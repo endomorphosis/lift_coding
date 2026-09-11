@@ -1,0 +1,5474 @@
+{
+  "sections": [
+    {
+      "number": "1",
+      "title": "Problem and contribution",
+      "pdf_page": 1,
+      "pdf_line": 20,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "2",
+      "title": "State and evidence are typed, separate authorities",
+      "pdf_page": 2,
+      "pdf_line": 38,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "2.1",
+      "title": "The persistent state model",
+      "pdf_page": 2,
+      "pdf_line": 39,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "2.2",
+      "title": "Claims carry provenance and applicability",
+      "pdf_page": 2,
+      "pdf_line": 46,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "2.3",
+      "title": "Incrementality with a visible unknown frontier",
+      "pdf_page": 2,
+      "pdf_line": 58,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "3",
+      "title": "Formalization: preserve the property before proving it",
+      "pdf_page": 3,
+      "pdf_line": 64,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "3.1",
+      "title": "Domain intent is not execution authority",
+      "pdf_page": 3,
+      "pdf_line": 65,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "3.2",
+      "title": "Loss-aware translation and solver-state limits",
+      "pdf_page": 3,
+      "pdf_line": 78,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "4",
+      "title": "Planning and state repair before neural execution",
+      "pdf_page": 4,
+      "pdf_line": 94,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "4.1",
+      "title": "Objective compilation and plan admission",
+      "pdf_page": 4,
+      "pdf_line": 95,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "4.2",
+      "title": "A routing gate is not a proof kernel",
+      "pdf_page": 4,
+      "pdf_line": 113,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "4.3",
+      "title": "Event-driven reassessment and bounded convergence",
+      "pdf_page": 4,
+      "pdf_line": 123,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "5",
+      "title": "Repair, context compilation, and procedural synthesis",
+      "pdf_page": 4,
+      "pdf_line": 135,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "5.1",
+      "title": "Localize and preserve the intended change",
+      "pdf_page": 4,
+      "pdf_line": 136,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "5.2",
+      "title": "Context minimizes unresolved information, not obligations",
+      "pdf_page": 5,
+      "pdf_line": 149,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "5.3",
+      "title": "Compile repeated successful work into bounded operators",
+      "pdf_page": 5,
+      "pdf_line": 161,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "6",
+      "title": "Test certificates and sound conditions for reuse",
+      "pdf_page": 5,
+      "pdf_line": 176,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "6.1",
+      "title": "Specify exactly what is certified",
+      "pdf_page": 5,
+      "pdf_line": 177,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "6.2",
+      "title": "Fixture-aware, phase-aware applicability",
+      "pdf_page": 6,
+      "pdf_line": 188,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "6.3",
+      "title": "Exact reuse and cross-tree reuse are distinct",
+      "pdf_page": 6,
+      "pdf_line": 196,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "7",
+      "title": "Incremental proof state and durable acceptance",
+      "pdf_page": 6,
+      "pdf_line": 203,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "7.1",
+      "title": "Completeness is independent of membership",
+      "pdf_page": 6,
+      "pdf_line": 204,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "7.2",
+      "title": "Prepared artifacts cannot publish themselves",
+      "pdf_page": 6,
+      "pdf_line": 211,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "7.3",
+      "title": "Acceptance invariant and remaining trusted base",
+      "pdf_page": 7,
+      "pdf_line": 230,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "7.4",
+      "title": "Multi-agent and world-state extension",
+      "pdf_page": 7,
+      "pdf_line": 237,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "8",
+      "title": "Evaluation: useful progress, preservation, and cost",
+      "pdf_page": 7,
+      "pdf_line": 245,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "8.1",
+      "title": "Primary comparison and independent oracles",
+      "pdf_page": 7,
+      "pdf_line": 246,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "8.2",
+      "title": "Populations and controls",
+      "pdf_page": 7,
+      "pdf_line": 253,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "8.3",
+      "title": "Economic and statistical reporting",
+      "pdf_page": 8,
+      "pdf_line": 265,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "9",
+      "title": "Evidence limits, related work, and conclusion",
+      "pdf_page": 9,
+      "pdf_line": 275,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "9.1",
+      "title": "What the existing artifacts establish",
+      "pdf_page": 9,
+      "pdf_line": 276,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "9.2",
+      "title": "Relationship to established methods",
+      "pdf_page": 9,
+      "pdf_line": 282,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "9.3",
+      "title": "Limitations and accountable self-improvement",
+      "pdf_page": 9,
+      "pdf_line": 295,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "A",
+      "title": "One complete state to repair to certificate cycle",
+      "pdf_page": 11,
+      "pdf_line": 336,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "A.1",
+      "title": "Counterfactual checks",
+      "pdf_page": 11,
+      "pdf_line": 341,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "B",
+      "title": "A typed evidence model and verification obligations",
+      "pdf_page": 12,
+      "pdf_line": 350,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "B.1",
+      "title": "Evidence record",
+      "pdf_page": 12,
+      "pdf_line": 351,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "B.2",
+      "title": "Targeted source-level checks before the final freeze",
+      "pdf_page": 13,
+      "pdf_line": 363,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C",
+      "title": "Fixture definitions, injected instances and reuse eligibility",
+      "pdf_page": 13,
+      "pdf_line": 368,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C.1",
+      "title": "Reviewed dependency-injection adapters",
+      "pdf_page": 13,
+      "pdf_line": 371,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C.2",
+      "title": "Preserve lifecycle effects",
+      "pdf_page": 13,
+      "pdf_line": 377,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C.3",
+      "title": "Proof batches, parallel preparation and the inner loop",
+      "pdf_page": 14,
+      "pdf_line": 387,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C.3.1",
+      "title": "Certificate and batch statement",
+      "pdf_page": 14,
+      "pdf_line": 388,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C.3.2",
+      "title": "Parallelism that preserves identity",
+      "pdf_page": 14,
+      "pdf_line": 399,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "C.3.3",
+      "title": "Development-loop states",
+      "pdf_page": 14,
+      "pdf_line": 400,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D",
+      "title": "Semantic objects, projection indexes and logical datasets",
+      "pdf_page": 15,
+      "pdf_line": 411,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.1",
+      "title": "Semantic objects and relations",
+      "pdf_page": 15,
+      "pdf_line": 412,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.2",
+      "title": "Hybrid retrieval without authority leakage",
+      "pdf_page": 15,
+      "pdf_line": 423,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.3",
+      "title": "Logical data versus physical layout",
+      "pdf_page": 15,
+      "pdf_line": 434,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.4",
+      "title": "VFS bridge",
+      "pdf_page": 15,
+      "pdf_line": 445,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.5",
+      "title": "Frames, events, transitions and learned continuation models",
+      "pdf_page": 16,
+      "pdf_line": 451,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.5.1",
+      "title": "State schema and abstraction profile",
+      "pdf_page": 16,
+      "pdf_line": 452,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.5.2",
+      "title": "Three distinct inference problems",
+      "pdf_page": 16,
+      "pdf_line": 465,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "D.5.3",
+      "title": "Dataset and promotion protocol",
+      "pdf_page": 16,
+      "pdf_line": 470,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "E",
+      "title": "Behavior-preserving remodularization, not cosmetic compression",
+      "pdf_page": 17,
+      "pdf_line": 480,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "E.1",
+      "title": "Model the observations to preserve",
+      "pdf_page": 17,
+      "pdf_line": 481,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "E.2",
+      "title": "Analyze before partitioning",
+      "pdf_page": 17,
+      "pdf_line": 488,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "E.3",
+      "title": "Bounded transformation and validation",
+      "pdf_page": 17,
+      "pdf_line": 494,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "E.4",
+      "title": "Fixed-point control and memory",
+      "pdf_page": 17,
+      "pdf_line": 512,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "F",
+      "title": "Rollout, event federation and verified self-hosting",
+      "pdf_page": 17,
+      "pdf_line": 521,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "F.1",
+      "title": "Reconcile predecessor programs",
+      "pdf_page": 17,
+      "pdf_line": 522,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "F.2",
+      "title": "Distinct rollout state machines",
+      "pdf_page": 18,
+      "pdf_line": 528,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "F.3",
+      "title": "Mandatory per-task receipts in required mode",
+      "pdf_page": 18,
+      "pdf_line": 529,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "F.4",
+      "title": "Concurrency and persistence",
+      "pdf_page": 18,
+      "pdf_line": 535,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "F.5",
+      "title": "Typed service parity",
+      "pdf_page": 18,
+      "pdf_line": 546,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "G",
+      "title": "Experiments and acceptance gates for the landing work",
+      "pdf_page": 19,
+      "pdf_line": 552,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "G.1",
+      "title": "Cost and uncertainty",
+      "pdf_page": 19,
+      "pdf_line": 553,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "G.2",
+      "title": "Hard gates and honest dispositions",
+      "pdf_page": 19,
+      "pdf_line": 564,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "H",
+      "title": "Early supervisor programs and their scientific role",
+      "pdf_page": 20,
+      "pdf_line": 573,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "H.1",
+      "title": "Dependency order, not a new campaign taxonomy",
+      "pdf_page": 20,
+      "pdf_line": 578,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "H.2",
+      "title": "Independent status dimensions",
+      "pdf_page": 20,
+      "pdf_line": 583,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "H.3",
+      "title": "World state, tests, and refactoring are parts of one loop",
+      "pdf_page": 21,
+      "pdf_line": 593,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "H.3.1",
+      "title": "Self-hosting must be observable",
+      "pdf_page": 21,
+      "pdf_line": 599,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "H.3.2",
+      "title": "Learned representations remain bounded research",
+      "pdf_page": 21,
+      "pdf_line": 606,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I",
+      "title": "A semantic preservation contract for every translation",
+      "pdf_page": 21,
+      "pdf_line": 612,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.1",
+      "title": "Concrete loss test to add",
+      "pdf_page": 22,
+      "pdf_line": 618,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.2",
+      "title": "Nonvacuity and contradictory premises",
+      "pdf_page": 22,
+      "pdf_line": 624,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.3",
+      "title": "What can be proved about acceptance and reuse",
+      "pdf_page": 22,
+      "pdf_line": 629,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.3.1",
+      "title": "Accepted-lineage invariant — proof sketch, not machine checked",
+      "pdf_page": 22,
+      "pdf_line": 630,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.3.2",
+      "title": "Dependency-projected test reuse — proof obligation",
+      "pdf_page": 23,
+      "pdf_line": 642,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.3.3",
+      "title": "Three acceptance questions, three different answers",
+      "pdf_page": 23,
+      "pdf_line": 654,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "I.3.4",
+      "title": "Useful autonomy requires positive-path witnesses",
+      "pdf_page": 23,
+      "pdf_line": 663,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "J",
+      "title": "Native proof code, metadata, and runtime observations",
+      "pdf_page": 23,
+      "pdf_line": 668,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "J.1",
+      "title": "The inspected optional Groth16 path",
+      "pdf_page": 23,
+      "pdf_line": 669,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "J.2",
+      "title": "Bind inner statements to outer claims",
+      "pdf_page": 23,
+      "pdf_line": 680,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "J.3",
+      "title": "Experiment still required",
+      "pdf_page": 24,
+      "pdf_line": 687,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "K",
+      "title": "Fill from one frozen, independently scored experiment",
+      "pdf_page": 24,
+      "pdf_line": 693,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "K.1",
+      "title": "Disclosure and reproducibility",
+      "pdf_page": 25,
+      "pdf_line": 694,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "K.2",
+      "title": "Final author actions",
+      "pdf_page": 25,
+      "pdf_line": 700,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "L",
+      "title": "How symbolic computations change the next agent action",
+      "pdf_page": 25,
+      "pdf_line": 708,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "L.1",
+      "title": "Abstract state supplies candidate bounds",
+      "pdf_page": 25,
+      "pdf_line": 709,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "L.2",
+      "title": "Interface composition creates a precise discharge job",
+      "pdf_page": 25,
+      "pdf_line": 716,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "L.3",
+      "title": "CEGAR localizes abstraction error before code repair",
+      "pdf_page": 26,
+      "pdf_line": 728,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "L.4",
+      "title": "Evidence feeds control, not just a report",
+      "pdf_page": 26,
+      "pdf_line": 739,
+      "status": "editable heading and adjacent prose transcribed"
+    },
+    {
+      "number": "M",
+      "title": "Composed control-loop specification",
+      "pdf_page": 27,
+      "pdf_line": 745,
+      "status": "editable heading and adjacent prose transcribed"
+    }
+  ],
+  "tables": [
+    {
+      "number": 1,
+      "pdf_page": 2,
+      "caption_first_line": "The semantic root, accepted-transition manifest, and mutable operational projection must",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 2,
+      "pdf_page": 3,
+      "caption_first_line": "Formal tools are selected by the obligation and evidence profile; not every tool runs on every",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 3,
+      "pdf_page": 6,
+      "caption_first_line": "Zero-knowledge can hide witnesses; it does not enlarge the meaning of the proved relation.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 4,
+      "pdf_page": 8,
+      "caption_first_line": "Pair safety endpoints with useful-progress endpoints. Zero unsafe actions is trivial for a",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 5,
+      "pdf_page": 8,
+      "caption_first_line": "Repository-reported preliminary evidence; not experiments rerun during this paper revision.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 6,
+      "pdf_page": 11,
+      "caption_first_line": "Illustrative state-to-repair-to-certificate cycle; labels are",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 7,
+      "pdf_page": 12,
+      "caption_first_line": "Formal mechanisms and their required evidence.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 8,
+      "pdf_page": 13,
+      "caption_first_line": "Staged test identities and permitted reuse.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 9,
+      "pdf_page": 14,
+      "caption_first_line": "Parallel preparation and serial publication obligations.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 10,
+      "pdf_page": 16,
+      "caption_first_line": "Program-prediction tasks and candidate semantics.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 11,
+      "pdf_page": 18,
+      "caption_first_line": "Distinct rollout state machines.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 12,
+      "pdf_page": 19,
+      "caption_first_line": "Experimental cohorts and required fault checks.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 13,
+      "pdf_page": 20,
+      "caption_first_line": "Earlier supervisor programs and their qualification requirements.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 14,
+      "pdf_page": 21,
+      "caption_first_line": "World-state, test, and refactoring methods in the supervision",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 15,
+      "pdf_page": 22,
+      "caption_first_line": "Logic views, their useful roles, and their explicit scope.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 16,
+      "pdf_page": 24,
+      "caption_first_line": "Adversarial changes at the native-proof admission boundary.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 17,
+      "pdf_page": 24,
+      "caption_first_line": "Main comparison; isolate component effects through matched",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    },
+    {
+      "number": 18,
+      "pdf_page": 25,
+      "caption_first_line": "Both sides of every acceptance boundary must be exercised.",
+      "status": "all extracted words/numbers retained in editable preformatted layout; row/cell alignment requires visual reconciliation"
+    }
+  ],
+  "equations": [
+    {
+      "number": 1,
+      "pdf_page": 2,
+      "status": "native LaTeX reconstructed and visually compared with original rendered page",
+      "extracted_text": "                   e = (claim, subjects, assumptions, scope, dependencies,\n                                                                                                        (1)\n                        translation profile, checker result, environment, policy, provenance).",
+      "tex_sha256": "61d80403d7c0c6e27ccf21e72a1579bb198b94d63bfb53ad40ab1bdbab099537"
+    },
+    {
+      "number": 2,
+      "pdf_page": 7,
+      "status": "native LaTeX reconstructed and visually compared with original rendered page",
+      "extracted_text": "                          Publish(s′ ) ⇒ CurrentParent(s) ∧ Authorized(a, s)\n                                           ∧ Scoped(a) ∧ CompleteManifest(q, s′ )                         (2)\n                                                                        ′             ′\n                                           ∧ EvidenceAdmitted(q, s ) ∧ CAS(s, s ).",
+      "tex_sha256": "cfa659eb2428da743b8581bc0271cbc2359365ecb06a2d0478cdb55c275cde88"
+    },
+    {
+      "number": 3,
+      "pdf_page": 22,
+      "status": "native LaTeX reconstructed and visually compared with original rendered page",
+      "extracted_text": "                        TargetChecker(τ (φ)) = accepted         ̸⇒    SourceSemantics |= φ.                 (3)",
+      "tex_sha256": "31a1d1e8ed8fb25a988f45f600495ea5cd43975686b43cb728c652dfe41b859a"
+    },
+    {
+      "number": 4,
+      "pdf_page": 25,
+      "status": "native LaTeX reconstructed and visually compared with original rendered page",
+      "extracted_text": "                     Abstract state = Const × Interval × Nullness × Exceptions × Effects.                 (4)",
+      "tex_sha256": "483e92245d47ce4739a16ce8128d3151d1a70decc23c8ffc5dc05590e55616ed"
+    },
+    {
+      "number": 5,
+      "pdf_page": 25,
+      "status": "native LaTeX reconstructed and visually compared with original rendered page",
+      "extracted_text": "                         G ∧ ¬A is UNSAT        ⇒     G ⇒ A (in the encoded theory).                      (5)",
+      "tex_sha256": "d61ae816335285881a292a80f95a2ff55571b1dce4287ffcf73e9e50abae38f8"
+    },
+    {
+      "number": 6,
+      "pdf_page": 26,
+      "status": "native LaTeX reconstructed and visually compared with original rendered page",
+      "extracted_text": "               A ⇒ I,        I ∧ B is UNSAT,         Symbols(I) ⊆ Symbols(A) ∩ Symbols(B).                (6)",
+      "tex_sha256": "18d007343bc0dacc6472f583f73adac57059a4f7b6e885f67e8ab8db135ed09e"
+    }
+  ],
+  "references": [
+    {
+      "id": 1,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        308,
+        309
+      ],
+      "transcribed_entry": "George C. Necula. Proof-carrying code. POPL, 1997, pp. 106–119. DOI: 10.1145/ 263699.263712.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 2,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        310,
+        311
+      ],
+      "transcribed_entry": "Patrick Cousot and Radhia Cousot. Abstract interpretation: a unified lattice model for static analysis of programs by construction or approximation of fixpoints. POPL, 1977, pp. 238–252.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 3,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        312,
+        313
+      ],
+      "transcribed_entry": "Edmund M. Clarke, Orna Grumberg, Somesh Jha, Yuan Lu, and Helmut Veith. Counterexample- guided abstraction refinement. CAV, 2000, pp. 154–169. DOI: 10.1007/10722167_15.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 4,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        314,
+        315
+      ],
+      "transcribed_entry": "Amir Pnueli, Michael Siegel, and Eli Singerman. Translation validation. TACAS, 1998, pp. 151–166.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 5,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        316,
+        317
+      ],
+      "transcribed_entry": "Armando Solar-Lezama. Program Synthesis by Sketching. PhD dissertation, University of California, Berkeley, 2008.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 6,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        318,
+        319
+      ],
+      "transcribed_entry": "Max Willsey, Chandrakana Nandi, Yisu Remy Wang, Oliver Flatt, Zachary Tatlock, and Pavel Panchekha. egg: Fast and extensible equality saturation. POPL, 2021. DOI: 10.1145/3434304.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 7,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        320,
+        321,
+        322
+      ],
+      "transcribed_entry": "Andrey Mokhov, Neil Mitchell, and Simon Peyton Jones. Build systems à la carte. ICFP, 2018. Expanded as Build systems à la carte: theory and practice, Journal of Functional Programming 30, 2020.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 8,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        323,
+        324,
+        325
+      ],
+      "transcribed_entry": "John Yang, Carlos E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik Narasimhan, and Ofir Press. SWE-agent: Agent-computer interfaces enable automated software engineering. NeurIPS 37, 2024.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 9,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        326,
+        327,
+        328
+      ],
+      "transcribed_entry": "Kaiyu Yang, Aidan Swope, Alex Gu, Rahul Chalamala, Peiyang Song, Shixing Yu, Saad Godil, Ryan J. Prenger, and Animashree Anandkumar. LeanDojo: Theorem proving with retrieval-augmented language models. NeurIPS 36, 2023.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 10,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        329,
+        330,
+        331
+      ],
+      "transcribed_entry": "Albert Qiaochu Jiang, Wenda Li, Szymon Tworkowski, Konrad Czechowski, Tomasz Odrzygóźdź, Piotr Miłoś, Yuhuai Wu, and Mateja Jamnik. Thor: Wielding hammers to in- tegrate language models and automated theorem provers. NeurIPS 35, 2022.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 11,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        332,
+        333
+      ],
+      "transcribed_entry": "Niels Mündler, Mark Niklas Müller, Jingxuan He, and Martin Vechev. SWT-Bench: Testing and validating real-world bug-fixes with code agents. NeurIPS 37, 2024.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    },
+    {
+      "id": 12,
+      "pdf_page": 10,
+      "pdf_line_numbers": [
+        334,
+        335
+      ],
+      "transcribed_entry": "Zhuoshi Pan et al. LLMLingua-2: Data distillation for efficient and faithful task-agnostic prompt compression. Findings of ACL, 2024, pp. 963–981. DOI: 10.18653/v1/2024.findings-acl.57.",
+      "status": "literal_entry_transcribed; metadata not independently verified"
+    }
+  ],
+  "numbered_lines": {
+    "1": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 14,
+      "source_text": "Coding agents repeatedly reconstruct repository state, regenerate plans, and re-"
+    },
+    "2": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 15,
+      "source_text": "run validation, yet shorter prompts or cached passes can omit dependencies and"
+    },
+    "3": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 16,
+      "source_text": "weaken assurance. We present an obligation-centered architecture that maintains"
+    },
+    "4": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 17,
+      "source_text": "content-addressed semantic state separately from operational task state and durable"
+    },
+    "5": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 18,
+      "source_text": "evidence. A formalization layer maps code, intent, and applicable constraints to"
+    },
+    "6": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 19,
+      "source_text": "typed obligations while exposing unsupported or lossy translations. A supervisor"
+    },
+    "7": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 20,
+      "source_text": "uses these obligations to select deterministic analysis, compositional reasoning,"
+    },
+    "8": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 21,
+      "source_text": "proof search, bounded synthesis, or an explicitly authorized neural residual. Candi-"
+    },
+    "9": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 22,
+      "source_text": "date edits are checked against current source; test and proof results are admitted"
+    },
+    "10": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 23,
+      "source_text": "only for their declared statements, environments, and trust profiles. Accepted"
+    },
+    "11": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 24,
+      "source_text": "transitions update durable roots and invalidate affected planning and verification"
+    },
+    "12": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 25,
+      "source_text": "state. The design includes incremental proof-unit sealing and staged fixture-aware"
+    },
+    "13": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 26,
+      "source_text": "test reuse, semantic-world memory, and procedural synthesis. We specify separate"
+    },
+    "14": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 27,
+      "source_text": "tests of preservation, progress, and end-to-end cost, including matched raw-context"
+    },
+    "15": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 28,
+      "source_text": "baselines, cold validation oracles, and positive authorization cases. [RESULTS:"
+    },
+    "16": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 29,
+      "source_text": "insert the frozen task population, useful completion rate, net measured cost,"
+    },
+    "17": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 30,
+      "source_text": "uncertainty intervals, and false-admission results.] The contribution is a method"
+    },
+    "18": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 31,
+      "source_text": "for governing repository evolution with explicit evidence, not a claim that hashing,"
+    },
+    "19": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 32,
+      "source_text": "model confidence, or every available solver proves arbitrary Python correct."
+    },
+    "20": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 35,
+      "source_text": "1    Problem and contribution"
+    },
+    "21": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 37,
+      "source_text": "The cost of an agent is not only the tokens used to generate a patch. It includes rediscovering"
+    },
+    "22": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 38,
+      "source_text": "relevant code, reconstructing assumptions, choosing tests, recovering interrupted work, and deciding"
+    },
+    "23": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 39,
+      "source_text": "whether previous evidence still applies. Repository agents and automated testing studies make the"
+    },
+    "24": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 40,
+      "source_text": "quality of the agent–tool boundary central to useful repair [8, 11]. Here, that boundary is a persistent"
+    },
+    "25": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 41,
+      "source_text": "state-and-obligation representation rather than an unstructured conversation history."
+    },
+    "26": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 42,
+      "source_text": "Our proposed method has three linked contributions. First, it compiles source and domain intent into"
+    },
+    "27": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 43,
+      "source_text": "identity-bound semantic evidence and explicit unresolved obligations. Second, it makes planning,"
+    },
+    "28": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 44,
+      "source_text": "counterexample-guided repair, and procedural synthesis consumers of those obligations, retaining"
+    },
+    "29": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 45,
+      "source_text": "neural models only for unresolved proposals. Third, it separates test observations, proof statements,"
+    },
+    "30": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 46,
+      "source_text": "reuse decisions, and accepted state transitions, enabling incremental work without silently upgrading"
+    },
+    "31": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 47,
+      "source_text": "evidence. Semantic context reduction is one measurable consequence of this loop, not its sole"
+    },
+    "32": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 48,
+      "source_text": "purpose."
+    },
+    "33": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 49,
+      "source_text": "The prototype contains source-present components and incompletely qualified integration paths. This"
+    },
+    "34": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 50,
+      "source_text": "working paper distinguishes those from methods specified in active workstreams and from results"
+    },
+    "35": {
+      "pdf_page": 1,
+      "pdf_extraction_line": 51,
+      "source_text": "actually measured. Source presence, branch landing, operational consumption, passing qualification,"
+    },
+    "36": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 16,
+      "source_text": "and policy promotion are different statuses. The final artifact must freeze the exact multi-repository"
+    },
+    "37": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 17,
+      "source_text": "source forest and the methods it exercises. [D1, A1–A5, N1–N14]"
+    },
+    "38": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 20,
+      "source_text": "2     State and evidence are typed, separate authorities"
+    },
+    "39": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 22,
+      "source_text": "2.1   The persistent state model"
+    },
+    "40": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 24,
+      "source_text": "Let F be a frozen repository forest, including source trees, declared overlays, dependency pins, and"
+    },
+    "41": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 25,
+      "source_text": "relevant environment identities. The incremental semantic index extracts stable symbols, semantic"
+    },
+    "42": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 26,
+      "source_text": "versions, typed relationships, and limitations. A separate semantic-state producer seals the finalized"
+    },
+    "43": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 27,
+      "source_text": "index into immutable facts, links, capsules, and environment bindings. It supplies pure selection and"
+    },
+    "44": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 28,
+      "source_text": "freshness operations; it does not execute tests, operate a task queue, or decide that a candidate is"
+    },
+    "45": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 29,
+      "source_text": "accepted. [D1]"
+    },
+    "46": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 31,
+      "source_text": "2.2   Claims carry provenance and applicability"
+    },
+    "47": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 33,
+      "source_text": "The domain-neutral IR kernel separates declarations, runs, results, and receipts. A declaration does"
+    },
+    "48": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 34,
+      "source_text": "not acquire a different semantic identity because a model or solver ran. Canonical identities bind a"
+    },
+    "49": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 35,
+      "source_text": "schema/domain and canonicalization profile; operational roots can reference declarations and their"
+    },
+    "50": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 36,
+      "source_text": "histories without inserting attempts, clocks, or leases into semantic content. Legal, Security, and"
+    },
+    "51": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 37,
+      "source_text": "Intent families share these protocols but do not share verdict authority or ontology. [N4]"
+    },
+    "52": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 44,
+      "source_text": "Admission checks integrity, source binding, current applicability, required checker evidence, and"
+    },
+    "53": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 45,
+      "source_text": "policy. These dimensions are not one scalar confidence score. A proof of an encoded property is"
+    },
+    "54": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 46,
+      "source_text": "not permission to perform an action; a signed statement is not independently observed execution; a"
+    },
+    "55": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 47,
+      "source_text": "candidate stored under a CID is not admitted knowledge. The hypothesis is that exact identities and"
+    },
+    "56": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 48,
+      "source_text": "explicit conditions enable reliable reuse—not that cryptographic hashes establish universal semantic"
+    },
+    "57": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 49,
+      "source_text": "equivalence."
+    },
+    "58": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 51,
+      "source_text": "2.3   Incrementality with a visible unknown frontier"
+    },
+    "59": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 53,
+      "source_text": "Previous and current semantic states drive additive invalidation and test/proof selection. Fresh exact"
+    },
+    "60": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 54,
+      "source_text": "dependency capsules may substitute for unchanged source under a declared profile; edited targets,"
+    },
+    "61": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 55,
+      "source_text": "stale records, and opaque or insufficient analyses require exact source or broader validation. Dynamic"
+    },
+    "62": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 56,
+      "source_text": "dispatch, reflection, fixtures, plugins, external services, and generated code can prevent a complete"
+    },
+    "63": {
+      "pdf_page": 2,
+      "pdf_extraction_line": 57,
+      "source_text": "dependency closure. Unknown edges widen the frontier rather than disappear from it. [D1; W1–W2]"
+    },
+    "64": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 23,
+      "source_text": "3     Formalization: preserve the property before proving it"
+    },
+    "65": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 25,
+      "source_text": "3.1   Domain intent is not execution authority"
+    },
+    "66": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 27,
+      "source_text": "A high-level objective is first a candidate specification. Intent IR expresses goals, actions, resources,"
+    },
+    "67": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 28,
+      "source_text": "and effects; Legal IR contributes applicable normative constraints; Security IR contributes principal,"
+    },
+    "68": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 29,
+      "source_text": "resource, and effect invariants. Their shared IR kernel supplies canonical claims and evidence"
+    },
+    "69": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 30,
+      "source_text": "references, not an automatic equivalence between domains. Reviewed formalization and source"
+    },
+    "70": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 31,
+      "source_text": "mappings turn a candidate into bounded obligations; ambiguity, missing coverage, and unsupported"
+    },
+    "71": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 32,
+      "source_text": "modalities remain explicit. [N4–N7]"
+    },
+    "72": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 33,
+      "source_text": "The attested authorization design queries a manifest-bound proof corpus, checks applicability and"
+    },
+    "73": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 34,
+      "source_text": "revocation, composes obligations, and produces an exact-context decision. Correctness and authoriza-"
+    },
+    "74": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 35,
+      "source_text": "tion are separate gates. The inspected reference enforcement layer supports one-time consumption"
+    },
+    "75": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 36,
+      "source_text": "and context rechecks, but does not itself connect to real tools; the documented receipt-consumption"
+    },
+    "76": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 37,
+      "source_text": "rollout defaults off/shadow. Thus the paper claims an interface and mechanism only at the deployment"
+    },
+    "77": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 38,
+      "source_text": "stage actually exercised. [N7, N11]"
+    },
+    "78": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 41,
+      "source_text": "3.2   Loss-aware translation and solver-state limits"
+    },
+    "79": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 43,
+      "source_text": "A target formula is useful only for claims preserved by its translation. For example, a legacy projection"
+    },
+    "80": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 44,
+      "source_text": "removes temporal/deontic operators and approximates a binary temporal formula by conjunction."
+    },
+    "81": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 45,
+      "source_text": "A proof of that projection cannot prove the original obligation. The admitted route must reject"
+    },
+    "82": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 46,
+      "source_text": "unsupported loss or bind an independently justified preservation relation. Translation validation"
+    },
+    "83": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 47,
+      "source_text": "checks the particular transformation rather than trusting every conversion [4]. [N8]"
+    },
+    "84": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 48,
+      "source_text": "The inspected incremental SMT wrapper maintains named assertions and replay identity but rebuilds"
+    },
+    "85": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 49,
+      "source_text": "a Z3 solver per check; that path supplies no exported proof object. It therefore supports assertion-"
+    },
+    "86": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 50,
+      "source_text": "level incrementality, not an established retained-clause speedup. Solver diversity, same-solver core"
+    },
+    "87": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 51,
+      "source_text": "rechecking, native proof reconstruction, and kernel checking must be reported separately. [D2]"
+    },
+    "88": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 52,
+      "source_text": "The actual component checker lowers a producer guarantee G and consumer assumption A to G ∧"
+    },
+    "89": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 53,
+      "source_text": "¬A; SAT supplies a countermodel, UNSAT discharges the encoded implication, and unsupported"
+    },
+    "90": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 54,
+      "source_text": "clauses remain uncovered. The bounded QF_LIA CEGAR adapter searches a Boolean abstraction,"
+    },
+    "91": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 55,
+      "source_text": "concretizes an error trace, and refines only spurious traces using validated predicates. A feasible trace"
+    },
+    "92": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 56,
+      "source_text": "refutes the model; incomplete search is not a proof. These results become reasoned plan obligations"
+    },
+    "93": {
+      "pdf_page": 3,
+      "pdf_extraction_line": 57,
+      "source_text": "and localized repair inputs. [N12–N13]"
+    },
+    "94": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 1,
+      "source_text": "4     Planning and state repair before neural execution"
+    },
+    "95": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 2,
+      "source_text": "4.1   Objective compilation and plan admission"
+    },
+    "96": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 4,
+      "source_text": "The direct-objective workstream replaces manual prompt elaboration with a bounded compiler:"
+    },
+    "97": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 5,
+      "source_text": "authorized input and repository scan yield goals, subgoals, task dependencies, assumptions, permitted"
+    },
+    "98": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 6,
+      "source_text": "effects, exact outputs, and acceptance obligations. Deterministic templates cover known task families."
+    },
+    "99": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 7,
+      "source_text": "A model may propose a residual decomposition, but the result must pass schema, dependency, scope,"
+    },
+    "100": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 8,
+      "source_text": "resource, and acceptance-coverage checks. An inferred specification is still a proposal until admitted;"
+    },
+    "101": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 9,
+      "source_text": "a model must not lower the objective or remove a required test to make its own plan succeed. [W2;"
+    },
+    "102": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 10,
+      "source_text": "DOEP]"
+    },
+    "103": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 11,
+      "source_text": "Planning maintains an obligation frontier. Resolved obligations reference current evidence; unre-"
+    },
+    "104": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 12,
+      "source_text": "solved obligations carry a reason and a permissible next route. Hard authority, safety, and effect"
+    },
+    "105": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 13,
+      "source_text": "conditions are checked before ranking by cost. The intended routing policy selects the cheapest"
+    },
+    "106": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 14,
+      "source_text": "adequate route, not a ritual invocation of every theorem prover."
+    },
+    "107": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 16,
+      "source_text": "current evidence / applicable procedure"
+    },
+    "108": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 17,
+      "source_text": "→ exact dependency and static analysis"
+    },
+    "109": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 18,
+      "source_text": "→ contract, abstract-state and solver checks"
+    },
+    "110": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 19,
+      "source_text": "→ bounded deterministic repair or synthesis"
+    },
+    "111": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 20,
+      "source_text": "→ explicitly authorized residual model"
+    },
+    "112": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 21,
+      "source_text": "→ independent validation / review / honest insufficiency"
+    },
+    "113": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 23,
+      "source_text": "4.2   A routing gate is not a proof kernel"
+    },
+    "114": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 25,
+      "source_text": "The pre-implementation kernel can defer unavailable capabilities, choose a unique analytical can-"
+    },
+    "115": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 26,
+      "source_text": "didate, abstain on ambiguous candidates, or authorize a named neural residual using resolved task/"
+    },
+    "116": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 27,
+      "source_text": "forest-bound receipts. It does not run a model, prove a candidate, or by itself complete a task. A"
+    },
+    "117": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 28,
+      "source_text": "Boolean “closes claim” on a candidate requires independent downstream justification. Its local zero"
+    },
+    "118": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 29,
+      "source_text": "provider-hook count is not a measurement of saved model calls across the workflow. [A1, N1]"
+    },
+    "119": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 30,
+      "source_text": "Integration is part of the method. The real caller must bind the current plan, diagnostic view and"
+    },
+    "120": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 31,
+      "source_text": "obligation graph to the same task and forest as its evidence. A valid authorized residual must progress"
+    },
+    "121": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 32,
+      "source_text": "while a minimally altered invalid request fails. Measuring only rejection would reward a deny-all"
+    },
+    "122": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 33,
+      "source_text": "agent rather than useful neurosymbolic control."
+    },
+    "123": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 35,
+      "source_text": "4.3   Event-driven reassessment and bounded convergence"
+    },
+    "124": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 37,
+      "source_text": "Repository, dependency, policy, proof, fixture, capability, and owner events invalidate only the"
+    },
+    "125": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 38,
+      "source_text": "affected causal/semantic frontier when that frontier is complete. The supervisor retains accepted"
+    },
+    "126": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 39,
+      "source_text": "unaffected subplans and emits a PlanDelta rather than rebuilding an entire prompt. Refill creates"
+    },
+    "127": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 40,
+      "source_text": "only tasks needed for explicit gaps or counterexamples, subject to plan epochs, generation limits,"
+    },
+    "128": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 41,
+      "source_text": "repeated-candidate detection, and authority. Unknown provider effects enter reconciliation rather"
+    },
+    "129": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 42,
+      "source_text": "than blind retry. [W2; DOEP]"
+    },
+    "130": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 43,
+      "source_text": "Queue exhaustion is not success. Completion requires current evidence covering every mandatory"
+    },
+    "131": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 44,
+      "source_text": "acceptance obligation and no unresolved required consumer. Bounded termination is also not con-"
+    },
+    "132": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 45,
+      "source_text": "vergence to a solution: budget exhaustion, nonconvergence, unavailable tools, and human decisions"
+    },
+    "133": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 46,
+      "source_text": "remain separate terminal outcomes. Incoming world-model self-hosting is qualified only when route"
+    },
+    "134": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 47,
+      "source_text": "and acceptance records show actual consumption of state, not merely sidecar logging. [W1–W2]"
+    },
+    "135": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 49,
+      "source_text": "5     Repair, context compilation, and procedural synthesis"
+    },
+    "136": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 50,
+      "source_text": "5.1   Localize and preserve the intended change"
+    },
+    "137": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 52,
+      "source_text": "A repair begins with a state-bound failed obligation, observation, or counterexample—not a free-form"
+    },
+    "138": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 53,
+      "source_text": "request to “fix everything.” Static dependency analysis and abstract interpretation bound the affected"
+    },
+    "139": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 54,
+      "source_text": "region. Assume–guarantee checks expose unmet component interfaces; validated unsat cores or"
+    },
+    "140": {
+      "pdf_page": 4,
+      "pdf_extraction_line": 55,
+      "source_text": "interpolants can identify a compact missing premise. CEGAR refines an abstraction after a spurious"
+    },
+    "141": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 1,
+      "source_text": "counterexample; CEGIS refines candidate implementations against accumulated counterexamples"
+    },
+    "142": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 2,
+      "source_text": "[3, 5]. Conflating these loops would obscure whether the program or its abstraction changed."
+    },
+    "143": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 3,
+      "source_text": "Candidate plans, patch sketches, and CodeEditPackets remain non-authoritative. The currently"
+    },
+    "144": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 4,
+      "source_text": "represented path checks preimages and scope, applies a Git patch in an isolated fenced worktree,"
+    },
+    "145": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 5,
+      "source_text": "rescans semantic state, and runs selected plus required fallback validation. General tokenizer-alias IR"
+    },
+    "146": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 6,
+      "source_text": "editing and exact CST/AST relinking remain separate PCSM extensions until their actual resolver,"
+    },
+    "147": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 7,
+      "source_text": "renderer, round-trip and adversarial checks are frozen. A source map alone is not a proof of semantic"
+    },
+    "148": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 8,
+      "source_text": "preservation."
+    },
+    "149": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 10,
+      "source_text": "5.2   Context minimizes unresolved information, not obligations"
+    },
+    "150": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 12,
+      "source_text": "The semantic compiler owns semantic ContextPack identity and sufficiency; the runtime compiles"
+    },
+    "151": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 13,
+      "source_text": "provider-facing ContextCapsules. The goal, authority, scope, and acceptance core is non-truncatable."
+    },
+    "152": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 14,
+      "source_text": "Optional evidence is chosen under byte/token budgets; exclusions have exact expansion references"
+    },
+    "153": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 15,
+      "source_text": "and reason codes. Required target source, caveats, tests, and proof obligations cannot be removed"
+    },
+    "154": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 16,
+      "source_text": "to hit a compression target. Parent-bound delta capsules carry new counterexamples or dependency"
+    },
+    "155": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 17,
+      "source_text": "facts while retaining the invariant core. Stable prefixes and provider cache reuse remain bound to"
+    },
+    "156": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 18,
+      "source_text": "model/tokenizer/policy identities. [D1; ASEH, PCSM]"
+    },
+    "157": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 19,
+      "source_text": "A model request names the residual question, admitted evidence, missing information, budget,"
+    },
+    "158": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 20,
+      "source_text": "expected response schema, and independent acceptance test. Failed candidates expand only implicated"
+    },
+    "159": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 21,
+      "source_text": "source or contracts when possible. This adapts abstraction refinement to context selection without"
+    },
+    "160": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 22,
+      "source_text": "claiming that every context heuristic is a sound program abstraction."
+    },
+    "161": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 24,
+      "source_text": "5.3   Compile repeated successful work into bounded operators"
+    },
+    "162": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 26,
+      "source_text": "ProcedureCegis already implements a bounded synthesis state machine. Its source order is existing"
+    },
+    "163": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 27,
+      "source_text": "verified procedure, built-in template, anti-unified pattern, declarative/constraint candidate, model"
+    },
+    "164": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 28,
+      "source_text": "sketch, and human candidate. Candidate and counterexample-set identities prevent repeated evaluation"
+    },
+    "165": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 29,
+      "source_text": "of the same pair. The synthesizer neither executes nor certifies nor promotes its output. [A2]"
+    },
+    "166": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 30,
+      "source_text": "The incoming memory method mines independently admitted trajectories, preserves failed episodes,"
+    },
+    "167": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 31,
+      "source_text": "infers applicability conditions, and validates anti-unified procedures on held-out families. Each"
+    },
+    "168": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 32,
+      "source_text": "procedure has typed parameters, effects, branch/loop bounds, residual holes, rollback, and required"
+    },
+    "169": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 33,
+      "source_text": "validation. Execution must recheck current applicability and authority. Learned call-target, event-"
+    },
+    "170": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 34,
+      "source_text": "delta, inverse-trace, and repair-delta models rank constrained candidates or abstain; their predicted"
+    },
+    "171": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 35,
+      "source_text": "transitions become accepted state only after observation or verification. [W2, W4]"
+    },
+    "172": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 36,
+      "source_text": "Architecture refactoring applies the same loop to module boundaries and state ownership: SCC-based"
+    },
+    "173": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 37,
+      "source_text": "candidates, compatibility contracts, source-preserving edits, differential traces, tests/proofs, and"
+    },
+    "174": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 38,
+      "source_text": "rollback. A smaller dependency graph, fewer files, or lower context burden only ranks candidates; it"
+    },
+    "175": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 39,
+      "source_text": "does not establish equivalence. [W4]"
+    },
+    "176": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 42,
+      "source_text": "6     Test certificates and sound conditions for reuse"
+    },
+    "177": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 44,
+      "source_text": "6.1   Specify exactly what is certified"
+    },
+    "178": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 46,
+      "source_text": "A test certificate must name its statement, source/dependency roots, runner and environment, fixture"
+    },
+    "179": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 47,
+      "source_text": "inputs, result semantics, and checker/trust profile. “Verified” is not a single universal evidence class."
+    },
+    "180": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 48,
+      "source_text": "A manifest can be complete while its child observations depend on a trusted runner; a circuit can"
+    },
+    "181": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 49,
+      "source_text": "correctly verify signatures while proving nothing about honest execution by their signer. [K1, A5]"
+    },
+    "182": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 50,
+      "source_text": "The source-present Groth16 adapter is gated by explicit opt-in and a compiled Rust backend, with"
+    },
+    "183": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 51,
+      "source_text": "BN254 and versioned circuit references. Its inspected derivation helper accepts only propositional"
+    },
+    "184": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 52,
+      "source_text": "atoms, facts, and one-antecedent implications, using forward chaining. This is not the full temporal/"
+    },
+    "185": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 53,
+      "source_text": "deontic system and not a CPython/pytest execution model. Versioned wrapper code, setup availability,"
+    },
+    "186": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 54,
+      "source_text": "and attestation metadata must not be mistaken for a qualified circuit/key ceremony or measured"
+    },
+    "187": {
+      "pdf_page": 5,
+      "pdf_extraction_line": 55,
+      "source_text": "prover performance. [N9–N10]"
+    },
+    "188": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 16,
+      "source_text": "6.2   Fixture-aware, phase-aware applicability"
+    },
+    "189": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 18,
+      "source_text": "The PCTDD workstream separates collection seed, fixture-definition closure, materialized fixture-"
+    },
+    "190": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 19,
+      "source_text": "instance commitment, pre-call execution key, and post-execution setup/call/teardown evidence. It"
+    },
+    "191": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 20,
+      "source_text": "binds parametrization, plugins/hooks, conftest, autouse fixtures, DI adapters, external snapshots,"
+    },
+    "192": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 21,
+      "source_text": "clocks/RNGs, interpreter, policy, and relevant hardware. Arbitrary Python object serialization is"
+    },
+    "193": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 22,
+      "source_text": "not a sound dependency model. Setup/call reuse may not silently skip required resource effects or"
+    },
+    "194": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 23,
+      "source_text": "teardown; a teardown failure prevents a whole-item pass. Opaque dependencies force execution."
+    },
+    "195": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 24,
+      "source_text": "[W3]"
+    },
+    "196": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 26,
+      "source_text": "6.3   Exact reuse and cross-tree reuse are distinct"
+    },
+    "197": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 28,
+      "source_text": "A full-tree cache key changes on an unrelated edit. Broader reuse therefore needs a current dependency"
+    },
+    "198": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 29,
+      "source_text": "projection and a noninterference/applicability witness, not just removal of the tree from a key. If"
+    },
+    "199": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 30,
+      "source_text": "a deterministic observation under profile θ is a function fθ of a complete projection πD, then"
+    },
+    "200": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 31,
+      "source_text": "πD(s)=πD(s′) implies equal observations. This conditional argument is elementary; proving that πD"
+    },
+    "201": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 32,
+      "source_text": "includes all relevant inputs and effects is the hard obligation. Runtime traces alone cannot show that"
+    },
+    "202": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 33,
+      "source_text": "no unobserved dependency exists. [W3; Appendix I]"
+    },
+    "203": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 35,
+      "source_text": "7     Incremental proof state and durable acceptance"
+    },
+    "204": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 36,
+      "source_text": "7.1   Completeness is independent of membership"
+    },
+    "205": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 38,
+      "source_text": "Verification is partitioned into source-addressed proof units with stable logical identities and complete"
+    },
+    "206": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 39,
+      "source_text": "applicability/trust keys. A requirement manifest declares every mandatory unit; a proof forest binds"
+    },
+    "207": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 40,
+      "source_text": "the evidence for those units in deterministic categories. Merkle membership proves inclusion, not"
+    },
+    "208": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 41,
+      "source_text": "that the collector included all required tests. Selection completeness and authorized removal of"
+    },
+    "209": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 42,
+      "source_text": "obligations are separately checked. Delta seals name the accepted parent and exact reused, replaced,"
+    },
+    "210": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 43,
+      "source_text": "added and removed units; uncertainty forces broader verification or a full checkpoint. [A5, K1]"
+    },
+    "211": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 45,
+      "source_text": "7.2   Prepared artifacts cannot publish themselves"
+    },
+    "212": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 47,
+      "source_text": "The durable store persists canonical blocks and candidate evidence; the supervisor runtime decides"
+    },
+    "213": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 48,
+      "source_text": "whether evidence satisfies current obligations. The small persistence adapter and actual pointer CAS"
+    },
+    "214": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 49,
+      "source_text": "are separate surfaces. Current-seal publication checks repository/branch identity, expected parent and"
+    },
+    "215": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 50,
+      "source_text": "generation. Local locks, atomic filesystem publication, and WAL recovery do not constitute global"
+    },
+    "216": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 51,
+      "source_text": "distributed consensus or a transaction spanning Git, the task database, and remote services. Crash"
+    },
+    "217": {
+      "pdf_page": 6,
+      "pdf_extraction_line": 52,
+      "source_text": "recovery must explicitly reconcile those boundaries. [K1–K4]"
+    },
+    "218": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 1,
+      "source_text": "candidate state and complete requirement manifest"
+    },
+    "219": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 2,
+      "source_text": "→ parallel prepare: canonicalize / hash / verify / build leaves"
+    },
+    "220": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 3,
+      "source_text": "→ recheck exact parent, scope, evidence and completeness"
+    },
+    "221": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 4,
+      "source_text": "→ persist children before referencing manifests"
+    },
+    "222": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 5,
+      "source_text": "→ one expected-parent publication barrier"
+    },
+    "223": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 6,
+      "source_text": "→ reconcile task disposition and publish accepted transition"
+    },
+    "224": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 8,
+      "source_text": "Parallel canonicalization, hashing, independent proof checks, and Merkle levels are staged PCTDD"
+    },
+    "225": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 9,
+      "source_text": "optimizations. They must preserve sequential bytes, CID profiles, category ordering, roots, and"
+    },
+    "226": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 10,
+      "source_text": "dispositions. Chunk-manifest identities are distinct from a raw-file SHA-256 digest. Hash memos"
+    },
+    "227": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 11,
+      "source_text": "need immutable content/profile bindings; a path or modification time alone is insufficient. Required"
+    },
+    "228": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 12,
+      "source_text": "proof-pending states may continue local preparation but remain non-mergeable until mandatory"
+    },
+    "229": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 13,
+      "source_text": "evidence is admitted. [W3]"
+    },
+    "230": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 15,
+      "source_text": "7.3   Acceptance invariant and remaining trusted base"
+    },
+    "231": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 21,
+      "source_text": "This is a design invariant to qualify on the actual call chain, not a theorem that all current code"
+    },
+    "232": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 22,
+      "source_text": "enforces it. A conditional preservation argument is possible: if the initial accepted state meets the"
+    },
+    "233": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 23,
+      "source_text": "selected artifact policy, every admitted transition checks that policy on exact inputs, and publication"
+    },
+    "234": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 24,
+      "source_text": "is exclusive, induction preserves that policy along the accepted lineage. It says nothing stronger than"
+    },
+    "235": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 25,
+      "source_text": "the checked policy and does not prove all physical side effects exactly once. Appendix I names the"
+    },
+    "236": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 26,
+      "source_text": "assumptions and proof obligations."
+    },
+    "237": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 28,
+      "source_text": "7.4   Multi-agent and world-state extension"
+    },
+    "238": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 30,
+      "source_text": "Sibling supervisors exchange typed requests, observations, and receipts, not writable access to"
+    },
+    "239": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 31,
+      "source_text": "each other’s state. Mergeable observational indexes can nominate dependencies; exclusive claims,"
+    },
+    "240": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 32,
+      "source_text": "fences, policy, publication, and completion remain transactional. Accepted world roots can compose"
+    },
+    "241": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 33,
+      "source_text": "semantic, program-trace, logical-dataset, procedure, proof, and environment roots. Cyclic logical"
+    },
+    "242": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 34,
+      "source_text": "graphs use stable IDs and snapshot manifests rather than literal cyclic content links. Required-mode"
+    },
+    "243": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 35,
+      "source_text": "operation must exhibit pre-state consumption, accepted transition evidence, and post-state publication."
+    },
+    "244": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 36,
+      "source_text": "[W1–W2; DOEP]"
+    },
+    "245": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 38,
+      "source_text": "8     Evaluation: useful progress, preservation, and cost"
+    },
+    "246": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 39,
+      "source_text": "8.1   Primary comparison and independent oracles"
+    },
+    "247": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 41,
+      "source_text": "Freeze a task population, model revisions, exact repository forest, tools, policies, budgets, and"
+    },
+    "248": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 42,
+      "source_text": "acceptance criteria before running paired conditions. The core A/B comparison changes only raw/"
+    },
+    "249": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 43,
+      "source_text": "lexical versus semantic context; later arms add routing, incremental verification/reuse, and governed"
+    },
+    "250": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 44,
+      "source_text": "lifecycle. These combined arms measure package effects, not the isolated contribution of each"
+    },
+    "251": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 45,
+      "source_text": "mechanism. Orthogonal ablations must isolate translation checking, symbolic routing, context"
+    },
+    "252": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 46,
+      "source_text": "selection, proof reuse, parallel preparation, and procedures. [ASEH; PCPR]"
+    },
+    "253": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 48,
+      "source_text": "8.2   Populations and controls"
+    },
+    "254": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 50,
+      "source_text": "Use exact pre-fix historical tasks, held-out task/repository families, and controlled adversarial cases."
+    },
+    "255": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 51,
+      "source_text": "Hide target patches and acceptance oracles from proposal generation; generated tests may supplement"
+    },
+    "256": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 52,
+      "source_text": "but not silently replace the oracle. Include valid authorized actions as well as invalid ones. Seed"
+    },
+    "257": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 53,
+      "source_text": "lost modalities, inconsistent assumptions, removed tests, missing fixture inputs, stale maps/keys,"
+    },
+    "258": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 54,
+      "source_text": "changed verification keys, unknown provider outcomes, and crashes around publication. Keep"
+    },
+    "259": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 55,
+      "source_text": "failures, timeouts, abstentions and unavailable routes visible."
+    },
+    "260": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 56,
+      "source_text": "Measure successful accepted tasks per fixed budget, false acceptance and false denial, conditional"
+    },
+    "261": {
+      "pdf_page": 7,
+      "pdf_extraction_line": 57,
+      "source_text": "solve rate after dispatch, time-to-first-valid-task, event-to-replan latency, task churn, manual repair,"
+    },
+    "262": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 41,
+      "source_text": "and each evidence class. Instrument actual provider boundaries: a gate that makes no model call"
+    },
+    "263": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 42,
+      "source_text": "internally does not establish that the workflow saved a model call. Warm-cache and cold-start"
+    },
+    "264": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 43,
+      "source_text": "conditions require separate results."
+    },
+    "265": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 47,
+      "source_text": "8.3   Economic and statistical reporting"
+    },
+    "266": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 49,
+      "source_text": "Report actual input/output/cached tokens, model calls, provider charges, CPU/GPU time, memory,"
+    },
+    "267": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 50,
+      "source_text": "storage, fixture setup/call/teardown, proof generation/checking, recovery, and human time. Currency"
+    },
+    "268": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 51,
+      "source_text": "conversions require a stated tariff; unavailable values are not zero. Measure end-to-end elapsed time"
+    },
+    "269": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 52,
+      "source_text": "directly rather than summing overlapping parallel durations. Report amortization and the break-even"
+    },
+    "270": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 53,
+      "source_text": "number of repeated tasks."
+    },
+    "271": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 54,
+      "source_text": "Use paired differences, medians, confidence intervals, failure counts with denominators, and stratifica-"
+    },
+    "272": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 55,
+      "source_text": "tion by dynamic-feature and task class. A finite zero-failure count is not universal safety. Preregister"
+    },
+    "273": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 56,
+      "source_text": "a quality/noninferiority margin and minimum useful completion threshold; efficiency promotion"
+    },
+    "274": {
+      "pdf_page": 8,
+      "pdf_extraction_line": 57,
+      "source_text": "requires both. The final results and exact tested forest remain [TO BE FILLED]."
+    },
+    "275": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 1,
+      "source_text": "9     Evidence limits, related work, and conclusion"
+    },
+    "276": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 2,
+      "source_text": "9.1   What the existing artifacts establish"
+    },
+    "277": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 4,
+      "source_text": "The reviewed standalone repository heads and the consumer’s dependency pins differ. A final claim"
+    },
+    "278": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 5,
+      "source_text": "must bind the actual loaded source forest, including overlays, native binaries, solver/circuit profiles"
+    },
+    "279": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 6,
+      "source_text": "and active rollout settings. Source-present intent authorization and a Groth16 wrapper must not"
+    },
+    "280": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 7,
+      "source_text": "be described as always-on enforcement or a validated universal prover. The preceding integration"
+    },
+    "281": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 8,
+      "source_text": "findings belong in the author audit until resolved or reported as limitations."
+    },
+    "282": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 10,
+      "source_text": "9.2   Relationship to established methods"
+    },
+    "283": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 12,
+      "source_text": "Proof-carrying code attaches checkable policy evidence to untrusted code [1]; abstract interpretation"
+    },
+    "284": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 13,
+      "source_text": "and CEGAR reason over approximations and refine them with counterexamples [2, 3]. Translation"
+    },
+    "285": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 14,
+      "source_text": "validation checks a produced transformation, and CEGIS searches bounded candidates against"
+    },
+    "286": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 15,
+      "source_text": "counterexamples [4, 5]. Equality saturation represents alternatives under rewrite relations [6]. These"
+    },
+    "287": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 16,
+      "source_text": "are foundations, not newly invented algorithms in this work."
+    },
+    "288": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 17,
+      "source_text": "The intended difference is composition at the agent’s operational boundary: persistent semantic"
+    },
+    "289": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 18,
+      "source_text": "state, explicit obligations, residual model authorization, phase-aware test evidence, and accepted-"
+    },
+    "290": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 19,
+      "source_text": "transition publication. Build-system research separates scheduling from rebuilding [7]; our reuse"
+    },
+    "291": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 20,
+      "source_text": "design additionally exposes statement, fixture, trust and authority conditions. Coding agents and"
+    },
+    "292": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 21,
+      "source_text": "test-generation benchmarks [8, 11], premise-retrieval and hammer systems [9, 10], and prompt"
+    },
+    "293": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 22,
+      "source_text": "compression [12] provide relevant baselines. We do not claim that this is the first neurosymbolic"
+    },
+    "294": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 23,
+      "source_text": "agent or that combining these techniques automatically improves performance."
+    },
+    "295": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 25,
+      "source_text": "9.3   Limitations and accountable self-improvement"
+    },
+    "296": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 27,
+      "source_text": "Python reflection, native code, external state, concurrency, incomplete specifications, and unsound"
+    },
+    "297": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 28,
+      "source_text": "translations limit what can be proved. A sound checker cannot repair an incorrectly formalized"
+    },
+    "298": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 29,
+      "source_text": "requirement. Default-deny behavior can mask broken positive paths. A self-improving supervisor"
+    },
+    "299": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 30,
+      "source_text": "must not edit its own protected acceptance specification, keys, validators or promotion policy under"
+    },
+    "300": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 31,
+      "source_text": "ordinary task authority. Every learned update or compiled procedure requires an independent holdout"
+    },
+    "301": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 32,
+      "source_text": "and rollback gate."
+    },
+    "302": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 33,
+      "source_text": "Important model use in implementation, formalization, candidate generation, experiments and"
+    },
+    "303": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 34,
+      "source_text": "manuscript preparation must be disclosed accurately. The final claims remain conditional on the"
+    },
+    "304": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 35,
+      "source_text": "frozen evidence and tested deployment. Our thesis is that persistent obligations can displace repeated"
+    },
+    "305": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 36,
+      "source_text": "neural reasoning and validation while preserving a declared acceptance standard; the paired evaluation"
+    },
+    "306": {
+      "pdf_page": 9,
+      "pdf_extraction_line": 37,
+      "source_text": "must determine whether the total benefit exceeds the added analysis and proof cost."
+    },
+    "307": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 1,
+      "source_text": "References"
+    },
+    "308": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 2,
+      "source_text": "[1] George C. Necula. Proof-carrying code. POPL, 1997, pp. 106–119. DOI: 10.1145/"
+    },
+    "309": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 3,
+      "source_text": "263699.263712."
+    },
+    "310": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 4,
+      "source_text": "[2] Patrick Cousot and Radhia Cousot. Abstract interpretation: a unified lattice model for static"
+    },
+    "311": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 5,
+      "source_text": "analysis of programs by construction or approximation of fixpoints. POPL, 1977, pp. 238–252."
+    },
+    "312": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 6,
+      "source_text": "[3] Edmund M. Clarke, Orna Grumberg, Somesh Jha, Yuan Lu, and Helmut Veith. Counterexample-"
+    },
+    "313": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 7,
+      "source_text": "guided abstraction refinement. CAV, 2000, pp. 154–169. DOI: 10.1007/10722167_15."
+    },
+    "314": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 8,
+      "source_text": "[4] Amir Pnueli, Michael Siegel, and Eli Singerman. Translation validation. TACAS, 1998, pp."
+    },
+    "315": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 9,
+      "source_text": "151–166."
+    },
+    "316": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 10,
+      "source_text": "[5] Armando Solar-Lezama. Program Synthesis by Sketching. PhD dissertation, University of"
+    },
+    "317": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 11,
+      "source_text": "California, Berkeley, 2008."
+    },
+    "318": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 12,
+      "source_text": "[6] Max Willsey, Chandrakana Nandi, Yisu Remy Wang, Oliver Flatt, Zachary Tatlock, and Pavel"
+    },
+    "319": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 13,
+      "source_text": "Panchekha. egg: Fast and extensible equality saturation. POPL, 2021. DOI: 10.1145/3434304."
+    },
+    "320": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 14,
+      "source_text": "[7] Andrey Mokhov, Neil Mitchell, and Simon Peyton Jones. Build systems à la carte. ICFP, 2018."
+    },
+    "321": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 15,
+      "source_text": "Expanded as Build systems à la carte: theory and practice, Journal of Functional Programming"
+    },
+    "322": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 16,
+      "source_text": "30, 2020."
+    },
+    "323": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 17,
+      "source_text": "[8] John Yang, Carlos E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik"
+    },
+    "324": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 18,
+      "source_text": "Narasimhan, and Ofir Press. SWE-agent: Agent-computer interfaces enable automated software"
+    },
+    "325": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 19,
+      "source_text": "engineering. NeurIPS 37, 2024."
+    },
+    "326": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 20,
+      "source_text": "[9] Kaiyu Yang, Aidan Swope, Alex Gu, Rahul Chalamala, Peiyang Song, Shixing Yu, Saad"
+    },
+    "327": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 21,
+      "source_text": "Godil, Ryan J. Prenger, and Animashree Anandkumar. LeanDojo: Theorem proving with"
+    },
+    "328": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 22,
+      "source_text": "retrieval-augmented language models. NeurIPS 36, 2023."
+    },
+    "329": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 23,
+      "source_text": "[10] Albert Qiaochu Jiang, Wenda Li, Szymon Tworkowski, Konrad Czechowski, Tomasz"
+    },
+    "330": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 24,
+      "source_text": "Odrzygóźdź, Piotr Miłoś, Yuhuai Wu, and Mateja Jamnik. Thor: Wielding hammers to in-"
+    },
+    "331": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 25,
+      "source_text": "tegrate language models and automated theorem provers. NeurIPS 35, 2022."
+    },
+    "332": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 26,
+      "source_text": "[11] Niels Mündler, Mark Niklas Müller, Jingxuan He, and Martin Vechev. SWT-Bench: Testing and"
+    },
+    "333": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 27,
+      "source_text": "validating real-world bug-fixes with code agents. NeurIPS 37, 2024."
+    },
+    "334": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 28,
+      "source_text": "[12] Zhuoshi Pan et al. LLMLingua-2: Data distillation for efficient and faithful task-agnostic prompt"
+    },
+    "335": {
+      "pdf_page": 10,
+      "pdf_extraction_line": 29,
+      "source_text": "compression. Findings of ACL, 2024, pp. 963–981. DOI: 10.18653/v1/2024.findings-acl.57."
+    },
+    "336": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 1,
+      "source_text": "A      One complete state to repair to certificate cycle"
+    },
+    "337": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 2,
+      "source_text": "Scenario: a repository operation writes a record before checking a caller’s permitted scope. The"
+    },
+    "338": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 3,
+      "source_text": "authorized requirement is that a denied request produces no persistent write. R0, P0 and T0 below"
+    },
+    "339": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 4,
+      "source_text": "are illustrative labels, not recorded benchmark CIDs. The example exercises the planned integration"
+    },
+    "340": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 5,
+      "source_text": "rather than claiming an observed end-to-end run."
+    },
+    "341": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 54,
+      "source_text": "A.1    Counterfactual checks"
+    },
+    "342": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 56,
+      "source_text": "Change F0, P0, the interpreter, a plugin, teardown behavior or an external snapshot without editing"
+    },
+    "343": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 57,
+      "source_text": "the test body: the key must change or reuse must be rejected. Deliver a duplicate event or late worker"
+    },
+    "344": {
+      "pdf_page": 11,
+      "pdf_extraction_line": 58,
+      "source_text": "completion: the current state must not regress. Crash after immutable persistence but before pointer"
+    },
+    "345": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 1,
+      "source_text": "CAS: recovery must not invent completion. Supply an empty manifest while O0 is required: reject"
+    },
+    "346": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 2,
+      "source_text": "incompleteness."
+    },
+    "347": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 3,
+      "source_text": "The example’s proof claim is limited to the selected model and observations. A successful unit test, a"
+    },
+    "348": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 4,
+      "source_text": "checked transition formula and an attested runner result remain different artifacts with different trust"
+    },
+    "349": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 5,
+      "source_text": "assumptions."
+    },
+    "350": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 8,
+      "source_text": "B     A typed evidence model and verification obligations"
+    },
+    "351": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 10,
+      "source_text": "B.1   Evidence record"
+    },
+    "352": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 12,
+      "source_text": "Evidence = (claim, subject_roots, statement_or_observation, scope,"
+    },
+    "353": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 13,
+      "source_text": "assumptions, dependency_roots, translation_receipts,"
+    },
+    "354": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 14,
+      "source_text": "checker_profile, checker_result, environment, policy,"
+    },
+    "355": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 15,
+      "source_text": "producer_or_signer, invalidation_bindings, provenance)"
+    },
+    "356": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 16,
+      "source_text": "Admit(e, q) = Integrity(e) ∧ SchemaValid(e) ∧ Applicable(e, q)"
+    },
+    "357": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 17,
+      "source_text": "∧ RequiredCheckPasses(e, q) ∧ PolicyAllows(e, q)"
+    },
+    "358": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 19,
+      "source_text": "This is a proposed unifying notation, not a replacement for existing schema authorities. Integrity"
+    },
+    "359": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 20,
+      "source_text": "checks exact bytes; applicability checks freshness and scope; required checking evaluates the selected"
+    },
+    "360": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 21,
+      "source_text": "statement; policy checks execution/acceptance authority. The conjunction cannot be satisfied by a"
+    },
+    "361": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 22,
+      "source_text": "model’s confidence score or a single untyped success flag. A verified proof may originate from an"
+    },
+    "362": {
+      "pdf_page": 12,
+      "pdf_extraction_line": 23,
+      "source_text": "untrusted model: the checking rule, not the proposal’s reputation, establishes the new claim."
+    },
+    "363": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 1,
+      "source_text": "B.2     Targeted source-level checks before the final freeze"
+    },
+    "364": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 3,
+      "source_text": "Add tests for duplicate or colliding named SMT assertion/assumption identifiers, exact formula-root"
+    },
+    "365": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 4,
+      "source_text": "binding in receipts, stale replay fingerprints, unsupported terms and rejection of unvalidated results."
+    },
+    "366": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 5,
+      "source_text": "Exercise the real caller admission path—not only a synthetic result constructor. These are review"
+    },
+    "367": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 6,
+      "source_text": "obligations, not a claim that a runtime exploit was demonstrated in this audit."
+    },
+    "368": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 8,
+      "source_text": "C     Fixture definitions, injected instances and reuse eligibility"
+    },
+    "369": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 9,
+      "source_text": "This appendix preserves the parallel sealing/TDD directive’s staged protocol. Earlier identity and"
+    },
+    "370": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 10,
+      "source_text": "trace infrastructure exists, but no new qualification of this entire protocol is asserted here. [P8; W3]"
+    },
+    "371": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 40,
+      "source_text": "C.1     Reviewed dependency-injection adapters"
+    },
+    "372": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 42,
+      "source_text": "Admit canonical primitives, bounded typed records, exact file/resource CIDs, versioned configuration"
+    },
+    "373": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 43,
+      "source_text": "allowlists, immutable database snapshots, reviewed service fakes or committed response corpora"
+    },
+    "374": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 44,
+      "source_text": "through explicit adapters. Do not serialize arbitrary callbacks, sockets, secrets, unrestricted object"
+    },
+    "375": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 45,
+      "source_text": "graphs or live databases as if they were complete immutable inputs. Bind adapter version, privacy"
+    },
+    "376": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 46,
+      "source_text": "policy and any absence or non-determinism. [W3]"
+    },
+    "377": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 48,
+      "source_text": "C.2     Preserve lifecycle effects"
+    },
+    "378": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 50,
+      "source_text": "Separate reuse of fixture definitions, fixture instances and test-call results. Module/session-scoped"
+    },
+    "379": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 51,
+      "source_text": "resources, parametrized instances and xdist worker ownership require scope-aware scheduling. If"
+    },
+    "380": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 52,
+      "source_text": "setup ran, required teardown/finalizers still run even when a call result is reusable. Teardown failure"
+    },
+    "381": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 53,
+      "source_text": "prevents a whole-item pass. Scheduling must preserve resource isolation and observed ordering"
+    },
+    "382": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 54,
+      "source_text": "requirements, not simply distribute tests with matching names. [W3]"
+    },
+    "383": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 55,
+      "source_text": "A trace records what was observed on one execution. It does not prove that a branch not taken"
+    },
+    "384": {
+      "pdf_page": 13,
+      "pdf_extraction_line": 56,
+      "source_text": "could not access another dependency. Exact reuse across states needs a closed behavioral boundary;"
+    },
+    "385": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 1,
+      "source_text": "otherwise widen the closure and execute. Keep cold executions and mutation cohorts to test the reuse"
+    },
+    "386": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 2,
+      "source_text": "policy independently."
+    },
+    "387": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 4,
+      "source_text": "C.3     Proof batches, parallel preparation and the inner loop"
+    },
+    "388": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 6,
+      "source_text": "C.3.1    Certificate and batch statement"
+    },
+    "389": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 8,
+      "source_text": "A batch statement binds the test inventory/requirement manifest, child execution keys and admitted"
+    },
+    "390": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 9,
+      "source_text": "outcomes, count, ordering, duplicate policy and aggregate root. A cryptographic profile must bind its"
+    },
+    "391": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 10,
+      "source_text": "public inputs, any private commitments, circuit or program, verification key, setup origin, verifier"
+    },
+    "392": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 11,
+      "source_text": "version and intended relation. A proof of signature verification still relies on the signer’s execution"
+    },
+    "393": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 12,
+      "source_text": "claim; it is not direct proof of the runner. Zero-knowledge is justified only by a defined privacy need"
+    },
+    "394": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 13,
+      "source_text": "and a reviewed statement. [W3]"
+    },
+    "395": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 14,
+      "source_text": "Reject unknown circuits or key origins, test-only keys on production allowlists, silent key generation,"
+    },
+    "396": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 15,
+      "source_text": "simulated required units, and outer metadata not bound to the verified statement. Keep proving"
+    },
+    "397": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 16,
+      "source_text": "keys and witness material outside public proof-store APIs. If recursive verification is unavailable,"
+    },
+    "398": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 17,
+      "source_text": "represent a manifest of individually verified leaves rather than inventing a recursive proof. [K1; W3]"
+    },
+    "399": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 19,
+      "source_text": "C.3.2    Parallelism that preserves identity"
+    },
+    "400": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 46,
+      "source_text": "C.3.3    Development-loop states"
+    },
+    "401": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 48,
+      "source_text": "The fast loop combines source capture, semantic invalidation, selection, cache-candidate lookup,"
+    },
+    "402": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 49,
+      "source_text": "fixture-aware execution, candidate repair and certificate production. Proof generation can proceed"
+    },
+    "403": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 50,
+      "source_text": "asynchronously inside the product only when the intermediate state remains explicitly non-mergeable."
+    },
+    "404": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 51,
+      "source_text": "Queue starvation, cancellation, proof failure, missing keys or unknown execution must preserve"
+    },
+    "405": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 52,
+      "source_text": "honest status. [W3]"
+    },
+    "406": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 53,
+      "source_text": "The directive’s rollout is bootstrap → shadow_hash → shadow_reuse → shadow_proof → protected"
+    },
+    "407": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 54,
+      "source_text": "→ required. These gates are not interchangeable with world-model shadow-read semantics. Measure"
+    },
+    "408": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 55,
+      "source_text": "call/setup/teardown time, proof latency, batch verification, hash/serialization throughput, cache"
+    },
+    "409": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 56,
+      "source_text": "corruption rejection, serial barrier time and total cost. Performance targets are acceptance goals—not"
+    },
+    "410": {
+      "pdf_page": 14,
+      "pdf_extraction_line": 57,
+      "source_text": "results. [W3]"
+    },
+    "411": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 1,
+      "source_text": "D     Semantic objects, projection indexes and logical datasets"
+    },
+    "412": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 2,
+      "source_text": "D.1   Semantic objects and relations"
+    },
+    "413": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 4,
+      "source_text": "Wrap existing domain-state CIDs in adjacent versioned semantic-object envelopes containing domain,"
+    },
+    "414": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 5,
+      "source_text": "schema, canonicalization profile, provenance, source CIDs, optional declared policy salt and evidence"
+    },
+    "415": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 6,
+      "source_text": "class. Do not alter the existing source-semantic root to include embeddings, prompts, actors, leases,"
+    },
+    "416": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 7,
+      "source_text": "wall time or transition history. Pure semantic deltas remain distinct from operational execution"
+    },
+    "417": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 8,
+      "source_text": "records. [W1, W2]"
+    },
+    "418": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 9,
+      "source_text": "Relations are scoped claims such as equivalent, refines, entails, contradicts, compatible_with and"
+    },
+    "419": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 10,
+      "source_text": "supersedes. Each binds left/right objects, scope, assumptions, environment and theory/policy, proof/"
+    },
+    "420": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 11,
+      "source_text": "evidence references, limitations and invalidation dependencies. “Similar” belongs to a retrieval"
+    },
+    "421": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 12,
+      "source_text": "projection, not the authoritative semantic relation vocabulary. Exact CID equality establishes byte"
+    },
+    "422": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 13,
+      "source_text": "identity, not universal semantic equivalence. [W1]"
+    },
+    "423": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 15,
+      "source_text": "D.2   Hybrid retrieval without authority leakage"
+    },
+    "424": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 17,
+      "source_text": "Projection records bind their semantic object, projection kind, model, tokenizer, preprocessor, dimen-"
+    },
+    "425": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 18,
+      "source_text": "sion, metric, normalization, vector identity and privacy policy. Rebuildable index manifests bind"
+    },
+    "426": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 19,
+      "source_text": "generations and model/projection compatibility. Lexical, vector, LSH/Hamming, graph or neural"
+    },
+    "427": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 20,
+      "source_text": "search may nominate candidates. The resolver must retrieve exact object bytes, verify current root"
+    },
+    "428": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 21,
+      "source_text": "membership and recheck freshness, environment, obligations and policy before use. A stale vector or"
+    },
+    "429": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 22,
+      "source_text": "approximate neighbor never substitutes for an exact subject. [W1, W2]"
+    },
+    "430": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 23,
+      "source_text": "The graph-to-graph or typed-attention TAGSeq/DAGSeq idea remains an optional experimental"
+    },
+    "431": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 24,
+      "source_text": "projection over typed program neighborhoods. It must be compared with exact lookup, rules, ordinary"
+    },
+    "432": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 25,
+      "source_text": "graph features and embedding-only baselines. Canonical symbols and typed source maps remain"
+    },
+    "433": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 26,
+      "source_text": "authoritative even if the learned projection changes. [W2]"
+    },
+    "434": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 28,
+      "source_text": "D.3   Logical data versus physical layout"
+    },
+    "435": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 30,
+      "source_text": "LogicalDatasetState and PhysicalDatasetLayout must not collapse into one identity. Under a fixed"
+    },
+    "436": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 31,
+      "source_text": "logical schema, key/order policy and provenance, changing Parquet row groups, compression or"
+    },
+    "437": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 32,
+      "source_text": "shard packaging should preserve logical content identity while changing layout identity. Set, multiset"
+    },
+    "438": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 33,
+      "source_text": "and ordered semantics must be explicit; duplicate and key-conflict behavior cannot be inferred from"
+    },
+    "439": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 34,
+      "source_text": "file order. [W1]"
+    },
+    "440": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 35,
+      "source_text": "Transformations bind exact inputs, transformation specification, environment/toolchain, candidate"
+    },
+    "441": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 36,
+      "source_text": "outputs and validation evidence. Merges use a closed declared semantics—append, keyed three-way,"
+    },
+    "442": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 37,
+      "source_text": "ordered, set/multiset, schema evolution or conflict. Distributed workers may prepare shards and"
+    },
+    "443": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 38,
+      "source_text": "candidate layouts, but only accepted logical state and validated provenance may enter a world root."
+    },
+    "444": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 39,
+      "source_text": "Legacy or mock dataset managers cannot silently remain production semantic authorities. [W1, W2]"
+    },
+    "445": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 41,
+      "source_text": "D.4   VFS bridge"
+    },
+    "446": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 43,
+      "source_text": "A successful canonical VFS/worktree mutation emits a durable post-commit receipt and semantic"
+    },
+    "447": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 44,
+      "source_text": "outbox record. Rescanning, invalidation and acceptance occur through the existing semantic and"
+    },
+    "448": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 45,
+      "source_text": "supervisor authorities. Filesystem success alone is not task success; recovery handles an outbox that"
+    },
+    "449": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 46,
+      "source_text": "exists before semantic acceptance, and all side effects remain attributable to exact operations. [W1,"
+    },
+    "450": {
+      "pdf_page": 15,
+      "pdf_extraction_line": 47,
+      "source_text": "W2]"
+    },
+    "451": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 1,
+      "source_text": "D.5     Frames, events, transitions and learned continuation models"
+    },
+    "452": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 3,
+      "source_text": "D.5.1    State schema and abstraction profile"
+    },
+    "453": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 5,
+      "source_text": "ProgramStateSnapshot:"
+    },
+    "454": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 6,
+      "source_text": "repository/environment/program-graph roots; source location; stack;"
+    },
+    "455": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 7,
+      "source_text": "selected locals or shapes; abstract heap/alias summary; path condition;"
+    },
+    "456": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 8,
+      "source_text": "exception state; obligations; capabilities/effects; external observations;"
+    },
+    "457": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 9,
+      "source_text": "capture profile; abstraction profile; confidence and limitations"
+    },
+    "458": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 10,
+      "source_text": "ProgramTransition:"
+    },
+    "459": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 11,
+      "source_text": "before-state; action; event; after-state or delta; conditions;"
+    },
+    "460": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 12,
+      "source_text": "observation/validation evidence; accepted/rejected/candidate status"
+    },
+    "461": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 14,
+      "source_text": "Profiles declare stack depth, value precision, heap slicing, allocation identity, timestamp treatment,"
+    },
+    "462": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 15,
+      "source_text": "exception handling and the observations preserved or erased. Absence is typed: a trace adapter that"
+    },
+    "463": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 16,
+      "source_text": "cannot capture an external service is not a complete program-state observer. Logical execution graphs"
+    },
+    "464": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 17,
+      "source_text": "may cycle without creating literal cyclic content-addressed blocks. [W2]"
+    },
+    "465": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 19,
+      "source_text": "D.5.2    Three distinct inference problems"
+    },
+    "466": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 41,
+      "source_text": "Symbolic pruning may exclude a candidate only through an admitted type, path, alias, effect, temporal,"
+    },
+    "467": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 42,
+      "source_text": "resource, authority, exception or contract constraint. Uncertainty is not exclusion. A repair-delta"
+    },
+    "468": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 43,
+      "source_text": "model proposes bounded changes to canonical nodes/edges; an exact resolver and source-preserving"
+    },
+    "469": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 44,
+      "source_text": "renderer still need independently validated source correspondence. [W2]"
+    },
+    "470": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 46,
+      "source_text": "D.5.3    Dataset and promotion protocol"
+    },
+    "471": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 48,
+      "source_text": "Freeze capture/abstraction profiles, provenance, source-family splits, candidate-set construction and"
+    },
+    "472": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 49,
+      "source_text": "targets before evaluation. Separate observed from synthetic/static-derived examples and distinguish"
+    },
+    "473": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 50,
+      "source_text": "valid alternatives from wrong predictions. Report candidate recall before ranking, top-k, calibration,"
+    },
+    "474": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 51,
+      "source_text": "abstention, unsupported cases, replay validity and downstream repair value. Model scores do not"
+    },
+    "475": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 52,
+      "source_text": "become facts or required certificate evidence. [W2]"
+    },
+    "476": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 53,
+      "source_text": "The predecessor proof-grounded learning campaign and a successor’s uncompleted work cannot share"
+    },
+    "477": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 54,
+      "source_text": "a positive-result label. Preserve the earlier reported no-go until a distinct frozen learned artifact and"
+    },
+    "478": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 55,
+      "source_text": "independent evaluation establish a new claim. This review does not establish new learned weights, a"
+    },
+    "479": {
+      "pdf_page": 16,
+      "pdf_extraction_line": 56,
+      "source_text": "tokenizer or a universal interlingua. [P6, P11; W2]"
+    },
+    "480": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 1,
+      "source_text": "E     Behavior-preserving remodularization, not cosmetic compression"
+    },
+    "481": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 2,
+      "source_text": "E.1   Model the observations to preserve"
+    },
+    "482": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 4,
+      "source_text": "Track function, class, block and module identity at multiple levels: exact source/CST, semantic imple-"
+    },
+    "483": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 5,
+      "source_text": "mentation, binding, contract, effects, mutable state, dependencies, public interface and compatibility."
+    },
+    "484": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 6,
+      "source_text": "Formatting, relocation, renaming, aliasing and semantic change need different dispositions. Public"
+    },
+    "485": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 7,
+      "source_text": "behavior includes return values, exceptions, mutation, initialization order, import effects, serialization/"
+    },
+    "486": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 8,
+      "source_text": "pickle names, introspection, plugin discovery, cancellation, timeouts, resources and documented API"
+    },
+    "487": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 9,
+      "source_text": "surfaces—not just existing happy-path tests. [A3; W4]"
+    },
+    "488": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 11,
+      "source_text": "E.2   Analyze before partitioning"
+    },
+    "489": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 13,
+      "source_text": "Build a typed architecture graph of calls, reads/writes, authority owners, providers, interfaces, receipt"
+    },
+    "490": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 14,
+      "source_text": "producers, stores, tests and proofs. Identify SCCs, cycles, import-time ordering and shared state. A"
+    },
+    "491": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 15,
+      "source_text": "partition candidate must preserve a coherent state owner and an explicit boundary contract; do not"
+    },
+    "492": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 16,
+      "source_text": "break a dependency cycle by hiding it behind opaque callbacks or duplicated state. Similarity and"
+    },
+    "493": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 17,
+      "source_text": "semantic-entropy scores nominate candidates but prove neither duplication nor dead code. [A3; W4]"
+    },
+    "494": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 19,
+      "source_text": "E.3   Bounded transformation and validation"
+    },
+    "495": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 21,
+      "source_text": "architecture finding → partition candidate → boundary contracts"
+    },
+    "496": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 22,
+      "source_text": "→ scoped operator + reversible migration plan"
+    },
+    "497": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 23,
+      "source_text": "→ isolated worktree + CST/AST-aware transform"
+    },
+    "498": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 24,
+      "source_text": "→ translation / differential / effect / public-surface checks"
+    },
+    "499": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 25,
+      "source_text": "→ selected and full-fallback tests + supported proofs"
+    },
+    "500": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 26,
+      "source_text": "→ independent admission + exact rollback + updated state"
+    },
+    "501": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 28,
+      "source_text": "Reuse a closed operator grammar: extract module/interface/pure function, move state to its owner,"
+    },
+    "502": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 29,
+      "source_text": "introduce typed adapters or dependency inversion, quarantine legacy/simulation paths, replace"
+    },
+    "503": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 30,
+      "source_text": "ambiguous outcomes, deprecate a public symbol or remove confirmed dead code after the relevant"
+    },
+    "504": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 31,
+      "source_text": "gate. Operators bind preconditions, scope, effects, migration, consumer coverage and rollback."
+    },
+    "505": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 32,
+      "source_text": "Unknown dynamic reachability is not proof of deadness. [A3; W4]"
+    },
+    "506": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 33,
+      "source_text": "Use property-based, metamorphic, mutation and differential executions over declared observables,"
+    },
+    "507": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 34,
+      "source_text": "plus type/effect checks and supported solver or native proof obligations. Tactician/Hammer routes"
+    },
+    "508": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 35,
+      "source_text": "can try to discharge obligations; bounded synthesis or a small model may propose a residual. A test"
+    },
+    "509": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 36,
+      "source_text": "suite cannot alone establish universal observational equivalence of arbitrary Python. Contradictory"
+    },
+    "510": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 37,
+      "source_text": "authoritative premises require conflict resolution, not proof by inconsistency to authorize a rewrite."
+    },
+    "511": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 38,
+      "source_text": "[W4]"
+    },
+    "512": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 40,
+      "source_text": "E.4   Fixed-point control and memory"
+    },
+    "513": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 42,
+      "source_text": "Persist accepted and rejected partitions, failed applicability, counterexamples and migration costs."
+    },
+    "514": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 43,
+      "source_text": "Recompute only affected graph regions; stop when no admissible beneficial candidate remains or a"
+    },
+    "515": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 44,
+      "source_text": "budget is exhausted. Public API, mutable-state, security, legal, payment, key, release-authority and"
+    },
+    "516": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 45,
+      "source_text": "wire-protocol changes retain their human-approval ceilings. Learned benefit or lower context cost"
+    },
+    "517": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 46,
+      "source_text": "cannot raise those ceilings. [A3; W4]"
+    },
+    "518": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 47,
+      "source_text": "The public architecture checkpoint establishes inventory and ArchitectureIR foundations. The broader"
+    },
+    "519": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 48,
+      "source_text": "SCC/partition/CST/remodularization program remains separately tracked against the author’s local"
+    },
+    "520": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 49,
+      "source_text": "worktree. [B1; W4]"
+    },
+    "521": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 51,
+      "source_text": "F     Rollout, event federation and verified self-hosting"
+    },
+    "522": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 52,
+      "source_text": "F.1   Reconcile predecessor programs"
+    },
+    "523": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 54,
+      "source_text": "The semantic-world and program-world directives explicitly require extending an accepted predeces-"
+    },
+    "524": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 55,
+      "source_text": "sor or creating a sealed successor—not two stores, scanners, schedulers or root authorities. Apply"
+    },
+    "525": {
+      "pdf_page": 17,
+      "pdf_extraction_line": 56,
+      "source_text": "the same rule to existing procedure, architecture, proof reuse, sealer, governor and meta-controller"
+    },
+    "526": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 1,
+      "source_text": "campaigns. Read the live owner-controlled board and dependency seals before adding tasks; old plan"
+    },
+    "527": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 2,
+      "source_text": "status text does not override current code or active local work. [W1–W4]"
+    },
+    "528": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 4,
+      "source_text": "F.2   Distinct rollout state machines"
+    },
+    "529": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 26,
+      "source_text": "F.3   Mandatory per-task receipts in required mode"
+    },
+    "530": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 28,
+      "source_text": "A task consumes an exact source forest, semantic/program state, obligation set, route decision and"
+    },
+    "531": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 29,
+      "source_text": "context plan. It produces candidate artifacts, observations, current validation, admitted or rejected"
+    },
+    "532": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 30,
+      "source_text": "transition, and a matching post-root/completion record. A deployment that writes optional semantic"
+    },
+    "533": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 31,
+      "source_text": "metadata while continuing to decide from raw prompts has not demonstrated required self-hosting."
+    },
+    "534": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 32,
+      "source_text": "[W2, W3]"
+    },
+    "535": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 34,
+      "source_text": "F.4   Concurrency and persistence"
+    },
+    "536": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 36,
+      "source_text": "The operational database is accessed through the current typed owner boundary; event and outbox"
+    },
+    "537": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 37,
+      "source_text": "records, revisions, claims and fences must agree. Delivery can be at least once while logical operations"
+    },
+    "538": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 38,
+      "source_text": "are idempotent. Causal graphs and affected-frontier wakeups avoid duplicate reconstruction, but"
+    },
+    "539": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 39,
+      "source_text": "retrieval projections and optional history stores cannot create readiness, leases or acceptance. [P3;"
+    },
+    "540": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 40,
+      "source_text": "W2]"
+    },
+    "541": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 41,
+      "source_text": "CRDT-like merging can be useful for observational knowledge with explicit conflict semantics. It"
+    },
+    "542": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 42,
+      "source_text": "must not merge exclusive leases, authorization, current roots, irreversible effects or completion by"
+    },
+    "543": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 43,
+      "source_text": "optimistic set union. Speculative agents use isolated branches and candidate proof/premise prefetch;"
+    },
+    "544": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 44,
+      "source_text": "only independently admitted outputs cross the serial publication boundary. Remote storage and"
+    },
+    "545": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 45,
+      "source_text": "libp2p/MCP++ transport require their own authentication/capability and fault tests. [W1, W2]"
+    },
+    "546": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 47,
+      "source_text": "F.5   Typed service parity"
+    },
+    "547": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 49,
+      "source_text": "Python, CLI and MCP are projections of the same operation contracts and authority rules. An"
+    },
+    "548": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 50,
+      "source_text": "envelope identity is not the semantic payload identity. Delegated capabilities authorize an operation"
+    },
+    "549": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 51,
+      "source_text": "but do not establish its mathematical correctness. Keep secrets and raw private traces outside prompt,"
+    },
+    "550": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 52,
+      "source_text": "receipt and public-storage surfaces; ordinary imports must not launch daemons or installers. [D1;"
+    },
+    "551": {
+      "pdf_page": 18,
+      "pdf_extraction_line": 53,
+      "source_text": "W1–W4]"
+    },
+    "552": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 1,
+      "source_text": "G     Experiments and acceptance gates for the landing work"
+    },
+    "553": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 36,
+      "source_text": "G.1   Cost and uncertainty"
+    },
+    "554": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 38,
+      "source_text": "T_total = elapsed wall time from task admission to terminal disposition"
+    },
+    "555": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 39,
+      "source_text": "Stage report = capture, compile, retrieve, model, setup, test, teardown,"
+    },
+    "556": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 40,
+      "source_text": "prove, verify, persist, retry, recover and human waits"
+    },
+    "557": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 41,
+      "source_text": "Money_total = billed provider cost + measured infrastructure allocation"
+    },
+    "558": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 42,
+      "source_text": "Resource report = CPU time, GPU time, peak memory, bytes, storage growth"
+    },
+    "559": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 44,
+      "source_text": "Overlapping parallel stage times are not additive wall time. Do not add seconds, tokens and dollars as"
+    },
+    "560": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 45,
+      "source_text": "if they were one physical quantity. A policy may optimize a declared weighted utility, but the paper"
+    },
+    "561": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 46,
+      "source_text": "must also report the separate observable units. Amortize cold indexing, proof setup, training and"
+    },
+    "562": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 47,
+      "source_text": "procedure compilation over an explicit number of tasks; include break-even behavior and workloads"
+    },
+    "563": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 48,
+      "source_text": "where the method is slower."
+    },
+    "564": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 50,
+      "source_text": "G.2   Hard gates and honest dispositions"
+    },
+    "565": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 52,
+      "source_text": "Require no observed unsafe admission, stale publication, forged certificate acceptance or false reuse in"
+    },
+    "566": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 53,
+      "source_text": "the frozen adversarial suite, while reporting its finite size and uncertainty. Quality must not be traded"
+    },
+    "567": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 54,
+      "source_text": "away to meet a speed target. An unavailable backend, an incomplete proof or baseline-compatible"
+    },
+    "568": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 55,
+      "source_text": "failing test remains visible. A non-promotion can be the correct campaign result."
+    },
+    "569": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 56,
+      "source_text": "The final anonymous bundle needs a source forest, install/lock and capability manifests, frozen"
+    },
+    "570": {
+      "pdf_page": 19,
+      "pdf_extraction_line": 57,
+      "source_text": "task population/splits, model settings, test/prover commands, raw receipts, analysis code, failure"
+    },
+    "571": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 1,
+      "source_text": "taxonomy, trusted-base manifest and replay instructions. A reviewer must be able to regenerate each"
+    },
+    "572": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 2,
+      "source_text": "table without private author state."
+    },
+    "573": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 4,
+      "source_text": "H     Early supervisor programs and their scientific role"
+    },
+    "574": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 5,
+      "source_text": "The chat contains more than the four saved world/TDD/refactoring directives. The earlier programs"
+    },
+    "575": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 6,
+      "source_text": "below are retained explicitly. They are reconciled with existing implementation owners rather than"
+    },
+    "576": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 7,
+      "source_text": "treated as commands to launch duplicate boards. A handoff prompt specifies intended work; it is not"
+    },
+    "577": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 8,
+      "source_text": "evidence that a supervisor was launched or that a worktree landed."
+    },
+    "578": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 34,
+      "source_text": "H.1   Dependency order, not a new campaign taxonomy"
+    },
+    "579": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 36,
+      "source_text": "First qualify state and applicability, then the symbolic route and real positive model-dispatch path,"
+    },
+    "580": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 37,
+      "source_text": "then repair and test-certificate admission. Only after those seams work should a combined run"
+    },
+    "581": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 38,
+      "source_text": "attribute gains to automatic refill, minification, procedures or learned world state. Existing gates and"
+    },
+    "582": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 39,
+      "source_text": "protected validation owners remain authoritative."
+    },
+    "583": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 41,
+      "source_text": "H.2   Independent status dimensions"
+    },
+    "584": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 43,
+      "source_text": "location: main | branch | local_overlay | specification_only"
+    },
+    "585": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 44,
+      "source_text": "implementation: present | partial | incompatible | missing"
+    },
+    "586": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 45,
+      "source_text": "integration: called | adapter_only | optional | unknown"
+    },
+    "587": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 46,
+      "source_text": "validation: not_run | reported | reproduced | failed | blocked"
+    },
+    "588": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 47,
+      "source_text": "rollout: off | shadow | guarded | required"
+    },
+    "589": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 48,
+      "source_text": "paper claim: exact mechanism + population + scope + limitations"
+    },
+    "590": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 50,
+      "source_text": "A branch may already be an ancestor of main; an importable module may never be consumed; a"
+    },
+    "591": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 51,
+      "source_text": "passing negative fixture may never exercise a valid path. Update each dimension independently. Do"
+    },
+    "592": {
+      "pdf_page": 20,
+      "pdf_extraction_line": 52,
+      "source_text": "not replace pending outcomes with the expected landing date."
+    },
+    "593": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 1,
+      "source_text": "H.3     World state, tests, and refactoring are parts of one loop"
+    },
+    "594": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 32,
+      "source_text": "The four saved directives collectively specify 126 top-level sections, including operational and report-"
+    },
+    "595": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 33,
+      "source_text": "ing requirements. Their previous complete heading index remains in the companion reconciliation"
+    },
+    "596": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 34,
+      "source_text": "handoff; it has not been replaced by this method summary. The latest revision retains Appendices"
+    },
+    "597": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 35,
+      "source_text": "A–G and adds exact source-level qualification issues rather than discarding the previously discussed"
+    },
+    "598": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 36,
+      "source_text": "mechanisms."
+    },
+    "599": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 38,
+      "source_text": "H.3.1    Self-hosting must be observable"
+    },
+    "600": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 39,
+      "source_text": "In shadow-write the system computes sidecar artifacts; in shadow-read it evaluates hypothetical"
+    },
+    "601": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 40,
+      "source_text": "decisions without changing authority. Guarded consumption and required self-hosting must be"
+    },
+    "602": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 41,
+      "source_text": "separately approved. In required mode each eligible task consumes a verified pre-root, current"
+    },
+    "603": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 42,
+      "source_text": "obligations and route/context decision, then publishes observations, validation, accepted/rejected"
+    },
+    "604": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 43,
+      "source_text": "transition and completion/post-root evidence. Workers may not modify rollout, keys, protected"
+    },
+    "605": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 44,
+      "source_text": "specifications or their own acceptance validator."
+    },
+    "606": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 46,
+      "source_text": "H.3.2    Learned representations remain bounded research"
+    },
+    "607": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 47,
+      "source_text": "Typed-attention/TAGSeq/DAGSeq-style models are optional comparisons after static, history, lexical"
+    },
+    "608": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 48,
+      "source_text": "and embedding baselines. Program graphs may be cyclic; storage manifests are not. Predicting a next"
+    },
+    "609": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 49,
+      "source_text": "event, recovering a predecessor trace and proposing a repair are different objectives with different"
+    },
+    "610": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 50,
+      "source_text": "labels. Track calibration, abstention, static-candidate recall, leakage-safe repository-family/time"
+    },
+    "611": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 51,
+      "source_text": "splits, and downstream acceptance. Attention weights, proximity and a generated CID are not proofs."
+    },
+    "612": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 53,
+      "source_text": "I     A semantic preservation contract for every translation"
+    },
+    "613": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 54,
+      "source_text": "The formal layer is not a bag of interchangeable solver adapters. For each source-to-target conversion"
+    },
+    "614": {
+      "pdf_page": 21,
+      "pdf_extraction_line": 55,
+      "source_text": "τ , record source domain, target logic/theory, vocabulary, variable/clock interpretation, assumptions,"
+    },
+    "615": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 1,
+      "source_text": "unsupported constructs, omissions, source map and claimed preservation direction. Source truth may"
+    },
+    "616": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 2,
+      "source_text": "be inferred from target truth only when that implication is established for the requested property. [N4,"
+    },
+    "617": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 3,
+      "source_text": "N8]"
+    },
+    "618": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 35,
+      "source_text": "I.1     Concrete loss test to add"
+    },
+    "619": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 37,
+      "source_text": "The inspected legacy converter maps O(p) to p and a temporal operator applied to p to p; it also"
+    },
+    "620": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 38,
+      "source_text": "approximates a binary temporal formula by conjunction. Construct distinct source states or traces"
+    },
+    "621": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 39,
+      "source_text": "in which the original modality differs while the projection agrees. The acceptance path must reject"
+    },
+    "622": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 40,
+      "source_text": "lifting a target proof to the source claim unless an appropriate preservation condition is supplied. This"
+    },
+    "623": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 41,
+      "source_text": "is a proposed semantic regression, not a newly executed repository test. [N8]"
+    },
+    "624": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 43,
+      "source_text": "I.2     Nonvacuity and contradictory premises"
+    },
+    "625": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 45,
+      "source_text": "Before accepting G⇒A in component composition, check the intended consistency and reachability"
+    },
+    "626": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 46,
+      "source_text": "conditions. Unsatisfiable G makes the implication vacuously true; it may expose a broken specification"
+    },
+    "627": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 47,
+      "source_text": "rather than a correct component. Unknown is not inconsistent and not proved. Mutating axioms or"
+    },
+    "628": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 48,
+      "source_text": "normative policy to close a proof is a new authorized specification change, not automatic repair."
+    },
+    "629": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 50,
+      "source_text": "I.3     What can be proved about acceptance and reuse"
+    },
+    "630": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 52,
+      "source_text": "I.3.1    Accepted-lineage invariant — proof sketch, not machine checked"
+    },
+    "631": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 53,
+      "source_text": "Fix a statement profile Θ and a policy predicate PΘ over artifact manifests. Assume: the initial"
+    },
+    "632": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 54,
+      "source_text": "accepted root satisfies PΘ; all required subject bytes and dependency references are verified; the"
+    },
+    "633": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 55,
+      "source_text": "manifest is complete under an admitted completeness rule; each accepted evidence item satisfies its"
+    },
+    "634": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 56,
+      "source_text": "designated checker relation; the sole publication operation enforces the expected parent and all gates;"
+    },
+    "635": {
+      "pdf_page": 22,
+      "pdf_extraction_line": 57,
+      "source_text": "and protected policy/checker identities cannot change under worker authority."
+    },
+    "636": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 1,
+      "source_text": "Then every root reachable solely through accepted publication transitions satisfies PΘ. Proof:"
+    },
+    "637": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 2,
+      "source_text": "induction on the number of successful publications. The initial case is assumed. For the induction"
+    },
+    "638": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 3,
+      "source_text": "step, the publisher checks PΘ on the exact candidate manifest and current parent before its CAS"
+    },
+    "639": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 4,
+      "source_text": "linearization; failed or stale attempts are not successors. The induction does not establish any property"
+    },
+    "640": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 5,
+      "source_text": "omitted by PΘ, truth of unsupported translations, honest signed observations, or atomicity of external"
+    },
+    "641": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 6,
+      "source_text": "side effects."
+    },
+    "642": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 8,
+      "source_text": "I.3.2    Dependency-projected test reuse — proof obligation"
+    },
+    "643": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 9,
+      "source_text": "Let Obsθ(t,s) be the relevant setup/call/teardown observation of test t in state s under a declared"
+    },
+    "644": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 10,
+      "source_text": "runtime/effect profile θ. Suppose a complete projection πD and deterministic function fθ exist such"
+    },
+    "645": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 11,
+      "source_text": "that Obsθ(t,s)=fθ(πD(s)) on all states admitted by the reuse policy. If πD(s)=πD(s′), equality of"
+    },
+    "646": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 12,
+      "source_text": "the observations follows immediately. An admitted previous observation can therefore transfer only"
+    },
+    "647": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 13,
+      "source_text": "within that profile and those assumptions."
+    },
+    "648": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 14,
+      "source_text": "The difficult part is establishing completeness and determinism of πD. Definitions alone miss fixture"
+    },
+    "649": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 15,
+      "source_text": "values; function coverage misses plugin, clock, network, DB and teardown effects. Two equal digests"
+    },
+    "650": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 16,
+      "source_text": "of incomplete manifests do not satisfy the premise. For effectful tests the profile must also show that"
+    },
+    "651": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 17,
+      "source_text": "required effects are replayed or observationally unnecessary. Otherwise run setup and/or the test"
+    },
+    "652": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 18,
+      "source_text": "and teardown. A cold oracle and adversarial mutations check the implementation but do not prove"
+    },
+    "653": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 19,
+      "source_text": "universal closure."
+    },
+    "654": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 21,
+      "source_text": "I.3.3    Three acceptance questions, three different answers"
+    },
+    "655": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 22,
+      "source_text": "Behavioral claim: does candidate program/model satisfy its obligation?"
+    },
+    "656": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 23,
+      "source_text": "Action permission: may this actor perform this action now?"
+    },
+    "657": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 24,
+      "source_text": "Publication: does this candidate and its evidence become current?"
+    },
+    "658": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 25,
+      "source_text": "Neither a proof of behavior nor a capability alone answers all three. Formalization determines"
+    },
+    "659": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 26,
+      "source_text": "the statement; authorization binds actor, tool, arguments, resources, effects, scope, time and roots;"
+    },
+    "660": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 27,
+      "source_text": "execution observations report what happened; publication chooses the accepted lineage. The reference"
+    },
+    "661": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 28,
+      "source_text": "pre-dispatch code uses an in-memory consumption ledger and fake-dispatch defaults, so durable"
+    },
+    "662": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 29,
+      "source_text": "real-tool integration requires its own adapter and restart evidence. [N7, N11]"
+    },
+    "663": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 31,
+      "source_text": "I.3.4    Useful autonomy requires positive-path witnesses"
+    },
+    "664": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 32,
+      "source_text": "Require a paired witness for each gate: a correctly authorized, well-bound case that progresses and a"
+    },
+    "665": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 33,
+      "source_text": "minimally altered case that is rejected. Include a deny-all control in safety/cost diagnostics, not as a"
+    },
+    "666": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 34,
+      "source_text": "competitive repair method. Otherwise default deferral, unavailable backends or adapter mismatches"
+    },
+    "667": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 35,
+      "source_text": "can masquerade as perfect safety and low inference cost."
+    },
+    "668": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 37,
+      "source_text": "J     Native proof code, metadata, and runtime observations"
+    },
+    "669": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 38,
+      "source_text": "J.1     The inspected optional Groth16 path"
+    },
+    "670": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 40,
+      "source_text": "The high-level adapter exposes Groth16/BN254 through a lazily imported Rust FFI backend and"
+    },
+    "671": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 41,
+      "source_text": "checks an explicit enable flag. Generation defaults to circuit version 1; the version-2 TDFOL_v1"
+    },
+    "672": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 42,
+      "source_text": "branch constructs a deterministic derivation trace and refuses a theorem outside its derivable fragment."
+    },
+    "673": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 43,
+      "source_text": "The helper’s grammar is limited to named atoms, facts, and unary-antecedent implications. A Python"
+    },
+    "674": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 44,
+      "source_text": "helper producing a trace is not by itself evidence that the deployed R1CS enforces every intended"
+    },
+    "675": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 45,
+      "source_text": "constraint. [N9–N10]"
+    },
+    "676": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 46,
+      "source_text": "The wrapper also supplies setup/ensure-setup functionality and allows a seed. Reproducible research"
+    },
+    "677": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 47,
+      "source_text": "setup and test-vector determinism must remain separate from approved operational key provenance."
+    },
+    "678": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 48,
+      "source_text": "Existence of key files or a compiled binary is not a proof of key ceremony, circuit soundness, correct"
+    },
+    "679": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 49,
+      "source_text": "deployment, or acceptable proving cost."
+    },
+    "680": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 51,
+      "source_text": "J.2     Bind inner statements to outer claims"
+    },
+    "681": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 53,
+      "source_text": "The inspected verify_proof path forwards JSON decoded from proof_data to the FFI verifier. Metadata"
+    },
+    "682": {
+      "pdf_page": 23,
+      "pdf_extraction_line": 54,
+      "source_text": "and attestation views are also assembled around that object. At the consumer boundary, compare the"
+    },
+    "683": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 1,
+      "source_text": "actual verified public inputs with the source, obligation, profile, environment, circuit, key and test-"
+    },
+    "684": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 2,
+      "source_text": "inventory claims used for admission. Do not infer that every outer metadata field is cryptographically"
+    },
+    "685": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 3,
+      "source_text": "bound merely because the inner proof verifies. This is a required boundary test; no exploitable"
+    },
+    "686": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 4,
+      "source_text": "end-to-end attack was reproduced. [N9]"
+    },
+    "687": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 23,
+      "source_text": "J.3   Experiment still required"
+    },
+    "688": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 25,
+      "source_text": "Measure native generation and verification on a named circuit and key policy, not an estimated"
+    },
+    "689": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 26,
+      "source_text": "proof-shaped record. For test attestation, run a genuine runner with independent observations; for"
+    },
+    "690": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 27,
+      "source_text": "direct execution claims, name the encoded runtime and external-I/O assumptions. Report prover"
+    },
+    "691": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 28,
+      "source_text": "unavailable as unavailable. Recursive verification is optional; a manifest of individually checked"
+    },
+    "692": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 29,
+      "source_text": "proofs is a different and acceptable mechanism when labeled correctly."
+    },
+    "693": {
+      "pdf_page": 24,
+      "pdf_extraction_line": 31,
+      "source_text": "K     Fill from one frozen, independently scored experiment"
+    },
+    "694": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 13,
+      "source_text": "K.1   Disclosure and reproducibility"
+    },
+    "695": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 15,
+      "source_text": "Language models were used for [actual implementation assistance], [candidate goals/plans/patches],"
+    },
+    "696": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 16,
+      "source_text": "[proof candidates], [data processing], and [manuscript preparation]. Record models, versions/dates,"
+    },
+    "697": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 17,
+      "source_text": "settings, prompts or permitted summaries, data exposure and independent checks. Remove unused"
+    },
+    "698": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 18,
+      "source_text": "roles rather than imply they occurred. Do not expose secrets, proprietary source, private witnesses or"
+    },
+    "699": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 19,
+      "source_text": "private reasoning logs to satisfy a reproducibility checklist."
+    },
+    "700": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 21,
+      "source_text": "K.2   Final author actions"
+    },
+    "701": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 23,
+      "source_text": "Freeze all landing worktrees and loaded dependency pins; reconcile implementations with ASEH,"
+    },
+    "702": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 24,
+      "source_text": "DOEP, PCPR, PCSM and W1–W4; qualify the positive-path gate; bound each logic translation and"
+    },
+    "703": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 25,
+      "source_text": "proof statement; regenerate result tables from raw evidence; report negative/missing results; replace"
+    },
+    "704": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 26,
+      "source_text": "artifact labels with anonymous paths; remove author-only review notes and identifying links; use"
+    },
+    "705": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 27,
+      "source_text": "the official workshop LaTeX style and check the actual PDF length. The separate audit/ledger is"
+    },
+    "706": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 28,
+      "source_text": "author-only. No repository mutation, supervisor launch, native build or live experiment is implied by"
+    },
+    "707": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 29,
+      "source_text": "this document revision."
+    },
+    "708": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 31,
+      "source_text": "L     How symbolic computations change the next agent action"
+    },
+    "709": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 32,
+      "source_text": "L.1   Abstract state supplies candidate bounds"
+    },
+    "710": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 34,
+      "source_text": "The inspected Python abstract interpreter uses a product of flat constants, integer intervals, nullness,"
+    },
+    "711": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 35,
+      "source_text": "exceptions and effects. Its immutable lattice protocol exposes order, join, meet, widening and"
+    },
+    "712": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 36,
+      "source_text": "narrowing; the adapter records local interprocedural summaries and source positions. The worklist"
+    },
+    "713": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 37,
+      "source_text": "accumulates possible states at program points. Unsupported reflection, native calls, loading and"
+    },
+    "714": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 38,
+      "source_text": "callbacks widen to opacity. A consumer may prune an impossible candidate only under a sound"
+    },
+    "715": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 39,
+      "source_text": "admitted approximation, never from a learned low score. [N14]"
+    },
+    "716": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 43,
+      "source_text": "L.2   Interface composition creates a precise discharge job"
+    },
+    "717": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 45,
+      "source_text": "A CompositionEdge references exact producer/consumer contracts and named normal, exceptional"
+    },
+    "718": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 46,
+      "source_text": "and induction clauses. Unknown clause references are rejected before solver execution. The compo-"
+    },
+    "719": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 47,
+      "source_text": "sition graph and receipt bind the semantic root, contracts, edges, obligation outcomes, uncovered"
+    },
+    "720": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 48,
+      "source_text": "assumptions and SCCs. Its basic implication query is G ∧ ¬A. SAT provides a countermodel;"
+    },
+    "721": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 49,
+      "source_text": "UNSAT provides solver-backed discharge of that encoded implication. Opaque prose stays uncovered."
+    },
+    "722": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 50,
+      "source_text": "Cycles need a typed invariant plus an independently solved closure check rather than mutually citing"
+    },
+    "723": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 51,
+      "source_text": "guarantees. [N12]"
+    },
+    "724": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 55,
+      "source_text": "This permits a caller to consume a dependency guarantee instead of repeatedly loading its body"
+    },
+    "725": {
+      "pdf_page": 25,
+      "pdf_extraction_line": 56,
+      "source_text": "only when current bindings, statement coverage and the consumer assumptions hold. A contract"
+    },
+    "726": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 1,
+      "source_text": "gap becomes a named repair or proof task. Consistency and reachability checks prevent treating an"
+    },
+    "727": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 2,
+      "source_text": "impossible guarantee as meaningful implementation correctness."
+    },
+    "728": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 4,
+      "source_text": "L.3   CEGAR localizes abstraction error before code repair"
+    },
+    "729": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 6,
+      "source_text": "The QF_LIA adapter searches a supplied Boolean abstraction of a control-flow graph and constructs"
+    },
+    "730": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 7,
+      "source_text": "a named concrete path formula for each abstract error trace. A feasible path is retained as a"
+    },
+    "731": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 8,
+      "source_text": "real counterexample. A spurious path may be refined with a validated interpolant/core, weakest"
+    },
+    "732": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 9,
+      "source_text": "precondition, or reviewed predicate. Iteration, predicate, abstract-state and trace-length budgets"
+    },
+    "733": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 10,
+      "source_text": "are explicit; unavailable, unknown, timeout and budget exhaustion are separate dispositions. It is a"
+    },
+    "734": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 11,
+      "source_text": "refinement adapter over existing contracts, not a second unrestricted model checker. [N13]"
+    },
+    "735": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 15,
+      "source_text": "Those are the checks required for an interpolant at the shared boundary. An unsat core identifies"
+    },
+    "736": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 16,
+      "source_text": "relevant asserted clauses but is not automatically an interpolant or a kernel proof. After localization,"
+    },
+    "737": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 17,
+      "source_text": "the supervisor may expand only the implicated context, request a bounded synthesis candidate, or"
+    },
+    "738": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 18,
+      "source_text": "abstain. CEGIS changes candidate programs; CEGAR changes the abstraction. [D2, D5; N13]"
+    },
+    "739": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 20,
+      "source_text": "L.4   Evidence feeds control, not just a report"
+    },
+    "740": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 22,
+      "source_text": "Each result must be consumed by the actual plan/frontier or admission service: closed implication →"
+    },
+    "741": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 23,
+      "source_text": "reusable component contract; feasible counterexample → repair obligation; missing semantic input"
+    },
+    "742": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 24,
+      "source_text": "→ exact expansion; unavailable solver → deferral/fallback; complete current evidence → candidate"
+    },
+    "743": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 25,
+      "source_text": "acceptance. A sidecar analysis that never affects these decisions cannot be credited with reducing"
+    },
+    "744": {
+      "pdf_page": 26,
+      "pdf_extraction_line": 26,
+      "source_text": "LLM use. Record the consumed result CID and subsequent control transition in the experiment."
+    },
+    "745": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 1,
+      "source_text": "M     Composed control-loop specification"
+    },
+    "746": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 2,
+      "source_text": "The following algorithm is retained from the preceding evaluated draft as an intended composition,"
+    },
+    "747": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 3,
+      "source_text": "not a newly executed implementation result. It is a control-flow specification retained for comparison"
+    },
+    "748": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 4,
+      "source_text": "with the final executable artifact."
+    },
+    "749": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 6,
+      "source_text": "Algorithm 1: Intended composed supervision loop. Input: authorized q, current source forest F,"
+    },
+    "750": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 7,
+      "source_text": "policy P, budget B"
+    },
+    "751": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 9,
+      "source_text": "1. reconcile event, task and artifact state; refresh F and derive G, O"
+    },
+    "752": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 10,
+      "source_text": "2. if cancelled or budget exhausted: return explicit non-success"
+    },
+    "753": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 11,
+      "source_text": "3. if every current obligation is admitted: return verify_goal_completion()"
+    },
+    "754": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 12,
+      "source_text": "4. generate bounded task proposals; preview and separately admit ready work"
+    },
+    "755": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 13,
+      "source_text": "5. if no task is admissible: return wait_or_review(), not goal success"
+    },
+    "756": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 14,
+      "source_text": "6. claim task; bind lease/fence, preimages, required context and validation"
+    },
+    "757": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 15,
+      "source_text": "7. choose deterministic, authorized residual-model, review or unavailable route"
+    },
+    "758": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 16,
+      "source_text": "8. if review/unavailable: record blocked attempt; return to the event service"
+    },
+    "759": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 17,
+      "source_text": "9. produce and apply candidate only through checked isolated execution"
+    },
+    "760": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 18,
+      "source_text": "10. rescan; derive O_new from authorized rules, not the worker’s pass claim"
+    },
+    "761": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 19,
+      "source_text": "11. verify/reuse evidence; retain failed, unknown and pending obligations"
+    },
+    "762": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 20,
+      "source_text": "12. if refinable failure: record new residual; return bounded retry to service"
+    },
+    "763": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 21,
+      "source_text": "13. if evidence incomplete or unsafe: return defer_or_reject()"
+    },
+    "764": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 22,
+      "source_text": "14. persist manifest; recheck current bindings; CAS the expected parent"
+    },
+    "765": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 23,
+      "source_text": "15. if publication conflicts: return reconcile(), not completion"
+    },
+    "766": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 24,
+      "source_text": "16. record accepted task transition and updated F, G, O; reevaluate at line 1"
+    },
+    "767": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 25,
+      "source_text": "17. propose procedure/policy learning separately; never self-promote"
+    },
+    "768": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 27,
+      "source_text": "This algorithm specifies the composition to evaluate. Passing tests of isolated stop paths does"
+    },
+    "769": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 28,
+      "source_text": "not establish the complete loop; qualification must exercise useful authorized progress as well as"
+    },
+    "770": {
+      "pdf_page": 27,
+      "pdf_extraction_line": 29,
+      "source_text": "rejection."
+    },
+    "771": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 1,
+      "source_text": "Paper checklist: completion pending"
+    },
+    "772": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 2,
+      "source_text": "The supplied workshop template includes a separate checklist.tex. That questionnaire was not"
+    },
+    "773": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 3,
+      "source_text": "included in the uploaded template sources. This page is an explicitly marked compilation placeholder,"
+    },
+    "774": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 4,
+      "source_text": "not a reproduction of the organizers’ checklist and not a declaration of compliance."
+    },
+    "775": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 5,
+      "source_text": "[TODO] Obtain the official questionnaire, replace this file, and complete its answers against the final"
+    },
+    "776": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 6,
+      "source_text": "manuscript and frozen artifact."
+    },
+    "777": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 7,
+      "source_text": "[TODO] Final experiment results, source snapshots, anonymous artifact access, and author-reviewed"
+    },
+    "778": {
+      "pdf_page": 28,
+      "pdf_extraction_line": 8,
+      "source_text": "LLM-use disclosures remain pending. No checklist answer is inferred from the draft."
+    }
+  },
+  "uncertain_math_lines": [
+    {
+      "pdf_page": 3,
+      "pdf_line": 88,
+      "text": "The actual component checker lowers a producer guarantee G and consumer assumption A to G ∧",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 3,
+      "pdf_line": 89,
+      "text": "¬A; SAT supplies a countermodel, UNSAT discharges the encoded implication, and unsupported",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 4,
+      "pdf_line": 108,
+      "text": "→ exact dependency and static analysis",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 4,
+      "pdf_line": 109,
+      "text": "→ contract, abstract-state and solver checks",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 4,
+      "pdf_line": 110,
+      "text": "→ bounded deterministic repair or synthesis",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 4,
+      "pdf_line": 111,
+      "text": "→ explicitly authorized residual model",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 4,
+      "pdf_line": 112,
+      "text": "→ independent validation / review / honest insufficiency",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 6,
+      "pdf_line": 199,
+      "text": "a deterministic observation under profile θ is a function fθ of a complete projection πD, then",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 6,
+      "pdf_line": 200,
+      "text": "πD(s)=πD(s′) implies equal observations. This conditional argument is elementary; proving that πD",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 7,
+      "pdf_line": 219,
+      "text": "→ parallel prepare: canonicalize / hash / verify / build leaves",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 7,
+      "pdf_line": 220,
+      "text": "→ recheck exact parent, scope, evidence and completeness",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 7,
+      "pdf_line": 221,
+      "text": "→ persist children before referencing manifests",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 7,
+      "pdf_line": 222,
+      "text": "→ one expected-parent publication barrier",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 7,
+      "pdf_line": 223,
+      "text": "→ reconcile task disposition and publish accepted transition",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 12,
+      "pdf_line": 352,
+      "text": "Evidence = (claim, subject_roots, statement_or_observation, scope,",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 12,
+      "pdf_line": 356,
+      "text": "Admit(e, q) = Integrity(e) ∧ SchemaValid(e) ∧ Applicable(e, q)",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 12,
+      "pdf_line": 357,
+      "text": "∧ RequiredCheckPasses(e, q) ∧ PolicyAllows(e, q)",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 14,
+      "pdf_line": 406,
+      "text": "The directive’s rollout is bootstrap → shadow_hash → shadow_reuse → shadow_proof → protected",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 14,
+      "pdf_line": 407,
+      "text": "→ required. These gates are not interchangeable with world-model shadow-read semantics. Measure",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 17,
+      "pdf_line": 495,
+      "text": "architecture finding → partition candidate → boundary contracts",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 17,
+      "pdf_line": 496,
+      "text": "→ scoped operator + reversible migration plan",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 17,
+      "pdf_line": 497,
+      "text": "→ isolated worktree + CST/AST-aware transform",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 17,
+      "pdf_line": 498,
+      "text": "→ translation / differential / effect / public-surface checks",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 17,
+      "pdf_line": 499,
+      "text": "→ selected and full-fallback tests + supported proofs",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 17,
+      "pdf_line": 500,
+      "text": "→ independent admission + exact rollback + updated state",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 19,
+      "pdf_line": 554,
+      "text": "T_total = elapsed wall time from task admission to terminal disposition",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 19,
+      "pdf_line": 555,
+      "text": "Stage report = capture, compile, retrieve, model, setup, test, teardown,",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 19,
+      "pdf_line": 557,
+      "text": "Money_total = billed provider cost + measured infrastructure allocation",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 19,
+      "pdf_line": 558,
+      "text": "Resource report = CPU time, GPU time, peak memory, bytes, storage growth",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 21,
+      "pdf_line": 614,
+      "text": "τ , record source domain, target logic/theory, vocabulary, variable/clock interpretation, assumptions,",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 22,
+      "pdf_line": 625,
+      "text": "Before accepting G⇒A in component composition, check the intended consistency and reachability",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 22,
+      "pdf_line": 631,
+      "text": "Fix a statement profile Θ and a policy predicate PΘ over artifact manifests. Assume: the initial",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 22,
+      "pdf_line": 632,
+      "text": "accepted root satisfies PΘ; all required subject bytes and dependency references are verified; the",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 636,
+      "text": "Then every root reachable solely through accepted publication transitions satisfies PΘ. Proof:",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 638,
+      "text": "step, the publisher checks PΘ on the exact candidate manifest and current parent before its CAS",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 640,
+      "text": "omitted by PΘ, truth of unsupported translations, honest signed observations, or atomicity of external",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 643,
+      "text": "Let Obsθ(t,s) be the relevant setup/call/teardown observation of test t in state s under a declared",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 644,
+      "text": "runtime/effect profile θ. Suppose a complete projection πD and deterministic function fθ exist such",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 645,
+      "text": "that Obsθ(t,s)=fθ(πD(s)) on all states admitted by the reuse policy. If πD(s)=πD(s′), equality of",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 23,
+      "pdf_line": 648,
+      "text": "The difficult part is establishing completeness and determinism of πD. Definitions alone miss fixture",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 25,
+      "pdf_line": 720,
+      "text": "assumptions and SCCs. Its basic implication query is G ∧ ¬A. SAT provides a countermodel;",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 26,
+      "pdf_line": 740,
+      "text": "Each result must be consumed by the actual plan/frontier or admission service: closed implication →",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 26,
+      "pdf_line": 741,
+      "text": "reusable component contract; feasible counterexample → repair obligation; missing semantic input",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    },
+    {
+      "pdf_page": 26,
+      "pdf_line": 742,
+      "text": "→ exact expansion; unavailable solver → deferral/fallback; complete current evidence → candidate",
+      "status": "inline/subscript positioning requires visual reconciliation"
+    }
+  ],
+  "layout_blocks": [
+    {
+      "pdf_page": 2,
+      "sha256": "4abe39921edeed2d7fd8961d512a856721e1f02bda3a7fa89893806b1e1aa29e",
+      "line_count": 12,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 3,
+      "sha256": "39735e648b9e8c7ebe3c196e7ba6209cd7d7a94e5e6a8e325d76e24c4deefe83",
+      "line_count": 19,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 6,
+      "sha256": "330a4b1e620fbaf6d85531d7b3828281614cdf57948796f1a8b8bd82e4636924",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 6,
+      "sha256": "f2a94749693956991c8833c9bfde1c239914c1bca197f98a2b57409677386c98",
+      "line_count": 11,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 8,
+      "sha256": "4a8da0317509cb24f131d7d41d3698e13dd351b581883e4704f32c242585bec8",
+      "line_count": 2,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 8,
+      "sha256": "945a321eb427620074544ba620325df160246f8e13f0948cdd50ec564cf6ee6f",
+      "line_count": 16,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 8,
+      "sha256": "df66fa52d20323112b78c1df5da4a16ceeb276a362a6229db02181ec966c8796",
+      "line_count": 2,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 8,
+      "sha256": "0e5e883908d00675e211c1d31005afb22b0c90df1ef396864ca3ba556aeba896",
+      "line_count": 11,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 11,
+      "sha256": "56aee9745864b8438b7e021fa4041dcb72cbc214f33148fbd75e3de32fe22c1b",
+      "line_count": 2,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 11,
+      "sha256": "69aee558a0e17de95452149e59a76c39359024298eea549f129906a6f4a54814",
+      "line_count": 42,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 12,
+      "sha256": "d57edf40b71a6dc1a7776ec3911009fd5718e1d57dde0d8db1c3884ae232b7a0",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 12,
+      "sha256": "7c04a49c73edc98a78a42bf3db8f3093b2fecd96f472767e72e6160c65d20ae5",
+      "line_count": 29,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 13,
+      "sha256": "5d5eeb76f0f072cbbdb9e8dc2ebf3bb020b5201041c4770692bbbffc81389abd",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 13,
+      "sha256": "e082645bcec6c69b61f8fdaf5bd8e0e48be6f914ba0c2701ba942730f092e3de",
+      "line_count": 24,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 14,
+      "sha256": "76d0eb568021af407ae202d52a611a3fe4d3d8c835cb08e12a7b6f0bb9c53dd6",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 14,
+      "sha256": "66a52c05a22e4e4d1e120526e8950c19c90573a655d0561e4bb253ea71fac2e7",
+      "line_count": 19,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 16,
+      "sha256": "ea7f07b8d85250ee2a023ec67ae0b9ae8c3262515f9fc8c4a2b50c1df288d2a2",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 16,
+      "sha256": "0953cd71e943f2aaa700225134448d08383adaa4b899536e1632f93ceffd537e",
+      "line_count": 14,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 18,
+      "sha256": "2be4712805d6de3dccd80425bd13f71e7c6e233cf48317fcc36cecbf6462c029",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 18,
+      "sha256": "74b40cda2aa9a6e00ec3df61fa711071458ebf849159dc50d4fcbd0db71b4525",
+      "line_count": 16,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 19,
+      "sha256": "d2483f4ef01dd8f940082f9a963893445bd7b410a42f208eb2ace43c85088132",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 19,
+      "sha256": "e823c886d16f66de20d76c4c4aff210c5cee732034057724ff199cf9defa0057",
+      "line_count": 29,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 20,
+      "sha256": "33e4676dde944e68d0a45bb54c66c26f89f9764def5a377ad27e2a119d49de56",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 20,
+      "sha256": "00c0f662b269c0939488814de148c33c549bc8279c858663599fa497f92d6716",
+      "line_count": 20,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 21,
+      "sha256": "83bf95c52d76cf416002e8a8c6981e4a7abfc2b0f603659813f630ba34a4b697",
+      "line_count": 2,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 21,
+      "sha256": "4999ead4bf3a8ea3a7b1d162f57504a93e5cd4b7ec668502fa5982e6b0747063",
+      "line_count": 24,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 22,
+      "sha256": "7f11fb88dab1ecf2aa627dc457787b49e95c1a371d385c8732d9d6f23a0e9d77",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 22,
+      "sha256": "e191754ee4e35cb93068280abb5af2df2c56c768c683c7140661998866054a13",
+      "line_count": 24,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 24,
+      "sha256": "d468cdc98b66ed3c1f2c45205844894ac27c086a9975068ab04bf3d7b4ce8872",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 24,
+      "sha256": "571dc51ec6141f158c28f5107437c5346f200acba1b6059b7be03b6702af4933",
+      "line_count": 13,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 24,
+      "sha256": "c441d26509da37c53c3f3a4103bb7b675b4bf975b13b0c19317ad4561065a66f",
+      "line_count": 2,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 24,
+      "sha256": "a4efa4864dd147d56119c35dde3a18853d9a0addef5be2e959e020829532cce4",
+      "line_count": 8,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 25,
+      "sha256": "454b9c32fa1557f3f30f28517ccb3ba602853f0c4b7b0763af92811bdf2e968a",
+      "line_count": 1,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    },
+    {
+      "pdf_page": 25,
+      "sha256": "f9caa468802c2ee36e44274f7bf6c61df5fc98c0aef82d04ab324197be413963",
+      "line_count": 8,
+      "status": "editable preformatted text; semantic table cells/inline scripts not fully typeset"
+    }
+  ],
+  "coverage": {
+    "original_pdf_pages": 28,
+    "numbered_pdf_lines": 778,
+    "missing_numbered_lines": [],
+    "sections_and_subsections": 95,
+    "tables": 18,
+    "numbered_equations": 6,
+    "references": 12,
+    "algorithm": {
+      "number": 1,
+      "pdf_page": 27,
+      "steps": 17,
+      "status": "all numbered steps transcribed"
+    },
+    "literal_TBD_cells_in_original": 34,
+    "literal_TBD_cells_in_tex": 34,
+    "task_complete": false,
+    "full_visual_fidelity_verified": false
+  },
+  "sources": {
+    "papers/vericodegen_neurosymbolic_supervision_workshop_draft.pdf": "2e4c0efda38036ad25a346200687bed3fb6ad20966400927b3f048f8caefacae",
+    "papers/completion/neurosymbolic_supervision/paper_extracted.txt": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4",
+    "papers/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "papers/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6"
+  },
+  "discrepancies": [
+    {
+      "id": "NS-REC-001",
+      "status": "open",
+      "pdf_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "issue": "PDF extraction does not recover original LaTeX macros, semantic table cells, citation commands, inline sub/superscripts, or exact pagination."
+    },
+    {
+      "id": "NS-REC-002",
+      "status": "open",
+      "pdf_pages": [
+        10
+      ],
+      "issue": "Bibliography wording is transcribed; references.bib preserves full entries in note fields. Structured author/title metadata, accents, and DOI linebreak joining need reconciliation; no bibliographic fact was independently checked."
+    },
+    {
+      "id": "NS-REC-003",
+      "status": "open",
+      "pdf_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "issue": "Explicit end-of-line hyphens are retained; distinguish linguistic hyphens from automatic line-wrap hyphenation before polishing."
+    },
+    {
+      "id": "NS-REC-004",
+      "status": "open",
+      "pdf_pages": [
+        1,
+        8,
+        24,
+        25,
+        28
+      ],
+      "issue": "All original missing-results/disclosure/checklist placeholders remain. No experiment, result, author identity, or checklist answer was supplied."
+    },
+    {
+      "id": "NS-REC-005",
+      "status": "open",
+      "pdf_pages": [
+        28
+      ],
+      "issue": "Original obsolete checklist-placeholder wording is preserved for reconciliation. Official checklist.tex is copied separately, unchanged and unanswered; do not treat original questionnaire-absence wording as current fact."
+    },
+    {
+      "id": "NS-REC-006",
+      "status": "unresolved_access",
+      "pdf_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "issue": "User-supplied Overleaf project 6a7b4742e20ac910c422a7e0 could not previously be retrieved; contents and paper mapping remain unverified. This staging is reconstruction, not recovered original source."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+405   A     Anonymous implementation map and claim status
+406   The identifiers below are source-inspection references, not newly measured experiments. The private
+407   author ledger maps each to the exact repository revision, path, inspected range, and available blob
+408   identity. A submission supplement containing the frozen implementation still needs to be prepared
+409   and anonymized; the small reference-semantics suite included with this draft is not a substitute for
+410   it. Existing source modules, documented contracts, proposed semantic conditions, and measured
+411   performance are different evidence classes.
+
+                                 Table 2: Module roles inspected for this paper.
+
+      ID           Source role                              Supported claim and boundary
+      S01          IR-family identity architecture          Domain-neutral canonicalization, provenance,
+                                                            and separate domain/result roles; not shared
+                                                            ontology.
+      S02          Generic compiler contracts               Configuration, artifacts, obligations, and
+                                                            grounded unsupported diagnostics; protocol
+                                                            module is not an automatic extractor.
+      S03          Source-grounded sample contracts         Immutable             normalized            input;
+                                                            source/span/assumption checks, not domain
+                                                            truth checking.
+      S04          Formalization view registry              Typed formula/registry/symbol/link records; de-
+                                                            clared cross-view labels are not proofs.
+      S05          Typed syntax core                        Many-sorted FOL nodes plus versioned exten-
+                                                            sions, elaboration and signature checks.
+      S06          Version-three artifacts / domain         Source/expression lineage before backend re-
+                   slices                                   quests; dual-read legacy adaptation.
+      S07          Canonical compiler/round-trip archi-     Source-withheld reconstruction, pinned policy,
+                   tecture                                  bounded rule shape, distinct identity profiles.
+      S08          Canonical structured-text compiler       Caller vocabulary and deterministic rule projec-
+                                                            tion; error, abstention, disclosed partial output.
+      S09          Legal multi-view adapter                 Separate source declaration and shared projec-
+                                                            tion identities; registered force/role/time/event
+                                                            views.
+      S10          Legal modal parser                       Deterministic cue and scope scaffolding with
+                                                            domain-specific editorial handling.
+      S11          Modal registry                           Named families and ambiguity profiles; registry
+                                                            presence is not solver qualification.
+      S12          Text-to-FOL converter                    Predicate/quantifier/operator extraction, op-
+                                                            tional NLP and fallback, syntax validation.
+      S13          Python security extractor                AST plus keyword/docstring seed policies and
+                                                            events, explicitly heuristic.
+      S14          Security-model       implementation      Bounded finite-model claims, temporal moni-
+                   guide                                    tors, and source projections; not universal code
+                                                            security.
+      S15          General multimodal processor             Text/metadata/embedding interface; random
+                                                            fallback embeddings are not symbolic evidence.
+      S16          Image-processing search excerpt          Placeholder in the inspected general image path;
+                                                            specialized alternative routes not audited.
+      S17          Autoencoder formalization advisor        Unverified view/premise/compression advice
+                                                            and bounded repairs; no new learned perfor-
+                                                            mance claimed.
+      S18          Legacy temporal/deontic converters       Concrete modal erasure and approximate lower-
+                                                            ing; this path cannot justify unrestricted proof
+                                                            transfer.
+      S19          External-prover architecture             Solver-local outcomes versus native reconstruc-
+                                                            tion, monitors, readiness and policy.
+
+
+
+                                                       11
+

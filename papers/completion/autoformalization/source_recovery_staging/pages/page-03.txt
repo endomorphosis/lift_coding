@@ -1,0 +1,60 @@
+88    3     Compilers, decompilers, and reconstruction loops
+
+89    3.1   The deterministic source-to-symbolic path
+
+90    The local modal codec uses deterministic registry cues, spaCy-derived features, BM25 frame ground-
+91    ing, and frame-logic consistency checks. It produces a structured modal declaration before optional
+92    expensive model repair. A separate selected structured-text profile has a narrower seven-field rule:
+93    modality, actor, action, object, conditions, exceptions, and temporal qualifiers. Its modality vo-
+94    cabulary is obligation, permission, and prohibition; its atom vocabulary is supplied by the caller.
+95    Unsupported semantics trigger abstention or disclosed partial output. The selected profile explicitly
+96    disables learned guidance and repair: training elsewhere in the repository does not imply that this
+97    frozen profile silently uses it. [artifact S07,S08,S23,S25]
+98    Formalization adapters produce named formula views and source maps. The maps bind IR constituents
+99    to source evidence; they are not proof of a correct interpretation. Source-code extraction offers
+100   additional candidate security facts, with explicit heuristic and coverage limitations. Media requires a
+101   separately measured extraction layer before this logic pipeline; no end-to-end audio/image theorem
+102   performance is established here. [artifact S09,S13–S16]
+
+103   3.2   Two different meanings of reconstruction
+
+104   Symbolic reconstruction follows
+                                I1 = Cψ (x),       x̂ = Dω (I1 ),     I2 = Cψ (x̂).                        (1)
+105   A decompiler renders roles, predicates, modality, conditions, exceptions, and temporal structure
+106   into inspectable text. The canonical source-withheld evaluation gives the realizer the IR, not the
+107   originating source, its locator, source map, private parser state, or gold target. Comparing I1 and I2
+108   tests reconstructable facets and compiler/realizer consistency. It does not prove source fidelity: both
+109   programs could consistently omit the same exception. [artifact S07]
+110   The adaptive autoencoder’s numerical reconstruction is different. Its encode method builds a state
+111   containing family predictions and an embedding projection; its decode returns that projection as
+112   a numeric vector. Its basic reconstruction target is the sample embedding, not arbitrary source
+113   prose. Textual decompilation and structural cycle metrics enter through the codec and multi-view
+114   bridge. Calling this vector reconstruction a trained free-text decoder would misstate the inspected
+115   implementation. [artifact S24]
+
+116   3.3   Constrained candidates and transfer beyond the legal teacher
+
+117   The constrained decoder gives learned heads a closed production space: valid-token, grammar, binder,
+118   type, and family masks precede candidate scoring. The inspected profile declares a frozen 143-token
+119   vocabulary and bounded search, but these declarations are not a learned tokenizer checkpoint or
+120   evidence of end-to-end sequence training. The learner may rank admitted productions; a deterministic
+121   grammar decides what can be represented. [artifact S33]
+122   The original sample builder is legal-specific. A domain-neutral formalization/advisor layer permits
+123   other domain adapters to share feature, view, checkpoint, and result contracts, but it does not
+124   automatically turn a legal-trained model into a calibrated Security or Intent formalizer. Cross-domain
+125   use needs explicit adapter mappings and separate evaluation. Shared infrastructure, statistical transfer,
+126   and semantic proof transfer are three distinct claims. [artifact S01,S17,S22]
+
+
+127   4     Adaptive multi-view learning
+
+128   4.1   Shared parameter state versus per-example memory
+
+129   The adaptive implementation has sparse parameter groups for feature embeddings, modal families,
+130   semantic slots, predicate arguments, logic signatures, view logits, decompiler plans, and family–slot–
+131   view interactions. It also retains compatibility fields indexed by sample identity. The generalizable
+132   training route disables per-sample memory for updates and evaluation; accepted improvements must
+
+
+                                                         3
+

@@ -1,0 +1,42 @@
+837   Q    Additional retrieval and proof-assistance evaluation
+838   The training arms T0–T5 remain unchanged. Retrieval and proof-assistance conditions should be
+839   evaluated on the same frozen tasks, with controlled budgets, rather than folded into an unexplained
+840   end-to-end score. The following are proposed experiments; no outcomes are claimed in this revision.
+
+                 Table 13: Separate measurements for retrieval, planning, and proof assistance.
+
+      Comparison                         Controlled variable                Required outcome
+      Lexical / vector / graph           Same corpus, queries, target       Independently judged relevant
+                                         interpretation and budget          context and accepted-premise
+                                                                            yield
+      Baseline / graph selector          Same goal and candidate            Recall against stated labels;
+                                         corpus                             proxy status; actual useful
+                                                                            proof coverage
+      Unguided / guided plan             Same admitted sources and          Deterministic replay, subgoal
+                                         route budget                       coverage, abstention and total
+                                                                            cost
+      Hammer / Leanstral assistance      Same source goal, native           Candidate rate, reconstruction
+                                         checker and resource envelope      acceptance, unsupported and
+                                                                            timeout rates
+      Proof heads off / on               Same representation checkpoint     Calibration, route value,
+                                         and isolated update policy         protected-objective invariance
+      Guidance off / promoted            Same compiler profile and          Actual consumer activation,
+                                         frozen source families             independent source fidelity,
+                                                                            regressions
+
+841   For all conditions, retain the corpus and index revision, tokenizer, embedding producer, index
+842   implementation, model digest, admitted premises, goal root, logical profile, supported translation
+843   fragment, toolchain, checker, time/memory limits, and outcome. Record fixture or mock targets
+844   explicitly. Count unsupported, unavailable, and abstained cases in coverage denominators rather than
+845   reporting only successful requests. End-to-end cost includes target construction, indexing, gradient
+846   updates, model calls, failed candidates, proof reconstruction, semantic validation, and human review.
+847   These experiments distinguish three hypotheses: better access to relevant context; better search under
+848   a fixed formal interpretation; and better fidelity of that interpretation to the source. Improvements in
+849   one do not establish improvements in the other two. No new performance value, trained checkpoint,
+850   native solver execution, or deployment qualification is inferred from rebuilding this paper.
+
+
+
+
+                                                        26
+

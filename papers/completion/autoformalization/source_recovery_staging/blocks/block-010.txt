@@ -1,0 +1,2 @@
+                   Q1 = ∀a, r, t : Protected(r) ∧ ¬ Approved(a, r, t) ⇒ ¬ Write(a, r, t),                (10)
+                   Q2 = ∀a, r, t : Write(a, r, t) ⇒ ∃u ∈ [t, t + 2] : Audit(a, r, u).                    (11)

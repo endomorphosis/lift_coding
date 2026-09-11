@@ -1,0 +1,40 @@
+{
+  "schema": "neurosymbolic-source-reconstruction-build/v1",
+  "built_at": "2026-09-11T16:00:41.517298+00:00",
+  "latexmk_exit_code": 0,
+  "command": [
+    "/home/barberb/.local/bin/vericodegen-latexmk",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-file-line-error",
+    "main.tex"
+  ],
+  "pdf_pages": 24,
+  "pdf_bytes": 238176,
+  "pdf_sha256": "d9765bc4342d73134241223ad752f2540cb13a3b1301d23ac0fd35a072141bc4",
+  "numbered_pdf_line_coverage": 778,
+  "source_page_count": 28,
+  "equation_count": 6,
+  "table_count": 18,
+  "reference_count": 12,
+  "algorithm_steps": 17,
+  "original_and_reconstructed_TBD_cell_counts": [
+    34,
+    34
+  ],
+  "preliminary_numeric_and_placeholder_anchor_checks": {
+    "58.90%": true,
+    "43.6161%": true,
+    "43.0539%": true,
+    "[TO BE FILLED]": true,
+    "[RESULTS:": true,
+    "[TODO]": true
+  },
+  "original_style_unchanged": true,
+  "official_checklist_copy_unchanged": true,
+  "new_research_results": false,
+  "task_complete": false,
+  "full_visual_fidelity_verified": false,
+  "layout_warning": "Underfull-box warnings remain. Tables are preserved as preformatted text, not publication-ready semantic tabular environments; pagination differs from the28-page baseline."
+}

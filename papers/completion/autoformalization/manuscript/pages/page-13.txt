@@ -1,0 +1,60 @@
+      ID            Source role                               Supported claim and boundary
+      S40           Legal Hammer/Leanstral rollout run-       Separate draft, trusted feedback, stable export
+                    book                                      and patch artifacts; fixed stages, canary gates
+                                                              and rollback evidence.
+
+
+412   Integration status to fill. For each claimed source-to-proof route, publish the exact frontend,
+413   domain adapter, syntax/elaboration version, logical profile, backend, optional features actually
+414   enabled, and result checker. Report an unsupported or unavailable route honestly. An importable
+415   adapter, passing schema test, old benchmark guide, or advertised feature list is not current end-to-end
+416   evidence.
+
+417   B     Preservation contract and proof-transfer argument
+418   Let SB be the source models admitted under explicit bridge assumptions B. Let τ be fixed on a
+419   specified premise and goal language. The contract is not required to cover every source sentence.
+420   Proposition 1 (Conditional semantic consequence transfer). Suppose for every s ∈ SB satisfying
+421   Γ, there exists a target model t such that RB (s, t) holds. Suppose related models preserve premises
+422   in the direction of Equation 7 and reflect the goal in the direction of Equation 8. If a sound target
+423   checker establishes τ (Γ) |= τ (ϕ), then Γ |=SB ϕ.
+
+424   Proof. Take any s ∈ SB satisfying Γ. Existence supplies a related t. Premise preservation gives
+425   t |= τ (Γ). Target consequence gives t |= τ (ϕ). Goal reflection gives s |= ϕ. The argument holds for
+426   each such s.
+
+427   This is a paper-level conditional argument, not a machine-checked theorem of the repository. It
+428   does not establish that the source extraction was faithful, that B was appropriate, that the model
+429   class was nonempty, or that a legacy converter satisfies the two preservation directions. Test consis-
+430   tency/reachability separately to avoid reporting a vacuous result as practical assurance.
+
+431   Suggested translation receipt. The following is specification notation rather than a newly imple-
+432   mented replacement for existing contracts:
+
+433            source-view, target-view, source-formula-root,
+434            target-formula-root,
+435            signature-map, interpretation-profile, bridge-assumptions,
+436            preserved-property, preservation-direction,
+437            supported-fragment,
+438            named-losses, source-map-root, checker-environment,
+439            checker-result, proof-or-countermodel-reference, status
+
+440   A consuming query must check that the receipt’s preserved property and direction are adequate for that
+441   query. Equi-satisfiability alone cannot establish a mapping of every model’s temporal observations.
+442   A loss flag cannot be ignored because a later solver returned UNSAT.
+
+443   Multi-source joins. For a document actor, code parameter, and event field, include a reviewed
+444   alignment claim rather than collapsing all matching strings. Bind namespace, tenant, instance identity,
+445   role, validity interval, source authority, and resolution method. Time bridges must specify clock origin,
+446   monotonicity, calendar/duration semantics, timezone where relevant, and unit conversion. Missing
+447   evidence remains unresolved. The result should retain all bridge assumptions so that revocation or
+448   source changes can invalidate dependent conclusions.
+
+449   Contradictory sources. Classical theorem provers may derive any goal from inconsistent premises.
+450   Do not repair inconsistency by suppressing an inconvenient observation or promoting a model’s
+451   confidence. Partition contexts, identify conflicting premises, request authoritative resolution, or
+452   choose a separately justified inconsistency-tolerant semantics. Such a change is a logic-profile change
+453   and must not be hidden inside a translation adapter.
+
+
+                                                         13
+

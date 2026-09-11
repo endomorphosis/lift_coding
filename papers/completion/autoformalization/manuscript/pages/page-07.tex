@@ -1,0 +1,64 @@
+% Original PDF page 7; hash in recovery-map.json.
+\recoverypage{7}
+\noindent
+For illustration, a normal modality can be interpreted with an indexed accessibility relation:\par
+
+\input{equations/equation-06.tex}
+\noindent
+Different Ri and frame axioms express different profiles. A reflexive epistemic relation supports\linebreak[4]
+factivity; a serial belief relation need not. A deontic ideal-world relation need not make the obligation\linebreak[4]
+true in the actual world. This is an illustrative semantic recipe, not a claim that every repository\linebreak[4]
+view is already compiled by Equation 6. Conditional norms, priorities, defeasible exceptions, and\linebreak[4]
+contrary-to-duty obligations require their own explicit semantics; ordinary normal modal logic is not\linebreak[4]
+a universal deontic solution. LogiKEy provides established semantic embeddings of deontic logics\linebreak[4]
+and combinations in HOL [3].\par
+
+\noindent
+The repository's principal view families. TDFOL explicitly combines first-order, temporal, and\linebreak[4]
+deontic syntax; DCEC adds agent-indexed cognitive operators and event-oriented structure. Their\linebreak[4]
+source modules expose these constructors, but constructor availability is distinct from complete\linebreak[4]
+backend coverage. [artifact S20--S21] The same interpreted norm may yield a deontic force/scope\linebreak[4]
+view, frame-based roles, temporal constraints, event/fluent relations, graph traversal edges, and a\linebreak[4]
+supported prover encoding. These are complementary task views. A predicted view distribution\linebreak[4]
+estimates which interfaces deserve attention; it is not a mixture of truth values. The shared symbol\linebreak[4]
+and provenance records permit joins, while each view retains its own semantic profile. [artifact\linebreak[4]
+S09,S31]\linebreak[4]
+Bare operator letters are unsafe identifiers: F can mean prohibition or eventually, and G can denote a\linebreak[4]
+cognitive goal or a temporal always operator. Family, profile, operator kind, arguments, and nesting\linebreak[4]
+must survive serialization. In particular, O(Gp) and G(Op) are not equated without a profile-specific\linebreak[4]
+commutation result.\par
+
+\subsection*{6.2  Loss-aware translation}
+\noindent
+A translation record must state the source/target views, profile, signature map, assumptions, supported\linebreak[4]
+constructs, named losses, preserved property, and checker evidence. Preserving satisfiability is\linebreak[4]
+different from preserving the truth of an arbitrary query; one-way abstraction is different from\linebreak[4]
+equivalence. Translation validation examines the produced transformation rather than trusting every\linebreak[4]
+invocation of a compiler [7].\linebreak[4]
+A concrete legacy path makes the need visible: the inspected TDFOL-to-FOL converter removes\linebreak[4]
+unary temporal and deontic operators and replaces a binary temporal formula by conjunction. This\linebreak[4]
+may serve as a lossy projection, but it cannot generally carry a modal theorem. The paper does not\linebreak[4]
+attribute this behavior to every adapter. For example, with p false in the actual world and true in every\linebreak[4]
+ideal world, O(p) holds while p does not. On the trace p = [true, false], p holds now but Gp does\linebreak[4]
+not. For strong until, q true now makes p U q true regardless of p now, contradicting the proposed\linebreak[4]
+replacement p \ensuremath{\land} q. [artifact S18]\linebreak[4]
+Encoding a proposition as a predicate such as obligatory(p) also does not supply its semantics. The\linebreak[4]
+representation must distinguish quotation/reification from applying a predicate to a term; relational or\linebreak[4]
+higher-order embeddings must interpret the modality, not simply preserve its spelling.\par
+
+\subsection*{6.3  A conditional proof-transfer rule}
+\noindent
+Let \ensuremath{\Gamma} |=Ls \ensuremath{\phi} be the desired source-view consequence. A translator \ensuremath{\tau} maps the premises and goal\linebreak[4]
+into Lt . Under bridge assumptions B, let RB (s, t) relate admitted source and target models. The\linebreak[4]
+required directionality is:\par
+
+\input{equations/equation-07.tex}
+\input{equations/equation-08.tex}
+\noindent
+For every admitted source model satisfying \ensuremath{\Gamma} and B, there must be a related target model; otherwise\linebreak[4]
+the relation can be vacuous. If the target checker soundly establishes \ensuremath{\tau} (\ensuremath{\Gamma}) |= \ensuremath{\tau} (\ensuremath{\phi}), these conditions\linebreak[4]
+transfer the consequence back. A proof sketch appears in Appendix B. This is a contract to discharge\linebreak[4]
+per supported translation, not a soundness theorem about every current extractor.\linebreak[4]
+Cross-source composition introduces further obligations: entity identities must align; timestamps\linebreak[4]
+and units must agree; domain assumptions and exception priorities must be compatible; and the joint\par
+

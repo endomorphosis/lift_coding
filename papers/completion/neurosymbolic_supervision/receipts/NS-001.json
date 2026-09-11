@@ -1,0 +1,155 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-001",
+  "status": "complete",
+  "completed_at": "2026-09-11T16:09:36.835470+00:00",
+  "scope": "Editable source recovery and explicit baseline reconciliation only; publication readiness and scientific results remain pending.",
+  "source_versions": {
+    "workspace_git_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "workspace_head_role": "Existing root context only; reconstructed outputs are new uncommitted files identified by exact snapshot hashes, not an invented source commit.",
+    "source_input_sha256": {
+      "papers/vericodegen_neurosymbolic_supervision_workshop_draft.pdf": "2e4c0efda38036ad25a346200687bed3fb6ad20966400927b3f048f8caefacae",
+      "papers/completion/neurosymbolic_supervision/paper_extracted.txt": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4",
+      "papers/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "papers/neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "papers/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6"
+    },
+    "validator_sha256": "376d9c9c4a81e86b36c3d9100429cf8b5661e53ca5dc883bdc1040c267256fcc",
+    "reconstruction_auditor_sha256": "10dba01affc767196c687e46d461c71f66166162d8004bf35a278984dd650b51",
+    "tool_versions_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-tool-versions.json"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex": "46a14011d3ec69cf2b399d310b830901a59c4d50bb4834142103c5f171a70585",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/references.bib": "50210fe9cc5425a8c2e19a8df41116901be6f988b061678a22f2568d66db384c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/BUILD.md": "b78a1cfa2b0efafee95e303acfa29c4fb724699d95c08ea921ced37349a4d51b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md": "eb12ebe30bfe5c0bb13f4bfa77971a09ce9ff4f3d408dd7fc01e8a1e521c7338",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json": "3e75bffe0811e45d58738dc86dccc069bffe2d7e3a2faa4c64e8847e4b2ad89e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/abstract.tex": "886f7c40385bc1e26c701e8717eaf82689f05486f3db50ae32cf28e9a86c71a8",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/transcription.tex": "5892b1be44d36ce09f3714280eae6837561168c656b8d4ef93944418016d9374",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/references.tex": "78567864373c117ff64c0c39bac7c8872587887716eae27c84164030bd18adc1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/check_reconstruction.py": "10dba01affc767196c687e46d461c71f66166162d8004bf35a278984dd650b51",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.pdf": "04d35d9d5cbb39ebf6b31bf08f030124549151244e0efd53d70c2b3f104fca7f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-build.log": "876c172d2c96ffafe5ff5e54464a4f35ed37b69602af8108588fa39ff0c0a89e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-reconstruction-check.log": "fddb292aea96d629f08e13475ea2da57eb5e31f2672d92c64fad4231b4a1504a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-tool-versions.json": "ef0a58ae4a2d90423841494f4bf77676b01a54af660b281b4175147b75e7489d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/vericodegen_neurosymbolic_supervision_workshop_draft.pdf": "2e4c0efda38036ad25a346200687bed3fb6ad20966400927b3f048f8caefacae",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/paper_extracted.txt": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/source_inputs.json": "c3ceaa366d6e3427140d5df302a761303921e95c9124375897bd0936f295241f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/visual_reference/ns-source-page2.png": "d5388d9f1c1800be46fc688b6f42ff01e519e2ac0bd38bab9ac54117cfa5673c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/visual_reference/ns-source-page7.png": "16becdd102dc3a4e2ab734976fe4148d2be3e6a97b625a9321b9b2d6ffbd9904",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/visual_reference/ns-source-page22.png": "d3cf34f2713e6a8d8f7a4b863bb92b872ad7b56e6105815ebe3fb2ca9a192799",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/visual_reference/ns-source-page25.png": "c8acc8675a1644ba2e6398056e2893dea6ff1cc048a264ede8b204aad794802c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/visual_reference/ns-source-page26.png": "3dad2d31a8b01b8c60daf7123030f146fd15b3dd23840e5dc267f555f16d7112",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-equation-visual-check.json": "04299aaaef2b2cac48b448760c4ea421b79e9a44fa763fda53539d4be8518055"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/manuscript/main.tex": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex",
+    "papers/completion/neurosymbolic_supervision/manuscript/references.bib": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/references.bib",
+    "papers/completion/neurosymbolic_supervision/manuscript/BUILD.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/BUILD.md",
+    "papers/completion/neurosymbolic_supervision/audit/source_recovery.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+    "papers/completion/neurosymbolic_supervision/audit/reconstruction_discrepancies.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Editable source builds to PDF with one documented command.",
+      "status": "met",
+      "explanation": "Canonical self-contained main.tex compiles with the documented absolute TeX Live wrapper. The successful build log and compiled PDF are retained; this establishes an editable source build, not publication-ready layout.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/BUILD.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-build.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.pdf"
+      ]
+    },
+    {
+      "criterion": "All sections, equations, tables, and references are either recovered or explicitly reconciled against the baseline.",
+      "status": "met",
+      "explanation": "The actual reconstruction audit accounts for all 778numbered PDF lines, 95headings, 18tables with every extracted line retained, 6numbered equations, 12references, and 17algorithmsteps. Numbered equations were visually compared to original pages; 44inline-math lines, table-cell typesetting, reference metadata, and line-wrap ambiguities are explicitly reconciled to baseline page/text/hash and assigned existing bounded follow-ups. This uses the criterion’s explicit-reconciliation option; it does not assert exact original LaTeX or complete visual fidelity.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/references.bib",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-reconstruction-check.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-equation-visual-check.json"
+      ]
+    },
+    {
+      "criterion": "A source-origin record distinguishes original recovery from reconstruction and lists unresolved author-owned material.",
+      "status": "met",
+      "explanation": "The source-origin record identifies PDF-derived reconstruction, records original PDF/extraction/template hashes and assistant/tooling assistance, distinguishes new uncommitted derivatives from original author sources, and lists author-owned source access and metadata uncertainties.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/source_inputs.json"
+      ]
+    },
+    {
+      "criterion": "Overleaf source provenance and project-to-paper identity are verified if accessible; otherwise access remains explicitly unresolved and reconstruction proceeds without blocking protocol/code work.",
+      "status": "met",
+      "explanation": "Original Overleaf access remains explicitly unresolved: prior authorized retrieval returned HTTP 403, no source was downloaded, and paper membership is unverified. The alternative specified in the criterion was followed: reconstruction proceeds independently without claiming recovered source provenance or blocking protocol/code tasks.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/source_inputs.json"
+      ]
+    },
+    {
+      "criterion": "Manuscript-specific source recovery is distinguished from the now-available local research template and checklist; reconstruction uses the local research shell without modifying shared inputs.",
+      "status": "met",
+      "explanation": "The canonical source uses an unchanged copy of the supplied research workshop style, with its official anonymous author block. The original PDF, template, style, and checklist input hashes were checked unchanged. Official checklist.tex is copied unchanged and unanswered; its draftplaceholder is explicitly reconciled to later NS-024 work. No competition or generic style substitution was made.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/BUILD.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-reconstruction-check.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/neurips_2026_vericode_workshop.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/neurips_2026_vericode.sty",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/checklist.tex"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/bin/vericodegen-latexmk",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "papers/completion/neurosymbolic_supervision/manuscript",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-build.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "check_reconstruction.py"
+      ],
+      "cwd": "papers/completion/neurosymbolic_supervision/manuscript",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-reconstruction-check.log"
+    }
+  ],
+  "limitations": {
+    "original_manuscript_source_recovered": false,
+    "overleaf_membership_verified": false,
+    "full_visual_fidelity_verified": false,
+    "publication_ready": false,
+    "new_experiment_results": false,
+    "remaining_TBD_cells": 34,
+    "followup_tasks": [
+      "NS-021",
+      "NS-022",
+      "NS-023",
+      "NS-024",
+      "NS-025"
+    ]
+  },
+  "runtime_authority": "Artifact completion record only; no live DB, native task status, provider attempt, branch, or source pin was mutated."
+}

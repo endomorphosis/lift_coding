@@ -1,0 +1,26 @@
+% Original PDF pp. 15; Table D1.
+\begingroup
+\renewcommand{\thetable}{D1}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.24\linewidth} >{\raggedright\arraybackslash}p{.32\linewidth} >{\raggedright\arraybackslash}p{.38\linewidth}@{}}
+\caption{Implementation-oriented trace. The table specifies what to record; it is not a claim that an end-to-end run has been performed.}\label{tab:D1}\\
+\toprule
+\textbf{Method} & \textbf{Representative implementation} & \textbf{Inputs to inspect in a reproducible run} \\
+\midrule
+\endfirsthead
+\textbf{Method} & \textbf{Representative implementation} & \textbf{Inputs to inspect in a reproducible run} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Legal routing & CanonicalLegalCorpus registry; rich legal bridge; typed canonical compiler & Dataset revision, source body, jurisdiction, source maps, unsupported facets \\[3pt]
+Skill import & SkillCenterSkillRecord and read-only bundle adapter & Physical source row, metadata, skill/library Markdown, entry/body/container identities \\[3pt]
+Intent normalization & IntentIRDocument and formalizer/normalizer ports & Actions, modalities, statements, grounded/inferred status, control edges \\[3pt]
+CVE adaptation & adapt\_\allowbreak{}cvefixes\_\allowbreak{}candidate; SecurityIRFormalizationAdapter & Vulnerable/fixed source records, candidate scope, review binding, prohibition/control polarity \\[3pt]
+Intent/code correlation & cve\_\allowbreak{}security\_\allowbreak{}gate & Exact intent mappings and independently extracted code effects under one security root \\[3pt]
+Constraint join & IRConstraintCompiler & Candidate graph, legal/security/intent checks, proof requirements, current roots \\[3pt]
+Proof authorization & IntentAuthorizationService; AuthorizationQueryComposer; AuthorizationPortfolio & Mandatory job population, backend routes, evidence/verifier identities, terminal decision \\[3pt]
+Guarded execution & Pre-invocation enforcement wrapper; ExecutionPermit & Enforce mode, current live context, authenticated receipt, expiry/use state, delegate effects \\[3pt]
+State control & QuackStateClient; StateTransaction & Named command, generation, fence, revision, idempotency and committed result \\[3pt]
+Protected MCP & AuthorizationGate and shared tool dispatch & Actual handler/tool arguments, envelope, strict UCAN verifier, policy provider, audit/result objects \\[3pt]
+\end{longtable}
+\endgroup

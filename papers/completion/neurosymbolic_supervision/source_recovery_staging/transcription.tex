@@ -1,0 +1,2113 @@
+% Original PDF page 1
+
+
+\section*{1 Problem and contribution}
+
+% PDF p.1 line 21
+The cost of an agent is not only the tokens used to generate a patch. It includes rediscovering
+% PDF p.1 line 22
+relevant code, reconstructing assumptions, choosing tests, recovering interrupted work, and deciding
+% PDF p.1 line 23
+whether previous evidence still applies. Repository agents and automated testing studies make the
+% PDF p.1 line 24
+quality of the agent–tool boundary central to useful repair [8, 11]. Here, that boundary is a persistent
+% PDF p.1 line 25
+state-and-obligation representation rather than an unstructured conversation history.
+% PDF p.1 line 26
+Our proposed method has three linked contributions. First, it compiles source and domain intent into
+% PDF p.1 line 27
+identity-bound semantic evidence and explicit unresolved obligations. Second, it makes planning,
+% PDF p.1 line 28
+counterexample-guided repair, and procedural synthesis consumers of those obligations, retaining
+% PDF p.1 line 29
+neural models only for unresolved proposals. Third, it separates test observations, proof statements,
+% PDF p.1 line 30
+reuse decisions, and accepted state transitions, enabling incremental work without silently upgrading
+% PDF p.1 line 31
+evidence. Semantic context reduction is one measurable consequence of this loop, not its sole
+% PDF p.1 line 32
+purpose.
+% PDF p.1 line 33
+The prototype contains source-present components and incompletely qualified integration paths. This
+% PDF p.1 line 34
+working paper distinguishes those from methods specified in active workstreams and from results
+% PDF p.1 line 35
+actually measured. Source presence, branch landing, operational consumption, passing qualification,
+
+% Original PDF page 2
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 1: The semantic root, accepted-transition manifest, and mutable operational projection must
+not be conflated.
+State space               Authority and purpose                    What it does not establish
+Semantic state G(F)       Semantic compiler: program facts,        Task completion, a permission
+                          contracts, dependency closure,           grant, or all-language behavioral
+                          approximation, source references.        correctness.
+Operational state O       Supervisor: goals, tasks, plan epochs,   A new meaning for a semantic
+                          leases, attempts, outcomes, route and    object or proof correctness by
+                          acceptance decisions.                    bookkeeping.
+Durable artifacts B       Store: canonical bytes, candidate        Truth, fresh applicability, or
+                          indexes, proof forests, WAL and          authorization merely from
+                          current-root CAS.                        persistence.
+\end{alltt}\endgroup
+
+
+
+% PDF p.2 line 36
+and policy promotion are different statuses. The final artifact must freeze the exact multi-repository
+% PDF p.2 line 37
+source forest and the methods it exercises. [D1, A1–A5, N1–N14]
+
+
+\section*{2 State and evidence are typed, separate authorities}
+
+\subsection*{2.1 The persistent state model}
+
+% PDF p.2 line 40
+Let F be a frozen repository forest, including source trees, declared overlays, dependency pins, and
+% PDF p.2 line 41
+relevant environment identities. The incremental semantic index extracts stable symbols, semantic
+% PDF p.2 line 42
+versions, typed relationships, and limitations. A separate semantic-state producer seals the finalized
+% PDF p.2 line 43
+index into immutable facts, links, capsules, and environment bindings. It supplies pure selection and
+% PDF p.2 line 44
+freshness operations; it does not execute tests, operate a task queue, or decide that a candidate is
+% PDF p.2 line 45
+accepted. [D1]
+
+\subsection*{2.2 Claims carry provenance and applicability}
+
+% PDF p.2 line 47
+The domain-neutral IR kernel separates declarations, runs, results, and receipts. A declaration does
+% PDF p.2 line 48
+not acquire a different semantic identity because a model or solver ran. Canonical identities bind a
+% PDF p.2 line 49
+schema/domain and canonicalization profile; operational roots can reference declarations and their
+% PDF p.2 line 50
+histories without inserting attempts, clocks, or leases into semantic content. Legal, Security, and
+% PDF p.2 line 51
+Intent families share these protocols but do not share verdict authority or ontology. [N4]
+
+
+\setcounter{equation}{0}
+\begin{equation}\begin{aligned}
+e = (&\mathrm{claim},\mathrm{subjects},\mathrm{assumptions},\mathrm{scope},\mathrm{dependencies},\\
+&\mathrm{translation\ profile},\mathrm{checker\ result},\mathrm{environment},\mathrm{policy},\mathrm{provenance}).
+\end{aligned}\tag{1}\end{equation}
+
+% PDF p.2 line 52
+Admission checks integrity, source binding, current applicability, required checker evidence, and
+% PDF p.2 line 53
+policy. These dimensions are not one scalar confidence score. A proof of an encoded property is
+% PDF p.2 line 54
+not permission to perform an action; a signed statement is not independently observed execution; a
+% PDF p.2 line 55
+candidate stored under a CID is not admitted knowledge. The hypothesis is that exact identities and
+% PDF p.2 line 56
+explicit conditions enable reliable reuse—not that cryptographic hashes establish universal semantic
+% PDF p.2 line 57
+equivalence.
+
+\subsection*{2.3 Incrementality with a visible unknown frontier}
+
+% PDF p.2 line 59
+Previous and current semantic states drive additive invalidation and test/proof selection. Fresh exact
+% PDF p.2 line 60
+dependency capsules may substitute for unchanged source under a declared profile; edited targets,
+% PDF p.2 line 61
+stale records, and opaque or insufficient analyses require exact source or broader validation. Dynamic
+% PDF p.2 line 62
+dispatch, reflection, fixtures, plugins, external services, and generated code can prevent a complete
+% PDF p.2 line 63
+dependency closure. Unknown edges widen the frontier rather than disappear from it. [D1; W1–W2]
+
+
+% Original PDF page 3
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 2: Formal tools are selected by the obligation and evidence profile; not every tool runs on every
+task.
+Formal mechanism            Question it answers                   Required qualification
+Abstract interpretation     Which values, effects, or paths       Sound over-approximation for the
+                            remain possible?                      supported fragment; opacity
+                                                                  elsewhere.
+Assume–guarantee            Do producer guarantees meet           Typed implication, nonvacuity, and
+                            consumer assumptions?                 valid induction for cycles.
+SMT / interpolation         Is an encoded obligation satisfied    Exact theory, formulas, bounds,
+                            or refuted; what boundary fact is     solver, result checks and translation
+                            useful?                               profile.
+Tactician / Hammer /        Which premises, tactics, or proof     Candidate search separated from
+proof assistant             candidates close a hole?              reconstruction or kernel checking.
+Temporal / deontic /        Which state, action, obligation,      A property-preserving encoding and
+cognitive / F-logic views   or knowledge relation is being        an available compatible backend.
+                            expressed?
+ZK relation / attestation   Which private witness satisfies       Circuit/program, public inputs, keys
+                            which public statement?               and verifier; no inferred execution
+                                                                  claim.
+\end{alltt}\endgroup
+
+
+
+\section*{3 Formalization: preserve the property before proving it}
+
+\subsection*{3.1 Domain intent is not execution authority}
+
+% PDF p.3 line 66
+A high-level objective is first a candidate specification. Intent IR expresses goals, actions, resources,
+% PDF p.3 line 67
+and effects; Legal IR contributes applicable normative constraints; Security IR contributes principal,
+% PDF p.3 line 68
+resource, and effect invariants. Their shared IR kernel supplies canonical claims and evidence
+% PDF p.3 line 69
+references, not an automatic equivalence between domains. Reviewed formalization and source
+% PDF p.3 line 70
+mappings turn a candidate into bounded obligations; ambiguity, missing coverage, and unsupported
+% PDF p.3 line 71
+modalities remain explicit. [N4–N7]
+% PDF p.3 line 72
+The attested authorization design queries a manifest-bound proof corpus, checks applicability and
+% PDF p.3 line 73
+revocation, composes obligations, and produces an exact-context decision. Correctness and authoriza-
+% PDF p.3 line 74
+tion are separate gates. The inspected reference enforcement layer supports one-time consumption
+% PDF p.3 line 75
+and context rechecks, but does not itself connect to real tools; the documented receipt-consumption
+% PDF p.3 line 76
+rollout defaults off/shadow. Thus the paper claims an interface and mechanism only at the deployment
+% PDF p.3 line 77
+stage actually exercised. [N7, N11]
+
+
+\subsection*{3.2 Loss-aware translation and solver-state limits}
+
+% PDF p.3 line 79
+A target formula is useful only for claims preserved by its translation. For example, a legacy projection
+% PDF p.3 line 80
+removes temporal/deontic operators and approximates a binary temporal formula by conjunction.
+% PDF p.3 line 81
+A proof of that projection cannot prove the original obligation. The admitted route must reject
+% PDF p.3 line 82
+unsupported loss or bind an independently justified preservation relation. Translation validation
+% PDF p.3 line 83
+checks the particular transformation rather than trusting every conversion [4]. [N8]
+% PDF p.3 line 84
+The inspected incremental SMT wrapper maintains named assertions and replay identity but rebuilds
+% PDF p.3 line 85
+a Z3 solver per check; that path supplies no exported proof object. It therefore supports assertion-
+% PDF p.3 line 86
+level incrementality, not an established retained-clause speedup. Solver diversity, same-solver core
+% PDF p.3 line 87
+rechecking, native proof reconstruction, and kernel checking must be reported separately. [D2]
+% PDF p.3 line 88
+The actual component checker lowers a producer guarantee G and consumer assumption A to G ∧
+% PDF p.3 line 89
+¬A; SAT supplies a countermodel, UNSAT discharges the encoded implication, and unsupported
+% PDF p.3 line 90
+clauses remain uncovered. The bounded QF\_LIA CEGAR adapter searches a Boolean abstraction,
+% PDF p.3 line 91
+concretizes an error trace, and refines only spurious traces using validated predicates. A feasible trace
+% PDF p.3 line 92
+refutes the model; incomplete search is not a proof. These results become reasoned plan obligations
+% PDF p.3 line 93
+and localized repair inputs. [N12–N13]
+
+
+% Original PDF page 4
+\section*{4 Planning and state repair before neural execution}
+\subsection*{4.1 Objective compilation and plan admission}
+
+% PDF p.4 line 96
+The direct-objective workstream replaces manual prompt elaboration with a bounded compiler:
+% PDF p.4 line 97
+authorized input and repository scan yield goals, subgoals, task dependencies, assumptions, permitted
+% PDF p.4 line 98
+effects, exact outputs, and acceptance obligations. Deterministic templates cover known task families.
+% PDF p.4 line 99
+A model may propose a residual decomposition, but the result must pass schema, dependency, scope,
+% PDF p.4 line 100
+resource, and acceptance-coverage checks. An inferred specification is still a proposal until admitted;
+% PDF p.4 line 101
+a model must not lower the objective or remove a required test to make its own plan succeed. [W2;
+% PDF p.4 line 102
+DOEP]
+% PDF p.4 line 103
+Planning maintains an obligation frontier. Resolved obligations reference current evidence; unre-
+% PDF p.4 line 104
+solved obligations carry a reason and a permissible next route. Hard authority, safety, and effect
+% PDF p.4 line 105
+conditions are checked before ranking by cost. The intended routing policy selects the cheapest
+% PDF p.4 line 106
+adequate route, not a ritual invocation of every theorem prover.
+
+\noindent current evidence / applicable procedure\par
+\noindent → exact dependency and static analysis\par
+\noindent → contract, abstract-state and solver checks\par
+\noindent → bounded deterministic repair or synthesis\par
+\noindent → explicitly authorized residual model\par
+\noindent → independent validation / review / honest insufficiency\par
+
+\subsection*{4.2 A routing gate is not a proof kernel}
+
+% PDF p.4 line 114
+The pre-implementation kernel can defer unavailable capabilities, choose a unique analytical can-
+% PDF p.4 line 115
+didate, abstain on ambiguous candidates, or authorize a named neural residual using resolved task/
+% PDF p.4 line 116
+forest-bound receipts. It does not run a model, prove a candidate, or by itself complete a task. A
+% PDF p.4 line 117
+Boolean “closes claim” on a candidate requires independent downstream justification. Its local zero
+% PDF p.4 line 118
+provider-hook count is not a measurement of saved model calls across the workflow. [A1, N1]
+% PDF p.4 line 119
+Integration is part of the method. The real caller must bind the current plan, diagnostic view and
+% PDF p.4 line 120
+obligation graph to the same task and forest as its evidence. A valid authorized residual must progress
+% PDF p.4 line 121
+while a minimally altered invalid request fails. Measuring only rejection would reward a deny-all
+% PDF p.4 line 122
+agent rather than useful neurosymbolic control.
+
+\subsection*{4.3 Event-driven reassessment and bounded convergence}
+
+% PDF p.4 line 124
+Repository, dependency, policy, proof, fixture, capability, and owner events invalidate only the
+% PDF p.4 line 125
+affected causal/semantic frontier when that frontier is complete. The supervisor retains accepted
+% PDF p.4 line 126
+unaffected subplans and emits a PlanDelta rather than rebuilding an entire prompt. Refill creates
+% PDF p.4 line 127
+only tasks needed for explicit gaps or counterexamples, subject to plan epochs, generation limits,
+% PDF p.4 line 128
+repeated-candidate detection, and authority. Unknown provider effects enter reconciliation rather
+% PDF p.4 line 129
+than blind retry. [W2; DOEP]
+% PDF p.4 line 130
+Queue exhaustion is not success. Completion requires current evidence covering every mandatory
+% PDF p.4 line 131
+acceptance obligation and no unresolved required consumer. Bounded termination is also not con-
+% PDF p.4 line 132
+vergence to a solution: budget exhaustion, nonconvergence, unavailable tools, and human decisions
+% PDF p.4 line 133
+remain separate terminal outcomes. Incoming world-model self-hosting is qualified only when route
+% PDF p.4 line 134
+and acceptance records show actual consumption of state, not merely sidecar logging. [W1–W2]
+
+\section*{5 Repair, context compilation, and procedural synthesis}
+\subsection*{5.1 Localize and preserve the intended change}
+
+% PDF p.4 line 137
+A repair begins with a state-bound failed obligation, observation, or counterexample—not a free-form
+% PDF p.4 line 138
+request to “fix everything.” Static dependency analysis and abstract interpretation bound the affected
+% PDF p.4 line 139
+region. Assume–guarantee checks expose unmet component interfaces; validated unsat cores or
+% PDF p.4 line 140
+interpolants can identify a compact missing premise. CEGAR refines an abstraction after a spurious
+
+
+% Original PDF page 5
+% PDF p.5 line 141
+counterexample; CEGIS refines candidate implementations against accumulated counterexamples
+% PDF p.5 line 142
+[3, 5]. Conflating these loops would obscure whether the program or its abstraction changed.
+% PDF p.5 line 143
+Candidate plans, patch sketches, and CodeEditPackets remain non-authoritative. The currently
+% PDF p.5 line 144
+represented path checks preimages and scope, applies a Git patch in an isolated fenced worktree,
+% PDF p.5 line 145
+rescans semantic state, and runs selected plus required fallback validation. General tokenizer-alias IR
+% PDF p.5 line 146
+editing and exact CST/AST relinking remain separate PCSM extensions until their actual resolver,
+% PDF p.5 line 147
+renderer, round-trip and adversarial checks are frozen. A source map alone is not a proof of semantic
+% PDF p.5 line 148
+preservation.
+
+\subsection*{5.2 Context minimizes unresolved information, not obligations}
+
+% PDF p.5 line 150
+The semantic compiler owns semantic ContextPack identity and sufficiency; the runtime compiles
+% PDF p.5 line 151
+provider-facing ContextCapsules. The goal, authority, scope, and acceptance core is non-truncatable.
+% PDF p.5 line 152
+Optional evidence is chosen under byte/token budgets; exclusions have exact expansion references
+% PDF p.5 line 153
+and reason codes. Required target source, caveats, tests, and proof obligations cannot be removed
+% PDF p.5 line 154
+to hit a compression target. Parent-bound delta capsules carry new counterexamples or dependency
+% PDF p.5 line 155
+facts while retaining the invariant core. Stable prefixes and provider cache reuse remain bound to
+% PDF p.5 line 156
+model/tokenizer/policy identities. [D1; ASEH, PCSM]
+% PDF p.5 line 157
+A model request names the residual question, admitted evidence, missing information, budget,
+% PDF p.5 line 158
+expected response schema, and independent acceptance test. Failed candidates expand only implicated
+% PDF p.5 line 159
+source or contracts when possible. This adapts abstraction refinement to context selection without
+% PDF p.5 line 160
+claiming that every context heuristic is a sound program abstraction.
+
+\subsection*{5.3 Compile repeated successful work into bounded operators}
+
+% PDF p.5 line 162
+ProcedureCegis already implements a bounded synthesis state machine. Its source order is existing
+% PDF p.5 line 163
+verified procedure, built-in template, anti-unified pattern, declarative/constraint candidate, model
+% PDF p.5 line 164
+sketch, and human candidate. Candidate and counterexample-set identities prevent repeated evaluation
+% PDF p.5 line 165
+of the same pair. The synthesizer neither executes nor certifies nor promotes its output. [A2]
+% PDF p.5 line 166
+The incoming memory method mines independently admitted trajectories, preserves failed episodes,
+% PDF p.5 line 167
+infers applicability conditions, and validates anti-unified procedures on held-out families. Each
+% PDF p.5 line 168
+procedure has typed parameters, effects, branch/loop bounds, residual holes, rollback, and required
+% PDF p.5 line 169
+validation. Execution must recheck current applicability and authority. Learned call-target, event-
+% PDF p.5 line 170
+delta, inverse-trace, and repair-delta models rank constrained candidates or abstain; their predicted
+% PDF p.5 line 171
+transitions become accepted state only after observation or verification. [W2, W4]
+% PDF p.5 line 172
+Architecture refactoring applies the same loop to module boundaries and state ownership: SCC-based
+% PDF p.5 line 173
+candidates, compatibility contracts, source-preserving edits, differential traces, tests/proofs, and
+% PDF p.5 line 174
+rollback. A smaller dependency graph, fewer files, or lower context burden only ranks candidates; it
+% PDF p.5 line 175
+does not establish equivalence. [W4]
+
+
+\section*{6 Test certificates and sound conditions for reuse}
+
+\subsection*{6.1 Specify exactly what is certified}
+
+% PDF p.5 line 178
+A test certificate must name its statement, source/dependency roots, runner and environment, fixture
+% PDF p.5 line 179
+inputs, result semantics, and checker/trust profile. “Verified” is not a single universal evidence class.
+% PDF p.5 line 180
+A manifest can be complete while its child observations depend on a trusted runner; a circuit can
+% PDF p.5 line 181
+correctly verify signatures while proving nothing about honest execution by their signer. [K1, A5]
+% PDF p.5 line 182
+The source-present Groth16 adapter is gated by explicit opt-in and a compiled Rust backend, with
+% PDF p.5 line 183
+BN254 and versioned circuit references. Its inspected derivation helper accepts only propositional
+% PDF p.5 line 184
+atoms, facts, and one-antecedent implications, using forward chaining. This is not the full temporal/
+% PDF p.5 line 185
+deontic system and not a CPython/pytest execution model. Versioned wrapper code, setup availability,
+% PDF p.5 line 186
+and attestation metadata must not be mistaken for a qualified circuit/key ceremony or measured
+% PDF p.5 line 187
+prover performance. [N9–N10]
+
+
+% Original PDF page 6
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 3: Zero-knowledge can hide witnesses; it does not enlarge the meaning of the proved relation.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Evidence class            Established relation                       Remaining assumption or limit
+Integrity / membership    These exact bytes or leaves belong to      Correctness and execution are not
+                          this commitment.                           implied.
+Signed runner             A named authorized signer asserts the      Runner integrity and observation
+observation               bound result.                              remain trusted.
+Formal proof              The encoded property follows in the        Translation adequacy, premises
+                          declared logic/profile.                    and checker TCB.
+Aggregation / seal        Declared child checks and manifest/        No stronger meaning than the
+                          transition rules hold.                     verified child relations.
+Direct execution proof    The specified machine/program              Actual modeled runtime, I/O
+                          produces the specified result.             oracles, inputs and bounds.
+\end{alltt}\endgroup
+
+
+\subsection*{6.2 Fixture-aware, phase-aware applicability}
+
+% PDF p.6 line 189
+The PCTDD workstream separates collection seed, fixture-definition closure, materialized fixture-
+% PDF p.6 line 190
+instance commitment, pre-call execution key, and post-execution setup/call/teardown evidence. It
+% PDF p.6 line 191
+binds parametrization, plugins/hooks, conftest, autouse fixtures, DI adapters, external snapshots,
+% PDF p.6 line 192
+clocks/RNGs, interpreter, policy, and relevant hardware. Arbitrary Python object serialization is
+% PDF p.6 line 193
+not a sound dependency model. Setup/call reuse may not silently skip required resource effects or
+% PDF p.6 line 194
+teardown; a teardown failure prevents a whole-item pass. Opaque dependencies force execution.
+% PDF p.6 line 195
+[W3]
+
+\subsection*{6.3 Exact reuse and cross-tree reuse are distinct}
+
+% PDF p.6 line 197
+A full-tree cache key changes on an unrelated edit. Broader reuse therefore needs a current dependency
+% PDF p.6 line 198
+projection and a noninterference/applicability witness, not just removal of the tree from a key. If
+% PDF p.6 line 199
+a deterministic observation under profile θ is a function fθ of a complete projection πD, then
+% PDF p.6 line 200
+πD(s)=πD(s′) implies equal observations. This conditional argument is elementary; proving that πD
+% PDF p.6 line 201
+includes all relevant inputs and effects is the hard obligation. Runtime traces alone cannot show that
+% PDF p.6 line 202
+no unobserved dependency exists. [W3; Appendix I]
+
+\section*{7 Incremental proof state and durable acceptance}
+\subsection*{7.1 Completeness is independent of membership}
+
+% PDF p.6 line 205
+Verification is partitioned into source-addressed proof units with stable logical identities and complete
+% PDF p.6 line 206
+applicability/trust keys. A requirement manifest declares every mandatory unit; a proof forest binds
+% PDF p.6 line 207
+the evidence for those units in deterministic categories. Merkle membership proves inclusion, not
+% PDF p.6 line 208
+that the collector included all required tests. Selection completeness and authorized removal of
+% PDF p.6 line 209
+obligations are separately checked. Delta seals name the accepted parent and exact reused, replaced,
+% PDF p.6 line 210
+added and removed units; uncertainty forces broader verification or a full checkpoint. [A5, K1]
+
+\subsection*{7.2 Prepared artifacts cannot publish themselves}
+
+% PDF p.6 line 212
+The durable store persists canonical blocks and candidate evidence; the supervisor runtime decides
+% PDF p.6 line 213
+whether evidence satisfies current obligations. The small persistence adapter and actual pointer CAS
+% PDF p.6 line 214
+are separate surfaces. Current-seal publication checks repository/branch identity, expected parent and
+% PDF p.6 line 215
+generation. Local locks, atomic filesystem publication, and WAL recovery do not constitute global
+% PDF p.6 line 216
+distributed consensus or a transaction spanning Git, the task database, and remote services. Crash
+% PDF p.6 line 217
+recovery must explicitly reconcile those boundaries. [K1–K4]
+
+
+
+
+% Original PDF page 7
+\noindent candidate state and complete requirement manifest\par
+\noindent → parallel prepare: canonicalize / hash / verify / build leaves\par
+\noindent → recheck exact parent, scope, evidence and completeness\par
+\noindent → persist children before referencing manifests\par
+\noindent → one expected-parent publication barrier\par
+\noindent → reconcile task disposition and publish accepted transition\par
+
+% PDF p.7 line 224
+Parallel canonicalization, hashing, independent proof checks, and Merkle levels are staged PCTDD
+% PDF p.7 line 225
+optimizations. They must preserve sequential bytes, CID profiles, category ordering, roots, and
+% PDF p.7 line 226
+dispositions. Chunk-manifest identities are distinct from a raw-file SHA-256 digest. Hash memos
+% PDF p.7 line 227
+need immutable content/profile bindings; a path or modification time alone is insufficient. Required
+% PDF p.7 line 228
+proof-pending states may continue local preparation but remain non-mergeable until mandatory
+% PDF p.7 line 229
+evidence is admitted. [W3]
+
+\subsection*{7.3 Acceptance invariant and remaining trusted base}
+
+\setcounter{equation}{1}
+\begin{equation}\begin{aligned}
+\mathrm{Publish}(s')\Rightarrow{}&\mathrm{CurrentParent}(s)\land\mathrm{Authorized}(a,s)\\
+&\land\mathrm{Scoped}(a)\land\mathrm{CompleteManifest}(q,s')\\
+&\land\mathrm{EvidenceAdmitted}(q,s')\land\mathrm{CAS}(s,s').
+\end{aligned}\tag{2}\end{equation}
+% PDF p.7 line 231
+This is a design invariant to qualify on the actual call chain, not a theorem that all current code
+% PDF p.7 line 232
+enforces it. A conditional preservation argument is possible: if the initial accepted state meets the
+% PDF p.7 line 233
+selected artifact policy, every admitted transition checks that policy on exact inputs, and publication
+% PDF p.7 line 234
+is exclusive, induction preserves that policy along the accepted lineage. It says nothing stronger than
+% PDF p.7 line 235
+the checked policy and does not prove all physical side effects exactly once. Appendix I names the
+% PDF p.7 line 236
+assumptions and proof obligations.
+
+\subsection*{7.4 Multi-agent and world-state extension}
+
+% PDF p.7 line 238
+Sibling supervisors exchange typed requests, observations, and receipts, not writable access to
+% PDF p.7 line 239
+each other’s state. Mergeable observational indexes can nominate dependencies; exclusive claims,
+% PDF p.7 line 240
+fences, policy, publication, and completion remain transactional. Accepted world roots can compose
+% PDF p.7 line 241
+semantic, program-trace, logical-dataset, procedure, proof, and environment roots. Cyclic logical
+% PDF p.7 line 242
+graphs use stable IDs and snapshot manifests rather than literal cyclic content links. Required-mode
+% PDF p.7 line 243
+operation must exhibit pre-state consumption, accepted transition evidence, and post-state publication.
+% PDF p.7 line 244
+[W1–W2; DOEP]
+
+\section*{8 Evaluation: useful progress, preservation, and cost}
+\subsection*{8.1 Primary comparison and independent oracles}
+
+% PDF p.7 line 247
+Freeze a task population, model revisions, exact repository forest, tools, policies, budgets, and
+% PDF p.7 line 248
+acceptance criteria before running paired conditions. The core A/B comparison changes only raw/
+% PDF p.7 line 249
+lexical versus semantic context; later arms add routing, incremental verification/reuse, and governed
+% PDF p.7 line 250
+lifecycle. These combined arms measure package effects, not the isolated contribution of each
+% PDF p.7 line 251
+mechanism. Orthogonal ablations must isolate translation checking, symbolic routing, context
+% PDF p.7 line 252
+selection, proof reuse, parallel preparation, and procedures. [ASEH; PCPR]
+
+\subsection*{8.2 Populations and controls}
+
+% PDF p.7 line 254
+Use exact pre-fix historical tasks, held-out task/repository families, and controlled adversarial cases.
+% PDF p.7 line 255
+Hide target patches and acceptance oracles from proposal generation; generated tests may supplement
+% PDF p.7 line 256
+but not silently replace the oracle. Include valid authorized actions as well as invalid ones. Seed
+% PDF p.7 line 257
+lost modalities, inconsistent assumptions, removed tests, missing fixture inputs, stale maps/keys,
+% PDF p.7 line 258
+changed verification keys, unknown provider outcomes, and crashes around publication. Keep
+% PDF p.7 line 259
+failures, timeouts, abstentions and unavailable routes visible.
+% PDF p.7 line 260
+Measure successful accepted tasks per fixed budget, false acceptance and false denial, conditional
+% PDF p.7 line 261
+solve rate after dispatch, time-to-first-valid-task, event-to-replan latency, task churn, manual repair,
+
+
+% Original PDF page 8
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 4: Pair safety endpoints with useful-progress endpoints. Zero unsafe actions is trivial for a
+deny-all system.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Study                     Matched comparison                        Primary correctness / progress
+                                                                    outcome
+Context                   Raw/retrieved source vs semantic          Completed accepted tasks; missed
+                          packs; same model/checks.                 regressions; tokens and fallback.
+Symbolic control          Model-first vs obligation-driven          Correct deterministic closures and
+                          routing.                                  authorized residual dispatch, not
+                                                                    just blocked calls.
+Repair / synthesis        Existing template/CEGIS vs model          Independent hidden/full
+                          proposal under same scope.                validation; specification
+                                                                    preservation; rejected candidates.
+Test / proof reuse        Cold execution vs admitted reuse;         False reuse; cold-oracle
+                          dependency-changing attacks.              agreement; fixture lifecycle;
+                                                                    coverage.
+Sealing / state           Sequential vs parallel; crashes and       Identical roots/dispositions,
+                          stale writers.                            accepted lineage, recovery and
+                                                                    useful continuation.
+\end{alltt}\endgroup
+
+
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 5: Repository-reported preliminary evidence; not experiments rerun during this paper revision.
+[A4–A5]
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Existing report           Bounded observation                       Cannot establish
+Semantic context          40 controlled tasks; 58.90\% median        Live inference savings, general
+harness                   estimated context reduction; no           repair accuracy, or useful provider
+                          model receipts.                           dispatch.
+Incremental sealer        40 transitions; 43.6161\% reuse;           Measured prover speedup; GPU
+                          43.0539\% estimated compute                cost; proof that arbitrary tests ran.
+                          reduction.
+Current source            Typed state, routing, formalization,      A single fully integrated
+inspection                bounded synthesis, and storage            deployment, unpushed worktree
+                          mechanisms.                               behavior, or passing runtime
+                                                                    qualification.
+\end{alltt}\endgroup
+
+
+
+
+% PDF p.8 line 262
+and each evidence class. Instrument actual provider boundaries: a gate that makes no model call
+% PDF p.8 line 263
+internally does not establish that the workflow saved a model call. Warm-cache and cold-start
+% PDF p.8 line 264
+conditions require separate results.
+
+
+
+\subsection*{8.3 Economic and statistical reporting}
+
+% PDF p.8 line 266
+Report actual input/output/cached tokens, model calls, provider charges, CPU/GPU time, memory,
+% PDF p.8 line 267
+storage, fixture setup/call/teardown, proof generation/checking, recovery, and human time. Currency
+% PDF p.8 line 268
+conversions require a stated tariff; unavailable values are not zero. Measure end-to-end elapsed time
+% PDF p.8 line 269
+directly rather than summing overlapping parallel durations. Report amortization and the break-even
+% PDF p.8 line 270
+number of repeated tasks.
+% PDF p.8 line 271
+Use paired differences, medians, confidence intervals, failure counts with denominators, and stratifica-
+% PDF p.8 line 272
+tion by dynamic-feature and task class. A finite zero-failure count is not universal safety. Preregister
+% PDF p.8 line 273
+a quality/noninferiority margin and minimum useful completion threshold; efficiency promotion
+% PDF p.8 line 274
+requires both. The final results and exact tested forest remain [TO BE FILLED].
+
+
+% Original PDF page 9
+\section*{9 Evidence limits, related work, and conclusion}
+\subsection*{9.1 What the existing artifacts establish}
+
+% PDF p.9 line 277
+The reviewed standalone repository heads and the consumer’s dependency pins differ. A final claim
+% PDF p.9 line 278
+must bind the actual loaded source forest, including overlays, native binaries, solver/circuit profiles
+% PDF p.9 line 279
+and active rollout settings. Source-present intent authorization and a Groth16 wrapper must not
+% PDF p.9 line 280
+be described as always-on enforcement or a validated universal prover. The preceding integration
+% PDF p.9 line 281
+findings belong in the author audit until resolved or reported as limitations.
+
+\subsection*{9.2 Relationship to established methods}
+
+% PDF p.9 line 283
+Proof-carrying code attaches checkable policy evidence to untrusted code [1]; abstract interpretation
+% PDF p.9 line 284
+and CEGAR reason over approximations and refine them with counterexamples [2, 3]. Translation
+% PDF p.9 line 285
+validation checks a produced transformation, and CEGIS searches bounded candidates against
+% PDF p.9 line 286
+counterexamples [4, 5]. Equality saturation represents alternatives under rewrite relations [6]. These
+% PDF p.9 line 287
+are foundations, not newly invented algorithms in this work.
+% PDF p.9 line 288
+The intended difference is composition at the agent’s operational boundary: persistent semantic
+% PDF p.9 line 289
+state, explicit obligations, residual model authorization, phase-aware test evidence, and accepted-
+% PDF p.9 line 290
+transition publication. Build-system research separates scheduling from rebuilding [7]; our reuse
+% PDF p.9 line 291
+design additionally exposes statement, fixture, trust and authority conditions. Coding agents and
+% PDF p.9 line 292
+test-generation benchmarks [8, 11], premise-retrieval and hammer systems [9, 10], and prompt
+% PDF p.9 line 293
+compression [12] provide relevant baselines. We do not claim that this is the first neurosymbolic
+% PDF p.9 line 294
+agent or that combining these techniques automatically improves performance.
+
+\subsection*{9.3 Limitations and accountable self-improvement}
+
+% PDF p.9 line 296
+Python reflection, native code, external state, concurrency, incomplete specifications, and unsound
+% PDF p.9 line 297
+translations limit what can be proved. A sound checker cannot repair an incorrectly formalized
+% PDF p.9 line 298
+requirement. Default-deny behavior can mask broken positive paths. A self-improving supervisor
+% PDF p.9 line 299
+must not edit its own protected acceptance specification, keys, validators or promotion policy under
+% PDF p.9 line 300
+ordinary task authority. Every learned update or compiled procedure requires an independent holdout
+% PDF p.9 line 301
+and rollback gate.
+% PDF p.9 line 302
+Important model use in implementation, formalization, candidate generation, experiments and
+% PDF p.9 line 303
+manuscript preparation must be disclosed accurately. The final claims remain conditional on the
+% PDF p.9 line 304
+frozen evidence and tested deployment. Our thesis is that persistent obligations can displace repeated
+% PDF p.9 line 305
+neural reasoning and validation while preserving a declared acceptance standard; the paired evaluation
+% PDF p.9 line 306
+must determine whether the total benefit exceeds the added analysis and proof cost.
+
+
+
+
+% Original PDF page 10
+\clearpage\input{references.tex}
+% Original PDF page 11
+\clearpage
+\section*{A One complete state to repair to certificate cycle}
+% PDF p.11 line 337
+Scenario: a repository operation writes a record before checking a caller’s permitted scope. The
+% PDF p.11 line 338
+authorized requirement is that a denied request produces no persistent write. R0, P0 and T0 below
+% PDF p.11 line 339
+are illustrative labels, not recorded benchmark CIDs. The example exercises the planned integration
+% PDF p.11 line 340
+rather than claiming an observed end-to-end run.
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 6: Illustrative state-to-repair-to-certificate cycle; labels are
+schematic.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Step                                        Artifact and acceptance condition
+1. Capture state                            Freeze source tree R0, recursive dependencies,
+                                            environment E0, policy P0 and semantic root S0. Extract
+                                            the call/effect edges for authorize and write\_record; keep
+                                            any opaque store behavior visible.
+2. State the obligation                     O0: denied(request, P0) implies persistent\_state\_after =
+                                            persistent\_state\_before for the declared observation
+                                            profile. Confirm this is an authorized requirement; do not
+                                            infer it only from existing tests.
+3. Obtain a counterexample                  A denied request under fixture instance F0 produces a
+                                            write. Bind the failing call trace, fixture-definition and
+                                            instance commitments, runner profile, setup/call/
+                                            teardown outcomes and exact source.
+4. Plan a bounded repair                    Localize the write-before-check ordering. Admit a plan
+                                            that changes only this operation and its justified
+                                            dependencies. The candidate must preserve authorized
+                                            writes, error behavior, finalization and public API
+                                            semantics.
+5. Choose a reasoning route                 Try an existing checked guard-before-effect template.
+                                            Use abstract effects or an encoded transition property to
+                                            discharge what the model supports. If ordering or
+                                            callbacks remain ambiguous, expand exact source or
+                                            request a bounded model residual—not an unrestricted
+                                            rewrite.
+6. Validate the candidate                   Apply to a fenced disposable worktree R1, rescan to S1
+                                            and invalidate the affected contracts/tests/proof units.
+                                            Execute relevant tests and full fallback where required.
+                                            A fake store test does not prove production database
+                                            semantics.
+7. Reuse narrowly                           A proof unit outside the complete affected closure may
+                                            be reused only after current binding and evidence checks.
+                                            A policy or fixture change invalidates every dependent
+                                            unit even if the test function text is unchanged.
+8. Seal and publish                         Admit the current requirement manifest, persist verified
+                                            children and a parent-bound delta seal, then
+                                            compare-and-swap the expected pointer/generation.
+                                            Reconcile the operational task only after matching
+                                            publication and validation receipts.
+9. Learn without self-approval              Store the accepted transition and rejected candidates.
+                                            Repeated independently validated instances may
+                                            nominate a guard-before-effect procedure; synthesis,
+                                            certification and promotion remain separate.
+\end{alltt}\endgroup
+
+
+\subsection*{A.1 Counterfactual checks}
+
+% PDF p.11 line 342
+Change F0, P0, the interpreter, a plugin, teardown behavior or an external snapshot without editing
+% PDF p.11 line 343
+the test body: the key must change or reuse must be rejected. Deliver a duplicate event or late worker
+% PDF p.11 line 344
+completion: the current state must not regress. Crash after immutable persistence but before pointer
+
+
+% Original PDF page 12
+% PDF p.12 line 345
+CAS: recovery must not invent completion. Supply an empty manifest while O0 is required: reject
+% PDF p.12 line 346
+incompleteness.
+% PDF p.12 line 347
+The example’s proof claim is limited to the selected model and observations. A successful unit test, a
+% PDF p.12 line 348
+checked transition formula and an attested runner result remain different artifacts with different trust
+% PDF p.12 line 349
+assumptions.
+
+
+\section*{B A typed evidence model and verification obligations}
+
+\subsection*{B.1 Evidence record}
+
+\noindent Evidence = (claim, subject\_roots, statement\_or\_observation, scope,\par
+\noindent assumptions, dependency\_roots, translation\_receipts,\par
+\noindent checker\_profile, checker\_result, environment, policy,\par
+\noindent producer\_or\_signer, invalidation\_bindings, provenance)\par
+\noindent Admit(e, q) = Integrity(e) ∧ SchemaValid(e) ∧ Applicable(e, q)\par
+\noindent ∧ RequiredCheckPasses(e, q) ∧ PolicyAllows(e, q)\par
+
+% PDF p.12 line 358
+This is a proposed unifying notation, not a replacement for existing schema authorities. Integrity
+% PDF p.12 line 359
+checks exact bytes; applicability checks freshness and scope; required checking evaluates the selected
+% PDF p.12 line 360
+statement; policy checks execution/acceptance authority. The conjunction cannot be satisfied by a
+% PDF p.12 line 361
+model’s confidence score or a single untyped success flag. A verified proof may originate from an
+% PDF p.12 line 362
+untrusted model: the checking rule, not the proposal’s reputation, establishes the new claim.
+
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 7: Formal mechanisms and their required evidence.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Mechanism                                    Representation and required limit
+Abstract interpretation                      Bind transfer semantics, abstract domain and widening/
+                                             narrowing strategy. Unsupported operations
+                                             over-approximate or become opaque. Do not call the
+                                             entire Python front end sound solely because one
+                                             abstract domain is well defined. [D3]
+Assume-guarantee                             Bind producer/consumer clauses, source map, theory,
+                                             invariants and normal/exceptional observations. Check
+                                             assumption consistency and cyclic closure; expose
+                                             uncovered prose clauses. [D4]
+Incremental SMT                              Bind full formula/assertion roots, declarations, theory,
+                                             translator, solver configuration and replay manifest. The
+                                             current wrapper rebuilds its solver; benchmark any
+                                             future retained-state implementation separately. [D2]
+Interpolation and refinement                 Validate implication, contradiction and shared
+                                             vocabulary; preserve unsupported/timeout outcomes.
+                                             CEGAR refines abstractions, while CEGIS refines
+                                             bounded candidates against accumulated
+                                             counterexamples. [D5]
+Tactician / Hammer / proof assistants        Premise and tactic predictions are candidates. Invoke the
+                                             actual available backend and native reconstruction or
+                                             checker required by the profile; no fake bridge, universal
+                                             provider or cross-logic soundness assumption. [D7; W2,
+                                             W4]
+Translation / e-graph extraction             Freeze source/target languages, supported observations,
+                                             rule trust and proof replay. Equi-satisfiability, refinement
+                                             and observational equivalence are different claims.
+                                             Opaque interface names are not implementation
+                                             evidence. [D6]
+\end{alltt}\endgroup
+
+
+% Original PDF page 13
+\subsection*{B.2 Targeted source-level checks before the final freeze}
+
+% PDF p.13 line 364
+Add tests for duplicate or colliding named SMT assertion/assumption identifiers, exact formula-root
+% PDF p.13 line 365
+binding in receipts, stale replay fingerprints, unsupported terms and rejection of unvalidated results.
+% PDF p.13 line 366
+Exercise the real caller admission path—not only a synthetic result constructor. These are review
+% PDF p.13 line 367
+obligations, not a claim that a runtime exploit was demonstrated in this audit.
+
+\section*{C Fixture definitions, injected instances and reuse eligibility}
+% PDF p.13 line 369
+This appendix preserves the parallel sealing/TDD directive’s staged protocol. Earlier identity and
+% PDF p.13 line 370
+trace infrastructure exists, but no new qualification of this entire protocol is asserted here. [P8; W3]
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 8: Staged test identities and permitted reuse.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Stage                     Required bindings                          Decision allowed
+0 · collection seed       Test node, parameters, marks,              Candidate lookup only; not a
+                          collection config, source/AST identity,    passing outcome.
+                          static closure, plugins and adapters.
+1 · fixture-definition    Fixture names, definitions, scopes,        Whole-item pre-setup reuse only
+closure                   autouse/usefixtures, parameterization,     under a qualified closed policy.
+                          transitive dependencies, conftest,
+                          hooks, setup/teardown/finalizers,
+                          purity/effect policy.
+2 · fixture-instance      Resolved parameter values and              Post-setup eligibility; opaque or
+commitment                reviewed injected commitments;             mutable unbound values force
+                          filesystem/database snapshot; service      execution.
+                          image and response corpus;
+                          transaction/lease, clock/RNG and
+                          setup outcome.
+3 · execution key         Test/source/fixture closure, instance      Re-admit a prior receipt or
+                          roots, runtime and dependency lock,        execute the call. No optimistic
+                          toolchain, relevant hardware, effect/      test pass.
+                          network policy, trace completeness,
+                          statement/circuit/key profile.
+4 · phase receipt         Setup, call and teardown outcomes,         Fresh observation and evidence
+                          failures, effects, observed dependency     for later reuse.
+                          trace, runner identity, final acceptance
+                          and signature/proof relation.
+\end{alltt}\endgroup
+
+
+\subsection*{C.1 Reviewed dependency-injection adapters}
+
+% PDF p.13 line 372
+Admit canonical primitives, bounded typed records, exact file/resource CIDs, versioned configuration
+% PDF p.13 line 373
+allowlists, immutable database snapshots, reviewed service fakes or committed response corpora
+% PDF p.13 line 374
+through explicit adapters. Do not serialize arbitrary callbacks, sockets, secrets, unrestricted object
+% PDF p.13 line 375
+graphs or live databases as if they were complete immutable inputs. Bind adapter version, privacy
+% PDF p.13 line 376
+policy and any absence or non-determinism. [W3]
+
+\subsection*{C.2 Preserve lifecycle effects}
+
+% PDF p.13 line 378
+Separate reuse of fixture definitions, fixture instances and test-call results. Module/session-scoped
+% PDF p.13 line 379
+resources, parametrized instances and xdist worker ownership require scope-aware scheduling. If
+% PDF p.13 line 380
+setup ran, required teardown/finalizers still run even when a call result is reusable. Teardown failure
+% PDF p.13 line 381
+prevents a whole-item pass. Scheduling must preserve resource isolation and observed ordering
+% PDF p.13 line 382
+requirements, not simply distribute tests with matching names. [W3]
+% PDF p.13 line 383
+A trace records what was observed on one execution. It does not prove that a branch not taken
+% PDF p.13 line 384
+could not access another dependency. Exact reuse across states needs a closed behavioral boundary;
+
+
+% Original PDF page 14
+% PDF p.14 line 385
+otherwise widen the closure and execute. Keep cold executions and mutation cohorts to test the reuse
+% PDF p.14 line 386
+policy independently.
+
+\subsection*{C.3 Proof batches, parallel preparation and the inner loop}
+
+\subsubsection*{C.3.1 Certificate and batch statement}
+
+% PDF p.14 line 389
+A batch statement binds the test inventory/requirement manifest, child execution keys and admitted
+% PDF p.14 line 390
+outcomes, count, ordering, duplicate policy and aggregate root. A cryptographic profile must bind its
+% PDF p.14 line 391
+public inputs, any private commitments, circuit or program, verification key, setup origin, verifier
+% PDF p.14 line 392
+version and intended relation. A proof of signature verification still relies on the signer’s execution
+% PDF p.14 line 393
+claim; it is not direct proof of the runner. Zero-knowledge is justified only by a defined privacy need
+% PDF p.14 line 394
+and a reviewed statement. [W3]
+% PDF p.14 line 395
+Reject unknown circuits or key origins, test-only keys on production allowlists, silent key generation,
+% PDF p.14 line 396
+simulated required units, and outer metadata not bound to the verified statement. Keep proving
+% PDF p.14 line 397
+keys and witness material outside public proof-store APIs. If recursive verification is unavailable,
+% PDF p.14 line 398
+represent a manifest of individually verified leaves rather than inventing a recursive proof. [K1; W3]
+
+\subsubsection*{C.3.2 Parallelism that preserves identity}
+
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 9: Parallel preparation and serial publication obligations.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Preparation job                             Required safety property
+Read / parse / canonicalize                 Use an exact immutable input or verified overlay.
+                                            Exclude symlink escapes, unstable reads and mutable
+                                            pathname assumptions; canonicalize once under a fixed
+                                            profile.
+Hash memo                                   Key exact content and relevant canonicalization/codec/
+                                            hash/source-mode policy. Reverify candidates; mtime or
+                                            a fast digest alone is not the final SHA/CID authority.
+Hash / verify workers                       Parallelize independent records/files/proof checks with
+                                            bounded CPU, memory, process/GPU usage,
+                                            cancellation and deadlines.
+Merkle construction                         Sort leaves, build categories and same-level nodes
+                                            concurrently, preserve normative order. Memoize
+                                            unchanged verified branches and recompute paths from
+                                            changed leaves.
+Serial barrier                              Recheck completeness and current identities, persist
+                                            children, then use the accepted expected parent/
+                                            generation. Worker completion order cannot change
+                                            bytes or disposition.
+\end{alltt}\endgroup
+
+
+
+\subsubsection*{C.3.3 Development-loop states}
+
+% PDF p.14 line 401
+The fast loop combines source capture, semantic invalidation, selection, cache-candidate lookup,
+% PDF p.14 line 402
+fixture-aware execution, candidate repair and certificate production. Proof generation can proceed
+% PDF p.14 line 403
+asynchronously inside the product only when the intermediate state remains explicitly non-mergeable.
+% PDF p.14 line 404
+Queue starvation, cancellation, proof failure, missing keys or unknown execution must preserve
+% PDF p.14 line 405
+honest status. [W3]
+% PDF p.14 line 406
+The directive’s rollout is bootstrap → shadow\_hash → shadow\_reuse → shadow\_proof → protected
+% PDF p.14 line 407
+→ required. These gates are not interchangeable with world-model shadow-read semantics. Measure
+% PDF p.14 line 408
+call/setup/teardown time, proof latency, batch verification, hash/serialization throughput, cache
+% PDF p.14 line 409
+corruption rejection, serial barrier time and total cost. Performance targets are acceptance goals—not
+% PDF p.14 line 410
+results. [W3]
+
+
+% Original PDF page 15
+\section*{D Semantic objects, projection indexes and logical datasets}
+\subsection*{D.1 Semantic objects and relations}
+
+% PDF p.15 line 413
+Wrap existing domain-state CIDs in adjacent versioned semantic-object envelopes containing domain,
+% PDF p.15 line 414
+schema, canonicalization profile, provenance, source CIDs, optional declared policy salt and evidence
+% PDF p.15 line 415
+class. Do not alter the existing source-semantic root to include embeddings, prompts, actors, leases,
+% PDF p.15 line 416
+wall time or transition history. Pure semantic deltas remain distinct from operational execution
+% PDF p.15 line 417
+records. [W1, W2]
+% PDF p.15 line 418
+Relations are scoped claims such as equivalent, refines, entails, contradicts, compatible\_with and
+% PDF p.15 line 419
+supersedes. Each binds left/right objects, scope, assumptions, environment and theory/policy, proof/
+% PDF p.15 line 420
+evidence references, limitations and invalidation dependencies. “Similar” belongs to a retrieval
+% PDF p.15 line 421
+projection, not the authoritative semantic relation vocabulary. Exact CID equality establishes byte
+% PDF p.15 line 422
+identity, not universal semantic equivalence. [W1]
+
+\subsection*{D.2 Hybrid retrieval without authority leakage}
+
+% PDF p.15 line 424
+Projection records bind their semantic object, projection kind, model, tokenizer, preprocessor, dimen-
+% PDF p.15 line 425
+sion, metric, normalization, vector identity and privacy policy. Rebuildable index manifests bind
+% PDF p.15 line 426
+generations and model/projection compatibility. Lexical, vector, LSH/Hamming, graph or neural
+% PDF p.15 line 427
+search may nominate candidates. The resolver must retrieve exact object bytes, verify current root
+% PDF p.15 line 428
+membership and recheck freshness, environment, obligations and policy before use. A stale vector or
+% PDF p.15 line 429
+approximate neighbor never substitutes for an exact subject. [W1, W2]
+% PDF p.15 line 430
+The graph-to-graph or typed-attention TAGSeq/DAGSeq idea remains an optional experimental
+% PDF p.15 line 431
+projection over typed program neighborhoods. It must be compared with exact lookup, rules, ordinary
+% PDF p.15 line 432
+graph features and embedding-only baselines. Canonical symbols and typed source maps remain
+% PDF p.15 line 433
+authoritative even if the learned projection changes. [W2]
+
+\subsection*{D.3 Logical data versus physical layout}
+
+% PDF p.15 line 435
+LogicalDatasetState and PhysicalDatasetLayout must not collapse into one identity. Under a fixed
+% PDF p.15 line 436
+logical schema, key/order policy and provenance, changing Parquet row groups, compression or
+% PDF p.15 line 437
+shard packaging should preserve logical content identity while changing layout identity. Set, multiset
+% PDF p.15 line 438
+and ordered semantics must be explicit; duplicate and key-conflict behavior cannot be inferred from
+% PDF p.15 line 439
+file order. [W1]
+% PDF p.15 line 440
+Transformations bind exact inputs, transformation specification, environment/toolchain, candidate
+% PDF p.15 line 441
+outputs and validation evidence. Merges use a closed declared semantics—append, keyed three-way,
+% PDF p.15 line 442
+ordered, set/multiset, schema evolution or conflict. Distributed workers may prepare shards and
+% PDF p.15 line 443
+candidate layouts, but only accepted logical state and validated provenance may enter a world root.
+% PDF p.15 line 444
+Legacy or mock dataset managers cannot silently remain production semantic authorities. [W1, W2]
+
+\subsection*{D.4 VFS bridge}
+
+% PDF p.15 line 446
+A successful canonical VFS/worktree mutation emits a durable post-commit receipt and semantic
+% PDF p.15 line 447
+outbox record. Rescanning, invalidation and acceptance occur through the existing semantic and
+% PDF p.15 line 448
+supervisor authorities. Filesystem success alone is not task success; recovery handles an outbox that
+% PDF p.15 line 449
+exists before semantic acceptance, and all side effects remain attributable to exact operations. [W1,
+% PDF p.15 line 450
+W2]
+
+
+
+
+% Original PDF page 16
+\subsection*{D.5 Frames, events, transitions and learned continuation models}
+
+\subsubsection*{D.5.1 State schema and abstraction profile}
+
+\noindent ProgramStateSnapshot:\par
+\noindent repository/environment/program-graph roots; source location; stack;\par
+\noindent selected locals or shapes; abstract heap/alias summary; path condition;\par
+\noindent exception state; obligations; capabilities/effects; external observations;\par
+\noindent capture profile; abstraction profile; confidence and limitations\par
+\noindent ProgramTransition:\par
+\noindent before-state; action; event; after-state or delta; conditions;\par
+\noindent observation/validation evidence; accepted/rejected/candidate status\par
+
+% PDF p.16 line 461
+Profiles declare stack depth, value precision, heap slicing, allocation identity, timestamp treatment,
+% PDF p.16 line 462
+exception handling and the observations preserved or erased. Absence is typed: a trace adapter that
+% PDF p.16 line 463
+cannot capture an external service is not a complete program-state observer. Logical execution graphs
+% PDF p.16 line 464
+may cycle without creating literal cyclic content-addressed blocks. [W2]
+
+\subsubsection*{D.5.2 Three distinct inference problems}
+
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 10: Program-prediction tasks and candidate semantics.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Task                                         Candidate semantics and validation
+Next call                                    Use lexical scope, imports/exports, nominal/structural
+                                             types, alias/points-to information, inheritance, dispatch
+                                             tables, callbacks, plugins and observed traces to build a
+                                             conservative set. Rank existing targets; keep
+                                             unknown-dynamic probability and abstention.
+Next event / abstract state delta            Predict call/return/raise/handle/branch/await/yield/
+                                             resume/I/O/mutation/contract/check events with a
+                                             declared state abstraction. Validate by replay, execution,
+                                             contracts or the appropriate formal backend.
+Inverse trace                                Return multiple predecessor hypotheses, missing calls/
+                                             inputs and replay recipes from a partial failure.
+                                             Non-invertibility and observational ambiguity are
+                                             expected; do not train it as a unique true reversal.
+\end{alltt}\endgroup
+
+
+
+% PDF p.16 line 466
+Symbolic pruning may exclude a candidate only through an admitted type, path, alias, effect, temporal,
+% PDF p.16 line 467
+resource, authority, exception or contract constraint. Uncertainty is not exclusion. A repair-delta
+% PDF p.16 line 468
+model proposes bounded changes to canonical nodes/edges; an exact resolver and source-preserving
+% PDF p.16 line 469
+renderer still need independently validated source correspondence. [W2]
+
+\subsubsection*{D.5.3 Dataset and promotion protocol}
+
+% PDF p.16 line 471
+Freeze capture/abstraction profiles, provenance, source-family splits, candidate-set construction and
+% PDF p.16 line 472
+targets before evaluation. Separate observed from synthetic/static-derived examples and distinguish
+% PDF p.16 line 473
+valid alternatives from wrong predictions. Report candidate recall before ranking, top-k, calibration,
+% PDF p.16 line 474
+abstention, unsupported cases, replay validity and downstream repair value. Model scores do not
+% PDF p.16 line 475
+become facts or required certificate evidence. [W2]
+% PDF p.16 line 476
+The predecessor proof-grounded learning campaign and a successor’s uncompleted work cannot share
+% PDF p.16 line 477
+a positive-result label. Preserve the earlier reported no-go until a distinct frozen learned artifact and
+% PDF p.16 line 478
+independent evaluation establish a new claim. This review does not establish new learned weights, a
+% PDF p.16 line 479
+tokenizer or a universal interlingua. [P6, P11; W2]
+
+
+% Original PDF page 17
+\section*{E Behavior-preserving remodularization, not cosmetic compression}
+\subsection*{E.1 Model the observations to preserve}
+
+% PDF p.17 line 482
+Track function, class, block and module identity at multiple levels: exact source/CST, semantic imple-
+% PDF p.17 line 483
+mentation, binding, contract, effects, mutable state, dependencies, public interface and compatibility.
+% PDF p.17 line 484
+Formatting, relocation, renaming, aliasing and semantic change need different dispositions. Public
+% PDF p.17 line 485
+behavior includes return values, exceptions, mutation, initialization order, import effects, serialization/
+% PDF p.17 line 486
+pickle names, introspection, plugin discovery, cancellation, timeouts, resources and documented API
+% PDF p.17 line 487
+surfaces—not just existing happy-path tests. [A3; W4]
+
+\subsection*{E.2 Analyze before partitioning}
+
+% PDF p.17 line 489
+Build a typed architecture graph of calls, reads/writes, authority owners, providers, interfaces, receipt
+% PDF p.17 line 490
+producers, stores, tests and proofs. Identify SCCs, cycles, import-time ordering and shared state. A
+% PDF p.17 line 491
+partition candidate must preserve a coherent state owner and an explicit boundary contract; do not
+% PDF p.17 line 492
+break a dependency cycle by hiding it behind opaque callbacks or duplicated state. Similarity and
+% PDF p.17 line 493
+semantic-entropy scores nominate candidates but prove neither duplication nor dead code. [A3; W4]
+
+\subsection*{E.3 Bounded transformation and validation}
+
+\noindent architecture finding → partition candidate → boundary contracts\par
+\noindent → scoped operator + reversible migration plan\par
+\noindent → isolated worktree + CST/AST-aware transform\par
+\noindent → translation / differential / effect / public-surface checks\par
+\noindent → selected and full-fallback tests + supported proofs\par
+\noindent → independent admission + exact rollback + updated state\par
+
+% PDF p.17 line 501
+Reuse a closed operator grammar: extract module/interface/pure function, move state to its owner,
+% PDF p.17 line 502
+introduce typed adapters or dependency inversion, quarantine legacy/simulation paths, replace
+% PDF p.17 line 503
+ambiguous outcomes, deprecate a public symbol or remove confirmed dead code after the relevant
+% PDF p.17 line 504
+gate. Operators bind preconditions, scope, effects, migration, consumer coverage and rollback.
+% PDF p.17 line 505
+Unknown dynamic reachability is not proof of deadness. [A3; W4]
+% PDF p.17 line 506
+Use property-based, metamorphic, mutation and differential executions over declared observables,
+% PDF p.17 line 507
+plus type/effect checks and supported solver or native proof obligations. Tactician/Hammer routes
+% PDF p.17 line 508
+can try to discharge obligations; bounded synthesis or a small model may propose a residual. A test
+% PDF p.17 line 509
+suite cannot alone establish universal observational equivalence of arbitrary Python. Contradictory
+% PDF p.17 line 510
+authoritative premises require conflict resolution, not proof by inconsistency to authorize a rewrite.
+% PDF p.17 line 511
+[W4]
+
+\subsection*{E.4 Fixed-point control and memory}
+
+% PDF p.17 line 513
+Persist accepted and rejected partitions, failed applicability, counterexamples and migration costs.
+% PDF p.17 line 514
+Recompute only affected graph regions; stop when no admissible beneficial candidate remains or a
+% PDF p.17 line 515
+budget is exhausted. Public API, mutable-state, security, legal, payment, key, release-authority and
+% PDF p.17 line 516
+wire-protocol changes retain their human-approval ceilings. Learned benefit or lower context cost
+% PDF p.17 line 517
+cannot raise those ceilings. [A3; W4]
+% PDF p.17 line 518
+The public architecture checkpoint establishes inventory and ArchitectureIR foundations. The broader
+% PDF p.17 line 519
+SCC/partition/CST/remodularization program remains separately tracked against the author’s local
+% PDF p.17 line 520
+worktree. [B1; W4]
+
+\section*{F Rollout, event federation and verified self-hosting}
+\subsection*{F.1 Reconcile predecessor programs}
+
+% PDF p.17 line 523
+The semantic-world and program-world directives explicitly require extending an accepted predeces-
+% PDF p.17 line 524
+sor or creating a sealed successor—not two stores, scanners, schedulers or root authorities. Apply
+% PDF p.17 line 525
+the same rule to existing procedure, architecture, proof reuse, sealer, governor and meta-controller
+
+
+% Original PDF page 18
+% PDF p.18 line 526
+campaigns. Read the live owner-controlled board and dependency seals before adding tasks; old plan
+% PDF p.18 line 527
+status text does not override current code or active local work. [W1–W4]
+
+\subsection*{F.2 Distinct rollout state machines}
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 11: Distinct rollout state machines.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Program                                      Meaning of progression
+World / program-world                        Bootstrap → shadow\_write → shadow\_read → guarded
+                                             → required. In the program-world directive, shadow\_
+                                             read computes hypothetical decisions without
+                                             influencing behavior. Guarded allows only bounded
+                                             consumption under independent checks. Required makes
+                                             pre-root consumption and post-root acceptance part of
+                                             task completion.
+Parallel sealing / TDD                       Bootstrap → shadow\_hash → shadow\_reuse → shadow\_
+                                             proof → protected → required. Require sequential parity
+                                             and zero unsafe divergence on the fixed adversarial
+                                             cohort before protective gates can depend on the new
+                                             path.
+Refactor / procedures                        Separate candidate generation, independent qualification,
+                                             shadow use and policy-authorized promotion. No worker
+                                             changes its own assurance threshold or rollout mode.
+\end{alltt}\endgroup
+
+
+\subsection*{F.3 Mandatory per-task receipts in required mode}
+
+% PDF p.18 line 530
+A task consumes an exact source forest, semantic/program state, obligation set, route decision and
+% PDF p.18 line 531
+context plan. It produces candidate artifacts, observations, current validation, admitted or rejected
+% PDF p.18 line 532
+transition, and a matching post-root/completion record. A deployment that writes optional semantic
+% PDF p.18 line 533
+metadata while continuing to decide from raw prompts has not demonstrated required self-hosting.
+% PDF p.18 line 534
+[W2, W3]
+
+\subsection*{F.4 Concurrency and persistence}
+
+% PDF p.18 line 536
+The operational database is accessed through the current typed owner boundary; event and outbox
+% PDF p.18 line 537
+records, revisions, claims and fences must agree. Delivery can be at least once while logical operations
+% PDF p.18 line 538
+are idempotent. Causal graphs and affected-frontier wakeups avoid duplicate reconstruction, but
+% PDF p.18 line 539
+retrieval projections and optional history stores cannot create readiness, leases or acceptance. [P3;
+% PDF p.18 line 540
+W2]
+% PDF p.18 line 541
+CRDT-like merging can be useful for observational knowledge with explicit conflict semantics. It
+% PDF p.18 line 542
+must not merge exclusive leases, authorization, current roots, irreversible effects or completion by
+% PDF p.18 line 543
+optimistic set union. Speculative agents use isolated branches and candidate proof/premise prefetch;
+% PDF p.18 line 544
+only independently admitted outputs cross the serial publication boundary. Remote storage and
+% PDF p.18 line 545
+libp2p/MCP++ transport require their own authentication/capability and fault tests. [W1, W2]
+
+\subsection*{F.5 Typed service parity}
+
+% PDF p.18 line 547
+Python, CLI and MCP are projections of the same operation contracts and authority rules. An
+% PDF p.18 line 548
+envelope identity is not the semantic payload identity. Delegated capabilities authorize an operation
+% PDF p.18 line 549
+but do not establish its mathematical correctness. Keep secrets and raw private traces outside prompt,
+% PDF p.18 line 550
+receipt and public-storage surfaces; ordinary imports must not launch daemons or installers. [D1;
+% PDF p.18 line 551
+W1–W4]
+
+
+
+
+% Original PDF page 19
+\section*{G Experiments and acceptance gates for the landing work}
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 12: Experimental cohorts and required fault checks.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Cohort / ablation                            Required measurements and failure checks
+State and selection                          Cold/incremental byte-root parity; deletion/rename/
+                                             config/fixture/native/dynamic changes; selected-vs-full
+                                             regressions; ambiguity and raw-source fallback. Empty
+                                             denominators stay not-applicable.
+Planning and repair                          Same tasks, models, budgets and acceptance criteria.
+                                             Count calls by route, deterministic closures, proof holes,
+                                             repaired/unsolved/escalated tasks, duplicate retries and
+                                             human interventions.
+Certificate reuse                            Cold oracle executions with changed fixtures, instances,
+                                             finalizers, plugins, policies, external snapshots and
+                                             runner versions. Report each attempted false reuse, not
+                                             only aggregate hit rate.
+Parallel sealer                              Equal bytes/roots/dispositions at multiple worker counts;
+                                             malformed blocks, cache corruption, interrupted writes
+                                             and stale-parent races. Separate prepare, verify, persist,
+                                             CAS, CPU/GPU and memory costs.
+Procedures / world models                    Held-out repository-family and time-based splits;
+                                             candidate recall, applicability, replay, calibration/
+                                             abstention, negative memory and transfer. Synthesis/
+                                             training cannot inspect held-out acceptance outputs.
+Architecture refactoring                     Frozen before/after tasks; API/import/exception/effect/
+                                             serialization behavior; dependency cone and context
+                                             burden; migration, validation, rollback and subsequent
+                                             maintenance cost.
+Recovery and federation                      Duplicate/reordered events, worker crashes, expiry/
+                                             fencing, unknown external effects, store unavailable,
+                                             network partition, cross-repository dirty overlays and
+                                             conflicting gitlinks.
+\end{alltt}\endgroup
+
+
+\subsection*{G.1 Cost and uncertainty}
+
+\noindent T\_total = elapsed wall time from task admission to terminal disposition\par
+\noindent Stage report = capture, compile, retrieve, model, setup, test, teardown,\par
+\noindent prove, verify, persist, retry, recover and human waits\par
+\noindent Money\_total = billed provider cost + measured infrastructure allocation\par
+\noindent Resource report = CPU time, GPU time, peak memory, bytes, storage growth\par
+
+% PDF p.19 line 559
+Overlapping parallel stage times are not additive wall time. Do not add seconds, tokens and dollars as
+% PDF p.19 line 560
+if they were one physical quantity. A policy may optimize a declared weighted utility, but the paper
+% PDF p.19 line 561
+must also report the separate observable units. Amortize cold indexing, proof setup, training and
+% PDF p.19 line 562
+procedure compilation over an explicit number of tasks; include break-even behavior and workloads
+% PDF p.19 line 563
+where the method is slower.
+
+\subsection*{G.2 Hard gates and honest dispositions}
+
+% PDF p.19 line 565
+Require no observed unsafe admission, stale publication, forged certificate acceptance or false reuse in
+% PDF p.19 line 566
+the frozen adversarial suite, while reporting its finite size and uncertainty. Quality must not be traded
+% PDF p.19 line 567
+away to meet a speed target. An unavailable backend, an incomplete proof or baseline-compatible
+% PDF p.19 line 568
+failing test remains visible. A non-promotion can be the correct campaign result.
+% PDF p.19 line 569
+The final anonymous bundle needs a source forest, install/lock and capability manifests, frozen
+% PDF p.19 line 570
+task population/splits, model settings, test/prover commands, raw receipts, analysis code, failure
+
+
+% Original PDF page 20
+% PDF p.20 line 571
+taxonomy, trusted-base manifest and replay instructions. A reviewer must be able to regenerate each
+% PDF p.20 line 572
+table without private author state.
+
+\section*{H Early supervisor programs and their scientific role}
+% PDF p.20 line 574
+The chat contains more than the four saved world/TDD/refactoring directives. The earlier programs
+% PDF p.20 line 575
+below are retained explicitly. They are reconciled with existing implementation owners rather than
+% PDF p.20 line 576
+treated as commands to launch duplicate boards. A handoff prompt specifies intended work; it is not
+% PDF p.20 line 577
+evidence that a supervisor was launched or that a worktree landed.
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 13: Earlier supervisor programs and their qualification requirements.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Program                  Method preserved                           Qualification needed
+ASEH · efficiency        Paired end-to-end telemetry;               Actual provider calls, success and
+and state hardening      deterministic-first routing; shared        cost at matched budgets; event/
+                         contexts; one state-transition             recovery and warm/cold
+                         authority; removal of duplicate            baselines.
+                         writable paths.
+DOEP · direct            High-level idea → typed objective →        Valid input reaches useful tasks;
+objective and event      goal/task DAG; event-driven                changed state invalidates affected
+planning                 PlanDelta and bounded refill; sibling      work; no runaway objectives or
+                         clients; nonconvergence and authority      queue-empty success.
+                         controls.
+PCPR · platform          Truthful unavailable/simulation            One loaded integrated forest,
+qualification            statuses, canonical path cutovers, real    active rollout, clean installation
+                         backend qualification, immutable           and current evidence; not three
+                         dependencies and release manifest.         unrelated main-head results.
+PCSM · semantic          Canonical semantic IR versus local         Separate slicing/alias/linking
+minification             projection; M1 source-linked edits,        ablations; exact target source;
+                         M2 declared abstraction, M3 advisory       round-trip and stale-map tests; no
+                         learning; tokenizer costs and CEGAR        universal AST linker inferred
+                         expansion.                                 from a patch schema.
+\end{alltt}\endgroup
+
+
+\subsection*{H.1 Dependency order, not a new campaign taxonomy}
+
+% PDF p.20 line 579
+First qualify state and applicability, then the symbolic route and real positive model-dispatch path,
+% PDF p.20 line 580
+then repair and test-certificate admission. Only after those seams work should a combined run
+% PDF p.20 line 581
+attribute gains to automatic refill, minification, procedures or learned world state. Existing gates and
+% PDF p.20 line 582
+protected validation owners remain authoritative.
+
+\subsection*{H.2 Independent status dimensions}
+
+\noindent location: main | branch | local\_overlay | specification\_only\par
+\noindent implementation: present | partial | incompatible | missing\par
+\noindent integration: called | adapter\_only | optional | unknown\par
+\noindent validation: not\_run | reported | reproduced | failed | blocked\par
+\noindent rollout: off | shadow | guarded | required\par
+\noindent paper claim: exact mechanism + population + scope + limitations\par
+
+% PDF p.20 line 590
+A branch may already be an ancestor of main; an importable module may never be consumed; a
+% PDF p.20 line 591
+passing negative fixture may never exercise a valid path. Update each dimension independently. Do
+% PDF p.20 line 592
+not replace pending outcomes with the expected landing date.
+
+
+
+
+% Original PDF page 21
+\subsection*{H.3 World state, tests, and refactoring are parts of one loop}
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 14: World-state, test, and refactoring methods in the supervision
+loop.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Directive                 Mechanisms retained                       Connection to supervision
+W1 ·                      Semantic objects and scoped relations;    Accepted pre/action/post
+semantic-addressed        canonical profiles; projection/index      transitions become reusable state;
+world                     generations; exact resolution; logical    similarity can nominate but never
+                          datasets vs layout; VFS outbox and        substitute for exact resolution.
+                          world-root CAS.
+W2 · program world        Frames/stacks/heaps, capture/             Obligations and counterexamples
+                          abstraction profiles, typed traces;       determine route, context, subgoals
+                          static candidates and symbolic            and tasks; learned output stays
+                          pruning; next-call, next-event,           candidate-tier until validated.
+                          inverse-trace and graph-delta
+                          residuals.
+W3 · parallel sealing /   Hash memo and parallel preparation;       Avoid repeated work only when
+TDD                       deterministic forests;                    current inputs, effects, evidence
+                          fixture-definition/instance and DI        and publication checks permit it;
+                          keys; whole-item vs call reuse; setup/    cold execution is the reference.
+                          call/teardown; xdist; async
+                          certificates.
+W4 · semantic             Multi-level identities; authority/state   Repair/refactor waves preserve
+refactoring               graphs; SCC partitions; boundary          observations under declared
+                          contracts; CST-aware codemods;            profiles; verified episodes support
+                          initialization, API, pickle and plugin    bounded procedures, negative
+                          compatibility.                            memory and fixed-point
+                                                                    reanalysis.
+\end{alltt}\endgroup
+
+
+% PDF p.21 line 594
+The four saved directives collectively specify 126 top-level sections, including operational and report-
+% PDF p.21 line 595
+ing requirements. Their previous complete heading index remains in the companion reconciliation
+% PDF p.21 line 596
+handoff; it has not been replaced by this method summary. The latest revision retains Appendices
+% PDF p.21 line 597
+A–G and adds exact source-level qualification issues rather than discarding the previously discussed
+% PDF p.21 line 598
+mechanisms.
+
+\subsubsection*{H.3.1 Self-hosting must be observable}
+% PDF p.21 line 600
+In shadow-write the system computes sidecar artifacts; in shadow-read it evaluates hypothetical
+% PDF p.21 line 601
+decisions without changing authority. Guarded consumption and required self-hosting must be
+% PDF p.21 line 602
+separately approved. In required mode each eligible task consumes a verified pre-root, current
+% PDF p.21 line 603
+obligations and route/context decision, then publishes observations, validation, accepted/rejected
+% PDF p.21 line 604
+transition and completion/post-root evidence. Workers may not modify rollout, keys, protected
+% PDF p.21 line 605
+specifications or their own acceptance validator.
+
+\subsubsection*{H.3.2 Learned representations remain bounded research}
+% PDF p.21 line 607
+Typed-attention/TAGSeq/DAGSeq-style models are optional comparisons after static, history, lexical
+% PDF p.21 line 608
+and embedding baselines. Program graphs may be cyclic; storage manifests are not. Predicting a next
+% PDF p.21 line 609
+event, recovering a predecessor trace and proposing a repair are different objectives with different
+% PDF p.21 line 610
+labels. Track calibration, abstention, static-candidate recall, leakage-safe repository-family/time
+% PDF p.21 line 611
+splits, and downstream acceptance. Attention weights, proximity and a generated CID are not proofs.
+
+\section*{I A semantic preservation contract for every translation}
+% PDF p.21 line 613
+The formal layer is not a bag of interchangeable solver adapters. For each source-to-target conversion
+% PDF p.21 line 614
+τ , record source domain, target logic/theory, vocabulary, variable/clock interpretation, assumptions,
+
+
+% Original PDF page 22
+% PDF p.22 line 615
+unsupported constructs, omissions, source map and claimed preservation direction. Source truth may
+% PDF p.22 line 616
+be inferred from target truth only when that implication is established for the requested property. [N4,
+% PDF p.22 line 617
+N8]
+
+\setcounter{equation}{2}
+\begin{equation}
+\mathrm{TargetChecker}(\tau(\varphi))=\mathrm{accepted}\quad\not\Rightarrow\quad\mathrm{SourceSemantics}\models\varphi.
+\tag{3}\end{equation}
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 15: Logic views, their useful roles, and their explicit scope.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Source view /              Useful role                                Scope to bind explicitly
+mechanism
+Typed software IR /        Contracts, alias/effect relations, claim   Supported syntax and extractor
+first-order formulas       dependencies.                              semantics; unknown behavior
+                                                                      stays possible.
+F-logic / object-frame     Structured entities and relationships.     Actual engine/profile and
+views                                                                 translation tests; an advertised
+                                                                      family is not an installed backend.
+TDFOL /                    Obligations, permissions, prohibitions     Clock/trace semantics, modal
+temporal-deontic           and temporal constraints.                  interpretation and
+view                                                                  property-preserving lowering.
+DCEC /                     Actions, events, agents and                Domain axioms and supported
+cognitive-event or         knowledge/intention relations.             modal/event fragment; no
+event-calculus view                                                   unqualified flattening to ordinary
+                                                                      predicates.
+SMT arithmetic /           Finite checks, satisfiability, inductive   Selected theory, bit width, bounds,
+arrays / bit-vectors       or bounded obligations.                    result type, solver and replay
+                                                                      identity.
+Lean / Coq / ATP +         Candidate proof search and                 Proof payload, theorem/axioms,
+reconstruction             independently checked theorems.            native checker version and exact
+                                                                      reconstruction result.
+ZK helper named            Finite atom/implication derivation         It accepts P and P→Q; this name
+TDFOL\_v1                   witness for an optional backend.           does not imply full temporal,
+                                                                      deontic or first-order semantics.
+\end{alltt}\endgroup
+
+
+\subsection*{I.1 Concrete loss test to add}
+
+% PDF p.22 line 619
+The inspected legacy converter maps O(p) to p and a temporal operator applied to p to p; it also
+% PDF p.22 line 620
+approximates a binary temporal formula by conjunction. Construct distinct source states or traces
+% PDF p.22 line 621
+in which the original modality differs while the projection agrees. The acceptance path must reject
+% PDF p.22 line 622
+lifting a target proof to the source claim unless an appropriate preservation condition is supplied. This
+% PDF p.22 line 623
+is a proposed semantic regression, not a newly executed repository test. [N8]
+
+\subsection*{I.2 Nonvacuity and contradictory premises}
+
+% PDF p.22 line 625
+Before accepting G⇒A in component composition, check the intended consistency and reachability
+% PDF p.22 line 626
+conditions. Unsatisfiable G makes the implication vacuously true; it may expose a broken specification
+% PDF p.22 line 627
+rather than a correct component. Unknown is not inconsistent and not proved. Mutating axioms or
+% PDF p.22 line 628
+normative policy to close a proof is a new authorized specification change, not automatic repair.
+
+\subsection*{I.3 What can be proved about acceptance and reuse}
+
+\subsubsection*{I.3.1 Accepted-lineage invariant — proof sketch, not machine checked}
+% PDF p.22 line 631
+Fix a statement profile Θ and a policy predicate PΘ over artifact manifests. Assume: the initial
+% PDF p.22 line 632
+accepted root satisfies PΘ; all required subject bytes and dependency references are verified; the
+% PDF p.22 line 633
+manifest is complete under an admitted completeness rule; each accepted evidence item satisfies its
+% PDF p.22 line 634
+designated checker relation; the sole publication operation enforces the expected parent and all gates;
+% PDF p.22 line 635
+and protected policy/checker identities cannot change under worker authority.
+
+
+% Original PDF page 23
+% PDF p.23 line 636
+Then every root reachable solely through accepted publication transitions satisfies PΘ. Proof:
+% PDF p.23 line 637
+induction on the number of successful publications. The initial case is assumed. For the induction
+% PDF p.23 line 638
+step, the publisher checks PΘ on the exact candidate manifest and current parent before its CAS
+% PDF p.23 line 639
+linearization; failed or stale attempts are not successors. The induction does not establish any property
+% PDF p.23 line 640
+omitted by PΘ, truth of unsupported translations, honest signed observations, or atomicity of external
+% PDF p.23 line 641
+side effects.
+
+\subsubsection*{I.3.2 Dependency-projected test reuse — proof obligation}
+% PDF p.23 line 643
+Let Obsθ(t,s) be the relevant setup/call/teardown observation of test t in state s under a declared
+% PDF p.23 line 644
+runtime/effect profile θ. Suppose a complete projection πD and deterministic function fθ exist such
+% PDF p.23 line 645
+that Obsθ(t,s)=fθ(πD(s)) on all states admitted by the reuse policy. If πD(s)=πD(s′), equality of
+% PDF p.23 line 646
+the observations follows immediately. An admitted previous observation can therefore transfer only
+% PDF p.23 line 647
+within that profile and those assumptions.
+% PDF p.23 line 648
+The difficult part is establishing completeness and determinism of πD. Definitions alone miss fixture
+% PDF p.23 line 649
+values; function coverage misses plugin, clock, network, DB and teardown effects. Two equal digests
+% PDF p.23 line 650
+of incomplete manifests do not satisfy the premise. For effectful tests the profile must also show that
+% PDF p.23 line 651
+required effects are replayed or observationally unnecessary. Otherwise run setup and/or the test
+% PDF p.23 line 652
+and teardown. A cold oracle and adversarial mutations check the implementation but do not prove
+% PDF p.23 line 653
+universal closure.
+
+\subsubsection*{I.3.3 Three acceptance questions, three different answers}
+\noindent Behavioral claim: does candidate program/model satisfy its obligation?\par
+\noindent Action permission: may this actor perform this action now?\par
+\noindent Publication: does this candidate and its evidence become current?\par
+% PDF p.23 line 658
+Neither a proof of behavior nor a capability alone answers all three. Formalization determines
+% PDF p.23 line 659
+the statement; authorization binds actor, tool, arguments, resources, effects, scope, time and roots;
+% PDF p.23 line 660
+execution observations report what happened; publication chooses the accepted lineage. The reference
+% PDF p.23 line 661
+pre-dispatch code uses an in-memory consumption ledger and fake-dispatch defaults, so durable
+% PDF p.23 line 662
+real-tool integration requires its own adapter and restart evidence. [N7, N11]
+
+\subsubsection*{I.3.4 Useful autonomy requires positive-path witnesses}
+% PDF p.23 line 664
+Require a paired witness for each gate: a correctly authorized, well-bound case that progresses and a
+% PDF p.23 line 665
+minimally altered case that is rejected. Include a deny-all control in safety/cost diagnostics, not as a
+% PDF p.23 line 666
+competitive repair method. Otherwise default deferral, unavailable backends or adapter mismatches
+% PDF p.23 line 667
+can masquerade as perfect safety and low inference cost.
+
+\section*{J Native proof code, metadata, and runtime observations}
+\subsection*{J.1 The inspected optional Groth16 path}
+
+% PDF p.23 line 670
+The high-level adapter exposes Groth16/BN254 through a lazily imported Rust FFI backend and
+% PDF p.23 line 671
+checks an explicit enable flag. Generation defaults to circuit version 1; the version-2 TDFOL\_v1
+% PDF p.23 line 672
+branch constructs a deterministic derivation trace and refuses a theorem outside its derivable fragment.
+% PDF p.23 line 673
+The helper’s grammar is limited to named atoms, facts, and unary-antecedent implications. A Python
+% PDF p.23 line 674
+helper producing a trace is not by itself evidence that the deployed R1CS enforces every intended
+% PDF p.23 line 675
+constraint. [N9–N10]
+% PDF p.23 line 676
+The wrapper also supplies setup/ensure-setup functionality and allows a seed. Reproducible research
+% PDF p.23 line 677
+setup and test-vector determinism must remain separate from approved operational key provenance.
+% PDF p.23 line 678
+Existence of key files or a compiled binary is not a proof of key ceremony, circuit soundness, correct
+% PDF p.23 line 679
+deployment, or acceptable proving cost.
+
+\subsection*{J.2 Bind inner statements to outer claims}
+
+% PDF p.23 line 681
+The inspected verify\_proof path forwards JSON decoded from proof\_data to the FFI verifier. Metadata
+% PDF p.23 line 682
+and attestation views are also assembled around that object. At the consumer boundary, compare the
+
+
+% Original PDF page 24
+% PDF p.24 line 683
+actual verified public inputs with the source, obligation, profile, environment, circuit, key and test-
+% PDF p.24 line 684
+inventory claims used for admission. Do not infer that every outer metadata field is cryptographically
+% PDF p.24 line 685
+bound merely because the inner proof verifies. This is a required boundary test; no exploitable
+% PDF p.24 line 686
+end-to-end attack was reproduced. [N9]
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 16: Adversarial changes at the native-proof admission boundary.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Adversarial modification                    Expected disposition
+Change outer source/test root but keep      Reject application claim if it differs from verified public
+proof\_data unchanged.                       inputs.
+Use proof of committed axioms as proof      Reject mismatched statement/evidence class.
+a Python test executed.
+Change circuit version, verification key,   Re-evaluate applicability; never silently reuse old
+profile or revocation root.                 admission.
+Omit one mandatory test from an             Reject completeness even if every included leaf verifies.
+otherwise valid batch.
+Pass call phase but fail teardown; reuse    No whole-item pass; execute/reject as policy requires.
+call with stale fixture values.
+Use simulated artifacts, auto-generated     No production credit; explicit unavailable/experimental
+test keys or unknown backend.               outcome.
+\end{alltt}\endgroup
+
+
+\subsection*{J.3 Experiment still required}
+
+% PDF p.24 line 688
+Measure native generation and verification on a named circuit and key policy, not an estimated
+% PDF p.24 line 689
+proof-shaped record. For test attestation, run a genuine runner with independent observations; for
+% PDF p.24 line 690
+direct execution claims, name the encoded runtime and external-I/O assumptions. Report prover
+% PDF p.24 line 691
+unavailable as unavailable. Recursive verification is optional; a manifest of individually checked
+% PDF p.24 line 692
+proofs is a different and acceptable mechanism when labeled correctly.
+
+\section*{K Fill from one frozen, independently scored experiment}
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 17: Main comparison; isolate component effects through matched
+ablations, not the combined arm alone.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Arm                         Accepted solved      False accept /    Tokens / cost     Elapsed /
+                            / total              deny                                human time
+A · raw + full validation   [TBD]                [TBD]             [TBD]             [TBD]
+B · semantic + same         [TBD]                [TBD]             [TBD]             [TBD]
+validation
+C · + symbolic route /      [TBD]                [TBD]             [TBD]             [TBD]
+reuse
+D · + governed lifecycle    [TBD]                [TBD]             [TBD]             [TBD]
+\end{alltt}\endgroup
+
+
+
+
+% Original PDF page 25
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Table 18: Both sides of every acceptance boundary must be exercised.
+\end{alltt}\endgroup
+
+\begingroup\fontsize{7}{8.4}\selectfont
+\begin{alltt}
+Integration witness                       Safe rejection       Valid progress        Evidence ID
+Pre-implementation provider gate          [TBD]                [TBD]                 [TBD]
+Loss-aware formal translation             [TBD]                [TBD]                 [TBD]
+Current native theorem/circuit profile    [TBD]                [TBD]                 [TBD]
+Fixture/call/teardown reuse               [TBD]                [TBD]                 [TBD]
+Root publication after restart            [TBD]                [TBD]                 [TBD]
+Required world/procedure                  [TBD]                [TBD]                 [TBD]
+consumption
+\end{alltt}\endgroup
+
+
+\subsection*{K.1 Disclosure and reproducibility}
+
+% PDF p.25 line 695
+Language models were used for [actual implementation assistance], [candidate goals/plans/patches],
+% PDF p.25 line 696
+[proof candidates], [data processing], and [manuscript preparation]. Record models, versions/dates,
+% PDF p.25 line 697
+settings, prompts or permitted summaries, data exposure and independent checks. Remove unused
+% PDF p.25 line 698
+roles rather than imply they occurred. Do not expose secrets, proprietary source, private witnesses or
+% PDF p.25 line 699
+private reasoning logs to satisfy a reproducibility checklist.
+
+\subsection*{K.2 Final author actions}
+
+% PDF p.25 line 701
+Freeze all landing worktrees and loaded dependency pins; reconcile implementations with ASEH,
+% PDF p.25 line 702
+DOEP, PCPR, PCSM and W1–W4; qualify the positive-path gate; bound each logic translation and
+% PDF p.25 line 703
+proof statement; regenerate result tables from raw evidence; report negative/missing results; replace
+% PDF p.25 line 704
+artifact labels with anonymous paths; remove author-only review notes and identifying links; use
+% PDF p.25 line 705
+the official workshop LaTeX style and check the actual PDF length. The separate audit/ledger is
+% PDF p.25 line 706
+author-only. No repository mutation, supervisor launch, native build or live experiment is implied by
+% PDF p.25 line 707
+this document revision.
+
+\section*{L How symbolic computations change the next agent action}
+\subsection*{L.1 Abstract state supplies candidate bounds}
+
+% PDF p.25 line 710
+The inspected Python abstract interpreter uses a product of flat constants, integer intervals, nullness,
+% PDF p.25 line 711
+exceptions and effects. Its immutable lattice protocol exposes order, join, meet, widening and
+% PDF p.25 line 712
+narrowing; the adapter records local interprocedural summaries and source positions. The worklist
+% PDF p.25 line 713
+accumulates possible states at program points. Unsupported reflection, native calls, loading and
+% PDF p.25 line 714
+callbacks widen to opacity. A consumer may prune an impossible candidate only under a sound
+% PDF p.25 line 715
+admitted approximation, never from a learned low score. [N14]
+
+\setcounter{equation}{3}
+\begin{equation}
+\text{Abstract state}=\mathrm{Const}\times\mathrm{Interval}\times\mathrm{Nullness}\times\mathrm{Exceptions}\times\mathrm{Effects}.
+\tag{4}\end{equation}
+
+\subsection*{L.2 Interface composition creates a precise discharge job}
+
+% PDF p.25 line 717
+A CompositionEdge references exact producer/consumer contracts and named normal, exceptional
+% PDF p.25 line 718
+and induction clauses. Unknown clause references are rejected before solver execution. The compo-
+% PDF p.25 line 719
+sition graph and receipt bind the semantic root, contracts, edges, obligation outcomes, uncovered
+% PDF p.25 line 720
+assumptions and SCCs. Its basic implication query is G ∧ ¬A. SAT provides a countermodel;
+% PDF p.25 line 721
+UNSAT provides solver-backed discharge of that encoded implication. Opaque prose stays uncovered.
+% PDF p.25 line 722
+Cycles need a typed invariant plus an independently solved closure check rather than mutually citing
+% PDF p.25 line 723
+guarantees. [N12]
+
+\setcounter{equation}{4}
+\begin{equation}
+G\land\neg A\text{ is UNSAT}\quad\Rightarrow\quad G\Rightarrow A\quad\text{(in the encoded theory).}
+\tag{5}\end{equation}
+
+% PDF p.25 line 724
+This permits a caller to consume a dependency guarantee instead of repeatedly loading its body
+% PDF p.25 line 725
+only when current bindings, statement coverage and the consumer assumptions hold. A contract
+
+
+% Original PDF page 26
+% PDF p.26 line 726
+gap becomes a named repair or proof task. Consistency and reachability checks prevent treating an
+% PDF p.26 line 727
+impossible guarantee as meaningful implementation correctness.
+
+\subsection*{L.3 CEGAR localizes abstraction error before code repair}
+
+% PDF p.26 line 729
+The QF\_LIA adapter searches a supplied Boolean abstraction of a control-flow graph and constructs
+% PDF p.26 line 730
+a named concrete path formula for each abstract error trace. A feasible path is retained as a
+% PDF p.26 line 731
+real counterexample. A spurious path may be refined with a validated interpolant/core, weakest
+% PDF p.26 line 732
+precondition, or reviewed predicate. Iteration, predicate, abstract-state and trace-length budgets
+% PDF p.26 line 733
+are explicit; unavailable, unknown, timeout and budget exhaustion are separate dispositions. It is a
+% PDF p.26 line 734
+refinement adapter over existing contracts, not a second unrestricted model checker. [N13]
+
+\setcounter{equation}{5}
+\begin{equation}
+A\Rightarrow I,\quad I\land B\text{ is UNSAT},\quad\mathrm{Symbols}(I)\subseteq\mathrm{Symbols}(A)\cap\mathrm{Symbols}(B).
+\tag{6}\end{equation}
+
+% PDF p.26 line 735
+Those are the checks required for an interpolant at the shared boundary. An unsat core identifies
+% PDF p.26 line 736
+relevant asserted clauses but is not automatically an interpolant or a kernel proof. After localization,
+% PDF p.26 line 737
+the supervisor may expand only the implicated context, request a bounded synthesis candidate, or
+% PDF p.26 line 738
+abstain. CEGIS changes candidate programs; CEGAR changes the abstraction. [D2, D5; N13]
+
+\subsection*{L.4 Evidence feeds control, not just a report}
+
+% PDF p.26 line 740
+Each result must be consumed by the actual plan/frontier or admission service: closed implication →
+% PDF p.26 line 741
+reusable component contract; feasible counterexample → repair obligation; missing semantic input
+% PDF p.26 line 742
+→ exact expansion; unavailable solver → deferral/fallback; complete current evidence → candidate
+% PDF p.26 line 743
+acceptance. A sidecar analysis that never affects these decisions cannot be credited with reducing
+% PDF p.26 line 744
+LLM use. Record the consumed result CID and subsequent control transition in the experiment.
+
+
+
+
+% Original PDF page 27
+\section*{M Composed control-loop specification}
+% PDF p.27 line 746
+The following algorithm is retained from the preceding evaluated draft as an intended composition,
+% PDF p.27 line 747
+not a newly executed implementation result. It is a control-flow specification retained for comparison
+% PDF p.27 line 748
+with the final executable artifact.
+
+% PDF p.27 line 749
+Algorithm 1: Intended composed supervision loop. Input: authorized q, current source forest F,
+% PDF p.27 line 750
+policy P, budget B
+
+\noindent 1. reconcile event, task and artifact state; refresh F and derive G, O\par
+\noindent 2. if cancelled or budget exhausted: return explicit non-success\par
+\noindent 3. if every current obligation is admitted: return verify\_goal\_completion()\par
+\noindent 4. generate bounded task proposals; preview and separately admit ready work\par
+\noindent 5. if no task is admissible: return wait\_or\_review(), not goal success\par
+\noindent 6. claim task; bind lease/fence, preimages, required context and validation\par
+\noindent 7. choose deterministic, authorized residual-model, review or unavailable route\par
+\noindent 8. if review/unavailable: record blocked attempt; return to the event service\par
+\noindent 9. produce and apply candidate only through checked isolated execution\par
+\noindent 10. rescan; derive O\_new from authorized rules, not the worker’s pass claim\par
+\noindent 11. verify/reuse evidence; retain failed, unknown and pending obligations\par
+\noindent 12. if refinable failure: record new residual; return bounded retry to service\par
+\noindent 13. if evidence incomplete or unsafe: return defer\_or\_reject()\par
+\noindent 14. persist manifest; recheck current bindings; CAS the expected parent\par
+\noindent 15. if publication conflicts: return reconcile(), not completion\par
+\noindent 16. record accepted task transition and updated F, G, O; reevaluate at line 1\par
+\noindent 17. propose procedure/policy learning separately; never self-promote\par
+
+% PDF p.27 line 768
+This algorithm specifies the composition to evaluate. Passing tests of isolated stop paths does
+% PDF p.27 line 769
+not establish the complete loop; qualification must exercise useful authorized progress as well as
+% PDF p.27 line 770
+rejection.
+
+
+
+
+% Original PDF page 28
+% PDF p.28 line 771
+Paper checklist: completion pending
+% PDF p.28 line 772
+The supplied workshop template includes a separate checklist.tex. That questionnaire was not
+% PDF p.28 line 773
+included in the uploaded template sources. This page is an explicitly marked compilation placeholder,
+% PDF p.28 line 774
+not a reproduction of the organizers’ checklist and not a declaration of compliance.
+% PDF p.28 line 775
+[TODO] Obtain the official questionnaire, replace this file, and complete its answers against the final
+% PDF p.28 line 776
+manuscript and frozen artifact.
+% PDF p.28 line 777
+[TODO] Final experiment results, source snapshots, anonymous artifact access, and author-reviewed
+% PDF p.28 line 778
+LLM-use disclosures remain pending. No checklist answer is inferred from the draft.
+
+
+
+

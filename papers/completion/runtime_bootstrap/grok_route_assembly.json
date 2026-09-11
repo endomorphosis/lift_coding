@@ -1,0 +1,681 @@
+{
+  "schema": "vericodegen-grok-route-assembly-proof/v1",
+  "started_at": "2026-09-11T16:11:28.696092+00:00",
+  "probe_source": "papers/completion/runtime_bootstrap/grok_route_assembly_probe.txt",
+  "probe_sha256": "63067a830d9b25eef157359699f1dbf1f27c27bd65d941d9b6b9f671293f0c80",
+  "tests": {
+    "file": "external/ipfs_accelerate/test/api/test_agent_supervisor_campaign_grok_pin.py",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "test/api/test_agent_supervisor_campaign_grok_pin.py",
+      "-q"
+    ],
+    "cwd": "external/ipfs_accelerate",
+    "observed_result": "3 passed in 1.57s; zero skips",
+    "coverage": [
+      "real installed auth/binary assembly",
+      "missing authentication rejected",
+      "incomplete ordered route rejected"
+    ]
+  },
+  "lanes": {
+    "autoformalization": {
+      "repo": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+      "accelerator_head": "448451025e4583b520fc8c389b9152f9f9d7a969",
+      "returncode": 0,
+      "log": "papers/completion/runtime_bootstrap/grok_route_assembly_autoformalization.log",
+      "log_sha256": "213a298a432a863ba52d021b2c478e604596f58b1b17ef47288b079dbead3462",
+      "result": {
+        "native_daemon_module": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "native_daemon_sha256": "452190f6d01d469030d4053eceeb2043c23820fc7005a20fdeec5dc7e17d775f",
+        "native_runner_module": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+        "native_runner_sha256": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+        "provider_pin": "grok",
+        "real_grok_readiness": true,
+        "assembled_argv": [
+          "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+          "-m",
+          "ipfs_accelerate_py.agent_supervisor.grok_cli_runner",
+          "--workspace",
+          "/tmp/paper-route-proof-mp3ogbfe/worktrees/worker",
+          "--model",
+          "grok-4.6",
+          "--max-turns",
+          "100000",
+          "--mode",
+          "agent",
+          "--codex-fallback-reasoning-effort",
+          "medium",
+          "--codex-fallback-command-json",
+          "[\"/usr/local/bin/codex\",\"exec\",\"--ignore-user-config\",\"--ignore-rules\",\"--ephemeral\",\"-s\",\"workspace-write\",\"-C\",\"/tmp/paper-route-proof-mp3ogbfe/worktrees/worker\",\"-m\",\"gpt-5.6-terra\",\"-c\",\"model_reasoning_effort=\\\"medium\\\"\",\"-\"]",
+          "--canonical-legacy-preflight-route",
+          "--grok-bin",
+          "/home/barberb/.local/bin/grok"
+        ],
+        "lazy_import_checks": [
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.hash_pressure",
+            "line": 55,
+            "symbols": [
+              "hashing_lock"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_command_binding",
+            "line": 58,
+            "symbols": [
+              "ensure_provider_command_bindings",
+              "recover_provider_command_name_error",
+              "scan_source_for_provider_command_names"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_command_environment",
+            "line": 63,
+            "symbols": [
+              "FORMAL_TOOLCHAIN_CONTRACT_SHA256_ENV",
+              "PROVIDER_COMMAND_ENV_DIGEST_ENV",
+              "PROVIDER_COMMAND_ENV_WRAPPER_ENV",
+              "PROVIDER_COMMAND_REQUIRED_COMMANDS_ENV",
+              "ProviderCommandEnvironmentError",
+              "sealed_provider_command_environment"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_failure_policy",
+            "line": 71,
+            "symbols": [
+              "GROK_FAILURE_RECEIPT_PREFIX",
+              "GROK_QUOTA_PROBE_PROMPT",
+              "GROK_QUOTA_PROBE_TIMEOUT_SECONDS",
+              "GROK_ROUTE_OUTCOME_PREFIX",
+              "MAX_GROK_FAILURE_EVIDENCE_BYTES",
+              "build_grok_failure_receipt",
+              "build_grok_route_outcome",
+              "render_grok_failure_receipt",
+              "render_grok_route_outcome",
+              "valid_grok_failure_receipt"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.validation.validation_runtime",
+            "line": 83,
+            "symbols": [
+              "ValidationRuntimeError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 86,
+            "symbols": [
+              "AGENT_IMPLEMENTATION_CODEX_IMAGE_ID",
+              "AGENT_IMPLEMENTATION_CODEX_IMAGE_LABEL",
+              "AGENT_IMPLEMENTATION_ROUTE_OUTCOME_PREFIX",
+              "AGENT_IMPLEMENTATION_QUOTA_VERIFIER_DISALLOWED_TOOLS"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4196,
+            "symbols": [
+              "parse_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4220,
+            "symbols": [
+              "build_grok_cli_command",
+              "build_grok_cli_env"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4335,
+            "symbols": [
+              "build_grok_cli_command",
+              "build_grok_cli_env"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4425,
+            "symbols": [
+              "retryable_agent_implementation_preflight_failure"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.control.provider_attempt_store",
+            "line": 4640,
+            "symbols": [
+              "DurableProviderAttemptCAS",
+              "ProviderAttemptStoreError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4644,
+            "symbols": [
+              "build_agent_implementation_route_outcome",
+              "parse_agent_implementation_effect_authorization_context",
+              "render_agent_implementation_route_outcome",
+              "valid_agent_implementation_route_outcome",
+              "verify_agent_implementation_sealed_control_plane"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.control.provider_attempt_store",
+            "line": 4855,
+            "symbols": [
+              "DurableProviderAttemptCAS",
+              "ProviderAttemptReservation",
+              "ProviderAttemptStoreError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4860,
+            "symbols": [
+              "LLMRouterError",
+              "build_agent_implementation_effect_authorization_context",
+              "build_agent_implementation_route_outcome",
+              "build_grok_cli_command",
+              "build_grok_cli_env",
+              "create_legacy_agent_implementation_route_invocation",
+              "decide_agent_implementation_fallback",
+              "find_grok_cli",
+              "parse_agent_implementation_effect_authorization_context",
+              "render_agent_implementation_route_outcome",
+              "resolve_agent_implementation_route",
+              "resolve_agent_implementation_route_binding",
+              "valid_agent_implementation_route_outcome",
+              "verify_agent_implementation_sealed_control_plane"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 983,
+            "symbols": [
+              "_grok_cli_command"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4119,
+            "symbols": [
+              "validate_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4290,
+            "symbols": [
+              "validate_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          }
+        ],
+        "provider_dispatched": false,
+        "live_state_mutated": false,
+        "temporary_state_only": true,
+        "selection_or_auth_mocked": false
+      }
+    },
+    "law_to_action": {
+      "repo": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+      "accelerator_head": "1e2f6779587478158917e9ee3e4921eb584a20c0",
+      "returncode": 0,
+      "log": "papers/completion/runtime_bootstrap/grok_route_assembly_law_to_action.log",
+      "log_sha256": "6561404320e7d87ac054a063ea1db9880dce0b0ccc77f617ea0f1512e79c4abf",
+      "result": {
+        "native_daemon_module": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "native_daemon_sha256": "452190f6d01d469030d4053eceeb2043c23820fc7005a20fdeec5dc7e17d775f",
+        "native_runner_module": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+        "native_runner_sha256": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+        "provider_pin": "grok",
+        "real_grok_readiness": true,
+        "assembled_argv": [
+          "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+          "-m",
+          "ipfs_accelerate_py.agent_supervisor.grok_cli_runner",
+          "--workspace",
+          "/tmp/paper-route-proof-1d0gg7s4/worktrees/worker",
+          "--model",
+          "grok-4.6",
+          "--max-turns",
+          "100000",
+          "--mode",
+          "agent",
+          "--codex-fallback-reasoning-effort",
+          "medium",
+          "--codex-fallback-command-json",
+          "[\"/usr/local/bin/codex\",\"exec\",\"--ignore-user-config\",\"--ignore-rules\",\"--ephemeral\",\"-s\",\"workspace-write\",\"-C\",\"/tmp/paper-route-proof-1d0gg7s4/worktrees/worker\",\"-m\",\"gpt-5.6-terra\",\"-c\",\"model_reasoning_effort=\\\"medium\\\"\",\"-\"]",
+          "--canonical-legacy-preflight-route",
+          "--grok-bin",
+          "/home/barberb/.local/bin/grok"
+        ],
+        "lazy_import_checks": [
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.hash_pressure",
+            "line": 55,
+            "symbols": [
+              "hashing_lock"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_command_binding",
+            "line": 58,
+            "symbols": [
+              "ensure_provider_command_bindings",
+              "recover_provider_command_name_error",
+              "scan_source_for_provider_command_names"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_command_environment",
+            "line": 63,
+            "symbols": [
+              "FORMAL_TOOLCHAIN_CONTRACT_SHA256_ENV",
+              "PROVIDER_COMMAND_ENV_DIGEST_ENV",
+              "PROVIDER_COMMAND_ENV_WRAPPER_ENV",
+              "PROVIDER_COMMAND_REQUIRED_COMMANDS_ENV",
+              "ProviderCommandEnvironmentError",
+              "sealed_provider_command_environment"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_failure_policy",
+            "line": 71,
+            "symbols": [
+              "GROK_FAILURE_RECEIPT_PREFIX",
+              "GROK_QUOTA_PROBE_PROMPT",
+              "GROK_QUOTA_PROBE_TIMEOUT_SECONDS",
+              "GROK_ROUTE_OUTCOME_PREFIX",
+              "MAX_GROK_FAILURE_EVIDENCE_BYTES",
+              "build_grok_failure_receipt",
+              "build_grok_route_outcome",
+              "render_grok_failure_receipt",
+              "render_grok_route_outcome",
+              "valid_grok_failure_receipt"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.validation.validation_runtime",
+            "line": 83,
+            "symbols": [
+              "ValidationRuntimeError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 86,
+            "symbols": [
+              "AGENT_IMPLEMENTATION_CODEX_IMAGE_ID",
+              "AGENT_IMPLEMENTATION_CODEX_IMAGE_LABEL",
+              "AGENT_IMPLEMENTATION_ROUTE_OUTCOME_PREFIX",
+              "AGENT_IMPLEMENTATION_QUOTA_VERIFIER_DISALLOWED_TOOLS"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4196,
+            "symbols": [
+              "parse_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4220,
+            "symbols": [
+              "build_grok_cli_command",
+              "build_grok_cli_env"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4335,
+            "symbols": [
+              "build_grok_cli_command",
+              "build_grok_cli_env"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4425,
+            "symbols": [
+              "retryable_agent_implementation_preflight_failure"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.control.provider_attempt_store",
+            "line": 4640,
+            "symbols": [
+              "DurableProviderAttemptCAS",
+              "ProviderAttemptStoreError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4644,
+            "symbols": [
+              "build_agent_implementation_route_outcome",
+              "parse_agent_implementation_effect_authorization_context",
+              "render_agent_implementation_route_outcome",
+              "valid_agent_implementation_route_outcome",
+              "verify_agent_implementation_sealed_control_plane"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.control.provider_attempt_store",
+            "line": 4855,
+            "symbols": [
+              "DurableProviderAttemptCAS",
+              "ProviderAttemptReservation",
+              "ProviderAttemptStoreError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4860,
+            "symbols": [
+              "LLMRouterError",
+              "build_agent_implementation_effect_authorization_context",
+              "build_agent_implementation_route_outcome",
+              "build_grok_cli_command",
+              "build_grok_cli_env",
+              "create_legacy_agent_implementation_route_invocation",
+              "decide_agent_implementation_fallback",
+              "find_grok_cli",
+              "parse_agent_implementation_effect_authorization_context",
+              "render_agent_implementation_route_outcome",
+              "resolve_agent_implementation_route",
+              "resolve_agent_implementation_route_binding",
+              "valid_agent_implementation_route_outcome",
+              "verify_agent_implementation_sealed_control_plane"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 983,
+            "symbols": [
+              "_grok_cli_command"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4119,
+            "symbols": [
+              "validate_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4290,
+            "symbols": [
+              "validate_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          }
+        ],
+        "provider_dispatched": false,
+        "live_state_mutated": false,
+        "temporary_state_only": true,
+        "selection_or_auth_mocked": false
+      }
+    },
+    "neurosymbolic_supervision": {
+      "repo": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+      "accelerator_head": "085f341a39ff239764504892b92e4b79c903a842",
+      "returncode": 0,
+      "log": "papers/completion/runtime_bootstrap/grok_route_assembly_neurosymbolic_supervision.log",
+      "log_sha256": "6d4875d30e373777ddca8bd6305f913fc85c59189c2797c7490eccdb767d89c7",
+      "result": {
+        "native_daemon_module": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "native_daemon_sha256": "452190f6d01d469030d4053eceeb2043c23820fc7005a20fdeec5dc7e17d775f",
+        "native_runner_module": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+        "native_runner_sha256": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+        "provider_pin": "grok",
+        "real_grok_readiness": true,
+        "assembled_argv": [
+          "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+          "-m",
+          "ipfs_accelerate_py.agent_supervisor.grok_cli_runner",
+          "--workspace",
+          "/tmp/paper-route-proof-he7z_q9c/worktrees/worker",
+          "--model",
+          "grok-4.6",
+          "--max-turns",
+          "100000",
+          "--mode",
+          "agent",
+          "--codex-fallback-reasoning-effort",
+          "medium",
+          "--codex-fallback-command-json",
+          "[\"/usr/local/bin/codex\",\"exec\",\"--ignore-user-config\",\"--ignore-rules\",\"--ephemeral\",\"-s\",\"workspace-write\",\"-C\",\"/tmp/paper-route-proof-he7z_q9c/worktrees/worker\",\"-m\",\"gpt-5.6-terra\",\"-c\",\"model_reasoning_effort=\\\"medium\\\"\",\"-\"]",
+          "--canonical-legacy-preflight-route",
+          "--grok-bin",
+          "/home/barberb/.local/bin/grok"
+        ],
+        "lazy_import_checks": [
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.hash_pressure",
+            "line": 55,
+            "symbols": [
+              "hashing_lock"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_command_binding",
+            "line": 58,
+            "symbols": [
+              "ensure_provider_command_bindings",
+              "recover_provider_command_name_error",
+              "scan_source_for_provider_command_names"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_command_environment",
+            "line": 63,
+            "symbols": [
+              "FORMAL_TOOLCHAIN_CONTRACT_SHA256_ENV",
+              "PROVIDER_COMMAND_ENV_DIGEST_ENV",
+              "PROVIDER_COMMAND_ENV_WRAPPER_ENV",
+              "PROVIDER_COMMAND_REQUIRED_COMMANDS_ENV",
+              "ProviderCommandEnvironmentError",
+              "sealed_provider_command_environment"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.runtime.provider_failure_policy",
+            "line": 71,
+            "symbols": [
+              "GROK_FAILURE_RECEIPT_PREFIX",
+              "GROK_QUOTA_PROBE_PROMPT",
+              "GROK_QUOTA_PROBE_TIMEOUT_SECONDS",
+              "GROK_ROUTE_OUTCOME_PREFIX",
+              "MAX_GROK_FAILURE_EVIDENCE_BYTES",
+              "build_grok_failure_receipt",
+              "build_grok_route_outcome",
+              "render_grok_failure_receipt",
+              "render_grok_route_outcome",
+              "valid_grok_failure_receipt"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.validation.validation_runtime",
+            "line": 83,
+            "symbols": [
+              "ValidationRuntimeError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 86,
+            "symbols": [
+              "AGENT_IMPLEMENTATION_CODEX_IMAGE_ID",
+              "AGENT_IMPLEMENTATION_CODEX_IMAGE_LABEL",
+              "AGENT_IMPLEMENTATION_ROUTE_OUTCOME_PREFIX",
+              "AGENT_IMPLEMENTATION_QUOTA_VERIFIER_DISALLOWED_TOOLS"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4196,
+            "symbols": [
+              "parse_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4220,
+            "symbols": [
+              "build_grok_cli_command",
+              "build_grok_cli_env"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4335,
+            "symbols": [
+              "build_grok_cli_command",
+              "build_grok_cli_env"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4425,
+            "symbols": [
+              "retryable_agent_implementation_preflight_failure"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.control.provider_attempt_store",
+            "line": 4640,
+            "symbols": [
+              "DurableProviderAttemptCAS",
+              "ProviderAttemptStoreError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4644,
+            "symbols": [
+              "build_agent_implementation_route_outcome",
+              "parse_agent_implementation_effect_authorization_context",
+              "render_agent_implementation_route_outcome",
+              "valid_agent_implementation_route_outcome",
+              "verify_agent_implementation_sealed_control_plane"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.agent_supervisor.control.provider_attempt_store",
+            "line": 4855,
+            "symbols": [
+              "DurableProviderAttemptCAS",
+              "ProviderAttemptReservation",
+              "ProviderAttemptStoreError"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4860,
+            "symbols": [
+              "LLMRouterError",
+              "build_agent_implementation_effect_authorization_context",
+              "build_agent_implementation_route_outcome",
+              "build_grok_cli_command",
+              "build_grok_cli_env",
+              "create_legacy_agent_implementation_route_invocation",
+              "decide_agent_implementation_fallback",
+              "find_grok_cli",
+              "parse_agent_implementation_effect_authorization_context",
+              "render_agent_implementation_route_outcome",
+              "resolve_agent_implementation_route",
+              "resolve_agent_implementation_route_binding",
+              "valid_agent_implementation_route_outcome",
+              "verify_agent_implementation_sealed_control_plane"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 983,
+            "symbols": [
+              "_grok_cli_command"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4119,
+            "symbols": [
+              "validate_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          },
+          {
+            "module": "ipfs_accelerate_py.llm_router",
+            "line": 4290,
+            "symbols": [
+              "validate_agent_implementation_quota_evidence"
+            ],
+            "missing": []
+          }
+        ],
+        "provider_dispatched": false,
+        "live_state_mutated": false,
+        "temporary_state_only": true,
+        "selection_or_auth_mocked": false
+      }
+    }
+  },
+  "scope": "Readiness, import closure and command assembly only; no provider or model invocation.",
+  "completed_at": "2026-09-11T16:11:39.715591+00:00"
+}

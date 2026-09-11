@@ -122,7 +122,11 @@ def environment(repo):
             env.pop(key)
     env.update(PYTHONPATH=os.pathsep.join(str(repo / p) for p in SUBMODULES),
                IPFS_ACCEL_SKIP_CORE="1", IPFS_AUTO_INSTALL="false",
-               IPFS_DATASETS_AUTO_INSTALL="false", PYTHONUNBUFFERED="1")
+               IPFS_DATASETS_AUTO_INSTALL="false", PYTHONUNBUFFERED="1",
+               # This native revision's auto selector imports an unavailable
+               # router API. The supported explicit Grok route retains its
+               # real authentication check and sealed runner fallback policy.
+               IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER="grok")
     return env
 
 

@@ -1,0 +1,320 @@
+{
+  "schema": "paper-exact-dead-owner-lifecycle-retirement/v1",
+  "started_at": "2026-09-11T15:59:58.158803+00:00",
+  "native_api": "WorktreeLifecycleStore.finalize_exact_dead_owner",
+  "lanes": {
+    "autoformalization": {
+      "before": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "record_id": "baguqeera7wi2i3cgnckqpbly4ltm2ieqhecsy3zyql2kse3obraezvi2mb6q",
+        "task_id": "AF-001",
+        "canonical_task_cid": "baguqeeradfafji3dt2orxgbgoyqtoklhdj6hmhy23uagpjs3yexuf3qx5x4a",
+        "attempt": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/aa3c34e3422526e97bca5571:0/1:1398721",
+        "state": "preparing",
+        "owner": {
+          "pid": 1398721,
+          "start_time_ticks": 55050334,
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 1386026
+        },
+        "lease_id": "0a18c4f57a900fbcfcd81af264569714e229e533",
+        "fence": 1,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-001-194054a3639e-attempt-1-1789141146",
+        "branch": "implementation/af-001-194054a3639e-attempt-1-1789141146",
+        "merge_target": "agent/vericodegen-2026-autoformalization",
+        "created_at": 1789141146.5147924,
+        "updated_at": 1789141146.5147924,
+        "expires_at": 1789162746.5147924,
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/aa3c34e3422526e97bca5571",
+        "terminal_reason": ""
+      },
+      "workspace_absent": true,
+      "record_backups": [
+        {
+          "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/ws-dd49e3c58007f1439fb41f9d.json",
+          "sha256": "b6e4fedffb8286487396a6694d804a5e9eccf54b9bb7006a65404c7d760ac9f6",
+          "payload": {
+            "attempt": 1,
+            "branch": "implementation/af-001-194054a3639e-attempt-1-1789141146",
+            "canonical_task_cid": "baguqeeradfafji3dt2orxgbgoyqtoklhdj6hmhy23uagpjs3yexuf3qx5x4a",
+            "created_at": 1789141146.5147924,
+            "expires_at": 1789162746.5147924,
+            "fence": 1,
+            "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/aa3c34e3422526e97bca5571:0/1:1398721",
+            "lease_id": "0a18c4f57a900fbcfcd81af264569714e229e533",
+            "merge_target": "agent/vericodegen-2026-autoformalization",
+            "owner": {
+              "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+              "parent_pid": 1386026,
+              "pid": 1398721,
+              "start_time_ticks": 55050334
+            },
+            "record_id": "baguqeera7wi2i3cgnckqpbly4ltm2ieqhecsy3zyql2kse3obraezvi2mb6q",
+            "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+            "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+            "state": "preparing",
+            "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/aa3c34e3422526e97bca5571",
+            "task_id": "AF-001",
+            "terminal_reason": "",
+            "updated_at": 1789141146.5147924,
+            "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-001-194054a3639e-attempt-1-1789141146"
+          }
+        },
+        {
+          "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/task-baguqeeradfafji3dt2orxgbgoyqtoklhdj6hmhy23uagpjs-a9be8e33c83eca55acf2e64a-a1.json",
+          "sha256": "76ff7e7846b156cb93d170e3a2e220634e131ae31b32ff25fd0b42392dac1db0",
+          "payload": {
+            "attempt": 1,
+            "canonical_task_cid": "baguqeeradfafji3dt2orxgbgoyqtoklhdj6hmhy23uagpjs3yexuf3qx5x4a",
+            "fence": 1,
+            "lease_id": "0a18c4f57a900fbcfcd81af264569714e229e533",
+            "record_id": "baguqeera7wi2i3cgnckqpbly4ltm2ieqhecsy3zyql2kse3obraezvi2mb6q",
+            "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+            "state": "preparing",
+            "task_id": "AF-001",
+            "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-001-194054a3639e-attempt-1-1789141146"
+          }
+        }
+      ],
+      "terminal": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "record_id": "baguqeera7wi2i3cgnckqpbly4ltm2ieqhecsy3zyql2kse3obraezvi2mb6q",
+        "task_id": "AF-001",
+        "canonical_task_cid": "baguqeeradfafji3dt2orxgbgoyqtoklhdj6hmhy23uagpjs3yexuf3qx5x4a",
+        "attempt": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/aa3c34e3422526e97bca5571:0/1:1398721",
+        "state": "terminal",
+        "owner": {
+          "pid": 1398721,
+          "start_time_ticks": 55050334,
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 1386026
+        },
+        "lease_id": "0a18c4f57a900fbcfcd81af264569714e229e533",
+        "fence": 2,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-001-194054a3639e-attempt-1-1789141146",
+        "branch": "implementation/af-001-194054a3639e-attempt-1-1789141146",
+        "merge_target": "agent/vericodegen-2026-autoformalization",
+        "created_at": 1789141146.5147924,
+        "updated_at": 1789142398.1818788,
+        "expires_at": 1789142398.1818788,
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/aa3c34e3422526e97bca5571",
+        "terminal_reason": "audited_second_launch_stopped_before_provider_with_absent_workspace"
+      },
+      "retired_at": "2026-09-11T15:59:58.191392+00:00"
+    },
+    "law_to_action": {
+      "before": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "record_id": "baguqeerat2egz6mpn3enryei6hietpybfm2fhrx5q25b2ggcnodwgahhrwxq",
+        "task_id": "LA-001",
+        "canonical_task_cid": "baguqeerawkd6qm5fra4qd4kjnpsz5lxzzaipuwln4uhe4vaqqnurkowreycq",
+        "attempt": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/5f7b81e0e2610f5cdb0446a4:0/1:1398279",
+        "state": "preparing",
+        "owner": {
+          "pid": 1398279,
+          "start_time_ticks": 55050315,
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 1386027
+        },
+        "lease_id": "5e7afd980ef4a5329170d33f3529e12395fe2c21",
+        "fence": 1,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-001-b287e833a588-attempt-1-1789141146",
+        "branch": "implementation/la-001-b287e833a588-attempt-1-1789141146",
+        "merge_target": "agent/vericodegen-2026-law_to_action",
+        "created_at": 1789141146.2252405,
+        "updated_at": 1789141146.2252405,
+        "expires_at": 1789162746.2252405,
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/5f7b81e0e2610f5cdb0446a4",
+        "terminal_reason": ""
+      },
+      "workspace_absent": true,
+      "record_backups": [
+        {
+          "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/ws-2249086cf4db161a0a1ac765.json",
+          "sha256": "cb984a85a5e002b365caff8ba83220422c6b25e77211b33387e95dcc7f7294aa",
+          "payload": {
+            "attempt": 1,
+            "branch": "implementation/la-001-b287e833a588-attempt-1-1789141146",
+            "canonical_task_cid": "baguqeerawkd6qm5fra4qd4kjnpsz5lxzzaipuwln4uhe4vaqqnurkowreycq",
+            "created_at": 1789141146.2252405,
+            "expires_at": 1789162746.2252405,
+            "fence": 1,
+            "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/5f7b81e0e2610f5cdb0446a4:0/1:1398279",
+            "lease_id": "5e7afd980ef4a5329170d33f3529e12395fe2c21",
+            "merge_target": "agent/vericodegen-2026-law_to_action",
+            "owner": {
+              "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+              "parent_pid": 1386027,
+              "pid": 1398279,
+              "start_time_ticks": 55050315
+            },
+            "record_id": "baguqeerat2egz6mpn3enryei6hietpybfm2fhrx5q25b2ggcnodwgahhrwxq",
+            "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+            "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+            "state": "preparing",
+            "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/5f7b81e0e2610f5cdb0446a4",
+            "task_id": "LA-001",
+            "terminal_reason": "",
+            "updated_at": 1789141146.2252405,
+            "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-001-b287e833a588-attempt-1-1789141146"
+          }
+        },
+        {
+          "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/task-baguqeerawkd6qm5fra4qd4kjnpsz5lxzzaipuwln4uhe4va-2c5f35b9afb6287d15d27cd1-a1.json",
+          "sha256": "a68bbb3e82f5653439c232fc1515a056808a9d0f67246b2761da5b17de2bce9c",
+          "payload": {
+            "attempt": 1,
+            "canonical_task_cid": "baguqeerawkd6qm5fra4qd4kjnpsz5lxzzaipuwln4uhe4vaqqnurkowreycq",
+            "fence": 1,
+            "lease_id": "5e7afd980ef4a5329170d33f3529e12395fe2c21",
+            "record_id": "baguqeerat2egz6mpn3enryei6hietpybfm2fhrx5q25b2ggcnodwgahhrwxq",
+            "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+            "state": "preparing",
+            "task_id": "LA-001",
+            "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-001-b287e833a588-attempt-1-1789141146"
+          }
+        }
+      ],
+      "terminal": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "record_id": "baguqeerat2egz6mpn3enryei6hietpybfm2fhrx5q25b2ggcnodwgahhrwxq",
+        "task_id": "LA-001",
+        "canonical_task_cid": "baguqeerawkd6qm5fra4qd4kjnpsz5lxzzaipuwln4uhe4vaqqnurkowreycq",
+        "attempt": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/5f7b81e0e2610f5cdb0446a4:0/1:1398279",
+        "state": "terminal",
+        "owner": {
+          "pid": 1398279,
+          "start_time_ticks": 55050315,
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 1386027
+        },
+        "lease_id": "5e7afd980ef4a5329170d33f3529e12395fe2c21",
+        "fence": 2,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-001-b287e833a588-attempt-1-1789141146",
+        "branch": "implementation/la-001-b287e833a588-attempt-1-1789141146",
+        "merge_target": "agent/vericodegen-2026-law_to_action",
+        "created_at": 1789141146.2252405,
+        "updated_at": 1789142398.1923485,
+        "expires_at": 1789142398.1923485,
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/5f7b81e0e2610f5cdb0446a4",
+        "terminal_reason": "audited_second_launch_stopped_before_provider_with_absent_workspace"
+      },
+      "retired_at": "2026-09-11T15:59:58.199392+00:00"
+    },
+    "neurosymbolic_supervision": {
+      "before": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "record_id": "baguqeerau3ioa5wrpissedl4remstetrfeu64bj3s7lgcx6me2fleu35nc3q",
+        "task_id": "NS-001",
+        "canonical_task_cid": "baguqeeraebr7yai7ypo7iptvssv2arwnmtl6yvbqb3cfql3uot3cyaerpgeq",
+        "attempt": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/fb762235622c7cd3a7e54c68:0/1:1398668",
+        "state": "preparing",
+        "owner": {
+          "pid": 1398668,
+          "start_time_ticks": 55050331,
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 1386047
+        },
+        "lease_id": "2bd456b74017c73372bacdab81898cee9225a3fc",
+        "fence": 1,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-001-2063fc011fc3-attempt-1-1789141146",
+        "branch": "implementation/ns-001-2063fc011fc3-attempt-1-1789141146",
+        "merge_target": "agent/vericodegen-2026-neurosymbolic_supervision",
+        "created_at": 1789141146.1304014,
+        "updated_at": 1789141146.1304014,
+        "expires_at": 1789162746.1304014,
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/fb762235622c7cd3a7e54c68",
+        "terminal_reason": ""
+      },
+      "workspace_absent": true,
+      "record_backups": [
+        {
+          "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/ws-cad2d4268ff842dd6d2c80f5.json",
+          "sha256": "c3cbbf8c0fe15bcc4bd0171b8dd81a98f7f10c1cfa100e02df218623621ee688",
+          "payload": {
+            "attempt": 1,
+            "branch": "implementation/ns-001-2063fc011fc3-attempt-1-1789141146",
+            "canonical_task_cid": "baguqeeraebr7yai7ypo7iptvssv2arwnmtl6yvbqb3cfql3uot3cyaerpgeq",
+            "created_at": 1789141146.1304014,
+            "expires_at": 1789162746.1304014,
+            "fence": 1,
+            "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/fb762235622c7cd3a7e54c68:0/1:1398668",
+            "lease_id": "2bd456b74017c73372bacdab81898cee9225a3fc",
+            "merge_target": "agent/vericodegen-2026-neurosymbolic_supervision",
+            "owner": {
+              "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+              "parent_pid": 1386047,
+              "pid": 1398668,
+              "start_time_ticks": 55050331
+            },
+            "record_id": "baguqeerau3ioa5wrpissedl4remstetrfeu64bj3s7lgcx6me2fleu35nc3q",
+            "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+            "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+            "state": "preparing",
+            "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/fb762235622c7cd3a7e54c68",
+            "task_id": "NS-001",
+            "terminal_reason": "",
+            "updated_at": 1789141146.1304014,
+            "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-001-2063fc011fc3-attempt-1-1789141146"
+          }
+        },
+        {
+          "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/task-baguqeeraebr7yai7ypo7iptvssv2arwnmtl6yvbqb3cfql3-800faf136186cfa406000f06-a1.json",
+          "sha256": "4dc88e1da0ef669f308e21060eb05d71aa8aaf3f45f692ee863a055eb8fabe63",
+          "payload": {
+            "attempt": 1,
+            "canonical_task_cid": "baguqeeraebr7yai7ypo7iptvssv2arwnmtl6yvbqb3cfql3uot3cyaerpgeq",
+            "fence": 1,
+            "lease_id": "2bd456b74017c73372bacdab81898cee9225a3fc",
+            "record_id": "baguqeerau3ioa5wrpissedl4remstetrfeu64bj3s7lgcx6me2fleu35nc3q",
+            "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+            "state": "preparing",
+            "task_id": "NS-001",
+            "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-001-2063fc011fc3-attempt-1-1789141146"
+          }
+        }
+      ],
+      "terminal": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "record_id": "baguqeerau3ioa5wrpissedl4remstetrfeu64bj3s7lgcx6me2fleu35nc3q",
+        "task_id": "NS-001",
+        "canonical_task_cid": "baguqeeraebr7yai7ypo7iptvssv2arwnmtl6yvbqb3cfql3uot3cyaerpgeq",
+        "attempt": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/fb762235622c7cd3a7e54c68:0/1:1398668",
+        "state": "terminal",
+        "owner": {
+          "pid": 1398668,
+          "start_time_ticks": 55050331,
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 1386047
+        },
+        "lease_id": "2bd456b74017c73372bacdab81898cee9225a3fc",
+        "fence": 2,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-001-2063fc011fc3-attempt-1-1789141146",
+        "branch": "implementation/ns-001-2063fc011fc3-attempt-1-1789141146",
+        "merge_target": "agent/vericodegen-2026-neurosymbolic_supervision",
+        "created_at": 1789141146.1304014,
+        "updated_at": 1789142398.200368,
+        "expires_at": 1789142398.200368,
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/fb762235622c7cd3a7e54c68",
+        "terminal_reason": "audited_second_launch_stopped_before_provider_with_absent_workspace"
+      },
+      "retired_at": "2026-09-11T15:59:58.207092+00:00"
+    }
+  },
+  "task_database_mutated": false,
+  "provider_invoked": false,
+  "success": true,
+  "finished_at": "2026-09-11T15:59:58.207586+00:00"
+}

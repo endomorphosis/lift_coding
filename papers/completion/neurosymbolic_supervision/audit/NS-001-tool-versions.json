@@ -1,0 +1,34 @@
+{
+  "latexmk": {
+    "argv": [
+      "/home/barberb/.local/bin/vericodegen-latexmk",
+      "-v"
+    ],
+    "exit_code": 0,
+    "output": "Latexmk, John Collins, 9 March 2026. Version 4.88"
+  },
+  "pdflatex": {
+    "argv": [
+      "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex",
+      "--version"
+    ],
+    "exit_code": 0,
+    "output": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)\nkpathsea version 6.4.2\nCopyright 2026 Han The Thanh (pdfTeX) et al.\nThere is NO warranty.  Redistribution of this software is\ncovered by the terms of both the pdfTeX copyright and\nthe Lesser GNU General Public License.\nFor more information about these matters, see the file\nnamed COPYING and the pdfTeX source.\nPrimary author of pdfTeX: Han The Thanh (pdfTeX) et al.\nCompiled with libpng 1.6.55; using libpng 1.6.55\nCompiled with zlib 1.3.2; using zlib 1.3.2\nCompiled with xpdf version 4.06"
+  },
+  "pdftotext": {
+    "argv": [
+      "pdftotext",
+      "-v"
+    ],
+    "exit_code": 0,
+    "output": "pdftotext version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+  },
+  "python": {
+    "argv": [
+      "python3",
+      "--version"
+    ],
+    "exit_code": 0,
+    "output": "Python 3.12.3"
+  }
+}

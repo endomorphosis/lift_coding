@@ -1,0 +1,59 @@
+628   This provides an engineered output language in which a model may rank candidates. It prevents
+629   impossible JSON shapes or invalid family/type combinations from receiving metric credit. It does
+630   not guarantee correct grounding, truth, faithful negation or exception scope. A fallback involving an
+631   admitted reference or gold artifact is not an independent blind prediction and must be excluded or
+632   reported separately in that evaluation condition.
+
+633   K.2    Feature export is not source copying
+
+634   The stable learned export restricts outputs to reusable feature groups such as compiler contracts,
+635   cycle consistency, decompiler surface templates, logic-view contracts, repair lanes and semantic
+636   slots. The inspected promotion code explicitly rejects raw-source, source-span, sample-memory, and
+637   token-copying markers. It resolves the export against registered contracts and checks fixed-sample
+638   paired metrics. Missing guardrail evidence, source-copy regression, symbolic-validity regression or
+639   an unfixed sample set blocks guidance emission.
+640   The product is a content-addressed guidance record: target contract and family, bounded features,
+641   repair suggestions, canary evidence, source-export identity and rollback metadata. Admission of
+642   this record is not itself a proof that a specific consumer enabled it. For an end-to-end claim, record
+643   the loaded guidance identity and show that the actual compiler or supervisor consumed it under the
+644   evaluated configuration. A branch containing training code and a canonical compiler configured with
+645   learning disabled are not one measured learned pipeline.
+
+646   K.3    Program synthesis changes the algorithm, not just the weights
+
+647   Introspection compares predicted and target families/views, decoded and target embeddings, semantic-
+648   slot diagnostics, source reconstruction, and feature-group ablations. The TODO mechanism distin-
+649   guishes learned-parameter actions from deterministic program-synthesis actions. For example, loss
+650   caused by poor shared family ranking can lead to a parameter update; loss caused by an unhandled
+651   exception pattern can lead to a parser/realizer patch proposal. Such a patch must be checked against
+652   preserved source facets and regression cases before its behavior becomes canonical.
+653   The local modal TODO supervisor and the broader external agent supervisor are not assumed identical.
+654   The paper’s artifact must identify the actual entry point, generated task/proposal, implementation
+655   executor, validation record, and activation path used in the experiment. No new autonomous execution
+656   is launched by this manuscript.
+
+657   L     Using IRs together: a concrete explanatory trace
+658   Consider the synthetic sentence: “A permit holder must file a notice within ten days after approval,
+659   unless exempt.” A bounded canonical rule may preserve modality O, actor permit holder, action
+660   file, object notice, an approval condition, an exemption, and a ten-day temporal qualifier. This is an
+661   explanatory example, not a newly run parser result.
+
+                    Table 9: Complementary views and what must be joined before a proof.
+
+      View                     Contribution                             Required bridge/evidence
+      Deontic                  An obligation with condition and ex-     Reviewed normative profile; ex-
+                               ception scope.                           emption precedence.
+      Frame/F-logic            Holder, permit, notice, and approval     Grounded identity and role map-
+                               roles and relations.                     ping, not string equality.
+      Temporal/TDFOL           Approval        anchor,     permitted    Correct interval and time seman-
+                               clock/unit interpretation,      dead-    tics; no modal erasure.
+                               line relation.
+      Event calculus           Approval and filing events; resulting    Admitted event identity, times-
+                               fluent transitions.                      tamp and transition axioms.
+      Graph projection         Retrieval, links, dependency and         Graph edge is evidence or struc-
+                               provenance traversal.                    ture, not automatically a theorem.
+      Prover encoding          A stated compliance query under ex-      Valid translation and indepen-
+                               plicit premises and theory.              dently checked result.
+
+                                                       20
+

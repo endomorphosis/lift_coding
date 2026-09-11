@@ -1,0 +1,61 @@
+583   For a categorical family or view target, normalize the nonnegative target row and apply
+                                              1 XX
+                                   LCE = −              qij log softmax(ℓi )j ,                           (13)
+                                              n       j
+                                                 i∈M
+
+584   where M selects available target rows. The denominator in the inspected path is the total sample count,
+585   not necessarily the count of active rows. The cosine term is evaluated on nonzero target/prediction
+586   norms. The broad norm-ratio guard is zero within its safe region and penalizes extreme ratios. L2
+587   regularization is normalized by the number of parameters. Not every term is active for every selected
+588   head.
+589   Microbatches contribute their globally normalized losses before gradients are accumulated. The
+590   implementation calls backward, rejects nonfinite packed loss metrics, computes and clips the gradient
+591   norm, and performs
+                                          Θ ← Θ − η Clip(∇Θ L),                                        (14)
+592   with a bounded step. The inspected code directly adds the scaled negative gradient; it does not
+593   implement Adam moments. Changed parameter rows are scattered back into the canonical transaction-
+594   aware maps. Device residency is an execution optimization, not a different symbolic semantics. Some
+595   configured groups may have no active parameters; a reported forward-only no-op must not be counted
+596   as learning progress.
+
+597   J.2   The outer model-selection step
+
+598   The generalizable trainer evaluates family, reconstructed-embedding, global-view, detailed-view,
+599   and combined update candidates. It tries learning-rate multipliers, may select hard examples, can
+600   cap target construction and pre-screen candidates, and compares candidate objective changes with
+601   per-metric regression limits. It temporarily applies candidate state, evaluates, and rolls it back before
+602   deciding which candidate to commit. The evaluated objective also includes view/structural losses,
+603   which need not be differentiable tensors.
+604   This is an inner numerical update surrounded by guarded discrete selection. Calling every stage
+605   backpropagation would be wrong. Equally, describing the tensor path as only heuristic tweaking
+606   would miss its actual backward and parameter-update operations. If validation samples are absent,
+607   evaluation falls back to training examples; that case must not be labeled held-out validation. A
+608   nonzero deadband changes the acceptance policy and must be disclosed, not buried as a numerical
+609   implementation detail.
+
+610   J.3   Proof-feedback heads and objective isolation
+
+611   The categorical heads are obligation family, trusted outcome, and reconstruction success. The
+612   multilabel heads are semantic slots, premise family, proof-route availability, and minimal failing
+613   contract. The default vocabulary and family-context sizes are bounded. A head can abstain when its
+614   confidence or available labels are inadequate.
+615   Training accepts only records passing trust, partition, and compiler/toolchain version checks. Dupli-
+616   cate IDs are not trained repeatedly. The first admissible version may pin previously empty proof-head
+617   state; mismatches are excluded. The implementation compares protected objective fingerprints and
+618   reports a proof-loss weight of zero in the primary representation objective. This is a useful causal
+619   design: proof feedback can teach prediction and route selection without being permitted to rewrite
+620   the statement solely to maximize provability. Actual downstream benefit still needs an ablation.
+
+621   K     Constrained decoding and learned-to-symbolic promotion
+622   K.1   Grammar controls the candidate language
+
+623   The decoder implementation declares typed productions and a frozen vocabulary of 143 tokens,
+624   including special, binder, operator, type, family, proof, tactic, source, identifier and production
+625   categories. Its declared masks are valid token, grammar, binder, type and family; its search bounds
+626   are 16 beam entries and 64 decode steps. These are implementation constants, not results of a newly
+627   trained model. The exact profile and any changes belong in the run manifest.
+
+
+                                                         19
+

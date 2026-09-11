@@ -1,0 +1,60 @@
+% Original PDF page 8; hash in recovery-map.json.
+\recoverypage{8}
+\noindent
+premise set must be consistent in the relevant sense. Under classical logic, inconsistent premises\linebreak[4]
+entail any conclusion. A system that silently adds an assumption to close a proof has changed the\linebreak[4]
+problem rather than solved it.\par
+
+\section*{7  Worked example: learned guidance and cross-view reasoning}
+\noindent
+Consider a synthetic coding requirement: ``Protected resources must not be written without approval.\linebreak[4]
+Each write must be audited within two steps.'' It is a specification example, not legal advice or a\linebreak[4]
+production experiment. One source supplies the requirement, a second supplies implementation text,\linebreak[4]
+and a third supplies observations. Let a be an actor, r a resource, and t a discrete trace position.\linebreak[4]
+The normative view may represent the first sentence as:\par
+
+\input{equations/equation-09.tex}
+\noindent
+The policy-to-compliance bridge defines which observed behaviors count as violations. It does not\linebreak[4]
+derive actual non-writing from the obligation. The compliance queries are:\par
+
+\input{equations/equation-10.tex}
+\input{equations/equation-11.tex}
+\noindent
+A deterministic implementation model sets Write = \ensuremath{\neg} Protected \ensuremath{\lor} Approved. Substitution estab-\linebreak[4]
+lishes Equation 10 in that model. An implementation that always writes supplies a counterexample\linebreak[4]
+when the resource is protected and approval is false. Transferring either result to actual source code\linebreak[4]
+requires a justified extraction or refinement relation; finding the word ``approve'' in a function name is\linebreak[4]
+insufficient.\linebreak[4]
+For Equation 11, an observed write at step 0 and a matching audit at step 1 satisfy the bounded\linebreak[4]
+requirement for that event. A matching audit at step 3 violates the two-step requirement only when the\linebreak[4]
+capture is complete through the relevant deadline and no earlier matching audit exists. An incomplete\linebreak[4]
+window yields unknown, not compliance and not proven violation. The same-looking name in a\linebreak[4]
+different tenant or request cannot be joined without an admitted identity mapping. A global program\linebreak[4]
+guarantee additionally requires reasoning over all modeled executions, not one successful log.\linebreak[4]
+The shared space reuses typed actor/resource/event identities, source maps, and explicit bridge\linebreak[4]
+assumptions. A Legal declaration can state the constraint, an Intent declaration can describe the\linebreak[4]
+proposed workflow, and a Security declaration can supply implementation properties. The intent\linebreak[4]
+is not an observed execution: explicit identity, action, time, and refinement mappings join these\linebreak[4]
+views. The resulting behavioral theorem, trace observation, and policy-applicability decision remain\linebreak[4]
+different conclusions. [artifact S01,S09]\linebreak[4]
+During training, paired variants of this example can change ``must'' to ``may'', move the exception,\linebreak[4]
+or change the audit window. The compiler and view metrics provide candidate targets; independent\linebreak[4]
+annotations determine whether the intended change survived. A family/view head may identify a\linebreak[4]
+temporal omission, a decompiler-plan feature may localize the missing phrase, and a proof-feedback\linebreak[4]
+head may rank a useful obligation. None substitutes for the actual current-profile check. This\linebreak[4]
+example illustrates how the representations cooperate; it is not reported as an executed learned-model\linebreak[4]
+experiment.\par
+
+\section*{8  Evidence and evaluation plan}
+\noindent
+This revision audits source code at one frozen repository snapshot. It does not execute the full\linebreak[4]
+repository, train a new checkpoint, establish a live CUDA speedup, or show that every supported\linebreak[4]
+head is enabled in the selected deployment. Existing CUDA tests check real gradient work, CPU\linebreak[4]
+parity, clipping, and resident parameters, but they are skipped without suitable hardware and use\linebreak[4]
+convenience fixtures. Their presence is not a new passing test run. [artifact S32]\linebreak[4]
+The earlier standalone reference suite remains in the supplement: all twelve finite semantic checks met\linebreak[4]
+their expected outcomes, including 26 disagreements between strong-until and conjunction among\linebreak[4]
+64 three-step trace pairs. These are illustrations, not accuracy measurements for the repository's\linebreak[4]
+compiler or autoencoder. No training gain is inferred from them.\par
+

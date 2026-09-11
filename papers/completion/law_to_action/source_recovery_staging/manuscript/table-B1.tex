@@ -1,0 +1,26 @@
+% Original PDF pp. 12, 13; Table B1.
+\begingroup
+\renewcommand{\thetable}{B1}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.24\linewidth} >{\raggedright\arraybackslash}p{.32\linewidth} >{\raggedright\arraybackslash}p{.38\linewidth}@{}}
+\caption{Logic families have different meanings. A shared symbol table or cross-view link does not prove that two encodings preserve those meanings.}\label{tab:B1}\\
+\toprule
+\textbf{Family/view} & \textbf{Representation and operations} & \textbf{What the paper may claim} \\
+\midrule
+\endfirsthead
+\textbf{Family/view} & \textbf{Representation and operations} & \textbf{What the paper may claim} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Propositional and first-order & Boolean operators, typed terms, predicates, variables and quantifiers & Bounded facts and implications under the encoded vocabulary; not general natural-language understanding \\[3pt]
+F-logic / frame & Object identity, class membership, slots and relational inheritance & Structured semantic relations for source entities, agents, tools and resources; not a cryptographic or temporal proof by itself \\[3pt]
+Deontic & Obligation, permission, prohibition; richer DCEC domain operators & Explicit normative force under the selected axioms/profile; an encoded permission is not an issued capability \\[3pt]
+Temporal / TDFOL & Always, eventually, next, until, since; quantified normative formulas & Model time-sensitive requirements and ordering; a backend must support the actual formula fragment \\[3pt]
+Event calculus & Events, changing fluents, initiation/termination and persistence as represented & Reason about transitions and obligations over traces; an observed event record is not a proof of every transition \\[3pt]
+DCEC & Cognitive operators for beliefs, knowledge, intentions, desires and goals, plus normative/event structure & Keep agent attitudes separate from asserted world facts; fact grounding still needs evidence \\[3pt]
+Datalog / rule-policy / SecPAL-like rendering & Bounded rules and authorization declarations where selected & Rule derivation and policy checking with an explicit open/closed-world convention, not automatic theorem authority \\[3pt]
+Hoare-style / transition / SMT & Preconditions, postconditions, abstract state and theory-specific constraints & Check program/guard properties under stated assumptions and available arithmetic, array, string or other fragments \\[3pt]
+Higher-order and interactive proof & Native proof terms/scripts and dependent/higher-order constructs supported by the chosen prover & Kernel-checked statements in that prover and environment, not universal translation correctness \\[3pt]
+Linear / separation & Declared broader training/representation families & Mention as registered or staged where appropriate; do not claim a live checker without a concrete supported translation and execution receipt \\[3pt]
+\end{longtable}
+\endgroup

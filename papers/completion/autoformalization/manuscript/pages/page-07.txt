@@ -1,0 +1,59 @@
+250   For illustration, a normal modality can be interpreted with an indexed accessibility relation:
+                                      [[□i ϕ]](w) = ∀v [Ri (w, v) ⇒ [[ϕ]](v)].                              (6)
+251   Different Ri and frame axioms express different profiles. A reflexive epistemic relation supports
+252   factivity; a serial belief relation need not. A deontic ideal-world relation need not make the obligation
+253   true in the actual world. This is an illustrative semantic recipe, not a claim that every repository
+254   view is already compiled by Equation 6. Conditional norms, priorities, defeasible exceptions, and
+255   contrary-to-duty obligations require their own explicit semantics; ordinary normal modal logic is not
+256   a universal deontic solution. LogiKEy provides established semantic embeddings of deontic logics
+257   and combinations in HOL [3].
+
+258   The repository’s principal view families. TDFOL explicitly combines first-order, temporal, and
+259   deontic syntax; DCEC adds agent-indexed cognitive operators and event-oriented structure. Their
+260   source modules expose these constructors, but constructor availability is distinct from complete
+261   backend coverage. [artifact S20–S21] The same interpreted norm may yield a deontic force/scope
+262   view, frame-based roles, temporal constraints, event/fluent relations, graph traversal edges, and a
+263   supported prover encoding. These are complementary task views. A predicted view distribution
+264   estimates which interfaces deserve attention; it is not a mixture of truth values. The shared symbol
+265   and provenance records permit joins, while each view retains its own semantic profile. [artifact
+266   S09,S31]
+267   Bare operator letters are unsafe identifiers: F can mean prohibition or eventually, and G can denote a
+268   cognitive goal or a temporal always operator. Family, profile, operator kind, arguments, and nesting
+269   must survive serialization. In particular, O(Gp) and G(Op) are not equated without a profile-specific
+270   commutation result.
+
+271   6.2   Loss-aware translation
+
+272   A translation record must state the source/target views, profile, signature map, assumptions, supported
+273   constructs, named losses, preserved property, and checker evidence. Preserving satisfiability is
+274   different from preserving the truth of an arbitrary query; one-way abstraction is different from
+275   equivalence. Translation validation examines the produced transformation rather than trusting every
+276   invocation of a compiler [7].
+277   A concrete legacy path makes the need visible: the inspected TDFOL-to-FOL converter removes
+278   unary temporal and deontic operators and replaces a binary temporal formula by conjunction. This
+279   may serve as a lossy projection, but it cannot generally carry a modal theorem. The paper does not
+280   attribute this behavior to every adapter. For example, with p false in the actual world and true in every
+281   ideal world, O(p) holds while p does not. On the trace p = [true, false], p holds now but Gp does
+282   not. For strong until, q true now makes p U q true regardless of p now, contradicting the proposed
+283   replacement p ∧ q. [artifact S18]
+284   Encoding a proposition as a predicate such as obligatory(p) also does not supply its semantics. The
+285   representation must distinguish quotation/reification from applying a predicate to a term; relational or
+286   higher-order embeddings must interpret the modality, not simply preserve its spelling.
+
+287   6.3   A conditional proof-transfer rule
+
+288   Let Γ |=Ls ϕ be the desired source-view consequence. A translator τ maps the premises and goal
+289   into Lt . Under bridge assumptions B, let RB (s, t) relate admitted source and target models. The
+290   required directionality is:
+                                           s |= Γ ∧ RB (s, t) ⇒ t |= τ (Γ),                                 (7)
+                                       t |= τ (ϕ) ∧ RB (s, t) ⇒ s |= ϕ.                                     (8)
+291   For every admitted source model satisfying Γ and B, there must be a related target model; otherwise
+292   the relation can be vacuous. If the target checker soundly establishes τ (Γ) |= τ (ϕ), these conditions
+293   transfer the consequence back. A proof sketch appears in Appendix B. This is a contract to discharge
+294   per supported translation, not a soundness theorem about every current extractor.
+295   Cross-source composition introduces further obligations: entity identities must align; timestamps
+296   and units must agree; domain assumptions and exception priorities must be compatible; and the joint
+
+
+                                                         7
+
