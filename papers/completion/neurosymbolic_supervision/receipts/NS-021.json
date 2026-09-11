@@ -1,0 +1,111 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-021",
+  "status": "complete",
+  "completed_at": "2026-09-11T23:19:20+00:00",
+  "scope": "Bibliography verification, anonymous artifact-citation mapping, novelty bound, and nonidentifying companion-paper overlap only. The recovered manuscript is not rewritten here; NS-022 integrates verified_references.bib and applies the label replacements.",
+  "source_versions": {
+    "workspace_git_head": "251d94f80cec44f55728429ead1e57abf92aaaf1",
+    "python": "Python 3.12.3",
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "claim_ledger": {
+      "path": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "owner_task": "NS-003"
+    },
+    "crossref_retrieved_at": "2026-09-11",
+    "dissertation_catalog": "EECS HTML title Program Synthesis By Sketching for UCB/EECS-2008-176, retrieved 2026-09-11; EECS-2008-164 rejected as a different report"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/reference_audit.md": "e1d77337a28eccd6336bd98402e22b0345f0827d8119fbfd5602a103c8316806",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/artifact_citation_map.json": "e5b0b271b45cda66cfc4f6f700bae18db171c2e0976b73fe8325f0454093bdab",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/related_paper_overlap.md": "4b89c88f7ca94874cc41ca06e1be544b0116b2420adc3f067240b13b4354e867",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/verified_references.bib": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validate_reference_audit.py": "fa82ebb47437e59f6475a45af8139642efd51af87d6625d25e15fa1e6670871c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validation.log": "f37903413b5152f5ca773c17f6fbd4d918f2b500aa2a05c26f9207c9ddea382a"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/audit/reference_audit.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/reference_audit.md",
+    "papers/completion/neurosymbolic_supervision/audit/artifact_citation_map.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/artifact_citation_map.json",
+    "papers/completion/neurosymbolic_supervision/audit/related_paper_overlap.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/related_paper_overlap.md",
+    "papers/completion/neurosymbolic_supervision/audit/verified_references.bib": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/verified_references.bib"
+  },
+  "criteria": [
+    {
+      "criterion": "Every citation resolves to a primary bibliographic source or accessible anonymous artifact and supports the adjacent statement.",
+      "status": "met",
+      "explanation": "All twelve reconstructed entries resolve to a Crossref DOI or the verified EECS dissertation catalog page. Each in-text use of [1]–[12] matches the cited work's actual contribution. Internal workstream labels are mapped to anonymous supplement identifiers or scientific descriptions rather than left as bibliography entries.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/verified_references.bib",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/reference_audit.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/artifact_citation_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validation.log"
+      ]
+    },
+    {
+      "criterion": "No unresolvable internal shorthand or identifying repository link remains in the submission.",
+      "status": "met",
+      "explanation": "This task's submission-facing outputs contain no GitHub, Overleaf, username, or author-repository URL. Every D/A/N/K/P/W token, Table 13 program name, PCTDD/M1–M3 stage, and B1 author-local worktree is resolved to an anonymous supplement id, a scientific description, or explicit removal. Manuscript application of those replacements is NS-022; these outputs do not leave unresolved shorthand in the verified bibliography or citation map.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/artifact_citation_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/verified_references.bib",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/reference_audit.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validation.log"
+      ]
+    },
+    {
+      "criterion": "Claims of novelty are bounded by the literature and the experiment, without invented first-of-kind claims.",
+      "status": "met",
+      "explanation": "The audit retains the draft's own bound: the twelve works are foundations or baselines, not newly invented algorithms; the intended contribution is the supervision/evidence composition at the agent boundary; the paper does not claim to be the first neurosymbolic agent or that combination automatically improves performance. No first-of-kind or unrun-benchmark claim is added.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/reference_audit.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/related_paper_overlap.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validation.log"
+      ]
+    },
+    {
+      "criterion": "Shared data/code/evaluation across the three submissions is disclosed appropriately and not double-counted as independent replication.",
+      "status": "met",
+      "explanation": "The overlap audit names the three distinct research questions, the two shared bibliographic works (translation validation and Thor), the shared kernel/translation/native-proof/storage surfaces, and the counting rules that forbid treating one inspection, one unavailable prover, or Table 5 preliminary arithmetic as three independent results. Companion evaluations are different protocols and oracles.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/related_paper_overlap.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/artifact_citation_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validation.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns021-evidence-7cc0da43",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns021-evidence-7cc0da43/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns021-evidence-7cc0da43/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns021-evidence-7cc0da43/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns021-evidence-7cc0da43/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validate_reference_audit.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validate_reference_audit.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-021/validation.log",
+      "started_at": "2026-09-11T23:18:59+00:00",
+      "finished_at": "2026-09-11T23:18:59+00:00",
+      "execution_kind": "sealed-profile structural audit of verified bibliography, artifact-citation map, and companion overlap; no Crossref call, manuscript edit, prover, or experiment"
+    }
+  ],
+  "limitations": [
+    "NS-021 does not rewrite manuscript/main.tex or manuscript/references.bib; NS-022 integrates the verified bibliography and applies label replacements.",
+    "Crossref given-name initials sometimes differ from conventional bylines; conventional bylines are retained and recorded.",
+    "No cited baseline was re-executed. Native proving remains the NS-014 unavailable profile.",
+    "Companion bibliographies were used to identify overlap from recovered titles and reference strings, not as a claim that those other lists are already publisher-verified.",
+    "This receipt is provenance validation, not independent scientific peer review or authorization to submit."
+  ],
+  "runtime_authority": "Artifact completion record only; no source tree, experiment, acceptance oracle, portal, author record, or companion-paper manuscript was changed."
+}
