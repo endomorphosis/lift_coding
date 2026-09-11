@@ -1,0 +1,317 @@
+{
+  "schema": "neurosymbolic-supervision/extensions-scope@1",
+  "task_id": "NS-015",
+  "observed_at": "2026-09-11T21:34:46.779650+00:00",
+  "observation_profile": {
+    "name": "operator_source_review_of_stopped_draft",
+    "operation": "Read-only inspection of retained source and prior capability evidence; no extension execution or fresh provider-environment capability probe.",
+    "current_capability_probe_executed": false,
+    "prior_profile_source": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+    "prior_profile_source_sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada"
+  },
+  "qualification_status": "no_retained_extensions",
+  "qualification_reason_codes": [
+    "procedure_cegis_identifier_missing",
+    "no_distinct_frozen_learned_artifact",
+    "prior_learned_artifact_no_go_preserved",
+    "required_mode_pre_post_consumption_not_observed",
+    "holdout_family_time_splits_not_executed",
+    "broad_w1_w4_graph_learning_remodularization_unevaluated"
+  ],
+  "retained_extensions": [],
+  "table18_row": {
+    "row": "Required world/procedure consumption",
+    "matrix_id": "table18_rows[required world/procedure consumption]",
+    "ns003_decision": "narrow_or_remove",
+    "ns015_closure": "untested_out_of_scope",
+    "retained_required_mode_claim": false,
+    "paired_pre_post_consumption_evidence": false,
+    "safe_rejection": null,
+    "valid_progress": null,
+    "evidence_id": null,
+    "publication_rule": "Mark Table 18 required world/procedure consumption untested/out of scope and remove required-mode extension claims. Do not block the planned core evaluation (context, routing, translation, fixture lifecycle, restart publication)."
+  },
+  "consumption_modes": {
+    "shadow_write": {
+      "definition": "Compute sidecar artifacts without changing authority or making those artifacts part of task completion.",
+      "observed_required_mode_use": false,
+      "qualifies_table18_row": false
+    },
+    "shadow_read": {
+      "definition": "Evaluate hypothetical decisions from world/program state without influencing behavior or changing authority.",
+      "observed_required_mode_use": false,
+      "qualifies_table18_row": false,
+      "not_interchangeable_with": [
+        "W3 shadow_hash/shadow_reuse/shadow_proof gates"
+      ]
+    },
+    "guarded": {
+      "definition": "Bounded consumption under independent checks; separately approved from shadow modes.",
+      "observed_required_mode_use": false,
+      "worker_self_promotion_permitted": false,
+      "protected_validator_edits_permitted": false,
+      "qualifies_table18_row": false
+    },
+    "required": {
+      "definition": "Each eligible task consumes a verified pre-root, current obligations and route/context decision, then publishes observations, validation, accepted/rejected transition, and completion/post-root evidence.",
+      "observed_required_mode_use": false,
+      "worker_self_promotion_permitted": false,
+      "protected_validator_edits_permitted": false,
+      "qualifies_table18_row": true,
+      "qualification_status": "untested_out_of_scope"
+    }
+  },
+  "candidates": [
+    {
+      "id": "procedure_cegis",
+      "paper_claim": "ProcedureCegis already implements a bounded synthesis state machine (PDF p. 5, §5.3).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "source": null,
+      "nearby_non_substitutes": [
+        {
+          "name": "FormalAssuranceCegis",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/formal_assurance_cegis.py",
+          "ns002_sha256": "9d4c230b0948628eef7818eceb5583f029c1b862fdea63e9566dc223243dc2f4",
+          "disposition": "Separately named bounded repair CEGIS. NS-002 forbids substituting it for ProcedureCegis. Certificates do not grant write authority; LLMs cannot promote patches."
+        },
+        {
+          "name": "ProgramRepairSynthesizer",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
+          "disposition": "Proposal-only repair synthesis over reviewed operators. Not ProcedureCegis; no write, semantic, or proof authority."
+        }
+      ],
+      "closure": "future_work_specification_only"
+    },
+    {
+      "id": "incoming_memory",
+      "paper_claim": "Incoming memory mines independently admitted trajectories, preserves failed episodes, infers applicability, and validates anti-unified procedures on held-out families (PDF p. 5, §5.3).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "source": null,
+      "nearby_non_substitutes": [
+        {
+          "name": "deterministic_failure_memory",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/deterministic_failure_memory.py",
+          "disposition": "Append-only deterministic repair failure memory. Not the incoming-memory method, not anti-unification, and not held-out procedure validation."
+        }
+      ],
+      "closure": "future_work_untested"
+    },
+    {
+      "id": "learned_call_event_inverse_repair_models",
+      "paper_claim": "Learned call-target, event-delta, inverse-trace, and repair-delta models rank constrained candidates or abstain; predicted transitions become accepted state only after observation or verification (PDF p. 5, §5.3; pp. 15–16, §D.5).",
+      "location": "local_overlay",
+      "implementation": "partial",
+      "integration": "adapter_only",
+      "validation": "blocked",
+      "rollout": "off",
+      "retained": false,
+      "frozen_learned_artifact": false,
+      "prior_no_go": {
+        "campaign": "PGIR-014",
+        "path": "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/result.v3.json",
+        "decision": "no_go",
+        "disposition": "frozen_no_go",
+        "training_task_eligible_count": 0,
+        "training_admitted_rows": 0,
+        "rights_quarantined_rows": 7173,
+        "reason_codes": [
+          "corpus_not_materialized",
+          "historical_semantic_baseline_not_currently_qualified",
+          "no_rights_admitted_training_rows",
+          "required_holdouts_insufficient"
+        ],
+        "compiler_learned_stages": [],
+        "tokenizer_status": "no_learned_tokenizer_admitted"
+      },
+      "nearby_non_substitutes": [
+        {
+          "name": "ir_learning_campaign_planner",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/ir_learning_campaign_planner.py",
+          "disposition": "Deterministic campaign adapter. It never grants a lease while RESULT identities are unresolved and never attaches proof results to a candidate projection."
+        }
+      ],
+      "missing_suggested_path": "implementation_plan/proof_grounded_ir_learning_fabric/",
+      "closure": "preserve_prior_no_go_future_work"
+    },
+    {
+      "id": "architecture_refactoring_remodularization",
+      "paper_claim": "Architecture refactoring uses SCC candidates, compatibility contracts, source-preserving edits, differential traces, tests/proofs, and rollback. A smaller graph or fewer files does not establish equivalence (PDF p. 5, §5.3; pp. 16–17, Appendix E).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "paper_limit": "The broader SCC/partition/CST/remodularization program remains separately tracked against the author's local worktree (PDF p. 17, §E.4).",
+      "closure": "future_work_untested"
+    },
+    {
+      "id": "required_mode_world_procedure_consumption",
+      "paper_claim": "Required-mode operation must exhibit pre-state consumption, accepted transition evidence, and post-state publication (PDF p. 7, §7.4; p. 18, §F.3; p. 21, §H.3.1; Table 18).",
+      "location": "local_overlay",
+      "implementation": "partial",
+      "integration": "optional",
+      "validation": "blocked",
+      "rollout": "off",
+      "retained": false,
+      "source_present_non_consumption": [
+        {
+          "name": "SupervisorWorldView",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/world_view.py",
+          "disposition": "Mutation-free query over one verified snapshot. Immutability is enforced. Querying a snapshot is not required-mode pre/post consumption."
+        },
+        {
+          "name": "WorldSnapshotBuilder",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/world_snapshot_builder.py",
+          "disposition": "Independently verified authority admission for a schedulable snapshot. Optional DuckLake projection never grants scheduling authority. Admission is not observed required-mode consumption."
+        }
+      ],
+      "consumed_pre_state": null,
+      "accepted_transition": null,
+      "published_post_state": null,
+      "closure": "untested_out_of_scope",
+      "historical_profile_capability": {
+        "semantic_state_package": "blocked",
+        "reason": "anyio is absent in the authoritative-style environment (NS-002 capabilities.json).",
+        "operational_claim": false,
+        "source": "NS-002 retained capabilities.json",
+        "fresh_probe_executed": false,
+        "current_environment_status": "not_retested"
+      }
+    },
+    {
+      "id": "w1_semantic_addressed_world",
+      "paper_claim": "W1 semantic objects, canonical profiles, exact resolution, logical datasets, VFS outbox and world-root CAS (PDF p. 20, Table 14).",
+      "location": "local_overlay",
+      "implementation": "partial",
+      "integration": "optional",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "closure": "unevaluated_narrowed_future_work"
+    },
+    {
+      "id": "w2_program_world",
+      "paper_claim": "W2 frames/stacks/heaps, capture/abstraction profiles, typed traces, static candidates, next-call/event/inverse-trace residuals (PDF p. 20, Table 14).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "closure": "unevaluated_narrowed_future_work"
+    },
+    {
+      "id": "w3_parallel_sealing_tdd_campaign",
+      "paper_claim": "W3 hash memo, parallel preparation, fixture-definition/instance and DI keys, setup/call/teardown (PDF p. 20, Table 14).",
+      "location": "local_overlay",
+      "implementation": "partial",
+      "integration": "optional",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "does_not_block_core": {
+        "core_table18_row": "Fixture/call/teardown reuse",
+        "owner_tasks": [
+          "NS-010",
+          "NS-011",
+          "NS-020"
+        ],
+        "rule": "The broad W3 world-directive campaign is not a submission prerequisite. The core fixture-lifecycle Table 18 row remains with NS-010/NS-011 and is not closed by this optional-extension task."
+      },
+      "closure": "unevaluated_narrowed_without_blocking_core"
+    },
+    {
+      "id": "w4_semantic_refactoring",
+      "paper_claim": "W4 multi-level identities, authority/state graphs, SCC partitions, CST-aware codemods, compatibility (PDF p. 20, Table 14; Appendix E).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "closure": "unevaluated_narrowed_future_work"
+    },
+    {
+      "id": "graph_learning_tagseq_dagseq",
+      "paper_claim": "Typed-attention/TAGSeq/DAGSeq-style models are optional comparisons after static, history, lexical and embedding baselines (PDF p. 16, §D.5.3; p. 21, §H.3.2).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "frozen_learned_artifact": false,
+      "closure": "preserve_prior_no_go_future_work"
+    },
+    {
+      "id": "federation_multi_agent_world_roots",
+      "paper_claim": "Sibling supervisors exchange typed requests; required-mode state consumption needs transactional authority and observed consumption (PDF p. 7, §7.4).",
+      "location": "specification_only",
+      "implementation": "missing",
+      "integration": "unknown",
+      "validation": "not_run",
+      "rollout": "off",
+      "retained": false,
+      "federation_owner": "NS-012 owns tested-deployment/federation wording; NS-015 closes required-mode consumption as untested.",
+      "closure": "future_work_untested"
+    }
+  ],
+  "authority_invariants": {
+    "worker_self_promotion": false,
+    "protected_validator_edits": false,
+    "training_or_synthesis_may_inspect_final_acceptance": false,
+    "sidecar_logging_is_consumed_evidence": false,
+    "nearby_named_module_is_not_a_substitute": true,
+    "unavailable_is_not_zero_or_success": true
+  },
+  "core_not_blocked": {
+    "optional_closed_here": [
+      "ProcedureCegis / incoming memory / learned world models",
+      "required-mode world/procedure consumption",
+      "broad W1--W4 campaigns",
+      "graph learning",
+      "remodularization / CST-AST semantic editing"
+    ],
+    "planned_core_evaluation": [
+      "semantic context and invalidation (NS-007)",
+      "provider routing gate (NS-008)",
+      "loss-aware translation (NS-009)",
+      "fixture/call/teardown reuse (NS-010--NS-011)",
+      "publication/restart (NS-012--NS-013)",
+      "matched A--D evaluation (NS-004--NS-006, NS-016--NS-020)"
+    ]
+  },
+  "required_for_reopening": [
+    "An exact located implementation whose identifier matches the retained claim, not a nearby similarly scoped module.",
+    "A distinct frozen learned artifact when the claim is learned; otherwise the PGIR-014 no-go remains.",
+    "Held-out family/time splits frozen before training/synthesis, with final acceptance outputs hidden from those stages.",
+    "Static, history, lexical, embedding, and template controls; negative memory of failed applicability.",
+    "Independent validation and rollback, with applicability failures, abstentions, bad predictions, and rollback costs remaining visible.",
+    "Guarded or required consumption distinguished from shadow-write/shadow-read; no worker self-promotion or protected-validator edits.",
+    "Paired pre-state consumption and accepted post-state evidence on the held-out bounded profile, measuring downstream repair/usefulness rather than sidecar logging."
+  ],
+  "claim_boundary": "This is a source-and-capability qualification. No extension is retained. It records no consumed world/procedure result, no learned-model evaluation, no remodularization benefit, and no required-mode self-hosting demonstration.",
+  "review_corrections": {
+    "original_draft_observed_at": "2026-09-11T19:10:00Z",
+    "original_timestamp_not_treated_as_current_observation": true,
+    "source_review_recorded_at": "2026-09-11T21:34:46.779650+00:00",
+    "prior_capability_results_not_promoted_to_fresh_execution": true,
+    "mandatory_core_evaluations_remain_pending": true
+  },
+  "current_source_inventory": {
+    "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/operator-review/source_inventory.json",
+    "sha256": "5d81722586400ee0fde2e60c6dd7d4e8fab5ed14fbcd844cf565bfb27b6810fa",
+    "method": "Read-only file hashes and bounded Python-source identifier search; not module execution."
+  }
+}

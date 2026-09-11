@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
 SUBMODULES = ("external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit")
 PYTHON = Path.home() / "lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python"
+GROK_TEX_PROFILE = Path("papers/completion/toolchains/grok_tex_profile.json")
 
 
 def now():
@@ -133,6 +134,10 @@ def environment(repo):
                IPFS_ACCELERATE_AGENT_CODEX_MODEL="gpt-5.6-terra",
                IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER="primary_quota_exhausted",
                IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT="high",
+               # The native Docker runner verifies the exact tree/launcher
+               # hashes before mounting this formatting toolchain read-only.
+               IPFS_ACCELERATE_AGENT_GROK_TEX_TOOLCHAIN_JSON=json.dumps(
+                   read(repo / GROK_TEX_PROFILE), sort_keys=True, separators=(",", ":")),
                # Successful merged workspaces use native terminal cleanup.
                # Failure rescue and ownership checks remain native obligations.
                IPFS_ACCELERATE_AGENT_WORKTREE_POOL_ENABLED="false",
