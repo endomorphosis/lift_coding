@@ -1,0 +1,17 @@
+{
+  "protocol_contract_valid": true,
+  "protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+  "final_execution_ready": false,
+  "planned_comparison_units": 448,
+  "observed_live_repair_results": 0,
+  "structural_negative_cases_rejected": [
+    "unscored_solved",
+    "unfrozen_final",
+    "unavailable_zero",
+    "actual_null",
+    "second_proposal",
+    "unidentified_dispatch",
+    "D_without_publication_requirement"
+  ],
+  "scope": "Static protocol/hash/arithmetic/schema checks only; no provider invocation or research result"
+}

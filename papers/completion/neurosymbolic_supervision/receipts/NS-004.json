@@ -1,0 +1,93 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-004",
+  "status": "complete",
+  "completed_at": "2026-09-11T18:07:47.577810+00:00",
+  "completion_scope": "Protocol specification only; native interrupted provider attempt is preserved separately and no provider success is claimed.",
+  "source_versions": {
+    "source_scope_commit": "43f60dac61e35f9bc6ccf2b7fa39c73d797b2b08",
+    "committed_verifier_sha256": "0dc1aced74cf4eca1be42d9aa3b7f5d080b857a5744ad50a21e66af7fddb8592",
+    "ipfs_accelerate_validation_commit": "34c8475d041db57cbe3c4e1dad122885b526e652",
+    "python": "Python 3.12.3",
+    "jsonschema": "4.26.0"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/feasibility_observation.json": "9b9bee4327ecde3fb2c11ff9962c17b905f628ab889eaae57a2569030ff346ea",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/experiment_manifest.json": "5d0bd610005cfd68e67f6f1dc4224a83bd9773b72d8e2aaf700fdec53883b649",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/measurement_schema.json": "e20f70ba7c055e9fdbbcd1540ce13213733dd3f3810d44a23c1f9f0b24064e03",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/preregistered_protocol.md": "e1e3403feafa0eb5c8bbda4b95e14e3415a92d2036182725784f30788d4e5e54",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol-contract-validation.log": "e9ec25ead1429d082b393609f41a95dbc7583b779cd6b225a4bb1b37c5f43528",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/validate_protocol.py": "2cf798094ce8ade19b911ccc125bb5eeb502b386773729bb4d6d7daa52123e3f"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/preregistered_protocol.md",
+    "papers/completion/neurosymbolic_supervision/protocol/experiment_manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/experiment_manifest.json",
+    "papers/completion/neurosymbolic_supervision/protocol/measurement_schema.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/measurement_schema.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Protocol has an immutable version/hash before final runs, with model settings, all arms, metrics, and data-access boundaries.",
+      "status": "met",
+      "explanation": "Content-addressed ns-core-v1 defines matched A\u2013D and two single-mechanism contrasts, actual disclosed Terra HIGH maintenance availability, nonzero genuine historical-repair recruitment, separate dev/pilot/final schedules and hidden-oracle boundaries. The bundle hashes are verified. Final source/model/task/scorer/runtime/resource qualification remains explicitly with NS-005/006/016; no final readiness or experiment is claimed.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/experiment_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/preregistered_protocol.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/measurement_schema.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Noninferiority margin, minimum useful completion threshold, CI method, and promotion/no-promotion criteria are specified before final outcomes.",
+      "status": "met",
+      "explanation": "Predeclares 0.05 absolute noninferiority margin, 0.25 robust useful-family completion floor, conservative paired exact-binomial component bounds, cold/warm alpha splitting, family-clustered descriptive bootstrap, strict safety/progress/efficiency gates, and no-promotion for missing/negative/inconclusive evidence. Planned N=16 independent final families is explicitly a bounded feasibility design without a power guarantee.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/experiment_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/preregistered_protocol.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/measurement_schema.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Actual versus estimated/unavailable cost fields and amortization horizons are defined.",
+      "status": "met",
+      "explanation": "Defines actual/estimated/unavailable values with provenance, null reasons, provider tokens/charges, every setup/call/teardown/proof/storage/recovery/scoring/human cost, directly measured elapsed, finite effect/CPU/wall/storage ceilings, and H=1/10/100/1000 amortization and break-even rules. Host availability is distinguished from reserved capacity and billing availability.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/experiment_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/preregistered_protocol.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/measurement_schema.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Simulations and checked-in oracle patches cannot count as live repair results.",
+      "status": "met",
+      "explanation": "Excludes old forty fixtures, target-patch replay, synthetic oracle outcomes, no-call/deny-all controls and sealer replays from live repair results. Requires source-preimage provenance, independent hidden acceptance, actual valid residual proposals and current evidence/publication. Seven structural negative schema cases fail; these are schema checks, not measured research results.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/experiment_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/preregistered_protocol.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol/measurement_schema.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol-contract-validation.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/validate_protocol.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/validate_protocol.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-004/protocol-contract-validation.log",
+      "started_at": "2026-09-11T18:07:47.476156+00:00",
+      "finished_at": "2026-09-11T18:07:47.583204+00:00"
+    }
+  ],
+  "limitations": [
+    "No new provider invocation, live benchmark repair, final source population, independent oracle or promotion decision was produced by NS-004.",
+    "Observed maintenance Terra HIGH access is not a reservation or scientific adapter qualification; native quota guard, actual source/model matching and resources remain mandatory.",
+    "The original provider-dispatched attempt log and private projection were preserved outside the publishable candidate. No provider receipt/history is rewritten by this candidate.",
+    "All counts are preregistered planned counts. Final quality may be inconclusive; this task does not narrow or complete the paper goal."
+  ]
+}
