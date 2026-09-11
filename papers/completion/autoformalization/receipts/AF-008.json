@@ -1,0 +1,177 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-008",
+  "status": "complete",
+  "completed_at": "2026-09-11T23:28:22.730938+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-inference-isolation/v1",
+      "report_schema": "autoformalization-leakage-control-report/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+      "sha256": "8e45fc48407e55f397ffd9cb2a769f7d15d9683d9a85db99ceb788becbb27e39",
+      "standard_library_only": true
+    },
+    "frozen_inputs": {
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "metrics_sha256": "eeed41f09c403192b1717c49e053916076710239fc335197bfd9c516a8dd5dbc"
+    },
+    "reuse_candidates": {
+      "modal_autoencoder.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+        "sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+        "imported": false,
+        "note": "Inspected for source-withheld and sample-memory contracts; this harness reimplements the isolation boundary in stdlib code."
+      },
+      "canonical_roundtrip.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+        "sha256": "0755cce95acc5e8094a109254cf841c1bdbbcec340f16a68023cdd4d93f9b864",
+        "imported": false,
+        "note": "Inspected for source-withheld and sample-memory contracts; this harness reimplements the isolation boundary in stdlib code."
+      },
+      "bench_semantic_logic_roundtrip.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py",
+        "sha256": "ecb62d6e5d263fe64119715bc23da7b4395ccb01541365dd45abc5352b2d536d",
+        "imported": false,
+        "note": "Inspected for source-withheld and sample-memory contracts; this harness reimplements the isolation boundary in stdlib code."
+      }
+    },
+    "empirical_execution": "none; A-E/T0-T5 remain unrun; this task is isolation-control enforcement only"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py": "8e45fc48407e55f397ffd9cb2a769f7d15d9683d9a85db99ceb788becbb27e39",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/test_inference_isolation.py": "14f705630c8eef4c7997788f19ae598011cb633b205cd87f9787f8ec68382325",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/evidence/leakage_control_report.json": "42f69d8128d1f63b6b8e59703572cf74bd9fe82b5dd96dd74b4b4fe1e58b640d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.meta.json": "4813e6f02006f9d8693abfcd9b24eb5e8ff402d355d677e8b14d3202f8583dde",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.stdout.log": "c79eb05863043bf701e9fccafc4aa5856207c53e539966fea6a7a981702b4883",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/probe_all.meta.json": "c701e5081954644aa110afab242b755473d8171bcca23e799b2264caa5be60ae",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/probe_all.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/probe_all.stdout.log": "b67c1db2c07be293aafc3a897831fd18f6e8049669d12e7faa683e7fe19ac837",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.meta.json": "dba3579e20c6af8597315e976234eb0fa63e969625faa741bdd205f54bde29bc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stdout.log": "2a439f544f2c4d2cb94ebd639371e484d55716fde7dc1a3cf95705b41863d125"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/inference_isolation.py": "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+    "papers/completion/autoformalization/evaluation/test_inference_isolation.py": "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/test_inference_isolation.py",
+    "papers/completion/autoformalization/evidence/leakage_control_report.json": "papers/completion/autoformalization/receipts/snapshots/AF-008/evidence/leakage_control_report.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Adversarial attempts to recover withheld source/gold through each documented channel are rejected or the affected condition is explicitly non-blind.",
+      "status": "met",
+      "explanation": "The isolation harness defines source-only, parser-assisted, and source-withheld views. Compact adversarial probes inject source text, source maps/locators, filesystem paths, retrieval, parser state, sample memory, gold IR, reference/gold decoder fallbacks, and sample-id cache keys. Every blocked channel is rejected on the source-withheld view; a caller may instead declare the affected condition non-blind, which still bars blind-prediction credit. Nested maps and a copied source sentence inside canonical IR are also rejected. No probe recovered withheld material.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/test_inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evidence/leakage_control_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/probe_all.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Main generalization arms disable sample-indexed memory for update and evaluation.",
+      "status": "met",
+      "explanation": "A, B, C, D, E, T0, T2, T3, T4, and T5 require use_sample_memory=False for both update and evaluation. Enabling memory, or relabeling those arms as non-blind sample-memory conditions, is rejected. T1 is the explicit memory diagnostic: sample memory stays on, seen and unseen partitions must be reported separately, and it cannot receive blind-prediction credit. Cache keys equal to sample IDs and decoded embeddings indexed by sample ID are treated as memory shortcuts even when a caller claims memory is off. The frozen environment manifest keeps sample_memory_main_generalization and source_withheld_retrieval false.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/test_inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evidence/leakage_control_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Forward, cycle and final reconstruction scores remain distinct and parser-assisted features are disclosed.",
+      "status": "met",
+      "explanation": "Reconstruction bundles must contain distinct forward (gold → first IR), cycle (first IR → second IR), and final (gold → second IR) objects. Collapsed mean/aggregate fields and a shared score object are rejected. Numerical vector MSE/cosine is recorded separately and is not a free-text decoder. Parser-assisted views require named features with producer, depends_on_parse, complete-compilation flag, and charged compile/extraction cost; zero compile cost for a complete compilation is rejected. Source-only views cannot consume those features, and parser-assisted arms cannot be credited as raw-text or blind prediction. Gold/reference decoder fallbacks are excluded from blind-prediction credit.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/test_inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/evidence/leakage_control_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/test_inference_isolation.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/test_inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/test_inference_isolation.stderr.log",
+      "started_at": "2026-09-11T23:28:22.478720+00:00",
+      "finished_at": "2026-09-11T23:28:22.538471+00:00",
+      "execution_kind": "sealed adversarial isolation contract tests"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/inference_isolation.py",
+        "report",
+        "--root",
+        ".",
+        "--output",
+        "papers/completion/autoformalization/evidence/leakage_control_report.json"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/leakage_control_report.stderr.log",
+      "started_at": "2026-09-11T23:28:22.565776+00:00",
+      "finished_at": "2026-09-11T23:28:22.634585+00:00",
+      "execution_kind": "deterministic leakage-control report materialization"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/inference_isolation.py",
+        "probe-all"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-008/evaluation/inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/probe_all.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-008/logs/probe_all.stderr.log",
+      "started_at": "2026-09-11T23:28:22.683604+00:00",
+      "finished_at": "2026-09-11T23:28:22.730938+00:00",
+      "execution_kind": "compact view-by-channel adversarial probe matrix"
+    }
+  ],
+  "limitations": [
+    "No A-E or T0-T5 experiment was executed.",
+    "No native checker, solver, compiler, retriever, or model was invoked.",
+    "ipfs_datasets isolation libraries were inspected and not imported; the paper harness is a stdlib contract.",
+    "Independent source-facet gold remains pending AF-005 review; fidelity is unmeasured.",
+    "Pilot fixtures used for adversarial probes are not natural held-out evaluation.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Inference views, source-withheld leakage rejection, sample-memory policy for generalization arms, distinct forward/cycle/final reconstruction scores, and parser-assisted feature disclosure. Empirical research runs remain unrun."
+}
