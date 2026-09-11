@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,7 @@ PREFIXES = dict(zip(PAPERS, ("AF", "LA", "NS")))
 ACCEL = ROOT / "external/ipfs_accelerate"
 SUBMODULES = ("external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit")
 TEMPLATES = ("papers/neurips_2026_vericode_workshop.tex", "papers/neurips_2026_vericode.sty", "papers/checklist.tex")
+RECEIPT_CLOCK_TOLERANCE_SECONDS = 60
 
 
 def read_json(path: Path):
@@ -63,6 +65,18 @@ def native_modules():
         parse_args, supervisor_config_from_args,
     )
     return parse_goal_heap, parse_task_file, parse_args, supervisor_config_from_args
+
+
+def task_evidence_paths(paper: str, task_id: str):
+    """Return only this task's receipt and immutable evidence directory."""
+    if paper not in PREFIXES or not isinstance(task_id, str) or not re.fullmatch(re.escape(PREFIXES[paper]) + r"-[0-9]{3,}", task_id):
+        raise ValueError(f"invalid paper/task evidence identity: {paper}/{task_id}")
+    receipt = str(BASE / paper / "receipts" / f"{task_id}.json")
+    snapshots = str(BASE / paper / "receipts" / "snapshots" / task_id) + "/"
+    for path in (receipt, snapshots):
+        if relative_file(path) != ROOT / path:
+            raise ValueError(f"task evidence path must not redirect through symlinks: {path}")
+    return receipt, snapshots
 
 
 def build(paper: str):
@@ -122,9 +136,8 @@ def build(paper: str):
              "Implement in native ephemeral worktrees. Coordinate shared library changes through the supervisor merge queue.",
              "Each task must write its receipt using the contract in the runbook; this is provenance validation, not scientific peer review.", ""]
     for task in data["tasks"]:
-        receipt = str(folder / "receipts" / f"{task['id']}.json")
-        outputs = list(dict.fromkeys([*task["deliverables"], receipt]))
-        snapshots = str(folder / "receipts" / "snapshots" / task["id"]) + "/"
+        receipt, snapshots = task_evidence_paths(paper, task["id"])
+        outputs = list(dict.fromkeys([*task["deliverables"], receipt, snapshots]))
         lines.extend([
             f"## {task['id']} {task['title']}", "", "- Status: todo", "- Completion: auto",
             "- Is schedulable: true", "- Review only: false", f"- Priority: {task['priority']}",
@@ -134,7 +147,7 @@ def build(paper: str):
             f"- Board namespace: {cfg['board_namespace']}",
             f"- Bundle: {paper}/{task['subgoal_id']}", f"- Parallel lane: {paper}",
             f"- Outputs: {', '.join(outputs)}",
-            f"- Predicted files: {', '.join([*outputs, snapshots])}",
+            f"- Predicted files: {', '.join(outputs)}",
             f"- Allowed paths: {', '.join(task.get('implementation_paths', []))}",
             "- Resource class: cpu-medium", "- Resource stage: execution",
             "- Implementation timeout seconds: 7200",
@@ -275,10 +288,13 @@ def paper_task_contracts(paper: str):
             if goal_id != contract["subgoal_id"]:
                 raise ValueError(f"reviewed task goal changed: {task.task_id}")
         else:
-            own_receipt = str(BASE / paper / "receipts" / f"{task.task_id}.json")
+            own_receipt, own_snapshots = task_evidence_paths(paper, task.task_id)
             contract = {
                 "id": task.task_id, "subgoal_id": goal_id,
-                "deliverables": [v for v in task.outputs if v != own_receipt],
+                # Evidence is writable native output, not a scientific output
+                # which must itself acquire another recursive evidence copy.
+                "deliverables": [v for v in task.outputs if v.rstrip("/") not in
+                                 {own_receipt, own_snapshots.rstrip("/")}],
                 "acceptance_criteria": [task.acceptance.strip()] if task.acceptance.strip() else [],
             }
         if not contract["deliverables"] or not contract["acceptance_criteria"] or not task.validation:
@@ -286,6 +302,11 @@ def paper_task_contracts(paper: str):
         contract["depends_on"] = list(task.depends_on)
         contracts[task.task_id] = contract
     return cfg, goals, contracts
+
+
+def _utc_now():
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc)
 
 
 def _receipt_time(value):
@@ -298,7 +319,104 @@ def _receipt_time(value):
         raise ValueError("invalid receipt completed_at timestamp") from exc
     if instant.tzinfo is None or instant.utcoffset() != timedelta(0):
         raise ValueError("receipt completed_at must have an explicit UTC offset")
+    if instant > _utc_now() + timedelta(seconds=RECEIPT_CLOCK_TOLERANCE_SECONDS):
+        raise ValueError("receipt completed_at is in the future beyond the 60-second clock tolerance")
     return instant
+
+
+def _python_source_valid(source, label):
+    """Check executable syntax only; never execute receipt-supplied programs."""
+    try:
+        compile(source, label, "exec")
+    except (SyntaxError, ValueError, TypeError) as exc:
+        raise ValueError(f"validation command has invalid Python source: {label}") from exc
+
+
+def _validation_command_source(command, artifacts):
+    """Check reproducible source references without claiming execution proof.
+
+    Python stdin requires ``stdin_artifact`` naming a hashed snapshot containing
+    the exact stdin bytes. A named script can optionally use ``script_artifact``
+    to bind its argv script path to retained source; otherwise its repository
+    path must exist. Literal ``-c`` already retains its source in argv.
+    """
+    argv = command["argv"]
+    start = 0
+    if Path(argv[0]).name == "env":
+        start = 1
+        while start < len(argv):
+            value = argv[start]
+            if value in {"-i", "--ignore-environment", "--"}:
+                start += 1
+                continue
+            if value in {"-u", "--unset"}:
+                start += 2
+                continue
+            if value.startswith("--unset="):
+                start += 1
+                continue
+            if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*=.*", value, re.DOTALL):
+                assigned = value.split("=", 1)[1].strip()
+                if re.fullmatch(r"<(?:fresh|temporary|temp|replace|your|path|actual|placeholder|tbd|todo)(?:[- _][^<>]+)?>|\[(?:tbd|todo|placeholder)\]|(?:tbd|todo|placeholder)", assigned, re.IGNORECASE):
+                    raise ValueError("validation command contains a placeholder environment value")
+                start += 1
+                continue
+            break
+    if start >= len(argv) or not re.fullmatch(r"python(?:[23](?:\.[0-9]+)?)?", Path(argv[start]).name):
+        return
+    index, mode, source = start + 1, "stdin", None
+    while index < len(argv):
+        value = argv[index]
+        if value == "-c" or value.startswith("-c") and len(value) > 2:
+            if value == "-c":
+                if index + 1 >= len(argv):
+                    raise ValueError("Python -c validation command has no source")
+                source = argv[index + 1]
+            else:
+                source = value[2:]
+            mode = "literal"
+            break
+        if value == "-m" or value.startswith("-m") and len(value) > 2:
+            if value == "-m" and index + 1 >= len(argv):
+                raise ValueError("Python -m validation command has no module")
+            return  # Named modules are retained by recorded source/runtime versions.
+        if value in {"-V", "--version", "-h", "--help", "--help-env", "--help-xoptions", "--help-all"}:
+            return
+        if value == "-":
+            break
+        if value == "--":
+            index += 1
+            if index == len(argv):
+                break
+            source, mode = argv[index], "script"
+            break
+        if value in {"-W", "-X", "--check-hash-based-pycs"}:
+            index += 2
+            continue
+        if value.startswith("-"):
+            index += 1
+            continue
+        source, mode = value, "script"
+        break
+    if mode == "literal":
+        _python_source_valid(source, "literal -c payload")
+        return
+    field = "stdin_artifact" if mode == "stdin" else "script_artifact"
+    retained = command.get(field)
+    if retained is not None:
+        if not isinstance(retained, str) or retained not in artifacts:
+            raise ValueError(f"{field} must name a hashed snapshot artifact")
+        _python_source_valid(relative_file(retained).read_bytes(), retained)
+    elif mode == "stdin":
+        raise ValueError("Python stdin validation command requires a hashed stdin_artifact")
+    else:
+        cwd = command.get("cwd", ".")
+        if not isinstance(cwd, str):
+            raise ValueError("validation command cwd must be a repository-relative path")
+        script = relative_file(str(Path(cwd) / source))
+        if not script.is_file():
+            raise ValueError("Python script validation command requires retained repository source or script_artifact")
+        _python_source_valid(script.read_bytes(), str(script.relative_to(ROOT)))
 
 
 def _output_belongs_to(output, deliverable):
@@ -373,6 +491,7 @@ def _verify_task_contract(paper: str, task, *, check_current: bool):
             raise ValueError("validation command is absent or failed")
         if not isinstance(command.get("log"), str) or command["log"] not in artifacts:
             raise ValueError("validation log must be a hashed snapshot artifact")
+        _validation_command_source(command, artifacts)
     if check_current:
         _check_current_outputs(outputs, artifacts)
         _check_directory_coverage(task["deliverables"], outputs)

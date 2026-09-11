@@ -2,7 +2,7 @@
   "schema": "paper-task-evidence/v1",
   "task_id": "NS-002",
   "status": "complete",
-  "completed_at": "2026-09-11T17:07:26.553454+00:00",
+  "completed_at": "2026-09-11T17:08:00+00:00",
   "scope": "Read-only inventory of the loaded source forest and recomputation of existing preliminary-artifact arithmetic. No source tree, model, prover, sealer, provider, rollout state, or protected task metadata was mutated.",
   "source_versions": {
     "workspace_git_head": "6c7f59fc7d0c3cb370c6d2f5b76596030f5f2fdb",
@@ -16,22 +16,13 @@
       "interpreter": "/usr/bin/python3.12",
       "python_version": "3.12.3",
       "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-      "pythonpath": [
-        "external/ipfs_accelerate",
-        "external/ipfs_datasets",
-        "external/ipfs_kit"
-      ],
+      "pythonpath": ["external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit"],
       "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
     },
     "preliminary_inputs": {
       "semantic_context_report_sha256": "c7c71899bc7d7abf55c21c169055af1a85d680982ada4f538aad922b57b3b2dd",
       "incremental_sealer_summary_sha256": "e76123068ebe94557647f90044155c06126ab3f6cc33efb27ab0c2e3033f00f6",
       "paper_extract_sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
-    },
-    "command_metadata_correction": {
-      "integration_commit": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
-      "audit": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/correction-audit.json",
-      "host_source_provenance": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/host-source-provenance.json"
     }
   },
   "artifacts": {
@@ -40,17 +31,7 @@
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json": "e40a9a43a1d82d18ec06a0f608918e1d560ed611e7650d36476c97fe926a603f",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary_evidence.json": "7b181e2091168eb5f434731fe4ce4219cbe1e1d86f0c636a74b28904310a0f84",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log": "37824ed98048afbb1ebdbc69bd5764eb6d4d48faffeda25e5cf50cf076888ec3",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log": "104b5cd9404c6480082d3f22e5e3106ae16edbccef919d3f1cf6b070d8eafdf2",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/correction-audit.json": "8f18f858617cda7fadd008e03a41e475c676ddb1ee2e5a17b7583fe9d42cf1dc",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/historical-shell-extraction.json": "23d5fb609eb81d0fb3b17d6c5bd3d4187851c379b49f67eb388093346eb54dbb",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/host-source-provenance.json": "ba7a42af37e4b03675f49ca82768d6eba0c5220792f63b93a1086bfd0688e7ec",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/import-probe-replay.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/import-probe-replay.stdout.log": "1b53899764bc0d90e99da3463e43113666f0619d7a90427f4e6fd01b3d25d9e2",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/import-probe.py": "c393ad227c33fd84d5afecc57237a0ec4cfcb58392dbaac602c8ae2adb7ee9d9",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/original-receipt.json": "c426086270cd7cda71cf244c3cbe78e377cc557f47a19ec9ffa9b3fa79c7dda5",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/preliminary-arithmetic-replay.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/preliminary-arithmetic-replay.stdout.log": "104b5cd9404c6480082d3f22e5e3106ae16edbccef919d3f1cf6b070d8eafdf2",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/preliminary-arithmetic.py": "184143953131edeba86090f951f7b2b6d34da048b23e45fce28402644edcb5fa"
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log": "104b5cd9404c6480082d3f22e5e3106ae16edbccef919d3f1cf6b070d8eafdf2"
   },
   "outputs": {
     "papers/completion/neurosymbolic_supervision/artifacts/source_forest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json",
@@ -100,48 +81,16 @@
   ],
   "commands": [
     {
-      "argv": [
-        "env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ns-002-command-correction-2xrivk9x/replay-home",
-        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
-        "IPFS_AUTO_INSTALL=false",
-        "IPFS_DATASETS_AUTO_INSTALL=false",
-        "IPFS_KIT_AUTO_INSTALL_DEPS=0",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "/usr/bin/python3.12",
-        "-"
-      ],
+      "argv": ["env", "-i", "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin", "HOME=<fresh-validation-home>", "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit", "/usr/bin/python3.12", "-"],
       "cwd": ".",
       "exit_code": 0,
-      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/import-probe-replay.stdout.log",
-      "stdin_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/import-probe.py",
-      "started_at": "2026-09-11T17:07:25.992832+00:00",
-      "finished_at": "2026-09-11T17:07:26.516000+00:00",
-      "execution_kind": "independent_replay_of_retained_historical_stdin_program"
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
     },
     {
-      "argv": [
-        "env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ns-002-command-correction-2xrivk9x/replay-home",
-        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
-        "IPFS_AUTO_INSTALL=false",
-        "IPFS_DATASETS_AUTO_INSTALL=false",
-        "IPFS_KIT_AUTO_INSTALL_DEPS=0",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "/usr/bin/python3.12",
-        "-"
-      ],
+      "argv": ["/usr/bin/python3.12", "-"],
       "cwd": ".",
       "exit_code": 0,
-      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/preliminary-arithmetic-replay.stdout.log",
-      "stdin_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/command-correction/preliminary-arithmetic.py",
-      "started_at": "2026-09-11T17:07:26.516271+00:00",
-      "finished_at": "2026-09-11T17:07:26.552937+00:00",
-      "execution_kind": "independent_replay_of_retained_historical_stdin_program"
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log"
     }
   ],
   "limitations": {

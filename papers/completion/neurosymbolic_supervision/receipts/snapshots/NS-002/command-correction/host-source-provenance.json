@@ -1,0 +1,123 @@
+{
+  "schema": "paper-host-source-provenance-clarification/v1",
+  "observed_at": "2026-09-11T17:07:25.992219+00:00",
+  "integration_commit": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
+  "host_repositories": [
+    {
+      "repository": "external/ipfs_accelerate",
+      "integration_gitlink": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "host_checkout_head": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "host_tracked_status": "",
+      "replay_export": "Exact Git archive of package tree and required raw artifacts; no live checkout files copied."
+    },
+    {
+      "repository": "external/ipfs_datasets",
+      "integration_gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "host_checkout_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "host_tracked_status": "",
+      "replay_export": "Exact Git archive of package tree and required raw artifacts; no live checkout files copied."
+    },
+    {
+      "repository": "external/ipfs_kit",
+      "integration_gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "host_checkout_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "host_tracked_status": "",
+      "replay_export": "Exact Git archive of package tree and required raw artifacts; no live checkout files copied."
+    }
+  ],
+  "source_crosschecks": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/formal_assurance_cegis.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "9d4c230b0948628eef7818eceb5583f029c1b862fdea63e9566dc223243dc2f4",
+      "git_object_sha256": "9d4c230b0948628eef7818eceb5583f029c1b862fdea63e9566dc223243dc2f4",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/deterministic_repair_composition.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "31f6460bf9ee0bab4806b09be04bbf3eae7eba17614661bfecf35293d9ac1b67",
+      "git_object_sha256": "31f6460bf9ee0bab4806b09be04bbf3eae7eba17614661bfecf35293d9ac1b67",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "952ab04860b135248c5c286417c0f18fe85930a3b1c4dd1b7e8ccc757b6f6a39",
+      "git_object_sha256": "952ab04860b135248c5c286417c0f18fe85930a3b1c4dd1b7e8ccc757b6f6a39",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/__init__.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "expected_sha256": "b4182826af58a52d90da4cea3c57ee684be90d4b41e39f209a697a0bbd8e3e45",
+      "git_object_sha256": "b4182826af58a52d90da4cea3c57ee684be90d4b41e39f209a697a0bbd8e3e45",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/__init__.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "112a3e11907cc0a609f1a99aa58103214ecfa52175b169205c461a3e14f6f0ef",
+      "git_object_sha256": "112a3e11907cc0a609f1a99aa58103214ecfa52175b169205c461a3e14f6f0ef",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+      "git_object_sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/benchmark.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "f0d4bb0f334869e3facc7d9fdf597ccb7f68d1788f112377dc5d7231d6647c22",
+      "git_object_sha256": "f0d4bb0f334869e3facc7d9fdf597ccb7f68d1788f112377dc5d7231d6647c22",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/counterexample_guided_tactician.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "4665e1b61ad4deb7e9b31d7b062bf365b3bc0cdfee953333128cab61d7a20f71",
+      "git_object_sha256": "4665e1b61ad4deb7e9b31d7b062bf365b3bc0cdfee953333128cab61d7a20f71",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/datasets_adapter.py",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "8075843572a05070f3037c74680292647febc5ed7bd603c9cfca458b437ba391",
+      "git_object_sha256": "8075843572a05070f3037c74680292647febc5ed7bd603c9cfca458b437ba391",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/requirements-proof-reuse.txt",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "4809b7012f515cfaea30140a117c86e47ada29f96fff9045eff57e390cf2fc8b",
+      "git_object_sha256": "4809b7012f515cfaea30140a117c86e47ada29f96fff9045eff57e390cf2fc8b",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_datasets/requirements-theorem-provers.txt",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "expected_sha256": "cb22dd5328bca48746c0747e2580a19b1a8602ed008875ad11c0eb650df825b9",
+      "git_object_sha256": "cb22dd5328bca48746c0747e2580a19b1a8602ed008875ad11c0eb650df825b9",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/docs/benchmarks/semantic_compression_harness_results.json",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "c7c71899bc7d7abf55c21c169055af1a85d680982ada4f538aad922b57b3b2dd",
+      "git_object_sha256": "c7c71899bc7d7abf55c21c169055af1a85d680982ada4f538aad922b57b3b2dd",
+      "match": true
+    },
+    {
+      "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/summary.json",
+      "commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "expected_sha256": "e76123068ebe94557647f90044155c06126ab3f6cc33efb27ab0c2e3033f00f6",
+      "git_object_sha256": "e76123068ebe94557647f90044155c06126ab3f6cc33efb27ab0c2e3033f00f6",
+      "match": true
+    }
+  ],
+  "scope": "Host Git objects independently identify bytes; original provider-visible Git failures remain historical observations.",
+  "benchmark_executed": false
+}

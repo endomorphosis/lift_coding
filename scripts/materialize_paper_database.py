@@ -19,6 +19,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
+PREFIXES = dict(zip(PAPERS, ("AF", "LA", "NS")))
 
 
 def _native(repo_root):
@@ -93,6 +94,32 @@ def _validation_argv(command, paper, task_id):
     return actual
 
 
+def _task_outputs(paper, task_id, outputs, repo_root):
+    """Admit one task-specific evidence directory, never a receipt subtree."""
+    if paper not in PREFIXES or not isinstance(task_id, str) or not re.fullmatch(re.escape(PREFIXES[paper]) + r"-[0-9]{3,}", task_id):
+        raise ValueError(f"invalid paper/task evidence identity: {paper}/{task_id}")
+    receipt = f"papers/completion/{paper}/receipts/{task_id}.json"
+    snapshots = f"papers/completion/{paper}/receipts/snapshots/{task_id}/"
+    admitted = []
+    receipt_roots = [Path(f"papers/completion/{name}/receipts") for name in PAPERS]
+    for output in [*outputs, receipt, snapshots]:
+        if not isinstance(output, str) or not output.strip() or output != output.strip():
+            raise ValueError("invalid empty or non-string native output path")
+        resolved = _path(repo_root, output)
+        path = Path(output)
+        if str(path) != output.removesuffix("/") or any(char in output for char in "*?[]\\,\r\n\x00"):
+            raise ValueError(f"native output path must be canonical and literal: {output}")
+        if output in {receipt, snapshots} and resolved != repo_root / path:
+            raise ValueError(f"task evidence path must not redirect through symlinks: {output}")
+        if output not in {receipt, snapshots} and any(
+                path == root or path.is_relative_to(root) or root.is_relative_to(path)
+                for root in receipt_roots):
+            raise ValueError(f"native output grants foreign or broad receipt evidence scope: {output}")
+        if output not in admitted:
+            admitted.append(output)
+    return admitted
+
+
 def build_population(paper, repo_root=ROOT):
     repo_root = Path(repo_root).resolve()
     if paper not in PAPERS:
@@ -160,8 +187,7 @@ def build_population(paper, repo_root=ROOT):
             raise ValueError(f"task {alias} needs evidence-aware status migration rather than fresh bootstrap")
         if not task.validation or not task.outputs or not task.acceptance:
             raise ValueError(f"task {alias} lacks executable output/validation/acceptance contract")
-        for output in task.outputs:
-            _path(repo_root, output)
+        outputs = _task_outputs(paper, alias, task.outputs, repo_root)
         criteria = seed["acceptance_criteria"] if seed else [task.acceptance]
         # Flatten native metadata: the database Portal bridge re-renders body
         # keys, so nesting it under metadata would lose Goal id / scope fields.
@@ -174,7 +200,7 @@ def build_population(paper, repo_root=ROOT):
                   "board_namespace": task.board_namespace,
                   "depends_on": [task_cids[d] for d in task.depends_on],
                   "outputs": [{"path": output, "kind": "directory" if output.endswith("/") else "file"}
-                              for output in task.outputs],
+                              for output in outputs],
                   "acceptance_criteria": criteria,
                   "validation_commands": [{"argv": _validation_argv(command, paper, alias), "source_command": command}
                                           for command in task.validation],
@@ -233,7 +259,7 @@ def materialize(paper, database, repo_root=ROOT):
                     planned = expected[record.task_cid]
                     if set(record.dependencies) != set(planned["depends_on"]):
                         raise ValueError(f"dependency projection mismatch: {record.task_alias}")
-                    if [o["path"] for o in record.outputs] != [o["path"] for o in planned["outputs"]]:
+                    if [(o["path"], o["effect"].get("kind")) for o in record.outputs] != [(o["path"], o["kind"]) for o in planned["outputs"]]:
                         raise ValueError(f"output projection mismatch: {record.task_alias}")
                     if record.body.get("goal id") != planned["goal id"]:
                         raise ValueError(f"native goal metadata was lost: {record.task_alias}")

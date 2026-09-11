@@ -1,0 +1,6 @@
+Command: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit /usr/bin/python3.12 -c '<LA-002 structural assertions>'
+Exit code: 0
+Output:
+LA-002 audit structural check: PASS
+contributions=4; corpus_claims=7; default=OFF; store=InMemoryCapabilityConsumptionStore
+logic/backend inventory, fixture/live limitations, selected routes, and experiment triage: present

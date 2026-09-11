@@ -1,0 +1,265 @@
+{
+  "schema": "autoformalization-claim-task-map/v1",
+  "frozen_at": "2026-09-11T00:00:00+00:00",
+  "execution_state": "all mapped experiments planned_unrun",
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "A source-grounded pipeline improves independently adjudicated source-facet fidelity on unseen natural source-family/time groups.",
+      "primary_metrics": [
+        "all-facet fidelity",
+        "coverage"
+      ],
+      "experiments": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "T0",
+        "T2"
+      ],
+      "controls": [
+        "C_vs_B",
+        "D_vs_C",
+        "E_vs_D",
+        "T2_vs_T0"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-004",
+        "AF-005",
+        "AF-007",
+        "AF-010",
+        "AF-011",
+        "AF-016"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "Without independent labels and measured controls, retain only method description; teacher loss cannot support this claim."
+    },
+    {
+      "id": "C2",
+      "claim": "Checked bridges and bounded learned advice improve useful native-checker proof coverage without increased false transfer.",
+      "primary_metrics": [
+        "native checked useful-proof coverage",
+        "false transfer rate",
+        "coverage",
+        "total cost"
+      ],
+      "experiments": [
+        "C",
+        "D",
+        "E"
+      ],
+      "controls": [
+        "D_vs_C",
+        "E_vs_D"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-004",
+        "AF-005",
+        "AF-007",
+        "AF-010",
+        "AF-015",
+        "AF-016"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "Solver-local or fixture outcomes cannot establish native proof coverage; unavailable proof routes remove this claim only."
+    },
+    {
+      "id": "C3",
+      "claim": "Shared learning generalizes beyond sample memory.",
+      "primary_metrics": [
+        "unseen all-facet fidelity",
+        "seen versus unseen diagnostic",
+        "coverage",
+        "cost"
+      ],
+      "experiments": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "controls": [
+        "T2_vs_T0",
+        "T1_vs_T2"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-004",
+        "AF-005",
+        "AF-008",
+        "AF-009",
+        "AF-011"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "T1 is a memorization diagnostic; no final-test/trained-checkpoint evidence means no gain claim."
+    },
+    {
+      "id": "C4",
+      "claim": "Isolated trusted proof feedback improves routing/calibration without harming source fidelity.",
+      "primary_metrics": [
+        "calibration",
+        "route value",
+        "protected-objective invariance",
+        "all-facet fidelity"
+      ],
+      "experiments": [
+        "T2",
+        "T3"
+      ],
+      "controls": [
+        "T3_vs_T2"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-005",
+        "AF-009",
+        "AF-011",
+        "AF-012"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "A predictive head or checker-derived target without isolated update/checker evidence does not support this claim."
+    },
+    {
+      "id": "C5",
+      "claim": "Promoted guidance improves a real compiler/realizer consumer on unseen material.",
+      "primary_metrics": [
+        "consumer activation",
+        "unseen fidelity",
+        "native checked coverage",
+        "regressions"
+      ],
+      "experiments": [
+        "T3",
+        "T4"
+      ],
+      "controls": [
+        "T4_vs_T3"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-004",
+        "AF-005",
+        "AF-011",
+        "AF-012",
+        "AF-013"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "An export or canary-only result without load receipt and locked-test evaluation does not support deployment improvement."
+    },
+    {
+      "id": "C6",
+      "claim": "A bounded executable repair improves a sealed starting arm without test-selected patches.",
+      "primary_metrics": [
+        "unseen fidelity",
+        "native checked coverage",
+        "regressions",
+        "repair cost"
+      ],
+      "experiments": [
+        "T4",
+        "T5"
+      ],
+      "controls": [
+        "T5_vs_sealed_T4"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-004",
+        "AF-005",
+        "AF-013",
+        "AF-014"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "A proposed or unexecuted patch is methods evidence only and does not complete T5."
+    },
+    {
+      "id": "C7",
+      "claim": "Retrieval, premise selection, planning, and proof assistance have separable matched-budget utility.",
+      "primary_metrics": [
+        "independent relevance",
+        "accepted-premise yield",
+        "replay/coverage",
+        "native acceptance",
+        "cost"
+      ],
+      "experiments": [
+        "table13_retrieval",
+        "table13_premise",
+        "table13_planning",
+        "table13_assistance",
+        "T3",
+        "T4"
+      ],
+      "controls": [
+        "lexical_vector_graph",
+        "baseline_graph_selector",
+        "unguided_guided",
+        "hammer_leanstral",
+        "proof_heads_off_on",
+        "guidance_off_promoted"
+      ],
+      "required_tasks": [
+        "AF-003",
+        "AF-004",
+        "AF-005",
+        "AF-017",
+        "AF-018",
+        "AF-019"
+      ],
+      "status": "unmeasured",
+      "narrowing_rule": "Proxy labels, hand-authored selector weights, or declared-only routes stay qualified and cannot support utility claims."
+    }
+  ],
+  "condition_crosswalk": {
+    "A": [
+      "C1"
+    ],
+    "B": [
+      "C1"
+    ],
+    "C": [
+      "C1",
+      "C2"
+    ],
+    "D": [
+      "C1",
+      "C2"
+    ],
+    "E": [
+      "C1",
+      "C2"
+    ],
+    "T0": [
+      "C1",
+      "C3"
+    ],
+    "T1": [
+      "C3"
+    ],
+    "T2": [
+      "C1",
+      "C3",
+      "C4"
+    ],
+    "T3": [
+      "C4",
+      "C5"
+    ],
+    "T4": [
+      "C5",
+      "C6",
+      "C7"
+    ],
+    "T5": [
+      "C6"
+    ]
+  },
+  "global_guardrails": [
+    "No value, zero, capability, activation, or completion follows from code, fixtures, plan entries, or unavailable conditions.",
+    "Final-test outcomes cannot select settings, prompts, grammar, thresholds, retrieval tuning, or patches.",
+    "Narrowing a claim never changes a run status or completes the empirical goal."
+  ]
+}
