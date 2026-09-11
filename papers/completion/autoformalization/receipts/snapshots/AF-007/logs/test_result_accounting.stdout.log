@@ -1,0 +1,22 @@
+test_composition_adapter_keeps_solver_local_out_of_native_proof (__main__.AdapterAndFrozenPopulationTests.test_composition_adapter_keeps_solver_local_out_of_native_proof) ... ok
+test_frozen_unrun_population_keeps_1913_and_zero_measured_rows (__main__.AdapterAndFrozenPopulationTests.test_frozen_unrun_population_keeps_1913_and_zero_measured_rows) ... ok
+test_roundtrip_fixture_adapter_cannot_enter_measured_table (__main__.AdapterAndFrozenPopulationTests.test_roundtrip_fixture_adapter_cannot_enter_measured_table) ... ok
+test_invalid_no_run_and_fixture_are_not_measured_rows (__main__.AdmissionTests.test_invalid_no_run_and_fixture_are_not_measured_rows) ... ok
+test_no_run_is_not_a_measured_zero (__main__.AdmissionTests.test_no_run_is_not_a_measured_zero) ... ok
+test_self_asserted_admission_is_rejected (__main__.AdmissionTests.test_self_asserted_admission_is_rejected) ... ok
+test_dropping_timeout_from_denominator_fails (__main__.DenominatorTests.test_dropping_timeout_from_denominator_fails) ... ok
+test_every_eligible_status_remains_in_denominator (__main__.DenominatorTests.test_every_eligible_status_remains_in_denominator) ... ok
+test_reducing_eligible_count_below_frozen_ids_fails (__main__.DenominatorTests.test_reducing_eligible_count_below_frozen_ids_fails) ... ok
+test_solver_local_does_not_count_as_native_checked_proof (__main__.KindSeparationTests.test_solver_local_does_not_count_as_native_checked_proof) ... ok
+test_timeout_attempt_is_measured_zero_not_unrun (__main__.KindSeparationTests.test_timeout_attempt_is_measured_zero_not_unrun) ... ok
+test_artifact_hash_tamper_is_rejected (__main__.RegenerationTests.test_artifact_hash_tamper_is_rejected) ... ok
+test_tables_regenerate_deterministically_with_hashes (__main__.RegenerationTests.test_tables_regenerate_deterministically_with_hashes) ... ok
+test_explicit_subset_remainder_stays_in_denominator (__main__.RemainderAndGoldTests.test_explicit_subset_remainder_stays_in_denominator) ... ok
+test_fidelity_without_gold_is_unmeasured_not_zero (__main__.RemainderAndGoldTests.test_fidelity_without_gold_is_unmeasured_not_zero) ... ok
+test_kind_status_matrix_rejects_collisions (__main__.SchemaContractTests.test_kind_status_matrix_rejects_collisions) ... ok
+test_schema_distinguishes_six_result_kinds (__main__.SchemaContractTests.test_schema_distinguishes_six_result_kinds) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.011s
+
+OK

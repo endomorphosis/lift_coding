@@ -1,0 +1,619 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "autoformalization-evaluation-result/v1",
+  "title": "AF-007 provenance-preserving evaluation contracts",
+  "description": "Raw per-example records, compact population recipes, and regenerated tables. Result kinds stay distinct. Invalid, no-run, and fixture records cannot be admitted as measured table rows. Every eligible source remains in coverage denominators.",
+  "schema": "autoformalization-evaluation-result/v1",
+  "result_kinds": [
+    "native_checked_proof",
+    "solver_local_result",
+    "countermodel",
+    "bounded_observation",
+    "failure",
+    "no_run"
+  ],
+  "execution_statuses": [
+    "measured",
+    "partial",
+    "unavailable",
+    "unsupported",
+    "abstained",
+    "timeout",
+    "invalid",
+    "failure",
+    "no_run"
+  ],
+  "coverage_denominator_statuses": [
+    "measured",
+    "partial",
+    "unavailable",
+    "unsupported",
+    "abstained",
+    "timeout",
+    "invalid",
+    "failure",
+    "no_run"
+  ],
+  "blocked_from_measured_table_rows": [
+    "invalid",
+    "no_run",
+    "fixture"
+  ],
+  "attempted_execution_statuses": [
+    "measured",
+    "partial",
+    "unsupported",
+    "abstained",
+    "timeout",
+    "invalid",
+    "failure"
+  ],
+  "unattempted_execution_statuses": [
+    "no_run",
+    "unavailable"
+  ],
+  "splits": [
+    "train",
+    "selection",
+    "fixed_canary",
+    "final_test",
+    "constructed_control"
+  ],
+  "checker_classes": [
+    "native",
+    "solver_local",
+    "none"
+  ],
+  "kind_constraints": {
+    "native_checked_proof": {
+      "execution_status": ["measured", "partial"],
+      "checker_class": "native",
+      "requires_native_receipt": true,
+      "counts_as_native_checked_proof": true
+    },
+    "solver_local_result": {
+      "execution_status": ["measured", "partial"],
+      "checker_class": "solver_local",
+      "counts_as_native_checked_proof": false
+    },
+    "countermodel": {
+      "execution_status": ["measured", "partial"],
+      "counts_as_native_checked_proof": false
+    },
+    "bounded_observation": {
+      "execution_status": ["measured", "partial"],
+      "counts_as_native_checked_proof": false
+    },
+    "failure": {
+      "execution_status": [
+        "failure",
+        "timeout",
+        "unsupported",
+        "abstained",
+        "invalid",
+        "partial"
+      ],
+      "counts_as_native_checked_proof": false
+    },
+    "no_run": {
+      "execution_status": ["no_run", "unavailable"],
+      "counts_as_native_checked_proof": false
+    }
+  },
+  "admission": {
+    "measured_table_row_requires": [
+      "eligible is true",
+      "fixture is false",
+      "constructed_control does not masquerade as natural held-out evidence",
+      "execution_status is measured",
+      "result_kind is not no_run",
+      "result_kind is not failure unless the failure itself is the measured observation, which it is not for success tables",
+      "identities.experiment_arm is present",
+      "artifacts.raw_sha256 is a 64-character lowercase hex digest",
+      "native_checked_proof additionally requires identities.checker, proof.checker_class=native, and proof.receipt_sha256"
+    ],
+    "self_asserted_admission_forbidden": true,
+    "fixture_pilot_roundtrip_is_not_natural_gold": true
+  },
+  "adapters": {
+    "semantic_logic_roundtrip": {
+      "source": "external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py",
+      "maps": {
+        "forward": "reconstruction.forward",
+        "cycle": "reconstruction.cycle",
+        "final": "reconstruction.final",
+        "parse": "parse"
+      },
+      "pilot_fixture_path": "external/ipfs_datasets/tests/fixtures/semantic_roundtrip/pilot_cases.json",
+      "pilot_fixture_admission": "fixture; excluded from natural denominators and measured tables"
+    },
+    "semantic_roundtrip_compositions": {
+      "source": "external/ipfs_datasets/benchmarks/bench_semantic_roundtrip_compositions.py",
+      "maps": {
+        "composition_consistency": "consistency",
+        "bridge_transfer": "proof"
+      }
+    },
+    "content_addressing": {
+      "source": "external/ipfs_datasets/benchmarks/logic_pipeline/content_addressing.py",
+      "use": "canonical JSON bytes and SHA-256 artifact digests; CID is encoding identity, not semantic gold"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullable_sha256": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status_field": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "failure",
+            "unmeasured",
+            "unavailable",
+            "unsupported",
+            "abstained",
+            "timeout",
+            "invalid",
+            "no_run"
+          ]
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "raw_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "record_id",
+        "source_id",
+        "source_family_time_group",
+        "split",
+        "experiment_arm",
+        "eligible",
+        "fixture",
+        "constructed_control",
+        "execution_status",
+        "result_kind",
+        "parse",
+        "elaboration",
+        "source_facets",
+        "source_maps",
+        "reconstruction",
+        "consistency",
+        "proof",
+        "identities",
+        "cost",
+        "artifacts"
+      ],
+      "properties": {
+        "schema": {
+          "const": "autoformalization-evaluation-result/v1"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_family_time_group": {
+          "type": "string",
+          "minLength": 1
+        },
+        "split": {
+          "type": "string",
+          "enum": [
+            "train",
+            "selection",
+            "fixed_canary",
+            "final_test",
+            "constructed_control"
+          ]
+        },
+        "experiment_arm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eligible": {
+          "type": "boolean"
+        },
+        "fixture": {
+          "type": "boolean"
+        },
+        "constructed_control": {
+          "type": "boolean"
+        },
+        "execution_status": {
+          "$ref": "#/$defs/execution_status_enum"
+        },
+        "result_kind": {
+          "$ref": "#/$defs/result_kind_enum"
+        },
+        "parse": {
+          "$ref": "#/$defs/status_field"
+        },
+        "elaboration": {
+          "$ref": "#/$defs/status_field"
+        },
+        "source_facets": {
+          "type": "object",
+          "required": [
+            "independent_gold_present",
+            "all_facet_match",
+            "ambiguity",
+            "status"
+          ],
+          "properties": {
+            "independent_gold_present": {
+              "type": "boolean"
+            },
+            "all_facet_match": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ambiguity": {
+              "type": "object",
+              "required": ["status"],
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "labels": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": true
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        },
+        "source_maps": {
+          "$ref": "#/$defs/status_field"
+        },
+        "reconstruction": {
+          "type": "object",
+          "required": ["forward", "cycle", "final"],
+          "properties": {
+            "forward": {
+              "$ref": "#/$defs/status_field"
+            },
+            "cycle": {
+              "$ref": "#/$defs/status_field"
+            },
+            "final": {
+              "$ref": "#/$defs/status_field"
+            }
+          },
+          "additionalProperties": false
+        },
+        "consistency": {
+          "$ref": "#/$defs/status_field"
+        },
+        "proof": {
+          "type": "object",
+          "required": [
+            "useful",
+            "false_transfer",
+            "checker_class",
+            "receipt_sha256"
+          ],
+          "properties": {
+            "useful": {
+              "type": "boolean"
+            },
+            "false_transfer": {
+              "type": "boolean"
+            },
+            "checker_class": {
+              "type": "string",
+              "enum": [
+                "native",
+                "solver_local",
+                "none"
+              ]
+            },
+            "receipt_sha256": {
+              "$ref": "#/$defs/nullable_sha256"
+            },
+            "theorem": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "fragment": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "identities": {
+          "type": "object",
+          "required": [
+            "experiment_arm",
+            "model",
+            "tool",
+            "checker",
+            "compiler"
+          ],
+          "properties": {
+            "experiment_arm": {
+              "type": "string"
+            },
+            "model": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "tool": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "checker": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "compiler": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "cost": {
+          "type": "object",
+          "required": [
+            "elapsed_seconds",
+            "cpu_seconds",
+            "gpu_seconds",
+            "provider_units",
+            "memory_gib",
+            "human_review_seconds"
+          ],
+          "properties": {
+            "elapsed_seconds": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "cpu_seconds": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "gpu_seconds": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "provider_units": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "memory_gib": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "human_review_seconds": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "artifacts": {
+          "type": "object",
+          "required": ["raw_sha256"],
+          "properties": {
+            "raw_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "command_log_sha256": {
+              "$ref": "#/$defs/nullable_sha256"
+            }
+          },
+          "additionalProperties": true
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "result_kind_enum": {
+      "type": "string",
+      "enum": [
+        "native_checked_proof",
+        "solver_local_result",
+        "countermodel",
+        "bounded_observation",
+        "failure",
+        "no_run"
+      ]
+    },
+    "execution_status_enum": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "partial",
+        "unavailable",
+        "unsupported",
+        "abstained",
+        "timeout",
+        "invalid",
+        "failure",
+        "no_run"
+      ]
+    },
+    "population_recipe": {
+      "type": "object",
+      "required": [
+        "schema",
+        "eligible_basis",
+        "arms",
+        "default_execution_status",
+        "default_result_kind"
+      ],
+      "properties": {
+        "schema": {
+          "const": "autoformalization-population-recipe/v1"
+        },
+        "eligible_basis": {
+          "type": "object",
+          "required": [
+            "split",
+            "field",
+            "count"
+          ],
+          "properties": {
+            "split": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "manifest_path": {
+              "type": "string"
+            },
+            "manifest_sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": true
+        },
+        "arms": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "default_execution_status": {
+          "$ref": "#/$defs/execution_status_enum"
+        },
+        "default_result_kind": {
+          "$ref": "#/$defs/result_kind_enum"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/raw_record"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

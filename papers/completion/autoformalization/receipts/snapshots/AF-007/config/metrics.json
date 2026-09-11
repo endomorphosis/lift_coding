@@ -1,0 +1,296 @@
+{
+  "schema": "autoformalization-metrics/v1",
+  "task_id": "AF-007",
+  "frozen_at": "2026-09-11T00:00:00+00:00",
+  "description": "Prespecified metrics for provenance-preserving evaluation. Coverage denominators retain every eligible source. Invalid, no-run, and fixture records cannot occupy measured table rows. Unrun or unavailable arms are not zero-score successes.",
+  "result_kinds": [
+    "native_checked_proof",
+    "solver_local_result",
+    "countermodel",
+    "bounded_observation",
+    "failure",
+    "no_run"
+  ],
+  "coverage_rule": "All eligible examples remain denominator: measured, abstained, unsupported, unavailable, timeout, invalid, failure, partial, and no-run stay distinct and counted.",
+  "admission_policy": {
+    "measured_table_row": {
+      "eligible": true,
+      "fixture": false,
+      "execution_status": "measured",
+      "result_kind_excluded": [
+        "no_run",
+        "failure"
+      ],
+      "invalid_excluded": true,
+      "self_asserted_admission_ignored": true
+    },
+    "blocked_labels": [
+      "invalid",
+      "no_run",
+      "fixture"
+    ],
+    "solver_local_is_not_native_checked_proof": true,
+    "countermodel_is_not_native_checked_proof": true,
+    "bounded_observation_is_not_native_checked_proof": true,
+    "fixture_pilot_roundtrip_is_not_natural_held_out": true,
+    "unavailable_is_not_zero": true,
+    "no_run_is_not_measured_zero": true
+  },
+  "denominator": {
+    "id": "eligible_sources",
+    "includes_statuses": [
+      "measured",
+      "partial",
+      "unavailable",
+      "unsupported",
+      "abstained",
+      "timeout",
+      "invalid",
+      "failure",
+      "no_run"
+    ],
+    "excludes": [
+      "fixture records",
+      "ineligible records",
+      "synthetic pilot cases used as natural gold"
+    ],
+    "natural_final_test_basis": "splits.json counts.final_test.natural_source_units; aliases do not inflate the unit floor"
+  },
+  "metrics": [
+    {
+      "id": "coverage",
+      "name": "coverage/abstention accounting",
+      "numerator": "count of eligible records whose execution_status is measured",
+      "denominator": "eligible_sources",
+      "kind": "status_rate",
+      "report_also": [
+        "unavailable",
+        "unsupported",
+        "abstained",
+        "timeout",
+        "invalid",
+        "failure",
+        "no_run",
+        "partial"
+      ]
+    },
+    {
+      "id": "parse_success",
+      "name": "parse success",
+      "numerator": "admitted measured rows with parse.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true
+    },
+    {
+      "id": "elaboration_success",
+      "name": "typed elaboration success",
+      "numerator": "admitted measured rows with elaboration.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true
+    },
+    {
+      "id": "all_facet_source_fidelity",
+      "name": "all-facet source fidelity",
+      "numerator": "admitted measured rows with independent gold and all_facet_match=true",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true,
+      "requires_independent_gold": true
+    },
+    {
+      "id": "source_map_validity",
+      "name": "source-map validity",
+      "numerator": "admitted measured rows with source_maps.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true
+    },
+    {
+      "id": "forward_reconstruction",
+      "name": "forward reconstruction",
+      "numerator": "admitted measured rows with reconstruction.forward.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true,
+      "distinct_from": [
+        "cycle_reconstruction",
+        "final_reconstruction"
+      ]
+    },
+    {
+      "id": "cycle_reconstruction",
+      "name": "cycle reconstruction",
+      "numerator": "admitted measured rows with reconstruction.cycle.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true,
+      "distinct_from": [
+        "forward_reconstruction",
+        "final_reconstruction"
+      ]
+    },
+    {
+      "id": "final_reconstruction",
+      "name": "final reconstruction",
+      "numerator": "admitted measured rows with reconstruction.final.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true,
+      "distinct_from": [
+        "forward_reconstruction",
+        "cycle_reconstruction"
+      ]
+    },
+    {
+      "id": "consistency",
+      "name": "consistency",
+      "numerator": "admitted measured rows with consistency.status=success",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true
+    },
+    {
+      "id": "native_checked_useful_proof_coverage",
+      "name": "native checked useful-proof coverage",
+      "numerator": "admitted measured rows with result_kind=native_checked_proof, proof.useful=true, checker_class=native, and receipt_sha256 present",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true,
+      "requires_native_checker_receipt": true,
+      "excludes_kinds": [
+        "solver_local_result",
+        "countermodel",
+        "bounded_observation",
+        "failure",
+        "no_run"
+      ]
+    },
+    {
+      "id": "solver_local_rate",
+      "name": "solver-local result rate",
+      "numerator": "eligible records with result_kind=solver_local_result",
+      "denominator": "eligible_sources",
+      "kind": "diagnostic",
+      "not_native_checked_proof": true
+    },
+    {
+      "id": "countermodel_rate",
+      "name": "countermodel rate",
+      "numerator": "eligible records with result_kind=countermodel",
+      "denominator": "eligible_sources",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "bounded_observation_rate",
+      "name": "bounded observation rate",
+      "numerator": "eligible records with result_kind=bounded_observation",
+      "denominator": "eligible_sources",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "false_transfer_rate",
+      "name": "false transfer",
+      "numerator": "admitted measured rows with proof.false_transfer=true",
+      "denominator": "eligible_sources",
+      "kind": "outcome",
+      "requires_attempt": true
+    },
+    {
+      "id": "abstention_rate",
+      "name": "abstention",
+      "numerator": "eligible records with execution_status=abstained",
+      "denominator": "eligible_sources",
+      "kind": "status_rate"
+    },
+    {
+      "id": "unsupported_rate",
+      "name": "unsupported",
+      "numerator": "eligible records with execution_status=unsupported",
+      "denominator": "eligible_sources",
+      "kind": "status_rate"
+    },
+    {
+      "id": "unavailable_rate",
+      "name": "unavailable",
+      "numerator": "eligible records with execution_status=unavailable",
+      "denominator": "eligible_sources",
+      "kind": "status_rate"
+    },
+    {
+      "id": "timeout_rate",
+      "name": "timeout",
+      "numerator": "eligible records with execution_status=timeout",
+      "denominator": "eligible_sources",
+      "kind": "status_rate"
+    },
+    {
+      "id": "no_run_rate",
+      "name": "no-run",
+      "numerator": "eligible records with execution_status=no_run",
+      "denominator": "eligible_sources",
+      "kind": "status_rate"
+    },
+    {
+      "id": "failure_rate",
+      "name": "failure",
+      "numerator": "eligible records with execution_status=failure",
+      "denominator": "eligible_sources",
+      "kind": "status_rate"
+    },
+    {
+      "id": "invalid_rate",
+      "name": "invalid",
+      "numerator": "eligible records with execution_status=invalid",
+      "denominator": "eligible_sources",
+      "kind": "status_rate",
+      "not_admitted_as_measured_row": true
+    },
+    {
+      "id": "total_cost",
+      "name": "total cost",
+      "numerator": "sum of recorded cost fields over eligible records, including failures and unrun zeros only when a cost was actually retained",
+      "denominator": "eligible_sources",
+      "kind": "cost",
+      "unmeasured_when": "cost fields are null"
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "NC-drop-timeout",
+      "claim": "Dropping timed-out eligible sources from the denominator must fail the denominator check."
+    },
+    {
+      "id": "NC-admit-fixture",
+      "claim": "A fixture or pilot roundtrip record must not appear as a measured table row."
+    },
+    {
+      "id": "NC-admit-no-run",
+      "claim": "A no-run record must not appear as a measured table row and must not become a measured zero success."
+    },
+    {
+      "id": "NC-admit-invalid",
+      "claim": "An invalid record remains in the denominator and cannot occupy a measured table row."
+    },
+    {
+      "id": "NC-solver-as-native",
+      "claim": "A solver-local SAT/UNSAT result cannot increment native checked useful-proof coverage."
+    },
+    {
+      "id": "NC-kind-collapse",
+      "claim": "Countermodel, bounded observation, failure, and no-run remain distinct from native checked proof."
+    }
+  ],
+  "table_regeneration": {
+    "deterministic": true,
+    "canonical_json": "sort_keys, comma-colon separators, UTF-8, no NaN",
+    "required_hashes": [
+      "raw_or_recipe_sha256",
+      "metrics_sha256",
+      "schema_sha256",
+      "eligible_basis_sha256"
+    ],
+    "denominator_check_required": true
+  }
+}
