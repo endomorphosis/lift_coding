@@ -192,7 +192,7 @@ def final_test_packets(group_sizes: list[int], allocation: list[int]) -> list[di
                 "packet_id": packet_id,
                 "packet_role": "planned_final_annotation_slot",
                 "evaluation_sample": False,
-        "evaluation_eligible": False,
+                "evaluation_eligible": False,
                 "candidate_blind": True,
                 "model_outputs_present": False,
                 "teacher_ir_present": False,
