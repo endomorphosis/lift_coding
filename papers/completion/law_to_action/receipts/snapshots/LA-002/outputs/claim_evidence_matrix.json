@@ -1,0 +1,133 @@
+{
+  "schema": "law-to-action-claim-evidence-matrix/v1",
+  "audited_at": "2026-09-11T16:45:05Z",
+  "purpose": "Claim boundary audit for LA-002. This is source inspection and environment discovery, not an experiment, deployment qualification, corpus recount, or proof result.",
+  "audit_basis": {
+    "manuscript": {
+      "path": "papers/completion/law_to_action/manuscript/main.tex",
+      "sha256": "6f2ebfaa1f5e3e9b3b8a63e15f802a36da1f6e87c2bfa7cf67b515d5c2eb2d12",
+      "source_status": "LA-001 PDF reconstruction; scientific source pins transcribed from the PDF remain unverified"
+    },
+    "extracted_pdf_text": {
+      "path": "papers/completion/law_to_action/extracted.txt",
+      "sha256": "7ba3ca062ada2271540676831842f095769a6feb085d2290ba96b26fa7182541"
+    },
+    "readiness_handoff": {
+      "path": "papers/completion/law_to_action/audit/LA-002-readiness.md",
+      "sha256": "143e23a35e9911d0c542dc3aa04d969d40661f23eb9eef0d374de6c40b3b3ee8"
+    },
+    "repository_revision_resolution": "blocked: each external worktree's .git file points to a missing worktree gitdir, so git rev-parse HEAD cannot establish a current commit. File SHA-256 values below are the reproducible inspection pins for this audit; LA-003+ must repair/replace the checkout and record real immutable commits before executing experiments. The readiness handoff's observation-time heads are not adopted as experiment pins."
+  },
+  "claim_status_vocabulary": {
+    "implemented_unqualified": "Source code/symbol was inspected, but no claim of live deployment or measured research outcome follows.",
+    "fixture_only": "A hermetic/deterministic test exists; it is not source-derived, live, cryptographic, or prover evidence unless separately qualified.",
+    "declared_only": "Registry/API metadata or syntax exists, without a dispatched and retained backend result.",
+    "unsupported": "No source, pin, run, label, or model evidence supports the stated paper-level claim.",
+    "future_work": "Explicitly outside the evaluated contribution for this paper."
+  },
+  "contributions": [
+    {
+      "id": "C1",
+      "draft_claim": "Source-preserving adapters and retrieval releases for legal, CVE, and skill IR families.",
+      "status": "implemented_unqualified",
+      "code": [
+        {"repository": "external/ipfs_datasets", "path": "ipfs_datasets_py/processors/legal_data/canonical_legal_corpora.py", "sha256": "fa42a538079557955d9ce5999a16f3a4cf5491e0e5172ed6b54e0bc254f5ff34", "symbol": "canonical legal corpus registry", "test": "tests/conformance/legal_ir/test_legal_ir_compiler_conformance.py"},
+        {"repository": "external/ipfs_datasets", "path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_compiler_api.py", "sha256": "cb028e7dd7cae55aba2171b2e43ce0f4aac78ea72a7ad3d8753d2f0312d2e70c", "symbol": "legal IR compiler API", "test": "tests/conformance/legal_ir/test_legal_ir_compiler_conformance.py"},
+        {"repository": "external/ipfs_datasets", "path": "ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py", "sha256": "e48c33c7bed68da1c93539c23174d3963d01f0b7bec39b0475395c85a5851cdc", "symbol": "adapt_cvefixes_candidate", "test": "tests for the CVE security gate are fixture/hermetic by default"},
+        {"repository": "external/ipfs_datasets", "path": "ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py", "sha256": "f4df3cb60239395e2eb06fb9b2c715aa43b56665a93fbaed1a4ac9b37fbbe105", "symbol": "SkillCenter immutable reader", "test": "tests/unit/logic/intent_ir/test_skillcenter_source.py"}
+      ],
+      "what_is_supported": "Inspectable bounded adapters, provenance-oriented schemas, and conformance scaffolding.",
+      "what_is_not_supported": "Legal interpretation fidelity, corpus completeness, expert review, source licenses/access, a source-derived CVE effect benchmark, or exhaustive formalization of SkillCenter."
+    },
+    {
+      "id": "C2",
+      "draft_claim": "Multi-logic constraint compilation and proof-oriented authorization.",
+      "status": "implemented_unqualified",
+      "code": [
+        {"repository": "external/ipfs_accelerate", "path": "ipfs_accelerate_py/agent_supervisor/proof/ir_constraint_compiler.py", "sha256": "332075acbb38d4ae4037b81bcf06840e4d800f33a0f90e2b4c59517b37ec0e56", "symbol": "IRConstraintCompiler (line 1375)", "test": "test/api/test_agent_supervisor_ir_constraint_compiler.py"},
+        {"repository": "external/ipfs_datasets", "path": "ipfs_datasets_py/logic/admissibility/service.py", "sha256": "e21f01a09e0f5b19b6171dc87bbc57b115ccf183b92a030752339a0b0a8ee4e5", "symbol": "IntentAuthorizationService (line 1502)", "test": "tests/benchmarks/logic/test_intent_admissibility_benchmark.py"},
+        {"repository": "external/ipfs_datasets", "path": "ipfs_datasets_py/logic/verification_api.py", "sha256": "ab7dab72dc18cf8a4a4fccf8a97fe426875d26998680ea70f56aca5cbe118be8", "symbol": "LogicVerificationAPI@1", "test": "no LA-002 executed backend qualification"}
+      ],
+      "what_is_supported": "A compilation/authorization surface and a declarative logic/provider discovery surface.",
+      "what_is_not_supported": "A theorem for a source claim, execution of every registry family, a live prover result, or the draft's QF_LIA interpolation assertion."
+    },
+    {
+      "id": "C3",
+      "draft_claim": "DuckDB-backed supervision and exact-context enforcement.",
+      "status": "implemented_unqualified",
+      "code": [
+        {"repository": "external/ipfs_accelerate", "path": "ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py", "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0", "symbol": "SupervisorPreInvocationEnforcement.authorize_and_delegate (line 997)", "test": "test/api/test_agent_supervisor_admissibility_enforcement.py"},
+        {"repository": "external/ipfs_accelerate", "path": "ipfs_accelerate_py/agent_supervisor/control/execution_permit.py", "sha256": "d1ef6113cb915c64759dcb1614daad4f0979e2da1c816f8222deb76a4f506522", "symbol": "ExecutionPermit", "test": "not selected as an evaluated protected route in LA-002"}
+      ],
+      "what_is_supported": "The pre-invocation gate documents exact context binding and has unit-test scaffolding.",
+      "what_is_not_supported": "Default-safe deployment, complete mediation across callers, durable consumption, owner recovery, or exactly-once remote effects."
+    },
+    {
+      "id": "C4",
+      "draft_claim": "Content-addressed, peer-accessible evidence and delegated MCP execution.",
+      "status": "implemented_unqualified",
+      "code": [
+        {"repository": "external/ipfs_kit", "path": "ipfs_kit_py/mcp_server/authorization.py", "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd", "symbol": "AuthorizationGate (line 109)", "test": "tests/runtime_readiness/mcplusplus/test_authorization_dispatch_gate.py"}
+      ],
+      "what_is_supported": "An inspectable authorization dispatch boundary and test contract.",
+      "what_is_not_supported": "Peer availability, content retention/retrieval, live network transport, real UCAN cryptographic verification, or proof-capability equivalence."
+    }
+  ],
+  "generated_code_effect_boundary": {
+    "status": "implemented_unqualified",
+    "code": {"repository": "external/ipfs_accelerate", "path": "ipfs_accelerate_py/agent_supervisor/proof/cve_security_gate.py", "sha256": "32b413d70cd47daefd36d50152e592003e5163baa4dfd16a261db8fcd0c84af3", "symbols": ["_effect_for_action (line 498)", "map_code_security_requests", "correlate_security_requests", "evaluate_cve_security_gate"], "test": "test/api/test_agent_supervisor_cve_security_gate.py"},
+    "limitation": "The inspected path maps supplied fact groups/handlers; it is not independent observation of arbitrary generated code. A benchmark must retain a separate code/handler effect extraction record and test a forbidden effect at the delegate boundary."
+  },
+  "enforcement_defaults_and_test_limits": {
+    "default_mode": {"value": "off", "source": "SupervisorPreInvocationEnforcement.mode line 644 and from_env line 693", "effect": "OFF calls the delegate without receipt verification or consumption (lines 1027-1044). It is not enforcement."},
+    "default_consumption_store": {"value": "InMemoryCapabilityConsumptionStore", "source": "__post_init__ line 656", "effect": "State is process-local; restart/recovery, cross-worker replay prevention, and durable single use are unqualified."},
+    "configured_enforce_requirement": "A later experiment must explicitly inject ENFORCE mode, a durable consumption store, authorization service, roots, issuer and clock, and must prove the chosen handler calls this boundary exactly once.",
+    "fixture_vs_live": [
+      {"surface": "CVE e2e", "status": "fixture_only by default", "evidence": "test_agent_supervisor_cve_security_e2e.py declares the default suite hermetic. Its live smoke is skipped unless CVEFIXES_SECURITY_IR_RUN_LIVE_HUB=1 plus exact revision, manifest SHA-256, and release-root pins are present."},
+      {"surface": "intent admissibility benchmark", "status": "fixture_only", "evidence": "tests/benchmarks/logic/test_intent_admissibility_benchmark.py calls itself offline deterministic and reconstructs fixture recipes; it is not a live model/prover experiment."},
+      {"surface": "MCP dispatch", "status": "fixture_only", "evidence": "test_authorization_dispatch_gate.py injects _Verifier and _PolicyProvider and uses eyJ.not-a-real-bearer-token.signature."},
+      {"surface": "enforcement unit tests", "status": "unit fixture with optional skip", "evidence": "test_agent_supervisor_admissibility_enforcement.py skips its authorization-dependent cases if the datasets authorization surface is unavailable."}
+    ]
+  },
+  "trained_normalizer_claim": {
+    "draft_claim": "A learned normalizer and trained semantic encoder operate behind the SkillCenter ports.",
+    "status": "unsupported",
+    "code": {"path": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/normalize/skill.py", "sha256": "a4213c6a9c3a872797863375905c3f50d1e02db477425116b2d04c9a9ff048fd", "symbols": ["SkillCenterIntentNormalizer", "UntrustedIntentCandidateProvider"], "observed_behavior": "The default is a small deterministic structural normalizer. An optional injectable provider can propose untrusted candidates, which remain decoder/schema/provenance/grounding checked."},
+    "missing_evidence": ["model identity and immutable weights", "training data and license", "tokenizer and inference configuration", "reviewed outputs and error analysis", "held-out trained-versus-deterministic comparison"],
+    "paper_action": "Do not claim a trained normalizer or encoder in the evaluated contribution. LA-007/LA-009 may add a separately pinned and evaluated model; otherwise retain only deterministic normalization as infrastructure."
+  },
+  "numerical_corpus_claims": [
+    {"family": "municipal", "claim": "567 jurisdictions; fourth drop 300 new jurisdictions, 448090 HTML sections, 41 states", "units": "jurisdictions/sections/states", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 immutable manifest and recount of the selected cohort; do not portray release totals as evaluated records."},
+    {"family": "Netherlands legal", "claim": "4999 laws; 89737 articles", "units": "laws/articles", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 manifest and selected-cohort recount."},
+    {"family": "Belgium legal", "claim": "9116 instruments plus 282 leftovers", "units": "instruments/leftovers", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 manifest and selected-cohort recount."},
+    {"family": "CVEfixes", "claim": "12987 input rows; 12714 derived records; 273 tombstones", "units": "rows/derived records/tombstones", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 pin/recount; live source requires the explicit hub pins."},
+    {"family": "CVEfixes", "claim": "85169 nodes; 167364 edges", "units": "graph nodes/edges", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 pin/recount; graph size is not effectiveness."},
+    {"family": "SkillCenter", "claim": "216972 physical records in 24 bundles", "units": "records/bundles", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 manifest/recount and source policy decision."},
+    {"family": "SkillCenter", "claim": "216972 vectors", "units": "vectors", "status": "unsupported", "basis": "release card/PDF transcription", "required": "LA-004 pin/recount; vectors do not establish normalized or safe procedures."}
+  ],
+  "logic_and_backend_inventory": {
+    "audit_rule": "A family/registry entry, parser, translation, provider declaration, solver process, checker receipt, and kernel proof are distinct. No listed family has a retained LA-002 execution result.",
+    "baseline_registry_source": "external/ipfs_datasets/ipfs_datasets_py/logic/families/registry.py:build_default_registry",
+    "baseline_families_all_declared_only": ["authorization", "concurrency", "cryptographic_protocol", "datalog", "dcec", "deontic", "event_calculus", "first_order", "frame_logic", "higher_order", "horn_chc", "hyperproperty", "modal", "mu_calculus", "program", "propositional", "refinement", "separation_logic", "tdfol", "temporal", "transition_system", "epistemic", "doxastic", "intention_agency", "session_process", "dependent_type", "description_logic", "defeasible_logic", "nonmonotonic_logic", "argumentation", "situation_calculus", "probabilistic", "fuzzy_weighted", "relevance_paraconsistent", "finite_field_constraint"],
+    "wave2_registry_source": "external/ipfs_datasets/ipfs_datasets_py/logic/families/registry_v3.py:_seed_wave2_family_entries",
+    "wave2_families_all_declared_or_parse_print_only": ["deontic", "argumentation", "nonmonotonic_logic", "defeasible_logic", "description_logic", "bdi", "epistemic_temporal", "agency", "intention_agency", "mu_calculus", "finite_field_constraint", "linear_logic", "session_process", "process_calculus", "refinement"],
+    "implemented_syntax_not_backend_qualified": [
+      {"family": "tdfol", "path": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_core.py", "meaning": "native representation/proof-result types; no retained execution or checker qualification"},
+      {"family": "dcec", "path": "external/ipfs_datasets/ipfs_datasets_py/logic/CEC/native/dcec_core.py", "meaning": "native Python representation; no retained execution or checker qualification"},
+      {"family": "software verification", "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/", "meaning": "IR, frontend, translation, obligation, monitoring, and receipt modules; no selected live backend result"}
+    ],
+    "runtime_backend_kinds_all_unqualified": ["declaration_only", "in_process", "jvm_process", "native_process", "ocaml_process", "remote_service", "wasm_sandbox"],
+    "authoritative_environment_backend_availability": {"z3": "absent from required validation PATH and Python import", "cvc5": "absent from required validation PATH and Python import", "vampire": "absent from required validation PATH", "eprover": "absent from required validation PATH", "isabelle": "absent from required validation PATH", "coqc": "absent from required validation PATH", "rocq": "absent from required validation PATH", "lean": "absent from required validation PATH", "lake": "absent from required validation PATH"},
+    "paper_action": "Select at most one explicitly installed native solver/checker fragment after LA-003 freezes a protocol. QF_LIA interpolation, all other listed families, and all remote/kernel claims are out of LA-002 scope and must be marked unrun unless a later digest-bound deployment and retained receipt qualify them."
+  },
+  "scope_decision": {
+    "central_evaluated_hypothesis": "On a bounded sandbox handler, an independently extracted generated-code effect correlated with an Intent/Security constraint is denied at the actual SupervisorPreInvocationEnforcement delegate boundary when a context-bound admission is invalid; matched admitted work remains executable.",
+    "selected_protected_routes": [
+      {"route": "primary", "entrypoint": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py:SupervisorPreInvocationEnforcement.authorize_and_delegate", "mode": "explicit ENFORCE only", "handler": "one new benchmark-owned sandbox mutation handler", "not_claimed": "coverage of arbitrary supervisor, MCP, network, or remote side-effect routes"},
+      {"route": "effect correlation input", "entrypoint": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/cve_security_gate.py:map_code_security_requests/correlate_security_requests", "mode": "benchmark input only", "handler": "the same sandbox handler", "not_claimed": "independent static analysis of arbitrary generated languages"}
+    ],
+    "essential_experiments": ["LA-003 predeclared bounded fixed-action protocol and source lineage controls", "LA-006 real pinned vulnerable/fixed/unrelated CVE cases with explicit effect mappings", "LA-008 enumerate and wire the selected delegate route in ENFORCE mode", "LA-010 execute one selected, actually available fragment/checker or report the concrete dependency gap", "LA-015 paired allowed/forbidden/replay/context-mutation cases measuring handler effect counters and useful work", "LA-012 durable consumption/restart qualification if one-time/replay prevention is claimed"],
+    "optional_or_out_of_scope": ["municipal/national legal correctness evaluation pending human review", "a trained skill normalizer/encoder evaluation", "all-family backend coverage and QF_LIA interpolation", "DuckDB owner/recovery as a safety claim beyond the selected store", "real UCAN/network/libp2p parity and content availability", "semantic refactoring, sealing, learned residuals, proof-carrying test reuse, and neighboring-paper program-world work", "closed-loop agent planning/recovery, ablations, and efficiency studies until the fixed-action route works"],
+    "claim_language_now": "Call the work a bounded runtime-enforcement evaluation plan/infrastructure audit until later raw records exist. Do not report universal safety, live deployment, trained-model performance, corpus coverage, or backend execution."
+  }
+}
