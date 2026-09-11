@@ -1,0 +1,28 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/autoformalization/evaluation/reference_semantics.py"
+    ],
+    "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af006_independent_correction/candidate",
+    "exit_code": 0,
+    "started_at": "2026-09-11T18:33:06.434291+00:00",
+    "finished_at": "2026-09-11T18:33:06.477907+00:00",
+    "stdout": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af006_independent_correction/candidate/papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/reconstruction.stdout.log",
+    "stderr": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af006_independent_correction/candidate/papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/reconstruction.stderr.log"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py",
+      "--root",
+      "."
+    ],
+    "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af006_independent_correction/candidate",
+    "exit_code": 1,
+    "started_at": "2026-09-11T18:33:06.478122+00:00",
+    "finished_at": "2026-09-11T18:33:06.561805+00:00",
+    "stdout": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af006_independent_correction/candidate/papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stdout.log",
+    "stderr": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af006_independent_correction/candidate/papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stderr.log"
+  }
+]

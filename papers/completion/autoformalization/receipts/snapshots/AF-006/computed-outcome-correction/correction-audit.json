@@ -1,0 +1,29 @@
+{
+  "scope": "Correct computed finite outcomes and their evidence, preserving all twelve reference checks and all twelve constructed minimal-pair specifications.",
+  "prior_receipt_sha256": "870736eef0e2058edbec2c6fc5eae9b67e2450e32419157159206ff3dac69180",
+  "prior_worker_commit": "b255e2b6b188a7ad05270576a168f55cfc3c48f0",
+  "prior_merge_commit": "72dc678ee7698a76a8e9d9f8217bfdb4feb3c4f2",
+  "prior_source_sha256": "761e0fc52fabff7fa2030368a5f802fee8c415cfb852a0aab685b25d03ddccf8",
+  "defect_reproduction": {
+    "operation": "in-memory replacement of old box() by constant True",
+    "actual_counterexamples": {
+      "C02": 16,
+      "C03": 30
+    },
+    "old_all_expected_outcomes_matched": true,
+    "reproduction_log": "papers/completion/runtime_bootstrap/seventh_campaign_independent_observation/measurement-findings.log",
+    "reproduction_log_sha256": "2d4f38c10f7eaa7c8cb34077828dee99804517dfa20d9526b5223e533f995e17"
+  },
+  "correction": "Expected labels no longer populate actual outputs. Real finite Boolean/count/trace/identity/meaning values and actual enumeration lengths determine each match. Mismatches remain in CLI output with exit1; strict evaluation raises.",
+  "validation": "Separate integer-mask modal encodings, backwards-until recurrence, explicit witness checks, twelve semantic/enumeration mutations spanning C01-C12, and expectation-echo negative check.",
+  "prior_commands": "The previous receipt and all eight referenced snapshots are preserved byte-for-byte. Its exact commands describe the old historical execution only; its false assurance that every semantic drift would fail is superseded. Do not replay those old commands against the corrected schema as if they validated it.",
+  "initial_validator_failure": "The first reviewer validator compared in-memory tuples to JSON-decoded lists. It failed before mutation checks. Corrected only the persisted-result comparison to JSON-normalized equality; no logical expected outcome or enumeration changed. Failed source, stderr and exact command metadata retained here.",
+  "no_claims": [
+    "Historical program recovery",
+    "Natural-distribution accuracy",
+    "Learned model or real project compiler/prover evaluation",
+    "Independent human gold annotation",
+    "Unbounded semantic soundness"
+  ],
+  "live_lane_or_native_db_modified": false
+}
