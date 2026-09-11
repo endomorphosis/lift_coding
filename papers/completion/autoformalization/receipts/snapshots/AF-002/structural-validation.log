@@ -1,0 +1,6 @@
+Command: /usr/bin/python3.12 -m json.tool papers/completion/autoformalization/config/experiment_plan.json; /usr/bin/python3.12 -m json.tool papers/completion/autoformalization/evidence/claim_task_map.json; structural assertions
+Exit code: 0
+AF-002 structural plan validation: PASS (11 conditions, fixed final-test lock, explicit status and required fields)
+Command: PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-002
+Exit code: 0
+Result: artifact_integrity_valid=true; current_outputs_checked=true.
