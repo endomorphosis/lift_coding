@@ -1,0 +1,105 @@
+{
+  "claim_limits": [
+    "This accounting does not execute models, compilers, or native checkers.",
+    "Unrun and unavailable conditions are not measured zeros.",
+    "Solver-local results, countermodels, and bounded observations are not native checked proofs.",
+    "Fixture and invalid records cannot occupy measured table rows."
+  ],
+  "deliverable_sha256": {
+    "metrics.json": "eeed41f09c403192b1717c49e053916076710239fc335197bfd9c516a8dd5dbc",
+    "result_schema.json": "992989b872ea76d29518f5b763014f37abb174fbddd112c0d0c50a39c14ed89d",
+    "run_benchmark.py": "59fc5bf9e94a59802ee2fde60075c6e111c40911e8f370285ddc721589c3c2ba",
+    "test_result_accounting.py": "2746617ac206a31d519d4619a9c4ccd2f691306baeed18972a160ba8a2b4acac"
+  },
+  "empirical_arms_executed": [],
+  "frozen_inputs": {
+    "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+  },
+  "home": "/tmp",
+  "model_invoked": false,
+  "native_checker_invoked": false,
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "provider_invoked": false,
+  "python": "/usr/bin/python3.12",
+  "result_kinds": [
+    "native_checked_proof",
+    "solver_local_result",
+    "countermodel",
+    "bounded_observation",
+    "failure",
+    "no_run"
+  ],
+  "schema": "autoformalization-af007-accounting-audit/v1",
+  "schema_contract": {
+    "execution_statuses": [
+      "measured",
+      "partial",
+      "unavailable",
+      "unsupported",
+      "abstained",
+      "timeout",
+      "invalid",
+      "failure",
+      "no_run"
+    ],
+    "metrics": [
+      "coverage",
+      "parse_success",
+      "elaboration_success",
+      "all_facet_source_fidelity",
+      "source_map_validity",
+      "forward_reconstruction",
+      "cycle_reconstruction",
+      "final_reconstruction",
+      "consistency",
+      "native_checked_useful_proof_coverage",
+      "solver_local_rate",
+      "countermodel_rate",
+      "bounded_observation_rate",
+      "false_transfer_rate",
+      "abstention_rate",
+      "unsupported_rate",
+      "unavailable_rate",
+      "timeout_rate",
+      "no_run_rate",
+      "failure_rate",
+      "invalid_rate",
+      "total_cost"
+    ],
+    "metrics_sha256": "4967536285aeec398b6c937c0a7fdca019d3ce70ce6dc27fb17a4b20f6c0b547",
+    "result_kinds": [
+      "native_checked_proof",
+      "solver_local_result",
+      "countermodel",
+      "bounded_observation",
+      "failure",
+      "no_run"
+    ],
+    "schema": "autoformalization-evaluation-result/v1",
+    "schema_sha256": "f4535079d82d930a0e9631e2bb9abac828664b506896c10296ce8569cddf8d99"
+  },
+  "task_id": "AF-007",
+  "unrun_tables": {
+    "admitted_measured_rows": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "T0": 0,
+      "T1": 0,
+      "T2": 0,
+      "T3": 0,
+      "T4": 0,
+      "T5": 0
+    },
+    "denominator_checks_pass": true,
+    "eligible": 1913,
+    "path": "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/unrun_tables.json",
+    "sha256": "629665ae667ed32c1d57769846da7ff7b26cd6faad4871a54816c6bb0ad291a1",
+    "tables_sha256": "3d9b9e2fd9cbdfeea22d0847363c548519f8e442707f51a026ee717e835112d5"
+  }
+}

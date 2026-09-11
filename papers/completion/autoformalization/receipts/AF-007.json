@@ -1,0 +1,173 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-007",
+  "status": "complete",
+  "completed_at": "2026-09-11T23:15:37.781337+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-evaluation-result/v1",
+      "metrics_schema": "autoformalization-metrics/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+      "sha256": "59fc5bf9e94a59802ee2fde60075c6e111c40911e8f370285ddc721589c3c2ba"
+    },
+    "frozen_inputs": {
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5"
+    },
+    "empirical_execution": "none; A-E/T0-T5 remain unrun; this task is accounting/admission only"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/config/metrics.json": "eeed41f09c403192b1717c49e053916076710239fc335197bfd9c516a8dd5dbc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/result_schema.json": "992989b872ea76d29518f5b763014f37abb174fbddd112c0d0c50a39c14ed89d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py": "59fc5bf9e94a59802ee2fde60075c6e111c40911e8f370285ddc721589c3c2ba",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/test_result_accounting.py": "2746617ac206a31d519d4619a9c4ccd2f691306baeed18972a160ba8a2b4acac",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/accounting_audit.json": "fc0c5dcbc4a47de66b3d3f6ed31dcb0b9162e827de5ef05f7241cc578cbeb0e6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/unrun_tables.json": "629665ae667ed32c1d57769846da7ff7b26cd6faad4871a54816c6bb0ad291a1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/check_schema.meta.json": "cc4d699d6d6ed93ecfad5919862c12c920184930073b5c244350cfc76a8a9cb1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/check_schema.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/check_schema.stdout.log": "aaa79b1c028cd10a235eb5afc0d8b9ad290cd22622c8e47b9a1b37c9f82a24f8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/materialize_unrun.meta.json": "d9b68ebbb468334ec1de3f5316b9bfcab9114c90f87a6f9ded1b2c77ee6c3316",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/materialize_unrun.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/materialize_unrun.stdout.log": "eadb84c1cad6b975a692b37b0abe20ae6ce7eee3153871fca3fba70c2167f93a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.meta.json": "8314b8de67096c8fbee80610b5f69effaa557bad3b187db5ea98a28f11fb8c62",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stdout.log": "64bc5bbb6d4ecd43a112a009b36d0ab7716a30b15b376c3a6cd1e74b15187438"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/run_benchmark.py": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+    "papers/completion/autoformalization/evaluation/result_schema.json": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/result_schema.json",
+    "papers/completion/autoformalization/evaluation/test_result_accounting.py": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/test_result_accounting.py",
+    "papers/completion/autoformalization/config/metrics.json": "papers/completion/autoformalization/receipts/snapshots/AF-007/config/metrics.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Every eligible source remains in coverage denominators, including unavailable, unsupported, abstained and timed-out cases.",
+      "status": "met",
+      "explanation": "The harness counts every eligible source in the coverage denominator. Compact mixed-status recipes retain unavailable, unsupported, abstained, timeout, invalid, failure, partial, measured and no-run slots; dropping a timeout fails the denominator check. The frozen final-test population of 1913 natural source units is retained as no-run for all eleven planned arms. Synthetic fixtures, coding, and trace inventories stay outside that natural denominator.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/test_result_accounting.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/unrun_tables.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/accounting_audit.json"
+      ]
+    },
+    {
+      "criterion": "Result schema distinguishes native checked proof, solver-local result, countermodel, bounded observation, failure and no-run.",
+      "status": "met",
+      "explanation": "result_schema.json and metrics.json enumerate those six result kinds. The harness rejects kind/status collisions, requires a native checker receipt for native_checked_proof, and keeps solver-local SAT/UNSAT, finite countermodels and bounded observations from incrementing native checked useful-proof coverage.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/result_schema.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/config/metrics.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/check_schema.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Invalid/no-run/fixture results cannot be admitted as measured table rows.",
+      "status": "met",
+      "explanation": "Admission is computed by the harness; raw records cannot self-assert it. Invalid, no-run and fixture records, including adapted semantic-logic-roundtrip pilot fixtures, are rejected from measured tables while remaining visible as rejected or excluded counts. Unrun arms report native-proof coverage as unrun with a null value, not a measured zero.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/test_result_accounting.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/config/metrics.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/unrun_tables.json"
+      ]
+    },
+    {
+      "criterion": "Tables can be regenerated deterministically from raw records with artifact hashes and denominator checks.",
+      "status": "met",
+      "explanation": "regenerate_tables emits canonical JSON, per-arm denominator checks, and SHA-256 digests over the recipe, records, metrics, schema and eligible basis. Repeating the same recipe yields identical bytes. Tampered artifact hashes are rejected. The frozen unrun tables digest is retained in the snapshot.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/test_result_accounting.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/unrun_tables.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/accounting_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/materialize_unrun.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/test_result_accounting.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/test_result_accounting.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/test_result_accounting.stderr.log",
+      "started_at": "2026-09-11T23:15:37.491596+00:00",
+      "finished_at": "2026-09-11T23:15:37.556976+00:00",
+      "execution_kind": "sealed accounting contract tests"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/run_benchmark.py",
+        "materialize-unrun",
+        "--root",
+        ".",
+        "--output",
+        "papers/completion/autoformalization/receipts/snapshots/AF-007/evidence/unrun_tables.json"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/materialize_unrun.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/materialize_unrun.stderr.log",
+      "started_at": "2026-09-11T23:15:37.585229+00:00",
+      "finished_at": "2026-09-11T23:15:37.647809+00:00",
+      "execution_kind": "frozen AF-002/AF-004 unrun population accounting"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/run_benchmark.py",
+        "check-schema"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-007/evaluation/run_benchmark.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/check_schema.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-007/logs/check_schema.stderr.log",
+      "started_at": "2026-09-11T23:15:37.697031+00:00",
+      "finished_at": "2026-09-11T23:15:37.739365+00:00",
+      "execution_kind": "schema and metrics contract pin"
+    }
+  ],
+  "limitations": [
+    "No A-E or T0-T5 experiment was executed.",
+    "No native checker, solver, compiler, or model was invoked.",
+    "Independent source-facet gold remains pending AF-005 review; fidelity is unmeasured.",
+    "Final-test source identities remain undisclosed; unrun tables use frozen eligible counts.",
+    "Adapted roundtrip/composition interfaces are field mappings, not live benchmark runs.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Evaluation result schema, metric catalog, provenance-preserving accounting harness, and admission/denominator tests. Empirical research runs remain unrun."
+}
