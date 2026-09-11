@@ -1,0 +1,52 @@
+{
+  "actual_probe_proof": "grok_native_quota_diagnosis_fixed.json records genuine fresh preflight + independent native session evidence and authorized quota-high decision. No implementation/fallback process invoked by the diagnostic.",
+  "changes": [
+    "Select exact encoded workspace/session or old direct session; reject ambiguous copies, symlinked directories, wrong cwd and directory identity drift; retain original terminal/summary/model/evidence checks.",
+    "Pass actual isolated verifier workspace into native evidence validator.",
+    "Forward explicitly configured closed quota-high route and fresh nonce through force_grok command assembly, preserving authentication and native quota authorization gates."
+  ],
+  "fallback_dispatched": false,
+  "fallback_prerequisites": {
+    "authenticated_cli_status": "codex login status: Logged in using ChatGPT",
+    "container_started_by_prerequisite_check": false,
+    "docker_binary": "/usr/bin/docker",
+    "native_pinned_image_verified": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+    "trusted_host_python": "/usr/bin/python3.12"
+  },
+  "files": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_implementation_route.py": "7f4a68e632a7d8ba1de2b9a245be224ec38dc5050d0a5f309efee80aa25698c9",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py": "e3f62e1c17191cc8d2eec09474eda1a1e7dc59d29af136f2ba1c94abb5402914",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py": "c49649664c73bcc2a420d1598a85cffcf00b600a3eab7a3a48b028717e8eac81",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_campaign_grok_pin.py": "7b8c88334e81429065916b2c98e22583798bb3942ca2fa4cfd1f3d9dfbedea19",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_quota_high_session.py": "c837ed52e8675c53cb0ad4135fff7772411c9367f69c877bb76a49d899403a59",
+    "papers/completion/runtime_bootstrap/diagnose_grok_quota_verifier.py": "65eee0f4c53542fbde807a28e9d9741f1217d27823428e98d75200fb344d0c9f",
+    "papers/completion/runtime_bootstrap/grok_native_quota_diagnosis.json": "36a11131dcfa1714f22452fc713d11f87f279dfe60195172b2f5ec0f1479fea4",
+    "papers/completion/runtime_bootstrap/grok_native_quota_diagnosis_fixed.json": "82fe0b8d9fa7f69173fbb4ea670405bc053788607c29d2f991fc599c41051ef4"
+  },
+  "implementation_dispatched": false,
+  "live_task_state_mutated": false,
+  "recorded_at": "2026-09-11T16:37:03.279967+00:00",
+  "root_cause": "Actual Grok native sessions are under sessions/encodeURIComponent(workspace)/UUID. Validator expected sessions/UUID, returned None. Runner then represented absent independent evidence as verifier_status=not_run although a verifier subprocess had executed.",
+  "schema": "paper-quota-high-route-repair/v1",
+  "source_hash_note": "Hashes are shared canonical workspace snapshots; daemon also contains separately reviewed supervisor/claim/environment/wait fixes and pre-existing changes. Campaign rollout records exact lane commits separately.",
+  "user_requested_route": {
+    "fallback": "gpt-5.6-terra",
+    "primary": "grok",
+    "reasoning_effort": "high",
+    "trigger": "independently_confirmed_quota_only"
+  },
+  "validation": [
+    {
+      "command": "python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_quota_high_session.py external/ipfs_accelerate/test/api/test_agent_supervisor_campaign_grok_pin.py",
+      "duration_seconds": 1.52,
+      "exit_code": 0,
+      "passed": 14,
+      "skipped": 0
+    },
+    {
+      "collection_error": "Pre-existing missing llm_router._VGO_AGENT_ROUTE_AUTHORIZATION_PATH; no tests collected; no unrelated runtime restoration attempted.",
+      "command": "python3 -m pytest -q external/ipfs_accelerate/test/api/test_llm_router_agent_implementation_route.py -k \"native_quota or route_resolver\"",
+      "exit_code": 2
+    }
+  ]
+}
