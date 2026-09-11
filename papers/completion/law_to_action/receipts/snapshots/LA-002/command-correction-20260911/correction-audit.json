@@ -1,0 +1,29 @@
+{
+  "schema": "paper-command-receipt-correction-audit/v1",
+  "audited_at": "2026-09-11T16:58:26.878637+00:00",
+  "integration_commit": "418980b7522555d03194e74eb5c790f9e7106437",
+  "original_receipt_sha256": "9d00e6d75e2d99012a77d4e0a53d5566ace886a7a3d3224a67928ed302e1565b",
+  "original_command": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "-c",
+      "LA-002 structural assertions over matrix, scope, and inventory"
+    ],
+    "cwd": ".",
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"
+  },
+  "literal_reproduction": "failed: Python SyntaxError, exit 1",
+  "underlying_historical_execution": "substantiated by original native log exact Python command and matching3 stdout lines; the receipt replaced executable code with an English description",
+  "native_log": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_database_portal_attempts/53e4a15210086ea1c1131461/implementation-logs/la-002-attempt-1.log",
+    "sha256": "4068ef8ca439d2aca6077970105ef2e233d1db70f0c69f9ec548e4255432a06f",
+    "excerpt_start_line": 8108,
+    "excerpt_end_line": 8112
+  },
+  "replay_result": "Exact historical Python code independently succeeds on hash-identical frozen audit outputs. New replay has its actual present timestamp and host context.",
+  "scope": "Correct the reproducibility metadata and distinguish host/source provenance; preserve every old snapshot and completed receipt as historical evidence. No empirical assertion or scope decision changes.",
+  "live_database_mutated": false,
+  "live_worktree_mutated": false,
+  "provider_invoked": false
+}

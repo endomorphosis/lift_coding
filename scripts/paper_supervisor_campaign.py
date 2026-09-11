@@ -180,6 +180,7 @@ def native_argv(repo, paper, lane, ready):
                  "scripts/materialize_paper_database.py", "scripts/paper_state_owner.py",
                  "scripts/paper_ducklake_projection.py", "scripts/paper_worker_observation.py",
                  "scripts/migrate_paper_validation_argv.py", "scripts/repair_paper_launch_validation.py",
+                 "scripts/repair_paper_snapshot_outputs.py",
                  "papers/completion/README.md",
                  "papers/neurips_2026_vericode_workshop.tex", "papers/neurips_2026_vericode.sty", "papers/checklist.tex"]
     for other in PAPERS:

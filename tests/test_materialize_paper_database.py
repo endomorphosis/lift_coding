@@ -5,6 +5,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 import tempfile
 import unittest
@@ -29,6 +30,9 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                     self.assertIn("predicted files", task)
                     self.assertTrue(task["native_source_block"].startswith("## " + task["task_id"]))
                     self.assertTrue(all(isinstance(item, dict) and item["path"] for item in task["outputs"]))
+                    snapshots = f"papers/completion/{paper}/receipts/snapshots/{task['task_id']}/"
+                    self.assertEqual([item for item in task["outputs"] if "receipts/snapshots/" in item["path"]],
+                                     [{"path": snapshots, "kind": "directory"}])
                     self.assertTrue(all(item["argv"] == ["python3", "scripts/paper_supervisors.py", "verify-task",
                                                         "--paper", paper, "--task", task["task_id"]]
                                         for item in task["validation_commands"]))
@@ -39,8 +43,10 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                     self.assertEqual(goal["parent_goal_cid"], expected)
 
     def test_fresh_database_is_queryable_with_exact_outputs_parent_edges_and_ready_set(self):
-        _, _, _, DatabaseTaskSource, _ = MODULE._native(MODULE.ROOT)
+        _, parse_tasks, _, DatabaseTaskSource, _ = MODULE._native(MODULE.ROOT)
         from ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge import DatabasePortalExecutionBridge
+        from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import TodoImplementationDaemon
+        from ipfs_accelerate_py.agent_supervisor.context.context_compiler import render_context_capsule
         with tempfile.TemporaryDirectory() as tmp:
             db = Path(tmp) / "control.duckdb"
             report = MODULE.materialize("law_to_action", db)
@@ -65,6 +71,29 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                 self.assertIn("- Predicted Files:", projection)
                 self.assertIn("python3 scripts/paper_supervisors.py verify-task", projection)
                 self.assertNotIn("bash -lc", projection)
+                snapshots = "papers/completion/law_to_action/receipts/snapshots/LA-003/"
+                self.assertEqual([dict(output["effect"]) for output in record.outputs if output["path"] == snapshots],
+                                 [{"path": snapshots, "kind": "directory"}])
+                repo = Path(tmp) / "worker"
+                repo.mkdir()
+                todo = repo / "projected.todo.md"
+                todo.write_text(projection)
+                for arguments in (("init",), ("add", "projected.todo.md"),
+                                  ("-c", "user.name=Paper Test", "-c", "user.email=paper@example.invalid", "commit", "-m", "baseline")):
+                    subprocess.run(["git", *arguments], cwd=repo, check=True, capture_output=True)
+                projected = parse_tasks(todo, "LA-")[0]
+                daemon = TodoImplementationDaemon(todo_path=todo, state_path=repo / "state/task.json",
+                    strategy_path=repo / "state/strategy.json", events_path=repo / "state/events.jsonl",
+                    repo_root=repo, task_header_prefix="## LA-")
+                with patch.dict(os.environ, {"IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER": "grok"}):
+                    compiled = daemon._compile_implementation_context(projected, attempt=1)
+                capsule = json.loads(render_context_capsule(compiled.capsule))
+                allowed = capsule["authority"]["edit_policy"]["allowed_paths"]
+                self.assertEqual(set(allowed), {output["path"] for output in record.outputs})
+                self.assertIn(snapshots, allowed)
+                self.assertIn(snapshots, capsule["scope"]["expected_outputs"])
+                self.assertNotIn(snapshots.replace("LA-003/", "LA-002/"), allowed)
+                self.assertNotIn(snapshots.removesuffix("LA-003/"), allowed)
             self.assertFalse(list(Path(tmp).glob(".paper-bootstrap-*")))
 
     def test_existing_database_is_never_opened_or_replaced(self):
@@ -76,6 +105,38 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                     MODULE.materialize("law_to_action", db)
                 build.assert_not_called()
             self.assertEqual(db.read_bytes(), b"existing owner data")
+
+    def test_snapshot_output_admission_rejects_foreign_broad_and_nonliteral_paths(self):
+        base = "papers/completion/law_to_action/receipts"
+        invalid = [".", "papers/", "papers/completion/law_to_action/", base + "/", base + "/snapshots/",
+                   base + "/snapshots/LA-004/", base + "/LA-004.json", base + "/snapshots/LA-003/extra.json",
+                   "papers/completion/autoformalization/receipts/snapshots/AF-003/",
+                   "reports/*.json", "./report.json", "reports//result.json", "reports/../result.json",
+                   "reports/result.json,other.json", "reports/bad\nname.json", "reports///", None, {}]
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for output in invalid:
+                with self.subTest(output=output), self.assertRaises(ValueError):
+                    MODULE._task_outputs("law_to_action", "LA-003", [output], root)
+            own = [base + "/LA-003.json", base + "/snapshots/LA-003/"]
+            self.assertEqual(MODULE._task_outputs("law_to_action", "LA-003", [*own, *own], root), own)
+            for task_id in ("AF-003", "LA-003/../LA-004", "LA-*", "LA-\u0660\u0660\u0663", None):
+                with self.subTest(task=task_id), self.assertRaisesRegex(ValueError, "evidence identity"):
+                    MODULE._task_outputs("law_to_action", task_id, [], root)
+            other = root / "another-task"
+            other.mkdir()
+            snapshots = root / base / "snapshots/LA-003"
+            snapshots.parent.mkdir(parents=True)
+            snapshots.symlink_to(other, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "redirect through symlinks"):
+                MODULE._task_outputs("law_to_action", "LA-003", [], root)
+            snapshots.unlink()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            with tempfile.TemporaryDirectory() as outside:
+                (root / "papers").symlink_to(outside, target_is_directory=True)
+                with self.assertRaisesRegex(ValueError, "escapes repository"):
+                    MODULE._task_outputs("law_to_action", "LA-003", [], root)
 
     def test_unknown_dependency_is_rejected_before_database_creation(self):
         native = MODULE._native(MODULE.ROOT)
