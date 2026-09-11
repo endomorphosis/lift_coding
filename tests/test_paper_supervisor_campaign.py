@@ -50,6 +50,8 @@ class CampaignTests(unittest.TestCase):
             "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER": "primary_quota_exhausted",
             "IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT": "high",
             "IPFS_ACCELERATE_AGENT_WORKTREE_POOL_ENABLED": "false",
+            "IPFS_ACCELERATE_AGENT_GROK_TEX_TOOLCHAIN_JSON": json.dumps(
+                CAM.read(ROOT / CAM.GROK_TEX_PROFILE), sort_keys=True, separators=(",", ":")),
         }
         foreign = {"IPFS_ACCELERATE_AGENT_IMPLEMENTATION_ROUTE_" + suffix: "foreign-test-only"
                    for suffix in ("BOARD_NAMESPACE", "AUTHORIZATION_PATH", "AUTHORIZATION_SHA256",
@@ -148,6 +150,9 @@ class CampaignTests(unittest.TestCase):
             state, paper = root / "state", "law_to_action"
             lane = state / paper
             lane.mkdir(parents=True)
+            profile = CAM.repo_for(paper, root) / CAM.GROK_TEX_PROFILE
+            profile.parent.mkdir(parents=True)
+            profile.write_bytes((ROOT / CAM.GROK_TEX_PROFILE).read_bytes())
             (lane / "control.duckdb").touch()
             (lane / "control.duckdb.bootstrap.json").write_text("{}")
             children, timers = [], []

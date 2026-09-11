@@ -1,0 +1,241 @@
+{
+  "schema": "autoformalization-annotation-provenance/v1",
+  "task_id": "AF-005",
+  "guideline_freeze": "AF-005/v1",
+  "recorded_at": "2026-09-11T21:37:33.598333+00:00",
+  "freeze": {
+    "guideline_freeze": "AF-005/v1",
+    "schema": "autoformalization-gold-facet/v1",
+    "packet_schema": "autoformalization-annotation-packet/v1",
+    "before_scored_model_output_inspection": true,
+    "model_outputs_inspected": false,
+    "inspection_scope": "This generator reads only its listed pinned protocol, source-manifest, development-export, guideline and conformance-fixture inputs. It does not inspect scored candidate outputs; this is not a universal audit of other processes or filesystem history.",
+    "final_test_bodies_inspected": false,
+    "extracted_guideline_schema": {
+      "schema": "autoformalization-gold-facet/v1",
+      "facet_ids": [
+        "propositions",
+        "modality",
+        "negation",
+        "actor_recipient_roles",
+        "quantifiers",
+        "exceptions",
+        "temporal_interpretation",
+        "ambiguity",
+        "source_spans",
+        "admissible_assumptions"
+      ],
+      "required_proposition_slots": [
+        "predicate",
+        "polarity",
+        "source_span"
+      ],
+      "modality_inventory": [
+        "obligation_O",
+        "permission_P",
+        "prohibition_F",
+        "claim_fact",
+        "knowledge_K",
+        "belief_B",
+        "other_declared",
+        "absent_no_normative_force"
+      ],
+      "negation_inventory": [
+        "factual_negation",
+        "prohibition",
+        "observed_absence_incomplete_trace",
+        "scope_over_quantifier",
+        "scope_over_condition",
+        "none"
+      ],
+      "quantifier_inventory": [
+        "none",
+        "universal",
+        "existential",
+        "numerical",
+        "order_universal_then_existential",
+        "order_existential_then_universal",
+        "unresolved_scope"
+      ],
+      "temporal_inventory": [
+        "untimed",
+        "event_time",
+        "interval_window",
+        "deadline_within",
+        "always_G",
+        "eventually_F",
+        "next_X",
+        "until_U",
+        "since",
+        "unresolved"
+      ],
+      "ambiguity_status": [
+        "single_supported_reading",
+        "multiple_admissible_readings",
+        "unresolvable_from_source",
+        "annotator_abstain"
+      ],
+      "adjudication_status": [
+        "pending_independent_review",
+        "not_applicable_single_annotator_pending",
+        "agreed",
+        "disagreed_unresolved",
+        "adjudicated"
+      ],
+      "label_origin": [
+        null,
+        "independent_human_review",
+        "automatic_teacher_derived",
+        "constructed_conformance_witness",
+        "rights_review_not_semantic"
+      ],
+      "unique_string_match_required": false,
+      "abstention_permitted": true,
+      "teacher_derived_admitted_as_gold": false
+    }
+  },
+  "sampling": {
+    "population_unique_final_test_units": 1913,
+    "population_operational_groups": 20,
+    "public_group_record_sizes_ascending": [
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      6,
+      6,
+      7,
+      8,
+      8,
+      10,
+      10,
+      15,
+      25,
+      28,
+      29,
+      1738
+    ],
+    "allocation_per_group_slot": [
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      5,
+      5,
+      5
+    ],
+    "provisional_template_slots": 100,
+    "actual_bound_final_units": 0,
+    "actual_adjudicated_final_units": 0,
+    "allocation_status": "provisional_record_histogram_template_not_a_frozen_unique_unit_sample",
+    "minimum_per_group": 3,
+    "giant_component_record_size": 1738,
+    "giant_component_allocated_units": 5,
+    "groups_unable_to_supply_five": 6,
+    "estimand": "pending_versioned_unit_vs_group_weighting_decision_before_private_binding_or_outcomes",
+    "primary_group_weights": null,
+    "supplementary_source_weights_declared_pre_outcome": null,
+    "four_macro_editions_assumed_in_sample": false,
+    "private_binding": "pending_authorized_private_unique_unit_counts_and_versioned_sampling_estimand_before_outcomes",
+    "shortfall_rule": "If aliasing leaves fewer unique units than allocated, report shortfall; do not backfill after annotation"
+  },
+  "packet_inventory": {
+    "planned_final_annotation_slot_packets": 100,
+    "development_calibration_packets": 122,
+    "pending_gold_record_templates": 100,
+    "completed_gold_records": 0,
+    "gold_records_with_values": 0
+  },
+  "teacher_derived_labels": {
+    "identified_separately": true,
+    "admitted_as_gold": false,
+    "compiler_and_view_targets_produced": 0,
+    "existing_semantic_labels_used": 0,
+    "semantic_gold_status": "pending_AF005_independent_candidate_blind_annotation",
+    "rights_review_is_not_semantic_review": true,
+    "mock_targets_semantic_claim_admission": false,
+    "hashed_term_projections": "excluded_from_semantic_embedding_and_teacher_claims",
+    "constructed_minimal_pairs": {
+      "path": "papers/completion/autoformalization/data/minimal_pairs.jsonl",
+      "sha256": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30",
+      "status": "independently_specified_constructed_witnesses_not_natural_gold"
+    },
+    "synthetic_roundtrip_fixtures": {
+      "path": "external/ipfs_datasets/tests/fixtures/semantic_roundtrip/pilot_cases.json",
+      "sha256": "6d34cdd1392d3a9964f04e4260f722e076ba7b96c3cdd2fc59749460756cf167",
+      "status": "excluded_synthetic_fixture"
+    }
+  },
+  "reusable_independent_label_audit": {
+    "independently_reviewed_labels_found": 0,
+    "reused": 0,
+    "rejected_as_non_gold": [
+      "AF-004 rights_review metadata",
+      "AF-004 teacher/compiler/view targets (none produced)",
+      "AF-006 constructed minimal pairs",
+      "semantic_roundtrip pilot fixtures"
+    ],
+    "rule": "The inspected teacher manifest records no reused semantic labels. No independent labels are supplied to this preparation; any future reuse needs a separate provenance audit."
+  },
+  "agreement_disagreement_adjudication": {
+    "basis": "real_inventory_of_annotation_records",
+    "independent_human_annotators": 0,
+    "completed_double_annotated_units": 0,
+    "agreements": 0,
+    "disagreements": 0,
+    "adjudications": 0,
+    "kappa_or_majority_imputed": false,
+    "note": "Zero is the observed count of independent annotation records, not a measured agreement statistic."
+  },
+  "independent_review": {
+    "required": true,
+    "available": false,
+    "status": "pending",
+    "effect": "affected_semantic_claims_remain_unmeasured",
+    "semantic_claims_measured": false,
+    "packets_prepared": true,
+    "gold_values_filled": false
+  },
+  "input_sha256": {
+    "splits.json": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "corpus_manifest.json": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+    "teacher_manifest.json": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+    "protocol.md": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+    "experiment_plan.json": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "annotation_guidelines.md": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+    "minimal_pairs.jsonl": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30",
+    "pilot_cases.json": "6d34cdd1392d3a9964f04e4260f722e076ba7b96c3cdd2fc59749460756cf167"
+  },
+  "partition_pins": {
+    "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "observed_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "private_membership_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126",
+    "corpus_private_inventory_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126"
+  },
+  "limitations": [
+    "Independent human review was unavailable; packets are prepared and gold values are unfilled.",
+    "Final-test source identities and bodies remain owner-only; public entries are unbound provisional templates, not committed sample membership.",
+    "Development locators are calibration only and are not the 100-unit evaluation sample.",
+    "Teacher-derived and constructed-conformance labels are identified separately and are not gold.",
+    "Zero agreement counts are an inventory of missing independent records, not high annotator reliability.",
+    "Coding/implementation and natural-trace populations remain unqualified and out of this sample."
+  ],
+  "canonical_payload_sha256": "944647a5765c566de79e2923f98ed9b308c7a4f50c0a2b7bc61d86ac8ea5ef36"
+}
