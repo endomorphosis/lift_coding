@@ -1,0 +1,66 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-003",
+  "status": "complete",
+  "completed_at": "2026-09-11T17:10:00+00:00",
+  "source_versions": {
+    "source-repository-01": "Current source revision is unresolved: external/ipfs_datasets/.git names a nonexistent gitdir. AF-002 records ac82107e246b30e35a2bbdcf75e01370d22350c6 as historical-only; current inspected-file hashes are retained in the internal source audit."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/source_audit_private.json": "6d49b050fa1dee7800e1da58c7aa96749388d95540a1399ab281b96922796b7a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/runtime_capability_matrix.json": "903437435bdba28c018f2ecf9fe15cc93543a520e292ec2af8f390eb20d4b82f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/config/environment_manifest.json": "562fabdee337aa0722348c837fe6fa6ef418ffbc21e1ae6e988c3edfac841a53",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/static-preflight-validation.log": "c425983d5f94f5824878ad72e2e041deaddc905019eff44873f3bc9f5b7258cd"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evidence/source_audit_private.json": "papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/source_audit_private.json",
+    "papers/completion/autoformalization/evidence/runtime_capability_matrix.json": "papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/runtime_capability_matrix.json",
+    "papers/completion/autoformalization/config/environment_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-003/config/environment_manifest.json"
+  },
+  "criteria": [
+    {
+      "criterion": "All 40 roles have resolved mappings or a concrete unresolved status and recovery task.",
+      "status": "met",
+      "explanation": "The internal ledger lists S01-S40. S14 and S32 retain explicit unresolved statuses and recovery tasks; every remaining role records an audited current-module mapping, source range, and content hash.",
+      "evidence": ["papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/source_audit_private.json"]
+    },
+    {
+      "criterion": "Runtime matrix separates implemented, documented-only, fixture-only, unsupported and unavailable routes; importability is not credited as end-to-end success.",
+      "status": "met",
+      "explanation": "The matrix defines all five classifications, records each route's blockers and success criterion, and records zero end-to-end successes in the sealed environment.",
+      "evidence": ["papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/runtime_capability_matrix.json"]
+    },
+    {
+      "criterion": "Chosen model/solver entry points, feature flags and resource constraints are pinned in a manifest.",
+      "status": "met",
+      "explanation": "The manifest pins the deliberately blocked static-preflight profile, explicitly records no selected executable model/solver/checker, disables feature flags, and fixes resource limits and activation requirements.",
+      "evidence": ["papers/completion/autoformalization/receipts/snapshots/AF-003/config/environment_manifest.json"]
+    },
+    {
+      "criterion": "Private repository identities stay in an internal ledger for later anonymization.",
+      "status": "met",
+      "explanation": "The internal-only source audit retains repository-root and revision-recovery information under an opaque ledger key; route evidence otherwise uses S01-S40 role identifiers.",
+      "evidence": ["papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/source_audit_private.json"]
+    }
+  ],
+  "commands": [
+    {
+      "argv": ["/usr/bin/python3.12", "-m", "json.tool", "papers/completion/autoformalization/evidence/source_audit_private.json"],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-003/static-preflight-validation.log"
+    },
+    {
+      "argv": ["/usr/bin/python3.12", "-c", "import importlib.util, importlib.metadata, shutil; sealed dependency/executable probe"],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-003/static-preflight-validation.log"
+    }
+  ],
+  "limitations": [
+    "No current source git commit can be claimed because the source worktree's gitdir is stale/unresolvable.",
+    "No source module was imported or credited as an executable proof/formalization route.",
+    "No model, GPU, corpus, checkpoint, external solver, Lean checker, embedding producer, index, or experiment was run."
+  ],
+  "completion_scope": "AF-003 completes the static source audit and fail-closed runtime preflight. It does not complete empirical, model, retrieval, solver, or native-checking work."
+}
