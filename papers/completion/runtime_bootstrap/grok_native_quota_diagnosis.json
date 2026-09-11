@@ -1,0 +1,145 @@
+{
+  "fallback_dispatched": false,
+  "finished_at": "2026-09-11T16:29:11.321030+00:00",
+  "implementation_dispatched": false,
+  "independent_verifier_confirmed": false,
+  "independent_verifier_return_type": "NoneType",
+  "live_state_mutated": false,
+  "preflight_overflow": false,
+  "preflight_receipt": {
+    "evidence_overflow": false,
+    "evidence_sha256": "sha256:db48ec878426d72eedede180d6330516fec9bd09e7d68c73a4c5a06dec5f750c",
+    "evidence_size": 140,
+    "expires_at_ms": 1789144207519,
+    "failure_class": "hard_quota_exhausted",
+    "nonce": "03d9d04ba0e8c214dbb33a1f4673731cfa11910ed9a9ee8b58ec9b1ecab7b17d",
+    "observed_at_ms": 1789144147519,
+    "primary_dispatched": false,
+    "primary_model": "grok-4.6",
+    "primary_provider": "grok",
+    "probe_contract_id": "sha256:07538c08220ab4c06d65e47666f00b60adb43e0c746b5913d41ceebba904cd16",
+    "probe_returncode": 1,
+    "receipt_id": "sha256:3b5e562963a05e8a9cc4cc0beb00ef6a712e0e739615450cec5ed01d66aa72b4",
+    "schema": "ipfs_accelerate_py.agent_supervisor.grok-failure-receipt@4",
+    "source": "isolated_no_tools_pre_dispatch_probe"
+  },
+  "preflight_returncode": 1,
+  "probes_are_real": true,
+  "schema": "paper-grok-native-quota-diagnosis/v1",
+  "started_at": "2026-09-11T16:29:03.539009+00:00",
+  "verifier_observation": {
+    "files": [
+      {
+        "bytes": 8018,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/chat_history.jsonl",
+        "sha256": "a52198e888fb9bc39ac4259c48c1ac59478662d5a43921734b62deb8880eab1a"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/chat_history.jsonl.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 479,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/events.jsonl",
+        "sha256": "d2e15a4d7143683c9a54d2ff6402aedf1b376c3ed8782e4b058a94dac5bbd4ae"
+      },
+      {
+        "bytes": 509,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/prompt_context.json",
+        "sha256": "8321180a1eba0ad41d8c87777b81dfe24b42814b5cd2e7237dccc60c2aea851a"
+      },
+      {
+        "bytes": 106,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/rewind_points.jsonl",
+        "sha256": "d4a3db05a973e443740ca847a324c2c53fb640978d50f81d8983910b021452c9"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/rewind_points.jsonl.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1506,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/signals.json",
+        "sha256": "076671e5ec265f5c9df17c87224b3de8536f4cd0a9ddb5510c5904471d953e21"
+      },
+      {
+        "bytes": 882,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/summary.json",
+        "sha256": "da7243318330f4339b04e3e4d36b9c3b544a6068819acb8862f79efe10558094"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/summary.json.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 5170,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/system_prompt.txt",
+        "sha256": "ebe469aeb8e18906cd8cc31f3beca49a1f2e2447c15dcfc9fc472ea2bb4a8d1c"
+      },
+      {
+        "bytes": 1,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/title_refresh_idx",
+        "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+      },
+      {
+        "bytes": 1193,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/updates.jsonl",
+        "sha256": "f4b695caeafd070cbc55b04a16671f370687c254001bc678536a49d664d8fe7b"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/updates.jsonl.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 636,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/ad90625a-c3bc-4bc5-a6ff-637e53abf90f/usage.json",
+        "sha256": "8dba04d87c04563a8dc85fb31243b83bc3a5aee5cb3b28cfd901fc24f5cf2b67"
+      },
+      {
+        "bytes": 165,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-7ioi_uta%2Fworkspace/prompt_history.jsonl",
+        "sha256": "2b3703889d739cfc05b7e0d59db3aa5fb8ad28c6ba3c1d7c0752f8839f5b34e7"
+      },
+      {
+        "bytes": 36864,
+        "relative": "sessions/session_search.sqlite",
+        "sha256": "79115804bf82f134896e9cdfd80cc76182b386b1d7bbd6ac73672e8c59ad6ba1"
+      }
+    ],
+    "native_validator_file": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_implementation_route.py",
+    "session_id": "ad90625a-c3bc-4bc5-a6ff-637e53abf90f",
+    "update_shapes": [
+      {
+        "keys": [
+          "method",
+          "params",
+          "timestamp"
+        ],
+        "type": null
+      },
+      {
+        "keys": [
+          "method",
+          "params",
+          "timestamp"
+        ],
+        "type": null
+      },
+      {
+        "keys": [
+          "method",
+          "params",
+          "timestamp"
+        ],
+        "type": null
+      }
+    ],
+    "validator_return_line": 3298,
+    "validator_returned_none": true,
+    "verifier_returncode": 1
+  }
+}

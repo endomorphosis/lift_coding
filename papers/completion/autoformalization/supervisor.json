@@ -29,5 +29,15 @@
   "refill_policy": "fixed reviewed board; split/discover follow-ups explicitly with lineage",
   "history_projection": "DuckLake; non-authoritative snapshots fetched through Quack",
   "runtime_launcher": "scripts/paper_supervisor_campaign.py",
-  "source_board_policy": "Markdown and JSON are reviewed import sources; runtime task changes belong to the database"
+  "source_board_policy": "Markdown and JSON are reviewed import sources; runtime task changes belong to the database",
+  "implementation_route": {
+    "primary_provider": "grok_cli",
+    "primary_model": "grok-4.6",
+    "fallback_provider": "codex",
+    "fallback_model": "gpt-5.6-terra",
+    "fallback_reasoning_effort": "high",
+    "fallback_trigger": "independently_verified_primary_quota_exhaustion",
+    "authorization_source": "User explicitly requested Codex gpt-5.6 Terra high fallback in this conversation on 2026-09-11",
+    "task_model_dispatched_by_configuration_change": false
+  }
 }

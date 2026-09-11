@@ -123,6 +123,9 @@ catalog containing history fetched through Quack. Each paper has its own branch,
 checkout, database, worker directories and merge queue. The native supervisor
 performs task claims, implementation, validation and merges. The campaign process
 starts owners, checks real remote readiness, monitors children and projects history.
+A complete native route pins Grok `grok-4.6` as primary and Codex
+`gpt-5.6-terra` with **high** reasoning as its fallback, as requested by the user.
+Fallback requires fresh independently verified Grok quota exhaustion.
 A failed lane is reported; it is never silently reset or switched to another task
 authority. Native execution/coordination bookkeeping uses private local sidecars.
 

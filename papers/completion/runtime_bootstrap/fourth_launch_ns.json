@@ -1,0 +1,137 @@
+{
+  "schema": "vericodegen-fourth-launch-ns-observation/v1",
+  "captured_at": "2026-09-11T16:26:18.692794+00:00",
+  "read_only_observation": true,
+  "paper": "neurosymbolic_supervision",
+  "controller": {
+    "pid": 2516086,
+    "birth": "55343745",
+    "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f"
+  },
+  "store_identity": {
+    "store_id": "vericodegen-2026-neurosymbolic_supervision",
+    "database_uuid": "17351fb0-0d3b-4069-a697-51f09ecf0a99"
+  },
+  "store_generation": {
+    "generation": "6"
+  },
+  "task": {
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "task_alias": "NS-002",
+    "status": "in_progress",
+    "revision": 6
+  },
+  "task_snapshot_sha256": "b7eed81a0e1567dfd16c9fc0525f5092b453574772591297f2d7b232f6816707",
+  "current_claim_receipt": {
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+    "control_claimed_revision": 6,
+    "control_expected_revision": 5,
+    "operation": "database_claim",
+    "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9"
+  },
+  "binding": {
+    "task_alias": "NS-002",
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69"
+  },
+  "binding_sha256": "4e130bfe67a0decc003b0554e31c66b563ea14ef5ff66b0e403a6ad41ce7b934",
+  "claim_events": [
+    {
+      "event_id": "baguqeera7jlne62hzjx6ozf2gtanzdctkmmdruoengcbgjmyn3zhhmzp6f2a",
+      "stream_id": "stream:intent",
+      "sequence": 93,
+      "global_sequence": 93,
+      "event_type": "intent.task_status_changed",
+      "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+      "attempt_id": "",
+      "session_id": "session:intent",
+      "recorded_at": "2026-09-11T16:22:27Z",
+      "event_snapshot_sha256": "f54f6e97391ae568fd81bcae876e0bbff39d2173ddd7c44c07ff8f32b183e060",
+      "body_sha256": "e88a7a9d81af9af02d45ec32c41ed2281c82d69e5eb583735022e6add96f40da"
+    }
+  ],
+  "projection": {
+    "active_task_id": "NS-002",
+    "active_phase": "",
+    "heartbeat_at": "2026-09-11T16:23:10.349534+00:00",
+    "last_progress_at": "2026-09-11T16:23:10.349534+00:00",
+    "active_worktree_path": "",
+    "active_branch": "",
+    "implementation_in_progress": false,
+    "last_implementation_returncode": 1
+  },
+  "implementation_log": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/f10469cfd06a76d1e2246f03/implementation-logs/ns-002-attempt-1.log",
+    "sha256_at_capture": "ea4963590730c3894b8e685abc3ecbf251c24cc9b666c9dbacc3b4c6a10c3ac1",
+    "bytes_at_capture": 3012
+  },
+  "provider_outcomes": {
+    "IPFS_ACCELERATE_GROK_FAILURE_RECEIPT": {
+      "evidence_overflow": false,
+      "evidence_sha256": "sha256:db48ec878426d72eedede180d6330516fec9bd09e7d68c73a4c5a06dec5f750c",
+      "evidence_size": 140,
+      "expires_at_ms": 1789143843003,
+      "failure_class": "hard_quota_exhausted",
+      "nonce": "f00a160d83893b9a93d017081be4a9e1d3a5293c3f5622c3f8386f300bce69ca",
+      "observed_at_ms": 1789143783003,
+      "primary_dispatched": false,
+      "primary_model": "grok-4.6",
+      "primary_provider": "grok",
+      "probe_contract_id": "sha256:07538c08220ab4c06d65e47666f00b60adb43e0c746b5913d41ceebba904cd16",
+      "probe_returncode": 1,
+      "receipt_id": "sha256:c87393937d483dcc2f037c0a7e5e05c226b151ec3e7e6db42b210438d3bad47b",
+      "schema": "ipfs_accelerate_py.agent_supervisor.grok-failure-receipt@4",
+      "source": "isolated_no_tools_pre_dispatch_probe"
+    },
+    "IPFS_ACCELERATE_GROK_ROUTE_OUTCOME": {
+      "decision": "denied",
+      "failure_class": "hard_quota_exhausted",
+      "fallback_dispatched": false,
+      "fallback_returncode": null,
+      "nonce": "f00a160d83893b9a93d017081be4a9e1d3a5293c3f5622c3f8386f300bce69ca",
+      "outcome_id": "sha256:0bf432e7cca731985584d5ca854b188cc5606fb95116632b6862bd9290f5fee0",
+      "preflight_receipt_id": "sha256:c87393937d483dcc2f037c0a7e5e05c226b151ec3e7e6db42b210438d3bad47b",
+      "primary_model": "grok-4.6",
+      "probe_returncode": 1,
+      "quota_evidence_id": "",
+      "route_plan": {
+        "authorization": null,
+        "fallback_implementer_identity": "codex",
+        "fallback_model_id": "gpt-5.6-terra",
+        "fallback_provider_id": "codex",
+        "fallback_reasoning_effort": "medium",
+        "fallback_trigger": "primary_quota_exhausted",
+        "invocation_binding": null,
+        "primary_model_id": "grok-4.6",
+        "primary_provider_id": "grok_cli",
+        "route_id": "agent-supervisor-grok45-terra56-medium-hard-quota-v1"
+      },
+      "schema": "ipfs_accelerate_py.agent_supervisor.grok-route-outcome@1",
+      "source": "grok_cli_runner",
+      "verifier_status": "not_run"
+    }
+  },
+  "interpretation": {
+    "primary_task_dispatched": false,
+    "codex_fallback_dispatched": false,
+    "diagnosis": "Typed Grok hard-quota preflight receipt produced denied route outcome; authorization diagnosis belongs to AF agent. Native task is retained in provider capacity backoff, not completed.",
+    "preflight_is_provider_activity": true,
+    "task_implementation_inference_confirmed": false
+  },
+  "daemon_backoff": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_implementation_daemon_20260911T162222Z.log",
+    "sha256_at_capture": "f8cf23545e7be7c4eb8fb6a8db39a31c0fdb866aa6d7c1b11ed7bd60d11f64bd",
+    "matching_pass_count": 103,
+    "first_at": "2026-09-11T16:23:10.766000+00:00",
+    "last_at": "2026-09-11T16:26:18.486000+00:00",
+    "gap_seconds_min": 1.643,
+    "gap_seconds_median": 1.8305,
+    "gap_seconds_max": 2.042,
+    "configured_interval_seconds": 30,
+    "database_wait_cap_seconds": 1,
+    "cause": "DatabaseImplementationDaemon.wait_for_wake caps the runner-computed 30-second wait at 1 second. Resumption reports unchanged=False/write_count=1 and therefore emits a full pass log each time."
+  },
+  "mutations_performed": []
+}

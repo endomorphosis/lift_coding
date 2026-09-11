@@ -118,15 +118,21 @@ def environment(repo):
     env = os.environ.copy()
     # Do not inherit another campaign's authority or task routing selection.
     for key in list(env):
-        if key.startswith(("IPFS_ACCELERATE_AGENT_STATE_", "IPFS_ACCELERATE_AGENT_QUACK_")) or key == "IPFS_ACCELERATE_AGENT_DATABASE_PROGRAM_JSON":
+        if key.startswith(("IPFS_ACCELERATE_AGENT_STATE_", "IPFS_ACCELERATE_AGENT_QUACK_",
+                           "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_ROUTE_")) or key == "IPFS_ACCELERATE_AGENT_DATABASE_PROGRAM_JSON":
             env.pop(key)
     env.update(PYTHONPATH=os.pathsep.join(str(repo / p) for p in SUBMODULES),
                IPFS_ACCEL_SKIP_CORE="1", IPFS_AUTO_INSTALL="false",
                IPFS_DATASETS_AUTO_INSTALL="false", PYTHONUNBUFFERED="1",
-               # This native revision's auto selector imports an unavailable
-               # router API. The supported explicit Grok route retains its
-               # real authentication check and sealed runner fallback policy.
-               IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER="grok")
+               # Complete native quota-only route requested by the user.
+               # Real independent quota evidence remains mandatory; provider
+               # errors or missing authentication do not authorize fallback.
+               IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER="grok",
+               IPFS_ACCELERATE_AGENT_GROK_MODEL="grok-4.6",
+               IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_PROVIDER="codex",
+               IPFS_ACCELERATE_AGENT_CODEX_MODEL="gpt-5.6-terra",
+               IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER="primary_quota_exhausted",
+               IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT="high")
     return env
 
 

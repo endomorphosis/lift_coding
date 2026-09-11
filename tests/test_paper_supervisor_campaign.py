@@ -41,6 +41,43 @@ def native_ready(process, database, paper):
 
 
 class CampaignTests(unittest.TestCase):
+    def test_environment_selects_complete_terra_high_quota_route_and_scrubs_foreign_scope(self):
+        expected = {
+            "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER": "grok",
+            "IPFS_ACCELERATE_AGENT_GROK_MODEL": "grok-4.6",
+            "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_PROVIDER": "codex",
+            "IPFS_ACCELERATE_AGENT_CODEX_MODEL": "gpt-5.6-terra",
+            "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER": "primary_quota_exhausted",
+            "IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT": "high",
+        }
+        foreign = {"IPFS_ACCELERATE_AGENT_IMPLEMENTATION_ROUTE_" + suffix: "foreign-test-only"
+                   for suffix in ("BOARD_NAMESPACE", "AUTHORIZATION_PATH", "AUTHORIZATION_SHA256",
+                                  "AUTHORIZATION_ID", "AUTHORIZATION_KIND", "SOURCE_HEAD", "SOURCE_TREE", "ID")}
+        foreign.update({key: "foreign-test-only" for key in (
+            "IPFS_ACCELERATE_AGENT_STATE_STORE_ID", "IPFS_ACCELERATE_AGENT_QUACK_ENDPOINT",
+            "IPFS_ACCELERATE_AGENT_QUACK_TOKEN", "IPFS_ACCELERATE_AGENT_DATABASE_PROGRAM_JSON")})
+        inherited = {**{key: "conflicting-inherited-value" for key in expected}, **foreign,
+                     "PAPER_TEST_UNRELATED": "preserved"}
+        with patch.dict(os.environ, inherited, clear=True):
+            result = CAM.environment(ROOT)
+            self.assertEqual(dict(os.environ), inherited)
+        self.assertEqual({key: result[key] for key in expected}, expected)
+        self.assertFalse(set(foreign) & set(result))
+        self.assertEqual(result["PAPER_TEST_UNRELATED"], "preserved")
+        self.assertEqual(result["PYTHONPATH"], os.pathsep.join(str(ROOT / p) for p in CAM.SUBMODULES))
+        # Resolve through the actual native selector: six strings alone must
+        # produce the supported quota-only high route, not an ambient default.
+        with patch.object(sys, "path", [str(ROOT / p) for p in CAM.SUBMODULES] + sys.path), patch.dict(os.environ, result, clear=True):
+            from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import _configured_agent_implementation_route_plan
+            route = _configured_agent_implementation_route_plan(ROOT)
+        self.assertEqual((route.primary_provider_id, route.primary_model_id,
+                          route.fallback_provider_id, route.fallback_model_id,
+                          route.fallback_trigger, route.fallback_reasoning_effort),
+                         ("grok_cli", "grok-4.6", "codex", "gpt-5.6-terra", "primary_quota_exhausted", "high"))
+        self.assertFalse(route.permits_authentication_unavailable)
+        self.assertIsNone(route.authorization)
+        self.assertIsNone(route.invocation_binding)
+
     def test_worker_observation_forwards_fresh_owner_tasks(self):
         rows = [{"task_cid": "cid:test", "status": "done"}]
         with patch.object(WORKERS, "observe_lane", return_value={"checked": True}) as observe, patch.dict(sys.modules, {"paper_worker_observation": WORKERS}):
