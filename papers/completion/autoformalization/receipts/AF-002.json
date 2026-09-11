@@ -1,0 +1,94 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-002",
+  "status": "complete",
+  "completed_at": "2026-09-11T16:54:22+00:00",
+  "source_versions": {
+    "reviewed_monorepo_commit": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "reviewed_ipfs_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "source_basis": "Tasks/review and reconstructed manuscript; live official CFP checked 2026-09-11 UTC. No execution capability or research result is asserted."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/protocol.md": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/config/experiment_plan.json": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/evidence/claim_task_map.json": "b3654785359b0b6ced9fdcf04ed092f370b3b5ed337178932803da23b5d34a58",
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/evidence/deadline_scope_options.md": "8b0937dbf261f50d5c71b252c24cd56f4a2872b88d2368d81795f5645ffbad7f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/structural-validation.log": "ec0f982cd5036e6b17dc7b8b5ae2e1ca3dae1c7df990c5db360dc0befe2961ef"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/protocol.md": "papers/completion/autoformalization/receipts/snapshots/AF-002/protocol.md",
+    "papers/completion/autoformalization/config/experiment_plan.json": "papers/completion/autoformalization/receipts/snapshots/AF-002/config/experiment_plan.json",
+    "papers/completion/autoformalization/evidence/claim_task_map.json": "papers/completion/autoformalization/receipts/snapshots/AF-002/evidence/claim_task_map.json",
+    "papers/completion/autoformalization/evidence/deadline_scope_options.md": "papers/completion/autoformalization/receipts/snapshots/AF-002/evidence/deadline_scope_options.md"
+  },
+  "criteria": [
+    {
+      "criterion": "A–E and T0–T5 each have explicit inputs, teacher availability, checker, budget, primary metrics and control comparison.",
+      "status": "met",
+      "explanation": "experiment_plan.json lists the eleven planned/unrun conditions with all required fields; shared teacher/checker capability gaps are also explicit.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/config/experiment_plan.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/protocol.md"
+      ]
+    },
+    {
+      "criterion": "Unrun/unavailable conditions remain explicit; narrowing a claim never marks a run executed or the full empirical goal complete.",
+      "status": "met",
+      "explanation": "All conditions begin planned_unrun, the claim map begins unmeasured, and the completion/narrowing rules forbid status laundering or full-goal completion.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/config/experiment_plan.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/evidence/claim_task_map.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/protocol.md"
+      ]
+    },
+    {
+      "criterion": "A machine-readable experiment plan fixes final-test access and permitted scope decisions before outcome inspection.",
+      "status": "met",
+      "explanation": "The versioned JSON plan declares pre-outcome freeze, final-test forbidden/allowed operations, sealing rule, and revision policy.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/config/experiment_plan.json"
+      ]
+    },
+    {
+      "criterion": "Current CFP/date checks and resource limits are recorded; no submission or public release is performed by this task.",
+      "status": "met",
+      "explanation": "The deadline record names the live official CFP check, tentative AoE dates, format limits, unreserved resource state, and explicitly prohibits external actions.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/evidence/deadline_scope_options.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-002/protocol.md"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-m",
+        "json.tool",
+        "papers/completion/autoformalization/config/experiment_plan.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-002/structural-validation.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/paper_supervisors.py",
+        "verify-task",
+        "--paper",
+        "autoformalization",
+        "--task",
+        "AF-002"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-002/structural-validation.log"
+    }
+  ],
+  "limitations": [
+    "No A-E/T0-T5 experiment, corpus, independent annotation, model route, GPU reservation, or native-checker execution is claimed.",
+    "This receipt validates the frozen protocol and its evidence only; it is not empirical replication or submission authorization."
+  ],
+  "completion_scope": "AF-002 protocol/completion-policy task is complete. The full empirical research goal remains planned and unrun."
+}
