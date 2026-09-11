@@ -1,0 +1,45 @@
+{
+  "schema": "la004-source-correction-audit/v1",
+  "observed_at": "2026-09-11T17:58:37.412485+00:00",
+  "original_provider_status": "Interrupted by root at scientific review boundary; no completed receipt existed. Original partial deliverables, log, git status, HEAD and diff preserved.",
+  "changes": [
+    "Replace six subdivisions of one law with six distinct operative legal section documents in six different titles.",
+    "Use only actually SHA-verified immutable CVE original Parquet and SkillCenter SQLite records.",
+    "Select one CVE row per canonical repository and one SkillCenter row per canonical repository/primary source/normalized body, excluding cross-population repositories.",
+    "Retain exact predeclared6/12/12 families,60 planned cases and source-family ranked split quotas; preserve independent downstream label and admission gates."
+  ],
+  "source_acquisition_failures": [
+    {
+      "attempt": "Initial full-shard all-column query,512MB DuckDB memory ceiling",
+      "status": "failed_OutOfMemory",
+      "corrective_action": "Select metadata first and read only12 reserved rows;500MB was still insufficient to decode large Parquet column buffers. Actual source read uses one DuckDB thread and2GB engine memory ceiling. This is source preparation cost, not a benchmark or claimed CPU budget."
+    },
+    {
+      "attempt": "First legal operative-text scan with pdftotext -layout",
+      "status": "three patterns not found across multi-column layout",
+      "corrective_action": "Repeated with retained pdftotext -raw extraction; all six required operative patterns found, with extraction hashes. No applicability labels inferred."
+    }
+  ],
+  "claim_limits": [
+    "Source reservation completion is not case construction, independent annotation, operational legal advice, or evaluation admission.",
+    "Canonical repository grouping and byte/normalized hashes do not establish statistical independence; fork/alias and near-duplicate review remain mandatory before experimental admission.",
+    "Official legal documents are frozen2024 source editions; current applicability and jurisdictional assumptions belong to independent LA005 review.",
+    "Only one original CVE shard and one SkillCenter bundle were physically recounted; no full-release or worldwide coverage claim.",
+    "No source body/patch/Markdown/PDF is redistributed. Public source bodies were treated as inert data and hashes; no final oracle labels/outcomes were inspected."
+  ],
+  "private_cache": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la004_source_bridge",
+  "raw_cache_is_not_public_artifact": true,
+  "LA003_wording_patch_is_separate": true,
+  "native_state_changed": false,
+  "runtime_versions": {
+    "source_query_python": "Python 3.12.3",
+    "manifest_validator_python": "Python 3.12.3",
+    "pdftotext": "pdftotext version 24.02.0",
+    "duckdb": "1.5.5"
+  },
+  "source_body_redaction_correction": {
+    "previous_receipt_sha256": "fed5cc1d0866295d1561e9e489661108b55d859af3bc07b5f617cb3516c5e412",
+    "private_history_manifest": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/law_to_action/la004-correction-history/v1/history-manifest.json",
+    "change": "Remove full original provider log from source-body-free paper evidence and replace it with bounded provenance observation and exact digest. Actual source replay and manifest validation do not depend on the log and remain historically unchanged."
+  }
+}

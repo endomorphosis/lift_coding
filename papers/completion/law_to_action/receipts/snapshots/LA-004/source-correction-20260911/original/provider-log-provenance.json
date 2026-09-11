@@ -1,0 +1,69 @@
+{
+  "schema": "la004-private-original-log-provenance/v1",
+  "observed_at": "2026-09-11T18:06:32.276328+00:00",
+  "original_log_sha256": "57161e3693ff3f827834471ddff24080e73913806a14ec96290402c31eabd7a0",
+  "original_log_bytes": 576354,
+  "full_original_private_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/law_to_action/la004-correction-history/v1/candidate/papers/completion/law_to_action/receipts/snapshots/LA-004/source-correction-20260911/original/provider.log",
+  "private_file_mode": "0600 beneath0700 owner-only history",
+  "reason_full_log_excluded_from_candidate": "Contains downloaded official-law text and repository source-file reads; it is not a source-body-free audit artifact.",
+  "safe_header_excerpt": [
+    {
+      "line": 1,
+      "text": "Task: LA-004 Freeze source manifests and reconcile all reported corpus populations"
+    },
+    {
+      "line": 2,
+      "text": "Started: 2026-09-11T17:35:25.698706+00:00"
+    },
+    {
+      "line": 4,
+      "text": "Branch: implementation/la-004-c8c9963892b4-attempt-1-1789148125"
+    },
+    {
+      "line": 5,
+      "text": "Baseline: 9da0b52a1e0b9b1dc149b106465f662f97e94d7e"
+    },
+    {
+      "line": 9,
+      "text": "Grok quota is exhausted; invoking the pinned Terra fallback"
+    },
+    {
+      "line": 10,
+      "text": "OpenAI Codex v0.154.0"
+    },
+    {
+      "line": 13,
+      "text": "model: gpt-5.6-terra"
+    },
+    {
+      "line": 14,
+      "text": "provider: openai"
+    },
+    {
+      "line": 17,
+      "text": "reasoning effort: high"
+    }
+  ],
+  "source_body_presence": {
+    "official_law_text": true,
+    "repository_source_file_reads": true,
+    "upstream_API_and_skill_metadata": true
+  },
+  "bounded_credential_scan": {
+    "hf_token": 0,
+    "openai_key": 0,
+    "xai_key": 0,
+    "bearer_credential": 0,
+    "signed_query_credential": 0,
+    "scope": "No matches to these credential-like patterns; this is a bounded scan, not a universal absence proof."
+  },
+  "final_label_observation": "No final experimental label/annotation output was produced in this interrupted source task. Upstream CVE/SkillCenter source metadata is not independently reviewed final benchmark annotation.",
+  "original_partial_sources_manifest": {
+    "sha256": "62be737568fdc4499a9e78fd9c7c8badabe92efc4722dee4bb3dfd49a004f11a",
+    "records": 30,
+    "scope": "Identifiers, locators, hashes, schema/rights notes and planned parent IDs only; recursive body/code/patch/credential-key scan found none.",
+    "maximum_source_record_string_length": 170
+  },
+  "prior_stage_history_manifest": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/law_to_action/la004-correction-history/v1/history-manifest.json",
+  "prior_candidate_receipt_sha256": "fed5cc1d0866295d1561e9e489661108b55d859af3bc07b5f617cb3516c5e412"
+}

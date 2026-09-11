@@ -3,8 +3,8 @@
   "paper_id": "law_to_action",
   "task_id": "LA-003",
   "status": "complete",
-  "completed_at": "2026-09-11T17:26:01.247318+00:00",
-  "completion_mode": "Agent-assisted corrected pre-outcome protocol checkpoint, including bounded aggregate resource scope for solver subprocesses. Original failed provider attempt, prior protocol snapshots and prior complete candidate receipt remain immutable history. Native task unchanged pending root integration.",
+  "completed_at": "2026-09-11T18:09:14.077741+00:00",
+  "completion_mode": "Agent-assisted clarification of source-freeze and downstream independent-review ordering. All frozen scientific design, resource, metric, admission and paper-goal requirements remain unchanged. Historical receipt and every snapshot/command remain immutable; this fresh protocol-only validation has no experiments.",
   "artifacts": {
     "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json": "ebd521039ed25e6d6e7d5a724879a0bd676089d15c54e6384d42f4290ae4d607",
     "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/protocol.json": "de8863191437800858415d66ef46707682e149d25b8af57f22e3cee52b4afad3",
@@ -28,18 +28,25 @@
     "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json": "f8c3e476f4ca1705cbf75ef7c27ea7721aebcc8113d49d335e72eb797fb1e33e",
     "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json": "7acfce00b76e35290e8b141d472caa33decb0b121d5880c63cefac02c74d5890",
     "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py": "97bf585e5dfd0a83622b04f545ed988c7c9a8ce12b1ee73080fa56cd7c493d13",
-    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log": "3364c73301725ee13f9f574f2e3d1fbd59914edb9993089cd6ae8cce12e5ffda"
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log": "3364c73301725ee13f9f574f2e3d1fbd59914edb9993089cd6ae8cce12e5ffda",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.json": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.md": "f7b232fd849fb01150446dd5a17bfc79cd1d1d60d90db871c00ae75c84d9ac41",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/previous-receipt.json": "fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/proposal-review.json": "fcd0959545b59722ca07b48d5ea9f27942a369a5cc27936f4f921939e7be4b67",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/task-dependency-contract.json": "d045b998f09edfb4d0007906fd1866be43f745d5fb5c5d5b1af9ae01544c3d97",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py": "9c2235b8defb0205b5e640353a7fda6fc028627a2c5dbe02cb9b03b2b9927aea",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validation/dependency-validator.log": "16c6c295c614989816a680b260cb1525e171de25f046e16f24481864be0db9d6"
   },
   "outputs": {
-    "papers/completion/law_to_action/benchmark/protocol.md": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
-    "papers/completion/law_to_action/benchmark/protocol.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+    "papers/completion/law_to_action/benchmark/protocol.md": "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.md",
+    "papers/completion/law_to_action/benchmark/protocol.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.json",
     "papers/completion/law_to_action/benchmark/resource_plan.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json"
   },
   "criteria": [
     {
       "criterion": "Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.",
       "status": "met",
-      "explanation": "Exact30 independent lineage families/60 paired cases,6/6/18 split quotas and three named seeds yield900 planned attempts in each separate study. The one-reserved-core,2GiB fixed-action plan fits the recorded host observation, subject to scheduler/control qualification.16 process/thread slots permit solver/checker descendants. Aggregate CPU/wall thresholds and actual-usage/overshoot accounting replace the invalid one-process assumption. Five CPU-hours is a stopping budget, not measured use or full-job wall time. The text explicitly makes no power/significance guarantee. Source cohort and resource enforcement are not yet qualified; planned sample counts are not observed counts.",
+      "explanation": "Exact30 independent lineage families/60 paired cases,6/6/18 split quotas and three named seeds yield900 planned attempts in each separate study. The one-reserved-core,2GiB fixed-action plan fits the recorded host observation, subject to scheduler/control qualification.16 process/thread slots permit solver/checker descendants. Aggregate CPU/wall thresholds and actual-usage/overshoot accounting replace the invalid one-process assumption. Five CPU-hours is a stopping budget, not measured use or full-job wall time. The text explicitly makes no power/significance guarantee. Source cohort and resource enforcement are not yet qualified; planned sample counts are not observed counts. The dependency clarification only separates LA004 source-manifest/split reservation from mandatory LA005/006/007 independent case/label review before evaluation. Fresh validation proves every pre-existing machine protocol value, resource byte and all other prose unchanged, and replays the original design checks.",
       "evidence": [
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
@@ -47,13 +54,18 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/proposal-review.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validation/dependency-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.json"
       ]
     },
     {
       "criterion": "Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.",
       "status": "met",
-      "explanation": "All derivatives inherit a globally unique parent-family split. Vulnerable/fixed CVE pairs and skill variants are atomic, with frozen canonical UTF-8 SHA256 ranking, cumulative per-population quotas, and deterministic tie-break. Final labels/siblings/patches cannot leak through retrieval. Cohort shortfalls/duplicates/cross-population IDs reject rather than silently changing counts. Synthetic partition checks confirm the rule, not actual corpus deduplication or label independence; LA-004\u2013LA-007 retain those obligations.",
+      "explanation": "All derivatives inherit a globally unique parent-family split. Vulnerable/fixed CVE pairs and skill variants are atomic, with frozen canonical UTF-8 SHA256 ranking, cumulative per-population quotas, and deterministic tie-break. Final labels/siblings/patches cannot leak through retrieval. Cohort shortfalls/duplicates/cross-population IDs reject rather than silently changing counts. Synthetic partition checks confirm the rule, not actual corpus deduplication or label independence; LA-004\u2013LA-007 retain those obligations. The dependency clarification only separates LA004 source-manifest/split reservation from mandatory LA005/006/007 independent case/label review before evaluation. Fresh validation proves every pre-existing machine protocol value, resource byte and all other prose unchanged, and replays the original design checks.",
       "evidence": [
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
@@ -61,13 +73,18 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/proposal-review.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validation/dependency-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.json"
       ]
     },
     {
       "criterion": "Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.",
       "status": "met",
-      "explanation": "False denial uses D only; abstention uses disjoint A; a separately named union measures withholding. Useful success, forbidden effects on both allowed and forbidden requests, observed and scheduled conservative bounds, operational loss, failure/timeouts, undefined rates, and every planned/not-started record have explicit formulas/reporting rules. Group resource-limit events retain actual cost and terminal reason rather than becoming safe denials. No actual effect data, task-success oracle or empirical metric estimates were produced.",
+      "explanation": "False denial uses D only; abstention uses disjoint A; a separately named union measures withholding. Useful success, forbidden effects on both allowed and forbidden requests, observed and scheduled conservative bounds, operational loss, failure/timeouts, undefined rates, and every planned/not-started record have explicit formulas/reporting rules. Group resource-limit events retain actual cost and terminal reason rather than becoming safe denials. No actual effect data, task-success oracle or empirical metric estimates were produced. The dependency clarification only separates LA004 source-manifest/split reservation from mandatory LA005/006/007 independent case/label review before evaluation. Fresh validation proves every pre-existing machine protocol value, resource byte and all other prose unchanged, and replays the original design checks.",
       "evidence": [
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
@@ -75,13 +92,18 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/proposal-review.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validation/dependency-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.json"
       ]
     },
     {
       "criterion": "Protocol records model/solver availability and compute/provider requirements without assuming paid access.",
       "status": "met",
-      "explanation": "Historical provider visibility is distinguished from host capacity and future scientific qualification. Named solver/checker, real UCAN, durable consumption, independent source/oracle and model requirements are explicit. Model-free A1/A2 are equivalence controls; actual prompt/retrieval and closed-loop comparisons remain a separate planned model study with call/token/time ceilings and zero added paid-provider budget. No source/model/tool availability or fixture substitution is assumed. The scientific model identity and real mechanism qualification remain future prerequisites; no currently dispatchable model experiment is claimed.",
+      "explanation": "Historical provider visibility is distinguished from host capacity and future scientific qualification. Named solver/checker, real UCAN, durable consumption, independent source/oracle and model requirements are explicit. Model-free A1/A2 are equivalence controls; actual prompt/retrieval and closed-loop comparisons remain a separate planned model study with call/token/time ceilings and zero added paid-provider budget. No source/model/tool availability or fixture substitution is assumed. The scientific model identity and real mechanism qualification remain future prerequisites; no currently dispatchable model experiment is claimed. The dependency clarification only separates LA004 source-manifest/split reservation from mandatory LA005/006/007 independent case/label review before evaluation. Fresh validation proves every pre-existing machine protocol value, resource byte and all other prose unchanged, and replays the original design checks.",
       "evidence": [
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
@@ -89,7 +111,12 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
         "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/proposal-review.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validation/dependency-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/outputs/protocol.json"
       ]
     }
   ],
@@ -110,6 +137,24 @@
         "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
         "PYTHONDONTWRITEBYTECODE": "1"
       }
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py",
+        "--protocol-dir",
+        "papers/completion/law_to_action/benchmark"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validation/dependency-validator.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-003/dependency-clarification-20260911/validate_dependency_clarification.py",
+      "started_at": "2026-09-11T18:09:14.044041+00:00",
+      "completed_at": "2026-09-11T18:09:14.077210+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
     }
   ],
   "source_versions": {
@@ -117,13 +162,42 @@
     "original_parent_commit": "418980b7522555d03194e74eb5c790f9e7106437",
     "validator_python": "Python 3.12.3",
     "protocol_revision": "LA-003/v3",
-    "previous_candidate_receipt_sha256": "b3083aad2fcc7d2df39b143c828909d657bcaa59f3e069794da78e28d4c60fe2",
-    "host_capacity_observation": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/host-capacity-observation.json"
+    "previous_candidate_receipt_sha256": "fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+    "host_capacity_observation": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/host-capacity-observation.json",
+    "clarification_revision": "LA-003/v3/dependency-clarification-1",
+    "frozen_scientific_protocol_revision_unchanged": "LA-003/v3",
+    "validator_sha256": "9c2235b8defb0205b5e640353a7fda6fc028627a2c5dbe02cb9b03b2b9927aea"
   },
   "limitations": [
     "Only protocol document and synthetic arithmetic validation ran. No source corpus, independent labels, empirical benchmark, model, provider, solver, or network evaluation was run.",
     "Actual source/manifests, labels, handler observations, named mechanisms, and scientific model deployments remain unqualified or unrun until their respective tasks supply evidence.",
     "This checkpoint does not complete the paper, authorize submission or spending, or replace any LA-004\u2013LA-025 obligation. Root must independently review and integrate the candidate before native completion is recorded.",
     "Resource limits are planned group-wide stopping thresholds. No CPU/cgroup, subprocess-containment, memory or watchdog enforcement stress test was run by this checkpoint; later qualification must retain actual use and any overshoot."
+  ],
+  "historical_command_provenance": {
+    "commands_preserved_exactly_from_prior_receipt": [
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+          "--protocol-dir",
+          "papers/completion/law_to_action/benchmark"
+        ],
+        "cwd": ".",
+        "exit_code": 0,
+        "log": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+        "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+        "executed_at": "2026-09-11T17:24:09.759380+00:00",
+        "environment": {
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        }
+      }
+    ],
+    "prior_receipt_sha256": "fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+    "interpretation": "The earlier command/log records the resource-corrected v3 protocol at its actual historical execution time. The added command validates this narrow clarified candidate and invokes the unchanged historical validator afresh. Prior command metadata is not evidence of a later execution."
+  },
+  "claim_limitations": [
+    "This protocol clarification does not qualify LA004 source ancestry, LA005/006/007 labels, case construction, any model/mechanism, or any experimental result. Native task/evidence integration remains a separate root-controlled operation."
   ]
 }
