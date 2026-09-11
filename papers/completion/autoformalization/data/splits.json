@@ -1,0 +1,152 @@
+{
+  "assignment": {
+    "allocation": "Assign the first at least 20 components and at least 100 natural units to final test; remaining ordered components round-robin train, selection, fixed-canary. Require all three development partitions nonempty. Counts only may determine the stop, never labels or outcomes.",
+    "failure": "No admitted four-way corpus completion if the exact connected-component graph cannot meet the frozen floor with nonempty development partitions; retain candidate graph and report shortfall without weakening the preregistration.",
+    "floor": {
+      "final_test_source_family_time_groups": 20,
+      "final_test_source_units": 100
+    },
+    "order": "HMAC-SHA256 under a private random 256-bit salt over canonical component member identities and fixed seed; salt and membership never published before sealed evaluation.",
+    "seed": 104729
+  },
+  "counts": {
+    "final_test": {
+      "by_domain": {
+        "cfr": 993,
+        "guidance": 7,
+        "mpep": 738,
+        "uscode": 175
+      },
+      "by_domain_record_counts": {
+        "cfr": 993,
+        "guidance": 7,
+        "mpep": 746,
+        "uscode": 175
+      },
+      "by_source_time": {
+        "2022-07-01": 738,
+        "2024-07-01": 993,
+        "2024-07-17": 7,
+        "2024-12-31": 175
+      },
+      "component_record_size_histogram": {
+        "3": 3,
+        "4": 3,
+        "5": 2,
+        "6": 2,
+        "7": 1,
+        "8": 2,
+        "10": 2,
+        "15": 1,
+        "25": 1,
+        "28": 1,
+        "29": 1,
+        "1738": 1
+      },
+      "exact_normalized_alias_records": 8,
+      "natural_source_records": 1921,
+      "natural_source_units": 1913,
+      "operational_connected_components": 20
+    },
+    "fixed_canary": {
+      "by_domain": {
+        "cfr": 38
+      },
+      "by_domain_record_counts": {
+        "cfr": 38
+      },
+      "by_source_time": {
+        "2024-07-01": 38
+      },
+      "component_record_size_histogram": {
+        "11": 1,
+        "27": 1
+      },
+      "exact_normalized_alias_records": 0,
+      "natural_source_records": 38,
+      "natural_source_units": 38,
+      "operational_connected_components": 2
+    },
+    "selection": {
+      "by_domain": {
+        "cfr": 15
+      },
+      "by_domain_record_counts": {
+        "cfr": 15
+      },
+      "by_source_time": {
+        "2024-07-01": 15
+      },
+      "component_record_size_histogram": {
+        "2": 2,
+        "11": 1
+      },
+      "exact_normalized_alias_records": 0,
+      "natural_source_records": 15,
+      "natural_source_units": 15,
+      "operational_connected_components": 3
+    },
+    "train": {
+      "by_domain": {
+        "cfr": 69
+      },
+      "by_domain_record_counts": {
+        "cfr": 69
+      },
+      "by_source_time": {
+        "2024-07-01": 69
+      },
+      "component_record_size_histogram": {
+        "1": 1,
+        "10": 1,
+        "58": 1
+      },
+      "exact_normalized_alias_records": 0,
+      "natural_source_records": 69,
+      "natural_source_units": 69,
+      "operational_connected_components": 3
+    }
+  },
+  "created_at": "2026-09-11T18:14:00.233621+00:00",
+  "exports": {
+    "final_test": {
+      "bytes": 26605860,
+      "membership_disclosed": false,
+      "private_owner_only": true,
+      "sha256": "7cf104505334f530937dd6a8304dd916e632f2ba79b01075b7d68ef52e6e730f"
+    },
+    "fixed_canary": {
+      "bytes": 159299,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/fixed_canary.sources.jsonl",
+      "sha256": "98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207"
+    },
+    "selection": {
+      "bytes": 50666,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/selection.sources.jsonl",
+      "sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c"
+    },
+    "train": {
+      "bytes": 693588,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/train.sources.jsonl",
+      "sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532"
+    }
+  },
+  "graph": {
+    "after_fixed_encoder_union": 28,
+    "after_lexical_union": 39,
+    "base_structural_groups": 82,
+    "independence": "Operational whole-source components, not proven independent samples; source-edition/domain dependence must be retained in reported limitations and reviewed before confirmatory inference",
+    "macro_editions": 4
+  },
+  "holdout": {
+    "body_in_provider_exports": false,
+    "ids_in_public_manifests": false,
+    "release_rule": "Only root-authorized sealed harness with scoped final-test read after checkpoint/configuration/patch lock; append-only evaluation output cannot feed development",
+    "salt_published": false,
+    "semantic_gold": "pending_AF005",
+    "state": "private_staged_not_released"
+  },
+  "partition_membership_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126",
+  "schema": "autoformalization-source-partitions/v2",
+  "status": "candidate_partitioned_pending_access_enforcement_and_independence_review"
+}

@@ -1,0 +1,44 @@
+{
+  "actual_population_floor_passes": true,
+  "negative_actual_final_source_admission_rejected": true,
+  "negative_final_id_disclosure_rejected": true,
+  "negative_selection_as_training_rejected": true,
+  "observed_cross_partition_graph_edges": 0,
+  "passed": true,
+  "private_final_identifiers_disclosed": false,
+  "scope": "Staged files only; does not exercise provider mounts, network denial, human annotation, or validate statistical independence",
+  "split_export_membership_and_hashes_exact": true,
+  "trusted_input_admission_checks": [
+    {
+      "frozen_export_hash_verified": true,
+      "network_or_mount_enforcement_claimed": false,
+      "role": "training",
+      "source_scan": {
+        "private_final_matches": 0,
+        "source_records": 69,
+        "unique_source_units": 69
+      }
+    },
+    {
+      "frozen_export_hash_verified": true,
+      "network_or_mount_enforcement_claimed": false,
+      "role": "model_selection",
+      "source_scan": {
+        "private_final_matches": 0,
+        "source_records": 15,
+        "unique_source_units": 15
+      }
+    },
+    {
+      "frozen_export_hash_verified": true,
+      "network_or_mount_enforcement_claimed": false,
+      "role": "fixed_canary",
+      "source_scan": {
+        "private_final_matches": 0,
+        "source_records": 38,
+        "unique_source_units": 38
+      }
+    }
+  ],
+  "verifier_sha256": "b2942e336551b8249c84c738fc3853f554006f86daef2be6a135281155717277"
+}

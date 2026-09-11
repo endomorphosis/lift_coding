@@ -1,0 +1,36 @@
+{
+  "schema": "af004-corpus-grouping-plan/v1",
+  "status": "fixed_before_source_similarity_results_and_before_any_model_outcomes",
+  "source_sha256": "66cc0653052512a3279cb9a530ad90b85f183ae201d74b0f930d0534a7ff9bdb",
+  "source_revision": "86c77cb650d30ee366983d1b2e25cd85e8c22e34",
+  "base_groups": "Whole CFR parts and whole MPEP chapters, each at its source-root/current-through edition; USC and guidance remain whole editions because the available metadata does not supply a qualified smaller hierarchy. Adjacent sections never split within these structural groups.",
+  "eligibility": "Nonempty natural official source text with upstream reviewed redistribution-allowed rights and no nonempty ai_derived payload. Reserved/empty sections are inventoried and excluded; short nonreserved sources remain eligible.",
+  "identity_edges": "Union equal nonempty canonical source URI or exact source-byte/content hashes and equal normalized full text across base groups. Identities are compared as source records, not metadata-only roots shared by an edition.",
+  "normalization": "Unicode NFKC, casefold, Unicode alphanumeric tokens; punctuation and whitespace are removed by tokenization, digits are preserved.",
+  "near_duplicate_edges": {
+    "method": "Exact set intersection of every eligible document's consecutive five-token shingles; all document pairs considered through a sparse inverted index, with no candidate-sampling omission.",
+    "minimum_smaller_document_unique_shingles": 40,
+    "minimum_intersection_shingles": 40,
+    "containment_threshold": 0.8,
+    "jaccard_threshold": 0.8,
+    "merge_rule": "Union whole base groups whenever containment or Jaccard passes; transitive closure includes cross-view and derivative chains. A whole group is never split to recover sample size."
+  },
+  "paraphrase_screen": {
+    "status": "required_if_structural_and_lexical_graph_still_can_meet_floor",
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "source": "AF003 selected fixed pretrained encoder, local files only; not fitted on corpus and not a semantic-gold producer",
+    "method": "Nonoverlapping 240-token source windows covering full text, mean attention-mask pooling and L2 normalization; all cross-group window cosine comparisons at >=0.95 with a >=0.5 shorter/longer token-length ratio cause conservative whole-group union. No threshold adjustment after results.",
+    "limit": "Lexical and embedding screens cannot prove that no semantic paraphrase exists; unresolved dependence stays an explicit limitation. If lexical closure alone leaves fewer than 20 components, the floor is impossible and there is no need to inspect further source content or train a model."
+  },
+  "split_assignment": {
+    "seed": 104729,
+    "order": "HMAC-SHA256 under a private random 256-bit salt over canonical component member identities and fixed seed; salt and membership never published before sealed evaluation.",
+    "allocation": "Assign the first at least 20 components and at least 100 natural units to final test; remaining ordered components round-robin train, selection, fixed-canary. Require all three development partitions nonempty. Counts only may determine the stop, never labels or outcomes.",
+    "floor": {"final_test_source_units": 100, "final_test_source_family_time_groups": 20},
+    "failure": "No admitted four-way corpus completion if the exact connected-component graph cannot meet the frozen floor with nonempty development partitions; retain candidate graph and report shortfall without weakening the preregistration."
+  },
+  "independence_limit": "Whole parts/chapters are structural candidates, not automatically independent units. Four macro-editions remain correlated in domain/time even if graph components survive. Report both structural connected components and macro-editions; never label 82 initial groups independent without graph analysis.",
+  "containment": "Raw source, private membership, salt and eventual final-test bodies stay outside repository and provider mounts under owner-only private state. Public manifests include counts and salted commitments only for holdout; development exports omit holdout IDs and bodies. Network/public-source contamination remains a limitation, and actual scoped no-network harness mounts require a separate retained enforcement check before acceptance.",
+  "annotation_and_targets": "No semantic labels inspected or created by this grouping task. Upstream hashed-term projections are excluded from semantic teacher claims; all independent human annotation and trained/teacher target production remain pending their actual tasks."
+}
