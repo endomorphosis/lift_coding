@@ -1,0 +1,59 @@
+37   This is neither one end-to-end language model nor an unsupervised discovery of a universal logic.
+38   The schema, operators, sorts, and admissibility rules are engineered. Learning estimates content,
+39   associations, rankings, and repair priorities within those contracts. Several paths coexist: determin-
+40   istic compilation, adaptive diagnostic learning, genuine tensor gradient updates, source-withheld
+41   reconstruction, and bounded model-assisted synthesis. We distinguish their inputs, outputs, objectives,
+42   and activation instead of describing all of them as one autoencoder.
+43   The contribution of this methods draft is: (i) a source-grounded account of representation learn-
+44   ing and compiler/decompiler improvement; (ii) an explicit account of BM25, vector, and graph
+45   retrieval, policy-constrained proof planning, Hammer reconstruction, and Leanstral guidance; and
+46   (iii) composition of complementary IR views through typed identities and justified translations. A
+47   worked policy–code–trace example and finite semantic witnesses illustrate the necessary boundaries.
+48   The final learned-fidelity, transfer, checkpoint, and cost experiments remain marked for completion.
+49   Source inspection establishes implementation mechanisms, not successful training of every optional
+50   configuration.
+
+51   2     Representations and training examples
+52   2.1   What is shared, and what is learned?
+
+53   Three axes must remain distinct. Source format names prose, code, traces, tables, or extracted media.
+54   Domain names Legal, Security, Intent, software, or UI declarations. Logical view names deontic,
+55   temporal, frame, first-order, cognitive/event, graph, or proof-oriented structure. Sharing canonical
+56   records does not equate domain ontologies or logical interpretations. [artifact S01–S06]
+57   The domain-neutral kernel supplies canonical bytes, identities, provenance, source spans, assumptions,
+58   claims, obligations, and result protocols. Domain adapters retain their own semantic slots. The syntax
+59   kernel supplies typed terms, binders, signatures, connectives, and versioned family extensions. A
+60   symbolic declaration is therefore discrete and inspectable; its CID identifies an encoding under a
+61   declared profile, not a learned location in a vector space. Equal vectors or nearby embeddings do not
+62   imply equivalent formulas. [artifact S01,S05]
+63   Six intermediate objects have different roles: canonical symbolic declarations, family-specific
+64   formulas, learned numerical features, graph relationships, search plans, and proof/evidence records.
+65   A search plan is not a formula; a declaration is not its verification result; and a vector is not a proof.
+66   Their interchange requires explicit mappings. A model can select or repair a candidate without
+67   defining its semantics. [artifact S01,S04,S34,S38]
+
+68   2.2   How examples and supervisory targets are constructed
+
+69   The concrete legal training record contains source identity and citation, raw and normalized text,
+70   an embedding-model identifier and vector, a modal IR document, frame candidates and selection,
+71   parser trace, and losses. A builder normalizes a U.S.-Code-style passage, parses modal formulas,
+72   ranks ontology frames using BM25, and packages the result. The default convenience embedding is
+73   explicitly a deterministic mock; the local codec can instead supply spaCy-derived feature hashing,
+74   and externally supplied vectors carry their producer identity. Experiments must record which path
+75   supplied the target vector. [artifact S22,S23]
+76   Thus targets are not all human gold labels. Modal-family targets can be derived from parsed operators;
+77   view targets come from bridge contracts and their configured scoring; frames can be retrieval-selected;
+78   and proof-feedback labels require admitted verifier records. Reproducing these labels measures
+79   distillation of those teachers. Independent annotations and held-out semantic distinctions are required
+80   to measure fidelity to the original source.
+81   For a source x, write I = Cψ (x) for the symbolic compiler output, e = T (x) for the declared embed-
+82   ding target, and f = F (x, I) for reusable features. Features include lexical cues, actor/action/object
+83   roles, conditions and exceptions, temporal structure, predicate arity, quantifier scope, provenance,
+84   frame relations, compiler contracts, and reconstruction diagnostics. The adaptive model predicts an
+85   embedding ê, a modal-family distribution pF , and a view distribution pV . Some features depend on
+86   an existing parse, so this is often parser-assisted learning, not a demonstrated raw-text-only universal
+87   compiler. [artifact S24]
+
+
+                                                         2
+

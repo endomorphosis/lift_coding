@@ -1,0 +1,55 @@
+495   An unimplemented arm is unavailable, not a zero-score success. A method may be compared only on
+496   the fragments for which its semantics is specified; also report the full-population coverage/abstention
+497   rate so narrowing coverage cannot masquerade as accuracy.
+
+      Table 6: Final empirical results remain unmeasured in this draft. Fill from retained runs, not targets.
+
+      Arm     Sources / covered       Fidelity / uncertainty   Correct transfers       Cost / latency
+      A       [TBD]                   [TBD]                    [TBD]                   [TBD]
+      B       [TBD]                   [TBD]                    [TBD]                   [TBD]
+      C       [TBD]                   [TBD]                    [TBD]                   [TBD]
+      D       [TBD]                   [TBD]                    [TBD]                   [TBD]
+      E       [TBD]                   [TBD]                    [TBD]                   [TBD]
+
+498   Report parse success, typed elaboration, source-facet fidelity, modal/quantifier scope, source-map
+499   validity, reconstruction fidelity, consistency, supported query coverage, correct proof transfer, false
+500   transfer, countermodel correctness, abstention, and checker class separately. Use paired differences
+501   and confidence intervals; a zero error count over a small corpus does not establish universal soundness.
+502   Include setup, vocabulary curation, annotation, extraction, model, proof search, independent checking,
+503   retries, and human review costs. A deterministically emitted formula does not have zero total
+504   engineering or processing cost.
+
+505   F     Source-grounded query procedure
+506   This is a composed method specification, not a claim that one existing function already performs
+507   every step.
+
+508          1. Bind a query to its source references, target property, ontology, allowed assumptions, and
+509             acceptance profile.
+510          2. Extract and normalize candidate declarations; retain unresolved observations and possible
+511             interpretations.
+512          3. Elaborate each formula against its signature; preserve modality, scope, time, exception, and
+513             source lineage.
+514          4. Resolve cross-source actors, events, resources, and units through admitted bridge records.
+515          5. Select only a target view that supports the required constructs. Unsupported loss causes
+516             abstention or explicit partial analysis.
+517          6. Check compatibility and nonvacuity of the selected premises; create property-preservation
+518             obligations for every relied-upon translation.
+519          7. Invoke an available solver or prover under exact theory, environment, and resource bounds.
+520             Keep candidate, satisfiability, monitor, and kernel-checked outcomes distinct.
+521          8. Reconstruct/check evidence at the assurance level required for the query. Bind the actual
+522             verified statement to the outer artifact fields.
+523          9. Return the conclusion with all assumptions, sources, bridge records, limitations, and result
+524             kind. Unknown does not become true or false by default.
+525         10. On counterexamples, distinguish a bad source interpretation, an inadequate abstraction, an
+526             invalid translation, and a real behavior violation before requesting a repair.
+
+527   G     Completion, LLM disclosure, and artifact separation
+528   Scope of this manuscript revision. The research pass used read-only repository inspection and
+529   primary-literature research. It executed only the standalone reference-semantics script and LaTeX
+530   build/quality checks. It did not train models, run OCR/ASR, execute the repository’s full tests, run
+531   native provers, or validate a universal multimodal translation. Prior supervisor paper measurements
+532   are intentionally not reused as autoformalization results.
+
+
+                                                        16
+

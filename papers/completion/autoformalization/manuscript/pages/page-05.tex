@@ -1,0 +1,60 @@
+% Original PDF page 5; hash in recovery-map.json.
+\recoverypage{5}
+\noindent
+Family targets may be mixed. Evaluation reports cross-entropy, target entropy, and excess cross-\linebreak[4]
+entropy. Since H(q, p) \ensuremath{-} H(q) = DKL (q\ensuremath{\Vert}p), a nonzero cross-entropy need not be avoidable error:\linebreak[4]
+it can include the target distribution's own entropy. Neither cosine similarity nor cross-entropy is a\linebreak[4]
+theorem about recovered meaning. [artifact S24]\par
+
+\subsection*{4.3  Guarded optimization rather than an unrestricted fit}
+\noindent
+The generalizable projection trainer selects update groups---family logits, decoded embeddings,\linebreak[4]
+global or feature-specific view logits, and combined updates---and evaluates candidate learning-rate\linebreak[4]
+steps. It can concentrate on hard examples, use bounded pre-screening, and select a candidate only\linebreak[4]
+when the chosen objective improves without disallowed regression. Candidate changes are evaluated\linebreak[4]
+transactionally and rolled back before selection; timeout, no-improvement, and regression remain\linebreak[4]
+visible. A configurable deadband can relax a named numerical tolerance, so its mode and protected\linebreak[4]
+metrics belong in the experiment manifest. [artifact S24]\linebreak[4]
+Validation examples supplied to this repeated selection procedure are model-selection data, not an\linebreak[4]
+untouched test set. Moreover, when no validation set is supplied, the inspected function falls back\linebreak[4]
+to evaluating training samples. The paper's generalization claims therefore require explicit disjoint\linebreak[4]
+source-family splits, separate final test data, disabled sample memory, and frozen targets. Source\linebreak[4]
+derivatives and multiple views of one passage must not cross partitions.\par
+
+\subsection*{4.4  Proof-aware auxiliary supervision}
+\noindent
+Seven explicit heads predict obligation family, semantic slots, premise family, route availability,\linebreak[4]
+trusted outcome, reconstruction success, and minimal failing contract. Categorical heads use nor-\linebreak[4]
+malized class probabilities; multilabel heads use independent sigmoid probabilities. Only version-\linebreak[4]
+matched, trusted, eligible feedback trains them; duplicates and excluded holdout records are tracked.\linebreak[4]
+The code reports coverage, abstention, and family-specific metrics. [artifact S24]\linebreak[4]
+Critically, these proof-head parameters are isolated. Their declared weight in the primary representa-\linebreak[4]
+tion objective is zero, and protected compiler cross-entropy, embedding, structural reconstruction,\linebreak[4]
+provenance, and anti-copy parameter fingerprints are checked before and after an update. A prediction\linebreak[4]
+of proof success can prioritize a route but cannot certify a formula. This protects against learning to\linebreak[4]
+replace a difficult source statement with an easier, different theorem. [artifact S24]\par
+
+\subsection*{4.5  How learning improves deterministic formalization}
+\noindent
+Introspection exposes feature contributions, embedding residuals, family margins, underrepresented\linebreak[4]
+view components, and pipeline-stage diagnostics. The TODO supervisor separates parameter updates\linebreak[4]
+from deterministic program-synthesis tasks. A high reconstruction loss can request a shared-weight\linebreak[4]
+update; a missing exception-scoping rule requires a compiler/decompiler repair and new regression\linebreak[4]
+tests. The cost-gated loop avoids expensive model repair unless it is enabled and its configured\linebreak[4]
+expected benefit exceeds call cost. Those estimates are decisions to evaluate, not measured economic\linebreak[4]
+guarantees. [artifact S24,S25,S29]\linebreak[4]
+Stable-feature promotion is an explicit join between the two loops. The export excludes raw source,\linebreak[4]
+token-level copying channels, sample identifiers, and sample-memory state. Integration resolves it\linebreak[4]
+against canonical view contracts and requires paired, fixed-canary evidence, including source-copy\linebreak[4]
+and symbolic-validity guardrails, before emitting content-addressed guidance with rollback metadata.\linebreak[4]
+This is a guarded transfer of learned regularities into a deterministic compiler-facing interface, not\linebreak[4]
+gradient descent through arbitrary parser code and not unconstrained rule invention. [artifact S30]\par
+
+\section*{5  Retrieval, tacticians, and proof reconstruction}
+\subsection*{5.1  Three retrieval signals, not three truth criteria}
+\noindent
+BM25 supplies lexical candidates: the sample builder ranks frames, while a separate GraphRAG thin\linebreak[4]
+client reads sharded postings and applies term-frequency, inverse-frequency, and length-normalization\linebreak[4]
+scoring. Vector indexes instead retrieve neighbors of a declared embedding; the inspected FAISS\linebreak[4]
+store maintains indexes, metadata, and identifier mappings. Graph adjacency and bounded walks\par
+

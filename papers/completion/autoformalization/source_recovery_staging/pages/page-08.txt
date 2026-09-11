@@ -1,0 +1,54 @@
+297   premise set must be consistent in the relevant sense. Under classical logic, inconsistent premises
+298   entail any conclusion. A system that silently adds an assumption to close a proof has changed the
+299   problem rather than solved it.
+
+300   7   Worked example: learned guidance and cross-view reasoning
+301   Consider a synthetic coding requirement: “Protected resources must not be written without approval.
+302   Each write must be audited within two steps.” It is a specification example, not legal advice or a
+303   production experiment. One source supplies the requirement, a second supplies implementation text,
+304   and a third supplies observations. Let a be an actor, r a resource, and t a discrete trace position.
+305   The normative view may represent the first sentence as:
+                        Protected(r) ∧ ¬ Approved(a, r, t) ⇒ Oa,t,θ (¬ Write(a, r, t)).                   (9)
+306   The policy-to-compliance bridge defines which observed behaviors count as violations. It does not
+307   derive actual non-writing from the obligation. The compliance queries are:
+                   Q1 = ∀a, r, t : Protected(r) ∧ ¬ Approved(a, r, t) ⇒ ¬ Write(a, r, t),                (10)
+                   Q2 = ∀a, r, t : Write(a, r, t) ⇒ ∃u ∈ [t, t + 2] : Audit(a, r, u).                    (11)
+308   A deterministic implementation model sets Write = ¬ Protected ∨ Approved. Substitution estab-
+309   lishes Equation 10 in that model. An implementation that always writes supplies a counterexample
+310   when the resource is protected and approval is false. Transferring either result to actual source code
+311   requires a justified extraction or refinement relation; finding the word “approve” in a function name is
+312   insufficient.
+313   For Equation 11, an observed write at step 0 and a matching audit at step 1 satisfy the bounded
+314   requirement for that event. A matching audit at step 3 violates the two-step requirement only when the
+315   capture is complete through the relevant deadline and no earlier matching audit exists. An incomplete
+316   window yields unknown, not compliance and not proven violation. The same-looking name in a
+317   different tenant or request cannot be joined without an admitted identity mapping. A global program
+318   guarantee additionally requires reasoning over all modeled executions, not one successful log.
+319   The shared space reuses typed actor/resource/event identities, source maps, and explicit bridge
+320   assumptions. A Legal declaration can state the constraint, an Intent declaration can describe the
+321   proposed workflow, and a Security declaration can supply implementation properties. The intent
+322   is not an observed execution: explicit identity, action, time, and refinement mappings join these
+323   views. The resulting behavioral theorem, trace observation, and policy-applicability decision remain
+324   different conclusions. [artifact S01,S09]
+325   During training, paired variants of this example can change “must” to “may”, move the exception,
+326   or change the audit window. The compiler and view metrics provide candidate targets; independent
+327   annotations determine whether the intended change survived. A family/view head may identify a
+328   temporal omission, a decompiler-plan feature may localize the missing phrase, and a proof-feedback
+329   head may rank a useful obligation. None substitutes for the actual current-profile check. This
+330   example illustrates how the representations cooperate; it is not reported as an executed learned-model
+331   experiment.
+
+332   8   Evidence and evaluation plan
+333   This revision audits source code at one frozen repository snapshot. It does not execute the full
+334   repository, train a new checkpoint, establish a live CUDA speedup, or show that every supported
+335   head is enabled in the selected deployment. Existing CUDA tests check real gradient work, CPU
+336   parity, clipping, and resident parameters, but they are skipped without suitable hardware and use
+337   convenience fixtures. Their presence is not a new passing test run. [artifact S32]
+338   The earlier standalone reference suite remains in the supplement: all twelve finite semantic checks met
+339   their expected outcomes, including 26 disagreements between strong-until and conjunction among
+340   64 three-step trace pairs. These are illustrations, not accuracy measurements for the repository’s
+341   compiler or autoencoder. No training gain is inferred from them.
+
+
+                                                         8
+

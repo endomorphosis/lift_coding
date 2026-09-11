@@ -1,0 +1,9 @@
+                   Table 5: Methods to compare under matched tasks and reasoning budgets.
+
+      Arm     Method
+      A       Direct model-to-target formalization with the same target checker.
+      B       Deterministic bounded compiler, declared vocabulary, and explicit abstention.
+      C       Typed multi-view representation with source grounding, but no admitted cross-view proof
+              transfer.
+      D       C plus checked property-specific bridges and compatible cross-source premise assembly.
+      E       D plus bounded learned view/premise advice, with frozen checkpoint and unchanged checker.

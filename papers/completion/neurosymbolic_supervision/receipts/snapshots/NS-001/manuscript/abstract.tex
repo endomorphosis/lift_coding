@@ -1,0 +1,19 @@
+Coding agents repeatedly reconstruct repository state, regenerate plans, and re-
+run validation, yet shorter prompts or cached passes can omit dependencies and
+weaken assurance. We present an obligation-centered architecture that maintains
+content-addressed semantic state separately from operational task state and durable
+evidence. A formalization layer maps code, intent, and applicable constraints to
+typed obligations while exposing unsupported or lossy translations. A supervisor
+uses these obligations to select deterministic analysis, compositional reasoning,
+proof search, bounded synthesis, or an explicitly authorized neural residual. Candi-
+date edits are checked against current source; test and proof results are admitted
+only for their declared statements, environments, and trust profiles. Accepted
+transitions update durable roots and invalidate affected planning and verification
+state. The design includes incremental proof-unit sealing and staged fixture-aware
+test reuse, semantic-world memory, and procedural synthesis. We specify separate
+tests of preservation, progress, and end-to-end cost, including matched raw-context
+baselines, cold validation oracles, and positive authorization cases. [RESULTS:
+insert the frozen task population, useful completion rate, net measured cost,
+uncertainty intervals, and false-admission results.] The contribution is a method
+for governing repository evolution with explicit evidence, not a claim that hashing,
+model confidence, or every available solver proves arbitrary Python correct.

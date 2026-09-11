@@ -1,0 +1,63 @@
+ID    Source role                           Supported claim and boundary
+S20   TDFOL syntax core                First-order, deontic, and temporal constructors
+                                       with explicit term sorts; no universal embedding
+                                       inferred.
+S21   DCEC native syntax core          Agent-indexed belief, knowledge, intention and
+                                       normative constructors; backend/theory support
+                                       remains a separate claim.
+S22   Legal sample builder             Source text, modal IR, frame and embedding
+                                       targets; default convenience embedding is ex-
+                                       plicitly mock.
+S23   Deterministic modal codec        Local parsing, spaCy feature hashing, BM25
+                                       frames, decompilation and consistency inputs.
+S24   Adaptive modal autoencoder       Shared parameter state; vector decode; gener-
+                                       alizable transactional training; separate proof
+                                       heads; guidance and sample-memory modes.
+S25   Cost-gated modal loop            Codec, graph import, prover signals, optional
+                                       model repair, and introspection rollout.
+S26   Packed tensor boundary           Stable feature-row gathering, parameter resi-
+                                       dency, optional CUDA, CPU reference and ex-
+                                       plicit fallback.
+S27   Packed loss implementation       Masked family/view CE, MSE, cosine, norm
+                                       guard and parameter regularization.
+S28   Packed optimizer step            FP32 loss reduction, optional BF16 activations,
+                                       accumulation, backward, clipping, SGD-style
+                                       update and changed-row scatter.
+S29   Local optimization usage guide   Loss-targeted TODO seeding, parameter up-
+                                       dates and re-evaluation; guide is not run evi-
+                                       dence.
+S30   Learned-guidance promotion       Source-free stable export, canonical contract
+                                       resolution, paired canary guards and rollback.
+S31   Multi-view target builder        Adapter-derived losses and configured view-
+                                       distribution targets; target generation is not a
+                                       universal semantic oracle.
+S32   Packed training tests            Tests for nonzero gradients, CPU parity and
+                                       residency; skipped when hardware absent and
+                                       not executed in this audit.
+S33   Constrained IR decoder           Typed productions, fixed vocabulary and valid-
+                                       token/grammar/binder/type/family masks; not a
+                                       claim of trained token-generation quality.
+S34   GraphRAG thin-client implementa- Sharded lexical scores, CID adjacency and
+      tion                             bounded walks; the declared vector CLI mode
+                                       is not implemented in this route.
+S35   FAISS vector store               Actual index/metadata/identifier interface with
+                                       dependency checks; no claim about a trained
+                                       encoder or measured retrieval gain.
+S36   Optional Hammer selector guide   Deterministic overlap baseline and pinned
+                                       graph-based scoring; supplied weights are hand-
+                                       authored, not a trained checkpoint.
+S37   ITP Hammer user guide            Bounded supported-fragment translation, opt-in
+                                       solver portfolio, native reconstruction and result
+                                       states; documented contract, not a new live run.
+S38   Logic Tactician planner          Pure, deterministic source ordering and acyclic
+                                       subgoals; optional pinned reorder/nomination;
+                                       no proof execution in planning.
+S39   Leanstral proof-assistant lane   Advisory proposals plus Lean checking and
+                                       anti-bypass policy; model configuration does
+                                       not establish execution or success.
+
+
+
+
+                                       12
+

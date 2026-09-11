@@ -236,4 +236,9 @@ shared outputs, so editing a manuscript in a later task does not erase its
 source-recovery evidence. Receipts and passing checks establish artifact
 integrity and recorded coverage; they are not independent scientific replication
 or a substitute for the final independent reproduction task and author review.
-The prepared program contains **no completion receipts or benchmark results**.
+Source-recovery checkpoint receipts are now being recorded after local builds
+and PDF reconciliation. They do not establish any benchmark result or a
+submission-ready manuscript. Keep private provenance and receipt snapshots out
+of the anonymous publication package; final packaging tasks must audit that
+separation. Use the database status and each receipt's stated scope to determine
+what has actually been completed.

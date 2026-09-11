@@ -1,0 +1,16 @@
+                    Table 9: Complementary views and what must be joined before a proof.
+
+      View                     Contribution                             Required bridge/evidence
+      Deontic                  An obligation with condition and ex-     Reviewed normative profile; ex-
+                               ception scope.                           emption precedence.
+      Frame/F-logic            Holder, permit, notice, and approval     Grounded identity and role map-
+                               roles and relations.                     ping, not string equality.
+      Temporal/TDFOL           Approval        anchor,     permitted    Correct interval and time seman-
+                               clock/unit interpretation,      dead-    tics; no modal erasure.
+                               line relation.
+      Event calculus           Approval and filing events; resulting    Admitted event identity, times-
+                               fluent transitions.                      tamp and transition axioms.
+      Graph projection         Retrieval, links, dependency and         Graph edge is evidence or struc-
+                               provenance traversal.                    ture, not automatically a theorem.
+      Prover encoding          A stated compliance query under ex-      Valid translation and indepen-
+                               plicit premises and theory.              dently checked result.

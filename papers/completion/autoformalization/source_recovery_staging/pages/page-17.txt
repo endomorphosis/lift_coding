@@ -1,0 +1,61 @@
+533   Disclosure to finalize. LLM assistance was used to research and draft this manuscript and its
+534   reference-example code. The author must verify the text, formulas, examples, implementation claims,
+535   and bibliography before submission. Record the actual models, dates, and material implementa-
+536   tion/formalization/experiment uses when the final runs exist; do not infer a model version or an author
+537   review that has not occurred. The reference suite is not a claim of human-independent discovery or
+538   audited proof.
+
+539   Remaining source and format work. Replace planned-result fields after freezing the source and
+540   experimental manifests. Validate actual modal bridges, source-fidelity annotations, positive proof
+541   paths, counterexamples, and availability. Prepare the anonymous implementation supplement; keep
+542   the private audit with public repository identities outside the submission. Replace the missing official
+543   checklist file rather than inventing its questions. The workshop style must remain unchanged; recheck
+544   the main-text page count after adding results. All appendices are part of the same submission PDF.
+
+545   H    Learning-system anatomy and terminology
+
+546   The original methods draft emphasized generic learned advice. This revision examines the concrete
+547   modal autoencoder, packed tensor training, source-free feature promotion, and multi-view targets. All
+548   statements here describe the inspected implementation; no new model was trained in this manuscript
+549   preparation.
+
+                    Table 7: Objects that must not all be called the same latent representation.
+
+      Object                    Construction and use                      What the current evidence does
+                                                                          not establish
+      Canonical modal IR        Source-linked formulas, operators,        Unsupervised invention of the
+                                predicates, roles, conditions, excep-     schema; arbitrary whole-language
+                                tions and frame structure.                correctness.
+      Structured round-trip     Seven-field rule records under a spe-     Full fidelity for every richer modal
+      IR                        cific compiler, vocabulary and real-      declaration.
+                                ization profile.
+      Feature encoding          Token/cue, semantic-slot, frame, con-     A pure text-only input when an
+                                tract, scope, provenance and diagnos-     existing parse or bridge target is
+                                tic features.                             used.
+      Decoded embedding         Numerical prediction compared             Generated natural-language recon-
+                                against the sample embedding using        struction or a guaranteed informa-
+                                MSE and cosine.                           tion bottleneck.
+      Family/view distribu-     Class scores over configured modal        Probability that a statement is
+      tion                      families and compiler/prover view         legally true or a theorem is proved.
+                                components.
+      Source-withheld text      Deterministic realization from admit-     Proof of original-source fidelity;
+                                ted IR without originating surface ac-    compiler and decoder can share
+                                cess.                                     omissions.
+      Proof-feedback heads      Bounded supervised predictions from       A substitute for the next actual
+                                admitted, version-bound verifier feed-    proof check.
+                                back.
+      Stable guidance ex-       Selected shared features mapped to        Raw parameter state becoming a
+      port                      canonical view contracts after canary     new semantic authority.
+                                admission.
+
+
+550   A useful classification. The concrete adaptive component is a feature-based, multi-head recon-
+551   struction/classification learner with sparse state and a packed tensor execution path. It should not
+552   be described as a variational autoencoder, generative adversarial network, Transformer sequence-
+553   to-sequence formalizer, or trained universal semantic bottleneck without identifying a separate
+554   implemented model and checkpoint. Other experimental mechanisms may exist elsewhere; this
+555   classification applies to the exact paths audited here.
+
+
+                                                        17
+

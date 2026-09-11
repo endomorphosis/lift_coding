@@ -1,0 +1,23 @@
+% Original PDF pp. 4; Table 2.
+\begingroup
+\renewcommand{\thetable}{2}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.24\linewidth} >{\raggedright\arraybackslash}p{.32\linewidth} >{\raggedright\arraybackslash}p{.38\linewidth}@{}}
+\caption{Roles of native views and checking infrastructure. A family's presence in a registry does not mean every formula or backend is qualified.}\label{tab:2}\\
+\toprule
+\textbf{Logic or formal view} & \textbf{Implemented role in the stack} & \textbf{Agent-safety use} \\
+\midrule
+\endfirsthead
+\textbf{Logic or formal view} & \textbf{Implemented role in the stack} & \textbf{Agent-safety use} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+First-order logic and F-logic/frame views & Predicates, quantified relations, typed objects, classes and slots & Describe actors, resources, tool interfaces, and relations needed by a rule \\[3pt]
+Deontic logic & Obligation, permission, prohibition; richer domain slots where supported & Separate required, allowed, and forbidden behavior \\[3pt]
+Temporal logic and TDFOL & Quantification plus deontic and temporal operators & Validity windows, prerequisite order, continuing duties and deadlines \\[3pt]
+Event calculus and DCEC & Events/fluents and cognitive/normative structure & Relate actions to state changes; distinguish an agent's belief or intention from established facts \\[3pt]
+Rule/policy and Datalog-style views & Bounded derivation and authorization declarations & Compute applicable facts and grants under an explicit world policy \\[3pt]
+Hoare-style contracts and SMT & Preconditions, postconditions, transitions, arithmetic and typed constraints & Check generated code and effect invariants in a declared fragment \\[3pt]
+Interactive proof kernels & Reconstructed Lean/Coq/Isabelle proofs through configured adapters & Independently check proof candidates when the required assurance demands it \\[3pt]
+\end{longtable}
+\endgroup

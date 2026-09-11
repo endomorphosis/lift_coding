@@ -1,0 +1,60 @@
+200   expand typed relationships and dependencies. These signals answer different questions—matching
+201   terms, numerical similarity, and explicit connectivity—and none establishes entailment. [artifact
+202   S22,S34,S35]
+203   Index construction is not encoder training. Nor does a common result envelope establish that every
+204   entry point supports every mode: the inspected thin-client CLI declares a vector option but does not
+205   dispatch it to an implemented vector query. The actual producer, backend, revision, and route must
+206   be recorded. Context found by any index becomes a premise only after grounding, applicability, and
+207   policy checks; absence from retrieval is not logical negation. Appendix N details these boundaries.
+
+208   5.2   The Tactician plans; the Hammer searches and reconstructs
+
+209   The repository’s LogicTactician deterministically orders caller-provided sources under an explicit
+210   policy, records selected/excluded routes, creates an acyclic subgoal plan, and reports stop or abstention
+211   conditions. Planning performs no proof, network work, or writes. Optional model guidance can
+212   reorder or nominate admitted sources under a pinned digest, with deterministic fallback. This planner
+213   is not itself a trained tactic synthesizer. [artifact S38]
+214   The ITP Hammer selects premises, lowers a supported first-order-safe fragment to TPTP or SMT-
+215   LIB, runs an allowed bounded solver portfolio, and attempts native reconstruction. Vampire/E are
+216   first-order automation routes; Z3/cvc5 are SMT routes; Lean, Coq/Rocq, and Isabelle/HOL have
+217   separate frontend/reconstruction contracts. A logic family specifies what a statement means; a prover
+218   family specifies a computation over an admitted encoding. Unsupported dependent, higher-order, or
+219   unresolved polymorphic constructs cannot be silently erased. External execution is opt-in, and native
+220   availability must be established. [artifact S37]
+221   Within this Hammer contract, solver output is a candidate until reconstruction is accepted by the
+222   originating ITP’s checker in its pinned environment. The deterministic premise baseline uses symbol,
+223   type, import, and graph overlap, not a universal vector ranker. Its optional graph-selector artifact uses
+224   hand-authored linear weights; the inspected release does not ship a genuinely trained premise-selector
+225   checkpoint. Ranking machinery, training a ranker, and proving a goal are separate claims. [artifact
+226   S36,S37]
+
+227   5.3   Leanstral proposals and verified training feedback
+
+228   Leanstral supplies advisory proof-engineering candidates, such as Lean edits or strategies. The
+229   security lane requires the suggested proof to pass the Lean checker and rejects proof bypasses; a
+230   model response does not replace source, runtime, or release evidence. The legal rollout separately
+231   admits structured guidance through syntax, provenance, anti-copy, proof, and configured Lean-
+232   reconstruction checks. Raw drafts never become reconstruction targets or trusted training labels.
+233   Verification creates a new structured artifact rather than making the original prose authoritative.
+234   [artifact S39,S40]
+235   Together, retrieval nominates context, the Tactician organizes bounded work, Hammer and Leanstral
+236   provide different proposal mechanisms, and checking determines the supported result. Admitted feed-
+237   back can train isolated heads or identify a compiler defect; a versioned patch still needs independent
+238   regression tests and rollout approval. This is not evidence that Leanstral’s base weights are fine-tuned
+239   by the adaptive autoencoder. The concrete contracts and return path are given in Appendix O.
+
+240   6     How different IRs are used together
+241   6.1   Semantics are indexed by a profile
+
+242   Each logical view has a signature, sentence language, semantic models, satisfaction relation, and a
+243   supported query fragment. The common record layer does not force one implementation of these
+244   components. A computable representation is not a universal decision procedure: queries may require
+245   decidable fragments, bounded search, or explicit unknown/timeout outcomes. First-order and frame
+246   views express objects and relations; event-calculus views express events, fluents, and change [6];
+247   deontic views express normative force; temporal views bind trace/clock semantics; cognitive views
+248   distinguish agent-indexed knowledge, belief, and intention. World, agent, time, action, and formula
+249   categories cannot be exchanged merely because their identifiers are strings.
+
+
+                                                         6
+

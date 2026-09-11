@@ -1,0 +1,18 @@
+      Table 8: Recommended experiment manifest fields; values remain to be filled from an actual training
+      run.
+      Field                 Required value
+      Source root           Exact corpus release, licensing/review state, document and derivative grouping
+      Teacher identities    Parser, vocabulary, frame index, embedding producer, view registry and
+                            target-builder versions
+      Model state           Shared parameter root, sample-memory mode, enabled groups, scales and
+                            capacity limits
+      Splits                Training; repeatedly used selection/canary set; untouched source-family/time
+                            test set
+      Execution             CPU/CUDA path, library and device versions, accumulation, clipping and
+                            precision
+      Selection             Learning-rate candidates, objective weights, hard-example policy, timeout and
+                            deadband mode
+      Proof feedback        Verifier, compiler/profile fingerprint, admissible statuses, excluded partitions
+                            and duplicates
+      Promotion             Paired canary identity, admitted stable export, active consumer, rollback and
+                            held-out results
