@@ -41,6 +41,12 @@ def native_ready(process, database, paper):
 
 
 class CampaignTests(unittest.TestCase):
+    def test_worker_observation_forwards_fresh_owner_tasks(self):
+        rows = [{"task_cid": "cid:test", "status": "done"}]
+        with patch.object(WORKERS, "observe_lane", return_value={"checked": True}) as observe, patch.dict(sys.modules, {"paper_worker_observation": WORKERS}):
+            self.assertEqual(CAM.worker_observation(Path("/tmp/test-lane"), authoritative_tasks=rows), {"checked": True})
+        observe.assert_called_once_with(Path("/tmp/test-lane"), authoritative_tasks=rows)
+
     def test_birth_parsing_and_identity_validation(self):
         # The parenthesized comm field itself may contain spaces and ')'.
         text = "123 (python ) worker) S " + " ".join(["0"] * 18 + ["7654321", "0"])
@@ -137,6 +143,7 @@ class CampaignTests(unittest.TestCase):
                 self.assertEqual(report["cleanup_errors"], [])
                 workers = CAM.read(state / "health.json")["workers"][paper]
                 self.assertFalse(workers["authoritative"])
+                self.assertTrue(workers["owner_tasks_supplied"])
                 self.assertEqual(workers["projection_count"], 0)
                 with (state / "campaign.lock").open("a") as lock:
                     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
