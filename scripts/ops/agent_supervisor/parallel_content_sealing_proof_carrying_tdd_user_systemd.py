@@ -83,6 +83,9 @@ LEGACY_SERVICE_REVISIONS: Final = (
         "sha256:b153a19680f7c700d07ccc87bafc2bd587911a0dbd60c8cea6128eea3c9d2ee8",
     ),
 )
+# The prior timer had only a boot-relative bootstrap. Exact bytes are retained
+# as the sole migration predecessor; arbitrary installed timers remain foreign.
+LEGACY_TIMER_SHA256: Final = "75446294cc9559269850bebc5ee1f704ecb199dd2c33eeb0b8801dff0a9e69e7"
 RENAME_EXCHANGE: Final = 2
 MAX_UNIT_BYTES: Final = 64 * 1024
 MAX_CONTROL_BYTES: Final = 8 * 1024 * 1024
@@ -317,7 +320,7 @@ def _render_units() -> dict[str, bytes]:
         raise EnsureError("service_template_claim_boundary_invalid")
     timer_lines = timer.splitlines()
     required_timer_lines = {
-        "OnBootSec=3min",
+        "OnActiveSec=3min",
         "OnUnitActiveSec=10min",
         "AccuracySec=30s",
         "RandomizedDelaySec=45s",
@@ -327,7 +330,8 @@ def _render_units() -> dict[str, bytes]:
     }
     if not required_timer_lines.issubset(set(timer_lines)):
         raise EnsureError("timer_template_policy_invalid")
-    if any(line.startswith("OnCalendar=") for line in timer_lines):
+    scheduled = [line for line in timer_lines if line.startswith("On")]
+    if scheduled != ["OnActiveSec=3min", "OnUnitActiveSec=10min"]:
         raise EnsureError("timer_template_policy_invalid")
     return {
         SERVICE_NAME: template.encode("utf-8"),
@@ -356,7 +360,14 @@ def _migratable_unit_payloads(
         if observed_sha256 != expected_sha256:
             raise EnsureError("sealed_predecessor_derivation_mismatch")
         predecessors.append(predecessor)
-    return {SERVICE_NAME: tuple(predecessors)}
+    timer = units.get(TIMER_NAME)
+    anchor = b"OnActiveSec=3min\n"
+    if not isinstance(timer, bytes) or timer.count(anchor) != 1:
+        raise EnsureError("rendered_timer_anchor_ambiguous")
+    previous_timer = timer.replace(anchor, b"OnBootSec=3min\n")
+    if hashlib.sha256(previous_timer).hexdigest() != LEGACY_TIMER_SHA256:
+        raise EnsureError("sealed_timer_predecessor_derivation_mismatch")
+    return {SERVICE_NAME: tuple(predecessors), TIMER_NAME: (previous_timer,)}
 
 
 def _subprocess_environment(*, systemd: bool) -> dict[str, str]:
@@ -1219,6 +1230,11 @@ def install(
         _systemctl_action(capability, "daemon-reload")
     if enable:
         _systemctl_action(capability, "enable", "--now", TIMER_NAME)
+        # enable --now leaves an already-active elapsed timer untouched. Restart
+        # only the timer to establish its OnActiveSec bootstrap; the service is
+        # still invoked later through its unchanged native resume admission.
+        _require_stable_validation(validation, config_path)
+        _systemctl_action(capability, "restart", TIMER_NAME)
     return {
         "schema": RECEIPT_SCHEMA,
         "command": "install",
@@ -1235,6 +1251,7 @@ def install(
         "upgraded_from_sealed_predecessor": upgraded,
         "daemon_reload": bool(daemon_reload),
         "timer_enabled_and_started": bool(enable),
+        "timer_activation_anchor_rearmed": bool(enable),
         "oneshot_command": "reviewed_operator_resume_only",
         "direct_owner_or_master_launch": False,
         "credential_material_accessed": False,

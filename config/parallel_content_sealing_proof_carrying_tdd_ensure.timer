@@ -3,7 +3,7 @@
 Description=Periodically ensure the fail-closed PCTDD supervisor
 
 [Timer]
-OnBootSec=3min
+OnActiveSec=3min
 OnUnitActiveSec=10min
 AccuracySec=30s
 RandomizedDelaySec=45s

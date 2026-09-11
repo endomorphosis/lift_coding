@@ -98,7 +98,8 @@ def test_templates_render_deterministically_to_resume_only() -> None:
     assert "StartLimitBurst=3" in service
     assert "Documentation=file:///" in service
     assert "file://file://" not in service
-    assert "OnBootSec=3min" in timer
+    assert "OnActiveSec=3min" in timer
+    assert "OnBootSec=" not in timer
     assert "OnUnitActiveSec=10min" in timer
     assert "Persistent=true" in timer
     assert "RandomizedDelaySec=45s" in timer
@@ -596,7 +597,7 @@ def test_systemctl_actions_require_the_exact_default_unit_directory(
         )
 
 
-def test_explicit_install_activation_uses_only_timer_enable(
+def test_explicit_install_activation_uses_only_timer_enable_and_rearm(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -621,6 +622,7 @@ def test_explicit_install_activation_uses_only_timer_enable(
     assert actions == [
         ("daemon-reload",),
         ("enable", "--now", module.TIMER_NAME),
+        ("restart", module.TIMER_NAME),
     ]
     assert result["timer_enabled_and_started"] is True
     assert all(module.SERVICE_NAME not in action for action in actions)
