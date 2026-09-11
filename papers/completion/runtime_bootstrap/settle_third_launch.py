@@ -49,6 +49,8 @@ def lane_work(paper, audit):
         "--store-id", "vericodegen-2026-" + paper,
         "--secret-handle", "handle:vericodegen-2026:" + paper + ":source-checkpoint-maintenance"],
         ROOT, C.environment(ROOT), owner_dir / "owner.log")
+    report["maintenance_owner_process"] = record
+    C.write(report_path, report)
     try:
         ready = C.wait_owner_ready(process, record, ready_path, paper=paper, database=lane / "control.duckdb")
         vault = owner_dir / (ready["endpoint_secret_handle"].replace(":", "_").replace("/", "_") + ".quack-token")
@@ -57,7 +59,7 @@ def lane_work(paper, audit):
         os.environ["IPFS_ACCELERATE_AGENT_STATE_SCHEMA_REVISION"] = "1"
         report["owner_identity"] = ready["identity"]
         owner = audit["control.execution.duckdb"]["database_task_attempts"][0]["owner_session_id"]
-        with DatabaseImplementationDaemon(database_path=lane / "control.duckdb", quack_uri=ready["quack_endpoint"], owner_session_id=owner) as daemon:
+        with DatabaseImplementationDaemon(database_path=lane / "control.duckdb", quack_uri=ready["quack_endpoint"], owner_session_id=owner, task_prefix=prefix + "-") as daemon:
             source = daemon.task_source
             records = source.intent.list_tasks(limit=1000)
             R.require(len(records) == 25, "unexpected task population")
@@ -110,6 +112,7 @@ def lane_work(paper, audit):
                 if task["task_alias"] == first:
                     receipt_rel = Path("papers/completion") / paper / "receipts" / (first + ".json")
                     argv = ["python3", "scripts/paper_supervisors.py", "verify-task", "--paper", paper, "--task", first]
+                    R.require(len(task["validations"]) == 1 and task["validations"][0]["argv"] == argv, "native validation command differs")
                     logfile = owner_dir / (first + "-verify-task.json")
                     with logfile.open("w") as log:
                         result = subprocess.run(argv, cwd=repo, env=C.environment(repo), stdout=log, stderr=subprocess.STDOUT)
@@ -153,6 +156,7 @@ def lane_work(paper, audit):
         os.environ.pop("IPFS_ACCELERATE_AGENT_QUACK_TOKEN", None)
         report["cleanup_errors"] = C.cleanup_children([("owner", process, record)])
         C.write(report_path, report)
+        R.require(not report["cleanup_errors"], "maintenance owner cleanup failed")
 
 
 def main():

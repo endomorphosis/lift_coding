@@ -224,10 +224,10 @@ def snapshot(state):
             "fetched_at": now(), "boards": [fetch_board(p, state / p) for p in PAPERS]}
 
 
-def worker_observation(lane):
+def worker_observation(lane, authoritative_tasks=None):
     try:
         from paper_worker_observation import observe_lane
-        return observe_lane(lane)
+        return observe_lane(lane, authoritative_tasks=authoritative_tasks)
     except Exception as exc:
         # A transient private projection read must not suppress owner health.
         return {"authoritative": False, "error_type": type(exc).__name__}
@@ -338,10 +338,11 @@ def serve(state, worktree_parent):
             write(state / "campaign.json", report)
         while not stopping:
             failures = [dict(kind=kind, pid=p.pid, exit_code=p.returncode) for kind, p, _record in children if p.poll() is not None]
-            health = {"checked_at": now(), "children_exited": failures,
-                      "workers": {paper: worker_observation(state / paper) for paper in PAPERS}}
+            health = {"checked_at": now(), "children_exited": failures}
             try:
                 snap = snapshot(state)
+                health["workers"] = {b["paper_id"]: worker_observation(
+                    state / b["paper_id"], authoritative_tasks=b["tasks"]) for b in snap["boards"]}
                 write(state / "quack-snapshot.json", snap)
                 lake = project_snapshot(snap, state / "ducklake", repo_root=ROOT, source_path=state / "quack-snapshot.json")
                 write(state / "ducklake-status.json", lake)
@@ -349,6 +350,8 @@ def serve(state, worktree_parent):
                 health["quack_reads_succeeded"] = True
             except Exception as exc:
                 health.update(quack_reads_succeeded=False, error_type=type(exc).__name__)
+                if "workers" not in health:
+                    health["workers"] = {paper: worker_observation(state / paper) for paper in PAPERS}
             write(state / "health.json", health)
             print(json.dumps(health), flush=True)
             for _ in range(30):
@@ -399,15 +402,17 @@ def main():
         for paper, lane_report in report["lanes"].items():
             lane = state / paper
             item = {"owner_alive": alive(lane_report.get("owner")),
-                    "supervisor_alive": alive(lane_report.get("supervisor")), "repo": lane_report["repo"],
-                    "workers": worker_observation(lane)}
+                    "supervisor_alive": alive(lane_report.get("supervisor")), "repo": lane_report["repo"]}
             try:
                 board = fetch_board(paper, lane)
+                item["workers"] = worker_observation(lane, authoritative_tasks=board["tasks"])
                 item.update(quack_read=True, tasks=dict(Counter(t["status"] for t in board["tasks"])),
                             active_tasks=[t["task_alias"] for t in board["tasks"] if t["status"] not in {"ready", "open", "todo"}],
                             events=len(board["events"]))
             except Exception as exc:
                 item.update(quack_read=False, error_type=type(exc).__name__)
+                if "workers" not in item:
+                    item["workers"] = worker_observation(lane)
             result["lanes"][paper] = item
         result["ducklake"] = read(state / "ducklake-status.json") if (state / "ducklake-status.json").exists() else None
         print(json.dumps(result, indent=2, default=str))
