@@ -1,0 +1,150 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-009",
+  "status": "complete",
+  "completed_at": "2026-09-11T23:52:52.438856+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "packed_implementation": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+      "sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+      "schema_version": "modal-autoencoder-packed-cuda-training-v1"
+    },
+    "autoencoder": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+      "architecture_version": "proof_aware_auxiliary_heads_v2"
+    },
+    "batching": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_batching.py",
+      "sha256": "06645b2f24f9ac9ba93d955448c3770b26a5952916208af541e570ee0649e8cf"
+    },
+    "checkpoint": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py",
+      "sha256": "f8e7baf903db781dfd0cb3127e296a0329bff83f55e373630a26094c48f64b63"
+    },
+    "state_transaction": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
+      "sha256": "90cbbd8a7cf864e7c0dd0b1799f6936f31ec509168f21661e38feee2bcb6c1a7"
+    },
+    "auditor": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py",
+      "sha256": "c51335f1ac10bad1a9c596391fbf7be375f5e96e1325fdc0b1813f825f3e9a1f",
+      "standard_library_packed_replica": true
+    },
+    "empirical_execution": "CPU numerical qualification only; torch/CUDA packed kernels unrun; A-E/T0-T5 remain unrun"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py": "c51335f1ac10bad1a9c596391fbf7be375f5e96e1325fdc0b1813f825f3e9a1f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json": "b2842a03af46a6ff8bb8f097e7a68c98e540ce2cd9a2b029b4510cb9eeb52b72",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json": "37539c5f034b25db5c4700750678967ff8f8e2c345857433e01a03b26de427be",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.meta.json": "44842da28e623fa1b24fa7590502ddd765c522aea00b42ad3a72bf519c0c665e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log": "df909b07e62cff8006fed0b472a42fbd69b32d15589ffc3d7c4d0250f1aa7165",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.meta.json": "3ba9bded68166637296f8508a08cbef48b7ba4465be1ba92b42d115669c9407a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stdout.log": "087f26a36ac76fbcd0fd2fc20702b9bee26e9889ad547a1c866e144b7550e62b"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evidence/training_correctness.json": "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
+    "papers/completion/autoformalization/config/training_backend.json": "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Actual test outputs and environment IDs are retained; skipped tests are labeled skipped.",
+      "status": "met",
+      "explanation": "Sealed-PATH /usr/bin/python3.12 evidence retains interpreter, PATH, HOME, uname, and source SHA-256 pins. Existing CPU tests executed: 7 state-transaction, 14 checkpoint, 8 batching, and 2 update-group tests passed. Packed CUDA training and residency modules are labeled skipped because torch is absent and numpy C-extensions need libblas.so.3.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py"
+      ]
+    },
+    {
+      "criterion": "A training update demonstrates nonzero admissible gradients and changed shared parameters; no-op paths remain explicit.",
+      "status": "met",
+      "explanation": "A stdlib replica of the packed _loss_chunk/clip/SGD path produced gradient_norm 0.4177, finite-difference agreement to 3e-11, and changed shared embedding and family rows used by three samples. AdaptiveModalAutoencoder python_sparse_batch on two legal samples changed shared family-embedding rows (deontic, conditional_normative, frame) and compiler-quality family logits, then reloaded a compact checkpoint. No-op paths remain explicit: learning-rate 0 leaves parameters unchanged; empty-blueprint packed CE uses masked.mean() and is not learning progress; nonfinite packed metrics reject the update; fully masked CE is 0; CUDA admission is torch_unavailable.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Equation normalization and SGD-style semantics match the current audited implementation or the manuscript is corrected.",
+      "status": "met",
+      "explanation": "Inspected modal_autoencoder_cuda.py (sha256 40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e) divides masked CE and reconstruction by total sample count n, guards cosine on nonzero norms, rejects nonfinite packed metrics, clips gradient norm, and applies Theta <- Theta - eta * clipped_grad with eta in [0,1] and no Adam moments. That matches Equations 5 and 12-14 and App. J. Empty-blueprint forward-only mean reduction is documented as a no-op, not a manuscript error. GPU/BF16 parity is unmeasured because CUDA is unavailable.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af009",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONPATH=external/ipfs_datasets",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "CUDA_VISIBLE_DEVICES=",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py",
+        "--root",
+        ".",
+        "--correctness",
+        "papers/completion/autoformalization/evidence/training_correctness.json",
+        "--backend",
+        "papers/completion/autoformalization/config/training_backend.json"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stderr.log",
+      "started_at": "2026-09-11T23:51:11.998929+00:00",
+      "finished_at": "2026-09-11T23:51:27.005745+00:00",
+      "execution_kind": "sealed CPU packed-numerics audit, native python_sparse_batch update, and existing torch-free unit tests"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af009",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-c",
+        "import json, pathlib, sys\npaths = sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding=\"utf-8\"))\n    print(path, \"ok\")\n",
+        "papers/completion/autoformalization/evidence/training_correctness.json",
+        "papers/completion/autoformalization/config/training_backend.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stderr.log",
+      "started_at": "2026-09-11T23:52:00.449099+00:00",
+      "finished_at": "2026-09-11T23:52:00.492409+00:00",
+      "execution_kind": "JSON parse pin of AF-009 outputs"
+    }
+  ],
+  "limitations": [
+    "torch is not importable in the sealed validation interpreter.",
+    "numpy C-extensions require libblas.so.3, which is absent; packed CUDA tests are skipped, not passed.",
+    "CPU/FP32/BF16 CUDA parity is unmeasured.",
+    "The packed autodiff demonstration is a stdlib replica of the audited _loss_chunk/clip/SGD formulas because apply_packed_projection_update cannot run without torch.",
+    "python_sparse_batch is a real shared-parameter CPU update and is not packed autodiff.",
+    "No A-E or T0-T5 research training ran.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Packed CPU numerical qualification, explicit no-op/skip labeling, native python_sparse_batch parameter change, checkpoint reload, transaction rollback, and equation/SGD audit. GPU research runs remain unauthorized."
+}

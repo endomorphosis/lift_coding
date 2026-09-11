@@ -1,0 +1,373 @@
+{
+  "acceptance": {
+    "actual_outputs_and_environment_ids_retained": true,
+    "equation_semantics": "match",
+    "manuscript_correction_required": false,
+    "nonzero_admissible_gradients": true,
+    "noop_paths_explicit": true,
+    "shared_parameters_changed": true,
+    "skipped_tests_labeled_skipped": true
+  },
+  "capabilities": {
+    "numpy": {
+      "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+      "importable": false,
+      "name": "numpy"
+    },
+    "pytest": {
+      "file": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+      "importable": true,
+      "name": "pytest",
+      "version": "8.1.1"
+    },
+    "torch": {
+      "error": "ModuleNotFoundError: No module named 'torch'",
+      "importable": false,
+      "name": "torch"
+    }
+  },
+  "created_at": "2026-09-11T23:51:26.898611+00:00",
+  "environment_id": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af009",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "interpreter": "/usr/bin/python3.12",
+    "machine": "aarch64",
+    "source_pins": {
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_batching.py": "06645b2f24f9ac9ba93d955448c3770b26a5952916208af541e570ee0649e8cf",
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py": "f8e7baf903db781dfd0cb3127e296a0329bff83f55e373630a26094c48f64b63",
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py": "90cbbd8a7cf864e7c0dd0b1799f6936f31ec509168f21661e38feee2bcb6c1a7"
+    },
+    "uname": [
+      "Linux",
+      "0175c21eb7df",
+      "6.17.0-1014-nvidia",
+      "#14-Ubuntu SMP PREEMPT_DYNAMIC Tue Mar 17 19:01:40 UTC 2026",
+      "aarch64"
+    ],
+    "version": "3.12.3"
+  },
+  "equations": {
+    "implementation": {
+      "adam_absent_from_packed_step": {
+        "found": true,
+        "note": "packed optimizer writes scaled negative gradients; no moment buffers"
+      },
+      "clip_grad_norm": {
+        "found": true,
+        "line": 1378,
+        "text": "torch.nn.utils.clip_grad_norm_(session.parameters, max_grad_norm)"
+      },
+      "cosine_zero_norm_guard": {
+        "found": true,
+        "line": 1100,
+        "text": "guard = (target_norm > 1.0e-8) & (decoded_norm > 1.0e-8)"
+      },
+      "eta_clamp": {
+        "found": true,
+        "line": 1382,
+        "text": "step = min(1.0, max(0.0, float(learning_rate)))"
+      },
+      "global_denominator": {
+        "found": true,
+        "line": 1079,
+        "text": "denominator = float(max(1, total_samples))"
+      },
+      "masked_ce_sum_over_n": {
+        "found": true,
+        "line": 1085,
+        "text": "losses[\"cross_entropy\"] = per_row.masked_select(mask).sum() / denominator"
+      },
+      "microbatch_plan_has_loss_scales": {
+        "found": true,
+        "line": 499,
+        "text": "scales = tuple((stop - start) / count for start, stop in ranges)"
+      },
+      "nonfinite_reject": {
+        "found": true,
+        "line": 1365,
+        "text": "raise FloatingPointError(\"non-finite packed training loss\")"
+      },
+      "noop_mean": {
+        "found": true,
+        "line": 1213,
+        "text": ").masked_select(state.family_mask).mean()"
+      },
+      "packed_update_uses_global_n_not_loss_scales": {
+        "found": true,
+        "note": "packed update divides each microbatch by total n and sums; helper loss_scales are unused"
+      },
+      "reconstruction_mean_then_n": {
+        "found": true,
+        "line": 1097,
+        "text": "losses[\"reconstruction\"] = (decoded32 - target).square().mean(dim=1).sum() / denominator"
+      },
+      "sgd_add_": {
+        "found": true,
+        "line": 1386,
+        "text": "parameter.add_(parameter.grad, alpha=-step)"
+      }
+    },
+    "manuscript_correction_required": false,
+    "manuscript_equations": {
+      "eq12_reconstruction": "(1/n) sum_i (1/d) ||ehat_i - e_i||_2^2",
+      "eq13_masked_ce": "-(1/n) sum_{i in M} sum_j q_ij log softmax(l_i)_j with n=total samples",
+      "eq14_sgd": "Theta <- Theta - eta Clip(grad Theta L); Clip is gradient-norm clip",
+      "eq5_packed_objective": "H(qF,pF)+H(qV,pV)+MSE+lambda_c(1-cos)+L_norm+lambda_2 R(Theta)"
+    },
+    "noop_documentation": "Empty-blueprint packed path reduces masked CE with mean() rather than /n and reports a forward-only no-op; App. J forbids counting that path as learning progress.  Active packed updates use total-sample n.",
+    "source": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+    "source_sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+    "verdict": "match"
+  },
+  "existing_tests": {
+    "executed": [
+      {
+        "exit_code": 0,
+        "failed": 0,
+        "id": "transaction_rollback",
+        "passed": 7,
+        "skipped": 0,
+        "status": "passed",
+        "stdout_tail": "mpt-1-1789169460/external/ipfs_datasets\nconfigfile: pytest.ini\ncollected 7 items\n\n../home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-009-fa568249c107-attempt-1-1789169460/external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_state_transaction.py . [ 14%]\n......                                                                   [100%]\n\n============================== 7 passed in 0.69s ===============================\n"
+      },
+      {
+        "exit_code": 0,
+        "failed": 0,
+        "id": "checkpoint_reload",
+        "passed": 14,
+        "skipped": 0,
+        "status": "passed",
+        "stdout_tail": "ixture_loop_scope=function, asyncio_default_test_loop_scope=function\ncollected 14 items\n\n../home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-009-fa568249c107-attempt-1-1789169460/external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_checkpoint.py . [  7%]\n.............                                                            [100%]\n\n============================== 14 passed in 0.89s ==============================\n"
+      },
+      {
+        "exit_code": 0,
+        "failed": 0,
+        "id": "globally_normalized_batching",
+        "passed": 8,
+        "skipped": 0,
+        "status": "passed",
+        "stdout_tail": "t_fixture_loop_scope=function, asyncio_default_test_loop_scope=function\ncollected 8 items\n\n../home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-009-fa568249c107-attempt-1-1789169460/external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_batching.py . [ 12%]\n.......                                                                  [100%]\n\n============================== 8 passed in 0.49s ===============================\n"
+      },
+      {
+        "exit_code": 0,
+        "failed": 0,
+        "id": "update_group_activation",
+        "passed": 2,
+        "skipped": 0,
+        "status": "passed",
+        "stdout_tail": "io_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function\ncollected 2 items\n\n../home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-009-fa568249c107-attempt-1-1789169460/external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py . [ 50%]\n.                                                                        [100%]\n\n============================== 2 passed in 0.98s ===============================\n"
+      }
+    ],
+    "skipped": [
+      {
+        "exit_code": 2,
+        "id": "packed_cuda_training",
+        "reason": "numpy C-extensions need libblas.so.3; torch also absent; CUDA packed tests not executable",
+        "status": "skipped"
+      },
+      {
+        "exit_code": 2,
+        "id": "packed_cuda_residency",
+        "reason": "numpy C-extensions need libblas.so.3; torch also absent; CUDA packed tests not executable",
+        "status": "skipped"
+      }
+    ]
+  },
+  "limitations": [
+    "torch is not importable in the sealed validation interpreter; packed CUDA/CPU-reference tensors were not executed through apply_packed_projection_update.",
+    "numpy C-extensions in /usr/lib/python3/dist-packages require libblas.so.3, which is absent; CUDA training collection therefore skipped.",
+    "CPU/FP32/BF16 parity is unmeasured.",
+    "python_sparse_batch is a real shared-parameter update but is not packed autodiff.",
+    "No A-E or T0-T5 research training ran."
+  ],
+  "native_python_sparse_batch_update": {
+    "backend": "python_sparse_batch",
+    "changed_compiler_quality_family_logit_rows": [
+      "quality:bias",
+      "quality:formula-count:2-3",
+      "quality:frame-candidate-count:2-3",
+      "quality:frame-logic-triples:0",
+      "quality:frame-logic:empty",
+      "quality:frame:rank-top",
+      "quality:frame:selected:administrative_notice_hearing",
+      "quality:symbolic-penalty:0",
+      "quality:symbolic:has-formula"
+    ],
+    "changed_shared_family_embedding_rows": [
+      "deontic",
+      "conditional_normative",
+      "frame"
+    ],
+    "checkpoint_bytes": 344402,
+    "checkpoint_reload_roundtrip": true,
+    "compute_backend": "python",
+    "device": null,
+    "embedding_producer": "mock:stable-sha256",
+    "note": "Native CPU python_sparse_batch updates shared tables through the historical nudge path.  It is not the packed autodiff path; packed autodiff requires torch.",
+    "parameter_changed": true,
+    "projection_update_backend": "python_sparse_batch",
+    "rollback_restored_probe_row": true,
+    "rollback_touched_row_count": 1,
+    "sample_ids": [
+      "us-code-5-552-af009-f942be0a7ea99e99",
+      "us-code-12-1841-af009-9f184ee1f59c0423"
+    ],
+    "torch": null,
+    "touched_row_count": 37344,
+    "update_group_count": 5,
+    "update_groups_nonempty": true
+  },
+  "packed_cpu_replica": {
+    "all_passed": true,
+    "cases": [
+      {
+        "detail": {
+          "cosine_skips_zero_norm_row": true,
+          "inactive_row_excluded": true,
+          "masked_cross_entropy": 0.6923173967628455,
+          "reconstruction_on_zero_target_present": true,
+          "unmasked_cross_entropy": 0.9347716227311694
+        },
+        "id": "active_masked_objectives",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "accumulation_plan_loss_scales_unused_by_packed_update": true,
+          "denominator": "total sample count n, not microbatch size",
+          "full_batch_total": 0.8262010731599729,
+          "sum_of_globally_normalized_chunks": 0.8262010731599729
+        },
+        "id": "globally_normalized_microbatches",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "cosine_guard": "target_norm > 1e-8 and decoded_norm > 1e-8",
+          "cosine_term": 0.05776735279425471,
+          "guarded_auxiliary": 0.0,
+          "reconstruction_still_active": true,
+          "zero_target_row_index": 2
+        },
+        "id": "zero_norms",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "clip_scale": 0.023939627454656325,
+          "clipped_gradient_norm": 0.009999999999999986,
+          "gradient_norm": 0.4177174443896775,
+          "max_grad_norm": 0.01
+        },
+        "id": "clipping",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "applied": false,
+          "parameter_changed": false,
+          "rejected": "non-finite packed training loss"
+        },
+        "id": "nonfinite_rejection",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "clipped_gradient_norm": 0.4177174443896775,
+          "finite_difference": {
+            "abs_error": 3.171515827737892e-11,
+            "analytic": -0.16662318977741117,
+            "numeric": -0.166623189745696,
+            "ok": true
+          },
+          "gradient_norm": 0.4177174443896775,
+          "losses": {
+            "cosine": 0.05776735279425471,
+            "cross_entropy": 0.6923173967628455,
+            "guarded_auxiliary": 0.0,
+            "l2": 0.0,
+            "legal_ir_cross_entropy": 0.0,
+            "reconstruction": 0.10500000000000001,
+            "total": 0.8262010731599729
+          },
+          "microbatch_ranges": [
+            [
+              0,
+              2
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "optimizer": "theta <- theta - eta * clip(grad); eta in [0,1]; no Adam moments",
+          "parameter_changed": true,
+          "shared_rows_changed": [
+            {
+              "l2_delta": 0.009190481332534658,
+              "row": 0,
+              "table": "embedding_weights",
+              "users": 3
+            },
+            {
+              "l2_delta": 0.009243105613416748,
+              "row": 1,
+              "table": "embedding_weights",
+              "users": 3
+            },
+            {
+              "l2_delta": 0.011699510642632617,
+              "row": 0,
+              "table": "family_weights",
+              "users": 3
+            },
+            {
+              "l2_delta": 0.011377221127634377,
+              "row": 1,
+              "table": "family_weights",
+              "users": 3
+            }
+          ]
+        },
+        "id": "nonzero_admissible_gradients_and_shared_parameter_change",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "empty_blueprint_forward_only": {
+            "counts_as_learning_progress": false,
+            "global_n_normalized": 0.6923173967628455,
+            "masked_mean": 0.9230898623504608,
+            "parameter_update": false,
+            "path": "cuda_packed_forward_noop_head",
+            "reduction": "masked.mean() not total_sample_count"
+          },
+          "fully_masked_family_ce": 0.0,
+          "zero_learning_rate": {
+            "applied": true,
+            "gradient_norm": 0.4177174443896775,
+            "parameter_changed": false
+          }
+        },
+        "id": "explicit_noop_paths",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "active_row_changed": true,
+          "inactive_row_unchanged": true,
+          "scatter": "only packed rows with nonzero activity are written back"
+        },
+        "id": "changed_row_scatter",
+        "status": "passed"
+      }
+    ],
+    "engine": "stdlib replica of _loss_chunk, clip_grad_norm, and SGD add_"
+  },
+  "schema": "autoformalization-training-correctness/v1",
+  "scope": "numerical qualification of packed CPU semantics; not T0-T5",
+  "task_id": "AF-009"
+}

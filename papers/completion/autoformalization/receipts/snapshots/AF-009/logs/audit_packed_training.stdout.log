@@ -1,0 +1,33 @@
+{
+  "backend": "papers/completion/autoformalization/config/training_backend.json",
+  "correctness": "papers/completion/autoformalization/evidence/training_correctness.json",
+  "equation_verdict": "match",
+  "executed": [
+    {
+      "id": "transaction_rollback",
+      "passed": 7,
+      "status": "passed"
+    },
+    {
+      "id": "checkpoint_reload",
+      "passed": 14,
+      "status": "passed"
+    },
+    {
+      "id": "globally_normalized_batching",
+      "passed": 8,
+      "status": "passed"
+    },
+    {
+      "id": "update_group_activation",
+      "passed": 2,
+      "status": "passed"
+    }
+  ],
+  "native_parameter_changed": true,
+  "packed_all_passed": true,
+  "skipped": [
+    "packed_cuda_training",
+    "packed_cuda_residency"
+  ]
+}
