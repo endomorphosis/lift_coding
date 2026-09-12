@@ -1,0 +1,366 @@
+{
+  "caller": {
+    "admission": "SupervisorLogicPlatformReceiptAdmission@1",
+    "cegar": "ipa.refine_spurious_paths",
+    "converter": "TDFOLToFOLConverter",
+    "finite_trace": "evaluate_formula",
+    "solver_readiness": "probe_solver_readiness",
+    "tdfol_prover": "TDFOLProver.prove",
+    "translation_validator": "validate_translation"
+  },
+  "capability": {
+    "binaries": {
+      "coqc": null,
+      "cvc5": null,
+      "lean": null,
+      "souffle": null,
+      "z3": null
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "modules": {
+      "enforcement": "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/enforcement.py",
+      "formal_logic_vocabulary": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_logic_vocabulary.py",
+      "ipa": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+      "logic_platform_admission": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_platform_admission.py",
+      "logic_translation_validation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_translation_validation.py",
+      "solver_readiness": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py",
+      "tdfol_converter": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_converter.py",
+      "tdfol_prover": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_prover.py"
+    },
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "pytest": "8.1.1",
+    "pytest_error": null,
+    "python_version": "3.12.3",
+    "z3_module": false,
+    "z3_module_error": "ModuleNotFoundError: No module named 'z3'"
+  },
+  "cases": [
+    {
+      "case_id": "exact_atom_supported_progress",
+      "description": "Exact FOL atom to SMT-LIB with matching semantic inventories progresses at solver-checked translation assurance.",
+      "expected_reason": "exact_translation_conformant",
+      "family": "translation",
+      "pair_id": "exact_atom",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "modal_erasure_obligation_lift",
+      "description": "O(p) and p share the TDFOL-to-FOL projection; exact translation of the obligation is quarantined and cannot admit the source claim.",
+      "expected_reason": "dropped_modal_operator",
+      "family": "lossy_projection",
+      "pair_id": "modal_erasure",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "temporal_erasure_always_lift",
+      "description": "Always/safety and the atom share a modal-erasing projection; a target proof of p on a partial trace cannot admit □p.",
+      "expected_reason": "dropped_modal_operator",
+      "family": "lossy_projection",
+      "pair_id": "temporal_erasure",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "until_conjunction_lossy_projection",
+      "description": "TDFOLToFOLConverter approximates p U q by p ∧ q; a proof of the conjunction cannot admit the until formula.",
+      "expected_reason": "until_approximated_by_conjunction",
+      "family": "lossy_projection",
+      "pair_id": "temporal_erasure",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "declared_conservative_modal_progress",
+      "description": "Declared conservative modal erasure progresses at candidate assurance and still cannot lift to the source obligation.",
+      "expected_reason": "conservative_candidate_only",
+      "family": "translation",
+      "pair_id": "modal_erasure",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "heuristic_cannot_prove",
+      "description": "Heuristic translations cannot support solver-checked or kernel proof of the source claim.",
+      "expected_reason": "translation_class_heuristic",
+      "family": "translation",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "undeclared_abstraction_quarantine",
+      "description": "An abstraction log on an exact contract is quarantined.",
+      "expected_reason": "undeclared_abstraction",
+      "family": "translation",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "bounded_abstraction_progress",
+      "description": "Bounded abstraction with declared dimensions, bounds, and abstraction log progresses as a bounded translation, not an unbounded source proof.",
+      "expected_reason": "bounded_abstraction_conformant",
+      "family": "translation",
+      "pair_id": "temporal_erasure",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "missing_finite_bounds",
+      "description": "Bounded abstraction without required finite bounds is quarantined.",
+      "expected_reason": "missing_finite_bounds",
+      "family": "translation",
+      "pair_id": "temporal_erasure",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "fixture_set_mismatch",
+      "description": "Caller artifact fixture set must match the reviewed contract.",
+      "expected_reason": "fixture_set_mismatch",
+      "family": "binding",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "stale_formula_root",
+      "description": "Stale formula-root identity is rejected by translation validation and caller admission.",
+      "expected_reason": "source_identity_mismatch",
+      "family": "binding",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "duplicate_named_assertions",
+      "description": "Colliding named SMT assertion/assumption identifiers bound to distinct formula roots are rejected.",
+      "expected_reason": "duplicate_named_assertion_id",
+      "family": "binding",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "unsupported_clause_uncovered",
+      "description": "Unsupported obligation evaluation remains uncovered and is distinct from proof.",
+      "expected_reason": "unsupported_not_proof",
+      "family": "solver_outcome",
+      "pair_id": "solver_status",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "opaque_clause_uncovered",
+      "description": "Opaque prose clauses stay uncovered and cannot discharge G⇒A.",
+      "expected_reason": "opaque_clause_uncovered",
+      "family": "solver_outcome",
+      "pair_id": "solver_status",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "solver_readiness_z3_unavailable",
+      "description": "Sealed-profile Z3 is unsupported; SAT/UNSAT are not invented.",
+      "expected_reason": "backend_unavailable",
+      "family": "solver_outcome",
+      "pair_id": "smt_unavailable",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "tdfol_axiom_proved_non_kernel",
+      "description": "TDFOL axiom lookup is a prover-class result; it is not kernel-checked proof.",
+      "expected_reason": "tdfol_axiom_lookup_non_kernel",
+      "family": "solver_outcome",
+      "pair_id": "solver_status",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "unknown_not_proved",
+      "description": "TDFOL unknown is not inconsistent and not proved.",
+      "expected_reason": "unknown",
+      "family": "solver_outcome",
+      "pair_id": "solver_status",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "timeout_budget_exhausted",
+      "description": "Budget-exhausted timeout remains distinct from proof, unknown, and unsupported.",
+      "expected_reason": "timeout",
+      "family": "solver_outcome",
+      "pair_id": "solver_status",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "vacuity_unsat_guarantee",
+      "description": "Unsatisfiable G makes G⇒A vacuously true on the finite-trace evaluator; that is not component correctness.",
+      "expected_reason": "vacuous_implication_not_proof",
+      "family": "composition",
+      "pair_id": "vacuity_reachability",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "reachability_gap",
+      "description": "task_ready never holds on the supplied trace; unreachability is not a proof of the consumer assumption.",
+      "expected_reason": "unreachable_assumption",
+      "family": "composition",
+      "pair_id": "vacuity_reachability",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "unvalidated_solver_result_rejected",
+      "description": "A solver result labeled proved cannot admit a kernel-required source claim without reconstruction.",
+      "expected_reason": "evidence_kind_does_not_support_verdict",
+      "family": "binding",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "sat_smt_unavailable",
+      "description": "SAT of G∧¬A is unavailable because Z3 is absent; it is not simulated.",
+      "expected_reason": "smt_sat_unavailable",
+      "family": "solver_outcome",
+      "pair_id": "smt_unavailable",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "unsat_smt_unavailable",
+      "description": "UNSAT of G∧¬A is unavailable because Z3 is absent; it is not treated as kernel discharge.",
+      "expected_reason": "smt_unsat_unavailable",
+      "family": "solver_outcome",
+      "pair_id": "smt_unavailable",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "stale_solver_fingerprint",
+      "description": "A solver fingerprint that does not match the submitted formula/source/theory/environment is rejected.",
+      "expected_reason": "stale_solver_fingerprint",
+      "family": "binding",
+      "pair_id": "exact_atom",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "cegar_ipa_spurious_refine",
+      "description": "Located IPA CEGAR refines a spurious path and refuses to refine away a corpus seed.",
+      "expected_reason": "ipa_spurious_path_refined",
+      "family": "cegar",
+      "pair_id": "cegar_located",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "cegar_qf_lia_adapter_unlocated",
+      "description": "Named bounded QF_LIA CEGAR/interpolant adapter is not located; IPA CEGAR is not substituted as that adapter.",
+      "expected_reason": "qf_lia_cegar_adapter_unlocated",
+      "family": "cegar",
+      "pair_id": "cegar_located",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "interpolant_mechanism_unavailable",
+      "description": "No interpolant generator or checker is located in Python source; unsat cores are not treated as interpolants.",
+      "expected_reason": "interpolant_checker_unlocated",
+      "family": "interpolant",
+      "pair_id": "interpolant",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "invalid_interpolant_not_admitted",
+      "description": "A purported interpolant whose symbols escape A∩B is not admitted; no interpolant is generated.",
+      "expected_reason": "invalid_interpolant_not_admitted",
+      "family": "interpolant",
+      "pair_id": "interpolant",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "composition_edge_unlocated",
+      "description": "CompositionEdge is specification-only; no equivalent is inferred.",
+      "expected_reason": "composition_edge_unlocated",
+      "family": "composition",
+      "pair_id": "composition",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "cyclic_composition_unlocated",
+      "description": "Independently checked cyclic assume-guarantee closure is not located; mutual citation is not treated as proof.",
+      "expected_reason": "cyclic_closure_checker_unlocated",
+      "family": "composition",
+      "pair_id": "composition",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "incremental_smt_wrapper_unlocated",
+      "description": "Inspected incremental SMT wrapper is not located; no retained-clause speedup is claimed. Assertion identity is replay, not solver-state incrementality.",
+      "expected_reason": "incremental_smt_wrapper_unlocated",
+      "family": "solver_outcome",
+      "pair_id": "smt_unavailable",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "kernel_vs_solver_evidence_classes",
+      "description": "Solver, reconstruction, and kernel evidence classes remain distinct; SAT/capability never become proof.",
+      "expected_reason": "solver_unsat_is_not_kernel_proof",
+      "family": "evidence_class",
+      "pair_id": "exact_atom",
+      "polarity": "diagnostic"
+    }
+  ],
+  "consumer_gitlinks": {
+    "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+    "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+  },
+  "fixture_set_id": "ns-009-logic-v1",
+  "generated_at": "2026-09-12T02:34:50+00:00",
+  "identifier_search": {
+    "CompositionEdge": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "Craig interpolant": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "ProcedureCegis": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "QF_LIA": {
+      "found_in_python_source": true,
+      "matched_files": 1,
+      "sample_paths": [
+        "external/ipfs_datasets/tests/unit/logic/test_duckdb_proof_queries.py"
+      ]
+    },
+    "incremental SMT": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "interpolant": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "ipa_cegar_located": {
+      "found": true,
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+      "symbol": "refine_spurious_paths"
+    }
+  },
+  "policy_id": "ns-009-logic-qualification-v1",
+  "qualification_not_live_ad": true,
+  "rules": {
+    "assertion_replay_is_not_retained_solver_state": true,
+    "lossy_projection_cannot_admit_source_claim": true,
+    "solver_result_is_not_kernel_proof": true,
+    "unavailable_mechanisms_are_not_simulated": true,
+    "vacuity_unknown_unsupported_timeout_are_distinct": true
+  },
+  "schema": "neurosymbolic-supervision/logic-qualification-cases@1",
+  "source_hashes": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py": "952ab04860b135248c5c286417c0f18fe85930a3b1c4dd1b7e8ccc757b6f6a39",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_logic_vocabulary.py": "602f92e8fc170f44971626f09b71efa4f4492690dda1bdecbe98b2c48939a65b",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_platform_admission.py": "ee1a6fdd218d24c61a790b574fe8d9c0fa4c58d89c89e641f6dcd2ecf08962f5",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_translation_validation.py": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py": "c1150f87a8c435dc58b9a44b5ad323a4c8b144f69cddf71234a36fc3b033dff4",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_converter.py": "19db7d143c0275eca84846b0b4abc1feba877c38b7f255a3c58c54d31d1bf16d",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_prover.py": "75afc5299206ff65714d5cb994e6e2b775dbdc578278ba7101a01887ceab18dd",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/enforcement.py": "4df840c46d685d9b5ea5a97ce4167a6762c63632b5d11b0d6b78c00de7848c74",
+    "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+    "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json": "e40a9a43a1d82d18ec06a0f608918e1d560ed611e7650d36476c97fe926a603f",
+    "papers/completion/neurosymbolic_supervision/paper_extracted.txt": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+  },
+  "task_id": "NS-009",
+  "workspace_git_head": "17fe8859a867f821b3373f179b22d19de771eb64"
+}
