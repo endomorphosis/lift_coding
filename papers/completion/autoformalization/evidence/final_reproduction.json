@@ -1,0 +1,1150 @@
+{
+  "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
+  "author_sign_off": false,
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-V"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.0017412719316780567,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:31:53.824027+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/packet_python_version.stdout.log",
+      "name": "packet_python_version",
+      "started_at": "2026-09-12T22:31:53.822276+00:00",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/packet_python_version.stderr.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-S",
+        "regenerate_tables.py",
+        "--check"
+      ],
+      "cwd": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/af025-unzip-x4f188g9/autoformalization-anonymous-reproducibility",
+      "cwd_role": "unpacked_anonymous_supplement",
+      "elapsed_seconds": 0.03905576595570892,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:31:53.869392+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/zip_regenerate_tables.stdout.log",
+      "name": "zip_regenerate_tables",
+      "started_at": "2026-09-12T22:31:53.830325+00:00",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/zip_regenerate_tables.stderr.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-S",
+        "verify_retained_inputs.py"
+      ],
+      "cwd": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/af025-unzip-x4f188g9/autoformalization-anonymous-reproducibility",
+      "cwd_role": "unpacked_anonymous_supplement",
+      "elapsed_seconds": 0.0346366330049932,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:31:53.904803+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/zip_verify_retained_inputs.stdout.log",
+      "name": "zip_verify_retained_inputs",
+      "started_at": "2026-09-12T22:31:53.870157+00:00",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/zip_verify_retained_inputs.stderr.log"
+    }
+  ],
+  "environment": {
+    "analyze_results_py_check_executed": false,
+    "analyze_results_py_check_reason": "analyze_results.py --check rewrites undeclared results files; ZIP regenerate_tables.py --check is the declared feasible reproduction.",
+    "home": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+    "home_prefix": "ipfs-accelerate-validation-home-",
+    "interpreter": "/usr/bin/python3.12",
+    "latex_compilation_is_empirical_validation": false,
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_version": "Python 3.12.3",
+    "standard_library_only": true
+  },
+  "example_receipts": {
+    "finite_semantic_checks": {
+      "all_match_declared_expected": true,
+      "n_checks": 12,
+      "path": "papers/completion/autoformalization/evaluation/reference_results.json",
+      "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+    },
+    "policy_code_trace": {
+      "machine_checked_compiler_soundness": false,
+      "n_rows": 16,
+      "native_lean_q1": 0,
+      "note": "Guarded Boolean Q1 holds; unguarded always-write is a countermodel. Native Lean Q1 is unavailable. Zero observed false transfers is not universal soundness.",
+      "path": "papers/completion/autoformalization/evidence/translation_receipts.jsonl",
+      "q1_rows": 6,
+      "q2_rows": 4,
+      "sha256": "8a79cb3d2f67b8c417c587b002ca4777e969e362b608f5d7e4ad66b16cb7286b"
+    }
+  },
+  "human_fidelity_status": "unmeasured_not_collected",
+  "identities": {
+    "papers/checklist.tex": {
+      "bytes": 26167,
+      "path": "papers/checklist.tex",
+      "present": true,
+      "role": "official_questionnaire",
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6"
+    },
+    "papers/completion/autoformalization/artifact/README.md": {
+      "bytes": 3253,
+      "path": "papers/completion/autoformalization/artifact/README.md",
+      "present": true,
+      "role": "artifact_readme",
+      "sha256": "badd357e9794a064f448952a8d086c48928be104518496e9a589089eb4290110"
+    },
+    "papers/completion/autoformalization/artifact/S01_S40_map.json": {
+      "bytes": 41707,
+      "path": "papers/completion/autoformalization/artifact/S01_S40_map.json",
+      "present": true,
+      "role": "s01_s40_map",
+      "sha256": "5be43ad165b1a00222f4b519eb052c814a2ff7f5e3e18a6e542eea6ff5715d24"
+    },
+    "papers/completion/autoformalization/artifact/manifest.json": {
+      "bytes": 112923,
+      "path": "papers/completion/autoformalization/artifact/manifest.json",
+      "present": true,
+      "role": "artifact_manifest",
+      "sha256": "649fa5f71d06e853587855325bf414e20128936ba90735e6a9f69e0054a74745"
+    },
+    "papers/completion/autoformalization/config/structural_evidence_scope.json": {
+      "bytes": 5891,
+      "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+      "present": true,
+      "role": "structural_evidence_scope",
+      "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+    },
+    "papers/completion/autoformalization/data/splits.json": {
+      "bytes": 5027,
+      "path": "papers/completion/autoformalization/data/splits.json",
+      "present": true,
+      "role": "splits",
+      "sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+    },
+    "papers/completion/autoformalization/evaluation/reference_results.json": {
+      "bytes": 20207,
+      "path": "papers/completion/autoformalization/evaluation/reference_results.json",
+      "present": true,
+      "role": "finite_example_receipts",
+      "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+    },
+    "papers/completion/autoformalization/evidence/anonymization_report.json": {
+      "bytes": 2390,
+      "path": "papers/completion/autoformalization/evidence/anonymization_report.json",
+      "present": true,
+      "role": "anonymization_report",
+      "sha256": "a445514f122a0b4369e10777469590083e4a77f6457a152bebcca5d138acf14d"
+    },
+    "papers/completion/autoformalization/evidence/author_feedback_status.json": {
+      "bytes": 1618,
+      "path": "papers/completion/autoformalization/evidence/author_feedback_status.json",
+      "present": true,
+      "role": "author_feedback_status",
+      "sha256": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b"
+    },
+    "papers/completion/autoformalization/evidence/author_questions.md": {
+      "bytes": 3944,
+      "path": "papers/completion/autoformalization/evidence/author_questions.md",
+      "present": true,
+      "role": "author_questions",
+      "sha256": "55ce3033ad738039eab3ca15227a94b0fec9bf6d56765a9e558f194a850216a1"
+    },
+    "papers/completion/autoformalization/evidence/bibliography_audit.md": {
+      "bytes": 4779,
+      "path": "papers/completion/autoformalization/evidence/bibliography_audit.md",
+      "present": true,
+      "role": "bibliography_audit",
+      "sha256": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376"
+    },
+    "papers/completion/autoformalization/evidence/final_claim_audit.json": {
+      "bytes": 19018,
+      "path": "papers/completion/autoformalization/evidence/final_claim_audit.json",
+      "present": true,
+      "role": "claim_audit",
+      "sha256": "796a507cf4cbfe0fcc246c534c02ddcd636c769b8cde87280161d12317db05e6"
+    },
+    "papers/completion/autoformalization/evidence/format_check.json": {
+      "bytes": 3042,
+      "path": "papers/completion/autoformalization/evidence/format_check.json",
+      "present": true,
+      "role": "format_check",
+      "sha256": "a5aa4559437b49786621cb3cb1402f30b8b079cbe8026186387de3bb37a3ab4e"
+    },
+    "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl": {
+      "bytes": 25059,
+      "path": "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl",
+      "present": true,
+      "role": "sealed_native_checker_receipts",
+      "sha256": "51678314ed22c819d8d4e164160fd80ef2b4b7f382e7a40330c75421be156781"
+    },
+    "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl": {
+      "bytes": 2654,
+      "path": "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+      "present": true,
+      "role": "development_native_checker_receipts",
+      "sha256": "07a55b7e757165371fc2a8f20e8e9fb7732ad245c80c2be76899b2dd68996396"
+    },
+    "papers/completion/autoformalization/evidence/translation_receipts.jsonl": {
+      "bytes": 29727,
+      "path": "papers/completion/autoformalization/evidence/translation_receipts.jsonl",
+      "present": true,
+      "role": "bridge_example_receipts",
+      "sha256": "8a79cb3d2f67b8c417c587b002ca4777e969e362b608f5d7e4ad66b16cb7286b"
+    },
+    "papers/completion/autoformalization/manuscript/checklist.tex": {
+      "bytes": 25755,
+      "path": "papers/completion/autoformalization/manuscript/checklist.tex",
+      "present": true,
+      "role": "checklist",
+      "sha256": "eac5742c44a922cf0f0ba21dea352d91f6560d3e563d47036a4e7073f5c3e755"
+    },
+    "papers/completion/autoformalization/manuscript/empirical_scope.tex": {
+      "bytes": 2771,
+      "path": "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+      "present": true,
+      "role": "empirical_scope",
+      "sha256": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739"
+    },
+    "papers/completion/autoformalization/manuscript/llm_disclosure.tex": {
+      "bytes": 5021,
+      "path": "papers/completion/autoformalization/manuscript/llm_disclosure.tex",
+      "present": true,
+      "role": "llm_disclosure",
+      "sha256": "3466c53cb020eb0ed2073c6e1a52ae3fedfce9b1529a4a3c31beb91011ea95f3"
+    },
+    "papers/completion/autoformalization/manuscript/main.tex": {
+      "bytes": 30946,
+      "path": "papers/completion/autoformalization/manuscript/main.tex",
+      "present": true,
+      "role": "manuscript_source",
+      "sha256": "0912df8c2e702f1d0db369e72f5e92fc4ac0ddc926efc6dde0b187255e842656"
+    },
+    "papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "path": "papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty",
+      "present": true,
+      "role": "per_paper_style",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "papers/completion/autoformalization/manuscript/references.bib": {
+      "bytes": 8353,
+      "path": "papers/completion/autoformalization/manuscript/references.bib",
+      "present": true,
+      "role": "bibliography",
+      "sha256": "65db8dd6f9fbe8f15fa8834688d4e25bbb108fc04f00427b7b4a6e2f6923ad28"
+    },
+    "papers/completion/autoformalization/results/hypothesis_report.md": {
+      "bytes": 8857,
+      "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+      "present": true,
+      "role": "hypothesis_report",
+      "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+    },
+    "papers/completion/autoformalization/results/summary.json": {
+      "bytes": 84488,
+      "path": "papers/completion/autoformalization/results/summary.json",
+      "present": true,
+      "role": "results_summary",
+      "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+    },
+    "papers/completion/autoformalization/results/table11_training.tex": {
+      "bytes": 2442,
+      "path": "papers/completion/autoformalization/results/table11_training.tex",
+      "present": true,
+      "role": "table11",
+      "sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74"
+    },
+    "papers/completion/autoformalization/results/table13_assistance.tex": {
+      "bytes": 2205,
+      "path": "papers/completion/autoformalization/results/table13_assistance.tex",
+      "present": true,
+      "role": "table13",
+      "sha256": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f"
+    },
+    "papers/completion/autoformalization/results/table6_pipeline.tex": {
+      "bytes": 2095,
+      "path": "papers/completion/autoformalization/results/table6_pipeline.tex",
+      "present": true,
+      "role": "table6",
+      "sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+    },
+    "papers/completion/autoformalization/submission/paper.pdf": {
+      "bytes": 270925,
+      "path": "papers/completion/autoformalization/submission/paper.pdf",
+      "present": true,
+      "role": "manuscript_pdf",
+      "sha256": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147"
+    },
+    "papers/completion/autoformalization/submission/supplement.zip": {
+      "bytes": 312081,
+      "path": "papers/completion/autoformalization/submission/supplement.zip",
+      "present": true,
+      "role": "anonymous_supplement",
+      "sha256": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1"
+    },
+    "papers/completion/autoformalization/submission/template_inputs.json": {
+      "bytes": 1689,
+      "path": "papers/completion/autoformalization/submission/template_inputs.json",
+      "present": true,
+      "role": "template_inputs",
+      "sha256": "7bdb8a267f9c0450693a133f335bd85e514f8378885ad51d026e3c6b012ab953"
+    },
+    "papers/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "path": "papers/neurips_2026_vericode.sty",
+      "present": true,
+      "role": "official_research_style",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "papers/neurips_2026_vericode_workshop.tex": {
+      "bytes": 17416,
+      "path": "papers/neurips_2026_vericode_workshop.tex",
+      "present": true,
+      "role": "official_research_shell",
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250"
+    }
+  },
+  "independent_reproduction_means": "separate_clean_execution_environment_not_an_outside_person",
+  "latex_compilation_is_not_empirical_validation": true,
+  "manuscript_objective": {
+    "fabricated_scientific_evidence": false,
+    "missing_source_files": [],
+    "omitted_or_unmeasured_claims": [
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ABS-HUMAN",
+        "kind": "unmeasured_limitation",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/evidence/author_feedback_status.json",
+            "present": true,
+            "sha256": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b"
+          },
+          {
+            "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+            "present": true,
+            "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+          }
+        ],
+        "status": "unmeasured"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ABS-FINALTEST",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/table6_pipeline.tex",
+            "present": true,
+            "sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/table11_training.tex",
+            "present": true,
+            "sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ABS-T345E",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/table11_training.tex",
+            "present": true,
+            "sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "unavailable"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C1",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C2",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C3",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C4",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C5",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C6",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          }
+        ],
+        "status": "unrun"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "C7",
+        "kind": "prespecified_primary",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/table13_assistance.tex",
+            "present": true,
+            "sha256": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          }
+        ],
+        "status": "inconclusive"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ARM-E-LOCKED",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          },
+          {
+            "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+            "present": true,
+            "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+          }
+        ],
+        "status": "unavailable"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "RW-NOT-RUN",
+        "kind": "related_work",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/evidence/bibliography_audit.md",
+            "present": true,
+            "sha256": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376"
+          },
+          {
+            "path": "papers/completion/autoformalization/manuscript/references.bib",
+            "present": true,
+            "sha256": "65db8dd6f9fbe8f15fa8834688d4e25bbb108fc04f00427b7b4a6e2f6923ad28"
+          }
+        ],
+        "status": "method_description"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "CONC",
+        "kind": "limitation",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          },
+          {
+            "path": "papers/completion/autoformalization/manuscript/main.tex",
+            "present": true,
+            "sha256": "0912df8c2e702f1d0db369e72f5e92fc4ac0ddc926efc6dde0b187255e842656"
+          }
+        ],
+        "status": "unrun"
+      }
+    ],
+    "optional_author_feedback_required": false,
+    "outside_reviewers_required": false,
+    "retained_automated_claims": [
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ABS-SCOPE",
+        "kind": "scope_limiter",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+            "present": true,
+            "sha256": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739"
+          },
+          {
+            "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+            "present": true,
+            "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ABS-T2",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "unsupported"
+      },
+      {
+        "claim_admissible_for_paper_primary": false,
+        "id": "ABS-T1",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+            "present": true,
+            "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "ABS-FINITE",
+        "kind": "finite_illustration",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/evaluation/reference_results.json",
+            "present": true,
+            "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+          },
+          {
+            "path": "papers/completion/autoformalization/runs/bridge_validation/results.jsonl",
+            "present": true,
+            "sha256": "335b4c5bdcfe68f50ce7e2824b9aa84e21db3267375450be585cb9e32eed64b3"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "AE-VS-T",
+        "kind": "method",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/config/pipeline_arms.json",
+            "present": true,
+            "sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22"
+          },
+          {
+            "path": "papers/completion/autoformalization/evidence/claim_task_map.json",
+            "present": true,
+            "sha256": "b3654785359b0b6ced9fdcf04ed092f370b3b5ed337178932803da23b5d34a58"
+          },
+          {
+            "path": "papers/completion/autoformalization/manuscript/main.tex",
+            "present": true,
+            "sha256": "0912df8c2e702f1d0db369e72f5e92fc4ac0ddc926efc6dde0b187255e842656"
+          }
+        ],
+        "status": "method_description"
+      },
+      {
+        "claim_admissible_for_paper_primary": false,
+        "id": "T1-MEMORY",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          },
+          {
+            "path": "papers/completion/autoformalization/runs/training_baselines/results.jsonl",
+            "present": true,
+            "sha256": "9e56dfd66e290697fafac77726d7c14aff739a42cb279db2594eacb311e5d1f6"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "T2-SHARED",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "unsupported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "AF029-NOT-TABLE11",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "method_description"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "NO-INVENTED-CHECKPOINT",
+        "kind": "scope_limiter",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/manuscript/main.tex",
+            "present": true,
+            "sha256": "0912df8c2e702f1d0db369e72f5e92fc4ac0ddc926efc6dde0b187255e842656"
+          },
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "PROP1",
+        "kind": "conditional_proposition",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/runs/bridge_validation/results.jsonl",
+            "present": true,
+            "sha256": "335b4c5bdcfe68f50ce7e2824b9aa84e21db3267375450be585cb9e32eed64b3"
+          },
+          {
+            "path": "papers/completion/autoformalization/manuscript/main.tex",
+            "present": true,
+            "sha256": "0912df8c2e702f1d0db369e72f5e92fc4ac0ddc926efc6dde0b187255e842656"
+          }
+        ],
+        "status": "method_description"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "AF006-TWELVE",
+        "kind": "finite_illustration",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/evaluation/reference_results.json",
+            "present": true,
+            "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "AF015-Q1",
+        "kind": "finite_illustration",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/runs/bridge_validation/results.jsonl",
+            "present": true,
+            "sha256": "335b4c5bdcfe68f50ce7e2824b9aa84e21db3267375450be585cb9e32eed64b3"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "AF027-DEV",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+            "present": true,
+            "sha256": "07a55b7e757165371fc2a8f20e8e9fb7732ad245c80c2be76899b2dd68996396"
+          },
+          {
+            "path": "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+            "present": true,
+            "sha256": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739"
+          }
+        ],
+        "status": "supported"
+      },
+      {
+        "claim_admissible_for_paper_primary": null,
+        "id": "COST",
+        "kind": "result",
+        "sources": [
+          {
+            "path": "papers/completion/autoformalization/results/summary.json",
+            "present": true,
+            "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+          },
+          {
+            "path": "papers/completion/autoformalization/evidence/cost_accounting.md",
+            "present": true,
+            "sha256": "07a181e6c5767aea94cf3ce32747b6d20b8e07cd4cd05ca4ded03101dc8330ae"
+          }
+        ],
+        "status": "supported"
+      }
+    ],
+    "unfinished_training_hidden_by_scope_change": false
+  },
+  "native_checker_receipts": {
+    "development_runtime_receipts": {
+      "n_rows": 3,
+      "note": "AF-027 development Lean/Z3 receipts used operator-local research-runtime binaries absent from sealed PATH. They remain development evidence and do not fill Table 6.",
+      "path": "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+      "purposes": [
+        "independent_native_checker_explicit_failure",
+        "independent_native_checker_success",
+        "independent_solver_local_unsat"
+      ],
+      "sealed_path_replayable": false,
+      "sha256": "07a55b7e757165371fc2a8f20e8e9fb7732ad245c80c2be76899b2dd68996396",
+      "table6_credit": false
+    },
+    "sealed_path_receipts": {
+      "accepted_true": 0,
+      "missing_tools": [
+        "lean",
+        "lake",
+        "elan",
+        "z3",
+        "cvc5",
+        "vampire",
+        "eprover",
+        "coqc",
+        "isabelle"
+      ],
+      "n_rows": 26,
+      "native_checked_proof_credit": 0,
+      "path": "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl",
+      "policy_rejections": 6,
+      "sha256": "51678314ed22c819d8d4e164160fd80ef2b4b7f382e7a40330c75421be156781",
+      "summary_accepted_proofs": 0,
+      "summary_any_usable": false
+    }
+  },
+  "ok": true,
+  "openreview_upload": false,
+  "optional_author_feedback_required": false,
+  "outside_reviewers_required": false,
+  "pdf_and_supplement": {
+    "checklist": {
+      "answers": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "No",
+        "Yes",
+        "Yes",
+        "Yes",
+        "NA",
+        "Yes",
+        "Yes",
+        "NA",
+        "NA",
+        "Yes"
+      ],
+      "guidelines_blocks": 16,
+      "instruction_block_removed": true,
+      "n_answers": 16,
+      "todo_fields": false
+    },
+    "claim_ledger": {
+      "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
+      "human_fidelity_unmeasured": true,
+      "n_claims": 27,
+      "optional_author_feedback_supplied": false,
+      "path": "papers/completion/autoformalization/evidence/final_claim_audit.json",
+      "sha256": "796a507cf4cbfe0fcc246c534c02ddcd636c769b8cde87280161d12317db05e6",
+      "statuses": {
+        "ABS-FINALTEST": "unrun",
+        "ABS-FINITE": "supported",
+        "ABS-HUMAN": "unmeasured",
+        "ABS-SCOPE": "supported",
+        "ABS-T1": "supported",
+        "ABS-T2": "unsupported",
+        "ABS-T345E": "unavailable",
+        "AE-VS-T": "method_description",
+        "AF006-TWELVE": "supported",
+        "AF015-Q1": "supported",
+        "AF027-DEV": "supported",
+        "AF029-NOT-TABLE11": "method_description",
+        "ARM-E-LOCKED": "unavailable",
+        "C1": "unrun",
+        "C2": "unrun",
+        "C3": "unrun",
+        "C4": "unrun",
+        "C5": "unrun",
+        "C6": "unrun",
+        "C7": "inconclusive",
+        "CONC": "unrun",
+        "COST": "supported",
+        "NO-INVENTED-CHECKPOINT": "supported",
+        "PROP1": "method_description",
+        "RW-NOT-RUN": "method_description",
+        "T1-MEMORY": "supported",
+        "T2-SHARED": "unsupported"
+      }
+    },
+    "disclosure": {
+      "author_verification_not_claimed": true,
+      "codex_unused": true,
+      "grok_46": true,
+      "minilm": true
+    },
+    "format_check_ok": true,
+    "latex_is_not_empirical_validation": true,
+    "pdf": {
+      "anonymous_block_retained": true,
+      "author": "Anonymous Author(s)",
+      "bytes": 270925,
+      "identifying_hits": [],
+      "main_text_pages": 9,
+      "path": "papers/completion/autoformalization/submission/paper.pdf",
+      "publication_hits": [],
+      "review_line_numbers_present": true,
+      "scientific_placeholders": [],
+      "sha256": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147",
+      "workshop_footer_present": true
+    },
+    "style_matches_official": true,
+    "style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "supplement": {
+      "bytes": 312081,
+      "member_count": 57,
+      "missing_required_members": [],
+      "path": "papers/completion/autoformalization/submission/supplement.zip",
+      "sha256": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1"
+    },
+    "templates": {
+      "papers/checklist.tex": {
+        "actual": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+        "expected": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+        "match": true
+      },
+      "papers/neurips_2026_vericode.sty": {
+        "actual": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+        "expected": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+        "match": true
+      },
+      "papers/neurips_2026_vericode_workshop.tex": {
+        "actual": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+        "expected": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+        "match": true
+      }
+    }
+  },
+  "public_upload": false,
+  "reproduced_at": "2026-09-12T22:31:53.965955+00:00",
+  "schema": "autoformalization-final-reproduction/v1",
+  "scope_policy_id": "AF-028/structural-evidence-scope/v1",
+  "scope_policy_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+  "tables": {
+    "ok": true,
+    "status_inventory": {
+      "af029_claim_admissible": false,
+      "arm_E_activated": false,
+      "final_test_denominator": 1913,
+      "gold_records_with_values": 0,
+      "hypothesis_status_counts": {
+        "inconclusive": 1,
+        "supported": 1,
+        "unrun": 6,
+        "unsupported": 1
+      },
+      "independent_gold_present": false,
+      "t2_update_counts": [
+        0
+      ],
+      "t4_activated": false,
+      "table11": {
+        "cell_count": 24,
+        "statuses": {
+          "measured_inventory": 6,
+          "unavailable": 2,
+          "unmeasured": 6,
+          "unrun": 10
+        }
+      },
+      "table13": {
+        "row_count": 6,
+        "statuses": {
+          "constructed_automatic_labels_only": 1,
+          "constructed_hand_authored_weights": 1,
+          "constructed_replay": 1,
+          "unavailable": 3
+        }
+      },
+      "table6": {
+        "cell_count": 20,
+        "statuses": {
+          "unavailable": 5,
+          "unmeasured": 5,
+          "unrun": 10
+        }
+      }
+    },
+    "tables": {
+      "summary.json": {
+        "actual_sha256_paper_tree": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72",
+        "actual_sha256_zip_regeneration": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72",
+        "expected_sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72",
+        "match": true
+      },
+      "table11_training.tex": {
+        "actual_sha256_paper_tree": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74",
+        "actual_sha256_zip_regeneration": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74",
+        "expected_sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74",
+        "match": true
+      },
+      "table13_assistance.tex": {
+        "actual_sha256_paper_tree": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f",
+        "actual_sha256_zip_regeneration": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f",
+        "expected_sha256": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f",
+        "match": true
+      },
+      "table6_pipeline.tex": {
+        "actual_sha256_paper_tree": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49",
+        "actual_sha256_zip_regeneration": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49",
+        "expected_sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49",
+        "match": true
+      }
+    },
+    "zip_ok": true
+  },
+  "task_id": "AF-025",
+  "unavailable_checks": {
+    "any_usable": false,
+    "missing": [
+      "lean",
+      "lake",
+      "elan",
+      "z3",
+      "cvc5",
+      "vampire",
+      "eprover",
+      "coqc",
+      "isabelle"
+    ],
+    "note": "Host operator toolchains are out of sealed-PATH scope.",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "tools": [
+      {
+        "name": "lean",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "lake",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "elan",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "z3",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "cvc5",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "vampire",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "eprover",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "coqc",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "isabelle",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      }
+    ]
+  },
+  "workshop_submission": false,
+  "zip_retained_inputs": {
+    "located": 56,
+    "mismatched": [],
+    "missing": [],
+    "ok": true
+  }
+}

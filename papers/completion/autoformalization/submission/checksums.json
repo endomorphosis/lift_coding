@@ -1,0 +1,276 @@
+{
+  "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
+  "author_sign_off": false,
+  "files": {
+    "papers/checklist.tex": {
+      "bytes": 26167,
+      "path": "papers/checklist.tex",
+      "present": true,
+      "role": "official_questionnaire",
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6"
+    },
+    "papers/completion/autoformalization/artifact/README.md": {
+      "bytes": 3253,
+      "path": "papers/completion/autoformalization/artifact/README.md",
+      "present": true,
+      "role": "artifact_readme",
+      "sha256": "badd357e9794a064f448952a8d086c48928be104518496e9a589089eb4290110"
+    },
+    "papers/completion/autoformalization/artifact/S01_S40_map.json": {
+      "bytes": 41707,
+      "path": "papers/completion/autoformalization/artifact/S01_S40_map.json",
+      "present": true,
+      "role": "s01_s40_map",
+      "sha256": "5be43ad165b1a00222f4b519eb052c814a2ff7f5e3e18a6e542eea6ff5715d24"
+    },
+    "papers/completion/autoformalization/artifact/manifest.json": {
+      "bytes": 112923,
+      "path": "papers/completion/autoformalization/artifact/manifest.json",
+      "present": true,
+      "role": "artifact_manifest",
+      "sha256": "649fa5f71d06e853587855325bf414e20128936ba90735e6a9f69e0054a74745"
+    },
+    "papers/completion/autoformalization/config/structural_evidence_scope.json": {
+      "bytes": 5891,
+      "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+      "present": true,
+      "role": "structural_evidence_scope",
+      "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+    },
+    "papers/completion/autoformalization/data/splits.json": {
+      "bytes": 5027,
+      "path": "papers/completion/autoformalization/data/splits.json",
+      "present": true,
+      "role": "splits",
+      "sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+    },
+    "papers/completion/autoformalization/evaluation/reference_results.json": {
+      "bytes": 20207,
+      "path": "papers/completion/autoformalization/evaluation/reference_results.json",
+      "present": true,
+      "role": "finite_example_receipts",
+      "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+    },
+    "papers/completion/autoformalization/evidence/anonymization_report.json": {
+      "bytes": 2390,
+      "path": "papers/completion/autoformalization/evidence/anonymization_report.json",
+      "present": true,
+      "role": "anonymization_report",
+      "sha256": "a445514f122a0b4369e10777469590083e4a77f6457a152bebcca5d138acf14d"
+    },
+    "papers/completion/autoformalization/evidence/author_feedback_status.json": {
+      "bytes": 1618,
+      "path": "papers/completion/autoformalization/evidence/author_feedback_status.json",
+      "present": true,
+      "role": "author_feedback_status",
+      "sha256": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b"
+    },
+    "papers/completion/autoformalization/evidence/author_questions.md": {
+      "bytes": 3944,
+      "path": "papers/completion/autoformalization/evidence/author_questions.md",
+      "present": true,
+      "role": "author_questions",
+      "sha256": "55ce3033ad738039eab3ca15227a94b0fec9bf6d56765a9e558f194a850216a1"
+    },
+    "papers/completion/autoformalization/evidence/bibliography_audit.md": {
+      "bytes": 4779,
+      "path": "papers/completion/autoformalization/evidence/bibliography_audit.md",
+      "present": true,
+      "role": "bibliography_audit",
+      "sha256": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376"
+    },
+    "papers/completion/autoformalization/evidence/final_claim_audit.json": {
+      "bytes": 19018,
+      "path": "papers/completion/autoformalization/evidence/final_claim_audit.json",
+      "present": true,
+      "role": "claim_audit",
+      "sha256": "796a507cf4cbfe0fcc246c534c02ddcd636c769b8cde87280161d12317db05e6"
+    },
+    "papers/completion/autoformalization/evidence/final_reproduction.json": {
+      "bytes": 43622,
+      "path": "papers/completion/autoformalization/evidence/final_reproduction.json",
+      "present": true,
+      "role": "final_reproduction",
+      "sha256": "8c4453adb04eedf031a9f4f5bd98d7b909aa79eb87c24ddcc2b45ea603930b3d"
+    },
+    "papers/completion/autoformalization/evidence/format_check.json": {
+      "bytes": 3042,
+      "path": "papers/completion/autoformalization/evidence/format_check.json",
+      "present": true,
+      "role": "format_check",
+      "sha256": "a5aa4559437b49786621cb3cb1402f30b8b079cbe8026186387de3bb37a3ab4e"
+    },
+    "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl": {
+      "bytes": 25059,
+      "path": "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl",
+      "present": true,
+      "role": "sealed_native_checker_receipts",
+      "sha256": "51678314ed22c819d8d4e164160fd80ef2b4b7f382e7a40330c75421be156781"
+    },
+    "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl": {
+      "bytes": 2654,
+      "path": "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+      "present": true,
+      "role": "development_native_checker_receipts",
+      "sha256": "07a55b7e757165371fc2a8f20e8e9fb7732ad245c80c2be76899b2dd68996396"
+    },
+    "papers/completion/autoformalization/evidence/translation_receipts.jsonl": {
+      "bytes": 29727,
+      "path": "papers/completion/autoformalization/evidence/translation_receipts.jsonl",
+      "present": true,
+      "role": "bridge_example_receipts",
+      "sha256": "8a79cb3d2f67b8c417c587b002ca4777e969e362b608f5d7e4ad66b16cb7286b"
+    },
+    "papers/completion/autoformalization/manuscript/checklist.tex": {
+      "bytes": 25755,
+      "path": "papers/completion/autoformalization/manuscript/checklist.tex",
+      "present": true,
+      "role": "checklist",
+      "sha256": "eac5742c44a922cf0f0ba21dea352d91f6560d3e563d47036a4e7073f5c3e755"
+    },
+    "papers/completion/autoformalization/manuscript/empirical_scope.tex": {
+      "bytes": 2771,
+      "path": "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+      "present": true,
+      "role": "empirical_scope",
+      "sha256": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739"
+    },
+    "papers/completion/autoformalization/manuscript/llm_disclosure.tex": {
+      "bytes": 5021,
+      "path": "papers/completion/autoformalization/manuscript/llm_disclosure.tex",
+      "present": true,
+      "role": "llm_disclosure",
+      "sha256": "3466c53cb020eb0ed2073c6e1a52ae3fedfce9b1529a4a3c31beb91011ea95f3"
+    },
+    "papers/completion/autoformalization/manuscript/main.tex": {
+      "bytes": 30946,
+      "path": "papers/completion/autoformalization/manuscript/main.tex",
+      "present": true,
+      "role": "manuscript_source",
+      "sha256": "0912df8c2e702f1d0db369e72f5e92fc4ac0ddc926efc6dde0b187255e842656"
+    },
+    "papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "path": "papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty",
+      "present": true,
+      "role": "per_paper_style",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "papers/completion/autoformalization/manuscript/references.bib": {
+      "bytes": 8353,
+      "path": "papers/completion/autoformalization/manuscript/references.bib",
+      "present": true,
+      "role": "bibliography",
+      "sha256": "65db8dd6f9fbe8f15fa8834688d4e25bbb108fc04f00427b7b4a6e2f6923ad28"
+    },
+    "papers/completion/autoformalization/results/hypothesis_report.md": {
+      "bytes": 8857,
+      "path": "papers/completion/autoformalization/results/hypothesis_report.md",
+      "present": true,
+      "role": "hypothesis_report",
+      "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+    },
+    "papers/completion/autoformalization/results/summary.json": {
+      "bytes": 84488,
+      "path": "papers/completion/autoformalization/results/summary.json",
+      "present": true,
+      "role": "results_summary",
+      "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+    },
+    "papers/completion/autoformalization/results/table11_training.tex": {
+      "bytes": 2442,
+      "path": "papers/completion/autoformalization/results/table11_training.tex",
+      "present": true,
+      "role": "table11",
+      "sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74"
+    },
+    "papers/completion/autoformalization/results/table13_assistance.tex": {
+      "bytes": 2205,
+      "path": "papers/completion/autoformalization/results/table13_assistance.tex",
+      "present": true,
+      "role": "table13",
+      "sha256": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f"
+    },
+    "papers/completion/autoformalization/results/table6_pipeline.tex": {
+      "bytes": 2095,
+      "path": "papers/completion/autoformalization/results/table6_pipeline.tex",
+      "present": true,
+      "role": "table6",
+      "sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+    },
+    "papers/completion/autoformalization/submission/paper.pdf": {
+      "bytes": 270925,
+      "path": "papers/completion/autoformalization/submission/paper.pdf",
+      "present": true,
+      "role": "manuscript_pdf",
+      "sha256": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147"
+    },
+    "papers/completion/autoformalization/submission/supplement.zip": {
+      "bytes": 312081,
+      "path": "papers/completion/autoformalization/submission/supplement.zip",
+      "present": true,
+      "role": "anonymous_supplement",
+      "sha256": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1"
+    },
+    "papers/completion/autoformalization/submission/template_inputs.json": {
+      "bytes": 1689,
+      "path": "papers/completion/autoformalization/submission/template_inputs.json",
+      "present": true,
+      "role": "template_inputs",
+      "sha256": "7bdb8a267f9c0450693a133f335bd85e514f8378885ad51d026e3c6b012ab953"
+    },
+    "papers/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "path": "papers/neurips_2026_vericode.sty",
+      "present": true,
+      "role": "official_research_style",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "papers/neurips_2026_vericode_workshop.tex": {
+      "bytes": 17416,
+      "path": "papers/neurips_2026_vericode_workshop.tex",
+      "present": true,
+      "role": "official_research_shell",
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250"
+    }
+  },
+  "generated_at": "2026-09-12T22:31:53.967122+00:00",
+  "packet_links": {
+    "claim_audit": [
+      "papers/completion/autoformalization/evidence/final_claim_audit.json",
+      "papers/completion/autoformalization/results/hypothesis_report.md"
+    ],
+    "manuscript": [
+      "papers/completion/autoformalization/submission/paper.pdf",
+      "papers/completion/autoformalization/manuscript/main.tex",
+      "papers/completion/autoformalization/manuscript/checklist.tex",
+      "papers/completion/autoformalization/manuscript/llm_disclosure.tex"
+    ],
+    "raw_evidence": [
+      "papers/completion/autoformalization/results/summary.json",
+      "papers/completion/autoformalization/results/table6_pipeline.tex",
+      "papers/completion/autoformalization/results/table11_training.tex",
+      "papers/completion/autoformalization/results/table13_assistance.tex",
+      "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl",
+      "papers/completion/autoformalization/evaluation/reference_results.json",
+      "papers/completion/autoformalization/evidence/translation_receipts.jsonl",
+      "papers/completion/autoformalization/evidence/final_reproduction.json"
+    ],
+    "supplement": [
+      "papers/completion/autoformalization/submission/supplement.zip",
+      "papers/completion/autoformalization/artifact/manifest.json",
+      "papers/completion/autoformalization/artifact/README.md"
+    ]
+  },
+  "public_upload": false,
+  "python": {
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "version": "Python 3.12.3"
+  },
+  "schema": "autoformalization-submission-checksums/v1",
+  "scope_policy_id": "AF-028/structural-evidence-scope/v1",
+  "scope_policy_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+  "task_id": "AF-025",
+  "workshop_submission": false
+}

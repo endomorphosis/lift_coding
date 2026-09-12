@@ -1,0 +1,72 @@
+{
+  "any_usable": false,
+  "missing": [
+    "lean",
+    "lake",
+    "elan",
+    "z3",
+    "cvc5",
+    "vampire",
+    "eprover",
+    "coqc",
+    "isabelle"
+  ],
+  "note": "Host operator toolchains are out of sealed-PATH scope.",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "tools": [
+    {
+      "name": "lean",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "lake",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "elan",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "z3",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "cvc5",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "vampire",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "eprover",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "coqc",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "isabelle",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    }
+  ]
+}
