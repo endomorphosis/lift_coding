@@ -1,0 +1,548 @@
+{
+  "actual_checkpoint_verification_status": "separate checker still running",
+  "aggregates": [
+    {
+      "arm_id": "T0",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.9884963625688034,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833391482666
+      },
+      "record_id": "T0:1:train:aggregate",
+      "replay": 1,
+      "seed": null,
+      "split": "train",
+      "update_count": 0,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T0",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833444771055
+      },
+      "record_id": "T0:1:selection:aggregate",
+      "replay": 1,
+      "seed": null,
+      "split": "selection",
+      "update_count": 0,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T0",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.9884963625688034,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833391482666
+      },
+      "record_id": "T0:2:train:aggregate",
+      "replay": 2,
+      "seed": null,
+      "split": "train",
+      "update_count": 0,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T0",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833444771055
+      },
+      "record_id": "T0:2:selection:aggregate",
+      "replay": 2,
+      "seed": null,
+      "split": "selection",
+      "update_count": 0,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T0",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.9884963625688034,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833391482666
+      },
+      "record_id": "T0:3:train:aggregate",
+      "replay": 3,
+      "seed": null,
+      "split": "train",
+      "update_count": 0,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T0",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833444771055
+      },
+      "record_id": "T0:3:selection:aggregate",
+      "replay": 3,
+      "seed": null,
+      "split": "selection",
+      "update_count": 0,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T1",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.8224477044792124,
+        "family_ce": 2.0311759192466288,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 0.9843436660548661,
+        "vector_mse": 0.0010676927107901427
+      },
+      "record_id": "T1:104729:train:aggregate",
+      "replay": null,
+      "seed": 104729,
+      "split": "train",
+      "update_count": 138,
+      "use_sample_memory": true
+    },
+    {
+      "arm_id": "T1",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833444771055
+      },
+      "record_id": "T1:104729:selection:aggregate",
+      "replay": null,
+      "seed": 104729,
+      "split": "selection",
+      "update_count": 138,
+      "use_sample_memory": true
+    },
+    {
+      "arm_id": "T1",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.8224477044792124,
+        "family_ce": 2.0311759192466288,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 0.9843436660548661,
+        "vector_mse": 0.0010676927107901427
+      },
+      "record_id": "T1:130363:train:aggregate",
+      "replay": null,
+      "seed": 130363,
+      "split": "train",
+      "update_count": 138,
+      "use_sample_memory": true
+    },
+    {
+      "arm_id": "T1",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833444771055
+      },
+      "record_id": "T1:130363:selection:aggregate",
+      "replay": null,
+      "seed": 130363,
+      "split": "selection",
+      "update_count": 138,
+      "use_sample_memory": true
+    },
+    {
+      "arm_id": "T1",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.8224477044792124,
+        "family_ce": 2.0311759192466288,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 0.9843436660548661,
+        "vector_mse": 0.0010676927107901427
+      },
+      "record_id": "T1:155921:train:aggregate",
+      "replay": null,
+      "seed": 155921,
+      "split": "train",
+      "update_count": 138,
+      "use_sample_memory": true
+    },
+    {
+      "arm_id": "T1",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 0.19611613513818402,
+        "vector_mse": 0.0025270833444771055
+      },
+      "record_id": "T1:155921:selection:aggregate",
+      "replay": null,
+      "seed": 155921,
+      "split": "selection",
+      "update_count": 138,
+      "use_sample_memory": true
+    },
+    {
+      "arm_id": "T2",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.9884963625688034,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 1.0,
+        "vector_mse": 0.0
+      },
+      "record_id": "T2:104729:train:aggregate",
+      "replay": null,
+      "seed": 104729,
+      "split": "train",
+      "update_count": 1,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T2",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 1.0,
+        "vector_mse": 0.0
+      },
+      "record_id": "T2:104729:selection:aggregate",
+      "replay": null,
+      "seed": 104729,
+      "split": "selection",
+      "update_count": 1,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T2",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.9884963625688034,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 1.0,
+        "vector_mse": 0.0
+      },
+      "record_id": "T2:130363:train:aggregate",
+      "replay": null,
+      "seed": 130363,
+      "split": "train",
+      "update_count": 1,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T2",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 1.0,
+        "vector_mse": 0.0
+      },
+      "record_id": "T2:130363:selection:aggregate",
+      "replay": null,
+      "seed": 130363,
+      "split": "selection",
+      "update_count": 1,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T2",
+      "counts": {
+        "eligible": 69,
+        "measured": 69,
+        "teacher_targets": 69
+      },
+      "metrics": {
+        "excess_ce": 0.9884963625688034,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 1.2087282147674163,
+        "vector_cosine": 1.0,
+        "vector_mse": 0.0
+      },
+      "record_id": "T2:155921:train:aggregate",
+      "replay": null,
+      "seed": 155921,
+      "split": "train",
+      "update_count": 1,
+      "use_sample_memory": false
+    },
+    {
+      "arm_id": "T2",
+      "counts": {
+        "eligible": 15,
+        "measured": 15,
+        "teacher_targets": 15
+      },
+      "metrics": {
+        "excess_ce": 1.47665752238956,
+        "family_ce": 2.1972245773362196,
+        "native_proof_coverage": null,
+        "native_proof_coverage_status": "teacher_checker_receipts_not_source_gold",
+        "source_fidelity": null,
+        "source_fidelity_status": "unmeasured_pending_AF-028",
+        "target_entropy": 0.7205670549466595,
+        "vector_cosine": 1.0,
+        "vector_mse": 0.0
+      },
+      "record_id": "T2:155921:selection:aggregate",
+      "replay": null,
+      "seed": 155921,
+      "split": "selection",
+      "update_count": 1,
+      "use_sample_memory": false
+    }
+  ],
+  "at": "2026-09-12T17:15:05.917712+00:00",
+  "diagnostic": {
+    "cases": [
+      {
+        "base": [
+          0.0,
+          0.0
+        ],
+        "candidate": [
+          0.25,
+          0.5
+        ],
+        "case": "positive_off_target",
+        "output": [
+          1.0,
+          0.0
+        ],
+        "output_equals_target": true,
+        "target": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "base": [
+          0.0,
+          0.0
+        ],
+        "candidate": [
+          0.0,
+          0.0
+        ],
+        "case": "zero_direction",
+        "output": [
+          0.0,
+          0.0
+        ],
+        "output_equals_target": false,
+        "target": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "base": [
+          0.0,
+          0.0
+        ],
+        "candidate": [
+          -0.25,
+          0.5
+        ],
+        "case": "negative_alignment",
+        "output": [
+          0.0,
+          0.0
+        ],
+        "output_equals_target": false,
+        "target": [
+          1.0,
+          0.0
+        ]
+      }
+    ],
+    "scope": "Exact source AST functions executed on three constructed vectors; no model/native training or research sample was executed. This is a control-flow illustration, not another scientific result."
+  },
+  "finding": "The pinned _decoded_for passes the current sample embedding target to _reconstruction_safe_projection. With positive alignment the helper can return target_point itself. Observed perfect T2 train/selection reconstruction is target-assisted and cannot establish source-free learned reconstruction or semantic/proof transfer.",
+  "interpretation": [
+    "T0/T1/T2 aggregate metrics are identical across their three repeats/seeds in this run; repeated identical numbers are not evidence of independent datasets.",
+    "T1 uses sample memory; its training reconstruction improvement is a memory diagnostic, not selection generalization.",
+    "T2 family cross entropy remains equal to T0 on both train and selection.",
+    "T3 has three training-attempt rows, not a new measured reconstruction/fidelity evaluation.",
+    "All human fidelity/native proof coverage fields in these aggregates remain null; the original pending_AF028 label is historical and superseded by the applied unmeasured-human scope.",
+    "Original source and output records remain untouched. Actual parameter updates and checkpoint lineage are separate facts; this observation supplies no promotion or source-free efficacy credit."
+  ],
+  "results": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/run_v1/output/runs/native_training/results.jsonl",
+    "sha256": "cebf2f713129f116144fcbad3816d74cf1de60b6444eec3024c999d7dafe8ffb"
+  },
+  "schema": "af029-retained-reconstruction-metric-scope-review/v1",
+  "scientific_training_calls": 0,
+  "source": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/execution_source/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+    "sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e"
+  },
+  "source_function_lines": {
+    "_check_same_length": 32120,
+    "_reconstruction_safe_projection": 8618,
+    "cosine_loss": 493,
+    "cosine_similarity": 483,
+    "mse_loss": 498
+  },
+  "source_or_result_mutations": 0
+}

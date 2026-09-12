@@ -1,0 +1,104 @@
+{
+  "asset_copy_setup_cost": {
+    "reason": "no independent timer retained for asset staging or source review",
+    "status": "unmeasured",
+    "value": null
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "boundary_sha256": "0fbe19d74a6ed85ef147c00b8ab8b400dd8ed2a7ae2a3afec8d046ba4c06e705",
+      "cleanup_sha256": "0dac49f4487cc077df8435c421a3f051b07d8a45c007c43353c1eae2cabf774e",
+      "container_attach_wall_seconds": 2.1568022799910977,
+      "error": {
+        "message": "module 'torch._C' has no attribute '_dlpack_exchange_api'",
+        "type": "AttributeError"
+      },
+      "execution_receipt_sha256": "120af3b733484486403b3db3073948e206c5254259b72f90590486c901e82450",
+      "new_model_api_calls": 0,
+      "peak_rss_bytes": 407187456,
+      "phase": "failed_before_inference",
+      "process_cpu_seconds": 0.6913459999999999,
+      "process_wall_seconds": 1.1807211020495743,
+      "status": "incomplete"
+    },
+    {
+      "attempt": 2,
+      "boundary_sha256": "41339e3bcddfba17b58093165937b41cc1b400194185c864a8b93ebe498cc81a",
+      "cleanup_sha256": "26d163ebed7305325da4318bac0e01da17b8f2e5dbc7499ad673408652cc87da",
+      "container_attach_wall_seconds": 5.613258633064106,
+      "error": {
+        "message": "Could not import module 'BertModel'. Are this object's requirements defined correctly?",
+        "type": "ModuleNotFoundError"
+      },
+      "execution_receipt_sha256": "f08b2990c0b0138c9247953c9b77ebedaf0dffdd008f3c7e9bb9fcb920944302",
+      "new_model_api_calls": 0,
+      "peak_rss_bytes": 370327552,
+      "phase": "failed_before_inference",
+      "process_cpu_seconds": 4.735652,
+      "process_wall_seconds": 4.769937033997849,
+      "status": "incomplete"
+    },
+    {
+      "attempt": 3,
+      "boundary_sha256": "1d38b9de1a7727dd80a1b9cbcb384ccf78280c519c280b8f6d0ae2115848b9f3",
+      "cleanup_sha256": "75b6b1785f090f010b9506ce189a1d740aef9e5606c5fc5236c63e12c799e8f1",
+      "container_attach_wall_seconds": 2.103472567978315,
+      "error": {
+        "message": "No module named 'yaml'",
+        "type": "ModuleNotFoundError"
+      },
+      "execution_receipt_sha256": "285792b3809d8914eaaca4ccf9c846dd3f85e03099eb9031a23af0c8f3eb133b",
+      "new_model_api_calls": 0,
+      "peak_rss_bytes": 257204224,
+      "phase": "failed_before_inference",
+      "process_cpu_seconds": 1.567031,
+      "process_wall_seconds": 1.5715564519632608,
+      "status": "incomplete"
+    },
+    {
+      "attempt": 4,
+      "boundary_sha256": "c9c7f56e516dcdf9be7088541ab774301334070300de28ce372ce90e32588d84",
+      "cleanup_sha256": "f1d9d091d28ca939242136facfd5e0f59c829fdc1ba500b52d3b5da5bca080de",
+      "container_attach_wall_seconds": 2.3019072479801252,
+      "error": {
+        "message": "No package metadata was found for The 'pyyaml>=5.1' distribution was not found and is required by this application. \nTry: `pip install transformers -U` or `pip install -e '.[dev]'` if you're working with git main",
+        "type": "PackageNotFoundError"
+      },
+      "execution_receipt_sha256": "69a5fad178d5192b46729f784135f961cad8621303ee593337996730ae1716c7",
+      "new_model_api_calls": 0,
+      "peak_rss_bytes": 262107136,
+      "phase": "failed_before_inference",
+      "process_cpu_seconds": 1.734495,
+      "process_wall_seconds": 1.7407448329031467,
+      "status": "incomplete"
+    },
+    {
+      "attempt": 5,
+      "boundary_sha256": "34b8f2c00b37a81c04067af62eda88b1e8501f4045a17b573efa3fc281af6000",
+      "cleanup_sha256": "32f96119f0e0cc87fe513f1d18e3741b53840f8d3426a064f731574b1bab5236",
+      "container_attach_wall_seconds": 35.28728995996062,
+      "error": null,
+      "execution_receipt_sha256": "c4e79991207f34ae2cf8840ee65dc85ee8e531e4963b7911b1f7d1489b085238",
+      "new_model_api_calls": 0,
+      "peak_rss_bytes": 505409536,
+      "phase": "successful_encoder_preparation",
+      "process_cpu_seconds": 34.466355,
+      "process_wall_seconds": 34.50211392098572,
+      "status": "completed"
+    }
+  ],
+  "charged_provider_cost": 0,
+  "currency_cost": null,
+  "fitting_updates": 0,
+  "future_AF029_training_costs_not_included": true,
+  "nested_cost_rule": "container attach wall includes process wall; never add those two quantities",
+  "preparation_run_once_shared_across_training_seeds": true,
+  "provider_calls": 0,
+  "schema": "af-native-training-preparation-costs/v1",
+  "successful_encoder_cpu_seconds": 34.466355,
+  "successful_encoder_process_wall_seconds": 34.50211392098572,
+  "sum_container_attach_wall_seconds": 47.46273068897426,
+  "sum_nonoverlapping_process_wall_seconds": 43.76507334189955,
+  "sum_process_cpu_seconds": 43.194879
+}

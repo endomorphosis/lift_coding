@@ -1,0 +1,23 @@
+{
+  "cleanup_exit_code": 0,
+  "container": "3be0eff07682832e9f883989224ca9d976bb2e443ca6f36ba50929151cb57a70",
+  "container_state": {
+    "Dead": false,
+    "Error": "",
+    "ExitCode": 1,
+    "FinishedAt": "2026-09-12T07:39:26.323601417Z",
+    "OOMKilled": false,
+    "Paused": false,
+    "Pid": 0,
+    "Restarting": false,
+    "Running": false,
+    "StartedAt": "2026-09-12T07:39:24.16543199Z",
+    "Status": "exited"
+  },
+  "exit_code": 1,
+  "manifest_sha256": "29304cdd13b6612057433265c926898952d1d8d7ea99ce5f42cd3c4410d62daa",
+  "provider_calls": 0,
+  "start_monotonic": 608470.559892061,
+  "status": "stopped_failed",
+  "wall_seconds": 2.3019072479801252
+}

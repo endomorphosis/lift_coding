@@ -1,0 +1,13 @@
+/opt/nvidia/entrypoint.d/50-gpu-driver-check.sh: line 5: ldconfig: command not found
+Traceback (most recent call last):
+  File "/job/encode_train_selection.py", line 23, in <module>
+    import torch,numpy
+  File "/research/python/torch/__init__.py", line 1931, in <module>
+    from torch._tensor import Tensor  # usort: skip
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/python/torch/_tensor.py", line 102, in <module>
+    class Tensor(torch._C.TensorBase):
+  File "/research/python/torch/_tensor.py", line 105, in Tensor
+    __dlpack_c_exchange_api__: object = torch._C._dlpack_exchange_api()
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'torch._C' has no attribute '_dlpack_exchange_api'

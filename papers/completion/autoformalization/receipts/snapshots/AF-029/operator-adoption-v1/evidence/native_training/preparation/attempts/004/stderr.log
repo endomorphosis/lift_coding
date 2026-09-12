@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 397, in from_name
+    return next(cls.discover(name=name))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/encoder-python/transformers/utils/versions.py", line 102, in require_version
+    got_ver = importlib.metadata.version(pkg)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 889, in version
+    return distribution(distribution_name).version
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 862, in distribution
+    return Distribution.from_name(distribution_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 399, in from_name
+    raise PackageNotFoundError(name)
+importlib.metadata.PackageNotFoundError: No package metadata was found for pyyaml
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/job/encode_train_selection.py", line 24, in <module>
+    from transformers import AutoModel,AutoTokenizer
+  File "/encoder-python/transformers/__init__.py", line 27, in <module>
+    from . import dependency_versions_check
+  File "/encoder-python/transformers/dependency_versions_check.py", line 57, in <module>
+    require_version_core(deps[pkg])
+  File "/encoder-python/transformers/utils/versions.py", line 117, in require_version_core
+    return require_version(requirement, hint)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/encoder-python/transformers/utils/versions.py", line 104, in require_version
+    raise importlib.metadata.PackageNotFoundError(
+importlib.metadata.PackageNotFoundError: No package metadata was found for The 'pyyaml>=5.1' distribution was not found and is required by this application. 
+Try: `pip install transformers -U` or `pip install -e '.[dev]'` if you're working with git main

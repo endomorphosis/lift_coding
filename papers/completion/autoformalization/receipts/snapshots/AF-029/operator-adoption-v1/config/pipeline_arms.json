@@ -1,0 +1,381 @@
+{
+  "arms": {
+    "A": {
+      "checker": {
+        "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+        "checker_id": "AF-010-shared-target-checker/v1",
+        "shared": true
+      },
+      "claim": "Direct model baseline under matched checker.",
+      "consumes_bridge_evidence": false,
+      "control_comparison": "A vs B on identical eligible tasks; unavailable is not zero.",
+      "development_route": "scientific_gateway_grok_4_6",
+      "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_a",
+      "family": "pipeline",
+      "features_allowed": [
+        "declared_vocabulary",
+        "source_text"
+      ],
+      "features_blocked": [
+        "checked_bridges",
+        "compiler_views",
+        "learned_advice",
+        "premise_assembly",
+        "sample_memory"
+      ],
+      "id": "A",
+      "learned_advice": false,
+      "name": "Direct model-to-target formalization",
+      "native_entry_points": [
+        "papers/completion/autoformalization/evaluation/scientific_gateway.py"
+      ],
+      "oracles_allowed": [
+        "direct_model_inference",
+        "independent_facet_adjudication",
+        "target_checker"
+      ],
+      "table5": "Direct model-to-target formalization with the same target checker.",
+      "uses_frozen_canonical_profile": false
+    },
+    "B": {
+      "checker": {
+        "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+        "checker_id": "AF-010-shared-target-checker/v1",
+        "shared": true
+      },
+      "claim": "Deterministic compiler baseline.",
+      "consumes_bridge_evidence": false,
+      "control_comparison": "B vs A and C on identical tasks/checker/budget.",
+      "development_route": "frozen_canonical_profile_compiler",
+      "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_b",
+      "family": "pipeline",
+      "features_allowed": [
+        "declared_vocabulary",
+        "explicit_abstention",
+        "source_maps",
+        "source_text",
+        "typed_deontic_ir"
+      ],
+      "features_blocked": [
+        "checked_bridges",
+        "direct_model_inference",
+        "learned_advice",
+        "learned_guidance",
+        "repair",
+        "sample_memory"
+      ],
+      "id": "B",
+      "learned_advice": false,
+      "name": "Deterministic bounded compiler",
+      "native_entry_points": [
+        "ipfs_datasets_py.logic.legal_ir.canonical_compiler.TypedDeonticCanonicalCompiler"
+      ],
+      "oracles_allowed": [
+        "deterministic_bounded_compiler",
+        "independent_facet_adjudication",
+        "target_checker"
+      ],
+      "table5": "Deterministic bounded compiler, declared vocabulary, and explicit abstention.",
+      "uses_frozen_canonical_profile": true
+    },
+    "C": {
+      "checker": {
+        "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+        "checker_id": "AF-010-shared-target-checker/v1",
+        "shared": true
+      },
+      "claim": "Source-grounded multiview without transfer.",
+      "consumes_bridge_evidence": false,
+      "control_comparison": "C vs B isolates multiview representation without transfer.",
+      "development_route": "typed_multiview_no_transfer",
+      "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_c",
+      "family": "pipeline",
+      "features_allowed": [
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "features_blocked": [
+        "checked_bridges",
+        "compatible_premise_assembly",
+        "cross_view_proof_transfer",
+        "D_bridge_evidence",
+        "learned_advice",
+        "sample_memory"
+      ],
+      "id": "C",
+      "learned_advice": false,
+      "name": "Typed source-grounded multiview without proof transfer",
+      "native_entry_points": [
+        "ipfs_datasets_py.logic.intent_ir.formalize.compiler.IntentFormalizationCompiler"
+      ],
+      "oracles_allowed": [
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_compiler_elaborator"
+      ],
+      "table5": "Typed multi-view representation with source grounding, but no admitted cross-view proof transfer.",
+      "uses_frozen_canonical_profile": false
+    },
+    "D": {
+      "checker": {
+        "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+        "checker_id": "AF-010-shared-target-checker/v1",
+        "shared": true
+      },
+      "claim": "Checked cross-source proof transfer.",
+      "consumes_bridge_evidence": true,
+      "control_comparison": "D vs C isolates checked bridges and premise assembly.",
+      "development_route": "checked_bridges_and_premises",
+      "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_d",
+      "family": "pipeline",
+      "features_allowed": [
+        "checked_property_bridges",
+        "compatible_premise_assembly",
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "features_blocked": [
+        "learned_advice",
+        "sample_memory"
+      ],
+      "id": "D",
+      "learned_advice": false,
+      "name": "Checked bridges and compatible premise assembly",
+      "native_entry_points": [
+        "papers/completion/autoformalization/evaluation/bridge_cases.py"
+      ],
+      "oracles_allowed": [
+        "bridge_obligations",
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_compiler_elaborator",
+        "premise_compatibility_nonvacuity"
+      ],
+      "table5": "C plus checked property-specific bridges and compatible cross-source premise assembly.",
+      "uses_frozen_canonical_profile": false
+    },
+    "E": {
+      "advice_cannot_replace_checking": true,
+      "checker": {
+        "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+        "checker_id": "AF-010-shared-target-checker/v1",
+        "shared": true
+      },
+      "claim": "Learned advice beyond checked bridges.",
+      "consumes_bridge_evidence": true,
+      "control_comparison": "E vs D isolates learned advice with checker fixed.",
+      "development_route": "unavailable_pending_AF-011_AF-013",
+      "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_e",
+      "family": "pipeline",
+      "features_allowed": [
+        "bounded_learned_view_premise_advice",
+        "checked_property_bridges",
+        "compatible_premise_assembly",
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "features_blocked": [
+        "checker_mutation",
+        "sample_memory",
+        "unpinned_advice"
+      ],
+      "id": "E",
+      "learned_advice": true,
+      "name": "D plus bounded learned view/premise advice",
+      "native_entry_points": [
+        "ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance.promote_legal_ir_learned_guidance"
+      ],
+      "oracles_allowed": [
+        "bridge_obligations",
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_checkpoint_advice",
+        "pinned_compiler_elaborator",
+        "premise_compatibility_nonvacuity"
+      ],
+      "promotion_gates": [
+        "AF-011",
+        "AF-013"
+      ],
+      "table5": "D plus bounded learned view/premise advice, with frozen checkpoint and unchanged checker.",
+      "uses_frozen_canonical_profile": false
+    }
+  },
+  "claim_policy": {
+    "development_qualification_is_not_table_6": true,
+    "importability_is_not_end_to_end": true,
+    "synthetic_success_forbidden": true,
+    "unavailable_is_not_zero": true,
+    "unavailable_optional_capabilities_receive_no_measured_credit": true,
+    "unavailable_prevents_performance_claims": true
+  },
+  "config_sha256": "5f6706bd888c86edc93de9643661137a9ea536b957cbec6e55a5f61e698396f8",
+  "development_sources": {
+    "constructed_control": {
+      "source_id": "AF027-DEV-Q1-protected-write",
+      "split": "constructed_control",
+      "text": "If Protected is true and Approved is false, then Write is false."
+    },
+    "final_test_used": false,
+    "natural_selection": {
+      "citation": "37 CFR 360.1",
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/selection.sources.jsonl",
+      "record_id": "cfr:37:360.1:2024",
+      "source_id": "AF027-DEV-selection-cfr-37-360.1-2024",
+      "split": "selection",
+      "text": "General.\n\n§ 360.1 General. This subpart prescribes procedures under 17 U.S.C. 111(d)(4)(A) and 17 U.S.C. 119(b)(4) whereby parties claiming entitlement to cable compulsory license royalty fees or satellite compulsory license royalty fees must file claims with the Copyright Royalty Board."
+    }
+  },
+  "entry_points": {
+    "A": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_a",
+    "B": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_b",
+    "C": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_c",
+    "D": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_d",
+    "E": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_e"
+  },
+  "frozen_canonical_profile": {
+    "constructor_route": "not_applicable",
+    "disables_learned_guidance": true,
+    "disables_repair": true,
+    "fallback_allowed": false,
+    "guidance": "no_guidance",
+    "implementation_representative_arm_id": "typed_deontic__no_guidance__no_repair__not_applicable__deterministic",
+    "learned_stages": [],
+    "model_call_count": 0,
+    "paper_evidence": "p. 3, §3.1: frozen canonical profile disables guidance",
+    "repair": "no_repair",
+    "source_module": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+    "used_by_arms": [
+      "B"
+    ]
+  },
+  "frozen_inputs": {
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+  },
+  "harness": {
+    "path": "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+    "sha256": "c758e91551b22436fc088f96e7289e447df0caa702f3f63a2a4fde220d2c6e92",
+    "standard_library_only": true
+  },
+  "isolation": {
+    "C_blocked_keys": [
+      "accepted_transfer",
+      "bridge_evidence",
+      "bridge_obligations",
+      "bridge_records",
+      "checked_bridges",
+      "checked_property_bridges",
+      "compatible_premises",
+      "cross_source_premises",
+      "cross_view_proof",
+      "premise_assembly",
+      "proof_transfer",
+      "property_preservation_obligations",
+      "translation_receipts"
+    ],
+    "C_cannot_consume_D_bridge_evidence": true,
+    "E_checker_equals_D_checker": true,
+    "E_distinct_from_D": true,
+    "E_may_not_mutate_checker": true,
+    "E_pending_gates": [
+      "AF-011",
+      "AF-013"
+    ],
+    "frozen_canonical_profile_disables_guidance": true
+  },
+  "matched_comparison": {
+    "checker": {
+      "advice_cannot_replace_checking": true,
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "checker_id": "AF-010-shared-target-checker/v1",
+      "intended_native": "lean",
+      "intended_solver_local": "z3_or_cvc5_descriptive_only",
+      "mutation_allowed": false,
+      "native_receipt_required_for_useful_proof": true,
+      "shared_across_arms": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "solver_local_is_not_native_checked_proof": true
+    },
+    "eligible_final_test_natural_source_units": 1913,
+    "private_final_ids_disclosed": false,
+    "resource_envelope": {
+      "deterministic_replays": 3,
+      "gpu_or_model_service_slots": 1,
+      "learned_condition_seeds": 3,
+      "memory_gib": 16,
+      "natural_final_test_units_per_condition": 100,
+      "per_item_search_validation_minutes": 10,
+      "per_seed_wall_minutes": 30,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ],
+      "source": "papers/completion/autoformalization/config/experiment_plan.json#/common_budget"
+    },
+    "source_tasks": "Development qualification uses public selection/constructed-control sources. Identical frozen AF-004 final-test identities remain undisclosed and unused.",
+    "vocabulary": "Caller-supplied atom vocabulary for B; gateway prompt for A."
+  },
+  "prior_task": "AF-010",
+  "schema": "autoformalization-pipeline-arms/v2",
+  "scientific_gateway": {
+    "fallback": {
+      "authorized_without_quota_evidence": false,
+      "model": "gpt-5.6-terra",
+      "provider": "codex",
+      "reasoning_effort": "high",
+      "trigger": "independently_verified_primary_quota_exhaustion"
+    },
+    "nested_worker_direct_dispatch": false,
+    "primary": {
+      "base_url": "https://api.x.ai/v1",
+      "chat_completions": "https://api.x.ai/v1/chat/completions",
+      "model": "grok-4.6",
+      "provider": "grok"
+    },
+    "refused": [
+      "final_test_bodies",
+      "holdout_labels",
+      "gold_values",
+      "nested_supervisor_dispatch",
+      "unconditional_unavailable_stub",
+      "fixture_model_output"
+    ],
+    "resource_envelope": {
+      "cached_leanstral_gguf_excluded": true,
+      "gpu_or_model_service_slots": 1,
+      "local_weight_file_forbidden_when_over_envelope": true,
+      "memory_gib": 16
+    },
+    "schema": "autoformalization-scientific-gateway/v1",
+    "scope": "development_qualification_before_final_freeze",
+    "task_id": "AF-027"
+  },
+  "suite_id": "AF-027-development-qualification",
+  "table5": {
+    "A": "Direct model-to-target formalization with the same target checker.",
+    "B": "Deterministic bounded compiler, declared vocabulary, and explicit abstention.",
+    "C": "Typed multi-view representation with source grounding, but no admitted cross-view proof transfer.",
+    "D": "C plus checked property-specific bridges and compatible cross-source premise assembly.",
+    "E": "D plus bounded learned view/premise advice, with frozen checkpoint and unchanged checker."
+  },
+  "task_id": "AF-027"
+}

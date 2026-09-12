@@ -1,0 +1,359 @@
+{
+  "admitted_feedback": 2606,
+  "checker_receipts": 69,
+  "config_id": "929723fc4a22d5ffdef3949e8083ff75e6ea51e5e79f321c49b85ea2f88c65a4",
+  "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+  "packed_cpu": [
+    {
+      "accepted_epochs": 1,
+      "applied_packed_updates": 5,
+      "backend": "packed_cpu",
+      "considered_families": [
+        "combined",
+        "decoded_embedding",
+        "family_logits",
+        "legal_ir_view_global_logits",
+        "legal_ir_view_logits"
+      ],
+      "full_family_search": true,
+      "gradient_norms": [
+        0.0,
+        0.0,
+        0.0,
+        8.428086280822754,
+        8.428086280822754
+      ],
+      "losses": [
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {
+          "total": 2.397895336151123
+        },
+        {
+          "cosine": 0.8038837909698486,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.0025270835030823946,
+          "total": 0.40446898341178894
+        },
+        {
+          "cosine": 0.8038837909698486,
+          "cross_entropy": 2.397895336151123,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0025270835030823946,
+          "total": 3.495511531829834
+        }
+      ],
+      "parameter_changed": true,
+      "report_count": 5,
+      "seed": 104729,
+      "shared_parameter_change": {
+        "after_sha256": "20f48097d69ff83f60db549596305273b4127b791d64c920318b2e4c72ba83a5",
+        "before_sha256": "e282fa0d5ffa44459298a3db4323d4b22d8017445ab510316b1ba21ce578c91a",
+        "changed_components": {
+          "compiler_quality_embedding_weights": 6912,
+          "decompiler_plan_embedding_weights": 1808640,
+          "family_embedding_weights": 3456,
+          "family_legal_ir_view_embedding_weights": 6912,
+          "family_semantic_slot_embedding_weights": 46106880,
+          "family_semantic_slot_legal_ir_view_embedding_weights": 92213760,
+          "feature_embedding_weights": 22117632,
+          "legal_ir_view_embedding_weights": 768,
+          "logic_signature_embedding_weights": 311040,
+          "predicate_argument_embedding_weights": 811776,
+          "round_trip_signal_embedding_weights": 34944,
+          "semantic_slot_embedding_weights": 6359424,
+          "semantic_slot_legal_ir_view_embedding_weights": 12718848
+        },
+        "changed_numeric_parameter_count": 182500992,
+        "components": [
+          "compiler_quality_embedding_weights",
+          "compiler_quality_family_logits",
+          "decompiler_plan_embedding_weights",
+          "decompiler_plan_family_logits",
+          "decompiler_plan_legal_ir_view_logits",
+          "family_embedding_weights",
+          "family_legal_ir_view_embedding_weights",
+          "family_semantic_slot_embedding_weights",
+          "family_semantic_slot_legal_ir_view_embedding_weights",
+          "family_semantic_slot_legal_ir_view_logits",
+          "feature_embedding_weights",
+          "feature_family_logits",
+          "feature_legal_ir_view_logits",
+          "legal_ir_view_embedding_weights",
+          "legal_ir_view_family_logits",
+          "legal_ir_view_logits",
+          "logic_signature_embedding_weights",
+          "logic_signature_family_logits",
+          "logic_signature_legal_ir_view_logits",
+          "predicate_argument_embedding_weights",
+          "predicate_argument_family_logits",
+          "predicate_argument_legal_ir_view_logits",
+          "round_trip_signal_embedding_weights",
+          "round_trip_signal_family_logits",
+          "round_trip_signal_legal_ir_view_logits",
+          "semantic_slot_embedding_weights",
+          "semantic_slot_family_logits",
+          "semantic_slot_legal_ir_view_embedding_weights",
+          "semantic_slot_legal_ir_view_family_logits",
+          "semantic_slot_legal_ir_view_logits"
+        ]
+      }
+    },
+    {
+      "accepted_epochs": 1,
+      "applied_packed_updates": 5,
+      "backend": "packed_cpu",
+      "considered_families": [
+        "combined",
+        "decoded_embedding",
+        "family_logits",
+        "legal_ir_view_global_logits",
+        "legal_ir_view_logits"
+      ],
+      "full_family_search": true,
+      "gradient_norms": [
+        0.0,
+        0.0,
+        0.0,
+        8.428086280822754,
+        8.428086280822754
+      ],
+      "losses": [
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {
+          "total": 2.397895336151123
+        },
+        {
+          "cosine": 0.8038838505744934,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.0025270835030823946,
+          "total": 0.40446901321411133
+        },
+        {
+          "cosine": 0.8038838505744934,
+          "cross_entropy": 2.397895336151123,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0025270835030823946,
+          "total": 3.495511531829834
+        }
+      ],
+      "parameter_changed": true,
+      "report_count": 5,
+      "seed": 130363,
+      "shared_parameter_change": {
+        "after_sha256": "a564d2ae88958c5bbc5408f130908a3b488eea16cb0d1761b779fdb8ee751bed",
+        "before_sha256": "e282fa0d5ffa44459298a3db4323d4b22d8017445ab510316b1ba21ce578c91a",
+        "changed_components": {
+          "compiler_quality_embedding_weights": 6912,
+          "decompiler_plan_embedding_weights": 1808640,
+          "family_embedding_weights": 3456,
+          "family_legal_ir_view_embedding_weights": 6912,
+          "family_semantic_slot_embedding_weights": 46106880,
+          "family_semantic_slot_legal_ir_view_embedding_weights": 92213760,
+          "feature_embedding_weights": 22117632,
+          "legal_ir_view_embedding_weights": 768,
+          "logic_signature_embedding_weights": 311040,
+          "predicate_argument_embedding_weights": 811776,
+          "round_trip_signal_embedding_weights": 34944,
+          "semantic_slot_embedding_weights": 6359424,
+          "semantic_slot_legal_ir_view_embedding_weights": 12718848
+        },
+        "changed_numeric_parameter_count": 182500992,
+        "components": [
+          "compiler_quality_embedding_weights",
+          "compiler_quality_family_logits",
+          "decompiler_plan_embedding_weights",
+          "decompiler_plan_family_logits",
+          "decompiler_plan_legal_ir_view_logits",
+          "family_embedding_weights",
+          "family_legal_ir_view_embedding_weights",
+          "family_semantic_slot_embedding_weights",
+          "family_semantic_slot_legal_ir_view_embedding_weights",
+          "family_semantic_slot_legal_ir_view_logits",
+          "feature_embedding_weights",
+          "feature_family_logits",
+          "feature_legal_ir_view_logits",
+          "legal_ir_view_embedding_weights",
+          "legal_ir_view_family_logits",
+          "legal_ir_view_logits",
+          "logic_signature_embedding_weights",
+          "logic_signature_family_logits",
+          "logic_signature_legal_ir_view_logits",
+          "predicate_argument_embedding_weights",
+          "predicate_argument_family_logits",
+          "predicate_argument_legal_ir_view_logits",
+          "round_trip_signal_embedding_weights",
+          "round_trip_signal_family_logits",
+          "round_trip_signal_legal_ir_view_logits",
+          "semantic_slot_embedding_weights",
+          "semantic_slot_family_logits",
+          "semantic_slot_legal_ir_view_embedding_weights",
+          "semantic_slot_legal_ir_view_family_logits",
+          "semantic_slot_legal_ir_view_logits"
+        ]
+      }
+    },
+    {
+      "accepted_epochs": 1,
+      "applied_packed_updates": 5,
+      "backend": "packed_cpu",
+      "considered_families": [
+        "combined",
+        "decoded_embedding",
+        "family_logits",
+        "legal_ir_view_global_logits",
+        "legal_ir_view_logits"
+      ],
+      "full_family_search": true,
+      "gradient_norms": [
+        0.0,
+        0.0,
+        0.0,
+        8.428086280822754,
+        8.428086280822754
+      ],
+      "losses": [
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {
+          "total": 2.397895336151123
+        },
+        {
+          "cosine": 0.8038837313652039,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.0025270835030823946,
+          "total": 0.40446895360946655
+        },
+        {
+          "cosine": 0.8038837313652039,
+          "cross_entropy": 2.397895336151123,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0025270835030823946,
+          "total": 3.495511293411255
+        }
+      ],
+      "parameter_changed": true,
+      "report_count": 5,
+      "seed": 155921,
+      "shared_parameter_change": {
+        "after_sha256": "94d76ac2d9d9bd0375968cd7aef541aef0979124dc13ad92a93350ab85cdaac8",
+        "before_sha256": "e282fa0d5ffa44459298a3db4323d4b22d8017445ab510316b1ba21ce578c91a",
+        "changed_components": {
+          "compiler_quality_embedding_weights": 6912,
+          "decompiler_plan_embedding_weights": 1808640,
+          "family_embedding_weights": 3456,
+          "family_legal_ir_view_embedding_weights": 6912,
+          "family_semantic_slot_embedding_weights": 46106880,
+          "family_semantic_slot_legal_ir_view_embedding_weights": 92213760,
+          "feature_embedding_weights": 22117632,
+          "legal_ir_view_embedding_weights": 768,
+          "logic_signature_embedding_weights": 311040,
+          "predicate_argument_embedding_weights": 811776,
+          "round_trip_signal_embedding_weights": 34944,
+          "semantic_slot_embedding_weights": 6359424,
+          "semantic_slot_legal_ir_view_embedding_weights": 12718848
+        },
+        "changed_numeric_parameter_count": 182500992,
+        "components": [
+          "compiler_quality_embedding_weights",
+          "compiler_quality_family_logits",
+          "decompiler_plan_embedding_weights",
+          "decompiler_plan_family_logits",
+          "decompiler_plan_legal_ir_view_logits",
+          "family_embedding_weights",
+          "family_legal_ir_view_embedding_weights",
+          "family_semantic_slot_embedding_weights",
+          "family_semantic_slot_legal_ir_view_embedding_weights",
+          "family_semantic_slot_legal_ir_view_logits",
+          "feature_embedding_weights",
+          "feature_family_logits",
+          "feature_legal_ir_view_logits",
+          "legal_ir_view_embedding_weights",
+          "legal_ir_view_family_logits",
+          "legal_ir_view_logits",
+          "logic_signature_embedding_weights",
+          "logic_signature_family_logits",
+          "logic_signature_legal_ir_view_logits",
+          "predicate_argument_embedding_weights",
+          "predicate_argument_family_logits",
+          "predicate_argument_legal_ir_view_logits",
+          "round_trip_signal_embedding_weights",
+          "round_trip_signal_family_logits",
+          "round_trip_signal_legal_ir_view_logits",
+          "semantic_slot_embedding_weights",
+          "semantic_slot_family_logits",
+          "semantic_slot_legal_ir_view_embedding_weights",
+          "semantic_slot_legal_ir_view_family_logits",
+          "semantic_slot_legal_ir_view_logits"
+        ]
+      }
+    }
+  ],
+  "t2_changed": true,
+  "targets": 84,
+  "wall_seconds": 13925.27
+}
