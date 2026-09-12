@@ -76,3 +76,8 @@ The local checklist contains **16 questions**. Include the completed per-paper c
 
 Two template quirks need no style modification. The shell comment says `\workshoptitle{}` is required but contains no call; the style defines/stores it while its research footer uses the fixed workshop notice. A reconstruction may set `\workshoptitle{NeurIPS 2026 Workshop on AI for Verifiable Coding}` to match the comment, and should inspect the resulting footer. Some instructional prose still calls the generic `neurips_2026.sty` the only style; the research shell's actual package load and workshop-specific research style are the relevant inputs. Main results supporting central claims must fit in the 4–9-page main text, even though appendices/checklist are excluded from that count.
 
+
+
+## User-directed scope amendment, 2026-09-12
+
+The user clarified that no outside reviewers are available or required to generate the manuscript. The current operational scope is in `benchmark/AUTOMATED_EVIDENCE_SCOPE.md` and `benchmark/automated_evidence_amendment.json`. Earlier recommendations above for outside legal/CVE/skill reviewers are historical planning, not a universal manuscript or automated-run gate. The original PDF planned expert-reviewed legal fidelity in Table E1; that particular claim is withdrawn from the amended evaluation without data. No labels, expert judgments or agreement statistics may be invented. Actual source, solver, effect, utility and cost evidence remain required for their corresponding claims. Optional author review is non-independent and not a task prerequisite.

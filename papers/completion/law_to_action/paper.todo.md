@@ -3,6 +3,8 @@
 Read `papers/completion/law_to_action/review.md` and `papers/completion/README.md` before work.
 Objective heap: `papers/completion/law_to_action/paper.objectives.md`. Board namespace: `vericodegen-2026-law_to_action`.
 
+Current user-directed scope: `papers/completion/law_to_action/benchmark/AUTOMATED_EVIDENCE_SCOPE.md`. Outside reviewers are not required for manuscript generation or automated evaluation. Earlier human-review requirements remain historical and are superseded only within this explicit amended scope.
+
 All tasks start open. P0 is submission-critical, P1 supports the full study, P2 is optional extension.
 Dependencies still apply across priority levels. A blocked experiment remains blocked until run or explicitly rescoped with a recorded claim change.
 Never turn estimates, mocks, dry runs, or missing values into measured results.
@@ -197,7 +199,7 @@ Acceptance criteria:
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
-## LA-006 Build real CVE vulnerable/fixed pairs and unrelated-code controls
+## LA-006 Complete source-supported CVE pair evidence under the automated scope
 
 - Status: todo
 - Completion: auto
@@ -205,7 +207,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: law_to_action
-- Depends on: LA-004
+- Depends on: LA-004, LA-026, LA-027
 - Goal id: LA-G2
 - Parent goal: LA-G000
 - Objective heap: papers/completion/law_to_action/paper.objectives.md
@@ -219,18 +221,18 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-006
-- Acceptance: Each pair has runnable sandbox reproduction or precisely defined supported behavior evidence and independently reviewed expected polarity.; No fabricated fixture CVE or mocked source record enters empirical sample counts.; Wildcards, self-granted authority and unsupported transfer remain rejected/unknown with reasons.
-- Paper evidence: pp2–3 §2.2; p11 A.2 lines 409–414; p16 Table E1 CVE row
+- Acceptance: All frozen 12 pairs/24 cases and 84 excluded controls retain exact identities, source/revision bindings and their LA-026 behavior evidence or explicit unsupported/failed status.; Every reported polarity result binds a scoped machine-checkable behavior contract and actual observation. Unknown polarity remains unknown and no independent-human or universal-security claim is made.; No fabricated CVE, mocked source, fabricated reviewer, self-granted authority or unsupported transfer receives empirical success credit. The amended scope and original failed history are retained.
+- Paper evidence: pp2–3 §2.2; p11 A.2 lines 409–414; p16 Table E1 CVE row; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py, external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/evaluation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_cve_security_e2e.py
 - Receipt: papers/completion/law_to_action/receipts/LA-006.json
 
-Select real supported vulnerable/fixed code pairs from the frozen CVE cohort with exact repository revisions and source-row locators. Define reviewed, non-authoritative scoped restriction candidates and explicit intent/code-effect mappings. Include unrelated but lexically similar code, broadened effects, fixed negatives and unknown scope. Retain CVE/CWE/source lineage and distinguish a fix for one restriction from universal security.
+Use the existing LA-026 evidence for the frozen 12 genuine CVE families/24 cases and preserve all 84 excluded controls. Bind exact vulnerable/fixed revisions, source-row locators and runnable isolated behavior evidence or precisely delimited source-supported observations. Record expected polarity only where an explicit machine-checkable scoped behavior contract supports it, with its provenance distinct from the adapter being evaluated. Otherwise retain unknown and exclude it only from the unsupported metric denominator with a recorded reason. No outside reviewer is required. Do not infer general security, exploitability, or independent human agreement from a source label, fix, compiler output or model judgment. Preserve the original LA-006 failed/blocked attempt and original criteria in history.
 
 Acceptance criteria:
 
-1. Each pair has runnable sandbox reproduction or precisely defined supported behavior evidence and independently reviewed expected polarity.
-2. No fabricated fixture CVE or mocked source record enters empirical sample counts.
-3. Wildcards, self-granted authority and unsupported transfer remain rejected/unknown with reasons.
+1. All frozen 12 pairs/24 cases and 84 excluded controls retain exact identities, source/revision bindings and their LA-026 behavior evidence or explicit unsupported/failed status.
+2. Every reported polarity result binds a scoped machine-checkable behavior contract and actual observation. Unknown polarity remains unknown and no independent-human or universal-security claim is made.
+3. No fabricated CVE, mocked source, fabricated reviewer, self-granted authority or unsupported transfer receives empirical success credit. The amended scope and original failed history are retained.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
@@ -309,7 +311,7 @@ Acceptance criteria:
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
-## LA-009 Execute source-to-IR fidelity and specificity evaluations
+## LA-009 Execute source-to-IR contract, coverage and scoped behavior measurements
 
 - Status: todo
 - Completion: auto
@@ -331,18 +333,18 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-009
-- Acceptance: All frozen selected cases have predictions or explicit failure records.; Metrics derive from case-level files, not implementation asserts or release-card totals.; No development examples leak into held-out results; unknowns retained.
-- Paper evidence: p16 Table E1 first three Not run rows; pp2–3 source adapters
+- Acceptance: Every frozen selected case has an actual prediction/observation or explicit failed, unavailable or unsupported record without changing cohorts after outcomes.; Every reported metric is reproducible from case-level files and an exact scoped machine expectation or observation with independent provenance where the metric requires it. Implementation agreement is not semantic accuracy.; Original source-lineage splits and case denominators remain fixed. Human/author review is not a run dependency, and unmeasured expert legal fidelity or agreement is not assigned a numeric score.
+- Paper evidence: p16 Table E1 first three Not run rows; pp2–3 source adapters; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/formalization_adapter.py, external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/typed_compiler.py
 - Receipt: papers/completion/law_to_action/receipts/LA-009.json
 
-Run actual source adapters/normalizers/compilers on frozen held-out sources and score against independent annotations. Report legal atoms/exception/applicability/span fidelity, CVE vulnerable detection/fixed and unrelated false rejection/unknown mappings, skill grounding/control-flow errors and malicious Markdown behavior. Preserve errors and unsupported constructs, stratify by source family and give denominators. Label hand-authored policies separately from learned extraction.
+Run actual pinned source adapters/normalizers/compilers on the unchanged frozen selected sources under the amended automated scope. Report source-span linkage and coverage, parse/schema validity, supported/unsupported fields, compiler/checker consistency, and source-supported CVE behavior observations with exact case denominators and producer provenance. Generated interpretations are predictions, not independent gold. Compare against a reference only for the precisely machine-defined property that reference supports and report shared-producer dependence. Expert legal applicability/exception fidelity, semantic accuracy and human agreement are unmeasured unless suitable real independent evidence exists. Preserve all errors, source-unavailable cases and unknowns and separate synthetic qualification controls from empirical source cases.
 
 Acceptance criteria:
 
-1. All frozen selected cases have predictions or explicit failure records.
-2. Metrics derive from case-level files, not implementation asserts or release-card totals.
-3. No development examples leak into held-out results; unknowns retained.
+1. Every frozen selected case has an actual prediction/observation or explicit failed, unavailable or unsupported record without changing cohorts after outcomes.
+2. Every reported metric is reproducible from case-level files and an exact scoped machine expectation or observation with independent provenance where the metric requires it. Implementation agreement is not semantic accuracy.
+3. Original source-lineage splits and case denominators remain fixed. Human/author review is not a run dependency, and unmeasured expert legal fidelity or agreement is not assigned a numeric score.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
@@ -555,11 +557,11 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-015
 - Acceptance: Run manifest and raw logs cover the frozen case population and arm matrix with explicit missing cells.; Measured safety uses effect counters, not decision labels alone.; No zero-failure result is inferred from not-run/skipped cases; all results retain denominator and implementation revision.
-- Paper evidence: p8 §7; p16 E.1 primary outcome and E.2 counterexamples
+- Paper evidence: p8 §7; p16 E.1 primary outcome and E.2 counterexamples; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ir_constraint_compiler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py
 - Receipt: papers/completion/law_to_action/receipts/LA-015.json
 
-Run every frozen fixed-action case across all applicable arms with actual proof, capability and handler integrations. Collect observed forbidden effects and allowed work, false denials, unknowns/abstentions, route coverage and stage-specific errors. Include all required cross-source adversarial categories and paired safe controls. Retain every attempted case and all skips/failures; reruns require a recorded reason and fresh run identity.
+Run every frozen fixed-action case across all applicable arms with actual proof, capability and handler integrations. Collect observed forbidden effects and allowed work, false denials, unknowns/abstentions, route coverage and stage-specific errors. Include all required cross-source adversarial categories and paired safe controls. Retain every attempted case and all skips/failures; reruns require a recorded reason and fresh run identity. The labels allowed and forbidden refer only to the frozen modeled policy and machine-checkable behavior contract admitted by LA-027. Independent effect observation means a separately observed handler/postcondition trace, not an outside human reviewer. Do not claim real-world legality, expert judgment or universal security from these automated outcomes.
 
 Acceptance criteria:
 
@@ -703,11 +705,11 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-019
 - Acceptance: Analysis script recreates summary tables and figures without hand-entered result values.; All headline claims trace to raw run/case IDs and uncertainty intervals.; No observed bounded safety rate is described as universal legal correctness or universal prevention.
-- Paper evidence: p8 §7 metrics; p15 D lines 508–511; p16 E.1–E.2
+- Paper evidence: p8 §7 metrics; p15 D lines 508–511; p16 E.1–E.2; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: 
 - Receipt: papers/completion/law_to_action/receipts/LA-019.json
 
-Generate all paper tables/figures from immutable raw records. Use protocol-defined paired comparisons and uncertainty clustered by independent source/task families. Include exact denominators, allowed utility, abstention/false denial, failure taxonomy, unsupported fragments, negative results and zero-event confidence bounds. Separate fixed-action and closed-loop results and fixture/real-provider evidence. Check source leakage and sensitivity to source families.
+Generate all paper tables/figures from immutable raw records. Use protocol-defined paired comparisons and uncertainty clustered by independent source/task families. Include exact denominators, allowed utility, abstention/false denial, failure taxonomy, unsupported fragments, negative results and zero-event confidence bounds. Separate fixed-action and closed-loop results and fixture/real-provider evidence. Check source leakage and sensitivity to source families. Apply the automated evidence amendment: report policy-relative effects and measured structural/behavioral properties. Do not calculate legal semantic accuracy, annotator agreement or human-validity rates from generated or blank labels. Optional author judgments, if any, are separate descriptive material and cannot replace empirical outcomes.
 
 Acceptance criteria:
 
@@ -816,18 +818,19 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-022
-- Acceptance: Every Not run/pending result placeholder is resolved by evidence or explicit scoped removal, never invented data.; Claim matrix links manuscript claims to exact experiments or clearly marked nonempirical implementation evidence.; Paper contains reproducible methodology and negative results, with a coherent evaluated verifiable-coding contribution.
-- Paper evidence: p1 abstract; p8 §§7–8; p16 Table E1; pp16–17 Appendix F
+- Acceptance: Every Not run/pending result placeholder is resolved by evidence or explicit scoped removal, never invented data.; Claim matrix links manuscript claims to exact experiments or clearly marked nonempirical implementation evidence.; Paper contains reproducible methodology and negative results, with a coherent evaluated verifiable-coding contribution.; Manuscript generation and an evidence-scoped submission candidate require no outside review. Optional author review is labeled non-independent and unsupported expert legal fidelity, human agreement and legal-validity claims are absent.
+- Paper evidence: p1 abstract; p8 §§7–8; p16 Table E1; pp16–17 Appendix F; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: 
 - Receipt: papers/completion/law_to_action/receipts/LA-022.json
 
-Replace evaluation-template prose and all pending rows with actual measured results or clearly scoped omissions. Rewrite abstract, contributions, method, evaluation and conclusion around supported findings; preserve model assumptions, incomplete legal coverage, source-interpretation uncertainty, protected-route limits and measured deployment scope. Remove unavailable future work from implemented contributions. Cite generated tables and correct all source statistics from manifests.
+Replace evaluation-template prose and all pending rows with actual measured results or clearly scoped omissions. Rewrite abstract, contributions, method, evaluation and conclusion around supported findings; preserve model assumptions, incomplete legal coverage, source-interpretation uncertainty, protected-route limits and measured deployment scope. Remove unavailable future work from implemented contributions. Cite generated tables and correct all source statistics from manifests. Complete manuscript drafting and compilation without waiting for outside reviewers or optional author feedback. Replace the original Table E1 expert-reviewed legal-fidelity experiment with an explicit withdrawn/unmeasured claim and describe the automated source-contract evaluation that actually ran. State no independent human legal/security/intent validation or inter-annotator agreement was collected unless authentic records support it. Preserve the primary actual protected-effect/useful-work experiment and truthful negative results; this scope change does not turn missing experiments into results.
 
 Acceptance criteria:
 
 1. Every Not run/pending result placeholder is resolved by evidence or explicit scoped removal, never invented data.
 2. Claim matrix links manuscript claims to exact experiments or clearly marked nonempirical implementation evidence.
 3. Paper contains reproducible methodology and negative results, with a coherent evaluated verifiable-coding contribution.
+4. Manuscript generation and an evidence-scoped submission candidate require no outside review. Optional author review is labeled non-independent and unsupported expert legal fidelity, human agreement and legal-validity claims are absent.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
@@ -892,11 +895,11 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Proposal artifact envelope: {"binary_paths":["papers/completion/law_to_action/submission/paper.pdf","papers/completion/law_to_action/submission/anonymous_supplement.zip"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-024
 - Acceptance: Compiled main-text page count is 4–9; PDF <=50 MB and supplementary ZIP <=100 MB.; Anonymous package does not link identifying author-maintained artifacts; necessary neutral aliases have a separate private mapping.; Actual methodology-essential LLM tool/model use and remaining human judgments are disclosed; the official style-generated anonymous Affiliation/Address/email block is retained.; Submission dates/template version are checked against the current CFP and recorded.; The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.; The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.; The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.; Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
-- Paper evidence: p1 placeholder author block; p14 Appendix D lines 504–507; p17 lines 546–549; workshop CFP; Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.
+- Paper evidence: p1 placeholder author block; p14 Appendix D lines 504–507; p17 lines 546–549; workshop CFP; Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: papers/neurips_2026_vericode_workshop.tex, papers/neurips_2026_vericode.sty, papers/checklist.tex
 - Receipt: papers/completion/law_to_action/receipts/LA-024.json
 
-Use the supplied local research workshop template and verify the final main text is 4–9 pages excluding references/appendices. Audit title/author block, acknowledgments, URLs, PDF metadata, figures, code comments and linked artifacts for double-blind compliance while preserving legitimate independent-source attribution. Disclose methodology-essential LLM tools, model versions and human review accurately. Confirm current CFP deadlines and size requirements without submitting externally. Build from the supplied local research shell papers/neurips_2026_vericode_workshop.tex and an unchanged copy of papers/neurips_2026_vericode.sty, using the supplied default \usepackage{neurips_2026_vericode} with no final, preprint, nonanonymous, or sglblindworkshop option. Do not use the competition/single-blind variant or the generic neurips_2026.sty. Copy papers/checklist.tex into this paper's manuscript directory, include it after references and optional appendices, remove only its BEGIN/END INSTRUCTIONS block, preserve the heading/questions/subheadings/guidelines, and replace all 16 \answerTODO{} and 16 \justificationTODO{} fields with actual evidence-backed \answerYes{}, \answerNo{}, or \answerNA{} and 1–2 sentence justifications. Do not edit the user's shared template/style/checklist originals or fabricate author-dependent answers. Pin input checksums. The style intentionally prints Anonymous Author(s), Affiliation, Address, and email: preserve this official anonymous block and exclude it from unresolved-placeholder failures.
+Use the supplied local research workshop template and verify the final main text is 4–9 pages excluding references/appendices. Audit title/author block, acknowledgments, URLs, PDF metadata, figures, code comments and linked artifacts for double-blind compliance while preserving legitimate independent-source attribution. Disclose methodology-essential LLM tools, model versions and human review accurately. Confirm current CFP deadlines and size requirements without submitting externally. Build from the supplied local research shell papers/neurips_2026_vericode_workshop.tex and an unchanged copy of papers/neurips_2026_vericode.sty, using the supplied default \usepackage{neurips_2026_vericode} with no final, preprint, nonanonymous, or sglblindworkshop option. Do not use the competition/single-blind variant or the generic neurips_2026.sty. Copy papers/checklist.tex into this paper's manuscript directory, include it after references and optional appendices, remove only its BEGIN/END INSTRUCTIONS block, preserve the heading/questions/subheadings/guidelines, and replace all 16 \answerTODO{} and 16 \justificationTODO{} fields with actual evidence-backed \answerYes{}, \answerNo{}, or \answerNA{} and 1–2 sentence justifications. Do not edit the user's shared template/style/checklist originals or fabricate author-dependent answers. Pin input checksums. The style intentionally prints Anonymous Author(s), Affiliation, Address, and email: preserve this official anonymous block and exclude it from unresolved-placeholder failures. Record outside human validation as not collected for the amended study unless authentic returns exist. The author may optionally review the draft, but that is not independent annotation, expert validation, agreement evidence or a prerequisite to generate the manuscript. Answer checklist questions from actual automated work and actual human involvement, not planned reviewer packets.
 
 Acceptance criteria:
 
@@ -913,7 +916,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 
 Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
-## LA-025 Independently reproduce key results, rebuild the PDF and provide author handoff
+## LA-025 Reproduce key results in a clean environment and provide optional author handoff
 
 - Status: todo
 - Completion: auto
@@ -935,18 +938,18 @@ Artifact transport: only the exact declared PDF/ZIP files above receive binary a
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-025
-- Acceptance: Independent reproduction commands, environment, outcomes and discrepancies are retained.; No unresolved result placeholders or unsupported empirical claims remain; material blockers prevent falsely marking the paper complete.; Final paper/artifact checksums, author-review handoff and proposed submission metadata are complete.
-- Paper evidence: p16 all pending experiments; p17 final disclosure; workshop reproducibility expectations
+- Acceptance: Clean isolated reproduction commands, environment, observed outcomes and discrepancies are retained, with automated versus human activities labeled accurately.; No unsupported empirical claims or unresolved scientific placeholders remain. Missing outside reviewers or optional author feedback are not blockers, but missing required execution evidence or invalid artifact claims remain blockers.; Final paper/artifact checksums, optional author-review handoff and proposed submission metadata are complete without implying submission, human validation or workshop acceptance.
+- Paper evidence: p16 all pending experiments; p17 final disclosure; workshop reproducibility expectations; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates: 
 - Receipt: papers/completion/law_to_action/receipts/LA-025.json
 
-From a clean isolated environment, rerun the documented bounded reproduction and regenerate key metrics/figures, rebuild manuscript and audit claims against raw evidence. Check missing citations, unresolved references/placeholders, broken artifact links, table consistency and PDF rendering. Provide reviewable final files, experiment inventory and explicit residual limitations/blockers. Prepare submission metadata for the authors; do not submit, upload or impersonate authors as part of autonomous completion. Verify research-template input checksums, all 16 completed checklist answers/justifications, preserved official style/anonymous block and workshop footer. Exempt only style-generated anonymous Affiliation/Address/email text from the residual-placeholder scan; scientific/checklist placeholders remain failures.
+From a clean isolated environment, rerun the documented bounded reproduction and regenerate key metrics/figures, rebuild manuscript and audit claims against raw evidence. Check missing citations, unresolved references/placeholders, broken artifact links, table consistency and PDF rendering. Provide reviewable final files, experiment inventory and explicit residual limitations/blockers. Prepare submission metadata for the authors; do not submit, upload or impersonate authors as part of autonomous completion. Verify research-template input checksums, all 16 completed checklist answers/justifications, preserved official style/anonymous block and workshop footer. Exempt only style-generated anonymous Affiliation/Address/email text from the residual-placeholder scan; scientific/checklist placeholders remain failures. Independent reproduction here means execution in a clean isolated environment with retained commands and evidence comparison and may be automated. No outside reviewer or returned annotation is required for completion. Deliver the compiled manuscript and handoff with optional author review clearly labeled, while preserving actual technical/scientific blockers and prohibiting unsupported claims.
 
 Acceptance criteria:
 
-1. Independent reproduction commands, environment, outcomes and discrepancies are retained.
-2. No unresolved result placeholders or unsupported empirical claims remain; material blockers prevent falsely marking the paper complete.
-3. Final paper/artifact checksums, author-review handoff and proposed submission metadata are complete.
+1. Clean isolated reproduction commands, environment, observed outcomes and discrepancies are retained, with automated versus human activities labeled accurately.
+2. No unsupported empirical claims or unresolved scientific placeholders remain. Missing outside reviewers or optional author feedback are not blockers, but missing required execution evidence or invalid artifact claims remain blockers.
+3. Final paper/artifact checksums, optional author-review handoff and proposed submission metadata are complete without implying submission, human validation or workshop acceptance.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
@@ -987,34 +990,34 @@ Acceptance criteria:
 
 Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
 
-## LA-027 Receive and adjudicate independent legal, CVE and skill reviews
+## LA-027 Implement and qualify the automated evidence scope without an outside-review gate
 
-- Status: blocked
-- Completion: manual
-- Is schedulable: false
+- Status: todo
+- Completion: auto
+- Is schedulable: true
 - Review only: false
 - Priority: P0
 - Track: law_to_action
-- Depends on: LA-005, LA-007, LA-026
+- Depends on: LA-005, LA-007, LA-026, LA-028
 - Goal id: LA-G2
 - Parent goal: LA-G000
 - Objective heap: papers/completion/law_to_action/paper.objectives.md
 - Board namespace: vericodegen-2026-law_to_action
 - Bundle: law_to_action/LA-G2
 - Parallel lane: law_to_action
-- Outputs: papers/completion/law_to_action/benchmark/annotations/human_review_import.json, papers/completion/law_to_action/benchmark/annotations/private_gold_commitment.json, papers/completion/law_to_action/benchmark/annotations/human_review_report.md, papers/completion/law_to_action/receipts/LA-027.json, papers/completion/law_to_action/receipts/snapshots/LA-027/
-- Predicted files: papers/completion/law_to_action/benchmark/annotations/human_review_import.json, papers/completion/law_to_action/benchmark/annotations/private_gold_commitment.json, papers/completion/law_to_action/benchmark/annotations/human_review_report.md, papers/completion/law_to_action/receipts/LA-027.json, papers/completion/law_to_action/receipts/snapshots/LA-027/
+- Outputs: papers/completion/law_to_action/benchmark/automated_evidence_amendment.json, papers/completion/law_to_action/benchmark/AUTOMATED_EVIDENCE_SCOPE.md, papers/completion/law_to_action/benchmark/automated_evidence.py, papers/completion/law_to_action/benchmark/tests/test_automated_evidence.py, papers/completion/law_to_action/benchmark/qualify_final_runtime.py, papers/completion/law_to_action/benchmark/source_pipeline.py, papers/completion/law_to_action/benchmark/protocol.json, papers/completion/law_to_action/benchmark/protocol.md, papers/completion/law_to_action/benchmark/FINAL_RUN.md, papers/completion/law_to_action/benchmark/annotations/automated_reference_manifest.json, papers/completion/law_to_action/results/automated_scope_qualification, papers/completion/law_to_action/receipts/LA-027.json, papers/completion/law_to_action/receipts/snapshots/LA-027/
+- Predicted files: papers/completion/law_to_action/benchmark/automated_evidence_amendment.json, papers/completion/law_to_action/benchmark/AUTOMATED_EVIDENCE_SCOPE.md, papers/completion/law_to_action/benchmark/automated_evidence.py, papers/completion/law_to_action/benchmark/tests/test_automated_evidence.py, papers/completion/law_to_action/benchmark/qualify_final_runtime.py, papers/completion/law_to_action/benchmark/source_pipeline.py, papers/completion/law_to_action/benchmark/protocol.json, papers/completion/law_to_action/benchmark/protocol.md, papers/completion/law_to_action/benchmark/FINAL_RUN.md, papers/completion/law_to_action/benchmark/annotations/automated_reference_manifest.json, papers/completion/law_to_action/results/automated_scope_qualification, papers/completion/law_to_action/receipts/LA-027.json, papers/completion/law_to_action/receipts/snapshots/LA-027/
 - Allowed paths:
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-027
-- Acceptance: Actual human legal/intent/security judgments bind the selected source units, versions, reviewers and timestamps, with explicit ambiguity/unknown and disagreement/adjudication records.; Every empirical CVE pair has independently reviewed expected polarity plus the LA-026 supported behavior evidence required by the unchanged LA-006 contract.; A validated import preserves original blank packets, all selected cases and review provenance; missing reviewers or labels cannot yield a complete review or scored fidelity claim.
-- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Acceptance: An explicit versioned amendment binds the unchanged source population/splits, original protocol and receipts, machine-expectation provenance, permitted automated metrics and withdrawn expert/legal-validity/human-agreement claims before any new evaluated predictions.; Actual normal automated admission works without reviewer identities or human labels, while focused controls reject missing runtime/source bindings, incomplete case accounting, invalid expectation provenance, self-reported success, stale profile or budget, and any attempt to label automated output independent human gold.; The selected native source adapters, proof/capability route and independent effect observer execute in an isolated qualification with exact commands, hashes, failures and raw logs. Fixtures remain qualification-only and no held-out result or useful-work success is inferred from them.; The runtime, analysis and manuscript instructions no longer require outside reviewers for the automated scope. All human fields remain absent/uncollected unless authentic returns exist, optional author review is labeled non-independent, and original task/receipt/blank-packet history is preserved.
+- Paper evidence: Superseded historical September 12 planning required independent human judgments. The current user-directed automated scope removes that outside-review prerequisite and does not claim human validation.; User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels.
 - Reuse candidates:
 - Receipt: papers/completion/law_to_action/receipts/LA-027.json
 
-External human-review gate for the prepared legal, CVE and skill cohorts. Obtain competent independent reviewers and adjudication with exact source spans and applicability assumptions. Do not treat agent-generated expected labels as expert or human review. The operator validates actual reviewer returns before completing this gate and restoring LA-006 after all of its unchanged criteria are met. This manual task is not dispatched to an implementation model. Actual returned labels and adjudicated gold remain in the private reviewer store outside Git; repository outputs contain aggregate counts, schemas and cryptographic import commitments only.
+Implement the user-directed claim and protocol amendment in benchmark/automated_evidence_amendment.json and AUTOMATED_EVIDENCE_SCOPE.md. This replaces the former external-human gate with an executable automated evidence contract and a fresh task receipt. Preserve the original LA-005/007/026/028 receipts, blank review packets, failed imports and original LA-027 contract as history; none becomes human gold. Add a distinct typed automated admission path in benchmark/automated_evidence.py and wire qualify_final_runtime.py/source_pipeline.py/FINAL_RUN.md and protocol metadata to it. Retain review_import.py strict refusal of agent-authored human provenance for optional actual author/human returns; do not pass fabricated review.admitted=true to the old gate. Automated admission must bind the exact source/split/case inventory, pre-prediction machine expectations and their producer provenance, selected real runtime/profile versions, budgets, actual protected-handler/observer qualification and allowed claim set. Development qualification alone cannot admit held-out scores. Derive source-contract metrics and observed policy-relative effects, not legal truth or human semantic agreement. Actual source-unavailable or runtime-incomplete cases stay failed/unknown. Optional author review can be recorded separately but is not required to run or write this scoped paper.
 
 Acceptance criteria:
 

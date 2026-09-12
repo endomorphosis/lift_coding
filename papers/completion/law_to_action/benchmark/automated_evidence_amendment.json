@@ -1,0 +1,62 @@
+{
+  "schema": "law-automated-evidence-scope-amendment/v1",
+  "status": "proposed_source_and_native_contract_change_pending_root_integration",
+  "requested_by": "user clarification relayed by root on 2026-09-12",
+  "source_head": "31dbbbcfa58e6b7746ae6678f6e52d7cc9a823dd",
+  "original_protocol": {
+    "path": "papers/completion/law_to_action/benchmark/protocol.json",
+    "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f"
+  },
+  "external_human_review_required": false,
+  "optional_author_review": {
+    "required": false,
+    "independent": false,
+    "collected": false,
+    "may_substitute_for_empirical_evidence": false
+  },
+  "scope": {
+    "permitted_claims": [
+      "source provenance/span linkage and coverage",
+      "parse/schema/structural contract conformance",
+      "source-supported narrowly defined CVE behavior",
+      "actual solver/checker outcome for encoded obligations",
+      "observed protected effects and useful work relative to frozen modeled policy",
+      "measured runtime/resource/provider usage with complete failures"
+    ],
+    "withdrawn_without_independent_data": [
+      "expert legal source-to-rule semantic fidelity",
+      "legal applicability or validity in the world",
+      "independent human legal/security/intent validation",
+      "inter-annotator agreement or adjudicated gold accuracy",
+      "semantic correctness inferred from implementation agreement"
+    ],
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "unknown_behavior_policy": "retain unknown and full source/case accounting; restrict only unsupported metric denominators with explicit reasons"
+  },
+  "original_population_budgets_unchanged": true,
+  "new_scientific_execution_authorized": false,
+  "completed_receipts_unchanged": [
+    "LA-005",
+    "LA-007",
+    "LA-026",
+    "LA-028"
+  ],
+  "new_runtime_qualification_owner": "LA-027",
+  "runtime_change_required": {
+    "current_blanket_gate": "benchmark/qualify_final_runtime.py: final_admission currently requires review import admitted for every route",
+    "new_gate": "explicit automated scope admission with exact source/case/profile/budget/observer and expectation bindings; no fake review.admitted value",
+    "optional_importer": "benchmark/review_import.py retains strict human-provenance checks only when an actual optional human return is imported",
+    "development_is_not_final": true
+  },
+  "changed_task_ids": [
+    "LA-006",
+    "LA-027",
+    "LA-009",
+    "LA-015",
+    "LA-019",
+    "LA-022",
+    "LA-024",
+    "LA-025"
+  ],
+  "native_application": "Fresh guarded native contract updates required after source review. Preserve all attempts/claims/events/receipts; do not delete or mark tasks complete from this proposal."
+}
