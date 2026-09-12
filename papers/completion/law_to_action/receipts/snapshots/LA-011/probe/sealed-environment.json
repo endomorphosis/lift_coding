@@ -1,0 +1,70 @@
+{
+  "HAVE_CRYPTO_ED25519": true,
+  "anyio": false,
+  "canonical_profile_d_available": false,
+  "canonical_profile_d_error": "",
+  "cryptography_origin": "/usr/lib/python3/dist-packages/cryptography/__init__.py",
+  "cryptography_version": "41.0.7",
+  "datasets_auth_available": true,
+  "ed25519_generated": "Ed25519PrivateKey",
+  "home": "/tmp/asref-grok-home-u7zr8a1q",
+  "home_is_validation_prefix": false,
+  "mcp_server_importable": false,
+  "multiformats": false,
+  "observed_at": "2026-09-12T02:17:49.276952+00:00",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "python": "/usr/bin/python3.12",
+  "python_executable": "/usr/bin/python3.12",
+  "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "python_version": "3.12.3",
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+    },
+    "authorization.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd"
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+    },
+    "execution_permit.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/execution_permit.py",
+      "sha256": "d1ef6113cb915c64759dcb1614daad4f0979e2da1c816f8222deb76a4f506522"
+    },
+    "profile_d_policy_datasets.py": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/profile_d_policy.py",
+      "sha256": "172958982dcf1a217aa61ddd6e4d2d0f0f5dced7d494d615fd028347020efe81"
+    },
+    "profile_d_policy_kit.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp/profile_d_policy.py",
+      "sha256": "356118a541090018d21f21c2ccfb3bfb92cafb05a63ee693dcfa23692eb18ea0"
+    },
+    "receipt.py": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/receipt.py",
+      "sha256": "ae8c4462361c8fc79ee5ab4889ac365efb6accc43d6efe4387ed28a7c5e7397b"
+    },
+    "revocation.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/revocation.py",
+      "sha256": "4b87dae8b0a037ab111f7c8ff8e4b0565c30791673bd8adf9c1155107e2ed280"
+    },
+    "server.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/server.py",
+      "sha256": "ea9e9906daedc3b38dbc1c787f0ec0b535e09efadb232ca8a5cf95cd742189db"
+    },
+    "test_authorization_dispatch_gate.py": {
+      "path": "external/ipfs_kit/tests/runtime_readiness/mcplusplus/test_authorization_dispatch_gate.py",
+      "sha256": "61b22b2d6798050226a6aabbb0f6c865a936030b9227f8c2ece569a866be0e04"
+    },
+    "test_ucan_verifier.py": {
+      "path": "external/ipfs_kit/tests/runtime_readiness/mcplusplus/test_ucan_verifier.py",
+      "sha256": "43be83a654a5569440677aecc6044bfb7c55dd248bb7a64f130e50f7f65b3151"
+    },
+    "ucan.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+      "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-011",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:17:50.091779+00:00",
+  "completion_mode": "ENFORCE authorize_and_delegate around BoundedExportHandler was qualified with allow/deny/unknown/context-mutation effect counters. Real Ed25519 UCAN verification ran; injected verifiers are labeled fixtures. Unprotected OFF/AUDIT/SHADOW/direct-handler routes were tested and excluded from the safety claim. Canonical Profile D and MCPServer remain unavailable without multiformats/anyio. This is qualification, not a scored A3/A4 run.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/benchmark/route_inventory.json": "82a200972a126373b57135c8e7ecbf2dbfdbbc06c87cc275bdf7ceeee606f96d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/patches/mediation_changes.md": "37ceab6d8bd25326989ac9bdceb82191b71f7925d58bda331a61a1b6cbfc75fb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/qualification.md": "c7d0ecc13b250dae1f1c51351098af29df93d5d8a2e76e774d6d180707911521",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/raw.jsonl": "ce08649bf434e9761117be4bc4b2d96161bd73dc5dd4e363e28e9bf4f49ee6e1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/sealed-environment.json": "5374998361fedd51d4865224275668b7110b65dc49438aec6fcb87c97c363750",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/summary.json": "6d005bbe577397891aa8c63e8249a530fee082e20cbd5a8fb692ddac4aaa3c01",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/tenant-widening.json": "7f2e59e7e6dd56abb1ce364277fb6221f08e9cc5719c4aed00887e3e60626255",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/qualify_mediation.py": "a12ac59cb0fcbbf7313524233af1a9d66d6dc6c4585e5c302361bbc338a33b58",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/traces/cases.json": "7eb363f8c25adf4dbebd295a656eff74621e7b5cc9de9bbed28fd74694bcd76e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/validate_mediation.py": "6f47652a2efa508e671e6845e373f3333d3c7f5fb075fd80301d29a2ae3e2590",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/commands.json": "e99980e66718492e9e200a813deb1f51d09ad26d9070518a23cb89ca0a8a9b63",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/qualify.stdout.log": "6d005bbe577397891aa8c63e8249a530fee082e20cbd5a8fb692ddac4aaa3c01",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/validate.stdout.log": "babf9be51076be7d241675965e2403d24c1151fc215600e09027b63d91ddee98"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/route_inventory.json": "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/benchmark/route_inventory.json",
+    "papers/completion/law_to_action/results/mediation/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/raw.jsonl",
+    "papers/completion/law_to_action/results/mediation/qualification.md": "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/qualification.md",
+    "papers/completion/law_to_action/patches/mediation_changes.md": "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/patches/mediation_changes.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Every route named in the paper has allow/deny/unknown/context-mutation effect-counter tests.",
+      "status": "met",
+      "explanation": "Paper-named routes were inventoried and each received allow, deny, unknown, and context-mutation jobs with independent BoundedExportHandler/EffectObserver counters: SupervisorPreInvocationEnforcement ENFORCE/OFF/AUDIT/SHADOW, ExecutionPermit, AuthorizationGate (tools/call check), lightweight Profile D dispatcher, and the unguarded handler. Mutations include wrong audience, tenant-a versus tenant-ab, expiry, revocation, forged proof identifiers, changed arguments/effects/environment, missing evidence, undeclared generated-code effects, and replay. 56/56 recorded cases passed.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/benchmark/route_inventory.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/qualification.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/traces/cases.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/qualify.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Real cryptographic verification is executed; injected test verifiers are labeled as fixtures only.",
+      "status": "met",
+      "explanation": "cryptography 41.0.7 Ed25519 issued and verified UCAN tokens through UCANVerifier and RevocationLedger (HAVE_CRYPTO_ED25519=True). 14 real-crypto jobs ran, including wrong audience, tenant-ab widening, expiry, revocation, forged signatures/keys, replay, and an attenuated chain. FixtureVerifier/FixturePolicy and gate-fixture-verifier-labeled are explicitly labeled fixture_only and are outside the safety claim. Canonical Profile D remains unavailable without multiformats and fail-closes at the gate.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/sealed-environment.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/tenant-widening.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/qualification.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/summary.json"
+      ]
+    },
+    {
+      "criterion": "No unprotected reachable route is included in the tested safety claim.",
+      "status": "met",
+      "explanation": "The selected safety claim is only SupervisorPreInvocationEnforcement.authorize_and_delegate in explicit ENFORCE mode around BoundedExportHandler.export_json. OFF, AUDIT, SHADOW, the unguarded handler, policy-only Profile D dispatch, ExecutionPermit, and MCP AuthorizationGate were tested with effect counters and marked in_safety_claim=false. OFF/AUDIT/SHADOW/direct-handler still produce effects, which is why they are excluded. inventory.selected_safety_claim.includes_unprotected_routes is false.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/benchmark/route_inventory.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/qualification.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/probe/summary.json"
+      ]
+    },
+    {
+      "criterion": "Code fixes are isolated and accompanied by meaningful boundary regressions; failures remain recorded.",
+      "status": "met",
+      "explanation": "No production source files were modified; this task may only write declared outputs. Isolated unapplied adapters are recorded in mediation_changes.md: proof-capability/UCAN binding, canonical Profile D/multiformats gap, MCPServer/anyio gap, shared ExecutionPermit ledger, and wrapping ReceiptError from forged from_dict. Each has a retained boundary regression. Failures and dependency gaps remain in raw.jsonl; selected ENFORCE cases produced zero forbidden effects on deny/unknown/context-mutation.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/patches/mediation_changes.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/outputs/results/mediation/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/qualify_mediation.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/validate_mediation.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/qualify_mediation.py"
+      ],
+      "completed_at": "2026-09-12T02:17:50.058788+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/qualify.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-011/qualify_mediation.py",
+      "started_at": "2026-09-12T02:17:49.056899+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-011/validate_mediation.py"
+      ],
+      "completed_at": "2026-09-12T02:17:50.091779+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-011/validate_mediation.py",
+      "started_at": "2026-09-12T02:17:50.059009+00:00"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "41.0.7",
+    "cryptography_origin": "/usr/lib/python3/dist-packages/cryptography/__init__.py",
+    "HAVE_CRYPTO_ED25519": true,
+    "datasets_auth_available": true,
+    "canonical_profile_d_available": false,
+    "anyio": false,
+    "multiformats": false,
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "bounded_export_handler": "bounded-export-handler/v2",
+    "empirical_benchmark_result": false,
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "authorization.py_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+    "ucan.py_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+    "execution_permit.py_sha256": "d1ef6113cb915c64759dcb1614daad4f0979e2da1c816f8222deb76a4f506522",
+    "future_gates": [
+      "A3 scored arm remains unrun until canonical Profile D is available or an approved digest-bound evaluator is deployed.",
+      "A4 combined proof-capability/UCAN/durable-consumption composition remains uncomposed.",
+      "Restart-safe consumption is LA-012.",
+      "MCPServer tools/call process import remains blocked without anyio; AuthorizationGate is the executed check."
+    ]
+  }
+}
