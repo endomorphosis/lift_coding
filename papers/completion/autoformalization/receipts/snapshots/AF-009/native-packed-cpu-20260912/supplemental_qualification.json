@@ -1,0 +1,42 @@
+{
+  "schema": "paper-supplemental-engineering-qualification/v1",
+  "task_id": "AF-009",
+  "recorded_at": "2026-09-12T05:12:18.725948+00:00",
+  "status": "qualified_cpu_engineering_only",
+  "original_receipt_sha256": "0c311f692abdf84ad2777ec2c49a052e5e6258e7fc8bb7b92ff782201f875b9b",
+  "native_task_mutated": false,
+  "historical_completion_receipt_archived": true,
+  "corrected_paper_receipt_proposed": true,
+  "research_runs": 0,
+  "human_annotations": 0,
+  "commands": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_cpu_modules_v2.json": "b6f2da5b025d45ef4ce44cd2a421aebc04ba58e44bef6b06910471b7788e64e5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.json": "0f596ca3303c69252c6e7126df70f3536a466fd5bb9752a1dc6ec5907c054319",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_gradient_witness_v2.json": "5c63a4ab6a898b8a3da05bc433aa35459cf07cb313f6f8e11b28d8e35983a5b9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.json": "37f29b9e0b62644ab74dbea47e5cea7de1ba6be5519b772b9ff86cd4630a2675",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_update_groups.json": "f6b7d73ec487107fce09a63b417ba438e35ffe397cb147bf68387b9a6629a787"
+  },
+  "qualified_native_files": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "candidate_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+      "original_sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py": {
+      "candidate_sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+      "original_sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py": {
+      "candidate_sha256": "b80b4c1318c12f74abb6cf265f2c0060d539cea047048875b704250e7d6e7a56",
+      "original_sha256": null
+    }
+  },
+  "limitations": [
+    "Synthetic numerical engineering qualification only; no natural-corpus training, semantic labels, T0-T5 benchmark, fidelity, generalization or end-to-end theorem-proving result.",
+    "Actual outer trainer uses the same two synthetic examples as training and validation. Accepted epoch is a numerical guardrail fixture outcome, not heldout quality.",
+    "CUDA FP32/BF16 parity and GPU residency/performance remain unmeasured: four native CUDA tests explicitly skipped because no CUDA device was available.",
+    "Native counters with cuda/kernel/transfer names are logical packed instrumentation in these CPU runs; they are not measured GPU launches, timings, or traffic.",
+    "Host runtime availability is qualified here. Current provider-container visibility and runtime admission require separate qualification.",
+    "Original AF009 receipt and snapshots are archived byte-for-byte; old replica/nudge results are historical only. A corrected paper receipt is proposed; native task status/history are unchanged.",
+    "AF026 memory/channel admission, AF010 real route adapters, AF011 experiment runs, independent human annotations and final heldout access gates remain required."
+  ]
+}

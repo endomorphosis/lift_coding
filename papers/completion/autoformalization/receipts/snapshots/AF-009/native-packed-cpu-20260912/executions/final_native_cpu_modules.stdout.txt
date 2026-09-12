@@ -1,0 +1,13 @@
+..........................................ssss...                        [100%]
+=============================== warnings summary ===============================
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_state_transaction.py::test_rejected_projection_uses_no_whole_state_copy_and_keeps_identity
+  /home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source/ipfs_datasets_py/logic/integration/reasoning/proof_execution_engine.py:35: DeprecationWarning: integration.caching.proof_cache is deprecated. Import from ipfs_datasets_py.logic.common.proof_cache instead.
+    from ..caching.proof_cache import get_global_cache
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py:115: CUDA is unavailable
+SKIPPED [1] tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py:179: CUDA is unavailable
+SKIPPED [1] tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py:213: CUDA is unavailable
+SKIPPED [1] tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py:237: CUDA BF16 is unavailable
+45 passed, 4 skipped, 1 warning in 50.62s

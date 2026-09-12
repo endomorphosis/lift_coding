@@ -1,0 +1,50 @@
+{
+  "schema": "af-native-training-actual-command/v1",
+  "started_at": "2026-09-12T04:59:37.464163+00:00",
+  "argv": [
+    "/usr/bin/python3.12",
+    "-I",
+    "-B",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/probe_native_cpu.py",
+    "--native-source",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source"
+  ],
+  "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME": "/home/barberb",
+    "IPFS_AUTO_INSTALL": "false",
+    "IPFS_DATASETS_AUTO_INSTALL": "false",
+    "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+    "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+    "IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "limits": {
+    "wall_seconds": 150,
+    "cpu_seconds": 120,
+    "address_space_bytes": 17179869184,
+    "cpu_affinity": [
+      0,
+      1
+    ]
+  },
+  "source_snapshot_sha256": "1f90fa823a64b4a0fa38ace7f379d301c76e5a98aa1f06aaec01d3c20151be39",
+  "packed_source_sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+  "driver_sha256": "c3a4d84d9d930ccabd8991ef639dfe1dc9dd2913bce368a32077aaa07e04ef35",
+  "research_run": false,
+  "provider_invoked": false,
+  "exit_code": 0,
+  "elapsed_seconds": 2.787751089897938,
+  "finished_at": "2026-09-12T04:59:40.252711+00:00",
+  "logs": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/final_native_gradient_witness.stdout.txt": "b33f2d99d268e8139075ce3be45e71d95ad772ec64cce19f5b755437d1a2dc6f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/final_native_gradient_witness.stderr.txt": "133842c2bf35760d5f0d97d353e0554ca0b1e2cc0d8f35abc40b5d858095216a"
+  }
+}

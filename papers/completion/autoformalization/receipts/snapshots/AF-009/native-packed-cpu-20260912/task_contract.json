@@ -1,0 +1,32 @@
+{
+  "id": "AF-009",
+  "subgoal_id": "AF-S03",
+  "title": "Validate packed training numerics and explicit parameter updates",
+  "priority": "P0",
+  "depends_on": [
+    "AF-003",
+    "AF-007"
+  ],
+  "paper_evidence": [
+    "p. 4, \u00a74.2, Equation 5",
+    "pp. 18\u201319, App. J, Equations 12\u201314",
+    "p. 8, lines 333\u2013337"
+  ],
+  "description": "Run relevant existing CPU tests for active/masked objectives, globally normalized microbatches, zero norms, clipping, nonfinite rejection, transaction rollback and changed-row scatter. Check checkpoint reload and update-group activation. If suitable CUDA already exists, perform targeted CPU/FP32/BF16 parity before GPU research runs; otherwise record GPU unavailability and proceed with permitted CPU scope.",
+  "acceptance_criteria": [
+    "Actual test outputs and environment IDs are retained; skipped tests are labeled skipped.",
+    "A training update demonstrates nonzero admissible gradients and changed shared parameters; no-op paths remain explicit.",
+    "Equation normalization and SGD-style semantics match the current audited implementation or the manuscript is corrected."
+  ],
+  "deliverables": [
+    "papers/completion/autoformalization/evidence/training_correctness.json",
+    "papers/completion/autoformalization/config/training_backend.json"
+  ],
+  "suggested_code_paths": [
+    "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+    "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
+    "external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py",
+    "external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_checkpoint.py"
+  ],
+  "implementation_paths": []
+}

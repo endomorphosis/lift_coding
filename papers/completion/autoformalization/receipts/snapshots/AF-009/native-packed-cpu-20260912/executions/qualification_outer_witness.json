@@ -1,0 +1,57 @@
+{
+  "schema": "af-native-training-actual-command/v1",
+  "started_at": "2026-09-12T05:06:47.055102+00:00",
+  "argv": [
+    "/usr/bin/python3.12",
+    "-I",
+    "-B",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/probe_outer_packed_cpu.py",
+    "--native-source",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source"
+  ],
+  "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME": "/home/barberb",
+    "IPFS_AUTO_INSTALL": "false",
+    "IPFS_DATASETS_AUTO_INSTALL": "false",
+    "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+    "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+    "IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "limits": {
+    "wall_seconds": 150,
+    "cpu_seconds": 120,
+    "address_space_bytes": 17179869184,
+    "cpu_affinity": [
+      0,
+      1
+    ]
+  },
+  "source_snapshot_sha256": "1f90fa823a64b4a0fa38ace7f379d301c76e5a98aa1f06aaec01d3c20151be39",
+  "packed_source_sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+  "native_sources": {
+    "modal_autoencoder.py": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+    "modal_autoencoder_cuda.py": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5"
+  },
+  "driver_sha256": "011907e4142cd0a86faa52b31c3aa47bba6b092eb0141958359e711e6b592f5d",
+  "probe_sha256": "934675da69d1453fd55139559caad5c25cb7b124c1c90d40a892ddefde42324a",
+  "test_sources": {},
+  "research_run": false,
+  "provider_invoked": false,
+  "exit_code": 0,
+  "elapsed_seconds": 10.341274653095752,
+  "finished_at": "2026-09-12T05:06:57.398236+00:00",
+  "native_sources_unchanged": true,
+  "logs": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/qualification_outer_witness.stdout.txt": "772279693265a874df7a8b77e32c4f39788101a2cd11932976b846a42716352e",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/qualification_outer_witness.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

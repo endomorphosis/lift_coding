@@ -2,149 +2,345 @@
   "schema": "paper-task-evidence/v1",
   "task_id": "AF-009",
   "status": "complete",
-  "completed_at": "2026-09-11T23:52:52.438856+00:00",
+  "completed_at": "2026-09-12T05:12:18.838872+00:00",
   "source_versions": {
-    "python": {
+    "datasets_original_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "qualified_native_patch_sha256": "4d75e6890750fccfe8a45ef53f1a8a0e1d2a4bce8e60adbacc1b190cd05906fd",
+    "native_files": {
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+        "candidate_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+        "original_sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py": {
+        "candidate_sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+        "original_sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e"
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py": {
+        "candidate_sha256": "b80b4c1318c12f74abb6cf265f2c0060d539cea047048875b704250e7d6e7a56",
+        "original_sha256": null
+      }
+    },
+    "frozen_source_inventory": {
+      "artifact": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/source_snapshot.json",
+      "sha256": "1f90fa823a64b4a0fa38ace7f379d301c76e5a98aa1f06aaec01d3c20151be39"
+    },
+    "runtime": {
+      "schema": "af-host-runtime-prerequisite-inspection/v1",
+      "observed_at": "2026-09-12T05:03:24.609869+00:00",
+      "machine": "aarch64",
       "interpreter": "/usr/bin/python3.12",
-      "version": "Python 3.12.3",
-      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+      "interpreter_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+      "torch": {
+        "version": "2.13.0+cu130",
+        "path": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+        "module_sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+        "cuda_available": true
+      },
+      "numpy": {
+        "version": "1.26.4",
+        "path": "/home/barberb/.local/lib/python3.12/site-packages/numpy/__init__.py",
+        "module_sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+      },
+      "native_checker_versions": {
+        "lean": {
+          "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+          "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+          "argv": [
+            "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stdout": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)\n",
+          "stderr": "",
+          "semantic_route_qualified_by_version": false
+        },
+        "z3": {
+          "path": "/home/barberb/.local/bin/z3",
+          "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+          "argv": [
+            "/home/barberb/.local/bin/z3",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stdout": "Z3 version 4.15.4 - 64 bit\n",
+          "stderr": "",
+          "semantic_route_qualified_by_version": false
+        },
+        "cvc5": {
+          "path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+          "sha256": "85827e46576d68570c520a2b2927fe1d260d0bfb2b93919f53f50ed29ee1e419",
+          "argv": [
+            "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stdout": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]\ncompiled with GCC version 11.4.0\non Feb 26 2026 01:24:28\n\nCopyright (c) 2009-2025 by the authors and their institutional\naffiliations listed at https://cvc5.github.io/people.html\n\ncvc5 is open-source and is covered by the BSD license (modified).\n\nTHIS SOFTWARE IS PROVIDED AS-IS, WITHOUT ANY WARRANTIES.\nUSE AT YOUR OWN RISK.\n\nThis version of cvc5 is linked against the following non-(L)GPL'ed\nthird party libraries.\n\n  CaDiCaL - Simplified Satisfiability Solver\n  See https://github.com/arminbiere/cadical for copyright information.\n\n  Editline Library\n  See https://thrysoee.dk/editline\n  for copyright information.\n\n  SymFPU - The Symbolic Floating Point Unit\n  See https://github.com/martin-cs/symfpu/tree/CVC4 for copyright information.\n\nThis version of cvc5 is linked against the following third party\nlibraries covered by the LGPLv3 license.\nSee licenses/lgpl-3.0.txt for more information.\n\n  GMP - Gnu Multi Precision Arithmetic Library\n  See http://gmplib.org for copyright information.\n\n  LibPoly polynomial library\n  See https://github.com/SRI-CSL/libpoly for copyright and\n  licensing information.\n\ncvc5 is statically linked against these libraries. To recompile\nthis version of cvc5 with different versions of these libraries\nfollow the instructions on https://github.com/cvc5/cvc5/blob/main/INSTALL.md\n\nSee the file COPYING (distributed with the source code, and with\nall binaries) for the full cvc5 copyright, licensing, and (lack of)\nwarranty information.\n\n",
+          "stderr": "",
+          "semantic_route_qualified_by_version": false
+        }
+      },
+      "cached_embedding_model": {
+        "repository": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "path": "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 466247,
+            "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+          },
+          "tokenizer_config.json": {
+            "bytes": 350,
+            "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+          },
+          "sentence_bert_config.json": {
+            "bytes": 53,
+            "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+          },
+          "modules.json": {
+            "bytes": 349,
+            "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+          },
+          "model.safetensors": {
+            "bytes": 90868376,
+            "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+          },
+          "README.md": {
+            "bytes": 10502,
+            "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+          },
+          "config_sentence_transformers.json": {
+            "bytes": 116,
+            "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+          },
+          "vocab.txt": {
+            "bytes": 231508,
+            "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+          },
+          "special_tokens_map.json": {
+            "bytes": 112,
+            "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+          },
+          "config.json": {
+            "bytes": 612,
+            "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+          }
+        }
+      },
+      "scope": "host read-only inventory and version commands only; no provider-container availability, formal verification, model-inference or benchmark claim"
     },
-    "packed_implementation": {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
-      "sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
-      "schema_version": "modal-autoencoder-packed-cuda-training-v1"
-    },
-    "autoencoder": {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
-      "sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
-      "architecture_version": "proof_aware_auxiliary_heads_v2"
-    },
-    "batching": {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_batching.py",
-      "sha256": "06645b2f24f9ac9ba93d955448c3770b26a5952916208af541e570ee0649e8cf"
-    },
-    "checkpoint": {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py",
-      "sha256": "f8e7baf903db781dfd0cb3127e296a0329bff83f55e373630a26094c48f64b63"
-    },
-    "state_transaction": {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
-      "sha256": "90cbbd8a7cf864e7c0dd0b1799f6936f31ec509168f21661e38feee2bcb6c1a7"
-    },
-    "auditor": {
-      "source": "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py",
-      "sha256": "c51335f1ac10bad1a9c596391fbf7be375f5e96e1325fdc0b1813f825f3e9a1f",
-      "standard_library_packed_replica": true
-    },
-    "empirical_execution": "CPU numerical qualification only; torch/CUDA packed kernels unrun; A-E/T0-T5 remain unrun"
+    "original_paper_receipt_sha256": "0c311f692abdf84ad2777ec2c49a052e5e6258e7fc8bb7b92ff782201f875b9b"
   },
   "artifacts": {
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py": "c51335f1ac10bad1a9c596391fbf7be375f5e96e1325fdc0b1813f825f3e9a1f",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json": "b2842a03af46a6ff8bb8f097e7a68c98e540ce2cd9a2b029b4510cb9eeb52b72",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json": "37539c5f034b25db5c4700750678967ff8f8e2c345857433e01a03b26de427be",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.meta.json": "44842da28e623fa1b24fa7590502ddd765c522aea00b42ad3a72bf519c0c665e",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log": "df909b07e62cff8006fed0b472a42fbd69b32d15589ffc3d7c4d0250f1aa7165",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.meta.json": "3ba9bded68166637296f8508a08cbef48b7ba4465be1ba92b42d115669c9407a",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stdout.log": "087f26a36ac76fbcd0fd2fc20702b9bee26e9889ad547a1c866e144b7550e62b"
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/config/training_backend.json": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/evidence/training_correctness.json": "839f7ac1fbf51a8af4156cae9c811de424746e68773b996616790438247e8e37",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_cpu_tests.json": "dc6961180783577073c0c9a062db5fe00cfd7c39ce10d4b961e0e58500ac9558",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_cpu_tests.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_cpu_tests.stdout.txt": "217a9bffb3ec2f1a82e2596fde14ecc2ab67c650260653707b92a0234b5ee3e3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_cpu_tests_v2.json": "d9cdcb1491f5ea24917fde8cbb68a59ea4dbce6ce78f4f2be0a431a0b056f142",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_cpu_tests_v2.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_cpu_tests_v2.stdout.txt": "631436f9acf6a3866a1e2beafac0ad96a9703e26c0692c1adf04cefe028d1480",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_final_controls.json": "6bf1b77f465eb7140191fa846a290f0cfdc487fae54746dcbd95ae18cacca944",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_final_controls.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_final_controls.stdout.txt": "7ae6792b481913bb300dae06925aa67ef69f740b9ef4b76ffc62bd4df044316e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/corrected_cpu_tests_v1.json": "ea7824f4c5760046fa9e5c9cf5da122a43e5a9c7d5e8d917a2d4c5cdb4ebae6f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/corrected_cpu_tests_v1.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/corrected_cpu_tests_v1.stdout.txt": "d3998c164f4fb8c0958ba643845015a0dab23421989e3c9a0cd9644625fef1dc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/final_native_cpu_modules.json": "c59e74f1862c7f5abddeafb8019349a08d7da5f649880b6b2c7812b823fc726d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/final_native_cpu_modules.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/final_native_cpu_modules.stdout.txt": "37a7257f3e8b9e6d92e7de4eed2b0d1d5d59de6bfae7976c01147e93693e22de",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/final_native_gradient_witness.json": "39a0d6c6094b6b1498e69cb4dcf8dc27b698ef985d0436cad94c665fa08913fc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/final_native_gradient_witness.stderr.txt": "133842c2bf35760d5f0d97d353e0554ca0b1e2cc0d8f35abc40b5d858095216a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/final_native_gradient_witness.stdout.txt": "b33f2d99d268e8139075ce3be45e71d95ad772ec64cce19f5b755437d1a2dc6f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/outer_packed_cpu_all_candidates.json": "69460f4503976452411d7cf2ca24c3e418187a1a48aac242aede34c86996e90f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/outer_packed_cpu_all_candidates.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/outer_packed_cpu_all_candidates.stdout.txt": "6eeef8013e24e2322a5755ac7ce314d71d8547af5bd404f41e426c9e07606d30",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/outer_packed_cpu_first.json": "72d0d2c89a9714c68e74c591d5e5b706717c66818989dd65c2a20991e6d4e783",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/outer_packed_cpu_first.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/outer_packed_cpu_first.stdout.txt": "2765a50ac7fb759ef4acbc5f04e2826ed674a369a62af5d13f07c58972e64f85",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_cpu_modules_v2.json": "b6f2da5b025d45ef4ce44cd2a421aebc04ba58e44bef6b06910471b7788e64e5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_cpu_modules_v2.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_cpu_modules_v2.stdout.txt": "7b048d6822c143fb18c3c1dca296fc5fe8704d559c1fc54cedc26c129207e53e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.json": "0f596ca3303c69252c6e7126df70f3536a466fd5bb9752a1dc6ec5907c054319",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stdout.txt": "4ae532ffb5c0321a0b0cbd4002fdfc62cbe937ef5017bb229816bc2de67ce655",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_gradient_witness_v2.json": "5c63a4ab6a898b8a3da05bc433aa35459cf07cb313f6f8e11b28d8e35983a5b9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_gradient_witness_v2.stderr.txt": "133842c2bf35760d5f0d97d353e0554ca0b1e2cc0d8f35abc40b5d858095216a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_gradient_witness_v2.stdout.txt": "b33f2d99d268e8139075ce3be45e71d95ad772ec64cce19f5b755437d1a2dc6f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.json": "37f29b9e0b62644ab74dbea47e5cea7de1ba6be5519b772b9ff86cd4630a2675",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.stdout.txt": "772279693265a874df7a8b77e32c4f39788101a2cd11932976b846a42716352e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_update_groups.json": "f6b7d73ec487107fce09a63b417ba438e35ffe397cb147bf68387b9a6629a787",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_update_groups.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_update_groups.stdout.txt": "2f717867ddaaf34abecde809a533c23d67578d2f53678c740b591a5a8f9eaa35",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/modal_autoencoder.py": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/modal_autoencoder_cuda.py": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/config/training_backend.json": "b2842a03af46a6ff8bb8f097e7a68c98e540ce2cd9a2b029b4510cb9eeb52b72",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/evidence/training_correctness.json": "37539c5f034b25db5c4700750678967ff8f8e2c345857433e01a03b26de427be",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/AF-009.json": "0c311f692abdf84ad2777ec2c49a052e5e6258e7fc8bb7b92ff782201f875b9b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py": "c51335f1ac10bad1a9c596391fbf7be375f5e96e1325fdc0b1813f825f3e9a1f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json": "b2842a03af46a6ff8bb8f097e7a68c98e540ce2cd9a2b029b4510cb9eeb52b72",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json": "37539c5f034b25db5c4700750678967ff8f8e2c345857433e01a03b26de427be",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.meta.json": "44842da28e623fa1b24fa7590502ddd765c522aea00b42ad3a72bf519c0c665e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log": "df909b07e62cff8006fed0b472a42fbd69b32d15589ffc3d7c4d0250f1aa7165",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.meta.json": "3ba9bded68166637296f8508a08cbef48b7ba4465be1ba92b42d115669c9407a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stdout.log": "087f26a36ac76fbcd0fd2fc20702b9bee26e9889ad547a1c866e144b7550e62b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/probe_native_cpu_v1.py": "b167698e7bd1282e5b2d31278c4f1f9ac7f4fd5b2270d76342994218a6b91618",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/run_qualification_v1.py": "c3a4d84d9d930ccabd8991ef639dfe1dc9dd2913bce368a32077aaa07e04ef35",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/run_qualification_v2.py": "cd2e7c8db93ccd6e51b39db0f6c06c9e2a3501012d7c7685c7763a86c1b53d01",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/run_qualification_v3.py": "fe462b3e5d1e96723fc16f2ec87daf1689fca5c0e51664654adf77c2963f0634",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/test_modal_autoencoder_packed_cpu_inner_final.py": "54525c24d72ed6654e639298ee1cbf7cb3015669240a193e645622419632f69b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/test_modal_autoencoder_packed_cpu_v1.py": "df58b599c09b668e7716f4daaa77160f21ecfef4c4cb7d67e103d23ed75f6afe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/historical/test_modal_autoencoder_packed_cpu_v2.py": "ddde62a6145f14766ab996f74a10ad6d7342533d27c4042d6d15557f44d27d08",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/inspect_runtime_prerequisites.py": "788fd8b10dcf4e61cf2b4fbf4b423f539d450a35e17f3467cc93fdd1fccf2568",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/native.patch": "4d75e6890750fccfe8a45ef53f1a8a0e1d2a4bce8e60adbacc1b190cd05906fd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/native_files.json": "118d0b4968a8aa06e6a3de39053015a39c840faa304cc1c58c7919ae873ef256",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/probe_native_cpu.py": "6fb3aa736defe6a1f4080c2a6439c7146e1873ca7f2af272688668914afe8ec4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/probe_outer_packed_cpu.py": "934675da69d1453fd55139559caad5c25cb7b124c1c90d40a892ddefde42324a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/run_qualification.py": "011907e4142cd0a86faa52b31c3aa47bba6b092eb0141958359e711e6b592f5d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/runtime_prerequisites.json": "06d4a392be6d9acc3bafe60526449586d44778a3f197177ba79cb4d01260864f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/runtime_prerequisites_actual.json": "1d94cf32ec697857863bbd80fd45c2dfdb051e2178eb6fef61f0ea94408c5b04",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/runtime_prerequisites_actual.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/source_snapshot.json": "1f90fa823a64b4a0fa38ace7f379d301c76e5a98aa1f06aaec01d3c20151be39",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/supplemental_qualification.json": "02c285ed1787dca360bd45ddc9f505c5695073076f24d2b86140b3425a204db4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/task_contract.json": "d832bfa99458fcb5d91cbd338b3be8c0a5540b63512bf681b4bf01f0f90ea595"
   },
   "outputs": {
-    "papers/completion/autoformalization/evidence/training_correctness.json": "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
-    "papers/completion/autoformalization/config/training_backend.json": "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json"
+    "papers/completion/autoformalization/evidence/training_correctness.json": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/evidence/training_correctness.json",
+    "papers/completion/autoformalization/config/training_backend.json": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/config/training_backend.json"
   },
   "criteria": [
     {
       "criterion": "Actual test outputs and environment IDs are retained; skipped tests are labeled skipped.",
       "status": "met",
-      "explanation": "Sealed-PATH /usr/bin/python3.12 evidence retains interpreter, PATH, HOME, uname, and source SHA-256 pins. Existing CPU tests executed: 7 state-transaction, 14 checkpoint, 8 batching, and 2 update-group tests passed. Packed CUDA training and residency modules are labeled skipped because torch is absent and numpy C-extensions need libblas.so.3.",
+      "explanation": "Actual /usr/bin/python3.12 host execution retained 49 passed and 4 explicitly skipped CUDA tests, complete literal commands/stdout/stderr/source hashes and Torch/NumPy/checker environment inventory. Fifteen new tests execute actual packed CPU/outer paths; 34 existing CPU tests pass. Four CUDA/BF16 tests skip because the device is unavailable.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py"
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/evidence/training_correctness.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/config/training_backend.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stdout.txt"
       ]
     },
     {
       "criterion": "A training update demonstrates nonzero admissible gradients and changed shared parameters; no-op paths remain explicit.",
       "status": "met",
-      "explanation": "A stdlib replica of the packed _loss_chunk/clip/SGD path produced gradient_norm 0.4177, finite-difference agreement to 3e-11, and changed shared embedding and family rows used by three samples. AdaptiveModalAutoencoder python_sparse_batch on two legal samples changed shared family-embedding rows (deontic, conditional_normative, frame) and compiler-quality family logits, then reloaded a compact checkpoint. No-op paths remain explicit: learning-rate 0 leaves parameters unchanged; empty-blueprint packed CE uses masked.mean() and is not learning progress; nonfinite packed metrics reject the update; fully masked CE is 0; CUDA admission is torch_unavailable.",
+      "explanation": "The actual native apply_packed_projection_update CPU route produces finite nonzero autograd gradients and changed shared parameters in the same invocation. Its explicit outer train_generalizable_projection(packed_cpu) route accepted one synthetic guarded epoch with no historical nudge fallback. Same-step parameter witnesses check theta_new=theta_initial-eta*clipped_gradient; per-sample family_logits/decoded_embeddings remain unchanged. Zero-rate/masked no-ops, failure rollback and unavailable-runtime rejection are tested. This is synthetic numerical qualification, not heldout fidelity or research training.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log"
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/evidence/training_correctness.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/config/training_backend.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stdout.txt",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.stdout.txt"
       ]
     },
     {
       "criterion": "Equation normalization and SGD-style semantics match the current audited implementation or the manuscript is corrected.",
       "status": "met",
-      "explanation": "Inspected modal_autoencoder_cuda.py (sha256 40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e) divides masked CE and reconstruction by total sample count n, guards cosine on nonzero norms, rejects nonfinite packed metrics, clips gradient norm, and applies Theta <- Theta - eta * clipped_grad with eta in [0,1] and no Adam moments. That matches Equations 5 and 12-14 and App. J. Empty-blueprint forward-only mean reduction is documented as a no-op, not a manuscript error. GPU/BF16 parity is unmeasured because CUDA is unavailable.",
+      "explanation": "Six failing controls on unchanged original packed source expose repeated microbatch L2, masked no-op NaN/unchanged-row scatter and nonfinite-gradient admission. Corrected actual implementation uses global-N masked/reconstruction losses, allocates parameter-normalized L2 once across microbatches, rejects nonfinite losses/gradient norms, clips and performs bounded SGD without moments, scattering changed FP32 rows only. Uneven accumulation and exact checkpoint reload pass. This matches the current manuscript equations 13/14 and page19; CUDA parity remains unmeasured.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/evidence/training_correctness.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/config/training_backend.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py"
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/evidence/training_correctness.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/current_outputs/config/training_backend.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stdout.txt",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/native.patch",
+        "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/baseline_final_controls.stdout.txt"
       ]
     }
   ],
   "commands": [
     {
       "argv": [
-        "env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af009",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "PYTHONPATH=external/ipfs_datasets",
-        "IPFS_AUTO_INSTALL=false",
-        "IPFS_DATASETS_AUTO_INSTALL=false",
-        "CUDA_VISIBLE_DEVICES=",
         "/usr/bin/python3.12",
-        "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py",
-        "--root",
-        ".",
-        "--correctness",
-        "papers/completion/autoformalization/evidence/training_correctness.json",
-        "--backend",
-        "papers/completion/autoformalization/config/training_backend.json"
+        "-I",
+        "-B",
+        "-c",
+        "import sys; sys.path[:0]=[sys.argv.pop(1), '/home/barberb/.local/lib/python3.12/site-packages']; import torch; torch.set_num_threads(2); torch.set_num_interop_threads(2); import pytest; raise SystemExit(pytest.main(sys.argv[1:]))",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+        "-c",
+        "/dev/null",
+        "--rootdir=/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "-ra",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_state_transaction.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_checkpoint.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_batching.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_residency.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py::test_feature_update_groups_prioritize_structural_fallback_over_noisy_codec_keys",
+        "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py::test_feature_logit_clip_bounds_large_feature_aggregates"
       ],
-      "cwd": ".",
-      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-009/audit_packed_training.py",
+      "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME": "/home/barberb",
+        "IPFS_AUTO_INSTALL": "false",
+        "IPFS_DATASETS_AUTO_INSTALL": "false",
+        "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+        "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+        "IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI": "0",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "CUDA_VISIBLE_DEVICES": "",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      },
       "exit_code": 0,
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stdout.log",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/audit_packed_training.stderr.log",
-      "started_at": "2026-09-11T23:51:11.998929+00:00",
-      "finished_at": "2026-09-11T23:51:27.005745+00:00",
-      "execution_kind": "sealed CPU packed-numerics audit, native python_sparse_batch update, and existing torch-free unit tests"
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stdout.txt",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.stderr.txt",
+      "started_at": "2026-09-12T05:06:48.231527+00:00",
+      "finished_at": "2026-09-12T05:07:44.154513+00:00",
+      "execution_kind": "operator-executed actual staged native CPU qualification; no paid provider or natural research run",
+      "retained_execution_record": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_final_modules.json"
     },
     {
       "argv": [
-        "env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af009",
-        "PYTHONDONTWRITEBYTECODE=1",
         "/usr/bin/python3.12",
-        "-c",
-        "import json, pathlib, sys\npaths = sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding=\"utf-8\"))\n    print(path, \"ok\")\n",
-        "papers/completion/autoformalization/evidence/training_correctness.json",
-        "papers/completion/autoformalization/config/training_backend.json"
+        "-I",
+        "-B",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/probe_outer_packed_cpu.py",
+        "--native-source",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source"
       ],
-      "cwd": ".",
+      "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME": "/home/barberb",
+        "IPFS_AUTO_INSTALL": "false",
+        "IPFS_DATASETS_AUTO_INSTALL": "false",
+        "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+        "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+        "IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI": "0",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "CUDA_VISIBLE_DEVICES": "",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      },
       "exit_code": 0,
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stdout.log",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-009/logs/check_json.stderr.log",
-      "started_at": "2026-09-11T23:52:00.449099+00:00",
-      "finished_at": "2026-09-11T23:52:00.492409+00:00",
-      "execution_kind": "JSON parse pin of AF-009 outputs"
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.stdout.txt",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.stderr.txt",
+      "started_at": "2026-09-12T05:06:47.055102+00:00",
+      "finished_at": "2026-09-12T05:06:57.398236+00:00",
+      "execution_kind": "operator-executed actual staged native CPU qualification; no paid provider or natural research run",
+      "retained_execution_record": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/executions/qualification_outer_witness.json",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/probe_outer_packed_cpu.py"
     }
   ],
   "limitations": [
-    "torch is not importable in the sealed validation interpreter.",
-    "numpy C-extensions require libblas.so.3, which is absent; packed CUDA tests are skipped, not passed.",
-    "CPU/FP32/BF16 CUDA parity is unmeasured.",
-    "The packed autodiff demonstration is a stdlib replica of the audited _loss_chunk/clip/SGD formulas because apply_packed_projection_update cannot run without torch.",
-    "python_sparse_batch is a real shared-parameter CPU update and is not packed autodiff.",
-    "No A-E or T0-T5 research training ran.",
-    "This receipt is provenance validation, not independent scientific replication."
+    "Synthetic numerical engineering qualification only; no natural-corpus training, semantic labels, T0-T5 benchmark, fidelity, generalization or end-to-end theorem-proving result.",
+    "Actual outer trainer uses the same two synthetic examples as training and validation. Accepted epoch is a numerical guardrail fixture outcome, not heldout quality.",
+    "CUDA FP32/BF16 parity and GPU residency/performance remain unmeasured: four native CUDA tests explicitly skipped because no CUDA device was available.",
+    "Native counters with cuda/kernel/transfer names are logical packed instrumentation in these CPU runs; they are not measured GPU launches, timings, or traffic.",
+    "Host runtime availability is qualified here. Current provider-container visibility and runtime admission require separate qualification.",
+    "Original AF009 receipt and snapshots are archived byte-for-byte; old replica/nudge results are historical only. A corrected paper receipt is proposed; native task status/history are unchanged.",
+    "AF026 memory/channel admission, AF010 real route adapters, AF011 experiment runs, independent human annotations and final heldout access gates remain required."
   ],
-  "completion_scope": "Packed CPU numerical qualification, explicit no-op/skip labeling, native python_sparse_batch parameter change, checkpoint reload, transaction rollback, and equation/SGD audit. GPU research runs remain unauthorized."
+  "completion_scope": "Actual native packed CPU numerical qualification and explicit guarded outer-trainer integration; no natural-corpus/human-gold/research/CUDA result.",
+  "native_task_state_changed": false,
+  "original_history_preserved": true
 }

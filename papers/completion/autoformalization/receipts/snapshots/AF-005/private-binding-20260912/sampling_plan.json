@@ -1,0 +1,38 @@
+{
+  "schema": "af005-private-annotation-sampling-plan/v1",
+  "frozen_at": "2026-09-12T05:15:42.203548+00:00",
+  "outcomes_at_freeze": {
+    "human_labels": 0,
+    "candidate_outputs_inspected": false,
+    "source_bodies_inspected_by_model": false
+  },
+  "target_unique_units": 100,
+  "target_operational_groups": 20,
+  "population_unique_units": 1913,
+  "unit_identity": "AF004 normalized_source_unit_sha256; aliases are one unit, never duplicate annotation units",
+  "stratum": "unchanged AF004 connected component; every one of20 final-test components included",
+  "allocation": "Start n_h=1 per component. Allocate remaining80 by Hamilton largest remainder proportional to (N_h-1), bounded by N_h. Remainder ties use domain-separated HMAC group order. No retries or outcome substitutions.",
+  "randomization": "Within each component, take lowest domain-separated HMAC-SHA256 ranks of canonical unique-unit digests, keyed by the existing private partition salt; tie by full unit digest. First frozen protocol seed104729 is included in canonical message. Partition salt and memberships never change.",
+  "selection_domain": "AF005-independent-annotation-final-v1",
+  "primary_estimand": "finite-population unit mean over the frozen1913 unique final units; not equal-group mean",
+  "weights": {
+    "inclusion_probability": "n_h/N_h",
+    "inverse_probability_weight": "N_h/n_h",
+    "estimator": "sum_h (N_h/n_h) sum_selected_y / 1913",
+    "no_missing_labels_as_failures": true,
+    "evaluation_eligibility": "false until actual independent adjudication and all scientific/execution gates pass"
+  },
+  "coverage": "Retain all100 selected units and all denominator statuses; no outcome-driven replacement. Fail if population/group/capacity constraints differ.",
+  "uncertainty": "Preregistered source-family/time-group cluster bootstrap10000 resamples must retain actual group correlation and unequal weights; report macro-edition sensitivity separately. Twenty operational components are not20 independent publishers/editions; no power or precision guarantee.",
+  "slot_mapping": "Public100 provisional templates are retained unchanged. New private bound packet IDs supersede only provisional membership; annotate capacity/reallocation provenance explicitly.",
+  "release": "Private owner-only packets for authorized independent annotation. No provider workspace/Git export, no candidate/teacher/prover output or invented labels.",
+  "source_bindings": {
+    "private_partition_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126",
+    "private_final_source_file_sha256": "7cf104505334f530937dd6a8304dd916e632f2ba79b01075b7d68ef52e6e730f",
+    "guidelines_sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+    "public_packets_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+    "public_gold_templates_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c"
+  }
+}

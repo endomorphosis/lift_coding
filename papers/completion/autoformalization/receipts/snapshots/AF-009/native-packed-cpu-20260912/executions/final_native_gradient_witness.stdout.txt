@@ -1,0 +1,90 @@
+{
+  "torch_version": "2.13.0+cu130",
+  "torch_file": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+  "cuda_available": false,
+  "implementation_file": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+  "report": {
+    "activation_dtype": "torch.float32",
+    "admitted": true,
+    "applied": true,
+    "clipped_gradient_norm": 2.4547712802886963,
+    "fallback_reason": "",
+    "gradient_accumulation_steps": 1,
+    "gradient_norm": 2.4547712802886963,
+    "kernel_launch_count": 26,
+    "loss_dtype": "torch.float32",
+    "losses": {
+      "cosine": 0.8038837909698486,
+      "cross_entropy": 2.3025851249694824,
+      "guarded_auxiliary": 0.0,
+      "l2": 0.0,
+      "legal_ir_cross_entropy": 1.7917594909667969,
+      "reconstruction": 0.2755480408668518,
+      "total": 4.771834373474121
+    },
+    "mixed_precision_checked": true,
+    "mixed_precision_safe": false,
+    "optimizer_state_resident": true,
+    "optimizer_step": 1,
+    "parameter_count": 31494,
+    "parameter_dtype": "torch.float32",
+    "resident_cache_hit": false,
+    "schema_version": "modal-autoencoder-cuda-residency-v2",
+    "synchronization_count": 4,
+    "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+    "transfer_bytes": 420280,
+    "transfer_count": 5,
+    "update_targets": [
+      "family_logits",
+      "decoded_embedding",
+      "legal_ir_view_logits"
+    ]
+  },
+  "same_step_parameter_witness": [
+    {
+      "component": "compiler_quality_family_logits",
+      "parameter_count": 90,
+      "gradient_finite": true,
+      "gradient_squared_norm": 0.033822931349277496,
+      "changed_parameter_count": 90,
+      "sgd_max_absolute_error": 0.0
+    },
+    {
+      "component": "family_embedding_weights",
+      "parameter_count": 72,
+      "gradient_finite": true,
+      "gradient_squared_norm": 1.0821020603179932,
+      "changed_parameter_count": 72,
+      "sgd_max_absolute_error": 0.0
+    },
+    {
+      "component": "feature_legal_ir_view_logits",
+      "parameter_count": 31326,
+      "gradient_finite": true,
+      "gradient_squared_norm": 4.791665077209473,
+      "changed_parameter_count": 31326,
+      "sgd_max_absolute_error": 0.0
+    },
+    {
+      "component": "legal_ir_view_logits",
+      "parameter_count": 6,
+      "gradient_finite": true,
+      "gradient_squared_norm": 0.11831226944923401,
+      "changed_parameter_count": 6,
+      "sgd_max_absolute_error": 0.0
+    }
+  ],
+  "profile_counter_scope": "native packed logical instrumentation; CPU run is not GPU transfer/kernel measurement",
+  "changed_components": [
+    "compiler_quality_family_logits",
+    "feature_legal_ir_view_logits",
+    "family_embedding_weights",
+    "legal_ir_view_logits"
+  ],
+  "touched_rows": 5245,
+  "before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+  "after_sha256": "acb993ba95a2c1735bc29fc42c125fe7887887f38dd09b93107c7dfd63909587",
+  "synthetic_inputs_only": true,
+  "input_embedding": "native existing mock:stable-sha256 test fixture",
+  "research_measurement": false
+}

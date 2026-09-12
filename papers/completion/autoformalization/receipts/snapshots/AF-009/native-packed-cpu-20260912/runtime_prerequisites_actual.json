@@ -1,0 +1,104 @@
+{
+  "schema": "af-host-runtime-prerequisite-inspection/v1",
+  "observed_at": "2026-09-12T05:03:24.609869+00:00",
+  "machine": "aarch64",
+  "interpreter": "/usr/bin/python3.12",
+  "interpreter_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "torch": {
+    "version": "2.13.0+cu130",
+    "path": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+    "module_sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+    "cuda_available": true
+  },
+  "numpy": {
+    "version": "1.26.4",
+    "path": "/home/barberb/.local/lib/python3.12/site-packages/numpy/__init__.py",
+    "module_sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+  },
+  "native_checker_versions": {
+    "lean": {
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+      "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)\n",
+      "stderr": "",
+      "semantic_route_qualified_by_version": false
+    },
+    "z3": {
+      "path": "/home/barberb/.local/bin/z3",
+      "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+      "argv": [
+        "/home/barberb/.local/bin/z3",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Z3 version 4.15.4 - 64 bit\n",
+      "stderr": "",
+      "semantic_route_qualified_by_version": false
+    },
+    "cvc5": {
+      "path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+      "sha256": "85827e46576d68570c520a2b2927fe1d260d0bfb2b93919f53f50ed29ee1e419",
+      "argv": [
+        "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]\ncompiled with GCC version 11.4.0\non Feb 26 2026 01:24:28\n\nCopyright (c) 2009-2025 by the authors and their institutional\naffiliations listed at https://cvc5.github.io/people.html\n\ncvc5 is open-source and is covered by the BSD license (modified).\n\nTHIS SOFTWARE IS PROVIDED AS-IS, WITHOUT ANY WARRANTIES.\nUSE AT YOUR OWN RISK.\n\nThis version of cvc5 is linked against the following non-(L)GPL'ed\nthird party libraries.\n\n  CaDiCaL - Simplified Satisfiability Solver\n  See https://github.com/arminbiere/cadical for copyright information.\n\n  Editline Library\n  See https://thrysoee.dk/editline\n  for copyright information.\n\n  SymFPU - The Symbolic Floating Point Unit\n  See https://github.com/martin-cs/symfpu/tree/CVC4 for copyright information.\n\nThis version of cvc5 is linked against the following third party\nlibraries covered by the LGPLv3 license.\nSee licenses/lgpl-3.0.txt for more information.\n\n  GMP - Gnu Multi Precision Arithmetic Library\n  See http://gmplib.org for copyright information.\n\n  LibPoly polynomial library\n  See https://github.com/SRI-CSL/libpoly for copyright and\n  licensing information.\n\ncvc5 is statically linked against these libraries. To recompile\nthis version of cvc5 with different versions of these libraries\nfollow the instructions on https://github.com/cvc5/cvc5/blob/main/INSTALL.md\n\nSee the file COPYING (distributed with the source code, and with\nall binaries) for the full cvc5 copyright, licensing, and (lack of)\nwarranty information.\n\n",
+      "stderr": "",
+      "semantic_route_qualified_by_version": false
+    }
+  },
+  "cached_embedding_model": {
+    "repository": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "path": "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "tokenizer.json": {
+        "bytes": 466247,
+        "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+      },
+      "tokenizer_config.json": {
+        "bytes": 350,
+        "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+      },
+      "sentence_bert_config.json": {
+        "bytes": 53,
+        "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+      },
+      "modules.json": {
+        "bytes": 349,
+        "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+      },
+      "model.safetensors": {
+        "bytes": 90868376,
+        "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+      },
+      "README.md": {
+        "bytes": 10502,
+        "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+      },
+      "config_sentence_transformers.json": {
+        "bytes": 116,
+        "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+      },
+      "vocab.txt": {
+        "bytes": 231508,
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "special_tokens_map.json": {
+        "bytes": 112,
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+      },
+      "config.json": {
+        "bytes": 612,
+        "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+      }
+    }
+  },
+  "scope": "host read-only inventory and version commands only; no provider-container availability, formal verification, model-inference or benchmark claim"
+}

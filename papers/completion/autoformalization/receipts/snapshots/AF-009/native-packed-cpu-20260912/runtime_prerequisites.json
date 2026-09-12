@@ -1,0 +1,61 @@
+{
+  "explicit_training_backend": {
+    "implemented": "train_generalizable_projection(..., projection_update_backend=\"packed_cpu\")",
+    "failure": "raises on unavailable/rejected packed update; no nudge fallback",
+    "selection_required_for_future_runs": true,
+    "legacy_auto_cpu_behavior": "unchanged native historical route"
+  },
+  "host_toolchain": {
+    "inventory": "papers/completion/autoformalization/receipts/snapshots/AF-009/native-packed-cpu-20260912/runtime_prerequisites_actual.json",
+    "torch": {
+      "version": "2.13.0+cu130",
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+      "module_sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+      "cuda_available": true
+    },
+    "numpy": {
+      "version": "1.26.4",
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/numpy/__init__.py",
+      "module_sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+    },
+    "native_checker_versions": {
+      "lean": {
+        "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+        "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      "z3": {
+        "path": "/home/barberb/.local/bin/z3",
+        "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "version": "Z3 version 4.15.4 - 64 bit"
+      },
+      "cvc5": {
+        "path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+        "sha256": "85827e46576d68570c520a2b2927fe1d260d0bfb2b93919f53f50ed29ee1e419",
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+      }
+    }
+  },
+  "provider_runtime": {
+    "status": "requires_explicit_qualification",
+    "required": "Expose a vetted read-only Torch/NumPy/native-library runtime and selected checker/model assets through the task execution profile; retain peer credential/private holdout exclusions. Do not infer availability from host paths.",
+    "existing_failure": "Original AF009 provider had missing Torch/libblas; shared Docker image is not this host Python environment."
+  },
+  "embedding": {
+    "cached_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "status": "existing AF003 synthetic smoke and current byte inventory; natural-input adapter/feature qualification remains open"
+  },
+  "generative_model": {
+    "status": "unqualified",
+    "required": "Compatible resource-bounded direct formalizer/model endpoint and immutable model revision; do not replace with a tiny unrelated language model or count a no_run as a baseline.",
+    "prior_manifest_limit": "Cached 119B Leanstral GGUF exceeds the frozen 16 GiB profile; this task did not load it."
+  },
+  "native_checkers": {
+    "status": "version commands passed; end-to-end paper adapter/checker obligations not inferred",
+    "required": "Bind actual emitted formal artifacts and check commands through the normalized harness; retain statuses/timeouts/cost denominators."
+  },
+  "human_gold": {
+    "existing_annotations": 0,
+    "required": "Prepare and privately bind packets; actual independent adjudication remains human work. No labels or semantic scores produced here."
+  }
+}

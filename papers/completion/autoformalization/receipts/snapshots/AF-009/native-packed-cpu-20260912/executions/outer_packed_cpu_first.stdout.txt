@@ -1,0 +1,45 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+____ test_outer_trainer_explicit_packed_cpu_runs_real_update_without_nudges ____
+
+    def test_outer_trainer_explicit_packed_cpu_runs_real_update_without_nudges():
+        value = model()
+        samples = _fixture._samples()
+        before = deepcopy(value.state.to_dict())
+        calls = []
+        executor = native.apply_cpu_reference_projection_update
+    
+        def witness(*args, **kwargs):
+            old = deepcopy(value.state.to_dict())
+            result = executor(*args, **kwargs)
+            calls.append((result.gradient_norm, value.state.to_dict() != old))
+            return result
+    
+        def forbidden(*args, **kwargs):
+            raise AssertionError("historical nudge fallback is forbidden")
+    
+        with patch.object(native, "apply_cpu_reference_projection_update", side_effect=witness), \
+             patch.object(value, "_nudge_family_logits", side_effect=forbidden), \
+             patch.object(value, "_nudge_decoded_embedding", side_effect=forbidden), \
+             patch.object(value, "_nudge_legal_ir_view_logits", side_effect=forbidden):
+            result = value.train_generalizable_projection(
+                samples, validation_samples=samples, epochs=1, learning_rate=0.025,
+                projection_update_backend="packed_cpu", projection_max_update_families=1,
+                max_line_search_attempts=1, legal_ir_evaluate_provers=False)
+        assert result["projection_update_backend"] == "packed_cpu"
+        assert result["projection_packed_cpu"]["enabled"]
+        assert not result["projection_cuda_residency"]["enabled"]
+        assert calls and any(norm > 0 and changed for norm, changed in calls)
+>       assert result["accepted_epochs"] == 1
+E       assert 0 == 1
+
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py:222: AssertionError
+=============================== warnings summary ===============================
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_outer_trainer_explicit_packed_cpu_runs_real_update_without_nudges
+  /home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source/ipfs_datasets_py/logic/integration/reasoning/proof_execution_engine.py:35: DeprecationWarning: integration.caching.proof_cache is deprecated. Import from ipfs_datasets_py.logic.common.proof_cache instead.
+    from ..caching.proof_cache import get_global_cache
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_outer_trainer_explicit_packed_cpu_runs_real_update_without_nudges
+1 failed, 1 passed, 1 warning in 6.18s

@@ -1,0 +1,476 @@
+{
+  "schema": "actual-outer-packed-cpu-witness/v1",
+  "accepted_epochs": 1,
+  "selected_update": "combined",
+  "candidate_update_order": [
+    "legal_ir_view_global_logits",
+    "legal_ir_view_logits",
+    "family_logits",
+    "decoded_embedding",
+    "combined"
+  ],
+  "backend": "packed_cpu",
+  "backend_report": {
+    "enabled": true,
+    "reports": [
+      {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 0.3439655005931854,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 0.3439655005931854,
+        "kernel_launch_count": 10,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 1.7917594909667969,
+          "reconstruction": 0.0,
+          "total": 1.7917594909667969
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 6,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 512,
+        "transfer_count": 5,
+        "update_targets": [
+          "legal_ir_view_global_logits"
+        ]
+      },
+      {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 2.2158467769622803,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 2.2158467769622803,
+        "kernel_launch_count": 12,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 1.7917594909667969,
+          "reconstruction": 0.0,
+          "total": 1.7917594909667969
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 31332,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 418192,
+        "transfer_count": 5,
+        "update_targets": [
+          "legal_ir_view_logits"
+        ]
+      },
+      {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 0.18391011655330658,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 0.18391011655330658,
+        "kernel_launch_count": 10,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.0,
+          "cross_entropy": 2.3025851249694824,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.0,
+          "total": 2.3025851249694824
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 90,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 1584,
+        "transfer_count": 5,
+        "update_targets": [
+          "family_logits"
+        ]
+      },
+      {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 1.0402413606643677,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 1.0402413606643677,
+        "kernel_launch_count": 14,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.8038837909698486,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.2755480408668518,
+          "total": 0.6774899363517761
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 72,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 1368,
+        "transfer_count": 5,
+        "update_targets": [
+          "decoded_embedding"
+        ]
+      },
+      {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 2.4547712802886963,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 2.4547712802886963,
+        "kernel_launch_count": 26,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.8038837909698486,
+          "cross_entropy": 2.3025851249694824,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 1.7917594909667969,
+          "reconstruction": 0.2755480408668518,
+          "total": 4.771834373474121
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 31494,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 420280,
+        "transfer_count": 5,
+        "update_targets": [
+          "family_logits",
+          "decoded_embedding",
+          "legal_ir_view_logits"
+        ]
+      }
+    ],
+    "fallback_allowed": false
+  },
+  "same_step_calls": [
+    {
+      "report": {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 0.3439655005931854,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 0.3439655005931854,
+        "kernel_launch_count": 10,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 1.7917594909667969,
+          "reconstruction": 0.0,
+          "total": 1.7917594909667969
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 6,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 512,
+        "transfer_count": 5,
+        "update_targets": [
+          "legal_ir_view_global_logits"
+        ]
+      },
+      "blocks": [
+        {
+          "component": "legal_ir_view_logits",
+          "gradient_squared_norm": 0.11831226944923401,
+          "gradient_finite": true,
+          "changed_parameters": 6,
+          "sgd_max_absolute_error": 0.0
+        }
+      ],
+      "canonical_state_changed_during_candidate": true
+    },
+    {
+      "report": {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 2.2158467769622803,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 2.2158467769622803,
+        "kernel_launch_count": 12,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 1.7917594909667969,
+          "reconstruction": 0.0,
+          "total": 1.7917594909667969
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 31332,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 418192,
+        "transfer_count": 5,
+        "update_targets": [
+          "legal_ir_view_logits"
+        ]
+      },
+      "blocks": [
+        {
+          "component": "legal_ir_view_logits",
+          "gradient_squared_norm": 0.11831226944923401,
+          "gradient_finite": true,
+          "changed_parameters": 6,
+          "sgd_max_absolute_error": 0.0
+        },
+        {
+          "component": "feature_legal_ir_view_logits",
+          "gradient_squared_norm": 4.791665077209473,
+          "gradient_finite": true,
+          "changed_parameters": 31326,
+          "sgd_max_absolute_error": 0.0
+        }
+      ],
+      "canonical_state_changed_during_candidate": true
+    },
+    {
+      "report": {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 0.18391011655330658,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 0.18391011655330658,
+        "kernel_launch_count": 10,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.0,
+          "cross_entropy": 2.3025851249694824,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.0,
+          "total": 2.3025851249694824
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 90,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 1584,
+        "transfer_count": 5,
+        "update_targets": [
+          "family_logits"
+        ]
+      },
+      "blocks": [
+        {
+          "component": "compiler_quality_family_logits",
+          "gradient_squared_norm": 0.033822931349277496,
+          "gradient_finite": true,
+          "changed_parameters": 90,
+          "sgd_max_absolute_error": 0.0
+        }
+      ],
+      "canonical_state_changed_during_candidate": true
+    },
+    {
+      "report": {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 1.0402413606643677,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 1.0402413606643677,
+        "kernel_launch_count": 14,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.8038837909698486,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.0,
+          "reconstruction": 0.2755480408668518,
+          "total": 0.6774899363517761
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 72,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 1368,
+        "transfer_count": 5,
+        "update_targets": [
+          "decoded_embedding"
+        ]
+      },
+      "blocks": [
+        {
+          "component": "family_embedding_weights",
+          "gradient_squared_norm": 1.0821020603179932,
+          "gradient_finite": true,
+          "changed_parameters": 72,
+          "sgd_max_absolute_error": 0.0
+        }
+      ],
+      "canonical_state_changed_during_candidate": true
+    },
+    {
+      "report": {
+        "activation_dtype": "torch.float32",
+        "admitted": true,
+        "applied": true,
+        "clipped_gradient_norm": 2.4547712802886963,
+        "fallback_reason": "",
+        "gradient_accumulation_steps": 1,
+        "gradient_norm": 2.4547712802886963,
+        "kernel_launch_count": 26,
+        "loss_dtype": "torch.float32",
+        "losses": {
+          "cosine": 0.8038837909698486,
+          "cross_entropy": 2.3025851249694824,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 1.7917594909667969,
+          "reconstruction": 0.2755480408668518,
+          "total": 4.771834373474121
+        },
+        "mixed_precision_checked": true,
+        "mixed_precision_safe": false,
+        "optimizer_state_resident": true,
+        "optimizer_step": 1,
+        "parameter_count": 31494,
+        "parameter_dtype": "torch.float32",
+        "resident_cache_hit": false,
+        "schema_version": "modal-autoencoder-cuda-residency-v2",
+        "synchronization_count": 4,
+        "training_schema_version": "modal-autoencoder-packed-cuda-training-v1",
+        "transfer_bytes": 420280,
+        "transfer_count": 5,
+        "update_targets": [
+          "family_logits",
+          "decoded_embedding",
+          "legal_ir_view_logits"
+        ]
+      },
+      "blocks": [
+        {
+          "component": "family_embedding_weights",
+          "gradient_squared_norm": 1.0821020603179932,
+          "gradient_finite": true,
+          "changed_parameters": 72,
+          "sgd_max_absolute_error": 0.0
+        },
+        {
+          "component": "compiler_quality_family_logits",
+          "gradient_squared_norm": 0.033822931349277496,
+          "gradient_finite": true,
+          "changed_parameters": 90,
+          "sgd_max_absolute_error": 0.0
+        },
+        {
+          "component": "legal_ir_view_logits",
+          "gradient_squared_norm": 0.11831226944923401,
+          "gradient_finite": true,
+          "changed_parameters": 6,
+          "sgd_max_absolute_error": 0.0
+        },
+        {
+          "component": "feature_legal_ir_view_logits",
+          "gradient_squared_norm": 4.791665077209473,
+          "gradient_finite": true,
+          "changed_parameters": 31326,
+          "sgd_max_absolute_error": 0.0
+        }
+      ],
+      "canonical_state_changed_during_candidate": true
+    }
+  ],
+  "before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+  "after_sha256": "0c646f773adea79a43957fbc186f7863d51d05ae1b46983e4156ed190d36ebd4",
+  "changed_components": [
+    "compiler_quality_family_logits",
+    "feature_legal_ir_view_logits",
+    "family_embedding_weights",
+    "legal_ir_view_logits"
+  ],
+  "sample_memory_changed": false,
+  "synthetic_training_and_validation_same_two_fixtures": true,
+  "scientific_fidelity_evaluation": false,
+  "research_benchmark": false,
+  "existing_guardrails_unchanged": true
+}

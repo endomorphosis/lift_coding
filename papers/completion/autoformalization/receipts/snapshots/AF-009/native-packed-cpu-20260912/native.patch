@@ -1,0 +1,401 @@
+diff --git a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+@@ -6967,6 +6967,7 @@
+         """
+         started_at = time.time()
+         self._cuda_residency_reports = []
++        self._packed_cpu_reports = []
+         sample_list = list(samples)
+         validation_list = list(validation_samples or [])
+         target_samples = validation_list or sample_list
+@@ -7032,13 +7033,14 @@
+             )
+         if normalized_update_backend not in {
+             "cuda_resident",
++            "packed_cpu",
+             "native",
+             "legacy",
+             "legacy_device",
+             "python_sparse_batch",
+         }:
+             raise ValueError(
+-                "projection_update_backend must be auto, cuda_resident, native, "
++                "projection_update_backend must be auto, cuda_resident, packed_cpu, native, "
+                 "legacy_device, or python_sparse_batch"
+             )
+ 
+@@ -8033,6 +8035,11 @@
+             "projection_profile": projection_profile,
+             "projection_profile_enabled": profiler is not None,
+             "projection_cuda_residency": cuda_residency,
++            "projection_packed_cpu": {
++                "enabled": normalized_update_backend == "packed_cpu",
++                "reports": list(self._packed_cpu_reports[-64:]),
++                "fallback_allowed": False,
++            },
+             "projection_update_backend": normalized_update_backend,
+             "rejection_summary": _projection_rejection_summary(epoch_reports),
+             "sample_memory_used": False,
+@@ -8106,6 +8113,8 @@
+         packed feature/parameter tensors and performs forward loss, backward,
+         clipping, and the optimizer step on the selected CUDA device.  It never
+         enters this method recursively or invokes a legacy per-sample updater.
++        The explicit ``packed_cpu`` backend uses the identical packed executor
++        on CPU and rejects failures without any historical-update fallback.
+         """
+         sample_list = list(samples)
+         target_tuple = tuple(str(target) for target in update_targets)
+@@ -8115,6 +8124,27 @@
+             raise StateTransactionConflictError(
+                 "projection update batch requires an active state transaction"
+             )
++        if normalized_backend == "packed_cpu":
++            # This explicit backend runs the same packed autograd/SGD executor
++            # on CPU. Failed admission/update must never become a nudge update.
++            from .modal_autoencoder_cuda import apply_cpu_reference_projection_update
++
++            report = apply_cpu_reference_projection_update(
++                self, sample_list, update_targets=target_tuple,
++                learning_rate=learning_rate, l2_regularization=l2_regularization,
++                profiler=profiler,
++            )
++            reports = list(getattr(self, "_packed_cpu_reports", ()))
++            reports.append(report.to_dict())
++            self._packed_cpu_reports = reports[-256:]
++            if not report.admitted or not report.applied:
++                raise RuntimeError(f"packed CPU update rejected: {report.fallback_reason}")
++            norm_report = legal_ir_trainable_head_transaction_delta_norm_report(
++                transaction, self.state, learning_rate=learning_rate,
++            )
++            norm_report["backend_report"] = report.to_dict()
++            norm_report["projection_update_backend"] = "packed_cpu"
++            return norm_report
+         if normalized_backend == "cuda_resident":
+             try:
+                 from .modal_autoencoder_cuda import (
+diff --git a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py
+@@ -1115,6 +1115,7 @@
+             losses["l2"] = (
+                 sum((parameter.float().square().sum() for parameter in session.parameters), zero.float())
+                 * float(l2_regularization)
++                * (float(stop - start) / denominator)
+                 / float(scalar_count)
+             )
+             kernel_count += len(session.parameters) + 1
+@@ -1144,21 +1145,29 @@
+     moved = 0
+     for name in sorted(session.blocks):
+         block = session.blocks[name]
+-        values = block.parameter.detach().float().cpu()
+-        moved += _bytes_for_tensor(values)
++        # Compare against the admitted FP32 value before transferring/scattering.
++        # An unchanged gathered row must not insert zeros or dirty a transaction.
++        changed = block.parameter.detach() != block.initial
+         mapping = getattr(autoencoder.state, block.component)
+         if block.kind == "scalar_map":
+-            for column_index, column in enumerate(block.columns):
+-                mapping[column] = float(values[0, column_index].item())
+-        elif block.kind == "vector":
+-            for row_index, row in enumerate(block.rows):
+-                mapping[row] = [float(value) for value in values[row_index].tolist()]
++            indices = block.torch.nonzero(changed[0], as_tuple=False).flatten()
++            values = block.parameter.detach()[0, indices].float().cpu()
++            moved += _bytes_for_tensor(values)
++            for offset, column_index in enumerate(indices.cpu().tolist()):
++                mapping[block.columns[column_index]] = float(values[offset].item())
+         else:
+-            for row_index, row in enumerate(block.rows):
+-                mapping[row] = {
+-                    column: float(values[row_index, column_index].item())
+-                    for column_index, column in enumerate(block.columns)
+-                }
++            indices = block.torch.nonzero(changed.any(dim=1), as_tuple=False).flatten()
++            values = block.parameter.detach()[indices].float().cpu()
++            moved += _bytes_for_tensor(values)
++            for offset, row_index in enumerate(indices.cpu().tolist()):
++                row = block.rows[row_index]
++                if block.kind == "vector":
++                    mapping[row] = [float(value) for value in values[offset].tolist()]
++                else:
++                    mapping[row] = {
++                        column: float(values[offset, column_index].item())
++                        for column_index, column in enumerate(block.columns)
++                    }
+     return moved
+ 
+ 
+@@ -1210,13 +1219,15 @@
+                 normalized = targets / targets.sum(dim=1, keepdim=True).clamp_min(1.0e-12)
+                 total = total + (
+                     -(normalized * state.torch.log_softmax(family_logits.float(), dim=1)).sum(dim=1)
+-                ).masked_select(state.family_mask).mean()
++                ).masked_select(state.family_mask).sum() / float(len(sample_list))
+             if target_set.intersection({"legal_ir_view_logits", "legal_ir_view_global_logits"}) and legal_logits.shape[1]:
+                 targets = state.legal_ir_targets.float()
+                 normalized = targets / targets.sum(dim=1, keepdim=True).clamp_min(1.0e-12)
+                 total = total + (
+                     -(normalized * state.torch.log_softmax(legal_logits.float(), dim=1)).sum(dim=1)
+-                ).masked_select(state.legal_ir_mask).mean()
++                ).masked_select(state.legal_ir_mask).sum() / float(len(sample_list))
++            if not bool(state.torch.isfinite(total).item()):
++                raise FloatingPointError("non-finite packed no-op loss")
+             report.applied = True
+             report.loss_dtype = str(state.torch.float32)
+             report.parameter_dtype = str(state.torch.float32)
+@@ -1370,6 +1381,8 @@
+         report.gradient_accumulation_steps = actual_steps
+         report.gradient_norm = _gradient_norm(torch, session.parameters)
+         _implicit_sync(profiler, report, "cuda_packed_gradient_norm")
++        if not math.isfinite(report.gradient_norm):
++            raise FloatingPointError("non-finite packed training gradient")
+         max_grad_norm = _env_float(
+             "IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_MAX_GRAD_NORM",
+             10.0,
+diff --git a/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py b/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py
+new file mode 100644
+--- /dev/null
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py
+@@ -0,0 +1,240 @@
++"""Qualify the actual packed autograd executor on CPU, using synthetic inputs."""
++from copy import deepcopy
++from dataclasses import replace
++import importlib.util
++import math
++from pathlib import Path
++from unittest.mock import patch
++
++import pytest
++import torch
++
++from ipfs_datasets_py.optimizers.logic_theorem_optimizer import modal_autoencoder_cuda as native
++
++_spec = importlib.util.spec_from_file_location(
++    "native_cuda_training_fixture", Path(__file__).with_name("test_modal_autoencoder_cuda_training.py"))
++_fixture = importlib.util.module_from_spec(_spec)
++_spec.loader.exec_module(_fixture)
++TARGETS = ("family_logits", "decoded_embedding", "legal_ir_view_logits")
++
++
++def model():
++    return _fixture._autoencoder("python")
++
++
++def update(value, samples=None, *, targets=TARGETS, rate=0.025, l2=0.0):
++    samples = _fixture._samples() if samples is None else samples
++    tx = value.state.transaction(label="native-packed-cpu-test").begin()
++    try:
++        report = native.apply_cpu_reference_projection_update(
++            value, samples, update_targets=targets, learning_rate=rate, l2_regularization=l2)
++        touched = tx.touched_row_count
++        if report.applied:
++            tx.commit()
++        else:
++            tx.rollback()
++        return report, touched
++    except BaseException:
++        if tx.active:
++            tx.rollback()
++        raise
++
++
++def test_same_native_step_has_gradients_sgd_and_shared_changes(monkeypatch):
++    monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_MAX_GRAD_NORM", "0.01")
++    value = model()
++    before = deepcopy(value.state.to_dict())
++    captured = []
++    scatter = native._scatter_blocks
++
++    def inspect_then_scatter(autoencoder, session):
++        for block in session.blocks.values():
++            parameter = block.parameter
++            assert parameter.grad is not None and torch.isfinite(parameter.grad).all()
++            assert torch.allclose(parameter, block.initial - 0.025 * parameter.grad, atol=1e-7, rtol=1e-6)
++            captured.append((float(parameter.grad.square().sum()), bool(torch.any(parameter != block.initial))))
++        return scatter(autoencoder, session)
++
++    def forbidden(*args, **kwargs):
++        raise AssertionError("historical nudge path must not execute")
++
++    with patch.object(native, "_scatter_blocks", side_effect=inspect_then_scatter), \
++         patch.object(value, "_nudge_family_logits", side_effect=forbidden), \
++         patch.object(value, "_nudge_decoded_embedding", side_effect=forbidden), \
++         patch.object(value, "_nudge_legal_ir_view_logits", side_effect=forbidden):
++        report, touched = update(value)
++    assert report.admitted and report.applied and report.optimizer_step == 1
++    assert report.gradient_norm > 0 and 0 < report.clipped_gradient_norm <= 0.010001
++    assert sum(g for g, _ in captured) > 0 and any(changed for _, changed in captured)
++    assert touched > 0
++    after = value.state.to_dict()
++    assert before["family_embedding_weights"] != after["family_embedding_weights"]
++    assert before["compiler_quality_family_logits"] != after["compiler_quality_family_logits"]
++
++
++@pytest.mark.parametrize("l2", [0.0, 2.0])
++@pytest.mark.parametrize("sample_count", [2, 3])
++def test_global_microbatch_normalization_including_l2(monkeypatch, l2, sample_count):
++    # Use nonzero canonical weights so an accidentally repeated L2 term matters.
++    seed = model()
++    first, _ = update(seed)
++    assert first.applied
++    left, right = model(), model()
++    left.state = type(seed.state).from_dict(seed.state.to_dict())
++    right.state = type(seed.state).from_dict(seed.state.to_dict())
++    monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_MAX_GRAD_NORM", "100")
++    monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_GRADIENT_ACCUMULATION_STEPS", "1")
++    samples = (_fixture._samples() * 2)[:sample_count]
++    a, _ = update(left, samples, l2=l2)
++    monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_GRADIENT_ACCUMULATION_STEPS", "2")
++    b, _ = update(right, samples, l2=l2)
++    assert a.applied and b.applied
++    assert a.gradient_accumulation_steps == 1 and b.gradient_accumulation_steps == 2
++    assert a.losses["l2"] == pytest.approx(b.losses["l2"], abs=1e-12, rel=1e-5)
++    assert a.losses == pytest.approx(b.losses, abs=1e-6, rel=1e-5)
++    assert a.gradient_norm == pytest.approx(b.gradient_norm, abs=1e-6, rel=1e-5)
++    for name in ("family_embedding_weights", "compiler_quality_family_logits", "legal_ir_view_logits"):
++        one, two = getattr(left.state, name), getattr(right.state, name)
++        assert set(one) == set(two)
++        for key in one:
++            assert one[key] == pytest.approx(two[key], abs=1e-6, rel=1e-5)
++
++
++@pytest.mark.parametrize("enabled", [True, False])
++def test_fully_masked_legal_objective_is_finite_explicit_noop(enabled):
++    value = model()
++    value.legal_ir_view_logit_scale = 1.0 if enabled else 0.0
++    # Keep candidate columns present even though every target is masked.
++    value.state.legal_ir_view_logits["TDFOL.prover"] = 0.0
++    value.state.legal_ir_view_logits["CEC.native"] = 0.0
++    before = deepcopy(value.state.to_dict())
++    with patch.object(value, "_legal_ir_view_target_distribution_for_sample", return_value={}):
++        report, touched = update(value, targets=("legal_ir_view_global_logits",))
++    assert report.applied and report.admitted
++    assert math.isfinite(report.losses["total"]) and report.losses["total"] == 0.0
++    assert report.gradient_norm == 0.0
++    assert value.state.to_dict() == before
++    assert touched == 0
++
++
++def test_zero_norm_embeddings_do_not_create_nonfinite_update():
++    value = model()
++    samples = [replace(s, embedding_vector=[0.0] * len(s.embedding_vector)) for s in _fixture._samples()]
++    report, _ = update(value, samples)
++    assert report.applied and all(math.isfinite(v) for v in report.losses.values())
++    assert math.isfinite(report.gradient_norm) and math.isfinite(report.clipped_gradient_norm)
++
++
++def test_nonfinite_loss_rejects_without_canonical_mutation():
++    value = model()
++    before = deepcopy(value.state.to_dict())
++    samples = [replace(s, embedding_vector=[float("nan")] * len(s.embedding_vector)) for s in _fixture._samples()]
++    report, _ = update(value, samples)
++    assert not report.applied and not report.admitted
++    assert "FloatingPointError" in report.fallback_reason
++    assert value.state.to_dict() == before
++
++
++def test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows():
++    value = model()
++    before = deepcopy(value.state.to_dict())
++    report, touched = update(value, rate=0.0)
++    assert report.applied and report.gradient_norm > 0
++    assert value.state.to_dict() == before
++    assert touched == 0
++
++
++def test_real_packed_update_rolls_back_exactly():
++    value = model()
++    before = deepcopy(value.state.to_dict())
++    tx = value.state.transaction(label="actual-packed-rollback").begin()
++    report = native.apply_cpu_reference_projection_update(
++        value, _fixture._samples(), update_targets=TARGETS, learning_rate=0.025)
++    assert report.applied and report.gradient_norm > 0 and tx.touched_row_count > 0
++    assert value.state.to_dict() != before
++    tx.rollback()
++    assert value.state.to_dict() == before
++
++
++def test_nonfinite_autograd_gradient_rejects_before_scatter():
++    value = model()
++    before = deepcopy(value.state.to_dict())
++    original = native._ResidentTrainingSession.create.__func__
++
++    def poisoned_gradient(cls, *args, **kwargs):
++        session = original(cls, *args, **kwargs)
++        # Fault injection at a real autograd boundary; forward loss stays finite.
++        session.parameters[0].register_hook(lambda grad: grad * float("inf"))
++        return session
++
++    with patch.object(native._ResidentTrainingSession, "create", classmethod(poisoned_gradient)):
++        report, touched = update(value)
++    assert not report.applied and not report.admitted
++    assert "FloatingPointError" in report.fallback_reason
++    assert touched == 0 and value.state.to_dict() == before
++
++
++def test_actual_packed_checkpoint_reload_then_second_update():
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_checkpoint import (
++        serialize_checkpoint, deserialize_checkpoint)
++    value = model()
++    first, _ = update(value)
++    assert first.applied and first.gradient_norm > 0
++    loaded = deserialize_checkpoint(serialize_checkpoint(value.state))
++    assert loaded.state.to_dict() == value.state.to_dict()
++    reloaded = model()
++    reloaded.state = loaded.state
++    a, _ = update(value)
++    b, _ = update(reloaded)
++    assert a.applied and b.applied and a.gradient_norm > 0 and b.gradient_norm > 0
++    assert a.losses == b.losses
++    assert reloaded.state.to_dict() == value.state.to_dict()
++
++
++def test_outer_trainer_explicit_packed_cpu_runs_real_update_without_nudges():
++    value = model()
++    samples = _fixture._samples()
++    before = deepcopy(value.state.to_dict())
++    calls = []
++    executor = native.apply_cpu_reference_projection_update
++
++    def witness(*args, **kwargs):
++        old = deepcopy(value.state.to_dict())
++        result = executor(*args, **kwargs)
++        calls.append((result.gradient_norm, value.state.to_dict() != old))
++        return result
++
++    def forbidden(*args, **kwargs):
++        raise AssertionError("historical nudge fallback is forbidden")
++
++    with patch.object(native, "apply_cpu_reference_projection_update", side_effect=witness), \
++         patch.object(value, "_nudge_family_logits", side_effect=forbidden), \
++         patch.object(value, "_nudge_decoded_embedding", side_effect=forbidden), \
++         patch.object(value, "_nudge_legal_ir_view_logits", side_effect=forbidden):
++        result = value.train_generalizable_projection(
++            samples, validation_samples=samples, epochs=1, learning_rate=0.025,
++            projection_update_backend="packed_cpu",
++            max_line_search_attempts=1, legal_ir_evaluate_provers=False)
++    assert result["projection_update_backend"] == "packed_cpu"
++    assert result["projection_packed_cpu"]["enabled"]
++    assert not result["projection_cuda_residency"]["enabled"]
++    assert calls and any(norm > 0 and changed for norm, changed in calls)
++    assert result["accepted_epochs"] == 1
++    assert value.state.to_dict() != before
++    assert value.state.family_logits == before["family_logits"]
++    assert value.state.decoded_embeddings == before["decoded_embeddings"]
++
++
++def test_outer_packed_cpu_rejection_rolls_back_without_legacy_fallback():
++    value = model()
++    before = deepcopy(value.state.to_dict())
++    failure = native.CudaResidencyReport(admitted=False, applied=False,
++                                         fallback_reason="torch_unavailable")
++    with patch.object(native, "apply_cpu_reference_projection_update", return_value=failure):
++        with pytest.raises(RuntimeError, match="packed CPU update rejected: torch_unavailable"):
++            value.train_generalizable_projection(
++                _fixture._samples(), epochs=1, projection_update_backend="packed_cpu",
++                projection_max_update_families=1, max_line_search_attempts=1,
++                legal_ir_evaluate_provers=False)
++    assert value.state.to_dict() == before
++    assert value.state._active_state_transaction is None

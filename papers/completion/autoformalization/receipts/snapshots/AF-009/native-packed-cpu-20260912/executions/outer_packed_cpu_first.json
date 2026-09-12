@@ -1,0 +1,61 @@
+{
+  "schema": "af-native-training-actual-command/v1",
+  "started_at": "2026-09-12T05:04:42.817718+00:00",
+  "argv": [
+    "/usr/bin/python3.12",
+    "-I",
+    "-B",
+    "-c",
+    "import sys; sys.path[:0]=[sys.argv.pop(1), '/home/barberb/.local/lib/python3.12/site-packages']; import torch; torch.set_num_threads(2); torch.set_num_interop_threads(2); import pytest; raise SystemExit(pytest.main(sys.argv[1:]))",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+    "-c",
+    "/dev/null",
+    "--rootdir=/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "-ra",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_outer_trainer_explicit_packed_cpu_runs_real_update_without_nudges",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_outer_packed_cpu_rejection_rolls_back_without_legacy_fallback"
+  ],
+  "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME": "/home/barberb",
+    "IPFS_AUTO_INSTALL": "false",
+    "IPFS_DATASETS_AUTO_INSTALL": "false",
+    "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+    "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+    "IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "limits": {
+    "wall_seconds": 150,
+    "cpu_seconds": 120,
+    "address_space_bytes": 17179869184,
+    "cpu_affinity": [
+      0,
+      1
+    ]
+  },
+  "source_snapshot_sha256": "1f90fa823a64b4a0fa38ace7f379d301c76e5a98aa1f06aaec01d3c20151be39",
+  "packed_source_sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+  "driver_sha256": "cd2e7c8db93ccd6e51b39db0f6c06c9e2a3501012d7c7685c7763a86c1b53d01",
+  "probe_sha256": null,
+  "test_sources": {},
+  "research_run": false,
+  "provider_invoked": false,
+  "exit_code": 1,
+  "elapsed_seconds": 9.285819125012495,
+  "finished_at": "2026-09-12T05:04:52.104349+00:00",
+  "logs": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/outer_packed_cpu_first.stdout.txt": "2765a50ac7fb759ef4acbc5f04e2826ed674a369a62af5d13f07c58972e64f85",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/outer_packed_cpu_first.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

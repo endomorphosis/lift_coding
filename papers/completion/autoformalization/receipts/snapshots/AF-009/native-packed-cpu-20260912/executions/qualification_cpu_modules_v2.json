@@ -1,0 +1,72 @@
+{
+  "schema": "af-native-training-actual-command/v1",
+  "started_at": "2026-09-12T05:00:49.021657+00:00",
+  "argv": [
+    "/usr/bin/python3.12",
+    "-I",
+    "-B",
+    "-c",
+    "import sys; sys.path[:0]=[sys.argv.pop(1), '/home/barberb/.local/lib/python3.12/site-packages']; import torch; torch.set_num_threads(2); torch.set_num_interop_threads(2); import pytest; raise SystemExit(pytest.main(sys.argv[1:]))",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+    "-c",
+    "/dev/null",
+    "--rootdir=/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "-ra",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_state_transaction.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_checkpoint.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_batching.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_residency.py"
+  ],
+  "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/native_source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME": "/home/barberb",
+    "IPFS_AUTO_INSTALL": "false",
+    "IPFS_DATASETS_AUTO_INSTALL": "false",
+    "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+    "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+    "IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "limits": {
+    "wall_seconds": 150,
+    "cpu_seconds": 120,
+    "address_space_bytes": 17179869184,
+    "cpu_affinity": [
+      0,
+      1
+    ]
+  },
+  "source_snapshot_sha256": "1f90fa823a64b4a0fa38ace7f379d301c76e5a98aa1f06aaec01d3c20151be39",
+  "packed_source_sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+  "driver_sha256": "cd2e7c8db93ccd6e51b39db0f6c06c9e2a3501012d7c7685c7763a86c1b53d01",
+  "probe_sha256": null,
+  "test_sources": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py": "54525c24d72ed6654e639298ee1cbf7cb3015669240a193e645622419632f69b",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_state_transaction.py": "78d354a8178eaca0472a83e07d8fa39df3f91da7737777b2667a7fc67f4344b9",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_checkpoint.py": "da11587e53f11547cac75be2800bb846165076b6f91154a8fb2d6f79ae338fab",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_batching.py": "8b5948e3607eb8b25cf01242af89b0af0084b708a535d9c50721d3e40fa5178a",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_training.py": "9c84c353182f3eda229c53bda6f7745e43998f4b55ff909366cddad76eb1a8aa",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_cuda_residency.py": "30da511c1aa8cf6a46789d08150f031a5a96baddafc404aa7dc8a2c7c9944855"
+  },
+  "research_run": false,
+  "provider_invoked": false,
+  "exit_code": 0,
+  "elapsed_seconds": 52.66369421209674,
+  "finished_at": "2026-09-12T05:01:41.686257+00:00",
+  "logs": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/qualification_cpu_modules_v2.stdout.txt": "7b048d6822c143fb18c3c1dca296fc5fe8704d559c1fc54cedc26c129207e53e",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/executions/qualification_cpu_modules_v2.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "cpu": {
+    "device": "cpu",
+    "native_python_sparse_batch": "executed",
+    "packed_torch_reference": "unavailable_torch_absent",
+    "status": "qualified_for_numerics"
+  },
+  "created_at": "2026-09-11T23:51:26.898628+00:00",
+  "cuda": {
+    "bf16_supported": false,
+    "cpu_fp32_bf16_parity": "unmeasured",
+    "cuda_is_available": false,
+    "reason": "ModuleNotFoundError: No module named 'torch'",
+    "skipped_tests": [
+      "packed_cuda_training",
+      "packed_cuda_residency"
+    ],
+    "status": "unavailable",
+    "torch_importable": false
+  },
+  "environment_flags": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_GRADIENT_ACCUMULATION_STEPS": {
+      "default": 1,
+      "role": "microbatch count for packed backward accumulation"
+    },
+    "IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_MAX_GRAD_NORM": {
+      "default": 10.0,
+      "role": "clip_grad_norm_ ceiling"
+    },
+    "IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_MIXED_PRECISION": {
+      "default": true,
+      "role": "optional BF16 activations after numerical check; loss stays FP32",
+      "status": "unmeasured_without_cuda"
+    }
+  },
+  "no_op_paths": [
+    "learning_rate clamped to 0",
+    "empty packed blueprints: forward-only mean CE, applied report, no scatter learning",
+    "nonfinite packed metrics: update rejected",
+    "fully masked categorical rows: CE contribution 0",
+    "cuda_resident admission failure: torch_unavailable / cuda_unavailable"
+  ],
+  "packed_implementation": {
+    "cosine_zero_norm_guard": true,
+    "empty_blueprint_policy": "forward_only_noop_mean_reduction",
+    "loss_dtype": "float32",
+    "microbatch_normalization": "global_sample_count",
+    "module": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+    "nonfinite_policy": "reject_update",
+    "optimizer": "sgd_clipped_no_moments",
+    "parameter_dtype": "float32",
+    "schema_version": "modal-autoencoder-packed-cuda-training-v1",
+    "sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e"
+  },
+  "qualification": "CPU packed-equation replica plus native python_sparse_batch update and torch-free unit tests.  Not a T0-T5 training run.",
+  "research_gpu_authorization": "denied",
+  "research_training": "unrun; AF-011 remains responsible for T0-T5",
+  "schema": "autoformalization-training-backend/v1",
+  "selected_backend": "cpu_packed_reference_semantics",
+  "task_id": "AF-009"
+}

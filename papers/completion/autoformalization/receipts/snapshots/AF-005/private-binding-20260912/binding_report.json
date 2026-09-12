@@ -1,0 +1,51 @@
+{
+  "schema": "af005-private-annotation-binding-report/v1",
+  "completed": true,
+  "completed_at": "2026-09-12T05:17:57.597533+00:00",
+  "helper_sha256": "6a24d0c033cb0b494f856f14d655a6d559ad2cc348c3d77af6277f5b0ae9cb8d",
+  "sampling_plan_sha256": "41bfb6978de5560fcc7404c04e34fe8b42297c3c875c7ec3353c9fc55348e87a",
+  "private_directory": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/af005-independent-annotation-v1",
+  "population_records": 1921,
+  "population_unique_units": 1913,
+  "operational_groups": 20,
+  "bound_unique_units": 100,
+  "bound_group_count": 20,
+  "alias_duplicates_selected_as_extra_units": 0,
+  "anonymous_group_allocation_histogram": {
+    "10:2": 2,
+    "29:2": 1,
+    "3:1": 3,
+    "28:2": 1,
+    "5:1": 2,
+    "1730:74": 1,
+    "4:1": 3,
+    "15:2": 1,
+    "8:2": 1,
+    "8:1": 1,
+    "6:1": 2,
+    "25:2": 1,
+    "7:1": 1
+  },
+  "human_annotations": 0,
+  "adjudicated_units": 0,
+  "evaluation_eligible_units": 0,
+  "unit_inclusion_probability": "n_h/N_h",
+  "unit_inverse_probability_weight": "N_h/n_h",
+  "primary_estimand": "finite-population unit mean over1913 unique final units; group dependence retained",
+  "private_commitments": {
+    "sampling_plan.json": "41bfb6978de5560fcc7404c04e34fe8b42297c3c875c7ec3353c9fc55348e87a",
+    "gold_facets.pending.private.jsonl": "8611d4f80dc6d43748cf3a9f1a72c66a6b368079aa650216f42b05c7a071694c",
+    "binding_manifest.private.json": "cd5e5a0915144289e20632ae7db0f20df4c9af046806dfcbc9657feeae4a3f91",
+    "annotation_packets.private.jsonl": "d9b205cd871deb47f8c28c1597dad531b06a0204080c5d68945118b328432ddf"
+  },
+  "private_modes": "directory0700/files0600",
+  "original_private_inputs_and_public_preparation_unchanged": true,
+  "new_source_oracle_or_label_data_exported_to_provider": false,
+  "limits": [
+    "100 privately bound sources are prepared, not independently annotated.",
+    "20 operational components are correlated; four broad official editions are not20 publishers.",
+    "One giant1730-unit component dominates unit weighting; report weighted intervals and macro-edition sensitivity, not equal-group point weighting.",
+    "No benchmark, model selection, formal validity, human agreement or semantic fidelity result.",
+    "Provider filesystem exclusion is an external runtime contract; this binding helper does not claim network/pretraining denial."
+  ]
+}

@@ -1,0 +1,99 @@
+..FFF..F.                                                                [100%]
+=================================== FAILURES ===================================
+____________ test_global_microbatch_normalization_including_l2[2.0] ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xe576012ee7e0>
+l2 = 2.0
+
+    @pytest.mark.parametrize("l2", [0.0, 2.0])
+    def test_global_microbatch_normalization_including_l2(monkeypatch, l2):
+        # Use nonzero canonical weights so an accidentally repeated L2 term matters.
+        seed = model()
+        first, _ = update(seed)
+        assert first.applied
+        left, right = model(), model()
+        left.state = type(seed.state).from_dict(seed.state.to_dict())
+        right.state = type(seed.state).from_dict(seed.state.to_dict())
+        monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_MAX_GRAD_NORM", "100")
+        monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_GRADIENT_ACCUMULATION_STEPS", "1")
+        a, _ = update(left, l2=l2)
+        monkeypatch.setenv("IPFS_DATASETS_MODAL_AUTOENCODER_CUDA_GRADIENT_ACCUMULATION_STEPS", "2")
+        b, _ = update(right, l2=l2)
+        assert a.applied and b.applied
+        assert a.gradient_accumulation_steps == 1 and b.gradient_accumulation_steps == 2
+>       assert a.losses["l2"] == pytest.approx(b.losses["l2"], abs=1e-12, rel=1e-5)
+E       assert 2.391686564351403e-07 == 4.78337312870...e-07 ± 4.8e-12
+E         
+E         comparison failed
+E         Obtained: 2.391686564351403e-07
+E         Expected: 4.783373128702806e-07 ± 4.8e-12
+
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py:91: AssertionError
+_______ test_fully_masked_legal_objective_is_finite_explicit_noop[True] ________
+
+enabled = True
+
+    @pytest.mark.parametrize("enabled", [True, False])
+    def test_fully_masked_legal_objective_is_finite_explicit_noop(enabled):
+        value = model()
+        value.legal_ir_view_logit_scale = 1.0 if enabled else 0.0
+        # Keep candidate columns present even though every target is masked.
+        value.state.legal_ir_view_logits["TDFOL.prover"] = 0.0
+        value.state.legal_ir_view_logits["CEC.native"] = 0.0
+        before = deepcopy(value.state.to_dict())
+        with patch.object(value, "_legal_ir_view_target_distribution_for_sample", return_value={}):
+            report, touched = update(value, targets=("legal_ir_view_global_logits",))
+        assert report.applied and report.admitted
+        assert math.isfinite(report.losses["total"]) and report.losses["total"] == 0.0
+        assert report.gradient_norm == 0.0
+        assert value.state.to_dict() == before
+>       assert touched == 0
+E       assert 2 == 0
+
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py:115: AssertionError
+_______ test_fully_masked_legal_objective_is_finite_explicit_noop[False] _______
+
+enabled = False
+
+    @pytest.mark.parametrize("enabled", [True, False])
+    def test_fully_masked_legal_objective_is_finite_explicit_noop(enabled):
+        value = model()
+        value.legal_ir_view_logit_scale = 1.0 if enabled else 0.0
+        # Keep candidate columns present even though every target is masked.
+        value.state.legal_ir_view_logits["TDFOL.prover"] = 0.0
+        value.state.legal_ir_view_logits["CEC.native"] = 0.0
+        before = deepcopy(value.state.to_dict())
+        with patch.object(value, "_legal_ir_view_target_distribution_for_sample", return_value={}):
+            report, touched = update(value, targets=("legal_ir_view_global_logits",))
+        assert report.applied and report.admitted
+>       assert math.isfinite(report.losses["total"]) and report.losses["total"] == 0.0
+E       assert (False)
+E        +  where False = <built-in function isfinite>(nan)
+E        +    where <built-in function isfinite> = math.isfinite
+
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py:112: AssertionError
+________ test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows _________
+
+    def test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows():
+        value = model()
+        before = deepcopy(value.state.to_dict())
+        report, touched = update(value, rate=0.0)
+        assert report.applied and report.gradient_norm > 0
+>       assert value.state.to_dict() == before
+E       AssertionError: assert {'architectur...int': '', ...} == {'architectur...int': '', ...}
+E         
+E         Omitting 36 identical items, use -vv to show
+E         Differing items:
+E         {'compiler_quality_family_logits': {'quality:bias': {'administrative_notice_hearing': 0.0, 'alethic': 0.0, 'conditiona...es:0': {'administrative_notice_hearing': 0.0, 'alethic': 0.0, 'conditional_normative': 0.0, 'deontic': 0.0, ...}, ...}} != {'compiler_quality_family_logits': {}}
+E         {'legal_ir_view_logits': {'CEC.native': 0.0, 'TDFOL.prover': 0.0, 'deontic.ir': 0.0, 'knowledge_graphs.neo4j_compat': 0.0, ...}} != {'legal_ir_view_logits': {}}
+E         {'family_embedding_weights': {'alethic': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, .....
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py:141: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_global_microbatch_normalization_including_l2[2.0]
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_fully_masked_legal_objective_is_finite_explicit_noop[True]
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_fully_masked_legal_objective_is_finite_explicit_noop[False]
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows
+4 failed, 5 passed in 6.45s

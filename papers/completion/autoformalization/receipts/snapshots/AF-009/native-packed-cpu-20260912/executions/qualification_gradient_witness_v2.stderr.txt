@@ -1,0 +1,3 @@
+/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_training/probe_native_cpu.py:39: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  'sgd_max_absolute_error': float((block.parameter - (block.initial - 0.025 * grad)).abs().max())})

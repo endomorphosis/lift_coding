@@ -1,0 +1,24 @@
+.......F.                                                                [100%]
+=================================== FAILURES ===================================
+________ test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows _________
+
+    def test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows():
+        value = model()
+        before = deepcopy(value.state.to_dict())
+        report, touched = update(value, rate=0.0)
+        assert report.applied and report.gradient_norm > 0
+>       assert value.state.to_dict() == before
+E       AssertionError: assert {'architectur...int': '', ...} == {'architectur...int': '', ...}
+E         
+E         Omitting 36 identical items, use -vv to show
+E         Differing items:
+E         {'legal_ir_view_logits': {'CEC.native': 0.0, 'TDFOL.prover': 0.0, 'deontic.ir': 0.0, 'knowledge_graphs.neo4j_compat': 0.0, ...}} != {'legal_ir_view_logits': {}}
+E         {'feature_legal_ir_view_logits': {'applicability-scope:applicability-class:994541de05db39ae': {'CEC.native': 0.0, 'TDF...emporal': {'CEC.native': 0.0, 'TDFOL.prover': 0.0, 'deontic.ir': 0.0, 'knowledge_graphs.neo4j_compat': 0.0, ...}, ...}} != {'feature_legal_ir_view_logits': {}}
+E         {'family_embedding_weights': {'alethic': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ...]...
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py:136: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_packed_cpu.py::test_zero_rate_does_not_scatter_unchanged_or_insert_zero_rows
+1 failed, 8 passed in 6.61s
