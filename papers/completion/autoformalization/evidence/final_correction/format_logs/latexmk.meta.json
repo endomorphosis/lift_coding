@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/home/barberb/.local/bin/vericodegen-latexmk",
+    "-g",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-file-line-error",
+    "main.tex"
+  ],
+  "cwd": "/tmp/af024-tex-build-d_e8eq61/manuscript",
+  "elapsed_seconds": 1.5853393990546465,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af024-tex-h7exzatx",
+    "LANG": "C.UTF-8",
+    "PATH": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "SOURCE_DATE_EPOCH": "1767225600",
+    "USER": "anonymous"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T23:31:07.292778+00:00",
+  "name": "latexmk",
+  "pdf_exists": true,
+  "started_at": "2026-09-12T23:31:05.707423+00:00",
+  "texbin": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux",
+  "wrapper": "/home/barberb/.local/bin/vericodegen-latexmk"
+}

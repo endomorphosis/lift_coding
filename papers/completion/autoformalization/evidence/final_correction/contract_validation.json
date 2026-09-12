@@ -1,0 +1,58 @@
+{
+  "schema": "af-final-correction-task-contract-check/v1",
+  "ok": true,
+  "actual_validator": "scripts/paper_supervisors.py:_verify_task_contract",
+  "validator_sha256": "0dc1aced74cf4eca1be42d9aa3b7f5d080b857a5744ad50a21e66af7fddb8592",
+  "checks": [
+    {
+      "task_id": "AF-021",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 32,
+      "output_count": 6
+    },
+    {
+      "task_id": "AF-022",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 30,
+      "output_count": 4
+    },
+    {
+      "task_id": "AF-023",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 36,
+      "output_count": 5
+    },
+    {
+      "task_id": "AF-024",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 58,
+      "output_count": 7
+    },
+    {
+      "task_id": "AF-025",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 48,
+      "output_count": 3
+    },
+    {
+      "task_id": "AF-029",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 104,
+      "output_count": 91
+    },
+    {
+      "task_id": "AF-013",
+      "artifact_integrity_valid": true,
+      "current_outputs_checked": true,
+      "artifact_count": 14,
+      "output_count": 4
+    }
+  ],
+  "no_native_imports_or_mutations": true
+}

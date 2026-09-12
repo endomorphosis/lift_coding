@@ -1,0 +1,283 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-024",
+  "status": "complete",
+  "completed_at": "2026-09-12T22:15:27.149335+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "checker": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-024/check_outputs.py",
+      "sha256": "b1b17fe9065822c58e87626d9f53ca30b0b33036f6cb10dec043957a3a4a68b3",
+      "schema": "autoformalization-format-check/v1",
+      "standard_library_only": true
+    },
+    "tex": {
+      "wrapper": "/home/barberb/.local/bin/vericodegen-latexmk",
+      "bin": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux",
+      "installation_manifest": "papers/completion/runtime_bootstrap/tex_installation_provenance.json",
+      "sealed_path_pdflatex": false
+    },
+    "empirical_execution": "Stdlib template checksum, checklist, disclosure, PDF metadata, and page-count checks. LaTeX compilation used the digest-bound TinyTeX tree. No model call, training, native checker, public upload, or fabricated author sign-off."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/assemble_receipt.py": "cbed7c6c5fe2e02b3a0c5a6adb0f314748c9ebf7bb147aa1511765a0aea1146f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/checklist.tex": "eac5742c44a922cf0f0ba21dea352d91f6560d3e563d47036a4e7073f5c3e755",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/empirical_scope.tex": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/figure-01.tex": "9e53b0168ab17ce2a54c7f747060098276cfdb2b48da182bcf101afd1f35bcc2",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/llm_disclosure.tex": "3466c53cb020eb0ed2073c6e1a52ae3fedfce9b1529a4a3c31beb91011ea95f3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/main.tex": "9ef78a1270407cd41b768eb7f7f00ee6c13c4143e5c83f58e0139fe43a484e78",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build/references.bib": "65db8dd6f9fbe8f15fa8834688d4e25bbb108fc04f00427b7b4a6e2f6923ad28",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/build_pdf.py": "9da2da5c752e675c0c1fc718cb1dc463d97880fb74fe631178e200fb46e2c7cf",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/check_outputs.py": "b1b17fe9065822c58e87626d9f53ca30b0b33036f6cb10dec043957a3a4a68b3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/inspect_format.py": "52e2836b1de5d8d398f3200aedb809d7db6f404d84957075645d31b22f6d066c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.meta.json": "8259afff345f6a367584aea6b4a8541eb07f86678b11d916c8656ae7a3f23f74",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log": "6137b51091c4b785548f84b97cdc1c527a6f45d6f9708bffae0d9e1fe4cd458e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/json_parse.meta.json": "a8dc03be999867bdb034845075de66c470e176f6e3103776a04dcca871963c5e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/json_parse.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/json_parse.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/latexmk.meta.json": "3e9ad5c90b05ef0b9841cbe851533f15e2b768b590642f88794403acd4cb034f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/latexmk.stderr.log": "c97f5bcaa897d781a91c796ec78661f1565816ded1ec9a2c41614f2c3f277c48",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/latexmk.stdout.log": "acaf22e87a53024a3aa03f2be9d2de483f3adbbb346e7cd9f2fa22aad95124ac",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/pdflatex.main.log": "b362769007d0de628b5f5902d16f7aee1cc6124c8e15f57543b477ec10478575",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/python_version.meta.json": "9e44f005d234e3047b13cc170fa5e4b9072e77bce7e42babfb53546bbc380016",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/python_version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/python_version.stdout.log": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/author_questions.md": "55ce3033ad738039eab3ca15227a94b0fec9bf6d56765a9e558f194a850216a1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json": "a5aa4559437b49786621cb3cb1402f30b8b079cbe8026186387de3bb37a3ab4e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/checklist.tex": "eac5742c44a922cf0f0ba21dea352d91f6560d3e563d47036a4e7073f5c3e755",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/llm_disclosure.tex": "3466c53cb020eb0ed2073c6e1a52ae3fedfce9b1529a4a3c31beb91011ea95f3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/paper.identity.json": "c05c10f6b93e9e230bcce28e1fc872556c50200c7f0bd0118fc47e6cfb1e958b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/paper.pyc": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/template_inputs.json": "7bdb8a267f9c0450693a133f335bd85e514f8378885ad51d026e3c6b012ab953",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/prepare_checklist.py": "28c806b3b3f3fb8540dce7fe628a9bf6d57880087d2f44c99a2337966575d015",
+    "papers/completion/autoformalization/receipts/snapshots/AF-024/run_sealed.py": "fbe59823804462fb2d848ef627b3faa252360f5a579f8749dbccd9ac75899118"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/manuscript/checklist.tex": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/checklist.tex",
+    "papers/completion/autoformalization/manuscript/llm_disclosure.tex": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/llm_disclosure.tex",
+    "papers/completion/autoformalization/submission/paper.pdf": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/paper.pyc",
+    "papers/completion/autoformalization/evidence/format_check.json": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json",
+    "papers/completion/autoformalization/evidence/author_questions.md": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/author_questions.md",
+    "papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/neurips_2026_vericode.sty",
+    "papers/completion/autoformalization/submission/template_inputs.json": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/template_inputs.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Main text is 4–9 pages excluding references/appendices and PDF is at most 50 MB, with official style unchanged.",
+      "status": "met",
+      "explanation": "The anonymous pdflatex log marks AF024-BEFORE-BIB on page 9, so main text excluding references/appendices is 9 pages (workshop range 4–9). submission/paper.pdf is under 50 MB. manuscript/neurips_2026_vericode.sty matches official SHA-256 2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/pdflatex.main.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No invented questionnaire, unexplained scientific TBD/To complete/TODO or broken reference remains; the official style-generated anonymous Affiliation/Address/email block is retained.",
+      "status": "met",
+      "explanation": "The per-paper checklist is a copy of papers/checklist.tex with only the instruction block removed and the 16 official questions retained. Source and PDF placeholder scans found no scientific TBD/To complete/TODO or answerTODO fields. The PDF keeps the style-generated Anonymous Author(s) / Affiliation / Address / email block. The pdflatex log reports no undefined references.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/checklist.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/pdflatex.main.log"
+      ]
+    },
+    {
+      "criterion": "Official disclosure/checklist answers agree with logs and distinguish known facts from author information still needed.",
+      "status": "met",
+      "explanation": "llm_disclosure.tex records the 2026-09-12 served grok-4.6 development call, MiniLM revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41, unused gpt-5.6-terra fallback, and zero plan-nomination calls. Checklist answers cite those logs; statistical significance is No because primary 1913-unit cells are unrun. author_questions.md separates known log facts from camera-ready identity, author verification, and submission, which remain uninvented.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/llm_disclosure.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/checklist.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/author_questions.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "PDF metadata and any linked artifacts pass the anonymity audit.",
+      "status": "met",
+      "explanation": "PDF /Author is Anonymous Author(s). No operator username, HOME path, Overleaf URL, or credential is present in the PDF bytes. The anonymous supplement was already audited in AF-023; this task does not publish an author-hosted URL or submit the paper.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/paper.identity.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.",
+      "status": "met",
+      "explanation": "Build main.tex loads \\usepackage{neurips_2026_vericode} with no options. final, preprint, nonanonymous, sglblindworkshop, the competition style, and generic neurips_2026.sty are absent. The per-paper style bytes equal the official research style.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/build/main.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/neurips_2026_vericode.sty",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/template_inputs.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.",
+      "status": "met",
+      "explanation": "manuscript/checklist.tex keeps the NeurIPS Paper Checklist heading, all 16 official question headings, and 16 Guidelines blocks. The BEGIN/END INSTRUCTIONS block is removed. All 16 \\answerTODO{} / \\justificationTODO{} fields are replaced by \\answerYes{}, \\answerNo{}, or \\answerNA{} plus 1–2 sentence justifications grounded in frozen logs.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/manuscript/checklist.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/prepare_checklist.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.",
+      "status": "met",
+      "explanation": "template_inputs.json pins the three shared user templates to SHA-256 c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250, 2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11, and 780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6. Live files still match. The PDF retains the official Affiliation/Address/email anonymous block.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/template_inputs.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.",
+      "status": "met",
+      "explanation": "The PDF contains the submission footer 'Submitted to NeurIPS 2026 Workshop on AI for Verifiable Coding' and review line numbers beside the checklist. lineno is loaded. Placeholder scans exempt Affiliation/Address/email and fail on scientific TODO/TBD; none of the latter remain.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/evidence/format_check.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/pdflatex.main.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-V"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.0018065099138766527,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:14:44.215193+00:00",
+      "started_at": "2026-09-12T22:14:44.213376+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/python_version.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/python_version.stderr.log",
+      "execution_kind": "sealed-PATH interpreter identity"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-S",
+        "-c",
+        "import json,pathlib; json.loads(pathlib.Path('papers/completion/autoformalization/evidence/format_check.json').read_text()); json.loads(pathlib.Path('papers/completion/autoformalization/submission/template_inputs.json').read_text())"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.026059894007630646,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:14:44.241547+00:00",
+      "started_at": "2026-09-12T22:14:44.215482+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/json_parse.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/json_parse.stderr.log",
+      "execution_kind": "JSON parse pin of format_check.json and template_inputs.json"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-S",
+        "papers/completion/autoformalization/receipts/snapshots/AF-024/check_outputs.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.021561853005550802,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:14:44.263521+00:00",
+      "started_at": "2026-09-12T22:14:44.241953+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/check_outputs.stderr.log",
+      "execution_kind": "stdlib template/checklist/disclosure/PDF anonymity checks; no model, training, or provider call",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-024/check_outputs.py"
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/bin/vericodegen-latexmk",
+        "-g",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "/tmp/af024-tex-build-zzt8l83q/manuscript",
+      "elapsed_seconds": 1.49371517309919,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af024-tex-y_gy8xjs",
+        "LANG": "C.UTF-8",
+        "PATH": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "SOURCE_DATE_EPOCH": "1767225600",
+        "USER": "anonymous"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T22:05:32.831972+00:00",
+      "started_at": "2026-09-12T22:05:31.338243+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/latexmk.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-024/logs/latexmk.stderr.log",
+      "execution_kind": "digest-bound TinyTeX latexmk build; pdflatex is absent from sealed PATH"
+    }
+  ]
+}

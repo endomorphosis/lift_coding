@@ -1,0 +1,474 @@
+{
+  "schema": "af-final-correction-preserved-qualification-attempts/v1",
+  "scope": "Earlier local correction/validator iterations; no scientific runs. Failed controls retained verbatim.",
+  "records": [
+    {
+      "name": "actual_evidence_v1.json",
+      "sha256": "de288ae760a9092755dce9c4ee48c68a2993c900c3812bfb11911fc05164a5a9",
+      "bytes": 199,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_corrected_evidence.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.09253443602938205\n}\n"
+    },
+    {
+      "name": "actual_evidence_v1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "actual_evidence_v1.stdout",
+      "sha256": "208bbc8eef3db7ef45d5c77f8fc8a3e5b5c7ee3cd8c666adfc7cd2cf580fdc00",
+      "bytes": 1016,
+      "utf8": "{\n  \"checks\": [\n    \"all_actual_projection_original_input_hashes_match\",\n    \"saved_training_success_does_not_rewrite_original_checker_OOM\",\n    \"actual_three_T2_seeds_full_updates\",\n    \"actual_three_T3_seeds_structural_scope_isolation\",\n    \"actual_amended_resource_profile_preserved\",\n    \"summary_uses_actual_adopted_execution\",\n    \"source_usage_equals_phase_projection_but_counted_only_once\",\n    \"actual_114_native_canaries_no_candidate_unactivated\",\n    \"no_empty_metric_or_reset_efficacy_inference\",\n    \"all_44_primary_cells_preserved\",\n    \"primary_final_cells_have_no_invented_measurements\",\n    \"human_fidelity_unknown_without_reviewer_gate\",\n    \"manuscript_actual_success_and_limitations_join\",\n    \"stale_failure_and_duplicate_cost_claims_removed\",\n    \"actual_E_executor_unconditional_refusal_preserved\",\n    \"constructed_zero_epoch_cannot_be_promoted_to_actual_completion\"\n  ],\n  \"checks_passed\": 16,\n  \"no_new_experiment\": true,\n  \"ok\": true,\n  \"schema\": \"af-final-correction-evidence-check/v1\"\n}\n"
+    },
+    {
+      "name": "actual_evidence_v2.json",
+      "sha256": "e24743032914374da5c8eb6f87a7668f0e780b8fb5ded626f29b2173b078fed7",
+      "bytes": 198,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_corrected_evidence.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.7921674000099301\n}\n"
+    },
+    {
+      "name": "actual_evidence_v2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "actual_evidence_v2.stdout",
+      "sha256": "0bda06bd09b932a67858cce5fff3db3bfe71011eec834d5c94bbf91f4f58240f",
+      "bytes": 1147,
+      "utf8": "{\n  \"checks\": [\n    \"all_actual_projection_original_input_hashes_match\",\n    \"saved_training_success_does_not_rewrite_original_checker_OOM\",\n    \"actual_three_T2_seeds_full_updates\",\n    \"actual_three_T3_seeds_structural_scope_isolation\",\n    \"actual_amended_resource_profile_preserved\",\n    \"summary_uses_actual_adopted_execution\",\n    \"source_usage_equals_phase_projection_but_counted_only_once\",\n    \"actual_114_native_canaries_no_candidate_unactivated\",\n    \"no_empty_metric_or_reset_efficacy_inference\",\n    \"all_44_primary_cells_preserved\",\n    \"primary_final_cells_have_no_invented_measurements\",\n    \"human_fidelity_unknown_without_reviewer_gate\",\n    \"manuscript_actual_success_and_limitations_join\",\n    \"stale_failure_and_duplicate_cost_claims_removed\",\n    \"actual_E_executor_unconditional_refusal_preserved\",\n    \"constructed_zero_epoch_cannot_be_promoted_to_actual_completion\",\n    \"source_guide_uses_actual_native_keyword_only_state_constructor\",\n    \"source_guide_state_loader_and_structural_export_exist\"\n  ],\n  \"checks_passed\": 18,\n  \"no_new_experiment\": true,\n  \"ok\": true,\n  \"schema\": \"af-final-correction-evidence-check/v1\"\n}\n"
+    },
+    {
+      "name": "analyze.meta.json",
+      "sha256": "ef6ca3af7cf2be71dd782f6ddeb9c3caaa41478d228db327fdeaa654ece6f1d5",
+      "bytes": 458,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/analyze_results.py\",\n    \"--check\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 0.07968020439147949\n}\n"
+    },
+    {
+      "name": "analyze.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "analyze.stdout.log",
+      "sha256": "0770e191650e2d9a391826cbf90b9a5e513b9a43688aae78bce08656f78b976e",
+      "bytes": 924,
+      "utf8": "{\"check_only\":true,\"false_transfer_generalized\":false,\"hypothesis_status_counts\":{\"inconclusive\":1,\"supported\":1,\"unrun\":6,\"unsupported\":1},\"ok\":true,\"original_placeholder_cells\":44,\"output_sha256\":{\"hypothesis\":\"4cbb61c13d9abb3856ea237b1bfd15b44c974ed807ee9288e1128fcf73324027\",\"summary\":\"465a6533707111d5092a8dd4d6a389e1757c3bb42bbcba4ac2112e1af54401e0\",\"table11\":\"b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14\",\"table13\":\"73d4695d7c4ad4f96070e795c76e713551aa76cec26030f932f9d05558f7caf2\",\"table6\":\"a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49\",\"unrun_tables\":\"016cfd5c1e6e83e2f36faf85ef7372a6bc7534cd891e2b3db2054cb0f520c614\"},\"post_hoc_as_prespecified\":false,\"remaining_placeholder_cells\":0,\"replaced_placeholder_cells\":44,\"schema\":\"autoformalization-results-analysis/v1\",\"task_id\":\"AF-021\",\"unrun_tables_sha256\":\"016cfd5c1e6e83e2f36faf85ef7372a6bc7534cd891e2b3db2054cb0f520c614\"}\n"
+    },
+    {
+      "name": "format_check.meta.json",
+      "sha256": "ef470b6659c29cdb20a285ad1f9ecfbed620de0646168bbda8d91156edd5165e",
+      "bytes": 466,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/check_format_outputs.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 1,\n  \"elapsed_seconds\": 0.020391225814819336\n}\n"
+    },
+    {
+      "name": "format_check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "format_check.stdout.log",
+      "sha256": "a74171767e206a4e5c0c4e9047342b7ad232924861afb67db1047f801340193e",
+      "bytes": 269,
+      "utf8": "AF-024 check failed:\n- missing pdf_identity: /home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/outputs/submission/paper.identity.json\n"
+    },
+    {
+      "name": "format_check_v2.json",
+      "sha256": "d7ba3f03e360b9374379a898eb68bb17988fab091201c931c286074bc3859af1",
+      "bytes": 195,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_format_outputs.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.04569674504455179\n}\n"
+    },
+    {
+      "name": "format_check_v2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "format_check_v2.stdout",
+      "sha256": "161d381af371e9c578de5485cdde9a8d660882acf592d0995266f71baf658936",
+      "bytes": 201,
+      "utf8": "AF-024 check passed\nmain_text_pages=9\npdf_bytes=303771\nstyle_sha256=2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11\nanswers=Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,NA,Yes,Yes,NA,NA,Yes\n"
+    },
+    {
+      "name": "format_check_v3.json",
+      "sha256": "a6988914afe69305b1cec7bc7a47e3cf6cde5bd15916d7e37586e7f6de1f73a3",
+      "bytes": 195,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_format_outputs.py\"\n  ],\n  \"exit_code\": 1,\n  \"wall_seconds\": 0.05140190105885267\n}\n"
+    },
+    {
+      "name": "format_check_v3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "format_check_v3.stdout",
+      "sha256": "825d809f6d397bfb8db6cddd09fb0b6e93dc1ffdfb903dd44b01a681a4983bc2",
+      "bytes": 101,
+      "utf8": "AF-024 check failed:\n- author_questions.md does not distinguish known facts from author-needed items\n"
+    },
+    {
+      "name": "format_check_v4.json",
+      "sha256": "add5ff04b7db1de9b14c7f9b670db22054c9fb576c069212e48d7f2f4b769ae9",
+      "bytes": 195,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_format_outputs.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.02837694203481078\n}\n"
+    },
+    {
+      "name": "format_check_v4.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "format_check_v4.stdout",
+      "sha256": "161d381af371e9c578de5485cdde9a8d660882acf592d0995266f71baf658936",
+      "bytes": 201,
+      "utf8": "AF-024 check passed\nmain_text_pages=9\npdf_bytes=303771\nstyle_sha256=2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11\nanswers=Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,NA,Yes,Yes,NA,NA,Yes\n"
+    },
+    {
+      "name": "handoff_check_v1.json",
+      "sha256": "303978b7f7bc38501434618c196c03fdd9552a7135cd8479ddc2a924c61b287d",
+      "bytes": 189,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_handoff.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.039883876917883754\n}\n"
+    },
+    {
+      "name": "handoff_check_v1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "handoff_check_v1.stdout",
+      "sha256": "4960a7d0fe79aa3954891d07d159446314c9d49870496241e53ec0a884dc618a",
+      "bytes": 168,
+      "utf8": "{\n  \"ok\": true,\n  \"file_identities\": 18,\n  \"clean_reproduction_commands\": 2,\n  \"original_AF013_AF029_receipts_unchanged\": true,\n  \"no_new_scientific_execution\": true\n}\n"
+    },
+    {
+      "name": "handoff_v1.json",
+      "sha256": "7bd19e34576c234af1f331810b55f4266f63f4bce97524f6148e5283831febd3",
+      "bytes": 187,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/build_handoff.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.1534493250073865\n}\n"
+    },
+    {
+      "name": "handoff_v1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "handoff_v1.stdout",
+      "sha256": "a5184fed378c524582024c0caab9d5150a9b5bfe81e4b9d96377101b4ce892be",
+      "bytes": 484,
+      "utf8": "{\n  \"ok\": true,\n  \"commands_passed\": 2,\n  \"reported_tables\": {\n    \"summary.json\": \"d369e99ec3bcc9d1bbd12361ca73300d2297b5363806be77dcd2625889bb2276\",\n    \"table11_training.tex\": \"b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14\",\n    \"table13_assistance.tex\": \"dab02cc945ce5db5efb16685daa2d6ca4cfaef9b03a6f96781c7829611322117\",\n    \"table6_pipeline.tex\": \"a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49\"\n  },\n  \"no_new_scientific_execution\": true\n}\n"
+    },
+    {
+      "name": "manuscript_check.meta.json",
+      "sha256": "efc28a1c595665359c324db63432a707eeca7d31c85eaa03d2fa8d498a7b483a",
+      "bytes": 462,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/check_manuscript.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 0.036844730377197266\n}\n"
+    },
+    {
+      "name": "manuscript_check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "manuscript_check.stdout.log",
+      "sha256": "c57520bcc8c050172c51a27cada4263fd8a9e13b799f5b9b63281d7a1bb9f7ff",
+      "bytes": 536,
+      "utf8": "{\n  \"abstract_chars\": 1683,\n  \"ae_separated\": true,\n  \"claim_count\": 27,\n  \"conclusion_chars\": 1606,\n  \"errors\": [],\n  \"final_test_denominator\": 1913,\n  \"historical_recovery_present\": true,\n  \"hypothesis_status\": {\n    \"C1\": \"unrun\",\n    \"C2\": \"unrun\",\n    \"C3\": \"unrun\",\n    \"C4\": \"unrun\",\n    \"C5\": \"unrun\",\n    \"C6\": \"unrun\",\n    \"C7\": \"inconclusive\",\n    \"H-T1-claim_admissible_for_paper_primary\": false,\n    \"H-T1-memory-diagnostic\": \"supported\",\n    \"H-T2-shared-learner\": \"unsupported\"\n  },\n  \"ok\": true,\n  \"t_separated\": true\n}\n"
+    },
+    {
+      "name": "manuscript_v2.json",
+      "sha256": "8f6825a4274fca21c038bbbcad8ac5b45bbb3daaffb2ed2806c9dab1416a736f",
+      "bytes": 192,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_manuscript.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.031115717021748424\n}\n"
+    },
+    {
+      "name": "manuscript_v2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "manuscript_v2.stdout",
+      "sha256": "c57520bcc8c050172c51a27cada4263fd8a9e13b799f5b9b63281d7a1bb9f7ff",
+      "bytes": 536,
+      "utf8": "{\n  \"abstract_chars\": 1683,\n  \"ae_separated\": true,\n  \"claim_count\": 27,\n  \"conclusion_chars\": 1606,\n  \"errors\": [],\n  \"final_test_denominator\": 1913,\n  \"historical_recovery_present\": true,\n  \"hypothesis_status\": {\n    \"C1\": \"unrun\",\n    \"C2\": \"unrun\",\n    \"C3\": \"unrun\",\n    \"C4\": \"unrun\",\n    \"C5\": \"unrun\",\n    \"C6\": \"unrun\",\n    \"C7\": \"inconclusive\",\n    \"H-T1-claim_admissible_for_paper_primary\": false,\n    \"H-T1-memory-diagnostic\": \"supported\",\n    \"H-T2-shared-learner\": \"unsupported\"\n  },\n  \"ok\": true,\n  \"t_separated\": true\n}\n"
+    },
+    {
+      "name": "manuscript_v3.json",
+      "sha256": "4f4247e23bc5ae6f090da98f8dc2fa330c02d29bbc6c029e085751f1c71ca29f",
+      "bytes": 190,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_manuscript.py\"\n  ],\n  \"exit_code\": 1,\n  \"wall_seconds\": 0.0395150079857558\n}\n"
+    },
+    {
+      "name": "manuscript_v3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "manuscript_v3.stdout",
+      "sha256": "ec29b655bb224e91f3babd65de408c11c4c0a5b2dba3cd0f0a4b2c3f2e653708",
+      "bytes": 601,
+      "utf8": "{\n  \"abstract_chars\": 1683,\n  \"ae_separated\": true,\n  \"claim_count\": 27,\n  \"conclusion_chars\": 897,\n  \"errors\": [\n    \"conclusion missing required limiter: does not establish\"\n  ],\n  \"final_test_denominator\": 1913,\n  \"historical_recovery_present\": true,\n  \"hypothesis_status\": {\n    \"C1\": \"unrun\",\n    \"C2\": \"unrun\",\n    \"C3\": \"unrun\",\n    \"C4\": \"unrun\",\n    \"C5\": \"unrun\",\n    \"C6\": \"unrun\",\n    \"C7\": \"inconclusive\",\n    \"H-T1-claim_admissible_for_paper_primary\": false,\n    \"H-T1-memory-diagnostic\": \"supported\",\n    \"H-T2-shared-learner\": \"unsupported\"\n  },\n  \"ok\": false,\n  \"t_separated\": true\n}\n"
+    },
+    {
+      "name": "package.meta.json",
+      "sha256": "f1e9c1134912052c523ea81cd88dbd1caf029107d42bb75040d81f281aa30804",
+      "bytes": 461,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/assemble_package.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 0.35344576835632324\n}\n"
+    },
+    {
+      "name": "package.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package.stdout.log",
+      "sha256": "8121d85608b0f1e52100036d2c0ce6b9dbcc9c5438fd818ab7154d20c5dcef37",
+      "bytes": 156,
+      "utf8": "{\n  \"members\": 58,\n  \"ok\": true,\n  \"roles\": 40,\n  \"zip_bytes\": 319911,\n  \"zip_sha256\": \"b7a0f79020498226630fb38df571c63d8343c0fa142573cc060c2215d6a47496\"\n}\n"
+    },
+    {
+      "name": "package_check.meta.json",
+      "sha256": "8dbaac33a4f4d68a661a41a7dee6bd3792da9ab1301c4cbfbfcad85ac688b6f0",
+      "bytes": 457,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/check_package.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 1,\n  \"elapsed_seconds\": 0.2577855587005615\n}\n"
+    },
+    {
+      "name": "package_check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package_check.stdout.log",
+      "sha256": "446906789fb7e730379d8f28bc676b4e92fa8b4527f163193f9401a28bfe0e81",
+      "bytes": 71,
+      "utf8": "AF-023 check failed:\n- ZIP regeneration hash mismatch for summary.json\n"
+    },
+    {
+      "name": "package_check_v2.meta.json",
+      "sha256": "cd33a187fd76e4afd84f0e57cb8a5ac46a417d471c8ebbb49395c489682f4bae",
+      "bytes": 458,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/check_package.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 0.27116823196411133\n}\n"
+    },
+    {
+      "name": "package_check_v2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package_check_v2.stdout.log",
+      "sha256": "5975e5b26e3b29127236e3cb994c2bf8e45d4f12f3cf122a67509dfd6525bdcf",
+      "bytes": 470,
+      "utf8": "{\n  \"fabricated_human_review\": false,\n  \"ok\": true,\n  \"private_ledger_excluded\": true,\n  \"public_upload\": false,\n  \"roles\": 40,\n  \"supplement_zip_bytes\": 319911,\n  \"tables\": {\n    \"table11_training.tex\": \"b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14\",\n    \"table13_assistance.tex\": \"73d4695d7c4ad4f96070e795c76e713551aa76cec26030f932f9d05558f7caf2\",\n    \"table6_pipeline.tex\": \"a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49\"\n  }\n}\n"
+    },
+    {
+      "name": "package_check_v3.json",
+      "sha256": "2f3c9c878d94caddd54f0ab3f1f5a2d949b93403c7fe0b84cf2297dd91c7dd83",
+      "bytes": 187,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_package.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.2543060400057584\n}\n"
+    },
+    {
+      "name": "package_check_v3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package_check_v3.stdout",
+      "sha256": "ab082fa2ff2f3c218104bafffd97803a3eaa3db2b0f251f97845206f532b234e",
+      "bytes": 470,
+      "utf8": "{\n  \"fabricated_human_review\": false,\n  \"ok\": true,\n  \"private_ledger_excluded\": true,\n  \"public_upload\": false,\n  \"roles\": 40,\n  \"supplement_zip_bytes\": 319951,\n  \"tables\": {\n    \"table11_training.tex\": \"b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14\",\n    \"table13_assistance.tex\": \"dab02cc945ce5db5efb16685daa2d6ca4cfaef9b03a6f96781c7829611322117\",\n    \"table6_pipeline.tex\": \"a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49\"\n  }\n}\n"
+    },
+    {
+      "name": "package_check_v4.json",
+      "sha256": "c9431181f4061ab959d9ae689d5b9e79bd24ccc6a17b1bfcaa5283f62b85a923",
+      "bytes": 187,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/check_package.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.2663574180332944\n}\n"
+    },
+    {
+      "name": "package_check_v4.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package_check_v4.stdout",
+      "sha256": "a3362b36f24ea350b1aed4e8f7aa6e3b183690ce41476dc836a81dc41be6f532",
+      "bytes": 470,
+      "utf8": "{\n  \"fabricated_human_review\": false,\n  \"ok\": true,\n  \"private_ledger_excluded\": true,\n  \"public_upload\": false,\n  \"roles\": 40,\n  \"supplement_zip_bytes\": 321236,\n  \"tables\": {\n    \"table11_training.tex\": \"b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14\",\n    \"table13_assistance.tex\": \"dab02cc945ce5db5efb16685daa2d6ca4cfaef9b03a6f96781c7829611322117\",\n    \"table6_pipeline.tex\": \"a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49\"\n  }\n}\n"
+    },
+    {
+      "name": "package_v2.json",
+      "sha256": "afeec064d92ae7a937c3c30d25c22d700a8ac7e9bc6c1238cf44078dc7962f57",
+      "bytes": 191,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/assemble_package.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.33824804704636335\n}\n"
+    },
+    {
+      "name": "package_v2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package_v2.stdout",
+      "sha256": "8451f4f6858e192d3412e715b5c13308a139131541648d83e9ab3ffccf2b1f93",
+      "bytes": 156,
+      "utf8": "{\n  \"members\": 58,\n  \"ok\": true,\n  \"roles\": 40,\n  \"zip_bytes\": 319951,\n  \"zip_sha256\": \"cc233eb4871c754bca68a53b4097fa2afa52a6bc3e2ffecd7c31f5d89af4d588\"\n}\n"
+    },
+    {
+      "name": "package_v3.json",
+      "sha256": "3592716f1c61cfae9c8da28502a122ecb2d6b8ac478945cfe552244dbc226d74",
+      "bytes": 190,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/assemble_package.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.3604315730044618\n}\n"
+    },
+    {
+      "name": "package_v3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "package_v3.stdout",
+      "sha256": "144f42536e5e8f12485a22627fd4192a740fed67635c862af486899253387fe3",
+      "bytes": 156,
+      "utf8": "{\n  \"members\": 58,\n  \"ok\": true,\n  \"roles\": 40,\n  \"zip_bytes\": 321236,\n  \"zip_sha256\": \"fab5fdbab40a254baa429c997842558110d751661653911199d10ba5011068ce\"\n}\n"
+    },
+    {
+      "name": "pdf_build.meta.json",
+      "sha256": "0453b7d1c172abce0cf5de0f40b4117eebfcbafbbcfbdecd1adb5a3b8bb73da9",
+      "bytes": 452,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/build_pdf.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 1.437502145767212\n}\n"
+    },
+    {
+      "name": "pdf_build.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "pdf_build.stdout.log",
+      "sha256": "81c705a3edd8728903d508b618397946acfdc904a31def3c21749cb75a5f3d94",
+      "bytes": 81,
+      "utf8": "{\n  \"ok\": true,\n  \"pdf_bytes\": 273793,\n  \"elapsed_seconds\": 1.4072223979746923\n}\n"
+    },
+    {
+      "name": "pdf_build_v2.json",
+      "sha256": "2c1c92a6d93dfd7a29f17507956dcc70cf43060dd1a2499c17a4366b045a738e",
+      "bytes": 183,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/build_pdf.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 1.5291943399934098\n}\n"
+    },
+    {
+      "name": "pdf_build_v2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "pdf_build_v2.stdout",
+      "sha256": "5a504a991fded41a7c448fd44f030b0cd7f1c4036be6b1f6ccb06986dbb14e7b",
+      "bytes": 81,
+      "utf8": "{\n  \"ok\": true,\n  \"pdf_bytes\": 303771,\n  \"elapsed_seconds\": 1.4733088210923597\n}\n"
+    },
+    {
+      "name": "pdf_build_v3.json",
+      "sha256": "539e843ad17f625f2afaf5205d968be737130bd75854017d334205055ace911c",
+      "bytes": 183,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/build_pdf.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 1.5606776619097218\n}\n"
+    },
+    {
+      "name": "pdf_build_v3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "pdf_build_v3.stdout",
+      "sha256": "aae9b598338e53f4feb04b351196badc47e5d0190bb96683f371b45b24716aa8",
+      "bytes": 81,
+      "utf8": "{\n  \"ok\": true,\n  \"pdf_bytes\": 303019,\n  \"elapsed_seconds\": 1.5314421789953485\n}\n"
+    },
+    {
+      "name": "pdf_inspect.meta.json",
+      "sha256": "f93981bf1e420271ad4ac037754c8429f9103eafcba117e3a6843240a74ca31e",
+      "bytes": 459,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/inspect_format.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 0.06988954544067383\n}\n"
+    },
+    {
+      "name": "pdf_inspect.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "pdf_inspect.stdout.log",
+      "sha256": "d4de313d4c9964a4732bd7af0dbca1cd3bcdc64d2f9ee5d894ae472748af9a6a",
+      "bytes": 78,
+      "utf8": "{\n  \"ok\": true,\n  \"main_text_pages\": 9,\n  \"total_pages\": 21,\n  \"errors\": []\n}\n"
+    },
+    {
+      "name": "pdf_inspect_v2.json",
+      "sha256": "fb421cb963edfa30d9176e753540904c47eb42b9213ff67a64bb260ea0052cf4",
+      "bytes": 189,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/inspect_format.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.07453779003117234\n}\n"
+    },
+    {
+      "name": "pdf_inspect_v2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "pdf_inspect_v2.stdout",
+      "sha256": "d4de313d4c9964a4732bd7af0dbca1cd3bcdc64d2f9ee5d894ae472748af9a6a",
+      "bytes": 78,
+      "utf8": "{\n  \"ok\": true,\n  \"main_text_pages\": 9,\n  \"total_pages\": 21,\n  \"errors\": []\n}\n"
+    },
+    {
+      "name": "pdf_inspect_v3.json",
+      "sha256": "37c64d0fe30b9ce42df7148da36b2ebfb4a676e8eda0c08fb5b82f6bf32b2625",
+      "bytes": 189,
+      "utf8": "{\n  \"argv\": [\n    \"python\",\n    \"-B\",\n    \"papers/completion/autoformalization/evaluation/final_correction/inspect_format.py\"\n  ],\n  \"exit_code\": 0,\n  \"wall_seconds\": 0.06295645399950445\n}\n"
+    },
+    {
+      "name": "pdf_inspect_v3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "pdf_inspect_v3.stdout",
+      "sha256": "d4de313d4c9964a4732bd7af0dbca1cd3bcdc64d2f9ee5d894ae472748af9a6a",
+      "bytes": 78,
+      "utf8": "{\n  \"ok\": true,\n  \"main_text_pages\": 9,\n  \"total_pages\": 21,\n  \"errors\": []\n}\n"
+    },
+    {
+      "name": "project_actual.meta.json",
+      "sha256": "2f6b5a3a11a9a6c4902dea2cc2ac11005c7f5ee2d1504387c880975516d46969",
+      "bytes": 469,
+      "utf8": "{\n  \"argv\": [\n    \"/usr/bin/python3.12\",\n    \"-B\",\n    \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate/papers/completion/autoformalization/evaluation/final_correction/project_actual_execution.py\"\n  ],\n  \"cwd\": \"/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af_final_manuscript_recovery_v1/candidate\",\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 0.03646659851074219\n}\n"
+    },
+    {
+      "name": "project_actual.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "name": "project_actual.stdout.log",
+      "sha256": "14a22828e5ef5c3a2a046281dff3cafabe5eb5e7ca581ab5293a38b720954e30",
+      "bytes": 68,
+      "utf8": "Actual source-bound scalar projection written; no experiment rerun.\n"
+    }
+  ]
+}

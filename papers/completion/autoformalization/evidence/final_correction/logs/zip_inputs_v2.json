@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-B",
+    "-S",
+    "verify_retained_inputs.py"
+  ],
+  "cwd": "fresh temporary anonymous ZIP root",
+  "environment": {
+    "HOME": "fresh empty temporary directory",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T23:31:08.977338+00:00",
+  "started_at": "2026-09-12T23:31:08.940332+00:00",
+  "stderr": "evidence/final_correction/logs/zip_inputs_v2.stderr",
+  "stdout": "evidence/final_correction/logs/zip_inputs_v2.stdout",
+  "wall_seconds": 0.03701633110176772
+}

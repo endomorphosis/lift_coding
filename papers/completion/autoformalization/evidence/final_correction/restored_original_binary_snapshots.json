@@ -1,0 +1,19 @@
+{
+  "schema": "af-original-snapshot-restoration/v1",
+  "rows": [
+    {
+      "restored_path": "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/submission/supplement.pyc",
+      "source_baseline": "e25c71be006a5ff2667999089ed1d1acc1c55553:papers/completion/autoformalization/submission/supplement.zip",
+      "sha256": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1",
+      "bytes": 312081,
+      "reason": "original receipt names a binary transport snapshot omitted by ignore rules; exact baseline output bytes restored without modification"
+    },
+    {
+      "restored_path": "papers/completion/autoformalization/receipts/snapshots/AF-024/outputs/submission/paper.pyc",
+      "source_baseline": "e25c71be006a5ff2667999089ed1d1acc1c55553:papers/completion/autoformalization/submission/paper.pdf",
+      "sha256": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147",
+      "bytes": 270925,
+      "reason": "original receipt names a binary transport snapshot omitted by ignore rules; exact baseline output bytes restored without modification"
+    }
+  ]
+}
