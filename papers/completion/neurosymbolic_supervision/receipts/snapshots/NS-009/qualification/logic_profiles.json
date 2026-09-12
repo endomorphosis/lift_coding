@@ -1,0 +1,187 @@
+{
+  "capability": {
+    "binaries": {
+      "coqc": null,
+      "cvc5": null,
+      "lean": null,
+      "souffle": null,
+      "z3": null
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_version": "3.12.3",
+    "z3_module": false
+  },
+  "converter": {
+    "id": "TDFOLToFOLConverter",
+    "losses": [
+      "DeonticFormula stripped to inner formula",
+      "TemporalFormula stripped to inner formula",
+      "BinaryTemporalFormula UNTIL/SINCE approximated by conjunction"
+    ],
+    "path": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_converter.py"
+  },
+  "evidence_classes": {
+    "finite_trace_evaluator": "bounded plan-check artifact, not a code proof",
+    "ipa_cegar": "spurious-path refinement over IPA findings",
+    "kernel": "not obtained in this qualification",
+    "solver_result": "non-authoritative until kernel reconstruction",
+    "tdfol_prover": "prover-class; axiom lookup is not kernel proof",
+    "translation_validation": "preservation/quarantine of a particular transformation"
+  },
+  "generated_at": "2026-09-12T02:34:50+00:00",
+  "identifier_search": {
+    "CompositionEdge": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "Craig interpolant": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "ProcedureCegis": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "QF_LIA": {
+      "found_in_python_source": true,
+      "matched_files": 1,
+      "sample_paths": [
+        "external/ipfs_datasets/tests/unit/logic/test_duckdb_proof_queries.py"
+      ]
+    },
+    "incremental SMT": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "interpolant": {
+      "found_in_python_source": false,
+      "matched_files": 0,
+      "sample_paths": []
+    },
+    "ipa_cegar_located": {
+      "found": true,
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+      "symbol": "refine_spurious_paths"
+    }
+  },
+  "located_mechanisms": {
+    "ipa_cegar": {
+      "not": "QF_LIA interpolating CEGAR adapter",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+      "status": "located_and_exercised",
+      "symbol": "refine_spurious_paths"
+    },
+    "logic_platform_admission": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_platform_admission.py",
+      "status": "located_and_exercised",
+      "symbol": "admit_receipt"
+    },
+    "tdfol_prover": {
+      "authority": "non_kernel",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_prover.py",
+      "status": "located_and_exercised"
+    }
+  },
+  "policy_id": "ns-009-logic-qualification-v1",
+  "retained_translation_profile": {
+    "bounded_tdfol_safety": {
+      "required_bounds": [
+        "max_trace_steps"
+      ],
+      "source_form": "tdfol",
+      "status": "qualified",
+      "target_form": "smt-lib",
+      "translation_class": "bounded_abstraction",
+      "unbounded_claim": false
+    },
+    "conservative_modal_erasure": {
+      "cannot_lift_to_source_obligation": true,
+      "maximum_assurance": "candidate",
+      "source_form": "dcec",
+      "status": "qualified",
+      "target_form": "fol",
+      "translation_class": "conservative_approximation"
+    },
+    "exact_fol_smtlib": {
+      "kernel_proof": false,
+      "maximum_assurance": "solver_checked",
+      "source_form": "fol",
+      "status": "qualified",
+      "target_form": "smt-lib",
+      "translation_class": "exact"
+    }
+  },
+  "schema": "neurosymbolic-supervision/logic-qualification-profiles@1",
+  "solvers": {
+    "cec": {
+      "authority": "non_authoritative",
+      "proof_success": false,
+      "readiness_identity": "solver-readiness:sha256:48b3faaa925e9b524bab1c512b1a745492cad200f722375b53569a2a20ca7ea8",
+      "reason_code": "available_candidate",
+      "status": "reconstruction_ready",
+      "supported": true
+    },
+    "dcec": {
+      "authority": "non_authoritative",
+      "proof_success": false,
+      "readiness_identity": "solver-readiness:sha256:b5b9277af707bc8889dd87a33c7bddc1cc60b52689ad27abc75d170b4da471c0",
+      "reason_code": "available_candidate",
+      "status": "reconstruction_ready",
+      "supported": true
+    },
+    "hammer": {
+      "authority": "non_authoritative",
+      "proof_success": false,
+      "readiness_identity": "solver-readiness:sha256:19c6cce52ea94ab79eb5237a2ed0ebc484f94b6e7cb650034da2f4edd2e77ac4",
+      "reason_code": "available_candidate",
+      "status": "reconstruction_ready",
+      "supported": true
+    },
+    "tdfol": {
+      "authority": "non_authoritative",
+      "proof_success": false,
+      "readiness_identity": "solver-readiness:sha256:df38db2c366e45f52ec5f0f29141d90432b7f864800bbd3708cd7f1f94c4469f",
+      "reason_code": "available_candidate",
+      "status": "reconstruction_ready",
+      "supported": true
+    },
+    "z3": {
+      "authority": "non_authoritative",
+      "proof_success": false,
+      "readiness_identity": "solver-readiness:sha256:cada34883f82e04f31438e9e4dfa476531f9daea2b87ba83608af9c66a2136bc",
+      "reason_code": "backend_unavailable",
+      "status": "unsupported",
+      "supported": false
+    }
+  },
+  "task_id": "NS-009",
+  "unavailable_or_specification_only": {
+    "CompositionEdge": {
+      "found_in_python_source": false,
+      "status": "specification_only"
+    },
+    "cyclic_assume_guarantee_closure": {
+      "status": "unlocated"
+    },
+    "incremental_smt_wrapper": {
+      "retained_clause_speedup": false,
+      "status": "unlocated"
+    },
+    "interpolant_checker": {
+      "found_in_python_source": false,
+      "status": "unlocated"
+    },
+    "qf_lia_cegar_adapter": {
+      "status": "unlocated"
+    },
+    "z3": {
+      "reason": "backend_unavailable",
+      "status": "unsupported"
+    }
+  }
+}

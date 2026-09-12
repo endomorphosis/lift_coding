@@ -1,0 +1,148 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-009",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:35:30+00:00",
+  "scope": "Caller-level translation-preservation and retained symbolic-checker qualification on the sealed validate_translation, TDFOLToFOLConverter, admit_receipt, probe_solver_readiness, TDFOLProver, and ipa.refine_spurious_paths surfaces. Not a live A–D experiment, SMT SAT/UNSAT measurement, interpolant generation, CompositionEdge discharge, retained-clause speedup, or kernel proof of arbitrary Python.",
+  "source_versions": {
+    "workspace_git_head": "17fe8859a867f821b3373f179b22d19de771eb64",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "8.1.1",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 recorded z3/cvc5/lean/coqc/souffle unavailable in the sealed-style profile. NS-009 re-probed the same PATH and still found no Z3 module or binary; SMT SAT/UNSAT, interpolants, CompositionEdge, and an incremental SMT wrapper are not treated as operational."
+    },
+    "caller": {
+      "logic_translation_validation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_translation_validation.py",
+      "logic_translation_validation_sha256": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62",
+      "solver_readiness": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py",
+      "solver_readiness_sha256": "c1150f87a8c435dc58b9a44b5ad323a4c8b144f69cddf71234a36fc3b033dff4",
+      "logic_platform_admission": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_platform_admission.py",
+      "logic_platform_admission_sha256": "ee1a6fdd218d24c61a790b574fe8d9c0fa4c58d89c89e641f6dcd2ecf08962f5",
+      "formal_logic_vocabulary": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_logic_vocabulary.py",
+      "formal_logic_vocabulary_sha256": "602f92e8fc170f44971626f09b71efa4f4492690dda1bdecbe98b2c48939a65b",
+      "ipa": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+      "ipa_sha256": "952ab04860b135248c5c286417c0f18fe85930a3b1c4dd1b7e8ccc757b6f6a39",
+      "tdfol_converter": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_converter.py",
+      "tdfol_converter_sha256": "19db7d143c0275eca84846b0b4abc1feba877c38b7f255a3c58c54d31d1bf16d",
+      "tdfol_prover": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_prover.py",
+      "tdfol_prover_sha256": "75afc5299206ff65714d5cb994e6e2b775dbdc578278ba7101a01887ceab18dd",
+      "enforcement": "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/enforcement.py",
+      "enforcement_sha256": "4df840c46d685d9b5ea5a97ce4167a6762c63632b5d11b0d6b78c00de7848c74"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_cases.json": "101e8f231e0427ba373b5bd5e00bc38ec968c38d3de8275ac6da355a354160dc",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_receipts.jsonl": "530b0d16f4ad48e248cabd78d24d80d51bb6e549fadf8bcf14300efa98ecec87",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_profiles.json": "494532ffdd8c647fc9d471a1f503872146eaf9d3a92faf95034a9d7cccb26954",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_report.md": "8e5017cf4047764f328786bba91a3228da1c8128c6d57c932f5938c88d681075",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/run_logic_qualification.py": "926741289b79171f6c991c5da60de8aa7219e96b4506c4c7aaaf92e2572883f2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/validate_logic_qualification.py": "bafbd5694122e5f623eccc689626fb0b56dcab9ee32119c0ceef611674e1177f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/logic-qualification.log": "4d08409c86754ea57122b549091f6f67383059cd32937d548bdc97927d73d8c4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/checkpoints/start.json": "029da40d5ca3574ccbcaf55bf2e44811d7ea14a8ad59dea6933e51ac816feb64",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/checkpoints/outputs.json": "aa273bebce55f1eed27056a1da69ce61e5949b73cd7da2dd7d975a99631a4c41"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/logic_cases.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_cases.json",
+    "papers/completion/neurosymbolic_supervision/qualification/logic_receipts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_receipts.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/logic_profiles.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_profiles.json",
+    "papers/completion/neurosymbolic_supervision/qualification/logic_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Valid supported translations can progress; unjustified lifting from modal-erasing or otherwise lossy projections cannot admit the source claim.",
+      "status": "met",
+      "explanation": "exact_atom_supported_progress validated an exact FOL atom to SMT-LIB with matching inventories (formula_root baguqeeramwn36h43fs6gepih7zuv4sw3eylulil7lkgshjh2jqfkc6my3rva, contract baguqeeracai4zl2aauwytjxxyyslormne2aio6n4kwpdialyqof2gblitxwq). validate_translation was conformant and promotion_allowed at solver_checked; admit_receipt admitted the bound non-conclusive solver envelope (caller receipt baguqeerarrvk2uzfp2mcnk6enrwn2fghu6tc52weyejhvth6da5qsfbj2qea) and rejected the same result as kernel proof. TDFOLToFOLConverter mapped O(Done) and Done to the identical FOL atom Done; the exact DCEC obligation translation dropped root:obligation and was quarantined (dropped_modal_operator). admit_receipt rejected source-claim lifting (translation_chain_invalid). SAFETY(p) was false on a partial trace where p held only at step 0. p U q and p ∧ q are distinct sources with the same FOL projection (∧ Done Ready). Declared conservative modal erasure progressed only at candidate assurance and still could not lift.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/run_logic_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/logic-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Actual caller receipts bind exact formulas/source/theory/solver/environment and reject stale or unvalidated results.",
+      "status": "met",
+      "explanation": "Caller envelopes through SupervisorLogicPlatformReceiptAdmission@1 bound formula_root, source/target forms, theory, solver_id, environment_id env-ns009-sealed, and contract/artifact identities. Stale formula roots failed source_identity_mismatch plus admission source_id_mismatch/freshness. A solver fingerprint that did not match the submitted formula was rejected. Fixture-set mismatch quarantined the artifact. Colliding named assertion IDs bound to distinct formula roots were rejected as assertion-identity replay, not retained solver state. A solver_result labeled proved was rejected for kernel completion (evidence_kind_does_not_support_verdict, reconstruction_not_passed).",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_profiles.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/validate_logic_qualification.py"
+      ]
+    },
+    {
+      "criterion": "Vacuity, unknown, unsupported, and budget-exhausted cases remain distinct from meaningful proof.",
+      "status": "met",
+      "explanation": "TDFOLProver.prove produced proved (axiom_lookup, non-kernel), unknown (forward chaining exhausted), and timeout (timeout_ms=0) as distinct statuses. Obligation evaluation on the finite-trace evaluator raised unsupported (no reference semantics). Vacuous G⇒A from unsatisfiable G (p ∧ ¬p) held on the trace evaluator and was rejected as kernel proof. SMT SAT and UNSAT of G∧¬A were recorded unavailable because probe_solver_readiness marked Z3 unsupported (backend_unavailable, no binary, no z3 module) rather than simulated sat/unsat. None of these classes was relabeled proved or kernel_proof.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_profiles.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/logic-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Any claimed CEGAR/interpolant/composition behavior is supported by located code and actual evidence; no unavailable mechanism is silently simulated.",
+      "status": "met",
+      "explanation": "ipa.refine_spurious_paths is located and was executed: spurious finding f-spurious was refined away and corpus seed f-seed remained corpus_bound. Identifier search found no interpolant checker, no CompositionEdge, no ProcedureCegis, and no incremental SMT wrapper in Python source. The named QF_LIA interpolating CEGAR adapter is not substituted by IPA CEGAR. A purported interpolant whose symbols escaped A∩B was not admitted; Craig implication/UNSAT checks were recorded as not discharged because no interpolant checker exists. Unsat cores are not treated as interpolants. Assertion replay is not retained-clause incrementality. No unavailable mechanism was simulated as success.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_profiles.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/qualification/logic_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/run_logic_qualification.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns009-run",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns009-run/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns009-run/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns009-run/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns009-run/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/validate_logic_qualification.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/validate_logic_qualification.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/logic-qualification.log",
+      "started_at": "2026-09-12T02:35:20+00:00",
+      "finished_at": "2026-09-12T02:35:26+00:00",
+      "execution_kind": "sealed-profile live translation/admission/CEGAR qualification check: exact progress, modal-erasure rejection, solver-readiness, IPA CEGAR; no A-D live repair and no simulated interpolant/SMT SAT"
+    }
+  ],
+  "limitations": {
+    "z3": "unsupported in the sealed PATH; SMT SAT/UNSAT of G∧¬A unavailable",
+    "interpolant_checker": "unlocated; unsat cores are not interpolants",
+    "CompositionEdge": "specification-only; identifier not found",
+    "incremental_smt_wrapper": "unlocated; assertion replay is not retained-clause incrementality; no retained-state speedup",
+    "qf_lia_cegar_adapter": "named interpolating QF_LIA CEGAR adapter unlocated; IPA refine_spurious_paths is a different located mechanism",
+    "cyclic_assume_guarantee_closure": "unlocated; mutual citation is not proof",
+    "tdfol_prover": "axiom lookup and unknown/timeout are prover-class, not kernel reconstruction",
+    "finite_trace_evaluator": "bounded plan-check artifact, not a code proof",
+    "fixture": "reviewed atoms, TDFOL converter examples, and IPA findings; not a historical live repair task",
+    "live_ad_experiment": false,
+    "claim_boundary": "This receipt qualifies loss-aware translation, caller formula/source/theory/solver/environment binding, distinct non-proof solver statuses, located IPA CEGAR, and truthful unavailability of interpolant/CompositionEdge/incremental SMT/Z3. It is not a matched A-D outcome or a kernel proof of arbitrary Python."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}
