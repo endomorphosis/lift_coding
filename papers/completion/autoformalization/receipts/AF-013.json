@@ -1,0 +1,190 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-013",
+  "status": "complete",
+  "completed_at": "2026-09-12T19:49:22.120000+00:00",
+  "source_versions": {
+    "adoption_instruction_source_head": "ecb15c9692ab2c2c566fc43fa0669538afb20a02",
+    "operator_execution_source_head": "06a34600b741c908eb25060650e9c88b9b895bf7",
+    "operator_manifest_sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344",
+    "operator_native_pins": {
+      "external/ipfs_accelerate": "bee8888ac9ce9e2a08482cc11c8416dfad9dc1f5",
+      "external/ipfs_datasets": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "pending_receipt_template": {
+      "path": "papers/completion/autoformalization/qualification/operator_inputs/AF-013/pending_receipt.template.json",
+      "sha256": "bd2ca6ada18847423a86f1b3cbfc38b5fc2d8f187ba36794cd62504c4c56bd50"
+    },
+    "compact_review": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-013/review_compact_adoption.py",
+      "sha256": "2ab73ba33ef0bce26cc7b2d4e899711007e9f64978b505b732d7d59240a9197d",
+      "schema": "af013-compact-native-adoption-handoff/v1",
+      "note": "Stdlib source/artifact review of the four compact operator mappings. Does not reload T3 payloads, regenerate exports, rerun canaries, invoke promotion, train, or call checkers/providers."
+    },
+    "af004_fixed_canary": {
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/fixed_canary.sources.jsonl",
+      "sha256": "98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+      "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+      "records": 38
+    },
+    "t3_identities": {
+      "104729": "def483e87bb57d27a8f24a3939a063d1039af95c111ec6d5733b452f612b5cbc",
+      "130363": "c90b4b9e7fd0120a7507b5e98bf7130e6c1e63091c14200afd3c2ee137ca5faf",
+      "155921": "a4e7a375e63e8a62c13691673342560596418095a0b1f0835ad6929d66d18be8"
+    },
+    "repository_head": "1a408e8d043948287fd98f6ff13f41fb88926e3c",
+    "empirical_execution": "Adopted three already-completed native operator runs (seeds 104729/130363/155921) that reloaded the exact AF-029 T3 identities read-only, exported 64 shared heads with sample_count=0, bound the frozen 38-record AF-004 canary before comparison, recorded native no_candidate promotion, and left T4 unactivated/unavailable with E locked. Matching ingestion identity is not applied learned guidance. Default reset is an actual compiler reset, not rollback of an applied effect. Checkpoint loading, exports, canaries, promotion, training, checker and provider calls were not repeated."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json": "7bf7cbe0641dfd7175922dd530f5d7a7158403a49fb6dbf508136ce0434dcbff",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json": "d95cc91cdc9e142d20e602af2aa68b8850e4fcf4f2ac6a5e515d3089a3f0e1ab",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl": "e2898a87f9c76ab4640b4a954fed536403fb2dd32ac2aacc94087a7ad324e373",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/review_compact_adoption.py": "2ab73ba33ef0bce26cc7b2d4e899711007e9f64978b505b732d7d59240a9197d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/python_version.meta.json": "8250a3f7561aaa98aa9a47af58b39167b3906a9db5902e43146bcf29d2d0c105",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/python_version.stdout.log": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/python_version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.meta.json": "3e6be8591b63da43163c4eb09a583ce3522028db74ed0af5a37530f3ba5476bd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stdout.log": "5b0d9bfb71e9e8dddbde66b9f3c5f13d33541a0359d551cd2d2cd2e565a61fd4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/json_parse.meta.json": "1e7d46fa3c9be7f8b1968e5012ee602b0ca6b747a1793446407a4259c26fd928",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/json_parse.stdout.log": "295f99fa0011784263c790ea66eba2155dafd1af4b47355e8405fd5221d9f594",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/json_parse.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evidence/consumer_activation.json": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+    "papers/completion/autoformalization/evidence/guidance_export.json": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+    "papers/completion/autoformalization/evidence/rollback_receipt.json": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json",
+    "papers/completion/autoformalization/runs/guidance_promotion/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl"
+  },
+  "criteria": [
+    {
+      "criterion": "Canary population and thresholds are fixed before comparison and are distinct from final test.",
+      "status": "met",
+      "explanation": "The AF-004 fixed-canary export digest 98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207 is 38 CFR records. All three operator seeds bind that exact population as canary_id af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207 with evidence_id lir-canary-evidence-944ac372cbce3d7326a08d58, fixed_sample_set=true and metric_tolerance=0.0. Native stage native_imports_and_canary_bound precedes native_checkpoint_reloaded on every seed, so the population and thresholds are fixed before comparison. The same 38 record_ids and source_text_sha256 identities appear on seeds 104729, 130363 and 155921. Final test remains 1913 private units with a different export digest; the canary is not the final-test set. This review did not rerun canaries.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Either actual consumer activation is evidenced by a matching loaded digest or the route is reported unactivated; export alone earns no downstream credit.",
+      "status": "met",
+      "explanation": "Every result row and the three-seed consumer observation report T4=unactivated/unavailable with e_locked=true. Activation state is unactivated; applied_learned_features=false; downstream_activation=false. Native compiler passes record matching artifact_ingestion_digest_matches=true with on_metadata_only=true; matching_ingestion_digest_is_applied_learning=false, so loaded export identity is not applied learned guidance. Compact exports exist (64 stable features, sample_count=0, raw_source_text/sample_memory excluded) but export alone earns no T4 credit. pipeline_arms.py still returns unavailable for E through `if arm_id == \"E\" or not capability.get(\"runnable\")`. Human agreement and fidelity remain null/unmeasured.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Promotion rejection and rollback retain their genuine result and are analyzed rather than bypassed.",
+      "status": "met",
+      "explanation": "Native promotion_report_outcome and status remain no_candidate on all three seeds with candidate_record_count=0 and promoted=false. The genuine block reasons are retained rather than bypassed: proof_receipts_missing, missing_view_family_weights, no_canonical_contracts_resolved, no_guidance_records_met_promotion_threshold. applied_learning_rollback_performed=false. Each seed performed 38 actual default compiler resets (114 total); off_on_core_equal and default_restored_core_equal are true because no learned effect was activated. This is an actual default reset, not rollback of an applied learned effect. family_metrics remains {}; a native guardrails_passed flag over that empty map is not an empirical proof or source-copy measurement. proof_receipt_count=0. Perfect T2 reconstruction remains target-assisted and is not source-free generalization.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.local/state",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/review_compact_adoption.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-013/review_compact_adoption.py",
+      "exit_code": 0,
+      "started_at": "2026-09-12T19:49:21.850443+00:00",
+      "finished_at": "2026-09-12T19:49:21.887818+00:00",
+      "execution_kind": "sealed-PATH compact source/artifact review of the four adoption mappings; does not rerun checkpoint loading, exports, canaries, promotion, training, checker or provider calls",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/review_compact_adoption.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.local/state",
+        "/usr/bin/python3.12",
+        "-c",
+        "import json, pathlib, sys\npaths=sys.argv[1:]\nfor path in paths:\n    text=pathlib.Path(path).read_text(encoding=\"utf-8\")\n    if path.endswith(\".jsonl\"):\n        rows=[json.loads(line) for line in text.splitlines() if line]\n        print(path, \"ok\", len(rows))\n    else:\n        json.loads(text)\n        print(path, \"ok\")\n",
+        "papers/completion/autoformalization/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/evidence/guidance_export.json",
+        "papers/completion/autoformalization/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/evidence/rollback_receipt.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T19:49:21.888090+00:00",
+      "finished_at": "2026-09-12T19:49:21.905050+00:00",
+      "execution_kind": "JSON/JSONL parse pin of compact AF-013 machine-readable outputs",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/json_parse.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/json_parse.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af013-K8pQ3n/.local/state",
+        "/usr/bin/python3.12",
+        "--version"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T19:49:21.848532+00:00",
+      "finished_at": "2026-09-12T19:49:21.850250+00:00",
+      "execution_kind": "sealed-PATH interpreter identity",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/python_version.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-013/logs/python_version.stderr.log"
+    }
+  ],
+  "limitations": [
+    "Checkpoint payloads remain out of Git as compact digest-bound references; this receipt did not reload the multi-gigabyte T3 files.",
+    "Exports, the 38-record canaries, promotion, training, checker calls and provider calls were not repeated; the compact native observations and retained raw-byte references are the operator evidence.",
+    "T4 is unactivated/unavailable. Matching ingestion identity is not applied learned-feature guidance. Export alone earns no downstream credit.",
+    "Native promotion remains no_candidate. Default reset is an actual compiler reset, not rollback of a previously applied learned effect.",
+    "A native guardrails_passed flag over an empty family-metrics map supplies no measured proof or source-copy guardrail result.",
+    "Proof, source-copy and human fidelity/agreement metrics remain unmeasured. Outside reviewers are not a manuscript-completion prerequisite.",
+    "Perfect T2 cosine/zero MSE remains target-assisted projection and is not source-free reconstruction, generalization, or semantic fidelity.",
+    "Arm E remains locked. Generic file existence, compact export, or this completed receipt cannot activate learned guidance.",
+    "This receipt is provenance validation, not independent scientific replication or submission authorization."
+  ],
+  "completion_scope": "Coordinating-assistant evidence/criterion review of the pending four-file operator-adoption bundle, sealed-PATH compact source/artifact validation, and ordinary receipt completion. Checkpoint loading, exports, canaries, promotion, training, checker calls and provider calls were not repeated."
+}
