@@ -1,0 +1,147 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-010",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:52:12+00:00",
+  "scope": "Fixture-instance and phase-aware reuse qualification on the sealed TestLocatorKey, TestExecutionKey, TestPassReceipt, TestProofCache, identity-component, collection-seed, lifecycle-capture, xdist, eligibility, and ProofCachedTestValidation surfaces. Not a live A–D experiment, not a native Groth16 proof of pytest execution, and not the NS-011 cold-oracle mutation campaign.",
+  "source_versions": {
+    "workspace_git_head": "11b1a8f88d0dfb793560e35fbdda642029c385a8",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "8.1.1",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 recorded multiformats unavailable in the sealed-style profile. NS-010 imported TestProofCache and identity components without a live multiformats package; a decode-only CID stub was installed only so runtime-trace imports could load. Native Groth16 verification of pytest execution is not treated as operational."
+    },
+    "caller": {
+      "proof_cached_test_validation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py",
+      "proof_cached_test_validation_sha256": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581",
+      "test_proof_cache": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+      "test_proof_cache_sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+      "test_certificate_store": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_certificate_store.py",
+      "test_certificate_store_sha256": "6ae02457603cfe2d5656e768e742f4ed320153d78ff5334d9ef48d2b6095cfb0",
+      "test_execution_contracts": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py",
+      "test_execution_contracts_sha256": "9702398656f4bff098049167f30f1e54ef1c892c2d1c021b2cde5a8c79ab0e69",
+      "ipfs_datasets_test_certificate_provider": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py",
+      "ipfs_datasets_test_certificate_provider_sha256": "8faacc1c4cbc4c7c6fb3e8077e428acbca031db0d449cf881a941036892b7f68",
+      "test_identity_components": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_identity_components.py",
+      "test_identity_components_sha256": "f264540c92c4c7ae90f26a2b52f375f3e3ddb04cee8d5bc17e7be7f92aa091be",
+      "test_reuse_eligibility": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py",
+      "test_reuse_eligibility_sha256": "f21b8e64a9ba1b0f5ebc2d3df126aa63f299dfe2c6c8b1e504cbf6233ae01b4e",
+      "collection_seed": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py",
+      "collection_seed_sha256": "b36f253be3f55350d9b57c09b9e81484579b527d1007651c66d9f088e1db65f9",
+      "runtime_revalidation": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py",
+      "runtime_revalidation_sha256": "f57da57a07b6e8c3c9bdc077d6506d3059846933c77a1bfff0fefbf490bc721d",
+      "xdist": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py",
+      "xdist_sha256": "05815776dd6cdf6d670c99a9cd702eecc988f265232f6fae1f28e8b547f136a4",
+      "test_selection": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py",
+      "test_selection_sha256": "ef59615ecb9a0a09a06b0da4f1aed962eaa7becae0e93e5829971c2fa6bb9e6a"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_profile.json": "c1430e4cf972ad6a17abdaa9c81759ec412be1ed08c263112523142ea35dc03e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_phase_cases.json": "80481fd14170a2a18917b002df2d4d616e548c013b398bce987b3ec58b20100a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_adapter_report.md": "2ea0ef9f86601c9d5e5e5fee78ae8af21c2148c06fcacd72c0b7ceb45ef5cd87",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/run_reuse_qualification.py": "74c4417061ad6c0574933c80f802be2e02c0736277b9e1b6a38bf96798f0ce19",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/validate_reuse_qualification.py": "9979884889945dca0b972737719df4cb417db101bf49ea4b3d214b7a4fe3c11f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse-qualification.log": "8dfcd01a80ece89cceff6ccd261b3ef10c631844c586a9d7b0e8d928402ac3e2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse_phase_results.jsonl": "0a1db422c74c17fb7dc3169c8a65a8ed1eac18b30af1c5e95c16e813a0d4a700",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/checkpoints/start.json": "a21f4338145fc0dd0ddab7383f55b1dcbbfd059210cad257d62051c1a531e857",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/checkpoints/outputs.json": "5acdc35dfe105cf0fac7567534c82419e585b0be9e35e5d35924021fd72349ee"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_profile.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_profile.json",
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_phase_cases.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_phase_cases.json",
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_adapter_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Reuse lookup cannot itself become a passing outcome.",
+      "status": "met",
+      "explanation": "ProofReuseCollectionSeed@1 action is RUN with authorizes_skip=false, authorizes_lookup=false, and no execution key. evaluate_reuse_eligibility never emits SKIP (non_reusable RUN when traces are missing). ProofCachedTestValidation.validate on a pytest skip string returned plain_skip_not_evidence and is_completion_evidence=false. Empty-candidate lookup is RUN/candidate_missing. Simulated/non-attested certificates are RUN/certificate_non_attested. Only an authoritative TestProofCache HIT with proof_cache_hit can SKIP.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_phase_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_profile.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_adapter_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/run_reuse_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Changed fixture definitions/values/plugins/policy/runtime/external snapshots invalidate or force execution even when the test body is unchanged.",
+      "status": "met",
+      "explanation": "The test-function CID was held at cid:function:unchanged-body. Changing fixture_cids, hook_plugin_cids, conftest_closure_cid, runtime_trace_root_cid, or external_snapshot_cids changed TestExecutionKey.content_id and made TestProofCache.lookup RUN with execution_key_mismatch. A changed policy_cid made lookup RUN with policy_mismatch. collect_fixture_hook_identity bound autouse and transitive fixture definitions; a definition-body change changed the fixture CID set while conftest/plugin CIDs stayed equal. Parameterized locators require parameter_values_cid. Interpreter/environment/lock identities are bound and change when PYTHONHASHSEED changes.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_phase_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_profile.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse_phase_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/validate_reuse_qualification.py"
+      ]
+    },
+    {
+      "criterion": "Call reuse after setup still runs required teardown; teardown failure prevents whole-item pass.",
+      "status": "met",
+      "explanation": "PostPassRuntimeTraceCapture.execute_lifecycle_once recorded setup, a non-reinvoked call placeholder, and teardown exactly once; may_authorize_skip remained false. Setup failure still ran teardown and did not invoke the call body. TestPassReceipt(admitted=True, teardown_outcome=fail) raised TestExecutionContractError requiring teardown_outcome=pass. A teardown-failure receipt with admitted=False could not SKIP (receipt_mismatch). Unhealthy xdist workers cannot skip or publish.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_phase_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_adapter_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/run_reuse_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse-qualification.log"
+      ]
+    },
+    {
+      "criterion": "An unchanged eligible case demonstrably reuses a prior admitted result, while unknown/effectful cases use an explicit fallback.",
+      "status": "met",
+      "explanation": "Unchanged eligible lookup HIT with action SKIP, reason proof_cache_hit, receipt baguqeerazrfpi6jrmof7phetw2w3pxpkjhnuxa4jwibxyfiwnhenllha3ljq, certificate baguqeerady2wz46okupheat427n5gl2tp354kstta7mvot2rxcycv47l573a, execution key baguqeeray5ulcvexqy2qp35q3mrxpwjekcuep22kzk4vayrerpnv5mqwj25q. Uncontrolled fixture values recorded uncontrolled_fixture_value. canonicalize_pytest_parameter rejected a lambda (no pickle/repr fallback). Incomplete runtime traces fell back to RUN/incomplete_trace. Collection-seed pre-setup reuse remains RUN-only and is distinct from post-setup call reuse that still requires teardown.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_phase_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_profile.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/qualification/reuse_adapter_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse_phase_results.jsonl"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns010-validate",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns010-validate/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns010-validate/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns010-validate/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns010-validate/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/validate_reuse_qualification.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/validate_reuse_qualification.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/reuse-qualification.log",
+      "started_at": "2026-09-12T02:52:00+00:00",
+      "finished_at": "2026-09-12T02:52:06+00:00",
+      "execution_kind": "sealed-profile live reuse-seam qualification check: lookup is not a pass, fixture/plugin/policy/runtime/snapshot invalidation, teardown retained after call reuse, eligible proof_cache_hit plus explicit fallbacks; no A-D live repair and no simulated Groth16 pytest proof"
+    }
+  ],
+  "limitations": {
+    "multiformats": "unsupported in the sealed PATH; a decode-only CID stub was installed only so runtime-trace imports could load",
+    "native_groth16_pytest_proof": "not claimed; cache verifier in this profile is a local authoritative callback over retained canonical bytes",
+    "cold_oracle_mutation_campaign": "NS-011; not this task",
+    "live_ad_experiment": false,
+    "fixture": "constructed locators/keys/receipts plus live contract, cache, identity, lifecycle, and validation APIs; not a historical live repair task",
+    "claim_boundary": "This receipt qualifies staged fixture/call/teardown identity and fail-closed lookup on the located adapters. It is not a matched A-D outcome, not a false-reuse rate, and not a kernel or Groth16 proof of arbitrary pytest execution."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}
