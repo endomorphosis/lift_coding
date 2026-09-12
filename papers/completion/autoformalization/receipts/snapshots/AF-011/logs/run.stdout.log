@@ -1,0 +1,36 @@
+{
+  "arms_executed": [
+    "T0",
+    "T1",
+    "T2"
+  ],
+  "config_id": "082d9a574705aabef0f46ba17f95c256118759fe3bb8a467110a12d19d1bfbdd",
+  "dataset_id": "1ccdbe48451a8b81d5c76a8494a4c2e84d53ce653236d1e5799de9cf58955c47",
+  "elapsed_seconds": 237.418,
+  "n_result_rows": 1200,
+  "t0_deterministic": true,
+  "t2_live_memory_checks": [
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 104729,
+      "trainer_sample_memory_used": false
+    },
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 130363,
+      "trainer_sample_memory_used": false
+    },
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 155921,
+      "trainer_sample_memory_used": false
+    }
+  ],
+  "t2_memory_disabled": true
+}
