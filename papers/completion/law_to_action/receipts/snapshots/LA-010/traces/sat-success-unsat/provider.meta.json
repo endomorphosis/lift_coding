@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json"
+  ],
+  "completed_at": "2026-09-12T01:57:29.502653+00:00",
+  "elapsed_seconds": 0.16380725300405174,
+  "exit_code": 0,
+  "parsed": {
+    "algorithm": "dpll",
+    "authority_kind": "satisfiability",
+    "elapsed_seconds": 0.00019009807147085667,
+    "formula_id": "sat-success-unsat",
+    "model": null,
+    "nclauses": 4,
+    "nvars": 3,
+    "provider": "sympy.logic.inference.satisfiable",
+    "query_kind": "satisfiability",
+    "status": "unsat",
+    "sympy_version": "1.12"
+  },
+  "started_at": "2026-09-12T01:57:29.338846+00:00",
+  "timed_out": false,
+  "timeout_seconds": null
+}

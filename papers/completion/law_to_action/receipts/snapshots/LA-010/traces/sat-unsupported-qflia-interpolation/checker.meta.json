@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-qflia-interpolation.json",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/provider.json"
+  ],
+  "completed_at": "2026-09-12T01:57:29.859622+00:00",
+  "elapsed_seconds": 0.032712435931898654,
+  "exit_code": 0,
+  "parsed": {
+    "agrees_with_provider": true,
+    "authority_kind": "satisfiability",
+    "checker": "exhaustive-truth-table",
+    "reason": "QF_LIA interpolation is not selected and cvc5 is unavailable",
+    "status": "unsupported"
+  },
+  "started_at": "2026-09-12T01:57:29.826908+00:00",
+  "timed_out": false,
+  "timeout_seconds": 5
+}

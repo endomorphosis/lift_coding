@@ -1,0 +1,201 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-010",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:57:30.336138+00:00",
+  "completion_mode": "Selected QF_BOOL SAT provider and independent exhaustive checker executed under the sealed validation PATH with retained raw artifacts. Native Z3/cvc5/Vampire/E/Lean/Coq/Isabelle remain unavailable. SAT/policy/simulated evidence cannot authorize theorem_proof allows. This is qualification, not a scored A4 benchmark.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-counterexample.json": "8ac40ef2b85e855cb634662401937cf19675f41d8790d7215f171ad7b1138971",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-forged-model.json": "4d1d1e91d602bafc376779d006a35440df9d4b18e341f67e0542f0c9a8101a79",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json": "440c6fe47250d9b52dd1ff863883825ea10411656a5a35a13d7bdde5047c8fcd",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-timeout.json": "8ab00debe0f8692a742bd641c8e7a7756a46ab150f6ec1ca90b1e1ed41a48c18",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-qflia-interpolation.json": "518b497ad4de17497bb2c0854d38e09081ba43860d11714ac7dfad5790e5ec8d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-quantifiers.json": "3c64e4252473a5fce6c606915eb63755d670401b6d9c5a51e98b3ae09d8a5f02",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/benchmark/manifests/provers.json": "81e3873e996516f47451a1fa5859e390e39e989dadab20eed7ba35c9b7ac39e1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/qualification.md": "054c7ab34a85782fc6ea5a20404edc127d8803ce971e9c96628c3d41beebc813",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/raw.jsonl": "c04a86c6735bb6aea6e5a1617bb52e6f7e125e93f321b4f79bb4a86bd1262300",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/probe/authority.json": "d4fdeef36592cf559cb82cc4b61953b2d18908f5b5934d291b9fe55e505e67d2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/probe/sealed-environment.json": "99855d7ec681780d8cc76843c726df233813af7b452547384aea4b470865a3bb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/probe/summary.json": "d9a6c93e76daac167ba6921a753ea4d5b05e760b12b7ba528e546c41ba106f11",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/qualify_proof_routes.py": "fa142fc80e8bba737eabfb2e098d227fb9abb9816bc802e7147c417b7a3e6928",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py": "258125dd9adf388c20f8acb7352f3206f1400c3e217966314b07ea78c85eb20a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py": "7a356270b936a5fb41ab2fa0746d6bf6f52da639d6465d99060fa5f28c1d4644",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/authority/record.json": "d4fdeef36592cf559cb82cc4b61953b2d18908f5b5934d291b9fe55e505e67d2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/checker.json": "a93ff4d11287e0ab4ca21f61ca131c363e94a3c5c3d104ddcf2bd7b3e56ed634",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/checker.meta.json": "94a4f04c4a3c4a5987f8a9ea16d9f1b435118ab2e12b23f165c289643eb7703d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/checker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/checker.stdout.raw": "c64e06ab82ede1be854047434efdd492e711e29f2b16a28cffcb35162c80d333",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/provider.json": "e517c28672bc5f876d33265e206b6770760430f3c817b314d9e8093de3b257bf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/provider.meta.json": "e505e134edaedea2a884450b6be2c41a3bf3042972ff084e1a840e211cbdc2e1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/provider.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/provider.stdout.raw": "4a746799adadb6f5e7b9f671e855de587604e56ac9cbba3a6011609f9282c516",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/record.json": "4dfd5b542a7b2c08c4148d9d07c92fc1145654cee78670a622eff751f27b1c33",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/checker.json": "57f0544afbad1a12ed641571b81df87e61c075fdd8b08ab51374946071614691",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/checker.meta.json": "90ca7890e2e12ef052c801e607a0d325beb3d4dd3cac5e34334b9198d3e40ee2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/checker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/checker.stdout.raw": "464d4cf383bcf9776b8dd97c9b1354d583c7ce0d218c35f7ecc3c38835b118b9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/forged-checker.meta.json": "2fe61c5bbdad5160cbc3e2332b73c96663dddec2f78e670af87944b5f26ade88",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/forged-checker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/forged-checker.stdout.raw": "452703a93eff612edee488ecc6bd4ebacf079f98466471982473fbb657ac6c55",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/forged-claim.json": "16bc851494bbc4f83b2e80f196ca2e61765ebbb89727e9ce4bbd75ae2fddebf6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/provider.json": "a0938bc3c832171f28444ab97c54d57da7ee0ded79b0858e654c87a04f2a3411",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/provider.meta.json": "ea54765a2cf99f495c15dd86be3d0e67deb568c7e366dcd8bb7bbeda404e5cbf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/provider.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/provider.stdout.raw": "6902f2c544d7d43f6f9473b7aec920b5da25ab653ce73b1641365b649b417f64",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/record.json": "f181e6152de9ab7a0bbaae6ff39f09ec49f663467ff07c3f3da28938d85f4911",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/checker.json": "3c330a4c3ac7954c74b993913a2c7f1652871cdcf74d8e160b789f01854c8a8e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/checker.meta.json": "61eca59860ab7415076e07618315b13e490a888d0983019369d45747a36c28cf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/checker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/checker.stdout.raw": "038a90f4e21ced53e8ff52c0810aa4ff6d3e7be4086859cc79b31b3177a63dc6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.json": "79ae5cb53f94c16538f8bd830fd99714620f788c23a8dfd7d8c8fd2cde9cc4a5",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.meta.json": "9700b57708eb8da356604988a0ec5f2d5b3894386638b89b2aaec72cc3cac40f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.stdout.raw": "e95ce791149cdf95ed5e6443098935a570b71defae14e6ebe7a8be00e9d19a99",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/record.json": "f6af76b6892a7e34f3ee853fcb52105d644321f4f65d0698f4ab8bdaf531604a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-timeout/provider.meta.json": "3423e98b6dc89d11bdb872a9a2ad3f9a96929b91a186227eedaab5a8a7d9e7ba",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-timeout/provider.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-timeout/provider.stdout.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-timeout/record.json": "d77b401ae1f8180367f3dfa916933fcb9196d7784526daab8987522a59830b52",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/checker.json": "8287afbd4eeb01bfafbd2545006371fdc59bc8b2cff83296664303674ea0be3b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/checker.meta.json": "720fa7dc3fd0badc83ae182aefbee46234c2a7b11f61d8c1cef1c41225bf19d9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/checker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/checker.stdout.raw": "c28b79eac9d2d20e4de314dbc167dfb99e7227221f167f64f7cca79fd12224de",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/provider.json": "f68b91ee8badae6f44a44f74b0164ad50324ba3d73bce4c0b19df4919064af62",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/provider.meta.json": "b968086e6fd639dd2e69e4a95df483109bc47e937b64acdfd7312132d19aee5f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/provider.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/provider.stdout.raw": "fb6ac3c4a86cf003242452c96c2e913e3f23c2b26dd8314e58f6da7b39562b40",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/record.json": "eb8f4378efa6c6ddae438e9bf4da4d05be0558d29993b82153b4149f32261574",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/checker.json": "ed8dc3737f7ded463eeaeb1206cb9018431b2b5dddebc773c372c1965845d25c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/checker.meta.json": "5be4fa6e6c6ef90a7f0f88e831523e906dd022123c567f3bd6d216846af7b3c1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/checker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/checker.stdout.raw": "d40b339b80143193b62795bf521bd33a2301f632aba55f91905b5a006baf6de0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/provider.json": "7f389c2f6f1ece74dcaf2904ed4e33727ea30bbd68821eb19fbe33df0e5774f5",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/provider.meta.json": "2ff5ce65341aab9009c8ef4ada0dcc33432f14454c3bd7a3b925930e75bd2a1e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/provider.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/provider.stdout.raw": "f1ef33d7aa72395be581ca732cdd149f4b2265937c634a3e34c5d508a59f2724",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/record.json": "da6e5c2178fab7a4863485963de852acfdcc48053d1018ba0d3ea6b8440eab84",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/validate_proof_routes.py": "fa68bd3f5adf3e0a052961f3304fe2a8257906d404d076c8024c91116feccd8a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/command-times.json": "08ab06abab776c09d5300a24ad7efb90480fdd867536a831ec523d5a18cec557",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/qualify.stdout.log": "d9a6c93e76daac167ba6921a753ea4d5b05e760b12b7ba528e546c41ba106f11",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/validate.stdout.log": "b03c15610476105d9160fbd0de74bd56791b1a11d18326b7e53e946537cb081d"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/manifests/provers.json": "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/benchmark/manifests/provers.json",
+    "papers/completion/law_to_action/results/proof_jobs/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/raw.jsonl",
+    "papers/completion/law_to_action/results/proof_jobs/qualification.md": "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/qualification.md"
+  },
+  "criteria": [
+    {
+      "criterion": "At least the benchmark-required proof-oriented route executes a real provider/checker with retained raw artifacts.",
+      "status": "met",
+      "explanation": "The selected Hoare-style security-invariant route ran SymPy 1.12 DPLL SAT as a child process on a QF_BOOL encoding of matching_roots \u2227 grant \u2192 \u00acforbidden_effect. The success job is UNSAT and the independent exhaustive checker agrees; the counterexample job is SAT with a retained model that the checker independently confirms. Raw provider/checker stdout, stderr, DIMACS formulas, argv, exit status and elapsed time are retained. Timeout, unsupported-quantifier, unsupported QF_LIA interpolation, and forged-model jobs were also executed. This is satisfiability qualification, not a kernel theorem or scored A4 run.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/benchmark/manifests/provers.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/qualification.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.stdout.raw",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/checker.stdout.raw",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/provider.stdout.raw",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/qualify.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Authority checks reject SAT-only/simulated/policy-only evidence where theorem evidence is required.",
+      "status": "met",
+      "explanation": "AuthorizationQueryComposer@1 emits closed-profile jobs whose required_authority is theorem_proof. ResultAuthority(satisfiability).require(theorem_proof) raises AuthorityMismatchError. result_status_to_job_verdict maps SAT/UNSAT to sat_only, simulated proved theorems to simulation, and policy approval to policy. select_job_result demotes a SAT-only attempt that claimed PROVED. AuthorizationDecisionPolicy.for_profile(legal-strict) yields abstain/not-allow for SAT-only, policy, simulated, monitor, and unavailable-kernel result sets. No weak-authority path produced allow.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/probe/authority.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/qualification.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Each reported family has qualified scope and receipt; unavailable optional families are accurately scoped, not assigned invented results.",
+      "status": "met",
+      "explanation": "Eleven families are reported. Only qf_bool_sympy_sat is qualified, and only as satisfiability on QF_BOOL. Z3, cvc5, Vampire, E, Lean/Lake, Coq/Rocq and Isabelle are unavailable under shutil.which and portfolio.probe_backend on the sealed PATH, with invented_results=false. QF_LIA interpolation is not_selected_unavailable. Policy approval and runtime monitors are scoped as distinct non-theorem authorities. No family is assigned a fabricated solver result.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/benchmark/manifests/provers.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/probe/sealed-environment.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/qualification.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/outputs/results/proof_jobs/raw.jsonl"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/qualify_proof_routes.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T01:57:29.196464+00:00",
+      "completed_at": "2026-09-12T01:57:30.315567+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/qualify.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-010/qualify_proof_routes.py",
+      "environment_overrides": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1",
+        "LANG": "C.UTF-8"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-010/validate_proof_routes.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T01:57:30.315800+00:00",
+      "completed_at": "2026-09-12T01:57:30.336138+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-010/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-010/validate_proof_routes.py",
+      "environment_overrides": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1",
+        "LANG": "C.UTF-8"
+      }
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "sympy": "1.12",
+    "sympy_origin": "/usr/lib/python3/dist-packages/sympy/__init__.py",
+    "selected_provider": "sympy.logic.inference.satisfiable dpll",
+    "selected_checker": "exhaustive-truth-table",
+    "selected_fragment": "QF_BOOL",
+    "empirical_benchmark_result": false,
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "native_smt_atp_kernel_available": false,
+    "compose.py_sha256": "99f3a672ad2c765c31d327b85fb77e1c000451a27636409c2e8c9c5632fa7765",
+    "portfolio.py_sha256": "92943d470b44717416e55cebf90ed2f037de74e445ffcd997651262a4c69335e",
+    "protocols.py_sha256": "69c172359b693d926c5059ed289945195445019cee64566c71618ce73949c738",
+    "future_gates": [
+      "Scored A4 full enforcement remains unrun until a theorem_proof kernel or other allowlisted theorem authority is qualified.",
+      "Z3/cvc5 SAT cannot be substituted for theorem_proof even if later deployed.",
+      "QF_LIA interpolation remains unselected and unrun."
+    ]
+  }
+}

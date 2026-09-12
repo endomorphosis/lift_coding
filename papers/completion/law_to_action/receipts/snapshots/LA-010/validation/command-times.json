@@ -1,0 +1,26 @@
+[
+  {
+    "name": "qualify",
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/qualify_proof_routes.py"
+    ],
+    "exit_code": 0,
+    "started_at": "2026-09-12T01:57:29.196464+00:00",
+    "completed_at": "2026-09-12T01:57:30.315567+00:00",
+    "elapsed_seconds": 1.119293074007146,
+    "home": "/tmp/ipfs-accelerate-validation-home-NMQTr0"
+  },
+  {
+    "name": "validate",
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/validate_proof_routes.py"
+    ],
+    "exit_code": 0,
+    "started_at": "2026-09-12T01:57:30.315800+00:00",
+    "completed_at": "2026-09-12T01:57:30.336138+00:00",
+    "elapsed_seconds": 0.020524388062767684,
+    "home": "/tmp/ipfs-accelerate-validation-home-NMQTr0"
+  }
+]
