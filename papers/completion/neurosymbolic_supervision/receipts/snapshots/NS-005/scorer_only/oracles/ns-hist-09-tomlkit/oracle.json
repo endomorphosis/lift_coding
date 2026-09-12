@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tests/test_toml_document.py::test_scalar_is_not_captured_by_table_rendered_from_dotted_key"
+  ],
+  "fail_to_pass_sha256": "7ce14a73fc3b1d931da321e099c6808cc7f906d04baf925d8fe185b50fe94e21",
+  "family_id": "upstream:sdispater/tomlkit",
+  "fix_commit": "495a42ecc9119eaaeb895def0fd025a71cd1cf60",
+  "hidden_files": [
+    {
+      "byte_length": 31864,
+      "path": "tests/test_toml_document.py",
+      "sha256": "cb6e04b63625992e67a73738e28146254adfe95dcd7c6899bbff30a1faf71cad"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-09-tomlkit",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "21a4942ed31e773061c9fc047d55b1bb3c637ee3",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "495a42ecc9119eaaeb895def0fd025a71cd1cf60",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "21a4942ed31e773061c9fc047d55b1bb3c637ee3"
+  },
+  "reference_patch_sha256": "79aacd03cd1ff372aab9b924bd27af929c484d725dce678767bd634d8a92b260",
+  "task_id": "ns-hist-09-tomlkit"
+}

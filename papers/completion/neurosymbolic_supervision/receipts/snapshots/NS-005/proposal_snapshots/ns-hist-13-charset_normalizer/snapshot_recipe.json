@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:jawah/charset_normalizer",
+  "files": [
+    {
+      "byte_length": 35239,
+      "path": "src/charset_normalizer/md.py",
+      "sha256": "9b468a83ee27584ea59cb1b6e82584137ec413042a8133a5e8c558e81737e38a"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "f6afd31c54fe20524f96be00de3bcb0e81727526",
+  "snapshot_sha256": "34cb7813db60e352bea4d46ff400127dc3ad0ff9cd86f47693ec53fc0a21e0ff",
+  "task_id": "ns-hist-13-charset_normalizer",
+  "upstream_repo": "https://github.com/jawah/charset_normalizer"
+}

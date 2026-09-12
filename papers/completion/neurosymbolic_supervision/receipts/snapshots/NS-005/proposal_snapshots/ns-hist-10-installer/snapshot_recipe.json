@@ -1,0 +1,21 @@
+{
+  "family_id": "upstream:pypa/installer",
+  "files": [
+    {
+      "byte_length": 10019,
+      "path": "src/installer/destinations.py",
+      "sha256": "200f82d40cd12e63f47e3bcd8f2f960ea2359087bb65e5f1eb54f65bd62956dd"
+    },
+    {
+      "byte_length": 8114,
+      "path": "src/installer/utils.py",
+      "sha256": "c68c38a65e14f6a717845bbc6cf8f1a1307db2b4c5361550a5448ba53f2b92e7"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "147fd0081eb0572574e7479dca6be2974359e3e1",
+  "snapshot_sha256": "fba8b070c0ea2f6c5c5a25a89b1e5c230234b8c96d451166ce0392e3c926c9d8",
+  "task_id": "ns-hist-10-installer",
+  "upstream_repo": "https://github.com/pypa/installer"
+}

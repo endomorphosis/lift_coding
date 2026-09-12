@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_namespace_on_root_without_other_attrs"
+  ],
+  "fail_to_pass_sha256": "92d1a8ca866c0d537b2a7a6da34e7b1074a6e70768fbbcc405f94efeb841526c",
+  "family_id": "upstream:martinblech/xmltodict",
+  "fix_commit": "f0322e578184421693434902547f330f4f0a44c3",
+  "hidden_files": [
+    {
+      "byte_length": 15483,
+      "path": "tests/test_xmltodict.py",
+      "sha256": "b721417590a6efae86c5ba93836874e1e0cef0f5fd1349af968d3c390b8693d6"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-01-xmltodict",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "75a17701db20d5d3ec2ea1f6c901cf2211011eb5",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "f0322e578184421693434902547f330f4f0a44c3",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "75a17701db20d5d3ec2ea1f6c901cf2211011eb5"
+  },
+  "reference_patch_sha256": "72c1a6aff0941d12942d96bc51b515fb0430aee762290b03a798bff5e12c8112",
+  "task_id": "ns-hist-01-xmltodict"
+}

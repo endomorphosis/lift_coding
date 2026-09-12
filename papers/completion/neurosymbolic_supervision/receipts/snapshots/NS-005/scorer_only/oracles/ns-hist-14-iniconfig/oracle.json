@@ -1,0 +1,31 @@
+{
+  "fail_to_pass": [
+    "testing/test_iniconfig.py::test_parse_strips_inline_comments",
+    "testing/test_iniconfig.py::test_parse_strips_inline_comments_from_continuations",
+    "testing/test_iniconfig.py::test_parse_preserves_inline_comments_when_disabled",
+    "testing/test_iniconfig.py::test_constructor_preserves_inline_comments_for_backward_compatibility"
+  ],
+  "fail_to_pass_sha256": "24421215e334f31a288e9ef7228b7fb046576d675e6358069f4490e8e4178b76",
+  "family_id": "upstream:pytest-dev/iniconfig",
+  "fix_commit": "e2d89f5283cbeb4b4ca55fe88b1c353c343b4972",
+  "hidden_files": [
+    {
+      "byte_length": 10655,
+      "path": "testing/test_iniconfig.py",
+      "sha256": "60d2e5eb1e39384b4107d50c4121facc77e7e9878cf85c8a8fe6f881f0ce6e3d"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-14-iniconfig",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "57b7ed9c7a5950f9c57b2cfbe641ff4cc04baf1c",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "e2d89f5283cbeb4b4ca55fe88b1c353c343b4972",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "57b7ed9c7a5950f9c57b2cfbe641ff4cc04baf1c"
+  },
+  "reference_patch_sha256": "e37df1a2ac99f644a1ae278fcc04055d11bc8db7dab7b051a1d1400394c1802e",
+  "task_id": "ns-hist-14-iniconfig"
+}

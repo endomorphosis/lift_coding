@@ -1,0 +1,580 @@
+{
+  "checks": {
+    "live_family_unique": true,
+    "no_sch_fixture_live": true,
+    "no_swe_bench_live_family": true,
+    "table12_mutations_covered": true,
+    "table18_boundaries_covered": true
+  },
+  "exclusions": [
+    {
+      "family_id": "upstream:Kludex/uvicorn",
+      "fix_commit_count_scanned": 1,
+      "reason": "no_eligible_bounded_python_fix_commit",
+      "stage": "commit_filter"
+    },
+    {
+      "family_id": "upstream:pallets/itsdangerous",
+      "fix_commit_count_scanned": 4,
+      "reason": "no_eligible_bounded_python_fix_commit",
+      "stage": "commit_filter"
+    },
+    {
+      "family_id": "upstream:pypa/packaging",
+      "license_path": "LICENSE",
+      "reason": "license_unqualified:unknown",
+      "stage": "license"
+    },
+    {
+      "family_id": "upstream:python-humanize/humanize",
+      "license_path": null,
+      "reason": "license_unqualified:None",
+      "stage": "license"
+    },
+    {
+      "family_id": "upstream:un33k/python-slugify",
+      "fix_commit_count_scanned": 4,
+      "reason": "no_eligible_bounded_python_fix_commit",
+      "stage": "commit_filter"
+    },
+    {
+      "commit": "00181151a4a6ad845de6683df65eb366df91a5d8",
+      "family_id": "upstream:Textualize/rich",
+      "reason": "reference_fix_tests_do_not_pass",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix for is_terminal"
+    },
+    {
+      "commit": "d9eff2aa44501ee1c6c9808543c493e4b2efe3c9",
+      "family_id": "upstream:Textualize/rich",
+      "reason": "reference_fix_tests_do_not_pass",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fixed issue with custom classes (fixes #2875)"
+    },
+    {
+      "family_id": "upstream:Textualize/rich",
+      "reason": "reference_fix_tests_do_not_pass",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "326456cb78eb6b50e6f44f01cb0eaccc7652cf1f",
+      "family_id": "upstream:oauthlib/oauthlib",
+      "reason": "hidden_tests_already_pass_on_prefix",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix OIDC tests (#565)"
+    },
+    {
+      "commit": "d963212334da3c152abfbc8b9545eb95aee2fa34",
+      "family_id": "upstream:jmcnamara/XlsxWriter",
+      "reason": "archive_pre_failed",
+      "stage": "baseline_verification_candidate",
+      "subject": "table: fix issue with @ in comments in table formulas"
+    },
+    {
+      "family_id": "upstream:jmcnamara/XlsxWriter",
+      "reason": "archive_pre_failed",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "afc86c748c214939e2293ec00879d85293bcd9fa",
+      "family_id": "upstream:pallets/click",
+      "reason": "hidden_tests_already_pass_on_prefix",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix colored output on Windows (#2607)"
+    },
+    {
+      "commit": "016fb9eb9b3835bcd4efc69dc048a0436bd7bfec",
+      "family_id": "upstream:arrow-py/arrow",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix: adding persian names of months and month-abbreviations and day-abbreviations in Gregorian calendar (#1172)"
+    },
+    {
+      "family_id": "upstream:arrow-py/arrow",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "8ea7338af1afeed75233d46f6099730d232bd429",
+      "family_id": "upstream:platformdirs/platformdirs",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix: return one site applications path for multipath (#532)"
+    },
+    {
+      "family_id": "upstream:platformdirs/platformdirs",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "961ce9dcf53dcef41f6268bbbb7c6a685a46c899",
+      "family_id": "upstream:yaml/pyyaml",
+      "reason": "reference_fix_tests_do_not_pass",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix issue with representing Enum types"
+    },
+    {
+      "commit": "5a0cfab86f6bccd5e5bec5c239ccfb94f8f0fe11",
+      "family_id": "upstream:yaml/pyyaml",
+      "reason": "reference_fix_tests_do_not_pass",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix handling of __slots__ (#161)"
+    },
+    {
+      "family_id": "upstream:yaml/pyyaml",
+      "reason": "reference_fix_tests_do_not_pass",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "ba04ac275291ea1754aba24643d17cb8e5638c66",
+      "family_id": "upstream:hynek/structlog",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix thread name CallsiteParameterAdder in async methods (issue #710) (#805)"
+    },
+    {
+      "family_id": "upstream:hynek/structlog",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "656c4de8f7dbeb6ecfb281ce857bdda931b5c909",
+      "family_id": "upstream:aio-libs/multidict",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix kwargs double-count in pure-Python extend/update size estimate (#1338)"
+    },
+    {
+      "family_id": "upstream:aio-libs/multidict",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "0b7790eb2adf436c6df39c9a2256aa8a31ba3893",
+      "family_id": "upstream:pytest-dev/pluggy",
+      "reason": "hidden_tests_already_pass_on_prefix",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix varnames to strip self for bound methods without dotted qualname"
+    },
+    {
+      "commit": "74876c40efa3137aee8ebf5d53d9542d65a13381",
+      "family_id": "upstream:pytest-dev/pluggy",
+      "reason": "hidden_tests_already_pass_on_prefix",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix varnames to handle Python 3.14 deferred annotations"
+    },
+    {
+      "family_id": "upstream:pytest-dev/pluggy",
+      "reason": "hidden_tests_already_pass_on_prefix",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "afc4ea7b5e969d501194d8acdc88025f877a5510",
+      "family_id": "upstream:pallets/werkzeug",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix str(request.headers)"
+    },
+    {
+      "family_id": "upstream:pallets/werkzeug",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "871f2c1cf33bc451376c225eeff77611cf2dd5a9",
+      "family_id": "upstream:hukkin/tomli",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "[pre-commit.ci] auto fixes from pre-commit.com hooks"
+    },
+    {
+      "family_id": "upstream:hukkin/tomli",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "ddc827ba1e3382e21307066e3c921cef8c3ee422",
+      "family_id": "upstream:aio-libs/yarl",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix IPv6 Zone ID decoding to correctly handle RFC 6874 %25 separator (#1653)"
+    },
+    {
+      "family_id": "upstream:aio-libs/yarl",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "ea7f441b455cabbae2bf98f2d10fd11724001155",
+      "family_id": "upstream:dateutil/dateutil",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix custom repr for ParserError"
+    },
+    {
+      "family_id": "upstream:dateutil/dateutil",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "1a2f97293966f3e6549e4da3d00d526915b03b3b",
+      "family_id": "upstream:encode/starlette",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix IndexError in URL.replace() on a URL with no authority (#3317)"
+    },
+    {
+      "family_id": "upstream:encode/starlette",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "8aafea1742722be692637e6027150aa92f06cbbf",
+      "family_id": "upstream:mkdocs/mkdocs",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix overzealous validation of `!relative` tag (#3466)"
+    },
+    {
+      "family_id": "upstream:mkdocs/mkdocs",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "c715d19fb88e81f04cf3506a3c2c2812621d1b46",
+      "family_id": "upstream:theskumar/python-dotenv",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "feat:  add `PYTHON_DOTENV_DISABLED` flag to disable load_dotenv (fixes #510) (#569)"
+    },
+    {
+      "family_id": "upstream:theskumar/python-dotenv",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "fccdaafffa82f42454f6a783db23b631407e9ca6",
+      "family_id": "upstream:pypa/pyproject-hooks",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix symlinked in-process path cleanup"
+    },
+    {
+      "family_id": "upstream:pypa/pyproject-hooks",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "family_id": "upstream:tox-dev/filelock",
+      "reason": "patch_exceeds_16kib",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "6a1c07745ad28cd835d8fb6995ead6011abefbbb",
+      "family_id": "upstream:psf/black",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix crash on `# fmt: skip` after an opening bracket with a standalone comment (#5161)"
+    },
+    {
+      "family_id": "upstream:psf/black",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "dcf0a0137b62d5a2d7bfea842d60cc529ebfba2e",
+      "family_id": "upstream:msiemens/tinydb",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix: correctly handle falsy values in LRUCache"
+    },
+    {
+      "family_id": "upstream:msiemens/tinydb",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "16d8143d9979fc5432b8b1effb1dc3f6048c7840",
+      "family_id": "upstream:pypa/build",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix: derive dist-info directory from wheel contents, not filename (#1119)"
+    },
+    {
+      "family_id": "upstream:pypa/build",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "cc13d1b8c978eaf78ed5308329cd41f03ecc3144",
+      "family_id": "upstream:pydantic/pydantic",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix JSON schema discriminator mapping keys for `bool` discriminators (#13632)"
+    },
+    {
+      "family_id": "upstream:pydantic/pydantic",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "2f865d516184aa88465099ff7dc08c3c5bce21c3",
+      "family_id": "upstream:pallets/markupsafe",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix test_leak skip"
+    },
+    {
+      "family_id": "upstream:pallets/markupsafe",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "33a14971c34fcd15deb2b18b50c9bd411eb6ed74",
+      "family_id": "upstream:pallets-eco/blinker",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix issues reported by flake8"
+    },
+    {
+      "family_id": "upstream:pallets-eco/blinker",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "54b6f7eb0784a3e1e76e763c359d058363195319",
+      "family_id": "upstream:urllib3/urllib3",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix full read with `amt=None` after a partial read (#4960)"
+    },
+    {
+      "family_id": "upstream:urllib3/urllib3",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "6d852d319acd5d97caf14037dff15ede04b37542",
+      "family_id": "upstream:encode/httpx",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix client.send() timeout new Request instance (#3116)"
+    },
+    {
+      "family_id": "upstream:encode/httpx",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "86d96efea7d08437e43cd340a59a3b9aa8555294",
+      "family_id": "upstream:redis/redis-py",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix(asyncio): set lock_name on the errors the async lock raises (#4317)"
+    },
+    {
+      "family_id": "upstream:redis/redis-py",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "c696ac6f3c2962b370fe8dda78c64cf2564e1457",
+      "family_id": "upstream:pytoolz/toolz",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Also fix merge_with"
+    },
+    {
+      "family_id": "upstream:pytoolz/toolz",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "0598d553b7f39a3db433c693cd7117ad5c57ef14",
+      "family_id": "upstream:sqlalchemy/sqlalchemy",
+      "reason": "archive_pre_failed",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix catastrophic backtracking in sqlite foreign key reflection regex"
+    },
+    {
+      "family_id": "upstream:sqlalchemy/sqlalchemy",
+      "reason": "archive_pre_failed",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "10a658221deb38a4c5b16db55ab554b0bf731707",
+      "family_id": "upstream:encode/httpcore",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix max_keepalive_connections (#1000)"
+    },
+    {
+      "family_id": "upstream:encode/httpcore",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "97f8d175656bc03c373a1c9038048a4d312c307c",
+      "family_id": "upstream:python-attrs/attrs",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix ClassVar forward reference detection (#1593)"
+    },
+    {
+      "family_id": "upstream:python-attrs/attrs",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "5212b36eadeec1fef5ecf4b081ae1618e6cc23b4",
+      "family_id": "upstream:benoitc/gunicorn",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "fix: announce Connection: close from the ASGI worker"
+    },
+    {
+      "family_id": "upstream:benoitc/gunicorn",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    },
+    {
+      "commit": "4f7d9e7047da96705b20dca31692cb4fafa7129c",
+      "family_id": "upstream:python-jsonschema/jsonschema",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification_candidate",
+      "subject": "Fix non-format test cases, skipping email ones and tightening UUID ones."
+    },
+    {
+      "family_id": "upstream:python-jsonschema/jsonschema",
+      "reason": "empty_suite_or_uncollectable",
+      "stage": "baseline_verification"
+    }
+  ],
+  "favorable_case_selection": false,
+  "frozen_at": "2026-09-12T00:17:15.565981+00:00",
+  "near_duplicate_families": {
+    "independence_limitation": "Shared-org libraries are disclosed. If exchangeability is not defensible, NS-019 must label intervals conditional/descriptive and decline population promotion.",
+    "rule": "Forks, vendored mirrors, and derivatives are one family; one live task per family.",
+    "shared_org_clusters_disclosed_not_merged": [
+      [
+        "pallets/click",
+        "pallets/jinja",
+        "pallets/werkzeug",
+        "pallets/itsdangerous",
+        "pallets/markupsafe"
+      ],
+      [
+        "encode/httpx",
+        "encode/starlette",
+        "encode/httpcore"
+      ],
+      [
+        "pypa/packaging",
+        "pypa/build",
+        "pypa/wheel",
+        "pypa/installer",
+        "pypa/pyproject-hooks"
+      ]
+    ]
+  },
+  "patch_acceptance_leakage": {
+    "hidden_payloads_in_tasks_jsonl": false,
+    "hidden_payloads_location": "hash-pinned reconstruction recipes under papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/",
+    "hidden_payloads_stored_in_tree": false,
+    "ns006_requirement": "Proposal sandbox must not mount the hidden store, reconstruct oracle payloads, or query oracle logs."
+  },
+  "population_fixed_before_final_outcomes": true,
+  "prior_fixtures": {
+    "admitted_as_live_repair": false,
+    "corpus_id": "semantic-state-benchmark-corpus-v1",
+    "reason": "Checked-in oracle/replay fixtures; production_eligible=false.",
+    "task_count": 40,
+    "task_ids": [
+      "sch-bench-01-core-add-body-fix",
+      "sch-bench-02-core-process-pipeline",
+      "sch-bench-03-exception-behavior-fix",
+      "sch-bench-04-security-side-effect",
+      "sch-bench-05-deleted-legacy-helper",
+      "sch-bench-06-monkey-patch-surface",
+      "sch-bench-07-dynamic-import-name",
+      "sch-bench-08-generated-bindings",
+      "sch-bench-09-core-multiply-guard",
+      "sch-bench-10-formatting-noise-adjacent",
+      "sch-bench-11-fixture-sample-record",
+      "sch-bench-12-pytest-ini-markers",
+      "sch-bench-13-test-core-expectation",
+      "sch-bench-14-test-api-signature-assert",
+      "sch-bench-15-test-schema-roundtrip",
+      "sch-bench-16-test-security-assert",
+      "sch-bench-17-api-fetch-signature",
+      "sch-bench-18-cross-module-call-core",
+      "sch-bench-19-mcp-client-adapter",
+      "sch-bench-20-mcp-ping-contract",
+      "sch-bench-21-api-default-param",
+      "sch-bench-22-adapter-endpoint-binding",
+      "sch-bench-23-user-record-field-add",
+      "sch-bench-24-user-record-dump-shape",
+      "sch-bench-25-lockfile-pytest-pin",
+      "sch-bench-26-policy-admission-mode",
+      "sch-bench-27-requirements-txt-pin",
+      "sch-bench-28-schema-fixture-co-migration",
+      "sch-bench-29-rename-process-symbol",
+      "sch-bench-30-split-core-api-edge",
+      "sch-bench-31-adapter-interface-split",
+      "sch-bench-32-schema-test-co-refactor",
+      "sch-bench-33-security-api-co-refactor",
+      "sch-bench-34-delete-and-rename-wave",
+      "sch-bench-35-stale-receipt-reject",
+      "sch-bench-36-out-of-scope-patch-reject",
+      "sch-bench-37-opaque-native-frontier",
+      "sch-bench-38-post-scan-source-race",
+      "sch-bench-39-failed-cas-reject",
+      "sch-bench-40-concurrent-human-review"
+    ]
+  },
+  "proposal_context_allowed": [
+    "issue/specification text",
+    "admitted pre-fix repair-surface recipes (commit + per-file SHA-256)",
+    "visible preexisting test node counts/hashes",
+    "family/split/license metadata"
+  ],
+  "proposal_context_forbidden": [
+    "reference/target patches",
+    "hidden FAIL_TO_PASS tests",
+    "oracle pass/fail logs",
+    "fix commit diffs",
+    "related-paper labels and gold outputs"
+  ],
+  "protocol_id": "ns-core-v1",
+  "related_paper_corpora": {
+    "autoformalization": {
+      "overlap_instance_ids": [],
+      "rule": "Lean/source-fidelity/proof-transfer material is out of this population."
+    },
+    "law_to_action": {
+      "overlap_instance_ids": [],
+      "rule": "CVE, legal, and skill/MCP corpora are excluded; commits mentioning CVE IDs were dropped."
+    },
+    "swe_bench": {
+      "excluded_families": [
+        "astropy/astropy",
+        "django/django",
+        "matplotlib/matplotlib",
+        "mwaskom/seaborn",
+        "pallets/flask",
+        "psf/requests",
+        "pydata/xarray",
+        "pylint-dev/pylint",
+        "pytest-dev/pytest",
+        "scikit-learn/scikit-learn",
+        "sphinx-doc/sphinx",
+        "sympy/sympy"
+      ],
+      "rule": "This protocol is not a SWE-bench or SWT-Bench run; those twelve families were excluded from the roster."
+    }
+  },
+  "schema": "neurosymbolic-supervision/leakage-audit@1",
+  "tasks_jsonl_contains_hidden_tests": false,
+  "tasks_jsonl_contains_reference_patch": false,
+  "unused_eligible_not_substituted_after_verification_failure": true
+}

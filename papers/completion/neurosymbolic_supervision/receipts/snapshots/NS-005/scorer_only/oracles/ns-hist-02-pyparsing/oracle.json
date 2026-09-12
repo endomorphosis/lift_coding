@@ -1,0 +1,30 @@
+{
+  "fail_to_pass": [
+    "tests/test_issue_633.py::test_issue_633_recursive_whitespace_bug",
+    "tests/test_issue_633.py::test_issue_633_control_case",
+    "tests/test_issue_633.py::test_issue_633_recursive_false_still_works"
+  ],
+  "fail_to_pass_sha256": "c3cc6ab6d9b21aab3cb12d32204a7d9f248e246b834c037fd80542b0351f94ee",
+  "family_id": "upstream:pyparsing/pyparsing",
+  "fix_commit": "d0673488e389b36989f495d5006b78f0b9ff9527",
+  "hidden_files": [
+    {
+      "byte_length": 892,
+      "path": "tests/test_issue_633.py",
+      "sha256": "011776e169bd3850721c60768b18c31186b0bacc88ebee0ef897253e90f64b0c"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-02-pyparsing",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "77c50a89cd0b91005b570a1c926900f484ca4421",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "d0673488e389b36989f495d5006b78f0b9ff9527",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "77c50a89cd0b91005b570a1c926900f484ca4421"
+  },
+  "reference_patch_sha256": "62d1e2b962df86578051eab4dbf729571790ddebe8f0b3bac42b632d9a84a7fb",
+  "task_id": "ns-hist-02-pyparsing"
+}

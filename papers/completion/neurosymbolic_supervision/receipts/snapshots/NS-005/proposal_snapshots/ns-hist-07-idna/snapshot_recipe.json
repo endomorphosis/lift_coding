@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:kjd/idna",
+  "files": [
+    {
+      "byte_length": 12795,
+      "path": "idna/core.py",
+      "sha256": "44522463e1e1159683a011058c6c3219dfef588d38b8e0108e7cee78c5aac0e5"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "522c0ebe02d8bd09039dd593e7c152ab5a1d26dd",
+  "snapshot_sha256": "564a36abd97e9ad5abd80d130d785e1401b23a361bf65bb771eeb5b5339f788a",
+  "task_id": "ns-hist-07-idna",
+  "upstream_repo": "https://github.com/kjd/idna"
+}

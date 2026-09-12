@@ -1,0 +1,71 @@
+{
+  "family_id": "upstream:rthalley/dnspython",
+  "files": [
+    {
+      "byte_length": 4110,
+      "path": "dns/e164.py",
+      "sha256": "9a7c08f25c8817eca784f61e9b75b5b13b095dbba148351ca266c8ff5daa8fde"
+    },
+    {
+      "byte_length": 3603,
+      "path": "dns/enum.py",
+      "sha256": "6b7fe90e0a001d43e9427370493ebb76dfc7c324163e2e02d2693f322972024e"
+    },
+    {
+      "byte_length": 3647,
+      "path": "dns/flags.py",
+      "sha256": "b0ca7c6e7efea7cf55c313157d650e24f1720213c126d099585cd79d9b04ddd0"
+    },
+    {
+      "byte_length": 2105,
+      "path": "dns/grange.py",
+      "sha256": "71bb310827f618c06a0dd0063bd4b11edd14137a74da5dab122294a650e250c5"
+    },
+    {
+      "byte_length": 5739,
+      "path": "dns/inet.py",
+      "sha256": "2cfe6e50a08a851bce4ad9172a14fa94feeb3190d491aa84f820717fa5207d34"
+    },
+    {
+      "byte_length": 46143,
+      "path": "dns/name.py",
+      "sha256": "8db9d070eb5a4d1606ad9a295f2463072c2b6b522ad2bafe66f9eb41c3fb2b84"
+    },
+    {
+      "byte_length": 4465,
+      "path": "dns/rdtypes/ANY/GPOS.py",
+      "sha256": "6119656cda2153a52b4ea76b233b065f91d6a5edf8b32cbcf6e4a34f461ece5b"
+    },
+    {
+      "byte_length": 11958,
+      "path": "dns/rdtypes/ANY/LOC.py",
+      "sha256": "ea2c4e2f75521331b103a4b8db2ecb601a31de8736614ae857131b8bca9ecb73"
+    },
+    {
+      "byte_length": 3651,
+      "path": "dns/rdtypes/IN/WKS.py",
+      "sha256": "46ea964d7e95f08f33db3519600a39fa332322cb0fdcda7813aaf854b4f6f9a9"
+    },
+    {
+      "byte_length": 5291,
+      "path": "dns/rdtypes/rrsigbase.py",
+      "sha256": "24a30f726ccb7c9599a7cc38bbc5459decf93929ce32d527d4771dd9e0c434bf"
+    },
+    {
+      "byte_length": 18606,
+      "path": "dns/rdtypes/svcbbase.py",
+      "sha256": "e22ac26c1b8d953f379382650bff83daecf46dba1abd767015620f66e6664502"
+    },
+    {
+      "byte_length": 25546,
+      "path": "dns/tokenizer.py",
+      "sha256": "6399838be40f9cb12fd6a34f04220d6920e976529ba1dd62fee1aed154771993"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "7cc53f6b1043b671ee4873e65f17244f9df403c9",
+  "snapshot_sha256": "5f7e4c2e37f17634856aeda91e15589ee3e17dbdf9a95a43fde42b3fad3eb752",
+  "task_id": "ns-hist-05-dnspython",
+  "upstream_repo": "https://github.com/rthalley/dnspython"
+}

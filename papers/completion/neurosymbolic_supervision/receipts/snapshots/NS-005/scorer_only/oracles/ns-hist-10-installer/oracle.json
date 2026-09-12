@@ -1,0 +1,58 @@
+{
+  "fail_to_pass": [
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to[a-a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to[a/b-a/b-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to[a/b-a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to[a-a/b-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to[a/b/c/d-a/b-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to[a/b-a/b/c/d-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_non_win32[/-/-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_non_win32[/a/b-/a/b-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_non_win32[/a/b-/a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_non_win32[/a-/a/b-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_non_win32[/a/b/c/d-/a/b-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_non_win32[/a/b-/a/b/c/d-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\-C:\\\\-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b-C:\\\\a\\\\b-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b-C:\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a-C:\\\\a\\\\b-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b\\\\c\\\\d-C:\\\\a\\\\b-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b-C:\\\\a\\\\b\\\\c\\\\d-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b-D:\\\\a-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b-D:\\\\-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\server\\\\a\\\\b-\\\\\\\\server\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\server\\\\a-\\\\\\\\server\\\\a\\\\b-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\server2\\\\a\\\\b-\\\\\\\\server\\\\a-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\?\\\\C:\\\\a\\\\b-\\\\\\\\?\\\\C:\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\?\\\\C:\\\\a\\\\b-C:\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[C:\\\\a\\\\b-\\\\\\\\?\\\\C:\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\?\\\\C:\\\\a-\\\\\\\\?\\\\C:\\\\a\\\\b-False]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\?\\\\UNC\\\\server\\\\a\\\\b-\\\\\\\\?\\\\UNC\\\\server\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\?\\\\UNC\\\\server\\\\a\\\\b-\\\\\\\\server\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\server\\\\a\\\\b-\\\\\\\\?\\\\UNC\\\\server\\\\a-True]",
+    "tests/test_utils.py::TestIsRelativeTo::test_is_relative_to_win32[\\\\\\\\?\\\\UNC\\\\server\\\\a-\\\\\\\\?\\\\UNC\\\\server\\\\a\\\\b-False]"
+  ],
+  "fail_to_pass_sha256": "52db4bba26dd466746fbdcc2a7c24649db0787c8c08e9f8d0a702d7acf1cceb6",
+  "family_id": "upstream:pypa/installer",
+  "fix_commit": "b5f03f151f0edbf43dd5793e2d6f1c94f7d3d408",
+  "hidden_files": [
+    {
+      "byte_length": 10111,
+      "path": "tests/test_utils.py",
+      "sha256": "02e696bbd0a61fb9a804bb0665a34bdaabc2eb5772d9acfe37fcea69cc6e0d83"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-10-installer",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "147fd0081eb0572574e7479dca6be2974359e3e1",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "b5f03f151f0edbf43dd5793e2d6f1c94f7d3d408",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "147fd0081eb0572574e7479dca6be2974359e3e1"
+  },
+  "reference_patch_sha256": "c84dd410263cf739ebf14e7c57675e24af4d8b3c802ddb3505b2ab10e6de53fe",
+  "task_id": "ns-hist-10-installer"
+}

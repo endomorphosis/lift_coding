@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tests/oauth2/rfc6749/endpoints/test_metadata.py::MetadataEndpointTest::test_server_metadata"
+  ],
+  "fail_to_pass_sha256": "7cae92d31af99ba268642ca003e9d34765d0e3a64cb462cabb1675e294cf879f",
+  "family_id": "upstream:oauthlib/oauthlib",
+  "fix_commit": "6bd865b36dc64caaa8aab9788742c9d54ce81c4d",
+  "hidden_files": [
+    {
+      "byte_length": 3484,
+      "path": "tests/oauth2/rfc6749/endpoints/test_metadata.py",
+      "sha256": "4096faaebbd59f7afb640933842d8ad9a81b83ccd22c1fdb76c1cd346c6c83d7"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-03-oauthlib",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "cf3cf407be774405f66188219eb1653c723e294b",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "6bd865b36dc64caaa8aab9788742c9d54ce81c4d",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "cf3cf407be774405f66188219eb1653c723e294b"
+  },
+  "reference_patch_sha256": "502a363b5d22fbef4552b7b87913e0ae84f42d75e921297cf5091507edbc3982",
+  "task_id": "ns-hist-03-oauthlib"
+}

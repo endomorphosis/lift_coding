@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:pallets/jinja",
+  "files": [
+    {
+      "byte_length": 10756,
+      "path": "src/jinja2/idtracking.py",
+      "sha256": "676bd6ca79f4e1fdf2394110c9323d9e4609f4bd2082304c6854cb2b1db62a01"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+  "snapshot_sha256": "1d34de8e91422a4ff2a3277ecd543c8aa52d991128cde32a22572133435008be",
+  "task_id": "ns-hist-16-jinja",
+  "upstream_repo": "https://github.com/pallets/jinja"
+}

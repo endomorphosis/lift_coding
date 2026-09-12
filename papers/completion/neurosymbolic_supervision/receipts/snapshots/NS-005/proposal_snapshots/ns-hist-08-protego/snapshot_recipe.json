@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:scrapy/protego",
+  "files": [
+    {
+      "byte_length": 18877,
+      "path": "src/protego.py",
+      "sha256": "93973f83f38981e52ccc89f5bf7c7501d885253803f2af8cbf364b60193b4f99"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "76f7ee1152feb2d4c51596c8b5abeba208250f90",
+  "snapshot_sha256": "04073da865d827132f6a66ed8de89b889617275e57704d91ac82220ac85e96ca",
+  "task_id": "ns-hist-08-protego",
+  "upstream_repo": "https://github.com/scrapy/protego"
+}

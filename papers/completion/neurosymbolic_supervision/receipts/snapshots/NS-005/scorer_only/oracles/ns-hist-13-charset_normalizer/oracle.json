@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tests/test_detect_legacy.py::TestDetectLegacy::test_utf8_json_with_cjk_text"
+  ],
+  "fail_to_pass_sha256": "fb6f4957d353460462dcbe51f6b5ab67f638119812c2f7ebe25e48f973f3ff3b",
+  "family_id": "upstream:jawah/charset_normalizer",
+  "fix_commit": "b130b7dae36658c7ba67381fe06a62c7c7c03894",
+  "hidden_files": [
+    {
+      "byte_length": 2451,
+      "path": "tests/test_detect_legacy.py",
+      "sha256": "dca3ca456180844cbc70441ee6846050aad609068d5b5040f9fb5fd4e9c82799"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-13-charset_normalizer",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "f6afd31c54fe20524f96be00de3bcb0e81727526",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "b130b7dae36658c7ba67381fe06a62c7c7c03894",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "f6afd31c54fe20524f96be00de3bcb0e81727526"
+  },
+  "reference_patch_sha256": "0cc0b76b0f47f33b38465c6b22ead7ceae35222766ff91f66ca268e30422d3db",
+  "task_id": "ns-hist-13-charset_normalizer"
+}

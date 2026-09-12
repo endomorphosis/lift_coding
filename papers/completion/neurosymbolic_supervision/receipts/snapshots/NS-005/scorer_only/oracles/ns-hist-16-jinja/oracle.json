@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tests/test_regression.py::test_load_parameter_when_set_in_all_if_branches"
+  ],
+  "fail_to_pass_sha256": "f90ebf09ea7fbaf409a639e8abe755e689bd65d84c64e58c675455dd6c344ed7",
+  "family_id": "upstream:pallets/jinja",
+  "fix_commit": "66587ce989e5a478e0bb165371fa2b9d42b7040f",
+  "hidden_files": [
+    {
+      "byte_length": 22902,
+      "path": "tests/test_regression.py",
+      "sha256": "98de7df7c5ec257cb2366114191fc814ab6bd3f4c04187d0386e0298ba222428"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-16-jinja",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "66587ce989e5a478e0bb165371fa2b9d42b7040f",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "fbc3a696c729d177340cc089531de7e2e5b6f065"
+  },
+  "reference_patch_sha256": "5ca6f37e7858cfbfa0aa813d703e80fb3bd9be0cf32c0280e281b3915dc7e940",
+  "task_id": "ns-hist-16-jinja"
+}

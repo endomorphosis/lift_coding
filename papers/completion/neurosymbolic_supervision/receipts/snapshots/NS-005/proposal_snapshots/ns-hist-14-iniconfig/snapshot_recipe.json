@@ -1,0 +1,21 @@
+{
+  "family_id": "upstream:pytest-dev/iniconfig",
+  "files": [
+    {
+      "byte_length": 5383,
+      "path": "src/iniconfig/__init__.py",
+      "sha256": "54d78711f7f17b2aa2a6c1593da464d91a0bf8da08c875fb3df2242b0ac0db1a"
+    },
+    {
+      "byte_length": 2405,
+      "path": "src/iniconfig/_parse.py",
+      "sha256": "255a021dfa214a10a9c05fda985c1dd6f364eb4869bbbda9cd618668cc927e3b"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "57b7ed9c7a5950f9c57b2cfbe641ff4cc04baf1c",
+  "snapshot_sha256": "2c86c71bcc7b80b3e9d931a524143a27a17e1b518c46f72842805dd9f8d5db28",
+  "task_id": "ns-hist-14-iniconfig",
+  "upstream_repo": "https://github.com/pytest-dev/iniconfig"
+}
