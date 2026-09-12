@@ -1,0 +1,6 @@
+{
+  "dimacs": "c grant=x1 matching_roots=x2 forbidden_effect=x3\nc invariant: matching & grant -> ~forbidden\np cnf 3 4\n1 0\n2 0\n3 0\n-2 -1 -3 0\n",
+  "expected": "unsat",
+  "format": "dimacs",
+  "id": "sat-success-unsat"
+}

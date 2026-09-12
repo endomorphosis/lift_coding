@@ -1,0 +1,121 @@
+{
+  "executables": [
+    {
+      "authority_kind": "satisfiability",
+      "available": false,
+      "executable": "z3",
+      "family": "smt",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "satisfiability",
+      "available": false,
+      "executable": "cvc5",
+      "family": "smt",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "vampire",
+      "family": "first_order",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "eprover",
+      "family": "first_order",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "lean",
+      "family": "dependent_type",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "lake",
+      "family": "dependent_type",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "coqc",
+      "family": "dependent_type",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "rocq",
+      "family": "dependent_type",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "available": false,
+      "executable": "isabelle",
+      "family": "higher_order",
+      "optional": true,
+      "path": null,
+      "probe": "shutil.which under process PATH; no install",
+      "required_for_selected_route": false
+    }
+  ],
+  "home": "/tmp/ipfs-accelerate-validation-home-NMQTr0",
+  "home_is_validation_prefix": true,
+  "observed_at": "2026-09-12T01:57:29.233412+00:00",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "python": "/usr/bin/python3.12",
+  "python_modules": {
+    "cvc5": {
+      "importable": false,
+      "origin": null
+    },
+    "pysmt": {
+      "importable": false,
+      "origin": null
+    },
+    "sympy": {
+      "importable": true,
+      "origin": "/usr/lib/python3/dist-packages/sympy/__init__.py",
+      "sha256": "f39a3961fab611e022112f5ef39034643ea7f46beba5a9ef11d51ebbe5797b6c",
+      "version": "1.12"
+    },
+    "z3": {
+      "importable": false,
+      "origin": null
+    }
+  },
+  "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "python_version": "Python 3.12.3"
+}

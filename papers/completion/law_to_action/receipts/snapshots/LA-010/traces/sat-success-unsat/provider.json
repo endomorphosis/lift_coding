@@ -1,0 +1,13 @@
+{
+  "algorithm": "dpll",
+  "authority_kind": "satisfiability",
+  "elapsed_seconds": 0.00019009807147085667,
+  "formula_id": "sat-success-unsat",
+  "model": null,
+  "nclauses": 4,
+  "nvars": 3,
+  "provider": "sympy.logic.inference.satisfiable",
+  "query_kind": "satisfiability",
+  "status": "unsat",
+  "sympy_version": "1.12"
+}

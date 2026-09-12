@@ -1,0 +1,66 @@
+{
+  "authority_kind_emitted": "satisfiability",
+  "case_kind": "success",
+  "checker": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.json"
+    ],
+    "elapsed_seconds": 0.03589831304270774,
+    "exit_code": 0,
+    "result": {
+      "agrees_with_provider": true,
+      "algorithm": "enumerate-all-assignments",
+      "assignments_examined": 8,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "claimed_model_accepted": null,
+      "elapsed_seconds": 1.1473079212009907e-05,
+      "forged_evidence": false,
+      "model": null,
+      "nclauses": 4,
+      "nvars": 3,
+      "status": "unsat"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "038a90f4e21ced53e8ff52c0810aa4ff6d3e7be4086859cc79b31b3177a63dc6"
+  },
+  "checker_id": "exhaustive-truth-table",
+  "empirical_benchmark_result": false,
+  "family": "qf_bool_sympy_sat",
+  "formula": "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json",
+  "fragment": "QF_BOOL",
+  "job_id": "sat-success-unsat",
+  "outcome": "unsat",
+  "provider": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json"
+    ],
+    "elapsed_seconds": 0.16380725300405174,
+    "exit_code": 0,
+    "result": {
+      "algorithm": "dpll",
+      "authority_kind": "satisfiability",
+      "elapsed_seconds": 0.00019009807147085667,
+      "formula_id": "sat-success-unsat",
+      "model": null,
+      "nclauses": 4,
+      "nvars": 3,
+      "provider": "sympy.logic.inference.satisfiable",
+      "query_kind": "satisfiability",
+      "status": "unsat",
+      "sympy_version": "1.12"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e95ce791149cdf95ed5e6443098935a570b71defae14e6ebe7a8be00e9d19a99",
+    "timed_out": false
+  },
+  "provider_id": "sympy-sat",
+  "query_kind": "satisfiability",
+  "required_authority": "satisfiability",
+  "timeout_seconds": null
+}

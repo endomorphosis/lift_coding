@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-forged-model.json",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-forged-model/forged-claim.json"
+  ],
+  "completed_at": "2026-09-12T01:57:30.096296+00:00",
+  "elapsed_seconds": 0.01774808205664158,
+  "exit_code": 0,
+  "parsed": {
+    "agrees_with_provider": false,
+    "algorithm": "enumerate-all-assignments",
+    "assignments_examined": 4,
+    "authority_kind": "satisfiability",
+    "checker": "exhaustive-truth-table",
+    "claimed_model_accepted": false,
+    "elapsed_seconds": 4.847999662160873e-06,
+    "forged_evidence": true,
+    "model": {
+      "x1": true,
+      "x2": false
+    },
+    "nclauses": 2,
+    "nvars": 2,
+    "status": "sat"
+  },
+  "started_at": "2026-09-12T01:57:30.078547+00:00",
+  "timed_out": false,
+  "timeout_seconds": 5
+}

@@ -1,0 +1,6 @@
+{
+  "dimacs": "c sat formula used to test a forged model\np cnf 2 2\n1 0\n-2 0\n",
+  "expected": "sat",
+  "format": "dimacs",
+  "id": "sat-forged-model"
+}

@@ -1,0 +1,7 @@
+{
+  "agrees_with_provider": true,
+  "authority_kind": "satisfiability",
+  "checker": "exhaustive-truth-table",
+  "reason": "quantified first-order formulas are outside the selected QF_BOOL fragment",
+  "status": "unsupported"
+}

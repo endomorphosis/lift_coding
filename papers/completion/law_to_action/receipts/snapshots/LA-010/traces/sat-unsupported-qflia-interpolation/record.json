@@ -1,0 +1,55 @@
+{
+  "authority_kind_emitted": "unsupported",
+  "case_kind": "unsupported",
+  "checker": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-qflia-interpolation.json",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-qflia-interpolation/provider.json"
+    ],
+    "elapsed_seconds": 0.032712435931898654,
+    "exit_code": 0,
+    "result": {
+      "agrees_with_provider": true,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "reason": "QF_LIA interpolation is not selected and cvc5 is unavailable",
+      "status": "unsupported"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "c28b79eac9d2d20e4de314dbc167dfb99e7227221f167f64f7cca79fd12224de"
+  },
+  "checker_id": "exhaustive-truth-table",
+  "empirical_benchmark_result": false,
+  "family": "cvc5_qflia_interpolation",
+  "formula": "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-qflia-interpolation.json",
+  "fragment": "QF_LIA",
+  "job_id": "sat-unsupported-qflia-interpolation",
+  "outcome": "unsupported",
+  "provider": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-qflia-interpolation.json"
+    ],
+    "elapsed_seconds": 0.018599196919240057,
+    "exit_code": 0,
+    "result": {
+      "authority_kind": "satisfiability",
+      "family": "smt",
+      "fragment": "QF_LIA",
+      "provider": "sympy-sat",
+      "query_kind": "interpolation",
+      "reason": "QF_LIA interpolation is not selected and cvc5 is unavailable",
+      "status": "unsupported"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "fb6ac3c4a86cf003242452c96c2e913e3f23c2b26dd8314e58f6da7b39562b40",
+    "timed_out": false
+  },
+  "provider_id": "sympy-sat",
+  "query_kind": "satisfiability",
+  "required_authority": "satisfiability",
+  "timeout_seconds": null
+}

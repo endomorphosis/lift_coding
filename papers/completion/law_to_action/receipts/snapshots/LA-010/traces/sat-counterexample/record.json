@@ -1,0 +1,74 @@
+{
+  "authority_kind_emitted": "satisfiability",
+  "case_kind": "counterexample",
+  "checker": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-counterexample.json",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-counterexample/provider.json"
+    ],
+    "elapsed_seconds": 0.017686881008557975,
+    "exit_code": 0,
+    "result": {
+      "agrees_with_provider": true,
+      "algorithm": "enumerate-all-assignments",
+      "assignments_examined": 8,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "claimed_model_accepted": true,
+      "elapsed_seconds": 6.880960427224636e-06,
+      "forged_evidence": false,
+      "model": {
+        "x1": true,
+        "x2": false,
+        "x3": true
+      },
+      "nclauses": 4,
+      "nvars": 3,
+      "status": "sat"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "c64e06ab82ede1be854047434efdd492e711e29f2b16a28cffcb35162c80d333"
+  },
+  "checker_id": "exhaustive-truth-table",
+  "empirical_benchmark_result": false,
+  "family": "qf_bool_sympy_sat",
+  "formula": "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-counterexample.json",
+  "fragment": "QF_BOOL",
+  "job_id": "sat-counterexample",
+  "outcome": "sat",
+  "provider": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-counterexample.json"
+    ],
+    "elapsed_seconds": 0.17834920110180974,
+    "exit_code": 0,
+    "result": {
+      "algorithm": "dpll",
+      "authority_kind": "satisfiability",
+      "elapsed_seconds": 0.00018261000514030457,
+      "formula_id": "sat-counterexample",
+      "model": {
+        "x1": true,
+        "x2": false,
+        "x3": true
+      },
+      "nclauses": 4,
+      "nvars": 3,
+      "provider": "sympy.logic.inference.satisfiable",
+      "query_kind": "satisfiability",
+      "status": "sat",
+      "sympy_version": "1.12"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "4a746799adadb6f5e7b9f671e855de587604e56ac9cbba3a6011609f9282c516",
+    "timed_out": false
+  },
+  "provider_id": "sympy-sat",
+  "query_kind": "satisfiability",
+  "required_authority": "satisfiability",
+  "timeout_seconds": null
+}
