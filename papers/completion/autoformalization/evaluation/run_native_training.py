@@ -102,6 +102,7 @@ sys.path[:0] = [str(HERE), str(REPO_ROOT / "external" / "ipfs_datasets")]
 sys.path.insert(0, str(INPUT_EVIDENCE_DIR))
 from resource_amendment import (
     SCHEMA as RESOURCE_AMENDMENT_SCHEMA, NativeProgressJournal, admit_amended_budget,
+    bind_environment_resource_limits,
 )
 
 
@@ -1008,6 +1009,7 @@ def main() -> int:
             raise SystemExit("amended native thread profile mismatch")
     env = probe_environment()
     if amended_resource_run:
+        bind_environment_resource_limits(env, repair_provenance["repair_budget"])
         env["amended_torch_threads"] = {"intraop": torch.get_num_threads(), "interop": torch.get_num_interop_threads()}
     if env["process_path_equals_sealed"] and not env["packages"]["torch"]["ok"]:
         raise SystemExit(
@@ -1931,6 +1933,8 @@ def main() -> int:
                 for name in ("lean", "z3", "cvc5")
             },
             "resource_limits": env["resource_limits"],
+            **({"legacy_declared_resource_limits": env["legacy_declared_resource_limits"],
+                "amended_torch_threads": env["amended_torch_threads"]} if amended_resource_run else {}),
             "projection_update_backend": REQUESTED_T2_BACKEND,
             "stripped_profile_is_error": True,
             "narrow_validator_is_separate": True,

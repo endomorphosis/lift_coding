@@ -88,6 +88,21 @@ def admit_amended_budget(budget):
     return budget["native_t2_soft_seconds"]
 
 
+def bind_environment_resource_limits(environment, budget):
+    if budget.get("schema") != SCHEMA or budget.get("resources") != LIMITS:
+        raise ValueError("resource environment lacks admitted amendment")
+    environment["legacy_declared_resource_limits"] = environment["resource_limits"]
+    environment["resource_limits"] = {
+        "memory_gib": 64, "cpu_limit": 2, "pids": 64,
+        "complete_T2_wall_seconds": 10800, "native_T2_soft_seconds": 9000,
+        "whole_wall_seconds": 36000, "per_seed_total_wall_limit": None,
+        "gpu_or_model_service_slots": 1, "compute_device": "cpu",
+        "scope": "Amended declared profile; actual host container receipt binds enforcement.",
+        "T1_T3_outside_T2_interval": True,
+    }
+    return environment
+
+
 class NativeProgressJournal:
     """Scalar events only. Failures are sticky and prevent result admission."""
     ALLOWED = {"stage", "elapsed_seconds", "epoch", "seed", "update", "line_search_attempt",
