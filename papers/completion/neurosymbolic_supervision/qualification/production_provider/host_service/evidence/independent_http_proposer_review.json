@@ -1,0 +1,143 @@
+{
+  "schema": "ns-http-proposer-independent-review/v1",
+  "reviewed_at_utc": "2026-09-12T06:41:06.209138+00:00",
+  "accepted_for_service_integration": true,
+  "service_signature_integration_reviewed": false,
+  "live_dispatch_qualified_by_this_review": false,
+  "source_files": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_proposer.py": "e604c4cb958e0af1646d36cb7d5fb1d16b96e369c70cb6ccfce38585f1f43bac",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_qualification_v2.json": "4656a550c6097b640299ae2e548a12c97d4c84d96e047166faad7d753a8d976e",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_profile.json": "e9ac48ea4947dc8f228c6670d362afe2c4391212da31425132a6d020007a09cc",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_package.private.json": "d6013261f8125a1de48a397d162bdd31dbb593bf1b78217f50aeeabaff177f19"
+  },
+  "package_member_hashes_verified": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/HTTP_HANDOFF.private.md": "7456e0442b24dcc3e1d3a8b17686bfb2c5a3b493c6348f2f9f3ebd96bbfe4f5f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/adapter.py": "40ceaba2d4c6307bbcb71028660552ba730ce496f505cf30821445d030a5d89b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_development_request_preflight_v2.json": "63a09256efe882cd666b2bbad1ff738b4efed58982311a085d6f417fb1b32cab",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_primary_api_sources.json": "a325fa5e621b97ce2c88ba9077c16d7370538484e6c8ed2bff6d9aec6d836690",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_profile.json": "e9ac48ea4947dc8f228c6670d362afe2c4391212da31425132a6d020007a09cc",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_proposer.py": "e604c4cb958e0af1646d36cb7d5fb1d16b96e369c70cb6ccfce38585f1f43bac",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_qualification_v2.json": "4656a550c6097b640299ae2e548a12c97d4c84d96e047166faad7d753a8d976e",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_qualification_v2.log": "19244f15eb2af73356e10cb1f3023db2d29c56c512e3ba3ed92842876824fa14",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/package.private.json": "d4b47d136873aa35c2fc30942004642d99b7a1a7f056d193b63007cef378e193",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/qualify_http_proposer.py": "e84ced0082185c0d7883c0e6738fe6d370b9cac100c15a243ca6bf21c655c518",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/registry.private.json": "50aca5a43ba8255f29e212c2e9aa0047ad7512a19e6b143dfc53170dc197e563"
+  },
+  "reviewed_cases": [
+    {
+      "case": "valid",
+      "retained_result_sha256": "2cec58a97527d2f5c4416e9e359e652a5c1c91e5e76e952a60f62628fb72d8ed",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "57b221ba9359744ec14931dab0e02cad1e347019ec06c223fd014fda258f6a2d",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": true
+    },
+    {
+      "case": "http429",
+      "retained_result_sha256": "2a8e53ba9993ee735a17efa2e506a36eb7e4f37e34428c58f3485fe4be535aa5",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "3afc3b716305241bdd0f6be46ce59e02500fcbcede546cba40432c3c87aac4ff",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "redirect",
+      "retained_result_sha256": "4d504e71d55b23ff4dbf14b65d63b1c16746d4bc5a9194792d87343a48e53f54",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "01aef17cd36940fd8b1cd6156ce40b8cbb809b8f0baf320d41dbf8c59c9e60ae",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "malformed",
+      "retained_result_sha256": "8488ccb99054b0078cb846ea1b1d994fbc259aeabde5ea9a87eac53bd9764aa9",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "f36ff5e47d00b6432ad4fd4083b0cb45c1eba03c612e21e3a321734db27ae1d4",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "wrong_model",
+      "retained_result_sha256": "aaf053b44160bbe3cde8e57e11d8b5741888d91b83f4aa450aa05bbc262e1ffe",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "d45ccca368057659c0c97303ba8c1a4be3b8e17518a9bec1dfa241d9533ff248",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "outside_edit",
+      "retained_result_sha256": "e95b746b257ebf0bf1e4d06b8bef1e51bc4b937f2ad14e86bce4702a944e2039",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "688bfc7cee3743c05a3c99ed8ff69ba93bc13bb586f66da9ef9cb3875cd2f4e0",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "ambiguous_edit",
+      "retained_result_sha256": "38f3c8288f014c2a272282696d9b39f3dd44da4d1b47b552c95c5b4a22149245",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "0799eb2021d2d98d82368a562d1ce9a9d42eaf7366532a47310a8769b08535fb",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "oversized_response",
+      "retained_result_sha256": "168129a27d9d972b9bae06f88c1914644c2307a26126c4a4ebef024dc8e7ba5c",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "c1460a40bb36563217695b1ec9b873145fb4e0b65d12748744afcdd80fb44d14",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "credential_echo",
+      "retained_result_sha256": "a61200364388173233316a501ec0fd600bd7ca6f6b37f79f594522ff63c595af",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "e5af9c0eb25fef3473620855e2a5ce25b1c84ad27393fe84ec65facd65187177",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    },
+    {
+      "case": "timeout",
+      "retained_result_sha256": "43f200f7145f015a6312f934e4ee1c5934e78ec46a93613ea87894126c9236ec",
+      "retained_boundary_sha256": "6692f4aa2b79eb56cba5634373d5a01169b61cd51445b991c716f03bb0e94e31",
+      "cleanup_sha256": "ff6a018e52fce99745cd23cdbd1fe34fa7e7ac5687965b57ea63d16a0e4866a6",
+      "actual_loopback_posts": 1,
+      "accepted_candidate": false
+    }
+  ],
+  "negative_guards": [
+    "consumed transport cannot replay",
+    "oversized serialized request rejects before auth/child",
+    "final split rejected"
+  ],
+  "findings": [],
+  "confirmed_contracts": [
+    "Host-only development registry controls source and exact edit paths; final split is rejected.",
+    "A pristine source and exact prompt are bound before serializing whole admitted public files; requests over64KiB reject before credentials or child creation.",
+    "Fixed HTTPS endpoint, certificate validation, disabled proxies and redirects, exactly one opener POST, no tool definitions, automatic retries or fallback.",
+    "Primary credential remains in host memory and Docker stdin; fixed child code alone is mounted, without proposal, home, credential files, scorer or oracle mounts.",
+    "Pre-start Docker inspection verifies pinned image, UID, one CPU,2GiB memory/swap,32pids,read-only root,no-new-privileges and dropped capabilities; actual qualified fixture containers were removed.",
+    "Duplicate response keys, unauthorized paths, ambiguous replacement strings, invalid structured responses and16KiB patch overflow reject; no returned code is executed by the proposer.",
+    "All proposed edits are checked against the complete frozen inventory in a staging tree before application; the separate service must seal and score the resulting exact candidate.",
+    "HTTP attempt and usage metadata do not imply settled charges or scientific repair success; absent/lost response remains a possible external effect."
+  ],
+  "service_integration_requirements": [
+    "The reservation.json existence check is not a signature or grant validator. The service must authenticate and durably consume the exact one-use grant, binding registry/unit/request/source/profile/amendment hashes before propose_http.",
+    "The service must preserve pending/uncertain reservations and exact transport output; no retry, refund or fresh dispatch inferred from an error.",
+    "After proposer cleanup, the service must seal the exact candidate and bind the cold scorer result in its signed public response; live signature/replay/access control is outside this proposer-only review."
+  ],
+  "qualification_limits": [
+    "Ten actual Docker tests used fake credentials, loopback and network=none; no real API/TLS reachability, model response, historical oracle execution or final evaluation is qualified.",
+    "Four real development request preflights retained all population members; two fit, two refuse the fixed64KiB whole-file context cap. A changed context policy requires a new consistent profile, not silent truncation.",
+    "The180-second limit bounds the attached provider process, while container creation, inspection and cleanup have separate bounded timeouts."
+  ],
+  "reviewer_actions": {
+    "real_provider_calls": 0,
+    "credential_reads": 0,
+    "native_store_opens_or_mutations": 0,
+    "source_or_workspace_mutations": 0,
+    "new_tests_executed": 0,
+    "retained_evidence_and_source_review_only": true
+  }
+}

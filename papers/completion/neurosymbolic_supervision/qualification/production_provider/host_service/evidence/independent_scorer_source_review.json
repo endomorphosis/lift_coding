@@ -1,0 +1,23 @@
+{
+  "schema": "historical-scorer-source-trust-review/v1",
+  "reviewed_at_utc": "2026-09-12T06:46:12.022990+00:00",
+  "review_type": "source_only_unexecuted",
+  "files": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/adapter.py": "40ceaba2d4c6307bbcb71028660552ba730ce496f505cf30821445d030a5d89b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be"
+  },
+  "finding": "Proposal generation is separate from the cold scoring container. This separation does not establish observation integrity against malicious candidate code: candidate Python and observation-producing pytest execute under the same scorer identity with access to scorer runtime material and writable result storage. Successful count/hash checks alone are not an adversarial scoring guarantee.",
+  "adversarial_payload_created": false,
+  "adversarial_demonstration_executed": false,
+  "historical_oracle_executed_by_reviewer": false,
+  "real_provider_calls_by_reviewer": 0,
+  "automatic_review_block": {
+    "reported_by": "parent /root instruction",
+    "action": "proposed adversarial scorer demonstration",
+    "disposition": "not performed; do not continue or create bypass payloads",
+    "local_tool_rejection_observed_by_this_reviewer": false
+  },
+  "allowed_followup": "Defensive source and existing normal qualification review only: consumed request, sealed candidate, explicit matching host operator review, separate scoring, signed retained receipt.",
+  "development_limit": "One operator-reviewed development case may qualify ordinary observed behavior within its exact source/profile scope. It must not claim malicious-candidate resistance, automatic trust in grader output, final scientific admission, or a general blind-scoring guarantee.",
+  "status": "preserved source-only finding; updated defensive service review pending"
+}

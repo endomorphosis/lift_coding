@@ -1,0 +1,86 @@
+{
+  "schema": "historical-development-service-independent-review/v1",
+  "reviewed_at_utc": "2026-09-12T07:00:50.347060+00:00",
+  "accepted_for_one_operator_reviewed_development_case": true,
+  "scope": "One root-admitted XMLtodict/A/local_cold development request with the exact frozen source/request/profile/amendment/grant, then a separate truthful AI operator candidate review and separately reserved score.",
+  "source_bindings": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_historical/historical_gateway.py": "946191a32d1a67607092699afe49b7e9e0f7c9b2eadcb0cf7e1d390711727390",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_v2/host_gateway.py": "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/adapter.py": "40ceaba2d4c6307bbcb71028660552ba730ce496f505cf30821445d030a5d89b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/http_proposer.py": "e604c4cb958e0af1646d36cb7d5fb1d16b96e369c70cb6ccfce38585f1f43bac"
+  },
+  "normal_qualification": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_historical/http_service_qualification_v5.json",
+    "sha256": "015a5c3728475f3bbdebad1d5222d2a2c43b5b8f439024f1b43205290c337713",
+    "script_sha256": "f1700edfc07eeeada1845942880dfcf4176337d249211b834c23d244ded15ac2",
+    "checks": [
+      "literal_worker_request_without_keys_or_credentials",
+      "actual_loopback_proposal_sealed_pending_without_score_or_final_response",
+      "pending_request_replay_no_second_post",
+      "different_grant_review_rejected_before_score_reservation",
+      "same_size_changed_candidate_rejected_before_review",
+      "explicit_constructed_review_then_actual_separate_cold_score_pass",
+      "final_signature_and_scope_verified",
+      "completed_same_request_replay_no_new_post_or_score",
+      "consumed_score_uncertainty_rejects_automatic_retry",
+      "distinct_pending_final_evidence_and_no_worker_keyfile",
+      "missing_creation_cleanup_proof_retains_exact_name_and_forbids_retry_score"
+    ],
+    "actual_loopback_and_constructed_cold_score_only": true
+  },
+  "retained_artifacts": {
+    "/tmp/historical-http-service-8dbeqg4_/grant/grant.json": "c52dc7ac383ecdc34be874fe6b1457f13ffcfaac27377cdf0be864a49201ddfa",
+    "/tmp/historical-http-service-8dbeqg4_/grant/reservation.json": "d539e8915d47e49c7575a49f676d0a6427481e528665b38c4ea4dd2bc554e573",
+    "/tmp/historical-http-service-8dbeqg4_/grant/score_reservation.json": "007dea3231fa2565a097105cd97a3e2d2808e702645f60b7fa70aae6c6cd543d",
+    "/tmp/historical-http-service-8dbeqg4_/grant/candidate_binding.json": "5b84f2b34bd79aa17dcf7713a065ff0714c6f6c00afa2aa02054224be389eb2b",
+    "/tmp/historical-http-service-8dbeqg4_/grant/operator_review.json": "175e62446130dfee4eb6a4ab8d5a54c0d26f387e8d70abfcbf243690bcd9d45a",
+    "/tmp/historical-http-service-8dbeqg4_/grant/proposal_result.json": "b87e56a97f04adcc273780ae8f4dde7c75ac630e3c5eb702874c6b8f4b39411e",
+    "/tmp/historical-http-service-8dbeqg4_/grant/result.preserved.json": "6fb00db5fd35cda3f59fd6bea81c5cd4413f3080f4b997d89bf17043f8c89682",
+    "/tmp/historical-http-service-8dbeqg4_/grant/http_proposer/cleanup.json": "6c44e9b6febb2e23b7e554b480566ef29886930c63f5a08442927d1190eb82a0",
+    "/tmp/historical-http-service-8dbeqg4_/grant/historical_scorer/cleanup.json": "8cd0418e0620662e4598fe19ef2d648b1a8864f07f818e27cffedbc216eb8ffc"
+  },
+  "retained_signatures_verified": 2,
+  "phase_binding_checks_passed": true,
+  "findings": [],
+  "confirmed_sequence": [
+    "Exact source/registry/profile/request amendment is bound before the durable one-use model reservation; no worker-controlled widening or automatic fallback.",
+    "Execute performs at most the single fixed HTTP request, proves its container termination, seals and hashes the allowed candidate, and signs pending evidence without calling the scorer.",
+    "Operator review template is unapproved by default and cannot count as human annotation. Approval must bind the sealed candidate inventory/patch, grant/request/reservation/profile and exact scorer/adapter sources.",
+    "A separate score-reviewed command rechecks the signature, scope, source and sealed bytes, consumes its own durable scoring reservation, and never invokes the HTTP proposer.",
+    "Pending and final receipts use separate immutable signing/output paths; source/candidate/review drift rejects and consumed uncertain operations cannot automatically repeat.",
+    "Ordinary constructed evidence retains final signature verification, exact candidate binding and successful cleanup of both sequential resource-bounded containers.",
+    "Final receipt separately scopes proposal and score time; it records unknown charge and explicit limits instead of refund, adversarial integrity, human review or final scientific admission."
+  ],
+  "restart_limits": [
+    "Complete retained pending/final records can be returned without another provider/scorer call.",
+    "Interruption after a reservation or unsigned artifact but before a complete signed result requires operator reconciliation; no automatic continuation or replay is claimed.",
+    "An expired or changed source-bound grant fails closed; retained evidence remains available for manual inspection."
+  ],
+  "scorer_trust_limit": {
+    "source_review_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/independent_scorer_source_review.json",
+    "source_review_sha256": "a54c7688d64e01a92bf397f662dda1917e884ac450bb38bd047894f360602a9a",
+    "proposal_generation_isolation_is_not_malicious_candidate_scorer_resistance": true,
+    "candidate_and_pytest_observation_share_scorer_identity": true,
+    "development_use_requires_actual_exact_candidate_operator_review": true,
+    "robust_scorer_integrity_and_final_admission_remain_downstream_NS011_NS016": true
+  },
+  "adversarial_demonstration": {
+    "created": false,
+    "executed": false,
+    "automatic_review_block_reported_by_parent": true,
+    "disposition": "Unperformed; only defensive source and existing normal qualification review undertaken."
+  },
+  "prior_http_proposer_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/independent_http_proposer_review.json",
+    "sha256": "5c1cdaac3727ec41aff89853bf91570c881ff4f58b5a7ec8f1fd5bfa7dfb9da5"
+  },
+  "reviewer_actions": {
+    "real_api_calls": 0,
+    "credential_reads": 0,
+    "historical_oracle_calls": 0,
+    "constructed_scorer_calls": 0,
+    "service_or_lane_or_database_mutations": 0,
+    "existing_normal_signature_checks_only": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "ns-historical-host-service-source/v1",
+  "installation_relative_to_operator_checkout": "papers/completion/runtime_bootstrap/unblock_20260912",
+  "files": {
+    "gateway_historical/historical_gateway.py": "946191a32d1a67607092699afe49b7e9e0f7c9b2eadcb0cf7e1d390711727390",
+    "gateway_v2/host_gateway.py": "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f",
+    "gateway_v2/client.py": "e953abb71ab5aaae4c1b957bdc3266ceaafed9c53aadb47e4fc124805380f77b",
+    "historical_adapter/adapter.py": "40ceaba2d4c6307bbcb71028660552ba730ce496f505cf30821445d030a5d89b",
+    "historical_adapter/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "historical_adapter/http_proposer.py": "e604c4cb958e0af1646d36cb7d5fb1d16b96e369c70cb6ccfce38585f1f43bac"
+  },
+  "private_registry_sha256": "50aca5a43ba8255f29e212c2e9aa0047ad7512a19e6b143dfc53170dc197e563",
+  "private_registry_distributed": false,
+  "scope": "reviewed_single_candidate_historical_development",
+  "pilot_final_admitted": false,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "qualifications": {
+    "evidence/http_service_qualification_v5.json": "015a5c3728475f3bbdebad1d5222d2a2c43b5b8f439024f1b43205290c337713",
+    "evidence/independent_http_service_review.json": "21e239918af76cc13430076ba1eb5eb81b4cd0e09df61b9730a70be27084b6f2",
+    "evidence/http_qualification_v2.json": "4656a550c6097b640299ae2e548a12c97d4c84d96e047166faad7d753a8d976e",
+    "evidence/independent_http_proposer_review.json": "5c1cdaac3727ec41aff89853bf91570c881ff4f58b5a7ec8f1fd5bfa7dfb9da5",
+    "evidence/independent_scorer_source_review.json": "a54c7688d64e01a92bf397f662dda1917e884ac450bb38bd047894f360602a9a",
+    "evidence/client_qualification_v3.json": "2723481536f86abede2b6dae78eae0cdf786883b4b1a9739317fc6ad189daffe",
+    "evidence/actual_client_qualification.json": "3b245f1128878543b743120e416a4ea40387f95623911ac134c80e408d91d02d",
+    "evidence/independent_client_review.json": "c14f9af57e55095f3f13fc253b93c7dcf9cef21fb84ca3f446043bf71cf69b84",
+    "evidence/actual_client_qualification_v2.json": "ac9362a85ae3565408543888ddf2fa587356573d75c126abddeb945789db0abb",
+    "evidence/client_qualification_v4.json": "c177572acc89e24a18af82e32ea30d5ccfaa0bc1c17a66c996a125df21b36596"
+  }
+}

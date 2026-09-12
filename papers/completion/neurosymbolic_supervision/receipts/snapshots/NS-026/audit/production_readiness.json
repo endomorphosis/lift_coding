@@ -1,0 +1,88 @@
+{
+  "development_amendment_id": "ns-historical-development-provider-amendment/v1",
+  "human_judgments_pending": true,
+  "not_a_final_ad_result": true,
+  "ns004_terra_high_available": false,
+  "ns016_freeze_ready": {
+    "amendment_pin": "papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json",
+    "blocking": [
+      "Pilot/final units remain rejected by current host adapter and service; NS016 must implement and qualify new frozen split admission.",
+      "Specific AI-reviewed candidate does not qualify adversarial scorer observation integrity; NS011/NS016 must address or explicitly bound this trust profile.",
+      "Additional development arms/cache paths need exact reviewed grants and actual qualification before paired comparisons.",
+      "Freeze served profile/population/schedule and any amendment before pilot/final outcomes; no verified Grok quota event or Terra scientific call is established."
+    ],
+    "budgets": {
+      "active_unit_wall_seconds_max": 300,
+      "admitted_patch_bytes_max": 16384,
+      "pre_final_boundary_provider_effects_reserved": 64,
+      "proposal_effects_per_unit": 1,
+      "provider_wall_seconds_max": 180,
+      "request_serialized_bytes_max": 65536
+    },
+    "oracle_store": "host-only private registry/custody; not loaded by historical host-result client",
+    "profile_pin": "papers/completion/neurosymbolic_supervision/experiments/production_profile.json",
+    "provider_source_pin": "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+    "run_instructions": [
+      "See qualification/production_provider/host_service/README.md for installation, prepare, request, execute, explicit operator review, score-reviewed, signed client import and interruption reconciliation."
+    ],
+    "runner_source_pin": "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+    "scorer_source_pin": "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+    "host_service_source": "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_service/source_manifest.json"
+  },
+  "ns016_still_owns_pilot_and_final": true,
+  "production_admitted": false,
+  "schema": "paper-ns-production-readiness/v1",
+  "source_hashes": {
+    "production_gateway.py": "1314986d2798253ca4ec23da067acb68a2b13dcc4b1daee9cb1426fc30697fe3",
+    "production_profile.json": "b07b2aea54bfd81cb3a0f8ac7d876216632cc1907e69586848b7226ccb86ec12",
+    "run_comparison.py": "6bc348d5f56ac32ea68704a10a478293786cf53da3a8371fbb534d75cd4df509",
+    "score_runs.py": "5e80572e51e0609d06fd1842694da5a0753ebdd66aa6c27bb3c50eca9abab158"
+  },
+  "task_id": "NS-026",
+  "written_at": "2026-09-12T07:10:43.342914+00:00",
+  "scope": "one_AI_operator_reviewed_historical_development_candidate",
+  "legacy_draft_development_invocation": {
+    "logical_effect_id": "f7ae9ec5d301694ba79e2d6568916b68ee86d6ab5796a206fbf71900740b9272",
+    "runtime_receipt_id": "8d3a4325-d9b5-92f1-925a-5113276ea183",
+    "served_model": "grok-4.6",
+    "served_provider": "xai",
+    "served_revision": "fp_e41c6060b2628547",
+    "terminal_state": "solved"
+  },
+  "historical_development": {
+    "task_id": "ns-hist-01-xmltodict",
+    "arm": "A",
+    "cache": "local_cold",
+    "grant_sha256": "a0bcebe5532b6d3a0db7145954828e6b979a2fd44f32f71af8ae3bf1cec07f6f",
+    "signed_response_sha256": "2a8965db6344a5db4475f7ec79de8d49e8828c489d5c2257c67145b9005fd627",
+    "actual_provider_calls": 1,
+    "served_model": "grok-4.6",
+    "api_system_fingerprint": "fp_e41c6060b2628547",
+    "underlying_served_revision_known": false,
+    "visible_passed": 34,
+    "hidden_passed": 1,
+    "patch_bytes": 574,
+    "operator_review_kind": "ai_operator",
+    "human_annotation": false,
+    "new_calls_during_client_import_resume_rescore": 0,
+    "usage_metadata": {
+      "completion_tokens": 111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "reasoning_tokens": 4748,
+        "rejected_prediction_tokens": 0
+      },
+      "cost_in_usd_ticks": 171448400,
+      "prompt_tokens": 11020,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 15879
+    },
+    "settled_provider_cost_available": false,
+    "reasoning_hard_cap_claimed": false
+  },
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "pilot_final_admitted": false,
+  "active_amendment_sha256": "00f4fc0512506510dfbf2433c48d029b74a8207015a55c24094bcf5d11205029"
+}

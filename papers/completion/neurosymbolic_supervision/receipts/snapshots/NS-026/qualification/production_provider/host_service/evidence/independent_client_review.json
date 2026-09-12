@@ -1,0 +1,55 @@
+{
+  "schema": "ns-historical-client-independent-review/v1",
+  "reviewed_at_utc": "2026-09-12T07:06:20.414125+00:00",
+  "accepted_for_staged_client_code": true,
+  "actual_grant_configuration_pending": true,
+  "accepted_for_ns026_completion_by_this_review": false,
+  "manifest": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_historical/client_files.json",
+    "sha256": "332e1a2a1cf0393a7639ec4489bb11ee932935f5c83ff2e9f22ccd8fe2148c21"
+  },
+  "patch_sha256": "abc7aa12c447b8a17b5ef686b652af789bde4f60166e2523f0caface2430bfd4",
+  "source_files": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "93e49d3dc176376c80606ee7ac34219330084eaa11bdb1f8ad745c197e6331ee",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/production_profile.json": "d993b5efe9e56386d0ee6da9c45dc45b853b27160b11a64b5d2d0c3395857e66",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "6bc348d5f56ac32ea68704a10a478293786cf53da3a8371fbb534d75cd4df509",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "5e80572e51e0609d06fd1842694da5a0753ebdd66aa6c27bb3c50eca9abab158"
+  },
+  "qualification": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_historical/client_qualification_v3.json",
+    "sha256": "2723481536f86abede2b6dae78eae0cdf786883b4b1a9739317fc6ad189daffe",
+    "script_sha256": "899017ed7286eab0383d31d064b02b3187589146edfa630477250eae44542016",
+    "tests": [
+      "literal_id_only_request_idempotent_without_credentials",
+      "actual_runner_pending_never_materializes_or_publishes_terminal",
+      "actual_signed_inert_receipt_cannot_be_promoted_to_real_development",
+      "actual_runner_imports_signed_synthetic_outcome_with_remote_metrics_null_and_distinct_operator_ledger",
+      "signed_rescore_without_hidden_read_or_new_effect_rejects_candidate_drift",
+      "modified_response_rejected_for_dispatch_and_completed_resume",
+      "different_arm_and_final_profile_not_admitted",
+      "durable_public_json_evidence_replays_without_ephemeral_queue_or_key_files"
+    ],
+    "synthetic_only": true
+  },
+  "findings": [],
+  "confirmed_contracts": [
+    "An exact host grant matches task,arm,cache,repetition and development record kind; final or different-arm grants are not admitted.",
+    "The client sends only the frozen ID request. Pending execution returns a separate pending schema and exit75, without source materialization, a terminal scientific outcome or provider dispatch.",
+    "An offer hash binds the Ed25519 public key; signed result verification binds grant/request/unit/arm/amendment/source/profile/manifest and rejects inert promotion or final-population claims.",
+    "Accepted host evidence additionally requires completed operator-reviewed development scope and the exact candidate/manifest/unit cold score; it does not imply native final admission or malicious-candidate scorer integrity.",
+    "Client import/resume and rescore reverify durable signed evidence and candidate identity without another model call, hidden-oracle reconstruction or scorer launch.",
+    "Local resource counters become unavailable for remote aggregate metrics; actual supplied token counts remain separate, settled charge stays unavailable, and the operator grant remains distinct from local runner effect accounting.",
+    "Durable offer/response JSON permits replay after the ephemeral queue is removed, without credential or public PEM files."
+  ],
+  "limits": [
+    "These eight client checks used signed synthetic schema fixtures; they do not establish a real provider result or complete NS026.",
+    "The final exact actual grant/evidence profile data is not configured yet and must be separately hash-bound and checked after the real operator-reviewed result.",
+    "This review covers the four-file ID-only host handoff delta against the retained NS026 candidate; legacy non-handoff routes are not newly qualified."
+  ],
+  "reviewer_actions": {
+    "source_or_native_mutations": 0,
+    "live_owner_queries": 0,
+    "real_provider_or_scorer_or_oracle_calls": 0,
+    "tests_rerun": 0
+  }
+}

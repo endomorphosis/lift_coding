@@ -1,0 +1,140 @@
+{
+  "schema": "ns-actual-historical-client-qualification/v1",
+  "completed": true,
+  "finished_at": "2026-09-12T07:12:33.283625+00:00",
+  "source_files": {
+    "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "93e49d3dc176376c80606ee7ac34219330084eaa11bdb1f8ad745c197e6331ee",
+    "papers/completion/neurosymbolic_supervision/experiments/production_profile.json": "b07b2aea54bfd81cb3a0f8ac7d876216632cc1907e69586848b7226ccb86ec12",
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "6bc348d5f56ac32ea68704a10a478293786cf53da3a8371fbb534d75cd4df509",
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "5e80572e51e0609d06fd1842694da5a0753ebdd66aa6c27bb3c50eca9abab158"
+  },
+  "actual_import_resume_rescore_only": true,
+  "new_provider_calls": 0,
+  "new_scorer_calls": 0,
+  "hidden_oracle_body_read_by_client": false,
+  "bound_prior_provider_calls": 1,
+  "grant_sha256": "a0bcebe5532b6d3a0db7145954828e6b979a2fd44f32f71af8ae3bf1cec07f6f",
+  "signed_response_sha256": "2a8965db6344a5db4475f7ec79de8d49e8828c489d5c2257c67145b9005fd627",
+  "specific_AI_operator_reviewed_candidate_only": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "pilot_final_admitted": false,
+  "commands": {
+    "import": {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "one-task",
+        "--repo",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate",
+        "--ledger",
+        "/tmp/ns026-actual-signed-import-20260912",
+        "--task-id",
+        "ns-hist-01-xmltodict",
+        "--arm",
+        "A",
+        "--cache",
+        "local_cold",
+        "--repetition",
+        "0",
+        "--path",
+        "production",
+        "--record-kind",
+        "development",
+        "--out",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/attempt.json"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "8f9ee0b6a2bd852a6dc511e49744d3793535f6f99a56b4174224e12b95da7577",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "resume": {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "one-task",
+        "--repo",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate",
+        "--ledger",
+        "/tmp/ns026-actual-signed-import-20260912",
+        "--task-id",
+        "ns-hist-01-xmltodict",
+        "--arm",
+        "A",
+        "--cache",
+        "local_cold",
+        "--repetition",
+        "0",
+        "--path",
+        "production",
+        "--record-kind",
+        "development",
+        "--out",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/resume.json"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "4d0c5f7f12312f02843c052476f25251444b0e494fc3ac27471b1bbb50a6e5a8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rescore": {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "--attempt",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/attempt.json",
+        "--out",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/rescored.json"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "a424c77e99077fa095f9cdac54e840a1df591bfe20a2da76352069c82fd2ecbf",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "validate": {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/validate_production_provider.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "802d70a6aaf1c074b2ece522a658d117ee2a57aeb42546988fa807fc89e1c446",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/attempt.json": "a5288a6606130ad0282a27fd371810bdc5c3c7d56b28d6c42d42eb2a28ed77b6",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/resume.json": "2b8cb04cfb7147a99415ddcc4f9d7035127b154113b68a133f6958870b3b5023",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/rescored.json": "2938b969cfd1b701d6bd4e41bc00cd71c87d3140db641b70831df52c5d41d160",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/provider_termination.json": "ed158bcbb5a9a9d9e63e8e8f7614145d93d546bb62443dbe52e894791a3e8cab",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/operator_review.json": "f1a1b8585df77f0e30fde4f2c35a8ca628ebf21d63ce984e8c75e1ce4253d9df",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/provider_boundary.json": "3fd78daa4ddfd319f280639de7faa23a5d11203dce9604e91daf4ce55b9734a6",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/candidate_binding.json": "c6dfd0d86a2359e3dc72ddb2440219ce08eefa0b6374a0464b2b947b88ffdc55",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/scorer_cleanup.json": "503171fb20ba1660c1774786f35f66638d10996b85bd2f522444bbfb49bb727a",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/provider_cleanup.json": "7ac34859111ee5ffe1e87a2dbdaf811e3828e523cd5b6141236822e9310e68d1",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/scorer_result.json": "1ff6a24fa67bbbd02c4ca2590da7405513e2d0831b32fe8a1c622af1553f174c",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/scorer_boundary.json": "bfc570072450db84ced906f88c3b9b9c4b274f274e4ffada59d70bfca763c53e",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/provider_profile.json": "e9ac48ea4947dc8f228c6670d362afe2c4391212da31425132a6d020007a09cc",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/signed_final.json": "2a8965db6344a5db4475f7ec79de8d49e8828c489d5c2257c67145b9005fd627",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/request_binding.json": "6fbf3a2be9c51c74ddd2ab8d788eec338fc868a8b474c4678271a6b10849e636",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/provider_result.json": "945b8f1619b7fa3ce314fc6f5977970b9c2fe9981d96cb62d18d22fa3c4f6fd1",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/candidate.canonical.patch": "44e5e47ce9e46d2e090e656923b664634d2d3571e3092dc1fec73d106423ef2f",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical_development/raw/signed_proposal.json": "802ceeb8cf4b1ae3638925f56bf46df09d04d90bef057b0d4fa433793f1d3d48",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_receipts/275899d8094c0f5789455968f0c3d242/offer.json": "e92490180649069cf8feda39ed929c15d6e592ab3eb392323d665be66f591955",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_receipts/275899d8094c0f5789455968f0c3d242/response.json": "2a8965db6344a5db4475f7ec79de8d49e8828c489d5c2257c67145b9005fd627",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_receipts/275899d8094c0f5789455968f0c3d242/development_provider_amendment.json": "00f4fc0512506510dfbf2433c48d029b74a8207015a55c24094bcf5d11205029"
+  },
+  "legacy_run_guard": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns026_recovery/candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/run_qualification.py"
+    ],
+    "exit_code": 1,
+    "new_provider_calls": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "36bba8ded184bb6ecf34c0994fb7891dfd0f06f989aa344af2da0b938edaef05"
+  },
+  "scopes": {
+    "proposal_elapsed_seconds": "proposal_phase_only",
+    "score_elapsed_seconds": "host_scorer_invocation_and_postcheck_only",
+    "operator_review_gap": "separate; not asserted zero",
+    "settled_charge": "unknown; API ticks retained",
+    "request_max_tokens": "4096 requested; reasoning hard cap not claimed"
+  }
+}
