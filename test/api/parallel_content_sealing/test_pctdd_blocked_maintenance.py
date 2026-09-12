@@ -1,5 +1,6 @@
 """Native maintenance observations: no readiness or callback settlement claim."""
 import copy
+import builtins
 import hashlib
 import importlib.util
 import json
@@ -95,6 +96,12 @@ def test_permission_denied_is_not_actor_death(tmp_path,monkeypatch):
 def test_qualified_private_runtime_requires_complete_current_source_equivalence(tmp_path, monkeypatch, drift):
     native = load()
     from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_supervisor as runtime
+    original_import = builtins.__import__
+    def prior_runtime_import(name, *args, **kwargs):
+        if name == 'ipfs_accelerate_py.agent_supervisor.merge.workspace_quarantine':
+            raise ModuleNotFoundError('helper absent from the running predecessor runtime')
+        return original_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, '__import__', prior_runtime_import)
     root = tmp_path / 'parent'
     root.mkdir()
     adopted = root / 'external/ipfs_accelerate'
@@ -139,6 +146,37 @@ def test_qualified_private_runtime_requires_complete_current_source_equivalence(
         assert result['runtime']['repository_revision'] == 'b' * 40
         assert 'repository_root' not in result['runtime']
         assert result['repositories'][1] == [str(adopted), 'b' * 40]
+
+
+@pytest.mark.parametrize('kind', ['symlink', 'hardlink', 'fifo', 'oversize'])
+def test_source_reader_refuses_unsafe_file_namespace(tmp_path, monkeypatch, kind):
+    native = load(); monkeypatch.setattr(native, 'ROOT', tmp_path)
+    path = tmp_path / 'source.py'
+    if kind == 'fifo': os.mkfifo(path)
+    else:
+        path.write_bytes(b'source')
+        if kind == 'symlink':
+            target = tmp_path / 'target.py'; path.rename(target); path.symlink_to(target)
+        elif kind == 'hardlink': os.link(path, tmp_path / 'second.py')
+    with pytest.raises(native.OperatorError):
+        native._maintenance_read_source(path, bound=1 if kind == 'oversize' else 100)
+
+
+def test_source_reader_refuses_path_replacement_during_read(tmp_path, monkeypatch):
+    native = load(); monkeypatch.setattr(native, 'ROOT', tmp_path)
+    path = tmp_path / 'source.py'; path.write_bytes(b'original')
+    original_read = os.read
+    replaced = False
+    def changed(fd, count):
+        nonlocal replaced
+        raw = original_read(fd, count)
+        if not replaced:
+            replacement = tmp_path / 'replacement.py'; replacement.write_bytes(b'original')
+            os.replace(replacement, path); replaced = True
+        return raw
+    monkeypatch.setattr(os, 'read', changed)
+    with pytest.raises(native.OperatorError, match='source changed'):
+        native._maintenance_read_source(path, bound=100)
 
 
 def configure(native, root):
