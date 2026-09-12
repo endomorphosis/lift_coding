@@ -1,0 +1,79 @@
+{
+  "author_sign_off": false,
+  "checkers_missing": [
+    "lean",
+    "lake",
+    "elan",
+    "z3",
+    "cvc5",
+    "vampire",
+    "eprover",
+    "coqc",
+    "isabelle"
+  ],
+  "checklist_answers": [
+    "Yes",
+    "Yes",
+    "Yes",
+    "Yes",
+    "Yes",
+    "Yes",
+    "No",
+    "Yes",
+    "Yes",
+    "Yes",
+    "NA",
+    "Yes",
+    "Yes",
+    "NA",
+    "NA",
+    "Yes"
+  ],
+  "criteria": [
+    "Reproduction result includes exact commands/environment, expected versus actual tables, and explicit unavailable checks; mere LaTeX compilation is not empirical validation.",
+    "Final packet links manuscript, supplement, claim audit and raw evidence with version/checksum identities.",
+    "The manuscript objective is complete when every retained automated empirical claim has real reproducible evidence and omitted/unmeasured human-dependent claims are explicit. Outside reviewers and optional author feedback are not prerequisites; unfinished required training or fabricated scientific evidence cannot be hidden by the scope change.",
+    "No claim that authors approved or the paper was submitted/published is made without real evidence."
+  ],
+  "latex_is_empirical_validation": false,
+  "ok": true,
+  "omitted_claims": [
+    "ABS-FINALTEST",
+    "ABS-HUMAN",
+    "ABS-T345E",
+    "ARM-E-LOCKED",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "CONC",
+    "RW-NOT-RUN"
+  ],
+  "retained_claims": [
+    "ABS-SCOPE",
+    "ABS-T2",
+    "ABS-T1",
+    "ABS-FINITE",
+    "AE-VS-T",
+    "T1-MEMORY",
+    "T2-SHARED",
+    "AF029-NOT-TABLE11",
+    "NO-INVENTED-CHECKPOINT",
+    "PROP1",
+    "AF006-TWELVE",
+    "AF015-Q1",
+    "AF027-DEV",
+    "COST"
+  ],
+  "tables": {
+    "summary.json": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72",
+    "table11_training.tex": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74",
+    "table13_assistance.tex": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f",
+    "table6_pipeline.tex": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+  },
+  "workshop_submission": false,
+  "zip_located": 56
+}

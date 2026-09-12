@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONNOUSERSITE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "-S",
+    "verify_retained_inputs.py"
+  ],
+  "cwd": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/af025-unzip-x4f188g9/autoformalization-anonymous-reproducibility",
+  "cwd_recorded": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx/af025-unzip-x4f188g9/autoformalization-anonymous-reproducibility",
+  "elapsed_seconds": 0.0346366330049932,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af025-7m0bmnsx",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T22:31:53.904803+00:00",
+  "name": "zip_verify_retained_inputs",
+  "started_at": "2026-09-12T22:31:53.870157+00:00",
+  "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/zip_verify_retained_inputs.stderr.log",
+  "stdout_log": "papers/completion/autoformalization/receipts/snapshots/AF-025/logs/zip_verify_retained_inputs.stdout.log"
+}
