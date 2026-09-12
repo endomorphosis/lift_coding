@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:sdispater/tomlkit",
+  "files": [
+    {
+      "byte_length": 48592,
+      "path": "tomlkit/container.py",
+      "sha256": "58ab85709ed0d6eba14a5ecc2cb9d72657b6785f2e56f78c7417b5f73c6bbdb0"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "21a4942ed31e773061c9fc047d55b1bb3c637ee3",
+  "snapshot_sha256": "520660dd36bcd4bde94d6de9e5397d3c5a1610089cf27ef508d4ed4799cef83a",
+  "task_id": "ns-hist-09-tomlkit",
+  "upstream_repo": "https://github.com/sdispater/tomlkit"
+}

@@ -1,0 +1,32 @@
+{
+  "fail_to_pass": [
+    "test/test_exc.py::TestAppException::test_memory_error",
+    "test/test_exc.py::TestAppException::test_no_exc",
+    "test/test_exc.py::TestAppException::test_noncatched_error",
+    "test/test_exc.py::TestAppException::test_other_error",
+    "test/test_exc.py::TestAppException::test_system_Exit"
+  ],
+  "fail_to_pass_sha256": "da11b913bc9d2a50c99bba50cacc45b7c457d391773bb177625802c1564aae4d",
+  "family_id": "upstream:bottlepy/bottle",
+  "fix_commit": "7a53615efc42cc521e6031bb363c4d754b8446a4",
+  "hidden_files": [
+    {
+      "byte_length": 1135,
+      "path": "test/test_exc.py",
+      "sha256": "5ad0bf4662ce6a6b5e8906c27840569a637913be639da13f9440c2d67f8473e8"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-06-bottle",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "c92516069e664efc9bac3746004402bd6f3cc9ec",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "7a53615efc42cc521e6031bb363c4d754b8446a4",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "c92516069e664efc9bac3746004402bd6f3cc9ec"
+  },
+  "reference_patch_sha256": "44aa7c994b39b6f62e7c9450269017269a37fbb9066d554393a34f06f9e4285f",
+  "task_id": "ns-hist-06-bottle"
+}

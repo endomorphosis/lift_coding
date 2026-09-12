@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:bottlepy/bottle",
+  "files": [
+    {
+      "byte_length": 179352,
+      "path": "bottle.py",
+      "sha256": "76b863f6befc32e5c993428754705daee5073c1c5314dfc0b4dd9d53aa56cbeb"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "c92516069e664efc9bac3746004402bd6f3cc9ec",
+  "snapshot_sha256": "2e0281fbcc074c9c29abcaa92f3e3410245b75d8cc2404eb383fb9533c17c421",
+  "task_id": "ns-hist-06-bottle",
+  "upstream_repo": "https://github.com/bottlepy/bottle"
+}

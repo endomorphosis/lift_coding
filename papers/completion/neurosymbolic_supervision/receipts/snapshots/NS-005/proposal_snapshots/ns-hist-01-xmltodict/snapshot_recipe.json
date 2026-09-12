@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:martinblech/xmltodict",
+  "files": [
+    {
+      "byte_length": 20464,
+      "path": "xmltodict.py",
+      "sha256": "7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "75a17701db20d5d3ec2ea1f6c901cf2211011eb5",
+  "snapshot_sha256": "468ebe23fac4d77395df52faea4d8ac94edfb7d82ec941e9fd3236bdb40fbcb7",
+  "task_id": "ns-hist-01-xmltodict",
+  "upstream_repo": "https://github.com/martinblech/xmltodict"
+}

@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:pallets/click",
+  "files": [
+    {
+      "byte_length": 35865,
+      "path": "src/click/types.py",
+      "sha256": "5430a6c50c956d1721626926c4bcae634a1a5aef2b9d32ce79a442448bf6b029"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "02046e7a19480f85fff7e4577486518abe47e401",
+  "snapshot_sha256": "668450feb299485458fc39029f14b70e3ed3c9039b46e2de2a1c8aa9408e4739",
+  "task_id": "ns-hist-04-click",
+  "upstream_repo": "https://github.com/pallets/click"
+}

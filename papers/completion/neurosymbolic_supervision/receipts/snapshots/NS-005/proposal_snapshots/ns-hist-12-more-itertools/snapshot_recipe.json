@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:more-itertools/more-itertools",
+  "files": [
+    {
+      "byte_length": 46124,
+      "path": "more_itertools/recipes.py",
+      "sha256": "cedd35cd25c5238d820b2380e09f852e0a9f0ed93d48ca75626e927210579eb8"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "cb75bb9c55f7ed3e77ce599097e1ba8da411746d",
+  "snapshot_sha256": "cfbeda627665d2b28952cf586d11f42a3b8c7b49608f886e04f8e5a125ba0d58",
+  "task_id": "ns-hist-12-more-itertools",
+  "upstream_repo": "https://github.com/more-itertools/more-itertools"
+}

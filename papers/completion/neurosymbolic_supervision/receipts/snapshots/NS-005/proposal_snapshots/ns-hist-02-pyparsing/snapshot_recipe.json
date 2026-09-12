@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:pyparsing/pyparsing",
+  "files": [
+    {
+      "byte_length": 41793,
+      "path": "pyparsing/helpers.py",
+      "sha256": "4d6bd4a3c9a7910cf8fe48e32544e5905fc2c2c853c74bd90e43f3776c855bd2"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "77c50a89cd0b91005b570a1c926900f484ca4421",
+  "snapshot_sha256": "4145313a41cf6c8a475c95d7948bfabe022a0337d7998c6dcdb30f3865fb259e",
+  "task_id": "ns-hist-02-pyparsing",
+  "upstream_repo": "https://github.com/pyparsing/pyparsing"
+}

@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tests/commands/test_convert.py::test_convert_rejects_egginfo_path_traversal"
+  ],
+  "fail_to_pass_sha256": "9fe01e05690994a97e6e120090430b3c665231a3f8220c17c5360d30e9b89246",
+  "family_id": "upstream:pypa/wheel",
+  "fix_commit": "d7d625d40d323d44646d39f2224bde7a1c16005b",
+  "hidden_files": [
+    {
+      "byte_length": 10314,
+      "path": "tests/commands/test_convert.py",
+      "sha256": "c0fbd930c92c13bcd946dd79897b27171d74f29b9e3077e1c08cca523627f1c9"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-15-wheel",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "986a440c3aacc45fb8486d2d01ae86bf3ddf3465",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "d7d625d40d323d44646d39f2224bde7a1c16005b",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "986a440c3aacc45fb8486d2d01ae86bf3ddf3465"
+  },
+  "reference_patch_sha256": "35556c61225dd36c898f2d4d91064c9599c84806220f842ca18fe97b3199dcdf",
+  "task_id": "ns-hist-15-wheel"
+}

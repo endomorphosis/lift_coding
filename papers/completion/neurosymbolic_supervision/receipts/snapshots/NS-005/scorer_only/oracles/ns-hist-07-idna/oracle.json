@@ -1,0 +1,37 @@
+{
+  "fail_to_pass": [
+    "tests/test_idna.py::IDNATests::testIDNTLDALabels",
+    "tests/test_idna.py::IDNATests::testIDNTLDULabels",
+    "tests/test_idna.py::IDNATests::test_check_bidi",
+    "tests/test_idna.py::IDNATests::test_check_hyphen_ok",
+    "tests/test_idna.py::IDNATests::test_check_initial_combiner",
+    "tests/test_idna.py::IDNATests::test_decode",
+    "tests/test_idna.py::IDNATests::test_encode",
+    "tests/test_idna.py::IDNATests::test_valid_contextj",
+    "tests/test_idna.py::IDNATests::test_valid_contexto",
+    "tests/test_idna.py::IDNATests::test_valid_label_length"
+  ],
+  "fail_to_pass_sha256": "007187088eb0dfe75cc34fc511c7a1a2a45270994229babfde86c3ba3ccac48a",
+  "family_id": "upstream:kjd/idna",
+  "fix_commit": "e00ed2854c5203be201940f4029a747684594409",
+  "hidden_files": [
+    {
+      "byte_length": 12814,
+      "path": "tests/test_idna.py",
+      "sha256": "6f3cd622f2fb58e7bcb90082a67241ad1ebd65593dbe555b5270e654f7062b76"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-07-idna",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "522c0ebe02d8bd09039dd593e7c152ab5a1d26dd",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "e00ed2854c5203be201940f4029a747684594409",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "522c0ebe02d8bd09039dd593e7c152ab5a1d26dd"
+  },
+  "reference_patch_sha256": "013c9bc3f5666ec54d34a031e3ee9bb37f1d9cd36c9071c4583e48b6f1b34d34",
+  "task_id": "ns-hist-07-idna"
+}

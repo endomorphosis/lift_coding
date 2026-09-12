@@ -1,0 +1,21 @@
+{
+  "family_id": "upstream:tornadoweb/tornado",
+  "files": [
+    {
+      "byte_length": 17097,
+      "path": "tornado/locks.py",
+      "sha256": "992cee2dd9b59d85e8de88ab8c31842e6e30025f8e038590a3bdc8531bda5a08"
+    },
+    {
+      "byte_length": 12418,
+      "path": "tornado/queues.py",
+      "sha256": "792679131f2235185e540f182435218c024fe76f5e8649bfc2f471b98393e749"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "4d892393adb0a434baeaa98a427d23c6c459a4bc",
+  "snapshot_sha256": "9d0f65ac8749838a32dcdd7003fcd73dac884c1a34e38b75db39682c5c3a6c27",
+  "task_id": "ns-hist-11-tornado",
+  "upstream_repo": "https://github.com/tornadoweb/tornado"
+}

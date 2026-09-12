@@ -1,0 +1,28 @@
+{
+  "fail_to_pass": [
+    "tornado/test/queues_test.py::QueueGetTest::test_get_zero_timeout"
+  ],
+  "fail_to_pass_sha256": "397b094df9404c2ab9f66d0bf4f54b553322b290966ad3cc30e01bb5fcfd69c7",
+  "family_id": "upstream:tornadoweb/tornado",
+  "fix_commit": "aac84855f3bf8bcd37243ef72e7ff647edd8c207",
+  "hidden_files": [
+    {
+      "byte_length": 14036,
+      "path": "tornado/test/queues_test.py",
+      "sha256": "ce9060d0acce453939e2175181555295b92377d4b8613e21a8a9f8bfdb2a4575"
+    }
+  ],
+  "oracle_id": "oracle:ns-hist-11-tornado",
+  "payload_stored_in_tree": false,
+  "pre_fix_commit": "4d892393adb0a434baeaa98a427d23c6c459a4bc",
+  "proposal_sandbox_may_read": false,
+  "reconstruction": {
+    "fix_commit": "aac84855f3bf8bcd37243ef72e7ff647edd8c207",
+    "hidden_tests": "git show {fix_commit}:{path}",
+    "method": "git_diff_pre_fix_to_fix",
+    "note": "Payload bytes are scorer-principal-only and are not stored in this tree.",
+    "pre_fix_commit": "4d892393adb0a434baeaa98a427d23c6c459a4bc"
+  },
+  "reference_patch_sha256": "dc7e03516fb36e16e17c39ba90c9cf223714d93050f585359466ee6e463cd595",
+  "task_id": "ns-hist-11-tornado"
+}

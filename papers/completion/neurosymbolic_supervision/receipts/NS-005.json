@@ -1,0 +1,135 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-005",
+  "status": "complete",
+  "completed_at": "2026-09-12T00:32:03.412283+00:00",
+  "completion_scope": "Frozen historical-repair population, hidden oracles, splits, and leakage audit only. No A-D experiment, promotion decision, or live model repair is claimed.",
+  "source_versions": {
+    "workspace_git_head": "3f71f8cd583c6d08b17d22fb1a78054de8d1b735",
+    "python": "Python 3.12.3",
+    "pytest": "present",
+    "protocol_id": "ns-core-v1",
+    "ns004_protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+    "source_scope_commit": "43f60dac61e35f9bc6ccf2b7fa39c73d797b2b08"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/audit/leakage_audit.json": "9a79f8761989c95f83b9add2f3308caaf0aed7e94acf1830db2ce20a7470be85",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/oracle_manifest.json": "37057f559b36f48633b2fb2275aaf2d8d8cbbf267104a5833424d883943c4043",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/provenance.md": "fbee22fde5261b19e3816e9908a23087f7708b2f915dcc86f002278efd140207",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/splits.json": "10017366a0e7e02304eac7146adf9fb98ae60f0902d44d4f2cd1be031f837f60",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/tasks.jsonl": "b4de83a5c53230e320cb57c3c7fe32554fb4e3e19986e86d3fb1374160665115",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark-contract-validation.log": "d56f10954279edd1822547962e823210b836ee922b739ce80b669c8924a815c4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-01-xmltodict/snapshot_recipe.json": "8b7109c83234a3f018cc2f0dd63dcec99061a7b8d698b4bef278a996dd83aa77",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-02-pyparsing/snapshot_recipe.json": "1c44eb637e9ee73d13fc47a9a1496373dd7f05bb23a695a32dacebfe2db8ce13",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-03-oauthlib/snapshot_recipe.json": "add4c4a9348b46278d3e7254f63f2a597872a2e1e4fd0e7ca3ec355221433d54",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-04-click/snapshot_recipe.json": "037ac1ffbec2df1388093d644f2ddeff10b88b5cd017b43608b27ddac16ce2b2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-05-dnspython/snapshot_recipe.json": "e45872607aca71252a54ba5df2457ffe2987ffd12663e412e19b741dfe795423",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-06-bottle/snapshot_recipe.json": "30fb9a7a8b5625ddde9d05ef00b8e144e05ffbc58740175f3f8ce9e054e037fe",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-07-idna/snapshot_recipe.json": "6f17a3cd74649380015d6e0fc3b201dafbb91563f7aa7b88585f6ed1dadf3bff",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-08-protego/snapshot_recipe.json": "6db92b27159bc7dbaf5215d7070f0be760c36fc82bce0656f82b2b491aaab075",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-09-tomlkit/snapshot_recipe.json": "ef2c9af7812f94711f6615d462901d36678233acee1c6e247b3e2bf5c22d55a5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-10-installer/snapshot_recipe.json": "050238b8272660a5d085a4425edc642dcd527aa1865694ab3d1aaef737bd3241",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-11-tornado/snapshot_recipe.json": "2eb67b35672ec724592c21d2c79beffd950b7db8d433a093d2b0c3305c917944",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-12-more-itertools/snapshot_recipe.json": "156f2eb840942418e10324836f92b36ffb43f4544a539055cb3185257ff60ab3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-13-charset_normalizer/snapshot_recipe.json": "a2fb4c50f7636ba290bd73935bee3070c1255b77bc73439dc203b971b9e581ed",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-14-iniconfig/snapshot_recipe.json": "e5adf6b691df7151e50eb445fb7f33d7d6e709b5525f669000b73d0c53d17daf",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-15-wheel/snapshot_recipe.json": "00ce01210f4f0ad42b5657e35959a5dbb7152bc4e82dd0a5b9aef90a3606c613",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/proposal_snapshots/ns-hist-16-jinja/snapshot_recipe.json": "635b852a72b63274f9e28434dabebb0ab30615ad5ccaa1289b7bcb3dcacbb502",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/README.md": "aedf960990ee6790637f5d39fb0a046b62ea9585e94b53bc21411e9efe3f1831",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-01-xmltodict/oracle.json": "74bab56293a9ae8314db377111b9a29b25deb7f312a0503a0d9c3f8428eae316",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-02-pyparsing/oracle.json": "f156c54ccd9135a96e4a77c6b14f593caddd1b03aa4c0a00f147c78fe469f692",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-03-oauthlib/oracle.json": "a685f0878eb36d53bd85434cda5ea4ac435edb1845c2fcec4926d6f2f474bb6b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-04-click/oracle.json": "315009fcf7e3832ad613957c488bec7be853b95d5dcb26d44f0b752dd34c92b3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-05-dnspython/oracle.json": "22d0710e9807255f3d4484da61fbd15d6133adf9dd0571be98e8f8b9b192560d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-06-bottle/oracle.json": "3453200b44a6e2decbbea80b2313e3b4b1402a1aefeea400c565389e7e0eb56f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-07-idna/oracle.json": "62b646d9e8c2c1d1bb05ad5cc506888fbcab5db5b5946e321eef77f3537a2410",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-08-protego/oracle.json": "7b331eacb087694c8e971c9c9fedaf59a05345eb32b0dfa2477a84beea4887a7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-09-tomlkit/oracle.json": "27f6aafb0111d9edbee78a05542b037028e3e757abacd0cbf6db7fea356fdfd8",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-10-installer/oracle.json": "a12a52d254993857b47ae906ca5ac9b57c142b32b30f96524683703d53fe94d0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-11-tornado/oracle.json": "66e9c23ee99bf96cf7d32a4c42d91002f1c1d2c78323c1af33ecdb2716c18f5e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-12-more-itertools/oracle.json": "572ee4ba2a841a3f7ffcd41457c95594e031121cb61dd5533a9acb77259fe179",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-13-charset_normalizer/oracle.json": "8dc0090732a5fde627d5d0d23691ed093822651d55dda51fe85af70ec25ecbe5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-14-iniconfig/oracle.json": "a63fd0b55fe1de28a5e309754eae81dad5d3119ae04e0861d62d4cada2aa6955",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-15-wheel/oracle.json": "4cc49c792d55dec2a0c45cf56fbfc38f7f68506da4ad5f1d6ab1b35845cd15d3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/oracles/ns-hist-16-jinja/oracle.json": "9f7f047a129fbb23f12426eff39a3efcad48595066667789120fac82bc16c9ae",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/qualification_fixture/nsq_fixture_v1/nsq_fixture/__init__.py": "5175a66de44862d0620bd3ddc6b92d2b530f5109a02341feb5ff0e17ef586811",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/qualification_fixture/nsq_fixture_v1/nsq_fixture/core.py": "3214b47dd6c93d0eea09102298c3fe41b0285ac825aaecbe8c58cc9a9d817ef3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/qualification_fixture/nsq_fixture_v1/policy.json": "d115415756d70e81c3f7ca26adb27d7f66da4532f4196e06d2f591d512138a69",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/qualification_fixture/nsq_fixture_v1/pytest.ini": "8250d20f42b419af40706490ead78aabab9feba93eab09a3f626e3de5256e1f4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/qualification_fixture/nsq_fixture_v1/tests/test_nsq.py": "ded1ee892b9afc3dd5de229302793a6d22ce92bb7f6801c60ac98aed8f234f46",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/validate_benchmark.py": "fbfe8d9f537a7a1dbc28c78bc4d394ef9817d1cdb4b7eb6a5aed829de7653ec8"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/benchmark/tasks.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/tasks.jsonl",
+    "papers/completion/neurosymbolic_supervision/benchmark/splits.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/splits.json",
+    "papers/completion/neurosymbolic_supervision/benchmark/oracle_manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/oracle_manifest.json",
+    "papers/completion/neurosymbolic_supervision/benchmark/provenance.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/provenance.md",
+    "papers/completion/neurosymbolic_supervision/audit/leakage_audit.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/audit/leakage_audit.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Every task has a fixed pre-fix snapshot, expected baseline condition, independent acceptance criteria, provenance, and split assignment.",
+      "status": "met",
+      "explanation": "All 16 live historical tasks pin a compact pre-fix repair-surface recipe (commit + per-file SHA-256, no in-tree source dump), an executed baseline in which hidden FAIL_TO_PASS tests fail on the pre-fix tree and pass on the privately reconstructed reference fix, independent hidden oracle IDs, license/upstream provenance, and a development/pilot/final split. Qualification, holdout, and 40 preliminary-fixture rows carry the same required fields with live_repair_admitted=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/tasks.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/splits.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/oracle_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Deduplication covers near-duplicate families, prior fixtures, related-paper corpora, and patch/acceptance leakage.",
+      "status": "met",
+      "explanation": "One live task per upstream lineage; SWE-bench twelve families, CVE-identified commits, and Lean/autoformalization material were excluded from the roster. The 40 sch-bench fixtures are listed only as preliminary_fixture_only. tasks.jsonl contains no reference patches or FAIL_TO_PASS payloads; hidden payloads are hash-pinned reconstruction recipes under scorer_only/ with payload_stored_in_tree=false and proposal_sandbox_may_mount_hidden_store=false. Shared-org clustering is disclosed, not silently merged.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/audit/leakage_audit.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/oracle_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/README.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Invalid/valid paired cases cover all retained Table 18 boundaries and Table 12 mutation categories.",
+      "status": "met",
+      "explanation": "Retained Table 18 boundaries (provider, translation, fixture lifecycle, restart publication) each have valid_progress and safe_rejection overlays bound to every frozen final family (64 cases at 8 final families). All 29 retained Table 12 mutation categories have valid/invalid pairs on independently generated nsq_fixture_v1 (58 cases), distinct from the old 40 fixtures. Native/world Table 18 rows remain narrowed and are holdout-only.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/tasks.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/splits.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Population size and exclusions are fixed before final outcomes; no favorable-case selection is permitted.",
+      "status": "met",
+      "explanation": "An a-priori roster was SHA-256 ranked before verification. Eligibility (license, Python-only bounded patch, tests, executed fail-to-pass) was applied in rank order. Verification failures were excluded with reasons and were not replaced after freeze. Actual live N=16 versus the preregistered 24 is recorded as a shortfall requiring a versioned NS-016 amendment; unused quota is not filled from easier leftovers. replacement_after_freeze=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/splits.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark/provenance.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/audit/leakage_audit.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark-contract-validation.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/validate_benchmark.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/validate_benchmark.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/benchmark-contract-validation.log",
+      "started_at": "2026-09-12T00:32:03.372822+00:00",
+      "finished_at": "2026-09-12T00:32:03.412283+00:00"
+    }
+  ],
+  "limitations": [
+    "Actual recruited live families are 16, below the preregistered 24. NS-016 must issue a versioned pre-final amendment or treat missing families as missing scheduled units; this freeze does not silently relabel the design.",
+    "No provider invocation or live historical repair result was produced. Builder pytest runs establish oracle applicability only.",
+    "Compact snapshot recipes pin admitted repair-surface files by commit and SHA-256; they are not full upstream worktrees. NS-006 materializes the pinned pre-fix commit for execution.",
+    "Hidden oracle payloads are hash-pinned reconstruction recipes and are not stored in the proposal-visible tree.",
+    "Shared-org libraries remain disclosed; independence is not assumed for population promotion."
+  ]
+}

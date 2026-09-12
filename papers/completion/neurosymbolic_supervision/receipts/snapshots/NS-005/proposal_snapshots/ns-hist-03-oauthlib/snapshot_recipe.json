@@ -1,0 +1,16 @@
+{
+  "family_id": "upstream:oauthlib/oauthlib",
+  "files": [
+    {
+      "byte_length": 8866,
+      "path": "oauthlib/oauth2/rfc6749/endpoints/metadata.py",
+      "sha256": "79eaeba51ac54a34c809d209b5b854a3f677572d7859ae457d410a70d5072abe"
+    }
+  ],
+  "kind": "compact_pre_fix_repair_surface_recipe",
+  "materialize": "git show {pre_fix_commit}:{path}",
+  "pre_fix_commit": "cf3cf407be774405f66188219eb1653c723e294b",
+  "snapshot_sha256": "e1d95cbce6e241d8e9f6a03853ccd5028c14572085cf38e7aa1b9c2aa87e9df2",
+  "task_id": "ns-hist-03-oauthlib",
+  "upstream_repo": "https://github.com/oauthlib/oauthlib"
+}
