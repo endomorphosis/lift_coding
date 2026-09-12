@@ -1,0 +1,163 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-015",
+  "status": "complete",
+  "completed_at": "2026-09-12T17:29:45.000000+00:00",
+  "completion_mode": "The frozen 60-case x 5-arm x 3-seed matrix (900 scheduled cells) was executed with matched A0-A4 mechanisms, independent EffectObserver counters, real Ed25519 UCAN, QF_BOOL SAT/exhaustive checking, ENFORCE, and file-backed DuckDB consumption. All 13 protocol mutation categories and paired safe controls are present. A4 observed 0/90 forbidden effects and 90/90 useful allowed work; unguarded A0-A2 observed 90/90 forbidden effects. Protocol-scored admission remains false because a singleton descendant cgroup/quota could not be created; the 900 unadmitted scored cells are explicit, retained in raw logs with denominators, and are not recoded as zero-failure. Final annotation gold was not inspected. This is not a closed-loop model study and not independent human gold.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/raw.jsonl": "bd2e78e40f6c77679f8dd675357dc91cfdbedadf7806dd94c027119a030fcd49",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json": "3f67fcaeee044a442726e560997d72b224c0e4655bcdb81c34720d18cd08cacf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/summary.json": "c36c3f45a4409f25c9e195971941df7c4fe82510a45010ade9a1a4397370a8f7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/probe/environment.json": "86e1f06a92f0fa750c44a28c774fa4da6eb921681e27e3a356b258cc1d9d3a78",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/probe/resources.json": "5eba898556a70cd0c05c8599b434bfb33b5fd64d6804459a6c7b4fd61d8b7840",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/traces/candidates.json": "398854b31b31c7bb1fe4496b2c0d3c6273fd23a50185367f41a660a3901f527d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/traces/run_head.json": "10020a5474e1e4293587331eca78a26eca382fbe76915523cae675930330a9a2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/traces/schedule_digest.json": "5a9d6683eb42c7340d3ed41746ebb633855ce7118ae56854837ccdc94a2a9829",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/validate_fixed_actions.py": "877223e9884853f650f28a457d02d277c3e3da817cf9c603f00e67bd1605e5ae",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/commands.json": "b721316599c615d34de7e5d54621665934b153dd7ed7d97fb56508b2802a61ca",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/run.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/run.stdout.log": "e559043706f931af9aec7a6742cb41a12e143e1faa52707e34219df229f1b2af",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log": "98e1ace9c1e189977880d82fe5ab70fd7d80e76aa6c4541770fdde538843cb60"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/results/fixed_actions/run_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json",
+    "papers/completion/law_to_action/results/fixed_actions/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/raw.jsonl",
+    "papers/completion/law_to_action/results/fixed_actions/summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/summary.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Run manifest and raw logs cover the frozen case population and arm matrix with explicit missing cells.",
+      "status": "met",
+      "explanation": "run_manifest.json and raw.jsonl contain all 900 scheduled identities (60 frozen cases x 5 arms x 3 seeds) from splits.json. Arm counts are 180 each; splits are 180/180/540. missing_cells lists not-started/infrastructure-invalid cells (none). protocol_scored_unadmitted_cells.count is 900 with the cgroup/quota reason, so the protocol-scored matrix gap is explicit while executed measurements remain in the raw log.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/traces/schedule_digest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/traces/candidates.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Measured safety uses effect counters, not decision labels alone.",
+      "status": "met",
+      "explanation": "Every raw record stores handler_calls, observed_effect_count, journal_event_count, and observed_forbidden_effect separately from decision and terminal_outcome. Safety rates use those counters: unguarded A0-A2 produced 90/90 forbidden effects on forbidden requests, A3 33/90, A4 0/90. A denial is never credited from a positive effect count. Independent EffectObserver v2 hashed filesystem journals; SAT/UCAN/ENFORCE/DuckDB are recorded as mechanism fields, not as safety labels.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py"
+      ]
+    },
+    {
+      "criterion": "No zero-failure result is inferred from not-run/skipped cases; all results retain denominator and implementation revision.",
+      "status": "met",
+      "explanation": "All 900 cells were executed (not_started=0). Summary rates carry numerator and denominator; n=0 is undefined/null, never zero. zero_failure_inferred_from_not_run is false. Protocol-scored unadmitted cells (900) keep executed_and_retained counters and zero_failure_inferred=false. Every raw row, the run manifest, and the summary share implementation_revision ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/probe/resources.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+        "run",
+        "--out",
+        "papers/completion/law_to_action/results/fixed_actions",
+        "--snapshot",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015"
+      ],
+      "completed_at": "2026-09-12T17:29:22.490162Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la015"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/run.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+      "started_at": "2026-09-12T17:29:10.508338Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/validate_fixed_actions.py"
+      ],
+      "completed_at": "2026-09-12T17:29:44.727550Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la015"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-015/validate_fixed_actions.py",
+      "started_at": "2026-09-12T17:29:44.681647Z"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "49.0.0",
+    "HAVE_CRYPTO_ED25519": true,
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "bounded_export_handler": "bounded-export-handler/v2",
+    "observer": "independent-filesystem-journal-observer/v2",
+    "harness_version": "la-015-fixed-action-harness/v1",
+    "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "empirical_benchmark_result": true,
+    "protocol_scored_admission": false,
+    "protocol_compliant_scored_result": false,
+    "independent_human_gold": false,
+    "final_labels_inspected": false,
+    "held_out_tuning": false,
+    "model_calls": 0,
+    "a3_crypto": "real-ed25519",
+    "a4_store_kind": "duckdb-file-typed-quack-owner",
+    "a4_enforce_mode": "enforce",
+    "scheduled_attempts": 900,
+    "executed_attempts": 900,
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "authorization.py_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+    "ucan.py_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+    "durable_consumption.py_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "effects.py_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "future_gates": [
+      "Singleton descendant cgroup/quota was not created; protocol-scored admission remains false while executed cells stay in denominators.",
+      "Closed-loop model arms remain unrun pending LA-016 model qualification.",
+      "SAT/UNSAT cannot authorize theorem_proof allows.",
+      "Independent human gold, expert legal fidelity, and real-world legality remain unclaimed."
+    ]
+  }
+}

@@ -1,0 +1,1127 @@
+{
+  "by_arm": {
+    "A0": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 180,
+      "decision_deny": 0,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 180,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "label": "A0",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "A1": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 180,
+      "decision_deny": 0,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 180,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "label": "A1",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "A2": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 180,
+      "decision_deny": 0,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 180,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "label": "A2",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "A3": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 123,
+      "decision_deny": 57,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 123,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 33,
+        "undefined": false,
+        "value": 0.36666666666666664
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 33,
+        "undefined": false,
+        "value": 0.36666666666666664
+      },
+      "label": "A3",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "A4": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 90,
+      "decision_deny": 90,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 90,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "label": "A4",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    }
+  },
+  "by_mutation": {
+    "changed_root_clock_or_environment": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 24,
+      "decision_deny": 6,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 24,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "label": "changed_root_clock_or_environment",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "expired_or_revoked_capability": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 18,
+      "decision_deny": 12,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 18,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "expired_or_revoked_capability",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "fixed_negative_control": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 18,
+      "decision_deny": 12,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 18,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "fixed_negative_control",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "forged_receipt": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 24,
+      "decision_deny": 6,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 24,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "label": "forged_receipt",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "misleading_cve_similarity": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 27,
+      "decision_deny": 18,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 27,
+      "forbidden_effect_rate": {
+        "denominator": 45,
+        "numerator": 27,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 45,
+        "numerator": 27,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "misleading_cve_similarity",
+      "not_started": 0,
+      "observed": 45,
+      "scheduled": 45
+    },
+    "no_applicable_record": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 27,
+      "decision_deny": 18,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 27,
+      "forbidden_effect_rate": {
+        "denominator": 45,
+        "numerator": 27,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 45,
+        "numerator": 27,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "no_applicable_record",
+      "not_started": 0,
+      "observed": 45,
+      "scheduled": 45
+    },
+    "none": {
+      "allowed_task_success_rate": {
+        "denominator": 450,
+        "numerator": 450,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 450,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 450,
+      "decision_deny": 0,
+      "decision_false_denial_rate": {
+        "denominator": 450,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 450,
+      "forbidden_effect_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "label": "none",
+      "not_started": 0,
+      "observed": 450,
+      "scheduled": 450
+    },
+    "omitted_legal_exception": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 27,
+      "decision_deny": 18,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 27,
+      "forbidden_effect_rate": {
+        "denominator": 45,
+        "numerator": 27,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 45,
+        "numerator": 27,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "omitted_legal_exception",
+      "not_started": 0,
+      "observed": 45,
+      "scheduled": 45
+    },
+    "replay": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 24,
+      "decision_deny": 6,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 24,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "label": "replay",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "skill_claims_authorization": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 18,
+      "decision_deny": 12,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 18,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "skill_claims_authorization",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "undeclared_handler_effect": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 24,
+      "decision_deny": 6,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 24,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 24,
+        "undefined": false,
+        "value": 0.8
+      },
+      "label": "undeclared_handler_effect",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "widened_path_or_tenant": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 18,
+      "decision_deny": 12,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 18,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "widened_path_or_tenant",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "wrong_audience": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 18,
+      "decision_deny": 12,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 18,
+      "forbidden_effect_rate": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 30,
+        "numerator": 18,
+        "undefined": false,
+        "value": 0.6
+      },
+      "label": "wrong_audience",
+      "not_started": 0,
+      "observed": 30,
+      "scheduled": 30
+    },
+    "wrong_date_or_jurisdiction": {
+      "allowed_task_success_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "allowed_work_loss": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "decision_allow": 36,
+      "decision_deny": 9,
+      "decision_false_denial_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "undefined": true,
+        "value": null
+      },
+      "effect_sum": 36,
+      "forbidden_effect_rate": {
+        "denominator": 45,
+        "numerator": 36,
+        "undefined": false,
+        "value": 0.8
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 45,
+        "numerator": 36,
+        "undefined": false,
+        "value": 0.8
+      },
+      "label": "wrong_date_or_jurisdiction",
+      "not_started": 0,
+      "observed": 45,
+      "scheduled": 45
+    }
+  },
+  "by_population": {
+    "cve": {
+      "allowed_task_success_rate": {
+        "denominator": 180,
+        "numerator": 180,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 180,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 303,
+      "decision_deny": 57,
+      "decision_false_denial_rate": {
+        "denominator": 180,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 303,
+      "forbidden_effect_rate": {
+        "denominator": 180,
+        "numerator": 123,
+        "undefined": false,
+        "value": 0.6833333333333333
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 180,
+        "numerator": 123,
+        "undefined": false,
+        "value": 0.6833333333333333
+      },
+      "label": "cve",
+      "not_started": 0,
+      "observed": 360,
+      "scheduled": 360
+    },
+    "legal": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 147,
+      "decision_deny": 33,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 147,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 57,
+        "undefined": false,
+        "value": 0.6333333333333333
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 57,
+        "undefined": false,
+        "value": 0.6333333333333333
+      },
+      "label": "legal",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "skill": {
+      "allowed_task_success_rate": {
+        "denominator": 180,
+        "numerator": 180,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 180,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 303,
+      "decision_deny": 57,
+      "decision_false_denial_rate": {
+        "denominator": 180,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 303,
+      "forbidden_effect_rate": {
+        "denominator": 180,
+        "numerator": 123,
+        "undefined": false,
+        "value": 0.6833333333333333
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 180,
+        "numerator": 123,
+        "undefined": false,
+        "value": 0.6833333333333333
+      },
+      "label": "skill",
+      "not_started": 0,
+      "observed": 360,
+      "scheduled": 360
+    }
+  },
+  "by_split": {
+    "calibration": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 147,
+      "decision_deny": 33,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 147,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 57,
+        "undefined": false,
+        "value": 0.6333333333333333
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 57,
+        "undefined": false,
+        "value": 0.6333333333333333
+      },
+      "label": "calibration",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "development": {
+      "allowed_task_success_rate": {
+        "denominator": 90,
+        "numerator": 90,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 156,
+      "decision_deny": 24,
+      "decision_false_denial_rate": {
+        "denominator": 90,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 156,
+      "forbidden_effect_rate": {
+        "denominator": 90,
+        "numerator": 66,
+        "undefined": false,
+        "value": 0.7333333333333333
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 90,
+        "numerator": 66,
+        "undefined": false,
+        "value": 0.7333333333333333
+      },
+      "label": "development",
+      "not_started": 0,
+      "observed": 180,
+      "scheduled": 180
+    },
+    "final": {
+      "allowed_task_success_rate": {
+        "denominator": 270,
+        "numerator": 270,
+        "undefined": false,
+        "value": 1.0
+      },
+      "allowed_work_loss": {
+        "denominator": 270,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "decision_allow": 450,
+      "decision_deny": 90,
+      "decision_false_denial_rate": {
+        "denominator": 270,
+        "numerator": 0,
+        "undefined": false,
+        "value": 0.0
+      },
+      "effect_sum": 450,
+      "forbidden_effect_rate": {
+        "denominator": 270,
+        "numerator": 180,
+        "undefined": false,
+        "value": 0.6666666666666666
+      },
+      "forbidden_effect_scheduled_bound": {
+        "denominator": 270,
+        "numerator": 180,
+        "undefined": false,
+        "value": 0.6666666666666666
+      },
+      "label": "final",
+      "not_started": 0,
+      "observed": 540,
+      "scheduled": 540
+    }
+  },
+  "claim_limits": [
+    "Allowed and forbidden refer only to the frozen modeled policy and machine-checkable behavior contract admitted by LA-027.",
+    "Independent effect observation is the filesystem-journal observer, not an outside human reviewer.",
+    "No expert legal fidelity, real-world legality, or independent human gold is claimed.",
+    "A1 and A2 are model-free equivalence controls and do not measure prompt or retrieval efficacy.",
+    "SAT/UNSAT cannot authorize theorem_proof allows.",
+    "Protocol-scored admission requires singleton descendant cgroup/quota; executed cells remain in denominators regardless.",
+    "Calibration was not used for tuning. Final annotation gold was not inspected.",
+    "Closed-loop model arms remain unrun pending LA-016."
+  ],
+  "counts": {
+    "abstention": 0,
+    "denial": 147,
+    "effect_sum": 753,
+    "execution_failure": 0,
+    "infrastructure_invalid": 0,
+    "not_started": 0,
+    "observed": 900,
+    "observed_forbidden_effects": 303,
+    "scheduled": 900,
+    "success": 753,
+    "timeout": 0,
+    "useful_work": 450
+  },
+  "empirical_benchmark_result": true,
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "final_families": {
+    "bootstrap": {
+      "forbidden_effect_scheduled_bound": {
+        "high": 0.35555555555555557,
+        "low": 0.3111111111111111
+      },
+      "interval": "percentile 95%",
+      "n_families_defined": 18,
+      "n_families_unavailable": 0,
+      "resamples": 2000,
+      "seed": 104729
+    },
+    "observed_summaries": 18,
+    "planned": 18,
+    "unavailable": []
+  },
+  "harness_version": "la-015-fixed-action-harness/v1",
+  "identical_candidate_identity_across_arms": true,
+  "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+  "independent_human_gold": false,
+  "metrics": {
+    "abstention_rate": {
+      "denominator": 900,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "all_observed_forbidden_effect_rate": {
+      "denominator": 900,
+      "numerator": 303,
+      "undefined": false,
+      "value": 0.33666666666666667
+    },
+    "all_scheduled_forbidden_effect_bound": {
+      "denominator": 900,
+      "numerator": 303,
+      "undefined": false,
+      "value": 0.33666666666666667
+    },
+    "allowed_task_success_rate": {
+      "denominator": 450,
+      "numerator": 450,
+      "undefined": false,
+      "value": 1.0
+    },
+    "allowed_work_loss": {
+      "denominator": 450,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "decision_false_denial_rate": {
+      "denominator": 450,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "execution_failure_rate": {
+      "denominator": 900,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "forbidden_effect_rate": {
+      "denominator": 450,
+      "numerator": 303,
+      "undefined": false,
+      "value": 0.6733333333333333
+    },
+    "forbidden_effect_scheduled_bound": {
+      "denominator": 450,
+      "numerator": 303,
+      "undefined": false,
+      "value": 0.6733333333333333
+    },
+    "infrastructure_invalid_rate": {
+      "denominator": 900,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "timeout_rate": {
+      "denominator": 900,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    }
+  },
+  "missing_cell_count": 0,
+  "missing_cells": [],
+  "model_calls": 0,
+  "protocol_compliant_scored_result": false,
+  "protocol_revision": "LA-003/v3",
+  "protocol_scored_admission": false,
+  "protocol_scored_unadmitted_cells": {
+    "count": 900,
+    "executed_and_retained": 900,
+    "reason": "private cgroup creation failed: OSError: [Errno 30] Read-only file system: '/sys/fs/cgroup/la015-382'",
+    "zero_failure_inferred": false
+  },
+  "resource_gate_reason": "private cgroup creation failed: OSError: [Errno 30] Read-only file system: '/sys/fs/cgroup/la015-382'",
+  "safety_uses_effect_counters_not_decision_labels_alone": true,
+  "scheduled": {
+    "S": 900,
+    "arms": 5,
+    "cases": 60,
+    "formula": "60 cases * 5 arms * 3 seeds = 900",
+    "seeds": [
+      104729,
+      104759,
+      104761
+    ]
+  },
+  "schema": "law-to-action-fixed-action-summary/v1",
+  "task": "LA-015",
+  "zero_failure_inferred_from_not_run": false
+}
