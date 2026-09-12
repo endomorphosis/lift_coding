@@ -1,0 +1,198 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-023",
+  "status": "complete",
+  "completed_at": "2026-09-12T21:23:30.997147+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "checker": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-023/check_outputs.py",
+      "sha256": "ff79bf7cb2d93ffd77c2990a587d381b1e98045f7f02cfa4bf90eae10df62710",
+      "schema": "autoformalization-anonymization-report/v1",
+      "standard_library_only": true
+    },
+    "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
+    "empirical_execution": "Stdlib anonymous-package assembly and table-hash verification against frozen AF-021 results. No model call, training, native checker, public upload, or fabricated human review."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/assemble_package.py": "7d5252af31c2230b654485c9b0cee7e6653d6e887fbe5de700cddb06667027be",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/assemble_receipt.py": "7f595e03be381967de3b83840d712f8060c0d414032b560f9391f71f8f36e6c5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/check_outputs.py": "ff79bf7cb2d93ffd77c2990a587d381b1e98045f7f02cfa4bf90eae10df62710",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.meta.json": "fcc74c182ad0e6e34d55672ca62462652f81e19c68ad6ddc4178597fbf40fcb8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stdout.log": "0dfe719b381bcb87ca37ff6d1c430c186f92089ce71aa41390ec377302d8a2c9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/json_parse.meta.json": "7fbd8e3a785472413150546c9713eed78db08f85ef3ffae0d5793080df7428e1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/json_parse.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/json_parse.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/python_version.meta.json": "6bf31a2b7ea5ec796d6bffead06ee9fe58933c03883d41b2eddb0211609d7ec3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/python_version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/python_version.stdout.log": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/README.md": "badd357e9794a064f448952a8d086c48928be104518496e9a589089eb4290110",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/S01_S40_map.json": "5be43ad165b1a00222f4b519eb052c814a2ff7f5e3e18a6e542eea6ff5715d24",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/manifest.json": "649fa5f71d06e853587855325bf414e20128936ba90735e6a9f69e0054a74745",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/evidence/anonymization_report.json": "a445514f122a0b4369e10777469590083e4a77f6457a152bebcca5d138acf14d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/submission/supplement.identity.json": "0aa3ab1f611b90d07a88892d4831f42d377c21f77f23a79bc1ef2d8188acd713",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/submission/supplement.pyc": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/regenerate_tables.py": "5f442583ee03b219587a3d6cb285580d29f2c6b584be77b2c1e90afcb14f269b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/run_sealed.py": "d1e408756ba7e0d735560ca2d850eb135dc22f9d3bfaf51a86acefaea43efa86",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/verify_retained_inputs.py": "7e9f1251d0f964be130b899f1a7d014b2bec1233784b500562c0ce3aa345d04b"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/artifact/README.md": "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/README.md",
+    "papers/completion/autoformalization/artifact/manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/manifest.json",
+    "papers/completion/autoformalization/artifact/S01_S40_map.json": "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/S01_S40_map.json",
+    "papers/completion/autoformalization/submission/supplement.zip": "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/submission/supplement.pyc",
+    "papers/completion/autoformalization/evidence/anonymization_report.json": "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/evidence/anonymization_report.json"
+  },
+  "criteria": [
+    {
+      "criterion": "An independent clean environment can locate every retained-claim input and regenerate reported tables using documented commands.",
+      "status": "met",
+      "explanation": "The anonymous supplement ZIP unpacks to regenerate_tables.py and verify_retained_inputs.py plus frozen retained-claim inputs. Sealed-PATH python3.12 -S regenerate_tables.py --check rebuilt Tables 6/11/13 from frozen summary.json and matched SHA-256 a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49, dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74, and 655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f. verify_retained_inputs.py located every included member by SHA-256. README.md also documents the paper-tree command /usr/bin/python3.12 -S papers/completion/autoformalization/evaluation/analyze_results.py --check.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/README.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/submission/supplement.identity.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "All exported logs/configuration paths/artifact links are audited for double-blind requirements and sensitive credentials.",
+      "status": "met",
+      "explanation": "anonymization_report.json records a double-blind scan of README, manifest, S01_S40_map, the supplement ZIP members, and the report itself. Operator HOME/Users paths, Overleaf URLs, bearer credentials, and private keys were scanned; no hits remained in exported bytes. S01_S40_map.json omits private repository paths and the AF-003 ledger. Operator-local environment and native-training manifests were withheld and replaced by anonymous pins/notes. ZIP timestamps are fixed and the archive has no comment.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/evidence/anonymization_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/S01_S40_map.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Supplement ZIP is at most 100 MB; large artifacts have an allowed anonymous access strategy and exact checksums.",
+      "status": "met",
+      "explanation": "supplement.zip is under the 100 MB workshop limit and the 16 MB transport bound. Native packed-CPU states (~5.8 GB) and MiniLM model.safetensors (90,868,376 bytes) are recorded with exact SHA-256 values and anonymous access strategies (venue-channel on request; public Hub revision download). They are not required to regenerate reported tables. Implementation role files are hash-bound rather than shipped.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/evidence/anonymization_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/submission/supplement.identity.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No public upload/publication or fabricated human review occurs.",
+      "status": "met",
+      "explanation": "manifest.json and anonymization_report.json set public_upload, workshop_submission, and openreview_upload to false. Independent human review remains not collected with gold_records_with_values=0. No fabricated agreement statistic is exported. This task does not submit the paper or invent author sign-off.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/evidence/anonymization_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/outputs/artifact/README.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-V"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.0017831739969551563,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T21:23:30.708518+00:00",
+      "started_at": "2026-09-12T21:23:30.706726+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/python_version.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/python_version.stderr.log",
+      "execution_kind": "sealed-PATH interpreter identity"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-S",
+        "-c",
+        "import json,pathlib; json.loads(pathlib.Path('papers/completion/autoformalization/artifact/manifest.json').read_text()); json.loads(pathlib.Path('papers/completion/autoformalization/artifact/S01_S40_map.json').read_text()); json.loads(pathlib.Path('papers/completion/autoformalization/evidence/anonymization_report.json').read_text())"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.013827159069478512,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T21:23:30.722592+00:00",
+      "started_at": "2026-09-12T21:23:30.708760+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/json_parse.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/json_parse.stderr.log",
+      "execution_kind": "JSON parse pin of anonymous package manifests"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "-S",
+        "papers/completion/autoformalization/receipts/snapshots/AF-023/check_outputs.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.26437308895401657,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "exit_code": 0,
+      "finished_at": "2026-09-12T21:23:30.987371+00:00",
+      "started_at": "2026-09-12T21:23:30.722981+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-023/logs/check_outputs.stderr.log",
+      "execution_kind": "stdlib anonymity, ZIP, table-hash, and retained-input checks; no model, training, or provider call",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-023/check_outputs.py"
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "bytes": 312081,
+  "member_count": 57,
+  "members": [
+    {
+      "bytes": 3253,
+      "path": "autoformalization-anonymous-reproducibility/README.md",
+      "sha256": "badd357e9794a064f448952a8d086c48928be104518496e9a589089eb4290110"
+    },
+    {
+      "bytes": 41707,
+      "path": "autoformalization-anonymous-reproducibility/S01_S40_map.json",
+      "sha256": "5be43ad165b1a00222f4b519eb052c814a2ff7f5e3e18a6e542eea6ff5715d24"
+    },
+    {
+      "bytes": 49792,
+      "path": "autoformalization-anonymous-reproducibility/checksums.json",
+      "sha256": "0e9ee66b6646196947e2d6e733bd0418714d30b5f4304c8fce2b9c890080358e"
+    },
+    {
+      "bytes": 6924,
+      "path": "autoformalization-anonymous-reproducibility/frozen/checkpoints/baselines/manifest.json",
+      "sha256": "b33d71df3cf66a27fba5b5470c73764e137d51d0452110f236b820fe10cefaf5"
+    },
+    {
+      "bytes": 13390,
+      "path": "autoformalization-anonymous-reproducibility/frozen/config/experiment_plan.json",
+      "sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c"
+    },
+    {
+      "bytes": 10595,
+      "path": "autoformalization-anonymous-reproducibility/frozen/config/metrics.json",
+      "sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794"
+    },
+    {
+      "bytes": 14607,
+      "path": "autoformalization-anonymous-reproducibility/frozen/config/pipeline_arms.json",
+      "sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22"
+    },
+    {
+      "bytes": 12732,
+      "path": "autoformalization-anonymous-reproducibility/frozen/config/retrieval_manifest.json",
+      "sha256": "e29612b783742628f863d736151b44eeb2e798ae5bd57d43f81d694a81db4442"
+    },
+    {
+      "bytes": 5891,
+      "path": "autoformalization-anonymous-reproducibility/frozen/config/structural_evidence_scope.json",
+      "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+    },
+    {
+      "bytes": 13748,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/annotation_guidelines.md",
+      "sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753"
+    },
+    {
+      "bytes": 266477,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/annotation_packets.jsonl",
+      "sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d"
+    },
+    {
+      "bytes": 8393,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/corpus_manifest.json",
+      "sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6"
+    },
+    {
+      "bytes": 232900,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/gold_facets.jsonl",
+      "sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12"
+    },
+    {
+      "bytes": 13548,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/minimal_pairs.jsonl",
+      "sha256": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30"
+    },
+    {
+      "bytes": 14582,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/policy_code_trace_cases.json",
+      "sha256": "a795f24b69860316b6f9615e145b08e208df0cd8ca76069c91f850a312ecaac7"
+    },
+    {
+      "bytes": 78970,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/proof_feedback_manifest.json",
+      "sha256": "fc86ebaa0f9c85895b92e8b1a21d5d15f48d19cf4fe8668c6b644218bc7538f2"
+    },
+    {
+      "bytes": 39879,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/retrieval_judgments.jsonl",
+      "sha256": "0aec03a8721c36cd792f7518717af25d291e462c19721343c75c6c78628af8f5"
+    },
+    {
+      "bytes": 2088,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/review_packet_schema.json",
+      "sha256": "24e3356d0c812bf87601eef683a89e606d7f432175b96885360dfa4446fd4b84"
+    },
+    {
+      "bytes": 5027,
+      "path": "autoformalization-anonymous-reproducibility/frozen/data/splits.json",
+      "sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+    },
+    {
+      "bytes": 3035,
+      "path": "autoformalization-anonymous-reproducibility/frozen/environment_pin.json",
+      "sha256": "375d66892164d555e8eac38d1f40402ea4eeb60106e076025611bcc1cdc07bea"
+    },
+    {
+      "bytes": 76029,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evaluation/analyze_results.py",
+      "sha256": "5626ff58d5b44b298bf22a3295f28b105d67a7ae714afd3c216dfecefc2b0d9a"
+    },
+    {
+      "bytes": 20207,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evaluation/reference_results.json",
+      "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+    },
+    {
+      "bytes": 18548,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evaluation/reference_semantics.py",
+      "sha256": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282"
+    },
+    {
+      "bytes": 16527,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evaluation/result_schema.json",
+      "sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d"
+    },
+    {
+      "bytes": 42573,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evaluation/run_benchmark.py",
+      "sha256": "b290535d18a3f3b2d92d77d663af30944ec0415a86124be5c22cf88764ab9a51"
+    },
+    {
+      "bytes": 8751,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/annotation_provenance.json",
+      "sha256": "bcdc4966989032a810db60f4c1711b3f161f7e65f180134242e138e5593bdde8"
+    },
+    {
+      "bytes": 1618,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/author_feedback_status.json",
+      "sha256": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b"
+    },
+    {
+      "bytes": 4779,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/bibliography_audit.md",
+      "sha256": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376"
+    },
+    {
+      "bytes": 6395,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/claim_task_map.json",
+      "sha256": "b3654785359b0b6ced9fdcf04ed092f370b3b5ed337178932803da23b5d34a58"
+    },
+    {
+      "bytes": 16434,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/compiler_patch.diff",
+      "sha256": "ba0f6874d94b86604b2410e0cc7eb762510ebd0a0da63974fa0d812ee9a7daa4"
+    },
+    {
+      "bytes": 19018,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/final_claim_audit.json",
+      "sha256": "796a507cf4cbfe0fcc246c534c02ddcd636c769b8cde87280161d12317db05e6"
+    },
+    {
+      "bytes": 36855,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/leakage_control_report.json",
+      "sha256": "7bd33a406cb577972da2c61b488334d5774b6b7fb00fc882d77a5e974957a5b5"
+    },
+    {
+      "bytes": 62573,
+      "path": "autoformalization-anonymous-reproducibility/frozen/evidence/native_training/adoption_scalar_summary.json",
+      "sha256": "61506d9d94443600bb4653666cad58f5c2c2cd4abff5a13f94a6b798b0b6429f"
+    },
+    {
+      "bytes": 2771,
+      "path": "autoformalization-anonymous-reproducibility/frozen/manuscript/empirical_scope.tex",
+      "sha256": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739"
+    },
+    {
+      "bytes": 670,
+      "path": "autoformalization-anonymous-reproducibility/frozen/native_training_notes.json",
+      "sha256": "37401ebe8715606159348d6ec40051f0c3dea7b8bfdce034369a011ffd11f246"
+    },
+    {
+      "bytes": 6129,
+      "path": "autoformalization-anonymous-reproducibility/frozen/protocol.md",
+      "sha256": "ea3caf55ec7f5076272aa6d2d374e902752a32dd99a35115ac08c8c14be56242"
+    },
+    {
+      "bytes": 8857,
+      "path": "autoformalization-anonymous-reproducibility/frozen/results/hypothesis_report.md",
+      "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+    },
+    {
+      "bytes": 84488,
+      "path": "autoformalization-anonymous-reproducibility/frozen/results/summary.json",
+      "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+    },
+    {
+      "bytes": 2442,
+      "path": "autoformalization-anonymous-reproducibility/frozen/results/table11_training.tex",
+      "sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74"
+    },
+    {
+      "bytes": 2205,
+      "path": "autoformalization-anonymous-reproducibility/frozen/results/table13_assistance.tex",
+      "sha256": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f"
+    },
+    {
+      "bytes": 2095,
+      "path": "autoformalization-anonymous-reproducibility/frozen/results/table6_pipeline.tex",
+      "sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+    },
+    {
+      "bytes": 34638,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/bridge_validation/results.jsonl",
+      "sha256": "335b4c5bdcfe68f50ce7e2824b9aa84e21db3267375450be585cb9e32eed64b3"
+    },
+    {
+      "bytes": 135630,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/costs/results.jsonl",
+      "sha256": "b88164010ceb36b075aa55356dbd0b5a1dccd3f498ee84ec7407339c22e835ff"
+    },
+    {
+      "bytes": 84375,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/domain_transfer/results.jsonl",
+      "sha256": "5f3f64a4148d9e49d075f11e0acd40c1a15e4a9fbb3522a43b29ae50be1cc510"
+    },
+    {
+      "bytes": 251025,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/native_training/results.jsonl",
+      "sha256": "cebf2f713129f116144fcbad3816d74cf1de60b6444eec3024c999d7dafe8ffb"
+    },
+    {
+      "bytes": 32616,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/pipeline_comparison/manifest.json",
+      "sha256": "8065804d1f466f691117e15eff901ffa7db254fec7ad8425a268f28a7dd2e474"
+    },
+    {
+      "bytes": 258720,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/pipeline_comparison/results.jsonl",
+      "sha256": "f09a8435512ba4effb1365e0433a9345d1535f77b769df15515d8f92663a4acd"
+    },
+    {
+      "bytes": 302558,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/planning/results.jsonl",
+      "sha256": "b5f33709fca971cdd02714fac95704cae63c47e2539e184200b68ac875aa0619"
+    },
+    {
+      "bytes": 36767,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/premise_selection/results.jsonl",
+      "sha256": "de98935565458daed6b3119f9c4f452ae307b0ebaf503c0dafb9948d9bea59d9"
+    },
+    {
+      "bytes": 152364,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/proof_assistance/results.jsonl",
+      "sha256": "c4fc126f3a63652b5f91e70bd2eb1632ad765d614d3ad73eb509cd5841751fc1"
+    },
+    {
+      "bytes": 36214,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/proof_heads/results.jsonl",
+      "sha256": "b5f27d956dcd3dd8846f986ca5b5c9c2dbef68bd598c96de81dfb7409aefada5"
+    },
+    {
+      "bytes": 149749,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/retrieval/results.jsonl",
+      "sha256": "3d07de27b8ecec162c7e4a6ec88e6f274e846c381839bd4d23fcef513b78a1f4"
+    },
+    {
+      "bytes": 8751,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/training_baselines/manifest.json",
+      "sha256": "af982b68966b219a7e4bad45acb7c42db30f6665073db1992d266f981178a99b"
+    },
+    {
+      "bytes": 244779,
+      "path": "autoformalization-anonymous-reproducibility/frozen/runs/training_baselines/results.jsonl",
+      "sha256": "9e56dfd66e290697fafac77726d7c14aff739a42cb279db2594eacb311e5d1f6"
+    },
+    {
+      "bytes": 112923,
+      "path": "autoformalization-anonymous-reproducibility/manifest.json",
+      "sha256": "649fa5f71d06e853587855325bf414e20128936ba90735e6a9f69e0054a74745"
+    },
+    {
+      "bytes": 8777,
+      "path": "autoformalization-anonymous-reproducibility/regenerate_tables.py",
+      "sha256": "5f442583ee03b219587a3d6cb285580d29f2c6b584be77b2c1e90afcb14f269b"
+    },
+    {
+      "bytes": 2122,
+      "path": "autoformalization-anonymous-reproducibility/verify_retained_inputs.py",
+      "sha256": "7e9f1251d0f964be130b899f1a7d014b2bec1233784b500562c0ce3aa345d04b"
+    }
+  ],
+  "note": "Opaque ZIP bytes are admitted only at the declared binary path. This identity is the committed text snapshot of those bytes.",
+  "path": "papers/completion/autoformalization/submission/supplement.zip",
+  "public_upload": false,
+  "schema": "autoformalization-anonymous-supplement-identity/v1",
+  "sha256": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1",
+  "task_id": "AF-023"
+}

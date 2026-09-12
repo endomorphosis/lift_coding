@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af023-owovl949/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONNOUSERSITE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "-S",
+    "papers/completion/autoformalization/receipts/snapshots/AF-023/check_outputs.py"
+  ],
+  "cwd": ".",
+  "elapsed_seconds": 0.26437308895401657,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af023-owovl949",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T21:23:30.987371+00:00",
+  "name": "check_outputs",
+  "started_at": "2026-09-12T21:23:30.722981+00:00"
+}

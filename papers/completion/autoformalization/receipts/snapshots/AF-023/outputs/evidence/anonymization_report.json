@@ -1,0 +1,66 @@
+{
+  "audited_at": "2026-09-12T21:23:30.679704+00:00",
+  "credentials": {
+    "api_keys_exported": false,
+    "private_keys_exported": false,
+    "secrets_exported": false
+  },
+  "double_blind": true,
+  "exclusions": [
+    "config/environment_manifest.json",
+    "config/training_backend.json",
+    "checkpoints/native_training/manifest.json",
+    "data/native_training_teacher_manifest.json",
+    "data/teacher_manifest.json",
+    "evidence/consumer_activation.json",
+    "evidence/guidance_export.json",
+    "evidence/repair_validation.json",
+    "evidence/rollback_receipt.json",
+    "evidence/source_audit_private.json",
+    "runs/compiler_repair/results.jsonl",
+    "runs/guidance_promotion/results.jsonl",
+    "runs/native_training/manifest.json"
+  ],
+  "exported_paths_audited": [
+    "papers/completion/autoformalization/artifact/README.md",
+    "papers/completion/autoformalization/artifact/manifest.json",
+    "papers/completion/autoformalization/artifact/S01_S40_map.json",
+    "papers/completion/autoformalization/submission/supplement.zip",
+    "papers/completion/autoformalization/evidence/anonymization_report.json"
+  ],
+  "findings": [],
+  "human_review": {
+    "fabricated": false,
+    "gold_records_with_values": 0,
+    "independent_review_collected": false
+  },
+  "identifying_hits": [],
+  "large_artifacts_have_checksums": true,
+  "ok": true,
+  "patterns_scanned": [
+    "operator usernames",
+    "operator HOME and Users paths",
+    "Overleaf project URLs",
+    "private keys and bearer credentials",
+    "private S01-S40 ledger fields"
+  ],
+  "publication": {
+    "author_hosted_url_published": false,
+    "openreview_upload": false,
+    "public_upload": false,
+    "workshop_submission": false
+  },
+  "redactions": [
+    "Operator HOME, cache, and binary paths omitted from the environment pin.",
+    "Native-training manifest operator paths replaced by compact anonymous notes.",
+    "Private AF-003 repository ledger omitted from S01_S40_map.json.",
+    "ZIP member timestamps fixed to 2026-01-01T00:00:00 and extra comment omitted."
+  ],
+  "s01_s40_private_ledger_excluded": true,
+  "schema": "autoformalization-anonymization-report/v1",
+  "supplement_zip_bytes": 312081,
+  "supplement_zip_max_bytes": 104857600,
+  "supplement_zip_sha256": "7437e6670058cd3e4cd417610fff4a8b0aef8fa4b2196554d4de302275b22fd1",
+  "task_id": "AF-023",
+  "within_workshop_limit": true
+}
