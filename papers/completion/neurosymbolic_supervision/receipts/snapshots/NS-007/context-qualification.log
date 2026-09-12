@@ -1,0 +1,4 @@
+NS-007 context qualification: OK
+rows=26 retained=25 families=12
+cold_incremental=agree_or_limited; valid_apply=pass; stale_oos=reject; tokenizer_fallback_retained
+live_smoke=cold_incremental_agree,pack_mandatory,malformed_patch_reject
