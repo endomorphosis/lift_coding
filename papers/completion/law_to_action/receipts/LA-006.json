@@ -3,20 +3,35 @@
   "paper_id": "law_to_action",
   "task_id": "LA-006",
   "status": "complete",
-  "completed_at": "2026-09-11T23:36:32.941974+00:00",
-  "completion_mode": "Real pinned CVEfixes pairs and non-empirical controls prepared from the frozen first shard. Independent human security review was not obtained; expected polarity remains unknown and evaluation admission remains blocked. Generated labels are not expert review. Untrusted source was not executed.",
+  "completed_at": "2026-09-12T16:39:10.827328+00:00",
+  "completion_mode": "Bound the frozen twelve LA-026 CVE families, twenty-four reserved cases, and eighty-four excluded controls to scoped machine-checkable behavior contracts under the LA-027/v1 automated evidence scope without rewriting the LA-026 envelopes. Expected polarity remains unknown. No independent-human or universal-security claim is made. The original 2026-09-11 failed/blocked attempt and original criteria are retained in history.",
   "artifacts": {
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/build_cve_pairs.py": "e7735d2ec48ba2c7897b26b5cc7cd8a1e49d3a26279950d7aa02af65b145f0d8",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/extract_cve_evidence.py": "8495b3cd12eb7de4d50fc03b4b271171538ffe5b0303cbfa9231880c9d58627b",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/annotations/cve_review.md": "d5f8445c20cb51951b89db9c8df6e07d7b5d6b3d1622eb7b963e72c665479147",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_controls.jsonl": "2151581aa3b8d61f8abf46dfd7f915225dd56bc2aee140c6719ea1927fb623ab",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl": "95ea434792dd8223b7f22ea1232c58d2920c5aaf4fd68b9a255379bd0280f25c",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/review_status.json": "f98987a13819b7cfeefcece0e5d42aec191520a59bb1f93993f788115799f878",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/row_evidence.json": "b804f300e1480eef5d933f6d82551f0459292427ec0ac6937bb26a21b35d2edc",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py": "40e92d85fb48a3775daa6861c4868f3ce479ad41af88f3856b0dba81422b8e4a",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/build_cve_pairs.stdout.log": "bbdd87c528a21bb193050261e3beedb160c3e2689c17ac9dd2c4b8136e7f0caf",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/extract_cve_evidence.stdout.log": "95d23c56f0b8ce824cd698f3b106276db372ce765d510021825412e527e4e90c",
-    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log": "995b3d6f5f6a7fa6b4049c9351a5411920705dc919296579225dc39ee41729a2"
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_automated_scope.py": "f8848132c4fa36a75abb7272f9563a3299816da8aed89e6961577bb30d2b2e90",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_summary.json": "225acf90067e93c65904c9250fb2da1b26e3093970952355631e2279047ab20f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/build_cve_pairs.py": "e7735d2ec48ba2c7897b26b5cc7cd8a1e49d3a26279950d7aa02af65b145f0d8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/extract_cve_evidence.py": "8495b3cd12eb7de4d50fc03b4b271171538ffe5b0303cbfa9231880c9d58627b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_criteria.json": "160ea9373fd32bb3605c32a2d18b89f883d5bad99c33eabb26b7755461e6294e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_outputs_manifest.json": "a29109815aeb376fa7f2d7294a64c587b2ba7f465557557c6e1cf42c07eec50e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_receipt.json": "d324efd753761d5de92ef18f53b8a52fc38827e716030b8f96a78771ffa345bb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/outputs/benchmark/annotations/cve_review.md": "d5f8445c20cb51951b89db9c8df6e07d7b5d6b3d1622eb7b963e72c665479147",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/outputs/benchmark/cases/cve_controls.jsonl": "2151581aa3b8d61f8abf46dfd7f915225dd56bc2aee140c6719ea1927fb623ab",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/outputs/benchmark/cases/cve_pairs.jsonl": "95ea434792dd8223b7f22ea1232c58d2920c5aaf4fd68b9a255379bd0280f25c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/review_status.json": "f98987a13819b7cfeefcece0e5d42aec191520a59bb1f93993f788115799f878",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/row_evidence.json": "b804f300e1480eef5d933f6d82551f0459292427ec0ac6937bb26a21b35d2edc",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/validate_cve_pairs.py": "40e92d85fb48a3775daa6861c4868f3ce479ad41af88f3856b0dba81422b8e4a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/validation/build_cve_pairs.stdout.log": "bbdd87c528a21bb193050261e3beedb160c3e2689c17ac9dd2c4b8136e7f0caf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/validation/extract_cve_evidence.stdout.log": "95d23c56f0b8ce824cd698f3b106276db372ce765d510021825412e527e4e90c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/validation/validate_cve_pairs.stdout.log": "995b3d6f5f6a7fa6b4049c9351a5411920705dc919296579225dc39ee41729a2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/annotations/cve_review.md": "38fc34610decc2d6df2a73f91d6fdf5e99a0711c524f1a6ce247af20cca43139",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_controls.jsonl": "9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/polarity_contracts.jsonl": "4ef386604710a0c5f20deba8efce4fb9f99cc1fa1fed44e50ad05eff76556c3a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/review_status.json": "74f32c12073ecde05ff65bf05704f5b172cc81d77dabb03954e76d41aad166e3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py": "be2a7132e0d14992ccf99b33e5d37cc29c23ae9af59b68a73b2b8edbb9a8eb0d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/bind_automated_scope.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/bind_automated_scope.stdout.log": "94085fd2a256ec7df49a01346dee924f3dee69d4af374e04893968381ecd0921",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log": "85bc260fd5bd310baa4ea498e53d50a9b24e43842b3d25d4f76d4d36ecf01370"
   },
   "outputs": {
     "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl",
@@ -25,39 +40,44 @@
   },
   "criteria": [
     {
-      "criterion": "Each pair has runnable sandbox reproduction or precisely defined supported behavior evidence and independently reviewed expected polarity.",
+      "criterion": "All frozen 12 pairs/24 cases and 84 excluded controls retain exact identities, source/revision bindings and their LA-026 behavior evidence or explicit unsupported/failed status.",
       "status": "met",
-      "explanation": "All twelve frozen pairs record exact shard SHA-256, file_row_number, repository, fix commit, CVE/CWE lineage, body hashes when present, and unique quoted spans when a unique window exists. Sandbox reproduction of native sinks was not run because CVEfixes rows are untrusted and must not be executed; that absence is recorded as precisely defined supported-behavior evidence rather than a fabricated reproduction. Independently reviewed expected polarity is documented as unknown with independent_human_security_review not_obtained; dataset-derived vulnerable_positive/fixed_negative roles are retained as non-gold methodological labels. Review provenance is present rather than omitted or invented.",
+      "explanation": "Live pair and control JSONL files remain byte-identical to the frozen LA-026 envelopes (SHA-256 2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117 and 9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c). All twelve frozen pair identities, twenty-four reserved case IDs, and eighty-four excluded control IDs match the LA-004 splits. Source locators and LA-026 isolated-reproduction bindings are unchanged. Recovery failures remain the empty retained LA-026 log. Controls remain empirical_sample false / enters_empirical_sample_count false. Original blocked envelopes are retained under original_failed_blocked_attempt_20260911/outputs/.",
       "evidence": [
         "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_controls.jsonl",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/annotations/cve_review.md",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/row_evidence.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_outputs_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py"
+      ]
+    },
+    {
+      "criterion": "Every reported polarity result binds a scoped machine-checkable behavior contract and actual observation. Unknown polarity remains unknown and no independent-human or universal-security claim is made.",
+      "status": "met",
+      "explanation": "Each of the 24 empirical case polarities and 84 control polarity results is bound in polarity_contracts.jsonl to a scoped_machine_checkable_behavior_contract produced by la-006-scoped-behavior-contract-compiler, which is distinct from the CVEfixes adapter under evaluation. Empirical observations are the LA-026 source-difference-at-pinned-revisions records; control observations are structural payload, distractor-identity, or transfer-mapping checks. polarity_supported_by_contract is false in every case, expected polarity is unknown, unknown results are excluded only from the unsupported metric denominator with a recorded reason, independently_reviewed/independent_human_gold/expert_certified/universal_security_claimed remain false, and no reviewer identity is invented.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/polarity_contracts.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_controls.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/annotations/cve_review.md",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/review_status.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py"
       ]
     },
     {
-      "criterion": "No fabricated fixture CVE or mocked source record enters empirical sample counts.",
+      "criterion": "No fabricated CVE, mocked source, fabricated reviewer, self-granted authority or unsupported transfer receives empirical success credit. The amended scope and original failed history are retained.",
       "status": "met",
-      "explanation": "Empirical sample counts are exactly the twelve LA-004 repository families and twenty-four reserved case identities. Each empirical CVE identifier, file_row_number, repository, fix commit, and source_record_sha256 matches the frozen manifest after a verified read of the pinned first shard. Fixture identifier CVE-2026-0042 and other mocked source records are excluded. The eighty-four control records are labeled empirical_sample false and enters_empirical_sample_count false, including real unselected distractor rows and synthetic policy mutations.",
+      "explanation": "Empirical sample counts remain exactly twelve real CVEfixes families and twenty-four reserved cases. Fixture identifier CVE-2026-0042, mocked source records, and fabricated reviewer identities are absent. Restriction candidates do not grant execution authority or admit wildcards. Unsupported transfer remains unknown on every pair and on the twelve unsupported_transfer controls. Self-granted authority and wildcard/broadened-effect controls remain rejected with observations and empirical_success_credit false. The LA-027/v1 automated scope is recorded on the binder summary, review, and catalog. The original 2026-09-11 failed/blocked attempt, original three criteria, original receipt, and original pair/control packets are retained under original_failed_blocked_attempt_20260911/.",
       "evidence": [
         "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_controls.jsonl",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/row_evidence.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/extract_cve_evidence.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py"
-      ]
-    },
-    {
-      "criterion": "Wildcards, self-granted authority and unsupported transfer remain rejected/unknown with reasons.",
-      "status": "met",
-      "explanation": "Each of the twelve families has wildcard_scope and self_granted_authority controls with expected_status rejected and explicit adapter/vocabulary reasons, plus unsupported_transfer and unknown_scope controls with expected_status unknown and reasons. Broadened effects remain rejected as generalization. No pair admits a wildcard restriction or grants_execution_authority. Intent/code-effect mapping onto the qualified export_json handler is recorded as unsupported_transfer/unknown.",
-      "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_controls.jsonl",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/cases/cve_pairs.jsonl",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/outputs/benchmark/annotations/cve_review.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_receipt.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_criteria.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_outputs_manifest.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log",
         "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py"
       ]
@@ -67,32 +87,24 @@
     {
       "argv": [
         "/usr/bin/python3.12",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/extract_cve_evidence.py",
-        "--parquet",
-        "/tmp/la006-cve-cache/train-00000-of-00003.parquet",
-        "--output",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/row_evidence.json"
+        "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_automated_scope.py"
       ],
       "cwd": ".",
       "exit_code": 0,
-      "started_at": "2026-09-11T23:36:21.014506+00:00",
-      "completed_at": "2026-09-11T23:36:32.886655+00:00",
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/extract_cve_evidence.stdout.log",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-006/extract_cve_evidence.py"
-    },
-    {
-      "argv": [
-        "/usr/bin/python3.12",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/build_cve_pairs.py",
-        "--evidence",
-        "papers/completion/law_to_action/receipts/snapshots/LA-006/row_evidence.json"
-      ],
-      "cwd": ".",
-      "exit_code": 0,
-      "started_at": "2026-09-11T23:36:32.886903+00:00",
-      "completed_at": "2026-09-11T23:36:32.915821+00:00",
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/build_cve_pairs.stdout.log",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-006/build_cve_pairs.py"
+      "started_at": "2026-09-12T16:39:10.721694+00:00",
+      "completed_at": "2026-09-12T16:39:10.762578+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/bind_automated_scope.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_automated_scope.py",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      }
     },
     {
       "argv": [
@@ -101,36 +113,64 @@
       ],
       "cwd": ".",
       "exit_code": 0,
-      "started_at": "2026-09-11T23:36:32.916075+00:00",
-      "completed_at": "2026-09-11T23:36:32.940046+00:00",
+      "started_at": "2026-09-12T16:39:10.774839+00:00",
+      "completed_at": "2026-09-12T16:39:10.827328+00:00",
       "log": "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py"
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-006/validate_cve_pairs.py",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      }
     }
   ],
   "source_versions": {
-    "repository_tree_id": "447e78e1e49cc413bc66fec9137f1dc5ccbc09e5",
+    "repository_head": "6a05f09a30f9dda89b39ae87ee50b94235376a30",
+    "repository_tree_id": "7105335b69de55941185d57b31317e1a5f125bff",
     "python": "/usr/bin/python3.12 (Python 3.12.3)",
-    "duckdb": "1.5.2",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
     "cvefixes_dataset": "hitoshura25/cvefixes",
     "cvefixes_revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
     "cvefixes_first_shard_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
-    "cvefixes_first_shard_bytes": 211599861,
-    "la004_frozen_manifest_sha256": "da9126276cf6fd1e6e2c427f67ad7f531bb489193ebf8d709d0d01dbc24d9757",
-    "la004_frozen_split_sha256": "d710ed9ed60d9e556b0d93efc0d486418404d5ab86f71a6914fba4ca49218ce3",
+    "la004_frozen_manifest_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+    "la004_frozen_split_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+    "la026_pairs_sha256": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+    "la026_controls_sha256": "9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c",
+    "la027_amendment": "LA-027/v1",
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "machine_contract_producer": "la-006-scoped-behavior-contract-compiler",
+    "machine_contract_producer_kind": "machine_contract_expectation_compiler",
+    "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+    "producer_distinct_from_evaluated_adapter": true,
     "packet_preparer": "la006-packet-preparer-implementation-worker",
+    "source_recovery_worker": "la026-source-recovery-implementation-worker",
     "independent_human_security_review": "not_obtained",
+    "independent_human_gold": false,
     "untrusted_source_executed": false,
-    "source_cache_location": "Private retrieval cache used only to extract locators, hashes, and quoted spans; parquet and source bodies remain retrieval_only and are not paper outputs."
+    "pairs": 12,
+    "empirical_cases": 24,
+    "excluded_controls": 84,
+    "failed_recovery_attempts": 0,
+    "empirical_success_credits": 0,
+    "original_failed_history": "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
   },
   "claim_limitations": [
-    "Independent human security review was not obtained. These packets are not expert gold.",
-    "Generated and worker-prepared labels are not expert review.",
-    "Independently reviewed expected polarity is unknown; dataset-derived roles are not an evaluation oracle.",
-    "Untrusted CVE source was not executed; there is no runnable sandbox reproduction of native sinks.",
+    "Independent human security review was not obtained and is not claimed.",
+    "Machine-contract expectations are not independent human gold.",
+    "Expected polarity remains unknown; dataset-derived roles are not an evaluation oracle.",
+    "LA-026 isolated source-difference observation is not native exploit execution.",
     "A fix for one scoped restriction is not universal security.",
-    "Evaluation admission for CVE cases remains blocked until competent independent review and adjudication.",
+    "Unsupported transfer, self-granted authority, wildcards, and fabricated or mocked sources receive no empirical success credit.",
     "Twelve repository families from one shard are not the full CVEfixes release.",
     "The structural validator is provenance checking, not scientific peer review.",
-    "The operator-protected checkpoint directory may be unwritable; no coordinate checkpoint is required for these compact packet outputs."
+    "The original LA-006 failed/blocked attempt is retained history and is not retroactively treated as complete independent review.",
+    "This binder is distinct from the CVEfixes adapter under evaluation and does not grant that adapter empirical success."
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "controls": 84,
+  "empirical_cases": 24,
+  "empirical_success_credits": 0,
+  "envelope_sha256": {
+    "cve_controls.jsonl": "9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c",
+    "cve_pairs.jsonl": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+    "la026/cve_controls.jsonl": "9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c",
+    "la026/cve_pairs.jsonl": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+    "original/cve_controls.jsonl": "2151581aa3b8d61f8abf46dfd7f915225dd56bc2aee140c6719ea1927fb623ab",
+    "original/cve_pairs.jsonl": "95ea434792dd8223b7f22ea1232c58d2920c5aaf4fd68b9a255379bd0280f25c"
+  },
+  "expected_polarity_unknown": 108,
+  "la026_controls_sha256": "9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c",
+  "la026_pairs_sha256": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+  "original_failed_history": "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911",
+  "pairs": 12,
+  "polarity_catalog": "papers/completion/law_to_action/receipts/snapshots/LA-006/polarity_contracts.jsonl",
+  "polarity_results_bound": 108,
+  "producer": {
+    "distinct_from_evaluated_adapter": true,
+    "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+    "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+    "id": "la-006-scoped-behavior-contract-compiler",
+    "kind": "machine_contract_expectation_compiler",
+    "not_cvefixes_adapter_output": true,
+    "not_expert_security_review": true,
+    "not_human_gold": true,
+    "not_independent_review": true,
+    "version": "la-006-automated-scope/v1"
+  },
+  "recovery_failures": 0,
+  "schema": "law-to-action-la006-automated-scope-bind/v1"
+}

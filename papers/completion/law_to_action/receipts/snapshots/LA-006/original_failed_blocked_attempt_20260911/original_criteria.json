@@ -1,0 +1,20 @@
+{
+  "attempt_kind": "original_failed_blocked_attempt",
+  "claimed_status": "complete",
+  "completed_at": "2026-09-11T23:36:32.941974+00:00",
+  "evaluation_admission": "blocked_until_independent_human_security_review",
+  "expected_polarity": "unknown",
+  "failure_kind": "blocked_missing_independent_human_security_review",
+  "independent_human_security_review": "not_obtained",
+  "not_human_gold": true,
+  "not_independently_reviewed": true,
+  "notes": "The original LA-006 contract required independently reviewed expected polarity. Independent human security review was not obtained, so evaluation admission remained blocked. This history is retained under the LA-027 automated-scope amendment and is not human gold.",
+  "original_criteria": [
+    "Each pair has runnable sandbox reproduction or precisely defined supported behavior evidence and independently reviewed expected polarity.",
+    "No fabricated fixture CVE or mocked source record enters empirical sample counts.",
+    "Wildcards, self-granted authority and unsupported transfer remain rejected/unknown with reasons."
+  ],
+  "original_receipt": "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_receipt.json",
+  "schema": "law-to-action-la006-original-failed-history/v1",
+  "task_id": "LA-006"
+}
