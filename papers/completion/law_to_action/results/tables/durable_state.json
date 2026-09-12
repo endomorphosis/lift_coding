@@ -1,0 +1,190 @@
+{
+  "claim_limits": [
+    "Durable-store qualification is not a scored 900-cell result.",
+    "A DuckDB commit is not remote exactly-once evidence."
+  ],
+  "in_memory_store_rows": 1,
+  "in_safety_claim": 14,
+  "jobs": [
+    {
+      "case_kind": "allow",
+      "decision": "allow",
+      "in_safety_claim": true,
+      "job_id": "enforce-allow-durable",
+      "mutation": "none",
+      "observed_effect_count": 1,
+      "passed": true,
+      "remote_effect_status": "observed",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "replay",
+      "decision": "deny",
+      "in_safety_claim": true,
+      "job_id": "enforce-replay-durable",
+      "mutation": "same-use-replay",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "concurrency",
+      "decision": "one-allow-one-deny",
+      "in_safety_claim": true,
+      "job_id": "concurrent-same-use",
+      "mutation": "two-threads-same-token",
+      "observed_effect_count": 1,
+      "passed": true,
+      "remote_effect_status": "observed",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "restart",
+      "decision": "deny",
+      "in_safety_claim": true,
+      "job_id": "restart-consume-survives",
+      "mutation": "close-reopen-file-backed-store",
+      "observed_effect_count": 1,
+      "passed": true,
+      "remote_effect_status": "observed",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "contrast",
+      "decision": "allow",
+      "in_safety_claim": false,
+      "job_id": "in-memory-restart-contrast",
+      "mutation": "in-memory-store-lost-on-restart",
+      "observed_effect_count": 2,
+      "passed": true,
+      "remote_effect_status": "observed",
+      "store_kind": "in-memory-contrast"
+    },
+    {
+      "case_kind": "lost_reply",
+      "decision": "idempotent_replay",
+      "in_safety_claim": true,
+      "job_id": "lost-reply-owner-idempotent-replay",
+      "mutation": "identical-command-after-commit",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "uncertain",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "lost_reply",
+      "decision": "deny",
+      "in_safety_claim": true,
+      "job_id": "lost-reply-after-delegate-no-repeat-effect",
+      "mutation": "discard-enforcer-reply-then-retry",
+      "observed_effect_count": 1,
+      "passed": true,
+      "remote_effect_status": "uncertain",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "uncertainty",
+      "decision": "deny",
+      "in_safety_claim": true,
+      "job_id": "crash-after-consume-before-delegate-uncertain",
+      "mutation": "consume-committed-delegate-not-called",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "uncertain",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "owner_failure",
+      "decision": "stale",
+      "in_safety_claim": true,
+      "job_id": "stale-generation",
+      "mutation": "wrong-generation",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "owner_failure",
+      "decision": "stale",
+      "in_safety_claim": true,
+      "job_id": "stale-fence",
+      "mutation": "wrong-fence-epoch",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "owner_failure",
+      "decision": "conflict",
+      "in_safety_claim": true,
+      "job_id": "stale-revision",
+      "mutation": "stale-store-revision",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "idempotency",
+      "decision": "idempotency_conflict",
+      "in_safety_claim": true,
+      "job_id": "changed-payload-idempotency",
+      "mutation": "same-idempotency-key-different-command-id",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "owner_failure",
+      "decision": "rolled_back",
+      "in_safety_claim": true,
+      "job_id": "owner-failure-rollback",
+      "mutation": "apply-raises-before-commit",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "owner_failure",
+      "decision": "timeout",
+      "in_safety_claim": true,
+      "job_id": "owner-exclusive-lock-timeout",
+      "mutation": "second-writer-while-owner-holds-lock",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    {
+      "case_kind": "dependency_gap",
+      "decision": "unavailable",
+      "in_safety_claim": false,
+      "job_id": "quack-gateway-unavailable",
+      "mutation": "load-quack-extension",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "absent",
+      "store_kind": "quack-gateway-unqualified"
+    },
+    {
+      "case_kind": "limitation",
+      "decision": "limitation_recorded",
+      "in_safety_claim": true,
+      "job_id": "remote-effect-not-exactly-once",
+      "mutation": "duckdb-commit-is-not-remote-exactly-once",
+      "observed_effect_count": 0,
+      "passed": true,
+      "remote_effect_status": "uncertain",
+      "store_kind": "duckdb-file-typed-quack-owner"
+    }
+  ],
+  "n_records": 16,
+  "passed_in_claim": 14,
+  "schema": "law-to-action-state-analysis/v1",
+  "task": "LA-012"
+}

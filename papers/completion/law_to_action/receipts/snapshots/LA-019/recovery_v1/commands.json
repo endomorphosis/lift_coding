@@ -1,0 +1,34 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/analysis/analyze.py",
+        "run",
+        "--root",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/candidate"
+      ],
+      "finished_epoch": 1789241580.8530772,
+      "returncode": 0,
+      "started_epoch": 1789241578.5484216
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/analysis/analyze.py",
+        "check",
+        "--root",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/candidate"
+      ],
+      "finished_epoch": 1789241581.5898845,
+      "returncode": 0,
+      "started_epoch": 1789241580.8530838
+    }
+  ],
+  "only_derived_analysis_written": true,
+  "raw_records_unchanged": true,
+  "schema": "la019-recovered-diagnostic-analysis-execution/v1",
+  "scientific_model_checker_or_effect_calls": 0
+}

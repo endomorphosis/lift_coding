@@ -1,0 +1,63 @@
+{
+  "actual_host_python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "commands": [
+    {
+      "actual_execution_root_metadata": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/candidate",
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/analysis/analyze.py",
+        "run",
+        "--root",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/candidate"
+      ],
+      "completed_at": "2026-09-12T19:33:00.853077+00:00",
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-019/recovery_v1/run.stdout.txt",
+      "scope": "Derived historical diagnostic analysis only; no scientific benchmark, model or checker invocation",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-019/analyze.py",
+      "started_at": "2026-09-12T19:32:58.548422+00:00"
+    },
+    {
+      "actual_execution_root_metadata": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/candidate",
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/analysis/analyze.py",
+        "check",
+        "--root",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/candidate"
+      ],
+      "completed_at": "2026-09-12T19:33:01.589885+00:00",
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-019/recovery_v1/check.stdout.txt",
+      "scope": "Derived historical diagnostic analysis only; no scientific benchmark, model or checker invocation",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-019/analyze.py",
+      "started_at": "2026-09-12T19:33:00.853084+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/receipts/snapshots/LA-019/validate_analysis.py"
+      ],
+      "completed_at": "2026-09-12T23:07:12.200923+00:00",
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-019/recovery_v1/validate.stdout.txt",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-019/validate_analysis.py",
+      "started_at": "2026-09-12T23:07:11.383766+00:00"
+    }
+  ],
+  "environment_overrides": {
+    "MPLBACKEND": "Agg",
+    "MPLCONFIGDIR": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la019_protected_source_recovery_v1/analysis_qualification_v1/mpl",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "SOURCE_DATE_EPOCH": "0"
+  },
+  "no_scientific_calls": true
+}

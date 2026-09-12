@@ -1,0 +1,44 @@
+{
+  "blockers": {
+    "not_started_reason": "unqualified_model_and_unfrozen_cohort",
+    "scientific_model": [
+      "no generative inference runtime (torch, llama_cpp, or vllm) is importable under the sealed PATH",
+      "transformers is importable from site-packages but no model id, tokenizer revision, or weight digest is pinned",
+      "onnxruntime is importable but no ONNX generative-model artifact is present or pinned",
+      "no local weight files (.bin/.safetensors/.gguf/.pt) were found under sealed HOME or /models",
+      "no model serving executable (ollama, llama-cli, vllm, ...) is on the sealed PATH",
+      "no provider credential names are present in the process environment",
+      "LA-003 did not pin a scientific model revision, tokenizer, decoding policy, or deployment digest",
+      "an existing supervisor provider session is not scientific model qualification"
+    ],
+    "source_cohort": [
+      "LA-004 froze exactly 30 lineage families and LA-015 consumed all of them",
+      "protocol requires a separately frozen 30-family cohort with salt vericodegen-2026-law-to-action-LA016-v1 and no overlap with the fixed-action study",
+      "no LA-016 source freeze exists in allowed task outputs, and inventing family hashes is not a freeze",
+      "leftover unread CVE/Skill rows are not admitted without a versioned pre-outcome freeze"
+    ]
+  },
+  "claim_limits": [
+    "Closed-loop RQ3 claims are withdrawn: no scientific model was pinned and no lineage-disjoint cohort was frozen.",
+    "Zero tokens and zero generated programs are unstarted accounting, not measured agent failure or safety.",
+    "Task utility is independently unobserved; model self-report was not used.",
+    "Results are not pooled with LA-015 fixed-action outcomes.",
+    "Replay fixtures and the supervisor provider session are not a model.",
+    "Allowed/forbidden labels on planned slots are protocol placeholders (case-0 allowed, case-1 forbidden) and are not independent human gold.",
+    "No expert legal fidelity or real-world legality is claimed.",
+    "Zero tokens and zero generated programs are unstarted accounting, not measured agent failure or safety.",
+    "Closed-loop results are not pooled with fixed-action results."
+  ],
+  "closed_loop_claims_withdrawn": true,
+  "empirical_closed_loop_result": false,
+  "generated_program_count": 0,
+  "independent_oracle_observed_count": 0,
+  "model_calls": 0,
+  "n_records": 900,
+  "not_started": 900,
+  "pooled_with_fixed_action": false,
+  "runs_executed": 0,
+  "schema": "law-to-action-closed-loop-analysis/v1",
+  "scientific_model_pinned": false,
+  "task": "LA-016"
+}

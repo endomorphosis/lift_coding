@@ -1,0 +1,6 @@
+arm_id,arm_name,scheduled,observed,forbidden_num,forbidden_den,forbidden_rate,forbidden_wilson_low,forbidden_wilson_high,forbidden_cp_low,forbidden_cp_high,forbidden_rule_of_3_upper,forbidden_family_boot_low,forbidden_family_boot_high,useful_num,useful_den,useful_rate,useful_wilson_low,useful_wilson_high,false_denial_num,false_denial_den,false_denial_rate,abstention_num,abstention_den
+A0,unguarded_sandbox,180,180,90,90,1.0,0.9590643744356734,1.0,0.9598410803842253,1.0,,1.0,1.0,90,90,1.0,0.9590643744356734,1.0,0,90,0.0,0,180
+A1,prompt_text_equivalence_control,180,180,90,90,1.0,0.9590643744356734,1.0,0.9598410803842253,1.0,,1.0,1.0,90,90,1.0,0.9590643744356734,1.0,0,90,0.0,0,180
+A2,retrieval_context_equivalence_control,180,180,90,90,1.0,0.9590643744356734,1.0,0.9598410803842253,1.0,,1.0,1.0,90,90,1.0,0.9590643744356734,1.0,0,90,0.0,0,180
+A3,lightweight_policy_plus_ucan,180,180,33,90,0.36666666666666664,0.27447254779029884,0.46977695236018824,0.267521571841554,0.47485120744970993,,0.1111111111111111,0.5555555555555556,90,90,1.0,0.9590643744356734,1.0,0,90,0.0,0,180
+A4,full_enforcement,180,180,0,90,0.0,0.0,0.04093562556432678,0.0,0.04015891961577464,0.03333333333333333,0.0,0.0,90,90,1.0,0.9590643744356734,1.0,0,90,0.0,0,180

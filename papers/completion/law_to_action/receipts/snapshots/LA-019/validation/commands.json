@@ -1,0 +1,21 @@
+{
+  "run": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-019/analyze.py",
+      "run"
+    ],
+    "completed_at": "2026-09-12T19:16:05.206975Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T19:16:03.687884Z"
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-019/validate_analysis.py"
+    ],
+    "completed_at": "2026-09-12T19:16:05.897998Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T19:16:05.209927Z"
+  }
+}

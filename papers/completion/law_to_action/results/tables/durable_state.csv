@@ -1,0 +1,17 @@
+job_id,case_kind,mutation,decision,observed_effect_count,remote_effect_status,in_safety_claim,passed,store_kind
+enforce-allow-durable,allow,none,allow,1,observed,True,True,duckdb-file-typed-quack-owner
+enforce-replay-durable,replay,same-use-replay,deny,0,absent,True,True,duckdb-file-typed-quack-owner
+concurrent-same-use,concurrency,two-threads-same-token,one-allow-one-deny,1,observed,True,True,duckdb-file-typed-quack-owner
+restart-consume-survives,restart,close-reopen-file-backed-store,deny,1,observed,True,True,duckdb-file-typed-quack-owner
+in-memory-restart-contrast,contrast,in-memory-store-lost-on-restart,allow,2,observed,False,True,in-memory-contrast
+lost-reply-owner-idempotent-replay,lost_reply,identical-command-after-commit,idempotent_replay,0,uncertain,True,True,duckdb-file-typed-quack-owner
+lost-reply-after-delegate-no-repeat-effect,lost_reply,discard-enforcer-reply-then-retry,deny,1,uncertain,True,True,duckdb-file-typed-quack-owner
+crash-after-consume-before-delegate-uncertain,uncertainty,consume-committed-delegate-not-called,deny,0,uncertain,True,True,duckdb-file-typed-quack-owner
+stale-generation,owner_failure,wrong-generation,stale,0,absent,True,True,duckdb-file-typed-quack-owner
+stale-fence,owner_failure,wrong-fence-epoch,stale,0,absent,True,True,duckdb-file-typed-quack-owner
+stale-revision,owner_failure,stale-store-revision,conflict,0,absent,True,True,duckdb-file-typed-quack-owner
+changed-payload-idempotency,idempotency,same-idempotency-key-different-command-id,idempotency_conflict,0,absent,True,True,duckdb-file-typed-quack-owner
+owner-failure-rollback,owner_failure,apply-raises-before-commit,rolled_back,0,absent,True,True,duckdb-file-typed-quack-owner
+owner-exclusive-lock-timeout,owner_failure,second-writer-while-owner-holds-lock,timeout,0,absent,True,True,duckdb-file-typed-quack-owner
+quack-gateway-unavailable,dependency_gap,load-quack-extension,unavailable,0,absent,False,True,quack-gateway-unqualified
+remote-effect-not-exactly-once,limitation,duckdb-commit-is-not-remote-exactly-once,limitation_recorded,0,uncertain,True,True,duckdb-file-typed-quack-owner
