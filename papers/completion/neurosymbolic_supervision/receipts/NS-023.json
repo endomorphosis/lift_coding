@@ -1,0 +1,136 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-023",
+  "status": "complete",
+  "completed_at": "2026-09-12T03:45:03+00:00",
+  "scope": "Independent review of the accepted-lineage induction, dependency-projection reuse obligation, three acceptance questions, Equation 2, and Algorithm 1 against qualified gates. Sketches remain unmachine-checked. No prover was invoked, no universal-Python proof work was started, and the reconstructed manuscript body was not rewritten (NS-022 integrates the restatement).",
+  "source_versions": {
+    "workspace_git_head": "69b32d1ee29573e47b2a6af7a0d0674a64f192b7",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "claim_ledger": {
+      "path": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "owner_task": "NS-003"
+    },
+    "gates": {
+      "admission.py": "16fcc43f52f41641abf297e36e0850e87394fdcfac2c9c0807ada19e4cd9cb4b",
+      "sealer.py": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+      "durable_state.py": "e718a115671f7d84fc7f5c693c8ef03d4216465d71e79fad04adf2442a277a9f",
+      "test_proof_cache.py": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+      "pre_implementation_kernel.py": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+      "authorization_logic.py": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1",
+      "logic_translation_validation.py": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62"
+    },
+    "prior_qualification": {
+      "NS-008": "papers/completion/neurosymbolic_supervision/qualification/provider_gate_report.md",
+      "NS-009": "papers/completion/neurosymbolic_supervision/qualification/logic_report.md",
+      "NS-010": "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md",
+      "NS-012": "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md",
+      "NS-013": "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json",
+      "NS-014": "papers/completion/neurosymbolic_supervision/qualification/native_scope_decision.md",
+      "NS-015": "papers/completion/neurosymbolic_supervision/qualification/extensions_report.md",
+      "NS-011": "absent; cold-oracle agreement remains undischarged"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_argument_review.md": "28dbad42c6369eb4857a2ae7c82c2af0b10d3dbf72088914141f86534be16223",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/assumption_gate_map.json": "74ee276648db802b69829542ed2bbe51ab1ddb5146a9d2644447203610394b90",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_arguments.tex": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validate_formal_arguments.py": "6174819dee2db3d5f4646138215e01a626175b0ef9a66f942ed3b0c8a10eacbc",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validation.log": "9433a71f6f019ce8fcca61cef5b1ed7ea499957018da52f8081572dcf6002733"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/audit/formal_argument_review.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_argument_review.md",
+    "papers/completion/neurosymbolic_supervision/audit/assumption_gate_map.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/assumption_gate_map.json",
+    "papers/completion/neurosymbolic_supervision/manuscript/formal_arguments.tex": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_arguments.tex"
+  },
+  "criteria": [
+    {
+      "criterion": "Each formal statement has precise scope, premises, conclusion, and a valid argument reviewed independently of generated prose.",
+      "status": "met",
+      "explanation": "FA-EQ2, FA-I31, FA-I32, FA-I33, and FA-ALG1 are restated with explicit scope, premises, conclusion, and an independent validity judgment. The review treats reconstructed prose as a source to check, not as a theorem. All five statements remain unmachine-checked; no z3/lean/coqc/cvc5 binary is present on the sealed PATH.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_argument_review.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/assumption_gate_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_arguments.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validation.log"
+      ]
+    },
+    {
+      "criterion": "Implementation evidence supports only tested premises; external side-effect atomicity and universal dependency closure are not inferred.",
+      "status": "met",
+      "explanation": "NS-012/NS-013 support complete-manifest, current-parent, exclusive sealer CAS, and checker-class admission on the named call chain. NS-009 supports translation quarantine. NS-010 supports fail-closed reuse identity, not πD completeness. A-TRUSTED-EFFECT is a trusted limitation; A-UNIVERSAL-DEPENDENCY-CLOSURE is undischarged. Both non-inferences are recorded as not_inferred.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/assumption_gate_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_argument_review.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validation.log"
+      ]
+    },
+    {
+      "criterion": "Unknown/inconsistent specifications and incomplete projections cannot be silently discharged by the argument.",
+      "status": "met",
+      "explanation": "A-UNKNOWN-SPEC, A-INCONSISTENT-SPEC, A-INCOMPLETE-PROJECTION, and A-COLD-ORACLE are undischarged with cannot_silently_discharge=true. NS-009 keeps unknown/timeout/unsupported/vacuous rows distinct from proof. NS-010 incomplete traces, opaque objects, and uncontrolled fixtures fall back to RUN. NS-011 cold-oracle artifacts are absent and are not invented. Unlocated CompositionEdge/interpolant/SMT mechanisms and the unavailable native-proof profile stay unavailable.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/assumption_gate_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_argument_review.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_arguments.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validation.log"
+      ]
+    },
+    {
+      "criterion": "The final algorithm is labeled executed composition only where the integrated witness supports it.",
+      "status": "met",
+      "explanation": "Algorithm 1 is labeled intended_composition_with_partial_executed_witness. full_loop_executed is false. Executed composition is restricted to NS-013 witness steps that map to lines 4, 7 (deterministic), 9, 11, 13, 14, and 16. Event-service reconcile, production residual-model dispatch, wait-or-review, procedure/policy learning, native proof, federation, and matched A–D runs remain intended only.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/assumption_gate_map.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_arguments.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/formal_argument_review.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validation.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns023-evidence-c861aef2",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns023-evidence-c861aef2/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns023-evidence-c861aef2/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns023-evidence-c861aef2/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns023-evidence-c861aef2/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validate_formal_arguments.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validate_formal_arguments.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-023/validation.log",
+      "started_at": "2026-09-12T03:45:03+00:00",
+      "finished_at": "2026-09-12T03:45:03+00:00",
+      "execution_kind": "sealed-profile structural audit of restated formal statements, assumption-to-gate map, and Algorithm 1 composition labels; no prover, experiment, or manuscript rewrite"
+    }
+  ],
+  "limitations": [
+    "Sketches are unmachine-checked. The sealed PATH has no z3, lean, coqc, or cvc5, and no independently checked proof artifact exists.",
+    "Universal-Python proof work was not initiated and is not required to complete this task.",
+    "External side-effect atomicity outside the tested WAL/CAS/lifecycle boundary is not claimed.",
+    "Universal dependency closure of reuse projections is not claimed. NS-011 cold-oracle scoring is absent and undischarged.",
+    "NS-012 kit proof_seal_store and datasets incremental-sealing evidence remain shimmed; exclusivity is the tested sealer call chain.",
+    "Native proving remains the NS-014 unavailable profile. World/procedure extensions remain the NS-015 unretained closure.",
+    "This task does not rewrite manuscript/main.tex; NS-022 integrates formal_arguments.tex.",
+    "This receipt is provenance validation of the argument audit, not independent scientific peer review or authorization to submit."
+  ],
+  "runtime_authority": "Artifact completion record only; no source tree, experiment, acceptance oracle, portal, author record, or companion-paper manuscript was changed."
+}

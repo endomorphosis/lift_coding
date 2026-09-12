@@ -1,0 +1,710 @@
+{
+  "schema": "neurosymbolic-supervision/assumption-gate-map@1",
+  "task_id": "NS-023",
+  "reviewed_at": "2026-09-12",
+  "machine_check": {
+    "status": "unmachine_checked",
+    "universal_python_proof_work_initiated": false,
+    "independently_checked_proof_artifact": false,
+    "sealed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "interpreter": "/usr/bin/python3.12",
+    "provers_in_sealed_path": {
+      "coqc": null,
+      "cvc5": null,
+      "lean": null,
+      "souffle": null,
+      "z3": null
+    },
+    "reason": "No independently checked proof artifact exists. Sketches remain human-reviewed conditional arguments. The sealed PATH has no usable z3, lean, coqc, or cvc5. Universal-Python proof work was not initiated."
+  },
+  "source": {
+    "draft_extract": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+    "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4",
+    "claim_ledger": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+    "formal_loci": [
+      "§7.3 Eq. 2",
+      "§I.2",
+      "§I.3.1",
+      "§I.3.2",
+      "§I.3.3",
+      "Algorithm 1"
+    ]
+  },
+  "decision_vocabulary": {
+    "tested_premise": "Qualification evidence supports this premise on the named call chain and only on that chain.",
+    "trusted_limitation": "Required by the argument and retained as an explicit assumption; not proved of the whole forest or of untested paths.",
+    "undischarged": "The argument cannot treat this as established. Unknown, incomplete, or missing campaigns stay visible.",
+    "unavailable": "The named mechanism or profile is absent from the sealed environment and is not simulated as success.",
+    "fail_closed_not_completeness": "The implementation rejects or falls back, which prevents silent discharge but does not prove the complementary completeness property."
+  },
+  "statements": [
+    {
+      "id": "FA-EQ2",
+      "name": "acceptance invariant",
+      "location": "§7.3 Eq. 2",
+      "kind": "conditional_design_invariant",
+      "scope": "One accepted-lineage publication under a declared artifact policy; not all process writes and not a distributed transaction.",
+      "premises": [
+        "A-CURRENT-PARENT",
+        "A-PROTECTED-AUTHORITY",
+        "A-COMPLETE-MANIFEST",
+        "A-CHECKER",
+        "A-EXCLUSIVE-PUBLICATION",
+        "A-EXACT-INPUT"
+      ],
+      "conclusion": "Publish(s') implies CurrentParent, Authorized, Scoped, CompleteManifest, EvidenceAdmitted, and CAS.",
+      "argument": "Definitional implication from the unique publication operation. The converse is not claimed.",
+      "validity": "valid_as_conditional_implication",
+      "machine_checked": false,
+      "composition_label": "design_invariant",
+      "implementation_status": "tested_on_sealer_call_chain_not_universal_enforcement",
+      "not_established": [
+        "universal enforcement by unexamined write paths",
+        "truth of unsupported translations",
+        "honest signed observations",
+        "external side-effect atomicity",
+        "global consensus"
+      ]
+    },
+    {
+      "id": "FA-I31",
+      "name": "accepted-lineage induction",
+      "location": "§I.3.1",
+      "kind": "unmachine_checked_proof_sketch",
+      "scope": "Roots reachable solely through accepted publication transitions of FA-EQ2 under fixed Θ and PΘ.",
+      "premises": [
+        "A-INITIAL-ROOT",
+        "A-EXACT-INPUT",
+        "A-COMPLETE-MANIFEST",
+        "A-CHECKER",
+        "A-TRANSLATION",
+        "A-CURRENT-PARENT",
+        "A-EXCLUSIVE-PUBLICATION",
+        "A-PROTECTED-AUTHORITY"
+      ],
+      "conclusion": "Every such reachable root satisfies PΘ.",
+      "argument": "Induction on successful CAS-linearized publications. Failed, stale, incomplete, and simulated attempts are not successors.",
+      "validity": "valid_as_conditional_implication",
+      "machine_checked": false,
+      "composition_label": "unmachine_checked_sketch",
+      "implementation_status": "inductive_step_tested_on_sealer_base_case_trusted",
+      "nonvacuity": "complete-manifest publication exists (NS-012/NS-013); deny-all is not the witness",
+      "not_established": [
+        "properties omitted by PΘ",
+        "initial-root interestingness",
+        "sole publication path in the whole forest",
+        "external side-effect atomicity"
+      ]
+    },
+    {
+      "id": "FA-I32",
+      "name": "dependency-projected test reuse",
+      "location": "§I.3.2",
+      "kind": "proof_obligation",
+      "scope": "Transfer of a previous setup/call/teardown observation under declared profile θ.",
+      "premises": [
+        "A-DETERMINISTIC-PROJECTION",
+        "A-INCOMPLETE-PROJECTION",
+        "A-UNIVERSAL-DEPENDENCY-CLOSURE",
+        "A-COLD-ORACLE"
+      ],
+      "conclusion": "Equal complete projections imply equal observations; previous observations transfer only inside that profile.",
+      "argument": "Function application of fθ. Completeness and determinism of πD are the hard premises and are not proved.",
+      "validity": "valid_as_conditional_implication",
+      "machine_checked": false,
+      "composition_label": "proof_obligation",
+      "implementation_status": "fail_closed_identity_and_lifecycle_qualified_completeness_unproved",
+      "not_established": [
+        "universal πD completeness",
+        "cold-oracle agreement",
+        "Groth16 proof of pytest execution",
+        "matched A-D reuse effectiveness"
+      ]
+    },
+    {
+      "id": "FA-I33",
+      "name": "three acceptance questions",
+      "location": "§I.3.3",
+      "kind": "type_distinction",
+      "scope": "Any candidate described as accepted.",
+      "premises": [
+        "A-CHECKER",
+        "A-PROTECTED-AUTHORITY",
+        "A-EXCLUSIVE-PUBLICATION"
+      ],
+      "conclusion": "Behavioral correctness, action permission, and publication are independent decisions.",
+      "argument": "A proof of behavior is not a permission grant; a permission grant is not a lineage publication.",
+      "validity": "valid_as_type_distinction",
+      "machine_checked": false,
+      "composition_label": "authority_separation",
+      "implementation_status": "tested_on_kernel_authorization_and_sealer_surfaces",
+      "not_established": [
+        "durable real-tool authorization beyond the reference evaluator",
+        "production model identity"
+      ]
+    },
+    {
+      "id": "FA-ALG1",
+      "name": "composed supervision loop",
+      "location": "Algorithm 1 / §M",
+      "kind": "intended_composition",
+      "scope": "The specified 17-line control flow. Executed composition is claimed only for the NS-013 integrated witness subset.",
+      "premises": [
+        "A-INITIAL-ROOT",
+        "A-COMPLETE-MANIFEST",
+        "A-CHECKER",
+        "A-TRANSLATION",
+        "A-CURRENT-PARENT",
+        "A-EXCLUSIVE-PUBLICATION",
+        "A-PROTECTED-AUTHORITY",
+        "A-DETERMINISTIC-PROJECTION"
+      ],
+      "conclusion": "The algorithm specifies the composition to evaluate. Isolated stop paths do not establish the complete loop.",
+      "argument": "Control-flow specification retained for comparison. Integrated witness maps to a proper subset of lines.",
+      "validity": "valid_as_specification",
+      "machine_checked": false,
+      "composition_label": "intended_composition_with_partial_executed_witness",
+      "implementation_status": "partial_executed_composition_ns013",
+      "full_loop_executed": false,
+      "not_established": [
+        "live event-service loop",
+        "production residual-model dispatch",
+        "procedure/policy learning",
+        "native proof",
+        "federation",
+        "matched A-D experiment"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A-INITIAL-ROOT",
+      "name": "initial-root policy",
+      "statement": "The initial accepted root satisfies PΘ.",
+      "required_by": ["FA-I31", "FA-ALG1"],
+      "disposition": "trusted_limitation",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "symbol": "IncrementalProofSealer.seal_full / parent_seal_cid",
+        "sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed"
+      },
+      "qualification": {
+        "tasks": ["NS-012", "NS-013"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json"
+        ],
+        "observation": "NS-013 publishes from parent seal ips.forest.genesis@1 under policy sha256:f711f00ed99912349c04196f2348905f2c299cb72fccdef83b03154cc0339f39. Genesis is a trusted starting root, not an independently proved interesting PΘ."
+      },
+      "limitation": "The induction assumes the initial root. It does not prove that genesis satisfies an interesting policy beyond being the named parent of the tested publication."
+    },
+    {
+      "id": "A-COMPLETE-MANIFEST",
+      "name": "complete-manifest",
+      "statement": "The requirement manifest is complete under an admitted completeness rule. Membership of some units is never completeness.",
+      "required_by": ["FA-EQ2", "FA-I31", "FA-ALG1"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py",
+        "symbol": "create_full_checkpoint / aggregate_verified_units",
+        "sha256": "3330a24a9052b0124b292824c63295d7760a6372e5f0718b1661b65897ea7aac"
+      },
+      "qualification": {
+        "tasks": ["NS-012", "NS-013"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_results.jsonl",
+          "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json"
+        ],
+        "observation": "Empty, missing, duplicate, reordered, and membership-only sets return incomplete_manifest. NS-013 empty requirement manifest while the obligation remained required returned incomplete_manifest with sealed=false."
+      },
+      "limitation": "Completeness is relative to the declared requirement set of the tested sealer profile, not to an unstated universal obligation inventory."
+    },
+    {
+      "id": "A-CHECKER",
+      "name": "checker",
+      "statement": "Each accepted evidence item satisfies its designated checker relation and evidence class. Solver results, axiom lookup, and kernel reconstruction remain distinct.",
+      "required_by": ["FA-EQ2", "FA-I31", "FA-I33", "FA-ALG1"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/admission.py",
+        "symbol": "EvidenceVerifier.verify_for_admission",
+        "sha256": "16fcc43f52f41641abf297e36e0850e87394fdcfac2c9c0807ada19e4cd9cb4b"
+      },
+      "qualification": {
+        "tasks": ["NS-009", "NS-012", "NS-013"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/logic_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/logic_profiles.json",
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md"
+        ],
+        "observation": "Admission rejects unvalidated solver results, simulated required units, and unknown proof systems. TDFOL axiom lookup is non-kernel. Independent pytest is the behavioral checker in NS-008/NS-013."
+      },
+      "limitation": "A designated checker establishes only its named evidence class. Membership, signed observation, aggregation, and direct execution are not interchangeable."
+    },
+    {
+      "id": "A-TRANSLATION",
+      "name": "translation",
+      "statement": "Lossy or unsupported translations cannot discharge source-level temporal or deontic obligations. Unknown, timeout, unsupported, and unavailable solver outcomes are not proofs.",
+      "required_by": ["FA-I31", "FA-ALG1"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_translation_validation.py",
+        "symbol": "validate_translation / SupervisorLogicPlatformReceiptAdmission.admit_receipt",
+        "sha256": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62"
+      },
+      "qualification": {
+        "tasks": ["NS-009"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/logic_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/logic_profiles.json",
+          "papers/completion/neurosymbolic_supervision/qualification/logic_receipts.jsonl"
+        ],
+        "observation": "Modal erasure O(Done)/Done and until-as-conjunction are quarantined. Finite-trace SAFETY(p) is false when p holds only at step 0. source_claim_admitted is false on every NS-009 row. Z3 is unsupported."
+      },
+      "limitation": "Supported translations progress at their declared assurance only. They do not lift to kernel completion of source claims. SMT SAT/UNSAT is unavailable, not simulated."
+    },
+    {
+      "id": "A-CURRENT-PARENT",
+      "name": "current-parent",
+      "statement": "Publication names the expected current parent. A delta against a superseded parent cannot move the pointer.",
+      "required_by": ["FA-EQ2", "FA-I31", "FA-ALG1"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "symbol": "CURRENT_ROOT_CAS / PublicationReason.STALE_PARENT",
+        "sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed"
+      },
+      "qualification": {
+        "tasks": ["NS-012"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_results.jsonl"
+        ],
+        "observation": "stale_parent_cannot_overwrite returns stale_parent without moving the current pointer. DurableCoordinationStore generation tokens reject ABA-stale operational writers."
+      },
+      "limitation": "Tested on the WAL/CAS sealer and operational generation token. Not a claim about every pointer in Git or remote stores."
+    },
+    {
+      "id": "A-EXCLUSIVE-PUBLICATION",
+      "name": "exclusive-publication",
+      "statement": "Compare-and-swap linearizes concurrent same-parent writers. Losers are not accepted successors. Publication is the unique accepted-lineage constructor in the argument's successor relation.",
+      "required_by": ["FA-EQ2", "FA-I31", "FA-I33", "FA-ALG1"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/durable_state.py",
+        "symbol": "IpfsKitDurableStateAdapter.compare_and_swap_root",
+        "sha256": "e718a115671f7d84fc7f5c693c8ef03d4216465d71e79fad04adf2442a277a9f"
+      },
+      "qualification": {
+        "tasks": ["NS-012"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md"
+        ],
+        "observation": "Six concurrent same-parent writers produce exactly one published generation; losers are stale_parent. Sequential and parallel worker counts 1, 2, 4, and 8 produce identical roots, inventories, and dispositions."
+      },
+      "limitation": "Exclusivity is the sealer CAS linearization. A-SOLE-PUBLICATION-PATH separately records that other write paths are not proved absent."
+    },
+    {
+      "id": "A-PROTECTED-AUTHORITY",
+      "name": "protected-authority",
+      "statement": "Policy and checker identities cannot change under ordinary worker authority. Action permission is not behavioral correctness and not publication.",
+      "required_by": ["FA-EQ2", "FA-I31", "FA-I33", "FA-ALG1"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+        "symbol": "ReferenceAuthorizationEvaluator",
+        "sha256": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1"
+      },
+      "qualification": {
+        "tasks": ["NS-008", "NS-013", "NS-015"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/provider_gate_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json",
+          "papers/completion/neurosymbolic_supervision/qualification/extensions_report.md"
+        ],
+        "observation": "PreImplementationKernel.evaluate admits analytical_unique_mapping only with current bindings and denies residual dispatch without typed receipts. Alice EXECUTE_TASK is permitted; mallory is denied. NS-015 records no worker self-promotion of protected validators. closes_claim is not independent success."
+      },
+      "limitation": "Permission tests use the reference evaluator on frozen qualification tasks. Durable real-tool integration and production model identity remain out of scope."
+    },
+    {
+      "id": "A-DETERMINISTIC-PROJECTION",
+      "name": "deterministic observation/effect projection",
+      "statement": "A complete projection πD and deterministic fθ exist such that Obsθ(t,s)=fθ(πD(s)) on all states admitted by the reuse policy.",
+      "required_by": ["FA-I32", "FA-ALG1"],
+      "disposition": "fail_closed_not_completeness",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+        "symbol": "TestProofCache.lookup / TestExecutionKey",
+        "sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883"
+      },
+      "qualification": {
+        "tasks": ["NS-010", "NS-013"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/reuse_profile.json",
+          "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json"
+        ],
+        "observation": "Unchanged eligible reuse hits proof_cache_hit. Fixture, plugin, policy, runtime-trace, and snapshot mutations force RUN. Teardown failure blocks admitted receipts. Call reuse after setup still runs teardown."
+      },
+      "limitation": "Fail-closed identity mismatch is qualified. Completeness of πD for arbitrary pytest, clocks, network, DB, and unmodeled plugins is not proved. Universal dependency closure is not inferred."
+    },
+    {
+      "id": "A-EXACT-INPUT",
+      "name": "exact-input",
+      "statement": "Required subject bytes and dependency references are verified. Stale fingerprints, stale formula roots, and colliding assertion IDs fail closed.",
+      "required_by": ["FA-EQ2", "FA-I31"],
+      "disposition": "tested_premise",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_platform_admission.py",
+        "symbol": "admit_receipt",
+        "sha256": "ee1a6fdd218d24c61a790b574fe8d9c0fa4c58d89c89e641f6dcd2ecf08962f5"
+      },
+      "qualification": {
+        "tasks": ["NS-007", "NS-009", "NS-012", "NS-013"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/logic_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/context_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md"
+        ],
+        "observation": "Stale formula roots, stale solver fingerprints, fixture-set mismatches, duplicate assertion IDs, mtime-only hash memos, and invisible preimages fail closed. Hash memos require content and profile reverification."
+      },
+      "limitation": "Exact-input checks apply to the named identity fields of the qualified adapters, not to unspecified external state."
+    },
+    {
+      "id": "A-TRUSTED-EFFECT",
+      "name": "trusted-effect / external side-effect atomicity",
+      "statement": "Physical side effects outside the tested WAL/CAS/lifecycle boundary occur exactly once.",
+      "required_by": ["FA-EQ2", "FA-I31"],
+      "disposition": "trusted_limitation",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "symbol": "recognize_post_cas_success / WorktreeLifecycleStore",
+        "sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed"
+      },
+      "qualification": {
+        "tasks": ["NS-012"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md"
+        ],
+        "observation": "Restart retains admitted evidence inside the WAL/CAS/lifecycle boundary. Duplicate recovery events do not invent a second success. NS-012 explicitly does not claim external exactly-once side effects."
+      },
+      "limitation": "External side-effect atomicity is not inferred from local CAS. Federation, libp2p/MCP, and remote stores remain unavailable."
+    },
+    {
+      "id": "A-UNKNOWN-SPEC",
+      "name": "unknown specifications",
+      "statement": "Unknown, timeout, unsupported, and unavailable outcomes are not proofs and cannot complete kernel-required source claims.",
+      "required_by": ["FA-I31", "FA-I32", "FA-ALG1"],
+      "disposition": "undischarged",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_translation_validation.py",
+        "symbol": "probe_solver_readiness / TDFOLProver.prove",
+        "sha256": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62"
+      },
+      "qualification": {
+        "tasks": ["NS-009"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/logic_report.md"
+        ],
+        "observation": "unknown_not_proved, timeout_budget_exhausted, unsupported_clause_uncovered, opaque_clause_uncovered, sat_smt_unavailable, and unsat_smt_unavailable remain distinct from proof. source_claim_admitted stays false."
+      },
+      "limitation": "Unknown specifications stay visible. They are not closed by the acceptance argument."
+    },
+    {
+      "id": "A-INCONSISTENT-SPEC",
+      "name": "inconsistent specifications",
+      "statement": "Unsatisfiable G making G⇒A vacuously true is not a proof of A. Mutating axioms to close a proof is a new authorized specification change.",
+      "required_by": ["FA-I31"],
+      "disposition": "undischarged",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_translation_validation.py",
+        "symbol": "vacuity / reachability checks in NS-009 cases",
+        "sha256": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62"
+      },
+      "qualification": {
+        "tasks": ["NS-009"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/logic_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/logic_receipts.jsonl"
+        ],
+        "observation": "vacuity_unsat_guarantee is rejected as proof. reachability_gap records unreachable assumptions. Unknown is not treated as inconsistent."
+      },
+      "limitation": "Inconsistent specifications are not silently repaired. They remain a specification problem, not an automatic proof."
+    },
+    {
+      "id": "A-INCOMPLETE-PROJECTION",
+      "name": "incomplete projections",
+      "statement": "Equal digests of incomplete manifests, incomplete runtime traces, opaque objects, and uncontrolled fixture values do not satisfy πD completeness.",
+      "required_by": ["FA-I32"],
+      "disposition": "undischarged",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py",
+        "symbol": "ProofCachedTestValidation.validate",
+        "sha256": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581"
+      },
+      "qualification": {
+        "tasks": ["NS-010"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/reuse_profile.json"
+        ],
+        "observation": "incomplete_trace, uncontrolled_fixture_value, and opaque_object_serialization_rejected fall back to RUN or reject. Collection seeds never become passing outcomes."
+      },
+      "limitation": "Fail-closed fallback prevents silent reuse of incomplete projections. It does not prove that remaining keys are complete projections."
+    },
+    {
+      "id": "A-UNIVERSAL-DEPENDENCY-CLOSURE",
+      "name": "universal dependency closure",
+      "statement": "πD captures every observationally relevant dependency of arbitrary tests, including clocks, network, databases, plugins, and unmodeled effects.",
+      "required_by": ["FA-I32"],
+      "disposition": "undischarged",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+        "symbol": "TestExecutionKey",
+        "sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883"
+      },
+      "qualification": {
+        "tasks": ["NS-010"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md"
+        ],
+        "observation": "NS-010 qualifies identity fields that are present. It does not prove that every possible dependency is in the key. The draft itself says a cold oracle and adversarial mutations do not prove universal closure."
+      },
+      "limitation": "Universal dependency closure is not inferred from equal execution-key digests."
+    },
+    {
+      "id": "A-COLD-ORACLE",
+      "name": "independent cold-oracle reuse scoring",
+      "statement": "An independent cold full runner agrees with admitted reuse on every scored case, with false-reuse denominators.",
+      "required_by": ["FA-I32"],
+      "disposition": "undischarged",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": null,
+        "symbol": "NS-011 cold full runner (not present)",
+        "sha256": null
+      },
+      "qualification": {
+        "tasks": ["NS-011"],
+        "evidence": [],
+        "observation": "papers/completion/neurosymbolic_supervision/qualification/cold_oracle_results.jsonl is absent. papers/completion/neurosymbolic_supervision/receipts/NS-011.json is absent. NS-010 assigns this campaign to NS-011 and does not claim it."
+      },
+      "limitation": "Cold-oracle agreement is not discharged. No false-reuse rate is reported."
+    },
+    {
+      "id": "A-SOLE-PUBLICATION-PATH",
+      "name": "sole publication operation",
+      "statement": "The tested sealer is the only operation that can introduce an accepted-lineage successor.",
+      "required_by": ["FA-I31"],
+      "disposition": "trusted_limitation",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "symbol": "IncrementalProofSealer",
+        "sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed"
+      },
+      "qualification": {
+        "tasks": ["NS-012"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md"
+        ],
+        "observation": "The induction's successor relation is defined as the sealer's successful CAS publications. Other persist APIs were not shown to be absent from the loaded forest."
+      },
+      "limitation": "Trusted for the argument's successor relation. Not a whole-program uniqueness proof."
+    },
+    {
+      "id": "A-NATIVE-PROOF",
+      "name": "native theorem/circuit profile",
+      "statement": "A genuine Groth16/circuit proof binds inner public inputs to outer source, obligation, and test-inventory claims.",
+      "required_by": ["FA-ALG1"],
+      "disposition": "unavailable",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16.py",
+        "symbol": "optional Groth16 adapter (profile closed unavailable)",
+        "sha256": null
+      },
+      "qualification": {
+        "tasks": ["NS-014"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/native_scope_decision.md"
+        ],
+        "observation": "The named native-proof profile is unavailable. No genuine proof payload, verified key/circuit, or measured prove/verify time is retained. Help-CLI observation is not a proof."
+      },
+      "limitation": "Native proving is out of scope. Horn-fragment helpers do not establish CPython/pytest execution."
+    },
+    {
+      "id": "A-COMPOSITION-EDGE",
+      "name": "composition-edge / interpolant / incremental SMT",
+      "statement": "Named CompositionEdge, interpolating QF_LIA CEGAR, interpolant checker, cyclic assume-guarantee closure, and incremental SMT wrapper discharge component obligations.",
+      "required_by": ["FA-I31"],
+      "disposition": "unavailable",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py",
+        "symbol": "refine_spurious_paths (located IPA CEGAR only)",
+        "sha256": null
+      },
+      "qualification": {
+        "tasks": ["NS-009"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/logic_report.md",
+          "papers/completion/neurosymbolic_supervision/qualification/logic_profiles.json"
+        ],
+        "observation": "IPA refine_spurious_paths is located and exercised. CompositionEdge, interpolant checker, cyclic closure, QF_LIA interpolating adapter, and incremental SMT wrapper were not located and are not simulated."
+      },
+      "limitation": "Unlocated specification-only mechanisms cannot discharge the acceptance argument."
+    },
+    {
+      "id": "A-WORLD-PROCEDURE",
+      "name": "world/procedure/refactoring consumption",
+      "statement": "Required-mode world or procedure consumption exhibits pre-state, accepted transition, and post-state publication.",
+      "required_by": ["FA-ALG1"],
+      "disposition": "unavailable",
+      "cannot_silently_discharge": true,
+      "gate": {
+        "module": null,
+        "symbol": "ProcedureCegis / IncomingMemory (not located)",
+        "sha256": null
+      },
+      "qualification": {
+        "tasks": ["NS-015"],
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/qualification/extensions_report.md"
+        ],
+        "observation": "No procedure, world-consumption, or refactoring extension is retained. Table 18 world/procedure row is untested/out of scope."
+      },
+      "limitation": "Algorithm 1 line 17 learning and world-root composition remain intended-only."
+    }
+  ],
+  "three_questions": {
+    "behavioral_claim": {
+      "question": "Does the candidate program or model satisfy its obligation?",
+      "gate": "independent pytest / designated checker; closes_claim ignored",
+      "qualification_tasks": ["NS-008", "NS-009", "NS-013"],
+      "does_not_answer": ["action permission", "publication"]
+    },
+    "action_permission": {
+      "question": "May this actor perform this action now?",
+      "gate": "ReferenceAuthorizationEvaluator",
+      "qualification_tasks": ["NS-008", "NS-013"],
+      "does_not_answer": ["behavioral correctness", "publication"]
+    },
+    "publication": {
+      "question": "Does this candidate and its evidence become current?",
+      "gate": "IncrementalProofSealer expected-parent CAS",
+      "qualification_tasks": ["NS-012", "NS-013"],
+      "does_not_answer": ["omitted obligations", "external exactly-once effects"]
+    }
+  },
+  "algorithm1": {
+    "label": "intended_composition_with_partial_executed_witness",
+    "full_loop_executed": false,
+    "live_ad_experiment": false,
+    "witness_task": "NS-013",
+    "witness_id": "baguqeerayjn2552ymrf3qtqjbvfe43q5yequcbhmowkmaazqaabyo5xuntxq",
+    "witness_artifact": "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json",
+    "executed_composition": [
+      {
+        "witness_step": "plan_bounded_repair",
+        "algorithm_line": 4,
+        "label": "executed_composition"
+      },
+      {
+        "witness_step": "choose_reasoning_route",
+        "algorithm_line": 7,
+        "variant": "deterministic_only",
+        "label": "executed_composition"
+      },
+      {
+        "witness_step": "validate_candidate",
+        "algorithm_line": 9,
+        "label": "executed_composition"
+      },
+      {
+        "witness_step": "reuse_narrowly",
+        "algorithm_line": 11,
+        "label": "executed_composition"
+      },
+      {
+        "witness_step": "incomplete_cannot_complete",
+        "algorithm_line": 13,
+        "label": "executed_composition"
+      },
+      {
+        "witness_step": "simulation_labeled_qualification",
+        "algorithm_line": 13,
+        "label": "executed_composition"
+      },
+      {
+        "witness_step": "seal_and_publish",
+        "algorithm_line": [14, 16],
+        "label": "executed_composition"
+      }
+    ],
+    "intended_only": [
+      {
+        "algorithm_line": 1,
+        "reason": "NS-013 freezes F/G/O for a qualification task; it is not live event-service reconcile"
+      },
+      {
+        "algorithm_line": 2,
+        "reason": "budget/cancel composition not executed as the integrated loop"
+      },
+      {
+        "algorithm_line": 5,
+        "reason": "wait_or_review not executed"
+      },
+      {
+        "algorithm_line": 7,
+        "variant": "production residual-model",
+        "reason": "residual without typed receipts rejected; production LLM identity unavailable"
+      },
+      {
+        "algorithm_line": 8,
+        "reason": "event-service return path not executed as a live loop"
+      },
+      {
+        "algorithm_line": 12,
+        "reason": "bounded retry to event service not executed"
+      },
+      {
+        "algorithm_line": 15,
+        "reason": "publication-conflict reconcile tested on the NS-012 sealer, not as Algorithm 1 event-service composition"
+      },
+      {
+        "algorithm_line": 17,
+        "reason": "learn_without_self_approval is a negative (no self-promotion), not executed procedure/policy learning"
+      }
+    ]
+  },
+  "non_inferences": {
+    "external_side_effect_atomicity": "not_inferred",
+    "universal_dependency_closure": "not_inferred",
+    "universal_python_correctness": "not_inferred",
+    "unknown_specifications_discharged": false,
+    "inconsistent_specifications_discharged": false,
+    "incomplete_projections_discharged": false,
+    "cold_oracle_agreement_discharged": false,
+    "native_proof_usable": false,
+    "algorithm1_full_loop_executed": false,
+    "matched_ad_experiment": false
+  },
+  "ns011_cold_oracle_present": false,
+  "manuscript_application": "NS-022"
+}
