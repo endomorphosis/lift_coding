@@ -1,0 +1,47 @@
+{
+  "schema": "af-optional-author-feedback-status/v1",
+  "task_id": "AF-028",
+  "recorded_at": "2026-09-12T15:24:00+00:00",
+  "independent_human_review": {
+    "collected": false,
+    "status": "not_collected_unmeasured",
+    "annotators": 0,
+    "double_annotated_units": 0,
+    "agreements": 0,
+    "disagreements": 0,
+    "adjudications": 0,
+    "kappa_or_majority_imputed": false,
+    "gold_records_with_values": 0,
+    "evaluation_eligible_units": 0,
+    "prepared_blank_packets": 100,
+    "note": "Zero is the observed count of independent annotation records, not a measured agreement statistic."
+  },
+  "optional_author_feedback": {
+    "collected": false,
+    "records": [],
+    "label": "optional non-independent author feedback",
+    "descriptive_only": true,
+    "independent": false,
+    "actual_provenance_required": true,
+    "may_be_used_as_gold": false,
+    "agreement_or_fidelity_score_allowed": false,
+    "outside_gold_and_scored_metrics": true,
+    "absence_is_acceptable": true,
+    "absence_fails_manuscript": false,
+    "absence_fails_task": false,
+    "does_not_open_final_packets": true
+  },
+  "operator_scope_decision": {
+    "date": "2026-09-12",
+    "decision": "User selected manuscript preparation without outside reviewers.",
+    "is_author_feedback": false,
+    "is_independent_review": false,
+    "replaces": "September 12 external-review scheduling gate",
+    "does_not_replace": "distinction between teacher/prover evidence and source fidelity"
+  },
+  "search": {
+    "public_author_comment_files_found": 0,
+    "invented_comments": 0,
+    "private_author_store_opened": false
+  }
+}

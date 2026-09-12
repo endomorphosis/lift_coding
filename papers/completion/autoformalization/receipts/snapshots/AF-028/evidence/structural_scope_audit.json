@@ -1,0 +1,697 @@
+{
+  "schema": "af-structural-scope-audit/v1",
+  "task_id": "AF-028",
+  "policy_id": "AF-028/structural-evidence-scope/v1",
+  "policy_schema": "af-automated-structural-evidence-scope/v1",
+  "recorded_at": "2026-09-12T15:24:00+00:00",
+  "authority": "User selected manuscript preparation without outside reviewers on 2026-09-12.",
+  "private_store": {
+    "path_recorded": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/af005-independent-annotation-v1",
+    "visible_to_this_process": false,
+    "opened": false,
+    "source_bodies_read": false,
+    "private_packets_read": false,
+    "pending_gold_read": false,
+    "commitments": {
+      "sampling_plan.json": "41bfb6978de5560fcc7404c04e34fe8b42297c3c875c7ec3353c9fc55348e87a",
+      "gold_facets.pending.private.jsonl": "8611d4f80dc6d43748cf3a9f1a72c66a6b368079aa650216f42b05c7a071694c",
+      "binding_manifest.private.json": "cd5e5a0915144289e20632ae7db0f20df4c9af046806dfcbc9657feeae4a3f91",
+      "annotation_packets.private.jsonl": "d9b205cd871deb47f8c28c1597dad531b06a0204080c5d68945118b328432ddf"
+    },
+    "note": "Existence may be probed; this auditor does not open private files."
+  },
+  "source_scoring_rule": "A checker proves the submitted formal statement within its profile. Whether that statement faithfully captures the source remains unmeasured without separate valid evidence. No proof/checker pass or automatic label is original-source semantic gold.",
+  "human_review": {
+    "independent_review_collected": false,
+    "agreement_status": "unmeasured_not_collected",
+    "adjudication_status": "not_performed",
+    "human_fidelity_status": "unmeasured_not_collected",
+    "prepared_blank_packets": 100,
+    "groups": 20,
+    "population_units": 1913,
+    "public_gold": {
+      "rows": 100,
+      "values_present_rows": 0,
+      "pending_or_unmeasured_rows": 100
+    },
+    "public_packets": {
+      "rows": 222,
+      "labeled_rows": 0
+    }
+  },
+  "optional_author_feedback": {
+    "collected": false,
+    "absence_is_acceptable": true,
+    "may_be_used_as_gold": false,
+    "label": "optional non-independent author feedback",
+    "status_path": "papers/completion/autoformalization/evidence/author_feedback_status.json",
+    "status_sha256": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b"
+  },
+  "custody_unchanged": {
+    "af005_public_outputs": [
+      {
+        "path": "papers/completion/autoformalization/data/annotation_guidelines.md",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_guidelines.md",
+        "expected_sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+        "current_sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+        "snapshot_sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+        "unchanged": true
+      },
+      {
+        "path": "papers/completion/autoformalization/data/annotation_packets.jsonl",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_packets.jsonl",
+        "expected_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+        "current_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+        "snapshot_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+        "unchanged": true
+      },
+      {
+        "path": "papers/completion/autoformalization/data/gold_facets.jsonl",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/gold_facets.jsonl",
+        "expected_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+        "current_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+        "snapshot_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+        "unchanged": true
+      },
+      {
+        "path": "papers/completion/autoformalization/evidence/annotation_provenance.json",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/evidence/annotation_provenance.json",
+        "expected_sha256": "bcdc4966989032a810db60f4c1711b3f161f7e65f180134242e138e5593bdde8",
+        "current_sha256": "bcdc4966989032a810db60f4c1711b3f161f7e65f180134242e138e5593bdde8",
+        "snapshot_sha256": "bcdc4966989032a810db60f4c1711b3f161f7e65f180134242e138e5593bdde8",
+        "unchanged": true
+      }
+    ],
+    "af027_public_outputs": [
+      {
+        "path": "papers/completion/autoformalization/data/review_binding_manifest.json",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_binding_manifest.json",
+        "expected_sha256": "ff9038c444b79f6ab69d71251025f96443fa0cb1224da0e36783829e436a6122",
+        "current_sha256": "ff9038c444b79f6ab69d71251025f96443fa0cb1224da0e36783829e436a6122",
+        "snapshot_sha256": "ff9038c444b79f6ab69d71251025f96443fa0cb1224da0e36783829e436a6122",
+        "unchanged": true
+      },
+      {
+        "path": "papers/completion/autoformalization/data/review_packet_schema.json",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_packet_schema.json",
+        "expected_sha256": "24e3356d0c812bf87601eef683a89e606d7f432175b96885360dfa4446fd4b84",
+        "current_sha256": "24e3356d0c812bf87601eef683a89e606d7f432175b96885360dfa4446fd4b84",
+        "snapshot_sha256": "24e3356d0c812bf87601eef683a89e606d7f432175b96885360dfa4446fd4b84",
+        "unchanged": true
+      },
+      {
+        "path": "papers/completion/autoformalization/evaluation/review_import.py",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/review_import.py",
+        "expected_sha256": "69dcd898e0c0c8c37a3af54ceb6d49acf7d9ff39568f1dbd8fcc0510f33494ef",
+        "current_sha256": "69dcd898e0c0c8c37a3af54ceb6d49acf7d9ff39568f1dbd8fcc0510f33494ef",
+        "snapshot_sha256": "69dcd898e0c0c8c37a3af54ceb6d49acf7d9ff39568f1dbd8fcc0510f33494ef",
+        "unchanged": true
+      },
+      {
+        "path": "papers/completion/autoformalization/evidence/human_review_handoff.md",
+        "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/human_review_handoff.md",
+        "expected_sha256": "14d73045e997e4f5a221988dacbe5823d0dd30c0b1b0873c4897cf3ad9b83779",
+        "current_sha256": "14d73045e997e4f5a221988dacbe5823d0dd30c0b1b0873c4897cf3ad9b83779",
+        "snapshot_sha256": "14d73045e997e4f5a221988dacbe5823d0dd30c0b1b0873c4897cf3ad9b83779",
+        "unchanged": true
+      }
+    ],
+    "prior_receipts": {
+      "papers/completion/autoformalization/receipts/AF-001.json": "5455f0b3084fd4950d35e6168193d70b152b44c7d62f9252f26ecdebe25fe4d5",
+      "papers/completion/autoformalization/receipts/AF-002.json": "e990653ae9f80c734b673b759d9c352374d73e17aa403619e0d3dd8d5954e436",
+      "papers/completion/autoformalization/receipts/AF-003.json": "57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+      "papers/completion/autoformalization/receipts/AF-004.json": "f4bad5a9a468e5c740c14b07b195176890682036576d8daaaeb708ae82e2c82c",
+      "papers/completion/autoformalization/receipts/AF-005.json": "e23502670bb55d1bb9a5c4bed5585cb1efe56f0de3fc25a8bf81d2ba53b0e77b",
+      "papers/completion/autoformalization/receipts/AF-006.json": "2bf185757c681b6073e6c0c8948304f549b1298b33bed66e58d2bce6b7c0254c",
+      "papers/completion/autoformalization/receipts/AF-007.json": "aab106ec4420d4ecbbea39f44dff2dc685b05ee3e6c06435dd7548754a875cab",
+      "papers/completion/autoformalization/receipts/AF-008.json": "f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0",
+      "papers/completion/autoformalization/receipts/AF-009.json": "086605f5dc38754dcc87306983374a07954e5f51a4cb0acb67b9839dd3a9848b",
+      "papers/completion/autoformalization/receipts/AF-010.json": "b0d89cab8aee9f01347cb3b77533c10a6c7f09d36886694b3e1ee35ba1eded12",
+      "papers/completion/autoformalization/receipts/AF-011.json": "ad79a9f2ab0349382e3f6ca6d534a6af3c5719ffd01ceb38dffb766271d402fb",
+      "papers/completion/autoformalization/receipts/AF-012.json": "5a128988609521c231b6b3306162cb48b1ac601b380c8d6c38d8e88394c48cef",
+      "papers/completion/autoformalization/receipts/AF-015.json": "f9966549bcbccb4db8c7f44eced602f0b025765ad02ef4adfee3f20397dfd2bc",
+      "papers/completion/autoformalization/receipts/AF-017.json": "cc32787aef698318705ed099d08d1b6b44267bf31c08db669d98ddb29c3f1a35",
+      "papers/completion/autoformalization/receipts/AF-018.json": "81c42040ab1d2cb32d09e2983c49fd4db518c484c6717bc009924027e3a47615",
+      "papers/completion/autoformalization/receipts/AF-020.json": "91ee271205d0a924159d15775c9a6d0b1fe6018e871584ed5b491dbcbd8a2a53",
+      "papers/completion/autoformalization/receipts/AF-026.json": "85d029e833c4a1f843c8d2ca075f2b2c3d280647bbae4156579dada27785856c",
+      "papers/completion/autoformalization/receipts/AF-027.json": "caabfc11dfcaab1241fd095525171696e7db4f4b383ce8e62697a577d4148571"
+    },
+    "historical_af002_protocol_sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+    "current_protocol_is_amendment": true,
+    "historical_protocol_body_retained": true
+  },
+  "native_checker_inventory": {
+    "af027_development": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-028-e6a4edf526b0-attempt-1-1789226293/papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+      "records": 3,
+      "kinds": {
+        "native_checked_proof": 1,
+        "failure": 1,
+        "solver_local_result": 1
+      },
+      "source_gold_admitted": 0,
+      "sample": [
+        {
+          "receipt_id": "independent_native_checker_success",
+          "checker": "lean",
+          "execution_status": "measured",
+          "result_kind": "native_checked_proof",
+          "counts_as_native_checked_proof": null
+        },
+        {
+          "receipt_id": "independent_native_checker_explicit_failure",
+          "checker": "lean",
+          "execution_status": "failure",
+          "result_kind": "failure",
+          "counts_as_native_checked_proof": null
+        },
+        {
+          "receipt_id": "independent_solver_local_unsat",
+          "checker": "z3",
+          "execution_status": "measured",
+          "result_kind": "solver_local_result",
+          "counts_as_native_checked_proof": null
+        }
+      ]
+    },
+    "af018_sealed_path": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-028-e6a4edf526b0-attempt-1-1789226293/papers/completion/autoformalization/evidence/native_checker_receipts.jsonl",
+      "records": 26,
+      "kinds": {
+        "unavailable": 20,
+        "invalid": 6
+      },
+      "source_gold_admitted": 0,
+      "sample": [
+        {
+          "receipt_id": "probe:lean",
+          "checker": "lean",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:lake",
+          "checker": "lake",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:elan",
+          "checker": "elan",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:z3",
+          "checker": "z3",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:cvc5",
+          "checker": "cvc5",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:vampire",
+          "checker": "vampire",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:eprover",
+          "checker": "eprover",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        },
+        {
+          "receipt_id": "probe:coqc",
+          "checker": "coqc",
+          "execution_status": "unavailable",
+          "result_kind": null,
+          "counts_as_native_checked_proof": false
+        }
+      ]
+    }
+  },
+  "quantities": [
+    {
+      "id": "Q-final-test-unrun",
+      "class": "unrun_failed_unavailable",
+      "description": "A-E and T0-T5 final-test tables remain no-run on the natural held-out population.",
+      "status": "unrun",
+      "denominator": 1913,
+      "numerator": 0,
+      "source": "papers/completion/autoformalization/data/splits.json",
+      "goal": null,
+      "premises": null,
+      "checker": null,
+      "seed": null,
+      "cost": "unmeasured_no_final_execution",
+      "bindings": {
+        "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+        "corpus_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+        "unrun_tables_sha256": "629665ae667ed32c1d57769846da7ff7b26cd6faad4871a54816c6bb0ad291a1",
+        "eligible_field": "natural_source_units"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "papers/completion/autoformalization/data/splits.json",
+        "goal": null,
+        "premises": null,
+        "checker": null,
+        "seed": null,
+        "denominator": 1913,
+        "cost": "unmeasured_no_final_execution",
+        "status": "unrun",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-human-fidelity",
+      "class": "unmeasured_human_semantic_fidelity",
+      "description": "Independent human source-facet labels, agreement and adjudication were not collected.",
+      "status": "unmeasured_not_collected",
+      "denominator": 100,
+      "numerator": null,
+      "source": "public AF-005/AF-027 blank packets; private store not opened",
+      "goal": null,
+      "premises": null,
+      "checker": null,
+      "seed": null,
+      "cost": "human_review_seconds_unmeasured",
+      "bindings": {
+        "annotators": 0,
+        "agreements": 0,
+        "disagreements": 0,
+        "adjudications": 0,
+        "gold_rows": 100,
+        "gold_values_present_rows": 0,
+        "gold_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+        "packets_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "public AF-005/AF-027 blank packets; private store not opened",
+        "goal": null,
+        "premises": null,
+        "checker": null,
+        "seed": null,
+        "denominator": 100,
+        "cost": "human_review_seconds_unmeasured",
+        "status": "unmeasured_not_collected",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-constructed-af006",
+      "class": "constructed_conformance",
+      "description": "Twelve newly executed finite reconstruction checks; not recovered historical Table 4.",
+      "status": "measured_constructed",
+      "denominator": 12,
+      "numerator": 12,
+      "source": "papers/completion/autoformalization/data/minimal_pairs.jsonl",
+      "goal": "predefined finite witnesses in Table 4 transcription",
+      "premises": "finite Kripke/Boolean/request-audit/identity examples only",
+      "checker": "papers/completion/autoformalization/evaluation/reference_semantics.py",
+      "seed": null,
+      "cost": "recorded_in_AF-006_receipt",
+      "bindings": {
+        "results_sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31",
+        "provenance_sha256": "72b3c58008ebac16f9cad94139d5e7ce2edaf3e10590b79ccc80f682f5abaeaf",
+        "minimal_pairs_sha256": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "papers/completion/autoformalization/data/minimal_pairs.jsonl",
+        "goal": "predefined finite witnesses in Table 4 transcription",
+        "premises": "finite Kripke/Boolean/request-audit/identity examples only",
+        "checker": "papers/completion/autoformalization/evaluation/reference_semantics.py",
+        "seed": null,
+        "denominator": 12,
+        "cost": "recorded_in_AF-006_receipt",
+        "status": "measured_constructed",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-constructed-af015",
+      "class": "constructed_conformance",
+      "description": "Property-specific Boolean/trace translation receipts; solver-local, not native Lean coverage.",
+      "status": "measured_constructed_solver_local_or_unavailable",
+      "denominator": 16,
+      "numerator": 16,
+      "source": "papers/completion/autoformalization/data/policy_code_trace_cases.json",
+      "goal": "named Q1/Q2/TDFOL fragment cases",
+      "premises": "case-local bridge assumptions",
+      "checker": "stdlib_finite_enumeration; native lean unavailable on sealed PATH",
+      "seed": null,
+      "cost": "recorded_in_AF-015_receipt",
+      "bindings": {
+        "translation_sha256": "8a79cb3d2f67b8c417c587b002ca4777e969e362b608f5d7e4ad66b16cb7286b"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "papers/completion/autoformalization/data/policy_code_trace_cases.json",
+        "goal": "named Q1/Q2/TDFOL fragment cases",
+        "premises": "case-local bridge assumptions",
+        "checker": "stdlib_finite_enumeration; native lean unavailable on sealed PATH",
+        "seed": null,
+        "denominator": 16,
+        "cost": "recorded_in_AF-015_receipt",
+        "status": "measured_constructed_solver_local_or_unavailable",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-native-af027",
+      "class": "exact_goal_native_checker_acceptance",
+      "description": "Independent Lean identity success, Lean explicit failure, and Z3 unsat sentinel on development artifacts.",
+      "status": "measured_development_exact_goal",
+      "denominator": 3,
+      "numerator": 3,
+      "source": "AF027-DEV constructed guarded-write artifacts",
+      "goal": "ok.lean identity; fail.lean False:=trivial; sentinel.smt2",
+      "premises": "development qualification files only",
+      "checker": "Lean 4.33.1 digest 79fb1d26...; Z3 4.15.4 digest bbea82f9...",
+      "seed": null,
+      "cost": "elapsed_ms on AF-027 receipts",
+      "bindings": {
+        "native_receipts_sha256": "07a55b7e757165371fc2a8f20e8e9fb7732ad245c80c2be76899b2dd68996396",
+        "claim_admissible": false,
+        "table6_credit": false
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "AF027-DEV constructed guarded-write artifacts",
+        "goal": "ok.lean identity; fail.lean False:=trivial; sentinel.smt2",
+        "premises": "development qualification files only",
+        "checker": "Lean 4.33.1 digest 79fb1d26...; Z3 4.15.4 digest bbea82f9...",
+        "seed": null,
+        "denominator": 3,
+        "cost": "elapsed_ms on AF-027 receipts",
+        "status": "measured_development_exact_goal",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-native-af018-sealed",
+      "class": "unrun_failed_unavailable",
+      "description": "Sealed-PATH native checker probes for assistance goals remain unavailable.",
+      "status": "unavailable",
+      "denominator": 26,
+      "numerator": 0,
+      "source": "AF-018 assistance encodings",
+      "goal": "named hammer/leanstral goals where present",
+      "premises": null,
+      "checker": "absent from sealed PATH",
+      "seed": null,
+      "cost": "probe elapsed retained; no kernel time",
+      "bindings": {
+        "native_receipts_sha256": "51678314ed22c819d8d4e164160fd80ef2b4b7f382e7a40330c75421be156781"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "AF-018 assistance encodings",
+        "goal": "named hammer/leanstral goals where present",
+        "premises": null,
+        "checker": "absent from sealed PATH",
+        "seed": null,
+        "denominator": 26,
+        "cost": "probe elapsed retained; no kernel time",
+        "status": "unavailable",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-teacher-af011",
+      "class": "teacher_agreement",
+      "description": "Mock embedding encode/decode and family CE on train/selection windows. Teacher dataset targets were not generated.",
+      "status": "measured_teacher_diagnostic",
+      "denominator": 84,
+      "numerator": 84,
+      "source": "AF-004 train/selection CFR windows",
+      "goal": "encode_decode_family_ce_without_decompiler_structural_targets",
+      "premises": null,
+      "checker": null,
+      "seed": [
+        104729,
+        130363,
+        155921
+      ],
+      "cost": "AF-011 run wall/cpu in receipt",
+      "bindings": {
+        "embedding_model": "mock:stable-sha256",
+        "teacher_targets_produced": 0,
+        "claim_admissible": false,
+        "training_manifest_sha256": "af982b68966b219a7e4bad45acb7c42db30f6665073db1992d266f981178a99b",
+        "teacher_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "AF-004 train/selection CFR windows",
+        "goal": "encode_decode_family_ce_without_decompiler_structural_targets",
+        "premises": null,
+        "checker": null,
+        "seed": [
+          104729,
+          130363,
+          155921
+        ],
+        "denominator": 84,
+        "cost": "AF-011 run wall/cpu in receipt",
+        "status": "measured_teacher_diagnostic",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-learned-af011-t2",
+      "class": "learned_updates",
+      "description": "T0-T2 limited-scope sealed-PATH execution; T2 python backend, update_count 0, not packed_cpu.",
+      "status": "measured_limited_scope",
+      "denominator": "69 train + 15 selection; 3 T0 replays; 3 T1/T2 seeds",
+      "numerator": null,
+      "source": "AF-004 train/selection only",
+      "goal": null,
+      "premises": null,
+      "checker": null,
+      "seed": [
+        104729,
+        130363,
+        155921
+      ],
+      "cost": "AF-011 receipt",
+      "bindings": {
+        "t2_executed": true,
+        "t2_backend": "native",
+        "claim_admissible": false
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "AF-004 train/selection only",
+        "goal": null,
+        "premises": null,
+        "checker": null,
+        "seed": [
+          104729,
+          130363,
+          155921
+        ],
+        "denominator": "69 train + 15 selection; 3 T0 replays; 3 T1/T2 seeds",
+        "cost": "AF-011 receipt",
+        "status": "measured_limited_scope",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-learned-af012-t3",
+      "class": "learned_updates",
+      "description": "T3 has no admitted native feedback; isolation probes are constructed controls.",
+      "status": "unavailable",
+      "denominator": 0,
+      "numerator": 0,
+      "source": "matched AF-011 T2 checkpoints",
+      "goal": null,
+      "premises": null,
+      "checker": "none admitted on sealed PATH",
+      "seed": [
+        104729,
+        130363,
+        155921
+      ],
+      "cost": "AF-012 receipt",
+      "bindings": {
+        "eligible_native_label_count": 0,
+        "isolation_probe_not_certification": true,
+        "proof_isolation_sha256": "5ab25471b86dfbb37fc39ff20223b0ada2b72065fcac76bc4f9b2413f7c7507d"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "matched AF-011 T2 checkpoints",
+        "goal": null,
+        "premises": null,
+        "checker": "none admitted on sealed PATH",
+        "seed": [
+          104729,
+          130363,
+          155921
+        ],
+        "denominator": 0,
+        "cost": "AF-012 receipt",
+        "status": "unavailable",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-structural-reconstruction",
+      "class": "automated_structural_correctness",
+      "description": "Forward/cycle/final reconstruction remain distinct accounting fields; final-test values unrun.",
+      "status": "accounted_unrun_on_final_test",
+      "denominator": 1913,
+      "numerator": null,
+      "source": "final-test lock",
+      "goal": null,
+      "premises": null,
+      "checker": null,
+      "seed": null,
+      "cost": null,
+      "bindings": {
+        "unrun_tables_sha256": "629665ae667ed32c1d57769846da7ff7b26cd6faad4871a54816c6bb0ad291a1"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "final-test lock",
+        "goal": null,
+        "premises": null,
+        "checker": null,
+        "seed": null,
+        "denominator": 1913,
+        "cost": null,
+        "status": "accounted_unrun_on_final_test",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-arm-e-gate",
+      "class": "training_activation_gates",
+      "description": "Arm E remains unavailable until AF-013 names exact checkpoint/advice identities.",
+      "status": "unavailable",
+      "denominator": null,
+      "numerator": 0,
+      "source": null,
+      "goal": null,
+      "premises": null,
+      "checker": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "seed": null,
+      "cost": null,
+      "bindings": {
+        "promotion_gates": [
+          "AF-011",
+          "AF-013"
+        ],
+        "development_route": "unavailable_pending_AF-011_AF-013",
+        "pipeline_arms_sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22"
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": null,
+        "goal": null,
+        "premises": null,
+        "checker": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+        "seed": null,
+        "denominator": null,
+        "cost": null,
+        "status": "unavailable",
+        "admitted_as_source_gold": false
+      }
+    },
+    {
+      "id": "Q-retrieval-constructed",
+      "class": "constructed_conformance",
+      "description": "AF-017 retrieval labels are constructed protocol judgments, not independent human adjudication.",
+      "status": "measured_constructed",
+      "denominator": 94,
+      "numerator": 94,
+      "source": "constructed citation/controlling-source protocol",
+      "goal": "relevance",
+      "premises": null,
+      "checker": null,
+      "seed": null,
+      "cost": "AF-017 receipt",
+      "bindings": {
+        "retrieval_sha256": "0aec03a8721c36cd792f7518717af25d291e462c19721343c75c6c78628af8f5",
+        "human_adjudication": false
+      },
+      "admitted_as_source_gold": false,
+      "required_bindings": {
+        "source": "constructed citation/controlling-source protocol",
+        "goal": "relevance",
+        "premises": null,
+        "checker": null,
+        "seed": null,
+        "denominator": 94,
+        "cost": "AF-017 receipt",
+        "status": "measured_constructed",
+        "admitted_as_source_gold": false
+      }
+    }
+  ],
+  "evidence_class_summary": {
+    "automated_structural_correctness": [
+      "Q-structural-reconstruction"
+    ],
+    "exact_goal_native_checker_acceptance": [
+      "Q-native-af027"
+    ],
+    "teacher_agreement": [
+      "Q-teacher-af011"
+    ],
+    "learned_updates": [
+      "Q-learned-af011-t2",
+      "Q-learned-af012-t3"
+    ],
+    "constructed_conformance": [
+      "Q-constructed-af006",
+      "Q-constructed-af015",
+      "Q-retrieval-constructed"
+    ],
+    "unmeasured_human_semantic_fidelity": [
+      "Q-human-fidelity"
+    ],
+    "unrun_failed_unavailable": [
+      "Q-final-test-unrun",
+      "Q-native-af018-sealed"
+    ],
+    "training_activation_gates": [
+      "Q-arm-e-gate"
+    ]
+  },
+  "excluded_from_manuscript_scope": [
+    "independent human agreement, adjudication, or semantic-fidelity scores",
+    "prover or teacher success as original-source meaning",
+    "Table 6/11/13 confirmatory performance from development or constructed rows",
+    "Arm E activation without AF-013 named checkpoint/advice receipts"
+  ],
+  "manuscript_wording_path": "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+  "analysis_wording_path": "papers/completion/autoformalization/evidence/structural_scope_report.md",
+  "deliverable_sha256": {
+    "papers/completion/autoformalization/config/structural_evidence_scope.json": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+    "papers/completion/autoformalization/evidence/author_feedback_status.json": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b",
+    "papers/completion/autoformalization/evidence/structural_scope_report.md": "b1ba2f99eda3282d5092228f45c3e7422de6cd2ea65098b887b0dc221f598836",
+    "papers/completion/autoformalization/manuscript/empirical_scope.tex": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739",
+    "papers/completion/autoformalization/protocol.md": "ea3caf55ec7f5076272aa6d2d374e902752a32dd99a35115ac08c8c14be56242"
+  },
+  "limitations": [
+    "This audit binds public evidence classes; it is not independent scientific replication.",
+    "Private gold and source bodies were not read and therefore cannot be asserted filled or empty beyond public commitments.",
+    "AF-029 training execution is out of this task and remains gated by its own criteria."
+  ]
+}

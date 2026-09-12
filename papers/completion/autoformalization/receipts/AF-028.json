@@ -1,0 +1,203 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-028",
+  "status": "complete",
+  "completed_at": "2026-09-12T15:30:38.951268+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "auditor": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-028/audit_structural_scope.py",
+      "sha256": "549d5871b4b6ab08a3d7e8176fddeb92e3bd586068bbb3a7d9dbbb2795358e7a",
+      "schema": "af-structural-scope-audit/v1"
+    },
+    "policy": {
+      "schema": "af-automated-structural-evidence-scope/v1",
+      "policy_id": "AF-028/structural-evidence-scope/v1"
+    },
+    "frozen_inputs": {
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+      "gold_facets_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+      "annotation_packets_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+      "review_binding_manifest_sha256": "ff9038c444b79f6ab69d71251025f96443fa0cb1224da0e36783829e436a6122",
+      "review_import_sha256": "69dcd898e0c0c8c37a3af54ceb6d49acf7d9ff39568f1dbd8fcc0510f33494ef",
+      "af002_protocol_snapshot_sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    },
+    "empirical_execution": "none; this task is a claim-scope audit. Independent human review was not collected. Optional author feedback was not supplied."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/audit_structural_scope.py": "549d5871b4b6ab08a3d7e8176fddeb92e3bd586068bbb3a7d9dbbb2795358e7a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/config/structural_evidence_scope.json": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/author_feedback_status.json": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_audit.json": "a02b312620e7ac9501c15a763114092861a2f8ee884a83a6891f83654450eec6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_report.md": "b1ba2f99eda3282d5092228f45c3e7422de6cd2ea65098b887b0dc221f598836",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.meta.json": "11f04e14bbc478acdb247f11ddf30da1f95f13e20d8d6f7ddb349d48613753ac",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.stdout.log": "dea8c5f6ac3328fd925e3401c12463029c62e4f1d1191243f71198efe51104b7",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/json_parse.meta.json": "3f7778ae33309dcdbd68202f194ea7b0eed5c9645b4d917b5fd833837cc721ca",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/json_parse.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/json_parse.stdout.log": "14b834654c1f7af7da3156b9bb0c538666275bc994a50a84a7d44c729eef5d88",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/python_version.meta.json": "a04290e4dd081f111c9fcc57af045008db3d5e5eeaa4ef52c22510c97bc3e90f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/python_version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/python_version.stdout.log": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.meta.json": "8984f5579c137ebe1ba19ca2ba08c04c470ec2afc126d4241a93168a7b851311",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.stdout.log": "223a20285593aecd6243578b1239593100847a52854fa268854b8175916d7166",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/manuscript/empirical_scope.tex": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739",
+    "papers/completion/autoformalization/receipts/snapshots/AF-028/protocol.md": "ea3caf55ec7f5076272aa6d2d374e902752a32dd99a35115ac08c8c14be56242"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/config/structural_evidence_scope.json": "papers/completion/autoformalization/receipts/snapshots/AF-028/config/structural_evidence_scope.json",
+    "papers/completion/autoformalization/evidence/structural_scope_audit.json": "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_audit.json",
+    "papers/completion/autoformalization/evidence/author_feedback_status.json": "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/author_feedback_status.json",
+    "papers/completion/autoformalization/evidence/structural_scope_report.md": "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_report.md",
+    "papers/completion/autoformalization/manuscript/empirical_scope.tex": "papers/completion/autoformalization/receipts/snapshots/AF-028/manuscript/empirical_scope.tex",
+    "papers/completion/autoformalization/protocol.md": "papers/completion/autoformalization/receipts/snapshots/AF-028/protocol.md"
+  },
+  "criteria": [
+    {
+      "criterion": "A versioned claim-scope audit binds actual source/evidence and distinguishes automated structural correctness, exact-goal native checker acceptance, teacher agreement, learned updates and constructed conformance from unmeasured human semantic fidelity. No proof/checker pass or automatic label is admitted as original-source semantic gold.",
+      "status": "met",
+      "explanation": "Policy AF-028/structural-evidence-scope/v1 and the bound audit classify twelve public quantities into automated structural correctness, exact-goal native checker acceptance (AF-027 Lean identity/failure and Z3 sentinel), teacher agreement (AF-011 mock embeddings), learned updates (AF-011 T0-T2 limited-scope; AF-012 T3 unavailable), constructed conformance (AF-006/AF-015/AF-017), unmeasured human semantic fidelity, unrun/unavailable outcomes, and Arm E activation gates. Every quantity sets admitted_as_source_gold=false. Checker and teacher success are not original-source semantic gold.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/config/structural_evidence_scope.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/audit_structural_scope.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Independent human review, agreement and adjudication are explicitly not collected/unmeasured. Any optional author feedback has actual author provenance and a descriptive non-independent label, remains outside gold/scored metrics, and its absence does not fail manuscript or task completion.",
+      "status": "met",
+      "explanation": "Public gold templates remain 100 blank pending rows with zero values. Independent annotators, agreements, disagreements and adjudications are 0 and kappa is not imputed. Optional author feedback records are empty; the descriptive label is 'optional non-independent author feedback'; absence_is_acceptable is true; may_be_used_as_gold is false. The operator 2026-09-12 no-outside-reviewers decision is recorded as not author feedback. verify-blank still reports zero human annotations and unread private source bodies.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/author_feedback_status.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Prior review packets/importers/commitments/receipts and sealed final custody remain unchanged. The report supplies concrete manuscript/analysis wording that omits unsupported fidelity/agreement claims while retaining failed/unrun outcomes, all real training/activation gates and reproducible structural-evidence denominators.",
+      "status": "met",
+      "explanation": "AF-005 gold/packet/guideline/provenance bytes and AF-027 binding/schema/importer/handoff bytes match their prior snapshot hashes. Private commitments were not opened. Protocol.md retains the AF-002/v1 freeze under an AF-028/v1 reporting amendment. empirical_scope.tex and structural_scope_report.md give manuscript and AF-021/AF-022 wording that keep the 1913-unit no-run denominator, AF-015/AF-018 unavailable native checks, AF-012 T3 missing feedback, and AF-013 Arm E gates, without independent-fidelity scores.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_report.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/manuscript/empirical_scope.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/protocol.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/evidence/structural_scope_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/state",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-028/audit_structural_scope.py",
+        "check"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-028/audit_structural_scope.py",
+      "exit_code": 0,
+      "started_at": "2026-09-12T15:29:33.227751+00:00",
+      "finished_at": "2026-09-12T15:29:33.281444+00:00",
+      "execution_kind": "sealed-PATH structural-scope and custody check",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/check.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/state",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/review_import.py",
+        "verify-blank"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T15:29:33.300756+00:00",
+      "finished_at": "2026-09-12T15:29:33.347790+00:00",
+      "execution_kind": "blank review-packet and gold-template verification; private store not opened",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/verify_blank.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/state",
+        "/usr/bin/python3.12",
+        "-c",
+        "import json, pathlib, sys\npaths=sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding=\"utf-8\"))\n    print(path, \"ok\")\n",
+        "papers/completion/autoformalization/config/structural_evidence_scope.json",
+        "papers/completion/autoformalization/evidence/structural_scope_audit.json",
+        "papers/completion/autoformalization/evidence/author_feedback_status.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T15:29:33.380840+00:00",
+      "finished_at": "2026-09-12T15:29:33.408479+00:00",
+      "execution_kind": "JSON parse pin of AF-028 machine-readable outputs",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/json_parse.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/json_parse.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af028-LI5fNt/.local/state",
+        "/usr/bin/python3.12",
+        "--version"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T15:29:33.441446+00:00",
+      "finished_at": "2026-09-12T15:29:33.444463+00:00",
+      "execution_kind": "sealed-PATH interpreter identity",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/python_version.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-028/logs/python_version.stderr.log"
+    }
+  ],
+  "limitations": [
+    "Independent human semantic-fidelity, agreement and adjudication were not collected and remain unmeasured.",
+    "Optional author feedback was not supplied; its absence does not fail this task.",
+    "This audit does not execute A-E/T0-T5 final-test evaluation, native training, or Arm E activation.",
+    "Private sealed packets and pending gold were not opened; public blankness is not a private-store content inspection.",
+    "Checker and teacher success remain non-gold. Development and constructed rows are not Table 6/11/13 performance.",
+    "This receipt is provenance validation, not independent scientific replication or submission authorization."
+  ],
+  "completion_scope": "Versioned structural-evidence claim-scope audit, optional-author-feedback status (absent, acceptable), manuscript/analysis wording, and AF-002 protocol reporting amendment. Prior review packets, importers, commitments, receipts and sealed final custody unchanged."
+}
