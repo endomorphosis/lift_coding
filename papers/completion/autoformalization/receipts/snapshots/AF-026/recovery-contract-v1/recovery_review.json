@@ -1,0 +1,103 @@
+{
+  "schema": "paper-af026-corrective-qualification-review/v1",
+  "created_at": "2026-09-11T23:43:48.308295+00:00",
+  "task_id": "AF-026",
+  "completion_evidence": false,
+  "acceptance_met_by_this_artifact": false,
+  "baseline_source_commit": "626f3669e382df0f307931a3d922e33fa16de403",
+  "original_receipt": {
+    "path": "papers/completion/autoformalization/receipts/AF-008.json",
+    "sha256": "f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0",
+    "preserved_copy": "papers/completion/autoformalization/receipts/snapshots/AF-026/recovery-contract-v1/original_AF-008_receipt.json"
+  },
+  "original_snapshot_population_verified": 12,
+  "unchanged_acceptance_criteria": [
+    "Adversarial attempts to recover withheld source/gold through each documented channel are rejected or the affected condition is explicitly non-blind.",
+    "Main generalization arms disable sample-indexed memory for update and evaluation.",
+    "Forward, cycle and final reconstruction scores remain distinct and parser-assisted features are disclosed."
+  ],
+  "retained_reviewer_probes": {
+    "check_scope": {
+      ".py": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af008_independent_review/check_scope.py",
+        "sha256": "8ca65b000ca15b75d6d0b70dd58fe504924a99c7129593d4ba39b9bdf7f1213f"
+      },
+      ".json": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af008_independent_review/check_scope.json",
+        "sha256": "75338cef8d1ddd4e00e80523f9405619487ef45171c1feab42c0cf49be62141f"
+      },
+      "observed_results": {
+        "schema": "paper-af008-independent-scope-check/v1",
+        "module_sha256": "8e45fc48407e55f397ffd9cb2a769f7d15d9683d9a85db99ceb788becbb27e39",
+        "encoded_auxiliary_canonical_ir_text_survives_filter": true,
+        "ordinary_same_process_synthetic_file_read_remains_possible": true,
+        "actual_holdout_access_attempted": false,
+        "provider_or_network_invoked": false,
+        "interpretation": "The input filter rejects named fields and raw literal canaries. It does not establish an enforced process/filesystem/retrieval boundary or semantic admissibility of arbitrary canonical_ir metadata. These checks do not demonstrate a leak in an executed paper experiment; none was run."
+      }
+    },
+    "check_credit": {
+      ".py": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af008_independent_review/check_credit.py",
+        "sha256": "2597ad65004dde92dfc106995129b73dd5726bbbbab500eb6ca57944f6c70a7e"
+      },
+      ".json": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af008_independent_review/check_credit.json",
+        "sha256": "fbec483edced7d8bcc812332c621b1934acb299f7baede84a45727c3a49beaa1"
+      },
+      "observed_results": {
+        "schema": "paper-af008-independent-credit-check/v1",
+        "classification_without_executor": {
+          "arm": "A",
+          "view": "source_withheld",
+          "blind": true,
+          "condition_class": "blind",
+          "blind_prediction_credit": true,
+          "leaked_channels": [],
+          "declared_non_blind_channels": [],
+          "reasons": [],
+          "parser_feature_count": 0
+        },
+        "prediction_credit_without_prediction_or_executor": {
+          "arm": "A",
+          "view": "source_withheld",
+          "blind": true,
+          "condition_class": "blind",
+          "blind_prediction_credit": true,
+          "leaked_channels": [],
+          "declared_non_blind_channels": [],
+          "reasons": [],
+          "parser_feature_count": 0
+        },
+        "provider_invoked": false,
+        "actual_holdout_access_attempted": false
+      }
+    }
+  },
+  "findings": [
+    "Encoded arbitrary canonical_ir auxiliary text survives the original key/literal filter.",
+    "Ordinary same-process synthetic file access remains possible; request construction does not establish a process or retrieval boundary.",
+    "classify_condition and credit_prediction grant blind_prediction_credit=true from arm/view alone, without an executor or prediction.",
+    "These inert counterexamples identify missing enforcement/credit evidence, not an observed leak in an executed paper experiment."
+  ],
+  "recovery_requirements": "This is a new corrective follow-up to AF-008, whose original source contract, completed receipt, snapshots, attempt and native success history remain immutable. Correct the shared AF-008 inference-isolation deliverables, but record all new commands, failures, qualification scope and superseded blind-credit claims in the separate AF-026 receipt and snapshots. Bind that receipt to the preserved AF-008 receipt SHA256 f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0. A source-only filter or declaration is not an executor qualification. This task is not a reopen, replay or refund of AF-008.\n\nBuild separate inference views for source-only, parser-assisted and source-withheld realization arms. Prevent the realizer from recovering raw text through source maps/locators, filesystem, retrieval, parser state or sample memory. Exclude reference/gold decoder fallbacks from blind-prediction credit. Record feature provenance and costs; inspect shared sample IDs and cache keys for memory shortcuts.\n\nCorrective qualification requirements (AF-026 v1): Treat the earlier key/substring filter, configuration declarations and synthetic JSON probes as request-shape checks only. An arm/view name or a caller-supplied clean flag must never grant blind-prediction credit. Bind any such credit to an actual retained prediction and to independently validated evidence for the exact executor, invocation, source/model/configuration identities and applicable channel restrictions; absent, stale or mismatched evidence grants no blind credit.\n\nFor each claimed blind condition, run bounded adversarial synthetic-canary tests through the actual executor and its process/channel boundary for the documented source, source-map/locator, filesystem, retrieval, parser-state, sample-memory, gold/reference-fallback and shared-ID/cache routes. Include encoded/nested auxiliary payloads in otherwise permitted canonical IR; qualify the IR projection and permitted field semantics instead of relying on denylisted names or literal substring matching. Retain literal commands, code/configuration digests, channel setup and observed outcomes. If a channel is available or cannot be qualified, explicitly classify that affected condition as non-blind and exclude it from blind credit. Do not infer a demonstrated paper-experiment leak from the inert reviewer counterexamples, or claim network/pretraining exclusion from a filesystem-only check.\n\nQualify the actual native sample-memory route for both update and evaluation of every main generalization arm, using the existing implementation interfaces and bounded synthetic sentinels. Show that disabled memory prevents reads and sample-indexed writes/retention within that memory route, including shared IDs/cache keys, and retain an enabled-memory diagnostic positive control separately as T1. A JSON use_sample_memory=false assertion alone does not satisfy the memory criterion. If the required native route cannot be exercised, leave that criterion unmet and report the blocker; declaring a main generalization arm non-blind does not waive it. Keep forward, cycle and final scores distinct, disclose actual parser feature producers and charged costs, and exclude reference/gold fallbacks from blind credit. Preserve the original receipt, snapshots and attempt history; retain failures and unavailable routes honestly. Do not claim all criteria met from scaffold or request-filter tests alone. Do not read real heldout bodies/labels for these probes or invent human annotations.",
+  "scope_constraints": [
+    "AF-008 is unchanged. AF-026 retains its three original outstanding criteria and shared scientific deliverables, plus only its own receipt/snapshot reservation; existing implementation path scope retained.",
+    "No blanket path authorization or native policy bypass; necessary implementation edits must remain inside the existing effective task scope, otherwise report the exact blocker.",
+    "Use synthetic canaries only; no hidden final source bodies, labels, sample IDs or salts in public receipts.",
+    "Main-memory qualification remains mandatory. The non-blind alternative applies only as already allowed by criterion1.",
+    "No model benchmark, study result, new human annotation or completed criterion is claimed by this source amendment."
+  ],
+  "native_transition": "Create a distinct AF-026 identity under existing AF-S03/plan/objective; preserve all AF-008 task/source/native success history. Add AF-026 as prerequisite of AF-010, AF-011 and AF-013 before further dependent execution. Fresh claim/attempt identities required; no reopen or replay of AF-008.",
+  "parent_task": "AF-008",
+  "parent_contract_preserved_in_new_task": [
+    "acceptance_criteria",
+    "deliverables",
+    "suggested_code_paths",
+    "implementation_paths"
+  ],
+  "independent_source_receipt_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af008_independent_review/independent_review.json",
+    "sha256": "657c1865d81580eeebbdacfaeb75f30ca0281feac4100684b7ff0cfd354ec22d"
+  }
+}

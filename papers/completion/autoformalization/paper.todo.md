@@ -355,7 +355,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-002, AF-003, AF-007, AF-008
+- Depends on: AF-002, AF-003, AF-007, AF-008, AF-026
 - Goal id: AF-S03
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -392,7 +392,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-004, AF-005, AF-006, AF-007, AF-008, AF-009
+- Depends on: AF-004, AF-005, AF-006, AF-007, AF-008, AF-009, AF-026
 - Goal id: AF-S04
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -467,7 +467,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-012, AF-008
+- Depends on: AF-012, AF-008, AF-026
 - Goal id: AF-S04
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -948,5 +948,50 @@ Acceptance criteria:
 2. Final packet links manuscript, supplement, claim audit and raw evidence with version/checksum identities.
 3. Supervisor marks the empirical objective complete only if required evidence exists; scope-reduced alternatives and pending author choices are explicit.
 4. No claim that authors approved or the paper was submitted/published is made without real evidence.
+
+Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+## AF-026 Qualify executor-bound leakage controls and correct AF-008 blind-credit claims
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: autoformalization
+- Depends on: AF-004, AF-007, AF-008
+- Goal id: AF-S03
+- Parent goal: AF-G000
+- Objective heap: papers/completion/autoformalization/paper.objectives.md
+- Board namespace: vericodegen-2026-autoformalization
+- Bundle: autoformalization/AF-S03
+- Parallel lane: autoformalization
+- Outputs: papers/completion/autoformalization/evaluation/inference_isolation.py, papers/completion/autoformalization/evaluation/test_inference_isolation.py, papers/completion/autoformalization/evidence/leakage_control_report.json, papers/completion/autoformalization/receipts/AF-026.json, papers/completion/autoformalization/receipts/snapshots/AF-026/
+- Predicted files: papers/completion/autoformalization/evaluation/inference_isolation.py, papers/completion/autoformalization/evaluation/test_inference_isolation.py, papers/completion/autoformalization/evidence/leakage_control_report.json, papers/completion/autoformalization/receipts/AF-026.json, papers/completion/autoformalization/receipts/snapshots/AF-026/
+- Allowed paths: external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py, external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-026
+- Acceptance: Adversarial attempts to recover withheld source/gold through each documented channel are rejected or the affected condition is explicitly non-blind.; Main generalization arms disable sample-indexed memory for update and evaluation.; Forward, cycle and final reconstruction scores remain distinct and parser-assisted features are disclosed.
+- Paper evidence: p. 3, §3.2, lines 104–115; p. 18, lines 574–579; p. 20, lines 628–645; Independent AF-008 scope and credit checks: arbitrary encoded IR extras survive request filtering, and arm/view declarations alone grant blind credit without a prediction or executor; inert probes only, no demonstrated paper-experiment leak.
+- Reuse candidates: external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py, external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py, external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py
+- Receipt: papers/completion/autoformalization/receipts/AF-026.json
+
+This is a new corrective follow-up to AF-008, whose original source contract, completed receipt, snapshots, attempt and native success history remain immutable. Correct the shared AF-008 inference-isolation deliverables, but record all new commands, failures, qualification scope and superseded blind-credit claims in the separate AF-026 receipt and snapshots. Bind that receipt to the preserved AF-008 receipt SHA256 f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0. A source-only filter or declaration is not an executor qualification. This task is not a reopen, replay or refund of AF-008.
+
+Build separate inference views for source-only, parser-assisted and source-withheld realization arms. Prevent the realizer from recovering raw text through source maps/locators, filesystem, retrieval, parser state or sample memory. Exclude reference/gold decoder fallbacks from blind-prediction credit. Record feature provenance and costs; inspect shared sample IDs and cache keys for memory shortcuts.
+
+Corrective qualification requirements (AF-026 v1): Treat the earlier key/substring filter, configuration declarations and synthetic JSON probes as request-shape checks only. An arm/view name or a caller-supplied clean flag must never grant blind-prediction credit. Bind any such credit to an actual retained prediction and to independently validated evidence for the exact executor, invocation, source/model/configuration identities and applicable channel restrictions; absent, stale or mismatched evidence grants no blind credit.
+
+For each claimed blind condition, run bounded adversarial synthetic-canary tests through the actual executor and its process/channel boundary for the documented source, source-map/locator, filesystem, retrieval, parser-state, sample-memory, gold/reference-fallback and shared-ID/cache routes. Include encoded/nested auxiliary payloads in otherwise permitted canonical IR; qualify the IR projection and permitted field semantics instead of relying on denylisted names or literal substring matching. Retain literal commands, code/configuration digests, channel setup and observed outcomes. If a channel is available or cannot be qualified, explicitly classify that affected condition as non-blind and exclude it from blind credit. Do not infer a demonstrated paper-experiment leak from the inert reviewer counterexamples, or claim network/pretraining exclusion from a filesystem-only check.
+
+Qualify the actual native sample-memory route for both update and evaluation of every main generalization arm, using the existing implementation interfaces and bounded synthetic sentinels. Show that disabled memory prevents reads and sample-indexed writes/retention within that memory route, including shared IDs/cache keys, and retain an enabled-memory diagnostic positive control separately as T1. A JSON use_sample_memory=false assertion alone does not satisfy the memory criterion. If the required native route cannot be exercised, leave that criterion unmet and report the blocker; declaring a main generalization arm non-blind does not waive it. Keep forward, cycle and final scores distinct, disclose actual parser feature producers and charged costs, and exclude reference/gold fallbacks from blind credit. Preserve the original receipt, snapshots and attempt history; retain failures and unavailable routes honestly. Do not claim all criteria met from scaffold or request-filter tests alone. Do not read real heldout bodies/labels for these probes or invent human annotations.
+
+Acceptance criteria:
+
+1. Adversarial attempts to recover withheld source/gold through each documented channel are rejected or the affected condition is explicitly non-blind.
+2. Main generalization arms disable sample-indexed memory for update and evaluation.
+3. Forward, cycle and final reconstruction scores remain distinct and parser-assisted features are disclosed.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
