@@ -1,0 +1,25 @@
+{
+  "run": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-017/run_ablations.py",
+      "run",
+      "--out",
+      "papers/completion/law_to_action/results/ablations",
+      "--snapshot",
+      "papers/completion/law_to_action/receipts/snapshots/LA-017"
+    ],
+    "completed_at": "2026-09-12T18:16:35.821781Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T18:16:34.123833Z"
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-017/validate_ablations.py"
+    ],
+    "completed_at": "2026-09-12T18:16:35.863658Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T18:16:35.822927Z"
+  }
+}
