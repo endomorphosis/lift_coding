@@ -1,0 +1,14 @@
+{
+  "schema": "paper-ns-pilot-A-worker-profile/v1",
+  "host_package_sha256": "243df6b66dd84fff5c825c31d4976b008660c697bf56a4a03cc3dea80f31b1ea",
+  "client_sha256": "da488a896c59c9e8fd03303ad9fb2bd81c6c1f9148e8d0782f6e5fd5baea5454",
+  "planned_cells": 48,
+  "enabled_cells": 4,
+  "arm": "A",
+  "cache": "local_cold",
+  "record_kind": "pilot",
+  "final_admitted": false,
+  "offer_drop_relative": "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/host_handoff/offer_drop.json",
+  "offer_drop_sha256": null,
+  "scientific_activation_review_sha256": null
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "ns028-deferred-worker-integration/v1",
+  "base_head": "a9da742f98fab8ae668e33d2c8a222833d19b101",
+  "files": {
+    "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": {
+      "before_sha256": "1314986d2798253ca4ec23da067acb68a2b13dcc4b1daee9cb1426fc30697fe3",
+      "sha256": "07e500d8a975608bc4353ba0d23ee63b712712aeae2b30b5894114b50ce704bb",
+      "candidate": "integration_candidates/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py"
+    },
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": {
+      "before_sha256": "6bc348d5f56ac32ea68704a10a478293786cf53da3a8371fbb534d75cd4df509",
+      "sha256": "0d62bd4bd9460374c96700c822950b2868609b447e118a17375971f0d4c70017",
+      "candidate": "integration_candidates/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py"
+    },
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": {
+      "before_sha256": "5e80572e51e0609d06fd1842694da5a0753ebdd66aa6c27bb3c50eca9abab158",
+      "sha256": "0f80abc71d8d1b450cd92bb9ac6c7f09cb6a9f96099588fb81d743df84275ead",
+      "candidate": "integration_candidates/papers/completion/neurosymbolic_supervision/experiments/score_runs.py"
+    }
+  },
+  "adapter_sha256": "c15743b717eedf0600d6f9b7dd3aea814a3248cc78590b8203c57b3e1d8d3a17",
+  "client_sha256": "da488a896c59c9e8fd03303ad9fb2bd81c6c1f9148e8d0782f6e5fd5baea5454",
+  "patch_sha256": "57faf7a65334528d59bb9ff064570887f9bcce6f027d927db462047c863e819a",
+  "apply_now": false,
+  "reason": "NS027 owns these three existing experiment files; integrate only after its committed result, preserving any new changes. Stale preimages must refuse."
+}
