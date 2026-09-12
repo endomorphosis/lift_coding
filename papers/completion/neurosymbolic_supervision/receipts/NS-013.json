@@ -1,0 +1,141 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-013",
+  "status": "complete",
+  "completed_at": "2026-09-12T03:31:45+00:00",
+  "scope": "Sealed-profile qualification of one integrated Table 6 guard-before-write cycle: authorized pre-state, obligation, counterexample, admitted plan/route, IsolatedPatchWorktree repair, independent pytest, TestProofCache reuse, complete requirement-manifest publication, and rejected/incomplete/simulated non-completion. Not a live A–D experiment, not a Groth16 proof of pytest execution, and not a live historical upstream repair.",
+  "source_versions": {
+    "workspace_git_head": "e75381bfe9f7f3a9ec8c4fcd08e38adbaca5bea1",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "9.0.3",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "classification": "NS-013 composes the NS-007 IsolatedPatchWorktree, NS-008 PreImplementationKernel, NS-010 TestProofCache, and NS-012 IncrementalProofSealer surfaces into one frozen guard-before-write witness. Kit proof_seal_store and datasets incremental-sealing evidence remain shimmed as in NS-012."
+    },
+    "caller": {
+      "worktree": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/worktree.py",
+      "worktree_sha256": "0d85d426eb4ffc6dd8dae09857439bc96950a46aa645dd05f734abd27b12ba1d",
+      "routing": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/routing.py",
+      "routing_sha256": "deedfa9a128ff430154a794337b9981f7e256f929df27ca1764027620f02a951",
+      "pre_implementation_kernel": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+      "pre_implementation_kernel_sha256": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+      "analytical_close_executor": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/analytical_close_executor.py",
+      "analytical_close_executor_sha256": "81660c5da9d3498912746c16c338ea14fc70afbbf0ada932ad5f24af1f5fb85f",
+      "sealer": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "sealer_sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+      "test_proof_cache": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+      "test_proof_cache_sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+      "authorization_logic": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+      "authorization_logic_sha256": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_witness.json": "f638b5764f45b3a7b9278838887e2d49f2cd5f437db6b2aad7a3f9fe4791a756",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_trace.jsonl": "5613f0742f4e1cbaa272072afbe07365d802bf7e59187f0d0c2165972fbcfa97",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_case_study.md": "dbc02e0aaa63c6ff439ab7bebac3eedb05cccca50efd0a8d2d5d226a6c3adc1f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/run_end_to_end_witness.py": "6189cdc0e66235a72937b268f6b8dc6dd8225ba4a1ccc35c6b0c80fe3c0319ca",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/validate_end_to_end_witness.py": "74c4b4df9c3ac905e14f5b8503182e4cb15519e329076c1e04c72d397de2d179",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/compat_shims.py": "0fc7bf70d59132a678c71293fe876cad925a863d5f857c789e74afd8c684241d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/fixture_recipe.json": "8f75c7297ae753ea1826334968cd5819271a44a6bb436120326c996cf7317853",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/end-to-end-qualification.log": "59664cf6429b02fc9a1cdb7d047b05dfb763707c6c472bc095aea04fcaa8057e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/checkpoints/start.json": "51f01953dba9440925a311ed1ffbda97bf671140623843b8e2c2d6a200fe78a5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/checkpoints/outputs.json": "87e44aa220edfdaaf01046e6c0557e3e0c456b448f36ca6ed5202b4fc6e9d97a"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/end_to_end_witness.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_witness.json",
+    "papers/completion/neurosymbolic_supervision/qualification/end_to_end_trace.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_trace.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/end_to_end_case_study.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_case_study.md"
+  },
+  "criteria": [
+    {
+      "criterion": "A genuine task progresses from authorized input to independently accepted patch and matching published post-root.",
+      "status": "met",
+      "explanation": "Frozen task baguqeerayjn2552ymrf3qtqjbvfe43q5yequcbhmowkmaazqaabyo5xuntxq started from authorized pre-tree ec8d7bceec58cd539744e94adcf6dd2c782408db / commit cf4d4b77d0dc05c5983b62370b75330f84cbe7e8 and policy sha256:f711f00ed99912349c04196f2348905f2c299cb72fccdef83b03154cc0339f39. IsolatedPatchWorktree applied patch sha256:96d5010b1879eff37c69e754c3687a88988be3518bc6296b48fa928d16077a53 without mutating the caller root. Independent pytest on the fenced worktree exited 0 (4 passed). IncrementalProofSealer published complete-manifest seal sha256:1776714283057d562d41664641edbdaf36dd1fccae7b77d872368a630a5c7b73 with pointer matching post-tree 9486efc2ed65852610a139a37e592e6d32c24dba.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_witness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_trace.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/run_end_to_end_witness.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/end-to-end-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Every step links current source/task/plan/obligation/evidence IDs; relevant symbolic/context evidence visibly changes the route or admission decision.",
+      "status": "met",
+      "explanation": "All twelve trace steps bind source sha256:8d77443535dacc431c61c298c343592e9407960b8229195ed587baf2116331fb, task baguqeerayjn2552ymrf3qtqjbvfe43q5yequcbhmowkmaazqaabyo5xuntxq, plan baguqeera3z3xeu3uo77qorfix7vbjr2vyvysrtmg6wryhhtmpckg5egqsjsq, and obligation baguqeera3w3hf2wk2sdlkm5jxw2m5ms3uy4xyrbxuyeadkwejyudiuyecj7q. Binding exact source confidence and a covering proof changed route_model from medium_model (heuristic, proofs_absent) to deterministic_only. PreImplementationKernel admitted analytical_unique_mapping for the unique candidate and denied residual dispatch without typed receipts (missing_typed_resolvable_authority_receipts).",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_witness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_trace.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_case_study.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/validate_end_to_end_witness.py"
+      ]
+    },
+    {
+      "criterion": "The valid permitted action still works while the specified denied-effect violation is repaired/rejected.",
+      "status": "met",
+      "explanation": "After the guard-before-write repair, alice/records.write still persisted and mallory's denied request left records and audit unchanged (denied_write_persisted=false, permitted_write_works=true, finalize still ran). The minimally altered invalid patch kept write-before-check; denied_write_persisted remained true and independent pytest still failed test_denied_no_write and test_exception_finalization. ReferenceAuthorizationEvaluator permitted alice EXECUTE_TASK and denied mallory on the same task/lease/path binding.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_witness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_trace.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_case_study.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/fixture_recipe.json"
+      ]
+    },
+    {
+      "criterion": "A rejected or incomplete path cannot report completion, and simulation-only runs remain labeled qualification rather than live success.",
+      "status": "met",
+      "explanation": "The invalid patch did not report completion. An empty or incomplete requirement manifest returned incomplete_manifest with sealed=false. A simulated required unit returned simulated_only and was not published. Residual invocation without typed receipts stayed defer_capability / provider_authorized=false. The witness sets live_ad_experiment=false, qualification_not_live_ad=true, and simulation_counted_as_success=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_witness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_trace.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/qualification/end_to_end_case_study.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/end-to-end-qualification.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns013-YEhMI9",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns013-YEhMI9/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns013-YEhMI9/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns013-YEhMI9/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns013-YEhMI9/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/validate_end_to_end_witness.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/validate_end_to_end_witness.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/end-to-end-qualification.log",
+      "started_at": "2026-09-12T03:31:36+00:00",
+      "finished_at": "2026-09-12T03:31:37+00:00",
+      "execution_kind": "sealed-profile live composition check: routing change, denied-write observation, incomplete-manifest rejection, simulated-unit non-publication; not a live A–D experiment"
+    }
+  ],
+  "limitations": {
+    "live_ad_experiment": false,
+    "simulation_counted_as_success": false,
+    "native_groth16_pytest_proof": "not claimed; units are integrity-verified local receipts",
+    "kit_proof_seal_store": "absent from the pinned kit tree; NS-013 reuses the NS-012 labeled hermetic WAL/CAS contract shim so IncrementalProofSealer can run. The shim is not a released kit pin.",
+    "datasets_incremental_sealing_evidence": "absent from the pinned datasets tree; a closed vocabulary shim supplies SealStatus/ProofMode/terminal-status dataclasses",
+    "federation_network_partition": "unavailable; not tested and not simulated as success",
+    "libp2p_mcp_transport": "unavailable",
+    "production_model_identity": "unavailable; deterministic unique mapping was used instead of a residual provider",
+    "claim_boundary": "This receipt qualifies one integrated guard-before-write cycle on the located accelerate callers. It is not a matched A–D outcome, not federation, and not a Groth16 proof of pytest execution."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}

@@ -1,0 +1,236 @@
+{
+  "capability": {
+    "anyio": true,
+    "binaries": {
+      "cvc5": null,
+      "groth16": null,
+      "z3": null
+    },
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "git": "/usr/bin/git",
+    "interpreter": "/usr/bin/python3.12",
+    "modules": {
+      "analytical_close_executor": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/analytical_close_executor.py",
+      "authorization_logic": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+      "compat_shims": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/compat_shims.py",
+      "harness": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
+      "pre_implementation_kernel": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+      "routing": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/routing.py",
+      "sealer": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "test_execution_contracts": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py",
+      "test_proof_cache": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+      "work_loop": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/work_loop.py",
+      "worktree": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/worktree.py"
+    },
+    "path": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/",
+    "public_semantic_state_import": {
+      "error": null,
+      "loaded": true
+    },
+    "pytest": "9.0.3",
+    "python_version": "3.12.3",
+    "shim_report": {
+      "datasets_evidence_shim": true,
+      "datasets_native_present": false,
+      "kit_native_present": false,
+      "kit_proof_seal_store_shim": true,
+      "schema": "ns-013/qualification-local-contract-shim@1"
+    },
+    "source_hashes": {
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py": "9702398656f4bff098049167f30f1e54ef1c892c2d1c021b2cde5a8c79ab0e69",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "ca8d05ebcbbb154d5bcf59a1684eb67db59829fa5b1ba80c943051502abf33b9",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/routing.py": "deedfa9a128ff430154a794337b9981f7e256f929df27ca1764027620f02a951",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/work_loop.py": "e70ef11730718a597560233bc673612f9b2ffda11aa8418d6e0a6506c875ffdb",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/worktree.py": "0d85d426eb4ffc6dd8dae09857439bc96950a46aa645dd05f734abd27b12ba1d",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/analytical_close_executor.py": "81660c5da9d3498912746c16c338ea14fc70afbbf0ada932ad5f24af1f5fb85f",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+      "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/compat_shims.py": "0fc7bf70d59132a678c71293fe876cad925a863d5f857c789e74afd8c684241d"
+    },
+    "workspace_git_head": "e75381bfe9f7f3a9ec8c4fcd08e38adbaca5bea1"
+  },
+  "claim_boundary": "This witness qualifies one integrated guard-before-write cycle on the located accelerate callers. It is not a matched A-D outcome, not federation, and not a Groth16 proof of pytest execution.",
+  "counterexample": {
+    "denied_write_persisted": true,
+    "failed": [
+      "FAILED",
+      "FAILED"
+    ],
+    "id": "baguqeeralbumk3xpbnoqtrrejcfw4b3ulfwtcmire4u6t2dtpk5ib6zkre7q",
+    "pytest_exit": 1
+  },
+  "generated_at": "2026-09-12T03:31:05+00:00",
+  "ids": {
+    "authority_receipt_cids": {
+      "doctor": "baguqeerautnm5gbg2f6mrvjwpmaniljnpblyzgiaf52dzifkilw5hzw7t3iq",
+      "logic": "baguqeerak2hdrryjfemdvsgftt35wu6dsdozdor4yr6cpp66zadf57kqntca",
+      "obligation": "baguqeeraaff2hf3gw4ir2jc5tat65qmxwmct2faclkgw44ziqvyjcjcxvtpq",
+      "planner": "baguqeera3z3xeu3uo77qorfix7vbjr2vyvysrtmg6wryhhtmpckg5egqsjsq",
+      "repair": "baguqeeraxblmrchzk6jggxargtbty5uuljo5kyftlzrwpr4c2an4scah3qeq"
+    },
+    "candidate_id": "baguqeera6qxkjhdfqbj2kzcdcp6jaekjhmxwtcjh4cd4zs7ocneoafmiv64a",
+    "counterexample_id": "baguqeeralbumk3xpbnoqtrrejcfw4b3ulfwtcmire4u6t2dtpk5ib6zkre7q",
+    "doctor_cid": "baguqeerautnm5gbg2f6mrvjwpmaniljnpblyzgiaf52dzifkilw5hzw7t3iq",
+    "environment_cid": "sha256:e4bc636d22e14b8fd6cc116b3cd5f288481df814cb5a9b5efb1cb5d2542f8580",
+    "evidence_ids": [
+      "baguqeera3w3hf2wk2sdlkm5jxw2m5ms3uy4xyrbxuyeadkwejyudiuyecj7q",
+      "baguqeeralbumk3xpbnoqtrrejcfw4b3ulfwtcmire4u6t2dtpk5ib6zkre7q",
+      "sha256:8d77443535dacc431c61c298c343592e9407960b8229195ed587baf2116331fb",
+      "sha256:96d5010b1879eff37c69e754c3687a88988be3518bc6296b48fa928d16077a53",
+      "sha256:1776714283057d562d41664641edbdaf36dd1fccae7b77d872368a630a5c7b73"
+    ],
+    "forest_cid": "baguqeeran7bm5sjyop5qpxpuu7yundri3rvmqci4mqlomdc2llh3qprvropq",
+    "obligation_id": "baguqeera3w3hf2wk2sdlkm5jxw2m5ms3uy4xyrbxuyeadkwejyudiuyecj7q",
+    "patch_digest": "sha256:96d5010b1879eff37c69e754c3687a88988be3518bc6296b48fa928d16077a53",
+    "plan_cid": "baguqeera3z3xeu3uo77qorfix7vbjr2vyvysrtmg6wryhhtmpckg5egqsjsq",
+    "policy_cid": "sha256:f711f00ed99912349c04196f2348905f2c299cb72fccdef83b03154cc0339f39",
+    "post_tree": "9486efc2ed65852610a139a37e592e6d32c24dba",
+    "pre_commit": "cf4d4b77d0dc05c5983b62370b75330f84cbe7e8",
+    "pre_tree": "ec8d7bceec58cd539744e94adcf6dd2c782408db",
+    "source_id": "sha256:8d77443535dacc431c61c298c343592e9407960b8229195ed587baf2116331fb",
+    "task_cid": "baguqeerayjn2552ymrf3qtqjbvfe43q5yequcbhmowkmaazqaabyo5xuntxq"
+  },
+  "invalid_path": {
+    "denied_write_persisted": true,
+    "empty_manifest_status": "incomplete_manifest",
+    "incomplete_completion_reported": false,
+    "incomplete_status": "incomplete_manifest",
+    "reported_completion": false,
+    "simulated_counted_as_success": false,
+    "simulated_status": "simulated_only"
+  },
+  "live_ad_experiment": false,
+  "policy_id": "ns-013-end-to-end-qualification-v1",
+  "publication": {
+    "generation": 0,
+    "manifest_root_cid": "sha256:eae100b04db3b4969f33a6e9ce91f43c2e825ffa7941dc15220895a3ab608964",
+    "parent_seal_cid": "ips.forest.genesis@1",
+    "pointer_seal_cid": "sha256:1776714283057d562d41664641edbdaf36dd1fccae7b77d872368a630a5c7b73",
+    "post_tree_matches_publication_subject": true,
+    "published": true,
+    "reason": "sealed",
+    "repository_proof_root": "sha256:761b84c156352a13268a1f5d2434caa41d10a67b72d7828e5932a80eb33fb958",
+    "required_unit_ids": [
+      "unit/source-integrity",
+      "unit/test-denied-no-write",
+      "unit/test-permitted-write",
+      "unit/test-exception-finalization",
+      "unit/test-api-scope"
+    ],
+    "seal_cid": "sha256:1776714283057d562d41664641edbdaf36dd1fccae7b77d872368a630a5c7b73",
+    "status": "sealed_full"
+  },
+  "qualification_not_live_ad": true,
+  "reuse": {
+    "collection_seed_not_skip_authority": true,
+    "execution_key_id": "baguqeera2ikjlnrpxquppfgorhghr6zhjvhnv7smueikbkwxf4d5oebjbmka",
+    "locator_id": "baguqeerahaltv3ihy3nqz7h7vj4prsnab4mf73p5xbl3qvefc2mtwpjnqfva",
+    "lookup_is_skip": true,
+    "lookup_reason": "proof_cache_hit",
+    "lookup_status": "hit",
+    "policy_change_is_skip": false,
+    "policy_change_reason": "policy_mismatch",
+    "receipt_id": "baguqeera5i4y27hpufzwx5mviq4p2xe3logy4va3re4fwz464me6dep4exuq"
+  },
+  "route_change": {
+    "after": {
+      "inputs": {
+        "available_proofs": 1,
+        "context_tokens": 800,
+        "dependency_cone_size": 2,
+        "lowest_confidence": "exact",
+        "prior_repair_failures": 0,
+        "prior_route_failed": false,
+        "risk": "low",
+        "unresolved_obligations": 1
+      },
+      "reason_codes": [
+        "confidence_exact",
+        "deterministic_only",
+        "proofs_cover_or_absent_obligations",
+        "risk_low"
+      ],
+      "route": "deterministic_only"
+    },
+    "before": {
+      "inputs": {
+        "available_proofs": 0,
+        "context_tokens": 800,
+        "dependency_cone_size": 4,
+        "lowest_confidence": "heuristic",
+        "prior_repair_failures": 0,
+        "prior_route_failed": false,
+        "risk": "medium",
+        "unresolved_obligations": 1
+      },
+      "reason_codes": [
+        "confidence_heuristic",
+        "context_within_small",
+        "dependency_cone_within_small",
+        "medium_model",
+        "proofs_absent",
+        "risk_medium",
+        "score_medium",
+        "unresolved_obligations_present"
+      ],
+      "route": "medium_model"
+    },
+    "evidence_that_changed_route": [
+      "lowest_confidence:heuristic->exact after source CID binding",
+      "available_proofs:0->1 covering obligation_id",
+      "risk:medium->low after exact authorize/write_record edges"
+    ],
+    "kernel_invalid": "missing_typed_resolvable_authority_receipts",
+    "kernel_valid": "analytical_unique_mapping"
+  },
+  "schema": "neurosymbolic-supervision/end-to-end-witness@1",
+  "simulation_counted_as_success": false,
+  "steps_completed": [
+    "capture_state",
+    "state_obligation",
+    "obtain_counterexample",
+    "plan_bounded_repair",
+    "choose_reasoning_route",
+    "validate_candidate",
+    "reuse_narrowly",
+    "seal_and_publish",
+    "learn_without_self_approval",
+    "invalid_denied_effect_rejected",
+    "incomplete_cannot_complete",
+    "simulation_labeled_qualification"
+  ],
+  "table6_labels_replaced": true,
+  "task": {
+    "counts_as_live_repair": false,
+    "family": "guard-before-write",
+    "historical_or_frozen": "frozen_genuine_qualification_task",
+    "identity": "baguqeerayjn2552ymrf3qtqjbvfe43q5yequcbhmowkmaazqaabyo5xuntxq",
+    "source_path": "pkg/records.py",
+    "specification": "denied(request, policy) implies persistent_state_after = persistent_state_before"
+  },
+  "task_id": "NS-013",
+  "valid_path": {
+    "analytical_pytest_passed": true,
+    "applied": true,
+    "authorization_surface": {
+      "deny_reason": "no_applicable_grant",
+      "deny_verdict": "deny",
+      "permit_reason": "allowed",
+      "permit_verdict": "permit"
+    },
+    "caller_root_unchanged": true,
+    "denied_write_persisted": false,
+    "finalized": true,
+    "lease_id": "f8f1fb7930d000c5fd697a9b952b340f3f48ff37",
+    "permitted_write_works": true,
+    "post_tree": "9486efc2ed65852610a139a37e592e6d32c24dba",
+    "pre_tree": "ec8d7bceec58cd539744e94adcf6dd2c782408db",
+    "pytest_exit": 0
+  }
+}
