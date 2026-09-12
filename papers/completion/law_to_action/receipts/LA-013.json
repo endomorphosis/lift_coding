@@ -1,0 +1,159 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-013",
+  "status": "complete",
+  "completed_at": "2026-09-12T03:15:37.453501+00:00",
+  "completion_mode": "Identical authorized and rejected ENFORCE requests were exercised through real stdio, loopback HTTP, and loopback libp2p processes. Local-process, local-network, and in-process modes are labeled distinctly. In-process framing is not libp2p network evidence. Public CIDv1/raw/sha2-256 integrity was checked separately from availability; no IPFS daemon was present and private preimages were not published. This is qualification, not a scored A3/A4 run.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/configuration.json": "85ef9444be601d9c08c5f3205fc15b09bb4b0fae9c3da16ebb1443ddb6cb04b5",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/parity.md": "621a04422038eceb6513621b5a9ad06c55d82d1149ee48059fc83e5871e82f2d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/raw.jsonl": "98ddbb85321b6109fc16e403163e917f01667e2baae1116134bcd8ef3cfcee3a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/probe/sealed-environment.json": "a75c4ec335df8c5a323a9ed2e061f43df75ff2f54d458481b6a0ad15cc6cace3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/probe/summary.json": "c5e86a804ee3eafe8c664516fab2de6ef1d8445c26eed1ee70b0daa8da989ad6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/qualify_transport.py": "82ba5b126a2c45371a3b46d691fb04f61713e88dbdc4d97f5fa8c97c8dd5c091",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/cases.json": "125c555cfe4de1f6509bd99c6ba8d5775eff8c99269e16b8ee641b919b0c9c4e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/http-identity.json": "96735d3f119451afd6f931ccb76ae6261e81a00771575c65cebebe11d473fa98",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/identities.json": "bc822f09c60d322f485b817fb9919288b17aed1b177481e9fca1c4c8871e8a86",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/libp2p-identity.json": "014e5b5ad0ae095f3d03630806dd0a71876efaa82ea688649b20c8f795cf496d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/private-commitment.json": "6ea4773eec0b8941d3f942edac642e9f8c81c356b4e5d581e1952fb53eabeb1b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/public-artifact.json": "7adb2c2f2ef2e75467d8636424465fc04be5afe316d90a75786a4d6245612900",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/validate_transport.py": "8c90f5a7878d80edc47b4d8e906a5ae25591a7c11043074083c766bb17805cc0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/commands.json": "bf5e9fc40339fd8290f69dbae03155ab17b7c8f05ba8a4d4ad65972a43486565",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/qualify.stderr.log": "d48f2d5be3067f8d035f8ddc9953ad768dd46489a2f04b95e41cb8ae0101f3d6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/qualify.stdout.log": "f54b49a782fee3c993c92d9e4c587b356816b3501a495767f8ba0a7f430aa06e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/validate.stdout.log": "d6532abbb13f88448abcc98f0c961b30a9bee444759b02fcd148df8c8cb59149"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/results/transport/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/raw.jsonl",
+    "papers/completion/law_to_action/results/transport/configuration.json": "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/configuration.json",
+    "papers/completion/law_to_action/results/transport/parity.md": "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/parity.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Actual network versus local/in-process modes are unambiguous in records.",
+      "status": "met",
+      "explanation": "stdio is recorded as local-process with actual_network=false over anonymous pipes. HTTP and libp2p bind 127.0.0.1 and are recorded as local-network with wan=false. libp2p used real Peer IDs, /mcp+p2p/1.0.0, Noise, Yamux, and TCP loopback multiaddrs. Direct Python calls and kit handle_stream_message are in-process with in_parity_claim=false. Kit serve_p2p does not listen and is not reported as network evidence.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/configuration.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/parity.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/libp2p-identity.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/identities.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/probe/sealed-environment.json"
+      ]
+    },
+    {
+      "criterion": "Semantic decisions and effects agree for identical requests on each claimed qualified transport.",
+      "status": "met",
+      "explanation": "The same tools/call envelopes for allow, deny, unknown, wrong-audience, and replay were sent to stdio, HTTP, and libp2p workers wrapping SupervisorPreInvocationEnforcement.authorize_and_delegate. Decisions and observed effect counts matched: allow produced one effect; deny/unknown/wrong-audience/replay produced zero. Invalid jsonrpc was rejected on each transport without handler effects. 18/18 selected parity cases passed.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/parity.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/cases.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/probe/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Artifact integrity and availability are reported separately; no private evidence is publicly published as a side effect.",
+      "status": "met",
+      "explanation": "Public payload bafkreifc7gtlqbt76e2k3ybugfm62vknho5dmdqd72nnxtrfernw2r3sl4 was retrieved over stdio, HTTP, and libp2p and rehashed under CIDv1/raw/sha2-256/base32 (integrity true) with availability local-only. HTTP GET of the public CID succeeded locally; the private CID returned 404. No ipfs/kubo daemon was present. Private preimage bytes were never written to declared outputs; private_bytes_published is false.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/configuration.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/outputs/results/transport/parity.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/public-artifact.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/traces/private-commitment.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/probe/sealed-environment.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/qualify_transport.py"
+      ],
+      "completed_at": "2026-09-12T03:15:28.060806+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la013-KuR3eE"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/qualify.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-013/qualify_transport.py",
+      "started_at": "2026-09-12T03:15:25.000000+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-013/validate_transport.py"
+      ],
+      "completed_at": "2026-09-12T03:15:37.453501+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la013-validate"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-013/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-013/validate_transport.py",
+      "started_at": "2026-09-12T03:15:37.398500+00:00"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "libp2p": "0.7.0",
+    "libp2p_origin": "/opt/ipfs-validation-site-packages/libp2p/__init__.py",
+    "trio": "0.33.0",
+    "cryptography": "49.0.0",
+    "cryptography_origin": "/opt/ipfs-validation-site-packages/cryptography/__init__.py",
+    "anyio": true,
+    "hypercorn": true,
+    "multiformats": true,
+    "ipfs_daemon": false,
+    "ipfs_binary": null,
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "empirical_benchmark_result": false,
+    "selected_route": "SupervisorPreInvocationEnforcement.authorize_and_delegate",
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "server.py_sha256": "ea9e9906daedc3b38dbc1c787f0ec0b535e09efadb232ca8a5cf95cd742189db",
+    "p2p_transport.py_sha256": "74f4f1eb34c76fba96996fe65dca100fcf8f551e4f293fa65a4bf3c93315f14a",
+    "artifacts.py_sha256": "b9921b8e5fff0dfee4318b54095f23b5f917fab77594dd0c5cfd64baaaeff3e3",
+    "mcp_p2p.py_sha256": "691076cf779a84c63cf31c5e1e7b5bbc449ed3fab68d2676a01952e4369f454d",
+    "libp2p_runtime.py_sha256": "06f9b87278f456a1a85ef30e08ccb4a5e4013515addff27e98a1d20f33aa1fe6",
+    "effects.py_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "public_cid": "bafkreifc7gtlqbt76e2k3ybugfm62vknho5dmdqd72nnxtrfernw2r3sl4",
+    "private_bytes_published": false,
+    "future_gates": [
+      "WAN/DHT/mDNS/relay/holepunch libp2p remains unqualified.",
+      "No kubo/ipfs daemon was present; public CID availability is local-only.",
+      "Kit serve_p2p does not listen and is not a network experiment.",
+      "A3/A4 scored arms remain unrun."
+    ]
+  }
+}

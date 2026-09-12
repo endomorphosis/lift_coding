@@ -1,0 +1,257 @@
+{
+  "authoritative_environment": {
+    "home_is_validation_prefix": true,
+    "home_prefix": "ipfs-accelerate-validation-home-",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_version": "3.12.3",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages"
+  },
+  "content_addressing": {
+    "codec": "raw",
+    "hash": "sha2-256",
+    "integrity_versus_availability": "Integrity is a CID rehash of held bytes. Availability is whether a daemon, pin, or peer could serve those bytes. They are recorded as separate fields.",
+    "ipfs_daemon": {
+      "attempted": true,
+      "available": false,
+      "binary": null,
+      "endpoint": "/ip4/127.0.0.1/tcp/5001/http",
+      "error": "ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5001): Max retries exceeded with url: /api/v0/version?stream-channels=true (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=5001): Failed to establish a new connection: [Errno 111] Connection refused\"))",
+      "error_type": "ConnectionError",
+      "kubo_binary": null
+    },
+    "multibase": "base32",
+    "private_artifact_cid": "bafkreify5eh7qh3w353olic4em7paq7epmc4w5ruvvkezvn6kcpf2qgs5q",
+    "private_availability": "not-published",
+    "private_bytes_published": false,
+    "private_bytes_sha256": "b8e90ff81f76df76e5a05c233ef043e47b05cb7634ad544cd5be509e5d40d2ec",
+    "profile": "CIDv1/raw/sha2-256/base32",
+    "public_artifact_cid": "bafkreifc7gtlqbt76e2k3ybugfm62vknho5dmdqd72nnxtrfernw2r3sl4",
+    "public_availability": "local-only",
+    "public_integrity_checked": true
+  },
+  "empirical_benchmark_result": false,
+  "modules": {
+    "anyio": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/anyio/__init__.py",
+      "version": null
+    },
+    "hypercorn": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/hypercorn/__init__.py",
+      "version": null
+    },
+    "ipfshttpclient": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/ipfshttpclient/__init__.py",
+      "version": "0.8.0a2"
+    },
+    "libp2p": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/libp2p/__init__.py",
+      "version": "0.7.0"
+    },
+    "multiaddr": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/multiaddr/__init__.py",
+      "version": "0.2.0"
+    },
+    "multiformats": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/multiformats/__init__.py",
+      "version": "0.3.1"
+    },
+    "trio": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/trio/__init__.py",
+      "version": "0.33.0"
+    }
+  },
+  "narrowed_claims": [
+    "Loopback 127.0.0.1 HTTP and libp2p are local-network tests, not WAN, DHT, mDNS, relay, or adversarial transport qualification.",
+    "stdio is a local process pipe, not a network path.",
+    "In-process framing and kit serve_p2p's sleep_forever host are not libp2p network evidence.",
+    "No IPFS daemon or kubo executable was present; public CID availability is local-only.",
+    "Private evidence preimages were not written to declared outputs and were not published.",
+    "Kit MCPServer HTTP, if reached, is AuthorizationGate, not the selected ENFORCE safety claim.",
+    "This is qualification, not a scored A3/A4 benchmark."
+  ],
+  "schema": "law-to-action-transport-configuration/v1",
+  "selected_route": {
+    "handler": "BoundedExportHandler.export_json",
+    "id": "supervisor_pre_invocation_enforce",
+    "in_safety_claim": true,
+    "mode": "enforce",
+    "symbol": "SupervisorPreInvocationEnforcement.authorize_and_delegate"
+  },
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+    },
+    "artifacts.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/artifacts.py",
+      "sha256": "b9921b8e5fff0dfee4318b54095f23b5f917fab77594dd0c5cfd64baaaeff3e3"
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+    },
+    "libp2p_runtime.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p/libp2p_runtime.py",
+      "sha256": "06f9b87278f456a1a85ef30e08ccb4a5e4013515addff27e98a1d20f33aa1fe6"
+    },
+    "mcp_p2p.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/mcp_p2p.py",
+      "sha256": "691076cf779a84c63cf31c5e1e7b5bbc449ed3fab68d2676a01952e4369f454d"
+    },
+    "mcp_p2p_client.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/mcp_p2p_client.py",
+      "sha256": "d2aafd5f0cde4c2b47fa272a71ab422381df66015feed02b007307c672379b02"
+    },
+    "p2p_transport.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/p2p_transport.py",
+      "sha256": "74f4f1eb34c76fba96996fe65dca100fcf8f551e4f293fa65a4bf3c93315f14a"
+    },
+    "server.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/server.py",
+      "sha256": "ea9e9906daedc3b38dbc1c787f0ec0b535e09efadb232ca8a5cf95cd742189db"
+    }
+  },
+  "task": "LA-013",
+  "transports": [
+    {
+      "actual_network": false,
+      "id": "stdio",
+      "in_parity_claim": true,
+      "in_process": false,
+      "kind": "stdio",
+      "network_mode": "local-process",
+      "process": {
+        "actual_network": false,
+        "in_process": false,
+        "network_mode": "local-process",
+        "pid": 411,
+        "protocol": "jsonrpc-2.0-ndjson",
+        "security": {
+          "channel": "anonymous-pipes",
+          "noise": false,
+          "tls": false
+        },
+        "transport": "stdio",
+        "wan": false
+      },
+      "protocol": "jsonrpc-2.0-ndjson",
+      "qualified": true,
+      "security": {
+        "channel": "anonymous-pipes",
+        "noise": false,
+        "tls": false
+      },
+      "wan": false
+    },
+    {
+      "actual_network": true,
+      "id": "http",
+      "in_parity_claim": true,
+      "in_process": false,
+      "kind": "http",
+      "listen": "127.0.0.1",
+      "network_mode": "local-network",
+      "process": {
+        "actual_network": true,
+        "in_process": false,
+        "listen": "127.0.0.1:52215",
+        "network_mode": "local-network",
+        "pid": 412,
+        "protocol": "jsonrpc-2.0-http",
+        "security": {
+          "channel": "plaintext-http",
+          "listen_host": "127.0.0.1",
+          "noise": false,
+          "tls": false
+        },
+        "tls": false,
+        "transport": "http",
+        "wan": false
+      },
+      "protocol": "jsonrpc-2.0-http",
+      "qualified": true,
+      "security": {
+        "channel": "plaintext-http",
+        "noise": false,
+        "tls": false
+      },
+      "tls": false,
+      "wan": false
+    },
+    {
+      "actual_network": true,
+      "id": "libp2p",
+      "in_parity_claim": true,
+      "in_process": false,
+      "kind": "libp2p",
+      "listen": "127.0.0.1",
+      "network_mode": "local-network",
+      "process": {
+        "actual_network": true,
+        "addrs": [
+          "/ip4/127.0.0.1/tcp/40645/p2p/12D3KooWFe1GYtKjoNTMmQCN5zdcNbD1gmz9KuWz2cJMF2chiRwD"
+        ],
+        "in_process": false,
+        "listen": "/ip4/127.0.0.1/tcp/40645",
+        "multiaddr": "/ip4/127.0.0.1/tcp/40645/p2p/12D3KooWFe1GYtKjoNTMmQCN5zdcNbD1gmz9KuWz2cJMF2chiRwD",
+        "network_mode": "local-network",
+        "peer_id": "12D3KooWFe1GYtKjoNTMmQCN5zdcNbD1gmz9KuWz2cJMF2chiRwD",
+        "pid": 413,
+        "protocol": "/mcp+p2p/1.0.0",
+        "security": {
+          "listen_host": "127.0.0.1",
+          "muxer": "yamux",
+          "muxer_fallback": "mplex",
+          "muxer_protocol_id": "/yamux/1.0.0",
+          "noise_protocol_id": "/noise",
+          "secure_channel": "noise",
+          "tls": false,
+          "transport": "tcp"
+        },
+        "transport": "libp2p",
+        "wan": false
+      },
+      "protocol": "/mcp+p2p/1.0.0",
+      "qualified": true,
+      "security": {
+        "muxer": "yamux",
+        "muxer_protocol_id": "/yamux/1.0.0",
+        "noise_protocol_id": "/noise",
+        "secure_channel": "noise",
+        "tls": false,
+        "transport": "tcp"
+      },
+      "wan": false
+    },
+    {
+      "actual_network": false,
+      "id": "in-process",
+      "in_parity_claim": false,
+      "in_process": true,
+      "kind": "in-process",
+      "network_mode": "in-process",
+      "note": "Direct Python call. Not reported as libp2p or HTTP network evidence.",
+      "qualified": false,
+      "wan": false
+    },
+    {
+      "actual_network": false,
+      "id": "kit-p2p-framing",
+      "in_parity_claim": false,
+      "in_process": true,
+      "kind": "in-process-framing",
+      "network_mode": "in-process",
+      "note": "ipfs_kit_py.mcp_server.p2p_transport.serve_p2p constructs a host and sleeps; it does not listen. In-process handle_stream_message is framing only.",
+      "qualified": false,
+      "wan": false
+    }
+  ]
+}
