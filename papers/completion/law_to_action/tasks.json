@@ -53,7 +53,7 @@
       "priority": "P0",
       "depends_on": [],
       "paper_evidence": [
-        "p1 anonymous author block; p14 Appendix D lines 504–507; p17 disclosure lines 546–549; manuscript body provided as PDF; local research template/checklist subsequently supplied",
+        "p1 anonymous author block; p14 Appendix D lines 504\u2013507; p17 disclosure lines 546\u2013549; manuscript body provided as PDF; local research template/checklist subsequently supplied",
         "User-supplied Overleaf project: https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0 (which paper(s) it contains is unverified; access/authentication pending)",
         "Local user-provided research template/style/checklist inspected 2026-09-11; no manuscript-specific .tex or .bib exists under papers/."
       ],
@@ -84,9 +84,9 @@
       "priority": "P0",
       "depends_on": [],
       "paper_evidence": [
-        "pp1–2 §1 contributions; pp4–8 §§3–8; pp16–17 Appendix F staged/unavailable work"
+        "pp1\u20132 \u00a71 contributions; pp4\u20138 \u00a7\u00a73\u20138; pp16\u201317 Appendix F staged/unavailable work"
       ],
-      "description": "Map implemented, tested, trained, staged and future-work claims to exact repositories, commits, symbols and tests. Inspect real defaults, adapters, code-effect sources and live backend availability. Focus on generated-code effects and runtime enforcement; keep neighboring papers’ refactoring/sealing scope separate. Remove or downgrade unsupported claims instead of expanding implementation without a benchmark need.",
+      "description": "Map implemented, tested, trained, staged and future-work claims to exact repositories, commits, symbols and tests. Inspect real defaults, adapters, code-effect sources and live backend availability. Focus on generated-code effects and runtime enforcement; keep neighboring papers\u2019 refactoring/sealing scope separate. Remove or downgrade unsupported claims instead of expanding implementation without a benchmark need.",
       "acceptance_criteria": [
         "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.",
         "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.",
@@ -113,7 +113,7 @@
         "LA-002"
       ],
       "paper_evidence": [
-        "p8 §7 lines 320–327; p16 Appendix E.1 lines 514–523 and E.2"
+        "p8 \u00a77 lines 320\u2013327; p16 Appendix E.1 lines 514\u2013523 and E.2"
       ],
       "description": "Specify research questions, source selection, number of independent source families and cases, mutation taxonomy, seeds/repetitions, resource limits and model/tool requirements before collecting outcomes. Define five arms: unguarded sandbox, prompt-only, retrieval+prompt, lightweight policy+UCAN, full enforcement. Separate fixed-action gate comparison from closed-loop agent planning. Predefine metrics, denominators, confidence intervals, exclusions and negative-result handling. If resources are absent, document a narrower still-useful evaluated contribution.",
       "acceptance_criteria": [
@@ -142,7 +142,7 @@
         "LA-003"
       ],
       "paper_evidence": [
-        "pp10–11 Appendix A; p16 E.1 lines 514–518"
+        "pp10\u201311 Appendix A; p16 E.1 lines 514\u2013518"
       ],
       "description": "Acquire bounded source cohorts at exact revisions and preserve bytes, URI, hashes/CIDs, source lineage, license/review state, schema and source failures. Recount every population used by the experiment. Preserve exact CVE snapshot d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2 and SkillCenter f9dd4fec3c86d85ebf116c7408ac5ce602c418a1 unless protocol documents a justified revision change. Distinguish physical rows, unique sources, normalized IRs, tombstones, index rows and checked formalizations. Broader un-recounted release statistics remain attributed background or are removed.",
       "acceptance_criteria": [
@@ -173,7 +173,7 @@
         "LA-004"
       ],
       "paper_evidence": [
-        "p2 §2.1 lines 61–68; pp10–11 A.1 lines 386–391; p16 Table E1 legal row"
+        "p2 \u00a72.1 lines 61\u201368; pp10\u201311 A.1 lines 386\u2013391; p16 Table E1 legal row"
       ],
       "description": "Annotate bounded legal provisions for actor/action/modality/object, conditions, exceptions, effective intervals, jurisdiction, authority, definitions, cross-references and exact source spans. Include omitted-exception, wrong-date/jurisdiction, unsupported-construct and no-applicable-record cases. Obtain competent independent human legal review with disagreement/adjudication records; prepare annotation packets autonomously and expose missing reviewer access as a dependency. Never represent generated labels as expert review.",
       "acceptance_criteria": [
@@ -203,7 +203,7 @@
         "LA-027"
       ],
       "paper_evidence": [
-        "pp2–3 §2.2; p11 A.2 lines 409–414; p16 Table E1 CVE row",
+        "pp2\u20133 \u00a72.2; p11 A.2 lines 409\u2013414; p16 Table E1 CVE row",
         "User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels."
       ],
       "description": "Use the existing LA-026 evidence for the frozen 12 genuine CVE families/24 cases and preserve all 84 excluded controls. Bind exact vulnerable/fixed revisions, source-row locators and runnable isolated behavior evidence or precisely delimited source-supported observations. Record expected polarity only where an explicit machine-checkable scoped behavior contract supports it, with its provenance distinct from the adapter being evaluated. Otherwise retain unknown and exclude it only from the unsupported metric denominator with a recorded reason. No outside reviewer is required. Do not infer general security, exploitability, or independent human agreement from a source label, fix, compiler output or model judgment. Preserve the original LA-006 failed/blocked attempt and original criteria in history.",
@@ -234,7 +234,7 @@
         "LA-004"
       ],
       "paper_evidence": [
-        "p3 §2.3 lines 110–120; p11 A.3; p16 Table E1 skill row"
+        "p3 \u00a72.3 lines 110\u2013120; p11 A.3; p16 Table E1 skill row"
       ],
       "description": "Select genuine pinned SkillCenter records and annotate goals, pre/postconditions, guards, effects, verification steps and success/failure/retry/parallel/join control edges with source spans. Tag inferred versus grounded nodes. Add bounded malicious Markdown and fake-permission mutations as clearly synthetic negative controls. Define independent review and record actual normalizer/model revisions; scope learned-component claims if no trained system exists.",
       "acceptance_criteria": [
@@ -263,7 +263,7 @@
         "LA-003"
       ],
       "paper_evidence": [
-        "p5 §4.1 lines 172–187; p8 §7 lines 298–325; p16 E.2 lines 525–529"
+        "p5 \u00a74.1 lines 172\u2013187; p8 \u00a77 lines 298\u2013325; p16 E.2 lines 525\u2013529"
       ],
       "description": "Build the benchmark runner and bounded export/code-generation handlers. Record actual delegate/effect counts, arguments, actor/audience, code/handler effects, roots, grants and observed postconditions. Keep independently extracted code effects separate from agent-declared intent. Enumerate legal/CVE/skill/token/proof/replay/context-mutation cases from the protocol. Persist append-only case-level records with explicit fixture/solver/crypto/storage/network/model labels.",
       "acceptance_criteria": [
@@ -304,7 +304,7 @@
         "LA-028"
       ],
       "paper_evidence": [
-        "p16 Table E1 first three Not run rows; pp2–3 source adapters",
+        "p16 Table E1 first three Not run rows; pp2\u20133 source adapters",
         "User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels."
       ],
       "description": "Run actual pinned source adapters/normalizers/compilers on the unchanged frozen selected sources under the amended automated scope. Report source-span linkage and coverage, parse/schema validity, supported/unsupported fields, compiler/checker consistency, and source-supported CVE behavior observations with exact case denominators and producer provenance. Generated interpretations are predictions, not independent gold. Compare against a reference only for the precisely machine-defined property that reference supports and report shared-producer dependence. Expert legal applicability/exception fidelity, semantic accuracy and human agreement are unmeasured unless suitable real independent evidence exists. Preserve all errors, source-unavailable cases and unknowns and separate synthetic qualification controls from empirical source cases.",
@@ -335,7 +335,7 @@
         "LA-008"
       ],
       "paper_evidence": [
-        "pp4–5 Table 2 and §3.2; p6 §4.2; pp12–13 Appendix B; p16 proof job Not run"
+        "pp4\u20135 Table 2 and \u00a73.2; p6 \u00a74.2; pp12\u201313 Appendix B; p16 proof job Not run"
       ],
       "description": "For each proof route actually used in the bounded benchmark, record installed prover/toolchain, supported fragment, premises, assumptions, translations and resource bounds; execute success, counterexample, timeout, unsupported and forged-evidence cases. Reconstruct and independently kernel-check proof candidates when the chosen assurance requires it. Distinguish solver SAT/UNSAT, runtime monitor, policy approval and theorem evidence. Test QF_LIA interpolation only if claimed and selected; remove unsupported broad-backend claims.",
       "acceptance_criteria": [
@@ -365,7 +365,7 @@
         "LA-010"
       ],
       "paper_evidence": [
-        "p6 §4.3; pp7–8 §§6.3–6.4; p14 C.4; p16 E.2"
+        "p6 \u00a74.3; pp7\u20138 \u00a7\u00a76.3\u20136.4; p14 C.4; p16 E.2"
       ],
       "description": "Explicitly configure enforce mode, trusted current roots/clock/receipt issuer and actual protected handler paths. Integrate real signed UCAN verification and bind proof-derived capability actor/audience/tool/version/arguments/effects/roots/allowed use to it. Enumerate compatibility/bypass routes and exclude or guard them. Exercise wrong audience, tenant-a versus tenant-ab widening, expiry/revocation, forged proof identifiers, changed args/effects/environment, missing evidence and undeclared generated-code effects.",
       "acceptance_criteria": [
@@ -401,7 +401,7 @@
         "LA-011"
       ],
       "paper_evidence": [
-        "p6 §5 lines 226–243; p14 C.2 lines 471–481; p16 DuckDB pending row"
+        "p6 \u00a75 lines 226\u2013243; p14 C.2 lines 471\u2013481; p16 DuckDB pending row"
       ],
       "description": "Find or implement the minimal durable consumption adapter required by the selected enforcement deployment and exercise it with the typed Quack owner. Run same-use concurrent attempts, restart, lost reply, stale generation/fence/revision, changed-payload idempotency and owner failure cases. Observe actual handler effect counts around commit/consume/delegate windows. Record unresolved remote-effect outcomes; do not claim arbitrary exactly-once APIs.",
       "acceptance_criteria": [
@@ -435,7 +435,7 @@
         "LA-012"
       ],
       "paper_evidence": [
-        "p7 §§6.1–6.2; p14 C.3; p16 cross-transport pending row"
+        "p7 \u00a7\u00a76.1\u20136.2; p14 C.3; p16 cross-transport pending row"
       ],
       "description": "Exercise the same authorized and rejected requests through real stdio, HTTP and libp2p processes for the routes retained in scope. Retain peer/process identities, negotiated protocol, security settings, transport errors and handler outcomes. Retrieve an evidence artifact through the claimed content-addressed path and validate bytes/profile. A local network test is labeled local; in-process framing cannot be reported as libp2p network evidence. Narrow unexecutable optional transport/publication claims.",
       "acceptance_criteria": [
@@ -466,7 +466,7 @@
         "LA-011"
       ],
       "paper_evidence": [
-        "p8 §7 lines 320–327; p16 E.1 lines 519–523"
+        "p8 \u00a77 lines 320\u2013327; p16 E.1 lines 519\u2013523"
       ],
       "description": "Implement the five protocol arms using identical sources, handlers, candidate actions and scoring. Match model/prompt/context budgets where relevant and state precisely which components each arm receives. Lightweight policy+UCAN must use real strict capabilities and declared policy, and full enforcement must add the selected checked obligations. Validate runner arm switching and comparable observation paths on development cases without tuning to held-out outcomes.",
       "acceptance_criteria": [
@@ -502,7 +502,7 @@
         "LA-014"
       ],
       "paper_evidence": [
-        "p8 §7; p16 E.1 primary outcome and E.2 counterexamples",
+        "p8 \u00a77; p16 E.1 primary outcome and E.2 counterexamples",
         "User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels."
       ],
       "description": "Run every frozen fixed-action case across all applicable arms with actual proof, capability and handler integrations. Collect observed forbidden effects and allowed work, false denials, unknowns/abstentions, route coverage and stage-specific errors. Include all required cross-source adversarial categories and paired safe controls. Retain every attempted case and all skips/failures; reruns require a recorded reason and fresh run identity. The labels allowed and forbidden refer only to the frozen modeled policy and machine-checkable behavior contract admitted by LA-027. Independent effect observation means a separately observed handler/postcondition trace, not an outside human reviewer. Do not claim real-world legality, expert judgment or universal security from these automated outcomes.",
@@ -533,7 +533,7 @@
         "LA-015"
       ],
       "paper_evidence": [
-        "p16 E.1 lines 522–523; p8 §7 planning/recovery trace"
+        "p16 E.1 lines 522\u2013523; p8 \u00a77 planning/recovery trace"
       ],
       "description": "Have actual pinned model agents generate or revise bounded code/tool plans under protocol arms, with identical task/source distributions, resource budgets and independent scoring. Record prompts/model/tokenizer revisions, generated code, independent effects, repair/replan attempts and useful task completion. Do not pool with fixed-action results because enforcement can alter candidates. If actual model execution is unavailable, record the blocker and explicitly narrow the paper rather than substituting replay fixtures.",
       "acceptance_criteria": [
@@ -559,7 +559,7 @@
         "LA-015"
       ],
       "paper_evidence": [
-        "p16 E.2 lines 530–534"
+        "p16 E.2 lines 530\u2013534"
       ],
       "description": "In the sandbox, ablate source provenance, hard applicability, intent/code correlation, proof jobs, current-root binding, capability verification and consumption separately from the full arm. Choose corresponding frozen positive and negative controls so each removed mechanism has a meaningful challenge; preserve all other inputs. Measure effect change, useful work and false rejection without enabling ablated configurations in live services.",
       "acceptance_criteria": [
@@ -585,7 +585,7 @@
         "LA-016"
       ],
       "paper_evidence": [
-        "p16 Table E1 efficiency Not run; p16 E.2 lines 532–534; p17 F lines 541–545"
+        "p16 Table E1 efficiency Not run; p16 E.2 lines 532\u2013534; p17 F lines 541\u2013545"
       ],
       "description": "Instrument complete wall time and all model input/output/retry tokens, retrieval transfer/cache work, compilation, solver/checker, current clock/root checks, database transactions, artifact storage, network and retries. Define cold/warm cache conditions and invalidation/root changes. Record hardware and concurrency. Report measured usage separately from any price conversion, and preserve final task utility; graph size or token saving is not direct monetary savings.",
       "acceptance_criteria": [
@@ -616,7 +616,7 @@
         "LA-018"
       ],
       "paper_evidence": [
-        "p8 §7 metrics; p15 D lines 508–511; p16 E.1–E.2",
+        "p8 \u00a77 metrics; p15 D lines 508\u2013511; p16 E.1\u2013E.2",
         "User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels."
       ],
       "description": "Generate all paper tables/figures from immutable raw records. Use protocol-defined paired comparisons and uncertainty clustered by independent source/task families. Include exact denominators, allowed utility, abstention/false denial, failure taxonomy, unsupported fragments, negative results and zero-event confidence bounds. Separate fixed-action and closed-loop results and fixture/real-provider evidence. Check source leakage and sensitivity to source families. Apply the automated evidence amendment: report policy-relative effects and measured structural/behavioral properties. Do not calculate legal semantic accuracy, annotator agreement or human-validity rates from generated or blank labels. Optional author judgments, if any, are separate descriptive material and cannot replace empirical outcomes.",
@@ -644,7 +644,7 @@
         "LA-015"
       ],
       "paper_evidence": [
-        "p8 §7 lines 298–313; p15 Appendix D twelve-step trace"
+        "p8 \u00a77 lines 298\u2013313; p15 Appendix D twelve-step trace"
       ],
       "description": "Select an actual successful bounded export/generated-code case and matched rejected recipient/undeclared-effect/replay variants. Trace source spans and CIDs, Intent/Legal/Security IR, exact generated-code effects, assumptions, real proof/checker receipt, signed grant, live context revalidation, consumption, handler effects and owner progression. Label any genuinely absent step and narrow the narrative accordingly.",
       "acceptance_criteria": [
@@ -679,7 +679,7 @@
         "LA-003"
       ],
       "paper_evidence": [
-        "p9 eight references; pp1–2 contributions; p8 conclusion"
+        "p9 eight references; pp1\u20132 contributions; p8 conclusion"
       ],
       "description": "Research current primary papers/specifications on verifiable generated code, agent runtime enforcement, proof-carrying authorization, executable legal rules and relevant agent-security benchmarks. Build a concise comparison of actual assurance boundary, source fidelity, generated-code effect observation and useful-work measurement. Confirm citation metadata and avoid unsupported novelty/superiority claims. Keep broad infrastructure descriptions subordinate to the tested contribution. Integrate the reviewed related-work discussion, citations and workshop fit into manuscript/main.tex as part of this task. Ensure the selected bibliography is actually loaded, existing citation keys remain resolvable without duplicate entries, and retain a real compilation/citation check. Inherited bibliography access dates are historical source text, not evidence of fresh verification. Verify the closest current runtime-enforcement systems, including AgentSpec, Progent and CaMeL, from their primary sources; citing a system does not mean it was benchmarked.",
       "acceptance_criteria": [
@@ -705,13 +705,14 @@
         "LA-001",
         "LA-019",
         "LA-020",
-        "LA-021"
+        "LA-021",
+        "LA-029"
       ],
       "paper_evidence": [
-        "p1 abstract; p8 §§7–8; p16 Table E1; pp16–17 Appendix F",
+        "p1 abstract; p8 \u00a7\u00a77\u20138; p16 Table E1; pp16\u201317 Appendix F",
         "User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels."
       ],
-      "description": "Replace evaluation-template prose and all pending rows with actual measured results or clearly scoped omissions. Rewrite abstract, contributions, method, evaluation and conclusion around supported findings; preserve model assumptions, incomplete legal coverage, source-interpretation uncertainty, protected-route limits and measured deployment scope. Remove unavailable future work from implemented contributions. Cite generated tables and correct all source statistics from manifests. Complete manuscript drafting and compilation without waiting for outside reviewers or optional author feedback. Replace the original Table E1 expert-reviewed legal-fidelity experiment with an explicit withdrawn/unmeasured claim and describe the automated source-contract evaluation that actually ran. State no independent human legal/security/intent validation or inter-annotator agreement was collected unless authentic records support it. Preserve the primary actual protected-effect/useful-work experiment and truthful negative results; this scope change does not turn missing experiments into results.",
+      "description": "Replace evaluation-template prose and all pending rows with actual measured results or clearly scoped omissions. Rewrite abstract, contributions, method, evaluation and conclusion around supported findings; preserve model assumptions, incomplete legal coverage, source-interpretation uncertainty, protected-route limits and measured deployment scope. Remove unavailable future work from implemented contributions. Cite generated tables and correct all source statistics from manifests. Complete manuscript drafting and compilation without waiting for outside reviewers or optional author feedback. Replace the original Table E1 expert-reviewed legal-fidelity experiment with an explicit withdrawn/unmeasured claim and describe the automated source-contract evaluation that actually ran. State no independent human legal/security/intent validation or inter-annotator agreement was collected unless authentic records support it. Preserve the primary actual protected-effect/useful-work experiment and truthful negative results; this scope change does not turn missing experiments into results. Consume LA029 summary.json, cost_report.md and claim_guidance.md computed from the actual corrected run. Label the LA009 18/18 comparison as shared-producer conformance, the old LA015 rows and LA016/LA017 comparison wording as protocol-unadmitted diagnostic evidence, and LA020 detailed replays as separate diagnostic executions. Preserve original receipts and run identities.",
       "acceptance_criteria": [
         "Every Not run/pending result placeholder is resolved by evidence or explicit scoped removal, never invented data.",
         "Claim matrix links manuscript claims to exact experiments or clearly marked nonempirical implementation evidence.",
@@ -738,7 +739,7 @@
         "LA-022"
       ],
       "paper_evidence": [
-        "pp10–11 Appendix A; p15 Table D1; p16 E.1; p17 disclosure"
+        "pp10\u201311 Appendix A; p15 Table D1; p16 E.1; p17 disclosure"
       ],
       "description": "Package experiment harness, exact repository revisions/patches, source/solver/model manifests, lockfiles/container recipe, commands, raw result hashes, analysis and a small runnable reproduction subset. Include source retrieval instructions and licensing restrictions when redistribution is unavailable. Keep private author identities, provider credentials and author-only source maps outside the anonymous bundle. Require meaningful checks of artifact consistency rather than file-presence assertions.",
       "acceptance_criteria": [
@@ -766,18 +767,18 @@
         "LA-023"
       ],
       "paper_evidence": [
-        "p1 placeholder author block; p14 Appendix D lines 504–507; p17 lines 546–549; workshop CFP",
-        "Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.",
+        "p1 placeholder author block; p14 Appendix D lines 504\u2013507; p17 lines 546\u2013549; workshop CFP",
+        "Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343\u2013350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.",
         "User clarification on 2026-09-12: no outside reviewers are available or required for manuscript generation. Unsupported human-agreement and expert legal-fidelity claims must be withdrawn rather than assigned generated labels."
       ],
-      "description": "Use the supplied local research workshop template and verify the final main text is 4–9 pages excluding references/appendices. Audit title/author block, acknowledgments, URLs, PDF metadata, figures, code comments and linked artifacts for double-blind compliance while preserving legitimate independent-source attribution. Disclose methodology-essential LLM tools, model versions and human review accurately. Confirm current CFP deadlines and size requirements without submitting externally. Build from the supplied local research shell papers/neurips_2026_vericode_workshop.tex and an unchanged copy of papers/neurips_2026_vericode.sty, using the supplied default \\usepackage{neurips_2026_vericode} with no final, preprint, nonanonymous, or sglblindworkshop option. Do not use the competition/single-blind variant or the generic neurips_2026.sty. Copy papers/checklist.tex into this paper's manuscript directory, include it after references and optional appendices, remove only its BEGIN/END INSTRUCTIONS block, preserve the heading/questions/subheadings/guidelines, and replace all 16 \\answerTODO{} and 16 \\justificationTODO{} fields with actual evidence-backed \\answerYes{}, \\answerNo{}, or \\answerNA{} and 1–2 sentence justifications. Do not edit the user's shared template/style/checklist originals or fabricate author-dependent answers. Pin input checksums. The style intentionally prints Anonymous Author(s), Affiliation, Address, and email: preserve this official anonymous block and exclude it from unresolved-placeholder failures. Record outside human validation as not collected for the amended study unless authentic returns exist. The author may optionally review the draft, but that is not independent annotation, expert validation, agreement evidence or a prerequisite to generate the manuscript. Answer checklist questions from actual automated work and actual human involvement, not planned reviewer packets.",
+      "description": "Use the supplied local research workshop template and verify the final main text is 4\u20139 pages excluding references/appendices. Audit title/author block, acknowledgments, URLs, PDF metadata, figures, code comments and linked artifacts for double-blind compliance while preserving legitimate independent-source attribution. Disclose methodology-essential LLM tools, model versions and human review accurately. Confirm current CFP deadlines and size requirements without submitting externally. Build from the supplied local research shell papers/neurips_2026_vericode_workshop.tex and an unchanged copy of papers/neurips_2026_vericode.sty, using the supplied default \\usepackage{neurips_2026_vericode} with no final, preprint, nonanonymous, or sglblindworkshop option. Do not use the competition/single-blind variant or the generic neurips_2026.sty. Copy papers/checklist.tex into this paper's manuscript directory, include it after references and optional appendices, remove only its BEGIN/END INSTRUCTIONS block, preserve the heading/questions/subheadings/guidelines, and replace all 16 \\answerTODO{} and 16 \\justificationTODO{} fields with actual evidence-backed \\answerYes{}, \\answerNo{}, or \\answerNA{} and 1\u20132 sentence justifications. Do not edit the user's shared template/style/checklist originals or fabricate author-dependent answers. Pin input checksums. The style intentionally prints Anonymous Author(s), Affiliation, Address, and email: preserve this official anonymous block and exclude it from unresolved-placeholder failures. Record outside human validation as not collected for the amended study unless authentic returns exist. The author may optionally review the draft, but that is not independent annotation, expert validation, agreement evidence or a prerequisite to generate the manuscript. Answer checklist questions from actual automated work and actual human involvement, not planned reviewer packets.",
       "acceptance_criteria": [
-        "Compiled main-text page count is 4–9; PDF <=50 MB and supplementary ZIP <=100 MB.",
+        "Compiled main-text page count is 4\u20139; PDF <=50 MB and supplementary ZIP <=100 MB.",
         "Anonymous package does not link identifying author-maintained artifacts; necessary neutral aliases have a separate private mapping.",
         "Actual methodology-essential LLM tool/model use and remaining human judgments are disclosed; the official style-generated anonymous Affiliation/Address/email block is retained.",
         "Submission dates/template version are checked against the current CFP and recorded.",
         "The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.",
-        "The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.",
+        "The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1\u20132 sentence evidence-backed justifications; only its instruction block is removed.",
         "The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.",
         "Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text."
       ],
@@ -936,6 +937,45 @@
         "papers/completion/law_to_action/benchmark/FINAL_RUN.md"
       ],
       "suggested_code_paths": [],
+      "implementation_paths": [],
+      "manual_review": false
+    },
+    {
+      "id": "LA-029",
+      "subgoal_id": "LA-G5",
+      "title": "Execute the frozen fixed-action benchmark under measured operator resource boundaries",
+      "priority": "P0",
+      "depends_on": [
+        "LA-008",
+        "LA-014",
+        "LA-015",
+        "LA-027"
+      ],
+      "paper_evidence": [
+        "LA-003/v3 fixed-action per-attempt resource contract remains unchanged.",
+        "LA-015 completed receipt 53b3b162 records 900 protocol-unadmitted diagnostic cells and does not discharge the admitted benchmark obligation.",
+        "Root authorized a separately accounted operator correction on 2026-09-12, preserving original and rescue runs and requiring no outside human reviewer."
+      ],
+      "description": "Use the exact operator-controlled per-cell Docker route staged in benchmark/fixed_action_operator, with the unchanged 60 frozen candidates, 900-cell schedule, five arm mechanisms and three seeds from source 7fc7c210. Ordinary provider authoring containers must not substitute another whole-loop diagnostic run or flip a resource-admission boolean. A host operator may supply the necessary Docker boundary and import exact retained results through normal source/evidence admission. Each cell uses one singleton CPU, 1-core quota, 2 GiB aggregate memory/no swap, 16 processes/threads, 20 s wall/aggregate CPU and the fixed global 18,000 CPU-second stopping budget. Keep one exclusive persistent benchmark DuckDB and study UCAN key across cells. Retain original 900 plus rescue 900 diagnostics, every raw outcome and failure, patch rejection/rescue history and all known/unknown costs separately. This task remains blocked until the concrete operator execution route and accounted admission are available. No outside reviewer or human annotations are required. The completion evidence must contain actual resource-qualified operator execution, not a missing-runtime report. Do not rerun, resample, change arms, claim model efficacy or upgrade modeled-policy outcomes to legal validity. LA029 owns the corrected operator run's recalculated analysis/statistics and actual cost report because LA018 completed and active LA019 retains its prior diagnostic scope. Recalculate the admitted matrix summary, denominators and uncertainty from the exact new operator run, preserving any missing or unadmitted dispositions, rather than using an old summary flag. Join each cell's measured group CPU, wall, memory peak, termination and setup/cleanup metadata without double-counting nested phases. Preserve both original 900-cell diagnostic histories, known costs and unknown historical CPU explicitly. Record a claim-guidance artifact: LA009's 18/18 is shared-producer conformance, LA015 compact rows are protocol-unadmitted diagnostic outcomes, LA016/LA017 evaluated-comparison wording does not establish an admitted benchmark, and LA020's detailed replay is a separate diagnostic execution rather than the historical LA015 run. Preserve all old receipts/replays and distinguish each new run identity.",
+      "acceptance_criteria": [
+        "All 900 frozen case-arm-seed identities have exactly one new accounted operator disposition, with source/candidate/schedule/runtime hashes and all original diagnostic histories preserved. An incomplete or unadmitted matrix remains an explicit unfinished benchmark obligation.",
+        "Each executed cell has observed singleton cpuset and CPU quota, 2 GiB/no-swap/16-process enforcement, actual whole-group timeout/termination evidence and measured descendant-inclusive cost accounting under the frozen 20 s/18,000 CPU-second stopping limits. Any prospective accounting clarification is explicit and frozen before this corrected run.",
+        "Actual frozen arm implementations produce retained independent effect-observer counters, useful-work outcomes and source-bound native proof/capability/durable-consumption evidence. The original mechanisms, schedule and shared private store/key semantics are unchanged.",
+        "No failed or unknown-termination cell is replayed, no usage is refunded or invented, and no diagnostic unadmitted rate is promoted to an admitted headline result. Downstream analysis and trace tasks consume only exact admitted correction evidence or explicitly retain its incompleteness. The recalculated admitted-run analysis/statistics, corrected cost report and explicit shared-validator, diagnostic-rate and separate-replay guidance are retained for LA019 and LA022."
+      ],
+      "deliverables": [
+        "papers/completion/law_to_action/benchmark/fixed_action_operator/",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json"
+      ],
+      "suggested_code_paths": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py"
+      ],
       "implementation_paths": [],
       "manual_review": false
     }

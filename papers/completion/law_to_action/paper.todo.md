@@ -804,7 +804,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: law_to_action
-- Depends on: LA-001, LA-019, LA-020, LA-021
+- Depends on: LA-001, LA-019, LA-020, LA-021, LA-029
 - Goal id: LA-G6
 - Parent goal: LA-G000
 - Objective heap: papers/completion/law_to_action/paper.objectives.md
@@ -823,7 +823,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: 
 - Receipt: papers/completion/law_to_action/receipts/LA-022.json
 
-Replace evaluation-template prose and all pending rows with actual measured results or clearly scoped omissions. Rewrite abstract, contributions, method, evaluation and conclusion around supported findings; preserve model assumptions, incomplete legal coverage, source-interpretation uncertainty, protected-route limits and measured deployment scope. Remove unavailable future work from implemented contributions. Cite generated tables and correct all source statistics from manifests. Complete manuscript drafting and compilation without waiting for outside reviewers or optional author feedback. Replace the original Table E1 expert-reviewed legal-fidelity experiment with an explicit withdrawn/unmeasured claim and describe the automated source-contract evaluation that actually ran. State no independent human legal/security/intent validation or inter-annotator agreement was collected unless authentic records support it. Preserve the primary actual protected-effect/useful-work experiment and truthful negative results; this scope change does not turn missing experiments into results.
+Replace evaluation-template prose and all pending rows with actual measured results or clearly scoped omissions. Rewrite abstract, contributions, method, evaluation and conclusion around supported findings; preserve model assumptions, incomplete legal coverage, source-interpretation uncertainty, protected-route limits and measured deployment scope. Remove unavailable future work from implemented contributions. Cite generated tables and correct all source statistics from manifests. Complete manuscript drafting and compilation without waiting for outside reviewers or optional author feedback. Replace the original Table E1 expert-reviewed legal-fidelity experiment with an explicit withdrawn/unmeasured claim and describe the automated source-contract evaluation that actually ran. State no independent human legal/security/intent validation or inter-annotator agreement was collected unless authentic records support it. Preserve the primary actual protected-effect/useful-work experiment and truthful negative results; this scope change does not turn missing experiments into results. Consume LA029 summary.json, cost_report.md and claim_guidance.md computed from the actual corrected run. Label the LA009 18/18 comparison as shared-producer conformance, the old LA015 rows and LA016/LA017 comparison wording as protocol-unadmitted diagnostic evidence, and LA020 detailed replays as separate diagnostic executions. Preserve original receipts and run identities.
 
 Acceptance criteria:
 
@@ -1063,3 +1063,41 @@ Acceptance criteria:
 3. Review import, final admission and analysis refuse missing independent labels, unavailable runtime routes and incomplete populations; final inputs/arm budgets are frozen before evaluated predictions.
 
 Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
+
+## LA-029 Execute the frozen fixed-action benchmark under measured operator resource boundaries
+
+- Status: blocked
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: law_to_action
+- Depends on: LA-008, LA-014, LA-015, LA-027
+- Goal id: LA-G5
+- Parent goal: LA-G000
+- Objective heap: papers/completion/law_to_action/paper.objectives.md
+- Board namespace: vericodegen-2026-law_to_action
+- Bundle: law_to_action/LA-G5
+- Parallel lane: law_to_action
+- Outputs: papers/completion/law_to_action/benchmark/fixed_action_operator/, papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json, papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl, papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl, papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json, papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md, papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md, papers/completion/law_to_action/results/fixed_actions_admitted/summary.json, papers/completion/law_to_action/receipts/LA-029.json, papers/completion/law_to_action/receipts/snapshots/LA-029/
+- Predicted files: papers/completion/law_to_action/benchmark/fixed_action_operator/, papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json, papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl, papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl, papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json, papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md, papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md, papers/completion/law_to_action/results/fixed_actions_admitted/summary.json, papers/completion/law_to_action/receipts/LA-029.json, papers/completion/law_to_action/receipts/snapshots/LA-029/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-029
+- Acceptance: All 900 frozen case-arm-seed identities have exactly one new accounted operator disposition, with source/candidate/schedule/runtime hashes and all original diagnostic histories preserved. An incomplete or unadmitted matrix remains an explicit unfinished benchmark obligation.; Each executed cell has observed singleton cpuset and CPU quota, 2 GiB/no-swap/16-process enforcement, actual whole-group timeout/termination evidence and measured descendant-inclusive cost accounting under the frozen 20 s/18,000 CPU-second stopping limits. Any prospective accounting clarification is explicit and frozen before this corrected run.; Actual frozen arm implementations produce retained independent effect-observer counters, useful-work outcomes and source-bound native proof/capability/durable-consumption evidence. The original mechanisms, schedule and shared private store/key semantics are unchanged.; No failed or unknown-termination cell is replayed, no usage is refunded or invented, and no diagnostic unadmitted rate is promoted to an admitted headline result. Downstream analysis and trace tasks consume only exact admitted correction evidence or explicitly retain its incompleteness. The recalculated admitted-run analysis/statistics, corrected cost report and explicit shared-validator, diagnostic-rate and separate-replay guidance are retained for LA019 and LA022.
+- Paper evidence: LA-003/v3 fixed-action per-attempt resource contract remains unchanged.; LA-015 completed receipt53b3b162 records900 protocol-unadmitted diagnostic cells and does not discharge the admitted benchmark obligation.; Root authorized a separately accounted operator correction on2026-09-12, preserving original and rescue runs and requiring no outside human reviewer.
+- Reuse candidates: papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py
+- Receipt: papers/completion/law_to_action/receipts/LA-029.json
+
+Use the exact operator-controlled per-cell Docker route staged in benchmark/fixed_action_operator, with the unchanged 60 frozen candidates, 900-cell schedule, five arm mechanisms and three seeds from source 7fc7c210. Ordinary provider authoring containers must not substitute another whole-loop diagnostic run or flip a resource-admission boolean. A host operator may supply the necessary Docker boundary and import exact retained results through normal source/evidence admission. Each cell uses one singleton CPU, 1-core quota, 2 GiB aggregate memory/no swap, 16 processes/threads, 20 s wall/aggregate CPU and the fixed global 18,000 CPU-second stopping budget. Keep one exclusive persistent benchmark DuckDB and study UCAN key across cells. Retain original 900 plus rescue 900 diagnostics, every raw outcome and failure, patch rejection/rescue history and all known/unknown costs separately. This task remains blocked until the concrete operator execution route and accounted admission are available. No outside reviewer or human annotations are required. The completion evidence must contain actual resource-qualified operator execution, not a missing-runtime report. Do not rerun, resample, change arms, claim model efficacy or upgrade modeled-policy outcomes to legal validity. LA029 owns the corrected operator run's recalculated analysis/statistics and actual cost report because LA018 completed and active LA019 retains its prior diagnostic scope. Recalculate the admitted matrix summary, denominators and uncertainty from the exact new operator run, preserving any missing or unadmitted dispositions, rather than using an old summary flag. Join each cell's measured group CPU, wall, memory peak, termination and setup/cleanup metadata without double-counting nested phases. Preserve both original 900-cell diagnostic histories, known costs and unknown historical CPU explicitly. Record a claim-guidance artifact: LA009's 18/18 is shared-producer conformance, LA015 compact rows are protocol-unadmitted diagnostic outcomes, LA016/LA017 evaluated-comparison wording does not establish an admitted benchmark, and LA020's detailed replay is a separate diagnostic execution rather than the historical LA015 run. Preserve all old receipts/replays and distinguish each new run identity.
+
+Acceptance criteria:
+
+1. All 900 frozen case-arm-seed identities have exactly one new accounted operator disposition, with source/candidate/schedule/runtime hashes and all original diagnostic histories preserved. An incomplete or unadmitted matrix remains an explicit unfinished benchmark obligation.
+2. Each executed cell has observed singleton cpuset and CPU quota, 2 GiB/no-swap/16-process enforcement, actual whole-group timeout/termination evidence and measured descendant-inclusive cost accounting under the frozen 20 s/18,000 CPU-second stopping limits. Any prospective accounting clarification is explicit and frozen before this corrected run.
+3. Actual frozen arm implementations produce retained independent effect-observer counters, useful-work outcomes and source-bound native proof/capability/durable-consumption evidence. The original mechanisms, schedule and shared private store/key semantics are unchanged.
+4. No failed or unknown-termination cell is replayed, no usage is refunded or invented, and no diagnostic unadmitted rate is promoted to an admitted headline result. Downstream analysis and trace tasks consume only exact admitted correction evidence or explicitly retain its incompleteness. The recalculated admitted-run analysis/statistics, corrected cost report and explicit shared-validator, diagnostic-rate and separate-replay guidance are retained for LA019 and LA022.
+
+Record exact operator commands, admitted boundary/cost receipts, all attempted cells and failures. This is an automated evidence obligation, not an outside review gate.
