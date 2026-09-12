@@ -1,0 +1,115 @@
+{
+  "schema": "ns027-public-baseline-frozen-input/v1",
+  "unit_id": "ns-hist-01-xmltodict",
+  "pre_fix_commit": "75a17701db20d5d3ec2ea1f6c901cf2211011eb5",
+  "archive_sha256": "72e6f909de6a20c7700a2398dcf9587a7d9263be68b6bd50361f2a375f909fda",
+  "source_files": {
+    ".github/workflows/test.yml": {
+      "sha256": "95afd593264cb80c13feb102b437af6dc0859f25fb4cffe416b76eca8672fd0e",
+      "mode": 436
+    },
+    ".gitignore": {
+      "sha256": "56c3eab7f913c4b9eeb497fb11839a722d374f704f40d892c3aaf4348653c7ad",
+      "mode": 436
+    },
+    ".travis.yml": {
+      "sha256": "21b07666796420bced7fb9fc8ae4c3fe109e10fc4018a2d10fe2b78be09469f6",
+      "mode": 436
+    },
+    "CHANGELOG.md": {
+      "sha256": "2b72ef2166b33970e9f1fd26e49bf53f500f0664069227c2d068bd4c88d78f15",
+      "mode": 436
+    },
+    "LICENSE": {
+      "sha256": "d66d5eb8f83a0ba21d3dd04318b8817588e8764daabea852d1035e3f07ffda55",
+      "mode": 436
+    },
+    "MANIFEST.in": {
+      "sha256": "fb35455ce703c371335c4d5e65714a12b32770219ddfabe493e406ab002ab239",
+      "mode": 436
+    },
+    "README.md": {
+      "sha256": "2d3eac86c65c866dd4c4054165db7875419d5204671f4b1448d423565cd5e18b",
+      "mode": 436
+    },
+    "ez_setup.py": {
+      "sha256": "0f63364b0e7a114e7b154b74a79ad2bbe842e79dc22912b1268040103cf0877a",
+      "mode": 509
+    },
+    "push_release.sh": {
+      "sha256": "459f5677c78c8b18575dcb739cfcac419412c964ca097fd2cbc0f5bb05cb7a1c",
+      "mode": 509
+    },
+    "setup.cfg": {
+      "sha256": "e4bd33cba1e9779df4fe84fc34e92a4c43a4adcbcfe4b937ae1302bd3e73d4b8",
+      "mode": 436
+    },
+    "setup.py": {
+      "sha256": "a8850da2138eff4c83aa84f65c5b67d26d3b6a2d522a6bf9ee9dac49e62cb58a",
+      "mode": 509
+    },
+    "tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/test_dicttoxml.py": {
+      "sha256": "d78b5827d8abed26e8c8168ee6ae78a2018bc8f519ef14949ea9285db6012b4d",
+      "mode": 436
+    },
+    "tests/test_xmltodict.py": {
+      "sha256": "dd02fa4a078d0454cfaf7226485579152dd486c8e866b9957641ce058e4a4096",
+      "mode": 436
+    },
+    "tox.ini": {
+      "sha256": "c157479ade68a4746d77ae742307cb4fae2e0e03ec29f8275066b3729b337c3c",
+      "mode": 436
+    },
+    "xmltodict.py": {
+      "sha256": "7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63",
+      "mode": 509
+    }
+  },
+  "expected_nodes": [
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_attrib",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_attrib_and_cdata",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_comments",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_custom_attrib",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_custom_cdata",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_disable_entities_false_returns_xmlbomb",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_disable_entities_true_attempts_external_dtd",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_disable_entities_true_ignores_external_dtd",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_disable_entities_true_ignores_xmlbomb",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_encoded_string",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_force_cdata",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_force_list_basic",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_force_list_callable",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_keep_whitespace",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_list",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_minimal",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_namespace_collapse",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_namespace_collapse_all",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_namespace_ignore",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_namespace_support",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_nested_semi_structured",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_postprocessor",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_postprocessor_attribute",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_postprocessor_skip",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_semi_structured",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_simple",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_skip_attrib",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_skip_whitespace",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_streaming",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_streaming_attrs",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_streaming_generator",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_streaming_interrupt",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_string_vs_file",
+    "tests/test_xmltodict.py::XMLToDictTestCase::test_unicode"
+  ],
+  "prior_collect_binding": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-01-xmltodict/collect.observation.json",
+    "sha256": "ac8e7361c303b766bad135d35291317bb236d4d0ba66d1cc0f4ac1285b243234"
+  },
+  "expected_count": 34,
+  "hidden_payloads_included": false,
+  "prior_selected_three_test_outcomes_preserved": true
+}

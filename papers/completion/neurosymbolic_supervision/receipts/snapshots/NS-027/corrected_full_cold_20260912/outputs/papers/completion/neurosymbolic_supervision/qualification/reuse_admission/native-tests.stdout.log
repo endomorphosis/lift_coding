@@ -1,0 +1,97 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-8.1.1, pluggy-1.6.0
+rootdir: /home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-027-b889fdf8119a-attempt-1-1789203608/external/ipfs_accelerate/test
+configfile: pytest.ini
+collected 78 items
+
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_valid_immutable_receipt_and_certificate_authorize_skip [32mPASSED[0m[32m [  1%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_stale_candidate_misses [32mPASSED[0m[32m [  2%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_poisoned_noncanonical_receipt_bytes_miss [32mPASSED[0m[32m [  3%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_private_material_in_immutable_proof_misses [32mPASSED[0m[32m [  5%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_cid_invalid_candidate_misses[receipt_cid] [32mPASSED[0m[32m [  6%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_cid_invalid_candidate_misses[certificate_cid] [32mPASSED[0m[32m [  7%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_revoked_candidate_misses_under_current_policy [32mPASSED[0m[32m [  8%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_simulated_certificate_cannot_authorize_skip [32mPASSED[0m[32m [ 10%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_policy_mismatched_candidate_misses [32mPASSED[0m[32m [ 11%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_public_outcome_mismatch_misses_even_when_verifier_returns_true [32mPASSED[0m[32m [ 12%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_mutable_metadata_cannot_override_current_revocation [32mPASSED[0m[32m [ 14%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_serialized_admission_record_cannot_be_reused_as_authority [32mPASSED[0m[32m [ 15%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_verifier_must_return_literal_true_not_mutable_status_metadata [32mPASSED[0m[32m [ 16%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_current_policy_is_rederived_on_every_lookup [32mPASSED[0m[32m [ 17%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_lookup_absence_is_a_typed_miss [32mPASSED[0m[32m [ 19%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_lookup_provider_exception_is_a_typed_error [32mPASSED[0m[32m [ 20%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_missing_verifier_is_a_typed_error [32mPASSED[0m[32m [ 21%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_unconditional_callback_rejected_when_retained_bytes_required [32mPASSED[0m[32m [ 23%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_proof_cache.py::test_ns011_placeholder_certificate_cannot_authorize_skip [32mPASSED[0m[32m [ 24%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_put_candidate_uses_temp_atomic_replace_readback_then_index [32mPASSED[0m[32m [ 25%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_cas_rejects_oversized_bytes [32mPASSED[0m[32m [ 26%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_cas_rejects_malformed_and_noncanonical_bytes [32mPASSED[0m[32m [ 28%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_cas_claimed_cid_mismatch_is_rejected [32mPASSED[0m[32m [ 29%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_partial_and_corrupt_blobs_miss_and_quarantine [32mPASSED[0m[32m [ 30%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_symlink_blob_path_misses_safely [32mPASSED[0m[32m [ 32%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_path_escape_cid_tokens_miss_safely [32mPASSED[0m[32m [ 33%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_lookup_skips_missing_cas_and_quarantines_corrupt_hint [32mPASSED[0m[32m [ 34%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_index_ttl_and_revocation_hide_candidates [32mPASSED[0m[32m [ 35%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_fence_blocks_stale_writer_from_index_publication [32mPASSED[0m[32m [ 37%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_parallel_writers_cannot_publish_mixed_authority [32mPASSED[0m[32m [ 38%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_store_integrates_with_trust_aware_proof_cache [32mPASSED[0m[32m [ 39%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_reload_rejects_ns011_placeholder_certificate [32mPASSED[0m[32m [ 41%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_index_symlink_is_rejected [32mPASSED[0m[32m [ 42%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_put_receipt_and_certificate_helpers_round_trip [32mPASSED[0m[32m [ 43%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_idempotent_cas_put_returns_already_exists [32mPASSED[0m[32m [ 44%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_restart_scrubs_partial_temporary_files [32mPASSED[0m[32m [ 46%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_test_certificate_store.py::test_bounded_index_retains_newest_candidates [32mPASSED[0m[32m [ 47%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_module_cold_import_does_not_load_datasets_zk_backend [32mPASSED[0m[32m [ 48%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_construction_and_capability_never_import_datasets [32mPASSED[0m[32m [ 50%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_verify_uses_exact_retained_bytes_and_pinned_inputs [32mPASSED[0m[32m [ 51%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_verify_rejects_mismatched_pinned_inputs [32mPASSED[0m[32m [ 52%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_lookup_and_verify_never_invoke_prove_or_issuer [32mPASSED[0m[32m [ 53%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_missing_datasets_provider_returns_run_compatible_unavailable [32mPASSED[0m[32m [ 55%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_incompatible_datasets_surface_returns_run_compatible_unavailable [32mPASSED[0m[32m [ 56%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_timeout_returns_run_compatible_timeout [32mPASSED[0m[32m [ 57%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_exception_returns_run_compatible_exception_result [32mPASSED[0m[32m [ 58%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_disabled_provider_is_unavailable_run [32mPASSED[0m[32m [ 60%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_simulated_backend_mode_is_rejected_as_non_attested [32mPASSED[0m[32m [ 61%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_simulated_metadata_markers_are_rejected [32mPASSED[0m[32m [ 62%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_datasets_non_attested_result_is_mapped_to_run [32mPASSED[0m[32m [ 64%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_verification_result_is_not_truthy [32mPASSED[0m[32m [ 65%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_as_cache_verifier_returns_exact_true_only_on_success [32mPASSED[0m[32m [ 66%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_receipt_certificate_identity_mismatch_is_rejected [32mPASSED[0m[32m [ 67%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_unconditional_verify_fn_cannot_authorize_skip [32mPASSED[0m[32m [ 69%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_ns011_placeholder_certificate_is_non_attested [32mPASSED[0m[32m [ 70%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_live_datasets_offline_conformance_backend_when_available [32mPASSED[0m[32m [ 71%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_provider_interface_constants_are_stable [32mPASSED[0m[32m [ 73%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_sanitize_native_child_env_excludes_injection_and_overwrites_root [32mPASSED[0m[32m [ 74%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_admit_issued_certificate_material_rejects_private_and_incomplete [32mPASSED[0m[32m [ 75%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_provider_admit_issued_material_never_grants_skip_authority [32mPASSED[0m[32m [ 76%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_provider_admit_rejects_provenance_mismatch [32mPASSED[0m[32m [ 78%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_authoritative_receipt_binds_current_state_and_exact_artifacts [32mPASSED[0m[32m [ 79%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_receipt_round_trip_is_content_addressed_and_projects_completion [32mPASSED[0m[32m [ 80%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_stale_receipt_is_not_completion_evidence [32mPASSED[0m[32m [ 82%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_current_repository_change_rejects_historical_certificate [32mPASSED[0m[32m [ 83%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_incomplete_recursive_gitlink_observation_rejects_skip [32mPASSED[0m[32m [ 84%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_simulated_certificate_is_never_completion_authority [32mPASSED[0m[32m [ 85%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides0-plain_skip_not_evidence] [32mPASSED[0m[32m [ 87%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides1-task_goal_missing] [32mPASSED[0m[32m [ 88%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides2-task_goal_missing] [32mPASSED[0m[32m [ 89%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides3-validation_command_missing] [32mPASSED[0m[32m [ 91%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides4-policy_missing] [32mPASSED[0m[32m [ 92%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides5-epoch_missing] [32mPASSED[0m[32m [ 93%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides6-validation_command_mismatch] [32mPASSED[0m[32m [ 94%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_only_authoritative_verifier_success_can_complete[rejected-rejected-verifier_rejected] [32mPASSED[0m[32m [ 96%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_only_authoritative_verifier_success_can_complete[unavailable-unavailable-verifier_unavailable] [32mPASSED[0m[32m [ 97%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_unconditional_callback_is_non_authoritative [32mPASSED[0m[32m [ 98%][0m
+external/ipfs_accelerate/test/api/test_agent_supervisor_proof_cached_test_validation.py::test_ns011_placeholder_certificate_is_not_completion_evidence [32mPASSED[0m[32m [100%][0m
+
+============================= slowest 10 durations =============================
+0.25s call     api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_timeout_returns_run_compatible_timeout
+0.04s call     api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py::test_live_datasets_offline_conformance_backend_when_available
+0.03s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_simulated_certificate_is_never_completion_authority
+0.03s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides1-task_goal_missing]
+0.03s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_only_authoritative_verifier_success_can_complete[unavailable-unavailable-verifier_unavailable]
+0.03s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_receipt_round_trip_is_content_addressed_and_projects_completion
+0.02s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_current_repository_change_rejects_historical_certificate
+0.02s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_ns011_placeholder_certificate_is_not_completion_evidence
+0.02s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_unconditional_callback_is_non_authoritative
+0.02s call     api/test_agent_supervisor_proof_cached_test_validation.py::test_untyped_or_unbound_claims_are_non_completion_evidence[overrides4-policy_missing]
+[32m============================== [32m[1m78 passed[0m[32m in 1.88s[0m[32m ==============================[0m
