@@ -486,7 +486,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py, external/ipfs_datasets/tests/unit/logic/integration/test_legal_ir_learned_guidance_promotion.py, external/ipfs_datasets/docs/implementation/runbooks/leanstral_legal_ir_rollout.md
 - Receipt: papers/completion/autoformalization/receipts/AF-013.json
 
-Export eligible shared features from T3; reject raw-source/sample-memory channels and resolve canonical contracts. Evaluate paired fixed canaries with anti-copy and symbolic-validity guards, freeze admitted guidance, and run matched guidance-off/on consumers for T4. Save an explicit loaded-guidance identity, rollback receipt and untouched-source fidelity outcomes; remain within an isolated experiment profile.
+Export eligible shared features from T3; reject raw-source/sample-memory channels and resolve canonical contracts. Evaluate paired fixed canaries with anti-copy and symbolic-validity guards, freeze admitted guidance, and run matched guidance-off/on consumers for T4. Save an explicit loaded-guidance identity, rollback receipt and explicitly labeled automated structural/checker outcomes on the fixed non-final canaries; remain within an isolated experiment profile. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments. Do not alter AF029 requirements or the retained blocked hold; learned guidance still requires actual eligible native checkpoints, fixed canary thresholds, loaded-consumer identity and rollback evidence. Any optional fidelity field remains null/unmeasured without independent labels.
 
 Acceptance criteria:
 
@@ -504,7 +504,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P1
 - Track: autoformalization
-- Depends on: AF-013, AF-006, AF-028
+- Depends on: AF-013, AF-006
 - Goal id: AF-S04
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -523,7 +523,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py, external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py, external/ipfs_datasets/docs/implementation/runbooks/leanstral_legal_ir_rollout.md
 - Receipt: papers/completion/autoformalization/receipts/AF-014.json
 
-Choose development-set semantic defects from actual introspection, generate bounded repair tasks, and apply candidate patches in an isolated worktree. Pin the pre-repair T4 or protocol-defined baseline, preserve loss-aware contracts, run independent semantic regressions and paired fixed-canary checks, then evaluate the frozen T5 patch on untouched test data. Distinguish parameter actions from executable changes and record rejected patches and review cost.
+Select development defects evidenced by explicit compiler contracts or source-bound finite conformance witnesses, freeze the baseline, and perform bounded isolated repairs with actual independent native checks and paired fixed-canary structural outcomes. Preserve source meaning as an unmeasured semantic claim unless separate valid evidence exists; a proof of a changed/easier statement is not improvement. Keep final-test material out of patch selection, retain rejected patches and costs, and report unexecuted final or semantic evaluation as unrun. No external human review is required to execute or report these structural experiments. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments.
 
 Acceptance criteria:
 
@@ -579,7 +579,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-005, AF-006, AF-010, AF-011, AF-013, AF-015, AF-027, AF-028, AF-029
+- Depends on: AF-005, AF-006, AF-010, AF-011, AF-013, AF-015, AF-027, AF-029
 - Goal id: AF-S05
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -598,7 +598,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py, external/ipfs_datasets/benchmarks/bench_semantic_roundtrip_compositions.py, external/ipfs_datasets/benchmarks/bench_itp_hammer.py
 - Receipt: papers/completion/autoformalization/receipts/AF-016.json
 
-Run available prespecified A–E configurations on the frozen tasks after baseline/guidance checkpoints and bridges are fixed. Preserve original-source, first-IR, reconstructed-text, second-IR, bridge and checker evidence per example. Score independent fidelity, uncertainty, correct/false transfer, coverage, and total latency/cost with identical denominators and explicit execution status.
+Execute the available prespecified A-E routes with frozen eligible checkpoints, actual consumer gates, exact source/IR/bridge/goal/checker artifacts and matched budgets. Report parse/elaboration, supported-fragment structure, source-map mechanics, automated round-trip agreement, exact-goal checker acceptance, abstention, coverage and total measured cost with full denominators. These are automated structural/checker outcomes, not source-semantic fidelity, legal correctness or human agreement. Leave independent fidelity and semantic false-transfer metrics unmeasured; label finite constructed witness failures separately. Preserve original20 Table6 cells with measured structural entries or explicit unavailable/unrun explanations and revised headings. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments.
 
 Acceptance criteria:
 
@@ -691,7 +691,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P1
 - Track: autoformalization
-- Depends on: AF-004, AF-005, AF-011, AF-015, AF-028, AF-029
+- Depends on: AF-004, AF-005, AF-011, AF-015, AF-029
 - Goal id: AF-S05
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -705,16 +705,16 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-019
-- Acceptance: Each evaluated domain has a supported profile, source population, ground-truth provenance, checkpoint and baseline.; Structural compatibility, learned transfer and valid semantic proof transfer are separately scored/described.; No multimodal OCR/ASR performance is claimed without a concrete measured extraction route.
+- Acceptance: Each evaluated domain has a supported profile, frozen source population, explicit formal target/property provenance, actual checkpoint and baseline; no source-semantic gold is implied when independent labels are unavailable.; Structural compatibility, learned transfer and valid semantic proof transfer are separately scored/described.; No multimodal OCR/ASR performance is claimed without a concrete measured extraction route.
 - Paper evidence: p. 3, §3.3, lines 122–126; pp. 24–25, App. P.1; p. 15, App. E evaluation populations
 - Reuse candidates: external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/formalization_adapter.py, external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py, external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_feature_transfer.py
 - Receipt: papers/completion/autoformalization/receipts/AF-019.json
 
-Evaluate legal-trained shared parameters against relevant deterministic/domain-specific controls on frozen Security/Intent/software examples, with separately reviewed adapter, entity and time mappings. Report per-domain fidelity and proof coverage so infrastructure compatibility is not mistaken for transfer. For domains/media lacking supported extractors or independent labels, retain explicit limitations and remove unmeasured transfer claims from the submission.
+Evaluate only supported frozen domains using actual checkpoints, deterministic controls and source-bound formal target/checker profiles. Report executable structural compatibility and exact-goal checker outcomes by domain; label any measured learned structural transfer by its precise target. Human semantic transfer, legal/intent fidelity and unmeasured media extraction are outside the current claim scope. Retain all unavailable domains and missingness rather than inventing labels or substituting easy statements. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments.
 
 Acceptance criteria:
 
-1. Each evaluated domain has a supported profile, source population, ground-truth provenance, checkpoint and baseline.
+1. Each evaluated domain has a supported profile, frozen source population, explicit formal target/property provenance, actual checkpoint and baseline; no source-semantic gold is implied when independent labels are unavailable.
 2. Structural compatibility, learned transfer and valid semantic proof transfer are separately scored/described.
 3. No multimodal OCR/ASR performance is claimed without a concrete measured extraction route.
 
@@ -765,7 +765,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-011, AF-012, AF-013, AF-014, AF-016, AF-017, AF-018, AF-019, AF-020, AF-028, AF-029
+- Depends on: AF-011, AF-012, AF-013, AF-014, AF-016, AF-017, AF-018, AF-019, AF-020, AF-029
 - Goal id: AF-S06
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -784,7 +784,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py, external/ipfs_datasets/benchmarks/bench_modal_autoencoder_cycle.py
 - Receipt: papers/completion/autoformalization/receipts/AF-021.json
 
-Aggregate the frozen raw experiment records with prespecified document-grouped paired effects and confidence intervals, seed variability, uncertainty and coverage. Report per-family/facet/domain results and false-transfer/abstention counts. Generate Table 6, Table 11 and retained Table 13 results directly from evidence; record every hypothesis as supported, unsupported, inconclusive or unrun. Update manifests/checkpoint/split/provenance fields.
+Aggregate the frozen raw experiment records with prespecified document-grouped paired effects and confidence intervals, seed variability, uncertainty and coverage. Report per-family/facet/domain results and false-transfer/abstention counts. Generate Table 6, Table 11 and retained Table 13 results directly from evidence; record every hypothesis as supported, unsupported, inconclusive or unrun. Update manifests/checkpoint/split/provenance fields. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments. Revise fidelity/agreement headings to explicit unmeasured entries rather than zeros, invented confidence intervals or automatic proxy scores. Keep human-dependent hypotheses outside supported conclusions; compare automated metrics only where underlying measures/denominators are compatible. The existing source-family and seed uncertainty units remain unchanged. AF017/018 completed retrieval/proof diagnostics may be reused only within their actual automatic-label/structural scope. Carry AF029 real training and all failed resource attempts/costs without alteration or double counting.
 
 Acceptance criteria:
 
@@ -822,7 +822,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: papers/autoformalization_training_methods_revised-1.pdf
 - Receipt: papers/completion/autoformalization/receipts/AF-022.json
 
-Rewrite the paper around the actual measured contribution and clear coding-verification use case. Compress descriptive material to make room for results within nine main pages. Audit equations, proof-transfer quantification/nonvacuity, vector-versus-text terminology, source-grounding versus truth, planning versus proof and implemented-versus-executed tense. Verify bibliography against primary sources and compare the final contribution with relevant verified-coding/autoformalization work. Preserve negative findings and explicit unavailable conditions.
+Rewrite the paper around the actual measured contribution and clear coding-verification use case. Compress descriptive material to make room for results within nine main pages. Audit equations, proof-transfer quantification/nonvacuity, vector-versus-text terminology, source-grounding versus truth, planning versus proof and implemented-versus-executed tense. Verify bibliography against primary sources and compare the final contribution with relevant verified-coding/autoformalization work. Preserve negative findings and explicit unavailable conditions. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments. Replace the original learned source-fidelity research-question/abstract/conclusion claims with the measured structural/native-training/checker contribution. Incorporate manuscript/empirical_scope.tex wording, remove claims of independent human agreement/adjudication, describe those evaluations as unperformed limitations/future work, and label author feedback only if actually supplied. Preserve the original recovery copy and its claim provenance as historical evidence; the final manuscript must not present its unmeasured promises as results.
 
 Acceptance criteria:
 
@@ -919,7 +919,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 
 Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
-## AF-025 Perform independent reproduction and prepare final author review packet
+## AF-025 Reproduce retained evidence and prepare the author handoff
 
 - Status: todo
 - Completion: auto
@@ -941,18 +941,18 @@ Artifact transport: only the exact declared PDF/ZIP files above receive binary a
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-025
-- Acceptance: Reproduction result includes exact commands/environment, expected versus actual tables, and explicit unavailable checks; mere LaTeX compilation is not empirical validation.; Final packet links manuscript, supplement, claim audit and raw evidence with version/checksum identities.; Supervisor marks the empirical objective complete only if required evidence exists; scope-reduced alternatives and pending author choices are explicit.; No claim that authors approved or the paper was submitted/published is made without real evidence.
+- Acceptance: Reproduction result includes exact commands/environment, expected versus actual tables, and explicit unavailable checks; mere LaTeX compilation is not empirical validation.; Final packet links manuscript, supplement, claim audit and raw evidence with version/checksum identities.; The manuscript objective is complete when every retained automated empirical claim has real reproducible evidence and omitted/unmeasured human-dependent claims are explicit. Outside reviewers and optional author feedback are not prerequisites; unfinished required training or fabricated scientific evidence cannot be hidden by the scope change.; No claim that authors approved or the paper was submitted/published is made without real evidence.
 - Paper evidence: p. 27, lines 857–859: final review/artifact/evidence unfinished; p. 17, lines 533–538: author verification required
 - Reuse candidates: external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py, external/ipfs_datasets/benchmarks/bench_itp_hammer.py
 - Receipt: papers/completion/autoformalization/receipts/AF-025.json
 
-Run the documented clean-environment reproduction at the declared feasible level, verify table hashes and example/native-checker receipts, and inspect the final PDF and supplement against the claim ledger. Prepare a concise concrete packet identifying finished work, measured failures, deliberately unrun conditions, any remaining independent annotation/author questions, deadlines and submission files. Keep human author sign-off and actual workshop submission outside autonomous task completion. Verify research-template input checksums, all 16 completed checklist answers/justifications, preserved official style/anonymous block and workshop footer. Exempt only style-generated anonymous Affiliation/Address/email text from the residual-placeholder scan; scientific/checklist placeholders remain failures.
+Run the documented clean-environment reproduction at the declared feasible level, verify table hashes and example/native-checker receipts, and inspect the final PDF and supplement against the claim ledger. Prepare a concise concrete packet identifying finished work, measured failures, deliberately unrun conditions, any remaining independent annotation/author questions, deadlines and submission files. Keep human author sign-off and actual workshop submission outside autonomous task completion. Verify research-template input checksums, all 16 completed checklist answers/justifications, preserved official style/anonymous block and workshop footer. Exempt only style-generated anonymous Affiliation/Address/email text from the residual-placeholder scan; scientific/checklist placeholders remain failures. Read papers/completion/autoformalization/config/structural_evidence_scope.json before choosing metrics or drafting claims. Human annotations are unavailable and are not a manuscript-completion prerequisite. Report human agreement and independent source-semantic fidelity as unmeasured; do not replace them with prover success, teacher agreement or optional author comments. Independent reproduction here means a separate clean execution environment; it does not require an outside person. The user has selected the supported automated-evidence scope, so do not wait for an external review panel before generating and validating the manuscript. Actual submission and claims of author sign-off remain separate.
 
 Acceptance criteria:
 
 1. Reproduction result includes exact commands/environment, expected versus actual tables, and explicit unavailable checks; mere LaTeX compilation is not empirical validation.
 2. Final packet links manuscript, supplement, claim audit and raw evidence with version/checksum identities.
-3. Supervisor marks the empirical objective complete only if required evidence exists; scope-reduced alternatives and pending author choices are explicit.
+3. The manuscript objective is complete when every retained automated empirical claim has real reproducible evidence and omitted/unmeasured human-dependent claims are explicit. Outside reviewers and optional author feedback are not prerequisites; unfinished required training or fabricated scientific evidence cannot be hidden by the scope change.
 4. No claim that authors approved or the paper was submitted/published is made without real evidence.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
@@ -1040,11 +1040,11 @@ Acceptance criteria:
 
 Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
 
-## AF-028 Receive and validate independent semantic-fidelity review
+## AF-028 Audit structural-evidence scope and optional author feedback
 
-- Status: blocked
-- Completion: manual
-- Is schedulable: false
+- Status: todo
+- Completion: auto
+- Is schedulable: true
 - Review only: false
 - Priority: P0
 - Track: autoformalization
@@ -1055,25 +1055,25 @@ Retain source/artifact hashes, exact commands, actual outcomes and limits in the
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S02
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/data/human_review_import.json, papers/completion/autoformalization/data/private_gold_commitment.json, papers/completion/autoformalization/evidence/human_review_report.md, papers/completion/autoformalization/receipts/AF-028.json, papers/completion/autoformalization/receipts/snapshots/AF-028/
-- Predicted files: papers/completion/autoformalization/data/human_review_import.json, papers/completion/autoformalization/data/private_gold_commitment.json, papers/completion/autoformalization/evidence/human_review_report.md, papers/completion/autoformalization/receipts/AF-028.json, papers/completion/autoformalization/receipts/snapshots/AF-028/
+- Outputs: papers/completion/autoformalization/config/structural_evidence_scope.json, papers/completion/autoformalization/evidence/structural_scope_audit.json, papers/completion/autoformalization/evidence/author_feedback_status.json, papers/completion/autoformalization/evidence/structural_scope_report.md, papers/completion/autoformalization/manuscript/empirical_scope.tex, papers/completion/autoformalization/protocol.md, papers/completion/autoformalization/receipts/AF-028.json, papers/completion/autoformalization/receipts/snapshots/AF-028
+- Predicted files: papers/completion/autoformalization/config/structural_evidence_scope.json, papers/completion/autoformalization/evidence/structural_scope_audit.json, papers/completion/autoformalization/evidence/author_feedback_status.json, papers/completion/autoformalization/evidence/structural_scope_report.md, papers/completion/autoformalization/manuscript/empirical_scope.tex, papers/completion/autoformalization/protocol.md, papers/completion/autoformalization/receipts/AF-028.json, papers/completion/autoformalization/receipts/snapshots/AF-028
 - Allowed paths:
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-028
-- Acceptance: Returned judgments cover the frozen selected population, distinguish unknown/missing from negative, and bind exact source and packet identities without changing selection after outcomes. Reviewers do not inspect evaluated model predictions; final predictions are produced only after this independent gold is sealed.; Two independent human reviewer identities, review timestamps/attestations, disagreements and adjudicator decisions are retained privately; agreement and weighted fidelity use their declared denominators.; The review importer validates actual returned files and preserves blank/original packets; no generated label, empty import or missing review can pass.
-- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Acceptance: A versioned claim-scope audit binds actual source/evidence and distinguishes automated structural correctness, exact-goal native checker acceptance, teacher agreement, learned updates and constructed conformance from unmeasured human semantic fidelity. No proof/checker pass or automatic label is admitted as original-source semantic gold.; Independent human review, agreement and adjudication are explicitly not collected/unmeasured. Any optional author feedback has actual author provenance and a descriptive non-independent label, remains outside gold/scored metrics, and its absence does not fail manuscript or task completion.; Prior review packets/importers/commitments/receipts and sealed final custody remain unchanged. The report supplies concrete manuscript/analysis wording that omits unsupported fidelity/agreement claims while retaining failed/unrun outcomes, all real training/activation gates and reproducible structural-evidence denominators.
+- Paper evidence: User clarified that no outside reviewers are available and manuscript generation should proceed with supported automated evidence; this replaces the September12 external-review scheduling requirement, not the original distinction between teacher/prover evidence and source fidelity.
 - Reuse candidates:
 - Receipt: papers/completion/autoformalization/receipts/AF-028.json
 
-External human-review gate. Two independent annotators and an adjudicator complete the privately source-bound packets. An agent may validate returned structure/provenance and prepare disagreement reports but may not generate labels and call them independent human review. Completion requires operator verification of actual returned reviews; this task is deliberately not dispatched to an implementation model. Training and runtime development can continue independently. Actual returned judgments and adjudicated gold remain in the private reviewer store outside Git; public outputs contain aggregate counts, schemas and cryptographic import commitments only.
+Replace the external-human-review scheduling gate with an executable claim-scope audit. Read the versioned structural-evidence policy and the public AF005/AF027 preparation/provenance reports; do not open sealed final packets, source bodies, private reviewer forms or gold. Audit which reported quantities are actual training/checkpoint updates, compiler/IR structural checks, native checking of exact declared goals, finite constructed conformance or automatic teacher agreement. Require original source/goal/premise/checker/seed/denominator/cost bindings for each retained measurement. Record independent human semantic-fidelity, agreement and adjudication as not collected/unmeasured, and remove their empirical claims from the current manuscript scope. Optional author feedback is descriptive, explicitly author-provided and non-independent; its absence passes this task and it cannot become gold, agreement statistics or a semantic-fidelity score. Preserve every prior blank packet, importer, commitment, task receipt and failed attempt; do not relabel old preparation as completed review. Produce a source-bound scope audit and precise AF021/AF022 claim edits. This is automatic manuscript-support work, not an external reviewer task or permission to complete training or activate learned guidance.
 
 Acceptance criteria:
 
-1. Returned judgments cover the frozen selected population, distinguish unknown/missing from negative, and bind exact source and packet identities without changing selection after outcomes. Reviewers do not inspect evaluated model predictions; final predictions are produced only after this independent gold is sealed.
-2. Two independent human reviewer identities, review timestamps/attestations, disagreements and adjudicator decisions are retained privately; agreement and weighted fidelity use their declared denominators.
-3. The review importer validates actual returned files and preserves blank/original packets; no generated label, empty import or missing review can pass.
+1. A versioned claim-scope audit binds actual source/evidence and distinguishes automated structural correctness, exact-goal native checker acceptance, teacher agreement, learned updates and constructed conformance from unmeasured human semantic fidelity. No proof/checker pass or automatic label is admitted as original-source semantic gold.
+2. Independent human review, agreement and adjudication are explicitly not collected/unmeasured. Any optional author feedback has actual author provenance and a descriptive non-independent label, remains outside gold/scored metrics, and its absence does not fail manuscript or task completion.
+3. Prior review packets/importers/commitments/receipts and sealed final custody remain unchanged. The report supplies concrete manuscript/analysis wording that omits unsupported fidelity/agreement claims while retaining failed/unrun outcomes, all real training/activation gates and reproducible structural-evidence denominators.
 
 Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
 

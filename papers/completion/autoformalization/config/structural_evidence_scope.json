@@ -1,0 +1,49 @@
+{
+  "adjudication_status": "not_performed",
+  "agreement_status": "unmeasured_not_collected",
+  "authority": "User selected manuscript preparation without outside reviewers on2026-09-12.",
+  "current_and_future_execution": "Existing automated results retain their actual populations. New final-source evaluation needs its normal frozen source/scorer execution admission; this reporting amendment neither opens private packets nor generates gold.",
+  "excluded_claims": [
+    "independent human agreement, adjudication or semantic-fidelity scores without data",
+    "prover success or teacher agreement establishes equivalence to original natural-language meaning",
+    "legal/intent correctness or source-semantic transfer from structural compatibility",
+    "generalized real-world correctness from finite constructed examples",
+    "untouched final-distribution performance from development/calibration data"
+  ],
+  "historical_100_human_review_sample": "Prepared and retained, not reviewed; not a current manuscript completion denominator.",
+  "human_fidelity_status": "unmeasured_not_collected",
+  "independent_human_semantic_labels_available": false,
+  "manuscript_requires_external_reviewers": false,
+  "optional_author_feedback": {
+    "absence_is_acceptable": true,
+    "actual_provenance_required": true,
+    "agreement_or_fidelity_score_allowed": false,
+    "does_not_open_final_packets": true,
+    "label": "optional non-independent author feedback",
+    "may_be_used_as_gold": false
+  },
+  "optional_author_feedback_required": false,
+  "preserved": [
+    "all original completed task receipts and evidence",
+    "blank review packets, schemas, private commitments and importers",
+    "sealed final-source/gold custody",
+    "source grouping, train/selection/canary roles and outcome history",
+    "AF029 actual training criteria, current operator admission and effect journals",
+    "AF013 checkpoint/canary/consumer/rollback gates",
+    "normal native artifact validators"
+  ],
+  "retained_metrics": [
+    "actual native training update/loss/checkpoint/teacher provenance with exact split/seed/cost",
+    "parse and typed elaboration under declared supported grammar",
+    "formal structural contract and source-map mechanics",
+    "automated forward/cycle/final reconstruction agreement labeled by producer",
+    "native checker acceptance of the exact declared goal and premises",
+    "solver-local/countermodel outcomes separately labeled",
+    "constructed finite conformance with predefined expected distinctions",
+    "actual loaded-guidance activation, rejection and rollback on fixed non-final canaries",
+    "coverage/abstention/failure/unsupported/time and full resource accounting"
+  ],
+  "schema": "af-automated-structural-evidence-scope/v1",
+  "scope_change_timing": "Reporting scope narrowed after historical diagnostics and while separately admitted AF029 training runs; this is not a claim of preregistered human fidelity evaluation.",
+  "source_scoring_rule": "A checker proves the submitted formal statement within its profile. Whether that statement faithfully captures the source remains unmeasured without separate valid evidence."
+}

@@ -1,3 +1,5 @@
+> Scope update (2026-09-12): the user selected a manuscript based on supported automated structural/native-training/checker evidence, without outside reviewers. The original v1 protocol below remains a historical prespecification. Its uncollected human-fidelity study,100-annotated-unit completion floor and external-review scheduling requirement do not gate the current manuscript. The explicit replacement claim/metric policy is config/structural_evidence_scope.json and manuscript/empirical_scope.tex. This changes reporting scope, not any active training resource/source/seed contract or final-data custody; previously observed outcomes are not relabeled as confirmatory.
+
 # AF-002: frozen research protocol
 
 **Protocol version:** `AF-002/v1`, frozen 2026-09-11 UTC before any AF-002 outcome inspection. **Execution state:** no A–E or T0–T5 condition has run. This is a prespecification, not an empirical result or submission decision.
