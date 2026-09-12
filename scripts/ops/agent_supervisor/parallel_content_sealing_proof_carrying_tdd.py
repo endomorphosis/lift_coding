@@ -18,6 +18,8 @@ projection.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import select
 import json
 import os
 import re
@@ -1270,7 +1272,9 @@ def _require_runtime_resume_authority(
     }
 
 
-def _authenticated_projection(board: Any, paths: Mapping[str, Path]) -> dict[str, Any]:
+def _authenticated_projection(
+    board: Any, paths: Mapping[str, Path], *, maintenance: bool = False,
+) -> dict[str, Any]:
     owner = _owner_projection(paths)
     identity, program = _exact_live_owner_identity(board, owner)
     token = _read_owner_token(
@@ -1287,6 +1291,8 @@ def _authenticated_projection(board: Any, paths: Mapping[str, Path]) -> dict[str
             program.quack_endpoint,
             token=token,
         )
+        if maintenance:
+            connection.execute("BEGIN TRANSACTION")
         server_row = connection.execute(
             "SELECT server_id, store_id, database_uuid, process_birth_id, "
             "listen_uri, extension_fingerprint, schema_revision, generation, "
@@ -1332,6 +1338,18 @@ def _authenticated_projection(board: Any, paths: Mapping[str, Path]) -> dict[str
                 "authenticated Quack lifecycle differs from the ready projection"
             )
         tasks = _task_projection(connection)
+        if maintenance:
+            tasks["maintenance_task_rows"] = [[row[index] for index in range(8)] for row in connection.execute(
+                "SELECT task_cid, task_alias, ordinal, status, revision, plan_cid, "
+                "body_json, identity_json FROM tasks ORDER BY ordinal, task_alias"
+            ).fetchall()]
+            tasks["maintenance_block_rows"] = [[row[index] for index in range(8)] for row in connection.execute(
+                "SELECT block_id, task_cid, blocker_kind, blocker_id, reason, "
+                "created_at, cleared_at, state FROM task_blocks ORDER BY block_id"
+            ).fetchall()]
+            connection.execute("ROLLBACK")
+            if _owner_projection(paths) != owner:
+                raise OperatorError("maintenance owner changed during read transaction")
     finally:
         if connection is not None:
             connection.close()
@@ -1985,6 +2003,412 @@ def _startup_blocker_grace_seconds(board: Any, monitor_seconds: float) -> float:
     return min(float(raw_grace), monitor_seconds)
 
 
+MAINTENANCE_OBSERVATION_SCHEMA = OPERATOR_SCHEMA + "/blocked-maintenance-observation@1"
+
+
+class DiagnosedBlockedMaintenance(OperatorError):
+    """Native launch completed infrastructure recovery; work remains blocked.
+
+    This remains an OperatorError for ordinary command-line callers. Only the
+    retained maintenance caller may consume the separate diagnostic outcome.
+    It grants no callback, task, acceptance, or publication authority.
+    """
+
+    def __init__(self, observation: Mapping[str, Any]):
+        super().__init__("infrastructure recovered; authenticated initial work remains blocked")
+        self.observation = json.loads(json.dumps(observation))
+
+
+def _maintenance_require(condition: bool, reason: str) -> None:
+    if not condition:
+        raise OperatorError("blocked maintenance observation refused: " + reason)
+
+
+def _maintenance_source(config_path: Path) -> dict[str, Any]:
+    """Observe source bytes without optional Git index refresh writes."""
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.merge.workspace_quarantine import read_regular
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        _read_control_plane_source_snapshot, IMPORTED_CONTROL_PLANE_SOURCE, CONTROL_PLANE_SOURCE_PATHS,
+    )
+    source = _read_control_plane_source_snapshot()
+    _maintenance_require(IMPORTED_CONTROL_PLANE_SOURCE.get("source_id") == source.get("source_id"),
+                         "loaded runtime source differs from current source")
+    _maintenance_require(bool(source.get("source_id")) and bool(source.get("control_plane_tree_id"))
+                         and [item.get("path") for item in source.get("sources", [])] == list(CONTROL_PLANE_SOURCE_PATHS)
+                         and all(item.get("available") is True for item in source.get("sources", [])),
+                         "runtime source incomplete")
+    roots = (ROOT, ACCEL_ROOT, ROOT / "external/ipfs_datasets", ROOT / "external/ipfs_kit")
+    revisions = []
+    for root in roots:
+        result = subprocess.run(
+            ["git", "--no-optional-locks", "-c", "diff.autoRefreshIndex=false", "-C", str(root),
+             "rev-parse", "--show-toplevel", "HEAD"], capture_output=True, text=True, timeout=10,
+            env=_python_environment(),
+        )
+        lines = result.stdout.splitlines()
+        _maintenance_require(result.returncode == 0 and len(lines) == 2 and lines[0] == str(root)
+                             and bool(re.fullmatch(r"[0-9a-f]{40}", lines[1])), "repository identity unavailable")
+        revisions.append([str(root), lines[1]])
+    _maintenance_require(source.get("repository_revision") == revisions[1][1],
+                         "loaded runtime revision differs from adopted checkout")
+    for item in source["sources"]:
+        raw, _ = read_regular(ACCEL_ROOT / item["path"], bound=16 * 1024 * 1024)
+        _maintenance_require(len(raw) == item["size_bytes"]
+                             and hashlib.sha256(raw).hexdigest() == item["sha256"],
+                             "loaded runtime bytes differ from adopted checkout")
+    # The retained native driver may use an independently qualified identical
+    # runtime checkout. Path provenance is not source-content identity: all
+    # loaded/current/adopted file bytes and runtime revision were checked above.
+    source = {key: value for key, value in source.items() if key != "repository_root"}
+    files = []
+    for path in (Path(__file__), config_path):
+        raw, _ = read_regular(_contained(path), bound=MAX_JSON_BYTES)
+        files.append([str(path), hashlib.sha256(raw).hexdigest()])
+    return {"repositories": revisions, "files": files, "runtime": source}
+
+
+def _maintenance_rows(authority: Mapping[str, Any]) -> tuple[dict[str, list[Any]], dict[str, list[Any]]]:
+    rows = authority.get("maintenance_task_rows")
+    blocks = authority.get("maintenance_block_rows")
+    _maintenance_require(isinstance(rows, list) and isinstance(blocks, list), "full task/block rows missing")
+    identities = authority.get("task_identity_rows")
+    statuses = authority.get("task_statuses")
+    _maintenance_require(isinstance(identities, list) and isinstance(statuses, list)
+                         and len(rows) == len(identities) == len(statuses), "full task population differs")
+    by_alias: dict[str, list[Any]] = {}
+    for index, row in enumerate(rows):
+        _maintenance_require(isinstance(row, list) and len(row) == 8
+                             and row[:3] == list(identities[index]) and row[3] == statuses[index]
+                             and type(row[4]) is int and row[4] >= 0
+                             and all(isinstance(row[i], str) for i in (0, 1, 3, 5, 6, 7))
+                             and row[1] not in by_alias, "task identity/status/revision differs")
+        by_alias[row[1]] = row
+    by_id: dict[str, list[Any]] = {}
+    cids = {row[0] for row in rows}
+    for row in blocks:
+        _maintenance_require(isinstance(row, list) and len(row) == 8
+                             and all(isinstance(row[i], str) for i in (0, 1, 2, 3, 4, 5, 7))
+                             and (row[6] is None or isinstance(row[6], str))
+                             and bool(row[0]) and row[0] not in by_id and row[1] in cids,
+                             "block record malformed, duplicated or foreign")
+        by_id[row[0]] = row
+    return by_alias, by_id
+
+
+def _maintenance_block_subset(baseline: Mapping[str, Any], current: Mapping[str, Any]) -> list[str]:
+    old_tasks, old_blocks = _maintenance_rows(baseline)
+    tasks, blocks = _maintenance_rows(current)
+    old_ids = _exact_blocked_task_ids(baseline, source="maintenance baseline", require_authenticated=True)
+    ids = _exact_blocked_task_ids(current, source="maintenance current", require_authenticated=True)
+    _maintenance_require(bool(ids) and ids <= old_ids, "new or absent current blocker")
+    # Resolution may remove blockers. Every surviving blocked task and every
+    # current active block must still be the exact previously observed record.
+    for alias in ids:
+        _maintenance_require(tasks[alias] == old_tasks.get(alias), "surviving blocked task changed")
+        cid = tasks[alias][0]
+        _maintenance_require([row for row in blocks.values() if row[1] == cid and row[7] == "active"]
+                             == [row for row in old_blocks.values() if row[1] == cid and row[7] == "active"],
+                             "surviving task blocker population changed")
+    for block_id, row in blocks.items():
+        if row[7] == "active":
+            _maintenance_require(row == old_blocks.get(block_id), "new or replaced active blocker")
+    current_active = {row[1] for row in blocks.values() if row[7] == "active"}
+    derived = {alias for alias, row in tasks.items() if row[3] in FAILED_STATUSES or row[0] in current_active}
+    _maintenance_require(derived == ids, "blocked aliases differ from exact records")
+    return sorted(ids)
+
+
+def capture_maintenance_baseline(config_path: Path) -> dict[str, Any]:
+    """Read the existing authority; never open its local database or mutate it.
+
+    A source-bound maintenance driver may execute this reviewed observer before
+    source adoption using the existing old owner's native transport and schema.
+    Its outer custody/source gates must remain held across that observation.
+    """
+    board, _ = _load_board(config_path)
+    paths = _runtime_paths(board)
+    source = _maintenance_source(config_path)
+    authority = _authenticated_projection(board, paths, maintenance=True)
+    _require_runtime_resume_authority(authority, expected_task_identities=_configured_task_identities(board))
+    _maintenance_rows(authority)
+    _maintenance_require(_maintenance_source(config_path) == source, "source changed during baseline")
+    return {"schema": MAINTENANCE_OBSERVATION_SCHEMA, "source": source,
+            "authority": authority, "callback_settlement_claimed": False}
+
+
+def _maintenance_process(pid: int) -> dict[str, Any]:
+    """Positive kernel identity only; inaccessible or reused actors refuse."""
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import read_process_birth
+    _maintenance_require(type(pid) is int and pid > 1, "invalid actor PID")
+    before = read_process_birth(pid)
+    _maintenance_require(before is not None, "actor is not positively live")
+    root = Path("/proc") / str(pid)
+    def bounded(name: str) -> bytes:
+        with (root / name).open("rb") as handle:
+            value = handle.read(131073)
+        _maintenance_require(len(value) <= 131072, "actor metadata bound")
+        return value
+    fields = bounded("stat").decode().rsplit(")", 1)[1].split()
+    value = {"birth": before.to_dict(), "uid": root.stat().st_uid,
+             "argv": [part.decode() for part in bounded("cmdline").split(b"\0") if part],
+             "cwd": os.readlink(root / "cwd"), "root": os.readlink(root / "root"),
+             "exe": os.readlink(root / "exe"), "group": int(fields[2]), "session": int(fields[3]),
+             "cgroup": bounded("cgroup").decode(),
+             "namespaces": {name: os.readlink(root / "ns" / name) for name in ("mnt", "pid", "user")}}
+    _maintenance_require(read_process_birth(pid) == before and fields[0] not in {"Z", "X", "T", "t"}
+                         and value["uid"] == os.geteuid() and value["cwd"] == str(ROOT)
+                         and value["root"] == os.readlink("/proc/self/root")
+                         and value["exe"] == os.readlink("/proc/self/exe")
+                         and value["namespaces"] == {name: os.readlink("/proc/self/ns/" + name)
+                                                    for name in ("mnt", "pid", "user")},
+                         "actor birth, execution or namespace differs")
+    return value
+
+
+def _maintenance_option(argv: Sequence[str], name: str, value: str) -> bool:
+    return [argv[i + 1] for i, token in enumerate(argv[:-1]) if token == name] == [value]
+
+
+def _maintenance_daemon_command(board: Any, wrapper: Mapping[str, Any], daemon: Mapping[str, Any]) -> None:
+    """Reconstruct the exact existing native command without starting a wrapper.
+
+    Config parsing and the non-plan-bound command renderer are pure. Deliberately
+    bypass the supervisor constructor, which has unrelated stateful work.
+    """
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor, parse_args, supervisor_config_from_args,
+    )
+    argv = wrapper["argv"]
+    entry = str(ROOT / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py")
+    _maintenance_require(len(argv) > 2 and argv[1] == entry, "native wrapper entry differs")
+    config = supervisor_config_from_args(parse_args(list(argv[2:])), repo_root=ROOT)
+    _maintenance_require(not config.plan_bound_dispatch and config.daemon_script_path is None
+                         and config.database_program is not None
+                         and config.database_program == board.resolved_database_program()
+                         and config.task_prefix == board.task_prefix
+                         and config.board_namespace == board.board_namespace
+                         and config.task_shard_count == int(board.max_lanes),
+                         "native daemon configured scope differs")
+    renderer = object.__new__(PortalImplementationSupervisor)
+    renderer.config = config
+    renderer.board_namespace = board.board_namespace
+    expected = renderer._build_daemon_command()
+    _maintenance_require(renderer._commands_match_with_verified_executable_alias(daemon["argv"], expected),
+                         "native daemon command differs")
+
+
+def _maintenance_cohort_identity(cohort: Mapping[str, Any]) -> dict[str, Any]:
+    """Owner PPID is observational; its stable birth survives caller exit.
+
+    Native Quack liveness binds PID, start ticks and boot. The owner's launch
+    parent can exit after a qualified handoff. Preserve the full observations
+    in receipts while comparing that exact native immutable birth definition.
+    Lane direct-parent relationships remain part of the compared identity.
+    """
+    value = json.loads(json.dumps(cohort))
+    owner_birth = value["owner"]["birth"]
+    value["owner"]["birth"] = {key: owner_birth[key] for key in ("pid", "start_time_ticks", "boot_id")}
+    return value
+
+
+class _BlockedMaintenanceMonitor:
+    """Retain the actual launched cohort while native observations qualify it."""
+    def __init__(self, config_path: Path, board: Any, paths: Mapping[str, Path],
+                 baseline: Mapping[str, Any], admitted_identity: Mapping[str, Any]):
+        _maintenance_require(baseline.get("schema") == MAINTENANCE_OBSERVATION_SCHEMA
+                             and baseline.get("callback_settlement_claimed") is False,
+                             "baseline schema differs")
+        self.config_path, self.board, self.paths = config_path, board, paths
+        self.baseline = json.loads(json.dumps(baseline))
+        self.admitted_identity = json.loads(json.dumps(admitted_identity))
+        self.expected = _configured_task_identities(board)
+        _require_runtime_resume_authority(self.baseline["authority"], expected_task_identities=self.expected)
+        _maintenance_rows(self.baseline["authority"])
+        self.source = _maintenance_source(config_path)
+        self.master_pid = 0
+        self.fds: dict[int, int] = {}
+        self.cohort: dict[str, Any] | None = None
+        self.since: float | None = None
+        self.last: dict[str, Any] | None = None
+
+    def close(self) -> None:
+        for descriptor in self.fds.values():
+            os.close(descriptor)
+        self.fds.clear()
+
+    def bind_launch(self, result: Mapping[str, Any]) -> None:
+        payload = result.get("json")
+        if isinstance(payload, Mapping) and type(payload.get("master_pid")) is int:
+            pid = payload["master_pid"]
+        else:
+            # The existing non-plan-bound native launcher emits these exact
+            # terminal key=value records after its printed launch plan.
+            values = re.findall(r"^master_pid=([1-9][0-9]*)$", str(result.get("stdout") or ""), re.M)
+            _maintenance_require(len(values) == 1, "native launched master receipt unavailable")
+            pid = int(values[0])
+        self.master_pid = pid
+        self.launched_master = self.actor(pid)
+        argv = self.launched_master["argv"]
+        _maintenance_require("ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner" in argv
+                             and _maintenance_option(argv, "--repo-root", str(ROOT))
+                             and _maintenance_option(argv, "--master-dir", str(self.paths["runtime"])),
+                             "launched master scope differs")
+
+    def actor(self, pid: int) -> dict[str, Any]:
+        value = _maintenance_process(pid)
+        if pid not in self.fds:
+            descriptor = os.pidfd_open(pid, 0)
+            try:
+                _maintenance_require(_maintenance_process(pid) == value, "actor changed while retaining pidfd")
+                self.fds[pid] = descriptor
+            except BaseException:
+                os.close(descriptor)
+                raise
+        _maintenance_require(not select.select([self.fds[pid]], [], [], 0)[0], "retained actor exited")
+        return value
+
+    def observe(self, advisory: Mapping[str, Any], now: float, *, allow_resolved: bool = False) -> None:
+        authority = _authenticated_projection(self.board, self.paths, maintenance=True)
+        _require_runtime_resume_authority(authority, expected_task_identities=self.expected)
+        identity = authority["identity"]
+        _maintenance_require(identity == self.admitted_identity, "newly admitted owner changed")
+        old_identity = self.baseline["authority"]["identity"]
+        _maintenance_require(all(identity[key] == old_identity[key] for key in
+                                ("store_id", "database_uuid", "listen_uri", "schema_revision", "extension_fingerprint"))
+                             and type(identity["generation"]) is int
+                             and identity["generation"] > old_identity["generation"], "owner store/generation differs")
+        _maintenance_require(_maintenance_source(self.config_path) == self.source, "source changed")
+        _maintenance_rows(authority)
+        current_ids = _exact_blocked_task_ids(authority, source="maintenance current", require_authenticated=True)
+        if not current_ids and not allow_resolved:
+            self.since, self.last = None, None
+            return
+        remaining = (_maintenance_block_subset(self.baseline["authority"], authority) if current_ids else [])
+        supervisor = _supervisor_projection(self.board, self.paths)
+        lanes = supervisor.get("lanes", [])
+        if not (supervisor.get("ready") is True and supervisor.get("master_pid") == self.master_pid
+                and len(lanes) == int(self.board.max_lanes) == 4
+                and all(lane.get("healthy") is True for lane in lanes)):
+            self.since, self.last = None, None
+            return
+        master = self.actor(self.master_pid)
+        _maintenance_require(master == self.launched_master, "launched master changed")
+        published, _ = _exact_live_owner_identity(self.board, _owner_projection(self.paths))
+        _maintenance_require(all(str(published.get(key)) == str(value)
+                                 for key, value in identity.items() if key != "revision")
+                             and int(published.get("revision", -1)) + 1 == identity["revision"],
+                             "authenticated and published owner differ")
+        owner = self.actor(published["process_birth"]["pid"])
+        from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import ProcessBirthIdentity
+        from ipfs_accelerate_py.agent_supervisor.runtime.quack_owner_watchdog import process_births_match
+        _maintenance_require(process_births_match(ProcessBirthIdentity.from_dict(owner["birth"]),
+                                                  ProcessBirthIdentity.from_dict(published["process_birth"])),
+                             "owner birth differs")
+        actors = {"master": master, "owner": owner, "lanes": []}
+        for index, lane in enumerate(lanes):
+            _maintenance_require(lane["index"] == index, "lane population differs")
+            wrapper = self.actor(lane["supervisor_pid"])
+            daemon = self.actor(lane["daemon_pid"])
+            directory = self.paths["state"] / f"lane-{index}"
+            prefix = f"{_slug(str(self.board.task_prefix))}_lane_{index}"
+            _maintenance_require(wrapper["birth"]["parent_pid"] == self.master_pid
+                                 and daemon["birth"]["parent_pid"] == wrapper["birth"]["pid"]
+                                 and str(ROOT / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py") in wrapper["argv"]
+                                 and all(_maintenance_option(actor["argv"], "--state-dir", str(directory))
+                                         and _maintenance_option(actor["argv"], "--state-prefix", prefix)
+                                         for actor in (wrapper, daemon))
+                                 and _maintenance_option(wrapper["argv"], "--task-shard-index", str(index)),
+                                 "lane parent or native scope differs")
+            _maintenance_daemon_command(self.board, wrapper, daemon)
+            projection = _json_object(directory / (prefix + "_supervisor_status.json"))
+            runtime = self.source["runtime"]
+            _maintenance_require(projection.get("supervisor_pid") == wrapper["birth"]["pid"]
+                                 and projection.get("control_plane_source_id") == runtime["source_id"]
+                                 and projection.get("control_plane_current_source_id") == runtime["source_id"]
+                                 and projection.get("control_plane_source_tree_id") == runtime["control_plane_tree_id"]
+                                 and projection.get("control_plane_update_pending") is False,
+                                 "lane loaded source differs")
+            actors["lanes"].append({"index": index, "wrapper": wrapper, "daemon": daemon})
+        for retained in [master, owner, *(actor for lane in actors["lanes"] for actor in (lane["wrapper"], lane["daemon"]))]:
+            _maintenance_require(self.actor(retained["birth"]["pid"]) == retained,
+                                 "cohort changed before observation completed")
+        _maintenance_require(_maintenance_source(self.config_path) == self.source,
+                             "source changed before observation completed")
+        final_owner, _ = _exact_live_owner_identity(self.board, _owner_projection(self.paths))
+        _maintenance_require(final_owner == published, "owner changed before observation completed")
+        if self.cohort is None:
+            self.cohort, self.since = actors, now
+        else:
+            _maintenance_require(_maintenance_cohort_identity(actors) == _maintenance_cohort_identity(self.cohort),
+                                 "retained launch cohort changed")
+            if self.since is None:
+                self.since = now
+        self.last = {"schema": MAINTENANCE_OBSERVATION_SCHEMA,
+                     "outcome": ("infrastructure_recovered_work_blocked" if remaining else "infrastructure_cohort_verified"),
+                     "operational_ready": False,
+                     "callback_settlement_claimed": False, "task_acceptance_claimed": False,
+                     "baseline": self.baseline, "source": self.source, "cohort": actors,
+                     "authority": authority, "remaining_blocked_task_ids": remaining,
+                     "stable_health_seconds": now - self.since}
+
+    def raise_diagnosed(self, advisory: Mapping[str, Any]) -> dict[str, Any]:
+        # Freshly repeat all gates at the actual native refusal boundary. No
+        # earlier status JSON, exception text, or fixture count can issue this.
+        self.observe(advisory, time.monotonic(), allow_resolved=True)
+        _maintenance_require(self.last is not None
+                             and self.last["stable_health_seconds"] >= MIN_STABLE_HEALTH_SECONDS,
+                             "infrastructure stability window incomplete")
+        if self.last["remaining_blocked_task_ids"]:
+            raise DiagnosedBlockedMaintenance(self.last)
+        # A blocker may resolve after the advisory status was sampled. Keep
+        # the same cohort's infrastructure timer, then require ordinary native
+        # readiness and repeat custody after that read before returning success.
+        return self.resolved_readiness(MIN_STABLE_HEALTH_SECONDS)
+
+    def resolved_readiness(self, minimum_stable_seconds: float = 0.0) -> dict[str, Any]:
+        ready = status(self.config_path)
+        authority = ready.get("task_authority", {})
+        _require_runtime_resume_authority(authority, expected_task_identities=self.expected)
+        _maintenance_require(ready.get("operational_ready") is True
+                             and authority.get("identity") == self.admitted_identity,
+                             "resolved boundary lacks ordinary native readiness")
+        self.observe(ready, time.monotonic(), allow_resolved=True)
+        _maintenance_require(self.last is not None and not self.last["remaining_blocked_task_ids"]
+                             and self.last["stable_health_seconds"] >= minimum_stable_seconds,
+                             "resolved boundary changed during readiness observation")
+        return ready
+
+
+def verify_diagnosed_blocked_maintenance(config_path: Path, observation: Mapping[str, Any]) -> dict[str, Any]:
+    """Fresh read-only verification of the previously diagnosed exact cohort."""
+    _maintenance_require(observation.get("schema") == MAINTENANCE_OBSERVATION_SCHEMA
+                         and observation.get("outcome") == "infrastructure_recovered_work_blocked"
+                         and observation.get("operational_ready") is False
+                         and observation.get("callback_settlement_claimed") is False
+                         and observation.get("stable_health_seconds", 0) >= MIN_STABLE_HEALTH_SECONDS,
+                         "diagnosed observation shape differs")
+    board, _ = _load_board(config_path)
+    check = _BlockedMaintenanceMonitor(config_path, board, _runtime_paths(board), observation["baseline"], observation["authority"]["identity"])
+    try:
+        _maintenance_require(check.source == observation["source"], "diagnosed source changed")
+        check.master_pid = observation["cohort"]["master"]["birth"]["pid"]
+        check.launched_master = observation["cohort"]["master"]
+        check.cohort = observation["cohort"]
+        check.observe({}, time.monotonic(), allow_resolved=True)
+        _maintenance_require(check.last is not None, "diagnosed infrastructure is not healthy")
+        if not check.last["remaining_blocked_task_ids"]:
+            check.resolved_readiness()
+            check.last["outcome"] = "infrastructure_recovered_work_unblocked"
+            check.last["operational_ready"] = True
+        return {"original_diagnosis": json.loads(json.dumps(observation)),
+                "current_verification": check.last}
+    finally:
+        check.close()
+
+
 def _launch_scheduler_and_monitor(
     config_path: Path,
     *,
@@ -1996,121 +2420,95 @@ def _launch_scheduler_and_monitor(
     command: str,
     mode: str,
     runtime_admission: Mapping[str, Any] | None = None,
+    maintenance_baseline: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Launch the one configured scheduler and monitor authoritative progress."""
 
     _require_native_start_allowed(paths)
-    initial_completed = int(initial_authority.get("completed_count") or 0)
-    initial_blocked_ids = _exact_blocked_task_ids(
-        initial_authority,
-        source="initial",
-        require_authenticated=True,
-    )
-    startup_blocker_grace = _startup_blocker_grace_seconds(
-        board,
-        monitor_seconds,
-    )
-    program = board.resolved_database_program()
-    token = _read_owner_token(_token_path(paths["owner"], program.endpoint_secret_handle))
-    _require_native_start_allowed(paths)
-    result = _run(
-        _scheduler_command(config_path, dry_run=False),
-        environment=_python_environment(
-            token=token,
-            secret_handle=program.endpoint_secret_handle,
-        ),
-        timeout=900.0,
+    maintenance = (
+        _BlockedMaintenanceMonitor(config_path, board, paths, maintenance_baseline, initial_authority["identity"])
+        if maintenance_baseline is not None else None
     )
     try:
-        _reject_secret_echo(result, token)
-    finally:
-        # Drop the sole in-memory copy owned by this operator as soon as the
-        # canonical detached scheduler inherits its private environment.
-        token = ""
-    _require_success(result, "configured-board detached implementation launch")
-
-    monitor_started = time.monotonic()
-    deadline = monitor_started + monitor_seconds
-    startup_blocker_deadline = monitor_started + startup_blocker_grace
-    last: dict[str, Any] = {}
-    healthy_since: float | None = None
-    healthy_processes: tuple[int, ...] = ()
-    progress_observed = False
-    while time.monotonic() < deadline:
-        last = status(config_path)
-        authority = last.get("task_authority")
-        authority = authority if isinstance(authority, Mapping) else {}
-        progress_observed = progress_observed or bool(
-            int(authority.get("in_progress_count") or 0) > 0
-            or int(authority.get("completed_count") or 0) > initial_completed
-            or authority.get("accepted_terminal") is True
+        initial_completed = int(initial_authority.get("completed_count") or 0)
+        initial_blocked_ids = _exact_blocked_task_ids(
+            initial_authority,
+            source="initial",
+            require_authenticated=True,
         )
-        supervisor = last.get("supervisor")
-        supervisor = supervisor if isinstance(supervisor, Mapping) else {}
-        lanes = supervisor.get("lanes")
-        lanes = lanes if isinstance(lanes, list) else []
-        if (
-            authority.get("authenticated_query") is True
-            and authority.get("accepted_terminal") is True
-            and last.get("program_state") == "accepted_terminal"
-        ):
+        startup_blocker_grace = _startup_blocker_grace_seconds(
+            board,
+            monitor_seconds,
+        )
+        program = board.resolved_database_program()
+        token = _read_owner_token(_token_path(paths["owner"], program.endpoint_secret_handle))
+        _require_native_start_allowed(paths)
+        result = _run(
+            _scheduler_command(config_path, dry_run=False),
+            environment=_python_environment(
+                token=token,
+                secret_handle=program.endpoint_secret_handle,
+            ),
+            timeout=900.0,
+        )
+        try:
+            _reject_secret_echo(result, token)
+        finally:
+            # Drop the sole in-memory copy owned by this operator as soon as the
+            # canonical detached scheduler inherits its private environment.
+            token = ""
+        _require_success(result, "configured-board detached implementation launch")
+        if maintenance is not None:
+            maintenance.bind_launch(result)
+
+        monitor_started = time.monotonic()
+        deadline = monitor_started + monitor_seconds
+        startup_blocker_deadline = monitor_started + startup_blocker_grace
+        last: dict[str, Any] = {}
+        healthy_since: float | None = None
+        healthy_processes: tuple[int, ...] = ()
+        progress_observed = False
+        def maintenance_boundary_response() -> dict[str, Any]:
+            assert maintenance is not None
+            ready = maintenance.raise_diagnosed(last)
+            authority = ready["task_authority"]
+            ready_progress = progress_observed or bool(
+                int(authority.get("in_progress_count") or 0) > 0
+                or int(authority.get("completed_count") or 0) > initial_completed
+                or authority.get("accepted_terminal") is True
+            )
+            _maintenance_require(ready_progress, "resolved boundary lacks authoritative progress")
             response = {
-                "schema": OPERATOR_SCHEMA,
-                "command": command,
-                "mode": mode,
-                "launched": True,
-                "already_running": False,
-                "accepted_terminal": True,
-                "process_health_claimed": False,
-                "monitored": True,
+                "schema": OPERATOR_SCHEMA, "command": command, "mode": mode,
+                "launched": True, "already_running": False, "accepted_terminal": False,
+                "process_health_claimed": True, "monitored": True,
+                "stable_health_seconds": maintenance.last["stable_health_seconds"],
                 "authoritative_progress_observed": True,
-                "initial_completed_count": initial_completed,
-                "state_owner": dict(owner),
+                "initial_completed_count": initial_completed, "state_owner": dict(owner),
                 "scheduler": result["json"] if result["json"] is not None else {
-                    "stdout": result["stdout"],
-                    "stderr": result["stderr"],
-                },
-                "status": last,
+                    "stdout": result["stdout"], "stderr": result["stderr"],
+                }, "status": ready,
             }
             if runtime_admission is not None:
                 response["runtime_admission"] = dict(runtime_admission)
             return response
-        process_signature = (
-            int(supervisor.get("master_pid") or 0),
-            *(
-                process_id
-                for lane in lanes
-                if isinstance(lane, Mapping)
-                for process_id in (
-                    int(lane.get("supervisor_pid") or 0),
-                    int(lane.get("daemon_pid") or 0),
-                )
-            ),
-        )
-        now = time.monotonic()
-        expected_lane_count = int(supervisor.get("expected_lane_count") or 0)
-        all_lanes_live = bool(
-            expected_lane_count > 0
-            and len(lanes) == expected_lane_count
-            and all(
-                isinstance(lane, Mapping) and lane.get("healthy") is True
-                for lane in lanes
+        while time.monotonic() < deadline:
+            last = status(config_path)
+            authority = last.get("task_authority")
+            authority = authority if isinstance(authority, Mapping) else {}
+            progress_observed = progress_observed or bool(
+                int(authority.get("in_progress_count") or 0) > 0
+                or int(authority.get("completed_count") or 0) > initial_completed
+                or authority.get("accepted_terminal") is True
             )
-        )
-        if (
-            last["operational_ready"] is True
-            and progress_observed
-            and supervisor.get("master_alive") is True
-            and supervisor.get("ready") is True
-            and all_lanes_live
-            and process_signature
-            and all(process_id > 1 for process_id in process_signature)
-        ):
-            if healthy_processes != process_signature:
-                healthy_processes = process_signature
-                healthy_since = now
-            elif healthy_since is not None and (
-                now - healthy_since >= MIN_STABLE_HEALTH_SECONDS
+            supervisor = last.get("supervisor")
+            supervisor = supervisor if isinstance(supervisor, Mapping) else {}
+            lanes = supervisor.get("lanes")
+            lanes = lanes if isinstance(lanes, list) else []
+            if (
+                authority.get("authenticated_query") is True
+                and authority.get("accepted_terminal") is True
+                and last.get("program_state") == "accepted_terminal"
             ):
                 response = {
                     "schema": OPERATOR_SCHEMA,
@@ -2118,10 +2516,9 @@ def _launch_scheduler_and_monitor(
                     "mode": mode,
                     "launched": True,
                     "already_running": False,
-                    "accepted_terminal": False,
-                    "process_health_claimed": True,
+                    "accepted_terminal": True,
+                    "process_health_claimed": False,
                     "monitored": True,
-                    "stable_health_seconds": now - healthy_since,
                     "authoritative_progress_observed": True,
                     "initial_completed_count": initial_completed,
                     "state_owner": dict(owner),
@@ -2134,60 +2531,130 @@ def _launch_scheduler_and_monitor(
                 if runtime_admission is not None:
                     response["runtime_admission"] = dict(runtime_admission)
                 return response
-        else:
-            healthy_since = None
-            healthy_processes = ()
-        if last.get("program_state") in {
-            "blocked",
-            "stalled_dependency_frontier",
-            "stalled_empty_frontier",
-        }:
-            # Give newly launched lanes a short admission window before treating
-            # an empty frontier as genuine. Exact blockers already present in
-            # the authenticated pre-launch authority may be reconciled by those
-            # lanes during the bounded startup window. New, additional, or
-            # malformed blockers remain immediate fail-closed terminals.
-            if last.get("program_state") == "blocked":
-                current_blocked_ids = _exact_blocked_task_ids(
-                    authority,
-                    source="current",
-                    require_authenticated=True,
+            process_signature = (
+                int(supervisor.get("master_pid") or 0),
+                *(
+                    process_id
+                    for lane in lanes
+                    if isinstance(lane, Mapping)
+                    for process_id in (
+                        int(lane.get("supervisor_pid") or 0),
+                        int(lane.get("daemon_pid") or 0),
+                    )
+                ),
+            )
+            now = time.monotonic()
+            if maintenance is not None:
+                maintenance.observe(last, now, allow_resolved=True)
+            expected_lane_count = int(supervisor.get("expected_lane_count") or 0)
+            all_lanes_live = bool(
+                expected_lane_count > 0
+                and len(lanes) == expected_lane_count
+                and all(
+                    isinstance(lane, Mapping) and lane.get("healthy") is True
+                    for lane in lanes
                 )
-                if not current_blocked_ids:
-                    raise OperatorError(
-                        "malformed current blocked-task projection"
+            )
+            if (
+                last["operational_ready"] is True
+                and progress_observed
+                and supervisor.get("master_alive") is True
+                and supervisor.get("ready") is True
+                and all_lanes_live
+                and process_signature
+                and all(process_id > 1 for process_id in process_signature)
+            ):
+                if healthy_processes != process_signature:
+                    healthy_processes = process_signature
+                    healthy_since = now
+                elif healthy_since is not None and (
+                    now - healthy_since >= MIN_STABLE_HEALTH_SECONDS
+                ):
+                    response = {
+                        "schema": OPERATOR_SCHEMA,
+                        "command": command,
+                        "mode": mode,
+                        "launched": True,
+                        "already_running": False,
+                        "accepted_terminal": False,
+                        "process_health_claimed": True,
+                        "monitored": True,
+                        "stable_health_seconds": now - healthy_since,
+                        "authoritative_progress_observed": True,
+                        "initial_completed_count": initial_completed,
+                        "state_owner": dict(owner),
+                        "scheduler": result["json"] if result["json"] is not None else {
+                            "stdout": result["stdout"],
+                            "stderr": result["stderr"],
+                        },
+                        "status": last,
+                    }
+                    if runtime_admission is not None:
+                        response["runtime_admission"] = dict(runtime_admission)
+                    return response
+            else:
+                healthy_since = None
+                healthy_processes = ()
+            if last.get("program_state") in {
+                "blocked",
+                "stalled_dependency_frontier",
+                "stalled_empty_frontier",
+            }:
+                # Give newly launched lanes a short admission window before treating
+                # an empty frontier as genuine. Exact blockers already present in
+                # the authenticated pre-launch authority may be reconciled by those
+                # lanes during the bounded startup window. New, additional, or
+                # malformed blockers remain immediate fail-closed terminals.
+                if last.get("program_state") == "blocked":
+                    current_blocked_ids = _exact_blocked_task_ids(
+                        authority,
+                        source="current",
+                        require_authenticated=True,
                     )
-                new_blocked_ids = current_blocked_ids - initial_blocked_ids
-                if new_blocked_ids:
-                    joined = ", ".join(sorted(new_blocked_ids))
+                    if not current_blocked_ids:
+                        raise OperatorError(
+                            "malformed current blocked-task projection"
+                        )
+                    new_blocked_ids = current_blocked_ids - initial_blocked_ids
+                    if new_blocked_ids:
+                        joined = ", ".join(sorted(new_blocked_ids))
+                        raise OperatorError(
+                            "supervisor reported new blocked task after detached "
+                            f"launch: {joined}"
+                        )
+                    if time.monotonic() >= startup_blocker_deadline:
+                        if maintenance is not None:
+                            return maintenance_boundary_response()
+                        raise OperatorError(
+                            "initial authenticated blockers persisted through the "
+                            "bounded startup recovery window"
+                        )
+                elif deadline - time.monotonic() < monitor_seconds - 15.0:
                     raise OperatorError(
-                        "supervisor reported new blocked task after detached "
-                        f"launch: {joined}"
+                        f"supervisor reached non-progress state: {last['program_state']}"
                     )
-                if time.monotonic() >= startup_blocker_deadline:
-                    raise OperatorError(
-                        "initial authenticated blockers persisted through the "
-                        "bounded startup recovery window"
-                    )
-            elif deadline - time.monotonic() < monitor_seconds - 15.0:
-                raise OperatorError(
-                    f"supervisor reached non-progress state: {last['program_state']}"
-                )
-        time.sleep(1.0)
-    if last.get("program_state") == "blocked":
+            time.sleep(1.0)
+        if last.get("program_state") == "blocked":
+            if maintenance is not None:
+                return maintenance_boundary_response()
+            raise OperatorError(
+                "initial authenticated blockers persisted through the bounded "
+                "startup recovery window"
+            )
+        if maintenance is not None and last.get("operational_ready") is True:
+            return maintenance_boundary_response()
+        if not progress_observed:
+            raise OperatorError(
+                "supervisor remained live but made no authoritative task progress "
+                "before the monitor deadline"
+            )
         raise OperatorError(
-            "initial authenticated blockers persisted through the bounded "
-            "startup recovery window"
+            "supervisor did not sustain healthy, unblocked execution before the "
+            "monitor deadline"
         )
-    if not progress_observed:
-        raise OperatorError(
-            "supervisor remained live but made no authoritative task progress "
-            "before the monitor deadline"
-        )
-    raise OperatorError(
-        "supervisor did not sustain healthy, unblocked execution before the "
-        "monitor deadline"
-    )
+    finally:
+        if maintenance is not None:
+            maintenance.close()
 
 
 def launch(
@@ -2295,6 +2762,7 @@ def _resume_locked(
     payload: Mapping[str, Any],
     paths: Mapping[str, Path],
     monitor_seconds: float,
+    maintenance_baseline: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Resume one current runtime while the operator serialization is held."""
 
@@ -2384,6 +2852,7 @@ def _resume_locked(
         command="resume",
         mode="runtime_resume",
         runtime_admission=admission,
+        maintenance_baseline=maintenance_baseline,
     )
 
 
