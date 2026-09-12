@@ -1,0 +1,157 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-014",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:59:20.253792+00:00",
+  "completion_mode": "Five matched fixed-action arms were implemented and compared on the 12 development-split reserved cases. Arms differ only by declared policy components. Candidate IDs/arguments/effects were identical across arms. A1 prompt-only and A2 retrieval+prompt are distinct; A0 remains sandboxed BoundedExportHandler dispatch. A3 used real Ed25519 UCANVerifier plus the declared-clause matcher. A4 added ENFORCE, QF_BOOL SAT/exhaustive checker, and file-backed DuckDB consumption. This is comparability qualification, not a scored LA-015 run. Singleton descendant cgroup/quota was not created; scored attempts stay unrun.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/baselines.py": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/arms.json": "418f06958aa55df738e3615c9e7b57a0b767deaa56bda3488681dee0d4236fbd",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/baselines.py": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/comparability_report.md": "76311517041104c3e4e014340af765b3fe2d18cae43180a40a319edfc4a9615c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/probe/environment.json": "d0a7a7907ad20af7b1708f5a2ddc611c79cbc132593a45811620d2f93abd1dce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/probe/resources.json": "f5f3876c7b5d333835e8fae0f62e0ae25d7e33e7cc2c3b8fd28d9a7b8180dba3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/candidates.json": "cf7d83174dbaee2f0198b1be2ada51ec8490fd2d453956c095022785ea21a9a9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/environment.json": "d0a7a7907ad20af7b1708f5a2ddc611c79cbc132593a45811620d2f93abd1dce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/records.json": "b6b2b0999cd3f8a6d79cc6ab5eb3c74e6ba51e4e34d6d5889ffb9f449ef59d3b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/resources.json": "f5f3876c7b5d333835e8fae0f62e0ae25d7e33e7cc2c3b8fd28d9a7b8180dba3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/summary.json": "98a84cae2aa2ae4a1a89c4b0076deb6a48878fb5bc5b230cd8c100a3dff96395",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/validate_comparability.py": "b0ffa9e9c7dad8bddf89851b5ac44f1edbc1cb08396dd241ca989cb4fda544f6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/qualify.stdout.log": "eea20f3475f0279ac32aa433656ee888cb2e042f3664076fee63564215c96dce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/validate.stdout.log": "ef6999a9a9df94f66471e8532da1747e4fb381c0532e9f98be57eb42984be48b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/commands.json": "c291a6758ee7476dc8d2a85e7523122f963e614f0d0f9611db6105260e46f2f2"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/arms.json": "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/arms.json",
+    "papers/completion/law_to_action/benchmark/baselines.py": "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/baselines.py",
+    "papers/completion/law_to_action/benchmark/comparability_report.md": "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/comparability_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Arm configurations are machine-readable and differ only by declared policy components.",
+      "status": "met",
+      "explanation": "arms.json declares shared_controls plus A0-A4 policy_components. After documentation labels are stripped, arms differ only by the eight declared policy-component booleans. Shared fingerprint 68922e130aab6d3f04d8df14d689c9267ceb598ea5a0f8c95589d96128cf8d31 is common; each arm fingerprint is unique. baselines.py load_arms() rejects extra execution keys.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/arms.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/baselines.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/comparability_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Fixed-action replay uses identical candidate IDs/arguments/effects across arms.",
+      "status": "met",
+      "explanation": "12 development-split reserved candidates were executed on all five arms (60 attempts). Candidate identity (ID, actor, audience, arguments, declared effects) was identical across arms for every case. A second per-arm replay of the first development candidate kept the same identity digest. Calibration and final families were not used.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/candidates.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/records.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/comparability_report.md"
+      ]
+    },
+    {
+      "criterion": "Prompt-only and retrieval+prompt are distinct, and unguarded execution remains sandboxed.",
+      "status": "met",
+      "explanation": "A1 attaches inert frozen policy text and no retrieval; A2 attaches the same policy text plus lineage-safe development retrieval metadata that excludes final siblings and acceptance oracles. Fingerprints differ. A0/A1/A2 are operationally equivalent (12/12 effects). Unguarded A0 still uses BoundedExportHandler.export_json in a per-attempt sandbox state_dir and does not evaluate generated source. A3/A4 deny the six forbidden candidates with zero effects using real Ed25519 UCAN and, for A4, ENFORCE plus SAT plus DuckDB consumption.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/arms.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/outputs/benchmark/comparability_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/records.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/qualify.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/validate.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/baselines.py",
+        "qualify",
+        "--trace-dir",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces",
+        "--report",
+        "papers/completion/law_to_action/benchmark/comparability_report.md",
+        "--records",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/records.json"
+      ],
+      "completed_at": "2026-09-12T02:58:26.576395+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la014"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/qualify.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-014/baselines.py",
+      "started_at": "2026-09-12T02:58:14.576395+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-014/validate_comparability.py"
+      ],
+      "completed_at": "2026-09-12T02:58:26.804737+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la014"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-014/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-014/validate_comparability.py",
+      "started_at": "2026-09-12T02:58:26.576395+00:00"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "49.0.0",
+    "HAVE_CRYPTO_ED25519": true,
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "bounded_export_handler": "bounded-export-handler/v2",
+    "empirical_benchmark_result": false,
+    "admitted_split": "development",
+    "held_out_tuning": false,
+    "scored_attempts_admitted": false,
+    "a3_crypto": "real-ed25519",
+    "a4_store_kind": "duckdb-file-typed-quack-owner",
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "authorization.py_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+    "ucan.py_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+    "durable_consumption.py_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "effects.py_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "future_gates": [
+      "Singleton descendant cgroup/quota was not created; scored LA-015 attempts stay unrun.",
+      "Closed-loop model arms remain unrun pending LA-016 model qualification.",
+      "SAT/UNSAT cannot authorize theorem_proof allows."
+    ]
+  }
+}
