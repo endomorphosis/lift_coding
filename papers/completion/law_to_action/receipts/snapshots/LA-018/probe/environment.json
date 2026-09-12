@@ -1,0 +1,287 @@
+{
+  "HAVE_CRYPTO_ED25519": true,
+  "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "closed_loop_model_status": {
+    "dispatchable": false,
+    "input_tokens_in_la016_ledger": 0,
+    "interpretation": "LA-016 recorded 0 tokens as unstarted accounting. LA-018 does not adopt those zeros as measured model usage.",
+    "scientific_model_pinned": false,
+    "status": "unrun_closed_loop_claims_withdrawn"
+  },
+  "concurrency": {
+    "maximum_parallel_attempts": 1,
+    "observed_parallel_attempts": 1,
+    "rule": "One attempt at a time; thread libraries pinned to 1."
+  },
+  "cryptography_version": "49.0.0",
+  "duckdb_available": true,
+  "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+  "duckdb_version": "1.5.2",
+  "hardware": {
+    "cgroup": "0::/",
+    "concurrency": {
+      "maximum_parallel_attempts": 1,
+      "observed_parallel_attempts": 1,
+      "rule": "One attempt at a time; thread libraries pinned to 1."
+    },
+    "cpu_model": "CPU implementer=0x41 CPU architecture=8 CPU part=0xd87",
+    "cpuinfo_identity": {
+      "CPU architecture": "8",
+      "CPU implementer": "0x41",
+      "CPU part": "0xd87"
+    },
+    "loadavg_1_5_15": [
+      "19.74",
+      "19.74",
+      "20.23"
+    ],
+    "logical_cpu_count_allowed": 20,
+    "logical_cpus_allowed": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "machine": "aarch64",
+    "memory_available_bytes_at_probe": 113115123712,
+    "memory_total_bytes": 130663821312,
+    "python_implementation": "CPython",
+    "release": "6.17.0-1014-nvidia",
+    "sysname": "Linux",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "RAYON_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    }
+  },
+  "harness_version": "la-018-efficiency-harness/v1",
+  "home": "/tmp/ipfs-accelerate-validation-home-la018-ohpASp",
+  "home_is_validation_prefix": true,
+  "implementation_revision": "4d8e3ba723ac68b8f2987ce09795b5375041cfc7d29158a67aeb6a465ec60a8b",
+  "network": {
+    "attempt_network": "disabled",
+    "observed": false
+  },
+  "observed_at": "2026-09-12T18:56:33.871978Z",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "path_enforced_in_harness": false,
+  "path_is_sealed": true,
+  "path_late_probe_note": "Some imported libraries prepend package bin directories. The harness records the authoritative sealed PATH separately from that late observation.",
+  "path_reported_by_late_probe": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-018-a6a1670562ca-attempt-1-1789238670/external/ipfs_datasets/bin:/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-018-a6a1670562ca-attempt-1-1789238670/external/ipfs_datasets/bin/.deps/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "pins": {
+    "files": {
+      "admissibility_enforcement.py": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+        "present": true,
+        "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+        "size_bytes": 51466
+      },
+      "arms.json": {
+        "path": "papers/completion/law_to_action/benchmark/arms.json",
+        "present": true,
+        "sha256": "418f06958aa55df738e3615c9e7b57a0b767deaa56bda3488681dee0d4236fbd",
+        "size_bytes": 9985
+      },
+      "authorization.py": {
+        "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+        "present": true,
+        "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+        "size_bytes": 13330
+      },
+      "baselines.py": {
+        "path": "papers/completion/law_to_action/benchmark/baselines.py",
+        "present": true,
+        "sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+        "size_bytes": 57307
+      },
+      "closed_loop_manifest": {
+        "path": "papers/completion/law_to_action/results/agents/run_manifest.json",
+        "present": true,
+        "sha256": "8fa99a856023300312f760a0aceaa3623d976289e68cda31c059983db9a76a90",
+        "size_bytes": 62295
+      },
+      "durable_consumption.py": {
+        "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+        "present": true,
+        "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+        "size_bytes": 71273
+      },
+      "effects.py": {
+        "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+        "present": true,
+        "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+        "size_bytes": 12768
+      },
+      "protocol.json": {
+        "path": "papers/completion/law_to_action/benchmark/protocol.json",
+        "present": true,
+        "sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+        "size_bytes": 24163
+      },
+      "run_closed_loop.py": {
+        "path": "papers/completion/law_to_action/receipts/snapshots/LA-016/run_closed_loop.py",
+        "present": true,
+        "sha256": "1f42dacae0640b825ed4d78876e0adc31436f68f116e6d9274ad104fc20f3ad7",
+        "size_bytes": 44855
+      },
+      "run_efficiency.py": {
+        "path": "papers/completion/law_to_action/receipts/snapshots/LA-018/run_efficiency.py",
+        "present": true,
+        "sha256": "c15b22e5a8170d758ec08858c797a41408a72c8a7272ec072e66aafb09e88855",
+        "size_bytes": 57566
+      },
+      "run_fixed_actions.py": {
+        "path": "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+        "present": true,
+        "sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+        "size_bytes": 61888
+      },
+      "sat_checker.py": {
+        "path": "papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+        "present": true,
+        "sha256": "258125dd9adf388c20f8acb7352f3206f1400c3e217966314b07ea78c85eb20a",
+        "size_bytes": 4442
+      },
+      "sat_provider.py": {
+        "path": "papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+        "present": true,
+        "sha256": "7a356270b936a5fb41ab2fa0746d6bf6f52da639d6465d99060fa5f28c1d4644",
+        "size_bytes": 4746
+      },
+      "sources.json": {
+        "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+        "present": true,
+        "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+        "size_bytes": 51880
+      },
+      "splits.json": {
+        "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+        "present": true,
+        "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+        "size_bytes": 17657
+      },
+      "ucan.py": {
+        "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+        "present": true,
+        "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+        "size_bytes": 21851
+      }
+    },
+    "harness_version": "la-018-efficiency-harness/v1",
+    "protocol_revision": "LA-003/v3",
+    "revision": "4d8e3ba723ac68b8f2987ce09795b5375041cfc7d29158a67aeb6a465ec60a8b"
+  },
+  "python": "/usr/bin/python3.12",
+  "python_executable": "/usr/bin/python3.12",
+  "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "python_version": "3.12.3",
+  "run": {
+    "completed_at": "2026-09-12T18:56:33.867013Z",
+    "python_environment": {
+      "HAVE_CRYPTO_ED25519": true,
+      "canonical_profile_d_available": true,
+      "cryptography_version": "49.0.0",
+      "duckdb_available": true,
+      "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+      "duckdb_version": "1.5.2",
+      "home": "/tmp/ipfs-accelerate-validation-home-la018-ohpASp",
+      "home_is_validation_prefix": true,
+      "observed_at": "2026-09-12T18:56:32.503962+00:00",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "python": "/usr/bin/python3.12",
+      "python_executable": "/usr/bin/python3.12",
+      "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+      "python_version": "3.12.3",
+      "source_pins": {
+        "admissibility_enforcement.py": {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+          "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+        },
+        "authorization.py": {
+          "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+          "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd"
+        },
+        "durable_consumption.py": {
+          "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+          "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe"
+        },
+        "effects.py": {
+          "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+          "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+        },
+        "ucan.py": {
+          "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+          "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95"
+        }
+      },
+      "sympy_available": true,
+      "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
+    },
+    "started_at": "2026-09-12T18:56:32.336827Z"
+  },
+  "schema": "law-to-action-efficiency-environment/v1",
+  "setup": {
+    "included_in_full_paper_cost": true,
+    "included_in_per_run_rows": false,
+    "includes": [
+      "module import",
+      "pin hashing",
+      "development family freeze",
+      "DuckDB store attach"
+    ],
+    "started_at": "2026-09-12T18:56:32.336827Z",
+    "wall_seconds": 0.227031069
+  },
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+    },
+    "authorization.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd"
+    },
+    "durable_consumption.py": {
+      "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+      "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe"
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+    },
+    "ucan.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+      "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95"
+    }
+  },
+  "sympy_available": true,
+  "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+  "task": "LA-018",
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "RAYON_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  }
+}
