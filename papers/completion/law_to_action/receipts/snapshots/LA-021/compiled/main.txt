@@ -1,0 +1,1158 @@
+            From Law to Action: Neuro-Symbolic Runtime
+                   Enforcement for MCP Agents
+
+
+                                                  Anonymous Author(s)
+                                                      Affiliation
+                                                       Address
+                                                        email
+
+
+
+                                                         Abstract
+
+ 1             We study a bounded runtime-checking question for generated code: under explicit
+ 2             ENFORCE at one pre-invocation Model Context Protocol (MCP) handler, can an
+ 3             independently observed generated-code effect that is correlated with a reviewed
+ 4             Security/Intent constraint, and that lacks a matching context-bound admission, be
+ 5             prevented from producing a forbidden sandbox mutation, while a matched admitted
+ 6             case can still perform useful permitted work? Legal documents, CVE-linked
+ 7             vulnerability and repair records, and SkillCenter procedures compile into Legal,
+ 8             Security, and Intent IR. Those IRs are models with distinct authority, not proofs of
+ 9             legal correctness, universal vulnerability absence, or permission. Closest systems—
+10             reference monitors, proof-carrying authorization, Catala, UCAN/Cedar, AgentSpec,
+11             Progent, CaMeL, and AgentDojo—motivate implementable arm classes; none is a
+12             scored baseline here. This paper is an implementation report and frozen evaluation
+13             protocol. End-to-end evaluation remains to be completed.
+
+
+14   1    Introduction
+
+15   An autonomous agent can follow a useful procedure and still violate a legal restriction, reproduce
+16   a known vulnerability, or act outside its delegated authority. A safeguard placed only in the model
+17   prompt cannot distinguish these cases reliably. The implementation described here places source-
+18   grounded constraints and a separate authorization boundary between proposed actions and protected
+19   MCP handlers. MCP supplies tool discovery and invocation; application implementations remain
+20   responsible for enforcing security requirements [1, 2].
+21   Our method begins before a tool call. A legal collection supplies normative constraints, a vulnerability-
+22   and-fix collection supplies security evidence, and a skill collection supplies descriptions of intended
+23   procedures. These become three intermediate representations (IRs), not one undifferentiated retrieval
+24   index. Formalization produces typed logic views and proof obligations. The runtime joins the results
+25   against one exact invocation, then checks authorization again before the effect. This design combines
+26   semantic compilation, proof search, capability security, and stateful execution rather than asking a
+27   language model to certify its own behavior.
+28   The planned workshop contribution is that bounded mediation test [3]. It is not a new authorization
+29   logic, a new legal language, or a first agent runtime monitor. AgentSpec, Progent, and CaMeL
+30   already supply runtime rules, tool-privilege checks, and capability isolation [4–6]; Catala compiles
+31   expert-authored law [7]; AgentDojo measures utility beside attacks [8]. We cite those primary sources
+32   as comparison classes. We do not execute them as experimental arms. Source adapters, constraint
+33   compilation, DuckDB-backed supervision, and content-addressed evidence remain implementation
+34   context; they are not evaluated safety results. Legal IR is a lossy model of selected facets, not a proof
+35   of legal correctness. Default OFF pass-through and in-memory consumption are not enforcement.
+
+     Submitted to NeurIPS 2026 Workshop on AI for Verifiable Coding. Do not distribute.
+36   Until retained benchmark records exist, this paper is an implementation report and frozen evaluation
+37   protocol.
+
+
+38   2   Related work
+
+39   The planned, not-yet-scored evaluation asks whether an independently observed generated-code
+40   effect is denied at one explicit ENFORCE delegate while matched admitted work remains executable.
+41   The comparison below is a literature comparison on that question. No cited external system was
+42   executed as a scored arm.
+
+
+43   Runtime enforcement. Complete mediation requires a check at every access to a protected resource
+44   [9]. Security automata and inlined or editing monitors describe which policies a runtime mechanism
+45   can enforce [10–13]. Those mechanisms inspect program actions. They do not compile legal or
+46   vulnerability sources, and they do not count useful MCP-handler work. AgentSpec supplies agent
+47   runtime triggers, predicates, and enforcement rules [4]. Progent checks symbolic tool privileges and
+48   classifies policy updates using an SMT solver [5]. These direct precedents rule out claims that this
+49   paper introduces agent runtime rules or guarded privilege updates. Neither system was benchmarked
+50   here.
+
+
+51   Proof-carrying admission. Proof-carrying code [14] and proof-carrying authentication [15] re-
+52   quire a checker to accept a proof before running untrusted code or granting a request. Translation
+53   validation and CompCert separate a translator from a checked proof [16, 17]. A content identifier or
+54   a proof_cid in an envelope is not that check.
+
+
+55   Executable law is not checked derivation. Encoding a statute as a logic program already performs
+56   an interpretation [18–20]. Catala compiles literate legal specifications to programs and has been
+57   applied to tax law [7, 21]. It is the closest executable-law precedent. It is not an agent runtime. Legal
+58   IR in this paper is a bounded, lossy compilation of selected facets; unsupported facets and expert
+59   applicability remain labeling problems, not theorems.
+
+
+60   Capabilities and application-level MCP enforcement. Object capabilities, attenuating caveats,
+61   relation tuples, and analyzable policy languages [22–25] justify a lightweight grant check. UCAN
+62   specifies signed delegated capabilities [26]. MCP supplies tool invocation; its authorization document
+63   specifies OAuth 2.1 resource-server roles and requires implementations to follow OAuth 2.1 security
+64   best practices [1, 2]. That protocol is not a generated-code effect monitor. A signature, a CID, or a
+65   peer identity is not a generated-code effect observation.
+
+
+66   Verifiable coding and agent-security evaluations. Functional correctness and issue resolution
+67   [27, 28] measure useful coding work without gated forbidden-effect counters. Closed-loop verified
+68   generation and autoformalization [29–31] target specs and prover artifacts, not this handler route.
+69   AgentDojo, ToolEmu, InjecAgent, τ -bench, and AgentHarm [8, 32–35] measure tool-use attacks,
+70   emulated risk, injection, policy following, or harm. CaMeL isolates agent data flow with capabilities
+71   [6]. They motivate reporting utility beside forbidden effects. They were not run here.
+
+
+72   Implementable arms, not imported suites. The planned matched arms are mechanism classes in
+73   this stack: an unguarded handler (A0); inert prompt and retrieval labels as model-free equivalence
+74   controls (A1, A2); a qualified policy and capability verifier (A3); and explicit ENFORCE with exact
+75   context binding, a qualified proof route, and durable consumption (A4). These scored comparisons
+76   remain pending until their mechanisms and integration qualify. Prompt or retrieval efficacy is not
+77   identified in the model-free study. CVEfixes is a vulnerability/fix collection [36], not a runtime.
+78   DuckDB/Quack, IPFS, and libp2p [37–39] are operational substrates. The workshop fit is runtime
+79   checking of generated code before a protected effect [3], not a claim that every cited system was
+80   benchmarked.
+
+
+                                                        2
+ 81   3     Corpus sources and their compilation into IRs
+ 82   3.1   Legal documents to Legal IR
+
+ 83   The legal collection is an input to the reasoning system, not an application mentioned after the
+ 84   architecture. Its source families include the United States Code, state statutes, state administrative
+ 85   rules, Federal Register documents, state and local court rules, municipal and county codes, caselaw,
+ 86   and national legislation outside the United States. The collection is expanding internationally;
+ 87   complete worldwide coverage is a collection objective, not an assumption of the method. The
+ 88   canonical registry binds each supported corpus to a country/branch, published dataset identifier, local
+ 89   root, JSON-LD layout, Parquet layout, and source-specific identity fields.
+ 90   The ingestion path preserves original documents separately from normalized provisions. Official
+ 91   sources and archive-derived captures retain their origin, retrieval revision, extraction route, and
+ 92   coverage limitations. For example, an international national-legislation snapshot can be recovered
+ 93   from Common Crawl WARC and Wayback captures of an official publisher. That is a provenance-
+ 94   bearing archive route, not a claim that an archive capture is a newly issued official text. Federal
+ 95   Register proposals, notices, and final rules must likewise remain different source kinds. Legal
+ 96   applicability depends on jurisdiction, authority, effective interval, definitions, exceptions, and the
+ 97   facts of the request, not merely textual similarity.
+ 98   The published retrieval layers add CID-keyed records, sparse indexes, vectors, and graph links. They
+ 99   are views of a documentary substrate. A statutory citation edge is not a proved implication, an
+100   embedding neighbor is not controlling authority, and a release named “IR” may contain retrieval
+101   records rather than completed formal proofs. The corpus manifest must therefore count source
+102   records, derived views, rejected records, and checked formalizations separately. Appendix A gives
+103   source families, representative release pins, and the exact questions a coverage manifest must answer.
+104   The legal compiler has two distinguishable paths. The rich deontic bridge preserves actor, action,
+105   modality, conditions, exceptions, temporal expressions, definitions, references, available source spans,
+106   and diagnostics. The stricter canonical compiler maps selected norms into a bounded vocabulary
+107   with seven fields: modality, actor, action, object, conditions, exceptions, and temporal qualifiers.
+108   Unrepresented material cannot disappear silently into a successful result. Source maps, declared
+109   losses, producer/configuration identity, and review state travel with the derived object. Compilation
+110   is thus reproducible and inspectable, while source-to-rule fidelity remains a separate validation
+111   requirement. Executable-law work such as Catala supplies a relevant precedent for compiling literate
+112   legal specifications [7]; it is not an agent runtime or a generated-code effect observer.
+
+113   3.2   Vulnerability and repair evidence to Security IR
+
+114   The security source is not simply a list of CVE identifiers. CVEfixes links vulnerability records
+115   to source repositories and fixes, supporting inspection of vulnerable and changed code [36]. Our
+116   inspected release uses an exact pinned hitoshura25/cvefixes snapshot, preserves the original Parquet
+117   bytes, and provides a source-CID-to-original-row index. The release reports 12,987 input rows,
+118   12,714 derived records, and 273 tombstones; these are release counts, not distinct-vulnerability
+119   counts or verified-prohibition counts. Original evidence and derived outputs remain independently
+120   addressable.
+121   The conversion is explicit: a bounded source record and a policy candidate, together with their
+122   review binding, enter adapt_cvefixes_candidate. The adapter constructs a canonical Security IR
+123   declaration, including an exact scoped deny-policy candidate where representable. Its contract rejects
+124   wildcard/generalized scope and attempts to insert an authority grant into the candidate. Evaluation
+125   results remain separate from declarations. The formalization adapter then lowers the declaration
+126   into policy, threat, transition, and claim views. The emitted prohibition binds action, preconditions,
+127   effects, mitigations, language, scope, and CVE/CWE identifiers. A CVE or CWE label alone is not
+128   the policy.
+129   Vulnerable and fixed examples have different methodological roles. Vulnerable code is a positive
+130   control for a candidate security restriction; fixed code is a negative control for that particular restriction.
+131   A fix does not certify that all other vulnerabilities are absent. The formalization emits a candidate
+132   prohibition and proof obligations, not a theorem or an execution denial merely because a record was
+133   retrieved.
+
+
+                                                            3
+134   The runtime connection is concrete. cve_security_gate maps both Intent IR actions and generated-
+135   code fact groups into exact SecurityAuthorizationRequest objects under the same pinned Security IR
+136   root. It correlates the two streams. A harmless declared intent cannot mask an undeclared, broader,
+137   contradictory, or rejected effect in generated code. Incomplete mappings remain unknown. The
+138   hard-constraint compiler consumes these checks before quality or cost ranking; no favorable score
+139   offsets a failed security constraint.
+
+140   3.3   SkillCenter Markdown to Intent IR
+
+141   SkillCenter supplies procedural source material: skill_md, library_md, YAML metadata, titles,
+142   domains, profiles, original URLs, source identifiers, and licensing information. The bounded reader
+143   opens upstream SQLite bundles read-only and immutable, disables extension loading, checks expected
+144   tables and columns, and applies record-size limits. SQLite here is an upstream corpus container, not
+145   the agent supervisor’s state database. Markdown bodies are parsed as untrusted data; commands
+146   appearing in a skill are never executed by ingestion.
+147   The pinned SkillCenter build reports 216,972 physical records in 24 bundles. The implementation
+148   explicitly reconciles physical counts against inconsistent upstream metadata. It computes two useful
+149   identities: an entry_cid over intrinsic record content and an exact body CID over UTF-8 skill_
+150   md. Container filename and dataset-revision provenance are retained separately so that repackaging
+151   unchanged intrinsic content does not change its entry identity. The derived release uses these identities
+152   across Parquet records, BM25 postings, graph nodes, vectors, and source lookup.
+153   Intent IR describes what a procedure tries to accomplish. Its schema distinguishes goals, preconditions,
+154   postconditions, invariants, guards, effects, assumptions, failures, and verification steps. Actions refer
+155   to tools, inputs, outputs, and required evidence. Control edges distinguish next, success, failure,
+156   conditional, retry, parallel, and join relationships. Source spans and grounded-versus-inferred status
+157   accompany semantic nodes. A procedure’s word “permitted” is a source assertion, not a capability
+158   from the system owner.
+159   The full retrieval corpus must not be confused with an exhaustively formalized skill library. The
+160   source adapter, schema, index builders, and formalizer/normalizer ports are inspectable; every claimed
+161   normalized document still needs its source and validation record. Learned normalization and a trained
+162   semantic encoder operate behind those ports. Corpus size alone says neither that every procedure has
+163   been normalized nor that every normalized procedure is safe to execute.
+
+164   3.4   Common lineage without collapsing the domains
+
+165   The three families share ir_core canonicalization, identity, provenance, schema, claim, obligation, and
+166   result contracts. They do not share an ontology or grant authority to one another. The kernel separates
+167   declarations, runs, results, and receipts. Running a prover therefore creates a new result/receipt rather
+168   than mutating the underlying legal norm or skill declaration.
+
+                    Table 1: Three source-to-IR paths. None of the source streams directly
+                    supplies execution authority.
+
+      Source stream               Derived semantics                    Contribution to an action decision
+      Legal texts and versions    Norms, scope, authority,             Which represented legal constraints
+                                  exceptions, temporal                 apply?
+                                  applicability
+      CVE-linked code and         Threat assumptions, effects,         Does the proposed or generated
+      fixes                       mitigations, scoped prohibition      behavior violate a reviewed security
+                                  candidates                           constraint?
+      Skill Markdown and          Goals, actions, guards, effects,     What is the agent trying to do, and
+      metadata                    verification, control flow           what effects does its procedure
+                                                                       require?
+
+
+169   Sparse, dense, and graph retrieval nominate evidence; hard applicability and exact identity determine
+170   whether it may be used. The SkillCenter release demonstrates bounded fetching through a manifest,
+
+
+                                                         4
+171   lexical or centroid meta-index, selected Parquet shards, and final CID-keyed records. This reduces
+172   repeated full-corpus transfer. It is an engineering mechanism for efficient context construction, not a
+173   substitute for dependency coverage or a measured end-to-end token-saving result.
+
+174   4     Logic families and executable proof work
+175   4.1   Why the implementation has several logics
+
+176   An IR is a domain representation; a logic family determines how its statements are interpreted. A
+177   prover is a backend that checks a supported encoding. Keeping these concepts separate is essential. A
+178   temporal obligation cannot become an ordinary Boolean predicate without recording what temporal
+179   meaning was lost. The compiler therefore produces native views, shared symbol bindings, source
+180   maps, and explicit cross-view links rather than concatenating formulas from different logics.
+                    Table 2: Roles of native views and checking infrastructure. A family’s
+                    presence in a registry does not mean every formula or backend is qualified.
+
+      Logic or formal view        Implemented role in the stack         Agent-safety use
+      First-order logic and       Predicates, quantified relations,     Describe actors, resources, tool
+      F-logic/frame views         typed objects, classes and slots      interfaces, and relations needed by a
+                                                                        rule
+      Deontic logic               Obligation, permission,               Separate required, allowed, and
+                                  prohibition; richer domain slots      forbidden behavior
+                                  where supported
+      Temporal logic and          Quantification plus deontic and       Validity windows, prerequisite order,
+      TDFOL                       temporal operators                    continuing duties and deadlines
+      Event calculus and          Events/fluents and                    Relate actions to state changes;
+      DCEC                        cognitive/normative structure         distinguish an agent’s belief or
+                                                                        intention from established facts
+      Rule/policy and             Bounded derivation and                Compute applicable facts and grants
+      Datalog-style views         authorization declarations            under an explicit world policy
+      Hoare-style contracts       Preconditions, postconditions,        Check generated code and effect
+      and SMT                     transitions, arithmetic and typed     invariants in a declared fragment
+                                  constraints
+      Interactive proof           Reconstructed                         Independently check proof candidates
+      kernels                     Lean/Coq/Isabelle proofs              when the required assurance demands
+                                  through configured adapters           it
+
+
+181   Temporal Deontic First-Order Logic (TDFOL) explicitly combines first-order predicates and quanti-
+182   fiers with obligation/permission/prohibition and temporal operators such as always, eventually, next,
+183   until, and since. Deontic Cognitive Event Calculus (DCEC) adds cognitive operators including belief,
+184   knowledge, intention, desire, and goal alongside event and normative structure. These are useful
+185   distinctions for agents: a model’s belief that a request is authorized is not an authenticated fact that it
+186   is authorized. Encoding a knowledge operator does not validate a perception result or make generated
+187   text true.
+188   F-logic contributes object-centered semantic relations, not digital signatures. Event calculus is the
+189   reasoning vocabulary for events and changing fluents; the append-only execution Event DAG is its
+190   provenance substrate, not itself an event-calculus proof. Higher-order, linear, and separation tags also
+191   occur in the broader training/representation contracts. We do not infer live proof support from those
+192   tags. Appendix B records the role, supported scope, and appropriate evidence boundary for each
+193   family.
+
+194   4.2   Translation, solving, reconstruction, and reuse
+
+195   Each backend request binds its family, premises, assumptions, target obligation, supported fragment,
+196   and resource limits. Z3 and cvc5 supply SMT results, models, or cores; Vampire and E serve first-
+197   order automated proving paths; interactive theorem-prover adapters support proof reconstruction and
+
+
+                                                          5
+198   kernel checking. Hammers select premises, translate to TPTP or SMT-LIB, run candidate-producing
+199   portfolios, and reconstruct a native proof where supported. Solver success and kernel acceptance
+200   remain different evidence kinds.
+201   The verification API also exposes abstract interpretation, assume-guarantee discharge, incremental
+202   SMT, differential checking, interpolation, and counterexample handling. These are selected methods,
+203   not a checklist run on every invocation. For example, the inspected interpolation path is bounded to
+204   QF_LIA with cvc5 production and independent checks of both interpolation conditions and shared
+205   vocabulary. An unavailable interpolant can produce a separately labeled validated core; it cannot be
+206   reported as a successful interpolant.
+207   Proof-grounded IR learning uses source/IR, translation, reconstruction, proof, tactic, and coun-
+208   terexample traces. Its contracts distinguish structural equality, logical equivalence, entailment,
+209   equisatisfiability, and heuristic similarity. A learned encoder can nominate a representation or
+210   premise set; the declared checker supplies acceptance evidence. Translation and reconstruction
+211   receipts retain the weakest relevant boundary. A nearest-neighbor score, a successful paraphrase, or a
+212   corpus-membership proof cannot upgrade a candidate to a theorem.
+
+
+
+213   5     Joining intent, law, and security before execution
+
+214   5.1   Concrete invocation and hard-constraint admission
+
+215   An InvocationIntentEnvelope commits to source identity, tenant, actor, audience, delegation,
+216   tool/version, arguments, proposed effects, environment, nonce, and relevant roots. Trusted adapters
+217   bind the effect description to the actual operation. Otherwise an agent could authorize a harmless
+218   description and execute a different effect.
+219   Legal and security applicability are evaluated independently. Legal queries bind jurisdiction, subject,
+220   authority, time, actor, resource, definitions, cross-references, exceptions, and source integrity. Security
+221   queries bind principal, capability, trust zone, asset, channel, action, effect, failure/rollback, and
+222   environment evidence. Hard filters precede ranking. Missing or contradictory required evidence is
+223   retained as a blocking condition rather than removed to make a request pass.
+224   The supervisor’s IRConstraintCompiler joins these results against the exact candidate action/effect
+225   graph. It rejects undeclared effects, unmatched domain bindings, incomplete legal applicability,
+226   applicable prohibitions, unresolved obligations, denied/unknown/conflicting security decisions, stale
+227   roots, unsatisfied dependencies, missing proofs, and failed validation. Intent conformance and legal
+228   permission constrain the candidate but do not grant security authorization. The output includes
+229   rejection witnesses and the affected action set for local replanning rather than a scalar score that a
+230   model can optimize around.
+
+
+231   5.2   Authorization proof jobs and decision receipts
+
+232   AuthorizationQueryComposer generates per-action jobs for applicability, positive grant, non-conflict,
+233   security invariant, pre-obligation, coverage, and context binding. Coverage is relative to the declared
+234   modeled scope, not proof that all relevant law has been collected. Additional jobs can address consis-
+235   tency, translation, reconstruction, and obligations during or after execution. AuthorizationPortfolio
+236   records attempts and selects compatible results deterministically; contradictory authoritative results
+237   require review.
+238   IntentAuthorizationService composes normalization, lowering, evidence selection, jobs, portfolio exe-
+239   cution, decision, receipt, and optional internal capability derivation. It does not execute the requested
+240   tool. Unknown, unsupported, contradictory, SAT-only, simulated, and merely policy/evidence-ready
+241   outcomes cannot silently satisfy the proof-oriented allow policy. An AttestedProofVerifier checks
+242   selected evidence against exact statements, assumptions, source/build/toolchain identities, obligations,
+243   scope, and corpus/policy/revocation roots. Signed assertions and zero-knowledge artifacts retain the
+244   statement and verifier they actually attest.
+
+
+                                                          6
+245   5.3   Pre-invocation enforcement
+
+246   A receipt becomes operational only through a protected effect boundary. SupervisorPreInvocationEn-
+247   forcement.authorize_and_delegate in enforce mode rechecks the live invocation, outcome, effects,
+248   expiry, roots, and capability, then atomically consumes the permitted use before invoking the delegate.
+249   Off, audit, and shadow modes do not provide the same prevention semantics. The supplied clock,
+250   roots, receipt issuer, and consumption store must be trusted and appropriate to the deployment.
+251   The separate short-lived ExecutionPermit path also binds the admitted graph, roots, mandatory
+252   dependency closure, validation plan, caller, policy, lease, fence, expiry, and use bound. Plan admission
+253   is not execution permission, and permission is not completion evidence. These interfaces must be
+254   traced at each entry point: a lightweight Profile D dispatcher, a UCAN-gated MCP server, and a
+255   full proof-oriented wrapper have related but nonidentical checks. Our security claim concerns a
+256   configured, mediated path, not every historical compatibility route.
+
+
+257   6     DuckDB and event-driven operational state
+
+258   The supervisor’s mutable control state is DuckDB, specifically control.duckdb, behind the typed
+259   Quack state-owner path. This is distinct from immutable IPFS artifacts and from read-only source-
+260   corpus containers. DuckDB/Quack provides the database access substrate [37]; the implementation
+261   adds ownership, command validation, generation/fence checks, and bounded retries.
+262   QuackStateClient exposes closed, named parameter-bound commands rather than model-supplied
+263   SQL. The inspected client supports an embedded exclusive-lock mode for hermetic/single-process
+264   tooling and a Quack-mode typed Unix-socket owner gateway. It verifies store/server identity, schema
+265   fingerprint, generation, and extension fingerprint. Generic client ATTACH and arbitrary SQL are not
+266   the model-facing interface. The operational boundary is the project’s typed service, not unrestricted
+267   access to every feature supported by the underlying Quack extension.
+268   StateTransaction binds expected store generation, fence epoch, row revision, and idempotency
+269   identity in short transactions. Same-row optimistic conflicts can receive bounded jittered retries;
+270   stale generation, mismatched fence, and changed-payload idempotency conflicts are non-retryable
+271   authority failures. A lost reply resolves against the committed command identity rather than causing
+272   the LLM to repeat an effect. Database transitions are authoritative after commit. Event/outbox/cursor
+273   integration and recovery must be qualified for the selected owner deployment; they are not replaced
+274   by Markdown task-board edits.
+275   Provider processes do not receive the owner’s token or an open SQL capability. The threat model
+276   prohibits extension installation, file-reader escapes, cross-root operations, and Python UDF surfaces
+277   through the typed client. Offline maintenance requires exclusive ownership. This is a single-owner
+278   failure domain, not multi-primary consensus. DuckLake projections or exported reports can support
+279   analysis but do not acquire task-mutation authority.
+280   Source, proof, policy, capability, and completion events trigger rescanning and targeted invalidation.
+281   Relevant changes reopen affected obligations; unchanged semantic dependencies remain candidates
+282   for reuse. The supervisor’s generation and fencing mechanisms prevent an old worker from publishing
+283   its result over newer state. Durable capability consumption and uncertain remote-effect recovery
+284   must be tested in the actual executor: a DuckDB commit alone does not make an arbitrary remote
+285   API exactly once.
+
+
+286   7     IPFS, libp2p, UCAN, and MCP++ in the execution path
+
+287   7.1   IPFS: identity and distribution of evidence
+
+288   The InterPlanetary File System (IPFS) uses content addressing to name bytes by content rather than
+289   by a mutable location [38]. Kit stores source bodies, IR declarations, graphs, ContextPacks, proofs,
+290   source/alias maps, decisions, and receipts as immutable artifacts. A recipient rehashes the retrieved
+291   bytes under the declared profile. Canonical declarations bind domain and schema so equal-looking
+292   payloads from different families cannot substitute for one another.
+
+
+                                                         7
+293   The IR kernel uses a declared canonical-JSON identity envelope and CIDv1/raw/SHA-256 profile;
+294   other contracts, including Profile D artifacts, use DAG-JSON. The codec and preimage are part
+295   of the contract. A plain SHA-256 digest is not relabeled a CID. A graph root commits to its
+296   referenced closure, while mutable current roots advance through a controlled publication path. This
+297   enables reproducible evidence reuse across machines. Availability still requires retention/pinning and
+298   functioning peers; local CID computation proves neither publication nor public availability. Private
+299   evidence needs explicit access and confidentiality controls.
+
+300   7.2   libp2p: peer communication, not permission
+
+301   libp2p supplies peer identities, transport selection, secure channels, protocol negotiation, and multi-
+302   plexed streams [39]. A Peer ID identifies a key-bound peer; it is not an application user or a tool grant.
+303   The MCP++ P2P carriage profile uses /mcp+p2p/1.0.0 with framed MCP messages. Stdio, HTTP,
+304   and P2P adapters should converge on the same validated dispatch semantics rather than implement
+305   different authorization policies.
+306   The relevant architectural benefit is that another agent can exchange an objective, request an IR
+307   artifact by CID, obtain proof evidence, or call a permitted tool without sharing the supervisor database.
+308   Discovery or a successfully authenticated peer connection does not authorize those operations. Tests
+309   of a local stream framing path also must not be reported as a wide-area network or adversarial
+310   transport qualification.
+
+311   7.3   UCAN: attenuated delegated authority
+
+312   The User Controlled Authorization Network (UCAN) represents signed delegated capabilities [26].
+313   In the inspected strict verifier, Ed25519 signatures, issuer/audience continuity, parent proofs, explicit
+314   resource/ability fields, validity windows, and supported request bounds are checked. A child capability
+315   must remain within the parent’s authority. A complete path segment matters: tenant-a/* must not
+316   accidentally include tenant-ab. The durable revocation/replay ledger supplies state that a signature
+317   alone cannot provide.
+318   This is separate from a formal proof. UCAN answers whether an authenticated principal may exercise
+319   a delegated capability. Legal and security reasoning answer whether this particular operation satisfies
+320   the applicable modeled constraints. Both must be satisfied where required. A parsed unsigned
+321   delegation stub, an agent-authored permission sentence, or a valid signature on irrelevant bytes cannot
+322   replace the strict verifier. The proof-derived AuthorizationCapability and a signed UCAN token are
+323   also distinct formats; deployments must connect them through an explicit trusted binding rather than
+324   equating their names.
+
+325   7.4   MCP++: where these mechanisms meet
+
+326   MCP++ adds optional profiles around MCP rather than replacing JSON-RPC. Profile A identifies the
+327   interface; B binds invocation and result artifacts; C specifies delegation; D carries temporal-deontic
+328   policy; E carries P2P messages; F records causal provenance; and G describes tasks, claims, leases,
+329   and coordination. Their portable schemas support heterogeneous agents, while the implementations
+330   perform the checks.
+331   Kit’s protected tools/call route invokes AuthorizationGate before dispatch. The gate checks enve-
+332   lope/tool/resource/ability bindings, a concrete UCAN verifier and ledger, and the Datasets-backed
+333   Profile D provider, then records the decision. Missing validators or required authorities deny. Profile
+334   D matches actor/action/resource/time, applies prohibition precedence, and requires a matching permis-
+335   sion. A returned obligation needs a handling policy; the inspected strict Kit gate accepts plain allow,
+336   not unresolved allow_with_obligations. This is a concrete policy gate. Stronger theorem-required
+337   actions additionally need the proof-oriented enforcement path; carrying a proof_cid in an output
+338   envelope does not establish that it was checked before execution.
+
+339   8     Worked source-to-effect trace and evaluation
+340   Consider an agent that retrieves a Markdown procedure for exporting records. The following is a
+341   composition walkthrough, not a newly executed integration result. The source record contributes
+
+
+                                                          8
+342   a procedure and source spans, not permission. Intent IR describes the selected records, recipi-
+343   ent/channel, expected effects, prerequisites, and verification. The legal slice supplies applicable
+344   reviewed disclosure/retention constraints. A retrieved vulnerability/fix example contributes a scoped
+345   candidate constraint for an unsafe data-flow or missing validation; applicability and review determine
+346   whether it participates. Generated code is independently analyzed so that its effects can be correlated
+347   with the stated intent.
+348   The supervisor binds this candidate to current Legal/Security/Intent roots and composes the required
+349   proof jobs. An unapproved destination, an unresolved exception, or an undeclared code effect blocks
+350   admission. A permissible candidate still requires a current grant for the exact actor, tool, resource,
+351   and bounds. The protected runtime checks the receipt and capability immediately before delegation;
+352   a recipient change invalidates the argument commitment, while revocation or consumed-use state
+353   rejects replay. DuckDB records operational progression, and immutable evidence records explain
+354   which sources, rules, proofs, and grants led to the result. The model can propose a revised plan, but it
+355   cannot remove a failed obligation by rewriting its explanation.
+356   The evaluation should exercise these existing paths. Source tests cover bounded SkillCenter reading,
+357   deterministic identities, CVE scope and authority rejection, typed compilation, proof-result authority,
+358   enforce-mode non-delegation, replay/concurrent consumption, Quack command/fence checks, and
+359   MCP transport parity. Inspected test assertions are not executed results. The next frozen experiment
+360   must record actual results separately for fixture, local solver, cryptographic, storage, and end-to-end
+361   agent paths.
+362   Compare unguarded sandbox execution, retrieval plus prompt instructions, lightweight policy/UCAN
+363   gating, and full proof-oriented enforcement on the same handlers. Those arms are mechanism classes
+364   in this stack, motivated by the primary sources in Section 2; they are not ports or scored reruns of
+365   Catala, Cedar, CaMeL, AgentDojo, or Clover. Cross-source cases should include malicious skill text, a
+366   wrong-jurisdiction or stale legal version, a misleading CVE match, vulnerable/fixed controls, omitted
+367   code effects, a widened capability, changed arguments, and restarted state. Measure actual forbidden
+368   delegate effects together with allowed-task success, false denial, abstention, source/formalization
+369   fidelity, route coverage, tokens, proof cost, and latency. No numerical safety or cost advantage is
+370   asserted before these runs. Appendices provide the lineage and experiment fields.
+
+371   9   Scope and conclusion
+372   The implemented surfaces are a source-grounded constraint pipeline and a controllable action
+373   boundary. They are not an evaluated safety result until retained runs exist. The work does not require
+374   a complete global corpus to enforce a reviewed bounded policy, and a large corpus does not prove
+375   completeness. Formalization may be partial; model proposals, signatures, content identities, monitor
+376   observations, solver results, and kernel proofs retain distinct meanings. Legal IR is a model of
+377   selected facets, not the law. Complete mediation is claimed only for the selected ENFORCE sandbox
+378   route, and only when roots, clock, issuer, and consumption store are the qualified ones. Default OFF
+379   and in-memory consumption are not that configuration.
+380   The system is best understood as a compiler-and-runtime stack: Legal IR supplies normative con-
+381   straints, Security IR supplies behavior and threat constraints, and Intent IR supplies proposed
+382   procedures. Native logics and proof tools determine what evidence is needed; DuckDB maintains
+383   operational truth; IPFS preserves exact artifacts; libp2p carries peer interactions; and UCAN limits
+384   delegated authority. Those substrates are not the workshop result. The safety-relevant question is
+385   whether a non-admitted generated-code effect is prevented from reaching one protected handler
+386   while matched admitted work still succeeds. That is a verifiable-coding claim about independently
+387   checkable admission [3], not superiority to Catala, AgentSpec, Progent, CaMeL, AgentDojo, or any
+388   other listed system.
+
+
+
+
+                                                         9
+389   References
+390    [1] Model Context Protocol contributors. Model Context Protocol specification, revision 2025-
+391        11-25, 2025. URL https://modelcontextprotocol.io/specification/2025-11-25.
+392        Accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 Septem-
+393        ber 2026 at the same URL; title: Specification - Model Context Protocol. Tool-invocation
+394        protocol, not a generated-code effect monitor.
+395    [2] Model Context Protocol contributors. Model Context Protocol: Authorization, revision 2025-
+396        11-25, 2025. URL https://modelcontextprotocol.io/specification/2025-11-25/
+397        basic/authorization. Accessed 6 September 2026 (reconstructed bibliography). Live
+398        document retrieved 12 September 2026; title: Authorization - Model Context Protocol. Specifies
+399        OAuth 2.1 resource-server roles and requires implementations to follow OAuth 2.1 security best
+400        practices. It is not a generated-code effect observer.
+401    [3] NeurIPS 2026 Workshop on AI for Verifiable Coding organizers. Call for papers, 2026. URL
+402        https://vericodegen.github.io/cfp.html. Live page retrieved 12 September 2026.
+403        Title: Call for Papers — VeriCodeGen: AI for Verifiable Coding at NeurIPS 2026. Research
+404        track: main text at least 4 and at most 9 pages excluding references and appendices; official
+405        2026 workshop template; double-blind submission including linked artifacts; methodology-
+406        essential LLM disclosure; non-archival workshop. Listed topics include runtime monitoring of
+407        agents, verified guardrails, constrained tool use, and access-control policies. Paper deadline 13
+408        September 2026 AoE; camera-ready 14 October 2026; workshop 12 December 2026, Atlanta.
+409    [4] Haoyu Wang, Christopher M. Poskitt, and Jun Sun. Agentspec: Customizable runtime enforce-
+410        ment for safe and reliable llm agents, 2025. URL https://arxiv.org/abs/2503.18666v3.
+411        Version 3, 31 July 2025. arXiv abstract retrieved 12 September 2026; first submitted 24 March
+412        2025. Operator metadata check 11 September 2026. Not benchmarked in this paper.
+413    [5] Tianneng Shi, Jingxuan He, Zhun Wang, Hongwei Li, Linyu Wu, Wenbo Guo, and Dawn Song.
+414        Progent: Securing ai agents with privilege control, 2025. URL https://arxiv.org/abs/
+415        2504.11703v3. Version 3 revised 14 May 2026; first submitted 16 April 2025. arXiv abstract
+416        retrieved 12 September 2026. Operator metadata check 11 September 2026. Not benchmarked
+417        in this paper.
+418    [6] Edoardo Debenedetti, Ilia Shumailov, Tianqi Fan, Jamie Hayes, Nicholas Carlini, Daniel
+419        Fabian, Christoph Kern, Chongyang Shi, Andreas Terzis, and Florian Tramèr. Defeating
+420        prompt injections by design, 2025. URL https://arxiv.org/abs/2503.18813v2. CaMeL
+421        capability isolation for LLM agents. Version 2, 24 June 2025; arXiv abstract retrieved 12
+422        September 2026. Operator metadata check 11 September 2026. Not executed as a scored arm
+423        here.
+424    [7] Denis Merigoux, Nicolas Chataing, and Jonathan Protzenko. Catala: A programming language
+425        for the law. Proceedings of the ACM on Programming Languages, 5(ICFP):77:1–77:29, 2021.
+426        doi: 10.1145/3473582. Crossref retrieved 12 September 2026. Crossref page field is 1-29;
+427        PACMPL article-number pagination 77:1–77:29 is retained from the reconstructed bibliography.
+428    [8] Edoardo Debenedetti, Jie Zhang, Mislav Balunović, Luca Beurer-Kellner, Marc Fischer, and
+429        Florian Tramèr. AgentDojo: A dynamic environment to evaluate prompt injection attacks and
+430        defenses for LLM agents. In Advances in Neural Information Processing Systems, volume 37,
+431        pages 82895–82920, 2024. doi: 10.52202/079017-2636. Crossref retrieved 12 September
+432        2026. arXiv abstract retrieved 12 September 2026; submitted 19 June 2024. Datasets and
+433        Benchmarks track. Utility versus attack-success in dynamic tool environments; not this paper’s
+434        sandbox-handler counters.
+435    [9] Jerome H. Saltzer and Michael D. Schroeder. The protection of information in computer systems.
+436        Proceedings of the IEEE, 63(9):1278–1308, 1975. doi: 10.1109/PROC.1975.9939. Crossref
+437        retrieved 12 September 2026.
+438   [10] Fred B. Schneider. Enforceable security policies. ACM Transactions on Information and System
+439        Security, 3(1):30–50, 2000. doi: 10.1145/353323.353382. Crossref retrieved 12 September
+440        2026.
+
+
+                                                       10
+441   [11] Úlfar Erlingsson and Fred B. Schneider. IRM enforcement of Java stack inspection. In
+442        Proceeding of the 2000 IEEE Symposium on Security and Privacy, pages 246–255. IEEE, 2000.
+443        doi: 10.1109/SECPRI.2000.848461. Crossref retrieved 12 September 2026. IEEE container
+444        title uses “Proceeding” rather than “Proceedings”.
+445   [12] Jay Ligatti, Lujo Bauer, and David Walker. Edit automata: enforcement mechanisms for run-
+446        time security policies. International Journal of Information Security, 4(1-2):2–16, 2005. doi:
+447        10.1007/s10207-004-0046-8. Crossref retrieved 12 September 2026. Issue is 1-2.
+448   [13] Kevin W. Hamlen, Greg Morrisett, and Fred B. Schneider. Computability classes for enforce-
+449        ment mechanisms. ACM Transactions on Programming Languages and Systems, 28(1):175–205,
+450        2006. doi: 10.1145/1111596.1111601. Crossref retrieved 12 September 2026. Corrected from
+451        the non-resolving identifier 10.1145/1111596.1111603.
+452   [14] George C. Necula. Proof-carrying code. In Proceedings of the 24th ACM SIGPLAN-SIGACT
+453        Symposium on Principles of Programming Languages, POPL ’97, pages 106–119. ACM, 1997.
+454        doi: 10.1145/263699.263712. Crossref retrieved 12 September 2026.
+455   [15] Andrew W. Appel and Edward W. Felten. Proof-carrying authentication. In Proceedings of
+456        the 6th ACM Conference on Computer and Communications Security, CCS ’99, pages 52–62.
+457        ACM, 1999. doi: 10.1145/319709.319718. Crossref retrieved 12 September 2026.
+458   [16] Amir Pnueli, Michael Siegel, and Eli Singerman. Translation validation. In Tools and Algorithms
+459        for the Construction and Analysis of Systems, volume 1384 of Lecture Notes in Computer
+460        Science, pages 151–166. Springer, 1998. doi: 10.1007/BFb0054170. Crossref retrieved 12
+461        September 2026. TACAS 1998, LNCS 1384.
+462   [17] Xavier Leroy. Formal verification of a realistic compiler. Communications of the ACM, 52(7):
+463        107–115, 2009. doi: 10.1145/1538788.1538814. Crossref retrieved 12 September 2026.
+464   [18] M. J. Sergot, F. Sadri, R. A. Kowalski, F. Kriwaczek, P. Hammond, and H. T. Cory. The British
+465        Nationality Act as a logic program. Communications of the ACM, 29(5):370–386, 1986. doi:
+466        10.1145/5689.5920. Crossref retrieved 12 September 2026.
+467   [19] Henry Prakken and Giovanni Sartor. Law and logic: A review from an argumentation perspective.
+468        Artificial Intelligence, 227:214–245, 2015. doi: 10.1016/j.artint.2015.06.005. Crossref retrieved
+469        12 September 2026.
+470   [20] Christoph Benzmüller, Xavier Parent, and Leendert van der Torre. Designing normative theories
+471        for ethical and legal reasoning: LogiKEy framework, methodology, and tool support. Artificial
+472        Intelligence, 287:103348, 2020. doi: 10.1016/j.artint.2020.103348. Crossref retrieved 12
+473        September 2026.
+474   [21] Denis Merigoux, Raphaël Monat, and Jonathan Protzenko. A modern compiler for the French
+475        tax code. In Proceedings of the 30th ACM SIGPLAN International Conference on Compiler
+476        Construction, CC 2021, pages 71–82. ACM, 2021. doi: 10.1145/3446804.3446850. Crossref
+477        retrieved 12 September 2026.
+478   [22] Mark S. Miller. Robust Composition: Towards a Unified Approach to Access Control and
+479        Concurrency Control. PhD thesis, Johns Hopkins University, 2006. PhD thesis; no DOI used.
+480        Object-capability discipline.
+
+481   [23] Arnar Birgisson, Joe Gibbs Politz, Úlfar Erlingsson, Ankur Taly, Michael Vrable, and Mark
+482        Lentczner. Macaroons: Cookies with contextual caveats for decentralized authorization in the
+483        cloud. In Proceedings of the 2014 Network and Distributed System Security Symposium, NDSS
+484        2014. Internet Society, 2014. doi: 10.14722/ndss.2014.23212. Crossref retrieved 12 September
+485        2026.
+486   [24] Ruoming Pang, Ramón Cáceres, Mike Burrows, Zhifeng Chen, Pratik Godiwala, Ankur Kapoor,
+487        Christopher J. Hill, Kamil Kowalczyk, Alexander Piwonka, David Ramadan, David Rosen-
+488        thal, David Sun, Rodrigo Tuttle, Jason Wang, Aaron Weingarten, and Maya Zaks. Zanz-
+489        ibar: Google’s consistent, global authorization system. In 2019 USENIX Annual Technical
+490        Conference (USENIX ATC 19), pages 33–46. USENIX Association, 2019. URL https:
+
+
+                                                       11
+491        //www.usenix.org/conference/atc19/presentation/pang. USENIX ATC 2019. No
+492        Crossref DOI required; official proceedings pagination 33–46.
+493   [25] Joseph W. Cutler, Craig Disselkoen, Aaron Eline, Shaobo He, Kyle Headley, Michael Hicks,
+494        Kesha Hietala, Eleftherios Ioannidis, John Kastner, Anwar Mamat, Darin McAdams, Matt
+495        McCutchen, Neha Rungta, Emina Torlak, and Andrew Wells. Cedar: A new language for
+496        expressive, fast, safe, and analyzable authorization. Proceedings of the ACM on Programming
+497        Languages, 8(OOPSLA1):670–697, 2024. doi: 10.1145/3649835. Crossref retrieved 12 Septem-
+498        ber 2026. Corrected from inherited DOI 10.1145/3649817 (Cocoon, a different OOPSLA1
+499        2024 paper) and inherited eprint 2403.04623 (a different arXiv record). Extended version:
+500        arXiv:2403.04651, submitted 7 March 2024.
+501   [26] UCAN contributors. User controlled authorization network (UCAN) specification, 2026. URL
+502        https://ucan.xyz/specification/. Specification accessed 6 September 2026 (recon-
+503        structed bibliography). Live document retrieved 12 September 2026; title: User Controlled
+504        Authorization Network (UCAN) Specification. Signed delegation is distinct from theorem
+505        checking and from exact proof-capability binding.
+506   [27] Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto,
+507        Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, Alex Ray, Raul
+508        Puri, Gretchen Krueger, Mikhail Petrov, Heidy Khlaaf, Girish Sastry, Pamela Mishkin, Brooke
+509        Chan, Scott Gray, Nick Ryder, Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad
+510        Bavarian, Clemens Winter, Philippe Tillet, Felipe Petroski Such, Dave Cummings, Matthias
+511        Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss, William Hebgen Guss, Alex
+512        Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor Babuschkin, Suchir Balaji, Shantanu Jain,
+513        William Saunders, Christopher Hesse, Andrew N. Carr, Jan Leike, Josh Achiam, Vedant Misra,
+514        Evan Morikawa, Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer,
+515        Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, and Wojciech
+516        Zaremba. Evaluating large language models trained on code, 2021. arXiv abstract retrieved 12
+517        September 2026; submitted 7 July 2021. HumanEval functional-correctness benchmark; not a
+518        forbidden-effect mediation measurement.
+519   [28] Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and
+520        Karthik Narasimhan. SWE-bench: Can language models resolve real-world GitHub issues?
+521        In The Twelfth International Conference on Learning Representations, 2024. ICLR 2024.
+522        OpenReview forum VTF8yNQM66 (OpenReview API returned HTTP 403 on 12 September
+523        2026). arXiv:2310.06770 abstract retrieved 12 September 2026; submitted 10 October 2023.
+524        Issue-resolution utility, not gated handler-effect counters.
+525   [29] Chuyue Sun, Ying Sheng, Oded Padon, and Clark Barrett. Clover: Closed-loop verifiable
+526        code generation, 2023. arXiv abstract retrieved 12 September 2026; submitted 26 October
+527        2023. No arXiv journal-ref or DOI on the abstract page. The inherited TU Wien ISBN item 27
+528        identifier resolves to a different FMCAD 2024 paper (Toward Exhaustive Sequential Redundancy
+529        Removal) and is not used.
+530   [30] Kaiyu Yang, Aidan Swope, Alex Gu, Rahul Chalamala, Peiyang Song, Shixing Yu, Saad
+531        Godil, Ryan J. Prenger, and Animashree Anandkumar. LeanDojo: Theorem proving with
+532        retrieval-augmented language models. In Advances in Neural Information Processing Systems,
+533        volume 36, pages 21573–21612, 2023. doi: 10.52202/075280-0944. Crossref retrieved 12
+534        September 2026. Neighboring workshop topic; not this handler route.
+535   [31] Yuhuai Wu, Albert Q. Jiang, Wenda Li, Markus N. Rabe, Charles Staats, Mateja Jamnik, and
+536        Christian Szegedy. Autoformalization with large language models. In Advances in Neural
+537        Information Processing Systems, volume 35, pages 32353–32368, 2022. doi: 10.52202/
+538        068431-2344. Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September
+539        2026; submitted 25 May 2022. Neighboring workshop topic; not this handler route.
+540   [32] Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba, Yann
+541        Dubois, Chris J. Maddison, and Tatsunori Hashimoto. Identifying the risks of LM agents with an
+542        LM-emulated sandbox. In The Twelfth International Conference on Learning Representations,
+543        2024. ToolEmu. arXiv abstract retrieved 12 September 2026; submitted 25 September 2023.
+544        Emulated tools are not independently observed handler mutations.
+
+
+                                                      12
+545   [33] Qiusi Zhan, Zhixiang Liang, Zifan Ying, and Daniel Kang. InjecAgent: Benchmarking indirect
+546        prompt injections in tool-integrated large language model agents. In Findings of the Association
+547        for Computational Linguistics: ACL 2024, pages 10471–10506, 2024. doi: 10.18653/v1/2024.
+548        findings-acl.624. Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September
+549        2026; submitted 5 March 2024.
+550   [34] Shunyu Yao, Noah Shinn, Pedram Razavi, and Karthik Narasimhan. τ -bench: A benchmark for
+551        tool-agent-user interaction in real-world domains, 2024. arXiv abstract retrieved 12 September
+552        2026; submitted 17 June 2024. Policy-following success in tool-agent-user interaction; not a
+553        generated-code-to-protected-effect mediation measurement.
+554   [35] Maksym Andriushchenko, Alexandra Souly, Mateusz Dziemian, Derek Duenas, Maxwell Lin,
+555        Justin Wang, Dan Hendrycks, Andy Zou, Zico Kolter, Matt Fredrikson, Eric Winsor, Jerome
+556        Wynne, Yarin Gal, and Xander Davies. AgentHarm: A benchmark for measuring harmfulness
+557        of LLM agents. In The Thirteenth International Conference on Learning Representations,
+558        2025. arXiv abstract retrieved 12 September 2026; submitted 11 October 2024. ICLR 2025.
+559        Harmfulness oracle; not this handler route.
+560   [36] Guru Bhandari, Amara Naseer, and Leon Moonen. CVEfixes: Automated collection of vulner-
+561        abilities and their fixes from open-source software. In Proceedings of the 17th International
+562        Conference on Predictive Models and Data Analytics in Software Engineering, pages 30–39,
+563        2021. doi: 10.1145/3475960.3475985. Crossref retrieved 12 September 2026. Dataset, not a
+564        runtime.
+565   [37] DuckDB team. Quack: The duckdb client-server protocol, 2026. URL https://duckdb.
+566        org/2026/05/12/quack-remote-protocol. 12 May 2026. Accessed 6 September 2026
+567        (reconstructed bibliography). Live document retrieved 12 September 2026; title: Quack: The
+568        DuckDB Client-Server Protocol. Operational-state substrate, not a safety theorem.
+569   [38] IPFS contributors. Content identifiers (CIDs), 2026. URL https://docs.ipfs.tech/
+570        concepts/content-addressing/. Documentation accessed 6 September 2026 (recon-
+571        structed bibliography). Live document retrieved 12 September 2026; title: Content Identifiers
+572        (CIDs) | IPFS Docs. Content identity is not publication, availability, or authorization.
+573   [39] libp2p contributors. libp2p connections specification, 2026. URL https://github.com/
+574        libp2p/specs/blob/master/connections/README.md. Specification accessed 6 Septem-
+575        ber 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title:
+576        specs/connections/README.md at master. Transport identity is not a tool grant.
+
+
+
+
+                                                       13
+577   A     Corpus lineage and release accounting
+578   A.1   Legal source families and acquisition routes
+
+579   The author-maintained legal program includes public releases for the U.S. Code, state statutes, state
+580   administrative rules, Federal Register documents, state/local court rules, municipal/county codes,
+581   caselaw, and national legislation. It also includes international harvests and retrieval releases. The
+582   paper does not interpret a dataset title, a country registry entry, or a successful scrape as exhaustive
+583   coverage. The private source map records identifying dataset names and inspected revisions; a
+584   submission artifact should substitute anonymous manifest identifiers while preserving the actual
+585   records and lineage.
+
+                    Table A1: Legal source families and provenance requirements. Identify-
+                    ing publisher/dataset mappings belong in the private author record until
+                    camera-ready.
+
+      Source family               Representative inspected            Required distinctions
+                                  substrate
+      Federal statutory law       U.S. Code sparse GraphRAG           Codification/release point, provision
+                                  release, pinned source revision     identity, amendment history and
+                                  and official release point          actual effective dates
+      State law                   State-statute release and           State, authority family, rule/statute
+                                  separate administrative-rule        distinction, missing jurisdictions and
+                                  corpus                              time coverage
+      Federal regulatory          Federal Register collection         Proposed rule, final rule, notice,
+      material                                                        publication date, effective date and
+                                                                      codified regulation are not
+                                                                      interchangeable
+      Court rules and caselaw     Merged per-state court rules;       Court, jurisdiction, local/general rule,
+                                  Caselaw Access Project-derived      opinion treatment, holdings versus
+                                  collection                          quotations
+      Municipal and county        Multi-drop municipal harvest        Publisher, jurisdiction, per-drop
+      law                                                             discovery and failure counts; registry
+                                                                      aliases may lag new release
+                                                                      namespaces
+      International legislation   Netherlands corpus; Belgian         Language, source authority,
+                                  official-source archive harvest;    consolidation date, archive capture,
+                                  Argentine CID-keyed retrieval       extraction version and incomplete
+                                  release                             coverage
+
+
+586   The inspected U.S. Code release card pins a source revision and the release point us/pl/118/45; it
+587   must not be described as every later law in force. The state-law card similarly provides a pinned
+588   source revision, a release label, and a vector model revision. These are reproducibility fields, not
+589   automatic temporal-validity guarantees. The registry’s local fields also vary by corpus: a field named
+590   id or jurisdiction in one source must not be silently interpreted as the same CID or state-code field
+591   used in another.
+592   The municipal card inspected on 6 September 2026 reports 567 jurisdictions across four drops. Its
+593   fourth drop reports 300 new jurisdictions and 448,090 HTML sections across 41 states. Those
+594   section counts describe that drop, not every municipality or necessarily the entire merged corpus. The
+595   Netherlands release reports 4,999 laws and 89,737 articles, with additional index/embedding rows.
+596   The Belgian card reports incomplete coverage of 9,116 instruments plus 282 leftovers and identifies
+597   an archive-based acquisition route. These card-reported quantities have not been independently
+598   recounted here and must be frozen or remeasured for the submitted experiment.
+599   A legal source-to-rule manifest should retain original bytes, source URI, retrieval method, acquisition
+600   time, instrument and provision identifiers, source span, language, jurisdiction, authority, effective
+601   interval when known, parser version, normalized-text identity, parent/source revisions, rejected rows,
+602   licenses, and review status. Cross-references, definitions, exceptions, and competing interpretations
+
+
+                                                        14
+603   require explicit records. A translation from source into a restricted seven-field grammar must retain
+604   unsupported facets outside that grammar and block uses that require them.
+
+
+605   A.2   Security source release and control construction
+
+606   The      inspected       derived        security       release     pins    hitoshura25/cvefixes        at
+607   d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2. This is the exact input snapshot; it must not be
+608   replaced in the narrative by the statistics of a different upstream CVEfixes release. The release reports
+609   12,987 original rows, 12,714 derived records, 273 tombstones, 85,169 graph nodes, and 167,364
+610   graph edges. Graph nodes, edges, vectors, source rows, and unique CVEs are different populations.
+611   The release retains byte-identical original Parquet, per-file digests/CIDs, row counts, and an original-
+612   row locator. The locator maps a source identity to a copied source shard and local row position.
+613   BM25, vectors, graph adjacency, and a retrieval manifest make the evidence remotely addressable
+614   without downloading all source bodies. Their identities permit integrity checks; none establishes that
+615   a vulnerability generalizes to another program.
+616   The domain adapter receives a typed PolicyCandidate, its SourceRecord population, and review bind-
+617   ing. It rejects generalized/wildcard scope, unknown authority assertions, duplicate JSON keys, and
+618   noncanonical fields on the relevant paths. It preserves a declaration and the detached candidate/review
+619   evidence separately. The formalizer specializes the shared Security IR policy view using exact typed
+620   terms for action, preconditions, effects, mitigations, language, scope, and CVE/CWE classifications.
+621   It emits a deontic prohibition candidate with explicit non-authoritative flags.
+622   Evaluation must include both the original vulnerable condition and the fixed negative control. A
+623   mitigation that removes one unsafe data-flow does not imply universal safety. Transfer to a proposed
+624   tool or generated patch needs an explicit mapping, a supported behavior model, applicable scope,
+625   and a checked rule. The runtime cve_security_gate separately maps intent-side and code-side facts,
+626   rejects undeclared or broadened effects, and preserves unknown mappings. The selected gate result
+627   must be bound to the same action and Security IR root used by plan admission.
+
+
+628   A.3   SkillCenter source identity and procedure representation
+
+629   The inspected SkillCenter source is Tommysha/skillcenter-bundles at revision
+630   f9dd4fec3c86d85ebf116c7408ac5ce602c418a1. The repository build notes report 216,972
+631   physical skill records across 24 bundles, rather than relying on the upstream card total. Expected
+632   source tables are bundle_meta, skills_index, and skills_content; source bodies include skill_md and
+633   library_md. SQLite is read as an untrusted, immutable input container. It is not the authoritative
+634   supervisor database.
+635   SkillCenterSkillRecord retains domain, profile, title, language, source URL/type/IDs, metadata
+636   YAML, Markdown, dataset revision, bundle filename, and bundle digest. Its intrinsic identity
+637   excludes the packaging provenance while retaining the source fields that define the entry. An exact
+638   body CID separately identifies the Markdown bytes. Thus a record can be traced to a bundle yet
+639   retain its intrinsic identity if the same content is repackaged. License expression and risk remain
+640   available for source-use policy.
+641   The schema of IntentIRDocument distinguishes statements from actions and control edges. Statement
+642   roles include goal, precondition, postcondition, invariant, guard, effect, assumption, failure, and
+643   verification. Action references include tools, inputs, outputs, objects, preconditions, effects, and
+644   verification steps. Edges include next, on-success, on-failure, conditional, retry, parallel, and join.
+645   Each node can be source-grounded or inferred and carries review state. These fields permit the system
+646   to ask what an agent proposes, what must already hold, and what evidence should follow.
+647   The published retrieval release reports 216,972 vectors corresponding to canonical entries; it also
+648   contains millions of lexical/index rows. Index totals must not be called additional skills. The bounded
+649   Parquet release, centroid routing, and paged graph navigation are retrieval mechanisms. Counts of
+650   available records do not establish counts of normalized Intent IR documents, valid procedures, safe
+651   skills, or learned models trained successfully.
+
+
+                                                         15
+652   A.4   Record chain and minimum provenance
+
+653   pinned source revision + raw artifact bytes
+654     -> bounded source record + content identity + use policy
+655     -> LegalIR | SecurityIR | IntentIR declaration
+656     -> native formal views + source map + loss/coverage diagnostics
+657     -> selected applicable constraints + exact invocation
+658     -> proof jobs + checked evidence + decision receipt
+659     -> authenticated capability / execution permit
+660     -> guarded effect + operational observation + durable record
+
+661   Each arrow needs a producer/configuration identity and input/output references. Declaration, valida-
+662   tion, admission, and effect observation are separate steps. Source bodies, local files, indexes, and
+663   public releases need their own source-access and retention rules; a content address does not provide
+664   encryption or license rights.
+
+665   B     Logic-family and backend method map
+666   B.1   Native semantics
+
+                    Table B1: Logic families have different meanings. A shared symbol
+                    table or cross-view link does not prove that two encodings preserve those
+                    meanings.
+
+      Family/view                  Representation and                 What the paper may claim
+                                   operations
+      Propositional and            Boolean operators, typed terms,    Bounded facts and implications under
+      first-order                  predicates, variables and          the encoded vocabulary; not general
+                                   quantifiers                        natural-language understanding
+      F-logic / frame              Object identity, class             Structured semantic relations for
+                                   membership, slots and              source entities, agents, tools and
+                                   relational inheritance             resources; not a cryptographic or
+                                                                      temporal proof by itself
+      Deontic                      Obligation, permission,            Explicit normative force under the
+                                   prohibition; richer DCEC           selected axioms/profile; an encoded
+                                   domain operators                   permission is not an issued capability
+      Temporal / TDFOL             Always, eventually, next, until,   Model time-sensitive requirements
+                                   since; quantified normative        and ordering; a backend must support
+                                   formulas                           the actual formula fragment
+      Event calculus               Events, changing fluents,          Reason about transitions and
+                                   initiation/termination and         obligations over traces; an observed
+                                   persistence as represented         event record is not a proof of every
+                                                                      transition
+      DCEC                         Cognitive operators for beliefs,   Keep agent attitudes separate from
+                                   knowledge, intentions, desires     asserted world facts; fact grounding
+                                   and goals, plus normative/event    still needs evidence
+                                   structure
+      Datalog / rule-policy /      Bounded rules and authorization    Rule derivation and policy checking
+      SecPAL-like rendering        declarations where selected        with an explicit open/closed-world
+                                                                      convention, not automatic theorem
+                                                                      authority
+      Hoare-style / transition /   Preconditions, postconditions,     Check program/guard properties
+      SMT                          abstract state and                 under stated assumptions and
+                                   theory-specific constraints        available arithmetic, array, string or
+                                                                      other fragments
+
+
+
+
+                                                         16
+      Family/view                 Representation and                  What the paper may claim
+                                  operations
+      Higher-order and            Native proof terms/scripts and      Kernel-checked statements in that
+      interactive proof           dependent/higher-order              prover and environment, not universal
+                                  constructs supported by the         translation correctness
+                                  chosen prover
+      Linear / separation         Declared broader                    Mention as registered or staged where
+                                  training/representation families    appropriate; do not claim a live
+                                                                      checker without a concrete supported
+                                                                      translation and execution receipt
+
+
+667   The TDFOL and DCEC Python cores establish parsable native representations. Compiler bridges and
+668   family engines determine which source constructs they can lower. Resource-scoped authorization
+669   may be representable without invoking every family. The manuscript should state which view was
+670   selected per experiment rather than treating the complete registry as one solver.
+
+671   B.2   Proof workflow and result classes
+
+672   The common proof workflow is: choose a supported view; create a typed obligation and premises;
+673   select a backend/hammer plan; execute within a bound; preserve translations, models, cores, and
+674   proof candidates; reconstruct where required; run the declared checker; then emit a result and receipt.
+675   Z3/cvc5, Vampire/E, and Lean/Coq/Isabelle belong to different stages. A timeout or unavailable
+676   backend is not a refutation, and satisfiability of a favorable instance does not prove universal safety.
+677   Datasets distinguishes authority kinds such as theorem proof, satisfiability, runtime monitor, evidence
+678   readiness, and policy approval. These are non-interchangeable. The supervisor also uses an assurance
+679   classification for whether the evidence meets a requested threshold. Neither mechanism permits a
+680   provider to upgrade its own output by naming it “verified.” A cryptographic attestation must bind the
+681   actual checked claim, verifier and public inputs; proving corpus membership alone cannot prove the
+682   member’s theorem.
+683   Counterexample-guided refinement identifies missing facts or assumptions in the encoded problem
+684   and requests specific additional context. Interpolation and unsat cores can narrow that request; they
+685   do not discover an omitted statute automatically. Abstract interpretation overapproximates a qualified
+686   program fragment, while assume-guarantee discharge checks that a producer’s established guarantee
+687   entails a consumer’s assumption. Learned premise/tactic selection and proof-grounded encoders
+688   improve search proposals; independent checking remains the acceptance operation.
+
+689   C     Database, artifact, network, and capability boundaries
+690   C.1   Storage is not one undifferentiated database
+
+                    Table C1: Database and protocol responsibilities. Legacy or auxiliary
+                    indexes can exist without changing the canonical DuckDB control-plane
+                    description.
+
+      Layer                       Technology and inspected role       Incorrect inference to avoid
+      Supervisor operational      DuckDB control.duckdb; typed       “The supervisor uses SQLite” or
+      authority                   Quack owner/client;                “each agent writes the database file
+                                  StateTransaction CAS and           directly”
+                                  idempotency
+      Source input packaging      Read-only SkillCenter SQLite        “An input database format defines the
+                                  bundles; source Parquet/JSON-       runtime architecture”
+                                  LD/HTML/WARC
+      Retrieval products          BM25, vectors, graphs and           “A retrieved neighbor is a grant or a
+                                  bounded Parquet shards keyed        proof”
+                                  by source IDs/CIDs
+
+
+                                                        17
+      Layer                       Technology and inspected role       Incorrect inference to avoid
+      Immutable artifacts         Kit-managed content-addressed       “The newest block is automatically
+                                  blocks, manifests, maps,            the accepted state”
+                                  proof/decision receipts, optional
+                                  IPFS replication
+      Peer carriage               libp2p negotiated streams and       “A peer identity grants tool
+                                  MCP++ framing                       permission”
+      Delegated capability        Strict signed UCAN verification     “A valid token proves the action is
+                                  and revocation/replay state         legally and semantically safe”
+
+
+691   C.2   A state transition through the typed owner
+
+692   A caller supplies a named command and typed parameters, not a SQL string. The owner validates
+693   store identity, schema/generation, task revision, fence, and idempotency key. A successful transaction
+694   commits the permitted state change and its recorded command result. The identical command can
+695   retrieve that result after a lost reply; a changed payload with the same identity is a conflict. Stale
+696   generations and fences require new admission rather than blind retry. Event delivery can wake
+697   dependent work, but does not substitute for the committed state.
+698   The inspected QuackStateClient describes both an embedded mode and a typed owner-gateway mode.
+699   Documentation that discusses generic Quack/ATTACH capability must not override the current
+700   client’s deliberately narrower interface. Likewise, the architecture should not promise that a reference
+701   in-memory capability consumption store is already backed by DuckDB. A deployment must supply
+702   and test the actual durable adapter used for receipt/capability consumption.
+
+703   C.3   IPFS and libp2p are complementary
+
+704   IPFS answers which artifact bytes are requested and enables verifiable retrieval of that content.
+705   Canonical IR, a source document, a decision receipt, and a graph node can each have independent
+706   identities. Pin/retention and transport choices determine availability. Public availability is not the
+707   default requirement for private legal or security material.
+708   libp2p answers how peers connect, authenticate a peer key, negotiate an application protocol, and
+709   exchange framed streams. A protocol ID selects the decoder; it does not select a legal jurisdiction
+710   or an authorization profile by itself. TLS/Noise or native transport security protects a channel when
+711   configured; it does not turn a peer’s proof claim into a checked proof. Deployments must record
+712   actual transports and security settings. Do not count an in-process call to a P2P handler as a full
+713   libp2p network experiment.
+
+714   C.4   UCAN and proof-oriented capabilities are distinct
+
+715   Strict UCAN checks cryptographic issuer identity, delegation continuity, explicit resource/ability
+716   bounds, temporal validity, permitted attenuation, revocation, and replay policy. It does not infer
+717   delegation from natural-language text. A principal may possess a valid capability yet fail a legal or
+718   security obligation. Conversely, a mathematically valid proof of a property does not authorize the
+719   principal to invoke an administrative tool.
+720   The proof-oriented AuthorizationCapability is an additional exact-context contract. Its relationship
+721   to a UCAN envelope must bind the same actor/audience, tool/version, arguments, effects, policy
+722   roots, and allowed use. Hash equality checks identity; authentication must come from the trusted
+723   issuer/transport mechanism. A signed token, capability use record, and proof receipt are related
+724   evidence objects, not aliases for one another.
+
+725   D     Implementation trace and source-to-check map
+
+726   The private companion contains exact repository revisions and paths. This table retains inspectable
+727   symbol names for author review; the final blind artifact should use consistent neutral aliases if these
+728   names reveal authorship.
+
+
+                                                        18
+                      Table D1: Implementation-oriented trace. The table specifies what to
+                      record; it is not a claim that an end-to-end run has been performed.
+
+      Method                      Representative                     Inputs to inspect in a reproducible
+                                  implementation                     run
+      Legal routing               CanonicalLegalCorpus registry;     Dataset revision, source body,
+                                  rich legal bridge; typed           jurisdiction, source maps,
+                                  canonical compiler                 unsupported facets
+      Skill import                SkillCenterSkillRecord and         Physical source row, metadata,
+                                  read-only bundle adapter           skill/library Markdown,
+                                                                     entry/body/container identities
+      Intent normalization        IntentIRDocument and               Actions, modalities, statements,
+                                  formalizer/normalizer ports        grounded/inferred status, control
+                                                                     edges
+      CVE adaptation              adapt_cvefixes_candidate; Secu-    Vulnerable/fixed source records,
+                                  rityIRFormalizationAdapter         candidate scope, review binding,
+                                                                     prohibition/control polarity
+      Intent/code correlation     cve_security_gate                  Exact intent mappings and
+                                                                     independently extracted code effects
+                                                                     under one security root
+      Constraint join             IRConstraintCompiler               Candidate graph, legal/security/intent
+                                                                     checks, proof requirements, current
+                                                                     roots
+      Proof authorization         IntentAuthorizationService;        Mandatory job population, backend
+                                  AuthorizationQueryComposer;        routes, evidence/verifier identities,
+                                  AuthorizationPortfolio             terminal decision
+      Guarded execution           Pre-invocation enforcement         Enforce mode, current live context,
+                                  wrapper; ExecutionPermit           authenticated receipt, expiry/use state,
+                                                                     delegate effects
+      State control               QuackStateClient;                  Named command, generation, fence,
+                                  StateTransaction                   revision, idempotency and committed
+                                                                     result
+      Protected MCP               AuthorizationGate and shared       Actual handler/tool arguments,
+                                  tool dispatch                      envelope, strict UCAN verifier, policy
+                                                                     provider, audit/result objects
+
+
+729         1. Resolve source and declaration manifests by exact revision/CID.
+730         2. Import skill procedure as data; derive or validate IntentIR.
+731         3. Select applicable LegalIR and reviewed SecurityIR constraints.
+732         4. Bind actual requested tool, arguments, actor and expected effects.
+733         5. Correlate intent-side effects with code/handler-side observations.
+734         6. Compose and execute the required formal jobs; retain non-successes.
+735         7. Produce an exact-context decision, not an effect.
+736         8. Check signed delegation and host-controlled current policy/state.
+737         9. In enforce mode, revalidate and consume the exact permitted use.
+738       10. Dispatch once through the selected protected path.
+739       11. Record observed outcome separately from proof and authorization.
+740       12. Commit operational progression through the DuckDB owner.
+
+741   Failure attribution should name a stage. A bad source extraction, a wrong legal interpretation, an
+742   irrelevant CVE analogy, an incomplete effect mapping, a false proof receipt, a stale root, a widened
+743   delegation, and a bypassing handler are different defects. The evidence should make it possible to
+744   locate which boundary failed rather than attributing all failures to “LLM hallucination.”
+
+
+                                                       19
+745   E     Evaluation completion template
+
+746   E.1   Populations and source freezing
+
+747   Before claiming a measured result, freeze a bounded legal slice, a CVE vulnerable/fixed cohort, a set
+748   of SkillCenter records, exact package revisions, native logic fragments, prover/toolchain versions,
+749   model/tokenizer revisions, and sandbox handler versions. Retain license/review state and source
+750   failures. Development, calibration, and held-out tasks must be separated by source lineage so that a
+751   derivative record of the same source does not leak between splits.
+752   The primary outcome is actual forbidden effects under guarded execution, jointly reported with useful
+753   permitted work. A reject-all gate is not useful. Compare the same action candidates and runtime
+754   environment under prompt-only, retrieval-assisted, lightweight policy/UCAN, and full proof-oriented
+755   enforcement. Then add a closed-loop model agent comparison to measure whether the constraints
+756   alter planning and recovery. These answer different questions and should not be pooled.
+
+                    Table E1: Result placeholders. “Not run” is not zero failures and is not a
+                    claim that the repository has no tests.
+
+      Measurement                 Planned record                       Present status
+      Legal source-to-IR          Expert-reviewed atoms,               Not run
+      fidelity                    exceptions, applicability and
+                                  source spans
+      CVE restriction             Vulnerable positives, fixed          Not run
+      specificity                 negatives, unrelated-code
+                                  controls
+      Skill grounding             Source spans, control-flow           Not run
+                                  fidelity, malicious Markdown
+                                  negatives
+      Proof job execution         Per-family provider/checker          Not run
+                                  route, assumptions, result and
+                                  receipt
+      Guarded effect              Delegate/effect counters under       Existing assertions inspected; frozen
+      prevention                  allow, deny, unknown, stale and      run pending
+                                  replay
+      DuckDB owner safety         Wrong generation/fence,              Existing implementation and test
+                                  concurrent commands, lost            design inspected; run pending
+                                  reply, restart
+      Cross-transport parity      Stdio/HTTP/P2P same request          Existing suite inspected; run pending
+                                  and outcome; actual network
+                                  mode
+      End-to-end efficiency       All model tokens, context            Not run
+                                  retrieval, proof and state/storage
+                                  overhead
+
+
+757   E.2   Required counterexamples and ablations
+
+758   Include omitted legal exceptions, wrong dates/jurisdictions, no applicable legal record, misleading
+759   CVE similarity, a fixed negative control, skill text claiming authorization, generated-code effects
+760   not declared in the intent, forged proof identifiers, wrong audience, widened path/tenant bounds,
+761   expired/revoked tokens, replay, and a changed environment between decision and use. Test each
+762   reachable protected route, not just one helper function.
+763   Ablate source provenance, hard applicability, intent/code correlation, proof jobs, current-root binding,
+764   capability verification, and consumption separately in a sandbox. Report where the actual effect
+765   counter changes. Measure cold and reused evidence, including retrieval/compilation, solver work,
+766   clock/root checks, database transactions, storage, and retry overhead. Do not translate graph size or
+767   token reduction directly into cost savings.
+
+
+                                                         20
+768   F    Scope, ongoing work, and disclosure
+769   Earlier worktree directives extend this stack with semantic-addressed program worlds, exact/abstract
+770   state transitions, learned next-call/next-event/inverse-trace residuals, semantic-preserving refactoring,
+771   parallel sealing, and proof-carrying test reuse. They support better candidate generation and incre-
+772   mental checking. Their uncommitted implementation bytes were not available for this revision, so
+773   they are not presented as newly executed methods or measured results.
+774   Semantic minification can send a task-specific ContextPack and local aliases rather than entire laws,
+775   skill libraries, or repositories. Its source maps, required obligations, and current-root bindings must
+776   remain intact. Learned encoders and similarity search nominate candidates; they cannot certify
+777   omitted constraints. Separate lexical/token savings, compilation cost, formal-checking cost, and final
+778   task utility when this optimization is evaluated.
+779   This draft was prepared using language-model assistance for source inspection, organization, and
+780   writing. No repository test suite, live model experiment, full corpus recount, or robot execution was
+781   performed during this document revision. The authors must replace this disclosure with the exact
+782   tools, model versions, human review, and executed experiments used for the final submission.
+
+
+
+
+                                                        21
+
