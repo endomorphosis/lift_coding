@@ -1,0 +1,184 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-020",
+  "status": "complete",
+  "completed_at": "2026-09-12T18:41:29.064709+00:00",
+  "completion_mode": "Selected frozen LA-015 A4 identities at seed 104729 were replayed with retained SAT, real Ed25519 UCAN, ENFORCE, bounded-export handler, independent observer, and DuckDB owner artifacts. The illustrated permitted skill export produced useful work (1 effect). Matched rejected-recipient, undeclared-effect, and replay variants were denied with 0 effects. Compact LA-015 outcomes matched the replay. Generated-code AST analysis, LegalIRCompilerAPI, kernel theorem_proof, published proof CIDs, and independent human gold are labeled absent. The figure does not present the harness stub CID or SAT UNSAT as a theorem proof.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/build_worked_trace.py": "c46b433326a62fe2fcfe5b4a62ee12fa90486ab40685d88afc45521b0765a868",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json": "77f683ad5e1b15e1ceb6df2c1b28284747a08f2c7c8d4276bafdc4fdd8e346e4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_ir_selected.json": "2730ae98341a3c1aaf9cb996db51e8d20410aa77580196f7945b2625701ec0cb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_manifest_selected.json": "e82ca5ce3b94fcd23a32f5c1984d22b575a8ccfcb2b8689a5aef30aab5f7ee96",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/figures/source_to_effect_trace.pdf": "0911525ffcf952346c82ffc295d70d51ab93035df63df5589924ca99ab32ba61",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/probe/environment.json": "7af168e9fed97efb19ededf1c86730771cb68a2682eb24a2d5ae9ab00c5aa848",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.json": "daaecfafbc6f2755dd9ae626b03356fe98c5213c3769cd5c40a967e0e00cc0de",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.ucan-meta.json": "ed796af33d6bce63d499c53ed4dcc1d2ef1785679644ac63bd8423b6f8916951",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.json": "5b5cdfb6c627af0f8909aa1ed07b9415b00d1dd8a9651860317f0dd34278cc57",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.ucan-meta.json": "901361334d366579d989733c22221ca433a76d81de7340d7d4dc7828e4e5821b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.json": "3c89ab6fe1fe086306d96c30649e2554359cf24322a42b0a652b22586a5f8ce8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.ucan-meta.json": "1b0ba8d5b2a5c4728ae175486b3e97201d988630fb4f7ca8c2855e56fa730e3f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.json": "d0cce1faf1fa2256f9367d0db8702aed470b8584e57085ec2dec335a3f817110",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.ucan-meta.json": "101447ed7f5f196179b14161cd1bcf71a804dcbb907db6345faf8dde923b86d3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json": "60b04f24f176666682627a919ddcf36eab486702f82fbdb2dfaf61473dfbd2ab",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.ucan-meta.json": "c3b700584628d4c33ef3668f67735742716b3375197e504d3dd5a3a2bd74c3f8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.json": "521a3b65bca1a9e8ec58345892ee7b54356e216bb44e578bbba052aa150773ce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.ucan-meta.json": "613b4078b30ca5ddb6b760a49a3c5762ec34478373159681bcd14c8ecaecef9c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.json": "5e3678749bf880319afebaec83480ecad52ca70ced0f2b8351be1e995ed12dab",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.ucan-meta.json": "475d81f214a550d27f169064dfd112c5e22e151e1351c59857dc126affc15eef",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/run_head.json": "4db0626a6ceb7fe88ee207fcfb36b269e4cc95ae12f650fa35a9e6f5efbf8acd",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/selection.json": "450693ba768ce9da1efd8f92f2f96b8ca63e89c876a5e59b3e0c111d5faee612",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/validate_worked_trace.py": "bfb3b357ae7fc3eedabd1cba49c51d1a66ee04771edba9b9243e4bacefd3356a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/commands.json": "8931ad6d3fd88d953f0d5e9e5cc69f90e3816302e59bf7e6167279ee7bf898c2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/run.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/run.stdout.log": "a5e6bd4577fc5d626b803d32af0117090cda27125b8d9d97e5372c95af436332",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log": "b0555cc0f593c70c3a607b09ee400c09b78bdd2a2c78160202e9644d4ebd7a00"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/results/worked_trace/trace.json": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+    "papers/completion/law_to_action/results/worked_trace/trace.md": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+    "papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/figures/source_to_effect_trace.pdf"
+  },
+  "criteria": [
+    {
+      "criterion": "Each illustrated transition links to actual raw evidence under one run/case identity.",
+      "status": "met",
+      "explanation": "The twelve Appendix D steps for permitted attempt 104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0 each cite hashed LA-020 snapshot evidence (source manifest/IR excerpts, detailed replay, and the compact LA-015 row). All step attempt_id/case_id values are that one identity. Variant pairs keep the same seed/arm run identity with their own case ids.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_ir_selected.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_manifest_selected.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/selection.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Trace contains at least permitted useful work and prevented forbidden effects.",
+      "status": "met",
+      "explanation": "The permitted A4 skill export has useful_work=true, decision=allow, observed_effect_count=1. Matched A4 variants wrong_audience, undeclared_handler_effect, and replay have decision=deny, observed_effect_count=0, and observed_forbidden_effect=false. Detailed replay matched the compact LA-015 rows for those identities.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/run_head.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Figure/table does not use a fabricated signature/proof receipt or pretend a conceptual step ran.",
+      "status": "met",
+      "explanation": "SAT receipts are satisfiability-only (theorem_proof=false). UCAN tokens are real Ed25519 with signature_present=true and fabricated_signature=false. Harness selected_evidence_cids are labeled not a published proof. Generated-code AST analysis, LegalIRCompilerAPI, kernel theorem_proof, published IPFS proof CIDs, and independent human gold are listed as absent/narrowed. The PDF is an ASCII text figure that states those non-claims and does not present the stub CID as a proof receipt.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/figures/source_to_effect_trace.pdf",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.ucan-meta.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/build_worked_trace.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/build_worked_trace.py",
+        "run",
+        "--out",
+        "papers/completion/law_to_action/results/worked_trace",
+        "--figure",
+        "papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf",
+        "--snapshot",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020"
+      ],
+      "completed_at": "2026-09-12T18:32:51.989405Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la020"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/run.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-020/build_worked_trace.py",
+      "started_at": "2026-09-12T18:32:50.642455Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-020/validate_worked_trace.py"
+      ],
+      "completed_at": "2026-09-12T18:32:52.031769Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la020"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-020/validate_worked_trace.py",
+      "started_at": "2026-09-12T18:32:51.990741Z"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "49.0.0",
+    "HAVE_CRYPTO_ED25519": true,
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "bounded_export_handler": "bounded-export-handler/v2",
+    "observer": "independent-filesystem-journal-observer/v2",
+    "harness_version": "la-020-worked-trace/v1",
+    "source_run": "LA-015",
+    "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "empirical_benchmark_result": true,
+    "independent_human_gold": false,
+    "theorem_proof": false,
+    "fabricated_signature": false,
+    "model_calls": 0,
+    "generated_program_count": 0,
+    "a4_crypto": "real-ed25519",
+    "a4_store_kind": "duckdb-file-typed-quack-owner",
+    "a4_enforce_mode": "enforce",
+    "seed": 104729,
+    "arm_id": "A4",
+    "future_gates": [
+      "Generated-code AST analysis and closed-loop model programs remain unrun.",
+      "SAT/UNSAT cannot authorize theorem_proof allows.",
+      "LegalIRCompilerAPI and independent human gold remain absent.",
+      "Harness selected_evidence_cids are constants, not published proofs."
+    ]
+  }
+}

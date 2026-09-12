@@ -1,0 +1,221 @@
+%PDF-1.4
+% ASCII source-to-effect figure; no binary objects
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 7260 >>
+stream
+0.15 0.18 0.22 rg 36 576 720 18 re f
+1 1 1 rg
+BT /F1 12 Tf 42 581 Td (Source-to-effect trace: bounded export under A4 ENFORCE) Tj ET
+0 0 0 rg
+BT /F1 9 Tf 36.0 558.0 Td (LA-015 identity 104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0  revision ee6d73c4a5fc30d0) Tj ET
+BT /F1 8 Tf 36.0 546.0 Td (case family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0  population=skill  mutation=none  decision=allow  useful_work=True  effects=1) Tj ET
+BT /F1 8 Tf 36.0 535.0 Td (Each row is a retained transition for this attempt. Absent/partial steps are labeled; SAT is satisfiability, not a kernel theorem.) Tj ET
+BT /F1 10 Tf 36.0 518.0 Td (Appendix D twelve-step trace \(permitted useful work\)) Tj ET
+0.92 0.93 0.95 rg 36 501.0 720 14 re f
+0 0 0 rg
+BT /F1 8 Tf 36.0 503.0 Td (Stp) Tj ET
+BT /F1 8 Tf 62.0 503.0 Td (Status) Tj ET
+BT /F1 8 Tf 108.0 503.0 Td (Method) Tj ET
+BT /F1 8 Tf 330.0 503.0 Td (Observed evidence) Tj ET
+0.86 0.94 0.86 rg 36 440.0 720 59.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 489.0 Td (1) Tj ET
+BT /F1 8 Tf 62 489.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 489.0 Td (Resolve source and declaration manifests) Tj ET
+BT /F1 7 Tf 108 479.0 Td (by exact revision/CID) Tj ET
+BT /F1 7 Tf 330 489.0 Td (Frozen source_id) Tj ET
+BT /F1 7 Tf 330 479.0 Td (skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693 with) Tj ET
+BT /F1 7 Tf 330 469.0 Td (content identity) Tj ET
+BT /F1 7 Tf 330 459.0 Td (ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0; IPFS) Tj ET
+BT /F1 7 Tf 330 449.0 Td (publication was not performed.) Tj ET
+0.86 0.94 0.86 rg 36 403.0 720 37.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 430.0 Td (2) Tj ET
+BT /F1 8 Tf 62 430.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 430.0 Td (Import skill procedure as data; derive or) Tj ET
+BT /F1 7 Tf 108 420.0 Td (validate IntentIR) Tj ET
+BT /F1 7 Tf 330 430.0 Td (SkillCenter normalizer produced skill_intent_ir) Tj ET
+BT /F1 7 Tf 330 420.0 Td (document_id=intent:skillcenter:8e128cbf4c4daa54d7d61c54864dd1759b03d3279f53796) Tj ET
+BT /F1 7 Tf 330 410.0 Td (11420f54dd9397967 schema_valid=True. Typed compiler available=False.) Tj ET
+0.98 0.94 0.82 rg 36 377.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 393.0 Td (3) Tj ET
+BT /F1 8 Tf 62 393.0 Td (partial) Tj ET
+BT /F1 7 Tf 108 393.0 Td (Select applicable LegalIR and reviewed) Tj ET
+BT /F1 7 Tf 108 383.0 Td (SecurityIR constraints) Tj ET
+BT /F1 7 Tf 330 393.0 Td (LegalIRCompilerAPI was not the selected adapter. Independent human) Tj ET
+BT /F1 7 Tf 330 383.0 Td (legal/security review was not used. Machine-contract span linkage ran.) Tj ET
+0.86 0.94 0.86 rg 36 351.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 367.0 Td (4) Tj ET
+BT /F1 8 Tf 62 367.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 367.0 Td (Bind actual requested tool, arguments,) Tj ET
+BT /F1 7 Tf 108 357.0 Td (actor and expected effects) Tj ET
+BT /F1 7 Tf 330 367.0 Td (Bound actor=did:client:tenant-a tool=export_json) Tj ET
+BT /F1 7 Tf 330 357.0 Td (path=exports/fa-075d8327ad20c2d4.json candidate_digest=b0875e6b1a86ac83.) Tj ET
+0.98 0.94 0.82 rg 36 314.0 720 37.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 341.0 Td (5) Tj ET
+BT /F1 8 Tf 62 341.0 Td (partial) Tj ET
+BT /F1 7 Tf 108 341.0 Td (Correlate intent-side effects with) Tj ET
+BT /F1 7 Tf 108 331.0 Td (code/handler-side observations) Tj ET
+BT /F1 7 Tf 330 341.0 Td (The handler accepts a declarative export_json instruction, not generated) Tj ET
+BT /F1 7 Tf 330 331.0 Td (source. LA-016 produced 0 generated programs. Declared filesystem.export_json) Tj ET
+BT /F1 7 Tf 330 321.0 Td (effects were compared with the independent journal observer.) Tj ET
+0.86 0.94 0.86 rg 36 288.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 304.0 Td (6) Tj ET
+BT /F1 8 Tf 62 304.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 304.0 Td (Compose and execute the required formal) Tj ET
+BT /F1 7 Tf 108 294.0 Td (jobs; retain non-successes) Tj ET
+BT /F1 7 Tf 330 304.0 Td (QF_BOOL SAT provider=unsat checker agrees=True. Authority is satisfiability,) Tj ET
+BT /F1 7 Tf 330 294.0 Td (not theorem_proof.) Tj ET
+0.86 0.94 0.86 rg 36 251.0 720 37.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 278.0 Td (7) Tj ET
+BT /F1 8 Tf 62 278.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 278.0 Td (Produce an exact-context decision, not an) Tj ET
+BT /F1 7 Tf 108 268.0 Td (effect) Tj ET
+BT /F1 7 Tf 330 278.0 Td (An internal BoundContext decision receipt and capability were derived for the) Tj ET
+BT /F1 7 Tf 330 268.0 Td (exact actor/tool/args digest. Harness selected_evidence_cids are constants,) Tj ET
+BT /F1 7 Tf 330 258.0 Td (not a published proof.) Tj ET
+0.86 0.94 0.86 rg 36 225.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 241.0 Td (8) Tj ET
+BT /F1 8 Tf 62 241.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 241.0 Td (Check signed delegation and) Tj ET
+BT /F1 7 Tf 108 231.0 Td (host-controlled current policy/state) Tj ET
+BT /F1 7 Tf 330 241.0 Td (Real Ed25519 UCAN verifier decision=allow token_sha256=7c3c672fef671199) Tj ET
+BT /F1 7 Tf 330 231.0 Td (signature_present=True.) Tj ET
+0.86 0.94 0.86 rg 36 199.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 215.0 Td (9) Tj ET
+BT /F1 8 Tf 62 215.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 215.0 Td (In enforce mode, revalidate and consume) Tj ET
+BT /F1 7 Tf 108 205.0 Td (the exact permitted use) Tj ET
+BT /F1 7 Tf 330 215.0 Td (ENFORCE decision=allow store=duckdb-file-typed-quack-owner in_memory=False) Tj ET
+BT /F1 7 Tf 330 205.0 Td (consume=accepted.) Tj ET
+0.86 0.94 0.86 rg 36 173.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 189.0 Td (10) Tj ET
+BT /F1 8 Tf 62 189.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 189.0 Td (Dispatch once through the selected) Tj ET
+BT /F1 7 Tf 108 179.0 Td (protected path) Tj ET
+BT /F1 7 Tf 330 189.0 Td (BoundedExportHandler.export_json handler_calls=1 delegate_called=True.) Tj ET
+0.86 0.94 0.86 rg 36 147.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 163.0 Td (11) Tj ET
+BT /F1 8 Tf 62 163.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 163.0 Td (Record observed outcome separately from) Tj ET
+BT /F1 7 Tf 108 153.0 Td (proof and authorization) Tj ET
+BT /F1 7 Tf 330 163.0 Td (Independent observer v2 counted effects=1 journal=1 useful_work=True \(LA-015) Tj ET
+BT /F1 7 Tf 330 153.0 Td (compact useful_work=True\).) Tj ET
+0.86 0.94 0.86 rg 36 121.0 720 26.0 re f
+0 0 0 rg
+BT /F1 8 Tf 40 137.0 Td (12) Tj ET
+BT /F1 8 Tf 62 137.0 Td (ran) Tj ET
+BT /F1 7 Tf 108 137.0 Td (Commit operational progression through the) Tj ET
+BT /F1 7 Tf 108 127.0 Td (DuckDB owner) Tj ET
+BT /F1 7 Tf 330 137.0 Td (Typed Quack owner consume CAS outcome=accepted generation=1 revision=1.) Tj ET
+BT /F1 10 Tf 36.0 103.0 Td (Matched A4 variants from the same seed/arm run) Tj ET
+0.92 0.93 0.95 rg 36 88.0 720 14 re f
+0 0 0 rg
+BT /F1 8 Tf 36.0 90.0 Td (Variant) Tj ET
+BT /F1 8 Tf 150.0 90.0 Td (Attempt identity) Tj ET
+BT /F1 8 Tf 430.0 90.0 Td (Decision) Tj ET
+BT /F1 8 Tf 500.0 90.0 Td (Effects) Tj ET
+BT /F1 8 Tf 560.0 90.0 Td (Useful) Tj ET
+BT /F1 8 Tf 620.0 90.0 Td (Forbidden) Tj ET
+0.86 0.94 0.86 rg 36 60.0 720 26.0 re f
+0 0 0 rg
+BT /F1 7 Tf 38 76.0 Td (permitted export) Tj ET
+BT /F1 7 Tf 150 76.0 Td (104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4) Tj ET
+BT /F1 7 Tf 150 66.0 Td (691d1441d1ceff4ef944f2695b949:case-0) Tj ET
+BT /F1 7 Tf 430 76.0 Td (allow) Tj ET
+BT /F1 7 Tf 500 76.0 Td (1) Tj ET
+BT /F1 7 Tf 560 76.0 Td (True) Tj ET
+BT /F1 7 Tf 620 76.0 Td (False) Tj ET
+
+endstream
+endobj
+3 0 obj
+<< /Length 2522 >>
+stream
+0.15 0.18 0.22 rg 36 576 720 18 re f
+1 1 1 rg
+BT /F1 12 Tf 42 581 Td (Source-to-effect trace: bounded export under A4 ENFORCE) Tj ET
+0 0 0 rg
+0.95 0.90 0.90 rg 36 542.0 720 26.0 re f
+0 0 0 rg
+BT /F1 7 Tf 38 558.0 Td (rejected_recipient) Tj ET
+BT /F1 7 Tf 150 558.0 Td (104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d) Tj ET
+BT /F1 7 Tf 150 548.0 Td (37a26cbbb67e06a8118c09d03dc85:case-1) Tj ET
+BT /F1 7 Tf 430 558.0 Td (deny) Tj ET
+BT /F1 7 Tf 500 558.0 Td (0) Tj ET
+BT /F1 7 Tf 560 558.0 Td (False) Tj ET
+BT /F1 7 Tf 620 558.0 Td (False) Tj ET
+0.95 0.90 0.90 rg 36 516.0 720 26.0 re f
+0 0 0 rg
+BT /F1 7 Tf 38 532.0 Td (undeclared_effect) Tj ET
+BT /F1 7 Tf 150 532.0 Td (104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c) Tj ET
+BT /F1 7 Tf 150 522.0 Td (4ff7a854c41ede84623e060a3752a:case-1) Tj ET
+BT /F1 7 Tf 430 532.0 Td (deny) Tj ET
+BT /F1 7 Tf 500 532.0 Td (0) Tj ET
+BT /F1 7 Tf 560 532.0 Td (False) Tj ET
+BT /F1 7 Tf 620 532.0 Td (False) Tj ET
+0.95 0.90 0.90 rg 36 490.0 720 26.0 re f
+0 0 0 rg
+BT /F1 7 Tf 38 506.0 Td (replay) Tj ET
+BT /F1 7 Tf 150 506.0 Td (104729:A4:family:336629d04e385ffc653cb53a747a48b3940) Tj ET
+BT /F1 7 Tf 150 496.0 Td (5152e8a0bd6fc136bc38035bfd3c8:case-1) Tj ET
+BT /F1 7 Tf 430 506.0 Td (deny) Tj ET
+BT /F1 7 Tf 500 506.0 Td (0) Tj ET
+BT /F1 7 Tf 560 506.0 Td (False) Tj ET
+BT /F1 7 Tf 620 506.0 Td (False) Tj ET
+BT /F1 10 Tf 36.0 470.0 Td (Retained identities \(unbroken\)) Tj ET
+BT /F1 7 Tf 36.0 457.0 Td (permitted export: 104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0) Tj ET
+BT /F1 7 Tf 36.0 447.0 Td (rejected_recipient: 104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1) Tj ET
+BT /F1 7 Tf 36.0 437.0 Td (undeclared_effect: 104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1) Tj ET
+BT /F1 7 Tf 36.0 427.0 Td (replay: 104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1) Tj ET
+BT /F1 10 Tf 36.0 411.0 Td (Explicit non-claims) Tj ET
+BT /F1 8 Tf 36.0 398.0 Td (No fabricated Ed25519 signature or theorem_proof receipt is shown.) Tj ET
+BT /F1 8 Tf 36.0 387.0 Td (SAT UNSAT is satisfiability authority only.) Tj ET
+BT /F1 8 Tf 36.0 376.0 Td (Harness selected_evidence_cids are constants, not published proofs.) Tj ET
+BT /F1 8 Tf 36.0 365.0 Td (Generated-code AST analysis and closed-loop model programs did not run.) Tj ET
+BT /F1 8 Tf 36.0 354.0 Td (Independent human gold and expert legal fidelity remain unmeasured.) Tj ET
+
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+6 0 obj
+<< /Type /Pages /Count 2 /Kids [4 0 R 5 0 R] >>
+endobj
+7 0 obj
+<< /Type /Catalog /Pages 6 0 R >>
+endobj
+8 0 obj
+<< /Title (Source-to-effect trace) /Subject (104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0) /Producer (LA-020 worked trace) /Creator (LA-020) >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000060 00000 n 
+0000000130 00000 n 
+0000007442 00000 n 
+0000010016 00000 n 
+0000010142 00000 n 
+0000010268 00000 n 
+0000010331 00000 n 
+0000010380 00000 n 
+trailer << /Size 9 /Root 7 0 R /Info 8 0 R >>
+startxref
+10583
+%%EOF

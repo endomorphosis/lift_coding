@@ -1,0 +1,240 @@
+{
+  "arm_id": "A4",
+  "attempt_id": "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+  "capability": {
+    "allowed_effects": [
+      "effect:filesystem.export_json"
+    ],
+    "built": true,
+    "capability_id": "capability:la-015-3c5fe946e5eff3e0ed5b",
+    "require_strict_subset": true
+  },
+  "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+  "compact_replay": {
+    "arm_id": "A4",
+    "attempt_id": "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+    "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+    "crypto": "real-ed25519",
+    "decision": "deny",
+    "denial_reason": "replayed",
+    "enforce_mode": "enforce",
+    "handler_calls": 0,
+    "identity_digest": "a8c7ffea9926f5f5b5db66b119272b8ff359e846bf9a9787d5e9ee56da8708eb",
+    "implementation_revision": "replay",
+    "independent_human_gold": false,
+    "journal_event_count": 0,
+    "mutation": "replay",
+    "observed_effect_count": 0,
+    "observed_forbidden_effect": false,
+    "oracle_label": "forbidden",
+    "population": "cve",
+    "sandbox": true,
+    "sat_status": "unsat",
+    "seed": 104729,
+    "split": "final",
+    "store_kind": "duckdb-file-typed-quack-owner",
+    "terminal_outcome": "denial",
+    "useful_work": false
+  },
+  "decision": "deny",
+  "enforce": {
+    "decision": "deny",
+    "delegate_called": false,
+    "denial_reason": "replayed",
+    "in_memory_store": false,
+    "mode": "enforce",
+    "store_kind": "duckdb-file-typed-quack-owner"
+  },
+  "failure": null,
+  "handler": {
+    "arbitrary_generated_source_execution": false,
+    "event": null,
+    "journal_events": [],
+    "observation": {
+      "event_count": 0,
+      "events": [],
+      "export_files": [],
+      "filesystem_entries": [],
+      "integrity_errors": [],
+      "journal_consistent": true,
+      "journal_event_count": 0,
+      "observation_complete": true,
+      "observation_digest": "ffc51feeeed4cf043c528b04bb061c8acf433f495ff6e007f4af40ac7428ccba",
+      "observed_effect_count": 0,
+      "observed_effects": [],
+      "observer_version": "independent-filesystem-journal-observer/v2",
+      "state_entry_count": 0
+    },
+    "version": "bounded-export-handler/v2"
+  },
+  "handler_calls": 0,
+  "identity": {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/fa-be915ee9f570c29e.json",
+      "payload": {
+        "candidate_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+        "fixture_candidate": false,
+        "mutation": "replay",
+        "oracle_label": "forbidden",
+        "population": "cve",
+        "split": "final",
+        "task": "LA-015-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "a8c7ffea9926f5f5b5db66b119272b8ff359e846bf9a9787d5e9ee56da8708eb",
+    "candidate_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 234,
+        "payload_sha256": "a89891db82ab23a1632bac4abe1e3bf7a71bed6d7806622f26bf1230c4cedae1",
+        "target": "exports/fa-be915ee9f570c29e.json"
+      }
+    ]
+  },
+  "journal_event_count": 0,
+  "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+  "mutation": "replay",
+  "observed_effect_count": 0,
+  "observed_forbidden_effect": false,
+  "oracle_label": "forbidden",
+  "owner": {
+    "consume_cas": {
+      "attempts": 1,
+      "changed": false,
+      "command_id": "cmd:consume:4ad7041ad90f1275001d39a727b9a3badaaf65f84f619de2dfd7f2ce8d97a1a4",
+      "conflict_kind": null,
+      "fence_epoch": 1,
+      "generation": 1,
+      "idempotency_key": "idem:consume:4ad7041ad90f1275001d39a727b9a3badaaf65f84f619de2dfd7f2ce8d97a1a4",
+      "interface": "StateTransaction@1",
+      "outcome": "idempotent_replay",
+      "result": {
+        "consumed": true,
+        "fence_epoch": 1,
+        "generation": 1,
+        "in_memory": false,
+        "phase": "consume",
+        "revision_before": 4,
+        "store_kind": "duckdb-file",
+        "token_key_digest": "4ad7041ad90f1275001d39a727b9a3badaaf65f84f619de2dfd7f2ce8d97a1a4"
+      },
+      "result_digest": "sha256:14e060e12e7c732526a8f590d1f1fd2eff3933fc0b8ec2b06219862c18042c1a",
+      "revision": 5,
+      "schema": "ipfs_accelerate_py/agent-supervisor/cas-result@1"
+    },
+    "transport": "embedded-exclusive-lock",
+    "warmup_cas": {
+      "attempts": 1,
+      "changed": true,
+      "command_id": "cmd:consume:4ad7041ad90f1275001d39a727b9a3badaaf65f84f619de2dfd7f2ce8d97a1a4",
+      "conflict_kind": null,
+      "fence_epoch": 1,
+      "generation": 1,
+      "idempotency_key": "idem:consume:4ad7041ad90f1275001d39a727b9a3badaaf65f84f619de2dfd7f2ce8d97a1a4",
+      "interface": "StateTransaction@1",
+      "outcome": "accepted",
+      "result": {
+        "consumed": true,
+        "fence_epoch": 1,
+        "generation": 1,
+        "in_memory": false,
+        "phase": "consume",
+        "revision_before": 4,
+        "store_kind": "duckdb-file",
+        "token_key_digest": "4ad7041ad90f1275001d39a727b9a3badaaf65f84f619de2dfd7f2ce8d97a1a4"
+      },
+      "result_digest": "sha256:14e060e12e7c732526a8f590d1f1fd2eff3933fc0b8ec2b06219862c18042c1a",
+      "revision": 5,
+      "schema": "ipfs_accelerate_py/agent-supervisor/cas-result@1"
+    }
+  },
+  "plan": {
+    "extra_effect_ids": false,
+    "name": "replay",
+    "policy_resource": "tenant-a/bucket-a/documents/report.txt",
+    "replay": true,
+    "wrong_audience": false
+  },
+  "population": "cve",
+  "receipt": {
+    "audience_id": "audience:supervisor-dispatcher",
+    "built": true,
+    "kind": "internal_bound_context_receipt",
+    "nonce": "nonce-3c5fe946e5eff3e0",
+    "receipt_id": "receipt:3c5fe946e5eff3e0ed5b8454",
+    "selected_evidence_cids_are_harness_constants": true,
+    "selected_evidence_cids_not_published_proof": true,
+    "stub_cid_present_in_harness": true,
+    "theorem_proof": false
+  },
+  "run_id": "la020-A4-104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1",
+  "sat": {
+    "allowed": true,
+    "authority_kind": "satisfiability",
+    "checker": {
+      "agrees_with_provider": true,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "forged_evidence": false,
+      "status": "unsat",
+      "theorem_proof": false
+    },
+    "provider": {
+      "algorithm": "dpll",
+      "authority_kind": "satisfiability",
+      "model": null,
+      "nclauses": null,
+      "nvars": null,
+      "provider": "sympy.logic.inference.satisfiable",
+      "status": "unsat"
+    },
+    "theorem_proof": false
+  },
+  "sat_raw": {
+    "allowed": true,
+    "authority_kind": "satisfiability",
+    "checker": {
+      "agrees_with_provider": true,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "status": "unsat",
+      "theorem_proof": false
+    },
+    "provider": {
+      "algorithm": "dpll",
+      "authority_kind": "satisfiability",
+      "elapsed_seconds": 4.371302202343941e-05,
+      "model": null,
+      "provider": "sympy.logic.inference.satisfiable",
+      "status": "unsat"
+    },
+    "theorem_proof": false
+  },
+  "seed": 104729,
+  "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+  "split": "final",
+  "terminal_outcome": "denial",
+  "ucan": {
+    "ability": "export_json",
+    "authorization_event_cid": "80213841699c54089fb53bbde769a000dbceed59146f58640e16874cc98f2a42",
+    "crypto": "real-ed25519",
+    "decision": "allow",
+    "fabricated_signature": false,
+    "issuer": "did:key:root-tenant-a",
+    "kid": "root-v1",
+    "policy_provider": "la-014-declared-lightweight-policy",
+    "reason": "ucan_and_declared_policy",
+    "resource": "tenant-a/bucket-a/documents/report.txt",
+    "signature_present": true,
+    "token_audience": "did:client:tenant-a",
+    "token_parts": 3,
+    "token_present": true,
+    "token_sha256": "775d249102cbb282e309ca4aba8c70e24470a5f78bab2256ca594dcad5e6fc36",
+    "verifier_kind": "real-ucan-verifier"
+  },
+  "useful_work": false
+}
