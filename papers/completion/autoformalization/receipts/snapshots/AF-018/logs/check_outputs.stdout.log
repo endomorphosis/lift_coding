@@ -1,0 +1,17 @@
+{
+  "assist_goals": 5,
+  "errors": [],
+  "n_assistance": 39,
+  "n_assistance_obs": 38,
+  "n_planning": 73,
+  "n_planning_obs": 72,
+  "n_receipt_obs": 25,
+  "n_receipts": 26,
+  "ok": true,
+  "paths": {
+    "assistance": "papers/completion/autoformalization/runs/proof_assistance/results.jsonl",
+    "planning": "papers/completion/autoformalization/runs/planning/results.jsonl",
+    "receipts": "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl"
+  },
+  "plan_goals": 8
+}

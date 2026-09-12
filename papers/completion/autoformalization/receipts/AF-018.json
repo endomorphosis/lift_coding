@@ -1,0 +1,221 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-018",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:25:23.048908+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema_planning": "autoformalization-planning-result/v1",
+      "schema_assistance": "autoformalization-proof-assistance-result/v1",
+      "schema_receipt": "autoformalization-native-checker-receipt/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py",
+      "sha256": "f7ed70294c1982a5aea5d5440d50411f9c09f617e531b6a27bbdf9a3073aea9b",
+      "standard_library_only": true
+    },
+    "repository_tree_id": "393e46a67728024d71024116ca87e907e66bec45",
+    "ipfs_datasets_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "inspected_not_imported": {
+      "planner.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/tactician/planner.py",
+        "sha256": "8952b5258803d1067075e8f4195ca2b8b25158d9e7f8a3be9fb607773d6c7d56",
+        "imported": false,
+        "note": "LogicTactician replica in the AF-018 harness; original is hashed, not imported."
+      },
+      "tactician_models.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/tactician/models.py",
+        "sha256": "680e1271953810c5583a7dc60d0798115ec1fc804a52614088d23ff8a58f4afc",
+        "imported": false,
+        "note": "Content-addressed plan records; replica uses sha256 body digests."
+      },
+      "tactician_policy.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/tactician/policy.py",
+        "sha256": "6d7fc5ef4e89c4e1edf3b91e96800008624cc5f0ccc0364bcfc05572011141b8",
+        "imported": false,
+        "note": "Closed baseline policy: no network, write, or proof execution."
+      },
+      "translation.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/translation.py",
+        "sha256": "f742eeadee821b70244bd485367075a1cb635e1ea8da5dbadd98f284c5fc714d",
+        "imported": false,
+        "note": "First-order-safe fragment; dependent/HO constructs fail closed."
+      },
+      "lean_reconstructor.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/reconstructors/lean.py",
+        "sha256": "86677cfa36f05bcb1b9f328619b7763da4522a231f0a947647b9828788f8d1d0",
+        "imported": false,
+        "note": "Rejects sorry and sorryAx; kernel check is not executed here."
+      },
+      "leanstral.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/modal/leanstral.py",
+        "sha256": "d50a5fbb9473d7d23a227989bbde811f9a44fd6cf57429b15a57e70e4b8ea7bc",
+        "imported": false,
+        "note": "Prompt forbids sorry/admit/axioms; no model call is dispatched."
+      },
+      "leanstral_verifier.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/modal/leanstral_verifier.py",
+        "sha256": "2cf16219d975c870ef54fa9aa105d66e22f03aff735db5a7590a807a8901aa9c",
+        "imported": false,
+        "note": "Verifier treats model output as hypothesis; not imported."
+      },
+      "bench_itp_hammer.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_itp_hammer.py",
+        "sha256": "06d824672ee9a02137fa5fba76d07bbf2a59288293ceb88b268b13235224afe1",
+        "imported": false,
+        "note": "Would import project packages; inspected only."
+      },
+      "itp_hammer_user_guide.md": {
+        "path": "external/ipfs_datasets/docs/logic/itp_hammer_user_guide.md",
+        "sha256": "544eb273e6dc36ead6bfca7b0a74a85501dab63880da55d121fc9999e006df0a",
+        "imported": false,
+        "note": "Solver output is an untrusted candidate until native reconstruction."
+      }
+    },
+    "frozen_inputs": {
+      "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "policy_code_trace_cases_sha256": "a795f24b69860316b6f9615e145b08e208df0cd8ca76069c91f850a312ecaac7",
+      "result_schema_sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d"
+    },
+    "leanstral_identity": {
+      "model_id": "Frosty40/Leanstral-1.5-119B-A6B-GGUF-NVFP4",
+      "revision": "abcc5ce2528c6375148d41dac6dce20f06c339f4",
+      "weight_file_bytes": 67135119264,
+      "prompt_settings_digest": "sha256:a9d903c9e82e40c11532a81fe4bbca00023f1238c7624c8de932e604a0ab497d",
+      "calls_executed": 0,
+      "fine_tuning_claimed": false
+    },
+    "guided_ranker_digest": "sha256:412ce3d4786228d7ac06bbb1be509dc94743d1aae029b5a9f841a783f17f3406",
+    "empirical_execution": "stdlib LogicTactician replica with three deterministic replays, first-order-safe TPTP/SMT-LIB encodings, and sorry/admit/axiom policy scans; sealed PATH has no Lean/ATP/SMT/Leanstral runtime"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/check_outputs.py": "f27fc366ee3546e80e749dba144ef2fda4d671ce3f082f82a768a0a095ef51d9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/evidence/native_checker_receipts.jsonl": "51678314ed22c819d8d4e164160fd80ef2b4b7f382e7a40330c75421be156781",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.meta.json": "47f05140919060542e1e078fddbdeec13bd2cfd6b41218c929c88071e352f2ef",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stdout.log": "afc82ce2928a8f37dbcd1cc6cc1b31bbad6fcaa4b9d887bf57655a9c94abedae",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.meta.json": "54d15893c33c9fdaa13bf2b76ca8ac61652e2f52f4cb901702e820918a4c69fe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stdout.log": "676857e8401c4038e405325fe0a8c267a045ae198231772923152b74ef9e501d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py": "f7ed70294c1982a5aea5d5440d50411f9c09f617e531b6a27bbdf9a3073aea9b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/run_sealed.py": "a3098b61a4f3d2f58f984d80b345dd475f7624f8f6da74785da802f57f5b0a7f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/planning/results.jsonl": "b5f33709fca971cdd02714fac95704cae63c47e2539e184200b68ac875aa0619",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/proof_assistance/results.jsonl": "c4fc126f3a63652b5f91e70bd2eb1632ad765d614d3ad73eb509cd5841751fc1"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/runs/planning/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/planning/results.jsonl",
+    "papers/completion/autoformalization/runs/proof_assistance/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/proof_assistance/results.jsonl",
+    "papers/completion/autoformalization/evidence/native_checker_receipts.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-018/evidence/native_checker_receipts.jsonl"
+  },
+  "criteria": [
+    {
+      "criterion": "Plans replay deterministically with pinned guidance/inputs and never count as executed proofs.",
+      "status": "met",
+      "explanation": "Eight constructed admitted goals were planned under a shared eight-source pool and a closed LogicTactician replica (no network, write, or proof execution). Unguided and pinned-ranker arms each replayed three times with seeds 104729/130363/155921; plan_id is identical across replays of the same (goal, arm). The pinned ranker digest sha256:412ce3d4786228d7ac06bbb1be509dc94743d1aae029b5a9f841a783f17f3406 is a disclosed hand-authored reverse-reorder of admitted sources, not a model call; every guided plan identity differs from the matching unguided plan. All 72 observation rows set counts_as_executed_proof false, result_kind bounded_observation or no_run, semantic_authority false, and proof_execution_allowed false. LLM nomination is recorded as unavailable with zero model calls.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/planning/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/check_outputs.py"
+      ]
+    },
+    {
+      "criterion": "Candidate and accepted-proof rates, native coverage, failure categories and all-attempt costs are reported separately.",
+      "status": "met",
+      "explanation": "The proof-assistance summary reports candidate_rate, accepted_proof_rate, native_coverage, failure_categories, and all_attempt_costs as distinct objects. Hammer and Leanstral candidate rates are 0.0/5 because no solver or model produced a candidate; accepted-proof rates and native coverage are 0.0/5 with native_checked_proofs=0. Failure categories are counted separately: unsupported_translation 6, unavailable_solver 3, unavailable_native_checker 5, unavailable_model_service 15, policy_rejected_sorry 2, policy_rejected_admit 2, policy_rejected_unapproved_axiom 2. Planning reports its own all-attempt costs (72 attempts) separately from assistance costs (47 attempts including sealed-PATH probes). TPTP/SMT encodings (Hammer encoding_rate 0.6) are not counted as solver candidates.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/proof_assistance/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/planning/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/evidence/native_checker_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Generated Lean with sorry/admit/unapproved axioms is rejected; method-essential model identity/prompt settings are retained.",
+      "status": "met",
+      "explanation": "Policy fixtures theorem t : True := by sorry, by admit, and axiom magic are rejected on both Hammer and Leanstral arms (policy_rejected, execution_status invalid) before any kernel claim. A clean trivial proof is not policy-rejected and is still not counted as a native proof because lean is absent. Leanstral identity Frosty40/Leanstral-1.5-119B-A6B-GGUF-NVFP4 revision abcc5ce2528c6375148d41dac6dce20f06c339f4 and prompt settings (strict JSON, proof body beginning with by, forbidden sorry/admit/axiom/imports) are retained with digest sha256:a9d903c9e82e40c11532a81fe4bbca00023f1238c7624c8de932e604a0ab497d. Policy fixtures are labeled not_a_model_output.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/proof_assistance/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/evidence/native_checker_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/check_outputs.py"
+      ]
+    },
+    {
+      "criterion": "Any unavailable assistance arm remains an explicit limitation, with no invented model calls or fine-tuning claim.",
+      "status": "met",
+      "explanation": "Sealed PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and a private HOME starting with ipfs-accelerate-validation-home- report lean, lake, elan, z3, cvc5, vampire, eprover, coqc, and isabelle unavailable. Hammer solver portfolio and native reconstruction, Leanstral model service and native check, and LLM plan nomination are listed as unavailable_arms. model_calls_executed is 0, invented_model_call is false, and fine_tuning_claimed is false. Leanstral weights (67135119264 bytes) remain outside the 16GiB envelope. No native_checked_proof row exists. Constructed_control rates do not fill Table 13 natural cells.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/proof_assistance/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/runs/planning/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/evidence/native_checker_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af018-laz93r5s",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.stderr.log",
+      "started_at": "2026-09-12T02:25:22.954066+00:00",
+      "finished_at": "2026-09-12T02:25:23.006781+00:00",
+      "execution_kind": "sealed-PATH deterministic plan replay, FOL translation, policy rejection, and native-tool unavailability probe"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af018-laz93r5s",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-018/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-018/check_outputs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/check_outputs.stderr.log",
+      "started_at": "2026-09-12T02:25:23.007333+00:00",
+      "finished_at": "2026-09-12T02:25:23.048908+00:00",
+      "execution_kind": "deterministic-replay, rate-separation, sorry/admit/axiom, and unavailable-arm checks"
+    }
+  ],
+  "limitations": [
+    "lean, lake, elan, z3, cvc5, vampire, eprover, coqc, and isabelle are absent from the sealed validation PATH; host ~/.elan Lean 4.33.1 and ~/.local/bin solvers are out of scope and were not used.",
+    "No native checked proof, solver-local theorem, or reconstructed kernel receipt is claimed.",
+    "Hammer TPTP/SMT-LIB encodings are constructed-control translations, not solver candidates.",
+    "The guided planning arm is a pinned hand-authored reorder, not a learned or Leanstral ranker.",
+    "LLM plan nomination and Leanstral proposal generation were not executed; zero model calls and no fine-tuning claim.",
+    "Leanstral-1.5-119B-A6B GGUF weights (67135119264 bytes) exceed the frozen 16GiB envelope and have no qualified served runtime.",
+    "Policy sorry/admit/axiom scans use labeled fixtures, not model outputs.",
+    "The evaluation pool is constructed_control, not the AF-004 natural corpus; AF-005 gold remains pending.",
+    "Constructed_control rates do not fill Table 13 natural held-out cells.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Deterministic unguided/guided plan replay on eight constructed admitted goals, first-order-safe Hammer encodings with explicit unsupported/unavailable solver and native-reconstruction stages, Leanstral identity/prompt retention without model calls, and sorry/admit/unapproved-axiom rejection; native checked proofs remain unavailable."
+}
