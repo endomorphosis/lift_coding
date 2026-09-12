@@ -398,14 +398,14 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: neurosymbolic_supervision
-- Depends on: NS-005, NS-010
+- Depends on: NS-005, NS-010, NS-026
 - Goal id: NS-SG3
 - Parent goal: NS-G000
 - Objective heap: papers/completion/neurosymbolic_supervision/paper.objectives.md
 - Board namespace: vericodegen-2026-neurosymbolic_supervision
 - Bundle: neurosymbolic_supervision/NS-SG3
 - Parallel lane: neurosymbolic_supervision
-- Outputs: papers/completion/neurosymbolic_supervision/qualification/cold_oracle_results.jsonl, papers/completion/neurosymbolic_supervision/qualification/reuse_mutation_results.jsonl, papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json, papers/completion/neurosymbolic_supervision/receipts/NS-011.json
+- Outputs: papers/completion/neurosymbolic_supervision/qualification/cold_oracle_results.jsonl, papers/completion/neurosymbolic_supervision/qualification/reuse_mutation_results.jsonl, papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json, papers/completion/neurosymbolic_supervision/receipts/NS-011.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/
 - Predicted files: papers/completion/neurosymbolic_supervision/qualification/cold_oracle_results.jsonl, papers/completion/neurosymbolic_supervision/qualification/reuse_mutation_results.jsonl, papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json, papers/completion/neurosymbolic_supervision/receipts/NS-011.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/
 - Allowed paths: 
 - Resource class: cpu-medium
@@ -589,15 +589,15 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: neurosymbolic_supervision
-- Depends on: NS-005, NS-011, NS-013, NS-014, NS-015
+- Depends on: NS-005, NS-011, NS-013, NS-014, NS-015, NS-026
 - Goal id: NS-SG4
 - Parent goal: NS-G000
 - Objective heap: papers/completion/neurosymbolic_supervision/paper.objectives.md
 - Board namespace: vericodegen-2026-neurosymbolic_supervision
 - Bundle: neurosymbolic_supervision/NS-SG4
 - Parallel lane: neurosymbolic_supervision
-- Outputs: papers/completion/neurosymbolic_supervision/pilot/results.jsonl, papers/completion/neurosymbolic_supervision/pilot/readiness_report.md, papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json, papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json, papers/completion/neurosymbolic_supervision/receipts/NS-016.json
-- Predicted files: papers/completion/neurosymbolic_supervision/pilot/results.jsonl, papers/completion/neurosymbolic_supervision/pilot/readiness_report.md, papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json, papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json, papers/completion/neurosymbolic_supervision/receipts/NS-016.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/
+- Outputs: papers/completion/neurosymbolic_supervision/pilot/results.jsonl, papers/completion/neurosymbolic_supervision/pilot/readiness_report.md, papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json, papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py, papers/completion/neurosymbolic_supervision/receipts/NS-016.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/
+- Predicted files: papers/completion/neurosymbolic_supervision/pilot/results.jsonl, papers/completion/neurosymbolic_supervision/pilot/readiness_report.md, papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json, papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py, papers/completion/neurosymbolic_supervision/receipts/NS-016.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/
 - Allowed paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py
 - Resource class: cpu-medium
 - Resource stage: execution
@@ -824,12 +824,13 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-neurosymbolic_supervision
 - Bundle: neurosymbolic_supervision/NS-SG6
 - Parallel lane: neurosymbolic_supervision
-- Outputs: papers/completion/neurosymbolic_supervision/manuscript/main.tex, papers/completion/neurosymbolic_supervision/manuscript/paper.pdf, papers/completion/neurosymbolic_supervision/audit/manuscript_result_checks.json, papers/completion/neurosymbolic_supervision/audit/revision_notes.md, papers/completion/neurosymbolic_supervision/receipts/NS-022.json
+- Outputs: papers/completion/neurosymbolic_supervision/manuscript/main.tex, papers/completion/neurosymbolic_supervision/manuscript/paper.pdf, papers/completion/neurosymbolic_supervision/audit/manuscript_result_checks.json, papers/completion/neurosymbolic_supervision/audit/revision_notes.md, papers/completion/neurosymbolic_supervision/receipts/NS-022.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/
 - Predicted files: papers/completion/neurosymbolic_supervision/manuscript/main.tex, papers/completion/neurosymbolic_supervision/manuscript/paper.pdf, papers/completion/neurosymbolic_supervision/audit/manuscript_result_checks.json, papers/completion/neurosymbolic_supervision/audit/revision_notes.md, papers/completion/neurosymbolic_supervision/receipts/NS-022.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
+- Proposal artifact envelope: {"binary_paths":["papers/completion/neurosymbolic_supervision/manuscript/paper.pdf"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-022
 - Acceptance: Abstract numbers and conclusions exactly match generated results and their population/uncertainty/limitations.; No TBD, TO BE FILLED, RESULTS placeholder, unsupported success assertion, or unresolved internal artifact label remains in scientific text.; The main text clearly states research question, novel composition, trusted assumptions, matched method/baseline, results, and negative cases.; Supplemental breadth cannot be mistaken for evaluated implementation; final scientific scope matches the claim ledger.
 - Paper evidence: PDF p. 1 abstract [RESULTS]; p. 8 [TO BE FILLED]; PDF pp. 24–25, Tables 17–18; PDF pp. 15–21: implementation-plan material; PDF p. 27, Algorithm 1: intended versus executed composition
@@ -846,6 +847,8 @@ Acceptance criteria:
 4. Supplemental breadth cannot be mistaken for evaluated implementation; final scientific scope matches the claim ledger.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
 ## NS-023 Audit the conditional acceptance and reuse arguments against actual gates
 
@@ -900,12 +903,13 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-neurosymbolic_supervision
 - Bundle: neurosymbolic_supervision/NS-SG7
 - Parallel lane: neurosymbolic_supervision
-- Outputs: papers/completion/neurosymbolic_supervision/release/README.md, papers/completion/neurosymbolic_supervision/release/manifest.json, papers/completion/neurosymbolic_supervision/release/reproduce.sh, papers/completion/neurosymbolic_supervision/release/supplement.zip, papers/completion/neurosymbolic_supervision/release/paper.pdf, papers/completion/neurosymbolic_supervision/audit/anonymity_report.md, papers/completion/neurosymbolic_supervision/audit/llm_use_disclosure.md, papers/completion/neurosymbolic_supervision/audit/author_attestations.md, papers/completion/neurosymbolic_supervision/audit/workshop_compliance.json, papers/completion/neurosymbolic_supervision/manuscript/checklist.tex, papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty, papers/completion/neurosymbolic_supervision/submission/template_inputs.json, papers/completion/neurosymbolic_supervision/receipts/NS-024.json
+- Outputs: papers/completion/neurosymbolic_supervision/release/README.md, papers/completion/neurosymbolic_supervision/release/manifest.json, papers/completion/neurosymbolic_supervision/release/reproduce.sh, papers/completion/neurosymbolic_supervision/release/supplement.zip, papers/completion/neurosymbolic_supervision/release/paper.pdf, papers/completion/neurosymbolic_supervision/audit/anonymity_report.md, papers/completion/neurosymbolic_supervision/audit/llm_use_disclosure.md, papers/completion/neurosymbolic_supervision/audit/author_attestations.md, papers/completion/neurosymbolic_supervision/audit/workshop_compliance.json, papers/completion/neurosymbolic_supervision/manuscript/checklist.tex, papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty, papers/completion/neurosymbolic_supervision/submission/template_inputs.json, papers/completion/neurosymbolic_supervision/receipts/NS-024.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-024/
 - Predicted files: papers/completion/neurosymbolic_supervision/release/README.md, papers/completion/neurosymbolic_supervision/release/manifest.json, papers/completion/neurosymbolic_supervision/release/reproduce.sh, papers/completion/neurosymbolic_supervision/release/supplement.zip, papers/completion/neurosymbolic_supervision/release/paper.pdf, papers/completion/neurosymbolic_supervision/audit/anonymity_report.md, papers/completion/neurosymbolic_supervision/audit/llm_use_disclosure.md, papers/completion/neurosymbolic_supervision/audit/author_attestations.md, papers/completion/neurosymbolic_supervision/audit/workshop_compliance.json, papers/completion/neurosymbolic_supervision/manuscript/checklist.tex, papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty, papers/completion/neurosymbolic_supervision/submission/template_inputs.json, papers/completion/neurosymbolic_supervision/receipts/NS-024.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-024/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
+- Proposal artifact envelope: {"binary_paths":["papers/completion/neurosymbolic_supervision/release/supplement.zip","papers/completion/neurosymbolic_supervision/release/paper.pdf"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-024
 - Acceptance: A clean environment can install the frozen artifact and regenerate results/tables without author-private state, or limitations are explicit and scientifically acceptable.; Official checklist questions are present and honestly answered; the compilation placeholder and five disclosure placeholders are gone.; PDF metadata, author block, bibliography, URLs, source paths, logs, and supplement pass a documented double-blind audit.; Methods-essential LLM use is accurately described with actual models/versions/settings/independent checks; unresolved author-owned factual attestations are clearly listed.; PDF main text is 4–9 pages excluding references/appendices, PDF below 50 MB, supplement ZIP below 100 MB, subject to final live CFP verification.; The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.; The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.; The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.; Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
 - Paper evidence: PDF p. 25, §K.1: five disclosure placeholders; PDF p. 25, §K.2 and p. 28 checklist TODOs; Workshop CFP: official 2026 template, double-blind artifacts, methodology-essential LLM disclosure; Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.
@@ -927,6 +931,8 @@ Acceptance criteria:
 9. Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
 ## NS-025 Run an independent final readiness audit and produce the author-review handoff
 
@@ -966,3 +972,41 @@ Acceptance criteria:
 5. Handoff includes exact files, checksums, reproducibility commands, known limitations, live deadline note, and no implied external submission.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+## NS-026 Implement and qualify an actual production provider and independent historical scorer
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: neurosymbolic_supervision
+- Depends on: NS-004, NS-005, NS-006, NS-007, NS-008, NS-009, NS-010, NS-012, NS-013
+- Goal id: NS-SG2
+- Parent goal: NS-G000
+- Objective heap: papers/completion/neurosymbolic_supervision/paper.objectives.md
+- Board namespace: vericodegen-2026-neurosymbolic_supervision
+- Bundle: neurosymbolic_supervision/NS-SG2
+- Parallel lane: neurosymbolic_supervision
+- Outputs: papers/completion/neurosymbolic_supervision/experiments/run_comparison.py, papers/completion/neurosymbolic_supervision/experiments/score_runs.py, papers/completion/neurosymbolic_supervision/experiments/production_gateway.py, papers/completion/neurosymbolic_supervision/experiments/production_profile.json, papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json, papers/completion/neurosymbolic_supervision/experiments/README.md, papers/completion/neurosymbolic_supervision/qualification/production_provider/, papers/completion/neurosymbolic_supervision/audit/production_readiness.json, papers/completion/neurosymbolic_supervision/receipts/NS-026.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/
+- Predicted files: papers/completion/neurosymbolic_supervision/experiments/run_comparison.py, papers/completion/neurosymbolic_supervision/experiments/score_runs.py, papers/completion/neurosymbolic_supervision/experiments/production_gateway.py, papers/completion/neurosymbolic_supervision/experiments/production_profile.json, papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json, papers/completion/neurosymbolic_supervision/experiments/README.md, papers/completion/neurosymbolic_supervision/qualification/production_provider/, papers/completion/neurosymbolic_supervision/audit/production_readiness.json, papers/completion/neurosymbolic_supervision/receipts/NS-026.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-026
+- Acceptance: One actual development provider invocation produces an independently scored retained repair or honest failure with real served identity, dispatch/effect receipt, source preimage, timing, token/cost availability and stage failures; a development stub is not sufficient.; Historical materialization uses exact pinned upstream pre-fix sources and nonempty unchanged baselines; proposal exports exclude scorer payloads, final labels, original Git objects and fixed-commit content, with an actual boundary/canary qualification.; The independent scorer consumes separately retained oracle material only after the proposal is sealed, verifies source/prediction/receipt bindings, and can admit actual production outcomes without blanket-refusal or fixture substitution.; Resume/retry tests preserve consumed/unknown effects and prohibit duplicate model dispatch; provider and scorer source pins, budgets and executable run instructions are ready for NS-016 freeze.
+- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Reuse candidates:
+- Receipt: papers/completion/neurosymbolic_supervision/receipts/NS-026.json
+
+Replace the NS-006 unconditional production refusal with an admitted provider path and independent historical scorer. Current probe_production_provider always rejects, production dispatch raises and scoring refuses production; materialize_live_task uses the caller repository instead of a pinned upstream store. Correct all four seams with exact source bindings, clean pre-fix exports and a scoped scientific gateway when the provider container cannot safely dispatch itself. Supervisor authoring keeps Grok primary and Codex terra/high only after verified fresh Grok quota exhaustion. Scientific calls separately obey an explicitly admitted scientific model profile. NS-004 proposes Terra HIGH through verified Grok quota-only fallback; a usage reset does not itself authorize that route. If this route is unavailable, freeze a versioned development-only provider amendment before any development call, naming the exact permitted Grok primary profile, transport, budgets, motivation and deviation from preserved NS-004. Record it in protocol/development_provider_amendment.json without overwriting the original protocol. Development qualification may use that fixed profile; NS-016 still owns the pilot and any explicit final-profile amendment before final evaluation. Never switch scientific models within paired blocks as an authoring fallback or manufacture quota exhaustion. No Docker socket, broad host credentials, original .git, fixed commits, curator session or scorer-only payload may be visible to proposal generation. Run a bounded real development qualification within NS-004 budgets, then let NS-016 perform the pre-final freeze.
+
+Acceptance criteria:
+
+1. One actual development provider invocation produces an independently scored retained repair or honest failure with real served identity, dispatch/effect receipt, source preimage, timing, token/cost availability and stage failures; a development stub is not sufficient.
+2. Historical materialization uses exact pinned upstream pre-fix sources and nonempty unchanged baselines; proposal exports exclude scorer payloads, final labels, original Git objects and fixed-commit content, with an actual boundary/canary qualification.
+3. The independent scorer consumes separately retained oracle material only after the proposal is sealed, verifies source/prediction/receipt bindings, and can admit actual production outcomes without blanket-refusal or fixture substitution.
+4. Resume/retry tests preserve consumed/unknown effects and prohibit duplicate model dispatch; provider and scorer source pins, budgets and executable run instructions are ready for NS-016 freeze.
+
+Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.

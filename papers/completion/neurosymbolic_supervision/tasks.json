@@ -12,7 +12,7 @@
     {
       "id": "NS-SG2",
       "title": "Build a leakage-safe benchmark and instrumented comparison runner",
-      "description": "Freeze tasks, hidden acceptance oracles, matched A\u2013D conditions, resource metrics, and preregistered statistical and quality criteria."
+      "description": "Freeze tasks, hidden acceptance oracles, matched A–D conditions, resource metrics, and preregistered statistical and quality criteria."
     },
     {
       "id": "NS-SG3",
@@ -48,7 +48,7 @@
       "priority": "P0",
       "depends_on": [],
       "paper_evidence": [
-        "PDF pp. 1\u201328: supplied manuscript exists only as a PDF in papers/",
+        "PDF pp. 1–28: supplied manuscript exists only as a PDF in papers/",
         "PDF p. 28, checklist: official checklist source absent from prior template",
         "User-supplied Overleaf project https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0; its contained paper(s) and source accessibility are unverified.",
         "Local user-provided research template/style/checklist inspected 2026-09-11; no manuscript-specific .tex or .bib exists under papers/."
@@ -85,9 +85,9 @@
       "priority": "P0",
       "depends_on": [],
       "paper_evidence": [
-        "PDF pp. 1\u20132, \u00a71: final artifact must freeze exact multi-repository forest",
+        "PDF pp. 1–2, §1: final artifact must freeze exact multi-repository forest",
         "PDF p. 8, Table 5: 40 controlled tasks and 40 sealer transitions",
-        "PDF p. 9, \u00a79.1; p. 20, \u00a7H.2: standalone heads differ from consumer pins"
+        "PDF p. 9, §9.1; p. 20, §H.2: standalone heads differ from consumer pins"
       ],
       "description": "Map every retained mechanism to code commit/path, gitlink, overlay, import path, dependency lock, runtime mode, capability, and original evidence. Resolve duplicate external and hallucinate_app copies. Locate ProcedureCegis, CompositionEdge, incremental SMT, CEGAR, and abstract-interpreter claims in their actual worktrees or mark unresolved/specification-only. Recompute the preliminary table arithmetic from existing raw artifacts without treating it as a new live experiment; record estimated versus measured provenance. Work in a paper-specific isolated checkout and coordinate with active code owners.",
       "acceptance_criteria": [
@@ -120,9 +120,9 @@
         "NS-002"
       ],
       "paper_evidence": [
-        "PDF pp. 1\u20132, \u00a71: mechanism and measured status distinguished",
-        "PDF pp. 15\u201321, Appendices D\u2013H: optional world/refactor/learning programs",
-        "PDF p. 25, \u00a7K.2: final author actions"
+        "PDF pp. 1–2, §1: mechanism and measured status distinguished",
+        "PDF pp. 15–21, Appendices D–H: optional world/refactor/learning programs",
+        "PDF p. 25, §K.2: final author actions"
       ],
       "description": "List every empirical, formal, implementation, deployment, and novelty claim with required evidence and owning task. Prioritize the semantic-context/routing/reuse/publication core. For each optional solver, Groth16, learned world model, procedure/refactoring, federation, and semantic editing extension, choose retained-and-qualified or explicitly future-work/unavailable wording. Preserve prior no-go results. Record a deadline-aware plan against the current CFP/portal, with no automatic submission or undocumented scope inflation.",
       "acceptance_criteria": [
@@ -152,9 +152,9 @@
         "NS-003"
       ],
       "paper_evidence": [
-        "PDF pp. 7\u20138, \u00a78 and Table 4",
-        "PDF p. 8, \u00a78.3: noninferiority margin and useful-completion threshold",
-        "PDF p. 24, Table 17: A\u2013D comparison"
+        "PDF pp. 7–8, §8 and Table 4",
+        "PDF p. 8, §8.3: noninferiority margin and useful-completion threshold",
+        "PDF p. 24, Table 17: A–D comparison"
       ],
       "description": "Specify A raw/lexical + full validation, B semantic + same validation, C added symbolic routing/reuse, D governed lifecycle with matched models/revisions, tasks, budgets, environments, and acceptance criteria. Define one-factor ablations, deny-all diagnostic, cold/warm cache states, randomized paired run order, repetitions, timeouts, exclusions, failure/abstention denominators, false accept/deny units, and an independent scoring plan. Choose final sample sizes from a documented feasibility/uncertainty rationale; use a separate pilot to finalize before seeing final outcomes. Set explicit provider/compute limits from available authorized resources and surface missing capacity honestly.",
       "acceptance_criteria": [
@@ -184,9 +184,9 @@
         "NS-004"
       ],
       "paper_evidence": [
-        "PDF p. 7, \u00a78.2: exact pre-fix tasks and hidden target patches/oracles",
+        "PDF p. 7, §8.2: exact pre-fix tasks and hidden target patches/oracles",
         "PDF p. 19, Table 12: cohort and fault-check matrix",
-        "PDF p. 16, \u00a7D.5.3: source-family splits and no-go preservation"
+        "PDF p. 16, §D.5.3: source-family splits and no-go preservation"
       ],
       "description": "Build a licensed/provenance-documented population of genuine pre-fix tasks plus controlled adversarial qualification cases. Pin each source snapshot, issue/specification, baseline-valid tests, acceptance oracle, dynamic-feature class, and task family. Split development/pilot/final and any learning holdouts by repository family and time. Keep hidden target patches and acceptance outputs outside proposal context. Reuse the 40 existing semantic fixtures as preliminary/qualification data only unless a separately justified task is independently generated.",
       "acceptance_criteria": [
@@ -219,11 +219,11 @@
         "NS-004"
       ],
       "paper_evidence": [
-        "PDF p. 8, lines 262\u2013270: actual provider boundaries and net cost",
-        "PDF p. 19, \u00a7G.1: stage costs and elapsed time",
+        "PDF p. 8, lines 262–270: actual provider boundaries and net cost",
+        "PDF p. 19, §G.1: stage costs and elapsed time",
         "PDF p. 27, Algorithm 1: intended composed loop"
       ],
-      "description": "Extend the existing semantic-state harness and production provider gateway in an isolated paper worktree. Implement versioned A\u2013D configuration, immutable per-attempt receipts, fixed-budget termination, randomization/seeds, explicit terminal states, and independent scorer interfaces. Measure actual input/output/cached tokens, call counts/charges, elapsed/CPU/GPU/memory/storage, setup/call/teardown, prove/verify/persist/retry/recover, and human waits. Log actual consumed evidence and next decisions; record unavailable measurements as null with reasons. The runner must never elevate production authority or modify protected acceptance standards merely to make a benchmark pass.",
+      "description": "Extend the existing semantic-state harness and production provider gateway in an isolated paper worktree. Implement versioned A–D configuration, immutable per-attempt receipts, fixed-budget termination, randomization/seeds, explicit terminal states, and independent scorer interfaces. Measure actual input/output/cached tokens, call counts/charges, elapsed/CPU/GPU/memory/storage, setup/call/teardown, prove/verify/persist/retry/recover, and human waits. Log actual consumed evidence and next decisions; record unavailable measurements as null with reasons. The runner must never elevate production authority or modify protected acceptance standards merely to make a benchmark pass.",
       "acceptance_criteria": [
         "Runner exposes reproducible commands for one task, one arm, paired runs, and rescoring.",
         "Provider receipts identify actual model/provider/revision and separate simulated/development from admitted production paths.",
@@ -260,7 +260,7 @@
         "NS-006"
       ],
       "paper_evidence": [
-        "PDF pp. 2, 5, \u00a7\u00a72.3/5.1/5.2: unknown frontier and non-truncatable acceptance core",
+        "PDF pp. 2, 5, §§2.3/5.1/5.2: unknown frontier and non-truncatable acceptance core",
         "PDF p. 19, Table 12: state and selection parity",
         "PDF p. 20, PCSM row: stale-map and round-trip tests"
       ],
@@ -293,8 +293,8 @@
         "NS-006"
       ],
       "paper_evidence": [
-        "PDF p. 4, \u00a74.2: positive-path witness and closes_claim limitation",
-        "PDF p. 23, \u00a7I.3.4: deny-all diagnostic",
+        "PDF p. 4, §4.2: positive-path witness and closes_claim limitation",
+        "PDF p. 23, §I.3.4: deny-all diagnostic",
         "PDF p. 25, Table 18: provider-gate row"
       ],
       "description": "Construct caller-level paired cases with exact task/forest/plan/doctor/obligation/authority bindings. Demonstrate a real permitted residual provider request, a downstream-validated deterministic repair, and minimally altered stale/missing/mismatched requests that reject or defer. Cover ambiguity, unavailable capabilities, repeated requests, and unknown provider effects. Count model invocations at the actual provider boundary and independently validate candidates rather than trusting a boolean claim-closure flag.",
@@ -326,9 +326,9 @@
         "NS-006"
       ],
       "paper_evidence": [
-        "PDF p. 3, \u00a73.2: lossy projection and SMT limits",
-        "PDF p. 13, \u00a7B.2: assertion/formula-root/replay tests",
-        "PDF p. 22, \u00a7\u00a7I.1\u2013I.2; pp. 25\u201326, Appendix L"
+        "PDF p. 3, §3.2: lossy projection and SMT limits",
+        "PDF p. 13, §B.2: assertion/formula-root/replay tests",
+        "PDF p. 22, §§I.1–I.2; pp. 25–26, Appendix L"
       ],
       "description": "Use the actual converter, translation contract, caller, and resolved solver modules. Add modal/temporal countermodels where source truth differs despite identical projection. Exercise supported positive translations, unsupported clauses, inconsistent guarantees, reachability, cyclic composition closure, duplicate named assertions/assumptions, stale formula roots and solver fingerprints, SAT/UNSAT/unknown/timeout, and invalid interpolants. Record solver versus reconstruction/kernel evidence classes and whether assertions are replayed or solver state is retained. If named draft modules remain unavailable, qualify the present profile and narrow the corresponding assertions.",
       "acceptance_criteria": [
@@ -360,8 +360,8 @@
         "NS-006"
       ],
       "paper_evidence": [
-        "PDF p. 6, \u00a7\u00a76.2\u20136.3",
-        "PDF pp. 13\u201314, Appendix C, Table 8: staged identity and lifecycle protocol"
+        "PDF p. 6, §§6.2–6.3",
+        "PDF pp. 13–14, Appendix C, Table 8: staged identity and lifecycle protocol"
       ],
       "description": "Inspect current cache/certificate/provider code and fill only the staged identity gaps needed for the frozen reuse profile. Bind collection and fixture definitions, transitive/autouse fixtures, parametrization, plugins/hooks/conftest, reviewed DI instance commitments, interpreter/dependency/policy/external snapshots, and setup/call/teardown outcomes. Distinguish full-item reuse before setup from call-only reuse after setup. Retain required finalizers/effects, bound xdist/session ownership, reject arbitrary opaque serialization, and fall back to execution for incomplete closures.",
       "acceptance_criteria": [
@@ -397,12 +397,13 @@
       "priority": "P0",
       "depends_on": [
         "NS-005",
-        "NS-010"
+        "NS-010",
+        "NS-026"
       ],
       "paper_evidence": [
-        "PDF p. 6, \u00a76.3: projection completeness is the hard premise",
-        "PDF pp. 13\u201314, \u00a7C.2; p. 19, Table 12: cold oracle and phase faults",
-        "PDF p. 23, \u00a7I.3.2: runtime traces do not prove closure"
+        "PDF p. 6, §6.3: projection completeness is the hard premise",
+        "PDF pp. 13–14, §C.2; p. 19, Table 12: cold oracle and phase faults",
+        "PDF p. 23, §I.3.2: runtime traces do not prove closure"
       ],
       "description": "Run the frozen reuse qualification cohort through both admitted reuse and an independent cold full runner. Mutate fixtures/instances/finalizers/plugins/hooks/config/policies/keys/runtime/external snapshots, include test removal, stale cache, incomplete traces, changed external effects, and nontrivial unchanged cases. Score every attempted false reuse, false denial, oracle disagreement, lifecycle outcome, cache hit, and fallback with explicit denominators. Keep the full oracle unavailable to candidate generation.",
       "acceptance_criteria": [
@@ -433,9 +434,9 @@
         "NS-006"
       ],
       "paper_evidence": [
-        "PDF pp. 6\u20137, \u00a77: complete manifests and accepted publication",
-        "PDF pp. 11\u201314, Appendix A.1 and Table 9",
-        "PDF pp. 18\u201319, \u00a7F.4 and Table 12: concurrency/federation fault cases"
+        "PDF pp. 6–7, §7: complete manifests and accepted publication",
+        "PDF pp. 11–14, Appendix A.1 and Table 9",
+        "PDF pp. 18–19, §F.4 and Table 12: concurrency/federation fault cases"
       ],
       "description": "Run deterministic sequential/parallel preparation at multiple worker counts with exact canonical profile/order. Inject missing/duplicate required units, corrupt blocks/hash memo, stale parent/generation/fence, interrupted persistence, CAS conflict, crashes around artifact/task publication, duplicated/reordered events, unknown provider results, and store unavailability. Assert durable reconciliation across artifact, operational, and Git state. Include a valid continuation after recovery. Restrict federation/network claims to the tested deployment and retain unavailable remote faults explicitly.",
       "acceptance_criteria": [
@@ -474,7 +475,7 @@
       ],
       "paper_evidence": [
         "PDF p. 11, Appendix A, Table 6: illustrative guard-before-write cycle",
-        "PDF p. 26, \u00a7L.4: evidence must change control decisions",
+        "PDF p. 26, §L.4: evidence must change control decisions",
         "PDF p. 27, Algorithm 1: intended composition not yet observed"
       ],
       "description": "Turn the bounded guard-before-write example or an equivalently frozen genuine historical task into a complete integrated run. Capture actual pre-state/obligation/counterexample, admitted plan and route, candidate patch, independent validation/reuse, complete requirement manifest, accepted parent-bound publication, and operational completion. Include permitted writes, denied no-write behavior, exceptions/finalization, API scope, and a minimally altered invalid case. Use exact source/receipt identifiers instead of schematic R0/P0/T0 labels.",
@@ -507,7 +508,7 @@
         "NS-003"
       ],
       "paper_evidence": [
-        "PDF p. 5, \u00a76.1; pp. 23\u201324, Appendix J",
+        "PDF p. 5, §6.1; pp. 23–24, Appendix J",
         "PDF p. 24, Table 16: inner/outer binding and key attacks",
         "PDF p. 25, Table 18: native theorem/circuit row"
       ],
@@ -540,8 +541,8 @@
         "NS-003"
       ],
       "paper_evidence": [
-        "PDF p. 5, \u00a75.3; p. 7, \u00a77.4",
-        "PDF pp. 15\u201321, Appendices D\u2013H",
+        "PDF p. 5, §5.3; p. 7, §7.4",
+        "PDF pp. 15–21, Appendices D–H",
         "PDF p. 25, Table 18: required world/procedure consumption"
       ],
       "description": "Resolve source and active-owner status before extending procedure/world/refactoring work. For retained claims, define a bounded operator/task family, current applicability and authority checks, held-out family/time splits, independent validation/rollback, static/history/lexical/embedding/template controls, negative memory, and actual consumed pre/post evidence. Measure downstream repair/usefulness rather than sidecar logging. Evaluate learned candidates only if a distinct frozen learned artifact exists. Otherwise preserve earlier no-go status and mark these optional mechanisms as planned future work, closing their Table 18 obligations with explicit untested scope.",
@@ -549,7 +550,7 @@
         "Every retained extension has an actual located implementation, independent holdout protocol, and consumed-result evidence.",
         "Training/synthesis cannot inspect final acceptance outputs; applicability failures, abstentions, bad predictions, and rollback costs remain visible.",
         "Guarded/required consumption is distinguished from shadow writing/reading, with no worker self-promotion or protected-validator edits.",
-        "Unevaluated broad W1\u2013W4, graph learning, or remodularization claims are removed/narrowed without blocking the measured core."
+        "Unevaluated broad W1–W4, graph learning, or remodularization claims are removed/narrowed without blocking the measured core."
       ],
       "deliverables": [
         "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json",
@@ -576,11 +577,12 @@
         "NS-011",
         "NS-013",
         "NS-014",
-        "NS-015"
+        "NS-015",
+        "NS-026"
       ],
       "paper_evidence": [
-        "PDF p. 7, \u00a78.1: freeze before paired conditions",
-        "PDF p. 20, \u00a7H.1: qualify seams before combined attribution"
+        "PDF p. 7, §8.1: freeze before paired conditions",
+        "PDF p. 20, §H.1: qualify seams before combined attribution"
       ],
       "description": "Run a small separate development pilot to validate all retained arms, oracle isolation, receipt completeness, resource estimates, model availability, and interruption handling. Fix harness defects through the existing owners; update the protocol only before the final freeze. Confirm sample-size/repetition feasibility and explicitly record any scoped-down but scientifically valid design before final outcomes. Freeze code, dependencies, model settings, data/splits, costs/limits, scoring scripts, and analysis plan.",
       "acceptance_criteria": [
@@ -593,7 +595,8 @@
         "papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
         "papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
         "papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json"
+        "papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
       ],
       "suggested_code_paths": [
         "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
@@ -607,14 +610,14 @@
     {
       "id": "NS-017",
       "subgoal_id": "NS-SG4",
-      "title": "Execute the frozen paired A\u2013D main comparison with real outcomes",
+      "title": "Execute the frozen paired A–D main comparison with real outcomes",
       "priority": "P0",
       "depends_on": [
         "NS-016"
       ],
       "paper_evidence": [
         "PDF p. 24, Table 17: all main results TBD",
-        "PDF pp. 7\u20138, \u00a78: useful progress and net cost"
+        "PDF pp. 7–8, §8: useful progress and net cost"
       ],
       "description": "Execute the final paired conditions using the fixed population, randomized order, repetitions, resource limits, and exact source/model/runtime versions. Preserve raw prompts or permitted summaries, provider responses/receipts, patches, independent validation, publication and terminal-state receipts, cold/warm identities, and resource logs. Resume from durable run state without silently retrying unknown paid effects. Record all unsolved/unavailable/timeout outcomes and deviations; never replace failed tasks or replay fixture patches to improve the table.",
       "acceptance_criteria": [
@@ -645,8 +648,8 @@
         "NS-016"
       ],
       "paper_evidence": [
-        "PDF p. 7, \u00a78.1: orthogonal component ablations",
-        "PDF p. 8, Table 4 and \u00a78.3",
+        "PDF p. 7, §8.1: orthogonal component ablations",
+        "PDF p. 8, Table 4 and §8.3",
         "PDF p. 19, Table 12"
       ],
       "description": "Execute preregistered one-factor comparisons for translation checks, symbolic routing, semantic context selection, test/proof reuse, parallel preparation, and procedures if retained. Include cold/warm state, full cold validation, sequential/parallel sealer, and route-level deterministic/model outcomes. Unsafe disabled-check controls must stay in the isolated adversarial harness with publication disabled. Use the same independent oracle, task pairs, model limits, and evidence schema; report package effects separately from isolated effects.",
@@ -679,7 +682,7 @@
         "NS-018"
       ],
       "paper_evidence": [
-        "PDF p. 8, \u00a78.3; p. 19, \u00a7G.1",
+        "PDF p. 8, §8.3; p. 19, §G.1",
         "PDF p. 24, Table 17; p. 1 abstract results placeholder"
       ],
       "description": "Run the fixed independent scorer over all attempts. Compute accepted solved/total, false acceptance and denial with denominators, dispatch-conditional solve rates, useful-progress/replan latency, fallback/churn/manual intervention, paired differences, median/distribution and confidence intervals, stratified dynamic/task classes, and noninferiority/useful-completion decisions. Measure tokens/charges/resources, directly observed elapsed/human time, cold-start setup and break-even amortization. Explain unavailable GPU/prover/currency observations and finite zero-failure bounds. Generate tables/plots solely from raw evidence.",
@@ -721,7 +724,7 @@
       "paper_evidence": [
         "PDF p. 25, Table 18: 18 TBD cells",
         "PDF p. 24, Table 16: native boundary mutations",
-        "PDF p. 25, \u00a7K.2: report negative/missing results"
+        "PDF p. 25, §K.2: report negative/missing results"
       ],
       "description": "Generate Table 18 from actual paired valid/invalid evidence at provider, translation, retained native, fixture lifecycle, restart publication, and retained world/procedure boundaries. For optional unclaimed mechanisms, use a clear untested/unavailable/out-of-scope disposition and matching text changes. Reconcile every numerical/implementation/deployment assertion against the frozen evidence; preserve negative results and specify which acceptance assumptions remain trusted or untested.",
       "acceptance_criteria": [
@@ -751,9 +754,9 @@
         "NS-003"
       ],
       "paper_evidence": [
-        "PDF pp. 9\u201310, \u00a79.2 and references 1\u201312",
+        "PDF pp. 9–10, §9.2 and references 1–12",
         "PDF throughout: internal D/A/N/K/P/W labels",
-        "PDF p. 21, \u00a7H.3: author-only companion reconciliation handoff"
+        "PDF p. 21, §H.3: author-only companion reconciliation handoff"
       ],
       "description": "Verify all 12 bibliography entries, identifiers, and attributed technical statements against primary sources. Resolve internal workstream labels to concise anonymous artifact citations or remove them; replace author-only review/reconciliation history with scientific descriptions. State the novelty as the tested supervision/evidence composition, with direct comparisons to relevant agent, regression-testing/build/reuse, formalization and proof-carrying methods. Coordinate a nonidentifying overlap/distinct-contribution audit with the autoformalization and law-to-action papers without implying independent evidence when datasets/code are shared.",
       "acceptance_criteria": [
@@ -788,11 +791,11 @@
       ],
       "paper_evidence": [
         "PDF p. 1 abstract [RESULTS]; p. 8 [TO BE FILLED]",
-        "PDF pp. 24\u201325, Tables 17\u201318",
-        "PDF pp. 15\u201321: implementation-plan material",
+        "PDF pp. 24–25, Tables 17–18",
+        "PDF pp. 15–21: implementation-plan material",
         "PDF p. 27, Algorithm 1: intended versus executed composition"
       ],
-      "description": "Rewrite abstract/introduction/method/evaluation/conclusion around the supported core and actual findings. Integrate generated Tables 17/18 and useful ablations/figures into a 4\u20139 main-page narrative. Separate preliminary estimates from live measurements and proof sketches from implementation enforcement. Convert the schematic cycle into the evidence-backed example if qualified. Narrow optional extensions and move/remove author-only campaign directives, duplicated explanations, and unsupported deployment assertions. Replace all result/benchmark placeholders, while factual author-owned disclosure content is handled in the artifact/disclosure task. Integrate the verified bibliography from audit/verified_references.bib into the recovered manuscript in this task so independent source recovery and reference auditing do not edit the same bibliography concurrently.",
+      "description": "Rewrite abstract/introduction/method/evaluation/conclusion around the supported core and actual findings. Integrate generated Tables 17/18 and useful ablations/figures into a 4–9 main-page narrative. Separate preliminary estimates from live measurements and proof sketches from implementation enforcement. Convert the schematic cycle into the evidence-backed example if qualified. Narrow optional extensions and move/remove author-only campaign directives, duplicated explanations, and unsupported deployment assertions. Replace all result/benchmark placeholders, while factual author-owned disclosure content is handled in the artifact/disclosure task. Integrate the verified bibliography from audit/verified_references.bib into the recovered manuscript in this task so independent source recovery and reference auditing do not edit the same bibliography concurrently.",
       "acceptance_criteria": [
         "Abstract numbers and conclusions exactly match generated results and their population/uncertainty/limitations.",
         "No TBD, TO BE FILLED, RESULTS placeholder, unsupported success assertion, or unresolved internal artifact label remains in scientific text.",
@@ -810,7 +813,16 @@
         "papers/completion/neurosymbolic_supervision/analysis/",
         "papers/completion/neurosymbolic_supervision/audit/final_claim_evidence_matrix.json"
       ],
-      "implementation_paths": []
+      "implementation_paths": [],
+      "proposal_artifact_envelope": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3",
+        "binary_paths": [
+          "papers/completion/neurosymbolic_supervision/manuscript/paper.pdf"
+        ],
+        "max_file_bytes": 16000000,
+        "max_patch_bytes": 16000000,
+        "max_output_bytes": 24000000
+      }
     },
     {
       "id": "NS-023",
@@ -822,8 +834,8 @@
         "NS-012"
       ],
       "paper_evidence": [
-        "PDF p. 7, Eq. 2 and \u00a77.3",
-        "PDF pp. 22\u201323, \u00a7I.3.1\u2013I.3.3",
+        "PDF p. 7, Eq. 2 and §7.3",
+        "PDF pp. 22–23, §I.3.1–I.3.3",
         "PDF p. 27, Algorithm 1"
       ],
       "description": "Check the accepted-lineage induction and dependency-projection reuse argument for precise hypotheses, nonvacuity, statement scope, and consistency with implemented call chains. State initial-root policy, complete-manifest/checker/translation/current-parent/exclusive-publication/protected-authority assumptions and deterministic observation/effect projection requirements. Map each assumption to qualification evidence or trusted limitation. Explain separate behavioral correctness, action permission, and publication decisions. Keep sketches explicitly unmachine-checked unless actual proof artifacts are independently checked; do not initiate unnecessary universal-Python proof work.",
@@ -855,20 +867,20 @@
         "NS-022"
       ],
       "paper_evidence": [
-        "PDF p. 25, \u00a7K.1: five disclosure placeholders",
-        "PDF p. 25, \u00a7K.2 and p. 28 checklist TODOs",
+        "PDF p. 25, §K.1: five disclosure placeholders",
+        "PDF p. 25, §K.2 and p. 28 checklist TODOs",
         "Workshop CFP: official 2026 template, double-blind artifacts, methodology-essential LLM disclosure",
-        "Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343\u2013350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions."
+        "Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions."
       ],
-      "description": "Apply the supplied local research workshop template and checklist, then build an anonymous supplement containing source/locks/capabilities, protocol/data provenance/splits, model settings/prompts or allowed summaries, runner/checker commands, raw shareable receipts, analysis, and failure cases. Redact secrets/private traces/identifying paths without corrupting content identities; publishable manifests must reference the redacted release snapshot. Recover accurate author-confirmable model-use records for implementation/formalization/plans/patches/proofs/data/manuscript and remove unused roles. Document facts requiring author attestation separately; never infer consent or fabricate them. Prepare artifact hosting files for review without sending, publishing, or submitting. Build from the supplied local research shell papers/neurips_2026_vericode_workshop.tex and an unchanged copy of papers/neurips_2026_vericode.sty, using the supplied default \\usepackage{neurips_2026_vericode} with no final, preprint, nonanonymous, or sglblindworkshop option. Do not use the competition/single-blind variant or the generic neurips_2026.sty. Copy papers/checklist.tex into this paper's manuscript directory, include it after references and optional appendices, remove only its BEGIN/END INSTRUCTIONS block, preserve the heading/questions/subheadings/guidelines, and replace all 16 \\answerTODO{} and 16 \\justificationTODO{} fields with actual evidence-backed \\answerYes{}, \\answerNo{}, or \\answerNA{} and 1\u20132 sentence justifications. Do not edit the user's shared template/style/checklist originals or fabricate author-dependent answers. Pin input checksums. The style intentionally prints Anonymous Author(s), Affiliation, Address, and email: preserve this official anonymous block and exclude it from unresolved-placeholder failures.",
+      "description": "Apply the supplied local research workshop template and checklist, then build an anonymous supplement containing source/locks/capabilities, protocol/data provenance/splits, model settings/prompts or allowed summaries, runner/checker commands, raw shareable receipts, analysis, and failure cases. Redact secrets/private traces/identifying paths without corrupting content identities; publishable manifests must reference the redacted release snapshot. Recover accurate author-confirmable model-use records for implementation/formalization/plans/patches/proofs/data/manuscript and remove unused roles. Document facts requiring author attestation separately; never infer consent or fabricate them. Prepare artifact hosting files for review without sending, publishing, or submitting. Build from the supplied local research shell papers/neurips_2026_vericode_workshop.tex and an unchanged copy of papers/neurips_2026_vericode.sty, using the supplied default \\usepackage{neurips_2026_vericode} with no final, preprint, nonanonymous, or sglblindworkshop option. Do not use the competition/single-blind variant or the generic neurips_2026.sty. Copy papers/checklist.tex into this paper's manuscript directory, include it after references and optional appendices, remove only its BEGIN/END INSTRUCTIONS block, preserve the heading/questions/subheadings/guidelines, and replace all 16 \\answerTODO{} and 16 \\justificationTODO{} fields with actual evidence-backed \\answerYes{}, \\answerNo{}, or \\answerNA{} and 1–2 sentence justifications. Do not edit the user's shared template/style/checklist originals or fabricate author-dependent answers. Pin input checksums. The style intentionally prints Anonymous Author(s), Affiliation, Address, and email: preserve this official anonymous block and exclude it from unresolved-placeholder failures.",
       "acceptance_criteria": [
         "A clean environment can install the frozen artifact and regenerate results/tables without author-private state, or limitations are explicit and scientifically acceptable.",
         "Official checklist questions are present and honestly answered; the compilation placeholder and five disclosure placeholders are gone.",
         "PDF metadata, author block, bibliography, URLs, source paths, logs, and supplement pass a documented double-blind audit.",
         "Methods-essential LLM use is accurately described with actual models/versions/settings/independent checks; unresolved author-owned factual attestations are clearly listed.",
-        "PDF main text is 4\u20139 pages excluding references/appendices, PDF below 50 MB, supplement ZIP below 100 MB, subject to final live CFP verification.",
+        "PDF main text is 4–9 pages excluding references/appendices, PDF below 50 MB, supplement ZIP below 100 MB, subject to final live CFP verification.",
         "The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.",
-        "The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1\u20132 sentence evidence-backed justifications; only its instruction block is removed.",
+        "The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.",
         "The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.",
         "Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text."
       ],
@@ -895,7 +907,17 @@
         "papers/neurips_2026_vericode.sty",
         "papers/checklist.tex"
       ],
-      "implementation_paths": []
+      "implementation_paths": [],
+      "proposal_artifact_envelope": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3",
+        "binary_paths": [
+          "papers/completion/neurosymbolic_supervision/release/supplement.zip",
+          "papers/completion/neurosymbolic_supervision/release/paper.pdf"
+        ],
+        "max_file_bytes": 16000000,
+        "max_patch_bytes": 16000000,
+        "max_output_bytes": 24000000
+      }
     },
     {
       "id": "NS-025",
@@ -906,7 +928,7 @@
         "NS-024"
       ],
       "paper_evidence": [
-        "PDF p. 25, \u00a7K.2: final author actions",
+        "PDF p. 25, §K.2: final author actions",
         "PDF p. 28: final experiment/source/artifact/disclosure checklist",
         "Workshop CFP and live submission portal deadlines"
       ],
@@ -930,6 +952,46 @@
         "papers/completion/neurosymbolic_supervision/tasks.json"
       ],
       "implementation_paths": []
+    },
+    {
+      "id": "NS-026",
+      "subgoal_id": "NS-SG2",
+      "title": "Implement and qualify an actual production provider and independent historical scorer",
+      "priority": "P0",
+      "depends_on": [
+        "NS-004",
+        "NS-005",
+        "NS-006",
+        "NS-007",
+        "NS-008",
+        "NS-009",
+        "NS-010",
+        "NS-012",
+        "NS-013"
+      ],
+      "paper_evidence": [
+        "Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending."
+      ],
+      "description": "Replace the NS-006 unconditional production refusal with an admitted provider path and independent historical scorer. Current probe_production_provider always rejects, production dispatch raises and scoring refuses production; materialize_live_task uses the caller repository instead of a pinned upstream store. Correct all four seams with exact source bindings, clean pre-fix exports and a scoped scientific gateway when the provider container cannot safely dispatch itself. Supervisor authoring keeps Grok primary and Codex terra/high only after verified fresh Grok quota exhaustion. Scientific calls separately obey an explicitly admitted scientific model profile. NS-004 proposes Terra HIGH through verified Grok quota-only fallback; a usage reset does not itself authorize that route. If this route is unavailable, freeze a versioned development-only provider amendment before any development call, naming the exact permitted Grok primary profile, transport, budgets, motivation and deviation from preserved NS-004. Record it in protocol/development_provider_amendment.json without overwriting the original protocol. Development qualification may use that fixed profile; NS-016 still owns the pilot and any explicit final-profile amendment before final evaluation. Never switch scientific models within paired blocks as an authoring fallback or manufacture quota exhaustion. No Docker socket, broad host credentials, original .git, fixed commits, curator session or scorer-only payload may be visible to proposal generation. Run a bounded real development qualification within NS-004 budgets, then let NS-016 perform the pre-final freeze.",
+      "acceptance_criteria": [
+        "One actual development provider invocation produces an independently scored retained repair or honest failure with real served identity, dispatch/effect receipt, source preimage, timing, token/cost availability and stage failures; a development stub is not sufficient.",
+        "Historical materialization uses exact pinned upstream pre-fix sources and nonempty unchanged baselines; proposal exports exclude scorer payloads, final labels, original Git objects and fixed-commit content, with an actual boundary/canary qualification.",
+        "The independent scorer consumes separately retained oracle material only after the proposal is sealed, verifies source/prediction/receipt bindings, and can admit actual production outcomes without blanket-refusal or fixture substitution.",
+        "Resume/retry tests preserve consumed/unknown effects and prohibit duplicate model dispatch; provider and scorer source pins, budgets and executable run instructions are ready for NS-016 freeze."
+      ],
+      "deliverables": [
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+        "papers/completion/neurosymbolic_supervision/experiments/production_profile.json",
+        "papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json",
+        "papers/completion/neurosymbolic_supervision/experiments/README.md",
+        "papers/completion/neurosymbolic_supervision/qualification/production_provider/",
+        "papers/completion/neurosymbolic_supervision/audit/production_readiness.json"
+      ],
+      "suggested_code_paths": [],
+      "implementation_paths": [],
+      "manual_review": false
     }
   ]
 }
