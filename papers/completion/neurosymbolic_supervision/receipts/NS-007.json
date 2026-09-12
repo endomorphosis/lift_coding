@@ -1,0 +1,131 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-007",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:58:05+00:00",
+  "scope": "Semantic-context, invalidation, and IsolatedPatchWorktree qualification on the sealed SemanticStateControlledFixture. Not a live A–D experiment, CST/AST linker result, or provider-tokenizer savings claim.",
+  "source_versions": {
+    "workspace_git_head": "eb534b4d555ab853277adfbe34aaee6005ddd7e8",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "8.1.1",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 recorded semantic_state blocked on missing anyio. NS-007 separately exercised the datasets producer and loaded the actual context_pack/worktree consumer modules after a namespace bypass of the anyio-gated package __init__, using the in-tree sealed CIDv1 profile because multiformats is absent."
+    },
+    "producer": {
+      "semantic_index": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/__init__.py",
+      "semantic_state": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/__init__.py"
+    },
+    "consumer": {
+      "context_pack": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+      "worktree": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/worktree.py",
+      "context_compiler": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "cid_utils": "external/ipfs_accelerate/ipfs_accelerate_py/utils/cid_utils.py"
+    },
+    "fixture": "tests.fixtures.software_contracts.semantic_state.SemanticStateControlledFixture@1"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_cases.json": "f5f92b9a7ba9b48320fd7e7b8914cb0b4458f6ae5fe1d5c8303072dc0ebd9603",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_results.jsonl": "63121cfd922cbcb51c8c74e687e53c270c492ef9ad59b17d1f745a6f657a012a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_report.md": "784edc13ed7fb959cdb60f51a422d62b3f4aec890d79e9ec56a1bc5597a3c4d4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/run_context_qualification.py": "6fc1dd6ace951e29e8b8ba01dc7381b84c412bd46388023bd4b606439eb49e2f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/validate_context_qualification.py": "5f63c4d3cafd70112985130fc7e67c3866c6c8c2c20fe67f8b09d6dabc48708e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/context-qualification.log": "55af1716e9f29e2ffa208b7188227f559479103c2c840cb2a18a5cb0bd5ff6ca"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/context_cases.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_cases.json",
+    "papers/completion/neurosymbolic_supervision/qualification/context_results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_results.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/context_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "All retained context cases preserve mandatory acceptance material and expose unknown/opaque frontiers.",
+      "status": "met",
+      "explanation": "Twenty-five retained cases from the controlled fixture and IsolatedPatchWorktree suite all kept target/surrounding/test source CIDs and obligation material in both raw and semantic packs, and ContextCompiler retained goal/authority/scope/acceptance. Opaque, heuristic, native, dynamic, and raw-source frontiers were recorded on every retained row; the unsupported CST/alias surface was explicitly not retained as an implemented claim.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/context-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Cold/incremental roots and selected/full validation agree within the declared profile; mismatches receive failures and cause fixes or explicit limitations.",
+      "status": "met",
+      "explanation": "For every producer case, cold and verified-incremental state_cid and semantic-state root_cid agreed. Pytest selected-versus-full execution on the declared subset (unchanged, local_body, format, native, delete, fixture, lock) found no missed full-suite failures. Dynamic/monkey/config/lock cases used full_pytest/both fallback inside the allow_full_fallback policy rather than silently dropping coverage. No mismatch was relabeled as success.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/context-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Valid source-bound patches apply and stale/out-of-scope preimages reject.",
+      "status": "met",
+      "explanation": "IsolatedPatchWorktree applied the local_body unified diff against an exact pkg/core.py preimage, changing only the fenced worktree (pre_tree 72204e13c53a3df5a76c690a8b04fa77a4c3c374 to post_tree 38841d5c12301203d554b9f4908d95f08936dccb) while leaving the caller root unchanged. A stale visibility map and an empty visibility map were rejected as invisible_preimage. An out-of-scope policy.toml patch was rejected. Baseline capsules assessed against the mutated root were stale and required raw source.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/run_context_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/context-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Context reduction is measured with the same actual tokenizer for both modes, with fallback rates retained.",
+      "status": "met",
+      "explanation": "Raw and semantic ContextPacks for each producer case shared one CalibratedTokenEstimator object (context-compiler-calibrated_utf8@1). No provider tokenizer (tiktoken) is installed; fallback_rate=1.0 is retained. Measured semantic-versus-raw token fractions on this fixture were negative (min -0.7544, max -0.2786, n=19) because required never-compress sources stayed in both modes and capsules were additive evidence, not a claimed tokenizer saving.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/qualification/context_report.md"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns007-evidence",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns007-evidence/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns007-evidence/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns007-evidence/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns007-evidence/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/validate_context_qualification.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/validate_context_qualification.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/context-qualification.log",
+      "started_at": "2026-09-12T01:57:20+00:00",
+      "finished_at": "2026-09-12T01:58:05+00:00",
+      "execution_kind": "sealed-profile live producer/consumer qualification check: cold/incremental roots, packing, and patch rejection; no A-D live repair"
+    }
+  ],
+  "limitations": {
+    "public_semantic_state_package_import": "blocked_without_anyio",
+    "consumer_modules_loaded_via_namespace_bypass": true,
+    "multiformats": "absent; in-tree sealed CIDv1 profile used",
+    "provider_tokenizer": "absent; calibrated_utf8 fallback_rate=1.0 retained",
+    "token_reduction_on_this_fixture": "semantic packs were not smaller than raw packs because required sources are never compressed",
+    "cst_alias_ir_linking": "out_of_implemented_claim",
+    "native_extension_loaded": false,
+    "live_ad_experiment": false,
+    "claim_boundary": "This receipt qualifies the datasets producer, ContextPack/ContextCompiler consumer, and IsolatedPatchWorktree source-linked edit path on the controlled fixture. It is not a matched A-D outcome, a CST/AST equivalence proof, or a provider-tokenizer cost saving."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}

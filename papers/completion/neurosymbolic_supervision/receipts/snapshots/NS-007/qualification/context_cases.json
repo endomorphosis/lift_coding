@@ -1,0 +1,484 @@
+{
+  "capability": {
+    "anyio": false,
+    "cid_shim": {
+      "implementation": "ipfs_accelerate_py.utils.cid_utils",
+      "kubo_cid_raw_byte_agreement": true,
+      "kubo_raw_cid_probe": "bafkreid4j6c4czomlyvwlmw2e45f5yttotmy77t7edjuisck5ykubsgvo4",
+      "profile": "CIDv1 / base32 / sha2-256 / raw|dag-json",
+      "reason": "multiformats is absent in the sealed profile",
+      "rebound_aliases": 32,
+      "sealed_raw_cid_probe": "bafkreid4j6c4czomlyvwlmw2e45f5yttotmy77t7edjuisck5ykubsgvo4"
+    },
+    "git": "/usr/bin/git",
+    "interpreter": "/usr/bin/python3.12",
+    "loaded_modules": {
+      "capsules_consumer": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/capsules.py",
+        "sha256": "8a15eafe368bbdd6e39be951f3cc9d86c0c5ea988773008cdc27165751483bc3"
+      },
+      "cid_utils": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/utils/cid_utils.py",
+        "sha256": "e7f6e94532c19ae22781fef967715f28c6825ffe4721bf52a52b647dce55e139"
+      },
+      "context_compiler": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+        "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece"
+      },
+      "context_pack": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+        "sha256": "0659cf081fa2d7f0746a7706a721e39cee254cc2ab4f32923666d85e18433c72"
+      },
+      "controlled_fixture_recipe": {
+        "path": "external/ipfs_datasets/tests/fixtures/software_contracts/semantic_state/recipe.py",
+        "sha256": "ab5fb496f440907a5eadd1800c07125ab29d5c3061e9f1d59240b186858c5bac"
+      },
+      "semantic_index": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/__init__.py",
+        "sha256": "5c41f8f1e165dd365eaaaa2a5f7a9a8bb97d311604a79b42b5999ca2c06f8997"
+      },
+      "semantic_state_producer": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/__init__.py",
+        "sha256": "282ac915c4f0896a789b908ad1038053c6efadf25130a402decbbc84311c5565"
+      },
+      "worktree": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/worktree.py",
+        "sha256": "0d85d426eb4ffc6dd8dae09857439bc96950a46aa645dd05f734abd27b12ba1d"
+      }
+    },
+    "multiformats": false,
+    "namespace_bypass_used": true,
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "path_after_imports": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-007-cdce4e292a90-attempt-1-1789176842/external/ipfs_datasets/bin:/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-007-cdce4e292a90-attempt-1-1789176842/external/ipfs_datasets/bin/.deps/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "public_mcplusplus_import": {
+      "error": "ModuleNotFoundError: No module named 'anyio'",
+      "loaded": false
+    },
+    "public_semantic_state_import": {
+      "error": "ModuleNotFoundError: No module named 'anyio'",
+      "loaded": false
+    },
+    "pytest": "8.1.1",
+    "python_version": "3.12.3",
+    "tiktoken": false
+  },
+  "cases": [
+    {
+      "case_id": "unchanged",
+      "description": "Unchanged tree: cold and incremental scans produce identical state and semantic-state roots.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "unchanged",
+      "kind": "unchanged",
+      "retained": true
+    },
+    {
+      "case_id": "local_body",
+      "description": "Local function body change of pkg.core.add.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "localized",
+      "kind": "local_body",
+      "retained": true
+    },
+    {
+      "case_id": "signature",
+      "description": "Public signature change of pkg.core.scale.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "localized",
+      "kind": "signature",
+      "retained": true
+    },
+    {
+      "case_id": "cross_module",
+      "description": "Cross-module caller body change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "localized",
+      "kind": "cross_module",
+      "retained": true
+    },
+    {
+      "case_id": "schema",
+      "description": "Dataclass/schema field addition on Payload.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "localized",
+      "kind": "schema",
+      "retained": true
+    },
+    {
+      "case_id": "exception",
+      "description": "Raised exception type change with stale recovery.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "localized",
+      "kind": "exception",
+      "retained": true
+    },
+    {
+      "case_id": "fixture",
+      "description": "Pytest fixture body change for database.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "fixture",
+      "kind": "fixture",
+      "retained": true
+    },
+    {
+      "case_id": "config",
+      "description": "Pytest configuration marker change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "configuration",
+      "kind": "config",
+      "retained": true
+    },
+    {
+      "case_id": "plugin",
+      "description": "Plugin module identity change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "configuration",
+      "kind": "plugin",
+      "retained": true
+    },
+    {
+      "case_id": "lock",
+      "description": "Lock/environment requirements pin change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "dependency",
+      "kind": "lock",
+      "retained": true
+    },
+    {
+      "case_id": "policy",
+      "description": "Selection policy version change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "configuration",
+      "kind": "policy",
+      "retained": true
+    },
+    {
+      "case_id": "interface",
+      "description": "Public interface descriptor version change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "configuration",
+      "kind": "interface",
+      "retained": true
+    },
+    {
+      "case_id": "generated",
+      "description": "Generated input file content change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "dependency",
+      "kind": "generated",
+      "retained": true
+    },
+    {
+      "case_id": "dynamic",
+      "description": "Dynamic import helper change (opaque reachability).",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "dynamic",
+      "kind": "dynamic",
+      "retained": true
+    },
+    {
+      "case_id": "monkey",
+      "description": "Monkey-patch assignment after class definition.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "dynamic",
+      "kind": "monkey",
+      "retained": true
+    },
+    {
+      "case_id": "native",
+      "description": "Opaque native library identity change.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "native",
+      "kind": "native",
+      "retained": true
+    },
+    {
+      "case_id": "format",
+      "description": "Unrelated formatting-only whitespace/indent change. Authored oracle is empty: no tests are semantically affected. This is ordinary selection truth, not an analyzer bypass.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "localized",
+      "kind": "format",
+      "retained": true
+    },
+    {
+      "case_id": "delete",
+      "description": "Delete stable_helper and its dedicated test.",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "deleted",
+      "kind": "delete",
+      "retained": true
+    },
+    {
+      "case_id": "rename",
+      "description": "Rename pkg/callers.py to pkg/pipeline_mod.py (heuristic rename).",
+      "expected": {
+        "cold_incremental_agree": true,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "renamed",
+      "kind": "rename",
+      "retained": true
+    },
+    {
+      "case_id": "repair_valid_source_bound",
+      "description": "Exact preimage source-bound patch applies inside a fenced worktree without mutating the caller root.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "repair",
+      "kind": "repair_apply",
+      "retained": true
+    },
+    {
+      "case_id": "repair_stale_preimage",
+      "description": "Stale visibility-map preimage is rejected; worktree and caller root stay unchanged.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "stale_map",
+      "kind": "stale_map",
+      "retained": true
+    },
+    {
+      "case_id": "repair_out_of_scope",
+      "description": "Out-of-scope policy.toml patch is rejected by IsolatedPatchWorktree admission.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "repair",
+      "kind": "repair_reject_scope",
+      "retained": true
+    },
+    {
+      "case_id": "repair_invisible_preimage",
+      "description": "Empty visibility map rejects the patch as an invisible preimage.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "stale_map",
+      "kind": "stale_map",
+      "retained": true
+    },
+    {
+      "case_id": "stale_capsule_map",
+      "description": "Baseline capsules assessed against a mutated semantic root must go stale or require raw source.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "stale_map",
+      "kind": "stale_map",
+      "retained": true
+    },
+    {
+      "case_id": "context_core_nontruncatable",
+      "description": "ContextCompiler retains goal/authority/scope/acceptance and required target source; optional evidence may become an expansion reference.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": true
+      },
+      "family": "context_core",
+      "kind": "context_core",
+      "retained": true
+    },
+    {
+      "case_id": "unsupported_cst_alias_ir",
+      "description": "Tokenizer-alias and CST/AST relinking remain outside the implemented source-linked edit path.",
+      "expected": {
+        "cold_incremental_agree": false,
+        "expose_unknown_or_opaque": true,
+        "preserve_mandatory_acceptance": null
+      },
+      "family": "context_core",
+      "kind": "out_of_claim",
+      "retained": false
+    }
+  ],
+  "fixture_universe": {
+    "mutation_kinds": [
+      "unchanged",
+      "local_body",
+      "signature",
+      "cross_module",
+      "schema",
+      "exception",
+      "format",
+      "rename",
+      "delete",
+      "config",
+      "plugin",
+      "policy",
+      "interface",
+      "lock",
+      "generated",
+      "fixture",
+      "dynamic",
+      "monkey",
+      "native"
+    ],
+    "test_node_ids": [
+      "tests/test_callers.py::test_only_add",
+      "tests/test_callers.py::test_pipeline",
+      "tests/test_core.py::test_add",
+      "tests/test_core.py::test_scale",
+      "tests/test_core.py::test_stable_helper",
+      "tests/test_dynamic.py::test_invoke_extension",
+      "tests/test_exceptions.py::test_recover",
+      "tests/test_exceptions.py::test_service_ok",
+      "tests/test_fixture_dep.py::test_database_name",
+      "tests/test_fixture_dep.py::test_multiplier",
+      "tests/test_generated.py::test_read_generated",
+      "tests/test_models.py::test_payload_defaults",
+      "tests/test_models.py::test_payload_roundtrip",
+      "tests/test_monkey.py::test_run",
+      "tests/test_native.py::test_native_scale",
+      "tests/test_plugin.py::test_plugin_hook",
+      "tests/test_policy_interface.py::test_interface_version",
+      "tests/test_policy_interface.py::test_policy_version"
+    ]
+  },
+  "generated_at": "2026-09-12T01:56:24+00:00",
+  "profile": {
+    "allow_full_fallback": true,
+    "consumer": "ipfs_accelerate_py.agent_supervisor.semantic_state.context_pack + worktree",
+    "edit_path": "IsolatedPatchWorktree@1",
+    "fixture": "SemanticStateControlledFixture@1",
+    "live_ad_experiment": false,
+    "policy_id": "ns-007-context-qualification-v1",
+    "producer": "ipfs_datasets_py.logic.software_contracts.semantic_index + semantic_state",
+    "record_kind": "qualification",
+    "selection_policy": "ns-007-context-qualification-v1"
+  },
+  "schema": "neurosymbolic-supervision/context-qualification-cases@1",
+  "source_surfaces": {
+    "capsules_consumer": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/capsules.py",
+      "sha256": "8a15eafe368bbdd6e39be951f3cc9d86c0c5ea988773008cdc27165751483bc3"
+    },
+    "cid_utils": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/utils/cid_utils.py",
+      "sha256": "e7f6e94532c19ae22781fef967715f28c6825ffe4721bf52a52b647dce55e139"
+    },
+    "context_compiler": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece"
+    },
+    "context_pack": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+      "sha256": "0659cf081fa2d7f0746a7706a721e39cee254cc2ab4f32923666d85e18433c72"
+    },
+    "controlled_fixture_recipe": {
+      "path": "external/ipfs_datasets/tests/fixtures/software_contracts/semantic_state/recipe.py",
+      "sha256": "ab5fb496f440907a5eadd1800c07125ab29d5c3061e9f1d59240b186858c5bac"
+    },
+    "semantic_index": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/__init__.py",
+      "sha256": "5c41f8f1e165dd365eaaaa2a5f7a9a8bb97d311604a79b42b5999ca2c06f8997"
+    },
+    "semantic_state_producer": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/__init__.py",
+      "sha256": "282ac915c4f0896a789b908ad1038053c6efadf25130a402decbbc84311c5565"
+    },
+    "worktree": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/worktree.py",
+      "sha256": "0d85d426eb4ffc6dd8dae09857439bc96950a46aa645dd05f734abd27b12ba1d"
+    }
+  },
+  "task_id": "NS-007",
+  "tokenizer": {
+    "compiler_estimator_version": "CalibratedTokenEstimator",
+    "context_pack_estimator_version": "context-compiler-calibrated_utf8@1",
+    "fallback_rate": 1.0,
+    "fallback_reason": "no provider tokenizer in sealed profile",
+    "name": "calibrated_utf8",
+    "provider_aware": false,
+    "same_estimator_for_raw_and_semantic": true
+  },
+  "unsupported_claims": [
+    "CST/AST relinking",
+    "tokenizer-alias semantic editing",
+    "canonical semantic IR versus local projection ablations beyond source-linked patches"
+  ]
+}
