@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "/job/encode_train_selection.py", line 24, in <module>
+    from transformers import AutoModel,AutoTokenizer
+  File "/encoder-python/transformers/__init__.py", line 27, in <module>
+    from . import dependency_versions_check
+  File "/encoder-python/transformers/dependency_versions_check.py", line 16, in <module>
+    from .utils.versions import require_version, require_version_core
+  File "/encoder-python/transformers/utils/__init__.py", line 19, in <module>
+    from huggingface_hub import get_full_repo_name  # for backward compatibility
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/encoder-python/huggingface_hub/__init__.py", line 1044, in __getattr__
+    submod = importlib.import_module(submod_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/encoder-python/huggingface_hub/hf_api.py", line 56, in <module>
+    from ._commit_api import (
+  File "/encoder-python/huggingface_hub/_commit_api.py", line 20, in <module>
+    from .file_download import hf_hub_url
+  File "/encoder-python/huggingface_hub/file_download.py", line 22, in <module>
+    from ._local_folder import get_local_download_paths, read_download_metadata, write_download_metadata
+  File "/encoder-python/huggingface_hub/_local_folder.py", line 61, in <module>
+    from .utils import WeakFileLock
+  File "/encoder-python/huggingface_hub/utils/__init__.py", line 50, in <module>
+    from ._fixes import SoftTemporaryDirectory, WeakFileLock, yaml_dump
+  File "/encoder-python/huggingface_hub/utils/_fixes.py", line 21, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'

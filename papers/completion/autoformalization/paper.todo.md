@@ -467,7 +467,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-012, AF-008, AF-026
+- Depends on: AF-012, AF-008, AF-026, AF-029
 - Goal id: AF-S04
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -579,7 +579,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-005, AF-006, AF-010, AF-011, AF-013, AF-015, AF-027, AF-028
+- Depends on: AF-005, AF-006, AF-010, AF-011, AF-013, AF-015, AF-027, AF-028, AF-029
 - Goal id: AF-S05
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -691,7 +691,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P1
 - Track: autoformalization
-- Depends on: AF-004, AF-005, AF-011, AF-015, AF-028
+- Depends on: AF-004, AF-005, AF-011, AF-015, AF-028, AF-029
 - Goal id: AF-S05
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -765,7 +765,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-011, AF-012, AF-013, AF-014, AF-016, AF-017, AF-018, AF-019, AF-020, AF-028
+- Depends on: AF-011, AF-012, AF-013, AF-014, AF-016, AF-017, AF-018, AF-019, AF-020, AF-028, AF-029
 - Goal id: AF-S06
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
@@ -1076,3 +1076,43 @@ Acceptance criteria:
 3. The review importer validates actual returned files and preserves blank/original packets; no generated label, empty import or missing review can pass.
 
 Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
+
+## AF-029 Execute teacher-bound native training and produce promotion-eligible checkpoints
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: autoformalization
+- Depends on: AF-003, AF-004, AF-006, AF-007, AF-009, AF-011, AF-012, AF-015, AF-026, AF-027
+- Goal id: AF-S04
+- Parent goal: AF-G000
+- Objective heap: papers/completion/autoformalization/paper.objectives.md
+- Board namespace: vericodegen-2026-autoformalization
+- Bundle: autoformalization/AF-S04
+- Parallel lane: autoformalization
+- Outputs: papers/completion/autoformalization/evaluation/run_native_training.py, papers/completion/autoformalization/data/native_training_inputs.json, papers/completion/autoformalization/data/native_training_teacher_manifest.json, papers/completion/autoformalization/runs/native_training/manifest.json, papers/completion/autoformalization/runs/native_training/results.jsonl, papers/completion/autoformalization/runs/native_training/costs.jsonl, papers/completion/autoformalization/checkpoints/native_training/manifest.json, papers/completion/autoformalization/evidence/native_training/, papers/completion/autoformalization/evaluation/pipeline_arms.py, papers/completion/autoformalization/config/pipeline_arms.json, papers/completion/autoformalization/receipts/AF-029.json, papers/completion/autoformalization/receipts/snapshots/AF-029/
+- Predicted files: papers/completion/autoformalization/evaluation/run_native_training.py, papers/completion/autoformalization/data/native_training_inputs.json, papers/completion/autoformalization/data/native_training_teacher_manifest.json, papers/completion/autoformalization/runs/native_training/manifest.json, papers/completion/autoformalization/runs/native_training/results.jsonl, papers/completion/autoformalization/runs/native_training/costs.jsonl, papers/completion/autoformalization/checkpoints/native_training/manifest.json, papers/completion/autoformalization/evidence/native_training/, papers/completion/autoformalization/evaluation/pipeline_arms.py, papers/completion/autoformalization/config/pipeline_arms.json, papers/completion/autoformalization/receipts/AF-029.json, papers/completion/autoformalization/receipts/snapshots/AF-029/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-029
+- Acceptance: The actual training process uses the qualified research-toolchain identity and nonsecret launch profile; it records CPU Torch/NumPy/native-checker origins, digests, resource limits and native packed/autograd execution. The narrow authoritative validator remains a separate source/artifact verifier. Stripping the declared research profile is an error, not proof that the required dependencies are unavailable.; A fixed real semantic encoder and actual compiler/view target producer generate nonempty, digest-bound targets from only the unchanged AF004 train and selection populations. Encoder weights/revision/tokenization/window aggregation, producer source/vocabulary/version and every input/output binding are retained. No mock vectors, reused heldout/grouping vectors, empty target map, final labels or fabricated independent gold can satisfy this criterion.; T0, T1 and shared-only T2 are actually executed using the frozen three seeds and common per-seed budget; native update counts, initial/final checkpoint identities, real losses, elapsed time and exhaustion/failure records are retained. T2 shared gradients and parameter changes use the native packed training path with sample memory disabled for update and evaluation. Partial attempts remain partial; no scalar replica or default configuration can substitute for execution.; Native checker feedback is actually produced for eligible training inputs under the pinned supported profile and independently bound to their source/goal/premise/checker identities. T3 trains only on admitted feedback with matched T2 checkpoints and protects the primary representation/anti-copy state. Empty or untrusted feedback remains an explicit unresolved gate; constructed isolation probes do not replace this execution.; A new eligible-checkpoint manifest binds the nonmock teacher/encoder artifacts, real T2/T3 checkpoints, native update/feedback receipts and protected-state comparisons. E promotion stays locked until a later actual AF013 canary/consumer receipt names these exact checkpoint/advice identities. Any E implementation is callable only behind those checks; generic file existence, completed task status or export alone never activates it.; All original AF011/AF012 receipts, limited-scope outputs and native success/attempt history remain preserved. The new measurements and full preparation/training/checker costs occupy distinct paths. Final-test inputs remain inaccessible; independent fidelity and confirmatory source-level claims still require AF028 human review.
+- Paper evidence: September 12 actual AF011/AF012 experiment receipts stripped the separately qualified research environment and left native learned checkpoints/feedback unmeasured; preserve these original limited-scope records.
+- Reuse candidates: papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py, papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py, papers/completion/autoformalization/evaluation/qualify_runtime.py, external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+- Receipt: papers/completion/autoformalization/receipts/AF-029.json
+
+Complete the native learned-checkpoint obligations left unmeasured by AF011/AF012 after their experiment commands deliberately selected the narrower validation environment. Use the already-qualified research runtime for experiments; preserve the existing strict validator and all historical receipts. Freeze and generate actual train/selection-only encoder/compiler targets, execute native T0/T1/T2 and eligible isolated T3 within the existing common budget, and produce new checkpoint lineage for AF013 promotion. A lack of independent final gold does not block development training, but it blocks final fidelity claims. Missing required inputs or exhausted runs are unresolved/partial and must not be declared completed merely by repeating the old limited-scope diagnostic alternative. Do not invoke an unreviewed model gateway or change frozen source population, seeds, final lock or resource ceilings. Experiment instructions: execute scientific preparation and training inside the qualified research environment, preferably via the container-local /opt/ipfs-accelerate/provider-command-env launcher and its declared Python; record its profile digest and actual package/checker origins. Do not recreate the narrower native validator with env -i for experiment execution. The configured verify-task validator remains unchanged and verifies committed source, manifests, receipts and hashes in its narrow environment; do not change global validation PATH/PYTHONPATH or protected native validation code. Use fresh train/selection-only encoder outputs, not preseal grouping/heldout vectors. If the encoder is not present in the approved worker profile, use an explicitly admitted operator preprocessing export with exact nonmock model weights/recipe/input/output digests or request the same scoped profile extension; never invent vectors. Freeze compiler/view targets with their actual producer, vocabulary, checker/profile bindings and failure counts before training. Keep all public validation artifacts free of private final identifiers, gold and source bodies. AF020 may already have completed cost accounting for the older diagnostic runs: leave its task, receipt and outputs intact; retain actual new preparation/training/checker costs under runs/native_training/costs.jsonl for downstream AF021 analysis. Preserve the frozen seeds 104729,130363,155921, per-seed wall budget30minutes and16GiB common envelope, with one reserved compute/model slot. This 7200-second implementation ceiling is not authorization to enlarge a scientific run budget. Admitted prepared input is the committed papers/completion/autoformalization/data/native_training_inputs.json (SHA2566177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a), with the complete preparation inventory at papers/completion/autoformalization/evidence/native_training/preparation/package_manifest.json (SHA256595fe3c2b6b7339d967cfbf21de28f07de8fe03d819f625b999740d1c3038b15). Before training run python3 papers/completion/autoformalization/evidence/native_training/preparation/verify_prepared_inputs.py --paper-root papers/completion/autoformalization. Require exact84 unchanged train/selection source identities (69train,15selection), package/source/vector/window hashes and384-dimensional actual encoder vectors. Read the preparation README for the explicit embedding_vector/embedding_model native sample interface; omitting those activates the legacy mock default and cannot satisfy this task. These newly encoded fixed-pretrained inputs are source-owned hash-verified files, not an OS read-only mount. They provide no compiler/view targets, checker labels, training update or promotion credit; those remain this task's obligations. Carry all five preparation attempts and their measured/unknown cost fields forward once, without double-counting overlapping clocks or changing AF020 historical records.
+
+Acceptance criteria:
+
+1. The actual training process uses the qualified research-toolchain identity and nonsecret launch profile; it records CPU Torch/NumPy/native-checker origins, digests, resource limits and native packed/autograd execution. The narrow authoritative validator remains a separate source/artifact verifier. Stripping the declared research profile is an error, not proof that the required dependencies are unavailable.
+2. A fixed real semantic encoder and actual compiler/view target producer generate nonempty, digest-bound targets from only the unchanged AF004 train and selection populations. Encoder weights/revision/tokenization/window aggregation, producer source/vocabulary/version and every input/output binding are retained. No mock vectors, reused heldout/grouping vectors, empty target map, final labels or fabricated independent gold can satisfy this criterion.
+3. T0, T1 and shared-only T2 are actually executed using the frozen three seeds and common per-seed budget; native update counts, initial/final checkpoint identities, real losses, elapsed time and exhaustion/failure records are retained. T2 shared gradients and parameter changes use the native packed training path with sample memory disabled for update and evaluation. Partial attempts remain partial; no scalar replica or default configuration can substitute for execution.
+4. Native checker feedback is actually produced for eligible training inputs under the pinned supported profile and independently bound to their source/goal/premise/checker identities. T3 trains only on admitted feedback with matched T2 checkpoints and protects the primary representation/anti-copy state. Empty or untrusted feedback remains an explicit unresolved gate; constructed isolation probes do not replace this execution.
+5. A new eligible-checkpoint manifest binds the nonmock teacher/encoder artifacts, real T2/T3 checkpoints, native update/feedback receipts and protected-state comparisons. E promotion stays locked until a later actual AF013 canary/consumer receipt names these exact checkpoint/advice identities. Any E implementation is callable only behind those checks; generic file existence, completed task status or export alone never activates it.
+6. All original AF011/AF012 receipts, limited-scope outputs and native success/attempt history remain preserved. The new measurements and full preparation/training/checker costs occupy distinct paths. Final-test inputs remain inaccessible; independent fidelity and confirmatory source-level claims still require AF028 human review.
+
+Retain actual source/runtime/target/checkpoint/cost evidence. Independent human labels remain pending; no prior completion or synthetic diagnostic substitutes for the required native training.

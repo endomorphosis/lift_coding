@@ -1,0 +1,24 @@
+{
+  "created_before_inference": true,
+  "env": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "HF_HOME": "/tmp/hf",
+    "HF_HUB_OFFLINE": "1",
+    "HOME": "/tmp",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONPATH": "/research/python:/encoder-python",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TORCH_DEVICE_BACKEND_AUTOLOAD": "0",
+    "TRANSFORMERS_OFFLINE": "1",
+    "USE_TF": "0",
+    "USE_TORCH": "1"
+  },
+  "launcher_sha256": "08058c4d3d779a40c3143f62969e7b8d9d61ac4d66826e9fd6206a9724653b9e",
+  "manifest_sha256": "9751b462e634a6dbc4c116d8707209d39f4de73139a88f55b6a110f3987678e5",
+  "producer_sha256": "b048c6b138f74de30ffede11223a4ae9f02846e9bc536215bf6f645dfab94d1d"
+}

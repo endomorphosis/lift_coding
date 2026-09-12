@@ -1,0 +1,79 @@
+{
+  "checked_before_start": true,
+  "cmd": [
+    "/job/encode_train_selection.py"
+  ],
+  "entrypoint": [
+    "/usr/bin/python3.12"
+  ],
+  "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+  "mounts": [
+    {
+      "Destination": "/encoder",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/native-training-preparation-20260912/encoder",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/encoder-python",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/native-training-preparation-20260912/python",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/research",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/home/barberb/.local/share/vericodegen-research-runtime",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/output",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": true,
+      "Source": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/native-training-preparation-20260912/attempt-002/output",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/usr",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/usr",
+      "Type": "bind"
+    },
+    {
+      "Destination": "/job",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/native-training-preparation-20260912/attempt-002/job",
+      "Type": "bind"
+    }
+  ],
+  "resources": {
+    "CapDrop": [
+      "ALL"
+    ],
+    "Memory": 2147483648,
+    "MemorySwap": 2147483648,
+    "NanoCpus": 1000000000,
+    "NetworkMode": "none",
+    "PidsLimit": 64,
+    "ReadonlyRootfs": true,
+    "Runtime": "runc",
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "Tmpfs": {
+      "/tmp": "rw,nosuid,nodev,size=128m"
+    }
+  },
+  "user": "1000:1000"
+}
