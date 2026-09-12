@@ -1,0 +1,2245 @@
+{
+  "admitted_count": 0,
+  "admitted_for_t3_training": [],
+  "capability_probe": {
+    "any_native_checker_usable": false,
+    "binaries": {
+      "coqc": null,
+      "cvc5": null,
+      "elan": null,
+      "eprover": null,
+      "isabelle": null,
+      "lake": null,
+      "lean": null,
+      "vampire": null,
+      "z3": null
+    },
+    "home": "/tmp/ipfs-accelerate-validation-home-af012-ay9fen1h",
+    "home_is_validation_private": true,
+    "host_elan_or_local_bin_ignored": true,
+    "imports": {
+      "faiss": {
+        "error": "ModuleNotFoundError: No module named 'faiss'",
+        "ok": false
+      },
+      "multiformats": {
+        "error": "ModuleNotFoundError: No module named 'multiformats'",
+        "ok": false
+      },
+      "numpy": {
+        "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+        "ok": false
+      },
+      "torch": {
+        "error": "ModuleNotFoundError: No module named 'torch'",
+        "ok": false
+      },
+      "transformers": {
+        "error": "ModuleNotFoundError: No module named 'transformers'",
+        "ok": false
+      }
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "compiler_checker_pins": {
+    "compiler_entry_point": "ipfs_datasets_py.logic.intent_ir.formalize.compiler.IntentFormalizationCompiler",
+    "compiler_version": "intent-formalization-compiler/v1",
+    "host_lean_status": "pinned_by_AF-003_but_not_on_sealed_PATH",
+    "host_z3_status": "pinned_by_AF-003_but_not_on_sealed_PATH",
+    "model_architecture_version": "proof_aware_auxiliary_heads_v2",
+    "sealed_path_native_checker": "unavailable",
+    "solver_authority": "solver-local only; never substitutes for native reconstruction"
+  },
+  "created_at": "2026-09-12T07:05:30.429699+00:00",
+  "eligible_native_label_count": 0,
+  "filter_accounting": {
+    "applied_count": 2,
+    "candidate_count": 6,
+    "duplicate_count": 1,
+    "natural_candidates_rejected": 84,
+    "rejection_reason_counts": {
+      "bodies_not_opened": 1,
+      "constructed_control": 19,
+      "final_test_locked": 1,
+      "fixed_canary_not_used_for_t3_training_or_threshold_selection": 1,
+      "holdout_partition": 1,
+      "ids_not_inspected": 1,
+      "invalid_content_address": 1,
+      "isolation_probe_not_t3_label": 2,
+      "native_checker_unavailable": 84,
+      "native_reconstruction_not_verified": 1,
+      "no_trusted_signal": 1,
+      "no_trusted_verifier_label": 84,
+      "not_admitted_t3_label": 1,
+      "not_from_permitted_natural_partition": 16,
+      "not_native_checked_proof": 16,
+      "not_native_feedback": 2,
+      "tampered_payload": 1,
+      "teacher_proof_feedback_pending": 84,
+      "untrusted": 1,
+      "version_mismatch": 1
+    },
+    "skipped_holdout_count": 1,
+    "skipped_invalid_count": 1,
+    "skipped_untrusted_count": 1,
+    "skipped_version_mismatch_count": 1
+  },
+  "frozen_inputs": {
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+    "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "t2_checkpoint_manifest_sha256": "b33d71df3cf66a27fba5b5470c73764e137d51d0452110f236b820fe10cefaf5",
+    "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+    "train_sources_sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532"
+  },
+  "inventory": [
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.10",
+      "document_sha256": "7b6e0d4ee9a42fda3b01f22eb5bb111523802e1938b297b9a9abce88aea8fc11",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.10:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.11",
+      "document_sha256": "f5a3472c3213705ecf14c0abf0b8c30d73f69868bf288d89f8f7d38d832de81b",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.11:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.12",
+      "document_sha256": "972772cdb0fcd6b9ef5fe6f6540f940548224d9b6c6596b89d4e14fd37d4f4fa",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.12:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.13",
+      "document_sha256": "cb71995321197499f0c514eff103f3ae6e433e517e9d72fba8304f6ba6902911",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.13:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.14",
+      "document_sha256": "a8b019b7fe5b004e485b2688b4108eee04ee7d0a8b484f9b68eff0c15cc78b2d",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.14:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.16",
+      "document_sha256": "7a20082dae33fea5d83f4f83f20722d107ff123ffaa51bb99e56566ef1bb4233",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.16:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.17",
+      "document_sha256": "6275978010a788e7b9215fc59f62ee3cb193e0b615b96acabfc2852d0e4d9229",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.17:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.18",
+      "document_sha256": "285dac58462d0e03d09a1aa5e97fc907b6b61055eff1dfe1de3ac8ed380891df",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.18:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.1",
+      "document_sha256": "5d5b02a4feb0231f4bfe149db9530a5056a8690f1a27d13792142c064b3362b9",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.1:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.22",
+      "document_sha256": "3d6815543e18b46e5d6b8312f8d6e43fdf205940bed16f9c539cc6fc8cb35e4e",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.22:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.23",
+      "document_sha256": "d9a6dd5eec156e3cf40de353499c6db1746daa81726ad9fae01deda27e9c59d7",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.23:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.24",
+      "document_sha256": "efcc201d07bdf5195df3cc305ce0b06f8f7bc52aee187bd1bff01074833fc53e",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.24:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.25",
+      "document_sha256": "48a8b2c02f7dd264d001292708d9e6df4b4ac9792315bc5768ad384b8596d55a",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.25:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.26",
+      "document_sha256": "07b042f12b4330de462fae486b495a798ef95c895ca3c4b152f243b0e2ed128a",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.26:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.27",
+      "document_sha256": "e951fc0ada16c7d64db6bc2b4c7099667b9f0724b644b55a9af87346aed85f9a",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.27:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.28",
+      "document_sha256": "ee1c62bb7ebb2b7e7ad0556956fa509de1f1cd80de70024c43ecf3edc39392c4",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.28:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.29",
+      "document_sha256": "c9c388439bb309455ad17210c4a959d73c4aa19f1fb2abe33559c273ffc91a2b",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.29:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.2",
+      "document_sha256": "e6cde12399af08c9bb99d3d491369bb58a01fd1fc88287802573b6534cbf11e3",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.2:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.30",
+      "document_sha256": "166773611d1e248667d2c21ffb08d3948f41ee1bf60c1aa4971a4b0a33a98f4d",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.30:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.31",
+      "document_sha256": "58ed563f0cee2a7ebcd3521e7a546fcd3322bff31e63f00b1ffa2a9802e47ed8",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.31:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.33",
+      "document_sha256": "eb0935795d3a8023b7c5a4ec6c0cf97bda1836eba2a0ebce5583bc9a27e6fabf",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.33:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.34",
+      "document_sha256": "e678fa6f372aef25a364936bf4ac891f6d5270e1fc54ba8a2598baaeb1425aa2",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.34:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.35",
+      "document_sha256": "474ede69fb7cab52c13a34aca23658ebce57b548662f4e785f4c86b689290bf6",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.35:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.36",
+      "document_sha256": "147ba90219aa48d90d04a984d0b1b2c45a354a8c9cdb2168d40439166bbe2319",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.36:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.37",
+      "document_sha256": "cff65cc27e7d1f92495d12949a85415f201abdff2f53bc6dcb20f98bdfbcd1e8",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.37:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.38",
+      "document_sha256": "279d60ea895c5e653a59880c94fad05c23be1205d089bf2158bb963d65caa113",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.38:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.39",
+      "document_sha256": "4083832ff2d682933d2d7aff78c908ca833a9e73dfea1ae44f9bb275ac3fc77c",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.39:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.3",
+      "document_sha256": "6b199770880afa02d21967d214224c6d279c469254e986497eed4aa040d3f210",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.3:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.40",
+      "document_sha256": "24ba123f9fcc780b8011070c2175a66c1b51c646ced3d9332754dae7ef167c86",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.40:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.4",
+      "document_sha256": "2d48df321d157b862f366f306c1d14f2f61a0cad9a92a947f07dcc1a9e5e47c4",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.4:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.6",
+      "document_sha256": "e067e908d32fc494b00fa9ab2f58e9d0eee0c0f33d92c9176f01a3fa5cf4cb36",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.6:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.7",
+      "document_sha256": "2392487bdd3f311938f47c8866c02c500a79cb38069454688601f736f7740215",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.7:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 201.8",
+      "document_sha256": "01ea20dad2c9d2176fbc25d4fa193aea3679f0719bc01f85f94cdb44655666f7",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:201.8:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.10",
+      "document_sha256": "fd96a85ec07143c2c4116a343c2579cdf28c2fcd79bbf649535c8164f86c59c8",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.10:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.11",
+      "document_sha256": "f80bee9c8d3f723fa83c13129a0cb5f73db071a711163388c9ae732ae28a4cf5",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.11:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.12",
+      "document_sha256": "9d6fb41b5133699f0f46c3e2e57f81e8f74b41cfafff561f16c5c82278cda37e",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.12:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.13",
+      "document_sha256": "174b13619b90929f43335502da103cfe0e483770975698e3370eb8af06ebe2a8",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.13:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.16",
+      "document_sha256": "01b515f97e9ecff3b8e4633a49586b954dd98f05ca98c7037dae3e48b100d90b",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.16:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.17",
+      "document_sha256": "87f07cc4064d21deaf20603e9800fdeb66854d42ca49468a22909fcdf3b0590a",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.17:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.18",
+      "document_sha256": "e8272be2189cf5ace6a416aa5e9e387c59fe08799d288983fa7dd92d010bb384",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.18:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.19",
+      "document_sha256": "1525fef141822e39502dd3ec7c33e077d7fdaa39090193912ba6c38b1b7f9179",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.19:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.1",
+      "document_sha256": "4f4df7d4e9d583271179d1276d792a9075bc6a51e1bacd464b892194c40f8ecc",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.1:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.21",
+      "document_sha256": "e605fffc00f202c15363f67cd5c281152d09abad117dbc9b16c1572a731ed6bd",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.21:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.22",
+      "document_sha256": "46163629838d26ec8fb14c56554d1287a3d11a4b55e3b76552b5af3c7a3edfbf",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.22:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.23",
+      "document_sha256": "cc4678cdf55f6f83c27b56fde2990cc086a2c3aecc08e3fb9611f2145323f099",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.23:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.24",
+      "document_sha256": "bb400737a98b9355d56a44131fbc58c640d40e961a0a4f5a83319f22ca0096b3",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.24:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.2",
+      "document_sha256": "961b560779781f22deb6509fba68e2269eb22783d8c3f692d164b68824867d16",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.2:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.5",
+      "document_sha256": "ab22a30b8d1909874096552a02f42e92423243e769323225ed4afce5fccbb0b6",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.5:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 202.6",
+      "document_sha256": "829ef620091e4b950bc174bafa87dc428c170469940071c2a0f31743775db7af",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:202.6:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.1",
+      "document_sha256": "12cad0b0632c73b1764b38d5989ebfac24bb02f519d1bd2df57fa0ca9a7e237c",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.1:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.2",
+      "document_sha256": "2995801db85283265506de815064a08ecfdeecfba370fda80d4c692b65f1fc4e",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.2:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.3",
+      "document_sha256": "36db84d573ef82cfe385445c26de40b8d11577f1c1c9442e677603bb031ccd41",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.3:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.4",
+      "document_sha256": "a9c4f639f2ba4a86203ccf38f76ee9e53437a124eda7bd4cdbf8056fdf3040cc",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.4:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.5",
+      "document_sha256": "62c964445abf67573a573913b30ba52257b6e585361759b5f9a07886d52d5769",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.5:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.6",
+      "document_sha256": "081e9454bf1824627a54004def50aeb887dc5322367e75a2b3a5b95b95f01461",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.6:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 211.7",
+      "document_sha256": "1aca0a8b3f164b9a88eba2ce489bf361f1aebd233c14e08d3ce4b2d82794a054",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:211.7:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 350.1",
+      "document_sha256": "07a6c420cc8326e430b90f1295e96777b72e5737b6a23f1b3739d0b94e7d41b1",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:350.1:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.10",
+      "document_sha256": "3cbe1a0a5cdcb4930db28116bdc54452ed7716f7b7c7d6b4a0ea31f5ecc21f7f",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.10:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.11",
+      "document_sha256": "480d33dc8ab9f29df503e9d43e3a96c243b135e2ee3d8d79f56e978f9b63d6af",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.11:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.1",
+      "document_sha256": "de215547b98e87a274bcd43f2f03b9149552bd2213ac496bedfaa25b30bf9ccf",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.1:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.2",
+      "document_sha256": "4d3c4c7ca3e0c26dec321ba8788ba3a4dffc62b3a7b7032e4e584d36913a04c5",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.2:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.4",
+      "document_sha256": "cd8259a304553f15ab0466ad7d016e316163f0fa4ccef8fed9710177c7131e11",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.4:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.5",
+      "document_sha256": "23680960c6b98fc34dbefcf0c1046b24aa246dcc2de746da333ebb7175ce4934",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.5:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.6",
+      "document_sha256": "422d74c3636f41e033680cb0580b3cb68529cb910b6215ec4d6cde8563fe0b90",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.6:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.7",
+      "document_sha256": "e9bc3c69e560bf01c3f73081aad1da5ba279f25d5812813e07f4a60167e7971e",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.7:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.8",
+      "document_sha256": "fbbd8eafbac1b5ac7d9484b9eb62c9ba5f3b3b747f19ffde3936022b0b97d6a5",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.8:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 381.9",
+      "document_sha256": "d00000a285e0616ad87f44c6f490c973aaa3d94c55a81bec997132f4f2258472",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:381.9:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 386.1",
+      "document_sha256": "c4b119cbc916c4a2cba4b85edfa0180718a843eda9fee12918f199ddfc7ef225",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:386.1:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 386.2",
+      "document_sha256": "3411db1f2427ac4c87a229c51ba40c000f27b6a1cc0411525a2bd1d615e1f569",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "train",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:386.2:2024",
+      "split": "train",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 301.1",
+      "document_sha256": "d779e78e105cdc83e419d1c95e16b92962af50e9ec5fc4221a77c24904c71ec4",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:301.1:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 301.2",
+      "document_sha256": "59bd654d4398edee7a6e9b3613347ed45115f12c2aee4b2976da23d9a048b0f0",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:301.2:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.1",
+      "document_sha256": "c40728fb8d2c4ac9fff808c87232da698ad92b1a09fb84a11ee99eb863e65faf",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.1:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.20",
+      "document_sha256": "819a5cdce45fca917590b9e074961f781e28bf393b62b94e7b0e6ce6fd0b94ce",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.20:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.21",
+      "document_sha256": "51850d38cf176992fc7bcbe5d9ca29f07ecc251ed636ec95449d28ef62238de1",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.21:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.22",
+      "document_sha256": "772a70d907443d079ba74b82a065dc0ba6a030a625907be570cc28311432fad1",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.22:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.23",
+      "document_sha256": "9e11aa0551f2eb1e4a402ba9809bc120bda7f213c50ae3d8bd57f39ca424df14",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.23:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.2",
+      "document_sha256": "c9e15f5316feafd633efacd17071dd625fc8d9fa15fe99599b9c09df058a9365",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.2:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.30",
+      "document_sha256": "d9823a2c4424c7c753541e700a4e9bbb6b79fb9068fe754fc18f49172ffe109f",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.30:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.31",
+      "document_sha256": "eca2efb599783f9e1c7f1ba2a7c6a53922140a6f70284bfcbff3ad554d0d02ad",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.31:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.32",
+      "document_sha256": "f7480acb74a7bb320f8de6737e0748bca544ba37865db9a0867063d718165cfa",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.32:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.3",
+      "document_sha256": "86655701bd75c7809ed6d055f9af81ef8e48f438920a994eba3cae7bdbcc8847",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.3:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 360.4",
+      "document_sha256": "f71b0e1dbb82c0d49ce745d7935552159686612f203fcb9e191577001e5b29aa",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:360.4:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 387.1",
+      "document_sha256": "4d94219f156aaea130933956c433ba6b3e1e7a014d7863e53e0bdb6a25531499",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:387.1:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "citation": "37 CFR 387.2",
+      "document_sha256": "a859e041eccdaf555c71b27e8aaf718a900a62442b062955ca2290f03bef039c",
+      "eligible_native_label": false,
+      "family": "cfr",
+      "native_feedback": "unavailable",
+      "partition_role": "selection",
+      "record_kind": "natural_source_candidate",
+      "rejection_reasons": [
+        "native_checker_unavailable",
+        "no_trusted_verifier_label",
+        "teacher_proof_feedback_pending"
+      ],
+      "source_record_id": "cfr:37:387.2:2024",
+      "split": "selection",
+      "training_label": "no_trusted_signal"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "n_units": 1913,
+      "record_kind": "locked_split",
+      "rejection_reasons": [
+        "final_test_locked",
+        "ids_not_inspected",
+        "bodies_not_opened"
+      ],
+      "split": "final_test"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "n_units": 38,
+      "record_kind": "unused_split",
+      "rejection_reasons": [
+        "fixed_canary_not_used_for_t3_training_or_threshold_selection"
+      ],
+      "split": "fixed_canary"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-SAFE-Q1",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-UNSAFE-Q1",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-TIMELY-AUDIT",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-DELAYED-AUDIT",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-INCOMPLETE-WINDOW",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-WRONG-TENANT",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-INCONSISTENT",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-NAME-EXTRACT",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PCT-DEONTIC-NOT-Q1",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "TDFOL-OBLIGATION-ERASURE",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "TDFOL-ALWAYS-ERASURE",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "TDFOL-UNTIL-ERASURE",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "NATIVE-LEAN-Q1",
+      "constructed_control": true,
+      "native_feedback": "unavailable",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "UNSUPPORTED-CTD",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "UNSUPPORTED-OG-GO",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "case_id": "PROP1-CONDITIONAL",
+      "constructed_control": true,
+      "native_feedback": "not_native_kernel",
+      "record_kind": "af015_constructed_bridge",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_from_permitted_natural_partition",
+        "not_native_checked_proof"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "record": {
+        "backend_outcomes": {
+          "lean": "skipped",
+          "z3": "skipped"
+        },
+        "deterministic_trusted": true,
+        "eligible_for_training": true,
+        "kernel_reconstruction": {
+          "attempted": false,
+          "checker": "",
+          "receipt_id": "",
+          "status": "not_attempted",
+          "verified": false
+        },
+        "legal_ir_view": "deontic.ir",
+        "minimal_failing_contract": null,
+        "obligation_id": "af012-isolation-trusted",
+        "partition": "train",
+        "record_id": "legal-ir-proof-feedback-446cbfd4a486b8f8af4db1d34396bd182a0760ded8f304d31b7462d51bd77715",
+        "repair_label": "exception_scope_projection",
+        "route_availability": {
+          "deterministic_contract": true,
+          "native_lean_reconstruction": false
+        },
+        "route_statuses": {
+          "deterministic_contract": "passed"
+        },
+        "semantic_family": "conditional_normative",
+        "training_label": "kernel_or_deterministic_trusted",
+        "trust_status": "trusted",
+        "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+      },
+      "record_kind": "isolation_contract_probe",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_native_feedback",
+        "isolation_probe_not_t3_label"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "record": {
+        "backend_outcomes": {},
+        "deterministic_trusted": false,
+        "eligible_for_training": true,
+        "kernel_reconstruction": {
+          "attempted": false,
+          "checker": "",
+          "receipt_id": "",
+          "status": "not_attempted",
+          "verified": false
+        },
+        "legal_ir_view": "deontic.ir",
+        "minimal_failing_contract": {
+          "contract_digest": "",
+          "contract_id": "legal-ir-view/deontic-ir/v1",
+          "evidence_ids": [
+            "af012-isolation-contract-evidence"
+          ],
+          "failing_fields": [
+            "formulas.exceptions"
+          ],
+          "failure_code": "missing_exception_scope",
+          "receipt_ids": [
+            "af012-isolation-contract-receipt"
+          ],
+          "verified": true,
+          "verifier": "deterministic_contract_validator"
+        },
+        "obligation_id": "af012-isolation-contract",
+        "partition": "train",
+        "record_id": "legal-ir-proof-feedback-9658633f4ca6a9caa0f8b0f35f5fe5e8f0a89b6d39afcdaca4022fa789b00667",
+        "repair_label": "exception_scope_projection",
+        "route_availability": {
+          "deterministic_contract": true,
+          "native_lean_reconstruction": false
+        },
+        "route_statuses": {},
+        "semantic_family": "conditional_normative",
+        "training_label": "contract_failure",
+        "trust_status": "trusted",
+        "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+      },
+      "record_kind": "isolation_contract_probe",
+      "rejection_reasons": [
+        "constructed_control",
+        "not_native_feedback",
+        "isolation_probe_not_t3_label"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "record": {
+        "backend_outcomes": {},
+        "deterministic_trusted": false,
+        "eligible_for_training": false,
+        "kernel_reconstruction": {
+          "attempted": false,
+          "checker": "",
+          "receipt_id": "",
+          "status": "not_attempted",
+          "verified": false
+        },
+        "legal_ir_view": "deontic.ir",
+        "minimal_failing_contract": null,
+        "obligation_id": "af012-filter-untrusted",
+        "partition": "train",
+        "record_id": "legal-ir-proof-feedback-fead3eed4173bcfa752a92327afa6e4e451739c642e515fdcad6a056dc070084",
+        "repair_label": "none",
+        "route_availability": {
+          "deterministic_contract": false,
+          "native_lean_reconstruction": false
+        },
+        "route_statuses": {},
+        "semantic_family": "conditional_normative",
+        "training_label": "no_trusted_signal",
+        "trust_status": "untrusted",
+        "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+      },
+      "record_kind": "filter_probe",
+      "rejection_reasons": [
+        "untrusted",
+        "no_trusted_signal"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "record": {
+        "backend_outcomes": {},
+        "deterministic_trusted": true,
+        "eligible_for_training": true,
+        "kernel_reconstruction": {
+          "attempted": false,
+          "checker": "",
+          "receipt_id": "",
+          "status": "not_attempted",
+          "verified": false
+        },
+        "legal_ir_view": "deontic.ir",
+        "minimal_failing_contract": null,
+        "obligation_id": "af012-filter-stale",
+        "partition": "train",
+        "record_id": "legal-ir-proof-feedback-fcfa6e302a291703f836f132c887c8cf2e6cf5b2f240ac53f929a61d9717d371",
+        "repair_label": "none",
+        "route_availability": {
+          "deterministic_contract": true
+        },
+        "route_statuses": {
+          "deterministic_contract": "passed"
+        },
+        "semantic_family": "conditional_normative",
+        "training_label": "kernel_or_deterministic_trusted",
+        "trust_status": "trusted",
+        "version_fingerprint": "c21b2a378384f11960f17808219e167fb1812bb0faa884b696b86b13b616b4b5"
+      },
+      "record_kind": "filter_probe",
+      "rejection_reasons": [
+        "version_mismatch"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "record": {
+        "backend_outcomes": {},
+        "deterministic_trusted": true,
+        "eligible_for_training": true,
+        "kernel_reconstruction": {
+          "attempted": false,
+          "checker": "",
+          "receipt_id": "",
+          "status": "not_attempted",
+          "verified": false
+        },
+        "legal_ir_view": "deontic.ir",
+        "minimal_failing_contract": null,
+        "obligation_id": "af012-filter-holdout",
+        "partition": "holdout",
+        "record_id": "legal-ir-proof-feedback-9f0c7acf8b9606046d209277e75652fb2de5ee33beeaa2abd3f2d0ac0f0a057e",
+        "repair_label": "none",
+        "route_availability": {
+          "deterministic_contract": true
+        },
+        "route_statuses": {
+          "deterministic_contract": "passed"
+        },
+        "semantic_family": "conditional_normative",
+        "training_label": "kernel_or_deterministic_trusted",
+        "trust_status": "trusted",
+        "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+      },
+      "record_kind": "filter_probe",
+      "rejection_reasons": [
+        "holdout_partition"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "record": {
+        "backend_outcomes": {},
+        "deterministic_trusted": false,
+        "eligible_for_training": true,
+        "kernel_reconstruction": {
+          "attempted": true,
+          "checker": "lean",
+          "receipt_id": "af012-filter-reconstruction-receipt",
+          "status": "unavailable",
+          "verified": false
+        },
+        "legal_ir_view": "deontic.ir",
+        "minimal_failing_contract": null,
+        "obligation_id": "af012-filter-reconstruction",
+        "partition": "train",
+        "record_id": "legal-ir-proof-feedback-3b13e2b8aff598ff2c7830f82c994180f630234331b6e9c7e313cfe4958ee754",
+        "repair_label": "none",
+        "route_availability": {},
+        "route_statuses": {},
+        "semantic_family": "conditional_normative",
+        "training_label": "reconstruction_failure",
+        "trust_status": "trusted",
+        "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+      },
+      "record_kind": "filter_probe",
+      "rejection_reasons": [
+        "constructed_control",
+        "native_reconstruction_not_verified",
+        "not_admitted_t3_label"
+      ],
+      "split": "constructed_control"
+    },
+    {
+      "admitted_for_t3_training": false,
+      "constructed_control": true,
+      "obligation_id": "af012-isolation-trusted",
+      "record_kind": "filter_probe",
+      "rejection_reasons": [
+        "invalid_content_address",
+        "tampered_payload"
+      ],
+      "split": "constructed_control"
+    }
+  ],
+  "isolation_probes": [
+    {
+      "backend_outcomes": {
+        "lean": "skipped",
+        "z3": "skipped"
+      },
+      "deterministic_trusted": true,
+      "eligible_for_training": true,
+      "kernel_reconstruction": {
+        "attempted": false,
+        "checker": "",
+        "receipt_id": "",
+        "status": "not_attempted",
+        "verified": false
+      },
+      "legal_ir_view": "deontic.ir",
+      "minimal_failing_contract": null,
+      "obligation_id": "af012-isolation-trusted",
+      "partition": "train",
+      "record_id": "legal-ir-proof-feedback-446cbfd4a486b8f8af4db1d34396bd182a0760ded8f304d31b7462d51bd77715",
+      "repair_label": "exception_scope_projection",
+      "route_availability": {
+        "deterministic_contract": true,
+        "native_lean_reconstruction": false
+      },
+      "route_statuses": {
+        "deterministic_contract": "passed"
+      },
+      "semantic_family": "conditional_normative",
+      "training_label": "kernel_or_deterministic_trusted",
+      "trust_status": "trusted",
+      "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+    },
+    {
+      "backend_outcomes": {},
+      "deterministic_trusted": false,
+      "eligible_for_training": true,
+      "kernel_reconstruction": {
+        "attempted": false,
+        "checker": "",
+        "receipt_id": "",
+        "status": "not_attempted",
+        "verified": false
+      },
+      "legal_ir_view": "deontic.ir",
+      "minimal_failing_contract": {
+        "contract_digest": "",
+        "contract_id": "legal-ir-view/deontic-ir/v1",
+        "evidence_ids": [
+          "af012-isolation-contract-evidence"
+        ],
+        "failing_fields": [
+          "formulas.exceptions"
+        ],
+        "failure_code": "missing_exception_scope",
+        "receipt_ids": [
+          "af012-isolation-contract-receipt"
+        ],
+        "verified": true,
+        "verifier": "deterministic_contract_validator"
+      },
+      "obligation_id": "af012-isolation-contract",
+      "partition": "train",
+      "record_id": "legal-ir-proof-feedback-9658633f4ca6a9caa0f8b0f35f5fe5e8f0a89b6d39afcdaca4022fa789b00667",
+      "repair_label": "exception_scope_projection",
+      "route_availability": {
+        "deterministic_contract": true,
+        "native_lean_reconstruction": false
+      },
+      "route_statuses": {},
+      "semantic_family": "conditional_normative",
+      "training_label": "contract_failure",
+      "trust_status": "trusted",
+      "version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474"
+    }
+  ],
+  "matched_budget": {
+    "common_envelope": {
+      "current_resource_availability": "unavailable_pending_AF-003_preflight_and_shared_scheduler_reservation",
+      "exhaustion": "partial_or_unrun; retain attempts/costs and narrow only affected claims",
+      "gpu_or_model_service_slots": 1,
+      "learned_condition_seeds": 3,
+      "memory_gib": 16,
+      "natural_final_test_units_per_condition": 100,
+      "per_item_search_validation_minutes": 10,
+      "per_seed_wall_minutes": 30
+    },
+    "learned_condition_seeds": [
+      104729,
+      130363,
+      155921
+    ],
+    "matched_primary_envelope": true,
+    "reason": "T3 uses the same three-seed common envelope as T2; extra checker cost was unused because sealed-PATH native checkers are absent.",
+    "t2_budget": "Three fixed seeds/common envelope; checkpoint/config/parameter-change receipts required.",
+    "t3_budget": "Three seeds/common envelope plus proof-feedback/checker cost.",
+    "t3_extra_checker_cost_consumed": false
+  },
+  "not_claimed": [
+    "T3 training gain versus T2",
+    "native checked useful-proof coverage",
+    "predicted proof-head success as certification",
+    "calibration on ineligible or constructed labels as a T3 metric",
+    "final-test proof-head generalization"
+  ],
+  "permitted_partitions": {
+    "final_test": {
+      "bodies_opened": false,
+      "ids_inspected": false,
+      "n_units": 1913,
+      "used_for": "locked"
+    },
+    "fixed_canary": {
+      "n_units": 38,
+      "used_for": "unused"
+    },
+    "selection": {
+      "n_units": 15,
+      "used_for": "candidate_inventory_eval_split"
+    },
+    "train": {
+      "n_units": 69,
+      "used_for": "candidate_inventory"
+    }
+  },
+  "pinned_version_fingerprint": "52987e4eb9ef5918f2d2e68e310e70e3e9996cc548f996ebf6ebc1db9edfe474",
+  "pinned_versions": {
+    "compiler_version": "intent-formalization-compiler/v1",
+    "contract_registry_version": "legal-ir-view-contract-registry-v1",
+    "lean_toolchain_version": "sealed-path-unavailable",
+    "obligation_schema_version": "legal-ir-proof-obligation-v1",
+    "premise_library_version": "legal-ir-premise-library-v1",
+    "proof_router_version": "legal-ir-proof-router-v1",
+    "reconstruction_schema_version": "legal-ir-hammer-reconstruction-receipt-v1",
+    "repair_taxonomy_version": "legal-ir-repair-labels-v1",
+    "solver_toolchain_version": "sealed-path-unavailable",
+    "theorem_registry_version": "autoformalization-theorem-registry/v1",
+    "translation_schema_version": "legal-ir-hammer-translation-v1"
+  },
+  "schema": "autoformalization-proof-feedback-manifest/v1",
+  "t3_outcome": {
+    "native_checker_usable": false,
+    "reason": "Sealed PATH has no lean/z3/cvc5/other native checkers; teacher proof_feedback records=0; no version-matched native kernel labels exist on the permitted train partition. T3 is not trained and is not certified from predicted proof-head success or constructed isolation probes.",
+    "scope": "limited_scope_unrun_missing_native_feedback",
+    "status": "unrun",
+    "teacher_proof_feedback": {
+      "records": 0,
+      "status": "pending_actual_checker_feedback_task"
+    }
+  },
+  "task_id": "AF-012"
+}

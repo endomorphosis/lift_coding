@@ -1,0 +1,47 @@
+{
+  "elapsed_seconds": 0.895,
+  "environment": {
+    "any_native_checker_usable": false,
+    "binaries": {
+      "coqc": null,
+      "cvc5": null,
+      "elan": null,
+      "eprover": null,
+      "isabelle": null,
+      "lake": null,
+      "lean": null,
+      "vampire": null,
+      "z3": null
+    },
+    "home": "/tmp/ipfs-accelerate-validation-home-af012-ay9fen1h",
+    "home_is_validation_private": true,
+    "host_elan_or_local_bin_ignored": true,
+    "imports": {
+      "faiss": {
+        "error": "ModuleNotFoundError: No module named 'faiss'",
+        "ok": false
+      },
+      "multiformats": {
+        "error": "ModuleNotFoundError: No module named 'multiformats'",
+        "ok": false
+      },
+      "numpy": {
+        "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+        "ok": false
+      },
+      "torch": {
+        "error": "ModuleNotFoundError: No module named 'torch'",
+        "ok": false
+      },
+      "transformers": {
+        "error": "ModuleNotFoundError: No module named 'transformers'",
+        "ok": false
+      }
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "isolation_held": true,
+  "t3_scope": "limited_scope_unrun_missing_native_feedback"
+}

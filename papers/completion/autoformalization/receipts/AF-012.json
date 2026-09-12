@@ -1,0 +1,185 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-012",
+  "status": "complete",
+  "completed_at": "2026-09-12T07:06:12.000000+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-proof-feedback-manifest/v1",
+      "result_schema": "autoformalization-proof-head-result/v1",
+      "isolation_schema": "autoformalization-proof-head-isolation/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py",
+      "sha256": "2b27b8e1961b242ebb07f496cfc328a5fa1e91e16d3615cbbf36e11b2815783d",
+      "standard_library_plus_autoencoder": true,
+      "note": "T3 training is attempted from matched AF-011 T2 checkpoints with AdaptiveModalAutoencoder isolated heads. Isolation probes are constructed controls and are not admitted T3 labels."
+    },
+    "repository_tree_id": "5a0069c626244d7a993c12ceb3b1fda56186a1b1",
+    "ipfs_datasets_head": "76a34bbfa148cf2fe25716f06c9ce49c9af10e0f",
+    "imported": {
+      "modal_autoencoder.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+        "sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+        "imported": true,
+        "compute_backend": "python",
+        "note": "AdaptiveModalAutoencoder python backend; proof-auxiliary heads trained only from LegalIRProofFeedbackRecord objects."
+      },
+      "legal_ir_proof_feedback.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+        "sha256": "764eec1332e5af7a1991385e89068c88fd51861f7ea5e52ce472da2f30119737",
+        "imported": true,
+        "note": "Versioned source-free proof-feedback records; untrusted, holdout, stale, duplicate, and invalid payloads are rejected."
+      }
+    },
+    "inspected_not_imported": {
+      "modal_autoencoder_cuda.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+        "sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+        "imported": false,
+        "note": "packed CUDA proof updates require Torch; sealed PATH import is unavailable."
+      },
+      "test_modal_autoencoder_proof_heads.py": {
+        "path": "external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+        "sha256": "849a6082e37ba3392686390ee523439979a253a8b73020baa213f23c1631dfb9",
+        "imported": false,
+        "note": "Isolation, version-mismatch, holdout, duplicate, and untrusted-skip contracts reused as the live filter/isolation probes."
+      },
+      "test_modal_autoencoder_trusted_feature_bus.py": {
+        "path": "external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_trusted_feature_bus.py",
+        "sha256": "92366ecd8d9cecd93d75933251cdaed6c48c8f2125e6c234aa9efba11e1192fc",
+        "imported": false,
+        "note": "Trusted feature-bus tests inspected; T4 consumer activation remains AF-013."
+      }
+    },
+    "frozen_inputs": {
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+      "train_sources_sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532",
+      "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c"
+    },
+    "empirical_execution": "sealed-PATH isolation probes on three matched T2 checkpoints; T3 training unrun because native checkers and eligible native labels are absent"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/capability_probe.json": "2da2a27ab2e5c37593d606e64b8cfff0d2ddda2481d4c11572f9d613baf03017",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/check_outputs.py": "986a2eefce20285eca6ca6dffb53576d090658198479d63db3790c74cc57e3e3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/data/proof_feedback_manifest.json": "fc86ebaa0f9c85895b92e8b1a21d5d15f48d19cf4fe8668c6b644218bc7538f2",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/evidence/proof_head_isolation.json": "5ab25471b86dfbb37fc39ff20223b0ada2b72065fcac76bc4f9b2413f7c7507d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.meta.json": "ecb9834df93b7f1cb8c7ebeff7adb668ecacc938b89f9ea522c90d02dad38147",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stdout.log": "6b76d300715b64cb8f10dc763b837e9188f8d2bdaba5e2af16e4bd23fbac5c35",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/run.meta.json": "be8f067aac95d15ea1e33fedfb98cdcb7ed1926536af4b6e74a59f1086fc8f94",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/run.stderr.log": "7a7aa51d0ea044379fe9841a9981404c5cfaccd5c2947bec422e5a4ae0fd0e66",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/run.stdout.log": "3123fa98f2007fbc453470641a8fc692020c334a57cccb56b06ea4ac5b3a4c1c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/run_sealed.py": "afd54b2ece279f3f1362fd7007f891adfa99f6abafedaa3b91c4ec836e9e609d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py": "2b27b8e1961b242ebb07f496cfc328a5fa1e91e16d3615cbbf36e11b2815783d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/runs/proof_heads/results.jsonl": "b5f27d956dcd3dd8846f986ca5b5c9c2dbef68bd598c96de81dfb7409aefada5"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/data/proof_feedback_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-012/data/proof_feedback_manifest.json",
+    "papers/completion/autoformalization/runs/proof_heads/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-012/runs/proof_heads/results.jsonl",
+    "papers/completion/autoformalization/evidence/proof_head_isolation.json": "papers/completion/autoformalization/receipts/snapshots/AF-012/evidence/proof_head_isolation.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Proof feedback never changes protected primary representation/anti-copy state under the declared isolation contract.",
+      "status": "met",
+      "explanation": "Each AF-011 T2 seed checkpoint (104729, 130363, 155921) was restored and trained with constructed isolation-contract probes through AdaptiveModalAutoencoder.train_proof_auxiliary_heads. Auxiliary head logits changed while the protected fingerprint and explicit primary/anti-copy fields (decoded_embeddings, family_logits, feature_embedding_weights, feature_family_logits, legal_ir_view_logits, semantic/compiler weights) stayed identical. objective_isolation reports proof_loss_weight_in_primary_objective=0.0, separate_parameters=true, and protected_parameters_unchanged=true. Isolation probes are constructed controls and are not admitted T3 labels.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/evidence/proof_head_isolation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/runs/proof_heads/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Calibration and routing metrics use actual eligible labels and matched route budgets, not predicted proof success as certification.",
+      "status": "met",
+      "explanation": "T3 calibration_error, route_value, and native_checked_useful_proof_coverage are null because eligible_native_label_count is 0. The calibration numerator is restricted to actual eligible native or version-matched verifier labels. T3 vs T2 uses the frozen three-seed common envelope; extra checker cost was unused. predicted_proof_success_used_as_certification is false on every result row. Isolation-probe calibration is retained only as a constructed diagnostic and is excluded from T3 certification. No row counts as a native checked proof or a claim-admissible table result.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/data/proof_feedback_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/runs/proof_heads/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/evidence/proof_head_isolation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Missing native feedback or insufficient labels yields a documented unrun/limited-scope T3 outcome.",
+      "status": "met",
+      "explanation": "Sealed-PATH probes report lean, lake, elan, z3, cvc5, vampire, eprover, coqc, and isabelle unavailable. Teacher proof_feedback.records is 0. All 69 train and 15 selection natural sources were inventoried and rejected for native_checker_unavailable and no_trusted_verifier_label. Admitted T3 training records are empty; each seed attempt has applied_count=0, execution_status=unavailable, result_kind=no_run. T3 scope is limited_scope_unrun_missing_native_feedback. Final-test identities/bodies were not opened. Filter accounting records untrusted, version-mismatch, holdout, invalid, and duplicate skips. No T3-versus-T2 training gain is claimed.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/data/proof_feedback_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/runs/proof_heads/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/capability_probe.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/run.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af012-ay9fen1h",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "PYTHONPATH=external/ipfs_datasets",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/run.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/run.stderr.log",
+      "started_at": "2026-09-12T07:05:29.518665+00:00",
+      "finished_at": "2026-09-12T07:05:30.488280+00:00",
+      "execution_kind": "sealed-PATH T3 proof-feedback admission, matched T2 isolation probes, and limited-scope unrun accounting"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af012-ay9fen1h",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "PYTHONPATH=external/ipfs_datasets",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-012/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-012/check_outputs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-012/logs/check_outputs.stderr.log",
+      "started_at": "2026-09-12T07:05:30.488969+00:00",
+      "finished_at": "2026-09-12T07:05:30.525595+00:00",
+      "execution_kind": "isolation, eligible-label calibration/routing, and unrun/limited-scope T3 checks"
+    }
+  ],
+  "limitations": [
+    "Torch, NumPy, MiniLM, FAISS, and native Lean/Z3/CVC5 binaries are unavailable on the sealed validation PATH.",
+    "Host AF-003 ~/.elan Lean and ~/.local/bin solvers are out of validation scope and were not used.",
+    "Teacher proof_feedback.records is 0; no native kernel-trusted labels exist on the AF-004 train partition.",
+    "Isolation-contract probes are constructed controls. They demonstrate protected-parameter isolation and are not T3 certification, native proof coverage, or a training gain.",
+    "T3 calibration, route value, and native checked useful-proof coverage remain null/unmeasured, not zeros.",
+    "Independent AF-005 gold is pending; source-facet fidelity is unmeasured.",
+    "Final-test identities and bodies were not opened.",
+    "No T3-versus-T2 empirical improvement is claimed.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Admitted verifier-feedback inventory over 69 train and 15 selection CFR units with pinned compiler/checker versions; isolated-head contract demonstrated on matched T2 checkpoints; T3 empirical training documented as limited-scope unrun because native feedback and eligible labels are absent."
+}
