@@ -1,0 +1,55 @@
+{
+  "arms": {
+    "A": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "B": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "C": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "D": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "E": {
+      "execution_status": "unavailable",
+      "measured_credit": false,
+      "preprocessing_charged": false,
+      "result_kind": "no_run"
+    }
+  },
+  "config_sha256": "5f6706bd888c86edc93de9643661137a9ea536b957cbec6e55a5f61e698396f8",
+  "failures": [],
+  "independent_native_checker": {
+    "explicit_failure": true,
+    "receipts": 3,
+    "success": true
+  },
+  "model_call": {
+    "elapsed_ms": 10315.266,
+    "execution_status": "measured",
+    "failures": [],
+    "receipt_sha256": "83c948ff60c2994346177ae574819a75c1c7778be675e8b6eecc4614e334774d",
+    "response_id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+    "served_model": "grok-4.6"
+  },
+  "observed_at": "2026-09-12T06:11:10.605228+00:00",
+  "passed": true,
+  "review_binding_sha256": "5474f9edc5e55ac321fac27ff34fe392fd879af4f0aac2fae9dc02d8f077a6a8",
+  "schema": "autoformalization-runtime-qualification/v1",
+  "table6_cells_measured": 0,
+  "task_id": "AF-027"
+}

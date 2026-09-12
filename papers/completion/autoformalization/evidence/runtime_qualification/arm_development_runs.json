@@ -1,0 +1,574 @@
+{
+  "any_performance_claim_admitted": false,
+  "arms": [
+    {
+      "arm": "A",
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "checker_id": "AF-010-shared-target-checker/v1",
+      "claim_admissible": false,
+      "development_only": true,
+      "execution_status": "measured",
+      "feature_access": [
+        "declared_vocabulary",
+        "source_text"
+      ],
+      "gateway_failures": [],
+      "gateway_receipt": {
+        "claim_admissible": false,
+        "credential": {
+          "available": true,
+          "expires_at": "2026-09-12T11:51:16.946286488Z",
+          "fingerprint": {
+            "algorithm": "sha256",
+            "length": 882,
+            "prefix_kind": "jwt",
+            "sha256": "5efd63954abfe7aec9c47bf37ce85f313cfa82d0534e6ef3ff539a436e52a157"
+          },
+          "source": "grok_cli_auth.json"
+        },
+        "execution_status": "measured",
+        "failures": [],
+        "fallback": {
+          "blockers": [],
+          "configured": true,
+          "considered": false,
+          "invoked": false,
+          "model": "gpt-5.6-terra",
+          "provider": "codex",
+          "reasoning_effort": "high",
+          "trigger": "independently_verified_primary_quota_exhaustion"
+        },
+        "fixture": false,
+        "gateway_identity_sha256": "f27fa57c8bd57e708e2c308e08578a281f706ad32cdab1c2b035adbd701376fa",
+        "http": {
+          "ok": true,
+          "response_headers": {
+            "CF-RAY": "a39cc0ad0b369b19-PDX",
+            "Connection": "close",
+            "Content-Length": "989",
+            "Content-Type": "application/json",
+            "Date": "Sat, 12 Sep 2026 06:11:09 GMT",
+            "Server": "cloudflare",
+            "Strict-Transport-Security": "max-age=31536000",
+            "access-control-allow-origin": "*",
+            "access-control-expose-headers": "*",
+            "cf-cache-status": "DYNAMIC",
+            "set-cookie": "redacted",
+            "traceparent": "00-b4ad4b10dcd6228b497360a63307277e-6a68c22d0000b46d-01",
+            "vary": "origin, access-control-request-method, access-control-request-headers",
+            "x-data-retention": "general",
+            "x-metrics-e2e-ms": "5221.5",
+            "x-metrics-mean-itl-ms": "15.2",
+            "x-metrics-ttft-ms": "320.7",
+            "x-ratelimit-limit-requests": "8300",
+            "x-ratelimit-limit-tokens": "53000000",
+            "x-ratelimit-remaining-requests": "8300",
+            "x-ratelimit-remaining-tokens": "53000000",
+            "x-request-id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+            "x-zero-data-retention": "false"
+          },
+          "status": 200,
+          "url": "https://api.x.ai/v1/chat/completions"
+        },
+        "output_sha256": "fb52b06935c4a867a2c17dc3e3784f417f49b2927ee47d99dcf5446964ab9ed8",
+        "output_text": "variable (Protected Approved Write : Prop)\ntheorem AF027_dev_q1\n    (guard : Protected → ¬ Approved → ¬ Write)\n    (hP : Protected) (hA : ¬ Approved) : ¬ Write :=\n  guard hP hA",
+        "primary": {
+          "base_url": "https://api.x.ai/v1",
+          "provider": "grok",
+          "requested_model": "grok-4.6"
+        },
+        "prompt_sha256": "1d9b23b293a4d99932c23291242f90d2dad9d573c0c13e950beb3d7f2091fec8",
+        "provider_attempted": "grok",
+        "purpose": "development_model_to_target",
+        "quota_exhausted": false,
+        "raw_response_excerpt": "{\"id\":\"f4e6a0fe-afca-9e0b-9cdf-9f45402c4934\",\"object\":\"chat.completion\",\"created\":1789193464,\"model\":\"grok-4.6\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"variable (Protected Approved Write : Prop)\\ntheorem AF027_dev_q1\\n    (guard : Protected → ¬ Approved → ¬ Write)\\n    (hP : Protected) (hA : ¬ Approved) : ¬ Write :=\\n  guard hP hA\",\"reasoning_content\":\"The user wants me to formalize a guarded-write law as Lean 4. The law is: if Protected is true and Approved is false, then Write is false.\\n\",\"refusal\":null},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":821,\"completion_tokens\":54,\"total_tokens\":1132,\"prompt_tokens_details\":{\"text_tokens\":821,\"audio_tokens\":0,\"image_tokens\":0,\"cached_tokens\":512},\"completion_tokens_details\":{\"reasoning_tokens\":257,\"audio_tokens\":0,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0},\"num_sources_used\":0,\"cost_in_usd_ticks\":9316000},\"system_fingerprint\":\"fp_e41c6060b2628547\",\"service_tier\":\"default\"}",
+        "receipt_sha256": "83c948ff60c2994346177ae574819a75c1c7778be675e8b6eecc4614e334774d",
+        "request_digest": "ae22f01c8598c529cb58b12b04dee9ebe12fd74ada2b8c9cf137fd526866f8c2",
+        "requested_model": "grok-4.6",
+        "result_kind": "bounded_observation",
+        "schema": "autoformalization-scientific-gateway-receipt/v1",
+        "scope": "development_qualification_before_final_freeze",
+        "served_identity": {
+          "created": 1789193464,
+          "object": "chat.completion",
+          "provider": "grok",
+          "requested_model": "grok-4.6",
+          "response_id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+          "served_model": "grok-4.6",
+          "service_tier": "default",
+          "system_fingerprint": "fp_e41c6060b2628547"
+        },
+        "source_id": "AF027-DEV-Q1-protected-write",
+        "source_sha256": "1d9b23b293a4d99932c23291242f90d2dad9d573c0c13e950beb3d7f2091fec8",
+        "split": "constructed_control",
+        "synthetic_success": false,
+        "task_id": "AF-027",
+        "timing": {
+          "elapsed_ms": 10315.266,
+          "finished_at": "2026-09-12T06:11:09.112034+00:00",
+          "started_at": "2026-09-12T06:10:58.796779+00:00",
+          "timeout_seconds": 90
+        },
+        "unconditional_unavailable": false,
+        "usage": {
+          "completion_tokens": 54,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 257,
+            "rejected_prediction_tokens": 0
+          },
+          "cost_in_usd_ticks": 9316000,
+          "num_sources_used": 0,
+          "prompt_tokens": 821,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 512,
+            "image_tokens": 0,
+            "text_tokens": 821
+          },
+          "total_tokens": 1132
+        },
+        "versions": {
+          "fallback_model": "gpt-5.6-terra",
+          "gateway": "autoformalization-scientific-gateway/v1",
+          "primary_model_requested": "grok-4.6",
+          "python": "3.12.3",
+          "receipt": "autoformalization-scientific-gateway-receipt/v1"
+        }
+      },
+      "gateway_receipt_sha256": "83c948ff60c2994346177ae574819a75c1c7778be675e8b6eecc4614e334774d",
+      "identities": {
+        "arm": "A",
+        "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_a",
+        "request_digest": "7ed4f219d75f489b8e4c83aaddfc3c43871e895f23bc4c1b4ff808acfebe9828",
+        "response_id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+        "served_model": "grok-4.6",
+        "source_id": "AF027-DEV-Q1-protected-write"
+      },
+      "isolation": "direct-model oracle only; no compiler, bridge, or advice access",
+      "measured_credit": false,
+      "native_checker": {
+        "argv": [
+          "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+          "/tmp/af027-lean-j55931y5/target.lean"
+        ],
+        "binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "checker": "lean",
+        "elapsed_ms": 494.185,
+        "execution_status": "measured",
+        "exit_code": 0,
+        "failures": [],
+        "finished_at": "2026-09-12T06:11:09.606698+00:00",
+        "independent": true,
+        "purpose": "arm_A_independent_native_checker",
+        "receipt_sha256": "b776b540c36e90413a457c39f867c8921752a8984f6d988f1972ebb51a296590",
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "result_kind": "native_checked_proof",
+        "schema": "autoformalization-native-checker-receipt/v2",
+        "source_sha256": "4b686ad2ae1180c3b63caa68bad3227197c5f631c7f0476cf4cb581771ec55c1",
+        "started_at": "2026-09-12T06:11:09.112524+00:00",
+        "stderr": "",
+        "stdout": ""
+      },
+      "oracle_access": [
+        "direct_model_inference",
+        "independent_facet_adjudication",
+        "target_checker"
+      ],
+      "output_sha256": "fb52b06935c4a867a2c17dc3e3784f417f49b2927ee47d99dcf5446964ab9ed8",
+      "preprocessing": {
+        "budget_item": "per_item_search_validation_minutes",
+        "budget_ms": 600000,
+        "charged": true,
+        "elapsed_ms": 10315.721,
+        "within_budget": true
+      },
+      "result_kind": "native_checked_proof",
+      "result_sha256": "3e619ae6501d20fe574fb8657756682ccf1b0484cfcfafcf9436ebb5232c97f0",
+      "schema": "autoformalization-pipeline-arm-result/v2",
+      "synthetic_success": false,
+      "table6_credit": false,
+      "task_id": "AF-027"
+    },
+    {
+      "arm": "B",
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "checker_id": "AF-010-shared-target-checker/v1",
+      "claim_admissible": false,
+      "compiler": {
+        "ir": {
+          "guidance": "no_guidance",
+          "learned_stages": [],
+          "model_call_count": 0,
+          "producer": "intent-formalization-compiler/v1",
+          "profile": "typed_deontic__no_guidance__no_repair__not_applicable__deterministic",
+          "repair": "no_repair",
+          "rules": [
+            {
+              "action": "file",
+              "actor": "parties",
+              "conditions": [],
+              "exceptions": [],
+              "modality": "O",
+              "object": "royalty_fee",
+              "temporal": []
+            }
+          ],
+          "source_map": [
+            {
+              "end": 120,
+              "rule_index": 0,
+              "start": 0
+            }
+          ],
+          "status": "compiled"
+        },
+        "ir_sha256": "68d5cb4d0db38943667693318aceee4ee840aeabf10a6c4cb4cf0f8abcea904e",
+        "native_import": "multiformats_missing_stdlib_replica",
+        "preprocessing": {
+          "budget_item": "per_item_search_validation_minutes",
+          "budget_ms": 600000,
+          "charged": true,
+          "elapsed_ms": 0.089,
+          "within_budget": true
+        },
+        "vocabulary": {
+          "actions": [
+            "file",
+            "claim",
+            "prescribe"
+          ],
+          "actors": [
+            "party",
+            "parties",
+            "copyright_royalty_board"
+          ],
+          "objects": [
+            "royalty_fee",
+            "claim",
+            "procedure"
+          ],
+          "qualifiers": [
+            "cable",
+            "satellite",
+            "compulsory_license"
+          ]
+        }
+      },
+      "development_only": true,
+      "execution_status": "measured",
+      "feature_access": [
+        "declared_vocabulary",
+        "explicit_abstention",
+        "source_maps",
+        "source_text",
+        "typed_deontic_ir"
+      ],
+      "frozen_canonical_profile": {
+        "constructor_route": "not_applicable",
+        "disables_learned_guidance": true,
+        "disables_repair": true,
+        "fallback_allowed": false,
+        "guidance": "no_guidance",
+        "implementation_representative_arm_id": "typed_deontic__no_guidance__no_repair__not_applicable__deterministic",
+        "learned_stages": [],
+        "model_call_count": 0,
+        "paper_evidence": "p. 3, §3.1: frozen canonical profile disables guidance",
+        "repair": "no_repair",
+        "source_module": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+        "used_by_arms": [
+          "B"
+        ]
+      },
+      "identities": {
+        "arm": "B",
+        "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_b",
+        "ir_sha256": "68d5cb4d0db38943667693318aceee4ee840aeabf10a6c4cb4cf0f8abcea904e",
+        "request_digest": "84f66cadf0d4b64ab30622b2b8f37bbaa5b5f39856378a35c3c026bf9a99d75a",
+        "source_id": "AF027-DEV-selection-cfr-37-360.1-2024"
+      },
+      "isolation": "frozen canonical profile disables guidance and repair",
+      "measured_credit": false,
+      "native_checker": {
+        "argv": [
+          "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+          "/tmp/af027-lean-t_6ukcmh/target.lean"
+        ],
+        "binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "checker": "lean",
+        "elapsed_ms": 341.166,
+        "execution_status": "measured",
+        "exit_code": 0,
+        "failures": [],
+        "finished_at": "2026-09-12T06:11:09.948465+00:00",
+        "independent": true,
+        "purpose": "arm_B_independent_native_checker",
+        "receipt_sha256": "20a0b946bdf7688e9734266437a3a55da08d7349b9bc8637b369d4419ae7fad1",
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "result_kind": "native_checked_proof",
+        "schema": "autoformalization-native-checker-receipt/v2",
+        "source_sha256": "3e485b866debfc1e289f63132d91a91460a73be98becb378781a19a4379a5d48",
+        "started_at": "2026-09-12T06:11:09.607313+00:00",
+        "stderr": "",
+        "stdout": ""
+      },
+      "oracle_access": [
+        "deterministic_bounded_compiler",
+        "independent_facet_adjudication",
+        "target_checker"
+      ],
+      "preprocessing": {
+        "budget_item": "per_item_search_validation_minutes",
+        "budget_ms": 600000,
+        "charged": true,
+        "elapsed_ms": 0.089,
+        "within_budget": true
+      },
+      "result_kind": "native_checked_proof",
+      "result_sha256": "ba5e3aed128ca25b9a4840ee29e522891b1bd0a0c138076a6e9b76a9ae14a752",
+      "schema": "autoformalization-pipeline-arm-result/v2",
+      "synthetic_success": false,
+      "table6_credit": false,
+      "task_id": "AF-027"
+    },
+    {
+      "arm": "C",
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "checker_id": "AF-010-shared-target-checker/v1",
+      "claim_admissible": false,
+      "compiler": {
+        "artifact_sha256": "687aa41a753d348fd805ed2c522e3e587d038aff7b5db19adfa064ed22944346",
+        "native_import": "multiformats_missing_stdlib_replica",
+        "proof_transfer_admitted": false,
+        "view_ids": [
+          "intent-ir-view/facts/v1",
+          "intent-ir-view/intention-deontic/v1",
+          "intent-ir-view/action-hoare/v1",
+          "intent-ir-view/invariant/v1",
+          "intent-ir-view/verification/v1",
+          "intent-ir-view/failure/v1"
+        ]
+      },
+      "development_only": true,
+      "execution_status": "measured",
+      "feature_access": [
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "identities": {
+        "arm": "C",
+        "artifact_sha256": "687aa41a753d348fd805ed2c522e3e587d038aff7b5db19adfa064ed22944346",
+        "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_c",
+        "request_digest": "33d5b5adca637998086d0a61b1ea6a9e6edd3a9cde3ea39bfe71493a8480628f",
+        "source_id": "AF027-DEV-selection-cfr-37-360.1-2024"
+      },
+      "isolation": "typed multiview without D bridge evidence or proof transfer",
+      "measured_credit": false,
+      "native_checker": {
+        "argv": [
+          "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+          "/tmp/af027-lean-q3c6ufd1/target.lean"
+        ],
+        "binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "checker": "lean",
+        "elapsed_ms": 354.979,
+        "execution_status": "measured",
+        "exit_code": 0,
+        "failures": [],
+        "finished_at": "2026-09-12T06:11:10.303948+00:00",
+        "independent": true,
+        "purpose": "arm_C_independent_native_checker",
+        "receipt_sha256": "61dadf9206f0eb1e32914285ab91a62da34263e89f5387e75272e973fdc17cb9",
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "result_kind": "native_checked_proof",
+        "schema": "autoformalization-native-checker-receipt/v2",
+        "source_sha256": "f67f7ece258a10b543c2915c4841b0f5fd5a75f18baa1a4281054767e8417f5c",
+        "started_at": "2026-09-12T06:11:09.948977+00:00",
+        "stderr": "",
+        "stdout": ""
+      },
+      "oracle_access": [
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_compiler_elaborator"
+      ],
+      "preprocessing": {
+        "budget_item": "per_item_search_validation_minutes",
+        "budget_ms": 600000,
+        "charged": true,
+        "elapsed_ms": 0.037,
+        "within_budget": true
+      },
+      "result_kind": "native_checked_proof",
+      "result_sha256": "3f8127a8fc156ba7243d91746895140015f8bf31dd14b510d880701b12eed746",
+      "schema": "autoformalization-pipeline-arm-result/v2",
+      "synthetic_success": false,
+      "table6_credit": false,
+      "task_id": "AF-027"
+    },
+    {
+      "arm": "D",
+      "bridge": {
+        "checked_bridges": true,
+        "premise_assembly": {
+          "compatible": true,
+          "nonvacuous": true,
+          "premises": [
+            "Protected",
+            "Approved",
+            "Write"
+          ]
+        },
+        "preserved_property": "Q1_truth",
+        "schema": "autoformalization-translation-receipt/v1",
+        "status": "accepted_transfer"
+      },
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "checker_id": "AF-010-shared-target-checker/v1",
+      "claim_admissible": false,
+      "development_only": true,
+      "execution_status": "measured",
+      "feature_access": [
+        "checked_property_bridges",
+        "compatible_premise_assembly",
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "identities": {
+        "arm": "D",
+        "bridge_sha256": "1715f84186af2bb81a6d06eac4e0b2868099b9673c1240c7d427f26a3f877417",
+        "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_d",
+        "request_digest": "99c6fe4d6358bb5ab6af710de59ddfaad9833d9dd6df1e8be536e0486ec42ff0",
+        "source_id": "AF027-DEV-Q1-protected-write"
+      },
+      "isolation": "checked bridges and premise assembly; no learned advice",
+      "measured_credit": false,
+      "native_checker": {
+        "argv": [
+          "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+          "/tmp/af027-lean-imkez67m/target.lean"
+        ],
+        "binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "checker": "lean",
+        "elapsed_ms": 275.901,
+        "execution_status": "measured",
+        "exit_code": 0,
+        "failures": [],
+        "finished_at": "2026-09-12T06:11:10.603581+00:00",
+        "independent": true,
+        "purpose": "arm_D_independent_native_checker",
+        "receipt_sha256": "a0785d8473bcc873daaa5a2e601e3505cf4ef4158e327f2564348e48ac92524f",
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "result_kind": "native_checked_proof",
+        "schema": "autoformalization-native-checker-receipt/v2",
+        "source_sha256": "79bc0655a8b201347fa01ea3fbf8b366bd18cdb0dacb7f0448cb111d1f3fe1e5",
+        "started_at": "2026-09-12T06:11:10.327682+00:00",
+        "stderr": "",
+        "stdout": ""
+      },
+      "note": "solver-local UNSAT of the unguarded assignment is not a native checked proof",
+      "oracle_access": [
+        "bridge_obligations",
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_compiler_elaborator",
+        "premise_compatibility_nonvacuity"
+      ],
+      "preprocessing": {
+        "budget_item": "per_item_search_validation_minutes",
+        "budget_ms": 600000,
+        "charged": true,
+        "elapsed_ms": 0.036,
+        "within_budget": true
+      },
+      "result_kind": "native_checked_proof",
+      "result_sha256": "5eedf651d8ccbfa5f82c1e7040603ed05f99f7037311c892ce3138079d780f06",
+      "schema": "autoformalization-pipeline-arm-result/v2",
+      "solver_local": {
+        "argv": [
+          "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+          "-in",
+          "-smt2"
+        ],
+        "binary_sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "checker": "z3",
+        "elapsed_ms": 12.532,
+        "execution_status": "measured",
+        "exit_code": 0,
+        "failures": [],
+        "finished_at": "2026-09-12T06:11:10.316856+00:00",
+        "independent": true,
+        "purpose": "arm_D_independent_solver_local_countermodel",
+        "receipt_sha256": "919ff3e52d67d4bcd388ca692c85fd425460365c8c657e201fee4b05dc308c96",
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+        "result_kind": "solver_local_result",
+        "schema": "autoformalization-native-checker-receipt/v2",
+        "source_sha256": "d5fb0132585a417a6f76c4c3726400a0d04e0a35b09b6f6ee3017ee53e8a3412",
+        "started_at": "2026-09-12T06:11:10.304330+00:00",
+        "stderr": "",
+        "stdout": "sat\n"
+      },
+      "synthetic_success": false,
+      "table6_credit": false,
+      "task_id": "AF-027"
+    },
+    {
+      "arm": "E",
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "checker_id": "AF-010-shared-target-checker/v1",
+      "claim_admissible": false,
+      "execution_status": "unavailable",
+      "feature_access": [
+        "bounded_learned_view_premise_advice",
+        "checked_property_bridges",
+        "compatible_premise_assembly",
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "identities": {
+        "arm": "E",
+        "entry_point": "papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_e",
+        "request_digest": "749df8a715a111cdfa938d4cb103eb0a28bb5285ac62077af1a9d3c2658b33bc",
+        "source_id": "qualify-e"
+      },
+      "isolation": "distinct from D; checker digest pinned to D; advice cannot replace checking",
+      "measured_credit": false,
+      "oracle_access": [
+        "bridge_obligations",
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_checkpoint_advice",
+        "pinned_compiler_elaborator",
+        "premise_compatibility_nonvacuity"
+      ],
+      "result_kind": "no_run",
+      "result_sha256": "014a36838d5476de779f5cc0c856dedf120abeeb70972302ad10f1bb7e884d01",
+      "schema": "autoformalization-pipeline-arm-result/v2",
+      "synthetic_success": false,
+      "table6_credit": false,
+      "task_id": "AF-027",
+      "unavailable_blockers": [
+        "no AF-011 frozen checkpoint under papers/completion/autoformalization/checkpoints",
+        "no AF-013 guidance export receipt",
+        "no AF-013 consumer activation receipt",
+        "teacher_manifest.learned_advice.status=pending_training_and_promotion_tasks",
+        "E remains unavailable until AF-011 and AF-013 complete",
+        "independent source labels pending_AF005_independent_candidate_blind_annotation"
+      ]
+    }
+  ],
+  "observed_at": "2026-09-12T06:11:10.604301+00:00",
+  "schema": "autoformalization-arm-development-runs/v1",
+  "table6_cells_measured": 0,
+  "task_id": "AF-027"
+}

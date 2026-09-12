@@ -1,0 +1,124 @@
+{
+  "claim_admissible": false,
+  "credential": {
+    "available": true,
+    "expires_at": "2026-09-12T11:51:16.946286488Z",
+    "fingerprint": {
+      "algorithm": "sha256",
+      "length": 882,
+      "prefix_kind": "jwt",
+      "sha256": "5efd63954abfe7aec9c47bf37ce85f313cfa82d0534e6ef3ff539a436e52a157"
+    },
+    "source": "grok_cli_auth.json"
+  },
+  "execution_status": "measured",
+  "failures": [],
+  "fallback": {
+    "blockers": [],
+    "configured": true,
+    "considered": false,
+    "invoked": false,
+    "model": "gpt-5.6-terra",
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "trigger": "independently_verified_primary_quota_exhaustion"
+  },
+  "fixture": false,
+  "gateway_identity_sha256": "f27fa57c8bd57e708e2c308e08578a281f706ad32cdab1c2b035adbd701376fa",
+  "http": {
+    "ok": true,
+    "response_headers": {
+      "CF-RAY": "a39cc0ad0b369b19-PDX",
+      "Connection": "close",
+      "Content-Length": "989",
+      "Content-Type": "application/json",
+      "Date": "Sat, 12 Sep 2026 06:11:09 GMT",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000",
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "*",
+      "cf-cache-status": "DYNAMIC",
+      "set-cookie": "redacted",
+      "traceparent": "00-b4ad4b10dcd6228b497360a63307277e-6a68c22d0000b46d-01",
+      "vary": "origin, access-control-request-method, access-control-request-headers",
+      "x-data-retention": "general",
+      "x-metrics-e2e-ms": "5221.5",
+      "x-metrics-mean-itl-ms": "15.2",
+      "x-metrics-ttft-ms": "320.7",
+      "x-ratelimit-limit-requests": "8300",
+      "x-ratelimit-limit-tokens": "53000000",
+      "x-ratelimit-remaining-requests": "8300",
+      "x-ratelimit-remaining-tokens": "53000000",
+      "x-request-id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+      "x-zero-data-retention": "false"
+    },
+    "status": 200,
+    "url": "https://api.x.ai/v1/chat/completions"
+  },
+  "output_sha256": "fb52b06935c4a867a2c17dc3e3784f417f49b2927ee47d99dcf5446964ab9ed8",
+  "output_text": "variable (Protected Approved Write : Prop)\ntheorem AF027_dev_q1\n    (guard : Protected → ¬ Approved → ¬ Write)\n    (hP : Protected) (hA : ¬ Approved) : ¬ Write :=\n  guard hP hA",
+  "primary": {
+    "base_url": "https://api.x.ai/v1",
+    "provider": "grok",
+    "requested_model": "grok-4.6"
+  },
+  "prompt_sha256": "1d9b23b293a4d99932c23291242f90d2dad9d573c0c13e950beb3d7f2091fec8",
+  "provider_attempted": "grok",
+  "purpose": "development_model_to_target",
+  "quota_exhausted": false,
+  "raw_response_excerpt": "{\"id\":\"f4e6a0fe-afca-9e0b-9cdf-9f45402c4934\",\"object\":\"chat.completion\",\"created\":1789193464,\"model\":\"grok-4.6\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"variable (Protected Approved Write : Prop)\\ntheorem AF027_dev_q1\\n    (guard : Protected → ¬ Approved → ¬ Write)\\n    (hP : Protected) (hA : ¬ Approved) : ¬ Write :=\\n  guard hP hA\",\"reasoning_content\":\"The user wants me to formalize a guarded-write law as Lean 4. The law is: if Protected is true and Approved is false, then Write is false.\\n\",\"refusal\":null},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":821,\"completion_tokens\":54,\"total_tokens\":1132,\"prompt_tokens_details\":{\"text_tokens\":821,\"audio_tokens\":0,\"image_tokens\":0,\"cached_tokens\":512},\"completion_tokens_details\":{\"reasoning_tokens\":257,\"audio_tokens\":0,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0},\"num_sources_used\":0,\"cost_in_usd_ticks\":9316000},\"system_fingerprint\":\"fp_e41c6060b2628547\",\"service_tier\":\"default\"}",
+  "receipt_sha256": "83c948ff60c2994346177ae574819a75c1c7778be675e8b6eecc4614e334774d",
+  "request_digest": "ae22f01c8598c529cb58b12b04dee9ebe12fd74ada2b8c9cf137fd526866f8c2",
+  "requested_model": "grok-4.6",
+  "result_kind": "bounded_observation",
+  "schema": "autoformalization-scientific-gateway-receipt/v1",
+  "scope": "development_qualification_before_final_freeze",
+  "served_identity": {
+    "created": 1789193464,
+    "object": "chat.completion",
+    "provider": "grok",
+    "requested_model": "grok-4.6",
+    "response_id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+    "served_model": "grok-4.6",
+    "service_tier": "default",
+    "system_fingerprint": "fp_e41c6060b2628547"
+  },
+  "source_id": "AF027-DEV-Q1-protected-write",
+  "source_sha256": "1d9b23b293a4d99932c23291242f90d2dad9d573c0c13e950beb3d7f2091fec8",
+  "split": "constructed_control",
+  "synthetic_success": false,
+  "task_id": "AF-027",
+  "timing": {
+    "elapsed_ms": 10315.266,
+    "finished_at": "2026-09-12T06:11:09.112034+00:00",
+    "started_at": "2026-09-12T06:10:58.796779+00:00",
+    "timeout_seconds": 90
+  },
+  "unconditional_unavailable": false,
+  "usage": {
+    "completion_tokens": 54,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 257,
+      "rejected_prediction_tokens": 0
+    },
+    "cost_in_usd_ticks": 9316000,
+    "num_sources_used": 0,
+    "prompt_tokens": 821,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 512,
+      "image_tokens": 0,
+      "text_tokens": 821
+    },
+    "total_tokens": 1132
+  },
+  "versions": {
+    "fallback_model": "gpt-5.6-terra",
+    "gateway": "autoformalization-scientific-gateway/v1",
+    "primary_model_requested": "grok-4.6",
+    "python": "3.12.3",
+    "receipt": "autoformalization-scientific-gateway-receipt/v1"
+  }
+}

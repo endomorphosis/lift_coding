@@ -1,0 +1,300 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-027",
+  "status": "complete",
+  "completed_at": "2026-09-12T06:13:31.971394+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3",
+      "version": "Python 3.12.3",
+      "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/"
+    },
+    "torch": {
+      "available": true,
+      "cuda_available": false,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/torch/__init__.py",
+      "name": "torch",
+      "version": "2.13.0+cpu"
+    },
+    "numpy": {
+      "available": true,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/numpy/__init__.py",
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    "native_checkers": {
+      "lean": {
+        "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      "z3": {
+        "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+        "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "version": "Z3 version 4.15.4 - 64 bit"
+      }
+    },
+    "served_model": {
+      "requested": "grok-4.6",
+      "served": "grok-4.6",
+      "response_id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+      "receipt_sha256": "83c948ff60c2994346177ae574819a75c1c7778be675e8b6eecc4614e334774d"
+    },
+    "frozen_inputs": {
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+    },
+    "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+    "prior_af010_receipt": "papers/completion/autoformalization/receipts/AF-010.json",
+    "empirical_execution": "development qualification only; Table 6 unrun; independent human review pending AF-028"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/config/pipeline_arms.json": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_binding_manifest.json": "ff9038c444b79f6ab69d71251025f96443fa0cb1224da0e36783829e436a6122",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_packet_schema.json": "24e3356d0c812bf87601eef683a89e606d7f432175b96885360dfa4446fd4b84",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/pipeline_arms.py": "c758e91551b22436fc088f96e7289e447df0caa702f3f63a2a4fde220d2c6e92",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/qualify_runtime.py": "6f0e459ef570bc37ddd60c978098842a3412557492a61e8a7d2206e773a2c3dd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/review_import.py": "69dcd898e0c0c8c37a3af54ceb6d49acf7d9ff39568f1dbd8fcc0510f33494ef",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/scientific_gateway.py": "76c7a102022a4a07abd421868a16c66ca5a5e3f2d1f82e94a6e057d3cbe22cff",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/human_review_handoff.md": "14d73045e997e4f5a221988dacbe5823d0dd30c0b1b0873c4897cf3ad9b83779",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/arm_development_runs.json": "3593a1103ceb9e10754a6e2bd590e5dc071027fa48e12a90022cc2fc085a01bd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/fail.lean": "3618b6aa031f5a199cf3def39c2e531f6d27fb26aa40e4934bb11d3c778e55d6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/model_target.lean": "4b686ad2ae1180c3b63caa68bad3227197c5f631c7f0476cf4cb581771ec55c1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/ok.lean": "ec5cff08f76e87db00e9d703bc8c50e0dd086ecf635b97f8885119f2c1515424",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/sentinel.smt2": "0081d3444afc92c0d414efa337f83e0c2caf36953f95db8ad534d4f86eccebb7",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/source.json": "baeba336197539e41cf7788fd430111b89dc23202f94a65002b739e51d0af72e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/input_manifest.json": "c2929f21161905cdd05c0965e06c36fb5d3961262a53b2460a722447c65145f8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/isolation_report.json": "b8400d9767b38782cd9b787fb6c9ae6cbee45e59f1c489af3aead4cc0db2e1d0",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.meta.json": "f4f21f0430288c674583861b148928400117536aed0f4038201777b77d71800f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.stdout.log": "ab580d1c93fc8f5c0486c61a4680b37bc6a9bace3bd25f15b81e5a9b727b0a2a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.meta.json": "7a9da834e107b96c205e61f6faf746009f792ae2caec06f9d4af2f44fd7b5317",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.stdout.log": "63f3a59cf0517df25ab3d7e7be467e74c7b1c6f7c8f7bccac12d1ef9eab5a0cd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.meta.json": "a70b536bd6efcc73a6c42722ef27c9ada217fa164e71f8b3837cc489d372388d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stdout.log": "ccb672d72826c19c20040f1d5d4b9fc749860b5ad6732dcd5c320cba4681d1ca",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.meta.json": "ccc5e3a3bd2f736598b5cb53fc082bd25657a2edcc10ab0b43d966dd08bffc92",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stdout.log": "fd8505cdb58401c02d28f05a2292e29cd5d84c236c234c8023fa3ea447edf0c1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.meta.json": "0db5f580127c4454c66d0faacf8d4ed81a636fd87e79378ae095e64bf715318d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stdout.log": "97b7fbac4a582c803e249c906d72fcff26563a42a39187015e820ff4ba8efb13",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.meta.json": "121e7074e6505fdba77686742297a0269c7119ab2c901dc8d5d1841b0ddc917a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stdout.log": "f227dabbf54678832d23a66a0ac840e344ea55b028a43c323a2ca05058c87964",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/model_call_receipt.json": "f5b6f5d7d900e32884b783647beec7760c4ec106b1a2b412817258843e4c9684",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/native_checker_receipts.jsonl": "07a55b7e757165371fc2a8f20e8e9fb7732ad245c80c2be76899b2dd68996396",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/qualification.json": "1881f9368353edf4714f025d5cd7890d55dbf114ed3e5e998a66b63e68f68101",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/review_binding_verification.json": "9d0a4e98bd54633bda7105eaba6af85e4d54a981def68b6348d514ad88056522",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/scientific_gateway_identity.json": "c6eff204a6ac08d4b6764dac791f13e2d56adcfbfda1763750c6b0fb29d60e3d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/smoke.json": "1c7937ee6da53045ffcf412adb6d78ebc08485dd5ab7ad91378043f17d39c8b9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/worker_runtime.json": "93091cea8db74d175ecec3ad0105d614747f6bc8c438e4f4265eb231e409927a"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/pipeline_arms.py": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/pipeline_arms.py",
+    "papers/completion/autoformalization/config/pipeline_arms.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/config/pipeline_arms.json",
+    "papers/completion/autoformalization/evaluation/scientific_gateway.py": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/scientific_gateway.py",
+    "papers/completion/autoformalization/evaluation/qualify_runtime.py": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/qualify_runtime.py",
+    "papers/completion/autoformalization/evaluation/review_import.py": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/review_import.py",
+    "papers/completion/autoformalization/data/review_binding_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_binding_manifest.json",
+    "papers/completion/autoformalization/data/review_packet_schema.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_packet_schema.json",
+    "papers/completion/autoformalization/evidence/human_review_handoff.md": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/human_review_handoff.md",
+    "papers/completion/autoformalization/evidence/runtime_qualification/arm_development_runs.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/arm_development_runs.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/development/fail.lean": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/fail.lean",
+    "papers/completion/autoformalization/evidence/runtime_qualification/development/model_target.lean": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/model_target.lean",
+    "papers/completion/autoformalization/evidence/runtime_qualification/development/ok.lean": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/ok.lean",
+    "papers/completion/autoformalization/evidence/runtime_qualification/development/sentinel.smt2": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/sentinel.smt2",
+    "papers/completion/autoformalization/evidence/runtime_qualification/development/source.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/development/source.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/input_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/input_manifest.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/isolation_report.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/isolation_report.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/check_json.meta.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.meta.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/check_json.stderr.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.stderr.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/check_json.stdout.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.stdout.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/gateway_identity.meta.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.meta.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/gateway_identity.stderr.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.stderr.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/gateway_identity.stdout.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.stdout.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/probe.meta.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.meta.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/probe.stderr.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stderr.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/probe.stdout.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stdout.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/qualify.meta.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.meta.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/qualify.stderr.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stderr.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/qualify.stdout.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stdout.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/self_test.meta.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.meta.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/self_test.stderr.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stderr.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/self_test.stdout.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stdout.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/verify_blank.meta.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.meta.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/verify_blank.stderr.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stderr.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/logs/verify_blank.stdout.log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stdout.log",
+    "papers/completion/autoformalization/evidence/runtime_qualification/model_call_receipt.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/model_call_receipt.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/native_checker_receipts.jsonl",
+    "papers/completion/autoformalization/evidence/runtime_qualification/qualification.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/qualification.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/review_binding_verification.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/review_binding_verification.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/scientific_gateway_identity.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/scientific_gateway_identity.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/smoke.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/smoke.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/worker_runtime.json": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/worker_runtime.json"
+  },
+  "criteria": [
+    {
+      "criterion": "At least one actual development model-to-target call and independent native checker execution have raw receipts, served identity, versions, timing and explicit failures; an unconditional unavailable adapter or fixture substitute does not meet this criterion.",
+      "status": "met",
+      "explanation": "Arm A dispatched a live HTTPS chat-completions call through the AF-027 scientific gateway to requested model grok-4.6. The API served grok-4.6 with response id, system fingerprint, token usage, wall-clock timing, and HTTP 200. The model returned a Lean 4 guarded-write theorem that independently type-checked. Separate worker-visible Lean 4.33.1 executions recorded a successful identity theorem and an explicit False:=trivial type-error failure; Z3 4.15.4 independently returned unsat on the QF_LIA sentinel. Leanstral GGUF weights were not loaded. Credentials are fingerprinted, not copied. This is not a fixture or unconditional unavailable stub.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/model_call_receipt.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/native_checker_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/arm_development_runs.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/qualification.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/scientific_gateway.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stdout.log"
+      ]
+    },
+    {
+      "criterion": "A-D mechanisms have callable real development routes with enforced arm isolation and charged preprocessing. E is wired to later AF-011/AF-013 checkpoint and promotion gates, and remains unavailable until those complete; this prerequisite does not require their future trained outputs. Unavailable optional capabilities never receive measured credit.",
+      "status": "met",
+      "explanation": "Arms A–D each executed a development route: A via the Grok scientific gateway plus independent Lean; B via the frozen canonical-profile compiler replica (native TypedDeonticCanonicalCompiler import still blocked on missing multiformats) plus Lean; C via typed source-grounded multiview without proof transfer plus Lean; D via C plus AF-015 protected-write bridge obligations, independent Z3 countermodel encoding, and Lean. Each of A–D charged preprocessing milliseconds against the per-item budget and kept claim_admissible=false and table6_credit=false. Nineteen isolation tests passed, including C rejecting D bridge evidence and E rejecting checker mutation. E remains unavailable pending AF-011 checkpoints and AF-013 promotion/consumer receipts and received no measured credit. AF-010 no-run Table 6 history is preserved.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/pipeline_arms.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/config/pipeline_arms.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/arm_development_runs.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/isolation_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stdout.log"
+      ]
+    },
+    {
+      "criterion": "The selected natural source inputs and 100 review packet identities are privately bound with source digests, grouping, inclusion probabilities/weights and separate gold custody; reviewer judgments remain blank until AF-028.",
+      "status": "met",
+      "explanation": "The operator-prepared AF-005 private binding of 100 unique units across 20 groups is imported by public commitment only. The public manifest lists AF005-FT-* templates and AF005-BOUND-001..100 identities, anonymous N_h/n_h groups, exact n_h/N_h inclusion probabilities and N_h/n_h weights summing to 1913, and separate pending-gold custody. Source bodies and unit digests remain in the operator private store and were not read by this worker. Public packets and gold templates remain unlabeled (zero annotators, pending adjudication, unmeasured semantic claims). The importer refuses generated labels and empty AF-028 imports.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_binding_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/data/review_packet_schema.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/review_import.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/human_review_handoff.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/review_binding_verification.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stdout.log"
+      ]
+    },
+    {
+      "criterion": "The runtime/input manifest and an executable smoke command reproduce qualification in the actual worker boundary, including Python/Torch/checker visibility, model budgets and receipt accounting.",
+      "status": "met",
+      "explanation": "qualify_runtime.py smoke/qualify probes the actual worker PATH rather than host ~/.elan or ~/.local/bin. Worker Python 3.12.3 sees Torch 2.13.0+cpu and NumPy 1.26.4 from the research-runtime site-packages, and digest-bound Lean 4.33.1 / Z3 4.15.4 binaries whose hashes match the AF-003/AF-009 host pins. The default sealed PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin is recorded separately from the operator validation PATH. The 16 GiB envelope excludes the cached Leanstral GGUF. The input manifest records model-call, checker, and arm-result receipt hashes. The executable smoke is python3 papers/completion/autoformalization/evaluation/qualify_runtime.py smoke.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/qualify_runtime.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/input_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/worker_runtime.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/smoke.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "papers/completion/autoformalization/evaluation/qualify_runtime.py",
+        "qualify"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:10:57.000000+00:00",
+      "finished_at": "2026-09-12T06:11:10.000000+00:00",
+      "execution_kind": "worker-boundary development qualification including actual Grok model-to-target and independent Lean/Z3",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/qualify.stderr.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/qualify_runtime.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+        "self-test"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:13:26.652253+00:00",
+      "finished_at": "2026-09-12T06:13:29.236250+00:00",
+      "execution_kind": "sealed-worker isolation self-test",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/self_test.stderr.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/pipeline_arms.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "papers/completion/autoformalization/evaluation/review_import.py",
+        "verify-blank"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:13:29.236704+00:00",
+      "finished_at": "2026-09-12T06:13:29.286414+00:00",
+      "execution_kind": "blank review-packet and gold-template verification",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/verify_blank.stderr.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/review_import.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "papers/completion/autoformalization/evaluation/scientific_gateway.py",
+        "identity"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:13:29.286833+00:00",
+      "finished_at": "2026-09-12T06:13:29.341167+00:00",
+      "execution_kind": "scientific gateway identity and credential fingerprint",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/gateway_identity.stderr.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/scientific_gateway.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-c",
+        "import json, pathlib, sys\npaths=sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding=\"utf-8\"))\n    print(path, \"ok\")\n",
+        "papers/completion/autoformalization/config/pipeline_arms.json",
+        "papers/completion/autoformalization/data/review_binding_manifest.json",
+        "papers/completion/autoformalization/data/review_packet_schema.json",
+        "papers/completion/autoformalization/evidence/runtime_qualification/qualification.json",
+        "papers/completion/autoformalization/evidence/runtime_qualification/model_call_receipt.json",
+        "papers/completion/autoformalization/evidence/runtime_qualification/input_manifest.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:13:29.341567+00:00",
+      "finished_at": "2026-09-12T06:13:29.359993+00:00",
+      "execution_kind": "JSON parse pin of AF-027 outputs",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/check_json.stderr.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "papers/completion/autoformalization/evaluation/qualify_runtime.py",
+        "probe"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:13:29.360391+00:00",
+      "finished_at": "2026-09-12T06:13:31.960104+00:00",
+      "execution_kind": "worker-visible Python/Torch/checker probe",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-027/evidence/runtime_qualification/logs/probe.stderr.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-027/evaluation/qualify_runtime.py"
+    }
+  ],
+  "limitations": [
+    "Development qualification is not Table 6 and admits no paper performance claim.",
+    "Native TypedDeonticCanonicalCompiler and IntentFormalizationCompiler imports still fail without multiformats; B/C used stdlib frozen-profile replicas and recorded that gap.",
+    "Independent human review remains pending AF-028; no labels were invented.",
+    "The private reviewer store was not mounted in this worker; public outputs are commitments only.",
+    "Codex gpt-5.6-terra/high fallback is configured as quota-only and was not invoked.",
+    "CUDA is not available in the worker Torch build (2.13.0+cpu).",
+    "Default sealed validation PATH does not include research-runtime binaries; smoke must be run in the worker boundary that exposes them, or via IPFS_ACCELERATE_AGENT_VALIDATION_PATH.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Worker-visible runtime qualification, scientific-gateway development model-to-target, independent native checker receipts, callable A-D development routes with isolation and charged preprocessing, E gated to AF-011/AF-013, and private 100-unit review binding without annotations."
+}

@@ -1,0 +1,151 @@
+{
+  "host_assumed_paths_probed": {
+    "elan_lean": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+    "elan_lean_exists": false,
+    "local_z3": "/home/barberb/.local/bin/z3",
+    "local_z3_exists": false,
+    "note": "Host AF-003 paths are recorded as not worker-visible; qualification uses worker-resolved binaries.",
+    "used": false
+  },
+  "model_budget": {
+    "cached_leanstral_excluded": true,
+    "codex_fallback": "gpt-5.6-terra/high quota-only",
+    "gpu_or_model_service_slots": 1,
+    "memory_gib": 16,
+    "served_grok_primary": "grok-4.6"
+  },
+  "native_checkers": {
+    "any_native_checker_usable": true,
+    "checkers": [
+      {
+        "name": "lean",
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "status": "available",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": true,
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      {
+        "name": "lake",
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lake",
+        "sha256": "8229bc302b0b7d0e7679e28cc2b830c5aec995ffe5714833503360252f1490ba",
+        "status": "available",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": true,
+        "version": "Lake version 5.0.0-src+819816b (Lean version 4.33.1)"
+      },
+      {
+        "name": "z3",
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+        "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "status": "available",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": true,
+        "version": "Z3 version 4.15.4 - 64 bit"
+      },
+      {
+        "name": "cvc5",
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/cvc5",
+        "sha256": "cad00b4849b015ea6a7790f73cecdf639423f1a17f2c5ec90fda783f778611fb",
+        "status": "available",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": true,
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+      },
+      {
+        "name": "vampire",
+        "on_process_path": false,
+        "resolved_path": null,
+        "sha256": null,
+        "status": "unavailable",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": false,
+        "version": null
+      },
+      {
+        "name": "eprover",
+        "on_process_path": false,
+        "resolved_path": null,
+        "sha256": null,
+        "status": "unavailable",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": false,
+        "version": null
+      },
+      {
+        "name": "coqc",
+        "on_process_path": false,
+        "resolved_path": null,
+        "sha256": null,
+        "status": "unavailable",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": false,
+        "version": null
+      },
+      {
+        "name": "isabelle",
+        "on_process_path": false,
+        "resolved_path": null,
+        "sha256": null,
+        "status": "unavailable",
+        "usable_in_default_sealed_path": false,
+        "usable_in_worker": false,
+        "version": null
+      }
+    ],
+    "home": "/tmp/asref-grok-home-y1fgkt9j",
+    "home_is_validation_private": false,
+    "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/",
+    "python_executable": "/usr/bin/python3",
+    "python_version": "3.12.3",
+    "sealed_path_expected": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "sealed_path_matches": false,
+    "validation_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin",
+    "worker_visible_not_host_assumed": true
+  },
+  "observed_at": "2026-09-12T06:13:31.694973+00:00",
+  "packages": {
+    "numpy": {
+      "available": true,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/numpy/__init__.py",
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    "torch": {
+      "available": true,
+      "cuda_available": false,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/torch/__init__.py",
+      "name": "torch",
+      "version": "2.13.0+cpu"
+    }
+  },
+  "process": {
+    "default_sealed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "home": "/tmp/asref-grok-home-y1fgkt9j",
+    "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/",
+    "process_path_equals_default_sealed": false,
+    "process_path_equals_validation_path": false,
+    "validation_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin"
+  },
+  "python": {
+    "executable": "/usr/bin/python3",
+    "path": [
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-027-b84149f0af7f-attempt-1-1789192233/papers/completion/autoformalization/evaluation",
+      "/home/barberb/.local/share/vericodegen-research-runtime/python",
+      "/opt/ipfs-validation-site-packages",
+      "/usr/lib/python312.zip",
+      "/usr/lib/python3.12",
+      "/usr/lib/python3.12/lib-dynload",
+      "/usr/local/lib/python3.12/dist-packages",
+      "/usr/lib/python3/dist-packages"
+    ],
+    "version": "3.12.3",
+    "version_string": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "schema": "autoformalization-worker-runtime/v1"
+}

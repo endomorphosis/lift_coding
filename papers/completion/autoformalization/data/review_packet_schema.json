@@ -1,0 +1,66 @@
+{
+  "$id": "autoformalization-review-packet/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "blank_until_AF-028": {
+    "adjudication.status": "pending_independent_review",
+    "annotators": [],
+    "evaluation_eligible": false,
+    "gold_values_present": false,
+    "model_outputs_present": false,
+    "semantic_claim_status": "unmeasured",
+    "teacher_ir_present": false
+  },
+  "description": "Public packets remain candidate-blind templates. Private bound packets stay in the reviewer store. Returned AF-028 files must preserve packet identities, distinguish unknown/missing from negative, and must not include model predictions.",
+  "facet_ids": [
+    "propositions",
+    "modality",
+    "negation",
+    "actor_recipient_roles",
+    "quantifiers",
+    "exceptions",
+    "temporal_interpretation",
+    "ambiguity",
+    "source_spans",
+    "admissible_assumptions"
+  ],
+  "gold_custody": {
+    "adjudicated": "AF-028 private store, never Git",
+    "private": "pending gold file in operator store",
+    "public": "blank templates only"
+  },
+  "gold_schema": "autoformalization-gold-facet/v1",
+  "import_refusals": [
+    "generated_label",
+    "empty_import",
+    "missing_review",
+    "changed_selection_after_outcomes",
+    "model_prediction_in_reviewer_packet"
+  ],
+  "import_schema": "autoformalization-human-review-import/v1",
+  "packet_schema": "autoformalization-annotation-packet/v1",
+  "required_public_packet_fields": [
+    "schema",
+    "packet_id",
+    "packet_role",
+    "candidate_blind",
+    "gold_values_present",
+    "model_outputs_present",
+    "teacher_ir_present",
+    "evaluation_eligible",
+    "annotation_status",
+    "source"
+  ],
+  "returned_review_required_fields": [
+    "packet_id",
+    "reviewer_id",
+    "reviewed_at",
+    "attestation",
+    "facets"
+  ],
+  "source_binding": {
+    "private": "source digests, bodies, record ids, inclusion rows",
+    "public": "packet identities and anonymous grouping only"
+  },
+  "title": "AF-027/AF-028 human-review packet and import contracts",
+  "unknown_or_missing_distinct_from_negative": true
+}

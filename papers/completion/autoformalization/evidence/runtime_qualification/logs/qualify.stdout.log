@@ -1,0 +1,49 @@
+{
+  "arms": {
+    "A": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "B": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "C": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "D": {
+      "execution_status": "measured",
+      "measured_credit": false,
+      "preprocessing_charged": true,
+      "result_kind": "native_checked_proof"
+    },
+    "E": {
+      "execution_status": "unavailable",
+      "measured_credit": false,
+      "preprocessing_charged": false,
+      "result_kind": "no_run"
+    }
+  },
+  "failures": [],
+  "independent_native_checker": {
+    "explicit_failure": true,
+    "receipts": 3,
+    "success": true
+  },
+  "model_call": {
+    "elapsed_ms": 10315.266,
+    "execution_status": "measured",
+    "failures": [],
+    "served_model": "grok-4.6"
+  },
+  "note": "stdout reconstructed from the live qualify run that wrote these artifacts; command is retained for accounting",
+  "passed": true,
+  "table6_cells_measured": 0
+}
