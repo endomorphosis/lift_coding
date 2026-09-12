@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af012-ay9fen1h",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LANG=C.UTF-8",
+    "PYTHONPATH=external/ipfs_datasets",
+    "IPFS_AUTO_INSTALL=false",
+    "IPFS_DATASETS_AUTO_INSTALL=false",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-012/run_t3_proof_heads.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 969.596,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af012-ay9fen1h",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONPATH": "external/ipfs_datasets"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T07:05:30.488280+00:00",
+  "name": "run",
+  "started_at": "2026-09-12T07:05:29.518665+00:00"
+}

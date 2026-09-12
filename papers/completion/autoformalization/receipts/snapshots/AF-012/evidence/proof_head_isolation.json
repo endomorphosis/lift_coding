@@ -1,0 +1,546 @@
+{
+  "calibration_and_routing": {
+    "actual_checker_outcomes": 0,
+    "calibration_error": null,
+    "eligible_native_label_count": 0,
+    "isolation_probe_metrics_are_not_t3_certification": true,
+    "matched_route_budget": true,
+    "route_value": null
+  },
+  "created_at": "2026-09-12T07:05:30.430409+00:00",
+  "filter_accounting": {
+    "applied_count": 2,
+    "duplicate_count": 1,
+    "objective_isolation": {
+      "proof_loss_weight_in_primary_objective": 0.0,
+      "protected_objectives": [
+        "compiler_cross_entropy",
+        "embedding_cosine",
+        "structural_reconstruction",
+        "provenance_alignment",
+        "anti_copy"
+      ],
+      "protected_parameters_unchanged": true,
+      "separate_parameters": true
+    },
+    "skipped_holdout_count": 1,
+    "skipped_invalid_count": 1,
+    "skipped_untrusted_count": 1,
+    "skipped_version_mismatch_count": 1
+  },
+  "held": true,
+  "isolation_contract": {
+    "anti_copy_protected": true,
+    "architecture": {
+      "architecture_version": "proof_aware_auxiliary_heads_v2",
+      "head_count": 7,
+      "heads": {
+        "minimal_failing_contract": {
+          "kind": "multilabel",
+          "max_labels": 64
+        },
+        "obligation_family": {
+          "kind": "categorical",
+          "max_labels": 64
+        },
+        "premise_family": {
+          "kind": "multilabel",
+          "max_labels": 64
+        },
+        "proof_route_availability": {
+          "kind": "multilabel",
+          "max_labels": 64
+        },
+        "reconstruction_success": {
+          "kind": "categorical",
+          "max_labels": 64
+        },
+        "semantic_slots": {
+          "kind": "multilabel",
+          "max_labels": 64
+        },
+        "trusted_outcome": {
+          "kind": "categorical",
+          "max_labels": 64
+        }
+      },
+      "max_family_contexts": 32,
+      "objective_isolation": {
+        "proof_loss_weight_in_primary_objective": 0.0,
+        "protected_objectives": [
+          "compiler_cross_entropy",
+          "embedding_cosine",
+          "structural_reconstruction",
+          "provenance_alignment",
+          "anti_copy"
+        ],
+        "separate_parameters": true
+      },
+      "proof_feedback_version_fingerprint": "",
+      "schema_version": "legal-ir-proof-auxiliary-heads-v1"
+    },
+    "head_schema_version": "legal-ir-proof-auxiliary-heads-v1",
+    "heads": [
+      "obligation_family",
+      "semantic_slots",
+      "premise_family",
+      "proof_route_availability",
+      "trusted_outcome",
+      "reconstruction_success",
+      "minimal_failing_contract"
+    ],
+    "primary_representation_protected": true,
+    "proof_loss_weight_in_primary_objective": 0.0,
+    "protected_objectives": [
+      "compiler_cross_entropy",
+      "embedding_cosine",
+      "structural_reconstruction",
+      "provenance_alignment",
+      "anti_copy"
+    ],
+    "rule": "Proof-feedback updates may change only proof_auxiliary_head_logits and applied_proof_feedback_ids/version fingerprint. Compiler CE, embedding, structural, provenance, and anti-copy parameters stay frozen.",
+    "separate_parameters": true,
+    "training_schema_version": "legal-ir-proof-auxiliary-training-v1"
+  },
+  "isolation_probes": [
+    {
+      "abstention_rate_isolation_probe_only": 0.142857142857,
+      "applied_count": 2,
+      "by_legal_ir_family": {
+        "deontic": {
+          "abstention_rate": 0.142857142857,
+          "accuracy": 0.714285714286,
+          "calibration_error": 0.158032429347,
+          "coverage": 0.857142857143,
+          "heads": {
+            "minimal_failing_contract": {
+              "abstention_rate": 1.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.251461042758,
+              "coverage": 0.0,
+              "loss": 0.696080651048,
+              "observation_count": 2
+            },
+            "obligation_family": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.0,
+              "coverage": 1.0,
+              "loss": 0.0,
+              "observation_count": 2
+            },
+            "premise_family": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.211661652892,
+              "coverage": 1.0,
+              "loss": 0.615775340161,
+              "observation_count": 2
+            },
+            "proof_route_availability": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.173308126731,
+              "coverage": 1.0,
+              "loss": 0.538373140735,
+              "observation_count": 2
+            },
+            "reconstruction_success": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.0,
+              "coverage": 1.0,
+              "loss": 0.0,
+              "observation_count": 2
+            },
+            "semantic_slots": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.21214360746,
+              "coverage": 1.0,
+              "loss": 0.616743043981,
+              "observation_count": 2
+            },
+            "trusted_outcome": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.257652575588,
+              "coverage": 1.0,
+              "loss": 0.708691472151,
+              "observation_count": 2
+            }
+          },
+          "loss": 0.453666235439,
+          "observation_count": 14,
+          "record_count": 2
+        }
+      },
+      "calibration_error_isolation_probe_only": 0.158032429347,
+      "coverage_isolation_probe_only": 0.857142857143,
+      "head_update_counts": {
+        "minimal_failing_contract": 2,
+        "obligation_family": 2,
+        "premise_family": 2,
+        "proof_route_availability": 2,
+        "reconstruction_success": 2,
+        "semantic_slots": 2,
+        "trusted_outcome": 2
+      },
+      "heads_changed": true,
+      "not_t3_certification": true,
+      "objective_isolation": {
+        "proof_loss_weight_in_primary_objective": 0.0,
+        "protected_objectives": [
+          "compiler_cross_entropy",
+          "embedding_cosine",
+          "structural_reconstruction",
+          "provenance_alignment",
+          "anti_copy"
+        ],
+        "protected_parameters_unchanged": true,
+        "separate_parameters": true
+      },
+      "protected_fields_unchanged": {
+        "compiler_quality_embedding_weights": true,
+        "compiler_quality_family_logits": true,
+        "decoded_embeddings": true,
+        "family_logits": true,
+        "feature_embedding_weights": true,
+        "feature_family_logits": true,
+        "legal_ir_view_embedding_weights": true,
+        "legal_ir_view_logits": true,
+        "semantic_slot_embedding_weights": true
+      },
+      "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_parameters_unchanged": true,
+      "seed": 104729,
+      "status": "applied",
+      "t2_checkpoint_identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+    },
+    {
+      "abstention_rate_isolation_probe_only": 0.142857142857,
+      "applied_count": 2,
+      "by_legal_ir_family": {
+        "deontic": {
+          "abstention_rate": 0.142857142857,
+          "accuracy": 0.714285714286,
+          "calibration_error": 0.158032429347,
+          "coverage": 0.857142857143,
+          "heads": {
+            "minimal_failing_contract": {
+              "abstention_rate": 1.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.251461042758,
+              "coverage": 0.0,
+              "loss": 0.696080651048,
+              "observation_count": 2
+            },
+            "obligation_family": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.0,
+              "coverage": 1.0,
+              "loss": 0.0,
+              "observation_count": 2
+            },
+            "premise_family": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.211661652892,
+              "coverage": 1.0,
+              "loss": 0.615775340161,
+              "observation_count": 2
+            },
+            "proof_route_availability": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.173308126731,
+              "coverage": 1.0,
+              "loss": 0.538373140735,
+              "observation_count": 2
+            },
+            "reconstruction_success": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.0,
+              "coverage": 1.0,
+              "loss": 0.0,
+              "observation_count": 2
+            },
+            "semantic_slots": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.21214360746,
+              "coverage": 1.0,
+              "loss": 0.616743043981,
+              "observation_count": 2
+            },
+            "trusted_outcome": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.257652575588,
+              "coverage": 1.0,
+              "loss": 0.708691472151,
+              "observation_count": 2
+            }
+          },
+          "loss": 0.453666235439,
+          "observation_count": 14,
+          "record_count": 2
+        }
+      },
+      "calibration_error_isolation_probe_only": 0.158032429347,
+      "coverage_isolation_probe_only": 0.857142857143,
+      "head_update_counts": {
+        "minimal_failing_contract": 2,
+        "obligation_family": 2,
+        "premise_family": 2,
+        "proof_route_availability": 2,
+        "reconstruction_success": 2,
+        "semantic_slots": 2,
+        "trusted_outcome": 2
+      },
+      "heads_changed": true,
+      "not_t3_certification": true,
+      "objective_isolation": {
+        "proof_loss_weight_in_primary_objective": 0.0,
+        "protected_objectives": [
+          "compiler_cross_entropy",
+          "embedding_cosine",
+          "structural_reconstruction",
+          "provenance_alignment",
+          "anti_copy"
+        ],
+        "protected_parameters_unchanged": true,
+        "separate_parameters": true
+      },
+      "protected_fields_unchanged": {
+        "compiler_quality_embedding_weights": true,
+        "compiler_quality_family_logits": true,
+        "decoded_embeddings": true,
+        "family_logits": true,
+        "feature_embedding_weights": true,
+        "feature_family_logits": true,
+        "legal_ir_view_embedding_weights": true,
+        "legal_ir_view_logits": true,
+        "semantic_slot_embedding_weights": true
+      },
+      "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_parameters_unchanged": true,
+      "seed": 130363,
+      "status": "applied",
+      "t2_checkpoint_identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+    },
+    {
+      "abstention_rate_isolation_probe_only": 0.142857142857,
+      "applied_count": 2,
+      "by_legal_ir_family": {
+        "deontic": {
+          "abstention_rate": 0.142857142857,
+          "accuracy": 0.714285714286,
+          "calibration_error": 0.158032429347,
+          "coverage": 0.857142857143,
+          "heads": {
+            "minimal_failing_contract": {
+              "abstention_rate": 1.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.251461042758,
+              "coverage": 0.0,
+              "loss": 0.696080651048,
+              "observation_count": 2
+            },
+            "obligation_family": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.0,
+              "coverage": 1.0,
+              "loss": 0.0,
+              "observation_count": 2
+            },
+            "premise_family": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.211661652892,
+              "coverage": 1.0,
+              "loss": 0.615775340161,
+              "observation_count": 2
+            },
+            "proof_route_availability": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.173308126731,
+              "coverage": 1.0,
+              "loss": 0.538373140735,
+              "observation_count": 2
+            },
+            "reconstruction_success": {
+              "abstention_rate": 0.0,
+              "accuracy": 1.0,
+              "calibration_error": 0.0,
+              "coverage": 1.0,
+              "loss": 0.0,
+              "observation_count": 2
+            },
+            "semantic_slots": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.21214360746,
+              "coverage": 1.0,
+              "loss": 0.616743043981,
+              "observation_count": 2
+            },
+            "trusted_outcome": {
+              "abstention_rate": 0.0,
+              "accuracy": 0.5,
+              "calibration_error": 0.257652575588,
+              "coverage": 1.0,
+              "loss": 0.708691472151,
+              "observation_count": 2
+            }
+          },
+          "loss": 0.453666235439,
+          "observation_count": 14,
+          "record_count": 2
+        }
+      },
+      "calibration_error_isolation_probe_only": 0.158032429347,
+      "coverage_isolation_probe_only": 0.857142857143,
+      "head_update_counts": {
+        "minimal_failing_contract": 2,
+        "obligation_family": 2,
+        "premise_family": 2,
+        "proof_route_availability": 2,
+        "reconstruction_success": 2,
+        "semantic_slots": 2,
+        "trusted_outcome": 2
+      },
+      "heads_changed": true,
+      "not_t3_certification": true,
+      "objective_isolation": {
+        "proof_loss_weight_in_primary_objective": 0.0,
+        "protected_objectives": [
+          "compiler_cross_entropy",
+          "embedding_cosine",
+          "structural_reconstruction",
+          "provenance_alignment",
+          "anti_copy"
+        ],
+        "protected_parameters_unchanged": true,
+        "separate_parameters": true
+      },
+      "protected_fields_unchanged": {
+        "compiler_quality_embedding_weights": true,
+        "compiler_quality_family_logits": true,
+        "decoded_embeddings": true,
+        "family_logits": true,
+        "feature_embedding_weights": true,
+        "feature_family_logits": true,
+        "legal_ir_view_embedding_weights": true,
+        "legal_ir_view_logits": true,
+        "semantic_slot_embedding_weights": true
+      },
+      "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_parameters_unchanged": true,
+      "seed": 155921,
+      "status": "applied",
+      "t2_checkpoint_identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+    }
+  ],
+  "matched_t2_checkpoints": [
+    {
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-104729-final.json",
+      "seed": 104729
+    },
+    {
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-130363-final.json",
+      "seed": 130363
+    },
+    {
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-155921-final.json",
+      "seed": 155921
+    }
+  ],
+  "predicted_proof_success_used_as_certification": false,
+  "schema": "autoformalization-proof-head-isolation/v1",
+  "t3_empirical": {
+    "admitted_records": 0,
+    "reason": "Sealed PATH has no lean/z3/cvc5/other native checkers; teacher proof_feedback records=0; no version-matched native kernel labels exist on the permitted train partition. T3 is not trained and is not certified from predicted proof-head success or constructed isolation probes.",
+    "scope": "limited_scope_unrun_missing_native_feedback",
+    "seeds": [
+      {
+        "calibration_error": null,
+        "claim_admissible": false,
+        "eligible_label_count": 0,
+        "execution_status": "unavailable",
+        "native_checked_useful_proof_coverage": null,
+        "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+        "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+        "protected_parameters_unchanged": true,
+        "reason": "Sealed PATH has no lean/z3/cvc5/other native checkers; teacher proof_feedback records=0; no version-matched native kernel labels exist on the permitted train partition. T3 is not trained and is not certified from predicted proof-head success or constructed isolation probes.",
+        "result_kind": "no_run",
+        "seed": 104729,
+        "state_unchanged": true,
+        "t2_checkpoint_identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "t2_checkpoint_path": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-104729-final.json",
+        "t2_termination_reason": "shared_parameter_trainer_completed_zero_accepted_epochs",
+        "t2_update_count": 0,
+        "t3_applied_count": 0,
+        "t3_candidate_count": 0,
+        "t3_eligible_count": 0,
+        "t3_status": "no_applicable_feedback"
+      },
+      {
+        "calibration_error": null,
+        "claim_admissible": false,
+        "eligible_label_count": 0,
+        "execution_status": "unavailable",
+        "native_checked_useful_proof_coverage": null,
+        "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+        "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+        "protected_parameters_unchanged": true,
+        "reason": "Sealed PATH has no lean/z3/cvc5/other native checkers; teacher proof_feedback records=0; no version-matched native kernel labels exist on the permitted train partition. T3 is not trained and is not certified from predicted proof-head success or constructed isolation probes.",
+        "result_kind": "no_run",
+        "seed": 130363,
+        "state_unchanged": true,
+        "t2_checkpoint_identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "t2_checkpoint_path": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-130363-final.json",
+        "t2_termination_reason": "shared_parameter_trainer_completed_zero_accepted_epochs",
+        "t2_update_count": 0,
+        "t3_applied_count": 0,
+        "t3_candidate_count": 0,
+        "t3_eligible_count": 0,
+        "t3_status": "no_applicable_feedback"
+      },
+      {
+        "calibration_error": null,
+        "claim_admissible": false,
+        "eligible_label_count": 0,
+        "execution_status": "unavailable",
+        "native_checked_useful_proof_coverage": null,
+        "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+        "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+        "protected_parameters_unchanged": true,
+        "reason": "Sealed PATH has no lean/z3/cvc5/other native checkers; teacher proof_feedback records=0; no version-matched native kernel labels exist on the permitted train partition. T3 is not trained and is not certified from predicted proof-head success or constructed isolation probes.",
+        "result_kind": "no_run",
+        "seed": 155921,
+        "state_unchanged": true,
+        "t2_checkpoint_identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "t2_checkpoint_path": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-155921-final.json",
+        "t2_termination_reason": "shared_parameter_trainer_completed_zero_accepted_epochs",
+        "t2_update_count": 0,
+        "t3_applied_count": 0,
+        "t3_candidate_count": 0,
+        "t3_eligible_count": 0,
+        "t3_status": "no_applicable_feedback"
+      }
+    ],
+    "status": "unrun"
+  },
+  "task_id": "AF-012"
+}
