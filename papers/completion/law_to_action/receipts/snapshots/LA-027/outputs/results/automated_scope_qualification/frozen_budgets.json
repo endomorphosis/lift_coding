@@ -1,0 +1,35 @@
+{
+  "admitted_split": "development",
+  "calibration_and_final_excluded": true,
+  "closed_loop_arm": {
+    "id": "closed_loop_A4",
+    "maximum_model_calls_per_attempt": 8,
+    "paid_provider_budget": 0,
+    "requires_model_calls": true,
+    "selected": false,
+    "status": "unrun"
+  },
+  "empirical_benchmark_result": false,
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "fixed_action": {
+    "attempts_if_scored": 900,
+    "development_scheduled_attempts": 180,
+    "network": "disabled",
+    "scored": false,
+    "seeds": [
+      104729,
+      104759,
+      104761
+    ],
+    "this_qualification_attempts": 2,
+    "wall_timeout_seconds": 20
+  },
+  "frozen_at": "2026-09-12T15:36:54.225380Z",
+  "frozen_before_evaluated_predictions": true,
+  "protocol_revision": "law-to-action-benchmark-protocol/v2",
+  "schema": "law-to-action-frozen-arm-budgets/v1",
+  "selected_arm": "A4",
+  "selected_arm_model_calls": 0,
+  "selected_arm_name": "full_enforcement",
+  "shared_controls_fingerprint_rule": "sha256 of canonical UTF-8 JSON of shared_controls for the shared fingerprint; sha256 of {shared_controls, policy_components} for each arm. Arms must differ only in policy_components plus documentation labels."
+}
