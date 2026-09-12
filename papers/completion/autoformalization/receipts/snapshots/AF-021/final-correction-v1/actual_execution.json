@@ -1,0 +1,207 @@
+{
+  "AF013": {
+    "E_locked": true,
+    "T4": "unactivated/unavailable",
+    "applied_learned_features": false,
+    "costs_by_seed": [
+      {
+        "accounting": "Native/process/sampled-cgroup measurements overlap. Do not sum nested clocks. Final cgroup CPU is not supplied by this launcher and remains unknown.",
+        "boundary_wall_seconds": 461.3584412269993,
+        "final_cgroup_cpu_seconds": null,
+        "native_peak_rss_kib": 13588428,
+        "native_process_cpu_seconds": 450.341659712,
+        "native_wall_seconds": 456.06594021699857,
+        "sampled_cgroup_cpu_seconds_lower_bound": 453.587795,
+        "sampled_cgroup_memory_peak_bytes_lower_bound": 19688460288,
+        "seed": 104729,
+        "whole_host_wall_seconds": 466.83193113596644
+      },
+      {
+        "accounting": "Native/process/sampled-cgroup measurements overlap. Do not sum nested clocks. Final cgroup CPU is not supplied by this launcher and remains unknown.",
+        "boundary_wall_seconds": 466.61535179195926,
+        "final_cgroup_cpu_seconds": null,
+        "native_peak_rss_kib": 13609816,
+        "native_process_cpu_seconds": 456.579588704,
+        "native_wall_seconds": 462.53492195904255,
+        "sampled_cgroup_cpu_seconds_lower_bound": 458.679726,
+        "sampled_cgroup_memory_peak_bytes_lower_bound": 19731185664,
+        "seed": 130363,
+        "whole_host_wall_seconds": 472.0401804620633
+      },
+      {
+        "accounting": "Native/process/sampled-cgroup measurements overlap. Do not sum nested clocks. Final cgroup CPU is not supplied by this launcher and remains unknown.",
+        "boundary_wall_seconds": 466.67635820794385,
+        "final_cgroup_cpu_seconds": null,
+        "native_peak_rss_kib": 13610748,
+        "native_process_cpu_seconds": 456.370841824,
+        "native_wall_seconds": 461.7066540130181,
+        "sampled_cgroup_cpu_seconds_lower_bound": 459.328316,
+        "sampled_cgroup_memory_peak_bytes_lower_bound": 19686838272,
+        "seed": 155921,
+        "whole_host_wall_seconds": 472.02307419199497
+      }
+    ],
+    "default_reset_is_applied_learning_rollback": false,
+    "diagnostics_total": 114,
+    "family_metrics_empty": true,
+    "fixed_canaries_per_seed": 38,
+    "promotion_block_reasons": [
+      "proof_receipts_missing",
+      "missing_view_family_weights",
+      "no_canonical_contracts_resolved",
+      "no_guidance_records_met_promotion_threshold"
+    ],
+    "promotion_outcomes": [
+      "no_candidate",
+      "no_candidate",
+      "no_candidate"
+    ],
+    "seeds": [
+      104729,
+      130363,
+      155921
+    ]
+  },
+  "costs": {
+    "accounting": "Different wall, process CPU, host and cgroup observations are not additive. Exclusive training stages partition the producer; original checker lies inside whole original boundary. Delivery and recovered checking are separate.",
+    "current_exclusive_training_stage_wall_seconds": 13926.773996266653,
+    "hard_cumulative_budget_claimed": false,
+    "original_cgroup_cpu_lower_bound_seconds": 14681.661862,
+    "original_failed_checker_wall_seconds": 764.6509387493134,
+    "per_seed": {
+      "104729": {
+        "current_exclusive_stage_wall_seconds": {
+          "T1": 24.72411483398173,
+          "T2": 2628.313560449984,
+          "T3": 1809.5377530889818
+        },
+        "current_seed_stage_wall_seconds": 4462.5754283729475,
+        "known_seed_attributed_wall_seconds_including_history": 5616.8498027770565,
+        "prior_known_per_seed_wall_seconds": 1154.2743744041086,
+        "unknown_prior_interruptions_remain": true
+      },
+      "130363": {
+        "current_exclusive_stage_wall_seconds": {
+          "T1": 25.368152017937973,
+          "T2": 2646.4538018180756,
+          "T3": 1812.0734887459548
+        },
+        "current_seed_stage_wall_seconds": 4483.895442581968,
+        "known_seed_attributed_wall_seconds_including_history": 4588.170627629939,
+        "prior_known_per_seed_wall_seconds": 104.27518504797109,
+        "unknown_prior_interruptions_remain": true
+      },
+      "155921": {
+        "current_exclusive_stage_wall_seconds": {
+          "T1": 24.906371681950986,
+          "T2": 2693.7773044760106,
+          "T3": 1841.1325199200073
+        },
+        "current_seed_stage_wall_seconds": 4559.816196077969,
+        "known_seed_attributed_wall_seconds_including_history": 4663.429921048057,
+        "prior_known_per_seed_wall_seconds": 103.61372497008742,
+        "unknown_prior_interruptions_remain": true
+      }
+    },
+    "prior_failure_report_sha256": [
+      "a54581eab8f1ebfc2bc4e0d7959b2418eb26ce6f3aa26bbb8ac5f129f812ebe3",
+      "2a5b7182d563f3d7ffaca4434539bea1cdb0408e4ed1d46f929f95999e0c1530"
+    ],
+    "separate_delivery_wall_seconds": 1299.9672253290191,
+    "separate_recovered_checker_process_cpu_seconds": 1258.4100826879999,
+    "separate_recovered_checker_wall_seconds": 1265.1566114430316,
+    "unknown_prior_interruptions_remain": true,
+    "whole_original_boundary_wall_seconds": 14712.601788867032
+  },
+  "human_agreement": null,
+  "human_fidelity": null,
+  "interpretation": "Completed saved T0/T1/T2/T3 training, recovered retained-byte validation and local artifact delivery. Original checker/container OOM stays failed. No source-semantic fidelity or final-test performance was measured.",
+  "metric_limit": "T2 target-assisted projection can return the supplied target vector; cosine 1 and MSE 0 do not establish source-free reconstruction, generalization or fidelity. T2 family CE equals T0. T3 labels concern compiler-structural contracts only.",
+  "original_container_success": false,
+  "original_input_sha256": {
+    "evidence/consumer_activation.json": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+    "evidence/native_training/adoption_handoff.json": "1149e384356efdb292d0cac5ff758578caa8543fb57dd2c32290df1027667c7e",
+    "evidence/native_training/adoption_scalar_summary.json": "61506d9d94443600bb4653666cad58f5c2c2cd4abff5a13f94a6b798b0b6429f",
+    "evidence/native_training/adoption_validation_costs.json": "3739b51c833f4c761a48a96ecb6e19cda2fa5158f2dac77817377a4abd54b69d",
+    "evidence/rollback_receipt.json": "d95cc91cdc9e142d20e602af2aa68b8850e4fcf4f2ac6a5e515d3089a3f0e1ab",
+    "receipts/AF-013.json": "e7bd5d9e5f899d44a262f7f28cd0bd5e6f22fdd67dce5a4949a87e5c8b555152",
+    "receipts/AF-029.json": "e5afe12686ae6bf4942c922a387c0c38aff36a5dd28f409c89ec3d3234b260c8",
+    "runs/guidance_promotion/results.jsonl": "e2898a87f9c76ab4640b4a954fed536403fb2dd32ac2aacc94087a7ad324e373",
+    "runs/native_training/manifest.json": "5efe5c80e4f7e03301c6921fcc3b7505301c278934f3639889433aa19107a33d"
+  },
+  "outside_human_review_required": false,
+  "resources": {
+    "T1_T3_outside_T2_interval": true,
+    "complete_T2_wall_seconds": 10800,
+    "compute_device": "cpu",
+    "cpu_limit": 2,
+    "gpu_or_model_service_slots": 1,
+    "memory_gib": 64,
+    "native_T2_soft_seconds": 9000,
+    "per_seed_total_wall_limit": null,
+    "pids": 64,
+    "scope": "Amended declared profile; actual host container receipt binds enforcement.",
+    "whole_wall_seconds": 36000
+  },
+  "saved_training_completed": true,
+  "schema": "af-final-corrected-execution-projection/v1",
+  "seeds": [
+    104729,
+    130363,
+    155921
+  ],
+  "separate_retained_byte_checker_succeeded": true,
+  "t2": [
+    {
+      "accepted_epochs": 1,
+      "applied_packed_updates": 5,
+      "changed_numeric_parameters": 182500992,
+      "seed": 104729
+    },
+    {
+      "accepted_epochs": 1,
+      "applied_packed_updates": 5,
+      "changed_numeric_parameters": 182500992,
+      "seed": 130363
+    },
+    {
+      "accepted_epochs": 1,
+      "applied_packed_updates": 5,
+      "changed_numeric_parameters": 182500992,
+      "seed": 155921
+    }
+  ],
+  "t3": [
+    {
+      "applied_updates": 256,
+      "eligible_labels": 2606,
+      "protected_parameters_unchanged": true,
+      "scope": "native_compiler_structural_contracts_only",
+      "seed": 104729,
+      "training_calibration_diagnostic": 0.038851691306
+    },
+    {
+      "applied_updates": 256,
+      "eligible_labels": 2606,
+      "protected_parameters_unchanged": true,
+      "scope": "native_compiler_structural_contracts_only",
+      "seed": 130363,
+      "training_calibration_diagnostic": 0.038851691306
+    },
+    {
+      "applied_updates": 256,
+      "eligible_labels": 2606,
+      "protected_parameters_unchanged": true,
+      "scope": "native_compiler_structural_contracts_only",
+      "seed": 155921,
+      "training_calibration_diagnostic": 0.038851691306
+    }
+  ],
+  "teacher": {
+    "final_test_accessed": false,
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "selection": 15,
+    "train": 69
+  }
+}

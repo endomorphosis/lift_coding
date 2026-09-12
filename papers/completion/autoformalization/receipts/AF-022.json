@@ -1,28 +1,24 @@
 {
-  "schema": "paper-task-evidence/v1",
-  "task_id": "AF-022",
-  "status": "complete",
-  "completed_at": "2026-09-12T21:06:52.677098+00:00",
-  "source_versions": {
-    "python": {
-      "interpreter": "/usr/bin/python3.12",
-      "version": "Python 3.12.3",
-      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
-    },
-    "checker": {
-      "source": "papers/completion/autoformalization/receipts/snapshots/AF-022/check_outputs.py",
-      "sha256": "8a19dea105f3cfc8d520478306ac0cd1526f5f913a9b31d3fe3cb33c868363f2",
-      "schema": "autoformalization-final-claim-audit/v1",
-      "standard_library_only": true
-    },
-    "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
-    "empirical_execution": "Stdlib manuscript, claim-audit, and bibliography checks against frozen AF-021 results. No model call, training, native checker, or final-test body access."
-  },
   "artifacts": {
     "papers/completion/autoformalization/receipts/snapshots/AF-022/assemble_receipt.py": "771609782315f1200aae9fe5de6979d0375cd598b30db9432536cf369ed49d92",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/check_outputs.py": "8a19dea105f3cfc8d520478306ac0cd1526f5f913a9b31d3fe3cb33c868363f2",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/bibliography_audit.md": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/final_claim_audit.json": "796a507cf4cbfe0fcc246c534c02ddcd636c769b8cde87280161d12317db05e6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/actual_execution.json": "4b1296a3b19720237702739e05c890f4a340c9255696498a94b6265bae90592c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/feedback_status.json": "16bb09ce3abdbd39525430d86eab1ab5432b33ceac1a0e4e746cc8fc86bc849a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.json": "e0458428ed1750872cc3b74ed740cfb4e930dcceedce0aa35a04ad37093ce5c3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stdout": "db75192f3cb264807d4636032af2f41cae474dbc7769d6aab91cebb83ae5879c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.json": "f46e72b6ae29cc8c637300c90eb0b60d42b5958b8038224d36244c9694c10004",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stdout": "cc4c75a8ab48a8d4a9c5fdf08184fae0a36bd73e00a16b51ebdd9434c1da4edd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/bibliography_audit.md": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/final_claim_audit.json": "bd5a3cf3fb9ceb9c868aa043c6f5b61c4a252ba9e9b739c8d3fb7c04f4b3e0bf",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/main.tex": "84f8783d2b670ba6ab82331854bcbee88fbcf2bd0574c3d41c324bb1a9685ce9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/references.bib": "65db8dd6f9fbe8f15fa8834688d4e25bbb108fc04f00427b7b4a6e2f6923ad28",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/prior_receipt.json": "7e8a7d1e9983e6c3fc746211da9a0f6e6a9c3d57e960d67136d805d4e22a174b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/source/check_corrected_evidence.py": "53ff6b84d3196d696ddea8de8c4231c10d35ff5ceecbdc9e7cf89a92650263bb",
+    "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/source/check_manuscript.py": "8a19dea105f3cfc8d520478306ac0cd1526f5f913a9b31d3fe3cb33c868363f2",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.meta.json": "6d5b751a0d3e0d2a3c2fa3033b7562e57ce570c30410d561255d7cebca536f87",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stdout.log": "17167cd3df4f9a10843b599c4df3cb87fd955d7e8e4f616accb8af8c2f6ed74d",
@@ -36,156 +32,123 @@
     "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/references.bib": "65db8dd6f9fbe8f15fa8834688d4e25bbb108fc04f00427b7b4a6e2f6923ad28",
     "papers/completion/autoformalization/receipts/snapshots/AF-022/run_sealed.py": "3af4b00a8ec415fd07019ee93aa8aac0865c8bfd55176802e7e1d42e974b90c0"
   },
-  "outputs": {
-    "papers/completion/autoformalization/manuscript/main.tex": "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/main.tex",
-    "papers/completion/autoformalization/manuscript/references.bib": "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/references.bib",
-    "papers/completion/autoformalization/evidence/final_claim_audit.json": "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/final_claim_audit.json",
-    "papers/completion/autoformalization/evidence/bibliography_audit.md": "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/bibliography_audit.md"
+  "commands": [
+    {
+      "argv": [
+        "python",
+        "-B",
+        "papers/completion/autoformalization/evaluation/final_correction/check_manuscript.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.04426098195835948,
+      "execution_kind": "actual corrective source/retained-byte/format validation; no new scientific run",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stdout",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/source/check_manuscript.py",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stderr"
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "papers/completion/autoformalization/evaluation/final_correction/check_corrected_evidence.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.7926393199013546,
+      "execution_kind": "actual corrective source/retained-byte/format validation; no new scientific run",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stdout",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/source/check_corrected_evidence.py",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stderr"
+    }
+  ],
+  "completed_at": "2026-09-12T23:51:34.129775+00:00",
+  "corrective_validation": {
+    "actor": "coordinating assistant",
+    "native_status_change_performed": false,
+    "native_worker_attempt_created": false,
+    "original_native_completion_is_historical": true,
+    "original_receipt": {
+      "completed_at": "2026-09-12T21:06:52.677098+00:00",
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/prior_receipt.json",
+      "sha256": "7e8a7d1e9983e6c3fc746211da9a0f6e6a9c3d57e960d67136d805d4e22a174b"
+    },
+    "schema": "af-derived-evidence-correction/v1",
+    "scope": "Refresh current derived outputs against already-completed AF029/AF013 evidence; preserve all original snapshots and failed attempts. Root/native append-only validation remains a separate reviewed action."
   },
   "criteria": [
     {
       "criterion": "Abstract/conclusion match the measured scope and use no invented checkpoint, deployment, transfer or training results.",
-      "status": "met",
-      "explanation": "The abstract reports automated structural correctness, exact-goal native checker receipts, teacher-agreement diagnostics, learned-update records, and finite constructed conformance; states that independent human source-facet fidelity and agreement were not collected; and keeps the 1913-unit final-test A--E coverage/cost unrun, fidelity unmeasured, and native useful-proof transfer unavailable. T2 accepted no sealed-PATH epochs; T1 is a sample-memory diagnostic; T3/T4/E/T5 remain unavailable or unrun. The conclusion states that the manuscript does not establish improved independent source fidelity or useful proof coverage on unseen material. Recovery-copy promises are not presented as results. check_outputs.py found no invented checkpoint, deployment, transfer, or training-success claims.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/main.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/final_claim_audit.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/main.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/references.bib",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/final_claim_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/bibliography_audit.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "The abstract/conclusion now describe actual all-three-seed T2/T3 updates, target-assisted reconstruction, and actual no-candidate AF013 promotion. T4/E remain unactivated, independent human fidelity is unmeasured, and primary final-test experiments remain unrun. Original checker OOM is distinguished from separately recovered saved-byte success.",
+      "status": "met"
     },
     {
       "criterion": "Every material claim maps to a source or raw result; finite illustrations and conditional propositions are labeled accurately.",
-      "status": "met",
-      "explanation": "final_claim_audit.json maps 27 material claims to manuscript locations, kinds, statuses, and source artifacts (summary.json, hypothesis_report.md, reference_results.json, bridge results, empirical_scope.tex). Finite illustrations (twelve reconstructed checks, policy--code--trace Q1/Q2) and the conditional transfer proposition (Equations 7--8 / Proposition 1) are labeled as such. C1--C6 remain unrun; C7 inconclusive; T1 diagnostic is not primary-admissible; T2 shared-learner is unsupported. Equations 1--14 are audited for reconstruction versus text, nonvacuity, and tense.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/final_claim_audit.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/main.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stdout.log",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/json_parse.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/main.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/references.bib",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/final_claim_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/bibliography_audit.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "The 27-item claim audit maps material statements to current source/scalar evidence. All actual projection input hashes and all 44 primary cells are checked. Finite illustrations, conditional propositions, empty metrics and default reset are not promoted to empirical semantic or learned-guidance efficacy.",
+      "status": "met"
     },
     {
-      "criterion": "The final narrative distinguishes A–E pipeline comparisons from T0–T5 learning comparisons.",
-      "status": "met",
-      "explanation": "The manuscript states that pipeline comparisons A--E vary the source-to-proof mechanism and learning comparisons T0--T5 vary memory, shared parameters, isolated proof heads, promoted guidance, and compiler repair, and that the two matrices are not merged. Separate definition tables tab:arms-ae and tab:arms-t and result tables tab:pipeline-results and tab:training-results are included. Section headings state that the A--E comparison is not a T0--T5 result and conversely. The claim audit records narrative_separation for both matrices.",
+      "criterion": "The final narrative distinguishes A\u2013E pipeline comparisons from T0\u2013T5 learning comparisons.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/main.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/final_claim_audit.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/main.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/references.bib",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/final_claim_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/bibliography_audit.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "The narrative preserves distinct A\u2013E pipeline and T0\u2013T5 learning matrices, the original cohort, unchanged model/checkpoint identities, and the current locked E executor.",
+      "status": "met"
     },
     {
       "criterion": "References are verified and missing material comparisons addressed without claiming unrelated benchmarks were run.",
-      "status": "met",
-      "explanation": "references.bib retains original PDF references [1]--[10] with verified arXiv/DOI/venue metadata. bibliography_audit.md records each primary-source check and the recovered Jiang 2024 venue note. LeanDojo, DSP, Sledgehammer, Baldur, CompCert, seL4, and Dafny are added as related-work placement only, each labeled not executed as a paper benchmark / not re-benchmarked. The manuscript states that ProofNet, miniF2F, LeanDojo, CompCert, seL4, and Dafny were not run.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/references.bib",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/evidence/bibliography_audit.md",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/manuscript/main.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/main.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/references.bib",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/final_claim_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/bibliography_audit.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/manuscript_v5.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "The primary-source bibliography and its original audit remain byte unchanged. The corrected manuscript retains comparison with the recorded related work without claiming those benchmarks were executed.",
+      "status": "met"
     }
   ],
-  "commands": [
-    {
-      "argv": [
-        "/usr/bin/env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp",
-        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.cache",
-        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.config",
-        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.local/share",
-        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.local/state",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "PYTHONNOUSERSITE=1",
-        "LANG=C.UTF-8",
-        "/usr/bin/python3.12",
-        "-V"
-      ],
-      "cwd": ".",
-      "elapsed_seconds": 0.0012110380921512842,
-      "env": {
-        "HOME": "/tmp/ipfs-accelerate-validation-home-af022-5peigdvp",
-        "LANG": "C.UTF-8",
-        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "PYTHONNOUSERSITE": "1"
-      },
-      "exit_code": 0,
-      "finished_at": "2026-09-12T21:06:52.609352+00:00",
-      "started_at": "2026-09-12T21:06:52.608133+00:00",
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/python_version.stdout.log",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/python_version.stderr.log",
-      "execution_kind": "sealed-PATH interpreter identity"
-    },
-    {
-      "argv": [
-        "/usr/bin/env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp",
-        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.cache",
-        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.config",
-        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.local/share",
-        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.local/state",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "PYTHONNOUSERSITE=1",
-        "LANG=C.UTF-8",
-        "/usr/bin/python3.12",
-        "-S",
-        "-c",
-        "import json,pathlib; json.loads(pathlib.Path('papers/completion/autoformalization/evidence/final_claim_audit.json').read_text())"
-      ],
-      "cwd": ".",
-      "elapsed_seconds": 0.015692201908677816,
-      "env": {
-        "HOME": "/tmp/ipfs-accelerate-validation-home-af022-5peigdvp",
-        "LANG": "C.UTF-8",
-        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "PYTHONNOUSERSITE": "1"
-      },
-      "exit_code": 0,
-      "finished_at": "2026-09-12T21:06:52.625319+00:00",
-      "started_at": "2026-09-12T21:06:52.609622+00:00",
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/json_parse.stdout.log",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/json_parse.stderr.log",
-      "execution_kind": "JSON parse pin of final_claim_audit.json"
-    },
-    {
-      "argv": [
-        "/usr/bin/env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp",
-        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.cache",
-        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.config",
-        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.local/share",
-        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af022-5peigdvp/.local/state",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "PYTHONNOUSERSITE=1",
-        "LANG=C.UTF-8",
-        "/usr/bin/python3.12",
-        "-S",
-        "papers/completion/autoformalization/receipts/snapshots/AF-022/check_outputs.py"
-      ],
-      "cwd": ".",
-      "elapsed_seconds": 0.03659753897227347,
-      "env": {
-        "HOME": "/tmp/ipfs-accelerate-validation-home-af022-5peigdvp",
-        "LANG": "C.UTF-8",
-        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "PYTHONNOUSERSITE": "1"
-      },
-      "exit_code": 0,
-      "finished_at": "2026-09-12T21:06:52.662362+00:00",
-      "started_at": "2026-09-12T21:06:52.625758+00:00",
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stdout.log",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-022/logs/check_outputs.stderr.log",
-      "execution_kind": "stdlib manuscript/claim/bibliography acceptance checks; no model, training, or provider call",
-      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-022/check_outputs.py"
+  "outputs": {
+    "papers/completion/autoformalization/evidence/bibliography_audit.md": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/bibliography_audit.md",
+    "papers/completion/autoformalization/evidence/final_claim_audit.json": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/evidence/final_claim_audit.json",
+    "papers/completion/autoformalization/manuscript/main.tex": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/main.tex",
+    "papers/completion/autoformalization/manuscript/references.bib": "papers/completion/autoformalization/receipts/snapshots/AF-022/final-correction-v1/outputs/manuscript/references.bib"
+  },
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "analysis_id": "e33d2ea1febda9b666deafdbecf12f427dfccf3ee25cd7bd4140fd365796b189",
+    "baseline_source": "e25c71be006a5ff2667999089ed1d1acc1c55553",
+    "empirical_execution": "Corrective source/metadata/LaTeX/table reproduction only; existing scientific runs are immutable.",
+    "python": {
+      "version": "Python 3.12.3"
     }
-  ]
+  },
+  "status": "complete",
+  "task_id": "AF-022"
 }

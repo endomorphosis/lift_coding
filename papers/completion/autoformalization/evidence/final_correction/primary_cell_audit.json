@@ -1,0 +1,643 @@
+{
+  "schema": "af-primary-cell-scope-audit/v1",
+  "cells": [
+    {
+      "table": "table6",
+      "cell_id": "A:sources_covered",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+      "blockers": [
+        "direct-model credential absent on sealed PATH",
+        "native Lean/Z3/CVC5 absent from sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked. Selection-split structural counts ({'unavailable': 15}) are a separate non-Table-6 diagnostic."
+    },
+    {
+      "table": "table6",
+      "cell_id": "A:fidelity_uncertainty",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+      "blockers": [
+        "independent_human_semantic_labels_available=false"
+      ],
+      "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse, elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold."
+    },
+    {
+      "table": "table6",
+      "cell_id": "A:correct_transfers",
+      "status": "unavailable",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+      "blockers": [
+        "direct-model credential absent on sealed PATH",
+        "native Lean/Z3/CVC5 absent from sealed PATH"
+      ],
+      "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. Zero observed false transfers on that finite set is not universal soundness."
+    },
+    {
+      "table": "table6",
+      "cell_id": "A:cost_latency",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. AF-020 retained historical costs and AF-016 selection elapsed times are not this cell."
+    },
+    {
+      "table": "table6",
+      "cell_id": "B:sources_covered",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+      "blockers": [
+        "native Lean/Z3/CVC5 absent from sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked. Selection-split structural counts ({'abstained': 4, 'measured': 11}) are a separate non-Table-6 diagnostic."
+    },
+    {
+      "table": "table6",
+      "cell_id": "B:fidelity_uncertainty",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+      "blockers": [
+        "independent_human_semantic_labels_available=false"
+      ],
+      "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse, elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold."
+    },
+    {
+      "table": "table6",
+      "cell_id": "B:correct_transfers",
+      "status": "unavailable",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+      "blockers": [
+        "native Lean/Z3/CVC5 absent from sealed PATH"
+      ],
+      "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. Zero observed false transfers on that finite set is not universal soundness."
+    },
+    {
+      "table": "table6",
+      "cell_id": "B:cost_latency",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. AF-020 retained historical costs and AF-016 selection elapsed times are not this cell."
+    },
+    {
+      "table": "table6",
+      "cell_id": "C:sources_covered",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+      "blockers": [
+        "native Lean/Z3/CVC5 absent from sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked. Selection-split structural counts ({'measured': 15}) are a separate non-Table-6 diagnostic."
+    },
+    {
+      "table": "table6",
+      "cell_id": "C:fidelity_uncertainty",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+      "blockers": [
+        "independent_human_semantic_labels_available=false"
+      ],
+      "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse, elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold."
+    },
+    {
+      "table": "table6",
+      "cell_id": "C:correct_transfers",
+      "status": "unavailable",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+      "blockers": [
+        "native Lean/Z3/CVC5 absent from sealed PATH"
+      ],
+      "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. Zero observed false transfers on that finite set is not universal soundness."
+    },
+    {
+      "table": "table6",
+      "cell_id": "C:cost_latency",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. AF-020 retained historical costs and AF-016 selection elapsed times are not this cell."
+    },
+    {
+      "table": "table6",
+      "cell_id": "D:sources_covered",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+      "blockers": [
+        "native Lean/Z3/CVC5 absent from sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked. Selection-split structural counts ({'unsupported': 15}) are a separate non-Table-6 diagnostic."
+    },
+    {
+      "table": "table6",
+      "cell_id": "D:fidelity_uncertainty",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+      "blockers": [
+        "independent_human_semantic_labels_available=false"
+      ],
+      "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse, elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold."
+    },
+    {
+      "table": "table6",
+      "cell_id": "D:correct_transfers",
+      "status": "unavailable",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+      "blockers": [
+        "native Lean/Z3/CVC5 absent from sealed PATH"
+      ],
+      "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. Zero observed false transfers on that finite set is not universal soundness."
+    },
+    {
+      "table": "table6",
+      "cell_id": "D:cost_latency",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. AF-020 retained historical costs and AF-016 selection elapsed times are not this cell."
+    },
+    {
+      "table": "table6",
+      "cell_id": "E:sources_covered",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+      "blockers": [
+        "T4 unactivated; e_locked; learned features not applied",
+        "native Lean/Z3/CVC5 absent from sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked. Selection-split structural counts ({'unavailable': 15}) are a separate non-Table-6 diagnostic."
+    },
+    {
+      "table": "table6",
+      "cell_id": "E:fidelity_uncertainty",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+      "blockers": [
+        "independent_human_semantic_labels_available=false"
+      ],
+      "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse, elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold."
+    },
+    {
+      "table": "table6",
+      "cell_id": "E:correct_transfers",
+      "status": "unavailable",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+      "blockers": [
+        "T4 unactivated; e_locked; learned features not applied",
+        "native Lean/Z3/CVC5 absent from sealed PATH"
+      ],
+      "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. Zero observed false transfers on that finite set is not universal soundness."
+    },
+    {
+      "table": "table6",
+      "cell_id": "E:cost_latency",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. AF-020 retained historical costs and AF-016 selection elapsed times are not this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T0:source_split_counts",
+      "status": "measured_inventory",
+      "value": {
+        "final_test": 1913,
+        "final_test_groups": 20,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "numerator": 122,
+      "denominator": 1913,
+      "backing": "data/splits.json SHA-256 d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-011/AF-029 T0 codec ran on train/selection only; 3 deterministic replays; update_count=0. Split counts are inventory, not held-out performance."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T0:held_out_fidelity",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005/AF-028 unmeasured human fidelity; AF-007 unrun all_facet_source_fidelity",
+      "blockers": [
+        "independent_human_semantic_labels_available=false",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 held-out fidelity claim. AF-011 mock:stable-sha256 and AF-029 MiniLM teacher diagnostics remain claim_admissible=false and do not fill this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T0:proof_route_benefit",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 unrun native_checked_useful_proof_coverage plus AF-012/013/014 receipts",
+      "blockers": [
+        "native checkers unavailable on sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-011/AF-029 T0 codec ran on train/selection only; 3 deterministic replays; update_count=0. This cell is not filled from constructed isolation probes."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T0:total_cost",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 total_cost.status=unrun; AF-020/AF-029 retained separately",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 total-cost figure for the locked final-test set. AF-020 retained historical phase costs and AF-029 failed encoder-preparation attempts are reported separately without double counting."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T1:source_split_counts",
+      "status": "measured_inventory",
+      "value": {
+        "final_test": 1913,
+        "final_test_groups": 20,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "numerator": 122,
+      "denominator": 1913,
+      "backing": "data/splits.json SHA-256 d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-011/AF-029 T1 sample-memory ran on train/selection only; seeds 104729/130363/155921; memorization diagnostic, not generalization. Split counts are inventory, not held-out performance."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T1:held_out_fidelity",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005/AF-028 unmeasured human fidelity; AF-007 unrun all_facet_source_fidelity",
+      "blockers": [
+        "independent_human_semantic_labels_available=false",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 held-out fidelity claim. AF-011 mock:stable-sha256 and AF-029 MiniLM teacher diagnostics remain claim_admissible=false and do not fill this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T1:proof_route_benefit",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 unrun native_checked_useful_proof_coverage plus AF-012/013/014 receipts",
+      "blockers": [
+        "native checkers unavailable on sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-011/AF-029 T1 sample-memory ran on train/selection only; seeds 104729/130363/155921; memorization diagnostic, not generalization. This cell is not filled from constructed isolation probes."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T1:total_cost",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 total_cost.status=unrun; AF-020/AF-029 retained separately",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 total-cost figure for the locked final-test set. AF-020 retained historical phase costs and AF-029 failed encoder-preparation attempts are reported separately without double counting."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T2:source_split_counts",
+      "status": "measured_inventory",
+      "value": {
+        "final_test": 1913,
+        "final_test_groups": 20,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "numerator": 122,
+      "denominator": 1913,
+      "backing": "data/splits.json SHA-256 d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-029 completed three actual T2 seeds, one accepted epoch and five packed updates per seed. Earlier AF-011 zero-update attempts remain historical; no final-test or fidelity claim follows. Split counts are inventory, not held-out performance."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T2:held_out_fidelity",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005/AF-028 unmeasured human fidelity; AF-007 unrun all_facet_source_fidelity",
+      "blockers": [
+        "independent_human_semantic_labels_available=false",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 held-out fidelity claim. AF-011 mock:stable-sha256 and AF-029 MiniLM teacher diagnostics remain claim_admissible=false and do not fill this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T2:proof_route_benefit",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 unrun native_checked_useful_proof_coverage plus AF-012/013/014 receipts",
+      "blockers": [
+        "native checkers unavailable on sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-029 completed three actual T2 seeds, one accepted epoch and five packed updates per seed. Earlier AF-011 zero-update attempts remain historical; no final-test or fidelity claim follows. This cell is not filled from constructed isolation probes."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T2:total_cost",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 total_cost.status=unrun; AF-020/AF-029 retained separately",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 total-cost figure for the locked final-test set. AF-020 retained historical phase costs and AF-029 failed encoder-preparation attempts are reported separately without double counting."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T3:source_split_counts",
+      "status": "measured_inventory",
+      "value": {
+        "final_test": 1913,
+        "final_test_groups": 20,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "numerator": 122,
+      "denominator": 1913,
+      "backing": "data/splits.json SHA-256 d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-029 applied 256 compiler-structural feedback updates from 2606 eligible labels per seed; three matched T2-to-T3 reloads completed. Final-test route benefit remains unrun. Split counts are inventory, not held-out performance."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T3:held_out_fidelity",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005/AF-028 unmeasured human fidelity; AF-007 unrun all_facet_source_fidelity",
+      "blockers": [
+        "independent_human_semantic_labels_available=false",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 held-out fidelity claim. AF-011 mock:stable-sha256 and AF-029 MiniLM teacher diagnostics remain claim_admissible=false and do not fill this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T3:proof_route_benefit",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 unrun native_checked_useful_proof_coverage plus AF-012/013/014 receipts",
+      "blockers": [
+        "native checkers unavailable on sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-029 applied 256 compiler-structural feedback updates from 2606 eligible labels per seed; three matched T2-to-T3 reloads completed. Final-test route benefit remains unrun. This cell is not filled from constructed isolation probes."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T3:total_cost",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 total_cost.status=unrun; AF-020/AF-029 retained separately",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 total-cost figure for the locked final-test set. AF-020 retained historical phase costs and AF-029 failed encoder-preparation attempts are reported separately without double counting."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T4:source_split_counts",
+      "status": "measured_inventory",
+      "value": {
+        "final_test": 1913,
+        "final_test_groups": 20,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "numerator": 122,
+      "denominator": 1913,
+      "backing": "data/splits.json SHA-256 d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-013 T4 unactivated/unavailable; e_locked; export identity is not applied learned guidance. Split counts are inventory, not held-out performance."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T4:held_out_fidelity",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005/AF-028 unmeasured human fidelity; AF-007 unrun all_facet_source_fidelity",
+      "blockers": [
+        "independent_human_semantic_labels_available=false",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 held-out fidelity claim. AF-011 mock:stable-sha256 and AF-029 MiniLM teacher diagnostics remain claim_admissible=false and do not fill this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T4:proof_route_benefit",
+      "status": "unavailable",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 unrun native_checked_useful_proof_coverage plus AF-012/013/014 receipts",
+      "blockers": [
+        "native checkers unavailable on sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-013 T4 unactivated/unavailable; e_locked; export identity is not applied learned guidance. This cell is not filled from constructed isolation probes."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T4:total_cost",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 total_cost.status=unrun; AF-020/AF-029 retained separately",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 total-cost figure for the locked final-test set. AF-020 retained historical phase costs and AF-029 failed encoder-preparation attempts are reported separately without double counting."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T5:source_split_counts",
+      "status": "measured_inventory",
+      "value": {
+        "final_test": 1913,
+        "final_test_groups": 20,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "numerator": 122,
+      "denominator": 1913,
+      "backing": "data/splits.json SHA-256 d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-014 T5 accepted compiler-contract repair on constructed witnesses; unseen fidelity and native coverage remain unrun. Split counts are inventory, not held-out performance."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T5:held_out_fidelity",
+      "status": "unmeasured",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-005/AF-028 unmeasured human fidelity; AF-007 unrun all_facet_source_fidelity",
+      "blockers": [
+        "independent_human_semantic_labels_available=false",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 held-out fidelity claim. AF-011 mock:stable-sha256 and AF-029 MiniLM teacher diagnostics remain claim_admissible=false and do not fill this cell."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T5:proof_route_benefit",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 unrun native_checked_useful_proof_coverage plus AF-012/013/014 receipts",
+      "blockers": [
+        "native checkers unavailable on sealed PATH",
+        "final_test_locked"
+      ],
+      "narrowed_claim": "AF-014 T5 accepted compiler-contract repair on constructed witnesses; unseen fidelity and native coverage remain unrun. This cell is not filled from constructed isolation probes."
+    },
+    {
+      "table": "table11",
+      "cell_id": "T5:total_cost",
+      "status": "unrun",
+      "value": null,
+      "numerator": null,
+      "denominator": 1913,
+      "backing": "AF-007 total_cost.status=unrun; AF-020/AF-029 retained separately",
+      "blockers": [
+        "final_test_locked"
+      ],
+      "narrowed_claim": "No Table 11 total-cost figure for the locked final-test set. AF-020 retained historical phase costs and AF-029 failed encoder-preparation attempts are reported separately without double counting."
+    }
+  ],
+  "count": 44,
+  "status_counts": {
+    "unrun": 21,
+    "unmeasured": 11,
+    "unavailable": 6,
+    "measured_inventory": 6
+  },
+  "new_final_test_experiments": 0,
+  "construction": "Existing source-bound reducer output; inventory counts do not fill efficacy/fidelity cells."
+}

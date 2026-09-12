@@ -1,42 +1,24 @@
 {
-  "schema": "paper-task-evidence/v1",
-  "task_id": "AF-021",
-  "status": "complete",
-  "completed_at": "2026-09-12T20:46:32.484076+00:00",
-  "source_versions": {
-    "python": {
-      "interpreter": "/usr/bin/python3.12",
-      "version": "Python 3.12.3",
-      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
-    },
-    "analyzer": {
-      "source": "papers/completion/autoformalization/receipts/snapshots/AF-021/evaluation/analyze_results.py",
-      "sha256": "5626ff58d5b44b298bf22a3295f28b105d67a7ae714afd3c216dfecefc2b0d9a",
-      "schema": "autoformalization-results-analysis/v1",
-      "standard_library_only": true
-    },
-    "frozen_inputs": {
-      "analyze_results_sha256": "5626ff58d5b44b298bf22a3295f28b105d67a7ae714afd3c216dfecefc2b0d9a",
-      "checkpoint_baselines_sha256": "b33d71df3cf66a27fba5b5470c73764e137d51d0452110f236b820fe10cefaf5",
-      "checkpoint_native_sha256": "a6cc9c3fa78c365977c8409b9a02e479a4cce8b3b3bde8035e889e40064a9fa3",
-      "claim_task_map_sha256": "b3654785359b0b6ced9fdcf04ed092f370b3b5ed337178932803da23b5d34a58",
-      "corpus_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
-      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
-      "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
-      "native_training_manifest_sha256": "5efe5c80e4f7e03301c6921fcc3b7505301c278934f3639889433aa19107a33d",
-      "pipeline_manifest_sha256": "8065804d1f466f691117e15eff901ffa7db254fec7ad8425a268f28a7dd2e474",
-      "private_final_ids_disclosed": false,
-      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
-      "structural_evidence_scope_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
-      "training_manifest_sha256": "af982b68966b219a7e4bad45acb7c42db30f6665073db1992d266f981178a99b",
-      "unrun_tables_sha256": "016cfd5c1e6e83e2f36faf85ef7372a6bc7534cd891e2b3db2054cb0f520c614"
-    },
-    "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
-    "empirical_execution": "Stdlib aggregation of frozen AF-007 unrun accounting and retained AF-011..AF-020/AF-029 records. No model call, training, native checker, or final-test body access."
-  },
   "artifacts": {
     "papers/completion/autoformalization/receipts/snapshots/AF-021/check_outputs.py": "be864bdfcccbc473f604605d4dd2e52355d462fbb31961834dae59dc83e070bf",
     "papers/completion/autoformalization/receipts/snapshots/AF-021/evaluation/analyze_results.py": "5626ff58d5b44b298bf22a3295f28b105d67a7ae714afd3c216dfecefc2b0d9a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/actual_execution.json": "4b1296a3b19720237702739e05c890f4a340c9255696498a94b6265bae90592c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/feedback_status.json": "16bb09ce3abdbd39525430d86eab1ab5432b33ceac1a0e4e746cc8fc86bc849a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.json": "e0458428ed1750872cc3b74ed740cfb4e930dcceedce0aa35a04ad37093ce5c3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stdout": "db75192f3cb264807d4636032af2f41cae474dbc7769d6aab91cebb83ae5879c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.json": "dcee8162e6fb941234af0c2b796426fbe7606c55cf95857cd9b63e52d9d2ab7c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stdout": "2846c24872cd472f203d5c8ab57cd8aebc5744d4d248912b8103105e6fecb31f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/evaluation/analyze_results.py": "ba8ae8261f080ecffc4f2f1aeb622848d1d1936a54b83baf89011c7148e28193",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/hypothesis_report.md": "771efaf14ae0101a699eedc26b26504c016dce18dd42c071c9265a39b132fd97",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/summary.json": "d369e99ec3bcc9d1bbd12361ca73300d2297b5363806be77dcd2625889bb2276",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table11_training.tex": "b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table13_assistance.tex": "dab02cc945ce5db5efb16685daa2d6ca4cfaef9b03a6f96781c7829611322117",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table6_pipeline.tex": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/prior_receipt.json": "6e9e8277557c38f13a9697ce4da85b57c2baec33a8f9ceb4371a5f7fdce5ef8c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/source/analyze_results.py": "ba8ae8261f080ecffc4f2f1aeb622848d1d1936a54b83baf89011c7148e28193",
+    "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/source/check_corrected_evidence.py": "53ff6b84d3196d696ddea8de8c4231c10d35ff5ceecbdc9e7cf89a92650263bb",
     "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/analyze.meta.json": "895874d727a6396ff579564241854860b9076d5cfa12ae89a7830c61e5f0f396",
     "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/analyze.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/analyze.stdout.log": "0a9919884cb956f985822e55cc76a21c107b48970a19440d85f799c04e12e04b",
@@ -52,143 +34,134 @@
     "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table6_pipeline.tex": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49",
     "papers/completion/autoformalization/receipts/snapshots/AF-021/run_sealed.py": "09e69020822190ddcb4c894f095189a8e8bfe0faa9cd688c2911bb5ed7936401"
   },
-  "outputs": {
-    "papers/completion/autoformalization/evaluation/analyze_results.py": "papers/completion/autoformalization/receipts/snapshots/AF-021/evaluation/analyze_results.py",
-    "papers/completion/autoformalization/results/table6_pipeline.tex": "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table6_pipeline.tex",
-    "papers/completion/autoformalization/results/table11_training.tex": "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table11_training.tex",
-    "papers/completion/autoformalization/results/table13_assistance.tex": "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table13_assistance.tex",
-    "papers/completion/autoformalization/results/summary.json": "papers/completion/autoformalization/receipts/snapshots/AF-021/results/summary.json",
-    "papers/completion/autoformalization/results/hypothesis_report.md": "papers/completion/autoformalization/receipts/snapshots/AF-021/results/hypothesis_report.md"
+  "commands": [
+    {
+      "argv": [
+        "python",
+        "-B",
+        "papers/completion/autoformalization/evaluation/analyze_results.py",
+        "--check"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.09523162699770182,
+      "execution_kind": "actual corrective source/retained-byte/format validation; no new scientific run",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stdout",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/source/analyze_results.py",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stderr"
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "papers/completion/autoformalization/evaluation/final_correction/check_corrected_evidence.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.7926393199013546,
+      "execution_kind": "actual corrective source/retained-byte/format validation; no new scientific run",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stdout",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/source/check_corrected_evidence.py",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stderr"
+    }
+  ],
+  "completed_at": "2026-09-12T23:51:34.125193+00:00",
+  "corrective_validation": {
+    "actor": "coordinating assistant",
+    "native_status_change_performed": false,
+    "native_worker_attempt_created": false,
+    "original_native_completion_is_historical": true,
+    "original_receipt": {
+      "completed_at": "2026-09-12T20:46:32.484076+00:00",
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/prior_receipt.json",
+      "sha256": "6e9e8277557c38f13a9697ce4da85b57c2baec33a8f9ceb4371a5f7fdce5ef8c"
+    },
+    "schema": "af-derived-evidence-correction/v1",
+    "scope": "Refresh current derived outputs against already-completed AF029/AF013 evidence; preserve all original snapshots and failed attempts. Root/native append-only validation remains a separate reviewed action."
   },
   "criteria": [
     {
       "criterion": "All 44 original TBD cells are replaced by audited measurements/intervals or explicit unavailable/unrun explanations with correspondingly narrowed claims.",
-      "status": "met",
-      "explanation": "Table 6 contributes 20 cells and Table 11 contributes 24 cells, the original 44 manuscript placeholders. Every cell has a definition, backing record, blockers, denominator, and narrowed claim. Coverage and cost remain unrun on the 1913-unit final-test population; independent fidelity remains unmeasured (null value, no invented interval); native useful-proof/transfer cells are unavailable because sealed PATH has no Lean/Z3/CVC5. Table 11 source/split counts are the frozen AF-004 inventory (train 69 / selection 15 / canary 38 / final-test 1913 locked). Table 13 retains six comparisons with constructed automatic-label diagnostics or explicit unavailability. remaining_placeholder_cells=0.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table6_pipeline.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table11_training.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table13_assistance.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/summary.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/check_outputs.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/evaluation/analyze_results.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table6_pipeline.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table11_training.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table13_assistance.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/summary.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/hypothesis_report.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "All 44 primary cells (20 Table 6, 24 Table 11) retain exact denominators and explicit measured-inventory, unrun, unavailable or unmeasured status. Actual three-seed T2/T3 updates and 114 rejected-promotion diagnostics are reported separately and do not fill the locked final-test cells.",
+      "status": "met"
     },
     {
       "criterion": "Raw counts, denominators, seeds, grouping, missingness and confidence-interval method are reproducible.",
-      "status": "met",
-      "explanation": "summary.json records raw counts (1913 final-test units, 20 groups, 69/15/38 split inventory, blank 100-packet gold templates with 0 valued records), denominators of 1913 for Tables 6/11/13 natural cells, seeds 104729/130363/155921, source-family/time grouping from splits.json, missingness (independent gold absent, native checkers absent, Arm E unactivated, human-review seconds unmeasured), and the prespecified 95% source-family/time-group cluster bootstrap with 10000 resamples. The interval is not_computed on the unrun final-test population and is not imputed. Regeneration from analyze_results.py is deterministic; unrun tables digest 016cfd5c1e6e83e2f36faf85ef7372a6bc7534cd891e2b3db2054cb0f520c614.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/summary.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/evaluation/analyze_results.py",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/analyze.stdout.log",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/check_outputs.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/evaluation/analyze_results.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table6_pipeline.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table11_training.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table13_assistance.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/summary.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/hypothesis_report.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "The actual reducer and clean ZIP regeneration reproduce fixed source hashes, raw counts, seeds, grouping, missingness and declared bootstrap method. No interval is fabricated where group observations are absent. Historical source_usage sums 481.585523993 seconds once and reconciles the identical phase_total projection; later actual costs and unknown prior interruptions remain distinct.",
+      "status": "met"
     },
     {
       "criterion": "Zero observed false transfers is not generalized to universal soundness.",
-      "status": "met",
-      "explanation": "Table 6 correct-transfer cells are unavailable with null numerators, not 0/1913 soundness. AF-016 selection rows have false_transfer=true count 0 and native_checked_proof count 0; constructed Q1 is labeled constructed_control. summary.json sets generalized_to_universal_soundness=false. The hypothesis report states: Zero observed false transfers is not generalized to universal soundness.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/summary.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/hypothesis_report.md",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/table6_pipeline.tex",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/check_outputs.stdout.log"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/evaluation/analyze_results.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table6_pipeline.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table11_training.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table13_assistance.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/summary.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/hypothesis_report.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "Finite constructed checks and exact-goal compiler-structural feedback are explicitly not source-semantic gold or universal soundness. T2 target-assisted reconstruction is not source-free learned reconstruction; actual AF013 promotion rejects every seed.",
+      "status": "met"
     },
     {
       "criterion": "Negative/inconclusive results are retained and no post-hoc test selection is represented as prespecified.",
-      "status": "met",
-      "explanation": "Prespecified C1-C6 remain unrun; C7 is inconclusive on constructed automatic-label diagnostics and does not fill natural Table 13 cells. H-T2-shared-learner is unsupported (AF-011 T2 accepted 0 shared-parameter epochs). The T1 memory diagnostic is labeled claim_admissible_for_paper_primary=false and does not fill Table 11 held-out fidelity. AF-029 packed_cpu updates, failed encoder-preparation attempts, AF-012 missing T3 feedback, AF-013 unactivated T4, and AF-014 unrun T5 improvement are retained. post_hoc_selection_represented_as_prespecified=false.",
       "evidence": [
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/hypothesis_report.md",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/results/summary.json",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/check_outputs.stdout.log",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/evaluation/analyze_results.py"
-      ]
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/evaluation/analyze_results.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table6_pipeline.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table11_training.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table13_assistance.tex",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/summary.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/hypothesis_report.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/actual_execution.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/analysis_v2.stdout",
+        "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/logs/actual_evidence_v4.stdout"
+      ],
+      "explanation": "Original AF011/012 failures, both OOM profiles, original final checker OOM, current saved-byte recovery, and unrun/unsupported hypotheses remain disclosed. The correction uses existing completed evidence and introduces no new experiment or post-hoc test selection.",
+      "status": "met"
     }
   ],
-  "commands": [
-    {
-      "argv": [
-        "/usr/bin/env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm",
-        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.cache",
-        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.config",
-        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.local/share",
-        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.local/state",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "PYTHONNOUSERSITE=1",
-        "LANG=C.UTF-8",
-        "/usr/bin/python3.12",
-        "-S",
-        "papers/completion/autoformalization/evaluation/analyze_results.py"
-      ],
-      "cwd": ".",
-      "elapsed_seconds": 0.06473209906835109,
-      "env": {
-        "HOME": "/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm",
-        "LANG": "C.UTF-8",
-        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "PYTHONNOUSERSITE": "1"
-      },
-      "execution_kind": "stdlib analysis of frozen records; no model, training, or provider call",
-      "exit_code": 0,
-      "finished_at": "2026-09-12T20:46:32.455267+00:00",
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/analyze.stdout.log",
-      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-021/evaluation/analyze_results.py",
-      "started_at": "2026-09-12T20:46:32.390524+00:00",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/analyze.stderr.log"
-    },
-    {
-      "argv": [
-        "/usr/bin/env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm",
-        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.cache",
-        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.config",
-        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.local/share",
-        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm/.local/state",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "PYTHONNOUSERSITE=1",
-        "LANG=C.UTF-8",
-        "/usr/bin/python3.12",
-        "-S",
-        "papers/completion/autoformalization/receipts/snapshots/AF-021/check_outputs.py"
-      ],
-      "cwd": ".",
-      "elapsed_seconds": 0.028428909019567072,
-      "env": {
-        "HOME": "/tmp/ipfs-accelerate-validation-home-af021-qsjbs7mm",
-        "LANG": "C.UTF-8",
-        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "PYTHONNOUSERSITE": "1"
-      },
-      "execution_kind": "stdlib check of regenerated tables, summary, and hypothesis report",
-      "exit_code": 0,
-      "finished_at": "2026-09-12T20:46:32.484076+00:00",
-      "log": "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/check_outputs.stdout.log",
-      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-021/check_outputs.py",
-      "started_at": "2026-09-12T20:46:32.455642+00:00",
-      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-021/logs/check_outputs.stderr.log"
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/analyze_results.py": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/evaluation/analyze_results.py",
+    "papers/completion/autoformalization/results/hypothesis_report.md": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/hypothesis_report.md",
+    "papers/completion/autoformalization/results/summary.json": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/summary.json",
+    "papers/completion/autoformalization/results/table11_training.tex": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table11_training.tex",
+    "papers/completion/autoformalization/results/table13_assistance.tex": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table13_assistance.tex",
+    "papers/completion/autoformalization/results/table6_pipeline.tex": "papers/completion/autoformalization/receipts/snapshots/AF-021/final-correction-v1/outputs/results/table6_pipeline.tex"
+  },
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "analysis_id": "e33d2ea1febda9b666deafdbecf12f427dfccf3ee25cd7bd4140fd365796b189",
+    "baseline_source": "e25c71be006a5ff2667999089ed1d1acc1c55553",
+    "empirical_execution": "Corrective source/metadata/LaTeX/table reproduction only; existing scientific runs are immutable.",
+    "python": {
+      "version": "Python 3.12.3"
     }
-  ],
-  "limitations": [
-    "Independent human semantic-fidelity, agreement, and adjudication were not collected and remain unmeasured.",
-    "Final-test 1913-unit identities remain locked; Tables 6/11 primary metrics are unrun or unavailable, not measured zeros.",
-    "Sealed PATH has no lean/lake/elan/z3/cvc5/vampire/eprover/coqc/isabelle.",
-    "AF-011 mock embeddings and AF-029 MiniLM teacher diagnostics are not original-source gold and do not fill Table 11 held-out fidelity.",
-    "AF-017/AF-018 constructed automatic-label diagnostics do not fill natural Table 13 cells.",
-    "Arm E / T4 remain unactivated. Zero observed false transfers is not universal soundness.",
-    "This receipt is provenance validation, not independent scientific replication or author sign-off."
-  ],
-  "notes": [
-    "AF-028 structural-evidence scope was read before choosing metrics or drafting claims.",
-    "Human annotations are unavailable and were not treated as a manuscript-completion prerequisite.",
-    "AF-029 real training and failed resource attempts/costs are cited without alteration or double counting into Table 6/11 cost cells."
-  ]
+  },
+  "status": "complete",
+  "task_id": "AF-021"
 }

@@ -1,0 +1,440 @@
+{
+  "counts": {
+    "checked": 61,
+    "timeout": 6,
+    "unsupported_fragment": 2
+  },
+  "coverage": {
+    "admitted_records": 2606,
+    "all_generated_obligations": 13932,
+    "path": "evidence/native_training/source_obligation_feedback/coverage.json",
+    "sha256": "0f6423cb8e71bb10111ee66429bc0496366d17eb36bf184853257c7ed7f612fa",
+    "supported_obligations": 2942,
+    "train_rows": 69
+  },
+  "frozen_inventory_sha256": "9847969c466222f8589143e8ba99abebfb0da64bc2d000eb90dad922f2162b78",
+  "native_checker_receipts": {
+    "path": "evidence/native_training/native_checker_receipts.jsonl",
+    "sha256": "3d5582599dc9ef95a28c5bb67ce805e200f35c91f6e18379e13d91fa35aaa909"
+  },
+  "prior_60_7_2_counts_are_separate_failed_run_history": true,
+  "rows": [
+    {
+      "exit_code": 0,
+      "ordinal": 0,
+      "receipt_sha256": "8c7794d5ddca67fb203dd7ace0957e74b52f670466aa1a29d0f980eb0e8dd015",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 1,
+      "receipt_sha256": "19b7d530e3240c957f4d9fcfc29b6c4be44bf7226624971a8ec9517e252fca8d",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 2,
+      "receipt_sha256": "acaa6d8be85a6a10ab5dc62bf6e9fc94e44d8db74cedc49a364663cab00a9918",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 3,
+      "receipt_sha256": "660e4db6ca8edbaf7941df84038f6fd9b3d81d4ca9302cea925b11b98c787f78",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 4,
+      "receipt_sha256": "15eb444b6b4f8c59ed30378b8d5fae1ca86ab04e8a8add2c23a28900b8dc342a",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 5,
+      "receipt_sha256": "3b9092e2b0b1eb96d5c37e9c33b310f42d3056e197e6959d0283353a4758e24d",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 6,
+      "receipt_sha256": "54231469c43b7e2abc50d89a3b1f5f9f28a10b28ebffc308977d8ce2bce2a7bf",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 7,
+      "receipt_sha256": "bbec0635e38609e057e5a9d25a72ee37bb3065b94b55be2813fb68f9ade98644",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 8,
+      "receipt_sha256": "4ec16773d423c81bdc380f1dcabfe2ace4b947a0bc15b94e8cdb131e83280484",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 9,
+      "receipt_sha256": "200897d0b7319e1732946e03d31a4b7e9dadffafea6e897952a440d321835a72",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 10,
+      "receipt_sha256": "c6abb5570b57a7e296aa58e3cb7f0311ee9dd6211017b7c8debf562a8ccc60c4",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 11,
+      "receipt_sha256": "2da84596e0162a8dd2a6867d2cef57c5602480682e3e38fca1e242a22b5ac734",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 12,
+      "receipt_sha256": "095d0f50fb38ff1ae5dfebe3f34f9945f74a17b32da814dcd85a3c9d28115032",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 13,
+      "receipt_sha256": "c0612a6103649b41952ad2b04141392a5b21fecc496d2cdc5bd36132f48922c3",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 14,
+      "receipt_sha256": "790ab1a7dafcef0cdf16ff6ec704c53cc7af292167023a32dc8f9120889ce451",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 15,
+      "receipt_sha256": "7ce33af382803b88da88087d66d7941a319b6ec516c646b8507552f0e4932387",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 16,
+      "receipt_sha256": "a3ae3e15356657dad0da7ded802fad2cd54b07173f9548d738875c5d6cc49977",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 17,
+      "receipt_sha256": "04c62c8cffb9d38db9b24d6b3d49f1c80ea43fe5f8c55cc4f0973b19184a4a1f",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 18,
+      "receipt_sha256": "052372c178b8c47c5701349c26345687f6db0f0d950e629ce68775bd8b4cfc83",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 19,
+      "receipt_sha256": "6e8334269a2f74312b278f086a9a32b858560cb75dafdfacc63a7584549f15a0",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 20,
+      "receipt_sha256": "7db6653e056abfd61b269ceed8a68296e5f1f1f322d92a8542095cbf51115906",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 21,
+      "receipt_sha256": "819c6d904b2407224b0de25fe0f5cd8b88d112ffb777f4b97c61253318f846cd",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 22,
+      "receipt_sha256": "e3f2c6ade8b3c03c333dd1bd78583d786078852ddf930af2734191638f6a701d",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 23,
+      "receipt_sha256": "a0f72f933458245a2c55993132c75e6ecfb0acc20cbce0fd379fb578836172cb",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 24,
+      "receipt_sha256": "89146c99d3b8b9967c91739a522f96fff07a2e6e01f7ebe7bb0863968241e61d",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 25,
+      "receipt_sha256": "166e295240c8aebdaaa965dfd3c225bd3d51adb2291967dd2ac09a6042cc7ace",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 26,
+      "receipt_sha256": "ddcd3b8298f95047fd6e205b3051db7ecfb03906290359b2d886cd3bb7679d7b",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 27,
+      "receipt_sha256": "d37a8431f932633e1ec1ef26fe8defa2d9a53f2fd97d4e095c131420c72afc0c",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 28,
+      "receipt_sha256": "d9d6b0640b4ccc2ce3f49076bf16b73478c4df1b3ec084c29304051b02520daf",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 29,
+      "receipt_sha256": "0ee4d8131ad9b3091f1de138c9433a945af844d3e782c1b80e7da0bbcc3abda9",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 30,
+      "receipt_sha256": "2f221413a3417b9cd07efa4fd1c27c02f2a44fceddddd6c8825bb2c584381507",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 31,
+      "receipt_sha256": "e0cd9d279a36d3b7a23be4c2218243f852e84e3912872d488753c4609f24bbcf",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 32,
+      "receipt_sha256": "e9426f910b65b39233fdcbea532736b08caeb14ff362480e903fa44e45e54447",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 33,
+      "receipt_sha256": "ddf914b40183019fbbf205ebe12429789711cf523e4038f2e33418ae608abfcf",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 34,
+      "receipt_sha256": "fe867370fd92e86f800c57a016fe547b1f5bb90463f899a717a407350367d220",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 35,
+      "receipt_sha256": "2075028608aa02fea8dab1ce83044e9d0ad84826b351e6dfd513d8ecde29fd9d",
+      "status": "checked"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 36,
+      "receipt_sha256": "bcc38b6152f7333b9b9f415cf34dd7d7e97333db21d5119e00b673a9a6411c9f",
+      "status": "timeout"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 37,
+      "receipt_sha256": "3f2cf9d6d584df87c6ac9a215b09f4282f9795827c39e45f397382134f13004b",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 38,
+      "receipt_sha256": "9235cb4e98560e1f69e18fcdf72a9f27acda21166884f40ec8f58d972c6fc719",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 39,
+      "receipt_sha256": "44e17a884d7cb69df172d8caa425430e41cf94aca01d7a86d09293f22afce25b",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 40,
+      "receipt_sha256": "56467b30ea2517ec20640700ddb096655e0c3ae3a8f89b4f8f12ea5aa724266a",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 41,
+      "receipt_sha256": "7c79d71fee8aec552de322d6977f18473cd5374098da23dc10818e7804869473",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 42,
+      "receipt_sha256": "2729f06295228c1525da4b2b19d262d7b6b8b7f242b958ae156bc1f5eafb897a",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 43,
+      "receipt_sha256": "7785f14c6f59fb032376a3cb8a6751d52c4036a4158f831fa45fea6e25942314",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 44,
+      "receipt_sha256": "f10b9f17d5b573940a6b1e748adaf42f470c026556ccbcb5d4a830e19b0e35c6",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 45,
+      "receipt_sha256": "926187b006c5d036790e831243d30a33f027fe2133dcc3482a90c855865fda96",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 46,
+      "receipt_sha256": "34e10f0b56e3159cab9eaa9f8fff6e68324777ce14158aea3f0b03a7b46b8792",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 47,
+      "receipt_sha256": "1d911b3a46b2de93238e3a916b971bc5f484cd7b2594b9e6decbab13df53620f",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 48,
+      "receipt_sha256": "7a0dd4e612eef6bd47b791073e9ed24236432dde31e8a05a4748e096330435c2",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 49,
+      "receipt_sha256": "b5fe56541a06dc009088a13c32c78bd06ceb62bc742ce9fa5cd50e083d6d4a9d",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 50,
+      "receipt_sha256": "e64eef81cdd8925cc0a6662606aac87c765e4162b981a4ff0cf3026523e15eb8",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 51,
+      "receipt_sha256": "a0dde8c44d5ab823b4320b4027878d0e0492f8c140fefcbeac81fe968f110751",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 52,
+      "receipt_sha256": "1d1f0bd434cb1f3d544e0e891b49a9797b972279fa6e40a2e86d3c69dfabf6c4",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 53,
+      "receipt_sha256": "358f28e6c412806aa5e5307230ced93f233cdb7ca465ef9a04a9c57ffdfd6495",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 54,
+      "receipt_sha256": "7e9e78c8e3522ee36bf73a3dd59731424e5a9ae70628af8e95047c212569008d",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 55,
+      "receipt_sha256": "83394c3c9b2c3cb5dd234d344cf65496e5c13e46a75c31ea03f819f5efebe296",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 56,
+      "receipt_sha256": "ff21b6eaf87d128fa7dfff054ba2e3bec8ac7ec540078e692077b5cdffb69d0b",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 57,
+      "receipt_sha256": "7721e09113e0bbd7a4f76d718ad5248f3e2f128cd54305451a58543c10341d7c",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 58,
+      "receipt_sha256": "3e5198ff3e414ed5b649f92d19aec2be835089500084f9755e8faff6600b691f",
+      "status": "checked"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 59,
+      "receipt_sha256": "5e0009e7e3f6da7f66dd63a5a11137b6146b355eb556625607ddc4f47f529945",
+      "status": "checked"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 60,
+      "receipt_sha256": "79a0e3cb8a4393880055d59b90190addc8864db144430925eb76e2738bf7d599",
+      "status": "unsupported_fragment"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 61,
+      "receipt_sha256": "4f9bb2427a478e04f77a87a53f385401cad1ceb16063f38ac1906f1f4a1eb1ef",
+      "status": "timeout"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 62,
+      "receipt_sha256": "47d9187fa9405a50f3e8d30f97c4e54fa3f1c82a517e1926c53c974306285687",
+      "status": "timeout"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 63,
+      "receipt_sha256": "fec9ebdfe348e5acbae49e82987c57d3de0a571b958ed33ea06f7938f3c563fc",
+      "status": "timeout"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 64,
+      "receipt_sha256": "a3f4d22fb6c01d070c723816d02059e0e5ced8c04b75e1b289a5edbdb234f123",
+      "status": "timeout"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 65,
+      "receipt_sha256": "67b93dbe0ae8842d689cf918d1e0860ed1182b08de12f6d0bd0775c4da3060ff",
+      "status": "timeout"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 66,
+      "receipt_sha256": "28850d8cb7b36040c4eadc51a922e46bf41e30bcddeab56b3673fa7cc68f1fa9",
+      "status": "checked"
+    },
+    {
+      "exit_code": null,
+      "ordinal": 67,
+      "receipt_sha256": "2b0c72bc8905b72ec247d1d7128b93d7e1ffd5dda44ad0ccc799526619ea3e1b",
+      "status": "unsupported_fragment"
+    },
+    {
+      "exit_code": 0,
+      "ordinal": 68,
+      "receipt_sha256": "658802b4ab25d5ea88ae3f82d3dbc9b7bd162254c276b5914271de0637716836",
+      "status": "checked"
+    }
+  ],
+  "schema": "af-final-feedback-status-projection/v1",
+  "scope": "final amended run compiler-structural feedback, not prior OOM attempts or semantic gold",
+  "semantic_fidelity_measured": false
+}
