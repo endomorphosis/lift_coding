@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "import json, pathlib, sys\npaths=sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding=\"utf-8\"))\n    print(path, \"ok\")\n",
+    "papers/completion/autoformalization/config/pipeline_arms.json",
+    "papers/completion/autoformalization/data/review_binding_manifest.json",
+    "papers/completion/autoformalization/data/review_packet_schema.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/qualification.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/model_call_receipt.json",
+    "papers/completion/autoformalization/evidence/runtime_qualification/input_manifest.json"
+  ],
+  "cwd": ".",
+  "exit_code": 0,
+  "finished_at": "2026-09-12T06:13:29.359993+00:00",
+  "log": "papers/completion/autoformalization/evidence/runtime_qualification/logs/check_json.stdout.log",
+  "started_at": "2026-09-12T06:13:29.341567+00:00",
+  "stderr_log": "papers/completion/autoformalization/evidence/runtime_qualification/logs/check_json.stderr.log"
+}

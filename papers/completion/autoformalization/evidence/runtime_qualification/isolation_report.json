@@ -1,0 +1,249 @@
+{
+  "all_isolation_passed": true,
+  "inspected_sources": {
+    "bridge_cases.py": {
+      "contains_frozen_profile_id": false,
+      "contains_learned_guidance_schema": false,
+      "contains_no_guidance": false,
+      "exists": true,
+      "imported": true,
+      "note": "AF-015 finite bridges are D-only evidence. C must not consume them.",
+      "path": "papers/completion/autoformalization/evaluation/bridge_cases.py",
+      "role": "D checked-bridge obligations and translation-receipt schema",
+      "sha256": "643a5b66489a787aefd809ac58ee9dc4dc016e5325fafd850e7f0957f7608abe"
+    },
+    "canonical_compiler.py": {
+      "contains_frozen_profile_id": false,
+      "contains_learned_guidance_schema": false,
+      "contains_no_guidance": true,
+      "exists": true,
+      "imported": false,
+      "note": "Composition pins guidance=no_guidance and repair=no_repair.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "role": "B typed-deontic compiler with caller-supplied vocabulary",
+      "sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87"
+    },
+    "canonical_contracts.py": {
+      "contains_frozen_profile_id": true,
+      "contains_learned_guidance_schema": false,
+      "contains_no_guidance": true,
+      "exists": true,
+      "imported": false,
+      "note": "IMPLEMENTATION_REPRESENTATIVE_ARM_ID is typed_deontic__no_guidance__no_repair__not_applicable__deterministic.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "role": "B representative arm identity",
+      "sha256": "9e6be753d3d714131fa01b1196725e89ba95904a9f04f5186646fe6d4f40b7b9"
+    },
+    "canonical_roundtrip.py": {
+      "contains_frozen_profile_id": false,
+      "contains_learned_guidance_schema": false,
+      "contains_no_guidance": false,
+      "exists": true,
+      "imported": false,
+      "note": "Inspected. Production import requires multiformats; AF-027 uses a stdlib frozen-profile replica when import fails.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "role": "B/C deterministic compiler and source-withheld round-trip composition",
+      "sha256": "0755cce95acc5e8094a109254cf841c1bdbbcec340f16a68023cdd4d93f9b864"
+    },
+    "intent_formalization_compiler.py": {
+      "contains_frozen_profile_id": false,
+      "contains_learned_guidance_schema": false,
+      "contains_no_guidance": false,
+      "exists": true,
+      "imported": false,
+      "note": "Native import requires multiformats; AF-027 uses a stdlib multiview replica when import fails.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+      "role": "C typed source-grounded multi-view compiler (AF-003 selected entry)",
+      "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552"
+    },
+    "legal_ir_learned_guidance.py": {
+      "contains_frozen_profile_id": false,
+      "contains_learned_guidance_schema": true,
+      "contains_no_guidance": true,
+      "exists": true,
+      "imported": false,
+      "note": "Advisor only. Absent AF-011/AF-013 receipts keep E unavailable.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py",
+      "role": "E promotion boundary for source-free stable-feature advice",
+      "sha256": "afdb96d257d201208ddde729c9dab3735763e3fc9b553bfc0f5ff23c1197b6d7"
+    },
+    "scientific_gateway.py": {
+      "contains_frozen_profile_id": false,
+      "contains_learned_guidance_schema": false,
+      "contains_no_guidance": false,
+      "exists": true,
+      "imported": true,
+      "note": "Nested workers do not dispatch supervisor jobs; A uses this gateway.",
+      "path": "papers/completion/autoformalization/evaluation/scientific_gateway.py",
+      "role": "A served Grok primary / Codex quota-only fallback",
+      "sha256": "7897f05071dfb24dede621692baf67cfbe7f4f016df459e29c8d3f5e9fbb1aa7"
+    }
+  },
+  "tests": [
+    {
+      "detail": "entry_point=papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_a; features=['declared_vocabulary', 'source_text']; oracles=['direct_model_inference', 'independent_facet_adjudication', 'target_checker']",
+      "features": [
+        "declared_vocabulary",
+        "source_text"
+      ],
+      "name": "A_entry_point_and_oracle_access",
+      "oracles": [
+        "direct_model_inference",
+        "independent_facet_adjudication",
+        "target_checker"
+      ],
+      "passed": true
+    },
+    {
+      "detail": "entry_point=papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_b; features=['declared_vocabulary', 'explicit_abstention', 'source_maps', 'source_text', 'typed_deontic_ir']; oracles=['deterministic_bounded_compiler', 'independent_facet_adjudication', 'target_checker']",
+      "features": [
+        "declared_vocabulary",
+        "explicit_abstention",
+        "source_maps",
+        "source_text",
+        "typed_deontic_ir"
+      ],
+      "name": "B_entry_point_and_oracle_access",
+      "oracles": [
+        "deterministic_bounded_compiler",
+        "independent_facet_adjudication",
+        "target_checker"
+      ],
+      "passed": true
+    },
+    {
+      "detail": "entry_point=papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_c; features=['declared_vocabulary', 'source_grounding', 'source_maps', 'source_text', 'typed_multiview']; oracles=['independent_facet_adjudication', 'native_proof_checker_where_supported', 'pinned_compiler_elaborator']",
+      "features": [
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "name": "C_entry_point_and_oracle_access",
+      "oracles": [
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_compiler_elaborator"
+      ],
+      "passed": true
+    },
+    {
+      "detail": "entry_point=papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_d; features=['checked_property_bridges', 'compatible_premise_assembly', 'declared_vocabulary', 'source_grounding', 'source_maps', 'source_text', 'typed_multiview']; oracles=['bridge_obligations', 'independent_facet_adjudication', 'native_proof_checker_where_supported', 'pinned_compiler_elaborator', 'premise_compatibility_nonvacuity']",
+      "features": [
+        "checked_property_bridges",
+        "compatible_premise_assembly",
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "name": "D_entry_point_and_oracle_access",
+      "oracles": [
+        "bridge_obligations",
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_compiler_elaborator",
+        "premise_compatibility_nonvacuity"
+      ],
+      "passed": true
+    },
+    {
+      "detail": "entry_point=papers/completion/autoformalization/evaluation/pipeline_arms.py:run_arm_e; features=['bounded_learned_view_premise_advice', 'checked_property_bridges', 'compatible_premise_assembly', 'declared_vocabulary', 'source_grounding', 'source_maps', 'source_text', 'typed_multiview']; oracles=['bridge_obligations', 'independent_facet_adjudication', 'native_proof_checker_where_supported', 'pinned_checkpoint_advice', 'pinned_compiler_elaborator', 'premise_compatibility_nonvacuity']",
+      "features": [
+        "bounded_learned_view_premise_advice",
+        "checked_property_bridges",
+        "compatible_premise_assembly",
+        "declared_vocabulary",
+        "source_grounding",
+        "source_maps",
+        "source_text",
+        "typed_multiview"
+      ],
+      "name": "E_entry_point_and_oracle_access",
+      "oracles": [
+        "bridge_obligations",
+        "independent_facet_adjudication",
+        "native_proof_checker_where_supported",
+        "pinned_checkpoint_advice",
+        "pinned_compiler_elaborator",
+        "premise_compatibility_nonvacuity"
+      ],
+      "passed": true
+    },
+    {
+      "detail": "E has a distinct arm id, entry point, and advice channel from D",
+      "name": "E_separately_identifiable",
+      "passed": true
+    },
+    {
+      "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+      "detail": "E binds the same checker identity and digest as D",
+      "name": "E_checker_equals_D_checker",
+      "passed": true
+    },
+    {
+      "detail": "E is wired to later AF-011/AF-013 gates and remains unavailable",
+      "name": "E_wired_to_AF011_AF013_and_unavailable",
+      "passed": true
+    },
+    {
+      "detail": "arm C cannot consume D bridge evidence: ['bridge_evidence', 'bridge_records', 'checked_bridges', 'premise_assembly', 'autoformalization-translation-receipt/v1']",
+      "name": "C_rejects_bridge_evidence_field",
+      "passed": true
+    },
+    {
+      "detail": "arm C cannot consume D bridge evidence: ['translation_receipts', 'bridge_records', 'checked_bridges', 'premise_assembly', 'autoformalization-translation-receipt/v1']",
+      "name": "C_rejects_nested_translation_receipt",
+      "passed": true
+    },
+    {
+      "detail": "arm A cannot consume D bridge evidence: ['checked_bridges']",
+      "name": "A_rejects_bridge_evidence",
+      "passed": true
+    },
+    {
+      "detail": "arm B frozen canonical profile disables learned guidance and repair",
+      "name": "B_rejects_learned_guidance",
+      "passed": true
+    },
+    {
+      "detail": "D accepts the bridge channel, executes development obligations, and still admits no Table 6 claim",
+      "execution_status": "measured",
+      "name": "D_may_name_bridge_evidence_but_not_claim_table6",
+      "passed": true,
+      "result_sha256": "144f18d3779b4224c6fccd0197c68272f75ad3c3241e2b0ed9a3f6dffaa3243c"
+    },
+    {
+      "detail": "arm E cannot silently alter its checker: ['checker_override']",
+      "name": "E_rejects_checker_override",
+      "passed": true
+    },
+    {
+      "detail": "arm E cannot silently alter its checker: ['checker_digest']",
+      "name": "E_rejects_checker_digest_drift",
+      "passed": true
+    },
+    {
+      "detail": "arm E cannot silently alter its checker: ['advice_as_checker']",
+      "name": "E_rejects_advice_as_checker",
+      "passed": true
+    },
+    {
+      "detail": "arm C refuses synthetic success markers ['synthetic_success']",
+      "name": "C_rejects_synthetic_success_flag",
+      "passed": true
+    },
+    {
+      "detail": "request experiment_arm E does not match adapter B",
+      "name": "B_rejects_E_identity",
+      "passed": true
+    },
+    {
+      "detail": "E stays unavailable and receives no measured credit",
+      "name": "E_unavailable_without_measured_credit",
+      "passed": true
+    }
+  ]
+}

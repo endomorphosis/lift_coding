@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "papers/completion/autoformalization/evaluation/qualify_runtime.py",
+    "smoke"
+  ],
+  "cwd": ".",
+  "default_sealed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "reproduces": [
+    "worker_runtime",
+    "python_torch_numpy_visibility",
+    "native_checker_visibility",
+    "scientific_gateway_model_to_target",
+    "independent_native_checker",
+    "A_D_development_routes",
+    "E_unavailable",
+    "review_binding",
+    "receipt_accounting"
+  ],
+  "worker_boundary": true
+}

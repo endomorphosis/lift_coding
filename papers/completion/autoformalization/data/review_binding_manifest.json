@@ -1,0 +1,1683 @@
+{
+  "created_at": "2026-09-12T06:10:58.029851+00:00",
+  "gold_custody": {
+    "label_origin": null,
+    "private_pending_gold": "gold_facets.pending.private.jsonl",
+    "private_pending_gold_sha256": "8611d4f80dc6d43748cf3a9f1a72c66a6b368079aa650216f42b05c7a071694c",
+    "public_templates": "papers/completion/autoformalization/data/gold_facets.jsonl",
+    "public_templates_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+    "separate_from_packets": true,
+    "values_present": false
+  },
+  "grouping": {
+    "accounting": {
+      "giant_component": {
+        "N_h": 1730,
+        "n_h": 74,
+        "note": "dominates unit weighting"
+      },
+      "groups": 20,
+      "inclusion_probability": "n_h/N_h",
+      "inverse_probability_weight": "N_h/n_h",
+      "population_unique_units": 1913,
+      "primary_estimand": "finite-population unit mean over 1913 unique final units; group dependence retained",
+      "sampled_units": 100,
+      "weight_sum": 1913
+    },
+    "anonymous_groups": [
+      {
+        "N_h": 1730,
+        "inclusion_probability": {
+          "denominator": 1730,
+          "exact": "74/1730",
+          "numerator": 74
+        },
+        "inverse_probability_weight": {
+          "denominator": 74,
+          "exact": "1730/74",
+          "numerator": 1730
+        },
+        "n_h": 74
+      },
+      {
+        "N_h": 29,
+        "inclusion_probability": {
+          "denominator": 29,
+          "exact": "2/29",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "29/2",
+          "numerator": 29
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 28,
+        "inclusion_probability": {
+          "denominator": 28,
+          "exact": "2/28",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "28/2",
+          "numerator": 28
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 25,
+        "inclusion_probability": {
+          "denominator": 25,
+          "exact": "2/25",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "25/2",
+          "numerator": 25
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 15,
+        "inclusion_probability": {
+          "denominator": 15,
+          "exact": "2/15",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "15/2",
+          "numerator": 15
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 10,
+        "inclusion_probability": {
+          "denominator": 10,
+          "exact": "2/10",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "10/2",
+          "numerator": 10
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 10,
+        "inclusion_probability": {
+          "denominator": 10,
+          "exact": "2/10",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "10/2",
+          "numerator": 10
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 8,
+        "inclusion_probability": {
+          "denominator": 8,
+          "exact": "1/8",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "8/1",
+          "numerator": 8
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 8,
+        "inclusion_probability": {
+          "denominator": 8,
+          "exact": "2/8",
+          "numerator": 2
+        },
+        "inverse_probability_weight": {
+          "denominator": 2,
+          "exact": "8/2",
+          "numerator": 8
+        },
+        "n_h": 2
+      },
+      {
+        "N_h": 7,
+        "inclusion_probability": {
+          "denominator": 7,
+          "exact": "1/7",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "7/1",
+          "numerator": 7
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 6,
+        "inclusion_probability": {
+          "denominator": 6,
+          "exact": "1/6",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "6/1",
+          "numerator": 6
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 6,
+        "inclusion_probability": {
+          "denominator": 6,
+          "exact": "1/6",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "6/1",
+          "numerator": 6
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 5,
+        "inclusion_probability": {
+          "denominator": 5,
+          "exact": "1/5",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "5/1",
+          "numerator": 5
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 5,
+        "inclusion_probability": {
+          "denominator": 5,
+          "exact": "1/5",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "5/1",
+          "numerator": 5
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 4,
+        "inclusion_probability": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "4/1",
+          "numerator": 4
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 4,
+        "inclusion_probability": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "4/1",
+          "numerator": 4
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 4,
+        "inclusion_probability": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "4/1",
+          "numerator": 4
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 3,
+        "inclusion_probability": {
+          "denominator": 3,
+          "exact": "1/3",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "3/1",
+          "numerator": 3
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 3,
+        "inclusion_probability": {
+          "denominator": 3,
+          "exact": "1/3",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "3/1",
+          "numerator": 3
+        },
+        "n_h": 1
+      },
+      {
+        "N_h": 3,
+        "inclusion_probability": {
+          "denominator": 3,
+          "exact": "1/3",
+          "numerator": 1
+        },
+        "inverse_probability_weight": {
+          "denominator": 1,
+          "exact": "3/1",
+          "numerator": 3
+        },
+        "n_h": 1
+      }
+    ],
+    "private_bound_ids_supersede_provisional_membership": true,
+    "public_provisional_slots_retained": true,
+    "stratum": "unchanged AF004 connected component; every one of20 final-test components included"
+  },
+  "guideline_freeze": "AF-005/v1",
+  "inclusion": {
+    "evaluation_eligibility": false,
+    "inverse_probability_weight": "N_h/n_h",
+    "no_missing_labels_as_failures": true,
+    "probability": "n_h/N_h",
+    "weight_sum": 1913
+  },
+  "limits": [
+    "100 privately bound sources are prepared, not independently annotated.",
+    "Repository outputs contain aggregate commitments and schemas only.",
+    "Reviewer judgments remain blank until AF-028.",
+    "This importer must not generate labels."
+  ],
+  "manifest_sha256": "5474f9edc5e55ac321fac27ff34fe392fd879af4f0aac2fae9dc02d8f077a6a8",
+  "operator_binding": {
+    "binding_report_sha256": "f98dd0602495927989cbe9919f4a828dcee95cccd78c54c08d79ccdd064a00fb",
+    "final_identities_in_repository": false,
+    "independent_verification_sha256": "68219c5c933370b59c01b5d30e966788b7316c44a9d083a62d9888014d65a285",
+    "private_commitments": {
+      "annotation_packets.private.jsonl": "d9b205cd871deb47f8c28c1597dad531b06a0204080c5d68945118b328432ddf",
+      "binding_manifest.private.json": "cd5e5a0915144289e20632ae7db0f20df4c9af046806dfcbc9657feeae4a3f91",
+      "gold_facets.pending.private.jsonl": "8611d4f80dc6d43748cf3a9f1a72c66a6b368079aa650216f42b05c7a071694c",
+      "sampling_plan.json": "41bfb6978de5560fcc7404c04e34fe8b42297c3c875c7ec3353c9fc55348e87a"
+    },
+    "private_directory": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/af005-independent-annotation-v1",
+    "private_modes": "directory0700/files0600",
+    "sampling_plan_sha256": "41bfb6978de5560fcc7404c04e34fe8b42297c3c875c7ec3353c9fc55348e87a",
+    "source_bodies_in_repository": false
+  },
+  "operator_verification": {
+    "bound_units": 100,
+    "evaluation_eligible_units": 0,
+    "human_annotations": 0,
+    "passed": true
+  },
+  "packet_identities": [
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-001",
+      "public_group_slot": "G01",
+      "public_packet_id": "AF005-FT-G01-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-002",
+      "public_group_slot": "G01",
+      "public_packet_id": "AF005-FT-G01-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-003",
+      "public_group_slot": "G01",
+      "public_packet_id": "AF005-FT-G01-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-004",
+      "public_group_slot": "G02",
+      "public_packet_id": "AF005-FT-G02-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-005",
+      "public_group_slot": "G02",
+      "public_packet_id": "AF005-FT-G02-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-006",
+      "public_group_slot": "G02",
+      "public_packet_id": "AF005-FT-G02-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-007",
+      "public_group_slot": "G03",
+      "public_packet_id": "AF005-FT-G03-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-008",
+      "public_group_slot": "G03",
+      "public_packet_id": "AF005-FT-G03-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-009",
+      "public_group_slot": "G03",
+      "public_packet_id": "AF005-FT-G03-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-010",
+      "public_group_slot": "G04",
+      "public_packet_id": "AF005-FT-G04-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-011",
+      "public_group_slot": "G04",
+      "public_packet_id": "AF005-FT-G04-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-012",
+      "public_group_slot": "G04",
+      "public_packet_id": "AF005-FT-G04-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-013",
+      "public_group_slot": "G04",
+      "public_packet_id": "AF005-FT-G04-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-014",
+      "public_group_slot": "G05",
+      "public_packet_id": "AF005-FT-G05-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-015",
+      "public_group_slot": "G05",
+      "public_packet_id": "AF005-FT-G05-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-016",
+      "public_group_slot": "G05",
+      "public_packet_id": "AF005-FT-G05-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-017",
+      "public_group_slot": "G05",
+      "public_packet_id": "AF005-FT-G05-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-018",
+      "public_group_slot": "G06",
+      "public_packet_id": "AF005-FT-G06-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-019",
+      "public_group_slot": "G06",
+      "public_packet_id": "AF005-FT-G06-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-020",
+      "public_group_slot": "G06",
+      "public_packet_id": "AF005-FT-G06-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-021",
+      "public_group_slot": "G06",
+      "public_packet_id": "AF005-FT-G06-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-022",
+      "public_group_slot": "G07",
+      "public_packet_id": "AF005-FT-G07-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-023",
+      "public_group_slot": "G07",
+      "public_packet_id": "AF005-FT-G07-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-024",
+      "public_group_slot": "G07",
+      "public_packet_id": "AF005-FT-G07-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-025",
+      "public_group_slot": "G07",
+      "public_packet_id": "AF005-FT-G07-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-026",
+      "public_group_slot": "G07",
+      "public_packet_id": "AF005-FT-G07-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-027",
+      "public_group_slot": "G08",
+      "public_packet_id": "AF005-FT-G08-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-028",
+      "public_group_slot": "G08",
+      "public_packet_id": "AF005-FT-G08-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-029",
+      "public_group_slot": "G08",
+      "public_packet_id": "AF005-FT-G08-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-030",
+      "public_group_slot": "G08",
+      "public_packet_id": "AF005-FT-G08-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-031",
+      "public_group_slot": "G08",
+      "public_packet_id": "AF005-FT-G08-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-032",
+      "public_group_slot": "G09",
+      "public_packet_id": "AF005-FT-G09-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-033",
+      "public_group_slot": "G09",
+      "public_packet_id": "AF005-FT-G09-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-034",
+      "public_group_slot": "G09",
+      "public_packet_id": "AF005-FT-G09-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-035",
+      "public_group_slot": "G09",
+      "public_packet_id": "AF005-FT-G09-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-036",
+      "public_group_slot": "G09",
+      "public_packet_id": "AF005-FT-G09-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-037",
+      "public_group_slot": "G09",
+      "public_packet_id": "AF005-FT-G09-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-038",
+      "public_group_slot": "G10",
+      "public_packet_id": "AF005-FT-G10-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-039",
+      "public_group_slot": "G10",
+      "public_packet_id": "AF005-FT-G10-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-040",
+      "public_group_slot": "G10",
+      "public_packet_id": "AF005-FT-G10-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-041",
+      "public_group_slot": "G10",
+      "public_packet_id": "AF005-FT-G10-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-042",
+      "public_group_slot": "G10",
+      "public_packet_id": "AF005-FT-G10-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-043",
+      "public_group_slot": "G10",
+      "public_packet_id": "AF005-FT-G10-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-044",
+      "public_group_slot": "G11",
+      "public_packet_id": "AF005-FT-G11-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-045",
+      "public_group_slot": "G11",
+      "public_packet_id": "AF005-FT-G11-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-046",
+      "public_group_slot": "G11",
+      "public_packet_id": "AF005-FT-G11-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-047",
+      "public_group_slot": "G11",
+      "public_packet_id": "AF005-FT-G11-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-048",
+      "public_group_slot": "G11",
+      "public_packet_id": "AF005-FT-G11-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-049",
+      "public_group_slot": "G11",
+      "public_packet_id": "AF005-FT-G11-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-050",
+      "public_group_slot": "G12",
+      "public_packet_id": "AF005-FT-G12-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-051",
+      "public_group_slot": "G12",
+      "public_packet_id": "AF005-FT-G12-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-052",
+      "public_group_slot": "G12",
+      "public_packet_id": "AF005-FT-G12-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-053",
+      "public_group_slot": "G12",
+      "public_packet_id": "AF005-FT-G12-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-054",
+      "public_group_slot": "G12",
+      "public_packet_id": "AF005-FT-G12-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-055",
+      "public_group_slot": "G12",
+      "public_packet_id": "AF005-FT-G12-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-056",
+      "public_group_slot": "G13",
+      "public_packet_id": "AF005-FT-G13-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-057",
+      "public_group_slot": "G13",
+      "public_packet_id": "AF005-FT-G13-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-058",
+      "public_group_slot": "G13",
+      "public_packet_id": "AF005-FT-G13-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-059",
+      "public_group_slot": "G13",
+      "public_packet_id": "AF005-FT-G13-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-060",
+      "public_group_slot": "G13",
+      "public_packet_id": "AF005-FT-G13-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-061",
+      "public_group_slot": "G13",
+      "public_packet_id": "AF005-FT-G13-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-062",
+      "public_group_slot": "G14",
+      "public_packet_id": "AF005-FT-G14-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-063",
+      "public_group_slot": "G14",
+      "public_packet_id": "AF005-FT-G14-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-064",
+      "public_group_slot": "G14",
+      "public_packet_id": "AF005-FT-G14-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-065",
+      "public_group_slot": "G14",
+      "public_packet_id": "AF005-FT-G14-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-066",
+      "public_group_slot": "G14",
+      "public_packet_id": "AF005-FT-G14-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-067",
+      "public_group_slot": "G14",
+      "public_packet_id": "AF005-FT-G14-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-068",
+      "public_group_slot": "G15",
+      "public_packet_id": "AF005-FT-G15-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-069",
+      "public_group_slot": "G15",
+      "public_packet_id": "AF005-FT-G15-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-070",
+      "public_group_slot": "G15",
+      "public_packet_id": "AF005-FT-G15-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-071",
+      "public_group_slot": "G15",
+      "public_packet_id": "AF005-FT-G15-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-072",
+      "public_group_slot": "G15",
+      "public_packet_id": "AF005-FT-G15-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-073",
+      "public_group_slot": "G15",
+      "public_packet_id": "AF005-FT-G15-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-074",
+      "public_group_slot": "G16",
+      "public_packet_id": "AF005-FT-G16-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-075",
+      "public_group_slot": "G16",
+      "public_packet_id": "AF005-FT-G16-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-076",
+      "public_group_slot": "G16",
+      "public_packet_id": "AF005-FT-G16-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-077",
+      "public_group_slot": "G16",
+      "public_packet_id": "AF005-FT-G16-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-078",
+      "public_group_slot": "G16",
+      "public_packet_id": "AF005-FT-G16-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-079",
+      "public_group_slot": "G16",
+      "public_packet_id": "AF005-FT-G16-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-080",
+      "public_group_slot": "G17",
+      "public_packet_id": "AF005-FT-G17-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-081",
+      "public_group_slot": "G17",
+      "public_packet_id": "AF005-FT-G17-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-082",
+      "public_group_slot": "G17",
+      "public_packet_id": "AF005-FT-G17-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-083",
+      "public_group_slot": "G17",
+      "public_packet_id": "AF005-FT-G17-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-084",
+      "public_group_slot": "G17",
+      "public_packet_id": "AF005-FT-G17-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-085",
+      "public_group_slot": "G17",
+      "public_packet_id": "AF005-FT-G17-U06",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-086",
+      "public_group_slot": "G18",
+      "public_packet_id": "AF005-FT-G18-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-087",
+      "public_group_slot": "G18",
+      "public_packet_id": "AF005-FT-G18-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-088",
+      "public_group_slot": "G18",
+      "public_packet_id": "AF005-FT-G18-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-089",
+      "public_group_slot": "G18",
+      "public_packet_id": "AF005-FT-G18-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-090",
+      "public_group_slot": "G18",
+      "public_packet_id": "AF005-FT-G18-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-091",
+      "public_group_slot": "G19",
+      "public_packet_id": "AF005-FT-G19-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-092",
+      "public_group_slot": "G19",
+      "public_packet_id": "AF005-FT-G19-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-093",
+      "public_group_slot": "G19",
+      "public_packet_id": "AF005-FT-G19-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-094",
+      "public_group_slot": "G19",
+      "public_packet_id": "AF005-FT-G19-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-095",
+      "public_group_slot": "G19",
+      "public_packet_id": "AF005-FT-G19-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-096",
+      "public_group_slot": "G20",
+      "public_packet_id": "AF005-FT-G20-U01",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-097",
+      "public_group_slot": "G20",
+      "public_packet_id": "AF005-FT-G20-U02",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-098",
+      "public_group_slot": "G20",
+      "public_packet_id": "AF005-FT-G20-U03",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-099",
+      "public_group_slot": "G20",
+      "public_packet_id": "AF005-FT-G20-U04",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    },
+    {
+      "gold_custody": "private_reviewer_store",
+      "gold_values_present": false,
+      "judgments": null,
+      "private_bound_packet_id": "AF005-BOUND-100",
+      "public_group_slot": "G20",
+      "public_packet_id": "AF005-FT-G20-U05",
+      "reviewer_judgment_status": "blank_until_AF-028",
+      "source_body_published": false,
+      "source_digest_custody": "private_reviewer_store",
+      "source_digest_published": false,
+      "split": "final_test"
+    }
+  ],
+  "pending_review_task": "AF-028",
+  "population": {
+    "allocation": "Start n_h=1 per component. Allocate remaining80 by Hamilton largest remainder proportional to (N_h-1), bounded by N_h. Remainder ties use domain-separated HMAC group order. No retries or outcome substitutions.",
+    "bound_unique_units": 100,
+    "operational_groups": 20,
+    "randomization": "Within each component, take lowest domain-separated HMAC-SHA256 ranks of canonical unique-unit digests, keyed by the existing private partition salt; tie by full unit digest. First frozen protocol seed104729 is included in canonical message. Partition salt and memberships never change.",
+    "seed": 104729,
+    "selection_domain": "AF005-independent-annotation-final-v1",
+    "unique_final_units": 1913
+  },
+  "private_store_probe": {
+    "commitments_match": false,
+    "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/af005-independent-annotation-v1'",
+    "source_bodies_read": false,
+    "visible": false
+  },
+  "public_pins": {
+    "annotation_guidelines_sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+    "annotation_packets_sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "gold_facets_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+  },
+  "reviewer_judgments": {
+    "adjudicated_units": 0,
+    "evaluation_eligible_units": 0,
+    "human_annotations": 0,
+    "invented_annotations_forbidden": true,
+    "status": "blank_until_AF-028"
+  },
+  "schema": "autoformalization-review-binding-manifest/v1",
+  "task_id": "AF-027"
+}

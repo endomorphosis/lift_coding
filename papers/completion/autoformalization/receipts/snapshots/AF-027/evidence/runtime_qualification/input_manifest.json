@@ -1,0 +1,58 @@
+{
+  "arm_runs": "papers/completion/autoformalization/evidence/runtime_qualification/arm_development_runs.json",
+  "created_at": "2026-09-12T06:11:10.604961+00:00",
+  "final_test_used": false,
+  "gold_used": false,
+  "model_budget": {
+    "cached_leanstral_excluded": true,
+    "codex_fallback": "gpt-5.6-terra/high quota-only",
+    "gpu_or_model_service_slots": 1,
+    "memory_gib": 16,
+    "served_grok_primary": "grok-4.6"
+  },
+  "model_call": "papers/completion/autoformalization/evidence/runtime_qualification/model_call_receipt.json",
+  "native_checkers": "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+  "packages": {
+    "numpy": "1.26.4",
+    "torch": "2.13.0+cpu"
+  },
+  "python": {
+    "executable": "/usr/bin/python3",
+    "path": [
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-027-b84149f0af7f-attempt-1-1789192233/papers/completion/autoformalization/evaluation",
+      "/home/barberb/.local/share/vericodegen-research-runtime/python",
+      "/opt/ipfs-validation-site-packages",
+      "/usr/lib/python312.zip",
+      "/usr/lib/python3.12",
+      "/usr/lib/python3.12/lib-dynload",
+      "/usr/local/lib/python3.12/dist-packages",
+      "/usr/lib/python3/dist-packages"
+    ],
+    "version": "3.12.3",
+    "version_string": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "receipt_accounting": {
+    "arm_results": {
+      "A": "3e619ae6501d20fe574fb8657756682ccf1b0484cfcfafcf9436ebb5232c97f0",
+      "B": "ba5e3aed128ca25b9a4840ee29e522891b1bd0a0c138076a6e9b76a9ae14a752",
+      "C": "3f8127a8fc156ba7243d91746895140015f8bf31dd14b510d880701b12eed746",
+      "D": "5eedf651d8ccbfa5f82c1e7040603ed05f99f7037311c892ce3138079d780f06",
+      "E": "014a36838d5476de779f5cc0c856dedf120abeeb70972302ad10f1bb7e884d01"
+    },
+    "model_call_receipt_sha256": "83c948ff60c2994346177ae574819a75c1c7778be675e8b6eecc4614e334774d",
+    "native_checker_receipts": 3,
+    "response_id": "f4e6a0fe-afca-9e0b-9cdf-9f45402c4934",
+    "served_model": "grok-4.6"
+  },
+  "review_binding": "papers/completion/autoformalization/data/review_binding_manifest.json",
+  "review_packet_schema": "papers/completion/autoformalization/data/review_packet_schema.json",
+  "schema": "autoformalization-runtime-input-manifest/v1",
+  "scientific_gateway": "papers/completion/autoformalization/evidence/runtime_qualification/scientific_gateway_identity.json",
+  "smoke_command": [
+    "/usr/bin/python3",
+    "papers/completion/autoformalization/evaluation/qualify_runtime.py",
+    "smoke"
+  ],
+  "task_id": "AF-027",
+  "worker_runtime": "papers/completion/autoformalization/evidence/runtime_qualification/worker_runtime.json"
+}
