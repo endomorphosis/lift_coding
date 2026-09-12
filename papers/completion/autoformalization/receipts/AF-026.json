@@ -1,0 +1,242 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-026",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:25:23.240811+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-inference-isolation/v2",
+      "report_schema": "autoformalization-leakage-control-report/v2",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+      "sha256": "488f96f70bfe235e82a05b6772c64b7b9cff1d980e8f6bf6648a44c4ae9f4e95"
+    },
+    "frozen_inputs": {
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5"
+    },
+    "native_interfaces": {
+      "modal_autoencoder.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+        "sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+        "imported": true,
+        "exercised": [
+          "AdaptiveModalAutoencoder._nudge_decoded_embedding",
+          "AdaptiveModalAutoencoder._nudge_family_logits",
+          "AdaptiveModalAutoencoder._decoded_for",
+          "AdaptiveModalAutoencoder._logits_for",
+          "AdaptiveModalAutoencoder.encode"
+        ],
+        "note": "Native sample-memory route qualified with synthetic sentinels. evaluate() is not used because it imports a symai path that writes outside the sealed validation HOME."
+      },
+      "canonical_roundtrip.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+        "sha256": "0755cce95acc5e8094a109254cf841c1bdbbcec340f16a68023cdd4d93f9b864",
+        "imported": false,
+        "note": "Inspected for the source-withheld DecompilerRequest boundary; this harness projects the same v1 rule-atom object without invoking the decompiler."
+      }
+    },
+    "parent_receipt_sha256": "f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0",
+    "empirical_execution": "none; A-E/T0-T5 remain unrun; this task is executor-bound isolation qualification only"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py": "488f96f70bfe235e82a05b6772c64b7b9cff1d980e8f6bf6648a44c4ae9f4e95",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/test_inference_isolation.py": "877ebab87d7f15743ef72b8318dfdf79489637c60667cf98cae9f025c46383da",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/evidence/leakage_control_report.json": "7bd33a406cb577972da2c61b488334d5774b6b7fb00fc882d77a5e974957a5b5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/leakage_control_report.meta.json": "73905406a3842b34310e0ebb4db112e350a434800142e4d0139101cfb39b7691",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/leakage_control_report.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/leakage_control_report.stdout.log": "039fcf4e7731f9a024cccf65002e41b0b99b4c7812a9e6bad4049b68b7496ec3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/probe_all.meta.json": "4911492ebc9eb1d43389bd9214ae2bc567f507d01172da288c7aa27ccfa43571",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/probe_all.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/probe_all.stdout.log": "ce3999b75d0d7b77de82f603b3cea13c5b836db55e022f0772d9d1030394bf87",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/qualify_memory.meta.json": "5d24994de2bfef8514ed9a6db088e87f1ffecee8d4d507b93cd75868f2379723",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/qualify_memory.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/qualify_memory.stdout.log": "c0f716e6003084368fb02a292ea9c5056ca2939da38f2641e9e3785156a7a36d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.meta.json": "13adac2e112e956bebfd440299d5ef7293fd8be448714ab92a9a362bf42e50f5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stdout.log": "b571c03bdd2cdc6089cac3235bf2731258bf6a0958324b4b2982b3cb0b2683d2",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/recovery-contract-v1/original_AF-008_receipt.json": "f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0",
+    "papers/completion/autoformalization/receipts/snapshots/AF-026/recovery-contract-v1/recovery_review.json": "ccea409c480f98d4e31819646941ce3819d91b29be7995e25c45c56ad4ae61e9"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/inference_isolation.py": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+    "papers/completion/autoformalization/evaluation/test_inference_isolation.py": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/test_inference_isolation.py",
+    "papers/completion/autoformalization/evidence/leakage_control_report.json": "papers/completion/autoformalization/receipts/snapshots/AF-026/evidence/leakage_control_report.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Adversarial attempts to recover withheld source/gold through each documented channel are rejected or the affected condition is explicitly non-blind.",
+      "status": "met",
+      "explanation": "An IsolationExecutor, not a request-shape filter, is the qualification boundary. Compact synthetic-canary probes inject source text, source maps/locators, filesystem paths, retrieval, parser state, sample memory, gold IR, reference/gold decoder fallbacks, and sample-id cache keys. Encoded/nested auxiliary payloads in otherwise permitted canonical IR are dropped by v1 rule-atom projection. Every documented channel is rejected or declared non-blind on the source-withheld view; a subprocess filesystem probe cannot read a synthetic canary, while a parent-process read remains possible and is not treated as an executor leak. Arm/view names and caller-supplied clean flags grant no blind-prediction credit. Credit requires a retained prediction plus matching executor/invocation/source/model/configuration evidence with closed documented channels; absent, stale, or mismatched evidence grants none. Filesystem qualification does not establish network or pretraining exclusion. Inert AF-008 reviewer counterexamples are not treated as a demonstrated paper-experiment leak.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/test_inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evidence/leakage_control_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/probe_all.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/recovery-contract-v1/original_AF-008_receipt.json"
+      ]
+    },
+    {
+      "criterion": "Main generalization arms disable sample-indexed memory for update and evaluation.",
+      "status": "met",
+      "explanation": "The native AdaptiveModalAutoencoder sample-memory route was exercised with synthetic sentinels for every main generalization arm. Disabled update_sample_memory prevents writes to decoded_embeddings and family_logits; disabled use_sample_memory prevents reads of planted sentinels through _decoded_for, _logits_for, and encode. Shared sample-id/cache-key shortcuts are detected. T1 remains a separate enabled-memory positive control that writes and reads, and still cannot receive blind-prediction credit. A JSON use_sample_memory=false declaration, feature-flag, or non-blind relabel does not waive this qualification. evaluate() is not used because it imports a symai path that writes outside the sealed validation HOME.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/test_inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evidence/leakage_control_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/qualify_memory.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Forward, cycle and final reconstruction scores remain distinct and parser-assisted features are disclosed.",
+      "status": "met",
+      "explanation": "Reconstruction bundles must contain distinct forward (gold → first IR), cycle (first IR → second IR), and final (gold → second IR) objects. Collapsed mean/aggregate fields and a shared score object are rejected. Numerical vector MSE/cosine is recorded separately and is not a free-text decoder. Parser-assisted views require named features with producer intent-formalization-compiler/v1, depends_on_parse, complete-compilation flag, and charged compile/extraction cost; zero compile cost for a complete compilation is rejected. Source-only views cannot consume those features, and parser-assisted arms cannot be credited as raw-text or blind prediction. Gold/reference decoder fallbacks are excluded from blind-prediction credit even when executor evidence is otherwise valid.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/test_inference_isolation.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/evidence/leakage_control_report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/leakage_control_report.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/test_inference_isolation.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/test_inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/test_inference_isolation.stderr.log",
+      "started_at": "2026-09-12T01:25:16.597289+00:00",
+      "finished_at": "2026-09-12T01:25:20.059218+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "execution_kind": "sealed executor-bound isolation contract tests"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/inference_isolation.py",
+        "report",
+        "--root",
+        ".",
+        "--output",
+        "papers/completion/autoformalization/evidence/leakage_control_report.json"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/leakage_control_report.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/leakage_control_report.stderr.log",
+      "started_at": "2026-09-12T01:25:20.090075+00:00",
+      "finished_at": "2026-09-12T01:25:21.571336+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "execution_kind": "deterministic leakage-control report materialization"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/inference_isolation.py",
+        "probe-all"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/probe_all.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/probe_all.stderr.log",
+      "started_at": "2026-09-12T01:25:21.625542+00:00",
+      "finished_at": "2026-09-12T01:25:21.788982+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "execution_kind": "compact view-by-channel adversarial probe matrix"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/inference_isolation.py",
+        "qualify-memory"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-026/evaluation/inference_isolation.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/qualify_memory.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-026/logs/qualify_memory.stderr.log",
+      "started_at": "2026-09-12T01:25:21.839327+00:00",
+      "finished_at": "2026-09-12T01:25:23.240811+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "execution_kind": "native AdaptiveModalAutoencoder sample-memory qualification"
+    }
+  ],
+  "limitations": [
+    "No A-E or T0-T5 experiment was executed.",
+    "No native checker, solver, compiler, retriever, or trained model checkpoint was invoked.",
+    "Filesystem qualification does not establish network or pretraining exclusion.",
+    "Inert AF-008 reviewer counterexamples are not demonstrated paper-experiment leaks.",
+    "AdaptiveModalAutoencoder.evaluate() is not used; it imports a symai path that writes outside the sealed validation HOME.",
+    "Pilot fixtures and synthetic canaries are not natural held-out evaluation.",
+    "AF-008 receipt, snapshots, and native success history remain immutable.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Executor-bound inference views, IR projection, source-withheld leakage rejection, native sample-memory qualification for generalization arms, distinct forward/cycle/final reconstruction scores, and parser-assisted feature disclosure. Empirical research runs remain unrun.",
+  "correction_of": {
+    "task_id": "AF-008",
+    "sha256": "f6a1589db14f3845b4caf11f6d87eb9682277a4e6af8e67b4ed793f3b2a7fce0",
+    "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-026/recovery-contract-v1/original_AF-008_receipt.json"
+  }
+}
