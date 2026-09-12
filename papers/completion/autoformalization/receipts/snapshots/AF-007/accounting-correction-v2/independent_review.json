@@ -1,0 +1,90 @@
+{
+  "schema": "af007-accounting-independent-review/v2",
+  "created_at": "2026-09-11T23:39:06.934997+00:00",
+  "accepted_for_integration": true,
+  "qualification_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/qualification_v2.json",
+  "qualification_sha256": "bbc78ae92e598b634008a803df7b833da8c0fab7e51e4ec6bf7c41d90442e197",
+  "candidate_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2",
+  "candidate_files": {
+    "papers/completion/autoformalization/config/metrics.json": {
+      "original_sha256": "eeed41f09c403192b1717c49e053916076710239fc335197bfd9c516a8dd5dbc",
+      "candidate_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794"
+    },
+    "papers/completion/autoformalization/evaluation/result_schema.json": {
+      "original_sha256": "992989b872ea76d29518f5b763014f37abb174fbddd112c0d0c50a39c14ed89d",
+      "candidate_sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d"
+    },
+    "papers/completion/autoformalization/evaluation/run_benchmark.py": {
+      "original_sha256": "59fc5bf9e94a59802ee2fde60075c6e111c40911e8f370285ddc721589c3c2ba",
+      "candidate_sha256": "b290535d18a3f3b2d92d77d663af30944ec0415a86124be5c22cf88764ab9a51"
+    },
+    "papers/completion/autoformalization/evaluation/test_result_accounting.py": {
+      "original_sha256": "2746617ac206a31d519d4619a9c4ccd2f691306baeed18972a160ba8a2b4acac",
+      "candidate_sha256": "48f6892446276b195c462fef85e1187f3855b47f0ef4a465d7e152c8c726027b"
+    }
+  },
+  "patch_sha256": "75954fdd8802f4378c0b4192819490736ec1d14cce1dab492cd623e0959bc680",
+  "prior_review_sha256": "691d49337fbc7ac39ae2aecc8fde0a050f1edea1554ad0709858d4cf5a87eb1a",
+  "verified_hashes": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2/papers/completion/autoformalization/config/metrics.json": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/original/papers/completion/autoformalization/config/metrics.json": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2/papers/completion/autoformalization/evaluation/result_schema.json": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/original/papers/completion/autoformalization/evaluation/result_schema.json": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2/papers/completion/autoformalization/evaluation/run_benchmark.py": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/original/papers/completion/autoformalization/evaluation/run_benchmark.py": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2/papers/completion/autoformalization/evaluation/test_result_accounting.py": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/original/papers/completion/autoformalization/evaluation/test_result_accounting.py": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/validation_commands_v2.json": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/v2_all_tests.stdout.log": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/v2_all_tests.stderr.log": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/v2_schema.stdout.log": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/v2_schema.stderr.log": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/v2_unrun.stdout.log": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/v2_unrun.stderr.log": true,
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/unrun_tables_v2.json": true
+  },
+  "review_method": "Read full v1 correction plus entire v1-to-v2 source/metric/schema/test delta. Verified all candidate/original/qualification/evidence hashes. Executed three independent synthetic arithmetic probes against exact v2 source; inspected all30 retained test results and all11 actual regenerated unrun-arm values. No model, compiler, checker, provider, human annotation or native API invoked.",
+  "resolved_finding": {
+    "id": "incomplete_annotation_becomes_measured_fidelity",
+    "primary_rule": "Primary numerator/value require a nonempty declared population and an admitted, independent-gold, definite boolean judgment for every eligible unit. Missing gold, null judgment and unrepresented eligible units remain unknown.",
+    "unchanged_denominator": true,
+    "coverage": "Definite adjudication count/full eligible count and missing-unit count are explicit.",
+    "lower_bound": "Verified matches/full eligible population is a separate field with not_a_primary_estimate:true. Unknown units are not asserted failures.",
+    "independent_negative_positive_proof": "Missing-gold and null-judgment two-row fixtures both yield null primary,1/2 adjudication coverage and separately labeled0.5 lower bound. Fully adjudicated true/false control yields measured0.5 and2/2 coverage."
+  },
+  "other_corrections_accepted": [
+    "Per-row gold gate",
+    "Natural recipe split/source-control separation",
+    "CPU observation independent from elapsed wall time",
+    "Explicit false bridge transfer preserved over aliases",
+    "Observed false-transfer failures counted without success admission; invalid/no-run/fixtures excluded",
+    "Finite/nonnegative numeric and strict canonical JSON guards",
+    "Normalized mappings explicitly do not qualify direct native benchmark report conversion"
+  ],
+  "retained_validation": {
+    "all_tests_passed": 30,
+    "existing_cases": 17,
+    "v1_cases": 8,
+    "new_adjudication_cases": 5,
+    "eleven_unrun_arms": true,
+    "each_eligible_count": 1913,
+    "admitted_measured_rows": 0,
+    "human_labels_created": 0,
+    "native_proof_and_primary_fidelity_values": null
+  },
+  "independent_probe": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_independent_review/probe_partial_gold_v2.py": "18d8856e3fdd830d72cde89d6fa32d8d9ff18024a3a43240e6eed63d6599c85a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_independent_review/probe_partial_gold_v2.stdout.json": "cc37dec46c73db08ea11bdb808708fbeea467c99a16ac6c9d8818e6efa50a944",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_independent_review/probe_partial_gold_v2.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "This acceptance is for accounting source correction only; no scientific result, source provenance or independent human annotation is certified.",
+    "The frozen full population remains1913 units. No revised sample, denominator, weighting or group definition is introduced. Any future separately declared sample still requires prospective protocol/provenance review and retained human adjudication.",
+    "At least100 independently adjudicated natural units and20 source-family/time groups remain downstream study gates; synthetic bookkeeping fixtures do not satisfy them.",
+    "The primary metric conservatively remains unavailable when any eligible unit lacks an admitted definite independent judgment, including failed/unrun units; coverage/lower-bound diagnostics remain available.",
+    "Gold/proof flags are normalized input claims and must be checked against external evidence before actual results are admitted; count-only unrun recipes do not expose or validate heldout IDs.",
+    "All old completed task/receipt/snapshot histories remain immutable; source integration and fresh actual commands/native evidence are separate root operations."
+  ],
+  "blocking_findings": [],
+  "live_mutations": false
+}

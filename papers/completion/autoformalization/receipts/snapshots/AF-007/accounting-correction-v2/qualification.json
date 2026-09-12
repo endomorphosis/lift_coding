@@ -1,0 +1,227 @@
+{
+  "schema": "paper-af007-accounting-correction-qualification/v2",
+  "completed": true,
+  "ready_for_independent_review": true,
+  "observed_at": "2026-09-11T23:36:49.754921+00:00",
+  "baseline_merge": "3683f360f2143620d57f70721274cf3209230fb4",
+  "original_receipt_sha256": "75de880474a74fadbf9df281a0d480d74ce405da0faf829d7388c9a19d04d537",
+  "original_receipt_and_native_history_preserved": true,
+  "prior_qualification": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/qualification.json",
+    "sha256": "ff882b6a1cbc5640c400c1d717a5842671d91834f6f59163e8f25fbdc918e20a",
+    "prior_candidate_and_patch_preserved": true
+  },
+  "candidate_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2",
+  "candidate_files": {
+    "papers/completion/autoformalization/config/metrics.json": {
+      "original_sha256": "eeed41f09c403192b1717c49e053916076710239fc335197bfd9c516a8dd5dbc",
+      "candidate_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794"
+    },
+    "papers/completion/autoformalization/evaluation/result_schema.json": {
+      "original_sha256": "992989b872ea76d29518f5b763014f37abb174fbddd112c0d0c50a39c14ed89d",
+      "candidate_sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d"
+    },
+    "papers/completion/autoformalization/evaluation/run_benchmark.py": {
+      "original_sha256": "59fc5bf9e94a59802ee2fde60075c6e111c40911e8f370285ddc721589c3c2ba",
+      "candidate_sha256": "b290535d18a3f3b2d92d77d663af30944ec0415a86124be5c22cf88764ab9a51"
+    },
+    "papers/completion/autoformalization/evaluation/test_result_accounting.py": {
+      "original_sha256": "2746617ac206a31d519d4619a9c4ccd2f691306baeed18972a160ba8a2b4acac",
+      "candidate_sha256": "48f6892446276b195c462fef85e1187f3855b47f0ef4a465d7e152c8c726027b"
+    }
+  },
+  "patch": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af007_accounting_correction/candidate_v2.patch",
+    "sha256": "75954fdd8802f4378c0b4192819490736ec1d14cce1dab492cd623e0959bc680"
+  },
+  "inherited_fixes": [
+    "Per-row independent-gold flag required for each fidelity numerator contribution. No new gold evidence is created.",
+    "Each eligible nonfixture record must match the recipe split. Natural-source populations reject constructed controls, and separate control populations remain supported.",
+    "CPU seconds defaults to null; separately supplied CPU measurements remain distinct from elapsed wall seconds.",
+    "Explicit bridge_transfer=False has precedence over aliases and remains a failure. Retained false-transfer failures count in the error metric without admission to success tables; invalid/no-run/fixtures remain excluded.",
+    "Finite numeric guards reject NaN/Infinity and negative costs.",
+    "Named benchmark adapters are labeled as normalized input mappings; conversion from native report formats remains unqualified."
+  ],
+  "additional_fix": "Primary fidelity numerator/value remain null until all declared eligible units have admitted results, independent gold, and definite boolean judgments. Explicit adjudication coverage and verified-success lower-bound diagnostics preserve the entire denominator and do not treat missing labels as failures.",
+  "validation": {
+    "candidate_tests_passed": 30,
+    "existing_tests_passed": 17,
+    "v1_regression_methods_passed": 8,
+    "new_population_adjudication_methods_passed": 5,
+    "new_cases": [
+      "partial gold",
+      "gold present but judgment null",
+      "complete match/mismatch population",
+      "no gold",
+      "missing explicit eligible unit"
+    ],
+    "original_literal_commands": 3,
+    "new_schema_and_frozen_unrun_commands_exit0": true,
+    "all_eleven_unrun_arms": {
+      "A": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "B": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "C": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "D": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "E": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "T0": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "T1": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "T2": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "T3": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "T4": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      },
+      "T5": {
+        "eligible": 1913,
+        "no_run": 1913,
+        "admitted_measured_rows": 0,
+        "primary_fidelity": null,
+        "native_proof_coverage": null,
+        "adjudicated_units": 0,
+        "missing_adjudicated_units": 1913,
+        "lower_bound_is_not_primary_estimate": true,
+        "other_metric_values_unchanged": true
+      }
+    }
+  },
+  "scientific_limits": [
+    "No benchmark, provider, compiler, checker, or human annotation was run or created.",
+    "Raw independent-gold/proof observation flags are input claims; this accounting change does not certify their external provenance.",
+    "Natural record source-ID membership is checked when eligible_source_ids are supplied; the frozen count-only unrun recipe has no measured records or disclosed holdout IDs.",
+    "Original native completed task/history/receipt are unchanged. Integration needs fresh validation/evidence against corrected source at a controlled boundary.",
+    "The lower-bound diagnostic is explicitly not the primary measured estimate; zero review coverage is not a zero fidelity score.",
+    "No post-outcome sample/weighting change or denominator reduction is introduced."
+  ],
+  "live_mutations": 0,
+  "evidence": {
+    "validation_commands_v2.json": {
+      "sha256": "90690806bd8641db601a15a126ab77d1b1bedb636f0282b04d81fba8ff61b956",
+      "bytes": 3491
+    },
+    "v2_all_tests.stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "v2_all_tests.stderr.log": {
+      "sha256": "6edecb7bca7e555f1c5db049e614cc29be0cb8d7e2bdae3b80a71e18e7d30e98",
+      "bytes": 4701
+    },
+    "v2_schema.stdout.log": {
+      "sha256": "79d14a86a70d0de8b7f9ef0d0bdbdbcc136b074b19403c014a75a7e0cff59986",
+      "bytes": 912
+    },
+    "v2_schema.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "v2_unrun.stdout.log": {
+      "sha256": "a4484b75c5d7ff7c5befb66dbab4d673562c69cb514435012beed6052ab0373e",
+      "bytes": 2067
+    },
+    "v2_unrun.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "unrun_tables_v2.json": {
+      "sha256": "807ff48a44309aaf7ee58e572ab75ffb5315477a04f1285460519120a183db22",
+      "bytes": 32937
+    }
+  }
+}
