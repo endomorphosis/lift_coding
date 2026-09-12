@@ -1,0 +1,166 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-016",
+  "status": "complete",
+  "completed_at": "2026-09-12T20:29:50.608677+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-pipeline-comparison-manifest/v1",
+      "result_schema": "autoformalization-evaluation-result/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py",
+      "sha256": "9d2fca9eaf6d8e95225bfa2f67c79e97645468d81d60cbd71a9bc67d2973ea15",
+      "standard_library_only": true,
+      "note": "Sealed-PATH A–E comparison. Table 6 remains the 1913-unit final-test recipe. Selection-split structural rows and constructed Q1 witnesses are labeled separately."
+    },
+    "repository_tree_id": "0f07a71f86d2b2826dddeb4e7a2f6cc3827bdd8c",
+    "ipfs_datasets_head": "4a13f53c8fb59416fcd7ee5fe15e66d752708576",
+    "inspected_not_imported": {
+      "bench_semantic_logic_roundtrip.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py",
+        "imported": false,
+        "note": "Named native report conversion remains unqualified; not executed as Table 6."
+      },
+      "bench_semantic_roundtrip_compositions.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_semantic_roundtrip_compositions.py",
+        "imported": false,
+        "note": "Inspected composition benchmark; not imported and not Table 6."
+      },
+      "bench_itp_hammer.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_itp_hammer.py",
+        "imported": false,
+        "note": "Would import project packages; hashed only."
+      },
+      "pipeline_arms.py": {
+        "path": "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+        "imported": false,
+        "note": "AF-027 development adapters and dummy identity theorems are not Table 6 evidence."
+      }
+    },
+    "frozen_inputs": {
+      "consumer_activation_sha256": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "gold_facets_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+      "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+      "pipeline_arms_sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22",
+      "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "structural_evidence_scope_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+      "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+    },
+    "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+    "empirical_execution": "Sealed-PATH probe plus 15 public selection units × A–E and a constructed Q1 control. Table 6 final-test 1913-unit cells remain unrun/unmeasured/unavailable. Arm B compiled 11/15 selection units and abstained on 4; C measured 15/15 structural multiviews; D unsupported on all 15 selection sources; A and E unavailable. Constructed Q1 guarded accepted_transfer and unguarded countermodel share pin 371b93eb755c341b3fc2f45a894b95ceab02f163165ce596e19dffacc8da0898. No native kernel proof."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/check_outputs.py": "a91412bfe70ab51015a7ebdd5da557c4893e308edcb5377fa2efd99af6b89a42",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.meta.json": "c82860c3f4cfbad1f4704a468255e5ea1d02f8f5865cb8588918642242026641",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.stdout.log": "b5a3f3706d0051a0890352395e77d35dbfc0e18189182cbbdfafc6a4412ff9ab",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.meta.json": "c761d7451a97e372e800d9a97c0569b9eb5d6df856d9965cbd630b690c67d289",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.stdout.log": "4ee4264f457a6b86bed2bf742f503f73ba070f3e79f7dcd5b18c833b8c36834c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py": "9d2fca9eaf6d8e95225bfa2f67c79e97645468d81d60cbd71a9bc67d2973ea15",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/run_sealed.py": "822c4ad8948f6e01ea68da6a374aad93f5db4bccc0a64ab8fc3a8f36573f9d18",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/manifest.json": "8065804d1f466f691117e15eff901ffa7db254fec7ad8425a268f28a7dd2e474",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/results.jsonl": "f09a8435512ba4effb1365e0433a9345d1535f77b769df15515d8f92663a4acd"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/runs/pipeline_comparison/manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/manifest.json",
+    "papers/completion/autoformalization/runs/pipeline_comparison/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/results.jsonl"
+  },
+  "criteria": [
+    {
+      "criterion": "Each of the 20 Table 6 cells is backed by actual raw measurements and definition, or an explicit unavailable/unrun status tied to narrowed claims.",
+      "status": "met",
+      "explanation": "The manifest enumerates the original 5×4 Table 6 cells with revised headings. All 20 keep denominator 1913 final-test natural units: 10 unrun (coverage and cost for A–E), 5 unmeasured (independent fidelity for A–E), and 5 unavailable (correct transfers, because sealed PATH has no Lean/Z3/CVC5 and A/E are additionally blocked). Each cell has a metric definition and a narrowed claim. Compact unrun accounting digest f3a1a84aa5a9d6c89d6d77218239b9f45e9bfaac9cc0e357745e6ce3d9349f44 regenerates 1913 no_run rows per arm with null fidelity/native/cost numerators. Selection-split structural counts (B 11 measured/4 abstained, C 15 measured, D 15 unsupported, A/E 15 unavailable) are labeled non-Table-6 and do not fill these cells.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Raw candidates and accepted checker evidence use identical pinned goal/premise/source identities.",
+      "status": "met",
+      "explanation": "Every results.jsonl record carries identity_pin_sha256 over source_id, source_sha256, goal_id, goal_sha256, premise_ids, premise_sha256, and checker digest 0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052. checker_request.pin_sha256 equals that candidate pin on all 81 rows; identical_to_candidate_pin is true. Native checkers were not submitted. The only accepted constructed evidence is Q1: guarded accepted_transfer and unguarded countermodel both bind source AF016-DEV-Q1-protected-write, goal Q1_protected_and_not_approved_implies_not_write, premises Protected/Approved/Write, and shared pin 371b93eb755c341b3fc2f45a894b95ceab02f163165ce596e19dffacc8da0898. Selection D lookups use the same source_id they refused to transfer. AF-027 dummy identity theorems were not attached to any source.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/check_outputs.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No cross-paper numbers, dry-run fixtures, default configuration values or historical unpinned runs enter the result table.",
+      "status": "met",
+      "explanation": "Table 6 cells contain no TBD, fixture, dry-run, or numeric stand-ins; values and numerators are null. results.jsonl fixture=false on every row and no final-test bodies were opened. Frozen pins match AF-002/AF-004/AF-007/AF-010/AF-013/AF-028 artifacts (splits d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27, selection 182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c). AF-027 development qualification is inspected not imported. Default configuration values were not copied into cells. Sealed PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and private HOME /tmp/ipfs-accelerate-validation-home-af016-il6foq9p were used; host toolchains were not.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/runs/pipeline_comparison/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.meta.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/check_outputs.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af016-il6foq9p",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/measure.stderr.log",
+      "started_at": "2026-09-12T20:29:04.015247+00:00",
+      "finished_at": "2026-09-12T20:29:04.071374+00:00",
+      "execution_kind": "sealed-PATH A–E structural execution on frozen selection sources, constructed Q1 witnesses, and compact Table 6 unrun accounting"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af016-il6foq9p",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-016/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-016/check_outputs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-016/logs/check_outputs.stderr.log",
+      "started_at": "2026-09-12T20:29:04.071744+00:00",
+      "finished_at": "2026-09-12T20:29:04.105910+00:00",
+      "execution_kind": "Table 6 cell, identity-pin, isolation, fixture, and unrun-denominator checks"
+    }
+  ],
+  "limitations": [
+    "Final-test 1913-unit Table 6 comparison is unrun; private identities remain undisclosed.",
+    "Independent source-semantic fidelity and semantic false-transfer are unmeasured; human annotations were not collected.",
+    "lean, lake, elan, z3, cvc5, vampire, eprover, coqc, and isabelle are absent from the sealed validation PATH; no native checked proof is claimed.",
+    "Arm A had no model credential under env -i and was not dispatched.",
+    "Arm E remains locked (T4 unactivated, e_locked); matching ingestion is not applied learned guidance.",
+    "Selection-split structural outcomes are not final-distribution performance.",
+    "Constructed Q1 finite witnesses are not Table 6 and not machine-checked compiler soundness.",
+    "AF-027 development qualification and dummy identity theorems are not reused.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Matched A–E comparison with 20 Table 6 cells recorded as unrun, unmeasured, or unavailable on the locked 1913-unit final-test denominator; sealed-PATH structural execution on 15 public selection units and constructed Q1 witnesses with identical candidate/checker identity pins."
+}
