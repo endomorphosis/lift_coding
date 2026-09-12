@@ -1,0 +1,143 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-007",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:41:23.756518+00:00",
+  "completion_mode": "Pinned SkillCenter intent packets and synthetic malicious-Markdown/fake-permission controls prepared from the frozen security-lite bundle. Independent human intent review was not obtained; evaluation admission remains blocked. Generated labels are not expert review. Source Markdown commands were not executed. No trained normalizer or encoder was available.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/build_skill_annotations.py": "cc1c1d10cb3cf2e930cdb517e84c836bc43406f8c2dc61f2f8b703064dbc6824",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/extract_skill_evidence.py": "477c668f809def53b75a4af74bdb15b24c383aecfbcf0a93ed216ead3d50c8d4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skill_guidelines.md": "0d3b750ca951be132ca93b9afd60fda65fc490f93e038c8f75ddecededacb187",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skills.jsonl": "05bb0e1f48900a35bf3ed1bdac89bf9b7f5bbcb2673c0cf140da9d5cd3d8bb44",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/cases/skill_adversarial.jsonl": "ce4517052c2aff98e77097349d1d7b8a0c7c9a1116cf2c174109e02fc910838e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/review_status.json": "e635af8e9c6fc47703f938496a166e5269d3727198b2b479c3575dc67069c7c4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/row_evidence.json": "a79509159892be76820b4d6135d37ef1356e0704a908ebb69330cb9139e3fcbf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/validate_skill_annotations.py": "5878d4cd97844810478b04136a4efaffd7c0ab0a547d5816b0df4acef449bdbf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/build_skill_annotations.stdout.log": "3f13481945ddccbad677b54a7ae6a28ab67830d6cd5f950d4df3e4cddd9f722d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/extract_skill_evidence.stdout.log": "ce35034e2a4a0829535abfd8cc2b5a96ff86c74ef74a9541adec9ba077e44d37",
+    "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/validate_skill_annotations.stdout.log": "ec6b59d210bde9a1e726a491b759ec3421c36f42fb4481dbbae47bf1f1b13cf4"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/annotations/skills.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skills.jsonl",
+    "papers/completion/law_to_action/benchmark/cases/skill_adversarial.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/cases/skill_adversarial.jsonl",
+    "papers/completion/law_to_action/benchmark/annotations/skill_guidelines.md": "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skill_guidelines.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Original skill and mutation identities/lineage remain distinguishable.",
+      "status": "met",
+      "explanation": "Each of the twelve frozen families has a source-faithful original on reserved case-0 with identity.kind original_skill and null mutation_id. Reserved case-1 and twenty-four extra synthetic controls use identity.kind synthetic_mutation, a mutation_id of the form mutation:<sha256>, and a distinct overlay hash. Mutation identities never reuse original skill_id or source_id. Parent source_id and lineage_family_id are retained so variants stay in the same split without identity collapse.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skills.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/cases/skill_adversarial.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skill_guidelines.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/review_status.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/validate_skill_annotations.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validate_skill_annotations.py"
+      ]
+    },
+    {
+      "criterion": "Independent reference annotations are created before viewing evaluated predictions.",
+      "status": "met",
+      "explanation": "Every original and mutation record sets independent_reference.created_before_evaluated_predictions true, evaluated_predictions_viewed false, and prediction_files_inspected to an empty list. Independent human intent review is documented as not_obtained rather than invented. No LA-009 prediction files were inspected. Evaluation admission remains blocked until competent independent review and adjudication.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skills.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/cases/skill_adversarial.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skill_guidelines.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/review_status.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/validate_skill_annotations.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validate_skill_annotations.py"
+      ]
+    },
+    {
+      "criterion": "Ingestion never executes source Markdown commands, and false textual authority has explicit expected rejection.",
+      "status": "met",
+      "explanation": "The extract reader opened the pinned SQLite bundle mode=ro&immutable=1, set PRAGMA query_only=ON, and disabled extension loading. skill_md was treated as untrusted data; fenced shell and git/pnpm/curl strings were quoted and not executed. All thirty-six synthetic mutations have expected_status rejected, false_textual_authority true, grants_execution_authority false, and ingestion_executes_markdown false. A procedure word permitted is recorded as a source assertion, not a capability.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/extract_skill_evidence.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/row_evidence.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/cases/skill_adversarial.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skill_guidelines.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/outputs/benchmark/annotations/skills.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/extract_skill_evidence.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/validate_skill_annotations.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validate_skill_annotations.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/extract_skill_evidence.py",
+        "--sqlite",
+        "/tmp/la007-skill-cache/skillcenter-security.sqlite",
+        "--output",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/row_evidence.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T01:41:23.637263+00:00",
+      "completed_at": "2026-09-12T01:41:23.678219+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/extract_skill_evidence.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-007/extract_skill_evidence.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/build_skill_annotations.py",
+        "--evidence",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/row_evidence.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T01:41:23.678958+00:00",
+      "completed_at": "2026-09-12T01:41:23.709253+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/build_skill_annotations.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-007/build_skill_annotations.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-007/validate_skill_annotations.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T01:41:23.709788+00:00",
+      "completed_at": "2026-09-12T01:41:23.753370+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-007/validation/validate_skill_annotations.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-007/validate_skill_annotations.py"
+    }
+  ],
+  "source_versions": {
+    "repository_tree_id": "4e414fa0398b60dff215ce80fbad0513ebfb81b2",
+    "python": "/usr/bin/python3.12 (Python 3.12.3)",
+    "skillcenter_dataset": "Tommysha/skillcenter-bundles",
+    "skillcenter_revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+    "skillcenter_bundle_file": "clawskills-bundle-lite-security-v20260227.sqlite",
+    "skillcenter_bundle_sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+    "skillcenter_bundle_bytes": 7892992,
+    "la004_frozen_manifest_sha256": "da9126276cf6fd1e6e2c427f67ad7f531bb489193ebf8d709d0d01dbc24d9757",
+    "la004_frozen_split_sha256": "d710ed9ed60d9e556b0d93efc0d486418404d5ab86f71a6914fba4ca49218ce3",
+    "structural_normalizer_revision": "skillcenter-intent-normalizer/v1",
+    "trained_normalizer_present": false,
+    "trained_encoder_present": false,
+    "model_revision": null,
+    "packet_preparer": "la007-packet-preparer-implementation-worker",
+    "independent_human_intent_review": "not_obtained",
+    "untrusted_source_executed": false,
+    "source_cache_location": "Private retrieval cache used only to extract quoted spans and hashes; SQLite and Markdown bodies remain retrieval_only and are not paper outputs."
+  },
+  "claim_limitations": [
+    "Independent human intent review was not obtained. These packets are not expert gold.",
+    "Generated and worker-prepared labels are not expert review.",
+    "A procedure's word permitted is a source assertion, not a capability.",
+    "Source Markdown commands were not executed by ingestion.",
+    "No trained SkillCenter normalizer or semantic encoder was available or evaluated.",
+    "Evaluation admission for skill cases remains blocked until competent independent review and adjudication.",
+    "Twelve repository families from one security-lite bundle are not the full SkillCenter release.",
+    "The structural validator is provenance checking, not scientific or intent peer review.",
+    "The operator-protected checkpoint directory was not writable in this environment; no coordinate checkpoint was stored there."
+  ]
+}
