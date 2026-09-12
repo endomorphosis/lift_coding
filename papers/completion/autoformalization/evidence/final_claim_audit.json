@@ -1,0 +1,470 @@
+{
+  "schema": "autoformalization-final-claim-audit/v1",
+  "task_id": "AF-022",
+  "frozen_at": "2026-09-12T21:30:00+00:00",
+  "manuscript": "papers/completion/autoformalization/manuscript/main.tex",
+  "historical_recovery_copy": {
+    "path": "papers/completion/autoformalization/manuscript/pages/",
+    "role": "historical PDF reconstruction; not the claim-bearing results narrative",
+    "unmeasured_promises_presented_as_results": false
+  },
+  "scope_policy": {
+    "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+    "policy_id": "AF-028/structural-evidence-scope/v1",
+    "empirical_scope_tex": "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+    "human_fidelity_status": "unmeasured_not_collected",
+    "independent_human_semantic_labels_available": false,
+    "optional_author_feedback_supplied": false,
+    "optional_author_feedback_labeled": false,
+    "author_feedback_absence_acceptable": true
+  },
+  "narrative_separation": {
+    "pipeline_A_to_E": {
+      "question": "source-to-proof mechanism under matched checker/budget",
+      "arms": ["A", "B", "C", "D", "E"],
+      "table": "tab:pipeline-results",
+      "definition_table": "tab:arms-ae",
+      "controls": ["A vs B", "C vs B", "D vs C", "E vs D"],
+      "not_the_learning_matrix": true
+    },
+    "learning_T0_to_T5": {
+      "question": "memory, shared parameters, isolated proof heads, promoted guidance, compiler repair",
+      "arms": ["T0", "T1", "T2", "T3", "T4", "T5"],
+      "table": "tab:training-results",
+      "definition_table": "tab:arms-t",
+      "controls": ["T1 vs T2 seen-source diagnostic", "T2 vs T0 shared learner", "T3 vs T2", "T4 vs T3", "T5 vs sealed starting arm"],
+      "not_the_pipeline_matrix": true
+    },
+    "explicit_manuscript_statements": [
+      "Pipeline comparisons A--E vary the source-to-proof mechanism.",
+      "Learning comparisons T0--T5 vary sample memory, shared parameters, isolated proof heads, promoted guidance, and compiler repair.",
+      "Those two matrices answer different questions and are not merged.",
+      "A--E pipeline comparison is not a T0--T5 result",
+      "T0--T5 learning comparison is not an A--E result"
+    ]
+  },
+  "equations_audit": [
+    {
+      "id": "eq:cycle",
+      "original": 1,
+      "kind": "symbolic reconstruction cycle",
+      "not": "source-semantic fidelity or free-text decoding",
+      "source": "manuscript/equations/equation-01.tex"
+    },
+    {
+      "id": "eq:emb",
+      "original": 2,
+      "kind": "schematic packed embedding head",
+      "not": "Transformer or VAE",
+      "source": "manuscript/equations/equation-02.tex"
+    },
+    {
+      "id": "eq:logits",
+      "original": [3, 4],
+      "kind": "schematic family/view softmax heads",
+      "not": "executed held-out classification accuracy",
+      "source": ["manuscript/equations/equation-03.tex", "manuscript/equations/equation-04.tex"]
+    },
+    {
+      "id": "eq:packed",
+      "original": 5,
+      "kind": "packed training objective",
+      "not": "Adam or held-out fidelity",
+      "source": "manuscript/equations/equation-05.tex"
+    },
+    {
+      "id": "eq:modal",
+      "original": 6,
+      "kind": "finite illustration of normal modal semantics",
+      "not": "every repository view is compiled by this equation",
+      "source": "manuscript/equations/equation-06.tex"
+    },
+    {
+      "id": "eq:prem",
+      "original": 7,
+      "kind": "conditional premise-preservation obligation",
+      "nonvacuity_required": true,
+      "not": "blanket machine-checked compiler soundness",
+      "source": "manuscript/equations/equation-07.tex"
+    },
+    {
+      "id": "eq:goal",
+      "original": 8,
+      "kind": "conditional goal-reflection obligation",
+      "not": "blanket machine-checked compiler soundness",
+      "source": "manuscript/equations/equation-08.tex"
+    },
+    {
+      "id": "eq:obl",
+      "original": 9,
+      "kind": "synthetic coding-example obligation",
+      "label": "finite illustration",
+      "source": "manuscript/equations/equation-09.tex"
+    },
+    {
+      "id": "eq:q1",
+      "original": 10,
+      "kind": "synthetic compliance query Q1",
+      "label": "finite illustration",
+      "source": "manuscript/equations/equation-10.tex"
+    },
+    {
+      "id": "eq:q2",
+      "original": 11,
+      "kind": "synthetic bounded-audit query Q2",
+      "label": "finite illustration",
+      "source": "manuscript/equations/equation-11.tex"
+    },
+    {
+      "id": "eq:rec",
+      "original": 12,
+      "kind": "packed reconstruction MSE",
+      "not": "source-withheld text cycle",
+      "source": "manuscript/equations/equation-12.tex"
+    },
+    {
+      "id": "eq:ce",
+      "original": 13,
+      "kind": "globally normalized masked CE",
+      "source": "manuscript/equations/equation-13.tex"
+    },
+    {
+      "id": "eq:sgd",
+      "original": 14,
+      "kind": "SGD-style packed update",
+      "not": "Adam; not a claim every head was deployed",
+      "source": "manuscript/equations/equation-14.tex"
+    }
+  ],
+  "terminology_audit": {
+    "vector_versus_text": "Numerical reconstruction is embedding reconstruction (eq:emb, eq:rec). Symbolic/text cycles use eq:cycle. Decode returning a numeric vector is not a trained free-text decoder.",
+    "source_grounding_versus_truth": "Source maps bind IR constituents to source evidence and are not proof of a correct interpretation. Retrieval is not a truth criterion.",
+    "planning_versus_proof": "The Tactician plans and performs no proof. Solver output is a candidate until native reconstruction is accepted. Table 13 executed_proofs=0.",
+    "implemented_versus_executed": "Packed updates, promotion machinery, and Hammer/Leanstral routes are implemented. T2 sealed-PATH epochs, T4 consumer load, Arm E, and native assistance on sealed PATH are executed/unrun statuses, not implementation claims.",
+    "proof_transfer_quantification_nonvacuity": "Equations 7--8 require related-model existence; a vacuous R_B is not transfer. Proposition 1 is a conditional paper argument."
+  },
+  "hypotheses": {
+    "C1": "unrun",
+    "C2": "unrun",
+    "C3": "unrun",
+    "C4": "unrun",
+    "C5": "unrun",
+    "C6": "unrun",
+    "C7": "inconclusive",
+    "H-T1-memory-diagnostic": "supported",
+    "H-T1-claim_admissible_for_paper_primary": false,
+    "H-T2-shared-learner": "unsupported"
+  },
+  "claims": [
+    {
+      "id": "ABS-SCOPE",
+      "location": "abstract",
+      "text": "We report automated structural correctness, exact-goal native checker receipts, teacher-agreement diagnostics, learned-update records, and finite constructed conformance.",
+      "kind": "scope_limiter",
+      "status": "supported",
+      "source": [
+        "papers/completion/autoformalization/manuscript/empirical_scope.tex",
+        "papers/completion/autoformalization/config/structural_evidence_scope.json",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "ABS-HUMAN",
+      "location": "abstract",
+      "text": "Independent human source-facet fidelity and agreement were not collected. Checker and teacher success are not original-source semantic gold.",
+      "kind": "unmeasured_limitation",
+      "status": "unmeasured",
+      "source": [
+        "papers/completion/autoformalization/evidence/author_feedback_status.json",
+        "papers/completion/autoformalization/config/structural_evidence_scope.json"
+      ]
+    },
+    {
+      "id": "ABS-FINALTEST",
+      "location": "abstract",
+      "text": "On the locked 1913-unit final-test population, matched A--E coverage and cost remain unrun, independent fidelity is unmeasured, and native useful-proof transfer is unavailable on the sealed checker PATH.",
+      "kind": "result",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/summary.json",
+        "papers/completion/autoformalization/results/table6_pipeline.tex",
+        "papers/completion/autoformalization/results/table11_training.tex"
+      ]
+    },
+    {
+      "id": "ABS-T2",
+      "location": "abstract",
+      "text": "Shared-parameter T2 accepted no sealed-PATH epochs.",
+      "kind": "result",
+      "status": "unsupported",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "ABS-T1",
+      "location": "abstract",
+      "text": "A T1 seen-source teacher-cosine gap is a sample-memory diagnostic, not generalization.",
+      "kind": "result",
+      "status": "supported",
+      "claim_admissible_for_paper_primary": false,
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "ABS-T345E",
+      "location": "abstract",
+      "text": "T3 has no eligible native labels; T4 and Arm E remain unactivated; T5 has no measured held-out improvement.",
+      "kind": "result",
+      "status": "unavailable",
+      "source": [
+        "papers/completion/autoformalization/results/table11_training.tex",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "ABS-FINITE",
+      "location": "abstract",
+      "text": "A synthetic policy--code--trace example and twelve reconstructed finite semantic checks illustrate composition and are not natural-distribution accuracy.",
+      "kind": "finite_illustration",
+      "status": "supported",
+      "source": [
+        "papers/completion/autoformalization/evaluation/reference_results.json",
+        "papers/completion/autoformalization/runs/bridge_validation/results.jsonl"
+      ]
+    },
+    {
+      "id": "AE-VS-T",
+      "location": "abstract/introduction/evaluation",
+      "text": "Pipeline comparisons A--E vary the source-to-proof mechanism. Learning comparisons T0--T5 vary sample memory, shared parameters, isolated proof heads, promoted guidance, and compiler repair. Those two matrices answer different questions and are not merged.",
+      "kind": "method",
+      "status": "method_description",
+      "source": [
+        "papers/completion/autoformalization/config/pipeline_arms.json",
+        "papers/completion/autoformalization/evidence/claim_task_map.json",
+        "papers/completion/autoformalization/manuscript/main.tex"
+      ]
+    },
+    {
+      "id": "C1",
+      "location": "results/hypotheses",
+      "text": "A source-grounded pipeline improves independently adjudicated source-facet fidelity on unseen natural source-family/time groups.",
+      "kind": "prespecified_primary",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "C2",
+      "location": "results/hypotheses",
+      "text": "Checked bridges and bounded learned advice improve useful native-checker proof coverage without increased false transfer.",
+      "kind": "prespecified_primary",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "C3",
+      "location": "results/hypotheses",
+      "text": "Shared learning generalizes beyond sample memory.",
+      "kind": "prespecified_primary",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "C4",
+      "location": "results/hypotheses",
+      "text": "Isolated trusted proof feedback improves routing/calibration without harming source fidelity.",
+      "kind": "prespecified_primary",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md"
+      ]
+    },
+    {
+      "id": "C5",
+      "location": "results/hypotheses",
+      "text": "Promoted guidance improves a real compiler/realizer consumer on unseen material.",
+      "kind": "prespecified_primary",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md"
+      ]
+    },
+    {
+      "id": "C6",
+      "location": "results/hypotheses",
+      "text": "A bounded executable repair improves a sealed starting arm without test-selected patches.",
+      "kind": "prespecified_primary",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md"
+      ]
+    },
+    {
+      "id": "C7",
+      "location": "results/table13",
+      "text": "Retrieval, premise selection, planning, and proof assistance have separable matched-budget utility.",
+      "kind": "prespecified_primary",
+      "status": "inconclusive",
+      "source": [
+        "papers/completion/autoformalization/results/table13_assistance.tex",
+        "papers/completion/autoformalization/results/hypothesis_report.md"
+      ]
+    },
+    {
+      "id": "T1-MEMORY",
+      "location": "results",
+      "text": "T1 train teacher cosine exceeds selection cosine on mock:stable-sha256 embeddings; this is a sample-memory diagnostic.",
+      "kind": "result",
+      "status": "supported",
+      "claim_admissible_for_paper_primary": false,
+      "source": [
+        "papers/completion/autoformalization/results/summary.json",
+        "papers/completion/autoformalization/runs/training_baselines/results.jsonl"
+      ]
+    },
+    {
+      "id": "T2-SHARED",
+      "location": "results",
+      "text": "AF-011 T2 accepted 0 shared-parameter epochs on sealed PATH; shared-learner generalization is unsupported.",
+      "kind": "result",
+      "status": "unsupported",
+      "source": [
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "AF029-NOT-TABLE11",
+      "location": "results",
+      "text": "Packed-CPU MiniLM teacher updates on train/selection remain claim_admissible=false and do not fill Table 11 held-out cells.",
+      "kind": "result",
+      "status": "method_description",
+      "source": [
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "NO-INVENTED-CHECKPOINT",
+      "location": "abstract/results/conclusion",
+      "text": "No new held-out checkpoint, deployment, transfer, or training success is reported.",
+      "kind": "scope_limiter",
+      "status": "supported",
+      "source": [
+        "papers/completion/autoformalization/manuscript/main.tex",
+        "papers/completion/autoformalization/results/summary.json"
+      ]
+    },
+    {
+      "id": "ARM-E-LOCKED",
+      "location": "results",
+      "text": "Arm E stays gated to AF-013 canary/consumer/rollback identities; T4 unactivated.",
+      "kind": "result",
+      "status": "unavailable",
+      "source": [
+        "papers/completion/autoformalization/results/summary.json",
+        "papers/completion/autoformalization/config/structural_evidence_scope.json"
+      ]
+    },
+    {
+      "id": "PROP1",
+      "location": "methods/appendix",
+      "text": "Equations 7--8 plus nonvacuity yield a conditional paper proposition, not machine-checked compiler soundness.",
+      "kind": "conditional_proposition",
+      "status": "method_description",
+      "source": [
+        "papers/completion/autoformalization/runs/bridge_validation/results.jsonl",
+        "papers/completion/autoformalization/manuscript/main.tex"
+      ]
+    },
+    {
+      "id": "AF006-TWELVE",
+      "location": "results",
+      "text": "Twelve reconstructed finite checks matched declared expected outcomes, including 26/64 strong-until vs conjunction disagreements. New reconstruction, not recovered historical Table 4.",
+      "kind": "finite_illustration",
+      "status": "supported",
+      "source": [
+        "papers/completion/autoformalization/evaluation/reference_results.json"
+      ]
+    },
+    {
+      "id": "AF015-Q1",
+      "location": "results",
+      "text": "Guarded Boolean model accepts Q1; unguarded always-write supplies a countermodel. Native Lean Q1 unavailable. Zero observed false transfers is not universal soundness.",
+      "kind": "finite_illustration",
+      "status": "supported",
+      "source": [
+        "papers/completion/autoformalization/runs/bridge_validation/results.jsonl"
+      ]
+    },
+    {
+      "id": "AF027-DEV",
+      "location": "results",
+      "text": "Development Lean identity success, Lean False:=trivial type error, and Z3 unsat sentinel do not receive Table 6 credit.",
+      "kind": "result",
+      "status": "supported",
+      "table6_credit": false,
+      "source": [
+        "papers/completion/autoformalization/evidence/runtime_qualification/native_checker_receipts.jsonl",
+        "papers/completion/autoformalization/manuscript/empirical_scope.tex"
+      ]
+    },
+    {
+      "id": "COST",
+      "location": "results",
+      "text": "Retained historical phase costs sum to 963.171 elapsed seconds and are not Table 6/11 final-test totals. Human-review seconds unmeasured. CUDA speedup unmeasured.",
+      "kind": "result",
+      "status": "supported",
+      "source": [
+        "papers/completion/autoformalization/results/summary.json",
+        "papers/completion/autoformalization/evidence/cost_accounting.md"
+      ]
+    },
+    {
+      "id": "RW-NOT-RUN",
+      "location": "related work",
+      "text": "LeanDojo, DSP/miniF2F, Thor/Sledgehammer, Baldur, CompCert, seL4, and Dafny are related-work comparisons and were not executed as paper benchmarks.",
+      "kind": "related_work",
+      "status": "method_description",
+      "source": [
+        "papers/completion/autoformalization/evidence/bibliography_audit.md",
+        "papers/completion/autoformalization/manuscript/references.bib"
+      ]
+    },
+    {
+      "id": "CONC",
+      "location": "conclusion",
+      "text": "The manuscript does not establish that the cycle improves independent source fidelity or useful cross-view proof coverage on genuinely unseen material.",
+      "kind": "limitation",
+      "status": "unrun",
+      "source": [
+        "papers/completion/autoformalization/results/hypothesis_report.md",
+        "papers/completion/autoformalization/manuscript/main.tex"
+      ]
+    }
+  ],
+  "forbidden_inventions_absent": [
+    "held-out source-fidelity percentage",
+    "invented checkpoint identity as a successful deployment",
+    "T4 applied learned-feature guidance",
+    "Arm E promoted",
+    "human agreement kappa or majority vote",
+    "CUDA training speedup",
+    "native useful-proof coverage on 1913 as a success fraction",
+    "universal compiler soundness from zero constructed false transfers",
+    "ProofNet/miniF2F/LeanDojo/CompCert/seL4/Dafny numbers as this paper's results"
+  ],
+  "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
+  "final_test_denominator": 1913,
+  "seeds": [104729, 130363, 155921]
+}
