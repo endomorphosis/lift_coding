@@ -1,0 +1,190 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-017",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:07:00.850272+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema_judgment": "autoformalization-retrieval-judgment/v1",
+      "schema_retrieval": "autoformalization-retrieval-result/v1",
+      "schema_premise": "autoformalization-premise-selection-result/v1",
+      "schema_manifest": "autoformalization-retrieval-manifest/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py",
+      "sha256": "d5821b2112413edafea2df0e1c4f8408b377ac04ab2d1ebbf5170356399cb1db",
+      "standard_library_only": true
+    },
+    "repository_tree_id": "bed52d397e9114d80bdf9dfc421746a186dedad9",
+    "ipfs_datasets_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "inspected_not_imported": {
+      "bench_itp_hammer_premise_selection.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_itp_hammer_premise_selection.py",
+        "sha256": "14271ddf07f9eec34d3bff1b067dbccb8ac6be9882c0107648c2e4771586df44",
+        "imported": false,
+        "note": "Held-out import-overlap proxy harness; proxy rows stay diagnostic."
+      },
+      "faiss_store.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/vector_stores/faiss_store.py",
+        "sha256": "719e8159c13631b4748f4b417f2643b0a1e12c94fe257d184c818d462a18fee4",
+        "imported": false,
+        "note": "Contains MockFaiss fallback; not imported. Real FAISS/NumPy were unavailable."
+      },
+      "learned_selector.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/learned_selector.py",
+        "sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da",
+        "imported": false,
+        "note": "Optional graph selector; default weights are hand-authored, not trained."
+      },
+      "learned_selector_model.json": {
+        "path": "external/ipfs_datasets/tests/fixtures/logic/hammers/learned_selector_model.json",
+        "sha256": "c553a47b9d2832f02099b97ab9f017f3fe8b84e6302833d5dcbae985e5cb01dc",
+        "imported": false,
+        "note": "Pinned hand-authored linear weights and digest.",
+        "model_digest": "sha256:ad48f4b45a454bc41b63bef17ed7b4c1695b8c21ab118c1ec16766f21a14aa75"
+      },
+      "legal_samples.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+        "sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd",
+        "imported": false,
+        "note": "stable_mock_embedding is excluded from semantic/retrieval claims."
+      },
+      "premise_selection.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/premise_selection.py",
+        "sha256": "c06d81f3065fb59f9c551aa60aafcecddcf2e9f91d9efc2554eb3b78528afdea",
+        "imported": false,
+        "note": "Deterministic symbol/type/import/graph Jaccard baseline; default weights hand-authored."
+      },
+      "premise_selection_corpus.json": {
+        "path": "external/ipfs_datasets/tests/fixtures/logic/hammers/premise_selection_corpus.json",
+        "sha256": "3d9de0393e9d38b5f8dc7a7a23547082e1c77cc20c45b9fee9d2aae66506b5cd",
+        "imported": false,
+        "note": "Synthetic Lean-named fixture; not a Mathlib excerpt."
+      }
+    },
+    "frozen_inputs": {
+      "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "policy_code_trace_cases_sha256": "a795f24b69860316b6f9615e145b08e208df0cd8ca76069c91f850a312ecaac7"
+    },
+    "empirical_execution": "stdlib BM25, exact inner-product hashed-trigram search, typed graph walks, and RRF on a 34-document constructed pool; FAISS/NumPy/MiniLM unavailable under sealed PATH"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/check_outputs.py": "22a60d8fa378da1804f1ea8be82039aa4ee224f2b5f0225d31c504baed0e069f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/config/retrieval_manifest.json": "e29612b783742628f863d736151b44eeb2e798ae5bd57d43f81d694a81db4442",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/data/retrieval_judgments.jsonl": "0aec03a8721c36cd792f7518717af25d291e462c19721343c75c6c78628af8f5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.meta.json": "aaa4294efeb476b7ff83d0e4964ca63aae55fe668c5523ec58af24d6950148f3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stdout.log": "85dd5ad622ff01c000e9ccc0060cfd2866626d1f3481e9d04c93ad1db32d0e52",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/measure.meta.json": "d51194eb14d1e82ae8a80f4e8bb9b31340784c8f0b3aa26fafb3c2b1caf51f27",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/measure.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/measure.stdout.log": "30a003e0c9ac122fec3de4aa938e30a2bdf5c4f2ea5c85d4f53b0ff95b0a753e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py": "d5821b2112413edafea2df0e1c4f8408b377ac04ab2d1ebbf5170356399cb1db",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/premise_selection/results.jsonl": "de98935565458daed6b3119f9c4f452ae307b0ebaf503c0dafb9948d9bea59d9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/retrieval/results.jsonl": "3d07de27b8ecec162c7e4a6ec88e6f274e846c381839bd4d23fcef513b78a1f4"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/data/retrieval_judgments.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-017/data/retrieval_judgments.jsonl",
+    "papers/completion/autoformalization/runs/retrieval/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/retrieval/results.jsonl",
+    "papers/completion/autoformalization/runs/premise_selection/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/premise_selection/results.jsonl",
+    "papers/completion/autoformalization/config/retrieval_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-017/config/retrieval_manifest.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Relevance recall/ranking and admitted-premise yield have independent label provenance and full corpus/query counts.",
+      "status": "met",
+      "explanation": "The frozen pool has 34 documents and 12 queries. Relevance uses citation_and_controlling_source/v1 over the full 34x12=408 pairs (35 positives; unlisted pairs are implicit negatives in compact qrels). Admitted-premise usefulness uses explicit_dependency_or_admission/v1 over the same 408 pairs (28 positives). The positive sets differ. Import-overlap proxy occupies a third label_task on the 5 premise goals x 34 documents (170 pairs) and is never used as the primary usefulness gold. Every retrieval and premise-selection observation row reports corpus_n_documents and query_n.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/data/retrieval_judgments.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/retrieval/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/premise_selection/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/config/retrieval_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py"
+      ]
+    },
+    {
+      "criterion": "Vector route is executed against real backend/dependencies; mock vectors or declared-only CLI modes cannot count as measured retrieval.",
+      "status": "met",
+      "explanation": "Under sealed PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and a fresh HOME, faiss is absent and NumPy C-extensions fail because libblas.so.3 is missing. The measured vector route is stdlib-exact-inner-product/v1: L2-normalized signed character-trigram hashes actually added to a brute-force IndexFlatIP-equivalent and searched by inner product. Vector scores vary across documents (not constant mock ranks). The GraphRAG thin-client vector subcommand is not dispatched. FAISS-store MockFaiss is inspected, not imported. MiniLM is unavailable in sealed HOME; the encoder is disclosed as signed-char-trigram-hash/v1, not a semantic teacher.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/retrieval/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/config/retrieval_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/measure.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Hand-authored selector weights and proxy labels are disclosed; any unavailable conditions narrow only their associated claims.",
+      "status": "met",
+      "explanation": "Deterministic baseline weights (0.45/0.20/0.20/0.15) and graph-selector weights (symbol_score 3.2, bias -1.6, digest sha256:ad48f4b45a454bc41b63bef17ed7b4c1695b8c21ab118c1ec16766f21a14aa75) are recorded as hand-authored with trained=false and no independent train/split. Proxy import-overlap recall is a separate metric (0.788889 at k=5) beside usefulness recall (0.96/0.92). Unavailable FAISS, MiniLM, trained selectors, and AF-004 natural source bodies (1913 final-test units, AF-005 gold pending) are listed with claim_narrowing that they do not fill Table 13 natural cells or support semantic-encoder/FAISS-library claims. Combined RRF is an untrained fusion.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/config/retrieval_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/runs/premise_selection/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/data/retrieval_judgments.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af017-v9w482t2",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/measure.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/measure.stderr.log",
+      "started_at": "2026-09-12T02:07:00.741695+00:00",
+      "finished_at": "2026-09-12T02:07:00.811806+00:00",
+      "execution_kind": "sealed-PATH lexical/vector/graph/RRF retrieval and premise-selection measurement"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af017-v9w482t2",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-017/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-017/check_outputs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-017/logs/check_outputs.stderr.log",
+      "started_at": "2026-09-12T02:07:00.813201+00:00",
+      "finished_at": "2026-09-12T02:07:00.850272+00:00",
+      "execution_kind": "independent-label, full-count, real-vector, and disclosure checks"
+    }
+  ],
+  "limitations": [
+    "FAISS, NumPy (libblas.so.3), torch, transformers, and MiniLM are unavailable in the sealed validation environment; no FAISS-library or neural-encoder retrieval quality is claimed.",
+    "The executed vector encoder is signed hashed character trigrams, not sentence-transformers/all-MiniLM-L6-v2.",
+    "The evaluation pool is constructed_control (14 policy/code/trace/frame documents plus the 20-theorem Hammer fixture), not the AF-004 natural legal corpus whose bodies remain owner-only and whose AF-005 gold is pending.",
+    "Relevance and usefulness labels are constructed protocols authored before scoring, not independent human adjudication.",
+    "Theorem usefulness labels are schematic lemma maps, not mined Mathlib proof dependencies or native checker admissions.",
+    "Graph-selector and deterministic baseline weights are hand-authored; no trained selector or independent train/split artifact exists.",
+    "Import-overlap proxy recall is diagnostic only and is not proof-premise recall.",
+    "Combined RRF is an untrained rank fusion, not a learned fusion policy.",
+    "Constructed_control metrics do not fill Table 13 natural held-out cells.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Matched-budget lexical BM25, exact inner-product hashed-trigram, graph-walk, and untrained RRF measurements plus deterministic and hand-authored graph premise selectors on a frozen 34-document/12-query constructed pool with independent relevance and usefulness labels; natural-corpus, FAISS/MiniLM, and trained-selector claims remain unavailable."
+}

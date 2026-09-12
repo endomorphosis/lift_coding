@@ -1,0 +1,21 @@
+{
+  "errors": [],
+  "n_documents": 34,
+  "n_judgments": 94,
+  "n_premise": 21,
+  "n_proxy_pairs": 170,
+  "n_queries": 12,
+  "n_relevance_pairs": 408,
+  "n_retrieval": 97,
+  "n_usefulness_pairs": 408,
+  "ok": true,
+  "paths": {
+    "judgments": "papers/completion/autoformalization/data/retrieval_judgments.jsonl",
+    "manifest": "papers/completion/autoformalization/config/retrieval_manifest.json",
+    "premise": "papers/completion/autoformalization/runs/premise_selection/results.jsonl",
+    "retrieval": "papers/completion/autoformalization/runs/retrieval/results.jsonl"
+  },
+  "relevance_positives": 35,
+  "usefulness_positives": 28,
+  "vector_rows": 24
+}

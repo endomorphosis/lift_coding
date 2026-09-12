@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af017-v9w482t2",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-017/measure_retrieval.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 70.562,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af017-v9w482t2",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T02:07:00.811806+00:00",
+  "name": "measure",
+  "started_at": "2026-09-12T02:07:00.741695+00:00"
+}

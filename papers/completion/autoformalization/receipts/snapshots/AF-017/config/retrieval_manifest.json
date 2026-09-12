@@ -1,0 +1,378 @@
+{
+  "backend_probe": {
+    "declared_only_cli": false,
+    "faiss": {
+      "available": false,
+      "error": "No module named 'faiss'",
+      "error_type": "ModuleNotFoundError"
+    },
+    "home": "/tmp/ipfs-accelerate-validation-home-af017-v9w482t2",
+    "interpreter": "/usr/bin/python3.12",
+    "minilm_encoder": {
+      "available": false,
+      "reason": "sealed HOME has no HuggingFace cache; transformers/torch unavailable"
+    },
+    "mock_vectors": false,
+    "numpy": {
+      "available": false,
+      "error": "NumPy C-extensions failed: libblas.so.3 is absent from the sealed environment",
+      "error_type": "ImportError"
+    },
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "3.12.3",
+    "selected_vector_backend": "stdlib-exact-inner-product/v1",
+    "sentence_transformers": {
+      "available": false,
+      "error": "No module named 'sentence_transformers'",
+      "error_type": "ModuleNotFoundError"
+    },
+    "sklearn": {
+      "available": false,
+      "error": "No module named 'sklearn'",
+      "error_type": "ModuleNotFoundError"
+    },
+    "spacy": {
+      "available": false,
+      "error": "No module named 'spacy'",
+      "error_type": "ModuleNotFoundError"
+    },
+    "thin_client_vector_dispatch": "not_executed",
+    "torch": {
+      "available": false,
+      "error": "No module named 'torch'",
+      "error_type": "ModuleNotFoundError"
+    },
+    "transformers": {
+      "available": false,
+      "error": "No module named 'transformers'",
+      "error_type": "ModuleNotFoundError"
+    }
+  },
+  "budgets": {
+    "graph_hops": 1,
+    "rrf_k": 60,
+    "token_budget": 256,
+    "top_k": [
+      5,
+      10
+    ]
+  },
+  "corpus": {
+    "document_ids": [
+      "frame.obligation_deontic",
+      "impl.guarded_write",
+      "impl.logging_helper",
+      "impl.unguarded_write",
+      "policy.audit_window",
+      "policy.emergency_exception",
+      "policy.protected_write",
+      "policy.protected_write_paraphrase",
+      "policy.records_retention",
+      "policy.tenant_isolation",
+      "thm.Group.inv_inv",
+      "thm.Group.mul_assoc",
+      "thm.Group.mul_left_inv",
+      "thm.Group.mul_one",
+      "thm.List.append_assoc",
+      "thm.List.append_nil",
+      "thm.List.length_append",
+      "thm.List.map_append",
+      "thm.List.reverse_append",
+      "thm.Nat.add_assoc",
+      "thm.Nat.add_comm",
+      "thm.Nat.add_zero",
+      "thm.Nat.mul_add",
+      "thm.Nat.mul_comm",
+      "thm.Order.le_refl",
+      "thm.Order.le_trans",
+      "thm.Set.inter_comm",
+      "thm.Set.subset_union_left",
+      "thm.Set.union_assoc",
+      "thm.Set.union_comm",
+      "trace.delayed_audit",
+      "trace.incomplete_window",
+      "trace.timely_audit",
+      "trace.wrong_tenant"
+    ],
+    "n_documents": 34,
+    "n_policy_code_trace_frame": 14,
+    "n_theorems": 20,
+    "sha256": "b22d2978f601bc7cf6ecb465fc4266885385e1d2d7e3bc55bef23b212f9d8eb4"
+  },
+  "created_at": "2026-09-12T02:07:00.782236+00:00",
+  "elapsed_ms": 19.549,
+  "eligible_natural_held_out": false,
+  "finished_at": "2026-09-12T02:07:00.801799+00:00",
+  "inspected_not_imported": {
+    "bench_itp_hammer_premise_selection.py": {
+      "bytes": 15792,
+      "imported": false,
+      "note": "Held-out import-overlap proxy harness; proxy rows stay diagnostic.",
+      "path": "external/ipfs_datasets/benchmarks/bench_itp_hammer_premise_selection.py",
+      "sha256": "14271ddf07f9eec34d3bff1b067dbccb8ac6be9882c0107648c2e4771586df44"
+    },
+    "faiss_store.py": {
+      "bytes": 41976,
+      "contains_mock_faiss": true,
+      "imported": false,
+      "mentions_ensure_module": true,
+      "note": "Inspected FAISS store; constructor requires real FAISS/NumPy. MockFaiss in the file is not executed.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/vector_stores/faiss_store.py",
+      "sha256": "719e8159c13631b4748f4b417f2643b0a1e12c94fe257d184c818d462a18fee4"
+    },
+    "learned_selector.py": {
+      "bytes": 54332,
+      "imported": false,
+      "note": "Optional graph selector; default weights are hand-authored, not trained.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/learned_selector.py",
+      "sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da"
+    },
+    "learned_selector_model.json": {
+      "bytes": 1031,
+      "imported": false,
+      "note": "Pinned hand-authored linear weights and digest.",
+      "path": "external/ipfs_datasets/tests/fixtures/logic/hammers/learned_selector_model.json",
+      "sha256": "c553a47b9d2832f02099b97ab9f017f3fe8b84e6302833d5dcbae985e5cb01dc"
+    },
+    "legal_samples.py": {
+      "bytes": 5745,
+      "imported": false,
+      "note": "stable_mock_embedding is excluded from semantic/retrieval claims.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+      "sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd"
+    },
+    "premise_selection.py": {
+      "bytes": 40151,
+      "imported": false,
+      "note": "Deterministic symbol/type/import/graph Jaccard baseline; default weights hand-authored.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/premise_selection.py",
+      "sha256": "c06d81f3065fb59f9c551aa60aafcecddcf2e9f91d9efc2554eb3b78528afdea"
+    },
+    "premise_selection_corpus.json": {
+      "bytes": 4840,
+      "imported": false,
+      "note": "Synthetic Lean-named fixture; not a Mathlib excerpt.",
+      "path": "external/ipfs_datasets/tests/fixtures/logic/hammers/premise_selection_corpus.json",
+      "sha256": "3d9de0393e9d38b5f8dc7a7a23547082e1c77cc20c45b9fee9d2aae66506b5cd"
+    }
+  },
+  "judgments": {
+    "encoding": "compact_qrels_implicit_negatives/v1",
+    "full_corpus_query_relevance": true,
+    "full_corpus_query_usefulness": true,
+    "human_adjudication": false,
+    "independent_label_tasks": [
+      "relevance",
+      "admitted_premise_usefulness"
+    ],
+    "n_file_rows": 94,
+    "n_proxy_pairs": 170,
+    "n_relevance_pairs": 408,
+    "n_relevance_positives": 35,
+    "n_rows": 986,
+    "n_usefulness_pairs": 408,
+    "n_usefulness_positives": 28,
+    "positive_sets_differ": true,
+    "proxy_label_task": "proxy_import_overlap"
+  },
+  "outputs": {
+    "judgments": "papers/completion/autoformalization/data/retrieval_judgments.jsonl",
+    "manifest": "papers/completion/autoformalization/config/retrieval_manifest.json",
+    "premise_selection": "papers/completion/autoformalization/runs/premise_selection/results.jsonl",
+    "retrieval": "papers/completion/autoformalization/runs/retrieval/results.jsonl"
+  },
+  "pool_id": "AF-017-constructed-retrieval-pool/v1",
+  "population": "constructed_control",
+  "queries": {
+    "n_premise_goals": 5,
+    "n_queries": 12,
+    "n_retrieval": 7,
+    "query_ids": [
+      "q.protected_write_rule",
+      "q.audit_deadline",
+      "q.tenant_join",
+      "q.emergency_override",
+      "q.nat_add_identity",
+      "q.list_concat_length",
+      "q.group_inverse",
+      "g.List.length_append",
+      "g.Group.inv_inv",
+      "g.Nat.add_assoc",
+      "g.Set.union_assoc",
+      "g.Order.le_trans"
+    ],
+    "sha256": "c03baee8efb1e038594c0cacabc44178a5510b18e0c9a032ccd2b07c4e244f1a"
+  },
+  "routes": {
+    "combined_rrf": {
+      "components": [
+        "lexical_bm25",
+        "vector_exact_ip",
+        "graph_walk"
+      ],
+      "method": "reciprocal_rank_fusion",
+      "rrf_k": 60,
+      "trained_fusion": false
+    },
+    "graph_walk": {
+      "edge_types": [
+        "cites",
+        "controls",
+        "implements",
+        "observed_by",
+        "shares_import",
+        "violated_by"
+      ],
+      "hops": 1,
+      "n_adjacency_nodes": 30,
+      "usefulness_edges_included": false
+    },
+    "lexical_bm25": {
+      "b": 0.75,
+      "body_tf_weight": 1.0,
+      "formula": "idf(t)*tf*(k1+1)/(tf+k1*(1-b+b*|d|/avgdl))",
+      "k1": 1.2,
+      "scoring_branch": "title_body_weighted_okapi",
+      "title_tf_weight": 2.0
+    },
+    "vector_exact_ip": {
+      "algorithm": "exact inner product over L2-normalized vectors (IndexFlatIP equivalent)",
+      "backend_id": "stdlib-exact-inner-product/v1",
+      "declared_only_cli": false,
+      "encoder": {
+        "dimension": 256,
+        "id": "signed-char-trigram-hash/v1",
+        "mock": false,
+        "ngram": 3,
+        "normalization": "l2",
+        "semantic_minilm": false
+      },
+      "faiss_library": {
+        "available": false,
+        "error": "No module named 'faiss'",
+        "error_type": "ModuleNotFoundError"
+      },
+      "mock_vectors": false,
+      "ntotal": 34,
+      "numpy": {
+        "available": false,
+        "error": "NumPy C-extensions failed: libblas.so.3 is absent from the sealed environment",
+        "error_type": "ImportError"
+      },
+      "thin_client_vector_subcommand": "not_dispatched"
+    }
+  },
+  "schema": "autoformalization-retrieval-manifest/v1",
+  "selectors": {
+    "deterministic_baseline": {
+      "graph_weight": 0.15,
+      "import_weight": 0.2,
+      "provenance": "hand_authored_module_defaults",
+      "symbol_weight": 0.45,
+      "trained": false,
+      "type_weight": 0.2
+    },
+    "hand_authored_graph_selector": {
+      "bias": -1.6,
+      "feature_names": [
+        "symbol_score",
+        "type_score",
+        "import_score",
+        "graph_score",
+        "goal_symbol_count",
+        "candidate_symbol_count",
+        "shared_symbol_count",
+        "candidate_import_count",
+        "one_hop_neighbor_count"
+      ],
+      "feature_version": "learned-selector-features-v1",
+      "independent_train_split": null,
+      "model_digest": "sha256:ad48f4b45a454bc41b63bef17ed7b4c1695b8c21ab118c1ec16766f21a14aa75",
+      "model_id": "graph-selector-default-v1",
+      "provenance": "hand_authored_linear_combination; matches tests/fixtures/logic/hammers/learned_selector_model.json",
+      "trained": false,
+      "weights": {
+        "candidate_import_count": 0.0,
+        "candidate_symbol_count": -0.01,
+        "goal_symbol_count": 0.0,
+        "graph_score": 0.8,
+        "import_score": 1.2,
+        "one_hop_neighbor_count": 0.05,
+        "shared_symbol_count": 0.15,
+        "symbol_score": 3.2,
+        "type_score": 1.0
+      }
+    }
+  },
+  "summaries": {
+    "premise_selection": {
+      "admitted_premise_yield_at_5": {
+        "deterministic_baseline": 0.96,
+        "hand_authored_graph_selector": 0.92
+      },
+      "proxy_import_overlap_recall_at_5": {
+        "deterministic_baseline": 0.788889,
+        "hand_authored_graph_selector": 0.788889
+      },
+      "usefulness_recall_at_5": {
+        "deterministic_baseline": 0.96,
+        "hand_authored_graph_selector": 0.92
+      }
+    },
+    "retrieval": {
+      "admitted_premise_yield_at_5": {
+        "combined_rrf": 0.811111,
+        "graph_walk": 0.713889,
+        "lexical_bm25": 0.852778,
+        "vector_exact_ip": 0.901389
+      },
+      "relevance_recall_at_5": {
+        "combined_rrf": 0.888889,
+        "graph_walk": 0.736111,
+        "lexical_bm25": 0.916667,
+        "vector_exact_ip": 0.916667
+      }
+    }
+  },
+  "task_id": "AF-017",
+  "unavailable_conditions": {
+    "claim_narrowing": [
+      "No FAISS-library or MiniLM semantic-vector quality claim.",
+      "No natural held-out legal/policy retrieval claim over AF-004 final-test units.",
+      "No trained premise-selector claim.",
+      "Constructed_control recall/yield do not fill Table 13 natural cells."
+    ],
+    "faiss": {
+      "available": false,
+      "error": "No module named 'faiss'",
+      "error_type": "ModuleNotFoundError"
+    },
+    "minilm": {
+      "available": false,
+      "reason": "sealed HOME has no HuggingFace cache; transformers/torch unavailable"
+    },
+    "natural_legal_corpus_retrieval": {
+      "annotation_packets_evaluation_eligible": false,
+      "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+      "natural_source_units": {
+        "final_test": 1913,
+        "fixed_canary": 38,
+        "selection": 15,
+        "train": 69
+      },
+      "reason": "AF-004 natural source bodies are owner-only; AF-005 packets remain pending_independent_review without gold values; final-test lock forbids retrieval tuning.",
+      "splits_assignment_seed": 104729,
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "status": "unavailable_for_retrieval_evaluation"
+    },
+    "numpy": {
+      "available": false,
+      "error": "NumPy C-extensions failed: libblas.so.3 is absent from the sealed environment",
+      "error_type": "ImportError"
+    },
+    "trained_selector": {
+      "available": false,
+      "reason": "No independent train/split artifact; default graph-selector weights remain hand-authored."
+    }
+  }
+}
