@@ -1,0 +1,40 @@
+{
+  "after": {
+    ".github/workflows/test.yml": "95afd593264cb80c13feb102b437af6dc0859f25fb4cffe416b76eca8672fd0e",
+    ".gitignore": "56c3eab7f913c4b9eeb497fb11839a722d374f704f40d892c3aaf4348653c7ad",
+    ".travis.yml": "21b07666796420bced7fb9fc8ae4c3fe109e10fc4018a2d10fe2b78be09469f6",
+    "CHANGELOG.md": "2b72ef2166b33970e9f1fd26e49bf53f500f0664069227c2d068bd4c88d78f15",
+    "LICENSE": "d66d5eb8f83a0ba21d3dd04318b8817588e8764daabea852d1035e3f07ffda55",
+    "MANIFEST.in": "fb35455ce703c371335c4d5e65714a12b32770219ddfabe493e406ab002ab239",
+    "README.md": "2d3eac86c65c866dd4c4054165db7875419d5204671f4b1448d423565cd5e18b",
+    "ez_setup.py": "0f63364b0e7a114e7b154b74a79ad2bbe842e79dc22912b1268040103cf0877a",
+    "push_release.sh": "459f5677c78c8b18575dcb739cfcac419412c964ca097fd2cbc0f5bb05cb7a1c",
+    "setup.cfg": "e4bd33cba1e9779df4fe84fc34e92a4c43a4adcbcfe4b937ae1302bd3e73d4b8",
+    "setup.py": "a8850da2138eff4c83aa84f65c5b67d26d3b6a2d522a6bf9ee9dac49e62cb58a",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/test_dicttoxml.py": "d78b5827d8abed26e8c8168ee6ae78a2018bc8f519ef14949ea9285db6012b4d",
+    "tests/test_xmltodict.py": "dd02fa4a078d0454cfaf7226485579152dd486c8e866b9957641ce058e4a4096",
+    "tox.ini": "c157479ade68a4746d77ae742307cb4fae2e0e03ec29f8275066b3729b337c3c",
+    "xmltodict.py": "7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63"
+  },
+  "after_sha256": "cd69ba9a05bc54f71281f70514064f14646dffeaf37dd0b5e1a48248ed33465c",
+  "before": {
+    ".github/workflows/test.yml": "95afd593264cb80c13feb102b437af6dc0859f25fb4cffe416b76eca8672fd0e",
+    ".gitignore": "56c3eab7f913c4b9eeb497fb11839a722d374f704f40d892c3aaf4348653c7ad",
+    ".travis.yml": "21b07666796420bced7fb9fc8ae4c3fe109e10fc4018a2d10fe2b78be09469f6",
+    "CHANGELOG.md": "2b72ef2166b33970e9f1fd26e49bf53f500f0664069227c2d068bd4c88d78f15",
+    "LICENSE": "d66d5eb8f83a0ba21d3dd04318b8817588e8764daabea852d1035e3f07ffda55",
+    "MANIFEST.in": "fb35455ce703c371335c4d5e65714a12b32770219ddfabe493e406ab002ab239",
+    "README.md": "2d3eac86c65c866dd4c4054165db7875419d5204671f4b1448d423565cd5e18b",
+    "ez_setup.py": "0f63364b0e7a114e7b154b74a79ad2bbe842e79dc22912b1268040103cf0877a",
+    "push_release.sh": "459f5677c78c8b18575dcb739cfcac419412c964ca097fd2cbc0f5bb05cb7a1c",
+    "setup.cfg": "e4bd33cba1e9779df4fe84fc34e92a4c43a4adcbcfe4b937ae1302bd3e73d4b8",
+    "setup.py": "a8850da2138eff4c83aa84f65c5b67d26d3b6a2d522a6bf9ee9dac49e62cb58a",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/test_dicttoxml.py": "d78b5827d8abed26e8c8168ee6ae78a2018bc8f519ef14949ea9285db6012b4d",
+    "tests/test_xmltodict.py": "dd02fa4a078d0454cfaf7226485579152dd486c8e866b9957641ce058e4a4096",
+    "tox.ini": "c157479ade68a4746d77ae742307cb4fae2e0e03ec29f8275066b3729b337c3c",
+    "xmltodict.py": "7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63"
+  },
+  "before_sha256": "cd69ba9a05bc54f71281f70514064f14646dffeaf37dd0b5e1a48248ed33465c"
+}

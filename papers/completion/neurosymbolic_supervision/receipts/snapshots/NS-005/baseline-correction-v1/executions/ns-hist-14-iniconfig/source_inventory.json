@@ -1,0 +1,40 @@
+{
+  "after": {
+    ".github/workflows/test.yml": "4cb88f8ee22e48eb306d353775d77562be1331605661739a10983add86e53a04",
+    ".gitignore": "526c4e37f8e34f67a4988aaadccea0e5553335460b34eae1b835077f886cb2bc",
+    ".pre-commit-config.yaml": "a979a8429c134b8d4c91f73d67818cbd9fc8d7737ca689fbb9f7ce19871b70d7",
+    "CHANGELOG": "a92424442894b69215ce9c507f331e9552bcced2d6b05dda41f733810885ee9c",
+    "LICENSE": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4",
+    "MANIFEST.in": "734a192af7f7b8c2bfa5ce7ad1ed2c9a880e914076e169548d5bc2ee1a7382d9",
+    "README.rst": "6e47277c193d520fdb3a5b256a38041bac703f9f116b8dc79d3b477e5503f7d0",
+    "example.ini": "ff70341749445bace38f6892030d707640197130169c810ec4ab4307dd831e6f",
+    "pyproject.toml": "b623a384699f55dc18844a2d6ae83e870c7b2341140058c6875fa5b97d7d2998",
+    "src/iniconfig/__init__.py": "54d78711f7f17b2aa2a6c1593da464d91a0bf8da08c875fb3df2242b0ac0db1a",
+    "src/iniconfig/_parse.py": "255a021dfa214a10a9c05fda985c1dd6f364eb4869bbbda9cd618668cc927e3b",
+    "src/iniconfig/exceptions.py": "9a2a50fda3310fd0af4af156375a135d8e10b919ca00c6757f7b027668c34d4d",
+    "src/iniconfig/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "testing/conftest.py": "ceae34cc6fdff2b86faafe4a9ee85a502b0da7ec7e62a279f69a6e77d33e5dc2",
+    "testing/test_iniconfig.py": "eb53e8d52fd3f5066e8a17f3ab44184d29cd1132bcdcad44af382b11a5564b79",
+    "uv.lock": "39ecc453aaa568358eb33ec4395ec84f6e7196a140a88dda3c435227181bdc50"
+  },
+  "after_sha256": "6607e60e1eba1cdc6535954aece78fa5baf476c63f54aff1e80d22f4c3a58a51",
+  "before": {
+    ".github/workflows/test.yml": "4cb88f8ee22e48eb306d353775d77562be1331605661739a10983add86e53a04",
+    ".gitignore": "526c4e37f8e34f67a4988aaadccea0e5553335460b34eae1b835077f886cb2bc",
+    ".pre-commit-config.yaml": "a979a8429c134b8d4c91f73d67818cbd9fc8d7737ca689fbb9f7ce19871b70d7",
+    "CHANGELOG": "a92424442894b69215ce9c507f331e9552bcced2d6b05dda41f733810885ee9c",
+    "LICENSE": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4",
+    "MANIFEST.in": "734a192af7f7b8c2bfa5ce7ad1ed2c9a880e914076e169548d5bc2ee1a7382d9",
+    "README.rst": "6e47277c193d520fdb3a5b256a38041bac703f9f116b8dc79d3b477e5503f7d0",
+    "example.ini": "ff70341749445bace38f6892030d707640197130169c810ec4ab4307dd831e6f",
+    "pyproject.toml": "b623a384699f55dc18844a2d6ae83e870c7b2341140058c6875fa5b97d7d2998",
+    "src/iniconfig/__init__.py": "54d78711f7f17b2aa2a6c1593da464d91a0bf8da08c875fb3df2242b0ac0db1a",
+    "src/iniconfig/_parse.py": "255a021dfa214a10a9c05fda985c1dd6f364eb4869bbbda9cd618668cc927e3b",
+    "src/iniconfig/exceptions.py": "9a2a50fda3310fd0af4af156375a135d8e10b919ca00c6757f7b027668c34d4d",
+    "src/iniconfig/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "testing/conftest.py": "ceae34cc6fdff2b86faafe4a9ee85a502b0da7ec7e62a279f69a6e77d33e5dc2",
+    "testing/test_iniconfig.py": "eb53e8d52fd3f5066e8a17f3ab44184d29cd1132bcdcad44af382b11a5564b79",
+    "uv.lock": "39ecc453aaa568358eb33ec4395ec84f6e7196a140a88dda3c435227181bdc50"
+  },
+  "before_sha256": "6607e60e1eba1cdc6535954aece78fa5baf476c63f54aff1e80d22f4c3a58a51"
+}

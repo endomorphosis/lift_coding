@@ -1,0 +1,859 @@
+{
+  "collected": [
+    "tests/test_regression.py::TestCorner::test_assigned_scoping",
+    "tests/test_regression.py::TestCorner::test_closure_scoping",
+    "tests/test_regression.py::TestBug::test_keyword_folding",
+    "tests/test_regression.py::TestBug::test_extends_output_bugs",
+    "tests/test_regression.py::TestBug::test_urlize_filter_escaping",
+    "tests/test_regression.py::TestBug::test_urlize_filter_closing_punctuation",
+    "tests/test_regression.py::TestBug::test_loop_call_loop",
+    "tests/test_regression.py::TestBug::test_weird_inline_comment",
+    "tests/test_regression.py::TestBug::test_old_macro_loop_scoping_bug",
+    "tests/test_regression.py::TestBug::test_partial_conditional_assignments",
+    "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug",
+    "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug_twoframe",
+    "tests/test_regression.py::TestBug::test_call_with_args",
+    "tests/test_regression.py::TestBug::test_empty_if_condition_fails",
+    "tests/test_regression.py::TestBug::test_recursive_loop_compile",
+    "tests/test_regression.py::TestBug::test_else_loop_bug",
+    "tests/test_regression.py::TestBug::test_correct_prefix_loader_name",
+    "tests/test_regression.py::TestBug::test_pass_context_callable_class",
+    "tests/test_regression.py::TestBug::test_block_set_with_extends",
+    "tests/test_regression.py::TestBug::test_nested_for_else",
+    "tests/test_regression.py::TestBug::test_macro_var_bug",
+    "tests/test_regression.py::TestBug::test_macro_var_bug_advanced",
+    "tests/test_regression.py::TestBug::test_callable_defaults",
+    "tests/test_regression.py::TestBug::test_macro_escaping",
+    "tests/test_regression.py::TestBug::test_macro_scoping",
+    "tests/test_regression.py::TestBug::test_scopes_and_blocks",
+    "tests/test_regression.py::TestBug::test_scopes_and_include",
+    "tests/test_regression.py::TestBug::test_caller_scoping",
+    "tests/test_regression.py::TestBug::test_variable_reuse",
+    "tests/test_regression.py::TestBug::test_double_caller",
+    "tests/test_regression.py::TestBug::test_double_caller_no_default",
+    "tests/test_regression.py::TestBug::test_macro_blocks",
+    "tests/test_regression.py::TestBug::test_scoped_block",
+    "tests/test_regression.py::TestBug::test_recursive_loop_filter",
+    "tests/test_regression.py::TestBug::test_empty_if",
+    "tests/test_regression.py::TestBug::test_subproperty_if",
+    "tests/test_regression.py::TestBug::test_set_and_include",
+    "tests/test_regression.py::TestBug::test_loop_include",
+    "tests/test_regression.py::TestBug::test_grouper_repr",
+    "tests/test_regression.py::TestBug::test_custom_context",
+    "tests/test_regression.py::TestBug::test_recursive_loop_bug",
+    "tests/test_regression.py::TestBug::test_markup_and_chainable_undefined",
+    "tests/test_regression.py::TestBug::test_scoped_block_loop_vars",
+    "tests/test_regression.py::TestBug::test_pass_context_loop_vars",
+    "tests/test_regression.py::TestBug::test_pass_context_scoped_loop_vars",
+    "tests/test_regression.py::TestBug::test_pass_context_in_blocks",
+    "tests/test_regression.py::TestBug::test_pass_context_block_and_loop",
+    "tests/test_regression.py::TestBug::test_cached_extends[extends]",
+    "tests/test_regression.py::TestBug::test_cached_extends[include]",
+    "tests/test_regression.py::TestBug::test_nested_loop_scoping",
+    "tests/test_regression.py::TestBug::test_pass_context_with_select",
+    "tests/test_regression.py::test_unicode_whitespace[\\x0c]",
+    "tests/test_regression.py::test_unicode_whitespace[\\x85]"
+  ],
+  "collection_errors": [],
+  "exitstatus": 0,
+  "pytest": "8.1.1",
+  "python": "3.12.3",
+  "reports": [
+    {
+      "nodeid": "tests/test_regression.py::TestCorner::test_assigned_scoping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestCorner::test_assigned_scoping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestCorner::test_assigned_scoping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestCorner::test_closure_scoping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestCorner::test_closure_scoping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestCorner::test_closure_scoping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_keyword_folding",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_keyword_folding",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_keyword_folding",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_extends_output_bugs",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_extends_output_bugs",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_extends_output_bugs",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_urlize_filter_escaping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_urlize_filter_escaping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_urlize_filter_escaping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_urlize_filter_closing_punctuation",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_urlize_filter_closing_punctuation",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_urlize_filter_closing_punctuation",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_loop_call_loop",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_loop_call_loop",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_loop_call_loop",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_weird_inline_comment",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_weird_inline_comment",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_weird_inline_comment",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_old_macro_loop_scoping_bug",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_old_macro_loop_scoping_bug",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_old_macro_loop_scoping_bug",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_partial_conditional_assignments",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_partial_conditional_assignments",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_partial_conditional_assignments",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug_twoframe",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug_twoframe",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_stacked_locals_scoping_bug_twoframe",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_call_with_args",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_call_with_args",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_call_with_args",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_empty_if_condition_fails",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_empty_if_condition_fails",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_empty_if_condition_fails",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_compile",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_compile",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_compile",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_else_loop_bug",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_else_loop_bug",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_else_loop_bug",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_correct_prefix_loader_name",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_correct_prefix_loader_name",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_correct_prefix_loader_name",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_callable_class",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_callable_class",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_callable_class",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_block_set_with_extends",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_block_set_with_extends",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_block_set_with_extends",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_nested_for_else",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_nested_for_else",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_nested_for_else",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_var_bug",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_var_bug",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_var_bug",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_var_bug_advanced",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_var_bug_advanced",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_var_bug_advanced",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_callable_defaults",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_callable_defaults",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_callable_defaults",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_escaping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_escaping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_escaping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_scoping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_scoping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_scoping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scopes_and_blocks",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scopes_and_blocks",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scopes_and_blocks",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scopes_and_include",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scopes_and_include",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scopes_and_include",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_caller_scoping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_caller_scoping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_caller_scoping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_variable_reuse",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_variable_reuse",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_variable_reuse",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_double_caller",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_double_caller",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_double_caller",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_double_caller_no_default",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_double_caller_no_default",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_double_caller_no_default",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_blocks",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_blocks",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_macro_blocks",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scoped_block",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scoped_block",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scoped_block",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_filter",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_filter",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_filter",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_empty_if",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_empty_if",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_empty_if",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_subproperty_if",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_subproperty_if",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_subproperty_if",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_set_and_include",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_set_and_include",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_set_and_include",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_loop_include",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_loop_include",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_loop_include",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_grouper_repr",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_grouper_repr",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_grouper_repr",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_custom_context",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_custom_context",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_custom_context",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_bug",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_bug",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_recursive_loop_bug",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_markup_and_chainable_undefined",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_markup_and_chainable_undefined",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_markup_and_chainable_undefined",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scoped_block_loop_vars",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scoped_block_loop_vars",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_scoped_block_loop_vars",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_loop_vars",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_loop_vars",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_loop_vars",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_scoped_loop_vars",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_scoped_loop_vars",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_scoped_loop_vars",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_in_blocks",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_in_blocks",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_in_blocks",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_block_and_loop",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_block_and_loop",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_block_and_loop",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_cached_extends[extends]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_cached_extends[extends]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_cached_extends[extends]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_cached_extends[include]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_cached_extends[include]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_cached_extends[include]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_nested_loop_scoping",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_nested_loop_scoping",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_nested_loop_scoping",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_with_select",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_with_select",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::TestBug::test_pass_context_with_select",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::test_unicode_whitespace[\\x0c]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::test_unicode_whitespace[\\x0c]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::test_unicode_whitespace[\\x0c]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_regression.py::test_unicode_whitespace[\\x85]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_regression.py::test_unicode_whitespace[\\x85]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_regression.py::test_unicode_whitespace[\\x85]",
+      "outcome": "passed",
+      "when": "teardown"
+    }
+  ],
+  "schema": "unchanged-pytest-observation/v1"
+}

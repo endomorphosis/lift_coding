@@ -1,0 +1,8 @@
+..........................                                               [100%]
+=============================== warnings summary ===============================
+tests/test_idna_uts46.py::TestIdnaTest::runTest
+  /usr/lib/python3.12/unittest/case.py:690: DeprecationWarning: It is deprecated to return a value that is not None from a test case (<bound method TestIdnaTest.runTest of <tests.test_idna_uts46.TestIdnaTest testMethod=runTest>>)
+    return self.run(*args, **kwds)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+26 passed, 1 warning in 0.06s

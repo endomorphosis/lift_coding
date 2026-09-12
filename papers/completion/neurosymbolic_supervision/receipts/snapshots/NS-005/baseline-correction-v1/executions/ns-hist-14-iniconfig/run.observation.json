@@ -1,0 +1,683 @@
+{
+  "collected": [
+    "testing/test_iniconfig.py::test_tokenize[assignment in value]",
+    "testing/test_iniconfig.py::test_tokenize[blank line]",
+    "testing/test_iniconfig.py::test_tokenize[comment]",
+    "testing/test_iniconfig.py::test_tokenize[comment on section]",
+    "testing/test_iniconfig.py::test_tokenize[comment on value]",
+    "testing/test_iniconfig.py::test_tokenize[comment2]",
+    "testing/test_iniconfig.py::test_tokenize[comment2 on section]",
+    "testing/test_iniconfig.py::test_tokenize[equality gets precedence]",
+    "testing/test_iniconfig.py::test_tokenize[pseudo section syntax in value]",
+    "testing/test_iniconfig.py::test_tokenize[section]",
+    "testing/test_iniconfig.py::test_tokenize[use of colon for name-values]",
+    "testing/test_iniconfig.py::test_tokenize[use of colon without space]",
+    "testing/test_iniconfig.py::test_tokenize[value]",
+    "testing/test_iniconfig.py::test_tokenize[value in section]",
+    "testing/test_iniconfig.py::test_tokenize[value with aligned continuation]",
+    "testing/test_iniconfig.py::test_tokenize[value with continuation]",
+    "testing/test_iniconfig.py::test_parse_empty",
+    "testing/test_iniconfig.py::test_ParseError",
+    "testing/test_iniconfig.py::test_continuation_needs_perceeding_token",
+    "testing/test_iniconfig.py::test_continuation_cant_be_after_section",
+    "testing/test_iniconfig.py::test_section_cant_be_empty",
+    "testing/test_iniconfig.py::test_error_on_weird_lines[!!]",
+    "testing/test_iniconfig.py::test_iniconfig_from_file",
+    "testing/test_iniconfig.py::test_iniconfig_section_first",
+    "testing/test_iniconfig.py::test_iniconig_section_duplicate_fails",
+    "testing/test_iniconfig.py::test_iniconfig_duplicate_key_fails",
+    "testing/test_iniconfig.py::test_iniconfig_lineof",
+    "testing/test_iniconfig.py::test_iniconfig_get_convert",
+    "testing/test_iniconfig.py::test_iniconfig_get_missing",
+    "testing/test_iniconfig.py::test_section_get",
+    "testing/test_iniconfig.py::test_missing_section",
+    "testing/test_iniconfig.py::test_section_getitem",
+    "testing/test_iniconfig.py::test_section_iter",
+    "testing/test_iniconfig.py::test_config_iter",
+    "testing/test_iniconfig.py::test_config_contains",
+    "testing/test_iniconfig.py::test_iter_file_order",
+    "testing/test_iniconfig.py::test_example_pypirc",
+    "testing/test_iniconfig.py::test_api_import",
+    "testing/test_iniconfig.py::test_iscommentline_true[#qwe]",
+    "testing/test_iniconfig.py::test_iscommentline_true[  #qwe]",
+    "testing/test_iniconfig.py::test_iscommentline_true[;qwe]",
+    "testing/test_iniconfig.py::test_iscommentline_true[ ;qwe]"
+  ],
+  "collection_errors": [],
+  "exitstatus": 0,
+  "pytest": "8.1.1",
+  "python": "3.12.3",
+  "reports": [
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[assignment in value]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[assignment in value]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[assignment in value]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[blank line]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[blank line]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[blank line]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment on section]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment on section]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment on section]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment on value]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment on value]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment on value]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment2]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment2]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment2]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment2 on section]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment2 on section]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[comment2 on section]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[equality gets precedence]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[equality gets precedence]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[equality gets precedence]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[pseudo section syntax in value]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[pseudo section syntax in value]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[pseudo section syntax in value]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[section]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[section]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[section]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[use of colon for name-values]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[use of colon for name-values]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[use of colon for name-values]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[use of colon without space]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[use of colon without space]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[use of colon without space]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value in section]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value in section]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value in section]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value with aligned continuation]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value with aligned continuation]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value with aligned continuation]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value with continuation]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value with continuation]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_tokenize[value with continuation]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_parse_empty",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_parse_empty",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_parse_empty",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_ParseError",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_ParseError",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_ParseError",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_continuation_needs_perceeding_token",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_continuation_needs_perceeding_token",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_continuation_needs_perceeding_token",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_continuation_cant_be_after_section",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_continuation_cant_be_after_section",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_continuation_cant_be_after_section",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_cant_be_empty",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_cant_be_empty",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_cant_be_empty",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_error_on_weird_lines[!!]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_error_on_weird_lines[!!]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_error_on_weird_lines[!!]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_from_file",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_from_file",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_from_file",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_section_first",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_section_first",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_section_first",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconig_section_duplicate_fails",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconig_section_duplicate_fails",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconig_section_duplicate_fails",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_duplicate_key_fails",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_duplicate_key_fails",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_duplicate_key_fails",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_lineof",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_lineof",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_lineof",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_get_convert",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_get_convert",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_get_convert",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_get_missing",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_get_missing",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iniconfig_get_missing",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_get",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_get",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_get",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_missing_section",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_missing_section",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_missing_section",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_getitem",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_getitem",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_getitem",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_iter",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_iter",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_section_iter",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_config_iter",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_config_iter",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_config_iter",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_config_contains",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_config_contains",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_config_contains",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iter_file_order",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iter_file_order",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iter_file_order",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_example_pypirc",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_example_pypirc",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_example_pypirc",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_api_import",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_api_import",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_api_import",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[#qwe]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[#qwe]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[#qwe]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[  #qwe]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[  #qwe]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[  #qwe]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[;qwe]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[;qwe]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[;qwe]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[ ;qwe]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[ ;qwe]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "testing/test_iniconfig.py::test_iscommentline_true[ ;qwe]",
+      "outcome": "passed",
+      "when": "teardown"
+    }
+  ],
+  "schema": "unchanged-pytest-observation/v1"
+}

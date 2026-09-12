@@ -1,0 +1,427 @@
+{
+  "collected": [
+    "tests/test_idna.py::IDNATests::testIDNTLDALabels",
+    "tests/test_idna.py::IDNATests::testIDNTLDULabels",
+    "tests/test_idna.py::IDNATests::test_check_bidi",
+    "tests/test_idna.py::IDNATests::test_check_hyphen_ok",
+    "tests/test_idna.py::IDNATests::test_check_initial_combiner",
+    "tests/test_idna.py::IDNATests::test_decode",
+    "tests/test_idna.py::IDNATests::test_encode",
+    "tests/test_idna.py::IDNATests::test_valid_contextj",
+    "tests/test_idna.py::IDNATests::test_valid_contexto",
+    "tests/test_idna.py::IDNATests::test_valid_label_length",
+    "tests/test_idna_codec.py::IDNACodecTests::testCodec",
+    "tests/test_idna_codec.py::IDNACodecTests::testIncrementalDecoder",
+    "tests/test_idna_codec.py::IDNACodecTests::testIncrementalEncoder",
+    "tests/test_idna_compat.py::IDNACompatTests::testToASCII",
+    "tests/test_idna_compat.py::IDNACompatTests::testToUnicode",
+    "tests/test_idna_compat.py::IDNACompatTests::test_nameprep",
+    "tests/test_idna_other.py::OtherUTS46Tests::test_std3",
+    "tests/test_idna_uts46.py::TestIdnaTest::runTest",
+    "tests/test_intranges.py::IntrangeTests::test_empty_range",
+    "tests/test_intranges.py::IntrangeTests::test_ranging",
+    "tests/test_intranges.py::IntrangeTests::test_ranging_2",
+    "tests/test_intranges.py::IntrangeTests::test_skips",
+    "tests/test_intranges.py::IntrangeContainsTests::test_empty",
+    "tests/test_intranges.py::IntrangeContainsTests::test_simple",
+    "tests/test_intranges.py::IntrangeContainsTests::test_singleton",
+    "tests/test_intranges.py::IntrangeContainsTests::test_skips"
+  ],
+  "collection_errors": [],
+  "exitstatus": 0,
+  "pytest": "8.1.1",
+  "python": "3.12.3",
+  "reports": [
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::testIDNTLDALabels",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::testIDNTLDALabels",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::testIDNTLDALabels",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::testIDNTLDULabels",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::testIDNTLDULabels",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::testIDNTLDULabels",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_bidi",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_bidi",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_bidi",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_hyphen_ok",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_hyphen_ok",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_hyphen_ok",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_initial_combiner",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_initial_combiner",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_check_initial_combiner",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_decode",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_decode",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_decode",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_encode",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_encode",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_encode",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_contextj",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_contextj",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_contextj",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_contexto",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_contexto",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_contexto",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_label_length",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_label_length",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna.py::IDNATests::test_valid_label_length",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testCodec",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testCodec",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testCodec",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testIncrementalDecoder",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testIncrementalDecoder",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testIncrementalDecoder",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testIncrementalEncoder",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testIncrementalEncoder",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_codec.py::IDNACodecTests::testIncrementalEncoder",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::testToASCII",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::testToASCII",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::testToASCII",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::testToUnicode",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::testToUnicode",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::testToUnicode",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::test_nameprep",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::test_nameprep",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_compat.py::IDNACompatTests::test_nameprep",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_other.py::OtherUTS46Tests::test_std3",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_other.py::OtherUTS46Tests::test_std3",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_other.py::OtherUTS46Tests::test_std3",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_idna_uts46.py::TestIdnaTest::runTest",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_idna_uts46.py::TestIdnaTest::runTest",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_idna_uts46.py::TestIdnaTest::runTest",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_empty_range",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_empty_range",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_empty_range",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_ranging",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_ranging",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_ranging",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_ranging_2",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_ranging_2",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_ranging_2",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_skips",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_skips",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeTests::test_skips",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_empty",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_empty",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_empty",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_simple",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_simple",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_simple",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_singleton",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_singleton",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_singleton",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_skips",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_skips",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_intranges.py::IntrangeContainsTests::test_skips",
+      "outcome": "passed",
+      "when": "teardown"
+    }
+  ],
+  "schema": "unchanged-pytest-observation/v1"
+}

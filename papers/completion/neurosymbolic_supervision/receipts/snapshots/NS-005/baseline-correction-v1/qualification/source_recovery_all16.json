@@ -1,0 +1,192 @@
+{
+  "schema": "ns005-unchanged-baseline-source-recovery/v1",
+  "at": "2026-09-12T04:56:10.638742+00:00",
+  "lane_head": "e98593bc467ee740f26612b57f609ed8f1157f6a",
+  "original_files": {
+    "benchmark/tasks.jsonl": "b4de83a5c53230e320cb57c3c7fe32554fb4e3e19986e86d3fb1374160665115",
+    "benchmark/splits.json": "10017366a0e7e02304eac7146adf9fb98ae60f0902d44d4f2cd1be031f837f60",
+    "benchmark/oracle_manifest.json": "37057f559b36f48633b2fb2275aaf2d8d8cbbf267104a5833424d883943c4043",
+    "receipts/NS-005.json": "a610dd1d70fcdcc046a9b866f3757a080bf446043aa67f1d81931e541fe2871f",
+    "protocol/preregistered_protocol.md": "e1e3403feafa0eb5c8bbda4b95e14e3415a92d2036182725784f30788d4e5e54"
+  },
+  "sources": [
+    {
+      "task_id": "ns-hist-01-xmltodict",
+      "upstream": "martinblech/xmltodict",
+      "pre_fix_commit": "75a17701db20d5d3ec2ea1f6c901cf2211011eb5",
+      "url": "https://codeload.github.com/martinblech/xmltodict/tar.gz/75a17701db20d5d3ec2ea1f6c901cf2211011eb5",
+      "archive_sha256": "72e6f909de6a20c7700a2398dcf9587a7d9263be68b6bd50361f2a375f909fda",
+      "archive_bytes": 22636,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-01-xmltodict/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-02-pyparsing",
+      "upstream": "pyparsing/pyparsing",
+      "pre_fix_commit": "77c50a89cd0b91005b570a1c926900f484ca4421",
+      "url": "https://codeload.github.com/pyparsing/pyparsing/tar.gz/77c50a89cd0b91005b570a1c926900f484ca4421",
+      "archive_sha256": "77642280c5304ed0ae155c9e3299cd88ede51224e591ad2619b3be7057498c3f",
+      "archive_bytes": 6861440,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-02-pyparsing/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-03-oauthlib",
+      "upstream": "oauthlib/oauthlib",
+      "pre_fix_commit": "cf3cf407be774405f66188219eb1653c723e294b",
+      "url": "https://codeload.github.com/oauthlib/oauthlib/tar.gz/cf3cf407be774405f66188219eb1653c723e294b",
+      "archive_sha256": "b6bfcf9e85b050d83670b83ac23797ecda3da3c8eb4d8123718b49dcf7ac1c4d",
+      "archive_bytes": 190647,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-03-oauthlib/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-04-click",
+      "upstream": "pallets/click",
+      "pre_fix_commit": "02046e7a19480f85fff7e4577486518abe47e401",
+      "url": "https://codeload.github.com/pallets/click/tar.gz/02046e7a19480f85fff7e4577486518abe47e401",
+      "archive_sha256": "3dd1bd094d30ff9d4febdf01a62cf8f132ff2924fa5d68637ff51c005cb814a3",
+      "archive_bytes": 337776,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-04-click/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-05-dnspython",
+      "upstream": "rthalley/dnspython",
+      "pre_fix_commit": "7cc53f6b1043b671ee4873e65f17244f9df403c9",
+      "url": "https://codeload.github.com/rthalley/dnspython/tar.gz/7cc53f6b1043b671ee4873e65f17244f9df403c9",
+      "archive_sha256": "332f2704b68075956358e9fe591a254bc16147c38b553bd2e0efd433b2a0e676",
+      "archive_bytes": 428096,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-05-dnspython/tree",
+      "admitted_source_hashes_verified": 12,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-06-bottle",
+      "upstream": "bottlepy/bottle",
+      "pre_fix_commit": "c92516069e664efc9bac3746004402bd6f3cc9ec",
+      "url": "https://codeload.github.com/bottlepy/bottle/tar.gz/c92516069e664efc9bac3746004402bd6f3cc9ec",
+      "archive_sha256": "127ec887a07604d54ad90236b14063c8f8577945de41b53c6ce1cc12e3c53596",
+      "archive_bytes": 827683,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-06-bottle/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-07-idna",
+      "upstream": "kjd/idna",
+      "pre_fix_commit": "522c0ebe02d8bd09039dd593e7c152ab5a1d26dd",
+      "url": "https://codeload.github.com/kjd/idna/tar.gz/522c0ebe02d8bd09039dd593e7c152ab5a1d26dd",
+      "archive_sha256": "40d3f25f38abfa2b3de1e1b1c7c34bd724b72a115f463631606b154164f0c9a4",
+      "archive_bytes": 181673,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-07-idna/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-08-protego",
+      "upstream": "scrapy/protego",
+      "pre_fix_commit": "76f7ee1152feb2d4c51596c8b5abeba208250f90",
+      "url": "https://codeload.github.com/scrapy/protego/tar.gz/76f7ee1152feb2d4c51596c8b5abeba208250f90",
+      "archive_sha256": "b56ac8d60b07501aeb8f21c91499f07b074c2fc55690b1796c91c8205e4425c0",
+      "archive_bytes": 3190987,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-08-protego/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-09-tomlkit",
+      "upstream": "sdispater/tomlkit",
+      "pre_fix_commit": "21a4942ed31e773061c9fc047d55b1bb3c637ee3",
+      "url": "https://codeload.github.com/sdispater/tomlkit/tar.gz/21a4942ed31e773061c9fc047d55b1bb3c637ee3",
+      "archive_sha256": "05c2f2a96e4373e4bf38a1abae744b4e24fa7393409bed0d20d0caf643d12ae2",
+      "archive_bytes": 117185,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-09-tomlkit/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-10-installer",
+      "upstream": "pypa/installer",
+      "pre_fix_commit": "147fd0081eb0572574e7479dca6be2974359e3e1",
+      "url": "https://codeload.github.com/pypa/installer/tar.gz/147fd0081eb0572574e7479dca6be2974359e3e1",
+      "archive_sha256": "76248387555d0c9df35f2025840dda9df97a316cab9f2105de65f5ce3d3cbd07",
+      "archive_bytes": 485375,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-10-installer/tree",
+      "admitted_source_hashes_verified": 2,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-11-tornado",
+      "upstream": "tornadoweb/tornado",
+      "pre_fix_commit": "4d892393adb0a434baeaa98a427d23c6c459a4bc",
+      "url": "https://codeload.github.com/tornadoweb/tornado/tar.gz/4d892393adb0a434baeaa98a427d23c6c459a4bc",
+      "archive_sha256": "ec5390036c107375167f7a114b1a38363f721cf9c5bc8f8261831f62e75e7a4f",
+      "archive_bytes": 547080,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-11-tornado/tree",
+      "admitted_source_hashes_verified": 2,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-12-more-itertools",
+      "upstream": "more-itertools/more-itertools",
+      "pre_fix_commit": "cb75bb9c55f7ed3e77ce599097e1ba8da411746d",
+      "url": "https://codeload.github.com/more-itertools/more-itertools/tar.gz/cb75bb9c55f7ed3e77ce599097e1ba8da411746d",
+      "archive_sha256": "3f63bc8aad71c89a7e56a37732c3d5e0457ebfaf22cca9d23545bafd203c7d13",
+      "archive_bytes": 142717,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-12-more-itertools/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-13-charset_normalizer",
+      "upstream": "jawah/charset_normalizer",
+      "pre_fix_commit": "f6afd31c54fe20524f96be00de3bcb0e81727526",
+      "url": "https://codeload.github.com/jawah/charset_normalizer/tar.gz/f6afd31c54fe20524f96be00de3bcb0e81727526",
+      "archive_sha256": "7c68d3c96c8cd6b02b495779a8029e5965e1618bd191415d813d8e0f49770f55",
+      "archive_bytes": 178675,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-13-charset_normalizer/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-14-iniconfig",
+      "upstream": "pytest-dev/iniconfig",
+      "pre_fix_commit": "57b7ed9c7a5950f9c57b2cfbe641ff4cc04baf1c",
+      "url": "https://codeload.github.com/pytest-dev/iniconfig/tar.gz/57b7ed9c7a5950f9c57b2cfbe641ff4cc04baf1c",
+      "archive_sha256": "a5ee983fcc7ef8c8e0bae2899ca1e64ef04f54289ce77b1cb51aed9c0990e73e",
+      "archive_bytes": 15601,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-14-iniconfig/tree",
+      "admitted_source_hashes_verified": 2,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-15-wheel",
+      "upstream": "pypa/wheel",
+      "pre_fix_commit": "986a440c3aacc45fb8486d2d01ae86bf3ddf3465",
+      "url": "https://codeload.github.com/pypa/wheel/tar.gz/986a440c3aacc45fb8486d2d01ae86bf3ddf3465",
+      "archive_sha256": "d9568a236d69576788fd07f47c0fae6a61ce78a662dfa56460974d23a17770f7",
+      "archive_bytes": 66096,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-15-wheel/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    },
+    {
+      "task_id": "ns-hist-16-jinja",
+      "upstream": "pallets/jinja",
+      "pre_fix_commit": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+      "url": "https://codeload.github.com/pallets/jinja/tar.gz/fbc3a696c729d177340cc089531de7e2e5b6f065",
+      "archive_sha256": "28e4f3d6aba39271e324ce8da365bfad8a6c4919d80a67b1fd715934ed057dd6",
+      "archive_bytes": 279066,
+      "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-16-jinja/tree",
+      "admitted_source_hashes_verified": 1,
+      "downloaded_only_pre_fix": true
+    }
+  ],
+  "hidden_oracle_bodies_read": false,
+  "population_unchanged": true
+}

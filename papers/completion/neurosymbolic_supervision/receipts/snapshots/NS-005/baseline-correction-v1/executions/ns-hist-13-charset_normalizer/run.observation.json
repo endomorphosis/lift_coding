@@ -1,0 +1,91 @@
+{
+  "collected": [
+    "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_keys",
+    "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value",
+    "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value_type",
+    "tests/test_detect_legacy.py::TestDetectLegacy::test_small_payload_confidence_altered",
+    "tests/test_detect_legacy.py::TestDetectLegacy::test_utf8_sig_not_striped"
+  ],
+  "collection_errors": [],
+  "exitstatus": 0,
+  "pytest": "8.1.1",
+  "python": "3.12.3",
+  "reports": [
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_keys",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_keys",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_keys",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value_type",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value_type",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_detect_dict_value_type",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_small_payload_confidence_altered",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_small_payload_confidence_altered",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_small_payload_confidence_altered",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_utf8_sig_not_striped",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_utf8_sig_not_striped",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_detect_legacy.py::TestDetectLegacy::test_utf8_sig_not_striped",
+      "outcome": "passed",
+      "when": "teardown"
+    }
+  ],
+  "schema": "unchanged-pytest-observation/v1"
+}

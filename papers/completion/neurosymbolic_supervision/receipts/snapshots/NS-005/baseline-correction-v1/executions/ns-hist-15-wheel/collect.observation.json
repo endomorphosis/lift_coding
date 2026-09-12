@@ -1,0 +1,23 @@
+{
+  "collected": [
+    "tests/commands/test_convert.py::test_egg_re",
+    "tests/commands/test_convert.py::test_convert_egg_file[win32]",
+    "tests/commands/test_convert.py::test_convert_egg_file[amd64]",
+    "tests/commands/test_convert.py::test_convert_egg_file[pure]",
+    "tests/commands/test_convert.py::test_convert_egg_directory[win32]",
+    "tests/commands/test_convert.py::test_convert_egg_directory[amd64]",
+    "tests/commands/test_convert.py::test_convert_egg_directory[pure]",
+    "tests/commands/test_convert.py::test_convert_bdist_wininst[win32]",
+    "tests/commands/test_convert.py::test_convert_bdist_wininst[amd64]",
+    "tests/commands/test_convert.py::test_convert_bdist_wininst[pure]",
+    "tests/commands/test_convert.py::test_convert_pkg_info_with_empty_description",
+    "tests/commands/test_convert.py::test_convert_pkg_info_with_one_line_description",
+    "tests/commands/test_convert.py::test_convert_pkg_info_uses_lowest_compatible_metadata_version"
+  ],
+  "collection_errors": [],
+  "exitstatus": 0,
+  "pytest": "8.1.1",
+  "python": "3.12.3",
+  "reports": [],
+  "schema": "unchanged-pytest-observation/v1"
+}

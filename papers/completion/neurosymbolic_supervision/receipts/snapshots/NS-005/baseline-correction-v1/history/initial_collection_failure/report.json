@@ -1,0 +1,80 @@
+{
+  "task_id": "ns-hist-02-pyparsing",
+  "source": {
+    "task_id": "ns-hist-02-pyparsing",
+    "upstream": "pyparsing/pyparsing",
+    "pre_fix_commit": "77c50a89cd0b91005b570a1c926900f484ca4421",
+    "url": "https://codeload.github.com/pyparsing/pyparsing/tar.gz/77c50a89cd0b91005b570a1c926900f484ca4421",
+    "archive_sha256": "77642280c5304ed0ae155c9e3299cd88ede51224e591ad2619b3be7057498c3f",
+    "archive_bytes": 6861440,
+    "tree": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-02-pyparsing/tree",
+    "admitted_source_hashes_verified": 1,
+    "downloaded_only_pre_fix": true
+  },
+  "runs": [
+    {
+      "stage": "collect",
+      "argv": [
+        "docker",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "ns-baseline-dd0fd0944fb54032975fb4366207224c",
+        "--cidfile",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_discovery_v1/ns-hist-02-pyparsing/collect.cid",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--user",
+        "1000:1000",
+        "--cpus",
+        "1",
+        "--memory",
+        "2g",
+        "--memory-swap",
+        "2g",
+        "--pids-limit",
+        "128",
+        "--tmpfs",
+        "/tmp:rw,nosuid,nodev,size=256m",
+        "--mount",
+        "type=bind,src=/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_discovery_v1/ns-hist-02-pyparsing/work,dst=/workspace",
+        "--workdir",
+        "/workspace",
+        "--env",
+        "HOME=/tmp",
+        "--env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "--env",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--entrypoint",
+        "python3",
+        "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--collect-only"
+      ],
+      "started_at": "2026-09-12T04:49:38.726776+00:00",
+      "finished_at": "2026-09-12T04:49:40.093255+00:00",
+      "returncode": 2,
+      "timed_out": false,
+      "stdout": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_discovery_v1/ns-hist-02-pyparsing/collect.stdout.log",
+        "sha256": "ac562f8782a6518b0e9fec1c16ff3bc63eee48a7cd3dce0b7b1f5472f2a7d92f"
+      },
+      "stderr": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_discovery_v1/ns-hist-02-pyparsing/collect.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "container_id": "a73ac0c5226d2439e57c886b67e8e6c0fc3da9e6a1f9e0e6529ff7e9152c18b3"
+    }
+  ],
+  "no_network": true,
+  "no_credentials_or_scorer_mounts": true
+}

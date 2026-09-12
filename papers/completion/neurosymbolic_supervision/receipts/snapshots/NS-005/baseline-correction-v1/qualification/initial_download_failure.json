@@ -1,0 +1,5 @@
+{
+  "original_extractor_sha256": "6a5867b96977255a8498513aa71a79d920819637566f3c6817bf9ebebb3e917f",
+  "reason": "Initial extractor rejected two safe in-tree symlinks; neither archive was changed. Updated extractor verifies each resolved link remains inside the exact pre-fix tree. No source/execution qualification was claimed from this failure.",
+  "status": "failed"
+}

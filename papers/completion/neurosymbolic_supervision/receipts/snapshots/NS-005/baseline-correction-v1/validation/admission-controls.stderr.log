@@ -1,0 +1,13 @@
+test_all_skipped_is_not_qualified (__main__.ActualPytestAdmission.test_all_skipped_is_not_qualified) ... ok
+test_collection_import_error_is_not_qualified (__main__.ActualPytestAdmission.test_collection_import_error_is_not_qualified) ... ok
+test_empty_file_is_not_nonempty_suite (__main__.ActualPytestAdmission.test_empty_file_is_not_nonempty_suite) ... ok
+test_failing_test_is_not_qualified (__main__.ActualPytestAdmission.test_failing_test_is_not_qualified) ... ok
+test_missing_execution_report_is_not_qualified (__main__.ActualPytestAdmission.test_missing_execution_report_is_not_qualified) ... ok
+test_mutated_source_is_not_qualified (__main__.ActualPytestAdmission.test_mutated_source_is_not_qualified) ... ok
+test_real_pass (__main__.ActualPytestAdmission.test_real_pass) ... ok
+test_teardown_failure_is_not_qualified (__main__.ActualPytestAdmission.test_teardown_failure_is_not_qualified) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.045s
+
+OK

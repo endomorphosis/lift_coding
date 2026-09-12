@@ -1,0 +1,459 @@
+{
+  "collected": [
+    "tests/test_utils.py::TestParseMetadata::test_basics",
+    "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[package-1-package-1]",
+    "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[ABC..12-abc-12]",
+    "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-753-py3-none-any.whl-expected0]",
+    "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-py3-none-any.whl-expected1]",
+    "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-macosx_10_11_x86_64.whl-expected2]",
+    "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-manylinux2010_x86_64.whl-expected3]",
+    "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-win_amd64.whl-expected4]",
+    "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0-py2.py3-none-any.zip]",
+    "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0.whl]",
+    "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0---.whl]",
+    "tests/test_utils.py::TestCopyFileObjWithHashing::test_basic_functionality",
+    "tests/test_utils.py::TestGetStreamLength::test_basic_functionality",
+    "tests/test_utils.py::TestScript::test_replace_shebang[python]",
+    "tests/test_utils.py::TestScript::test_replace_shebang[pythonw]",
+    "tests/test_utils.py::TestScript::test_replace_shebang[python-with-args]",
+    "tests/test_utils.py::TestScript::test_replace_shebang[python-no-content]",
+    "tests/test_utils.py::TestScript::test_keep_data[#!py\\ntest]",
+    "tests/test_utils.py::TestScript::test_keep_data[#!something\\ntest]",
+    "tests/test_utils.py::TestScript::test_keep_data[#something\\ntest]",
+    "tests/test_utils.py::TestScript::test_keep_data[#something]",
+    "tests/test_utils.py::TestScript::test_keep_data[something]",
+    "tests/test_utils.py::TestConstructRecord::test_construct",
+    "tests/test_utils.py::TestParseEntryPoints::test_valid[empty]",
+    "tests/test_utils.py::TestParseEntryPoints::test_valid[unrelated]",
+    "tests/test_utils.py::TestParseEntryPoints::test_valid[cli]",
+    "tests/test_utils.py::TestParseEntryPoints::test_valid[gui]",
+    "tests/test_utils.py::TestParseEntryPoints::test_valid[cli-and-gui]"
+  ],
+  "collection_errors": [],
+  "exitstatus": 0,
+  "pytest": "8.1.1",
+  "python": "3.12.3",
+  "reports": [
+    {
+      "nodeid": "tests/test_utils.py::TestParseMetadata::test_basics",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseMetadata::test_basics",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseMetadata::test_basics",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[package-1-package-1]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[package-1-package-1]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[package-1-package-1]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[ABC..12-abc-12]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[ABC..12-abc-12]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCanonicalizeDistributionName::test_valid_cases[ABC..12-abc-12]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-753-py3-none-any.whl-expected0]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-753-py3-none-any.whl-expected0]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-753-py3-none-any.whl-expected0]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-py3-none-any.whl-expected1]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-py3-none-any.whl-expected1]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[package-1!1.0+abc.7-py3-none-any.whl-expected1]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-macosx_10_11_x86_64.whl-expected2]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-macosx_10_11_x86_64.whl-expected2]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-macosx_10_11_x86_64.whl-expected2]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-manylinux2010_x86_64.whl-expected3]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-manylinux2010_x86_64.whl-expected3]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-manylinux2010_x86_64.whl-expected3]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-win_amd64.whl-expected4]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-win_amd64.whl-expected4]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_valid_cases[tensorflow-2.3.0-cp38-cp38-win_amd64.whl-expected4]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0-py2.py3-none-any.zip]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0-py2.py3-none-any.zip]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0-py2.py3-none-any.zip]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0.whl]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0.whl]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0.whl]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0---.whl]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0---.whl]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseWheelFilename::test_invalid_cases[pip-20.0.0---.whl]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCopyFileObjWithHashing::test_basic_functionality",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCopyFileObjWithHashing::test_basic_functionality",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestCopyFileObjWithHashing::test_basic_functionality",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestGetStreamLength::test_basic_functionality",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestGetStreamLength::test_basic_functionality",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestGetStreamLength::test_basic_functionality",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[pythonw]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[pythonw]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[pythonw]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python-with-args]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python-with-args]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python-with-args]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python-no-content]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python-no-content]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_replace_shebang[python-no-content]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#!py\\ntest]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#!py\\ntest]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#!py\\ntest]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#!something\\ntest]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#!something\\ntest]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#!something\\ntest]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#something\\ntest]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#something\\ntest]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#something\\ntest]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#something]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#something]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[#something]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[something]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[something]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestScript::test_keep_data[something]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestConstructRecord::test_construct",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestConstructRecord::test_construct",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestConstructRecord::test_construct",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[empty]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[empty]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[empty]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[unrelated]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[unrelated]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[unrelated]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[cli]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[cli]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[cli]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[gui]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[gui]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[gui]",
+      "outcome": "passed",
+      "when": "teardown"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[cli-and-gui]",
+      "outcome": "passed",
+      "when": "setup"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[cli-and-gui]",
+      "outcome": "passed",
+      "when": "call"
+    },
+    {
+      "nodeid": "tests/test_utils.py::TestParseEntryPoints::test_valid[cli-and-gui]",
+      "outcome": "passed",
+      "when": "teardown"
+    }
+  ],
+  "schema": "unchanged-pytest-observation/v1"
+}
