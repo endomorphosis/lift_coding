@@ -1157,13 +1157,13 @@ class AttemptExecutor:
             )
 
         try:
-            if path_class == "production" and record_kind == "development":
+            if path_class == "production" and record_kind in ("development", "pilot"):
                 gateway = load_gateway()
                 gw = gateway.dispatch({"path_class": path_class, "record_kind": record_kind, "task_id": task["task_id"], "arm": arm, "cache": cache, "repetition": repetition}, root=self.root)
                 if gw.get("schema") == "paper-ns-host-handoff-pending/v1":
                     # Pending transport is not a scientific outcome or terminal ledger row.
                     return {**gw, "path_class": path_class, "schedule_unit_id": unit_id, "task_id": task["task_id"], "record_kind": record_kind, "terminal_published": False}
-                if gw.get("schema") != "paper-ns-host-historical-development/v1":
+                if gw.get("schema") != f"paper-ns-host-historical-{record_kind}/v1":
                     raise RunnerError("unrecognized historical host response")
                 verified = gw["host_verified"]
                 signed = verified["receipt"]
@@ -1174,8 +1174,8 @@ class AttemptExecutor:
                 candidate = {"host_candidate_sha256": signed.get("candidate_sha256"), "patch_bytes": signed.get("patch_bytes"), "files_retained_host_only": True} if signed.get("candidate_sha256") else None
                 context = {"arm": arm, "routing": "fixed_operator_host_http_request", "request_binding": signed.get("request_binding"), "client_reads_hidden_oracle": False}
                 isolation = {"scope_preserved": True, "hidden_store_mounted": False, "hidden_markers_found": [], "boundary_scope": "fixed_host_http_request_and_reviewed_sealed_candidate", "provider_termination": signed.get("provider_termination"), "scorer_boundary_sha256": (signed.get("scorer") or {}).get("boundary_sha256"), "automatic_adversarial_scorer_integrity_qualified": False, "human_annotation": False}
-                if not gw.get("admitted_historical_development"):
-                    return finish("unavailable", "Signed result does not admit this historical development pipeline; no final result inferred.")
+                if not gw.get("admitted_historical_" + record_kind):
+                    return finish("unavailable", f"Signed result does not admit this historical {record_kind} pipeline; no final result inferred.")
                 oracle = gateway.host_oracle(verified)
                 return finish("solved" if oracle["status"] == "passed" else "unsolved" if oracle["status"] == "failed" else "unavailable", oracle["reason"])
             t_index = time.perf_counter()
@@ -1635,6 +1635,7 @@ class AttemptExecutor:
             "simulated": False,
             "admitted_production": bool(gw.get("admitted_production")),
             "admitted_historical_development": bool(gw.get("admitted_historical_development")),
+            **({"admitted_historical_pilot": bool(gw.get("admitted_historical_pilot"))} if gw.get("schema") == "paper-ns-host-historical-pilot/v1" else {}),
             "host_verified": gw.get("host_verified"),
             "dispatched": bool(gw.get("dispatched")),
             "dispatch_confirmed": bool(gw.get("dispatch_confirmed")),
@@ -1789,7 +1790,7 @@ class AttemptExecutor:
             "NS-026 runner/provider qualification; not a frozen final A-D scientific result.",
         ]
         if host:
-            interpretation.append("Historical development only, one operator grant and AI-reviewed candidate; no native campaign reservation, final-profile admission or adversarial scorer-integrity qualification. Rescore verifies the retained signed result without another score.")
+            interpretation.append("Historical pilot A/B cold only; one exact operator grant and reviewed candidate within the frozen24-cell plan. Historical48 identities remain separately retained (8 retained,40 removed,16 added). One cell does not establish a paired result or final admission. Rescore verifies the signed result without another score." if kw["record_kind"] == "pilot" else "Historical development only, one operator grant and AI-reviewed candidate; no native campaign reservation, final-profile admission or adversarial scorer-integrity qualification. Rescore verifies the retained signed result without another score.")
         if not kw["live"]:
             interpretation.append(
                 "Development/simulated path is not an admitted production repair and is excluded from live-repair denominators."

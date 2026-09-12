@@ -245,9 +245,26 @@ def score_host_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
     return scored
 
 
+def reuse_skip_is_not_oracle_pass(attempt: dict[str, Any]) -> bool:
+    """Reuse SKIP/text cannot count as independent cold scoring or safe agreement."""
+
+    measurement = attempt.get("measurement") or {}
+    oracle = measurement.get("oracle") or {}
+    control = measurement.get("control") or {}
+    if control.get("reuse_credit") is True:
+        return False
+    if oracle.get("status") == "skipped":
+        return False
+    if str(oracle.get("reason") or "").lower() in {"proof_cache_hit"}:
+        return False
+    return True
+
+
 def score_attempt(attempt: dict[str, Any], *, timeout: float = 30.0) -> dict[str, Any]:
     if attempt.get("schema") != RUNNER.SCHEMA_WRAPPER:
         raise SystemExit("attempt is not paper-ns-runner-attempt/v1")
+    if not reuse_skip_is_not_oracle_pass(attempt) and (attempt.get("provider_receipt") or {}).get("host_verified"):
+        raise SystemExit("reuse skip or unavailable scoring cannot count as an oracle pass")
     if (attempt.get("provider_receipt") or {}).get("host_verified"):
         return score_host_attempt(attempt)
     runner = attempt["runner"]

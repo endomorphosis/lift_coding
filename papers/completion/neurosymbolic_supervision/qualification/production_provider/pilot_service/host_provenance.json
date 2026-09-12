@@ -1,37 +1,10 @@
 {
-  "bindings": {
-    "implementation_package.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "243df6b66dd84fff5c825c31d4976b008660c697bf56a4a03cc3dea80f31b1ea"
-    },
-    "independent_implementation_review.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "6dfafaf8a96e3a0208b4bfefde5f647112333f8aeeab40c5f4b376a3cf0f2218"
-    },
-    "independent_inert_service_v1.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "f9b91a51914f8fd77a04ca52c99db4b1868ace3f3e0edb3de6bb9b44d1e74a43"
-    },
-    "inert_service_cross_review.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "b466d9fb2773e557df69868a7a1ea49090e82e12ced409cc07890d192ebacc86"
-    },
-    "public_baseline_compatibility_v1.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "f5bfd44246e7b5d70aad0b38d1b930efe217c05a6d749e2dbd1d3885bf21fa88"
-    },
-    "root_host_source_installation.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "95cb62e7e56704a23fbb8d57cb0154391c5f514ce4d0b2e9c820ee80f4b839b1"
-    },
-    "root_public_baseline_admission.private.json": {
-      "scope": "host source / public preparation / inert qualification only; no new pilot outcome",
-      "sha256": "472800f14f45077b707f472fe3e6386821d8259345468117be2fcbc260cde70a"
-    }
-  },
-  "grants_created_by_delivery": 0,
-  "host_root": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-20260912-v1",
-  "model_calls": 0,
-  "schema": "ns028-worker-host-provenance/v1",
+  "schema": "ns028-AB-worker-host-provenance/v1",
+  "host_package_sha256": "4e73194717a72d99ac00ec4026ba6f5f36b271c36feee0ad735ca28275daa831",
+  "host_package_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/implementation_package_v2.private.json",
+  "client_sha256": "b75456a3a3d917b60eb03850aa6fa9f81bc889cbe2246fa3425bb50cb9b39a82",
+  "historical_A_package_preserved": "243df6b66dd84fff5c825c31d4976b008660c697bf56a4a03cc3dea80f31b1ea",
+  "actual_context_qualification_required_before_activation": true,
+  "provider_calls": 0,
   "scorer_calls": 0
 }

@@ -439,7 +439,21 @@ def host_handoff_grant(root: Path, task_id: str, arm: str, cache: str, repetitio
     return {"binding": binding, "offer": offer, "queue": queue}
 
 
+def _pilot_worker(root: Path):
+    """Load the reviewed NS028 input client; no host authority is created here."""
+    import importlib.util
+    path = root / PAPER_REL / "qualification/production_provider/pilot_service/worker_adapter.py"
+    if path.resolve() != path or sha256_bytes(path.read_bytes()) != "f9f4f6e497313436790b6b6c3ec1683abdd7c7dc91c449d92670a793b52eba39":
+        raise GatewayError("reviewed pilot adapter changed", terminal="rejected")
+    spec = importlib.util.spec_from_file_location("ns028_pilot_worker", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def verify_host_response(root: Path, binding: Mapping[str, Any]) -> dict[str, Any]:
+    if binding.get("record_kind") == "pilot":
+        return _pilot_worker(root).verify(root, binding)
     import base64
     import subprocess
     selected = host_handoff_grant(root, binding["task_id"], binding["arm"], binding["cache"], binding["repetition"], binding["record_kind"])
@@ -511,6 +525,8 @@ def dispatch_host_handoff(request: Mapping[str, Any], root: Path) -> dict[str, A
 def host_oracle(verified: Mapping[str, Any]) -> dict[str, Any]:
     """Interpret scalar signed host evidence; no tests, source or oracle loading."""
     receipt = verified["receipt"]
+    if receipt.get("schema") == "operator-pilot-receipt/v2":
+        return _pilot_worker(repo_root()).oracle(verified)
     scorer = receipt.get("scorer") or {}
     binding = receipt.get("operator_review_binding") or {}
     if not verified.get("signature_and_scope_verified") or receipt.get("status") != "completed" or receipt.get("error") is not None or receipt.get("operator_review_kind") != "ai_operator" or receipt.get("trust_scope") != "specific_reviewed_development_candidate_only" or receipt.get("automatic_adversarial_scorer_integrity_qualified") is not False or receipt.get("production_final_admitted") is not False:
@@ -528,6 +544,11 @@ def host_oracle(verified: Mapping[str, Any]) -> dict[str, Any]:
 def dispatch(request: Mapping[str, Any], *, root: Path | None = None, timeout: float | None = None) -> dict[str, Any]:
     root = repo_root(root)
     path_class = str(request.get("path_class") or "development")
+    if path_class == "production" and request.get("record_kind") == "pilot":
+        try:
+            return _pilot_worker(root).dispatch(root, request)
+        except (ValueError, KeyError) as exc:
+            raise GatewayError(str(exc), terminal="rejected") from exc
     if path_class == "production" and request.get("record_kind") == "development":
         return dispatch_host_handoff(request, root)
     amendment = load_amendment(root)

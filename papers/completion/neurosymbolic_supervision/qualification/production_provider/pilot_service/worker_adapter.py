@@ -3,14 +3,20 @@ import hashlib,importlib.util,json,re
 from pathlib import Path
 PAPER=Path('papers/completion/neurosymbolic_supervision')
 SERVICE=PAPER/'qualification/production_provider/pilot_service'
-HOST_PACKAGE='243df6b66dd84fff5c825c31d4976b008660c697bf56a4a03cc3dea80f31b1ea'
-CLIENT_SHA='da488a896c59c9e8fd03303ad9fb2bd81c6c1f9148e8d0782f6e5fd5baea5454'
+HOST_PACKAGE='4e73194717a72d99ac00ec4026ba6f5f36b271c36feee0ad735ca28275daa831'
+CLIENT_SHA='b75456a3a3d917b60eb03850aa6fa9f81bc889cbe2246fa3425bb50cb9b39a82'
 UNITS={'ns-hist-05-dnspython','ns-hist-06-bottle','ns-hist-07-idna','ns-hist-08-protego'}
 def require(ok,msg):
  if not ok:raise ValueError(msg)
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def canon(x):return json.dumps(x,sort_keys=True,separators=(',',':')).encode()
 def valid_sha(s):return type(s)is str and re.fullmatch('[0-9a-f]{64}',s)is not None
+
+def cell_id(unit,arm,repetition):
+ return sha(canon({'unit':unit,'arm':arm,'cache':'local_cold','repetition':repetition,'record_kind':'pilot'}))
+
+def planned_cells():
+ return {cell_id(u,a,r)for u in UNITS for a in ('A','B')for r in (0,1,2)}
 
 def client(root):
  path=Path(root)/SERVICE/'pilot_client.py';require(path.is_absolute()and path.resolve()==path and sha(path.read_bytes())==CLIENT_SHA,'approved pilot client changed')
@@ -19,19 +25,19 @@ def client(root):
 def configuration(root):
  cfg=json.loads((Path(root)/PAPER/'experiments/production_profile.json').read_text()).get('pilot_host_handoff')
  if cfg is None:return None
- require(cfg.get('schema')=='paper-ns-pilot-A-worker-profile/v1'and cfg.get('host_package_sha256')==HOST_PACKAGE and cfg.get('client_sha256')==CLIENT_SHA,'pilot profile source binding differs')
- require(cfg.get('planned_cells')==48 and cfg.get('enabled_cells')==4 and cfg.get('arm')=='A'and cfg.get('cache')=='local_cold'and cfg.get('record_kind')=='pilot'and cfg.get('final_admitted')is False,'pilot profile scope differs')
+ require(cfg.get('schema')=='paper-ns-pilot-AB-worker-profile/v1'and cfg.get('host_package_sha256')==HOST_PACKAGE and cfg.get('client_sha256')==CLIENT_SHA,'pilot profile source binding differs')
+ require(cfg.get('planned_cells')==24 and cfg.get('historical_planned_cells')==48 and cfg.get('enabled_cells')==24 and cfg.get('arms')==['A','B'] and cfg.get('repetitions')==[0,1,2]and cfg.get('cache')=='local_cold'and cfg.get('record_kind')=='pilot'and cfg.get('final_admitted')is False,'pilot profile scope differs')
  require(cfg.get('offer_drop_relative')==str(SERVICE/'host_handoff/offer_drop.json'),'pilot drop location differs')
  return cfg
 
 def offer_binding(root,task_id,arm,cache,repetition,record_kind):
  require(record_kind=='pilot'and task_id in UNITS,'only four frozen pilot units admitted')
- require(arm=='A'and cache=='local_cold'and repetition==0,'real mechanism/cache not implemented by pilot-A client')
+ require(arm in('A','B')and cache=='local_cold'and type(repetition)is int and repetition in(0,1,2),'only qualified A/B cold repetitions0..2 supported')
  cfg=configuration(root)
  if cfg is None or cfg.get('offer_drop_sha256')is None or cfg.get('scientific_activation_review_sha256')is None:return None
  require(valid_sha(cfg['offer_drop_sha256'])and valid_sha(cfg['scientific_activation_review_sha256']),'invalid root activation binding')
  pc=client(root);raw=pc.read(Path(root)/cfg['offer_drop_relative']);require(sha(raw)==cfg['offer_drop_sha256'],'root offer drop changed');drop=json.loads(raw)
- require(drop.get('schema')=='ns028-pilot-A-offer-drop/v1'and drop.get('host_package_sha256')==HOST_PACKAGE and drop.get('client_sha256')==CLIENT_SHA and drop.get('scientific_activation_review_sha256')==cfg['scientific_activation_review_sha256'],'offer activation scope changed')
+ require(drop.get('schema')=='ns028-pilot-AB-offer-drop/v1'and drop.get('host_package_sha256')==HOST_PACKAGE and drop.get('client_sha256')==CLIENT_SHA and drop.get('scientific_activation_review_sha256')==cfg['scientific_activation_review_sha256'],'offer activation scope changed')
  require(drop.get('worker_root')==str(Path(root).resolve()),'offer belongs to a different worker workspace')
  base_profile=json.loads((Path(root)/PAPER/'experiments/production_profile.json').read_text());base_profile.pop('pilot_host_handoff',None)
  require(drop.get('base_profile_sha256')==sha(canon(base_profile)),'original development/profile binding changed')
@@ -39,18 +45,18 @@ def offer_binding(root,task_id,arm,cache,repetition,record_kind):
  require(set(drop.get('worker_source_files',{}))==required,'worker source inventory differs')
  for name,digest in drop['worker_source_files'].items():
   require(valid_sha(digest)and sha(pc.read(Path(root)/name))==digest,'reviewed worker source changed: '+name)
- require(drop.get('planned_cells')==48 and drop.get('final_admitted')is False and len(drop['bindings'])==4 and {b['unit']for b in drop['bindings']}==UNITS,'pilot offer population changed')
+ require(drop.get('planned_cells')==24 and drop.get('historical_planned_cells')==48 and drop.get('final_admitted')is False and 1<=len(drop['bindings'])<=24 and len({b['cell_id']for b in drop['bindings']})==len(drop['bindings']) and {b['cell_id']for b in drop['bindings']}<=planned_cells(),'pilot offer population changed')
  for b in drop['bindings']:
-  require(b.get('batch_sha256')==drop['batch_sha256']and b.get('record_kind')=='pilot'and b.get('arm')=='A'and b.get('cache')=='local_cold'and b.get('repetition')==0,'drop includes unqualified scope')
- selected=[b for b in drop['bindings']if b['unit']==task_id];require(len(selected)==1,'ambiguous pilot grant')
- return {**selected[0],'task_id':task_id}
+  require(b.get('batch_sha256')==drop['batch_sha256']and b.get('record_kind')=='pilot'and b.get('unit')in UNITS and b.get('arm')in('A','B')and b.get('cache')=='local_cold'and type(b.get('repetition'))is int and b['repetition']in(0,1,2)and b['cell_id']==cell_id(b['unit'],b['arm'],b['repetition']),'drop includes unqualified scope')
+ selected=[b for b in drop['bindings']if b['cell_id']==cell_id(task_id,arm,repetition)];require(len(selected)<=1,'ambiguous pilot grant')
+ return {**selected[0],'task_id':task_id}if selected else None
 
 def verify(root,binding):
  selected=offer_binding(root,binding['task_id'],binding['arm'],binding['cache'],binding['repetition'],binding['record_kind']);require(selected==binding,'pilot grant/source/profile no longer admitted')
  return client(root).verify(root,binding)
 
 def dispatch(root,request):
- binding=offer_binding(root,str(request['task_id']),str(request['arm']),str(request.get('cache','local_cold')),int(request.get('repetition',0)),str(request['record_kind']))
+ binding=offer_binding(root,str(request['task_id']),str(request['arm']),str(request.get('cache','local_cold')),request.get('repetition',0),str(request['record_kind']))
  if binding is None:return {'schema':'paper-ns-host-handoff-pending/v1','status':'pending_operator_inputs','terminal':False,'reason':'Awaiting reviewed root offer-drop/profile and pre-outcome scientific activation. No model, scorer or local historical materialization has run.','provider_dispatched_by_client':False}
  pc=client(root);queue,_=pc.selected(root,binding)
  # Durable final evidence is verified without trying to recreate its queue request.
@@ -65,4 +71,4 @@ def oracle(verified):
  require(body.get('operator_review_sha256')and all(binding.get(k)==body.get(k)for k in ('grant_sha256','candidate_sha256','source_sha256','batch_sha256','cell_id')),'review candidate/cell binding differs')
  require(score.get('schema')=='ns-historical-cold-host-result/v1'and score.get('split')=='pilot'and score.get('unit_id')==body['unit']and score.get('manifest_sha256')==body['manifest_sha256']and score.get('candidate_sha256')==body['candidate_sha256'],'cold score identity differs')
  details=score.get('scorer')or{};collected=all(type(details.get(k))is int and details[k]>0 for k in ('visible_collected','hidden_collected'));passed=score.get('success')is True and details.get('success')is True and score.get('container_exit_code')==0 and score.get('timed_out')is False
- return {'status':'passed'if passed and collected else'failed'if collected else'unavailable','independent_scorer_id':'operator-cold-scorer-reviewed-pilot','receipt_id':'sha256:'+verified['response_sha256'],'cold_full_validation':collected,'candidate_valid':passed if collected else None,'hidden_access_incident':False,'reason':'Exact signed cold score for this reviewed pilot-A candidate; no final comparison or adversarial scorer-integrity admission.','operator_review_sha256':body['operator_review_sha256'],'trust_scope':body['trust_scope'],'automatic_adversarial_scorer_integrity_qualified':False,'human_annotation':False,**{k:details.get(k)for k in ('visible_collected','visible_passed','hidden_collected','hidden_passed')}}
+ return {'status':'passed'if passed and collected else'failed'if collected else'unavailable','independent_scorer_id':'operator-cold-scorer-reviewed-pilot','receipt_id':'sha256:'+verified['response_sha256'],'cold_full_validation':collected,'candidate_valid':passed if collected else None,'hidden_access_incident':False,'reason':'Exact signed cold score for this reviewed pilot A/B candidate; no final comparison or adversarial scorer-integrity admission.','operator_review_sha256':body['operator_review_sha256'],'trust_scope':body['trust_scope'],'automatic_adversarial_scorer_integrity_qualified':False,'human_annotation':False,**{k:details.get(k)for k in ('visible_collected','visible_passed','hidden_collected','hidden_passed')}}

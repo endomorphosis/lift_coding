@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Paired A-D comparison runner for the neurosymbolic supervision core (NS-026).
+"""Paired A-D comparison runner for the neurosymbolic supervision core (NS-026/NS-027).
 
 The runner is confined to this paper worktree. It never edits protected
 acceptance oracles, never relabels a simulated observation as production,
 and never completes a live historical repair without an admitted production
 dispatch plus independent cold scoring. Development stubs remain labeled
 stubs. Actual development dispatch uses the frozen NS-026 amendment and
-`production_gateway.py`.
+`production_gateway.py`. NS-027 removed unsupported retained-byte reuse:
+unless a later admitted reuse amendment sets qualified_reuse, every arm
+executes full cold without reuse credit.
 """
 
 from __future__ import annotations
@@ -247,6 +249,135 @@ def paper_dir(root: Path) -> Path:
 
 def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_reuse_admission(root: Path | None = None) -> dict[str, Any]:
+    """Load the NS-027 source-bound reuse amendment. Missing means reuse is not admitted."""
+
+    path = paper_dir(root or repo_root()) / "protocol" / "reuse_admission_amendment.json"
+    if not path.is_file():
+        return {
+            "schema": "paper-ns-reuse-admission-amendment/v1",
+            "accepted_route": "enforced_full_cold_removal",
+            "reuse_admitted": False,
+            "final_admission_enabled": False,
+            "old_unsupported_profile_rejected": True,
+            "missing_amendment": True,
+        }
+    return load_json(path)
+
+
+def reuse_credit_permitted(admission: Mapping[str, Any] | None = None) -> bool:
+    data = dict(admission) if admission is not None else load_reuse_admission()
+    if data.get("reuse_admitted") is True or data.get("accepted_route") == "qualified_reuse":
+        raise RunnerError("NS027 removal has no admitted verifier; a future reuse mechanism requires separately reviewed source and qualification")
+    return False
+
+
+def reject_unsupported_reuse_profile(admission: Mapping[str, Any] | None = None) -> bool:
+    """Return True when the NS-010/NS-011 unsupported profile is rejected."""
+
+    data = dict(admission) if admission is not None else load_reuse_admission()
+    if data.get("accepted_route") in {"enforced_full_cold_removal", "qualified_reuse"}:
+        return data.get("old_unsupported_profile_rejected", True) is True
+    return True
+
+
+def run_public_cold_qualification(*, root: Path, source_tree: Path, source_files: Mapping[str, Any], expected_nodes: list[str], output: Path) -> dict[str, Any]:
+    """Execute the removed-reuse route on an unchanged public pre-fix baseline.
+
+    This is a public baseline qualification, never a provider or hidden-oracle
+    entry point. Actual native lookup/skip validation and command execution are
+    retained. No prior pass, cryptographic certificate or reuse benefit is made.
+    """
+    import shlex
+    from ipfs_accelerate_py.agent_supervisor.proof.test_execution_contracts import TestLocatorKey, TestExecutionKey
+    from ipfs_accelerate_py.agent_supervisor.proof.test_proof_cache import TestProofCache
+    from ipfs_accelerate_py.agent_supervisor.proof.test_certificate_store import TestCertificateStore
+    from ipfs_accelerate_py.agent_supervisor.integrations.ipfs_datasets_test_certificate_provider import IpfsDatasetsTestCertificateProvider
+    from ipfs_accelerate_py.agent_supervisor.validation.proof_cached_test_validation import ProofCachedTestValidation
+    from ipfs_accelerate_py.agent_supervisor.validation.validation_commands import ValidationCommand
+    from ipfs_accelerate_py.agent_supervisor.validation.validation_scheduler import run_validation_command
+    def required(ok: bool, why: str) -> None:
+        if not ok:
+            raise RunnerError(why)
+    def save_once(path: Path, value: Any) -> None:
+        raw = (canonical_dumps(value) + "\n").encode()
+        fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(raw); stream.flush(); os.fsync(stream.fileno())
+        fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try: os.fsync(fd)
+        finally: os.close(fd)
+    def inventory() -> dict[str, Any]:
+        result = {}
+        for path in sorted(source_tree.rglob("*")):
+            required(not path.is_symlink(), "public baseline symlink refused")
+            if path.is_file():
+                result[str(path.relative_to(source_tree))] = {"sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "mode": path.stat().st_mode & 0o777}
+        return result
+    required(output.is_absolute() and source_tree.is_absolute(), "absolute reviewed roots required")
+    required(not output.exists(), "each qualification requires a new output directory")
+    required(not output.is_relative_to(source_tree) and not source_tree.is_relative_to(output), "baseline and observations must be separate")
+    required(len(expected_nodes) == 34 and len(set(expected_nodes)) == 34, "whole frozen XMLtodict baseline required")
+    required(inventory() == dict(source_files), "unchanged public pre-fix inventory differs")
+    admission = load_reuse_admission(root)
+    required(not reuse_credit_permitted(admission), "this public route never admits reuse")
+    output.mkdir(parents=True, mode=0o700)
+    environment = dict(os.environ)  # Preserve qualified research PATH/PYTHONPATH.
+    checker_origins = {name: shutil.which(name, path=environment.get("PATH")) for name in ("lean", "lake", "z3", "cvc5")}
+    required(all(checker_origins.values()) and environment.get("IPFS_ACCELERATE_AGENT_RESEARCH_TOOLCHAIN_SHA256"), "admitted research runtime/checker bindings must remain available")
+    import pytest
+    source_digest = sha256_json(dict(source_files))
+    runtime = {"python": sys.executable, "python_version": sys.version, "pytest": pytest.__version__, "pytest_origin": pytest.__file__, "PATH": environment.get("PATH"), "PYTHONPATH": environment.get("PYTHONPATH"), "checker_origins": checker_origins, "research_profile_sha256": environment.get("IPFS_ACCELERATE_AGENT_RESEARCH_TOOLCHAIN_SHA256"), "formal_toolchain_sha256": environment.get("FORMAL_TOOLCHAIN_CONTRACT_SHA256")}
+    save_once(output / "freeze.json", {"schema": "ns027-actual-public-cold-freeze/v1", "created_at": utcnow(), "source_sha256": source_digest, "source_files": dict(source_files), "expected_nodes": expected_nodes, "runtime": runtime, "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "reuse_credit": False, "provider_calls": 0, "hidden_oracle_access": False, "pilot_or_final_admission": False})
+    store = TestCertificateStore(output / "empty_native_certificate_store")
+    locator = TestLocatorKey(repository_id="historical:martinblech/xmltodict@75a17701db20d5d3ec2ea1f6c901cf2211011eb5", package_identity="public-source-sha256:" + source_digest, node_id="tests/test_xmltodict.py")
+    # No runtime proof/trace exists: an explicit missing-cache RUN is required.
+    key = TestExecutionKey(locator_cid=locator.locator_id, repository_forest_cid="sha256:" + source_digest, static_trace_root_cid="", runtime_trace_root_cid="", runtime_completeness_policy="public-full-cold-no-reuse/v1", policy_cid="ns027-removed-reuse/v2", test_function_cid="sha256:" + source_files["tests/test_xmltodict.py"]["sha256"], fixture_cids=())
+    lookup = TestProofCache(verifier=None).lookup(locator, key, candidates=())
+    required(lookup.decision.is_run, "native cache must select cold execution")
+    provider = IpfsDatasetsTestCertificateProvider()
+    validation = ProofCachedTestValidation(certificate_provider=provider, repository_root=root).validate(task_id="NS-027", goal_id="NS-SG3", validation_command=shlex.join([sys.executable, "-m", "pytest", "tests/test_xmltodict.py"]), decision="SKIPPED: proof cache hit", execution_key=key, certificate=None, pass_receipt=None)
+    required(not validation.is_completion_evidence() and "plain_skip_not_evidence" in validation.reason_codes, "native completion validator must reject unsupported skip")
+    save_once(output / "native_route.json", {"lookup": lookup.decision.to_dict(), "skip_validation": validation.to_dict(), "certificate_store": str(store.root), "store_has_no_prior_certificate": True, "reuse_credit": False, "fake_pass_receipt_created": False})
+    plugin = output / "public_observer.py"
+    plugin.write_text('''import json,os,time,resource,sys,hashlib
+from pathlib import Path
+nodes=[];reports=[];errors=[]
+def pytest_collection_modifyitems(session,config,items):nodes.extend(item.nodeid for item in items)
+def pytest_collectreport(report):
+ if report.failed:errors.append(str(report.nodeid))
+def pytest_runtest_logreport(report):reports.append({'nodeid':report.nodeid,'when':report.when,'outcome':report.outcome,'duration':report.duration})
+def pytest_sessionfinish(session,exitstatus):
+ r=resource.getrusage(resource.RUSAGE_SELF)
+ Path(os.environ['NS027_PUBLIC_OBSERVATION']).write_text(json.dumps({'collected':nodes,'reports':reports,'collection_errors':errors,'exitstatus':int(exitstatus),'cpu_seconds':r.ru_utime+r.ru_stime,'maxrss_kib':r.ru_maxrss,'xmltodict_origin':sys.modules['xmltodict'].__file__,'xmltodict_sha256':hashlib.sha256(Path(sys.modules['xmltodict'].__file__).read_bytes()).hexdigest()}))
+''')
+    environment.setdefault("PYTHON", sys.executable)  # Current admitted interpreter; native sealed launcher remains authoritative.
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    environment["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+    # Append only the observer; never replace the declared research/module roots.
+    environment["PYTHONPATH"] = os.pathsep.join(filter(None, [environment.get("PYTHONPATH", ""), str(output), str(source_tree)]))
+    stages = []
+    for name, extra in (("collect", ["--collect-only"]), ("run", [])):
+        command = shlex.join(["python", "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", "public_observer", *extra, "tests/test_xmltodict.py"])
+        stage_env = {**environment, "NS027_PUBLIC_OBSERVATION": str(output / (name + ".observation.json"))}
+        save_once(output / (name + ".pending.json"), {"command": command, "started_at": utcnow(), "source_sha256": source_digest})
+        result = run_validation_command(spec=ValidationCommand(command=command, cacheable=False, validation_id="NS027-public-" + name), workspace_path=source_tree, timeout_seconds=60, environment=stage_env)
+        save_once(output / (name + ".native_command.json"), result)
+        observation_path = output / (name + ".observation.json")
+        observed = json.loads(observation_path.read_text()) if observation_path.is_file() else None
+        stages.append({"stage": name, "command_result_sha256": hashlib.sha256((output / (name + ".native_command.json")).read_bytes()).hexdigest(), "observation": observed})
+        required(result.get("returncode") == 0 and result.get("timed_out") is not True, "actual native public command failed: " + name)
+        required(observed is not None and observed["collected"] == expected_nodes and not observed["collection_errors"], "whole unchanged public collection differs")
+        required(Path(observed["xmltodict_origin"]).resolve() == source_tree / "xmltodict.py" and observed["xmltodict_sha256"] == source_files["xmltodict.py"]["sha256"], "tests imported a different installed XMLtodict version")
+        if name == "run":
+            reports = observed["reports"]
+            required(len(reports) == 3 * len(expected_nodes) and all(r["outcome"] == "passed" for r in reports), "every public setup/call/teardown must pass")
+    required(inventory() == dict(source_files), "public source changed during baseline")
+    result = {"schema": "ns027-actual-native-public-cold/v1", "success": True, "source_sha256": source_digest, "expected_count": 34, "collected": 34, "passed": 34, "stages": stages, "runtime": runtime, "native_cache_action": str(lookup.decision.action), "skip_completion_evidence": False, "reuse_credit": False, "provider_calls": 0, "hidden_scorer_calls": 0, "pilot_or_final_admission": False, "boundary": "whole unchanged public baseline via actual native scheduler; not a scored provider repair or a reuse witness"}
+    save_once(output / "result.json", result)
+    return result
 
 
 class EvidenceLog:
@@ -716,6 +847,15 @@ def pack_context(task: dict[str, Any], arm: str, sandbox: Path) -> dict[str, Any
     }
     packed = dict(spec[arm])
     packed["arm"] = arm
+    admission = load_reuse_admission()
+    if not reuse_credit_permitted(admission):
+        packed["reuse"] = False
+        packed["reuse_credit"] = False
+        packed["reuse_profile"] = "removed_full_cold"
+        packed["unsupported_reuse_profile_rejected"] = reject_unsupported_reuse_profile(admission)
+    else:
+        packed["reuse_credit"] = bool(packed.get("reuse"))
+        packed["unsupported_reuse_profile_rejected"] = reject_unsupported_reuse_profile(admission)
     packed["byte_length"] = len(canonical_dumps(packed).encode("utf-8"))
     return packed
 
@@ -1063,6 +1203,10 @@ class AttemptExecutor:
                 t_prime = time.perf_counter()
                 cpu_prime0 = cpu_seconds()
                 context = pack_context(task, arm, sandbox)
+                if not reuse_credit_permitted():
+                    context = dict(context)
+                    context["reuse"] = False
+                    context["reuse_credit"] = False
                 prime_elapsed = time.perf_counter() - t_prime
                 prime_cpu = max(0.0, cpu_seconds() - cpu_prime0)
                 stages.append(
@@ -1646,7 +1790,7 @@ class AttemptExecutor:
             "NS-026 runner/provider qualification; not a frozen final A-D scientific result.",
         ]
         if host:
-            interpretation.append("Historical pilot A/cold only; one exact operator grant and reviewed candidate. This is one of four enabled cells in the preserved 48-cell plan; no final or paired-mechanism admission. Rescore verifies the signed result without another score." if kw["record_kind"] == "pilot" else "Historical development only, one operator grant and AI-reviewed candidate; no native campaign reservation, final-profile admission or adversarial scorer-integrity qualification. Rescore verifies the retained signed result without another score.")
+            interpretation.append("Historical pilot A/B cold only; one exact operator grant and reviewed candidate within the frozen24-cell plan. Historical48 identities remain separately retained (8 retained,40 removed,16 added). One cell does not establish a paired result or final admission. Rescore verifies the signed result without another score." if kw["record_kind"] == "pilot" else "Historical development only, one operator grant and AI-reviewed candidate; no native campaign reservation, final-profile admission or adversarial scorer-integrity qualification. Rescore verifies the retained signed result without another score.")
         if not kw["live"]:
             interpretation.append(
                 "Development/simulated path is not an admitted production repair and is excluded from live-repair denominators."
@@ -1735,6 +1879,8 @@ class AttemptExecutor:
                 "replan_count": 0,
                 "manual_intervention_count": 0,
                 "reuse_cold_disagreement": None,
+                "reuse_credit": False if not reuse_credit_permitted() else None,
+                "unsupported_reuse_profile_rejected": reject_unsupported_reuse_profile(),
             },
             "deviation_ids": [],
             "interpretation_limits": interpretation,

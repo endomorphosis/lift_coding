@@ -1,5 +1,5 @@
 """Constructed client integration checks: no provider, scorer, network or native calls."""
-import ast,copy,hashlib,importlib.util,json,shutil,socket,sys,tempfile,types,unittest
+import ast,copy,itertools,hashlib,importlib.util,json,shutil,socket,sys,tempfile,types,unittest
 from pathlib import Path
 from unittest.mock import patch
 sys.dont_write_bytecode=True
@@ -17,27 +17,56 @@ class Delivery(unittest.TestCase):
   self.W=load('fixture_worker',self.root/SERVICE/'worker_adapter.py');self.B=load('fixture_builder',self.root/SERVICE/'build_offer_drop.py');self.G=load('fixture_gateway',self.root/PAPER/'experiments/production_gateway.py')
   self.profile={'host_handoff':{'unchanged_development_fixture':True},'pilot_host_handoff':json.loads((HERE/'pilot_profile.template.json').read_text())};save(self.root/PAPER/'experiments/production_profile.json',self.profile)
   self.request={'path_class':'production','record_kind':'pilot','task_id':'ns-hist-05-dnspython','arm':'A','cache':'local_cold','repetition':0}
- def activate(self):
+ def activate(self,subset=False,late_wave=False):
   import datetime as dt
   grants=[]
-  for i,unit in enumerate(sorted(self.W.UNITS)):
+  cells=list(itertools.product(sorted(self.W.UNITS),('A','B'),(0,1,2)))
+  if subset:cells=cells[:1]
+  for i,(unit,arm,repetition)in enumerate(cells):
    queue=self.root/SERVICE/'host_handoff'/str(i);queue.mkdir(parents=True)
-   grant={'schema':'operator-historical-pilot-grant/v1','unit':unit,'arm':'A','max_provider_calls':1,'authority':'explicit_operator_pilot_grant_not_campaign_claim','expires_at':(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=1)).isoformat(),'queue':str(queue),'grant_id':str(i),'amendment_sha256':'a'*64,'profile':{'constructed_fixture':True},'source_sha256':'b'*64,'manifest_sha256':'c'*64}
+   grant={'schema':'operator-historical-pilot-grant/v2','unit':unit,'arm':arm,'repetition':repetition,'max_provider_calls':1,'authority':'explicit_operator_pilot_grant_not_campaign_claim','expires_at':(dt.datetime.now(dt.timezone.utc)+dt.timedelta(hours=1)).isoformat(),'queue':str(queue),'grant_id':str(i),'amendment_sha256':'a'*64,'profile':{'constructed_fixture':True},'source_sha256':'b'*64,'manifest_sha256':'c'*64}
    gp=self.root/'private-metadata'/str(i)/'grant.json';save(gp,grant);grants.append(gp)
-   req={'schema':'operator-pilot-request/v1','batch_sha256':'d'*64,'cell_id':str(i),'cache':'local_cold','repetition':0,'record_kind':'pilot','grant_sha256':self.W.sha(gp.read_bytes()),'grant_id':str(i),'request_id':str(i),'unit':unit,'arm':'A','amendment_sha256':'a'*64}
+   req={'schema':'operator-pilot-request/v2','batch_sha256':'d'*64,'cell_id':self.W.cell_id(unit,arm,repetition),'cache':'local_cold','repetition':repetition,'record_kind':'pilot','grant_sha256':self.W.sha(gp.read_bytes()),'grant_id':str(i),'request_id':str(i),'unit':unit,'arm':arm,'amendment_sha256':'a'*64}
    save(queue/'offer.json',{'request':req,'profile':grant['profile'],'source_sha256':grant['source_sha256'],'public_key_sha256':'e'*64,'public_verifier':{'algorithm':'Ed25519','encoding':'spki_der_base64','data':''}})
   names={str(PAPER/'experiments'/n)for n in ('production_gateway.py','run_comparison.py','score_runs.py')}|{str(SERVICE/n)for n in ('worker_adapter.py','pilot_client.py')}
-  review={'schema':'ns028-scientific-pilot-activation-review/v1','accepted':True,'frozen_before_comparison_outcomes':True,'comparison_scope_frozen':True,'final_admitted':False,'reviewer_kind':'ai_operator','host_package_sha256':self.W.HOST_PACKAGE,'planned_cells':48,'retained_arms':['A','B','C','D'],'distinct_mechanisms_verified':True,'retained_arm_profiles':{a:{'mechanism_id':'constructed-'+a,'source_sha256':'2'*64,'qualification_sha256':'3'*64}for a in ('A','B','C','D')},'mechanism_context_profile_sha256':'f'*64,'worker_source_review_sha256':'1'*64,'batch_sha256':'d'*64,'worker_source_files':{n:self.W.sha((self.root/n).read_bytes())for n in names},'constructed_fixture_only':True}
+  review={'schema':'ns028-scientific-pilot-AB-activation-review/v1','accepted':True,'frozen_before_comparison_outcomes':True,'comparison_scope_frozen':True,'final_admitted':False,'reviewer_kind':'ai_operator','host_package_sha256':self.W.HOST_PACKAGE,'planned_cells':24,'historical_planned_cells':48,'retained_original_cells':8,'removed_original_cells':40,'added_cells':16,'scientific_arm_removal_amendment_sha256':'6'*64,'retained_arms':['A','B'],'distinct_mechanisms_verified':True,'retained_arm_profiles':{a:{'mechanism_id':'constructed-'+a,'source_sha256':'2'*64,'qualification_sha256':'3'*64}for a in ('A','B')},'mechanism_context_profile_sha256':'f'*64,'worker_source_review_sha256':'1'*64,'batch_sha256':'d'*64,'worker_source_files':{n:self.W.sha((self.root/n).read_bytes())for n in names},'constructed_fixture_only':True}
   rp=self.root/'fixture-review.json';save(rp,review);out=self.root/'proposed-drop'
-  result=self.B.stage(self.root,grants,rp,self.W.sha(rp.read_bytes()),out);self.assertFalse(result['installed'])
+  result=self.B.stage(self.root,grants[:1]if late_wave else grants,rp,self.W.sha(rp.read_bytes()),out);self.assertFalse(result['installed'])
   shutil.copy2(out/'offer_drop.json',self.root/SERVICE/'host_handoff/offer_drop.json');shutil.copy2(out/'production_profile.proposed.json',self.root/PAPER/'experiments/production_profile.json')
   return grants,rp
  def test_missing_activation_pending_no_effect(self):
   result=self.G.dispatch(self.request,root=self.root);self.assertEqual(result['status'],'pending_operator_inputs');self.assertFalse(result['terminal']);self.assertFalse((self.root/SERVICE/'host_handoff').exists())
  def test_unsupported_arm_refused(self):
-  with self.assertRaises(ValueError):self.W.dispatch(self.root,{**self.request,'arm':'B'})
+  with self.assertRaises(ValueError):self.W.dispatch(self.root,{**self.request,'arm':'C'})
  def test_late_drop_pending_and_exact_request_replay(self):
   self.activate();first=self.G.dispatch(self.request,root=self.root);second=self.G.dispatch(self.request,root=self.root);self.assertEqual(first,second);self.assertEqual(first['status'],'pending_operator');binding=first['grant_binding'];pc=self.W.client(self.root);queue,offer=pc.selected(self.root,binding);self.assertEqual((queue/'request.json').read_bytes(),pc.canon(offer['request']))
+ def test_all24_actual_client_bindings(self):
+  self.activate()
+  for unit,arm,repetition in itertools.product(sorted(self.W.UNITS),('A','B'),(0,1,2)):
+   result=self.W.dispatch(self.root,{**self.request,'task_id':unit,'arm':arm,'repetition':repetition})
+   self.assertEqual(result['status'],'pending_operator');self.assertEqual(result['grant_binding']['cell_id'],self.W.cell_id(unit,arm,repetition))
+ def test_missing_late_cell_pending_without_request(self):
+  self.activate(subset=True)
+  result=self.W.dispatch(self.root,{**self.request,'arm':'B','repetition':2})
+  self.assertEqual(result['status'],'pending_operator_inputs');self.assertFalse(list((self.root/SERVICE/'host_handoff').glob('*/request.json')))
+ def test_boolean_repetition_refused(self):
+  with self.assertRaises(ValueError):self.W.dispatch(self.root,{**self.request,'repetition':True})
+ def test_append_only_late_offer_wave(self):
+  grants,rp=self.activate(late_wave=True)
+  old=json.loads((self.root/SERVICE/'host_handoff/offer_drop.json').read_text());out=self.root/'next-wave'
+  self.B.stage(self.root,grants[1:2],rp,self.W.sha(rp.read_bytes()),out)
+  new=json.loads((out/'offer_drop.json').read_text());self.assertEqual(new['previous_drop_sha256'],self.W.sha(self.W.canon(old)));self.assertEqual(len(new['bindings']),2);self.assertIn(old['bindings'][0],new['bindings'])
+  with self.assertRaisesRegex(ValueError,'cannot be reissued'):self.B.stage(self.root,grants[:1],rp,self.W.sha(rp.read_bytes()),self.root/'must-not-exist')
+ def test_expired_unissued_grant_refused(self):
+  import datetime as dt
+  grants,rp=self.activate(late_wave=True);p=grants[1];g=json.loads(p.read_text());g['expires_at']=(dt.datetime.now(dt.timezone.utc)-dt.timedelta(seconds=1)).isoformat();save(p,g)
+  with self.assertRaisesRegex(ValueError,'expired grant'):self.B.stage(self.root,[p],rp,self.W.sha(rp.read_bytes()),self.root/'expired-never')
+ def test_v2_signed_scope_routes_real_worker_oracle(self):
+  body={'schema':'operator-pilot-receipt/v2','status':'completed','error':None,'operator_review_kind':'ai_operator','trust_scope':'specific_reviewed_pilot_candidate_only','automatic_adversarial_scorer_integrity_qualified':False,'production_final_admitted':False,'operator_review_sha256':'a'*64,'unit':self.request['task_id'],'manifest_sha256':'b'*64,**{k:'c'*64 for k in ('grant_sha256','candidate_sha256','source_sha256','batch_sha256','cell_id')}}
+  body['operator_review_binding']={k:body[k]for k in ('grant_sha256','candidate_sha256','source_sha256','batch_sha256','cell_id')};body['scorer']={'schema':'ns-historical-cold-host-result/v1','split':'pilot','unit_id':body['unit'],'manifest_sha256':body['manifest_sha256'],'candidate_sha256':body['candidate_sha256'],'success':False,'container_exit_code':0,'timed_out':False,'scorer':{'visible_collected':34,'visible_passed':34,'hidden_collected':1,'hidden_passed':0,'success':False}}
+  verified={'receipt':body,'signature_and_scope_verified':True,'admitted_historical_pilot':True,'response_sha256':'d'*64}
+  with patch.object(self.G,'repo_root',return_value=self.root):result=self.G.host_oracle(verified)
+  self.assertEqual(result['status'],'failed');self.assertEqual(result['visible_collected'],34);self.assertFalse(result['candidate_valid'])
  def test_changed_offer_refused(self):
   self.activate();p=self.root/SERVICE/'host_handoff/0/offer.json';p.write_text('{}')
   req={**self.request,'task_id':sorted(self.W.UNITS)[0]}
@@ -53,7 +82,7 @@ class Delivery(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'pre-outcome'):self.B.stage(self.root,grants,rp,self.W.sha(rp.read_bytes()),self.root/'never-created')
  def test_single_arm_activation_refused(self):
   grants,rp=self.activate();x=json.loads(rp.read_text());x['retained_arms']=['A'];save(rp,x)
-  with self.assertRaisesRegex(ValueError,'at least two'):self.B.stage(self.root,grants,rp,self.W.sha(rp.read_bytes()),self.root/'never-created')
+  with self.assertRaisesRegex(ValueError,'two distinct'):self.B.stage(self.root,grants,rp,self.W.sha(rp.read_bytes()),self.root/'never-created')
  def test_runner_pending_precedes_materialize_and_publish(self):
   R=load('fixture_runner',self.root/PAPER/'experiments/run_comparison.py');obj=R.AttemptExecutor.__new__(R.AttemptExecutor);obj.root=self.root;obj.evidence=object();obj.args=types.SimpleNamespace(scenario='normal',path='production',task_id=self.request['task_id'],arm='A',cache='local_cold',repetition=0,record_kind='pilot');obj.ledger=types.SimpleNamespace(get_internal=lambda _:None);obj._publish=lambda **kw:(_ for _ in()).throw(AssertionError('terminal publish forbidden'))
   with patch.object(R,'load_task',return_value={'task_id':self.request['task_id'],'live_repair_admitted':True}),patch.object(R,'load_gateway',return_value=self.G),patch.object(R,'materialize_live_task',side_effect=AssertionError('historical body access forbidden')):

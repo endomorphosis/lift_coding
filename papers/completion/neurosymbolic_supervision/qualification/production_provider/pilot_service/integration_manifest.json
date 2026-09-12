@@ -1,26 +1,27 @@
 {
   "schema": "ns028-deferred-worker-integration/v1",
-  "base_head": "a9da742f98fab8ae668e33d2c8a222833d19b101",
+  "base_head": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
   "files": {
     "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": {
       "before_sha256": "1314986d2798253ca4ec23da067acb68a2b13dcc4b1daee9cb1426fc30697fe3",
-      "sha256": "07e500d8a975608bc4353ba0d23ee63b712712aeae2b30b5894114b50ce704bb",
+      "sha256": "efdeaf4badcf559ab125def3dc87a95dbf34cbde07875a07cefa1a13a1651b9a",
       "candidate": "integration_candidates/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py"
     },
     "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": {
-      "before_sha256": "6bc348d5f56ac32ea68704a10a478293786cf53da3a8371fbb534d75cd4df509",
-      "sha256": "0d62bd4bd9460374c96700c822950b2868609b447e118a17375971f0d4c70017",
+      "before_sha256": "6b21b34ffc5d69fd686067a82bb4008aed3d04f7452622a89fba49331a56697a",
+      "sha256": "0d10884654e094a6138b4e01622153e0f89222b424c95577163169a39d114947",
       "candidate": "integration_candidates/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py"
     },
     "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": {
-      "before_sha256": "5e80572e51e0609d06fd1842694da5a0753ebdd66aa6c27bb3c50eca9abab158",
-      "sha256": "0f80abc71d8d1b450cd92bb9ac6c7f09cb6a9f96099588fb81d743df84275ead",
+      "before_sha256": "ab53223f0e88f5e2f273e363cd419b747767e7714ac2c2053406399c2082aaf4",
+      "sha256": "3d6402ef79f2764c40f6c6eccc1e048e64ac392c4142c8266cda85fae2e3add2",
       "candidate": "integration_candidates/papers/completion/neurosymbolic_supervision/experiments/score_runs.py"
     }
   },
-  "adapter_sha256": "c15743b717eedf0600d6f9b7dd3aea814a3248cc78590b8203c57b3e1d8d3a17",
-  "client_sha256": "da488a896c59c9e8fd03303ad9fb2bd81c6c1f9148e8d0782f6e5fd5baea5454",
-  "patch_sha256": "57faf7a65334528d59bb9ff064570887f9bcce6f027d927db462047c863e819a",
+  "adapter_sha256": "f9f4f6e497313436790b6b6c3ec1683abdd7c7dc91c449d92670a793b52eba39",
+  "client_sha256": "b75456a3a3d917b60eb03850aa6fa9f81bc889cbe2246fa3425bb50cb9b39a82",
+  "patch_sha256": "0b6d2844ad09a97327cbd21c8a1a8f2dd6f05045cd044cde1711126c9a2288bd",
   "apply_now": false,
-  "reason": "NS027 owns these three existing experiment files; integrate only after its committed result, preserving any new changes. Stale preimages must refuse."
+  "host_package_sha256": "4e73194717a72d99ac00ec4026ba6f5f36b271c36feee0ad735ca28275daa831",
+  "reason": "Exact A/B24 worker hooks based on corrected NS027 source. Root integration/activation after final source/profile review; no grants or effects in this package."
 }

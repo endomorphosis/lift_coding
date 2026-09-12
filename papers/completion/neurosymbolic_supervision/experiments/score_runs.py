@@ -227,7 +227,8 @@ def score_host_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
     receipt = verified["receipt"]
     identity = attempt["measurement"]["identity"]
     binding = verified["binding"]
-    if attempt["measurement"]["record_kind"] != "development" or any(identity.get(key) != binding.get(key) for key in ("task_id", "arm", "cache", "repetition")):
+    kind = binding.get("record_kind", "development")
+    if kind not in ("development", "pilot") or attempt["measurement"]["record_kind"] != kind or any(identity.get(key) != binding.get(key) for key in ("task_id", "arm", "cache", "repetition")):
         raise ValueError("host receipt schedule differs")
     if attempt["bindings"]["source_preimage_id"] != receipt["source_sha256"] or identity["source_preimage_id"] != receipt["source_sha256"] or (attempt["runner"].get("candidate") or {}).get("host_candidate_sha256") != receipt["candidate_sha256"]:
         raise ValueError("host source/candidate binding differs")
@@ -236,7 +237,7 @@ def score_host_attempt(attempt: dict[str, Any]) -> dict[str, Any]:
     scored["measurement"]["oracle"] = oracle
     scored["runner"]["command"] = "rescore"
     scored["runner"]["host_rescore"] = {"signed_evidence_reverified": True, "new_provider_calls": 0, "new_scorer_calls": 0, "hidden_oracle_loaded": False, "response_sha256": verified["response_sha256"]}
-    admitted = receipt.get("historical_development_unit_admitted") is True and receipt.get("served_profile_admitted") is True
+    admitted = receipt.get("historical_" + kind + "_unit_admitted") is True and receipt.get("served_profile_admitted") is True
     passed = admitted and oracle["status"] == "passed"
     scored["measurement"]["terminal_state"] = "solved" if passed else "unsolved" if admitted and oracle["status"] == "failed" else "unavailable"
     scored["measurement"]["terminal_reason"] = oracle["reason"]

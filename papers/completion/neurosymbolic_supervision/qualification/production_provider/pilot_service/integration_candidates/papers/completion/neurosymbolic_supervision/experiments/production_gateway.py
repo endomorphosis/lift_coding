@@ -443,7 +443,7 @@ def _pilot_worker(root: Path):
     """Load the reviewed NS028 input client; no host authority is created here."""
     import importlib.util
     path = root / PAPER_REL / "qualification/production_provider/pilot_service/worker_adapter.py"
-    if path.resolve() != path or sha256_bytes(path.read_bytes()) != "c15743b717eedf0600d6f9b7dd3aea814a3248cc78590b8203c57b3e1d8d3a17":
+    if path.resolve() != path or sha256_bytes(path.read_bytes()) != "f9f4f6e497313436790b6b6c3ec1683abdd7c7dc91c449d92670a793b52eba39":
         raise GatewayError("reviewed pilot adapter changed", terminal="rejected")
     spec = importlib.util.spec_from_file_location("ns028_pilot_worker", path)
     module = importlib.util.module_from_spec(spec)
@@ -525,7 +525,7 @@ def dispatch_host_handoff(request: Mapping[str, Any], root: Path) -> dict[str, A
 def host_oracle(verified: Mapping[str, Any]) -> dict[str, Any]:
     """Interpret scalar signed host evidence; no tests, source or oracle loading."""
     receipt = verified["receipt"]
-    if receipt.get("schema") == "operator-pilot-receipt/v1":
+    if receipt.get("schema") == "operator-pilot-receipt/v2":
         return _pilot_worker(repo_root()).oracle(verified)
     scorer = receipt.get("scorer") or {}
     binding = receipt.get("operator_review_binding") or {}

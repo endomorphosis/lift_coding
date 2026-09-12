@@ -7,6 +7,7 @@ import base64,hashlib,json,os,stat,subprocess,tempfile
 from pathlib import Path
 PREFIX=Path('papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/host_handoff')
 REQUEST_KEYS={'schema','batch_sha256','cell_id','cache','repetition','record_kind','grant_sha256','grant_id','request_id','unit','arm','amendment_sha256'}
+UNITS=('ns-hist-05-dnspython','ns-hist-06-bottle','ns-hist-07-idna','ns-hist-08-protego')
 def canon(x):return json.dumps(x,sort_keys=True,separators=(',',':')).encode()
 def sha(x):return hashlib.sha256(x).hexdigest()
 def require(ok,msg):
@@ -21,7 +22,9 @@ def read(p):
 def selected(root,binding):
  root=Path(root);rel=Path(binding['queue_relative']);require(not rel.is_absolute()and '..'not in rel.parts and rel.is_relative_to(PREFIX),'queue outside exact pilot reservation')
  queue=root/rel;raw=read(queue/'offer.json');require(sha(raw)==binding['offer_sha256'],'offer hash changed');offer=json.loads(raw);request=offer['request']
- require(set(request)==REQUEST_KEYS and request['schema']=='operator-pilot-request/v1'and request['record_kind']=='pilot'and request['arm']=='A'and request['cache']=='local_cold'and request['repetition']==0,'pilot-A request scope differs')
+ require(set(request)==REQUEST_KEYS and request['schema']=='operator-pilot-request/v2'and request['record_kind']=='pilot'and request['arm']in('A','B')and request['cache']=='local_cold'and type(request['repetition'])is int and request['repetition']in(0,1,2)and request['unit']in UNITS,'pilot-AB request scope differs')
+ expected_cell=sha(canon({k:request[k]for k in ('unit','arm','cache','repetition','record_kind')}))
+ require(request['cell_id']==expected_cell,'request cell identity differs')
  for key in REQUEST_KEYS-{'schema','request_id'}:require(request[key]==binding[key],'host cell binding differs: '+key)
  require(offer['profile']==binding['profile']and offer['source_sha256']==binding['source_sha256'],'host source/profile differs')
  return queue,offer
@@ -34,7 +37,7 @@ def verify(root,binding):
   p=Path(t);(p/'public.der').write_bytes(public);(p/'receipt').write_bytes(canon(body));(p/'signature').write_bytes(base64.b64decode(signed['signature'],validate=True))
   checked=subprocess.run(['/usr/bin/openssl','pkeyutl','-verify','-pubin','-keyform','DER','-rawin','-inkey',str(p/'public.der'),'-in',str(p/'receipt'),'-sigfile',str(p/'signature')],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=15)
   require(checked.returncode==0,'pilot signature invalid')
- require(body['schema']=='operator-pilot-receipt/v1'and body['inert_qualification']is False and body['final_scientific_run']is False and body['production_final_admitted']is False and body['historical_population_admitted']is False,'non-pilot or inert receipt')
+ require(body['schema']=='operator-pilot-receipt/v2'and body['inert_qualification']is False and body['final_scientific_run']is False and body['production_final_admitted']is False and body['historical_population_admitted']is False,'non-pilot or inert receipt')
  for key in REQUEST_KEYS-{'schema','request_id'}:require(body[key]==offer['request'][key],'receipt cell differs: '+key)
  require(body['request_sha256']==sha(canon(offer['request']))and body['profile']==binding['profile']and body['source_sha256']==binding['source_sha256']and body['manifest_sha256']==binding['manifest_sha256'],'receipt source/request differs')
  completed=body.get('status')=='completed'and body.get('error')is None
