@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-S",
+    "papers/completion/autoformalization/evaluation/aggregate_costs.py"
+  ],
+  "cwd": ".",
+  "elapsed_seconds": 0.16816588689107448,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af020-final-w7c7oyvn",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "execution_kind": "stdlib historical cost correction/check; no model or training call",
+  "exit_code": 0,
+  "finished_at": "2026-09-12T08:00:58.989172+00:00",
+  "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-v3-aggregate.stdout.log",
+  "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py",
+  "started_at": "2026-09-12T08:00:58.821007+00:00",
+  "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-v3-aggregate.stderr.log"
+}

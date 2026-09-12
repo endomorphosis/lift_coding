@@ -95,8 +95,8 @@ and it is not reported as 0.0 seconds or a 1.0x speedup.
 
 ## Versions
 
-- Generated at: 2026-09-12T08:00:58.865761+00:00
-- aggregate_costs.py sha256: `8411106b811eb7fbf6d95dbadaca51d392fd81ed5ce61e9b51130951d3973a7f`
+- Generated at: 2026-09-12T07:53:58.520167+00:00
+- aggregate_costs.py sha256: `bfe3e565f75bec937317b535279246cc8bdae0d5cb4cf8e56f7b33734bb89523`
 - runtime_telemetry.py sha256: `229e88ee03102e85aac0d1101561338309c5570bd1acee3ea2d1226022e7aa6e`
 - environment_manifest sha256: `06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5`
 - experiment_plan sha256: `b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c`

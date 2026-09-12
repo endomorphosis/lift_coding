@@ -1060,11 +1060,7 @@ def throughput_records(telemetry, usage: Sequence[Mapping[str, Any]], probe: Map
             "task_id": "AF-020",
             "phase": "target_construction",
             "execution_status": "measured" if cpu_matched and cpu_matched.get("status") == "measured" else "unmeasured",
-            "hardware": telemetry.hardware_precision_record(
-                hardware="cpu", precision="python_backend_unquantized", cache_state="unused",
-                cuda_available=False, gpu_telemetry_available=False, device="cpu",
-                notes="Exact retained AF011 T0 CPU replay profile; not the current reducer host.",
-            ),
+            "hardware": probe["hardware"],
             "comparison": cpu_matched,
             "notes": "T0 codec replays are matched CPU actual runs of the same identity; this is not a CUDA speedup.",
         },
@@ -1384,34 +1380,6 @@ def validate_outputs(telemetry) -> dict[str, Any]:
     return {"ok": True, "rows": len(rows), "kinds": sorted(kinds)}
 
 
-def reconciliation_record(telemetry, recon: Mapping[str, Any], versions: Mapping[str, Any]) -> dict[str, Any]:
-    return {
-        "schema": SCHEMA,
-        "record_kind": "reconciliation",
-        "record_id": "AF-020:reconciliation",
-        "task_id": "AF-020",
-        "phase": "setup",
-        "execution_status": "measured",
-        "hardware": telemetry.hardware_precision_record(
-            hardware="mixed_retained_run_metadata", precision="see_source_usage",
-            cache_state="see_source_usage", cuda_available=None, gpu_telemetry_available=False,
-            notes="Reconciliation over retained source_usage hardware; current reducer probe is separate.",
-        ),
-        "ok": recon["ok"],
-        "includes_setup": True,
-        "includes_failures": True,
-        "phase_measured_elapsed_seconds": recon["phase_measured_elapsed_seconds"],
-        "record_measured_elapsed_seconds": recon["record_measured_elapsed_seconds"],
-        "independent_elapsed_seconds": recon["independent_elapsed_seconds"],
-        "record_count": recon["record_count"],
-        "failure_record_count": recon["failure_record_count"],
-        "setup_record_count": recon["setup_record_count"],
-        "unmeasured_quantity_counts": recon["unmeasured_quantity_counts"],
-        "mismatches": recon["mismatches"],
-        "versions": versions,
-    }
-
-
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate existing cost outputs")
@@ -1439,7 +1407,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "python": sys.version.split()[0],
         "elapsed_seconds": round(time.perf_counter() - t0, 6),
     }
-    recon_row = reconciliation_record(telemetry, recon, versions)
+    recon_row = {
+        "schema": SCHEMA,
+        "record_kind": "reconciliation",
+        "record_id": "AF-020:reconciliation",
+        "task_id": "AF-020",
+        "phase": "setup",
+        "execution_status": "measured",
+        "hardware": probe["hardware"],
+        "ok": recon["ok"],
+        "includes_setup": True,
+        "includes_failures": True,
+        "phase_measured_elapsed_seconds": recon["phase_measured_elapsed_seconds"],
+        "record_measured_elapsed_seconds": recon["record_measured_elapsed_seconds"],
+        "independent_elapsed_seconds": recon["independent_elapsed_seconds"],
+        "record_count": recon["record_count"],
+        "failure_record_count": recon["failure_record_count"],
+        "setup_record_count": recon["setup_record_count"],
+        "unmeasured_quantity_counts": recon["unmeasured_quantity_counts"],
+        "mismatches": recon["mismatches"],
+        "versions": versions,
+    }
     rows: list[dict[str, Any]] = [probe, contract, *usage, *phases, *throughput, recon_row]
     markdown = render_markdown(
         probe=probe, recon=recon, usage=usage, throughput=throughput, versions=versions

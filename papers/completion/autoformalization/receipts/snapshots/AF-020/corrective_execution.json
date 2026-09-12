@@ -1,0 +1,90 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-S",
+        "papers/completion/autoformalization/evaluation/aggregate_costs.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.16719604597892612,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af020-correction-bxrrt7mz",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "execution_kind": "stdlib corrective historical cost reduction or checks; no training/model calls",
+      "exit_code": 0,
+      "finished_at": "2026-09-12T07:51:53.561739+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-aggregate.stdout.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py",
+      "started_at": "2026-09-12T07:51:53.394546+00:00",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-aggregate.stderr.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-S",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.03601415699813515,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af020-correction-bxrrt7mz",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "execution_kind": "stdlib corrective historical cost reduction or checks; no training/model calls",
+      "exit_code": 0,
+      "finished_at": "2026-09-12T07:51:53.601545+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-check-outputs.stdout.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py",
+      "started_at": "2026-09-12T07:51:53.565532+00:00",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-check-outputs.stderr.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-S",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/check_nested_costs.py"
+      ],
+      "cwd": ".",
+      "elapsed_seconds": 0.06691823003347963,
+      "env": {
+        "HOME": "/tmp/ipfs-accelerate-validation-home-af020-correction-bxrrt7mz",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "execution_kind": "stdlib corrective historical cost reduction or checks; no training/model calls",
+      "exit_code": 0,
+      "finished_at": "2026-09-12T07:51:53.671533+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-check-nested.stdout.log",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/check_nested_costs.py",
+      "started_at": "2026-09-12T07:51:53.604621+00:00",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-check-nested.stderr.log"
+    }
+  ],
+  "completed": true,
+  "native_db_mutations": 0,
+  "native_telemetry_sha256": "229e88ee03102e85aac0d1101561338309c5570bd1acee3ea2d1226022e7aa6e",
+  "original_attempt_history_rewritten": false,
+  "original_parent_commit": "9057ce1e7a441a0bcd581a039a2c95956364abad",
+  "original_receipt_sha256": "6a551eaf7fbd456569de9a518fe2a7107d634b8609d0499387aea0da7e4b2531",
+  "provider_calls": 0,
+  "raw_inputs_unchanged": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/logs/measure.meta.json": "54d15893c33c9fdaa13bf2b76ca8ac61652e2f52f4cb901702e820918a4c69fe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py": "f7ed70294c1982a5aea5d5440d50411f9c09f617e531b6a27bbdf9a3073aea9b",
+    "papers/completion/autoformalization/runs/planning/results.jsonl": "b5f33709fca971cdd02714fac95704cae63c47e2539e184200b68ac875aa0619",
+    "papers/completion/autoformalization/runs/proof_assistance/results.jsonl": "c4fc126f3a63652b5f91e70bd2eb1632ad765d614d3ad73eb509cd5841751fc1"
+  },
+  "regression_sha256": "3c8e2d42f4044fb28b1cbaf05621cff763bcff481ee2a3f52650fcea71f2bf6a",
+  "schema": "af020-corrective-accounting-execution/v1",
+  "source_sha256": "6c687afbecf6df9084af81da37cbb11fc1650a170f4727f432e88632504d9ff3",
+  "training_runs": 0
+}

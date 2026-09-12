@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-S",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/check_nested_costs.py"
+  ],
+  "cwd": ".",
+  "elapsed_seconds": 0.06691823003347963,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af020-correction-bxrrt7mz",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "execution_kind": "stdlib corrective historical cost reduction or checks; no training/model calls",
+  "exit_code": 0,
+  "finished_at": "2026-09-12T07:51:53.671533+00:00",
+  "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-check-nested.stdout.log",
+  "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/check_nested_costs.py",
+  "started_at": "2026-09-12T07:51:53.604621+00:00",
+  "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-check-nested.stderr.log"
+}

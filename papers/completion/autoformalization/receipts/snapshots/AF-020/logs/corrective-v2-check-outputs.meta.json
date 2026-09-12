@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-S",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py"
+  ],
+  "cwd": ".",
+  "elapsed_seconds": 0.0687576140044257,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af020-final-x3_3ce6r",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "execution_kind": "stdlib historical cost correction/check; no model or training call",
+  "exit_code": 0,
+  "finished_at": "2026-09-12T07:53:58.716631+00:00",
+  "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-v2-check-outputs.stdout.log",
+  "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py",
+  "started_at": "2026-09-12T07:53:58.647877+00:00",
+  "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/corrective-v2-check-outputs.stderr.log"
+}

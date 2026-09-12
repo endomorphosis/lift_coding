@@ -183,7 +183,9 @@ def probe_hardware(telemetry) -> dict[str, Any]:
             smi["stdout"] = (completed.stdout or "").strip()[:500]
             smi["stderr"] = (completed.stderr or "").strip()[:300]
             smi["usable"] = completed.returncode == 0 and bool(smi["stdout"])
-            if not smi["usable"]:
+            if smi["usable"]:
+                smi["reason"] = "current host device query succeeded; no CUDA training executed"
+            else:
                 smi["reason"] = smi["stdout"] or smi.get("stderr") or f"nvidia-smi exit {completed.returncode}"
         except (OSError, subprocess.SubprocessError, TimeoutError) as exc:
             smi["reason"] = f"{type(exc).__name__}: {exc}"
@@ -452,11 +454,28 @@ def collect_training(telemetry) -> list[dict[str, Any]]:
     return records
 
 
-def collect_command_setup(telemetry, task_id: str, rel_path: str, arm: str, notes: str) -> Optional[dict[str, Any]]:
+def collect_command_setup(
+    telemetry, task_id: str, rel_path: str, arm: str, notes: str,
+    *, nested_usage: Sequence[Mapping[str, Any]] = (),
+) -> Optional[dict[str, Any]]:
     path = PAPER_ROOT / rel_path
     elapsed, reason = meta_elapsed(path)
     if elapsed is None and not path.is_file():
         return None
+    outer_elapsed = elapsed
+    children = [
+        {"record_id": row["record_id"], "source_path": row["source_path"],
+         "source_sha256": row["source_sha256"], "elapsed_seconds": measured_elapsed(row)}
+        for row in nested_usage if measured_elapsed(row) is not None
+    ]
+    child_elapsed = math.fsum(child["elapsed_seconds"] for child in children)
+    if children:
+        if elapsed is not None:
+            if child_elapsed > elapsed + 1e-9:
+                raise ValueError(f"{task_id}: nested measured phases exceed enclosing command time")
+            elapsed = max(0.0, elapsed - child_elapsed)
+        reason += f"; command remainder after subtracting separately counted nested phases ({child_elapsed:.9f}s)"
+        notes += " The enclosing command also contains the separately reported nested phases; only its remaining time is charged here."
     return usage_record(
         telemetry,
         record_id=f"{task_id}:setup:{path.stem}",
@@ -475,7 +494,61 @@ def collect_command_setup(telemetry, task_id: str, rel_path: str, arm: str, note
         execution_status="measured" if elapsed is not None else "unavailable",
         includes_setup=True,
         notes=notes,
+        extra={"elapsed_coverage": {
+            "policy": "outer_command_minus_separately_counted_nested_phases",
+            "outer_elapsed_seconds": outer_elapsed,
+            "nested_elapsed_seconds": child_elapsed,
+            "nested_records": children,
+            "remainder_includes_unmeasured_command_work": True,
+        }} if children else None,
     )
+
+
+def shared_af018_policy_scans(rows: Sequence[Mapping[str, Any]]) -> tuple[dict[str, str], list[dict[str, Any]]]:
+    """Attribute each frozen AF018 fixture scan once, without changing raw rows.
+
+    The retained producer times the scan before its two-arm loop. This is a
+    source-specific reduction, not generic deduplication of similar timings.
+    """
+    groups: dict[tuple[str, str], list[Mapping[str, Any]]] = defaultdict(list)
+    for row in rows:
+        if row.get("stage") != "policy_scan":
+            continue
+        detail = row.get("detail") or {}
+        identities = row.get("identities") or {}
+        value = (row.get("cost") or {}).get("elapsed_seconds")
+        if not (
+            row.get("fixture") is True and row.get("constructed_control") is True
+            and detail.get("not_a_model_output") is True
+            and identities.get("tool") == "lean-policy-scan/v1"
+            and isinstance(row.get("goal_id"), str) and row["goal_id"]
+            and isinstance(detail.get("source_sha256"), str) and len(detail["source_sha256"]) == 64
+            and type(value) in (int, float) and math.isfinite(value) and value >= 0
+        ):
+            raise ValueError("AF018 policy scan lacks the frozen shared-fixture provenance")
+        groups[(row["goal_id"], detail["source_sha256"])].append(row)
+    attribution: dict[str, str] = {}
+    scans = []
+    for (goal, source_hash), pair in sorted(groups.items()):
+        if len(pair) != 2 or {r.get("experiment_arm") for r in pair} != {"hammer", "leanstral"}:
+            raise ValueError("AF018 shared policy scan requires its exact two-arm pair")
+        values = [(r.get("cost") or {})["elapsed_seconds"] for r in pair]
+        if values[0] != values[1] or pair[0].get("execution_status") != pair[1].get("execution_status"):
+            raise ValueError("AF018 shared policy scan pair has inconsistent timing/status")
+        charge = "AF-018:shared-policy-scan:" + sha256_text(canonical_dumps([goal, source_hash]))[:16] + ":validation"
+        originals = []
+        for row in pair:
+            rid = row.get("record_id")
+            if not isinstance(rid, str) or rid in attribution:
+                raise ValueError("AF018 duplicate or missing policy record identity")
+            attribution[rid] = charge
+            originals.append({"record_id": rid, "record_sha256": sha256_text(canonical_dumps(row)),
+                              "experiment_arm": row["experiment_arm"], "execution_status": row.get("execution_status"),
+                              "elapsed_seconds": values[0]})
+        scans.append({"record_id": charge, "goal_id": goal, "source_sha256": source_hash,
+                      "elapsed_seconds": values[0], "original_records": originals,
+                      "execution_status": pair[0].get("execution_status")})
+    return attribution, scans
 
 
 def collect_jsonl_costs(
@@ -494,6 +567,13 @@ def collect_jsonl_costs(
     if not rows:
         return []
     digest = sha256_file(path)
+    shared_attribution: dict[str, str] = {}
+    shared_scans: list[dict[str, Any]] = []
+    if task_id == "AF-018" and rel_path == "runs/proof_assistance/results.jsonl":
+        producer = PAPER_ROOT / "receipts/snapshots/AF-018/measure_assistance.py"
+        if sha256_file(producer) != "f7ed70294c1982a5aea5d5440d50411f9c09f617e531b6a27bbdf9a3073aea9b":
+            raise ValueError("AF018 shared timing reduction requires the reviewed original producer")
+        shared_attribution, shared_scans = shared_af018_policy_scans(rows)
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         if row.get("kind") == "summary" or row.get("record_kind") in {"summary", "coverage", "capability"}:
@@ -508,7 +588,12 @@ def collect_jsonl_costs(
         for item in items:
             cost = item.get("cost") if isinstance(item.get("cost"), Mapping) else {}
             value = cost.get("elapsed_seconds") if cost else item.get("elapsed_seconds")
-            if isinstance(value, (int, float)) and math.isfinite(value) and value >= 0:
+            shared_charge = shared_attribution.get(item.get("record_id"))
+            unavailable_zero = (
+                task_id == "AF-018" and rel_path == "runs/proof_assistance/results.jsonl"
+                and value == 0.0 and item.get("execution_status") in {"unavailable", "unsupported"}
+            )
+            if not shared_charge and not unavailable_zero and isinstance(value, (int, float)) and math.isfinite(value) and value >= 0:
                 elapsed_values.append(float(value))
             status = str(item.get("execution_status") or item.get("status") or "")
             if status in {"failure", "timeout", "invalid", "error", "failed"} or item.get("includes_failure"):
@@ -545,6 +630,11 @@ def collect_jsonl_costs(
                 notes=notes,
                 extra={
                     "row_count": len(items),
+                    "shared_elapsed_attribution": [
+                        {"original_record_id": item["record_id"], "charge_record_id": shared_attribution[item["record_id"]]}
+                        for item in items if item.get("record_id") in shared_attribution
+                    ],
+                    "raw_rows_preserved": True,
                     "failure_row_count": failures,
                     "elapsed_min": min(elapsed_values) if elapsed_values else None,
                     "elapsed_max": max(elapsed_values) if elapsed_values else None,
@@ -575,6 +665,19 @@ def collect_jsonl_costs(
                     notes=f"{failures} retained failure/timeout/invalid rows; elapsed is not double-counted here.",
                 )
             )
+    for scan in shared_scans:
+        records.append(usage_record(
+            telemetry, record_id=scan["record_id"], task_id=task_id,
+            experiment_arm="shared_policy_fixture_scan", phase="validation",
+            source_path=rel_path, source_sha256=digest,
+            elapsed=scan["elapsed_seconds"], elapsed_observed=True,
+            elapsed_reason="one actual pre-arm-loop policy scan; duplicated raw arm timings attributed once",
+            hardware="cpu", precision="unmeasured", cache_state="unused", cuda_available=False,
+            execution_status="measured", unit_count=1,
+            notes="Shared constructed policy-validation cost, not a provider call or executed native proof; raw arm statuses remain unchanged.",
+            extra={"shared_scan_attribution": scan,
+                   "raw_producer_source_sha256": "f7ed70294c1982a5aea5d5440d50411f9c09f617e531b6a27bbdf9a3073aea9b"},
+        ))
     return records
 
 
@@ -737,27 +840,27 @@ def collect_unmeasured_phases(telemetry, probe: Mapping[str, Any]) -> list[dict[
             notes="Hashed-trigram vector route in AF-017 is not a MiniLM embedding cost.",
         )
     )
-    if not probe.get("gpu_usable"):
-        records.append(
-            usage_record(
-                telemetry,
-                record_id="AF-020:cuda:unmeasured",
-                task_id="AF-020",
-                experiment_arm="cuda",
-                phase="updates_selection",
-                source_path="papers/completion/autoformalization/evaluation/aggregate_costs.py",
-                source_sha256=sha256_file(Path(__file__)),
-                elapsed=None,
-                elapsed_observed=False,
-                elapsed_reason="no matched CPU/CUDA/precision actual training run in the sealed environment",
-                hardware="cuda",
-                precision="unmeasured",
-                cache_state="unmeasured",
-                cuda_available=False,
-                execution_status="unavailable",
-                notes="Unavailable CUDA is not a zero-cost or 1.0x speedup result.",
-            )
+    # Retained unmatched CUDA costs stay unmeasured regardless of reducer-host visibility.
+    records.append(
+        usage_record(
+            telemetry,
+            record_id="AF-020:cuda:unmeasured",
+            task_id="AF-020",
+            experiment_arm="cuda",
+            phase="updates_selection",
+            source_path="papers/completion/autoformalization/evaluation/aggregate_costs.py",
+            source_sha256=sha256_file(Path(__file__)),
+            elapsed=None,
+            elapsed_observed=False,
+            elapsed_reason="no matched CPU/CUDA/precision actual training run in the sealed environment",
+            hardware="cuda",
+            precision="unmeasured",
+            cache_state="unmeasured",
+            cuda_available=False,
+            execution_status="unavailable",
+            notes="Unavailable CUDA is not a zero-cost or 1.0x speedup result.",
         )
+    )
     return records
 
 
@@ -899,7 +1002,12 @@ def phase_total_records(telemetry, recon: Mapping[str, Any], probe: Mapping[str,
                 "provider_units": cell(telemetry, None, "provider_units", observed=False),
                 "memory_gib": cell(telemetry, None, "memory_gib", observed=False),
                 "human_review_seconds": cell(telemetry, None, "human_review_seconds", observed=False),
-                "hardware": probe["hardware"],
+                "hardware": telemetry.hardware_precision_record(
+                    hardware="mixed_retained_run_metadata", precision="see_source_usage",
+                    cache_state="see_source_usage", cuda_available=None,
+                    gpu_telemetry_available=False,
+                    notes="Aggregate over retained source_usage hardware; current reducer probe is separate.",
+                ),
                 "record_count": payload.get("record_count", 0),
                 "failure_record_count": payload.get("failure_record_count", 0),
                 "setup_record_count": payload.get("setup_record_count", 0),
@@ -952,7 +1060,11 @@ def throughput_records(telemetry, usage: Sequence[Mapping[str, Any]], probe: Map
             "task_id": "AF-020",
             "phase": "target_construction",
             "execution_status": "measured" if cpu_matched and cpu_matched.get("status") == "measured" else "unmeasured",
-            "hardware": probe["hardware"],
+            "hardware": telemetry.hardware_precision_record(
+                hardware="cpu", precision="python_backend_unquantized", cache_state="unused",
+                cuda_available=False, gpu_telemetry_available=False, device="cpu",
+                notes="Exact retained AF011 T0 CPU replay profile; not the current reducer host.",
+            ),
             "comparison": cpu_matched,
             "notes": "T0 codec replays are matched CPU actual runs of the same identity; this is not a CUDA speedup.",
         },
@@ -1006,7 +1118,9 @@ def render_markdown(
         "Observation kinds are `measured`, `estimated`, `provider`, and `unmeasured`.",
         "Estimated and provider figures are never relabeled as measured wall-clock costs.",
         "",
-        "## Hardware, precision, and cache",
+        "## Current reducer environment and retained-run hardware",
+        "",
+        "This hardware probe describes the current accounting process only. It neither changes the retained historical run hardware nor demonstrates CUDA training.",
         "",
         f"- Sealed PATH: `{probe.get('path')}`",
         f"- Interpreter: `{probe.get('interpreter')}` ({probe.get('python_version')})",
@@ -1053,6 +1167,7 @@ def render_markdown(
             f"Independent usage sum: {recon.get('independent_elapsed_seconds')} s.",
             f"Reconciliation ok: `{recon.get('ok')}`. Setup included: `{recon.get('includes_setup')}`. Failures included: `{recon.get('includes_failures')}`.",
             "Phase totals reconcile with retained run/usage records, including setup and failures.",
+            "AF018's enclosing command is charged once: separately timed planning, candidate-generation and unique shared policy scans are subtracted from the command remainder. Each policy fixture was scanned once before the hammer/Leanstral loop; its duplicated raw arm timings are charged once as shared validation. Original rows/statuses are retained and mapped by exact goal, source hash and original producer hash. Unavailable-stage zero placeholders are not measured proof execution.",
             "",
             "## Retained sources",
             "",
@@ -1082,7 +1197,7 @@ def render_markdown(
             "",
             "## Limitations",
             "",
-            "- Sealed validation PATH has no usable NVIDIA driver (`nvidia-smi` cannot query devices).",
+            "- The current reducer's observed hardware probe is scoped to this rerender; retained source-run CUDA and precision limitations remain unchanged.",
             "- CPU seconds, billed memory-GiB, MiniLM/FAISS embedding cost, Leanstral GPU time, and human review are unmeasured.",
             "- Annotation cost is unmeasured while AF-005 independent gold is pending.",
             "- AF-011 `elapsed_seconds: 0.0` on some aggregate jsonl rows is ignored; wall times are taken from the checkpoint manifest.",
@@ -1107,6 +1222,20 @@ def collect_all(telemetry, probe: Mapping[str, Any]) -> list[dict[str, Any]]:
     usage: list[dict[str, Any]] = []
     usage.extend(collect_training(telemetry))
     usage.extend(collect_af009(telemetry))
+    # Both result files are written within AF018's retained measure.meta
+    # command. Normalize the shared fixture scans first; then its remaining
+    # item timers are disjoint components of that outer interval.
+    # Keep those measurements and charge only the remaining command time as
+    # setup; adding the entire command would count the item timers twice.
+    assistance_usage = collect_jsonl_costs(
+        telemetry, task_id="AF-018", rel_path="runs/planning/results.jsonl",
+        phase="preparation", arm_field="experiment_arm", cache_state="unused",
+        notes="Deterministic plan replay wall time; not proof execution.",
+    ) + collect_jsonl_costs(
+        telemetry, task_id="AF-018", rel_path="runs/proof_assistance/results.jsonl",
+        phase="proof_reconstruction", arm_field="experiment_arm", cache_state="unused",
+        notes="Hammer/Leanstral assistance attempts including unsupported and unavailable stages.",
+    )
     for item in (
         collect_command_setup(
             telemetry, "AF-007", "receipts/snapshots/AF-007/logs/test_result_accounting.meta.json",
@@ -1127,6 +1256,7 @@ def collect_all(telemetry, probe: Mapping[str, Any]) -> list[dict[str, Any]]:
         collect_command_setup(
             telemetry, "AF-018", "receipts/snapshots/AF-018/logs/measure.meta.json",
             "planning_assistance", "AF-018 sealed planning/assistance command wall time.",
+            nested_usage=assistance_usage,
         ),
         collect_command_setup(
             telemetry, "AF-012", "receipts/snapshots/AF-012/logs/run.meta.json"
@@ -1137,28 +1267,7 @@ def collect_all(telemetry, probe: Mapping[str, Any]) -> list[dict[str, Any]]:
     ):
         if item is not None:
             usage.append(item)
-    usage.extend(
-        collect_jsonl_costs(
-            telemetry,
-            task_id="AF-018",
-            rel_path="runs/planning/results.jsonl",
-            phase="preparation",
-            arm_field="experiment_arm",
-            cache_state="unused",
-            notes="Deterministic plan replay wall time; not proof execution.",
-        )
-    )
-    usage.extend(
-        collect_jsonl_costs(
-            telemetry,
-            task_id="AF-018",
-            rel_path="runs/proof_assistance/results.jsonl",
-            phase="proof_reconstruction",
-            arm_field="experiment_arm",
-            cache_state="unused",
-            notes="Hammer/Leanstral assistance attempts including unsupported and unavailable stages.",
-        )
-    )
+    usage.extend(assistance_usage)
     usage.extend(
         collect_jsonl_costs(
             telemetry,
@@ -1275,6 +1384,34 @@ def validate_outputs(telemetry) -> dict[str, Any]:
     return {"ok": True, "rows": len(rows), "kinds": sorted(kinds)}
 
 
+def reconciliation_record(telemetry, recon: Mapping[str, Any], versions: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "schema": SCHEMA,
+        "record_kind": "reconciliation",
+        "record_id": "AF-020:reconciliation",
+        "task_id": "AF-020",
+        "phase": "setup",
+        "execution_status": "measured",
+        "hardware": telemetry.hardware_precision_record(
+            hardware="mixed_retained_run_metadata", precision="see_source_usage",
+            cache_state="see_source_usage", cuda_available=None, gpu_telemetry_available=False,
+            notes="Reconciliation over retained source_usage hardware; current reducer probe is separate.",
+        ),
+        "ok": recon["ok"],
+        "includes_setup": True,
+        "includes_failures": True,
+        "phase_measured_elapsed_seconds": recon["phase_measured_elapsed_seconds"],
+        "record_measured_elapsed_seconds": recon["record_measured_elapsed_seconds"],
+        "independent_elapsed_seconds": recon["independent_elapsed_seconds"],
+        "record_count": recon["record_count"],
+        "failure_record_count": recon["failure_record_count"],
+        "setup_record_count": recon["setup_record_count"],
+        "unmeasured_quantity_counts": recon["unmeasured_quantity_counts"],
+        "mismatches": recon["mismatches"],
+        "versions": versions,
+    }
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate existing cost outputs")
@@ -1302,27 +1439,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "python": sys.version.split()[0],
         "elapsed_seconds": round(time.perf_counter() - t0, 6),
     }
-    recon_row = {
-        "schema": SCHEMA,
-        "record_kind": "reconciliation",
-        "record_id": "AF-020:reconciliation",
-        "task_id": "AF-020",
-        "phase": "setup",
-        "execution_status": "measured",
-        "hardware": probe["hardware"],
-        "ok": recon["ok"],
-        "includes_setup": True,
-        "includes_failures": True,
-        "phase_measured_elapsed_seconds": recon["phase_measured_elapsed_seconds"],
-        "record_measured_elapsed_seconds": recon["record_measured_elapsed_seconds"],
-        "independent_elapsed_seconds": recon["independent_elapsed_seconds"],
-        "record_count": recon["record_count"],
-        "failure_record_count": recon["failure_record_count"],
-        "setup_record_count": recon["setup_record_count"],
-        "unmeasured_quantity_counts": recon["unmeasured_quantity_counts"],
-        "mismatches": recon["mismatches"],
-        "versions": versions,
-    }
+    recon_row = reconciliation_record(telemetry, recon, versions)
     rows: list[dict[str, Any]] = [probe, contract, *usage, *phases, *throughput, recon_row]
     markdown = render_markdown(
         probe=probe, recon=recon, usage=usage, throughput=throughput, versions=versions

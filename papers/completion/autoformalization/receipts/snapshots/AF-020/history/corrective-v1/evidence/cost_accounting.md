@@ -28,7 +28,7 @@ This hardware probe describes the current accounting process only. It neither ch
 - Machine: `aarch64`
 - CUDA_VISIBLE_DEVICES: `None`
 - nvidia-smi usable: `True`
-- nvidia-smi reason: current host device query succeeded; no CUDA training executed
+- nvidia-smi reason: nvidia-smi not on PATH
 - torch import: `{"error": "ModuleNotFoundError: No module named 'torch'", "ok": false}`
 - CUDA available in this process: `True`
 - Hardware record: `{"cache_state":"unused","cuda_available":true,"device":"cuda","gpu_telemetry_available":true,"hardware":"cuda","notes":"Sealed-PATH probe; operator ~/.local torch/CUDA is out of scope.","precision":"unmeasured"}`
@@ -51,7 +51,7 @@ T1 sample-memory updates are labeled `sample_memory` and are not treated as a CU
 | target_construction | 3 | 23.560000 | 0 | 0 | True |
 | features | 1 | unmeasured | 0 | 0 | True |
 | indexing | 5 | unmeasured | 0 | 0 | True |
-| updates_selection | 8 | 150.934000 | 0 | 0 | True |
+| updates_selection | 7 | 150.934000 | 0 | 0 | True |
 | model_calls | 1 | unmeasured | 0 | 0 | True |
 | failed_attempts | 3 | unmeasured | 3 | 0 | True |
 | proof_reconstruction | 2 | 0.000053 | 2 | 0 | True |
@@ -73,7 +73,7 @@ checkpoint manifest.  Planning and assistance elapsed values are sums of retaine
 `cost.elapsed_seconds` cells.  Retrieval/premise rows without timers contribute setup from
 the sealed command log and leave per-query latency unmeasured.
 
-Source usage rows: 53.
+Source usage rows: 52.
 
 ## Throughput and speedup
 
@@ -95,8 +95,8 @@ and it is not reported as 0.0 seconds or a 1.0x speedup.
 
 ## Versions
 
-- Generated at: 2026-09-12T08:00:58.865761+00:00
-- aggregate_costs.py sha256: `8411106b811eb7fbf6d95dbadaca51d392fd81ed5ce61e9b51130951d3973a7f`
+- Generated at: 2026-09-12T07:51:53.442893+00:00
+- aggregate_costs.py sha256: `6c687afbecf6df9084af81da37cbb11fc1650a170f4727f432e88632504d9ff3`
 - runtime_telemetry.py sha256: `229e88ee03102e85aac0d1101561338309c5570bd1acee3ea2d1226022e7aa6e`
 - environment_manifest sha256: `06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5`
 - experiment_plan sha256: `b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c`

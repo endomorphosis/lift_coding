@@ -19,17 +19,19 @@ logs.  Dry-run synthetic throughput is not used as CUDA or residency evidence.
 Observation kinds are `measured`, `estimated`, `provider`, and `unmeasured`.
 Estimated and provider figures are never relabeled as measured wall-clock costs.
 
-## Hardware, precision, and cache
+## Current reducer environment and retained-run hardware
+
+This hardware probe describes the current accounting process only. It neither changes the retained historical run hardware nor demonstrates CUDA training.
 
 - Sealed PATH: `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin`
 - Interpreter: `/usr/bin/python3.12` (3.12.3)
 - Machine: `aarch64`
 - CUDA_VISIBLE_DEVICES: `None`
-- nvidia-smi usable: `False`
-- nvidia-smi reason: NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
+- nvidia-smi usable: `True`
+- nvidia-smi reason: current host device query succeeded; no CUDA training executed
 - torch import: `{"error": "ModuleNotFoundError: No module named 'torch'", "ok": false}`
-- CUDA available in this process: `False`
-- Hardware record: `{"cache_state":"unused","cuda_available":false,"device":"cpu","gpu_telemetry_available":false,"hardware":"cpu","notes":"Sealed-PATH probe; operator ~/.local torch/CUDA is out of scope.","precision":"unmeasured"}`
+- CUDA available in this process: `True`
+- Hardware record: `{"cache_state":"unused","cuda_available":true,"device":"cuda","gpu_telemetry_available":true,"hardware":"cuda","notes":"Sealed-PATH probe; operator ~/.local torch/CUDA is out of scope.","precision":"unmeasured"}`
 
 AF-009 selected `packed_cpu` with float32 parameters/losses on the operator host and recorded
 CUDA status `unavailable` (skipped tests, `CUDA_VISIBLE_DEVICES` empty).  AF-011 sealed T0–T2
@@ -43,7 +45,7 @@ T1 sample-memory updates are labeled `sample_memory` and are not treated as a CU
 
 | Phase | Records | Measured elapsed (s) | Failures | Setup rows | Present |
 | --- | ---: | ---: | ---: | ---: | --- |
-| setup | 7 | 64.169610 | 0 | 7 | True |
+| setup | 7 | 64.166542 | 0 | 7 | True |
 | preparation | 3 | 0.003000 | 0 | 0 | True |
 | annotation | 1 | unmeasured | 0 | 0 | True |
 | target_construction | 3 | 23.560000 | 0 | 0 | True |
@@ -52,15 +54,16 @@ T1 sample-memory updates are labeled `sample_memory` and are not treated as a CU
 | updates_selection | 8 | 150.934000 | 0 | 0 | True |
 | model_calls | 1 | unmeasured | 0 | 0 | True |
 | failed_attempts | 3 | unmeasured | 3 | 0 | True |
-| proof_reconstruction | 2 | 0.000084 | 2 | 0 | True |
-| validation | 14 | 242.921914 | 5 | 0 | True |
+| proof_reconstruction | 2 | 0.000053 | 2 | 0 | True |
+| validation | 18 | 242.921930 | 5 | 0 | True |
 | review | 1 | unmeasured | 0 | 0 | True |
 
-Measured elapsed summed across phases: 481.588608018 s.
-Measured elapsed summed across retained records: 481.588608018 s.
-Independent usage sum: 481.588608018 s.
+Measured elapsed summed across phases: 481.585523993 s.
+Measured elapsed summed across retained records: 481.585523993 s.
+Independent usage sum: 481.585523993 s.
 Reconciliation ok: `True`. Setup included: `True`. Failures included: `True`.
 Phase totals reconcile with retained run/usage records, including setup and failures.
+AF018's enclosing command is charged once: separately timed planning, candidate-generation and unique shared policy scans are subtracted from the command remainder. Each policy fixture was scanned once before the hammer/Leanstral loop; its duplicated raw arm timings are charged once as shared validation. Original rows/statuses are retained and mapped by exact goal, source hash and original producer hash. Unavailable-stage zero placeholders are not measured proof execution.
 
 ## Retained sources
 
@@ -70,7 +73,7 @@ checkpoint manifest.  Planning and assistance elapsed values are sums of retaine
 `cost.elapsed_seconds` cells.  Retrieval/premise rows without timers contribute setup from
 the sealed command log and leave per-query latency unmeasured.
 
-Source usage rows: 49.
+Source usage rows: 53.
 
 ## Throughput and speedup
 
@@ -82,7 +85,7 @@ and it is not reported as 0.0 seconds or a 1.0x speedup.
 
 ## Limitations
 
-- Sealed validation PATH has no usable NVIDIA driver (`nvidia-smi` cannot query devices).
+- The current reducer's observed hardware probe is scoped to this rerender; retained source-run CUDA and precision limitations remain unchanged.
 - CPU seconds, billed memory-GiB, MiniLM/FAISS embedding cost, Leanstral GPU time, and human review are unmeasured.
 - Annotation cost is unmeasured while AF-005 independent gold is pending.
 - AF-011 `elapsed_seconds: 0.0` on some aggregate jsonl rows is ignored; wall times are taken from the checkpoint manifest.
@@ -92,8 +95,8 @@ and it is not reported as 0.0 seconds or a 1.0x speedup.
 
 ## Versions
 
-- Generated at: 2026-09-12T07:22:36.412961+00:00
-- aggregate_costs.py sha256: `ab4c62f23c813a7e94ced9da5922c89156b9aac1fbdb3bb7c2901342a43227f6`
+- Generated at: 2026-09-12T08:00:58.865761+00:00
+- aggregate_costs.py sha256: `8411106b811eb7fbf6d95dbadaca51d392fd81ed5ce61e9b51130951d3973a7f`
 - runtime_telemetry.py sha256: `229e88ee03102e85aac0d1101561338309c5570bd1acee3ea2d1226022e7aa6e`
 - environment_manifest sha256: `06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5`
 - experiment_plan sha256: `b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c`

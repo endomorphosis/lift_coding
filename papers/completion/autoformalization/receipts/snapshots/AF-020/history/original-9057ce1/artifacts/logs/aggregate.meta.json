@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af020-lz2umd17",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONNOUSERSITE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/evaluation/aggregate_costs.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 121.822,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af020-lz2umd17",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T07:22:36.481625+00:00",
+  "name": "aggregate",
+  "started_at": "2026-09-12T07:22:36.359786+00:00"
+}

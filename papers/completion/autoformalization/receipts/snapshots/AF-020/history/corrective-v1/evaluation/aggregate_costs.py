@@ -183,9 +183,7 @@ def probe_hardware(telemetry) -> dict[str, Any]:
             smi["stdout"] = (completed.stdout or "").strip()[:500]
             smi["stderr"] = (completed.stderr or "").strip()[:300]
             smi["usable"] = completed.returncode == 0 and bool(smi["stdout"])
-            if smi["usable"]:
-                smi["reason"] = "current host device query succeeded; no CUDA training executed"
-            else:
+            if not smi["usable"]:
                 smi["reason"] = smi["stdout"] or smi.get("stderr") or f"nvidia-smi exit {completed.returncode}"
         except (OSError, subprocess.SubprocessError, TimeoutError) as exc:
             smi["reason"] = f"{type(exc).__name__}: {exc}"
@@ -840,27 +838,27 @@ def collect_unmeasured_phases(telemetry, probe: Mapping[str, Any]) -> list[dict[
             notes="Hashed-trigram vector route in AF-017 is not a MiniLM embedding cost.",
         )
     )
-    # Retained unmatched CUDA costs stay unmeasured regardless of reducer-host visibility.
-    records.append(
-        usage_record(
-            telemetry,
-            record_id="AF-020:cuda:unmeasured",
-            task_id="AF-020",
-            experiment_arm="cuda",
-            phase="updates_selection",
-            source_path="papers/completion/autoformalization/evaluation/aggregate_costs.py",
-            source_sha256=sha256_file(Path(__file__)),
-            elapsed=None,
-            elapsed_observed=False,
-            elapsed_reason="no matched CPU/CUDA/precision actual training run in the sealed environment",
-            hardware="cuda",
-            precision="unmeasured",
-            cache_state="unmeasured",
-            cuda_available=False,
-            execution_status="unavailable",
-            notes="Unavailable CUDA is not a zero-cost or 1.0x speedup result.",
+    if not probe.get("gpu_usable"):
+        records.append(
+            usage_record(
+                telemetry,
+                record_id="AF-020:cuda:unmeasured",
+                task_id="AF-020",
+                experiment_arm="cuda",
+                phase="updates_selection",
+                source_path="papers/completion/autoformalization/evaluation/aggregate_costs.py",
+                source_sha256=sha256_file(Path(__file__)),
+                elapsed=None,
+                elapsed_observed=False,
+                elapsed_reason="no matched CPU/CUDA/precision actual training run in the sealed environment",
+                hardware="cuda",
+                precision="unmeasured",
+                cache_state="unmeasured",
+                cuda_available=False,
+                execution_status="unavailable",
+                notes="Unavailable CUDA is not a zero-cost or 1.0x speedup result.",
+            )
         )
-    )
     return records
 
 
@@ -1002,12 +1000,7 @@ def phase_total_records(telemetry, recon: Mapping[str, Any], probe: Mapping[str,
                 "provider_units": cell(telemetry, None, "provider_units", observed=False),
                 "memory_gib": cell(telemetry, None, "memory_gib", observed=False),
                 "human_review_seconds": cell(telemetry, None, "human_review_seconds", observed=False),
-                "hardware": telemetry.hardware_precision_record(
-                    hardware="mixed_retained_run_metadata", precision="see_source_usage",
-                    cache_state="see_source_usage", cuda_available=None,
-                    gpu_telemetry_available=False,
-                    notes="Aggregate over retained source_usage hardware; current reducer probe is separate.",
-                ),
+                "hardware": probe["hardware"],
                 "record_count": payload.get("record_count", 0),
                 "failure_record_count": payload.get("failure_record_count", 0),
                 "setup_record_count": payload.get("setup_record_count", 0),
@@ -1060,11 +1053,7 @@ def throughput_records(telemetry, usage: Sequence[Mapping[str, Any]], probe: Map
             "task_id": "AF-020",
             "phase": "target_construction",
             "execution_status": "measured" if cpu_matched and cpu_matched.get("status") == "measured" else "unmeasured",
-            "hardware": telemetry.hardware_precision_record(
-                hardware="cpu", precision="python_backend_unquantized", cache_state="unused",
-                cuda_available=False, gpu_telemetry_available=False, device="cpu",
-                notes="Exact retained AF011 T0 CPU replay profile; not the current reducer host.",
-            ),
+            "hardware": probe["hardware"],
             "comparison": cpu_matched,
             "notes": "T0 codec replays are matched CPU actual runs of the same identity; this is not a CUDA speedup.",
         },
@@ -1384,34 +1373,6 @@ def validate_outputs(telemetry) -> dict[str, Any]:
     return {"ok": True, "rows": len(rows), "kinds": sorted(kinds)}
 
 
-def reconciliation_record(telemetry, recon: Mapping[str, Any], versions: Mapping[str, Any]) -> dict[str, Any]:
-    return {
-        "schema": SCHEMA,
-        "record_kind": "reconciliation",
-        "record_id": "AF-020:reconciliation",
-        "task_id": "AF-020",
-        "phase": "setup",
-        "execution_status": "measured",
-        "hardware": telemetry.hardware_precision_record(
-            hardware="mixed_retained_run_metadata", precision="see_source_usage",
-            cache_state="see_source_usage", cuda_available=None, gpu_telemetry_available=False,
-            notes="Reconciliation over retained source_usage hardware; current reducer probe is separate.",
-        ),
-        "ok": recon["ok"],
-        "includes_setup": True,
-        "includes_failures": True,
-        "phase_measured_elapsed_seconds": recon["phase_measured_elapsed_seconds"],
-        "record_measured_elapsed_seconds": recon["record_measured_elapsed_seconds"],
-        "independent_elapsed_seconds": recon["independent_elapsed_seconds"],
-        "record_count": recon["record_count"],
-        "failure_record_count": recon["failure_record_count"],
-        "setup_record_count": recon["setup_record_count"],
-        "unmeasured_quantity_counts": recon["unmeasured_quantity_counts"],
-        "mismatches": recon["mismatches"],
-        "versions": versions,
-    }
-
-
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate existing cost outputs")
@@ -1439,7 +1400,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "python": sys.version.split()[0],
         "elapsed_seconds": round(time.perf_counter() - t0, 6),
     }
-    recon_row = reconciliation_record(telemetry, recon, versions)
+    recon_row = {
+        "schema": SCHEMA,
+        "record_kind": "reconciliation",
+        "record_id": "AF-020:reconciliation",
+        "task_id": "AF-020",
+        "phase": "setup",
+        "execution_status": "measured",
+        "hardware": probe["hardware"],
+        "ok": recon["ok"],
+        "includes_setup": True,
+        "includes_failures": True,
+        "phase_measured_elapsed_seconds": recon["phase_measured_elapsed_seconds"],
+        "record_measured_elapsed_seconds": recon["record_measured_elapsed_seconds"],
+        "independent_elapsed_seconds": recon["independent_elapsed_seconds"],
+        "record_count": recon["record_count"],
+        "failure_record_count": recon["failure_record_count"],
+        "setup_record_count": recon["setup_record_count"],
+        "unmeasured_quantity_counts": recon["unmeasured_quantity_counts"],
+        "mismatches": recon["mismatches"],
+        "versions": versions,
+    }
     rows: list[dict[str, Any]] = [probe, contract, *usage, *phases, *throughput, recon_row]
     markdown = render_markdown(
         probe=probe, recon=recon, usage=usage, throughput=throughput, versions=versions
