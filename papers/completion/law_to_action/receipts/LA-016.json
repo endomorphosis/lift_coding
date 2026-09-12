@@ -1,0 +1,171 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-016",
+  "status": "complete",
+  "completed_at": "2026-09-12T17:58:15.640000+00:00",
+  "completion_mode": "The protocol-planned 60-case x 5-arm x 3-seed closed-loop matrix (900 cells) was retained as not-started in compact_cell_v1 raw.jsonl (arm/seed/task, tokens, retries, blocked outcome per cell) plus run_manifest cell_defaults. No scientific model was pinned: torch/llama_cpp/vllm are absent, no local weights exist, paid-provider budget is 0, and the supervisor session is not qualification. transformers/onnxruntime/sentencepiece are importable but unpinned. No lineage-disjoint LA-016 source freeze exists; the LA-004/LA-015 30 families were not reused. Zero model calls, tokens, retries, and generated programs are unstarted accounting, not measured agent failure. Closed-loop RQ3 claims are withdrawn in recovery_analysis.md with author-visible manuscript/protocol scope impact. Independent utility is the dispatched-oracle observation of none; no model self-report was scored. Replay fixtures were not substituted. Bulk per-cell envelopes were not duplicated: compact recipe encoding keeps the 900 identities under the admission budget.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/generated_code/INDEX.json": "5655b5e4c7ad48d7535f52bd938d945fc120307b51b4846b0c647e6a43c2f6e7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/generated_code/no_generated_programs.json": "4e2ed6c2b51f8344e74c2df1a68a2c2be18a74e4cd1ea35b5628f52327426d42",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/raw.jsonl": "d4d10fbfb2699e4b67a0ff972069c9211271b511c75f98815b6ca7a6704a3a45",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md": "433b0b3fb2ccb2dbfe4014336e5e22b4fc0e7d2eba49c9d843ae310b39cd38e9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json": "8fa99a856023300312f760a0aceaa3623d976289e68cda31c059983db9a76a90",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/probe/environment.json": "9f54f14f973df7891132e3e82e592760c49c695f32e127be8bf12a63aec3ee49",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/probe/model_provider.json": "0074a0076312cf97034ec25a52bbb93e57c7782c6f42c73dd0c1e92c0cc89bee",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/probe/source_disjointness.json": "f8d49a4a7c735e2c66bebec17baf1f808c84c5a6679e5a4430fe81b11a770852",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/run_closed_loop.py": "1f42dacae0640b825ed4d78876e0adc31436f68f116e6d9274ad104fc20f3ad7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/blockers.json": "1cfe83bafcc15de86cb9c417fff377328a41e2d04d5d71cd86fdd469e7973e1b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/planned_matrix.json": "164837e61961c2d160e4b8d22c7e30a58f0c7c42fc3542eb103b5a0bc6183a55",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/run_head.json": "5abbe248ee57ba8579430a84c9816e098532143e86d9b039750087e031d9eb03",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/schedule_digest.json": "7ccb9ab348046eb8b410ac3adfc87e401fc338cd2ec748be1a4769efb7e14da2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/validate_closed_loop.py": "ae782d4484d75f74cdd8c4bae10efb6010311d3df7eb94c106296bdd22260631",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/commands.json": "10c67374ff4d3d60548a88eac293d8196d6e0ecee33c75192353c8f39b055401",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/run.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/run.stdout.log": "56aea05b870ab454b45486a0bd45c9b91a1c6944b83a22e311f5b4a240ed6e85",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/validate.stdout.log": "b88fc2ea0f72bd695b15cd8d80bfae24f4fc4233c637b7badf9e41ed6fa578cf"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/results/agents/run_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+    "papers/completion/law_to_action/results/agents/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/raw.jsonl",
+    "papers/completion/law_to_action/results/agents/recovery_analysis.md": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md",
+    "papers/completion/law_to_action/results/agents/generated_code/INDEX.json": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/generated_code/INDEX.json",
+    "papers/completion/law_to_action/results/agents/generated_code/no_generated_programs.json": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/generated_code/no_generated_programs.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Actual model calls and generated programs are evidenced or closed-loop claims are explicitly removed with author-visible scope impact.",
+      "status": "met",
+      "explanation": "No actual model calls or generated programs exist: model_calls=0, generated_program_count=0, and generated_code/ contains only INDEX.json (900 not-generated attempt IDs) and no_generated_programs.json. The sealed-environment probe found no generative runtime, no weight files, and no authorized no-cost endpoint; transformers is present without a pinned model. Closed-loop claims are explicitly withdrawn in recovery_analysis.md, which lists author-visible manuscript \u00a77 / E.1 lines 519\u2013523, Table E1, RQ3, and A1/A2 scope impact. Replay fixtures and this supervisor session were not used as a model.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/generated_code/INDEX.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/generated_code/no_generated_programs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/probe/model_provider.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Task utility is independently observed, not model self-reported.",
+      "status": "met",
+      "explanation": "Every compact raw cell expands with independent_oracle_observed=false, model_self_reported_success=false, and useful_work=false. Observed-conditional allowed-task success is undefined (O=0). Scheduled 0/450 allowed success is retained as an accounting identity over not-started cells and is not scored as a measured agent capability. No model output was accepted as success. The independent observation is the absence of dispatched oracle/effect traces.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "All retries, failures, blocked outcomes and model tokens are retained by arm/seed/task.",
+      "status": "met",
+      "explanation": "raw.jsonl contains all 900 scheduled identities (60 planned cases x 5 arms x 3 seeds) as compact_cell_v1 rows. Each row stores arm_id, seed, case_id, model_calls, input_tokens, output_tokens, total_tokens, retries, repair_attempts, replan_attempts, blocked, and terminal_outcome=not_started. Shared constants are in run_manifest cell_defaults (reason unqualified_model_and_unfrozen_cohort). The token ledger retains the 15 arm/seed buckets (60 attempts each, all not-started, all-zero tokens). missing_cells lists all 900 blocked attempt IDs. Nothing was dropped or recoded as zero-failure safety.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/schedule_digest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/blockers.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/validate.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/run_closed_loop.py",
+        "run",
+        "--out",
+        "papers/completion/law_to_action/results/agents",
+        "--snapshot",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016"
+      ],
+      "completed_at": "2026-09-12T17:58:15.592733Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la016-DbrMfa"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/run.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-016/run_closed_loop.py",
+      "started_at": "2026-09-12T17:58:15.534958Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/validate_closed_loop.py"
+      ],
+      "completed_at": "2026-09-12T17:58:15.632239Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la016-DbrMfa"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-016/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-016/validate_closed_loop.py",
+      "started_at": "2026-09-12T17:58:15.598019Z"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "49.0.0",
+    "HAVE_CRYPTO_ED25519": true,
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "harness_version": "la-016-closed-loop-harness/v1",
+    "implementation_revision": "cb9a5d10db5cef3e995604793fdafe5ba9edb3a1781290143c360b0f571a7ef4",
+    "raw_encoding": "compact_cell_v1",
+    "empirical_closed_loop_result": false,
+    "scientific_model_pinned": false,
+    "closed_loop_claims_withdrawn": true,
+    "fixture_model_used": false,
+    "pooled_with_fixed_action": false,
+    "independent_human_gold": false,
+    "model_calls": 0,
+    "total_tokens": 0,
+    "generated_program_count": 0,
+    "scheduled_attempts": 900,
+    "executed_attempts": 0,
+    "not_started_attempts": 900,
+    "available_modules": [
+      "onnxruntime",
+      "sentencepiece",
+      "transformers"
+    ],
+    "generative_runtimes": [],
+    "split_salt": "vericodegen-2026-law-to-action-LA016-v1",
+    "future_gates": [
+      "Pin a digest-bound local model or already authorized no-additional-cost endpoint, tokenizer, and decoding policy before any closed-loop dispatch.",
+      "Freeze 30 lineage-disjoint families with salt vericodegen-2026-law-to-action-LA016-v1; do not reuse the LA-015 cohort.",
+      "Do not treat a supervisor provider session as scientific model qualification.",
+      "Manuscript \u00a77 / E.1 closed-loop comparison language remains withdrawn until those gates pass."
+    ]
+  }
+}

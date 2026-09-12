@@ -1,0 +1,23 @@
+{
+  "dispatchable": false,
+  "fixture_model_used": false,
+  "lineage_disjoint_cohort_frozen": false,
+  "model_reasons": [
+    "no generative inference runtime (torch, llama_cpp, or vllm) is importable under the sealed PATH",
+    "transformers is importable from site-packages but no model id, tokenizer revision, or weight digest is pinned",
+    "onnxruntime is importable but no ONNX generative-model artifact is present or pinned",
+    "no local weight files (.bin/.safetensors/.gguf/.pt) were found under sealed HOME or /models",
+    "no model serving executable (ollama, llama-cli, vllm, ...) is on the sealed PATH",
+    "no provider credential names are present in the process environment",
+    "LA-003 did not pin a scientific model revision, tokenizer, decoding policy, or deployment digest",
+    "an existing supervisor provider session is not scientific model qualification"
+  ],
+  "not_started_reason": "unqualified_model_and_unfrozen_cohort",
+  "scientific_model_pinned": false,
+  "source_reasons": [
+    "LA-004 froze exactly 30 lineage families and LA-015 consumed all of them",
+    "protocol requires a separately frozen 30-family cohort with salt vericodegen-2026-law-to-action-LA016-v1 and no overlap with the fixed-action study",
+    "no LA-016 source freeze exists in allowed task outputs, and inventing family hashes is not a freeze",
+    "leftover unread CVE/Skill rows are not admitted without a versioned pre-outcome freeze"
+  ]
+}
