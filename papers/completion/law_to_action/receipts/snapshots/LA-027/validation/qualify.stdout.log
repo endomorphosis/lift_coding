@@ -1,0 +1,144 @@
+{
+  "analysis": {
+    "admission": {
+      "admitted": true,
+      "evidence_scope": "automated_source_contracts_and_policy_effects",
+      "scored": false
+    },
+    "empirical_benchmark_result": false,
+    "exit_status": 0,
+    "final_examples_scored": false,
+    "held_out_scored": false,
+    "message": "Automated-scope analysis records source-contract coverage and independent effect-observer qualification. It does not score held-out examples or claim expert legal fidelity, legal validity, or human agreement.",
+    "permitted_claims": [
+      "source provenance/span linkage and coverage",
+      "parse/schema/structural contract conformance",
+      "source-supported narrowly defined CVE behavior",
+      "actual solver/checker outcome for encoded obligations",
+      "observed protected effects and useful work relative to frozen modeled policy",
+      "measured runtime/resource/provider usage with complete failures"
+    ],
+    "qualification": {
+      "e2e": {
+        "capability_route_executed": true,
+        "handler_boundary_reached": true,
+        "proof_route_executed": true,
+        "status": "qualified_development_boundary"
+      },
+      "pipeline": {
+        "by_population": {
+          "cve": {
+            "cases": 4,
+            "failures": 0,
+            "predictions": 4
+          },
+          "legal": {
+            "cases": 4,
+            "failures": 0,
+            "predictions": 4
+          },
+          "skill": {
+            "cases": 4,
+            "failures": 1,
+            "predictions": 3
+          }
+        },
+        "cases": 12,
+        "failures": 1,
+        "predictions": 11
+      }
+    },
+    "schema": "law-to-action-automated-analysis/v1",
+    "scored": false,
+    "status": "qualification_recorded_not_scored",
+    "useful_work_success_inferred_from_fixtures": false,
+    "withdrawn_without_independent_data": [
+      "expert legal source-to-rule semantic fidelity",
+      "legal applicability or validity in the world",
+      "independent human legal/security/intent validation",
+      "inter-annotator agreement or adjudicated gold accuracy",
+      "semantic correctness inferred from implementation agreement"
+    ]
+  },
+  "automated_admission": {
+    "admitted": true,
+    "exit_status": 0,
+    "human_fields": {
+      "adjudication": "uncollected",
+      "agreement": "uncollected",
+      "disagreement": "uncollected",
+      "final_adjudication": "uncollected",
+      "independent_human_gold": false,
+      "optional_author_review": {
+        "collected": false,
+        "independent": false,
+        "label": "non-independent",
+        "may_substitute_for_empirical_evidence": false,
+        "required": false
+      },
+      "reviewed_at": "uncollected",
+      "reviewer_id": "absent"
+    },
+    "scored": false
+  },
+  "completed_at": "2026-09-12T15:36:56.170348Z",
+  "controls": {
+    "all_refused": true,
+    "count": 8
+  },
+  "e2e": {
+    "allow_decision": "allow",
+    "capability_route_executed": true,
+    "deny_decision": "deny",
+    "enforce_route_executed": true,
+    "fixture_harness_used": false,
+    "handler_boundary_reached": true,
+    "la008_run_py_represented_as_production": false,
+    "proof_route_executed": true,
+    "status": "qualified_development_boundary"
+  },
+  "empirical_benchmark_result": false,
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "final_labels_inspected": false,
+  "fixture_only_routes_represented_as_production": false,
+  "frozen_before_evaluated_predictions": true,
+  "held_out_result_inferred": false,
+  "independent_human_gold": false,
+  "model_provider_ledger": {
+    "call_count": 0,
+    "requires_model_calls": false
+  },
+  "optional_review_import": {
+    "admitted": false,
+    "code": "missing_independent_review_return",
+    "used_as_automated_gate": false
+  },
+  "pipeline": {
+    "by_population": {
+      "cve": {
+        "cases": 4,
+        "failures": 0,
+        "predictions": 4
+      },
+      "legal": {
+        "cases": 4,
+        "failures": 0,
+        "predictions": 4
+      },
+      "skill": {
+        "cases": 4,
+        "failures": 1,
+        "predictions": 3
+      }
+    },
+    "cases": 12,
+    "failures": 1,
+    "predictions": 11
+  },
+  "production_claim": false,
+  "qualify_version": "la-027-qualify-automated-scope/v1",
+  "schema": "law-to-action-automated-scope-qualification/v1",
+  "selected_arm": "A4",
+  "task": "LA-027",
+  "useful_work_success_inferred_from_fixtures": false
+}

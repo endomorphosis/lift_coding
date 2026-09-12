@@ -1,0 +1,125 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/benchmark/tests/test_automated_evidence.py"
+    ],
+    "completed_at": "2026-09-12T15:36:54.022721+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/unittest.stdout.log",
+    "started_at": "2026-09-12T15:36:53.820654+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-027/qualify_final_runtime.py",
+      "qualify-automated",
+      "--out",
+      "papers/completion/law_to_action/results/automated_scope_qualification"
+    ],
+    "completed_at": "2026-09-12T15:36:56.605807+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/qualify.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-027/qualify_final_runtime.py",
+    "started_at": "2026-09-12T15:36:54.023215+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-027/qualify_final_runtime.py",
+      "admit-final",
+      "--out",
+      "papers/completion/law_to_action/results/automated_scope_qualification"
+    ],
+    "completed_at": "2026-09-12T15:36:56.662077+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/admit.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-027/qualify_final_runtime.py",
+    "started_at": "2026-09-12T15:36:56.606524+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-027/qualify_final_runtime.py",
+      "analyze",
+      "--out",
+      "papers/completion/law_to_action/results/automated_scope_qualification"
+    ],
+    "completed_at": "2026-09-12T15:36:56.706809+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/analyze.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-027/qualify_final_runtime.py",
+    "started_at": "2026-09-12T15:36:56.662585+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-027/validate_automated_scope.py"
+    ],
+    "completed_at": "2026-09-12T15:36:56.808046+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-027/validate_automated_scope.py",
+    "started_at": "2026-09-12T15:36:56.707260+00:00"
+  }
+]

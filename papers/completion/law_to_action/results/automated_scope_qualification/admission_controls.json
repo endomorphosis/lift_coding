@@ -1,0 +1,176 @@
+{
+  "all_refused": true,
+  "controls": [
+    {
+      "admitted": false,
+      "control": "missing_runtime_binding",
+      "exit_status": 2,
+      "expected_reason": "missing_runtime_binding",
+      "passed": true,
+      "reasons": [
+        "missing_runtime_binding"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "missing_source_binding",
+      "exit_status": 2,
+      "expected_reason": "missing_source_binding",
+      "passed": true,
+      "reasons": [
+        "missing_source_binding"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "incomplete_case_accounting",
+      "exit_status": 2,
+      "expected_reason": "incomplete_case_accounting",
+      "passed": true,
+      "reasons": [
+        "incomplete_case_accounting"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "invalid_expectation_provenance",
+      "exit_status": 2,
+      "expected_reason": "invalid_expectation_provenance",
+      "passed": true,
+      "reasons": [
+        "invalid_expectation_provenance"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "self_reported_success",
+      "exit_status": 2,
+      "expected_reason": "self_reported_success",
+      "passed": true,
+      "reasons": [
+        "self_reported_success"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "stale_profile",
+      "exit_status": 2,
+      "expected_reason": "stale_profile",
+      "passed": true,
+      "reasons": [
+        "stale_profile"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "stale_budget",
+      "exit_status": 2,
+      "expected_reason": "stale_budget",
+      "passed": true,
+      "reasons": [
+        "stale_budget"
+      ],
+      "scored": false
+    },
+    {
+      "admitted": false,
+      "control": "automated_output_labeled_human_gold",
+      "exit_status": 2,
+      "expected_reason": "automated_output_labeled_human_gold",
+      "passed": true,
+      "reasons": [
+        "automated_output_labeled_human_gold"
+      ],
+      "scored": false
+    }
+  ],
+  "normal_admission": {
+    "admission_version": "la-027-automated-evidence/v1",
+    "admitted": true,
+    "admitted_at": "2026-09-12T15:36:56.169891Z",
+    "bindings": {
+      "amendment": {
+        "path": "papers/completion/law_to_action/benchmark/automated_evidence_amendment.json",
+        "present": true,
+        "sha256": "864fa9b4c47db37688cc1944f9fee84cf64835154ddedbbee8dc34ecb95bd6e6",
+        "size_bytes": 5002
+      },
+      "budget_digest": "9d03ec39b30f62a50619bf5ca70baae2dfa340f5c8dfea95772b859bd769a39e",
+      "case_count": 60,
+      "family_count": 30,
+      "machine_expectations_digest": "ddba37a792152506904b008bf3400e96c0050fcd4428e60ba82de29819603964",
+      "observer": "independent-filesystem-journal-observer/v2",
+      "original_protocol": {
+        "path": "papers/completion/law_to_action/benchmark/protocol.json",
+        "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f"
+      },
+      "profile_digest": "ad4edfbe3d3a3bdd27d33c73c66a8fef3521a0d4020527fe64ec0c27b2231fe6",
+      "solver": "qf_bool_sympy_sat",
+      "source_manifest": {
+        "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+        "present": true,
+        "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+        "size_bytes": 51880
+      },
+      "splits": {
+        "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+        "present": true,
+        "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+        "size_bytes": 17657
+      }
+    },
+    "development_qualification_is_not_held_out": true,
+    "empirical_benchmark_result": false,
+    "envelope_digest": "a4bc41e1b52b4ad6dba175acdcee0c3ffb86c373b2bf45ea53296251dd984c9b",
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "exit_status": 0,
+    "final_examples_scored": false,
+    "fixtures_are_qualification_only": true,
+    "held_out_scored": false,
+    "human_fields": {
+      "adjudication": "uncollected",
+      "agreement": "uncollected",
+      "disagreement": "uncollected",
+      "final_adjudication": "uncollected",
+      "independent_human_gold": false,
+      "optional_author_review": {
+        "collected": false,
+        "independent": false,
+        "label": "non-independent",
+        "may_substitute_for_empirical_evidence": false,
+        "required": false
+      },
+      "reviewed_at": "uncollected",
+      "reviewer_id": "absent"
+    },
+    "message": "Automated source-contract and policy-effect admission succeeded without reviewer identities or human labels. This is not a scored held-out study and not human gold.",
+    "permitted_claims": [
+      "source provenance/span linkage and coverage",
+      "parse/schema/structural contract conformance",
+      "source-supported narrowly defined CVE behavior",
+      "actual solver/checker outcome for encoded obligations",
+      "observed protected effects and useful work relative to frozen modeled policy",
+      "measured runtime/resource/provider usage with complete failures"
+    ],
+    "production_claim": false,
+    "reasons": [],
+    "schema": "law-to-action-automated-evidence-admission/v1",
+    "scored": false,
+    "task": "LA-027",
+    "useful_work_success_inferred_from_fixtures": false,
+    "withdrawn_without_independent_data": [
+      "expert legal source-to-rule semantic fidelity",
+      "legal applicability or validity in the world",
+      "independent human legal/security/intent validation",
+      "inter-annotator agreement or adjudicated gold accuracy",
+      "semantic correctness inferred from implementation agreement"
+    ]
+  },
+  "schema": "law-to-action-automated-admission-controls/v1"
+}

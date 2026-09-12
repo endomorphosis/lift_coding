@@ -1,0 +1,285 @@
+{
+  "allow_decision": "allow",
+  "arbitrary_generated_source_execution": false,
+  "attempts": [
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "derived_from_source_adapter": true,
+      "development_qualification": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "fixture_route": false,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "adapter": "deterministic_deontic_parser",
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "fixture_candidate": false,
+            "oracle_role": "allowed",
+            "population": "legal",
+            "source_prediction_sha256": "0e119940f872e91ad12afa5d99d6f6ec52babf937fcc6c0881d770942199bb48",
+            "split": "development",
+            "task": "LA-027-automated-scope-qualification"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "e234a028ea033a0850bc9b2886f1b3e3aa50b5562cbe79fa0f8e2b5c3418b380",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 371,
+            "payload_sha256": "092d6d5776ec6773a3835b2ba7548797b17378834074221ca5f59225bcd4c913",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 0.0003415039973333478,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "16f1e6eda54d8093caae5beebf0348ba5c416a9d277930b8cf3cdf488a2a5adb",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "production_claim": false,
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "deny",
+      "delegated": false,
+      "derived_from_source_adapter": true,
+      "development_qualification": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "fixture_route": false,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "adapter": "deterministic_deontic_parser",
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "fixture_candidate": false,
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "source_prediction_sha256": "0e119940f872e91ad12afa5d99d6f6ec52babf937fcc6c0881d770942199bb48",
+            "split": "development",
+            "task": "LA-027-automated-scope-qualification"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "7ec8fb5e0952f1d55f2d5dff6ada2e52a4e5307528829ff1cc5df4a8aaae0930",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 373,
+            "payload_sha256": "1421b6fe28c63adaee3ac89e15d3e22895a6d4f187a18e35b6101909bb6eb485",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 5.004997365176678e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "production_claim": false,
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "derived_from_source_adapter": true,
+      "development_qualification": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "fixture_route": false,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "adapter": "deterministic_deontic_parser",
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "fixture_candidate": false,
+            "oracle_role": "allowed",
+            "population": "legal",
+            "source_prediction_sha256": "0e119940f872e91ad12afa5d99d6f6ec52babf937fcc6c0881d770942199bb48",
+            "split": "development",
+            "task": "LA-027-automated-scope-qualification"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "e234a028ea033a0850bc9b2886f1b3e3aa50b5562cbe79fa0f8e2b5c3418b380",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 371,
+            "payload_sha256": "092d6d5776ec6773a3835b2ba7548797b17378834074221ca5f59225bcd4c913",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "production_claim": false,
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    }
+  ],
+  "capability_route_executed": true,
+  "deny_decision": "deny",
+  "durable_store_kind": "duckdb-file-typed-quack-owner",
+  "empirical_benchmark_result": false,
+  "enforce_route_executed": true,
+  "fixture_harness_used": false,
+  "handler_boundary_reached": true,
+  "in_memory_store": false,
+  "la008_run_py_represented_as_production": false,
+  "model_calls": 0,
+  "production_claim": false,
+  "proof_route_executed": true,
+  "schema": "law-to-action-development-e2e/v1",
+  "selected_arm": "A4",
+  "source_adapter": "deterministic_deontic_parser",
+  "source_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+  "status": "qualified_development_boundary",
+  "unguarded_effects": 1
+}

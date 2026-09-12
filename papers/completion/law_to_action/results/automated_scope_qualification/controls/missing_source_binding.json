@@ -1,0 +1,51 @@
+{
+  "admission": {
+    "admission_version": "la-027-automated-evidence/v1",
+    "admitted": false,
+    "admitted_at": "2026-09-12T15:36:56.133030Z",
+    "empirical_benchmark_result": false,
+    "envelope_digest": "015dfd6e9ec0bb6431fc4237cf28ee57a044a3428b207727ef3392584076dc46",
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "exit_status": 2,
+    "final_examples_scored": false,
+    "held_out_scored": false,
+    "human_fields": {
+      "adjudication": "uncollected",
+      "agreement": "uncollected",
+      "disagreement": "uncollected",
+      "final_adjudication": "uncollected",
+      "independent_human_gold": false,
+      "optional_author_review": {
+        "collected": false,
+        "independent": false,
+        "label": "non-independent",
+        "may_substitute_for_empirical_evidence": false,
+        "required": false
+      },
+      "reviewed_at": "uncollected",
+      "reviewer_id": "absent"
+    },
+    "message": "Automated admission refused. A failed admission is not an executed study.",
+    "production_claim": false,
+    "reasons": [
+      "missing_source_binding"
+    ],
+    "schema": "law-to-action-automated-evidence-admission/v1",
+    "scored": false,
+    "task": "LA-027",
+    "useful_work_success_inferred_from_fixtures": false
+  },
+  "check": {
+    "admitted": false,
+    "control": "missing_source_binding",
+    "exit_status": 2,
+    "expected_reason": "missing_source_binding",
+    "passed": true,
+    "reasons": [
+      "missing_source_binding"
+    ],
+    "scored": false
+  },
+  "control": "missing_source_binding",
+  "mutation": "missing_source_binding"
+}
