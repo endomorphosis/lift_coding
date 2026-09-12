@@ -1,0 +1,2423 @@
+{
+  "analysis_id": "392407da2432633405e512e2e0b17e960ed89c2a3552f4a09959e73125fc4c43",
+  "claim_limits": [
+    "Independent human agreement and source-semantic fidelity are unmeasured.",
+    "Unrun and unavailable are not measured zeros.",
+    "Teacher, reconstruction, and prover success are not original-source gold."
+  ],
+  "created_at": "2026-09-12T21:23:30.510110+00:00",
+  "excluded_from_anonymous_export": [
+    "config/environment_manifest.json",
+    "config/training_backend.json",
+    "checkpoints/native_training/manifest.json",
+    "data/native_training_teacher_manifest.json",
+    "data/teacher_manifest.json",
+    "evidence/consumer_activation.json",
+    "evidence/guidance_export.json",
+    "evidence/repair_validation.json",
+    "evidence/rollback_receipt.json",
+    "evidence/source_audit_private.json",
+    "runs/compiler_repair/results.jsonl",
+    "runs/guidance_promotion/results.jsonl",
+    "runs/native_training/manifest.json",
+    "evidence/source_audit_private.json#/private_ledger"
+  ],
+  "human_review": {
+    "fabricated": false,
+    "gold_records_with_values": 0,
+    "independent_review_collected": false
+  },
+  "large_artifacts": [
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 190,
+      "id": "minilm:1_Pooling/config.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "1_Pooling/config.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 10502,
+      "id": "minilm:README.md",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "README.md",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 612,
+      "id": "minilm:config.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "config.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 116,
+      "id": "minilm:config_sentence_transformers.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "config_sentence_transformers.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "public_model_hub_anonymous_download"
+      },
+      "bytes": 90868376,
+      "id": "minilm:model.safetensors",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "model.safetensors",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 349,
+      "id": "minilm:modules.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "modules.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 53,
+      "id": "minilm:sentence_bert_config.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "sentence_bert_config.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 112,
+      "id": "minilm:special_tokens_map.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "special_tokens_map.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 466247,
+      "id": "minilm:tokenizer.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "tokenizer.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 350,
+      "id": "minilm:tokenizer_config.json",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "tokenizer_config.json",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 231508,
+      "id": "minilm:vocab.txt",
+      "kind": "public_embedding_model_file",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "path": "vocab.txt",
+      "required_to_regenerate_reported_tables": false,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "anonymous_name": "T2-104729-final.json",
+      "bytes": 5879300067,
+      "id": "native-checkpoint:T2-104729-final.json",
+      "kind": "native_training_state",
+      "required_to_regenerate_reported_tables": false,
+      "scientific_completion_admitted": false,
+      "sha256": "a7128b133296bbfb18c5d92e85da088f1e1d57cd5a87ad2147a48efb57217932"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "anonymous_name": "T2-130363-final.json",
+      "bytes": 5879301981,
+      "id": "native-checkpoint:T2-130363-final.json",
+      "kind": "native_training_state",
+      "required_to_regenerate_reported_tables": false,
+      "scientific_completion_admitted": false,
+      "sha256": "7ea1f7a8e11d65958fa1900069471e1367c67bfb750091af0488b763f2a8c828"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "anonymous_name": "T2-155921-final.json",
+      "bytes": 5879278275,
+      "id": "native-checkpoint:T2-155921-final.json",
+      "kind": "native_training_state",
+      "required_to_regenerate_reported_tables": false,
+      "scientific_completion_admitted": false,
+      "sha256": "cdd3f96c6bea69f864fe59760703f1de1f426f04713bddfd0ec40fda6d38b18d"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "anonymous_name": "T3-104729-final.json",
+      "bytes": 5879326750,
+      "id": "native-checkpoint:T3-104729-final.json",
+      "kind": "native_training_state",
+      "required_to_regenerate_reported_tables": false,
+      "scientific_completion_admitted": false,
+      "sha256": "324e0488bf71b87124d431fd4b7099d6f5a7b4fc45b0c537e524c611f4d13dd0"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "anonymous_name": "T3-130363-final.json",
+      "bytes": 5879328664,
+      "id": "native-checkpoint:T3-130363-final.json",
+      "kind": "native_training_state",
+      "required_to_regenerate_reported_tables": false,
+      "scientific_completion_admitted": false,
+      "sha256": "bd76ef019fbdc97c57dc56d05359c875aac9887e21f835af4c5d483ec104794e"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "anonymous_name": "T3-155921-final.json",
+      "bytes": 5879304958,
+      "id": "native-checkpoint:T3-155921-final.json",
+      "kind": "native_training_state",
+      "required_to_regenerate_reported_tables": false,
+      "scientific_completion_admitted": false,
+      "sha256": "e161f648d75653bc0e1c1515992028838ec6c96b3b87bbde0e2896bf6e809fdc"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "arm_id": "T0",
+      "bytes": null,
+      "id": "baseline-checkpoint:5975e52cd3db",
+      "kind": "sample_memory_or_codec_state",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "arm_id": "T1",
+      "bytes": null,
+      "id": "baseline-checkpoint:1a1bb5919cbc",
+      "kind": "sample_memory_or_codec_state",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "1a1bb5919cbc0808381e69de3629c3a9da2f65de88994661b0e89a0ab63feba9"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "arm_id": "T1",
+      "bytes": null,
+      "id": "baseline-checkpoint:f25507dfc60b",
+      "kind": "sample_memory_or_codec_state",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "f25507dfc60b2dd8a0093bb96c0f4633a665d1dc95713799a6349abe331f9e34"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "arm_id": "T1",
+      "bytes": null,
+      "id": "baseline-checkpoint:b628a9466f2e",
+      "kind": "sample_memory_or_codec_state",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "b628a9466f2ecd660ec674c51a5bcd9e07dde3fb30b30829908527e6fa52c0e3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 22202,
+      "id": "config/environment_manifest.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 6860,
+      "id": "config/training_backend.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 6296,
+      "id": "checkpoints/native_training/manifest.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "a6cc9c3fa78c365977c8409b9a02e479a4cce8b3b3bde8035e889e40064a9fa3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 3685,
+      "id": "data/native_training_teacher_manifest.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "3fb875b7fac796389ccbebbcbd798977fdd74e1e4198e0dda6341955c421e886"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 5692,
+      "id": "data/teacher_manifest.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 21236,
+      "id": "evidence/consumer_activation.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 161628,
+      "id": "evidence/guidance_export.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "7bf7cbe0641dfd7175922dd530f5d7a7158403a49fb6dbf508136ce0434dcbff"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 15292,
+      "id": "evidence/repair_validation.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "ef44169f2282ac27d1a632d992ee16fae55d350b2d383d1817bb0c64c836da4a"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 3664,
+      "id": "evidence/rollback_receipt.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "d95cc91cdc9e142d20e602af2aa68b8850e4fcf4f2ac6a5e515d3089a3f0e1ab"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 29578,
+      "id": "evidence/source_audit_private.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "f865eca0f686e1d179cc71c4e8a7a9c36928780468df3384b73803c9c35bd454"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 29924,
+      "id": "runs/compiler_repair/results.jsonl",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "08131ec40811ef5a3b4615c08ea0b1cf7f1b0a3446cfede8c2659a5c15794280"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 55497,
+      "id": "runs/guidance_promotion/results.jsonl",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "e2898a87f9c76ab4640b4a954fed536403fb2dd32ac2aacc94087a7ad324e373"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 42425,
+      "id": "runs/native_training/manifest.json",
+      "kind": "operator_local_or_private_ledger",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "5efe5c80e4f7e03301c6921fcc3b7505301c278934f3639889433aa19107a33d"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa",
+      "bytes": 9211,
+      "current_blob_sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa",
+      "id": "role:S01",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "18d0a4e71385f657355366c282c65c8616c2ddb5278348ca261047f5722b79f7",
+      "bytes": 36390,
+      "current_blob_sha256": "18d0a4e71385f657355366c282c65c8616c2ddb5278348ca261047f5722b79f7",
+      "id": "role:S02",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "18d0a4e71385f657355366c282c65c8616c2ddb5278348ca261047f5722b79f7"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "e537994d17982bd9b612c2535bf8a9da3dd10c356392b0ac543db5ab9a40ca2c",
+      "bytes": 13436,
+      "current_blob_sha256": "e537994d17982bd9b612c2535bf8a9da3dd10c356392b0ac543db5ab9a40ca2c",
+      "id": "role:S03",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "e537994d17982bd9b612c2535bf8a9da3dd10c356392b0ac543db5ab9a40ca2c"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "fac9c2cda82a2b076b83ffaedbcd8188916d5511d9e2aa5a13cbe5e9a978e6e3",
+      "bytes": 30716,
+      "current_blob_sha256": "fac9c2cda82a2b076b83ffaedbcd8188916d5511d9e2aa5a13cbe5e9a978e6e3",
+      "id": "role:S04",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "fac9c2cda82a2b076b83ffaedbcd8188916d5511d9e2aa5a13cbe5e9a978e6e3"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "7c4367457ff94628740cd2ecdb97b4a0c2878f99cb3206d4a05bc8d965ef0169",
+      "bytes": 3559,
+      "current_blob_sha256": "7c4367457ff94628740cd2ecdb97b4a0c2878f99cb3206d4a05bc8d965ef0169",
+      "id": "role:S05",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "7c4367457ff94628740cd2ecdb97b4a0c2878f99cb3206d4a05bc8d965ef0169"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "cdf999e4ea4b26a0ef4b5043d7567ffba1385bdc070f303f217cbef96a0e5510",
+      "bytes": 45113,
+      "current_blob_sha256": "cdf999e4ea4b26a0ef4b5043d7567ffba1385bdc070f303f217cbef96a0e5510",
+      "id": "role:S06",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "cdf999e4ea4b26a0ef4b5043d7567ffba1385bdc070f303f217cbef96a0e5510"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+      "bytes": 61446,
+      "current_blob_sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+      "id": "role:S07",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87",
+      "bytes": 34574,
+      "current_blob_sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87",
+      "id": "role:S08",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "80204883247be10831b6d2c3f831336a80bab2a00f427f6dc35f363edd96fbb2",
+      "bytes": 66185,
+      "current_blob_sha256": "80204883247be10831b6d2c3f831336a80bab2a00f427f6dc35f363edd96fbb2",
+      "id": "role:S09",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "80204883247be10831b6d2c3f831336a80bab2a00f427f6dc35f363edd96fbb2"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "2d12dff43f85c18bb20f4ac2bc878a2d2ef27a7e2b1a6dc6493b100f7138b0e0",
+      "bytes": 161001,
+      "current_blob_sha256": "2d12dff43f85c18bb20f4ac2bc878a2d2ef27a7e2b1a6dc6493b100f7138b0e0",
+      "id": "role:S10",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "2d12dff43f85c18bb20f4ac2bc878a2d2ef27a7e2b1a6dc6493b100f7138b0e0"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "e1bee6ba59b916cf02cb47cb712df2e90d02f6273abf544121ab6eae59c32c9e",
+      "bytes": 521439,
+      "current_blob_sha256": "e1bee6ba59b916cf02cb47cb712df2e90d02f6273abf544121ab6eae59c32c9e",
+      "id": "role:S11",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "e1bee6ba59b916cf02cb47cb712df2e90d02f6273abf544121ab6eae59c32c9e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "bfab64afed5c3752fbd765574102a141919f157f452a78e996564516d34b5c4a",
+      "bytes": 12069,
+      "current_blob_sha256": "bfab64afed5c3752fbd765574102a141919f157f452a78e996564516d34b5c4a",
+      "id": "role:S12",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "bfab64afed5c3752fbd765574102a141919f157f452a78e996564516d34b5c4a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "788c95fd11c79cdc0af84e7b9e278fac802e063e59d0e4689a688abad33d8a3a",
+      "bytes": 18168,
+      "current_blob_sha256": "788c95fd11c79cdc0af84e7b9e278fac802e063e59d0e4689a688abad33d8a3a",
+      "id": "role:S13",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "788c95fd11c79cdc0af84e7b9e278fac802e063e59d0e4689a688abad33d8a3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "6ce2242343fe5e3e6829bd48537eb1eabb6b7c54005da5f6f69500b9f73b905f",
+      "bytes": 1738,
+      "current_blob_sha256": "6ce2242343fe5e3e6829bd48537eb1eabb6b7c54005da5f6f69500b9f73b905f",
+      "id": "role:S15",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "6ce2242343fe5e3e6829bd48537eb1eabb6b7c54005da5f6f69500b9f73b905f"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "1eb49f79c415ccb0cbef653126c3132d07e60a2180b8b1b0706bea71d79a96b6",
+      "bytes": 10864,
+      "current_blob_sha256": "1eb49f79c415ccb0cbef653126c3132d07e60a2180b8b1b0706bea71d79a96b6",
+      "id": "role:S16",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "1eb49f79c415ccb0cbef653126c3132d07e60a2180b8b1b0706bea71d79a96b6"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "1499fdec2eb88867b122a0175fc64428239765f155d366380c98073ee4777700",
+      "bytes": 84568,
+      "current_blob_sha256": "1499fdec2eb88867b122a0175fc64428239765f155d366380c98073ee4777700",
+      "id": "role:S17",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "1499fdec2eb88867b122a0175fc64428239765f155d366380c98073ee4777700"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "a18399d2b7e07506b1ab7e5951a27271081ec411f1d29187483cab08363c0ce9",
+      "bytes": 20780,
+      "current_blob_sha256": "a18399d2b7e07506b1ab7e5951a27271081ec411f1d29187483cab08363c0ce9",
+      "id": "role:S18",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "a18399d2b7e07506b1ab7e5951a27271081ec411f1d29187483cab08363c0ce9"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "cc4048edefd664f3d8c1392fe3400c9059caf353f04b96d42d4f5b21edca9b9d",
+      "bytes": 48048,
+      "current_blob_sha256": "cc4048edefd664f3d8c1392fe3400c9059caf353f04b96d42d4f5b21edca9b9d",
+      "id": "role:S19",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "cc4048edefd664f3d8c1392fe3400c9059caf353f04b96d42d4f5b21edca9b9d"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "157dd0aa6f119cb6e9800f75c08189e86b500eca526cbeb2242bb629339077ab",
+      "bytes": 29371,
+      "current_blob_sha256": "157dd0aa6f119cb6e9800f75c08189e86b500eca526cbeb2242bb629339077ab",
+      "id": "role:S20",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "157dd0aa6f119cb6e9800f75c08189e86b500eca526cbeb2242bb629339077ab"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "4e042e5b1c163c6397bcd9fd0bccae665f8c43a95dca083403405cfa00179802",
+      "bytes": 58285,
+      "current_blob_sha256": "4e042e5b1c163c6397bcd9fd0bccae665f8c43a95dca083403405cfa00179802",
+      "id": "role:S21",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "4e042e5b1c163c6397bcd9fd0bccae665f8c43a95dca083403405cfa00179802"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd",
+      "bytes": 5745,
+      "current_blob_sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd",
+      "id": "role:S22",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f",
+      "bytes": 316101,
+      "current_blob_sha256": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31",
+      "id": "role:S23",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+      "bytes": 1371393,
+      "current_blob_sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e",
+      "id": "role:S24",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "e77289ee5e3cc80839e7679cb88848b36df97728ec5465c41b6e6e291269017e",
+      "bytes": 42863,
+      "current_blob_sha256": "e77289ee5e3cc80839e7679cb88848b36df97728ec5465c41b6e6e291269017e",
+      "id": "role:S25",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "e77289ee5e3cc80839e7679cb88848b36df97728ec5465c41b6e6e291269017e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+      "bytes": 69704,
+      "current_blob_sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a",
+      "id": "role:S26",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+      "bytes": 69704,
+      "current_blob_sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a",
+      "id": "role:S27",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e",
+      "bytes": 69704,
+      "current_blob_sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a",
+      "id": "role:S28",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "a535490dd20776d7388c600adc91034186fcbc41af32b823fa2215b11dbf6a13",
+      "bytes": 62575,
+      "current_blob_sha256": "a535490dd20776d7388c600adc91034186fcbc41af32b823fa2215b11dbf6a13",
+      "id": "role:S29",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "a535490dd20776d7388c600adc91034186fcbc41af32b823fa2215b11dbf6a13"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "9ddcb15a485fdccb7ff911dfd54e6912e34c0367200c71f3c10f3c871ee924c5",
+      "bytes": 56535,
+      "current_blob_sha256": "9ddcb15a485fdccb7ff911dfd54e6912e34c0367200c71f3c10f3c871ee924c5",
+      "id": "role:S30",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "9ddcb15a485fdccb7ff911dfd54e6912e34c0367200c71f3c10f3c871ee924c5"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+      "bytes": 1371393,
+      "current_blob_sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e",
+      "id": "role:S31",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "297560cb9ffe828b003ea913133d2f857bea0496a4b18284428a38575f36b88e",
+      "bytes": 40785,
+      "current_blob_sha256": "297560cb9ffe828b003ea913133d2f857bea0496a4b18284428a38575f36b88e",
+      "id": "role:S33",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "297560cb9ffe828b003ea913133d2f857bea0496a4b18284428a38575f36b88e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "dc0c8e8bb660d85c002d0e4354c6cb8d9926b9d31b7ac25471a7e6e26a45ca33",
+      "bytes": 31750,
+      "current_blob_sha256": "dc0c8e8bb660d85c002d0e4354c6cb8d9926b9d31b7ac25471a7e6e26a45ca33",
+      "id": "role:S34",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "dc0c8e8bb660d85c002d0e4354c6cb8d9926b9d31b7ac25471a7e6e26a45ca33"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "7e1b731561c1b73bb513eb6d51bd58acc89a87afbf2888e53b2a2aee539a86bb",
+      "bytes": 21074,
+      "current_blob_sha256": "7e1b731561c1b73bb513eb6d51bd58acc89a87afbf2888e53b2a2aee539a86bb",
+      "id": "role:S35",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "7e1b731561c1b73bb513eb6d51bd58acc89a87afbf2888e53b2a2aee539a86bb"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da",
+      "bytes": 54332,
+      "current_blob_sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da",
+      "id": "role:S36",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "55bc429e0f591ba2ded781441285d212270639b29bb33cd250f70cd2424b8261",
+      "bytes": 44224,
+      "current_blob_sha256": "55bc429e0f591ba2ded781441285d212270639b29bb33cd250f70cd2424b8261",
+      "id": "role:S37",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "55bc429e0f591ba2ded781441285d212270639b29bb33cd250f70cd2424b8261"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "8952b5258803d1067075e8f4195ca2b8b25158d9e7f8a3be9fb607773d6c7d56",
+      "bytes": 16320,
+      "current_blob_sha256": "8952b5258803d1067075e8f4195ca2b8b25158d9e7f8a3be9fb607773d6c7d56",
+      "id": "role:S38",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "8952b5258803d1067075e8f4195ca2b8b25158d9e7f8a3be9fb607773d6c7d56"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "d50a5fbb9473d7d23a227989bbde811f9a44fd6cf57429b15a57e70e4b8ea7bc",
+      "bytes": 115451,
+      "current_blob_sha256": "d50a5fbb9473d7d23a227989bbde811f9a44fd6cf57429b15a57e70e4b8ea7bc",
+      "id": "role:S39",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "d50a5fbb9473d7d23a227989bbde811f9a44fd6cf57429b15a57e70e4b8ea7bc"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "audited_blob_sha256": "da1d91e1521a4523d8949d99fa63a6bdc7a48bed932bc4877d72fa0d17423a6d",
+      "bytes": 217912,
+      "current_blob_sha256": "da1d91e1521a4523d8949d99fa63a6bdc7a48bed932bc4877d72fa0d17423a6d",
+      "id": "role:S40",
+      "kind": "s01_s40_implementation",
+      "required_to_regenerate_reported_tables": false,
+      "sha256": "da1d91e1521a4523d8949d99fa63a6bdc7a48bed932bc4877d72fa0d17423a6d"
+    }
+  ],
+  "publication": {
+    "author_hosted_url_published": false,
+    "openreview_upload": false,
+    "public_upload": false,
+    "workshop_submission": false
+  },
+  "regenerators": [
+    {
+      "path": "regenerate_tables.py",
+      "sha256": "5f442583ee03b219587a3d6cb285580d29f2c6b584be77b2c1e90afcb14f269b"
+    },
+    {
+      "path": "evaluation/analyze_results.py",
+      "sha256": "5626ff58d5b44b298bf22a3295f28b105d67a7ae714afd3c216dfecefc2b0d9a"
+    },
+    {
+      "path": "evaluation/run_benchmark.py",
+      "sha256": "b290535d18a3f3b2d92d77d663af30944ec0415a86124be5c22cf88764ab9a51"
+    }
+  ],
+  "reported_tables": {
+    "summary.json": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72",
+    "table11_training.tex": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74",
+    "table13_assistance.tex": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f",
+    "table6_pipeline.tex": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+  },
+  "reproduction": {
+    "commands": [
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-S",
+          "regenerate_tables.py",
+          "--check"
+        ],
+        "cwd": "autoformalization-anonymous-reproducibility",
+        "purpose": "Regenerate Tables 6/11/13 from frozen retained-claim records and verify SHA-256"
+      },
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-S",
+          "verify_retained_inputs.py"
+        ],
+        "cwd": "autoformalization-anonymous-reproducibility",
+        "purpose": "Locate every included retained-claim input and verify SHA-256"
+      },
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-S",
+          "papers/completion/autoformalization/evaluation/analyze_results.py",
+          "--check"
+        ],
+        "cwd": "paper-tree",
+        "purpose": "Optional replay of the AF-021 regenerator when the paper tree is present"
+      }
+    ],
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "standard_library_only": true
+  },
+  "retained_claim_inputs": [
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/config/experiment_plan.json",
+      "bytes": 13390,
+      "path": "config/experiment_plan.json",
+      "sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/config/metrics.json",
+      "bytes": 10595,
+      "path": "config/metrics.json",
+      "sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/config/pipeline_arms.json",
+      "bytes": 14607,
+      "path": "config/pipeline_arms.json",
+      "sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/config/retrieval_manifest.json",
+      "bytes": 12732,
+      "path": "config/retrieval_manifest.json",
+      "sha256": "e29612b783742628f863d736151b44eeb2e798ae5bd57d43f81d694a81db4442"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/config/structural_evidence_scope.json",
+      "bytes": 5891,
+      "path": "config/structural_evidence_scope.json",
+      "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/annotation_guidelines.md",
+      "bytes": 13748,
+      "path": "data/annotation_guidelines.md",
+      "sha256": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/annotation_packets.jsonl",
+      "bytes": 266477,
+      "path": "data/annotation_packets.jsonl",
+      "sha256": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/corpus_manifest.json",
+      "bytes": 8393,
+      "path": "data/corpus_manifest.json",
+      "sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/gold_facets.jsonl",
+      "bytes": 232900,
+      "path": "data/gold_facets.jsonl",
+      "sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/minimal_pairs.jsonl",
+      "bytes": 13548,
+      "path": "data/minimal_pairs.jsonl",
+      "sha256": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/policy_code_trace_cases.json",
+      "bytes": 14582,
+      "path": "data/policy_code_trace_cases.json",
+      "sha256": "a795f24b69860316b6f9615e145b08e208df0cd8ca76069c91f850a312ecaac7"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/proof_feedback_manifest.json",
+      "bytes": 78970,
+      "path": "data/proof_feedback_manifest.json",
+      "sha256": "fc86ebaa0f9c85895b92e8b1a21d5d15f48d19cf4fe8668c6b644218bc7538f2"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/retrieval_judgments.jsonl",
+      "bytes": 39879,
+      "path": "data/retrieval_judgments.jsonl",
+      "sha256": "0aec03a8721c36cd792f7518717af25d291e462c19721343c75c6c78628af8f5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/review_packet_schema.json",
+      "bytes": 2088,
+      "path": "data/review_packet_schema.json",
+      "sha256": "24e3356d0c812bf87601eef683a89e606d7f432175b96885360dfa4446fd4b84"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/data/splits.json",
+      "bytes": 5027,
+      "path": "data/splits.json",
+      "sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evaluation/analyze_results.py",
+      "bytes": 76029,
+      "path": "evaluation/analyze_results.py",
+      "sha256": "5626ff58d5b44b298bf22a3295f28b105d67a7ae714afd3c216dfecefc2b0d9a"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evaluation/reference_results.json",
+      "bytes": 20207,
+      "path": "evaluation/reference_results.json",
+      "sha256": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evaluation/reference_semantics.py",
+      "bytes": 18548,
+      "path": "evaluation/reference_semantics.py",
+      "sha256": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evaluation/result_schema.json",
+      "bytes": 16527,
+      "path": "evaluation/result_schema.json",
+      "sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evaluation/run_benchmark.py",
+      "bytes": 42573,
+      "path": "evaluation/run_benchmark.py",
+      "sha256": "b290535d18a3f3b2d92d77d663af30944ec0415a86124be5c22cf88764ab9a51"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/annotation_provenance.json",
+      "bytes": 8751,
+      "path": "evidence/annotation_provenance.json",
+      "sha256": "bcdc4966989032a810db60f4c1711b3f161f7e65f180134242e138e5593bdde8"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/author_feedback_status.json",
+      "bytes": 1618,
+      "path": "evidence/author_feedback_status.json",
+      "sha256": "14ce596c963c044ff825178be4c350bdbfee1fdab2da7a37ebf0bd3ccf65184b"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/bibliography_audit.md",
+      "bytes": 4779,
+      "path": "evidence/bibliography_audit.md",
+      "sha256": "d00ba63cfbd1d2a640e8711eb0efa27ca14d78fbe78dc3175764a6b921402376"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/claim_task_map.json",
+      "bytes": 6395,
+      "path": "evidence/claim_task_map.json",
+      "sha256": "b3654785359b0b6ced9fdcf04ed092f370b3b5ed337178932803da23b5d34a58"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/compiler_patch.diff",
+      "bytes": 16434,
+      "path": "evidence/compiler_patch.diff",
+      "sha256": "ba0f6874d94b86604b2410e0cc7eb762510ebd0a0da63974fa0d812ee9a7daa4"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/final_claim_audit.json",
+      "bytes": 19018,
+      "path": "evidence/final_claim_audit.json",
+      "sha256": "796a507cf4cbfe0fcc246c534c02ddcd636c769b8cde87280161d12317db05e6"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/leakage_control_report.json",
+      "bytes": 36855,
+      "path": "evidence/leakage_control_report.json",
+      "sha256": "7bd33a406cb577972da2c61b488334d5774b6b7fb00fc882d77a5e974957a5b5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/evidence/native_training/adoption_scalar_summary.json",
+      "bytes": 62573,
+      "path": "evidence/native_training/adoption_scalar_summary.json",
+      "sha256": "61506d9d94443600bb4653666cad58f5c2c2cd4abff5a13f94a6b798b0b6429f"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/checkpoints/baselines/manifest.json",
+      "bytes": 6924,
+      "path": "checkpoints/baselines/manifest.json",
+      "sha256": "b33d71df3cf66a27fba5b5470c73764e137d51d0452110f236b820fe10cefaf5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/manuscript/empirical_scope.tex",
+      "bytes": 2771,
+      "path": "manuscript/empirical_scope.tex",
+      "sha256": "84234fe84a3ef5fbfc858bc284bedd874115a1c4087854a4ccdc32fc1815c739"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/protocol.md",
+      "bytes": 6129,
+      "path": "protocol.md",
+      "sha256": "ea3caf55ec7f5076272aa6d2d374e902752a32dd99a35115ac08c8c14be56242"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/results/hypothesis_report.md",
+      "bytes": 8857,
+      "path": "results/hypothesis_report.md",
+      "sha256": "1bc1e0be14eb9c42fd20418adcd0f9b9127897f1dc940bc91539871e1d45d596"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/results/summary.json",
+      "bytes": 84488,
+      "path": "results/summary.json",
+      "sha256": "62e63725fe02f4ac9f9c5a3b397d0b2d9f9d7a1e25fc87e9eb7fdc21cb01cc72"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/results/table11_training.tex",
+      "bytes": 2442,
+      "path": "results/table11_training.tex",
+      "sha256": "dcb2582f2c091a48b3c26bb1b1698e1287d70d77cc2c3824b4f1f822bd2d6e74"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/results/table13_assistance.tex",
+      "bytes": 2205,
+      "path": "results/table13_assistance.tex",
+      "sha256": "655dfb58c0c1a960b636dbe35292ee243fbcb197fad1108f8a047742e2f62d3f"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/results/table6_pipeline.tex",
+      "bytes": 2095,
+      "path": "results/table6_pipeline.tex",
+      "sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/bridge_validation/results.jsonl",
+      "bytes": 34638,
+      "path": "runs/bridge_validation/results.jsonl",
+      "sha256": "335b4c5bdcfe68f50ce7e2824b9aa84e21db3267375450be585cb9e32eed64b3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/costs/results.jsonl",
+      "bytes": 135630,
+      "path": "runs/costs/results.jsonl",
+      "sha256": "b88164010ceb36b075aa55356dbd0b5a1dccd3f498ee84ec7407339c22e835ff"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/domain_transfer/results.jsonl",
+      "bytes": 84375,
+      "path": "runs/domain_transfer/results.jsonl",
+      "sha256": "5f3f64a4148d9e49d075f11e0acd40c1a15e4a9fbb3522a43b29ae50be1cc510"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/native_training/results.jsonl",
+      "bytes": 251025,
+      "path": "runs/native_training/results.jsonl",
+      "sha256": "cebf2f713129f116144fcbad3816d74cf1de60b6444eec3024c999d7dafe8ffb"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/pipeline_comparison/manifest.json",
+      "bytes": 32616,
+      "path": "runs/pipeline_comparison/manifest.json",
+      "sha256": "8065804d1f466f691117e15eff901ffa7db254fec7ad8425a268f28a7dd2e474"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/pipeline_comparison/results.jsonl",
+      "bytes": 258720,
+      "path": "runs/pipeline_comparison/results.jsonl",
+      "sha256": "f09a8435512ba4effb1365e0433a9345d1535f77b769df15515d8f92663a4acd"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/planning/results.jsonl",
+      "bytes": 302558,
+      "path": "runs/planning/results.jsonl",
+      "sha256": "b5f33709fca971cdd02714fac95704cae63c47e2539e184200b68ac875aa0619"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/premise_selection/results.jsonl",
+      "bytes": 36767,
+      "path": "runs/premise_selection/results.jsonl",
+      "sha256": "de98935565458daed6b3119f9c4f452ae307b0ebaf503c0dafb9948d9bea59d9"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/proof_assistance/results.jsonl",
+      "bytes": 152364,
+      "path": "runs/proof_assistance/results.jsonl",
+      "sha256": "c4fc126f3a63652b5f91e70bd2eb1632ad765d614d3ad73eb509cd5841751fc1"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/proof_heads/results.jsonl",
+      "bytes": 36214,
+      "path": "runs/proof_heads/results.jsonl",
+      "sha256": "b5f27d956dcd3dd8846f986ca5b5c9c2dbef68bd598c96de81dfb7409aefada5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/retrieval/results.jsonl",
+      "bytes": 149749,
+      "path": "runs/retrieval/results.jsonl",
+      "sha256": "3d07de27b8ecec162c7e4a6ec88e6f274e846c381839bd4d23fcef513b78a1f4"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/training_baselines/manifest.json",
+      "bytes": 8751,
+      "path": "runs/training_baselines/manifest.json",
+      "sha256": "af982b68966b219a7e4bad45acb7c42db30f6665073db1992d266f981178a99b"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/runs/training_baselines/results.jsonl",
+      "bytes": 244779,
+      "path": "runs/training_baselines/results.jsonl",
+      "sha256": "9e56dfd66e290697fafac77726d7c14aff739a42cb279db2594eacb311e5d1f6"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/native_training_notes.json",
+      "bytes": 670,
+      "path": "frozen/native_training_notes.json",
+      "sha256": "37401ebe8715606159348d6ec40051f0c3dea7b8bfdce034369a011ffd11f246"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "frozen/environment_pin.json",
+      "bytes": 3035,
+      "path": "frozen/environment_pin.json",
+      "sha256": "375d66892164d555e8eac38d1f40402ea4eeb60106e076025611bcc1cdc07bea"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "regenerate_tables.py",
+      "bytes": 8777,
+      "path": "regenerate_tables.py",
+      "sha256": "5f442583ee03b219587a3d6cb285580d29f2c6b584be77b2c1e90afcb14f269b"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "strategy": "included_in_supplement"
+      },
+      "bundle_path": "verify_retained_inputs.py",
+      "bytes": 2122,
+      "path": "verify_retained_inputs.py",
+      "sha256": "7e9f1251d0f964be130b899f1a7d014b2bec1233784b500562c0ce3aa345d04b"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 190,
+      "path": "minilm:1_Pooling/config.json",
+      "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 10502,
+      "path": "minilm:README.md",
+      "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 612,
+      "path": "minilm:config.json",
+      "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 116,
+      "path": "minilm:config_sentence_transformers.json",
+      "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "public_model_hub_anonymous_download"
+      },
+      "bytes": 90868376,
+      "path": "minilm:model.safetensors",
+      "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 349,
+      "path": "minilm:modules.json",
+      "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 53,
+      "path": "minilm:sentence_bert_config.json",
+      "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 112,
+      "path": "minilm:special_tokens_map.json",
+      "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 466247,
+      "path": "minilm:tokenizer.json",
+      "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 350,
+      "path": "minilm:tokenizer_config.json",
+      "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded_by_this_package",
+        "reviewer_access": "Anonymous download of the public sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 with the listed file checksum. No author-hosted URL is published.",
+        "strategy": "included_in_supplement"
+      },
+      "bytes": 231508,
+      "path": "minilm:vocab.txt",
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5879300067,
+      "path": "native-checkpoint:T2-104729-final.json",
+      "sha256": "a7128b133296bbfb18c5d92e85da088f1e1d57cd5a87ad2147a48efb57217932"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5879301981,
+      "path": "native-checkpoint:T2-130363-final.json",
+      "sha256": "7ea1f7a8e11d65958fa1900069471e1367c67bfb750091af0488b763f2a8c828"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5879278275,
+      "path": "native-checkpoint:T2-155921-final.json",
+      "sha256": "cdd3f96c6bea69f864fe59760703f1de1f426f04713bddfd0ec40fda6d38b18d"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5879326750,
+      "path": "native-checkpoint:T3-104729-final.json",
+      "sha256": "324e0488bf71b87124d431fd4b7099d6f5a7b4fc45b0c537e524c611f4d13dd0"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5879328664,
+      "path": "native-checkpoint:T3-130363-final.json",
+      "sha256": "bd76ef019fbdc97c57dc56d05359c875aac9887e21f835af4c5d483ec104794e"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "States exceed the 100 MB supplement limit. Exact SHA-256 values are recorded. Bytes may be provided through the venue anonymous channel on request. They are not required to regenerate reported Tables 6/11/13.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5879304958,
+      "path": "native-checkpoint:T3-155921-final.json",
+      "sha256": "e161f648d75653bc0e1c1515992028838ec6c96b3b87bbde0e2896bf6e809fdc"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": null,
+      "path": "baseline-checkpoint:5975e52cd3db",
+      "sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": null,
+      "path": "baseline-checkpoint:1a1bb5919cbc",
+      "sha256": "1a1bb5919cbc0808381e69de3629c3a9da2f65de88994661b0e89a0ab63feba9"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": null,
+      "path": "baseline-checkpoint:f25507dfc60b",
+      "sha256": "f25507dfc60b2dd8a0093bb96c0f4633a665d1dc95713799a6349abe331f9e34"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Checkpoint identity is the SHA-256 recorded in the baseline manifest. Raw state files are not in the supplement. Table 11 held-out fidelity remains unmeasured.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": null,
+      "path": "baseline-checkpoint:b628a9466f2e",
+      "sha256": "b628a9466f2ecd660ec674c51a5bcd9e07dde3fb30b30829908527e6fa52c0e3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 22202,
+      "path": "config/environment_manifest.json",
+      "sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 6860,
+      "path": "config/training_backend.json",
+      "sha256": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 6296,
+      "path": "checkpoints/native_training/manifest.json",
+      "sha256": "a6cc9c3fa78c365977c8409b9a02e479a4cce8b3b3bde8035e889e40064a9fa3"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 3685,
+      "path": "data/native_training_teacher_manifest.json",
+      "sha256": "3fb875b7fac796389ccbebbcbd798977fdd74e1e4198e0dda6341955c421e886"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 5692,
+      "path": "data/teacher_manifest.json",
+      "sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 21236,
+      "path": "evidence/consumer_activation.json",
+      "sha256": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 161628,
+      "path": "evidence/guidance_export.json",
+      "sha256": "7bf7cbe0641dfd7175922dd530f5d7a7158403a49fb6dbf508136ce0434dcbff"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 15292,
+      "path": "evidence/repair_validation.json",
+      "sha256": "ef44169f2282ac27d1a632d992ee16fae55d350b2d383d1817bb0c64c836da4a"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 3664,
+      "path": "evidence/rollback_receipt.json",
+      "sha256": "d95cc91cdc9e142d20e602af2aa68b8850e4fcf4f2ac6a5e515d3089a3f0e1ab"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 29578,
+      "path": "evidence/source_audit_private.json",
+      "sha256": "f865eca0f686e1d179cc71c4e8a7a9c36928780468df3384b73803c9c35bd454"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 29924,
+      "path": "runs/compiler_repair/results.jsonl",
+      "sha256": "08131ec40811ef5a3b4615c08ea0b1cf7f1b0a3446cfede8c2659a5c15794280"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 55497,
+      "path": "runs/guidance_promotion/results.jsonl",
+      "sha256": "e2898a87f9c76ab4640b4a954fed536403fb2dd32ac2aacc94087a7ad324e373"
+    },
+    {
+      "access": {
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Original bytes contain operator-local paths or the private S01-S40 ledger. They are withheld from the anonymous ZIP. The SHA-256 is recorded. Table regeneration uses the included frozen results and clean manifests.",
+        "strategy": "excluded_operator_local_paths"
+      },
+      "bytes": 42425,
+      "path": "runs/native_training/manifest.json",
+      "sha256": "5efe5c80e4f7e03301c6921fcc3b7505301c278934f3639889433aa19107a33d"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 9211,
+      "path": "role:S01",
+      "sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 36390,
+      "path": "role:S02",
+      "sha256": "18d0a4e71385f657355366c282c65c8616c2ddb5278348ca261047f5722b79f7"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 13436,
+      "path": "role:S03",
+      "sha256": "e537994d17982bd9b612c2535bf8a9da3dd10c356392b0ac543db5ab9a40ca2c"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 30716,
+      "path": "role:S04",
+      "sha256": "fac9c2cda82a2b076b83ffaedbcd8188916d5511d9e2aa5a13cbe5e9a978e6e3"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 3559,
+      "path": "role:S05",
+      "sha256": "7c4367457ff94628740cd2ecdb97b4a0c2878f99cb3206d4a05bc8d965ef0169"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 45113,
+      "path": "role:S06",
+      "sha256": "cdf999e4ea4b26a0ef4b5043d7567ffba1385bdc070f303f217cbef96a0e5510"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 61446,
+      "path": "role:S07",
+      "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 34574,
+      "path": "role:S08",
+      "sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 66185,
+      "path": "role:S09",
+      "sha256": "80204883247be10831b6d2c3f831336a80bab2a00f427f6dc35f363edd96fbb2"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 161001,
+      "path": "role:S10",
+      "sha256": "2d12dff43f85c18bb20f4ac2bc878a2d2ef27a7e2b1a6dc6493b100f7138b0e0"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 521439,
+      "path": "role:S11",
+      "sha256": "e1bee6ba59b916cf02cb47cb712df2e90d02f6273abf544121ab6eae59c32c9e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 12069,
+      "path": "role:S12",
+      "sha256": "bfab64afed5c3752fbd765574102a141919f157f452a78e996564516d34b5c4a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 18168,
+      "path": "role:S13",
+      "sha256": "788c95fd11c79cdc0af84e7b9e278fac802e063e59d0e4689a688abad33d8a3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 1738,
+      "path": "role:S15",
+      "sha256": "6ce2242343fe5e3e6829bd48537eb1eabb6b7c54005da5f6f69500b9f73b905f"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 10864,
+      "path": "role:S16",
+      "sha256": "1eb49f79c415ccb0cbef653126c3132d07e60a2180b8b1b0706bea71d79a96b6"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 84568,
+      "path": "role:S17",
+      "sha256": "1499fdec2eb88867b122a0175fc64428239765f155d366380c98073ee4777700"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 20780,
+      "path": "role:S18",
+      "sha256": "a18399d2b7e07506b1ab7e5951a27271081ec411f1d29187483cab08363c0ce9"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 48048,
+      "path": "role:S19",
+      "sha256": "cc4048edefd664f3d8c1392fe3400c9059caf353f04b96d42d4f5b21edca9b9d"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 29371,
+      "path": "role:S20",
+      "sha256": "157dd0aa6f119cb6e9800f75c08189e86b500eca526cbeb2242bb629339077ab"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 58285,
+      "path": "role:S21",
+      "sha256": "4e042e5b1c163c6397bcd9fd0bccae665f8c43a95dca083403405cfa00179802"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 5745,
+      "path": "role:S22",
+      "sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 316101,
+      "path": "role:S23",
+      "sha256": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 1371393,
+      "path": "role:S24",
+      "sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 42863,
+      "path": "role:S25",
+      "sha256": "e77289ee5e3cc80839e7679cb88848b36df97728ec5465c41b6e6e291269017e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 69704,
+      "path": "role:S26",
+      "sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 69704,
+      "path": "role:S27",
+      "sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 69704,
+      "path": "role:S28",
+      "sha256": "88ec503eac1ec43c95c5bdaf85e664b949a171d2666c9349f9952c7446e79f3a"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 62575,
+      "path": "role:S29",
+      "sha256": "a535490dd20776d7388c600adc91034186fcbc41af32b823fa2215b11dbf6a13"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 56535,
+      "path": "role:S30",
+      "sha256": "9ddcb15a485fdccb7ff911dfd54e6912e34c0367200c71f3c10f3c871ee924c5"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 1371393,
+      "path": "role:S31",
+      "sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 40785,
+      "path": "role:S33",
+      "sha256": "297560cb9ffe828b003ea913133d2f857bea0496a4b18284428a38575f36b88e"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 31750,
+      "path": "role:S34",
+      "sha256": "dc0c8e8bb660d85c002d0e4354c6cb8d9926b9d31b7ac25471a7e6e26a45ca33"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 21074,
+      "path": "role:S35",
+      "sha256": "7e1b731561c1b73bb513eb6d51bd58acc89a87afbf2888e53b2a2aee539a86bb"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 54332,
+      "path": "role:S36",
+      "sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 44224,
+      "path": "role:S37",
+      "sha256": "55bc429e0f591ba2ded781441285d212270639b29bb33cd250f70cd2424b8261"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 16320,
+      "path": "role:S38",
+      "sha256": "8952b5258803d1067075e8f4195ca2b8b25158d9e7f8a3be9fb607773d6c7d56"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 115451,
+      "path": "role:S39",
+      "sha256": "d50a5fbb9473d7d23a227989bbde811f9a44fd6cf57429b15a57e70e4b8ea7bc"
+    },
+    {
+      "access": {
+        "included_in_supplement": false,
+        "publication_status": "not_uploaded",
+        "reviewer_access": "Content-addressed implementation bytes may be provided through the venue's anonymous supplementary channel on request. No public URL is published.",
+        "strategy": "hash_bound_anonymous_artifact_store_on_request"
+      },
+      "bytes": 217912,
+      "path": "role:S40",
+      "sha256": "da1d91e1521a4523d8949d99fa63a6bdc7a48bed932bc4877d72fa0d17423a6d"
+    }
+  ],
+  "s01_s40": {
+    "map": "S01_S40_map.json",
+    "private_ledger_excluded": true,
+    "role_count": 40
+  },
+  "schema": "autoformalization-anonymous-artifact-manifest/v1",
+  "task_id": "AF-023",
+  "visibility": "anonymous-submission",
+  "workshop_limits": {
+    "supplement_zip_max_bytes": 104857600,
+    "transport_zip_max_bytes": 16000000
+  }
+}
