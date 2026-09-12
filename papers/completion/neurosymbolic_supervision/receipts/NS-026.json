@@ -1,0 +1,187 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-026",
+  "status": "complete",
+  "completed_at": "2026-09-12T06:13:06.559051+00:00",
+  "completion_scope": "Admitted development Grok 4.6 HTTPS gateway, pinned historical materialization, independent historical scorer, resume/unknown-effect checks, and NS-016 freeze handoff. Not a Terra HIGH production admission, not a pilot/final A-D result, and not an independently attested human judgment.",
+  "source_versions": {
+    "workspace_git_head": "f9aba72dfd502752194c6af9cce7093b8d073656",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3",
+    "protocol_id": "ns-core-v1",
+    "ns004_protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+    "amendment_id": "ns-026-dev-grok-4.6-https-v1",
+    "run_comparison_sha256": "4b6d3a8fa330539e84da0c7e7c6f64d310c0605606d512f22c2ea690a923326d",
+    "score_runs_sha256": "fe8f9bf5020e648240149df1b79d6f3072a9d871bc27c16b34df747e96a46232",
+    "production_gateway_sha256": "7092d20eca3c081028782f396f889e53705bfa7d3b6007588d9ed13f56bf4925",
+    "served_provider": "xai",
+    "served_model": "grok-4.6",
+    "served_revision": "fp_e41c6060b2628547"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/audit/production_readiness.json": "e6c380de8e326c1a6c1a08e787df51820b0ab8d4052258bd3365f503a5111c96",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/README.md": "4cd489ef78f28cbd55119d24da44f86de6465f398f7cd41be7c117eae5145bad",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/production_gateway.py": "7092d20eca3c081028782f396f889e53705bfa7d3b6007588d9ed13f56bf4925",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/production_profile.json": "b88b64f10b588786f6902430c57bb0fd240e052e6b5845681fcf81fddaad8fd2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/run_comparison.py": "4b6d3a8fa330539e84da0c7e7c6f64d310c0605606d512f22c2ea690a923326d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/score_runs.py": "fe8f9bf5020e648240149df1b79d6f3072a9d871bc27c16b34df747e96a46232",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/protocol/development_provider_amendment.json": "d03ee696afcd705366b2b0f85dd8f6e9a12ede0984fdb7e47f7310954182f372",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/README.md": "d792bc4a324485664e0ddaffce65156712b3950e4297ec0de2397e587550544c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/attempt.json": "5b67d3bd197f6c8cbb2eb82056145182add14e413a53518db1e90e69e86618c1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/campaign.json": "c14456ab71c0fbbef0dd2d0264b24f88196573049ada490931d7bc3989380791",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/resume.json": "37036175e5abd7959497ed653f6fe3835bf68c6bd0a06ce8ec7b5348b9da873a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/scored.json": "07c9fce2d23453e87191eaccb91dbbfa9e4a0d8324c530a4fcf44850017b0684",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/stdout.log": "e75cfeca1b4cbbd95cbc5fb0776a67ee2f9e766a4d698fbb69022cce12664a39",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/baseline.json": "4a8c9fcf28cbd3e7a873eaf7234f137d35b31c9db5c9593da92df0a655ea2dce",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/full_materialize.json": "b01c2483c042583a74e4e1ea72611735cd75ca2268ffaa4f8cb283dc5e2407b0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/isolation_canary.json": "69bc9451651736d622cb043816d744af5f96620610a6ee345f8f68ae4abc4936",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/materialize.json": "3b9a492217279b21d8b4124ae76dbfedd589473b90f62cd4b5d9bb90b1792ebd",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/proposal_export_scan.json": "3d2d03b5f25a170712c81b6342871b8ee0f338d431bb72fc038fbbba86c04525",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/README.md": "6e542e71b507970d9a23cf92ccdc41a2d0451ae0b71496db5072cf89cdb2d325",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/client.py": "a55859f04f324ead153472a5e85e91add107c5f1e52f7af4d591bea4dd2079a7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/development_provider_amendment.json": "f76dbac799205979d6ccc647972ea7bad8dcc225fc3e09e76778c3dd3ab29003",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/offer.json": "9a82d6f93d88750b9c305e9dde6c13ed06cb24993ab915e1ccce875bbcb204ed",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/public.pem": "ed8d02bd30478389a913d54adac704959c92471f979135afd10849e2dd3050cc",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/request.json": "e6bd3bb86edf8835fedef0131df5836b4d2e8c8fa74c12d1942903a2b83f4f6a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/response.json": "9a66d5e235b5c4d07e62af1e8df9014b8cefd10321ec0102ebd2279f39763c0b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/probe.json": "79c8f6b3d18ea593280bb67849eeb5ac48e0dcbc5809b161d4b295d998bfa8c5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/qualification_report.json": "d0b0fb16908f8341e859419ff62d3030dbedcf1b7ada84aad3a65b9c7bbaa2d5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/crash_campaign.json": "866db6473e24e05ee872e7ec93acbe0aee8bdc35c9beb7dd4e4b1df8f69aae26",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/resumed.json": "c4448f4882944cc3ed7f4665f4df51d4fdaf2fe8ba26d4a5ba3456c62c969b1d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/unknown_production.json": "902fc83bc78fe6ea94629d23aac99212f2bddecaa253f9aa141ae127334f7796",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/run_qualification.py": "5d83d4714a38a7729a41c88965ff7d644b507d3a0676f1117abd2587b0ddf1b8",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/bindings.json": "f4ae00d277adbab6f0dca21883ea9b41b86c6767ee00eb7454036ba03b767acb",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/historical_scored.json": "7683e8df13fe588607f8978a0946e8525b66c817022e96474e61058ecd48e4c3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/historical_sealed_unsolved.json": "9f612cbc30ac18b925d0060a60e4187bef5b4052bc80d3b04c55caf94c7aca07",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/production_admission_path.json": "bb5d315b8794f467c5cf15df41eefbbf19c89d940ac4498869e854528ab1f9dd",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/production_admission_path.scored.json": "e2faaee0d07dd25d265bfc25436b49bb6f06ee5da7aff0176ba68b8eca967591",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/validate_production_provider.py": "0863ab4490459ab3eafe2e3209a9b42e00f68923d8436211c91e1e8972b08fee",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification.log": "2eb28dab75db0142fa7144ff3b0069fb03a4141dc4621845b1f972b5903dfd3c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/validation.log": "b619a0ca4a746b67418450eea9e4506d635e84a6be7ac077ebd6924db10810fb"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/run_comparison.py",
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/score_runs.py",
+    "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/production_gateway.py",
+    "papers/completion/neurosymbolic_supervision/experiments/production_profile.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/production_profile.json",
+    "papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/protocol/development_provider_amendment.json",
+    "papers/completion/neurosymbolic_supervision/experiments/README.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/README.md",
+    "papers/completion/neurosymbolic_supervision/audit/production_readiness.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/audit/production_readiness.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/README.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/README.md",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/development_invocation/attempt.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/attempt.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/development_invocation/campaign.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/campaign.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/development_invocation/resume.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/resume.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/development_invocation/scored.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/scored.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/development_invocation/stderr.log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/stderr.log",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/development_invocation/stdout.log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/stdout.log",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical/baseline.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/baseline.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical/full_materialize.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/full_materialize.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical/isolation_canary.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/isolation_canary.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical/materialize.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/materialize.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/historical/proposal_export_scan.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/proposal_export_scan.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/README.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/README.md",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/client.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/client.py",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/development_provider_amendment.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/development_provider_amendment.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/offer.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/offer.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/public.pem": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/public.pem",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/request.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/request.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/response.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/host_handoff/response.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/probe.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/probe.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/qualification_report.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/qualification_report.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/resume/crash_campaign.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/crash_campaign.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/resume/resumed.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/resumed.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/resume/unknown_production.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/unknown_production.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/run_qualification.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/run_qualification.py",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/scorer/bindings.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/bindings.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/scorer/historical_scored.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/historical_scored.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/scorer/historical_sealed_unsolved.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/historical_sealed_unsolved.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/scorer/production_admission_path.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/production_admission_path.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/scorer/production_admission_path.scored.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/production_admission_path.scored.json",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/validate_production_provider.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/validate_production_provider.py"
+  },
+  "criteria": [
+    {
+      "criterion": "One actual development provider invocation produces an independently scored retained repair or honest failure with real served identity, dispatch/effect receipt, source preimage, timing, token/cost availability and stage failures; a development stub is not sufficient.",
+      "status": "met",
+      "explanation": "Frozen amendment ns-026-dev-grok-4.6-https-v1 dispatched one HTTPS completion to api.x.ai before any stub was used as the qualification provider. Served identity was provider=xai model=grok-4.6 revision=fp_e41c6060b2628547 runtime_receipt_id=8d3a4325-d9b5-92f1-925a-5113276ea183. logical_effect_id=f7ae9ec5d301694ba79e2d6568916b68ee86d6ab5796a206fbf71900740b9272, dispatched=true, simulated=false, admitted_production=false, possibly_charged=true. Source preimage 4a9a8dc13cf403dc7f17fe059737ee70ed5c029c822dbaf9be4894d9e72d8986. input_tokens=793 actual, output_tokens=26 actual, reasoning_tokens=42 actual; provider_charge unavailable with API ticks disclosed. active_elapsed_seconds=7.499710680916905 from time.perf_counter. Stages recorded: index_context, provider, fixture_setup, fixture_call, fixture_teardown, proof_generate, proof_verify, persist_seal, cold_scoring. Independent scorer ns-026-independent-historical-scorer passed hidden tests on the sealed candidate (terminal_state=solved). This is not ns-006-deterministic-dev-stub.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/attempt.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/scored.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/protocol/development_provider_amendment.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/qualification_report.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/production_gateway.py"
+      ]
+    },
+    {
+      "criterion": "Historical materialization uses exact pinned upstream pre-fix sources and nonempty unchanged baselines; proposal exports exclude scorer payloads, final labels, original Git objects and fixed-commit content, with an actual boundary/canary qualification.",
+      "status": "met",
+      "explanation": "ns-hist-01-xmltodict was materialized from the GitHub tarball of pre_fix_commit 75a17701db20d5d3ec2ea1f6c901cf2211011eb5, archive_sha256=72e6f909de6a20c7700a2398dcf9587a7d9263be68b6bd50361f2a375f909fda matching the NS-005 pin, xmltodict.py sha256=7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63. Caller git was not used. Proposal export contained only ['xmltodict.py'], git_present=False, no scorer_only payload. Unchanged baseline pytest on three pre-fix visible nodes exited 0 on the unmodified tree. A canary sandbox containing the scorer_only path was rejected by inspect_isolation.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/materialize.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/proposal_export_scan.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/baseline.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/historical/isolation_canary.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/production_gateway.py"
+      ]
+    },
+    {
+      "criterion": "The independent scorer consumes separately retained oracle material only after the proposal is sealed, verifies source/prediction/receipt bindings, and can admit actual production outcomes without blanket-refusal or fixture substitution.",
+      "status": "met",
+      "explanation": "score_runs.py loads NS-005 scorer_only oracles only after the attempt JSON is sealed. A sealed historical candidate for ns-hist-01-xmltodict reconstructed hidden tests from fix_commit and executed them; oracle status=failed candidate_valid=False scorer_id=ns-026-independent-historical-scorer. This is an honest FAIL_TO_PASS miss on the unchanged pre-fix file, not an NS-006 blanket live refusal and not a fixture substitution. The scorer admission path no longer returns unavailable solely because live_repair_admitted is true; production outcomes can be admitted when admitted_production is true and hidden tests pass.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/historical_scored.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/bindings.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/scorer/production_admission_path.scored.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/scored.json"
+      ]
+    },
+    {
+      "criterion": "Resume/retry tests preserve consumed/unknown effects and prohibit duplicate model dispatch; provider and scorer source pins, budgets and executable run instructions are ready for NS-016 freeze.",
+      "status": "met",
+      "explanation": "Re-running the admitted development schedule unit replayed the published receipt with provider_effects_dispatched=1 and replayed=true. A stub crash-after-provider resume kept provider_effects_dispatched=1. The production path for ns-hist-01-xmltodict remained not solved and not admitted. NS-016 freeze handoff records gateway/runner/scorer pins, NS-004 budgets, and executable probe/one-task/score/materialize commands in production_readiness.json and experiments/README.md.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/campaign.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/development_invocation/resume.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/crash_campaign.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/resume/unknown_production.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/audit/production_readiness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/experiments/README.md"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/run_qualification.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/run_qualification.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification.log",
+      "started_at": "2026-09-12T06:10:26.723839+00:00",
+      "finished_at": "2026-09-12T06:10:53.788753+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/validate_production_provider.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/qualification/production_provider/validate_production_provider.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-026/validation.log",
+      "started_at": "2026-09-12T06:13:06.559051+00:00",
+      "finished_at": "2026-09-12T06:13:06.559051+00:00"
+    }
+  ],
+  "limitations": [
+    "Terra HIGH / Codex production is not admitted; NS-016 still owns the pilot and final freeze.",
+    "provider_charge is unavailable; API cost_in_usd_ticks are disclosed but are not a settlement receipt.",
+    "Docker container isolation is unavailable in the sealed validation profile.",
+    "Independent human judgments remain pending as stated in the paper evidence note.",
+    "This is not a frozen final A-D scientific result."
+  ]
+}

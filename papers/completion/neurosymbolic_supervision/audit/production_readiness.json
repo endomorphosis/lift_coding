@@ -1,0 +1,53 @@
+{
+  "development_amendment_id": "ns-026-dev-grok-4.6-https-v1",
+  "development_invocation": {
+    "logical_effect_id": "f7ae9ec5d301694ba79e2d6568916b68ee86d6ab5796a206fbf71900740b9272",
+    "runtime_receipt_id": "8d3a4325-d9b5-92f1-925a-5113276ea183",
+    "served_model": "grok-4.6",
+    "served_provider": "xai",
+    "served_revision": "fp_e41c6060b2628547",
+    "terminal_state": "solved"
+  },
+  "human_judgments_pending": true,
+  "not_a_final_ad_result": true,
+  "ns004_terra_high_available": false,
+  "ns016_freeze_ready": {
+    "amendment_pin": "papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json",
+    "blocking": [
+      "Terra HIGH native route unavailable in the sealed validation profile",
+      "No independently verified fresh Grok quota exhaustion",
+      "NS-016 must freeze actual pilot served identity before final A-D"
+    ],
+    "budgets": {
+      "active_unit_wall_seconds_max": 300,
+      "admitted_patch_bytes_max": 16384,
+      "pre_final_boundary_provider_effects_reserved": 64,
+      "proposal_effects_per_unit": 1,
+      "provider_wall_seconds_max": 180,
+      "request_serialized_bytes_max": 65536
+    },
+    "oracle_store": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/",
+    "profile_pin": "papers/completion/neurosymbolic_supervision/experiments/production_profile.json",
+    "provider_source_pin": "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+    "run_instructions": [
+      "python3 papers/completion/neurosymbolic_supervision/experiments/production_gateway.py probe --out $OUT/probe.json",
+      "python3 papers/completion/neurosymbolic_supervision/experiments/run_comparison.py one-task --task-id ns-dev-boundary-add --arm A --cache local_cold --repetition 0 --record-kind development --path development --admitted-provider --ledger $LEDGER --out $OUT/dev-actual.json",
+      "python3 papers/completion/neurosymbolic_supervision/experiments/score_runs.py --attempt $OUT/dev-actual.json --out $OUT/dev-actual.rescored.json",
+      "python3 papers/completion/neurosymbolic_supervision/experiments/production_gateway.py materialize --task-id ns-hist-01-xmltodict --mode proposal --store $STORE --dest $DEST --out $OUT/materialize.json"
+    ],
+    "runner_source_pin": "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+    "scorer_source_pin": "papers/completion/neurosymbolic_supervision/experiments/score_runs.py"
+  },
+  "ns016_still_owns_pilot_and_final": true,
+  "production_admitted": false,
+  "schema": "paper-ns-production-readiness/v1",
+  "source_hashes": {
+    "development_provider_amendment.json": "d03ee696afcd705366b2b0f85dd8f6e9a12ede0984fdb7e47f7310954182f372",
+    "production_gateway.py": "7092d20eca3c081028782f396f889e53705bfa7d3b6007588d9ed13f56bf4925",
+    "production_profile.json": "b88b64f10b588786f6902430c57bb0fd240e052e6b5845681fcf81fddaad8fd2",
+    "run_comparison.py": "4b6d3a8fa330539e84da0c7e7c6f64d310c0605606d512f22c2ea690a923326d",
+    "score_runs.py": "fe8f9bf5020e648240149df1b79d6f3072a9d871bc27c16b34df747e96a46232"
+  },
+  "task_id": "NS-026",
+  "written_at": "2026-09-12T06:11:41.990257+00:00"
+}

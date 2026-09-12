@@ -1,0 +1,178 @@
+{
+  "ok": true,
+  "started_at": "2026-09-12T06:10:26.723839+00:00",
+  "finished_at": "2026-09-12T06:10:53.788753+00:00",
+  "checks": [
+    {
+      "name": "production_not_admitted",
+      "ok": true
+    },
+    {
+      "amendment_id": "ns-026-dev-grok-4.6-https-v1",
+      "name": "development_amendment_frozen",
+      "ok": true
+    },
+    {
+      "active_elapsed_seconds": {
+        "reason": null,
+        "source": "time.perf_counter",
+        "status": "actual",
+        "unit": "seconds",
+        "value": 7.499710680916905
+      },
+      "input_tokens": {
+        "reason": null,
+        "source": "provider.usage",
+        "status": "actual",
+        "unit": "tokens",
+        "value": 793
+      },
+      "logical_effect_id": "f7ae9ec5d301694ba79e2d6568916b68ee86d6ab5796a206fbf71900740b9272",
+      "name": "actual_development_provider_not_stub",
+      "ok": true,
+      "output_tokens": {
+        "reason": null,
+        "source": "provider.usage",
+        "status": "actual",
+        "unit": "tokens",
+        "value": 26
+      },
+      "possibly_charged": true,
+      "provider_charge": {
+        "reason": "API reported cost_in_usd_ticks=4168400 but that is not a settlement billing receipt.",
+        "source": null,
+        "status": "unavailable",
+        "unit": "currency",
+        "value": null
+      },
+      "runtime_receipt_id": "8d3a4325-d9b5-92f1-925a-5113276ea183",
+      "served_model": "grok-4.6",
+      "served_provider": "xai",
+      "served_revision": "fp_e41c6060b2628547",
+      "source_preimage_id": "4a9a8dc13cf403dc7f17fe059737ee70ed5c029c822dbaf9be4894d9e72d8986",
+      "stages": [
+        "index_context",
+        "provider",
+        "fixture_setup",
+        "fixture_call",
+        "fixture_teardown",
+        "proof_generate",
+        "proof_verify",
+        "persist_seal",
+        "cold_scoring"
+      ],
+      "terminal_reason": "independent cold oracle passed on the development unit",
+      "terminal_state": "solved",
+      "usage_receipt_id": "sha256:6e988492e4c92384738ec28f2187500b61e717c50d3164efd1e2fa3159e4a9b3"
+    },
+    {
+      "effect_unchanged": true,
+      "name": "independent_score_after_seal",
+      "ok": true,
+      "oracle": {
+        "candidate_valid": true,
+        "cold_full_validation": true,
+        "hidden_access_incident": false,
+        "independent_scorer_id": "ns-026-independent-historical-scorer",
+        "reason": "hidden tests passed on the patched tree",
+        "receipt_id": "sha256:32e173da0e1b842a8160ebea23a7875ae2e9ca74472c396186483b4768aece02",
+        "status": "passed"
+      },
+      "terminal_state": "solved"
+    },
+    {
+      "name": "resume_no_duplicate_dispatch",
+      "ok": true,
+      "provider_calls_by_effect": {
+        "f7ae9ec5d301694ba79e2d6568916b68ee86d6ab5796a206fbf71900740b9272": 1
+      },
+      "provider_effects_dispatched": 1,
+      "replayed": true
+    },
+    {
+      "name": "pinned_pre_fix_proposal_export",
+      "ok": true,
+      "scan": {
+        "archive_sha256": "72e6f909de6a20c7700a2398dcf9587a7d9263be68b6bd50361f2a375f909fda",
+        "expected_archive_sha256": "72e6f909de6a20c7700a2398dcf9587a7d9263be68b6bd50361f2a375f909fda",
+        "expected_xmltodict_sha256": "7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63",
+        "files": [
+          "xmltodict.py"
+        ],
+        "fix_commit_file_present": false,
+        "git_present": false,
+        "isolation": {
+          "clean": true,
+          "file_count": 1,
+          "forbidden_markers": [],
+          "git_present": false
+        },
+        "scorer_payload_present": false,
+        "used_caller_git": false,
+        "xmltodict_sha256": "7084494972ac820ecc41625b35fda59f2da1556ea34ab46414696471369cfe63"
+      }
+    },
+    {
+      "canary": {
+        "hidden_markers_found": [
+          "receipts/snapshots/NS-005/scorer_only",
+          "scorer_only/oracles"
+        ],
+        "rejected": true,
+        "scope_preserved": false
+      },
+      "name": "boundary_canary_rejects_scorer_payload",
+      "ok": true
+    },
+    {
+      "name": "nonempty_unchanged_baseline",
+      "ok": true,
+      "pytest_exit": 0
+    },
+    {
+      "name": "historical_scorer_no_blanket_refusal",
+      "ok": true,
+      "oracle": {
+        "candidate_valid": false,
+        "cold_full_validation": true,
+        "hidden_access_incident": false,
+        "independent_scorer_id": "ns-026-independent-historical-scorer",
+        "reason": "hidden tests failed on the patched tree",
+        "receipt_id": "sha256:46e31df3159cdd55ef247ef91277c6e35bc3e12c6d81c93f5edabcc9c3f87826",
+        "status": "failed"
+      }
+    },
+    {
+      "name": "scorer_can_admit_production_without_blanket_refusal",
+      "note": "Scorer-path qualification on a sealed historical candidate. Not a live production arm result.",
+      "ok": true,
+      "oracle": {
+        "candidate_valid": false,
+        "cold_full_validation": true,
+        "hidden_access_incident": false,
+        "independent_scorer_id": "ns-026-independent-historical-scorer",
+        "reason": "hidden tests failed on the patched tree",
+        "receipt_id": "sha256:c225b9738705be657bc3bf9f5416df724023ac85e2e09e63fea951765c380281",
+        "status": "failed"
+      },
+      "terminal_state": "unsolved"
+    },
+    {
+      "campaign": {
+        "provider_calls_by_effect": {
+          "75557eda861e9ad2e065d9e0f8d3b367d2c61263f9cd166e7692745506c27fb7": 1
+        },
+        "provider_effects_dispatched": 1,
+        "unknown_effects": []
+      },
+      "name": "stub_interrupt_no_duplicate_dispatch",
+      "ok": true
+    },
+    {
+      "name": "production_unknown_or_unavailable_not_solved",
+      "ok": true,
+      "terminal_reason": "Production Terra HIGH is not admitted. docker_absent_from_authoritative_validation_PATH; codex_absent_from_authoritative_validation_PATH; no_codex_or_openai_key_in_process; no_independently_verified_fresh_grok_quota_exhaustion; usage_reset_does_not_authorize_terra_high. Development amendment ns-026-dev-grok-4.6-https-v1 does not grant production.",
+      "terminal_state": "unavailable"
+    }
+  ]
+}

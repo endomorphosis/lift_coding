@@ -1,0 +1,34 @@
+{
+  "schema": "ns-development-provider-amendment/v1",
+  "scope": "development_only",
+  "provider": "grok",
+  "model": "grok-4.6",
+  "expected_served_aliases": [
+    "grok-4.6-build"
+  ],
+  "transport": "operator_host_native_builder_with_explicit_resources",
+  "fallback_allowed": false,
+  "max_provider_calls": 1,
+  "created_at": "2026-09-12T06:12:50.464827+00:00",
+  "reason": "Qualify the operator-host development transport through a real worker request and independent cold scorer.",
+  "unit": "public-slug-development-canary-v1",
+  "historical_population_admitted": false,
+  "final_scientific_run": false,
+  "ns004_protocol_sha256": "e1e3403feafa0eb5c8bbda4b95e14e3415a92d2036182725784f30788d4e5e54",
+  "ns004_manifest_sha256": "5d0bd610005cfd68e67f6f1dc4224a83bd9773b72d8e2aaf700fdec53883b649",
+  "original_final_profile_preserved": true,
+  "final_profile_owner": "NS-016",
+  "max_agent_turns": 6,
+  "provider_wall_seconds": 180,
+  "provider_cpu_cores": 1,
+  "provider_memory_bytes": 2147483648,
+  "provider_pids": 32,
+  "human_labels_supplied": 0,
+  "campaign_task_provenance_only": {
+    "task": "NS-026",
+    "attempt": "attempt:3699e68faa1c4156908d669e4b6d455c",
+    "claim": "claim:06325f8bfe9f4d2e93453eb239eae74d"
+  },
+  "native_campaign_claim_or_effect_reservation": false,
+  "operator_authorization": "User instruction to unblock and complete taskboards; bounded development qualification."
+}

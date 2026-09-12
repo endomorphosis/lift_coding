@@ -1,0 +1,87 @@
+{
+  "schema": "paper-ns-development-provider-amendment/v1",
+  "amendment_id": "ns-026-dev-grok-4.6-https-v1",
+  "version": 1,
+  "frozen_at": "2026-09-12T06:10:00+00:00",
+  "scope": "development_qualification_only",
+  "preserves_ns004_protocol": true,
+  "overwrites_original_protocol": false,
+  "protocol_id": "ns-core-v1",
+  "ns004_protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+  "ns004_protocol_document_sha256": "e1e3403feafa0eb5c8bbda4b95e14e3415a92d2036182725784f30788d4e5e54",
+  "ns004_measurement_schema_sha256": "e20f70ba7c055e9fdbbcd1540ce13213733dd3f3810d44a23c1f9f0b24064e03",
+  "ns004_proposed_profile": {
+    "provider": "openai",
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "historically_observed_cli": "0.154.0",
+    "transport": "existing_native_quota_guarded_Docker_Codex_fallback",
+    "primary_provider": "grok",
+    "fallback_trigger": "independently_verified_primary_quota_exhausted"
+  },
+  "motivation": "NS-004's Terra HIGH scientific profile is unavailable in this environment: Docker is absent from the authoritative validation PATH, Codex is not a sealed scientific dispatcher, and no independently verified fresh Grok quota-exhaustion receipt authorizes the quota-guarded Codex fallback. A usage reset does not authorize Terra HIGH. NS-026 therefore freezes this development-only Grok primary profile before any development provider call so qualification can proceed without overwriting ns-core-v1 or mixing models inside paired blocks.",
+  "deviation_from_preserved_ns004": {
+    "reason_codes": [
+      "terra_high_route_unavailable",
+      "docker_absent_from_sealed_validation_path",
+      "codex_not_admitted_without_verified_grok_quota_exhaustion",
+      "usage_reset_does_not_authorize_fallback"
+    ],
+    "changed_fields": [
+      "scientific_requested_provider",
+      "scientific_requested_model",
+      "scientific_transport",
+      "reasoning_effort"
+    ],
+    "does_not_authorize": [
+      "pilot_evaluation",
+      "final_evaluation",
+      "mixed_model_pooling",
+      "production_admission",
+      "codex_bypass",
+      "usage_reset_as_quota_exhaustion",
+      "model_switch_within_paired_block"
+    ],
+    "owner_of_pilot_and_any_final_profile_amendment": "NS-016"
+  },
+  "permitted_development_profile": {
+    "path_class": "development",
+    "admitted_production": false,
+    "simulated": false,
+    "provider": "xai",
+    "requested_model": "grok-4.6",
+    "transport": "https://api.x.ai/v1/chat/completions",
+    "transport_kind": "scoped_https_scientific_gateway",
+    "auth": "runtime_oidc_or_XAI_API_KEY_read_by_gateway_never_copied_into_proposal_or_receipt_bodies",
+    "reasoning_effort": "low",
+    "temperature": null,
+    "sampling_seed": null,
+    "sampling_seed_supported": false,
+    "temperature_supported": false,
+    "max_tokens": 1024,
+    "one_proposal_effect": true
+  },
+  "budgets": {
+    "request_serialized_bytes_max": 65536,
+    "admitted_patch_bytes_max": 16384,
+    "provider_wall_seconds_max": 180,
+    "active_unit_wall_seconds_max": 300,
+    "aggregate_unit_host_cpu_seconds_max": 240,
+    "independent_cold_scoring_wall_seconds_max": 120,
+    "proposal_effects_per_unit": 1,
+    "development_qualification_effects_reserved": 4,
+    "additional_paid_provider_currency_budget": 0
+  },
+  "isolation": {
+    "docker_socket": false,
+    "broad_host_credentials_in_proposal": false,
+    "original_git_in_proposal": false,
+    "fixed_commits_in_proposal": false,
+    "curator_session_in_proposal": false,
+    "scorer_only_payload_in_proposal": false
+  },
+  "scientific_calls_obey_admitted_profile": true,
+  "never_switch_models_within_paired_block": true,
+  "development_stub_is_not_this_profile": true,
+  "ns016_freeze_note": "This amendment is a development pin only. NS-016 must freeze the actual pilot/final served identity, CLI/runtime/image hashes, remaining quota, and any further profile change before final A-D dispatch."
+}
