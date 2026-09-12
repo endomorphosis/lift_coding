@@ -1,0 +1,454 @@
+{
+  "cases": [
+    {
+      "case_id": "PCT-SAFE-Q1",
+      "evaluator": "q1_implementation",
+      "expected_outcome": "q1_holds_on_guarded_model",
+      "expected_status": "accepted_transfer",
+      "fragment_id": "q1-protected-write",
+      "implementation": "guarded",
+      "outcome_class": "safe",
+      "profile_id": "guarded-implementation-fol/v1",
+      "query_id": "Q1",
+      "source_view": "security.implementation",
+      "target_view": "compliance.fol"
+    },
+    {
+      "case_id": "PCT-UNSAFE-Q1",
+      "evaluator": "q1_implementation",
+      "expected_outcome": "q1_countermodel",
+      "expected_status": "accepted_countermodel",
+      "fragment_id": "q1-protected-write",
+      "implementation": "unguarded",
+      "outcome_class": "unsafe",
+      "profile_id": "guarded-implementation-fol/v1",
+      "query_id": "Q1",
+      "source_view": "security.implementation",
+      "target_view": "compliance.fol"
+    },
+    {
+      "case_id": "PCT-TIMELY-AUDIT",
+      "evaluator": "q2_trace",
+      "expected_outcome": "satisfied_within_observed_window",
+      "expected_status": "accepted_bounded_observation",
+      "fragment_id": "q2-bounded-audit",
+      "outcome_class": "timely-audit",
+      "profile_id": "bounded-audit-trace/v1",
+      "query_id": "Q2",
+      "source_view": "trace.observation",
+      "target_view": "compliance.fol",
+      "trace": {
+        "audit_t": 1,
+        "capture_complete_through": 2,
+        "deadline_offset": 2,
+        "policy_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "trace_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "write_t": 0
+      }
+    },
+    {
+      "case_id": "PCT-DELAYED-AUDIT",
+      "evaluator": "q2_trace",
+      "expected_outcome": "violated_within_observed_window",
+      "expected_status": "accepted_countermodel",
+      "fragment_id": "q2-bounded-audit",
+      "outcome_class": "delayed-audit",
+      "profile_id": "bounded-audit-trace/v1",
+      "query_id": "Q2",
+      "source_view": "trace.observation",
+      "target_view": "compliance.fol",
+      "trace": {
+        "audit_t": 3,
+        "capture_complete_through": 2,
+        "deadline_offset": 2,
+        "policy_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "trace_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "write_t": 0
+      }
+    },
+    {
+      "case_id": "PCT-INCOMPLETE-WINDOW",
+      "evaluator": "q2_trace",
+      "expected_outcome": "unknown",
+      "expected_status": "unknown_incomplete_window",
+      "fragment_id": "q2-bounded-audit",
+      "outcome_class": "incomplete-window",
+      "profile_id": "bounded-audit-trace/v1",
+      "query_id": "Q2",
+      "source_view": "trace.observation",
+      "target_view": "compliance.fol",
+      "trace": {
+        "audit_t": null,
+        "capture_complete_through": 0,
+        "deadline_offset": 2,
+        "policy_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "trace_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "write_t": 0
+      }
+    },
+    {
+      "case_id": "PCT-WRONG-TENANT",
+      "evaluator": "q2_trace",
+      "expected_outcome": "unresolved_identity",
+      "expected_status": "unresolved_identity",
+      "fragment_id": "q2-bounded-audit",
+      "outcome_class": "wrong-tenant",
+      "profile_id": "bounded-audit-trace/v1",
+      "query_id": "Q2",
+      "source_view": "trace.observation",
+      "target_view": "compliance.fol",
+      "trace": {
+        "audit_t": 1,
+        "capture_complete_through": 2,
+        "deadline_offset": 2,
+        "policy_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-a"
+        },
+        "trace_identity": {
+          "actor": "alice",
+          "request": "req-1",
+          "resource": "r1",
+          "tenant": "tenant-b"
+        },
+        "write_t": 0
+      }
+    },
+    {
+      "case_id": "PCT-INCONSISTENT",
+      "evaluator": "inconsistent_premises",
+      "expected_outcome": "transfer_refused_inconsistent_premises",
+      "expected_status": "inconsistent_premises",
+      "fragment_id": "q1-protected-write",
+      "outcome_class": "inconsistent-premise",
+      "premises": [
+        {
+          "approved": false,
+          "protected": true,
+          "write": true
+        },
+        {
+          "approved": false,
+          "protected": true,
+          "write": false
+        }
+      ],
+      "profile_id": "guarded-implementation-fol/v1",
+      "query_id": "Q1",
+      "source_view": "compliance.fol",
+      "target_view": "compliance.fol"
+    },
+    {
+      "case_id": "PCT-NAME-EXTRACT",
+      "evaluator": "name_extraction",
+      "expected_outcome": "name_match_is_not_refinement",
+      "expected_status": "rejected_unjustified_extraction",
+      "fragment_id": "q1-protected-write",
+      "implementation_text": "def approve_and_write(resource): write(resource)",
+      "outcome_class": "unjustified-extraction",
+      "profile_id": "guarded-implementation-fol/v1",
+      "query_id": "Q1",
+      "source_view": "source.code",
+      "target_view": "security.implementation"
+    },
+    {
+      "case_id": "PCT-DEONTIC-NOT-Q1",
+      "evaluator": "deontic_not_actual",
+      "expected_outcome": "obligation_does_not_entail_actual_nonwriting",
+      "expected_status": "rejected_preservation_failure",
+      "fragment_id": "deontic-obligation-not-actuality",
+      "outcome_class": "obligation-not-actuality",
+      "profile_id": "deontic-ideal-worlds/v1",
+      "query_id": "Q1",
+      "source_view": "legal.deontic",
+      "target_view": "compliance.fol"
+    },
+    {
+      "case_id": "TDFOL-OBLIGATION-ERASURE",
+      "evaluator": "tdfol_obligation_erasure",
+      "expected_outcome": "O(p)_true_p_false",
+      "expected_status": "rejected_preservation_failure",
+      "fragment_id": "tdfol-unary-erasure",
+      "outcome_class": "lossy-tdfol-erasure",
+      "profile_id": "tdfol-lossy-fol-projection/v1",
+      "query_id": null,
+      "source_view": "tdfol.deontic",
+      "target_view": "fol.propositional"
+    },
+    {
+      "case_id": "TDFOL-ALWAYS-ERASURE",
+      "evaluator": "tdfol_always_erasure",
+      "expected_outcome": "p_now_true_Gp_false",
+      "expected_status": "rejected_preservation_failure",
+      "fragment_id": "tdfol-unary-erasure",
+      "outcome_class": "lossy-tdfol-erasure",
+      "profile_id": "tdfol-lossy-fol-projection/v1",
+      "query_id": null,
+      "source_view": "tdfol.temporal",
+      "target_view": "fol.propositional"
+    },
+    {
+      "case_id": "TDFOL-UNTIL-ERASURE",
+      "evaluator": "tdfol_until_erasure",
+      "expected_outcome": "until_not_conjunction",
+      "expected_status": "rejected_preservation_failure",
+      "fragment_id": "tdfol-until-conjunction",
+      "outcome_class": "lossy-tdfol-erasure",
+      "profile_id": "tdfol-lossy-fol-projection/v1",
+      "query_id": null,
+      "source_view": "tdfol.temporal",
+      "target_view": "fol.propositional"
+    },
+    {
+      "case_id": "NATIVE-LEAN-Q1",
+      "checker_name": "lean",
+      "evaluator": "native_checker",
+      "expected_outcome": "lean_absent_from_sealed_path",
+      "expected_status": "unavailable_native_checker",
+      "fragment_id": "q1-protected-write",
+      "outcome_class": "missing-native-checker",
+      "profile_id": "guarded-implementation-fol/v1",
+      "query_id": "Q1",
+      "source_view": "compliance.fol",
+      "target_view": "lean.theorem"
+    },
+    {
+      "case_id": "UNSUPPORTED-CTD",
+      "evaluator": "unsupported_fragment",
+      "expected_outcome": "contrary_to_duty_unsupported",
+      "expected_status": "unsupported_fragment",
+      "fragment_id": "contrary-to-duty",
+      "outcome_class": "unsupported-fragment",
+      "profile_id": "deontic-ideal-worlds/v1",
+      "query_id": null,
+      "source_view": "legal.deontic",
+      "target_view": "compliance.fol"
+    },
+    {
+      "case_id": "UNSUPPORTED-OG-GO",
+      "evaluator": "unsupported_fragment",
+      "expected_outcome": "og_go_not_equated_without_profile_result",
+      "expected_status": "unsupported_fragment",
+      "fragment_id": "og-go-commutation",
+      "outcome_class": "unsupported-fragment",
+      "profile_id": "deontic-ideal-worlds/v1",
+      "query_id": null,
+      "source_view": "tdfol.mixed",
+      "target_view": "tdfol.mixed"
+    },
+    {
+      "case_id": "PROP1-CONDITIONAL",
+      "evaluator": "proposition_1",
+      "expected_outcome": "not_machine_checked_compiler_soundness",
+      "expected_status": "paper_conditional_argument",
+      "fragment_id": "q1-protected-write",
+      "outcome_class": "paper-proposition",
+      "profile_id": "guarded-implementation-fol/v1",
+      "query_id": null,
+      "source_view": "paper.appendix_b",
+      "target_view": "paper.appendix_b"
+    }
+  ],
+  "fragments": [
+    {
+      "checker": "finite_boolean_enumeration",
+      "equation": "10",
+      "fragment_id": "q1-protected-write",
+      "query": "∀a,r,t. Protected(r) ∧ ¬Approved(a,r,t) ⇒ ¬Write(a,r,t)",
+      "status": "supported"
+    },
+    {
+      "checker": "finite_trace_observation",
+      "equation": "11",
+      "fragment_id": "q2-bounded-audit",
+      "query": "∀a,r,t. Write(a,r,t) ⇒ ∃u∈[t,t+2]. Audit(a,r,u)",
+      "status": "supported"
+    },
+    {
+      "checker": "two_world_modal_witness",
+      "equation": "9",
+      "fragment_id": "deontic-obligation-not-actuality",
+      "query": "O(¬Write) does not entail ¬Write",
+      "status": "supported_as_negative_control"
+    },
+    {
+      "checker": "lossy_projection_countermodel",
+      "equation": null,
+      "fragment_id": "tdfol-unary-erasure",
+      "query": "O(p)↦p and G(p)↦p",
+      "status": "unsupported_for_transfer"
+    },
+    {
+      "checker": "lossy_projection_countermodel",
+      "equation": null,
+      "fragment_id": "tdfol-until-conjunction",
+      "query": "p U q ↦ p ∧ q",
+      "status": "unsupported_for_transfer"
+    },
+    {
+      "checker": null,
+      "equation": null,
+      "fragment_id": "contrary-to-duty",
+      "query": "O(¬Write) with CTD O(Audit | Write)",
+      "status": "unsupported"
+    },
+    {
+      "checker": null,
+      "equation": null,
+      "fragment_id": "og-go-commutation",
+      "query": "O(Gp) versus G(Op)",
+      "status": "unsupported"
+    }
+  ],
+  "not_legal_advice": true,
+  "not_production_experiment": true,
+  "profiles": [
+    {
+      "bridge_assumptions": [
+        "Finite Boolean implementation model; Write determined by the named implementation.",
+        "Identity relation on Protected/Approved/Write assignments.",
+        "No extraction from natural source code is claimed."
+      ],
+      "logic_family": "typed_first_order",
+      "profile_id": "guarded-implementation-fol/v1",
+      "source_signature": [
+        "Protected",
+        "Approved",
+        "Write"
+      ],
+      "supported_queries": [
+        "Q1"
+      ],
+      "target_signature": [
+        "Protected",
+        "Approved",
+        "Write"
+      ]
+    },
+    {
+      "bridge_assumptions": [
+        "Discrete trace positions with deadline offset 2.",
+        "Actor/resource/tenant/request identities join only under an admitted mapping.",
+        "Incomplete capture through the deadline is unknown, not compliance or violation.",
+        "One successful log is not a global program guarantee."
+      ],
+      "logic_family": "finite_trace_observation",
+      "profile_id": "bounded-audit-trace/v1",
+      "source_signature": [
+        "Write",
+        "Audit"
+      ],
+      "supported_queries": [
+        "Q2"
+      ],
+      "target_signature": [
+        "Write",
+        "Audit"
+      ]
+    },
+    {
+      "bridge_assumptions": [
+        "Ideal-world accessibility need not be reflexive.",
+        "Obligation is not actuality; Q1 is a compliance query, not a deontic consequence."
+      ],
+      "logic_family": "serial_deontic_modal",
+      "profile_id": "deontic-ideal-worlds/v1",
+      "source_signature": [
+        "O",
+        "Write"
+      ],
+      "supported_queries": [],
+      "target_signature": [
+        "Write"
+      ]
+    },
+    {
+      "bridge_assumptions": [
+        "Named losses: unary deontic/temporal erasure; until replaced by conjunction.",
+        "This profile is a negative control and cannot carry a modal theorem."
+      ],
+      "logic_family": "tdfol_to_fol_erasure",
+      "profile_id": "tdfol-lossy-fol-projection/v1",
+      "source_signature": [
+        "O",
+        "G",
+        "U"
+      ],
+      "supported_queries": [],
+      "target_signature": [
+        "propositional_skeleton"
+      ]
+    }
+  ],
+  "proposition_1": {
+    "blanket_repository_soundness": false,
+    "claim_boundary": "A paper-level conditional argument, not a machine-checked theorem of the repository. Discharged per supported translation on constructed finite models only.",
+    "does_not_establish": [
+      "faithful source extraction",
+      "appropriateness of bridge assumptions B",
+      "nonempty model class without an existence check",
+      "that TDFOLToFOLConverter satisfies Equations 7 and 8",
+      "machine-checked soundness of any repository compiler"
+    ],
+    "kind": "paper_conditional_argument",
+    "machine_checked_compiler_soundness": false,
+    "name": "Proposition 1",
+    "requires": [
+      "related_model_existence",
+      "premise_preservation_equation_7",
+      "goal_reflection_equation_8",
+      "sound_target_checker",
+      "nonvacuous_bridge_relation",
+      "consistent_premises"
+    ],
+    "title": "Conditional semantic consequence transfer"
+  },
+  "queries": {
+    "Q1": {
+      "equation": "10",
+      "id": "Q1",
+      "text": "Protected(r) ∧ ¬Approved(a,r,t) ⇒ ¬Write(a,r,t)"
+    },
+    "Q2": {
+      "equation": "11",
+      "id": "Q2",
+      "text": "Write(a,r,t) ⇒ ∃u∈[t,t+2]. Audit(a,r,u)"
+    }
+  },
+  "schema": "autoformalization-policy-code-trace-cases/v1",
+  "specification_example": "Protected resources must not be written without approval. Each write must be audited within two steps.",
+  "suite_id": "AF-015-supported-bridges-policy-code-trace",
+  "task_id": "AF-015"
+}

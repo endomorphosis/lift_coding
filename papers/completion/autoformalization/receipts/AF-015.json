@@ -1,0 +1,159 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-015",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:06:56.955600+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-policy-code-trace-cases/v1",
+      "result_schema": "autoformalization-bridge-validation-result/v1",
+      "receipt_schema": "autoformalization-translation-receipt/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py",
+      "sha256": "643a5b66489a787aefd809ac58ee9dc4dc016e5325fafd850e7f0957f7608abe",
+      "standard_library_only": true
+    },
+    "inspected_not_imported": {
+      "tdfol_converter.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/TDFOL/tdfol_converter.py",
+        "sha256": "19db7d143c0275eca84846b0b4abc1feba877c38b7f255a3c58c54d31d1bf16d",
+        "imported": false,
+        "note": "Lossy unary modal erasure and until-to-conjunction replica used as a negative control."
+      },
+      "formalization_adapter.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/formalization_adapter.py",
+        "sha256": "09accb91139230c08f9d9876ebc83485803419fad8b49e80e37b1f0f6861d631",
+        "imported": false,
+        "note": "Inspected declaration-only adapter; not executed and not treated as a soundness theorem."
+      },
+      "reference_semantics.py": {
+        "path": "papers/completion/autoformalization/evaluation/reference_semantics.py",
+        "sha256": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282",
+        "imported": false,
+        "note": "AF-006 C09\u2013C11 finite witnesses inform protected-write/audit cases."
+      }
+    },
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "empirical_execution": "constructed finite models and sealed-PATH native-checker probes only; A-E/T0-T5 remain unrun; no native Lean/Z3/CVC5 kernel proof"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/data/policy_code_trace_cases.json": "a795f24b69860316b6f9615e145b08e208df0cd8ca76069c91f850a312ecaac7",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py": "643a5b66489a787aefd809ac58ee9dc4dc016e5325fafd850e7f0957f7608abe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/evidence/translation_receipts.jsonl": "8a79cb3d2f67b8c417c587b002ca4777e969e362b608f5d7e4ad66b16cb7286b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.meta.json": "21ebfc6e18f52bf993a2e89dbd639c35fbc1a564e0eb99bb46797811380b6dfb",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stdout.log": "92eb9bc3b9512e812151a18380a16513b612a643a667ce03878a16f1daec1365",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/check_json.meta.json": "8dbdac02e7f1fa8dcdfdde889ff7b4e4fbcd8277878daf959077c83f92915eae",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/check_json.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/check_json.stdout.log": "05452e628e04e0a55708b807439d3856f3898a181ed52aa7779e4ce6849fa08a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-015/runs/bridge_validation/results.jsonl": "335b4c5bdcfe68f50ce7e2824b9aa84e21db3267375450be585cb9e32eed64b3"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/bridge_cases.py": "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py",
+    "papers/completion/autoformalization/data/policy_code_trace_cases.json": "papers/completion/autoformalization/receipts/snapshots/AF-015/data/policy_code_trace_cases.json",
+    "papers/completion/autoformalization/runs/bridge_validation/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-015/runs/bridge_validation/results.jsonl",
+    "papers/completion/autoformalization/evidence/translation_receipts.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-015/evidence/translation_receipts.jsonl"
+  },
+  "criteria": [
+    {
+      "criterion": "Every accepted transfer carries the preserved property/direction, bridge assumptions, supported fragment and independently checked proof/countermodel.",
+      "status": "met",
+      "explanation": "PCT-SAFE-Q1 is the only accepted consequence transfer: Q1 truth, source-implementation-to-target-query direction, identity-bridge assumptions, fragment q1-protected-write, related-model existence, Equations 7\u20138, consistent premises, and a four-assignment finite proof. PCT-UNSAFE-Q1 and PCT-DELAYED-AUDIT are accepted countermodels with the same receipt fields and explicit witnesses (unapproved protected write; audit at step 3 outside a complete [0,2] window). No accepted receipt is missing those fields or claims compiler soundness.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evidence/translation_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/runs/bridge_validation/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Safe, unsafe, delayed-audit, incomplete-window, wrong-tenant and inconsistent-premise examples have justified distinct outcomes.",
+      "status": "met",
+      "explanation": "The six required classes compute six different outcomes: safe q1_holds_on_guarded_model; unsafe q1_countermodel; delayed-audit violated_within_observed_window; incomplete-window unknown; wrong-tenant unresolved_identity; inconsistent-premise transfer_refused_inconsistent_premises. A late matching audit is a violation only with complete capture; an incomplete window is unknown; a tenant-b audit is not joined; Write and \u00acWrite premises are refused rather than exploded into Q1.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/data/policy_code_trace_cases.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/runs/bridge_validation/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evidence/translation_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stdout.log"
+      ]
+    },
+    {
+      "criterion": "The conditional paper proposition is not represented as blanket machine-checked compiler soundness.",
+      "status": "met",
+      "explanation": "PROP1-CONDITIONAL records Proposition 1 as a paper-level conditional argument with machine_checked_compiler_soundness false and blanket_repository_soundness false. The suite states it does not establish extraction faithfulness, appropriateness of B, a nonempty model class, or that TDFOLToFOLConverter satisfies Equations 7\u20138. Lossy TDFOL erasure cases are rejected preservation failures, not accepted compiler theorems.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/data/policy_code_trace_cases.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evidence/translation_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/runs/bridge_validation/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py"
+      ]
+    },
+    {
+      "criterion": "Missing native checkers or unsupported fragments are included in coverage/status reports.",
+      "status": "met",
+      "explanation": "Sealed-PATH probes report lean, lake, z3, cvc5, vampire, eprover, coqc, and isabelle unavailable; NATIVE-LEAN-Q1 is no_run/unavailable rather than a kernel proof. Coverage lists unsupported fragments contrary-to-duty and og-go-commutation, with UNSUPPORTED-CTD and UNSUPPORTED-OG-GO retained in the denominator as unsupported.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/runs/bridge_validation/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evidence/translation_receipts.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af015",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/bridge_cases.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-015/evaluation/bridge_cases.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/bridge_cases.stderr.log",
+      "started_at": "2026-09-12T01:06:56.890282+00:00",
+      "finished_at": "2026-09-12T01:06:56.935323+00:00",
+      "execution_kind": "sealed-PATH finite bridge validation, policy-code-trace cases, and native-checker unavailability probe"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af015",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-c",
+        "\nimport json, pathlib, sys\npaths = sys.argv[1:]\nfor path in paths:\n    text = pathlib.Path(path).read_text(encoding=\"utf-8\")\n    if path.endswith(\".jsonl\"):\n        rows = [json.loads(line) for line in text.splitlines() if line]\n        print(path, \"jsonl\", len(rows), \"ok\")\n    else:\n        json.loads(text)\n        print(path, \"json\", \"ok\")\n",
+        "papers/completion/autoformalization/data/policy_code_trace_cases.json",
+        "papers/completion/autoformalization/runs/bridge_validation/results.jsonl",
+        "papers/completion/autoformalization/evidence/translation_receipts.jsonl"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/check_json.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-015/logs/check_json.stderr.log",
+      "started_at": "2026-09-12T01:06:56.936116+00:00",
+      "finished_at": "2026-09-12T01:06:56.954191+00:00",
+      "execution_kind": "JSON/JSONL parse pin of AF-015 outputs"
+    }
+  ],
+  "limitations": [
+    "Native Lean/Z3/CVC5/Isabelle binaries are absent from the sealed validation PATH; no kernel proof is claimed.",
+    "Checks are constructed finite models and traces, not natural held-out source-to-proof measurements.",
+    "Project compilers, TDFOL runtime objects, and Security IR adapters were inspected and hashed but not imported or executed.",
+    "Proposition 1 is not discharged as a machine-checked theorem of any repository compiler.",
+    "A-E and T0-T5 remain unrun.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Supported-fragment bridge receipts and the paper's protected-write/audit policy-code-trace cases on finite constructed models, with explicit unavailable native checkers and unsupported fragments."
+}
