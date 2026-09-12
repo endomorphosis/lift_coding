@@ -1,0 +1,298 @@
+{
+  "capability": {
+    "binaries": {
+      "cvc5": null,
+      "groth16": null,
+      "z3": null
+    },
+    "durable_status": "imported_bypass_package_init",
+    "interpreter": "/usr/bin/python3.12",
+    "lifecycle_status": "imported",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_version": "3.12.3"
+  },
+  "cases": [
+    {
+      "case_id": "seq_par_worker_counts_match",
+      "description": "Sequential and parallel preparation at worker counts 1/2/4/8 produce identical bytes, roots, inventories, and dispositions.",
+      "expected_reason": "identical_roots_inventories_dispositions",
+      "family": "parallel_prepare",
+      "polarity": "valid",
+      "table": "table9"
+    },
+    {
+      "case_id": "worker_completion_order_cannot_alter_authority",
+      "description": "Worker completion order may vary; serial barrier preserves normative inventory and roots.",
+      "expected_reason": "worker_order_is_not_authority",
+      "family": "parallel_prepare",
+      "polarity": "valid",
+      "table": "table9"
+    },
+    {
+      "case_id": "hash_memo_requires_content_and_profile",
+      "description": "Hash memo keys exact content and canonicalization/codec/hash/source-mode policy, then reverifies.",
+      "expected_reason": "content_profile_reverified",
+      "family": "hash_memo",
+      "polarity": "valid",
+      "table": "table9"
+    },
+    {
+      "case_id": "mtime_only_hash_memo_rejected",
+      "description": "A path or modification time alone is not the final SHA/CID authority.",
+      "expected_reason": "mtime_or_path_is_not_authority",
+      "family": "hash_memo",
+      "polarity": "invalid",
+      "table": "table9"
+    },
+    {
+      "case_id": "corrupt_hash_memo_reverified_and_rejected",
+      "description": "A corrupted hash-memo digest is reverified against content and cannot authorize a root.",
+      "expected_reason": "corrupt_or_stale_memo",
+      "family": "hash_memo",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "empty_manifest_cannot_pass",
+      "description": "An empty required set cannot produce a production full seal.",
+      "expected_reason": "incomplete_manifest",
+      "family": "completeness",
+      "polarity": "invalid",
+      "table": "table9"
+    },
+    {
+      "case_id": "incomplete_manifest_missing_required_unit",
+      "description": "Missing required units fail closed; membership of a subset is not completeness.",
+      "expected_reason": "incomplete_manifest",
+      "family": "completeness",
+      "polarity": "invalid",
+      "table": "table9"
+    },
+    {
+      "case_id": "duplicate_required_unit_rejected",
+      "description": "Duplicate required unit identities cannot pass a complete manifest.",
+      "expected_reason": "duplicate_required_unit",
+      "family": "completeness",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "membership_is_not_completeness",
+      "description": "Merkle membership of presented units is not completeness against the requirement manifest.",
+      "expected_reason": "incomplete_manifest",
+      "family": "completeness",
+      "polarity": "invalid",
+      "table": "table9"
+    },
+    {
+      "case_id": "aggregation_missing_child",
+      "description": "Manifest aggregation rejects a missing required child.",
+      "expected_reason": "missing_child",
+      "family": "aggregation",
+      "polarity": "invalid",
+      "table": "table9"
+    },
+    {
+      "case_id": "aggregation_duplicate_child",
+      "description": "Manifest aggregation rejects duplicate children.",
+      "expected_reason": "duplicate_child",
+      "family": "aggregation",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "aggregation_reordered_children",
+      "description": "Reordered children cannot pass a complete ordered manifest.",
+      "expected_reason": "reordered_children",
+      "family": "aggregation",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "stale_parent_cannot_overwrite",
+      "description": "A stale parent cannot replace the accepted current seal.",
+      "expected_reason": "stale_parent",
+      "family": "cas",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "exactly_one_concurrent_cas_winner",
+      "description": "Exactly one concurrent valid writer publishes a generation; losers are stale_parent.",
+      "expected_reason": "single_cas_winner",
+      "family": "cas",
+      "polarity": "valid",
+      "table": "table12"
+    },
+    {
+      "case_id": "pre_cas_crash_leaves_old_pointer",
+      "description": "A crash before CAS leaves the old current pointer unchanged.",
+      "expected_reason": "pre_cas_pointer_unchanged",
+      "family": "crash",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "failed_units_cannot_publish",
+      "description": "Failed required units cannot publish or invent task success.",
+      "expected_reason": "proof_failed",
+      "family": "publication",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "durable_stale_generation_conflict",
+      "description": "A stale generation-bearing operational writer cannot replace the accepted durable root.",
+      "expected_reason": "stale_generation_conflict",
+      "family": "operational_cas",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "git_fence_mismatch_denied",
+      "description": "A stale or forged Git lifecycle fence cannot replace the admitted worktree claim.",
+      "expected_reason": "git_fence_mismatch_denied",
+      "family": "git_lifecycle",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "post_cas_crash_recovers_success",
+      "description": "Post-CAS crash recovery recognizes the committed pointer and finalizes cleanup.",
+      "expected_reason": "recovered_success",
+      "family": "recovery",
+      "polarity": "valid",
+      "table": "table12"
+    },
+    {
+      "case_id": "recovery_is_idempotent",
+      "description": "A second recovery is idempotent and does not move the accepted root.",
+      "expected_reason": "idempotent_recovery",
+      "family": "recovery",
+      "polarity": "valid",
+      "table": "table12"
+    },
+    {
+      "case_id": "pre_cas_crash_then_valid_continuation",
+      "description": "After a recoverable pre-CAS crash, a valid continuation publishes without unobserved duplicate success.",
+      "expected_reason": "valid_continuation",
+      "family": "recovery",
+      "polarity": "valid",
+      "table": "table12"
+    },
+    {
+      "case_id": "duplicate_reordered_events_idempotent",
+      "description": "Duplicated or reordered recovery events remain idempotent and cannot invent a second success.",
+      "expected_reason": "duplicate_events_idempotent",
+      "family": "recovery",
+      "polarity": "valid",
+      "table": "table12"
+    },
+    {
+      "case_id": "unknown_provider_result_not_success",
+      "description": "Unknown provider/proof-system results cannot be admitted as task success.",
+      "expected_reason": "unknown_proof_system",
+      "family": "unknown_effect",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "simulated_required_unit_not_sealed",
+      "description": "Simulated required units cannot satisfy a production seal.",
+      "expected_reason": "simulated_only",
+      "family": "unknown_effect",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "store_unavailability_typed",
+      "description": "Missing or relative store roots are typed unavailable; no default HOME/daemon root is invented.",
+      "expected_reason": "explicit_root_required",
+      "family": "availability",
+      "polarity": "invalid",
+      "table": "table12"
+    },
+    {
+      "case_id": "federation_network_unavailable",
+      "description": "Federation, network partition, and libp2p/MCP transport remain unavailable outside the tested local deployment.",
+      "expected_reason": "remote_faults_unavailable",
+      "family": "federation",
+      "polarity": "diagnostic",
+      "table": "table12"
+    },
+    {
+      "case_id": "measurements_separately_labeled",
+      "description": "Prepare/verify/persist/CAS CPU, memory, storage, and elapsed measurements are real and separately labeled.",
+      "expected_reason": "separately_labeled_actual_measurements",
+      "family": "measurement",
+      "polarity": "valid",
+      "table": "table12"
+    }
+  ],
+  "claim_boundary": "This matrix qualifies local sequential/parallel preparation, complete manifests, parent-bound CAS, and restart reconciliation on the located accelerate sealer plus hermetic WAL/CAS contracts. It is not global consensus, not federation, and not exactly-once physical side effects beyond the tested boundary.",
+  "exactly_once_external_claimed": false,
+  "federation_claimed": false,
+  "generated_at": "2026-09-12T03:14:35+00:00",
+  "policy_id": "ns-012-sealer-recovery-qualification-v1",
+  "positive_witness": {
+    "aggregation_root": "sha256:414361889e181c20ba0c850b8eddbb19756d525c3632b280530c3f518fff05a8",
+    "manifest_root_cid": "sha256:da6bf080c464f75151fd4c367938c02e71114030392dd8082d550dc449fd1dd9",
+    "repository_proof_root": "sha256:e22cee66325d7590d1e61d5ee60feee0be7dbddb85999e0405b7e9d593ea4b47",
+    "seal_cid": "sha256:25180cd72df48fc18f236e9d36799c35b9c9dc765da65bf3cc206cedfd8eab7a"
+  },
+  "qualification_not_live_ad": true,
+  "recovery_receipt_count": 3,
+  "schema": "neurosymbolic-supervision/sealer-fault-matrix@1",
+  "shim": {
+    "datasets_evidence_shim": true,
+    "datasets_native_present": false,
+    "kit_native_present": false,
+    "kit_proof_seal_store_shim": true,
+    "schema": "ns-012/qualification-local-contract-shim@1"
+  },
+  "source_hashes": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/worktree_lifecycle.py": "e8bc8277ec2a50731c20baf1ae57128d9cd2fd43a85c2bba252e8eebe6faab4b",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/admission.py": "16fcc43f52f41641abf297e36e0850e87394fdcfac2c9c0807ada19e4cd9cb4b",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/aggregation.py": "20e6c31e72dadc67d4292dca3637f6543e9352286bf1967743b477216af37a6c",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/delta_seal.py": "8d9bf91cd4bca391dc3fbf9a2ea78966d7dcc5dfba0f114caf8c2d5d1b83be07",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py": "3330a24a9052b0124b292824c63295d7760a6372e5f0718b1661b65897ea7aac",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/durable_state.py": "e718a115671f7d84fc7f5c693c8ef03d4216465d71e79fad04adf2442a277a9f",
+    "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py": "6c5adeeee8fb5be606392636f2b2ccfcff660ba6323271d35bf1e34022fdc8bb",
+    "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py": "6e96f40fe9f05e8fb1f88d7c58e2660a81d184cb9d85d02fe333fdbca70dd1f1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/compat_shims.py": "324764c0799a5d029dea2dcc11bb079fda7822207eb0ed9ec4c92f7280ec4be1"
+  },
+  "table12": {
+    "parallel_sealer": [
+      "equal bytes/roots/dispositions at multiple worker counts",
+      "malformed/missing/duplicate units",
+      "cache/hash-memo corruption",
+      "interrupted writes",
+      "stale-parent races",
+      "separate prepare/verify/persist/CAS CPU/memory/storage/elapsed"
+    ],
+    "recovery_and_federation": [
+      "duplicate/reordered events",
+      "worker crashes around artifact publication",
+      "expiry/fencing",
+      "unknown external effects",
+      "store unavailable",
+      "network partition retained unavailable",
+      "cross-repository dirty overlays retained unavailable"
+    ]
+  },
+  "table9": {
+    "hash_memo": "content + codec/hash/canonicalization/source-mode; reverify; mtime rejected",
+    "hash_verify_workers": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "merkle_construction": "normative unit_id order after serial barrier",
+    "read_parse_canonicalize": "exact immutable canonical-json profile",
+    "serial_barrier": "worker completion order cannot change bytes or disposition"
+  },
+  "task_id": "NS-012",
+  "tested_deployment": "hermetic local IncrementalProofSealer WAL/CAS, DurableCoordinationStore, worktree lifecycle"
+}

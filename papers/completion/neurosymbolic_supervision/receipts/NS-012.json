@@ -1,0 +1,157 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-012",
+  "status": "complete",
+  "completed_at": "2026-09-12T03:14:36+00:00",
+  "scope": "Sealed-profile qualification of complete requirement manifests, sequential/parallel preparation at worker counts 1/2/4/8, parent-bound WAL/CAS publication, DurableCoordinationStore generation CAS, fenced worktree lifecycle, and restart recovery. Federation/network partitions and libp2p/MCP transport remain unavailable. Not a live A–D experiment, not a Groth16 proof of pytest execution, and not an external exactly-once side-effect claim beyond the tested hermetic WAL/CAS/lifecycle boundary.",
+  "source_versions": {
+    "workspace_git_head": "108db756960e55481f0ec86d0f6f9f6022cd1e98",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "9.0.3",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 recorded incremental_proof_sealer blocked because ipfs_datasets_py.logic.zkp.incremental_sealing was absent. NS-012 confirmed that package and nested ipfs_kit_py.proof_seal_store remain absent from the pinned trees, installed labeled contract-faithful shims, and exercised the accelerate sealer, DurableCoordinationStore, and WorktreeLifecycleStore live."
+    },
+    "caller": {
+      "sealer": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "sealer_sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+      "full_checkpoint": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py",
+      "full_checkpoint_sha256": "3330a24a9052b0124b292824c63295d7760a6372e5f0718b1661b65897ea7aac",
+      "aggregation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/aggregation.py",
+      "aggregation_sha256": "20e6c31e72dadc67d4292dca3637f6543e9352286bf1967743b477216af37a6c",
+      "delta_seal": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/delta_seal.py",
+      "delta_seal_sha256": "8d9bf91cd4bca391dc3fbf9a2ea78966d7dcc5dfba0f114caf8c2d5d1b83be07",
+      "admission": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/admission.py",
+      "admission_sha256": "16fcc43f52f41641abf297e36e0850e87394fdcfac2c9c0807ada19e4cd9cb4b",
+      "durable_state": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/durable_state.py",
+      "durable_state_sha256": "e718a115671f7d84fc7f5c693c8ef03d4216465d71e79fad04adf2442a277a9f",
+      "worktree_lifecycle": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/worktree_lifecycle.py",
+      "worktree_lifecycle_sha256": "e8bc8277ec2a50731c20baf1ae57128d9cd2fd43a85c2bba252e8eebe6faab4b",
+      "proof_certificate_store": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+      "proof_certificate_store_sha256": "6e96f40fe9f05e8fb1f88d7c58e2660a81d184cb9d85d02fe333fdbca70dd1f1",
+      "coordination_storage": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "coordination_storage_sha256": "6c5adeeee8fb5be606392636f2b2ccfcff660ba6323271d35bf1e34022fdc8bb"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_fault_matrix.json": "32bbba5638763973a89e452769ada470640b3909e86fe2c0a2d7d564b7759a81",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl": "c3b25e1044f64a0fcfcb13877c88e0c2081d35f61c92f4c8642a4a5bc1a586ed",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/recovery_receipts.jsonl": "5662c721f67f28be8c69afe3b4ddc3c5ed7b031ca8cd5cae656e1b160d952c5b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_recovery_report.md": "edd65f5ebc1f9bbdd7708e5806cb13006bd6375dffd13f8b167210837f329937",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/run_sealer_qualification.py": "a62c674392b818e5f0bf4eb2c5372caa6daf7a75549aee06351c87917f8afcd4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/validate_sealer_qualification.py": "52f90afce7993f7445f46c4cfea51341be537816044cfa888cb0390a8cfa0161",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/compat_shims.py": "324764c0799a5d029dea2dcc11bb079fda7822207eb0ed9ec4c92f7280ec4be1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/sealer-qualification.log": "3e64ca267a5e731cae090727b2f7672f713089e49bcb03448756803410a6ec8b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/checkpoints/start.json": "6cbb10fdd41d52e18f85f348b6a4deac95e10568ecc3d3626621271436b0eeb7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/checkpoints/outputs.json": "fb9d75072cee16c1ce3ae905be2c0fb1c0eab289c29fb8be05a1e173cc507e8d"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/sealer_fault_matrix.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_fault_matrix.json",
+    "papers/completion/neurosymbolic_supervision/qualification/sealer_results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/recovery_receipts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/recovery_receipts.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/sealer_recovery_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_recovery_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Sequential/parallel bytes, roots, inventories, and dispositions match on identical inputs; worker order cannot alter authority.",
+      "status": "met",
+      "explanation": "Preparation at worker counts 1, 2, 4, and 8 under a frozen canonical-json/sha256 profile produced identical leaf roots, inventories, full-checkpoint seal CID sha256:25180cd72df48fc18f236e9d36799c35b9c9dc765da65bf3cc206cedfd8eab7a, manifest root sha256:da6bf080c464f75151fd4c367938c02e71114030392dd8082d550dc449fd1dd9, repository proof root, and aggregation root. Hash memo keys content plus codec/hash/canonicalization/source-mode and reverifies; mtime-only keys are rejected. Worker completion order varied; the serial barrier kept authority unchanged.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_fault_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_recovery_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/run_sealer_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/sealer-qualification.log"
+      ]
+    },
+    {
+      "criterion": "An empty or incomplete manifest cannot pass a mandatory obligation; membership alone is never completeness.",
+      "status": "met",
+      "explanation": "create_full_checkpoint returned incomplete_manifest and sealed=false for an empty required set, a missing mandatory unit, and a presented subset that did not equal the requirement manifest. Duplicate unit identities raised FullCheckpointError. Manifest aggregation rejected missing_child, duplicate_child, and reordered_children. Merkle membership of some units never authorized a complete seal.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_fault_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/validate_sealer_qualification.py"
+      ]
+    },
+    {
+      "criterion": "Stale/late/failed writers cannot replace the accepted root or invent task success.",
+      "status": "met",
+      "explanation": "A delta against a superseded parent returned stale_parent without moving the current pointer. Six concurrent same-parent writers produced exactly one published generation; losers were stale_parent. A pre-CAS crash and a failed required unit left the accepted root unchanged. DurableCoordinationStore rejected an ABA-stale generation token (RootConflict). WorktreeLifecycleStore denied a duplicate live claim and a forged fence. Unknown proof systems and simulated required units could not admit or seal.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_recovery_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/run_sealer_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/sealer-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Restart retains admitted evidence and resumes a useful valid task without unobserved duplicate effects; external exactly-once behavior is not claimed beyond the tested boundary.",
+      "status": "met",
+      "explanation": "A crash after CAS and before cleanup left the pointer on seal sha256:25180cd72df48fc18f236e9d36799c35b9c9dc765da65bf3cc206cedfd8eab7a. recover_publication recognized pointer_matches_seal, committed cleanup, and recognize_post_cas_success reported recovered_success. A second recovery was committed_prefix/idempotent. A pre-CAS crash left no current pointer; a subsequent valid publish resumed a sealed task. Duplicate recovery events did not invent a second success. Recovery receipts set exactly_once_external_claimed=false. Network partition, libp2p/MCP transport, and remote stores remain unavailable.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/recovery_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_recovery_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/validate_sealer_qualification.py"
+      ]
+    },
+    {
+      "criterion": "Prepare/verify/persist/CAS CPU/memory/storage/elapsed measurements are real and separately labeled.",
+      "status": "met",
+      "explanation": "The measurements_separately_labeled case recorded actual prepare, verify, persist, and CAS elapsed (time.perf_counter, ms), CPU (time.process_time, ms), peak RSS (resource.getrusage, bytes), and storage (canonical/store bytes). GPU time is unavailable with an explicit reason because no accelerator exists in the sealed PATH. Overlapping parallel stage times are not added as one physical quantity.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/qualification/sealer_recovery_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/sealer-qualification.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns012-validate",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns012-validate/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns012-validate/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns012-validate/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns012-validate/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/validate_sealer_qualification.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/validate_sealer_qualification.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/sealer-qualification.log",
+      "started_at": "2026-09-12T03:14:36+00:00",
+      "finished_at": "2026-09-12T03:14:36+00:00",
+      "execution_kind": "sealed-profile live sealer/CAS/recovery qualification check: sequential/parallel root equality, incomplete-manifest rejection, stale-parent CAS, post-CAS recovery, separately labeled measurements; federation and external exactly-once are not claimed"
+    }
+  ],
+  "limitations": {
+    "kit_proof_seal_store": "absent from the pinned kit tree; NS-012 installed a labeled hermetic WAL/CAS contract shim so IncrementalProofSealer could run. The shim is not a released kit pin.",
+    "datasets_incremental_sealing_evidence": "absent from the pinned datasets tree; a closed vocabulary shim supplies SealStatus/ProofMode/terminal-status and evidence dataclasses already imported by accelerate.",
+    "federation_network_partition": "unavailable; not tested and not simulated as success",
+    "libp2p_mcp_transport": "unavailable",
+    "remote_store": "unavailable",
+    "exactly_once_external_side_effects": false,
+    "native_groth16_pytest_proof": "not claimed",
+    "live_ad_experiment": false,
+    "claim_boundary": "This receipt qualifies local sequential/parallel preparation, complete manifests, parent-bound CAS, operational generation CAS, Git fencing, and restart reconciliation on the located accelerate sealer plus hermetic WAL/CAS contracts. It is not global consensus, not federation, and not exactly-once physical side effects beyond the tested boundary."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}
