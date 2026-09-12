@@ -317,14 +317,14 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: law_to_action
-- Depends on: LA-005, LA-006, LA-007, LA-008
+- Depends on: LA-005, LA-006, LA-007, LA-008, LA-026, LA-027, LA-028
 - Goal id: LA-G3
 - Parent goal: LA-G000
 - Objective heap: papers/completion/law_to_action/paper.objectives.md
 - Board namespace: vericodegen-2026-law_to_action
 - Bundle: law_to_action/LA-G3
 - Parallel lane: law_to_action
-- Outputs: papers/completion/law_to_action/results/source_ir/raw.jsonl, papers/completion/law_to_action/results/source_ir/metrics.json, papers/completion/law_to_action/results/source_ir/failure_review.md, papers/completion/law_to_action/receipts/LA-009.json
+- Outputs: papers/completion/law_to_action/results/source_ir/raw.jsonl, papers/completion/law_to_action/results/source_ir/metrics.json, papers/completion/law_to_action/results/source_ir/failure_review.md, papers/completion/law_to_action/receipts/LA-009.json, papers/completion/law_to_action/receipts/snapshots/LA-009/
 - Predicted files: papers/completion/law_to_action/results/source_ir/raw.jsonl, papers/completion/law_to_action/results/source_ir/metrics.json, papers/completion/law_to_action/results/source_ir/failure_review.md, papers/completion/law_to_action/receipts/LA-009.json, papers/completion/law_to_action/receipts/snapshots/LA-009/
 - Allowed paths: 
 - Resource class: cpu-medium
@@ -732,12 +732,13 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-law_to_action
 - Bundle: law_to_action/LA-G6
 - Parallel lane: law_to_action
-- Outputs: papers/completion/law_to_action/results/worked_trace/trace.json, papers/completion/law_to_action/results/worked_trace/trace.md, papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf, papers/completion/law_to_action/receipts/LA-020.json
+- Outputs: papers/completion/law_to_action/results/worked_trace/trace.json, papers/completion/law_to_action/results/worked_trace/trace.md, papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf, papers/completion/law_to_action/receipts/LA-020.json, papers/completion/law_to_action/receipts/snapshots/LA-020/
 - Predicted files: papers/completion/law_to_action/results/worked_trace/trace.json, papers/completion/law_to_action/results/worked_trace/trace.md, papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf, papers/completion/law_to_action/receipts/LA-020.json, papers/completion/law_to_action/receipts/snapshots/LA-020/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
+- Proposal artifact envelope: {"binary_paths":["papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-020
 - Acceptance: Each illustrated transition links to actual raw evidence under one run/case identity.; Trace contains at least permitted useful work and prevented forbidden effects.; Figure/table does not use a fabricated signature/proof receipt or pretend a conceptual step ran.
 - Paper evidence: p8 §7 lines 298–313; p15 Appendix D twelve-step trace
@@ -753,6 +754,8 @@ Acceptance criteria:
 3. Figure/table does not use a fabricated signature/proof receipt or pretend a conceptual step ran.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
 ## LA-021 Strengthen related work and workshop-specific novelty using primary sources
 
@@ -880,12 +883,13 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-law_to_action
 - Bundle: law_to_action/LA-G7
 - Parallel lane: law_to_action
-- Outputs: papers/completion/law_to_action/submission/paper.pdf, papers/completion/law_to_action/submission/anonymous_supplement.zip, papers/completion/law_to_action/submission/compliance_audit.md, papers/completion/law_to_action/submission/disclosure.md, papers/completion/law_to_action/manuscript/checklist.tex, papers/completion/law_to_action/manuscript/neurips_2026_vericode.sty, papers/completion/law_to_action/submission/template_inputs.json, papers/completion/law_to_action/receipts/LA-024.json
+- Outputs: papers/completion/law_to_action/submission/paper.pdf, papers/completion/law_to_action/submission/anonymous_supplement.zip, papers/completion/law_to_action/submission/compliance_audit.md, papers/completion/law_to_action/submission/disclosure.md, papers/completion/law_to_action/manuscript/checklist.tex, papers/completion/law_to_action/manuscript/neurips_2026_vericode.sty, papers/completion/law_to_action/submission/template_inputs.json, papers/completion/law_to_action/receipts/LA-024.json, papers/completion/law_to_action/receipts/snapshots/LA-024/
 - Predicted files: papers/completion/law_to_action/submission/paper.pdf, papers/completion/law_to_action/submission/anonymous_supplement.zip, papers/completion/law_to_action/submission/compliance_audit.md, papers/completion/law_to_action/submission/disclosure.md, papers/completion/law_to_action/manuscript/checklist.tex, papers/completion/law_to_action/manuscript/neurips_2026_vericode.sty, papers/completion/law_to_action/submission/template_inputs.json, papers/completion/law_to_action/receipts/LA-024.json, papers/completion/law_to_action/receipts/snapshots/LA-024/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
+- Proposal artifact envelope: {"binary_paths":["papers/completion/law_to_action/submission/paper.pdf","papers/completion/law_to_action/submission/anonymous_supplement.zip"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-024
 - Acceptance: Compiled main-text page count is 4–9; PDF <=50 MB and supplementary ZIP <=100 MB.; Anonymous package does not link identifying author-maintained artifacts; necessary neutral aliases have a separate private mapping.; Actual methodology-essential LLM tool/model use and remaining human judgments are disclosed; the official style-generated anonymous Affiliation/Address/email block is retained.; Submission dates/template version are checked against the current CFP and recorded.; The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.; The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.; The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.; Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
 - Paper evidence: p1 placeholder author block; p14 Appendix D lines 504–507; p17 lines 546–549; workshop CFP; Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.
@@ -906,6 +910,8 @@ Acceptance criteria:
 8. Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
 ## LA-025 Independently reproduce key results, rebuild the PDF and provide author handoff
 
@@ -943,3 +949,114 @@ Acceptance criteria:
 3. Final paper/artifact checksums, author-review handoff and proposed submission metadata are complete.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+## LA-026 Complete source-bound CVE reproductions and reviewer-ready evidence
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: law_to_action
+- Depends on: LA-004, LA-008
+- Goal id: LA-G2
+- Parent goal: LA-G000
+- Objective heap: papers/completion/law_to_action/paper.objectives.md
+- Board namespace: vericodegen-2026-law_to_action
+- Bundle: law_to_action/LA-G2
+- Parallel lane: law_to_action
+- Outputs: papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl, papers/completion/law_to_action/benchmark/cases/cve_controls.jsonl, papers/completion/law_to_action/benchmark/cve_reproduction/, papers/completion/law_to_action/benchmark/annotations/cve_review.md, papers/completion/law_to_action/benchmark/annotations/review_packet_manifest.json, papers/completion/law_to_action/receipts/LA-026.json, papers/completion/law_to_action/receipts/snapshots/LA-026/
+- Predicted files: papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl, papers/completion/law_to_action/benchmark/cases/cve_controls.jsonl, papers/completion/law_to_action/benchmark/cve_reproduction/, papers/completion/law_to_action/benchmark/annotations/cve_review.md, papers/completion/law_to_action/benchmark/annotations/review_packet_manifest.json, papers/completion/law_to_action/receipts/LA-026.json, papers/completion/law_to_action/receipts/snapshots/LA-026/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-026
+- Acceptance: Every reserved pair has exact source/revision hashes and an isolated reproduction or precisely defined source-supported behavior evidence, with failure records for all attempted recovery.; The frozen 12 pairs/24 cases and 84 excluded controls remain distinguishable with complete source and mutation lineage; no synthetic control enters empirical sample counts.; Reviewers receive source evidence, scope assumptions and blank polarity/adjudication fields in a complete manifest; independent review remains pending in LA-027 and LA-006.
+- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Reuse candidates:
+- Receipt: papers/completion/law_to_action/receipts/LA-026.json
+
+Finish the technical work held by LA-006 while independent review is pending. Recover exact vulnerable/fixed source bodies for the existing 12 source-family pairs/24 reserved cases and preserve all 84 excluded controls. Use official/upstream pinned sources, isolated effect-observing reproductions or precisely supported behavior evidence, retain failed attempts and unknown applicability, and update the review packets. Do not change frozen population, manufacture CVEs or infer independent expected polarity from the implementation under evaluation.
+
+Acceptance criteria:
+
+1. Every reserved pair has exact source/revision hashes and an isolated reproduction or precisely defined source-supported behavior evidence, with failure records for all attempted recovery.
+2. The frozen 12 pairs/24 cases and 84 excluded controls remain distinguishable with complete source and mutation lineage; no synthetic control enters empirical sample counts.
+3. Reviewers receive source evidence, scope assumptions and blank polarity/adjudication fields in a complete manifest; independent review remains pending in LA-027 and LA-006.
+
+Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
+
+## LA-027 Receive and adjudicate independent legal, CVE and skill reviews
+
+- Status: blocked
+- Completion: manual
+- Is schedulable: false
+- Review only: false
+- Priority: P0
+- Track: law_to_action
+- Depends on: LA-005, LA-007, LA-026
+- Goal id: LA-G2
+- Parent goal: LA-G000
+- Objective heap: papers/completion/law_to_action/paper.objectives.md
+- Board namespace: vericodegen-2026-law_to_action
+- Bundle: law_to_action/LA-G2
+- Parallel lane: law_to_action
+- Outputs: papers/completion/law_to_action/benchmark/annotations/human_review_import.json, papers/completion/law_to_action/benchmark/annotations/private_gold_commitment.json, papers/completion/law_to_action/benchmark/annotations/human_review_report.md, papers/completion/law_to_action/receipts/LA-027.json, papers/completion/law_to_action/receipts/snapshots/LA-027/
+- Predicted files: papers/completion/law_to_action/benchmark/annotations/human_review_import.json, papers/completion/law_to_action/benchmark/annotations/private_gold_commitment.json, papers/completion/law_to_action/benchmark/annotations/human_review_report.md, papers/completion/law_to_action/receipts/LA-027.json, papers/completion/law_to_action/receipts/snapshots/LA-027/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-027
+- Acceptance: Actual human legal/intent/security judgments bind the selected source units, versions, reviewers and timestamps, with explicit ambiguity/unknown and disagreement/adjudication records.; Every empirical CVE pair has independently reviewed expected polarity plus the LA-026 supported behavior evidence required by the unchanged LA-006 contract.; A validated import preserves original blank packets, all selected cases and review provenance; missing reviewers or labels cannot yield a complete review or scored fidelity claim.
+- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Reuse candidates:
+- Receipt: papers/completion/law_to_action/receipts/LA-027.json
+
+External human-review gate for the prepared legal, CVE and skill cohorts. Obtain competent independent reviewers and adjudication with exact source spans and applicability assumptions. Do not treat agent-generated expected labels as expert or human review. The operator validates actual reviewer returns before completing this gate and restoring LA-006 after all of its unchanged criteria are met. This manual task is not dispatched to an implementation model. Actual returned labels and adjudicated gold remain in the private reviewer store outside Git; repository outputs contain aggregate counts, schemas and cryptographic import commitments only.
+
+Acceptance criteria:
+
+1. Actual human legal/intent/security judgments bind the selected source units, versions, reviewers and timestamps, with explicit ambiguity/unknown and disagreement/adjudication records.
+2. Every empirical CVE pair has independently reviewed expected polarity plus the LA-026 supported behavior evidence required by the unchanged LA-006 contract.
+3. A validated import preserves original blank packets, all selected cases and review provenance; missing reviewers or labels cannot yield a complete review or scored fidelity claim.
+
+Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
+
+## LA-028 Qualify real source adapters, review import and benchmark execution before final scoring
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: law_to_action
+- Depends on: LA-005, LA-007, LA-008, LA-010, LA-011, LA-012, LA-013, LA-014, LA-026
+- Goal id: LA-G3
+- Parent goal: LA-G000
+- Objective heap: papers/completion/law_to_action/paper.objectives.md
+- Board namespace: vericodegen-2026-law_to_action
+- Bundle: law_to_action/LA-G3
+- Parallel lane: law_to_action
+- Outputs: papers/completion/law_to_action/benchmark/source_pipeline.py, papers/completion/law_to_action/benchmark/review_import.py, papers/completion/law_to_action/benchmark/qualify_final_runtime.py, papers/completion/law_to_action/benchmark/runtime_manifest.json, papers/completion/law_to_action/results/development_qualification/, papers/completion/law_to_action/benchmark/FINAL_RUN.md, papers/completion/law_to_action/receipts/LA-028.json, papers/completion/law_to_action/receipts/snapshots/LA-028/
+- Predicted files: papers/completion/law_to_action/benchmark/source_pipeline.py, papers/completion/law_to_action/benchmark/review_import.py, papers/completion/law_to_action/benchmark/qualify_final_runtime.py, papers/completion/law_to_action/benchmark/runtime_manifest.json, papers/completion/law_to_action/results/development_qualification/, papers/completion/law_to_action/benchmark/FINAL_RUN.md, papers/completion/law_to_action/receipts/LA-028.json, papers/completion/law_to_action/receipts/snapshots/LA-028/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-028
+- Acceptance: Selected source adapters actually process development legal/CVE/skill sources into retained predictions or explicit failures, with all inputs and runtime versions pinned.; An executable end-to-end development command reaches the selected proof/capability/effect-observing handler boundary and records actual model/provider calls when the chosen arm requires them; fixture-only routes are not represented as production.; Review import, final admission and analysis refuse missing independent labels, unavailable runtime routes and incomplete populations; final inputs/arm budgets are frozen before evaluated predictions.
+- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Reuse candidates:
+- Receipt: papers/completion/law_to_action/receipts/LA-028.json
+
+Prepare actual source extraction/normalization and the final-run entry points independently of missing human judgments. Qualify the real frozen source adapters and protected handlers on development sources, with stage-specific receipts and a review-return importer that refuses missing/agent-generated human provenance. Distinguish the prior fixed-candidate fixture runs from model/held-out comparisons. Make source access, selected solver/crypto/transport/runtime profiles, budgets and final admission requirements executable. Do not inspect final labels or score final examples before LA-027.
+
+Acceptance criteria:
+
+1. Selected source adapters actually process development legal/CVE/skill sources into retained predictions or explicit failures, with all inputs and runtime versions pinned.
+2. An executable end-to-end development command reaches the selected proof/capability/effect-observing handler boundary and records actual model/provider calls when the chosen arm requires them; fixture-only routes are not represented as production.
+3. Review import, final admission and analysis refuse missing independent labels, unavailable runtime routes and incomplete populations; final inputs/arm budgets are frozen before evaluated predictions.
+
+Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.

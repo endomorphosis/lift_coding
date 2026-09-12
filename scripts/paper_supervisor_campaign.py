@@ -24,6 +24,7 @@ PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
 SUBMODULES = ("external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit")
 PYTHON = Path.home() / "lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python"
 GROK_TEX_PROFILE = Path("papers/completion/toolchains/grok_tex_profile.json")
+RESEARCH_PROFILE = Path("papers/completion/toolchains/research_profile.json")
 
 
 def now():
@@ -138,6 +139,8 @@ def environment(repo):
                # hashes before mounting this formatting toolchain read-only.
                IPFS_ACCELERATE_AGENT_GROK_TEX_TOOLCHAIN_JSON=json.dumps(
                    read(repo / GROK_TEX_PROFILE), sort_keys=True, separators=(",", ":")),
+               IPFS_ACCELERATE_AGENT_RESEARCH_TOOLCHAIN_JSON=json.dumps(
+                   read(repo / RESEARCH_PROFILE), sort_keys=True, separators=(",", ":")),
                # Successful merged workspaces use native terminal cleanup.
                # Failure rescue and ownership checks remain native obligations.
                IPFS_ACCELERATE_AGENT_WORKTREE_POOL_ENABLED="false",
@@ -224,13 +227,14 @@ def fetch_board(paper, lane):
         if metadata.get("database_uuid") != identity["database_uuid"]:
             raise RuntimeError("remote database identity differs from ready owner")
         tasks = records("SELECT * FROM tasks ORDER BY ordinal, task_alias")
+        dependencies = records("SELECT task_cid, dependency_task_cid FROM task_dependencies ORDER BY task_cid, dependency_task_cid")
         goals = records("SELECT * FROM goals ORDER BY ordinal, goal_alias")
         events = records("SELECT * FROM domain_events ORDER BY global_sequence")
         conn.commit()
         return {"paper_id": paper, "board_namespace": "vericodegen-2026-" + paper,
                 "store_identity": {"store_id": ready["store_id"], "database_uuid": identity["database_uuid"]},
                 "store_generation": {"generation": ready["store_generation"]},
-                "tasks": tasks, "goals": goals, "events": events}
+                "tasks": tasks, "goals": goals, "events": events, "task_dependencies": dependencies}
     finally:
         conn.close()
 
@@ -247,6 +251,48 @@ def worker_observation(lane, authoritative_tasks=None):
     except Exception as exc:
         # A transient private projection read must not suppress owner health.
         return {"authoritative": False, "error_type": type(exc).__name__}
+
+
+def task_progress(board):
+    """Explain waiting work from one authenticated task/dependency snapshot.
+
+    This is an eligibility diagnostic, not a claim or scientific acceptance.
+    Native Source.ready_tasks remains the scheduling authority.
+    """
+    tasks = {t["task_cid"]: t for t in board["tasks"]}
+    dependencies = {cid: [] for cid in tasks}
+    for edge in board.get("task_dependencies", []):
+        if edge["task_cid"] in dependencies:
+            dependencies[edge["task_cid"]].append(edge["dependency_task_cid"])
+    eligible, running, blocked, waiting = [], [], [], []
+    dependency_snapshot_available = "task_dependencies" in board
+    for cid, task in tasks.items():
+        alias, status = task["task_alias"], task["status"]
+        raw_body = task.get("body_json", {})
+        body = json.loads(raw_body) if isinstance(raw_body, str) else raw_body
+        schedulable = str(body.get("is_schedulable", body.get("is schedulable", True))).lower() not in {"false", "0", "no"}
+        manual = str(body.get("completion", "auto")).lower() == "manual"
+        missing = [tasks[d]["task_alias"] if d in tasks else d for d in dependencies[cid]
+                   if d not in tasks or tasks[d]["status"] != "completed"]
+        if status == "in_progress":
+            running.append(alias)
+        elif status == "blocked":
+            receipt = body.get("completion_receipt") or {}
+            blocked.append({"task": alias, "reason": receipt.get("reason", "external_human_review_pending" if manual else "blocked_task"),
+                            "human_review": manual, "unmet_dependencies": sorted(missing)})
+        elif status == "ready":
+            if dependency_snapshot_available and schedulable and not manual and not missing:
+                eligible.append(alias)
+            else:
+                waiting.append({"task": alias, "unmet_dependencies": sorted(missing),
+                                "human_review": manual, "schedulable": schedulable})
+    state = ("working" if running else "awaiting_dispatch" if eligible else
+             "tasks_complete" if tasks and all(t["status"] == "completed" for t in tasks.values()) else
+             "waiting_on_blockers" if dependency_snapshot_available else "dependency_snapshot_unavailable")
+    return {"state": state, "in_progress": sorted(running), "eligible_candidates": sorted(eligible),
+            "blocked": sorted(blocked, key=lambda t: t["task"]), "waiting": sorted(waiting, key=lambda t: t["task"]),
+            "dependency_snapshot_available": dependency_snapshot_available,
+            "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"}
 
 
 def launch(argv, cwd, env, log):
@@ -363,6 +409,7 @@ def serve(state, worktree_parent):
                 lake = project_snapshot(snap, state / "ducklake", repo_root=ROOT, source_path=state / "quack-snapshot.json")
                 write(state / "ducklake-status.json", lake)
                 health["tasks"] = {b["paper_id"]: dict(Counter(t["status"] for t in b["tasks"])) for b in snap["boards"]}
+                health["progress"] = {b["paper_id"]: task_progress(b) for b in snap["boards"]}
                 health["quack_reads_succeeded"] = True
             except Exception as exc:
                 health.update(quack_reads_succeeded=False, error_type=type(exc).__name__)
@@ -425,6 +472,7 @@ def main():
                 item.update(quack_read=True, tasks=dict(Counter(t["status"] for t in board["tasks"])),
                             active_tasks=[t["task_alias"] for t in board["tasks"] if t["status"] not in {"ready", "open", "todo"}],
                             events=len(board["events"]))
+                item["progress"] = task_progress(board)
             except Exception as exc:
                 item.update(quack_read=False, error_type=type(exc).__name__)
                 if "workers" not in item:
