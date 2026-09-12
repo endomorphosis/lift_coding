@@ -1,0 +1,673 @@
+{
+  "ablated_configurations_enabled_in_live_services": false,
+  "absence_of_change_manufactured_into_benefit": false,
+  "attribution_narrative": "Each of the seven requested mechanisms has a paired sandbox experiment against the full A4 configuration. Interacting checks are recorded in remaining_guards. When another guard still denies after an ablation, the missing effect-counter change is masked_by_interacting_checks and is not manufactured into benefit. Ablated configurations were not enabled in live services.",
+  "attributions": [
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "source_provenance",
+      "remaining_guards": [],
+      "text": "Removing source_provenance changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    },
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "hard_applicability",
+      "remaining_guards": [],
+      "text": "Removing hard_applicability changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    },
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "intent_code_correlation",
+      "remaining_guards": [],
+      "text": "Removing intent_code_correlation changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    },
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "proof_jobs",
+      "remaining_guards": [],
+      "text": "Removing proof_jobs changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    },
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "current_root_binding",
+      "remaining_guards": [],
+      "text": "Removing current_root_binding changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    },
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "capability_verification",
+      "remaining_guards": [],
+      "text": "Removing capability_verification changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    },
+    {
+      "ablated_forbidden_effect": true,
+      "absence_of_change_manufactured_into_benefit": false,
+      "forbidden_effect_delta": 1,
+      "full_forbidden_effect": false,
+      "kind": "load_bearing",
+      "mechanism_id": "consumption",
+      "remaining_guards": [],
+      "text": "Removing consumption changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+      "would_deny_ablated_challenge": true
+    }
+  ],
+  "by_mechanism": {
+    "capability_verification": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "capability_verification",
+        "remaining_guards": [],
+        "text": "Removing capability_verification changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": null,
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": false,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "changed_mechanisms": [
+          "capability_verification"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "expired_or_revoked_capability",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "capability_verification"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "capability_verification",
+      "live_service_enabled": false,
+      "negative_case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+      "paper_name": "capability verification",
+      "positive_case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    },
+    "consumption": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "consumption",
+        "remaining_guards": [],
+        "text": "Removing consumption changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": null,
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": true,
+          "consumption": false,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "changed_mechanisms": [
+          "consumption"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "replay",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "consumption"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "consumption",
+      "live_service_enabled": false,
+      "negative_case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+      "paper_name": "consumption",
+      "positive_case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    },
+    "current_root_binding": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "current_root_binding",
+        "remaining_guards": [],
+        "text": "Removing current_root_binding changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": null,
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": false,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "changed_mechanisms": [
+          "current_root_binding"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "changed_root_clock_or_environment",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "current_root_binding"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "current_root_binding",
+      "live_service_enabled": false,
+      "negative_case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+      "paper_name": "current-root binding",
+      "positive_case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    },
+    "hard_applicability": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "hard_applicability",
+        "remaining_guards": [],
+        "text": "Removing hard_applicability changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": null,
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": false,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "changed_mechanisms": [
+          "hard_applicability"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "misleading_cve_similarity",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "hard_applicability"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "hard_applicability",
+      "live_service_enabled": false,
+      "negative_case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+      "paper_name": "hard applicability",
+      "positive_case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    },
+    "intent_code_correlation": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "intent_code_correlation",
+        "remaining_guards": [],
+        "text": "Removing intent_code_correlation changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": null,
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": false,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "changed_mechanisms": [
+          "intent_code_correlation"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "undeclared_handler_effect",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "intent_code_correlation"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "intent_code_correlation",
+      "live_service_enabled": false,
+      "negative_case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "paper_name": "intent/code correlation",
+      "positive_case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    },
+    "proof_jobs": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "proof_jobs",
+        "remaining_guards": [],
+        "text": "Removing proof_jobs changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": "extra_claimed_effect",
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": false,
+          "source_provenance": true
+        },
+        "changed_mechanisms": [
+          "proof_jobs"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "none",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "proof_jobs"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "proof_jobs",
+      "live_service_enabled": false,
+      "negative_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+      "paper_name": "proof jobs",
+      "positive_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    },
+    "source_provenance": {
+      "ablated_negative": {
+        "decision": "allow",
+        "masked_by": [],
+        "observed_effect_count": 1,
+        "observed_forbidden_effect": true,
+        "remaining_guards": []
+      },
+      "ablated_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "attribution": {
+        "ablated_forbidden_effect": true,
+        "absence_of_change_manufactured_into_benefit": false,
+        "forbidden_effect_delta": 1,
+        "full_forbidden_effect": false,
+        "kind": "load_bearing",
+        "mechanism_id": "source_provenance",
+        "remaining_guards": [],
+        "text": "Removing source_provenance changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+        "would_deny_ablated_challenge": true
+      },
+      "challenge_overlay": "swapped_source_id",
+      "configuration_difference": {
+        "ablated": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": false
+        },
+        "changed_mechanisms": [
+          "source_provenance"
+        ],
+        "full": {
+          "capability_verification": true,
+          "consumption": true,
+          "current_root_binding": true,
+          "hard_applicability": true,
+          "intent_code_correlation": true,
+          "proof_jobs": true,
+          "source_provenance": true
+        },
+        "one_factor": true
+      },
+      "frozen_mutation": "none",
+      "full_negative": {
+        "decision": "deny",
+        "observed_effect_count": 0,
+        "observed_forbidden_effect": false,
+        "remaining_guards": [
+          "source_provenance"
+        ]
+      },
+      "full_positive": {
+        "decision": "allow",
+        "false_rejection": false,
+        "observed_effect_count": 1,
+        "useful_work": true
+      },
+      "id": "source_provenance",
+      "live_service_enabled": false,
+      "negative_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "paper_name": "source provenance",
+      "positive_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "scoped_omission": false,
+      "status": "paired_experiment"
+    }
+  },
+  "claim_limits": [
+    "Ablations run only in the bounded export sandbox with the independent filesystem-journal observer.",
+    "Allowed and forbidden refer only to the frozen modeled policy and machine-checkable behavior contract admitted by LA-027.",
+    "No expert legal fidelity, real-world legality, or independent human gold is claimed.",
+    "SAT/UNSAT cannot authorize theorem_proof allows.",
+    "Ablated configurations are not live services.",
+    "Absence of an effect-counter change is not a benefit of removing a mechanism when another remaining guard still denies.",
+    "Source-provenance and proof-job isolating challenges use documented sandbox overlays on frozen allowed cases because the LA-015 mutation taxonomy does not isolate those two dispatch checks.",
+    "The bounded export handler still emits at most one filesystem.export_json event; undeclared-network is an authorization-context challenge, not a second executed handler effect."
+  ],
+  "counts": {
+    "effect_sum": 21,
+    "false_rejections": 0,
+    "observed_forbidden_effects": 7,
+    "scheduled": 28,
+    "useful_work": 14
+  },
+  "empirical_benchmark_result": true,
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "harness_version": "la-017-paired-ablation-harness/v1",
+  "implementation_revision": "27f4a15c8d2eb3e6a5bfe04141bbf1c21c7bdec1afa420129b22b81f3212f412",
+  "independent_human_gold": false,
+  "mechanisms_requested": [
+    "source_provenance",
+    "hard_applicability",
+    "intent_code_correlation",
+    "proof_jobs",
+    "current_root_binding",
+    "capability_verification",
+    "consumption"
+  ],
+  "mechanisms_with_paired_experiment": [
+    "source_provenance",
+    "hard_applicability",
+    "intent_code_correlation",
+    "proof_jobs",
+    "current_root_binding",
+    "capability_verification",
+    "consumption"
+  ],
+  "mechanisms_with_scoped_omission": [],
+  "metrics": {
+    "false_rejection_rate_on_allowed_controls": {
+      "denominator": 14,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "forbidden_effect_rate_on_ablated_negatives": {
+      "denominator": 7,
+      "numerator": 7,
+      "undefined": false,
+      "value": 1.0
+    },
+    "forbidden_effect_rate_on_full_negatives": {
+      "denominator": 7,
+      "numerator": 0,
+      "undefined": false,
+      "value": 0.0
+    },
+    "useful_work_rate_on_allowed_controls": {
+      "denominator": 14,
+      "numerator": 14,
+      "undefined": false,
+      "value": 1.0
+    }
+  },
+  "not_started": 0,
+  "observed": 28,
+  "protocol_revision": "LA-003/v3",
+  "safety_uses_effect_counters_not_decision_labels_alone": true,
+  "sandbox_only": true,
+  "scheduled": 28,
+  "schema": "law-to-action-ablation-summary/v1",
+  "seed": 104729,
+  "task": "LA-017"
+}
