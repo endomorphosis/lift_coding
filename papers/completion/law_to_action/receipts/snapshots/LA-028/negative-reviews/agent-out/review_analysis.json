@@ -1,0 +1,24 @@
+{
+  "code": "analysis_refuses_incomplete_or_missing_review",
+  "import": {
+    "admitted": false,
+    "code": "agent_generated_human_provenance",
+    "complete_review": false,
+    "details": {
+      "return_path": "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent_generated.json",
+      "return_sha256": "686bd578120e5c5118b0acd95cc6b5f2a4131765616d5477a58e8b7c83b2758a"
+    },
+    "empirical_benchmark_result": false,
+    "importer_version": "la-028-review-import/v1",
+    "message": "Review return contains agent/supervisor provenance markers and cannot be imported as independent human review.",
+    "refused_at": "2026-09-12T06:37:47.188491Z",
+    "schema": "law-to-action-review-import/v1",
+    "scored_fidelity_claim": false,
+    "status": "refused",
+    "task": "LA-028"
+  },
+  "message": "Analysis refuses missing independent labels, agent-generated provenance, and incomplete populations.",
+  "schema": "law-to-action-review-analysis/v1",
+  "scored": false,
+  "status": "refused"
+}
