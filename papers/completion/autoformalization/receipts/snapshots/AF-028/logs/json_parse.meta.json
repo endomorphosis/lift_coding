@@ -1,0 +1,18 @@
+{
+  "name": "json_parse",
+  "argv": [
+    "/usr/bin/python3.12",
+    "-c",
+    "import json, pathlib, sys\npaths=sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding=\"utf-8\"))\n    print(path, \"ok\")\n",
+    "papers/completion/autoformalization/config/structural_evidence_scope.json",
+    "papers/completion/autoformalization/evidence/structural_scope_audit.json",
+    "papers/completion/autoformalization/evidence/author_feedback_status.json"
+  ],
+  "cwd": ".",
+  "exit_code": 0,
+  "started_at": "2026-09-12T15:29:33.380840+00:00",
+  "finished_at": "2026-09-12T15:29:33.408479+00:00",
+  "home": "/tmp/ipfs-accelerate-validation-home-af028-LI5fNt",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "interpreter": "/usr/bin/python3.12"
+}
