@@ -1,0 +1,63 @@
+{
+  "applied_learning_rollback_performed": false,
+  "interpretation": "Native compiler runs ingest the export identity but do not apply learned features. T4 is unactivated/unavailable; E remains locked. Default reset is an actual compiler reset, not rollback of a previously applied learned effect. Missing proof/source-copy metrics remain missing. Target-assisted T2 reconstruction is not source-free generalization or semantic fidelity. Human fidelity/agreement remain unmeasured; outside reviewers are not a manuscript-completion prerequisite. A native guardrails_passed flag over an empty family-metrics map supplies no measured proof/source-copy guardrail result. Export support counts describe native shared heads with samples=(), not empirical canary support.",
+  "provenance": {
+    "manifest": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/root_accepted_plan.private.json",
+      "sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344"
+    },
+    "metric_scope": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/independent_run_observations/reconstruction_metric_scope.private.json",
+      "sha256": "2ad345cb396119a0c902b9e6cdb465ad0c52670ba19742a834d48d715144ab61"
+    },
+    "root_audit": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/adoption_v1/root_all_three_seed_audit.private.json",
+      "sha256": "1151d7447fbbff339b71c9f9f9059fd7cc152cd55601dabecad48c077f0e40bc"
+    },
+    "source_versions": {
+      "adoption_instruction_source_head": "ecb15c9692ab2c2c566fc43fa0669538afb20a02",
+      "operator_execution_source_head": "06a34600b741c908eb25060650e9c88b9b895bf7",
+      "operator_manifest_sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344",
+      "operator_native_pins": {
+        "external/ipfs_accelerate": "bee8888ac9ce9e2a08482cc11c8416dfad9dc1f5",
+        "external/ipfs_datasets": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+        "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+      }
+    },
+    "whole_run_clock": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/root_shared_run_clock.private.json",
+      "sha256": "64e85ddc13848e2e62fececee9eb638ad974fbd0139f36a41a535cbd2a2a8f67"
+    }
+  },
+  "reset_operations_attempted": 114,
+  "schema": "af013-three-seed-default-reset-observation/v1",
+  "seeds": [
+    {
+      "native_reset": {
+        "applied_learning_rollback_performed": false,
+        "reason": "Each paired row retains an actual fresh default compiler run. No learned effect was activated.",
+        "reset_operations_attempted": 38,
+        "schema": "af013-default-reset-observation/v1"
+      },
+      "seed": 104729
+    },
+    {
+      "native_reset": {
+        "applied_learning_rollback_performed": false,
+        "reason": "Each paired row retains an actual fresh default compiler run. No learned effect was activated.",
+        "reset_operations_attempted": 38,
+        "schema": "af013-default-reset-observation/v1"
+      },
+      "seed": 130363
+    },
+    {
+      "native_reset": {
+        "applied_learning_rollback_performed": false,
+        "reason": "Each paired row retains an actual fresh default compiler run. No learned effect was activated.",
+        "reset_operations_attempted": 38,
+        "schema": "af013-default-reset-observation/v1"
+      },
+      "seed": 155921
+    }
+  ]
+}

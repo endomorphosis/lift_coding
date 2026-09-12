@@ -1,0 +1,71 @@
+{
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json": "7bf7cbe0641dfd7175922dd530f5d7a7158403a49fb6dbf508136ce0434dcbff",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json": "d95cc91cdc9e142d20e602af2aa68b8850e4fcf4f2ac6a5e515d3089a3f0e1ab",
+    "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl": "e2898a87f9c76ab4640b4a954fed536403fb2dd32ac2aacc94087a7ad324e373"
+  },
+  "automatic_completion_available": false,
+  "commands": [],
+  "completed_at": null,
+  "criteria": [
+    {
+      "criterion": "Canary population and thresholds are fixed before comparison and are distinct from final test.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json"
+      ],
+      "explanation": "Coordinating-assistant evidence/criterion review; no outside-human prerequisite.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Either actual consumer activation is evidenced by a matching loaded digest or the route is reported unactivated; export alone earns no downstream credit.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json"
+      ],
+      "explanation": "Coordinating-assistant evidence/criterion review; no outside-human prerequisite.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Promotion rejection and rollback retain their genuine result and are analyzed rather than bypassed.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json"
+      ],
+      "explanation": "Coordinating-assistant evidence/criterion review; no outside-human prerequisite.",
+      "status": "pending"
+    }
+  ],
+  "outputs": {
+    "papers/completion/autoformalization/evidence/consumer_activation.json": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/consumer_activation.json",
+    "papers/completion/autoformalization/evidence/guidance_export.json": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/guidance_export.json",
+    "papers/completion/autoformalization/evidence/rollback_receipt.json": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/evidence/rollback_receipt.json",
+    "papers/completion/autoformalization/runs/guidance_promotion/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-013/operator-adoption-v1/runs/guidance_promotion/results.jsonl"
+  },
+  "pending_actions": [
+    "Analyze native rejection and default reset within the unchanged three criteria.",
+    "Retain unavailable T4/E and all unknown metrics. Do not rerun operator checkpoints/canaries/training/providers.",
+    "Finish through unchanged ordinary native validation, merge and durable completion event."
+  ],
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "adoption_instruction_source_head": "ecb15c9692ab2c2c566fc43fa0669538afb20a02",
+    "operator_execution_source_head": "06a34600b741c908eb25060650e9c88b9b895bf7",
+    "operator_manifest_sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344",
+    "operator_native_pins": {
+      "external/ipfs_accelerate": "bee8888ac9ce9e2a08482cc11c8416dfad9dc1f5",
+      "external/ipfs_datasets": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    }
+  },
+  "status": "pending_operator_semantic_review",
+  "task_id": "AF-013",
+  "template_only": true
+}

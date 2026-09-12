@@ -1,0 +1,3206 @@
+{
+  "e_locked": true,
+  "export_samples": 0,
+  "interpretation": "Native compiler runs ingest the export identity but do not apply learned features. T4 is unactivated/unavailable; E remains locked. Default reset is an actual compiler reset, not rollback of a previously applied learned effect. Missing proof/source-copy metrics remain missing. Target-assisted T2 reconstruction is not source-free generalization or semantic fidelity. Human fidelity/agreement remain unmeasured; outside reviewers are not a manuscript-completion prerequisite. A native guardrails_passed flag over an empty family-metrics map supplies no measured proof/source-copy guardrail result. Export support counts describe native shared heads with samples=(), not empirical canary support.",
+  "native_raw_export_schema_not_implied": true,
+  "provenance": {
+    "manifest": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/root_accepted_plan.private.json",
+      "sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344"
+    },
+    "metric_scope": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/independent_run_observations/reconstruction_metric_scope.private.json",
+      "sha256": "2ad345cb396119a0c902b9e6cdb465ad0c52670ba19742a834d48d715144ab61"
+    },
+    "root_audit": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/adoption_v1/root_all_three_seed_audit.private.json",
+      "sha256": "1151d7447fbbff339b71c9f9f9059fd7cc152cd55601dabecad48c077f0e40bc"
+    },
+    "source_versions": {
+      "adoption_instruction_source_head": "ecb15c9692ab2c2c566fc43fa0669538afb20a02",
+      "operator_execution_source_head": "06a34600b741c908eb25060650e9c88b9b895bf7",
+      "operator_manifest_sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344",
+      "operator_native_pins": {
+        "external/ipfs_accelerate": "bee8888ac9ce9e2a08482cc11c8416dfad9dc1f5",
+        "external/ipfs_datasets": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+        "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+      }
+    },
+    "whole_run_clock": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/root_shared_run_clock.private.json",
+      "sha256": "64e85ddc13848e2e62fececee9eb638ad974fbd0139f36a41a535cbd2a2a8f67"
+    }
+  },
+  "representation": "aggregate-with-retained-native-references",
+  "schema": "af013-three-seed-native-export-reference/v1",
+  "seeds": [
+    {
+      "checkpoint": {
+        "arm": "T3",
+        "bytes": 5879326750,
+        "identity_sha256": "def483e87bb57d27a8f24a3939a063d1039af95c111ec6d5733b452f612b5cbc",
+        "no_payload_parsed_or_rehashed": true,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/delivered/evidence/native_training/states/T3-104729-final.json",
+        "seed": 104729,
+        "sha256": "324e0488bf71b87124d431fd4b7099d6f5a7b4fc45b0c537e524c611f4d13dd0",
+        "shard_ordinal": 3,
+        "stat_only_at_preparation": true
+      },
+      "export": {
+        "contract_feature_atoms": [],
+        "excluded_categories": [
+          "decoded_embeddings",
+          "raw_source_text",
+          "sample_identifiers",
+          "sample_memory",
+          "source_spans",
+          "token_features"
+        ],
+        "export_id": "lir-feature-export-609c2646eb8be276f3453a62",
+        "feature_count": 64,
+        "model_state_id": "modal-autoencoder-state-3bcb6025f6686500e2510698",
+        "repair_lane_feature_atoms": [],
+        "sample_count": 0,
+        "sample_memory_included": false,
+        "schema_version": "legal-ir-stable-autoencoder-feature-export-v1",
+        "stable_features": [
+          {
+            "feature": "compiler-contract:bias",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-af9fd592d4b64d1544c5",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "compiler-profile:bias",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-eb080d052440e11d06f3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "compiler-profile:text-token-count:16-31",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-7987f24f7802a7147283",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "cycle-consistency:bias",
+            "feature_group": "cycle_consistency",
+            "feature_id": "lir-feature-3900db6165d9d175ece4",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "decompiler-surface:bias",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-11e138aea53b659dba46",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "decompiler-surface:uscode-surface-profile:uscode_section_heading_surface",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-209acaa7ee488b404e11",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "logic-view-contract:bias",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-ea592b10e0bc4f9275d3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "logic-view-contract:expected-view:knowledge_graphs_neo4j_compat",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-6d99edc50aebb6a49d30",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "logic-view-contract:expected-view:modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-07c20bd3eb4d99d71c23",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_multiview_legal_ir_graph_projection:knowledge_graphs_neo4j_compat",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d923fd9a135bcc1176e2",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "repair-plan:bias",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-c4e3c8ef10a070aa6ee0",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "semantic-slot:bias",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-153ba8f0568975217cc9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "semantic-slot:frame-logic-ontology:modal_flogic_ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5df02228d4ac54faca77",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "semantic-slot:frame-logic-triples:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-693b0df2ee40239b3a8f",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966964
+          },
+          {
+            "feature": "compiler-profile:frame:administrative_notice_hearing",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-5bfe640e6b5c5cd8a5ca",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005830914686
+          },
+          {
+            "feature": "semantic-slot:selected-frame:administrative_notice_hearing",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-48857b4618657f30924a",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005830914686
+          },
+          {
+            "feature": "logic-view-contract:expected-view:deontic_norms",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d4fe22028df8034b0926",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "logic-view-contract:expected-view:external_provers_router",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-3338bae9908fc9d11f85",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "logic-view-contract:expected-view:modal_ir",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d810633386e880914410",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_deontic_bridge_quality_gate:deontic_norms",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-0e25ddf47c504aa785af",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:conditions:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ebf47b2aced651d799b9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:exceptions:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-95b2ea9208ffa6002a64",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:predicate-arity:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-d89e4acaf02a21ba3e35",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:predicate-role:clause",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-2a83fbca013200fc0caa",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:predicate-token-count:4-7",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a9b1b4ba1a1d547cfe37",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-897de2529c5750040063",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:temporal",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-25a82f29de1c74bd8a5c",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-85a4bc4db851149e8b82",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:temporal",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a2a68fe368c2e7b1ac9b",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.00570360744
+          },
+          {
+            "feature": "semantic-slot:text-cue:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5ca86b62fdfd6eb334ac",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005667368106
+          },
+          {
+            "feature": "logic-view-contract:expected-view:fol_tdfol",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d3974b631c372c6cef33",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005628392252
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_tdfol_bridge_parse:fol_tdfol",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-b484c16802a407f928cf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005628392252
+          },
+          {
+            "feature": "logic-view-contract:expected-view:cec_native",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-a29587c751c5f87cf51f",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005583943049
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_cec_dcec_bridge:cec_native",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-ecb4600bb3b9c5605ceb",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005583943049
+          },
+          {
+            "feature": "logic-view-contract:todo-route:refine_typed_ir_or_decompiler_slots:modal_ir+external_provers_router+deontic_norms+fol_tdfol+cec_native+knowledge_graphs_neo4j_compat+modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-c2df66b0b45c8091dd2e",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005509692734
+          },
+          {
+            "feature": "logic-view-contract:view-signature:modal_ir+external_provers_router+deontic_norms+fol_tdfol+cec_native+knowledge_graphs_neo4j_compat+modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-69e4626ce96f1c98a4db",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005509692734
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ec7bd6c2fe7b1f147b84",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525375
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:frame",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-9de7cc1a859d1f6c53a1",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525375
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-0e8e43c2a4e57846ee92",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525375
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:frame",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-1d9477f455a80fffd518",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525375
+          },
+          {
+            "feature": "semantic-slot:family-role:deontic:clause",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-7bf0536d9cec177476d2",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:modal-family:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-7b509aac28be96115b47",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:surface-cue-family:deontic:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4bd6187d354ce25afe77",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a4d9704888107ab791f9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-aedf2e95fd95a4fdd4c0",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5c6e580ad8ca96cddcbf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-52795a16e002076f937e",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b67fb6be024e87f108e7",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-8922582143f387038526",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b89c3f5fceb7425769f3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4829d8f54f2e4cd63bb8",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||knowledge_graphs.neo4j_compat",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-cd55d99d1cb79ebfb7b1",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-3a490cf228c6de03cfeb",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4d2c41c3382e03756eaf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b8fb72cbeb40bbf64eaa",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||knowledge_graphs.neo4j_compat",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-12a0884c1809b0e23a89",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-d429dd1539619e2d4327",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||modal.frame_logic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-e0b5891656766b0f6bae",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-885264b64e5781908668",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-3220fd1ad9ae389253dd",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ddd2495ce51a5e999c76",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||modal.frame_logic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-1394c28dc8579b182435",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair:deontic->conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-f0a5918b0fb41dd2f624",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair:deontic->deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a4d7d5b3cdc40b35478b",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017819
+          }
+        ],
+        "view_family_weights": {}
+      },
+      "export_canonical_sha256": "5b0697cde5b1ae1a2ebfb778fcc45941ea70a76612d9d807d1f83b2d06a4fd15",
+      "raw_files": {
+        "boundary.json": {
+          "bytes": 30815,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/boundary.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "8b32f9d83c6c082981e13f60af555c93c5d0cc87feb25d0f3e0a9713a9b15f99"
+        },
+        "cleanup.stderr": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/cleanup.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "cleanup.stdout": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/cleanup.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2328bd8bb2cfe9f2f15495d8cbbf2cb5973d611ba6eaf5265aba9bfe59c23a09"
+        },
+        "cleanup_absence.stderr": {
+          "bytes": 88,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/cleanup_absence.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f5ce47951617bd26606132d958ea4d6fce3c77b7db284fa18008c78e0bb8953f"
+        },
+        "cleanup_absence.stdout": {
+          "bytes": 3,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/cleanup_absence.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "container.cid": {
+          "bytes": 64,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/container.cid",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "63dcd8e6ce33e07a658207fa8611eed4e46c559755922cbe4c6f89a3d249a227"
+        },
+        "create.stderr": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/create.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "create.stdout": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/create.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2328bd8bb2cfe9f2f15495d8cbbf2cb5973d611ba6eaf5265aba9bfe59c23a09"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symai.config.json": {
+          "bytes": 915,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symai.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b7d7301d60ae3c520fbe756780959290edba153455f19ec1c1371f33ca937e04"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symserver.config.json": {
+          "bytes": 2,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symserver.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symsh.config.json": {
+          "bytes": 650,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symsh.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "513791bf133ee3737256284abf2cadd26440f5741dd45d3bbaf873a4829f5265"
+        },
+        "events.jsonl": {
+          "bytes": 185387,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/events.jsonl",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "cae57f3a621faca47d735c680d7ef7a01d3d694bdc4203b69a312451af2216bb"
+        },
+        "output/canary-000.json": {
+          "bytes": 467021,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-000.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b4e2c001140f05dcefbf0cf2a1233a43141fefbe2bd9055e55e3321b96b7b286"
+        },
+        "output/canary-001.json": {
+          "bytes": 250682,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-001.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "5e396c1de2d464b2e7e8d2d41d55ba0d66e1b1e4fe5d05bd7e06def8dc8c02dc"
+        },
+        "output/canary-002.json": {
+          "bytes": 291368,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-002.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "fbfd93759044bbc184514c86acfdd139d65c522573b67c0b9141905c03a97134"
+        },
+        "output/canary-003.json": {
+          "bytes": 664702,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-003.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "cf37b416327be88c41c2fde0f935ef93b07a481c33dcf9f37cc57e0385aea1c8"
+        },
+        "output/canary-004.json": {
+          "bytes": 1113230,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-004.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e922f9ebd9501eeed19f1699943a914057db08b444e79d478fe063363f71e055"
+        },
+        "output/canary-005.json": {
+          "bytes": 418152,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-005.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "58435c018d23d97ec7508d7d40db60293922c983bdd8d9ad8438a668676962f7"
+        },
+        "output/canary-006.json": {
+          "bytes": 564353,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-006.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "de266dc8da803df7b21fea53c232bbad3119f84fee8e879034f284282587f8fc"
+        },
+        "output/canary-007.json": {
+          "bytes": 800416,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-007.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "5edd79027692781caba482ee388aea690d0da39f14558033ef0360b216b81fe2"
+        },
+        "output/canary-008.json": {
+          "bytes": 226512,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-008.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ae228eb06cc773ef3d24200bf3467616c964bd8f8a4bad94a8cbaaed5c4b2c49"
+        },
+        "output/canary-009.json": {
+          "bytes": 371633,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-009.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ae03e2853d5cef21ed1546b76657b1eaf3f84dbf7863f29d86e52d0f2dd840ea"
+        },
+        "output/canary-010.json": {
+          "bytes": 475544,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-010.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "d433be93abae867b30710260a4a43796179579d53e31c036b9d0583d9cb50b7a"
+        },
+        "output/canary-011.json": {
+          "bytes": 461871,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-011.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "5533e31d6909ae224ada3906477c03e24f3089e8932a4fd0f9deba8e5cfd1f58"
+        },
+        "output/canary-012.json": {
+          "bytes": 630373,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-012.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "936e51c080587241ab26a52e79238c67a9c9fe9e95e966e87434bb4d9551b2ef"
+        },
+        "output/canary-013.json": {
+          "bytes": 707388,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-013.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "85667477cc17c32988d6d7c97d690df7a6a6bed7ef608f40c79a42d3746cae0b"
+        },
+        "output/canary-014.json": {
+          "bytes": 222122,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-014.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "02d33081d5da7846ee29c03b7568d5f86578342d5dc10b43a5878d5fee7cd28b"
+        },
+        "output/canary-015.json": {
+          "bytes": 345974,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-015.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ae1ab7e6d8bda22c1f7852601f9900d46efcf8502106ffd351eba1e4bfbf27c4"
+        },
+        "output/canary-016.json": {
+          "bytes": 408334,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-016.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9ac718f53dd83a45f465ab931174ca843277207a1e3bc24f7285b55a0a3fc5ec"
+        },
+        "output/canary-017.json": {
+          "bytes": 190929,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-017.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0b2bb9114361a3635a4a49007dedfddba38cde12abc90c4300948d4cdaff69c1"
+        },
+        "output/canary-018.json": {
+          "bytes": 215562,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-018.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "7bad027759452952f5660ed73e18495458ec145509f919425effddbba00c9db7"
+        },
+        "output/canary-019.json": {
+          "bytes": 408910,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-019.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "d7a1b934a3916d0e1c1147170c77b2ac7c7212915a8ccecea08736fce6047821"
+        },
+        "output/canary-020.json": {
+          "bytes": 466722,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-020.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "3eca32c6d5ce8e1d56a6334331912523731674a87d4224f564bc4a1f1f1ea853"
+        },
+        "output/canary-021.json": {
+          "bytes": 227328,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-021.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "7dab4f7b1963bcd9f4608aeb21189957d18a32daad3d1a8c8df4825b1d6fbc04"
+        },
+        "output/canary-022.json": {
+          "bytes": 362362,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-022.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "fc9e0a146b550a99256501f946a651b33a91171f7e5d48d1c759ea87e86d253d"
+        },
+        "output/canary-023.json": {
+          "bytes": 351882,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-023.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ef16a890ee8247d2e2caa35ca9e8727d3a05580b9061dde1b22e536154bac0aa"
+        },
+        "output/canary-024.json": {
+          "bytes": 490465,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-024.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "dd7e90e298251abbb241332997fcef2b0c8c6c20ecfcbf1e07e37f5af1996de2"
+        },
+        "output/canary-025.json": {
+          "bytes": 457543,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-025.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6ebe13e915ab35b6b70104add1dc24d70ccf9b3ca1dcec29eaa4e95483d44935"
+        },
+        "output/canary-026.json": {
+          "bytes": 610126,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-026.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0ebfe1642e09889656b7454eba2770e03de5b1e16375d86c78f91621b41c634d"
+        },
+        "output/canary-027.json": {
+          "bytes": 187291,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-027.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2d3180347a256095b111342ef7c9eb64d7150dfa87fc830c11aa8c61fb112195"
+        },
+        "output/canary-028.json": {
+          "bytes": 162088,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-028.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e22f3debcba0953529bd0578412f01807d53b39cc21431b3067682fa31a6089c"
+        },
+        "output/canary-029.json": {
+          "bytes": 159538,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-029.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9e32de16c53285575fe0febb293f7cd3f8136a701b55a3967c5f30017a4cd291"
+        },
+        "output/canary-030.json": {
+          "bytes": 138940,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-030.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "c243cd5e1e89184102e5c84d6c1f6697f8aa11353ca5cb2f90a327201120b835"
+        },
+        "output/canary-031.json": {
+          "bytes": 309903,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-031.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e1b742837f9e466fdd1eb5572be2db7899e220668df4996ee76d4799260ea584"
+        },
+        "output/canary-032.json": {
+          "bytes": 181694,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-032.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "667724d3c90e46f47b4bd4cc2904d76283141587b00884033bcefd2097cefb0e"
+        },
+        "output/canary-033.json": {
+          "bytes": 155233,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-033.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "1ade510d97ffff833f7030b02883e1d6cdc691991bdb837408162c8b50a7622d"
+        },
+        "output/canary-034.json": {
+          "bytes": 545888,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-034.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "edb678f653c15ff90f33f172c5f8a0f9604b183fef7e67ae526477df48843be0"
+        },
+        "output/canary-035.json": {
+          "bytes": 314540,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-035.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ededfba7d04a7375747b69b3938b735f61366773c2014cddc05a41a320a3f94b"
+        },
+        "output/canary-036.json": {
+          "bytes": 549369,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-036.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6117e8bee952a4621974808144d9dbebe8670634969277512af0d3bd55390a97"
+        },
+        "output/canary-037.json": {
+          "bytes": 393056,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/canary-037.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f68d079c8a157441c20fec9a6859f4e16e431b8e316988ae1198b33fe0a105b5"
+        },
+        "output/consumer_activation.json": {
+          "bytes": 450,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/consumer_activation.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0c2cf8d05639774ec3ea65d89ca468d0aa30f6e9102e11a876a08014802dcb37"
+        },
+        "output/events.jsonl": {
+          "bytes": 1326,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/events.jsonl",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "30ab30e9944b25b2d678e62d0deb2831f4a12826e18be38caf43557f5ae787d9"
+        },
+        "output/guidance_export.json": {
+          "bytes": 18424,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/guidance_export.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "878163e675361b39cd6041fd464b981a939ffc76f6db455bdc9b321a214dcbe6"
+        },
+        "output/native_promotion_result.json": {
+          "bytes": 4275,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/native_promotion_result.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "7d0dcca05a1cf80c7d3e1b5e29ef860d3f46238849dbfa8b5d23b1b514a2c93e"
+        },
+        "output/paired_summary.json": {
+          "bytes": 9815,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/paired_summary.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "da75c6a315e9aed565f5212215f93ad08e0a53fa2f700f8254f2736895603692"
+        },
+        "output/rollback_receipt.json": {
+          "bytes": 237,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/output/rollback_receipt.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9ad86b8e1f2c393733db6db0b9f2bc24224a9460cff3a0f84d7ee3b1a10da015"
+        },
+        "plan.json": {
+          "bytes": 14421,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/plan.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0bfdbd84604084a0ab68c592d3096581e9be0c07c4026e40b7a126781296b418"
+        },
+        "precreate.stderr": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/precreate.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ac4f89f2bbb078d5ea5eca878c9c21b828f588acfc53e3ef89b24f775454ab7c"
+        },
+        "precreate.stdout": {
+          "bytes": 3,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/precreate.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "reservation.json": {
+          "bytes": 232,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/reservation.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "95ad12d5767933610330e5835f9ff97052968d34b23396e9a9d2f145c97c16a1"
+        },
+        "stderr.log": {
+          "bytes": 353,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/stderr.log",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "bf05c957c91b733280b294934879bb46e00abb02e0abe8d856fd665cbf6503a9"
+        },
+        "stdout.log": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/stdout.log",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "terminal.inspect.json": {
+          "bytes": 31376,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_104729_v1/terminal.inspect.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "18e2b58e438d494f30f8d44d72fc30382b87947209adc1a8afd75a569eb49bc9"
+        }
+      },
+      "seed": 104729
+    },
+    {
+      "checkpoint": {
+        "arm": "T3",
+        "bytes": 5879328664,
+        "identity_sha256": "c90b4b9e7fd0120a7507b5e98bf7130e6c1e63091c14200afd3c2ee137ca5faf",
+        "no_payload_parsed_or_rehashed": true,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/delivered/evidence/native_training/states/T3-130363-final.json",
+        "seed": 130363,
+        "sha256": "bd76ef019fbdc97c57dc56d05359c875aac9887e21f835af4c5d483ec104794e",
+        "shard_ordinal": 4,
+        "stat_only_at_preparation": true
+      },
+      "export": {
+        "contract_feature_atoms": [],
+        "excluded_categories": [
+          "decoded_embeddings",
+          "raw_source_text",
+          "sample_identifiers",
+          "sample_memory",
+          "source_spans",
+          "token_features"
+        ],
+        "export_id": "lir-feature-export-b1ecfeaac57bc0c89ccfdffb",
+        "feature_count": 64,
+        "model_state_id": "modal-autoencoder-state-2dae825be19f28b1823eda06",
+        "repair_lane_feature_atoms": [],
+        "sample_count": 0,
+        "sample_memory_included": false,
+        "schema_version": "legal-ir-stable-autoencoder-feature-export-v1",
+        "stable_features": [
+          {
+            "feature": "compiler-contract:bias",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-af9fd592d4b64d1544c5",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "compiler-profile:bias",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-eb080d052440e11d06f3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "compiler-profile:text-token-count:16-31",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-7987f24f7802a7147283",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "cycle-consistency:bias",
+            "feature_group": "cycle_consistency",
+            "feature_id": "lir-feature-3900db6165d9d175ece4",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "decompiler-surface:bias",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-11e138aea53b659dba46",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "decompiler-surface:uscode-surface-profile:uscode_section_heading_surface",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-209acaa7ee488b404e11",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "logic-view-contract:bias",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-ea592b10e0bc4f9275d3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "logic-view-contract:expected-view:knowledge_graphs_neo4j_compat",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-6d99edc50aebb6a49d30",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "logic-view-contract:expected-view:modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-07c20bd3eb4d99d71c23",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_multiview_legal_ir_graph_projection:knowledge_graphs_neo4j_compat",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d923fd9a135bcc1176e2",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "repair-plan:bias",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-c4e3c8ef10a070aa6ee0",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "semantic-slot:bias",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-153ba8f0568975217cc9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "semantic-slot:frame-logic-ontology:modal_flogic_ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5df02228d4ac54faca77",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "semantic-slot:frame-logic-triples:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-693b0df2ee40239b3a8f",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966991
+          },
+          {
+            "feature": "compiler-profile:frame:administrative_notice_hearing",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-5bfe640e6b5c5cd8a5ca",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005830914757
+          },
+          {
+            "feature": "semantic-slot:selected-frame:administrative_notice_hearing",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-48857b4618657f30924a",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005830914757
+          },
+          {
+            "feature": "logic-view-contract:expected-view:deontic_norms",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d4fe22028df8034b0926",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "logic-view-contract:expected-view:external_provers_router",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-3338bae9908fc9d11f85",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "logic-view-contract:expected-view:modal_ir",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d810633386e880914410",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_deontic_bridge_quality_gate:deontic_norms",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-0e25ddf47c504aa785af",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:conditions:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ebf47b2aced651d799b9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:exceptions:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-95b2ea9208ffa6002a64",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:predicate-arity:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-d89e4acaf02a21ba3e35",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:predicate-role:clause",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-2a83fbca013200fc0caa",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:predicate-token-count:4-7",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a9b1b4ba1a1d547cfe37",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-897de2529c5750040063",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:temporal",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-25a82f29de1c74bd8a5c",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-85a4bc4db851149e8b82",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:temporal",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a2a68fe368c2e7b1ac9b",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607513
+          },
+          {
+            "feature": "semantic-slot:text-cue:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5ca86b62fdfd6eb334ac",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005667368175
+          },
+          {
+            "feature": "logic-view-contract:expected-view:fol_tdfol",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d3974b631c372c6cef33",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005628392321
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_tdfol_bridge_parse:fol_tdfol",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-b484c16802a407f928cf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005628392321
+          },
+          {
+            "feature": "logic-view-contract:expected-view:cec_native",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-a29587c751c5f87cf51f",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005583943123
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_cec_dcec_bridge:cec_native",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-ecb4600bb3b9c5605ceb",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005583943123
+          },
+          {
+            "feature": "logic-view-contract:todo-route:refine_typed_ir_or_decompiler_slots:modal_ir+external_provers_router+deontic_norms+fol_tdfol+cec_native+knowledge_graphs_neo4j_compat+modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-c2df66b0b45c8091dd2e",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005509692783
+          },
+          {
+            "feature": "logic-view-contract:view-signature:modal_ir+external_provers_router+deontic_norms+fol_tdfol+cec_native+knowledge_graphs_neo4j_compat+modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-69e4626ce96f1c98a4db",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005509692783
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ec7bd6c2fe7b1f147b84",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525425
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:frame",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-9de7cc1a859d1f6c53a1",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525425
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-0e8e43c2a4e57846ee92",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525425
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:frame",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-1d9477f455a80fffd518",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525425
+          },
+          {
+            "feature": "semantic-slot:family-role:deontic:clause",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-7bf0536d9cec177476d2",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:modal-family:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-7b509aac28be96115b47",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:surface-cue-family:deontic:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4bd6187d354ce25afe77",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a4d9704888107ab791f9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-aedf2e95fd95a4fdd4c0",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5c6e580ad8ca96cddcbf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-52795a16e002076f937e",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b67fb6be024e87f108e7",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-8922582143f387038526",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b89c3f5fceb7425769f3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4829d8f54f2e4cd63bb8",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||knowledge_graphs.neo4j_compat",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-cd55d99d1cb79ebfb7b1",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-3a490cf228c6de03cfeb",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4d2c41c3382e03756eaf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b8fb72cbeb40bbf64eaa",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||knowledge_graphs.neo4j_compat",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-12a0884c1809b0e23a89",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-d429dd1539619e2d4327",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||modal.frame_logic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-e0b5891656766b0f6bae",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-885264b64e5781908668",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-3220fd1ad9ae389253dd",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ddd2495ce51a5e999c76",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||modal.frame_logic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-1394c28dc8579b182435",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair:deontic->conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-f0a5918b0fb41dd2f624",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair:deontic->deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a4d7d5b3cdc40b35478b",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017856
+          }
+        ],
+        "view_family_weights": {}
+      },
+      "export_canonical_sha256": "d446315441079c3fa200c665adee5d8eec2fdc668f2e2a314e21500d14da88b9",
+      "raw_files": {
+        "boundary.json": {
+          "bytes": 30815,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/boundary.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "804380aa1efeb3a3918a009b5ae23a80212cf0676252671c4a96a47c8470ab19"
+        },
+        "cleanup.stderr": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/cleanup.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "cleanup.stdout": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/cleanup.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6c8943d87b40ed7648f0d7beba9e99c4fc945d017d32952c318cc4b6c77a22ab"
+        },
+        "cleanup_absence.stderr": {
+          "bytes": 88,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/cleanup_absence.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "bc3042065d5eb41543cdad506bb71b9806d5cca19f180746a90f56717996d45c"
+        },
+        "cleanup_absence.stdout": {
+          "bytes": 3,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/cleanup_absence.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "container.cid": {
+          "bytes": 64,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/container.cid",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "442f224c342f75bd18bf22fab61ed7ed7aaa2aae7a6b1d0019b115de424c84f5"
+        },
+        "create.stderr": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/create.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "create.stdout": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/create.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6c8943d87b40ed7648f0d7beba9e99c4fc945d017d32952c318cc4b6c77a22ab"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symai.config.json": {
+          "bytes": 915,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symai.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b7d7301d60ae3c520fbe756780959290edba153455f19ec1c1371f33ca937e04"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symserver.config.json": {
+          "bytes": 2,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symserver.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symsh.config.json": {
+          "bytes": 650,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symsh.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "513791bf133ee3737256284abf2cadd26440f5741dd45d3bbaf873a4829f5265"
+        },
+        "events.jsonl": {
+          "bytes": 187745,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/events.jsonl",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "69c0e9a772497762468e7457dc93d6afbdb51704094dd5c7600597cb80858e67"
+        },
+        "output/canary-000.json": {
+          "bytes": 467052,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-000.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "67aee8c28e595061ff6a04c2fb694a5d8f69603be91184cb5c2a4d7c42507c97"
+        },
+        "output/canary-001.json": {
+          "bytes": 250707,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-001.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e1582176338d1893b527a68992804821928180e8dd6381ae3307e4f998f2e5b8"
+        },
+        "output/canary-002.json": {
+          "bytes": 291389,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-002.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ccfb5e0dd23a8ccecf00416a8728b896490153c5d1d962df6e47fa3dee670012"
+        },
+        "output/canary-003.json": {
+          "bytes": 664723,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-003.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b6543647dce09decc29c04a47ac9b81c3a6bd2c7556133ddd6dd89de649661ad"
+        },
+        "output/canary-004.json": {
+          "bytes": 1113256,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-004.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "4b4eef6963c50f67c22a5479f1694c5c3bd7f690a5e03eb416e9fe5368ab658d"
+        },
+        "output/canary-005.json": {
+          "bytes": 418182,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-005.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "3f9a8b8fb8427a96b375f89f6477a7b7777a6a73f91748abcf72271a385f99a2"
+        },
+        "output/canary-006.json": {
+          "bytes": 564375,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-006.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2d704439fbe0e7fcbb2a1b3ab0706b998efb5e4ff65706bf0f43fc3908a6b294"
+        },
+        "output/canary-007.json": {
+          "bytes": 800439,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-007.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "d271934e0e1f1f332eb05974874ed6ad47637a2048e5b4632911741a13719914"
+        },
+        "output/canary-008.json": {
+          "bytes": 226532,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-008.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "948f3f1cd751d43324776c59433998cfe7ab03fc60547f15f7ee369014b40aae"
+        },
+        "output/canary-009.json": {
+          "bytes": 371665,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-009.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ea32a13e7af41e2c9da3e87d33a5386e8d56c0876f346f22381f5af836dc51ce"
+        },
+        "output/canary-010.json": {
+          "bytes": 475580,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-010.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2ff9822c6fc0fd8664c312940c04e347a725cc2209995780afcdd992ea3b07e2"
+        },
+        "output/canary-011.json": {
+          "bytes": 461894,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-011.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b89c3318335414df36be8be297c9a0e55a79e7f9bf5065fbd3935644d94cae5e"
+        },
+        "output/canary-012.json": {
+          "bytes": 630399,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-012.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "be318c6daa1c8c8e830eb914c40f1d39ea2e995fa3395c113d69cfdfe90f50a3"
+        },
+        "output/canary-013.json": {
+          "bytes": 707416,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-013.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "07fa2104b92249660d3b953bcba0b3e058d6ba297e1c5d0e48a7cfcfc447327e"
+        },
+        "output/canary-014.json": {
+          "bytes": 222148,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-014.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e74af39dcd405501a9cc6b92f10338dafc16ffc0a894d0c394e7f366bc6a996c"
+        },
+        "output/canary-015.json": {
+          "bytes": 346011,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-015.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "8bd909d5c24928644f35d5b04fc162fda8ed70beaabcab8a57487f995a574c09"
+        },
+        "output/canary-016.json": {
+          "bytes": 408361,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-016.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "d5857819d595c1cfddb4c810361ebeb42f63b7e1e205d6d1a6e7dbe27f61f5aa"
+        },
+        "output/canary-017.json": {
+          "bytes": 190955,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-017.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2b1c870dd154b24eecfefbe57937ea935079ebce4e5fdf221260ca7b9fb48348"
+        },
+        "output/canary-018.json": {
+          "bytes": 215585,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-018.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "29d31f02f14a229420943c90f228af2bb48520501b77ae336572866ef589bdbf"
+        },
+        "output/canary-019.json": {
+          "bytes": 408944,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-019.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9c3934930cbe6cb37ca431a2a364e320d96c82eaa9cd40601c03afedac9a8654"
+        },
+        "output/canary-020.json": {
+          "bytes": 466749,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-020.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e320f0ab838170d114430811ed48cafaab23542b7aa04c5da9ebcc2c791bcb8b"
+        },
+        "output/canary-021.json": {
+          "bytes": 227356,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-021.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f15a15265c6a59f52bc05b2177582fef85f230e2627b075d52a4272219f2065c"
+        },
+        "output/canary-022.json": {
+          "bytes": 362384,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-022.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6e1fcc48b2b856ff99781b31b685d5c58ada857d1aec6c44c634e1daae9b04eb"
+        },
+        "output/canary-023.json": {
+          "bytes": 351907,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-023.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "11237c3c5528578a1362fb1d43d3d32fffd304d2ee649fd0c2fafd5d085cf6a4"
+        },
+        "output/canary-024.json": {
+          "bytes": 490499,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-024.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "a1bdaabfa3f8f60d4c4ddc9432cd079cbbf08cb842b1feb55217fce429d744fe"
+        },
+        "output/canary-025.json": {
+          "bytes": 457568,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-025.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "5e283c3095b69f1a446648f1bb0c3c071717b9f2043bffd505009e69442adde0"
+        },
+        "output/canary-026.json": {
+          "bytes": 610157,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-026.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0dc0f670c162fdf0ef91da66cf2eac9b7c2a1141734984347835258b01ae4b07"
+        },
+        "output/canary-027.json": {
+          "bytes": 187316,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-027.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6c0413789ef5dcb5e352293d361c91ecdba25784ccf60a7faccb6c115d85eb10"
+        },
+        "output/canary-028.json": {
+          "bytes": 162118,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-028.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "cf1ee6aac46c3b9799204f24af55e380e21177e43f852f8d8288ade4a09e4817"
+        },
+        "output/canary-029.json": {
+          "bytes": 159563,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-029.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "baece9ba33a8560c43262fb85da4e272760b78aefa15d613900d18682105bace"
+        },
+        "output/canary-030.json": {
+          "bytes": 138970,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-030.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "57955eb8a6dfd0a3d59c647ddde8af7e5e0db84b193a1a9c283e3d21e0b336d3"
+        },
+        "output/canary-031.json": {
+          "bytes": 309928,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-031.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f796b99b993b75094fa58c179eb033fc286458fd6ff089c7965c7b30a40e5124"
+        },
+        "output/canary-032.json": {
+          "bytes": 181718,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-032.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "29f375ae3f481c94783d8fc3080229a60a78ef944a81686c5e5716e59120b0a3"
+        },
+        "output/canary-033.json": {
+          "bytes": 155251,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-033.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "acd0f3dc9dc218f64d5c4b7bc0994c987c1236b672b87e9ab30cf7ab66420f8a"
+        },
+        "output/canary-034.json": {
+          "bytes": 545910,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-034.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "4954e5344cf8969ffdbd6768c08ad3afc54b39681e9220c917975e8a27338fbd"
+        },
+        "output/canary-035.json": {
+          "bytes": 314573,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-035.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "5391fe8c770861825d4f70911af5b8d1a130b253d25d2d90e8cd4f6d29e9cb01"
+        },
+        "output/canary-036.json": {
+          "bytes": 549395,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-036.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ec7ade9e4548ecec267abe4927c8b968de7197935d4f112b7c4f47d6338c26e9"
+        },
+        "output/canary-037.json": {
+          "bytes": 393085,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/canary-037.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9ed6bf11f8253aa5afe4edc6afcf8ed613c5a6ac7e4ea44a1b8f549f77c374f5"
+        },
+        "output/consumer_activation.json": {
+          "bytes": 450,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/consumer_activation.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e712bb47bf8671d7013376ea384d95ad24b2674e21744a7eb3a8657a8b161630"
+        },
+        "output/events.jsonl": {
+          "bytes": 1328,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/events.jsonl",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "7bd37f2904696b63191960030e7226a120573db7612bfde1ed2d13ec75ff0a0f"
+        },
+        "output/guidance_export.json": {
+          "bytes": 18437,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/guidance_export.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "c9d13f67fcd08a6106de464c4d40c82cf14906289d550a94a4b37958b49d6c4e"
+        },
+        "output/native_promotion_result.json": {
+          "bytes": 4275,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/native_promotion_result.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "785d78046e03fb36eaddd10e0ecd1195839f52cd32e964c9ce79ff7ab9036ceb"
+        },
+        "output/paired_summary.json": {
+          "bytes": 9815,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/paired_summary.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "da75c6a315e9aed565f5212215f93ad08e0a53fa2f700f8254f2736895603692"
+        },
+        "output/rollback_receipt.json": {
+          "bytes": 237,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/output/rollback_receipt.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9ad86b8e1f2c393733db6db0b9f2bc24224a9460cff3a0f84d7ee3b1a10da015"
+        },
+        "plan.json": {
+          "bytes": 14421,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/plan.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "dc569a564fe8d4b2ee7a4808350e126a8c378185559ee2a8572a4a863cf4a436"
+        },
+        "precreate.stderr": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/precreate.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "8b4e761561b49afa6a6eec63739bd7b0038fba1fb1967622581e77f0a6444739"
+        },
+        "precreate.stdout": {
+          "bytes": 3,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/precreate.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "reservation.json": {
+          "bytes": 232,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/reservation.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "c0ad199f68e7cfcd222e0b35b2bf2f088dc23a4fd94c82d0ab9e8a7d2aa006dd"
+        },
+        "stderr.log": {
+          "bytes": 353,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/stderr.log",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "bf05c957c91b733280b294934879bb46e00abb02e0abe8d856fd665cbf6503a9"
+        },
+        "stdout.log": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/stdout.log",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "terminal.inspect.json": {
+          "bytes": 31376,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_130363_v1/terminal.inspect.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "4c913a10b84a7f636eb5ab2a233fb285d4ce416bb100f3749899446db8890c65"
+        }
+      },
+      "seed": 130363
+    },
+    {
+      "checkpoint": {
+        "arm": "T3",
+        "bytes": 5879304958,
+        "identity_sha256": "a4e7a375e63e8a62c13691673342560596418095a0b1f0835ad6929d66d18be8",
+        "no_payload_parsed_or_rehashed": true,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/delivered/evidence/native_training/states/T3-155921-final.json",
+        "seed": 155921,
+        "sha256": "e161f648d75653bc0e1c1515992028838ec6c96b3b87bbde0e2896bf6e809fdc",
+        "shard_ordinal": 5,
+        "stat_only_at_preparation": true
+      },
+      "export": {
+        "contract_feature_atoms": [],
+        "excluded_categories": [
+          "decoded_embeddings",
+          "raw_source_text",
+          "sample_identifiers",
+          "sample_memory",
+          "source_spans",
+          "token_features"
+        ],
+        "export_id": "lir-feature-export-f3778fa624adcb4dc3fec307",
+        "feature_count": 64,
+        "model_state_id": "modal-autoencoder-state-f7f95edfd3a0c15cc44b86fc",
+        "repair_lane_feature_atoms": [],
+        "sample_count": 0,
+        "sample_memory_included": false,
+        "schema_version": "legal-ir-stable-autoencoder-feature-export-v1",
+        "stable_features": [
+          {
+            "feature": "compiler-contract:bias",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-af9fd592d4b64d1544c5",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "compiler-profile:bias",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-eb080d052440e11d06f3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "compiler-profile:text-token-count:16-31",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-7987f24f7802a7147283",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "cycle-consistency:bias",
+            "feature_group": "cycle_consistency",
+            "feature_id": "lir-feature-3900db6165d9d175ece4",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "decompiler-surface:bias",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-11e138aea53b659dba46",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "decompiler-surface:uscode-surface-profile:uscode_section_heading_surface",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-209acaa7ee488b404e11",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "logic-view-contract:bias",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-ea592b10e0bc4f9275d3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "logic-view-contract:expected-view:knowledge_graphs_neo4j_compat",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-6d99edc50aebb6a49d30",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "logic-view-contract:expected-view:modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-07c20bd3eb4d99d71c23",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_multiview_legal_ir_graph_projection:knowledge_graphs_neo4j_compat",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d923fd9a135bcc1176e2",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "repair-plan:bias",
+            "feature_group": "decompiler_surface_template",
+            "feature_id": "lir-feature-c4e3c8ef10a070aa6ee0",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "semantic-slot:bias",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-153ba8f0568975217cc9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "semantic-slot:frame-logic-ontology:modal_flogic_ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5df02228d4ac54faca77",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "semantic-slot:frame-logic-triples:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-693b0df2ee40239b3a8f",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005992966896
+          },
+          {
+            "feature": "compiler-profile:frame:administrative_notice_hearing",
+            "feature_group": "compiler_contract",
+            "feature_id": "lir-feature-5bfe640e6b5c5cd8a5ca",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005830914674
+          },
+          {
+            "feature": "semantic-slot:selected-frame:administrative_notice_hearing",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-48857b4618657f30924a",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005830914674
+          },
+          {
+            "feature": "logic-view-contract:expected-view:deontic_norms",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d4fe22028df8034b0926",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "logic-view-contract:expected-view:external_provers_router",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-3338bae9908fc9d11f85",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "logic-view-contract:expected-view:modal_ir",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d810633386e880914410",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_deontic_bridge_quality_gate:deontic_norms",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-0e25ddf47c504aa785af",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:conditions:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ebf47b2aced651d799b9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:exceptions:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-95b2ea9208ffa6002a64",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:predicate-arity:0",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-d89e4acaf02a21ba3e35",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:predicate-role:clause",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-2a83fbca013200fc0caa",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:predicate-token-count:4-7",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a9b1b4ba1a1d547cfe37",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-897de2529c5750040063",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:temporal",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-25a82f29de1c74bd8a5c",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-85a4bc4db851149e8b82",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:temporal",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a2a68fe368c2e7b1ac9b",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005703607349
+          },
+          {
+            "feature": "semantic-slot:text-cue:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5ca86b62fdfd6eb334ac",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005667368103
+          },
+          {
+            "feature": "logic-view-contract:expected-view:fol_tdfol",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-d3974b631c372c6cef33",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005628392251
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_tdfol_bridge_parse:fol_tdfol",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-b484c16802a407f928cf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005628392251
+          },
+          {
+            "feature": "logic-view-contract:expected-view:cec_native",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-a29587c751c5f87cf51f",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005583942978
+          },
+          {
+            "feature": "logic-view-contract:todo-route:repair_cec_dcec_bridge:cec_native",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-ecb4600bb3b9c5605ceb",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005583942978
+          },
+          {
+            "feature": "logic-view-contract:todo-route:refine_typed_ir_or_decompiler_slots:modal_ir+external_provers_router+deontic_norms+fol_tdfol+cec_native+knowledge_graphs_neo4j_compat+modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-c2df66b0b45c8091dd2e",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005509692672
+          },
+          {
+            "feature": "logic-view-contract:view-signature:modal_ir+external_provers_router+deontic_norms+fol_tdfol+cec_native+knowledge_graphs_neo4j_compat+modal_frame_logic",
+            "feature_group": "logic_view_contract",
+            "feature_id": "lir-feature-69e4626ce96f1c98a4db",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005509692672
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ec7bd6c2fe7b1f147b84",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525323
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-family-surface-profile:uscode_section_heading_surface:frame",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-9de7cc1a859d1f6c53a1",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525323
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-0e8e43c2a4e57846ee92",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525323
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-target-reconstruction-family:frame",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-1d9477f455a80fffd518",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005472525323
+          },
+          {
+            "feature": "semantic-slot:family-role:deontic:clause",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-7bf0536d9cec177476d2",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:modal-family:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-7b509aac28be96115b47",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:surface-cue-family:deontic:deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4bd6187d354ce25afe77",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a4d9704888107ab791f9",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-aedf2e95fd95a4fdd4c0",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->conditional_normative||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-5c6e580ad8ca96cddcbf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-52795a16e002076f937e",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b67fb6be024e87f108e7",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->deontic||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-8922582143f387038526",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b89c3f5fceb7425769f3",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4829d8f54f2e4cd63bb8",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||knowledge_graphs.neo4j_compat",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-cd55d99d1cb79ebfb7b1",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->epistemic||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-3a490cf228c6de03cfeb",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-4d2c41c3382e03756eaf",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-b8fb72cbeb40bbf64eaa",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||knowledge_graphs.neo4j_compat",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-12a0884c1809b0e23a89",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-d429dd1539619e2d4327",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->frame||modal.frame_logic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-e0b5891656766b0f6bae",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||TDFOL.prover",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-885264b64e5781908668",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||deontic.ir",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-3220fd1ad9ae389253dd",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||modal.autoencoder",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-ddd2495ce51a5e999c76",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair-view-contract:deontic->temporal||modal.frame_logic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-1394c28dc8579b182435",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair:deontic->conditional_normative",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-f0a5918b0fb41dd2f624",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          },
+          {
+            "feature": "semantic-slot:typed-decompiler-family-pair:deontic->deontic",
+            "feature_group": "semantic_slot",
+            "feature_id": "lir-feature-a4d7d5b3cdc40b35478b",
+            "sample_support": 1,
+            "source_head_count": 1,
+            "stable": true,
+            "support_ratio": 1.0,
+            "weight": 0.005468017808
+          }
+        ],
+        "view_family_weights": {}
+      },
+      "export_canonical_sha256": "832e91958df9d840fb9fa70a6e4700dbaf486965fe52b3bdcc30c97730c90311",
+      "raw_files": {
+        "boundary.json": {
+          "bytes": 30815,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/boundary.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "a6ba940d8012befe62ed7ad33a6ee899b832ad0d45fec921be906a45cadc7bbf"
+        },
+        "cleanup.stderr": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/cleanup.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "cleanup.stdout": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/cleanup.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "a14e7b8ebca913e011f4c5ace9ea66c241acb18e05b8802b83ed3cc056de0449"
+        },
+        "cleanup_absence.stderr": {
+          "bytes": 88,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/cleanup_absence.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ee433f5e7fcd3eac0968e585491422e0d7f038e298be5ab49429d1b481f68cbc"
+        },
+        "cleanup_absence.stdout": {
+          "bytes": 3,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/cleanup_absence.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "container.cid": {
+          "bytes": 64,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/container.cid",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "990b2a97f8d1181c65551366ae292891e1c40ab7990faba06d35eb2f7b040750"
+        },
+        "create.stderr": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/create.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "create.stdout": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/create.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "a14e7b8ebca913e011f4c5ace9ea66c241acb18e05b8802b83ed3cc056de0449"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symai.config.json": {
+          "bytes": 915,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symai.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b7d7301d60ae3c520fbe756780959290edba153455f19ec1c1371f33ca937e04"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symserver.config.json": {
+          "bytes": 2,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symserver.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "empty-home/.local/share/ipfs_datasets_py/symai/.symai/symsh.config.json": {
+          "bytes": 650,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/empty-home/.local/share/ipfs_datasets_py/symai/.symai/symsh.config.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "513791bf133ee3737256284abf2cadd26440f5741dd45d3bbaf873a4829f5265"
+        },
+        "events.jsonl": {
+          "bytes": 187572,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/events.jsonl",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "2e4a2df282971ee7112ced49fd40e927dc287d0fb04a447086a8f8420baa404e"
+        },
+        "output/canary-000.json": {
+          "bytes": 467053,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-000.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "8ba48edc997eb9091be2d2822f256ff0f7afee25ee240049c02ac01c50ee18a1"
+        },
+        "output/canary-001.json": {
+          "bytes": 250708,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-001.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "661b6e8e393e5748f3ecdea1719b8701a31abeb1da243c6ad20a0b9d526181e7"
+        },
+        "output/canary-002.json": {
+          "bytes": 291383,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-002.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "8efa7e97df32bcca123d96fdfc46c27bc8e6099019a7c9900e11f8121a49f8f6"
+        },
+        "output/canary-003.json": {
+          "bytes": 664718,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-003.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f45b189ad108f13f2fc01bae14237fa6075567b446212f6d33f00474f252abc7"
+        },
+        "output/canary-004.json": {
+          "bytes": 1113256,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-004.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "3951c6013a5da42001f31cd1560d2a09d59b625dcce249b765618f7c859766c6"
+        },
+        "output/canary-005.json": {
+          "bytes": 418180,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-005.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "651c8153b804ba55dc923dd9a702d9e7b943eff76bc5e2fc3b1019a2eede0bec"
+        },
+        "output/canary-006.json": {
+          "bytes": 564373,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-006.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "4a106b34b917f10ba7db8c5a91c10f4de9ce6f53a143aecef744ec001b864e12"
+        },
+        "output/canary-007.json": {
+          "bytes": 800443,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-007.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "d2ff9d2d3fc88e2954a1ff7ac4c4dc84856e5b483f1f94a48f7e31b5fae0aeb3"
+        },
+        "output/canary-008.json": {
+          "bytes": 226532,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-008.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "736cad0ad67fefec06e33e43bbe2f22d4e7854ff38998eccc2097ebae2f2c3b6"
+        },
+        "output/canary-009.json": {
+          "bytes": 371663,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-009.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f5cc18f5149e7c867ffe7a2a52f299abe5ea6a3eec7694dc443f907b6c8a1892"
+        },
+        "output/canary-010.json": {
+          "bytes": 475576,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-010.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "58c38dece3ed21ec53ab3c04f26c3faf39c5f60a79ce14efb13b3e3a9109e952"
+        },
+        "output/canary-011.json": {
+          "bytes": 461898,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-011.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "4dd99e3bad44e07988d0cb649b9fa9b492c0109e525394b3072ad79fb9c08999"
+        },
+        "output/canary-012.json": {
+          "bytes": 630399,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-012.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ab06dc801d2a4326a2b7e876084924fdb72d85d94f2083bfc17cecbcc6a71226"
+        },
+        "output/canary-013.json": {
+          "bytes": 707416,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-013.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "43d875aae6ade3715b05fee29e3bd671adcf6cb1407bda33582349fed896b583"
+        },
+        "output/canary-014.json": {
+          "bytes": 222144,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-014.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "ebf766d3a76352081909fd02da5df514b91eda76fc983879bc038d4fa4a54355"
+        },
+        "output/canary-015.json": {
+          "bytes": 346003,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-015.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9384afd602c022b24fd89eefe0d803877f8fce5e3d26b2ed5112837506417e6d"
+        },
+        "output/canary-016.json": {
+          "bytes": 408367,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-016.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "b9551d035bc432a6339b663c0c4743193cc8988c6550d650ca86ff2f07e2683b"
+        },
+        "output/canary-017.json": {
+          "bytes": 190957,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-017.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "5aecc95cd0be0979166396142a17b17d22ab10942dc6c96e733941c6674ce616"
+        },
+        "output/canary-018.json": {
+          "bytes": 215587,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-018.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "62a5da80e8deedee2e760d316cf4474bd1634ef0e9f985958c4d6788f0b66607"
+        },
+        "output/canary-019.json": {
+          "bytes": 408939,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-019.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0a1c798a0dc4ad6e0939e41ba7836864c85d975f0db961e920e0eff4509b6a03"
+        },
+        "output/canary-020.json": {
+          "bytes": 466740,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-020.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9d03f26b19f9ceba2daea35aea9fb7327743c67ffe95743f7475db8d20ad775e"
+        },
+        "output/canary-021.json": {
+          "bytes": 227361,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-021.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "101d8df7f457a46320d7ab84b98ab1940a45aed6f245dec14870f8f08313ddc3"
+        },
+        "output/canary-022.json": {
+          "bytes": 362383,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-022.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "58c8fe8367f0aadd6d065ec8111d692cce8cb47fee448c0920e11eeb04883434"
+        },
+        "output/canary-023.json": {
+          "bytes": 351916,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-023.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "8a32bde16624febe9109cea90a3d2d4df4703e67cf335613fcd9707c66b60c71"
+        },
+        "output/canary-024.json": {
+          "bytes": 490497,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-024.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0c09c54676b3d70d931933829bf87ed264c7e8717fd5709ec3fc55009f57c5b1"
+        },
+        "output/canary-025.json": {
+          "bytes": 457568,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-025.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "1689e8574f5529a567ad067c68826f07f6ee943dfa86129902bd9afcbe57edba"
+        },
+        "output/canary-026.json": {
+          "bytes": 610152,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-026.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "cced4f4b510e72bf887a29acda3934653b3fcf7a890767106a7a7cde24513513"
+        },
+        "output/canary-027.json": {
+          "bytes": 187311,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-027.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0eeb3bbae5ccb0018999db48df7e37c35d85703b770ecb805d196ac03b79d0fb"
+        },
+        "output/canary-028.json": {
+          "bytes": 162111,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-028.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "a2fbe276afdda83b5c309d401d259cfa57705acd5b4c67754baa5610fdc48c9b"
+        },
+        "output/canary-029.json": {
+          "bytes": 159568,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-029.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "3a9c8c98b3b1bae995fa8d8dcce31c7f3f6f45692bba5f26324c77a070fc9568"
+        },
+        "output/canary-030.json": {
+          "bytes": 138966,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-030.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "52552186b0da2cea1c668bef25e2e0f0e7b461af72fcbe6c98d36d2b12c5e0cd"
+        },
+        "output/canary-031.json": {
+          "bytes": 309925,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-031.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "33577975ffb52e9717aca7a5f896d9b24d64557420e97b0141c1a9b44b319b60"
+        },
+        "output/canary-032.json": {
+          "bytes": 181704,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-032.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "24e8e43f442e80ba7536d8a57e85c439a7ff211d6847061b2ee9b5a5bb6534a5"
+        },
+        "output/canary-033.json": {
+          "bytes": 155254,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-033.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "0ed8968ff13774d35af14ce7aef73f4b4ff925fe6031c634f55e63a1464303b6"
+        },
+        "output/canary-034.json": {
+          "bytes": 545923,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-034.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "f809a339908ff2c794625c8e399867ce9933bea0e69d76ea0aa2d3f1b261f626"
+        },
+        "output/canary-035.json": {
+          "bytes": 314569,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-035.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6879e53514980e5c906c414cbb0d79507aac95734c6be5a792fc9f13719b600e"
+        },
+        "output/canary-036.json": {
+          "bytes": 549391,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-036.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6eed476723c9993372c7f9006dbad4167dbeb4ff481c7073094d19ec3f31b1a0"
+        },
+        "output/canary-037.json": {
+          "bytes": 393091,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/canary-037.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "d7beb5610655419c0bbf688f55a094642afc5034109482dc084253a83b1a249a"
+        },
+        "output/consumer_activation.json": {
+          "bytes": 450,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/consumer_activation.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "88a25e70e31f9b05f2cd8a21d8d75f6c6753cc2700ce3efbc6f7e5a37583d5d0"
+        },
+        "output/events.jsonl": {
+          "bytes": 1327,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/events.jsonl",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "dfa29982ba054b80c97ad3b4b5efdb5475fccf5eef196bb6ff9ae158c0b1b563"
+        },
+        "output/guidance_export.json": {
+          "bytes": 18437,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/guidance_export.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "130b67f4d61d623d72e0fb41b00c5bd02d6ac95b6c1a47055403231557c353f4"
+        },
+        "output/native_promotion_result.json": {
+          "bytes": 4275,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/native_promotion_result.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e9fb0838617b6e70a5e1b430d6b5b4c56f8155a2abc7cd2535c228ed055c5963"
+        },
+        "output/paired_summary.json": {
+          "bytes": 9815,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/paired_summary.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "da75c6a315e9aed565f5212215f93ad08e0a53fa2f700f8254f2736895603692"
+        },
+        "output/rollback_receipt.json": {
+          "bytes": 237,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/output/rollback_receipt.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9ad86b8e1f2c393733db6db0b9f2bc24224a9460cff3a0f84d7ee3b1a10da015"
+        },
+        "plan.json": {
+          "bytes": 14421,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/plan.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "354bcf9eae3c6cabdabebefee85063c09156ac120d6d5791cc0b3b13588ef5b9"
+        },
+        "precreate.stderr": {
+          "bytes": 65,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/precreate.stderr",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "679955f91d5c4076a46ff2e383dcb38549a2b161d5dd28617d0b7fd5c835b8c9"
+        },
+        "precreate.stdout": {
+          "bytes": 3,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/precreate.stdout",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "reservation.json": {
+          "bytes": 232,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/reservation.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "6bf532aa4b703f2f137e47e931b858b66ef1331c5db876d2f12adb48e02f01d1"
+        },
+        "stderr.log": {
+          "bytes": 353,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/stderr.log",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "bf05c957c91b733280b294934879bb46e00abb02e0abe8d856fd665cbf6503a9"
+        },
+        "stdout.log": {
+          "bytes": 0,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/stdout.log",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "terminal.inspect.json": {
+          "bytes": 31376,
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/actual_seed_155921_v1/terminal.inspect.json",
+          "representation": "retained-native-bytes-reference",
+          "sha256": "9efaba8a95642763d214e9c7ced6d439520930de720a84f2d634944404eaa15a"
+        }
+      },
+      "seed": 155921
+    }
+  ]
+}

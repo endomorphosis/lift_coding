@@ -1,0 +1,463 @@
+{
+  "T4": "unactivated/unavailable",
+  "e_locked": true,
+  "human_agreement": null,
+  "human_fidelity": null,
+  "interpretation": "Native compiler runs ingest the export identity but do not apply learned features. T4 is unactivated/unavailable; E remains locked. Default reset is an actual compiler reset, not rollback of a previously applied learned effect. Missing proof/source-copy metrics remain missing. Target-assisted T2 reconstruction is not source-free generalization or semantic fidelity. Human fidelity/agreement remain unmeasured; outside reviewers are not a manuscript-completion prerequisite. A native guardrails_passed flag over an empty family-metrics map supplies no measured proof/source-copy guardrail result. Export support counts describe native shared heads with samples=(), not empirical canary support.",
+  "matching_ingestion_digest_is_applied_learning": false,
+  "optional_author_feedback": null,
+  "provenance": {
+    "manifest": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/root_accepted_plan.private.json",
+      "sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344"
+    },
+    "metric_scope": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/independent_run_observations/reconstruction_metric_scope.private.json",
+      "sha256": "2ad345cb396119a0c902b9e6cdb465ad0c52670ba19742a834d48d715144ab61"
+    },
+    "root_audit": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/adoption_v1/root_all_three_seed_audit.private.json",
+      "sha256": "1151d7447fbbff339b71c9f9f9059fd7cc152cd55601dabecad48c077f0e40bc"
+    },
+    "source_versions": {
+      "adoption_instruction_source_head": "ecb15c9692ab2c2c566fc43fa0669538afb20a02",
+      "operator_execution_source_head": "06a34600b741c908eb25060650e9c88b9b895bf7",
+      "operator_manifest_sha256": "840934d28da0a2dce26bacfacbe67f6a2299322cf6d5c0110853e5ffbff61344",
+      "operator_native_pins": {
+        "external/ipfs_accelerate": "bee8888ac9ce9e2a08482cc11c8416dfad9dc1f5",
+        "external/ipfs_datasets": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+        "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+      }
+    },
+    "whole_run_clock": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af013_operator_preparation_v1/launcher_v1/root_shared_run_clock.private.json",
+      "sha256": "64e85ddc13848e2e62fececee9eb638ad974fbd0139f36a41a535cbd2a2a8f67"
+    }
+  },
+  "schema": "af013-three-seed-consumer-observation/v1",
+  "seeds": [
+    {
+      "activation": {
+        "T4": "unavailable",
+        "applied_learned_features": false,
+        "human_agreement": null,
+        "human_fidelity": null,
+        "optional_author_feedback": null,
+        "promotion_result_is_native_raw": true,
+        "promotion_result_sha256": "7d0dcca05a1cf80c7d3e1b5e29ef860d3f46238849dbfa8b5d23b1b514a2c93e",
+        "reason": "Existing default compiler passes record guidance identity but do not consume learned features.",
+        "schema": "af013-consumer-observation/v1",
+        "state": "unactivated"
+      },
+      "promotion": {
+        "activation_state": {
+          "activation_allowed": false,
+          "active": false,
+          "active_promotion_id": "",
+          "block_reasons": [
+            "proof_receipts_missing",
+            "missing_view_family_weights",
+            "no_canonical_contracts_resolved",
+            "no_guidance_records_met_promotion_threshold"
+          ],
+          "state": "blocked"
+        },
+        "block_reasons": [
+          "proof_receipts_missing",
+          "missing_view_family_weights",
+          "no_canonical_contracts_resolved",
+          "no_guidance_records_met_promotion_threshold"
+        ],
+        "canary_evidence": {
+          "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+          "evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "family_metrics": {},
+          "fixed_sample_set": true,
+          "guardrails_passed": true,
+          "metric_regressions": [],
+          "metric_tolerance": 0.0,
+          "missing_guardrail_evidence": [],
+          "schema_version": "legal-ir-learned-guidance-fixed-canary-v1",
+          "source_copy_regressions": [],
+          "symbolic_validity_regressions": []
+        },
+        "candidate_record_count": 0,
+        "causal_evidence": {
+          "compiler_commit_bound": true,
+          "family_metric_deltas": {},
+          "fixed_canary_evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "learned_path_responsive": false,
+          "metric_lineage_complete": false,
+          "proof_receipt_count": 0,
+          "view_family_weights": {}
+        },
+        "compiler_commit": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+        "eligible_snapshot_id": "",
+        "fixed_canary_binding": {
+          "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+          "evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "fixed_sample_set": true,
+          "guardrails_passed": true,
+          "metric_tolerance": 0.0,
+          "schema_version": "legal-ir-learned-guidance-fixed-canary-v1"
+        },
+        "guidance_records": [],
+        "learned_export": {
+          "artifact_path": "",
+          "export_id": "lir-feature-export-609c2646eb8be276f3453a62",
+          "feature_count": 64,
+          "model_state_id": "modal-autoencoder-state-3bcb6025f6686500e2510698",
+          "sample_count": 0,
+          "sample_memory_included": false,
+          "schema_version": "legal-ir-stable-autoencoder-feature-export-v1",
+          "sha256": "d5cf66cf0b52a7c2aced8104f1ec4989e800a11747f0ded0865d9aee611fd684"
+        },
+        "learned_export_id": "lir-feature-export-609c2646eb8be276f3453a62",
+        "learned_export_sha256": "d5cf66cf0b52a7c2aced8104f1ec4989e800a11747f0ded0865d9aee611fd684",
+        "promoted": false,
+        "promotion_allowed": false,
+        "promotion_id": "lir-guidance-promotion-4ad9f6ab6f39d32a7724a04c",
+        "promotion_report_outcome": "no_candidate",
+        "proof_receipt_ids": [],
+        "proof_receipts": [],
+        "records": [],
+        "report_artifact_path": "",
+        "report_outcome": "no_candidate",
+        "rollback_metadata": {
+          "activation_allowed": false,
+          "activation_key": "lir-guidance-promotion-4ad9f6ab6f39d32a7724a04c",
+          "block_reasons": [
+            "proof_receipts_missing",
+            "missing_view_family_weights",
+            "no_canonical_contracts_resolved",
+            "no_guidance_records_met_promotion_threshold"
+          ],
+          "canary_evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "disable_action": "remove_promoted_guidance_records",
+          "previous_promotion_id": "",
+          "restore_mode": "canary_only",
+          "rollback_id": "lir-guidance-rollback-a78b7f6a51e5e13f4555c58b",
+          "schema_version": "legal-ir-learned-guidance-rollback-v1",
+          "source_export_id": "lir-feature-export-609c2646eb8be276f3453a62"
+        },
+        "schema_version": "legal-ir-learned-guidance-promotion-v1",
+        "source_copy_checks": {
+          "checked_paths": [],
+          "forbidden_feature_marker_count": 0,
+          "guardrails_passed": true,
+          "premise_security": {
+            "accepted": true,
+            "artifact_id": "lir-feature-export-609c2646eb8be276f3453a62",
+            "artifact_role": "learned_guidance_promotion",
+            "blocks_codex_todo": false,
+            "blocks_promotion": false,
+            "blocks_proof": false,
+            "blocks_training": false,
+            "findings": [],
+            "input_sha256": "5b0697cde5b1ae1a2ebfb778fcc45941ea70a76612d9d807d1f83b2d06a4fd15",
+            "provenance": {
+              "hard_rule": "legal_source_text_is_data_not_instructions",
+              "omitted_field_hashes": {},
+              "rejected_field_hashes": {},
+              "source_policy": "hash_only_legal_source_text"
+            },
+            "rejected": false,
+            "rejection_reasons": [],
+            "sanitized_sha256": "5b0697cde5b1ae1a2ebfb778fcc45941ea70a76612d9d807d1f83b2d06a4fd15",
+            "schema_version": "legal-ir-premise-security-v1"
+          },
+          "sample_memory_included": false,
+          "source_copy_policy": "hash_only",
+          "source_copy_regressions": [],
+          "stable_feature_count": 64,
+          "unsafe_feature_count": 0
+        },
+        "source_export_id": "lir-feature-export-609c2646eb8be276f3453a62",
+        "status": "no_candidate"
+      },
+      "seed": 104729
+    },
+    {
+      "activation": {
+        "T4": "unavailable",
+        "applied_learned_features": false,
+        "human_agreement": null,
+        "human_fidelity": null,
+        "optional_author_feedback": null,
+        "promotion_result_is_native_raw": true,
+        "promotion_result_sha256": "785d78046e03fb36eaddd10e0ecd1195839f52cd32e964c9ce79ff7ab9036ceb",
+        "reason": "Existing default compiler passes record guidance identity but do not consume learned features.",
+        "schema": "af013-consumer-observation/v1",
+        "state": "unactivated"
+      },
+      "promotion": {
+        "activation_state": {
+          "activation_allowed": false,
+          "active": false,
+          "active_promotion_id": "",
+          "block_reasons": [
+            "proof_receipts_missing",
+            "missing_view_family_weights",
+            "no_canonical_contracts_resolved",
+            "no_guidance_records_met_promotion_threshold"
+          ],
+          "state": "blocked"
+        },
+        "block_reasons": [
+          "proof_receipts_missing",
+          "missing_view_family_weights",
+          "no_canonical_contracts_resolved",
+          "no_guidance_records_met_promotion_threshold"
+        ],
+        "canary_evidence": {
+          "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+          "evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "family_metrics": {},
+          "fixed_sample_set": true,
+          "guardrails_passed": true,
+          "metric_regressions": [],
+          "metric_tolerance": 0.0,
+          "missing_guardrail_evidence": [],
+          "schema_version": "legal-ir-learned-guidance-fixed-canary-v1",
+          "source_copy_regressions": [],
+          "symbolic_validity_regressions": []
+        },
+        "candidate_record_count": 0,
+        "causal_evidence": {
+          "compiler_commit_bound": true,
+          "family_metric_deltas": {},
+          "fixed_canary_evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "learned_path_responsive": false,
+          "metric_lineage_complete": false,
+          "proof_receipt_count": 0,
+          "view_family_weights": {}
+        },
+        "compiler_commit": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+        "eligible_snapshot_id": "",
+        "fixed_canary_binding": {
+          "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+          "evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "fixed_sample_set": true,
+          "guardrails_passed": true,
+          "metric_tolerance": 0.0,
+          "schema_version": "legal-ir-learned-guidance-fixed-canary-v1"
+        },
+        "guidance_records": [],
+        "learned_export": {
+          "artifact_path": "",
+          "export_id": "lir-feature-export-b1ecfeaac57bc0c89ccfdffb",
+          "feature_count": 64,
+          "model_state_id": "modal-autoencoder-state-2dae825be19f28b1823eda06",
+          "sample_count": 0,
+          "sample_memory_included": false,
+          "schema_version": "legal-ir-stable-autoencoder-feature-export-v1",
+          "sha256": "1de4b80725f57a7f97adff40091a68766abee95cebbec8366dd06bdb9756b7e8"
+        },
+        "learned_export_id": "lir-feature-export-b1ecfeaac57bc0c89ccfdffb",
+        "learned_export_sha256": "1de4b80725f57a7f97adff40091a68766abee95cebbec8366dd06bdb9756b7e8",
+        "promoted": false,
+        "promotion_allowed": false,
+        "promotion_id": "lir-guidance-promotion-ae70e64821bd444db3d252d5",
+        "promotion_report_outcome": "no_candidate",
+        "proof_receipt_ids": [],
+        "proof_receipts": [],
+        "records": [],
+        "report_artifact_path": "",
+        "report_outcome": "no_candidate",
+        "rollback_metadata": {
+          "activation_allowed": false,
+          "activation_key": "lir-guidance-promotion-ae70e64821bd444db3d252d5",
+          "block_reasons": [
+            "proof_receipts_missing",
+            "missing_view_family_weights",
+            "no_canonical_contracts_resolved",
+            "no_guidance_records_met_promotion_threshold"
+          ],
+          "canary_evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "disable_action": "remove_promoted_guidance_records",
+          "previous_promotion_id": "",
+          "restore_mode": "canary_only",
+          "rollback_id": "lir-guidance-rollback-7e62e506de62668af8723584",
+          "schema_version": "legal-ir-learned-guidance-rollback-v1",
+          "source_export_id": "lir-feature-export-b1ecfeaac57bc0c89ccfdffb"
+        },
+        "schema_version": "legal-ir-learned-guidance-promotion-v1",
+        "source_copy_checks": {
+          "checked_paths": [],
+          "forbidden_feature_marker_count": 0,
+          "guardrails_passed": true,
+          "premise_security": {
+            "accepted": true,
+            "artifact_id": "lir-feature-export-b1ecfeaac57bc0c89ccfdffb",
+            "artifact_role": "learned_guidance_promotion",
+            "blocks_codex_todo": false,
+            "blocks_promotion": false,
+            "blocks_proof": false,
+            "blocks_training": false,
+            "findings": [],
+            "input_sha256": "d446315441079c3fa200c665adee5d8eec2fdc668f2e2a314e21500d14da88b9",
+            "provenance": {
+              "hard_rule": "legal_source_text_is_data_not_instructions",
+              "omitted_field_hashes": {},
+              "rejected_field_hashes": {},
+              "source_policy": "hash_only_legal_source_text"
+            },
+            "rejected": false,
+            "rejection_reasons": [],
+            "sanitized_sha256": "d446315441079c3fa200c665adee5d8eec2fdc668f2e2a314e21500d14da88b9",
+            "schema_version": "legal-ir-premise-security-v1"
+          },
+          "sample_memory_included": false,
+          "source_copy_policy": "hash_only",
+          "source_copy_regressions": [],
+          "stable_feature_count": 64,
+          "unsafe_feature_count": 0
+        },
+        "source_export_id": "lir-feature-export-b1ecfeaac57bc0c89ccfdffb",
+        "status": "no_candidate"
+      },
+      "seed": 130363
+    },
+    {
+      "activation": {
+        "T4": "unavailable",
+        "applied_learned_features": false,
+        "human_agreement": null,
+        "human_fidelity": null,
+        "optional_author_feedback": null,
+        "promotion_result_is_native_raw": true,
+        "promotion_result_sha256": "e9fb0838617b6e70a5e1b430d6b5b4c56f8155a2abc7cd2535c228ed055c5963",
+        "reason": "Existing default compiler passes record guidance identity but do not consume learned features.",
+        "schema": "af013-consumer-observation/v1",
+        "state": "unactivated"
+      },
+      "promotion": {
+        "activation_state": {
+          "activation_allowed": false,
+          "active": false,
+          "active_promotion_id": "",
+          "block_reasons": [
+            "proof_receipts_missing",
+            "missing_view_family_weights",
+            "no_canonical_contracts_resolved",
+            "no_guidance_records_met_promotion_threshold"
+          ],
+          "state": "blocked"
+        },
+        "block_reasons": [
+          "proof_receipts_missing",
+          "missing_view_family_weights",
+          "no_canonical_contracts_resolved",
+          "no_guidance_records_met_promotion_threshold"
+        ],
+        "canary_evidence": {
+          "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+          "evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "family_metrics": {},
+          "fixed_sample_set": true,
+          "guardrails_passed": true,
+          "metric_regressions": [],
+          "metric_tolerance": 0.0,
+          "missing_guardrail_evidence": [],
+          "schema_version": "legal-ir-learned-guidance-fixed-canary-v1",
+          "source_copy_regressions": [],
+          "symbolic_validity_regressions": []
+        },
+        "candidate_record_count": 0,
+        "causal_evidence": {
+          "compiler_commit_bound": true,
+          "family_metric_deltas": {},
+          "fixed_canary_evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "learned_path_responsive": false,
+          "metric_lineage_complete": false,
+          "proof_receipt_count": 0,
+          "view_family_weights": {}
+        },
+        "compiler_commit": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+        "eligible_snapshot_id": "",
+        "fixed_canary_binding": {
+          "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+          "evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "fixed_sample_set": true,
+          "guardrails_passed": true,
+          "metric_tolerance": 0.0,
+          "schema_version": "legal-ir-learned-guidance-fixed-canary-v1"
+        },
+        "guidance_records": [],
+        "learned_export": {
+          "artifact_path": "",
+          "export_id": "lir-feature-export-f3778fa624adcb4dc3fec307",
+          "feature_count": 64,
+          "model_state_id": "modal-autoencoder-state-f7f95edfd3a0c15cc44b86fc",
+          "sample_count": 0,
+          "sample_memory_included": false,
+          "schema_version": "legal-ir-stable-autoencoder-feature-export-v1",
+          "sha256": "7d4aac7d03546b456a2283990ae7a0ffdc0863b7bceac7cfbd06aeb6204605a7"
+        },
+        "learned_export_id": "lir-feature-export-f3778fa624adcb4dc3fec307",
+        "learned_export_sha256": "7d4aac7d03546b456a2283990ae7a0ffdc0863b7bceac7cfbd06aeb6204605a7",
+        "promoted": false,
+        "promotion_allowed": false,
+        "promotion_id": "lir-guidance-promotion-eeae7b713614c17e35b89684",
+        "promotion_report_outcome": "no_candidate",
+        "proof_receipt_ids": [],
+        "proof_receipts": [],
+        "records": [],
+        "report_artifact_path": "",
+        "report_outcome": "no_candidate",
+        "rollback_metadata": {
+          "activation_allowed": false,
+          "activation_key": "lir-guidance-promotion-eeae7b713614c17e35b89684",
+          "block_reasons": [
+            "proof_receipts_missing",
+            "missing_view_family_weights",
+            "no_canonical_contracts_resolved",
+            "no_guidance_records_met_promotion_threshold"
+          ],
+          "canary_evidence_id": "lir-canary-evidence-944ac372cbce3d7326a08d58",
+          "disable_action": "remove_promoted_guidance_records",
+          "previous_promotion_id": "",
+          "restore_mode": "canary_only",
+          "rollback_id": "lir-guidance-rollback-aba37ed50780955d660cb448",
+          "schema_version": "legal-ir-learned-guidance-rollback-v1",
+          "source_export_id": "lir-feature-export-f3778fa624adcb4dc3fec307"
+        },
+        "schema_version": "legal-ir-learned-guidance-promotion-v1",
+        "source_copy_checks": {
+          "checked_paths": [],
+          "forbidden_feature_marker_count": 0,
+          "guardrails_passed": true,
+          "premise_security": {
+            "accepted": true,
+            "artifact_id": "lir-feature-export-f3778fa624adcb4dc3fec307",
+            "artifact_role": "learned_guidance_promotion",
+            "blocks_codex_todo": false,
+            "blocks_promotion": false,
+            "blocks_proof": false,
+            "blocks_training": false,
+            "findings": [],
+            "input_sha256": "832e91958df9d840fb9fa70a6e4700dbaf486965fe52b3bdcc30c97730c90311",
+            "provenance": {
+              "hard_rule": "legal_source_text_is_data_not_instructions",
+              "omitted_field_hashes": {},
+              "rejected_field_hashes": {},
+              "source_policy": "hash_only_legal_source_text"
+            },
+            "rejected": false,
+            "rejection_reasons": [],
+            "sanitized_sha256": "832e91958df9d840fb9fa70a6e4700dbaf486965fe52b3bdcc30c97730c90311",
+            "schema_version": "legal-ir-premise-security-v1"
+          },
+          "sample_memory_included": false,
+          "source_copy_policy": "hash_only",
+          "source_copy_regressions": [],
+          "stable_feature_count": 64,
+          "unsafe_feature_count": 0
+        },
+        "source_export_id": "lir-feature-export-f3778fa624adcb4dc3fec307",
+        "status": "no_candidate"
+      },
+      "seed": 155921
+    }
+  ]
+}
