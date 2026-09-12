@@ -1,0 +1,852 @@
+{
+  "baselines": {
+    "domain_specific_finite_Q1": "stdlib_finite_enumeration",
+    "intent_plan_is_not_occurrence": "App.P.1",
+    "t0_codec": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+  },
+  "checkpoints": {
+    "af011_config_id": "082d9a574705aabef0f46ba17f95c256118759fe3bb8a467110a12d19d1bfbdd",
+    "af011_dataset_id": "1ccdbe48451a8b81d5c76a8494a4c2e84d53ce653236d1e5799de9cf58955c47",
+    "af011_t0_t2": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+    "af011_t1": {
+      "104729": "1a1bb5919cbc0808381e69de3629c3a9da2f65de88994661b0e89a0ab63feba9",
+      "130363": "f25507dfc60b2dd8a0093bb96c0f4633a665d1dc95713799a6349abe331f9e34",
+      "155921": "b628a9466f2ecd660ec674c51a5bcd9e07dde3fb30b30829908527e6fa52c0e3"
+    },
+    "af029_payloads_present": false,
+    "af029_t2": [
+      "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b"
+    ],
+    "af029_t3": [
+      "def483e87bb57d27a8f24a3939a063d1039af95c111ec6d5733b452f612b5cbc",
+      "c90b4b9e7fd0120a7507b5e98bf7130e6c1e63091c14200afd3c2ee137ca5faf",
+      "a4e7a375e63e8a62c13691673342560596418095a0b1f0835ad6929d66d18be8"
+    ]
+  },
+  "claim_classes": {
+    "learned_transfer": {
+      "description": "Legal-trained shared parameters vs deterministic/domain-specific controls on other-domain examples.",
+      "n_measured": 7,
+      "n_rows": 10,
+      "n_unavailable": 3,
+      "n_unsupported": 0,
+      "source_semantic_gold_implied": false
+    },
+    "multimodal_extraction": {
+      "description": "OCR/ASR only after a concrete measured extraction route.",
+      "n_measured": 0,
+      "n_rows": 2,
+      "n_unavailable": 0,
+      "n_unsupported": 2,
+      "source_semantic_gold_implied": false
+    },
+    "semantic_proof_transfer": {
+      "description": "Property-specific finite consequence transfer with admitted entity/time mappings.",
+      "n_measured": 7,
+      "n_rows": 8,
+      "n_unavailable": 1,
+      "n_unsupported": 0,
+      "source_semantic_gold_implied": false
+    },
+    "structural_compatibility": {
+      "description": "Shared FormalizationSample/Compiler/Artifact contracts and disjoint view IDs.",
+      "n_measured": 5,
+      "n_rows": 5,
+      "n_unavailable": 0,
+      "n_unsupported": 0,
+      "source_semantic_gold_implied": false
+    }
+  },
+  "domains": {
+    "intent": {
+      "baseline": {
+        "actual": true,
+        "id": "plan_is_not_occurrence"
+      },
+      "checkpoint": {
+        "actual": true,
+        "af011_t0_t2": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "af029_t2": [
+          "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+          "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+          "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b"
+        ]
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "scored": true,
+          "status": "measured_null_AF011_unavailable_AF029"
+        },
+        "semantic_proof_transfer": {
+          "scored": true,
+          "status": "measured"
+        },
+        "structural_compatibility": {
+          "scored": true,
+          "status": "measured"
+        }
+      },
+      "evaluated": true,
+      "formal_target_provenance": {
+        "profile_id": "intent-ir-view/action-hoare/v1",
+        "property_id": "plan-postcondition-not-occurrence",
+        "source": "App. P.1 Intent plan vs occurrence distinction"
+      },
+      "independent_labels": {
+        "available": false,
+        "status": "unmeasured_not_collected"
+      },
+      "population": {
+        "examples": [
+          "intent.plan-request-approve-write"
+        ],
+        "frozen": true,
+        "kind": "constructed_control",
+        "n_examples": 1,
+        "natural_admitted": 0
+      },
+      "profile": {
+        "producer_id": "intent-formalization-compiler",
+        "profile_id": "intent-formalization-compiler/v1",
+        "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+        "source": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+        "supported": true,
+        "views": [
+          "intent-ir-view/facts/v1",
+          "intent-ir-view/intention-deontic/v1",
+          "intent-ir-view/action-hoare/v1",
+          "intent-ir-view/workflow-temporal/v1",
+          "intent-ir-view/invariant/v1"
+        ]
+      },
+      "source_semantic_gold": false
+    },
+    "legal": {
+      "baseline": {
+        "actual": true,
+        "id": "T0-deterministic-codec",
+        "identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+      },
+      "checkpoint": {
+        "actual": true,
+        "af011_t0_t2": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "af011_t1": {
+          "104729": "1a1bb5919cbc0808381e69de3629c3a9da2f65de88994661b0e89a0ab63feba9",
+          "130363": "f25507dfc60b2dd8a0093bb96c0f4633a665d1dc95713799a6349abe331f9e34",
+          "155921": "b628a9466f2ecd660ec674c51a5bcd9e07dde3fb30b30829908527e6fa52c0e3"
+        },
+        "af029_t2": [
+          "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+          "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+          "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b"
+        ]
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "cross_domain_role": "source_only",
+          "scored": true,
+          "status": "measured"
+        },
+        "semantic_proof_transfer": {
+          "note": "constraint stated; not implementation proof",
+          "scored": true,
+          "status": "measured"
+        },
+        "structural_compatibility": {
+          "scored": true,
+          "status": "measured"
+        }
+      },
+      "evaluated": true,
+      "formal_target_provenance": {
+        "independent_gold_rows_with_values": 0,
+        "property_id": "Q1",
+        "source": "App. P.1 constructed constraint plus AF-004 legal inventory",
+        "teacher_compiler_targets": 0,
+        "text": "Protected(r) and not Approved(a,r,t) implies not Write(a,r,t)"
+      },
+      "independent_labels": {
+        "available": false,
+        "status": "unmeasured_not_collected"
+      },
+      "population": {
+        "bodies_opened": false,
+        "final_test_locked": true,
+        "final_test_units": 1913,
+        "fixed_canary_units": 38,
+        "frozen": true,
+        "kind": "natural_legal_policy",
+        "selection_units": 15,
+        "split_counts": {
+          "final_test": {
+            "by_domain": {
+              "cfr": 993,
+              "guidance": 7,
+              "mpep": 738,
+              "uscode": 175
+            },
+            "by_domain_record_counts": {
+              "cfr": 993,
+              "guidance": 7,
+              "mpep": 746,
+              "uscode": 175
+            },
+            "by_source_time": {
+              "2022-07-01": 738,
+              "2024-07-01": 993,
+              "2024-07-17": 7,
+              "2024-12-31": 175
+            },
+            "component_record_size_histogram": {
+              "10": 2,
+              "15": 1,
+              "1738": 1,
+              "25": 1,
+              "28": 1,
+              "29": 1,
+              "3": 3,
+              "4": 3,
+              "5": 2,
+              "6": 2,
+              "7": 1,
+              "8": 2
+            },
+            "exact_normalized_alias_records": 8,
+            "natural_source_records": 1921,
+            "natural_source_units": 1913,
+            "operational_connected_components": 20
+          },
+          "fixed_canary": {
+            "by_domain": {
+              "cfr": 38
+            },
+            "by_domain_record_counts": {
+              "cfr": 38
+            },
+            "by_source_time": {
+              "2024-07-01": 38
+            },
+            "component_record_size_histogram": {
+              "11": 1,
+              "27": 1
+            },
+            "exact_normalized_alias_records": 0,
+            "natural_source_records": 38,
+            "natural_source_units": 38,
+            "operational_connected_components": 2
+          },
+          "selection": {
+            "by_domain": {
+              "cfr": 15
+            },
+            "by_domain_record_counts": {
+              "cfr": 15
+            },
+            "by_source_time": {
+              "2024-07-01": 15
+            },
+            "component_record_size_histogram": {
+              "11": 1,
+              "2": 2
+            },
+            "exact_normalized_alias_records": 0,
+            "natural_source_records": 15,
+            "natural_source_units": 15,
+            "operational_connected_components": 3
+          },
+          "train": {
+            "by_domain": {
+              "cfr": 69
+            },
+            "by_domain_record_counts": {
+              "cfr": 69
+            },
+            "by_source_time": {
+              "2024-07-01": 69
+            },
+            "component_record_size_histogram": {
+              "1": 1,
+              "10": 1,
+              "58": 1
+            },
+            "exact_normalized_alias_records": 0,
+            "natural_source_records": 69,
+            "natural_source_units": 69,
+            "operational_connected_components": 3
+          }
+        },
+        "train_units": 69
+      },
+      "profile": {
+        "producer_id": "legal-ir-formalization-adapter",
+        "profile_id": "legal-ir-formalization-adapter/v1",
+        "sha256": "6ff6dd3dc3f4319bba1f629a5b89c882a044c4951fed194215fdee7651381461",
+        "source": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/adapter.py",
+        "supported": true,
+        "views": [
+          "legal-ir-view/deontic/v1",
+          "legal-ir-view/frame-logic/v1",
+          "legal-ir-view/tdfol/v1",
+          "legal-ir-view/cec/v1"
+        ]
+      },
+      "source_semantic_gold": false
+    },
+    "media": {
+      "baseline": {
+        "actual": false,
+        "status": "no_measured_extraction_baseline"
+      },
+      "checkpoint": {
+        "actual": true,
+        "identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "note": "checkpoint exists but is not an OCR/ASR model"
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "scored": false,
+          "status": "unsupported"
+        },
+        "semantic_proof_transfer": {
+          "scored": false,
+          "status": "unsupported"
+        },
+        "structural_compatibility": {
+          "scored": false,
+          "status": "unsupported"
+        }
+      },
+      "evaluated": false,
+      "extraction_route": {
+        "asr_performance_claimed": false,
+        "measured": false,
+        "ocr_performance_claimed": false
+      },
+      "formal_target_provenance": {
+        "property_id": null,
+        "status": "no_extracted_formal_target"
+      },
+      "independent_labels": {
+        "available": false,
+        "status": "unmeasured_not_collected"
+      },
+      "population": {
+        "frozen": false,
+        "kind": "unextracted_media",
+        "natural_admitted": 0
+      },
+      "profile": {
+        "capability_route": "R07",
+        "profile_id": null,
+        "supported": false
+      },
+      "source_semantic_gold": false
+    },
+    "security": {
+      "baseline": {
+        "actual": true,
+        "id": "domain_specific_finite_Q1"
+      },
+      "checkpoint": {
+        "actual": true,
+        "af011_t0_t2": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "af029_t2": [
+          "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+          "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+          "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b"
+        ]
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "scored": true,
+          "status": "measured_null_AF011_unavailable_AF029"
+        },
+        "semantic_proof_transfer": {
+          "scored": true,
+          "status": "measured"
+        },
+        "structural_compatibility": {
+          "scored": true,
+          "status": "measured"
+        }
+      },
+      "evaluated": true,
+      "formal_target_provenance": {
+        "profile_id": "guarded-implementation-fol/v1",
+        "property_id": "Q1",
+        "source": "AF-015/AF-006 finite protected-write models",
+        "text": "Protected(r) and not Approved(a,r,t) implies not Write(a,r,t)"
+      },
+      "independent_labels": {
+        "available": false,
+        "status": "unmeasured_not_collected"
+      },
+      "population": {
+        "examples": [
+          "security.guarded-implementation",
+          "security.unguarded-implementation"
+        ],
+        "frozen": true,
+        "kind": "constructed_control",
+        "n_examples": 2,
+        "natural_admitted": 0
+      },
+      "profile": {
+        "producer_id": "security-ir-formalization-adapter",
+        "profile_id": "security-ir-formalization-adapter/v1",
+        "sha256": "09accb91139230c08f9d9876ebc83485803419fad8b49e80e37b1f0f6861d631",
+        "source": "external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/formalization_adapter.py",
+        "supported": true,
+        "views": [
+          "security-ir-view/threat/v1",
+          "security-ir-view/policy/v1",
+          "security-ir-view/transition/v1",
+          "security-ir-view/claim/v1"
+        ]
+      },
+      "source_semantic_gold": false
+    },
+    "software": {
+      "baseline": {
+        "actual": true,
+        "id": "domain_specific_finite_Q1"
+      },
+      "checkpoint": {
+        "actual": true,
+        "af011_t0_t2": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "af029_t2": [
+          "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+          "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+          "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b"
+        ]
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "scored": true,
+          "status": "measured_null_AF011_unavailable_AF029"
+        },
+        "semantic_proof_transfer": {
+          "scored": true,
+          "status": "measured"
+        },
+        "structural_compatibility": {
+          "note": "no dedicated software FormalizationSample adapter; uses Security profile",
+          "scored": true,
+          "status": "measured"
+        }
+      },
+      "evaluated": true,
+      "formal_target_provenance": {
+        "profile_id": "guarded-implementation-fol/v1",
+        "property_id": "Q1",
+        "text": "Protected(r) and not Approved(a,r,t) implies not Write(a,r,t)"
+      },
+      "independent_labels": {
+        "available": false,
+        "status": "unmeasured_not_collected"
+      },
+      "population": {
+        "examples": [
+          "software.guarded-write-function"
+        ],
+        "frozen": true,
+        "kind": "constructed_control",
+        "n_examples": 1,
+        "natural_admission": "pending_original_source_authorship_temporal_identity_and_record_rights_qualification",
+        "natural_admitted": 0
+      },
+      "profile": {
+        "note": "Constructed snippet reuses the Security guarded-write profile; no natural code adapter is admitted.",
+        "profile_id": "guarded-implementation-fol/v1",
+        "supported": true
+      },
+      "source_semantic_gold": false
+    },
+    "trace": {
+      "baseline": {
+        "actual": true,
+        "id": "identity_and_window_rules"
+      },
+      "checkpoint": {
+        "actual": true,
+        "af011_t0_t2": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "scored": false,
+          "status": "not_a_learned_target"
+        },
+        "semantic_proof_transfer": {
+          "scored": true,
+          "status": "measured"
+        },
+        "structural_compatibility": {
+          "scored": false,
+          "status": "not_an_ir_adapter"
+        }
+      },
+      "evaluated": true,
+      "formal_target_provenance": {
+        "profile_id": "bounded-audit-trace/v1",
+        "property_id": "Q2",
+        "text": "Write(a,r,t) implies exists u in [t, t+2]. Audit(a,r,u)"
+      },
+      "independent_labels": {
+        "available": false,
+        "status": "unmeasured_not_collected"
+      },
+      "population": {
+        "examples": [
+          "trace.timely-audit",
+          "trace.wrong-tenant"
+        ],
+        "frozen": true,
+        "kind": "constructed_control",
+        "n_examples": 2,
+        "natural_admission": "unavailable_no_qualified_natural_trace_artifact_discovered",
+        "natural_admitted": 0
+      },
+      "profile": {
+        "profile_id": "bounded-audit-trace/v1",
+        "supported": true
+      },
+      "source_semantic_gold": false
+    },
+    "ui": {
+      "baseline": {
+        "actual": false,
+        "status": "no_ui_baseline"
+      },
+      "checkpoint": {
+        "actual": true,
+        "identity": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "note": "legal-trained checkpoint is not a UI extractor"
+      },
+      "claim_classes": {
+        "learned_transfer": {
+          "scored": false,
+          "status": "unsupported"
+        },
+        "semantic_proof_transfer": {
+          "scored": false,
+          "status": "unsupported"
+        },
+        "structural_compatibility": {
+          "scored": false,
+          "status": "unsupported"
+        }
+      },
+      "evaluated": false,
+      "formal_target_provenance": {
+        "status": "no_supported_ui_profile"
+      },
+      "independent_labels": {
+        "available": false
+      },
+      "population": {
+        "kind": "unavailable",
+        "natural_admitted": 0
+      },
+      "profile": {
+        "profile_id": null,
+        "supported": false
+      },
+      "source_semantic_gold": false
+    }
+  },
+  "environment": {
+    "home": "/tmp/ipfs-accelerate-validation-home-af019-due87_vr",
+    "home_is_validation_private": true,
+    "ocr_asr_tools": [
+      {
+        "name": "tesseract",
+        "resolved_path": "/usr/bin/tesseract",
+        "status": "available",
+        "usable_in_sealed_validation": true
+      },
+      {
+        "name": "whisper",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "easyocr",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "ffmpeg",
+        "resolved_path": "/usr/bin/ffmpeg",
+        "status": "available",
+        "usable_in_sealed_validation": true
+      }
+    ],
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_executable": "/usr/bin/python3.12",
+    "python_modules": [
+      {
+        "detail": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+        "name": "numpy",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'torch'",
+        "name": "torch",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'transformers'",
+        "name": "transformers",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'sentence_transformers'",
+        "name": "sentence_transformers",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'faiss'",
+        "name": "faiss",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'pytesseract'",
+        "name": "pytesseract",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'easyocr'",
+        "name": "easyocr",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'whisper'",
+        "name": "whisper",
+        "status": "unavailable"
+      },
+      {
+        "detail": "ModuleNotFoundError: No module named 'cv2'",
+        "name": "cv2",
+        "status": "unavailable"
+      },
+      {
+        "file": "/usr/lib/python3/dist-packages/PIL/__init__.py",
+        "name": "PIL",
+        "status": "imported",
+        "version": "10.2.0"
+      }
+    ],
+    "python_version": "3.12.3",
+    "tools": [
+      {
+        "name": "lean",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "lake",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "elan",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "z3",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "cvc5",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "vampire",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "eprover",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "coqc",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      },
+      {
+        "name": "isabelle",
+        "resolved_path": null,
+        "status": "unavailable",
+        "usable_in_sealed_validation": false
+      }
+    ]
+  },
+  "frozen_inputs": {
+    "baseline_checkpoint_manifest_sha256": "b33d71df3cf66a27fba5b5470c73764e137d51d0452110f236b820fe10cefaf5",
+    "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+    "eligible_checkpoint_binding_sha256": "10664da0118d073159454e7ec4df7e032285af9580793f4427cd3511de3a6214",
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "native_checkpoint_manifest_sha256": "a6cc9c3fa78c365977c8409b9a02e479a4cce8b3b3bde8035e889e40064a9fa3",
+    "policy_code_trace_cases_sha256": "a795f24b69860316b6f9615e145b08e208df0cd8ca76069c91f850a312ecaac7",
+    "result_schema_sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d",
+    "runtime_capability_matrix_sha256": "92b19f363faee75a2ffbcc67d0b9092c6ccbd2666f13ae78a11b68c9c7a4ff6b",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "structural_evidence_scope_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+    "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+  },
+  "independent_source_semantic_labels": {
+    "adjudication_status": "not_performed",
+    "available": false,
+    "gold_rows": 100,
+    "gold_rows_with_values": 0,
+    "human_agreement": "unmeasured_not_collected",
+    "implied_by_prover_or_teacher": false
+  },
+  "inspected_sources": {
+    "bridge_cases.py": {
+      "imported": false,
+      "note": "AF-015 Q1/Q2 finite evaluators are replicated here, not imported.",
+      "path": "papers/completion/autoformalization/evaluation/bridge_cases.py",
+      "sha256": "643a5b66489a787aefd809ac58ee9dc4dc016e5325fafd850e7f0957f7608abe"
+    },
+    "canonical_roundtrip.py": {
+      "imported": false,
+      "note": "Legal production composition; inspected, not executed.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "0755cce95acc5e8094a109254cf841c1bdbbcec340f16a68023cdd4d93f9b864"
+    },
+    "feature_transfer.py": {
+      "imported": false,
+      "note": "Legacy architecture-version feature copy, not Legal-to-Security transfer.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_feature_transfer.py",
+      "sha256": "a710e9a0ae9b318f72866cda8b2735e11c2ab7073c5d1539b51386e6f330b3b9"
+    },
+    "formalization_compiler.py": {
+      "imported": false,
+      "note": "FormalizationCompiler protocol and artifact; no proof execution.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/compiler.py",
+      "sha256": "18d0a4e71385f657355366c282c65c8616c2ddb5278348ca261047f5722b79f7"
+    },
+    "formalization_samples.py": {
+      "imported": false,
+      "note": "Domain-neutral FormalizationSample contract.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/samples.py",
+      "sha256": "e537994d17982bd9b612c2535bf8a9da3dd10c356392b0ac543db5ab9a40ca2c"
+    },
+    "image_processor.py": {
+      "imported": false,
+      "note": "Optional Tesseract wrapper; not a measured OCR evaluation route.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/processors/file_converter/image_processor.py",
+      "sha256": "1eb49f79c415ccb0cbef653126c3132d07e60a2180b8b1b0706bea71d79a96b6"
+    },
+    "intent_compiler.py": {
+      "imported": false,
+      "note": "intent-formalization-compiler/v1; syntactic multi-view compiler.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+      "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552"
+    },
+    "legal_adapter.py": {
+      "imported": false,
+      "note": "legal-ir-formalization-adapter/v1; Legal domain compile() on FormalizationSample.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/adapter.py",
+      "sha256": "6ff6dd3dc3f4319bba1f629a5b89c882a044c4951fed194215fdee7651381461"
+    },
+    "security_adapter.py": {
+      "imported": false,
+      "note": "security-ir-formalization-adapter/v1; declaration features only.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/formalization_adapter.py",
+      "sha256": "09accb91139230c08f9d9876ebc83485803419fad8b49e80e37b1f0f6861d631"
+    },
+    "structural_evidence_scope.json": {
+      "imported": false,
+      "note": "AF-028 policy: checker/teacher success is not source-semantic gold.",
+      "path": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+      "sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea"
+    }
+  },
+  "limitations": [
+    "Independent human source-semantic labels are unavailable; human agreement is unmeasured.",
+    "AF-011 T2 python-backend accepted 0 shared-parameter epochs; null delta is not a calibrated transfer.",
+    "AF-029 T2 MiniLM packed_cpu application to other domains is unavailable under sealed PATH.",
+    "Constructed_control results do not fill natural held-out table cells.",
+    "No OCR/ASR performance is claimed.",
+    "Finite Q1/Q2 checks are solver_local constructed witnesses, not native kernel proofs.",
+    "Legal/Security/Intent adapter compatibility is not statistical transfer."
+  ],
+  "mappings": [
+    {
+      "kind": "adapter",
+      "mapping_id": "adapter.shared-formalization-sample",
+      "review": "Legal/Security/Intent adapters share FormalizationSample/Compiler/Artifact contracts. Shared infrastructure is not semantic identity or statistical transfer.",
+      "status": "admitted_contract_only"
+    },
+    {
+      "fields": [
+        "actor",
+        "resource",
+        "tenant",
+        "request"
+      ],
+      "kind": "entity",
+      "mapping_id": "entity.admitted.tenant-a",
+      "review": "Exact constructed-identifier equality. Not a natural-document entity linker.",
+      "status": "admitted",
+      "value": {
+        "actor": "alice",
+        "request": "req-1",
+        "resource": "r1",
+        "tenant": "tenant-a"
+      }
+    },
+    {
+      "fields": [
+        "tenant"
+      ],
+      "kind": "entity",
+      "mapping_id": "entity.rejected.wrong-tenant",
+      "review": "A shared actor/resource name is not sufficient to join tenants.",
+      "status": "rejected",
+      "value": {
+        "policy_tenant": "tenant-a",
+        "trace_tenant": "tenant-b"
+      }
+    },
+    {
+      "clock": "trace-step-index",
+      "deadline_offset": 2,
+      "kind": "time",
+      "mapping_id": "time.discrete-index.deadline-2",
+      "review": "Discrete constructed-trace steps; not wall-clock alignment of natural logs.",
+      "status": "admitted"
+    },
+    {
+      "kind": "adapter",
+      "mapping_id": "intent-plan.not-occurrence",
+      "review": "An Intent plan postcondition is not evidence that the write occurred.",
+      "status": "rejected_as_execution_evidence"
+    }
+  ],
+  "policy_id": "AF-028/structural-evidence-scope/v1",
+  "pool_id": "AF-019-protected-write-composition/v1",
+  "schema": "autoformalization-domain-scope-matrix/v1",
+  "source_scoring_rule": "A checker proves the submitted formal statement within its profile. Whether that statement faithfully captures the source remains unmeasured without separate valid evidence. No proof/checker pass, automatic teacher label, reconstruction score, or constructed witness is original-source semantic gold.",
+  "task_id": "AF-019"
+}
