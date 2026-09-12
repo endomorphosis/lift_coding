@@ -1,0 +1,145 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-011",
+  "status": "complete",
+  "completed_at": "2026-09-12T07:45:18+00:00",
+  "scope": "Independent cold-oracle scoring of admitted TestProofCache reuse against a live pytest cohort, with adversarial mutations of fixtures, instances, finalizers, plugins, hooks, config, policies, keys, runtime traces, external snapshots, test removal, stale cache, incomplete traces, and changed external effects. Skipped and unavailable oracle rows cannot count as safe agreement. Not a live A–D experiment and not a native Groth16 proof of pytest execution.",
+  "source_versions": {
+    "workspace_git_head": "5623f189464340ca4faec154d9323bdc81d7ed99",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "8.1.1",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "cf85648380946e776170b7f30c66cc0f72a01a2e",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 recorded groth16/z3/cvc5 unavailable in the sealed-style profile. NS-011 re-probed PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and still found z3, cvc5, and groth16 null. Native Groth16 verification of pytest execution is not treated as operational."
+    },
+    "caller": {
+      "proof_cached_test_validation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py",
+      "proof_cached_test_validation_sha256": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581",
+      "test_proof_cache": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+      "test_proof_cache_sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+      "test_certificate_store": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_certificate_store.py",
+      "test_certificate_store_sha256": "6ae02457603cfe2d5656e768e742f4ed320153d78ff5334d9ef48d2b6095cfb0",
+      "test_execution_contracts": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py",
+      "test_execution_contracts_sha256": "9702398656f4bff098049167f30f1e54ef1c892c2d1c021b2cde5a8c79ab0e69",
+      "test_identity_components": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_identity_components.py",
+      "test_identity_components_sha256": "f264540c92c4c7ae90f26a2b52f375f3e3ddb04cee8d5bc17e7be7f92aa091be",
+      "test_reuse_eligibility": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py",
+      "test_reuse_eligibility_sha256": "f21b8e64a9ba1b0f5ebc2d3df126aa63f299dfe2c6c8b1e504cbf6233ae01b4e",
+      "selection_execution": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/selection_execution.py",
+      "selection_execution_sha256": "89370028c0700d95e1c05c8e90a8d92a3ed29259a453b001cadff19ed9a4ece8",
+      "verification": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/verification.py",
+      "verification_sha256": "f117de54086539e7b5a3f19dc2b6f1a5f16def6267309876ffc9f4adee580cf0"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/cold_oracle_results.jsonl": "d2f1b8855371793f8fad883c9d91dc427728694bfa1ad748ecb5f44347ab6dc3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_mutation_results.jsonl": "63da636c659d35e9b748ba6b206bcde97c5a76b0f1c4561fd89e963c9a8fb728",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_analysis.json": "8423c4fc2b7f269de693544ccf275a7d6f2baa71710d841991c0634428c2a066",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/run_cold_oracle_qualification.py": "99b151a0b64380f1e1e30545cbf06c368ff44f54b848e9f4b429123124ecd125",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/validate_cold_oracle_qualification.py": "42134ee3453cb1085bd6cf73c7ed2c20b0bab7320b30b69e8a2fca5407c70cba",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/fixture_recipe.json": "40fb2b1482c6a5fe99759fe7395fb4424d467c2cc433bcc521f7e9e93957b957",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/cold-oracle-qualification.log": "e628d91a44240e4e1f6618f75eb5cd1260ec20f99901d721f1e94b305e5c7b37",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/checkpoints/start.json": "77b670b7e266d5d6290046d64d0351b7edfce6f13d4c38ec57d6efcef7f9b75a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/checkpoints/outputs.json": "c9449fefb50e1e411ed9af9fe8dfbfebaf9a54d1ffa85208c8bae6c150387daa"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/cold_oracle_results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/cold_oracle_results.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_mutation_results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_mutation_results.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_analysis.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Cold execution and reuse are independently recorded for every scored case; skipped/unavailable oracle cases cannot count as safe agreement.",
+      "status": "met",
+      "explanation": "All 26 scored cases have a reuse-mutation row with reuse_recorded_before_cold=true and oracle_unavailable_to_reuse_lookup=true, plus a separate cold-oracle row with independent_of_reuse_lookup=true. Reuse lookup used file identity and TestProofCache only; the scoring pytest process ran afterward. pytest_skip_not_safe_agreement (oracle_status=skipped), test_removal_invalidates, and removed_node_oracle_unavailable (oracle_status=unavailable) have counts_as_safe_agreement=false. A live validator smoke confirmed that a pytest.skip cannot count as safe agreement.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/cold_oracle_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_mutation_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_analysis.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/run_cold_oracle_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/validate_cold_oracle_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/cold-oracle-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Each required mutation has an expected invalidation/fallback decision and a genuine unchanged positive reuse witness.",
+      "status": "met",
+      "explanation": "Required mutation kinds fixture_definition, fixture_instance, finalizer, plugin, hook, config, policy, key, runtime, external_snapshot, test_removal, stale_cache, incomplete_trace, and changed_external_effect each have an expected RUN invalidation or fallback on the identity-from-files profile (execution_key_mismatch, policy_mismatch, incomplete_trace, eligibility_denied, candidate_missing, certificate_non_attested, or receipt_mismatch). Five genuine unchanged positive reuse witnesses independently SKIP with proof_cache_hit and cold_outcome=pass: unchanged_eligible_test_double (receipt baguqeera6djis6mg2n6l27xfyrbchj44y5ks2ejmzoxnjvcakyxizkmr7htq), unchanged_eligible_test_snapshot, unchanged_eligible_test_identity, unchanged_eligible_test_resource_finalizer, and call_reuse_after_setup_runs_teardown. Fixture-value and snapshot mutations independently cold-failed while reuse stayed RUN.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_mutation_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/cold_oracle_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_analysis.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/fixture_recipe.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/run_cold_oracle_qualification.py"
+      ]
+    },
+    {
+      "criterion": "False-reuse rate includes all attempted reuse cases and reports exact counts/uncertainty, including observed failures.",
+      "status": "met",
+      "explanation": "All 26 attempted reuse lookups are in the all-attempted denominator. Paper-claim identity-from-files is 0/25 false reuse (observed_failures=[], Clopper-Pearson 95% upper 0.1372, closed-form zero-event upper 0.1129) and 0/25 false denial. All-attempted including the excluded stale-key attack is 1/26 (observed_failures=[stale_key_presented_without_rebind], Clopper-Pearson 95% [0.0010, 0.1964]). Wilson intervals accompany both rates. Denominators are not reduced for skip/unavailable oracle rows.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_analysis.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_mutation_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/cold_oracle_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/validate_cold_oracle_qualification.py"
+      ]
+    },
+    {
+      "criterion": "Any discovered unsound reuse blocks the affected profile until fixed/requalified or explicitly excluded from the paper claim.",
+      "status": "met",
+      "explanation": "identity-from-files (the paper-claim profile) has unsound_reuse_cases=[] and claim_status=qualified_with_finite_uncertainty. Presenting a stale TestExecutionKey after a fixture-value mutation produced a cache HIT while independent cold failed; that stale-key-caller profile is blocked_and_excluded_from_paper_claim with exclusion that callers must recompute the current execution key from files. The honest rebind path (stale_cache_honest_rebind) stayed RUN/execution_key_mismatch.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_analysis.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/reuse_mutation_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/qualification/cold_oracle_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/cold-oracle-qualification.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns011-validate",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns011-validate/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns011-validate/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns011-validate/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns011-validate/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/validate_cold_oracle_qualification.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/validate_cold_oracle_qualification.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/cold-oracle-qualification.log",
+      "started_at": "2026-09-12T07:44:20+00:00",
+      "finished_at": "2026-09-12T07:45:10+00:00",
+      "execution_kind": "sealed-profile live cold-oracle reuse qualification: independent pytest full-run scoring, mutation invalidation/fallback, skip/unavailable not agreement, false-reuse 0/25 on identity-from-files with stale-key-caller blocked and excluded; no A-D live repair and no simulated Groth16 pytest proof"
+    }
+  ],
+  "limitations": {
+    "multiformats": "unsupported in the sealed PATH; a decode-only CID stub was installed only so runtime-trace imports could load",
+    "native_groth16_pytest_proof": "not claimed; cache verifier in this profile is a local authoritative callback over retained canonical bytes",
+    "z3_cvc5": "absent from the sealed PATH; not used",
+    "universal_projection_closure": "A cold oracle and adversarial mutations check the identity-from-files caller; they do not prove completeness of πD on all states",
+    "stale_key_caller": "Presenting a previously admitted execution key after a file mutation is unsound and is excluded from the paper claim; callers must rebind the current key from files",
+    "live_ad_experiment": false,
+    "fixture": "compact generated pytest cohort plus live TestProofCache/identity/lifecycle APIs; not a historical live repair task",
+    "claim_boundary": "This receipt qualifies independent cold-versus-reuse scoring and mutation invalidation on the identity-from-files profile. It is not a matched A-D outcome, not a native Groth16 proof of arbitrary pytest execution, and not a universal dependency-closure theorem."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}

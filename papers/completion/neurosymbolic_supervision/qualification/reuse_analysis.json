@@ -1,0 +1,424 @@
+{
+  "all_attempted_reuse_cases": {
+    "denominator": 26,
+    "false_reuse": {
+      "clopper_pearson_95": {
+        "level": 0.95,
+        "lower": 0.0009732878933350229,
+        "method": "clopper_pearson",
+        "upper": 0.19636964676253915,
+        "zero_event_upper_closed_form": null
+      },
+      "denominator": 26,
+      "events": 1,
+      "exact_counts": "1/26",
+      "label": "false_reuse_all_attempted",
+      "observed_failures": [
+        "stale_key_presented_without_rebind"
+      ],
+      "proportion": 0.038461538461538464,
+      "undefined_when_denominator_zero": false,
+      "wilson_95": {
+        "level": 0.95,
+        "lower": 0.006821984993543487,
+        "method": "wilson",
+        "upper": 0.18892778903034757
+      }
+    },
+    "includes_excluded_stale_key_attack": true,
+    "note": "The all-attempted denominator includes the explicitly excluded stale-key-caller attack. The paper claim uses identity-from-files."
+  },
+  "baseline_admissions": {
+    "tests/test_alpha.py::test_double": {
+      "certificate_cid": "baguqeeragly4nldn6r357e6vgvazuped5ajr4ljmu2fieandz73cyxoto32a",
+      "execution_key_cid": "baguqeerau4s6xfy5gvlpqacdlcr5ebgsp55j4v3zrvskcqlsix6rpgpcrepq",
+      "receipt_cid": "baguqeera6djis6mg2n6l27xfyrbchj44y5ks2ejmzoxnjvcakyxizkmr7htq",
+      "test_function_cid": "baguqeerajgbniaidhe6qv5epz4bbhlg6jixuw74e5m4melmmoofvlbocyqoq"
+    },
+    "tests/test_alpha.py::test_resource_finalizer": {
+      "certificate_cid": "baguqeeran2slc7rnyhxbhvjfb27qecs33zs7vaypqnig4ivnhd3hunret7la",
+      "execution_key_cid": "baguqeeratjhahvnwkpi43z27hub4dlhwufiiiomngcecarepedag4ctr6w7q",
+      "receipt_cid": "baguqeerajyir3ogw4vfpwqfqukdan5knvxmibex3pqg5ymwlh56rwbgxxmya",
+      "test_function_cid": "baguqeerau5ldrljolzf7td2m2buhxofflz2nkxlg64zcnkuhls4bwe3rzq3a"
+    },
+    "tests/test_alpha.py::test_snapshot": {
+      "certificate_cid": "baguqeerapkni4xdvy6cdyv7ovbgjnctjsbkgjxidhlcwdaufkuvirwv46zfq",
+      "execution_key_cid": "baguqeerasgahezn2pnnlcn4umjazv5rt3j4qebre6y7lzayn57ie254jsk5q",
+      "receipt_cid": "baguqeerabpzr7km6uozvgkv2sa53yv77wn6zmqileisgciknc45n3nnc6qdq",
+      "test_function_cid": "baguqeeramuwntn5uo52qskqxfjdl4cxiuwgiwjn7lshjphn2z7xm2uqssh4q"
+    },
+    "tests/test_beta.py::test_identity": {
+      "certificate_cid": "baguqeera2mt75y4vdcsahmt4jp3zgdzoxvd3flrjaszdjoj2vvc2s6pdal4q",
+      "execution_key_cid": "baguqeerak6q6pdwwrqihrwfgoedpdd5bdp7euwltxz5iqgaat5hfpstcgdnq",
+      "receipt_cid": "baguqeeraqynmjagydx3tu7voys5m5rvdhmdb7lzica7jkmp2jde6zciu62na",
+      "test_function_cid": "baguqeeraluvkdijglywdvhg2gvy5zztt42rs7trppnk6wq7ttcfbynmz7a3a"
+    }
+  },
+  "baseline_cold": {
+    "tests/test_alpha.py::test_double": {
+      "cold_outcome": "pass",
+      "elapsed_ms": 114,
+      "observation_sha256": "002904c9b70d6e93736b7628a7061774cb7f1069d0d22538febf1859b4b61170",
+      "oracle_status": "actual"
+    },
+    "tests/test_alpha.py::test_resource_finalizer": {
+      "cold_outcome": "pass",
+      "elapsed_ms": 113,
+      "observation_sha256": "a21969389c74149643b25d9f990775beebe5f29cf05e521d463f83485de5a2f1",
+      "oracle_status": "actual"
+    },
+    "tests/test_alpha.py::test_snapshot": {
+      "cold_outcome": "pass",
+      "elapsed_ms": 113,
+      "observation_sha256": "0018887a8aef5b769f525df905c145f767dc5633508faa2744dcc21f08475857",
+      "oracle_status": "actual"
+    },
+    "tests/test_beta.py::test_identity": {
+      "cold_outcome": "pass",
+      "elapsed_ms": 113,
+      "observation_sha256": "39e4c54ce053606304c4776438e027be19d767a22035a2d9c664a988070b9cf9",
+      "oracle_status": "actual"
+    },
+    "tests/test_skip.py::test_explicit_skip": {
+      "cold_outcome": "skip",
+      "elapsed_ms": 113,
+      "observation_sha256": "37175a33c373c9f4f7e4e5f9fd27f4a2ade683ecca9b6ca9a2b087fcda057dac",
+      "oracle_status": "skipped"
+    }
+  },
+  "capability": {
+    "binaries": {
+      "cvc5": null,
+      "groth16": null,
+      "z3": null
+    },
+    "groth16_available": false,
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "pytest": "8.1.1",
+    "python_version": "3.12.3"
+  },
+  "claim_boundary": "This analysis is a sealed-profile cold-oracle mutation campaign on the identity-from-files reuse caller. It is not a matched A–D experiment, not a native Groth16 proof of pytest execution, and not a universal closure proof of πD.",
+  "consumer_gitlinks": {
+    "external/ipfs_accelerate": "cf85648380946e776170b7f30c66cc0f72a01a2e",
+    "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+  },
+  "each_required_mutation_has_invalidation_or_fallback": true,
+  "excluded_profiles": {
+    "stale-key-caller": {
+      "blocked": true,
+      "claim_status": "blocked_and_excluded_from_paper_claim",
+      "exclusion": "Callers must recompute the current TestExecutionKey from files. Presenting a stale key after a dependency mutation is unsound and is excluded from the paper reuse claim.",
+      "unsound_reuse_cases": [
+        "stale_key_presented_without_rebind"
+      ]
+    }
+  },
+  "finished_at": "2026-09-12T07:44:19+00:00",
+  "generated_at": "2026-09-12T07:44:14+00:00",
+  "genuine_unchanged_positive_reuse_witnesses": [
+    "unchanged_eligible_test_double",
+    "unchanged_eligible_test_snapshot",
+    "unchanged_eligible_test_identity",
+    "unchanged_eligible_test_resource_finalizer",
+    "call_reuse_after_setup_runs_teardown"
+  ],
+  "independence": {
+    "cold_independent_of_reuse_lookup": true,
+    "oracle_unavailable_to_candidate_generation": true,
+    "reuse_recorded_before_cold_for_every_case": true,
+    "skipped_or_unavailable_cannot_count_as_safe_agreement": true
+  },
+  "missing_required_mutation_kinds": [],
+  "observed_mutation_kinds": [
+    "changed_external_effect",
+    "config",
+    "external_snapshot",
+    "finalizer",
+    "fixture_definition",
+    "fixture_instance",
+    "hook",
+    "incomplete_trace",
+    "key",
+    "plugin",
+    "policy",
+    "runtime",
+    "stale_cache",
+    "test_removal",
+    "unchanged_positive"
+  ],
+  "paper_claim": {
+    "blocked": false,
+    "claim_status": "qualified_with_finite_uncertainty",
+    "exclusion": null,
+    "false_denial": {
+      "clopper_pearson_95": {
+        "level": 0.95,
+        "lower": 0.0,
+        "method": "clopper_pearson",
+        "upper": 0.13718517153071236,
+        "zero_event_upper_closed_form": 0.11292814500684323
+      },
+      "denominator": 25,
+      "events": 0,
+      "exact_counts": "0/25",
+      "label": "false_denial",
+      "observed_failures": [],
+      "proportion": 0.0,
+      "undefined_when_denominator_zero": false,
+      "wilson_95": {
+        "level": 0.95,
+        "lower": 1.3877787807814457e-17,
+        "method": "wilson",
+        "upper": 0.13319225093904846
+      }
+    },
+    "false_reuse": {
+      "clopper_pearson_95": {
+        "level": 0.95,
+        "lower": 0.0,
+        "method": "clopper_pearson",
+        "upper": 0.13718517153071236,
+        "zero_event_upper_closed_form": 0.11292814500684323
+      },
+      "denominator": 25,
+      "events": 0,
+      "exact_counts": "0/25",
+      "label": "false_reuse",
+      "observed_failures": [],
+      "proportion": 0.0,
+      "undefined_when_denominator_zero": false,
+      "wilson_95": {
+        "level": 0.95,
+        "lower": 1.3877787807814457e-17,
+        "method": "wilson",
+        "upper": 0.13319225093904846
+      }
+    },
+    "profile": "identity-from-files",
+    "unsound_reuse_cases": []
+  },
+  "paper_claim_profile": "identity-from-files",
+  "policy_id": "ns-011-cold-oracle-qualification-v1",
+  "positive_reuse_witness_count": 5,
+  "profiles": {
+    "identity-from-files": {
+      "attempted_reuse_cases": 25,
+      "blocked": false,
+      "claim_status": "qualified_with_finite_uncertainty",
+      "false_denial": {
+        "clopper_pearson_95": {
+          "level": 0.95,
+          "lower": 0.0,
+          "method": "clopper_pearson",
+          "upper": 0.13718517153071236,
+          "zero_event_upper_closed_form": 0.11292814500684323
+        },
+        "denominator": 25,
+        "events": 0,
+        "exact_counts": "0/25",
+        "label": "false_denial",
+        "observed_failures": [],
+        "proportion": 0.0,
+        "undefined_when_denominator_zero": false,
+        "wilson_95": {
+          "level": 0.95,
+          "lower": 1.3877787807814457e-17,
+          "method": "wilson",
+          "upper": 0.13319225093904846
+        }
+      },
+      "false_reuse": {
+        "clopper_pearson_95": {
+          "level": 0.95,
+          "lower": 0.0,
+          "method": "clopper_pearson",
+          "upper": 0.13718517153071236,
+          "zero_event_upper_closed_form": 0.11292814500684323
+        },
+        "denominator": 25,
+        "events": 0,
+        "exact_counts": "0/25",
+        "label": "false_reuse",
+        "observed_failures": [],
+        "proportion": 0.0,
+        "undefined_when_denominator_zero": false,
+        "wilson_95": {
+          "level": 0.95,
+          "lower": 1.3877787807814457e-17,
+          "method": "wilson",
+          "upper": 0.13319225093904846
+        }
+      },
+      "oracle_skip_or_unavailable_cases": [
+        "test_removal_invalidates",
+        "pytest_skip_not_safe_agreement",
+        "removed_node_oracle_unavailable"
+      ],
+      "profile": "identity-from-files",
+      "safe_agreement_cases": [
+        "unchanged_eligible_test_double",
+        "unchanged_eligible_test_snapshot",
+        "unchanged_eligible_test_identity",
+        "unchanged_eligible_test_resource_finalizer",
+        "fixture_definition_change_invalidates",
+        "fixture_instance_value_change_invalidates",
+        "finalizer_change_invalidates",
+        "plugin_change_invalidates",
+        "hook_change_invalidates",
+        "config_change_invalidates",
+        "policy_change_invalidates",
+        "interpreter_key_change_invalidates",
+        "runtime_trace_change_invalidates",
+        "external_snapshot_change_invalidates",
+        "changed_external_effect_invalidates",
+        "stale_cache_honest_rebind",
+        "incomplete_runtime_trace_fallback",
+        "lookup_miss_is_run",
+        "simulated_certificate_cannot_skip",
+        "uncontrolled_fixture_fallback",
+        "teardown_failure_cannot_skip",
+        "call_reuse_after_setup_runs_teardown"
+      ],
+      "skipped_or_unavailable_cannot_count_as_safe_agreement": true,
+      "true_reuse_witnesses": [
+        "unchanged_eligible_test_double",
+        "unchanged_eligible_test_snapshot",
+        "unchanged_eligible_test_identity",
+        "unchanged_eligible_test_resource_finalizer",
+        "call_reuse_after_setup_runs_teardown"
+      ],
+      "unsound_reuse_cases": []
+    },
+    "stale-key-caller": {
+      "attempted_reuse_cases": 1,
+      "blocked": true,
+      "claim_status": "blocked_and_excluded_from_paper_claim",
+      "false_denial": {
+        "clopper_pearson_95": {
+          "level": 0.95,
+          "lower": 0.0,
+          "method": "clopper_pearson",
+          "upper": 0.9749999999999999,
+          "zero_event_upper_closed_form": 0.95
+        },
+        "denominator": 1,
+        "events": 0,
+        "exact_counts": "0/1",
+        "label": "false_denial",
+        "observed_failures": [],
+        "proportion": 0.0,
+        "undefined_when_denominator_zero": false,
+        "wilson_95": {
+          "level": 0.95,
+          "lower": 0.0,
+          "method": "wilson",
+          "upper": 0.7934506856227626
+        }
+      },
+      "false_reuse": {
+        "clopper_pearson_95": {
+          "level": 0.95,
+          "lower": 0.024999999999999994,
+          "method": "clopper_pearson",
+          "upper": 1.0,
+          "zero_event_upper_closed_form": null
+        },
+        "denominator": 1,
+        "events": 1,
+        "exact_counts": "1/1",
+        "label": "false_reuse",
+        "observed_failures": [
+          "stale_key_presented_without_rebind"
+        ],
+        "proportion": 1.0,
+        "undefined_when_denominator_zero": false,
+        "wilson_95": {
+          "level": 0.95,
+          "lower": 0.20654931437723745,
+          "method": "wilson",
+          "upper": 1.0
+        }
+      },
+      "oracle_skip_or_unavailable_cases": [],
+      "profile": "stale-key-caller",
+      "safe_agreement_cases": [],
+      "skipped_or_unavailable_cannot_count_as_safe_agreement": true,
+      "true_reuse_witnesses": [],
+      "unsound_reuse_cases": [
+        "stale_key_presented_without_rebind"
+      ]
+    }
+  },
+  "qualification_not_live_ad": true,
+  "required_mutation_kinds": [
+    "fixture_definition",
+    "fixture_instance",
+    "finalizer",
+    "plugin",
+    "hook",
+    "config",
+    "policy",
+    "key",
+    "runtime",
+    "external_snapshot",
+    "test_removal",
+    "stale_cache",
+    "incomplete_trace",
+    "changed_external_effect",
+    "unchanged_positive"
+  ],
+  "schema": "neurosymbolic-supervision/reuse-analysis@1",
+  "scoring_classes": {
+    "correct_invalidation_or_fallback": [
+      "fixture_definition_change_invalidates",
+      "fixture_instance_value_change_invalidates",
+      "finalizer_change_invalidates",
+      "plugin_change_invalidates",
+      "hook_change_invalidates",
+      "config_change_invalidates",
+      "policy_change_invalidates",
+      "interpreter_key_change_invalidates",
+      "runtime_trace_change_invalidates",
+      "external_snapshot_change_invalidates",
+      "changed_external_effect_invalidates",
+      "stale_cache_honest_rebind",
+      "incomplete_runtime_trace_fallback",
+      "lookup_miss_is_run",
+      "simulated_certificate_cannot_skip",
+      "uncontrolled_fixture_fallback",
+      "teardown_failure_cannot_skip"
+    ],
+    "false_reuse": [
+      "stale_key_presented_without_rebind"
+    ],
+    "not_agreement_oracle_skip_or_unavailable": [
+      "test_removal_invalidates",
+      "pytest_skip_not_safe_agreement",
+      "removed_node_oracle_unavailable"
+    ],
+    "true_reuse": [
+      "unchanged_eligible_test_double",
+      "unchanged_eligible_test_snapshot",
+      "unchanged_eligible_test_identity",
+      "unchanged_eligible_test_resource_finalizer",
+      "call_reuse_after_setup_runs_teardown"
+    ]
+  },
+  "source_hashes": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_identity_components.py": "f264540c92c4c7ae90f26a2b52f375f3e3ddb04cee8d5bc17e7be7f92aa091be",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py": "f21b8e64a9ba1b0f5ebc2d3df126aa63f299dfe2c6c8b1e504cbf6233ae01b4e",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py": "8faacc1c4cbc4c7c6fb3e8077e428acbca031db0d449cf881a941036892b7f68",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_certificate_store.py": "6ae02457603cfe2d5656e768e742f4ed320153d78ff5334d9ef48d2b6095cfb0",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py": "9702398656f4bff098049167f30f1e54ef1c892c2d1c021b2cde5a8c79ab0e69",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py": "b36f253be3f55350d9b57c09b9e81484579b527d1007651c66d9f088e1db65f9",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py": "f57da57a07b6e8c3c9bdc077d6506d3059846933c77a1bfff0fefbf490bc721d",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py": "05815776dd6cdf6d670c99a9cd702eecc988f265232f6fae1f28e8b547f136a4",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py": "ef59615ecb9a0a09a06b0da4f1aed962eaa7becae0e93e5829971c2fa6bb9e6a"
+  },
+  "task_id": "NS-011",
+  "workspace_git_head": "5623f189464340ca4faec154d9323bdc81d7ed99"
+}
