@@ -1,0 +1,47 @@
+{
+  "files": {
+    "app.py": {
+      "bytes": 174,
+      "sha256": "034afb5c832b8b0f2aefa243ca4a5a858aef6d02ecadf9407b72e677d239b519"
+    },
+    "conftest.py": {
+      "bytes": 343,
+      "sha256": "95538dba923d5166d87e88ee8516b2bc4f054b7052d830940d749abf35a2fa85"
+    },
+    "effects/side_channel.json": {
+      "bytes": 23,
+      "sha256": "4e18877bb217f6a8ce4cecf6bf26e6ed0087c3ffc09d5acc28fd42b7ff6819bf"
+    },
+    "ns011_observer.py": {
+      "bytes": 1254,
+      "sha256": "f66bfe145a64bb3f10bc3fec8b91e723c97afef9ca094827aeb7023baf048349"
+    },
+    "ns011_plugin.py": {
+      "bytes": 69,
+      "sha256": "7bf59c863e02febeef8ca7fb56e79b9adcfb955e6e5aa3081a71b12b3b10d241"
+    },
+    "pytest.ini": {
+      "bytes": 89,
+      "sha256": "bc1f85117ca4733355d58605dccd3ca02631aac148de54e00df98dab970b9c5e"
+    },
+    "snapshots/db.json": {
+      "bytes": 14,
+      "sha256": "75cdf728f39097206ff78d0acdd2d5dd32e894dce62e11967ae9188dfe71ff7e"
+    },
+    "tests/test_alpha.py": {
+      "bytes": 472,
+      "sha256": "fbd72b261dfd8654088119f399c5635574149df86e090263617a38c83817af70"
+    },
+    "tests/test_beta.py": {
+      "bytes": 111,
+      "sha256": "47fa409974468f5a4ddb8f8837f714e0843e153e42622bee4ef67f2711ee9322"
+    },
+    "tests/test_skip.py": {
+      "bytes": 106,
+      "sha256": "55e7d52f788a726412632d5432a385252d0de0c68a7c4e2e8a85c8ba37e2b293"
+    }
+  },
+  "policy_id": "ns-011-cold-oracle-qualification-v1",
+  "schema": "neurosymbolic-supervision/cold-oracle-fixture-recipe@1",
+  "task_id": "NS-011"
+}
