@@ -1,0 +1,46 @@
+{
+  "binding_checks": {
+    "client_worker_gateway_chain": true,
+    "future_host_nine_file_map": true,
+    "original_preimages_unchanged": true,
+    "original_score_interpreter_byte_identical": true,
+    "template_unactivated": true
+  },
+  "commands": [
+    [
+      "python",
+      "-B",
+      "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/test_failure_advancement.py"
+    ],
+    [
+      "python",
+      "-B",
+      "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/test_original_batch_guards.py"
+    ]
+  ],
+  "constructed_controls": 20,
+  "evidence": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/original_batch_guards.stderr.txt": "bd4b2775a65cc6d16ed915a8a4700ff8d2e863e4ea83216abc8a3c7cc87bf337",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/original_batch_guards.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/qualification_v5.stderr.txt": "63325bd4e4d39070d89581902c6926c7abab04a5e9a2a6d6168abc139c27df3a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/qualification_v5.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/test_failure_advancement.py": "8df27eca62780727c438c2995f8921acfd595ce1900cf9c5d58e4f2ddf1e2709",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/test_original_batch_guards.py": "7153044c7b141cda6a3ba810c90201e3308d3a7e50b58345d50a36242539f94d"
+  },
+  "no_docker_calls": true,
+  "no_historical_oracle_or_reference_reads": true,
+  "no_live_source_or_native_writes": true,
+  "no_provider_calls": true,
+  "no_scorer_calls": true,
+  "prior_runs_retained": [
+    "qualification_v1.stderr.txt",
+    "qualification_v2.stderr.txt",
+    "qualification_v3.stderr.txt",
+    "qualification_v4.stderr.txt"
+  ],
+  "remaining_boundary": "Only retained exact child cleanup proof is implemented; later external cleanup certificate admission is not. Unknown termination remains pending. No final/scientific effect is authorized by qualification.",
+  "retained_original_batch_controls": 8,
+  "schema": "ns028-failure-advancement-qualification/v1",
+  "success": true,
+  "test_scope": "Constructed metadata with temporary test signatures, actual disposition/client/batch/worker/rescore source; external stable manifest and candidate lookup mocked. Fabricated observations are unit fixtures, never real operator or scientific receipts. No model, Docker, candidate execution or scoring."
+}

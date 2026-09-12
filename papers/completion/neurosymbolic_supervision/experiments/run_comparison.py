@@ -1174,6 +1174,9 @@ class AttemptExecutor:
                 candidate = {"host_candidate_sha256": signed.get("candidate_sha256"), "patch_bytes": signed.get("patch_bytes"), "files_retained_host_only": True} if signed.get("candidate_sha256") else None
                 context = {"arm": arm, "routing": "fixed_operator_host_http_request", "request_binding": signed.get("request_binding"), "client_reads_hidden_oracle": False}
                 isolation = {"scope_preserved": True, "hidden_store_mounted": False, "hidden_markers_found": [], "boundary_scope": "fixed_host_http_request_and_reviewed_sealed_candidate", "provider_termination": signed.get("provider_termination"), "scorer_boundary_sha256": (signed.get("scorer") or {}).get("boundary_sha256"), "automatic_adversarial_scorer_integrity_qualified": False, "human_annotation": False}
+                if record_kind == "pilot" and verified.get("terminal_failure") is True:
+                    oracle = gateway.host_oracle(verified)
+                    return finish("unavailable", oracle["reason"])
                 if not gw.get("admitted_historical_" + record_kind):
                     return finish("unavailable", f"Signed result does not admit this historical {record_kind} pipeline; no final result inferred.")
                 oracle = gateway.host_oracle(verified)

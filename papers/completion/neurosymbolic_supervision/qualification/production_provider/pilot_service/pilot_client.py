@@ -29,23 +29,66 @@ def selected(root,binding):
  require(offer['profile']==binding['profile']and offer['source_sha256']==binding['source_sha256'],'host source/profile differs')
  return queue,offer
 
-def verify(root,binding):
- queue,offer=selected(root,binding);raw=read(queue/'response.json');signed=json.loads(raw);body=signed['receipt'];key=offer['public_verifier']
+def verify_signature(offer,signed):
+ key=offer['public_verifier'];body=signed['receipt']
  require(set(key)=={'algorithm','encoding','data'}and key['algorithm']=='Ed25519'and key['encoding']=='spki_der_base64','unknown verifier')
  public=base64.b64decode(key['data'],validate=True);require(sha(public)==offer['public_key_sha256']==signed['public_key_sha256'],'public key differs')
  with tempfile.TemporaryDirectory(prefix='pilot-public-signature-')as t:
   p=Path(t);(p/'public.der').write_bytes(public);(p/'receipt').write_bytes(canon(body));(p/'signature').write_bytes(base64.b64decode(signed['signature'],validate=True))
   checked=subprocess.run(['/usr/bin/openssl','pkeyutl','-verify','-pubin','-keyform','DER','-rawin','-inkey',str(p/'public.der'),'-in',str(p/'receipt'),'-sigfile',str(p/'signature')],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=15)
   require(checked.returncode==0,'pilot signature invalid')
+ return body
+
+def receipt_scope(body,offer,binding):
  require(body['schema']=='operator-pilot-receipt/v2'and body['inert_qualification']is False and body['final_scientific_run']is False and body['production_final_admitted']is False and body['historical_population_admitted']is False,'non-pilot or inert receipt')
  for key in REQUEST_KEYS-{'schema','request_id'}:require(body[key]==offer['request'][key],'receipt cell differs: '+key)
  require(body['request_sha256']==sha(canon(offer['request']))and body['profile']==binding['profile']and body['source_sha256']==binding['source_sha256']and body['manifest_sha256']==binding['manifest_sha256'],'receipt source/request differs')
+
+def verify_disposition(offer,signed,original_raw,binding):
+ """An additive terminal accounting record never converts its original to success."""
+ original=verify_signature(offer,json.loads(original_raw));receipt_scope(original,offer,binding)
+ d=verify_signature(offer,signed)
+ require(d.get('schema')=='operator-pilot-failure-disposition/v1'and d.get('status')=='terminal_failed'and d.get('terminal')is True,'unknown disposition')
+ require(d.get('original_receipt_sha256')==sha(original_raw),'original signed evidence changed')
+ require(d.get('original_filename')in('proposal_result.json','result.json'),'unknown original evidence path')
+ for key in ('grant_sha256','request_sha256','batch_sha256','cell_id','source_sha256','manifest_sha256','amendment_sha256'):
+  require(d.get('binding',{}).get(key)==original.get(key),'disposition binding differs: '+key)
+ require(d['binding'].get('profile_sha256')==sha(canon(original['profile'])),'disposition profile differs')
+ require(d.get('provider_termination')==original.get('provider_termination')and d['provider_termination'].get('termination_proven')is True,'unknown provider termination remains blocked')
+ require(d.get('preserved_original_body_sha256')==sha(canon(original)),'original cost/error/usage binding differs')
+ require(d.get('new_provider_calls')==0 and type(d['new_provider_calls'])is int and d.get('new_scorer_calls')==0 and type(d['new_scorer_calls'])is int,'disposition cannot execute an effect')
+ require(all(d.get(k)is False for k in ('retry_allowed','success_credit','score_credit','historical_pilot_unit_admitted','final_admitted','human_annotation')),'failure disposition overclaims authority')
+ require(d.get('operator_record',{}).get('binding')==d['binding']and d['operator_record'].get('approved')is True and sha(canon(d['operator_record']))==d.get('operator_record_sha256'),'operator disposition record differs')
+ record=d['operator_record'];require(record.get('schema')=='operator-pilot-failure-accounting-review/v1'and record.get('reviewer_kind')=='ai_operator'and record.get('scope')=='terminal_failure_accounting_only'and record.get('human_annotation')is False and record.get('final_admission')is False,'operator accounting scope differs')
+ kind=d.get('classification');require(kind==record.get('classification'),'disposition class differs')
+ if kind=='known_proposal_failure':
+  require(d['original_filename']=='result.json'and original.get('status')=='operator_reconciliation_required'and original.get('error')is not None and original.get('scorer',{}).get('executed')is False,'not a known proposal failure')
+ elif kind=='candidate_rejected':
+  require(d['original_filename']=='proposal_result.json'and original.get('status')=='awaiting_operator_candidate_review'and original.get('error')is None and original.get('scorer',{}).get('executed')is False,'not a pending candidate')
+  review=d.get('candidate_review',{});require(review.get('approved')is False and review.get('binding')==d['binding'].get('candidate_review_binding')and sha(canon(review))==d['binding'].get('candidate_review_sha256'),'exact rejected candidate review missing')
+ elif kind=='known_scorer_failure':
+  require(d['original_filename']=='result.json'and original.get('status')=='scorer_reconciliation_required'and original.get('error')is not None and d.get('scorer_termination',{}).get('termination_proven')is True,'unknown scorer termination remains blocked')
+ else:raise ValueError('unsupported failure class')
+ return original,d
+
+def verify(root,binding):
+ queue,offer=selected(root,binding)
+ if(queue/'disposition.json').exists():
+  raw=read(queue/'disposition.json');signed=json.loads(raw);d=signed['receipt']
+  filename='proposal.json'if d.get('original_filename')=='proposal_result.json'else'response.json'
+  body,d=verify_disposition(offer,signed,read(queue/filename),binding)
+  return {'schema':'paper-ns-host-historical-pilot/v1','receipt':body,'binding':dict(binding),'response_sha256':sha(raw),'response_sha256_scope':'append_only_failure_disposition','signature_and_scope_verified':True,'admitted_historical_pilot':False,'admitted_final':False,'useful_completion':False,'terminal_failure':True,'failure_disposition':d,'host_measurements_scope':'all original signed stage values and unknown charges retained; disposition adds no experiment effects'}
+ if not(queue/'response.json').exists():return pending(binding)
+ raw=read(queue/'response.json');signed=json.loads(raw);body=verify_signature(offer,signed);receipt_scope(body,offer,binding)
  completed=body.get('status')=='completed'and body.get('error')is None
- if completed:
-  require(body.get('operator_review_kind')=='ai_operator'and body.get('trust_scope')=='specific_reviewed_pilot_candidate_only'and body.get('operator_review_sha256')and body.get('automatic_adversarial_scorer_integrity_qualified')is False,'exact candidate review absent')
-  score=body['scorer'];require(score['schema']=='ns-historical-cold-host-result/v1'and score['split']=='pilot'and score['unit_id']==body['unit']and score['candidate_sha256']==body['candidate_sha256']and score['manifest_sha256']==body['manifest_sha256'],'cold score differs')
-  require(body.get('served_profile_admitted')is True and body.get('historical_pilot_unit_admitted')is True and body.get('provider_invoked')is True and body.get('provider_termination',{}).get('termination_proven')is True,'actual served and terminated proposal missing')
- return {'schema':'paper-ns-host-historical-pilot/v1','receipt':body,'binding':dict(binding),'response_sha256':sha(raw),'signature_and_scope_verified':True,'admitted_historical_pilot':completed,'admitted_final':False,'useful_completion':bool(completed and body['scorer'].get('success')is True),'host_measurements_scope':'use signed remote stage values; client verification CPU is separate'}
+ if not completed:return pending(binding)
+ require(body.get('operator_review_kind')=='ai_operator'and body.get('trust_scope')=='specific_reviewed_pilot_candidate_only'and body.get('operator_review_sha256')and body.get('automatic_adversarial_scorer_integrity_qualified')is False,'exact candidate review absent')
+ score=body['scorer'];require(score['schema']=='ns-historical-cold-host-result/v1'and score['split']=='pilot'and score['unit_id']==body['unit']and score['candidate_sha256']==body['candidate_sha256']and score['manifest_sha256']==body['manifest_sha256'],'cold score differs')
+ require(body.get('served_profile_admitted')is True and body.get('historical_pilot_unit_admitted')is True and body.get('provider_invoked')is True and body.get('provider_termination',{}).get('termination_proven')is True,'actual served and terminated proposal missing')
+ return {'schema':'paper-ns-host-historical-pilot/v1','receipt':body,'binding':dict(binding),'response_sha256':sha(raw),'signature_and_scope_verified':True,'admitted_historical_pilot':True,'admitted_final':False,'useful_completion':bool(score.get('success')is True),'host_measurements_scope':'use signed remote stage values; client verification CPU is separate'}
+
+def pending(binding):
+ return {'schema':'paper-ns-host-handoff-pending/v1','batch_sha256':binding['batch_sha256'],'cell_id':binding['cell_id'],'terminal':False,'provider_invoked_by_client':False,'reason':'Awaiting scoring or exact append-only failure disposition; unresolved termination never publishes a terminal outcome.'}
 
 def dispatch(root,binding):
  queue,offer=selected(root,binding);path=queue/'request.json';raw=canon(offer['request'])
@@ -57,5 +100,5 @@ def dispatch(root,binding):
   fd=os.open(queue,os.O_RDONLY|os.O_DIRECTORY)
   try:os.fsync(fd)
   finally:os.close(fd)
- if not(queue/'response.json').exists():return {'schema':'paper-ns-host-handoff-pending/v1','batch_sha256':binding['batch_sha256'],'cell_id':binding['cell_id'],'terminal':False,'provider_invoked_by_client':False}
+ if not(queue/'response.json').exists()and not(queue/'disposition.json').exists():return pending(binding)
  return verify(root,binding)

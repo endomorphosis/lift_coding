@@ -443,7 +443,7 @@ def _pilot_worker(root: Path):
     """Load the reviewed NS028 input client; no host authority is created here."""
     import importlib.util
     path = root / PAPER_REL / "qualification/production_provider/pilot_service/worker_adapter.py"
-    if path.resolve() != path or sha256_bytes(path.read_bytes()) != "f9f4f6e497313436790b6b6c3ec1683abdd7c7dc91c449d92670a793b52eba39":
+    if path.resolve() != path or sha256_bytes(path.read_bytes()) != "934be147b21aeb56ab69c2e5b778788baa60518fc34765a0194f61164207779e":
         raise GatewayError("reviewed pilot adapter changed", terminal="rejected")
     spec = importlib.util.spec_from_file_location("ns028_pilot_worker", path)
     module = importlib.util.module_from_spec(spec)

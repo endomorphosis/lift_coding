@@ -1,0 +1,49 @@
+{
+  "activation_pending": true,
+  "base_head": "2dce81e0c43da2577667f113393287e1b4de9ed6",
+  "failure_package_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/failure_advancement_v1/package.private.json",
+  "failure_package_sha256": "b5b8c200c9b63021bd8e928fd70651cc3ec52e7e445b3a748613103d21a042c1",
+  "files": {
+    "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": {
+      "before_sha256": "efdeaf4badcf559ab125def3dc87a95dbf34cbde07875a07cefa1a13a1651b9a",
+      "sha256": "de34ec9c1119869fe85810dfda0f65f301e9066a0ec35bb0cd97c56c5f00ad6b"
+    },
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": {
+      "before_sha256": "0d10884654e094a6138b4e01622153e0f89222b424c95577163169a39d114947",
+      "sha256": "750204e11f769a91f74fcdc0d9e1567da3e9503bdb13d410d0b31bbfc1895d2c"
+    },
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": {
+      "before_sha256": "3d6402ef79f2764c40f6c6eccc1e048e64ac392c4142c8266cda85fae2e3add2",
+      "sha256": "3d6402ef79f2764c40f6c6eccc1e048e64ac392c4142c8266cda85fae2e3add2"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/FAILURE_DISPOSITIONS.md": {
+      "before_sha256": null,
+      "sha256": "0d38597ac3c5fa1a585a7d9304fba5bc43ccd503c7f34409915fac615176983b"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/build_offer_drop.py": {
+      "before_sha256": "626ff9632e2e54e90a2eb0195fe46a9258a09ca1ade31d967425d1a73fb7c87e",
+      "sha256": "626ff9632e2e54e90a2eb0195fe46a9258a09ca1ade31d967425d1a73fb7c87e"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/pilot_client.py": {
+      "before_sha256": "b75456a3a3d917b60eb03850aa6fa9f81bc889cbe2246fa3425bb50cb9b39a82",
+      "sha256": "81e8758031abe1102992987e5bee8830039c68c9599fc0d2665012515fa544a9"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/pilot_profile.template.json": {
+      "before_sha256": "0d4a1d408479dd7987d05069f0a236d0a28911e70994c22c3c55e1baae167049",
+      "sha256": "bcd14d570192546781cb44e8ac69a0793e6e164a4d7d65339ba4c1edc65a288b"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/worker_adapter.py": {
+      "before_sha256": "f9f4f6e497313436790b6b6c3ec1683abdd7c7dc91c449d92670a793b52eba39",
+      "sha256": "934be147b21aeb56ab69c2e5b778788baa60518fc34765a0194f61164207779e"
+    }
+  },
+  "host_package_sha256": "83c9b063d9df449db79412147c7e7304bd33ac5c22c0e5a08810228ed27da0f5",
+  "legacy_integration_helper_not_applicable": true,
+  "native_task_mutations": 0,
+  "provider_calls": 0,
+  "qualification_sha256": "6790a5c28c71b63d9e7e465f2af9497d622e3fc43488b2aea4edc6d7eb8d6fde",
+  "schema": "ns028-failure-worker-source-integration/v1",
+  "scorer_calls": 0,
+  "source_already_integrated_here": true,
+  "source_review_sha256": "53e0d4cec51777337eae68fffb6b90e1dfa0cf2561fd281f18a824c7f7ddf88c"
+}

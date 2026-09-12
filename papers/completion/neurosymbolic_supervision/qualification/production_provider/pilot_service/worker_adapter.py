@@ -3,8 +3,8 @@ import hashlib,importlib.util,json,re
 from pathlib import Path
 PAPER=Path('papers/completion/neurosymbolic_supervision')
 SERVICE=PAPER/'qualification/production_provider/pilot_service'
-HOST_PACKAGE='4e73194717a72d99ac00ec4026ba6f5f36b271c36feee0ad735ca28275daa831'
-CLIENT_SHA='b75456a3a3d917b60eb03850aa6fa9f81bc889cbe2246fa3425bb50cb9b39a82'
+HOST_PACKAGE='83c9b063d9df449db79412147c7e7304bd33ac5c22c0e5a08810228ed27da0f5'
+CLIENT_SHA='81e8758031abe1102992987e5bee8830039c68c9599fc0d2665012515fa544a9'
 UNITS={'ns-hist-05-dnspython','ns-hist-06-bottle','ns-hist-07-idna','ns-hist-08-protego'}
 def require(ok,msg):
  if not ok:raise ValueError(msg)
@@ -60,12 +60,15 @@ def dispatch(root,request):
  if binding is None:return {'schema':'paper-ns-host-handoff-pending/v1','status':'pending_operator_inputs','terminal':False,'reason':'Awaiting reviewed root offer-drop/profile and pre-outcome scientific activation. No model, scorer or local historical materialization has run.','provider_dispatched_by_client':False}
  pc=client(root);queue,_=pc.selected(root,binding)
  # Durable final evidence is verified without trying to recreate its queue request.
- result=pc.verify(root,binding)if(queue/'response.json').exists()else pc.dispatch(root,binding)
+ result=pc.verify(root,binding)if(queue/'response.json').exists()or(queue/'disposition.json').exists()else pc.dispatch(root,binding)
  if result['schema']=='paper-ns-host-handoff-pending/v1':return {**result,'status':'pending_operator','grant_binding':binding,'provider_dispatched_by_client':False}
- body=result['receipt'];return {'schema':'paper-ns-host-historical-pilot/v1','status':'completed','admitted_historical_pilot':result['admitted_historical_pilot'],'admitted_production':False,'admitted_final':False,'dispatched':body.get('provider_dispatch_may_have_occurred')is True,'dispatch_confirmed':body.get('provider_invoked')is True,'served_provider':'grok','served_model':(body.get('provider_stream_metadata',{}).get('served_models')or[None])[0],'served_revision':None,'possibly_charged':body.get('unknown_external_charge')is True,'proposal_effect_count':1 if body.get('provider_dispatch_may_have_occurred')else 0,'host_verified':result}
+ body=result['receipt'];return {'schema':'paper-ns-host-historical-pilot/v1','status':'terminal_failed'if result.get('terminal_failure')else'completed','terminal_failure':result.get('terminal_failure',False),'admitted_historical_pilot':result['admitted_historical_pilot'],'admitted_production':False,'admitted_final':False,'dispatched':body.get('provider_dispatch_may_have_occurred')is True,'dispatch_confirmed':body.get('provider_invoked')is True,'served_provider':'grok','served_model':(body.get('provider_stream_metadata',{}).get('served_models')or[None])[0],'served_revision':None,'possibly_charged':body.get('unknown_external_charge')is True,'proposal_effect_count':1 if body.get('provider_dispatch_may_have_occurred')else 0,'host_verified':result}
 
 def oracle(verified):
  body=verified['receipt'];score=body.get('scorer')or{};binding=body.get('operator_review_binding')or{}
+ if verified.get('terminal_failure')is True:
+  require(verified.get('signature_and_scope_verified')is True and verified.get('admitted_historical_pilot')is False and verified.get('useful_completion')is False and verified['failure_disposition']['status']=='terminal_failed','failure disposition cannot grant score credit')
+  return {'status':'unavailable','independent_scorer_id':None,'receipt_id':'sha256:'+verified['response_sha256'],'cold_full_validation':False,'candidate_valid':None,'hidden_access_incident':False,'reason':'Terminal '+verified['failure_disposition']['classification']+'; original effect/error/usage retained, no score or success credit, no retry.','failure_disposition_sha256':verified['response_sha256'],'automatic_adversarial_scorer_integrity_qualified':False,'human_annotation':False}
  require(verified.get('signature_and_scope_verified')is True and verified.get('admitted_historical_pilot')is True and body.get('status')=='completed'and body.get('error')is None,'signed reviewed pilot score absent')
  require(body.get('operator_review_kind')=='ai_operator'and body.get('trust_scope')=='specific_reviewed_pilot_candidate_only'and body.get('automatic_adversarial_scorer_integrity_qualified')is False and body.get('production_final_admitted')is False,'pilot reviewer scope differs')
  require(body.get('operator_review_sha256')and all(binding.get(k)==body.get(k)for k in ('grant_sha256','candidate_sha256','source_sha256','batch_sha256','cell_id')),'review candidate/cell binding differs')
