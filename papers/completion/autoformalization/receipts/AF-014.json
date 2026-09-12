@@ -1,0 +1,232 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-014",
+  "status": "complete",
+  "completed_at": "2026-09-12T20:11:12.626309+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-compiler-repair-result/v1",
+      "trace_schema": "autoformalization-repair-task-trace/v1",
+      "validation_schema": "autoformalization-repair-validation/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-014/run_compiler_repair.py",
+      "sha256": "d5f022539fcb4dc4b483b3b7048009bb08c9a844ecdadeef7742febe0cc3eb61",
+      "checker": "papers/completion/autoformalization/receipts/snapshots/AF-014/check_outputs.py",
+      "checker_sha256": "46dfb99bd2f51f9ae5e33899700ba839f6dddcb2cc1e91f386d46f3de83f2d1e"
+    },
+    "exception_scope_rule": "af014-executable-exception-scoping/v1",
+    "pre_patch_sha256": {
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py": "0f81dad45244ab88d3df5ac8c5d585d80d4ee14c59a5441c1bdd19f5a2cccd86"
+    },
+    "post_patch_sha256": {
+      "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py": "bf80ae36f5092015bb56fe0e119f359135bda8a21b41cd74f779abd8de5e862b"
+    },
+    "t4_starting_arm": {
+      "status": "unactivated/unavailable",
+      "e_locked": true,
+      "consumer_activation_sha256": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+      "note": "AF-013 pins T4 unactivated/unavailable. This repair is an executable compiler change, not applied learned guidance."
+    },
+    "af004_fixed_canary": {
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/fixed_canary.sources.jsonl",
+      "sha256": "98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+      "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+      "records": 38,
+      "used_for_patch_selection": false
+    },
+    "development_witnesses": {
+      "minimal_pairs_sha256": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30",
+      "mp09": "MP09-exception-scope",
+      "mp12": "MP12-round-trip-shared-loss",
+      "reference_semantics_sha256": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282",
+      "note": "Constructed development witnesses specified before this patch. Final test was not opened."
+    },
+    "structural_evidence_scope_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+    "repository_head": "325d1649ab2a90210b1452d878946326bbb9e608",
+    "ipfs_datasets_head": "c6fed0457015eb057336b7cacabcddf192eec9f5",
+    "empirical_execution": "Sealed-PATH structural compile of constructed development witnesses and the 38-record AF-004 canary after the executable exception-scoping patch. T5 final-test evaluation, native checker proofs, and unbounded synthesis remain unrun. No accepted improvement is reported as a measured outcome."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/run_compiler_repair.py": "d5f022539fcb4dc4b483b3b7048009bb08c9a844ecdadeef7742febe0cc3eb61",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/check_outputs.py": "46dfb99bd2f51f9ae5e33899700ba839f6dddcb2cc1e91f386d46f3de83f2d1e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/runs/compiler_repair/results.jsonl": "08131ec40811ef5a3b4615c08ea0b1cf7f1b0a3446cfede8c2659a5c15794280",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_task_trace.json": "14205b425160b22389bdb1a5820b088b145a964c3ab400c9538ee1154e774c7c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/compiler_patch.diff": "ba0f6874d94b86604b2410e0cc7eb762510ebd0a0da63974fa0d812ee9a7daa4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_validation.json": "ef44169f2282ac27d1a632d992ee16fae55d350b2d383d1817bb0c64c836da4a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py": "bf80ae36f5092015bb56fe0e119f359135bda8a21b41cd74f779abd8de5e862b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.meta.json": "d34112e3e6d827a9661c4dea0cb0bc3d7f152b6c2d39eaef1b2f9a8d763895cb",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.stdout.log": "a5947002b58463800da32d5655446af62984af53788f4300e320955759f55a0e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.meta.json": "2478328695a8356b076fc570376d33d07f8c59e5f53609ffb9e1829418c5603f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stdout.log": "06c118665f115be6f7608d1e706d47a60c3ff929b1423516d2528bb409da5d91",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/json_parse.meta.json": "02c063858e4fff8100169fbc9a2d2043a401fb027fc7b9bc623754ef566c3f85",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/json_parse.stdout.log": "96e9eca5bbbf8de72e885d3c9b0103af5f48ae1866463fc93b601fd6913f7c43",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/json_parse.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/python_version.meta.json": "6e9f47dfa5ef858624910eeb2b1fe34c59445157da31702a4206d4d84c953888",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/python_version.stdout.log": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/python_version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/runs/compiler_repair/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-014/runs/compiler_repair/results.jsonl",
+    "papers/completion/autoformalization/evidence/repair_task_trace.json": "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_task_trace.json",
+    "papers/completion/autoformalization/evidence/compiler_patch.diff": "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/compiler_patch.diff",
+    "papers/completion/autoformalization/evidence/repair_validation.json": "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_validation.json",
+    "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": "papers/completion/autoformalization/receipts/snapshots/AF-014/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py": "papers/completion/autoformalization/receipts/snapshots/AF-014/external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Trace connects observed defect, task/proposal, actual patch, validation evidence, activation configuration and rollback identity.",
+      "status": "met",
+      "explanation": "repair_task_trace.json records the six-stage chain in order. The observed defect is the frozen MP09 compile audit_exempt with unless role=condition. The proposal is executable exception-scoping rule af014-executable-exception-scoping/v1, not a T4 parameter overlay. The actual patch is the two codec files with pre-patch blobs fd40489c.../0f81dad4... and post-patch blobs 1c704dec.../bf80ae36..., plus compiler_patch.diff. Validation is the sealed-PATH structural compile of MP09/condition-exception/except-as-otherwise-provided/no-exception regressions and the 38-record AF-004 canary. Activation is the always-on compiler rule with T4 learned guidance unactivated/unavailable and E locked. Rollback identity restores those two pre-patch blobs and records applied_learning_rollback_performed=false.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_task_trace.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/compiler_patch.diff",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_validation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Final-test examples never choose the patch; shared source errors are not removed merely to make a proof easy.",
+      "status": "met",
+      "explanation": "Patch selection used the constructed MP09 development witness and the paper's missing exception-scoping contract. The 1913-unit final test remains unopened/unrun and used_for_patch_selection=false. The 38-record AF-004 canary (digest 98549048...) was compiled only as a paired structural regression and was not used to choose the patch. MP12/C12 is retained: recompiled IR stays equal after dropping the same exception, source_meaning_equal remains false, and meaning_disagreement_count remains 1. Rejected proposals include dropping the exception to equalize MP12, using T4 guidance overlay, and selecting from final test.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/runs/compiler_repair/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_validation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_task_trace.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No accepted improvement is a valid measured outcome; unexecuted synthesis remains unrun with narrowed corresponding claims.",
+      "status": "met",
+      "explanation": "T5-NO-MEASURED-IMPROVEMENT is no_run with accepted_improvement_is_measured_outcome=false. Unseen fidelity and native checked coverage are null. T5-UNEXECUTED-SYNTHESIS is no_run. Native Lean/Z3/CVC5/Isabelle are unavailable on the sealed PATH. Structural contracts on constructed witnesses are not held-out source-semantic gold. Human agreement and independent source-semantic fidelity remain unmeasured per AF-028. Corresponding T5 empirical claims stay unrun/unavailable rather than being filled by the accepted compiler contract.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/runs/compiler_repair/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/evidence/repair_validation.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/state",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/run_compiler_repair.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-014/run_compiler_repair.py",
+      "exit_code": 0,
+      "started_at": "2026-09-12T20:10:23.091844+00:00",
+      "finished_at": "2026-09-12T20:10:24.914872+00:00",
+      "execution_kind": "sealed-PATH bounded compiler/decompiler repair: development structural contracts, retained MP12 shared-loss, 38-record canary structural compile, native-checker unavailability probe",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/run_compiler_repair.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/state",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-014/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-014/check_outputs.py",
+      "exit_code": 0,
+      "started_at": "2026-09-12T20:10:49.279258+00:00",
+      "finished_at": "2026-09-12T20:10:49.312244+00:00",
+      "execution_kind": "sealed-PATH acceptance-criterion check of AF-014 outputs",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/check_outputs.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/state",
+        "/usr/bin/python3.12",
+        "-c",
+        "\nimport json, pathlib, sys\npaths = sys.argv[1:]\nfor path in paths:\n    text = pathlib.Path(path).read_text(encoding=\"utf-8\")\n    if path.endswith(\".jsonl\"):\n        rows = [json.loads(line) for line in text.splitlines() if line]\n        print(path, \"jsonl\", len(rows), \"ok\")\n    else:\n        json.loads(text)\n        print(path, \"json\", \"ok\")\n",
+        "papers/completion/autoformalization/runs/compiler_repair/results.jsonl",
+        "papers/completion/autoformalization/evidence/repair_task_trace.json",
+        "papers/completion/autoformalization/evidence/repair_validation.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T20:10:49.312507+00:00",
+      "finished_at": "2026-09-12T20:10:49.343794+00:00",
+      "execution_kind": "JSON/JSONL parse pin of AF-014 machine-readable outputs",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/json_parse.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/json_parse.stderr.log"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep/.local/state",
+        "/usr/bin/python3.12",
+        "--version"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T20:11:12.624864+00:00",
+      "finished_at": "2026-09-12T20:11:12.626309+00:00",
+      "execution_kind": "sealed-PATH interpreter identity",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/python_version.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-014/logs/python_version.stderr.log"
+    }
+  ],
+  "limitations": [
+    "Native Lean/Z3/CVC5/Isabelle binaries are absent from the sealed validation PATH; no kernel proof is claimed.",
+    "Structural compiler contracts on constructed development witnesses are not original-source semantic gold or held-out fidelity.",
+    "T5 unseen fidelity, native checked coverage, and final-test evaluation remain unrun.",
+    "No accepted improvement is reported as a valid measured outcome.",
+    "Unbounded compiler/decompiler synthesis remains unrun.",
+    "Human agreement and independent source-semantic fidelity remain unmeasured; AF-028 does not make them a manuscript-completion prerequisite.",
+    "T4 remains unactivated/unavailable. Matching ingestion identity is not applied learned guidance.",
+    "This receipt is provenance validation of a bounded executable repair, not independent scientific replication or submission authorization."
+  ],
+  "completion_scope": "Bounded executable exception-scoping repair on constructed development witnesses, with retained MP12 shared-loss, paired AF-004 canary structural compile, unrun final test, unavailable native checkers, and unrun synthesis. T5 empirical gain is not claimed."
+}
