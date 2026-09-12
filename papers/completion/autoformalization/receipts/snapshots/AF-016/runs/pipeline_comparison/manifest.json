@@ -1,0 +1,604 @@
+{
+  "capability_probe": {
+    "direct_model": {
+      "auth_file_present": false,
+      "blockers": [
+        "no process-environment model credential under sealed env -i",
+        "private validation HOME has no Grok auth.json",
+        "native Lean checker required for Arm A useful-proof credit and is absent"
+      ],
+      "credential_env_keys_present": [],
+      "runnable": false
+    },
+    "home": "/tmp/ipfs-accelerate-validation-home-af016-il6foq9p",
+    "home_is_validation_private": true,
+    "interpreter": "/usr/bin/python3.12",
+    "learned_guidance": {
+      "T4": "unactivated/unavailable",
+      "applied_learned_features": false,
+      "blockers": [
+        "AF-013 consumer observation records T4 unactivated/unavailable",
+        "e_locked is true; matching ingestion identity is not applied learned guidance",
+        "advice cannot replace checking; native checker remains absent"
+      ],
+      "e_locked": true,
+      "matching_ingestion_digest_is_applied_learning": false,
+      "runnable": false
+    },
+    "native_binaries": {
+      "any_native_checker_usable": false,
+      "home": "/tmp/ipfs-accelerate-validation-home-af016-il6foq9p",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "tools": {
+        "coqc": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "cvc5": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "elan": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "eprover": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "isabelle": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "lake": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "lean": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "vampire": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        },
+        "z3": {
+          "path": null,
+          "sha256": null,
+          "usable": false
+        }
+      }
+    },
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "claim_policy": {
+    "constructed_control_is_not_table_6": true,
+    "development_qualification_is_not_table_6": true,
+    "independent_fidelity_unmeasured": true,
+    "selection_structural_is_not_final_distribution": true,
+    "semantic_false_transfer_unmeasured": true,
+    "synthetic_success_forbidden": true,
+    "unavailable_is_not_zero": true,
+    "unrun_is_not_zero": true
+  },
+  "created_at": "2026-09-12T20:29:04.063093+00:00",
+  "frozen_inputs": {
+    "consumer_activation_sha256": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "gold_facets_sha256": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+    "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+    "pipeline_arms_sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22",
+    "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "structural_evidence_scope_sha256": "6373506c21a276388ef3ebf582d48d01a7aa5cc114ca414c0ca07a23f4f8ceea",
+    "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+  },
+  "inspected_not_imported": {
+    "bench_itp_hammer.py": {
+      "exists": true,
+      "imported": false,
+      "note": "Would import project packages; hashed only.",
+      "path": "external/ipfs_datasets/benchmarks/bench_itp_hammer.py",
+      "sha256": "06d824672ee9a02137fa5fba76d07bbf2a59288293ceb88b268b13235224afe1"
+    },
+    "bench_semantic_logic_roundtrip.py": {
+      "exists": true,
+      "imported": false,
+      "note": "Named native report conversion remains unqualified; not executed as Table 6.",
+      "path": "external/ipfs_datasets/benchmarks/bench_semantic_logic_roundtrip.py",
+      "sha256": "ecb62d6e5d263fe64119715bc23da7b4395ccb01541365dd45abc5352b2d536d"
+    },
+    "bench_semantic_roundtrip_compositions.py": {
+      "exists": true,
+      "imported": false,
+      "note": "Inspected composition benchmark; not imported and not Table 6.",
+      "path": "external/ipfs_datasets/benchmarks/bench_semantic_roundtrip_compositions.py",
+      "sha256": "36c3a14fe54a78783f0a68434d81e56e7ebcfe2356f0c140fa2b6e5e86f7e77c"
+    },
+    "canonical_compiler.py": {
+      "exists": true,
+      "imported": false,
+      "note": "Native import requires multiformats; B uses the frozen-profile stdlib replica.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87"
+    },
+    "intent_formalization_compiler.py": {
+      "exists": true,
+      "imported": false,
+      "note": "Native import requires multiformats; C uses the stdlib multiview replica.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+      "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552"
+    },
+    "legal_ir_learned_guidance.py": {
+      "exists": true,
+      "imported": false,
+      "note": "E stays locked; export identity is not applied learned guidance.",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py",
+      "sha256": "afdb96d257d201208ddde729c9dab3735763e3fc9b553bfc0f5ff23c1197b6d7"
+    },
+    "pipeline_arms.py": {
+      "exists": true,
+      "imported": false,
+      "note": "AF-027 development adapters are not Table 6. Dummy identity theorems are not reused.",
+      "path": "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+      "sha256": "c758e91551b22436fc088f96e7289e447df0caa702f3f63a2a4fde220d2c6e92"
+    }
+  },
+  "limitations": [
+    "Final-test 1913-unit Table 6 comparison is unrun; identities remain undisclosed.",
+    "Independent source-semantic fidelity and semantic false-transfer are unmeasured.",
+    "Sealed PATH has no lean/lake/elan/z3/cvc5/vampire/eprover/coqc/isabelle.",
+    "Arm A had no model credential and was not dispatched.",
+    "Arm E is locked; T4 unactivated; checker digest equals D and was not mutated.",
+    "Constructed Q1 finite witnesses are not Table 6 and not compiler soundness.",
+    "AF-027 development qualification and dummy identity theorems are not reused."
+  ],
+  "manifest_sha256": "43aa7edeba6b92f1c90ead88b8a381f0e4246762366ece891496fa89a2acb983",
+  "matched_comparison": {
+    "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+    "checker_id": "AF-010-shared-target-checker/v1",
+    "eligible_final_test_natural_source_units": 1913,
+    "private_final_ids_disclosed": false,
+    "resource_envelope": {
+      "current_resource_availability": "unavailable_pending_AF-003_preflight_and_shared_scheduler_reservation",
+      "exhaustion": "partial_or_unrun; retain attempts/costs and narrow only affected claims",
+      "gpu_or_model_service_slots": 1,
+      "learned_condition_seeds": 3,
+      "memory_gib": 16,
+      "natural_final_test_units_per_condition": 100,
+      "per_item_search_validation_minutes": 10,
+      "per_seed_wall_minutes": 30
+    },
+    "seeds": [
+      104729,
+      130363,
+      155921
+    ],
+    "shared_checker_across_arms": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ]
+  },
+  "non_table6_structural_execution": {
+    "constructed_control_records": 6,
+    "not_final_distribution": true,
+    "population": "AF-004 selection.sources.jsonl (15 natural CFR units) plus constructed Q1",
+    "selection_execution_status_counts": {
+      "A": {
+        "unavailable": 15
+      },
+      "B": {
+        "abstained": 4,
+        "measured": 11
+      },
+      "C": {
+        "measured": 15
+      },
+      "D": {
+        "unsupported": 15
+      },
+      "E": {
+        "unavailable": 15
+      }
+    },
+    "selection_records": 75,
+    "selection_tables_sha256": "c04ef82e570603a519483b753067585fd4900478604a1dbae4a05bf96c008591",
+    "split": "selection"
+  },
+  "schema": "autoformalization-pipeline-comparison-manifest/v1",
+  "scope": {
+    "adjudication_status": "not_performed",
+    "human_fidelity_status": "unmeasured_not_collected",
+    "independent_human_semantic_labels_available": false,
+    "policy_id": "AF-028/structural-evidence-scope/v1"
+  },
+  "suite_id": "AF-016-matched-pipeline-comparison/v1",
+  "table6": {
+    "cell_count": 20,
+    "cells": [
+      {
+        "arm": "A",
+        "backing": "compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+        "blockers": [
+          "direct-model and native checker unavailable on sealed PATH",
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "A:sources_covered",
+        "column": "sources_covered",
+        "definition": "Count of eligible final-test natural source units with execution_status=measured, divided by 1913. Unavailable, unsupported, abstained, timeout, invalid, failure, partial, and no_run remain in the denominator and are not scored as zero coverage.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked and unused. Selection-split structural coverage is a separate non-Table-6 diagnostic.",
+        "numerator": null,
+        "original_heading": "Sources / covered",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Coverage / abstention on eligible final-test natural units (unrun is not zero)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "A",
+        "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+        "blockers": [
+          "independent_human_semantic_labels_available=false"
+        ],
+        "cell_id": "A:fidelity_uncertainty",
+        "column": "fidelity_uncertainty",
+        "definition": "All-facet independent source-semantic fidelity requires independent gold and a definite judgment on every eligible unit. Primary numerator is null until that population is complete. Uncertainty is not imputed from missing labels.",
+        "denominator": 1913,
+        "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse/elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold.",
+        "numerator": null,
+        "original_heading": "Fidelity / uncertainty",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Independent source-semantic fidelity / uncertainty (unmeasured; not prover or teacher agreement)",
+        "status": "unmeasured",
+        "value": null
+      },
+      {
+        "arm": "A",
+        "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+        "blockers": [
+          "direct-model and native checker unavailable on sealed PATH",
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "A:correct_transfers",
+        "column": "correct_transfers",
+        "definition": "Native-checked useful-proof coverage requires result_kind=native_checked_proof, proof.useful=true, checker_class=native, and receipt_sha256, with the receipt naming the same source/goal/premise/checker identities as the candidate. Semantic false-transfer is a separate unmeasured quantity.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. AF-027 development Lean identity theorems are not reused.",
+        "numerator": null,
+        "original_heading": "Correct transfers",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Exact-goal native-checked useful proof / correct transfer (semantic false-transfer remains unmeasured)",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "arm": "A",
+        "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+        "blockers": [
+          "final_test_locked"
+        ],
+        "cell_id": "A:cost_latency",
+        "column": "cost_latency",
+        "definition": "Sum of observed elapsed/cpu/gpu/provider/human-review costs over the 1913-unit final-test population, including failed and unrun attempts attributed to that population. A deterministically emitted formula does not have zero total cost.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. Selection-split structural elapsed times are retained separately and are not this cell.",
+        "numerator": null,
+        "original_heading": "Cost / latency",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Total measured cost / latency on the Table 6 population (unrun is not a zero-cost success)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "B",
+        "backing": "compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+        "blockers": [
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "B:sources_covered",
+        "column": "sources_covered",
+        "definition": "Count of eligible final-test natural source units with execution_status=measured, divided by 1913. Unavailable, unsupported, abstained, timeout, invalid, failure, partial, and no_run remain in the denominator and are not scored as zero coverage.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked and unused. Selection-split structural coverage is a separate non-Table-6 diagnostic.",
+        "numerator": null,
+        "original_heading": "Sources / covered",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Coverage / abstention on eligible final-test natural units (unrun is not zero)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "B",
+        "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+        "blockers": [
+          "independent_human_semantic_labels_available=false"
+        ],
+        "cell_id": "B:fidelity_uncertainty",
+        "column": "fidelity_uncertainty",
+        "definition": "All-facet independent source-semantic fidelity requires independent gold and a definite judgment on every eligible unit. Primary numerator is null until that population is complete. Uncertainty is not imputed from missing labels.",
+        "denominator": 1913,
+        "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse/elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold.",
+        "numerator": null,
+        "original_heading": "Fidelity / uncertainty",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Independent source-semantic fidelity / uncertainty (unmeasured; not prover or teacher agreement)",
+        "status": "unmeasured",
+        "value": null
+      },
+      {
+        "arm": "B",
+        "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+        "blockers": [
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "B:correct_transfers",
+        "column": "correct_transfers",
+        "definition": "Native-checked useful-proof coverage requires result_kind=native_checked_proof, proof.useful=true, checker_class=native, and receipt_sha256, with the receipt naming the same source/goal/premise/checker identities as the candidate. Semantic false-transfer is a separate unmeasured quantity.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. AF-027 development Lean identity theorems are not reused.",
+        "numerator": null,
+        "original_heading": "Correct transfers",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Exact-goal native-checked useful proof / correct transfer (semantic false-transfer remains unmeasured)",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "arm": "B",
+        "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+        "blockers": [
+          "final_test_locked"
+        ],
+        "cell_id": "B:cost_latency",
+        "column": "cost_latency",
+        "definition": "Sum of observed elapsed/cpu/gpu/provider/human-review costs over the 1913-unit final-test population, including failed and unrun attempts attributed to that population. A deterministically emitted formula does not have zero total cost.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. Selection-split structural elapsed times are retained separately and are not this cell.",
+        "numerator": null,
+        "original_heading": "Cost / latency",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Total measured cost / latency on the Table 6 population (unrun is not a zero-cost success)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "C",
+        "backing": "compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+        "blockers": [
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "C:sources_covered",
+        "column": "sources_covered",
+        "definition": "Count of eligible final-test natural source units with execution_status=measured, divided by 1913. Unavailable, unsupported, abstained, timeout, invalid, failure, partial, and no_run remain in the denominator and are not scored as zero coverage.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked and unused. Selection-split structural coverage is a separate non-Table-6 diagnostic.",
+        "numerator": null,
+        "original_heading": "Sources / covered",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Coverage / abstention on eligible final-test natural units (unrun is not zero)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "C",
+        "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+        "blockers": [
+          "independent_human_semantic_labels_available=false"
+        ],
+        "cell_id": "C:fidelity_uncertainty",
+        "column": "fidelity_uncertainty",
+        "definition": "All-facet independent source-semantic fidelity requires independent gold and a definite judgment on every eligible unit. Primary numerator is null until that population is complete. Uncertainty is not imputed from missing labels.",
+        "denominator": 1913,
+        "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse/elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold.",
+        "numerator": null,
+        "original_heading": "Fidelity / uncertainty",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Independent source-semantic fidelity / uncertainty (unmeasured; not prover or teacher agreement)",
+        "status": "unmeasured",
+        "value": null
+      },
+      {
+        "arm": "C",
+        "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+        "blockers": [
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "C:correct_transfers",
+        "column": "correct_transfers",
+        "definition": "Native-checked useful-proof coverage requires result_kind=native_checked_proof, proof.useful=true, checker_class=native, and receipt_sha256, with the receipt naming the same source/goal/premise/checker identities as the candidate. Semantic false-transfer is a separate unmeasured quantity.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. AF-027 development Lean identity theorems are not reused.",
+        "numerator": null,
+        "original_heading": "Correct transfers",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Exact-goal native-checked useful proof / correct transfer (semantic false-transfer remains unmeasured)",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "arm": "C",
+        "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+        "blockers": [
+          "final_test_locked"
+        ],
+        "cell_id": "C:cost_latency",
+        "column": "cost_latency",
+        "definition": "Sum of observed elapsed/cpu/gpu/provider/human-review costs over the 1913-unit final-test population, including failed and unrun attempts attributed to that population. A deterministically emitted formula does not have zero total cost.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. Selection-split structural elapsed times are retained separately and are not this cell.",
+        "numerator": null,
+        "original_heading": "Cost / latency",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Total measured cost / latency on the Table 6 population (unrun is not a zero-cost success)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "D",
+        "backing": "compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+        "blockers": [
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "D:sources_covered",
+        "column": "sources_covered",
+        "definition": "Count of eligible final-test natural source units with execution_status=measured, divided by 1913. Unavailable, unsupported, abstained, timeout, invalid, failure, partial, and no_run remain in the denominator and are not scored as zero coverage.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked and unused. Selection-split structural coverage is a separate non-Table-6 diagnostic.",
+        "numerator": null,
+        "original_heading": "Sources / covered",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Coverage / abstention on eligible final-test natural units (unrun is not zero)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "D",
+        "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+        "blockers": [
+          "independent_human_semantic_labels_available=false"
+        ],
+        "cell_id": "D:fidelity_uncertainty",
+        "column": "fidelity_uncertainty",
+        "definition": "All-facet independent source-semantic fidelity requires independent gold and a definite judgment on every eligible unit. Primary numerator is null until that population is complete. Uncertainty is not imputed from missing labels.",
+        "denominator": 1913,
+        "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse/elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold.",
+        "numerator": null,
+        "original_heading": "Fidelity / uncertainty",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Independent source-semantic fidelity / uncertainty (unmeasured; not prover or teacher agreement)",
+        "status": "unmeasured",
+        "value": null
+      },
+      {
+        "arm": "D",
+        "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+        "blockers": [
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "D:correct_transfers",
+        "column": "correct_transfers",
+        "definition": "Native-checked useful-proof coverage requires result_kind=native_checked_proof, proof.useful=true, checker_class=native, and receipt_sha256, with the receipt naming the same source/goal/premise/checker identities as the candidate. Semantic false-transfer is a separate unmeasured quantity.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. AF-027 development Lean identity theorems are not reused.",
+        "numerator": null,
+        "original_heading": "Correct transfers",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Exact-goal native-checked useful proof / correct transfer (semantic false-transfer remains unmeasured)",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "arm": "D",
+        "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+        "blockers": [
+          "final_test_locked"
+        ],
+        "cell_id": "D:cost_latency",
+        "column": "cost_latency",
+        "definition": "Sum of observed elapsed/cpu/gpu/provider/human-review costs over the 1913-unit final-test population, including failed and unrun attempts attributed to that population. A deterministically emitted formula does not have zero total cost.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. Selection-split structural elapsed times are retained separately and are not this cell.",
+        "numerator": null,
+        "original_heading": "Cost / latency",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Total measured cost / latency on the Table 6 population (unrun is not a zero-cost success)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "E",
+        "backing": "compact unrun recipe over splits.json counts.final_test.natural_source_units=1913",
+        "blockers": [
+          "T4 unactivated; e_locked; learned features not applied",
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "E:sources_covered",
+        "column": "sources_covered",
+        "definition": "Count of eligible final-test natural source units with execution_status=measured, divided by 1913. Unavailable, unsupported, abstained, timeout, invalid, failure, partial, and no_run remain in the denominator and are not scored as zero coverage.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 coverage claim. Final-test identities remain locked and unused. Selection-split structural coverage is a separate non-Table-6 diagnostic.",
+        "numerator": null,
+        "original_heading": "Sources / covered",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Coverage / abstention on eligible final-test natural units (unrun is not zero)",
+        "status": "unrun",
+        "value": null
+      },
+      {
+        "arm": "E",
+        "backing": "AF-005 gold_facets remain pending_independent_review; AF-028 human_fidelity_status=unmeasured_not_collected",
+        "blockers": [
+          "independent_human_semantic_labels_available=false"
+        ],
+        "cell_id": "E:fidelity_uncertainty",
+        "column": "fidelity_uncertainty",
+        "definition": "All-facet independent source-semantic fidelity requires independent gold and a definite judgment on every eligible unit. Primary numerator is null until that population is complete. Uncertainty is not imputed from missing labels.",
+        "denominator": 1913,
+        "narrowed_claim": "Independent human agreement and source-semantic fidelity are unmeasured. Parse/elaboration, teacher agreement, reconstruction, and prover success are not this cell and are not original-source gold.",
+        "numerator": null,
+        "original_heading": "Fidelity / uncertainty",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Independent source-semantic fidelity / uncertainty (unmeasured; not prover or teacher agreement)",
+        "status": "unmeasured",
+        "value": null
+      },
+      {
+        "arm": "E",
+        "backing": "sealed-PATH binary probe plus compact 1913-unit no_run recipe",
+        "blockers": [
+          "T4 unactivated; e_locked; learned features not applied",
+          "native Lean/Z3/CVC5 absent from sealed PATH"
+        ],
+        "cell_id": "E:correct_transfers",
+        "column": "correct_transfers",
+        "definition": "Native-checked useful-proof coverage requires result_kind=native_checked_proof, proof.useful=true, checker_class=native, and receipt_sha256, with the receipt naming the same source/goal/premise/checker identities as the candidate. Semantic false-transfer is a separate unmeasured quantity.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 correct-transfer or native useful-proof claim. Sealed PATH has no Lean/Z3/CVC5. Constructed Q1 finite witnesses are labeled constructed_control and do not fill this cell. AF-027 development Lean identity theorems are not reused.",
+        "numerator": null,
+        "original_heading": "Correct transfers",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Exact-goal native-checked useful proof / correct transfer (semantic false-transfer remains unmeasured)",
+        "status": "unavailable",
+        "value": null
+      },
+      {
+        "arm": "E",
+        "backing": "compact unrun recipe total_cost.status=unrun with retained_cost_records=0",
+        "blockers": [
+          "final_test_locked"
+        ],
+        "cell_id": "E:cost_latency",
+        "column": "cost_latency",
+        "definition": "Sum of observed elapsed/cpu/gpu/provider/human-review costs over the 1913-unit final-test population, including failed and unrun attempts attributed to that population. A deterministically emitted formula does not have zero total cost.",
+        "denominator": 1913,
+        "narrowed_claim": "No Table 6 cost/latency figure. Final-test was not executed, so the cell is unrun rather than 0. Selection-split structural elapsed times are retained separately and are not this cell.",
+        "numerator": null,
+        "original_heading": "Cost / latency",
+        "population": "final_test.natural_source_units",
+        "revised_heading": "Total measured cost / latency on the Table 6 population (unrun is not a zero-cost success)",
+        "status": "unrun",
+        "value": null
+      }
+    ],
+    "denominator": 1913,
+    "original_caption": "Final empirical results remain unmeasured in this draft. Fill from retained runs, not targets.",
+    "revised_caption": "Table 6 final-test A–E comparison. Each of 20 cells is unrun, unmeasured, or unavailable with a narrowed claim. Selection-split structural outcomes and constructed Q1 witnesses are retained separately and are not these cells.",
+    "unrun_recipe_sha256": "69d8bdfdc71f6fbbfd53071b4c85be708c191b125a7cac4ce7aa7cb0fbbc094a",
+    "unrun_tables_sha256": "f3a1a84aa5a9d6c89d6d77218239b9f45e9bfaac9cc0e357745e6ce3d9349f44"
+  },
+  "task_id": "AF-016"
+}

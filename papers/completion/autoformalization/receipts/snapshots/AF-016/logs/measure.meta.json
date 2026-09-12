@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af016-il6foq9p",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-016/measure_pipeline.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 56.109,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af016-il6foq9p",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T20:29:04.071374+00:00",
+  "name": "measure",
+  "started_at": "2026-09-12T20:29:04.015247+00:00"
+}
