@@ -1,0 +1,27 @@
+{
+  "run": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-020/build_worked_trace.py",
+      "run",
+      "--out",
+      "papers/completion/law_to_action/results/worked_trace",
+      "--figure",
+      "papers/completion/law_to_action/results/figures/source_to_effect_trace.pdf",
+      "--snapshot",
+      "papers/completion/law_to_action/receipts/snapshots/LA-020"
+    ],
+    "completed_at": "2026-09-12T18:32:51.989405Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T18:32:50.642455Z"
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-020/validate_worked_trace.py"
+    ],
+    "completed_at": "2026-09-12T18:32:52.031769Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T18:32:51.990741Z"
+  }
+}

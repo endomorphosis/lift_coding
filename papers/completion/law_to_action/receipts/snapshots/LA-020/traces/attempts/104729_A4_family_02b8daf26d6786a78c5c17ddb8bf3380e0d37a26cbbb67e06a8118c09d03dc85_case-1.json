@@ -1,0 +1,211 @@
+{
+  "arm_id": "A4",
+  "attempt_id": "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+  "capability": {
+    "built": false
+  },
+  "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+  "compact_replay": {
+    "arm_id": "A4",
+    "attempt_id": "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+    "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+    "crypto": "real-ed25519",
+    "decision": "deny",
+    "denial_reason": "context-mismatch",
+    "enforce_mode": "enforce",
+    "handler_calls": 0,
+    "identity_digest": "056f447e3b7d7534540a6095df7c092a8fa53d755d28e9dc9f130ebd205cbc4e",
+    "implementation_revision": "replay",
+    "independent_human_gold": false,
+    "journal_event_count": 0,
+    "mutation": "wrong_audience",
+    "observed_effect_count": 0,
+    "observed_forbidden_effect": false,
+    "oracle_label": "forbidden",
+    "population": "cve",
+    "sandbox": true,
+    "sat_status": "unsat",
+    "seed": 104729,
+    "split": "calibration",
+    "store_kind": "duckdb-file-typed-quack-owner",
+    "terminal_outcome": "denial",
+    "useful_work": false
+  },
+  "decision": "deny",
+  "enforce": {
+    "decision": "deny",
+    "delegate_called": false,
+    "denial_reason": "context-mismatch",
+    "in_memory_store": false,
+    "mode": "enforce",
+    "store_kind": "duckdb-file-typed-quack-owner"
+  },
+  "failure": null,
+  "handler": {
+    "arbitrary_generated_source_execution": false,
+    "event": null,
+    "journal_events": [],
+    "observation": {
+      "event_count": 0,
+      "events": [],
+      "export_files": [],
+      "filesystem_entries": [],
+      "integrity_errors": [],
+      "journal_consistent": true,
+      "journal_event_count": 0,
+      "observation_complete": true,
+      "observation_digest": "ffc51feeeed4cf043c528b04bb061c8acf433f495ff6e007f4af40ac7428ccba",
+      "observed_effect_count": 0,
+      "observed_effects": [],
+      "observer_version": "independent-filesystem-journal-observer/v2",
+      "state_entry_count": 0
+    },
+    "version": "bounded-export-handler/v2"
+  },
+  "handler_calls": 0,
+  "identity": {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/fa-de4e67ccf6ee6eb0.json",
+      "payload": {
+        "candidate_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+        "fixture_candidate": false,
+        "mutation": "wrong_audience",
+        "oracle_label": "forbidden",
+        "population": "cve",
+        "split": "calibration",
+        "task": "LA-015-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "056f447e3b7d7534540a6095df7c092a8fa53d755d28e9dc9f130ebd205cbc4e",
+    "candidate_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 248,
+        "payload_sha256": "82e1c378eec450e8124cdda5ab054093e26160d658c8061560f939cf26cb7161",
+        "target": "exports/fa-de4e67ccf6ee6eb0.json"
+      }
+    ]
+  },
+  "journal_event_count": 0,
+  "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+  "mutation": "wrong_audience",
+  "observed_effect_count": 0,
+  "observed_forbidden_effect": false,
+  "oracle_label": "forbidden",
+  "owner": {
+    "consume_cas": {
+      "attempts": 1,
+      "changed": true,
+      "command_id": "cmd:consume:d190aac31aeb32d7b2f3925c5698cbb5069d8d1a0b7e38470d325cbd1094a113",
+      "conflict_kind": null,
+      "fence_epoch": 1,
+      "generation": 1,
+      "idempotency_key": "idem:consume:d190aac31aeb32d7b2f3925c5698cbb5069d8d1a0b7e38470d325cbd1094a113",
+      "interface": "StateTransaction@1",
+      "outcome": "accepted",
+      "result": {
+        "consumed": true,
+        "fence_epoch": 1,
+        "generation": 1,
+        "in_memory": false,
+        "phase": "consume",
+        "revision_before": 1,
+        "store_kind": "duckdb-file",
+        "token_key_digest": "d190aac31aeb32d7b2f3925c5698cbb5069d8d1a0b7e38470d325cbd1094a113"
+      },
+      "result_digest": "sha256:e0e2fc2565392b44c9287f7174577b96692457c9fdf271153815af62deeafb38",
+      "revision": 2,
+      "schema": "ipfs_accelerate_py/agent-supervisor/cas-result@1"
+    },
+    "transport": "embedded-exclusive-lock",
+    "warmup_cas": null
+  },
+  "plan": {
+    "extra_effect_ids": false,
+    "name": "wrong_audience",
+    "policy_resource": "tenant-a/bucket-a/documents/report.txt",
+    "replay": false,
+    "wrong_audience": true
+  },
+  "population": "cve",
+  "receipt": {
+    "audience_id": "audience:wrong",
+    "built": true,
+    "kind": "internal_bound_context_receipt",
+    "nonce": "nonce-541928ccbccaf6a6",
+    "receipt_id": "receipt:541928ccbccaf6a6dd9d60be",
+    "selected_evidence_cids_are_harness_constants": true,
+    "selected_evidence_cids_not_published_proof": true,
+    "stub_cid_present_in_harness": true,
+    "theorem_proof": false
+  },
+  "run_id": "la020-A4-104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1",
+  "sat": {
+    "allowed": true,
+    "authority_kind": "satisfiability",
+    "checker": {
+      "agrees_with_provider": true,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "forged_evidence": false,
+      "status": "unsat",
+      "theorem_proof": false
+    },
+    "provider": {
+      "algorithm": "dpll",
+      "authority_kind": "satisfiability",
+      "model": null,
+      "nclauses": null,
+      "nvars": null,
+      "provider": "sympy.logic.inference.satisfiable",
+      "status": "unsat"
+    },
+    "theorem_proof": false
+  },
+  "sat_raw": {
+    "allowed": true,
+    "authority_kind": "satisfiability",
+    "checker": {
+      "agrees_with_provider": true,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "status": "unsat",
+      "theorem_proof": false
+    },
+    "provider": {
+      "algorithm": "dpll",
+      "authority_kind": "satisfiability",
+      "elapsed_seconds": 4.4737011194229126e-05,
+      "model": null,
+      "provider": "sympy.logic.inference.satisfiable",
+      "status": "unsat"
+    },
+    "theorem_proof": false
+  },
+  "seed": 104729,
+  "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+  "split": "calibration",
+  "terminal_outcome": "denial",
+  "ucan": {
+    "ability": "export_json",
+    "crypto": "real-ed25519",
+    "decision": "deny",
+    "fabricated_signature": false,
+    "issuer": "did:key:root-tenant-a",
+    "kid": "root-v1",
+    "policy_provider": "la-014-declared-lightweight-policy",
+    "reason": "ucan_denied",
+    "resource": "tenant-a/bucket-a/documents/report.txt",
+    "signature_present": true,
+    "token_audience": "did:wrong",
+    "token_parts": 3,
+    "token_present": true,
+    "token_sha256": "612c1b1bc46d47ab9744a75023e901ac430a6272030676c2a15d85274d21ba65",
+    "verifier_kind": "real-ucan-verifier"
+  },
+  "useful_work": false
+}

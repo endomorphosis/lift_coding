@@ -1,0 +1,1272 @@
+{
+  "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0": {
+    "adapter": {
+      "id": "cvefixes-security-ir-adapter",
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+      "symbol": "adapt_cvefixes_candidate",
+      "version": "cvefixes-security-ir-adapter/v1"
+    },
+    "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+    "compiler_checker": {
+      "independent_behavior_contract": {
+        "distinct_from_evaluated_adapter": true,
+        "polarity_unknown": true,
+        "producer": "la-006-scoped-behavior-contract-compiler",
+        "source_difference_observed": true
+      },
+      "ran": false,
+      "reason": "adapter_error"
+    },
+    "cve_behavior": {
+      "checked_property": "source_difference_at_pinned_revisions",
+      "empirical_success_credit": false,
+      "independent_human_gold": false,
+      "independent_producer": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-006-scoped-behavior-contract-compiler",
+        "kind": "machine_contract_expectation_compiler",
+        "not_cvefixes_adapter_output": true,
+        "not_human_gold": true,
+        "version": "la-006-automated-scope/v1"
+      },
+      "la027_checked_property": "source_supported_behavior_contract",
+      "observation": {
+        "effect_observed": "source_text_difference_at_fix_commit_versus_first_parent",
+        "executed_untrusted_source": false,
+        "fixed_revision": "586d96cc12ef218243a3466354b4d208b5472a6c",
+        "kind": "isolated_upstream_source_recovery",
+        "observer": "github_commit_metadata_and_raw_file_bytes",
+        "runnable_sandbox_reproduction": "not_run_untrusted_source_not_executed",
+        "source_difference_observed": true,
+        "status": "source_difference_observed_at_pinned_revisions",
+        "vulnerable_revision": "3ed283f6c5d05404caf3335a5263935a9746fd74"
+      },
+      "polarity_expected": "unknown",
+      "polarity_supported_by_contract": false,
+      "transfer_to_export_json": "unsupported",
+      "untrusted_source_executed": false
+    },
+    "cve_side": "vulnerable",
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "failure": {
+      "code": "cve_adapter_error",
+      "message": "CVEfixesAdapterError: candidate scope must contain complete, exact CVEfixes policy attributes",
+      "trace": "Traceback (most recent call last):\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py\", line 304, in _policy_attributes\n    return attributes.require_exact_policy_constraints()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/vocabulary.py\", line 793, in require_exact_policy_constraints\n    raise CVEfixesVocabularyError(\nipfs_datasets_py.logic.security_ir.cvefixes.vocabulary.CVEfixesVocabularyError: CVE/CWE classifications are not sufficient policy authority; an exact action, scope, and precondition or effect are required\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py\", line 926, in measure_cve\n    adapted = adapt_cvefixes_candidate(candidate, sources=[source_record], review=review)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py\", line 558, in adapt_cvefixes_candidate\n    attributes = _policy_attributes(candidate)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py\", line 306, in _policy_attributes\n    raise CVEfixesAdapterError(\nipfs_datasets_py.logic.security_ir.cvefixes.adapter.CVEfixesAdapterError: candidate scope must contain complete, exact CVEfixes policy attributes\n"
+    },
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "cve_ids": [
+        "CVE-2014-2829"
+      ],
+      "independent_label_used": false,
+      "independent_polarity": "unknown",
+      "pair_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:pair",
+      "restriction_authoritative": false,
+      "restriction_mapping_status": "unknown",
+      "restriction_status": "unknown",
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 1,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6"
+        ],
+        "reconstructed_sha256": "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6",
+        "redistribution": "quoted_spans_only",
+        "span_count": 1
+      }
+    },
+    "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+    "machine_contract_outcome": {
+      "adapter_schema_valid": false,
+      "checked_property": "source_supported_behavior_contract",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "polarity_not_scored": true,
+      "reason": "independent_behavior_observation_retained_after_adapter_failure",
+      "reference_producer": "la-006-scoped-behavior-contract-compiler",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_supported_behavior_contract",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "source_faithful_vulnerable_positive",
+    "parse_schema_validity": {
+      "reason": "adapter_error",
+      "valid": false
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+      "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1"
+    ],
+    "population": "cve",
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 1,
+      "hash_mismatches": 0,
+      "input_span_count": 1,
+      "linked": true,
+      "reconstructed_sha256": "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6",
+      "span_count": 1
+    },
+    "split": "calibration",
+    "status": "failed",
+    "supported_unsupported_fields": {
+      "supported": [
+        "source_difference_observation"
+      ],
+      "unsupported": [
+        "adapter_output",
+        "evaluation_polarity"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  },
+  "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1": {
+    "adapter": {
+      "id": "cvefixes-security-ir-adapter",
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+      "symbol": "adapt_cvefixes_candidate",
+      "version": "cvefixes-security-ir-adapter/v1"
+    },
+    "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+    "compiler_checker": {
+      "independent_behavior_contract": {
+        "distinct_from_evaluated_adapter": true,
+        "polarity_unknown": true,
+        "producer": "la-006-scoped-behavior-contract-compiler",
+        "source_difference_observed": true
+      },
+      "ran": false,
+      "reason": "adapter_error"
+    },
+    "cve_behavior": {
+      "checked_property": "source_difference_at_pinned_revisions",
+      "empirical_success_credit": false,
+      "independent_human_gold": false,
+      "independent_producer": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-006-scoped-behavior-contract-compiler",
+        "kind": "machine_contract_expectation_compiler",
+        "not_cvefixes_adapter_output": true,
+        "not_human_gold": true,
+        "version": "la-006-automated-scope/v1"
+      },
+      "la027_checked_property": "source_supported_behavior_contract",
+      "observation": {
+        "effect_observed": "source_text_difference_at_fix_commit_versus_first_parent",
+        "executed_untrusted_source": false,
+        "fixed_revision": "586d96cc12ef218243a3466354b4d208b5472a6c",
+        "kind": "isolated_upstream_source_recovery",
+        "observer": "github_commit_metadata_and_raw_file_bytes",
+        "runnable_sandbox_reproduction": "not_run_untrusted_source_not_executed",
+        "source_difference_observed": true,
+        "status": "source_difference_observed_at_pinned_revisions",
+        "vulnerable_revision": "3ed283f6c5d05404caf3335a5263935a9746fd74"
+      },
+      "polarity_expected": "unknown",
+      "polarity_supported_by_contract": false,
+      "transfer_to_export_json": "unsupported",
+      "untrusted_source_executed": false
+    },
+    "cve_side": "fixed",
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "failure": {
+      "code": "cve_adapter_error",
+      "message": "CVEfixesAdapterError: candidate scope must contain complete, exact CVEfixes policy attributes",
+      "trace": "Traceback (most recent call last):\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py\", line 304, in _policy_attributes\n    return attributes.require_exact_policy_constraints()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/vocabulary.py\", line 793, in require_exact_policy_constraints\n    raise CVEfixesVocabularyError(\nipfs_datasets_py.logic.security_ir.cvefixes.vocabulary.CVEfixesVocabularyError: CVE/CWE classifications are not sufficient policy authority; an exact action, scope, and precondition or effect are required\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py\", line 926, in measure_cve\n    adapted = adapt_cvefixes_candidate(candidate, sources=[source_record], review=review)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py\", line 558, in adapt_cvefixes_candidate\n    attributes = _policy_attributes(candidate)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-009-6d01400e3de9-attempt-1-1789231406/external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py\", line 306, in _policy_attributes\n    raise CVEfixesAdapterError(\nipfs_datasets_py.logic.security_ir.cvefixes.adapter.CVEfixesAdapterError: candidate scope must contain complete, exact CVEfixes policy attributes\n"
+    },
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "cve_ids": [
+        "CVE-2014-2829"
+      ],
+      "independent_label_used": false,
+      "independent_polarity": "unknown",
+      "pair_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:pair",
+      "restriction_authoritative": false,
+      "restriction_mapping_status": "unknown",
+      "restriction_status": "unknown",
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 1,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6"
+        ],
+        "reconstructed_sha256": "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6",
+        "redistribution": "quoted_spans_only",
+        "span_count": 1
+      }
+    },
+    "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+    "machine_contract_outcome": {
+      "adapter_schema_valid": false,
+      "checked_property": "source_supported_behavior_contract",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "polarity_not_scored": true,
+      "reason": "independent_behavior_observation_retained_after_adapter_failure",
+      "reference_producer": "la-006-scoped-behavior-contract-compiler",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_supported_behavior_contract",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "fixed_negative_control",
+    "parse_schema_validity": {
+      "reason": "adapter_error",
+      "valid": false
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+      "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1"
+    ],
+    "population": "cve",
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 1,
+      "hash_mismatches": 0,
+      "input_span_count": 1,
+      "linked": true,
+      "reconstructed_sha256": "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6",
+      "span_count": 1
+    },
+    "split": "calibration",
+    "status": "failed",
+    "supported_unsupported_fields": {
+      "supported": [
+        "source_difference_observation"
+      ],
+      "unsupported": [
+        "adapter_output",
+        "evaluation_polarity"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  },
+  "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0": {
+    "adapter": {
+      "id": "cvefixes-security-ir-adapter",
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+      "symbol": "adapt_cvefixes_candidate",
+      "version": "cvefixes-security-ir-adapter/v1"
+    },
+    "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+    "compiler_checker": {
+      "adapter": {
+        "producer": "cvefixes-security-ir-adapter",
+        "ran": true
+      },
+      "formalization_adapter": {
+        "applied": false,
+        "available": true,
+        "reason": "declaration_is_observed_candidate_not_authoritative_security_ir",
+        "version": "security-ir-formalization-adapter/v1"
+      },
+      "implementation_consistency": {
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "note": "adapter schema validity and LA-026/LA-006 source-difference observation are distinct properties",
+        "paired_independent_observation": true,
+        "shared_producer_dependence": false
+      },
+      "independent_behavior_contract": {
+        "distinct_from_evaluated_adapter": true,
+        "polarity_unknown": true,
+        "producer": "la-006-scoped-behavior-contract-compiler",
+        "source_difference_observed": true
+      }
+    },
+    "cve_behavior": {
+      "checked_property": "source_difference_at_pinned_revisions",
+      "empirical_success_credit": false,
+      "independent_human_gold": false,
+      "independent_producer": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-006-scoped-behavior-contract-compiler",
+        "kind": "machine_contract_expectation_compiler",
+        "not_cvefixes_adapter_output": true,
+        "not_human_gold": true,
+        "version": "la-006-automated-scope/v1"
+      },
+      "la027_checked_property": "source_supported_behavior_contract",
+      "observation": {
+        "effect_observed": "source_text_difference_at_fix_commit_versus_first_parent",
+        "executed_untrusted_source": false,
+        "fixed_revision": "924d16008cfcc09356c87db01848e45290cb58ca",
+        "kind": "isolated_upstream_source_recovery",
+        "observer": "github_commit_metadata_and_raw_file_bytes",
+        "runnable_sandbox_reproduction": "not_run_untrusted_source_not_executed",
+        "source_difference_observed": true,
+        "status": "source_difference_observed_at_pinned_revisions",
+        "vulnerable_revision": "7e56c6a82ff0a283846118bc23bf5f5e98b0bb37"
+      },
+      "polarity_expected": "unknown",
+      "polarity_supported_by_contract": false,
+      "transfer_to_export_json": "unsupported",
+      "untrusted_source_executed": false
+    },
+    "cve_side": "vulnerable",
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "cve_ids": [
+        "CVE-2021-4265"
+      ],
+      "independent_label_used": false,
+      "independent_polarity": "unknown",
+      "pair_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:pair",
+      "restriction_authoritative": false,
+      "restriction_mapping_status": "packet_preparer_non_authoritative_candidate",
+      "restriction_status": "observed_candidate",
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 2,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "80903edf1c3e22042f502b0b42381876b8a44233a10c300d751927700fb6f8cb",
+          "47b2bf771d6f7ca441280e63289c36ab0882428699a0f88456cd17d7df04e244"
+        ],
+        "reconstructed_sha256": "a31d81da96395c2a0da8cc4560e44a4cdb2f76ae27b529a67f575d7a875bd380",
+        "redistribution": "quoted_spans_only",
+        "span_count": 2
+      }
+    },
+    "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+    "machine_contract_outcome": {
+      "adapter_schema_valid": true,
+      "checked_property": "source_supported_behavior_contract",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "polarity_not_scored": true,
+      "reason": "source_supported_behavior_observation_with_unknown_polarity",
+      "reference_producer": "la-006-scoped-behavior-contract-compiler",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_supported_behavior_contract",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "source_faithful_vulnerable_positive",
+    "parse_schema_validity": {
+      "checker": {
+        "distinct_from_independent_behavior_contract": true,
+        "id": "la-009-cvefixes-adapter-schema-checker"
+      },
+      "reason": "ok",
+      "valid": true
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1"
+    ],
+    "population": "cve",
+    "prediction": {
+      "adapter_version": "cvefixes-security-ir-adapter/v1",
+      "authority": "observed_candidate_not_independent_review",
+      "candidate_cid": "bafkreiahtbweuqwmqyvreg4nn4xeoaixq6f22js47ak6cegkvvarhhlgta",
+      "declaration_sha256": "a9e4977fdf37dc5a247c0a1f0d7cfaa7417c2c8f0732c5a418b08c26c51957db",
+      "grants_execution_authority": false,
+      "independent_human_gold": false,
+      "independent_review": "not_used",
+      "kind": "cvefixes_security_ir_observed_candidate",
+      "proof_authoritative": false,
+      "review_state": "observed_candidate",
+      "source_record_id": "bafkreibu6kokkpnacnukgef2bjoo2lt2rmku3ctnmpvp2gyvf5fmdomjjq"
+    },
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 2,
+      "hash_mismatches": 0,
+      "input_span_count": 2,
+      "linked": true,
+      "reconstructed_sha256": "a31d81da96395c2a0da8cc4560e44a4cdb2f76ae27b529a67f575d7a875bd380",
+      "span_count": 2
+    },
+    "split": "development",
+    "status": "prediction",
+    "supported_unsupported_fields": {
+      "supported": [
+        "source_difference_observation"
+      ],
+      "unsupported": [
+        "evaluation_polarity",
+        "export_json_transfer",
+        "native_sink_execution"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  },
+  "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1": {
+    "adapter": {
+      "id": "cvefixes-security-ir-adapter",
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+      "symbol": "adapt_cvefixes_candidate",
+      "version": "cvefixes-security-ir-adapter/v1"
+    },
+    "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+    "compiler_checker": {
+      "adapter": {
+        "producer": "cvefixes-security-ir-adapter",
+        "ran": true
+      },
+      "formalization_adapter": {
+        "applied": false,
+        "available": true,
+        "reason": "declaration_is_observed_candidate_not_authoritative_security_ir",
+        "version": "security-ir-formalization-adapter/v1"
+      },
+      "implementation_consistency": {
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "note": "adapter schema validity and LA-026/LA-006 source-difference observation are distinct properties",
+        "paired_independent_observation": true,
+        "shared_producer_dependence": false
+      },
+      "independent_behavior_contract": {
+        "distinct_from_evaluated_adapter": true,
+        "polarity_unknown": true,
+        "producer": "la-006-scoped-behavior-contract-compiler",
+        "source_difference_observed": true
+      }
+    },
+    "cve_behavior": {
+      "checked_property": "source_difference_at_pinned_revisions",
+      "empirical_success_credit": false,
+      "independent_human_gold": false,
+      "independent_producer": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-006-scoped-behavior-contract-compiler",
+        "kind": "machine_contract_expectation_compiler",
+        "not_cvefixes_adapter_output": true,
+        "not_human_gold": true,
+        "version": "la-006-automated-scope/v1"
+      },
+      "la027_checked_property": "source_supported_behavior_contract",
+      "observation": {
+        "effect_observed": "source_text_difference_at_fix_commit_versus_first_parent",
+        "executed_untrusted_source": false,
+        "fixed_revision": "924d16008cfcc09356c87db01848e45290cb58ca",
+        "kind": "isolated_upstream_source_recovery",
+        "observer": "github_commit_metadata_and_raw_file_bytes",
+        "runnable_sandbox_reproduction": "not_run_untrusted_source_not_executed",
+        "source_difference_observed": true,
+        "status": "source_difference_observed_at_pinned_revisions",
+        "vulnerable_revision": "7e56c6a82ff0a283846118bc23bf5f5e98b0bb37"
+      },
+      "polarity_expected": "unknown",
+      "polarity_supported_by_contract": false,
+      "transfer_to_export_json": "unsupported",
+      "untrusted_source_executed": false
+    },
+    "cve_side": "fixed",
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "cve_ids": [
+        "CVE-2021-4265"
+      ],
+      "independent_label_used": false,
+      "independent_polarity": "unknown",
+      "pair_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:pair",
+      "restriction_authoritative": false,
+      "restriction_mapping_status": "packet_preparer_non_authoritative_candidate",
+      "restriction_status": "observed_candidate",
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 2,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "4ac54b32b4d4ddfbf3950f86be6e65f3b4ccbdd09b06be64b391a8a090d9bf0c",
+          "47b2bf771d6f7ca441280e63289c36ab0882428699a0f88456cd17d7df04e244"
+        ],
+        "reconstructed_sha256": "e0eac41060233220258a4033daae772df3b07643cc1d15963da1bed45a395069",
+        "redistribution": "quoted_spans_only",
+        "span_count": 2
+      }
+    },
+    "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+    "machine_contract_outcome": {
+      "adapter_schema_valid": true,
+      "checked_property": "source_supported_behavior_contract",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "polarity_not_scored": true,
+      "reason": "source_supported_behavior_observation_with_unknown_polarity",
+      "reference_producer": "la-006-scoped-behavior-contract-compiler",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_supported_behavior_contract",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "fixed_negative_control",
+    "parse_schema_validity": {
+      "checker": {
+        "distinct_from_independent_behavior_contract": true,
+        "id": "la-009-cvefixes-adapter-schema-checker"
+      },
+      "reason": "ok",
+      "valid": true
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1"
+    ],
+    "population": "cve",
+    "prediction": {
+      "adapter_version": "cvefixes-security-ir-adapter/v1",
+      "authority": "observed_candidate_not_independent_review",
+      "candidate_cid": "bafkreiayj7jnem42irjvocemr3ltom25brksqz5wivxsjeppmlq5llyxt4",
+      "declaration_sha256": "049ae66a3388537765b12a9170e32f40838ff439b0d1fb11c83a1cf7614474eb",
+      "grants_execution_authority": false,
+      "independent_human_gold": false,
+      "independent_review": "not_used",
+      "kind": "cvefixes_security_ir_observed_candidate",
+      "proof_authoritative": false,
+      "review_state": "observed_candidate",
+      "source_record_id": "bafkreid5ecypwm5ejkzm2hpk5in76gb5xqfktb2zwgszyiob2sktr4svnm"
+    },
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 2,
+      "hash_mismatches": 0,
+      "input_span_count": 2,
+      "linked": true,
+      "reconstructed_sha256": "e0eac41060233220258a4033daae772df3b07643cc1d15963da1bed45a395069",
+      "span_count": 2
+    },
+    "split": "development",
+    "status": "prediction",
+    "supported_unsupported_fields": {
+      "supported": [
+        "source_difference_observation"
+      ],
+      "unsupported": [
+        "evaluation_polarity",
+        "export_json_transfer",
+        "native_sink_execution"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  },
+  "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0": {
+    "adapter": {
+      "id": "skillcenter-intent-normalizer",
+      "module": "ipfs_datasets_py.logic.intent_ir.normalize.skill",
+      "symbol": "SkillCenterIntentNormalizer.normalize_with_diagnostics",
+      "version": "skillcenter-intent-normalizer/v1"
+    },
+    "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+    "compiler_checker": {
+      "implementation_consistency": {
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "normalizer_and_independent_decoder_agree": true,
+        "note": "decoder/schema validate the produced document; they do not score intent fidelity against packet-preparer nodes",
+        "shared_producer_dependence": false
+      },
+      "independent_schema_checker": {
+        "checker": {
+          "distinct_from_evaluated_adapter": true,
+          "evaluated_adapter": "ipfs_datasets_py.logic.intent_ir.normalize.skill",
+          "id": "intent-ir-decoder-and-schema",
+          "modules": [
+            "ipfs_datasets_py.logic.intent_ir.decoder",
+            "ipfs_datasets_py.logic.intent_ir.schema"
+          ]
+        },
+        "document_id": "intent:skillcenter:8e128cbf4c4daa54d7d61c54864dd1759b03d3279f5379611420f54dd9397967",
+        "schema_version": "intent-ir/v1",
+        "valid": true
+      },
+      "normalizer": {
+        "producer": "skillcenter-intent-normalizer",
+        "ran": true
+      },
+      "typed_compiler": {
+        "available": false,
+        "error": "IntentTypedCompilerError: unknown intent view/route label 'skill'",
+        "selected": false
+      },
+      "untrusted_markdown_executed": false
+    },
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "annotation_id": "la007:00bf87910b65138ba37289b1c504ccee30e92946045d0cefca49a22d3e46148c:original",
+      "bundle_sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+      "content_sha256": "ba080478cfb3fc7194fbfc7ff9222dd71c284192b2b8feb8bcdf4799dafc701a",
+      "full_bundle_body": "retrieval_only_not_redistributed",
+      "independent_label_used": false,
+      "packet_preparer_intent_nodes_used_as_gold": false,
+      "reconstructed_markdown_sha256": "5e92f28a07dbfe18aeac774f18c1d9adeb3c82b61c370488747ecd12fcef4a19",
+      "skill_id": "00bf87910b65138ba37289b1c504ccee30e92946045d0cefca49a22d3e46148c",
+      "source_contains_markdown_commands": true,
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 16,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "a0f5bc519ea72f77ea5606060062867c6864a28648ae6f414d1a2b9fbf1ffd5d",
+          "57be981d882e1d8b92cfa0bfa5d681edf78b772060527fa2ab1c2d94be649a23",
+          "24cdf787b887c29f4b6a214d94c9ced1fc8950f4844df43335caac7fc3c2ea34",
+          "f984102a165b8bd443be03a1ffee0571bc939b10f243da6dc5e0bd4506f3c8d8",
+          "79af717fd083323f1a1100377e5046643809c80a6be4edf11ca640bc58d198d4",
+          "646102de204726ff473966fe8654960859695a47f7b2f8670f8cb71bbf601168",
+          "646102de204726ff473966fe8654960859695a47f7b2f8670f8cb71bbf601168",
+          "8d9c4f3d43f63a632b0300048af1af7821b1fa83276c91d7623cb4cb1ea92287",
+          "8d9c4f3d43f63a632b0300048af1af7821b1fa83276c91d7623cb4cb1ea92287",
+          "17f96a22fd73e65a658ff9977087bcc3afe6b0ac4d77586ba9e3076002846193",
+          "06e1e2e4058648aef5e1767f9a3d3876626af53987a124907c0bb4c7e61eb65f",
+          "b46d210f95f81a35df013348e2b83b1fa756540e18da538e9d729a6066c7cafc",
+          "f99ba58034260e512ccd9d954235f2fabe72206ba7674d4c20290c5271805b3a",
+          "8e941dfd6aea7e6bb2d6f067b3c0d57d276134fb1ba9e1f40d2cae13ef27c054",
+          "fe83f37385a87017a0f5a39de51e0f97d2951027f888afbd0940094efb0e601e",
+          "074de5d545b9105248cf5baf8f4b87eb8991b62114265f478b97145f86026aa0"
+        ],
+        "reconstructed_sha256": "26e6897a4690392ed6567f9fbc902f3eb6583d200a2cc195892abc2405e3035e",
+        "redistribution": "quoted_spans_only",
+        "span_count": 16
+      },
+      "synthetic_mutation": false
+    },
+    "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+    "machine_contract_outcome": {
+      "checked_property": "source_span_and_intent_ir_schema_conformance",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "reason": "span_linkage_and_intent_ir_schema_conformance",
+      "reference_producer": "la-027-automated-reference-manifest",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_span_and_intent_ir_schema_conformance",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "source_faithful",
+    "parse_schema_validity": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.intent_ir.normalize.skill",
+        "id": "intent-ir-decoder-and-schema",
+        "modules": [
+          "ipfs_datasets_py.logic.intent_ir.decoder",
+          "ipfs_datasets_py.logic.intent_ir.schema"
+        ]
+      },
+      "document_id": "intent:skillcenter:8e128cbf4c4daa54d7d61c54864dd1759b03d3279f5379611420f54dd9397967",
+      "schema_version": "intent-ir/v1",
+      "valid": true
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1"
+    ],
+    "population": "skill",
+    "prediction": {
+      "action_count": 0,
+      "authority": "non_authoritative_adapter_output",
+      "control_edge_count": 0,
+      "diagnostic_count": 6,
+      "document_id": "intent:skillcenter:8e128cbf4c4daa54d7d61c54864dd1759b03d3279f5379611420f54dd9397967",
+      "document_sha256": "2113817aa46ab9730193c65c22a6eaa93f159e28a9b0ba209debd0d2c0a29c87",
+      "independent_human_gold": false,
+      "independent_review": "not_used",
+      "kind": "skill_intent_ir",
+      "normalizer_version": "skillcenter-intent-normalizer/v1",
+      "schema_version": "intent-ir/v1",
+      "statement_count": 10,
+      "untrusted_markdown_executed": false
+    },
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 16,
+      "hash_mismatches": 0,
+      "input_span_count": 16,
+      "linked": true,
+      "reconstructed_sha256": "26e6897a4690392ed6567f9fbc902f3eb6583d200a2cc195892abc2405e3035e",
+      "span_count": 16
+    },
+    "split": "development",
+    "status": "prediction",
+    "supported_unsupported_fields": {
+      "supported": [
+        "statements"
+      ],
+      "unsupported": [
+        "actions",
+        "control_edges"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  },
+  "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0": {
+    "adapter": {
+      "id": "cvefixes-security-ir-adapter",
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+      "symbol": "adapt_cvefixes_candidate",
+      "version": "cvefixes-security-ir-adapter/v1"
+    },
+    "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+    "compiler_checker": {
+      "adapter": {
+        "producer": "cvefixes-security-ir-adapter",
+        "ran": true
+      },
+      "formalization_adapter": {
+        "applied": false,
+        "available": true,
+        "reason": "declaration_is_observed_candidate_not_authoritative_security_ir",
+        "version": "security-ir-formalization-adapter/v1"
+      },
+      "implementation_consistency": {
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "note": "adapter schema validity and LA-026/LA-006 source-difference observation are distinct properties",
+        "paired_independent_observation": true,
+        "shared_producer_dependence": false
+      },
+      "independent_behavior_contract": {
+        "distinct_from_evaluated_adapter": true,
+        "polarity_unknown": true,
+        "producer": "la-006-scoped-behavior-contract-compiler",
+        "source_difference_observed": true
+      }
+    },
+    "cve_behavior": {
+      "checked_property": "source_difference_at_pinned_revisions",
+      "empirical_success_credit": false,
+      "independent_human_gold": false,
+      "independent_producer": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-006-scoped-behavior-contract-compiler",
+        "kind": "machine_contract_expectation_compiler",
+        "not_cvefixes_adapter_output": true,
+        "not_human_gold": true,
+        "version": "la-006-automated-scope/v1"
+      },
+      "la027_checked_property": "source_supported_behavior_contract",
+      "observation": {
+        "effect_observed": "source_text_difference_at_fix_commit_versus_first_parent",
+        "executed_untrusted_source": false,
+        "fixed_revision": "9a4ab85439d1b838ee7b8eeebbf59174bb787811",
+        "kind": "isolated_upstream_source_recovery",
+        "observer": "github_commit_metadata_and_raw_file_bytes",
+        "runnable_sandbox_reproduction": "not_run_untrusted_source_not_executed",
+        "source_difference_observed": true,
+        "status": "source_difference_observed_at_pinned_revisions",
+        "vulnerable_revision": "50daa5e658f3ca677da4984eb48492fd7695a27a"
+      },
+      "polarity_expected": "unknown",
+      "polarity_supported_by_contract": false,
+      "transfer_to_export_json": "unsupported",
+      "untrusted_source_executed": false
+    },
+    "cve_side": "vulnerable",
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "cve_ids": [
+        "CVE-2016-7149"
+      ],
+      "independent_label_used": false,
+      "independent_polarity": "unknown",
+      "pair_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:pair",
+      "restriction_authoritative": false,
+      "restriction_mapping_status": "packet_preparer_non_authoritative_candidate",
+      "restriction_status": "observed_candidate",
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 2,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "2c75c4ed9a7c378d16cda7f9ef254583e669ca0a80da1dc99b5bfc8f5006a329",
+          "003e7004f65c3160a054ec3951a0c7f2213f0a7100aa2ddd0037b18beab9068e"
+        ],
+        "reconstructed_sha256": "04eeb7fa60cb590214309c6e119224412e9d2529cbee62b00f58287325372df0",
+        "redistribution": "quoted_spans_only",
+        "span_count": 2
+      }
+    },
+    "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+    "machine_contract_outcome": {
+      "adapter_schema_valid": true,
+      "checked_property": "source_supported_behavior_contract",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "polarity_not_scored": true,
+      "reason": "source_supported_behavior_observation_with_unknown_polarity",
+      "reference_producer": "la-006-scoped-behavior-contract-compiler",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_supported_behavior_contract",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "source_faithful_vulnerable_positive",
+    "parse_schema_validity": {
+      "checker": {
+        "distinct_from_independent_behavior_contract": true,
+        "id": "la-009-cvefixes-adapter-schema-checker"
+      },
+      "reason": "ok",
+      "valid": true
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+      "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1"
+    ],
+    "population": "cve",
+    "prediction": {
+      "adapter_version": "cvefixes-security-ir-adapter/v1",
+      "authority": "observed_candidate_not_independent_review",
+      "candidate_cid": "bafkreidx4hahpgi6zfeoxrulrx7r35qisas742jl2fkt662add64kgoe5m",
+      "declaration_sha256": "cf2553ee5c314d261be10e94f8150b2099acbe6fa95d1dcbe42fa3163ef363a5",
+      "grants_execution_authority": false,
+      "independent_human_gold": false,
+      "independent_review": "not_used",
+      "kind": "cvefixes_security_ir_observed_candidate",
+      "proof_authoritative": false,
+      "review_state": "observed_candidate",
+      "source_record_id": "bafkreicdvndbbdl6whgnt7omtktxulkl2intg34yupmw76ycw3dmf56pbi"
+    },
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 2,
+      "hash_mismatches": 0,
+      "input_span_count": 2,
+      "linked": true,
+      "reconstructed_sha256": "04eeb7fa60cb590214309c6e119224412e9d2529cbee62b00f58287325372df0",
+      "span_count": 2
+    },
+    "split": "final",
+    "status": "prediction",
+    "supported_unsupported_fields": {
+      "supported": [
+        "source_difference_observation"
+      ],
+      "unsupported": [
+        "evaluation_polarity",
+        "export_json_transfer",
+        "native_sink_execution"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  },
+  "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1": {
+    "adapter": {
+      "id": "cvefixes-security-ir-adapter",
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+      "symbol": "adapt_cvefixes_candidate",
+      "version": "cvefixes-security-ir-adapter/v1"
+    },
+    "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+    "compiler_checker": {
+      "adapter": {
+        "producer": "cvefixes-security-ir-adapter",
+        "ran": true
+      },
+      "formalization_adapter": {
+        "applied": false,
+        "available": true,
+        "reason": "declaration_is_observed_candidate_not_authoritative_security_ir",
+        "version": "security-ir-formalization-adapter/v1"
+      },
+      "implementation_consistency": {
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "note": "adapter schema validity and LA-026/LA-006 source-difference observation are distinct properties",
+        "paired_independent_observation": true,
+        "shared_producer_dependence": false
+      },
+      "independent_behavior_contract": {
+        "distinct_from_evaluated_adapter": true,
+        "polarity_unknown": true,
+        "producer": "la-006-scoped-behavior-contract-compiler",
+        "source_difference_observed": true
+      }
+    },
+    "cve_behavior": {
+      "checked_property": "source_difference_at_pinned_revisions",
+      "empirical_success_credit": false,
+      "independent_human_gold": false,
+      "independent_producer": {
+        "distinct_from_evaluated_adapter": true,
+        "evaluated_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter",
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-006-scoped-behavior-contract-compiler",
+        "kind": "machine_contract_expectation_compiler",
+        "not_cvefixes_adapter_output": true,
+        "not_human_gold": true,
+        "version": "la-006-automated-scope/v1"
+      },
+      "la027_checked_property": "source_supported_behavior_contract",
+      "observation": {
+        "effect_observed": "source_text_difference_at_fix_commit_versus_first_parent",
+        "executed_untrusted_source": false,
+        "fixed_revision": "9a4ab85439d1b838ee7b8eeebbf59174bb787811",
+        "kind": "isolated_upstream_source_recovery",
+        "observer": "github_commit_metadata_and_raw_file_bytes",
+        "runnable_sandbox_reproduction": "not_run_untrusted_source_not_executed",
+        "source_difference_observed": true,
+        "status": "source_difference_observed_at_pinned_revisions",
+        "vulnerable_revision": "50daa5e658f3ca677da4984eb48492fd7695a27a"
+      },
+      "polarity_expected": "unknown",
+      "polarity_supported_by_contract": false,
+      "transfer_to_export_json": "unsupported",
+      "untrusted_source_executed": false
+    },
+    "cve_side": "fixed",
+    "empirical_source_case": true,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "frozen_selected_case": true,
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "human_review_run_dependency": false,
+    "implementation_agreement_is_not_semantic_accuracy": true,
+    "independent_human_gold": false,
+    "input": {
+      "cve_ids": [
+        "CVE-2016-7149"
+      ],
+      "independent_label_used": false,
+      "independent_polarity": "unknown",
+      "pair_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:pair",
+      "restriction_authoritative": false,
+      "restriction_mapping_status": "packet_preparer_non_authoritative_candidate",
+      "restriction_status": "observed_candidate",
+      "span_reconstruction": {
+        "empty_quoted": 0,
+        "hash_matches": 2,
+        "hash_mismatches": 0,
+        "quoted_sha256s": [
+          "1376d1368afd0b5d8b71225bc2fc45ef1301c4d69f2a513609f40dc2f4f3c92a",
+          "003e7004f65c3160a054ec3951a0c7f2213f0a7100aa2ddd0037b18beab9068e"
+        ],
+        "reconstructed_sha256": "dda9859fbe28a8386df976b8f411ebd38bdf11907d77a1f75677bb855c8c61dd",
+        "redistribution": "quoted_spans_only",
+        "span_count": 2
+      }
+    },
+    "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+    "machine_contract_outcome": {
+      "adapter_schema_valid": true,
+      "checked_property": "source_supported_behavior_contract",
+      "implementation_agreement_is_not_semantic_accuracy": true,
+      "polarity_not_scored": true,
+      "reason": "source_supported_behavior_observation_with_unknown_polarity",
+      "reference_producer": "la-006-scoped-behavior-contract-compiler",
+      "satisfied": true
+    },
+    "machine_expectation": {
+      "authority": "explicitly_identified_machine_contract_expectation",
+      "checked_property": "source_supported_behavior_contract",
+      "expectation_kind": "machine_contract",
+      "frozen_before_evaluated_predictions": true,
+      "independent_human_gold": false,
+      "policy_polarity": "unknown",
+      "producer": {
+        "distinct_from_evaluated_adapter": true,
+        "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+        "id": "la-027-automated-reference-manifest",
+        "kind": "machine_contract_expectation_compiler",
+        "not_expert_legal_review": true,
+        "not_human_gold": true,
+        "not_independent_review": true,
+        "version": "la-027-automated-evidence/v1"
+      }
+    },
+    "mutation_class": "fixed_negative_control",
+    "parse_schema_validity": {
+      "checker": {
+        "distinct_from_independent_behavior_contract": true,
+        "id": "la-009-cvefixes-adapter-schema-checker"
+      },
+      "reason": "ok",
+      "valid": true
+    },
+    "pipeline_version": "la-009-source-ir/v1",
+    "planned_case_ids": [
+      "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+      "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1"
+    ],
+    "population": "cve",
+    "prediction": {
+      "adapter_version": "cvefixes-security-ir-adapter/v1",
+      "authority": "observed_candidate_not_independent_review",
+      "candidate_cid": "bafkreihrjnd3632xbybctkeu6cvrj44oxqplcoygtjppfbqfnsa5r6wwvi",
+      "declaration_sha256": "61171aca294353d459c8706954b15af3a504dc60874f14e751bb176ab1ae1550",
+      "grants_execution_authority": false,
+      "independent_human_gold": false,
+      "independent_review": "not_used",
+      "kind": "cvefixes_security_ir_observed_candidate",
+      "proof_authoritative": false,
+      "review_state": "observed_candidate",
+      "source_record_id": "bafkreiexrfdxvlux7viax5gd3tcspgivvho5ubdudsrr3oj667asvtckwu"
+    },
+    "schema": "law-to-action-source-ir-measurement/v1",
+    "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+    "source_span_linkage": {
+      "checker": {
+        "distinct_from_evaluated_adapter": true,
+        "id": "la-009-quoted-span-hash-checker",
+        "kind": "independent_source_span_checker",
+        "not_human_gold": true
+      },
+      "coverage": "quoted_spans_present",
+      "empty_quoted": 0,
+      "hash_matches": 2,
+      "hash_mismatches": 0,
+      "input_span_count": 2,
+      "linked": true,
+      "reconstructed_sha256": "dda9859fbe28a8386df976b8f411ebd38bdf11907d77a1f75677bb855c8c61dd",
+      "span_count": 2
+    },
+    "split": "final",
+    "status": "prediction",
+    "supported_unsupported_fields": {
+      "supported": [
+        "source_difference_observation"
+      ],
+      "unsupported": [
+        "evaluation_polarity",
+        "export_json_transfer",
+        "native_sink_execution"
+      ]
+    },
+    "synthetic_qualification_control": false,
+    "task": "LA-009",
+    "unmeasured": {
+      "expert_legal_fidelity": "unmeasured",
+      "human_agreement": "unmeasured",
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "semantic_accuracy": "unmeasured"
+    }
+  }
+}
