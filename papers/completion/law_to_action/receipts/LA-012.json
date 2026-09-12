@@ -1,0 +1,140 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-012",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:38:08.761470+00:00",
+  "completion_mode": "Enforced ENFORCE deployment used file-backed DuckDBCapabilityConsumptionStore via the typed Quack owner (embedded exclusive-lock). Default InMemoryCapabilityConsumptionStore was a labeled contrast only. Restart, replay, concurrency, lost-reply, stale generation/fence/revision, changed-payload, owner failure, and uncertain remote-effect cases retained raw owner transaction evidence. Quack Unix-socket gateway is unavailable without LOAD quack. This is qualification, not a scored A3/A4 run and not arbitrary remote exactly-once.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/durable_consumption.py": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/benchmark/durable_consumption.py": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/patches/state_changes.md": "8e94c25abf4744795176f0e15df522a00a0891aa25266c93d22c71061aef12b0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/failure_matrix.md": "e36f1cbe291c91ca12a6b6e9439ca3ffde97e3660d4f4832978a9db8229ce53f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/raw.jsonl": "860c2ae4d7de9c6b32b5c42dfba058afb389d2093dd1497aeef35f37a5e441d4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/probe/sealed-environment.json": "ef02fad92ee0a049054f42cfc4f001a4c62f121f47d6d1002f22fb59c3baabe2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/probe/summary.json": "76506021a7fad28bd5384f4a0cd6c34b05e04e6add59cb7ee76be1310401394b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/traces/cases.json": "305d0719125d0fa9023b1015dd9d8757862b23c3a9c8d1e87679afcd2c58e196",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/validate_durable_consumption.py": "fb95de4eaf63c34ce866a9ad762c27c99726ffe9db323caaeb258d3c2645b375",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/commands.json": "f554dde2ba796be39c61c34ece5179124cf35a875257b1c17fda5696089359d2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/qualify.stdout.log": "76506021a7fad28bd5384f4a0cd6c34b05e04e6add59cb7ee76be1310401394b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/validate.stdout.log": "5b6a17f547a81db4473892025daf16969627ec03256a6adc8d63a4cce2a0ab4d"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/durable_consumption.py": "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/benchmark/durable_consumption.py",
+    "papers/completion/law_to_action/results/state/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/raw.jsonl",
+    "papers/completion/law_to_action/results/state/failure_matrix.md": "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/failure_matrix.md",
+    "papers/completion/law_to_action/patches/state_changes.md": "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/patches/state_changes.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Enforced benchmark deployment uses the documented actual durable store, never the default in-memory store while claiming restart safety.",
+      "status": "met",
+      "explanation": "Selected ENFORCE cases inject DuckDBCapabilityConsumptionStore against file-backed control.duckdb through QuackStateClient/StateTransaction. The store refuses :memory: paths. InMemoryCapabilityConsumptionStore appears only as in-memory-restart-contrast with in_safety_claim=false. 14/14 selected claim cases used store_kind duckdb-file-typed-quack-owner.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/benchmark/durable_consumption.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/failure_matrix.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/probe/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/traces/cases.json"
+      ]
+    },
+    {
+      "criterion": "Restart/replay/concurrency outcomes and raw owner transaction evidence are retained.",
+      "status": "met",
+      "explanation": "Cases restart-consume-survives, enforce-replay-durable, concurrent-same-use, stale-generation, stale-fence, stale-revision, changed-payload-idempotency, owner-failure-rollback, and owner-exclusive-lock-timeout retained CAS outcome, digest, generation, fence, and revision fields in raw.jsonl owner_transactions. Restart produced one local effect then deny with zero extra effects.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/failure_matrix.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/traces/cases.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Loss-of-reply does not silently trigger a repeated external effect; uncertainty is explicitly represented.",
+      "status": "met",
+      "explanation": "Identical owner command identity after commit returned idempotent_replay with the same result_digest and changed=false. Discarded ENFORCE replies did not re-invoke BoundedExportHandler. Consume-then-crash-before-delegate left zero local effects and remote_effect_status=uncertain. remote-effect-not-exactly-once records that a DuckDB commit is not an arbitrary remote exactly-once API.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/results/state/failure_matrix.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/outputs/patches/state_changes.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/traces/cases.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/durable_consumption.py"
+      ],
+      "completed_at": "2026-09-12T02:38:08.708064+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la012"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/qualify.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-012/durable_consumption.py",
+      "started_at": "2026-09-12T02:38:00.649349+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-012/validate_durable_consumption.py"
+      ],
+      "completed_at": "2026-09-12T02:38:08.761470+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la012"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-012/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-012/validate_durable_consumption.py",
+      "started_at": "2026-09-12T02:38:08.708291+00:00"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "quack_extension_loaded": false,
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "store_kind": "duckdb-file-typed-quack-owner",
+    "in_memory_default_used_for_restart_claim": false,
+    "empirical_benchmark_result": false,
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "quack_state_client.py_sha256": "40208ae8b67eb67c62d0de71bb9146d6ccc2d3efcb28d0532c839011fbd7454b",
+    "quack_state_server.py_sha256": "7fe6055fc60884149b4a43fe28543d62e90620dd942b569a748fa02be5a19ff1",
+    "control_plane_transactions.py_sha256": "0410335c2322b653dd89e898bfb3fb334731663b83623f026c57833b557d0c1a",
+    "future_gates": [
+      "Unix-socket Quack owner gateway remains unqualified without LOAD quack under sealed HOME.",
+      "A DuckDB consume commit is not arbitrary remote exactly-once execution.",
+      "A3/A4 scored arms remain unrun."
+    ]
+  }
+}
