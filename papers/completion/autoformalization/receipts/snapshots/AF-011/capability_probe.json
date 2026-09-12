@@ -1,0 +1,55 @@
+{
+  "environment": {
+    "binaries": {
+      "coqc": null,
+      "cvc5": null,
+      "eprover": null,
+      "isabelle": null,
+      "lake": null,
+      "lean": null,
+      "vampire": null,
+      "z3": null
+    },
+    "home": "/tmp/ipfs-accelerate-validation-home-af011-run-xbofO4",
+    "home_is_validation_private": true,
+    "imports": {
+      "faiss": {
+        "error": "ModuleNotFoundError: No module named 'faiss'",
+        "ok": false
+      },
+      "multiformats": {
+        "error": "ModuleNotFoundError: No module named 'multiformats'",
+        "ok": false
+      },
+      "numpy": {
+        "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+        "ok": false
+      },
+      "torch": {
+        "error": "ModuleNotFoundError: No module named 'torch'",
+        "ok": false
+      },
+      "transformers": {
+        "error": "ModuleNotFoundError: No module named 'transformers'",
+        "ok": false
+      }
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "minilm_cache_present": false,
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "packed_cpu_probe": {
+    "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+    "executed_backend": "native",
+    "ok": false,
+    "requested_backend": "packed_cpu"
+  },
+  "t2_source_memory_contract": {
+    "nudge_decoded_embedding_default_update_sample_memory": true,
+    "source_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+    "t2_memory_disabled_in_source": true,
+    "train_generalizable_projection_evaluation_use_sample_memory": false,
+    "train_generalizable_projection_returns_sample_memory_used_false": true
+  }
+}

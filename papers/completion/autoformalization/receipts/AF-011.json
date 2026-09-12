@@ -1,0 +1,204 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-011",
+  "status": "complete",
+  "completed_at": "2026-09-12T06:52:18.217833+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-training-baselines-manifest/v1",
+      "result_schema": "autoformalization-training-baseline-result/v1",
+      "checkpoint_schema": "autoformalization-baseline-checkpoints/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py",
+      "sha256": "b3a4d559f9763ece78277edd73d1f4c1112bd27746f7037451a1274c4ffa6e90",
+      "standard_library_plus_autoencoder": true,
+      "note": "Item-level rows stored once per arm after the sealed T0/T1/T2 run; aggregates cover every seed/replay."
+    },
+    "repository_tree_id": "233231536f45f8b268d064c10bf010e663fdba11",
+    "ipfs_datasets_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "imported": {
+      "modal_autoencoder.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+        "sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+        "imported": true,
+        "compute_backend": "python",
+        "note": "AdaptiveModalAutoencoder python backend; packed_cpu unavailable without NumPy/Torch."
+      },
+      "legal_samples.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+        "sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd",
+        "imported": true,
+        "note": "build_us_code_sample contract used for CFR windows; mock:stable-sha256 embeddings are teacher diagnostics only."
+      }
+    },
+    "inspected_not_imported": {
+      "modal_autoencoder_cuda.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+        "sha256": "45d7f3ec461d7a4dc6f8208a83dfce3106baf87b08c58e778424108ae0b85bf5",
+        "imported": false,
+        "note": "packed_cpu route requires Torch/NumPy; sealed PATH import failed."
+      },
+      "modal_autoencoder_checkpoint.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py",
+        "sha256": "f8e7baf903db781dfd0cb3127e296a0329bff83f55e373630a26094c48f64b63",
+        "imported": false,
+        "note": "Checkpoint identities are SHA-256 of canonical state JSON, not pickle."
+      }
+    },
+    "frozen_inputs": {
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+      "train_sources_sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532",
+      "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c"
+    },
+    "empirical_execution": "T0 three deterministic python-backend codec replays and T1/T2 three seeds on 69 train plus 15 selection CFR units with a 1024-character window and mock embeddings; packed_cpu/Torch/MiniLM unavailable; final test locked; T2 accepted 0 shared-parameter epochs and retained empty sample memory"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/capability_probe.json": "8118c5633efec68e7146cac4104ae2b9d71b55661c80a5c07da750bbf66e8ca7",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/check_outputs.py": "e02c4458a7fc67be3c701db949330ac29678848459ed0b8722b60b3a10bf0cad",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/baselines/manifest.json": "b33d71df3cf66a27fba5b5470c73764e137d51d0452110f236b820fe10cefaf5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T0-replay1-final.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T0-replay1-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T0-replay2-final.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T0-replay2-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T0-replay3-final.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T0-replay3-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-104729-final.json": "370a515eb78c9cddf74f8ab3c48b1505bda9d19f3364e09643769a0ba092187c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-104729-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-130363-final.json": "07ac707a5a045358bfd3aaf681ab8de447e7e2894289978baddf46c2a1e40109",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-130363-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-155921-final.json": "874901a7dba61000e958ed47319a62750946c24905e1df0ae9e0432557648e55",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-155921-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-104729-final.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-104729-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-130363-final.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-130363-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-155921-final.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T2-155921-initial.json": "fccd17abc2cc8239d89d381d30c89f681c8d6a5e7a0949b91a40b64522e9798b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.meta.json": "488e5ac9b52593e0bedab4a3844ead7d15b0b2dd3249159e90d6ae172ad4d8d3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stdout.log": "325a4dff81e0d352bf63a6cb9022e80155e051c64c3fec1639ba53aedb7f778c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.meta.json": "77f9ab6ea6b7ed7a1fc90ccbf1c705451f047700c13a1db4c14da08fbfbf1a93",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.stdout.log": "1b6815ddbee4cecbda508481fb04b17ebe82e53dc717937ab66d0e593a5111f4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py": "b3a4d559f9763ece78277edd73d1f4c1112bd27746f7037451a1274c4ffa6e90",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/manifest.json": "af982b68966b219a7e4bad45acb7c42db30f6665073db1992d266f981178a99b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/results.jsonl": "9e56dfd66e290697fafac77726d7c14aff739a42cb279db2594eacb311e5d1f6"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/runs/training_baselines/manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/manifest.json",
+    "papers/completion/autoformalization/runs/training_baselines/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/results.jsonl",
+    "papers/completion/autoformalization/checkpoints/baselines/manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/baselines/manifest.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Every executed seed has dataset/config/initial/final checkpoint identities, learning logs, update counts and termination reason.",
+      "status": "met",
+      "explanation": "T0 ran three deterministic replays and T1/T2 ran seeds 104729, 130363, and 155921. Every measured aggregate and item row binds dataset_id 1ccdbe48451a8b81d5c76a8494a4c2e84d53ce653236d1e5799de9cf58955c47, config_id 082d9a574705aabef0f46ba17f95c256118759fe3bb8a467110a12d19d1bfbdd, initial and final state SHA-256 identities, update_count, and termination_reason. T0 update_count is 0 with identical initial/final hashes. T1 records 138 sample-memory updates per seed. T2 completed the shared-parameter trainer with 0 accepted epochs and unchanged state. Compact identity files retain hashes. Item-level rows are stored once per arm (T0 replay 1; T1/T2 seed 104729) so the jsonl stays within admission size; aggregates still cover every executed seed and replay.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/states/T1-104729-final.json"
+      ]
+    },
+    {
+      "criterion": "Counts and real results exist for all executed arms; missing or budget-exhausted runs stay unrun/partial.",
+      "status": "met",
+      "explanation": "T0, T1, and T2 each have measured aggregate results for all executed seeds/replays and item-level vector MSE/cosine for all 69 train and 15 selection source records, plus aggregate family CE, target entropy, and excess CE. Final-test (1913 units) and fixed-canary (38 units) rows are unrun/no_run with bodies_opened=false. Packed_cpu was requested and failed under sealed PATH; the executed T2 backend is native python. Teacher compiler/view targets remain 0. Source fidelity and native proof coverage are null/unmeasured, not zeros.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/capability_probe.json"
+      ]
+    },
+    {
+      "criterion": "T2 update/evaluation memory is demonstrably disabled and no final-test outcome selects model settings.",
+      "status": "met",
+      "explanation": "train_generalizable_projection hardcodes evaluation use_sample_memory=False and returns sample_memory_used=False. Live T2 runs kept decoded_embeddings empty and unchanged, and encode/decode with memory requested matched memory-off. Selection was the explicit T2 line-search validation split. Final-test identities and bodies were not opened; used_to_select_model_settings is false. Frozen hyperparameters were recorded in config_id before outcome inspection.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "A budget-constrained alternative narrows claims explicitly without fabricating a training gain.",
+      "status": "met",
+      "explanation": "The run manifest records a narrowed methods/development-diagnostics route. T1 seen-source cosine 0.991 versus selection 0.410 is labeled a memory diagnostic, not generalization. T2 accepted 0 shared-parameter epochs and matches T0 vector diagnostics, so no shared-learner training gain is claimed. Table 11 fidelity, native proof coverage, MiniLM quality, packed_cpu/CUDA speedup, compiler-teacher CE, full-document unwindowed training, and final-test generalization are listed as not claimed. Mock embeddings and the 1024-character window are disclosed.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/runs/training_baselines/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/checkpoints/baselines/manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af011-run-xbofO4",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "PYTHONPATH=external/ipfs_datasets",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/run.stderr.log",
+      "started_at": "2026-09-12T06:37:30.654147+00:00",
+      "finished_at": "2026-09-12T06:41:28.072147+00:00",
+      "execution_kind": "sealed-PATH T0/T1/T2 python-backend training baselines on frozen train/selection partitions"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af011-check-compact1",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-011/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-011/check_outputs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-011/logs/check_outputs.stderr.log",
+      "started_at": "2026-09-12T06:51:44.028569+00:00",
+      "finished_at": "2026-09-12T06:51:44.067794+00:00",
+      "execution_kind": "identity, count, T2-memory, final-test lock, narrowed-claim, and compact item-coverage checks"
+    }
+  ],
+  "limitations": [
+    "Torch, NumPy, MiniLM, FAISS, and native Lean/Z3/CVC5 binaries are unavailable on the sealed validation PATH; packed_cpu was requested and failed.",
+    "Embeddings are mock:stable-sha256 teacher diagnostics, not sentence-transformers/all-MiniLM-L6-v2 semantic vectors.",
+    "Autoencoder inputs used a frozen 1024-character window over AF-004 CFR sources; 58/69 train and 7/15 selection units were truncated.",
+    "Independent AF-005 gold is pending; source-facet fidelity and native checked proof coverage are unmeasured.",
+    "Compiler/view teacher targets_produced is 0; family CE is parser-derived, not a generated compiler teacher.",
+    "T2 accepted 0 shared-parameter epochs. No Table 11 training gain, final-test generalization, or CUDA/packed_cpu speedup is claimed.",
+    "T1 seen-source reconstruction is a sample-memory diagnostic and is not a generalization result.",
+    "Final-test bodies and identities were not opened.",
+    "This receipt is provenance validation, not independent scientific replication.",
+    "Item-level result rows are stored once per arm (T0 replay 1; T1/T2 seed 104729 primary evaluation). Aggregates and checkpoint identities cover every executed seed/replay."
+  ],
+  "completion_scope": "Executed T0 deterministic codec replays and T1/T2 seeded AdaptiveModalAutoencoder python-backend runs on frozen AF-004 train and selection CFR units with explicit T2 memory disable, locked final test, a narrowed no-training-gain claim set, and compact item-level result storage."
+}

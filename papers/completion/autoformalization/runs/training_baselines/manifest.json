@@ -1,0 +1,217 @@
+{
+  "arms": {
+    "T0": {
+      "condition": "deterministic codec and view adapters",
+      "deterministic_across_replays": true,
+      "deterministic_metric_hashes": [
+        "d5c6c1c95f041aeae3e654e2301c8ac8b07f8896eab639a5eaebfb6b676a3f23",
+        "d5c6c1c95f041aeae3e654e2301c8ac8b07f8896eab639a5eaebfb6b676a3f23",
+        "d5c6c1c95f041aeae3e654e2301c8ac8b07f8896eab639a5eaebfb6b676a3f23"
+      ],
+      "executed": true,
+      "replays": 3,
+      "update_count": 0
+    },
+    "T1": {
+      "condition": "adaptive learner with sample memory",
+      "executed": true,
+      "memory_diagnostic_not_generalization": true,
+      "sample_memory_enabled_for_evaluation": true,
+      "sample_memory_enabled_for_update": true,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ]
+    },
+    "T2": {
+      "condition": "shared parameters only",
+      "executed": true,
+      "executed_backend": "native",
+      "live_memory_checks": [
+        {
+          "decoded_embeddings_unchanged": true,
+          "evaluate_with_memory_matches_without": true,
+          "sample_memory_entry_count": 0,
+          "seed": 104729,
+          "trainer_sample_memory_used": false
+        },
+        {
+          "decoded_embeddings_unchanged": true,
+          "evaluate_with_memory_matches_without": true,
+          "sample_memory_entry_count": 0,
+          "seed": 130363,
+          "trainer_sample_memory_used": false
+        },
+        {
+          "decoded_embeddings_unchanged": true,
+          "evaluate_with_memory_matches_without": true,
+          "sample_memory_entry_count": 0,
+          "seed": 155921,
+          "trainer_sample_memory_used": false
+        }
+      ],
+      "requested_backend": "packed_cpu",
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ]
+    }
+  },
+  "budget_constrained_alternative": {
+    "author_decision_required_for_manuscript_claim_edit": true,
+    "executed_scope": "T0 three deterministic codec replays and T1/T2 three seeds on 69 train plus 15 selection CFR units using AdaptiveModalAutoencoder python backend, a 1024-character source window, and mock:stable-sha256 embeddings.",
+    "not_claimed": [
+      "Table 11 held-out all-facet source fidelity",
+      "native checked useful-proof coverage",
+      "shared-learner generalization to unseen final-test source-family/time groups",
+      "MiniLM or other semantic-encoder quality",
+      "packed_cpu or CUDA training gain",
+      "compiler/view teacher CE against generated targets",
+      "T1 seen-source reconstruction as generalization",
+      "full-document unwindowed training"
+    ],
+    "reason": "Sealed PATH lacks torch/NumPy/MiniLM and native checkers; packed_cpu raises; teacher targets_produced=0; independent AF-005 gold is pending; final test remains locked; mock embeddings are excluded from semantic claims; autoencoder inputs use a frozen 1024-character window because full-statute evaluate/decompiler targets exceeded the sealed-PATH wall clock. T1 seen-source cosine improvement is a memory diagnostic. No training gain is admitted for the paper's primary hypotheses.",
+    "route": "budget_and_capability_constrained_development_diagnostics",
+    "status": "narrowed_methods_and_development_diagnostics"
+  },
+  "capability_probe": {
+    "binaries": {
+      "coqc": null,
+      "cvc5": null,
+      "eprover": null,
+      "isabelle": null,
+      "lake": null,
+      "lean": null,
+      "vampire": null,
+      "z3": null
+    },
+    "home": "/tmp/ipfs-accelerate-validation-home-af011-run-xbofO4",
+    "home_is_validation_private": true,
+    "imports": {
+      "faiss": {
+        "error": "ModuleNotFoundError: No module named 'faiss'",
+        "ok": false
+      },
+      "multiformats": {
+        "error": "ModuleNotFoundError: No module named 'multiformats'",
+        "ok": false
+      },
+      "numpy": {
+        "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+        "ok": false
+      },
+      "torch": {
+        "error": "ModuleNotFoundError: No module named 'torch'",
+        "ok": false
+      },
+      "transformers": {
+        "error": "ModuleNotFoundError: No module named 'transformers'",
+        "ok": false
+      }
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "minilm_cache_present": false,
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "config": {
+    "compute_device": "python",
+    "embedding_model": "mock:stable-sha256",
+    "legal_ir_evaluate_provers": false,
+    "requested_t2_backend": "packed_cpu",
+    "seeds": [
+      104729,
+      130363,
+      155921
+    ],
+    "t0_replays": 3,
+    "t1_epochs": 1,
+    "t1_learning_rate": 0.35,
+    "t2_epochs": 1,
+    "t2_executed_backend": "native",
+    "t2_learning_rate": 0.025,
+    "t2_line_search_attempts": 1,
+    "t2_max_seconds": 90.0,
+    "t2_max_update_families": 1,
+    "t2_use_sample_memory": false,
+    "text_window_chars": 1024
+  },
+  "config_id": "082d9a574705aabef0f46ba17f95c256118759fe3bb8a467110a12d19d1bfbdd",
+  "created_at": "2026-09-12T06:41:28.072147+00:00",
+  "dataset_id": "1ccdbe48451a8b81d5c76a8494a4c2e84d53ce653236d1e5799de9cf58955c47",
+  "elapsed_seconds": 237.418,
+  "final_test_access": {
+    "bodies_opened": false,
+    "ids_inspected": false,
+    "membership_disclosed": false,
+    "n_units": 1913,
+    "private_owner_only": true,
+    "sha256_from_splits_manifest": "7cf104505334f530937dd6a8304dd916e632f2ba79b01075b7d68ef52e6e730f",
+    "status": "locked",
+    "used_to_select_model_settings": false
+  },
+  "frozen_inputs": {
+    "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+    "modal_autoencoder_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+    "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+    "train_sources_sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532",
+    "training_backend_sha256": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5"
+  },
+  "item_row_policy": {
+    "aggregates_cover": "every executed seed and T0 replay",
+    "item_rows": "one primary evaluation per arm (T0 replay 1; T1/T2 seed 104729 memory-on/off respectively)",
+    "n_result_rows": 282,
+    "reason": "duplicate per-seed item rows omitted to stay within admission size; unique 69 train and 15 selection source identities retained for each arm"
+  },
+  "packed_cpu_probe": {
+    "error": "ImportError: Error importing numpy: you should not try to import numpy from\n        its source directory; please exit the numpy source tree, and relaunch\n        your python interpreter from there.",
+    "executed_backend": "native",
+    "ok": false,
+    "requested_backend": "packed_cpu"
+  },
+  "partitions": {
+    "fixed_canary": {
+      "n": 38,
+      "used": false
+    },
+    "selection": {
+      "n": 15,
+      "n_truncated": 7,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/selection.sources.jsonl",
+      "used_as": "T2_line_search_validation_and_development_unseen_eval"
+    },
+    "train": {
+      "n": 69,
+      "n_truncated": 58,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/train.sources.jsonl",
+      "used_as": "updates_and_seen_eval"
+    }
+  },
+  "schema": "autoformalization-training-baselines-manifest/v1",
+  "t2_source_memory_contract": {
+    "nudge_decoded_embedding_default_update_sample_memory": true,
+    "source_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+    "t2_memory_disabled_in_source": true,
+    "train_generalizable_projection_evaluation_use_sample_memory": false,
+    "train_generalizable_projection_returns_sample_memory_used_false": true
+  },
+  "task_id": "AF-011",
+  "teacher": {
+    "compiler_view_targets_produced": 0,
+    "semantic_gold": "pending_AF005_independent_candidate_blind_annotation"
+  },
+  "text_window": {
+    "chars": 1024,
+    "selection_truncated": 7,
+    "train_truncated": 58
+  }
+}

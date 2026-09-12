@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af011-check-compact1",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/check_outputs.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 39,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af011-check-compact1",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T06:51:44.067794+00:00",
+  "name": "check_outputs",
+  "started_at": "2026-09-12T06:51:44.028569+00:00"
+}

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af011-run-xbofO4",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LANG=C.UTF-8",
+    "PYTHONPATH=external/ipfs_datasets",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-011/run_training_baselines.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 237418.0,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af011-run-xbofO4",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T06:41:28.072147+00:00",
+  "name": "run",
+  "started_at": "2026-09-12T06:37:30.654147+00:00"
+}
