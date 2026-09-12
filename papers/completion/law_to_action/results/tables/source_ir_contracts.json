@@ -1,0 +1,248 @@
+{
+  "by_population": {
+    "cve": {
+      "case_ids": [
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+        "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+        "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-0",
+        "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-1",
+        "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+        "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+        "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+        "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+        "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+        "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+        "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+        "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1",
+        "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+        "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+        "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-0",
+        "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-1",
+        "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+        "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+        "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-0",
+        "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-1"
+      ],
+      "cases": 24,
+      "failed": 4,
+      "machine_contract_satisfied": 24,
+      "prediction": 20,
+      "schema_valid": 20,
+      "span_linked": 24,
+      "unavailable": 0,
+      "unsupported": 0
+    },
+    "legal": {
+      "case_ids": [
+        "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-0",
+        "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1",
+        "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-0",
+        "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-1",
+        "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+        "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1",
+        "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-0",
+        "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-1"
+      ],
+      "cases": 12,
+      "failed": 0,
+      "machine_contract_satisfied": 12,
+      "prediction": 12,
+      "schema_valid": 12,
+      "span_linked": 12,
+      "unavailable": 0,
+      "unsupported": 0
+    },
+    "skill": {
+      "case_ids": [
+        "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+        "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+        "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-0",
+        "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-1",
+        "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-0",
+        "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-1",
+        "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-0",
+        "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-1",
+        "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-0",
+        "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+        "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-0",
+        "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+        "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-0",
+        "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-1",
+        "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-0",
+        "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+        "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-0",
+        "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-1",
+        "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-0",
+        "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-1"
+      ],
+      "cases": 24,
+      "failed": 0,
+      "machine_contract_satisfied": 24,
+      "prediction": 18,
+      "schema_valid": 18,
+      "span_linked": 24,
+      "unavailable": 0,
+      "unsupported": 6
+    }
+  },
+  "failed": [
+    {
+      "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+      "code": "cve_adapter_error",
+      "population": "cve",
+      "split": "calibration",
+      "status": "failed"
+    },
+    {
+      "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+      "code": "cve_adapter_error",
+      "population": "cve",
+      "split": "calibration",
+      "status": "failed"
+    },
+    {
+      "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+      "code": "cve_adapter_error",
+      "population": "cve",
+      "split": "final",
+      "status": "failed"
+    },
+    {
+      "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+      "code": "cve_adapter_error",
+      "population": "cve",
+      "split": "final",
+      "status": "failed"
+    }
+  ],
+  "metrics": {
+    "machine_contract_satisfied": {
+      "clopper_pearson_95": {
+        "high": 1.0,
+        "level": 0.95,
+        "low": 0.9403705077138331,
+        "method": "clopper_pearson",
+        "undefined": false
+      },
+      "denominator": 60,
+      "numerator": 60,
+      "undefined": false,
+      "value": 1.0,
+      "wilson_95": {
+        "high": 0.9999999999999998,
+        "level": 0.95,
+        "low": 0.93982814785791,
+        "method": "wilson_score",
+        "undefined": false
+      },
+      "zero_event_rule_of_3": {
+        "applies_when_k_eq_0": true,
+        "method": "rule_of_three",
+        "undefined": true,
+        "upper": null
+      }
+    },
+    "parse_schema_validity": {
+      "clopper_pearson_95": {
+        "high": 0.9170711898409363,
+        "level": 0.95,
+        "low": 0.7147807451712972,
+        "method": "clopper_pearson",
+        "undefined": false
+      },
+      "denominator": 60,
+      "numerator": 50,
+      "undefined": false,
+      "value": 0.8333333333333334,
+      "wilson_95": {
+        "high": 0.9068682302080855,
+        "level": 0.95,
+        "low": 0.7196838683638547,
+        "method": "wilson_score",
+        "undefined": false
+      },
+      "zero_event_rule_of_3": {
+        "applies_when_k_eq_0": true,
+        "method": "rule_of_three",
+        "undefined": true,
+        "upper": null
+      }
+    },
+    "source_span_linkage": {
+      "clopper_pearson_95": {
+        "high": 1.0,
+        "level": 0.95,
+        "low": 0.9403705077138331,
+        "method": "clopper_pearson",
+        "undefined": false
+      },
+      "denominator": 60,
+      "numerator": 60,
+      "undefined": false,
+      "value": 1.0,
+      "wilson_95": {
+        "high": 0.9999999999999998,
+        "level": 0.95,
+        "low": 0.93982814785791,
+        "method": "wilson_score",
+        "undefined": false
+      },
+      "zero_event_rule_of_3": {
+        "applies_when_k_eq_0": true,
+        "method": "rule_of_three",
+        "undefined": true,
+        "upper": null
+      }
+    }
+  },
+  "unsupported": [
+    {
+      "case_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "population": "skill",
+      "split": "development",
+      "status": "unsupported"
+    },
+    {
+      "case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+      "population": "skill",
+      "split": "calibration",
+      "status": "unsupported"
+    },
+    {
+      "case_id": "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-1",
+      "population": "skill",
+      "split": "final",
+      "status": "unsupported"
+    },
+    {
+      "case_id": "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+      "population": "skill",
+      "split": "final",
+      "status": "unsupported"
+    },
+    {
+      "case_id": "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-1",
+      "population": "skill",
+      "split": "final",
+      "status": "unsupported"
+    },
+    {
+      "case_id": "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-1",
+      "population": "skill",
+      "split": "final",
+      "status": "unsupported"
+    }
+  ]
+}

@@ -1,0 +1,1663 @@
+{
+  "claim_limits": [
+    "No observed bounded safety rate is universal legal correctness or universal prevention.",
+    "Optional author judgments, if any, are not empirical outcomes and were not used here."
+  ],
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "fixture_versus_real_provider": {
+    "duckdb_file_store_in_A4": true,
+    "fixed_action_sandbox": true,
+    "in_memory_store_in_scored_A4": false,
+    "qualification_fixtures_are_not_held_out_scores": true,
+    "real_ed25519_ucan_in_A3_A4": true,
+    "scientific_model_provider": false,
+    "sympy_sat_real_child_process": true
+  },
+  "implementation_agreement_is_not_semantic_accuracy": true,
+  "independent_human_gold": false,
+  "negative_results": [
+    {
+      "attempt_ids": [
+        "104729:A3:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+        "104729:A3:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+        "104729:A3:family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+        "104729:A3:family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "104729:A3:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+        "104729:A3:family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "104729:A3:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+        "104729:A3:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+        "104729:A3:family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+        "104729:A3:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "104729:A3:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "104759:A3:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+        "104759:A3:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "104759:A3:family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+        "104759:A3:family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+        "104759:A3:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "104759:A3:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+        "104759:A3:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+        "104759:A3:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+        "104759:A3:family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "104759:A3:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+        "104759:A3:family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "104761:A3:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+        "104761:A3:family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+        "104761:A3:family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+        "104761:A3:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+        "104761:A3:family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "104761:A3:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+        "104761:A3:family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "104761:A3:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+        "104761:A3:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+        "104761:A3:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "104761:A3:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1"
+      ],
+      "id": "N1",
+      "text": "A3 does not prevent all policy-forbidden effects; residual leaks remain on listed attempt IDs."
+    },
+    {
+      "id": "N2",
+      "not_started": 900,
+      "scheduled": 900,
+      "text": "Closed-loop model planning was not executed; zeros are unstarted accounting."
+    },
+    {
+      "id": "N3",
+      "text": "CVE polarity remains unknown; source-difference observation is not detection accuracy."
+    },
+    {
+      "id": "N4",
+      "protocol_scored_unadmitted_cells": {
+        "count": 900,
+        "executed_and_retained": 900,
+        "note": "Protocol-scored admission requires singleton descendant cgroup/quota. Unadmitted cells remain in the raw log with effect counters and denominators; they are never recoded as zero-failure.",
+        "reason": "private cgroup creation failed: OSError: [Errno 30] Read-only file system: '/sys/fs/cgroup/la015-382'",
+        "zero_failure_inferred": false
+      },
+      "text": "Protocol-scored admission is false because a singleton descendant cgroup/quota could not be created."
+    },
+    {
+      "id": "N5",
+      "text": "SAT/UNSAT qualification does not authorize theorem_proof allows."
+    }
+  ],
+  "schema": "law-to-action-failure-taxonomy/v1",
+  "stages": [
+    {
+      "counts": {
+        "failed": 4,
+        "prediction": 50,
+        "unsupported": 6
+      },
+      "failed": [
+        {
+          "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+          "code": "cve_adapter_error",
+          "population": "cve",
+          "split": "calibration",
+          "status": "failed"
+        },
+        {
+          "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+          "code": "cve_adapter_error",
+          "population": "cve",
+          "split": "calibration",
+          "status": "failed"
+        },
+        {
+          "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+          "code": "cve_adapter_error",
+          "population": "cve",
+          "split": "final",
+          "status": "failed"
+        },
+        {
+          "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+          "code": "cve_adapter_error",
+          "population": "cve",
+          "split": "final",
+          "status": "failed"
+        }
+      ],
+      "id": "source_ir",
+      "label": "Source adapter/normalizer/compiler",
+      "note": "Generated labels are predictions. Expert legal fidelity is unmeasured.",
+      "unsupported": [
+        {
+          "case_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+          "population": "skill",
+          "split": "development",
+          "status": "unsupported"
+        },
+        {
+          "case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+          "population": "skill",
+          "split": "calibration",
+          "status": "unsupported"
+        },
+        {
+          "case_id": "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-1",
+          "population": "skill",
+          "split": "final",
+          "status": "unsupported"
+        },
+        {
+          "case_id": "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+          "population": "skill",
+          "split": "final",
+          "status": "unsupported"
+        },
+        {
+          "case_id": "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-1",
+          "population": "skill",
+          "split": "final",
+          "status": "unsupported"
+        },
+        {
+          "case_id": "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-1",
+          "population": "skill",
+          "split": "final",
+          "status": "unsupported"
+        }
+      ]
+    },
+    {
+      "id": "solver_checker",
+      "jobs": [
+        {
+          "authority_kind_emitted": "satisfiability",
+          "case_kind": "success",
+          "checker_id": "exhaustive-truth-table",
+          "family": "qf_bool_sympy_sat",
+          "fragment": "QF_BOOL",
+          "job_id": "sat-success-unsat",
+          "outcome": "unsat",
+          "provider_id": "sympy-sat",
+          "required_authority": "satisfiability"
+        },
+        {
+          "authority_kind_emitted": "satisfiability",
+          "case_kind": "counterexample",
+          "checker_id": "exhaustive-truth-table",
+          "family": "qf_bool_sympy_sat",
+          "fragment": "QF_BOOL",
+          "job_id": "sat-counterexample",
+          "outcome": "sat",
+          "provider_id": "sympy-sat",
+          "required_authority": "satisfiability"
+        },
+        {
+          "authority_kind_emitted": "unavailable",
+          "case_kind": "timeout",
+          "checker_id": "exhaustive-truth-table",
+          "family": "qf_bool_sympy_sat",
+          "fragment": "QF_BOOL",
+          "job_id": "sat-timeout",
+          "outcome": "timeout",
+          "provider_id": "sympy-sat",
+          "required_authority": "satisfiability"
+        },
+        {
+          "authority_kind_emitted": "unsupported",
+          "case_kind": "unsupported",
+          "checker_id": "exhaustive-truth-table",
+          "family": "qf_bool_sympy_sat",
+          "fragment": "FOL-quantifiers",
+          "job_id": "sat-unsupported-quantifiers",
+          "outcome": "unsupported",
+          "provider_id": "sympy-sat",
+          "required_authority": "theorem_proof"
+        },
+        {
+          "authority_kind_emitted": "unsupported",
+          "case_kind": "unsupported",
+          "checker_id": "exhaustive-truth-table",
+          "family": "cvc5_qflia_interpolation",
+          "fragment": "QF_LIA",
+          "job_id": "sat-unsupported-qflia-interpolation",
+          "outcome": "unsupported",
+          "provider_id": "sympy-sat",
+          "required_authority": "satisfiability"
+        },
+        {
+          "authority_kind_emitted": "satisfiability",
+          "case_kind": "forged-evidence",
+          "checker_id": "exhaustive-truth-table",
+          "family": "qf_bool_sympy_sat",
+          "fragment": "QF_BOOL",
+          "job_id": "sat-forged-model",
+          "outcome": "sat",
+          "provider_id": "sympy-sat",
+          "required_authority": "satisfiability"
+        },
+        {
+          "authority_kind_emitted": "sat_only",
+          "case_kind": "authority-reject",
+          "checker_id": null,
+          "family": "authorization_decision_policy",
+          "fragment": null,
+          "job_id": "authority-sat-only-cannot-allow",
+          "outcome": "rejected",
+          "provider_id": null,
+          "required_authority": "theorem_proof"
+        },
+        {
+          "authority_kind_emitted": "policy_approval",
+          "case_kind": "authority-reject",
+          "checker_id": null,
+          "family": "policy_approval",
+          "fragment": null,
+          "job_id": "authority-policy-cannot-allow",
+          "outcome": "rejected",
+          "provider_id": null,
+          "required_authority": "theorem_proof"
+        },
+        {
+          "authority_kind_emitted": "simulated",
+          "case_kind": "authority-reject",
+          "checker_id": null,
+          "family": "simulation",
+          "fragment": null,
+          "job_id": "authority-simulated-cannot-allow",
+          "outcome": "rejected",
+          "provider_id": null,
+          "required_authority": "theorem_proof"
+        },
+        {
+          "authority_kind_emitted": "unavailable",
+          "case_kind": "unavailable",
+          "checker_id": null,
+          "family": "lean_kernel",
+          "fragment": null,
+          "job_id": "authority-kernel-unavailable",
+          "outcome": "unavailable",
+          "provider_id": null,
+          "required_authority": "theorem_proof"
+        }
+      ],
+      "label": "Selected SAT provider and independent checker",
+      "note": "Qualification only; SAT authority is not theorem_proof."
+    },
+    {
+      "a3_residual_forbidden": {
+        "attempt_ids": [
+          "104729:A3:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+          "104729:A3:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "104729:A3:family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+          "104729:A3:family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+          "104729:A3:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+          "104729:A3:family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+          "104729:A3:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+          "104729:A3:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+          "104729:A3:family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+          "104729:A3:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+          "104729:A3:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "104759:A3:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+          "104759:A3:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "104759:A3:family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+          "104759:A3:family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+          "104759:A3:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+          "104759:A3:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+          "104759:A3:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "104759:A3:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+          "104759:A3:family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+          "104759:A3:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+          "104759:A3:family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+          "104761:A3:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+          "104761:A3:family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+          "104761:A3:family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+          "104761:A3:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "104761:A3:family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+          "104761:A3:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+          "104761:A3:family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+          "104761:A3:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+          "104761:A3:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+          "104761:A3:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "104761:A3:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1"
+        ],
+        "by_mutation": {
+          "changed_root_clock_or_environment": 6,
+          "forged_receipt": 6,
+          "replay": 6,
+          "undeclared_handler_effect": 6,
+          "wrong_date_or_jurisdiction": 9
+        },
+        "by_population": {
+          "cve": 15,
+          "legal": 3,
+          "skill": 15
+        },
+        "case_ids": [
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+          "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+          "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+          "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+          "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+          "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+          "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+          "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1"
+        ],
+        "count": 33
+      },
+      "a4_residual_forbidden": {
+        "attempt_ids": [],
+        "count": 0,
+        "zero_event_on_forbidden_requests": {
+          "clopper_pearson_95": {
+            "high": 0.04015891961577464,
+            "level": 0.95,
+            "low": 0.0,
+            "method": "clopper_pearson",
+            "undefined": false
+          },
+          "denominator": 90,
+          "numerator": 0,
+          "undefined": false,
+          "value": 0.0,
+          "wilson_95": {
+            "high": 0.04093562556432678,
+            "level": 0.95,
+            "low": 0.0,
+            "method": "wilson_score",
+            "undefined": false
+          },
+          "zero_event_rule_of_3": {
+            "applies_when_k_eq_0": true,
+            "level": 0.95,
+            "method": "rule_of_three",
+            "undefined": false,
+            "upper": 0.03333333333333333
+          }
+        }
+      },
+      "id": "capability_and_context",
+      "label": "UCAN/policy versus full ENFORCE context binding",
+      "note": "A3 residual leaks are stage-specific: lightweight policy did not bind root/clock/replay/undeclared-effect/forged-receipt/wrong-date classes that A4 denied."
+    },
+    {
+      "id": "durable_consumption",
+      "in_safety_claim": 14,
+      "jobs": [
+        {
+          "case_kind": "allow",
+          "decision": "allow",
+          "in_safety_claim": true,
+          "job_id": "enforce-allow-durable",
+          "mutation": "none",
+          "observed_effect_count": 1,
+          "passed": true,
+          "remote_effect_status": "observed",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "replay",
+          "decision": "deny",
+          "in_safety_claim": true,
+          "job_id": "enforce-replay-durable",
+          "mutation": "same-use-replay",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "concurrency",
+          "decision": "one-allow-one-deny",
+          "in_safety_claim": true,
+          "job_id": "concurrent-same-use",
+          "mutation": "two-threads-same-token",
+          "observed_effect_count": 1,
+          "passed": true,
+          "remote_effect_status": "observed",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "restart",
+          "decision": "deny",
+          "in_safety_claim": true,
+          "job_id": "restart-consume-survives",
+          "mutation": "close-reopen-file-backed-store",
+          "observed_effect_count": 1,
+          "passed": true,
+          "remote_effect_status": "observed",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "contrast",
+          "decision": "allow",
+          "in_safety_claim": false,
+          "job_id": "in-memory-restart-contrast",
+          "mutation": "in-memory-store-lost-on-restart",
+          "observed_effect_count": 2,
+          "passed": true,
+          "remote_effect_status": "observed",
+          "store_kind": "in-memory-contrast"
+        },
+        {
+          "case_kind": "lost_reply",
+          "decision": "idempotent_replay",
+          "in_safety_claim": true,
+          "job_id": "lost-reply-owner-idempotent-replay",
+          "mutation": "identical-command-after-commit",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "uncertain",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "lost_reply",
+          "decision": "deny",
+          "in_safety_claim": true,
+          "job_id": "lost-reply-after-delegate-no-repeat-effect",
+          "mutation": "discard-enforcer-reply-then-retry",
+          "observed_effect_count": 1,
+          "passed": true,
+          "remote_effect_status": "uncertain",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "uncertainty",
+          "decision": "deny",
+          "in_safety_claim": true,
+          "job_id": "crash-after-consume-before-delegate-uncertain",
+          "mutation": "consume-committed-delegate-not-called",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "uncertain",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "owner_failure",
+          "decision": "stale",
+          "in_safety_claim": true,
+          "job_id": "stale-generation",
+          "mutation": "wrong-generation",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "owner_failure",
+          "decision": "stale",
+          "in_safety_claim": true,
+          "job_id": "stale-fence",
+          "mutation": "wrong-fence-epoch",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "owner_failure",
+          "decision": "conflict",
+          "in_safety_claim": true,
+          "job_id": "stale-revision",
+          "mutation": "stale-store-revision",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "idempotency",
+          "decision": "idempotency_conflict",
+          "in_safety_claim": true,
+          "job_id": "changed-payload-idempotency",
+          "mutation": "same-idempotency-key-different-command-id",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "owner_failure",
+          "decision": "rolled_back",
+          "in_safety_claim": true,
+          "job_id": "owner-failure-rollback",
+          "mutation": "apply-raises-before-commit",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "owner_failure",
+          "decision": "timeout",
+          "in_safety_claim": true,
+          "job_id": "owner-exclusive-lock-timeout",
+          "mutation": "second-writer-while-owner-holds-lock",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        {
+          "case_kind": "dependency_gap",
+          "decision": "unavailable",
+          "in_safety_claim": false,
+          "job_id": "quack-gateway-unavailable",
+          "mutation": "load-quack-extension",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "absent",
+          "store_kind": "quack-gateway-unqualified"
+        },
+        {
+          "case_kind": "limitation",
+          "decision": "limitation_recorded",
+          "in_safety_claim": true,
+          "job_id": "remote-effect-not-exactly-once",
+          "mutation": "duckdb-commit-is-not-remote-exactly-once",
+          "observed_effect_count": 0,
+          "passed": true,
+          "remote_effect_status": "uncertain",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        }
+      ],
+      "label": "DuckDB owner consumption",
+      "passed_in_claim": 14
+    },
+    {
+      "id": "component_ablation",
+      "label": "One-factor sandbox ablations against A4",
+      "mechanisms": {
+        "capability_verification": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:capability_verification:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:capability_verification:full:positive",
+            "104729:capability_verification:full:negative",
+            "104729:capability_verification:ablated:positive",
+            "104729:capability_verification:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:capability_verification:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "capability_verification",
+          "n_rows": 4,
+          "negative_case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+          "positive_case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+          "remaining_guards": []
+        },
+        "consumption": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:consumption:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:consumption:full:positive",
+            "104729:consumption:full:negative",
+            "104729:consumption:ablated:positive",
+            "104729:consumption:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:consumption:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "consumption",
+          "n_rows": 4,
+          "negative_case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "positive_case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+          "remaining_guards": []
+        },
+        "current_root_binding": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:current_root_binding:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:current_root_binding:full:positive",
+            "104729:current_root_binding:full:negative",
+            "104729:current_root_binding:ablated:positive",
+            "104729:current_root_binding:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:current_root_binding:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "current_root_binding",
+          "n_rows": 4,
+          "negative_case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+          "positive_case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+          "remaining_guards": []
+        },
+        "hard_applicability": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:hard_applicability:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:hard_applicability:full:positive",
+            "104729:hard_applicability:full:negative",
+            "104729:hard_applicability:ablated:positive",
+            "104729:hard_applicability:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:hard_applicability:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "hard_applicability",
+          "n_rows": 4,
+          "negative_case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+          "positive_case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+          "remaining_guards": []
+        },
+        "intent_code_correlation": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:intent_code_correlation:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:intent_code_correlation:full:positive",
+            "104729:intent_code_correlation:full:negative",
+            "104729:intent_code_correlation:ablated:positive",
+            "104729:intent_code_correlation:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:intent_code_correlation:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "intent_code_correlation",
+          "n_rows": 4,
+          "negative_case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "positive_case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "remaining_guards": []
+        },
+        "proof_jobs": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:proof_jobs:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:proof_jobs:full:positive",
+            "104729:proof_jobs:full:negative",
+            "104729:proof_jobs:ablated:positive",
+            "104729:proof_jobs:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:proof_jobs:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "proof_jobs",
+          "n_rows": 4,
+          "negative_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+          "positive_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+          "remaining_guards": []
+        },
+        "source_provenance": {
+          "ablated_forbidden_effect": true,
+          "ablated_negative_attempt_id": "104729:source_provenance:ablated:negative",
+          "ablated_positive_false_rejection": false,
+          "ablated_positive_useful_work": true,
+          "attempt_ids": [
+            "104729:source_provenance:full:positive",
+            "104729:source_provenance:full:negative",
+            "104729:source_provenance:ablated:positive",
+            "104729:source_provenance:ablated:negative"
+          ],
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "full_negative_attempt_id": "104729:source_provenance:full:negative",
+          "full_positive_useful_work": true,
+          "kind": "load_bearing",
+          "live_service": false,
+          "masked_by": [],
+          "mechanism_id": "source_provenance",
+          "n_rows": 4,
+          "negative_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+          "positive_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+          "remaining_guards": []
+        }
+      }
+    },
+    {
+      "blockers": {
+        "not_started_reason": "unqualified_model_and_unfrozen_cohort",
+        "scientific_model": [
+          "no generative inference runtime (torch, llama_cpp, or vllm) is importable under the sealed PATH",
+          "transformers is importable from site-packages but no model id, tokenizer revision, or weight digest is pinned",
+          "onnxruntime is importable but no ONNX generative-model artifact is present or pinned",
+          "no local weight files (.bin/.safetensors/.gguf/.pt) were found under sealed HOME or /models",
+          "no model serving executable (ollama, llama-cli, vllm, ...) is on the sealed PATH",
+          "no provider credential names are present in the process environment",
+          "LA-003 did not pin a scientific model revision, tokenizer, decoding policy, or deployment digest",
+          "an existing supervisor provider session is not scientific model qualification"
+        ],
+        "source_cohort": [
+          "LA-004 froze exactly 30 lineage families and LA-015 consumed all of them",
+          "protocol requires a separately frozen 30-family cohort with salt vericodegen-2026-law-to-action-LA016-v1 and no overlap with the fixed-action study",
+          "no LA-016 source freeze exists in allowed task outputs, and inventing family hashes is not a freeze",
+          "leftover unread CVE/Skill rows are not admitted without a versioned pre-outcome freeze"
+        ]
+      },
+      "id": "closed_loop_planning",
+      "label": "Closed-loop generated-code planning",
+      "not_started": 900,
+      "scheduled": 900,
+      "withdrawn": true
+    }
+  ],
+  "task": "LA-019",
+  "unsupported_fragments": [
+    {
+      "case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "HIPAA privacy regulation definition of covered entity is outside this section PDF."
+    },
+    {
+      "case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Interaction with 42 U.S.C. \u00a7 1320d-7 state-law effect is not annotated as a rule."
+    },
+    {
+      "case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "What counts as valid individual authorization under the HIPAA privacy rule is not in this section."
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Case-law narrowing of exceeds-authorized-access is outside the statute PDF."
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Cross-referenced consumer-reporting definitions are not expanded."
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Extra-territorial reach and historical versioning beyond USCODE-2024 are unsupported."
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "FTC COPPA rule text is incorporated by reference and is not this source family."
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Definition of child/operator from 15 U.S.C. \u00a7 6501 is not a complete unique span here."
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Incorporation of Commission regulations under subsection (b)."
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Open-ended 'any reasonable effort' technology-dependent consent standard."
+    },
+    {
+      "case_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Missing unique definition spans for child and operator in this family PDF."
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Full twelve-plus disclosure exceptions cannot be losslessly stored in a seven-field tuple."
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Agency definition incorporates 5 U.S.C. \u00a7 552(e)."
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Any non-552a privacy regime is outside this family."
+    },
+    {
+      "case_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Triennial Librarian of Congress class rulemaking cannot be reduced to a static seven-field tuple."
+    },
+    {
+      "case_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Good-faith determination is not a seven-field primitive."
+    },
+    {
+      "case_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-0",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-0",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Full CPNI definition including negative subscriber-list carve-out exceeds a single object field."
+    },
+    {
+      "case_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "exceptions_empty_in_parse"
+    },
+    {
+      "case_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-1",
+      "kind": "unsupported_field",
+      "population": "legal",
+      "value": "promotable_to_theorem"
+    },
+    {
+      "case_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-1",
+      "kind": "unsupported_construct",
+      "population": "legal",
+      "value": "Historical Communications Act versions before Pub. L. 104-104 are not this source family."
+    },
+    {
+      "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "adapter_output"
+    },
+    {
+      "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "adapter_output"
+    },
+    {
+      "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "adapter_output"
+    },
+    {
+      "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "adapter_output"
+    },
+    {
+      "case_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-0",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "evaluation_polarity"
+    },
+    {
+      "case_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "export_json_transfer"
+    },
+    {
+      "case_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-1",
+      "kind": "unsupported_field",
+      "population": "cve",
+      "value": "native_sink_execution"
+    },
+    {
+      "case_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "intent_ir_document_policy_excluded"
+    },
+    {
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "intent_ir_document_policy_excluded"
+    },
+    {
+      "case_id": "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "intent_ir_document_policy_excluded"
+    },
+    {
+      "case_id": "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "intent_ir_document_policy_excluded"
+    },
+    {
+      "case_id": "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "intent_ir_document_policy_excluded"
+    },
+    {
+      "case_id": "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "intent_ir_document_policy_excluded"
+    },
+    {
+      "case_id": "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-0",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    },
+    {
+      "case_id": "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "actions"
+    },
+    {
+      "case_id": "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-1",
+      "kind": "unsupported_field",
+      "population": "skill",
+      "value": "control_edges"
+    }
+  ],
+  "withdrawn_without_independent_data": [
+    "expert legal source-to-rule semantic fidelity",
+    "legal applicability or validity in the world",
+    "independent human legal/security/intent validation",
+    "inter-annotator agreement or adjudicated gold accuracy",
+    "semantic correctness inferred from implementation agreement"
+  ]
+}

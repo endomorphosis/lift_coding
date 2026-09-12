@@ -1,0 +1,122 @@
+{
+  "claim_limits": [
+    "This is qualification evidence, not a scored A4 cell.",
+    "SAT/UNSAT cannot authorize theorem_proof allows."
+  ],
+  "empirical_benchmark_result": false,
+  "jobs": [
+    {
+      "authority_kind_emitted": "satisfiability",
+      "case_kind": "success",
+      "checker_id": "exhaustive-truth-table",
+      "family": "qf_bool_sympy_sat",
+      "fragment": "QF_BOOL",
+      "job_id": "sat-success-unsat",
+      "outcome": "unsat",
+      "provider_id": "sympy-sat",
+      "required_authority": "satisfiability"
+    },
+    {
+      "authority_kind_emitted": "satisfiability",
+      "case_kind": "counterexample",
+      "checker_id": "exhaustive-truth-table",
+      "family": "qf_bool_sympy_sat",
+      "fragment": "QF_BOOL",
+      "job_id": "sat-counterexample",
+      "outcome": "sat",
+      "provider_id": "sympy-sat",
+      "required_authority": "satisfiability"
+    },
+    {
+      "authority_kind_emitted": "unavailable",
+      "case_kind": "timeout",
+      "checker_id": "exhaustive-truth-table",
+      "family": "qf_bool_sympy_sat",
+      "fragment": "QF_BOOL",
+      "job_id": "sat-timeout",
+      "outcome": "timeout",
+      "provider_id": "sympy-sat",
+      "required_authority": "satisfiability"
+    },
+    {
+      "authority_kind_emitted": "unsupported",
+      "case_kind": "unsupported",
+      "checker_id": "exhaustive-truth-table",
+      "family": "qf_bool_sympy_sat",
+      "fragment": "FOL-quantifiers",
+      "job_id": "sat-unsupported-quantifiers",
+      "outcome": "unsupported",
+      "provider_id": "sympy-sat",
+      "required_authority": "theorem_proof"
+    },
+    {
+      "authority_kind_emitted": "unsupported",
+      "case_kind": "unsupported",
+      "checker_id": "exhaustive-truth-table",
+      "family": "cvc5_qflia_interpolation",
+      "fragment": "QF_LIA",
+      "job_id": "sat-unsupported-qflia-interpolation",
+      "outcome": "unsupported",
+      "provider_id": "sympy-sat",
+      "required_authority": "satisfiability"
+    },
+    {
+      "authority_kind_emitted": "satisfiability",
+      "case_kind": "forged-evidence",
+      "checker_id": "exhaustive-truth-table",
+      "family": "qf_bool_sympy_sat",
+      "fragment": "QF_BOOL",
+      "job_id": "sat-forged-model",
+      "outcome": "sat",
+      "provider_id": "sympy-sat",
+      "required_authority": "satisfiability"
+    },
+    {
+      "authority_kind_emitted": "sat_only",
+      "case_kind": "authority-reject",
+      "checker_id": null,
+      "family": "authorization_decision_policy",
+      "fragment": null,
+      "job_id": "authority-sat-only-cannot-allow",
+      "outcome": "rejected",
+      "provider_id": null,
+      "required_authority": "theorem_proof"
+    },
+    {
+      "authority_kind_emitted": "policy_approval",
+      "case_kind": "authority-reject",
+      "checker_id": null,
+      "family": "policy_approval",
+      "fragment": null,
+      "job_id": "authority-policy-cannot-allow",
+      "outcome": "rejected",
+      "provider_id": null,
+      "required_authority": "theorem_proof"
+    },
+    {
+      "authority_kind_emitted": "simulated",
+      "case_kind": "authority-reject",
+      "checker_id": null,
+      "family": "simulation",
+      "fragment": null,
+      "job_id": "authority-simulated-cannot-allow",
+      "outcome": "rejected",
+      "provider_id": null,
+      "required_authority": "theorem_proof"
+    },
+    {
+      "authority_kind_emitted": "unavailable",
+      "case_kind": "unavailable",
+      "checker_id": null,
+      "family": "lean_kernel",
+      "fragment": null,
+      "job_id": "authority-kernel-unavailable",
+      "outcome": "unavailable",
+      "provider_id": null,
+      "required_authority": "theorem_proof"
+    }
+  ],
+  "n_records": 10,
+  "schema": "law-to-action-proof-job-analysis/v1",
+  "task": "LA-010"
+}

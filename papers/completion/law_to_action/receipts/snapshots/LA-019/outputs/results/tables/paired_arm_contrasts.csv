@@ -1,0 +1,6 @@
+contrast,n_families,mean_family_delta,boot_low,boot_high,strat_boot_low,strat_boot_high,interpretation
+A1_versus_A0,18,0.0,0.0,0.0,0.0,0.0,equivalence_instrumentation_check
+A2_versus_A0,18,0.0,0.0,0.0,0.0,0.0,equivalence_instrumentation_check
+A3_versus_A0,18,-0.6666666666666666,-0.8888888888888888,-0.4444444444444444,-0.8888888888888888,-0.4444444444444444,qualified_mechanism_effect
+A4_versus_A0,18,-1.0,-1.0,-1.0,-1.0,-1.0,qualified_mechanism_effect
+A4_versus_A3,18,-0.3333333333333333,-0.5555555555555556,-0.1111111111111111,-0.5555555555555556,-0.1111111111111111,qualified_mechanism_effect

@@ -1,0 +1,83 @@
+{
+  "generated_by": "papers/completion/law_to_action/analysis/analyze.py",
+  "inputs": {
+    "ablation_raw": {
+      "path": "papers/completion/law_to_action/results/ablations/raw.jsonl",
+      "present": true,
+      "sha256": "7ecf2358aaa50d072aacb0085d284d2ae86d8eb792830c581e56da8fda348428",
+      "size_bytes": 110830
+    },
+    "agents_manifest": {
+      "path": "papers/completion/law_to_action/results/agents/run_manifest.json",
+      "present": true,
+      "sha256": "8fa99a856023300312f760a0aceaa3623d976289e68cda31c059983db9a76a90",
+      "size_bytes": 62295
+    },
+    "agents_raw": {
+      "path": "papers/completion/law_to_action/results/agents/raw.jsonl",
+      "present": true,
+      "sha256": "d4d10fbfb2699e4b67a0ff972069c9211271b511c75f98815b6ca7a6704a3a45",
+      "size_bytes": 265990
+    },
+    "efficiency_raw": {
+      "path": "papers/completion/law_to_action/results/efficiency/raw.jsonl",
+      "present": true,
+      "sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "size_bytes": 370078
+    },
+    "fixed_manifest": {
+      "path": "papers/completion/law_to_action/results/fixed_actions/run_manifest.json",
+      "present": true,
+      "sha256": "3f67fcaeee044a442726e560997d72b224c0e4655bcdb81c34720d18cd08cacf",
+      "size_bytes": 17115
+    },
+    "fixed_raw": {
+      "path": "papers/completion/law_to_action/results/fixed_actions/raw.jsonl",
+      "present": true,
+      "sha256": "bd2e78e40f6c77679f8dd675357dc91cfdbedadf7806dd94c027119a030fcd49",
+      "size_bytes": 673566
+    },
+    "mediation_raw": {
+      "path": "papers/completion/law_to_action/results/mediation/raw.jsonl",
+      "present": true,
+      "sha256": "ce08649bf434e9761117be4bc4b2d96161bd73dc5dd4e363e28e9bf4f49ee6e1",
+      "size_bytes": 35221
+    },
+    "proof_raw": {
+      "path": "papers/completion/law_to_action/results/proof_jobs/raw.jsonl",
+      "present": true,
+      "sha256": "c04a86c6735bb6aea6e5a1617bb52e6f7e125e93f321b4f79bb4a86bd1262300",
+      "size_bytes": 17466
+    },
+    "protocol": {
+      "path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "present": true,
+      "sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+      "size_bytes": 24163
+    },
+    "source_ir_raw": {
+      "path": "papers/completion/law_to_action/results/source_ir/raw.jsonl",
+      "present": true,
+      "sha256": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+      "size_bytes": 412543
+    },
+    "sources": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+      "present": true,
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+      "size_bytes": 51880
+    },
+    "splits": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+      "present": true,
+      "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+      "size_bytes": 17657
+    },
+    "state_raw": {
+      "path": "papers/completion/law_to_action/results/state/raw.jsonl",
+      "present": true,
+      "sha256": "860c2ae4d7de9c6b32b5c42dfba058afb389d2093dd1497aeef35f37a5e441d4",
+      "size_bytes": 25331
+    }
+  }
+}
