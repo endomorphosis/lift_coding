@@ -1,0 +1,23 @@
+{
+  "ci_method": "95% source-family/time-group cluster bootstrap, 10000 resamples; seed summaries separate.",
+  "denominator": 1913,
+  "errors": [],
+  "false_transfer_generalized": false,
+  "final_test_groups": 20,
+  "hypothesis_status_counts": {
+    "inconclusive": 1,
+    "supported": 1,
+    "unrun": 6,
+    "unsupported": 1
+  },
+  "ok": true,
+  "original_placeholder_cells": 44,
+  "post_hoc_as_prespecified": false,
+  "remaining_placeholder_cells": 0,
+  "replaced_placeholder_cells": 44,
+  "seeds": [
+    104729,
+    130363,
+    155921
+  ]
+}
