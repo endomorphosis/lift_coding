@@ -1,0 +1,241 @@
+{
+  "caller": {
+    "analytical_close": "AnalyticalCloseExecutor@1",
+    "authorization": "ReferenceAuthorizationEvaluator",
+    "bound_request": "KernelEvaluationRequest with exact plan/doctor/obligation receipts",
+    "kernel": "PreImplementationKernel@1",
+    "residual_invocation": "ResidualProviderInvocation@1",
+    "thin_gate": "evaluate_provider_gate (does not forward view CIDs)"
+  },
+  "capability": {
+    "anyio": false,
+    "interpreter": "/usr/bin/python3.12",
+    "modules": {
+      "analytical_close_executor": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/analytical_close_executor.py",
+      "authorization_logic": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+      "implementation_disposition": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_disposition.py",
+      "pre_implementation_kernel": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+      "pre_implementation_provider_gate": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_provider_gate.py",
+      "providers": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/providers.py",
+      "residual_llm_packet": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/residual_llm_packet.py",
+      "residual_provider_invocation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/residual_provider_invocation.py"
+    },
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "public_semantic_state_import": {
+      "error": "ModuleNotFoundError: No module named 'anyio'",
+      "loaded": false
+    },
+    "pytest": "8.1.1",
+    "pytest_error": null,
+    "python_version": "3.12.3"
+  },
+  "cases": [
+    {
+      "case_id": "deterministic_unique_close",
+      "description": "Unique analytical mapping closes without a provider call; independent pytest oracle must pass.",
+      "expected_reason": "analytical_unique_mapping",
+      "family": "deterministic",
+      "pair_id": "deterministic_close",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "closes_claim_untrusted",
+      "description": "A unique closes_claim candidate does not count as useful progress until the frozen oracle passes.",
+      "expected_reason": "closes_claim_not_independent_success",
+      "family": "closes_claim",
+      "pair_id": "deterministic_close",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_authorized_progress",
+      "description": "Exact task/forest/plan/doctor/obligation receipts authorize residual dispatch to the intended provider; independent oracle scores the nomination.",
+      "expected_reason": "residual_packet_authorized",
+      "family": "residual",
+      "pair_id": "residual_progress",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "residual_missing_authority_receipts",
+      "description": "Packet present but typed resolvable authority receipts are absent.",
+      "expected_reason": "missing_typed_resolvable_authority_receipts",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_mismatched_task",
+      "description": "Authority receipts bound to a different task_cid are rejected.",
+      "expected_reason": "missing_typed_resolvable_authority_receipts",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_mismatched_forest",
+      "description": "Authority receipts bound to a different forest CID are rejected.",
+      "expected_reason": "missing_typed_resolvable_authority_receipts",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_mismatched_views",
+      "description": "Plan/doctor/obligation view CIDs that are not the durable receipts cannot authorize residual use.",
+      "expected_reason": "missing_typed_resolvable_authority_receipts",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_forged_receipt_identity",
+      "description": "Forged receipt content_id that does not match the payload identity is rejected.",
+      "expected_reason": "missing_typed_resolvable_authority_receipts",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_missing_packet",
+      "description": "No unique analytical close and no residual packet abstains; provider stays unreachable.",
+      "expected_reason": "no_analytical_close",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "residual_gate_omits_views",
+      "description": "evaluate_provider_gate without exact plan/doctor/obligation view CIDs cannot admit residual use.",
+      "expected_reason": "missing_typed_resolvable_authority_receipts",
+      "family": "invalid_binding",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "ambiguous_candidates",
+      "description": "Two competing closing candidates abstain; residual provider is not called.",
+      "expected_reason": "ambiguous_repair_candidates",
+      "family": "ambiguity",
+      "pair_id": "ambiguity",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "missing_planner",
+      "description": "Missing planner backend defers; capability stays unavailable and is not a silent LLM fallback.",
+      "expected_reason": "missing_required_backend",
+      "family": "capability",
+      "pair_id": "capability",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "missing_doctor",
+      "description": "Missing doctor backend defers; capability stays unavailable and is not a silent LLM fallback.",
+      "expected_reason": "missing_required_backend",
+      "family": "capability",
+      "pair_id": "capability",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "production_llm_unavailable",
+      "description": "Sealed profile has no production model identity; unavailability is not zero cost or simulated success.",
+      "expected_reason": "production_model_identity_unavailable",
+      "family": "capability",
+      "pair_id": "capability",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "deterministic_preempts_residual",
+      "description": "A unique analytical close is selected before residual authorization; the packet does not invoke a provider.",
+      "expected_reason": "analytical_unique_mapping",
+      "family": "deterministic",
+      "pair_id": "deterministic_vs_residual",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "unknown_provider_effect",
+      "description": "An authorized residual whose nomination escapes the write lease enters reconciliation rather than blind success.",
+      "expected_reason": "unknown_provider_effect",
+      "family": "unknown_effect",
+      "pair_id": "residual_progress",
+      "polarity": "invalid"
+    },
+    {
+      "case_id": "repeated_residual_no_blind_retry",
+      "description": "A repeated residual request after an unknown effect is reconciled rather than blindly re-invoked.",
+      "expected_reason": "repeated_residual_requires_reconciliation",
+      "family": "repeated",
+      "pair_id": "residual_progress",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "deny_all_control",
+      "description": "A deny-all route never calls a provider and cannot pass useful-progress criteria.",
+      "expected_reason": "deny_all_not_useful_progress",
+      "family": "deny_all",
+      "pair_id": "deny_all",
+      "polarity": "diagnostic"
+    },
+    {
+      "case_id": "authorization_permit_execute",
+      "description": "Reference authorization permits EXECUTE_TASK on the exact task/lease/worktree/path binding.",
+      "expected_reason": "allowed",
+      "family": "authorization",
+      "pair_id": "authorization_scope",
+      "polarity": "valid"
+    },
+    {
+      "case_id": "authorization_deny_task_scope",
+      "description": "A minimally altered task_id is denied for task_scope_mismatch; authorization is not code correctness.",
+      "expected_reason": "task_scope_mismatch",
+      "family": "authorization",
+      "pair_id": "authorization_scope",
+      "polarity": "invalid"
+    }
+  ],
+  "fixture": {
+    "bug": "return a - b",
+    "core_sha256": "639a19214da34e91dc25385fac24bc80b0a2f5d49f9520e2f882b8309eeb04e2",
+    "fix": "return a + b",
+    "kind": "hermetic_add_scale",
+    "test_sha256": "3160d755bb2c12047c8a37ed09236cc8d2aba5929ca370876f27137cb7be9e8f"
+  },
+  "generated_at": "2026-09-12T02:14:06+00:00",
+  "intended_provider": {
+    "admitted_production": false,
+    "id": "ns-008-qualification-residual-provider@1",
+    "revision": "ns-008-residual-provider-v1",
+    "script": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/residual_provider.py"
+  },
+  "oracle": {
+    "command": [
+      "python3",
+      "-m",
+      "pytest",
+      "tests/test_core.py",
+      "-q"
+    ],
+    "independent_of_closes_claim": true,
+    "kind": "pytest"
+  },
+  "policy_id": "ns-008-provider-gate-qualification-v1",
+  "qualification_not_live_ad": true,
+  "rules": {
+    "closes_claim_is_not_success": true,
+    "count_invocations_at_residual_provider_boundary": true,
+    "deny_all_cannot_pass_useful_progress": true,
+    "kernel_zero_hooks_are_not_workflow_savings": true,
+    "missing_capabilities_stay_unavailable": true
+  },
+  "schema": "neurosymbolic-supervision/provider-gate-cases@1",
+  "source_hashes": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/residual_llm_packet.py": "1de5545cf2ec1876c79a6e9da76352df8c58092be92a396fce79fa45a2894087",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/providers.py": "fe6b78ef5e0fff0bae4f3f5de9661d5514b2ba7bc571f9c78641904b68303f10",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/analytical_close_executor.py": "81660c5da9d3498912746c16c338ea14fc70afbbf0ada932ad5f24af1f5fb85f",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_disposition.py": "df9c34a75230a858dfc9038e75d9c6fa51c86fe6d60bf6b0412ea368904e540e",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_provider_gate.py": "7d4c980ee3f3d747a335856f29a7291e8d6d395d44ee9120eaa573a08f86acbe",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/residual_provider_invocation.py": "ba72ea67a61457739bce6364aa0c87bc1dd8096aeada7435a79081e5b2c97f32",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/residual_provider.py": "4b5195d00857921ad1a396b554d975ef584f5b48e8527fd1b8d7d36564b608c4"
+  },
+  "task_id": "NS-008"
+}
