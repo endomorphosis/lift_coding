@@ -1,0 +1,16 @@
+{"action":"RUN","at":"2026-09-12T09:22:40.144284+00:00","case_id":"unconditional_callback_rejected","reason":"illegal_authority","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.144516+00:00","case_id":"missing_verifier_unavailable","reason":"verifier_unavailable","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.144662+00:00","case_id":"mismatched_verifier_authority","reason":"trust_policy_rejected","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.144790+00:00","case_id":"ns011_placeholder_certificate_rejected","reason":"certificate_non_attested","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.144915+00:00","case_id":"changed_certificate_bytes_rejected","reason":"candidate_integrity_failed","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145037+00:00","case_id":"stale_key_without_rebind_rejected","reason":"execution_key_mismatch","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145158+00:00","case_id":"missing_candidate_run","reason":"candidate_missing","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145286+00:00","case_id":"policy_mismatch_run","reason":"policy_mismatch","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145409+00:00","case_id":"simulated_certificate_rejected","reason":"certificate_non_attested","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145537+00:00","case_id":"incomplete_trace_fallback","reason":"incomplete_trace","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145655+00:00","case_id":"native_provider_cannot_authorize_skip","reason":"malformed_artifact","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145771+00:00","case_id":"setup_call_teardown_recorded","reason":"teardown_ran_after_setup_and_call","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.145885+00:00","case_id":"teardown_failure_cannot_skip","reason":"receipt_mismatch","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.146009+00:00","case_id":"unknown_effectful_fallback","reason":"eligibility_denied","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:22:40.146127+00:00","case_id":"pytest_skip_not_safe_agreement","reason":"plain_skip_not_evidence","status":"pass"}
+{"action":"RUN","at":"2026-09-12T09:23:34.701838+00:00","case_id":"historical_xmltodict_unchanged_baseline_cold","reason":"reuse_not_admitted_full_cold","status":"pass"}
