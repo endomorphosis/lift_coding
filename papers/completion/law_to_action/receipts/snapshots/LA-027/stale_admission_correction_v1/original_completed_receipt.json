@@ -54,14 +54,7 @@
     "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/unittest.stderr.log": "513dce91d5da218f9cfd52f1b8d7f56f9766016d7126be81e45b22f70d0df6d8",
     "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/unittest.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stdout.log": "a540fe589361377b033dc30ff363f013add5a8295c6b02ed7368d9e498e0ec56",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/original_completed_receipt.json": "0f5604f3b91548e17911f4272d1dda4517fba0a63c78469e45c18cd05fbefdc0",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/benchmark/automated_evidence.py": "7ced94a508638cf4fd7c67357c3a14cbded1283c67046c3b6af40887049a3757",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/benchmark/qualify_final_runtime.py": "82dc0a54c039f083140df169be287d440a7a18ae4d623bf04e0e23c761a6cf7b",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log": "c16fe6a7a5696121cec7dc0ed845cd3644825067dd4e073bad9c42b528a9999b",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/correction.json": "8993c7a1e3d499556201fcf0fe6fd4696200942333a5a85fd555eefa7594c67c",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/qualification.json": "66212b65601f1c732a4eae2392d6756ff8f7ad8a5c5081c980e6f354901edf5a",
-    "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py": "b1d528dfaa20087f7e684919955a9617902cc76fea0ebf4cde5580c707b7ca20"
+    "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stdout.log": "a540fe589361377b033dc30ff363f013add5a8295c6b02ed7368d9e498e0ec56"
   },
   "commands": [
     {
@@ -186,23 +179,10 @@
       "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stdout.log",
       "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-027/validate_automated_scope.py",
       "started_at": "2026-09-12T15:36:56.707260+00:00"
-    },
-    {
-      "argv": [
-        "/usr/bin/python3.12",
-        "-B",
-        "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py"
-      ],
-      "cwd": ".",
-      "exit_code": 0,
-      "started_at": "2026-09-12T15:52:42.754116+00:00",
-      "finished_at": "2026-09-12T15:52:43.985896+00:00",
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py"
     }
   ],
-  "completed_at": "2026-09-12T15:54:31.004252+00:00",
-  "completion_mode": "Bound the LA-027/v1 automated evidence amendment to the unchanged source population, original protocol hash, original LA-005/007/026/028 receipts and blank packets. Typed automated admission succeeded without reviewer identities or human labels. Focused controls refused missing bindings, incomplete accounting, invalid expectation provenance, self-reported success, stale profile/budget and automated output labeled human gold. Isolated A4 qualification executed SAT, UCAN, ENFORCE and the independent effect observer. Fixtures remain qualification-only. This is not scored LA-009/LA-015 and not human gold. An explicit later stale-admission correction preserves this original receipt and all snapshots, fixes continuing admission authority, and records new metadata-only CLI validation. It does not replay the completed worker or its native scientific qualification.",
+  "completed_at": "2026-09-12T15:36:56.841252+00:00",
+  "completion_mode": "Bound the LA-027/v1 automated evidence amendment to the unchanged source population, original protocol hash, original LA-005/007/026/028 receipts and blank packets. Typed automated admission succeeded without reviewer identities or human labels. Focused controls refused missing bindings, incomplete accounting, invalid expectation provenance, self-reported success, stale profile/budget and automated output labeled human gold. Isolated A4 qualification executed SAT, UCAN, ENFORCE and the independent effect observer. Fixtures remain qualification-only. This is not scored LA-009/LA-015 and not human gold.",
   "criteria": [
     {
       "criterion": "An explicit versioned amendment binds the unchanged source population/splits, original protocol and receipts, machine-expectation provenance, permitted automated metrics and withdrawn expert/legal-validity/human-agreement claims before any new evaluated predictions.",
@@ -226,13 +206,9 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/automated_admission.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/admission_controls.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/unittest.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/correction.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/qualification.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log"
+        "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/validate.stdout.log"
       ],
-      "explanation": "automated_evidence.py admitted a normal envelope with reviewer_id=absent and independent_human_gold=false, scored=false, exit_status=0. Eight focused controls each refused with exit_status=2 for missing runtime/source bindings, incomplete case accounting, invalid expectation provenance, self-reported success, stale profile, stale budget, and automated output labeled independent human gold. validate_automated_scope.py re-ran a failing admit subprocess and observed process exit 2. Post-completion correction: the real saved-admission CLI path is now covered by 11 additional controls (20 CLI invocations and three direct analysis checks). The original stale-profile acceptance is reproduced and explicitly corrected; old source/profile admissions now refuse. Original human-gold restrictions remain unchanged.",
+      "explanation": "automated_evidence.py admitted a normal envelope with reviewer_id=absent and independent_human_gold=false, scored=false, exit_status=0. Eight focused controls each refused with exit_status=2 for missing runtime/source bindings, incomplete case accounting, invalid expectation provenance, self-reported success, stale profile, stale budget, and automated output labeled independent human gold. validate_automated_scope.py re-ran a failing admit subprocess and observed process exit 2.",
       "status": "met"
     },
     {
@@ -244,10 +220,9 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/source_pipeline_summary.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/qualification_summary.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/runtime_manifest.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/qualify.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/correction.json"
+        "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/qualify.stdout.log"
       ],
-      "explanation": "qualify-automated ran native legal/CVE/skill adapters on 12 development cases (11 predictions, 1 failures) then A4 SAT/UCAN/ENFORCE/DuckDB/BoundedExportHandler/EffectObserver. handler_boundary_reached=True; proof=True; capability=True; allow=allow; deny=deny. Fixture harness is not production. held_out_result_inferred=false and useful_work_success_inferred_from_fixtures=false. Commands, hashes and raw logs are retained in results/automated_scope_qualification and this snapshot. This native runtime execution is historical under the original pinned source; the later correction changes saved-admission validation only and adds no scientific execution credit. See the explicit unchanged-function correspondence in the correction record.",
+      "explanation": "qualify-automated ran native legal/CVE/skill adapters on 12 development cases (11 predictions, 1 failures) then A4 SAT/UCAN/ENFORCE/DuckDB/BoundedExportHandler/EffectObserver. handler_boundary_reached=True; proof=True; capability=True; allow=allow; deny=deny. Fixture harness is not production. held_out_result_inferred=false and useful_work_success_inferred_from_fixtures=false. Commands, hashes and raw logs are retained in results/automated_scope_qualification and this snapshot.",
       "status": "met"
     },
     {
@@ -259,13 +234,9 @@
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/review_import_refusal.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/final_analysis.json",
         "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/admit.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/analyze.stdout.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/correction.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/qualification.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py",
-        "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log"
+        "papers/completion/law_to_action/receipts/snapshots/LA-027/validation/analyze.stdout.log"
       ],
-      "explanation": "FINAL_RUN.md, protocol.json/md and qualify_final_runtime.py admit-final/analyze use the automated scope and do not require outside reviewers. Human fields remain absent/uncollected; optional author review is labeled non-independent and uncollected. review_import.py still refuses a missing return and is not the automated gate. Original LA-005/007/026/028 receipts and blank review_packet_manifest.json hashes are unchanged. No fabricated review.admitted=true value was written. Post-completion correction: the real saved-admission CLI path is now covered by 11 additional controls (20 CLI invocations and three direct analysis checks). The original stale-profile acceptance is reproduced and explicitly corrected; old source/profile admissions now refuse. Original human-gold restrictions remain unchanged.",
+      "explanation": "FINAL_RUN.md, protocol.json/md and qualify_final_runtime.py admit-final/analyze use the automated scope and do not require outside reviewers. Human fields remain absent/uncollected; optional author review is labeled non-independent and uncollected. review_import.py still refuses a missing return and is not the automated gate. Original LA-005/007/026/028 receipts and blank review_packet_manifest.json hashes are unchanged. No fabricated review.admitted=true value was written.",
       "status": "met"
     }
   ],
@@ -275,19 +246,17 @@
     "SAT evidence cannot authorize theorem_proof allows.",
     "Closed-loop model arms are unrun; no scientific model is pinned.",
     "Optional author review was not collected and is not independent.",
-    "Original LA-005/007/026/028 receipts and blank packets remain historical and are not human gold.",
-    "Original saved admission remains historical and is stale under corrected current source; normal fresh source/runtime qualification is required before a future scientific run.",
-    "No source-body, held-out, scorer, handler, proof, model or provider execution occurred during this post-completion correction."
+    "Original LA-005/007/026/028 receipts and blank packets remain historical and are not human gold."
   ],
   "outputs": {
     "papers/completion/law_to_action/benchmark/AUTOMATED_EVIDENCE_SCOPE.md": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/AUTOMATED_EVIDENCE_SCOPE.md",
     "papers/completion/law_to_action/benchmark/FINAL_RUN.md": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/FINAL_RUN.md",
     "papers/completion/law_to_action/benchmark/annotations/automated_reference_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/annotations/automated_reference_manifest.json",
-    "papers/completion/law_to_action/benchmark/automated_evidence.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/benchmark/automated_evidence.py",
+    "papers/completion/law_to_action/benchmark/automated_evidence.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/automated_evidence.py",
     "papers/completion/law_to_action/benchmark/automated_evidence_amendment.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/automated_evidence_amendment.json",
     "papers/completion/law_to_action/benchmark/protocol.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/protocol.json",
     "papers/completion/law_to_action/benchmark/protocol.md": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/protocol.md",
-    "papers/completion/law_to_action/benchmark/qualify_final_runtime.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/benchmark/qualify_final_runtime.py",
+    "papers/completion/law_to_action/benchmark/qualify_final_runtime.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/qualify_final_runtime.py",
     "papers/completion/law_to_action/benchmark/source_pipeline.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/source_pipeline.py",
     "papers/completion/law_to_action/benchmark/tests/test_automated_evidence.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/benchmark/tests/test_automated_evidence.py",
     "papers/completion/law_to_action/results/automated_scope_qualification/admission_controls.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/admission_controls.json",
@@ -318,50 +287,29 @@
     "papers/completion/law_to_action/results/automated_scope_qualification/source_pipeline_freeze.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/source_pipeline_freeze.json",
     "papers/completion/law_to_action/results/automated_scope_qualification/source_pipeline_summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/source_pipeline_summary.json",
     "papers/completion/law_to_action/results/automated_scope_qualification/source_predictions.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/source_predictions.jsonl",
-    "papers/completion/law_to_action/results/automated_scope_qualification/source_records.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/source_records.jsonl",
-    "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log",
-    "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/correction.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/correction.json",
-    "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/qualification.json": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/qualification.json",
-    "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/outputs/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py"
+    "papers/completion/law_to_action/results/automated_scope_qualification/source_records.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-027/outputs/results/automated_scope_qualification/source_records.jsonl"
   },
   "paper_id": "law_to_action",
   "schema": "paper-task-evidence/v1",
   "source_versions": {
-    "historical_runtime_qualification": {
-      "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-      "automated_evidence.py_sha256": "a9a77e526df7a12706e8c988bf9f9ec383d134eb5dae84b2f2c2a96d1fabdcd6",
-      "cryptography": "49.0.0",
-      "duckdb": "1.5.2",
-      "empirical_benchmark_result": false,
-      "evidence_scope": "automated_source_contracts_and_policy_effects",
-      "independent_human_gold": false,
-      "optional_author_review_independent": false,
-      "original_protocol_sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
-      "python": "Python 3.12.3",
-      "python_executable": "/usr/bin/python3.12",
-      "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
-      "qualify_final_runtime.py_sha256": "6eeec0db6fbebb185e7f29f71022fdc34912dedc0e398a2192d3f749d4ce0510",
-      "selected_arm": "A4",
-      "source_pipeline.py_sha256": "cbdc5792c6b0d2ef3d38ef31e2bd8aab0c87fe5b120b5a509b355e048934e8c8",
-      "sympy": "1.14.0",
-      "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
-    },
-    "post_completion_source_sha256": {
-      "automated_evidence.py": "7ced94a508638cf4fd7c67357c3a14cbded1283c67046c3b6af40887049a3757",
-      "qualify_final_runtime.py": "82dc0a54c039f083140df169be287d440a7a18ae4d623bf04e0e23c761a6cf7b"
-    },
-    "metadata_cli_python": "/usr/bin/python3.12",
-    "qualification_scope": "Copied source/metadata CLI controls only; no native handlers, provider, scorer or held-out run."
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "automated_evidence.py_sha256": "a9a77e526df7a12706e8c988bf9f9ec383d134eb5dae84b2f2c2a96d1fabdcd6",
+    "cryptography": "49.0.0",
+    "duckdb": "1.5.2",
+    "empirical_benchmark_result": false,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "independent_human_gold": false,
+    "optional_author_review_independent": false,
+    "original_protocol_sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "qualify_final_runtime.py_sha256": "6eeec0db6fbebb185e7f29f71022fdc34912dedc0e398a2192d3f749d4ce0510",
+    "selected_arm": "A4",
+    "source_pipeline.py_sha256": "cbdc5792c6b0d2ef3d38ef31e2bd8aab0c87fe5b120b5a509b355e048934e8c8",
+    "sympy": "1.14.0",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
   },
   "status": "complete",
-  "task_id": "LA-027",
-  "original_completed_at": "2026-09-12T15:36:56.841252+00:00",
-  "post_completion_correction": {
-    "schema": "la027-post-completion-stale-admission-correction/v1",
-    "original_receipt_path": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/original_completed_receipt.json",
-    "original_receipt_sha256": "0f5604f3b91548e17911f4272d1dda4517fba0a63c78469e45c18cd05fbefdc0",
-    "record_path": "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/correction.json",
-    "native_status_revision_unchanged": "completed5",
-    "scientific_results_rerun": false
-  }
+  "task_id": "LA-027"
 }

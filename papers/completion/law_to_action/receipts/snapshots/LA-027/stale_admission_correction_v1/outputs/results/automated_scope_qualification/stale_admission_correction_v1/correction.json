@@ -1,0 +1,93 @@
+{
+  "schema": "la027-post-completion-stale-admission-correction/v1",
+  "observed_at": "2026-09-12T15:54:31.003711+00:00",
+  "original_completed_source": "a6c8838d023642b16de37422c5c45b79ca020563",
+  "original_receipt": {
+    "path": "papers/completion/law_to_action/receipts/snapshots/LA-027/stale_admission_correction_v1/original_completed_receipt.json",
+    "sha256": "0f5604f3b91548e17911f4272d1dda4517fba0a63c78469e45c18cd05fbefdc0",
+    "completed_at": "2026-09-12T15:36:56.841252+00:00"
+  },
+  "defect": "The completed admit-final and analyze CLI trusted a saved admitted boolean without rebinding the original envelope to current source, profile, budget and population. A normal saved admission followed by a later baselines.py source revision was still accepted by both original commands.",
+  "correction": "Both CLI paths now call the existing automated admission route on the retained original envelope and compare its complete stable admission record to the saved record. Only the observation timestamp may differ. Direct automated_analysis requires and revalidates the envelope.",
+  "qualification": {
+    "schema": "la027-saved-admission-cli-qualification/v1",
+    "executed": true,
+    "scope": "Actual standard-library CLI execution over copied source and metadata only; no source bodies, native runtime, handler, provider or scorer execution.",
+    "test_count": 11,
+    "cli_invocations": 20,
+    "direct_analysis_controls": 3,
+    "all_passed": true,
+    "command": {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T15:52:42.754116+00:00",
+      "finished_at": "2026-09-12T15:52:43.985896+00:00",
+      "log": "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log"
+    },
+    "historical_defect_reproduced": [
+      {
+        "command": "admit-final",
+        "exit_code": 0,
+        "stale_profile_accepted": true,
+        "scored": false
+      },
+      {
+        "command": "analyze",
+        "exit_code": 0,
+        "stale_profile_accepted": true,
+        "scored": false
+      }
+    ],
+    "source_sha256": {
+      "automated_evidence.py": "7ced94a508638cf4fd7c67357c3a14cbded1283c67046c3b6af40887049a3757",
+      "qualify_final_runtime.py": "82dc0a54c039f083140df169be287d440a7a18ae4d623bf04e0e23c761a6cf7b"
+    },
+    "test_sha256": "b1d528dfaa20087f7e684919955a9617902cc76fea0ebf4cde5580c707b7ca20",
+    "log_sha256": "c16fe6a7a5696121cec7dc0ed845cd3644825067dd4e073bad9c42b528a9999b",
+    "native_runtime_calls": 0,
+    "provider_calls": 0,
+    "scorer_calls": 0,
+    "old_receipt_and_original_snapshots_modified": false
+  },
+  "source_equivalence": {
+    "automated_evidence.py": {
+      "unchanged_function_count": 26,
+      "changed_or_added_function_names": [
+        "automated_analysis",
+        "load_saved_admission",
+        "main",
+        "revalidate_admission"
+      ],
+      "old_sha256": "a9a77e526df7a12706e8c988bf9f9ec383d134eb5dae84b2f2c2a96d1fabdcd6",
+      "new_sha256": "7ced94a508638cf4fd7c67357c3a14cbded1283c67046c3b6af40887049a3757"
+    },
+    "qualify_final_runtime.py": {
+      "unchanged_function_count": 29,
+      "changed_or_added_function_names": [
+        "admit_final",
+        "main",
+        "qualify_automated"
+      ],
+      "old_sha256": "6eeec0db6fbebb185e7f29f71022fdc34912dedc0e398a2192d3f749d4ce0510",
+      "new_sha256": "82dc0a54c039f083140df169be287d440a7a18ae4d623bf04e0e23c761a6cf7b"
+    }
+  },
+  "historical_native_qualification": "The original source-adapter/SAT/UCAN/handler/observer execution and its failures remain exact historical evidence under the original source hashes. This correction executes only copied-metadata CLI controls. Unchanged native and handler functions are not reattributed as newly executed.",
+  "existing_result_directory": "Original automated_scope_qualification records remain untouched; their old admission is intentionally stale under the corrected source. Future studies must qualify/freeze their current source normally in a fresh directory. No admission is fabricated by rebinding an old success.",
+  "scope_unchanged": {
+    "outside_human_review_required": false,
+    "human_gold_created": false,
+    "held_out_scored": false,
+    "new_scientific_runs": 0,
+    "new_providers": 0,
+    "new_handlers": 0,
+    "task_status_or_attempt_rewritten": false,
+    "current_source_must_requalify_before_scientific_admission": true
+  },
+  "native_followup": "Append a passed ordinary current-output verify-task record and distinct corrective evidence through the existing owner APIs. Preserve completed5, its old completion receipt, all attempts and effects."
+}
