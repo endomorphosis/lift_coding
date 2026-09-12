@@ -1,0 +1,362 @@
+{
+  "admitted_feedback": 69,
+  "completed_task_status_insufficient": true,
+  "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+  "created_at": "2026-09-12T09:01:37.425462+00:00",
+  "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+  "e_locked_until": "AF-013 canary/consumer receipt naming these exact identities",
+  "eligible_checkpoint_identities": [
+    "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+    "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+    "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+    "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+    "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+    "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74"
+  ],
+  "encoder": {
+    "independent_gold": false,
+    "inputs_sha256": "6177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a",
+    "mock": false,
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "preprocessing_manifest_sha256": "adc840668b7d12bb4eeebae23749b26939b9d90720d422c462291d4e0e9b1e01",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "source_gold": false,
+    "tokenization": "WordPiece without truncation; 254-content-token windows plus specials",
+    "window_aggregation": "attention-mask mean pool, L2 per window, content-token-weighted average, document L2"
+  },
+  "export_alone_insufficient": true,
+  "final_test_used_to_select_settings": false,
+  "generic_file_existence_insufficient": true,
+  "mock_teacher": false,
+  "native_feedback_receipts": 138,
+  "native_update_receipts": [
+    {
+      "accepted_epochs": 0,
+      "applied_packed_updates": 1,
+      "backend": "packed_cpu",
+      "gradient_norms": [
+        0.0,
+        0.0
+      ],
+      "losses": [
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {}
+      ],
+      "parameter_changed": false,
+      "report_count": 2,
+      "seed": 104729
+    },
+    {
+      "accepted_epochs": 0,
+      "applied_packed_updates": 1,
+      "backend": "packed_cpu",
+      "gradient_norms": [
+        0.0,
+        0.0
+      ],
+      "losses": [
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {}
+      ],
+      "parameter_changed": false,
+      "report_count": 2,
+      "seed": 130363
+    },
+    {
+      "accepted_epochs": 0,
+      "applied_packed_updates": 1,
+      "backend": "packed_cpu",
+      "gradient_norms": [
+        0.0,
+        0.0
+      ],
+      "losses": [
+        {
+          "cosine": 0.0,
+          "cross_entropy": 0.0,
+          "guarded_auxiliary": 0.0,
+          "l2": 0.0,
+          "legal_ir_cross_entropy": 0.6931471824645996,
+          "reconstruction": 0.0,
+          "total": 0.6931471824645996
+        },
+        {}
+      ],
+      "parameter_changed": false,
+      "report_count": 2,
+      "seed": 155921
+    }
+  ],
+  "promotion_unlocked": false,
+  "protected_state_comparisons": [
+    {
+      "applied_count": 69,
+      "eligible_count": 69,
+      "execution_status": "measured",
+      "matched_t2_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_parameters_unchanged": true,
+      "seed": 104729,
+      "t3_final_checkpoint_sha256": "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+      "t3_initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "t3_status": "applied",
+      "termination_reason": "completed_isolated_proof_head_updates",
+      "unresolved_gate": null,
+      "update_count": 69
+    },
+    {
+      "applied_count": 69,
+      "eligible_count": 69,
+      "execution_status": "measured",
+      "matched_t2_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_parameters_unchanged": true,
+      "seed": 130363,
+      "t3_final_checkpoint_sha256": "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+      "t3_initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "t3_status": "applied",
+      "termination_reason": "completed_isolated_proof_head_updates",
+      "unresolved_gate": null,
+      "update_count": 69
+    },
+    {
+      "applied_count": 69,
+      "eligible_count": 69,
+      "execution_status": "measured",
+      "matched_t2_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "protected_fingerprint_after": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_fingerprint_before": "62be4b70718a32473772438ba0d382bd11253b3dfb71b507c605f356b253b152",
+      "protected_parameters_unchanged": true,
+      "seed": 155921,
+      "t3_final_checkpoint_sha256": "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+      "t3_initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "t3_status": "applied",
+      "termination_reason": "completed_isolated_proof_head_updates",
+      "unresolved_gate": null,
+      "update_count": 69
+    }
+  ],
+  "runs": [
+    {
+      "arm_id": "T0",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 29.374,
+      "final_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "projection_update_backend": null,
+      "replay": 1,
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seed": null,
+      "state_unchanged": true,
+      "termination_reason": "deterministic_codec_no_update",
+      "update_count": 0
+    },
+    {
+      "arm_id": "T0",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 4.279,
+      "final_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "projection_update_backend": null,
+      "replay": 2,
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seed": null,
+      "state_unchanged": true,
+      "termination_reason": "deterministic_codec_no_update",
+      "update_count": 0
+    },
+    {
+      "arm_id": "T0",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 4.282,
+      "final_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "projection_update_backend": null,
+      "replay": 3,
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seed": null,
+      "state_unchanged": true,
+      "termination_reason": "deterministic_codec_no_update",
+      "update_count": 0
+    },
+    {
+      "arm_id": "T1",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 18.442,
+      "final_checkpoint_sha256": "90486022f1e3d70b05a7cd68f1d90c8005fb36776e3c6efe35346f50c8edcd1b",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "sample_memory_enabled_for_evaluation": true,
+      "sample_memory_enabled_for_update": true,
+      "sample_memory_entry_count": 69,
+      "seed": 104729,
+      "termination_reason": "completed_sample_memory_updates",
+      "update_count": 138
+    },
+    {
+      "arm_id": "T1",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 18.109,
+      "final_checkpoint_sha256": "b213dd89cb106ea4fea99e5b0ddb7c84c7c3f42a5b75f3997b720fec1782e921",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "sample_memory_enabled_for_evaluation": true,
+      "sample_memory_enabled_for_update": true,
+      "sample_memory_entry_count": 69,
+      "seed": 130363,
+      "termination_reason": "completed_sample_memory_updates",
+      "update_count": 138
+    },
+    {
+      "arm_id": "T1",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 18.174,
+      "final_checkpoint_sha256": "7fe82d30915fc16aedc8ec44d88aef56c48c63a165a03193a8ae49be09668ec6",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "sample_memory_enabled_for_evaluation": true,
+      "sample_memory_enabled_for_update": true,
+      "sample_memory_entry_count": 69,
+      "seed": 155921,
+      "termination_reason": "completed_sample_memory_updates",
+      "update_count": 138
+    },
+    {
+      "arm_id": "T2",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 35.659,
+      "final_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "packed_cpu_applied_updates": 1,
+      "parameter_changed": false,
+      "projection_update_backend": "packed_cpu",
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "sample_memory_entry_count": 0,
+      "seed": 104729,
+      "stopped_reason": "RuntimeError: packed CPU update rejected: cuda_packed_training_failed:UnsafeParameterKeyError",
+      "termination_reason": "packed_cpu_update_failure",
+      "update_count": 0
+    },
+    {
+      "arm_id": "T3",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 0.018,
+      "final_checkpoint_sha256": "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "matched_t2_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "protected_parameters_unchanged": true,
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seed": 104729,
+      "termination_reason": "completed_isolated_proof_head_updates",
+      "update_count": 69
+    },
+    {
+      "arm_id": "T2",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 36.203,
+      "final_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "packed_cpu_applied_updates": 1,
+      "parameter_changed": false,
+      "projection_update_backend": "packed_cpu",
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "sample_memory_entry_count": 0,
+      "seed": 130363,
+      "stopped_reason": "RuntimeError: packed CPU update rejected: cuda_packed_training_failed:UnsafeParameterKeyError",
+      "termination_reason": "packed_cpu_update_failure",
+      "update_count": 0
+    },
+    {
+      "arm_id": "T3",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 0.017,
+      "final_checkpoint_sha256": "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "matched_t2_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "protected_parameters_unchanged": true,
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seed": 130363,
+      "termination_reason": "completed_isolated_proof_head_updates",
+      "update_count": 69
+    },
+    {
+      "arm_id": "T2",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 35.668,
+      "final_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "packed_cpu_applied_updates": 1,
+      "parameter_changed": false,
+      "projection_update_backend": "packed_cpu",
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "sample_memory_entry_count": 0,
+      "seed": 155921,
+      "stopped_reason": "RuntimeError: packed CPU update rejected: cuda_packed_training_failed:UnsafeParameterKeyError",
+      "termination_reason": "packed_cpu_update_failure",
+      "update_count": 0
+    },
+    {
+      "arm_id": "T3",
+      "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+      "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+      "elapsed_seconds": 0.017,
+      "final_checkpoint_sha256": "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+      "initial_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "matched_t2_checkpoint_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "protected_parameters_unchanged": true,
+      "sample_memory_enabled_for_evaluation": false,
+      "sample_memory_enabled_for_update": false,
+      "seed": 155921,
+      "termination_reason": "completed_isolated_proof_head_updates",
+      "update_count": 69
+    }
+  ],
+  "schema": "autoformalization-native-training-checkpoints/v1",
+  "t2_identities": [
+    "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+    "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+    "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737"
+  ],
+  "t3_identities": [
+    "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+    "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74",
+    "b1534233d4b25559e750b27fe42cf7d1b44b4139dc5a970dbad5b67e504b3c74"
+  ],
+  "task_id": "AF-029",
+  "teacher_manifest": "papers/completion/autoformalization/data/native_training_teacher_manifest.json",
+  "teacher_manifest_sha256": "f80169c5e6b251774d26016bc7d8739b6ba195a737f902107b526936fd76cc06"
+}

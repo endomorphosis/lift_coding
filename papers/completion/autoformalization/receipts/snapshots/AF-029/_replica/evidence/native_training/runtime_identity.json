@@ -1,0 +1,94 @@
+{
+  "any_native_checker_usable": true,
+  "home": "/tmp/asref-grok-home-ln3ymi_i",
+  "home_is_validation_private": false,
+  "interpreter": "/usr/bin/python3.12",
+  "launcher": "/opt/ipfs-accelerate/provider-command-env",
+  "native_checkers": {
+    "coqc": {
+      "on_process_path": false,
+      "resolved_path": null,
+      "sha256": null,
+      "usable": false,
+      "version": null
+    },
+    "cvc5": {
+      "on_process_path": true,
+      "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/cvc5",
+      "sha256": "cad00b4849b015ea6a7790f73cecdf639423f1a17f2c5ec90fda783f778611fb",
+      "usable": true,
+      "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+    },
+    "eprover": {
+      "on_process_path": false,
+      "resolved_path": null,
+      "sha256": null,
+      "usable": false,
+      "version": null
+    },
+    "isabelle": {
+      "on_process_path": false,
+      "resolved_path": null,
+      "sha256": null,
+      "usable": false,
+      "version": null
+    },
+    "lake": {
+      "on_process_path": true,
+      "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lake",
+      "sha256": "8229bc302b0b7d0e7679e28cc2b830c5aec995ffe5714833503360252f1490ba",
+      "usable": true,
+      "version": "Lake version 5.0.0-src+819816b (Lean version 4.33.1)"
+    },
+    "lean": {
+      "on_process_path": true,
+      "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+      "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+      "usable": true,
+      "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+    },
+    "vampire": {
+      "on_process_path": false,
+      "resolved_path": null,
+      "sha256": null,
+      "usable": false,
+      "version": null
+    },
+    "z3": {
+      "on_process_path": true,
+      "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+      "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+      "usable": true,
+      "version": "Z3 version 4.15.4 - 64 bit"
+    }
+  },
+  "packages": {
+    "numpy": {
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/numpy/__init__.py",
+      "ok": true,
+      "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e",
+      "version": "1.26.4"
+    },
+    "torch": {
+      "cpu": true,
+      "cuda_available": false,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/torch/__init__.py",
+      "ok": true,
+      "sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+      "version": "2.13.0+cpu"
+    }
+  },
+  "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/",
+  "process_path_equals_sealed": false,
+  "pythonpath": "/home/barberb/.local/share/vericodegen-research-runtime/python:/opt/ipfs-validation-site-packages",
+  "research_bin_on_path": true,
+  "research_toolchain_sha256": "babc2ef29c2e4328b4a7ebb13f639b35a3e24c2c79abd8aa16ee3f6e70943bc7",
+  "resource_limits": {
+    "compute_device": "cpu",
+    "gpu_or_model_service_slots": 1,
+    "memory_gib": 16,
+    "per_seed_wall_minutes": 30
+  },
+  "stripped_profile_is_error": true,
+  "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+}

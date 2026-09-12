@@ -1,0 +1,63 @@
+{
+  "all_five_containers_removed": true,
+  "completed": true,
+  "container_exit_code": 0,
+  "final_sources_or_labels_accessed": false,
+  "grouping_vectors_reused": false,
+  "input_artifact_sha256": "6177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a",
+  "input_population_unchanged": true,
+  "manifest_sha256": "adc840668b7d12bb4eeebae23749b26939b9d90720d422c462291d4e0e9b1e01",
+  "model_files_verified": 11,
+  "negative_controls": [
+    {
+      "case": "missing_row",
+      "rejected": true
+    },
+    {
+      "case": "unexpected_id",
+      "rejected": true
+    },
+    {
+      "case": "altered_vector",
+      "rejected": true
+    },
+    {
+      "case": "nonfinite_vector",
+      "rejected": true
+    },
+    {
+      "case": "window_gap",
+      "rejected": true
+    },
+    {
+      "case": "wrong_source",
+      "rejected": true
+    },
+    {
+      "case": "gold_claim",
+      "rejected": true
+    }
+  ],
+  "no_source_gold_or_compiler_target_credit": true,
+  "positive": {
+    "content_tokens": 130693,
+    "dimensions": 384,
+    "final_inputs": 0,
+    "rows": 84,
+    "source_rows_omitted": 0,
+    "splits": {
+      "selection": 15,
+      "train": 69
+    },
+    "uncovered_content_tokens": 0,
+    "windows": 559
+  },
+  "producer_sha256": "b048c6b138f74de30ffede11223a4ae9f02846e9bc536215bf6f645dfab94d1d",
+  "qualified_at": "2026-09-12T07:43:07.241218+00:00",
+  "real_offline_encoder_execution": true,
+  "runtime_dependency_files_verified": 2318,
+  "schema": "af-native-training-input-qualification/v1",
+  "scientific_training_completed": false,
+  "unique_vectors": 84,
+  "verifier_sha256": "a90f5818b0fb725cfcc9830cbfc8c0d83a7ab278c7fe344ca81e70c674e311fd"
+}

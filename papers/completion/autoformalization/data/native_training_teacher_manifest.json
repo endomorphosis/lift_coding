@@ -1,0 +1,2394 @@
+{
+  "compile_failures": 0,
+  "created_at": "2026-09-12T09:01:37.415182+00:00",
+  "empty_target_map": false,
+  "encoder": {
+    "independent_gold": false,
+    "inputs_sha256": "6177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a",
+    "mock": false,
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "preprocessing_manifest_sha256": "adc840668b7d12bb4eeebae23749b26939b9d90720d422c462291d4e0e9b1e01",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "source_gold": false,
+    "tokenization": "WordPiece without truncation; 254-content-token windows plus specials",
+    "window_aggregation": "attention-mask mean pool, L2 per window, content-token-weighted average, document L2"
+  },
+  "final_test_access": false,
+  "human_review": "pending_AF-028",
+  "native_checker_feedback": {
+    "admitted_records": 69,
+    "constructed_isolation_probes_are_not_t3_labels": true,
+    "receipts": 138,
+    "unresolved_gate": null
+  },
+  "population": {
+    "final_test": 0,
+    "selection": 15,
+    "train": 69
+  },
+  "producer": {
+    "entry_point": "ipfs_datasets_py.logic.intent_ir.formalize.compiler.IntentFormalizationCompiler",
+    "proof_backend_execution": false,
+    "source": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+    "source_sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+    "version": "intent-formalization-compiler/v1",
+    "vocabulary": "intent-ir-view-registry/v1"
+  },
+  "rows": [
+    {
+      "artifact_sha256": "72d32d2c8aff27394b733d56e0eb4599493034f96a12cdec15ac6cb184532896",
+      "declaration_digest": "sha256:0baef95288c1423fbaafe6e01e2256abb4673eea256749295e6c2e2ad99eb729",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "c5666038bf8d82ce2ed4bfacc2607652de991c1fb021100676d1d1222e019f98",
+      "goal_id": "goal-cfr:37:201.10:2024",
+      "independent_gold": false,
+      "input_document_sha256": "7b6e0d4ee9a42fda3b01f22eb5bb111523802e1938b297b9a9abce88aea8fc11",
+      "output_binding_sha256": "1c84581941931dc5f76d9677ac2210e8664e74f8a2f2b33bf1237efe7acc1f4d",
+      "premise_id": "src-cfr:37:201.10:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.10:2024",
+      "sample_id": "us-code-General Provisions-201.10-3a4795f229067d01",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "3c766e2d7942ff5e407198b421850b2089ff6227f66daf1f2be4e5ffc68091d2",
+      "declaration_digest": "sha256:16c2e789661bcebf5c91da8b9235e4f57fe6be4debdc12a770ebc55945e8262b",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "f25b4dfd037f85a42047c702f6329ad480eea7c3ef6499204c8f108050454152",
+      "goal_id": "goal-cfr:37:201.11:2024",
+      "independent_gold": false,
+      "input_document_sha256": "f5a3472c3213705ecf14c0abf0b8c30d73f69868bf288d89f8f7d38d832de81b",
+      "output_binding_sha256": "6393c8622a5772a7ef8f95ce42d2583b9e06bcfda74ab716e393661123d58164",
+      "premise_id": "src-cfr:37:201.11:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.11:2024",
+      "sample_id": "us-code-General Provisions-201.11-f9ac1a64d7706a63",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "f12cc646ab3c8768044fbaf034e3a119773c030506565aac02bc0f8a53fbe913",
+      "declaration_digest": "sha256:1331f47fd6ae6676af6db0e773cb2156c12d7fc59852fd57ce5e80ac145ebe36",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "59f9b09e38515e11f943e555446a9eeea2e96f34952a1a4dcc7f8d9722916be6",
+      "goal_id": "goal-cfr:37:201.12:2024",
+      "independent_gold": false,
+      "input_document_sha256": "972772cdb0fcd6b9ef5fe6f6540f940548224d9b6c6596b89d4e14fd37d4f4fa",
+      "output_binding_sha256": "8d1726664eb6f3194e11ea5b1c1413d503f744c1a47d673aee145c5c1b84a109",
+      "premise_id": "src-cfr:37:201.12:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.12:2024",
+      "sample_id": "us-code-General Provisions-201.12-6d6006db0b7eed5d",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "4feb2874ce529cbf07097ed570cc1c0d556b3070cf00413f65173b2ff77ecced",
+      "declaration_digest": "sha256:92cc85601da13cc249c37e1edb911d767e343c68bb5582d567b0f9569c6f2c80",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "e74ca0adb66b4150024926465dc42e40371cebd710b6302aee6c79262fa0a82b",
+      "goal_id": "goal-cfr:37:201.13:2024",
+      "independent_gold": false,
+      "input_document_sha256": "cb71995321197499f0c514eff103f3ae6e433e517e9d72fba8304f6ba6902911",
+      "output_binding_sha256": "97755b24afb3bd04fd18d34fd9bc53437a7dbbca9a0c1fba4bab76cba9d22d5d",
+      "premise_id": "src-cfr:37:201.13:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.13:2024",
+      "sample_id": "us-code-General Provisions-201.13-54763c7a73b3ec4f",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "c18c9e1fe98167e1b4ef80a209d2b897cae7f19f505850e81b9b1103fff56863",
+      "declaration_digest": "sha256:f5a2db30562d0689a08bd4134a62282a12914c21c517bd7d2da66720f618ac27",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "663b8fcacf30d8ec349d5e4178abf3d9b1e2f4ab034de4f22f434c8b6c594a90",
+      "goal_id": "goal-cfr:37:201.14:2024",
+      "independent_gold": false,
+      "input_document_sha256": "a8b019b7fe5b004e485b2688b4108eee04ee7d0a8b484f9b68eff0c15cc78b2d",
+      "output_binding_sha256": "5d248bfd485e5080091d69a26cf486748705029cff1a4d400eed308cadc78da9",
+      "premise_id": "src-cfr:37:201.14:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.14:2024",
+      "sample_id": "us-code-General Provisions-201.14-81d34dd03be45b09",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "7ac0d7a54f2da2f49c57ef1d3e15213308a549ab7d2be7f9b17d8572ae8e1c01",
+      "declaration_digest": "sha256:6bd93eb01e633f0edff5596e560c2547790f0e5fa92235464bd22dd5fb6f1778",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "9f47656eca349566cc7e0eff02b184d9e4191ebd288ccce860f9369cfbfbf996",
+      "goal_id": "goal-cfr:37:201.16:2024",
+      "independent_gold": false,
+      "input_document_sha256": "7a20082dae33fea5d83f4f83f20722d107ff123ffaa51bb99e56566ef1bb4233",
+      "output_binding_sha256": "663028933f0264fd6055d7093e9b8efe142ca1872350811ddecd4c453b1c491d",
+      "premise_id": "src-cfr:37:201.16:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.16:2024",
+      "sample_id": "us-code-General Provisions-201.16-a617d820154e2f77",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "562d5d1745703068d4d2dbb80f7ef172bcf741aaab764e11bcf2f0cf0e0fb308",
+      "declaration_digest": "sha256:8575f8c2e73310cfc35b127bfe14d8aee6b224c79a3f226df6d38508802c87e3",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "13b9cbce5b951b1224ee3e4a9e03f42cb984bbe32631355040c1ec31c082fda1",
+      "goal_id": "goal-cfr:37:201.17:2024",
+      "independent_gold": false,
+      "input_document_sha256": "6275978010a788e7b9215fc59f62ee3cb193e0b615b96acabfc2852d0e4d9229",
+      "output_binding_sha256": "0aac2a9ce2d964e95eab85fc96b147d78999f5a1316c6a9a7dc4c86026cbde41",
+      "premise_id": "src-cfr:37:201.17:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.17:2024",
+      "sample_id": "us-code-General Provisions-201.17-4a096e6c9ae4749e",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "858da571c2f381e356e604639c6c0558066645a339c9d5ca44b00cc78f19e3e0",
+      "declaration_digest": "sha256:978ffc56bf1157bebdb357a9dcda4c69def87f0c0379971c02b1d6b12dd234b3",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a1d0ef80f9b65d54bc1546597e98782c5e17432d94307f9486c54af8872f6caf",
+      "goal_id": "goal-cfr:37:201.18:2024",
+      "independent_gold": false,
+      "input_document_sha256": "285dac58462d0e03d09a1aa5e97fc907b6b61055eff1dfe1de3ac8ed380891df",
+      "output_binding_sha256": "f59151a15008dd615b2aabd45392787fa6203851ae686139934c8a1f6d064428",
+      "premise_id": "src-cfr:37:201.18:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.18:2024",
+      "sample_id": "us-code-General Provisions-201.18-d6163dc2b1014a8d",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "323d2308cf4ef86545d5e3bedc2a411ef9c54e1a127d49faf485e6963f0b3869",
+      "declaration_digest": "sha256:33df2f5ec3c81f9a435faef2b4c1009c797c99d3bf7b920b91c49d15235c00f3",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a5c62b4b8ae7fce3fcec1ff190d1906b449b9c9d4d1312d28f455d231dec50f8",
+      "goal_id": "goal-cfr:37:201.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "5d5b02a4feb0231f4bfe149db9530a5056a8690f1a27d13792142c064b3362b9",
+      "output_binding_sha256": "0ab480ac84fbcfabda083023c5a4f2e4ed513c4b6bb7d398a317a29342ddbaa7",
+      "premise_id": "src-cfr:37:201.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.1:2024",
+      "sample_id": "us-code-General Provisions-201.1-6abbf26404724daa",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "5121384ea06342ad9f3a6b69f22431930f104cd1c8b1b2c1d20a84d9d3d1e71d",
+      "declaration_digest": "sha256:25c84a57f5087cd8e07b59dc58fea0073a5924d3a796166a87eff91cea8d9576",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "8a9d86e5c97c494d527c68d721157222ba61aa478f70f5e3fd71def87dd3b5a7",
+      "goal_id": "goal-cfr:37:201.22:2024",
+      "independent_gold": false,
+      "input_document_sha256": "3d6815543e18b46e5d6b8312f8d6e43fdf205940bed16f9c539cc6fc8cb35e4e",
+      "output_binding_sha256": "e0dd43dd610ddb5fb02e476c4eeed0d1cc4f6c652908ed2bbc6c37740ec17005",
+      "premise_id": "src-cfr:37:201.22:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.22:2024",
+      "sample_id": "us-code-General Provisions-201.22-7711d7f0da6a9996",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "1c5b51672beb2b6c9a24a7b557be9d46e5e17e53ccc15cce5873c4e12d83d76b",
+      "declaration_digest": "sha256:794a1b29e2e6e252cda707609f13d58065385cca0d19ddbfb319b8d2577cf3d1",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "85723a1e9c5b03a86747221aa60cdbacc697a95245565ded9c4f79ce5979eda4",
+      "goal_id": "goal-cfr:37:201.23:2024",
+      "independent_gold": false,
+      "input_document_sha256": "d9a6dd5eec156e3cf40de353499c6db1746daa81726ad9fae01deda27e9c59d7",
+      "output_binding_sha256": "bf65db9c4144982fb1429940f889a81dae9f682dc7f05fc8d11e070f55b475ff",
+      "premise_id": "src-cfr:37:201.23:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.23:2024",
+      "sample_id": "us-code-General Provisions-201.23-e4b65b4d5927300f",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "9eac5742d94d4aa5599d8b7829a1cb8900c26b56c8e562bdd4096fee152b156f",
+      "declaration_digest": "sha256:31110678989f0b76753562e0469476f1040b6e7cddac9c03b2e838718962bacd",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "04a3bde151f5d43b85d191eb7c472a43c5bc36c74afddb8c0bb33ea378c8e65d",
+      "goal_id": "goal-cfr:37:201.24:2024",
+      "independent_gold": false,
+      "input_document_sha256": "efcc201d07bdf5195df3cc305ce0b06f8f7bc52aee187bd1bff01074833fc53e",
+      "output_binding_sha256": "a908cd6362ab0de2facd060dd58ea4e0f1436131081639d7522ec4641ad074e2",
+      "premise_id": "src-cfr:37:201.24:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.24:2024",
+      "sample_id": "us-code-General Provisions-201.24-2c5d7edcad4fb818",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "d4af4101d4d26166673ebbde9ba44c37de72d5e75d2ad7f9c6ad53edfd96c83b",
+      "declaration_digest": "sha256:475b5a3a7f5c39887e93a9e9b4eb277801bcabb50165b29b976eeb7fafcb80ee",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "4e1c06558d7596ed919c6a8a8432e8aec8bc13f7596e1ad4f2a68bf30d738c59",
+      "goal_id": "goal-cfr:37:201.25:2024",
+      "independent_gold": false,
+      "input_document_sha256": "48a8b2c02f7dd264d001292708d9e6df4b4ac9792315bc5768ad384b8596d55a",
+      "output_binding_sha256": "d47e03d761af2daba041ed201f03fb87319ff92be7a74ed27562245b65e0fc58",
+      "premise_id": "src-cfr:37:201.25:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.25:2024",
+      "sample_id": "us-code-General Provisions-201.25-ee0d41f45549ba47",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "ac1fd80ea3b0ecd0457973990e9b9a62520eb63124fc812b656c99da1eb06c76",
+      "declaration_digest": "sha256:9d1bc305b7c1d05dd0f40634103fa663e465bc0cffda7897ac923bbdccbeb3e1",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "24e4cfa21169ac1061efa5c5e81caaad5d922bb4b173f2374db2e1e32b28ae7a",
+      "goal_id": "goal-cfr:37:201.26:2024",
+      "independent_gold": false,
+      "input_document_sha256": "07b042f12b4330de462fae486b495a798ef95c895ca3c4b152f243b0e2ed128a",
+      "output_binding_sha256": "72975827a9fbbdb414eac213f7bd93ad8e364924ae91543b11f5b4d3e49e7e82",
+      "premise_id": "src-cfr:37:201.26:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.26:2024",
+      "sample_id": "us-code-General Provisions-201.26-ce29cde11e62b733",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "223ef34a298016b523a943fd3dd8c0763964851bc33598ed0270cd154eafaa10",
+      "declaration_digest": "sha256:712465efc559f75595fba2376f1a82fa2014ca1748b39b19f2b9ac01f32981df",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "ba0f57b2666d18031be1220136999565a64ec80c5eb49b64dbb78c4803b190ba",
+      "goal_id": "goal-cfr:37:201.27:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e951fc0ada16c7d64db6bc2b4c7099667b9f0724b644b55a9af87346aed85f9a",
+      "output_binding_sha256": "0cf2a28149db5cfb1cf15d7349afee994cbe63ad475e6e504fbce8741327569d",
+      "premise_id": "src-cfr:37:201.27:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.27:2024",
+      "sample_id": "us-code-General Provisions-201.27-cea2ff8aa69a26b9",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "91d11983836e40e97a9ec646fbaa6546f10524f79943882973ca4348cffc4fbe",
+      "declaration_digest": "sha256:e10de5a1981a7fbb73d33975f34aae10128fe76bc3f5f04c1af63d1bf673e3ab",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "f14211a0ed15818bf6551b32887724b693ccd0d34d713e83cb40ca996e11a100",
+      "goal_id": "goal-cfr:37:201.28:2024",
+      "independent_gold": false,
+      "input_document_sha256": "ee1c62bb7ebb2b7e7ad0556956fa509de1f1cd80de70024c43ecf3edc39392c4",
+      "output_binding_sha256": "baa2f80b52ab3fffdf78fa99531e8362a36ac76a89d7c9b5c01a1fc26020d94d",
+      "premise_id": "src-cfr:37:201.28:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.28:2024",
+      "sample_id": "us-code-General Provisions-201.28-b1f8949297bbc6c6",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "e8d69ed56fa8355c7910b21726d67ccdb780f6a8d94f79445d90a56f22f1b197",
+      "declaration_digest": "sha256:fb5e996292227e1f24508a062c8a345b25ee43a3a02687556fa608fff2b5da48",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "9d584d7dd25da058f10b4a1e2ea216ed6600424d54533526ec2bb0982f80a7cd",
+      "goal_id": "goal-cfr:37:201.29:2024",
+      "independent_gold": false,
+      "input_document_sha256": "c9c388439bb309455ad17210c4a959d73c4aa19f1fb2abe33559c273ffc91a2b",
+      "output_binding_sha256": "e941d03db25c2d681ce87f76cb3696bfb502a6f0420757f8572e59d1d32551d8",
+      "premise_id": "src-cfr:37:201.29:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.29:2024",
+      "sample_id": "us-code-General Provisions-201.29-877fca18b19a2c12",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "2b4cdadc472834767eb2906438674e892838038a2d10fff10fd7bb363c83ef76",
+      "declaration_digest": "sha256:d8cb22c2310274573056b5ffdc33780b427232f94842055e0ab42e7203d185c0",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "615c75c91f5c3634894e42a9db1405e82496e6b5eab42adae09512ae715e00da",
+      "goal_id": "goal-cfr:37:201.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e6cde12399af08c9bb99d3d491369bb58a01fd1fc88287802573b6534cbf11e3",
+      "output_binding_sha256": "89269ec6d4191a425a70bf974f9321093ee9a5e2a94987c589ac9fdeac45b37e",
+      "premise_id": "src-cfr:37:201.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.2:2024",
+      "sample_id": "us-code-General Provisions-201.2-338f2796bd4a6a5d",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "d401fd19d5dd16d4b87f1207ada5aebeee1d0a3eceb144243e64e2cc07cca1b0",
+      "declaration_digest": "sha256:43e6989e7de57a9c2fbe0b4090d2ee32f868a1445c54a16ccd3b654076ed099f",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "50be5af11df42482ff64441d2385d9b8db552e0973b0f746831d7ec2021ddc2a",
+      "goal_id": "goal-cfr:37:201.30:2024",
+      "independent_gold": false,
+      "input_document_sha256": "166773611d1e248667d2c21ffb08d3948f41ee1bf60c1aa4971a4b0a33a98f4d",
+      "output_binding_sha256": "7a41340d04a4b1ee7d2b3671d4fa0d6845e8fe89d286fc711caa4683c012ff12",
+      "premise_id": "src-cfr:37:201.30:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.30:2024",
+      "sample_id": "us-code-General Provisions-201.30-81987811ccd2d157",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "6e4f6d6dcfa7f4c22e25dbe246596a3c501c7002c7995a3e711310a5d37a99d5",
+      "declaration_digest": "sha256:2ecef59170d22dbb268c09de5538a70568e518c03748c4da5544816efb855e3c",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "0c568d3a59af895180a968a2a34c129deb50a8a0623bab7e2bad0b34232cb8db",
+      "goal_id": "goal-cfr:37:201.31:2024",
+      "independent_gold": false,
+      "input_document_sha256": "58ed563f0cee2a7ebcd3521e7a546fcd3322bff31e63f00b1ffa2a9802e47ed8",
+      "output_binding_sha256": "74f3f0a21ac1e0733d4ddd6af99e6e0d375f48bb68a2d3388cf450c0b188acb6",
+      "premise_id": "src-cfr:37:201.31:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.31:2024",
+      "sample_id": "us-code-General Provisions-201.31-2b194377bc76aa50",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "d0b079c3997edfcc977f7aa0fe890278c5d73da786e60a589a23e97dd1ecb6a8",
+      "declaration_digest": "sha256:35a6733405c0e215daf64b54158b86bbe8d039c5e446613cda14c23f967828fb",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "1370e18ae3688350d53f3a3aadc1ab4363a0d0c1233e9f7f4def7d5d812da846",
+      "goal_id": "goal-cfr:37:201.33:2024",
+      "independent_gold": false,
+      "input_document_sha256": "eb0935795d3a8023b7c5a4ec6c0cf97bda1836eba2a0ebce5583bc9a27e6fabf",
+      "output_binding_sha256": "44fef0763a7dce442272aff38b39708dbba28d6d36e6807834e91241b09f5c6c",
+      "premise_id": "src-cfr:37:201.33:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.33:2024",
+      "sample_id": "us-code-General Provisions-201.33-2ee0e786093d3c4d",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "405b175be91815c2c3b881c374a12a3452da4ffb335c12a2958f4ad92c445559",
+      "declaration_digest": "sha256:e8bffd227d35b185bd4cd09f077b1ab9eaf38ce6ecac7bdb6958cea3e20b1d82",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "cad479c4a8e898c40da8c4f28e43a8926422e3bb4972f6b32798b5e7dfa9776b",
+      "goal_id": "goal-cfr:37:201.34:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e678fa6f372aef25a364936bf4ac891f6d5270e1fc54ba8a2598baaeb1425aa2",
+      "output_binding_sha256": "b1cd716d583674f3dd751c6220ee0d5fbccd726f21cc75fbf128ab1e695dd265",
+      "premise_id": "src-cfr:37:201.34:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.34:2024",
+      "sample_id": "us-code-General Provisions-201.34-8ec271f994ef8b3f",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "2cac9d4fd5c0dbf41719da1e93dea6e1a2cbadcf97da0e6b684e6a8ea409d86d",
+      "declaration_digest": "sha256:597497bfb236bd21c6649d6a93e95c32dc0404091ae51ac396376105ac645e48",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "bffe01dfda5cca75c3fad76d9446a3de7092ca18e99f0db27b5e35a334cbda78",
+      "goal_id": "goal-cfr:37:201.35:2024",
+      "independent_gold": false,
+      "input_document_sha256": "474ede69fb7cab52c13a34aca23658ebce57b548662f4e785f4c86b689290bf6",
+      "output_binding_sha256": "3180113fb7cc57a38fd81889414edd99a3b8945049e5bdb2870d23aa9c4e4504",
+      "premise_id": "src-cfr:37:201.35:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.35:2024",
+      "sample_id": "us-code-General Provisions-201.35-122fe8894b8d0cb7",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "5410e167fddebdfc4cda24f4b32d39722dfffcf1ad69da26264f7f8c5bf4b644",
+      "declaration_digest": "sha256:2c5e7acaec6ece45c81cbe6965082dbe8b420d1e90cbeb2988aeee5351d76a3e",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "0c96f632879160f2777a34b014cd2ad4257e132107c9ed693ac1fc5b2278ad76",
+      "goal_id": "goal-cfr:37:201.36:2024",
+      "independent_gold": false,
+      "input_document_sha256": "147ba90219aa48d90d04a984d0b1b2c45a354a8c9cdb2168d40439166bbe2319",
+      "output_binding_sha256": "cf59937be1d66bfeae739d0cfd456411fe3f6097611ea3e09cb4ab4a8d279285",
+      "premise_id": "src-cfr:37:201.36:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.36:2024",
+      "sample_id": "us-code-General Provisions-201.36-849b31cee00a15c4",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "d7c34c27e51cdb69a46a2fc4c5ab0333cdd6b2fb3bb2492840c96b3bb068ddd7",
+      "declaration_digest": "sha256:cebd4a107418afd9127b63e5cd97287be5df97001adb510339e01823590ad2bb",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "1cb39dc5e4a990e98633637ea8f51c929d14b25823eaded9820b10f404265717",
+      "goal_id": "goal-cfr:37:201.37:2024",
+      "independent_gold": false,
+      "input_document_sha256": "cff65cc27e7d1f92495d12949a85415f201abdff2f53bc6dcb20f98bdfbcd1e8",
+      "output_binding_sha256": "be91060762bbb82c1cd6cba3112ac61d2283c7c8daebcce001a5f811a1286386",
+      "premise_id": "src-cfr:37:201.37:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.37:2024",
+      "sample_id": "us-code-General Provisions-201.37-916d725d5bdd3618",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "9c10d1e8a0a92cdc8c3f2233e1ba726b2737e0f2303639de1cb271624c5086c4",
+      "declaration_digest": "sha256:a98a12dcc5ca02a8f0f4959c22a373373de8ebc5dd1050229ffc68bcdf0e1e63",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a58e527fdea616f87e0d63efef907281de95155cce7bb4a387b6e22c7c920c87",
+      "goal_id": "goal-cfr:37:201.38:2024",
+      "independent_gold": false,
+      "input_document_sha256": "279d60ea895c5e653a59880c94fad05c23be1205d089bf2158bb963d65caa113",
+      "output_binding_sha256": "41f7a93c381f24caa731c6893866892211b197c00d014b79342bcb44dcb98eed",
+      "premise_id": "src-cfr:37:201.38:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.38:2024",
+      "sample_id": "us-code-General Provisions-201.38-fdbe792a23e09d8f",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "68db7f131806c5077b46e82c92e5e29f37425c3def860fc09af997c517b523db",
+      "declaration_digest": "sha256:d543bd82e21aa347574da40c0167935d6cef85c60c9d7e6900600c8e9b138c32",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "dad201ef47ccb1525d88bb320fab9659c26e797340851514ea06dbfd0c769237",
+      "goal_id": "goal-cfr:37:201.39:2024",
+      "independent_gold": false,
+      "input_document_sha256": "4083832ff2d682933d2d7aff78c908ca833a9e73dfea1ae44f9bb275ac3fc77c",
+      "output_binding_sha256": "bc82570e9f77ded24c710f49b03092373871716e3de29f6fe5bba279f7cd8a67",
+      "premise_id": "src-cfr:37:201.39:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.39:2024",
+      "sample_id": "us-code-General Provisions-201.39-99cb5d79d3383d32",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "2374d37314863134006f58d711436d08d0a5bd71276a1617e971d76b03c66808",
+      "declaration_digest": "sha256:667e22424f45f8f02bd8d1bfa70fe75ade1fa505db2b125b8a58ab9f4e763176",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "33e5829271e98204568e53596220c3d2f7fc8bcf22d6afc17ed04e5f6b968c11",
+      "goal_id": "goal-cfr:37:201.3:2024",
+      "independent_gold": false,
+      "input_document_sha256": "6b199770880afa02d21967d214224c6d279c469254e986497eed4aa040d3f210",
+      "output_binding_sha256": "a19f1f1967f00202fc6cf60c6dab1b2e33045cd79034b6fdfd8b54ce2757b950",
+      "premise_id": "src-cfr:37:201.3:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.3:2024",
+      "sample_id": "us-code-General Provisions-201.3-392ff507844a4217",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "15dfad7edd37ad7f484e7285a0af3728267cec647feeec5cc76b384ce6209b60",
+      "declaration_digest": "sha256:c7e613675b16e2629f2c21fa81a267d732537a93bef285600745d2eb22b6d3ea",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a77531e768ec4aad222c8e54bf6d08a2e327f1a352e6181c831d9b15ac3a90b9",
+      "goal_id": "goal-cfr:37:201.40:2024",
+      "independent_gold": false,
+      "input_document_sha256": "24ba123f9fcc780b8011070c2175a66c1b51c646ced3d9332754dae7ef167c86",
+      "output_binding_sha256": "c125bbd4968661a4edec3419ae2023123502fd69341ad483be4828ef7fc7f278",
+      "premise_id": "src-cfr:37:201.40:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.40:2024",
+      "sample_id": "us-code-General Provisions-201.40-bdb15dc31bc73634",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "27a0a717b0495fbaed83de81f1763ec69ec0f5b088abcb384a98ad070a5bfb0f",
+      "declaration_digest": "sha256:151d013337d792270784bb2b19d65f091543be93db796ac2733f2756734adaee",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a03a4e68cc6601df81de99f30b161f3476bebbb686d4c65fae7a69bf9088aead",
+      "goal_id": "goal-cfr:37:201.4:2024",
+      "independent_gold": false,
+      "input_document_sha256": "2d48df321d157b862f366f306c1d14f2f61a0cad9a92a947f07dcc1a9e5e47c4",
+      "output_binding_sha256": "c9767745fcab711c381b01c41d9e2ecdc2d09997375d4d2579604e8d4251bcd8",
+      "premise_id": "src-cfr:37:201.4:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.4:2024",
+      "sample_id": "us-code-General Provisions-201.4-7cd27c6ff8ae4731",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "787a0c7d656957221d3a20f2f56d219de84f2ab772356ca65296b89098ce0695",
+      "declaration_digest": "sha256:46c2239e8f35c9308f4ef0cbef0acb9f388543a65b78c01c6ec2905f490556d3",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "6cd36bc12aba0ff5c8627f96e009b4d4b958b2a416ccdd62047fad0f96a22c5c",
+      "goal_id": "goal-cfr:37:201.6:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e067e908d32fc494b00fa9ab2f58e9d0eee0c0f33d92c9176f01a3fa5cf4cb36",
+      "output_binding_sha256": "e390cacdad9c8d36254e469ccd1c07935fc161bfc390a048663e86248827c6a5",
+      "premise_id": "src-cfr:37:201.6:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.6:2024",
+      "sample_id": "us-code-General Provisions-201.6-c8d80afefd079639",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "f31404ed2b8c77fc9edcc5f3c1f0df4008218b8216cecbff40a3a286ec67a4c1",
+      "declaration_digest": "sha256:838bb57da3c2ae3ef9bbb2daacdb56c0c826d6c462d484ca5eadcbd7d311fc7e",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "ba6d8040f144fa16965a71dcb4a0791dad6426fea7465e71852d15166aa6a6fd",
+      "goal_id": "goal-cfr:37:201.7:2024",
+      "independent_gold": false,
+      "input_document_sha256": "2392487bdd3f311938f47c8866c02c500a79cb38069454688601f736f7740215",
+      "output_binding_sha256": "a99b74ae10841780c7b948bf66528e2fa8ec38451190404450c324c8dfcb7e23",
+      "premise_id": "src-cfr:37:201.7:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.7:2024",
+      "sample_id": "us-code-General Provisions-201.7-26f2150016326ab0",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "cf384f621c723714314a7e5a02e7d8896a940ec95964672bd160ebac36ca3553",
+      "declaration_digest": "sha256:0278278a8ec30c5c76506ffa1cbd91a86d84d17d7962be1495002f0e84585b01",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "fefc228bdcfd87ec0f888e7663057f2ff6ffe8e37acbd9b186e21a30f0e63737",
+      "goal_id": "goal-cfr:37:201.8:2024",
+      "independent_gold": false,
+      "input_document_sha256": "01ea20dad2c9d2176fbc25d4fa193aea3679f0719bc01f85f94cdb44655666f7",
+      "output_binding_sha256": "e314f73cee6e6108e3758cd0b4d8dfbb234626aa4a9217e157cf1928ea7483e4",
+      "premise_id": "src-cfr:37:201.8:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:201.8:2024",
+      "sample_id": "us-code-General Provisions-201.8-88b0a85b5f94da75",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "5b4705ae0df2610040b6769e9b7c34c03c2134aea1f9ead406894e9e7acbc9eb",
+      "declaration_digest": "sha256:67578e2c74167cb770222aa95ef2dba2f548e353c3322b0a22b03c4fdbe5e462",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "84c5f8b8b15e66bbb8cce466c22f3e5d618f9f78ebbb60faa462b412c90c9d68",
+      "goal_id": "goal-cfr:37:202.10:2024",
+      "independent_gold": false,
+      "input_document_sha256": "fd96a85ec07143c2c4116a343c2579cdf28c2fcd79bbf649535c8164f86c59c8",
+      "output_binding_sha256": "979c020afd56cbd850ff39bcc2750ac374e63e47c1ca3d95068696c7ddc34c17",
+      "premise_id": "src-cfr:37:202.10:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.10:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.10-2c7ef4541b69ec5a",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "93a181284147cf5d0a4108975294be9c673c0ed10333019d0677c66e8783435d",
+      "declaration_digest": "sha256:7bdfdf4fcd4bda911aaa909447abaea0a90d076dc84dd008fa3519c2c63a3ffd",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "15873f5adab710c96889206799a38d8c661f0409fca3e3a48b9b186313cd8098",
+      "goal_id": "goal-cfr:37:202.11:2024",
+      "independent_gold": false,
+      "input_document_sha256": "f80bee9c8d3f723fa83c13129a0cb5f73db071a711163388c9ae732ae28a4cf5",
+      "output_binding_sha256": "b764ebc7f36a6dd5a5d93b831615fa13fd26d31a55b4ca8390b5c6d403356855",
+      "premise_id": "src-cfr:37:202.11:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.11:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.11-f7f114b372c504a2",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "58cfcf3f7c1abec5c569f76617b258fafae3fe80440039fafc94a3ca68f448ba",
+      "declaration_digest": "sha256:dd796ee230836380218b06f62e1eb09b212253451569704755ac05e019a2cd71",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "ec5a8829acd919e05d52ca2e2a050f5b39ebdb3d6f9d9cb7ff73554eba1d62ce",
+      "goal_id": "goal-cfr:37:202.12:2024",
+      "independent_gold": false,
+      "input_document_sha256": "9d6fb41b5133699f0f46c3e2e57f81e8f74b41cfafff561f16c5c82278cda37e",
+      "output_binding_sha256": "cbeb636eca12ecb6630a5d8dd9627ebaf230db6ff677c00c60ab8e6ab12ab131",
+      "premise_id": "src-cfr:37:202.12:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.12:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.12-f24ffc8f68585c93",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "687011e4231c43e8b93c48d3c64ee90dcfba5ff1a08771770d710a7616327a83",
+      "declaration_digest": "sha256:1456520e8d1d95ddf900821da9cb5c0e0c5dfa16dc87ec624b5e4245cad3f662",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "cc05e491d84e07c0de9f277968fda3003cf85afa6a82f84501f3c35869c3485e",
+      "goal_id": "goal-cfr:37:202.13:2024",
+      "independent_gold": false,
+      "input_document_sha256": "174b13619b90929f43335502da103cfe0e483770975698e3370eb8af06ebe2a8",
+      "output_binding_sha256": "228f3b3ddbb52577f1a934b7fd6e01c438ab237ce8a3645659c6b32c89145039",
+      "premise_id": "src-cfr:37:202.13:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.13:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.13-043cbe385a4f54a1",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "4b6d279cf6f1ca49ba9218145b1895b3878975baa677b507d0114876d8960cf9",
+      "declaration_digest": "sha256:96c808e8a1a5614c050128d23082d23692f0bf4883c9b4bb7c6bf84427252564",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "da34cd88e3edb02fdb30a482ee76307124c2876c0b63fef22a29e6dfbff6e525",
+      "goal_id": "goal-cfr:37:202.16:2024",
+      "independent_gold": false,
+      "input_document_sha256": "01b515f97e9ecff3b8e4633a49586b954dd98f05ca98c7037dae3e48b100d90b",
+      "output_binding_sha256": "c145aa45bc197c765fc50102b847422490c4bc49661315a36842d57c3c0f8279",
+      "premise_id": "src-cfr:37:202.16:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.16:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.16-9e69ff1ab9273255",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "e6d3336138690ba468c213c2ae5aee43e6db12e4124dd0d35ab5a76e83513254",
+      "declaration_digest": "sha256:2c5aa1382e9c7444e7aa844135c50d1ffab702f0a7748197ccf49c96ab23ab91",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "770580d1b12c5e9661b64f9108aac17c1cee8306813e1a49d594064c71a88ebc",
+      "goal_id": "goal-cfr:37:202.17:2024",
+      "independent_gold": false,
+      "input_document_sha256": "87f07cc4064d21deaf20603e9800fdeb66854d42ca49468a22909fcdf3b0590a",
+      "output_binding_sha256": "dfc58a588653352f110eadb22370561a155daee2a09f401dc3b297e53be9f8d8",
+      "premise_id": "src-cfr:37:202.17:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.17:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.17-54099fe2fc2c9385",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "46b2103ddc795680e703f0063755759ae6087de7c5e83d4a0cf717047450ee33",
+      "declaration_digest": "sha256:9b150125cf601b9009285c3bc7b8a1a41b52484faaabb36a9be9b2ce0eb25e2c",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a0d829424634d90b2124996145335c9aa2cba039665b19e9a21714fd6c162238",
+      "goal_id": "goal-cfr:37:202.18:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e8272be2189cf5ace6a416aa5e9e387c59fe08799d288983fa7dd92d010bb384",
+      "output_binding_sha256": "803d8f15ad8fc7c0dbceb12e013ab4798c39adb61e697a959ea66d31bb053ee7",
+      "premise_id": "src-cfr:37:202.18:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.18:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.18-844786c93132055b",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "4671c9c8c502fe67893b0fe4eb387bcab66000ecc1e3be9c39e0fa899ab5a8c1",
+      "declaration_digest": "sha256:38a9830f1ccb65421ec70b5b5ed043050196973e78c5ebe411721c4e2cac46ef",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "7557cc84eb7abb414f4dfbea25517137551e4cd0a8a283f5e9ab8067a2c0867c",
+      "goal_id": "goal-cfr:37:202.19:2024",
+      "independent_gold": false,
+      "input_document_sha256": "1525fef141822e39502dd3ec7c33e077d7fdaa39090193912ba6c38b1b7f9179",
+      "output_binding_sha256": "36328c502ac80bae862e59a0e7a4b13efa76d5cd343e9e295e9ab2d736d2fca7",
+      "premise_id": "src-cfr:37:202.19:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.19:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.19-541f2e3c032badbf",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "0c6f5cce51f2b4a8040ac728732a51814f501bcc53c20b5005f438a6368dbdea",
+      "declaration_digest": "sha256:f79e0ec450c80da34bc8706165d975a265a8d555547ab04f2049fbe18121169e",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "705e26577295c1e16644ab9993f4255555e39111b63129875e4fc255321b01c0",
+      "goal_id": "goal-cfr:37:202.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "4f4df7d4e9d583271179d1276d792a9075bc6a51e1bacd464b892194c40f8ecc",
+      "output_binding_sha256": "31b38e55794f5be7ec5907591853b45a74c32b8a079aa2324a62834b2ba72845",
+      "premise_id": "src-cfr:37:202.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.1:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.1-a167d577a3002770",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "e32157abbd0980dd7950f988ecd1983b4551fcf83f7a29e02ce6d9b004f8f50f",
+      "declaration_digest": "sha256:28abf574fe863ec59ca819596934875f150064cfd8a7ecb73b4899ce3a57f59d",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "c80e970521f07c9621402aace20dcd9d502f9c253e5a47d1373f0b36a9ae40ae",
+      "goal_id": "goal-cfr:37:202.21:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e605fffc00f202c15363f67cd5c281152d09abad117dbc9b16c1572a731ed6bd",
+      "output_binding_sha256": "2f6674a24fc36d6800bdf3d790c5591716b5c2a4336f41d8fc59544005177e21",
+      "premise_id": "src-cfr:37:202.21:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.21:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.21-18b1d811aa0474ad",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "9896bfadf22cb8cf53aae53ea28269bc12aa74fc11e7e174e06b2eb2b375007e",
+      "declaration_digest": "sha256:48d41fcd183c247875a1474ada236fcb854e6d7994ca5c4774f63ae7163e9cc2",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "382a941d1206b8d004705a237d7895e9d8de1db0153398d06ba227f0a9540fc7",
+      "goal_id": "goal-cfr:37:202.22:2024",
+      "independent_gold": false,
+      "input_document_sha256": "46163629838d26ec8fb14c56554d1287a3d11a4b55e3b76552b5af3c7a3edfbf",
+      "output_binding_sha256": "17e14befb65306a7bb6bf954fe06b28b742f49e3b68b0a4d43d3ecb9611a4d70",
+      "premise_id": "src-cfr:37:202.22:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.22:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.22-bf1bb4d0121c930b",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "92435fa616031a77b54d621051a9f85bf2f7b62d3c9e09a4c4b7392f219e2e11",
+      "declaration_digest": "sha256:4dc1de93b4596d0759d3aab8b72f2eb107d0e6b7a2813b5b6f77c0656faecc81",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "d866e436131693d9b34bc405f13c34c12e50a31f196e7a81aae81104b0c4747b",
+      "goal_id": "goal-cfr:37:202.23:2024",
+      "independent_gold": false,
+      "input_document_sha256": "cc4678cdf55f6f83c27b56fde2990cc086a2c3aecc08e3fb9611f2145323f099",
+      "output_binding_sha256": "74ca86c60adeffa571f62827ba1ad9344f20c364be52ccfbcbf68640fd3d6a83",
+      "premise_id": "src-cfr:37:202.23:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.23:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.23-a9f1a20e37705cbd",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "201b80a0af1d113c1a64fd4ca3785678d59d8a329a8467f82f4a53ed2072e0b9",
+      "declaration_digest": "sha256:5a617bf0d21da91bd12b421095ad4068790cb15bc67192e32608087f166653cb",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "87d6536ae9bdff9bfde41d4d5e8b279373808dbe3ea8db652a5adb9d778f6e1e",
+      "goal_id": "goal-cfr:37:202.24:2024",
+      "independent_gold": false,
+      "input_document_sha256": "bb400737a98b9355d56a44131fbc58c640d40e961a0a4f5a83319f22ca0096b3",
+      "output_binding_sha256": "ab48f1f0af8197c41002dd08da9374b3f127445646841fd786647e4ab942daa2",
+      "premise_id": "src-cfr:37:202.24:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.24:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.24-dd3104320e2e5baf",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "811ed32f9463287413694c1f037e7e9d41ed71afe3db7d1393e1beda5188b740",
+      "declaration_digest": "sha256:77b92b33aa8b7efb3a2fc5a58c66ea735c914016aba6b23649d7fa6511cae85b",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "2edf4a4bbb32e1b4442628378e9dba0a585018fb8b06386f298511a049a253d0",
+      "goal_id": "goal-cfr:37:202.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "961b560779781f22deb6509fba68e2269eb22783d8c3f692d164b68824867d16",
+      "output_binding_sha256": "374b6296b65df834b2fd87506972e69baf7bc14131acdb8a748dfd9903a010b0",
+      "premise_id": "src-cfr:37:202.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.2:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.2-4e3e1060b9b62fe5",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "c91789f9835b0731a379e69c347857151db2c65431844deb1abc26b921bdd348",
+      "declaration_digest": "sha256:8b04504d997cdc98815dac3ef64b8b6d1b42b5d35e33616613cc95b1de56728b",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "7489e0d767b660f35722bdee95d9a83d76152a1580c3a30c1b021331d39af508",
+      "goal_id": "goal-cfr:37:202.5:2024",
+      "independent_gold": false,
+      "input_document_sha256": "ab22a30b8d1909874096552a02f42e92423243e769323225ed4afce5fccbb0b6",
+      "output_binding_sha256": "86b4da333b2e2bba24c33b60d256fbf39d9c5160cd3f267f2e0ac9a3f66ff7df",
+      "premise_id": "src-cfr:37:202.5:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.5:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.5-6b433b55c8234fca",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "32cc2dc9bb618d28f6ef2626c74800629aff67d81120efad4cd31d031e327d3f",
+      "declaration_digest": "sha256:e3ac52a8dc9c07cc1e86955741eb00e2decc29e7b3a7f582d5c44ce885862328",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "5a052eb472496d8ceba7ccf082dca0cca3f273659037d2cb76a15aa67d4a7892",
+      "goal_id": "goal-cfr:37:202.6:2024",
+      "independent_gold": false,
+      "input_document_sha256": "829ef620091e4b950bc174bafa87dc428c170469940071c2a0f31743775db7af",
+      "output_binding_sha256": "dc52e52c2e48db797efbbd85d2c203e8d8e9d33fbc9b5658c4fe4abaffb3fd6a",
+      "premise_id": "src-cfr:37:202.6:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:202.6:2024",
+      "sample_id": "us-code-Preregistration and Registration of Claims to Copyright-202.6-2339df2b45063aec",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "69f1e499a941e584869e790145acd76dfd2ea0014fe363dea082526ce94f8840",
+      "declaration_digest": "sha256:65b30b71a178bc05fcc74bf46f52774b677f62f8e43674284394bb1f2648113e",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "1166295cb4680126731310daa83584d265f84929b9d438a7a16b6b51c6676917",
+      "goal_id": "goal-cfr:37:211.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "12cad0b0632c73b1764b38d5989ebfac24bb02f519d1bd2df57fa0ca9a7e237c",
+      "output_binding_sha256": "2049d4f0c10d6dd27e5a51fe67c34360fb0f70c70570efe02516a9ebf8b718fc",
+      "premise_id": "src-cfr:37:211.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.1:2024",
+      "sample_id": "us-code-Mask Work Protection-211.1-f38a2ea06cd46cd8",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "7a5f0a18ca34e324902bd3c60f80667097b6e40abdcacd1e5f6f7357f14a3584",
+      "declaration_digest": "sha256:8a8956304f05ecf909355148416a7fad51de2ade6237150d518f5883ec196fde",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "1fa755f4e9476dac91ddc2d0a93b068d065bcecc53a0819fd462ada06dee6aff",
+      "goal_id": "goal-cfr:37:211.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "2995801db85283265506de815064a08ecfdeecfba370fda80d4c692b65f1fc4e",
+      "output_binding_sha256": "477c23727b51a33667b0e2761ec17497b0837a70ddd9a60480f689995f1adce5",
+      "premise_id": "src-cfr:37:211.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.2:2024",
+      "sample_id": "us-code-Mask Work Protection-211.2-8e10680b53284d75",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "02d3210e6802ab72c8703f6f5e43835bf9d480efc50193870cf9821b7faa5b3b",
+      "declaration_digest": "sha256:6d383caefea3c6bd704e84a738c0359213b42882f09ab6125ddf8644faf0f3db",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "c2e4e0d32466028fe1a19c2db934725be5f6572e34346f6c01905aba0926ec28",
+      "goal_id": "goal-cfr:37:211.3:2024",
+      "independent_gold": false,
+      "input_document_sha256": "36db84d573ef82cfe385445c26de40b8d11577f1c1c9442e677603bb031ccd41",
+      "output_binding_sha256": "307a7274e3e4028894f9f931a0237cce8e71400150451bf2a9134a04983ce215",
+      "premise_id": "src-cfr:37:211.3:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.3:2024",
+      "sample_id": "us-code-Mask Work Protection-211.3-c2f1e45b3fbfd6ab",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "0ca3ac30d7f3380d3efd8665f38e9079d96aa673656c745030367c14b847c74c",
+      "declaration_digest": "sha256:d9e153f1dd21863f1ff8450ef79adc093ffacb4206dec77a6dabfeecfb7ce6bc",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a2b3c30829c347dbeda3b468a59160fe1034599adaf562cfd2f0b938f0c783da",
+      "goal_id": "goal-cfr:37:211.4:2024",
+      "independent_gold": false,
+      "input_document_sha256": "a9c4f639f2ba4a86203ccf38f76ee9e53437a124eda7bd4cdbf8056fdf3040cc",
+      "output_binding_sha256": "527c04673163b08e143a765edc4ab7e6b7596df178acdac8b93c2f1ec406ea2d",
+      "premise_id": "src-cfr:37:211.4:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.4:2024",
+      "sample_id": "us-code-Mask Work Protection-211.4-963cf7eb864525c3",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "25fb3d513367d53ffa1c35660910349ec5ee847883fe62e35445ca07456f8b0f",
+      "declaration_digest": "sha256:b520826fedce5ce0d12a33115431dc95d49f2f70a0cce75d089704767b8d4159",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "d58c689cc3c0bd2069863704c8b437617bb4e1bf8bb3b9f4761133cb6665a86c",
+      "goal_id": "goal-cfr:37:211.5:2024",
+      "independent_gold": false,
+      "input_document_sha256": "62c964445abf67573a573913b30ba52257b6e585361759b5f9a07886d52d5769",
+      "output_binding_sha256": "b869d9b6f1d5387726dae86412d97394b2aad8d2910cd3b3106bfbdecb5cfac0",
+      "premise_id": "src-cfr:37:211.5:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.5:2024",
+      "sample_id": "us-code-Mask Work Protection-211.5-c93cf4a952b25132",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "acd4dac65e45913a1630341d19fd4e31100c3a035b19033ffb2be4797ef431a4",
+      "declaration_digest": "sha256:6c10707a8fe7949700d4a7f0c36dfa3d0d2f1dc226c9d21ad9ec5141888ad035",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "00b3a0ee5bdbc95b71a72a5763c8578089bbeca95d037675764de69f12231ac0",
+      "goal_id": "goal-cfr:37:211.6:2024",
+      "independent_gold": false,
+      "input_document_sha256": "081e9454bf1824627a54004def50aeb887dc5322367e75a2b3a5b95b95f01461",
+      "output_binding_sha256": "39b2eeaceaf9c1e5674946623a04f25a16d09cdf699c64f92c9564ebe1eb7152",
+      "premise_id": "src-cfr:37:211.6:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.6:2024",
+      "sample_id": "us-code-Mask Work Protection-211.6-d4715cc13327c319",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "41188805ab4385eac2123f9872594200f8679d29eeeabb120383e78d7a5fc32d",
+      "declaration_digest": "sha256:bcd288efd62bd8941c18487b49af654e4d41481257f7246b5079d3a33d58b94c",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "093d38c905e322150a1b2f10c72044400aebf34c739fd156a3fa16dfc2442638",
+      "goal_id": "goal-cfr:37:211.7:2024",
+      "independent_gold": false,
+      "input_document_sha256": "1aca0a8b3f164b9a88eba2ce489bf361f1aebd233c14e08d3ce4b2d82794a054",
+      "output_binding_sha256": "2e49fc1a013a34026e21caeb90e1460ac0f4236a384c17dadcc3776896531f04",
+      "premise_id": "src-cfr:37:211.7:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:211.7:2024",
+      "sample_id": "us-code-Mask Work Protection-211.7-a974fe4fe6eb0873",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "1266a6d45bc6f6fe21ccd8bcfc23a3109c768b6f2c19dddd5a2450feaf9eea7a",
+      "declaration_digest": "sha256:5ecdd9d76e4a5963f11069b51eaa5dfd4762ff798b3425701b406999d06c6206",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "143f63aaf2784ecb5a2aef750a7eda12cd1149ea6284987f15766771e1a1459d",
+      "goal_id": "goal-cfr:37:350.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "07a6c420cc8326e430b90f1295e96777b72e5737b6a23f1b3739d0b94e7d41b1",
+      "output_binding_sha256": "2af96985ca794abdd1ddd843dd39d099b81016b99c3107911dd542a7d5181867",
+      "premise_id": "src-cfr:37:350.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:350.1:2024",
+      "sample_id": "us-code-General Administrative Provisions-350.1-5a6753a396a6fb20",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "8be7f44a75f912d219caf735039b82bb738f466c8e8b7f5152f3b65f67538dd9",
+      "declaration_digest": "sha256:7b63c31b26b687781375178b08dda4deb7abd1ed0edec71f219e2dc720926fc9",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "5a127aa72497cff94025b18fe71b21cfe02c8347a6ad5b5d86027a08b71502e4",
+      "goal_id": "goal-cfr:37:381.10:2024",
+      "independent_gold": false,
+      "input_document_sha256": "3cbe1a0a5cdcb4930db28116bdc54452ed7716f7b7c7d6b4a0ea31f5ecc21f7f",
+      "output_binding_sha256": "2d628fef4973f753d92f46661e8dbcfb937cf5c6988c2437bb595fb089896df3",
+      "premise_id": "src-cfr:37:381.10:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.10:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.10-6d4c3c9d0f2fabb5",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "3bec5b6d56b06006950d793206f391ed82fa75b4c1dc0ae4fbf243b6bc4f1314",
+      "declaration_digest": "sha256:afe26a0cc3a9d59f83dd44fa204e8275e954e76a2fcdb0739c20ea069a3f03c2",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "fdda6cdfc1cb5eacac0019c32b7cbb243511f4b07f0d1ca2e6584169e371de66",
+      "goal_id": "goal-cfr:37:381.11:2024",
+      "independent_gold": false,
+      "input_document_sha256": "480d33dc8ab9f29df503e9d43e3a96c243b135e2ee3d8d79f56e978f9b63d6af",
+      "output_binding_sha256": "445217329e5ccc3c7ad323d328eb40eb8a275ff08d23c48ab1cb26a3ce632aba",
+      "premise_id": "src-cfr:37:381.11:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.11:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.11-bd440f894e9569d9",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "9e8bbec9bdfb6e0a9a38c5e9258e96fc506014116aa06a668dacd6e56e97c34e",
+      "declaration_digest": "sha256:2fc4d26540475b38200704937d8b69d4b8d67947cc93aff084222f4d5e3922a5",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "1a8defd37322e5f5170993f3da69a39700bc28864ef29f1279f37bbeea909c1d",
+      "goal_id": "goal-cfr:37:381.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "de215547b98e87a274bcd43f2f03b9149552bd2213ac496bedfaa25b30bf9ccf",
+      "output_binding_sha256": "6dc6006ab64858758e94fead5625ff9cedaa2acd89ff3411e8a149c212bd5312",
+      "premise_id": "src-cfr:37:381.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.1:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.1-c16df8c2942061d4",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "9038e491758bbdfb6369409abed2413f28d5ccf5f6beb0be598c1465c6887116",
+      "declaration_digest": "sha256:6f92a1403254f3734a282fe219e89dbffab2624c4e9ddc801f929da91f82f788",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "efa1cf6b8677d1eea55ae7778e3f8978c463d6ff9c712d3a05c398906b513e1c",
+      "goal_id": "goal-cfr:37:381.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "4d3c4c7ca3e0c26dec321ba8788ba3a4dffc62b3a7b7032e4e584d36913a04c5",
+      "output_binding_sha256": "dd04b6aff2e4f21965e2b1cbe5a97fc6d12ec8374b7c887ac6463a731ca04ae4",
+      "premise_id": "src-cfr:37:381.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.2:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.2-71dbbf5e9004a915",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "cab851aa1ba5f042a542a0143cace132f7ad3a178b9c12b3cfeba0cdba7b5e18",
+      "declaration_digest": "sha256:382e20b05fb5765e7f06dbf6305168f5d20cc870387dbd9f72a197e993fbf4c9",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "68a9fd6b1dc94b98b1968e5d19d15045505759126d2bd4ceb00975c2201509f8",
+      "goal_id": "goal-cfr:37:381.4:2024",
+      "independent_gold": false,
+      "input_document_sha256": "cd8259a304553f15ab0466ad7d016e316163f0fa4ccef8fed9710177c7131e11",
+      "output_binding_sha256": "475fe78580556000b5c3459b5bceb9245be0c655b45d76d745e919ab3675d878",
+      "premise_id": "src-cfr:37:381.4:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.4:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.4-27e46f0dcf3e4fbc",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "f85d260ba8f5794221383222a8b87e346d124a477503b3d12c4d76f31828fef4",
+      "declaration_digest": "sha256:b2a4b2b9f15ad149b384366d8c921aafce9ebea80651159f5dfd05b12d9bf235",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "5eb5dfc28caf3548f3958f7938962b36d7c522ae21446a9e16212ab93f09012c",
+      "goal_id": "goal-cfr:37:381.5:2024",
+      "independent_gold": false,
+      "input_document_sha256": "23680960c6b98fc34dbefcf0c1046b24aa246dcc2de746da333ebb7175ce4934",
+      "output_binding_sha256": "0445ab7727bedfc3d2aa492cde017f22340f5bef4c5a611b90c6452b21b25eef",
+      "premise_id": "src-cfr:37:381.5:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.5:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.5-31939d448f022572",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "2122562d98ff9aa7581f7854b01daeb2bd000e79b7d0ca5d927090b212bab054",
+      "declaration_digest": "sha256:eab1b745a78063c92c7976ab72080b9596458012eca020a0103dff1062a72fa4",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "214be958bde8e4e231875f7bad99b5e58c482cf815d4c5569390e23e37d965dc",
+      "goal_id": "goal-cfr:37:381.6:2024",
+      "independent_gold": false,
+      "input_document_sha256": "422d74c3636f41e033680cb0580b3cb68529cb910b6215ec4d6cde8563fe0b90",
+      "output_binding_sha256": "b7bb63e105fdb197d21e24f8de5b1b49bdda4eb6b2c80c35e771de56cf3035cb",
+      "premise_id": "src-cfr:37:381.6:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.6:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.6-e06956bac1274431",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "7c9c7c9526d4e1dde63e028fa295172c0f4ef74db8e657705e2ac433a1cd5be8",
+      "declaration_digest": "sha256:9f170d5c36352b158447ad75a14350d3adb88e9aace53ddce291ad628482ecf7",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "96c6187e4066e245c5a0449443941cdd08013fc17c9bdaca0620f0e242904547",
+      "goal_id": "goal-cfr:37:381.7:2024",
+      "independent_gold": false,
+      "input_document_sha256": "e9bc3c69e560bf01c3f73081aad1da5ba279f25d5812813e07f4a60167e7971e",
+      "output_binding_sha256": "d74e877d2e6c5ccdb5f68423fb7dd13c553b24512c2f81e58091b97c673be00e",
+      "premise_id": "src-cfr:37:381.7:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.7:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.7-fcb4c99ad6955a91",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "30eaffbde9007e19d90e126898d06ced103d1c1195690838df6b69a9fe8edc87",
+      "declaration_digest": "sha256:0444477aef1dd2d768e1bd73af0b7638de2bfb2e8bb9ce9c1b24e67cea2bfa13",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "6fcee0e11518ddb53d3c964b65f2769b4b42b32ca1e7c1d31fe7fcca0a3d29f1",
+      "goal_id": "goal-cfr:37:381.8:2024",
+      "independent_gold": false,
+      "input_document_sha256": "fbbd8eafbac1b5ac7d9484b9eb62c9ba5f3b3b747f19ffde3936022b0b97d6a5",
+      "output_binding_sha256": "ca29e10766e0b1117e3de7454b034c94cc60ed09b57b8066bb39ac7fb1a235cf",
+      "premise_id": "src-cfr:37:381.8:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.8:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.8-516d89031f29d002",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "821d48f7aa755f43d9ac3fc4396e97d53c93f012044649fac6f6f34eb3cc3580",
+      "declaration_digest": "sha256:fa5444facb04c2ac65dbfdeb94bfed64259bfc3154bfb2ea7e4ea84cdcce9a69",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "dd86ee4e75b6213be92b99322fcecc97fec2040ed1f9a867bb25222661fee66d",
+      "goal_id": "goal-cfr:37:381.9:2024",
+      "independent_gold": false,
+      "input_document_sha256": "d00000a285e0616ad87f44c6f490c973aaa3d94c55a81bec997132f4f2258472",
+      "output_binding_sha256": "be5fd565430c64aedd95488c276a9a40c0750a985ee05191eb51c8b3cf951266",
+      "premise_id": "src-cfr:37:381.9:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:381.9:2024",
+      "sample_id": "us-code-Use of Certain Copyrighted Works in Connection with Noncommercial Educational Broadcasting-381.9-91967656145a1851",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "d4f223a9d19c4dd4664fe14544af9ee453e9ecd5885bc3df1ce773d9c07f9c15",
+      "declaration_digest": "sha256:f8021d1afbf2f8932eb613de408d7124e41231895ddf9e89980b60ae3884de15",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "d2439c770c7efccd248bb36de6e69396e79310063a00cc4f7ad1846eb8665407",
+      "goal_id": "goal-cfr:37:386.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "c4b119cbc916c4a2cba4b85edfa0180718a843eda9fee12918f199ddfc7ef225",
+      "output_binding_sha256": "456d1b977b15b603b1c07b581cda363c8ee0dfdd6d973e91951db22fef9fc1c7",
+      "premise_id": "src-cfr:37:386.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:386.1:2024",
+      "sample_id": "us-code-Adjustment of Royalty Fees for Secondary Transmissions by Satellite Carriers-386.1-79d5a0c3ed83af6f",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "2406f1be25157bd3ef3d73f59b5d66c6b597f2728ecfa6082504adec070ca5c5",
+      "declaration_digest": "sha256:9227d757c072ff57e80ace870009016ff30e706294b27245692d15b9b4f51ff2",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "879565c468400ff3a7a861910605c16c48628b8aabd71e37fbc7febff621c524",
+      "goal_id": "goal-cfr:37:386.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "3411db1f2427ac4c87a229c51ba40c000f27b6a1cc0411525a2bd1d615e1f569",
+      "output_binding_sha256": "a6ea71dbdb6a18f0c35fb07e5fc7d6a8227bb91624dcb9abdff11f08de61fee7",
+      "premise_id": "src-cfr:37:386.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:386.2:2024",
+      "sample_id": "us-code-Adjustment of Royalty Fees for Secondary Transmissions by Satellite Carriers-386.2-6b94a92ce7db5727",
+      "source_gold": false,
+      "split": "train",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "6a8e16669c59d7d71adabb376287ee39bef9b30097b5a81e1c4f6b50f207a1b8",
+      "declaration_digest": "sha256:268ce61bf498117b9be1683ef1944d2a6a2ec3830d2ebf0f2f6d65505b425fd0",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "6a3d3e87c1e1da1b537ad96d11633639585c2ac64d2d9438b2d3618038703f71",
+      "goal_id": "goal-cfr:37:301.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "d779e78e105cdc83e419d1c95e16b92962af50e9ec5fc4221a77c24904c71ec4",
+      "output_binding_sha256": "a46e77379560c349af93deac73c0c0c6d6befcd0b211f3c6f442a42d84e5c0c3",
+      "premise_id": "src-cfr:37:301.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:301.1:2024",
+      "sample_id": "us-code-Organization-301.1-7721cef03feb8f43",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "3902769cdd0772ff58e46dbf6eaea1f1a08dfe1e55b113afeab190e158923524",
+      "declaration_digest": "sha256:d0d1521094447efeb5eeec7883c8f24c87e405dc2d8d07b7d42a058d3209274a",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "2c59ae05ea959d26983112d291b720095e3ca47e7ba62fb78b266a34011d0748",
+      "goal_id": "goal-cfr:37:301.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "59bd654d4398edee7a6e9b3613347ed45115f12c2aee4b2976da23d9a048b0f0",
+      "output_binding_sha256": "a8452ee91554d6f87cef69ac1689fd816f610ac06ff2959dbb022e053e5b0d77",
+      "premise_id": "src-cfr:37:301.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:301.2:2024",
+      "sample_id": "us-code-Organization-301.2-9095fe80ebcb080c",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "495f1fd9329a8b83f292b128c972135771153ac397eea3163e34ce349b172ec7",
+      "declaration_digest": "sha256:4262c50ca6c1e1532b828eec4c13e9896cd96ddbaa628b16dd75eaa7071c0b4a",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "cab0dd761b3d5c58d080e3a14b42383084ee6197a17567fba7d3b7855c1a1d97",
+      "goal_id": "goal-cfr:37:360.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "c40728fb8d2c4ac9fff808c87232da698ad92b1a09fb84a11ee99eb863e65faf",
+      "output_binding_sha256": "e8e8b243f0a408244e02d097f698471052bd2a84a53fa9e271c33a055aff4113",
+      "premise_id": "src-cfr:37:360.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.1:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.1-c676c344a08cf7da",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "413732e0dbd1e1c52d5813c899c9d4665643d0c7ce2549d6eca5591e2f045ce3",
+      "declaration_digest": "sha256:a248453b46a6956e8807d0e351eafae88de9e30475c75dfcf581844ab783ded5",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "f02d2ad5742f49ae865dd8fe18f4efc95baa8c17c07d84d71db6e538a3344193",
+      "goal_id": "goal-cfr:37:360.20:2024",
+      "independent_gold": false,
+      "input_document_sha256": "819a5cdce45fca917590b9e074961f781e28bf393b62b94e7b0e6ce6fd0b94ce",
+      "output_binding_sha256": "7fcf484fbccc83538cd1b245d2994c9d155fb8656c32f928891dd1754aa508bd",
+      "premise_id": "src-cfr:37:360.20:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.20:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.20-8e5ce09c2ac96eb6",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "1561d10cb2bef90bad72e8922a03a0285d96991d4ba06e39c633653ab5e388bc",
+      "declaration_digest": "sha256:3309d0aeb16a7cda45026a8da5bab776233fb59da7ef47ddd7160ce05864af57",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "9fdbdcb753f8c4221db69ffee292a507d61d983c87a90fd8496f355985af1a1d",
+      "goal_id": "goal-cfr:37:360.21:2024",
+      "independent_gold": false,
+      "input_document_sha256": "51850d38cf176992fc7bcbe5d9ca29f07ecc251ed636ec95449d28ef62238de1",
+      "output_binding_sha256": "171bffdb0fab794dd23f6d294912ad81435b3707692065b52786aad36534cd82",
+      "premise_id": "src-cfr:37:360.21:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.21:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.21-b1f736bcd40aebd1",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "10281a729663dee32a102b721925b6bcc29ba5739ecc83bff7ce1adfc854ac12",
+      "declaration_digest": "sha256:5da5ec8b663b45f9e25bd560fb7ee7fad8cfaa66ed92a3ff4fbf1161fa1c0944",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "3189b4ddb32d1c168658bbd333e4dc2896207b4ad62d12521daaaa009cb66252",
+      "goal_id": "goal-cfr:37:360.22:2024",
+      "independent_gold": false,
+      "input_document_sha256": "772a70d907443d079ba74b82a065dc0ba6a030a625907be570cc28311432fad1",
+      "output_binding_sha256": "a77885de8b4196440d496911be660190668920e54e12549a7d7cc56a73b9006c",
+      "premise_id": "src-cfr:37:360.22:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.22:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.22-5376e8ac021a5329",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "4cdc65b9264ffd6573e29073d9c7084004f919be8aa641fd0b77755c73e6dc5e",
+      "declaration_digest": "sha256:0b0886c44de80528932aa3c84ac69091afcc36aaa3577c9c83b3234a95294d64",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "3420839a09cbd2b9c4aa4f9407fbaa81af045e38378872ed89fcbedff419ac44",
+      "goal_id": "goal-cfr:37:360.23:2024",
+      "independent_gold": false,
+      "input_document_sha256": "9e11aa0551f2eb1e4a402ba9809bc120bda7f213c50ae3d8bd57f39ca424df14",
+      "output_binding_sha256": "3812a4fa9d5d812c47148f12801a7663d35501b7068b7471799c698c62af5c06",
+      "premise_id": "src-cfr:37:360.23:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.23:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.23-2e5faf1e4c7a27ba",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "5de01da74b7d874d2bd743b5531ffe82e532cbf6e6abb68d868690fe88a77d6d",
+      "declaration_digest": "sha256:86b3364757d733e905a89d50738126fc3403dcde88a9dbd17c47118e2f1646ff",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "a38fb0c1aa67e922d63a08488414ac2ed75e7384f82454e583e762f52628dea7",
+      "goal_id": "goal-cfr:37:360.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "c9e15f5316feafd633efacd17071dd625fc8d9fa15fe99599b9c09df058a9365",
+      "output_binding_sha256": "78bb4eeacea25f605ede237be3943b50d1c7a4c929c28f574a976bd04d3267c5",
+      "premise_id": "src-cfr:37:360.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.2:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.2-13467abad3d56474",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "a0380c76300ea4635b1dcf08e70aa6a0e780bbced6057ec8d58611485c58a556",
+      "declaration_digest": "sha256:c545c625b46c72dc8aa52f2fb2297718dbe682734486c88b36349898001305a2",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "9808d12c3272aee543022f44c49b2fab90291644abd65ee3d31415a4405c2a72",
+      "goal_id": "goal-cfr:37:360.30:2024",
+      "independent_gold": false,
+      "input_document_sha256": "d9823a2c4424c7c753541e700a4e9bbb6b79fb9068fe754fc18f49172ffe109f",
+      "output_binding_sha256": "3f10c1c3d0892a48c4311b68a6bbe8f179678f73930c91aa97b538d5417f342c",
+      "premise_id": "src-cfr:37:360.30:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.30:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.30-a8951aedf3570355",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "3736ac4f061fcc4e7dde09bf819b036360198c4f68ca623d20ba82760261acef",
+      "declaration_digest": "sha256:5c467e3306460cc079b63752d22aba0d59c4b407a61683df443b20cf9c0eeddc",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "8ebbf24a181908a10e8c771f1e1d83affcad56b166e1eb949a95e8da6b94e087",
+      "goal_id": "goal-cfr:37:360.31:2024",
+      "independent_gold": false,
+      "input_document_sha256": "eca2efb599783f9e1c7f1ba2a7c6a53922140a6f70284bfcbff3ad554d0d02ad",
+      "output_binding_sha256": "888f637044b7a47c2018e13f8a0212caf8f347de0d6d5b6d62968156a0b5c1f4",
+      "premise_id": "src-cfr:37:360.31:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.31:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.31-2a66b9f0980c30b1",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "3efc50aca87d182269064378e8e40d7173dc57932ea726b6360706aecb7a3129",
+      "declaration_digest": "sha256:8a083042918f6ebb644477605106d4f0706359b6a52fa08635c34496822002e4",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "5b13991e82582668a11bd746231ca6de5559ad7497a1ac1ca0da3af3b00ac6fa",
+      "goal_id": "goal-cfr:37:360.32:2024",
+      "independent_gold": false,
+      "input_document_sha256": "f7480acb74a7bb320f8de6737e0748bca544ba37865db9a0867063d718165cfa",
+      "output_binding_sha256": "c84d3f884cc4a2fd4955e112c8077ee804f731d079e71654db814bceb742aa10",
+      "premise_id": "src-cfr:37:360.32:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.32:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.32-cba295e7d4d9acb8",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "eb91efc396ef4fed3973523b1b49653a7c66b20977a297ec1c854440cd3dba97",
+      "declaration_digest": "sha256:810a799967d20b105863956b996e4e0c422f9b0a551b6226bbe01c1f123d9652",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "3f136a874ad4133fd842a905b0884b9d1edbc0bdc10c5cedf097b387191f74fb",
+      "goal_id": "goal-cfr:37:360.3:2024",
+      "independent_gold": false,
+      "input_document_sha256": "86655701bd75c7809ed6d055f9af81ef8e48f438920a994eba3cae7bdbcc8847",
+      "output_binding_sha256": "483a4b96706c233cde373679957de21a82c88700dd407bca7d267f4b57f2d10a",
+      "premise_id": "src-cfr:37:360.3:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.3:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.3-5acea35ac5a7f804",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "d8e0feaef193674dc538ca55499c75689fa24e07fd3d89f977da44aa328b42da",
+      "declaration_digest": "sha256:0aaae2a185cf6e38a785246b8842747a50393087f95c68d423925840063bd1e3",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "00b7cb8e335071e27fd2830fbe804d7cdfc7d79b1dd9b1d3e62758533e946041",
+      "goal_id": "goal-cfr:37:360.4:2024",
+      "independent_gold": false,
+      "input_document_sha256": "f71b0e1dbb82c0d49ce745d7935552159686612f203fcb9e191577001e5b29aa",
+      "output_binding_sha256": "af2df10e00fdf2a871450af2f58c3a00b61891ea8a7af0e0e336a02187d8837a",
+      "premise_id": "src-cfr:37:360.4:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:360.4:2024",
+      "sample_id": "us-code-Filing of Claims to Royalty Fees-360.4-e0e652394db677db",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "888da96f911bcff533dca1cf1037ef0e771cf6ac969e9323aaf337e5b6d93a88",
+      "declaration_digest": "sha256:bc682ca184d1a8bbc5a0dcdbe58873d105e1ffa535bbd2e8a04104413ae55612",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "4c8839088db5cb4925dad2171498981b20d09bb61490a15e7838818ce6ce1990",
+      "goal_id": "goal-cfr:37:387.1:2024",
+      "independent_gold": false,
+      "input_document_sha256": "4d94219f156aaea130933956c433ba6b3e1e7a014d7863e53e0bdb6a25531499",
+      "output_binding_sha256": "ee8df53edfa421cbfae05a9c6175f534760a71120346ea9ef2e604aba5b1d06f",
+      "premise_id": "src-cfr:37:387.1:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:387.1:2024",
+      "sample_id": "us-code-Adjustment of Royalty Fee for Cable Compulsory License-387.1-c1851debff034773",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    },
+    {
+      "artifact_sha256": "6c8b3cb531aedceae58fc00cbd8d8de769f8248e38b0934871827b6a5b7dfb67",
+      "declaration_digest": "sha256:21287d913584fd2b06121fefa41bc2511d26837eaade35443cee2918ee34f13f",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "embedding_vector_sha256": "1271166359ffe4fc88d26227bb8c5df25d015e9a719f423440e4fd41c7a3a7dd",
+      "goal_id": "goal-cfr:37:387.2:2024",
+      "independent_gold": false,
+      "input_document_sha256": "a859e041eccdaf555c71b27e8aaf718a900a62442b062955ca2290f03bef039c",
+      "output_binding_sha256": "b7ad897e4cf9e40d79e694e19efeb3014f1c7784fd6fc35a4658cc8be79e041e",
+      "premise_id": "src-cfr:37:387.2:2024",
+      "producer": "intent-formalization-compiler",
+      "producer_version": "intent-formalization-compiler/v1",
+      "proof_backend_execution": false,
+      "record_id": "cfr:37:387.2:2024",
+      "sample_id": "us-code-Adjustment of Royalty Fee for Cable Compulsory License-387.2-f79582be33a00ebb",
+      "source_gold": false,
+      "split": "selection",
+      "view_distribution": {
+        "deontic.ir": 0.5,
+        "knowledge_graphs.neo4j_compat": 0.5
+      },
+      "view_ids": [
+        "intent-ir-view/facts/v1",
+        "intent-ir-view/intention-deontic/v1"
+      ],
+      "vocabulary": "intent-ir-view-registry/v1"
+    }
+  ],
+  "schema": "autoformalization-native-training-teacher-manifest/v1",
+  "targets_produced": 84,
+  "task_id": "AF-029"
+}

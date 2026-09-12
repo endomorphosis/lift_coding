@@ -1,0 +1,275 @@
+{
+  "completed": true,
+  "delivery": "committed hash-verified input; not OS read-only",
+  "file_count": 65,
+  "files": {
+    "data/native_training_inputs.json": {
+      "bytes": 733230,
+      "sha256": "6177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a"
+    },
+    "evidence/native_training/preparation/README.md": {
+      "bytes": 5807,
+      "sha256": "9c7bdc5c8cdc95be676a0d5da20dd6b3ce9dff34176d680a4dfde5cc41209368"
+    },
+    "evidence/native_training/preparation/attempts/001/boundary.json": {
+      "bytes": 1920,
+      "sha256": "0fbe19d74a6ed85ef147c00b8ab8b400dd8ed2a7ae2a3afec8d046ba4c06e705"
+    },
+    "evidence/native_training/preparation/attempts/001/cleanup.json": {
+      "bytes": 120,
+      "sha256": "0dac49f4487cc077df8435c421a3f051b07d8a45c007c43353c1eae2cabf774e"
+    },
+    "evidence/native_training/preparation/attempts/001/command.json": {
+      "bytes": 2267,
+      "sha256": "c421e8c9bed2b1ecf003963710b5245dbc96a833d46d3807dc48ba4fa0e890af"
+    },
+    "evidence/native_training/preparation/attempts/001/create.json": {
+      "bytes": 117,
+      "sha256": "68eafabc4decc2fb47ac36874876d1dc45bf9df23dccdcc7f2b74d8bd02b12bd"
+    },
+    "evidence/native_training/preparation/attempts/001/execution_receipt.json": {
+      "bytes": 918,
+      "sha256": "120af3b733484486403b3db3073948e206c5254259b72f90590486c901e82450"
+    },
+    "evidence/native_training/preparation/attempts/001/execution_status.json": {
+      "bytes": 664,
+      "sha256": "77822535801f9cb56e9af0fd585e7e8e7e6abcf2b36475b7e0bb43e8f4f528d5"
+    },
+    "evidence/native_training/preparation/attempts/001/exit_state.json": {
+      "bytes": 269,
+      "sha256": "ab59a847de3235b70c0128eeb84a823705d87c49e8724d3908085e02d3048d68"
+    },
+    "evidence/native_training/preparation/attempts/001/launch_binding.json": {
+      "bytes": 818,
+      "sha256": "5de31e2ecd53581e086c41c766c1c195ba69ff2d0f820360253db73caa6c36e3"
+    },
+    "evidence/native_training/preparation/attempts/001/preprocessing_manifest.json": {
+      "bytes": 410479,
+      "sha256": "a7b89495a9d65b6d3632668a4daf62b30afa7163a760e6a50b1a4b99fff8727d"
+    },
+    "evidence/native_training/preparation/attempts/001/stderr.log": {
+      "bytes": 747,
+      "sha256": "9c02c8265cb7eb2e4ea42931d387422aa260c9851c330c45ee5810656d068df6"
+    },
+    "evidence/native_training/preparation/attempts/001/stdout.log": {
+      "bytes": 1859,
+      "sha256": "485464e9c7348a03100fdc8b168597682eb52006a50d332f30aa54240172f65c"
+    },
+    "evidence/native_training/preparation/attempts/002/boundary.json": {
+      "bytes": 2203,
+      "sha256": "41339e3bcddfba17b58093165937b41cc1b400194185c864a8b93ebe498cc81a"
+    },
+    "evidence/native_training/preparation/attempts/002/cleanup.json": {
+      "bytes": 120,
+      "sha256": "26d163ebed7305325da4318bac0e01da17b8f2e5dbc7499ad673408652cc87da"
+    },
+    "evidence/native_training/preparation/attempts/002/command.json": {
+      "bytes": 2394,
+      "sha256": "0246ee13a70daeeb5c1cb5500680b670b20774c081638d7b898588a066eb6003"
+    },
+    "evidence/native_training/preparation/attempts/002/create.json": {
+      "bytes": 117,
+      "sha256": "587d85f5d1b387cb95c7f6d6067812248a7afe0417856ff1be1a857ce5720a1d"
+    },
+    "evidence/native_training/preparation/attempts/002/execution_receipt.json": {
+      "bytes": 1354,
+      "sha256": "f08b2990c0b0138c9247953c9b77ebedaf0dffdd008f3c7e9bb9fcb920944302"
+    },
+    "evidence/native_training/preparation/attempts/002/execution_status.json": {
+      "bytes": 663,
+      "sha256": "5dd17c4ed4c1e8115e1a68c7dd23c0f76abe124d1baaf2bcece18be205e65c64"
+    },
+    "evidence/native_training/preparation/attempts/002/exit_state.json": {
+      "bytes": 269,
+      "sha256": "b733f6fbf3830a2ff3925b035c361822d3cc59976329f9f0e1b4f12bfecb4e1c"
+    },
+    "evidence/native_training/preparation/attempts/002/launch_binding.json": {
+      "bytes": 818,
+      "sha256": "c152c0c4293289411e404dcdf977ebede24e973c7f7fbcdc9b20a4af67a991d7"
+    },
+    "evidence/native_training/preparation/attempts/002/preprocessing_manifest.json": {
+      "bytes": 411298,
+      "sha256": "e7a7f4781a110164fe5e3c5294ceb1a075d6582a1082fee45c5e7e7aa34e1821"
+    },
+    "evidence/native_training/preparation/attempts/002/stderr.log": {
+      "bytes": 4970,
+      "sha256": "d5773675520baf92d454f67b22efcc6ff8b35b97ba18dd292c9d6f85c8dcc09b"
+    },
+    "evidence/native_training/preparation/attempts/002/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/native_training/preparation/attempts/003/boundary.json": {
+      "bytes": 2213,
+      "sha256": "1d38b9de1a7727dd80a1b9cbcb384ccf78280c519c280b8f6d0ae2115848b9f3"
+    },
+    "evidence/native_training/preparation/attempts/003/cleanup.json": {
+      "bytes": 120,
+      "sha256": "75b6b1785f090f010b9506ce189a1d740aef9e5606c5fc5236c63e12c799e8f1"
+    },
+    "evidence/native_training/preparation/attempts/003/command.json": {
+      "bytes": 2402,
+      "sha256": "0f72b503e2498010187fd3170941cadb9a2b657c3dd9c14608b50f4f68ff5e55"
+    },
+    "evidence/native_training/preparation/attempts/003/create.json": {
+      "bytes": 117,
+      "sha256": "897a1bc19f3d9559071c857a5f2e509730737582fdf0eda0b32a5ef12be1ecb3"
+    },
+    "evidence/native_training/preparation/attempts/003/execution_receipt.json": {
+      "bytes": 880,
+      "sha256": "285792b3809d8914eaaca4ccf9c846dd3f85e03099eb9031a23af0c8f3eb133b"
+    },
+    "evidence/native_training/preparation/attempts/003/execution_status.json": {
+      "bytes": 663,
+      "sha256": "9afb5059a5b68bc10cf382b7e2256a2a49b1c83b403e416a8955715105a6da14"
+    },
+    "evidence/native_training/preparation/attempts/003/exit_state.json": {
+      "bytes": 269,
+      "sha256": "38338c591d933a4dd873c126804ba80759ae8531f637b8746a2525dcd8644c69"
+    },
+    "evidence/native_training/preparation/attempts/003/launch_binding.json": {
+      "bytes": 818,
+      "sha256": "a833fe79332acd7786ccf4c692f0e64993d3ec557dd86fad58b3c71dac0f0d77"
+    },
+    "evidence/native_training/preparation/attempts/003/preprocessing_manifest.json": {
+      "bytes": 411373,
+      "sha256": "9751b462e634a6dbc4c116d8707209d39f4de73139a88f55b6a110f3987678e5"
+    },
+    "evidence/native_training/preparation/attempts/003/stderr.log": {
+      "bytes": 1838,
+      "sha256": "36c263426a961034dc1bde81f9ec4a3cf67b3a1652caf360cff80dcbf9a95328"
+    },
+    "evidence/native_training/preparation/attempts/003/stdout.log": {
+      "bytes": 63,
+      "sha256": "4990889b0363f026593cc5310e352c3eb1217c4d01eac312ee74159adb488703"
+    },
+    "evidence/native_training/preparation/attempts/004/boundary.json": {
+      "bytes": 2225,
+      "sha256": "c9c7f56e516dcdf9be7088541ab774301334070300de28ce372ce90e32588d84"
+    },
+    "evidence/native_training/preparation/attempts/004/cleanup.json": {
+      "bytes": 120,
+      "sha256": "f1d9d091d28ca939242136facfd5e0f59c829fdc1ba500b52d3b5da5bca080de"
+    },
+    "evidence/native_training/preparation/attempts/004/command.json": {
+      "bytes": 2414,
+      "sha256": "71bda4d6e379da2c7274852909aaf36d53a8cbc886b08a72bde01e96077a7e1b"
+    },
+    "evidence/native_training/preparation/attempts/004/create.json": {
+      "bytes": 117,
+      "sha256": "239893c8e8116a14cad7e0de4e749ca4020a98a1e674483f6b8369daaec2b848"
+    },
+    "evidence/native_training/preparation/attempts/004/execution_receipt.json": {
+      "bytes": 1073,
+      "sha256": "69a5fad178d5192b46729f784135f961cad8621303ee593337996730ae1716c7"
+    },
+    "evidence/native_training/preparation/attempts/004/execution_status.json": {
+      "bytes": 663,
+      "sha256": "484713ca89d8cad8be229ed1faa6a47361bd2b8973263c80e977b81e6de1cc5a"
+    },
+    "evidence/native_training/preparation/attempts/004/exit_state.json": {
+      "bytes": 268,
+      "sha256": "834848be4fdd23bd74347309b38390363bd90945679b88e2f3e3ee619e7639e5"
+    },
+    "evidence/native_training/preparation/attempts/004/launch_binding.json": {
+      "bytes": 818,
+      "sha256": "f7ad77d385010a5617a291273db23095995eb36bf9073bad372c462927b7fbe1"
+    },
+    "evidence/native_training/preparation/attempts/004/preprocessing_manifest.json": {
+      "bytes": 414178,
+      "sha256": "29304cdd13b6612057433265c926898952d1d8d7ea99ce5f42cd3c4410d62daa"
+    },
+    "evidence/native_training/preparation/attempts/004/stderr.log": {
+      "bytes": 2105,
+      "sha256": "ea9acd716c9ed5bb0286321141f4eec7e31363c0f8e3cd6102ef5a99e5b4c040"
+    },
+    "evidence/native_training/preparation/attempts/004/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/native_training/preparation/attempts/005/boundary.json": {
+      "bytes": 2225,
+      "sha256": "34b8f2c00b37a81c04067af62eda88b1e8501f4045a17b573efa3fc281af6000"
+    },
+    "evidence/native_training/preparation/attempts/005/cleanup.json": {
+      "bytes": 120,
+      "sha256": "32f96119f0e0cc87fe513f1d18e3741b53840f8d3426a064f731574b1bab5236"
+    },
+    "evidence/native_training/preparation/attempts/005/command.json": {
+      "bytes": 2414,
+      "sha256": "6ad6dd2322a3f069e9aafc277623d93ffb11fda919b8045ffea22d73b999c16e"
+    },
+    "evidence/native_training/preparation/attempts/005/create.json": {
+      "bytes": 117,
+      "sha256": "637cf863fac96c0280460161a7b2c4493efde5bed41ff8eba985f1600adbab02"
+    },
+    "evidence/native_training/preparation/attempts/005/execution_receipt.json": {
+      "bytes": 1642,
+      "sha256": "c4e79991207f34ae2cf8840ee65dc85ee8e531e4963b7911b1f7d1489b085238"
+    },
+    "evidence/native_training/preparation/attempts/005/execution_status.json": {
+      "bytes": 657,
+      "sha256": "698760bb3e4c3c81c02eb12f5a30ac960b8cdf12f0096aa9a7e28908d829796b"
+    },
+    "evidence/native_training/preparation/attempts/005/exit_state.json": {
+      "bytes": 268,
+      "sha256": "8e6912ce08f81001eda19ebb0a8af7699c0f6f9bcc159f54b8835bfeac047e2a"
+    },
+    "evidence/native_training/preparation/attempts/005/launch_binding.json": {
+      "bytes": 818,
+      "sha256": "f4d169ec459b9d16f97e71588a1bd58378b8eb9123690b147fd4c8dd16d7b6d6"
+    },
+    "evidence/native_training/preparation/attempts/005/stderr.log": {
+      "bytes": 409,
+      "sha256": "17e22707e0e8e0cbce113110793dc70a6597334d1fa48b9d5317e37a83922359"
+    },
+    "evidence/native_training/preparation/attempts/005/stdout.log": {
+      "bytes": 7661,
+      "sha256": "d16bee1954de0a53299b3a362ca1ec7cb924dcac5b84b99374b039b340b1fdfd"
+    },
+    "evidence/native_training/preparation/cost_receipt.json": {
+      "bytes": 4614,
+      "sha256": "f7cd73e38e63af7c2feab37431f826c7b169916d692e5be4196c252c9c6d5e77"
+    },
+    "evidence/native_training/preparation/encode_train_selection.py": {
+      "bytes": 6387,
+      "sha256": "b048c6b138f74de30ffede11223a4ae9f02846e9bc536215bf6f645dfab94d1d"
+    },
+    "evidence/native_training/preparation/encoder_preparation_frozen.private.json": {
+      "bytes": 925,
+      "sha256": "2347eb98d153f4da64a5096c8f785f1329aa594f58af5a4ee5d2500ed2c7f8a1"
+    },
+    "evidence/native_training/preparation/preprocessing_manifest.json": {
+      "bytes": 414813,
+      "sha256": "adc840668b7d12bb4eeebae23749b26939b9d90720d422c462291d4e0e9b1e01"
+    },
+    "evidence/native_training/preparation/qualification.json": {
+      "bytes": 1672,
+      "sha256": "b133cdd71492e984117d25fa3f6e005447e9a133649ee60a21260e1d015b385b"
+    },
+    "evidence/native_training/preparation/qualification_procedure.py": {
+      "bytes": 6804,
+      "sha256": "9b064ce9eb499937945d29d8dbcc0561d57bc568a695e8347d40112ca2c9eecd"
+    },
+    "evidence/native_training/preparation/run_frozen_encoder.py": {
+      "bytes": 4821,
+      "sha256": "b5d766efb25b097a2f35969ee5ed7e1bdb022208b16c78052edd1baeb394849c"
+    },
+    "evidence/native_training/preparation/verify_prepared_inputs.py": {
+      "bytes": 3979,
+      "sha256": "a90f5818b0fb725cfcc9830cbfc8c0d83a7ab278c7fe344ca81e70c674e311fd"
+    },
+    "evidence/native_training/preparation/window_inventory.json": {
+      "bytes": 98962,
+      "sha256": "6a6aca4384cd12e458b653e5c6968e9c519cc8dc040d4a73ea0badc79cb24fec"
+    }
+  },
+  "model_weights_or_raw_text_included": false,
+  "native_training_completed": false,
+  "schema": "af-native-training-preparation-package/v1",
+  "source_population": {
+    "final": 0,
+    "selection": 15,
+    "train": 69
+  }
+}

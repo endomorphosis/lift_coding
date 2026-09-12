@@ -1,0 +1,252 @@
+{
+  "arms": {
+    "T0": {
+      "deterministic_across_replays": false,
+      "deterministic_metric_hashes": [
+        "890c402e0400406a6dd86c0483059e1032135726f3a0de9f9f9f39782f7aecc6",
+        "2a9a809de37e6c62242d8342b11df1eb3f1de83a636fe685d696662110880068",
+        "2a9a809de37e6c62242d8342b11df1eb3f1de83a636fe685d696662110880068"
+      ],
+      "executed": true,
+      "replays": 3,
+      "update_count": 0
+    },
+    "T1": {
+      "executed": true,
+      "memory_diagnostic": true,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ]
+    },
+    "T2": {
+      "executed": true,
+      "packed_cpu": [
+        {
+          "accepted_epochs": 0,
+          "applied_packed_updates": 1,
+          "backend": "packed_cpu",
+          "gradient_norms": [
+            0.0,
+            0.0
+          ],
+          "losses": [
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {}
+          ],
+          "parameter_changed": false,
+          "report_count": 2,
+          "seed": 104729
+        },
+        {
+          "accepted_epochs": 0,
+          "applied_packed_updates": 1,
+          "backend": "packed_cpu",
+          "gradient_norms": [
+            0.0,
+            0.0
+          ],
+          "losses": [
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {}
+          ],
+          "parameter_changed": false,
+          "report_count": 2,
+          "seed": 130363
+        },
+        {
+          "accepted_epochs": 0,
+          "applied_packed_updates": 1,
+          "backend": "packed_cpu",
+          "gradient_norms": [
+            0.0,
+            0.0
+          ],
+          "losses": [
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {}
+          ],
+          "parameter_changed": false,
+          "report_count": 2,
+          "seed": 155921
+        }
+      ],
+      "parameter_changed": false,
+      "projection_update_backend": "packed_cpu",
+      "sample_memory_disabled": true,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ]
+    },
+    "T3": {
+      "admitted_feedback": 69,
+      "executed": true,
+      "partial": false,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ],
+      "unresolved_gate": null
+    }
+  },
+  "config": {
+    "compute_device": "cpu",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "legal_ir_evaluate_provers": false,
+    "parser_text_chars": 4096,
+    "projection_update_backend": "packed_cpu",
+    "seeds": [
+      104729,
+      130363,
+      155921
+    ],
+    "t0_replays": 3,
+    "t1_epochs": 1,
+    "t1_learning_rate": 0.35,
+    "t2_epochs": 1,
+    "t2_learning_rate": 0.05,
+    "t2_line_search_attempts": 1,
+    "t2_max_seconds": 240.0,
+    "t2_max_update_families": 2,
+    "t2_use_sample_memory": false,
+    "t3_learning_rate": 0.1
+  },
+  "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd",
+  "cpu_seconds": 221.491,
+  "created_at": "2026-09-12T09:01:37.423195+00:00",
+  "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+  "environment": {
+    "narrow_validator_is_separate": true,
+    "native_checkers": {
+      "cvc5": {
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/cvc5",
+        "sha256": "cad00b4849b015ea6a7790f73cecdf639423f1a17f2c5ec90fda783f778611fb",
+        "usable": true,
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+      },
+      "lean": {
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "usable": true,
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      "z3": {
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+        "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "usable": true,
+        "version": "Z3 version 4.15.4 - 64 bit"
+      }
+    },
+    "numpy": {
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/numpy/__init__.py",
+      "ok": true,
+      "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e",
+      "version": "1.26.4"
+    },
+    "projection_update_backend": "packed_cpu",
+    "research_toolchain_sha256": "babc2ef29c2e4328b4a7ebb13f639b35a3e24c2c79abd8aa16ee3f6e70943bc7",
+    "resource_limits": {
+      "compute_device": "cpu",
+      "gpu_or_model_service_slots": 1,
+      "memory_gib": 16,
+      "per_seed_wall_minutes": 30
+    },
+    "stripped_profile_is_error": true,
+    "torch": {
+      "cpu": true,
+      "cuda_available": false,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/torch/__init__.py",
+      "ok": true,
+      "sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+      "version": "2.13.0+cpu"
+    }
+  },
+  "final_test_locked": true,
+  "frozen_inputs": {
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+    "modal_autoencoder_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+    "native_training_inputs_sha256": "6177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a",
+    "package_manifest_sha256": "595fe3c2b6b7339d967cfbf21de28f07de8fe03d819f625b999740d1c3038b15",
+    "preprocessing_manifest_sha256": "adc840668b7d12bb4eeebae23749b26939b9d90720d422c462291d4e0e9b1e01",
+    "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "train_sources_sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532",
+    "training_backend_sha256": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5"
+  },
+  "preserved_prior": {
+    "AF-011": "papers/completion/autoformalization/receipts/AF-011.json",
+    "AF-012": "papers/completion/autoformalization/receipts/AF-012.json",
+    "AF-020": "papers/completion/autoformalization/receipts/AF-020.json"
+  },
+  "promotion": {
+    "e_locked": true,
+    "generic_file_existence_insufficient": true,
+    "requires_af013_identity_bound_canary": true
+  },
+  "schema": "autoformalization-native-training-manifest/v1",
+  "t2_live_memory_checks": [
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 104729,
+      "trainer_sample_memory_used": false
+    },
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 130363,
+      "trainer_sample_memory_used": false
+    },
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 155921,
+      "trainer_sample_memory_used": false
+    }
+  ],
+  "t2_memory_contract": {
+    "source_sha256": "160f6fd8c3c49509abef9f9e4e83727bc8c53fc818e8477ef248d8d3dda0bfb3",
+    "t2_memory_disabled_in_source": true,
+    "train_generalizable_projection_evaluation_use_sample_memory": false,
+    "train_generalizable_projection_returns_sample_memory_used_false": true
+  },
+  "task_id": "AF-029",
+  "wall_seconds": 232.553
+}

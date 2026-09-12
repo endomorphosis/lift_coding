@@ -1,0 +1,17 @@
+{"stage": "start", "path": "/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/", "torch": "2.13.0+cpu"}
+{"stage": "samples", "train": 69, "selection": 15}
+{"stage": "compiler_targets", "count": 84, "elapsed": 0.264}
+{"stage": "native_checker", "receipts": 138, "admitted": 69, "elapsed": 12.301}
+{"stage": "T0", "replay": 1, "elapsed": 29.374}
+{"stage": "T0", "replay": 2, "elapsed": 4.279}
+{"stage": "T0", "replay": 3, "elapsed": 4.282}
+{"stage": "T1", "seed": 104729, "updates": 138, "elapsed": 18.442}
+{"stage": "T1", "seed": 130363, "updates": 138, "elapsed": 18.109}
+{"stage": "T1", "seed": 155921, "updates": 138, "elapsed": 18.174}
+{"stage": "T2", "seed": 104729, "updates": 0, "applied": 1, "elapsed": 35.659, "backend": "packed_cpu"}
+{"stage": "T3", "seed": 104729, "applied": 69, "elapsed": 0.018}
+{"stage": "T2", "seed": 130363, "updates": 0, "applied": 1, "elapsed": 36.203, "backend": "packed_cpu"}
+{"stage": "T3", "seed": 130363, "applied": 69, "elapsed": 0.017}
+{"stage": "T2", "seed": 155921, "updates": 0, "applied": 1, "elapsed": 35.668, "backend": "packed_cpu"}
+{"stage": "T3", "seed": 155921, "applied": 69, "elapsed": 0.017}
+{"admitted_feedback": 69, "checker_receipts": 138, "config_id": "917b200c845b4cc0c9cd1f553798968102979b62feb431df8761ddce3d9fb0bd", "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e", "packed_cpu": [{"accepted_epochs": 0, "applied_packed_updates": 1, "backend": "packed_cpu", "gradient_norms": [0.0, 0.0], "losses": [{"cosine": 0.0, "cross_entropy": 0.0, "guarded_auxiliary": 0.0, "l2": 0.0, "legal_ir_cross_entropy": 0.6931471824645996, "reconstruction": 0.0, "total": 0.6931471824645996}, {}], "parameter_changed": false, "report_count": 2, "seed": 104729}, {"accepted_epochs": 0, "applied_packed_updates": 1, "backend": "packed_cpu", "gradient_norms": [0.0, 0.0], "losses": [{"cosine": 0.0, "cross_entropy": 0.0, "guarded_auxiliary": 0.0, "l2": 0.0, "legal_ir_cross_entropy": 0.6931471824645996, "reconstruction": 0.0, "total": 0.6931471824645996}, {}], "parameter_changed": false, "report_count": 2, "seed": 130363}, {"accepted_epochs": 0, "applied_packed_updates": 1, "backend": "packed_cpu", "gradient_norms": [0.0, 0.0], "losses": [{"cosine": 0.0, "cross_entropy": 0.0, "guarded_auxiliary": 0.0, "l2": 0.0, "legal_ir_cross_entropy": 0.6931471824645996, "reconstruction": 0.0, "total": 0.6931471824645996}, {}], "parameter_changed": false, "report_count": 2, "seed": 155921}], "t2_changed": false, "targets": 84, "wall_seconds": 232.553}

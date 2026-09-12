@@ -1,0 +1,2 @@
+Token indices sequence length is longer than the specified maximum sequence length for this model (4232 > 512). Running this sequence through the model will result in indexing errors
+You're using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
