@@ -1,0 +1,131 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-021",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:23:12+00:00",
+  "completion_mode": "Primary-source related-work and bounded novelty integration into the editable workshop manuscript, with Crossref/arXiv/CFP identifier checks and a real compilation/citation check. Not a scored bake-off and not an end-to-end safety result.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.bbl": "4b92dcb4a1c3d409b6c6305aa2c091557916059113c19b876b51d3eaa97a077c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.blg": "ca6ab7a5b4323f741ff04e718564e7b4ac084b6d0a44ebdb29613663312445b6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.log": "c8117c20a116067e82450f59dd34dbbfc1d5c443cea802c77c227895233199a9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.txt": "67b08ed24e4b15b315991cf83c829de8046cfa0f782ea113d08db6ddfee2c791",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/pdf_digest.json": "b1b7f139240f4bffee3f733e37b7efcf434b9c5437eeb2f8dcf6b38e603f6c2c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/operator-review/primary_sources.json": "4b7a6420c75323c94818bf325553266f52ec92b9a58ce6dda263d93c8a8e1fdd",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex": "2cc4f671200b5cf1831a7b7555a1ef0875732dc53d658c36e17d9be445eb6313",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib": "9443def8ca8cffe9f86f7dcd7d47384ddb3455aee8d09cfd2a5eafe789180b15",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/novelty_statement.md": "5baf5518003a3d0ad5c19b4b22733111fb99cafdf6d5ca73eb6218ab7218f23c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/related_work.md": "cf5fdd1418c014b64dcd6792a5d74f3fd87d3c6a60fbb09e8d0aef34cae29bc8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/primary-source-verification.json": "d35ea327a45cfb746ba20141ebebc85f2870938f416f3f29ec3bf2506728cd9b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validate_related_work.py": "1c494b8393d08957a868672f4d345b5efb59ed92c58b164a095fdb3d1cfe1861",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/compile.stdout.log": "1d729bf3ea7fa281a0d657b1c468b87619ec793a5744a00cb89dcb18cc3e4cdf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/validate_related_work.stderr.log": "5497d33b7e1c2c8669c5478b7a13a93443b683b8f26af80940016e5a9deef148",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/validate_related_work.stdout.log": "5cf9f673d33260e0900952554062e5b459117c01eba15c0aae40f79198fa45e1"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/related_work.md": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/related_work.md",
+    "papers/completion/law_to_action/manuscript/related_work.bib": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib",
+    "papers/completion/law_to_action/novelty_statement.md": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/novelty_statement.md",
+    "papers/completion/law_to_action/manuscript/main.tex": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex"
+  },
+  "criteria": [
+    {
+      "criterion": "Closest related systems and implementable baseline rationale are cited from primary sources.",
+      "status": "met",
+      "explanation": "related_work.md and related_work.bib compare assurance boundary, source fidelity, generated-code effect observation, and useful-work measurement for reference monitors, proof-carrying authorization, Catala/executable law, UCAN/Cedar/MCP, AgentSpec, Progent, CaMeL, AgentDojo, and workshop-neighbor coding/proof systems. Arm A0–A4 rationale is taken from those primary sources as mechanism classes in this stack, not imported suites. Identifier corrections: Cedar DOI 10.1145/3649835 / arXiv:2403.04651; Hamlen DOI 10.1145/1111596.1111601; Clover cited from arXiv:2310.17807 after a false FMCAD DOI was removed. Live CFP, MCP, UCAN, IPFS, libp2p, and Quack URLs were retrieved on 12 September 2026. No listed external system is a scored arm.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/related_work.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/primary-source-verification.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/operator-review/primary_sources.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/validate_related_work.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Novelty statement matches the bounded experimental contribution and acknowledges modeling/trust assumptions.",
+      "status": "met",
+      "explanation": "novelty_statement.md and the rewritten abstract, introduction, and conclusion state the selected ENFORCE sandbox-handler question, keep Legal IR as a lossy model, record OFF/in-memory/trust limits, and refuse first-system or superiority claims against AgentSpec, Progent, CaMeL, Catala, AgentDojo, and related systems. Empirical safety numbers are reserved until retained runs exist.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/novelty_statement.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.txt",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/validate_related_work.stdout.log"
+      ]
+    },
+    {
+      "criterion": "References and workshop fit are reflected in editable manuscript without pretending all listed systems were benchmarked.",
+      "status": "met",
+      "explanation": "main.tex loads only related_work.bib, cites the comparison set in a Related work section rather than \\nocite, and states that no cited external system was executed as a scored arm. The live CFP (4–9 main-text pages; runtime monitoring, verified guardrails, constrained tool use) is cited. The compiled document has 9 main-text pages, references on pages 10–13, and appendices after that, as recorded in the pdflatex log and pdftotext extract. The binary PDF is omitted from the snapshot (NUL bytes); pdf_digest.json records its SHA-256 and page counts. Compilation used the LA-001 TinyTeX wrapper; the sealed-PATH validator confirmed citation resolution, identifier corrections, and bake-off non-claims.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/pdf_digest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.txt",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.bbl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/compiled/main.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/compile.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/validate_related_work.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validate_related_work.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/bin/vericodegen-latexmk",
+        "-g",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "papers/completion/law_to_action/manuscript",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/compile.stdout.log",
+      "started_at": "2026-09-12T01:17:27+00:00",
+      "completed_at": "2026-09-12T01:17:27+00:00",
+      "environment_overrides": {
+        "PATH_NOTE": "Wrapper prepends user-local TinyTeX; pdflatex/bibtex are not on the sealed validation PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin."
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validate_related_work.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/validate_related_work.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-021/validate_related_work.py",
+      "started_at": "2026-09-12T01:23:12+00:00",
+      "completed_at": "2026-09-12T01:23:12+00:00",
+      "environment_overrides": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3 (/usr/bin/python3.12)",
+    "authoritative_validation_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "latexmk": "4.88 via /home/barberb/.local/bin/vericodegen-latexmk -> TinyTeX TeX Live 2026",
+    "pdftex": "3.141592653-2.6-1.40.29 (TeX Live 2026)",
+    "bibtex": "0.99e (TeX Live 2026)",
+    "pdftotext": "24.02.0 (/usr/bin/pdftotext; present on sealed PATH)",
+    "selected_bibliography": "papers/completion/law_to_action/manuscript/related_work.bib",
+    "inherited_bibliography_retained_unloaded": "papers/completion/law_to_action/manuscript/references.bib",
+    "primary_source_check": "2026-09-12 Crossref, arXiv abstracts, live CFP and specification URLs",
+    "operator_review_agentspec_progent_camel": "2026-09-11 versioned arXiv abstracts, reconfirmed 2026-09-12",
+    "model_or_solver_experiment": "none performed by LA-021",
+    "scored_arms_executed": "none",
+    "compiled_pdf_snapshot": "omitted; NUL-byte binary. Digest and pdftotext extract retained."
+  },
+  "limitations": [
+    "This task is a literature comparison, identifier check, novelty bound, and manuscript integration. It does not execute AgentSpec, Progent, CaMeL, AgentDojo, Catala, Cedar, or any other listed system as a scored arm.",
+    "pdflatex/bibtex/latexmk are absent from the sealed validation PATH. Compilation used the same user-local TinyTeX wrapper as LA-001. The sealed-PATH validator checked sources, citations, and the compiled text extract via pdftotext. The binary PDF is omitted from the snapshot because it contains NUL bytes; sha256 and page counts are in pdf_digest.json.",
+    "OpenReview API for SWE-bench forum VTF8yNQM66 returned HTTP 403; the ICLR 2024 venue is retained with retrieved arXiv:2310.06770.",
+    "Inherited MCP/UCAN/IPFS/libp2p/Quack access dates remain reconstructed 6 September 2026 source text; live retrieval on 12 September 2026 confirmed URL resolution without replacing those dates.",
+    "LA-022 remains responsible for replacing evaluation-template prose with measured results or scoped omissions. No numerical safety, utility, or cost advantage is claimed here."
+  ]
+}

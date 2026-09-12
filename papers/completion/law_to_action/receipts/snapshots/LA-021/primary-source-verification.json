@@ -1,0 +1,78 @@
+{
+  "schema": "paper-la021-primary-source-verification/v1",
+  "retrieved_at": "2026-09-12T01:00:00+00:00",
+  "method": "Crossref works API, arXiv abstract HTML, doi.org redirects, live specification/CFP GETs. Not a bake-off and not a claim that any listed system was executed.",
+  "corrections": [
+    {
+      "key": "cutler2024cedar",
+      "issue": "Inherited DOI 10.1145/3649817 is Cocoon (a different PACMPL OOPSLA1 2024 paper). Inherited eprint 2403.04623 is a different arXiv record (Bloch oscillations).",
+      "correction": "DOI 10.1145/3649835, pages 670-697, PACMPL 8(OOPSLA1); extended version arXiv:2403.04651 submitted 7 March 2024."
+    },
+    {
+      "key": "hamlen2006enforcement",
+      "issue": "Inherited DOI 10.1145/1111596.1111603 does not resolve in Crossref (HTTP 404).",
+      "correction": "DOI 10.1145/1111596.1111601, TOPLAS 28(1):175-205."
+    },
+    {
+      "key": "sun2024clover",
+      "issue": "Inherited TU Wien DOI 10.34727/2024/isbn.978-3-85448-065-5_27 redirects to Toward Exhaustive Sequential Redundancy Removal, not Clover.",
+      "correction": "Cite arXiv:2310.17807 only (submitted 26 October 2023; no journal-ref/DOI on the abstract page)."
+    },
+    {
+      "key": "mcp-auth",
+      "issue": "Reconstructed paraphrase 'application implementations remain responsible for enforcing security requirements' is not a verbatim quotation of the live 2025-11-25 authorization page.",
+      "correction": "Live page specifies OAuth 2.1 resource-server roles and requires implementations to follow OAuth 2.1 security best practices."
+    }
+  ],
+  "crossref_confirmed_dois": [
+    "10.1109/PROC.1975.9939",
+    "10.1145/263699.263712",
+    "10.1145/319709.319718",
+    "10.1145/353323.353382",
+    "10.1109/SECPRI.2000.848461",
+    "10.1007/s10207-004-0046-8",
+    "10.1145/1111596.1111601",
+    "10.1007/BFb0054170",
+    "10.1145/5689.5920",
+    "10.1016/j.artint.2015.06.005",
+    "10.1016/j.artint.2020.103348",
+    "10.1145/3446804.3446850",
+    "10.1145/3473582",
+    "10.1145/3475960.3475985",
+    "10.1145/3649835",
+    "10.1145/1538788.1538814",
+    "10.18653/v1/2024.findings-acl.624",
+    "10.52202/079017-2636",
+    "10.52202/075280-0944",
+    "10.52202/068431-2344",
+    "10.14722/ndss.2014.23212"
+  ],
+  "arxiv_abstracts_retrieved": [
+    "2107.03374",
+    "2310.17807",
+    "2205.12615",
+    "2406.13352",
+    "2309.15817",
+    "2403.02691",
+    "2406.12045",
+    "2410.09024",
+    "2503.18813v2",
+    "2503.18666v3",
+    "2504.11703v3",
+    "2403.04651",
+    "2310.06770"
+  ],
+  "live_urls_retrieved": {
+    "https://vericodegen.github.io/cfp.html": "Call for Papers — VeriCodeGen: AI for Verifiable Coding at NeurIPS 2026; 4-9 main-text pages; official 2026 template; non-archival; topics include runtime monitoring of agents, verified guardrails, constrained tool use, access-control policies",
+    "https://modelcontextprotocol.io/specification/2025-11-25": "Specification - Model Context Protocol",
+    "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization": "Authorization - Model Context Protocol",
+    "https://ucan.xyz/specification/": "User Controlled Authorization Network (UCAN) Specification",
+    "https://docs.ipfs.tech/concepts/content-addressing/": "Content Identifiers (CIDs) | IPFS Docs",
+    "https://github.com/libp2p/specs/blob/master/connections/README.md": "specs/connections/README.md at master · libp2p/specs",
+    "https://duckdb.org/2026/05/12/quack-remote-protocol": "Quack: The DuckDB Client-Server Protocol – DuckDB"
+  },
+  "unresolved": [
+    "OpenReview API for SWE-bench forum VTF8yNQM66 returned HTTP 403; ICLR 2024 venue retained with arXiv:2310.06770 as the retrieved primary eprint."
+  ],
+  "not_benchmarked": true
+}

@@ -1,7 +1,8 @@
 {
   "schema": "paper-la021-primary-source-metadata-review/v1",
   "observed_at": "2026-09-11T21:42:05.745697+00:00",
-  "scope": "Primary arXiv abstract pages and version histories reviewed by the operator. This verifies the metadata and bounded descriptions below, not implementation behavior, reported scores, or every inherited citation.",
+  "completed_at": "2026-09-12T01:20:00+00:00",
+  "scope": "Primary arXiv abstract pages and version histories reviewed by the operator for AgentSpec, Progent, and CaMeL. Remaining bibliography identifiers were checked on 12 September 2026 as recorded in primary-source-verification.json. This verifies metadata and bounded descriptions, not implementation behavior, reported scores, or experimental execution.",
   "sources": [
     {
       "system": "AgentSpec",
@@ -15,7 +16,8 @@
       "first_submitted": "2025-03-24",
       "version_date": "2025-07-31",
       "bounded_description": "A rule language expresses triggers, predicates and runtime enforcement for agents. Its reported domains include code execution.",
-      "review_implication": "Runtime constraints and enforcement already have direct agent-system precedents; do not claim the first runtime rule layer."
+      "review_implication": "Runtime constraints and enforcement already have direct agent-system precedents; do not claim the first runtime rule layer.",
+      "reconfirmed_2026-09-12": true
     },
     {
       "system": "Progent",
@@ -33,7 +35,8 @@
       "first_submitted": "2025-04-16",
       "version_date": "2026-05-14",
       "bounded_description": "Symbolic policies constrain tool names and arguments. The current abstract describes SMT classification of policy updates, with automatic narrowing and approval for expansion.",
-      "review_implication": "Compare this explicit privilege boundary and security/utility measurement; do not imply that agent policy enforcement or guarded updates are unique to the law-to-action paper."
+      "review_implication": "Compare this explicit privilege boundary and security/utility measurement; do not imply that agent policy enforcement or guarded updates are unique to the law-to-action paper.",
+      "reconfirmed_2026-09-12": true
     },
     {
       "system": "CaMeL",
@@ -54,9 +57,11 @@
       "first_submitted": "2025-03-24",
       "version_date": "2025-06-24",
       "bounded_description": "A layer separates control and data flow from trusted queries and uses capabilities to constrain data flow at tool calls.",
-      "review_implication": "Discuss this adjacent capability boundary; citations are not evidence that its implementation was benchmarked in this paper."
+      "review_implication": "Discuss this adjacent capability boundary; citations are not evidence that its implementation was benchmarked in this paper.",
+      "reconfirmed_2026-09-12": true
     }
   ],
-  "native_state_modified": false,
-  "task_complete": false
+  "native_state_modified": true,
+  "task_complete": true,
+  "follow_on_verification": "papers/completion/law_to_action/receipts/snapshots/LA-021/primary-source-verification.json"
 }

@@ -1,0 +1,261 @@
+\begin{thebibliography}{39}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Model Context Protocol contributors}(2025{\natexlab{a}})]{mcp}
+{Model Context Protocol contributors}.
+\newblock {Model Context Protocol specification, revision 2025-11-25}, 2025{\natexlab{a}}.
+\newblock URL \url{https://modelcontextprotocol.io/specification/2025-11-25}.
+\newblock Accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 September 2026 at the same URL; title: Specification - Model Context Protocol. Tool-invocation protocol, not a generated-code effect monitor.
+
+\bibitem[{Model Context Protocol contributors}(2025{\natexlab{b}})]{mcp-auth}
+{Model Context Protocol contributors}.
+\newblock {Model Context Protocol: Authorization, revision 2025-11-25}, 2025{\natexlab{b}}.
+\newblock URL \url{https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization}.
+\newblock Accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title: Authorization - Model Context Protocol. Specifies OAuth 2.1 resource-server roles and requires implementations to follow OAuth 2.1 security best practices. It is not a generated-code effect observer.
+
+\bibitem[{NeurIPS 2026 Workshop on AI for Verifiable Coding organizers}(2026)]{vericode2026cfp}
+{NeurIPS 2026 Workshop on AI for Verifiable Coding organizers}.
+\newblock Call for papers, 2026.
+\newblock URL \url{https://vericodegen.github.io/cfp.html}.
+\newblock Live page retrieved 12 September 2026. Title: Call for Papers --- VeriCodeGen: AI for Verifiable Coding at NeurIPS 2026. Research track: main text at least 4 and at most 9 pages excluding references and appendices; official 2026 workshop template; double-blind submission including linked artifacts; methodology-essential LLM disclosure; non-archival workshop. Listed topics include runtime monitoring of agents, verified guardrails, constrained tool use, and access-control policies. Paper deadline 13 September 2026 AoE; camera-ready 14 October 2026; workshop 12 December 2026, Atlanta.
+
+\bibitem[Wang et~al.(2025)Wang, Poskitt, and Sun]{wang2025agentspec}
+Haoyu Wang, Christopher~M. Poskitt, and Jun Sun.
+\newblock Agentspec: Customizable runtime enforcement for safe and reliable llm agents, 2025.
+\newblock URL \url{https://arxiv.org/abs/2503.18666v3}.
+\newblock Version 3, 31 July 2025. arXiv abstract retrieved 12 September 2026; first submitted 24 March 2025. Operator metadata check 11 September 2026. Not benchmarked in this paper.
+
+\bibitem[Shi et~al.(2025)Shi, He, Wang, Li, Wu, Guo, and Song]{shi2025progent}
+Tianneng Shi, Jingxuan He, Zhun Wang, Hongwei Li, Linyu Wu, Wenbo Guo, and Dawn Song.
+\newblock Progent: Securing ai agents with privilege control, 2025.
+\newblock URL \url{https://arxiv.org/abs/2504.11703v3}.
+\newblock Version 3 revised 14 May 2026; first submitted 16 April 2025. arXiv abstract retrieved 12 September 2026. Operator metadata check 11 September 2026. Not benchmarked in this paper.
+
+\bibitem[Debenedetti et~al.(2025)Debenedetti, Shumailov, Fan, Hayes, Carlini, Fabian, Kern, Shi, Terzis, and Tram{\`{e}}r]{debenedetti2025camel}
+Edoardo Debenedetti, Ilia Shumailov, Tianqi Fan, Jamie Hayes, Nicholas Carlini, Daniel Fabian, Christoph Kern, Chongyang Shi, Andreas Terzis, and Florian Tram{\`{e}}r.
+\newblock Defeating prompt injections by design, 2025.
+\newblock URL \url{https://arxiv.org/abs/2503.18813v2}.
+\newblock CaMeL capability isolation for LLM agents. Version 2, 24 June 2025; arXiv abstract retrieved 12 September 2026. Operator metadata check 11 September 2026. Not executed as a scored arm here.
+
+\bibitem[Merigoux et~al.(2021{\natexlab{a}})Merigoux, Chataing, and Protzenko]{catala}
+Denis Merigoux, Nicolas Chataing, and Jonathan Protzenko.
+\newblock {Catala: A programming language for the law}.
+\newblock \emph{Proceedings of the ACM on Programming Languages}, 5\penalty0 (ICFP):\penalty0 77:1--77:29, 2021{\natexlab{a}}.
+\newblock \doi{10.1145/3473582}.
+\newblock Crossref retrieved 12 September 2026. Crossref page field is 1-29; PACMPL article-number pagination 77:1--77:29 is retained from the reconstructed bibliography.
+
+\bibitem[Debenedetti et~al.(2024)Debenedetti, Zhang, Balunovi{\'{c}}, Beurer-Kellner, Fischer, and Tram{\`{e}}r]{debenedetti2024agentdojo}
+Edoardo Debenedetti, Jie Zhang, Mislav Balunovi{\'{c}}, Luca Beurer-Kellner, Marc Fischer, and Florian Tram{\`{e}}r.
+\newblock {AgentDojo}: A dynamic environment to evaluate prompt injection attacks and defenses for {LLM} agents.
+\newblock In \emph{Advances in Neural Information Processing Systems}, volume~37, pages 82895--82920, 2024.
+\newblock \doi{10.52202/079017-2636}.
+\newblock Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September 2026; submitted 19 June 2024. Datasets and Benchmarks track. Utility versus attack-success in dynamic tool environments; not this paper's sandbox-handler counters.
+
+\bibitem[Saltzer and Schroeder(1975)]{saltzer1975protection}
+Jerome~H. Saltzer and Michael~D. Schroeder.
+\newblock The protection of information in computer systems.
+\newblock \emph{Proceedings of the IEEE}, 63\penalty0 (9):\penalty0 1278--1308, 1975.
+\newblock \doi{10.1109/PROC.1975.9939}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Schneider(2000)]{schneider2000enforceable}
+Fred~B. Schneider.
+\newblock Enforceable security policies.
+\newblock \emph{ACM Transactions on Information and System Security}, 3\penalty0 (1):\penalty0 30--50, 2000.
+\newblock \doi{10.1145/353323.353382}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[\'{U}lfar Erlingsson and Schneider(2000)]{erlingsson2000irm}
+\'{U}lfar Erlingsson and Fred~B. Schneider.
+\newblock {IRM} enforcement of {Java} stack inspection.
+\newblock In \emph{Proceeding of the 2000 {IEEE} Symposium on Security and Privacy}, pages 246--255. IEEE, 2000.
+\newblock \doi{10.1109/SECPRI.2000.848461}.
+\newblock Crossref retrieved 12 September 2026. IEEE container title uses ``Proceeding'' rather than ``Proceedings''.
+
+\bibitem[Ligatti et~al.(2005)Ligatti, Bauer, and Walker]{ligatti2005edit}
+Jay Ligatti, Lujo Bauer, and David Walker.
+\newblock Edit automata: enforcement mechanisms for run-time security policies.
+\newblock \emph{International Journal of Information Security}, 4\penalty0 (1-2):\penalty0 2--16, 2005.
+\newblock \doi{10.1007/s10207-004-0046-8}.
+\newblock Crossref retrieved 12 September 2026. Issue is 1-2.
+
+\bibitem[Hamlen et~al.(2006)Hamlen, Morrisett, and Schneider]{hamlen2006enforcement}
+Kevin~W. Hamlen, Greg Morrisett, and Fred~B. Schneider.
+\newblock Computability classes for enforcement mechanisms.
+\newblock \emph{ACM Transactions on Programming Languages and Systems}, 28\penalty0 (1):\penalty0 175--205, 2006.
+\newblock \doi{10.1145/1111596.1111601}.
+\newblock Crossref retrieved 12 September 2026. Corrected from the non-resolving identifier 10.1145/1111596.1111603.
+
+\bibitem[Necula(1997)]{necula1997pcc}
+George~C. Necula.
+\newblock Proof-carrying code.
+\newblock In \emph{Proceedings of the 24th {ACM} {SIGPLAN}-{SIGACT} Symposium on Principles of Programming Languages}, POPL '97, pages 106--119. ACM, 1997.
+\newblock \doi{10.1145/263699.263712}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Appel and Felten(1999)]{appel1999pca}
+Andrew~W. Appel and Edward~W. Felten.
+\newblock Proof-carrying authentication.
+\newblock In \emph{Proceedings of the 6th {ACM} Conference on Computer and Communications Security}, CCS '99, pages 52--62. ACM, 1999.
+\newblock \doi{10.1145/319709.319718}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Pnueli et~al.(1998)Pnueli, Siegel, and Singerman]{pnueli1998translation}
+Amir Pnueli, Michael Siegel, and Eli Singerman.
+\newblock Translation validation.
+\newblock In \emph{Tools and Algorithms for the Construction and Analysis of Systems}, volume 1384 of \emph{Lecture Notes in Computer Science}, pages 151--166. Springer, 1998.
+\newblock \doi{10.1007/BFb0054170}.
+\newblock Crossref retrieved 12 September 2026. TACAS 1998, LNCS 1384.
+
+\bibitem[Leroy(2009)]{leroy2009compcert}
+Xavier Leroy.
+\newblock Formal verification of a realistic compiler.
+\newblock \emph{Communications of the ACM}, 52\penalty0 (7):\penalty0 107--115, 2009.
+\newblock \doi{10.1145/1538788.1538814}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Sergot et~al.(1986)Sergot, Sadri, Kowalski, Kriwaczek, Hammond, and Cory]{sergot1986bna}
+M.~J. Sergot, F.~Sadri, R.~A. Kowalski, F.~Kriwaczek, P.~Hammond, and H.~T. Cory.
+\newblock The {British} {Nationality} {Act} as a logic program.
+\newblock \emph{Communications of the ACM}, 29\penalty0 (5):\penalty0 370--386, 1986.
+\newblock \doi{10.1145/5689.5920}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Prakken and Sartor(2015)]{prakken2015lawlogic}
+Henry Prakken and Giovanni Sartor.
+\newblock Law and logic: A review from an argumentation perspective.
+\newblock \emph{Artificial Intelligence}, 227:\penalty0 214--245, 2015.
+\newblock \doi{10.1016/j.artint.2015.06.005}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Benzm{\"u}ller et~al.(2020)Benzm{\"u}ller, Parent, and van~der Torre]{benzmueller2020logikey}
+Christoph Benzm{\"u}ller, Xavier Parent, and Leendert van~der Torre.
+\newblock Designing normative theories for ethical and legal reasoning: {LogiKEy} framework, methodology, and tool support.
+\newblock \emph{Artificial Intelligence}, 287:\penalty0 103348, 2020.
+\newblock \doi{10.1016/j.artint.2020.103348}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Merigoux et~al.(2021{\natexlab{b}})Merigoux, Monat, and Protzenko]{merigoux2021tax}
+Denis Merigoux, Rapha{\"e}l Monat, and Jonathan Protzenko.
+\newblock A modern compiler for the {French} tax code.
+\newblock In \emph{Proceedings of the 30th {ACM} {SIGPLAN} International Conference on Compiler Construction}, CC 2021, pages 71--82. ACM, 2021{\natexlab{b}}.
+\newblock \doi{10.1145/3446804.3446850}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Miller(2006)]{miller2006robust}
+Mark~S. Miller.
+\newblock \emph{Robust Composition: Towards a Unified Approach to Access Control and Concurrency Control}.
+\newblock PhD thesis, Johns Hopkins University, 2006.
+\newblock PhD thesis; no DOI used. Object-capability discipline.
+
+\bibitem[Birgisson et~al.(2014)Birgisson, Politz, Erlingsson, Taly, Vrable, and Lentczner]{birgisson2014macaroons}
+Arnar Birgisson, Joe~Gibbs Politz, {\'{U}}lfar Erlingsson, Ankur Taly, Michael Vrable, and Mark Lentczner.
+\newblock Macaroons: Cookies with contextual caveats for decentralized authorization in the cloud.
+\newblock In \emph{Proceedings of the 2014 Network and Distributed System Security Symposium}, NDSS 2014. Internet Society, 2014.
+\newblock \doi{10.14722/ndss.2014.23212}.
+\newblock Crossref retrieved 12 September 2026.
+
+\bibitem[Pang et~al.(2019)Pang, C{\'{a}}ceres, Burrows, Chen, Godiwala, Kapoor, Hill, Kowalczyk, Piwonka, Ramadan, Rosenthal, Sun, Tuttle, Wang, Weingarten, and Zaks]{pang2019zanzibar}
+Ruoming Pang, Ram{\'{o}}n C{\'{a}}ceres, Mike Burrows, Zhifeng Chen, Pratik Godiwala, Ankur Kapoor, Christopher~J. Hill, Kamil Kowalczyk, Alexander Piwonka, David Ramadan, David Rosenthal, David Sun, Rodrigo Tuttle, Jason Wang, Aaron Weingarten, and Maya Zaks.
+\newblock Zanzibar: {Google}'s consistent, global authorization system.
+\newblock In \emph{2019 {USENIX} Annual Technical Conference ({USENIX} {ATC} 19)}, pages 33--46. {USENIX} Association, 2019.
+\newblock URL \url{https://www.usenix.org/conference/atc19/presentation/pang}.
+\newblock USENIX ATC 2019. No Crossref DOI required; official proceedings pagination 33--46.
+
+\bibitem[Cutler et~al.(2024)Cutler, Disselkoen, Eline, He, Headley, Hicks, Hietala, Ioannidis, Kastner, Mamat, McAdams, McCutchen, Rungta, Torlak, and Wells]{cutler2024cedar}
+Joseph~W. Cutler, Craig Disselkoen, Aaron Eline, Shaobo He, Kyle Headley, Michael Hicks, Kesha Hietala, Eleftherios Ioannidis, John Kastner, Anwar Mamat, Darin McAdams, Matt McCutchen, Neha Rungta, Emina Torlak, and Andrew Wells.
+\newblock Cedar: A new language for expressive, fast, safe, and analyzable authorization.
+\newblock \emph{Proceedings of the ACM on Programming Languages}, 8\penalty0 (OOPSLA1):\penalty0 670--697, 2024.
+\newblock \doi{10.1145/3649835}.
+\newblock Crossref retrieved 12 September 2026. Corrected from inherited DOI 10.1145/3649817 (Cocoon, a different OOPSLA1 2024 paper) and inherited eprint 2403.04623 (a different arXiv record). Extended version: arXiv:2403.04651, submitted 7 March 2024.
+
+\bibitem[{UCAN contributors}(2026)]{ucan}
+{UCAN contributors}.
+\newblock {User controlled authorization network (UCAN) specification}, 2026.
+\newblock URL \url{https://ucan.xyz/specification/}.
+\newblock Specification accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title: User Controlled Authorization Network (UCAN) Specification. Signed delegation is distinct from theorem checking and from exact proof-capability binding.
+
+\bibitem[Chen et~al.(2021)Chen, Tworek, Jun, Yuan, de~Oliveira~Pinto, Kaplan, Edwards, Burda, Joseph, Brockman, Ray, Puri, Krueger, Petrov, Khlaaf, Sastry, Mishkin, Chan, Gray, Ryder, Pavlov, Power, Kaiser, Bavarian, Winter, Tillet, Such, Cummings, Plappert, Chantzis, Barnes, Herbert-Voss, Guss, Nichol, Paino, Tezak, Tang, Babuschkin, Balaji, Jain, Saunders, Hesse, Carr, Leike, Achiam, Misra, Morikawa, Radford, Knight, Brundage, Murati, Mayer, Welinder, McGrew, Amodei, McCandlish, Sutskever, and Zaremba]{chen2021codex}
+Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique~Ponde de~Oliveira~Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, Alex Ray, Raul Puri, Gretchen Krueger, Mikhail Petrov, Heidy Khlaaf, Girish Sastry, Pamela Mishkin, Brooke Chan, Scott Gray, Nick Ryder, Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad Bavarian, Clemens Winter, Philippe Tillet, Felipe~Petroski Such, Dave Cummings, Matthias Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss, William~Hebgen Guss, Alex Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor Babuschkin, Suchir Balaji, Shantanu Jain, William Saunders, Christopher Hesse, Andrew~N. Carr, Jan Leike, Josh Achiam, Vedant Misra, Evan Morikawa, Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer, Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, and Wojciech Zaremba.
+\newblock Evaluating large language models trained on code, 2021.
+\newblock arXiv abstract retrieved 12 September 2026; submitted 7 July 2021. HumanEval functional-correctness benchmark; not a forbidden-effect mediation measurement.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and Narasimhan]{jimenez2024swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan.
+\newblock {SWE}-bench: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{The Twelfth International Conference on Learning Representations}, 2024.
+\newblock ICLR 2024. OpenReview forum VTF8yNQM66 (OpenReview API returned HTTP 403 on 12 September 2026). arXiv:2310.06770 abstract retrieved 12 September 2026; submitted 10 October 2023. Issue-resolution utility, not gated handler-effect counters.
+
+\bibitem[Sun et~al.(2023)Sun, Sheng, Padon, and Barrett]{sun2024clover}
+Chuyue Sun, Ying Sheng, Oded Padon, and Clark Barrett.
+\newblock Clover: Closed-loop verifiable code generation, 2023.
+\newblock arXiv abstract retrieved 12 September 2026; submitted 26 October 2023. No arXiv journal-ref or DOI on the abstract page. The inherited TU Wien ISBN item 27 identifier resolves to a different FMCAD 2024 paper (Toward Exhaustive Sequential Redundancy Removal) and is not used.
+
+\bibitem[Yang et~al.(2023)Yang, Swope, Gu, Chalamala, Song, Yu, Godil, Prenger, and Anandkumar]{yang2023leandojo}
+Kaiyu Yang, Aidan Swope, Alex Gu, Rahul Chalamala, Peiyang Song, Shixing Yu, Saad Godil, Ryan~J. Prenger, and Animashree Anandkumar.
+\newblock {LeanDojo}: Theorem proving with retrieval-augmented language models.
+\newblock In \emph{Advances in Neural Information Processing Systems}, volume~36, pages 21573--21612, 2023.
+\newblock \doi{10.52202/075280-0944}.
+\newblock Crossref retrieved 12 September 2026. Neighboring workshop topic; not this handler route.
+
+\bibitem[Wu et~al.(2022)Wu, Jiang, Li, Rabe, Staats, Jamnik, and Szegedy]{wu2022autoformalization}
+Yuhuai Wu, Albert~Q. Jiang, Wenda Li, Markus~N. Rabe, Charles Staats, Mateja Jamnik, and Christian Szegedy.
+\newblock Autoformalization with large language models.
+\newblock In \emph{Advances in Neural Information Processing Systems}, volume~35, pages 32353--32368, 2022.
+\newblock \doi{10.52202/068431-2344}.
+\newblock Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September 2026; submitted 25 May 2022. Neighboring workshop topic; not this handler route.
+
+\bibitem[Ruan et~al.(2024)Ruan, Dong, Wang, Pitis, Zhou, Ba, Dubois, Maddison, and Hashimoto]{ruan2024toolemu}
+Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba, Yann Dubois, Chris~J. Maddison, and Tatsunori Hashimoto.
+\newblock Identifying the risks of {LM} agents with an {LM}-emulated sandbox.
+\newblock In \emph{The Twelfth International Conference on Learning Representations}, 2024.
+\newblock ToolEmu. arXiv abstract retrieved 12 September 2026; submitted 25 September 2023. Emulated tools are not independently observed handler mutations.
+
+\bibitem[Zhan et~al.(2024)Zhan, Liang, Ying, and Kang]{zhan2024injecagent}
+Qiusi Zhan, Zhixiang Liang, Zifan Ying, and Daniel Kang.
+\newblock {InjecAgent}: Benchmarking indirect prompt injections in tool-integrated large language model agents.
+\newblock In \emph{Findings of the Association for Computational Linguistics: {ACL} 2024}, pages 10471--10506, 2024.
+\newblock \doi{10.18653/v1/2024.findings-acl.624}.
+\newblock Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September 2026; submitted 5 March 2024.
+
+\bibitem[Yao et~al.(2024)Yao, Shinn, Razavi, and Narasimhan]{yao2024taubench}
+Shunyu Yao, Noah Shinn, Pedram Razavi, and Karthik Narasimhan.
+\newblock $\tau$-bench: A benchmark for tool-agent-user interaction in real-world domains, 2024.
+\newblock arXiv abstract retrieved 12 September 2026; submitted 17 June 2024. Policy-following success in tool-agent-user interaction; not a generated-code-to-protected-effect mediation measurement.
+
+\bibitem[Andriushchenko et~al.(2025)Andriushchenko, Souly, Dziemian, Duenas, Lin, Wang, Hendrycks, Zou, Kolter, Fredrikson, Winsor, Wynne, Gal, and Davies]{andriushchenko2025agentharm}
+Maksym Andriushchenko, Alexandra Souly, Mateusz Dziemian, Derek Duenas, Maxwell Lin, Justin Wang, Dan Hendrycks, Andy Zou, Zico Kolter, Matt Fredrikson, Eric Winsor, Jerome Wynne, Yarin Gal, and Xander Davies.
+\newblock {AgentHarm}: A benchmark for measuring harmfulness of {LLM} agents.
+\newblock In \emph{The Thirteenth International Conference on Learning Representations}, 2025.
+\newblock arXiv abstract retrieved 12 September 2026; submitted 11 October 2024. ICLR 2025. Harmfulness oracle; not this handler route.
+
+\bibitem[Bhandari et~al.(2021)Bhandari, Naseer, and Moonen]{cvefixes}
+Guru Bhandari, Amara Naseer, and Leon Moonen.
+\newblock {CVEfixes: Automated collection of vulnerabilities and their fixes from open-source software}.
+\newblock In \emph{Proceedings of the 17th International Conference on Predictive Models and Data Analytics in Software Engineering}, pages 30--39, 2021.
+\newblock \doi{10.1145/3475960.3475985}.
+\newblock Crossref retrieved 12 September 2026. Dataset, not a runtime.
+
+\bibitem[{DuckDB team}(2026)]{quack}
+{DuckDB team}.
+\newblock {Quack: The duckdb client-server protocol}, 2026.
+\newblock URL \url{https://duckdb.org/2026/05/12/quack-remote-protocol}.
+\newblock 12 May 2026. Accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title: Quack: The DuckDB Client-Server Protocol. Operational-state substrate, not a safety theorem.
+
+\bibitem[{IPFS contributors}(2026)]{ipfs}
+{IPFS contributors}.
+\newblock {Content identifiers (CIDs)}, 2026.
+\newblock URL \url{https://docs.ipfs.tech/concepts/content-addressing/}.
+\newblock Documentation accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title: Content Identifiers (CIDs) | IPFS Docs. Content identity is not publication, availability, or authorization.
+
+\bibitem[{libp2p contributors}(2026)]{libp2p}
+{libp2p contributors}.
+\newblock {libp2p connections specification}, 2026.
+\newblock URL \url{https://github.com/libp2p/specs/blob/master/connections/README.md}.
+\newblock Specification accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title: specs/connections/README.md at master. Transport identity is not a tool grant.
+
+\end{thebibliography}
