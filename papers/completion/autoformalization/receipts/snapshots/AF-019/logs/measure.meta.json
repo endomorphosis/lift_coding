@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af019-due87_vr",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-019/measure_domain_transfer.py"
+  ],
+  "cwd": ".",
+  "elapsed_ms": 61.756,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af019-due87_vr",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T18:41:59.977358+00:00",
+  "name": "measure",
+  "started_at": "2026-09-12T18:41:59.915579+00:00"
+}
