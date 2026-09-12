@@ -1,0 +1,115 @@
+{
+  "schema": "paper-ns015-current-source-inventory/v1",
+  "task_id": "NS-015",
+  "observed_at": "2026-09-12T01:01:38.142441+00:00",
+  "scope": "Current file presence, SHA-256 identities, and bounded Python-source identifier search. No module imports, extension execution, hidden-oracle binding, training, synthesis, or benchmark measurements.",
+  "method": "stdlib pathlib walk of *.py under the inspected roots; SHA-256 of named files; existence check of the suggested learned-fabric directory. Not rg. Not module execution.",
+  "files": {
+    "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/result.v3.json": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 1575,
+      "sha256": "8baf9a5b26d7f3bf76902d702601c0b6ab9bea2d67560d4a4ce2f7266a276bfc"
+    },
+    "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/campaign_input_root.json": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 30096,
+      "sha256": "1ac9703071918508dde24d9f9d39c43aec0eb346348d3ea7857985bb77cd1f97"
+    },
+    "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/tokenizer_policy.json": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 958,
+      "sha256": "e48ed2ebac07fbdaf2aabeeeca22c8716e1c06c9829b8d9c84b0d6bbc276eddc"
+    },
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/formal_assurance_cegis.py": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 81903,
+      "sha256": "9d4c230b0948628eef7818eceb5583f029c1b862fdea63e9566dc223243dc2f4"
+    },
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/deterministic_failure_memory.py": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 7740,
+      "sha256": "fc86d2a47960697e7439dd08f392253a111a6a31969781fd4fd2f2a85c2d6916"
+    },
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/ir_learning_campaign_planner.py": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 13154,
+      "sha256": "6710398b62a2ee36fee97f0a52c1614cc860f11fd38342b008468f142e0a9a56"
+    },
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 105049,
+      "sha256": "8f7421b368a504ab1fd9319f5bc5ad3b521f2901c62f5927e6b84b5a425364c0"
+    },
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/world_snapshot_builder.py": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 11453,
+      "sha256": "194b8fc082ce799a19947e250ee21483fd2cfb8a94df3eec538e32ed03ae8726"
+    },
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/world_view.py": {
+      "exists": true,
+      "is_file": true,
+      "bytes": 5159,
+      "sha256": "9cf6ba28eba11ef0a9482de6f660e96b1ea607f625d768e25e24c06c825b6ddd"
+    },
+    "implementation_plan/proof_grounded_ir_learning_fabric/": {
+      "exists": false,
+      "is_file": false
+    }
+  },
+  "identifier_search": {
+    "roots": [
+      "external/ipfs_accelerate/ipfs_accelerate_py",
+      "external/ipfs_datasets/ipfs_datasets_py",
+      "implementation_plan"
+    ],
+    "glob": "*.py",
+    "tokens": {
+      "ProcedureCegis": {"matched_files": [], "found_in_python_source": false},
+      "IncomingMemory": {"matched_files": [], "found_in_python_source": false},
+      "incoming_memory": {"matched_files": [], "found_in_python_source": false},
+      "TAGSeq": {"matched_files": [], "found_in_python_source": false},
+      "DAGSeq": {"matched_files": [], "found_in_python_source": false}
+    },
+    "paper_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4",
+      "ProcedureCegis": true,
+      "TAGSeq": true,
+      "incoming_memory_method": true
+    },
+    "nearby_non_substitute_identifiers": {
+      "FormalAssuranceCegis": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/formal_assurance_cegis.py",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_formal_assurance_cegis.py"
+      ],
+      "SupervisorWorldView": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/world_view.py"
+      ],
+      "WorldSnapshotBuilder": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/world_snapshot_builder.py"
+      ]
+    }
+  },
+  "source_heads": {
+    ".": "530abaffeb489682ba03cbb7e2c52ed7e5dd3df9",
+    "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+    "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+  },
+  "prior_capability_profile": {
+    "path": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+    "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+    "owner_task": "NS-002",
+    "fresh_probe_executed": false,
+    "note": "NS-002 recorded semantic_state blocked on missing anyio. This inventory does not retest that profile or treat it as a current execution result."
+  },
+  "source_context": "Current NS-015 source-and-scope qualification. File identities, not live integration."
+}

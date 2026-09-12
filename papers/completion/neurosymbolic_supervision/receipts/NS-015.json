@@ -1,0 +1,133 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-015",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:07:40+00:00",
+  "scope": "Optional procedure/world/refactoring extension qualification only. No extension is retained. No training, synthesis, required-mode consumption, hidden-oracle binding, or core A–D evaluation was performed.",
+  "source_versions": {
+    "workspace_git_head": "530abaffeb489682ba03cbb7e2c52ed7e5dd3df9",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 previously recorded semantic_state blocked on missing anyio. NS-015 did not retest that profile and did not promote it to a current execution result."
+    },
+    "claim_ledger": {
+      "path": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "owner_task": "NS-003"
+    },
+    "pgir014_no_go": {
+      "result": "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/result.v3.json",
+      "result_sha256": "8baf9a5b26d7f3bf76902d702601c0b6ab9bea2d67560d4a4ce2f7266a276bfc",
+      "campaign_input_root": "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/campaign_input_root.json",
+      "campaign_input_root_sha256": "1ac9703071918508dde24d9f9d39c43aec0eb346348d3ea7857985bb77cd1f97",
+      "tokenizer_policy": "external/ipfs_accelerate/data/agent_supervisor/proof_grounded_ir_learning/freeze/tokenizer_policy.json",
+      "tokenizer_policy_sha256": "e48ed2ebac07fbdaf2aabeeeca22c8716e1c06c9829b8d9c84b0d6bbc276eddc"
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_scope.json": "a9d4e13b58e20199f4186e70774eb00a1a498f587929173e19e8444c073e13aa",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_holdout_protocol.md": "4a8ae51c84d9d698d857dec829c4c3868f0237587d1d0984042a747ce6fc99ec",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_results.jsonl": "bccf63df8fa145265e161c1629b58293d9d392588a46f1f172ea629bb0f88eb9",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_report.md": "9de6501919f5d361e3a2771211144b9f00f2385ede98c1966ce40a500cc0386b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/source_review/source_inventory.json": "6856905bc509fad5c02950bb46da007a4b0bcadefe4afe68a52faf8ea7378e8e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/validate_extensions_scope.py": "09b78368548c711e9d195414831aa8d6c45ac37ebcc47c53a6bd1681e339034b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/extension-scope-closure.log": "53cf8253840b67c2fb51dd77c6527a3a2bd152f58afddcadaa5e30cd4751b25e"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_scope.json",
+    "papers/completion/neurosymbolic_supervision/qualification/extension_holdout_protocol.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_holdout_protocol.md",
+    "papers/completion/neurosymbolic_supervision/qualification/extension_results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_results.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/extensions_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Every retained extension has an actual located implementation, independent holdout protocol, and consumed-result evidence.",
+      "status": "met",
+      "explanation": "No extension is retained. Identifier search found no ProcedureCegis, IncomingMemory, TAGSeq, or DAGSeq Python implementation. Nearby similarly named modules are recorded as non-substitutes. The independent holdout protocol is published as the reopening condition, not as an executed experiment. Consumed pre/action/post fields are null with reasons; sidecar logging and snapshot queries are not counted.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_scope.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/source_review/source_inventory.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/extension-scope-closure.log"
+      ]
+    },
+    {
+      "criterion": "Training/synthesis cannot inspect final acceptance outputs; applicability failures, abstentions, bad predictions, and rollback costs remain visible.",
+      "status": "met",
+      "explanation": "The holdout protocol hides target patches, acceptance oracles, and final holdout labels from training and synthesis, and forbids dropping applicability failures, abstentions, bad predictions, and rollback costs. No training or synthesis ran, and hidden oracles were not bound or read. Result records keep those visibility flags as protocol requirements rather than experimental counts.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_holdout_protocol.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_report.md"
+      ]
+    },
+    {
+      "criterion": "Guarded/required consumption is distinguished from shadow writing/reading, with no worker self-promotion or protected-validator edits.",
+      "status": "met",
+      "explanation": "Scope, protocol, and results distinguish shadow_write, shadow_read, guarded, and required modes from each other and from W3 sealing gates. Only required mode would qualify the Table 18 row, and it is closed untested/out of scope. Worker self-promotion and protected-validator edits are forbidden. Observed consumption mode is off.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_scope.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_holdout_protocol.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_results.jsonl"
+      ]
+    },
+    {
+      "criterion": "Unevaluated broad W1–W4, graph learning, or remodularization claims are removed/narrowed without blocking the measured core.",
+      "status": "met",
+      "explanation": "W1–W4, TAGSeq/DAGSeq graph learning, and remodularization are marked unevaluated future work or preserved no-go. The core Table 18 fixture-lifecycle row remains with NS-010/NS-011. Planned core evaluation NS-007–NS-013 and matched A–D work is explicitly not blocked. Table 18 required world/procedure consumption is untested/out of scope.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_scope.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extensions_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/qualification/extension_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/extension-scope-closure.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns015-evidence-6a8b1de9",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns015-evidence-6a8b1de9/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns015-evidence-6a8b1de9/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns015-evidence-6a8b1de9/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns015-evidence-6a8b1de9/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/validate_extensions_scope.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/validate_extensions_scope.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/extension-scope-closure.log",
+      "started_at": "2026-09-12T01:07:35.626054+00:00",
+      "finished_at": "2026-09-12T01:07:36.294362+00:00",
+      "execution_kind": "sealed-profile structural source-and-scope audit; no extension import, training, synthesis, hidden-oracle binding, required-mode consumption, or capability re-probe"
+    }
+  ],
+  "limitations": {
+    "retained_extensions": [],
+    "table18_required_world_procedure_consumption": "untested_out_of_scope",
+    "consumed_pre_post_evidence": false,
+    "learned_artifact_evaluated": false,
+    "pgir014_no_go_preserved": true,
+    "training_or_synthesis_run": false,
+    "hidden_oracles_inspected": false,
+    "capability_profile_retested": false,
+    "claim_boundary": "This receipt verifies an explicit untested/out-of-scope closure for optional procedure/world/refactoring extensions. It is not a consumed-result ledger, a learned-model evaluation, a required-mode self-hosting demonstration, or a core A–D outcome."
+  },
+  "runtime_authority": "Artifact completion record only; no source tree, rollout, acceptance oracle, protected validator, worker promotion, portal, or submission state was changed."
+}
