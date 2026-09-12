@@ -1,0 +1,169 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-020",
+  "status": "complete",
+  "completed_at": "2026-09-12T07:22:36.503459+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-cost-accounting-result/v1",
+      "telemetry_schema": "legal-ir-cost-accounting-v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py",
+      "sha256": "ab4c62f23c813a7e94ced9da5922c89156b9aac1fbdb3bb7c2901342a43227f6",
+      "standard_library_only": true,
+      "telemetry_loaded_by_file_path": true
+    },
+    "repository_tree_id": "6c27840f9698540f7b06cb034e697364b91af2e8",
+    "ipfs_datasets_head": "76a34bbfa148cf2fe25716f06c9ce49c9af10e0f",
+    "imported": {
+      "runtime_telemetry.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+        "sha256": "229e88ee03102e85aac0d1101561338309c5570bd1acee3ea2d1226022e7aa6e",
+        "imported": true,
+        "note": "Loaded by file path; package __init__ auto-install is not executed. CostLedger/classify_cost_quantity/matched_throughput/gpu_cost_from_observation are the AF-020 contract."
+      }
+    },
+    "inspected_not_imported": {
+      "cycle_throughput_benchmark.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/cycle_throughput_benchmark.py",
+        "sha256": "eb26490a154c7586d540820b016a3f9fa0aaebfc7e73d1823e4bdac534d65fa7",
+        "imported": false,
+        "note": "Offline cold/warm reducer; no matched CUDA summaries exist for this paper, so it is not used as speedup evidence."
+      },
+      "bench_modal_autoencoder_cycle.py": {
+        "path": "external/ipfs_datasets/benchmarks/bench_modal_autoencoder_cycle.py",
+        "sha256": "47669cdcb71f53644aa109b451d65af6539e235a37d97674495837923a745a22",
+        "imported": false,
+        "note": "Would import project packages and is not a retained paper run."
+      },
+      "training_backend.json": {
+        "path": "papers/completion/autoformalization/config/training_backend.json",
+        "sha256": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5",
+        "imported": false,
+        "note": "AF-009 packed_cpu float32 qualification; CUDA status unavailable."
+      }
+    },
+    "frozen_inputs": {
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c"
+    },
+    "empirical_execution": "Sealed-PATH reduction of retained AF-007/009/011/012/015/017/018 run and command-log timings plus a RuntimeTelemetry cost-ledger contract check. CUDA driver, torch, and MiniLM were unavailable; no matched CPU/CUDA actual runs."
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py": "5c573c7175fb6b632bd2b0f1aa2d28f615ffac690987bc0432d39b1baf915831",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py": "ab4c62f23c813a7e94ced9da5922c89156b9aac1fbdb3bb7c2901342a43227f6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/evidence/cost_accounting.md": "15af71c7837087a959a3d9513a243e21abd74055f288e6d110d0d657e576ca62",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.meta.json": "196c8605e7df8a71f505a19a0d11bba3056861665e81d9f93a414f5cc0a27e8d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.stdout.log": "8e7c4ad9aab4a9bb2cc5fce49126fdeed0ba11aa8c30882c07628e9a6d6c1f37",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.meta.json": "4e2fdcb744aec82494f285ebc01254e0263a61dc23c5581fb7abe08193bc0d56",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stdout.log": "83369301325cc52f88077056d6483e6cf001fc9e1113eca3d6acccaa2b65bc79",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/run_sealed.py": "c075bae0ddead514eb3872f7dc0e92bd80a43600860635fd252c020888d6a0fb",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/runs/costs/results.jsonl": "6fcbfece482c55d1754fcb39e704471cb096a5c5d0047f1f20620ba90a1d0b71",
+    "papers/completion/autoformalization/receipts/snapshots/AF-020/runtime_telemetry.py": "229e88ee03102e85aac0d1101561338309c5570bd1acee3ea2d1226022e7aa6e"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/aggregate_costs.py": "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py",
+    "papers/completion/autoformalization/runs/costs/results.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-020/runs/costs/results.jsonl",
+    "papers/completion/autoformalization/evidence/cost_accounting.md": "papers/completion/autoformalization/receipts/snapshots/AF-020/evidence/cost_accounting.md",
+    "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": "papers/completion/autoformalization/receipts/snapshots/AF-020/runtime_telemetry.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Cost units, measured versus estimated/provider costs, cache state, hardware and precision are explicit.",
+      "status": "met",
+      "explanation": "Every source_usage and phase_total cell names its unit (seconds, cpu_seconds, gpu_seconds, provider_units, gibibytes) and observation kind (measured, estimated, provider, unmeasured). CPU seconds are never inferred from wall time. Provider call counts stay labeled provider. Hardware/precision/cache_state are present on usage and phase rows: sealed CPU with unused or sample_memory cache; AF-009 packed_cpu float32; CUDA precision unmeasured. Sealed-PATH probe recorded nvidia-smi unusable, torch/numpy absent, and cuda_available false.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/runs/costs/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/evidence/cost_accounting.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/runtime_telemetry.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Phase totals reconcile with retained run/usage records, including setup and failures.",
+      "status": "met",
+      "explanation": "CostLedger summed 49 retained usage rows, including seven setup command residuals/logs and failure rows from AF-009 packed-CPU exits and AF-018 assistance/proof-reconstruction attempts. Measured elapsed is 481.588608018s on both the per-record sum and the twelve-phase catalog; the independent usage sum matches. Annotation, features, indexing, model-call GPU/service time, and review remain unmeasured rather than filled with zeros. check_outputs confirmed includes_setup and includes_failures.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/runs/costs/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/evidence/cost_accounting.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py"
+      ]
+    },
+    {
+      "criterion": "Any throughput/speedup is based on matched actual runs; unavailable hardware is not a zero-cost result.",
+      "status": "met",
+      "explanation": "The only measured ratio is AF-011 T0 codec replay 1 versus replay 2 on matched CPU python-backend identity (about 1.021x), labeled as not a CUDA speedup. CPU-versus-CUDA, cold/warm residency, and fp16/fp32 GPU comparisons are unmeasured with value null. gpu_cost_from_observation(0.0, cuda_available=False) returns unmeasured/null; matched_throughput without a CUDA actual run does not emit 0.0s or 1.0x. nvidia-smi cannot talk to a driver in the sealed environment.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/runs/costs/results.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/evidence/cost_accounting.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/runtime_telemetry.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af020-lz2umd17",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/aggregate_costs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/evaluation/aggregate_costs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/aggregate.stderr.log",
+      "started_at": "2026-09-12T07:22:36.359786+00:00",
+      "finished_at": "2026-09-12T07:22:36.481625+00:00",
+      "execution_kind": "sealed-PATH cost aggregation over retained run/usage records"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af020-lz2umd17",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONNOUSERSITE=1",
+        "LANG=C.UTF-8",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-020/check_outputs.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-020/logs/check_outputs.stderr.log",
+      "started_at": "2026-09-12T07:22:36.482037+00:00",
+      "finished_at": "2026-09-12T07:22:36.503459+00:00",
+      "execution_kind": "unit, kind, hardware/cache/precision, reconciliation, and CUDA-unmeasured checks"
+    }
+  ],
+  "limitations": [
+    "nvidia-smi is on the sealed PATH but cannot communicate with an NVIDIA driver; torch/NumPy/MiniLM are absent from the private HOME.",
+    "No matched cold/warm CPU/CUDA/precision training or residency runs were executed; CUDA speedup is unmeasured, not zero.",
+    "CPU seconds, billed memory-GiB, and human-review seconds are unmeasured and are not inferred from elapsed wall time.",
+    "Independent annotation (AF-005) is pending; annotation and review phases are unmeasured.",
+    "Leanstral/model-service wall time is unmeasured; provider_units=0 records executed call counts, not GPU occupancy.",
+    "AF-011 python-backend T0–T2 wall times are not packed_cpu or CUDA economics.",
+    "AF-009 packed_cpu float32 qualification used CUDA_VISIBLE_DEVICES empty and skipped CUDA tests.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Instrument runtime cost phases and reduce retained AF-007/009/011/015/017/018 (and related) run/usage records into per-phase totals with explicit units, measured/estimated/provider/unmeasured kinds, cache/hardware/precision, setup and failure inclusion, and unmeasured CUDA throughput."
+}
