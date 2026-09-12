@@ -1,0 +1,38 @@
+{
+  "command": "paired",
+  "schema": "paper-ns-runner-batch/v1",
+  "units": [
+    {
+      "arm": "A",
+      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-A-local_cold-0.json",
+      "path_class": "development",
+      "schedule_unit_id": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+      "task_id": "ns-dev-boundary-add",
+      "terminal_state": "solved"
+    },
+    {
+      "arm": "C",
+      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-C-local_cold-0.json",
+      "path_class": "development",
+      "schedule_unit_id": "747d72500a6aba3f2b0bc7a8fd772332e7f0500c7da09ef6e7a0826f16a34675",
+      "task_id": "ns-dev-boundary-add",
+      "terminal_state": "solved"
+    },
+    {
+      "arm": "B",
+      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-B-local_cold-0.json",
+      "path_class": "development",
+      "schedule_unit_id": "f2c8deaebfb287ffa07b44b73c0f38229105f7db1656a161c4c16073d6f4ba4d",
+      "task_id": "ns-dev-boundary-add",
+      "terminal_state": "solved"
+    },
+    {
+      "arm": "D",
+      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-D-local_cold-0.json",
+      "path_class": "development",
+      "schedule_unit_id": "b12665bb7f26d5d5fef30324ac280f0ef35491a648613b001d77a9bb1b6d94d9",
+      "task_id": "ns-dev-boundary-add",
+      "terminal_state": "solved"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "commands": {
+    "interrupt-resume": {
+      "crash_exit_code": 75,
+      "duplicate_dispatch_prevented": true,
+      "provider_effects_dispatched": 1,
+      "resume_terminal": "solved"
+    },
+    "live-production-probe": {
+      "exit_code": 0,
+      "revision_availability_reason": "No admitted production reservation, quota grant, or native scientific provider gateway is bound in this process. Key presence is none; semantic-state import succeeded. NS-006 does not bypass the native quota gate or spend paid budget.",
+      "sampling_seed_supported": false,
+      "served_model": null,
+      "served_provider": null,
+      "served_revision": null,
+      "temperature_supported": false,
+      "terminal_state": "unavailable"
+    },
+    "one-arm": {
+      "exit_code": 0,
+      "provider_effects_dispatched": 1,
+      "units": [
+        {
+          "arm": "A",
+          "path": "/tmp/ns006-validate-2h1c_pju/outs/one-arm/ns-dev-boundary-add-A-local_cold-0.json",
+          "path_class": "development",
+          "schedule_unit_id": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+          "task_id": "ns-dev-boundary-add",
+          "terminal_state": "solved"
+        }
+      ]
+    },
+    "one-task": {
+      "active_elapsed_seconds": 0.45281899289693683,
+      "exit_code": 0,
+      "path_class": "development",
+      "schedule_unit_id": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+      "terminal_state": "solved"
+    },
+    "paired": {
+      "arms": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "exit_code": 0,
+      "terminals": [
+        "solved",
+        "solved",
+        "solved",
+        "solved"
+      ]
+    },
+    "rescore": {
+      "exit_code": 0,
+      "oracle_status": "passed"
+    }
+  },
+  "files": {
+    "README.md": "3a392867a8edcc8d6fee20f1c6c93aab8877b56d1a72e078e7cb1314f6796aa3",
+    "measurement_schema.json": "e20f70ba7c055e9fdbbcd1540ce13213733dd3f3810d44a23c1f9f0b24064e03",
+    "receipt_schema.json": "1170a73efe8256cef0cf3ed841c328c81d84eb2df555e27f7b8ccadc840dbde0",
+    "run_comparison.py": "2a26dd30807ddf4ff0bd35c394844d39ae531f749e0b2f486e9622d135d9c835",
+    "score_runs.py": "273b09892b6d2d0d44460100ed04998424a315dde95985e98f01c1e89f5175fa"
+  },
+  "invariants": [
+    "production path does not reserve or dispatch without admission",
+    "proposal sandbox does not mount NS-005 scorer_only",
+    "development/simulated receipts cannot set admitted_production",
+    "live historical units cannot be solved without production admission",
+    "confirmed provider effects are not replayed",
+    "end-to-end elapsed is time.perf_counter over the whole attempt"
+  ],
+  "ok": true,
+  "schema": "paper-ns-runner-validation/v1",
+  "terminals": {
+    "abstained": "provider returned no candidate",
+    "cancelled": "cancellation observed before provider dispatch",
+    "rejected": "candidate path not in admitted scope: tests/test_hidden.py",
+    "rejected:oversize-patch": "admitted patch 20036 exceeds cap",
+    "rejected:oversize-request": "serialized request 66134 exceeds cap",
+    "simulated_solved_not_production": "simulated",
+    "solved": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+    "timed_out": "provider wall budget exhausted",
+    "unavailable": "pre-fix snapshot not materialized: xmltodict.py: git show 75a17701db20d5d3ec2ea1f6c901cf2211011eb5:xmltodict.py failed",
+    "unsolved": "hidden tests failed on the patched tree"
+  }
+}

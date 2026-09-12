@@ -1,0 +1,475 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vericodegen:ns-core-v1:runner-receipt",
+  "title": "NS-006 paired-runner attempt receipt",
+  "description": "Wrapper around the NS-004 measurement contract. The measurement object must additionally validate against protocol/measurement_schema.json. Extra runner fields never relax that contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "path_class",
+    "measurement",
+    "bindings",
+    "provider_receipt",
+    "runner"
+  ],
+  "properties": {
+    "schema": {
+      "const": "paper-ns-runner-attempt/v1"
+    },
+    "path_class": {
+      "enum": [
+        "production",
+        "development",
+        "simulated"
+      ]
+    },
+    "measurement": {
+      "type": "object",
+      "required": [
+        "schema",
+        "record_kind",
+        "identity",
+        "terminal_state",
+        "terminal_reason"
+      ],
+      "properties": {
+        "schema": {
+          "const": "paper-ns-attempt-measurement/v1"
+        }
+      }
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol_bundle_sha256",
+        "protocol_document_sha256",
+        "measurement_schema_sha256",
+        "source_forest_sha256",
+        "oracle_manifest_sha256",
+        "runner_source_id",
+        "task_id",
+        "family_id",
+        "source_preimage_id",
+        "schedule_unit_id",
+        "evidence_ids"
+      ],
+      "properties": {
+        "protocol_bundle_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "protocol_document_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "measurement_schema_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_forest_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "oracle_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "runner_source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_preimage_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schedule_unit_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "provider_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path_class",
+        "simulated",
+        "admitted_production",
+        "dispatched",
+        "dispatch_confirmed",
+        "logical_effect_id",
+        "served_provider",
+        "served_model",
+        "served_revision",
+        "revision_availability_reason",
+        "reasoning_effort",
+        "runtime_receipt_id",
+        "usage_receipt_id",
+        "possibly_charged",
+        "sampling_seed_supported",
+        "temperature_supported",
+        "proposal_effect_count",
+        "provider_cache_observed",
+        "unknown_effect",
+        "replayed"
+      ],
+      "properties": {
+        "path_class": {
+          "enum": [
+            "production",
+            "development",
+            "simulated"
+          ]
+        },
+        "simulated": {
+          "type": "boolean"
+        },
+        "admitted_production": {
+          "type": "boolean"
+        },
+        "dispatched": {
+          "type": "boolean"
+        },
+        "dispatch_confirmed": {
+          "type": "boolean"
+        },
+        "logical_effect_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "served_provider": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "served_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "served_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision_availability_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reasoning_effort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "runtime_receipt_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "usage_receipt_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "possibly_charged": {
+          "type": "boolean"
+        },
+        "sampling_seed_supported": {
+          "type": "boolean"
+        },
+        "temperature_supported": {
+          "type": "boolean"
+        },
+        "proposal_effect_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "provider_cache_observed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "unknown_effect": {
+          "type": "boolean"
+        },
+        "replayed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interface",
+        "command",
+        "ledger_id",
+        "isolation",
+        "resource_enforcement",
+        "interruption",
+        "semantic_state_import",
+        "container_enforcement",
+        "campaign",
+        "proposal_context",
+        "sandbox_files",
+        "candidate",
+        "live_repair_admitted",
+        "hidden_oracle_in_proposal"
+      ],
+      "properties": {
+        "interface": {
+          "const": "NSPairedRunner@1"
+        },
+        "command": {
+          "enum": [
+            "one-task",
+            "one-arm",
+            "paired",
+            "rescore"
+          ]
+        },
+        "ledger_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isolation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "proposal_sandbox_root",
+            "hidden_store_mounted",
+            "hidden_markers_found",
+            "scope_preserved"
+          ],
+          "properties": {
+            "proposal_sandbox_root": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "hidden_store_mounted": {
+              "type": "boolean"
+            },
+            "hidden_markers_found": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "scope_preserved": {
+              "type": "boolean"
+            }
+          }
+        },
+        "resource_enforcement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "request_serialized_bytes_max",
+            "admitted_patch_bytes_max",
+            "provider_wall_seconds_max",
+            "active_unit_wall_seconds_max",
+            "process_rlimits_applied",
+            "cgroup_available",
+            "docker_available",
+            "limit_triggered"
+          ],
+          "properties": {
+            "request_serialized_bytes_max": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "admitted_patch_bytes_max": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "provider_wall_seconds_max": {
+              "type": "number",
+              "minimum": 0
+            },
+            "active_unit_wall_seconds_max": {
+              "type": "number",
+              "minimum": 0
+            },
+            "process_rlimits_applied": {
+              "type": "object"
+            },
+            "cgroup_available": {
+              "type": "boolean"
+            },
+            "docker_available": {
+              "type": "boolean"
+            },
+            "limit_triggered": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "interruption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "resumed",
+            "duplicate_dispatch_prevented",
+            "unknown_effect_reconciled"
+          ],
+          "properties": {
+            "resumed": {
+              "type": "boolean"
+            },
+            "duplicate_dispatch_prevented": {
+              "type": "boolean"
+            },
+            "unknown_effect_reconciled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "semantic_state_import": {
+          "type": "object"
+        },
+        "container_enforcement": {
+          "type": "object"
+        },
+        "campaign": {
+          "type": "object"
+        },
+        "proposal_context": {
+          "type": "object"
+        },
+        "sandbox_files": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "candidate": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "live_repair_admitted": {
+          "type": "boolean"
+        },
+        "hidden_oracle_in_proposal": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "path_class": {
+            "const": "production"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provider_receipt": {
+            "properties": {
+              "simulated": {
+                "const": false
+              },
+              "path_class": {
+                "const": "production"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provider_receipt": {
+            "properties": {
+              "admitted_production": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "path_class": {
+            "const": "production"
+          },
+          "provider_receipt": {
+            "properties": {
+              "simulated": {
+                "const": false
+              },
+              "dispatched": {
+                "const": true
+              },
+              "dispatch_confirmed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "path_class": {
+            "enum": [
+              "development",
+              "simulated"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provider_receipt": {
+            "properties": {
+              "admitted_production": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

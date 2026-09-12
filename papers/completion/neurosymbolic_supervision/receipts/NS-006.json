@@ -1,0 +1,171 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-006",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:32:08.834077+00:00",
+  "completion_scope": "Paired runner, independent scorer, receipt schema, and measured provider/validation/resource boundaries. Development/simulated qualification units only; no live historical repair, production proposal, or final A-D result is claimed.",
+  "source_versions": {
+    "workspace_git_head": "1f921b0e31c1eb8f66a2e4944c502a80fd8e1df5",
+    "python": "Python 3.12.3",
+    "jsonschema": "4.26.0",
+    "pytest": "9.0.3",
+    "protocol_id": "ns-core-v1",
+    "ns004_protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+    "measurement_schema_sha256": "e20f70ba7c055e9fdbbcd1540ce13213733dd3f3810d44a23c1f9f0b24064e03",
+    "source_forest_sha256": "c2fab2dc40fe54b58a14002872214cc7acd8297a7d2aeee1ea43a18c20e7564a",
+    "oracle_manifest_sha256": "37057f559b36f48633b2fb2275aaf2d8d8cbbf267104a5833424d883943c4043",
+    "interpreter": "/usr/bin/python3.12",
+    "run_comparison_sha256": "2a26dd30807ddf4ff0bd35c394844d39ae531f749e0b2f486e9622d135d9c835",
+    "score_runs_sha256": "273b09892b6d2d0d44460100ed04998424a315dde95985e98f01c1e89f5175fa"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/audit/runner_validation.json": "59b772e55126e04bd31e72158f80029eb40e407d844667ad092f226442696a9f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/README.md": "3a392867a8edcc8d6fee20f1c6c93aab8877b56d1a72e078e7cb1314f6796aa3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/receipt_schema.json": "1170a73efe8256cef0cf3ed841c328c81d84eb2df555e27f7b8ccadc840dbde0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/run_comparison.py": "2a26dd30807ddf4ff0bd35c394844d39ae531f749e0b2f486e9622d135d9c835",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/score_runs.py": "273b09892b6d2d0d44460100ed04998424a315dde95985e98f01c1e89f5175fa",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/campaign.json": "866db6473e24e05ee872e7ec93acbe0aee8bdc35c9beb7dd4e4b1df8f69aae26",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/crash.stderr.log": "ba34ec722ab7cdcf8ce26f92cfa271bbc719d115a5893734c4393992ac6c5334",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/crash.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/ledger/campaign.json": "866db6473e24e05ee872e7ec93acbe0aee8bdc35c9beb7dd4e4b1df8f69aae26",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/ledger/units/2228fe9121a73c71eba2b0c4b26ad62c28375680d25a152f5270750d991e0fb8.json": "6cc3aec0b351321dd14ebc7e5e200547cae5341109f2bf2047ab92440eb8eb86",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/resume.stdout.log": "68e743e345fa1c42e2dcab6892f198fde980efe477eb48de9b8a58c51ef3da7d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/resumed.json": "9472e53297c140402cc5b6549ab7f8532965e70fe69c42a7ffd582f624a2112e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-live/campaign.json": "eec8a2dd49d525d3de7fa6c5081f198ba19fd52acd40d0003088afd0562a9ade",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-live/units/004c6f79628f69c9814df4cf40b1525b4dbb71e5ec365c4417c62420298ebd5a.json": "7db8322bda0c84f7e6cbb6e531a6c1d0f56dbbd3a459c14d28373736cc5072c6",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-one/campaign.json": "c14456ab71c0fbbef0dd2d0264b24f88196573049ada490931d7bc3989380791",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-one/units/3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c.json": "30c7c4873a0e83590948f7d04d208ffd1f9570f126089e3a69524883c3741799",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired/campaign.json": "6134ec5ffddc136ef6522df15eb54b3d9836ce5e8ee85bf13f4f78e04a38fed6",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired/publications/b12665bb7f26d5d5fef30324ac280f0ef35491a648613b001d77a9bb1b6d94d9.json": "4063523237e16417bdd67d35b5a29d965b585c77b4b00a846bb8600bbf1db541",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired/units/3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c.json": "0f228924e6540614401d532efbe9819897647432944d790a117cec9f32ec5164",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired/units/747d72500a6aba3f2b0bc7a8fd772332e7f0500c7da09ef6e7a0826f16a34675.json": "8db02e687bc5f7614fd3bab8492d233a0df500269eae8a2f49e70a2364b00fb7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired/units/b12665bb7f26d5d5fef30324ac280f0ef35491a648613b001d77a9bb1b6d94d9.json": "6d4190c5afe09dda1494bcd3f470246f9ebdffe6783796333f0fa9d42a81248a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired/units/f2c8deaebfb287ffa07b44b73c0f38229105f7db1656a161c4c16073d6f4ba4d.json": "5fd167df86d152a8155f052a774af258d9c035f0b84dd5b02301cd6b10602cb6",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/campaign.json": "8f476e1b37f9250959c5cb60fd4b6121aa200549c8e87deb4a83497feb135099",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/032d83c814655bec7d40cb9f2602568e71ce7cc551b72311c2d2d224b8c9f0d9.json": "18be040b3d663fcf43076b71c6d6aa39a490c2c5569bca15b9a6c56f8b7e01c0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/2327cd2e92134fa6f24b8893bc6d2980cb41dff4a843353a62a1eb1058b463ed.json": "b6c609ab75045a7e3a111f747eab4decfbcb118d22ce4b5e31f547c037351ed2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/53958665eb2f9a0b8c1af28ddc548d55d26bd697951c436e36c7bc97c0e7788c.json": "8264a1e01449168ef73189d900ca8a2a9930230c7072d063e191b532fd8b4b0b",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/6e78fb2271f034faa9ca2a6c519a37b5049d153e7eeaa8e249ac40697337ea77.json": "a1d3e810f6a8ed25b0f3e530882c531b997851a688412c8022722f9cb724d6fb",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/8a0e6f33873a05bde99759473f422988db09b59cc30792e8edd7a1277564dbb9.json": "1573ce9e453d8fa8af06f7be8ae8941643f25515f39ca6e9a7d8ef6a26b215ce",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/dcab37248564b1e4bfcc3c52e4c48119342a711d79e0a1cf02f6de6b82aa8bf5.json": "5f2b0b630534a3c269ebb4e4647eadde58b19bd9c44c4447addb92c2bbf8a631",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-scenarios/units/e01efb1df3871d5958000a05555201c8d9d6672fd97f60379c1501ce3ffe3a68.json": "ee3be7bf43260d9e42588e7119991cb77c6657599ab6e5a891788aa156b4cbbf",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/live-ns-hist-01-xmltodict.json": "905fa624caa266cc7c7fb0374d9d84dffc397cbee3700936f89f54519cc7bfe2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/live.stdout.log": "22c2f46c317606e71d8661bc580de4f225cedde76ea815c319794fb8e1f21b4e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-arm/ns-dev-boundary-add-A-local_cold-0.json": "43b20b85d45c0236c2adb33f0381d1d13f2cc075fb78fad4b3ec799ba692fd5c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-arm/summary.json": "beafca6b16ff35904c5e0c0230b16320a18908ba4f291b93fd49153d5cc7f08e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-arm.stdout.log": "e9f749d1dc347993eadfc8a7042c2f0ca7da14b707bf8fa4a1c0725887fe6aca",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json": "e063bf2859f3cc9e53f4163c9488287f777fdc88f2595ee3e6854acf1a9485d5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.rescored.json": "b45dd3057c56358b0a210b9ee32cd414f0db8b72d73bbdb6aa397ed61f36673f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.stdout.log": "a666404097713c915b9a83fad28c14563ae01e1556575cdc8ca493c700956a8c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-A-local_cold-0.json": "81fb09a81b0e0f3f38544ae93a78d9c85164d748b11352cf75b1723609f78795",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-B-local_cold-0.json": "66e306600c2998545213f0f6f0ce2e0cff111c96708749840dc07b47022ef9b3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-C-local_cold-0.json": "e25a01cff1a0408a56a3f86bd68246fae938f607f698ccb29fd94295d2ee3ab1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-D-local_cold-0.json": "b106ea385bb8eabbcc76e5d337258a37d109e8d58f09c935f3365fa1189be807",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/summary.json": "acab0ae9a0f25f45357fcae5d9f46cd82c3656d4642ab2c309163f0d8be52d57",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired.stdout.log": "01c820634aed60f6a331b31892a0665984bcf269ad13889b233c58ce0c4a5b7a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/rescore.stdout.log": "c8faec5cac48696394d4bf6c7dcbf72d73a397251d7042a6f2fca9970b9da0c9",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/abstain.json": "3eb05d321a932680010632754d4ec8a5744ac9b928ac89b2a67bb3b5e03650e9",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/abstain.stdout.log": "799054e92314a8c2794773045858f6bbaa176ae1ae21d8289e3acac67b486a96",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/cancel.json": "3f28de15eab6c0e12714966a04254d1f481bc48ff91fd20e22efe78ecbe1c45f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/cancel.stdout.log": "b9b379171a957d07cfa0ac9b64967a078dabc36fb917e9a52275fedcb2a1f4e7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/oversize-patch.json": "62a31014eddda3b5dd3a084813fc11afee355c2d5c2d4a3f51557424d4e9965f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/oversize-patch.stdout.log": "95c32f2165a0f79c18373a4c5e8faaf950869e7fd7fcb3d511001eaff9345346",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/oversize-request.json": "714ba2fc9c0a7e20e7f5d48ba51f017247735d6100ff2f7ede61d3da54a69257",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/oversize-request.stdout.log": "2145702b282ad3ea411e1b60a623a8aea7c381899bbef3993f26477f370e5d3e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/reject-scope.json": "a18564f22494a7d9d60bfdb5cf02f14cae77831e01272baf6a914e147c7caefa",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/reject-scope.stdout.log": "9271dc0ee735deba13ebb65b88d60199a5357cf49ce41c4c2e754bd0e7ff8fde",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/timeout.json": "da4e2456ad600761d6e078fbfe70996c37b912ae3434495d9e6e6229dfc92d0e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/timeout.stdout.log": "cef9d19cf874911161e510e379ba517199f7ba7f55f0923a423eb70bdfb24ef4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/unsolved.json": "7160850ed4352808bd8eb67236bb1d811694e89cb0b040042277ac374958222c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/unsolved.stdout.log": "91900c67187d577851cd65d9d15f68412206308f3c518f214d8c94f3ecf6d0dc",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/runner-contract-validation.log": "0de82b08ea53927db2244c60a564e83feff9cb19ac7ede210369c2dd5c14bf8a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/validate_runner.py": "f9627949a65ad6370e23d47f7d352fdaf7c33669a0a052bb50fe72c25732d764"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/run_comparison.py",
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/score_runs.py",
+    "papers/completion/neurosymbolic_supervision/experiments/README.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/README.md",
+    "papers/completion/neurosymbolic_supervision/experiments/receipt_schema.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/receipt_schema.json",
+    "papers/completion/neurosymbolic_supervision/audit/runner_validation.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/audit/runner_validation.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Runner exposes reproducible commands for one task, one arm, paired runs, and rescoring.",
+      "status": "met",
+      "explanation": "run_comparison.py implements one-task, one-arm, and paired; score_runs.py independently rescores. README documents the exact argv. Frozen executions of all four commands succeeded: development one-task solved, one-arm replayed the same schedule unit, paired A-D all solved under the development stub, and rescore confirmed the hidden oracle without changing the provider effect.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/README.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/run_comparison.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-arm/summary.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/summary.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.rescored.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/runner-contract-validation.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/audit/runner_validation.json"
+      ]
+    },
+    {
+      "criterion": "Provider receipts identify actual model/provider/revision and separate simulated/development from admitted production paths.",
+      "status": "met",
+      "explanation": "Every receipt stores served_provider/model/revision or null plus revision_availability_reason, sampling_seed_supported, and temperature_supported. Development stub identity is ns-006-injected-development / ns-006-deterministic-dev-stub / ns-006-dev-stub-v1 with admitted_production=false. Simulated path_class cannot admit production. The live ns-hist-01 unit used path_class=production, simulated=false, and recorded unavailable served identity without fabricating a production dispatch.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/experiments/receipt_schema.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/live-ns-hist-01-xmltodict.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/audit/runner_validation.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/runner-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Attempt outcomes distinguish solved/unsolved/rejected/abstained/timed-out/unavailable/cancelled; end-to-end elapsed is measured directly.",
+      "status": "met",
+      "explanation": "Boundary units produced solved, unsolved, rejected (scope and byte caps), abstained, timed_out, unavailable, and cancelled. active_elapsed_seconds is status=actual from time.perf_counter over the whole attempt including scoring; stage walls are not summed. Token/charge/GPU fields are unavailable with reasons rather than zero.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/unsolved.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/abstain.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/cancel.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/reject-scope.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/terminals/timeout.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/live-ns-hist-01-xmltodict.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/runner-contract-validation.log"
+      ]
+    },
+    {
+      "criterion": "Results bind task/protocol/source forest/evidence IDs and survive interruption without duplicate provider charging or fabricated completion.",
+      "status": "met",
+      "explanation": "Bindings include protocol_bundle_sha256, source_forest_sha256, oracle_manifest_sha256, runner_source_id, task/family/preimage/schedule_unit IDs, and consumed evidence hashes. A crash after confirmed provider dispatch stored the receipt; resume scored without a second dispatch (campaign provider_effects_dispatched=1). Live production units cannot become solved. Proposal sandboxes do not mount NS-005 scorer_only.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/resumed.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/interrupt/campaign.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/live-ns-hist-01-xmltodict.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/audit/runner_validation.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/validate_runner.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/validate_runner.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/validate_runner.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/runner-contract-validation.log",
+      "started_at": "2026-09-12T01:32:08.834077+00:00",
+      "finished_at": "2026-09-12T01:32:08.834077+00:00"
+    }
+  ],
+  "limitations": [
+    "No billed production proposal, live historical repair, or final A-D comparison was produced.",
+    "Development stub proposals are fixture-keyed and do not measure a scientific B/A context effect.",
+    "Pinned pre-fix commits are not local git objects in this environment; live materialization is unavailable.",
+    "Docker container isolation is unavailable; process rlimits and request/patch/wall/effect caps were enforced.",
+    "Sampling seed and temperature controls are unsupported; they are recorded rather than asserted set.",
+    "NS-016 still owns pilot reservation, actual model freeze, and remaining-deadline feasibility."
+  ]
+}

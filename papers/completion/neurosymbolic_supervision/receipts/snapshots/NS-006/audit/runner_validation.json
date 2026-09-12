@@ -1,0 +1,240 @@
+{
+  "commands": {
+    "interrupt_resume": {
+      "crash_after": "provider",
+      "duplicate_dispatch_prevented": true,
+      "provider_calls_by_effect": {
+        "75557eda861e9ad2e065d9e0f8d3b367d2c61263f9cd166e7692745506c27fb7": 1
+      },
+      "provider_effects_dispatched": 1,
+      "resume_terminal": "solved",
+      "resumed": true
+    },
+    "live_production_probe": {
+      "admitted_production": false,
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "one-task",
+        "--task-id",
+        "ns-hist-01-xmltodict",
+        "--arm",
+        "A",
+        "--path",
+        "production",
+        "--record-kind",
+        "development",
+        "--ledger",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-live",
+        "--out",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/live-ns-hist-01-xmltodict.json"
+      ],
+      "path_class": "production",
+      "revision_availability_reason": "No admitted production reservation, quota grant, or native scientific provider gateway is bound in this process. Key presence is none; semantic-state import succeeded. NS-006 does not bypass the native quota gate or spend paid budget.",
+      "sampling_seed_supported": false,
+      "served_model": null,
+      "served_provider": null,
+      "served_revision": null,
+      "simulated": false,
+      "temperature_supported": false,
+      "terminal_reason": "pre-fix snapshot not materialized: xmltodict.py: git show 75a17701db20d5d3ec2ea1f6c901cf2211011eb5:xmltodict.py failed",
+      "terminal_state": "unavailable"
+    },
+    "one-arm": {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "one-arm",
+        "--arm",
+        "A",
+        "--registry",
+        "ns-006-boundary",
+        "--cache",
+        "local_cold",
+        "--repetition",
+        "0",
+        "--record-kind",
+        "development",
+        "--path",
+        "development",
+        "--ledger",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-one",
+        "--out-dir",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-arm"
+      ],
+      "replayed_same_schedule_unit": true,
+      "summary": {
+        "command": "one-arm",
+        "schema": "paper-ns-runner-batch/v1",
+        "units": [
+          {
+            "arm": "A",
+            "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-arm/ns-dev-boundary-add-A-local_cold-0.json",
+            "path_class": "development",
+            "schedule_unit_id": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+            "task_id": "ns-dev-boundary-add",
+            "terminal_state": "solved"
+          }
+        ]
+      }
+    },
+    "one-task": {
+      "active_elapsed_seconds": {
+        "reason": null,
+        "source": "time.perf_counter",
+        "status": "actual",
+        "unit": "seconds",
+        "value": 0.44037840492092073
+      },
+      "admitted_production": false,
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "one-task",
+        "--task-id",
+        "ns-dev-boundary-add",
+        "--arm",
+        "A",
+        "--cache",
+        "local_cold",
+        "--repetition",
+        "0",
+        "--record-kind",
+        "development",
+        "--path",
+        "development",
+        "--ledger",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-one",
+        "--out",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json"
+      ],
+      "hidden_oracle_in_proposal": false,
+      "path_class": "development",
+      "protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+      "schedule_unit_id": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+      "served_model": "ns-006-deterministic-dev-stub",
+      "served_provider": "ns-006-injected-development",
+      "served_revision": "ns-006-dev-stub-v1",
+      "source_forest_sha256": "c2fab2dc40fe54b58a14002872214cc7acd8297a7d2aeee1ea43a18c20e7564a",
+      "terminal_state": "solved"
+    },
+    "paired": {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "paired",
+        "--family-id",
+        "ns-dev:boundary-add",
+        "--cache",
+        "local_cold",
+        "--repetition",
+        "0",
+        "--record-kind",
+        "development",
+        "--path",
+        "development",
+        "--ledger",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/ledger-paired",
+        "--out-dir",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired"
+      ],
+      "summary": {
+        "command": "paired",
+        "schema": "paper-ns-runner-batch/v1",
+        "units": [
+          {
+            "arm": "A",
+            "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-A-local_cold-0.json",
+            "path_class": "development",
+            "schedule_unit_id": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+            "task_id": "ns-dev-boundary-add",
+            "terminal_state": "solved"
+          },
+          {
+            "arm": "C",
+            "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-C-local_cold-0.json",
+            "path_class": "development",
+            "schedule_unit_id": "747d72500a6aba3f2b0bc7a8fd772332e7f0500c7da09ef6e7a0826f16a34675",
+            "task_id": "ns-dev-boundary-add",
+            "terminal_state": "solved"
+          },
+          {
+            "arm": "B",
+            "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-B-local_cold-0.json",
+            "path_class": "development",
+            "schedule_unit_id": "f2c8deaebfb287ffa07b44b73c0f38229105f7db1656a161c4c16073d6f4ba4d",
+            "task_id": "ns-dev-boundary-add",
+            "terminal_state": "solved"
+          },
+          {
+            "arm": "D",
+            "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/paired/ns-dev-boundary-add-D-local_cold-0.json",
+            "path_class": "development",
+            "schedule_unit_id": "b12665bb7f26d5d5fef30324ac280f0ef35491a648613b001d77a9bb1b6d94d9",
+            "task_id": "ns-dev-boundary-add",
+            "terminal_state": "solved"
+          }
+        ]
+      }
+    },
+    "rescore": {
+      "argv": [
+        "python3",
+        "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "--attempt",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.json",
+        "--out",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-006/qualification/one-task.rescored.json"
+      ],
+      "oracle": {
+        "candidate_valid": true,
+        "cold_full_validation": true,
+        "hidden_access_incident": false,
+        "independent_scorer_id": "ns-006-independent-scorer",
+        "reason": "hidden tests passed on the patched tree",
+        "receipt_id": "sha256:53cbe469d4fac93050b031d656ca593c8aa0b5c64b7734a3ebbf3a7eac905816",
+        "status": "passed"
+      },
+      "provider_effect_unchanged": true
+    }
+  },
+  "file_sha256": {
+    "papers/completion/neurosymbolic_supervision/experiments/README.md": "3a392867a8edcc8d6fee20f1c6c93aab8877b56d1a72e078e7cb1314f6796aa3",
+    "papers/completion/neurosymbolic_supervision/experiments/receipt_schema.json": "1170a73efe8256cef0cf3ed841c328c81d84eb2df555e27f7b8ccadc840dbde0",
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "2a26dd30807ddf4ff0bd35c394844d39ae531f749e0b2f486e9622d135d9c835",
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "273b09892b6d2d0d44460100ed04998424a315dde95985e98f01c1e89f5175fa"
+  },
+  "invariants": [
+    "production path does not reserve or dispatch without admission",
+    "proposal sandbox does not mount NS-005 scorer_only",
+    "development/simulated receipts cannot set admitted_production",
+    "live historical units cannot be solved without production admission",
+    "confirmed provider effects are not replayed",
+    "end-to-end elapsed is time.perf_counter over the whole attempt"
+  ],
+  "limitations": [
+    "Development/simulated ns-dev-boundary-add units qualify the runner interface only and are excluded from live-repair denominators.",
+    "No billed production proposal was dispatched. The production path recorded unavailable identity and did not fabricate a solved live repair.",
+    "Pinned NS-005 pre-fix commits are not local git objects here; live materialization remains unavailable until scorer-principal git objects exist.",
+    "semantic_state may import in this host profile; production admission still requires the native quota-gated gateway and is fail-closed.",
+    "Docker/cgroup container isolation is unavailable; process rlimits and byte/wall caps were enforced.",
+    "Sampling seed and temperature controls are unsupported on the observed provider surface."
+  ],
+  "ok": true,
+  "schema": "paper-ns-runner-validation/v1",
+  "scope": "Runner interface, isolation, resource caps, path-class separation, independent scoring, and interruption/idempotency. Not a live A-D scientific result, production repair, or final freeze.",
+  "task_id": "NS-006",
+  "terminals_observed": {
+    "abstained": "provider returned no candidate",
+    "cancelled": "cancellation observed before provider dispatch",
+    "rejected": "candidate path not in admitted scope: tests/test_hidden.py",
+    "rejected:oversize-patch": "admitted patch 20036 exceeds cap",
+    "rejected:oversize-request": "serialized request 66134 exceeds cap",
+    "simulated_solved_not_production": "simulated",
+    "solved": "3cec685534d08dc767bc2cced0bf0ba271bc0249d4672082fbdfb293c9958b6c",
+    "timed_out": "provider wall budget exhausted",
+    "unavailable": "pre-fix snapshot not materialized: xmltodict.py: git show 75a17701db20d5d3ec2ea1f6c901cf2211011eb5:xmltodict.py failed",
+    "unsolved": "hidden tests failed on the patched tree"
+  },
+  "validator_ok": true
+}
