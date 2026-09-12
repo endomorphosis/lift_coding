@@ -1,0 +1,104 @@
+{
+  "analysis": {
+    "code": "analysis_refuses_incomplete_or_missing_review",
+    "import": {
+      "admitted": false,
+      "code": "incomplete_population",
+      "complete_review": false,
+      "details": {
+        "missing_case_count": 59,
+        "missing_case_ids_head": [
+          "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+          "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+          "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+          "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1",
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+          "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+          "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1",
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1"
+        ],
+        "required_case_count": 60,
+        "return_path": "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete.json",
+        "return_sha256": "21399110f274d50288161890dffa7cd28e1b1f4ba3a3369e533d45a7779bb423",
+        "returned_case_count": 1
+      },
+      "empirical_benchmark_result": false,
+      "importer_version": "la-028-review-import/v1",
+      "message": "Review return does not cover every frozen selected case. Incomplete populations cannot be admitted.",
+      "refused_at": "2026-09-12T06:37:47.231400Z",
+      "schema": "law-to-action-review-import/v1",
+      "scored_fidelity_claim": false,
+      "status": "refused",
+      "task": "LA-028"
+    },
+    "message": "Analysis refuses missing independent labels, agent-generated provenance, and incomplete populations.",
+    "schema": "law-to-action-review-analysis/v1",
+    "scored": false,
+    "status": "refused"
+  },
+  "blank_packet_state": {
+    "blank_reviewer_fields": [
+      "polarity",
+      "expected_polarity",
+      "adjudication",
+      "agreement",
+      "disagreement",
+      "reviewer_id",
+      "reviewed_at",
+      "reviewer_notes",
+      "final_adjudication"
+    ],
+    "independent_review_status": "pending",
+    "manifest": "papers/completion/law_to_action/benchmark/annotations/review_packet_manifest.json",
+    "manifest_sha256": "6272e6a0d6f4905c6f0a727a2735d1ec94caf290cc107256fb53e7996d74ffa5",
+    "nonblank_review_fields": [],
+    "original_blank_packets_preserved": true,
+    "packet_count": 108
+  },
+  "final_admission": {
+    "admitted": false,
+    "missing_independent_labels": true,
+    "reason": "incomplete_population",
+    "scored": false
+  },
+  "import": {
+    "admitted": false,
+    "code": "incomplete_population",
+    "complete_review": false,
+    "details": {
+      "missing_case_count": 59,
+      "missing_case_ids_head": [
+        "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+        "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+        "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+        "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1",
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+        "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1",
+        "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1"
+      ],
+      "required_case_count": 60,
+      "return_path": "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete.json",
+      "return_sha256": "21399110f274d50288161890dffa7cd28e1b1f4ba3a3369e533d45a7779bb423",
+      "returned_case_count": 1
+    },
+    "empirical_benchmark_result": false,
+    "importer_version": "la-028-review-import/v1",
+    "message": "Review return does not cover every frozen selected case. Incomplete populations cannot be admitted.",
+    "refused_at": "2026-09-12T06:37:47.231400Z",
+    "schema": "law-to-action-review-import/v1",
+    "scored_fidelity_claim": false,
+    "status": "refused",
+    "task": "LA-028"
+  },
+  "importer_version": "la-028-review-import/v1",
+  "schema": "law-to-action-review-import/v1"
+}

@@ -1,0 +1,21 @@
+{
+  "admission": {
+    "admitted": false,
+    "final_examples_scored": false,
+    "incomplete_populations": false,
+    "message": "Final admission and analysis refuse missing independent labels, unavailable runtime routes, and incomplete populations. Development qualification is not a scored final run.",
+    "missing_independent_labels": true,
+    "production_claim": false,
+    "reasons": [
+      "missing_independent_labels"
+    ],
+    "schema": "law-to-action-final-admission/v1",
+    "scored": false,
+    "unavailable_runtime_routes": []
+  },
+  "code": "analysis_refuses_unadmitted_final_run",
+  "message": "Analysis refuses to score final examples without independent labels, complete populations, and available runtime routes.",
+  "schema": "law-to-action-final-analysis/v1",
+  "scored": false,
+  "status": "refused"
+}

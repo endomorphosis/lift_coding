@@ -1,0 +1,76 @@
+{
+  "analysis": {
+    "code": "analysis_refuses_incomplete_or_missing_review",
+    "import": {
+      "admitted": false,
+      "code": "missing_independent_review_return",
+      "complete_review": false,
+      "details": {
+        "pending_in": [
+          "LA-027"
+        ],
+        "required_case_count": 60,
+        "return_path": null
+      },
+      "empirical_benchmark_result": false,
+      "importer_version": "la-028-review-import/v1",
+      "message": "No independent human review return is present. Missing reviewers or labels cannot yield a complete review or scored fidelity claim.",
+      "refused_at": "2026-09-12T06:37:46.242343Z",
+      "schema": "law-to-action-review-import/v1",
+      "scored_fidelity_claim": false,
+      "status": "refused",
+      "task": "LA-028"
+    },
+    "message": "Analysis refuses missing independent labels, agent-generated provenance, and incomplete populations.",
+    "schema": "law-to-action-review-analysis/v1",
+    "scored": false,
+    "status": "refused"
+  },
+  "blank_packet_state": {
+    "blank_reviewer_fields": [
+      "polarity",
+      "expected_polarity",
+      "adjudication",
+      "agreement",
+      "disagreement",
+      "reviewer_id",
+      "reviewed_at",
+      "reviewer_notes",
+      "final_adjudication"
+    ],
+    "independent_review_status": "pending",
+    "manifest": "papers/completion/law_to_action/benchmark/annotations/review_packet_manifest.json",
+    "manifest_sha256": "6272e6a0d6f4905c6f0a727a2735d1ec94caf290cc107256fb53e7996d74ffa5",
+    "nonblank_review_fields": [],
+    "original_blank_packets_preserved": true,
+    "packet_count": 108
+  },
+  "final_admission": {
+    "admitted": false,
+    "missing_independent_labels": true,
+    "reason": "missing_independent_review_return",
+    "scored": false
+  },
+  "import": {
+    "admitted": false,
+    "code": "missing_independent_review_return",
+    "complete_review": false,
+    "details": {
+      "pending_in": [
+        "LA-027"
+      ],
+      "required_case_count": 60,
+      "return_path": null
+    },
+    "empirical_benchmark_result": false,
+    "importer_version": "la-028-review-import/v1",
+    "message": "No independent human review return is present. Missing reviewers or labels cannot yield a complete review or scored fidelity claim.",
+    "refused_at": "2026-09-12T06:37:46.242343Z",
+    "schema": "law-to-action-review-import/v1",
+    "scored_fidelity_claim": false,
+    "status": "refused",
+    "task": "LA-028"
+  },
+  "importer_version": "la-028-review-import/v1",
+  "schema": "law-to-action-review-import/v1"
+}

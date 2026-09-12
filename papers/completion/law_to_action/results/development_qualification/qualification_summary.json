@@ -1,0 +1,86 @@
+{
+  "analysis": {
+    "admission": {
+      "admitted": false,
+      "final_examples_scored": false,
+      "incomplete_populations": false,
+      "message": "Final admission and analysis refuse missing independent labels, unavailable runtime routes, and incomplete populations. Development qualification is not a scored final run.",
+      "missing_independent_labels": true,
+      "production_claim": false,
+      "reasons": [
+        "missing_independent_labels"
+      ],
+      "schema": "law-to-action-final-admission/v1",
+      "scored": false,
+      "unavailable_runtime_routes": []
+    },
+    "code": "analysis_refuses_unadmitted_final_run",
+    "message": "Analysis refuses to score final examples without independent labels, complete populations, and available runtime routes.",
+    "schema": "law-to-action-final-analysis/v1",
+    "scored": false,
+    "status": "refused"
+  },
+  "completed_at": "2026-09-12T06:37:46.713208Z",
+  "e2e": {
+    "allow_decision": "allow",
+    "capability_route_executed": true,
+    "deny_decision": "deny",
+    "enforce_route_executed": true,
+    "handler_boundary_reached": true,
+    "proof_route_executed": true,
+    "status": "qualified_development_boundary"
+  },
+  "empirical_benchmark_result": false,
+  "final_admission": {
+    "admitted": false,
+    "final_examples_scored": false,
+    "incomplete_populations": false,
+    "message": "Final admission and analysis refuse missing independent labels, unavailable runtime routes, and incomplete populations. Development qualification is not a scored final run.",
+    "missing_independent_labels": true,
+    "production_claim": false,
+    "reasons": [
+      "missing_independent_labels"
+    ],
+    "schema": "law-to-action-final-admission/v1",
+    "scored": false,
+    "unavailable_runtime_routes": []
+  },
+  "final_labels_inspected": false,
+  "fixture_only_routes_represented_as_production": false,
+  "frozen_before_evaluated_predictions": true,
+  "model_provider_ledger": {
+    "call_count": 0,
+    "requires_model_calls": false
+  },
+  "pipeline": {
+    "by_population": {
+      "cve": {
+        "cases": 4,
+        "failures": 0,
+        "predictions": 4
+      },
+      "legal": {
+        "cases": 4,
+        "failures": 0,
+        "predictions": 4
+      },
+      "skill": {
+        "cases": 4,
+        "failures": 1,
+        "predictions": 3
+      }
+    },
+    "cases": 12,
+    "failures": 1,
+    "predictions": 11
+  },
+  "production_claim": false,
+  "qualify_version": "la-028-qualify-final-runtime/v1",
+  "review_import": {
+    "admitted": false,
+    "code": "missing_independent_review_return"
+  },
+  "schema": "law-to-action-development-qualification/v1",
+  "selected_arm": "A4",
+  "task": "LA-028"
+}

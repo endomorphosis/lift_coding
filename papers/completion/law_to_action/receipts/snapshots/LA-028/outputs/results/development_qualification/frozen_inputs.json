@@ -1,0 +1,120 @@
+{
+  "families": [
+    {
+      "lineage_family_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec",
+      "planned_case_ids": [
+        "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1"
+      ],
+      "population": "legal",
+      "source_id": "legal:ecbeda8c2b54b70c25b58163f663d98ad9f0b0773a571205b7544b126b0968df"
+    },
+    {
+      "lineage_family_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d",
+      "planned_case_ids": [
+        "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1"
+      ],
+      "population": "legal",
+      "source_id": "legal:de03688269ae120e7a9ee211cd7d2b0071d1038a5bb0ed19d153c68f8ac66f19"
+    },
+    {
+      "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+      "planned_case_ids": [
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1"
+      ],
+      "population": "cve",
+      "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f"
+    },
+    {
+      "lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+      "planned_case_ids": [
+        "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1"
+      ],
+      "population": "cve",
+      "source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b"
+    },
+    {
+      "lineage_family_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914",
+      "planned_case_ids": [
+        "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1"
+      ],
+      "population": "skill",
+      "source_id": "skill:e0ad50b89f0dda175af0c86e086b5b4f0ca0bc7d5d7b8e4983e9b4f84cd8c5b1"
+    },
+    {
+      "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+      "planned_case_ids": [
+        "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1"
+      ],
+      "population": "skill",
+      "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693"
+    }
+  ],
+  "frozen_at": "2026-09-12T06:37:44.926429Z",
+  "frozen_before_evaluated_predictions": true,
+  "inspect_final_labels": false,
+  "pins": {
+    "arms.json": {
+      "path": "papers/completion/law_to_action/benchmark/arms.json",
+      "present": true,
+      "sha256": "418f06958aa55df738e3615c9e7b57a0b767deaa56bda3488681dee0d4236fbd",
+      "size_bytes": 9985
+    },
+    "corpus_counts.json": {
+      "path": "papers/completion/law_to_action/benchmark/corpus_counts.json",
+      "present": true,
+      "sha256": "9bb3e85c460fc33710a2cfe12d836e6e9a9a62a63c9985e5250e475bd30de5fc",
+      "size_bytes": 3199
+    },
+    "cve_pairs.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl",
+      "present": true,
+      "sha256": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+      "size_bytes": 150894
+    },
+    "legal.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/annotations/legal.jsonl",
+      "present": true,
+      "sha256": "964be42468c82e04d77b37a90fbab66f5be82f899e54ada60ff403072323dd1b",
+      "size_bytes": 117635
+    },
+    "protocol.json": {
+      "path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "present": true,
+      "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+      "size_bytes": 22587
+    },
+    "resource_plan.json": {
+      "path": "papers/completion/law_to_action/benchmark/resource_plan.json",
+      "present": true,
+      "sha256": "985d48de55803995bec8ab4b75ffb0979a1c3f49c66f314d97caa7609db616aa",
+      "size_bytes": 8234
+    },
+    "skills.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/annotations/skills.jsonl",
+      "present": true,
+      "sha256": "05bb0e1f48900a35bf3ed1bdac89bf9b7f5bbcb2673c0cf140da9d5cd3d8bb44",
+      "size_bytes": 213314
+    },
+    "sources.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+      "present": true,
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+      "size_bytes": 51880
+    },
+    "splits.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+      "present": true,
+      "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+      "size_bytes": 17657
+    }
+  },
+  "schema": "law-to-action-frozen-final-inputs/v1",
+  "score_final_examples": false,
+  "split": "development"
+}
