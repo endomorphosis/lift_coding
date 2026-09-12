@@ -1,0 +1,338 @@
+[
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-1aff4ebeb953245c.json",
+      "payload": {
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "oracle_role": "allowed",
+        "population": "legal",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+    "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 193,
+        "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+        "target": "exports/dev-1aff4ebeb953245c.json"
+      }
+    ],
+    "oracle_role": "allowed",
+    "population": "legal",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-9b4549cc5346e2a4.json",
+      "payload": {
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "oracle_role": "forbidden",
+        "population": "legal",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+    "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 195,
+        "payload_sha256": "d5dca576b842569eb7a270ece47e92f668ba90fc6ce101a8bcf2ee5e289ff8d5",
+        "target": "exports/dev-9b4549cc5346e2a4.json"
+      }
+    ],
+    "oracle_role": "forbidden",
+    "population": "legal",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-01f63aff56d8a050.json",
+      "payload": {
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "oracle_role": "allowed",
+        "population": "legal",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+    "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 193,
+        "payload_sha256": "1507e470dad44df8bfb1d3c423e1fb782ab2687e8730d1e6c2095b716d428fdd",
+        "target": "exports/dev-01f63aff56d8a050.json"
+      }
+    ],
+    "oracle_role": "allowed",
+    "population": "legal",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-f01d66c636e39285.json",
+      "payload": {
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "oracle_role": "forbidden",
+        "population": "legal",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+    "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 195,
+        "payload_sha256": "0dc0e9c85d3457f4076abaa2ac3469d2af3ddeff26ecd7734e372467fcef41e8",
+        "target": "exports/dev-f01d66c636e39285.json"
+      }
+    ],
+    "oracle_role": "forbidden",
+    "population": "legal",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-fed344be69c125af.json",
+      "payload": {
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "oracle_role": "allowed",
+        "population": "cve",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+    "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 191,
+        "payload_sha256": "4922a8c84b7a35190ce490502c51e8d6859e5bb570d7b8056b758a169073937e",
+        "target": "exports/dev-fed344be69c125af.json"
+      }
+    ],
+    "oracle_role": "allowed",
+    "population": "cve",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-5de4b12213fe7d79.json",
+      "payload": {
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "oracle_role": "forbidden",
+        "population": "cve",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+    "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 193,
+        "payload_sha256": "e14a6bffb71e52931034356cbb6838f6fe3e85b1dfef13b6a70b0a4f56e05883",
+        "target": "exports/dev-5de4b12213fe7d79.json"
+      }
+    ],
+    "oracle_role": "forbidden",
+    "population": "cve",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-2fb68d791c8888c0.json",
+      "payload": {
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "oracle_role": "allowed",
+        "population": "cve",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+    "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 191,
+        "payload_sha256": "bfd9a36a3e705cc6841695a0a4c1b9863bae18490c95e5aac7b4f1778a77e5b4",
+        "target": "exports/dev-2fb68d791c8888c0.json"
+      }
+    ],
+    "oracle_role": "allowed",
+    "population": "cve",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-19d06fcc66a2394a.json",
+      "payload": {
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "oracle_role": "forbidden",
+        "population": "cve",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+    "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 193,
+        "payload_sha256": "269a1566c14a86fb456b643f6a2f7c1d5c7bf65d86b0ecb3f9f53d4a49b7f319",
+        "target": "exports/dev-19d06fcc66a2394a.json"
+      }
+    ],
+    "oracle_role": "forbidden",
+    "population": "cve",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-be11ca50dec7f31b.json",
+      "payload": {
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "oracle_role": "allowed",
+        "population": "skill",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+    "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 193,
+        "payload_sha256": "159fb20a1bdbd2cae7d4a85d05a988cff92a105aebf5f3940e7f8393dfe0299c",
+        "target": "exports/dev-be11ca50dec7f31b.json"
+      }
+    ],
+    "oracle_role": "allowed",
+    "population": "skill",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-b96c9f83a6ae6ba7.json",
+      "payload": {
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "oracle_role": "forbidden",
+        "population": "skill",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+    "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 195,
+        "payload_sha256": "9d6636d5bfd78d5218d0e12938be43c461d5bb2264e4fab270ca6b01c4542c79",
+        "target": "exports/dev-b96c9f83a6ae6ba7.json"
+      }
+    ],
+    "oracle_role": "forbidden",
+    "population": "skill",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-075d8327ad20c2d4.json",
+      "payload": {
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "oracle_role": "allowed",
+        "population": "skill",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+    "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 193,
+        "payload_sha256": "e06e89d9052e96383a10ca9bda39d2910b3066772aee7e08bfb4abec2501c5bd",
+        "target": "exports/dev-075d8327ad20c2d4.json"
+      }
+    ],
+    "oracle_role": "allowed",
+    "population": "skill",
+    "split": "development"
+  },
+  {
+    "actor": "did:client:tenant-a",
+    "arguments": {
+      "operation": "export_json",
+      "path": "exports/dev-4c68406959c656c4.json",
+      "payload": {
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "oracle_role": "forbidden",
+        "population": "skill",
+        "split": "development",
+        "task": "LA-014-fixed-action"
+      }
+    },
+    "audience": "did:service:tenant-a",
+    "candidate_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+    "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+    "declared_effects": [
+      {
+        "effect_kind": "filesystem.export_json",
+        "payload_bytes": 195,
+        "payload_sha256": "5dd693bc91ce9be9b7091e96e433ff036732925a98570bb0d5a7eaa50101875f",
+        "target": "exports/dev-4c68406959c656c4.json"
+      }
+    ],
+    "oracle_role": "forbidden",
+    "population": "skill",
+    "split": "development"
+  }
+]
