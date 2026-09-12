@@ -1,0 +1,272 @@
+% AF-022 claim-bearing manuscript.
+% Historical PDF recovery remains under pages/ and source_recovery_staging/;
+% that recovery copy is not this paper's results narrative.
+\documentclass{article}
+\usepackage{neurips_2026_vericode}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref,url,booktabs,amsfonts,amsmath,amssymb,graphicx,xcolor}
+\hypersetup{pdfauthor={Anonymous Author(s)},pdftitle={Compiler-Guided Autoformalization with Adaptive Multi-View Representations},pdfsubject={NeurIPS 2026 Workshop on AI for Verifiable Coding},pdfcreator={LaTeX with neurips_2026_vericode},pdfproducer={pdfTeX}}
+\title{Compiler-Guided Autoformalization with Adaptive\\Multi-View Representations}
+\author{Anonymous Author(s)}
+\providecommand{\workshoptitle}[1]{}
+\workshoptitle{NeurIPS 2026 Workshop on AI for Verifiable Coding}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Autoformalization for verifiable coding requires a source-grounded interpretation and a computational route for checking it. We describe a compiler-guided architecture that couples engineered symbolic intermediate representations (IRs) to adaptive multi-view representation learning, and we report the automated structural, native-training, and checker evidence that was actually obtained. Pipeline comparisons A--E vary the source-to-proof mechanism. Learning comparisons T0--T5 vary sample memory, shared parameters, isolated proof heads, promoted guidance, and compiler repair. Those two matrices answer different questions and are not merged.
+
+We report automated structural correctness, exact-goal native checker receipts, teacher-agreement diagnostics, learned-update records, and finite constructed conformance. Independent human source-facet fidelity and agreement were not collected. Checker and teacher success are not original-source semantic gold. On the locked 1913-unit final-test population, matched A--E coverage and cost remain unrun, independent fidelity is unmeasured, and native useful-proof transfer is unavailable on the sealed checker \texttt{PATH}. Shared-parameter T2 accepted no sealed-\texttt{PATH} epochs; a T1 seen-source teacher-cosine gap is a sample-memory diagnostic, not generalization. T3 has no eligible native labels; T4 and Arm~E remain unactivated; T5 has no measured held-out improvement. A synthetic policy--code--trace example and twelve reconstructed finite semantic checks illustrate composition and are not natural-distribution accuracy.
+\end{abstract}
+
+\section{Introduction}
+Autoformalization makes heterogeneous material available to mechanical reasoning, but a formula can be well typed and provable while misrepresenting its source~\citep{wu2022autoformalization,azerbayev2023proofnet,jiang2024multilanguage}. A requirement, an implementation, and an execution trace also have different truth conditions: an obligation is not an observation, permission is not execution, and belief is not fact. Mathematical autoformalization demonstrates useful natural-language translation into formal statements. The coding-verification question is how to learn better source-to-symbolic mappings while preserving those distinctions, without treating retrieval, planning, or a solver candidate as a proof.
+
+The method couples a deterministic semantic pipeline to adaptive representation learning. Compilers create source-grounded IRs, decomposers expose multiple logical views, and decompilers reconstruct inspectable content. An adaptive modal autoencoder learns reusable feature-to-embedding and feature-to-family/view parameters against teacher targets. Reconstruction, structural, provenance, grammar, and cross-view diagnostics identify where the symbolic pipeline is inadequate. Bounded optimization then either updates shared parameters or proposes a separately validated compiler/decompiler change. Checked proof feedback, when admitted, trains isolated prediction heads rather than rewarding arbitrary changes that make the input easier to prove.
+
+This is neither one end-to-end language model nor unsupervised discovery of a universal logic. The schema, operators, sorts, and admissibility rules are engineered. Learning estimates content, associations, rankings, and repair priorities within those contracts. Several implemented paths coexist: deterministic compilation, adaptive diagnostic learning, packed tensor updates, source-withheld reconstruction, and bounded model-assisted synthesis. We distinguish their inputs, outputs, objectives, and activation.
+
+The original draft asked whether shared learned representations and checked feedback improve independently judged source fidelity and useful proof coverage on unseen material. Independent human labels were not collected, so that question remains unmeasured. The measured contribution of this manuscript is narrower:
+
+\begin{enumerate}
+\item a source-grounded account of compilation, multi-view IRs, and adaptive learning, with equations audited for reconstruction versus text, source maps versus truth, planning versus proof, and implemented versus executed tense;
+\item matched pipeline conditions A--E and learning conditions T0--T5, reported separately, with every primary final-test cell retained as unrun, unavailable, or unmeasured rather than as a silent zero;
+\item finite constructed conformance, solver-local policy--code--trace witnesses, development exact-goal checker receipts, and native-training diagnostics, each labeled by population and not promoted to held-out source-semantic gold.
+\end{enumerate}
+
+Historical PDF recovery text is retained under \texttt{pages/} as provenance. That recovery copy still contains unmeasured promises; this manuscript does not present those promises as results.
+
+\section{Representations, teachers, and reconstruction}
+\subsection{What is shared, and what is learned}
+Three axes remain distinct. Source format names prose, code, traces, tables, or extracted media. Domain names Legal, Security, Intent, software, or UI declarations. Logical view names deontic, temporal, frame, first-order, cognitive/event, graph, or proof-oriented structure. Sharing canonical records does not equate domain ontologies or logical interpretations.
+
+The domain-neutral kernel supplies canonical bytes, identities, provenance, source spans, assumptions, claims, obligations, and result protocols. Domain adapters retain their own semantic slots. A symbolic declaration is discrete and inspectable; its content identifier binds an encoding under a declared profile, not a learned location in a vector space. Equal vectors or nearby embeddings do not imply equivalent formulas. Six intermediate objects have different roles: canonical symbolic declarations, family-specific formulas, learned numerical features, graph relationships, search plans, and proof/evidence records. A search plan is not a formula; a declaration is not its verification result; and a vector is not a proof.
+
+\subsection{Supervisory targets are teachers, not source gold}
+The concrete legal training record contains source identity, normalized text, an embedding-model identifier and vector, a modal IR document, frame candidates, parser trace, and losses. The default convenience embedding is a deterministic mock (\texttt{mock:stable-sha256}); a local codec can supply spaCy-derived feature hashing; externally supplied vectors carry their producer identity. Modal-family targets can be derived from parsed operators; view targets come from bridge contracts; frames can be retrieval-selected; proof-feedback labels require admitted verifier records. Reproducing these labels measures distillation of those teachers. Independent annotations are required to measure fidelity to the original source, and those annotations were not collected.
+
+For a source $x$, write $I=C_\psi(x)$ for the symbolic compiler output, $e=T(x)$ for the declared embedding target, and $f=F(x,I)$ for reusable features. Features include lexical cues, actor/action/object roles, conditions and exceptions, temporal structure, predicate arity, quantifier scope, provenance, frame relations, compiler contracts, and reconstruction diagnostics. The adaptive model predicts an embedding $\hat e$, a modal-family distribution $p_F$, and a view distribution $p_V$. Some features depend on an existing parse, so this is often parser-assisted learning, not a demonstrated raw-text-only compiler.
+
+\subsection{Compilers and two meanings of reconstruction}
+The local modal codec uses deterministic registry cues, spaCy-derived features, BM25 frame grounding, and frame-logic consistency checks. A selected structured-text profile has a seven-field rule---modality, actor, action, object, conditions, exceptions, and temporal qualifiers---and explicitly disables learned guidance and repair. Formalization adapters produce named formula views and source maps. The maps bind IR constituents to source evidence; they are not proof of a correct interpretation. Media extraction is a limitation: no OCR/ASR theorem performance is claimed.
+
+\input{figure-01.tex}
+
+Symbolic reconstruction follows
+\begin{equation}
+I_1=C_\psi(x),\qquad \hat{x}=D_\omega(I_1),\qquad I_2=C_\psi(\hat{x}).
+\label{eq:cycle}
+\end{equation}
+A decompiler renders roles, predicates, modality, conditions, exceptions, and temporal structure into inspectable text. Source-withheld evaluation gives the realizer the IR, not the originating source, locator, source map, private parser state, or gold target. Comparing $I_1$ and $I_2$ tests reconstructable facets and compiler/realizer consistency. It does not prove source fidelity: both programs could consistently omit the same exception. Forward (gold$\to$first IR), cycle (first IR$\to$second IR), and end-to-end (gold$\to$second IR) scores remain distinct.
+
+The autoencoder's numerical reconstruction is different. Encode builds a state containing family predictions and an embedding projection; decode returns that projection as a numeric vector. Its basic reconstruction target is the sample embedding, not arbitrary source prose. Calling this vector reconstruction a trained free-text decoder would misstate the implementation: numerical decode is not a trained free-text decoder.
+
+\section{Adaptive learning and assistance}
+\subsection{Shared parameters versus sample memory}
+The adaptive implementation has sparse parameter groups for feature embeddings, modal families, semantic slots, predicate arguments, logic signatures, view logits, decompiler plans, and family--slot--view interactions. It also retains compatibility fields indexed by sample identity. The generalizable training route disables per-sample memory for updates and evaluation. Reconstructing a stored vector for a known sample is not generalization. A schematic of the shared heads is
+\begin{equation}
+\hat e=e_0(f)+\sum_g A_g(f)W_g,
+\label{eq:emb}
+\end{equation}
+\begin{equation}
+p_F=\mathrm{softmax}\!\left(\ell^0_F(f)+\sum_g A_g(f)U_g\right),\qquad
+p_V=\mathrm{softmax}\!\left(\ell^0_V(f)+\sum_g A_g(f)V_g\right).
+\label{eq:logits}
+\end{equation}
+Here $A_g$ is activity of a bounded feature group, and $W_g,U_g,V_g$ are enabled embedding and logit tables. This notation summarizes the packed implementation; it is not a Transformer or variational autoencoder. A forward-only no-op is reported separately from a parameter update.
+
+\subsection{Packed objective and isolated proof heads}
+The packed tensor path gathers active rows, constructs predictions, reduces losses in FP32, backpropagates, clips gradients, applies an SGD-style step, and scatters changed rows into transaction-aware state. The inspected update is not Adam. For the active heads,
+\begin{equation}
+\begin{split}
+L_{\mathrm{packed}}={}&H(q_F,p_F)+H(q_V,p_V)+\mathrm{MSE}(e,\hat e)\\
+&+\lambda_c(1-\cos(e,\hat e))+L_{\mathrm{norm}}+\lambda_2 R(\Theta).
+\end{split}
+\label{eq:packed}
+\end{equation}
+Targets are normalized distributions; masks exclude unavailable rows. Neither cosine similarity nor cross-entropy is a theorem about recovered meaning. Appendix~\ref{app:packed} records the globally normalized masked CE and the SGD-style step actually audited.
+
+Seven explicit heads can predict obligation family, semantic slots, premise family, route availability, trusted outcome, reconstruction success, and minimal failing contract. Their declared weight in the primary representation objective is zero. A prediction of proof success can prioritize a route but cannot certify a formula.
+
+Stable-feature promotion is an implemented join, not an executed consumer result in this manuscript. Export excludes raw source, token-level copying channels, sample identifiers, and sample-memory state. Admission requires paired fixed-canary evidence and rollback metadata. File existence or a matching ingestion digest is not applied learned-feature guidance. The frozen canonical compiler profile continues to disable learned guidance.
+
+\subsection{Retrieval, planning, and proof proposals}
+BM25, vector indexes, and knowledge-graph traversal supply complementary context rather than truth criteria. Index construction is not encoder training. Context becomes a premise only after grounding, applicability, and policy checks; absence from retrieval is not logical negation.
+
+The Tactician deterministically orders caller-provided sources under an explicit policy and creates an acyclic subgoal plan. Planning performs no proof. The ITP Hammer selects premises, lowers a supported first-order-safe fragment, runs an allowed solver portfolio, and attempts native reconstruction. Solver output is a candidate until reconstruction is accepted by the originating checker. Leanstral supplies advisory proof-engineering proposals; a model response does not replace checking. Generated Lean containing \texttt{sorry}, \texttt{admit}, or unapproved axioms is rejected before any kernel claim. These mechanisms are implemented routes. On the sealed validation \texttt{PATH}, native Lean/Z3/CVC5/Vampire/E/Coq/Isabelle assistance was unavailable, and no Hammer or Leanstral benchmark from other papers was run.
+
+\section{Multi-view translation and a coding example}
+\subsection{Profile-indexed semantics and a conditional transfer rule}
+Each logical view has a signature, sentence language, semantic models, satisfaction relation, and a supported query fragment. For illustration, a normal modality can be interpreted with an indexed accessibility relation
+\begin{equation}
+[\![\Box_i\phi]\!](w)=\forall v\,[R_i(w,v)\Rightarrow[\![\phi]\!](v)].
+\label{eq:modal}
+\end{equation}
+Equation~\ref{eq:modal} is an illustrative semantic recipe, not a claim that every repository view is compiled by it. Ordinary normal modal logic is not a universal deontic solution~\citep{benzmuller2020logikey}. $O(Gp)$ and $G(Op)$ are not equated without a profile-specific commutation result.
+
+A translation record must state source/target views, profile, signature map, assumptions, supported constructs, named losses, preserved property, and checker evidence. Translation validation examines the produced transformation rather than trusting every compiler invocation~\citep{pnueli1998translation}. A legacy TDFOL-to-FOL converter that erases unary temporal and deontic operators and replaces strong until by conjunction is a negative control; a resulting solver success is not a valid modal proof.
+
+Let $\Gamma\models_{L_s}\phi$ be the desired source-view consequence. A translator $\tau$ maps premises and goal into $L_t$. Under bridge assumptions $B$, let $R_B(s,t)$ relate admitted source and target models. The required directionality is
+\begin{equation}
+s\models\Gamma\land R_B(s,t)\;\Rightarrow\; t\models\tau(\Gamma),
+\label{eq:prem}
+\end{equation}
+\begin{equation}
+t\models\tau(\phi)\land R_B(s,t)\;\Rightarrow\; s\models\phi.
+\label{eq:goal}
+\end{equation}
+For every admitted source model satisfying $\Gamma$ and $B$ there must be a related target model; otherwise the relation can be vacuous. If a target checker soundly establishes $\tau(\Gamma)\models\tau(\phi)$, these conditions transfer the consequence back. This is a \emph{conditional paper proposition} to discharge per supported translation, not a machine-checked soundness theorem about every implementation translator. Inconsistent premises are refused rather than exploded into an accepted transfer.
+
+\subsection{Synthetic policy--code--trace illustration}
+Consider a synthetic coding requirement: ``Protected resources must not be written without approval. Each write must be audited within two steps.'' It is a specification example, not legal advice and not a production experiment. One source supplies the requirement, a second supplies implementation text, and a third supplies observations. The normative view may represent the first sentence as
+\begin{equation}
+\mathrm{Protected}(r)\land\neg\mathrm{Approved}(a,r,t)\;\Rightarrow\; O_{a,t,\theta}(\neg\mathrm{Write}(a,r,t)).
+\label{eq:obl}
+\end{equation}
+The policy-to-compliance bridge defines which observed behaviors count as violations. It does not derive actual non-writing from the obligation. The compliance queries are
+\begin{equation}
+Q_1=\forall a,r,t:\;\mathrm{Protected}(r)\land\neg\mathrm{Approved}(a,r,t)\Rightarrow\neg\mathrm{Write}(a,r,t),
+\label{eq:q1}
+\end{equation}
+\begin{equation}
+Q_2=\forall a,r,t:\;\mathrm{Write}(a,r,t)\Rightarrow\exists u\in[t,t+2]:\mathrm{Audit}(a,r,u).
+\label{eq:q2}
+\end{equation}
+A deterministic implementation model $\mathrm{Write}=\neg\mathrm{Protected}\lor\mathrm{Approved}$ makes $Q_1$ hold on that finite Boolean model. An always-write implementation supplies a countermodel when the resource is protected and approval is false. Transferring either result to actual source code requires a justified extraction or refinement relation; finding the word ``approve'' in a function name is insufficient. For $Q_2$, a write at step~0 and a matching audit at step~1 satisfy the bounded requirement for that observed event; an audit at step~3 violates it only when capture is complete through the deadline; an incomplete window yields unknown; a same-looking name in a different tenant cannot be joined without an admitted identity mapping. These are finite constructed witnesses, not compiler soundness and not Table~\ref{tab:pipeline-results}.
+
+\section{Evaluation protocol}
+Pipeline arms A--E and learning arms T0--T5 share frozen source-family/time grouping and a 1913-unit final-test lock when a comparison calls for the same population, but they answer different questions. A--E vary the source-to-proof pipeline under a matched checker contract. T0--T5 vary learning and transfer from a sealed starting representation.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Pipeline arms A--E vary source-to-proof mechanism. They are not the T0--T5 learning matrix.}
+\label{tab:arms-ae}
+\begin{tabular}{lp{0.72\linewidth}}
+\toprule
+Arm & Mechanism (matched source tasks, vocabulary, checker, and budget where required) \\
+\midrule
+A & Direct model-to-target formalization. \\
+B & Deterministic bounded compiler; frozen canonical profile; explicit abstention; learned guidance disabled. \\
+C & Typed source-grounded multiview without admitted proof transfer; cannot consume D bridge evidence. \\
+D & C plus checked property-specific bridges and compatible premise assembly. \\
+E & D plus bounded learned view/premise advice; checker unchanged; gated to actual loaded-guidance identity. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Learning arms T0--T5 vary memory, shared parameters, isolated feedback, promotion, and repair. They are not the A--E pipeline matrix.}
+\label{tab:arms-t}
+\begin{tabular}{lp{0.72\linewidth}}
+\toprule
+Arm & Learning comparison \\
+\midrule
+T0 & Deterministic/codec baseline; no shared-parameter fit. \\
+T1 & Adaptive with sample memory (seen-source diagnostic, not a fair generalization condition). \\
+T2 & Shared-parameter-only updates; sample memory disabled. \\
+T3 & Isolated trusted proof heads from a matched T2 checkpoint. \\
+T4 & Source-free promoted guidance actually loaded by a compiler/realizer consumer. \\
+T5 & Bounded executable compiler/decompiler repair from a sealed starting arm. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Prespecified seeds are 104729, 130363, and 155921. Frozen splits are train 69 / selection 15 / fixed canary 38 / final-test 1913 locked across 20 source-family/time groups (CFR 993, MPEP 738, U.S.\ Code 175, guidance 7). Final-test identities, labels, maps, and outcomes do not enter training, selection, canaries, or inspection. Uncertainty, when computed, is a 95\% source-family/time-group cluster bootstrap with 10000 resamples; it is not imputed for unrun cells.
+
+\input{empirical_scope.tex}
+
+\section{Measured results}
+\subsection{A--E pipeline comparison is not a T0--T5 result}
+Table~\ref{tab:pipeline-results} reports the locked final-test A--E matrix. Unrun and unavailable are not measured zeros. Independent source-semantic fidelity is unmeasured and is not prover or teacher agreement. Selection-split structural counts (A unavailable 15/15; B abstained 4 and measured 11; C measured 15/15; D unsupported 15/15; E unavailable 15/15) are a separate non-Table~\ref{tab:pipeline-results} diagnostic and do not fill the 1913-unit cells.
+
+\input{../results/table6_pipeline.tex}
+
+\subsection{T0--T5 learning comparison is not an A--E result}
+Table~\ref{tab:training-results} reports T0--T5. Split counts are frozen inventory. Held-out independent fidelity is unmeasured; teacher cosine and reconstruction do not fill that column. Proof/route benefit and final-test cost remain unrun or unavailable.
+
+\input{../results/table11_training.tex}
+
+On train 69 plus selection 15, T0 replayed a deterministic codec three times with \texttt{update\_count}$=0$ and mock embeddings. T1, with sample memory, produced train vector-cosine values $\{0.991,0.709,0.993,0.674,0.992,0.755\}$ versus selection $\{0.410,0.625,0.464\}$ under \texttt{mock:stable-sha256}. That gap supports the prespecified memorization diagnostic and is not held-out fidelity. T2 accepted $0$ shared-parameter epochs on the sealed \texttt{PATH}; the negative/null shared-learner result is retained. Later packed-CPU parameter changes on the same train/selection windows used MiniLM teacher targets, remain \texttt{claim\_admissible=false}, and do not fill Table~\ref{tab:training-results} held-out cells. T3 has $0$ eligible native labels on the sealed \texttt{PATH}. T4 is unactivated: export identity is not applied learned guidance, and Arm~E stays locked. T5 accepted an exception-scoping compiler contract on constructed witnesses; unseen fidelity and native coverage remain unrun, recorded as no measured held-out improvement.
+
+\subsection{Assistance comparisons remain constructed or unavailable}
+Table~\ref{tab:assistance-results} retains the six prespecified assistance comparisons. Constructed automatic-label diagnostics do not fill natural held-out cells. Unavailable native checkers are not measured zeros. Independently judged natural relevance was not collected. Selector weights are disclosed as hand-authored (\texttt{trained=false}); import-overlap is a proxy, not usefulness gold. Plans replay deterministically and are not executed proofs (\texttt{executed\_proofs}$=0$). Hammer/Leanstral native reconstruction is unavailable. No miniF2F, ProofNet, LeanDojo, CompCert, seL4, or Dafny benchmark was run.
+
+\input{../results/table13_assistance.tex}
+
+\subsection{Constructed conformance and development checkers}
+Twelve reconstructed finite semantic checks matched their declared expected outcomes, including $26$ disagreements between strong-until and conjunction among $64$ length-three traces. This is a new reconstruction, not recovery of a historical Table~4 execution, and not natural-distribution accuracy.
+
+On the synthetic policy--code--trace fragment, a guarded Boolean model accepts $Q_1$ transfer and an unguarded always-write model supplies a $Q_1$ countermodel. Timely versus delayed audit, incomplete windows, wrong-tenant identity, inconsistent premises, unjustified name extraction, obligation-not-actuality, and lossy TDFOL erasure have distinct outcomes. Native Lean $Q_1$ is unavailable on the sealed \texttt{PATH}. Zero observed false transfers on that finite set is not universal soundness. Proposition~\ref{prop:transfer} is not represented as machine-checked compiler soundness.
+
+Development exact-goal receipts include a Lean identity success, a Lean \texttt{False:=trivial} type error, and a Z3 unsat sentinel. Those receipts do not receive Table~\ref{tab:pipeline-results} credit.
+
+\subsection{Costs, missingness, and hypotheses}
+Retained historical phase costs sum to $963.171$ elapsed seconds and are not a Table~\ref{tab:pipeline-results} or Table~\ref{tab:training-results} final-test total. Human-review seconds remain unmeasured, not $0.0$. GPU/CUDA training speedup is unmeasured; skipped CUDA tests and absent sealed-\texttt{PATH} torch are not a zero-cost success. Failed encoder-preparation attempts are retained and not double-counted.
+
+Prespecified claims C1--C6 remain unrun. C7 is inconclusive on constructed automatic-label diagnostics. The T1 memory diagnostic is supported only as a non-primary teacher-cosine result. Shared-parameter generalization (T2 versus T0 on unseen source families) is unsupported on the sealed \texttt{PATH}. Optional author feedback was not supplied and is not required.
+
+\section{Related work}
+Mathematical autoformalization with large language models~\citep{wu2022autoformalization,azerbayev2023proofnet,jiang2024multilanguage} motivates learned statement generation, typically into proof-assistant mathematics. Our source pipeline combines domain-specific parsing, structured teacher targets, adaptive representation heads, and checked compilation guidance for policy, code, and trace material. We do not report ProofNet, miniF2F, or multilingual math-autoformalization scores; those benchmarks were not run.
+
+Retrieval-augmented and informal-to-formal proving~\citep{jiang2022thor,jiang2023dsp,yang2023leandojo,first2023baldur} integrate language models with hammers or whole-proof generation. Thor and Sledgehammer~\citep{blanchette2013sledgehammer} reconstruct solver candidates in an originating ITP. Our Hammer and Leanstral routes are the corresponding implemented mechanisms, but sealed-\texttt{PATH} native checkers were unavailable, so we do not claim LeanDojo/Thor/Baldur performance.
+
+Verified coding systems such as CompCert~\citep{leroy2009compcert}, seL4~\citep{klein2009sel4}, and Dafny~\citep{leino2010dafny} supply the workshop's coding-verification context: a specification, an implementation, and a machine-checked artifact. Our synthetic protected-write/audit example is a finite illustration of that use case, not a verified kernel, compiler, or program verifier, and those systems were not re-benchmarked here.
+
+Learned perception plus symbolic execution is established in neural-symbolic reasoning~\citep{yi2018nsvqa}; here provenance, modal scope, and separate proof-feedback objectives are material. We do not claim to originate multi-logic interoperability: institutions formalize signatures, models, and satisfaction~\citep{goguen1992institutions}, while LogiKEy combines normative logics by HOL embedding~\citep{benzmuller2020logikey}. Frame logic, event calculus, and translation validation are established foundations~\citep{kifer1995flogic,kowalski1986events,pnueli1998translation}.
+
+\section{Limitations and conclusion}
+Independent human semantic-fidelity, agreement, and adjudication were not performed; their protocols remain unexecuted future work and supply no empirical score. Teacher bias, sample-memory shortcuts, lossy legacy translations, bounded backend coverage, and unactivated guidance are retained limitations. Constructor or route availability is distinct from supported semantic fragments and live checker coverage. A CID binds encoding, not interpretation. A trained view classifier, valid source map, or high reconstruction score does not establish faithful interpretation. Result kinds remain distinct: theorem proof, satisfiability, finite runtime observation, evidence readiness, and policy approval.
+
+The methodology is a coupled learning and compilation system: symbolic structure supplies auditable targets; trainable shared representations expose systematic errors; constrained proposals and fixed-canary admission are the intended compiler-facing path; modality-aware views support explicitly justified reasoning. What this manuscript establishes is that inventory: implemented A--E and T0--T5 conditions, honest unrun/unavailable/unmeasured primary cells on 1913 locked final-test units, a supported T1 memorization diagnostic, an unsupported sealed-\texttt{PATH} T2 shared-learner update, constructed conformance and policy--code--trace witnesses, and development checker receipts that are not source gold. It does not establish that the cycle improves independent source fidelity or useful cross-view proof coverage on genuinely unseen material.
+
+\begin{ack}
+Anonymous workshop submission; acknowledgements omitted.
+\end{ack}
+
+\typeout{AF024-BEFORE-BIB:\thepage}
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\typeout{AF024-BEFORE-APPENDIX:\thepage}
+\appendix
+\section{Packed training equations}
+\label{app:packed}
+The packed reconstruction term averages over embedding coordinates,
+\begin{equation}
+L_{\mathrm{rec}}=\frac1n\sum_i\frac1d\|\hat e_i-e_i\|_2^2,
+\label{eq:rec}
+\end{equation}
+and masked family/view cross-entropy is globally normalized over eligible rows $M$,
+\begin{equation}
+L_{\mathrm{CE}}=-\frac1n\sum_{i\in M}\sum_j q_{ij}\log\mathrm{softmax}(\ell_i)_j.
+\label{eq:ce}
+\end{equation}
+The inspected update is SGD-style,
+\begin{equation}
+\Theta\leftarrow\Theta-\eta\,\mathrm{Clip}(\nabla_\Theta L).
+\label{eq:sgd}
+\end{equation}
+These identities describe the audited packed-CPU path. They are not a claim that every configured head was enabled in a deployed checkpoint, and they are not held-out source fidelity.
+
+\section{Conditional proof-transfer proposition}
+\label{app:prop}
+\paragraph{Proposition 1 (conditional semantic consequence transfer).}
+\label{prop:transfer}
+Assume a translator $\tau$, bridge assumptions $B$, and a relation $R_B$ that is nonvacuous on the admitted source models of $\Gamma$. If Equations~\ref{eq:prem}--\ref{eq:goal} hold, premises are consistent in the relevant sense, and a sound target checker establishes $\tau(\Gamma)\models\tau(\phi)$, then $\Gamma\models_{L_s}\phi$.
+This is a paper-level conditional argument, not a theorem that every repository translator satisfies. Related-model existence, premise preservation, goal reflection, and checker identity must be discharged per supported fragment. The legacy TDFOL converter does not satisfy the contract.
+
+\section{Historical recovery copy}
+\label{app:recovery}
+The user-supplied PDF was reconstructed into editable pages under \texttt{pages/} and \texttt{source\_recovery\_staging/} with a discrepancy audit. That recovery copy preserves original wording, pending result fields, and historical claims; it is not this paper's results narrative. Equations~\ref{eq:cycle}--\ref{eq:sgd} were transcribed from that PDF and re-audited here for quantification, nonvacuity, and tense.
+
+\typeout{AF024-BEFORE-DISCLOSURE:\thepage}
+\input{llm_disclosure.tex}
+\newpage
+\typeout{AF024-BEFORE-CHECKLIST:\thepage}
+\input{checklist.tex}
+\end{document}
+

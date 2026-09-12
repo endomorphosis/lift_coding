@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONNOUSERSITE=1",
+    "LANG=C.UTF-8",
+    "/usr/bin/python3.12",
+    "-V"
+  ],
+  "cwd": ".",
+  "elapsed_seconds": 0.0018065099138766527,
+  "env": {
+    "HOME": "/tmp/ipfs-accelerate-validation-home-af024-4u8zkgyz",
+    "LANG": "C.UTF-8",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-09-12T22:14:44.215193+00:00",
+  "name": "python_version",
+  "started_at": "2026-09-12T22:14:44.213376+00:00"
+}

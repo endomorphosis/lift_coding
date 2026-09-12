@@ -1,0 +1,49 @@
+{
+  "schema": "autoformalization-template-inputs/v1",
+  "task_id": "AF-024",
+  "shared_user_templates_unmodified": true,
+  "package_load": "\\usepackage{neurips_2026_vericode}",
+  "package_options": [],
+  "anonymous_default": true,
+  "forbidden_options_absent": [
+    "final",
+    "preprint",
+    "nonanonymous",
+    "sglblindworkshop"
+  ],
+  "unused_substitutions": {
+    "papers/neurips_2026.sty": "generic NeurIPS style not used",
+    "papers/neurips_2026_vericode_competition.sty": "competition/single-blind style not used",
+    "papers/neurips_2026_vericode_workshop_competition.tex": "competition shell not used"
+  },
+  "inputs": {
+    "papers/neurips_2026_vericode_workshop.tex": {
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "bytes": 17416,
+      "modified": false,
+      "role": "research_shell"
+    },
+    "papers/neurips_2026_vericode.sty": {
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "bytes": 13757,
+      "modified": false,
+      "role": "research_style"
+    },
+    "papers/checklist.tex": {
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "bytes": 26167,
+      "modified": false,
+      "role": "official_questionnaire"
+    }
+  },
+  "per_paper_style_copy": {
+    "path": "papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty",
+    "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "matches_official": true
+  },
+  "cfp_constraints": {
+    "main_text_pages": "4-9 excluding references/appendices",
+    "pdf_max_bytes": 52428800,
+    "source": "https://vericodegen.github.io/cfp.html"
+  }
+}

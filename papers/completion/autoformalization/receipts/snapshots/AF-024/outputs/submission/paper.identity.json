@@ -1,0 +1,10 @@
+{
+  "schema": "autoformalization-anonymous-pdf-identity/v1",
+  "task_id": "AF-024",
+  "path": "papers/completion/autoformalization/submission/paper.pdf",
+  "bytes": 270925,
+  "sha256": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147",
+  "media_type": "application/pdf",
+  "public_upload": false,
+  "note": "Opaque PDF bytes are admitted only at the declared binary_paths file. This identity is the committed text snapshot of those bytes. Identical PDF bytes are retained at the gitignored generated suffix paper.pyc so verify-task can hash them without a second admitted binary path."
+}
