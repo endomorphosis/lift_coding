@@ -1,0 +1,222 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-010",
+  "status": "complete",
+  "completed_at": "2026-09-12T01:37:45.447055+00:00",
+  "source_versions": {
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "harness": {
+      "schema": "autoformalization-pipeline-arms/v1",
+      "preflight_schema": "autoformalization-pipeline-arm-preflight/v1",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+      "sha256": "37a87e6b0417c850bb85754bb6966357621358b2ce4edc8d3a3d421d7185c85e",
+      "standard_library_only": true
+    },
+    "frozen_inputs": {
+      "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+      "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+      "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+      "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4"
+    },
+    "inspected_not_imported": {
+      "canonical_roundtrip.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+        "sha256": "0755cce95acc5e8094a109254cf841c1bdbbcec340f16a68023cdd4d93f9b864",
+        "imported": false,
+        "note": "Frozen production composition disables learned stages, fallback, and model calls. Import probe failed: missing multiformats."
+      },
+      "canonical_compiler.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+        "sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87",
+        "imported": false,
+        "note": "Composition pins guidance=no_guidance and repair=no_repair."
+      },
+      "canonical_contracts.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+        "sha256": "9e6be753d3d714131fa01b1196725e89ba95904a9f04f5186646fe6d4f40b7b9",
+        "imported": false,
+        "note": "IMPLEMENTATION_REPRESENTATIVE_ARM_ID is typed_deontic__no_guidance__no_repair__not_applicable__deterministic."
+      },
+      "intent_formalization_compiler.py": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+        "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+        "imported": false,
+        "note": "AF-003 selected syntactic multi-view compiler; not executed as Table 6 evidence."
+      },
+      "bridge_cases.py": {
+        "path": "papers/completion/autoformalization/evaluation/bridge_cases.py",
+        "sha256": "643a5b66489a787aefd809ac58ee9dc4dc016e5325fafd850e7f0957f7608abe",
+        "imported": false,
+        "note": "AF-015 finite bridges are D-only evidence and are not Table 6 measurements."
+      }
+    },
+    "import_probes": {
+      "canonical_roundtrip": "import_failed_missing_multiformats",
+      "canonical_compiler": "import_failed_missing_multiformats",
+      "legal_ir_learned_guidance": "imported_with_symbolicai_warning; importability is not end-to-end"
+    },
+    "checker_digest": "0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052",
+    "empirical_execution": "none; A-E remain unrun; this task is matched adapter implementation and sealed-PATH preflight only"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/config/pipeline_arms.json": "b7d8b7a11078ce81d7f8f45af25698050c6e34a3124136bf87a80aae95bd3bea",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py": "37a87e6b0417c850bb85754bb6966357621358b2ce4edc8d3a3d421d7185c85e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/evidence/pipeline_arm_preflight.json": "590802377eb79256b6636080f3a449517cfd055bc99fb7079ee6f87ab8a2d555",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/check_json.meta.json": "4c0b75d5c6e7808942a1065f4b986abecce1c69cae545ce4db0f6ccaccce4187",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/check_json.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/check_json.stdout.log": "161fce8f44e3a19298fd9326c5afe0287e7ec087eb5cfba27cd430014350bae6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/execute_a.meta.json": "9d0823be5bfc2c94678bb02d88d73e9094857d78a934b44c68a55fd61c3f5b7d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/execute_a.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/execute_a.stdout.log": "af96279f615cc740063cf86a6a06345f640674fa13ad0fb52556704920aa4cf5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.meta.json": "9fec97818dcb61ec260a34bd4e5a00863298c3794b7fa4b4860c524f805e6f61",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.stdout.log": "e1793b1d5a175d4c49c3e64f686db6d484d98896b50f7433e297c23c842b5eab",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.meta.json": "07e34306e6ca8e94ea7d064a4dc5a491a5a9ff9973c08480984167f8dd36f779",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.stdout.log": "286622210a564a70e58bac0e5d09a86f14c643901e9140a15ac5837946a99e2f"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/pipeline_arms.py": "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+    "papers/completion/autoformalization/config/pipeline_arms.json": "papers/completion/autoformalization/receipts/snapshots/AF-010/config/pipeline_arms.json",
+    "papers/completion/autoformalization/evidence/pipeline_arm_preflight.json": "papers/completion/autoformalization/receipts/snapshots/AF-010/evidence/pipeline_arm_preflight.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Each arm exposes a executable entry point/configuration and its exact feature/oracle access.",
+      "status": "met",
+      "explanation": "Arms A–E each have a callable adapter (run_arm_a through run_arm_e), a frozen configuration object, and an explicit features_allowed/oracles_allowed/features_blocked set. A is direct-model inference plus the shared target checker; B is the frozen typed-deontic compiler with no_guidance/no_repair; C is typed source-grounded multiview without transfer; D adds checked bridges and premise assembly; E adds pinned learned advice. All five share checker digest 0d22c6e92be47a464452266e1a09d3b1d072f98ce3e5fec19bdbe9f47273f052, the AF-002 resource envelope, and identical undisclosed AF-004 final-test identities. Seventeen isolation tests passed, including one entry-point/oracle check per arm.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/config/pipeline_arms.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/evidence/pipeline_arm_preflight.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.stdout.log"
+      ]
+    },
+    {
+      "criterion": "C cannot accidentally consume D bridge evidence; E is separately identifiable and does not silently alter its checker.",
+      "status": "met",
+      "explanation": "C rejects nested and top-level D bridge fields (bridge_evidence, translation_receipts, checked_bridges, premise_assembly, and autoformalization-translation-receipt/v1). A and B are likewise blocked from that channel. D may name bridge evidence but still returns unavailable/no_run rather than an accepted transfer. E has a distinct arm id, entry point, and advice channel from D, binds the same checker digest, and rejects checker_override, drifted checker_digest, and advice_as_checker. B refuses learned guidance because the frozen canonical profile disables it.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/config/pipeline_arms.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/evidence/pipeline_arm_preflight.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Unavailable implementations are reported and prevent related performance claims rather than returning synthetic success.",
+      "status": "met",
+      "explanation": "Sealed-PATH probes report lean/lake/z3/cvc5/vampire/eprover/coqc/isabelle absent. Direct-model is unselected; the cached Leanstral weight file exceeds the 16 GiB envelope and no served runtime is on PATH. Learned advice lacks AF-011 checkpoints and AF-013 promotion/consumer receipts. Every arm is implemented as an adapter but end_to_end_status=unavailable, claim_admissible=false, result_kind=no_run, synthetic_success=false. Execute A on the sealed PATH returns unavailable rather than a fabricated formalization. performance_claims_admitted is empty and table6_cells_measured is 0. Import of legal_ir_learned_guidance is recorded and is not treated as E success; compiler imports failed on missing multiformats.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/evidence/pipeline_arm_preflight.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/config/pipeline_arms.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/execute_a.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af010",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+        "materialize"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/materialize.stderr.log",
+      "started_at": "2026-09-12T01:37:44.155616+00:00",
+      "finished_at": "2026-09-12T01:37:45.333847+00:00",
+      "execution_kind": "sealed-PATH A-E adapter materialize, capability preflight, and isolation checks"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af010",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+        "self-test"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/self_test.stderr.log",
+      "started_at": "2026-09-12T01:37:45.334057+00:00",
+      "finished_at": "2026-09-12T01:37:45.384727+00:00",
+      "execution_kind": "sealed-PATH isolation and unavailable-execution self-test"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af010",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/pipeline_arms.py",
+        "execute",
+        "--arm",
+        "A",
+        "--source-id",
+        "preflight-direct-model"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-010/evaluation/pipeline_arms.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/execute_a.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/execute_a.stderr.log",
+      "started_at": "2026-09-12T01:37:45.385002+00:00",
+      "finished_at": "2026-09-12T01:37:45.430620+00:00",
+      "execution_kind": "sealed-PATH arm A execute; must return unavailable, not synthetic success"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-af010",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-c",
+        "import json, pathlib, sys\npaths = sys.argv[1:]\nfor path in paths:\n    json.loads(pathlib.Path(path).read_text(encoding='utf-8'))\n    print(path, 'ok')\n",
+        "papers/completion/autoformalization/config/pipeline_arms.json",
+        "papers/completion/autoformalization/evidence/pipeline_arm_preflight.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/check_json.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-010/logs/check_json.stderr.log",
+      "started_at": "2026-09-12T01:37:45.430879+00:00",
+      "finished_at": "2026-09-12T01:37:45.447055+00:00",
+      "execution_kind": "JSON parse pin of AF-010 outputs"
+    }
+  ],
+  "limitations": [
+    "Native Lean/Z3/CVC5/Isabelle binaries are absent from the sealed validation PATH; no kernel proof is claimed.",
+    "No compatible direct-model service is qualified; cached Leanstral weights exceed the 16 GiB envelope.",
+    "Learned guidance has no AF-011 checkpoint or AF-013 promotion/consumer receipt.",
+    "Canonical compiler imports failed because multiformats is absent; inspection is not execution.",
+    "legal_ir_learned_guidance imported with a SymbolicAI warning; importability is not E success.",
+    "Independent source labels remain pending in the frozen teacher manifest.",
+    "A-E paper tasks remain unrun; this preflight is not Table 6.",
+    "This receipt is provenance validation, not independent scientific replication."
+  ],
+  "completion_scope": "Matched A-E adapter entry points, feature/oracle access, C/D bridge isolation, E checker pin, and sealed-PATH capability preflight. No source-to-proof benchmark was executed."
+}
