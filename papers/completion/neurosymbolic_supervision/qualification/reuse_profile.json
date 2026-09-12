@@ -1,0 +1,144 @@
+{
+  "authority": {
+    "collection_seed_action": "RUN",
+    "eligibility_never_skips": true,
+    "lookup_is_not_a_pass": true,
+    "plain_skip_not_evidence": true,
+    "simulated_certificates_cannot_skip": true,
+    "skip_reason_codes": [
+      "proof_cache_hit"
+    ]
+  },
+  "capability": {
+    "binaries": {
+      "cvc5": null,
+      "groth16": null,
+      "z3": null
+    },
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "pytest": "8.1.1",
+    "python_version": "3.12.3",
+    "selection_error": null,
+    "selection_status": "imported"
+  },
+  "claim_boundary": "This profile qualifies staged fixture/call/teardown identity and fail-closed lookup on the located adapters. It is not a cold-oracle false-reuse rate (NS-011), not a matched A–D outcome, and not a native Groth16 proof of arbitrary pytest execution.",
+  "fallbacks": {
+    "incomplete_trace": "RUN",
+    "missing_candidates": "RUN",
+    "opaque_object_serialization": "reject / RUN",
+    "uncontrolled_fixture_value": "RUN",
+    "unknown_eligibility": "non_reusable RUN"
+  },
+  "generated_at": "2026-09-12T02:51:03+00:00",
+  "invalidation": {
+    "conftest": true,
+    "external_snapshot": true,
+    "fixture_definition": true,
+    "fixture_value": true,
+    "plugin": true,
+    "policy": true,
+    "runtime_trace": true,
+    "unchanged_body_insufficient": true
+  },
+  "lifecycle": {
+    "call_reuse_runs_teardown": true,
+    "full_item_pre_setup_distinct_from_call_only": true,
+    "setup_failure_runs_teardown": true,
+    "teardown_failure_blocks_admitted_receipt": true,
+    "teardown_failure_cannot_skip": true,
+    "xdist_worker_cannot_skip_when_unhealthy": true
+  },
+  "located_mechanisms": {
+    "PostPassRuntimeTraceCapture": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py",
+    "ProofCachedTestValidation@1": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py",
+    "ProofReuseCollectionSeed@1": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py",
+    "ProofReuseXdistCoordination@1": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py",
+    "TestCertificateProvider@1": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py",
+    "TestCertificateStore@1": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_certificate_store.py",
+    "TestProofCache@1": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+    "TestSelection@1": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py"
+  },
+  "policy_id": "ns-010-reuse-qualification-v1",
+  "positive_reuse_witness": {
+    "action": "SKIP",
+    "case_id": "unchanged_eligible_reuses_admitted_result",
+    "certificate_cid": "baguqeerady2wz46okupheat427n5gl2tp354kstta7mvot2rxcycv47l573a",
+    "execution_key_cid": "baguqeeray5ulcvexqy2qp35q3mrxpwjekcuep22kzk4vayrerpnv5mqwj25q",
+    "reason_code": "proof_cache_hit",
+    "receipt_cid": "baguqeerazrfpi6jrmof7phetw2w3pxpkjhnuxa4jwibxyfiwnhenllha3ljq"
+  },
+  "qualification_not_live_ad": true,
+  "reuse_seam_status": "implemented_and_qualified",
+  "schema": "neurosymbolic-supervision/reuse-profile@1",
+  "source_hashes": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_identity_components.py": "f264540c92c4c7ae90f26a2b52f375f3e3ddb04cee8d5bc17e7be7f92aa091be",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py": "f21b8e64a9ba1b0f5ebc2d3df126aa63f299dfe2c6c8b1e504cbf6233ae01b4e",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py": "8faacc1c4cbc4c7c6fb3e8077e428acbca031db0d449cf881a941036892b7f68",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_certificate_store.py": "6ae02457603cfe2d5656e768e742f4ed320153d78ff5334d9ef48d2b6095cfb0",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py": "9702398656f4bff098049167f30f1e54ef1c892c2d1c021b2cde5a8c79ab0e69",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py": "b36f253be3f55350d9b57c09b9e81484579b527d1007651c66d9f088e1db65f9",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py": "f57da57a07b6e8c3c9bdc077d6506d3059846933c77a1bfff0fefbf490bc721d",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py": "05815776dd6cdf6d670c99a9cd702eecc988f265232f6fae1f28e8b547f136a4",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py": "ef59615ecb9a0a09a06b0da4f1aed962eaa7becae0e93e5829971c2fa6bb9e6a"
+  },
+  "table8_stages": [
+    {
+      "authorizes_skip": false,
+      "decision_allowed": "candidate lookup only; not a passing outcome",
+      "interface": "ProofReuseCollectionSeed@1",
+      "name": "collection_seed",
+      "stage": 0,
+      "witness_case": "collection_seed_not_passing_outcome"
+    },
+    {
+      "binds": [
+        "fixture names/definitions/scopes",
+        "autouse/usefixtures",
+        "transitive dependencies",
+        "conftest",
+        "hooks/plugins",
+        "parametrization"
+      ],
+      "decision_allowed": "whole-item pre-setup reuse only under a closed policy",
+      "interface": "TestIdentityComponents@1 / FixtureHookIdentity",
+      "name": "fixture_definition_closure",
+      "stage": 1,
+      "witness_case": "autouse_transitive_fixture_bound"
+    },
+    {
+      "decision_allowed": "post-setup eligibility; opaque/uncontrolled values force execution",
+      "interface": "reviewed value CID or value_adapter_cid",
+      "name": "fixture_instance_commitment",
+      "stage": 2,
+      "witness_case": "unknown_uncontrolled_fixture_fallback"
+    },
+    {
+      "binds": [
+        "locator",
+        "repository forest",
+        "fixture/plugin/conftest CIDs",
+        "static/runtime traces",
+        "interpreter/platform",
+        "dependency lock",
+        "policy",
+        "external snapshots"
+      ],
+      "decision_allowed": "re-admit a prior receipt or execute; no optimistic pass",
+      "interface": "TestExecutionKey@1",
+      "name": "execution_key",
+      "stage": 3,
+      "witness_case": "unchanged_eligible_reuses_admitted_result"
+    },
+    {
+      "decision_allowed": "fresh observation; teardown failure prevents whole-item pass",
+      "interface": "TestPassReceipt@1",
+      "name": "phase_receipt",
+      "stage": 4,
+      "witness_case": "teardown_fail_receipt_cannot_skip"
+    }
+  ],
+  "task_id": "NS-010"
+}
