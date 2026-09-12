@@ -1,0 +1,139 @@
+{
+  "actual_calls": [],
+  "available_executables": [],
+  "available_modules": [
+    "transformers",
+    "onnxruntime",
+    "sentencepiece"
+  ],
+  "call_count": 0,
+  "credential_names_present": [],
+  "decoding": null,
+  "deployment_digest": null,
+  "executables": [
+    {
+      "available": false,
+      "name": "ollama",
+      "path": null
+    },
+    {
+      "available": false,
+      "name": "llama-cli",
+      "path": null
+    },
+    {
+      "available": false,
+      "name": "llama-server",
+      "path": null
+    },
+    {
+      "available": false,
+      "name": "llama.cpp",
+      "path": null
+    },
+    {
+      "available": false,
+      "name": "huggingface-cli",
+      "path": null
+    },
+    {
+      "available": false,
+      "name": "vllm",
+      "path": null
+    },
+    {
+      "available": false,
+      "name": "text-generation-server",
+      "path": null
+    }
+  ],
+  "fixture_model_stubs_used": false,
+  "generative_runtimes": [],
+  "local_weights_found": false,
+  "model_id": null,
+  "modules": [
+    {
+      "available": false,
+      "name": "torch",
+      "origin": null
+    },
+    {
+      "available": true,
+      "name": "transformers",
+      "origin": "/opt/ipfs-validation-site-packages/transformers/__init__.py"
+    },
+    {
+      "available": false,
+      "name": "llama_cpp",
+      "origin": null
+    },
+    {
+      "available": false,
+      "name": "vllm",
+      "origin": null
+    },
+    {
+      "available": true,
+      "name": "onnxruntime",
+      "origin": "/opt/ipfs-validation-site-packages/onnxruntime/__init__.py"
+    },
+    {
+      "available": false,
+      "name": "ctransformers",
+      "origin": null
+    },
+    {
+      "available": false,
+      "name": "gguf",
+      "origin": null
+    },
+    {
+      "available": true,
+      "name": "sentencepiece",
+      "origin": "/opt/ipfs-validation-site-packages/sentencepiece/__init__.py"
+    }
+  ],
+  "note": "Closed-loop dispatch requires a digest-bound local model or already authorized no-additional-cost endpoint locked before outcomes. None qualified.",
+  "paid_provider_budget": 0,
+  "qualified": false,
+  "reasons": [
+    "no generative inference runtime (torch, llama_cpp, or vllm) is importable under the sealed PATH",
+    "transformers is importable from site-packages but no model id, tokenizer revision, or weight digest is pinned",
+    "onnxruntime is importable but no ONNX generative-model artifact is present or pinned",
+    "no local weight files (.bin/.safetensors/.gguf/.pt) were found under sealed HOME or /models",
+    "no model serving executable (ollama, llama-cli, vllm, ...) is on the sealed PATH",
+    "no provider credential names are present in the process environment",
+    "LA-003 did not pin a scientific model revision, tokenizer, decoding policy, or deployment digest",
+    "an existing supervisor provider session is not scientific model qualification"
+  ],
+  "schema": "law-to-action-model-provider-ledger/v1",
+  "scientific_model_pinned": false,
+  "supervisor_session_is_qualification": false,
+  "tokenizer_id": null,
+  "weight_roots": [
+    {
+      "has_weight_files": false,
+      "path": "/tmp/ipfs-accelerate-validation-home-la016-DbrMfa/.cache/huggingface/hub",
+      "present": false,
+      "sample_file_count": 0
+    },
+    {
+      "has_weight_files": false,
+      "path": "/models",
+      "present": false,
+      "sample_file_count": 0
+    },
+    {
+      "has_weight_files": false,
+      "path": "/opt/models",
+      "present": false,
+      "sample_file_count": 0
+    },
+    {
+      "has_weight_files": false,
+      "path": "/usr/local/share/models",
+      "present": false,
+      "sample_file_count": 0
+    }
+  ]
+}

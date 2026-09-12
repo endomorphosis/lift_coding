@@ -1,0 +1,25 @@
+{
+  "run": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-016/run_closed_loop.py",
+      "run",
+      "--out",
+      "papers/completion/law_to_action/results/agents",
+      "--snapshot",
+      "papers/completion/law_to_action/receipts/snapshots/LA-016"
+    ],
+    "completed_at": "2026-09-12T17:58:15.592733Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T17:58:15.534958Z"
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-016/validate_closed_loop.py"
+    ],
+    "completed_at": "2026-09-12T17:58:15.632239Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T17:58:15.598019Z"
+  }
+}
