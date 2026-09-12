@@ -495,10 +495,26 @@ def _verify_task_contract(paper: str, task, *, check_current: bool):
     if check_current:
         _check_current_outputs(outputs, artifacts)
         _check_directory_coverage(task["deliverables"], outputs)
-    return {"task": task_id, "artifact_integrity_valid": True,
+    scientific_gate = None
+    if paper == "neurosymbolic_supervision" and task_id == "NS-028":
+        # Both this module and the guard/authority are explicit native protected
+        # baseline paths. Never execute a worker-authored scientific validator.
+        import importlib.util
+        sys.dont_write_bytecode = True
+        guard_path = ROOT / "scripts/ns028_completion_guard.py"
+        if guard_path.resolve() != guard_path or not guard_path.is_file():
+            raise ValueError("protected NS028 completion guard is missing or redirected")
+        spec = importlib.util.spec_from_file_location("protected_ns028_completion_guard", guard_path)
+        guard = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(guard)
+        scientific_gate = guard.verify(ROOT, receipt)
+    result = {"task": task_id, "artifact_integrity_valid": True,
             "current_outputs_checked": check_current, "completed_at": completed_at.isoformat(),
             "outputs": outputs, "artifacts": artifacts,
             "limitation": "Recorded evidence is checked; this is not independent scientific replication."}
+    if scientific_gate is not None:
+        result["scientific_completion_gate"] = scientific_gate
+    return result
 
 
 def verify_task(paper: str, task_id: str):

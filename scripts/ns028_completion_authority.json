@@ -1,0 +1,14 @@
+{
+  "schema": "ns028-root-completion-authority/v1",
+  "task_id": "NS-028",
+  "approved": false,
+  "reason": "No actual 24-cell terminal pilot and retained-arm witness package has been reviewed. Only root may populate this protected baseline authority from exact retained host offers, signatures, candidate reviews and actual native harness evidence.",
+  "client_sha256": "81e8758031abe1102992987e5bee8830039c68c9599fc0d2665012515fa544a9",
+  "batch_sha256": null,
+  "retained_arms": ["A", "B"],
+  "cells": {},
+  "freeze_file_sha256": null,
+  "final_manifest_file_sha256": null,
+  "source_pins": {},
+  "native_harness": null
+}

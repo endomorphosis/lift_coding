@@ -1,0 +1,15 @@
+{
+  "schema": "ns028-real-pending-completion-regression-fixture/v1",
+  "scope": "Exact false completion receipt and the exact hashed pending-row snapshot from the stopped actual claim10 attempt. No other artifact is needed to reach the mandatory pending-row rejection.",
+  "scientific_execution": false,
+  "files": {
+    "papers/completion/neurosymbolic_supervision/receipts/NS-028.json": {
+      "sha256": "084c6b7da9d3fe16e7c778e6efef8d3c67242bafc9b535c501c5e96078cd421a",
+      "bytes": 129620
+    },
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/primary/papers/completion/neurosymbolic_supervision/pilot/results.jsonl": {
+      "sha256": "60570d1395c6df21a176ae958f9b5704ed2d5e8f1741a5796194526e18b2096a",
+      "bytes": 120756
+    }
+  }
+}

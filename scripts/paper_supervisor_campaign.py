@@ -189,6 +189,7 @@ def native_argv(repo, paper, lane, ready):
     for path in SUBMODULES:
         argv.extend(["--worktree-submodule-path", path])
     protected = ["scripts/paper_supervisors.py", "scripts/paper_supervisor_campaign.py",
+                 "scripts/ns028_completion_guard.py", "scripts/ns028_completion_authority.json",
                  "scripts/materialize_paper_database.py", "scripts/paper_state_owner.py",
                  "scripts/paper_ducklake_projection.py", "scripts/paper_worker_observation.py",
                  "scripts/migrate_paper_validation_argv.py", "scripts/repair_paper_launch_validation.py",
