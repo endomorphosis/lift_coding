@@ -3726,6 +3726,155 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int, repai
                 server.stop()
 
 
+def recover_legacy_verification_timeout(
+    *, task_alias: str, expected_revision: int, task_projection: Path,
+) -> int:
+    """Admit one fresh attempt after a proved legacy verification timeout.
+
+    The caller retains native maintenance custody across this command. The
+    scoped Quack command supplies the CAS and idempotency boundary; historical
+    workspace bytes are preserved and cannot serve as completion evidence.
+    """
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.legacy_verification_retry import (
+        hold_legacy_retry_queue_absence,
+        inspect_legacy_verification_retry,
+    )
+    from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
+
+    board, population, paths = _load()
+    prior_pid = 0
+    if paths["operator_pid"].is_file():
+        try:
+            prior_pid = int(paths["operator_pid"].read_text().strip())
+        except (OSError, ValueError) as exc:
+            raise HandoffError("cannot identify the prior operator for legacy retry") from exc
+    if _pid_alive(prior_pid):
+        raise HandoffError("stop the live DOEP operator before legacy verification retry")
+    matches = [task for task in population["tasks"] if task.get("task_alias") == task_alias]
+    if len(matches) != 1:
+        raise HandoffError("legacy retry task is not unique in the sealed population")
+    task_cid = str(matches[0]["task_cid"])
+    projection = task_projection.absolute()
+    if not projection.resolve(strict=True).is_relative_to(paths["state"].resolve(strict=True)):
+        raise HandoffError("legacy retry projection is outside this board's state")
+    source_observation = _history_source_observation()
+    source_head = source_observation["."]["head"]
+    key = _sha256(_canonical_json_bytes({"task_alias": task_alias, "task_cid": task_cid,
+                                        "expected_revision": expected_revision})).replace(":", "-")
+    authorization_path = paths["evidence"] / "operator-recovery" / f"legacy-verification-{key}.json"
+    server = _build_server(board, paths)
+    client = grant = None
+    try:
+        server.start()
+        if not server.ready():
+            raise HandoffError("Quack owner did not become ready for legacy retry")
+        client, grant = _make_blocked_retry_recovery_client(
+            server, board, task_cid=task_cid, task_alias=task_alias,
+        )
+        rows = client.execute("select_task_by_cid", {"task_cid": task_cid})
+        if len(rows) != 1:
+            raise HandoffError("legacy retry task authority is absent or ambiguous")
+        current = dict(rows[0])
+        saved = _json_object(authorization_path) if authorization_path.exists() else None
+        if saved is not None:
+            saved_body = {key: value for key, value in saved.items() if key != "authorization_id"}
+            if (saved.get("schema") != "doep/legacy-verification-fresh-retry-authorization@1"
+                    or saved.get("authorization_id") != _sha256(_canonical_json_bytes(saved_body))
+                    or saved.get("task_cid") != task_cid or saved.get("task_alias") != task_alias
+                    or saved.get("expected_revision") != expected_revision
+                    or saved.get("source_head") != source_head
+                    or saved.get("source_observation") != source_observation
+                    or saved.get("projection_path") != str(projection)):
+                raise HandoffError("retained legacy retry authorization differs")
+        if current.get("status") == "blocked" and current.get("revision") == expected_revision:
+            evidence = inspect_legacy_verification_retry(
+                current, task_projection=projection, allowed_attempt_root=paths["state"],
+                retained_worktree_root=paths["root"] / "worktrees",
+                expected_task_revision=expected_revision,
+            )
+            with hold_legacy_retry_queue_absence(
+                queue_dir=paths["root"] / "merge-queue",
+                target_repository_id=checkout_repository_id(ROOT),
+                target_branch=board.merge_target_branch,
+                evidence=evidence,
+            ) as queue_evidence:
+                body = json.loads(current["body_json"])
+                terminal = body["completion_receipt"]
+                cooldowns = client.execute("executor_retry_cooldown_by_task", {"task_cid": task_cid})
+                if len(cooldowns) > 1:
+                    raise HandoffError("legacy retry cooldown authority is ambiguous")
+                prior_cooldown = dict(cooldowns[0]) if cooldowns else None
+                if saved is None:
+                    saved = {
+                        "schema": "doep/legacy-verification-fresh-retry-authorization@1",
+                        "task_alias": task_alias, "task_cid": task_cid,
+                        "expected_revision": expected_revision, "source_head": source_head,
+                        "source_observation": source_observation,
+                        "projection_path": str(projection), "evidence": evidence,
+                        "queue_evidence": queue_evidence, "task_body": body,
+                        "terminal_receipt": terminal, "expected_released_cooldown": prior_cooldown,
+                        "now_ms": time.time_ns() // 1_000_000,
+                        "generation": client.load_generation().to_record(),
+                        "require_fresh_portal_revalidation": True,
+                        "retained_candidate_admitted": False,
+                    }
+                    saved["authorization_id"] = _sha256(_canonical_json_bytes(saved))
+                    _immutable_json(authorization_path, saved)
+                elif (saved.get("evidence") != evidence or saved.get("task_body") != body
+                      or saved.get("terminal_receipt") != terminal
+                      or saved.get("expected_released_cooldown") != prior_cooldown):
+                    raise HandoffError("legacy retry predecessor changed after authorization")
+                # Recheck the retained history immediately before the guarded CAS.
+                if inspect_legacy_verification_retry(
+                    current, task_projection=projection, allowed_attempt_root=paths["state"],
+                    retained_worktree_root=paths["root"] / "worktrees",
+                    expected_task_revision=expected_revision,
+                ) != evidence:
+                    raise HandoffError("legacy retry history changed before CAS")
+                if _history_source_observation() != source_observation:
+                    raise HandoffError("legacy retry current source changed before CAS")
+                result = _submit_legacy_verification_retry(client, saved)
+        elif saved is not None and type(current.get("revision")) is int and current["revision"] > expected_revision:
+            # The exact original command can only return its recorded result
+            # or fail its old revision CAS. It cannot start another attempt.
+            if _history_source_observation() != source_observation:
+                raise HandoffError("legacy retry current source changed before replay")
+            result = _submit_legacy_verification_retry(client, saved)
+        else:
+            raise HandoffError("legacy retry task differs from the expected blocked revision")
+        receipt = {"task_alias": task_alias, "authorization_id": saved["authorization_id"],
+                   "require_fresh_portal_revalidation": True, "result": result.to_dict()}
+        _atomic_json(authorization_path.with_suffix(".result.json"), receipt)
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        if not result.accepted:
+            raise HandoffError(f"canonical legacy retry rejected: {result.outcome.value}")
+        return 0
+    finally:
+        try:
+            if client is not None:
+                client.close()
+        finally:
+            try:
+                if grant is not None:
+                    server.revoke_typed_client_grant(grant.grant_id)
+            finally:
+                server.stop()
+
+
+def _submit_legacy_verification_retry(client: Any, saved: Mapping[str, Any]) -> Any:
+    terminal = saved["terminal_receipt"]
+    return client.recover_blocked_task_retry(
+        task_cid=saved["task_cid"], expected_task_revision=saved["expected_revision"],
+        task_body=saved["task_body"], terminal_receipt=terminal,
+        max_task_attempts_before=terminal["attempt_number"],
+        max_task_attempts_after=terminal["attempt_number"] + 1,
+        operator_handoff_receipt_id=saved["authorization_id"],
+        sidecar_evidence_id=saved["evidence"]["evidence_id"], now_ms=saved["now_ms"],
+        require_fresh_portal_revalidation=True,
+        expected_released_cooldown=saved["expected_released_cooldown"],
+    )
+
+
 def _retained_pool_source_admission() -> dict[str, Any]:
     """Negative release diagnostics still require ordinary current-root admission."""
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
@@ -3746,6 +3895,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     commands.add_parser("observe-task-histories")
     commands.add_parser("recover-blocked-lock-timeout")
     commands.add_parser("recover-doep-031-protected-control-plane-update")
+    legacy_parser = commands.add_parser("recover-legacy-verification-timeout")
+    legacy_parser.add_argument("--task", required=True)
+    legacy_parser.add_argument("--expected-revision", type=int, required=True)
+    legacy_parser.add_argument("--task-projection", type=Path, required=True)
     recovery_parser = commands.add_parser("recover-claim-verification")
     recovery_parser.add_argument("--task", required=True)
     recovery_parser.add_argument("--expected-revision", type=int, required=True)
@@ -3778,6 +3931,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "authoritative-status":
             print(json.dumps(authoritative_status(history_tasks=args.history_task), sort_keys=True))
             return 0
+        if args.command == "recover-legacy-verification-timeout":
+            return recover_legacy_verification_timeout(
+                task_alias=args.task, expected_revision=args.expected_revision,
+                task_projection=args.task_projection,
+            )
         if args.command == "recover-repaired-dependency-preflight":
             return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision, repaired_dependency=True)
         if args.command == "recover-claim-verification":
