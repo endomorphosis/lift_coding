@@ -1,0 +1,437 @@
+{
+  "activation": {
+    "exception_scope_rule": "af014-executable-exception-scoping/v1",
+    "executable_change": true,
+    "parameter_action": false,
+    "t4_learned_guidance": "unactivated/unavailable"
+  },
+  "all_structural_contracts_passed": true,
+  "baseline": {
+    "e_locked": true,
+    "mp09_defect": {
+      "defect": "Exception token 'exempt' leaked into the governing deontic predicate and the unless cue was compiled as a generic condition.",
+      "deontic_exceptions": [
+        "unless exempt"
+      ],
+      "deontic_predicate": "audit_exempt",
+      "family_id": "MP09-exception-scope",
+      "source": "The operator must audit unless exempt.",
+      "split": "constructed_control",
+      "unless_role": "condition"
+    },
+    "pre_patch_sha256": {
+      "codec.py": "0f81dad45244ab88d3df5ac8c5d585d80d4ee14c59a5441c1bdd19f5a2cccd86",
+      "spacy_modal_codec.py": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f"
+    },
+    "source": "AF-013 consumer_activation.json",
+    "starting_arm": "T4",
+    "status": "unactivated/unavailable"
+  },
+  "canary": {
+    "all_compiled": true,
+    "canary_id": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+    "distinct_from_final_test": true,
+    "exception_formula_count_sum": 134,
+    "formula_count_sum": 753,
+    "n_records": 38,
+    "sha256": "98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+    "used_for_patch_selection": false
+  },
+  "claim_limits": [
+    "Structural compiler contracts on constructed development witnesses are not original-source semantic gold.",
+    "No native checker proof was executed.",
+    "T5 unseen fidelity and native checked coverage remain unrun.",
+    "No accepted improvement is a valid measured outcome.",
+    "Unexecuted synthesis remains unrun.",
+    "Human agreement and independent source-semantic fidelity remain unmeasured."
+  ],
+  "development": [
+    {
+      "document_exception_scope_rule": "af014-executable-exception-scoping/v1",
+      "document_exception_scope_source": "executable_compiler_rule",
+      "failures": [],
+      "family_id": "MP09-exception-scope",
+      "formulas": [
+        {
+          "arguments": [
+            "actor:operator",
+            "scope:audit"
+          ],
+          "conditions": [],
+          "cue": "must",
+          "exception_scope_role": "clause",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": true,
+          "exceptions": [
+            "unless exempt"
+          ],
+          "family": "deontic",
+          "predicate": "audit",
+          "role": "clause",
+          "symbol": "O"
+        },
+        {
+          "arguments": [
+            "actor:operator_audit",
+            "scope:exempt"
+          ],
+          "conditions": [],
+          "cue": "unless",
+          "exception_scope_role": "exception",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": false,
+          "exceptions": [
+            "unless exempt"
+          ],
+          "family": "conditional_normative",
+          "predicate": "exempt",
+          "role": "exception",
+          "symbol": "O|"
+        }
+      ],
+      "passed": true,
+      "record_id": "T5-DEV-MP09-EXCEPTION-SCOPE",
+      "source": "The operator must audit unless exempt."
+    },
+    {
+      "document_exception_scope_rule": "af014-executable-exception-scoping/v1",
+      "document_exception_scope_source": "executable_compiler_rule",
+      "failures": [],
+      "family_id": "compiler-contract-if-unless",
+      "formulas": [
+        {
+          "arguments": [
+            "scope:application_complete_agency_issue"
+          ],
+          "conditions": [
+            "if the application is complete"
+          ],
+          "cue": "if",
+          "exception_scope_role": "condition",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": true,
+          "exceptions": [
+            "unless waived"
+          ],
+          "family": "conditional_normative",
+          "predicate": "application_complete_agency_issue_written_notice",
+          "role": "condition",
+          "symbol": "O|"
+        },
+        {
+          "arguments": [
+            "actor:application_complete_agency",
+            "scope:issue_written_notice"
+          ],
+          "conditions": [
+            "if the application is complete"
+          ],
+          "cue": "must",
+          "exception_scope_role": "clause",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": true,
+          "exceptions": [
+            "unless waived"
+          ],
+          "family": "deontic",
+          "predicate": "issue_written_notice",
+          "role": "clause",
+          "symbol": "O"
+        },
+        {
+          "arguments": [
+            "actor:agency_issue_written_notice",
+            "scope:waived"
+          ],
+          "conditions": [
+            "if the application is complete"
+          ],
+          "cue": "unless",
+          "exception_scope_role": "exception",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": false,
+          "exceptions": [
+            "unless waived"
+          ],
+          "family": "conditional_normative",
+          "predicate": "waived",
+          "role": "exception",
+          "symbol": "O|"
+        }
+      ],
+      "passed": true,
+      "record_id": "T5-DEV-CONDITION-AND-EXCEPTION",
+      "source": "If the application is complete, the agency must issue written notice unless waived."
+    },
+    {
+      "document_exception_scope_rule": "af014-executable-exception-scoping/v1",
+      "document_exception_scope_source": "executable_compiler_rule",
+      "failures": [],
+      "family_id": "compiler-contract-except-as-otherwise-provided",
+      "formulas": [
+        {
+          "arguments": [
+            "actor:secretary",
+            "scope:publish_notice"
+          ],
+          "conditions": [
+            "as otherwise provided in this section"
+          ],
+          "cue": "shall",
+          "exception_scope_role": "clause",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": true,
+          "exceptions": [
+            "except as otherwise provided in this section"
+          ],
+          "family": "deontic",
+          "predicate": "publish_notice",
+          "role": "clause",
+          "symbol": "O"
+        },
+        {
+          "arguments": [
+            "actor:secretary_shall_publish_notice",
+            "scope:provided_section"
+          ],
+          "conditions": [
+            "as otherwise provided in this section"
+          ],
+          "cue": "except",
+          "exception_scope_role": "exception",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": false,
+          "exceptions": [
+            "except as otherwise provided in this section"
+          ],
+          "family": "conditional_normative",
+          "predicate": "provided_section",
+          "role": "exception",
+          "symbol": "O|"
+        },
+        {
+          "arguments": [
+            "actor:secretary_shall_publish_notice",
+            "scope:section"
+          ],
+          "conditions": [
+            "as otherwise provided in this section"
+          ],
+          "cue": "except as otherwise provided",
+          "exception_scope_role": "exception",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": false,
+          "exceptions": [
+            "except as otherwise provided in this section"
+          ],
+          "family": "conditional_normative",
+          "predicate": "section",
+          "role": "exception",
+          "symbol": "O|"
+        },
+        {
+          "arguments": [
+            "actor:secretary_shall_publish_notice"
+          ],
+          "conditions": [
+            "as otherwise provided in this section"
+          ],
+          "cue": "as otherwise provided in",
+          "exception_scope_role": "condition",
+          "exception_scope_rule": "af014-executable-exception-scoping/v1",
+          "exception_scope_source": "executable_compiler_rule",
+          "exception_tokens_excluded_from_predicate": true,
+          "exceptions": [
+            "except as otherwise provided in this section"
+          ],
+          "family": "conditional_normative",
+          "predicate": "secretary_shall_publish_notice",
+          "role": "condition",
+          "symbol": "O|"
+        }
+      ],
+      "passed": true,
+      "record_id": "T5-DEV-EXCEPT-AS-OTHERWISE-PROVIDED",
+      "source": "The Secretary shall publish the notice except as otherwise provided in this section."
+    },
+    {
+      "document_exception_scope_rule": "af014-executable-exception-scoping/v1",
+      "document_exception_scope_source": "executable_compiler_rule",
+      "failures": [],
+      "family_id": "compiler-contract-no-exception",
+      "formulas": [
+        {
+          "arguments": [
+            "actor:agency",
+            "scope:records_promptly_available_person"
+          ],
+          "conditions": [],
+          "cue": "must",
+          "exception_scope_role": null,
+          "exception_scope_rule": null,
+          "exception_scope_source": null,
+          "exception_tokens_excluded_from_predicate": null,
+          "exceptions": [],
+          "family": "deontic",
+          "predicate": "records_promptly_available_person",
+          "role": "clause",
+          "symbol": "O"
+        }
+      ],
+      "passed": true,
+      "record_id": "T5-DEV-NO-EXCEPTION-REGRESSION",
+      "source": "The agency must make records promptly available to any person."
+    }
+  ],
+  "environment": {
+    "home": "/tmp/ipfs-accelerate-validation-home-af014-H5H5Ep",
+    "home_is_validation_private": true,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-014-f005396c7f8a-attempt-1-1789242765/external/ipfs_datasets/bin:/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-014-f005396c7f8a-attempt-1-1789242765/external/ipfs_datasets/bin/.deps/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_executable": "/usr/bin/python3.12",
+    "python_version": "3.12.3"
+  },
+  "final_test": {
+    "natural_source_units": 1913,
+    "opened": false,
+    "status": "unrun",
+    "used_for_patch_selection": false
+  },
+  "finished_at": "2026-09-12T20:10:24.914872+00:00",
+  "missing_native_checkers": [
+    "lean",
+    "lake",
+    "z3",
+    "cvc5",
+    "vampire",
+    "eprover",
+    "coqc",
+    "isabelle"
+  ],
+  "native_checkers": [
+    {
+      "name": "lean",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "lake",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "z3",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "cvc5",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "vampire",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "eprover",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "coqc",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    },
+    {
+      "name": "isabelle",
+      "resolved_path": null,
+      "status": "unavailable",
+      "usable_in_sealed_validation": false
+    }
+  ],
+  "rejected_patches": [
+    {
+      "kind": "semantic_erasure",
+      "proposal_id": "reject-drop-exception-to-equalize-mp12",
+      "reason": "Deleting the independently specified exception from source meaning would make C12/MP12 source_meaning_equal and make a proof easy. Shared source errors are retained.",
+      "status": "rejected"
+    },
+    {
+      "kind": "parameter_action",
+      "proposal_id": "reject-t4-guidance-overlay-as-repair",
+      "reason": "_apply_compiler_guidance_typed_semantics is a learned-guidance/parameter overlay. T4 is unactivated/unavailable; a parameter action is not an executable compiler/decompiler patch.",
+      "status": "rejected"
+    },
+    {
+      "kind": "leakage",
+      "proposal_id": "reject-final-test-patch-selection",
+      "reason": "Final-test examples never choose the patch.",
+      "status": "rejected"
+    },
+    {
+      "kind": "unexecuted_synthesis",
+      "proposal_id": "reject-unbounded-registry-rewrite",
+      "reason": "Unbounded synthesis remains unrun; only the bounded exception-scoping rule was applied.",
+      "status": "rejected"
+    }
+  ],
+  "rollback_identity": {
+    "applied_learning_rollback_performed": false,
+    "post_patch_sha256": {
+      "codec.py": "bf80ae36f5092015bb56fe0e119f359135bda8a21b41cd74f779abd8de5e862b",
+      "spacy_modal_codec.py": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31"
+    },
+    "pre_patch_sha256": {
+      "codec.py": "0f81dad45244ab88d3df5ac8c5d585d80d4ee14c59a5441c1bdd19f5a2cccd86",
+      "spacy_modal_codec.py": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f"
+    }
+  },
+  "rule_id": "af014-executable-exception-scoping/v1",
+  "schema": "autoformalization-repair-validation/v1",
+  "shared_loss": {
+    "claim": "Equal recompiled IR after dropping the same exception is not source fidelity. The compiler patch does not delete this independently specified meaning disagreement.",
+    "family_id": "MP12-round-trip-shared-loss",
+    "first_ir": {
+      "obligation": "audit"
+    },
+    "meaning_counterexamples": [
+      {
+        "exempt": true,
+        "obligation_holds": false,
+        "round_trip_truth": false,
+        "source_truth": true
+      }
+    ],
+    "meaning_disagreement_count": 1,
+    "original_source": {
+      "exception": "exempt",
+      "obligation": "audit"
+    },
+    "realized": "must audit",
+    "recompiled_ir": {
+      "obligation": "audit"
+    },
+    "recompiled_ir_equal": true,
+    "source_meaning_equal": false
+  },
+  "started_at": "2026-09-12T20:10:23.091844+00:00",
+  "structural_evidence_scope": "papers/completion/autoformalization/config/structural_evidence_scope.json",
+  "suite_id": "AF-014-bounded-compiler-decompiler-repair",
+  "task_id": "AF-014"
+}

@@ -1,0 +1,126 @@
+{
+  "chain": [
+    {
+      "evidence": "compiler introspection on MP09 constructed development witness",
+      "final_test_used": false,
+      "observation": {
+        "defect": "Exception token 'exempt' leaked into the governing deontic predicate and the unless cue was compiled as a generic condition.",
+        "deontic_exceptions": [
+          "unless exempt"
+        ],
+        "deontic_predicate": "audit_exempt",
+        "family_id": "MP09-exception-scope",
+        "source": "The operator must audit unless exempt.",
+        "split": "constructed_control",
+        "unless_role": "condition"
+      },
+      "split": "constructed_control",
+      "stage": "observed_defect"
+    },
+    {
+      "description": "Scope unless/except prefixes as exception guards, exclude exception-clause tokens from governing predicates, and keep this rule independent of T4 guidance overlay.",
+      "kind": "executable_compiler_change",
+      "parameter_action": false,
+      "proposal_id": "af014-executable-exception-scoping/v1",
+      "stage": "task_proposal"
+    },
+    {
+      "diff": "papers/completion/autoformalization/evidence/compiler_patch.diff",
+      "paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py"
+      ],
+      "post_patch_sha256": {
+        "codec.py": "bf80ae36f5092015bb56fe0e119f359135bda8a21b41cd74f779abd8de5e862b",
+        "spacy_modal_codec.py": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31"
+      },
+      "pre_patch_sha256": {
+        "codec.py": "0f81dad45244ab88d3df5ac8c5d585d80d4ee14c59a5441c1bdd19f5a2cccd86",
+        "spacy_modal_codec.py": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f"
+      },
+      "stage": "actual_patch"
+    },
+    {
+      "development_structural": [
+        "T5-DEV-MP09-EXCEPTION-SCOPE",
+        "T5-DEV-CONDITION-AND-EXCEPTION",
+        "T5-DEV-EXCEPT-AS-OTHERWISE-PROVIDED",
+        "T5-DEV-NO-EXCEPTION-REGRESSION"
+      ],
+      "final_test": "unrun",
+      "fixed_canary": "af004-fixed-canary-98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+      "native_checkers": [
+        "lean",
+        "lake",
+        "z3",
+        "cvc5",
+        "vampire",
+        "eprover",
+        "coqc",
+        "isabelle"
+      ],
+      "shared_loss_retained": true,
+      "stage": "validation_evidence"
+    },
+    {
+      "always_on_in_compiler": true,
+      "arm_e": "locked",
+      "exception_scope_rule": "af014-executable-exception-scoping/v1",
+      "parameter_action": false,
+      "stage": "activation_configuration",
+      "t4_learned_guidance": "unactivated/unavailable"
+    },
+    {
+      "applied_learning_rollback_performed": false,
+      "note": "Rollback is restoration of the two pre-patch codec blobs. This is not rollback of a T4 learned effect; AF-013 default reset remains an actual compiler reset.",
+      "post_patch_blobs": {
+        "codec.py": "bf80ae36f5092015bb56fe0e119f359135bda8a21b41cd74f779abd8de5e862b",
+        "spacy_modal_codec.py": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31"
+      },
+      "restore_pre_patch_blobs": {
+        "codec.py": "0f81dad45244ab88d3df5ac8c5d585d80d4ee14c59a5441c1bdd19f5a2cccd86",
+        "spacy_modal_codec.py": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f"
+      },
+      "stage": "rollback_identity"
+    }
+  ],
+  "rejected_patches": [
+    {
+      "kind": "semantic_erasure",
+      "proposal_id": "reject-drop-exception-to-equalize-mp12",
+      "reason": "Deleting the independently specified exception from source meaning would make C12/MP12 source_meaning_equal and make a proof easy. Shared source errors are retained.",
+      "status": "rejected"
+    },
+    {
+      "kind": "parameter_action",
+      "proposal_id": "reject-t4-guidance-overlay-as-repair",
+      "reason": "_apply_compiler_guidance_typed_semantics is a learned-guidance/parameter overlay. T4 is unactivated/unavailable; a parameter action is not an executable compiler/decompiler patch.",
+      "status": "rejected"
+    },
+    {
+      "kind": "leakage",
+      "proposal_id": "reject-final-test-patch-selection",
+      "reason": "Final-test examples never choose the patch.",
+      "status": "rejected"
+    },
+    {
+      "kind": "unexecuted_synthesis",
+      "proposal_id": "reject-unbounded-registry-rewrite",
+      "reason": "Unbounded synthesis remains unrun; only the bounded exception-scoping rule was applied.",
+      "status": "rejected"
+    }
+  ],
+  "review_cost": {
+    "final_test_opens": 0,
+    "native_checker_calls": 0,
+    "provider_calls": 0,
+    "synthesis_calls": 0,
+    "unit": "sealed_path_python_process"
+  },
+  "rule_id": "af014-executable-exception-scoping/v1",
+  "schema": "autoformalization-repair-task-trace/v1",
+  "starting_arm": "T4",
+  "starting_arm_status": "unactivated/unavailable",
+  "suite_id": "AF-014-bounded-compiler-decompiler-repair",
+  "task_id": "AF-014"
+}

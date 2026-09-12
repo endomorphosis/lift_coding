@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-c",
+    "\nimport json, pathlib, sys\npaths = sys.argv[1:]\nfor path in paths:\n    text = pathlib.Path(path).read_text(encoding=\"utf-8\")\n    if path.endswith(\".jsonl\"):\n        rows = [json.loads(line) for line in text.splitlines() if line]\n        print(path, \"jsonl\", len(rows), \"ok\")\n    else:\n        json.loads(text)\n        print(path, \"json\", \"ok\")\n",
+    "papers/completion/autoformalization/runs/compiler_repair/results.jsonl",
+    "papers/completion/autoformalization/evidence/repair_task_trace.json",
+    "papers/completion/autoformalization/evidence/repair_validation.json"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-09-12T20:10:49.343794+00:00",
+  "name": "json_parse",
+  "started_at": "2026-09-12T20:10:49.312507+00:00"
+}
