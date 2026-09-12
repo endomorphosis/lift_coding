@@ -41,6 +41,31 @@ def native_ready(process, database, paper):
 
 
 class CampaignTests(unittest.TestCase):
+    def test_progress_explains_dependency_stall_despite_ready_status(self):
+        board = {"tasks": [
+            {"task_cid":"parent", "task_alias":"AF-009", "status":"blocked",
+             "body_json":json.dumps({"completion_receipt":{"reason":"native_update_unqualified"}})},
+            {"task_cid":"child", "task_alias":"AF-011", "status":"ready", "body_json":"{}"}],
+            "task_dependencies":[{"task_cid":"child", "dependency_task_cid":"parent"}]}
+        progress = CAM.task_progress(board)
+        self.assertEqual(progress["state"], "waiting_on_blockers")
+        self.assertEqual(progress["eligible_candidates"], [])
+        self.assertEqual(progress["waiting"][0]["unmet_dependencies"], ["AF-009"])
+        self.assertEqual(progress["blocked"][0]["reason"], "native_update_unqualified")
+        board["tasks"][0]["status"] = "completed"
+        self.assertEqual(CAM.task_progress(board)["eligible_candidates"], ["AF-011"])
+
+    def test_progress_does_not_admit_manual_or_unknown_dependency_tasks(self):
+        board = {"tasks":[{"task_cid":"review", "task_alias":"LA-027", "status":"ready",
+            "body_json":json.dumps({"completion":"manual", "is schedulable":"false"})}], "task_dependencies":[]}
+        progress = CAM.task_progress(board)
+        self.assertEqual(progress["state"], "waiting_on_blockers")
+        self.assertTrue(progress["waiting"][0]["human_review"])
+        board["tasks"][0]["body_json"] = "{}"
+        board.pop("task_dependencies")
+        self.assertEqual(CAM.task_progress(board)["state"], "dependency_snapshot_unavailable")
+        self.assertEqual(CAM.task_progress(board)["eligible_candidates"], [])
+
     def test_environment_selects_complete_terra_high_quota_route_and_scrubs_foreign_scope(self):
         expected = {
             "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER": "grok",
@@ -52,6 +77,8 @@ class CampaignTests(unittest.TestCase):
             "IPFS_ACCELERATE_AGENT_WORKTREE_POOL_ENABLED": "false",
             "IPFS_ACCELERATE_AGENT_GROK_TEX_TOOLCHAIN_JSON": json.dumps(
                 CAM.read(ROOT / CAM.GROK_TEX_PROFILE), sort_keys=True, separators=(",", ":")),
+            "IPFS_ACCELERATE_AGENT_RESEARCH_TOOLCHAIN_JSON": json.dumps(
+                CAM.read(ROOT / CAM.RESEARCH_PROFILE), sort_keys=True, separators=(",", ":")),
         }
         foreign = {"IPFS_ACCELERATE_AGENT_IMPLEMENTATION_ROUTE_" + suffix: "foreign-test-only"
                    for suffix in ("BOARD_NAMESPACE", "AUTHORIZATION_PATH", "AUTHORIZATION_SHA256",
@@ -150,9 +177,10 @@ class CampaignTests(unittest.TestCase):
             state, paper = root / "state", "law_to_action"
             lane = state / paper
             lane.mkdir(parents=True)
-            profile = CAM.repo_for(paper, root) / CAM.GROK_TEX_PROFILE
-            profile.parent.mkdir(parents=True)
-            profile.write_bytes((ROOT / CAM.GROK_TEX_PROFILE).read_bytes())
+            for profile_path in (CAM.GROK_TEX_PROFILE, CAM.RESEARCH_PROFILE):
+                profile = CAM.repo_for(paper, root) / profile_path
+                profile.parent.mkdir(parents=True, exist_ok=True)
+                profile.write_bytes((ROOT / profile_path).read_bytes())
             (lane / "control.duckdb").touch()
             (lane / "control.duckdb.bootstrap.json").write_text("{}")
             children, timers = [], []

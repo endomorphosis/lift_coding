@@ -392,14 +392,14 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-004, AF-005, AF-006, AF-007, AF-008, AF-009, AF-026
+- Depends on: AF-004, AF-005, AF-006, AF-007, AF-008, AF-009, AF-026, AF-027
 - Goal id: AF-S04
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S04
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/runs/training_baselines/manifest.json, papers/completion/autoformalization/runs/training_baselines/results.jsonl, papers/completion/autoformalization/checkpoints/baselines/manifest.json, papers/completion/autoformalization/receipts/AF-011.json
+- Outputs: papers/completion/autoformalization/runs/training_baselines/manifest.json, papers/completion/autoformalization/runs/training_baselines/results.jsonl, papers/completion/autoformalization/checkpoints/baselines/manifest.json, papers/completion/autoformalization/receipts/AF-011.json, papers/completion/autoformalization/receipts/snapshots/AF-011/
 - Predicted files: papers/completion/autoformalization/runs/training_baselines/manifest.json, papers/completion/autoformalization/runs/training_baselines/results.jsonl, papers/completion/autoformalization/checkpoints/baselines/manifest.json, papers/completion/autoformalization/receipts/AF-011.json, papers/completion/autoformalization/receipts/snapshots/AF-011/
 - Allowed paths: 
 - Resource class: cpu-medium
@@ -504,15 +504,15 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P1
 - Track: autoformalization
-- Depends on: AF-013, AF-006
+- Depends on: AF-013, AF-006, AF-028
 - Goal id: AF-S04
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S04
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/runs/compiler_repair/results.jsonl, papers/completion/autoformalization/evidence/repair_task_trace.json, papers/completion/autoformalization/evidence/compiler_patch.diff, papers/completion/autoformalization/evidence/repair_validation.json, papers/completion/autoformalization/receipts/AF-014.json
-- Predicted files: papers/completion/autoformalization/runs/compiler_repair/results.jsonl, papers/completion/autoformalization/evidence/repair_task_trace.json, papers/completion/autoformalization/evidence/compiler_patch.diff, papers/completion/autoformalization/evidence/repair_validation.json, papers/completion/autoformalization/receipts/AF-014.json, papers/completion/autoformalization/receipts/snapshots/AF-014/
+- Outputs: papers/completion/autoformalization/runs/compiler_repair/results.jsonl, papers/completion/autoformalization/evidence/repair_task_trace.json, papers/completion/autoformalization/evidence/compiler_patch.diff, papers/completion/autoformalization/evidence/repair_validation.json, external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py, external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py, papers/completion/autoformalization/receipts/AF-014.json, papers/completion/autoformalization/receipts/snapshots/AF-014/
+- Predicted files: papers/completion/autoformalization/runs/compiler_repair/results.jsonl, papers/completion/autoformalization/evidence/repair_task_trace.json, papers/completion/autoformalization/evidence/compiler_patch.diff, papers/completion/autoformalization/evidence/repair_validation.json, external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py, external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py, papers/completion/autoformalization/receipts/AF-014.json, papers/completion/autoformalization/receipts/snapshots/AF-014/
 - Allowed paths: external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py, external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py
 - Resource class: cpu-medium
 - Resource stage: execution
@@ -579,14 +579,14 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-005, AF-006, AF-010, AF-011, AF-013, AF-015
+- Depends on: AF-005, AF-006, AF-010, AF-011, AF-013, AF-015, AF-027, AF-028
 - Goal id: AF-S05
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S05
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/runs/pipeline_comparison/manifest.json, papers/completion/autoformalization/runs/pipeline_comparison/results.jsonl, papers/completion/autoformalization/receipts/AF-016.json
+- Outputs: papers/completion/autoformalization/runs/pipeline_comparison/manifest.json, papers/completion/autoformalization/runs/pipeline_comparison/results.jsonl, papers/completion/autoformalization/receipts/AF-016.json, papers/completion/autoformalization/receipts/snapshots/AF-016/
 - Predicted files: papers/completion/autoformalization/runs/pipeline_comparison/manifest.json, papers/completion/autoformalization/runs/pipeline_comparison/results.jsonl, papers/completion/autoformalization/receipts/AF-016.json, papers/completion/autoformalization/receipts/snapshots/AF-016/
 - Allowed paths: 
 - Resource class: cpu-medium
@@ -691,14 +691,14 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P1
 - Track: autoformalization
-- Depends on: AF-004, AF-005, AF-011, AF-015
+- Depends on: AF-004, AF-005, AF-011, AF-015, AF-028
 - Goal id: AF-S05
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S05
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/runs/domain_transfer/results.jsonl, papers/completion/autoformalization/evidence/domain_scope_matrix.json, papers/completion/autoformalization/receipts/AF-019.json
+- Outputs: papers/completion/autoformalization/runs/domain_transfer/results.jsonl, papers/completion/autoformalization/evidence/domain_scope_matrix.json, papers/completion/autoformalization/receipts/AF-019.json, papers/completion/autoformalization/receipts/snapshots/AF-019/
 - Predicted files: papers/completion/autoformalization/runs/domain_transfer/results.jsonl, papers/completion/autoformalization/evidence/domain_scope_matrix.json, papers/completion/autoformalization/receipts/AF-019.json, papers/completion/autoformalization/receipts/snapshots/AF-019/
 - Allowed paths: 
 - Resource class: cpu-medium
@@ -735,8 +735,8 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S06
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/evaluation/aggregate_costs.py, papers/completion/autoformalization/runs/costs/results.jsonl, papers/completion/autoformalization/evidence/cost_accounting.md, papers/completion/autoformalization/receipts/AF-020.json
-- Predicted files: papers/completion/autoformalization/evaluation/aggregate_costs.py, papers/completion/autoformalization/runs/costs/results.jsonl, papers/completion/autoformalization/evidence/cost_accounting.md, papers/completion/autoformalization/receipts/AF-020.json, papers/completion/autoformalization/receipts/snapshots/AF-020/
+- Outputs: papers/completion/autoformalization/evaluation/aggregate_costs.py, papers/completion/autoformalization/runs/costs/results.jsonl, papers/completion/autoformalization/evidence/cost_accounting.md, external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py, papers/completion/autoformalization/receipts/AF-020.json, papers/completion/autoformalization/receipts/snapshots/AF-020/
+- Predicted files: papers/completion/autoformalization/evaluation/aggregate_costs.py, papers/completion/autoformalization/runs/costs/results.jsonl, papers/completion/autoformalization/evidence/cost_accounting.md, external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py, papers/completion/autoformalization/receipts/AF-020.json, papers/completion/autoformalization/receipts/snapshots/AF-020/
 - Allowed paths: external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py
 - Resource class: cpu-medium
 - Resource stage: execution
@@ -765,14 +765,14 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Review only: false
 - Priority: P0
 - Track: autoformalization
-- Depends on: AF-011, AF-012, AF-013, AF-014, AF-016, AF-017, AF-018, AF-019, AF-020
+- Depends on: AF-011, AF-012, AF-013, AF-014, AF-016, AF-017, AF-018, AF-019, AF-020, AF-028
 - Goal id: AF-S06
 - Parent goal: AF-G000
 - Objective heap: papers/completion/autoformalization/paper.objectives.md
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S06
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/evaluation/analyze_results.py, papers/completion/autoformalization/results/table6_pipeline.tex, papers/completion/autoformalization/results/table11_training.tex, papers/completion/autoformalization/results/table13_assistance.tex, papers/completion/autoformalization/results/summary.json, papers/completion/autoformalization/results/hypothesis_report.md, papers/completion/autoformalization/receipts/AF-021.json
+- Outputs: papers/completion/autoformalization/evaluation/analyze_results.py, papers/completion/autoformalization/results/table6_pipeline.tex, papers/completion/autoformalization/results/table11_training.tex, papers/completion/autoformalization/results/table13_assistance.tex, papers/completion/autoformalization/results/summary.json, papers/completion/autoformalization/results/hypothesis_report.md, papers/completion/autoformalization/receipts/AF-021.json, papers/completion/autoformalization/receipts/snapshots/AF-021/
 - Predicted files: papers/completion/autoformalization/evaluation/analyze_results.py, papers/completion/autoformalization/results/table6_pipeline.tex, papers/completion/autoformalization/results/table11_training.tex, papers/completion/autoformalization/results/table13_assistance.tex, papers/completion/autoformalization/results/summary.json, papers/completion/autoformalization/results/hypothesis_report.md, papers/completion/autoformalization/receipts/AF-021.json, papers/completion/autoformalization/receipts/snapshots/AF-021/
 - Allowed paths: 
 - Resource class: cpu-medium
@@ -848,12 +848,13 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S07
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/artifact/README.md, papers/completion/autoformalization/artifact/manifest.json, papers/completion/autoformalization/artifact/S01_S40_map.json, papers/completion/autoformalization/submission/supplement.zip, papers/completion/autoformalization/evidence/anonymization_report.json, papers/completion/autoformalization/receipts/AF-023.json
+- Outputs: papers/completion/autoformalization/artifact/README.md, papers/completion/autoformalization/artifact/manifest.json, papers/completion/autoformalization/artifact/S01_S40_map.json, papers/completion/autoformalization/submission/supplement.zip, papers/completion/autoformalization/evidence/anonymization_report.json, papers/completion/autoformalization/receipts/AF-023.json, papers/completion/autoformalization/receipts/snapshots/AF-023/
 - Predicted files: papers/completion/autoformalization/artifact/README.md, papers/completion/autoformalization/artifact/manifest.json, papers/completion/autoformalization/artifact/S01_S40_map.json, papers/completion/autoformalization/submission/supplement.zip, papers/completion/autoformalization/evidence/anonymization_report.json, papers/completion/autoformalization/receipts/AF-023.json, papers/completion/autoformalization/receipts/snapshots/AF-023/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
+- Proposal artifact envelope: {"binary_paths":["papers/completion/autoformalization/submission/supplement.zip"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-023
 - Acceptance: An independent clean environment can locate every retained-claim input and regenerate reported tables using documented commands.; All exported logs/configuration paths/artifact links are audited for double-blind requirements and sensitive credentials.; Supplement ZIP is at most 100 MB; large artifacts have an allowed anonymous access strategy and exact checksums.; No public upload/publication or fabricated human review occurs.
 - Paper evidence: p. 11, lines 405–411; p. 17, lines 539–544; p. 27, lines 857–859
@@ -871,6 +872,8 @@ Acceptance criteria:
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
 
+Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
+
 ## AF-024 Apply official template, questionnaire, and actual LLM disclosure
 
 - Status: todo
@@ -886,12 +889,13 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-autoformalization
 - Bundle: autoformalization/AF-S07
 - Parallel lane: autoformalization
-- Outputs: papers/completion/autoformalization/manuscript/checklist.tex, papers/completion/autoformalization/manuscript/llm_disclosure.tex, papers/completion/autoformalization/submission/paper.pdf, papers/completion/autoformalization/evidence/format_check.json, papers/completion/autoformalization/evidence/author_questions.md, papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty, papers/completion/autoformalization/submission/template_inputs.json, papers/completion/autoformalization/receipts/AF-024.json
+- Outputs: papers/completion/autoformalization/manuscript/checklist.tex, papers/completion/autoformalization/manuscript/llm_disclosure.tex, papers/completion/autoformalization/submission/paper.pdf, papers/completion/autoformalization/evidence/format_check.json, papers/completion/autoformalization/evidence/author_questions.md, papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty, papers/completion/autoformalization/submission/template_inputs.json, papers/completion/autoformalization/receipts/AF-024.json, papers/completion/autoformalization/receipts/snapshots/AF-024/
 - Predicted files: papers/completion/autoformalization/manuscript/checklist.tex, papers/completion/autoformalization/manuscript/llm_disclosure.tex, papers/completion/autoformalization/submission/paper.pdf, papers/completion/autoformalization/evidence/format_check.json, papers/completion/autoformalization/evidence/author_questions.md, papers/completion/autoformalization/manuscript/neurips_2026_vericode.sty, papers/completion/autoformalization/submission/template_inputs.json, papers/completion/autoformalization/receipts/AF-024.json, papers/completion/autoformalization/receipts/snapshots/AF-024/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
 - Implementation timeout seconds: 7200
+- Proposal artifact envelope: {"binary_paths":["papers/completion/autoformalization/submission/paper.pdf"],"max_file_bytes":16000000,"max_output_bytes":24000000,"max_patch_bytes":16000000,"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"}
 - Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-024
 - Acceptance: Main text is 4–9 pages excluding references/appendices and PDF is at most 50 MB, with official style unchanged.; No invented questionnaire, unexplained scientific TBD/To complete/TODO or broken reference remains; the official style-generated anonymous Affiliation/Address/email block is retained.; Official disclosure/checklist answers agree with logs and distinguish known facts from author information still needed.; PDF metadata and any linked artifacts pass the anonymity audit.; The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.; The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1–2 sentence evidence-backed justifications; only its instruction block is removed.; The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.; Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
 - Paper evidence: p. 17, lines 533–544; p. 27, entire checklist placeholder; main text occupies pp. 1–9; Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343–350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions.
@@ -912,6 +916,8 @@ Acceptance criteria:
 8. Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+Artifact transport: only the exact declared PDF/ZIP files above receive binary admission. Retained before-plus-after artifact bytes must fit the native 16,000,000-byte materialized bound and 24,000,000-byte serialized bound. Keep supplements compact; large datasets/checkpoints use reproducible hash-bound artifact-store references with the required anonymous access review. If an actual required package exceeds the bound, retain its measured size for an explicit runtime-cap qualification before retrying. This transport allowance supplies no scientific or format-validation credit.
 
 ## AF-025 Perform independent reproduction and prepare final author review packet
 
@@ -995,3 +1001,78 @@ Acceptance criteria:
 3. Forward, cycle and final reconstruction scores remain distinct and parser-assisted features are disclosed.
 
 Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.
+
+## AF-027 Qualify usable experiment runtimes, source inputs and real pipeline execution
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: autoformalization
+- Depends on: AF-003, AF-004, AF-007, AF-009, AF-010, AF-026
+- Goal id: AF-S03
+- Parent goal: AF-G000
+- Objective heap: papers/completion/autoformalization/paper.objectives.md
+- Board namespace: vericodegen-2026-autoformalization
+- Bundle: autoformalization/AF-S03
+- Parallel lane: autoformalization
+- Outputs: papers/completion/autoformalization/evaluation/pipeline_arms.py, papers/completion/autoformalization/config/pipeline_arms.json, papers/completion/autoformalization/evaluation/scientific_gateway.py, papers/completion/autoformalization/evaluation/qualify_runtime.py, papers/completion/autoformalization/evaluation/review_import.py, papers/completion/autoformalization/evidence/runtime_qualification/, papers/completion/autoformalization/data/review_binding_manifest.json, papers/completion/autoformalization/data/review_packet_schema.json, papers/completion/autoformalization/evidence/human_review_handoff.md, papers/completion/autoformalization/receipts/AF-027.json, papers/completion/autoformalization/receipts/snapshots/AF-027/
+- Predicted files: papers/completion/autoformalization/evaluation/pipeline_arms.py, papers/completion/autoformalization/config/pipeline_arms.json, papers/completion/autoformalization/evaluation/scientific_gateway.py, papers/completion/autoformalization/evaluation/qualify_runtime.py, papers/completion/autoformalization/evaluation/review_import.py, papers/completion/autoformalization/evidence/runtime_qualification/, papers/completion/autoformalization/data/review_binding_manifest.json, papers/completion/autoformalization/data/review_packet_schema.json, papers/completion/autoformalization/evidence/human_review_handoff.md, papers/completion/autoformalization/receipts/AF-027.json, papers/completion/autoformalization/receipts/snapshots/AF-027/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-027
+- Acceptance: At least one actual development model-to-target call and independent native checker execution have raw receipts, served identity, versions, timing and explicit failures; an unconditional unavailable adapter or fixture substitute does not meet this criterion.; A-D mechanisms have callable real development routes with enforced arm isolation and charged preprocessing. E is wired to later AF-011/AF-013 checkpoint and promotion gates, and remains unavailable until those complete; this prerequisite does not require their future trained outputs. Unavailable optional capabilities never receive measured credit.; The selected natural source inputs and 100 review packet identities are privately bound with source digests, grouping, inclusion probabilities/weights and separate gold custody; reviewer judgments remain blank until AF-028.; The runtime/input manifest and an executable smoke command reproduce qualification in the actual worker boundary, including Python/Torch/checker visibility, model budgets and receipt accounting.
+- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Reuse candidates:
+- Receipt: papers/completion/autoformalization/receipts/AF-027.json
+
+Replace unconditional unavailable stubs with actual configured adapters. Host Python already has Torch and NumPy and host native checkers exist; qualify the exact worker-visible runtime instead of assuming host visibility. Bind private natural source inputs without exposing gold or holdout labels. Select a served direct model within the existing resource envelope, preserve Grok primary and Codex terra/high quota-only fallback, and use an auditable scoped scientific gateway if nested workers cannot dispatch directly. Run only development qualification before final freeze. Use the operator-prepared private binding of the 100 reserved semantic-review slots and preregistered sampling/weighting metadata. Keep source bodies and final identities in the private reviewer store; repository outputs contain only aggregate commitments and schemas, never the private packets. Do not invent annotations. Preserve prior no-run records and original receipts.
+
+Acceptance criteria:
+
+1. At least one actual development model-to-target call and independent native checker execution have raw receipts, served identity, versions, timing and explicit failures; an unconditional unavailable adapter or fixture substitute does not meet this criterion.
+2. A-D mechanisms have callable real development routes with enforced arm isolation and charged preprocessing. E is wired to later AF-011/AF-013 checkpoint and promotion gates, and remains unavailable until those complete; this prerequisite does not require their future trained outputs. Unavailable optional capabilities never receive measured credit.
+3. The selected natural source inputs and 100 review packet identities are privately bound with source digests, grouping, inclusion probabilities/weights and separate gold custody; reviewer judgments remain blank until AF-028.
+4. The runtime/input manifest and an executable smoke command reproduce qualification in the actual worker boundary, including Python/Torch/checker visibility, model budgets and receipt accounting.
+
+Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
+
+## AF-028 Receive and validate independent semantic-fidelity review
+
+- Status: blocked
+- Completion: manual
+- Is schedulable: false
+- Review only: false
+- Priority: P0
+- Track: autoformalization
+- Depends on: AF-005, AF-027
+- Goal id: AF-S02
+- Parent goal: AF-G000
+- Objective heap: papers/completion/autoformalization/paper.objectives.md
+- Board namespace: vericodegen-2026-autoformalization
+- Bundle: autoformalization/AF-S02
+- Parallel lane: autoformalization
+- Outputs: papers/completion/autoformalization/data/human_review_import.json, papers/completion/autoformalization/data/private_gold_commitment.json, papers/completion/autoformalization/evidence/human_review_report.md, papers/completion/autoformalization/receipts/AF-028.json, papers/completion/autoformalization/receipts/snapshots/AF-028/
+- Predicted files: papers/completion/autoformalization/data/human_review_import.json, papers/completion/autoformalization/data/private_gold_commitment.json, papers/completion/autoformalization/evidence/human_review_report.md, papers/completion/autoformalization/receipts/AF-028.json, papers/completion/autoformalization/receipts/snapshots/AF-028/
+- Allowed paths:
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-028
+- Acceptance: Returned judgments cover the frozen selected population, distinguish unknown/missing from negative, and bind exact source and packet identities without changing selection after outcomes. Reviewers do not inspect evaluated model predictions; final predictions are produced only after this independent gold is sealed.; Two independent human reviewer identities, review timestamps/attestations, disagreements and adjudicator decisions are retained privately; agreement and weighted fidelity use their declared denominators.; The review importer validates actual returned files and preserves blank/original packets; no generated label, empty import or missing review can pass.
+- Paper evidence: Authorized September 12 unblock review: dependencies must lead to executed evidence, with independent human judgments explicitly pending.
+- Reuse candidates:
+- Receipt: papers/completion/autoformalization/receipts/AF-028.json
+
+External human-review gate. Two independent annotators and an adjudicator complete the privately source-bound packets. An agent may validate returned structure/provenance and prepare disagreement reports but may not generate labels and call them independent human review. Completion requires operator verification of actual returned reviews; this task is deliberately not dispatched to an implementation model. Training and runtime development can continue independently. Actual returned judgments and adjudicated gold remain in the private reviewer store outside Git; public outputs contain aggregate counts, schemas and cryptographic import commitments only.
+
+Acceptance criteria:
+
+1. Returned judgments cover the frozen selected population, distinguish unknown/missing from negative, and bind exact source and packet identities without changing selection after outcomes. Reviewers do not inspect evaluated model predictions; final predictions are produced only after this independent gold is sealed.
+2. Two independent human reviewer identities, review timestamps/attestations, disagreements and adjudicator decisions are retained privately; agreement and weighted fidelity use their declared denominators.
+3. The review importer validates actual returned files and preserves blank/original packets; no generated label, empty import or missing review can pass.
+
+Retain source/artifact hashes, exact commands, actual outcomes and limits in the task receipt. Never close missing empirical or human evidence with a fixture, estimate or placeholder.
