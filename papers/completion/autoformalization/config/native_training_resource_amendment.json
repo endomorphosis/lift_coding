@@ -1,0 +1,75 @@
+{
+  "T2_stage_definition": "10800s complete stage from journal start through native outer trainer, T2 evaluation and checkpoint save/reload. Native soft9000s reserves1800s within that stage, but does not guarantee prompt return. T1/T3 are outside T2; no10800s total-per-seed claim.",
+  "accepted": true,
+  "accepted_scope": "Root-authorized resource amendment and isolated engineering; actual scientific dispatch requires a separate exact one-use admission.",
+  "capacity_limit": "64GiB is a justified planning envelope, not demonstrated full-cohort feasibility. Actual dimensions, native phase telemetry and costs must be retained.",
+  "cohort_unchanged": true,
+  "comparison_arms": [
+    "T0",
+    "T1",
+    "T2",
+    "T3"
+  ],
+  "frozen_at": "2026-09-12T12:21:05.556143+00:00",
+  "historical_claims": "Both16GiB OOMs and all prior failures, costs and unknown interruption usage remain preserved. New outcomes belong to this amended development experiment and cannot claim compliance with the former16GiB/30-minute envelope. Previous baseline runs remain historical; new comparisons rerun under the common amended profile.",
+  "historical_common_envelope": {
+    "memory_gib": 16,
+    "per_seed_wall_minutes": 30
+  },
+  "historical_experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+  "native_t2_soft_seconds": 9000,
+  "native_update_family_count": 5,
+  "one_reserved_compute_slot": true,
+  "population": {
+    "final": 0,
+    "selection": 15,
+    "train": 69
+  },
+  "prior_budget_claim_superseded": true,
+  "prior_oom_review_sha256s": [
+    "a54581eab8f1ebfc2bc4e0d7959b2418eb26ce6f3aa26bbb8ac5f129f812ebe3",
+    "2a5b7182d563f3d7ffaca4434539bea1cdb0408e4ed1d46f929f95999e0c1530"
+  ],
+  "resources": {
+    "cpus": 2,
+    "memory_bytes": 68719476736,
+    "pids": 64,
+    "t2_seconds_per_seed": 10800,
+    "wall_seconds": 36000
+  },
+  "same_resource_profile_for_all_new_comparison_arms": true,
+  "schema": "af029-common-resource-amendment/v1",
+  "scientific_outcomes_at_freeze": "No completed full-cohort T2 or T3 result exists; prior T0/T1 and failed-run outcomes have been observed. This is an explicit development amendment, not a claim of untouched original preregistration.",
+  "seeds": [
+    104729,
+    130363,
+    155921
+  ],
+  "storage": {
+    "available_bytes": 402091900928,
+    "filesystem_capacity_bytes": 4031871553536,
+    "native_transport_limits_unchanged": {
+      "per_blob_bytes": 67108864,
+      "store_bytes": 536870912
+    },
+    "observed_at": "2026-09-12T12:22:22.101618+00:00",
+    "preflight_requirement": "Record fresh available space for exact output/control filesystem before dispatch; preserve complete checkpoints and partial files. This observation is not a checkpoint-size bound.",
+    "transport_scope": "Old T1 archive/reload qualification does not prove large T2/T3 checkpoint transport. A separately admitted storage quota and bounded chunk manifests may be required; no numeric truncation, representation change, or old-quota fit claim."
+  },
+  "threads": {
+    "MKL_NUM_THREADS": 2,
+    "OMP_NUM_THREADS": 2,
+    "OPENBLAS_NUM_THREADS": 2,
+    "torch_interop": 1,
+    "torch_intraop": 2
+  },
+  "unchanged_scientific_scope": [
+    "fixed69train/15selection inputs and384-dimensional teacher vectors",
+    "all3frozen seeds, all5native update families, one epoch/one line-search attempt",
+    "same objectives, normalization, full cohort, FP32 packed updater and noT2sample memory",
+    "source-bound structural compiler feedback, no independent human gold claim",
+    "complete native checkpoint bytes, exact reload, T3 protected-state isolation and actual result gates",
+    "no final/test access or E promotion before later named checkpoint consumer gates"
+  ],
+  "whole_run_definition": "36000s complete run including shared setup/compiler feedback/T0, all3T1/T2/T3 and packaging. Three complete T2 ceilings reserve32400s, leaving3600s total for the other phases. No automatic retry."
+}

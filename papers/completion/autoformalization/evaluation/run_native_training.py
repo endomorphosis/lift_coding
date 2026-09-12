@@ -99,6 +99,10 @@ TRAIN_PATH = PAPER_ROOT / "receipts" / "snapshots" / "AF-004" / "train.sources.j
 SELECTION_PATH = PAPER_ROOT / "receipts" / "snapshots" / "AF-004" / "selection.sources.jsonl"
 
 sys.path[:0] = [str(HERE), str(REPO_ROOT / "external" / "ipfs_datasets")]
+sys.path.insert(0, str(INPUT_EVIDENCE_DIR))
+from resource_amendment import (
+    SCHEMA as RESOURCE_AMENDMENT_SCHEMA, NativeProgressJournal, admit_amended_budget,
+)
 
 
 def utc_now() -> str:
@@ -936,7 +940,7 @@ def admit_repair(argv: Sequence[str] | None = None) -> dict[str, Any]:
     if sha256_file(budget_path) != args.repair_budget_sha256:
         raise ValueError("pre-execution repair budget changed")
     budget = json.loads(budget_path.read_bytes())
-    if (budget.get("schema") != "af029-corrective-run-budget/v1"
+    if (budget.get("schema") not in {"af029-corrective-run-budget/v1", RESOURCE_AMENDMENT_SCHEMA}
             or budget.get("prior_failure_manifest_sha256") != args.prior_failure_manifest_sha256
             or budget.get("seeds") != list(SEEDS)
             or budget.get("population") != {"train": 69, "selection": 15, "final": 0}
@@ -946,17 +950,20 @@ def admit_repair(argv: Sequence[str] | None = None) -> dict[str, Any]:
     allowances = budget.get("per_seed") or {}
     if set(allowances) != {str(seed) for seed in SEEDS}:
         raise ValueError("repair budget missing a fixed seed")
-    for allowance in allowances.values():
-        known = allowance.get("known_prior_wall_seconds")
-        fresh = allowance.get("new_t2_wall_seconds")
-        if (type(known) not in (int, float) or type(fresh) not in (int, float)
-                or not math.isfinite(known) or not math.isfinite(fresh)
-                or known < 0 or not 0 < fresh <= 1200 or known + fresh > 1800
-                or type(allowance.get("interrupted_usage_unknown")) is not bool):
-            raise ValueError("invalid or over-budget corrective allowance")
-    if len({v["new_t2_wall_seconds"] for v in allowances.values()}) != 1:
-        raise ValueError("fixed seeds require the same predeclared T2 allowance")
-    T2_MAX_SECONDS = next(iter(allowances.values()))["new_t2_wall_seconds"]
+    if budget["schema"] == RESOURCE_AMENDMENT_SCHEMA:
+        T2_MAX_SECONDS = admit_amended_budget(budget)
+    else:
+        for allowance in allowances.values():
+            known = allowance.get("known_prior_wall_seconds")
+            fresh = allowance.get("new_t2_wall_seconds")
+            if (type(known) not in (int, float) or type(fresh) not in (int, float)
+                    or not math.isfinite(known) or not math.isfinite(fresh)
+                    or known < 0 or not 0 < fresh <= 1200 or known + fresh > 1800
+                    or type(allowance.get("interrupted_usage_unknown")) is not bool):
+                raise ValueError("invalid or over-budget corrective allowance")
+        if len({v["new_t2_wall_seconds"] for v in allowances.values()}) != 1:
+            raise ValueError("fixed seeds require the same predeclared T2 allowance")
+        T2_MAX_SECONDS = next(iter(allowances.values()))["new_t2_wall_seconds"]
     OUTPUT_ROOT = args.output_root.resolve()
     if OUTPUT_ROOT.exists() or OUTPUT_ROOT == PAPER_ROOT.resolve():
         raise ValueError("corrective output root must be fresh; never overwrite an earlier run")
@@ -991,7 +998,17 @@ def main() -> int:
     refuse_stripped_profile()
     started = time.time()
     cpu_started = time.process_time()
+    amended_resource_run = repair_provenance["repair_budget"]["schema"] == RESOURCE_AMENDMENT_SCHEMA
+    if amended_resource_run:
+        import torch
+        torch.set_num_threads(2)
+        torch.set_num_interop_threads(1)
+        if (torch.get_num_threads() != 2 or torch.get_num_interop_threads() != 1
+                or any(os.environ.get(key) != "2" for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"))):
+            raise SystemExit("amended native thread profile mismatch")
     env = probe_environment()
+    if amended_resource_run:
+        env["amended_torch_threads"] = {"intraop": torch.get_num_threads(), "interop": torch.get_num_interop_threads()}
     if env["process_path_equals_sealed"] and not env["packages"]["torch"]["ok"]:
         raise SystemExit(
             "Stripping the declared research profile is an error, not proof that "
@@ -1451,6 +1468,12 @@ def main() -> int:
         order = list(range(len(train_samples)))
         rng.shuffle(order)
         ordered_train = [train_samples[i] for i in order]
+        telemetry = None
+        if amended_resource_run:
+            telemetry = NativeProgressJournal(EVIDENCE_DIR / f"native-progress-{seed}.jsonl", seed,
+                {"repair_budget_sha256": repair_provenance["repair_budget_sha256"],
+                 "runner_sha256": sha256_file(Path(__file__))})
+            model._packed_training_progress_callback = telemetry
         t2 = time.time()
         try:
             report = model.train_generalizable_projection(
@@ -1468,6 +1491,7 @@ def main() -> int:
                 max_reconstruction_regression=1.0,
                 max_cross_entropy_regression=1.0,
                 max_legal_ir_loss_regression=1.0,
+                progress_callback=telemetry,
             )
             failure = None
         except Exception as exc:
@@ -1479,6 +1503,10 @@ def main() -> int:
                 "projection_packed_cpu": {"enabled": True, "reports": list(getattr(model, "_packed_cpu_reports", []))},
             }
             failure = f"{type(exc).__name__}: {exc}"
+        finally:
+            if telemetry is not None:
+                telemetry.close()
+                telemetry.require_complete()
         elapsed = round(time.time() - t2, 3)
         final_sha, final_state = state_blob(model)
         shared_change = shared_parameter_change(initial_state, final_state)
