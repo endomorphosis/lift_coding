@@ -1,0 +1,15 @@
+{
+  "cases": 60,
+  "cohorts_unchanged": true,
+  "metrics_reproduced": true,
+  "raw_sha256": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+  "task": "LA-009",
+  "valid": true,
+  "withdrawn_unmeasured": [
+    "expert_legal_fidelity",
+    "inter_annotator_agreement",
+    "independent_human_validation",
+    "legal_applicability_or_validity_in_the_world",
+    "semantic_accuracy_from_implementation_agreement"
+  ]
+}
