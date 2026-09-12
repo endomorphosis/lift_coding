@@ -1,0 +1,5 @@
+NS-008 provider-gate qualification: OK
+rows=20 required=19
+residual=independently_checked; deterministic=oracle_pass_no_provider
+invalid_pairs=expected_reasons; deny_all=not_useful_progress; kernel_hooks=not_savings
+live_smoke=closed_deterministic,defer_capability,residual_authorized,thin_gate_blocked

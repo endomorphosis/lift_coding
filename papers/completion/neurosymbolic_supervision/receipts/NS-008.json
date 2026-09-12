@@ -1,0 +1,152 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-008",
+  "status": "complete",
+  "completed_at": "2026-09-12T02:14:34+00:00",
+  "scope": "Caller-level provider-gate qualification on the sealed PreImplementationKernel, ResidualProviderInvocation, AnalyticalCloseExecutor, and ReferenceAuthorizationEvaluator surfaces. Not a live A–D experiment, production model-identity claim, or workflow-level savings measurement from kernel hook counts.",
+  "source_versions": {
+    "workspace_git_head": "4cefc72db88107a7f087338980a62b88ff125321",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "pytest": "8.1.1",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "sha256": "9fab08c9c4e0d7ad6888f93430dd2d5b67a8dbf34d7b8e053b747f3aaa7b9ada",
+      "classification": "NS-002 recorded semantic_state blocked on missing anyio. NS-008 imported the kernel, gate, residual-invocation, analytical-close, and authorization modules without the anyio-gated semantic_state package __init__. No production model identity is present in the sealed profile."
+    },
+    "caller": {
+      "pre_implementation_kernel": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+      "pre_implementation_kernel_sha256": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+      "pre_implementation_provider_gate": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_provider_gate.py",
+      "pre_implementation_provider_gate_sha256": "7d4c980ee3f3d747a335856f29a7291e8d6d395d44ee9120eaa573a08f86acbe",
+      "implementation_disposition": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_disposition.py",
+      "implementation_disposition_sha256": "df9c34a75230a858dfc9038e75d9c6fa51c86fe6d60bf6b0412ea368904e540e",
+      "residual_provider_invocation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/residual_provider_invocation.py",
+      "residual_provider_invocation_sha256": "ba72ea67a61457739bce6364aa0c87bc1dd8096aeada7435a79081e5b2c97f32",
+      "analytical_close_executor": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/analytical_close_executor.py",
+      "analytical_close_executor_sha256": "81660c5da9d3498912746c16c338ea14fc70afbbf0ada932ad5f24af1f5fb85f",
+      "residual_llm_packet": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/residual_llm_packet.py",
+      "residual_llm_packet_sha256": "1de5545cf2ec1876c79a6e9da76352df8c58092be92a396fce79fa45a2894087",
+      "authorization_logic": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+      "authorization_logic_sha256": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1",
+      "providers": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/providers.py",
+      "providers_sha256": "fe6b78ef5e0fff0bae4f3f5de9661d5514b2ba7bc571f9c78641904b68303f10"
+    },
+    "intended_provider": {
+      "id": "ns-008-qualification-residual-provider@1",
+      "revision": "ns-008-residual-provider-v1",
+      "script": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/residual_provider.py",
+      "sha256": "4b5195d00857921ad1a396b554d975ef584f5b48e8527fd1b8d7d36564b608c4",
+      "admitted_production": false
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_cases.json": "d78ca2cbb89a1b9c24917f9b3895ccb8aa699bb6ac7f5b7e0d93b9f361c5e034",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_receipts.jsonl": "217015c6c16293491cbe270a3473a4750dae1ada012919bf43feb0891c9b1053",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_report.md": "3571afea61ed23376f91057948401d15331a18e74479e9d1b41433238198d0de",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/run_provider_gate_qualification.py": "5b0555a6fe2007117cf1b3e1d34b30577f3ba62435a5984a7dd84550553f3c37",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/validate_provider_gate.py": "d3db4077c58178610ff58408f066ddee9237d2a2aedb61700b9f916d3778bf59",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/residual_provider.py": "4b5195d00857921ad1a396b554d975ef584f5b48e8527fd1b8d7d36564b608c4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/provider-gate-qualification.log": "c4dbd7e2531a346a03e32f695fae77c529fe9f24eab65a1c7869c9c203ab28c3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/checkpoints/start.json": "8759e88223f91244b0348c6007640afc4b3f12f4d6f44b7172e163168e941ec8",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/checkpoints/outputs.json": "1c786fdc60fc0e66f43122b8a7295b9787f256fd80d99132dae43e52f70adbdb"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/provider_gate_cases.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_cases.json",
+    "papers/completion/neurosymbolic_supervision/qualification/provider_gate_receipts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_receipts.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/provider_gate_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "At least one valid residual request reaches the intended real provider and produces a traceable independently checked outcome.",
+      "status": "met",
+      "explanation": "residual_authorized_progress bound exact task/forest/plan/doctor/obligation receipts (task_cid baguqeeraelrh6ffjmns4gfiw6o5jyuubf2r57zux5iklp4n72qvbyezsz64a, forest baguqeeran7o5jxsyoxnxkkwy6sqgzxur33vswu6gbiox37m3fu42w4x3ljgq, packet baguqeeracl4zqdvkydt57cgoutaqpmyxvlyqgbrga2oflrfqnlfd3fcnfblq) through PreImplementationKernel.evaluate. ResidualProviderInvocation.invoke ran the intended qualification provider ns-008-qualification-residual-provider@1 as a real process (actual_process_invocations=1, invocation receipt residual_provider_invoked). The lease-bounded nomination was applied by AnalyticalCloseExecutor and independently passed pytest tests/test_core.py (exit 0). Kernel provider_hook_count remained 0; invocations were counted at the residual-provider boundary. admitted_production=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/residual_provider.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/run_provider_gate_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/provider-gate-qualification.log"
+      ]
+    },
+    {
+      "criterion": "At least one deterministic closure progresses without a provider call and passes the fixed oracle.",
+      "status": "met",
+      "explanation": "deterministic_unique_close selected closed_deterministic / analytical_unique_mapping with skip_provider=true, provider_authorized=false, and kernel provider_hook_count=0. assert_provider_dispatch_allowed raised PermissionError. AnalyticalCloseExecutor mutated pkg/core.py (reason analytical_close_applied) and the frozen pytest oracle passed independently of the candidate closes_claim flag (kernel receipt baguqeera55f45ouzpa6cxxxq2caicbyt6x4nt6ihme2focw4qhtzqgtg4hzq). closes_claim_untrusted kept the same kernel disposition without applying a fix; the oracle failed and useful_progress stayed false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/run_provider_gate_qualification.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/provider-gate-qualification.log"
+      ]
+    },
+    {
+      "criterion": "Each invalid pair fails for the expected binding/authority reason; missing capabilities stay unavailable.",
+      "status": "met",
+      "explanation": "Minimally altered residual pairs failed closed without provider authorization: missing receipts, mismatched task, mismatched forest, mismatched plan/doctor/obligation views, forged receipt identity, and the thin evaluate_provider_gate helper that omits view CIDs all returned missing_typed_resolvable_authority_receipts; a missing packet abstained with no_analytical_close; two closing candidates abstained with ambiguous_repair_candidates; authorization_deny_task_scope returned task_scope_mismatch. Missing planner/doctor backends deferred with missing_required_backend and capability_available=false. The sealed profile has no production model identity (production_llm_unavailable). An authorized residual whose nomination escaped the write lease was recorded as unknown_provider_effect and independently failed the oracle rather than succeeding.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/validate_provider_gate.py"
+      ]
+    },
+    {
+      "criterion": "No workflow-level savings are inferred from zero hooks inside the kernel, and deny-all cannot pass useful-progress criteria.",
+      "status": "met",
+      "explanation": "Every kernel evaluation recorded provider_hook_count=0 because PreImplementationKernel never calls a model; every receipt sets workflow_savings_inferred=false and kernel_provider_hook_count_is_not_workflow_savings=true. Residual invocations are counted only at ResidualProviderInvocation.invoke. deny_all_control skipped the provider, applied no repair, failed the frozen oracle, and kept useful_progress=false / deny_all_useful_progress=false, so a reject-everything route cannot satisfy useful-progress criteria.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_cases.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/qualification/provider_gate_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/provider-gate-qualification.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns008-evidence",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns008-evidence/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns008-evidence/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns008-evidence/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns008-evidence/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONPATH=external/ipfs_accelerate",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/validate_provider_gate.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/validate_provider_gate.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/provider-gate-qualification.log",
+      "started_at": "2026-09-12T02:14:33+00:00",
+      "finished_at": "2026-09-12T02:14:34+00:00",
+      "execution_kind": "sealed-profile live kernel/gate/residual-invocation qualification check: deterministic close, residual authorization, capability deferral, thin-gate rejection; no A-D live repair"
+    }
+  ],
+  "limitations": {
+    "public_semantic_state_package_import": "blocked_without_anyio",
+    "production_model_identity": "unavailable_in_sealed_profile",
+    "intended_residual_provider": "digest-bound qualification process ns-008-qualification-residual-provider@1 invoked through ResidualProviderInvocation@1; admitted_production=false",
+    "thin_gate_helper": "evaluate_provider_gate does not forward plan/doctor/obligation view CIDs; residual progress used KernelEvaluationRequest with exact receipts",
+    "kernel_provider_hook_count": "always 0 from kernel evaluation; not a workflow-level savings measurement",
+    "fixture": "hermetic add/scale qualification fixture, not a historical live repair task",
+    "live_ad_experiment": false,
+    "claim_boundary": "This receipt qualifies caller-level deterministic closure, authorized residual dispatch, binding/authority rejection, unavailable capabilities, and deny-all non-progress. It is not a matched A-D outcome or a production LLM cost saving."
+  },
+  "runtime_authority": "Artifact completion record only; no production proposal, hidden oracle, portal, or submission state was changed."
+}
