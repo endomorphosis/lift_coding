@@ -1,0 +1,161 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-018",
+  "status": "complete",
+  "completed_at": "2026-09-12T18:56:34.064932+00:00",
+  "completion_mode": "Forty-eight A4 development-split efficiency runs (12 frozen cases x cold/warm/stale-root/stale-clock) were timed with exclusive phase walls. Per-run exclusive sums plus overhead reconcile with end-to-end walls; nested solver elapsed and the enforcement envelope are not double-counted. Cold misses and warm hits are reproducible; stale root/clock invalidation drops cached solver evidence and yields 0 useful work on allowed cases while cold/warm preserve 6/6 allowed useful work. Model tokens, network bytes, and prices remain unobserved and are not filled. Graph size and token saving are not treated as money.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/probe/environment.json": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/run_efficiency.py": "c15b22e5a8170d758ec08858c797a41408a72c8a7272ec072e66aafb09e88855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/traces/run_head.json": "2fb8ec742f0cb774620f460e9148418c2ab7a05ed93c514518b4c96853481138",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/traces/schedule.json": "47f23d3a4e1b427d2a92255dd1f9c9d8e9f8d93e28bdc651efa39f7244c33eea",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/validate_efficiency.py": "a7f4b10d19e7ad07500ad946600c9a6e2d3884be12e1f871f2793c6e5ecf6082",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/commands.json": "428b3e30743a597f3dbed53bf1181e291b19a1ed788b69e3d6b88d4ba97f4dd2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/run.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/run.stdout.log": "c91efceb88d84c49d9d0573e82ffd7fbd9b10fa2bd80a054ac30cba62fcf2d8e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log": "8199b77e7fe6316db41045fc6173dccb8a481cf5a5793a554910cece56eb92a3"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/results/efficiency/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+    "papers/completion/law_to_action/results/efficiency/environment.json": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json",
+    "papers/completion/law_to_action/results/efficiency/summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Per-run phase totals reconcile with end-to-end observations with overhead/double-counting explained.",
+      "status": "met",
+      "explanation": "Each of the 48 raw rows stores exclusive walls for retrieval, compilation, solver, checker, clock/root checks, capability verification, DuckDB consumption, artifact storage, and handler effects. exclusive_phase_sum_seconds plus overhead_seconds equals end_to_end_wall_seconds. Nested SymPy provider elapsed and the authorize_and_delegate envelope are recorded as nested observations and are not added to the exclusive sum. Setup/qualification wall is measured once and included in full paper cost as setup + sum(e2e), never as setup + phases + e2e. summary.reconciliation.all_rows_reconcile is true.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/validate_efficiency.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Cold/warm conditions and stale-evidence invalidation are reproducible.",
+      "status": "met",
+      "explanation": "The 12 frozen development cases run cold, warm, stale_root, then stale_clock against a per-case process-local cache. Cold retrieval/compilation/solver are misses; warm counterparts are hits. Stale-root invalidates compilation/solver/checker keys bound to policy:root-v1; stale-clock invalidates solver/checker keys bound to the current clock. Allowed useful work is 6/6 on cold and warm and 0/6 after either invalidation. The validator rechecks the paired matrix against live/snapshot copies.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/traces/schedule.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No external price assumptions or unobserved token counts are silently filled.",
+      "status": "met",
+      "explanation": "Every raw row sets model.observed=false and leaves input/output/retry/total tokens null. Network bytes are null and unobserved under the sealed no-network PATH. price_conversion.applied is false and price_usd is null. Graph size and token saving are not converted to money. Retries are observed zeros (retry_count=0), not invented token counts. LA-016's unstarted 0-token ledger is recorded as unstarted accounting and is not adopted as measured model usage.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/run_efficiency.py",
+        "run",
+        "--out",
+        "papers/completion/law_to_action/results/efficiency",
+        "--snapshot",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018"
+      ],
+      "completed_at": "2026-09-12T18:56:34.040926Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la018-ohpASp"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/run.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-018/run_efficiency.py",
+      "started_at": "2026-09-12T18:56:32.306366Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-018/validate_efficiency.py"
+      ],
+      "completed_at": "2026-09-12T18:56:34.064932Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la018-ohpASp"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-018/validate_efficiency.py",
+      "started_at": "2026-09-12T18:56:34.041849Z"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "49.0.0",
+    "HAVE_CRYPTO_ED25519": true,
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "harness_version": "la-018-efficiency-harness/v1",
+    "implementation_revision": "4d8e3ba723ac68b8f2987ce09795b5375041cfc7d29158a67aeb6a465ec60a8b",
+    "empirical_efficiency_result": true,
+    "independent_human_gold": false,
+    "sandbox_only": true,
+    "scientific_model_pinned": false,
+    "model_tokens_observed": false,
+    "price_conversion_applied": false,
+    "scheduled_attempts": 48,
+    "executed_attempts": 48,
+    "allowed_cold_useful_work": 6,
+    "allowed_warm_useful_work": 6,
+    "allowed_stale_root_useful_work": 0,
+    "allowed_stale_clock_useful_work": 0,
+    "a4_crypto": "real-ed25519",
+    "a4_store_kind": "duckdb-file-typed-quack-owner",
+    "a4_enforce_mode": "enforce",
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "authorization.py_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+    "ucan.py_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+    "durable_consumption.py_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "effects.py_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "future_gates": [
+      "Closed-loop model tokens remain unobserved until a scientific model is pinned.",
+      "SAT/UNSAT cannot authorize theorem_proof allows.",
+      "Independent human gold, expert legal fidelity, and real-world legality remain unclaimed.",
+      "Upstream PDF/Parquet/SQLite bodies remain retrieval_only and were not fetched.",
+      "Token reduction and graph size are not monetary savings."
+    ]
+  }
+}
