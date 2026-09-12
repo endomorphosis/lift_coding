@@ -2024,10 +2024,36 @@ def _maintenance_require(condition: bool, reason: str) -> None:
         raise OperatorError("blocked maintenance observation refused: " + reason)
 
 
+def _maintenance_read_source(path: Path, *, bound: int) -> bytes:
+    """Read sealed source without depending on a newer runtime helper module."""
+    _maintenance_require(not path.is_symlink(), "source path is a symlink")
+    target = _contained(path)
+    fd = os.open(target, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC)
+    try:
+        before = os.fstat(fd)
+        _maintenance_require(stat.S_ISREG(before.st_mode) and before.st_uid == os.geteuid()
+                             and before.st_nlink == 1 and 0 <= before.st_size <= bound,
+                             "source is not a bounded owned regular file")
+        raw = bytearray()
+        while len(raw) <= bound:
+            chunk = os.read(fd, min(65536, bound + 1 - len(raw)))
+            if not chunk:
+                break
+            raw.extend(chunk)
+        fields = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns", "st_ctime_ns",
+                  "st_uid", "st_nlink")
+        after, named = os.fstat(fd), target.lstat()
+        _maintenance_require(all(getattr(before, key) == getattr(after, key) == getattr(named, key)
+                                 for key in fields) and len(raw) == before.st_size,
+                             "source changed during bounded read")
+        return bytes(raw)
+    finally:
+        os.close(fd)
+
+
 def _maintenance_source(config_path: Path) -> dict[str, Any]:
     """Observe source bytes without optional Git index refresh writes."""
     _ensure_import_path()
-    from ipfs_accelerate_py.agent_supervisor.merge.workspace_quarantine import read_regular
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         _read_control_plane_source_snapshot, IMPORTED_CONTROL_PLANE_SOURCE, CONTROL_PLANE_SOURCE_PATHS,
     )
@@ -2053,7 +2079,7 @@ def _maintenance_source(config_path: Path) -> dict[str, Any]:
     _maintenance_require(source.get("repository_revision") == revisions[1][1],
                          "loaded runtime revision differs from adopted checkout")
     for item in source["sources"]:
-        raw, _ = read_regular(ACCEL_ROOT / item["path"], bound=16 * 1024 * 1024)
+        raw = _maintenance_read_source(ACCEL_ROOT / item["path"], bound=16 * 1024 * 1024)
         _maintenance_require(len(raw) == item["size_bytes"]
                              and hashlib.sha256(raw).hexdigest() == item["sha256"],
                              "loaded runtime bytes differ from adopted checkout")
@@ -2063,7 +2089,7 @@ def _maintenance_source(config_path: Path) -> dict[str, Any]:
     source = {key: value for key, value in source.items() if key != "repository_root"}
     files = []
     for path in (Path(__file__), config_path):
-        raw, _ = read_regular(_contained(path), bound=MAX_JSON_BYTES)
+        raw = _maintenance_read_source(path, bound=MAX_JSON_BYTES)
         files.append([str(path), hashlib.sha256(raw).hexdigest()])
     return {"repositories": revisions, "files": files, "runtime": source}
 
