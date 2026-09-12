@@ -1,0 +1,17 @@
+{
+  "actual_network": true,
+  "in_process": false,
+  "listen": "127.0.0.1:52215",
+  "network_mode": "local-network",
+  "pid": 412,
+  "protocol": "jsonrpc-2.0-http",
+  "security": {
+    "channel": "plaintext-http",
+    "listen_host": "127.0.0.1",
+    "noise": false,
+    "tls": false
+  },
+  "tls": false,
+  "transport": "http",
+  "wan": false
+}

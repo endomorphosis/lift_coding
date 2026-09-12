@@ -1,0 +1,58 @@
+{
+  "http": {
+    "actual_network": true,
+    "in_process": false,
+    "listen": "127.0.0.1:52215",
+    "network_mode": "local-network",
+    "pid": 412,
+    "protocol": "jsonrpc-2.0-http",
+    "security": {
+      "channel": "plaintext-http",
+      "listen_host": "127.0.0.1",
+      "noise": false,
+      "tls": false
+    },
+    "tls": false,
+    "transport": "http",
+    "wan": false
+  },
+  "libp2p": {
+    "actual_network": true,
+    "addrs": [
+      "/ip4/127.0.0.1/tcp/40645/p2p/12D3KooWFe1GYtKjoNTMmQCN5zdcNbD1gmz9KuWz2cJMF2chiRwD"
+    ],
+    "in_process": false,
+    "listen": "/ip4/127.0.0.1/tcp/40645",
+    "multiaddr": "/ip4/127.0.0.1/tcp/40645/p2p/12D3KooWFe1GYtKjoNTMmQCN5zdcNbD1gmz9KuWz2cJMF2chiRwD",
+    "network_mode": "local-network",
+    "peer_id": "12D3KooWFe1GYtKjoNTMmQCN5zdcNbD1gmz9KuWz2cJMF2chiRwD",
+    "pid": 413,
+    "protocol": "/mcp+p2p/1.0.0",
+    "security": {
+      "listen_host": "127.0.0.1",
+      "muxer": "yamux",
+      "muxer_fallback": "mplex",
+      "muxer_protocol_id": "/yamux/1.0.0",
+      "noise_protocol_id": "/noise",
+      "secure_channel": "noise",
+      "tls": false,
+      "transport": "tcp"
+    },
+    "transport": "libp2p",
+    "wan": false
+  },
+  "stdio": {
+    "actual_network": false,
+    "in_process": false,
+    "network_mode": "local-process",
+    "pid": 411,
+    "protocol": "jsonrpc-2.0-ndjson",
+    "security": {
+      "channel": "anonymous-pipes",
+      "noise": false,
+      "tls": false
+    },
+    "transport": "stdio",
+    "wan": false
+  }
+}
