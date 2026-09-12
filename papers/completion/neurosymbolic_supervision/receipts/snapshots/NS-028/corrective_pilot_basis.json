@@ -1,0 +1,16 @@
+{
+  "schema": "ns028-corrective-pilot-basis/v1",
+  "status": "unperformed_corrective_task",
+  "review_sha256": "59b68dfb7c67fe24e023ff315f26cd129ab0330c32e053ada565d0decfd5a941",
+  "proposal_sha256": "9045ff9aa7390fe363d7afa5898a729fdacfb7ce66e9d0374fd8b7762e8a03ee",
+  "original_NS016_criteria": [
+    "Pilot tasks are excluded from final holdouts and labeled developmental.",
+    "Each retained arm has a valid useful path and completed independent scoring, or is explicitly removed with claims updated before final runs.",
+    "All receipts required by Tables 17/18 and cost analysis can be produced; missing provider/resources have honest readiness statuses.",
+    "Final source/task/protocol/scorer manifests are immutable and hashed before the first final attempt."
+  ],
+  "old_NS016_is_not_validated": true,
+  "provider_calls": 0,
+  "scorer_calls": 0,
+  "prohibited_adversarial_demonstration_performed": false
+}

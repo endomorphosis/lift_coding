@@ -1,0 +1,87 @@
+{
+  "finding": {
+    "claim_mismatch": "NS011 receipt describes a local authoritative callback over retained canonical bytes, but the supplied callback never checks any bytes. reuse_analysis declares paper_claim.blocked=false and qualified_with_finite_uncertainty. Those labels do not establish an admitted proof-backed production reuse path.",
+    "criteria_assessment": {
+      "criterion1": "Actual separate cold recording and skip/unavailable rejection supported for the controlled harness.",
+      "criterion2": "Identity invalidation and unchanged cold-positive cases supported conditionally; genuine admitted-result authority not established because verifier and certificates are synthetic.",
+      "criterion3": "26-case all-attempted empirical count and observed stale-key failure retained, but statistical intervals apply only to this controlled mocked-verifier cohort.",
+      "criterion4": "Stale-key profile is explicitly excluded; mocked certificate/verifier admission is not marked blocked in the paper-claim profile. This qualification cannot authorize production/final reuse."
+    },
+    "source_lines": {
+      "NS010_same_dependency_gap": "run_reuse_qualification.py456 default verifier alwaysTrue and648 validator callback alwaysTrue",
+      "NS011_certificate_constructor": "884-918 creates placeholder cid:proof:ns-011 and labels CRYPTOGRAPHIC/AUTHORITATIVE",
+      "NS011_receipt_constructor": "run_cold_oracle_qualification.py865-881 builds PASS TestPassReceipt(admitted=True)",
+      "NS011_verifier": "939-952 TestProofCache verifier=lambda *_args: True",
+      "production_boundary": "proof_cached_test_validation.py1-11 requires live repository observation, retained certificate/pass-receipt re-verification and fresh completion-evidence receipt"
+    },
+    "status": "production_admission_unqualified"
+  },
+  "original_history_rewritten": false,
+  "original_review_sha256": "be2ee8331a79afb3a5bb58432f5d19d78773ccee601c747b9b4a2dfb32073455",
+  "original_scored_cohort": {
+    "all_attempted_false_reuse": "1/26",
+    "limitations_disclosed": "constructed pytest cohort; not historical A-D or native Groth16 proof",
+    "paired_reuse_and_actual_cold_records": 26,
+    "paper_subset_false_reuse": "0/25",
+    "same_case_population": true,
+    "skipped_or_unavailable_not_safe_agreement": true
+  },
+  "original_source_evidence": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py": {
+      "bytes": 45008,
+      "sha256": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/cold_oracle_results.jsonl": {
+      "bytes": 34690,
+      "sha256": "d2f1b8855371793f8fad883c9d91dc427728694bfa1ad748ecb5f44347ab6dc3"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json": {
+      "bytes": 16118,
+      "sha256": "8423c4fc2b7f269de693544ccf275a7d6f2baa71710d841991c0634428c2a066"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_mutation_results.jsonl": {
+      "bytes": 35754,
+      "sha256": "63da636c659d35e9b748ba6b206bcde97c5a76b0f1c4561fd89e963c9a8fb728"
+    },
+    "papers/completion/neurosymbolic_supervision/qualification/reuse_profile.json": {
+      "bytes": 7115,
+      "sha256": "c1430e4cf972ad6a17abdaa9c81759ec412be1ed08c263112523142ea35dc03e"
+    },
+    "papers/completion/neurosymbolic_supervision/receipts/NS-010.json": {
+      "bytes": 13986,
+      "sha256": "0fbc0ac8ba87c3618a7332c7aec2afe346f98342a288648bf8587d555bbfabb4"
+    },
+    "papers/completion/neurosymbolic_supervision/receipts/NS-011.json": {
+      "bytes": 14332,
+      "sha256": "67f344c16f6c9b2cdeb9daca0f33a9aaa0e3389826d4cc188ff5d72175a77382"
+    },
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-010/run_reuse_qualification.py": {
+      "bytes": 74739,
+      "sha256": "74c4417061ad6c0574933c80f802be2e02c0736277b9e1b6a38bf96798f0ce19"
+    },
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/run_cold_oracle_qualification.py": {
+      "bytes": 76569,
+      "sha256": "99b151a0b64380f1e1e30545cbf06c368ff44f54b848e9f4b429123124ecd125"
+    },
+    "papers/completion/neurosymbolic_supervision/tasks.json": {
+      "bytes": 74849,
+      "sha256": "b91584b57f2fe03461c60c285f2d2be7d3c946ea64a56d24cdfc377df5a9421c"
+    }
+  },
+  "original_source_parent": "bd2dfd56439a7f263592cc9a7c3e6f316c3000a0",
+  "preserve_original_receipts": [
+    "NS-010",
+    "NS-011"
+  ],
+  "prohibited_adversarial_demonstration_performed": false,
+  "provider_calls": 0,
+  "required_final_gate": {
+    "active_work_may_continue": true,
+    "original_contract": "NS016 criterion2 permits each retained arm to have an actual useful independently scored path or be explicitly removed with claims updated before final runs; criterion4 requires frozen admission/scorer/source manifests before first final attempt",
+    "other_limits": "Existing NS026 operator-review-only scorer trust limits and development-only registry locks remain; no automatic pilot/final admission follows from NS011.",
+    "required_guard": "Before NS017/NS018 final attempts, qualify a genuine trusted receipt/certificate/verifier path with current key rebinding and independent cold outcomes, or explicitly remove unqualified reuse claims before final freeze. Unit callback success cannot silently satisfy this gate."
+  },
+  "schema": "ns027-corrective-admission-basis/v1",
+  "scorer_calls": 0,
+  "status": "unperformed_corrective_task"
+}
