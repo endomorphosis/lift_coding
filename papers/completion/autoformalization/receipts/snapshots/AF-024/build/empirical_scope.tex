@@ -1,0 +1,40 @@
+% AF-028 claim-scope wording. Automated structural evidence only; not independent
+% human semantic gold. AF-022 may \input this block; it does not assert unrun
+% experiments executed.
+\paragraph{Empirical scope.}
+We evaluate automated structural and execution properties of the inspected
+pipeline: typed elaboration, declared compiler contracts, reconstruction
+agreement labeled by its producer, training and checkpoint updates with exact
+split/seed/cost bindings, and native checker acceptance of an exact declared
+formal goal under a pinned checker identity. Each reported quantity must carry
+its own execution record, population, seed, source, goal, premises, checker and
+resource bindings. A checker-accepted formal statement is not evidence that the
+statement faithfully captures the original natural-language source. Automatic
+teacher agreement and round-trip agreement are reported as such and are not
+original-source semantic gold.
+\paragraph{Supported automated denominators.}
+Constructed finite conformance is retained on its predefined witness set
+(AF-006 twelve reconstructed checks; AF-015 property-specific Boolean/trace
+cases). Native exact-goal checking is retained only where an independent
+receipt names the goal, premises, checker digest and outcome, including
+explicit failures (AF-027 Lean identity success, Lean \texttt{False:=trivial}
+type error, and Z3 unsat sentinel; sealed-PATH AF-018 probes remain
+unavailable). Learned updates and teacher diagnostics remain bound to the
+populations actually used (AF-011: 69 train plus 15 selection CFR windows,
+mock embeddings, \texttt{claim\_admissible=false}; AF-009 packed-CPU
+numerics are a separate host diagnostic). Final-test Tables~6/11/13 keep the
+1913-unit no-run denominator; unrun and unavailable are not measured zeros.
+Arm~E stays gated to later AF-013 canary, consumer-load and rollback receipts.
+Development, fixed-canary and constructed results must not be presented as
+untouched final-distribution performance.
+\paragraph{Unperformed human evaluation.}
+No independent human semantic-fidelity study, inter-annotator agreement study,
+or adjudication was performed for this manuscript. Their proposed protocols
+are retained as unexecuted work and supply no empirical score. The prepared
+100-unit candidate-blind sample across 20 groups remains blank; zero
+agreement is an inventory of missing records, not a reliability statistic.
+Any optional author comments, if supplied, are descriptive non-independent
+feedback with author provenance, remain outside gold and scored metrics, and
+are not required for manuscript or task completion. The manuscript's
+supported contribution is limited to the automated evidence actually
+reported; source-semantic fidelity and its transfer remain unmeasured.

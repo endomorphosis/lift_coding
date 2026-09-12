@@ -1,0 +1,106 @@
+{
+  "schema": "autoformalization-format-check/v1",
+  "task_id": "AF-024",
+  "checked_at": "2026-09-12T22:05:32.888739+00:00",
+  "ok": true,
+  "errors": [],
+  "pdf": {
+    "path": "papers/completion/autoformalization/submission/paper.pdf",
+    "bytes": 270925,
+    "sha256": "516f5bf2bc169bd7510b4421d1c6e5c02848a03e6df5b1170977e2a03558e147",
+    "max_bytes": 52428800,
+    "within_50mb": true,
+    "total_pages": 20,
+    "metadata": {
+      "Author": "Anonymous Author(s)",
+      "Title": "Compiler-Guided Autoformalization with Adaptive Multi-View Representations",
+      "Creator": "LaTeX with neurips2026vericode",
+      "Producer": "pdfTeX",
+      "Subject": "NeurIPS 2026 Workshop on AI for Verifiable Coding"
+    }
+  },
+  "page_accounting": {
+    "main_text_pages_excluding_refs_appendices": 9,
+    "min_main_text_pages": 4,
+    "max_main_text_pages": 9,
+    "bibliography_start_page": 10,
+    "appendix_start_page": 11,
+    "disclosure_start_page": 12,
+    "checklist_start_page": 14,
+    "total_pages": 20,
+    "style_generated_anonymous_block_exempted": true
+  },
+  "style": {
+    "package": "neurips_2026_vericode",
+    "options": [],
+    "anonymous_default": true,
+    "competition_or_generic_substitution": false,
+    "workshop_footer_present": true,
+    "review_line_numbers_present": true,
+    "official_anonymous_block_retained": true,
+    "per_paper_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "matches_official_style": true
+  },
+  "checklist": {
+    "questions": 16,
+    "answers": [
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "No",
+      "Yes",
+      "Yes",
+      "Yes",
+      "NA",
+      "Yes",
+      "Yes",
+      "NA",
+      "NA",
+      "Yes"
+    ],
+    "instruction_block_removed": true,
+    "todo_fields_present": false,
+    "guidelines_preserved": true
+  },
+  "disclosure_agrees_with_logs": {
+    "grok_46_development_call": true,
+    "minilm_revision": true,
+    "codex_fallback_not_invoked": true,
+    "plan_nomination_zero_calls": true,
+    "author_verification_not_claimed": true
+  },
+  "anonymity": {
+    "pdf_author": "Anonymous Author(s)",
+    "identifying_hits": [],
+    "operator_or_overleaf_in_pdf_bytes": false
+  },
+  "placeholders": {
+    "scientific_unresolved": [],
+    "official_affiliation_address_email_exempted": true
+  },
+  "latex": {
+    "undefined_references": [],
+    "missing_fonts": [],
+    "lineno_loaded": true
+  },
+  "shared_templates": {
+    "papers/neurips_2026_vericode_workshop.tex": {
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "matches_recorded": true,
+      "modified": false
+    },
+    "papers/neurips_2026_vericode.sty": {
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "matches_recorded": true,
+      "modified": false
+    },
+    "papers/checklist.tex": {
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "matches_recorded": true,
+      "modified": false
+    }
+  }
+}

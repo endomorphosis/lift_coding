@@ -1,0 +1,89 @@
+% AF-024 methodology disclosure. Facts are taken from frozen logs; model
+% versions are not invented. Writing-only assistance is recorded here and is
+% not experimental evidence.
+\section{Language-model, teacher-model, and asset disclosure}
+\label{app:llm}
+
+This appendix records methodology-essential model, teacher, and asset uses that
+were actually logged. It does not invent a version, a prompt, or an author
+review. Writing, editing, and formatting assistance is disclosed for
+completeness; under the workshop checklist it does not by itself require a
+core-method declaration.
+
+\subsection{Direct model-to-target (Arm~A development)}
+\label{app:llm-grok}
+One development qualification call used the configured scientific gateway to
+\texttt{https://api.x.ai/v1/chat/completions}. The requested and served model
+was \texttt{grok-4.6} (system fingerprint \texttt{fp\_e41c6060b2628547}) on
+2026-09-12, started 06:10:58 UTC and finished 06:11:09 UTC. The constructed
+source was a guarded-write sentence
+(\texttt{AF027-DEV-Q1-protected-write}); the prompt digest is
+\texttt{sha256:1d9b23b293a4d99932c23291242f90d2dad9d573c0c13e950beb3d7f2091fec8}
+and the completion digest is
+\texttt{sha256:fb52b06935c4a867a2c17dc3e3784f417f49b2927ee47d99dcf5446964ab9ed8}.
+Usage was 821 prompt tokens and 54 completion tokens. A Codex
+\texttt{gpt-5.6-terra} (reasoning effort high) fallback was configured and was
+not invoked. The receipt sets \texttt{claim\_admissible=false}; the call does
+not fill Table~\ref{tab:pipeline-results}.
+
+\subsection{Embedding teacher and grouping encoder}
+\label{app:llm-minilm}
+The lexical/paraphrase grouping encoder and later packed-CPU teacher targets
+used \texttt{sentence-transformers/all-MiniLM-L6-v2} at revision
+\texttt{1110a243fdf4706b3f48f1d95db1a4f5529b4d41}, loaded locally
+(\texttt{local\_files\_only=true}, \texttt{trust\_remote\_code=false}) with
+attention-mask mean pooling and L2 normalization. The weight file
+\texttt{model.safetensors} is 90{,}868{,}376 bytes with SHA-256
+\texttt{53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db}.
+T0/T1 teacher diagnostics on the sealed path used
+\texttt{mock:stable-sha256} embeddings, which are not a language model.
+Packed-CPU MiniLM updates on train/selection remain
+\texttt{claim\_admissible=false} and do not fill
+Table~\ref{tab:training-results} held-out cells.
+
+\subsection{Unavailable or unused model routes}
+\label{app:llm-unavailable}
+LLM plan nomination executed zero model calls. Leanstral proposal generation
+was not run; its weights (67{,}135{,}119{,}264 bytes) exceed the 16\,GiB
+envelope. Hammer/Leanstral native reconstruction is unavailable on the sealed
+\texttt{PATH}. Compiler-repair (AF-014) recorded
+\texttt{provider\_calls=0}. No model version is inferred for those unrun
+routes.
+
+\subsection{Manuscript writing assistance}
+\label{app:llm-writing}
+The recovered source PDF stated that language-model assistance was used to
+research and draft the manuscript and reference-example code, and that author
+verification had not occurred. This AF-024 formatting pass used an
+implementation agent to apply the official template, complete the
+questionnaire from logs, and compile the anonymous PDF. That writing and
+formatting use is not a core experimental method, is not a substitute for
+author verification, and is not reported as a measured result.
+
+\subsection{Broader impacts}
+\label{app:impacts}
+A verified mapping from policy or code into a checked artifact can help
+reviewers notice missing approvals, missing audits, or inconsistent premises
+before deployment. The same machinery can be misused: an incorrect
+formalization of a legal or security obligation can be treated as authority;
+monitoring queries can be aimed at people rather than at declared system
+behavior; and a solver success can be presented as source-faithful proof.
+Mitigations retained here are abstention on unsupported fragments, withholding
+holdout source bodies, refusing \texttt{sorry}/\texttt{admit} before any
+kernel claim, and keeping teacher, reconstruction, and prover success distinct
+from independent source fidelity, which remains unmeasured.
+
+\subsection{Existing and new assets}
+\label{app:assets}
+The legal/policy cohort is the upstream
+\texttt{justicedao/patent-legal-corpus} revision
+\texttt{86c77cb650d30ee366983d1b2e25cd85e8c22e34}. Upstream record metadata
+declares reviewed public-domain U.S.\ government works and the dataset card
+declares CC0-1.0; those are preserved declarations, not a new legal
+determination by this manuscript. Coding/implementation shard rows include 72
+upstream \texttt{allow} and 4024 \texttt{needs\_review} license-risk labels
+and are not admitted as natural evaluation data. MiniLM is the public
+sentence-transformers checkpoint named above. New anonymous assets in this
+submission are the supplement ZIP (table regenerators, frozen retained-claim
+inputs, S01--S40 hashes) plus hash-bound references for native packed-CPU
+states that are not shipped. No author-hosted URL is published here.
