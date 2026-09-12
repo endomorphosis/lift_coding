@@ -1,0 +1,6 @@
+NS-023 formal-argument audit: OK
+statements=5; assumptions=19; machine_checked=false; full_loop_executed=false
+external_side_effect_atomicity=not_inferred; universal_dependency_closure=not_inferred
+unknown_incomplete_undischarged=true; ns011_cold_oracle=absent
+provers={"coqc": null, "cvc5": null, "lean": null, "souffle": null, "z3": null}
+manuscript_not_edited=NS-022
