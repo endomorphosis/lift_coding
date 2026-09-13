@@ -1,0 +1,73 @@
+{
+  "actual_native_control_execution": {
+    "actual_native_packing_calls": true,
+    "candidate_context_sha256": "5724b1e870b28875a073cd84e836af9312ff9b4d5a742271486ae64ff32a9168",
+    "constructed_control_inputs": true,
+    "cpu_seconds": 0.004866559999999964,
+    "errors": 0,
+    "failures": 0,
+    "native_module_origin": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+    "native_source_pins": {
+      "external/ipfs_accelerate": "d64365639afd1572aa99015abe2bfa2bbfe3d6e2",
+      "external/ipfs_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "oracle_read": false,
+    "original_context_sha256": "0f37c570bccb4232e96d62edcad6388bc65e8ace1159ad2576812ddc348e6857",
+    "peak_rss_kib": 61648,
+    "provider_calls": 0,
+    "schema": "ns-native-raw-caveat-union-qualification/v1",
+    "scientific_calls": 0,
+    "scorer_calls": 0,
+    "success": true,
+    "target_source_executed": false,
+    "tests_run": 10,
+    "wall_seconds": 0.004896146012470126
+  },
+  "bindings": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/control_child.py": "d9a3ed6ed205b51d141572a511c701d4d6b78364f0ec502956d3089638e09761",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/package.private.json": "de27a5200d1a4419e298dc563960e9ad4b2903a5608de19291b785ae7b0077c7",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/qualification_runs/native-controls-v3/boundary.json": "5e538e38a5c6aab0fe26e23b57d54e7d45bbd904ff0ad80a6fdb784be8503858",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/qualification_runs/native-controls-v3/cleanup.json": "12700709c519393a3b8f4b2ddee20d89032b3e8354ef0e29186bd9b265c6b926",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/qualification_runs/native-controls-v3/output/context_execution.log": "54b2ec28ed6015b3762b115f34c82bf1244e49e09fd1942ffa52335f137c53e6",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/qualification_runs/native-controls-v3/output/result.json": "187cf55461e07df2f925b7dff9985acd9e3b2f2e314dea11d6598c91386ddc2f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/qualification_runs/native-controls-v3/qualification.private.json": "9abdec8c383514ac362a1e520ab661241e9b5854bbdecd0ef405c355e55c15bb",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/source.patch": "27a58235bae3a0c83960a1aea97c730f934a40c06fae75615707128d7a197642"
+  },
+  "boundary": {
+    "cpu_nanocpus": 1000000000,
+    "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+    "memory_bytes": 2147483648,
+    "memory_swap_bytes": 2147483648,
+    "native_source_mount": {
+      "Destination": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate",
+      "Mode": "",
+      "Propagation": "rprivate",
+      "RW": false,
+      "Source": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_caveat_union_recovery_v1/candidate",
+      "Type": "bind"
+    },
+    "network": "none",
+    "pids": 32,
+    "read_only_root": true
+  },
+  "container_execution": {
+    "automatic_retry": false,
+    "cleanup_exit_code": 0,
+    "exit_code": 0,
+    "log_sha256": "54b2ec28ed6015b3762b115f34c82bf1244e49e09fd1942ffa52335f137c53e6",
+    "native_state_mutations": 0,
+    "pending": null,
+    "plan_sha256": "837d2018437835d334fbecadca0a6ad9a2a239916c400adb162978591d7da6dd",
+    "provider_calls": 0,
+    "receipt_sha256": "187cf55461e07df2f925b7dff9985acd9e3b2f2e314dea11d6598c91386ddc2f",
+    "schema": "ns028-native-harness-container-qualification/v1",
+    "scorer_calls": 0,
+    "script_sha256": "d9a3ed6ed205b51d141572a511c701d4d6b78364f0ec502956d3089638e09761",
+    "source_sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+    "success": true,
+    "wall_seconds": 1.1240919949486852
+  },
+  "schema": "ns-native-raw-caveat-union-execution/v1",
+  "scope": "Actual native API calls use constructed public metadata only. All10 controls passed; no final source preparation, model/scorer/baseline execution or scientific admission. Prior failed preparation/control histories are retained by the bound package. Native d643 base plus exact qualified single-line source5724 overlay at execution; prospective one-file native commit60baee adopts those bytes."
+}

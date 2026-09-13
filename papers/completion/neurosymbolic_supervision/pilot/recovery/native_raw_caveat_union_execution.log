@@ -1,0 +1,16 @@
+test_distinct_raw_caveats_projection_and_cid_unchanged (__main__.Controls.test_distinct_raw_caveats_projection_and_cid_unchanged) ... ok
+test_duplicate_caller_assumptions_still_rejected (__main__.Controls.test_duplicate_caller_assumptions_still_rejected) ... ok
+test_exact_and_conservative_projection_unchanged (__main__.Controls.test_exact_and_conservative_projection_unchanged) ... ok
+test_explicit_assumption_collision_retained_once (__main__.Controls.test_explicit_assumption_collision_retained_once) ... ok
+test_malformed_caller_assumption_still_rejected (__main__.Controls.test_malformed_caller_assumption_still_rejected) ... ok
+test_multicapsule_order_stable (__main__.Controls.test_multicapsule_order_stable) ... ok
+test_native_admission_duplicate_caveats_still_rejected (__main__.Controls.test_native_admission_duplicate_caveats_still_rejected) ... ok
+test_original_multicapsule_reproduces_duplicate_failure (__main__.Controls.test_original_multicapsule_reproduces_duplicate_failure) ... ok
+test_shared_caveats_union_preserves_raw_references_and_admissions (__main__.Controls.test_shared_caveats_union_preserves_raw_references_and_admissions) ... ok
+test_single_raw_cid_and_complete_projection_unchanged (__main__.Controls.test_single_raw_cid_and_complete_projection_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.005s
+
+OK
+{"schema": "ns-native-raw-caveat-union-qualification/v1", "success": true, "tests_run": 10, "failures": 0, "errors": 0, "native_source_pins": {"external/ipfs_accelerate": "d64365639afd1572aa99015abe2bfa2bbfe3d6e2", "external/ipfs_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366", "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"}, "candidate_context_sha256": "5724b1e870b28875a073cd84e836af9312ff9b4d5a742271486ae64ff32a9168", "original_context_sha256": "0f37c570bccb4232e96d62edcad6388bc65e8ace1159ad2576812ddc348e6857", "native_module_origin": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py", "wall_seconds": 0.004896146012470126, "cpu_seconds": 0.004866559999999964, "peak_rss_kib": 61648, "constructed_control_inputs": true, "actual_native_packing_calls": true, "target_source_executed": false, "oracle_read": false, "provider_calls": 0, "scorer_calls": 0, "scientific_calls": 0}
