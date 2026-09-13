@@ -33,7 +33,13 @@
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/ablations.tex": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/figures/family_useful.pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/figures/family_useful.svg": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/render_ascii_figure.py": "5ee285b83cb06dda16be7855dee692c956dcc7ae66f563b81ce42847338ddd1e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_tool_call.json": "bc978cf95e9f72cd9f74fc9b4d537194a09f7a2fec472f09e6493bee9d87b28e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_tool_result.json": "b3c2b136fb23571e393d8fb419e86c2b9d5c8cdc9d29611d3ee3608461faaf37",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_stdout.log": "d93d6e52e38913fc0b454c96157edd7ae3b9b144d9023d3444e6cb95b9fc4bf1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/provenance.json": "0541d23ae22eb8914096f6411eba2611f0e43f08604f295637b73e92d92747a5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/README.md": "0d822f1408ed778f4318b2e2dff97cc8f7320f4b0c84bfba36f6980199797bdf"
   },
   "outputs": {
     "papers/completion/neurosymbolic_supervision/analysis/analyze.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/analyze.py",
@@ -49,13 +55,16 @@
     {
       "criterion": "One documented analysis command regenerates main and ablation tables from immutable raw records.",
       "status": "met",
-      "explanation": "The current-source analyzer (SHA256 16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251) ran once against the immutable NS-017 main manifest 0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac and the NS-018 withdrawn-ablation manifest 15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0. It wrote the seven rendered outputs: results.json, statistical_report.md, cost_report.md, table17.tex, ablations.tex, and the family_useful PDF/SVG figures. The command read retained signed objects and empty ablation JSONL files; it issued no grants, provider posts, or scorer calls (new_scientific_calls=0). Ordinary validation recomputed output hashes and confirmed Table 17 and the explicit out-of-scope ablation table were generated solely from those bytes.",
+      "explanation": "The current-source analyzer (SHA256 16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251) ran once against the immutable NS-017 main manifest 0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac and the NS-018 withdrawn-ablation manifest 15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0. The analyzer initially wrote seven rendered outputs: results.json, statistical_report.md, cost_report.md, table17.tex, ablations.tex, and the family_useful PDF/SVG figures. The committed PDF is a later, separate handwritten ASCII rendering of the same16 A/B useful_mean values in eight-family order; all six non-PDF outputs, including the SVG, retain their analyzer provenance. Its exact original shell tool call, successful result, stdout and stdin source are retained under ascii_derivative_provenance_v1. This derivative has distinct geometry/font encoding; no Matplotlib byte identity or unrecorded OS clock/argv is claimed. The command read retained signed objects and empty ablation JSONL files; it issued no grants, provider posts, or scorer calls (new_scientific_calls=0). Ordinary validation recomputed output hashes and confirmed Table 17 and the explicit out-of-scope ablation table were generated solely from those bytes.",
       "evidence": [
         "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/analyze.py",
         "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/analyze.log",
         "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex",
         "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/ablations.tex",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log"
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/provenance.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/render_ascii_figure.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_tool_result.json"
       ]
     },
     {
@@ -159,7 +168,7 @@
     "C/D routing, warm caches, reuse, publication-comparison efficacy, and human semantic fidelity remain withdrawn or unmeasured.",
     "Unknown provider charges, missing scorer clocks, and missing operator phases stay unavailable rather than zero. Nested clocks are not summed as elapsed.",
     "Two exactly duplicated identical retained-label records are accepted; a conflicting repeated label still fails. Original signed results, manifests, reducers, and scoring policy were not altered.",
-    "The NS-020 renderer pin is intentionally unchanged. Cross-version PDF/SVG byte identity is not claimed. The sealed matplotlib run emitted the documented optional Axes3D import warning and a Fontconfig default-config error while writing the SVG. The committed PDF is the same eight-family descriptive A/B figure encoded as ASCII PDF so the ordinary unified diff does not require a binary patch.",
+    "The NS-020 renderer pin is intentionally unchanged. Cross-version PDF/SVG byte identity is not claimed. The sealed matplotlib run emitted the documented optional Axes3D import warning and a Fontconfig default-config error while writing the SVG. The committed PDF is the same eight-family descriptive A/B figure encoded as ASCII PDF so the ordinary unified diff does not require a binary patch. This ASCII PDF is a separate derivative with distinct geometry and an unembedded Helvetica Type1 font; exact actual source/tool provenance is retained under ascii_derivative_provenance_v1. The original13:06 verifier entry predates the later PDF_SHA source revision and does not attest to that revision. Its original logs, command entries and completion timestamp are preserved as historical records; no derivative start/end/duration or OS argv was recorded.",
     "Outside human review is not required; this receipt is provenance validation, not independent scientific peer review or authorization to submit."
   ]
 }

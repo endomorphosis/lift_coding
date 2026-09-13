@@ -1,0 +1,83 @@
+{
+  "committed_derivative": {
+    "bytes": 5019,
+    "commit": "6156cfcf409d1a40e1ce67c33fafbe58ea972e8d",
+    "path": "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.pdf",
+    "repository": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+    "sha256": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5"
+  },
+  "derivation_scope": "Handwritten PDF drawing source reads the 16 existing group useful_mean values in the eight retained family order. It writes a distinct ASCII PDF preserving those data coordinates/labels. It does not call the analyzer, recompute statistics, invoke a provider or scorer, or alter original signed evidence. It is not geometrically/font/byte identical to Matplotlib output.",
+  "figure_font": "Helvetica Type1, unembedded. This historical NS019 task figure is separate from the root-approved NS022 font42 layout figure.",
+  "input_results": {
+    "bytes": 467975,
+    "commit": "6156cfcf409d1a40e1ce67c33fafbe58ea972e8d",
+    "path": "papers/completion/neurosymbolic_supervision/analysis/results.json",
+    "repository": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+    "sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e"
+  },
+  "origin": "Recovered verbatim from an actual ordinary-worker shell tool invocation; the Python file is a separately extracted copy of the original stdin source, not a file claimed to have existed at execution time.",
+  "original_event_commitments": {
+    "call_line": 4295,
+    "call_line_sha256": "e3437bf3acad20854d824bb5852e55ebb4e04dae3ede829a2072b13f7df1059c",
+    "completed_line": 4299,
+    "completed_line_sha256": "92d8cac107cfb3059da861ed07b48d0af08174dabfdef4cfb222bf6af818b868",
+    "line_convention": "1-based JSONL; line hashes exclude terminating newline",
+    "scope": "Only these two public figure-source/tool events are copied; no full worker log, environment, credential, hidden/scorer record or candidate payload is copied.",
+    "worker_log_bytes": 4582256,
+    "worker_log_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/c771fd15b40fe7d760b33e32/implementation-logs/ns-019-attempt-1.log",
+    "worker_log_sha256": "8b24c893d38a66e46acdea0cfe57ac57841f8cdb7aa44c56e562f4669cfc385d"
+  },
+  "original_matplotlib_PDF": {
+    "bytes": 16554,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/actual_NS019_render_v1/manuscript/generated/figures/family_useful.pdf",
+    "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06"
+  },
+  "original_stdout": {
+    "bytes": 347,
+    "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_stdout.log",
+    "sha256": "d93d6e52e38913fc0b454c96157edd7ae3b9b144d9023d3444e6cb95b9fc4bf1"
+  },
+  "original_tool_call": {
+    "bytes": 5904,
+    "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_tool_call.json",
+    "sha256": "bc978cf95e9f72cd9f74fc9b4d537194a09f7a2fec472f09e6493bee9d87b28e"
+  },
+  "original_tool_result": {
+    "bytes": 8444,
+    "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/original_tool_result.json",
+    "sha256": "b3c2b136fb23571e393d8fb419e86c2b9d5c8cdc9d29611d3ee3608461faaf37"
+  },
+  "prepared_at_utc": "2026-09-13T13:34:15.175290+00:00",
+  "recorded_invocation": {
+    "OS_argv": null,
+    "command_location": "original_tool_call.json:rawInput.command; exact shell command, not reconstructed OS argv",
+    "current_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-019-f50c057391b3-attempt-1-1789304160",
+    "elapsed_seconds": null,
+    "exit_code": 0,
+    "finished_at": null,
+    "recorded_stdout_bytes": 347,
+    "signal": null,
+    "started_at": null,
+    "timed_out": false,
+    "tool_call_id": "call-6d30a257-be91-4b53-972d-14b0d9be0a97-80",
+    "tool_name": "run_terminal_command",
+    "truncated": false,
+    "unavailable_reason": "The original retained tool event does not record OS argv or per-command start/end/duration. No clock is inferred from file mtime, event order, receipt completion time, or preparation time."
+  },
+  "retained_original_SVG": {
+    "bytes": 42894,
+    "commit": "6156cfcf409d1a40e1ce67c33fafbe58ea972e8d",
+    "path": "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.svg",
+    "repository": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+    "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+  },
+  "schema": "ns019-ascii-figure-derivative-provenance/v1",
+  "source": {
+    "bytes": 5275,
+    "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/ascii_derivative_provenance_v1/render_ascii_figure.py",
+    "sha256": "5ee285b83cb06dda16be7855dee692c956dcc7ae66f563b81ce42847338ddd1e"
+  },
+  "task_id": "NS-019",
+  "validation_history": "The13:03 analyzer and13:06 verifier commands/logs remain original historical entries. The ASCII derivative was generated later in the retained worker event order; the adoption verifier PDF_SHA was then rebound in source edits at original log lines4466/4519. The prior13:06 command/log is not a claimed validation of that later source revision. No validation is re-executed or backdated here.",
+  "verification_scope": "Independent read-only review checked all16 data positions and eight labels against committed results. No claim of identical full geometry or font embedding; no derivative source execution."
+}

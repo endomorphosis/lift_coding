@@ -1,0 +1,5 @@
+This directory retains an actual ordinary-worker ASCII figure conversion. `original_tool_call.json` and `original_tool_result.json` are exact two-event extracts. `render_ascii_figure.py` is the exact stdin Python text from that call, saved after the fact for provenance; it was not the original command-line file. `original_stdout.log` is the347 original output bytes. No invocation was repeated during recovery.
+
+The call read existing NS019 results and wrote the5019-byte PDF8ea081bc. Matplotlib had earlier emitted the16554-byte PDF001ddc34 and unchanged SVGe1503343. The ASCII drawing preserves the16 A/B values and eight labels but has distinct geometry and an unembedded Helvetica Type1 font. It remains the historical NS019 output; the final NS022 manuscript uses a separate font42 layout figure.
+
+The retained events record the exact shell command, working directory and successful exit. OS argv and start/end/duration are absent and remain unavailable. Existing analyzer/verifier command entries and logs are historical and unchanged; the13:06 verifier log does not attest to the later PDF-hash source revision. See provenance.json for exact bindings.
