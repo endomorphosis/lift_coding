@@ -1,0 +1,46 @@
+{
+  "actual_scope": "Read all24 prepared source carriers, strictly decode two PDFs in memory, verify stored and original exact hashes. No file materialization or compilation branch executed.",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_worker_adoption_preparation_v1/payload/build_from_snapshot.py",
+    "--manifest-sha256",
+    "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973",
+    "--verify-only"
+  ],
+  "elapsed_host_wall_seconds": 0.06444166507571936,
+  "exit_code": 0,
+  "finished_at": "2026-09-13T13:54:22.137825+00:00",
+  "helper_compile_path_not_executed": true,
+  "manifest": {
+    "bytes": 9232,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_worker_adoption_preparation_v1/payload/source_manifest.json",
+    "sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973"
+  },
+  "native_scientific_provider_scorer_or_reproduction_calls": 0,
+  "result": {
+    "compiler_calls": 0,
+    "decoded_original_source_bytes": 166920,
+    "files_written": 0,
+    "manifest_sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973",
+    "source_files": 24,
+    "verified": true
+  },
+  "schema": "ns024-source-handoff-verification/v1",
+  "source": {
+    "bytes": 7867,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_worker_adoption_preparation_v1/payload/build_from_snapshot.py",
+    "sha256": "03fd2813eda5350be5c54b8db1f67aac096caf070da2f481bdb650f68e71dae7"
+  },
+  "started_at": "2026-09-13T13:54:22.073396+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_worker_adoption_preparation_v1/verification.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 208,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_worker_adoption_preparation_v1/verification.stdout.log",
+    "sha256": "cd12b802dc351b5cfd93b09d743c5c95b7833b7a373af4eadf9612a6d3294cae"
+  }
+}

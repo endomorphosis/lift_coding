@@ -1,0 +1,31 @@
+{
+  "NS011_false_reuse": {
+    "all_attempts": 26,
+    "observed": 1,
+    "selected_25_not_substituted": true
+  },
+  "NS012_recovery_records": 3,
+  "NS027": {
+    "case_attempts": 48,
+    "completed_rows": 47,
+    "full_public_baselines": 2,
+    "invocations": 4,
+    "reuse_credit": false,
+    "tests_per_baseline": 34
+  },
+  "final_outcome_rows": 0,
+  "historical_rows": {
+    "NS-007": 26,
+    "NS-008": 20,
+    "NS-009": 32,
+    "NS-011": 26,
+    "NS-012": 27
+  },
+  "native_qualification_reexecuted": false,
+  "original_claims": 32,
+  "provider_calls": 0,
+  "schema": "ns020-public-boundary-count-replay/v1",
+  "scorer_calls": 0,
+  "signature_authentication_of_derivatives": false,
+  "table_rows": 6
+}

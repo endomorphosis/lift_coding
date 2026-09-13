@@ -1,0 +1,127 @@
+{
+  "schema": "ns024-workshop-compliance/v1",
+  "task_id": "NS-024",
+  "publication_authorized": false,
+  "live_cfp_verification": "subject_to_final_live_cfp_verification",
+  "paper_pdf": {
+    "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+    "bytes": 252576,
+    "pages": 20,
+    "main_pages_excluding_references_and_appendices": 6,
+    "below_50_mb": true,
+    "author": "Anonymous Authors",
+    "workshop_footer": "Submitted to NeurIPS 2026 Workshop on AI for Verifiable Coding. Do not distribute.",
+    "review_line_numbers": true,
+    "type3_fonts": false,
+    "embedded_type1_or_cid_truetype": true
+  },
+  "supplement_zip": {
+    "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07",
+    "bytes": 2280657,
+    "zip_entries": 468,
+    "below_100_mb": true,
+    "unpooled_components": ["final32", "prior", "boundary"]
+  },
+  "style": {
+    "file": "papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty",
+    "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "matches_shared_research_style": true,
+    "usepackage_options": [],
+    "anonymous_default": true,
+    "substitutions_absent": [
+      "competition",
+      "sglblindworkshop",
+      "final",
+      "preprint",
+      "nonanonymous",
+      "generic neurips_2026.sty"
+    ]
+  },
+  "checklist": {
+    "file": "papers/completion/neurosymbolic_supervision/manuscript/checklist.tex",
+    "sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1",
+    "official_questions": 16,
+    "instruction_block_removed": true,
+    "guidelines_preserved": true,
+    "answerTODO_fields": 0,
+    "justificationTODO_fields": 0,
+    "answers": [
+      "Yes",
+      "Yes",
+      "No",
+      "No",
+      "No",
+      "Yes",
+      "Yes",
+      "No",
+      "N/A",
+      "Yes",
+      "N/A",
+      "No",
+      "Yes",
+      "N/A",
+      "N/A",
+      "Yes"
+    ]
+  },
+  "placeholders": {
+    "compilation_placeholder_gone": true,
+    "five_disclosure_placeholders_gone": true,
+    "scientific_tbd_or_todo_in_pdf": false,
+    "official_style_generated_anonymous_text_exempt": [
+      "Anonymous Author(s)",
+      "Affiliation",
+      "Address",
+      "email"
+    ],
+    "style_answerTODO_macros_are_unused_definitions": true
+  },
+  "shared_templates_unmodified": true,
+  "criteria": [
+    {
+      "id": 1,
+      "status": "met_with_explicit_limits",
+      "summary": "Anonymous numerical reproduction regenerates retained tables from the frozen ZIP; original-signature verification, hidden rescoring, and model replay remain unavailable."
+    },
+    {
+      "id": 2,
+      "status": "met",
+      "summary": "Official 16 questions are answered; compilation placeholder and five §K.1 disclosure placeholders are absent from source and PDF."
+    },
+    {
+      "id": 3,
+      "status": "met_with_residual_correlation_limit",
+      "summary": "PDF metadata, author block, bibliography, URLs, and logs pass the documented scan; supplement retains anonymized lift_coding path tokens as residual correlation strings."
+    },
+    {
+      "id": 4,
+      "status": "met",
+      "summary": "Grok 4.6 one-POST scientific use is described with actual settings; unresolved author attestations are listed rather than invented."
+    },
+    {
+      "id": 5,
+      "status": "met_subject_to_live_cfp",
+      "summary": "Main text 6 pages, PDF 252576 bytes, ZIP 2280657 bytes."
+    },
+    {
+      "id": 6,
+      "status": "met",
+      "summary": "Local research style loaded unchanged with no options; competition/generic substitutions absent."
+    },
+    {
+      "id": 7,
+      "status": "met",
+      "summary": "Per-paper checklist has 16 official questions, preserved guidelines, Yes/No/N/A answers, 1-2 sentence justifications, instruction block removed."
+    },
+    {
+      "id": 8,
+      "status": "met",
+      "summary": "Shared template checksums match NS-001; official Affiliation/Address/email strings retained."
+    },
+    {
+      "id": 9,
+      "status": "met",
+      "summary": "Workshop footer and line numbers retained; placeholder scan exempts style-generated anonymous text only."
+    }
+  ]
+}

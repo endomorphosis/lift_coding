@@ -1,0 +1,100 @@
+{
+  "accepted_outputs": {
+    "papers/completion/neurosymbolic_supervision/audit/anonymity_report.md": {
+      "bytes": 3785,
+      "sha256": "bd73a72523cef179d433c9cc61e083bf71da2cf6a1d3099d926214370cf361ff"
+    },
+    "papers/completion/neurosymbolic_supervision/audit/author_attestations.md": {
+      "bytes": 2424,
+      "sha256": "4d493a06168e8963d3edab24095e7e5b9137e4aff46dd6816280299cbfb8c846"
+    },
+    "papers/completion/neurosymbolic_supervision/audit/llm_use_disclosure.md": {
+      "bytes": 2659,
+      "sha256": "bc9d7be31f87c40c82bfd1096d8843ce80a1ce3dd373091970518c975f3cdcbc"
+    },
+    "papers/completion/neurosymbolic_supervision/audit/workshop_compliance.json": {
+      "bytes": 4157,
+      "sha256": "d188fff63c53816efc334b222d1fda3106a7eecfedde6a8b0fa409d59d31be7b"
+    },
+    "papers/completion/neurosymbolic_supervision/manuscript/checklist.tex": {
+      "bytes": 28079,
+      "sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1"
+    },
+    "papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "papers/completion/neurosymbolic_supervision/release/README.md": {
+      "bytes": 4113,
+      "sha256": "b0f1c14dff71ab06858412dcb68ea781c5c89a094e47c2ca0752ffca9757a452"
+    },
+    "papers/completion/neurosymbolic_supervision/release/manifest.json": {
+      "bytes": 5830,
+      "sha256": "cd673ac98f1a058caf934174a93364e8199a438306ec38217bae0f6f885116c2"
+    },
+    "papers/completion/neurosymbolic_supervision/release/paper.pdf": {
+      "bytes": 252576,
+      "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862"
+    },
+    "papers/completion/neurosymbolic_supervision/release/reproduce.sh": {
+      "bytes": 1549,
+      "sha256": "0ea4f3a6874008f10de37e63d3bbfa87351c653bea5036bb20dfb1ee8a0a58c9"
+    },
+    "papers/completion/neurosymbolic_supervision/release/supplement.zip": {
+      "bytes": 2280657,
+      "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+    },
+    "papers/completion/neurosymbolic_supervision/submission/template_inputs.json": {
+      "bytes": 2755,
+      "sha256": "ce314d14308c9b043c83bb5d3ace91d0b9a35c0e17d56ba0b7eed677f5eab1cb"
+    }
+  },
+  "all_passed": true,
+  "checklist_answers": [
+    "Yes",
+    "Yes",
+    "No",
+    "No",
+    "No",
+    "Yes",
+    "Yes",
+    "No",
+    "N/A",
+    "Yes",
+    "N/A",
+    "No",
+    "Yes",
+    "N/A",
+    "N/A",
+    "Yes"
+  ],
+  "failures": [],
+  "new_scientific_calls": 0,
+  "pdf": {
+    "author": "Anonymous Authors",
+    "bytes": 252576,
+    "pages": 20,
+    "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+    "type3": false
+  },
+  "protected": {
+    "ns019_family_useful_pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "ns022_main_tex": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+    "ns022_paper_pdf": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+  },
+  "schema": "ns024-release-verification/v1",
+  "source_verify": {
+    "compiler_calls": 0,
+    "decoded_original_source_bytes": 166920,
+    "files_written": 0,
+    "manifest_sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973",
+    "source_files": 24,
+    "verified": true
+  },
+  "supplement": {
+    "bytes": 2280657,
+    "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07",
+    "zip_entries": 468
+  },
+  "task_id": "NS-024"
+}
