@@ -1,0 +1,32 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "86fe1291c34cca6c13e20aa4eb51cbe9e4a2e99bea296bc0d859ffbe75d5b948",
+    "amendment_sha256": "ab45a7b7048e194eb84eb299bd91553e931e604933dfe306fa5d507617e2bc25",
+    "batch_sha256": "7f15268d26c338b1c46722db9eb1988545dfc41b08605e945673b8b50d297866",
+    "candidate_binding_sha256": "f59806495ae25b769fdf834d58fa0fefdabcd4ada72ee5f3f869f19a0cfc3f82",
+    "candidate_sha256": "48894a54e9c012cc0a4c95b13f382bacaae74350698c60ffb5ea8a0218eaabd7",
+    "cell_id": "461cea9a66f7f755eaa6411f7fb2d4ba4252d5faa68b5148dad4914b86ac1810",
+    "grant_sha256": "2ed5e05d804ebc005190c4209fa92f91e3f490c5a616bc886bd31823e5c3f190",
+    "manifest_sha256": "5ca607ead84ec2adbf01a0c7282aa28f65bf2a34eac8edc3af1f0ff44b31b340",
+    "patch_sha256": "08c0908d7021e6fe382fdba16ba2211d9c842b83ca2bf96e58baf4ed3bf7547b",
+    "profile_sha256": "fde8da30eca8a45be1f3de6504881663a0af6b1d00f5dd886a36f26d2f54b378",
+    "proposal_receipt_sha256": "96618f72a4817cf8821360d4aa72ea4643a2e34eee95bd32bbb81d8a8308a5bd",
+    "provider_result_sha256": "afe82b2561eb36ad83b682aa0b513f340943a82529e4312878262c6bb9ef0cae",
+    "record_kind": "pilot",
+    "request_sha256": "ce63560db4d20d4844602b503d0b9767622f304160c96bcc82710f63a4ee8264",
+    "reservation_sha256": "63e5d564a12ace310f2d37598aca0ccb33de0112f9408da79c1144fb3594b4d8",
+    "scorer_profile_sha256": "217f962d244b52c2b0287b835b46a13c1102464283e30e950d16e518864f8298",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "88ce67c870a32eafd27c56f48da1141765aaedd1ac811b9ab8e61fdbc86ca351"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read the exact613-byte patch08c0908d against the bound public preimage and sealed idna/core.py. It only catches UnicodeDecodeError from ASCII validation of a nonempty Punycode payload and raises the library IDNAError, then preserves the trailing-hyphen check using a byte slice. It adds no imports, process/network/file/environment effects, test changes, scorer access or acceptance bypass. All other candidate files/types/modes are constrained by the existing exact binding. I approve this specific candidate for the isolated cold scorer; functional correctness remains determined by that actual independent score. This is AI source review, not human semantic annotation or a general adversarial integrity qualification.",
+  "reviewed_at": "2026-09-12T16:28:41.012789+00:00",
+  "reviewer": "root",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-candidate-review/v1",
+  "trust_scope": "specific_reviewed_pilot_candidate_only"
+}

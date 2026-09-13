@@ -1,0 +1,322 @@
+{
+  "accepted_for_prospective_public_baseline_compatibility": true,
+  "all8_newly_executed_under_exact128_recipe": false,
+  "all9_new_containers_cleanup_absence_proven": true,
+  "audit_source": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/audit_final128_join.py",
+    "sha256": "c4e47e9b3a444a0c7aa50eec5a70548c953febe76187021bfd3c92b033b3c464"
+  },
+  "bindings": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/registry.private.json": "50aca5a43ba8255f29e212c2e9aa0047ad7512a19e6b143dfc53170dc197e563",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/adapter.py": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_pilot_gateway_review/candidate/pilot_service/adapter.py": "06438bf7775a87739e4db14558328d82e85a8000b81f52d1a1945c31f4f9b298",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_pilot_gateway_review/public_baseline_child.py": "0891745c4682b408829060d306a8fa80dd3f1a65ea9a257f00ca2546fc745892",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_pilot_gateway_review/qualify_public_baselines.py": "fa0ba0d7ba41f2722ba8dd9279d08068e26697c76205a275785ab0e128865753",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-09-tomlkit/collect.observation.json": "5981c1d172edd419c765ecb7a470a9dd3559f29d79711cccf94654f779097d35",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-09-tomlkit/report.json": "88a8872b70cfe1405c4912b018577ae51ff8bcc7fd75b480d5759fa2297c061b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-09-tomlkit/run.observation.json": "78c4dcf9bf7ae3f476f61e32d6d73d944c1b1d0092f5de3679efc32c4403b8e5",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-10-installer/collect.observation.json": "1159b3f4a04ac2f0f908f41327fca70406c9fcbb7486cbfd7df8ee56a33057b9",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-10-installer/report.json": "c7d6746218b92f4f9dbea2c798694391133270db2c293063eebd442c0fcde27c",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-10-installer/run.observation.json": "3289a9a5444d13f021aa35fbcffb003517da66ed295a4f56a7d636d0d1ca5e87",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-11-tornado/collect.observation.json": "e116019c6d4c3a1b4de27c9a303253ba67021bbdc84ce3a958600f2fda38871b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-11-tornado/report.json": "8d6de87b3a240a63f9c3db4b87a7403f3b84f92af8ca11081694c6055d4e3f3f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-11-tornado/run.observation.json": "a2bb4be86149fc2e8801cefca98b8fd5a85ccd71b5040d9a189d42d80b590e80",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-12-more-itertools/collect.observation.json": "73f33fb7577a7e78dda7b69a692491ee4d5892427f9b24f1bbd1111bfad7df39",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-12-more-itertools/report.json": "3adc49a98295b979805af1e24bfd5090145d0bb71f00532298cceca03598b54d",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-12-more-itertools/run.observation.json": "2bf34ced345b67c198abe597e3e47cdea5388ef08b1ea5ddf88ed961f11b83ed",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-13-charset_normalizer/collect.observation.json": "2709ace23a9193d512fceaa6209741929a4ecb2c44b0376ede477dd418d55d4f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-13-charset_normalizer/report.json": "cf099a01b5c8a5e69daa8d8fafd8fe771858d91d08b062e7c6c3a453b3437f0b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-13-charset_normalizer/run.observation.json": "e529f79cdcd5b9ea3174ea1ee053185aa6ed78539abcf34ff4b687d7f0ea24dd",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-14-iniconfig/collect.observation.json": "08b5bfddbda76734b03acc43e43ab8e0fb62ed6d9e10b26a5c9d4266e4818791",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-14-iniconfig/report.json": "23d24af1de3e3de0d093cfa0a8321f2cc47b4b557c61591ccbd1cdf3e7a7706d",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-14-iniconfig/run.observation.json": "1532b4fdab683f7e535d72a7c97edc040137b7d2f5f7db3006fd05d67e7d9abf",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-15-wheel/collect.observation.json": "3ee232a010bd8e0508b905da3fa438b291af2640b43cd60318230782287a57eb",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-15-wheel/report.json": "82c1daf8af5eff66d021c022c301a35ddebb6653c2c2ff03aa33a8b5db7e0db1",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-15-wheel/run.observation.json": "b4092db8c97c910a8bb3e7c07cf838a87e2d891534eeb274f24c2306c3571a06",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-16-jinja/collect.observation.json": "08a42848ba989dfc4ba75f931e048e6f52912ca5a762321cd6b2233bfed44d17",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-16-jinja/report.json": "eea58dc064ec3eb942015c54622186fa891c45e6fa8991b0718126686c9b7f45",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-16-jinja/run.observation.json": "60d4966e9285d14e34aa3b1c4368bdd750131157dae99ca7d74da4dd107ba0aa",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/audit_final128_join.py": "c4e47e9b3a444a0c7aa50eec5a70548c953febe76187021bfd3c92b033b3c464",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/independent_results_review.private.json": "2cbafd0565d09be04c2068aa16ebf473ce7b4738cda1b641b39841ec2812b2f2",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/public_baseline_child.py": "e2eb264810795abcf369552330e8e4027540c48e6d65db8ee4ce3cb262e1a554",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/run_public_baselines.py": "106c9ced70fda3f7de03fecb6bf9e90dffb8640c5344944b82ae6356eb1f26ce",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_result.private.json": "c8057b6c58ab9aa54f975352fe7d17c325a4881de4e16c80d0a7de51c46f299e",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/public_recipe.json": "d095daf5fbe1b0a8845a6a0dac9d176d88e64bb50e700cbbd37fb585d8f6ff54",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/report.json": "bee90800dd18f794b08248ad8b588339d46c8fd33aa1e82b14153e23d1764ce0",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/results/public_baseline_result.json": "f8ca919f55ec16bcbf4b73f80edcac724a1c7a28c50c9456750b0e5094c726ad",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/results/visible.observation.json": "2bf34ced345b67c198abe597e3e47cdea5388ef08b1ea5ddf88ed961f11b83ed",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/results/visible.stderr.private.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/results/visible.stdout.private.log": "d1909683f5d65d2d5f5fc2549c6ab1ba0104aa8cc94ce2f26a6177f211f5c4b7",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/public_baseline_child.py": "e2eb264810795abcf369552330e8e4027540c48e6d65db8ee4ce3cb262e1a554",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/run_public_baselines.py": "28f16c1abb621d9db75a0344df2558cc3e70bd12039257031c8cbac06d88f31d",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/source_bindings.private.json": "3a82f50302c94018a5771cbee474f890ef6d78cb4be0eec58dbba309db88f75a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/source_preflight.private.json": "57861479a1a0cabd9be56d9b966137f93ae7c555edcf91b5a6f1b6c53018641a"
+  },
+  "costs": {
+    "accounting_scope": "Every initial32 result and cost is retained, including the two thread-start failures. CPU/memory are sampled lower bounds. Overlapping child/host clocks are not added. Historical baseline costs remain in their original reports and are not reset or refunded.",
+    "all9_host_attach_wall_seconds_sum": 21.989912960096262,
+    "all9_host_cleanup_wall_seconds_sum": 0.1933960842434317,
+    "all9_observed_cgroup_cpu_seconds_lower_bound": 17.779066999999998,
+    "initial8_at32": {
+      "host_attach_wall_seconds_sum": 11.953597140032798,
+      "host_cleanup_wall_seconds_sum": 0.16775067627895623,
+      "observed_cgroup_cpu_seconds_lower_bound": 8.616261,
+      "scope": "CPU/memory sampled inside child before terminal serialization are lower bounds. Child and host times overlap; no exact complete-container CPU claim or refund."
+    },
+    "target128": {
+      "host_attach_wall_seconds": 10.036315820063464,
+      "host_cleanup_wall_seconds": 0.025645407964475453,
+      "observed_cgroup_cpu_seconds_lower_bound": 9.162806,
+      "observed_cgroup_memory_peak_bytes_lower_bound": 213852160
+    }
+  },
+  "created_at": "2026-09-13T00:52:01.225992+00:00",
+  "final_scorer_profile": {
+    "child_shared_wall_seconds_max": 115,
+    "cpu_count": 1,
+    "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+    "memory_bytes": 2147483648,
+    "network": "none",
+    "pids": 128,
+    "runtime": "runc",
+    "wall_seconds_max": 120
+  },
+  "full_unchanged_public_denominator": 839,
+  "limitations": [
+    "Public visible baseline compatibility only; no hidden/reference bodies accessed.",
+    "No provider/model calls, hidden scoring, candidate outcomes or final benchmark scores.",
+    "Increasing scorer PID allowance applies prospectively to both arms/all8; provider/native preparation stays32.",
+    "Successful baseline import/resource compatibility does not establish candidate correctness or scientific success."
+  ],
+  "new_exact_observe128_tests_passed": 587,
+  "new_exact_observe128_units": 1,
+  "original128_baseline_tests_passed": 839,
+  "original128_baselines_units": 8,
+  "other7_current_exact_observe32_tests_passed": 252,
+  "qualification_transfer": "Seven units passed the exact current observe process at32PIDs and their original bound128PID baselines. Only more-itertools required the authorized exact current128PID check; all587 now pass. This is explicitly joined evidence, not eight new128PID runs.",
+  "resource_amendment": {
+    "applies_to": "both arms/all8 final units",
+    "authorized_by": "root coordinating agent, 2026-09-13 before final outcomes",
+    "final_scorer_pids": 128,
+    "provider_and_native_preparation_pids_unchanged": 32,
+    "qualification_scope": "Only unchanged more-itertools public visible baseline; no hidden scoring or model generation",
+    "unchanged_child_wall_seconds": 115,
+    "unchanged_cpus": 1,
+    "unchanged_host_wall_seconds": 120,
+    "unchanged_memory_bytes": 2147483648
+  },
+  "schema": "ns-final8-128pid-public-compatibility-joined-review/v1",
+  "target128_counts": {
+    "collected": 587,
+    "failed": 0,
+    "passed": 587,
+    "skipped": 0
+  },
+  "target128_report": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/target128_v1/actual_run_v1/ns-hist-12-more-itertools/report.json",
+    "sha256": "bee90800dd18f794b08248ad8b588339d46c8fd33aa1e82b14153e23d1764ce0"
+  },
+  "unit_results": [
+    {
+      "current32_failed": 0,
+      "current32_passed": 70,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-09-tomlkit/report.json",
+        "sha256": "3aecc65710ae6437438c61125a30ce54ae91fe78c96deecfac1b47050e3544cb"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-09-tomlkit/report.json",
+        "sha256": "88a8872b70cfe1405c4912b018577ae51ff8bcc7fd75b480d5759fa2297c061b"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-09-tomlkit/run.observation.json",
+        "sha256": "78c4dcf9bf7ae3f476f61e32d6d73d944c1b1d0092f5de3679efc32c4403b8e5"
+      },
+      "public_test_count": 70,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-09-tomlkit/prefix.tar.gz",
+        "pre_fix_commit": "21a4942ed31e773061c9fc047d55b1bb3c637ee3",
+        "sha256": "05c2f2a96e4373e4bf38a1abae744b4e24fa7393409bed0d20d0caf643d12ae2"
+      },
+      "source_inventory_sha256": "c40fc8c0396bf525ba487335e01f19bd1fbdddf476c9cd0a097ecd370bc4bd40",
+      "unit_id": "ns-hist-09-tomlkit"
+    },
+    {
+      "current32_failed": 0,
+      "current32_passed": 28,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-10-installer/report.json",
+        "sha256": "0f695806a85cc44ca2654e0b47be7a9ab5c29da6c167ab5eb1b62b424c4a2cca"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-10-installer/report.json",
+        "sha256": "c7d6746218b92f4f9dbea2c798694391133270db2c293063eebd442c0fcde27c"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-10-installer/run.observation.json",
+        "sha256": "3289a9a5444d13f021aa35fbcffb003517da66ed295a4f56a7d636d0d1ca5e87"
+      },
+      "public_test_count": 28,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-10-installer/prefix.tar.gz",
+        "pre_fix_commit": "147fd0081eb0572574e7479dca6be2974359e3e1",
+        "sha256": "76248387555d0c9df35f2025840dda9df97a316cab9f2105de65f5ce3d3cbd07"
+      },
+      "source_inventory_sha256": "a12416b353daad9e658440e0165f2c5156e7332d9923c9d43a2748dd3170a326",
+      "unit_id": "ns-hist-10-installer"
+    },
+    {
+      "current32_failed": 0,
+      "current32_passed": 41,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-11-tornado/report.json",
+        "sha256": "0e53d36b0594acc7b33a34201666648679eedb72c74c6495e6d1baf5ce73a11a"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-11-tornado/report.json",
+        "sha256": "8d6de87b3a240a63f9c3db4b87a7403f3b84f92af8ca11081694c6055d4e3f3f"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-11-tornado/run.observation.json",
+        "sha256": "a2bb4be86149fc2e8801cefca98b8fd5a85ccd71b5040d9a189d42d80b590e80"
+      },
+      "public_test_count": 41,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-11-tornado/prefix.tar.gz",
+        "pre_fix_commit": "4d892393adb0a434baeaa98a427d23c6c459a4bc",
+        "sha256": "ec5390036c107375167f7a114b1a38363f721cf9c5bc8f8261831f62e75e7a4f"
+      },
+      "source_inventory_sha256": "3807a589f16250f5a130453c05407d09db9e70e78b4d49313bc3aef23a2142a6",
+      "unit_id": "ns-hist-11-tornado"
+    },
+    {
+      "current32_failed": 2,
+      "current32_passed": 585,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-12-more-itertools/report.json",
+        "sha256": "ab5c3cbc9264d80ea11177030bfa0b9d744d177396985279dba264755004ecbe"
+      },
+      "evidence_scope": "Original128 baseline, retained observe32 failure, and new exact observe128 success",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-12-more-itertools/report.json",
+        "sha256": "3adc49a98295b979805af1e24bfd5090145d0bb71f00532298cceca03598b54d"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-12-more-itertools/run.observation.json",
+        "sha256": "2bf34ced345b67c198abe597e3e47cdea5388ef08b1ea5ddf88ed961f11b83ed"
+      },
+      "public_test_count": 587,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-12-more-itertools/prefix.tar.gz",
+        "pre_fix_commit": "cb75bb9c55f7ed3e77ce599097e1ba8da411746d",
+        "sha256": "3f63bc8aad71c89a7e56a37732c3d5e0457ebfaf22cca9d23545bafd203c7d13"
+      },
+      "source_inventory_sha256": "6f327805836f5a26ed4a4cd67c35cdfdbdf74a7d415f72ecf2bb56da55bf7146",
+      "unit_id": "ns-hist-12-more-itertools"
+    },
+    {
+      "current32_failed": 0,
+      "current32_passed": 5,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-13-charset_normalizer/report.json",
+        "sha256": "a6bbc26f3c9e4c3dabfaddf876f2168c4b9e2ccb996a1d7fe619ef103f0a4e72"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-13-charset_normalizer/report.json",
+        "sha256": "cf099a01b5c8a5e69daa8d8fafd8fe771858d91d08b062e7c6c3a453b3437f0b"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-13-charset_normalizer/run.observation.json",
+        "sha256": "e529f79cdcd5b9ea3174ea1ee053185aa6ed78539abcf34ff4b687d7f0ea24dd"
+      },
+      "public_test_count": 5,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-13-charset_normalizer/prefix.tar.gz",
+        "pre_fix_commit": "f6afd31c54fe20524f96be00de3bcb0e81727526",
+        "sha256": "7c68d3c96c8cd6b02b495779a8029e5965e1618bd191415d813d8e0f49770f55"
+      },
+      "source_inventory_sha256": "a6e7e29f6d0920c4f406b2b73f95b82e565577b9ea308fa24d54cb29be79f06e",
+      "unit_id": "ns-hist-13-charset_normalizer"
+    },
+    {
+      "current32_failed": 0,
+      "current32_passed": 42,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-14-iniconfig/report.json",
+        "sha256": "a7cd12c0f112b4fe6011fbedfab9d40e5ff519f463aaa4d839229555fe110061"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-14-iniconfig/report.json",
+        "sha256": "23d24af1de3e3de0d093cfa0a8321f2cc47b4b557c61591ccbd1cdf3e7a7706d"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-14-iniconfig/run.observation.json",
+        "sha256": "1532b4fdab683f7e535d72a7c97edc040137b7d2f5f7db3006fd05d67e7d9abf"
+      },
+      "public_test_count": 42,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-14-iniconfig/prefix.tar.gz",
+        "pre_fix_commit": "57b7ed9c7a5950f9c57b2cfbe641ff4cc04baf1c",
+        "sha256": "a5ee983fcc7ef8c8e0bae2899ca1e64ef04f54289ce77b1cb51aed9c0990e73e"
+      },
+      "source_inventory_sha256": "1ac2b429ce1a6106995d08ae57dc41c8b1c85525c4170b9664588ae4348e5774",
+      "unit_id": "ns-hist-14-iniconfig"
+    },
+    {
+      "current32_failed": 0,
+      "current32_passed": 13,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-15-wheel/report.json",
+        "sha256": "1f909359b6301a4eb3563f313e9e5065e36311e77c9ff89519078e004e003c0c"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-15-wheel/report.json",
+        "sha256": "82c1daf8af5eff66d021c022c301a35ddebb6653c2c2ff03aa33a8b5db7e0db1"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-15-wheel/run.observation.json",
+        "sha256": "b4092db8c97c910a8bb3e7c07cf838a87e2d891534eeb274f24c2306c3571a06"
+      },
+      "public_test_count": 13,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-15-wheel/prefix.tar.gz",
+        "pre_fix_commit": "986a440c3aacc45fb8486d2d01ae86bf3ddf3465",
+        "sha256": "d9568a236d69576788fd07f47c0fae6a61ce78a662dfa56460974d23a17770f7"
+      },
+      "source_inventory_sha256": "833be84c5aa5c90716d83c714aafc505335b2b681b29d3a2ef75d0d0b692cd17",
+      "unit_id": "ns-hist-15-wheel"
+    },
+    {
+      "current32_failed": 0,
+      "current32_passed": 53,
+      "current32_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/actual_run_v1/ns-hist-16-jinja/report.json",
+        "sha256": "8d5d0c7372303d6187a520348a5b47510ac8274e4bcaf787369d5fffd98527f6"
+      },
+      "evidence_scope": "Original128 baseline and current exact observe32 compatibility",
+      "original128_baseline_report": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-16-jinja/report.json",
+        "sha256": "eea58dc064ec3eb942015c54622186fa891c45e6fa8991b0718126686c9b7f45"
+      },
+      "original128_observation": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/baseline_remaining12_v3/ns-hist-16-jinja/run.observation.json",
+        "sha256": "60d4966e9285d14e34aa3b1c4368bdd750131157dae99ca7d74da4dd107ba0aa"
+      },
+      "public_test_count": 53,
+      "source_archive": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache/ns-hist-16-jinja/prefix.tar.gz",
+        "pre_fix_commit": "fbc3a696c729d177340cc089531de7e2e5b6f065",
+        "sha256": "28e4f3d6aba39271e324ce8da365bfad8a6c4919d80a67b1fd715934ed057dd6"
+      },
+      "source_inventory_sha256": "b1fd21596b787a42d3f293efc81068917e778d8d4b9a52c18619e15f6c8b2423",
+      "unit_id": "ns-hist-16-jinja"
+    }
+  ]
+}

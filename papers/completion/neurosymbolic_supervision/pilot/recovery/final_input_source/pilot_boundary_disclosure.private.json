@@ -1,0 +1,25 @@
+{
+  "all24_full600second_host_compliance": false,
+  "analysis_sha256": "634254087669d9a71b198e77445816ab7f4444f42beba5600d62ec322b685482",
+  "cell20": {
+    "additional_classification": "HTTP-wrapper and gateway durations exceeded600seconds; full-host boundary compliance is not established.",
+    "cell_id": "83cc1bb5dc33d7d76afc49bbdfdae97fd766a11343ad6c2197fa3c50d35d728e",
+    "child_seconds": 585.1247943429044,
+    "disposition_sha256": "1d6c858cc73dd862d8e9d8d3be9e33e02fe12006de68960b108e816570e8ac79",
+    "durations_are_nested": true,
+    "frozen_code_timer_scope": "600second timeout wraps attached child process wait; wrapper additionally includes readback/postprocessing and gateway includes sealing/checks.",
+    "gateway_seconds": 635.5778229869902,
+    "http_wrapper_seconds": 618.5002352530137,
+    "interpretation": "The code timer scope does not prove a prespecified scientific exclusion. Preserve this boundary deviation explicitly; no score or useful success credit.",
+    "outcome": "unscored_candidate_rejected_after_review_grant_expiry",
+    "reconciliation": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/cell020_interruption_reconciliation.private.json",
+      "sha256": "d07b5cf9e0642db28e20e4df32dfa5637ac8660d158b5975f390bbc9282f4d13"
+    },
+    "scientific_postprocessing_exclusion_prespecified": null
+  },
+  "no_retry_or_regrant": true,
+  "other_observed_wrapper_or_gateway_excess600": [],
+  "schema": "ns028-pilot-boundary-disclosure/v1",
+  "settled_remote_charges": "unavailable; observed API usage/ticks are not settlement or zero-cost evidence"
+}

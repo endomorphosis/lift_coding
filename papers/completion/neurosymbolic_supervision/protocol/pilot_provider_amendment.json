@@ -1,0 +1,653 @@
+{
+  "created_at": "2026-09-12T15:45:26.962119+00:00",
+  "deadline_plan": {
+    "allowances_are_estimates_not_hard_runtime_guarantees": true,
+    "arithmetic_fits_current_window": true,
+    "as_of_UTC": "2026-09-12T15:43:27.701337+00:00",
+    "deadline_UTC": "2026-09-14T12:00:00+00:00",
+    "latest_start_for_full_planning_allowance_UTC": "2026-09-13T07:12:00+00:00",
+    "limitations": [
+      "One 1,331-byte empty-edits diagnostic with 918 prompt tokens does not establish latency or success for 50,544\u201358,088-byte real pilot requests.",
+      "Local provider cleanup does not prove remote cancellation or settled charges.",
+      "Engineering, actual patch review, provider availability, extraction/setup and validation overhead can exhaust the planning allowance; retain partial/full denominators and disclose unfinished work if deadline is reached.",
+      "No extra generation effects or outcome-selected replacements are authorized by spare time."
+    ],
+    "planning_allowances_seconds": {
+      "analysis_and_manuscript_seconds": 28800,
+      "artifact_validation_and_archival_seconds": 14400,
+      "contingency_seconds": 14400,
+      "engineering_and_source_qualification_seconds": 21600,
+      "operator_candidate_review_seconds_planning_allowance": 7200
+    },
+    "remaining_slack_seconds": 55712.298662999994,
+    "seconds_available": 159392.298663,
+    "serial_machine_formula": "24 * (600 proposer + 120 scorer) = 17,280 seconds = 4.8 hours; absolute child/socket deadlines are nested inside the 600, not added.",
+    "serial_machine_hours": 4.8,
+    "serial_machine_seconds": 17280,
+    "total_planned_hours": 28.8,
+    "total_planned_seconds": 103680
+  },
+  "diagnostic": {
+    "cpu_seconds": null,
+    "does_not_qualify_real_pilot_response_latency_or_success": true,
+    "enclosing_wall_seconds": 9.367797,
+    "execution": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/generation_diagnostic_v1/actual_v1/execution.private.json",
+      "sha256": "b20e025d3a8ca1847bfe73aa847821e51e017c23862d0ed2592793b0ccada841"
+    },
+    "model_and_response": {
+      "http_status": 200,
+      "parsed_empty_edits": true,
+      "served_model": "grok-4.6"
+    },
+    "nested_http_seconds": 8.700476,
+    "scientific_credit": false,
+    "scorer_calls": 0,
+    "separate_accounting": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/generation_diagnostic_v1/accounting.private.json",
+      "sha256": "e4895734953032b020dd99a8c7a656307635c21a6cb4c4b5767b669c99b16864"
+    },
+    "separate_generated_calls": 1,
+    "settled_provider_cost": null,
+    "usage": {
+      "completion_tokens": 5,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "reasoning_tokens": 219,
+        "rejected_prediction_tokens": 0
+      },
+      "cost_in_usd_ticks": 8200800,
+      "prompt_tokens": 918,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 1142
+    }
+  },
+  "interpretation": [
+    "Six prior pilot failures and the separate diagnostic remain charged and separately reported; the proposed31 ceiling is a prospective amendment of27, not a refund.",
+    "V1 and V2 each retain three failed consumed cells and21 cancelled-unissued cells; no old grant is retried.",
+    "New V3 retains exact V2 user/system/model/schema/parameter bytes and the full ordered24 design in a fresh namespace. Native context preparation and cold scorer remain unchanged.",
+    "The successful small empty-edits diagnostic establishes one response, not real-pilot latency, usefulness or full experimental feasibility.",
+    "No old/new protocol pooling, final admission, human semantic-fidelity claim or24-independent-unit claim.",
+    "Root freezes exact runtime source/profile/request/batch authority before new effects; this proposal creates none."
+  ],
+  "new_protocol": {
+    "arms": [
+      "A",
+      "B"
+    ],
+    "cache": "local_cold",
+    "cell_payload_bindings": [
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "8d36e247a1d5833d3ef9bb5ae616bb57a0910804b20fd725c9871ad5f44f2b15",
+        "logical_cell_id": "461cea9a66f7f755eaa6411f7fb2d4ba4252d5faa68b5148dad4914b86ac1810",
+        "repetition": 0,
+        "request_payload_bytes": 50599,
+        "unit_id": "ns-hist-07-idna",
+        "v2_request_binding_sha256": "13d1aeb168624f66b2034d5dbbe2cfd99c1306f53b0bffb96967feee81702f32",
+        "v2_request_payload_sha256": "b3b1f5b920342cb21a8e452b7e44a52b56f58260e0b47319fccff3b9e1f4b96a"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "f1f473a41ce3b378614035ffdb474fceb5934ff15ac50007463153e70b75f41d",
+        "logical_cell_id": "a8891526f33c4c121a2acf36188694de08bd20f1f0548d5c5e5a20fb9f2991d3",
+        "repetition": 0,
+        "request_payload_bytes": 55833,
+        "unit_id": "ns-hist-07-idna",
+        "v2_request_binding_sha256": "6d9b92277bdae1786f7fb78b1cc55d0a212c03315840664cc840b39d2baa607a",
+        "v2_request_payload_sha256": "33b8454f9f956d503d4a8c2a5f23509c708879b3b8a20e17e446b61445433f26"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "0f5c26ddcc34e3039e1e8c37ffb17dfe041fbfb55ca2fff8d352192201fcc098",
+        "logical_cell_id": "24f0e561cfaad3ae54e1d0d863c023b7e24e932659a04c64535966ad12b69ee8",
+        "repetition": 1,
+        "request_payload_bytes": 50544,
+        "unit_id": "ns-hist-05-dnspython",
+        "v2_request_binding_sha256": "ebba38abd8de205c9301d249e1c0fa835035d63c12e0286345ca10988f719f8a",
+        "v2_request_payload_sha256": "a284ec995ac81bd7b7e36fab314271213d5bc773d45f139c245d78a19215fe51"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "079a2d4f23b245f8614c0acf22f5af57b674921359a59ca3f7b4e9f150080f16",
+        "logical_cell_id": "1d06843045a771efdf6412415b06d12ef20a65508953d0b4a9841986c96fde93",
+        "repetition": 1,
+        "request_payload_bytes": 57644,
+        "unit_id": "ns-hist-05-dnspython",
+        "v2_request_binding_sha256": "09ade9440f2937939b20ef3edcdfbc3114c97efe8581fdc91e2cee762fad5977",
+        "v2_request_payload_sha256": "59c8ab0e7f967ff430c8761a638864fb00d385c90d3747a01561508e4cea1ecd"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "079a2d4f23b245f8614c0acf22f5af57b674921359a59ca3f7b4e9f150080f16",
+        "logical_cell_id": "c81f6c367191d918499532a41035df6796b12560d7a80f934ee5fc8b04936051",
+        "repetition": 2,
+        "request_payload_bytes": 57644,
+        "unit_id": "ns-hist-05-dnspython",
+        "v2_request_binding_sha256": "09ade9440f2937939b20ef3edcdfbc3114c97efe8581fdc91e2cee762fad5977",
+        "v2_request_payload_sha256": "59c8ab0e7f967ff430c8761a638864fb00d385c90d3747a01561508e4cea1ecd"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "0f5c26ddcc34e3039e1e8c37ffb17dfe041fbfb55ca2fff8d352192201fcc098",
+        "logical_cell_id": "0df40197a665a34df56f5fde088c9649d003fa8e72db1353190ed3fc6ad5b6c5",
+        "repetition": 2,
+        "request_payload_bytes": 50544,
+        "unit_id": "ns-hist-05-dnspython",
+        "v2_request_binding_sha256": "ebba38abd8de205c9301d249e1c0fa835035d63c12e0286345ca10988f719f8a",
+        "v2_request_payload_sha256": "a284ec995ac81bd7b7e36fab314271213d5bc773d45f139c245d78a19215fe51"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "0e80e73c911d65018acabb8b0bee6a9730878d121dc1befefdb6d79da019f598",
+        "logical_cell_id": "6a489621a4bf64b44a1ddbffab161d941e3c967c09c3dfba831a0429edde6ef8",
+        "repetition": 0,
+        "request_payload_bytes": 58088,
+        "unit_id": "ns-hist-06-bottle",
+        "v2_request_binding_sha256": "fed7256417b0e3ed1092826d05aad15bba4ed953e0fe696a7cebd090ce7a2a0b",
+        "v2_request_payload_sha256": "f5782a03f06736cb8fcd9770758f56d1d3db9039eea0a5243cbeb5e4464d3396"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "98e5376118975dd99b417f2747f92d97fdad4959fd1acdfd8b1975c1f8331865",
+        "logical_cell_id": "8c011afa7f7b2a5aea7bd985c06d036784d0e81d3de3a40d9845db360ca76229",
+        "repetition": 0,
+        "request_payload_bytes": 50622,
+        "unit_id": "ns-hist-06-bottle",
+        "v2_request_binding_sha256": "ae5c581995b9d4a8efad014a01c2f9dba9be173e5cd65aec6c6f8c1c42257c65",
+        "v2_request_payload_sha256": "b14d7796994286f035773c053dc2c7d2c0602dce586c380951b952a7935d4336"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "f1f473a41ce3b378614035ffdb474fceb5934ff15ac50007463153e70b75f41d",
+        "logical_cell_id": "e768497178fa516ae7c92cd5eda3f27b0737b1f52f735a8beec3d652e7db8a2f",
+        "repetition": 1,
+        "request_payload_bytes": 55833,
+        "unit_id": "ns-hist-07-idna",
+        "v2_request_binding_sha256": "6d9b92277bdae1786f7fb78b1cc55d0a212c03315840664cc840b39d2baa607a",
+        "v2_request_payload_sha256": "33b8454f9f956d503d4a8c2a5f23509c708879b3b8a20e17e446b61445433f26"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "8d36e247a1d5833d3ef9bb5ae616bb57a0910804b20fd725c9871ad5f44f2b15",
+        "logical_cell_id": "3c90c471833f933ffc83ab1a07dc24ee43d526b72aee2eea2e093a5f1ef6410a",
+        "repetition": 1,
+        "request_payload_bytes": 50599,
+        "unit_id": "ns-hist-07-idna",
+        "v2_request_binding_sha256": "13d1aeb168624f66b2034d5dbbe2cfd99c1306f53b0bffb96967feee81702f32",
+        "v2_request_payload_sha256": "b3b1f5b920342cb21a8e452b7e44a52b56f58260e0b47319fccff3b9e1f4b96a"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "079a2d4f23b245f8614c0acf22f5af57b674921359a59ca3f7b4e9f150080f16",
+        "logical_cell_id": "1741c060f6ea3a4897827d651b362e0c9e25fb4bf3d374a6aa0f1909bd72ad22",
+        "repetition": 0,
+        "request_payload_bytes": 57644,
+        "unit_id": "ns-hist-05-dnspython",
+        "v2_request_binding_sha256": "09ade9440f2937939b20ef3edcdfbc3114c97efe8581fdc91e2cee762fad5977",
+        "v2_request_payload_sha256": "59c8ab0e7f967ff430c8761a638864fb00d385c90d3747a01561508e4cea1ecd"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "0f5c26ddcc34e3039e1e8c37ffb17dfe041fbfb55ca2fff8d352192201fcc098",
+        "logical_cell_id": "b81f575a94f5a2b667264bf89a0c4ca71437b6160795b99735f04b8180e88499",
+        "repetition": 0,
+        "request_payload_bytes": 50544,
+        "unit_id": "ns-hist-05-dnspython",
+        "v2_request_binding_sha256": "ebba38abd8de205c9301d249e1c0fa835035d63c12e0286345ca10988f719f8a",
+        "v2_request_payload_sha256": "a284ec995ac81bd7b7e36fab314271213d5bc773d45f139c245d78a19215fe51"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "8d36e247a1d5833d3ef9bb5ae616bb57a0910804b20fd725c9871ad5f44f2b15",
+        "logical_cell_id": "7beed120e79238af6c85392c6341617c7f37c354b21c373f827df4b29ba93a2c",
+        "repetition": 2,
+        "request_payload_bytes": 50599,
+        "unit_id": "ns-hist-07-idna",
+        "v2_request_binding_sha256": "13d1aeb168624f66b2034d5dbbe2cfd99c1306f53b0bffb96967feee81702f32",
+        "v2_request_payload_sha256": "b3b1f5b920342cb21a8e452b7e44a52b56f58260e0b47319fccff3b9e1f4b96a"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "f1f473a41ce3b378614035ffdb474fceb5934ff15ac50007463153e70b75f41d",
+        "logical_cell_id": "79dc9234d80ab2309f0090c9c1945bdcd07e3cb56cdd68c0a0fa812f71eb4b0b",
+        "repetition": 2,
+        "request_payload_bytes": 55833,
+        "unit_id": "ns-hist-07-idna",
+        "v2_request_binding_sha256": "6d9b92277bdae1786f7fb78b1cc55d0a212c03315840664cc840b39d2baa607a",
+        "v2_request_payload_sha256": "33b8454f9f956d503d4a8c2a5f23509c708879b3b8a20e17e446b61445433f26"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "e009dd95e013276a0e9a14dd87ce49364bea8b3d618359d96435783ab61f73e8",
+        "logical_cell_id": "42220ed6fca00df81ab569be6ac3afd8761b8e6605f865ce49c3f0f5fc922055",
+        "repetition": 1,
+        "request_payload_bytes": 50648,
+        "unit_id": "ns-hist-08-protego",
+        "v2_request_binding_sha256": "50bd82c45b9ef48fe85f993b89867cba8e1410a8544fee0425de3a2fb2910e57",
+        "v2_request_payload_sha256": "42d6bb66cd7e12da53ca34bb7a8737fe9a7fa272101a8128a335086e9728e91e"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "af8363f0d339d76e8c89c40989d65b8edcf2d7d51a8f164d4851e107266b6bb2",
+        "logical_cell_id": "40100bfbc0b8b346a4b36f5b66d1d9a46933d562d09bfa4f289eb611dac43337",
+        "repetition": 1,
+        "request_payload_bytes": 57978,
+        "unit_id": "ns-hist-08-protego",
+        "v2_request_binding_sha256": "a5791d0aaa6d71299c16053c6c53691d685f292fe0c53c28cf8a615512a1299b",
+        "v2_request_payload_sha256": "c36855456ee2c4d9256a035efbc81f40946e41c2ecabf73af1e607d0ec98c9f9"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "0e80e73c911d65018acabb8b0bee6a9730878d121dc1befefdb6d79da019f598",
+        "logical_cell_id": "5b9a9d74c6dd4b75d219a53fc47065f20f8f28a3a772b974dd341f9a6ee8ec36",
+        "repetition": 2,
+        "request_payload_bytes": 58088,
+        "unit_id": "ns-hist-06-bottle",
+        "v2_request_binding_sha256": "fed7256417b0e3ed1092826d05aad15bba4ed953e0fe696a7cebd090ce7a2a0b",
+        "v2_request_payload_sha256": "f5782a03f06736cb8fcd9770758f56d1d3db9039eea0a5243cbeb5e4464d3396"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "98e5376118975dd99b417f2747f92d97fdad4959fd1acdfd8b1975c1f8331865",
+        "logical_cell_id": "f8949439b8d0425a1c13388c1f5e26176b8136e0e8178bfd2230caae5a44ce15",
+        "repetition": 2,
+        "request_payload_bytes": 50622,
+        "unit_id": "ns-hist-06-bottle",
+        "v2_request_binding_sha256": "ae5c581995b9d4a8efad014a01c2f9dba9be173e5cd65aec6c6f8c1c42257c65",
+        "v2_request_payload_sha256": "b14d7796994286f035773c053dc2c7d2c0602dce586c380951b952a7935d4336"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "e009dd95e013276a0e9a14dd87ce49364bea8b3d618359d96435783ab61f73e8",
+        "logical_cell_id": "a396ae2819ac9681e1729bea5f98d9828a70cd1edef184a9f7d48dff486f21e7",
+        "repetition": 2,
+        "request_payload_bytes": 50648,
+        "unit_id": "ns-hist-08-protego",
+        "v2_request_binding_sha256": "50bd82c45b9ef48fe85f993b89867cba8e1410a8544fee0425de3a2fb2910e57",
+        "v2_request_payload_sha256": "42d6bb66cd7e12da53ca34bb7a8737fe9a7fa272101a8128a335086e9728e91e"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "af8363f0d339d76e8c89c40989d65b8edcf2d7d51a8f164d4851e107266b6bb2",
+        "logical_cell_id": "83cc1bb5dc33d7d76afc49bbdfdae97fd766a11343ad6c2197fa3c50d35d728e",
+        "repetition": 2,
+        "request_payload_bytes": 57978,
+        "unit_id": "ns-hist-08-protego",
+        "v2_request_binding_sha256": "a5791d0aaa6d71299c16053c6c53691d685f292fe0c53c28cf8a615512a1299b",
+        "v2_request_payload_sha256": "c36855456ee2c4d9256a035efbc81f40946e41c2ecabf73af1e607d0ec98c9f9"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "98e5376118975dd99b417f2747f92d97fdad4959fd1acdfd8b1975c1f8331865",
+        "logical_cell_id": "8dff9600cfba01fb841e69850e92bc65a070d499c29669eddcdf843faf61cc67",
+        "repetition": 1,
+        "request_payload_bytes": 50622,
+        "unit_id": "ns-hist-06-bottle",
+        "v2_request_binding_sha256": "ae5c581995b9d4a8efad014a01c2f9dba9be173e5cd65aec6c6f8c1c42257c65",
+        "v2_request_payload_sha256": "b14d7796994286f035773c053dc2c7d2c0602dce586c380951b952a7935d4336"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "0e80e73c911d65018acabb8b0bee6a9730878d121dc1befefdb6d79da019f598",
+        "logical_cell_id": "4718106f278cd97e8f9533c715d6d95dbb3591f77fd634f161b28d0456f29b6a",
+        "repetition": 1,
+        "request_payload_bytes": 58088,
+        "unit_id": "ns-hist-06-bottle",
+        "v2_request_binding_sha256": "fed7256417b0e3ed1092826d05aad15bba4ed953e0fe696a7cebd090ce7a2a0b",
+        "v2_request_payload_sha256": "f5782a03f06736cb8fcd9770758f56d1d3db9039eea0a5243cbeb5e4464d3396"
+      },
+      {
+        "arm": "B",
+        "cache": "local_cold",
+        "context_binding_sha256": "af8363f0d339d76e8c89c40989d65b8edcf2d7d51a8f164d4851e107266b6bb2",
+        "logical_cell_id": "c4cd45a4e3ed659adfbee395b17a1ca372ffe539d8de8efec743a34ce8f5750b",
+        "repetition": 0,
+        "request_payload_bytes": 57978,
+        "unit_id": "ns-hist-08-protego",
+        "v2_request_binding_sha256": "a5791d0aaa6d71299c16053c6c53691d685f292fe0c53c28cf8a615512a1299b",
+        "v2_request_payload_sha256": "c36855456ee2c4d9256a035efbc81f40946e41c2ecabf73af1e607d0ec98c9f9"
+      },
+      {
+        "arm": "A",
+        "cache": "local_cold",
+        "context_binding_sha256": "e009dd95e013276a0e9a14dd87ce49364bea8b3d618359d96435783ab61f73e8",
+        "logical_cell_id": "1f9c50766f32e580ebf67b0a85dce219a0c3d4fe69f1dd0bffc6b99e6dba32ed",
+        "repetition": 0,
+        "request_payload_bytes": 50648,
+        "unit_id": "ns-hist-08-protego",
+        "v2_request_binding_sha256": "50bd82c45b9ef48fe85f993b89867cba8e1410a8544fee0425de3a2fb2910e57",
+        "v2_request_payload_sha256": "42d6bb66cd7e12da53ca34bb7a8737fe9a7fa272101a8128a335086e9728e91e"
+      }
+    ],
+    "common_request_change_only": "None: exact V2 request payload bytes, model, schema, parameters and prepared contexts are preserved. Only common runtime limits and phase telemetry change.",
+    "final_admitted": false,
+    "independent_units": 4,
+    "matched_cells": 24,
+    "model": "grok-4.6",
+    "nested_repetitions_per_arm": 3,
+    "new_host_root": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3",
+    "new_outcomes_observed": 0,
+    "new_private_and_queue_namespace_required": true,
+    "new_private_root": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/activation_v3/grants",
+    "new_queue_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/operator_workspace_v3/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/host_handoff",
+    "order_unchanged": true,
+    "planned_cells": [
+      "461cea9a66f7f755eaa6411f7fb2d4ba4252d5faa68b5148dad4914b86ac1810",
+      "a8891526f33c4c121a2acf36188694de08bd20f1f0548d5c5e5a20fb9f2991d3",
+      "24f0e561cfaad3ae54e1d0d863c023b7e24e932659a04c64535966ad12b69ee8",
+      "1d06843045a771efdf6412415b06d12ef20a65508953d0b4a9841986c96fde93",
+      "c81f6c367191d918499532a41035df6796b12560d7a80f934ee5fc8b04936051",
+      "0df40197a665a34df56f5fde088c9649d003fa8e72db1353190ed3fc6ad5b6c5",
+      "6a489621a4bf64b44a1ddbffab161d941e3c967c09c3dfba831a0429edde6ef8",
+      "8c011afa7f7b2a5aea7bd985c06d036784d0e81d3de3a40d9845db360ca76229",
+      "e768497178fa516ae7c92cd5eda3f27b0737b1f52f735a8beec3d652e7db8a2f",
+      "3c90c471833f933ffc83ab1a07dc24ee43d526b72aee2eea2e093a5f1ef6410a",
+      "1741c060f6ea3a4897827d651b362e0c9e25fb4bf3d374a6aa0f1909bd72ad22",
+      "b81f575a94f5a2b667264bf89a0c4ca71437b6160795b99735f04b8180e88499",
+      "7beed120e79238af6c85392c6341617c7f37c354b21c373f827df4b29ba93a2c",
+      "79dc9234d80ab2309f0090c9c1945bdcd07e3cb56cdd68c0a0fa812f71eb4b0b",
+      "42220ed6fca00df81ab569be6ac3afd8761b8e6605f865ce49c3f0f5fc922055",
+      "40100bfbc0b8b346a4b36f5b66d1d9a46933d562d09bfa4f289eb611dac43337",
+      "5b9a9d74c6dd4b75d219a53fc47065f20f8f28a3a772b974dd341f9a6ee8ec36",
+      "f8949439b8d0425a1c13388c1f5e26176b8136e0e8178bfd2230caae5a44ce15",
+      "a396ae2819ac9681e1729bea5f98d9828a70cd1edef184a9f7d48dff486f21e7",
+      "83cc1bb5dc33d7d76afc49bbdfdae97fd766a11343ad6c2197fa3c50d35d728e",
+      "8dff9600cfba01fb841e69850e92bc65a070d499c29669eddcdf843faf61cc67",
+      "4718106f278cd97e8f9533c715d6d95dbb3591f77fd634f161b28d0456f29b6a",
+      "c4cd45a4e3ed659adfbee395b17a1ca372ffe539d8de8efec743a34ce8f5750b",
+      "1f9c50766f32e580ebf67b0a85dce219a0c3d4fe69f1dd0bffc6b99e6dba32ed"
+    ],
+    "pool_with_prior_protocol": false,
+    "reasoning_effort": "provider_default_omitted",
+    "repetitions": [
+      0,
+      1,
+      2
+    ],
+    "request_cap_bytes": 65536,
+    "response_payload_protocol": "http-json-edits-v2",
+    "runtime": {
+      "child_absolute_wall_seconds": 595,
+      "child_deadline_includes_entire_request_open_read_parse": true,
+      "cpus": 1,
+      "existing_image_network_custody_and_cold_scorer_unchanged": true,
+      "final_source_hash_pending_author_freeze": true,
+      "memory_bytes": 2147483648,
+      "parent_deadline_includes_child_lifetime_and_forced_cleanup_trigger": true,
+      "parent_wall_seconds": 600,
+      "phase_telemetry": true,
+      "pids": 32,
+      "socket_timeout_seconds": 590,
+      "timeouts_are_nested_not_additive": true
+    },
+    "source_and_prepared_native_context_components_unchanged": true,
+    "unit_ids": [
+      "ns-hist-05-dnspython",
+      "ns-hist-06-bottle",
+      "ns-hist-07-idna",
+      "ns-hist-08-protego"
+    ],
+    "version": "http-json-edits-runtime-v3"
+  },
+  "one_use_and_custody": {
+    "every_refusal_failure_unknown_and_unissued_cell_retained": true,
+    "expiry_waves_preserve_exact_fixed_order_and_never_reissue_consumed_grants": true,
+    "mandatory_separate_ai_or_operator_review_before_scoring": true,
+    "no_oracle_in_proposal_context": true,
+    "no_redirects_retries_or_fallback": true,
+    "one_post_per_new_grant": true,
+    "provider_termination_proven_before_sealing_and_review": true,
+    "signed_id_only_handoff": true,
+    "unfinished_or_unknown_effect_blocks_automatic_next_dispatch": true
+  },
+  "previous_batch": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-json-20260912-v2/inputs_v2/batch.private.json",
+    "sha256": "86eaeb26fc5f4d7329a59b030e57d5fa7b84d1108333fed095f548703d109fb2"
+  },
+  "previous_cancellation": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/actual_pilot_v2/runtime_contract_cancellation.private.json",
+    "sha256": "f538100a552b1ae93994e2f8ec819ec7137ddb73c729f372eddc525463cafe5e"
+  },
+  "previous_common_amendment": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-json-20260912-v2/inputs_v2/common_amendment.private.json",
+    "sha256": "820a192979c777d03050926441b945052bcd334be61a5fa155754cbb6fac4e71"
+  },
+  "previous_protocol_disposition": {
+    "completed_cells": 0,
+    "grant_reissue_allowed": false,
+    "old_effect_roots_untouched": true,
+    "original_cells": [
+      "461cea9a66f7f755eaa6411f7fb2d4ba4252d5faa68b5148dad4914b86ac1810",
+      "a8891526f33c4c121a2acf36188694de08bd20f1f0548d5c5e5a20fb9f2991d3",
+      "24f0e561cfaad3ae54e1d0d863c023b7e24e932659a04c64535966ad12b69ee8",
+      "1d06843045a771efdf6412415b06d12ef20a65508953d0b4a9841986c96fde93",
+      "c81f6c367191d918499532a41035df6796b12560d7a80f934ee5fc8b04936051",
+      "0df40197a665a34df56f5fde088c9649d003fa8e72db1353190ed3fc6ad5b6c5",
+      "6a489621a4bf64b44a1ddbffab161d941e3c967c09c3dfba831a0429edde6ef8",
+      "8c011afa7f7b2a5aea7bd985c06d036784d0e81d3de3a40d9845db360ca76229",
+      "e768497178fa516ae7c92cd5eda3f27b0737b1f52f735a8beec3d652e7db8a2f",
+      "3c90c471833f933ffc83ab1a07dc24ee43d526b72aee2eea2e093a5f1ef6410a",
+      "1741c060f6ea3a4897827d651b362e0c9e25fb4bf3d374a6aa0f1909bd72ad22",
+      "b81f575a94f5a2b667264bf89a0c4ca71437b6160795b99735f04b8180e88499",
+      "7beed120e79238af6c85392c6341617c7f37c354b21c373f827df4b29ba93a2c",
+      "79dc9234d80ab2309f0090c9c1945bdcd07e3cb56cdd68c0a0fa812f71eb4b0b",
+      "42220ed6fca00df81ab569be6ac3afd8761b8e6605f865ce49c3f0f5fc922055",
+      "40100bfbc0b8b346a4b36f5b66d1d9a46933d562d09bfa4f289eb611dac43337",
+      "5b9a9d74c6dd4b75d219a53fc47065f20f8f28a3a772b974dd341f9a6ee8ec36",
+      "f8949439b8d0425a1c13388c1f5e26176b8136e0e8178bfd2230caae5a44ce15",
+      "a396ae2819ac9681e1729bea5f98d9828a70cd1edef184a9f7d48dff486f21e7",
+      "83cc1bb5dc33d7d76afc49bbdfdae97fd766a11343ad6c2197fa3c50d35d728e",
+      "8dff9600cfba01fb841e69850e92bc65a070d499c29669eddcdf843faf61cc67",
+      "4718106f278cd97e8f9533c715d6d95dbb3591f77fd634f161b28d0456f29b6a",
+      "c4cd45a4e3ed659adfbee395b17a1ca372ffe539d8de8efec743a34ce8f5750b",
+      "1f9c50766f32e580ebf67b0a85dce219a0c3d4fe69f1dd0bffc6b99e6dba32ed"
+    ],
+    "scorer_calls": 0,
+    "terminal_failures": [
+      {
+        "cell_id": "461cea9a66f7f755eaa6411f7fb2d4ba4252d5faa68b5148dad4914b86ac1810",
+        "classification": "known_local_terminal_failure_remote_effects_unknown",
+        "cleanup_sha256": "2a60f82f5d526a763067b13e6691dab78547597cbc714a7204aee84a3c5b4b55",
+        "conservative_slots_consumed": 1,
+        "grant_sha256": "a1039ed6d9c50596e733931fefebeed834c12709d0359672000dd554d674df2c",
+        "provider_calls_charged_to_ceiling": 1,
+        "provider_result_sha256": "d14d86eba4615ae5faa2c3e177b7ea061e4ac3495813c2356277c5f2ef8db943",
+        "remote_execution_and_settled_charges": "unknown; not refunded",
+        "remote_execution_usage_settlement": "unknown",
+        "score_credit": false,
+        "scorer_calls": 0,
+        "signed_disposition_sha256": "fee0ae08f929841169cb2c4b5298ef12b49fe09b14aab8c360b486599ea7a08e",
+        "status": "terminal_failed",
+        "success_credit": false,
+        "terminal_observation": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/actual_pilot_v2/cell001_terminal.private.json",
+          "sha256": "6cfd354cf87549640f91bd733db59fd2c3e1794c8030855af1520fd1f0adc82d"
+        }
+      },
+      {
+        "cell_id": "a8891526f33c4c121a2acf36188694de08bd20f1f0548d5c5e5a20fb9f2991d3",
+        "classification": "known_local_terminal_failure_remote_effects_unknown",
+        "cleanup_sha256": "99dbd7fc939228376af431ef493a1f55e50f0d0608619ea932ecd8e3989766da",
+        "conservative_slots_consumed": 1,
+        "grant_sha256": "524750ab6fb071b013f6d7e6ae5a24f54f21e024a91976139871bd9516433ea7",
+        "provider_calls_charged_to_ceiling": 1,
+        "provider_result_sha256": "65a76fbc0b01a379f0cca0acbafccffea86de43fbafcd16d4692b8c51cc6b2b8",
+        "remote_execution_and_settled_charges": "unknown; not refunded",
+        "remote_execution_usage_settlement": "unknown",
+        "score_credit": false,
+        "scorer_calls": 0,
+        "signed_disposition_sha256": "be770404f47fd5024f9eef7cd4c49d5665ff2186e8635e8368baa82ea9dc174c",
+        "status": "terminal_failed",
+        "success_credit": false,
+        "terminal_observation": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/actual_pilot_v2/cell002_terminal.private.json",
+          "sha256": "b3f3d34bed299335ff6c190c1c37667bffe2f47ff6a63ea0c5e12271dedb3fd7"
+        }
+      },
+      {
+        "cell_id": "24f0e561cfaad3ae54e1d0d863c023b7e24e932659a04c64535966ad12b69ee8",
+        "classification": "known_local_terminal_failure_remote_effects_unknown",
+        "cleanup_sha256": "f3d30b6b40920adeac5e02ad8a2cf351a6cedc113f910549e04930273e749630",
+        "conservative_slots_consumed": 1,
+        "grant_sha256": "696a7f909c37097dd088ba36eb3f437b702f9fbafecdd5b0b2c0165c519e8111",
+        "provider_calls_charged_to_ceiling": 1,
+        "provider_result_sha256": "691c2693716eb40078f5d3e396278e6eaddf47435438b53870bfb6a05a1c8eb6",
+        "remote_execution_and_settled_charges": "unknown; not refunded",
+        "remote_execution_usage_settlement": "unknown",
+        "score_credit": false,
+        "scorer_calls": 0,
+        "signed_disposition_sha256": "70f70288b9536ab282034f5c0a8d349fb250bb1ba3922baf70f2bcbf2b30345e",
+        "status": "terminal_failed",
+        "success_credit": false,
+        "terminal_observation": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/actual_pilot_v2/cell003_terminal.private.json",
+          "sha256": "8e9bddde1e65538c3869c7b48d06a542d35321e20080d55054c11a82f3ab52f8"
+        }
+      }
+    ],
+    "unissued_cancelled_cells": [
+      "1d06843045a771efdf6412415b06d12ef20a65508953d0b4a9841986c96fde93",
+      "c81f6c367191d918499532a41035df6796b12560d7a80f934ee5fc8b04936051",
+      "0df40197a665a34df56f5fde088c9649d003fa8e72db1353190ed3fc6ad5b6c5",
+      "6a489621a4bf64b44a1ddbffab161d941e3c967c09c3dfba831a0429edde6ef8",
+      "8c011afa7f7b2a5aea7bd985c06d036784d0e81d3de3a40d9845db360ca76229",
+      "e768497178fa516ae7c92cd5eda3f27b0737b1f52f735a8beec3d652e7db8a2f",
+      "3c90c471833f933ffc83ab1a07dc24ee43d526b72aee2eea2e093a5f1ef6410a",
+      "1741c060f6ea3a4897827d651b362e0c9e25fb4bf3d374a6aa0f1909bd72ad22",
+      "b81f575a94f5a2b667264bf89a0c4ca71437b6160795b99735f04b8180e88499",
+      "7beed120e79238af6c85392c6341617c7f37c354b21c373f827df4b29ba93a2c",
+      "79dc9234d80ab2309f0090c9c1945bdcd07e3cb56cdd68c0a0fa812f71eb4b0b",
+      "42220ed6fca00df81ab569be6ac3afd8761b8e6605f865ce49c3f0f5fc922055",
+      "40100bfbc0b8b346a4b36f5b66d1d9a46933d562d09bfa4f289eb611dac43337",
+      "5b9a9d74c6dd4b75d219a53fc47065f20f8f28a3a772b974dd341f9a6ee8ec36",
+      "f8949439b8d0425a1c13388c1f5e26176b8136e0e8178bfd2230caae5a44ce15",
+      "a396ae2819ac9681e1729bea5f98d9828a70cd1edef184a9f7d48dff486f21e7",
+      "83cc1bb5dc33d7d76afc49bbdfdae97fd766a11343ad6c2197fa3c50d35d728e",
+      "8dff9600cfba01fb841e69850e92bc65a070d499c29669eddcdf843faf61cc67",
+      "4718106f278cd97e8f9533c715d6d95dbb3591f77fd634f161b28d0456f29b6a",
+      "c4cd45a4e3ed659adfbee395b17a1ca372ffe539d8de8efec743a34ce8f5750b",
+      "1f9c50766f32e580ebf67b0a85dce219a0c3d4fe69f1dd0bffc6b99e6dba32ed"
+    ],
+    "unissued_status": "cancelled_unissued_for_prospective_common_runtime_repair"
+  },
+  "prior_v1": {
+    "cancellation": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/actual_pilot_v1/response_contract_cancellation.private.json",
+      "sha256": "b3c238e80848a6064608f25fddf31aeecc1ee619b373fd78dad3530c9d02c5c3"
+    },
+    "cancelled_unissued": 21,
+    "grant_replay_allowed": false,
+    "original48_cells": [
+      "ffac468e2dfb01fee63085c6115a69e8fcf8f29114a9f3738caaa4f9a6f52711",
+      "b1d1cfd51b290399172b81eea797cc5e1f425b2bbe0bd010196bad0f111baeb8",
+      "985ba29219db6125655ef21eef9d9ea37a071e96868cecc338bf0185e4551213",
+      "10e093a6d80a0f84c4058d464267737f1263b31f3d2625310f6a3bdeade7f6c2",
+      "261c67d3631ced477dea3d86c2c302417cb487d21d909ee9e7ac5ca0340f4b30",
+      "a8f05c009920c695176c9e69410ccc920ed0e43dbcb48943cf8e394466c0eea2",
+      "e045d372efd51260012ac6e2fe8cf6236bbce8065a7eba7c8870c82addce82f4",
+      "f49b450da0461a3f5e9247ff2d27279e547f7107bf28647783c74844cf03ed51",
+      "461cea9a66f7f755eaa6411f7fb2d4ba4252d5faa68b5148dad4914b86ac1810",
+      "2ab446696adae0afc2334b45d04ad67ccd52b8c29bc5214f5c44b1297deea206",
+      "a8891526f33c4c121a2acf36188694de08bd20f1f0548d5c5e5a20fb9f2991d3",
+      "186302afd76f0780573e02ccff80399073b92d1cfb59f8801331c475de140994",
+      "b5eca8bf163395c465fcb7645bcf537685f0b8988a03960b7050997998dbc776",
+      "62cdd3951765612ea169e5d55ecc7e0f87b3eb5f801fb56a36cf5e95fd82caee",
+      "c839fa512e621077389f48ae5bc5584019cd97b327e09da04fdd521b0358315d",
+      "6b766fc7bfc4c3744bc1d2c7db54ccc7d8c3f1a2096eb8479259cf6094bb5f6b",
+      "8963a0bb500649dd7b474cc63051630dfea1b093a4fdf327a9e9321abaff53e0",
+      "31d057acad840c318cf99fefb2264fcadb93f275b45e3e87a40af7c627520249",
+      "6a489621a4bf64b44a1ddbffab161d941e3c967c09c3dfba831a0429edde6ef8",
+      "94a976b575fb4ff03c70c8d73e44f0a3828382d25e2da32fb40bf4c2440bf3f9",
+      "6d2cbb9decc0eb7eee0f321781125f054dd45e6e14a5f8cfd22af31199918f9f",
+      "f4f23ad1d40893363776d58397588ba2cc53b66d80dc0ae90d6ad91ed816860d",
+      "5d2f9eca492e4a34067cde7b352d6f9ee2cfcb82bb6523dec5289f1c9893b620",
+      "8c011afa7f7b2a5aea7bd985c06d036784d0e81d3de3a40d9845db360ca76229",
+      "7ccfe8f4084efd0238a51418234b6817ad0b43bb0804e254d598648c15480eed",
+      "ba8e3eebe5840a65462771ac4ade32edc4068c357b76aba29cf21e56d3ab371f",
+      "d7c759ca8b7b239c173dc0f131656b05e73cdbda6e63883b89ec45f726be2a59",
+      "c09fd1e604706ef35fb3612cf87edc424515e8d755501844ba29672c7f8e5281",
+      "6f6dfe76c29e22cd2028573bde66a447fa4986f3cda7df57d8e7906339c2b928",
+      "df96ca4f906d4a669b87bf340394b8b11a0fd2e6a30ace78b7f73c5fd2aacdf3",
+      "1741c060f6ea3a4897827d651b362e0c9e25fb4bf3d374a6aa0f1909bd72ad22",
+      "cbe94b878fba31ce13765d071c293537df30efb40f0153baf70b9ef9928a9001",
+      "2bde1c6dd9af00c178bfcf7431cedd9a8f0717766e3daeb8552d977995f1ebf8",
+      "4b6f0227893a246bc7529e307c4a87272bc366bcd6b127d135fa4451e5850238",
+      "b81f575a94f5a2b667264bf89a0c4ca71437b6160795b99735f04b8180e88499",
+      "bbca880ee93c695d04626405c70ebd246e26566817cdfcbb1872aa2158308de8",
+      "1d01043b5ce9a59ebf38bc2a522ab538e1f47fde03055a87e3832478b6e5a876",
+      "7d178fcd980fe232494e499268b61f01c6067c5af7eb1e62a3817f5f62d7fff6",
+      "b62a754de59e644bc691421cd3f7fe358f21c5f52037a9f6abb03c50d42be7ee",
+      "58911eeeade2830ef7f907bb1e5a4ee4d945c13872ab8c288cbd7b4cb8a0c602",
+      "429192a3df7fa62e2a6f0a0dcb499f5a2add4f3acc5f8cfae6456cd003a16344",
+      "c78ead6f859fe2a8f7052838faa0b6b061754e7819c4753a8964ebb866e99158",
+      "c4cd45a4e3ed659adfbee395b17a1ca372ffe539d8de8efec743a34ce8f5750b",
+      "973aab84dca2aa1aac0dfa5b0e44f8faef0e937ce25d3552a903d2482f722a25",
+      "ea7dddaffc0e85e254fd57ea4cc4a4e34aff70224bc2b77525427ac1c6367794",
+      "2bf302c850fdf57da018651262215df5fa22c00ef1b7c00694215a57936a6b06",
+      "1f9c50766f32e580ebf67b0a85dce219a0c3d4fe69f1dd0bffc6b99e6dba32ed",
+      "cf3befedb26a8cfdd8fefdbd04ac4a76ca418ad1e277f4e7d3057556ac40a46c"
+    ],
+    "recovery_manifest": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/response_recovery_manifest.proposed.private.json",
+      "sha256": "06b8355f12ae67a0787f2e0d26bed182caf58f1a814527fab69de5696081ad42"
+    },
+    "scorer_calls": 0,
+    "terminal_failed_consumed": 3
+  },
+  "proposal_budget": {
+    "cumulative_max_calls": 31,
+    "diagnostic_calls_separate": 1,
+    "fallback_allowed": false,
+    "new_max_calls": 24,
+    "new_max_scorer_calls": 24,
+    "previous_consumed_calls": 3,
+    "previous_cumulative_max_calls": 27,
+    "prior_ceiling_prospectively_superseded": true,
+    "prior_consumption_refunded": false,
+    "prior_v1_consumed_calls": 3,
+    "retries": 0,
+    "scope": "The two retained pilot protocols, one explicitly separate diagnostic, and the proposed V3 common24 only; earlier NS026/canary/authoring effects remain separately disclosed.",
+    "total_previous_consumed_slot_or_diagnostic_upper_bound": 7,
+    "unknown_termination_stops_later_cells": true
+  },
+  "proposal_history_v1": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/proposal_history_v1/recovery_manifest.proposed.private.json",
+    "sha256": "d4206bd808e0c41ca3ca9cd1fabfc46f8bc134532f219ffd0f6fee5fdc1b0a6c"
+  },
+  "request_payload_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/installed_input_qualification.private.json",
+    "sha256": "e010049373f228670a0b99d725305349ecadab8a3b1b7090bbf0f92bc74f305d"
+  },
+  "schema": "ns-pilot-runtime-contract-recovery/v3",
+  "scientific_dispatch_authorized": false,
+  "stage": "isolated_prospective_proposal_pending_root_source_freeze_rebinding_and_scientific_admission",
+  "v2_installed_package": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/response_contract_v2/installed_package.private.json",
+    "sha256": "833fdcf0cfd8deb26c139c79debbef775cda4e4fa92cb89135fc19ce166f810e"
+  }
+}
