@@ -92,7 +92,9 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     board = SimpleNamespace()
     identity = SimpleNamespace(process_birth_id='birth:test', to_dict=lambda: {'server_id': 'owner:test', 'process_birth_id': 'birth:test'})
     stopped = []
-    server = SimpleNamespace(start=lambda: identity, ready=lambda: True, stop=lambda: stopped.append('owner'))
+    startup_order = []
+    server = SimpleNamespace(start=lambda: (startup_order.append('start'), identity)[1],
+                             ready=lambda: True, stop=lambda: stopped.append('owner'))
     class Child:
         failure = ''
         def __init__(self, **kwargs):
@@ -125,13 +127,16 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     monkeypatch.setattr(m, '_LiveMonitor', Child)
     monkeypatch.setattr(m, '_store_id', lambda board: 'store:test')
     bindings = []
-    monkeypatch.setattr(m, '_bind_native_status', lambda server, population: bindings.append(population))
+    def configure(server, board, population, paths):
+        startup_order.append('configure'); bindings.append(population)
+    monkeypatch.setattr(m, '_configure_native_status_before_start', configure)
     if history_failure:
         with pytest.raises(m.HandoffError, match='unknown native history'):
             m.launch(observe_history_only=history_only)
     else:
         assert m.launch(observe_history_only=history_only) == (0 if history_only else runner_result)
     assert bindings == [population()]
+    assert startup_order == ['configure', 'start']
     assert paths['bootstrap_receipt'].read_bytes() == historical
     after = paths['bootstrap_receipt'].stat()
     assert (after.st_ino, after.st_mtime_ns) == (before.st_ino, before.st_mtime_ns)

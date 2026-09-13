@@ -3292,7 +3292,30 @@ def _bind_native_status(server: Any, population: Mapping[str, Any]) -> None:
     )
 
 
-def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]:
+def _configure_native_status_before_start(
+    server: Any, board: Any, population: Mapping[str, Any], paths: Mapping[str, Path],
+) -> None:
+    """Opt in to this board's existing queue before publishing status readers."""
+    from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
+
+    raw = board.payload.get("runtime_paths")
+    if not isinstance(raw, Mapping) or type(raw.get("merge_queue")) is not str:
+        raise HandoffError("DOEP queue observation requires its configured queue scope")
+    queue = board.path(raw["merge_queue"])
+    if queue != paths["root"] / "merge-queue":
+        raise HandoffError("DOEP queue observation differs from its canonical campaign queue")
+    server.configure_database_status_before_start(
+        board_namespace=PROGRAM_ID, plan_root_cid=population["plan_root_cid"],
+        repository_tree_id=population["repository_tree_id"],
+        task_cids=[task["task_cid"] for task in population["tasks"]],
+        queue_dir=queue, target_repository_id=checkout_repository_id(ROOT),
+        target_branch=board.merge_target_branch,
+    )
+
+
+def authoritative_status(
+    *, history_tasks: Sequence[str] = (), queue_task: str | None = None,
+) -> dict[str, Any]:
     """Read live state using this invocation's own native read-only session."""
     from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import process_birth_id
     from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
@@ -3311,6 +3334,8 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
     if (len(history_tasks) > 8 or len(set(history_tasks)) != len(history_tasks)
             or any(alias not in aliases for alias in history_tasks)):
         raise HandoffError("history request is outside the sealed DOEP population or bound")
+    if queue_task is not None and (type(queue_task) is not str or queue_task not in aliases):
+        raise HandoffError("queue observation task is outside the sealed DOEP population")
     owner = _json_object(paths["owner_status"])
     identity = owner.get("identity")
     if (owner.get("lifecycle") != "ready" or not isinstance(identity, Mapping)
@@ -3346,7 +3371,14 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
             before = client.load_generation()
             histories = {alias: dict(source.task_revision_history_projection(aliases[alias]))
                          for alias in history_tasks}
-            snapshot = connection.completion_closeout_snapshot(sorted(aliases.values()))
+            queue_observation = None
+            if queue_task is None:
+                snapshot = connection.completion_closeout_snapshot(sorted(aliases.values()))
+            else:
+                queue_observation = connection.legacy_merge_queue_task_observation(
+                    sorted(aliases.values()), task_cid=aliases[queue_task],
+                )
+                snapshot = queue_observation["control_snapshot"]
             after = client.load_generation()
             if before.content_id == after.content_id:
                 break
@@ -3370,6 +3402,7 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
             "tasks": tasks, "leases": relations["leases"]["rows"],
             "completion_snapshot": snapshot["completion_snapshot"],
             "closeout_snapshot": dict(snapshot), "task_histories": histories,
+            **({"legacy_queue_observation": queue_observation} if queue_task is not None else {}),
             "store_generation": after.to_record(),
             "required_goal_count": len(population["goals"]),
             "completion_authority": False,
@@ -3420,6 +3453,7 @@ def launch(*, observe_history_only: bool = False) -> int:
     prior_environment = dict(os.environ)
     result = 1
     try:
+        _configure_native_status_before_start(server, board, population, paths)
         identity = server.start()
         if not server.ready():
             raise HandoffError("Quack state owner did not become ready")
@@ -3429,7 +3463,6 @@ def launch(*, observe_history_only: bool = False) -> int:
             population,
             objective_observation,
         )
-        _bind_native_status(server, population)
         launch_id = (
             "sha256:"
             + hashlib.sha256(
@@ -3979,6 +4012,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     dependency_parser.add_argument("--expected-revision", type=int, required=True)
     native_parser = commands.add_parser("authoritative-status")
     native_parser.add_argument("--history-task", action="append", default=[])
+    native_parser.add_argument("--queue-task", help="observe one sealed task's existing Portal queue rows")
     admission_parser = commands.add_parser("retained-pool-release-admission")
     admission_parser.add_argument("--request-json", type=Path, required=True)
     status_parser = commands.add_parser("status")
@@ -4001,7 +4035,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(result, sort_keys=True))
             return 0 if result["disposition"] == "deferred" else 2
         if args.command == "authoritative-status":
-            print(json.dumps(authoritative_status(history_tasks=args.history_task), sort_keys=True))
+            print(json.dumps(authoritative_status(history_tasks=args.history_task,
+                                                 queue_task=args.queue_task), sort_keys=True))
             return 0
         if args.command == "recover-legacy-verification-timeout":
             return recover_legacy_verification_timeout(
