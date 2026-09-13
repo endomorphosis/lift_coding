@@ -1,0 +1,165 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-019",
+  "status": "complete",
+  "template_only": false,
+  "completed_at": "2026-09-13T13:06:45+00:00",
+  "scope": "Ordinary current-source rendering of the already root-frozen 32-cell A/B local-cold comparison. The analyzer accepts a repeated retained label only when the complete metadata record is identical; conflicting records still fail. This completion regenerates Table 17, the explicit out-of-scope ablation table, descriptive eight-family summaries, and separate cost scopes from immutable NS-017/NS-018 records. It does not issue grants, run models, scorers, contexts, experiments, retries, or resource-lease actions, and it does not change the NS-020 renderer pin.",
+  "source_versions": {
+    "analyzer_source_sha256": "16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251",
+    "rendered_results_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "analysis_policy_sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+    "actual32_bundle_sha256": "f8488d8e69f097a8332ec6ae41aded6b260e5ad8df90531bd539d6f9e85b4f46",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "matplotlib": "3.10.8",
+    "native_accelerate": "60baee769d39a53c52142c56fbf6ed7483773aa3",
+    "native_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+    "native_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "ns017_manifest_sha256": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+    "ns018_ablation_manifest_sha256": "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+    "python": "Python 3.12.3",
+    "reducer_source_sha256": "ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94",
+    "strict_complete32_analysis_sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/analyze.log": "5d3a7010a1b294c1cd51a0b8a9bd406d83232c82518ee8d0f5734ac86b0f9116",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log": "feff079c6ba0d6904b360fbcbe0be8e318b2cf1ca28bffd1f528dcd75c1b2ae9",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.py": "37b4f02026fba58571cca9d4d1c0532060482137bbcfba613dee4628c2167d90",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/analyze.py": "16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/cost_report.md": "3fdd110eaf153cc6290f06861873928118fe507768959a6358f822a0f1ec7ed2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/results.json": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/statistical_report.md": "24e978ad64e73f2c4485e641f3b162b170c5a76c8d71c874b60fba9a21346826",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/ablations.tex": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/figures/family_useful.pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/figures/family_useful.svg": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/analysis/analyze.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/analyze.py",
+    "papers/completion/neurosymbolic_supervision/analysis/cost_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/cost_report.md",
+    "papers/completion/neurosymbolic_supervision/analysis/results.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/results.json",
+    "papers/completion/neurosymbolic_supervision/analysis/statistical_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/statistical_report.md",
+    "papers/completion/neurosymbolic_supervision/manuscript/generated/ablations.tex": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/ablations.tex",
+    "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.pdf": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/figures/family_useful.pdf",
+    "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.svg": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/figures/family_useful.svg",
+    "papers/completion/neurosymbolic_supervision/manuscript/generated/table17.tex": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex"
+  },
+  "criteria": [
+    {
+      "criterion": "One documented analysis command regenerates main and ablation tables from immutable raw records.",
+      "status": "met",
+      "explanation": "The current-source analyzer (SHA256 16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251) ran once against the immutable NS-017 main manifest 0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac and the NS-018 withdrawn-ablation manifest 15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0. It wrote the seven rendered outputs: results.json, statistical_report.md, cost_report.md, table17.tex, ablations.tex, and the family_useful PDF/SVG figures. The command read retained signed objects and empty ablation JSONL files; it issued no grants, provider posts, or scorer calls (new_scientific_calls=0). Ordinary validation recomputed output hashes and confirmed Table 17 and the explicit out-of-scope ablation table were generated solely from those bytes.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/analyze.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/analyze.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/ablations.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log"
+      ]
+    },
+    {
+      "criterion": "All counts reconcile to the run manifest, including failed/unsolved/timeout/abstained/unavailable cases.",
+      "status": "met",
+      "explanation": "Rendered results retain the fixed 32-cell denominator, eight independent families, and two nested repetitions (104729, 130363) in original order. Useful completions are 9/32 (A 5/16, B 4/16). Outcomes reconcile exactly to the NS-017 manifest: 9 full_cold_pass, 7 hidden_acceptance_failed, 14 proposal_child_deadline, and 2 known_proposal_failure. The 685-label retained-object map has 683 unique labels plus two exactly duplicated identical metadata records; conflicting labels still fail. Withdrawn population remains 192 original factor cells, 32 retained, 160 removed (128 non-A/B plus 32 A/B warm), and eight unrecruited families. Measured ablation rows remain 0. No cell is discarded from the denominator.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/results.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/statistical_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log"
+      ]
+    },
+    {
+      "criterion": "Confidence intervals and quality gates follow the preregistered plan; deviations and inconclusive outcomes are explicit.",
+      "status": "met",
+      "explanation": "The frozen analysis policy (SHA256 a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3) is followed exactly: eight family blocks, nested repetitions, 20,000 shared whole-family bootstrap resamples, seed 20260911, and a descriptive conditional 95% percentile interval. Mean family B-minus-A useful fraction is -0.0625 with interval [-0.1875, 0]; degenerate=false. The report states that original D/A promotion, noninferiority, and 16-family inference were withdrawn, and that a degenerate interval would not establish equality or safety. Quality gates remain the frozen useful-completion and resource rules; 14 child-deadline overruns and 7 hidden-acceptance failures stay labeled failures. Inferential claims are withdrawn rather than replaced with a superiority or noninferiority decision.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/statistical_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/results.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/table17.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log"
+      ]
+    },
+    {
+      "criterion": "No estimated preliminary number is labeled measured, no missing cost is zero, and overlapping stage times are not summed as elapsed.",
+      "status": "met",
+      "explanation": "Every resource summary sets missing_is_zero=false. Gateway-score clocks are known for 16/32 cells; the other 16 remain missing rather than zero. All 32 rows keep unknown_external_charge=true and settlement unavailable. Isolated ablation cost components remain null, not zero. Missing operator phases retain the recorded missing reason and are not filled with zero elapsed time. Child, wrapper, gateway, scorer, client, grant-to-terminal, and operator-phase clocks stay in separate nested scopes and are not added as one elapsed total. Prior/setup ledgers remain separately bound. No preliminary estimate is labeled measured.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/cost_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/analysis/results.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/rendered_final32/manuscript/generated/ablations.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns019-render-0c6dec8d",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns019-render-0c6dec8d/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns019-render-0c6dec8d/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns019-render-0c6dec8d/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns019-render-0c6dec8d/.local/state",
+        "MPLCONFIGDIR=/tmp/ipfs-accelerate-validation-home-ns019-render-0c6dec8d/.config/matplotlib",
+        "PYTHONPATH=/opt/ipfs-validation-site-packages",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/analysis/analyze.py",
+        "--repository",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-019-f50c057391b3-attempt-1-1789304160",
+        "--manifest-sha256",
+        "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+        "--ablation-manifest-sha256",
+        "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+        "--output",
+        "/tmp/ipfs-accelerate-ns019-rendered-final32-0c6dec8d"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 2.0142945130355656,
+      "execution_kind": "sealed-profile current-source rendering of the frozen 32-cell A/B local-cold comparison from immutable NS-017/NS-018 records; no provider, scorer, grant, lease, or experiment rerun",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:03:23.829623+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/analyze.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/analyze.py",
+      "started_at": "2026-09-13T13:03:21.815321+00:00"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns019-verify-ccddf1ad",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns019-verify-ccddf1ad/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns019-verify-ccddf1ad/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns019-verify-ccddf1ad/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns019-verify-ccddf1ad/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.py"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 0.03367892000824213,
+      "execution_kind": "sealed-profile ordinary hash and count check of current-source NS-019 outputs against frozen NS-017/NS-018 identities, analysis policy, and the qualified identical-label exception; no provider, scorer, grant, lease, or experiment rerun",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:06:27.175913+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-019/adoption_validation/verify_rendered_analysis.py",
+      "started_at": "2026-09-13T13:06:27.142226+00:00"
+    }
+  ],
+  "limitations": [
+    "This completion renders already admitted NS-017/NS-018 evidence. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+    "The 32 nested cells are eight families with two nested repetitions, not 32 independent repositories or a sixteen-family sample. Original D/A promotion, noninferiority, superiority, and 16-family inferential objectives remain withdrawn.",
+    "The descriptive conditional interval is not a population-wide efficacy, equality, or safety claim.",
+    "C/D routing, warm caches, reuse, publication-comparison efficacy, and human semantic fidelity remain withdrawn or unmeasured.",
+    "Unknown provider charges, missing scorer clocks, and missing operator phases stay unavailable rather than zero. Nested clocks are not summed as elapsed.",
+    "Two exactly duplicated identical retained-label records are accepted; a conflicting repeated label still fails. Original signed results, manifests, reducers, and scoring policy were not altered.",
+    "The NS-020 renderer pin is intentionally unchanged. Cross-version PDF/SVG byte identity is not claimed. The sealed matplotlib run emitted the documented optional Axes3D import warning and a Fontconfig default-config error while writing the SVG. The committed PDF is the same eight-family descriptive A/B figure encoded as ASCII PDF so the ordinary unified diff does not require a binary patch.",
+    "Outside human review is not required; this receipt is provenance validation, not independent scientific peer review or authorization to submit."
+  ]
+}
