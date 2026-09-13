@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "/usr/bin/python3.12",
+    "-B",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.py"
+  ],
+  "cwd": ".",
+  "exit_code": 0,
+  "started_at": "2026-09-13T17:24:12.922105+00:00",
+  "finished_at": "2026-09-13T17:24:14.149558+00:00",
+  "elapsed_host_wall_seconds": 1.2274414750281721,
+  "all_passed": true,
+  "failures": []
+}

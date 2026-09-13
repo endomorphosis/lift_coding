@@ -1,0 +1,213 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-025",
+  "status": "complete",
+  "completed_at": "2026-09-13T17:24:14.149558+00:00",
+  "scope": "Independent final readiness audit of the frozen anonymous NS-024 package. Independently extracted supplement.zip 48cee756, regenerated unpooled numerical summaries, reconciled PDF tables to results.json/freeze ac605b5d, scanned placeholders, checked NS-001--NS-024 snapshot integrity, and produced an author-review handoff. No provider, scorer, hidden-test, portal, submission, or publication action. No invented author attestations.",
+  "source_versions": {
+    "workspace_git_head": "f7549b44f67bd0d7214f962311d47f64bb6a3499",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "accepted_paper_pdf_sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+    "accepted_supplement_zip_sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07",
+    "ns022_paper_pdf_sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+    "ns022_main_tex_sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+    "ns019_ascii_family_useful_pdf_sha256": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "results_json_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "table17_sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "table18_sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+    "ablations_sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+    "answered_checklist_sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1",
+    "per_paper_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "shared_research_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "shared_workshop_tex_sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "shared_official_checklist_sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "final32_reproduced_summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215",
+    "release_pdf_pdftotext_sha256": "34918d170d995e41f3f9da69f6be46ed49bc856037cf06de040752c79a11afb9",
+    "declared_root_handoff_sha256": "c9917e47d6a8b54fbd5dcaba4eb94bb13fb60b017d3462569726918bccaa2304",
+    "declared_root_cfp_sha256": "0f7294cf7e1381104fb443a4a1c78acf58dfc06a3f73738752ad8534bbdeb1b3",
+    "root_handoff_independently_hashed": false,
+    "root_cfp_independently_hashed": false,
+    "validator_sha256": "5cc31a71c2f3c4fc63cb98998ce62d340b9c36d8ab3157a7d46bbe95a80b1fa0"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/FINAL_REVIEW.md": "65d12a9dc384f6307bce0f7212c29dab36d3417b09fa8328619619f087cf22ab",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/checksums.sha256": "58dd7d194ce16aaa8a66ca569ab7f3b1431be2d42ef9e7497e79c737321f9547",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_placeholder_scan.json": "204707740e5b54e139660c2ba34d230557a95428897fce4e2645a54ec684f446",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_readiness.json": "bac0b577bcfbc444bbee5acf207e5cccdb3d925c39b76da0cfe270d8d97e1803",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.execution.json": "d536e4ea5cfb8e3974c357bd07fa80eabe9c5914b552cf499a02d1c9808656a1",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.log": "761508910b7a9e60961935110748af994e427c1a19050c994237d54cd8796532",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.py": "5cc31a71c2f3c4fc63cb98998ce62d340b9c36d8ab3157a7d46bbe95a80b1fa0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.stdout.json": "fd6c685910c3f5399c62593421a83755d03d9116e2c94376679e8a4fb4dad95d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/numerical_reproduction/final32_summary.json": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/numerical_reproduction/reproduction.json": "e8c73274316f0b33a24f716a980cb86e77643df04ff817a9f441125ba5c06c83",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/predecessor_summary.json": "a8bafb68e2a1f2d2821014836831d050af9116d06627ab7bf4759bcc3a22247f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/reproduce.execution.json": "59054c36ce730af2f208f24ecc92c546d63f553417c41ae49ac2f50690776d4c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/reproduce.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/reproduce.stdout.log": "916dc880b070273f7907489597708884a4d767e3f7e22c9d40ebac368ebba9b0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/scientific_audit.stdout.json": "e17b06f490b1137cc0050da1cbf1b00ed67a38dbcc726d8f7fce06dd3dc9e645"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/release/FINAL_REVIEW.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/FINAL_REVIEW.md",
+    "papers/completion/neurosymbolic_supervision/release/checksums.sha256": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/checksums.sha256",
+    "papers/completion/neurosymbolic_supervision/audit/final_readiness.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_readiness.json",
+    "papers/completion/neurosymbolic_supervision/audit/final_placeholder_scan.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_placeholder_scan.json"
+  },
+  "criteria": [
+    {
+      "criterion": "All predecessor task outcomes are backed by the declared deliverables and all required core acceptance obligations are satisfied or transparently reported as research limitations without false completion.",
+      "status": "met",
+      "explanation": "NS-001 through NS-024 each have a complete paper-task-evidence/v1 receipt whose snapshot artifacts still match their recorded SHA-256 digests. Live files later owned by NS-022/NS-024 (and some NS-001/NS-006/NS-010/NS-011 paths) are reported as superseded live outputs, not as missing predecessor evidence. Core frozen-experiment, packaging, checklist, and disclosure obligations are either met in those receipts or recorded as explicit research limitations (unavailable native proving, unmeasured human fidelity, unsettled charges, unmachine-checked sketches, withdrawn C/D/warm/reuse/publication arms).",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/predecessor_summary.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.stdout.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/FINAL_REVIEW.md"
+      ]
+    },
+    {
+      "criterion": "Fresh build/analysis reproduces final tables and no result, benchmark, checklist, or unintended author-detail placeholder remains in the reviewable manuscript; the official style-generated anonymous Affiliation/Address/email block is allowed.",
+      "status": "met",
+      "explanation": "Sealed-PATH extraction of supplement.zip 48cee756 through release/reproduce.sh regenerated the three unpooled component summaries (final32/prior/boundary) with Python 3.12; final32 summary SHA256 ae46fd4e matches the NS-024 recorded product and analysis/results.json useful totals A 5/16, B 4/16, mean -0.0625. pdftotext of paper.pdf 0fb82abb and NS-022 paper.pdf 907f0a24, plus snapshot .tex sources and the answered checklist, have no scientific/result/benchmark/checklist TODO/TBD/placeholder hits. Official Anonymous Author(s)/Affiliation/Address/email strings are the only exemption.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/reproduce.stdout.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/numerical_reproduction/reproduction.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/numerical_reproduction/final32_summary.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_placeholder_scan.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.stdout.json"
+      ]
+    },
+    {
+      "criterion": "Every final numerical/formal/operational claim traces to the frozen evidence ledger and no measured/estimated/unavailable categories are conflated.",
+      "status": "met",
+      "explanation": "PDF and table17 totals reconcile to analysis/results.json 6b07e88f and freeze ac605b5d / file 7175ca68: eight families, 32 cells, nested repetitions 104729/130363, original 192/160 withdrawn lineage, outcomes 9/7/2/14, quality interval [-0.1875, 0.0]. Missing API costs stay missing (16 unsettled; not zero). Human fidelity, C/D, warm/reuse, publication efficacy, and 16-family inference remain withdrawn or unmeasured. NS-023 formal sketches remain unmachine-checked conditional arguments.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/numerical_reproduction/final32_summary.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.stdout.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_readiness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/FINAL_REVIEW.md"
+      ]
+    },
+    {
+      "criterion": "Independent readiness report explicitly distinguishes submission-ready technical package from any outstanding author-owned attestations/portal action.",
+      "status": "met",
+      "explanation": "final_readiness.json sets technical_package_ready_for_author_review true while submission_authorized, publication_authorized, portal_action_performed, author_proofread_attested, and outside_reviewer_recruited are false. Outstanding author-owned attestations are listed rather than invented. The technical package is ready for author review; it is not an authorized submission.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_readiness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/FINAL_REVIEW.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.stdout.json"
+      ]
+    },
+    {
+      "criterion": "Handoff includes exact files, checksums, reproducibility commands, known limitations, live deadline note, and no implied external submission.",
+      "status": "met",
+      "explanation": "FINAL_REVIEW.md and checksums.sha256 name the exact PDF/ZIP/wrapper files and SHA-256 digests, the sealed-PATH reproduce.sh command, frozen-claim limits, and the operator/root deadline 2026-09-14T12:00:00Z. The private CFP file was not independently hashed in this worktree; that access gap is explicit. The handoff states the package does not submit, upload, or publish.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/FINAL_REVIEW.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/checksums.sha256",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/final_readiness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/reproduce.execution.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHON=/usr/bin/python3.12",
+        "/bin/sh",
+        "papers/completion/neurosymbolic_supervision/release/reproduce.sh",
+        "/tmp/ns025-receipt-extract-v1",
+        "/tmp/ns025-receipt-repro-v1"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/reproduce.stdout.log",
+      "started_at": "2026-09-13T17:24:00.705093+00:00",
+      "finished_at": "2026-09-13T17:24:01.290863+00:00",
+      "elapsed_host_wall_seconds": 0.5857613529078662,
+      "execution_kind": "sealed-PATH fresh extraction of supplement.zip 48cee756 and included reproduce.py; three unpooled child numerical reproducers; no provider/scorer/hidden-test/signature replay"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.py",
+      "started_at": "2026-09-13T17:24:12.922105+00:00",
+      "finished_at": "2026-09-13T17:24:14.149558+00:00",
+      "elapsed_host_wall_seconds": 1.2274414750281721,
+      "execution_kind": "sealed-PATH independent NS-025 readiness audit: PDF/ZIP identities, page boundaries, placeholder scan, table reconciliation, predecessor snapshot integrity, CFP-file availability, and current deliverable checks; no pdflatex, provider, scorer, or portal"
+    }
+  ],
+  "limitations": [
+    "The declared root handoff markdown c9917e47 and CFP review 0f7294cf were not present at the lift_coding paths in this worktree; this worker audited the in-repo NS-024 adopted PDF/ZIP that match the declared product hashes.",
+    "This worker did not fetch the live workshop portal. Deadline 2026-09-14T12:00:00Z and the claim that three abstracts are registered are operator/root notes, not independently confirmed portal state.",
+    "Sealed validation PATH does not provide pdflatex. Ordinary verification inspects the adopted PDF/ZIP with python3.12/pdffonts/pdfinfo/pdftotext and the included numerical reproduce.py.",
+    "Public numerical reproduction regenerates retained scalar summaries from anonymous derivatives. It does not authenticate original private signatures, rescore hidden tests, or replay providers.",
+    "Exact served Grok 4.6 revision/weights, settled charges, human semantic fidelity/expert agreement/human time, NeurIPS Code of Ethics author review, complete asset-terms confirmation, and author proofread remain unresolved or unmeasured.",
+    "Supplement executed sources retain anonymized /anonymous-runtime/operator-root/lift_coding path tokens. These are residual correlation strings, not author names or emails, and do not guarantee de-identification.",
+    "Formal arguments remain unmachine-checked conditional sketches (NS-023). C/D, warm/reuse, publication efficacy, and original 16-family inferential objectives remain withdrawn.",
+    "Live NS-022 manuscript/main.tex d10683b1 and paper.pdf 907f0a24 and NS-019 ASCII family_useful.pdf 8ea081bc were not overwritten.",
+    "This receipt is an independent readiness record, not scientific peer review or authorization to submit or publish.",
+    "No model, scorer, context, proof, experiment, retry, or resource-lease action was issued (new_scientific_calls=0)."
+  ],
+  "runtime_authority": "Artifact completion record only; no source tree outside declared NS-025 outputs, no NS-019/NS-022/NS-024 generated scientific outputs or receipts mutated, no native task status, provider attempt, or publication action was mutated.",
+  "new_worker_execution": {
+    "sealed_numerical_reproduction": [
+      "env",
+      "-i",
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro",
+      "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.cache",
+      "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.config",
+      "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.local/share",
+      "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.local/state",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTHON=/usr/bin/python3.12",
+      "/bin/sh",
+      "papers/completion/neurosymbolic_supervision/release/reproduce.sh",
+      "/tmp/ns025-receipt-extract-v1",
+      "/tmp/ns025-receipt-repro-v1"
+    ],
+    "sealed_validation_command": [
+      "env",
+      "-i",
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit",
+      "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.cache",
+      "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.config",
+      "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.local/share",
+      "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-audit/.local/state",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "/usr/bin/python3.12",
+      "-B",
+      "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-025/independent_audit.py"
+    ],
+    "new_scientific_calls": 0
+  }
+}

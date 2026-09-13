@@ -1,0 +1,81 @@
+{
+  "schema": "ns025-final-placeholder-scan/v1",
+  "task_id": "NS-025",
+  "scanned_at": "2026-09-13T17:19:41+00:00",
+  "reviewable_manuscript": {
+    "ns024_release_pdf": {
+      "path": "papers/completion/neurosymbolic_supervision/release/paper.pdf",
+      "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+      "pdftotext_sha256": "34918d170d995e41f3f9da69f6be46ed49bc856037cf06de040752c79a11afb9",
+      "scientific_placeholder_hits": []
+    },
+    "ns022_scientific_pdf": {
+      "path": "papers/completion/neurosymbolic_supervision/manuscript/paper.pdf",
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+      "pages": 12,
+      "scientific_placeholder_hits": []
+    },
+    "ns024_snapshot_tex_sources": {
+      "root": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-024/manuscript_source_v1/sources",
+      "scientific_placeholder_hits": []
+    },
+    "answered_checklist": {
+      "path": "papers/completion/neurosymbolic_supervision/manuscript/checklist.tex",
+      "sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1",
+      "answerTODO_fields": 0,
+      "justificationTODO_fields": 0,
+      "scientific_placeholder_hits": []
+    }
+  },
+  "patterns_failed_closed": [
+    "\\[TODO\\]",
+    "\\\\answerTODO",
+    "\\\\justificationTODO",
+    "answerTODO",
+    "justificationTODO",
+    "TO BE FILLED",
+    "\\bTBD\\b",
+    "compilation placeholder",
+    "\\[RESULTS(?:\\s*:|\\])",
+    "\\[CITATION",
+    "\\[REFERENCE",
+    "lorem ipsum",
+    "\\bFIXME\\b",
+    "\\bXXX\\b",
+    "[actual implementation assistance]",
+    "[candidate goals/plans/patches]",
+    "[proof candidates]",
+    "[data processing]",
+    "[manuscript preparation]"
+  ],
+  "exempted_official_anonymous_block": [
+    "Anonymous Author(s)",
+    "Anonymous Authors",
+    "Affiliation",
+    "Address",
+    "email"
+  ],
+  "exemption_rule": "Only official style-generated anonymous Affiliation/Address/email author-block text is exempt. Scientific, result, benchmark, and checklist placeholders remain failures.",
+  "official_style_unused_todo_macros": {
+    "file": "papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty",
+    "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "defines_answerTODO": true,
+    "used_in_answered_checklist": false
+  },
+  "identity_scan": {
+    "pdf_home_or_gmail_or_overleaf": false,
+    "supplement_raw_home_or_gmail": false,
+    "residual_anonymized_lift_coding_path_tokens": {
+      "count": 4,
+      "kind": "correlation_string_not_author_name",
+      "members": [
+        "final32/source/objects/171fbc492df3c9e7231e954674cf1fde0a5fec1eda733a107d5d5a147e420a4e/preparation_launcher/run_context_preparation_caveat_v2.py",
+        "final32/source/objects/1b7c3db5492d9e389134cffb0ca97d03f7e7a64b1d4fbf6baad0c03fc7b5edc9/original_operator/operator_cell.py",
+        "final32/source/objects/50f091d76afbe36b0a503bde7da10f965ce78dc633c3c3686aab4638b614ee03/continued_driver/operator_cell_continued.py",
+        "final32/source/objects/aa3ff611800f095703c158964e875aad4975bfc62859e1e83bd4f8fe719130cd/continued_driver/build_offer_drop_continued.py"
+      ]
+    }
+  },
+  "scientific_placeholder_failures": [],
+  "passed": true
+}
