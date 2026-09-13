@@ -79,7 +79,8 @@ def test_route_observation_uses_only_the_paired_projection(monkeypatch, drift):
 @pytest.mark.parametrize('runner_result', [0, 17])
 @pytest.mark.parametrize('history_only', [False, True])
 @pytest.mark.parametrize('history_failure', [False, 'read', 'publication'])
-def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, monkeypatch, runner_result, history_only, history_failure):
+@pytest.mark.parametrize('enable_queue', [False, True])
+def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, monkeypatch, runner_result, history_only, history_failure, enable_queue):
     m = module()
     from ipfs_accelerate_py.agent_supervisor.runtime import configured_board_scheduler as scheduler
     from ipfs_accelerate_py.agent_supervisor.runtime import multi_supervisor_runner as runner
@@ -127,15 +128,16 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     monkeypatch.setattr(m, '_LiveMonitor', Child)
     monkeypatch.setattr(m, '_store_id', lambda board: 'store:test')
     bindings = []
-    def configure(server, board, population, paths):
-        startup_order.append('configure'); bindings.append(population)
+    def configure(server, board, population, paths, *, enable_legacy_queue_observation):
+        startup_order.append('configure'); bindings.append((population, enable_legacy_queue_observation))
     monkeypatch.setattr(m, '_configure_native_status_before_start', configure)
     if history_failure:
         with pytest.raises(m.HandoffError, match='unknown native history'):
-            m.launch(observe_history_only=history_only)
+            m.launch(observe_history_only=history_only, enable_legacy_queue_observation=enable_queue)
     else:
-        assert m.launch(observe_history_only=history_only) == (0 if history_only else runner_result)
-    assert bindings == [population()]
+        assert m.launch(observe_history_only=history_only,
+            enable_legacy_queue_observation=enable_queue) == (0 if history_only else runner_result)
+    assert bindings == [(population(), enable_queue)]
     assert startup_order == ['configure', 'start']
     assert paths['bootstrap_receipt'].read_bytes() == historical
     after = paths['bootstrap_receipt'].stat()

@@ -176,11 +176,93 @@ def test_launcher_derives_queue_scope_from_native_board_configuration(monkeypatc
     paths = {'root': board.path(payload['runtime_paths']['root'])}
     calls = []
     server = SimpleNamespace(configure_database_status_before_start=lambda **kwargs: calls.append(kwargs))
-    m._configure_native_status_before_start(server, board, population, paths)
+    m._configure_native_status_before_start(server, board, population, paths,
+        enable_legacy_queue_observation=True)
     assert calls == [dict(board_namespace=m.PROGRAM_ID, plan_root_cid=population['plan_root_cid'],
         repository_tree_id=population['repository_tree_id'], task_cids=[t['task_cid'] for t in population['tasks']],
         queue_dir=ROOT / payload['runtime_paths']['merge_queue'],
         target_repository_id=checkout_repository_id(ROOT), target_branch=payload['merge_target_branch'])]
     payload['runtime_paths']['merge_queue'] = 'data/foreign/merge-queue'
-    with pytest.raises(m.HandoffError): m._configure_native_status_before_start(server, board, population, paths)
+    with pytest.raises(m.HandoffError):
+        m._configure_native_status_before_start(server, board, population, paths,
+            enable_legacy_queue_observation=True)
     assert len(calls) == 1
+
+
+@pytest.mark.parametrize('command', ['run', 'observe-task-histories'])
+@pytest.mark.parametrize('enabled', [False, True])
+def test_launcher_cli_queue_opt_in_is_explicit(monkeypatch, command, enabled):
+    m = module(); calls = []
+    monkeypatch.setattr(m, 'launch', lambda **kwargs: calls.append(kwargs) or 0)
+    assert m.main([command] + (['--enable-legacy-queue-observation'] if enabled else [])) == 0
+    expected = {'enable_legacy_queue_observation': enabled}
+    if command == 'observe-task-histories': expected['observe_history_only'] = True
+    assert calls == [expected]
+
+
+@pytest.mark.parametrize('enable_queue', [False, True])
+def test_preinitialized_board_without_queue_preserves_default_launch(tmp_path, monkeypatch, enable_queue):
+    """Use the actual 85-task seed, objective observer, owner and route reader."""
+    from ipfs_accelerate_py.agent_supervisor.runtime import configured_board_scheduler as scheduler
+    from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import DatabaseTaskSource
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import TypedStateOwnerError
+
+    m = module()
+    population = json.loads((ROOT / 'config/agent_supervisor_direct_objective_event_driven_planning_board.json').read_text())
+    monkeypatch.setattr(m, 'ROOT', tmp_path)
+    runtime = tmp_path / 'runtime'
+    database = runtime / 'control.duckdb'
+    program = SimpleNamespace(store_id=str(database), store_generation='doep-test',
+        quack_endpoint='quack:127.0.0.1:0', endpoint_secret_handle='handle:doep-queue-optional')
+    raw = {name: str(runtime / name) for name in ('state', 'logs', 'evidence', 'quack_owner')}
+    raw.update(root=str(runtime), merge_queue=str(runtime / 'merge-queue'))
+    board = SimpleNamespace(payload={'runtime_paths': raw}, runtime_paths=raw,
+        path=Path, resolved_database_program=lambda: program, merge_target_branch='main')
+    paths = m._runtime_paths(board)
+    with DatabaseTaskSource(database, owner_id='synthetic-doep-seed') as source:
+        source.materialize(population)
+        objective = population['objective']
+        source.intent.upsert_objective(objective_id=objective['objective_id'],
+            objective_alias='DOEP', title=objective['title'], body=objective)
+        assert source.snapshot().to_dict()['task_count'] == 85
+    assert not Path(raw['merge_queue']).exists()
+    monkeypatch.setattr(m, '_load', lambda: (board, population, paths))
+    # This fixture is not a source-adoption qualification. Native source
+    # preflight is independent; actual owner startup and reads remain unstubbed.
+    monkeypatch.setattr(scheduler, 'main', lambda args: 0)
+    servers = []
+    build = m._build_server
+    def capture(*args):
+        server = build(*args)
+        servers.append(server)
+        return server
+    monkeypatch.setattr(m, '_build_server', capture)
+    histories = []
+    def observed_history(server, board, population, **kwargs):
+        histories.append(server)
+        result = m.authoritative_status()
+        assert result['control']['task_count'] == 85
+        assert result['completion_authority'] is False
+        with pytest.raises(TypedStateOwnerError):
+            m.authoritative_status(queue_task='DOEP-063')
+        return {'observation_cid': 'synthetic:history', 'completion_authoritative': False}
+    monkeypatch.setattr(m, '_observe_task_histories', observed_history)
+    try:
+        if enable_queue:
+            with pytest.raises(FileNotFoundError) as missing:
+                m.launch(observe_history_only=True, enable_legacy_queue_observation=True)
+            assert missing.value.filename == raw['merge_queue']
+            assert histories == []
+        else:
+            assert m.launch(observe_history_only=True) == 0
+            assert len(histories) == 1
+        assert not Path(raw['merge_queue']).exists()
+        assert not paths['operator_pid'].exists()
+        assert len(servers) == 1
+        assert servers[0]._connection is None and servers[0]._owner is None
+        assert servers[0]._command_gateway is None
+        assert not servers[0].typed_command_socket_path().exists()
+        assert not servers[0].typed_command_token_path().exists()
+    finally:
+        for server in servers:
+            server.stop()

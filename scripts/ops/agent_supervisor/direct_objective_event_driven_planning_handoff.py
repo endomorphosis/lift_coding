@@ -3294,23 +3294,26 @@ def _bind_native_status(server: Any, population: Mapping[str, Any]) -> None:
 
 def _configure_native_status_before_start(
     server: Any, board: Any, population: Mapping[str, Any], paths: Mapping[str, Path],
+    *, enable_legacy_queue_observation: bool = False,
 ) -> None:
-    """Opt in to this board's existing queue before publishing status readers."""
+    """Bind this board before publication; queue observation is explicit opt-in."""
     from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
 
-    raw = board.payload.get("runtime_paths")
-    if not isinstance(raw, Mapping) or type(raw.get("merge_queue")) is not str:
-        raise HandoffError("DOEP queue observation requires its configured queue scope")
-    queue = board.path(raw["merge_queue"])
-    if queue != paths["root"] / "merge-queue":
-        raise HandoffError("DOEP queue observation differs from its canonical campaign queue")
-    server.configure_database_status_before_start(
+    arguments = dict(
         board_namespace=PROGRAM_ID, plan_root_cid=population["plan_root_cid"],
         repository_tree_id=population["repository_tree_id"],
         task_cids=[task["task_cid"] for task in population["tasks"]],
-        queue_dir=queue, target_repository_id=checkout_repository_id(ROOT),
-        target_branch=board.merge_target_branch,
     )
+    if enable_legacy_queue_observation:
+        raw = board.payload.get("runtime_paths")
+        if not isinstance(raw, Mapping) or type(raw.get("merge_queue")) is not str:
+            raise HandoffError("DOEP queue observation requires its configured queue scope")
+        queue = board.path(raw["merge_queue"])
+        if queue != paths["root"] / "merge-queue":
+            raise HandoffError("DOEP queue observation differs from its canonical campaign queue")
+        arguments.update(queue_dir=queue, target_repository_id=checkout_repository_id(ROOT),
+                         target_branch=board.merge_target_branch)
+    server.configure_database_status_before_start(**arguments)
 
 
 def authoritative_status(
@@ -3414,7 +3417,9 @@ def authoritative_status(
         connection.close()
 
 
-def launch(*, observe_history_only: bool = False) -> int:
+def launch(
+    *, observe_history_only: bool = False, enable_legacy_queue_observation: bool = False,
+) -> int:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
     )
@@ -3453,7 +3458,8 @@ def launch(*, observe_history_only: bool = False) -> int:
     prior_environment = dict(os.environ)
     result = 1
     try:
-        _configure_native_status_before_start(server, board, population, paths)
+        _configure_native_status_before_start(server, board, population, paths,
+            enable_legacy_queue_observation=enable_legacy_queue_observation)
         identity = server.start()
         if not server.ready():
             raise HandoffError("Quack state owner did not become ready")
@@ -3996,8 +4002,10 @@ def _retained_pool_source_admission() -> dict[str, Any]:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("run")
-    commands.add_parser("observe-task-histories")
+    for command in ("run", "observe-task-histories"):
+        launch_parser = commands.add_parser(command)
+        launch_parser.add_argument("--enable-legacy-queue-observation", action="store_true",
+            help="bind read-only observation of the existing configured Portal queue before startup")
     commands.add_parser("recover-blocked-lock-timeout")
     commands.add_parser("recover-doep-031-protected-control-plane-update")
     legacy_parser = commands.add_parser("recover-legacy-verification-timeout")
@@ -4048,9 +4056,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "recover-claim-verification":
             return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision)
         if args.command == "run":
-            return launch()
+            return launch(enable_legacy_queue_observation=args.enable_legacy_queue_observation)
         if args.command == "observe-task-histories":
-            return launch(observe_history_only=True)
+            return launch(observe_history_only=True,
+                          enable_legacy_queue_observation=args.enable_legacy_queue_observation)
         if args.command == "recover-blocked-lock-timeout":
             return recover_blocked_lock_timeout()
         if args.command == "recover-doep-031-protected-control-plane-update":
