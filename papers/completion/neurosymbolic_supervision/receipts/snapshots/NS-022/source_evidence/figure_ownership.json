@@ -1,0 +1,31 @@
+{
+  "schema": "ns022-figure-ownership-distinction/v1",
+  "excluded_from_ns022_copy": "source/generated/figures/family_useful.pdf",
+  "historical_matplotlib_input": {
+    "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06",
+    "bytes": 16554,
+    "type3_fonts": true,
+    "role": "retained original analyzer-produced PDF; not referenced by accepted main.tex; not copied onto live NS019 output",
+    "present_in_writing_inputs": true,
+    "copied_to_live_manuscript": false,
+    "copied_as_raw_ns022_snapshot": false
+  },
+  "live_ns019_ascii_derivative": {
+    "path": "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.pdf",
+    "sha256": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "bytes": 5019,
+    "role": "current NS019-owned handwritten ASCII rendering; task-owned historical output, not the published Figure 1",
+    "preserved_unchanged": true
+  },
+  "published_figure1_font42_layout": {
+    "accepted_source_path": "source/layout/family_useful.pdf",
+    "raw_sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443",
+    "referenced_by_accepted_main_tex": "layout/family_useful.pdf",
+    "type3_fonts": false,
+    "embedded": "CID TrueType DejaVuSans"
+  },
+  "svg_unchanged": {
+    "path": "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.svg",
+    "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+  }
+}

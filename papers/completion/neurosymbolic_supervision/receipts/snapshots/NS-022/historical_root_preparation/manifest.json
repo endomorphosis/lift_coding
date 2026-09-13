@@ -1,0 +1,157 @@
+{
+  "accepted_pdf": {
+    "bytes": 216541,
+    "path": "paper.pdf",
+    "role": "accepted_12_page_NS022_manuscript_without_NS024_checklist",
+    "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+  },
+  "all_essential_bytes_available_in_checkout": true,
+  "files": {
+    "README.md": {
+      "bytes": 2515,
+      "role": "checkout_relative_worker_guidance",
+      "sha256": "3cc6bde2810680f2d17101b10389da65e09ae65d4ce113b97136d38d5faeed13"
+    },
+    "evidence/original_build_record.json": {
+      "bytes": 26093,
+      "role": "exact_retained_root_document_preparation_evidence_metadata",
+      "sha256": "f8d9758c70e24d0ab10d3a37e38fc87fac64266f6965170e2f79a9753e06cc50"
+    },
+    "evidence/original_font_qualification.json": {
+      "bytes": 10962,
+      "role": "exact_retained_root_document_preparation_evidence_metadata",
+      "sha256": "ece5c32bfcf5e244281d747fae4a9f71debd20026825b31d999902f2a78db2d7"
+    },
+    "evidence/original_root_font_review.json": {
+      "bytes": 1892,
+      "role": "exact_retained_root_document_preparation_evidence_metadata",
+      "sha256": "9857948a3375e3dbc1593a78bf2388abbce0fb746eff79daed5dda1bae88607e"
+    },
+    "paper.pdf": {
+      "bytes": 216541,
+      "role": "accepted_12_page_NS022_manuscript_without_NS024_checklist",
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+    },
+    "source/appendix/entry.tex": {
+      "bytes": 708,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+    },
+    "source/appendix/formal_arguments.tex": {
+      "bytes": 10689,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+    },
+    "source/fragments/abstract.tex": {
+      "bytes": 1125,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "6bbfa679a15787c20a5edd71cc64b2a37e13dc1b5e16ffca125d7cf2a31240c8"
+    },
+    "source/fragments/analysis_method.tex": {
+      "bytes": 2619,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+    },
+    "source/fragments/conclusion.tex": {
+      "bytes": 772,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "947a8337834e907cfb869b4c01869499a5a3d18378c6fbe51b1673091fc88711"
+    },
+    "source/fragments/design.tex": {
+      "bytes": 4229,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+    },
+    "source/fragments/evidence_method.tex": {
+      "bytes": 3099,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "0b8d25f29d1636378d348fd0fe8ec7ea3806e239d62d29656f92afd65f2a633c"
+    },
+    "source/fragments/introduction.tex": {
+      "bytes": 2105,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "c26b82b6fb9d1eafce035fb0bcf2011ab86f0c74e5c65e8f1e26fdd4b7f97bcf"
+    },
+    "source/fragments/limitations.tex": {
+      "bytes": 2050,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "f7aad3fef3d624e4dd3bd82162682a8713df4d118e4abd9ea3f7a1a1960caa53"
+    },
+    "source/fragments/related_work.tex": {
+      "bytes": 1490,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+    },
+    "source/fragments/results.tex": {
+      "bytes": 5438,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "8bed75f07be9c7af1fd49a1ea48650333ea70047d84b7db1ea01c0015cf73f55"
+    },
+    "source/generated/ablations.tex": {
+      "bytes": 894,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+    },
+    "source/generated/figures/family_useful.pdf": {
+      "bytes": 16554,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06"
+    },
+    "source/generated/figures/family_useful.svg": {
+      "bytes": 42894,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+    },
+    "source/generated/table17.tex": {
+      "bytes": 477,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    },
+    "source/generated/table18.tex": {
+      "bytes": 1431,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    "source/header.tex": {
+      "bytes": 586,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "1c85c4d98b25222af3d94ea3843e3a0ed03883803b22eb40472c4512414eeb0e"
+    },
+    "source/layout/family_useful.pdf": {
+      "bytes": 14063,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443"
+    },
+    "source/layout/table18.tex": {
+      "bytes": 1455,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+    },
+    "source/main.tex": {
+      "bytes": 2253,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab"
+    },
+    "source/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "source/verified_references.bib": {
+      "bytes": 6339,
+      "role": "exact_accepted_NS022_source_or_retained_generated_input",
+      "sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951"
+    }
+  },
+  "historical_build": "evidence/original_build_record.json",
+  "native_task_completion_or_publication_claimed": false,
+  "original_absolute_metadata_paths_are_historical_commitments_only": true,
+  "original_package_sha256": "6e18e9c5ed8fcd9da986828fc79a0ffbc7488b3b415df3ba8cdd8767caf4446b",
+  "original_selected_manifest_sha256": "f992bb5a03ea3412c8644827ba71f7051e259ac735566f9f1b736d9abff80002",
+  "private_environment_credentials_hidden_bodies_or_general_worker_logs_copied": false,
+  "review": "evidence/original_root_font_review.json",
+  "schema": "ns022-complete-checkout-writing-inputs/v1",
+  "source_entrypoint": "source/main.tex",
+  "source_file_count": 22,
+  "task_id": "NS-022"
+}

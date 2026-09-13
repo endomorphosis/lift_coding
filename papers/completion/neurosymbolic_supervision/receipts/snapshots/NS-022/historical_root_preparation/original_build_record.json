@@ -1,0 +1,382 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/bin/pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-output-directory=build_v4",
+        "main.tex"
+      ],
+      "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2",
+      "elapsed_host_wall_seconds": 0.3183380300179124,
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:21:11.519873+00:00",
+      "started_at": "2026-09-13T13:21:11.201552+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/01_stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 14465,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/01_stdout.log",
+        "sha256": "b6be4ea65222b466bb0ffcbb93f588839243498a1ef6bfd85277ddd162ef097d"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/bin/bibtex",
+        "build_v4/main"
+      ],
+      "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2",
+      "elapsed_host_wall_seconds": 0.020062583964318037,
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:21:11.540071+00:00",
+      "started_at": "2026-09-13T13:21:11.520025+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/02_stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 165,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/02_stdout.log",
+        "sha256": "f2b5b7eda12e4f597f70b23ac48f510d4eb01cd9cb8050bf242e283b2e794fde"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/bin/pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-output-directory=build_v4",
+        "main.tex"
+      ],
+      "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2",
+      "elapsed_host_wall_seconds": 0.318470063037239,
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:21:11.858655+00:00",
+      "started_at": "2026-09-13T13:21:11.540200+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/03_stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 13786,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/03_stdout.log",
+        "sha256": "1b62f219f311596c692bd8bcd29ae38125b173c58abc3cccd66bdc14f09ef568"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/bin/pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-output-directory=build_v4",
+        "main.tex"
+      ],
+      "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2",
+      "elapsed_host_wall_seconds": 0.3184912789147347,
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:21:12.177286+00:00",
+      "started_at": "2026-09-13T13:21:11.858810+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/04_stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 12674,
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_execution_v4/04_stdout.log",
+        "sha256": "c9e6f872e6bd9405ffb44bc4ecd9f9a034ab346bea1b30b91893234ffe35ecac"
+      },
+      "timed_out": false
+    }
+  ],
+  "finished_at": "2026-09-13T13:21:12.177429+00:00",
+  "live_or_native_changes": false,
+  "official_checklist_included": false,
+  "output_files": {
+    "main.aux": {
+      "bytes": 9330,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/build_v4/main.aux",
+      "sha256": "b5a6648d73a03c03f75e63f191249972e0d314f2f76b2d95785088e26f73c715"
+    },
+    "main.bbl": {
+      "bytes": 2782,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/build_v4/main.bbl",
+      "sha256": "3f614878c41daca15df2bc663570b33be76e7aa867d3426cd3990763f948c10f"
+    },
+    "main.blg": {
+      "bytes": 908,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/build_v4/main.blg",
+      "sha256": "7dbc099e32832934a44e7e1bc30b9cdd8093d9f168b58ccf3022ef7eec007bed"
+    },
+    "main.log": {
+      "bytes": 27479,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/build_v4/main.log",
+      "sha256": "5ada1182bfa3299b75cea9baeb70057567c37738fc788ac39fe96723ca2d28f6"
+    },
+    "main.out": {
+      "bytes": 1809,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/build_v4/main.out",
+      "sha256": "343f3afba4184ebfbddd314db9ab9505d2edf8ed3de3d0b27a77a8d15ef2153f"
+    },
+    "main.pdf": {
+      "bytes": 216541,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/build_v4/main.pdf",
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+    }
+  },
+  "schema": "ns022-actual-offline-manuscript-build/v1",
+  "scientific_calls": 0,
+  "source": {
+    "bytes": 2635,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/build_manuscript_v4.py",
+    "sha256": "83cd5731b66fe30f0b702ad4cea14e49a4804239c777518bfc52f25b8ff411d7"
+  },
+  "source_after": {
+    "appendix/entry.tex": {
+      "bytes": 708,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/appendix/entry.tex",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+    },
+    "appendix/formal_arguments.tex": {
+      "bytes": 10689,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/appendix/formal_arguments.tex",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+    },
+    "fragments/abstract.tex": {
+      "bytes": 1125,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/abstract.tex",
+      "sha256": "6bbfa679a15787c20a5edd71cc64b2a37e13dc1b5e16ffca125d7cf2a31240c8"
+    },
+    "fragments/analysis_method.tex": {
+      "bytes": 2619,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/analysis_method.tex",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+    },
+    "fragments/conclusion.tex": {
+      "bytes": 772,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/conclusion.tex",
+      "sha256": "947a8337834e907cfb869b4c01869499a5a3d18378c6fbe51b1673091fc88711"
+    },
+    "fragments/design.tex": {
+      "bytes": 4229,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/design.tex",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+    },
+    "fragments/evidence_method.tex": {
+      "bytes": 3099,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/evidence_method.tex",
+      "sha256": "0b8d25f29d1636378d348fd0fe8ec7ea3806e239d62d29656f92afd65f2a633c"
+    },
+    "fragments/introduction.tex": {
+      "bytes": 2105,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/introduction.tex",
+      "sha256": "c26b82b6fb9d1eafce035fb0bcf2011ab86f0c74e5c65e8f1e26fdd4b7f97bcf"
+    },
+    "fragments/limitations.tex": {
+      "bytes": 2050,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/limitations.tex",
+      "sha256": "f7aad3fef3d624e4dd3bd82162682a8713df4d118e4abd9ea3f7a1a1960caa53"
+    },
+    "fragments/related_work.tex": {
+      "bytes": 1490,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/related_work.tex",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+    },
+    "fragments/results.tex": {
+      "bytes": 5438,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/results.tex",
+      "sha256": "8bed75f07be9c7af1fd49a1ea48650333ea70047d84b7db1ea01c0015cf73f55"
+    },
+    "generated/ablations.tex": {
+      "bytes": 894,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/ablations.tex",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+    },
+    "generated/figures/family_useful.pdf": {
+      "bytes": 16554,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/figures/family_useful.pdf",
+      "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06"
+    },
+    "generated/figures/family_useful.svg": {
+      "bytes": 42894,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/figures/family_useful.svg",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+    },
+    "generated/table17.tex": {
+      "bytes": 477,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/table17.tex",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    },
+    "generated/table18.tex": {
+      "bytes": 1431,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/table18.tex",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    "header.tex": {
+      "bytes": 586,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/header.tex",
+      "sha256": "1c85c4d98b25222af3d94ea3843e3a0ed03883803b22eb40472c4512414eeb0e"
+    },
+    "layout/family_useful.pdf": {
+      "bytes": 14063,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/layout/family_useful.pdf",
+      "sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443"
+    },
+    "layout/table18.tex": {
+      "bytes": 1455,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/layout/table18.tex",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+    },
+    "main.tex": {
+      "bytes": 2253,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/main.tex",
+      "sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab"
+    },
+    "neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/neurips_2026_vericode.sty",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "verified_references.bib": {
+      "bytes": 6339,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/verified_references.bib",
+      "sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951"
+    }
+  },
+  "source_before": {
+    "appendix/entry.tex": {
+      "bytes": 708,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/appendix/entry.tex",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+    },
+    "appendix/formal_arguments.tex": {
+      "bytes": 10689,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/appendix/formal_arguments.tex",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+    },
+    "fragments/abstract.tex": {
+      "bytes": 1125,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/abstract.tex",
+      "sha256": "6bbfa679a15787c20a5edd71cc64b2a37e13dc1b5e16ffca125d7cf2a31240c8"
+    },
+    "fragments/analysis_method.tex": {
+      "bytes": 2619,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/analysis_method.tex",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+    },
+    "fragments/conclusion.tex": {
+      "bytes": 772,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/conclusion.tex",
+      "sha256": "947a8337834e907cfb869b4c01869499a5a3d18378c6fbe51b1673091fc88711"
+    },
+    "fragments/design.tex": {
+      "bytes": 4229,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/design.tex",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+    },
+    "fragments/evidence_method.tex": {
+      "bytes": 3099,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/evidence_method.tex",
+      "sha256": "0b8d25f29d1636378d348fd0fe8ec7ea3806e239d62d29656f92afd65f2a633c"
+    },
+    "fragments/introduction.tex": {
+      "bytes": 2105,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/introduction.tex",
+      "sha256": "c26b82b6fb9d1eafce035fb0bcf2011ab86f0c74e5c65e8f1e26fdd4b7f97bcf"
+    },
+    "fragments/limitations.tex": {
+      "bytes": 2050,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/limitations.tex",
+      "sha256": "f7aad3fef3d624e4dd3bd82162682a8713df4d118e4abd9ea3f7a1a1960caa53"
+    },
+    "fragments/related_work.tex": {
+      "bytes": 1490,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/related_work.tex",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+    },
+    "fragments/results.tex": {
+      "bytes": 5438,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/fragments/results.tex",
+      "sha256": "8bed75f07be9c7af1fd49a1ea48650333ea70047d84b7db1ea01c0015cf73f55"
+    },
+    "generated/ablations.tex": {
+      "bytes": 894,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/ablations.tex",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+    },
+    "generated/figures/family_useful.pdf": {
+      "bytes": 16554,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/figures/family_useful.pdf",
+      "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06"
+    },
+    "generated/figures/family_useful.svg": {
+      "bytes": 42894,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/figures/family_useful.svg",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+    },
+    "generated/table17.tex": {
+      "bytes": 477,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/table17.tex",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    },
+    "generated/table18.tex": {
+      "bytes": 1431,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/generated/table18.tex",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    "header.tex": {
+      "bytes": 586,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/header.tex",
+      "sha256": "1c85c4d98b25222af3d94ea3843e3a0ed03883803b22eb40472c4512414eeb0e"
+    },
+    "layout/family_useful.pdf": {
+      "bytes": 14063,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/layout/family_useful.pdf",
+      "sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443"
+    },
+    "layout/table18.tex": {
+      "bytes": 1455,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/layout/table18.tex",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+    },
+    "main.tex": {
+      "bytes": 2253,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/main.tex",
+      "sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab"
+    },
+    "neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/neurips_2026_vericode.sty",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "verified_references.bib": {
+      "bytes": 6339,
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/manuscript_font_v2/verified_references.bib",
+      "sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951"
+    }
+  },
+  "source_bindings": {
+    "bytes": 29555,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns022_actual_manuscript_assembly_v1/source_bindings_v4.private.json",
+    "sha256": "3dfb015092dc5f4bbf8616d8cca451d2bbfd20c1f8430b74302c17116c60f87d"
+  },
+  "source_unchanged": true,
+  "started_at": "2026-09-13T13:21:11.199847+00:00",
+  "submission_or_task_completion_claimed": false,
+  "success": true
+}

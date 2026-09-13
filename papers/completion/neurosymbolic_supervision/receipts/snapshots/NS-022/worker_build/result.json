@@ -1,0 +1,117 @@
+{
+  "schema": "ns022-worker-scratch-build/v1",
+  "pdflatex": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex",
+  "bibtex": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/bibtex",
+  "scratch": "/tmp/ipfs-accelerate-ns022-worker-relative-d6c2cdaa0536",
+  "prior_absolute_tmp_bibtex_blocked_by_openout_any": true,
+  "relative_cwd_retry": true,
+  "sealed_validation_path_has_pdflatex": false,
+  "historical_root_pdflatex": "/home/barberb/.local/bin/pdflatex",
+  "this_is_not_the_historical_root_command": true,
+  "shell_escape": "disabled",
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "/tmp/ipfs-accelerate-ns022-worker-relative-d6c2cdaa0536",
+      "exit_code": 0,
+      "started_at": "2026-09-13T15:06:41.031463+00:00",
+      "finished_at": "2026-09-13T15:06:41.297422+00:00",
+      "elapsed_host_wall_seconds": 0.2659448649501428,
+      "stdout_bytes": 14440,
+      "stderr_bytes": 0,
+      "stdout_sha256": "44eab3b9f7db49e44ada4030d956c348e8c650c36277f3771ec5e9072517fc4b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "execution_kind": "worker TinyTeX current-source compile in relative scratch cwd; -no-shell-escape; not sealed validation PATH; not historical root /home/barberb/.local/bin/pdflatex"
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/bibtex",
+        "main"
+      ],
+      "cwd": "/tmp/ipfs-accelerate-ns022-worker-relative-d6c2cdaa0536",
+      "exit_code": 0,
+      "started_at": "2026-09-13T15:06:41.297488+00:00",
+      "finished_at": "2026-09-13T15:06:41.305098+00:00",
+      "elapsed_host_wall_seconds": 0.007615245063789189,
+      "stdout_bytes": 156,
+      "stderr_bytes": 0,
+      "stdout_sha256": "368cee06f1f905fed392787666ff02e02201aeea1cc0c0039252dc1fd5b4975e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "execution_kind": "worker TinyTeX current-source compile in relative scratch cwd; -no-shell-escape; not sealed validation PATH; not historical root /home/barberb/.local/bin/pdflatex"
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "/tmp/ipfs-accelerate-ns022-worker-relative-d6c2cdaa0536",
+      "exit_code": 0,
+      "started_at": "2026-09-13T15:06:41.305124+00:00",
+      "finished_at": "2026-09-13T15:06:41.563777+00:00",
+      "elapsed_host_wall_seconds": 0.2586652759928256,
+      "stdout_bytes": 13733,
+      "stderr_bytes": 0,
+      "stdout_sha256": "e57631942f8a37d686596e086f25623bbb2e3ec279085d60bf6b3a4d9c54c4cb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "execution_kind": "worker TinyTeX current-source compile in relative scratch cwd; -no-shell-escape; not sealed validation PATH; not historical root /home/barberb/.local/bin/pdflatex"
+    },
+    {
+      "argv": [
+        "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "/tmp/ipfs-accelerate-ns022-worker-relative-d6c2cdaa0536",
+      "exit_code": 0,
+      "started_at": "2026-09-13T15:06:41.563826+00:00",
+      "finished_at": "2026-09-13T15:06:41.837802+00:00",
+      "elapsed_host_wall_seconds": 0.2739916549762711,
+      "stdout_bytes": 12621,
+      "stderr_bytes": 0,
+      "stdout_sha256": "bbb6b02096feec7df729a410163c2ce8b3e162c17e7d4ae017440b4d0da8d095",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "execution_kind": "worker TinyTeX current-source compile in relative scratch cwd; -no-shell-escape; not sealed validation PATH; not historical root /home/barberb/.local/bin/pdflatex"
+    }
+  ],
+  "success": true,
+  "output_pdf": {
+    "bytes": 216541,
+    "sha256": "2eb0e6dc18e6b21770e81f06ef77bb8544dfea47d1ea6bc8ea81262a18204e52",
+    "matches_accepted_907f0a24": false,
+    "pages": 12,
+    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nZHJDNZ+NimbusRomNo9L-Medi            Type 1            Custom           yes yes yes     58  0\nAEZVAK+NimbusRomNo9L-Regu            Type 1            Custom           yes yes yes     59  0\nWQEBFD+SFTT1000                      Type 1            Custom           yes yes yes     60  0\nNBAIUF+NimbusSanL-Regu               Type 1            Custom           yes yes yes     61  0\nESJFTF+CMSY10                        Type 1            Builtin          yes yes yes     62  0\nXFXWXU+CMR10                         Type 1            Builtin          yes yes yes     63  0\nJJTGHA+CMMI10                        Type 1            Builtin          yes yes yes     64  0\nCBUQMG+CMMI7                         Type 1            Builtin          yes yes yes     78  0\nIMIRNL+CMR7                          Type 1            Builtin          yes yes yes     90  0\nWOXOGF+CMEX10                        Type 1            Builtin          yes yes yes     91  0\nYFOPWW+NimbusRomNo9L-ReguItal        Type 1            Custom           yes yes yes    129  0\nNSJEOL+CMSY7                         Type 1            Builtin          yes yes yes    138  0\nBMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    206  0\n",
+    "type3_present": false
+  },
+  "deliverable_paper_pdf": {
+    "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+    "bytes": 216541,
+    "pages": 12,
+    "role": "accepted historical build product adopted as manuscript/paper.pdf",
+    "worker_compile_does_not_replace_accepted_bytes": true
+  },
+  "declared_checkpoint_directory": {
+    "declared": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/789706549be7af1b7701946f/implementation_checkpoints/ns-022-d6c2cdaa0536",
+    "writable": false,
+    "error": "OSError: [Errno 30] Read-only file system: '/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state'"
+  },
+  "first_attempt_absolute_output_directory": {
+    "success": false,
+    "reason": "bibtex openout_any=p refused absolute /tmp .blg path",
+    "first_pass_pdf_sha256": "50e2d632315c1c167b041772478d2bb439abae600d25ae292159b47388e6fee6",
+    "first_pass_pages": 11
+  }
+}

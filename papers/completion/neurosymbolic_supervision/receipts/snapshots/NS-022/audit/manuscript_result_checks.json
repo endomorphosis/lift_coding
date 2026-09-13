@@ -1,0 +1,417 @@
+{
+  "schema": "ns022-manuscript-result-checks/v1",
+  "task_id": "NS-022",
+  "all_passed": true,
+  "accepted_outputs": {
+    "manuscript/main.tex": {
+      "sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+      "bytes": 2253
+    },
+    "manuscript/paper.pdf": {
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+      "bytes": 216541,
+      "pages": 12
+    }
+  },
+  "source_adoption": {
+    "writing_inputs_manifest_sha256": "1ee539aa44992c6f4aaae6b475921525380faecb15fe3e61b6aeae892da543af",
+    "allowlisted_source_count": 21,
+    "excluded_generated_figure": "source/generated/figures/family_useful.pdf",
+    "copied": {
+      "appendix/entry.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0",
+        "bytes": 708
+      },
+      "appendix/formal_arguments.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+        "bytes": 10689
+      },
+      "fragments/abstract.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "6bbfa679a15787c20a5edd71cc64b2a37e13dc1b5e16ffca125d7cf2a31240c8",
+        "bytes": 1125
+      },
+      "fragments/analysis_method.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509",
+        "bytes": 2619
+      },
+      "fragments/conclusion.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "947a8337834e907cfb869b4c01869499a5a3d18378c6fbe51b1673091fc88711",
+        "bytes": 772
+      },
+      "fragments/design.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1",
+        "bytes": 4229
+      },
+      "fragments/evidence_method.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "0b8d25f29d1636378d348fd0fe8ec7ea3806e239d62d29656f92afd65f2a633c",
+        "bytes": 3099
+      },
+      "fragments/introduction.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "c26b82b6fb9d1eafce035fb0bcf2011ab86f0c74e5c65e8f1e26fdd4b7f97bcf",
+        "bytes": 2105
+      },
+      "fragments/limitations.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "f7aad3fef3d624e4dd3bd82162682a8713df4d118e4abd9ea3f7a1a1960caa53",
+        "bytes": 2050
+      },
+      "fragments/related_work.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f",
+        "bytes": 1490
+      },
+      "fragments/results.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "8bed75f07be9c7af1fd49a1ea48650333ea70047d84b7db1ea01c0015cf73f55",
+        "bytes": 5438
+      },
+      "generated/ablations.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+        "bytes": 894
+      },
+      "generated/figures/family_useful.svg": {
+        "kind": "raw_source_copy",
+        "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
+        "bytes": 42894
+      },
+      "generated/table17.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+        "bytes": 477
+      },
+      "generated/table18.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+        "bytes": 1431
+      },
+      "header.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "1c85c4d98b25222af3d94ea3843e3a0ed03883803b22eb40472c4512414eeb0e",
+        "bytes": 586
+      },
+      "layout/family_useful.pdf": {
+        "kind": "base64",
+        "raw_sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443",
+        "base64_sha256": "018a63253057464f0212106bc6656027be09f47ee248eaf3165b15ef089b263d"
+      },
+      "layout/table18.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3",
+        "bytes": 1455
+      },
+      "main.tex": {
+        "kind": "raw_source_copy",
+        "sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+        "bytes": 2253
+      },
+      "neurips_2026_vericode.sty": {
+        "kind": "raw_source_copy",
+        "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+        "bytes": 13757
+      },
+      "verified_references.bib": {
+        "kind": "raw_source_copy",
+        "sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951",
+        "bytes": 6339
+      }
+    },
+    "live_manuscript_writes": [
+      "papers/completion/neurosymbolic_supervision/manuscript/main.tex",
+      "papers/completion/neurosymbolic_supervision/manuscript/paper.pdf"
+    ]
+  },
+  "figure_ownership": {
+    "published_figure1": {
+      "source": "layout/family_useful.pdf",
+      "raw_sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443",
+      "snapshot": "canonical base64, not a raw layout snapshot"
+    },
+    "live_ns019_ascii_pdf": {
+      "path": "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.pdf",
+      "sha256": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+      "bytes": 5019,
+      "preserved_unchanged": true,
+      "not_the_published_figure": true
+    },
+    "historical_matplotlib_pdf": {
+      "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06",
+      "bytes": 16554,
+      "not_copied": true,
+      "type3": true
+    }
+  },
+  "pdf_inspection": {
+    "pages": 12,
+    "page_boundaries": {
+      "main": [
+        1,
+        6
+      ],
+      "references": [
+        7,
+        7
+      ],
+      "appendices": [
+        8,
+        12
+      ]
+    },
+    "title": "Neurosymbolic Supervision with Explicit Evidence: A Cold Repair Study",
+    "author": "Anonymous Authors",
+    "type3_present": false,
+    "fonts_embedded_type1_or_cid_truetype": true,
+    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nZHJDNZ+NimbusRomNo9L-Medi            Type 1            Custom           yes yes yes     58  0\nAEZVAK+NimbusRomNo9L-Regu            Type 1            Custom           yes yes yes     59  0\nWQEBFD+SFTT1000                      Type 1            Custom           yes yes yes     60  0\nNBAIUF+NimbusSanL-Regu               Type 1            Custom           yes yes yes     61  0\nESJFTF+CMSY10                        Type 1            Builtin          yes yes yes     62  0\nXFXWXU+CMR10                         Type 1            Builtin          yes yes yes     63  0\nJJTGHA+CMMI10                        Type 1            Builtin          yes yes yes     64  0\nCBUQMG+CMMI7                         Type 1            Builtin          yes yes yes     78  0\nIMIRNL+CMR7                          Type 1            Builtin          yes yes yes     90  0\nWOXOGF+CMEX10                        Type 1            Builtin          yes yes yes     91  0\nYFOPWW+NimbusRomNo9L-ReguItal        Type 1            Custom           yes yes yes    129  0\nNSJEOL+CMSY7                         Type 1            Builtin          yes yes yes    138  0\nBMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    206  0\n"
+  },
+  "placeholder_scan": {
+    "scientific_source_hits": [],
+    "paper_pdf_hits": [],
+    "style_todo_macros_are_official_definitions_not_scientific_placeholders": true
+  },
+  "numeric_checks": [
+    {
+      "name": "useful_9_of_32",
+      "expected": 9,
+      "present": true,
+      "detail": "useful_completions=9"
+    },
+    {
+      "name": "arm_A_5_of_16",
+      "expected": 5,
+      "present": true,
+      "detail": "A useful=5"
+    },
+    {
+      "name": "arm_B_4_of_16",
+      "expected": 4,
+      "present": true,
+      "detail": "B useful=4"
+    },
+    {
+      "name": "mean_B_minus_A",
+      "expected": -0.0625,
+      "present": true,
+      "detail": "mean_B_minus_A_useful=-0.0625"
+    },
+    {
+      "name": "descriptive_ci",
+      "expected": [
+        -0.1875,
+        0.0
+      ],
+      "present": true,
+      "detail": "bootstrap quality_B_minus_A [-0.1875, 0]"
+    },
+    {
+      "name": "families_8",
+      "expected": 8,
+      "present": true,
+      "detail": "independent_families=8"
+    },
+    {
+      "name": "cells_32",
+      "expected": 32,
+      "present": true,
+      "detail": "planned_cells=32"
+    },
+    {
+      "name": "nested_104729",
+      "expected": 104729,
+      "present": true,
+      "detail": "nested repetition 104729"
+    },
+    {
+      "name": "nested_130363",
+      "expected": 130363,
+      "present": true,
+      "detail": "nested repetition 130363"
+    },
+    {
+      "name": "deadlines_14",
+      "expected": 14,
+      "present": true,
+      "detail": "proposal_child_deadline=14"
+    },
+    {
+      "name": "hidden_failed_7",
+      "expected": 7,
+      "present": true,
+      "detail": "hidden_acceptance_failed=7"
+    },
+    {
+      "name": "proposal_failures_2",
+      "expected": 2,
+      "present": true,
+      "detail": "known_proposal_failure=2"
+    },
+    {
+      "name": "scoring_16",
+      "expected": 16,
+      "present": true,
+      "detail": "score known_count=16"
+    },
+    {
+      "name": "cold_completed_15",
+      "expected": 15,
+      "present": true,
+      "detail": "actual_cold_completed=15"
+    },
+    {
+      "name": "posts_32",
+      "expected": 32,
+      "present": true,
+      "detail": "actual_provider_posts=32"
+    },
+    {
+      "name": "child_median_472.777",
+      "expected": 472.777,
+      "present": true,
+      "detail": "round3(472.7765865229885)=472.777"
+    },
+    {
+      "name": "wrapper_median_473.660",
+      "expected": 473.66,
+      "present": true,
+      "detail": "round3(473.6595022229594)=473.660"
+    },
+    {
+      "name": "gateway_median_474.107",
+      "expected": 474.107,
+      "present": true,
+      "detail": "round3(474.1069081349997)=474.107"
+    },
+    {
+      "name": "score_median_2.500",
+      "expected": 2.5,
+      "present": true,
+      "detail": "round3(2.500105839979369)=2.500"
+    },
+    {
+      "name": "grant_median_603.644",
+      "expected": 603.644,
+      "present": true,
+      "detail": "round3(603.643553)=603.644"
+    },
+    {
+      "name": "grant_max_10938.574",
+      "expected": 10938.574,
+      "present": true,
+      "detail": "round3(10938.574228)=10938.574"
+    },
+    {
+      "name": "original_192",
+      "expected": 192,
+      "present": true,
+      "detail": "original_planned_factor_cells=192"
+    },
+    {
+      "name": "withdrawn_160",
+      "expected": 160,
+      "present": true,
+      "detail": "withdrawn_planned_factor_cells=160"
+    },
+    {
+      "name": "unrecruited_8",
+      "expected": 8,
+      "present": true,
+      "detail": "unrecruited_original_families=8"
+    },
+    {
+      "name": "api_usage_16_of_32",
+      "expected": 16,
+      "present": true,
+      "detail": "API usage known_count=16, settled_charge=false"
+    },
+    {
+      "name": "paired_score_families_1",
+      "expected": 1,
+      "present": true,
+      "detail": "complete scoring-time families=1"
+    },
+    {
+      "name": "false_reuse_1_of_26",
+      "expected": "1/26",
+      "present": true,
+      "detail": "historical false reuse 1/26"
+    },
+    {
+      "name": "cell5_28_of_28",
+      "expected": "28/28",
+      "present": true,
+      "detail": "cell 5 public checks 28/28"
+    },
+    {
+      "name": "cell27_895.290",
+      "expected": "895.290",
+      "present": true,
+      "detail": "cell 27 reservation 895.290 seconds"
+    },
+    {
+      "name": "table17_tornado",
+      "expected": "-0.5",
+      "present": true,
+      "detail": "Tornado family row"
+    },
+    {
+      "name": "table17_all",
+      "expected": "-0.0625",
+      "present": true,
+      "detail": "all-eight table footer"
+    },
+    {
+      "name": "settled_charges_unavailable",
+      "expected": false,
+      "present": true,
+      "detail": "settled_charge is false for all API usage scopes"
+    },
+    {
+      "name": "no_advantage",
+      "expected": true,
+      "present": true,
+      "detail": "abstract/conclusion negative result"
+    }
+  ],
+  "structural_checks": {
+    "research_question": true,
+    "novel_composition": true,
+    "trusted_assumptions": true,
+    "matched_method_baseline": true,
+    "results": true,
+    "negative_cases": true,
+    "supplement_not_evaluated_implementation": true,
+    "withdrawn_cd_warm_reuse_publication_16family": true,
+    "ns_nnn_defined_as_qualification_ids": true,
+    "checklist_not_in_ns022": true,
+    "figure_not_additional_experiment": true
+  },
+  "claim_ledger_alignment": {
+    "results_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "final_claim_evidence_matrix": "papers/completion/neurosymbolic_supervision/audit/final_claim_evidence_matrix.json",
+    "scientific_scope": "eight-family A/B local-cold 32-cell descriptive comparison; C/D, warm, reuse, publication, and sixteen-family inferential objectives remain withdrawn",
+    "matched": true
+  },
+  "interrupted_authoring": {
+    "prior_live_main_tex_sha256": "46a14011d3ec69cf2b399d310b830901a59c4d50bb4834142103c5f171a70585",
+    "replaced_by_accepted_entrypoint": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+    "ns001_snapshot_preserved": true
+  },
+  "toolchain": {
+    "validation_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "pdflatex": null,
+    "python3.12": "/usr/bin/python3.12",
+    "pdffonts": "/usr/bin/pdffonts",
+    "pdfinfo": "/usr/bin/pdfinfo",
+    "pdftotext": "/usr/bin/pdftotext"
+  },
+  "new_scientific_calls": 0,
+  "publication_authorized": false,
+  "outside_reviewer_required": false
+}

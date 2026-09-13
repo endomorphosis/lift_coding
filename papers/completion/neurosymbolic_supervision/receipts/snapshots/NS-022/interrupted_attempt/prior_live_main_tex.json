@@ -1,0 +1,16 @@
+{
+  "schema": "ns022-interrupted-authoring-history/v1",
+  "prior_live_main_tex_sha256": "46a14011d3ec69cf2b399d310b830901a59c4d50bb4834142103c5f171a70585",
+  "prior_live_main_tex_bytes": 114696,
+  "prior_identity": "NS-001 PDF-reconstruction editable source (snapshot SHA 46a14011d3ec69cf2b399d310b830901a59c4d50bb4834142103c5f171a70585)",
+  "prior_placeholders_present": [
+    "[RESULTS: insert the frozen task population, useful completion rate, net measured cost, uncertainty intervals, and false-admission results.]",
+    "TO BE FILLED cells retained in the reconstruction follow-ups"
+  ],
+  "replacement": {
+    "accepted_main_tex_sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+    "accepted_paper_pdf_sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+    "note": "This NS-022 completion replaces the placeholder-filled reconstruction entrypoint with the accepted 21-file assembly entrypoint and the accepted 12-page PDF. The NS-001 reconstruction snapshot remains the historical interrupted-authoring record; it is not rewritten."
+  },
+  "ns001_snapshot_preserved": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex"
+}

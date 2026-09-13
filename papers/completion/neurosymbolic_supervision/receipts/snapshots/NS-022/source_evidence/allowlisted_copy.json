@@ -1,0 +1,132 @@
+{
+  "schema": "ns022-allowlisted-source-adoption/v1",
+  "writing_inputs_manifest_sha256": "1ee539aa44992c6f4aaae6b475921525380faecb15fe3e61b6aeae892da543af",
+  "accepted_pdf_sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+  "accepted_main_tex_sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+  "allowlisted_source_count": 21,
+  "excluded_generated_figure": "generated/figures/family_useful.pdf",
+  "copied": {
+    "appendix/entry.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0",
+      "bytes": 708
+    },
+    "appendix/formal_arguments.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+      "bytes": 10689
+    },
+    "fragments/abstract.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "6bbfa679a15787c20a5edd71cc64b2a37e13dc1b5e16ffca125d7cf2a31240c8",
+      "bytes": 1125
+    },
+    "fragments/analysis_method.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509",
+      "bytes": 2619
+    },
+    "fragments/conclusion.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "947a8337834e907cfb869b4c01869499a5a3d18378c6fbe51b1673091fc88711",
+      "bytes": 772
+    },
+    "fragments/design.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1",
+      "bytes": 4229
+    },
+    "fragments/evidence_method.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "0b8d25f29d1636378d348fd0fe8ec7ea3806e239d62d29656f92afd65f2a633c",
+      "bytes": 3099
+    },
+    "fragments/introduction.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "c26b82b6fb9d1eafce035fb0bcf2011ab86f0c74e5c65e8f1e26fdd4b7f97bcf",
+      "bytes": 2105
+    },
+    "fragments/limitations.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "f7aad3fef3d624e4dd3bd82162682a8713df4d118e4abd9ea3f7a1a1960caa53",
+      "bytes": 2050
+    },
+    "fragments/related_work.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f",
+      "bytes": 1490
+    },
+    "fragments/results.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "8bed75f07be9c7af1fd49a1ea48650333ea70047d84b7db1ea01c0015cf73f55",
+      "bytes": 5438
+    },
+    "generated/ablations.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+      "bytes": 894
+    },
+    "generated/figures/family_useful.svg": {
+      "kind": "raw_source_copy",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
+      "bytes": 42894
+    },
+    "generated/table17.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+      "bytes": 477
+    },
+    "generated/table18.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+      "bytes": 1431
+    },
+    "header.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "1c85c4d98b25222af3d94ea3843e3a0ed03883803b22eb40472c4512414eeb0e",
+      "bytes": 586
+    },
+    "layout/family_useful.pdf": {
+      "kind": "base64",
+      "raw_sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443",
+      "base64_sha256": "018a63253057464f0212106bc6656027be09f47ee248eaf3165b15ef089b263d"
+    },
+    "layout/table18.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3",
+      "bytes": 1455
+    },
+    "main.tex": {
+      "kind": "raw_source_copy",
+      "sha256": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+      "bytes": 2253
+    },
+    "neurips_2026_vericode.sty": {
+      "kind": "raw_source_copy",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "bytes": 13757
+    },
+    "verified_references.bib": {
+      "kind": "raw_source_copy",
+      "sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951",
+      "bytes": 6339
+    }
+  },
+  "live_generated_preserved": {
+    "generated/figures/family_useful.pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "generated/figures/family_useful.svg": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
+    "generated/table17.tex": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "generated/table18.tex": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+    "generated/ablations.tex": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+  },
+  "live_manuscript_writes": [
+    "papers/completion/neurosymbolic_supervision/manuscript/main.tex",
+    "papers/completion/neurosymbolic_supervision/manuscript/paper.pdf"
+  ],
+  "task_output_exact_note": "Only main.tex and paper.pdf are live manuscript writes. The other allowlisted sources are retained under receipts/snapshots/NS-022/manuscript/ with the same relative names. The font42 layout PDF is canonical base64, not an extra raw layout snapshot.",
+  "declared_checkpoint_directory": {
+    "declared": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/789706549be7af1b7701946f/implementation_checkpoints/ns-022-d6c2cdaa0536",
+    "writable": false,
+    "error": "OSError: [Errno 30] Read-only file system: '/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state'"
+  }
+}
