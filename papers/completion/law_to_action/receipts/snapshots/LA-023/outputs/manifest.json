@@ -1,0 +1,350 @@
+{
+  "anonymization": {
+    "credentials_packaged": false,
+    "excluded_paths": [
+      "papers/completion/law_to_action/private/source_provenance.json",
+      "operator private DuckDB",
+      "study UCAN private key"
+    ],
+    "private_author_companion_packaged": false,
+    "rules": [
+      "Replace /home/<user>/ with /home/anonymous/",
+      "Replace ipfs-accelerate-validation-home-<suffix> with ipfs-accelerate-validation-home-REDACTED",
+      "Replace email addresses with anonymous@example.invalid"
+    ],
+    "scientific_outcome_fields_unaltered": true
+  },
+  "anonymous_supplement_zip": {
+    "form": "directory_bundle",
+    "member_prefix": "law_to_action_anonymous_supplement/",
+    "note": "Declared path is a UTF-8 directory bundle. check_artifact.py packs a ZIP in memory for credential/member scans.",
+    "path": "papers/completion/law_to_action/artifact/anonymous_supplement.zip"
+  },
+  "artifact_files": {
+    "README.md": {
+      "sha256": "d0ec5314c1795263bba2607cac4b805922fd6a80c2295501ebf69f66da1d0995",
+      "size_bytes": 8967
+    },
+    "anonymous_supplement.zip": {
+      "form": "directory_bundle",
+      "note": "UTF-8 directory bundle; packed ZIP is generated in-memory by check_artifact.py and is not stored as a git binary.",
+      "sha256": null
+    },
+    "environment.lock": {
+      "sha256": "50c80bcd1aef032515690441d05359f10af158ccf1d99a28d5cc6e65b82e8dd8",
+      "size_bytes": 4729
+    },
+    "reproduce.sh": {
+      "sha256": "492e41fa7a196e454d144c563558bd421b85aba3c40bbc354b8080a8effd7555",
+      "size_bytes": 2793
+    }
+  },
+  "assembled_at": "2026-09-13T02:19:58.382515+00:00",
+  "bundle_files": {
+    "README.md": "d0ec5314c1795263bba2607cac4b805922fd6a80c2295501ebf69f66da1d0995",
+    "environment.lock": "50c80bcd1aef032515690441d05359f10af158ccf1d99a28d5cc6e65b82e8dd8",
+    "harness/handlers/__init__.py": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+    "harness/handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "harness/run.py": "5c454f0d6060d9682330ed0d9ab98f75d2c0f7f74d7609804b95e2da5d7eadd0",
+    "harness/tests/test_measurement_integrity.py": "0d96890144cf355b238872c55e9210d7cb5bb9f3500773f2c32f3ee479ccb2c4",
+    "logs/anonymized_cost_report.md": "d8d86ee16a6db9bb9c107632dce52173591a8e3719ea23046e071227e65a6d92",
+    "reproduce.sh": "492e41fa7a196e454d144c563558bd421b85aba3c40bbc354b8080a8effd7555",
+    "scripts/check_artifact.py": "48f075fc17de967c8387b7fd128e898244d20285061d8040c289fe28e05a45c6",
+    "subset/arm_safety_utility.json": "ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f",
+    "subset/claim_guidance.md": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+    "subset/outcomes.recipe.json": "44ba360f403e11a27efe7acd132ba782a1cc14fa373adf88207ea0d531043f13",
+    "subset/sources.json": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6"
+  },
+  "commands": {
+    "bounded_reproduce": "bash papers/completion/law_to_action/artifact/reproduce.sh",
+    "checker": "/usr/bin/python3.12 papers/completion/law_to_action/receipts/snapshots/LA-023/check_artifact.py --artifact papers/completion/law_to_action/artifact",
+    "unpacked_reproduce": "./reproduce.sh"
+  },
+  "headline_admitted_rates": {
+    "A0": {
+      "forbidden": [
+        90,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A1": {
+      "forbidden": [
+        90,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A2": {
+      "forbidden": [
+        90,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A3": {
+      "forbidden": [
+        33,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A4": {
+      "forbidden": [
+        0,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    }
+  },
+  "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+  "limitations": [
+    "Bounded reproduction does not re-execute the 900 operator cells.",
+    "Docker, Z3, cvc5, and duckdb are unavailable on the sealed validation PATH.",
+    "Expert legal fidelity, human agreement, and closed-loop model claims remain unmeasured or withdrawn.",
+    "The declared supplement path is a text directory bundle; a packed ZIP is generated in-memory during checks."
+  ],
+  "reported_results": [
+    {
+      "included_in_anonymous_bundle": true,
+      "inclusion": "recipe_included",
+      "note": "Compact scientific rows are regenerated from this hashed file by subset/outcomes.recipe.json.",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl",
+      "sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+      "size_bytes": 878298
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json",
+      "sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+      "size_bytes": 172562
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl",
+      "sha256": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+      "size_bytes": 616945
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json",
+      "sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+      "size_bytes": 2460883
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json",
+      "sha256": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+      "size_bytes": 598808
+    },
+    {
+      "included_in_anonymous_bundle": true,
+      "inclusion": "included",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md",
+      "sha256": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+      "size_bytes": 1562
+    },
+    {
+      "included_in_anonymous_bundle": true,
+      "inclusion": "anonymized_included",
+      "path": "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md",
+      "sha256": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+      "size_bytes": 6790
+    },
+    {
+      "included_in_anonymous_bundle": true,
+      "inclusion": "included",
+      "path": "papers/completion/law_to_action/results/tables/arm_safety_utility.json",
+      "sha256": "ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f",
+      "size_bytes": 3831
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/tables/headline_claims.json",
+      "sha256": "0e673a6e2138959423d659ec35adf57d2fd1b39dce08513222b8bfabb3fae0b8",
+      "size_bytes": 24098
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/source_ir/metrics.json",
+      "sha256": "dc60da670036e8f03cc982dc8b19993359583dddeb3ac2c10a827a85362e0564",
+      "size_bytes": 15344
+    },
+    {
+      "included_in_anonymous_bundle": true,
+      "inclusion": "included",
+      "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+      "size_bytes": 51880
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+      "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+      "size_bytes": 17657
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/benchmark/manifests/provers.json",
+      "sha256": "81e3873e996516f47451a1fa5859e390e39e989dadab20eed7ba35c9b7ac39e1",
+      "size_bytes": 11748
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+      "size_bytes": 24163
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/claim_evidence_matrix.json",
+      "sha256": "d88508eec5f47513ea22eb8ca450cdce873eb5cd186acc2be2ec1ffd2ed8abb3",
+      "size_bytes": 20516
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/results/worked_trace/trace.json",
+      "sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "size_bytes": 31691
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/analysis/analyze.py",
+      "sha256": "d7d8587b739da34905618a6ce38c2b489374f0332ab367f816956e55ddb5c3ad",
+      "size_bytes": 93436
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/manuscript/main.tex",
+      "sha256": "e09dbcc3f00e7ce6f74a089db1c4b4f02fe48695fb98fb933f8ec19f89dde5f1",
+      "size_bytes": 32559
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/manuscript/results.tex",
+      "sha256": "6b04a0fa8ab53b46177b2dba81708c7d268c6a1f70890e55a2ecb5e1fbcc792e",
+      "size_bytes": 8383
+    },
+    {
+      "included_in_anonymous_bundle": false,
+      "inclusion": "repository_hashed",
+      "path": "papers/completion/law_to_action/manuscript/limitations.tex",
+      "sha256": "b454ac8d2925e9ebfa865b9127f0b236d8842e0f57d05dc21efaee73b2fa071e",
+      "size_bytes": 2126
+    }
+  ],
+  "retrievable_sources": [
+    {
+      "artifact_id": "legal-computer-access",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "USCODE-2024:18-USC-1030",
+      "sha256": "b403c8ea9d052478c35cdcdaa5361ba6ff09d3ca89b129e1bc031c870367ac76",
+      "size_bytes": 170233,
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/pdf/USCODE-2024-title18-partI-chap47-sec1030.pdf",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "legal-federal-records-privacy",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "USCODE-2024:5-USC-552a",
+      "sha256": "9a090bb5da1dd4bc151d2fc7651e659c3d56d23fad3932eaedd3f083638ab24a",
+      "size_bytes": 207511,
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/pdf/USCODE-2024-title5-partI-chap5-subchapII-sec552a.pdf",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "legal-childrens-privacy",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "USCODE-2024:15-USC-6502",
+      "sha256": "39eede5f2f8dffb893574526f158e1c1bb16a3cd2047a6634d770e132b11348b",
+      "size_bytes": 140398,
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title15/pdf/USCODE-2024-title15-chap91-sec6502.pdf",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "legal-access-control-circumvention",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "USCODE-2024:17-USC-1201",
+      "sha256": "0878ee4ab36ad6fbfcbbc1fb6749ef5242f57a30f21e8119c84498edb05f1aa1",
+      "size_bytes": 155496,
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title17/pdf/USCODE-2024-title17-chap12-sec1201.pdf",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "legal-health-information",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "USCODE-2024:42-USC-1320d-6",
+      "sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+      "size_bytes": 139247,
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/pdf/USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "legal-telecom-confidentiality",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "USCODE-2024:47-USC-222",
+      "sha256": "4cc72f64f8f4a6b99809b2da804e90ba00d796f5e91e93d20b35751d21c1072e",
+      "size_bytes": 138021,
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title47/pdf/USCODE-2024-title47-chap5-subchapII-partI-sec222.pdf",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "cve-first-shard",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+      "size_bytes": 211599861,
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "status": "retrieval_only"
+    },
+    {
+      "artifact_id": "skill-security-bundle",
+      "included_bytes": 0,
+      "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+      "size_bytes": 7892992,
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "status": "retrieval_only"
+    }
+  ],
+  "schema": "law-to-action-artifact-manifest/v1",
+  "task": "LA-023",
+  "title": "From Law to Action: Neuro-Symbolic Runtime Enforcement for MCP Agents"
+}

@@ -1,0 +1,1025 @@
+{
+  "schema": "law-to-action-source-manifest/v2",
+  "task": "LA-004",
+  "frozen_at": "2026-09-11T17:56:24.686553+00:00",
+  "status": "verified_source_manifest_and_split_reservation_no_evaluated_cases",
+  "selection_scope": "Six distinct official 2024 legal section documents in six titles, 12 repositories from the first pinned CVE shard, and 12 disjoint repositories from the pinned SkillCenter security bundle.",
+  "source_record_hash_encoding": "Sorted compact UTF-8 JSON with ensure_ascii=False; nonfinite floats mapped to explicit __nonfinite_float__ objects. Legal records hash exact PDF bytes. Skill records hash joined index and content values. CVE file_row_number is an external locator and excluded from record content hash.",
+  "source_artifacts": [
+    {
+      "artifact_id": "legal-computer-access",
+      "cache_relative_path": "legal_raw/legal-computer-access.pdf",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/pdf/USCODE-2024-title18-partI-chap47-sec1030.pdf",
+      "revision": "USCODE-2024:18-USC-1030",
+      "sha256": "b403c8ea9d052478c35cdcdaa5361ba6ff09d3ca89b129e1bc031c870367ac76",
+      "size_bytes": 170233,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "scope": "Entire section document is one atomic source family; adjacent page context is retained as context only. No provision is split into another family.",
+      "operative_text_present": true,
+      "applicability_review": "LA-005 pending; presence is not a legal applicability judgment"
+    },
+    {
+      "artifact_id": "legal-federal-records-privacy",
+      "cache_relative_path": "legal_raw/legal-federal-records-privacy.pdf",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/pdf/USCODE-2024-title5-partI-chap5-subchapII-sec552a.pdf",
+      "revision": "USCODE-2024:5-USC-552a",
+      "sha256": "9a090bb5da1dd4bc151d2fc7651e659c3d56d23fad3932eaedd3f083638ab24a",
+      "size_bytes": 207511,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "scope": "Entire section document is one atomic source family; adjacent page context is retained as context only. No provision is split into another family.",
+      "operative_text_present": true,
+      "applicability_review": "LA-005 pending; presence is not a legal applicability judgment"
+    },
+    {
+      "artifact_id": "legal-childrens-privacy",
+      "cache_relative_path": "legal_raw/legal-childrens-privacy.pdf",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title15/pdf/USCODE-2024-title15-chap91-sec6502.pdf",
+      "revision": "USCODE-2024:15-USC-6502",
+      "sha256": "39eede5f2f8dffb893574526f158e1c1bb16a3cd2047a6634d770e132b11348b",
+      "size_bytes": 140398,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "scope": "Entire section document is one atomic source family; adjacent page context is retained as context only. No provision is split into another family.",
+      "operative_text_present": true,
+      "applicability_review": "LA-005 pending; presence is not a legal applicability judgment"
+    },
+    {
+      "artifact_id": "legal-access-control-circumvention",
+      "cache_relative_path": "legal_raw/legal-access-control-circumvention.pdf",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title17/pdf/USCODE-2024-title17-chap12-sec1201.pdf",
+      "revision": "USCODE-2024:17-USC-1201",
+      "sha256": "0878ee4ab36ad6fbfcbbc1fb6749ef5242f57a30f21e8119c84498edb05f1aa1",
+      "size_bytes": 155496,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "scope": "Entire section document is one atomic source family; adjacent page context is retained as context only. No provision is split into another family.",
+      "operative_text_present": true,
+      "applicability_review": "LA-005 pending; presence is not a legal applicability judgment"
+    },
+    {
+      "artifact_id": "legal-health-information",
+      "cache_relative_path": "legal_raw/legal-health-information.pdf",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/pdf/USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf",
+      "revision": "USCODE-2024:42-USC-1320d-6",
+      "sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+      "size_bytes": 139247,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "scope": "Entire section document is one atomic source family; adjacent page context is retained as context only. No provision is split into another family.",
+      "operative_text_present": true,
+      "applicability_review": "LA-005 pending; presence is not a legal applicability judgment"
+    },
+    {
+      "artifact_id": "legal-telecom-confidentiality",
+      "cache_relative_path": "legal_raw/legal-telecom-confidentiality.pdf",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title47/pdf/USCODE-2024-title47-chap5-subchapII-partI-sec222.pdf",
+      "revision": "USCODE-2024:47-USC-222",
+      "sha256": "4cc72f64f8f4a6b99809b2da804e90ba00d796f5e91e93d20b35751d21c1072e",
+      "size_bytes": 138021,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "scope": "Entire section document is one atomic source family; adjacent page context is retained as context only. No provision is split into another family.",
+      "operative_text_present": true,
+      "applicability_review": "LA-005 pending; presence is not a legal applicability judgment"
+    },
+    {
+      "artifact_id": "cve-first-shard",
+      "cache_relative_path": "train-00000-of-00003.parquet",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+      "size_bytes": 211599861,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "verified_original_Parquet_shard",
+      "schema_version": "pinned_CVEfixes_source_profile",
+      "rights_note": "Dataset card declares Apache-2.0; actual upstream code licenses still govern later code redistribution."
+    },
+    {
+      "artifact_id": "skill-security-bundle",
+      "cache_relative_path": "skillcenter-security.sqlite",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+      "size_bytes": 7892992,
+      "redistribution": {
+        "status": "retrieval_only",
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact."
+      },
+      "source_type": "verified_original_SQLite_bundle",
+      "schema_version": "skillcenter_sqlite_bundle_v1",
+      "rights_note": "Packaging MIT does not grant rights to all individual sources. license_risk is source metadata, not independently established permission."
+    }
+  ],
+  "source_records": [
+    {
+      "source_id": "legal:de03688269ae120e7a9ee211cd7d2b0071d1038a5bb0ed19d153c68f8ac66f19",
+      "population": "legal",
+      "lineage_family_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d",
+      "ancestry_key": [
+        "official_legal_section",
+        "18-USC-1030"
+      ],
+      "artifact_id": "legal-computer-access",
+      "source_locator": {
+        "section": "18-USC-1030",
+        "edition": "2024",
+        "document_sha256": "b403c8ea9d052478c35cdcdaa5361ba6ff09d3ca89b129e1bc031c870367ac76"
+      },
+      "source_record_sha256": "b403c8ea9d052478c35cdcdaa5361ba6ff09d3ca89b129e1bc031c870367ac76",
+      "normalized_source_sha256": "a7786333c86c80a5ca7b0872a6cf0f28e3ed69c29050204671c2395a7a574405",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "legal:de03688269ae120e7a9ee211cd7d2b0071d1038a5bb0ed19d153c68f8ac66f19",
+        "planned_case_ids": [
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-005"
+    },
+    {
+      "source_id": "legal:e8354c32ee4176788081d7b63a3349b940f5da6248b0f83447ae68675f4ed80c",
+      "population": "legal",
+      "lineage_family_id": "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629",
+      "ancestry_key": [
+        "official_legal_section",
+        "5-USC-552a"
+      ],
+      "artifact_id": "legal-federal-records-privacy",
+      "source_locator": {
+        "section": "5-USC-552a",
+        "edition": "2024",
+        "document_sha256": "9a090bb5da1dd4bc151d2fc7651e659c3d56d23fad3932eaedd3f083638ab24a"
+      },
+      "source_record_sha256": "9a090bb5da1dd4bc151d2fc7651e659c3d56d23fad3932eaedd3f083638ab24a",
+      "normalized_source_sha256": "53ddd70a86497df24ee5388d02244e02f0e60814e42a7d5da7facc4a5ef45898",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "legal:e8354c32ee4176788081d7b63a3349b940f5da6248b0f83447ae68675f4ed80c",
+        "planned_case_ids": [
+          "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-0",
+          "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-005"
+    },
+    {
+      "source_id": "legal:f08147c92d4d15d2fbe1abc0a03a476f0b12c986d6a5d95f082b69f4c70b554c",
+      "population": "legal",
+      "lineage_family_id": "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc",
+      "ancestry_key": [
+        "official_legal_section",
+        "15-USC-6502"
+      ],
+      "artifact_id": "legal-childrens-privacy",
+      "source_locator": {
+        "section": "15-USC-6502",
+        "edition": "2024",
+        "document_sha256": "39eede5f2f8dffb893574526f158e1c1bb16a3cd2047a6634d770e132b11348b"
+      },
+      "source_record_sha256": "39eede5f2f8dffb893574526f158e1c1bb16a3cd2047a6634d770e132b11348b",
+      "normalized_source_sha256": "58b47e9dad18d43726505ffa6538a04fdbcc70279d3841b8faf0259ad34b3de0",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "legal:f08147c92d4d15d2fbe1abc0a03a476f0b12c986d6a5d95f082b69f4c70b554c",
+        "planned_case_ids": [
+          "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-0",
+          "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-005"
+    },
+    {
+      "source_id": "legal:e2eaaf422eb62aaaaf962bef8d47702e2c149760473c88d9383fa7ba7806bf58",
+      "population": "legal",
+      "lineage_family_id": "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d",
+      "ancestry_key": [
+        "official_legal_section",
+        "17-USC-1201"
+      ],
+      "artifact_id": "legal-access-control-circumvention",
+      "source_locator": {
+        "section": "17-USC-1201",
+        "edition": "2024",
+        "document_sha256": "0878ee4ab36ad6fbfcbbc1fb6749ef5242f57a30f21e8119c84498edb05f1aa1"
+      },
+      "source_record_sha256": "0878ee4ab36ad6fbfcbbc1fb6749ef5242f57a30f21e8119c84498edb05f1aa1",
+      "normalized_source_sha256": "a0e204ede0d0c3e3a70ef522484989ad1ce8d865c74ed03be0e3082ba45bd681",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "legal:e2eaaf422eb62aaaaf962bef8d47702e2c149760473c88d9383fa7ba7806bf58",
+        "planned_case_ids": [
+          "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-0",
+          "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-005"
+    },
+    {
+      "source_id": "legal:ecbeda8c2b54b70c25b58163f663d98ad9f0b0773a571205b7544b126b0968df",
+      "population": "legal",
+      "lineage_family_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec",
+      "ancestry_key": [
+        "official_legal_section",
+        "42-USC-1320d-6"
+      ],
+      "artifact_id": "legal-health-information",
+      "source_locator": {
+        "section": "42-USC-1320d-6",
+        "edition": "2024",
+        "document_sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0"
+      },
+      "source_record_sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+      "normalized_source_sha256": "279c74a9baa635848c0b193b7ceca7880803011af3cbf621eef009d1b08fb7eb",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "legal:ecbeda8c2b54b70c25b58163f663d98ad9f0b0773a571205b7544b126b0968df",
+        "planned_case_ids": [
+          "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+          "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-005"
+    },
+    {
+      "source_id": "legal:8017f125427adc50380cf4f2b6fc2acefb6f102293d6b672d0247dbb72a24f28",
+      "population": "legal",
+      "lineage_family_id": "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7",
+      "ancestry_key": [
+        "official_legal_section",
+        "47-USC-222"
+      ],
+      "artifact_id": "legal-telecom-confidentiality",
+      "source_locator": {
+        "section": "47-USC-222",
+        "edition": "2024",
+        "document_sha256": "4cc72f64f8f4a6b99809b2da804e90ba00d796f5e91e93d20b35751d21c1072e"
+      },
+      "source_record_sha256": "4cc72f64f8f4a6b99809b2da804e90ba00d796f5e91e93d20b35751d21c1072e",
+      "normalized_source_sha256": "9a4c305f7f4e801cb3305523c69ddaf3055d718f5fc356d8bd7a6795770a972d",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "legal:8017f125427adc50380cf4f2b6fc2acefb6f102293d6b672d0247dbb72a24f28",
+        "planned_case_ids": [
+          "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-0",
+          "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-005"
+    },
+    {
+      "source_id": "cve:ce7168a173a1bb4ebef7f3a1162d072d30690f27ce74640ee65231c7c4033fd3",
+      "population": "cve",
+      "lineage_family_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04",
+      "ancestry_key": [
+        "repository",
+        "github.com/apache/mynewt-nimble"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 0,
+        "cve_id": "CVE-2024-24746",
+        "fix_commit": "d42a0ebe6632bd0c318560e4293a522634f60594",
+        "repository": "github.com/apache/mynewt-nimble"
+      },
+      "source_record_sha256": "3694e02a800ae58a3a700e354d9fede8d450a695d9672655aaee99a9f0faf2dd",
+      "normalized_source_sha256": "db05a0d69399ac05782b8e782a5a14dc257feb52bb255bc15680c3dd86e46565",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:ce7168a173a1bb4ebef7f3a1162d072d30690f27ce74640ee65231c7c4033fd3",
+        "planned_case_ids": [
+          "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-0",
+          "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:fe6696430d9a566ecafc3137e39b1bd92826c03dcd3ade6ed9ec504c3f843644",
+      "population": "cve",
+      "lineage_family_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992",
+      "ancestry_key": [
+        "repository",
+        "github.com/pofider/phantom-html-to-pdf"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 1,
+        "cve_id": "CVE-2020-7763",
+        "fix_commit": "b5d2da2639a49a95e0bdb3bc0c987cb6406b8259",
+        "repository": "github.com/pofider/phantom-html-to-pdf"
+      },
+      "source_record_sha256": "a6c2026c1ae04607fab0a9e9944880675837e22b1ee27c8f93cac0148fe7bfab",
+      "normalized_source_sha256": "98afcf96412c4f785421b725dc31bc0fe467258ba0fdf3d71124264631195899",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:fe6696430d9a566ecafc3137e39b1bd92826c03dcd3ade6ed9ec504c3f843644",
+        "planned_case_ids": [
+          "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+          "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:ef8efcd2f930b4d7a14d77f1cc349b019e7614237c33057ccd0362db8ce5f19c",
+      "population": "cve",
+      "lineage_family_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94",
+      "ancestry_key": [
+        "repository",
+        "github.com/advplyr/audiobookshelf"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 2,
+        "cve_id": "CVE-2023-51665",
+        "fix_commit": "728496010cbfcee5b7b54001c9f79e02ede30d82",
+        "repository": "github.com/advplyr/audiobookshelf"
+      },
+      "source_record_sha256": "b027e7f6fd69a3e8ec808a060b090940947f959799c2367ac8d3f5d277aa2d12",
+      "normalized_source_sha256": "5b790b83d1bfdeb19044f27ebd37d07596d19e58c50cfc0c9137a2d9ee7ca669",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:ef8efcd2f930b4d7a14d77f1cc349b019e7614237c33057ccd0362db8ce5f19c",
+        "planned_case_ids": [
+          "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-0",
+          "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+      "population": "cve",
+      "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+      "ancestry_key": [
+        "repository",
+        "github.com/siwapp/siwapp-ror"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 5,
+        "cve_id": "CVE-2021-4265",
+        "fix_commit": "924d16008cfcc09356c87db01848e45290cb58ca",
+        "repository": "github.com/siwapp/siwapp-ror"
+      },
+      "source_record_sha256": "bea567d2e5b5cdf5b027174872b0ac13b281a27b1a3eaca5db7903363e18a233",
+      "normalized_source_sha256": "f50a7f11b10953b3102360b5997a625332423b27efe9243e31ca69af745c6862",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+        "planned_case_ids": [
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:632938f672083d701d8c1114b64ce424829f45b2fb3a90cc83cfb4c82b43a441",
+      "population": "cve",
+      "lineage_family_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e",
+      "ancestry_key": [
+        "repository",
+        "github.com/lepture/mistune"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 6,
+        "cve_id": "CVE-2017-16876",
+        "fix_commit": "5f06d724bc05580e7f203db2d4a4905fc1127f98",
+        "repository": "github.com/lepture/mistune"
+      },
+      "source_record_sha256": "45bef39ed91c595b79f2e4d0d4cde4cc34e9816cd594fbcbd80240f1290a9c11",
+      "normalized_source_sha256": "fb7ecb8af956e59c5f3252bdd5bb5313848efd5ede1d7339eac958ec4aa5762b",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:632938f672083d701d8c1114b64ce424829f45b2fb3a90cc83cfb4c82b43a441",
+        "planned_case_ids": [
+          "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-0",
+          "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b",
+      "population": "cve",
+      "lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+      "ancestry_key": [
+        "repository",
+        "github.com/mz-automation/libiec61850"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 7,
+        "cve_id": "CVE-2022-21159",
+        "fix_commit": "cfa94cbf10302bedc779703f874ee2e8387a0721",
+        "repository": "github.com/mz-automation/libiec61850"
+      },
+      "source_record_sha256": "60d0c37b065045352e2635efc0c6809da8f7a014319af3655c2cdf6be651e8ca",
+      "normalized_source_sha256": "7ed70977de69b2e5cedbe033df785128e5546fd51b39de885a8887d32eda95dd",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b",
+        "planned_case_ids": [
+          "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+          "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:d00ef5daf47afdace1397eb13f05855cdad67c0631cfcdf8a44960c8caf09957",
+      "population": "cve",
+      "lineage_family_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902",
+      "ancestry_key": [
+        "repository",
+        "github.com/ramseyk/httpserver"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 10,
+        "cve_id": "CVE-2019-25087",
+        "fix_commit": "1a0de56e4dafff9c2f9c8f6b130a764f7a50df52",
+        "repository": "github.com/ramseyk/httpserver"
+      },
+      "source_record_sha256": "e640a1923f2d2d9cdf26283c8e13fe16533ac0882541c1d5a160856d9b8804c1",
+      "normalized_source_sha256": "d061e46cbc7cd175c504be2c0f74944d59f2abd1b6ff579265bee021b932d761",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:d00ef5daf47afdace1397eb13f05855cdad67c0631cfcdf8a44960c8caf09957",
+        "planned_case_ids": [
+          "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+          "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+      "population": "cve",
+      "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+      "ancestry_key": [
+        "repository",
+        "github.com/esl/mongooseim"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 11,
+        "cve_id": "CVE-2014-2829",
+        "fix_commit": "586d96cc12ef218243a3466354b4d208b5472a6c",
+        "repository": "github.com/esl/mongooseim"
+      },
+      "source_record_sha256": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+      "normalized_source_sha256": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+        "planned_case_ids": [
+          "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+          "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:f67ed820310f942901fff3ec0fa3da08da2a62a9267dcb3cb09f07de54a7665c",
+      "population": "cve",
+      "lineage_family_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479",
+      "ancestry_key": [
+        "repository",
+        "github.com/auth0/express-jwt"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 12,
+        "cve_id": "CVE-2020-15084",
+        "fix_commit": "7ecab5f8f0cab5297c2b863596566eb0c019cdef",
+        "repository": "github.com/auth0/express-jwt"
+      },
+      "source_record_sha256": "ad0fb31f2368ab3b96e0c8ced712b2a0ef91ff4ce8b73df7dee8f77ef985c965",
+      "normalized_source_sha256": "ad0fb31f2368ab3b96e0c8ced712b2a0ef91ff4ce8b73df7dee8f77ef985c965",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:f67ed820310f942901fff3ec0fa3da08da2a62a9267dcb3cb09f07de54a7665c",
+        "planned_case_ids": [
+          "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+          "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+      "population": "cve",
+      "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+      "ancestry_key": [
+        "repository",
+        "github.com/b2evolution/b2evolution"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 13,
+        "cve_id": "CVE-2016-7149",
+        "fix_commit": "9a4ab85439d1b838ee7b8eeebbf59174bb787811",
+        "repository": "github.com/b2evolution/b2evolution"
+      },
+      "source_record_sha256": "a642fdc33b7a12639c13df620ae0e19793cc4fea2a4402897922fe47630d564f",
+      "normalized_source_sha256": "99040a5062b9d88ebc76f463d88346144989857ba9677184f4e27e170d08477e",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+        "planned_case_ids": [
+          "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+          "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:f0a887e8b29776f66de7442393d150390a06677855a40098c2cb879c1ea17e8d",
+      "population": "cve",
+      "lineage_family_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382",
+      "ancestry_key": [
+        "repository",
+        "github.com/kde/ark"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 23,
+        "cve_id": "CVE-2020-24654",
+        "fix_commit": "8bf8c5ef07b0ac5e914d752681e470dea403a5bd",
+        "repository": "github.com/kde/ark"
+      },
+      "source_record_sha256": "009e86295e7f9b3aedd7b280ce0281185adee69a4a9a5dcdcf39e90bce973e9c",
+      "normalized_source_sha256": "4907051f926aa9e770211e2f157aafdd677db38ed76d258eea5471748639812e",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:f0a887e8b29776f66de7442393d150390a06677855a40098c2cb879c1ea17e8d",
+        "planned_case_ids": [
+          "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+          "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "cve:4f2ed896018faeb0a70c1542a88ed36959d0c5f257ba25698c49f2336c0f32c7",
+      "population": "cve",
+      "lineage_family_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8",
+      "ancestry_key": [
+        "repository",
+        "github.com/wp-plugins/qtranslate-slug"
+      ],
+      "artifact_id": "cve-first-shard",
+      "source_locator": {
+        "file_row_number": 24,
+        "cve_id": "CVE-2015-10092",
+        "fix_commit": "74b3932696f9868e14563e51b7d0bb68c53bf5e4",
+        "repository": "github.com/wp-plugins/qtranslate-slug"
+      },
+      "source_record_sha256": "2cb83aa0244b05fbb2a72ef2646c039b7b1ff01862268ae24d1ecf71c6838628",
+      "normalized_source_sha256": "f7f9d017767e3df4f28d5db028e3641dce80cefdbe43246bc4aebc261f88248e",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "cve:4f2ed896018faeb0a70c1542a88ed36959d0c5f257ba25698c49f2336c0f32c7",
+        "planned_case_ids": [
+          "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+          "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-006"
+    },
+    {
+      "source_id": "skill:62e94216d5a87466a64f959435c1fac9dfbcb5aa3e8348b77d6cc6c386ee6f7d",
+      "population": "skill",
+      "lineage_family_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3",
+      "ancestry_key": [
+        "repository",
+        "github.com/azimolabs/apple-sign-in-php-sdk"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "009023de16c6b564fca7b3b56621553a4678ebcd2fa8c9301ac779142ef00c47",
+        "primary_source_id": "9d688b4dc22fb303e2bebb63f1486951793c770a8f9b865221d0002673a3db13",
+        "repository": "github.com/azimolabs/apple-sign-in-php-sdk",
+        "source_url": "https://github.com/AzimoLabs/apple-sign-in-php-sdk"
+      },
+      "source_record_sha256": "e9869404c6c3bf90ddb37eda80f1b4f4b0ce78cc0d679cfb3b7c97ef89a468bf",
+      "normalized_source_sha256": "dae18ad146214f2830dd6327a812e100fcd553609f0846deeb31c607993c001b",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:62e94216d5a87466a64f959435c1fac9dfbcb5aa3e8348b77d6cc6c386ee6f7d",
+        "planned_case_ids": [
+          "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+          "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:d9e9065f34e6a4a5c58b317f8f615950406f62e9cf9d1e2aa0d044946a888a9a",
+      "population": "skill",
+      "lineage_family_id": "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30",
+      "ancestry_key": [
+        "repository",
+        "github.com/ithacaxyz/porto"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "00af1bb82917ee226e54b3fa3a5b4b56e7b5dde0b1fea68b35b58897707c7206",
+        "primary_source_id": "a7dc1d09f438b03cd6aedf307285940d7a040935547776670bef27395fbebe23",
+        "repository": "github.com/ithacaxyz/porto",
+        "source_url": "https://github.com/ithacaxyz/porto"
+      },
+      "source_record_sha256": "f21a2db3f7b58b5c601797d1fa029eb177f6eaa3e05c76938438b723b053274c",
+      "normalized_source_sha256": "43afe4634f810b9e1277be9742d5cdb9537734c3d0b6ccdb9c4aec7b0c06682d",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:d9e9065f34e6a4a5c58b317f8f615950406f62e9cf9d1e2aa0d044946a888a9a",
+        "planned_case_ids": [
+          "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-0",
+          "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:e0ad50b89f0dda175af0c86e086b5b4f0ca0bc7d5d7b8e4983e9b4f84cd8c5b1",
+      "population": "skill",
+      "lineage_family_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914",
+      "ancestry_key": [
+        "repository",
+        "github.com/h0ru5/apo"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "00bae8435847e6526b7eb021256c23a112ec42b4fb3ead72a24de8a3882c2568",
+        "primary_source_id": "67e45bf77508eef73f11361b30abddaf7446c4a5d2561080813c27766a9e956d",
+        "repository": "github.com/h0ru5/apo",
+        "source_url": "https://github.com/h0ru5/apo"
+      },
+      "source_record_sha256": "e0e7d2cd31b9429d08c3de390d1060796a11c4c5f37c504523fc9cffdd540dbf",
+      "normalized_source_sha256": "b6055185c723b88c11aea6ab10604d5617f0869db4df0c868991eaf1e24c69aa",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:e0ad50b89f0dda175af0c86e086b5b4f0ca0bc7d5d7b8e4983e9b4f84cd8c5b1",
+        "planned_case_ids": [
+          "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+          "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+      "population": "skill",
+      "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+      "ancestry_key": [
+        "repository",
+        "github.com/grapheneos/attestationserver"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "00bf87910b65138ba37289b1c504ccee30e92946045d0cefca49a22d3e46148c",
+        "primary_source_id": "074de5d545b9105248cf5baf8f4b87eb8991b62114265f478b97145f86026aa0",
+        "repository": "github.com/grapheneos/attestationserver",
+        "source_url": "https://github.com/GrapheneOS/AttestationServer"
+      },
+      "source_record_sha256": "ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0",
+      "normalized_source_sha256": "c4f637f560e6ad58552cdac53694f8d42e086964b9b35da5d9a685f381d34b1a",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+        "planned_case_ids": [
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:8788e79d80dcfa0c733c722ff359b437f4e0ecab32fc51d251537e5fdcbc4c0e",
+      "population": "skill",
+      "lineage_family_id": "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad",
+      "ancestry_key": [
+        "repository",
+        "github.com/asteyatech-com/clawgate-api"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "00ca4ec9b2d0ecaa17e2a3f748dc6c24f8a0eb945a6ac6c868d8752c5c58cbe5",
+        "primary_source_id": "5b14451d1b3b8bf083361b8a33dbd52177952f95a35f3d2cbfb65e841a017ab0",
+        "repository": "github.com/asteyatech-com/clawgate-api",
+        "source_url": "https://github.com/AsteyaTech-com/clawgate-api"
+      },
+      "source_record_sha256": "f332fb059f51f06938f0426452310f08f1e4e596fcf6aaae87ef3073f19d9909",
+      "normalized_source_sha256": "eff7e1bce164057f23f4eb5e3e7e3527774078e0177c764d0b60b54f33f77132",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:8788e79d80dcfa0c733c722ff359b437f4e0ecab32fc51d251537e5fdcbc4c0e",
+        "planned_case_ids": [
+          "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-0",
+          "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:4df5228fd93e11184d7c3dc8792d0f1d616826febe5ebfc79679b94883a2052a",
+      "population": "skill",
+      "lineage_family_id": "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228",
+      "ancestry_key": [
+        "repository",
+        "github.com/erickit/nest-user-auth"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "00faddaceb8aafc0c9efea13c2412ae95ef4c263f7bbeb5407ff874517f15125",
+        "primary_source_id": "0393964680ee32df30c595e71b9b3140a699f568ac0ceed2d93939814a01090f",
+        "repository": "github.com/erickit/nest-user-auth",
+        "source_url": "https://github.com/EricKit/nest-user-auth"
+      },
+      "source_record_sha256": "ff21a24a1d25e9eb8f1526bf7efb35a83c4fa1e7adb29d45ff52cd7ff7663dd5",
+      "normalized_source_sha256": "6cf9d44808db52c4ebfb41c14cb37b82462181210399018e16dbd3bf46e0f78c",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:4df5228fd93e11184d7c3dc8792d0f1d616826febe5ebfc79679b94883a2052a",
+        "planned_case_ids": [
+          "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-0",
+          "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:b1a095d3586727e6618e56cd884a2fbddc543274872f1ccc5cf0097bb2ddd44a",
+      "population": "skill",
+      "lineage_family_id": "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db",
+      "ancestry_key": [
+        "repository",
+        "github.com/gobeyondidentity/bi-sdk-react-native"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "010714ad4d9318043ad3a45a67b2b120d84eb099a7e027fe43da975a2bf28cc3",
+        "primary_source_id": "11940c9b262357ff4feb2531abc5e73cb67d2fbb8d12a0a61dd50f802fa3e83f",
+        "repository": "github.com/gobeyondidentity/bi-sdk-react-native",
+        "source_url": "https://github.com/gobeyondidentity/bi-sdk-react-native"
+      },
+      "source_record_sha256": "49b85629b8efe382b6dcce046a4a46695a4f72a289eb368aacdcba81f1283698",
+      "normalized_source_sha256": "7debcd7fd5e78a85f5682627c2b5e757f35b620f09ea3bd0a59da72ef90a9e12",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:b1a095d3586727e6618e56cd884a2fbddc543274872f1ccc5cf0097bb2ddd44a",
+        "planned_case_ids": [
+          "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-0",
+          "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:08ab67f9bdde4d3c672e203c72763c66a076e79eeadfcb26edd18da9d1025082",
+      "population": "skill",
+      "lineage_family_id": "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8",
+      "ancestry_key": [
+        "repository",
+        "github.com/theopenlane/core"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "010a6cd34b22c5ecfd6ba976081b51238de9929c00a1babb525d34c4da7e33c7",
+        "primary_source_id": "7083ed4c0d620d625cd3168645e3d72752471acbf28f0fddca7531f7eadc96fa",
+        "repository": "github.com/theopenlane/core",
+        "source_url": "https://github.com/theopenlane/core"
+      },
+      "source_record_sha256": "ea04d183d7597f1cbf86c139c74f6f4a502a87d4b70ddd2f7a233a078cfefd91",
+      "normalized_source_sha256": "d3d0f811b93eedfa5985aa9e06e0b2e85255305d175bdd27d04b1888705aa7b5",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:08ab67f9bdde4d3c672e203c72763c66a076e79eeadfcb26edd18da9d1025082",
+        "planned_case_ids": [
+          "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-0",
+          "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:b66601b773602841e197521fd005b3f22b803b94bded355d0625825a05099613",
+      "population": "skill",
+      "lineage_family_id": "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d",
+      "ancestry_key": [
+        "repository",
+        "github.com/cesnet/fake-oidc-server"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "013c5c66b5c7da771068210f8342c0bd6ddadca3ebeb51d5ba635a21f0a3539f",
+        "primary_source_id": "7ebe2b23819a82e122f114f115ead590ee10686feba83661da1301dcc327c7a5",
+        "repository": "github.com/cesnet/fake-oidc-server",
+        "source_url": "https://github.com/CESNET/fake-oidc-server"
+      },
+      "source_record_sha256": "08539069a7001a0e5d11d7cd41999de23d951b70bf557b9d86824c0d3fad282b",
+      "normalized_source_sha256": "7fc84be98f994cb4b179801c1327264dc53099390d6fb7e4d3eedc40a8738cd1",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:b66601b773602841e197521fd005b3f22b803b94bded355d0625825a05099613",
+        "planned_case_ids": [
+          "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-0",
+          "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:53d611eab740d52d0fc794979d832b817dcec055be7ace1e48754ba64f518b28",
+      "population": "skill",
+      "lineage_family_id": "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c",
+      "ancestry_key": [
+        "repository",
+        "github.com/yaxian/rocket-jwt"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "01a43f63e79c9f1004dce3238e2ce19a8416e3c796e7bb663c2d7cb6cb4e04a0",
+        "primary_source_id": "f015a6a6d3c8d183c73f9bbde3c03aca3c26b4dc36f61722bfa5312313e728b5",
+        "repository": "github.com/yaxian/rocket-jwt",
+        "source_url": "https://github.com/Yaxian/rocket-jwt"
+      },
+      "source_record_sha256": "23f057900e8a05d854342ac7412532a2ffc41977a0d778c44673437fbb643817",
+      "normalized_source_sha256": "b9eed27af894b1004920edd363b039307ac68b0151d53e563c0905e180017d93",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:53d611eab740d52d0fc794979d832b817dcec055be7ace1e48754ba64f518b28",
+        "planned_case_ids": [
+          "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-0",
+          "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:849ca035392d1dd38b9c94ee60ddd01d6899edb6cd44bd80ced43b4c5054c259",
+      "population": "skill",
+      "lineage_family_id": "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10",
+      "ancestry_key": [
+        "repository",
+        "github.com/geigerzaehler/oidc-provider-mock"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "01ca84ba3221cedb8769b499fddc8722f54498c8185a08df19b15badec8cd06d",
+        "primary_source_id": "d9ce6e634ae4ccabb18c76ae29f4e928ce0d806e2572b122b3d513a5713603f1",
+        "repository": "github.com/geigerzaehler/oidc-provider-mock",
+        "source_url": "https://github.com/geigerzaehler/oidc-provider-mock"
+      },
+      "source_record_sha256": "96b0b574afeaedb25ccf03150905f105fce65e669321c443f5664c8b58ee65ee",
+      "normalized_source_sha256": "87aefdfbe44b2ff80c7123f31c006a7d9e04ed58a28bbc19c34426526e52cfb0",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:849ca035392d1dd38b9c94ee60ddd01d6899edb6cd44bd80ced43b4c5054c259",
+        "planned_case_ids": [
+          "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-0",
+          "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    },
+    {
+      "source_id": "skill:d27b8996d960846aa8909e99fbe08a1265506924697d71bfa8017869fd162932",
+      "population": "skill",
+      "lineage_family_id": "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac",
+      "ancestry_key": [
+        "repository",
+        "github.com/athroniaeth/fastapi-api-key"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "source_locator": {
+        "skill_id": "023f82143f9fbcf928784109239b4b9b0f6b7451bbe41207e762e2d386d73aff",
+        "primary_source_id": "0763ac0f7bb4744c43994798f7444ee30cddaeba07b1edd6ab68e78c95cb2d7f",
+        "repository": "github.com/athroniaeth/fastapi-api-key",
+        "source_url": "https://github.com/Athroniaeth/fastapi-api-key"
+      },
+      "source_record_sha256": "b8c6db64502d71f6e7aae79cec9c81387a204fb3e8b3828fd571d26d743fac3a",
+      "normalized_source_sha256": "cc45b6d3cd07ccba2b0772b67ce27f88aba52617a790eca8f12a8dfad8d1debb",
+      "status": "source_frozen_case_construction_and_independent_review_pending",
+      "source_to_ir": {
+        "status": "planned_not_materialized",
+        "source_parent_id": "skill:d27b8996d960846aa8909e99fbe08a1265506924697d71bfa8017869fd162932",
+        "planned_case_ids": [
+          "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-0",
+          "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:case-1"
+        ],
+        "materialized_ir_ids": []
+      },
+      "label_review_task": "LA-007"
+    }
+  ],
+  "evaluation_admission": {
+    "admitted_cases": 0,
+    "independently_reviewed_labels": 0,
+    "pending_tasks": [
+      "LA-005",
+      "LA-006",
+      "LA-007"
+    ],
+    "requirements": [
+      "Independent legal applicability, real CVE pair/controls, and skill/variant review remain mandatory.",
+      "Cross-repository fork/alias and near-duplicate review, actual case ancestry, and all final sibling/patch/label leakage checks must pass before evaluation.",
+      "Any ineligible reserved family is reported as a shortfall, never silently replaced; amendments must precede outcomes.",
+      "Opaque IDs and conservative repository grouping establish this source reservation, not statistical independence of future observations."
+    ]
+  }
+}
