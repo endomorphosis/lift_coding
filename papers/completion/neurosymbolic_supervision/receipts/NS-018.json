@@ -1,0 +1,120 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-018",
+  "status": "complete",
+  "template_only": false,
+  "completed_at": "2026-09-13T12:53:39.557203+00:00",
+  "scope": "Ordinary withdrawn-ablation scope record for the already root-frozen 32-cell A/B local-cold comparison. This completion binds original192 lineage, 160 removed factor cells, eight unrecruited families, empty measured-ablation rows, and existing NS-017 main evidence by hash. It does not launch translation, routing, reuse, warm-cache, sealer, parallel, or procedure experiments, and it does not copy main outcomes into ablation rows.",
+  "source_versions": {
+    "analysis_policy_sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+    "actual32_bundle_sha256": "f8488d8e69f097a8332ec6ae41aded6b260e5ad8df90531bd539d6f9e85b4f46",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "materialize_scope_sha256": "aeca4c77736b3811b98c1b7d5a8e1551be1c0ac4470d6f5554747be799cb82a4",
+    "native_accelerate": "60baee769d39a53c52142c56fbf6ed7483773aa3",
+    "native_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+    "native_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "ns017_attempts_sha256": "7d3471f965cc9bd6c024e1fd9c528b9797c40601e5083eb8f1f506d78094716f",
+    "ns017_manifest_sha256": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+    "ns017_receipt_sha256": "8540fd510882abb6588152a310f124725c3e8cfebcfaefd9aefa74d2c1fa1cd8",
+    "original192_sha256": "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80",
+    "strict_complete32_analysis_sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766",
+    "verify_script_sha256": "dd0a648c75d510227eb009874157172978e1b208e3cf59cf0944c2798f27a03e"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/materialize_scope.py": "aeca4c77736b3811b98c1b7d5a8e1551be1c0ac4470d6f5554747be799cb82a4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.py": "dd0a648c75d510227eb009874157172978e1b208e3cf59cf0944c2798f27a03e",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.log": "ed76cd4c44b78d637ca2475a4e891121347369c0e5cbe2ac752b3355126e8887",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/attempts.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/deviations.md": "a41bd140e54c183d7838eef656e3b3767f03725e33da180fb57174689e23afc5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/manifest.json": "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/resource_measurements.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/runs/ablations/attempts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/attempts.jsonl",
+    "papers/completion/neurosymbolic_supervision/runs/ablations/deviations.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/deviations.md",
+    "papers/completion/neurosymbolic_supervision/runs/ablations/manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/manifest.json",
+    "papers/completion/neurosymbolic_supervision/runs/ablations/resource_measurements.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/resource_measurements.jsonl"
+  },
+  "criteria": [
+    {
+      "criterion": "Each retained efficiency mechanism has a matched isolated comparison or an explicit non-attributable limitation.",
+      "status": "met",
+      "explanation": "The only retained efficiency mechanism is the A/B source-linked native semantic context factor across eight original final families and two nested repetitions (104729, 130363). Validation recomputed the 32 frozen cell identities from original192 order/filter lineage and confirmed they match freeze planned_cells. That contrast uses matched public raw selection and does not isolate arbitrary subcomponents, so no matched isolated component comparison exists; the manifest records an explicit non-attributable limitation. Translation, C/D routing, reuse, warm-cache, sealer, parallel, procedure, publication-comparison, and deny-all mechanisms remain withdrawn or diagnostic-only with measured_ablation_attempt=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.py"
+      ]
+    },
+    {
+      "criterion": "Controls differ only in declared factors; enabled checks and acceptance standards are recorded.",
+      "status": "met",
+      "explanation": "The retained design changes only the declared A/B native semantic-context factor at local-cold cache, holding families, repetitions, record_kind, and public raw selection matched. Enabled checks and acceptance standards are copied from the frozen analysis policy (one-use sealed candidate, independent cold scoring of all nonempty public and hidden checks, nested resource clocks). Withdrawn C/D/warm/reuse/sealer/translation/parallel/procedure controls were not executed. Empty ablation files contain no fabricated successful controls. NS-017 main evidence is bound by hash after it exists and is not treated as an ablation control.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.log"
+      ]
+    },
+    {
+      "criterion": "Deny-all contributes only diagnostic safety/cost evidence and cannot satisfy useful-progress promotion.",
+      "status": "met",
+      "explanation": "The scope record sets deny-all to diagnostic safety/cost evidence only: can_satisfy_useful_progress_promotion=false, useful_completion_claimed=false, and measured_ablation_attempt=false. No deny-all row exists in the empty ablation datasets. Deny-all therefore cannot satisfy useful-progress promotion for this experiment.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.log"
+      ]
+    },
+    {
+      "criterion": "Ablation failures, extra fallback, proof/index/setup/training costs, and slower workloads remain in outputs.",
+      "status": "met",
+      "explanation": "Measured ablation attempt and resource files are real zero-byte files (SHA256 e3b0c442...), not zeros for cost or successful controls. Isolated proof/index/setup/training/fallback/cleanup/review/workload attributions remain null. The 160 removed factor cells, eight unrecruited families, prior NS-016/NS-028 pilot costs, NS-017 unknown provider charges, missing scorer clocks, and historical pilot boundary overruns remain in separately bound ledgers. No slower workload or failed setup is removed by the empty ablation rows.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/scope_record_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns018-adoption-zfor3C",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns018-adoption-zfor3C/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns018-adoption-zfor3C/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns018-adoption-zfor3C/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns018-adoption-zfor3C/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.py"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 0.04725173604674637,
+      "execution_kind": "sealed-profile withdrawn-ablation scope check of the frozen 32-cell A/B local-cold design, original192 lineage, empty measured-ablation rows, and existing NS-017 main-evidence hashes; no provider, scorer, grant, lease, or experiment rerun",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T12:52:49.111064+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-018/adoption_validation/verify_withdrawn_ablations.py",
+      "started_at": "2026-09-13T12:52:49.063796+00:00"
+    }
+  ],
+  "limitations": [
+    "This completion records withdrawn/out-of-scope ablations and binds existing NS-017 main evidence by hash. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+    "The retained A/B contrast does not isolate arbitrary subcomponents of the source-linked native semantic context mechanism. Isolated efficiency gains remain unmeasured.",
+    "C/D routing, warm caches, reuse, publication-comparison efficacy, translation, sealer, parallel, procedure, and original 16-family inferential objectives remain withdrawn, not completed benchmark outcomes.",
+    "Deny-all is diagnostic only and cannot satisfy useful-progress promotion.",
+    "Empty ablation files are not zero experimental, setup, fallback, proof, index, training, or slower-workload costs. Those remain in separately bound ledgers or null isolated attributions.",
+    "Outside human review is not required; human semantic fidelity remains unmeasured. Native task completion is not claimed."
+  ]
+}
