@@ -1,0 +1,26 @@
+\section{Related work}
+
+Proof-carrying code places explicit evidence between a code producer and a
+consumer's safety policy\citep{baseline01}. That relationship motivates our
+separation of a proposed artifact from the evidence needed to accept it. Our
+retained repair experiment uses finite executable checks; its signed records
+are provenance for observations, and do not constitute proof-carrying code in
+that formal sense. The conditional acceptance and reuse arguments likewise
+depend on their stated premises and are not machine-checked native proofs.
+
+Build systems provide a precise setting for reasoning about dependencies and
+incremental work. Mokhov et al.\ separate the order in which tasks run from the
+decision whether a task needs rebuilding\citep{baseline07}. Our design applies
+that distinction to the applicability of evidence: reusing a previous test
+observation additionally requires the relevant program, test, environment, and
+lifecycle dependencies to remain valid. The cold A/B experiment supplies no
+empirical comparison of incremental test reuse with a build system.
+
+SWE-agent studies how a purpose-built interface for repository navigation,
+editing, and program execution affects coding-agent
+behavior\citep{baseline08}. This motivates treating the agent's access to
+repository information as part of the method. Our intervention is the addition
+of source-linked native context under a fixed proposal and scoring protocol.
+Differences in tasks, interaction, model, and acceptance criteria preclude
+interpreting this experiment as a head-to-head evaluation of SWE-agent or as a
+new result on its benchmarks.
