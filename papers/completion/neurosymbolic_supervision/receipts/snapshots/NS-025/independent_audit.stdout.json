@@ -1,0 +1,828 @@
+{
+  "all_passed": true,
+  "author_proofread_attested": false,
+  "checksums_expected": {
+    "README.md": "b0f1c14dff71ab06858412dcb68ea781c5c89a094e47c2ca0752ffca9757a452",
+    "manifest.json": "cd673ac98f1a058caf934174a93364e8199a438306ec38217bae0f6f885116c2",
+    "paper.pdf": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+    "reproduce.sh": "0ea4f3a6874008f10de37e63d3bbfa87351c653bea5036bb20dfb1ee8a0a58c9",
+    "supplement.zip": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+  },
+  "deliverables": {
+    "papers/completion/neurosymbolic_supervision/audit/final_placeholder_scan.json": {
+      "bytes": 3298,
+      "exists": true,
+      "sha256": "204707740e5b54e139660c2ba34d230557a95428897fce4e2645a54ec684f446",
+      "snapshot_exists": true
+    },
+    "papers/completion/neurosymbolic_supervision/audit/final_readiness.json": {
+      "bytes": 7558,
+      "exists": true,
+      "sha256": "bac0b577bcfbc444bbee5acf207e5cccdb3d925c39b76da0cfe270d8d97e1803",
+      "snapshot_exists": true
+    },
+    "papers/completion/neurosymbolic_supervision/release/FINAL_REVIEW.md": {
+      "bytes": 8500,
+      "exists": true,
+      "sha256": "65d12a9dc384f6307bce0f7212c29dab36d3417b09fa8328619619f087cf22ab",
+      "snapshot_exists": true
+    },
+    "papers/completion/neurosymbolic_supervision/release/checksums.sha256": {
+      "bytes": 392,
+      "exists": true,
+      "sha256": "58dd7d194ce16aaa8a66ca569ab7f3b1431be2d42ef9e7497e79c737321f9547",
+      "snapshot_exists": true
+    }
+  },
+  "failures": [],
+  "generated_at": "2026-09-13T17:24:14.142339+00:00",
+  "new_scientific_calls": 0,
+  "numerical_reproduction": {
+    "argv": [
+      "/bin/sh",
+      "papers/completion/neurosymbolic_supervision/release/reproduce.sh",
+      "/tmp/ns025-supplement-extract-v1",
+      "/tmp/ns025-supplement-repro-v1"
+    ],
+    "elapsed_host_wall_seconds": 0.638065,
+    "exit_code": 0,
+    "final32_summary_path": "/tmp/ns025-supplement-repro-v1/final32/numerical/summary.json",
+    "final32_summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215",
+    "finished_at": "2026-09-13T17:24:13.615699+00:00",
+    "new_scientific_or_native_calls": 0,
+    "reproduction": {
+      "components": {
+        "boundary": {
+          "execution": {
+            "argv": [
+              "/usr/bin/python3.12",
+              "-B",
+              "-s",
+              "/tmp/ns025-supplement-extract-v1/boundary/reproduce.py",
+              "--root",
+              "/tmp/ns025-supplement-extract-v1/boundary"
+            ],
+            "elapsed_host_wall_seconds": 0.06397821404971182,
+            "exit_code": 0,
+            "finished_at": "2026-09-13T17:24:13.487077+00:00",
+            "started_at": "2026-09-13T17:24:13.423093+00:00",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "162c5ffb0b74a800114f2f002692195046212adb2cdc87688154aaf70eddd55b",
+            "timed_out": false
+          },
+          "result": {
+            "NS011_false_reuse": {
+              "all_attempts": 26,
+              "observed": 1,
+              "selected_25_not_substituted": true
+            },
+            "NS012_recovery_records": 3,
+            "NS027": {
+              "case_attempts": 48,
+              "completed_rows": 47,
+              "full_public_baselines": 2,
+              "invocations": 4,
+              "reuse_credit": false,
+              "tests_per_baseline": 34
+            },
+            "final_outcome_rows": 0,
+            "historical_rows": {
+              "NS-007": 26,
+              "NS-008": 20,
+              "NS-009": 32,
+              "NS-011": 26,
+              "NS-012": 27
+            },
+            "native_qualification_reexecuted": false,
+            "original_claims": 32,
+            "provider_calls": 0,
+            "schema": "ns020-public-boundary-count-replay/v1",
+            "scorer_calls": 0,
+            "signature_authentication_of_derivatives": false,
+            "table_rows": 6
+          }
+        },
+        "final32": {
+          "execution": {
+            "argv": [
+              "/usr/bin/python3.12",
+              "-B",
+              "-s",
+              "/tmp/ns025-supplement-extract-v1/final32/reproduce.py",
+              "--release",
+              "/tmp/ns025-supplement-extract-v1/final32",
+              "--output",
+              "/tmp/ns025-supplement-repro-v1/final32/numerical"
+            ],
+            "elapsed_host_wall_seconds": 0.21413129393476993,
+            "exit_code": 0,
+            "finished_at": "2026-09-13T17:24:13.358232+00:00",
+            "started_at": "2026-09-13T17:24:13.144101+00:00",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "2f996577eb215251fc45c7514cc2a7b02c5746705a505b6575ba77572cb07ad6",
+            "timed_out": false
+          },
+          "result": {
+            "success": true,
+            "summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215"
+          }
+        },
+        "prior": {
+          "execution": {
+            "argv": [
+              "/usr/bin/python3.12",
+              "-B",
+              "-s",
+              "/tmp/ns025-supplement-extract-v1/prior/source/reproduce.py",
+              "/tmp/ns025-supplement-extract-v1/prior"
+            ],
+            "elapsed_host_wall_seconds": 0.06385210098233074,
+            "exit_code": 0,
+            "finished_at": "2026-09-13T17:24:13.422607+00:00",
+            "started_at": "2026-09-13T17:24:13.358769+00:00",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "8250f30117602e14fac7cc21358729046dd9fb8f35551c5ee920597c8a897e75",
+            "timed_out": false
+          },
+          "result": {
+            "all_files": 16,
+            "cost_records": 93,
+            "families": 4,
+            "indexed_members": 15,
+            "new_provider_scorer_native_calls": 0,
+            "original_signature_reverification": false,
+            "pilot_cells": 24,
+            "success": true,
+            "useful": 10
+          }
+        }
+      },
+      "cost_scopes_summed": false,
+      "manifest_sha256": "1a2b523bea55cd81699bc749bc002445edf53b298b7b245b797ad3888bec23a8",
+      "network_isolation_claimed": false,
+      "new_scientific_or_native_calls": 0,
+      "offline_scope": "Exact reviewed local numerical/file programs only; no networking program or API is invoked.",
+      "outcomes_pooled": false,
+      "schema": "ns-combined-anonymous-offline-reproduction/v1",
+      "scopes": {
+        "boundary": "Six historical boundary rows and retained qualification counts; no final outcomes or new qualifications",
+        "final32": "32 A/B cold cells; eight families and two nested repetitions",
+        "prior": "Separate 24-cell developmental pilot; four families and three nested repetitions, plus original separated cost ledgers"
+      },
+      "signature_authentication_performed": false,
+      "success": true
+    },
+    "reproduction_sha256": "9d4d33de6ad183b56c3e3049e0cb50d424b077b3151e73f66efc23ae2b18b853",
+    "started_at": "2026-09-13T17:24:12.977634+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "916dc880b070273f7907489597708884a4d767e3f7e22c9d40ebac368ebba9b0",
+    "success": true
+  },
+  "operator_cfp_note": {
+    "abstracts_registered_claimed_by_root": 3,
+    "anonymous_zip_limit_mb": 100,
+    "author_proofread_required": true,
+    "deadline": "2026-09-14T12:00:00Z",
+    "declared_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/workshop_requirements_1257_v1/review.private.json",
+    "declared_sha256": "0f7294cf7e1381104fb443a4a1c78acf58dfc06a3f73738752ad8534bbdeb1b3",
+    "llm_disclosure_required": true,
+    "main_pages": "4-9",
+    "official_template_unchanged": true,
+    "pdf_limit_mb": 50,
+    "source": "root_operator_task_instruction",
+    "this_worker_did_not_fetch_live_portal": true
+  },
+  "outside_reviewer_recruited": false,
+  "packaging": {
+    "checklist_answers": [
+      "Yes",
+      "Yes",
+      "No",
+      "No",
+      "No",
+      "Yes",
+      "Yes",
+      "No",
+      "N/A",
+      "Yes",
+      "N/A",
+      "No",
+      "Yes",
+      "N/A",
+      "N/A",
+      "Yes"
+    ],
+    "justification_count": 16,
+    "ns019_figure_preserved": true,
+    "ns022_main_tex_preserved": true,
+    "raw_identity_members": [],
+    "residual_lift_coding_members": [
+      "final32/source/objects/171fbc492df3c9e7231e954674cf1fde0a5fec1eda733a107d5d5a147e420a4e/preparation_launcher/run_context_preparation_caveat_v2.py",
+      "final32/source/objects/1b7c3db5492d9e389134cffb0ca97d03f7e7a64b1d4fbf6baad0c03fc7b5edc9/original_operator/operator_cell.py",
+      "final32/source/objects/50f091d76afbe36b0a503bde7da10f965ce78dc633c3c3686aab4638b614ee03/continued_driver/operator_cell_continued.py",
+      "final32/source/objects/aa3ff611800f095703c158964e875aad4975bfc62859e1e83bd4f8fe719130cd/continued_driver/build_offer_drop_continued.py"
+    ],
+    "shared_templates_unmodified": true,
+    "style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "zip_bytes": 2280657,
+    "zip_entries": 468,
+    "zip_sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+  },
+  "pdf_scan": {
+    "checklist_placeholder_hits": [],
+    "exempted_style_generated_anonymous_text": [
+      "Anonymous Author(s)",
+      "Anonymous Authors",
+      "Affiliation",
+      "Address",
+      "email"
+    ],
+    "ns022_pdf": {
+      "author": "Anonymous Authors",
+      "bytes": 216541,
+      "note": "NS-022 12-page scientific manuscript; NS-024 owns the 20-page workshop package.",
+      "pages": 12,
+      "placeholder_hits": [],
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+    },
+    "ns022_pdf_text_sha256": "2e369701b48a7cc1fddf24f7e8ef092ca2cc6f9b592fc4e7b704b06af9bc6471",
+    "ns024_pdf": {
+      "author": "Anonymous Authors",
+      "bytes": 252576,
+      "embedded_type1": true,
+      "layout": {
+        "llm_disclosure": "13",
+        "main": "1-6",
+        "official_checklist": "14-20",
+        "references": "7",
+        "technical_appendices": "8-12"
+      },
+      "main_pages_excluding_references_and_appendices": 6,
+      "pages": 20,
+      "placeholder_hits": [],
+      "review_line_numbers": true,
+      "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+      "title": "Neurosymbolic Supervision with Explicit Evidence: A Cold Repair Study",
+      "type3": false,
+      "workshop_footer": true
+    },
+    "page_heading_samples": {
+      "1": " Neurosymbolic Supervision with Explicit Evidence: A Cold Repair Study Anonymous Author(s) Affiliation Address email Abstract 1 We study whether native source-linked semantic context improves cold program 2 repair under fixed resources. Our",
+      "13": "396 E LLM use, public reproduction, and responsible use 397 Scientific model use. The final cold-repair comparison uses Grok 4.6 to propose source edits 398 from the fixed A/B context requests (Section 3). Each of the 32 cells consumes one ",
+      "14": "432 NeurIPS Paper Checklist 433 1. Claims 434 Question: Do the main claims made in the abstract and introduction accurately reflect the 435 paper\u2019s contributions and scope? 436 Answer: [Yes] 437 Justification: The abstract and Sections 1, 5",
+      "20": "749 Answer: [N/A] 750 Justification: The reported source-code comparison includes no crowdsourcing or human- 751 subject annotation study. Section 7 states that human semantic fidelity, expert agreement and 752 human time were not measured;",
+      "7": "251 References 252 [1] Patrick Cousot and Radhia Cousot. Abstract interpretation: a unified lattice model for static 253 analysis of programs by construction or approximation of fixpoints. In Proceedings of the 4th 254 ACM SIGACT-SIGPLAN Sy",
+      "8": "274 A Full conditional argument record 275 The following audited statements are retained verbatim from the earlier formal argument record. 276 Their Equation 2, Algorithm 1, and statement identifiers name that record; they are not additiona"
+    },
+    "pdf_text_sha256": "34918d170d995e41f3f9da69f6be46ed49bc856037cf06de040752c79a11afb9",
+    "source_placeholder_hits": []
+  },
+  "portal_action_performed": false,
+  "predecessor_rows": [
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-11T16:09:36.835470+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Later tasks own some live paths; snapshot evidence remains the predecessor outcome.",
+        "original_manuscript_source_recovered: False",
+        "overleaf_membership_verified: False",
+        "full_visual_fidelity_verified: False",
+        "publication_ready: False",
+        "new_experiment_results: False",
+        "remaining_TBD_cells: 34"
+      ],
+      "live_outputs_still_match": false,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/manuscript/main.tex"
+      ],
+      "task_id": "NS-001"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-11T17:07:26.553454+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "nested_submodule_heads_verified: False",
+        "live_model_receipts: False",
+        "measured_prover_timing: False",
+        "native_prover_available: False",
+        "live_experiment_rerun: False",
+        "source_tree_mutated: False"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-002"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-11T17:44:00+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "live_experiment_run: False",
+        "positive_results_inferred: False",
+        "author_facts_inferred: False",
+        "portal_checked_or_submission_attempted: False",
+        "optional_backend_implemented: False",
+        "claim_boundary: This receipt proves the integrity and declared scope of NS-003 records, not the scientific truth of later claims or the availability of external services."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-003"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-11T18:07:47.577810+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "No new provider invocation, live benchmark repair, final source population, independent oracle or promotion decision was produced by NS-004.",
+        "Observed maintenance Terra HIGH access is not a reservation or scientific adapter qualification; native quota guard, actual source/model matching and resources remain mandatory.",
+        "The original provider-dispatched attempt log and private projection were preserved outside the publishable candidate. No provider receipt/history is rewritten by this candidate.",
+        "All counts are preregistered planned counts. Final quality may be inconclusive; this task does not narrow or complete the paper goal."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-004"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T05:06:30.367146+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Actual recruited live families are 16, below the preregistered 24. NS-016 must issue a versioned pre-final amendment or treat missing families as missing scheduled units; this freeze does not silently relabel the design.",
+        "No provider invocation or live historical repair result was produced. Builder pytest runs establish oracle applicability only.",
+        "Compact snapshot recipes pin admitted repair-surface files by commit and SHA-256; they are not full upstream worktrees. NS-006 materializes the pinned pre-fix commit for execution.",
+        "Hidden oracle payloads are hash-pinned reconstruction recipes and are not stored in the proposal-visible tree.",
+        "Shared-org libraries remain disclosed; independence is not assumed for population promotion.",
+        "All16 unchanged-baseline qualifications are newly executed; historical hidden-oracle applicability was retained but not independently rerun here."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-005"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T01:32:08.834077+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Later tasks own some live paths; snapshot evidence remains the predecessor outcome.",
+        "No billed production proposal, live historical repair, or final A-D comparison was produced.",
+        "Development stub proposals are fixture-keyed and do not measure a scientific B/A context effect.",
+        "Pinned pre-fix commits are not local git objects in this environment; live materialization is unavailable.",
+        "Docker container isolation is unavailable; process rlimits and request/patch/wall/effect caps were enforced.",
+        "Sampling seed and temperature controls are unsupported; they are recorded rather than asserted set.",
+        "NS-016 still owns pilot reservation, actual model freeze, and remaining-deadline feasibility."
+      ],
+      "live_outputs_still_match": false,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/experiments/README.md"
+      ],
+      "task_id": "NS-006"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T01:58:05+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "public_semantic_state_package_import: blocked_without_anyio",
+        "consumer_modules_loaded_via_namespace_bypass: True",
+        "multiformats: absent; in-tree sealed CIDv1 profile used",
+        "provider_tokenizer: absent; calibrated_utf8 fallback_rate=1.0 retained",
+        "token_reduction_on_this_fixture: semantic packs were not smaller than raw packs because required sources are never compressed",
+        "cst_alias_ir_linking: out_of_implemented_claim"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-007"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T02:14:34+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "public_semantic_state_package_import: blocked_without_anyio",
+        "production_model_identity: unavailable_in_sealed_profile",
+        "intended_residual_provider: digest-bound qualification process ns-008-qualification-residual-provider@1 invoked through ResidualProviderInvocation@1; admitted_production=false",
+        "thin_gate_helper: evaluate_provider_gate does not forward plan/doctor/obligation view CIDs; residual progress used KernelEvaluationRequest with exact receipts",
+        "kernel_provider_hook_count: always 0 from kernel evaluation; not a workflow-level savings measurement",
+        "fixture: hermetic add/scale qualification fixture, not a historical live repair task"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-008"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T02:35:30+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "z3: unsupported in the sealed PATH; SMT SAT/UNSAT of G\u2227\u00acA unavailable",
+        "interpolant_checker: unlocated; unsat cores are not interpolants",
+        "CompositionEdge: specification-only; identifier not found",
+        "incremental_smt_wrapper: unlocated; assertion replay is not retained-clause incrementality; no retained-state speedup",
+        "qf_lia_cegar_adapter: named interpolating QF_LIA CEGAR adapter unlocated; IPA refine_spurious_paths is a different located mechanism",
+        "cyclic_assume_guarantee_closure: unlocated; mutual citation is not proof"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-009"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T02:52:12+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Later tasks own some live paths; snapshot evidence remains the predecessor outcome.",
+        "multiformats: unsupported in the sealed PATH; a decode-only CID stub was installed only so runtime-trace imports could load",
+        "native_groth16_pytest_proof: not claimed; cache verifier in this profile is a local authoritative callback over retained canonical bytes",
+        "cold_oracle_mutation_campaign: NS-011; not this task",
+        "live_ad_experiment: False",
+        "fixture: constructed locators/keys/receipts plus live contract, cache, identity, lifecycle, and validation APIs; not a historical live repair task",
+        "claim_boundary: This receipt qualifies staged fixture/call/teardown identity and fail-closed lookup on the located adapters. It is not a matched A-D outcome, not a false-reuse rate, and not a kernel or Groth16 proof of arbitrary pytest execution."
+      ],
+      "live_outputs_still_match": false,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_profile.json",
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_phase_cases.json",
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md"
+      ],
+      "task_id": "NS-010"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T07:45:18+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Later tasks own some live paths; snapshot evidence remains the predecessor outcome.",
+        "multiformats: unsupported in the sealed PATH; a decode-only CID stub was installed only so runtime-trace imports could load",
+        "native_groth16_pytest_proof: not claimed; cache verifier in this profile is a local authoritative callback over retained canonical bytes",
+        "z3_cvc5: absent from the sealed PATH; not used",
+        "universal_projection_closure: A cold oracle and adversarial mutations check the identity-from-files caller; they do not prove completeness of \u03c0D on all states",
+        "stale_key_caller: Presenting a previously admitted execution key after a file mutation is unsound and is excluded from the paper claim; callers must rebind the current key from files",
+        "live_ad_experiment: False"
+      ],
+      "live_outputs_still_match": false,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json"
+      ],
+      "task_id": "NS-011"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T03:14:36+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "kit_proof_seal_store: absent from the pinned kit tree; NS-012 installed a labeled hermetic WAL/CAS contract shim so IncrementalProofSealer could run. The shim is not a released kit pin.",
+        "datasets_incremental_sealing_evidence: absent from the pinned datasets tree; a closed vocabulary shim supplies SealStatus/ProofMode/terminal-status and evidence dataclasses already imported by accelerate.",
+        "federation_network_partition: unavailable; not tested and not simulated as success",
+        "libp2p_mcp_transport: unavailable",
+        "remote_store: unavailable",
+        "exactly_once_external_side_effects: False"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-012"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T03:31:45+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "live_ad_experiment: False",
+        "simulation_counted_as_success: False",
+        "native_groth16_pytest_proof: not claimed; units are integrity-verified local receipts",
+        "kit_proof_seal_store: absent from the pinned kit tree; NS-013 reuses the NS-012 labeled hermetic WAL/CAS contract shim so IncrementalProofSealer can run. The shim is not a released kit pin.",
+        "datasets_incremental_sealing_evidence: absent from the pinned datasets tree; a closed vocabulary shim supplies SealStatus/ProofMode/terminal-status dataclasses",
+        "federation_network_partition: unavailable; not tested and not simulated as success"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-013"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-11T18:24:00+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "native_profile_qualified: False",
+        "native_proof_generated: False",
+        "native_proof_verified: False",
+        "measured_generation_elapsed_ms: None",
+        "measured_verification_elapsed_ms: None",
+        "simulation_counted_as_success: False"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-014"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T01:07:40+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "retained_extensions: []",
+        "table18_required_world_procedure_consumption: untested_out_of_scope",
+        "consumed_pre_post_evidence: False",
+        "learned_artifact_evaluated: False",
+        "pgir014_no_go_preserved: True",
+        "training_or_synthesis_run: False"
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-015"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T12:11:43.278632+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-016"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T12:41:26.445124+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "This completion reviews already-retained signed final32 evidence; it does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+        "Incomplete hidden validation on cell 5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1 preserves the signed hidden_acceptance_failed label and is not an observed hidden assertion failure or a proven infrastructure fault.",
+        "Runtime provenance is mixed: 7 cells used the original resource lease and 25 used a prospectively admitted continuation with a different executable source. The original freeze file remains a pre-outcome record.",
+        "All 32 external provider charges remain unsettled. Nested clocks are not an additive grand total. Missing scorer time, operator-review effort, and authoring effort remain unavailable, not zero.",
+        "Publication is not required by either retained arm. Anonymous release is not admitted. Hidden oracle payloads are omitted; independent hidden rescoring needs separately authorized scorer custody.",
+        "C/D routing, warm caches, reuse, publication-comparison efficacy, and original 16-family inferential objectives are withdrawn, not completed benchmark outcomes."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-017"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T12:53:39.557203+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "This completion records withdrawn/out-of-scope ablations and binds existing NS-017 main evidence by hash. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+        "The retained A/B contrast does not isolate arbitrary subcomponents of the source-linked native semantic context mechanism. Isolated efficiency gains remain unmeasured.",
+        "C/D routing, warm caches, reuse, publication-comparison efficacy, translation, sealer, parallel, procedure, and original 16-family inferential objectives remain withdrawn, not completed benchmark outcomes.",
+        "Deny-all is diagnostic only and cannot satisfy useful-progress promotion.",
+        "Empty ablation files are not zero experimental, setup, fallback, proof, index, training, or slower-workload costs. Those remain in separately bound ledgers or null isolated attributions.",
+        "Outside human review is not required; human semantic fidelity remains unmeasured. Native task completion is not claimed."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-018"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T13:06:45+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "This completion renders already admitted NS-017/NS-018 evidence. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+        "The 32 nested cells are eight families with two nested repetitions, not 32 independent repositories or a sixteen-family sample. Original D/A promotion, noninferiority, superiority, and 16-family inferential objectives remain withdrawn.",
+        "The descriptive conditional interval is not a population-wide efficacy, equality, or safety claim.",
+        "C/D routing, warm caches, reuse, publication-comparison efficacy, and human semantic fidelity remain withdrawn or unmeasured.",
+        "Unknown provider charges, missing scorer clocks, and missing operator phases stay unavailable rather than zero. Nested clocks are not summed as elapsed.",
+        "Two exactly duplicated identical retained-label records are accepted; a conflicting repeated label still fails. Original signed results, manifests, reducers, and scoring policy were not altered."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-019"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T13:48:44.659492+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Committed boundary_witnesses.json is a compact SHA256-pointer recipe of the 32 original-order terminals. It does not re-emit full retained envelopes or private original host paths. Full bodies remain in NS-017 retained objects and NS-019 results; the snapshot helper is the generator, not a second experiment. The unchanged envelope_recipe.generator_snapshot is an upstream full-envelope attribution; consult compact_derivative_provenance_v1/provenance.json for the complete actual two-stage transformation.",
+        "This completion reconciles already admitted NS-017/NS-019 evidence. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+        "The 32 nested cells are eight families with two nested repetitions, not 32 independent repositories or a sixteen-family sample. Original D/A promotion, noninferiority, superiority, and 16-family inferential objectives remain withdrawn.",
+        "C/D routing, warm caches, reuse, publication-comparison efficacy, native proof, world/procedure consumption, and human semantic fidelity remain withdrawn, untested, or unmeasured.",
+        "Constructed native and service controls remain structural or metadata qualifications. They are not historical repairs, final efficacy measurements, or exclusive physical-capacity proofs.",
+        "Private-original digest commitments are provenance. This helper does not reopen candidate code, hidden oracles, grant/cleanup bodies, or author-host paths."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-020"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-11T23:19:20+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "NS-021 does not rewrite manuscript/main.tex or manuscript/references.bib; NS-022 integrates the verified bibliography and applies label replacements.",
+        "Crossref given-name initials sometimes differ from conventional bylines; conventional bylines are retained and recorded.",
+        "No cited baseline was re-executed. Native proving remains the NS-014 unavailable profile.",
+        "Companion bibliographies were used to identify overlap from recovered titles and reference strings, not as a claim that those other lists are already publisher-verified.",
+        "This receipt is provenance validation, not independent scientific peer review or authorization to submit."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-021"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T15:16:21.703394+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Sealed validation PATH does not provide pdflatex. Ordinary verification inspects the adopted accepted PDF and sources with python3.12/pdffonts/pdfinfo/pdftotext.",
+        "The historical root compile that produced paper.pdf 907f0a24 used /home/barberb/.local/bin/pdflatex in a private authoring tree. That command is retained as original_build_record.json and is not this worker's command.",
+        "A new worker TinyTeX compile of the current accepted sources succeeded (12 pages, no Type3, pdftotext-identical to 907f0a24) but produced a distinct SHA256 2eb0e6dc because PDF identifiers differ. The deliverable remains the accepted historical product 907f0a24; the worker PDF is not an extra raw snapshot.",
+        "The first worker BibTeX attempt with an absolute /tmp output directory was refused by openout_any=p. The successful retry used a relative scratch cwd. The declared checkpoint directory was not writable (read-only parent state mount).",
+        "Task-output-exact admission authorizes live manuscript writes only for main.tex and paper.pdf. Companion allowlisted sources live in this snapshot; the font42 layout PDF is canonical base64, not a raw layout snapshot.",
+        "Live NS-019 ASCII family_useful.pdf 8ea081bc and NS-020 table18 3fa332e3 were not overwritten. The published Figure 1 uses layout/family_useful.pdf d70be874."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-022"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-12T03:45:03+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Sketches are unmachine-checked. The sealed PATH has no z3, lean, coqc, or cvc5, and no independently checked proof artifact exists.",
+        "Universal-Python proof work was not initiated and is not required to complete this task.",
+        "External side-effect atomicity outside the tested WAL/CAS/lifecycle boundary is not claimed.",
+        "Universal dependency closure of reuse projections is not claimed. NS-011 cold-oracle scoring is absent and undischarged.",
+        "NS-012 kit proof_seal_store and datasets incremental-sealing evidence remain shimmed; exclusivity is the tested sealer call chain.",
+        "Native proving remains the NS-014 unavailable profile. World/procedure extensions remain the NS-015 unretained closure."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-023"
+    },
+    {
+      "artifact_integrity": true,
+      "completed_at": "2026-09-13T17:04:32.124587356+00:00",
+      "criteria_met": true,
+      "deliverable_snapshots_present": true,
+      "limitations_noted": [
+        "Sealed validation PATH does not provide pdflatex. Ordinary verification inspects the adopted accepted PDF/ZIP and sources with python3.12/pdffonts/pdfinfo/pdftotext and the included numerical reproduce.py.",
+        "The inherited root compile that produced paper.pdf 0fb82abb used /home/barberb/.local/bin/pdflatex in a private authoring tree. That command is retained as original_manuscript_build_record.json and is not this worker's command.",
+        "A new worker TinyTeX compile of the snapshot sources succeeded (20 pages, 252576 bytes, no Type3, pdftotext-identical to 0fb82abb) but produced a distinct SHA256 dfb5e0c0 because PDF identifiers differ. The deliverable remains the accepted historical product 0fb82abb; the worker PDF is not an extra raw snapshot.",
+        "Public numerical reproduction regenerates retained scalar summaries from anonymous derivatives. It does not authenticate original private signatures, rescore hidden tests, or replay providers.",
+        "Exact served Grok 4.6 revision/weights, settled charges, human semantic fidelity/expert agreement/human time, NeurIPS Code of Ethics author review, complete asset-terms confirmation, and author proofread remain unresolved or unmeasured.",
+        "Supplement executed sources retain anonymized /anonymous-runtime/operator-root/lift_coding path tokens. These are residual correlation strings, not author names or emails, and do not guarantee de-identification."
+      ],
+      "live_outputs_still_match": true,
+      "receipt_exists": true,
+      "status": "complete",
+      "superseded_live_outputs": [],
+      "task_id": "NS-024"
+    }
+  ],
+  "predecessors": {
+    "all_complete_with_snapshot_integrity": true,
+    "predecessor_count": 24,
+    "superseded_live_output_tasks": [
+      "NS-001",
+      "NS-006",
+      "NS-010",
+      "NS-011"
+    ]
+  },
+  "protected": {
+    "ns019_family_useful_pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "ns022_main_tex": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+    "ns022_paper_pdf": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+  },
+  "publication_authorized": false,
+  "root_cfp_file": {
+    "bytes": null,
+    "declared_sha256": "0f7294cf7e1381104fb443a4a1c78acf58dfc06a3f73738752ad8534bbdeb1b3",
+    "exists": false,
+    "independently_hashed": false,
+    "match": false,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/workshop_requirements_1257_v1/review.private.json",
+    "sha256": null
+  },
+  "root_handoff": {
+    "bytes": null,
+    "declared_sha256": "c9917e47d6a8b54fbd5dcaba4eb94bb13fb60b017d3462569726918bccaa2304",
+    "exists": false,
+    "independently_hashed": false,
+    "match": false,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/ns024_final_artifact_handoff_v1.md",
+    "sha256": null
+  },
+  "schema": "ns025-independent-readiness-audit/v1",
+  "submission_authorized": false,
+  "tables": {
+    "ablations_sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+    "canonical_freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "claims": {
+      "arm_useful_A": 5,
+      "arm_useful_B": 4,
+      "categories_not_conflated": true,
+      "fixed_cells": 32,
+      "human_semantic_fidelity": null,
+      "independent_families": 8,
+      "mean_B_minus_A_useful": -0.0625,
+      "missing_cost_count": 16,
+      "nested_repetitions": [
+        104729,
+        130363
+      ],
+      "original_planned_factor_cells": 192,
+      "outcomes": {
+        "full_cold_pass": 9,
+        "hidden_acceptance_failed": 7,
+        "known_proposal_failure": 2,
+        "proposal_child_deadline": 14
+      },
+      "quality_interval": [
+        -0.1875,
+        0.0
+      ],
+      "settled_charges": false,
+      "unrecruited_families": 8,
+      "withdrawn": [
+        "C/D routing comparative benefits",
+        "warm-cache and reuse comparative effects",
+        "publication-comparison efficacy",
+        "original sixteen-family inferential objectives"
+      ],
+      "withdrawn_planned_factor_cells": 160
+    },
+    "final32_summary_reconciled": true,
+    "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "missing_family_pdf_heuristic": [],
+    "pdf_contains_useful_totals": true,
+    "reproduction_success": true,
+    "results_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "table17_sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "table18_sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+  },
+  "task_id": "NS-025"
+}

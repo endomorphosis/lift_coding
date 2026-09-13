@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns025-repro/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHON=/usr/bin/python3.12",
+    "/bin/sh",
+    "papers/completion/neurosymbolic_supervision/release/reproduce.sh",
+    "/tmp/ns025-receipt-extract-v1",
+    "/tmp/ns025-receipt-repro-v1"
+  ],
+  "cwd": ".",
+  "exit_code": 0,
+  "started_at": "2026-09-13T17:24:00.705093+00:00",
+  "finished_at": "2026-09-13T17:24:01.290863+00:00",
+  "elapsed_host_wall_seconds": 0.5857613529078662
+}

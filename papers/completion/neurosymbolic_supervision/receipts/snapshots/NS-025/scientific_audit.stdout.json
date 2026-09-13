@@ -1,0 +1,339 @@
+{
+  "all_passed": true,
+  "author_proofread_attested": false,
+  "checksums_expected": {
+    "README.md": "b0f1c14dff71ab06858412dcb68ea781c5c89a094e47c2ca0752ffca9757a452",
+    "manifest.json": "cd673ac98f1a058caf934174a93364e8199a438306ec38217bae0f6f885116c2",
+    "paper.pdf": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+    "reproduce.sh": "0ea4f3a6874008f10de37e63d3bbfa87351c653bea5036bb20dfb1ee8a0a58c9",
+    "supplement.zip": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+  },
+  "deliverables": {},
+  "failures": [],
+  "generated_at": "2026-09-13T17:19:40.992045+00:00",
+  "new_scientific_calls": 0,
+  "numerical_reproduction": {
+    "argv": [
+      "/bin/sh",
+      "papers/completion/neurosymbolic_supervision/release/reproduce.sh",
+      "/tmp/ns025-supplement-extract-v1",
+      "/tmp/ns025-supplement-repro-v1"
+    ],
+    "elapsed_host_wall_seconds": 0.571326,
+    "exit_code": 0,
+    "final32_summary_path": "/tmp/ns025-supplement-repro-v1/final32/numerical/summary.json",
+    "final32_summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215",
+    "finished_at": "2026-09-13T17:19:40.530450+00:00",
+    "new_scientific_or_native_calls": 0,
+    "reproduction": {
+      "components": {
+        "boundary": {
+          "execution": {
+            "argv": [
+              "/usr/bin/python3.12",
+              "-B",
+              "-s",
+              "/tmp/ns025-supplement-extract-v1/boundary/reproduce.py",
+              "--root",
+              "/tmp/ns025-supplement-extract-v1/boundary"
+            ],
+            "elapsed_host_wall_seconds": 0.03178243094589561,
+            "exit_code": 0,
+            "finished_at": "2026-09-13T17:19:40.421472+00:00",
+            "started_at": "2026-09-13T17:19:40.389709+00:00",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "162c5ffb0b74a800114f2f002692195046212adb2cdc87688154aaf70eddd55b",
+            "timed_out": false
+          },
+          "result": {
+            "NS011_false_reuse": {
+              "all_attempts": 26,
+              "observed": 1,
+              "selected_25_not_substituted": true
+            },
+            "NS012_recovery_records": 3,
+            "NS027": {
+              "case_attempts": 48,
+              "completed_rows": 47,
+              "full_public_baselines": 2,
+              "invocations": 4,
+              "reuse_credit": false,
+              "tests_per_baseline": 34
+            },
+            "final_outcome_rows": 0,
+            "historical_rows": {
+              "NS-007": 26,
+              "NS-008": 20,
+              "NS-009": 32,
+              "NS-011": 26,
+              "NS-012": 27
+            },
+            "native_qualification_reexecuted": false,
+            "original_claims": 32,
+            "provider_calls": 0,
+            "schema": "ns020-public-boundary-count-replay/v1",
+            "scorer_calls": 0,
+            "signature_authentication_of_derivatives": false,
+            "table_rows": 6
+          }
+        },
+        "final32": {
+          "execution": {
+            "argv": [
+              "/usr/bin/python3.12",
+              "-B",
+              "-s",
+              "/tmp/ns025-supplement-extract-v1/final32/reproduce.py",
+              "--release",
+              "/tmp/ns025-supplement-extract-v1/final32",
+              "--output",
+              "/tmp/ns025-supplement-repro-v1/final32/numerical"
+            ],
+            "elapsed_host_wall_seconds": 0.21417731291148812,
+            "exit_code": 0,
+            "finished_at": "2026-09-13T17:19:40.324145+00:00",
+            "started_at": "2026-09-13T17:19:40.109964+00:00",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "2f996577eb215251fc45c7514cc2a7b02c5746705a505b6575ba77572cb07ad6",
+            "timed_out": false
+          },
+          "result": {
+            "success": true,
+            "summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215"
+          }
+        },
+        "prior": {
+          "execution": {
+            "argv": [
+              "/usr/bin/python3.12",
+              "-B",
+              "-s",
+              "/tmp/ns025-supplement-extract-v1/prior/source/reproduce.py",
+              "/tmp/ns025-supplement-extract-v1/prior"
+            ],
+            "elapsed_host_wall_seconds": 0.0645841759396717,
+            "exit_code": 0,
+            "finished_at": "2026-09-13T17:19:40.389216+00:00",
+            "started_at": "2026-09-13T17:19:40.324644+00:00",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "8250f30117602e14fac7cc21358729046dd9fb8f35551c5ee920597c8a897e75",
+            "timed_out": false
+          },
+          "result": {
+            "all_files": 16,
+            "cost_records": 93,
+            "families": 4,
+            "indexed_members": 15,
+            "new_provider_scorer_native_calls": 0,
+            "original_signature_reverification": false,
+            "pilot_cells": 24,
+            "success": true,
+            "useful": 10
+          }
+        }
+      },
+      "cost_scopes_summed": false,
+      "manifest_sha256": "1a2b523bea55cd81699bc749bc002445edf53b298b7b245b797ad3888bec23a8",
+      "network_isolation_claimed": false,
+      "new_scientific_or_native_calls": 0,
+      "offline_scope": "Exact reviewed local numerical/file programs only; no networking program or API is invoked.",
+      "outcomes_pooled": false,
+      "schema": "ns-combined-anonymous-offline-reproduction/v1",
+      "scopes": {
+        "boundary": "Six historical boundary rows and retained qualification counts; no final outcomes or new qualifications",
+        "final32": "32 A/B cold cells; eight families and two nested repetitions",
+        "prior": "Separate 24-cell developmental pilot; four families and three nested repetitions, plus original separated cost ledgers"
+      },
+      "signature_authentication_performed": false,
+      "success": true
+    },
+    "reproduction_sha256": "e8c73274316f0b33a24f716a980cb86e77643df04ff817a9f441125ba5c06c83",
+    "started_at": "2026-09-13T17:19:39.959124+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "916dc880b070273f7907489597708884a4d767e3f7e22c9d40ebac368ebba9b0",
+    "success": true
+  },
+  "operator_cfp_note": {
+    "abstracts_registered_claimed_by_root": 3,
+    "anonymous_zip_limit_mb": 100,
+    "author_proofread_required": true,
+    "deadline": "2026-09-14T12:00:00Z",
+    "declared_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/workshop_requirements_1257_v1/review.private.json",
+    "declared_sha256": "0f7294cf7e1381104fb443a4a1c78acf58dfc06a3f73738752ad8534bbdeb1b3",
+    "llm_disclosure_required": true,
+    "main_pages": "4-9",
+    "official_template_unchanged": true,
+    "pdf_limit_mb": 50,
+    "source": "root_operator_task_instruction",
+    "this_worker_did_not_fetch_live_portal": true
+  },
+  "outside_reviewer_recruited": false,
+  "packaging": {
+    "checklist_answers": [
+      "Yes",
+      "Yes",
+      "No",
+      "No",
+      "No",
+      "Yes",
+      "Yes",
+      "No",
+      "N/A",
+      "Yes",
+      "N/A",
+      "No",
+      "Yes",
+      "N/A",
+      "N/A",
+      "Yes"
+    ],
+    "justification_count": 16,
+    "ns019_figure_preserved": true,
+    "ns022_main_tex_preserved": true,
+    "raw_identity_members": [],
+    "residual_lift_coding_members": [
+      "final32/source/objects/171fbc492df3c9e7231e954674cf1fde0a5fec1eda733a107d5d5a147e420a4e/preparation_launcher/run_context_preparation_caveat_v2.py",
+      "final32/source/objects/1b7c3db5492d9e389134cffb0ca97d03f7e7a64b1d4fbf6baad0c03fc7b5edc9/original_operator/operator_cell.py",
+      "final32/source/objects/50f091d76afbe36b0a503bde7da10f965ce78dc633c3c3686aab4638b614ee03/continued_driver/operator_cell_continued.py",
+      "final32/source/objects/aa3ff611800f095703c158964e875aad4975bfc62859e1e83bd4f8fe719130cd/continued_driver/build_offer_drop_continued.py"
+    ],
+    "shared_templates_unmodified": true,
+    "style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "zip_bytes": 2280657,
+    "zip_entries": 468,
+    "zip_sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+  },
+  "pdf_scan": {
+    "checklist_placeholder_hits": [],
+    "exempted_style_generated_anonymous_text": [
+      "Anonymous Author(s)",
+      "Anonymous Authors",
+      "Affiliation",
+      "Address",
+      "email"
+    ],
+    "ns022_pdf": {
+      "author": "Anonymous Authors",
+      "bytes": 216541,
+      "note": "NS-022 12-page scientific manuscript; NS-024 owns the 20-page workshop package.",
+      "pages": 12,
+      "placeholder_hits": [],
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+    },
+    "ns022_pdf_text_sha256": "2e369701b48a7cc1fddf24f7e8ef092ca2cc6f9b592fc4e7b704b06af9bc6471",
+    "ns024_pdf": {
+      "author": "Anonymous Authors",
+      "bytes": 252576,
+      "embedded_type1": true,
+      "layout": {
+        "llm_disclosure": "13",
+        "main": "1-6",
+        "official_checklist": "14-20",
+        "references": "7",
+        "technical_appendices": "8-12"
+      },
+      "main_pages_excluding_references_and_appendices": 6,
+      "pages": 20,
+      "placeholder_hits": [],
+      "review_line_numbers": true,
+      "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+      "title": "Neurosymbolic Supervision with Explicit Evidence: A Cold Repair Study",
+      "type3": false,
+      "workshop_footer": true
+    },
+    "page_heading_samples": {
+      "1": " Neurosymbolic Supervision with Explicit Evidence: A Cold Repair Study Anonymous Author(s) Affiliation Address email Abstract 1 We study whether native source-linked semantic context improves cold program 2 repair under fixed resources. Our",
+      "13": "396 E LLM use, public reproduction, and responsible use 397 Scientific model use. The final cold-repair comparison uses Grok 4.6 to propose source edits 398 from the fixed A/B context requests (Section 3). Each of the 32 cells consumes one ",
+      "14": "432 NeurIPS Paper Checklist 433 1. Claims 434 Question: Do the main claims made in the abstract and introduction accurately reflect the 435 paper\u2019s contributions and scope? 436 Answer: [Yes] 437 Justification: The abstract and Sections 1, 5",
+      "20": "749 Answer: [N/A] 750 Justification: The reported source-code comparison includes no crowdsourcing or human- 751 subject annotation study. Section 7 states that human semantic fidelity, expert agreement and 752 human time were not measured;",
+      "7": "251 References 252 [1] Patrick Cousot and Radhia Cousot. Abstract interpretation: a unified lattice model for static 253 analysis of programs by construction or approximation of fixpoints. In Proceedings of the 4th 254 ACM SIGACT-SIGPLAN Sy",
+      "8": "274 A Full conditional argument record 275 The following audited statements are retained verbatim from the earlier formal argument record. 276 Their Equation 2, Algorithm 1, and statement identifiers name that record; they are not additiona"
+    },
+    "pdf_text_sha256": "34918d170d995e41f3f9da69f6be46ed49bc856037cf06de040752c79a11afb9",
+    "source_placeholder_hits": []
+  },
+  "portal_action_performed": false,
+  "predecessors": {
+    "all_complete_with_snapshot_integrity": true,
+    "predecessor_count": 24,
+    "superseded_live_output_tasks": [
+      "NS-001",
+      "NS-006",
+      "NS-010",
+      "NS-011"
+    ]
+  },
+  "protected": {
+    "ns019_family_useful_pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "ns022_main_tex": "d10683b13e4fb0c5566e3b71fb7941fb2a95f1be5e1a50aa38957fe3092bf8ab",
+    "ns022_paper_pdf": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab"
+  },
+  "publication_authorized": false,
+  "root_cfp_file": {
+    "bytes": null,
+    "declared_sha256": "0f7294cf7e1381104fb443a4a1c78acf58dfc06a3f73738752ad8534bbdeb1b3",
+    "exists": false,
+    "independently_hashed": false,
+    "match": false,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/workshop_requirements_1257_v1/review.private.json",
+    "sha256": null
+  },
+  "root_handoff": {
+    "bytes": null,
+    "declared_sha256": "c9917e47d6a8b54fbd5dcaba4eb94bb13fb60b017d3462569726918bccaa2304",
+    "exists": false,
+    "independently_hashed": false,
+    "match": false,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/ns024_final_artifact_handoff_v1.md",
+    "sha256": null
+  },
+  "schema": "ns025-independent-readiness-audit/v1",
+  "submission_authorized": false,
+  "tables": {
+    "ablations_sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+    "canonical_freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "claims": {
+      "arm_useful_A": 5,
+      "arm_useful_B": 4,
+      "categories_not_conflated": true,
+      "fixed_cells": 32,
+      "human_semantic_fidelity": null,
+      "independent_families": 8,
+      "mean_B_minus_A_useful": -0.0625,
+      "missing_cost_count": 16,
+      "nested_repetitions": [
+        104729,
+        130363
+      ],
+      "original_planned_factor_cells": 192,
+      "outcomes": {
+        "full_cold_pass": 9,
+        "hidden_acceptance_failed": 7,
+        "known_proposal_failure": 2,
+        "proposal_child_deadline": 14
+      },
+      "quality_interval": [
+        -0.1875,
+        0.0
+      ],
+      "settled_charges": false,
+      "unrecruited_families": 8,
+      "withdrawn": [
+        "C/D routing comparative benefits",
+        "warm-cache and reuse comparative effects",
+        "publication-comparison efficacy",
+        "original sixteen-family inferential objectives"
+      ],
+      "withdrawn_planned_factor_cells": 160
+    },
+    "final32_summary_reconciled": true,
+    "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "missing_family_pdf_heuristic": [],
+    "pdf_contains_useful_totals": true,
+    "reproduction_success": true,
+    "results_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "table17_sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "table18_sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+  },
+  "task_id": "NS-025"
+}

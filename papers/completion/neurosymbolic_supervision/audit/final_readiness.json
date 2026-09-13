@@ -1,0 +1,143 @@
+{
+  "schema": "ns025-final-readiness/v1",
+  "task_id": "NS-025",
+  "audited_at": "2026-09-13T17:19:41+00:00",
+  "technical_package_ready_for_author_review": true,
+  "technically_complete_anonymous_workshop_package": true,
+  "submission_authorized": false,
+  "publication_authorized": false,
+  "portal_action_performed": false,
+  "outside_reviewer_recruited": false,
+  "author_proofread_attested": false,
+  "new_scientific_or_native_calls": 0,
+  "distinction": {
+    "technical_package": "The frozen 20-page anonymous PDF 0fb82abb, combined 468-entry ZIP 48cee756, official unanswered-to-answered checklist 48859ff3, unchanged research style 2944ec0d, and clean-environment numerical wrapper are ready for an authorized author to proofread. Independent sealed-PATH extraction regenerated the three unpooled component summaries with matching child stdout/summary hashes.",
+    "author_owned_attestations": "Proofread, NeurIPS Code of Ethics review, complete asset/provider terms confirmation, exact served Grok 4.6 revision/weights, whether any authoring task invoked gpt-5.6-terra, settled charges, human semantic fidelity/expert agreement/human time, and IRB/consent facts remain unresolved. This receipt does not invent them.",
+    "portal_action": "No OpenReview upload, camera-ready, or publication action was performed. Root reported a CFP check and three registered abstracts; this worker did not fetch the live portal and did not independently hash the private CFP file."
+  },
+  "live_deadline_note": {
+    "operator_or_root_declared_deadline": "2026-09-14T12:00:00Z",
+    "declared_cfp_file": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/workshop_requirements_1257_v1/review.private.json",
+    "declared_cfp_sha256": "0f7294cf7e1381104fb443a4a1c78acf58dfc06a3f73738752ad8534bbdeb1b3",
+    "independently_hashed_in_this_worktree": false,
+    "independently_fetched_live_portal": false,
+    "declared_requirements": {
+      "main_pages_excluding_references_and_appendices": "4-9",
+      "pdf_limit_mb": 50,
+      "anonymous_zip_limit_mb": 100,
+      "official_template_unchanged": true,
+      "author_proofread_required": true,
+      "llm_disclosure_required": true
+    },
+    "root_claimed_abstracts_registered": 3,
+    "this_worker_confirmed_portal_registration": false,
+    "measured_package_against_declared_bounds": {
+      "main_pages": 6,
+      "pdf_bytes": 252576,
+      "pdf_below_50_mb": true,
+      "zip_bytes": 2280657,
+      "zip_below_100_mb": true
+    }
+  },
+  "frozen_experiment": {
+    "canonical_freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "independent_families": 8,
+    "fixed_cells": 32,
+    "nested_repetitions": [104729, 130363],
+    "original_planned_factor_cells": 192,
+    "withdrawn_planned_factor_cells": 160,
+    "unrecruited_families": 8,
+    "arm_useful": {"A": 5, "B": 4, "planned_per_arm": 16, "mean_B_minus_A": -0.0625},
+    "quality_B_minus_A": {"lower": -0.1875, "upper": 0.0, "degenerate": false},
+    "outcomes": {
+      "full_cold_pass": 9,
+      "hidden_acceptance_failed": 7,
+      "known_proposal_failure": 2,
+      "proposal_child_deadline": 14
+    },
+    "withdrawn_not_completed_benchmarks": [
+      "C/D routing comparative benefits",
+      "warm-cache and reuse comparative effects",
+      "publication-comparison efficacy",
+      "original sixteen-family inferential objectives"
+    ]
+  },
+  "package_files": {
+    "paper.pdf": {
+      "path": "papers/completion/neurosymbolic_supervision/release/paper.pdf",
+      "bytes": 252576,
+      "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+      "pages": 20,
+      "layout": {
+        "main": "1-6",
+        "references": "7",
+        "technical_appendices": "8-12",
+        "llm_disclosure": "13",
+        "official_checklist": "14-20"
+      }
+    },
+    "supplement.zip": {
+      "path": "papers/completion/neurosymbolic_supervision/release/supplement.zip",
+      "bytes": 2280657,
+      "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07",
+      "zip_entries": 468,
+      "unpooled_components": ["final32", "prior", "boundary"]
+    },
+    "ns022_scientific_pdf": {
+      "path": "papers/completion/neurosymbolic_supervision/manuscript/paper.pdf",
+      "bytes": 216541,
+      "sha256": "907f0a24b775d22cbff1a35e958c2f121cbb4784756b2943dcee4eb5ae3e14ab",
+      "pages": 12,
+      "role": "NS-022 owned 12-page scientific manuscript; not overwritten by NS-024/NS-025"
+    }
+  },
+  "checklist_answers": ["Yes", "Yes", "No", "No", "No", "Yes", "Yes", "No", "N/A", "Yes", "N/A", "No", "Yes", "N/A", "N/A", "Yes"],
+  "templates": {
+    "shared_research_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "shared_workshop_tex_sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "shared_official_checklist_sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "per_paper_answered_checklist_sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1",
+    "shared_user_templates_unmodified": true
+  },
+  "predecessors": {
+    "audited": ["NS-001", "NS-002", "NS-003", "NS-004", "NS-005", "NS-006", "NS-007", "NS-008", "NS-009", "NS-010", "NS-011", "NS-012", "NS-013", "NS-014", "NS-015", "NS-016", "NS-017", "NS-018", "NS-019", "NS-020", "NS-021", "NS-022", "NS-023", "NS-024"],
+    "all_receipts_complete_with_snapshot_integrity": true,
+    "live_paths_later_owned": ["NS-001", "NS-006", "NS-010", "NS-011"],
+    "note": "Later owners replaced some live files. Predecessor outcomes remain the hashed snapshots. NS-023 historically recorded NS-011 as absent at its review time; NS-011 is now complete and its snapshot evidence is intact."
+  },
+  "outstanding_author_owned_attestations": [
+    "Author proofread of the final anonymous package",
+    "NeurIPS Code of Ethics review and conformance",
+    "Complete asset/provider terms-of-use confirmation",
+    "Exact served Grok 4.6 revision and weights",
+    "Whether any authoring task actually invoked gpt-5.6-terra",
+    "Settled provider charges (32 cells remain unsettled; missing costs are not zero)",
+    "Human semantic fidelity, expert agreement, and human time (unmeasured)",
+    "IRB, consent, compensation, or human-subject protocol (no such study is reported)",
+    "Submission, camera-ready, or publication authorization"
+  ],
+  "unavailable_or_unmeasured_not_zeroed": [
+    "human semantic fidelity",
+    "expert agreement",
+    "human time",
+    "settled provider charges",
+    "exact served model revision",
+    "isolated false-admission estimate",
+    "C/D, warm, reuse, and publication comparative effects",
+    "original 16-family inferential objectives",
+    "machine-checked formal arguments"
+  ],
+  "reproducibility": {
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "command": "PYTHON=/usr/bin/python3.12 /bin/sh papers/completion/neurosymbolic_supervision/release/reproduce.sh ABSOLUTE_NEW_EXTRACT_DIR ABSOLUTE_NEW_OUTPUT_DIR",
+    "independent_after_extraction": {
+      "success": true,
+      "elapsed_host_wall_seconds": 0.571326,
+      "final32_summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215",
+      "new_scientific_or_native_calls": 0,
+      "signature_authentication_performed": false
+    }
+  }
+}

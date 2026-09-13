@@ -1,0 +1,217 @@
+{
+  "schema": "ns025-predecessor-summary/v1",
+  "all_complete_with_snapshot_integrity": true,
+  "predecessor_count": 24,
+  "superseded_live_output_tasks": [
+    "NS-001",
+    "NS-006",
+    "NS-010",
+    "NS-011"
+  ],
+  "rows": [
+    {
+      "task_id": "NS-001",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": false,
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/manuscript/main.tex"
+      ]
+    },
+    {
+      "task_id": "NS-002",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-003",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-004",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-005",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-006",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": false,
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/experiments/README.md"
+      ]
+    },
+    {
+      "task_id": "NS-007",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-008",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-009",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-010",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": false,
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_profile.json",
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_phase_cases.json",
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_adapter_report.md"
+      ]
+    },
+    {
+      "task_id": "NS-011",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": false,
+      "superseded_live_outputs": [
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json"
+      ]
+    },
+    {
+      "task_id": "NS-012",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-013",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-014",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-015",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-016",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-017",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-018",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-019",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-020",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-021",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-022",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-023",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    },
+    {
+      "task_id": "NS-024",
+      "status": "complete",
+      "criteria_met": true,
+      "artifact_integrity": true,
+      "live_outputs_still_match": true,
+      "superseded_live_outputs": []
+    }
+  ]
+}
