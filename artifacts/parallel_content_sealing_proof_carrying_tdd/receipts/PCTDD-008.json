@@ -1,0 +1,43 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-008.json",
+    "external/ipfs_kit/ipfs_kit_py/proof_seal/__init__.py",
+    "external/ipfs_kit/ipfs_kit_py/proof_seal/hash_memo_store.py",
+    "external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py"
+  ],
+  "claim": "Worker-authored kit hash-memo store persists and rehashes exact memo bytes under lookup keys while never deciding semantic reuse. Git blobs remain lookup keys only and filesystem metadata remains candidate-only. Typed unavailable semantic-reuse, WAL/CAS publication, production-ZK, key-ceremony, native-hasher, and direct-execution cases do not change claim meaning. This receipt does not complete PCTDD-008, admit its own tests, or self-approve output.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; pytest skip or reuse; current-root publication; WAL/CAS; task completion; production ZK; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-008@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "filesystem_metadata_is_candidate_only": true,
+    "git_blob_is_lookup_key_only": true,
+    "hash_memo_store": "HashMemoStore@1",
+    "hash_memo_store_record": "HashMemoStoreRecord@1",
+    "persisted_byte_rehash_required": true,
+    "predecessor_verified_hash_memo": "VerifiedHashMemo@1",
+    "publication_authority_invoked": false,
+    "semantic_reuse_authority": "ipfs_accelerate_py",
+    "storage_wal_cas_authority": "ipfs_kit_py"
+  },
+  "dependency_receipts": ["PCTDD-007"],
+  "limitations": {
+    "direct_execution_profile": {"status": "typed_unavailable", "reason_code": "direct_execution_profile_optional", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "key_ceremony": {"status": "typed_unavailable", "reason_code": "production_zk_key_ceremony_unavailable", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "memo_reuse_decision": {"status": "typed_unavailable", "reason_code": "kit_store_has_no_semantic_reuse_authority", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "native_batch_hasher": {"status": "typed_unavailable", "reason_code": "native_batch_hasher_not_installed", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "production_zk": {"status": "typed_unavailable", "reason_code": "production_zk_key_ceremony_unavailable", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "wal_cas_publication": {"status": "typed_unavailable", "reason_code": "hash_memo_store_has_no_publication_authority", "claim_unchanged": true, "production_admitted": false, "self_approved": false}
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "task_id": "PCTDD-008",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-008@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
