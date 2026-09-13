@@ -1,0 +1,124 @@
+{
+  "aliases": [
+    {
+      "component": "ipfs_accelerate",
+      "definition_kind": "class",
+      "definition_line": 625,
+      "execution_scope": "selected measured handler boundary",
+      "included_source": {
+        "archive": "recovery_source_v1/evidence.zip",
+        "member": "recovery_history/candidate/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py"
+      },
+      "included_source_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "neutral_symbol": "PreInvocationEnforcer",
+      "original_symbol": "SupervisorPreInvocationEnforcement",
+      "upstream_relative_source": "ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "upstream_revision": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2"
+    },
+    {
+      "component": "paper",
+      "definition_kind": "class",
+      "definition_line": 44,
+      "execution_scope": "selected measured handler boundary",
+      "included_source": {
+        "archive": "recovery_source_v1/evidence.zip",
+        "member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/handlers/effects.py"
+      },
+      "included_source_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "neutral_symbol": "SandboxExportHandler",
+      "original_symbol": "BoundedExportHandler",
+      "upstream_relative_source": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "upstream_revision": "d6127a257a433fabb8183180d82cc3b309040c47"
+    },
+    {
+      "component": "ipfs_datasets",
+      "definition_kind": "class",
+      "definition_line": 175,
+      "execution_scope": "implementation context; not a claim of a separately scored arm",
+      "included_source": {
+        "path": "implementation_sources/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_compiler_api.py"
+      },
+      "included_source_sha256": "cb028e7dd7cae55aba2171b2e43ce0f4aac78ea72a7ad3d8753d2f0312d2e70c",
+      "neutral_symbol": "LegalIRCompiler",
+      "original_symbol": "LegalIRCompilerAPI",
+      "upstream_relative_source": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_compiler_api.py",
+      "upstream_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    {
+      "component": "ipfs_datasets",
+      "definition_kind": "class",
+      "definition_line": 151,
+      "execution_scope": "implementation context; not a claim of a separately scored arm",
+      "included_source": {
+        "path": "implementation_sources/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py"
+      },
+      "included_source_sha256": "f4df3cb60239395e2eb06fb9b2c715aa43b56665a93fbaed1a4ac9b37fbbe105",
+      "neutral_symbol": "SkillRecordAdapter",
+      "original_symbol": "SkillCenterSkillRecord",
+      "upstream_relative_source": "ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py",
+      "upstream_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    {
+      "component": "ipfs_accelerate",
+      "definition_kind": "class",
+      "definition_line": 1375,
+      "execution_scope": "implementation context; not a claim of a separately scored arm",
+      "included_source": {
+        "path": "implementation_sources/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ir_constraint_compiler.py"
+      },
+      "included_source_sha256": "332075acbb38d4ae4037b81bcf06840e4d800f33a0f90e2b4c59517b37ec0e56",
+      "neutral_symbol": "ConstraintCompiler",
+      "original_symbol": "IRConstraintCompiler",
+      "upstream_relative_source": "ipfs_accelerate_py/agent_supervisor/proof/ir_constraint_compiler.py",
+      "upstream_revision": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2"
+    },
+    {
+      "component": "ipfs_datasets",
+      "definition_kind": "class",
+      "definition_line": 1502,
+      "execution_scope": "implementation context; not a claim of a separately scored arm",
+      "included_source": {
+        "path": "implementation_sources/ipfs_datasets/ipfs_datasets_py/logic/admissibility/service.py"
+      },
+      "included_source_sha256": "e21f01a09e0f5b19b6171dc87bbc57b115ccf183b92a030752339a0b0a8ee4e5",
+      "neutral_symbol": "AuthorizationService",
+      "original_symbol": "IntentAuthorizationService",
+      "upstream_relative_source": "ipfs_datasets_py/logic/admissibility/service.py",
+      "upstream_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    {
+      "component": "ipfs_accelerate",
+      "definition_kind": "class",
+      "definition_line": 687,
+      "execution_scope": "implementation context; not a claim of a separately scored arm",
+      "included_source": {
+        "path": "implementation_sources/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py"
+      },
+      "included_source_sha256": "40208ae8b67eb67c62d0de71bb9146d6ccc2d3efcb28d0532c839011fbd7454b",
+      "neutral_symbol": "TypedStateClient",
+      "original_symbol": "QuackStateClient",
+      "upstream_relative_source": "ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py",
+      "upstream_revision": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2"
+    },
+    {
+      "component": "ipfs_datasets",
+      "definition_kind": "function",
+      "definition_line": 531,
+      "execution_scope": "implementation context; not a claim of a separately scored arm",
+      "included_source": {
+        "path": "implementation_sources/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py"
+      },
+      "included_source_sha256": "e48c33c7bed68da1c93539c23174d3963d01f0b7bec39b0475395c85a5851cdc",
+      "neutral_symbol": "CVEFixesAdapter",
+      "original_symbol": "adapt_cvefixes_candidate",
+      "upstream_relative_source": "ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py",
+      "upstream_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    }
+  ],
+  "licenses": "recovery_source_v1/licenses/",
+  "private_author_project_host_metadata_included": false,
+  "purpose": "Neutral manuscript identifiers mapped to included original technical definitions; this is not a private author or path mapping.",
+  "schema": "law-public-technical-symbol-aliases/v1",
+  "source_execution_performed": false,
+  "symbol_count": 8
+}
