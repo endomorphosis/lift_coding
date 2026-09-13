@@ -3292,7 +3292,33 @@ def _bind_native_status(server: Any, population: Mapping[str, Any]) -> None:
     )
 
 
-def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]:
+def _configure_native_status_before_start(
+    server: Any, board: Any, population: Mapping[str, Any], paths: Mapping[str, Path],
+    *, enable_legacy_queue_observation: bool = False,
+) -> None:
+    """Bind this board before publication; queue observation is explicit opt-in."""
+    from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
+
+    arguments = dict(
+        board_namespace=PROGRAM_ID, plan_root_cid=population["plan_root_cid"],
+        repository_tree_id=population["repository_tree_id"],
+        task_cids=[task["task_cid"] for task in population["tasks"]],
+    )
+    if enable_legacy_queue_observation:
+        raw = board.payload.get("runtime_paths")
+        if not isinstance(raw, Mapping) or type(raw.get("merge_queue")) is not str:
+            raise HandoffError("DOEP queue observation requires its configured queue scope")
+        queue = board.path(raw["merge_queue"])
+        if queue != paths["root"] / "merge-queue":
+            raise HandoffError("DOEP queue observation differs from its canonical campaign queue")
+        arguments.update(queue_dir=queue, target_repository_id=checkout_repository_id(ROOT),
+                         target_branch=board.merge_target_branch)
+    server.configure_database_status_before_start(**arguments)
+
+
+def authoritative_status(
+    *, history_tasks: Sequence[str] = (), queue_task: str | None = None,
+) -> dict[str, Any]:
     """Read live state using this invocation's own native read-only session."""
     from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import process_birth_id
     from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
@@ -3311,6 +3337,8 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
     if (len(history_tasks) > 8 or len(set(history_tasks)) != len(history_tasks)
             or any(alias not in aliases for alias in history_tasks)):
         raise HandoffError("history request is outside the sealed DOEP population or bound")
+    if queue_task is not None and (type(queue_task) is not str or queue_task not in aliases):
+        raise HandoffError("queue observation task is outside the sealed DOEP population")
     owner = _json_object(paths["owner_status"])
     identity = owner.get("identity")
     if (owner.get("lifecycle") != "ready" or not isinstance(identity, Mapping)
@@ -3346,7 +3374,14 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
             before = client.load_generation()
             histories = {alias: dict(source.task_revision_history_projection(aliases[alias]))
                          for alias in history_tasks}
-            snapshot = connection.completion_closeout_snapshot(sorted(aliases.values()))
+            queue_observation = None
+            if queue_task is None:
+                snapshot = connection.completion_closeout_snapshot(sorted(aliases.values()))
+            else:
+                queue_observation = connection.legacy_merge_queue_task_observation(
+                    sorted(aliases.values()), task_cid=aliases[queue_task],
+                )
+                snapshot = queue_observation["control_snapshot"]
             after = client.load_generation()
             if before.content_id == after.content_id:
                 break
@@ -3370,6 +3405,7 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
             "tasks": tasks, "leases": relations["leases"]["rows"],
             "completion_snapshot": snapshot["completion_snapshot"],
             "closeout_snapshot": dict(snapshot), "task_histories": histories,
+            **({"legacy_queue_observation": queue_observation} if queue_task is not None else {}),
             "store_generation": after.to_record(),
             "required_goal_count": len(population["goals"]),
             "completion_authority": False,
@@ -3381,7 +3417,9 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
         connection.close()
 
 
-def launch(*, observe_history_only: bool = False) -> int:
+def launch(
+    *, observe_history_only: bool = False, enable_legacy_queue_observation: bool = False,
+) -> int:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
     )
@@ -3420,6 +3458,8 @@ def launch(*, observe_history_only: bool = False) -> int:
     prior_environment = dict(os.environ)
     result = 1
     try:
+        _configure_native_status_before_start(server, board, population, paths,
+            enable_legacy_queue_observation=enable_legacy_queue_observation)
         identity = server.start()
         if not server.ready():
             raise HandoffError("Quack state owner did not become ready")
@@ -3429,7 +3469,6 @@ def launch(*, observe_history_only: bool = False) -> int:
             population,
             objective_observation,
         )
-        _bind_native_status(server, population)
         launch_id = (
             "sha256:"
             + hashlib.sha256(
@@ -3963,8 +4002,10 @@ def _retained_pool_source_admission() -> dict[str, Any]:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("run")
-    commands.add_parser("observe-task-histories")
+    for command in ("run", "observe-task-histories"):
+        launch_parser = commands.add_parser(command)
+        launch_parser.add_argument("--enable-legacy-queue-observation", action="store_true",
+            help="bind read-only observation of the existing configured Portal queue before startup")
     commands.add_parser("recover-blocked-lock-timeout")
     commands.add_parser("recover-doep-031-protected-control-plane-update")
     legacy_parser = commands.add_parser("recover-legacy-verification-timeout")
@@ -3979,6 +4020,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     dependency_parser.add_argument("--expected-revision", type=int, required=True)
     native_parser = commands.add_parser("authoritative-status")
     native_parser.add_argument("--history-task", action="append", default=[])
+    native_parser.add_argument("--queue-task", help="observe one sealed task's existing Portal queue rows")
     admission_parser = commands.add_parser("retained-pool-release-admission")
     admission_parser.add_argument("--request-json", type=Path, required=True)
     status_parser = commands.add_parser("status")
@@ -4001,7 +4043,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(result, sort_keys=True))
             return 0 if result["disposition"] == "deferred" else 2
         if args.command == "authoritative-status":
-            print(json.dumps(authoritative_status(history_tasks=args.history_task), sort_keys=True))
+            print(json.dumps(authoritative_status(history_tasks=args.history_task,
+                                                 queue_task=args.queue_task), sort_keys=True))
             return 0
         if args.command == "recover-legacy-verification-timeout":
             return recover_legacy_verification_timeout(
@@ -4013,9 +4056,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "recover-claim-verification":
             return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision)
         if args.command == "run":
-            return launch()
+            return launch(enable_legacy_queue_observation=args.enable_legacy_queue_observation)
         if args.command == "observe-task-histories":
-            return launch(observe_history_only=True)
+            return launch(observe_history_only=True,
+                          enable_legacy_queue_observation=args.enable_legacy_queue_observation)
         if args.command == "recover-blocked-lock-timeout":
             return recover_blocked_lock_timeout()
         if args.command == "recover-doep-031-protected-control-plane-update":
