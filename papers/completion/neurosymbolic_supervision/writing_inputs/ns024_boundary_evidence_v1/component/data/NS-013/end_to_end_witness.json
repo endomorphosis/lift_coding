@@ -1,0 +1,78 @@
+{
+  "counterexample": {
+    "denied_write_persisted": true,
+    "pytest_exit": 1
+  },
+  "ids": {
+    "doctor_cid": "baguqeerautnm5gbg2f6mrvjwpmaniljnpblyzgiaf52dzifkilw5hzw7t3iq",
+    "environment_cid": "sha256:e4bc636d22e14b8fd6cc116b3cd5f288481df814cb5a9b5efb1cb5d2542f8580",
+    "forest_cid": "baguqeeran7bm5sjyop5qpxpuu7yundri3rvmqci4mqlomdc2llh3qprvropq",
+    "plan_cid": "baguqeera3z3xeu3uo77qorfix7vbjr2vyvysrtmg6wryhhtmpckg5egqsjsq",
+    "policy_cid": "sha256:f711f00ed99912349c04196f2348905f2c299cb72fccdef83b03154cc0339f39",
+    "task_cid": "baguqeerayjn2552ymrf3qtqjbvfe43q5yequcbhmowkmaazqaabyo5xuntxq"
+  },
+  "invalid_path": {
+    "denied_write_persisted": true,
+    "incomplete_completion_reported": false,
+    "reported_completion": false,
+    "simulated_counted_as_success": false
+  },
+  "live_ad_experiment": false,
+  "policy_id": "ns-013-end-to-end-qualification-v1",
+  "publication": {
+    "generation": 0,
+    "manifest_root_cid": "sha256:eae100b04db3b4969f33a6e9ce91f43c2e825ffa7941dc15220895a3ab608964",
+    "parent_seal_cid": "ips.forest.genesis@1",
+    "pointer_seal_cid": "sha256:1776714283057d562d41664641edbdaf36dd1fccae7b77d872368a630a5c7b73",
+    "post_tree_matches_publication_subject": true,
+    "published": true,
+    "reason": "sealed",
+    "seal_cid": "sha256:1776714283057d562d41664641edbdaf36dd1fccae7b77d872368a630a5c7b73",
+    "status": "sealed_full"
+  },
+  "qualification_not_live_ad": true,
+  "reuse": {
+    "collection_seed_not_skip_authority": true,
+    "lookup_is_skip": true,
+    "policy_change_is_skip": false
+  },
+  "route_change": {
+    "after": {
+      "inputs": {
+        "available_proofs": 1,
+        "context_tokens": 800,
+        "dependency_cone_size": 2,
+        "prior_repair_failures": 0,
+        "prior_route_failed": false,
+        "unresolved_obligations": 1
+      }
+    },
+    "before": {
+      "inputs": {
+        "available_proofs": 0,
+        "context_tokens": 800,
+        "dependency_cone_size": 4,
+        "prior_repair_failures": 0,
+        "prior_route_failed": false,
+        "unresolved_obligations": 1
+      }
+    }
+  },
+  "schema": "neurosymbolic-supervision/end-to-end-witness@1",
+  "simulation_counted_as_success": false,
+  "table6_labels_replaced": true,
+  "task": {
+    "counts_as_live_repair": false,
+    "family": "guard-before-write"
+  },
+  "task_id": "NS-013",
+  "valid_path": {
+    "analytical_pytest_passed": true,
+    "applied": true,
+    "caller_root_unchanged": true,
+    "denied_write_persisted": false,
+    "finalized": true,
+    "permitted_write_works": true,
+    "pytest_exit": 0
+  }
+}

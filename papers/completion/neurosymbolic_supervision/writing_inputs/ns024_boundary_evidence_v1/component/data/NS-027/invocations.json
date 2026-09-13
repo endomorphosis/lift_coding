@@ -1,0 +1,63 @@
+{
+  "invocations": [
+    {
+      "aggregate_resource_costs": null,
+      "case_attempts_observed": 0,
+      "completed_case_rows": 0,
+      "cost_status": "individual measured command records retained; missing setup/import/aggregate costs remain unknown",
+      "exit_code": 1,
+      "failure_phase": "capability-probe argument NameError before qualification",
+      "failure_sha256": "9e07936fbe3be8a3edda76d0ab7cf9948eb8bef603adfd0b3aee279871258434",
+      "failure_type": "NameError",
+      "invocation_sha256": "3871c56e072494551ed9e3ae9b877220cbf67cfdccdb75a487d03bab39924e6c",
+      "outcomes_sha256": null,
+      "pending_or_failed_cold_case": false,
+      "run_id": "operator-repair-qualification-v1",
+      "script_sha256": "8fa4c699eb8d9f9547457bc55a90c82ca7daf652d815f0b0e4685bc3a2fdcb71"
+    },
+    {
+      "aggregate_resource_costs": null,
+      "case_attempts_observed": 16,
+      "completed_case_rows": 15,
+      "cost_status": "individual measured command records retained; missing setup/import/aggregate costs remain unknown",
+      "exit_code": 1,
+      "failure_phase": "sealed validation launcher refusal during the sixteenth cold case",
+      "failure_sha256": "1e22937de4b942da4570065eb680b32dfded7ed8841456b8cf256dbaadf1ee4c",
+      "failure_type": "ValidationRuntimeError",
+      "invocation_sha256": "083849041699ce2579bd09dfa55b16291dd80bd92c0a8ef07ec39becef557376",
+      "outcomes_sha256": "2461e87ac6af4c30b9550500ae585f935fa587c6e9e00629006b44e1f4dabe03",
+      "pending_or_failed_cold_case": true,
+      "run_id": "operator-repair-qualification-v2",
+      "script_sha256": "48c7224cbf432a57841925a08f62608f4d8636e0d5d3d3ae5ab230251eabece0"
+    },
+    {
+      "aggregate_resource_costs": null,
+      "case_attempts_observed": 16,
+      "completed_case_rows": 16,
+      "cost_status": "individual measured command records retained; missing setup/import/aggregate costs remain unknown",
+      "exit_code": 0,
+      "failure_sha256": null,
+      "invocation_sha256": "f507a3fa878582bc7c37ab3917e598309ce7c0b23b5d2312d360ec9d22598268",
+      "outcomes_sha256": "9905a7ca81c38454407a5961dc25a0a80c935572259bbb27b33adba898b5fe6a",
+      "pending_or_failed_cold_case": false,
+      "run_id": "operator-repair-qualification-v3",
+      "script_sha256": "7f06ef6883643f825b5ff4f54b9c9a188366b0be4e108eb9e3307b90a285b344"
+    },
+    {
+      "aggregate_resource_costs": null,
+      "case_attempts_observed": 16,
+      "completed_case_rows": 16,
+      "cost_status": "individual measured command records retained; missing setup/import/aggregate costs remain unknown",
+      "exit_code": 0,
+      "failure_sha256": null,
+      "invocation_sha256": "967e47d88e2751310172bb6d6c887f751cc04f271c93f2b9a8d444a5019221fd",
+      "outcomes_sha256": "b896e86dddcda3655035ccfc9f72a518c9fc92df68b2449890900ac42390b618",
+      "pending_or_failed_cold_case": false,
+      "run_id": "operator-repair-qualification-v4",
+      "script_sha256": "cc7882936416492bb5b7905c7ff19d9a47d3df553f79b3427c303990a32d310d"
+    }
+  ],
+  "no_invocation_excluded": true,
+  "reuse_safety_estimate": false,
+  "schema": "ns020-unsigned-NS027-invocation-projection/v1"
+}

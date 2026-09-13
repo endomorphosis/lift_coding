@@ -1,0 +1,226 @@
+{
+  "actual_final_rows": [],
+  "controls_are_not_scientific_outcomes": true,
+  "records": {
+    "continued_client_analysis": {
+      "checks": [],
+      "original_sha256": "97dc9dce6e5b1b66b7d4f219590c7de5417738acdd57976a46a9e70ebef50126",
+      "scalars": {
+        "actual_final_analysis_executed": false,
+        "analysis_export_join_controls": 39,
+        "client_controls": 16,
+        "constructed_controls_only": true,
+        "containers": 0,
+        "full_actual_authority_loader_executed": false,
+        "lease_effects": 0,
+        "live_source_writes": 0,
+        "native_calls": 0,
+        "original_client_crypto_resource_read_dispatch_ast_identical": true,
+        "original_policy_function_ast_identical": true,
+        "scientific_calls": 0,
+        "success": true
+      },
+      "source_hashes": []
+    },
+    "continued_overlay": {
+      "checks": [
+        "test_actual_original_resource_predicate_ast_unchanged",
+        "test_only_declared_gateway_functions_changed",
+        "test_static_authority_positive_and_all_prefix_refs_forwarded",
+        "test_unapproved_rejected",
+        "test_fixture_authority_rejected",
+        "test_old_freeze_changed_refused",
+        "test_consumed_cell_refused",
+        "test_suffix_reordered_refused",
+        "test_extra_provider_slot_refused",
+        "test_float_slot_count_refused",
+        "test_profile_budget_change_refused",
+        "test_retry_refused",
+        "test_false_unchanged_runtime_claim_refused",
+        "test_scientific_source_change_refused",
+        "test_validator_source_omission_refused",
+        "test_mismatched_effective_service_path_refused",
+        "test_actual_prefix_audit_binding_required",
+        "test_successor_fixture_refused",
+        "test_manager_custody_missing_refused",
+        "test_post_caller_evidence_required",
+        "test_source_qualification_wrong_map_refused",
+        "test_accounting_mode_does_not_call_liveness",
+        "test_effect_mode_calls_exact_successor_lease_check",
+        "test_public_projection_accepted_by_actual_new_client",
+        "test_gateway_refuses_missing_continuation_before_effects",
+        "test_gateway_configures_client_from_exact_authority",
+        "test_gateway_authority_symlink_refused",
+        "test_gateway_runtime_fields_actual_map_and_original_map",
+        "test_signing_adds_all_runtime_fields_without_lease_refresh",
+        "test_prefix_hash_mutation_refused",
+        "test_source_and_prefix_symlink_refused",
+        "test_static_globals_resolve"
+      ],
+      "original_sha256": "95c6198cb807cd97b6c7e96243a98102e00f780f77c56afbb70d8b73984be957",
+      "scalars": {
+        "constructed_controls_count": 32,
+        "exit_code": 0,
+        "new_native_calls": 0,
+        "new_provider_calls": 0,
+        "new_scorer_calls": 0,
+        "no_scientific_calls": true,
+        "success": true,
+        "unchanged_lease_checks_verified": true,
+        "wall_seconds": 0.19478674698621035
+      },
+      "source_hashes": []
+    },
+    "historical_native_gate": {
+      "checks": [
+        "actual_native_valid_freeze",
+        "freeze_file_sha_mismatch",
+        "missing_freeze",
+        "native_dispatch_false",
+        "native_consumed_freeze",
+        "native_missing_useful_B",
+        "actual_current_file_stale",
+        "native_runtime_profile_changed"
+      ],
+      "original_sha256": "fdb5a447b52b2081047eb65fd48cc2fbf050ee02a395e43ea9ce14fa01e25269",
+      "scalars": {
+        "actual_native_import_and_calls": true,
+        "control_inputs_constructed": true,
+        "native_store_calls": 0,
+        "provider_calls": 0,
+        "scientific_admission": false,
+        "scorer_calls": 0,
+        "success": true,
+        "wall_seconds": 2.063981148065068
+      },
+      "source_hashes": [
+        "082caa40d8558f83bfed6de5060d6e7cdb211a21582dcdfa41eb61569a16b8ca",
+        "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+        "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65",
+        "4c760a514aa3b823516e89352dd4de447bc2b6318d31060a016aaacd6325187d",
+        "70fafde1e0b5e0ab789c53ccdcea63a0b1c0465a7f2bfa5ea78dba983762209a",
+        "7f5e8f8a8bc5fc22217abb1aea4df29e54584e8a3935e5a7de9b5530f915308a",
+        "80ad01a9b6ead005910c8c46ec1a5adbcbed013f982cdfb0b8f3dc6d13767376",
+        "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb",
+        "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9"
+      ]
+    },
+    "managed_fixture": {
+      "checks": {
+        "actual_unlocked_descriptor_refused": true,
+        "exact_holder_absent_after_cleanup": true,
+        "expired_refused": true,
+        "holder_survived_closed_caller_tool_session": true,
+        "released_holder_refused": true,
+        "wrong_holder_fd_refused": true,
+        "wrong_inode_refused": true,
+        "wrong_pid_birth_refused": true
+      },
+      "original_sha256": "b2ebde6638927d72d73836ea3623a9b555318315d274b983db682bf78fba7998",
+      "scalars": {
+        "fixture": true,
+        "native_calls": 0,
+        "production_resource_lease_created": false,
+        "provider_calls": 0,
+        "scorer_calls": 0,
+        "signal_sender_of_original_loss_known": false,
+        "success": true
+      },
+      "source_hashes": [
+        "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1",
+        "8c23ada25aa62fc35f0a1c0441dc34fde43bf55bc02b363e75e8c8db7ceb57d3",
+        "fbb153cdcb0332d974e39e8bb0f9cfde3319267b3bcfc9c2fe3eef8a3d6656cb"
+      ]
+    },
+    "original_resource": {
+      "checks": [
+        "actual_holder_fd_inode_kernel_lock",
+        "reused_pid_refused",
+        "wrong_inode_refused",
+        "different_budget_refused",
+        "expired_lease_refused",
+        "changed_boundary_refused",
+        "unlocked_holder_refused",
+        "all_exact_caps_admitted",
+        "provider_child_seconds_overrun_no_credit",
+        "http_wrapper_seconds_overrun_no_credit",
+        "gateway_proposal_seconds_overrun_no_credit",
+        "scorer_overrun_no_credit",
+        "missing_time_not_zero",
+        "nonfinite_time_refused",
+        "pilot20_shape_explicit_dual_overrun"
+      ],
+      "original_sha256": "f4ef41bd797d473226683b5f6ee1aaa3d02b29cb96dba025db2cb7189a92b8ce",
+      "scalars": {
+        "actual_cooperative_lock_acquired_and_released": true,
+        "exclusive_physical_resources_claimed": false,
+        "provider_calls": 0,
+        "scorer_calls": 0,
+        "success": true
+      },
+      "source_hashes": [
+        "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1",
+        "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84"
+      ]
+    },
+    "original_service": {
+      "checks": [
+        "actual_builder_final32_preserves_original192_order",
+        "actual_client_selects_four_constructed_offers_from_fixed32",
+        "first_matched_block_contains_both_arms",
+        "B_wrong_request_refused_before_reservation",
+        "B_wrong_request_has_no_effect_reservation",
+        "B_actual_client_pending_idempotent",
+        "B_native_source_drift_refused_before_reservation",
+        "B_execute_signs_pending_without_scorer",
+        "B_actual_pending_signature_verified",
+        "B_execute_reentry_reuses_pending_without_new_effect",
+        "B_missing_operator_review_cannot_score",
+        "B_missing_review_does_not_consume_score",
+        "B_changed_sealed_source_rejects_review",
+        "B_review_template_unapproved_and_exact_patch_bound",
+        "B_review_scope_drift_refused_before_score",
+        "B_score_after_review_uses_no_new_provider",
+        "B_inert_boundary_never_promoted",
+        "B_actual_final_signature_verified",
+        "B_actual_client_rejects_inert_terminal",
+        "B_repeat_score_returns_same_signed_result",
+        "A_wrong_request_refused_before_reservation",
+        "A_wrong_request_has_no_effect_reservation",
+        "A_actual_client_pending_idempotent",
+        "A_native_source_drift_refused_before_reservation",
+        "A_execute_signs_pending_without_scorer",
+        "A_actual_pending_signature_verified",
+        "A_execute_reentry_reuses_pending_without_new_effect",
+        "A_missing_operator_review_cannot_score",
+        "A_missing_review_does_not_consume_score",
+        "A_changed_sealed_source_rejects_review",
+        "A_review_template_unapproved_and_exact_patch_bound",
+        "A_review_scope_drift_refused_before_score",
+        "A_score_after_review_uses_no_new_provider",
+        "A_inert_boundary_never_promoted",
+        "A_actual_final_signature_verified",
+        "A_actual_client_rejects_inert_terminal",
+        "A_repeat_score_returns_same_signed_result",
+        "unknown_boundary_retains_consumed_reservation",
+        "unknown_reentry_does_not_redispatch",
+        "unfinished_prior_cell_blocks_new_effect",
+        "later_cell_remains_unconsumed"
+      ],
+      "original_sha256": "7952749c7aa426566c1c2826305d3befb42f7f62501aa0e8b1945e669ddd38c1",
+      "scalars": {
+        "actual_provider_calls": 0,
+        "actual_scorer_calls": 0,
+        "constructed_fixture_retained": true,
+        "credential_reads": 0,
+        "docker_calls": 0,
+        "hidden_payloads_read": false,
+        "original_source_modified": false,
+        "source_package_unchanged": true,
+        "success": true
+      },
+      "source_hashes": []
+    }
+  },
+  "schema": "ns020-unsigned-historical-service-controls/v1"
+}

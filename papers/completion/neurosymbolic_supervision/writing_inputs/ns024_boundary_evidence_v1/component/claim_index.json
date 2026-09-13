@@ -1,0 +1,370 @@
+{
+  "all_final_claims_resolved": false,
+  "boundary_witnesses_file": "boundary_witnesses.json",
+  "claims": [
+    {
+      "allowed_current_wording": "No final estimate supplied here. Require complete actual NS017/NS019 evidence; isolated false-admission and net-cost claims need their own observations.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "A frozen population has a useful-completion rate, net measured cost, uncertainty intervals, and false-admission result.",
+      "original_claim_id": "C-ABS-01",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "deferred_complete32"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "The architecture maintains typed semantic, operational, and durable evidence and specifies routing, checking, sealing, reuse, and evaluation.",
+      "original_claim_id": "C-ABS-02",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Hashes, model confidence, and available solvers do not prove arbitrary Python correct.",
+      "original_claim_id": "C-ABS-03",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Persistent state-and-obligation representation can organize source intent, explicit obligations, proposal routing, evidence reuse, and accepted transitions.",
+      "original_claim_id": "C-01",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Located source is not deployed/qualified closure; use exact historical and final runtime versions separately.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "The prototype has source-present components but incompletely qualified integration paths, and final claims need an exact loaded multi-repository forest.",
+      "original_claim_id": "C-02",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "source_presence_not_integration"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "A semantic root represents program facts/contracts/dependencies/limits, not task completion, permission, or all-language correctness.",
+      "original_claim_id": "C-T1-SEMANTIC",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Operational task state may record decisions but does not change semantic meaning or establish proof correctness.",
+      "original_claim_id": "C-T1-OPERATIONAL",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Canonical bytes/CAS records do not establish truth, fresh applicability, or authorization merely by persistence.",
+      "original_claim_id": "C-T1-DURABLE",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Source-linked context/selection qualification only; no acceptance decision or final efficacy.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007"
+      ],
+      "original_claim": "The semantic index/producer extracts and seals typed source evidence and supplies selection/freshness without deciding acceptance or running tests.",
+      "original_claim_id": "C-03",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Claims have identity, applicability, checker, environment, policy, and provenance dimensions; integrity/evidence/authorization are distinct.",
+      "original_claim_id": "C-04",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Freshness/fallback controls retained; positive production reuse is removed.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007",
+        "NS-011",
+        "NS-027"
+      ],
+      "original_claim": "Exact fresh dependency capsules can support reuse while stale, opaque, or dynamic dependencies expand validation frontier.",
+      "original_claim_id": "C-05",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Abstract interpretation, assume-guarantee, SMT/interpolation, proof search, temporal/deontic views, and ZK attestation each have a limited question and stated qualification obligation.",
+      "original_claim_id": "C-T2",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Cross-domain IR, manifest-bound authorization, revocation/context checks, and receipt consumption are interfaces with separate correctness/authorization gates; inspected rollout is off/shadow.",
+      "original_claim_id": "C-06",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Bounded loss-aware translation, no lifted kernel/source claim.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-009"
+      ],
+      "original_claim": "Lossy projections cannot establish original temporal/deontic obligations; supported translation and solver outcomes have bounded semantics.",
+      "original_claim_id": "C-07",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Objective compilation and residual plans are admitted only after schema/dependency/scope/resource/acceptance checks; models cannot lower objectives or remove tests.",
+      "original_claim_id": "C-08",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Kernel dispositions and one constructed residual call; zero local hooks is not savings.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-008"
+      ],
+      "original_claim": "The kernel can defer, deterministically choose, abstain, or authorize a residual, but neither its boolean nor zero local hooks proves workflow success/savings.",
+      "original_claim_id": "C-09",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "This pack does not qualify complete event/PlanDelta/refill lifecycle. Queue exhaustion and old campaign labels cannot establish completion.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Event invalidation, PlanDelta retention, bounded refill, and reconciliation preserve mandatory obligations; queue exhaustion is not success.",
+      "original_claim_id": "C-10",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "broader_claim_not_established_by_this_pack"
+    },
+    {
+      "allowed_current_wording": "Exact-preimage fenced repair on constructed fixtures, no generic CST/AST relinking.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007",
+        "NS-013"
+      ],
+      "original_claim": "State-bound repair may use dependency/abstract/contract analyses and a fenced patch-validation path; generic tokenizer-alias and CST/AST editing are separate extensions.",
+      "original_claim_id": "C-11",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Constructed nontruncatable context-core checks; calibrated UTF-8 token estimates are not model-token savings.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007"
+      ],
+      "original_claim": "Context capsules retain non-truncatable goal/authority/scope/acceptance evidence and bind optional compression/cache reuse to identities.",
+      "original_claim_id": "C-12",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "No retained procedure/learned/refactoring extension.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-015"
+      ],
+      "original_claim": "Procedure synthesis, incoming memory, learned candidates, and architecture refactoring are bounded/non-authoritative and require applicability, holdouts, validation, rollback, and consumed evidence.",
+      "original_claim_id": "C-13",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "withdrawn_or_unavailable"
+    },
+    {
+      "allowed_current_wording": "Native proof profile unavailable; no proving/verification or pytest attestation result.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-014"
+      ],
+      "original_claim": "Certificates have bounded statements and trust profiles; Groth16 source presence/opt-in wrapper and restricted derivation do not establish test execution, a qualified circuit, ceremony, or timing.",
+      "original_claim_id": "C-14",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "withdrawn_or_unavailable"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Membership, signed observation, formal proof, aggregation, and direct execution each establish only their named relation with remaining assumptions.",
+      "original_claim_id": "C-T3",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Preserve 1/26 historical false reuse; corrected admitted behavior is full cold, not reusable proof.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-011",
+        "NS-027"
+      ],
+      "original_claim": "Fixture/call/teardown reuse needs complete lifecycle identity and a dependency projection; opaque closure or teardown failure forces execution.",
+      "original_claim_id": "C-15",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Local constructed completeness/CAS/recovery with labeled shims only.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-012",
+        "NS-013"
+      ],
+      "original_claim": "Complete manifests, parent-bound delta seals, persistence, CAS, and parallel preparation require completeness/recovery checks and do not provide global consensus.",
+      "original_claim_id": "C-16",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "The acceptance invariant is a conditional design invariant, not proof that current code universally enforces it or exactly-once side effects.",
+      "original_claim_id": "C-17",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "No required world/procedure pre/post consumption witness.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-015"
+      ],
+      "original_claim": "Multi-agent/world roots and required-mode state consumption are an extension requiring transactional authority and observed consumption.",
+      "original_claim_id": "C-18",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "withdrawn_or_unavailable"
+    },
+    {
+      "allowed_current_wording": "Only eight-family A/B cold32 retained; original192/removed160/eight unrecruited remain explicit. C/D, warm, isolated ablations and original confirmatory inference are withdrawn.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "A-D matched comparisons, isolated ablations, hidden independent oracles, full terminal denominators, direct resource measurement, and preregistered thresholds are required for an efficacy conclusion.",
+      "original_claim_id": "C-19",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "original_design_superseded_by_frozen32"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Each context/routing/repair/reuse/sealing comparison pairs safety with useful-progress outcomes; deny-all is not a competitive baseline.",
+      "original_claim_id": "C-T4",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Preserve historical estimate/source label privately; do not present old checked-in arithmetic as final model/prover or measured performance evidence.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "A checked-in 40-task report has 58.90% median estimated context reduction and no model receipts.",
+      "original_claim_id": "C-T5-CONTEXT",
+      "original_decision_historical": "preliminary_report",
+      "preparation_disposition": "legacy_preliminary_only_not_current_measurement"
+    },
+    {
+      "allowed_current_wording": "Preserve historical estimate/source label privately; do not present old checked-in arithmetic as final model/prover or measured performance evidence.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "A checked-in 40-transition summary reports 43.6161% reuse and 43.0539% estimated compute reduction, with no measured timing/GPU proof.",
+      "original_claim_id": "C-T5-SEALER",
+      "original_decision_historical": "preliminary_report",
+      "preparation_disposition": "legacy_preliminary_only_not_current_measurement"
+    },
+    {
+      "allowed_current_wording": "Located source is not deployed/qualified closure; use exact historical and final runtime versions separately.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Source inspection locates typed-state/routing/formalization/synthesis/storage surfaces but not a fully integrated deployment or runtime qualification.",
+      "original_claim_id": "C-T5-SOURCE",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "source_presence_not_integration"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "original_claim": "Loaded forest binding, conditional claims, established-method attribution, protected acceptance authority, independent holdouts, accurate model-use disclosure, and paired evaluation delimit the contribution.",
+      "original_claim_id": "C-20",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    }
+  ],
+  "current_scope": {
+    "bytes": 1681,
+    "custody": "current_repository",
+    "path": "papers/completion/neurosymbolic_supervision/protocol/final32_adoption_scope.json",
+    "sha256": "37e089bd8fde93868389158eaa3c01983cd0382d481a2dc548b2d27eba58ea74"
+  },
+  "external_human_review_required": false,
+  "final_scientific_results_deferred": true,
+  "human_fidelity_measured": false,
+  "original_claim_count": 32,
+  "original_claim_ids_preserved": [
+    "C-ABS-01",
+    "C-ABS-02",
+    "C-ABS-03",
+    "C-01",
+    "C-02",
+    "C-T1-SEMANTIC",
+    "C-T1-OPERATIONAL",
+    "C-T1-DURABLE",
+    "C-03",
+    "C-04",
+    "C-05",
+    "C-T2",
+    "C-06",
+    "C-07",
+    "C-08",
+    "C-09",
+    "C-10",
+    "C-11",
+    "C-12",
+    "C-13",
+    "C-14",
+    "C-T3",
+    "C-15",
+    "C-16",
+    "C-17",
+    "C-18",
+    "C-19",
+    "C-T4",
+    "C-T5-CONTEXT",
+    "C-T5-SEALER",
+    "C-T5-SOURCE",
+    "C-20"
+  ],
+  "original_scope_cannot_override_current_frozen32": true,
+  "preparation_only": true,
+  "public_reference_derivation": "Only source-evidence link relocated to supplied public source index; original claim IDs/text/flags unchanged.",
+  "schema": "ns020-final-claim-evidence-matrix-preparation/v1",
+  "source_evidence_file": "source_index.json"
+}

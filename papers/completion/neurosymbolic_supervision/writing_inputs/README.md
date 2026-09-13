@@ -22,7 +22,9 @@ complete experiment evidence. Their presence is not a task-completion receipt.
   Preserve conditional argument premises and unchanged official styling.
 - NS-024: `ns024_prior_evidence_v1/component/` holds the verified prior numerical
   component. Combine it with the actual final32 anonymous component and the
-  eligible public boundary-qualification records supporting retained claims.
+  public boundary component in `ns024_boundary_evidence_v1/component/`.
+  Its evidence index defines NS-NNN IDs and preserves historical failures;
+  its replay checks scalar counts without executing historical programs.
   Keep exact public derivatives, original hashes, licenses, and reproduction
   limits explicit. Neither existing component alone is the full supplement.
 

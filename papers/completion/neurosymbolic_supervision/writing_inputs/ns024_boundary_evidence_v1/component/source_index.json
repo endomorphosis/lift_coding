@@ -1,0 +1,315 @@
+{
+  "NS027_invocation_source_coverage": {
+    "operator-repair-qualification-v1": {
+      "included": false,
+      "source_sha256": "8fa4c699eb8d9f9547457bc55a90c82ca7daf652d815f0b0e4685bc3a2fdcb71"
+    },
+    "operator-repair-qualification-v2": {
+      "included": false,
+      "source_sha256": "48c7224cbf432a57841925a08f62608f4d8636e0d5d3d3ae5ab230251eabece0"
+    },
+    "operator-repair-qualification-v3": {
+      "included": false,
+      "source_sha256": "7f06ef6883643f825b5ff4f54b9c9a188366b0be4e108eb9e3307b90a285b344"
+    },
+    "operator-repair-qualification-v4": {
+      "included": true,
+      "source_sha256": "cc7882936416492bb5b7905c7ff19d9a47d3df553f79b3427c303990a32d310d"
+    }
+  },
+  "epochs": {
+    "NS-007": {
+      "caller_source_hashes": {},
+      "original_receipt_sha256": "829848006759344aadd7e7b101fbe33938e76a3cadb9193faad29b7cf749cee0",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "pytest": "8.1.1",
+        "python": "Python 3.12.3",
+        "workspace_git_head": "eb534b4d555ab853277adfbe34aaee6005ddd7e8"
+      }
+    },
+    "NS-008": {
+      "caller_source_hashes": {
+        "analytical_close_executor_sha256": "81660c5da9d3498912746c16c338ea14fc70afbbf0ada932ad5f24af1f5fb85f",
+        "authorization_logic_sha256": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1",
+        "implementation_disposition_sha256": "df9c34a75230a858dfc9038e75d9c6fa51c86fe6d60bf6b0412ea368904e540e",
+        "pre_implementation_kernel_sha256": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+        "pre_implementation_provider_gate_sha256": "7d4c980ee3f3d747a335856f29a7291e8d6d395d44ee9120eaa573a08f86acbe",
+        "providers_sha256": "fe6b78ef5e0fff0bae4f3f5de9661d5514b2ba7bc571f9c78641904b68303f10",
+        "residual_llm_packet_sha256": "1de5545cf2ec1876c79a6e9da76352df8c58092be92a396fce79fa45a2894087",
+        "residual_provider_invocation_sha256": "ba72ea67a61457739bce6364aa0c87bc1dd8096aeada7435a79081e5b2c97f32"
+      },
+      "original_receipt_sha256": "2b7cf3cff519147a9f3ed3189c3d0d48e5127e3e3b0317066c015f45c2e937f7",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "pytest": "8.1.1",
+        "python": "Python 3.12.3",
+        "workspace_git_head": "4cefc72db88107a7f087338980a62b88ff125321"
+      }
+    },
+    "NS-009": {
+      "caller_source_hashes": {
+        "enforcement_sha256": "4df840c46d685d9b5ea5a97ce4167a6762c63632b5d11b0d6b78c00de7848c74",
+        "formal_logic_vocabulary_sha256": "602f92e8fc170f44971626f09b71efa4f4492690dda1bdecbe98b2c48939a65b",
+        "ipa_sha256": "952ab04860b135248c5c286417c0f18fe85930a3b1c4dd1b7e8ccc757b6f6a39",
+        "logic_platform_admission_sha256": "ee1a6fdd218d24c61a790b574fe8d9c0fa4c58d89c89e641f6dcd2ecf08962f5",
+        "logic_translation_validation_sha256": "6eebde25647840e696d2bcd204be015b7b5d1302d29bc8444f2b583199279f62",
+        "solver_readiness_sha256": "c1150f87a8c435dc58b9a44b5ad323a4c8b144f69cddf71234a36fc3b033dff4",
+        "tdfol_converter_sha256": "19db7d143c0275eca84846b0b4abc1feba877c38b7f255a3c58c54d31d1bf16d",
+        "tdfol_prover_sha256": "75afc5299206ff65714d5cb994e6e2b775dbdc578278ba7101a01887ceab18dd"
+      },
+      "original_receipt_sha256": "31c17b91088e040c4272dcc14888148487e970c9101d8336bc7e6662b1e4dfcb",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "pytest": "8.1.1",
+        "python": "Python 3.12.3",
+        "workspace_git_head": "17fe8859a867f821b3373f179b22d19de771eb64"
+      }
+    },
+    "NS-011": {
+      "caller_source_hashes": {
+        "proof_cached_test_validation_sha256": "582ebfc3b8ec85ea357f025ba2761490402570333e8464beb7c0d30cfbf4a581",
+        "selection_execution_sha256": "89370028c0700d95e1c05c8e90a8d92a3ed29259a453b001cadff19ed9a4ece8",
+        "test_certificate_store_sha256": "6ae02457603cfe2d5656e768e742f4ed320153d78ff5334d9ef48d2b6095cfb0",
+        "test_execution_contracts_sha256": "9702398656f4bff098049167f30f1e54ef1c892c2d1c021b2cde5a8c79ab0e69",
+        "test_identity_components_sha256": "f264540c92c4c7ae90f26a2b52f375f3e3ddb04cee8d5bc17e7be7f92aa091be",
+        "test_proof_cache_sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+        "test_reuse_eligibility_sha256": "f21b8e64a9ba1b0f5ebc2d3df126aa63f299dfe2c6c8b1e504cbf6233ae01b4e",
+        "verification_sha256": "f117de54086539e7b5a3f19dc2b6f1a5f16def6267309876ffc9f4adee580cf0"
+      },
+      "original_receipt_sha256": "67f344c16f6c9b2cdeb9daca0f33a9aaa0e3389826d4cc188ff5d72175a77382",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "cf85648380946e776170b7f30c66cc0f72a01a2e",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "pytest": "8.1.1",
+        "python": "Python 3.12.3",
+        "workspace_git_head": "5623f189464340ca4faec154d9323bdc81d7ed99"
+      }
+    },
+    "NS-012": {
+      "caller_source_hashes": {
+        "admission_sha256": "16fcc43f52f41641abf297e36e0850e87394fdcfac2c9c0807ada19e4cd9cb4b",
+        "aggregation_sha256": "20e6c31e72dadc67d4292dca3637f6543e9352286bf1967743b477216af37a6c",
+        "coordination_storage_sha256": "6c5adeeee8fb5be606392636f2b2ccfcff660ba6323271d35bf1e34022fdc8bb",
+        "delta_seal_sha256": "8d9bf91cd4bca391dc3fbf9a2ea78966d7dcc5dfba0f114caf8c2d5d1b83be07",
+        "durable_state_sha256": "e718a115671f7d84fc7f5c693c8ef03d4216465d71e79fad04adf2442a277a9f",
+        "full_checkpoint_sha256": "3330a24a9052b0124b292824c63295d7760a6372e5f0718b1661b65897ea7aac",
+        "proof_certificate_store_sha256": "6e96f40fe9f05e8fb1f88d7c58e2660a81d184cb9d85d02fe333fdbca70dd1f1",
+        "sealer_sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+        "worktree_lifecycle_sha256": "e8bc8277ec2a50731c20baf1ae57128d9cd2fd43a85c2bba252e8eebe6faab4b"
+      },
+      "original_receipt_sha256": "b76a47879cc1deec3e63263f9831b2194699fa608f6b283a1ce2912236f9541c",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "pytest": "9.0.3",
+        "python": "Python 3.12.3",
+        "workspace_git_head": "108db756960e55481f0ec86d0f6f9f6022cd1e98"
+      }
+    },
+    "NS-013": {
+      "caller_source_hashes": {
+        "analytical_close_executor_sha256": "81660c5da9d3498912746c16c338ea14fc70afbbf0ada932ad5f24af1f5fb85f",
+        "authorization_logic_sha256": "455104fb4c968414c8542d186d8d2594742c2e7c2b8f5c70c8293d5116f44ff1",
+        "pre_implementation_kernel_sha256": "681183a1096f76a6d7e06cd703792aa1faacc1f90644e387fbdeea890890413c",
+        "routing_sha256": "deedfa9a128ff430154a794337b9981f7e256f929df27ca1764027620f02a951",
+        "sealer_sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed",
+        "test_proof_cache_sha256": "4c5977b0910f381f3fc85e5e370825043c7166ced5fffcd4868290e67d332883",
+        "worktree_sha256": "0d85d426eb4ffc6dd8dae09857439bc96950a46aa645dd05f734abd27b12ba1d"
+      },
+      "original_receipt_sha256": "ef7b96d8801e1ccd7033fe0617b4b07f5a1ef8df009e6b8916782c63e14fb3b0",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "pytest": "9.0.3",
+        "python": "Python 3.12.3",
+        "workspace_git_head": "e75381bfe9f7f3a9ec8c4fcd08e38adbaca5bea1"
+      }
+    },
+    "NS-014": {
+      "caller_source_hashes": {},
+      "original_receipt_sha256": "f8c21ea48c3fbbd3f8806e9ed124f30665a1a0663032d7558ab1d5f63349d71f",
+      "source_versions": {
+        "workspace_git_head": "c23acea9431b87299485a04d544c3e3e41580d76"
+      }
+    },
+    "NS-015": {
+      "caller_source_hashes": {},
+      "original_receipt_sha256": "af0aeba2ab6a93a388cbf5427e7f9abbdddbceb47e812a9b74bebfe406ae173d",
+      "source_versions": {
+        "consumer_gitlinks": {
+          "external/ipfs_accelerate": "c70c5a39f6e61eb3933263265506c50ea39ee9a4",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "python": "Python 3.12.3",
+        "workspace_git_head": "530abaffeb489682ba03cbb7e2c52ed7e5dd3df9"
+      }
+    },
+    "NS-027": {
+      "caller_source_hashes": {},
+      "original_receipt_sha256": "88ff201b7ca16de38685ba468f12f00257cc584baf8f9241c15f3b6920a8aab3",
+      "source_versions": {
+        "native_pins": {
+          "ipfs_accelerate": "e52e9c669004098341895ddfadf63db6f18cdeb3",
+          "ipfs_datasets": "f4238dd83effd1f1984a6104ad9112ee7d12c00a",
+          "ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "repair_package_sha256": "21025e60188c6797f57bc5fcbef109a86dae427656133324100ea84421b403b2",
+        "repair_qualification_sha256": "f91f2d2a5d9905219b0ce98a8121e1948ee43f758670bcbd6d187c978c438941",
+        "research_profile_sha256": "1bc2c65388bc5a79ae61e762653d336ae5401e7b0d592d265884d2ab166a8f84",
+        "source_base_head": "1583db4a2ea4f0bb6236387dd096e8b8d1cb0065"
+      }
+    }
+  },
+  "included_sources": [
+    {
+      "component_path": "source/original/NS-007/run_context_qualification.py",
+      "evidence_id": "NS-007",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/run_context_qualification.py",
+      "original_sha256": "6fc1dd6ace951e29e8b8ba01dc7381b84c412bd46388023bd4b606439eb49e2f",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-007/validate_context_qualification.py",
+      "evidence_id": "NS-007",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-007/validate_context_qualification.py",
+      "original_sha256": "5f63c4d3cafd70112985130fc7e67c3866c6c8c2c20fe67f8b09d6dabc48708e",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-008/residual_provider.py",
+      "evidence_id": "NS-008",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/residual_provider.py",
+      "original_sha256": "4b5195d00857921ad1a396b554d975ef584f5b48e8527fd1b8d7d36564b608c4",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-008/run_provider_gate_qualification.py",
+      "evidence_id": "NS-008",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/run_provider_gate_qualification.py",
+      "original_sha256": "5b0555a6fe2007117cf1b3e1d34b30577f3ba62435a5984a7dd84550553f3c37",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-008/validate_provider_gate.py",
+      "evidence_id": "NS-008",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-008/validate_provider_gate.py",
+      "original_sha256": "d3db4077c58178610ff58408f066ddee9237d2a2aedb61700b9f916d3778bf59",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-009/run_logic_qualification.py",
+      "evidence_id": "NS-009",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/run_logic_qualification.py",
+      "original_sha256": "926741289b79171f6c991c5da60de8aa7219e96b4506c4c7aaaf92e2572883f2",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-009/validate_logic_qualification.py",
+      "evidence_id": "NS-009",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-009/validate_logic_qualification.py",
+      "original_sha256": "bafbd5694122e5f623eccc689626fb0b56dcab9ee32119c0ceef611674e1177f",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-011/run_cold_oracle_qualification.py",
+      "evidence_id": "NS-011",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/run_cold_oracle_qualification.py",
+      "original_sha256": "99b151a0b64380f1e1e30545cbf06c368ff44f54b848e9f4b429123124ecd125",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-011/validate_cold_oracle_qualification.py",
+      "evidence_id": "NS-011",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-011/validate_cold_oracle_qualification.py",
+      "original_sha256": "42134ee3453cb1085bd6cf73c7ed2c20b0bab7320b30b69e8a2fca5407c70cba",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-012/compat_shims.py",
+      "evidence_id": "NS-012",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/compat_shims.py",
+      "original_sha256": "324764c0799a5d029dea2dcc11bb079fda7822207eb0ed9ec4c92f7280ec4be1",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-012/run_sealer_qualification.py",
+      "evidence_id": "NS-012",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/run_sealer_qualification.py",
+      "original_sha256": "a62c674392b818e5f0bf4eb2c5372caa6daf7a75549aee06351c87917f8afcd4",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-012/validate_sealer_qualification.py",
+      "evidence_id": "NS-012",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-012/validate_sealer_qualification.py",
+      "original_sha256": "52f90afce7993f7445f46c4cfea51341be537816044cfa888cb0390a8cfa0161",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-013/compat_shims.py",
+      "evidence_id": "NS-013",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/compat_shims.py",
+      "original_sha256": "0fc7bf70d59132a678c71293fe876cad925a863d5f857c789e74afd8c684241d",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-013/run_end_to_end_witness.py",
+      "evidence_id": "NS-013",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/run_end_to_end_witness.py",
+      "original_sha256": "6189cdc0e66235a72937b268f6b8dc6dd8225ba4a1ccc35c6b0c80fe3c0319ca",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-013/validate_end_to_end_witness.py",
+      "evidence_id": "NS-013",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-013/validate_end_to_end_witness.py",
+      "original_sha256": "74c4b4df9c3ac905e14f5b8503182e4cb15519e329076c1e04c72d397de2d179",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-014/validate_unavailable_profile.py",
+      "evidence_id": "NS-014",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/validate_unavailable_profile.py",
+      "original_sha256": "5320c337d90e16bb8858c40dc4cb0495584ea0d7094f7af32c047163f821644a",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-015/validate_extensions_scope.py",
+      "evidence_id": "NS-015",
+      "original_repository_path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-015/validate_extensions_scope.py",
+      "original_sha256": "09b78368548c711e9d195414831aa8d6c45ac37ebcc47c53a6bd1681e339034b",
+      "role": "historical producer/shim/validator source; native runtime and complete repository remain outside this component"
+    },
+    {
+      "component_path": "source/original/NS-027/run_retained_reuse_qualification.py",
+      "evidence_id": "NS-027",
+      "original_sha256": "cc7882936416492bb5b7905c7ff19d9a47d3df553f79b3427c303990a32d310d",
+      "role": "v4 corrected runner only; earlier invocation runner hashes retained, those bodies not supplied by this selected source set"
+    }
+  ],
+  "schema": "ns020-boundary-source-index/v1",
+  "source_replay_scope": "Source inspection only. Replay.py checks unsigned scalar/table counts and never executes these files. Native dependencies, full historical repository layouts and exact environments are not reconstructed."
+}
