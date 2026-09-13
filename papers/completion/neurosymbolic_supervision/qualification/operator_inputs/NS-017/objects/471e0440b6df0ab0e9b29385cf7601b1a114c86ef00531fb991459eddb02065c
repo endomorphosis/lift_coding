@@ -1,0 +1,34 @@
+diff --git a/src/wheel/_commands/convert.py b/src/wheel/_commands/convert.py
+--- a/src/wheel/_commands/convert.py
++++ b/src/wheel/_commands/convert.py
+@@ -116,6 +116,12 @@
+     return re.sub(r"[-_.]+", "-", name).lower().replace("-", "_")
+ 
+ 
++def _is_within_directory(directory: Path, target: Path) -> bool:
++    directory = directory.resolve()
++    target = target.resolve()
++    return directory in target.parents
++
++
+ class ConvertSource(metaclass=ABCMeta):
+     name: str
+     version: str
+@@ -316,10 +322,16 @@
+             if verbose:
+                 print(f"{archive}...", flush=True, end="")
+ 
+-            dest_path = Path(dest_dir) / (
++            dest_dir_path = Path(dest_dir)
++            dest_path = dest_dir_path / (
+                 f"{source.name}-{source.version}-{source.pyver}-{source.abi}"
+                 f"-{source.platform}.whl"
+             )
++            if not _is_within_directory(dest_dir_path, dest_path):
++                raise ValueError(
++                    "Wheel path is outside of the destination directory: "
++                    f"{dest_path}"
++                )
+             with WheelFile(dest_path, "w") as wheelfile:
+                 for name_or_zinfo, contents in source.generate_contents():
+                     wheelfile.writestr(name_or_zinfo, contents)

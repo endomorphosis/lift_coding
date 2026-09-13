@@ -1,0 +1,85 @@
+diff --git a/src/installer/destinations.py b/src/installer/destinations.py
+--- a/src/installer/destinations.py
++++ b/src/installer/destinations.py
+@@ -16,6 +16,7 @@
+ from installer.utils import (
+     _WINDOWS,
+     Scheme,
++    _adjust_for_long_path,
+     construct_record_file,
+     copyfileobj_with_hashing,
+     fix_shebang,
+@@ -167,15 +168,16 @@
+         - Hashes the written content, to determine the entry in the ``RECORD`` file.
+         """
+         target_path = self._path_with_destdir(scheme, path)
+-        if not self.overwrite_existing and target_path.exists():
++        target_path_long = _adjust_for_long_path(os.fspath(target_path))
++        if not self.overwrite_existing and os.path.exists(target_path_long):
+             message = f"File already exists: {target_path!s}"
+             raise FileExistsError(message)
+ 
+-        parent_folder = target_path.parent
+-        if not parent_folder.exists():
+-            parent_folder.mkdir(parents=True)
+-
+-        with target_path.open("wb") as f:
++        parent_folder = _adjust_for_long_path(os.fspath(target_path.parent))
++        if not os.path.exists(parent_folder):
++            os.makedirs(parent_folder)
++
++        with open(target_path_long, "wb") as f:
+             hash_, size = copyfileobj_with_hashing(stream, f, self.hash_algorithm)
+ 
+         if is_executable:
+@@ -236,10 +238,12 @@
+                 Scheme("scripts"), script_name, stream, is_executable=True
+             )
+ 
+-            path = self._path_with_destdir(Scheme("scripts"), script_name)
+-            mode = path.stat().st_mode
++            path = _adjust_for_long_path(
++                os.fspath(self._path_with_destdir(Scheme("scripts"), script_name))
++            )
++            mode = os.stat(path).st_mode
+             mode |= (mode & 0o444) >> 2
+-            path.chmod(mode)
++            os.chmod(path, mode)
+ 
+             return entry
+ 
+@@ -250,7 +254,9 @@
+ 
+         import compileall
+ 
+-        target_path = self._path_with_destdir(scheme, record.path)
++        target_path = _adjust_for_long_path(
++            os.fspath(self._path_with_destdir(scheme, record.path))
++        )
+         dir_path_to_embed = (Path(self.scheme_dict[scheme]) / record.path).parent
+ 
+         for level in self.bytecode_optimization_levels:
+diff --git a/src/installer/utils.py b/src/installer/utils.py
+--- a/src/installer/utils.py
++++ b/src/installer/utils.py
+@@ -265,8 +265,19 @@
+     return mask
+ 
+ 
++def _adjust_for_long_path(pathname: str) -> str:
++    """Fix for Windows issue with long paths.
++
++    If the path is too long, it is converted to an extended path by adding the
++    prefix `\\?\\`.
++    """
++    if _WINDOWS and len(pathname) >= 260:
++        return f"\\?\\{pathname}"
++    return pathname
++
++
+ # Borrowed from:
+ # https://github.com/pypa/pip/blob/0f21fb92/src/pip/_internal/utils/unpacking.py#L93
+ def make_file_executable(path: Path) -> None:
+     """Make the file at the provided path executable."""
+-    path.chmod(0o777 & ~_current_umask() | 0o111)
++    os.chmod(_adjust_for_long_path(os.fspath(path)), 0o777 & ~_current_umask() | 0o111)

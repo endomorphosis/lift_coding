@@ -1,0 +1,35 @@
+{
+  "allocation_kind": "cooperative_operator_lease",
+  "created_at": "2026-09-13T03:27:42.268272+00:00",
+  "exclusive_physical_resources": false,
+  "expires_at": "2026-09-13T15:27:42.268272+00:00",
+  "fixture": false,
+  "holder_fd": 3,
+  "holder_pid": 1490550,
+  "holder_start_ticks": "67976842",
+  "lock_device": 66306,
+  "lock_file": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/resource.lock",
+  "lock_inode": 78778347,
+  "manager_kind": "systemd_user_service",
+  "manager_unit": "ns-final-lease-ab32-continuation-v1.service",
+  "measured_boundary_evidence": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/final128_joined_compatibility.private.json",
+    "sha256": "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f"
+  },
+  "native_store_calls": 0,
+  "paid_call_ceiling": 32,
+  "phase_limits": {
+    "cpu_count": 1,
+    "memory_bytes": 2147483648,
+    "proposal_seconds": 600,
+    "provider_pids": 32,
+    "scorer_pids": 128,
+    "scorer_seconds": 120
+  },
+  "provider_calls": 0,
+  "schema": "ns-final-root-resource-reservation/v1",
+  "scope": "Root operator capacity allocation; exact batch32 one-use reservations and phase lock separately enforce durable effect ceilings. Real cgroups enforce per-phase caps. No claim of exclusive physical resource reservation.",
+  "scorer_call_ceiling": 32,
+  "scorer_calls": 0,
+  "source_sha256": "8c23ada25aa62fc35f0a1c0441dc34fde43bf55bc02b363e75e8c8db7ceb57d3"
+}

@@ -1,0 +1,47 @@
+"""Read-only joins for actual mixed-runtime final evidence, without new science."""
+import hashlib,importlib.util,json,os,stat
+from pathlib import Path
+HERE=Path(__file__).resolve().parent
+CLIENT=HERE.parent/'candidate/final_service/pilot_client.py'
+CLIENT_SHA='9c4f5e1cdf863bfa3b050b48ed4f8b142377394ce4661b3ded4b2e7c1c8d8dfa'
+
+def require(ok,message):
+ if not ok:raise ValueError(message)
+def canon(value):return json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def bound(ref,bindings):
+ p=Path(ref['path']);require(p.is_absolute()and p.resolve()==p and not p.is_symlink(),'canonical continuation metadata required')
+ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  st=os.fstat(fd);require(stat.S_ISREG(st.st_mode)and st.st_size<=1048576,'bounded continuation metadata required')
+  with os.fdopen(fd,'rb',closefd=False)as f:raw=f.read(1048577)
+ finally:os.close(fd)
+ h=hashlib.sha256(raw).hexdigest();require(h==ref['sha256'],'continuation metadata changed');bindings[str(p)]=h;return json.loads(raw)
+def imported(path,digest,name,bindings):
+ p=Path(path);require(p.is_absolute()and p.resolve()==p and p.is_file()and not p.is_symlink()and p.stat().st_size<=1048576 and sha(p)==digest,'continuation verifier source changed')
+ bindings[str(p)]=digest;s=importlib.util.spec_from_file_location(name,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+
+def load_context(ref,bindings):
+ contract=bound(ref,bindings);pc=imported(CLIENT,CLIENT_SHA,'analysis_continuation_public_client',bindings);pc.configure_continuation(contract)
+ effective=contract['effective_source_bindings'];validator=[(p,h)for p,h in effective.items()if Path(p).name=='lease_continuation.py'];require(len(validator)==1,'one actual authority validator required')
+ clients=[h for p,h in effective.items()if Path(p).name=='pilot_client.py'];require(clients==[CLIENT_SHA],'effective client differs from this qualified verifier')
+ helper=imported(*validator[0],'analysis_full_continuation_authority',bindings)
+ authority=helper.checked_authority(contract['authority'],accounting_only=True)
+ require(helper.public_contract(authority,contract['authority'])==contract,'public projection differs from full root authority')
+ bound(contract['authority'],bindings)
+ for mapping in (contract['original_frozen_source_bindings'],effective):
+  for path,digest in mapping.items():require(sha(path)==digest,'original/effective source drift');bindings[path]=digest
+ bound(contract['runtime_continuation']['successor_resource_reservation'],bindings)
+ return {'pc':pc,'contract':contract,'contract_binding':ref,'authority':authority,'summary':{'schema':'ns-final-mixed-runtime-provenance/v1','contract_binding':ref,'authority':contract['authority'],'original_frozen_package_sha256':pc._FROZEN_PACKAGE_SHA,'effective_source_sha256':contract['runtime_continuation']['effective_source_sha256'],'consumed_original_cells':7,'prospective_continuation_cells':25,'same_original_batch_and_freeze':True,'source_maps_represent_distinct_actual_runtimes':True,'new_runtime_is_not_original_source':True,'lease_liveness_verified_during_reduction':False,'analysis_policy_changed':False}}
+
+def verify_row_runtime(grant,body,client,cid,context):
+ pc=context['pc'];c=context['contract'];g=pc.verify_signed_runtime(grant,cid);r=pc.verify_signed_runtime(body,cid);require(g==r,'grant/receipt runtime provenance differs')
+ if cid in c['remaining_cells']:
+  require(client.get('runtime_continuation_contract_sha256')==pc.sha(pc.canon(c))and client.get('runtime_continuation_verifier_sha256')==CLIENT_SHA,'actual offline continuation verifier binding absent')
+  observation=client.get('runtime_continuation_checks',{}).get(cid)
+  require(type(observation)is dict and observation.get('schema')=='ns-final-offline-runtime-continuation-verification/v1'and observation.get('terminal')is True and observation.get('cell_id')==cid and observation.get('batch_sha256')==pc._BATCH_SHA and observation.get('runtime_source_provenance')==r,'actual selected continuation verification missing')
+  verified=client['results'][0]['result']['host_verified']
+  require(observation.get('offer_sha256')==verified['binding']['offer_sha256'],'actual continuation offer differs')
+  terminal_name='disposition.json'if verified.get('terminal_failure')is True else'response.json'
+  require(observation.get('documents',{}).get(terminal_name)==verified['response_sha256'],'actual continuation signed terminal differs')
+ return r

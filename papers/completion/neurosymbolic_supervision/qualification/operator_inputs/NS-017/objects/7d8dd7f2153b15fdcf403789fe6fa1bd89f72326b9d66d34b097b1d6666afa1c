@@ -1,0 +1,27 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "35a9d6a52011784112d82445fb40f053ef15abd9b483cbd955fa8804f818ff1f",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67",
+    "grant_sha256": "61853ef4af87d9dfa1edf5ab130fc07ea1472933d2be46a1d84761145fd5542d",
+    "manifest_sha256": "f5594e45f6b758a36d2f8b43adbdb9624939f2b77ccebb2a5b356f3f42d959ec",
+    "original_receipt_sha256": "705a286927e5749adf22340d840cdfa582f4a4aa1241614c7b98e1e4a6b24b38",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "provider_termination_evidence_sha256": "5702f55ceb1e0c5c255b1b49ada34aa5015be5fdd7181af638c71e6a9aad5b68",
+    "request_sha256": "06b59bedfdc4372bee54cfc19cc7738cb0f729279f15f22433be57c5390e7ccc",
+    "reservation_sha256": "f7b76a5a630a6fae9494bbe3892dc9a3c2c4e9967d2efd6f774ae26acc87feec",
+    "service_source_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "source_sha256": "5760a4471c370919aa8a7af0d6890791954109ce2aa59426e4a87d3a54b31726"
+  },
+  "classification": "known_proposal_failure",
+  "delegation_sha256": "eb933810292c6abca35e04d0929180b4d8e271cae25cd3057fc13069f68e474b",
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T02:16:37.161801+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "I reviewed the original signed final cell003 proposal failure and retained HTTP metadata: exactly one POST returned HTTP503 after427.468039 child seconds; wrapper427.980322 and gateway428.243588 seconds are within their caps. No candidate was applied, no scorer was invoked, and exact container521db11c cleanup returned0 with termination_proven true. This is a known locally terminated proposal failure, not a scoring outcome or successful trial. API usage and settled remote charge remain unavailable; HTTP status does not establish zero charge. Preserve the original result and reservation, add no provider/scorer calls, no retry or regrant, and give no score/success credit. I am the delegated AI operator, not a human annotator or managed authoring worker."
+}

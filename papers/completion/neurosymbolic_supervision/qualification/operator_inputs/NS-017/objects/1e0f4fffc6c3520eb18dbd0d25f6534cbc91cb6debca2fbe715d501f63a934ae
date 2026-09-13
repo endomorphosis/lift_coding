@@ -1,0 +1,39 @@
+{
+  "approved_for_inactive_driver_preparation": true,
+  "at": "2026-09-13T01:22:05.565490+00:00",
+  "authoring_claim_execution": false,
+  "authority": "root_operator_scientific_driver",
+  "batch": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/batch.private.json",
+    "sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418"
+  },
+  "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+  "freeze": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/final_experiment_freeze.json",
+    "sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a"
+  },
+  "grants_created": 0,
+  "native_task_completion_authorized": false,
+  "preparation_helper": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepare_operator_driver.py",
+    "sha256": "ebe0354cc44c01b6ef7ce2fd28b15afd58e05c1134056fdf5497ca27994dd50f"
+  },
+  "provider_calls": 0,
+  "qualified_source_package": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_source_package_v1/package.private.json",
+    "sha256": "595a06a354aad453ccac215060a06dec8afd52ca5bbb1148ee9a640f805a4331"
+  },
+  "record_kind": "final",
+  "root_freeze_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_freeze_review.private.json",
+    "sha256": "ec7eeabbaf1adb216c1e0a8a797c0d8286c35d04a2adc16d43de654029999761"
+  },
+  "root_installed_source_package": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/installed_host_stage_v1/installed_package.private.json",
+    "sha256": "6d8f8842bf0207aa30b4711591c652127981c90d00f1e1758e2e6cd2750c5038"
+  },
+  "schema": "ns028-root-final-driver-provenance-amendment/v1",
+  "scope": "Actual final32 offline typed client under root operator custody; no managed task claim, grant, provider or scorer effect. Missing offers remain pending. Scientific activation requires separate root admission and actual offline no-offer check.",
+  "scorer_calls": 0,
+  "source_sha256_expected": "ebe0354cc44c01b6ef7ce2fd28b15afd58e05c1134056fdf5497ca27994dd50f"
+}

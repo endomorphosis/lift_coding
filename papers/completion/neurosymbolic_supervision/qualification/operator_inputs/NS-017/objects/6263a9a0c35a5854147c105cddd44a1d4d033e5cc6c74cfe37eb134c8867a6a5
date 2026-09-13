@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "37cf32d7ada6ed66624c0f32c822774f51801c3a8964d1f840d4faea7e5a6a9e",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "67e8df4dedf15d5c716cbb09b8bec030a0f5c6580ea65c3f192eb75ba4ee9609",
+    "candidate_sha256": "9fd7092dfbff0871b9020099e00648e0814b9d79e14a545801a7ca7f25bf6a15",
+    "cell_id": "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08",
+    "grant_sha256": "1c29e5fcac0ca17409f351ebf6a93da44b296a3e4ff4d1432cf10c2921cae83b",
+    "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+    "patch_sha256": "1b6bc4c18587ab5daea74127f40b28c5637ebac9ed3ab1c51d76323ea511f2ab",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "proposal_receipt_sha256": "f3de63990695c4b9891dd6616acfa1c048393406a99592afca4cef0b321213c6",
+    "provider_result_sha256": "43c95918e2602dd49a19dd5350121453de3d60d001e91566ba1fb17a07a6d65d",
+    "record_kind": "final",
+    "request_sha256": "111236e17042e5b4b35c26cf8c7bbedc20d77edc9c0d38ddad1d5b6d26133cbf",
+    "reservation_sha256": "3c994535fd4760dd4c584280f86748e1775292ae1a3e8a21a0fcca541ee70933",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read the exact1326-byte patch and public running_min/running_max and window helpers. It removes only strictly larger minima candidates or strictly smaller maxima candidates, retaining earlier equal elements until their original indexed expiry. This addresses stable tie identity while leaving expiry, iteration, unbounded accumulate and input validation unchanged; comments now describe non-strict subsequences. Only allowed more_itertools/recipes.py changes, with no tests, dependencies, scorer or budget edits. This bounded AI source review permits this exact candidate\u2019s cold validation, without claiming hidden success, human annotation or adversarial scorer qualification.",
+  "reviewed_at": "2026-09-13T04:39:09.273973+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

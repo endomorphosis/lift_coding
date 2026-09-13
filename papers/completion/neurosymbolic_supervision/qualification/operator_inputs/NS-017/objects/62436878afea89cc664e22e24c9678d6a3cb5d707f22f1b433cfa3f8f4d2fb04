@@ -1,0 +1,140 @@
+{
+  "schema": "ns017-downstream-contract-snapshot/v1",
+  "source": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/tasks.json",
+    "sha256": "8b0a7488375d75801b4364c309bd6607f9f7208947053f71bc7bea830e77075c"
+  },
+  "tasks": {
+    "NS-017": {
+      "acceptance_criteria": [
+        "All planned task-arm-repeat units have an actual terminal record or explicitly documented missingness; denominator changes are prohibited after outcomes.",
+        "Useful completions are independently validated and linked to admitted publication where the arm requires it.",
+        "Actual provider and stage measurements support the final cost fields; estimated/unavailable data remain distinct.",
+        "Raw records and deviations bind the immutable final experiment freeze and are sufficient for independent rescoring."
+      ],
+      "deliverables": [
+        "papers/completion/neurosymbolic_supervision/runs/main/manifest.json",
+        "papers/completion/neurosymbolic_supervision/runs/main/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/runs/main/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/runs/main/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/runs/main/deviations.md"
+      ],
+      "depends_on": [
+        "NS-016",
+        "NS-027",
+        "NS-028"
+      ],
+      "description": "The governing design is the already root-frozen pre-outcome 32-cell A/B local-cold comparison across eight original final families and two nested repetitions (104729,130363), canonical freeze ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d, file SHA7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a. This source amendment implements that existing freeze; it does not change the experiment after outcomes. Preserve original192 order/filter lineage,160 removed factor cells,eight unrecruited families, prior pilot/protocol failures and all costs. C/D routing, warm caches, reuse, publication-comparison efficacy and original16-family inferential objectives are withdrawn from this experiment; they are not completed benchmark outcomes. Outside human review is not required; human semantic fidelity remains unmeasured. Adopt only the actual signed terminal evidence produced by the separately admitted root operator for all32 fixed cells after its complete retained-evidence audit. Do not issue grants, model/provider requests, scorer invocations, source-context recomputation, retries, or resource-lease changes. A task claim is not root grant authority. If actual terminal evidence is incomplete, preserve exact missingness and keep adoption incomplete; never synthesize an outcome. Import raw permitted responses/patch references, independent cold scalar scores, bound AI/operator candidate reviews, exact cleanup and per-layer budget compliance, and original unscored rejections. Derive admitted useful completion only from signed evidence and the frozen timing policy. Publication is not required by either retained arm. Root may pre-stage the exact large artifact bundle so the ordinary worker need only verify hashes and finish a concise receipt. ",
+      "id": "NS-017",
+      "implementation_paths": [],
+      "paper_evidence": [
+        "PDF p. 24, Table 17: all main results TBD",
+        "PDF pp. 7\u20138, \u00a78: useful progress and net cost"
+      ],
+      "priority": "P0",
+      "subgoal_id": "NS-SG4",
+      "suggested_code_paths": [
+        "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json"
+      ],
+      "title": "Adopt the frozen32 A/B cold final evidence without repeating experiments"
+    },
+    "NS-019": {
+      "acceptance_criteria": [
+        "One documented analysis command regenerates main and ablation tables from immutable raw records.",
+        "All counts reconcile to the run manifest, including failed/unsolved/timeout/abstained/unavailable cases.",
+        "Confidence intervals and quality gates follow the preregistered plan; deviations and inconclusive outcomes are explicit.",
+        "No estimated preliminary number is labeled measured, no missing cost is zero, and overlapping stage times are not summed as elapsed."
+      ],
+      "deliverables": [
+        "papers/completion/neurosymbolic_supervision/analysis/analyze.py",
+        "papers/completion/neurosymbolic_supervision/analysis/results.json",
+        "papers/completion/neurosymbolic_supervision/analysis/statistical_report.md",
+        "papers/completion/neurosymbolic_supervision/analysis/cost_report.md",
+        "papers/completion/neurosymbolic_supervision/manuscript/generated/table17.tex",
+        "papers/completion/neurosymbolic_supervision/manuscript/generated/ablations.tex",
+        "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/"
+      ],
+      "depends_on": [
+        "NS-017",
+        "NS-018"
+      ],
+      "description": "The governing design is the already root-frozen pre-outcome 32-cell A/B local-cold comparison across eight original final families and two nested repetitions (104729,130363), canonical freeze ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d, file SHA7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a. This source amendment implements that existing freeze; it does not change the experiment after outcomes. Preserve original192 order/filter lineage,160 removed factor cells,eight unrecruited families, prior pilot/protocol failures and all costs. C/D routing, warm caches, reuse, publication-comparison efficacy and original16-family inferential objectives are withdrawn from this experiment; they are not completed benchmark outcomes. Outside human review is not required; human semantic fidelity remains unmeasured. Read retained root-admitted signed final evidence without new model or scorer calls. Follow the frozen analysis_policy.json exactly: report eight independent families with two nested matched repetitions, fixed32 denominator, paired A/B descriptive results and all failed/unscored/unknown cases. Do not treat32 nested cells as32 independent repositories, invent a sixteen-family sample, noninferiority margin, superiority decision, human-time estimate, or publication/reuse benefit. Any uncertainty summary must be supported by the frozen policy; otherwise state that inferential claims were withdrawn. Reverify signatures and reconcile source/cell/order/freezefile identities before projecting scalar outcomes. Keep child/wrapper/gateway/scorer clocks distinct and non-additive, unknown charges null, failed setup and prior pilot/protocol/diagnostic costs in their own retained scopes. Generate Table17 and the explicit out-of-scope ablation table solely from those bytes. ",
+      "id": "NS-019",
+      "implementation_paths": [],
+      "paper_evidence": [
+        "PDF p. 8, \u00a78.3; p. 19, \u00a7G.1",
+        "PDF p. 24, Table 17; p. 1 abstract results placeholder"
+      ],
+      "priority": "P0",
+      "subgoal_id": "NS-SG5",
+      "suggested_code_paths": [
+        "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/runs/main/",
+        "papers/completion/neurosymbolic_supervision/runs/ablations/"
+      ],
+      "title": "Regenerate descriptive eight-family A/B outcomes and measured cost summaries"
+    },
+    "NS-024": {
+      "acceptance_criteria": [
+        "A clean environment can install the frozen artifact and regenerate results/tables without author-private state, or limitations are explicit and scientifically acceptable.",
+        "Official checklist questions are present and honestly answered; the compilation placeholder and five disclosure placeholders are gone.",
+        "PDF metadata, author block, bibliography, URLs, source paths, logs, and supplement pass a documented double-blind audit.",
+        "Methods-essential LLM use is accurately described with actual models/versions/settings/independent checks; unresolved author-owned factual attestations are clearly listed.",
+        "PDF main text is 4\u20139 pages excluding references/appendices, PDF below 50 MB, supplement ZIP below 100 MB, subject to final live CFP verification.",
+        "The build loads the local research neurips_2026_vericode.sty unchanged, in its anonymous default mode; competition, single-blind, final, preprint, nonanonymous, and generic-style substitutions are absent.",
+        "The per-paper checklist copy contains all 16 official questions and preserved guidelines, with no answerTODO/justificationTODO fields and with actual Yes/No/N/A answers plus 1\u20132 sentence evidence-backed justifications; only its instruction block is removed.",
+        "The shared user templates are unmodified and their recorded input checksums match; the final anonymous author block may retain the Affiliation/Address/email strings generated by the official style.",
+        "Final build retains the workshop footer, anonymous behavior and review line numbers; source/PDF placeholder checks distinguish unanswered scientific fields from official style-generated anonymous text."
+      ],
+      "deliverables": [
+        "papers/completion/neurosymbolic_supervision/release/README.md",
+        "papers/completion/neurosymbolic_supervision/release/manifest.json",
+        "papers/completion/neurosymbolic_supervision/release/reproduce.sh",
+        "papers/completion/neurosymbolic_supervision/release/supplement.zip",
+        "papers/completion/neurosymbolic_supervision/release/paper.pdf",
+        "papers/completion/neurosymbolic_supervision/audit/anonymity_report.md",
+        "papers/completion/neurosymbolic_supervision/audit/llm_use_disclosure.md",
+        "papers/completion/neurosymbolic_supervision/audit/author_attestations.md",
+        "papers/completion/neurosymbolic_supervision/audit/workshop_compliance.json",
+        "papers/completion/neurosymbolic_supervision/manuscript/checklist.tex",
+        "papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty",
+        "papers/completion/neurosymbolic_supervision/submission/template_inputs.json"
+      ],
+      "depends_on": [
+        "NS-022"
+      ],
+      "description": "The governing design is the already root-frozen pre-outcome 32-cell A/B local-cold comparison across eight original final families and two nested repetitions (104729,130363), canonical freeze ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d, file SHA7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a. This source amendment implements that existing freeze; it does not change the experiment after outcomes. Preserve original192 order/filter lineage,160 removed factor cells,eight unrecruited families, prior pilot/protocol failures and all costs. C/D routing, warm caches, reuse, publication-comparison efficacy and original16-family inferential objectives are withdrawn from this experiment; they are not completed benchmark outcomes. Outside human review is not required; human semantic fidelity remains unmeasured. Package the actually executed final service, native overlays, phase helper, client driver, input preparation, runtime/profile and reducer sources, plus exact freeze/order and retained pilot/final scalar evidence. Include a derived portable provenance index mapping anonymous release paths to preserved original private hashes; historical absolute host paths remain historical metadata, not runnable reproduction commands. Preserve confidential oracle/reference/credential custody. Retain actual failure histories and scoped costs, excluding fabricated measurements or unavailable author claims. The supplement must clearly separate four-family pilot, eight-family32-cell final evidence, public-only baseline qualification and constructed native controls; withdrawn C/D/warm/reuse/publication claims stay withdrawn. Reuse the original official anonymous template, checklist, size and page constraints; do not publish, submit, download models, or rerun experiments. ",
+      "id": "NS-024",
+      "implementation_paths": [],
+      "paper_evidence": [
+        "PDF p. 25, \u00a7K.1: five disclosure placeholders",
+        "PDF p. 25, \u00a7K.2 and p. 28 checklist TODOs",
+        "Workshop CFP: official 2026 template, double-blind artifacts, methodology-essential LLM disclosure",
+        "Local research template line 10 loads neurips_2026_vericode; line 461 includes checklist.tex. Research style lines 343\u2013350 generate the anonymous Affiliation/Address/email block. Local checklist contains 16 official questions."
+      ],
+      "priority": "P0",
+      "proposal_artifact_envelope": {
+        "binary_paths": [
+          "papers/completion/neurosymbolic_supervision/release/supplement.zip",
+          "papers/completion/neurosymbolic_supervision/release/paper.pdf"
+        ],
+        "max_file_bytes": 16000000,
+        "max_output_bytes": 24000000,
+        "max_patch_bytes": 16000000,
+        "schema": "ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@3"
+      },
+      "subgoal_id": "NS-SG7",
+      "suggested_code_paths": [
+        "papers/completion/neurosymbolic_supervision/manuscript/",
+        "papers/completion/neurosymbolic_supervision/artifacts/",
+        "papers/completion/neurosymbolic_supervision/benchmark/",
+        "papers/completion/neurosymbolic_supervision/analysis/",
+        "papers/neurips_2026_vericode_workshop.tex",
+        "papers/neurips_2026_vericode.sty",
+        "papers/checklist.tex"
+      ],
+      "title": "Package the anonymous frozen A/B evidence and actual executed sources"
+    }
+  }
+}

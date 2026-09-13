@@ -1,0 +1,680 @@
+{
+  "actual_complete32": true,
+  "analysis": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/analysis/analysis.private.json",
+    "sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766"
+  },
+  "changes_protocol_or_denominator": false,
+  "changes_signed_outcomes": false,
+  "cost_scope": "Original signed and operator phase clocks remain exact. Additional administrative observations are separately nested. Missing authoring effort, unsigned credential timing and unsettled provider charges do not become zero. No clock grand total or changed useful-completion predicate.",
+  "created_at": "2026-09-13T11:40:45.692922+00:00",
+  "native_calls": 0,
+  "outside_reviewers_required": false,
+  "records": [
+    {
+      "category": "incomplete_hidden_validation_import_failure",
+      "cell_id": "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell005_incomplete_validation_disclosure.private.json",
+          "sha256": "549d06768be74537f1ed142642739fe04e28465687be246f598a9a03ac66e812"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell005_import_error_category.private.json",
+          "sha256": "4a3a90aad35035a56e329107805cbc01488be9eba679b25f741324dc72ea7d9e"
+        }
+      ],
+      "hidden_assertion_failure_observed": false,
+      "hidden_names_source_or_raw_logs_included": false,
+      "infrastructure_fault_proven": false,
+      "original_signed_receipt_sha256": "d0ce0827cd71a7826b624c9ea1843bf4b20997edb5c39ff7cbbca2825fc33366",
+      "sanitized_only": true,
+      "signed_outcome": "hidden_acceptance_failed",
+      "statement": "The signed label hidden_acceptance_failed is preserved. Public checks passed28/28, while hidden collection produced zero assertions and exit4 with a categorized import-name failure. This is incomplete validation, not an observed hidden behavioral assertion failure or a proven external infrastructure fault. No useful credit or retry; all original denominator and costs retained.",
+      "useful_completion": false
+    },
+    {
+      "category": "original_lease_interruption",
+      "cell_id": "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell007_lease_loss_stop.private.json",
+          "sha256": "c7370e0eec452558b9a0bbc896e4202635327def431bf54a0182263387c2feed"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell007_terminal.private.json",
+          "sha256": "99bad977f11874f86e046ff6e537505957e763e6cb71d8386d32a2aa28de1704"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "3a92311c444df0ac298cd1ae3a074f67b5f2807cbcb9f0293020ed4c63a8c094",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original cooperative lease holder ended during the consumed seventh cell. Its original request, termination/failure record, known cleanup and unknown signal sender remain preserved. A prospectively admitted successor serves only the remaining25cells. No replay, attribution of the signal to a known actor, or claim of one unchanged executable runtime across all32.",
+      "useful_completion": false
+    },
+    {
+      "category": "pre_effect_launcher_path_failure",
+      "cell_id": "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell009_pre_effect_shell_failure.private.json",
+          "sha256": "eba93a66958739036934a2ae3bc0898dfe639f4515847fcfc754bc77c0178d00"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "48c533b2b04c6147e164b6799e0c90240a4eed4ae5b3d6d7462e29787bd0e538",
+      "sanitized_only": true,
+      "signed_outcome": "full_cold_pass",
+      "statement": "An outer command used a mistyped interpreter path and exited127 before the reviewed helper, reservation or provider dispatch. The corrected exact interpreter then launched the original effect once. Preserve the failed diagnostic and unmeasured outer-command effort; it is not a second scientific attempt or a refund.",
+      "useful_completion": true
+    },
+    {
+      "category": "operator_bookkeeping_takeover",
+      "cell_id": "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell025_bookkeeping_takeover_v1/result.private.json",
+          "sha256": "b06d96922acb7069dc6f70ecb0178316cd3dc66761752f6c53215936a5e19b1d"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell025_bookkeeping_takeover_v2/result.private.json",
+          "sha256": "ef28e9c1d96adb624e9e21c9c16ac92b792fc82859547112d99c8856c4601f91"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "d23b1ffe30019983aa0c9adba3e6604cdfda52d8952a19ef089bda2be9161f30",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "Root completed the unconsumed failure disposition and offline terminal verification after a delegated bookkeeping interruption. A read-only Docker diagnostic first rejected an alternate absence-message spelling before any disposition write or new scientific effect. Preserve that diagnostic, actual later accounting clocks and grant-to-terminal delay. The original timed-out request was not repeated.",
+      "useful_completion": false
+    },
+    {
+      "category": "authentication_headroom_shortfall",
+      "cell_id": "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_auth_window_gap.private.json",
+          "sha256": "bf2cb0e9bc84f78cc11147a9442f35b2e6bf39525102cd23ac34011d6657f5bb"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell027_auth_window_reconciliation_v1.private.json",
+          "sha256": "24b2275f39e91e45e3d55ab1ef299070c1576c8ca2990edd8ecd4117aa5af7e5"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_sanitized_relative_http_metadata.private.json",
+          "sha256": "a64b5339b85f2dd0fe4e02ddb7e5162245a6b52777923ecdad7cc7206cbcfdaf"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "f19e27e641eebee43664c8b35f361beb193cdbab79554a358b60123c1b16a9c4",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The normal metadata check passed with908.702199seconds before unsigned expiry.13.412674seconds of startup left895.289514seconds at the consumed reservation, below the intended900second operational margin. Exact absolute POST time is unobserved. This shortfall is distinct from frozen generation/scorer resource predicates and does not relabel the outcome or authorize a retry. Normal credential refresh before the next grant was retained separately.",
+      "useful_completion": false
+    },
+    {
+      "category": "usage_interruption_and_exact_environment_recovery",
+      "cell_id": "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell029_bookkeeping_takeover_v1/result.private.json",
+          "sha256": "3bd7f31f0a5ec4628374088df482697764d2ac107ce162c167e8bfed7e9800e5"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell029_bookkeeping_takeover_v2/result.private.json",
+          "sha256": "756a16e96006ab3b6cbcf686b48354ad9ac08f3449c41b8976046dda7c4d5660"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell029_bookkeeping_takeover_v3/result.private.json",
+          "sha256": "1868eb23d79e5a6519f622cd74252b3cb574380ce8026ad98007907398e38284"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell029_disposition_template/execution.private.json",
+          "sha256": "39acdb5f51a598d1141d132e376214f0fbf995148ba474fe308721147656734f"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell029_disposition_template_recovery001/execution.private.json",
+          "sha256": "6776b21bdb92320aa2658bc56533a40096725eabc454467026a367ecbc03e268"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "07885c23d784ba6e619fda44dd36a07b1702ec8e142d419515eb99566469fd48",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original request terminated at07:51:54UTC; a subsequent Codex authoring-usage interruption delayed failure accounting until root recovery after10:31UTC. A wrong authority filename stopped the first read-only recovery before effects. A launch-environment mismatch then caused the original gateway to reject the first accounting template. Root recovered the exact original selected-configuration hash without changing scientific sources, grants, requests or checks. A fresh bookkeeping template and first disposition retained the original result and expired grant. No model/scorer replay; preserve all administrative delay, diagnostic costs and unknown authoring effort.",
+      "useful_completion": false
+    },
+    {
+      "category": "additional_recovery_template_clock",
+      "cell_id": "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a",
+      "changes_signed_compliance": false,
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell029_disposition_template_recovery001/execution.private.json",
+          "sha256": "6776b21bdb92320aa2658bc56533a40096725eabc454467026a367ecbc03e268"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell029_bookkeeping_takeover_v3/result.private.json",
+          "sha256": "1868eb23d79e5a6519f622cd74252b3cb574380ce8026ad98007907398e38284"
+        }
+      ],
+      "extra_phase_elapsed_host_wall_seconds": 0.160823130980134,
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "07885c23d784ba6e619fda44dd36a07b1702ec8e142d419515eb99566469fd48",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The extra successful read-only recovery template is outside the standard seven named operator phases. Its separately retained wall duration is 0.160823130980134seconds. It overlaps the larger root bookkeeping interval and is neither added to nested clocks nor treated as zero or a new scientific trial.",
+      "summed_with_nested_clocks": false,
+      "useful_completion": false
+    },
+    {
+      "category": "read_only_cleanup_diagnostic_predicate_correction",
+      "cell_id": "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b",
+      "diagnostic_effort_seconds": null,
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell030_root_cleanup_observation_v1.private.json",
+          "sha256": "429debc7f06a6627a56c05c1b7e8141e12858b73cba6b5f3197b784105e1f931"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "original_signed_receipt_sha256": "91ab329cca8d56756d0df19876a0782bbdda8d434cc5253ab433c9a8e7f0062d",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "Two root read-only diagnostics returned false because of an incorrect Boolean predicate and then case-sensitive parsing of Docker absence text. The actual daemon returned the exact retained container identifier as absent. The corrected exact comparison and original successful cleanup were verified before the first disposition; no scientific effect was repeated. Diagnostic effort was not measured and is not zero.",
+      "useful_completion": false
+    },
+    {
+      "category": "root_outer_invocation_clocks",
+      "cell_id": "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/actual_final_v1_cell030_root_execute_outer_v1/execution.private.json",
+          "sha256": "690b2642675a52f8e105b477488c52f210687029cc4468609ae59ddefb71828f"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell030_root_poll001_outer_v1/execution.private.json",
+          "sha256": "f489e57215f8f9b33a7af1ae925d6f6c334d73841727957fd12473a94bff0328"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell030_root_poll_outer_v1/execution.private.json",
+          "sha256": "2b22f2a9200dfa8623e8c8c6ee288cb839e9b32993c80d9802e6eeabfdb153da"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell030_root_prepare_outer_v1/execution.private.json",
+          "sha256": "8e2d894c975b39e6e80b24b4968a1e67242e461fa7806b9396c7686491aa5c04"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "operator_reasoning_effort_seconds": null,
+      "original_signed_receipt_sha256": "91ab329cca8d56756d0df19876a0782bbdda8d434cc5253ab433c9a8e7f0062d",
+      "outer_invocations": [
+        {
+          "elapsed_host_wall_seconds": 596.3174522020854,
+          "exit_code": 0,
+          "invocation": "actual_final_v1_cell030_root_execute_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "690b2642675a52f8e105b477488c52f210687029cc4468609ae59ddefb71828f",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 3.1258514740038663,
+          "exit_code": 0,
+          "invocation": "cell030_root_poll001_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "f489e57215f8f9b33a7af1ae925d6f6c334d73841727957fd12473a94bff0328",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 3.3149082290474325,
+          "exit_code": 0,
+          "invocation": "cell030_root_poll_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "2b22f2a9200dfa8623e8c8c6ee288cb839e9b32993c80d9802e6eeabfdb153da",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 1.9450644839089364,
+          "exit_code": 0,
+          "invocation": "cell030_root_prepare_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "8e2d894c975b39e6e80b24b4968a1e67242e461fa7806b9396c7686491aa5c04",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        }
+      ],
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "Four actual root outer invocations retain their separate measured wall durations in this disclosure. These include unchanged-helper startup/completion and overlap inner proposal, bookkeeping, or client clocks. No grand total, new compliance threshold, scientific retry or claim of measured AI reasoning effort is introduced.",
+      "summed_with_nested_clocks": false,
+      "useful_completion": false
+    },
+    {
+      "category": "root_outer_invocation_clocks",
+      "cell_id": "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell031_root_execute_outer_v1/execution.private.json",
+          "sha256": "f58b6ead3399460912dac40bacde36d551dc89199b5677aec744a5d7dc601e9b"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell031_root_poll_outer_v1/execution.private.json",
+          "sha256": "30156b82156a404b87b631e5b996b5d6376df557bcd162e85083495781083dd9"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell031_root_prepare_outer_v1/execution.private.json",
+          "sha256": "d8b05783a0518eb05e11c48a251fd2e432b0fb18c0bfd0e73bc81126bc327683"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell031_root_terminal_poll_outer_v1/execution.private.json",
+          "sha256": "409f0713df0527ea3407c91589d2969e7f2c0850abaca40b5a4b1b108d84ba3d"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "operator_reasoning_effort_seconds": null,
+      "original_signed_receipt_sha256": "36cdc721ecbd0a4e62a0e76be336913ec7319ae91f7a0d2b00455405d4609589",
+      "outer_invocations": [
+        {
+          "elapsed_host_wall_seconds": 596.5227075300645,
+          "exit_code": 0,
+          "invocation": "cell031_root_execute_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "f58b6ead3399460912dac40bacde36d551dc89199b5677aec744a5d7dc601e9b",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 3.251657508080825,
+          "exit_code": 0,
+          "invocation": "cell031_root_poll_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "30156b82156a404b87b631e5b996b5d6376df557bcd162e85083495781083dd9",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 1.806978028966114,
+          "exit_code": 0,
+          "invocation": "cell031_root_prepare_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "d8b05783a0518eb05e11c48a251fd2e432b0fb18c0bfd0e73bc81126bc327683",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 3.5743937839288265,
+          "exit_code": 0,
+          "invocation": "cell031_root_terminal_poll_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "409f0713df0527ea3407c91589d2969e7f2c0850abaca40b5a4b1b108d84ba3d",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        }
+      ],
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "Four actual root outer invocations retain their separate measured wall durations in this disclosure. These include unchanged-helper startup/completion and overlap inner proposal, bookkeeping, or client clocks. No grand total, new compliance threshold, scientific retry or claim of measured AI reasoning effort is introduced.",
+      "summed_with_nested_clocks": false,
+      "useful_completion": false
+    },
+    {
+      "category": "root_outer_invocation_clocks",
+      "cell_id": "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell032_root_execute_outer_v1/execution.private.json",
+          "sha256": "72e0dff31aa4e513402580db5be53c1140584e21dd0949bcb936804ba73ffa23"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell032_root_poll_outer_v1/execution.private.json",
+          "sha256": "c8d7e388050ebc8643d0b5593ed4ddf5f921a86961f0c96920f917c4cb2711d2"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell032_root_prepare_outer_v1/execution.private.json",
+          "sha256": "5de693a852d5308e54e2c37c2e6d8732d3f55dea0ca4b0355c8bcee502642d2e"
+        },
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell032_root_terminal_poll_outer_v1/execution.private.json",
+          "sha256": "a66857a8c403cac2af3642823d146e961d8f66e1db972da92543f49be47065c9"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "operator_reasoning_effort_seconds": null,
+      "original_signed_receipt_sha256": "74625e6f991cd2ad698d8017d95e4ad702571b6a44d5a459c6c2560d9f155679",
+      "outer_invocations": [
+        {
+          "elapsed_host_wall_seconds": 596.3214688720182,
+          "exit_code": 0,
+          "invocation": "cell032_root_execute_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "72e0dff31aa4e513402580db5be53c1140584e21dd0949bcb936804ba73ffa23",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 3.297595034004189,
+          "exit_code": 0,
+          "invocation": "cell032_root_poll_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "c8d7e388050ebc8643d0b5593ed4ddf5f921a86961f0c96920f917c4cb2711d2",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 1.8599099540151656,
+          "exit_code": 0,
+          "invocation": "cell032_root_prepare_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "5de693a852d5308e54e2c37c2e6d8732d3f55dea0ca4b0355c8bcee502642d2e",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        },
+        {
+          "elapsed_host_wall_seconds": 3.421155713032931,
+          "exit_code": 0,
+          "invocation": "cell032_root_terminal_poll_outer_v1",
+          "measured": true,
+          "original_execution_sha256": "a66857a8c403cac2af3642823d146e961d8f66e1db972da92543f49be47065c9",
+          "scope": "Outer root launch through completion of unchanged operator helper; nested with original helper, service and client clocks.",
+          "summed_with_nested_clocks": false
+        }
+      ],
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "Four actual root outer invocations retain their separate measured wall durations in this disclosure. These include unchanged-helper startup/completion and overlap inner proposal, bookkeeping, or client clocks. No grand total, new compliance threshold, scientific retry or claim of measured AI reasoning effort is introduced.",
+      "summed_with_nested_clocks": false,
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0/derivation_provenance.private.json",
+          "sha256": "1f42a0cc6f9a3ad3fc82565ca9ac5208cce49ff0b547f88a17a006ca5edda31a"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "f36e2d6b3140143884c3cfe671738540cadec47ceeb43e196aa0bbad806d9862",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67/derivation_provenance.private.json",
+          "sha256": "110beee89cbd6c5e2bfa1c28fb088ff23fad880cc8196f22918324dd77ad3ab0"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "705a286927e5749adf22340d840cdfa582f4a4aa1241614c7b98e1e4a6b24b38",
+      "sanitized_only": true,
+      "signed_outcome": "known_proposal_failure",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe/derivation_provenance.private.json",
+          "sha256": "ef2f8ed2549bb34623154652b4511e97c04cdc32373e5585e7f433747eb722cf"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "5dba13ea3003586ff5d39f5e5a7119b71eea7581e8b35c5efc34991d2141d6fc",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca/derivation_provenance.private.json",
+          "sha256": "9ebfe058eb3a849e077ba0a17e3f4ba89c35d38a707cc7dc78b060ac573f5ab9"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "8182c9851bd3fdfe98d337de757d8c10b8af98904c94f03a129aef897bb30829",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f/derivation_provenance.private.json",
+          "sha256": "a4c89828ac01036792e7341283ea0d2f0d74083643359ce16d768aa5630d526e"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "07cbdcd463b284f7e2b549bbf6fffb48cb3a3c60e8cce9ab654f96c1067fb1b9",
+      "sanitized_only": true,
+      "signed_outcome": "known_proposal_failure",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64/derivation_provenance.private.json",
+          "sha256": "91271ff4ff1a93cccfb2902f0165da7a6aba1a7f6b544332b2393fe5f97b43ad"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "2eb30f25554843f5184e5dbf6783dd779421e33ba38741f1bd1a3c70f50d120c",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d/derivation_provenance.private.json",
+          "sha256": "b0943ca127b520afbfba577851ed347bd35db7a8cda077f410b6c61fea5711b7"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "ecd845cca472e845fc74d3d87987d13979b12d4c8e750ba1f05955db441f80ec",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e/derivation_provenance.private.json",
+          "sha256": "1bffe58ba53a8583b5a61ac6098832e77161d2589137e18537552ccd0d1ebd10"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "c1dc540cdc176ad09105a1dc9854319cf4d92715706055710a2a91d3b1539735",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2/derivation_provenance.private.json",
+          "sha256": "75e6ee07972507cd633e528ed37b9c0dfe988aa78bed797a14c4d61d70e68c6a"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "9d66e1bf29a4db9d12994fa4548986b4fc1647e4162fa8a51634e5b60eea1277",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2/derivation_provenance.private.json",
+          "sha256": "1c060a20b33beafdd677506888ad43ac11f9a5c624e2642d4625ceb5f40edce6"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "d23b1ffe30019983aa0c9adba3e6604cdfda52d8952a19ef089bda2be9161f30",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/derivation_provenance.private.json",
+          "sha256": "10e878f9ddba1af2dc7433f2ec2284a2fed787788c7c0737d2638a109a45f8a6"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "f19e27e641eebee43664c8b35f361beb193cdbab79554a358b60123c1b16a9c4",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a/derivation_provenance.private.json",
+          "sha256": "ce57b5ccbff7a9680506bf82768cf3bad6d7a792772b31c338f82af55691b707"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "07885c23d784ba6e619fda44dd36a07b1702ec8e142d419515eb99566469fd48",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b/derivation_provenance.private.json",
+          "sha256": "401a54073df88fc78adc857a406aec62e0ffece72adc4b775a3be3833c33b4c0"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "91ab329cca8d56756d0df19876a0782bbdda8d434cc5253ab433c9a8e7f0062d",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0/derivation_provenance.private.json",
+          "sha256": "01b064ffc75331386736edb62650de18a2d9e3207f56e375a39f0307fa31523b"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "36cdc721ecbd0a4e62a0e76be336913ec7319ae91f7a0d2b00455405d4609589",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    },
+    {
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "category": "derived_zero_change_candidate_metadata",
+      "cell_id": "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442",
+      "evidence": [
+        {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/derived_metadata/8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442/derivation_provenance.private.json",
+          "sha256": "87b08b0d66d6a3fd351947f91e397ba49302fd75050a473553d674569e81a40b"
+        }
+      ],
+      "hidden_names_source_or_raw_logs_included": false,
+      "model_candidate_returned": false,
+      "original_candidate_binding_file_absent": true,
+      "original_signed_receipt_sha256": "74625e6f991cd2ad698d8017d95e4ad702571b6a44d5a459c6c2560d9f155679",
+      "sanitized_only": true,
+      "signed_outcome": "proposal_child_deadline",
+      "statement": "The original failed proposal has a signed unchanged public-inventory commitment but no original candidate-binding file. A separate unsigned metadata sidecar was derived after strict32 completion from the exact original public inventory, empty patch and signed commitment. It is explicitly reconstructed metadata, not a returned model edit, recovered original file, candidate review or human annotation. Original absence, receipt identity, failure credit and fixed denominator remain unchanged.",
+      "useful_completion": false
+    }
+  ],
+  "schema": "ns-final32-additive-validation-disclosures/v1",
+  "scientific_calls": 0
+}

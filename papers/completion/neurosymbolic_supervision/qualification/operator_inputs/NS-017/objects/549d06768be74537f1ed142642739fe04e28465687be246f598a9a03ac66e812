@@ -1,0 +1,43 @@
+{
+  "at": "2026-09-13T02:41:59.150114+00:00",
+  "bindings": [
+    {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/result.json",
+      "sha256": "d0ce0827cd71a7826b624c9ea1843bf4b20997edb5c39ff7cbbca2825fc33366"
+    },
+    {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/historical_scorer/host_result.json",
+      "sha256": "30307795a15c6b1d7315dabff0091844a5abf8d907ac8c6343196479003bc53b"
+    },
+    {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/historical_scorer/results/result.json",
+      "sha256": "05b03caefa318a300f78079da66f8cbca5da6fbb6367466b4da9ebc685ef6178"
+    },
+    {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/historical_scorer/cleanup.json",
+      "sha256": "e38bb1a11c176f9c829562b61a8c506434ae149e7a3706cc2a82d516e61fb8cc"
+    },
+    {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/historical_scorer/command.private.json",
+      "sha256": "be7a13564eccb9b8e966ee8474454c14cb3f33b08c00a426ca2482cb8d43d43c"
+    },
+    {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/historical_scorer/boundary.private.json",
+      "sha256": "5798cebb7f55064117fe81a45c3fd445621e50f8997937163f4d7eaca70bbbdc"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell005_terminal.private.json",
+      "sha256": "b3b3d8d3998fefea955d9741c292db8c8de2e1b3e710b5c55fd6ecef8ffbbedc"
+    }
+  ],
+  "cell_id": "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1",
+  "cell_number": 5,
+  "hidden_bodies_or_logs_read_by_operator": false,
+  "interpretation": "Incomplete hidden validation; potential scorer/collection error. No hidden assertion failure was observed. Exact signed label retained unchanged; useful success false, fixed denominator unchanged, no retry.",
+  "observed_hidden_collected": 0,
+  "observed_hidden_exit_code": 4,
+  "observed_hidden_passed": 0,
+  "original_signed_classification": "hidden_acceptance_failed",
+  "schema": "ns-final-incomplete-hidden-validation-disclosure/v1",
+  "source_or_candidate_changed": false
+}

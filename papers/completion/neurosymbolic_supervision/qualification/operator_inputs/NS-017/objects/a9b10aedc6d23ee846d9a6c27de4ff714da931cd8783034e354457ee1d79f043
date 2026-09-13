@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "fbc023badf7d9066be5ab0b92a309876f3ac2010d2637fabfafb3e832da7f8fa",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "8af5c20df3f2311b4057ec14bf440ea5ca7c594238180fb639661a76f3dd33ab",
+    "candidate_sha256": "d9098be2559f278f6c7618c944d6c777e5506122a3bb2d4f9c64863948503516",
+    "cell_id": "6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b",
+    "grant_sha256": "2bd9f9a52d839ea2056797f667aec3173bd60a1111d1b095d2268a859e7c2ac8",
+    "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+    "patch_sha256": "80446728286b8eb785c6323b170fc27293ed489be930c9196ffddc664f6a3c2f",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "proposal_receipt_sha256": "1fd52ec5925227bdcbcf98816ec968837784d789523eaab683a74ddfe2688c14",
+    "provider_result_sha256": "f9c0e0061fe8d1de4262fd66e60fe98ff9929bd613fd7fa41faf07ea93d40aab",
+    "record_kind": "final",
+    "request_sha256": "333e97351e63ca0e29457a7fc3befda3b69e29e8f7fbd9f817a5ad7088c5475e",
+    "reservation_sha256": "f73c2076bb5301c3e09ffa63960fbca0e8a87f3bb6a781d89fab713b1bfdce03",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read this exact1632-byte two-file patch against the public constructor and full parser previously read in this session. The new classmethod passes text and path to the existing constructor; the shared inline-comment helper replaces the existing section stripping and now also strips value and continuation suffixes. Section helper extraction preserves ordinary existing stripping, while applying it to values changes legacy constructor semantics and literal #/semicolon handling; cold validation must determine correctness and compatibility. Only the two allowed implementation paths change, with tests, dependencies, resource limits and scorer inputs untouched. This is an AI source-scope review for this candidate\u2019s own cold score, not a hidden-success, human-annotation or adversarial-integrity claim.",
+  "reviewed_at": "2026-09-13T06:15:27.253773+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

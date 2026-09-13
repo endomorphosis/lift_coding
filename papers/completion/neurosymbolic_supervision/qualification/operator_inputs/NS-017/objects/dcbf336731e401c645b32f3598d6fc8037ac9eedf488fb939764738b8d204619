@@ -1,0 +1,25 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "f2e278dd6b03df08aae056fc864b5601068ae6a7f10165232a25707eb2113465",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0",
+    "grant_sha256": "dcc8da51bb9b752c626de7e01bf3af800e12580c5a790cb2812ed568d384a841",
+    "manifest_sha256": "f5594e45f6b758a36d2f8b43adbdb9624939f2b77ccebb2a5b356f3f42d959ec",
+    "original_receipt_sha256": "f36e2d6b3140143884c3cfe671738540cadec47ceeb43e196aa0bbad806d9862",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "provider_termination_evidence_sha256": "d46814fd6ae0c2481bdf650a2d091238aa5e415f63a259d1b83f8c40894fcb84",
+    "request_sha256": "6e896331ce1fcd1f4bd526c267fe6754064dc84144c4352442341f607defbafb",
+    "reservation_sha256": "0e48e935dde3e7eba4d9dfbf23fc67ce80691c0fa5dfb674b520b271fe2d5a26",
+    "service_source_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "source_sha256": "5760a4471c370919aa8a7af0d6890791954109ce2aa59426e4a87d3a54b31726"
+  },
+  "classification": "known_proposal_failure",
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T01:51:40.527216+00:00",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "Original fixed final cell001, Tomlkit/B/104729, consumed one HTTP POST and reached its child absolute deadline before receiving response bytes. Measured child595.000375372 seconds exceeds595; wrapper595.507611033 and gateway595.935362266 seconds are separate nested intervals below600. No candidate edit was admitted and no scorer was invoked. Exact retained provider container termination and cleanup are verified. Preserve the original signed failure, zero response bytes, absent usage and unavailable settlement/unknown charge. This append-only terminal accounting grants no success or score credit and performs no retry, replacement, regrant or additional model/scorer effect."
+}

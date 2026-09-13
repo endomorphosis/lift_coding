@@ -1,0 +1,16 @@
+diff --git a/src/wheel/_commands/convert.py b/src/wheel/_commands/convert.py
+--- a/src/wheel/_commands/convert.py
++++ b/src/wheel/_commands/convert.py
+@@ -316,10 +316,10 @@
+             if verbose:
+                 print(f"{archive}...", flush=True, end="")
+ 
+-            dest_path = Path(dest_dir) / (
++            dest_path = Path(dest_dir) / Path(
+                 f"{source.name}-{source.version}-{source.pyver}-{source.abi}"
+                 f"-{source.platform}.whl"
+-            )
++            ).name
+             with WheelFile(dest_path, "w") as wheelfile:
+                 for name_or_zinfo, contents in source.generate_contents():
+                     wheelfile.writestr(name_or_zinfo, contents)

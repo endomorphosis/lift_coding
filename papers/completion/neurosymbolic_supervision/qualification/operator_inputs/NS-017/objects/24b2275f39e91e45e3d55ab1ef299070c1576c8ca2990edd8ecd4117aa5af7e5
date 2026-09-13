@@ -1,0 +1,37 @@
+{
+  "approved": true,
+  "at": "2026-09-13T07:25:08.636434+00:00",
+  "auth_helper": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/check_primary_auth_metadata.py",
+    "sha256": "b3500b06c89c8e42d3bbfe65ba9228b87e0702a2e98c3aa1e45e17c833336ad8"
+  },
+  "authority": "root_operator_scientific_driver",
+  "cell027_action": "Continue observing the existing single execution; retain sanitized relative child/open-entered metadata and raw-log digest if available. Finish only its eligible candidate review/cold scoring or typed failure accounting and exact cleanup under the original protocol. No new grant, extra POST, replay or source modification.",
+  "finding": "The normal metadata check actually passed its900-second remaining-window predicate.13.412674 seconds elapsed before the consumed reservation, reducing the unsigned-expiry margin to895.289514 seconds. Exact absolute POST time is unobserved. This is a recorded operational timing-margin shortfall; no assertion of900 seconds at effect time or full operational compliance is made.",
+  "frozen_analysis_policy": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/analysis_policy_v2.proposed.private.json",
+    "sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3"
+  },
+  "frozen_source_or_policy_mutations": 0,
+  "gap": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_auth_window_gap.private.json",
+    "sha256": "bf2cb0e9bc84f78cc11147a9442f35b2e6bf39525102cd23ac34011d6657f5bb"
+  },
+  "new_grants": 0,
+  "new_provider_calls": 0,
+  "new_scorer_calls": 0,
+  "next_cells_action": "Before creating cell028 grant, wait for the normal primary refresh window, obtain normal models exit0 and advanced expiry with at least1800 seconds remaining. This conservative scheduling headroom is an operator delay, not a model/resource/reducer change. Repeat normal metadata checks before grants/POSTs; calculate remaining time again immediately before invoking the unchanged helper and do not launch if below900. If narrow headroom cannot survive startup, wait for normal refresh without a grant. Never edit credentials.",
+  "no_outside_input_required": true,
+  "original_delegation": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "required_disclosure": "Retain this timing gap separately from signed generation/scorer budget violations, including absence of exact absolute POST timestamp. Include in final operational limitations and provenance; no blanket full-boundary compliance claim.",
+  "schema": "ns-root-auth-window-reconciliation/v1",
+  "scientific_rule_interpretation": "The frozen scientific useful-outcome/resource rules do not introduce a900-second credential-headroom outcome threshold. Keep every original cell/outcome, actual model/settings/expiry/error and measured resource disposition. This observation does not reclassify a successful or failed candidate, waive actual expired-grant or resource rules, or authorize a retry.",
+  "successor_delegation": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells026_032_successor_v1.private.json",
+    "sha256": "e10777453fd629e43ddb6a328e9632ffa54482add65a582abf18f399514878d1"
+  },
+  "unchanged_scientific_rule": "True only for an actual sealed candidate admitted under its one-use final grant and independently cold-scored with all nonempty public and hidden checks passing. Failed, refused, unknown, unscored, expired or missing cells remain false in the32-cell useful-completion denominator and retain distinct reason/status labels."
+}

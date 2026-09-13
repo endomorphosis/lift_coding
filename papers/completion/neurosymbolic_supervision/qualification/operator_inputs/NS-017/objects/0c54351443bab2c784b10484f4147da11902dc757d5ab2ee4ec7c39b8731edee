@@ -1,0 +1,31 @@
+diff --git a/more_itertools/recipes.py b/more_itertools/recipes.py
+--- a/more_itertools/recipes.py
++++ b/more_itertools/recipes.py
+@@ -1471,11 +1471,11 @@
+ 
+ 
+ def _windowed_running_min(iterator, maxlen):
+-    sis = deque()  # Strictly increasing subsequence
++    sis = deque()  # Increasing subsequence
+     for index, value in enumerate(iterator):
+         if sis and sis[0][0] == index - maxlen:
+             sis.popleft()
+-        while sis and not sis[-1][1] < value:  # Remove non-increasing values
++        while sis and value < sis[-1][1]:  # Remove larger values
+             sis.pop()
+         sis.append((index, value))  # Most recent value at position -1
+         yield sis[0][1]  # Window minimum at position 0
+@@ -1512,11 +1512,11 @@
+ 
+ 
+ def _windowed_running_max(iterator, maxlen):
+-    sds = deque()  # Strictly decreasing subsequence
++    sds = deque()  # Decreasing subsequence
+     for index, value in enumerate(iterator):
+         if sds and sds[0][0] == index - maxlen:
+             sds.popleft()
+-        while sds and not sds[-1][1] > value:  # Remove non-decreasing values
++        while sds and sds[-1][1] < value:  # Remove smaller values
+             sds.pop()
+         sds.append((index, value))  # Most recent value at position -1
+         yield sds[0][1]  # Window maximum at position 0

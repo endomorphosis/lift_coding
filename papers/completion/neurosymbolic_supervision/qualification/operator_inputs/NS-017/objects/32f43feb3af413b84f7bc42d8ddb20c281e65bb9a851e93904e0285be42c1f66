@@ -1,0 +1,44 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "9be7934705d87ef963bab861a61e83459c8624a7d586ef9a17f81ce21804ae6a",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "28f1c158aabef682851aa2c2b82db7443b13303da0aed1ae95123985092a1efb",
+    "candidate_sha256": "c51200f0144d5515d9865eaf55cde308a39277b03b091100f82db36dfe1750e8",
+    "cell_id": "2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f",
+    "grant_sha256": "8371784ffd938a5c6cff7721bf1b327be11332a7bf980403e937d768b989ccf2",
+    "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+    "patch_sha256": "26fa53fa7955bf43684ed6c08fd660da10bdf59040fb0ef23d8217346cd97563",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "proposal_receipt_sha256": "0702df26a4818e4a9ca006443dbaad954d6c94126a137311bd6ae3f6a66a05de",
+    "provider_result_sha256": "0ab1426af00239e97867538a65787a8dca1396f55fc9734de545a00421d36d4c",
+    "record_kind": "final",
+    "request_sha256": "eb4d5fae0113923eb867666fcf5bea25adec1b594d1ec03e9dfed1001277b243",
+    "reservation_sha256": "d747238f62db50e048e39946df76991e6a0fe3ceba75bb38cd830285e33f2563",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells026_032_successor_v1.private.json",
+    "sha256": "e10777453fd629e43ddb6a328e9632ffa54482add65a582abf18f399514878d1"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "proposal_compliance_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell028_successor_proposal_compliance.private.json",
+    "sha256": "623ed25401fee87ed1a7801348e061c62cefcc676e7ad51380c386c7a782d262"
+  },
+  "provider_absence_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell028_successor_provider_absence.private.json",
+    "sha256": "5a877c16fc3953aaa817d1052c5cbf4ad790f53a60edceedd061ed4434c5ec7a"
+  },
+  "review_statement": "I read the exact 708-byte patch, SHA256 26fa53fa7955bf43684ed6c08fd660da10bdf59040fb0ef23d8217346cd97563, against the original public wheel convert implementation. The sole permitted file now converts the generated wheel name to Path(...).name before joining it to dest_dir, removing any preceding path components from the output filename. The change contains no added execution, test, dependency, resource, hidden-input or scorer modification. Platform-specific separators, metadata changes during source iteration, and the resulting functional behavior remain for the fixed scorer to measure; I make no correctness or success assertion. Exact provider cleanup and absence are verified, and measured child, wrapper and gateway times are all within the unchanged limits. I approve only this sealed candidate for its single cold validation under the existing AI operator trust scope, without human annotation or adversarial scorer-integrity qualification.",
+  "reviewed_at": "2026-09-13T07:39:44.297649+00:00",
+  "reviewer": "/root/final_cells",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

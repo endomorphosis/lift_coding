@@ -1,0 +1,135 @@
+"""Explicit prospective control-plane authority; original final freeze is history.
+
+This module only reads exact metadata and source bytes. Actual liveness, PID
+birth, FD/inode/kernel flock, expiry and available capacity remain checked by
+the unchanged resource_reservation function in native_final_gate.py.
+"""
+import hashlib,importlib.util,json,os,stat,sys
+from pathlib import Path
+
+ACTIVATION_SHA='a79cb456abf20fef034e70261509075c181540ce13aa1a588fced63cae934b05'
+BATCH_SHA='ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418'
+FREEZE_SHA='7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a'
+OLD_RESERVATION_SHA='2b00ba343d676fb29f445df3f3527cea62f853faf1c0ac846942bb46444655c4'
+RELEASE_SHA='2f2839e4c1808cd3a4eb46045ac85ea9d5f4b2e824efc0317484111290d698a9'
+PREFIX_AUDIT_SHA='812c561c288b958e05887b8b932c0738f75658d093778a81386c84d872dfbd6c'
+LIMITS={'cpu_count':1,'memory_bytes':2147483648,'provider_pids':32,'scorer_pids':128,'proposal_seconds':600,'scorer_seconds':120}
+CHANGED_ROLES={'pilot_gateway.py','native_final_gate.py','pilot_client.py','lease_continuation.py'}
+
+def require(ok,message):
+    if not ok:raise ValueError(message)
+def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+def digest(value):return hashlib.sha256(canonical(value)).hexdigest()
+def raw_file(path,expected=None,maximum=32<<20):
+    p=Path(path);require(p.is_absolute() and p.resolve()==p,'canonical continuation input required')
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        before=os.fstat(fd);require(stat.S_ISREG(before.st_mode) and before.st_size<=maximum,'bounded regular continuation input required')
+        with os.fdopen(fd,'rb',closefd=False) as stream:raw=stream.read(maximum+1)
+        after=os.fstat(fd);require((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns) and len(raw)==before.st_size,'continuation input changed')
+    finally:os.close(fd)
+    require(expected is None or hashlib.sha256(raw).hexdigest()==expected,'continuation input hash differs');return raw
+def bound(ref):
+    require(set(ref)=={'path','sha256'},'exact continuation metadata binding required')
+    return json.loads(raw_file(ref['path'],ref['sha256'],1<<20),parse_constant=lambda _:(_ for _ in()).throw(ValueError('nonfinite continuation metadata')))
+def verify_file(path,expected,maximum=32<<20):
+    """Hash retained evidence without parsing or exposing its payload."""
+    p=Path(path);require(p.is_absolute() and p.resolve()==p,'canonical retained prefix evidence required')
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        before=os.fstat(fd);require(stat.S_ISREG(before.st_mode) and before.st_size<=maximum,'bounded retained prefix evidence required')
+        h=hashlib.sha256();size=0
+        with os.fdopen(fd,'rb',closefd=False) as stream:
+            for chunk in iter(lambda:stream.read(1<<20),b''):h.update(chunk);size+=len(chunk);require(size<=maximum,'retained prefix grew')
+        after=os.fstat(fd);require((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns) and size==before.st_size and h.hexdigest()==expected,'retained prefix evidence changed')
+    finally:os.close(fd)
+def map_guard(original,effective):
+    require(len(original)==10 and len(effective)==11,'original10/effective11 source maps required')
+    old={Path(p).name:(p,h) for p,h in original.items()};new={Path(p).name:(p,h) for p,h in effective.items()}
+    require(len(old)==10 and len(new)==11 and set(new)==set(old)|{'lease_continuation.py'},'effective runtime source roles differ')
+    for name,(path,h) in new.items():
+        if name not in CHANGED_ROLES:require(h==old[name][1],'scientific/transport/scorer source changed outside continuation scope')
+        raw_file(path,h)
+    for path,h in original.items():raw_file(path,h)
+    require(str(Path(__file__).resolve()) in effective,'actual continuation validator absent from effective source map')
+
+def checked_authority(path,sha=None,cell_id=None,accounting_only=False):
+    binding=path if isinstance(path,dict) and sha is None else {'path':str(path),'sha256':sha}
+    a=bound(binding)
+    require(a.get('schema')=='ns-final-resource-lease-continuation/v1' and a.get('approved') is True and a.get('authority')=='root_operator' and a.get('fixture') is False,'explicit actual root continuation authority required')
+    require(a['original_activation']['sha256']==ACTIVATION_SHA and a['original_batch']['sha256']==BATCH_SHA and a['original_freeze']['sha256']==FREEZE_SHA and
+            a['old_reservation']['sha256']==OLD_RESERVATION_SHA and a['old_release']['sha256']==RELEASE_SHA,'original final/lease history differs')
+    activation=bound(a['original_activation']);batch=bound(a['original_batch']);freeze=bound(a['original_freeze']);old=bound(a['old_reservation']);released=bound(a['old_release'])
+    require(activation['approved'] is True and activation['record_kind']=='final' and activation['batch']==a['original_batch'] and activation['freeze']==a['original_freeze'],'original final authority differs')
+    ordered=activation['ordered_cells'];require(len(ordered)==32 and len(set(ordered))==32 and ordered==batch['planned_cells']==batch['enabled_cells']==freeze['planned_cells'],'original32 order differs')
+    require(all(type(a.get(key)) is int for key in ('consumed_provider_slots','additional_provider_slots_max','additional_scorer_slots_max','original_provider_ceiling','original_scorer_ceiling','retries')),'integer continuation slot/budget counts required')
+    require(a['consumed_cells']==ordered[:7] and a['remaining_cells']==ordered[7:] and a['consumed_provider_slots']==7 and a['additional_provider_slots_max']==25 and a['additional_scorer_slots_max']==25,'continuation must be exactly unissued suffix25')
+    require(a['phase_limits']==LIMITS and a['original_provider_ceiling']==a['original_scorer_ceiling']==32 and a['retries']==0 and a['regrant_consumed_cells'] is False and a['original_outcomes_preserved'] is True,'continuation cannot alter budgets/outcomes or authorize retries')
+    require(a['request_model_context_scorer_analysis_unchanged'] is True and a['executable_runtime_changed'] is True and a['original_freeze_rewritten'] is False,'explicit runtime deviation required')
+    require(freeze['resource_reservation_evidence']==a['old_reservation'] and released['resource_reservation_evidence_sha256']==OLD_RESERVATION_SHA and
+            released['reason']=='SIGTERM' and released['released_at']=='2026-09-13T02:57:27.891600+00:00' and a['original_signal_sender_known'] is False,'retain actual lease loss without invented cause')
+    require(a['original_frozen_source_bindings']==activation['host_source_files'] and digest(a['original_frozen_source_bindings'])==batch['package_sha256']==freeze['package_sha256'],'original frozen package differs')
+    map_guard(a['original_frozen_source_bindings'],a['effective_source_bindings'])
+    service=Path(a['effective_service']);require(service.is_absolute() and service.resolve()==service and service==Path(__file__).resolve().parent,'actual effective service path differs')
+    require(all(Path(path).parent==service for path in a['effective_source_bindings'] if Path(path).name!='host_gateway.py'),'effective source escapes declared service')
+    require(a['prefix_terminal_audit']['sha256']==PREFIX_AUDIT_SHA,'exact original prefix audit required')
+    audit=bound(a['prefix_terminal_audit'])
+    require(audit['schema']=='ns-final-consumed-prefix-terminal-audit/v1' and audit['root_reviewed'] is True and
+            audit['original_activation']==a['original_activation'] and audit['batch']==a['original_batch'] and audit['freeze']==a['original_freeze'] and
+            audit['consumed_cells']==ordered[:7] and audit['remaining_cells']==ordered[7:] and audit['terminal_count']==7 and audit['unissued_count']==25 and
+            audit['actual_crypto_reverified'] is True and audit['all_terminal_client_cleanup_verified'] is True and audit['unknown_local_termination_count']==0 and
+            audit['all37_original_source_pins_unchanged'] is True and audit['no_retries_or_regrants'] is True,'actual prefix7/remaining25 custody audit required')
+    require(len(audit['records'])==7 and [record['cell_id'] for record in audit['records']]==ordered[:7],'prefix evidence order differs')
+    for record in audit['records']:
+        for key in ('terminal','client_execution','client_result'):
+            ref=record[key];require(set(ref)=={'path','sha256'},'exact prefix evidence ref required');verify_file(ref['path'],ref['sha256'])
+    prior_bindings=bound(audit['partial_analysis_bindings'])
+    require(isinstance(prior_bindings,dict) and 0<len(prior_bindings)<=4096,'bounded original partial-analysis lineage required')
+    for path,expected in prior_bindings.items():verify_file(path,expected)
+    verify_file(audit['partial_analysis']['path'],audit['partial_analysis']['sha256'])
+    require(isinstance(a['continuation_id'],str) and 1<=len(a['continuation_id'])<=128 and a['successor_reservation']!=a['old_reservation'],'distinct continuation identity required')
+    successor=bound(a['successor_reservation']);holder_source=raw_file(a['holder_source']['path'],a['holder_source']['sha256'])
+    require(successor['schema']=='ns-final-root-resource-reservation/v1' and successor['allocation_kind']=='cooperative_operator_lease' and successor['exclusive_physical_resources'] is False and
+            successor['phase_limits']==LIMITS and successor['paid_call_ceiling']==successor['scorer_call_ceiling']==32 and successor['source_sha256']==a['holder_source']['sha256'] and
+            successor['manager_kind']=='systemd_user_service' and successor['fixture'] is False and successor['holder_pid']!=old['holder_pid'],'successor lease provenance differs')
+    launch=bound(a['holder_launch_evidence'])
+    require(launch['schema']=='ns-final-managed-lease-launch/v1' and launch['success'] is True and launch['fixture'] is False and launch['resource_reservation_evidence']==a['successor_reservation'] and
+            launch['unit_name']==successor['manager_unit'] and launch['holder_pid']==successor['holder_pid'] and launch['holder_start_ticks']==successor['holder_start_ticks'] and
+            launch['manager_owned_process_confirmed'] is True and launch['caller_session_lifetime_independent'] is True,'actual detached manager custody required')
+    after=bound(a['holder_after_caller_exit_evidence']);check=after['actual_original_resource_lease_check']
+    require(after['success'] is True and after['actual_caller_tool_exited_before_this_observation'] is True and after['launch_result']==a['holder_launch_evidence'] and
+            after['reservation']==a['successor_reservation'] and after['holder_pid']==successor['holder_pid'] and after['holder_start_ticks']==successor['holder_start_ticks'] and
+            check['held'] is True and check['evidence_sha256']==a['successor_reservation']['sha256'],'actual post-caller holder observation required')
+    # Source qualification is exact evidence, not a substitute for the actual
+    # liveness and flock checks the caller performs immediately before effects.
+    qualification=bound(a['overlay_qualification'])
+    require(qualification['success'] is True and qualification['no_scientific_calls'] is True and qualification['unchanged_lease_checks_verified'] is True and
+            qualification['effective_source_bindings']==a['effective_source_bindings'],'qualified continuation source differs')
+    if cell_id is not None:require(cell_id in a['remaining_cells'],'consumed/outside cell cannot use continuation')
+    if not accounting_only:
+        source=Path(__file__).resolve().with_name('native_final_gate.py');spec=importlib.util.spec_from_file_location('ns_continuation_lease_only',source)
+        module=importlib.util.module_from_spec(spec);sys.path.insert(0,str(source.parent))
+        try:spec.loader.exec_module(module)
+        finally:sys.path.pop(0)
+        module.resource_reservation(a['successor_reservation'])
+    return a
+
+def runtime_evidence(authority,binding):
+    return {'authority':dict(binding),'successor_resource_reservation':authority['successor_reservation'],
+            'effective_source_sha256':digest(authority['effective_source_bindings']),
+            'original_frozen_package_sha256':digest(authority['original_frozen_source_bindings']),
+            'continuation_id':authority['continuation_id']}
+
+def public_contract(authority,path,sha=None):
+    binding=path if isinstance(path,dict) and sha is None else {'path':str(path),'sha256':sha}
+    return {'schema':'ns-final-runtime-continuation-client-contract/v1','authority':binding,
+            'original_activation':authority['original_activation'],'original_batch':authority['original_batch'],'original_freeze':authority['original_freeze'],
+            'ordered_cells':authority['consumed_cells']+authority['remaining_cells'],'consumed_cells':authority['consumed_cells'],'remaining_cells':authority['remaining_cells'],
+            'original_frozen_source_bindings':authority['original_frozen_source_bindings'],'effective_source_bindings':authority['effective_source_bindings'],
+            'runtime_continuation':runtime_evidence(authority,binding)}
+
+def cell_guard(authority,binding,batch,cell_id,effective_sources):
+    require(cell_id in authority['remaining_cells'] and authority['original_batch']['sha256']==BATCH_SHA and
+            batch['freeze_binding']==authority['original_freeze'] and batch['package_sha256']==digest(authority['original_frozen_source_bindings']) and
+            effective_sources==authority['effective_source_bindings'],'wrong cell or actual runtime continuation source')
+    return runtime_evidence(authority,binding)

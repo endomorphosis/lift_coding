@@ -1,0 +1,35 @@
+{
+  "cleanup_absence": {
+    "argv": [
+      "docker",
+      "--host",
+      "unix:///var/run/docker.sock",
+      "container",
+      "inspect",
+      "791eb54ca8f81d2a01b23c1dd4c3e465521641e066d01d4337a60f10310c1c70"
+    ],
+    "cleanup": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a/http_proposer/cleanup.json",
+      "sha256": "9bbfa63834ec6a261920fe519452bdc421780489245d5703df62ed617fd339c7"
+    },
+    "exact_container_absent": true,
+    "exit_code": 1,
+    "stderr_sha256": "2e7f458e4bf78645516e815ae0507131c9e01ac83d1c4aae59b7d5937477ed77",
+    "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "elapsed_host_wall_seconds": 0.19806162093300372,
+  "error_type": "ValueError",
+  "finished_at": "2026-09-13T10:35:22.436054+00:00",
+  "new_grants": 0,
+  "new_provider_calls": 0,
+  "new_scorer_calls": 0,
+  "old_handle_observation": "45121 absent; actualphaseexecutionexit0, boundlogsandsignedresultretained; helperabsent. No phase replay.",
+  "pending": "disposition_template",
+  "prior_local_attempt": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell029_bookkeeping_takeover_v1/result.private.json",
+    "sha256": "3bd7f31f0a5ec4628374088df482697764d2ac107ce162c167e8bfed7e9800e5"
+  },
+  "schema": "ns-root-cell029-bookkeeping-takeover/v2",
+  "started_at": "2026-09-13T10:35:22.244884+00:00",
+  "success": false
+}

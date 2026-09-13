@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "c7eb236c83eb84091dfd098ae64f6e20dd2f41944f4854b120dfbe5bfa3f7775",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0",
+    "candidate_sha256": "5537744f85766a1ddcdafcef8b8a9e6356bd59c494a801c12ec60dab7c856975",
+    "cell_id": "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8",
+    "grant_sha256": "810c450b291d650035841769a9ae4f89406efb6fb3c14430838eb8c315cc6d5a",
+    "manifest_sha256": "0484175664afbf4f299b3237a64c57cf6a9290a08d72084dbe06e5f3a523a570",
+    "patch_sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "proposal_receipt_sha256": "a1885ed4ee230d170da92f5a940dccd2c61a28153ceea6b43c1fe891d0ecbf1e",
+    "provider_result_sha256": "cc58eedab8e1d5b4a38fbefccff0afb85d9937687cd6f848b4f33f830695f144",
+    "record_kind": "final",
+    "request_sha256": "fac1b7489543c1a4fc71bf8dc051e88b097ff43d9755952d759018bedacac390",
+    "reservation_sha256": "50cddb336e1255fdf35dfea8962416c93647cb04ad7c702188890063c9f52346",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "749692af806570868eb1914f6735f3dcc42db6c1c274590dc429108989d1b69e"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read this cell\u2019s exact 957-byte patch and assessed it against the public pre-fix Condition.wait, Semaphore.acquire and queue timeout implementations already read in this session. The three explicit None checks retain the existing timeout callbacks and cleanup while admitting zero-valued deadlines; the semaphore fast path is unaffected. Only the two permitted implementation files change. No tests, dependencies, scorer inputs or resource limits change. This AI review admits this exact independently generated candidate to cold validation only; it does not borrow another cell\u2019s test result, assert hidden success, constitute human annotation, or qualify adversarial scorer integrity.",
+  "reviewed_at": "2026-09-13T04:30:14.435740+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

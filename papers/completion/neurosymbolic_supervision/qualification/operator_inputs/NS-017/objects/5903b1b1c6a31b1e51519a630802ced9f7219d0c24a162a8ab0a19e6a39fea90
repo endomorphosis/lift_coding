@@ -1,0 +1,59 @@
+diff --git a/tomlkit/container.py b/tomlkit/container.py
+--- a/tomlkit/container.py
++++ b/tomlkit/container.py
+@@ -150,6 +150,16 @@
+         self.append(name, table)
+         return
+ 
++    def _renders_as_header(self, key: Key | None, value: Item) -> bool:
++        # Dotted keys normally render inline (``a.b = 1``). A nested table
++        # child makes them emit a ``[header]`` that would capture following
++        # siblings on round-trip (#550).
++        if key is None or not isinstance(value, (Table, AoT)):
++            return False
++        if isinstance(value, AoT) or not value.is_super_table() or not key.is_dotted():
++            return True
++        return any(self._renders_as_header(k, v) for k, v in value.value.body)
++
+     def _get_last_index_before_table(self) -> int:
+         last_index = -1
+         for i, (k, v) in enumerate(self._body):
+@@ -159,7 +169,7 @@
+             if isinstance(v, Whitespace) and not v.is_fixed():
+                 continue
+ 
+-            if isinstance(v, (Table, AoT)) and k is not None and not k.is_dotted():
++            if self._renders_as_header(k, v):
+                 break
+             last_index = i
+         return last_index + 1
+@@ -873,10 +883,7 @@
+         # moved past them, exactly as a value-to-table change already is.
+         reposition_dotted = dotted_to_header and any(
+             not isinstance(cur_val, (Null, Whitespace))
+-            and not (
+-                isinstance(cur_val, (Table, AoT))
+-                and (cur_key is None or not cur_key.is_dotted())
+-            )
++            and not self._renders_as_header(cur_key, cur_val)
+             for cur_key, cur_val in self._body[idx + 1 :]
+         )
+         if not isinstance(new_key, Key):
+@@ -901,14 +908,12 @@
+             self.remove(k)
+             if isinstance(value, (AoT, Table)):
+                 # New tables must appear after all entries that render inline:
+-                # plain values and dotted keys (which are super tables). Skip
+-                # those and insert before the first real ``[header]`` so the new
++                # plain values and dotted keys that stay inline. Skip those
++                # and insert before the first real ``[header]`` so the new
+                 # table cannot swallow a following sibling on round-trip.
+                 for i in range(idx, len(self._body)):
+                     cur_key, cur_val = self._body[i]
+-                    if isinstance(cur_val, (AoT, Table)) and not (
+-                        cur_key is not None and cur_key.is_dotted()
+-                    ):
++                    if self._renders_as_header(cur_key, cur_val):
+                         self._insert_at(i, new_key, value)
+                         idx = i
+                         break

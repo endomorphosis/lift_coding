@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "49deb6a9a7a7cee90d6365a6b547aaee3beba328ab76c6220532e958f6be1d22",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "e56f1e31a1a2f4ba9b3228569586f991c7790e46468f800228a90f917c8fc702",
+    "candidate_sha256": "c5d507116489bc4c0fe43cb0370014b43475e26d3ac089cc3926e973244add8c",
+    "cell_id": "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633",
+    "grant_sha256": "f4a70095793544119f4f7ec3ac6543ffefbbd071391ff56391cb3fec6d52afa7",
+    "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+    "patch_sha256": "0ac58677dc38835db5e23f0b0a697446eba1dff2a0ed5a604217c7d65cd5aa3f",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "proposal_receipt_sha256": "e684db0553f43bff66655a951c704c079b0add087a15922aaef64156f3f96b43",
+    "provider_result_sha256": "9a4a54334654f1a0fd88a9be2a8bd82b686c5b2a3386a25ea44cfb27134b6c13",
+    "record_kind": "final",
+    "request_sha256": "6cdb76dac460806f38f7675d5006249dcc9b6e35853a190abfe442e969a534fd",
+    "reservation_sha256": "5b9f3826debaf3f9f4157aaf03f8ec7e5b8ed07713c2283ec736b1f1790d543b",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read this exact1326-byte patch against the public windowed running_min/running_max source examined in this session. Minimum removal now requires new value < previous value, and maximum removal requires previous value < new value. Equal elements stay in insertion order until indexed expiry, preserving stable ties. Window expiry, yielding, unbounded paths and validation remain unchanged; only permitted recipes.py and its explanatory comments change. No test/dependency/scorer/budget edits are present. I approve this specific candidate for its own cold validation, without inferring hidden success or claiming human annotation or adversarial integrity.",
+  "reviewed_at": "2026-09-13T04:45:23.186753+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

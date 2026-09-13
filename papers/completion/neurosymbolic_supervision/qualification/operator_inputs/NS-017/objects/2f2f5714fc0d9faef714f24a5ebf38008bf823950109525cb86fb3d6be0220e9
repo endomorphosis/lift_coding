@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "2675162f0a760952a4abd73957054c1750743fac0a8d366c11a0adda9e90bd32",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "f3120eb1833b664ab0f80af01c48924f76625f14ee7aa25fada6e60d8c1212f7",
+    "candidate_sha256": "ba4014458b14ac096124b597698237653b6c8c5b0f116b8fa0374e1e2b05885e",
+    "cell_id": "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6",
+    "grant_sha256": "0776cc8eaf24146dd59e3049c027abe7fbd9c8b53b9d59263795ba1de00e7ec6",
+    "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+    "patch_sha256": "0c54351443bab2c784b10484f4147da11902dc757d5ab2ee4ec7c39b8731edee",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "proposal_receipt_sha256": "b80ef3edb1bd9d7848510184a784dc896fa83d6d3c0dbb7c95985297cb82b274",
+    "provider_result_sha256": "d0ca3635ba75dd1e14dbc4129f40ae35460b536094ddd395108feb0c98e73825",
+    "record_kind": "final",
+    "request_sha256": "768bb11ed9a7e72a9505632e1bfe686be14b4e342e9903dcaa9ce7e1e00db576",
+    "reservation_sha256": "71c5dd1de0f661868c8247477462b7033b7c649d11bcca0ed6214e05a5172bf9",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read this cell\u2019s exact1318-byte recipes.py patch and assessed it using the public pre-fix running_min/running_max and window helper source already read. The strict new<old minimum and old<new maximum comparisons retain older equal elements, and the original indexed expiry remains intact. The non-strict ordering is consistent with removal of Strictly from comments. Only the allowed implementation file changes, with tests, dependencies, scorer and budgets preserved. This is a separate AI review of this candidate for its own cold validation; it imports no other cell\u2019s score and makes no hidden-success, human-annotation or adversarial-integrity claim.",
+  "reviewed_at": "2026-09-13T04:56:13.227684+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

@@ -1,0 +1,19 @@
+{
+  "disposition_sha256": "ace805361d8990de2057daf1330fbe757cf2e1e548867582b9fb14a42a8c7bdb",
+  "finished_at": "2026-09-13T07:06:03.785632+00:00",
+  "new_grants": 0,
+  "new_provider_calls": 0,
+  "new_scorer_calls": 0,
+  "next_unconsumed_step": "continued poll25, fresh offline poll002",
+  "operator_record_sha256": "33ee5e8d15a7c139c65989112de7283e23909120f504ce5c3b4d945a2d7e09a9",
+  "pending": null,
+  "prior_local_attempt": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell025_bookkeeping_takeover_v1/result.private.json",
+    "sha256": "b06d96922acb7069dc6f70ecb0178316cd3dc66761752f6c53215936a5e19b1d"
+  },
+  "prior_refusal": "Docker container inspect reports No such container, not No such object. Prior assertion refused before operator record or disposition phase; all retained bytes unchanged.",
+  "schema": "ns-root-cell025-bookkeeping-takeover/v2",
+  "started_at": "2026-09-13T07:06:03.451194+00:00",
+  "success": true,
+  "template_sha256": "c1e832566340f38a7c8212a5f3db3deaa4ab4fbf5985de7b80924b5b9dfe6eac"
+}

@@ -1,0 +1,62 @@
+"""Root-owned cooperative allocation only; no provider/scorer/native-store calls.
+
+Keep this exact process alive until final work ends. A phase verifies PID birth,
+FD/inode and the actual kernel flock. This does not reserve exclusive physical
+CPU or guarantee memory against unrelated host processes; container cgroups
+enforce the admitted limits and each phase checks current available capacity.
+"""
+import sys
+sys.dont_write_bytecode=True
+import argparse,datetime,fcntl,hashlib,json,os,signal,time
+from pathlib import Path
+
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def require(ok,msg):
+    if not ok:raise ValueError(msg)
+def save(p,v):
+    fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+    with os.fdopen(fd,'w')as f:json.dump(v,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+    fd=os.open(p.parent,os.O_RDONLY|os.O_DIRECTORY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+def main():
+    ap=argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--directory',type=Path,required=True)
+    ap.add_argument('--boundary-evidence',type=Path,required=True)
+    ap.add_argument('--boundary-evidence-sha256',required=True)
+    ap.add_argument('--seconds',type=int,default=43200)
+    a=ap.parse_args();os.umask(0o077)
+    require(a.directory.is_absolute() and a.directory.resolve()==a.directory and not a.directory.exists(),'fresh private lease directory required')
+    require(a.boundary_evidence.is_absolute() and a.boundary_evidence.resolve()==a.boundary_evidence and sha(a.boundary_evidence)==a.boundary_evidence_sha256,'actual measured boundary binding differs')
+    require(0<a.seconds<=43200,'cooperative lease must end within12 hours')
+    a.directory.mkdir(mode=0o700);lock=a.directory/'resource.lock'
+    fd=os.open(lock,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+    fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB);info=os.fstat(fd)
+    start=datetime.datetime.now(datetime.timezone.utc);stopped=[]
+    signal.signal(signal.SIGTERM,lambda *_:stopped.append('SIGTERM'))
+    signal.signal(signal.SIGINT,lambda *_:stopped.append('SIGINT'))
+    evidence={'schema':'ns-final-root-resource-reservation/v1','allocation_kind':'cooperative_operator_lease',
+              'exclusive_physical_resources':False,'paid_call_ceiling':32,'scorer_call_ceiling':32,
+              'phase_limits':{'cpu_count':1,'memory_bytes':2147483648,'provider_pids':32,
+                              'scorer_pids':128,'proposal_seconds':600,'scorer_seconds':120},
+              'holder_pid':os.getpid(),'holder_fd':fd,
+              'holder_start_ticks':Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19],
+              'lock_file':str(lock),'lock_inode':info.st_ino,'lock_device':info.st_dev,
+              'created_at':start.isoformat(),'expires_at':(start+datetime.timedelta(seconds=a.seconds)).isoformat(),
+              'measured_boundary_evidence':{'path':str(a.boundary_evidence),'sha256':a.boundary_evidence_sha256},
+              'source_sha256':sha(__file__),'scope':'Root operator capacity allocation; exact batch32 one-use reservations and phase lock separately enforce durable effect ceilings. Real cgroups enforce per-phase caps. No claim of exclusive physical resource reservation.',
+              'provider_calls':0,'scorer_calls':0,'native_store_calls':0}
+    path=a.directory/'reservation.private.json';save(path,evidence)
+    print(json.dumps({'resource_reservation_evidence':{'path':str(path),'sha256':sha(path)},
+                      'holder_pid':os.getpid(),'holder_start_ticks':evidence['holder_start_ticks'],
+                      'expires_at':evidence['expires_at'],'actual_lock_held':True}),flush=True)
+    deadline=time.monotonic()+a.seconds
+    try:
+        while time.monotonic()<deadline and not stopped:time.sleep(min(1,max(.01,deadline-time.monotonic())))
+    finally:
+        os.close(fd)
+        save(a.directory/'released.private.json',{'resource_reservation_evidence_sha256':sha(path),
+              'released_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              'reason':stopped[0]if stopped else'lease_expired','provider_calls':0,'scorer_calls':0})
+
+if __name__=='__main__':main()

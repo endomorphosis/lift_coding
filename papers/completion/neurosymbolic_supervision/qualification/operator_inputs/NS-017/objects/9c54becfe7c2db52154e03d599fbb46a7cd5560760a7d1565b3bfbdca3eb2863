@@ -1,0 +1,30 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "ccea0f93c9dcd4ef0fd49267cb43a811f5f531a5678f41731f14d6aae03ad339",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+    "grant_sha256": "3cda104eb3f5a82a62506b3f11e70c3ff77adbcfbbc9b2b257a74581a486b81e",
+    "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+    "original_receipt_sha256": "c1dc540cdc176ad09105a1dc9854319cf4d92715706055710a2a91d3b1539735",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "provider_termination_evidence_sha256": "5b94a628b6e962504a3245b6f65a374921dad454abcaebc9248a4a11c95627fd",
+    "request_sha256": "80f5528572a5e11ac0b3d7574467c2564bbb0212a8d688e088e6b7df0ea050bd",
+    "reservation_sha256": "2124e0c8f372da1d561084118deb344c6cc63b7d76c41f60bb6e2c65f9f1bbad",
+    "service_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a"
+  },
+  "classification": "known_proposal_failure",
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T05:43:55.897691+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "I inspected the original cell20 one-POST metadata and signed termination: _ChildAbsoluteDeadline at open_entered, zero response bytes, child595.000456s. Measured child compliance fails; wrapper595.632256s and gateway595.871568s are separately preserved. No candidate was admitted and no scorer executed; unchanged source/zero patch is not success. Cleanup return0 and independently absent exact CID prove local termination. Remote work and settled charge remain unknown. Preserve this fixed failed cell, all timings and original signed evidence without retry, regrant, replacement, score, human annotation or native completion."
+}

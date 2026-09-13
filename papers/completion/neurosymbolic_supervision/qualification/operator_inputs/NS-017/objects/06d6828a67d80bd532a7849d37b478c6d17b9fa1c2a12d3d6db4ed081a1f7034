@@ -1,0 +1,33 @@
+diff --git a/tornado/locks.py b/tornado/locks.py
+--- a/tornado/locks.py
++++ b/tornado/locks.py
+@@ -122,7 +122,7 @@
+         """
+         waiter: Future[bool] = Future()
+         self._waiters.append(waiter)
+-        if timeout:
++        if timeout is not None:
+ 
+             def on_timeout() -> None:
+                 if not waiter.done():
+@@ -421,7 +421,7 @@
+             waiter.set_result(_ReleasingContextManager(self))
+         else:
+             self._waiters.append(waiter)
+-            if timeout:
++            if timeout is not None:
+ 
+                 def on_timeout() -> None:
+                     if not waiter.done():
+diff --git a/tornado/queues.py b/tornado/queues.py
+--- a/tornado/queues.py
++++ b/tornado/queues.py
+@@ -55,7 +55,7 @@
+ 
+ 
+ def _set_timeout(future: Future, timeout: None | float | datetime.timedelta) -> None:
+-    if timeout:
++    if timeout is not None:
+ 
+         def on_timeout() -> None:
+             if not future.done():

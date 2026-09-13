@@ -1,0 +1,182 @@
+"""Strict retained-final32 reduction. No cryptographic rerun or scientific effect.
+
+Missing outcomes stay in the32-cell denominator. Constructed tests call these
+pure functions; actual terminal authority remains the retained signed client.
+"""
+import sys
+sys.dont_write_bytecode=True
+import argparse,collections,datetime as dt,hashlib,importlib.util,json,math,os,random,stat
+from pathlib import Path
+HERE=Path(__file__).resolve().parent
+FINAL=HERE.parent
+POLICY_SHA='a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3'
+CLIENT=FINAL/'service_native_v2/final_service/pilot_client.py'
+CLIENT_SHA='4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84'
+UNITS=tuple('ns-hist-'+x for x in ('09-tomlkit','10-installer','11-tornado','12-more-itertools','13-charset_normalizer','14-iniconfig','15-wheel','16-jinja'))
+REPS=(104729,130363)
+METRICS=('provider_child_elapsed_seconds','http_wrapper_elapsed_seconds','gateway_proposal_elapsed_seconds','gateway_score_elapsed_seconds','grant_to_terminal_elapsed_seconds','client_poll_wall_seconds','client_poll_cpu_seconds')
+def require(ok,msg):
+    if not ok:raise ValueError(msg)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def canon(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+def read(p,bindings,expected=None):
+    p=Path(p);require(p.is_absolute()and p.resolve()==p,'canonical retained input required')
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        st=os.fstat(fd);require(stat.S_ISREG(st.st_mode)and st.st_size<=4*1024*1024,'bounded retained metadata required')
+        with os.fdopen(fd,'rb',closefd=False)as f:raw=f.read(4*1024*1024+1)
+    finally:os.close(fd)
+    h=hashlib.sha256(raw).hexdigest();require(expected is None or h==expected,'retained input hash differs: '+str(p));require(str(p)not in bindings or bindings[str(p)]==h,'input changed during reduction');bindings[str(p)]=h
+    return json.loads(raw)
+def write(p,value):
+    # Exact nonfinite input bytes remain in retained evidence; output uses null.
+    def clean(v):
+        if isinstance(v,float)and not math.isfinite(v):return None
+        if isinstance(v,dict):return {k:clean(x)for k,x in v.items()}
+        if isinstance(v,list):return [clean(x)for x in v]
+        return v
+    fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+    with os.fdopen(fd,'wb')as f:f.write(json.dumps(clean(value),indent=2,sort_keys=True,allow_nan=False).encode()+b'\n');f.flush();os.fsync(f.fileno())
+def bound(v,bindings):return read(v['path'],bindings,v['sha256'])
+def finite(v):return type(v)in(int,float)and math.isfinite(v)and v>=0
+def interval(start,end):
+    try:
+        a,b=dt.datetime.fromisoformat(start),dt.datetime.fromisoformat(end)
+        if a.tzinfo is None or b.tzinfo is None:return None
+        value=(b-a).total_seconds();return value if finite(value)else None
+    except (ValueError,TypeError):return None
+def measured(values):
+    known=[v for v in values if finite(v)]
+    return {'known_sum':sum(known)if known else None,'known_count':len(known),'missing_or_invalid_count':len(values)-len(known),'planned_count':len(values),'mean':sum(known)/len(known)if known else None,'median':quantile(sorted(known),.5)if known else None,'p95':quantile(sorted(known),.95)if known else None,'maximum':max(known)if known else None,'missing_is_zero':False}
+def quantile(values,p):
+    require(bool(values)and 0<=p<=1,'quantile domain');i=(len(values)-1)*p;lo=math.floor(i);hi=math.ceil(i);return values[lo]+(values[hi]-values[lo])*(i-lo)
+def cell_id(unit,arm,rep):return hashlib.sha256(canon({'unit':unit,'arm':arm,'cache':'local_cold','repetition':rep,'record_kind':'final'})).hexdigest()
+def validate_rows(rows):
+    require(len(rows)==32,'fixed32 denominator required');expected={(u,a,r)for u in UNITS for a in('A','B')for r in REPS}
+    require({(r['unit'],r['arm'],r['repetition'])for r in rows}==expected,'final identities missing/duplicated')
+    require(len({r['cell_id']for r in rows})==32,'duplicate final cell')
+    for r in rows:
+        require(r['cell_id']==cell_id(r['unit'],r['arm'],r['repetition']),'cell hash differs')
+        require(type(r['terminal'])is bool and type(r['useful_completion'])is bool,'typed outcome required')
+        require(r['terminal']or not r['useful_completion'],'missing cannot be useful')
+def summarize(rows):
+    validate_rows(rows);complete=all(r['terminal']for r in rows);groups=[];paired=[]
+    for u in UNITS:
+        means={};robust={};costs={}
+        for arm in('A','B'):
+            group=[r for r in rows if r['unit']==u and r['arm']==arm];require(len(group)==2,'two nested repetitions required')
+            means[arm]=sum(r['useful_completion']for r in group)/2;robust[arm]=all(r['useful_completion']for r in group)
+            costs[arm]={k:(sum(r.get(k)for r in group)/2 if all(finite(r.get(k))for r in group)else None)for k in METRICS}
+            groups.append({'unit':u,'arm':arm,'planned':2,'terminal':sum(r['terminal']for r in group),'useful':sum(r['useful_completion']for r in group),'useful_mean':means[arm],'both_repetitions_useful':robust[arm],'outcomes':dict(collections.Counter(r['outcome']for r in group)),'resource_means_complete_pair_only':costs[arm]})
+        paired.append({'unit':u,'B_minus_A_useful_mean':means['B']-means['A'],'B_minus_A_robust':int(robust['B'])-int(robust['A']),'cost_B_minus_A':{k:costs['B'][k]-costs['A'][k]if costs['A'][k]is not None and costs['B'][k]is not None else None for k in METRICS}})
+    boot=None
+    if complete:
+        rng=random.Random(20260911);draw_hash=hashlib.sha256();quality=[];robust=[];cost={k:[]for k in METRICS if all(p['cost_B_minus_A'][k]is not None for p in paired)}
+        for _ in range(20000):
+            draws=[rng.randrange(8)for _ in range(8)];draw_hash.update(bytes(draws))
+            quality.append(sum(paired[i]['B_minus_A_useful_mean']for i in draws)/8);robust.append(sum(paired[i]['B_minus_A_robust']for i in draws)/8)
+            for k,values in cost.items():values.append(sum(paired[i]['cost_B_minus_A'][k]for i in draws)/8)
+        def ci(v):
+            s=sorted(v);return {'lower':quantile(s,.025),'upper':quantile(s,.975),'degenerate':s[0]==s[-1]}
+        boot={'resamples':20000,'seed':20260911,'draws_per_resample':8,'family_order':list(UNITS),'draw_bytes_sha256':draw_hash.hexdigest(),'quality_B_minus_A':ci(quality),'robust_B_minus_A':ci(robust),'cost_B_minus_A':{k:ci(v)for k,v in cost.items()},'cost_interval_unavailable':{k:'One or more original family blocks lacks both repetitions for both arms; no zero imputation or reduced-block bootstrap.'for k in METRICS if k not in cost},'interpretation':'Conditional descriptive percentile intervals on8 convenience-selected families; degeneracy does not establish equality/safety/promotion. No replacement original D/A confirmatory gate.'}
+    return {'complete':complete,'planned_cells':32,'terminal_cells':sum(r['terminal']for r in rows),'missing_or_nonterminal':sum(not r['terminal']for r in rows),'useful_completions':sum(r['useful_completion']for r in rows),'useful_fraction_fixed32':sum(r['useful_completion']for r in rows)/32,'arm_useful_fixed16':{a:{'useful':sum(r['useful_completion']for r in rows if r['arm']==a),'planned':16}for a in('A','B')},'outcomes':dict(collections.Counter(r['outcome']for r in rows)),'groups':groups,'paired_family_rows':paired,'mean_B_minus_A_useful':sum(p['B_minus_A_useful_mean']for p in paired)/8,'bootstrap':boot,'bootstrap_pending_reason':None if complete else'No bootstrap before all32 actual terminal records; pendingfalse values are accounting only.','resource_summaries':{k:measured([r.get(k)for r in rows])for k in METRICS},'paired_cost_family_coverage':{k:{'complete_families':sum(p['cost_B_minus_A'][k]is not None for p in paired),'planned_families':8}for k in METRICS},'independent_families':8,'nested_repetitions_per_family_arm':2,'unrecruited_original_families':8}
+def original_terminal_path(private,disposition):
+    if disposition is None:return private/'result.json'
+    name={'candidate_rejected':'proposal_result.json','known_proposal_failure':'result.json','known_scorer_failure':'result.json'}[disposition['classification']]
+    require(disposition['original_filename']==name,'signed original filename differs');p=private/name;h=sha(p)
+    require(disposition['original_receipt_sha256']==h==disposition['binding']['original_receipt_sha256'],'signed original hash differs');return p
+def load_client():
+    require(sha(CLIENT)==CLIENT_SHA,'qualified final resource verifier source differs')
+    spec=importlib.util.spec_from_file_location('final_analysis_resource_contract',CLIENT);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+def pending_row(a,n,cid,bindings):
+    """Unverified pending observations retain costs but never become terminals."""
+    m=a['amendments'][cid];private=Path(a['private_root'])/cid
+    row={'number':n,'cell_id':cid,'unit':m['unit'],'arm':m['arm'],'repetition':m['repetition'],'cache':'local_cold','terminal':False,'useful_completion':False,'outcome':'issued_nonterminal'if private.exists()else'unissued_pending','observation_scope':'Pending retained metadata only; no actual terminal verification or outcome credit.'}
+    if(private/'reservation.json').exists():read(private/'reservation.json',bindings);row['outcome']='consumed_unresolved'
+    original=next((private/name for name in('result.json','proposal_result.json')if(private/name).exists()),None)
+    if original:
+        body=read(original,bindings)['receipt'];require(body['cell_id']==cid and body['batch_sha256']==a['batch']['sha256'],'pending record scope differs')
+        state=body.get('status');termination=body.get('provider_termination',{}).get('termination_proven')
+        row['outcome']='pending_candidate_review'if state=='awaiting_operator_candidate_review'else'known_failure_pending_disposition'if termination is True and state=='operator_reconciliation_required'else'pending_client_verification'if state=='completed'else'unknown_local_termination_or_reconciliation'
+        proposer=read(private/'http_proposer/result.json',bindings,body['proposal_result_sha256'])if body.get('proposal_result_sha256')else {};provider=proposer.get('provider')or{}
+        row.update(actual_provider_posts=provider.get('attempted_posts'),provider_child_elapsed_seconds=provider.get('elapsed_seconds'),http_wrapper_elapsed_seconds=proposer.get('elapsed_seconds'),gateway_proposal_elapsed_seconds=body.get('elapsed_seconds'),gateway_score_elapsed_seconds=body.get('score_elapsed_seconds'),usage=provider.get('usage'),settled_provider_cost=proposer.get('settled_provider_cost'),unknown_external_charge=body.get('unknown_external_charge'),pending_signed_metadata_path=str(original),pending_signed_metadata_sha256=sha(original))
+    return row
+def terminal_row(op,a,batch,n,cid,bindings,pc):
+    meta=a['amendments'][cid];bound(meta,bindings);private=Path(a['private_root'])/cid;tpath=op/f'cell{n:03}_terminal.private.json';t=read(tpath,bindings)
+    require(t['terminal_verified']is True and t['cell_id']==cid and t['batch_sha256']==a['batch']['sha256'],'terminal scope differs')
+    execution=bound(t['client_execution'],bindings);client=bound(t['client_result'],bindings)
+    require(execution['success']is True and execution['cleanup_exit_code']==0 and client['terminal']is True and client['batch_sha256']==a['batch']['sha256']and len(client['results'])==1,'actual terminal client absent')
+    result=client['results'][0];require(result['cell_id']==cid,'client cell differs');verified=result['result']['host_verified'];scalar=t['cold_scalar_result'];require(scalar==result['result']['cold_scalar_result'],'scalar changed')
+    require(verified['signature_and_scope_verified']is True and (verified.get('terminal_failure')is True or verified.get('admitted_historical_final')is True),'typed final client authority absent')
+    failure=t['terminal_failure'];require(failure==verified.get('terminal_failure',False),'failure status changed')
+    disposition=read(private/'disposition.json',bindings,scalar['failure_disposition_sha256'])['receipt']if failure else None
+    original_path=original_terminal_path(private,disposition);original=read(original_path,bindings);body=original['receipt'];require(body==verified['receipt'],'retained signed body differs from verified client body')
+    require(body['schema']=='operator-final-receipt/v1'and body['record_kind']=='final'and body['final_scientific_run']is True and body['inert_qualification']is False,'nonfinal/inert receipt cannot be evidence')
+    require(body['cell_id']==cid and body['batch_sha256']==a['batch']['sha256']and body['amendment_sha256']==meta['sha256']and body['final_freeze_sha256']==a['freeze']['sha256'],'signed final bindings differ')
+    require(body['unit']==meta['unit']and body['arm']==meta['arm']and body['repetition']==meta['repetition']and body['cache']=='local_cold','cell identity differs')
+    require(body['provider_termination']['termination_proven']is True,'unknown termination is not terminal')
+    grant=read(private/'grant.json',bindings,body['grant_sha256']);require(grant['schema']=='operator-historical-final-grant/v1'and grant['batch_binding']['cell_id']==cid and grant['batch_binding']['sha256']==a['batch']['sha256'],'grant differs')
+    require(grant['profile']==body['profile']and grant['request_binding']==body['request_binding'],'profile/request changed')
+    profile_commitment=batch['units'][meta['unit']]['arms'][meta['arm']]
+    require(hashlib.sha256(canon(grant['profile'])).hexdigest()==profile_commitment['profile_sha256']and hashlib.sha256(canon(grant['request_binding'])).hexdigest()==profile_commitment['request_binding_sha256'],'grant is outside frozen16 request/profile commitments')
+    require(grant['native_head']==batch['native_head']and hashlib.sha256(canon(grant['source_bindings'])).hexdigest()==batch['package_sha256'],'grant native/service source changed')
+    proposer=read(private/'http_proposer/result.json',bindings,body['proposal_result_sha256'])if body.get('proposal_result_sha256')else {};provider=proposer.get('provider')or{}
+    cleanup=read(private/'http_proposer/cleanup.json',bindings,body['provider_termination']['cleanup_sha256']);require(cleanup['returncode']==0 and cleanup['container']==body['provider_termination']['container_id'],'provider cleanup differs')
+    compliance=pc.resource_compliance(body,scoring=not failure or disposition['classification']=='known_scorer_failure')
+    require(body.get('proposal_resource_compliance')==pc.resource_compliance(body,scoring=False),'signed proposal resource summary differs')
+    if not failure:
+        require(verified['resource_compliance']==body['resource_compliance']==compliance,'signed final resource summary differs')
+        useful=scalar.get('candidate_valid')is True and scalar.get('cold_full_validation')is True and verified.get('useful_completion')is True
+        require(useful==(verified['useful_completion']is True),'client/scalar useful discrepancy')
+        require(not useful or compliance['compliant'],'overrun cannot be useful')
+        raw_class=(body.get('scorer')or{}).get('scorer',{}).get('classification')
+        outcome='full_cold_pass'if useful else 'scorer_resource_unqualified'if not compliance['compliant']else raw_class or'cold_validation_failed'
+    else:
+        require(disposition==verified['failure_disposition']and disposition['success_credit']is False and disposition['retry_allowed']is False,'disposition credit differs');useful=False
+        outcome=('proposal_child_deadline'if provider.get('absolute_timeout')is True else'candidate_parser_failure'if proposer.get('parse_error')else'proposal_resource_unqualified'if disposition['classification']=='candidate_rejected'and not pc.resource_compliance(body,scoring=False)['compliant']else disposition['classification'])
+    reviews={}
+    for name in('operator_review.json','operator_disposition.json'):
+        if(private/name).exists():reviews[name]=read(private/name,bindings)
+    expiry_delay=interval(grant.get('expires_at'),reviews.get('operator_review.json',{}).get('reviewed_at'))
+    expired_review=expiry_delay is not None
+    if failure and disposition['classification']=='candidate_rejected'and expired_review and outcome=='candidate_rejected':outcome='expired_candidate_review'
+    polls=[]
+    for path in sorted(op.glob(f'cell{n:03}_client_poll[0-9][0-9][0-9]/execution.private.json')):
+        e=read(path,bindings);rpath=path.parent/'work/result.json';c=read(rpath,bindings,e['result_sha256'])if e.get('result_sha256')else{}
+        polls.append({'path':str(path),'sha256':bindings[str(path)],'success':e.get('success'),'wall_seconds':e.get('wall_seconds'),'cpu_seconds':c.get('cpu_seconds')})
+    def pollsum(key):return sum(p[key]for p in polls)if polls and all(finite(p.get(key))for p in polls)else None
+    posts=provider.get('attempted_posts');require(posts is None or(type(posts)is int and 0<=posts<=1),'more than one POST cannot be silently pooled')
+    return {'number':n,'cell_id':cid,'unit':meta['unit'],'arm':meta['arm'],'repetition':meta['repetition'],'cache':'local_cold','terminal':True,'outcome':outcome,'disposition_class':None if disposition is None else disposition['classification'],'candidate_review_after_grant_expiry':expired_review,'retained_operator_accounting_statement':None if disposition is None else disposition.get('operator_record',{}).get('statement'),'useful_completion':useful,'raw_scorer_success':body.get('scorer',{}).get('success'),'raw_cold_classification':body.get('scorer',{}).get('scorer',{}).get('classification'),'resource_compliance':compliance,'original_receipt_filename':original_path.name,'actual_provider_posts':posts,'provider_status':provider.get('status'),'http_status':provider.get('http_status'),'served_model':provider.get('served_model'),'served_revision':provider.get('served_revision'),'parse_error':proposer.get('parse_error'),'gateway_proposal_elapsed_seconds':body.get('elapsed_seconds'),'http_wrapper_elapsed_seconds':proposer.get('elapsed_seconds'),'provider_child_elapsed_seconds':provider.get('elapsed_seconds'),'gateway_score_elapsed_seconds':body.get('score_elapsed_seconds'),'gateway_score_elapsed_scope':body.get('score_elapsed_seconds_scope'),'grant_to_terminal_elapsed_seconds':interval(grant.get('created_at'),t.get('at')),'end_to_end_scope':'grant creation through actual terminal client observation, including queue/operator review; excludes earlier setup','actual_cold_completed':scalar.get('cold_full_validation')is True,'scorer_reservation_exists':(private/'score_reservation.json').exists(),'visible_passed':scalar.get('visible_passed'),'visible_collected':scalar.get('visible_collected'),'hidden_passed':scalar.get('hidden_passed'),'hidden_collected':scalar.get('hidden_collected'),'usage':provider.get('usage'),'settled_provider_cost':proposer.get('settled_provider_cost'),'unknown_external_charge':body.get('unknown_external_charge'),'client_polls':polls,'client_poll_wall_seconds':pollsum('wall_seconds'),'client_poll_cpu_seconds':pollsum('cpu_seconds'),'operator_review_effort_cost':None,'operator_review_effort_unknown_reason':'Retained timestamps bound elapsed waiting/review interval, not AI reasoning CPU or settled spend.','signed_terminal_path':str(tpath),'signed_terminal_sha256':sha(tpath),'original_signed_receipt_sha256':sha(original_path),'human_annotation':False}
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--activation',type=Path,required=True);ap.add_argument('--activation-sha256',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--allow-partial',action='store_true');args=ap.parse_args();os.umask(0o077)
+    bindings={str(Path(__file__).resolve()):sha(__file__),str(CLIENT):CLIENT_SHA};pc=load_client();a=read(args.activation,bindings,args.activation_sha256);op=args.activation.parent
+    require(a['schema']=='ns028-root-final-operator-activation/v1','final activation required');batch=bound(a['batch'],bindings);freeze=bound(a['freeze'],bindings);policy=read(FINAL/'analysis_policy_v2.proposed.private.json',bindings,POLICY_SHA)
+    require(batch['analysis_policy_binding']['sha256']==POLICY_SHA==freeze['analysis_policy_sha256'],'frozen analysis policy differs');require(a['ordered_cells']==batch['planned_cells']==batch['enabled_cells']and len(a['ordered_cells'])==32,'frozen32 order changed')
+    prepared=read(FINAL/'installed_host_stage_v1/installed_package.private.json',bindings,'6d8f8842bf0207aa30b4711591c652127981c90d00f1e1758e2e6cd2750c5038');inputs=bound(prepared['prepared_inputs'],bindings);lineage={}
+    for unit in UNITS:
+        lineage[unit]={}
+        for arm in('A','B'):
+            v=inputs['bindings'][unit][arm];p=inputs['profiles'][unit][arm];b=batch['units'][unit]['arms'][arm]
+            require(hashlib.sha256(canon(v)).hexdigest()==b['request_binding_sha256']and hashlib.sha256(canon(p)).hexdigest()==b['profile_sha256'],'request/profile lineage differs')
+            lineage[unit][arm]={'request_sha256':v['request_sha256'],'request_bytes':v['request_bytes'],'request_binding_sha256':b['request_binding_sha256'],'context_binding_sha256':v['context_binding_sha256'],'profile_sha256':b['profile_sha256'],'public_context_preparation_sha256':v['public_context_preparation_sha256']}
+    rows=[];pending=False
+    for n,cid in enumerate(a['ordered_cells'],1):
+        if not(op/f'cell{n:03}_terminal.private.json').exists():
+            require(args.allow_partial,'actual terminal missing for fixedcell'+str(n));pending=True;m=a['amendments'][cid]
+            rows.append(pending_row(a,n,cid,bindings))
+        else:
+            require(not pending,'non-prefix terminal sequence');rows.append(terminal_row(op,a,batch,n,cid,bindings,pc))
+    summary=summarize(rows);terminal=[r for r in rows if r['terminal']]
+    costs={}
+    for name in('prompt_tokens','completion_tokens','total_tokens','cost_in_usd_ticks'):
+        costs[name]=measured([(r.get('usage')or{}).get(name)for r in rows]);costs[name]['settled_charge']=False
+    ledgers=[('final_native_preparation',FINAL/'actual_final_context_qualification.private.json'),('final_public_baseline_preparation',FINAL.parents[2]/'ns_final_public_baseline_compatibility_v1/final128_joined_compatibility.private.json'),('final_saved_metadata_candidate',FINAL/'actual_input_stage_v1/execution.private.json'),('final_saved_metadata_installation',FINAL/'installed_host_stage_v1/execution.private.json'),('prior_developmental_cohort',FINAL.parent/'actual_pilot_v3/cohort_completion_v1/package.private.json')]
+    retained=[]
+    for label,p in ledgers:
+        read(p,bindings);retained.append({'scope':label,'path':str(p),'sha256':bindings[str(p)],'pooled_into_final_outcomes':False,'summed_with_nested_phase_costs':False})
+    prior=read(FINAL.parent/'installed_package.private.json',bindings,'4b6f9e6d85b225e87a2276002e6b0f12b4c797b8eed7184566318b5b90d9352d')
+    bound(prior['recovery'],bindings);retained.append({'scope':'prior_protocol_versions_and_diagnostic_recovery','path':prior['recovery']['path'],'sha256':prior['recovery']['sha256'],'pooled_into_final_outcomes':False,'summed_with_nested_phase_costs':False})
+    summary.update(schema='ns-final32-retained-evidence-analysis/v1',analyzed_at=dt.datetime.now(dt.timezone.utc).isoformat(),rows=rows,batch_sha256=a['batch']['sha256'],activation={'path':str(args.activation),'sha256':args.activation_sha256},freeze_sha256=a['freeze']['sha256'],analysis_policy_sha256=POLICY_SHA,request_profile_lineage=lineage,prior_and_preparation_cost_ledgers=retained,observed_api_usage=costs,actual_provider_posts=measured([r.get('actual_provider_posts')for r in rows]),actual_cold_completed=sum(r.get('actual_cold_completed')is True for r in terminal),scorer_reservations_observed=sum(r.get('scorer_reservation_exists')is True for r in terminal),boundary_unqualified_cells=[r['cell_id']for r in terminal if not r['resource_compliance']['compliant']],unknown_external_charge_cells=sum(r.get('unknown_external_charge')is True for r in terminal),cost_scope='All clock scopes are separate and nested, never added together. Setup ledgers are charged once; prior protocol/pilot outcomes never pool into final. Missing/unknown measurements and settlement remain unavailable, not zero.',verification_scope='Rechecks hashes and exact retained typed-client receipt/scalar/resource equality. Does not rerun cryptography/native/model/scorer; no constructed control becomes actual evidence.',comparison_scope=policy['comparison_scope'],statistical_scope=policy['analysis_unit'],new_provider_calls=0,new_scorer_calls=0,new_native_calls=0,native_task_completed=False)
+    require(not args.output.exists()and args.output.is_absolute()and args.output.resolve()==args.output,'fresh canonical output required');args.output.mkdir(mode=0o700);write(args.output/'analysis.private.json',summary);write(args.output/'bindings.private.json',bindings)
+    print(json.dumps({'analysis_sha256':sha(args.output/'analysis.private.json'),'bindings_sha256':sha(args.output/'bindings.private.json'),'complete':summary['complete'],'terminal_cells':summary['terminal_cells']}))
+if __name__=='__main__':main()

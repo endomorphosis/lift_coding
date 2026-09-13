@@ -1,0 +1,978 @@
+{
+  "actual_complete32": true,
+  "admission_file": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_export_admission.private.json",
+    "sha256": "242d4023a32952dea5bc74b6d416cda2ac271c522ccdb31868e1c8cb7139bd15"
+  },
+  "analysis": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/analysis/analysis.private.json",
+    "sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766"
+  },
+  "anonymous_release_admitted": false,
+  "builder_sha256": "1dfad27e6c55e98fe6ca5460e5a2b18a8ddf62de2d617fa9c5a8ddff0741ac08",
+  "cells": {
+    "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e/candidate_binding.json",
+        "sha256": "f58fb8e6ebd8cc7550d41052801346c1856d636a18edf3d4ef26d6231aab3902"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0/candidate_binding.json",
+        "sha256": "c42e439266b36ce6e6b02e15d77c6bfbd1230a7fc8a165469216a9e4842ac134"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064/candidate_binding.json",
+        "sha256": "6764b02fec5e73386425dac19ac09eadc0641f7e8df2cc4b6ee9751d7514133d"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/charset_normalizer/md.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064/changed/src/charset_normalizer/md.py",
+          "sha256": "a479bd075bb42adf0e13af9f081fcbd41ca0d28bc27ceb4a5d2f18209c581c25"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064/candidate.patch",
+        "sha256": "b426c7fda51f62df4d8f75f4f643cba922bce83e2d9413d5c33fd93c9d2a1eb1"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/candidate_binding.json",
+        "sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "tornado/locks.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/changed/tornado/locks.py",
+          "sha256": "a8a0ac4dbcf2f8cbbcbcad1ad3129b33cfd55ab07cf0b0987f94d531eb47164f"
+        },
+        "tornado/queues.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/changed/tornado/queues.py",
+          "sha256": "37d4de3a7efac85e172933170a7177c6be4d44230970cb7c8eb22da79f0ea0bb"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/candidate.patch",
+        "sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/candidate_binding.json",
+        "sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "tornado/locks.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/changed/tornado/locks.py",
+          "sha256": "a8a0ac4dbcf2f8cbbcbcad1ad3129b33cfd55ab07cf0b0987f94d531eb47164f"
+        },
+        "tornado/queues.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/changed/tornado/queues.py",
+          "sha256": "37d4de3a7efac85e172933170a7177c6be4d44230970cb7c8eb22da79f0ea0bb"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/candidate.patch",
+        "sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925/candidate_binding.json",
+        "sha256": "e69ab2cb54b6890b1c7d9c917bd9c14fe357a4380ee346d1d40b6552ddfb0764"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/wheel/_commands/convert.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925/changed/src/wheel/_commands/convert.py",
+          "sha256": "028d3820517b1b2ea542f7a3ecb924a89c9fad868470b5dda23ff3ddc7428106"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925/candidate.patch",
+        "sha256": "471e0440b6df0ab0e9b29385cf7601b1a114c86ef00531fb991459eddb02065c"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe/candidate_binding.json",
+        "sha256": "ac73380978204acf00ec312d004336ddedb846725ee2f7733fe08b23baa0c815"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f/candidate_binding.json",
+        "sha256": "28f1c158aabef682851aa2c2b82db7443b13303da0aed1ae95123985092a1efb"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/wheel/_commands/convert.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f/changed/src/wheel/_commands/convert.py",
+          "sha256": "79a7ec151e3fa880202197e0e87088e27fd606cf0d47c4f853bf4d6c654ac515"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f/candidate.patch",
+        "sha256": "26fa53fa7955bf43684ed6c08fd660da10bdf59040fb0ef23d8217346cd97563"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c/candidate_binding.json",
+        "sha256": "f3120eb1833b664ab0f80af01c48924f76625f14ee7aa25fada6e60d8c1212f7"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "more_itertools/recipes.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c/changed/more_itertools/recipes.py",
+          "sha256": "44797611e5c2dc131c17857481467308c94f6795cf1fa5d8745a1166af9dac54"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c/candidate.patch",
+        "sha256": "0c54351443bab2c784b10484f4147da11902dc757d5ab2ee4ec7c39b8731edee"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/candidate_binding.json",
+        "sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "tornado/locks.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/changed/tornado/locks.py",
+          "sha256": "a8a0ac4dbcf2f8cbbcbcad1ad3129b33cfd55ab07cf0b0987f94d531eb47164f"
+        },
+        "tornado/queues.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/changed/tornado/queues.py",
+          "sha256": "37d4de3a7efac85e172933170a7177c6be4d44230970cb7c8eb22da79f0ea0bb"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/candidate.patch",
+        "sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/candidate_binding.json",
+        "sha256": "df62acc421441d81518c83202e73272bff323d4a01e02d4d523dddf6023032a8"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/iniconfig/__init__.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/changed/src/iniconfig/__init__.py",
+          "sha256": "89798deccb8131dab4195b81415b02a2f81f8e78b2004dbe8dfae8fbd65867bd"
+        },
+        "src/iniconfig/_parse.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/changed/src/iniconfig/_parse.py",
+          "sha256": "ef3f822be332ddcc3bb2402feabb8980d0582ea5ae8dbbd4d83bf35a58754af8"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/candidate.patch",
+        "sha256": "d3635640de8732a07e8cb890b24f4918b55fd803ff7737d9f0555d91a356d466"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633/candidate_binding.json",
+        "sha256": "e56f1e31a1a2f4ba9b3228569586f991c7790e46468f800228a90f917c8fc702"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "more_itertools/recipes.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633/changed/more_itertools/recipes.py",
+          "sha256": "2d78cc9091b628646511a9b412a0f9e5ae26a8e084f93c5e886ad2c5dc218ac5"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633/candidate.patch",
+        "sha256": "0ac58677dc38835db5e23f0b0a697446eba1dff2a0ed5a604217c7d65cd5aa3f"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/candidate_binding.json",
+        "sha256": "9373025002fad6c3519c4c502351e79ea370d359da141b1286c8b36dd1cf3edb"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/installer/destinations.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/changed/src/installer/destinations.py",
+          "sha256": "8f6d53c4a6b7956d2ad70fbf02e5c850a18e510b5f38a1eb1d3ae453adea69b6"
+        },
+        "src/installer/utils.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/changed/src/installer/utils.py",
+          "sha256": "ae5643d127b1e92f5f618cfe0f1c9276d0d3573ae802eced60f63b94597f12c9"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/candidate.patch",
+        "sha256": "c9d33a47b6ab144ef114cbf56d22870b38afb3379641f4836aa5a75457182dfa"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca/candidate_binding.json",
+        "sha256": "ac73380978204acf00ec312d004336ddedb846725ee2f7733fe08b23baa0c815"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6/candidate_binding.json",
+        "sha256": "f3120eb1833b664ab0f80af01c48924f76625f14ee7aa25fada6e60d8c1212f7"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "more_itertools/recipes.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6/changed/more_itertools/recipes.py",
+          "sha256": "44797611e5c2dc131c17857481467308c94f6795cf1fa5d8745a1166af9dac54"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6/candidate.patch",
+        "sha256": "0c54351443bab2c784b10484f4147da11902dc757d5ab2ee4ec7c39b8731edee"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/candidate_binding.json",
+        "sha256": "8af5c20df3f2311b4057ec14bf440ea5ca7c594238180fb639661a76f3dd33ab"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/iniconfig/__init__.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/changed/src/iniconfig/__init__.py",
+          "sha256": "a821dc53bd8c07cdf8ca08ed10121d7d0eec99f95d97b70ffb201575ea5c7253"
+        },
+        "src/iniconfig/_parse.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/changed/src/iniconfig/_parse.py",
+          "sha256": "ed5486ef516b79cb4ae0518e1c44410db4aa9a382b49082a80a1a6cec1372096"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/candidate.patch",
+        "sha256": "80446728286b8eb785c6323b170fc27293ed489be930c9196ffddc664f6a3c2f"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67/candidate_binding.json",
+        "sha256": "c42e439266b36ce6e6b02e15d77c6bfbd1230a7fc8a165469216a9e4842ac134"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64/candidate_binding.json",
+        "sha256": "f58fb8e6ebd8cc7550d41052801346c1856d636a18edf3d4ef26d6231aab3902"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442/candidate_binding.json",
+        "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d/candidate_binding.json",
+        "sha256": "f58fb8e6ebd8cc7550d41052801346c1856d636a18edf3d4ef26d6231aab3902"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2/candidate_binding.json",
+        "sha256": "8e03e1aed3deb8e8c1e43da892cd3e078d08c912ac0412fe8f4b6795379f4145"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08/candidate_binding.json",
+        "sha256": "67e8df4dedf15d5c716cbb09b8bec030a0f5c6580ea65c3f192eb75ba4ee9609"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "more_itertools/recipes.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08/changed/more_itertools/recipes.py",
+          "sha256": "e340e78656beaeb168e551cb343737d1d94f84d2301548421154727c1779098c"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08/candidate.patch",
+        "sha256": "1b6bc4c18587ab5daea74127f40b28c5637ebac9ed3ab1c51d76323ea511f2ab"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148/candidate_binding.json",
+        "sha256": "0bf0b69d865ad05992b9009e7b263161e8b16f2710fb5b2d4833e7243d5fe299"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "tomlkit/container.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148/changed/tomlkit/container.py",
+          "sha256": "56339e058bcb7536fe4fd3d2043efe0f63b9a94224fdf9f8abb150c872769c6c"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148/candidate.patch",
+        "sha256": "5903b1b1c6a31b1e51519a630802ced9f7219d0c24a162a8ab0a19e6a39fea90"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b/candidate_binding.json",
+        "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a/candidate_binding.json",
+        "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0/candidate_binding.json",
+        "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2/candidate_binding.json",
+        "sha256": "c9107c89ea31786ca3fcac84cef35ea16f9b386b82e490f7495264439b52b0ff"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/candidate_binding.json",
+        "sha256": "c9107c89ea31786ca3fcac84cef35ea16f9b386b82e490f7495264439b52b0ff"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    },
+    "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68": {
+      "candidate_present": false,
+      "reason": "no_candidate_in_original_signed_receipt"
+    },
+    "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0/candidate_binding.json",
+        "sha256": "c1c2cdea8d0706df18695b7ab8ead34cb4081c2cb411b23e1e07bf7b43a05494"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "tomlkit/container.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0/changed/tomlkit/container.py",
+          "sha256": "07fac8c2e345e61f736624e73b8625b777c67c34e1cba4c5ce9776d91f377f4e"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0/candidate.patch",
+        "sha256": "1a5ad27fe9481a45bad59b688459369d56f65e36950e782766b42498213a1730"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/candidate_binding.json",
+        "sha256": "937e373652a0c30c0db68ef0f45b633554e00a4df8fc1daf3856f581b998e62b"
+      },
+      "candidate_present": true,
+      "changed_files": {
+        "src/iniconfig/__init__.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/changed/src/iniconfig/__init__.py",
+          "sha256": "4993cfcaf73381e87e78ec1ad47dc2efcd1fa42db9b342d8a760b86867101018"
+        },
+        "src/iniconfig/_parse.py": {
+          "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/changed/src/iniconfig/_parse.py",
+          "sha256": "93af27812a01bc6c6ec322bb9a038ea7e9f73f6188a0c2b93c0c77d57a6c9fd1"
+        }
+      },
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/candidate.patch",
+        "sha256": "3380a31657416b0b33ed11e0214024d42c912996b1ef9c924aa32ba16683d922"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "actual_retained_ai_candidate_review"
+    },
+    "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f": {
+      "candidate_binding": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f/candidate_binding.json",
+        "sha256": "306072aad5c8a459266cd586e954625acbb6dbd487fc9f45936cf36a60a1ba71"
+      },
+      "candidate_binding_metadata_origin": "derived_zero_change_after_failed_proposal",
+      "candidate_present": true,
+      "candidate_semantics": "Signed unchanged baseline inventory after failed proposal; no returned model candidate.",
+      "changed_files": {},
+      "patch": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_payloads_v1/candidates/fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f/candidate.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_edit_payloads_only": true,
+      "review_scope": "no_candidate_review_before_original_proposal_failure"
+    }
+  },
+  "exporter_sha256": "83ac49c3d79bc99ad73adb6defdc24c3866837eedc02a9c3bc462fc5139bb5bb",
+  "files": {
+    "candidates/018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e/candidate_binding.json": {
+      "bytes": 18544,
+      "sha256": "f58fb8e6ebd8cc7550d41052801346c1856d636a18edf3d4ef26d6231aab3902"
+    },
+    "candidates/09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0/candidate_binding.json": {
+      "bytes": 15297,
+      "sha256": "c42e439266b36ce6e6b02e15d77c6bfbd1230a7fc8a165469216a9e4842ac134"
+    },
+    "candidates/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064/candidate.patch": {
+      "bytes": 634,
+      "sha256": "b426c7fda51f62df4d8f75f4f643cba922bce83e2d9413d5c33fd93c9d2a1eb1"
+    },
+    "candidates/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064/candidate_binding.json": {
+      "bytes": 14294,
+      "sha256": "6764b02fec5e73386425dac19ac09eadc0641f7e8df2cc4b6ee9751d7514133d"
+    },
+    "candidates/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064/changed/src/charset_normalizer/md.py": {
+      "bytes": 35319,
+      "sha256": "a479bd075bb42adf0e13af9f081fcbd41ca0d28bc27ceb4a5d2f18209c581c25"
+    },
+    "candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/candidate.patch": {
+      "bytes": 957,
+      "sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034"
+    },
+    "candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/candidate_binding.json": {
+      "bytes": 45958,
+      "sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0"
+    },
+    "candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/changed/tornado/locks.py": {
+      "bytes": 17121,
+      "sha256": "a8a0ac4dbcf2f8cbbcbcad1ad3129b33cfd55ab07cf0b0987f94d531eb47164f"
+    },
+    "candidates/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0/changed/tornado/queues.py": {
+      "bytes": 12430,
+      "sha256": "37d4de3a7efac85e172933170a7177c6be4d44230970cb7c8eb22da79f0ea0bb"
+    },
+    "candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/candidate.patch": {
+      "bytes": 957,
+      "sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034"
+    },
+    "candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/candidate_binding.json": {
+      "bytes": 45958,
+      "sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0"
+    },
+    "candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/changed/tornado/locks.py": {
+      "bytes": 17121,
+      "sha256": "a8a0ac4dbcf2f8cbbcbcad1ad3129b33cfd55ab07cf0b0987f94d531eb47164f"
+    },
+    "candidates/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8/changed/tornado/queues.py": {
+      "bytes": 12430,
+      "sha256": "37d4de3a7efac85e172933170a7177c6be4d44230970cb7c8eb22da79f0ea0bb"
+    },
+    "candidates/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925/candidate.patch": {
+      "bytes": 1305,
+      "sha256": "471e0440b6df0ab0e9b29385cf7601b1a114c86ef00531fb991459eddb02065c"
+    },
+    "candidates/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925/candidate_binding.json": {
+      "bytes": 7755,
+      "sha256": "e69ab2cb54b6890b1c7d9c917bd9c14fe357a4380ee346d1d40b6552ddfb0764"
+    },
+    "candidates/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925/changed/src/wheel/_commands/convert.py": {
+      "bytes": 13635,
+      "sha256": "028d3820517b1b2ea542f7a3ecb924a89c9fad868470b5dda23ff3ddc7428106"
+    },
+    "candidates/2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe/candidate_binding.json": {
+      "bytes": 10701,
+      "sha256": "ac73380978204acf00ec312d004336ddedb846725ee2f7733fe08b23baa0c815"
+    },
+    "candidates/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f/candidate.patch": {
+      "bytes": 708,
+      "sha256": "26fa53fa7955bf43684ed6c08fd660da10bdf59040fb0ef23d8217346cd97563"
+    },
+    "candidates/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f/candidate_binding.json": {
+      "bytes": 7754,
+      "sha256": "28f1c158aabef682851aa2c2b82db7443b13303da0aed1ae95123985092a1efb"
+    },
+    "candidates/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f/changed/src/wheel/_commands/convert.py": {
+      "bytes": 13201,
+      "sha256": "79a7ec151e3fa880202197e0e87088e27fd606cf0d47c4f853bf4d6c654ac515"
+    },
+    "candidates/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c/candidate.patch": {
+      "bytes": 1318,
+      "sha256": "0c54351443bab2c784b10484f4147da11902dc757d5ab2ee4ec7c39b8731edee"
+    },
+    "candidates/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c/candidate_binding.json": {
+      "bytes": 5618,
+      "sha256": "f3120eb1833b664ab0f80af01c48924f76625f14ee7aa25fada6e60d8c1212f7"
+    },
+    "candidates/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c/changed/more_itertools/recipes.py": {
+      "bytes": 46083,
+      "sha256": "44797611e5c2dc131c17857481467308c94f6795cf1fa5d8745a1166af9dac54"
+    },
+    "candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/candidate.patch": {
+      "bytes": 957,
+      "sha256": "06d6828a67d80bd532a7849d37b478c6d17b9fa1c2a12d3d6db4ed081a1f7034"
+    },
+    "candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/candidate_binding.json": {
+      "bytes": 45958,
+      "sha256": "43c55104602549ab4cb4646eb1e324a9ce158d0d64cd344095a54150fc429ad0"
+    },
+    "candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/changed/tornado/locks.py": {
+      "bytes": 17121,
+      "sha256": "a8a0ac4dbcf2f8cbbcbcad1ad3129b33cfd55ab07cf0b0987f94d531eb47164f"
+    },
+    "candidates/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2/changed/tornado/queues.py": {
+      "bytes": 12430,
+      "sha256": "37d4de3a7efac85e172933170a7177c6be4d44230970cb7c8eb22da79f0ea0bb"
+    },
+    "candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/candidate.patch": {
+      "bytes": 1146,
+      "sha256": "d3635640de8732a07e8cb890b24f4918b55fd803ff7737d9f0555d91a356d466"
+    },
+    "candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/candidate_binding.json": {
+      "bytes": 2422,
+      "sha256": "df62acc421441d81518c83202e73272bff323d4a01e02d4d523dddf6023032a8"
+    },
+    "candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/changed/src/iniconfig/__init__.py": {
+      "bytes": 5507,
+      "sha256": "89798deccb8131dab4195b81415b02a2f81f8e78b2004dbe8dfae8fbd65867bd"
+    },
+    "candidates/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85/changed/src/iniconfig/_parse.py": {
+      "bytes": 2559,
+      "sha256": "ef3f822be332ddcc3bb2402feabb8980d0582ea5ae8dbbd4d83bf35a58754af8"
+    },
+    "candidates/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633/candidate.patch": {
+      "bytes": 1326,
+      "sha256": "0ac58677dc38835db5e23f0b0a697446eba1dff2a0ed5a604217c7d65cd5aa3f"
+    },
+    "candidates/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633/candidate_binding.json": {
+      "bytes": 5618,
+      "sha256": "e56f1e31a1a2f4ba9b3228569586f991c7790e46468f800228a90f917c8fc702"
+    },
+    "candidates/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633/changed/more_itertools/recipes.py": {
+      "bytes": 46091,
+      "sha256": "2d78cc9091b628646511a9b412a0f9e5ae26a8e084f93c5e886ad2c5dc218ac5"
+    },
+    "candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/candidate.patch": {
+      "bytes": 3102,
+      "sha256": "c9d33a47b6ab144ef114cbf56d22870b38afb3379641f4836aa5a75457182dfa"
+    },
+    "candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/candidate_binding.json": {
+      "bytes": 8284,
+      "sha256": "9373025002fad6c3519c4c502351e79ea370d359da141b1286c8b36dd1cf3edb"
+    },
+    "candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/changed/src/installer/destinations.py": {
+      "bytes": 10297,
+      "sha256": "8f6d53c4a6b7956d2ad70fbf02e5c850a18e510b5f38a1eb1d3ae453adea69b6"
+    },
+    "candidates/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1/changed/src/installer/utils.py": {
+      "bytes": 8453,
+      "sha256": "ae5643d127b1e92f5f618cfe0f1c9276d0d3573ae802eced60f63b94597f12c9"
+    },
+    "candidates/5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca/candidate_binding.json": {
+      "bytes": 10701,
+      "sha256": "ac73380978204acf00ec312d004336ddedb846725ee2f7733fe08b23baa0c815"
+    },
+    "candidates/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6/candidate.patch": {
+      "bytes": 1318,
+      "sha256": "0c54351443bab2c784b10484f4147da11902dc757d5ab2ee4ec7c39b8731edee"
+    },
+    "candidates/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6/candidate_binding.json": {
+      "bytes": 5618,
+      "sha256": "f3120eb1833b664ab0f80af01c48924f76625f14ee7aa25fada6e60d8c1212f7"
+    },
+    "candidates/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6/changed/more_itertools/recipes.py": {
+      "bytes": 46083,
+      "sha256": "44797611e5c2dc131c17857481467308c94f6795cf1fa5d8745a1166af9dac54"
+    },
+    "candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/candidate.patch": {
+      "bytes": 1632,
+      "sha256": "80446728286b8eb785c6323b170fc27293ed489be930c9196ffddc664f6a3c2f"
+    },
+    "candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/candidate_binding.json": {
+      "bytes": 2422,
+      "sha256": "8af5c20df3f2311b4057ec14bf440ea5ca7c594238180fb639661a76f3dd33ab"
+    },
+    "candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/changed/src/iniconfig/__init__.py": {
+      "bytes": 5538,
+      "sha256": "a821dc53bd8c07cdf8ca08ed10121d7d0eec99f95d97b70ffb201575ea5c7253"
+    },
+    "candidates/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b/changed/src/iniconfig/_parse.py": {
+      "bytes": 2549,
+      "sha256": "ed5486ef516b79cb4ae0518e1c44410db4aa9a382b49082a80a1a6cec1372096"
+    },
+    "candidates/7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67/candidate_binding.json": {
+      "bytes": 15297,
+      "sha256": "c42e439266b36ce6e6b02e15d77c6bfbd1230a7fc8a165469216a9e4842ac134"
+    },
+    "candidates/877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64/candidate_binding.json": {
+      "bytes": 18544,
+      "sha256": "f58fb8e6ebd8cc7550d41052801346c1856d636a18edf3d4ef26d6231aab3902"
+    },
+    "candidates/8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442/candidate_binding.json": {
+      "bytes": 21963,
+      "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+    },
+    "candidates/90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d/candidate_binding.json": {
+      "bytes": 18544,
+      "sha256": "f58fb8e6ebd8cc7550d41052801346c1856d636a18edf3d4ef26d6231aab3902"
+    },
+    "candidates/94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2/candidate_binding.json": {
+      "bytes": 3079,
+      "sha256": "8e03e1aed3deb8e8c1e43da892cd3e078d08c912ac0412fe8f4b6795379f4145"
+    },
+    "candidates/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08/candidate.patch": {
+      "bytes": 1326,
+      "sha256": "1b6bc4c18587ab5daea74127f40b28c5637ebac9ed3ab1c51d76323ea511f2ab"
+    },
+    "candidates/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08/candidate_binding.json": {
+      "bytes": 5618,
+      "sha256": "67e8df4dedf15d5c716cbb09b8bec030a0f5c6580ea65c3f192eb75ba4ee9609"
+    },
+    "candidates/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08/changed/more_itertools/recipes.py": {
+      "bytes": 46091,
+      "sha256": "e340e78656beaeb168e551cb343737d1d94f84d2301548421154727c1779098c"
+    },
+    "candidates/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148/candidate.patch": {
+      "bytes": 2757,
+      "sha256": "5903b1b1c6a31b1e51519a630802ced9f7219d0c24a162a8ab0a19e6a39fea90"
+    },
+    "candidates/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148/candidate_binding.json": {
+      "bytes": 11857,
+      "sha256": "0bf0b69d865ad05992b9009e7b263161e8b16f2710fb5b2d4833e7243d5fe299"
+    },
+    "candidates/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148/changed/tomlkit/container.py": {
+      "bytes": 48909,
+      "sha256": "56339e058bcb7536fe4fd3d2043efe0f63b9a94224fdf9f8abb150c872769c6c"
+    },
+    "candidates/afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b/candidate_binding.json": {
+      "bytes": 21963,
+      "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+    },
+    "candidates/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a/candidate_binding.json": {
+      "bytes": 21963,
+      "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+    },
+    "candidates/babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0/candidate_binding.json": {
+      "bytes": 21963,
+      "sha256": "702e8242604509d34dfd7bb31b653a8778f43b6ec583da2c0578152f04a29464"
+    },
+    "candidates/ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2/candidate_binding.json": {
+      "bytes": 10024,
+      "sha256": "c9107c89ea31786ca3fcac84cef35ea16f9b386b82e490f7495264439b52b0ff"
+    },
+    "candidates/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/candidate_binding.json": {
+      "bytes": 10024,
+      "sha256": "c9107c89ea31786ca3fcac84cef35ea16f9b386b82e490f7495264439b52b0ff"
+    },
+    "candidates/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0/candidate.patch": {
+      "bytes": 1174,
+      "sha256": "1a5ad27fe9481a45bad59b688459369d56f65e36950e782766b42498213a1730"
+    },
+    "candidates/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0/candidate_binding.json": {
+      "bytes": 11857,
+      "sha256": "c1c2cdea8d0706df18695b7ab8ead34cb4081c2cb411b23e1e07bf7b43a05494"
+    },
+    "candidates/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0/changed/tomlkit/container.py": {
+      "bytes": 49079,
+      "sha256": "07fac8c2e345e61f736624e73b8625b777c67c34e1cba4c5ce9776d91f377f4e"
+    },
+    "candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/candidate.patch": {
+      "bytes": 1318,
+      "sha256": "3380a31657416b0b33ed11e0214024d42c912996b1ef9c924aa32ba16683d922"
+    },
+    "candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/candidate_binding.json": {
+      "bytes": 2422,
+      "sha256": "937e373652a0c30c0db68ef0f45b633554e00a4df8fc1daf3856f581b998e62b"
+    },
+    "candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/changed/src/iniconfig/__init__.py": {
+      "bytes": 5555,
+      "sha256": "4993cfcaf73381e87e78ec1ad47dc2efcd1fa42db9b342d8a760b86867101018"
+    },
+    "candidates/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7/changed/src/iniconfig/_parse.py": {
+      "bytes": 2558,
+      "sha256": "93af27812a01bc6c6ec322bb9a038ea7e9f73f6188a0c2b93c0c77d57a6c9fd1"
+    },
+    "candidates/fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f/candidate.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidates/fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f/candidate_binding.json": {
+      "bytes": 59703,
+      "sha256": "306072aad5c8a459266cd586e954625acbb6dbd487fc9f45936cf36a60a1ba71"
+    }
+  },
+  "new_native_calls": 0,
+  "new_provider_calls": 0,
+  "new_scorer_calls": 0,
+  "ordered_cells": [
+    "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0",
+    "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148",
+    "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67",
+    "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0",
+    "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1",
+    "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe",
+    "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+    "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca",
+    "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0",
+    "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2",
+    "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8",
+    "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f",
+    "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08",
+    "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633",
+    "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c",
+    "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6",
+    "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64",
+    "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d",
+    "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064",
+    "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+    "f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7",
+    "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2",
+    "6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b",
+    "3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85",
+    "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2",
+    "1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925",
+    "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+    "2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f",
+    "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a",
+    "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b",
+    "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0",
+    "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442"
+  ],
+  "payload_bytes": 1005818,
+  "public_edit_payloads_only": true,
+  "schema": "ns-final32-reviewed-candidate-payloads/v1",
+  "source_allowlist": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/candidate_source_allowlist_v1/candidate_source_allowlist.private.json",
+    "sha256": "7f43e08850a36cf0f41e0f92d2ed5933b19a9915052598be70de9f7a40996170"
+  }
+}

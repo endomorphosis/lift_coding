@@ -1,0 +1,30 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "83041501bfc15aec32e8da8a358041df7ab9d6b46631a99aea3f4d8efd35587f",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2",
+    "grant_sha256": "7a2271bf5b9983bd8d2f19cd956e36773c384d2fe5141cf585476f54fedbda2e",
+    "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+    "original_receipt_sha256": "9d66e1bf29a4db9d12994fa4548986b4fc1647e4162fa8a51634e5b60eea1277",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "provider_termination_evidence_sha256": "295108aa94a4a97edb6f44963ed2552c604cb0038d59a25acb29d8ef84911ddc",
+    "request_sha256": "06024d67732a725cd1b4cea230fbe1d525170d1fd16580b8dda7974ec26bb6a8",
+    "reservation_sha256": "6d4854fa5bcff7372225c615c9c1cc7c23b2fb4e9d318460fc3936f3d6390b08",
+    "service_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33"
+  },
+  "classification": "known_proposal_failure",
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T06:04:47.053338+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "I inspected cell22 original one-POST metadata: _ChildAbsoluteDeadline at open_entered, zero response bytes, child595.002391s. The measured child boundary is exceeded; wrapper596.512050s and signed gateway596.773871s remain separate and below their600s bounds. No candidate was admitted and no scorer ran; unchanged-tree and zero-patch metadata are not success. Signed termination evidence, cleanup0 and independent exact-CID absence prove local termination. Remote execution and settled charge remain unknown. Preserve this original fixed failure without retry, regrant, replacement, score, human annotation or native-completion claim."
+}

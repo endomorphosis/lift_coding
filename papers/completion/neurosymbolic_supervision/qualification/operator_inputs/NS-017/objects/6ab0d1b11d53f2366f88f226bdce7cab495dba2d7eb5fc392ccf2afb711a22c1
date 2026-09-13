@@ -1,0 +1,25 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "799de1a6528b18ffb058fed3c20cd9aef51b9fbe7366622be5039d76ea3e5a71",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+    "grant_sha256": "5743f2319f11cda9ff0674d27626cb316a7441e71b5484c391d4d337901d5160",
+    "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+    "original_receipt_sha256": "3a92311c444df0ac298cd1ae3a074f67b5f2807cbcb9f0293020ed4c63a8c094",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "provider_termination_evidence_sha256": "3fc8dc98e2814e9030942baa3ea53732a15a13c626d78a049fef85d17c8c1e07",
+    "request_sha256": "3352fc2e6865fc4d579538e0a85f0dd2084c2e51c20f9fdff7f67664b7548179",
+    "reservation_sha256": "a16905f5bf917ee4a901d18e3a3778cf4f02b614f0ed44795f1f45fff27c6b60",
+    "service_source_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e"
+  },
+  "classification": "known_proposal_failure",
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T03:08:50.347002+00:00",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "Cell007 consumed exactly one fixed Grok4.6 POST, received no response, and reached the child absolute deadline at595.0004390469985 seconds. Its original signed gateway failure separately records loss of root cooperative lease PID2886108; the retained lease release records SIGTERM during this case, with unknown sender. Exact provider container cleanup returned0 and independent inspection confirms absence. No candidate or scorer exists. Preserve both original failures, the consumed cell and unknown remote usage/charge; allow terminal failure accounting only, with no retry, regrant, score, success credit, lease replacement or next-cell dispatch. Root evidence audit566ef4977edcdb343a3a186f4304599871d5fd2f01e6b5ee54fd00f5521a2f9c."
+}

@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "b869bc33ac3b35d7a8eab1b175612312f23eb280e4bab7b23d91d37326ac9a7b",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "6764b02fec5e73386425dac19ac09eadc0641f7e8df2cc4b6ee9751d7514133d",
+    "candidate_sha256": "0610a2417d016989b9db9a0e134c87204332baa8b190c4d1a57d182c88f4c342",
+    "cell_id": "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064",
+    "grant_sha256": "71195796b4d56d6ca5ea508992815dc9870ce38d0884239435e297820551bcc9",
+    "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+    "patch_sha256": "b426c7fda51f62df4d8f75f4f643cba922bce83e2d9413d5c33fd93c9d2a1eb1",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "proposal_receipt_sha256": "7926930d644ed75707b6de5dfdb334f904f2e3ab060e1009ea62d8f025f900a4",
+    "provider_result_sha256": "219c8903f1fe7872c5bc2a971eb3c870b235eb7216ff5681cca28f98b1c4a740",
+    "record_kind": "final",
+    "request_sha256": "5185bd8cd0b1f778388326632c0b1beff03b521955a52d2dde797d5626c5f7c4",
+    "reservation_sha256": "e919b852f52ef3b34140571ab0133f81eebefc267b5f2ddf009ddef7d73e48db",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read this exact634-byte md.py patch, the public issue, and the full TooManySymbolOrPunctuationPlugin feed/reset/ratio context. It excludes ASCII single and double quotes from the punctuation/symbol increment while preserving character counts, last-character state, thresholds, other symbols and all other detectors. This is a plausible scoped reduction of structural JSON quote penalties, not proof that encoding selection or all inputs are correct; cold validation must measure that. Only allowed md.py changes, with no tests, dependencies, resources or scorer changes. This candidate-specific AI source review authorizes its own cold score, not human annotation or adversarial scorer qualification.",
+  "reviewed_at": "2026-09-13T05:31:23.782104+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

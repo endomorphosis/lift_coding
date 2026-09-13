@@ -1,0 +1,40 @@
+diff --git a/src/iniconfig/__init__.py b/src/iniconfig/__init__.py
+--- a/src/iniconfig/__init__.py
++++ b/src/iniconfig/__init__.py
+@@ -124,6 +124,14 @@
+                 assert value is not None
+                 sections_data[section][name] = value
+ 
++    @classmethod
++    def parse(
++        cls,
++        data: str,
++        path: str | os.PathLike[str] = "<iniconfig>",
++    ) -> "IniConfig":
++        return cls(path, data)
++
+     def lineof(self, section: str, name: str | None = None) -> int | None:
+         lineno = self._sources.get((section, name))
+         return None if lineno is None else lineno + 1
+diff --git a/src/iniconfig/_parse.py b/src/iniconfig/_parse.py
+--- a/src/iniconfig/_parse.py
++++ b/src/iniconfig/_parse.py
+@@ -69,10 +69,16 @@
+                 name, value = line.split(":", 1)
+             except ValueError:
+                 raise ParseError(path, lineno, f"unexpected line: {line!r}") from None
+-        return name.strip(), value.strip()
++        return name.strip(), _stripcomment(value.strip())
+     # continuation
+     else:
+-        return None, line.strip()
++        return None, _stripcomment(line.strip())
++
++
++def _stripcomment(line: str) -> str:
++    for c in COMMENTCHARS:
++        line = line.split(c)[0]
++    return line.rstrip()
+ 
+ 
+ def iscommentline(line: str) -> bool:

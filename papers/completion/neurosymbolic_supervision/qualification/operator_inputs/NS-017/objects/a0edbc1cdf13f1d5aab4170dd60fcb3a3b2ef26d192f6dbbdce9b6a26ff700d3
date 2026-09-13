@@ -1,0 +1,85 @@
+{
+  "analysis_unit": "Whole historical family;2repetitions are nested within each arm. No32-independent-repository inference and no16-family denominator.",
+  "arms": [
+    "A",
+    "B"
+  ],
+  "bootstrap": {
+    "degeneracy": "An all-equal bootstrap is not evidence of exact equality or universal safety. With only8 convenience-selected families, intervals do not establish population-level promotion.",
+    "interval": "Descriptive conditional95percent percentile interval",
+    "quantile": "linear interpolation at index (B-1)*p for p=0.025 and0.975",
+    "random_generator": "Python3.12 random.Random (MT19937), exactly8 randrange(8) draws per resample",
+    "resamples": 20000,
+    "resampling_unit": "8 whole family blocks with replacement, shared across arms and repetitions",
+    "seed": 20260911
+  },
+  "cache": "local_cold",
+  "comparison_scope": "Retain the original prespecified B/A descriptive comparison only. Original D/A primary quality/efficiency promotion comparisons are withdrawn with unsupported C/D/reuse/publication factors; no replacement confirmatory promotion claim.",
+  "cost_rules": [
+    "Preserve actual/estimated/unavailable status, units, raw measurement origin and unknown reasons. API usage/ticks are not settlement.",
+    "Record generation child, HTTP wrapper, gateway and score intervals separately as nested scopes; do not sum overlapping stages.",
+    "Record actual per-cell end-to-end elapsed including operator review/queue waits separately from component times; do not treat human/AI review, setup, authoring, failures or cleanup as free.",
+    "Charge actual final native/public preparation once with explicit sharing across its two repetitions; do not claim warm-cache/proof-reuse efficiency.",
+    "Retain all prior pilot/protocol failures and setup costs separately; do not pool their outcomes into final estimates.",
+    "Explicitly disclose every observed profile/timer boundary overshoot and every unknown remote charge; no blanket full-boundary compliance claim."
+  ],
+  "final_dispatch_admitted": false,
+  "final_scorer_pid_amendment": {
+    "all_8_families_both_AB_arms": true,
+    "cpu_count": 1,
+    "failed_32PID_preparation_preserved": true,
+    "memory_bytes": 2147483648,
+    "native_preparation_pids": 32,
+    "provider_pids": 32,
+    "reason": "Unchanged original more-itertools public concurrency tests require50/100 threads; original128PID baseline restored before final outcomes",
+    "scorer_child_seconds": 115,
+    "scorer_host_seconds": 120,
+    "scorer_pids": 128
+  },
+  "first_final_attempt_started": false,
+  "fixed_denominator": 32,
+  "frozen_before_final_outcomes": true,
+  "historical_original_family_target": 16,
+  "independent_family_count": 8,
+  "measured_resource_success_rule": {
+    "after_score": "retain all raw signed pass/fail observations, but any measured scorer overrun has no useful-success credit",
+    "before_score": "generation overrun/missing time remains unscored candidate rejection; no grant replacement",
+    "clock_scope": "separate nested measured intervals; never summed as disjoint; preparation/operator review/client verification separately costed",
+    "gateway_proposal_seconds_max": 600,
+    "http_wrapper_seconds_max": 600,
+    "missing_or_nonfinite_measurement": "unqualified, never zero",
+    "pilot20_precedent": "child585.125 compliant, wrapper618.500 and gateway635.578 beyond600; old failure remains unchanged",
+    "postprocessing_exclusion_within_measured_phase": false,
+    "provider_child_seconds_max": 595,
+    "scorer_invocation_seconds_max": 120
+  },
+  "missing_cost_is_zero": false,
+  "nested_repetitions": [
+    104729,
+    130363
+  ],
+  "original_policy": {
+    "path": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+    "sha256": "e1e3403feafa0eb5c8bbda4b95e14e3415a92d2036182725784f30788d4e5e54"
+  },
+  "provider_calls_authorized": 0,
+  "schema": "ns028-final-AB-analysis-policy/v1",
+  "scorer_calls_authorized": 0,
+  "status": "prospective_policy_for_root_review_before_final_outcomes",
+  "summaries": [
+    "Per-cell raw outcome and distinct failure classes.",
+    "Per-family arm useful mean across the two fixed repetitions.",
+    "Paired family-mean B-minus-A differences and their mean across all8 families.",
+    "Robust family success requires both repetitions useful; reported descriptively, not as a passed original D/A promotion gate.",
+    "Raw resource distributions, measured totals and paired family summaries where both measured values exist; report missing counts explicitly and do not silently drop them from outcome denominators."
+  ],
+  "unrecruited_original_families": 8,
+  "unsupported_endpoints": [
+    "C/D routing/governance comparative benefits",
+    "proof/test reuse or local_warm effects",
+    "certificate/publication comparative benefits",
+    "adversarial scorer-integrity qualification",
+    "independent human semantic annotation"
+  ],
+  "useful_outcome": "True only for an actual sealed candidate admitted under its one-use final grant and independently cold-scored with all nonempty public and hidden checks passing. Failed, refused, unknown, unscored, expired or missing cells remain false in the32-cell useful-completion denominator and retain distinct reason/status labels."
+}

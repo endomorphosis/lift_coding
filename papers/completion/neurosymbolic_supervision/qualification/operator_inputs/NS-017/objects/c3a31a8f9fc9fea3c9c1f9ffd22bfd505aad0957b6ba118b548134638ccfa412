@@ -1,0 +1,41 @@
+{
+  "at": "2026-09-13T03:28:09.422338+00:00",
+  "success": true,
+  "actual_caller_tool_exited_before_this_observation": true,
+  "launch_result": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/actual_managed_launch_v1/result.private.json",
+    "sha256": "79795b4b2e7257bc03e05199430539f00a7866ce814659c56956839bc2ac40cb"
+  },
+  "reservation": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+    "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+  },
+  "manager_properties": {
+    "MainPID": "1490550",
+    "Result": "success",
+    "ExecMainStatus": "0",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/ns-final-lease-ab32-continuation-v1.service",
+    "MemoryPeak": "7598080",
+    "CPUUsageNSec": "38471000",
+    "TasksCurrent": "1",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "holder_pid": 1490550,
+  "holder_start_ticks": "67976842",
+  "actual_original_resource_lease_check": {
+    "held": true,
+    "holder_pid": 1490550,
+    "holder_start_ticks": "67976842",
+    "lock_inode": 78778347,
+    "evidence_sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4",
+    "available_memory_bytes": 103420133376,
+    "allocation_kind": "cooperative_operator_lease",
+    "exclusive_physical_resources": false
+  },
+  "expires_at": "2026-09-13T15:27:42.268272+00:00",
+  "provider_calls": 0,
+  "scorer_calls": 0,
+  "new_grants": 0
+}

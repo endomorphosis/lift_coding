@@ -1,0 +1,27 @@
+"""Actual native AST identity: lossless non-Unicode Python string literals."""
+import ast,base64,json,unittest,importlib.util,os
+from pathlib import Path
+from ipfs_datasets_py.logic.software_contracts.semantic_index import identity as I
+from ipfs_datasets_py.logic.software_contracts.content import canonical_dag_json_bytes,cid_for_structured
+class Normalization(unittest.TestCase):
+ def test_plain_strings_unchanged(self):
+  for value in ['plain','café','emoji '+chr(0x1f642),'literal \\ud800','\x00']:
+   self.assertEqual(I.normalize_ast(value),value)
+ def test_surrogate_string_lossless(self):
+  for value in [chr(0xd800),chr(0xdfff),'a'+chr(0xd800)+'b',chr(0xd800)+chr(0xdc00)]:
+   result=I.normalize_ast(value);self.assertEqual(result['$semantic_literal'],'str-surrogatepass')
+   self.assertEqual(base64.b64decode(result['utf8_base64']).decode('utf8','surrogatepass'),value)
+   canonical_dag_json_bytes(result)
+ def test_distinct_python_values_stay_distinct(self):
+  vals=[chr(0xd800),chr(0xd801),'\\ud800',chr(0x10000),chr(0xd800)+chr(0xdc00)]
+  self.assertEqual(len({cid_for_structured(I.normalize_ast(ast.Constant(value=v)))for v in vals}),len(vals))
+ def test_ordinary_literal_ast_structure_unchanged(self):
+  self.assertEqual(I.normalize_ast(ast.Constant(value='café')),{'_type':'Constant','value':'café','kind':None})
+  self.assertEqual(I.normalize_ast(ast.Constant(value=42)),{'_type':'Constant','value':42,'kind':None})
+ def test_strict_content_validator_not_relaxed(self):
+  with self.assertRaises(UnicodeEncodeError):canonical_dag_json_bytes({'value':chr(0xd800)})
+ def test_actual_python_frontend_public_literal(self):
+  from ipfs_datasets_py.logic.software_contracts.semantic_index.python_analysis import analyze_python_source
+  result=analyze_python_source("def f():\n return '\\ud800'\n",'sample.py','constructed-surrogate-normalization')
+  self.assertTrue(result.symbols)
+if __name__=='__main__':unittest.main()

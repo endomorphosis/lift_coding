@@ -1,0 +1,40 @@
+"""Post32 additive operator wall-cost custody; no new experiment or policy."""
+import argparse,hashlib,json,math,os,re
+from pathlib import Path
+import continuation_io as CI
+PHASES=('prepare','build_offer','execute','review-template','score','disposition_template','dispose_failed')
+SCOPE='Elapsed wall sampled by the phase helper after operator-invoked subprocess completion and stdout/stderr flush/fsync; includes gateway signing and added continuation checks after signed gateway clock sampling. Separate nested scope, not added to signed provider/wrapper/gateway/scorer/client clocks and not a new compliance threshold.'
+def require(ok,m):
+ if not ok:raise ValueError(m)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def reference(p):return {'path':str(p),'sha256':sha(p)}
+def measured_record(raw,ref,phase):
+ value=raw.get('elapsed_host_wall_seconds')
+ valid=type(value)in(int,float)and math.isfinite(value)and value>=0
+ return {'phase':phase,'execution':ref,'elapsed_host_wall_seconds':value if valid else None,'measured':valid,'missing_reason':None if valid else 'Field absent or invalid; original record retained without zero imputation.','exit_code':raw.get('exit_code'),'automatic_retry':raw.get('automatic_retry'),'scope':SCOPE,'summed_with_nested_clocks':False,'changes_signed_compliance':False}
+def collect(operator,rows,bindings):
+ result={}
+ for row in rows:
+  tag=f"cell{row['number']:03}";records={}
+  expected=[(phase,operator/(tag+'_'+phase)/'execution.private.json')for phase in PHASES]
+  # Only exact helper phase metadata names; no stdout/stderr or private payload reads.
+  expected += [(p.parent.name[len(tag)+1:],p)for p in sorted(operator.glob(tag+'_poll_command[0-9][0-9][0-9]/execution.private.json'))]
+  for phase,p in expected:
+   if p.exists():
+    ref=reference(p);raw=CI.bound(ref,bindings);records[phase]=measured_record(raw,ref,phase)
+   else:records[phase]={'phase':phase,'execution':None,'elapsed_host_wall_seconds':None,'measured':False,'missing_reason':'No retained invocation record observed for this phase; no zero cost or extra trial inferred.','scope':SCOPE,'summed_with_nested_clocks':False,'changes_signed_compliance':False}
+  result[row['cell_id']]={'number':row['number'],'runtime_source_provenance':row['runtime_source_provenance'],'records':records}
+ return result
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--activation',type=Path,required=True);p.add_argument('--activation-sha256',required=True);p.add_argument('--analysis',type=Path,required=True);p.add_argument('--analysis-sha256',required=True);p.add_argument('--continuation-contract',type=Path,required=True);p.add_argument('--continuation-contract-sha256',required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+ refs={};ar={'path':str(a.activation),'sha256':a.activation_sha256};anr={'path':str(a.analysis),'sha256':a.analysis_sha256};cr={'path':str(a.continuation_contract),'sha256':a.continuation_contract_sha256}
+ require(a.activation_sha256=='a79cb456abf20fef034e70261509075c181540ce13aa1a588fced63cae934b05','original activation required')
+ activation=CI.bound(ar,refs);an=CI.bound(anr,refs);ctx=CI.load_context(cr,refs)
+ require(an['complete']is True and an['planned_cells']==an['terminal_cells']==32 and an['missing_or_nonterminal']==0 and an['activation']==ar and an['runtime_continuation']==ctx['summary'],'strict actual32 continuation analysis required')
+ require([r['cell_id']for r in an['rows']]==activation['ordered_cells']and all(r['terminal']is True and r['number']==i for i,r in enumerate(an['rows'],1)),'exact fixed terminal order required')
+ cells=collect(a.activation.parent,an['rows'],refs)
+ out={'schema':'ns-final32-operator-host-phase-costs/v1','actual_complete32':True,'analysis':anr,'activation':ar,'continuation_contract':cr,'runtime_continuation':ctx['summary'],'ordered_cells':activation['ordered_cells'],'cells':cells,'source_sha256':sha(__file__),'input_bindings':refs,'scope':SCOPE,'all_signed_clocks_unchanged':True,'frozen_analysis_policy_changed':False,'new_provider_calls':0,'new_scorer_calls':0,'new_native_calls':0}
+ require(a.output.is_absolute()and a.output.resolve()==a.output and not a.output.exists(),'fresh canonical output required')
+ with os.fdopen(os.open(a.output,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600),'w')as f:json.dump(out,f,sort_keys=True,indent=2,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
+ print(json.dumps(reference(a.output)))
+if __name__=='__main__':main()

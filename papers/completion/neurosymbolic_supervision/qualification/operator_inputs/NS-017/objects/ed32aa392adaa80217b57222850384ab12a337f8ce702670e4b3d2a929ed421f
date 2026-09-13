@@ -1,0 +1,129 @@
+"""Offline operator invocation of the typed NS028 final client."""
+import sys
+sys.dont_write_bytecode = True
+import hashlib, importlib.util, json, os, pathlib, resource, stat, subprocess, time
+
+P = pathlib.Path
+started = time.monotonic()
+cpu = time.process_time()
+observed = []
+continuation_checks = {}
+continuation_client = None
+
+def require(ok, reason):
+    if not ok:
+        raise ValueError(reason)
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def read(path):
+    path = P(path)
+    require(path.is_absolute() and path.resolve() == path, 'noncanonical input')
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        require(stat.S_ISREG(os.fstat(fd).st_mode) and os.fstat(fd).st_size <= 1048576, 'input must be regular and at most1MiB')
+        with os.fdopen(fd, 'rb', closefd=False) as f:
+            return f.read(1048577)
+    finally:
+        os.close(fd)
+
+def save(path, value):
+    raw = json.dumps(value, sort_keys=True, indent=2, allow_nan=False).encode()+b'\n'
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'wb') as f:
+        f.write(raw); f.flush(); os.fsync(f.fileno())
+
+def audit(event, args):
+    if event == 'subprocess.Popen':
+        argv = args[1]
+        require(isinstance(argv, (tuple, list)) and list(argv[:3]) == ['/usr/bin/openssl', 'pkeyutl', '-verify'], 'only pinned client public-signature verification may spawn')
+        observed.append([str(x) for x in argv])
+    if event in ('socket.connect', 'socket.connect_ex', 'socket.bind'):
+        raise ValueError('offline client cannot open a network endpoint')
+
+def bound_cell(module, root, cell, batch_sha256):
+    binding = module.offer_binding(root, cell['unit'], cell['arm'], 'local_cold', cell['repetition'], 'final')
+    if binding is not None:
+        require(binding.get('batch_sha256') == batch_sha256, 'offered cell belongs to another batch')
+    return binding
+
+def dispatch_bound(module, root, cell, batch_sha256):
+    # Independently check continued provenance before the unchanged client can write a typed request.
+    binding = bound_cell(module, root, cell, batch_sha256)
+    if binding is not None:
+        continuation_checks[cell['cell_id']] = continuation_client.verify_public_cell(root, binding)
+    return module.dispatch(root, {'task_id': cell['unit'], 'arm': cell['arm'], 'cache': 'local_cold', 'repetition': cell['repetition'], 'record_kind': 'final'})
+
+def main():
+    global continuation_client
+    os.umask(0o077)
+    cfg = json.loads(read('/client/invocation.json'))
+    contract = cfg['runtime_continuation_contract']
+    require(digest(json.dumps(contract,sort_keys=True,separators=(',',':')).encode()) == cfg['runtime_continuation_contract_sha256'], 'public continuation contract changed')
+    extra = P('/client/continuation_client.py')
+    require(digest(read(extra)) == cfg['runtime_continuation_verifier_sha256'], 'actual additional continuation verifier changed')
+    spec = importlib.util.spec_from_file_location('additional_continuation_verifier', extra)
+    continuation_client = importlib.util.module_from_spec(spec); spec.loader.exec_module(continuation_client)
+    continuation_client.configure_continuation(contract)
+    root = P(cfg['worker_root'])
+    require(root.is_absolute() and root.resolve() == root, 'worker path differs')
+    for rel, expected in cfg['source5'].items():
+        require(digest(read(root/rel)) == expected, 'reviewed source changed: '+rel)
+    profile_path = root/'papers/completion/neurosymbolic_supervision/experiments/production_profile.json'
+    require(digest(read(profile_path)) == cfg['profile_sha256'], 'profile preimage changed')
+    service = root/'papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service'
+    spec = importlib.util.spec_from_file_location('reviewed_operator_worker_adapter', service/'worker_adapter.py')
+    module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+    client = module.client(root)
+    require(P('/usr/bin/openssl').is_file() and os.access('/usr/bin/openssl', os.X_OK), 'public signature verifier unavailable')
+    sys.addaudithook(audit)
+    require(len(cfg['ordered_cells']) == 32 and len({x['cell_id'] for x in cfg['ordered_cells']}) == 32, 'fixed batch differs')
+    for cell in cfg['ordered_cells']:
+        require(module.cell_id(cell['unit'], cell['arm'], cell['repetition']) == cell['cell_id'], 'fixed cell ID differs')
+    results = []
+    selected = None
+    if cfg['mode'] == 'qualify_no_offer':
+        require(module.configuration(root)['offer_drop_sha256'] is None, 'qualification cannot use activated offer')
+        for cell in cfg['ordered_cells']:
+            value = dispatch_bound(module, root, cell, cfg['batch_sha256'])
+            require(value['schema'] == 'paper-ns-host-handoff-pending/v1' and value['terminal'] is False, 'missing offer must remain pending')
+            results.append({'cell_id': cell['cell_id'], 'result': value})
+        require(not list((service/'host_handoff').iterdir()), 'no-offer client wrote queue')
+    else:
+        index = cfg['cell_index']
+        require(type(index) is int and 0 <= index < 32, 'invalid ordered cell index')
+        for prior in cfg['ordered_cells'][:index]:
+            binding = bound_cell(module, root, prior, cfg['batch_sha256'])
+            if binding is None:
+                save('/client-work/result.json', {'schema': 'ns028-operator-client-observation/v1', 'terminal': False, 'status': 'pending_prior_cell', 'blocked_by': prior['cell_id'], 'task_completion_admitted': False})
+                return
+            continuation_checks[prior['cell_id']] = continuation_client.verify_public_cell(root, binding)
+            value = module.verify(root, binding)
+            if value['schema'] == 'paper-ns-host-handoff-pending/v1':
+                save('/client-work/result.json', {'schema': 'ns028-operator-client-observation/v1', 'terminal': False, 'status': 'pending_prior_cell', 'blocked_by': prior['cell_id'], 'task_completion_admitted': False})
+                return
+            require(value.get('signature_and_scope_verified') is True and (value.get('terminal_failure') is True or value.get('admitted_historical_final') is True), 'prior fixed cell has no signed terminal accounting')
+            continuation_checks[prior['cell_id']] = continuation_client.verify_public_cell(root, binding, require_terminal=True)
+        selected = cfg['ordered_cells'][index]
+        value = dispatch_bound(module, root, selected, cfg['batch_sha256'])
+        if value['schema'] != 'paper-ns-host-handoff-pending/v1':
+            binding = bound_cell(module, root, selected, cfg['batch_sha256'])
+            verified = module.verify(root, binding)
+            require(verified == value['host_verified'], 'independent typed-client reread changed')
+            continuation_checks[selected['cell_id']] = continuation_client.verify_public_cell(root, binding, require_terminal=True)
+            value['cold_scalar_result'] = module.oracle(verified)
+            queue, _ = client.selected(root, binding)
+            export = P('/client-work/public_evidence'); export.mkdir(mode=0o700)
+            files = {}
+            for name in ('offer.json', 'request.json', 'response.json', 'disposition.json', 'proposal.json'):
+                if (queue/name).exists():
+                    raw = client.read(queue/name); fd = os.open(export/name, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o400)
+                    with os.fdopen(fd, 'wb') as f: f.write(raw); f.flush(); os.fsync(f.fileno())
+                    files[name] = {'sha256': digest(raw), 'bytes': len(raw)}
+            save(export/'manifest.json', {'schema': 'ns028-operator-public-client-export/v1', 'files': files, 'cell_id': selected['cell_id'], 'batch_sha256': cfg['batch_sha256'], 'source5': cfg['source5'], 'profile_sha256': cfg['profile_sha256'], 'authoring_claim_completion_admitted': False, 'runtime_continuation_contract_sha256':cfg['runtime_continuation_contract_sha256'], 'runtime_continuation_verifier_sha256':cfg['runtime_continuation_verifier_sha256'], 'runtime_continuation_checks':continuation_checks})
+        results.append({'cell_id': selected['cell_id'], 'result': value})
+    save('/client-work/result.json', {'schema': 'ns028-operator-client-observation/v1', 'mode': cfg['mode'], 'operator_driver': True, 'authoring_claim_execution': False, 'task_completion_admitted': False, 'batch_sha256': cfg['batch_sha256'], 'source5': cfg['source5'], 'profile_sha256': cfg['profile_sha256'], 'results': results, 'terminal': bool(selected and results[-1]['result'].get('host_verified')), 'provider_or_scorer_calls_by_client': 0, 'runtime_continuation_contract_sha256':cfg['runtime_continuation_contract_sha256'], 'runtime_continuation_verifier_sha256':cfg['runtime_continuation_verifier_sha256'], 'runtime_continuation_checks':continuation_checks, 'signature_subprocesses': observed, 'cpu_seconds': time.process_time()-cpu, 'wall_seconds': time.monotonic()-started, 'peak_rss_kib': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss})
+
+if __name__ == '__main__':
+    main()

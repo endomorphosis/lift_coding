@@ -1,0 +1,18 @@
+{
+  "actual_provider_calls": 0,
+  "actual_scorer_calls": 0,
+  "at": "2026-09-13T04:11:28.270069+00:00",
+  "cause": "Mistyped Python executable path ip-datasets instead of ipfs-datasets; shell could not start the reviewed helper.",
+  "cell": 9,
+  "correction": "Invoke the exact delegated Python path once, with new outer stdout/stderr files. This is not a second provider request.",
+  "exit_code": 127,
+  "files": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell009_continued_execute_outer.stderr.private.txt": "c62cefb6aa4fb184d17db8472aef2cf445d7ff2183e406db007798f57467eeac",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell009_continued_execute_outer.stdout.private.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "http_work_directory_absent": true,
+  "original_grant_retained": true,
+  "phase_journal_absent": true,
+  "provider_reservation_absent": true,
+  "schema": "ns-final-pre-effect-shell-failure/v1"
+}

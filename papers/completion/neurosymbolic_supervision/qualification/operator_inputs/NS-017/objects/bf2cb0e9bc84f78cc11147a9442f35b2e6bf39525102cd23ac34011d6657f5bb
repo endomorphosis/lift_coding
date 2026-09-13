@@ -1,0 +1,34 @@
+{
+  "action": "Observe existing single provider handle to termination, preserve exact evidence and unknown charges; no replay. Hold cell 028 grant pending root reconciliation.",
+  "at": "2026-09-13T07:22:14.104753+00:00",
+  "auth_metadata": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_continued_auth_before_post_v1/result.private.json",
+    "sha256": "af0cc3f4e9c4691b845e5640862c8988bf604635c3070f29fdd58854b7c461d0"
+  },
+  "cell_id": "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+  "cell_number": 27,
+  "credential_values_or_raw_logs_retained": false,
+  "exact_post_timestamp_observed": false,
+  "intended_model_listed": true,
+  "metadata_after_remaining_seconds": 908.702199,
+  "metadata_finished_to_phase_plan_seconds": 13.044101,
+  "metadata_finished_to_reservation_seconds": 13.412674,
+  "metadata_guard_minimum_seconds": 900,
+  "metadata_passed_900_second_guard": true,
+  "new_grant_or_provider_or_scorer_effects_from_this_observation": 0,
+  "normal_metadata_exit_code": 0,
+  "phase_plan": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_execute/plan.private.json",
+    "sha256": "b06553bddd53f09819f55cbf84d29e14623ed581ae99cd3307a269097b10fd3a"
+  },
+  "remaining_at_phase_plan_seconds": 895.658087,
+  "remaining_at_reservation_seconds": 895.289514,
+  "reservation": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/reservation.json",
+    "sha256": "62e6e7d901527fb25b1ab9ce560f55d1c330cacab01f190f57c14a28e44b2cac"
+  },
+  "reservation_at_or_above_900_second_guard": false,
+  "schema": "ns-final-auth-window-observation/v1",
+  "signature_validity_asserted": false,
+  "unsigned_expiry_utc": "2026-09-13T07:35:55+00:00"
+}

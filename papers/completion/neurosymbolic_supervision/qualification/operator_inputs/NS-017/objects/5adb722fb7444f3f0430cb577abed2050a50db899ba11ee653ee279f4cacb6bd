@@ -1,0 +1,46 @@
+{
+  "approved": true,
+  "auth_gap": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_auth_window_gap.private.json",
+    "sha256": "bf2cb0e9bc84f78cc11147a9442f35b2e6bf39525102cd23ac34011d6657f5bb"
+  },
+  "auth_gap_reconciliation": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_cell027_auth_window_reconciliation_v1.private.json",
+    "sha256": "24b2275f39e91e45e3d55ab1ef299070c1576c8ca2990edd8ecd4117aa5af7e5"
+  },
+  "binding": {
+    "amendment_sha256": "29a05c0325e4c29c4776707783a0ba10d6286160d4f355844303674e11a38b65",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+    "grant_sha256": "607a7821c206bf0c558bf58c492fc6a509fb303d9d05b991f3e1d98f13ab583b",
+    "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+    "original_receipt_sha256": "f19e27e641eebee43664c8b35f361beb193cdbab79554a358b60123c1b16a9c4",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "provider_termination_evidence_sha256": "4fd1866dbedef763810b667b3416a794c71861b9a7f94e39873b4a682728993e",
+    "request_sha256": "7bff9f097992dd482457ecd4be5a32ae1285d457eca786c751d8e453b1997dfb",
+    "reservation_sha256": "62e6e7d901527fb25b1ab9ce560f55d1c330cacab01f190f57c14a28e44b2cac",
+    "service_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a"
+  },
+  "classification": "known_proposal_failure",
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells026_032_successor_v1.private.json",
+    "sha256": "e10777453fd629e43ddb6a328e9632ffa54482add65a582abf18f399514878d1"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "provider_absence": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_successor_provider_absence.private.json",
+    "sha256": "4ffe3efeff2b02b82158464b30740cf169a30ca6078a34e123ef905588968be3"
+  },
+  "relative_http_metadata": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell027_sanitized_relative_http_metadata.private.json",
+    "sha256": "a64b5339b85f2dd0fe4e02ddb7e5162245a6b52777923ecdad7cc7206cbcfdaf"
+  },
+  "reviewed_at": "2026-09-13T07:33:10.601194+00:00",
+  "reviewer": "/root/final_cells",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "I reviewed the exact signed original cell 027 wheel/A/130363 receipt and retained operational metadata. The consumed single HTTP POST produced zero response bytes and ended at its absolute child deadline while open_entered. The actual child clock is 595.000438750023 seconds, exceeding the unchanged 595-second child limit; wrapper 595.4896941130282 and gateway 595.7564343449194 seconds are separate nested intervals below 600. No provider edit was admitted, no AI candidate review occurred and no scorer reservation or scorer invocation exists. The signed receipt retains the sealed public baseline commitment and zero patch bytes; it is not a successful provider candidate. Exact retained provider container cleanup returned zero and a targeted state-only inspect proved that exact CID absent. I preserve the original failure, absent usage/settlement and unknown external charge, with no success or score credit and no retry, replay, replacement or regrant. The separate metadata-check-to-reservation auth margin gap and root reconciliation remain explicitly bound as operational disclosure; no exact absolute POST time or full operational compliance is asserted."
+}

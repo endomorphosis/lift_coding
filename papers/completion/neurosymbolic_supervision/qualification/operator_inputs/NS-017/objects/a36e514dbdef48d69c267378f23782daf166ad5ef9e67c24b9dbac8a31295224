@@ -1,0 +1,44 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "67148ae36ac84f55eeaa69883d6f91b365373c0ff2d568f696fe685f0e8acc86",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "e69ab2cb54b6890b1c7d9c917bd9c14fe357a4380ee346d1d40b6552ddfb0764",
+    "candidate_sha256": "0ac5a1b1f85dae4a4597c7f1c5689b327fe78dca02598b00f159e6a730867b51",
+    "cell_id": "1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925",
+    "grant_sha256": "be28dfe7a3bab87c7c41c06cccb7e9e513a96e65ba40a1cd8ce01217654b631d",
+    "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+    "patch_sha256": "471e0440b6df0ab0e9b29385cf7601b1a114c86ef00531fb991459eddb02065c",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "proposal_receipt_sha256": "cc99713b9b90040ec0d63e318643459d2cf46806b11c79c95f301729a99fe246",
+    "provider_result_sha256": "240493639e5e9fd0c09c80c9f13e5db6a68da3209e4a7117e0c37ee100a9f9c2",
+    "record_kind": "final",
+    "request_sha256": "1f611a41f6d72fdb9c8ccbc24404fe5780126c6ed41ffce26011b36aba3cac86",
+    "reservation_sha256": "2743d232e83344ce9c781d1e5dfa069152b15e1256256a6104af04890254fcb6",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells026_032_successor_v1.private.json",
+    "sha256": "e10777453fd629e43ddb6a328e9632ffa54482add65a582abf18f399514878d1"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "proposal_compliance_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell026_successor_proposal_compliance.private.json",
+    "sha256": "6582f543b51a9ef36f9ef3b1fbcc6efa99d13e1a100e01e85fa215ee7ec40653"
+  },
+  "provider_absence_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell026_successor_provider_absence.private.json",
+    "sha256": "c56542b0867b7e47eb75194071a03c542e102de34b8cf3803856c74e2e28cc30"
+  },
+  "review_statement": "I read the exact 1305-byte patch, SHA256 471e0440b6df0ab0e9b29385cf7601b1a114c86ef00531fb991459eddb02065c, against the original public wheel convert source. The sole permitted implementation file gains a helper that resolves directory and target paths and requires the directory among the target parents; convert uses it before opening the generated wheel destination and raises ValueError on escape. This is a bounded implementation change with no test, dependency, resource, hidden input or scorer changes. Symlink behavior, path edge cases, lazy source metadata and functional correctness remain questions for the fixed scorer; this review does not assert success. The exact provider cleanup and absence are verified and measured child, wrapper and gateway proposal clocks are all within their unchanged limits. I approve only this candidate for its single cold validation under the existing AI operator trust scope, without human annotation or adversarial scorer-integrity qualification.",
+  "reviewed_at": "2026-09-13T07:18:58.911665+00:00",
+  "reviewer": "/root/final_cells",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

@@ -1,0 +1,30 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "f54c0d2933b85d0673bfe0a1a47799675c9c36057f376041655c53f4c23c471b",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca",
+    "grant_sha256": "e91d255b0e7747be6467b863f645bec507cd9857323c2ceeecc82bfccf2399aa",
+    "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+    "original_receipt_sha256": "8182c9851bd3fdfe98d337de757d8c10b8af98904c94f03a129aef897bb30829",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "provider_termination_evidence_sha256": "24461013478dfde9a252bc04c61490764f4576edbf4235de46dd9fb8cdcf07bf",
+    "request_sha256": "a731ebeb9bfca85bda49571c4c4bcb20acd049f05f305d537ea57d96443abe87",
+    "reservation_sha256": "60c19ee58d1644173091c5f6e7e86f59772963bb802f70ce61285a6ab8543313",
+    "service_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e"
+  },
+  "classification": "known_proposal_failure",
+  "delegated_root_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T04:08:42.157276+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "Actual cell008 Installer/A/130363 attempted exactly one Grok4.6-requested POST. The retained child reached its absolute deadline at595.0004230829654s, returned no HTTP status or admitted model response, and produced no admitted edit; the sealed unchanged-tree identity is not a successful candidate. Wrapper595.4975150000537s and signed gateway596.3704550939146s remain separate; whole operator subprocess596.6057293900521s includes its post-timer tail. Signed proposal compliance is false because the child exceeded595s. Exact CID termination is proven by cleanup return0 and independent absence inspection. No scorer was invoked; remote completion and settled charge remain unknown. Retain this known proposal failure with zero success/score credit, no retry, no regrant and no replacement."
+}

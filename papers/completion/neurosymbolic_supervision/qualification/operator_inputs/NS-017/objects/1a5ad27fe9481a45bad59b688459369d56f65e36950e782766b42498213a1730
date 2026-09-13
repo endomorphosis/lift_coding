@@ -1,0 +1,29 @@
+diff --git a/tomlkit/container.py b/tomlkit/container.py
+--- a/tomlkit/container.py
++++ b/tomlkit/container.py
+@@ -151,6 +151,16 @@
+         return
+ 
+     def _get_last_index_before_table(self) -> int:
++        def emits_header(key: Key | None, val: Item) -> bool:
++            if not isinstance(val, (Table, AoT)):
++                return False
++            # Dotted super tables render inline as ``a.b = 1``. Nested
++            # tables/AoTs make them emit a real ``[header]``, which would
++            # capture a following top-level scalar (#550).
++            if key is not None and key.is_dotted() and val.is_super_table():
++                return any(emits_header(ck, cv) for ck, cv in val.value.body)
++            return key is not None
++
+         last_index = -1
+         for i, (k, v) in enumerate(self._body):
+             if isinstance(v, Null):
+@@ -159,7 +169,7 @@
+             if isinstance(v, Whitespace) and not v.is_fixed():
+                 continue
+ 
+-            if isinstance(v, (Table, AoT)) and k is not None and not k.is_dotted():
++            if emits_header(k, v):
+                 break
+             last_index = i
+         return last_index + 1

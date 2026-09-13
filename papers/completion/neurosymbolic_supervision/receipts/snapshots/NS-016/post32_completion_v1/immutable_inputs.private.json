@@ -1,0 +1,76 @@
+{
+  "actual_final_evidence_read": false,
+  "files": {
+    "analysis_producer": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/client_analysis_slice_v1/analyze_continuation.py",
+      "sha256": "ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94"
+    },
+    "bundle_builder": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/client_analysis_slice_v1/build_bundle.py",
+      "sha256": "1dfad27e6c55e98fe6ca5460e5a2b18a8ddf62de2d617fa9c5a8ddff0741ac08"
+    },
+    "client_extension": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/client_analysis_slice_v1/client_extension.py",
+      "sha256": "1a808e43f3290e9e038d80af53f5f0052bf2eb731417e79af8be75bd0a439ca1"
+    },
+    "cost_producer": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/client_analysis_slice_v1/export_operator_phase_costs.py",
+      "sha256": "efc9a050dc3c89f73bda163d1c15753c0df5c25308fece3bf369534b9bff36e1"
+    },
+    "design": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/design.proposed.private.json",
+      "sha256": "a5ca09bd0ddbb7d6ffe6929654751ceec69aabd1b2dc27fcda465537e7c8b713"
+    },
+    "export_producer": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/client_analysis_slice_v1/export_continuation.py",
+      "sha256": "b62c6283bcfcfb5afc3f8289ea273a82101aee117275dfce91c18960deebd081"
+    },
+    "freeze_authority": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_freeze_authority.private.json",
+      "sha256": "280fe1c3f66456e48711e01d405c33c3d9b601e4b38957187b3f0b833c9198a3"
+    },
+    "freeze_execution": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/freeze_execution_v1/result.private.json",
+      "sha256": "b069239f44fab7d8d4bb5d2f84a1728ba5a069873188bdd1cfeecac83a6581b2"
+    },
+    "original_outputs": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns016_completion_preparation_v1/source_bindings.private.json",
+      "sha256": "900b7d80faf74b8a0d054a197497454015ccf11599bfa9479069ec773ac762b5"
+    },
+    "pilot_activation": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/activation.private.json",
+      "sha256": "4757277bc5ba71c780478c6b74e7b636e4de847db95becd10ac06652a82962eb"
+    },
+    "pilot_analysis": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/delegated_analysis_v1/complete024_v1/results/analysis.private.json",
+      "sha256": "634254087669d9a71b198e77445816ab7f4444f42beba5600d62ec322b685482"
+    },
+    "pilot_bindings": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/delegated_analysis_v1/complete024_v1/results/bindings.private.json",
+      "sha256": "50b13351f8251d5f567dfff670b3a8e66fe9b0706354dce6faefa1dd04933c21"
+    },
+    "pilot_cohort": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/cohort_completion_v1/package.private.json",
+      "sha256": "8ac85c4df1069d35d3713b4a712655cc56c822173bd3c1ec210f02d35fcd195d"
+    },
+    "pilot_producer": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/delegated_analysis_v1/analyze.py",
+      "sha256": "a8bcf67cccb9c4175b1ac1a2186994d9497e176e79c4fae1ad495d4db9d519db"
+    },
+    "pilot_review": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/delegated_analysis_v1/root_complete24_review.private.json",
+      "sha256": "83105becb14ab86615f20d526409941d4bbeab5b4c9927803de3c388a195ca5a"
+    },
+    "policy": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/analysis_policy_v2.proposed.private.json",
+      "sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3"
+    },
+    "receipt_route": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns016_017_adoption_route_v1/receipt_route.py",
+      "sha256": "fe671e889ff4daba639f8f5889815ff9334221760eb1dafb978265629ca27afe"
+    }
+  },
+  "read_scope": "Only declared producer sources, accepted historical pilot metadata and original pre-outcome preparation metadata. No actual final rows/cells or runtime calls.",
+  "schema": "ns016-completion-audit-immutable-inputs/v1",
+  "source_only_preparation": true
+}

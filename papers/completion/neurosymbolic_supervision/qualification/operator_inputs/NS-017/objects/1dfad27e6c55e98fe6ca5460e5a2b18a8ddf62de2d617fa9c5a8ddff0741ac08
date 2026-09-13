@@ -1,0 +1,383 @@
+"""Preinstall NS017 evidence only after strict actual32 completion and root audit.
+
+No provider/scorer/native context or task API. No partial/fixture mode. Signed
+public documents are reverified with the frozen offline client, and candidate
+bytes are read only from an exact separately reviewed allowlist.
+"""
+import argparse,datetime,difflib,hashlib,importlib.util,io,json,math,os,stat,tarfile,tempfile,sys
+sys.dont_write_bytecode=True
+from pathlib import Path
+D=Path(__file__).resolve().parent;F=D.parents[1]
+import continuation_io as CI
+P='papers/completion/neurosymbolic_supervision/'
+INPUT=P+'qualification/operator_inputs/NS-017/'
+SNAP=P+'receipts/snapshots/NS-017/operator_adoption_v1/'
+ACTIVATION_SHA='a79cb456abf20fef034e70261509075c181540ce13aa1a588fced63cae934b05'
+ANALYZER_SHA='ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94'
+EXPORTER_SHA='b62c6283bcfcfb5afc3f8289ea273a82101aee117275dfce91c18960deebd081'
+CLIENT_SHA='9c4f5e1cdf863bfa3b050b48ed4f8b142377394ce4661b3ded4b2e7c1c8d8dfa'
+ANALYSIS_PACKAGE_SHA='c62063240596d38c574f587e83a39ac2191e8aed4be1e27310dcac7f73587b8e'
+SOURCE_INVENTORY_SHA='1c9e04c2682da0a95d5d59293dcab37e572f2963ac28563d68266bb660f2357c'
+TASK_CONTRACTS_SHA='62436878afea89cc664e22e24c9678d6a3cb5d707f22f1b433cfa3f8f4d2fb04'
+POLICY_SHA='a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3'
+FREEZE_FILE_SHA='7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a'
+FREEZE_CANONICAL_SHA='ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d'
+PUBLIC_NAMES={'request.json','offer.json','response.json','proposal.json','disposition.json','operator_review.json','operator_disposition.json','client_export_manifest.json'}
+UNITS=tuple('ns-hist-'+s for s in ('09-tomlkit','10-installer','11-tornado','12-more-itertools','13-charset_normalizer','14-iniconfig','15-wheel','16-jinja'))
+REPS=(104729,130363)
+MAIN=('manifest.json','attempts.jsonl','provider_receipts.jsonl','resource_measurements.jsonl','deviations.md')
+
+
+def require(ok,message):
+    if not ok:raise ValueError(message)
+def digest(raw):return hashlib.sha256(raw).hexdigest()
+def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+def clean(value):
+    if isinstance(value,float) and not math.isfinite(value):return None
+    if isinstance(value,dict):return {k:clean(v) for k,v in value.items()}
+    if isinstance(value,list):return [clean(v) for v in value]
+    return value
+def encoded(value):return json.dumps(value,sort_keys=True,indent=2,allow_nan=False).encode()+b'\n'
+def safe_rel(value):
+    require(isinstance(value,str) and value and '\\' not in value and not any(ord(c)<32 or ord(c)==127 for c in value),'Unsafe relative path')
+    p=Path(value);require(not p.is_absolute() and not any(c in ('.','..','.git') for c in p.parts) and str(p)==value and value!='.','Unsafe relative path');return p
+
+def read_bytes(path,expected=None,maximum=64<<20):
+    p=Path(path);require(p.is_absolute() and p.resolve()==p,'Canonical input path required')
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        before=os.fstat(fd);require(stat.S_ISREG(before.st_mode) and before.st_size<=maximum,'Bounded regular input required')
+        with os.fdopen(fd,'rb',closefd=False) as stream:raw=stream.read(maximum+1)
+        after=os.fstat(fd)
+        require((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns) and len(raw)==before.st_size,'Input changed while reading')
+    finally:os.close(fd)
+    require(expected is None or digest(raw)==expected,'Input hash differs');return raw
+
+def bound(record,maximum=64<<20):return json.loads(read_bytes(record['path'],record['sha256'],maximum),parse_constant=lambda x:(_ for _ in()).throw(ValueError('Nonfinite metadata')))
+def binding(path):return {'path':str(path),'sha256':digest(read_bytes(path))}
+def module(path,expected):
+    require(digest(read_bytes(path))==expected,'Frozen source changed');spec=importlib.util.spec_from_file_location('ns017_retained_'+expected[:12],path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+
+def admission_guard(adm):
+    require(adm.get('schema')=='ns017-actual-final32-adoption-admission/v1' and adm.get('approved') is True and adm.get('authority')=='root_operator','Exact root adoption admission required')
+    require(adm.get('input_kind')=='actual_signed_complete_final32' and adm.get('fixture') is False and adm.get('allow_partial') is False,'Partial or constructed evidence cannot materialize')
+    require(adm['activation']['sha256']==ACTIVATION_SHA and adm['analysis_package']['sha256']==ANALYSIS_PACKAGE_SHA,'Actual final activation/source package required')
+    require(adm['builder_sha256']==digest(read_bytes(Path(__file__).resolve())),'Builder source binding differs')
+    require(adm['source_inventory']['sha256']==SOURCE_INVENTORY_SHA and adm['task_contracts']['sha256']==TASK_CONTRACTS_SHA,'Frozen source inventory/task contracts differ')
+
+def metadata_guard(adm,a,an,ex,review,freeze):
+    require(a['schema']=='ns028-root-final-operator-activation/v1' and a['approved'] is True and a['record_kind']=='final','Actual final activation required')
+    require(an['schema']=='ns-final32-retained-evidence-analysis/v1' and an['complete'] is True and an['terminal_cells']==an['planned_cells']==32 and an['missing_or_nonterminal']==0,'All32 actual terminals required')
+    require(an['activation']==adm['activation'] and an['batch_sha256']==a['batch']['sha256'] and an['freeze_sha256']==a['freeze']['sha256']==FREEZE_FILE_SHA and an['analysis_policy_sha256']==POLICY_SHA,'Final analysis binding differs')
+    require(freeze['freeze_sha256']==FREEZE_CANONICAL_SHA and digest(canonical({k:v for k,v in freeze.items() if k!='freeze_sha256'}))==FREEZE_CANONICAL_SHA,'Canonical immutable freeze differs')
+    require(freeze['first_final_attempt_started'] is False,'Pre-outcome original marker changed')
+    rows=an['rows'];require(len(rows)==32 and [r['cell_id'] for r in rows]==a['ordered_cells'],'Exact32 frozen order required')
+    require({(r['unit'],r['arm'],r['repetition']) for r in rows}=={(u,arm,rep) for u in UNITS for arm in ('A','B') for rep in REPS},'Fixed eight-family A/B repetition scope differs')
+    for number,r in enumerate(rows,1):
+        require(r['number']==number and r['cache']=='local_cold' and type(r['repetition']) is int,'Exact frozen row coordinates required')
+        require(r['terminal'] is True and type(r['useful_completion']) is bool and r['human_annotation'] is False,'Actual typed terminal row required')
+        require(r['cell_id']==digest(canonical({'unit':r['unit'],'arm':r['arm'],'cache':'local_cold','repetition':r['repetition'],'record_kind':'final'})),'Cell identity differs')
+    require(an['useful_completions']==sum(r['useful_completion'] for r in rows) and all(an['arm_useful_fixed16'][arm]=={'useful':sum(r['useful_completion'] for r in rows if r['arm']==arm),'planned':16} for arm in ('A','B')),'Fixed-denominator aggregate differs from exact rows')
+    require(ex['schema']=='ns-final32-public-evidence-export/v1' and ex['cells']==32 and ex['analysis']==adm['analysis'] and ex['source_sha256']==EXPORTER_SHA and ex['private_keys_or_oracle_payloads_exported'] is False,'Strict complete32 public export required')
+    require(review['schema']=='ns-final32-root-complete-evidence-review/v1' and review['accepted_actual_final32'] is True and review['fixture'] is False and
+            review['analysis']==adm['analysis'] and review['analysis_bindings']==adm['analysis_bindings'] and review['export_manifest']==adm['export_manifest'] and
+            review['activation']==adm['activation'] and review['ordered_cells']==a['ordered_cells'] and review['actual_terminal_cells']==32 and
+            review['all_terminal_client_cleanup_verified'] is True and review['unknown_local_termination_count']==0 and review['strict_reducer_allow_partial'] is False,'Actual root complete evidence audit required')
+    require(all(an[k]==0 and type(an[k]) is int for k in ('new_provider_calls','new_scorer_calls','new_native_calls')),'Reduction must create no scientific calls')
+    summary=an.get('runtime_continuation')
+    require(type(summary)is dict and summary==ex.get('runtime_continuation') and summary.get('contract_binding')==adm.get('continuation_contract')==review.get('continuation_contract') and
+            summary.get('consumed_original_cells')==7 and summary.get('prospective_continuation_cells')==25 and summary.get('analysis_policy_changed') is False,
+            'Exact root-reviewed mixed runtime continuation required')
+
+
+
+def source_versions_guard(versions,context):
+    expected={'native_accelerate':'60baee769d39a53c52142c56fbf6ed7483773aa3',
+              'native_datasets':'b9686e09beb4973fea13a9c6d93d40b6d2741366',
+              'native_kit':'6196017ca3df016c7159dce43af60f2a0d96a9ae',
+              'original_frozen_host_source_sha256':'5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4',
+              'analysis_source_sha256':ANALYZER_SHA,'export_source_sha256':EXPORTER_SHA,
+              'final_freeze_file_sha256':FREEZE_FILE_SHA}
+    expected.update(effective_continuation_host_source_sha256=context['summary']['effective_source_sha256'],runtime_epochs=['original_resource_lease','prospective_resource_lease_continuation'])
+    require('actual_host_source_sha256' not in versions and all(versions.get(k)==v for k,v in expected.items()),'Actual mixed source lineage differs')
+
+def disclosure_guard(adm,analysis,review,disclosures):
+    require(review['validation_disclosures']==adm['validation_disclosures'] and disclosures['schema']=='ns-final32-additive-validation-disclosures/v1' and
+            disclosures['analysis']==adm['analysis'] and disclosures['actual_complete32'] is True and
+            disclosures['changes_signed_outcomes'] is False and disclosures['changes_protocol_or_denominator'] is False,
+            'Exact root-reviewed additive validation disclosures required')
+    rows={r['cell_id']:r for r in analysis['rows']};result={};seen=set()
+    for item in disclosures['records']:
+        row=rows[item['cell_id']];key=(item['cell_id'],item['category']);require(key not in seen,'Duplicate validation disclosure');seen.add(key)
+        require(item['original_signed_receipt_sha256']==row['original_signed_receipt_sha256'] and item['signed_outcome']==row['outcome'] and item['useful_completion'] is row['useful_completion'],'Disclosure changes original outcome')
+        require(item['sanitized_only'] is True and item['hidden_names_source_or_raw_logs_included'] is False and
+                item['evidence'] and isinstance(item['statement'],str) and 1<=len(item['statement'])<=4096,'Bounded sanitized disclosure required')
+        if item['category']=='incomplete_hidden_validation_import_failure':
+            require(row['useful_completion'] is False and row.get('hidden_collected')==0 and
+                    item['hidden_assertion_failure_observed'] is False and item['infrastructure_fault_proven'] is False,
+                    'Incomplete validation cannot become an assertion or infrastructure verdict')
+        result.setdefault(item['cell_id'],[]).append(item)
+    return result
+
+def baseline_guard(unit,baseline,rows,verified):
+    # Only metadata is read. No oracle path is opened or exported.
+    original=bound(baseline['original_unit_manifest'],16<<20)
+    require(original['unit_id']==unit and original['split']=='final' and
+            original['source_archive']['sha256']==baseline['source_archive_sha256']==baseline['archive']['sha256'] and
+            original['proposal_files']==baseline['proposal_files'] and original['allowed_edit_paths']==baseline['allowed_edit_paths'],
+            'Baseline projection differs from the actual frozen public edit authority')
+    require(all(verified[r['cell_id']]['receipt']['manifest_sha256']==baseline['original_unit_manifest']['sha256'] for r in rows if r['unit']==unit),'Signed final manifest differs')
+
+def reconstruct_patch(cb,payload,baseline):
+    """Same deterministic adapter diff, reading only changed public preimages.
+
+    Never extract or execute an archive, and never inspect an oracle/reference.
+    The exact generated bytes must match the original signed candidate binding.
+    """
+    changed=sorted(cb['changed_paths'])
+    if not changed:return b''
+    archive=read_bytes(baseline['archive']['path'],baseline['archive']['sha256'],64<<20)
+    old={};seen=set();count=0;total=0
+    with tarfile.open(fileobj=io.BytesIO(archive),mode='r:gz') as tf:
+        for member in tf:
+            count+=1;require(count<=20000,'Public archive member bound exceeded')
+            parts=Path(member.name).parts;require(parts and not member.name.startswith('/'),'Unsafe public archive name')
+            if len(parts)==1:continue
+            rel=str(safe_rel('/'.join(parts[1:])));require(rel not in seen,'Duplicate public archive path');seen.add(rel)
+            if rel not in changed:continue
+            spec=baseline['proposal_files'][rel]
+            require(member.isfile() and spec['kind']=='file' and member.size==spec['bytes'] and member.size<=16<<20,'Changed public preimage is not a bounded original file')
+            total+=member.size;require(total<=64<<20,'Public preimage aggregate bound exceeded')
+            with tf.extractfile(member) as stream:raw=stream.read(member.size+1)
+            require(len(raw)==member.size and digest(raw)==spec['sha256'],'Public preimage bytes differ');old[rel]=raw
+    require(set(old)==set(changed),'Required public preimage absent from exact archive')
+    patch=b''
+    for rel in changed:
+        before=old[rel].decode('utf-8');after=payload['changed/'+rel].decode('utf-8');require('\0' not in before+after,'Binary source edit refused')
+        lines=difflib.unified_diff(before.splitlines(keepends=True),after.splitlines(keepends=True),fromfile='a/'+rel,tofile='b/'+rel,n=3)
+        patch+=('diff --git a/'+rel+' b/'+rel+'\n'+''.join(line if line.endswith('\n') else line+'\n\\ No newline at end of file\n' for line in lines)).encode()
+        require(len(patch)<=16384,'Original 16KiB patch budget exceeded')
+    return patch
+
+def candidate_guard(row,body,entry,baseline,public_cell,*,patch_raw=None):
+    """Check only declared sealed public edit bytes and their signed commitments."""
+    candidate_sha=body.get('candidate_sha256')
+    if candidate_sha is None:
+        require(entry=={'candidate_present':False,'reason':'no_candidate_in_original_signed_receipt'},'Missing candidate must remain explicit');return {}
+    require(entry['candidate_present'] is True and entry['public_edit_payloads_only'] is True,'Retained actual candidate bytes required')
+    binding_raw=read_bytes(entry['candidate_binding']['path'],entry['candidate_binding']['sha256']);cb=json.loads(binding_raw);files=cb['files']
+    require(len(cb['changed_paths'])==len(set(cb['changed_paths'])) and type(cb['patch_bytes']) is int,'Malformed candidate path/patch metadata')
+    require(cb['sha256']==candidate_sha==digest(canonical(files)),'Actual sealed candidate inventory identity differs')
+    require(baseline['public_repository_source_only'] is True and baseline['oracle_or_reference_patch_included'] is False,'Public baseline custody required')
+    require(set(files)==set(baseline['proposal_files']) and set(cb['changed_paths'])<=set(baseline['allowed_edit_paths']),'Candidate exceeds original public edit authority')
+    changed={k for k in files if files[k]!=baseline['proposal_files'][k]};require(changed==set(cb['changed_paths'])==set(entry['changed_files']),'Exact changed public-file set differs')
+    for p in files:
+        safe_rel(p);require(files[p]['kind']==baseline['proposal_files'][p]['kind'] and files[p].get('mode')==baseline['proposal_files'][p].get('mode'),'Candidate type/mode changed')
+    review_name='operator_review.json'
+    if review_name in public_cell:
+        review=json.loads(public_cell[review_name]);rb=review['binding']
+        require(rb['candidate_sha256']==candidate_sha and rb['patch_sha256']==cb['patch_sha256'] and rb['candidate_binding_sha256']==digest(canonical(cb)),'Candidate/patch is not the exact reviewed object')
+        require(entry['review_scope']=='actual_retained_ai_candidate_review','Candidate review scope differs')
+    else:
+        require(row['disposition_class']=='known_proposal_failure' and body.get('scorer',{}).get('executed') is False and entry['review_scope']=='no_candidate_review_before_original_proposal_failure','Missing pre-score review cannot be invented')
+    patch=patch_raw if patch_raw is not None else read_bytes(entry['patch']['path'],entry['patch']['sha256'],16384)
+    require(digest(patch)==cb['patch_sha256'] and len(patch)==cb['patch_bytes'],'Exact retained patch payload required')
+    require(sum(files[p].get('bytes',0) for p in changed)<=64<<20,'Per-cell candidate edit transport bound exceeded')
+    result={'candidate_binding.json':binding_raw,'candidate.patch':patch}
+    for rel,record in entry['changed_files'].items():
+        require(files[rel]['kind']=='file','Changed symlink not admitted')
+        raw=read_bytes(record['path'],record['sha256'],16<<20)
+        require(record['sha256']==files[rel]['sha256'] and len(raw)==files[rel]['bytes'],'Changed file bytes differ from sealed signed inventory')
+        result['changed/'+rel]=raw
+    require(patch==reconstruct_patch(cb,result,baseline),'Patch does not reconstruct exact changed public bytes')
+    return result
+
+
+def verified_public(adm,a,an,ex):
+    cells=bound(adm['export_cells']);require(cells['schema']=='ns-final-root-cell-authority-proposal/v1' and cells['batch_sha256']==a['batch']['sha256'] and set(cells['cells'])==set(a['ordered_cells']) and adm['export_cells']['sha256']==ex['root_cells_sha256'],'Exact32 exported authority joins required')
+    context=continuation_context(adm,an,ex);require(cells.get('runtime_continuation')==context['summary'],'Exported continuation scope differs')
+    exports=Path(adm['export_manifest']['path']).parent;public={cid:{} for cid in a['ordered_cells']}
+    require({str(p.relative_to(exports)) for p in exports.rglob('*') if p.is_file()}==set(ex['files'])|{'root_cells.proposed.private.json','export_manifest.private.json'},'Undeclared export files')
+    for rel,h in ex['files'].items():
+        if rel in ('public_runtime_continuation_contract.json','continuation_verification_bindings.private.json'):
+            raw=read_bytes(exports/rel,h,1<<20)
+            if rel=='public_runtime_continuation_contract.json':require(digest(raw)==adm['continuation_contract']['sha256'] and json.loads(raw)==context['contract'],'Exported public contract differs')
+            else:
+                for path,expected in json.loads(raw).items():read_bytes(path,expected,1<<20)
+            continue
+        path=safe_rel(rel);require(len(path.parts)==3 and path.parts[0]=='host_receipts' and path.parts[1] in public and path.name in PUBLIC_NAMES,'Non-public export path refused')
+        public[path.parts[1]][path.name]=read_bytes(exports/path,h,1<<20)
+    require(set(ex['files'])>= {'public_runtime_continuation_contract.json','continuation_verification_bindings.private.json'},'Continuation export metadata missing')
+    client=context['pc']
+    verified={}
+    # No dispatch method is imported/called. A private disposable reconstruction
+    # uses only the already-complete public export to call the exact verifier.
+    with tempfile.TemporaryDirectory(prefix='ns017-public-reverify-') as directory:
+        temp=Path(directory)
+        for row in an['rows']:
+            cid=row['cell_id'];entry=cells['cells'][cid];relative=client.PREFIX/cid;q=temp/relative;q.mkdir(parents=True)
+            for name,raw in public[cid].items():(q/name).write_bytes(raw)
+            public_binding={**entry['binding'],'queue_relative':str(relative)}
+            observation=client.verify_public_cell(temp,public_binding,require_terminal=True)
+            require(observation['runtime_source_provenance']==entry.get('runtime_source_provenance')==row.get('runtime_source_provenance'),'Signed row runtime provenance differs')
+            result=client.verify(temp,public_binding)
+            require(result['signature_and_scope_verified'] is True and result['useful_completion']==row['useful_completion'] and result['response_sha256']==entry['terminal_sha256'],'Actual final signature/resource/outcome join differs')
+            original=result['receipt'];require(digest(public[cid]['proposal.json' if row['original_receipt_filename']=='proposal_result.json' else 'response.json'])==row['original_signed_receipt_sha256'],'Original signed receipt identity differs')
+            require(original['cell_id']==cid and original['inert_qualification'] is False and original['final_scientific_run'] is True,'Fixture cannot enter actual bundle')
+            scoring=not result.get('terminal_failure',False) or result.get('failure_disposition',{}).get('classification')=='known_scorer_failure'
+            require(row['resource_compliance']==clean(client.resource_compliance(original,scoring=scoring)),'Scalar signed resource compliance differs')
+            require(row.get('gateway_proposal_elapsed_seconds')==clean(original.get('elapsed_seconds')) and row.get('gateway_score_elapsed_seconds')==clean(original.get('score_elapsed_seconds')),'Actual signed gateway/scorer clock differs')
+            verified[cid]=result
+    return public,verified
+
+
+
+
+def operator_phase_cost_guard(adm,an,review):
+    costs=bound(adm['operator_phase_cost_manifest'])
+    require(review['operator_phase_cost_manifest']==adm['operator_phase_cost_manifest'] and costs['schema']=='ns-final32-operator-host-phase-costs/v1' and
+            costs['actual_complete32'] is True and costs['analysis']==adm['analysis'] and costs['continuation_contract']==adm['continuation_contract'] and
+            costs['ordered_cells']==[r['cell_id']for r in an['rows']] and set(costs['cells'])==set(costs['ordered_cells']) and
+            costs['all_signed_clocks_unchanged'] is True and costs['frozen_analysis_policy_changed'] is False,'Exact additive operator phase cost custody required')
+    for path,h in costs['input_bindings'].items():read_bytes(path,h,1<<20)
+    cost_source=Path(__file__).resolve().with_name('export_operator_phase_costs.py')
+    require(costs['source_sha256']==digest(read_bytes(cost_source)),'Operator cost exporter changed')
+    helper=module(cost_source,costs['source_sha256'])
+    observed_bindings={}
+    current=helper.collect(Path(adm['activation']['path']).parent,an['rows'],observed_bindings)
+    require(costs['cells']==current and all(costs['input_bindings'].get(path)==h for path,h in observed_bindings.items()),'Operator phase records omitted or changed versus retained actual inventory')
+
+    for row in an['rows']:
+        cell=costs['cells'][row['cell_id']]
+        require(cell['number']==row['number'] and cell['runtime_source_provenance']==row['runtime_source_provenance'],'Operator phase row differs')
+        for phase,item in cell['records'].items():
+            require(item['phase']==phase and item['scope']==helper.SCOPE and item['summed_with_nested_clocks'] is False and item['changes_signed_compliance'] is False,'Operator phase scope overclaim')
+            if item['execution'] is not None:require(item==helper.measured_record(bound(item['execution']),item['execution'],phase),'Operator phase measured value differs')
+            else:require(item['elapsed_host_wall_seconds'] is None and item['measured'] is False,'Missing operator phase imputed as zero')
+    return costs
+
+def continuation_context(adm,an,ex):
+    tracked={};context=CI.load_context(adm['continuation_contract'],tracked)
+    require(context['summary']==an.get('runtime_continuation')==ex.get('runtime_continuation'),'Actual full authority and analysis/export differ')
+    driver=bound(adm['continuation_driver_package'])
+    require(driver['continuation_public_contract']==adm['continuation_contract'] and driver['continuation_verifier']['sha256']==CLIENT_SHA and
+            driver['batch']==context['contract']['original_batch'] and [x['cell_id']for x in driver['ordered_cells']]==context['contract']['ordered_cells'],
+            'Actual continued client package differs')
+    original=bound(driver['original_package']);require(driver['source5']==original['source5'],'Frozen original worker source5 changed')
+    # Join to every actual continued terminal client execution through retained
+    # strict reducer evidence, without invoking the client again here.
+    for row in an['rows'][7:]:
+        terminal=bound({'path':row['signed_terminal_path'],'sha256':row['signed_terminal_sha256']})
+        execution=bound(terminal['client_execution'])
+        require(execution['success'] is True and execution['cleanup_exit_code']==0 and execution['package_sha256']==adm['continuation_driver_package']['sha256'] and
+                execution['actual_launcher_sha256']==driver['package_files']['launch.py'] and execution['actual_bootstrap_sha256']==driver['package_files']['bootstrap.py'],
+                'Actual terminal executed another continuation client package')
+    context['driver']=driver;return context
+
+def build(adm,output,*,admission_file=None):
+    admission_guard(adm)
+    require(adm['operation']=='build_actual_adoption_bundle_only','Exact bundle operation admission required')
+    require(type(adm['max_preinstallation_bytes']) is int and 0<adm['max_preinstallation_bytes']<=256<<20,'Exact bounded preinstallation quota required')
+    # These exact gate inputs are read before any cell files or staging writes.
+    a=bound(adm['activation']);an=bound(adm['analysis']);ex=bound(adm['export_manifest']);review=bound(adm['root_complete_review']);freeze=bound(a['freeze'])
+    metadata_guard(adm,a,an,ex,review,freeze)
+    pkg=bound(adm['analysis_package']);require(pkg['source_files'][str(D/'analyze_continuation.py')]==ANALYZER_SHA and pkg['source_files'][str(D/'export_continuation.py')]==EXPORTER_SHA,'Qualified reducer/export source differs')
+    lineage=bound(adm['analysis_bindings']);require(lineage.get(str(D/'analyze_continuation.py'))==ANALYZER_SHA,'Actual strict reducer source binding absent')
+    for p,h in lineage.items():read_bytes(p,h)
+    public,verified=verified_public(adm,a,an,ex)
+    candidates=bound(adm['candidate_payload_manifest']);baselines=bound(adm['public_baseline_manifest'])
+    require(candidates['schema']=='ns-final32-reviewed-candidate-payloads/v1' and candidates['actual_complete32'] is True and candidates['ordered_cells']==a['ordered_cells'] and candidates['analysis']==adm['analysis'] and candidates['public_edit_payloads_only'] is True and set(candidates['cells'])==set(a['ordered_cells']),'Complete actual candidate byte allowlist required')
+    require(baselines['schema']=='ns-final8-public-baseline-reproduction/v1' and set(baselines['units'])==set(UNITS),'Original eight public baselines required')
+    require(review['candidate_payload_manifest']==adm['candidate_payload_manifest'] and review['public_baseline_manifest']==adm['public_baseline_manifest'],'Root candidate/baseline custody audit differs')
+    disclosures=bound(adm['validation_disclosures']);disclosure_map=disclosure_guard(adm,an,review,disclosures)
+    inventory=bound(adm['source_inventory']);require(inventory['schema']=='ns017-retained-source-inventory-proposal/v1' and inventory['immutable_pins']==freeze['immutable_pins'],'All37 source identities required')
+    for unit,baseline in baselines['units'].items():
+        baseline_guard(unit,baseline,an['rows'],verified)
+        prepar=an['request_profile_lineage'][unit]['B']['public_context_preparation_sha256'];entry=inventory['sources'][prepar]
+        packet=json.loads(read_bytes(entry['source_paths'][0],prepar,16<<20))
+        require(packet['unit_id']==unit and packet['source_archive_sha256']==baseline['source_archive_sha256'],'Public baseline archive is not the frozen preparation source')
+    context=continuation_context(adm,an,ex);source_versions_guard(adm['source_versions'],context)
+    operator_costs=operator_phase_cost_guard(adm,an,review)
+    files={};private_refs={};portable=[];retained_bytes=0
+    def retain(label,raw,kind,original_sha=None):
+        nonlocal retained_bytes
+        h=digest(raw);rel=INPUT+'objects/'+h
+        if rel in files:require(files[rel]==raw,'Digest collision')
+        else:
+            require(retained_bytes+len(raw)<=adm['max_preinstallation_bytes'],'Measured retained-object quota exceeded')
+            files[rel]=raw;retained_bytes+=len(raw)
+        portable.append({'label':label,'repo_path':rel,'sha256':h,'bytes':len(raw),'kind':kind,'anonymous_release_approved':False,'original_sha256':original_sha or h})
+        return {'path':rel,'sha256':h}
+    # Add actual continuation source/authority objects under their own epoch.
+    # Original37 inventory remains separate and byte-identical.
+    continuation_refs=[adm['continuation_contract'],adm['continuation_driver_package'],adm['operator_phase_cost_manifest'],context['contract']['authority']]
+    authority=context['authority']
+    continuation_refs += [authority[k]for k in ('successor_reservation','holder_source','holder_launch_evidence','holder_after_caller_exit_evidence','overlay_qualification')]
+    for ref in continuation_refs:retain('continuation_metadata/'+ref['sha256'],read_bytes(ref['path'],ref['sha256'],1<<20),'private_actual_continuation_metadata')
+    for path,h in context['contract']['effective_source_bindings'].items():retain('continuation_source/'+Path(path).name,read_bytes(path,h,1<<20),'actual_continuation_service_source')
+    for path,h in pkg['source_files'].items():retain('continuation_analysis_source/'+Path(path).name,read_bytes(path,h,1<<20),'actual_continuation_analysis_source')
+    driver=context['driver'];driver_root=Path(adm['continuation_driver_package']['path']).parent
+    for rel,h in driver['package_files'].items():retain('continuation_driver/'+rel,read_bytes(driver_root/safe_rel(rel),h,1<<20),'actual_continuation_client_package')
+    for cell in operator_costs['cells'].values():
+        for record in cell['records'].values():
+            if record['execution'] is not None:
+                ref=record['execution'];retain('operator_phase/'+ref['sha256'],read_bytes(ref['path'],ref['sha256'],1<<20),'actual_operator_subprocess_wall_record')
+    for path in (Path(__file__).resolve(),Path(__file__).resolve().with_name('export_operator_phase_costs.py')):
+        retain('continuation_adoption_source/'+path.name,read_bytes(path),'actual_continuation_adoption_source')
+    for cid,docs in public.items():
+        for name,raw in docs.items():retain('final/'+cid+'/'+name,raw,'exact_signed_public_evidence')
+    for row in an['rows']:
+        cid=row['cell_id'];payload=candidate_guard(row,verified[cid]['receipt'],candidates['cells'][cid],baselines['units'][row['unit']],public[cid])
+        for name,raw in payload.items():retain('candidate/'+cid+'/'+name,raw,'actual_allowlisted_public_candidate_edit')
+    for unit,baseline in baselines['units'].items():
+        require(baseline['source_archive_sha256']==baseline['archive']['sha256'] and isinstance(baseline['public_retrieval_url'],str) and baseline['public_retrieval_url'].startswith('https://') and baseline['upstream_revision'] and baseline['license_status'] in ('retained_license','explicit_redistribution_limitation'),'Public source retrieval/revision/license required')
+        if baseline['license_status']=='explicit_redistribution_limitation':require(isinstance(baseline.get('license_limitation'),str) and 1<=len(baseline['license_limitation'])<=4096,'Explicit redistribution limitation required')
+        raw=read_bytes(baseline['archive']['path'],baseline['archive']['sha256'],64<<20);retain('public_baseline/'+unit+'/archive',raw,'public_repository_preimage')
+        if baseline['license_status']=='retained_license':retain('public_baseline/'+unit+'/LICENSE',read_bytes(baseline['license']['path'],baseline['license']['sha256'],1<<20),'public_license')
+    for h,entry in inventory['sources'].items():
+        raw=read_bytes(entry['source_paths'][0],h,64<<20);require(len(raw)==entry['bytes'],'Retained source size differs')
+        retain('source/'+h,raw,'actual_or_explicit_historical_source')
+    # Private originals remain byte exact; the separately derived portable map
+    # avoids treating author-host paths as executable reproduction commands.
+    for key in ('activation','analysis','analysis_bindings','export_manifest','export_cells','root_complete_review','candidate_payload_manifest','public_baseline_manifest','source_inventory','analysis_package','validation_disclosures','task_contracts'):
+        raw=read_bytes(adm[key]['path'],adm[key]['sha256']);private_refs[key]=retain('private_provenance/'+key,raw,'private_original_metadata_not_anonymous')
+    for cell_records in disclosure_map.values():
+        for item in cell_records:
+            for ref in item['evidence']:
+                retain('validation_disclosure/'+ref['sha256'],read_bytes(ref['path'],ref['sha256'],1<<20),'private_additive_validation_disclosure')
+    writing_guide=read_bytes(adm['writing_scope_review']['path'],adm['writing_scope_review']['sha256'],1<<20)
+    files[INPUT+'NS022_NS024_SCOPE_REVIEW.md']=writing_guide
+    contract=bound(adm['task_contracts'])['tasks']['NS-017'];require(contract['deliverables']==[P+'runs/main/'+n for n in MAIN] and len(contract['acceptance_criteria'])==4,'Exact original NS017 output/criterion contract required')
+    attempts=[];providers=[];resources=[]
+    provider_keys=('actual_provider_posts','provider_status','http_status','served_model','served_revision','parse_error','usage','settled_provider_cost','unknown_external_charge')
+    resource_keys=('gateway_proposal_elapsed_seconds','http_wrapper_elapsed_seconds','provider_child_elapsed_seconds','gateway_score_elapsed_seconds','gateway_score_elapsed_scope','grant_to_terminal_elapsed_seconds','end_to_end_scope','client_poll_wall_seconds','client_poll_cpu_seconds','operator_review_effort_cost','operator_review_effort_unknown_reason','resource_compliance')
+    for row in an['rows']:
+        core={k:row[k] for k in ('number','cell_id','unit','arm','repetition','cache','terminal','outcome','useful_completion')};core.update(validation_disclosures=disclosure_map.get(row['cell_id'],[]),record_kind='final',original_signed_receipt_sha256=row['original_signed_receipt_sha256'],signed_terminal_sha256=row['signed_terminal_sha256'],human_annotation=False,runtime_source_provenance=row['runtime_source_provenance'],operator_phase_host_invocations=operator_costs['cells'][row['cell_id']]['records'])
+        attempts.append({**core,**{k:row.get(k) for k in ('disposition_class','actual_cold_completed','raw_scorer_success','raw_cold_classification','visible_passed','visible_collected','hidden_passed','hidden_collected')},**{k:row.get(k) for k in resource_keys}})
+        providers.append({**core,**{k:row.get(k) for k in provider_keys}});resources.append({**core,**{k:row.get(k) for k in resource_keys}})
+    manifest={'operator_phase_host_cost_scope':operator_costs['scope'],'runtime_continuation':context['summary'],'schema':'ns017-actual-final32-main-adoption/v1','planned_cells':32,'terminal_cells':32,'independent_families':8,'nested_repetitions_per_family_arm':2,'ordered_cells':a['ordered_cells'],'freeze_file_sha256':FREEZE_FILE_SHA,'freeze_canonical_sha256':FREEZE_CANONICAL_SHA,'analysis_policy_sha256':POLICY_SHA,'private_original_refs':private_refs,'retained_objects':portable,'source_versions':adm['source_versions'],'prior_pilot_reuse':'Existing root-installed NS028 pilot source/evidence is retained in place. The actual32 analysis binds its separate prior ledger; no pooling or duplicate pilot calls.','actual_useful_completions':an['useful_completions'],'arm_useful_fixed16':an['arm_useful_fixed16'],'prior_and_preparation_cost_ledgers':an['prior_and_preparation_cost_ledgers'],'cost_scope':an['cost_scope'],'repetition_identifiers_are_not_served_api_random_seed_claims':True,'publication_required_by_retained_arms':False,'native_task_completion_claimed':False,'anonymous_release_admitted':False}
+    out={P+'runs/main/manifest.json':encoded(manifest),P+'runs/main/attempts.jsonl':b''.join(canonical(x)+b'\n' for x in attempts),P+'runs/main/provider_receipts.jsonl':b''.join(canonical(x)+b'\n' for x in providers),P+'runs/main/resource_measurements.jsonl':b''.join(canonical(x)+b'\n' for x in resources),P+'runs/main/deviations.md':('''# Actual final evidence scope\n\nThe original lease terminated during cell007. The consumed seven-cell prefix retains its actual original source, lease-loss failure and resource-authority provenance. The remaining25 use a prospectively approved successor cooperative lease and explicitly different executable service/client sources. Original freeze, batch, requests, scientific limits, policy and32-cell denominator remain unchanged. This is mixed actual runtime provenance, not a claim that all32 ran under the original source/lease.
+
+All 32 original A/B cold cells retain terminal outcomes and the fixed denominator. Eight families are independent blocks; the two repetition IDs are nested design identifiers, not served-API seed claims. Raw cold outcomes and signed resource failures stay distinct. Additive validation disclosures preserve original signed labels and success credit: missing hidden collection or import failure is not an observed hidden assertion failure or a proven infrastructure fault. No disclosure changes a cell, denominator or budget. C/D, warm/reuse/publication benefits and original confirmatory claims were withdrawn.\n\nThe signed gateway clock ends before signing; new continuation checks inside sign_phase occur after that sampling point. Exact operator phase records separately retain whole subprocess elapsed_host_wall_seconds including those checks and signing. Missing phase records or fields remain unavailable. This added cost custody does not change signed compliance or the frozen statistical policy.
+
+Provider, wrapper, gateway, scorer, client and grant-to-terminal clocks retain their separate nested scopes; they are never added into one cost. Missing settlement and AI reasoning effort remain null. Prior pilot/protocol/diagnostic and setup ledgers remain separately bound, without outcome pooling or refunds.\n\nExact public candidate edits and original public baseline archives/revisions/licenses are retained for reconstruction. Hidden oracle/reference-patch payloads and credentials are not included; independent hidden rescoring requires its separately authorized scorer custody. This bundle reruns no scorer or model.\n\nThe stored raw signatures and source bytes preserve original provenance; some original metadata/code contains private absolute paths. NS024 must produce and audit a clearly derived portable/anonymous map and eligible copies before release. This preinstallation bundle is not an approved anonymous ZIP.\n''').encode()}
+    outputs={};artifacts={}
+    for rel,raw in out.items():
+        files[rel]=raw;snapshot=SNAP+Path(rel).name;files[snapshot]=raw;outputs[rel]=snapshot;artifacts[snapshot]=digest(raw)
+    receipt={'schema':'paper-task-evidence/v1','task_id':'NS-017','status':'pending_operator_evidence_review','template_only':True,'automatic_completion_available':False,'completed_at':None,'criteria':[{'criterion':c,'status':'pending','explanation':'Review the bound actual32 evidence and precise limitations; complete only through ordinary validation.','evidence':list(artifacts)} for c in contract['acceptance_criteria']],'outputs':outputs,'artifacts':artifacts,'commands':[],'source_versions':adm['source_versions']}
+    template=INPUT+'pending_receipt.template.json';files[template]=encoded(receipt);files[INPUT+'portable_provenance.proposed.json']=encoded({'schema':'ns017-portable-provenance-proposal/v1','objects':portable,'anonymous_release_admitted':False,'private_originals_preserved':True,'raw_objects_with_identifying_paths_must_not_enter_anonymous_zip_without_review':True})
+    files[INPUT+'OPERATOR_HANDOFF.md']=('FIRST read pending_receipt.template.json (SHA256 '+digest(files[template])+'). All original outputs and exact retained objects are already installed. Verify the four original NS017 criteria and hashes, add actual ordinary validation logs, and finish a concise receipt. Do not issue grants, poll offers, run a provider/model/scorer, recompute contexts, or rerun experiments. Candidate and hidden-oracle custody limitations must stay explicit. NS019 owns tables; NS022 and NS024 must read the preinstalled NS022_NS024_SCOPE_REVIEW.md, repair the actually compiled main.tex and checklist, and build the actual anonymous ZIP. NS024 owns its release audit. No external human reviewer is required.\n').encode()
+    total=sum(len(raw) for raw in files.values());require(total<=adm['max_preinstallation_bytes']<=256<<20,'Measured preinstallation quota exceeded')
+    output=Path(output);require(output.is_absolute() and output.resolve()==output and not output.exists(),'Fresh canonical staging directory required');output.mkdir(mode=0o700)
+    for rel,raw in files.items():
+        p=output/safe_rel(rel);p.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+        with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600),'wb') as f:f.write(raw);f.flush();os.fsync(f.fileno())
+    record={'schema':'ns017-actual-final32-preinstallation-bundle/v1','success':True,'admission_file':admission_file,'admission_canonical_sha256':digest(canonical(adm)),'files':{p:{'sha256':digest(raw),'bytes':len(raw)} for p,raw in files.items()},'total_bytes':total,'current_output_count':5,'actual_terminal_cells':32,'scientific_calls':0,'native_writes':0,'anonymous_zip_qualified':False,'source_preinstallation_required':True,'pending_receipt_template':{'path':template,'sha256':digest(files[template])}}
+    with (output/'bundle_manifest.private.json').open('x') as f:json.dump(record,f,sort_keys=True,indent=2);f.write('\n')
+    return record
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--admission',type=Path,required=True);p.add_argument('--sha256',required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();os.umask(0o077)
+    adm=bound({'path':str(a.admission),'sha256':a.sha256});result=build(adm,a.output,admission_file={'path':str(a.admission),'sha256':a.sha256});print(json.dumps({'success':True,'files':len(result['files']),'bytes':result['total_bytes']}))
+if __name__=='__main__':main()

@@ -1,0 +1,3425 @@
+{
+  "approved": false,
+  "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+  "cells": {
+    "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e": {
+      "binding": {
+        "amendment_sha256": "ccea0f93c9dcd4ef0fd49267cb43a811f5f531a5678f41731f14d6aae03ad339",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "91c57c1d44fdea0e42758be870656cc7",
+        "grant_sha256": "3cda104eb3f5a82a62506b3f11e70c3ff77adbcfbbc9b2b257a74581a486b81e",
+        "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+        "offer_sha256": "a51f7e6ab3cbf7ac2a4af6ee802f44a82be131bbded1117525cd11db478d015e",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "b3b3423b097101f6deb4768328ca1f06",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a",
+        "unit": "ns-hist-13-charset_normalizer"
+      },
+      "offer_sha256": "a51f7e6ab3cbf7ac2a4af6ee802f44a82be131bbded1117525cd11db478d015e",
+      "public_key_sha256": "7095c139591f53beeee41ee7c779f3f7289da64b25dceebeea782bae56289625",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "240e00dcaa0f33366d848d96a279dc65b3d0aa5aa39854209fb25a698b0de6f9"
+    },
+    "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0": {
+      "binding": {
+        "amendment_sha256": "f2e278dd6b03df08aae056fc864b5601068ae6a7f10165232a25707eb2113465",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "c19137bddd617ef3ae8b0d7355472f30",
+        "grant_sha256": "dcc8da51bb9b752c626de7e01bf3af800e12580c5a790cb2812ed568d384a841",
+        "manifest_sha256": "f5594e45f6b758a36d2f8b43adbdb9624939f2b77ccebb2a5b356f3f42d959ec",
+        "offer_sha256": "82f00945c4437d431ed1aecc972eb528e2de45adf5a5add95b7833aa2f024cf5",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "5a24a9b40d81ab17487fe1f3f1626cfd",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5760a4471c370919aa8a7af0d6890791954109ce2aa59426e4a87d3a54b31726",
+        "unit": "ns-hist-09-tomlkit"
+      },
+      "offer_sha256": "82f00945c4437d431ed1aecc972eb528e2de45adf5a5add95b7833aa2f024cf5",
+      "public_key_sha256": "70d80e37d0f672032abf2a317d106dc262cf4d309aa9e8ce544b94983bb22ec3",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "0ca577d6071336daf72a0599adc16f50b3104e0890d179ed54341c04b28dcb2b"
+    },
+    "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064": {
+      "binding": {
+        "amendment_sha256": "b869bc33ac3b35d7a8eab1b175612312f23eb280e4bab7b23d91d37326ac9a7b",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "383c7f8ff6f21454878040b2ece94d7a",
+        "grant_sha256": "71195796b4d56d6ca5ea508992815dc9870ce38d0884239435e297820551bcc9",
+        "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+        "offer_sha256": "2073978c634638f2c10f94b4d47e5ced9b325bb9bcc15d9f7657bdf712c26034",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "8910a1110c4a1e118d9d049907dbbe9f",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a",
+        "unit": "ns-hist-13-charset_normalizer"
+      },
+      "offer_sha256": "2073978c634638f2c10f94b4d47e5ced9b325bb9bcc15d9f7657bdf712c26034",
+      "public_key_sha256": "60a9f73733940f2fadec5ed1e3fd2fdf411879c522c672dda7dbbe8c1c0cee6d",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "8dbac99f6cf1561a12b08543dfbc6b1af9654c48835aa60a00dbd17a7345d489"
+    },
+    "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0": {
+      "binding": {
+        "amendment_sha256": "1982c4a869216ddd829f4e986bc7ec0189947fbf3ad511870faeb9c38ae2603e",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "f97d4a71ec9ea9eef6e43273f00077b0",
+        "grant_sha256": "46448d307fbddb8ecad9bf1935f1846b5bd749c6cc3b92b3ac48b60b845eb257",
+        "manifest_sha256": "0484175664afbf4f299b3237a64c57cf6a9290a08d72084dbe06e5f3a523a570",
+        "offer_sha256": "f4de4ed52cde000153313e1b857501751683537290666fcb51bf9b7515466622",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "b6a6394b79f95986d1df864e9f78b562",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "749692af806570868eb1914f6735f3dcc42db6c1c274590dc429108989d1b69e",
+        "unit": "ns-hist-11-tornado"
+      },
+      "offer_sha256": "f4de4ed52cde000153313e1b857501751683537290666fcb51bf9b7515466622",
+      "public_key_sha256": "728bc05c975e819d505b3089129469ac222f5d65ec8c23a10e9eafe44fb4ade9",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "48c533b2b04c6147e164b6799e0c90240a4eed4ae5b3d6d7462e29787bd0e538"
+    },
+    "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8": {
+      "binding": {
+        "amendment_sha256": "c7eb236c83eb84091dfd098ae64f6e20dd2f41944f4854b120dfbe5bfa3f7775",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "57a91444d3d875db6939ede57fecd08c",
+        "grant_sha256": "810c450b291d650035841769a9ae4f89406efb6fb3c14430838eb8c315cc6d5a",
+        "manifest_sha256": "0484175664afbf4f299b3237a64c57cf6a9290a08d72084dbe06e5f3a523a570",
+        "offer_sha256": "57061dd1250df5b99a22122c961d49b488ee4473be12fb188230fea3ebf315cb",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "a8632db3e79b74665a898735026d6804",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "749692af806570868eb1914f6735f3dcc42db6c1c274590dc429108989d1b69e",
+        "unit": "ns-hist-11-tornado"
+      },
+      "offer_sha256": "57061dd1250df5b99a22122c961d49b488ee4473be12fb188230fea3ebf315cb",
+      "public_key_sha256": "989e4f5522f2f88082112a6df93f23eba5d9ee3fc4689629af33ba0dfe9b239c",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "9ac65172f263d8e56f7dfbb81e76d5611bf9e86f09ad0ad55a204c2eeb12bcd6"
+    },
+    "1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925": {
+      "binding": {
+        "amendment_sha256": "67148ae36ac84f55eeaa69883d6f91b365373c0ff2d568f696fe685f0e8acc86",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "303062220d2aef47f2df7d64a90106e6",
+        "grant_sha256": "be28dfe7a3bab87c7c41c06cccb7e9e513a96e65ba40a1cd8ce01217654b631d",
+        "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+        "offer_sha256": "32b130394e0f345ec9232f2c97f73b6f0e17087c4f523f3eb93f40e057edb64c",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "ab792984ba134b70fce46a2afca96e26",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a",
+        "unit": "ns-hist-15-wheel"
+      },
+      "offer_sha256": "32b130394e0f345ec9232f2c97f73b6f0e17087c4f523f3eb93f40e057edb64c",
+      "public_key_sha256": "671a06dedd055639a06af320dcb03fda074c761ba079fd1e0556832363a3b11f",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "faae2ffc7149dbcc904c802c7a21b83650f0922f525b7f481771161023196580"
+    },
+    "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe": {
+      "binding": {
+        "amendment_sha256": "f096d51b6a4cbf6a1ad27195a181f3f7b3b05341358d09f27c575862537c4750",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "8ec7c712d6eabcb3bfa54bc7bc57d635",
+        "grant_sha256": "ee12096a05ac2e5d43f99510307b07a7d8ca9af74c1d539623cfcf47622f5d96",
+        "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+        "offer_sha256": "424457e741b0ac1205db855fdaa5e757fcf51351676744632dd3d8f16dddf9b8",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "55c610cc1fac7ca520b0148143dd5e85",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e",
+        "unit": "ns-hist-10-installer"
+      },
+      "offer_sha256": "424457e741b0ac1205db855fdaa5e757fcf51351676744632dd3d8f16dddf9b8",
+      "public_key_sha256": "843362baf27da4ecb73883915fdf4e5fd4fcb6a50edb923d649e6e83a3d65fb5",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "227445cc681eda963c05e0832163dca04302d024e02f5394c56091ad7d8e3432"
+    },
+    "2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f": {
+      "binding": {
+        "amendment_sha256": "9be7934705d87ef963bab861a61e83459c8624a7d586ef9a17f81ce21804ae6a",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "f1386a342f077686bbea095219094d8a",
+        "grant_sha256": "8371784ffd938a5c6cff7721bf1b327be11332a7bf980403e937d768b989ccf2",
+        "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+        "offer_sha256": "69c56d4f0f6aac32dddca3153e680461bfa7ad847c6b1b94e3058dc5920f71b5",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "c0f243b52ede75ef9783a7def4890822",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a",
+        "unit": "ns-hist-15-wheel"
+      },
+      "offer_sha256": "69c56d4f0f6aac32dddca3153e680461bfa7ad847c6b1b94e3058dc5920f71b5",
+      "public_key_sha256": "a2ff4b2fa2e8a66739839ce2117ab2586a061d660148daa272012f7374d4d870",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "bdf03a070e00f39c29a5907700e0a0585d780e9cdd70b965cd79ce2cad9d0c17"
+    },
+    "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c": {
+      "binding": {
+        "amendment_sha256": "c9c7218dd4f14cdc0c9b8a017cac7ed41f485595dd2df7734e6f6a1e3eefab9d",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "8c31a616d2e383e57ef8f1b25f3bc600",
+        "grant_sha256": "8da432bea3e24fcca6a5f198d057301c3d99083f42b073917c8b7ece32489166",
+        "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+        "offer_sha256": "0d33e200747df7e26e980585f293bdb5245745323f09ade28039ef585ebb6bd2",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "31e7d028326c2bc43fc7323cd536c570",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe",
+        "unit": "ns-hist-12-more-itertools"
+      },
+      "offer_sha256": "0d33e200747df7e26e980585f293bdb5245745323f09ade28039ef585ebb6bd2",
+      "public_key_sha256": "600467c8783fb4d2f3b097ddb00f9f1e851c2ce1ee00a7140c8013899b717125",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "b8581f697bac27402cd4a6d5928300f3c972e7fa9593daa16bd13472a8536449"
+    },
+    "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2": {
+      "binding": {
+        "amendment_sha256": "a4efe234a37304a3b5e9ade44347e3ffed9ec0f3027a07b03246c68b20e867d6",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "7220928909f03ff40cb42ae282b1dfeb",
+        "grant_sha256": "4bab38a2bdc16d4b02ee6936a95d338bbea010cfd64796d93fdaf496b346c654",
+        "manifest_sha256": "0484175664afbf4f299b3237a64c57cf6a9290a08d72084dbe06e5f3a523a570",
+        "offer_sha256": "13910fe70c48d707208d82a3f36958aaff466686c0b5059a1878c6598a4b8963",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "7ae467151891e118a1110dcb8ef23d84",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "749692af806570868eb1914f6735f3dcc42db6c1c274590dc429108989d1b69e",
+        "unit": "ns-hist-11-tornado"
+      },
+      "offer_sha256": "13910fe70c48d707208d82a3f36958aaff466686c0b5059a1878c6598a4b8963",
+      "public_key_sha256": "39fbd45f95ed67d8578792e1c0f6896a1fad91fcbf11b72bedc9548e75501e90",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "ff6a671dd2c5688408cd9b10c677ff95a123ef62ce30d62a0cdfa4e1dc67abe5"
+    },
+    "3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85": {
+      "binding": {
+        "amendment_sha256": "68bec7ac15074776a75e22fcf6b2ae213edda15e13eb946e197fc6a60359fedc",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "d697dc5f171028a3812f6be070e866e8",
+        "grant_sha256": "bb8df638e46aafe156e6338495121cb1a58b32b027bb2082e1989098b51568e8",
+        "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+        "offer_sha256": "c9dc8958c70669a13106324728ec1dda625cc99627e4dd67de25df6db516fefe",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "ecb89c2cfe6db31e16d5a6e9d3a5cf65",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33",
+        "unit": "ns-hist-14-iniconfig"
+      },
+      "offer_sha256": "c9dc8958c70669a13106324728ec1dda625cc99627e4dd67de25df6db516fefe",
+      "public_key_sha256": "790e020a32743ee6efd1ed55a09338d6089872732d05de573ecb9f3fb2d45f77",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "8ca6fe8da26da5381f1fa463adc35be222a09f533822b33a8c01abcd206efc4e"
+    },
+    "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633": {
+      "binding": {
+        "amendment_sha256": "49deb6a9a7a7cee90d6365a6b547aaee3beba328ab76c6220532e958f6be1d22",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "226cf094672d32025a79dd4a0ede40f2",
+        "grant_sha256": "f4a70095793544119f4f7ec3ac6543ffefbbd071391ff56391cb3fec6d52afa7",
+        "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+        "offer_sha256": "08102ff8240aca92cb469ae1ee185fd377d1259c1ff17f4cfb7bc4b5d2081beb",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "208ecedc4cf55842d589fe32bc5c34f2",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe",
+        "unit": "ns-hist-12-more-itertools"
+      },
+      "offer_sha256": "08102ff8240aca92cb469ae1ee185fd377d1259c1ff17f4cfb7bc4b5d2081beb",
+      "public_key_sha256": "a81b6be37b2fd33a5f09acfc43847d5e3340d20abc63ba83a60c0bca34370517",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "c21e09b853c90e4cdbf5cb315e0a230eeb66159f946bb3f08dec29c06fe22cc0"
+    },
+    "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1": {
+      "binding": {
+        "amendment_sha256": "17ead7752e1f25859b4dba9f7c368f57914113cd12dd082a910164a0ded6b86c",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "0b8c7faf3ce955ef590197d2f1b658e4",
+        "grant_sha256": "5e94b9e7b69e8a9589168c8eda20b0b1eb0fa7e7e2c36e69d25d63b967873faa",
+        "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+        "offer_sha256": "c775fc3f0018725b25b29a35b42afe6f7f065a7f91bf0d2186e1c33b05125508",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "504aef8c46f64a2cec98d63d509dac57",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e",
+        "unit": "ns-hist-10-installer"
+      },
+      "offer_sha256": "c775fc3f0018725b25b29a35b42afe6f7f065a7f91bf0d2186e1c33b05125508",
+      "public_key_sha256": "d9f708ba3dd21d86f2786a25b2749d5ecdd736f0ee62092a1bca8d23a03303d9",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "d0ce0827cd71a7826b624c9ea1843bf4b20997edb5c39ff7cbbca2825fc33366"
+    },
+    "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca": {
+      "binding": {
+        "amendment_sha256": "f54c0d2933b85d0673bfe0a1a47799675c9c36057f376041655c53f4c23c471b",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "9b948527032db23d00b3bd4cc5f40525",
+        "grant_sha256": "e91d255b0e7747be6467b863f645bec507cd9857323c2ceeecc82bfccf2399aa",
+        "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+        "offer_sha256": "12f3334ac7f44bac2ae15122b0800f1afcedf0c3d1e8cac85003dc8c4d59eb80",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "c2b54f701b06e8af50c689e9559d3b79",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e",
+        "unit": "ns-hist-10-installer"
+      },
+      "offer_sha256": "12f3334ac7f44bac2ae15122b0800f1afcedf0c3d1e8cac85003dc8c4d59eb80",
+      "public_key_sha256": "7ac63b58a71a8398114bd6c0a77cf8e722dcb74e379c3691c9314d81fc5f841b",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "f4048e9b406baa876d02400fe028e2b6bdb1e9a9677f25667b9225b26b529ff8"
+    },
+    "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6": {
+      "binding": {
+        "amendment_sha256": "2675162f0a760952a4abd73957054c1750743fac0a8d366c11a0adda9e90bd32",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "0135677254c1bac93d53e2a130ceb497",
+        "grant_sha256": "0776cc8eaf24146dd59e3049c027abe7fbd9c8b53b9d59263795ba1de00e7ec6",
+        "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+        "offer_sha256": "f51d94bd92473ac76599b85e499ad07ef50425816e395b46bc23fc5646f57ac9",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "b337e6237f3a52b2038f707137aa6352",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe",
+        "unit": "ns-hist-12-more-itertools"
+      },
+      "offer_sha256": "f51d94bd92473ac76599b85e499ad07ef50425816e395b46bc23fc5646f57ac9",
+      "public_key_sha256": "b172a1372ad0ed34d28af47e7fad3ff853594fd6af45d8e5b8e2771edaf246b7",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "aeb18ed14806a9d1885877495e02e3174332ec1fd657a9d5a4f9fd9de6500b50"
+    },
+    "6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b": {
+      "binding": {
+        "amendment_sha256": "fbc023badf7d9066be5ab0b92a309876f3ac2010d2637fabfafb3e832da7f8fa",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "124e614ce8930d9b982d331db5277067",
+        "grant_sha256": "2bd9f9a52d839ea2056797f667aec3173bd60a1111d1b095d2268a859e7c2ac8",
+        "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+        "offer_sha256": "0fe4a506d7cc7b0e8015c4e80be0f28681a7314d0ebd69cc0a967b6fc24a6802",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "f47337bc0ec40942c0fc17ebea98ecf2",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33",
+        "unit": "ns-hist-14-iniconfig"
+      },
+      "offer_sha256": "0fe4a506d7cc7b0e8015c4e80be0f28681a7314d0ebd69cc0a967b6fc24a6802",
+      "public_key_sha256": "e6897aced42eba32efcbfccda176039519b471df894d5d64f6cdcef540c66747",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "ff05655731571aeb2ef224bd44165db02101177025d1b481c617fea484672c95"
+    },
+    "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67": {
+      "binding": {
+        "amendment_sha256": "35a9d6a52011784112d82445fb40f053ef15abd9b483cbd955fa8804f818ff1f",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "4a69aaf5deac79d45e8753be0371fd84",
+        "grant_sha256": "61853ef4af87d9dfa1edf5ab130fc07ea1472933d2be46a1d84761145fd5542d",
+        "manifest_sha256": "f5594e45f6b758a36d2f8b43adbdb9624939f2b77ccebb2a5b356f3f42d959ec",
+        "offer_sha256": "f80969728b8eecc5502c0e15ed5d130b2d130433330089b10db8d17d41455ef7",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "f2cb6abac7c43ae057bd0dd4ab6dc233",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5760a4471c370919aa8a7af0d6890791954109ce2aa59426e4a87d3a54b31726",
+        "unit": "ns-hist-09-tomlkit"
+      },
+      "offer_sha256": "f80969728b8eecc5502c0e15ed5d130b2d130433330089b10db8d17d41455ef7",
+      "public_key_sha256": "c6797d2f5ef606f2e493bfa1d09abcd502e0290e6958ff425e7ece0499a232c6",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "03702ac9769206da1d6158dc4457394560a26b0a62fd35f373b486b404682276"
+    },
+    "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64": {
+      "binding": {
+        "amendment_sha256": "aefa2e85cced70c433507bf4ef4eab0fbde3f2d1d97d88beb5e87a9da4c23829",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "6a99c80fabf71e3f13da167f9a1d16c0",
+        "grant_sha256": "cd58fcb82d384697a18e4b9dc3c6bf76c25c6ff08ded5dcceb1be516774f0a7e",
+        "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+        "offer_sha256": "151e0adc65606dbf95a7386c43689a1882b022a88e00b1812b653d84c9c0b0db",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "d443b252e54846d4b5d74a903c83b680",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a",
+        "unit": "ns-hist-13-charset_normalizer"
+      },
+      "offer_sha256": "151e0adc65606dbf95a7386c43689a1882b022a88e00b1812b653d84c9c0b0db",
+      "public_key_sha256": "69eeb233d6716d4812b6684d923ddb73b5d895807ff74db794681b3bb2fcce0f",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "6ad5afa28516acb44750eb095b982fc0e475db1d9b52a3b8482de257d8b79fa1"
+    },
+    "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442": {
+      "binding": {
+        "amendment_sha256": "c08088194b85cb414cab0245328a15e2ee061472373bf3b9429d7733ea80a906",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "2eabd1922cb73d65c973a59f7116b8b4",
+        "grant_sha256": "797eec4347dc3008b3e3e5275f6e114bba8ff0eb12ba8704cc08f51cad3bb901",
+        "manifest_sha256": "136ffb923eb4b00bbabd70bef2ded3e2b84ad70643e10d8cc5d616ede09efc0c",
+        "offer_sha256": "d2d19fc3e6ff7fe65d06dd013c07898c9f03f98a0b40f7f3308acacce2c36df9",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "1c203e6f6e3bac793f31f604988e75aa",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5e65f4a65436ace167dabc064064aded50ab2cbbad3061331dd47d33acd432bd",
+        "unit": "ns-hist-16-jinja"
+      },
+      "offer_sha256": "d2d19fc3e6ff7fe65d06dd013c07898c9f03f98a0b40f7f3308acacce2c36df9",
+      "public_key_sha256": "b5dbd1095234074cc047f90bb6d2c06bbe0df0f0ddcb184a432fd1111eb5acf1",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "df26d013bf6ff9a4303d468bba3703362e6df7e6492d356f8952537e109f84f2"
+    },
+    "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d": {
+      "binding": {
+        "amendment_sha256": "6d895c31bd08679f9883a7548193f5b720dd7c7c157099eb01f63bd8ae732dfd",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "f4f9480918cf074d0c87da59b069bc63",
+        "grant_sha256": "751e0359ca36ddc87bb15b158ca4a7a2ccb04301d4cdefae31a73d5f44f8d61d",
+        "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+        "offer_sha256": "530d625c0de693685a18cb0e5aa354d32b40769c7e0ef465e45a6c6c08e2ae99",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "d38499499e1ceb47c448a86ad6bc7438",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a",
+        "unit": "ns-hist-13-charset_normalizer"
+      },
+      "offer_sha256": "530d625c0de693685a18cb0e5aa354d32b40769c7e0ef465e45a6c6c08e2ae99",
+      "public_key_sha256": "fe96b6f8db5a4dd65e6347a04b3e62a0bbc69c620e84da05e740f410d14ab6d4",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "8deee99e00bf945c94c5300382348240115a0ccbc254c10a1fae3fb12c943230"
+    },
+    "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2": {
+      "binding": {
+        "amendment_sha256": "83041501bfc15aec32e8da8a358041df7ab9d6b46631a99aea3f4d8efd35587f",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "950c414951cf26f205ee4294af57e087",
+        "grant_sha256": "7a2271bf5b9983bd8d2f19cd956e36773c384d2fe5141cf585476f54fedbda2e",
+        "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+        "offer_sha256": "10dc2d40092fc9112a3083b1bd3c6f8383640c56a40fa2f482ed5651baa9216f",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "a3c5b5d2e01468461cf4c9086fb2d35d",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33",
+        "unit": "ns-hist-14-iniconfig"
+      },
+      "offer_sha256": "10dc2d40092fc9112a3083b1bd3c6f8383640c56a40fa2f482ed5651baa9216f",
+      "public_key_sha256": "664dda0b0c37c1c1a8879646f6ba0575c28cfcda93c714697fd18a412af9aec7",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "65a3d97c007797897616e34b267f5024a19a6eeba9a7219299144971636eb2eb"
+    },
+    "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08": {
+      "binding": {
+        "amendment_sha256": "37cf32d7ada6ed66624c0f32c822774f51801c3a8964d1f840d4faea7e5a6a9e",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "870c32ab35b38d67a07037fb1a2c8f61",
+        "grant_sha256": "1c29e5fcac0ca17409f351ebf6a93da44b296a3e4ff4d1432cf10c2921cae83b",
+        "manifest_sha256": "9860b1419fc0d6a83380fce5ea90be97cdf82806a22fb590b32298cec57da68f",
+        "offer_sha256": "fbf0fa5b9281276585a0265028f703b0fae22413b426c18f698badb0cfa67712",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "1c46506b88be5e92c043bd38d04a63fa",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7a764051675148e1f6cd008b77bd5e40c911c24649e555fbb537fd94eb2f2cbe",
+        "unit": "ns-hist-12-more-itertools"
+      },
+      "offer_sha256": "fbf0fa5b9281276585a0265028f703b0fae22413b426c18f698badb0cfa67712",
+      "public_key_sha256": "0957fa0b4b1541357c46a404db5e5a028451c118e6a0a8762001051b6c65aaf4",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "20f213d5393ec085d76299d11a291ea5ff2ce366d40410f023687c55d4b18379"
+    },
+    "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148": {
+      "binding": {
+        "amendment_sha256": "3f33be123f8f785816701882b667eedddea71312a7b67ef49928293973478902",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "ca6d0cfee78d01459e549fe49f800bb7",
+        "grant_sha256": "58d644f1928930d4319b1c0e276f0015afd004e02d3385a29c6088e5fde82e7d",
+        "manifest_sha256": "f5594e45f6b758a36d2f8b43adbdb9624939f2b77ccebb2a5b356f3f42d959ec",
+        "offer_sha256": "b4ef390009c6b5312c484e86e25e848508bcfed874d444cec720faa800e7d27c",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "5369f8bba24f9c1213f59ba1dda51e12",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5760a4471c370919aa8a7af0d6890791954109ce2aa59426e4a87d3a54b31726",
+        "unit": "ns-hist-09-tomlkit"
+      },
+      "offer_sha256": "b4ef390009c6b5312c484e86e25e848508bcfed874d444cec720faa800e7d27c",
+      "public_key_sha256": "b2db12c18305c0b265e6b3d3b4af7e43fb01407af88d5fa58ec1bffb2250638a",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "32d30c83357a3fb4275d4238ca85b6de79c7515917cd8ea19865e2d125376d0b"
+    },
+    "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b": {
+      "binding": {
+        "amendment_sha256": "fbe6ccaf9d191ad6cb044604b65ad56248315ac40e9f0683048ec5455bf2e10b",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "056c01c14fc0908aca4eb4d0df58fbdf",
+        "grant_sha256": "97e2b525a802212807e371f733e8b95516aa290cf9035c1270c21a26a0609ae0",
+        "manifest_sha256": "136ffb923eb4b00bbabd70bef2ded3e2b84ad70643e10d8cc5d616ede09efc0c",
+        "offer_sha256": "91460099d7c823ecf33c318459b7c7b0526d06ef2e88e85764319fb320d15bcb",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "aa319fa8ac485ef145a3a983fe2b80b3",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5e65f4a65436ace167dabc064064aded50ab2cbbad3061331dd47d33acd432bd",
+        "unit": "ns-hist-16-jinja"
+      },
+      "offer_sha256": "91460099d7c823ecf33c318459b7c7b0526d06ef2e88e85764319fb320d15bcb",
+      "public_key_sha256": "b338824f45a05e3a0c6f72ed5a8d529121578eb966714cdb59e07f4b20305dab",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "439a6972a76edbad3d6a7281e3826b238d9c90ae2b15d0f6797421a4936196b2"
+    },
+    "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a": {
+      "binding": {
+        "amendment_sha256": "29bc57dfeded4e7d545eedb62774e92845d14d0edc730872a4a6dd36dd26c055",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "ab186989d6618592815a12fdf6ad471d",
+        "grant_sha256": "1a2136037e385e08bae48731a79f0056eec22deb0f25aea0995d2ef59e67bdb9",
+        "manifest_sha256": "136ffb923eb4b00bbabd70bef2ded3e2b84ad70643e10d8cc5d616ede09efc0c",
+        "offer_sha256": "260110c0babe1539e192b3009c53e77fcb27430260df708bf4a11de2f7566f42",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "83444e9c6cc4bddf4bf466920b272fa0",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5e65f4a65436ace167dabc064064aded50ab2cbbad3061331dd47d33acd432bd",
+        "unit": "ns-hist-16-jinja"
+      },
+      "offer_sha256": "260110c0babe1539e192b3009c53e77fcb27430260df708bf4a11de2f7566f42",
+      "public_key_sha256": "d07924e5463b2138edf70bbaeafe96494f79739336cb4feedb918524ef466aa1",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "a001222c12cc0d0030a386d2ee58c37d840e8747f5548ef8ab838c676d46e3bb"
+    },
+    "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0": {
+      "binding": {
+        "amendment_sha256": "b6b90773ab6463893a3875c122f3d72ea7dad8f7c30f2eacb74c8b6c220f0ba4",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "7347951df2bffba2cb521ace410ed9ea",
+        "grant_sha256": "f1be1a7e1dc3c1aa1432c8a674092761f686a47e5f08025ddc4cf3f2402c1e29",
+        "manifest_sha256": "136ffb923eb4b00bbabd70bef2ded3e2b84ad70643e10d8cc5d616ede09efc0c",
+        "offer_sha256": "88a79ac5807062b85f1d6a1dabbf50e8a27f5bc7d71e271786f513a9341358fb",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "be03899ef0b9520af52bfe7f8fe80341",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5e65f4a65436ace167dabc064064aded50ab2cbbad3061331dd47d33acd432bd",
+        "unit": "ns-hist-16-jinja"
+      },
+      "offer_sha256": "88a79ac5807062b85f1d6a1dabbf50e8a27f5bc7d71e271786f513a9341358fb",
+      "public_key_sha256": "abce19fc85df4165be77d58e45c187f9c263392f11787d27ce4ae2f72dfff0e5",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "81a5e8690633773baf8a22fe4bec87e26cfc08e012e7fb3ec39f997d51501b36"
+    },
+    "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2": {
+      "binding": {
+        "amendment_sha256": "f3209f8951ee507c14c3f481925920666cbfd213f652fe62b221e3f2a91224e7",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "12aa474804335a6c2455e63bc0c9e545",
+        "grant_sha256": "6dda67ff11c1e7cbf0c68e6393d35af1afdb2954dcbaa9a0335bbeeaed9e1be4",
+        "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+        "offer_sha256": "912e346006fe024a94b9bdc3a56f3151514f9937ef0514a47d839e874566a9fe",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "13206280d444a6cd26623207b26d0817",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a",
+        "unit": "ns-hist-15-wheel"
+      },
+      "offer_sha256": "912e346006fe024a94b9bdc3a56f3151514f9937ef0514a47d839e874566a9fe",
+      "public_key_sha256": "97d820f5362ac19b40e88c04a64c26397082d67dd223ab281b6da097ead89cdc",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "ace805361d8990de2057daf1330fbe757cf2e1e548867582b9fb14a42a8c7bdb"
+    },
+    "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e": {
+      "binding": {
+        "amendment_sha256": "29a05c0325e4c29c4776707783a0ba10d6286160d4f355844303674e11a38b65",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "ad84655b2d394f2cf0ce82a3a00b765d",
+        "grant_sha256": "607a7821c206bf0c558bf58c492fc6a509fb303d9d05b991f3e1d98f13ab583b",
+        "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+        "offer_sha256": "5c0694c1fd1aef5cfc733d04b46699f796ea53e88835f3677c84b508009ed1b7",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "a1cc31bddbb7ff3a28356178fd6f2d30",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a",
+        "unit": "ns-hist-15-wheel"
+      },
+      "offer_sha256": "5c0694c1fd1aef5cfc733d04b46699f796ea53e88835f3677c84b508009ed1b7",
+      "public_key_sha256": "87b6eac240fe0f0dfc9a0de71fceef4be3095a9f54e056739a349ed5bf41a063",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "b72e6c7b15012bfc5dde1595f41553da304285161605116ee522b5112f5cba51"
+    },
+    "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68": {
+      "binding": {
+        "amendment_sha256": "799de1a6528b18ffb058fed3c20cd9aef51b9fbe7366622be5039d76ea3e5a71",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "5f744087c5b5c05ac0dd68fb8f1b55a2",
+        "grant_sha256": "5743f2319f11cda9ff0674d27626cb316a7441e71b5484c391d4d337901d5160",
+        "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+        "offer_sha256": "6fa805788bda961a7bfae305b1de3cfc1d12925efc8da4066fe0041d646d6321",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "fd1a5bd433ef86597b70ca6872c7376b",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e",
+        "unit": "ns-hist-10-installer"
+      },
+      "offer_sha256": "6fa805788bda961a7bfae305b1de3cfc1d12925efc8da4066fe0041d646d6321",
+      "public_key_sha256": "9600c51bea6f346877d3ee734704103b05095188b4724dc2e7afe566a8af086c",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "65672d9185f3d45b5ac4f84313d8553f3032d1be8922da30b9bbb48bd9eec5d8"
+    },
+    "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0": {
+      "binding": {
+        "amendment_sha256": "71887dec94ca097a8035d8308f3eab0cf5023771a544cba3811389fa1e0c27a1",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "1498d5ab0c901aca0f72a7474fed5ffd",
+        "grant_sha256": "d17da85dc0ccd5dabe8f761770d3b8c7e5292634c4b34c383c11c16c2d30229f",
+        "manifest_sha256": "f5594e45f6b758a36d2f8b43adbdb9624939f2b77ccebb2a5b356f3f42d959ec",
+        "offer_sha256": "5971026f3bd37a0640862410d0e4729140523366aa2df3ad5de4664c6a10816a",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "92fcaa0e8c391ffafe252c76ac5d6f41",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "5760a4471c370919aa8a7af0d6890791954109ce2aa59426e4a87d3a54b31726",
+        "unit": "ns-hist-09-tomlkit"
+      },
+      "offer_sha256": "5971026f3bd37a0640862410d0e4729140523366aa2df3ad5de4664c6a10816a",
+      "public_key_sha256": "691e560711f1295bf8c24ff8d57d80ce33b3edcddf6daed3288b3b18bd268f99",
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "bd08bc4beb223519e04d675f5ac5d496d92c0cb25d062464aa2bc0225f36a1cf"
+    },
+    "f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7": {
+      "binding": {
+        "amendment_sha256": "ea3d3a2d872dba7d576a7debe67aab6e3837c535a568aca5f37965e175a0dae0",
+        "arm": "A",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "a65b7a86220ef41e8d4ba46a0326e0b6",
+        "grant_sha256": "8d2f7ff3d1a63e215f5e0f4e301345108763d2378c0b94b49bda80937a5f376b",
+        "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+        "offer_sha256": "b27fac08b976b83b06dc9b8b451cec886e85fcf08ff4be2289eccd8e8edb395f",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "A",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 104729,
+        "request_id": "6298421f129a2c874e4e5086b8c9b768",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33",
+        "unit": "ns-hist-14-iniconfig"
+      },
+      "offer_sha256": "b27fac08b976b83b06dc9b8b451cec886e85fcf08ff4be2289eccd8e8edb395f",
+      "public_key_sha256": "a8a9cc5a696a4fea5281d7e863225f2e3defcad9cd165fcb189dd0e687545725",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "response.json",
+      "terminal_sha256": "8f0c2446922dd8be3ac97074be44bef658cb9b166969ea88c28757b9b4efd028"
+    },
+    "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f": {
+      "binding": {
+        "amendment_sha256": "e4d18f027fa434dd914f711ff1ce492a7ef305c16060dd6073d91b6734271d5f",
+        "arm": "B",
+        "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+        "cache": "local_cold",
+        "cell_id": "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f",
+        "final_freeze_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+        "grant_id": "45460cf1ce9a0f87fc6cba9b20c5f31a",
+        "grant_sha256": "45ce8165abb8a856b27942554766d3ea6e3070df2d891b9c94f32752f7c7be64",
+        "manifest_sha256": "0484175664afbf4f299b3237a64c57cf6a9290a08d72084dbe06e5f3a523a570",
+        "offer_sha256": "73dac33a47981c3bb9e27cde106c1f570b54dec3cc359261683c4a340cbb7f82",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "context_profile_sha256": "80bfcc297437358969c0730202efe3e02eaa3c7f9e5fa11c046168a51afd4d41",
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "child_absolute_wall_seconds": 595,
+            "context_policy": "ns-pilot-AB-common-context/v1: same public raw spans; B adds real native source-linked semantic records; exact omissions; no window truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "response_contract": {
+              "local_candidate_admission_unchanged": true,
+              "response_format_sha256": "6f97eb36b5c10128b872918dd86c8248bbcf3f506ffbac1db17d5cc0115ddb7c",
+              "schema": "ns-http-json-edits-response-contract/v2",
+              "single_response_no_tools": true,
+              "system_prompt_sha256": "09af880a80886b89c44914934ec6bbb60d3db2f5cc2e1e53574bd6b376272bbe"
+            },
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 590,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 600
+          },
+          "implemented_arm": "B",
+          "implemented_cache": "local_cold",
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "mechanism_profile_sha256": "e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d",
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": true,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 128,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        },
+        "record_kind": "final",
+        "repetition": 130363,
+        "request_id": "276e53b5250b633d111407a7a96edc64",
+        "schema": "operator-final-request/v1",
+        "source_sha256": "749692af806570868eb1914f6735f3dcc42db6c1c274590dc429108989d1b69e",
+        "unit": "ns-hist-11-tornado"
+      },
+      "offer_sha256": "73dac33a47981c3bb9e27cde106c1f570b54dec3cc359261683c4a340cbb7f82",
+      "public_key_sha256": "5d0cb2d8ce360b3b77ca2206b016e2433d1c62dbcc63db71bd5bec022e9b2bfb",
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "terminal_filename": "disposition.json",
+      "terminal_sha256": "44afb59758ff6c12d0086b1981d90e450bc333577daf3088de2f64d1eadf3572"
+    }
+  },
+  "runtime_continuation": {
+    "analysis_policy_changed": false,
+    "authority": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+      "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+    },
+    "consumed_original_cells": 7,
+    "contract_binding": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/root_driver_candidate_v1/offline_client/inputs/runtime_continuation_contract.private.json",
+      "sha256": "158d62aa5a7c6fe7ebc17789f1288af5d248e7a4dbe108d6a44b1f807357c404"
+    },
+    "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "lease_liveness_verified_during_reduction": false,
+    "new_runtime_is_not_original_source": true,
+    "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "prospective_continuation_cells": 25,
+    "same_original_batch_and_freeze": true,
+    "schema": "ns-final-mixed-runtime-provenance/v1",
+    "source_maps_represent_distinct_actual_runtimes": true
+  },
+  "schema": "ns-final-root-cell-authority-proposal/v1",
+  "scope": "Actual32 signed final terminals only, with raw outcomes and signed measured-resource compliance. Root/native evidence authority remains separate; no managed authoring completion claim."
+}

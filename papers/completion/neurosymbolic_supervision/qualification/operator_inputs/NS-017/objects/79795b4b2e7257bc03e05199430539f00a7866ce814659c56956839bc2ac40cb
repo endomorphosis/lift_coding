@@ -1,0 +1,45 @@
+{
+  "actual_lease_check": {
+    "allocation_kind": "cooperative_operator_lease",
+    "available_memory_bytes": 103799963648,
+    "evidence_sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4",
+    "exclusive_physical_resources": false,
+    "held": true,
+    "holder_pid": 1490550,
+    "holder_start_ticks": "67976842",
+    "lock_inode": 78778347
+  },
+  "admission": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/managed_lease_admission.approved.private.json",
+    "sha256": "2e461857bbdc45fcbb94434ca1d310a3a0a3131d7f9f643205594fb949a5e6e4"
+  },
+  "caller_session_lifetime_independent": true,
+  "fixture": false,
+  "holder_pid": 1490550,
+  "holder_start_ticks": "67976842",
+  "launcher_wall_seconds": 0.33431415795348585,
+  "manager_owned_process_confirmed": true,
+  "manager_properties": {
+    "ActiveState": "active",
+    "CPUUsageNSec": "37734000",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/ns-final-lease-ab32-continuation-v1.service",
+    "ExecMainStatus": "0",
+    "LoadState": "loaded",
+    "MainPID": "1490550",
+    "MemoryPeak": "7598080",
+    "Result": "success",
+    "SubState": "running",
+    "TasksCurrent": "1"
+  },
+  "native_calls": 0,
+  "production_scientific_authority_created": false,
+  "provider_calls": 0,
+  "resource_reservation_evidence": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+    "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+  },
+  "schema": "ns-final-managed-lease-launch/v1",
+  "scorer_calls": 0,
+  "success": true,
+  "unit_name": "ns-final-lease-ab32-continuation-v1.service"
+}

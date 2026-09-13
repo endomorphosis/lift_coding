@@ -1,0 +1,152 @@
+"""One-use offline client container; no scientific host execution or grant API."""
+import sys
+sys.dont_write_bytecode = True
+import argparse, hashlib, json, os, pathlib, re, subprocess, time
+
+P = pathlib.Path
+HERE = P(__file__).resolve().parent
+DOCKER = ['/usr/bin/docker', '--host', 'unix:///var/run/docker.sock']
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+def sha(path):
+    return hashlib.sha256(P(path).read_bytes()).hexdigest()
+
+def read_bound(path, expected):
+    path = P(path)
+    require(path.is_absolute() and path.resolve() == path and not path.is_symlink() and path.is_file() and path.stat().st_size <= 1048576, 'bounded canonical input required')
+    require(sha(path) == expected, 'input hash differs: '+str(path))
+    return json.loads(path.read_text())
+
+def save(path, value):
+    fd = os.open(path, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'w') as f:
+        json.dump(value, f, sort_keys=True, indent=2, allow_nan=False); f.write('\n'); f.flush(); os.fsync(f.fileno())
+    fd = os.open(P(path).parent, os.O_DIRECTORY); os.fsync(fd); os.close(fd)
+
+def command(argv, timeout=30):
+    return subprocess.run(argv, stdin=subprocess.DEVNULL, capture_output=True, timeout=timeout, env={'PATH':'/usr/bin:/bin'})
+
+def inspect(cid):
+    result = command(DOCKER+['inspect', cid])
+    require(result.returncode == 0, 'exact container inspect failed')
+    rows = json.loads(result.stdout); require(len(rows) == 1, 'ambiguous inspect')
+    return rows[0]
+
+def exact_absence(result, name):
+    return result.returncode == 1 and result.stdout.strip() == b'[]' and result.stderr.decode().strip().casefold() in ('error: no such object: '+name, 'error response from daemon: no such container: '+name)
+
+def main():
+    os.umask(0o077)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--package-sha256', required=True)
+    parser.add_argument('--output', required=True)
+    modes = parser.add_mutually_exclusive_group(required=True)
+    modes.add_argument('--qualify-no-offer', action='store_true')
+    modes.add_argument('--admission')
+    parser.add_argument('--admission-sha256')
+    args = parser.parse_args()
+    package = read_bound(HERE/'package.private.json', args.package_sha256)
+    for rel, expected in package['package_files'].items():
+        require(sha(HERE/rel) == expected, 'operator client package drift')
+    contract = read_bound(package['continuation_public_contract']['path'], package['continuation_public_contract']['sha256'])
+    verifier = P(package['continuation_verifier']['path'])
+    require(sha(verifier) == package['continuation_verifier']['sha256'], 'extra continuation verifier changed')
+    require(package['source5'] == read_bound(package['original_package']['path'], package['original_package']['sha256'])['source5'], 'original frozen source5 must stay exact')
+    require(contract['ordered_cells'] == [cell['cell_id'] for cell in package['ordered_cells']]
+            and contract['original_batch'] == package['batch'], 'continued client order or batch differs')
+    output = P(args.output)
+    require(output.is_absolute() and output.resolve() == output and not output.exists(), 'fresh canonical output required')
+    worker = P(package['worker_root'])
+    profile = HERE/'inputs/production_profile.json'
+    profile_sha = package['profile_sha256']
+    mode = 'qualify_no_offer' if args.qualify_no_offer else 'poll'
+    index = 0
+    admission = None
+    queue = output/'empty-queue' if args.qualify_no_offer else P(package['queue_root'])
+    if args.admission:
+        require(args.admission_sha256 is not None, 'admission hash required')
+        admission = read_bound(args.admission, args.admission_sha256)
+        require(admission.get('schema') == 'ns028-operator-final-client-admission/v1' and admission.get('approved') is True and admission.get('authority') == 'root_operator_scientific_driver', 'explicit operator client admission required')
+        require(admission.get('runtime_continuation_authority') == contract['authority'], 'client admission continuation authority differs')
+        require(admission.get('package_sha256') == args.package_sha256 and admission.get('batch_sha256') == package['batch']['sha256'] and admission.get('worker_root') == str(worker), 'admission driver/batch/workspace differs')
+        require(admission.get('operator_driver_amendment_sha256') == package['root_operator_driver_amendment']['sha256'], 'root driver provenance differs')
+        require(admission.get('provider_calls_by_client') == 0 and admission.get('scorer_calls_by_client') == 0 and admission.get('authoring_claim_execution') is False, 'driver scope differs')
+        profile = P(admission['profile']['path']); profile_sha = admission['profile']['sha256']
+        cfg = read_bound(profile, profile_sha)
+        require(cfg.get('final_host_handoff',{}).get('host_package_sha256') == package['host_package_sha256'], 'different host profile')
+        require(queue.exists() and queue.is_dir() and queue.resolve() == queue, 'exact root-created queue required')
+        index = admission['cell_index']; require(type(index) is int and 0 <= index < 32, 'ordered index invalid')
+        require(admission['cell_id'] == package['ordered_cells'][index]['cell_id'], 'cell outside frozen order')
+    output.mkdir(mode=0o700)
+    for name in ['work','home','docker-config']:
+        (output/name).mkdir(mode=0o700)
+    if args.qualify_no_offer:
+        queue.mkdir(mode=0o700)
+    invocation = {'schema':'ns028-operator-client-invocation/v1','worker_root':str(worker),'source5':package['source5'],'profile_sha256':profile_sha,'ordered_cells':package['ordered_cells'],'batch_sha256':package['batch']['sha256'],'mode':mode,'cell_index':index}
+    invocation.update(runtime_continuation_contract=contract, runtime_continuation_contract_sha256=hashlib.sha256(json.dumps(contract,sort_keys=True,separators=(',',':')).encode()).hexdigest(), runtime_continuation_verifier_sha256=package['continuation_verifier']['sha256'])
+    save(output/'invocation.json', invocation)
+    name = 'ns028-offline-client-'+hashlib.sha256(str(output).encode()).hexdigest()[:20]
+    mounts = [(HERE/'bootstrap.py','/client/bootstrap.py',True),(output/'invocation.json','/client/invocation.json',True),(output/'work','/client-work',False),(output/'home','/client-home',False),(queue,package['queue_root'],False),(profile,str(worker/package['profile_relative']),True)]
+    mounts += [(verifier,'/client/continuation_client.py',True)]
+    mounts += [(HERE/'client_source'/rel, str(worker/rel), True) for rel in package['source5']]
+    argv = DOCKER+['--config',str(output/'docker-config'),'create','--pull=never','--name',name,'--cidfile',str(output/'container.cid'),'--label','ns028.operator-client-package='+args.package_sha256,'--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--runtime=runc','--cpus=1','--memory=2147483648','--memory-swap=2147483648','--pids-limit=32','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=67108864','--workdir','/client','--entrypoint','/usr/bin/env']
+    for source,dest,ro in mounts:
+        require(',' not in str(source) and ',' not in dest, 'ambiguous bind path')
+        argv += ['--mount','type=bind,src='+str(source)+',dst='+dest+(',readonly' if ro else '')]
+    argv += [package['image'],'-i','PATH=/usr/bin:/bin','HOME=/client-home','TMPDIR=/tmp','PYTHONDONTWRITEBYTECODE=1','/usr/bin/python3','-I','-B','/client/bootstrap.py']
+    save(output/'plan.json', {'schema':'ns028-offline-operator-client-plan/v1','argv':argv,'mounts':[{'Source':str(s),'Destination':d,'RW':not ro}for s,d,ro in mounts],'image':package['image'],'package_sha256':args.package_sha256,'admission':None if admission is None else {'path':args.admission,'sha256':args.admission_sha256},'wall_seconds':60,'model_scorer_grant_calls':0})
+    result = {'schema':'ns028-offline-operator-client-execution/v1','mode':mode,'success':False,'pending':None,'package_sha256':args.package_sha256,'plan_sha256':sha(output/'plan.json'),'provider_calls':0,'scorer_calls':0,'grants_created':0,'authoring_claim_execution':False,'task_completion_admitted':False,'automatic_retry':False}
+    result.update(runtime_continuation_contract_sha256=invocation['runtime_continuation_contract_sha256'], runtime_continuation_verifier_sha256=invocation['runtime_continuation_verifier_sha256'], original_package=package['original_package'], actual_launcher_sha256=sha(__file__), actual_bootstrap_sha256=sha(HERE/'bootstrap.py'))
+    cid = None
+    attempted = False
+    started = time.monotonic()
+    try:
+        absent = command(DOCKER+['inspect',name])
+        save(output/'precreate.json', {'returncode':absent.returncode,'stdout':absent.stdout.decode(),'stderr':absent.stderr.decode()})
+        require(exact_absence(absent, name), 'container absence not exact')
+        result['pending'] = 'create_outcome_unknown'; attempted = True
+        created = command(argv,60)
+        save(output/'created.json', {'returncode':created.returncode,'stdout':created.stdout.decode(),'stderr':created.stderr.decode()})
+        require(created.returncode == 0, 'create failed')
+        cid = created.stdout.decode().strip()
+        require(re.fullmatch('[a-f0-9]{64}',cid) and (output/'container.cid').read_text().strip() == cid, 'CID differs')
+        data = inspect(cid); hc = data['HostConfig']
+        actual = sorted([{'Source':m['Source'],'Destination':m['Destination'],'RW':m['RW']} for m in data['Mounts'] if m['Type']=='bind'],key=lambda x:x['Destination'])
+        expected = sorted([{'Source':str(s),'Destination':d,'RW':not ro}for s,d,ro in mounts],key=lambda x:x['Destination'])
+        require(data['Image']==package['image'] and data['Name']=='/'+name and data['Config']['Labels']['ns028.operator-client-package']==args.package_sha256 and actual==expected,'actual source/mount boundary differs')
+        require(hc['NanoCpus']==1000000000 and hc['Memory']==2147483648 and hc['MemorySwap']==2147483648 and hc['PidsLimit']==32 and hc['NetworkMode']=='none' and hc['ReadonlyRootfs'] and hc['CapDrop']==['ALL'] and not hc['Privileged'] and not hc['PidMode'] and hc['Runtime']=='runc' and any(x.startswith('no-new-privileges')for x in hc['SecurityOpt']),'actual resource/security boundary differs')
+        require(data['State']['Status']=='created' and not data['State']['Running'],'unexpected already-started container')
+        save(output/'boundary.json',data)
+        result['pending']='client_running'
+        run = command(DOCKER+['start','--attach',cid],60)
+        save(output/'run.json',{'returncode':run.returncode,'stdout':run.stdout.decode(),'stderr':run.stderr.decode()})
+        final=inspect(cid);save(output/'final_inspect.json',final)
+        require(run.returncode==0 and final['State']['ExitCode']==0 and not final['State']['Running'] and not final['State']['OOMKilled'],'offline client failed')
+        body=json.loads((output/'work/result.json').read_text());require(body['task_completion_admitted'] is False,'client cannot complete native task')
+        if args.qualify_no_offer:
+            require(len(body['results'])==32 and all(x['result']['terminal']is False for x in body['results']) and not list(queue.iterdir()),'no-offer scope failed')
+        result.update(success=True,result_sha256=sha(output/'work/result.json'),exit_code=run.returncode)
+    except BaseException as exc:
+        result['error']=type(exc).__name__+': '+str(exc)
+    finally:
+        if attempted:
+            try:
+                data=inspect(cid or name)
+                require(data['Name']=='/'+name and data['Image']==package['image'] and data['Config']['Labels'].get('ns028.operator-client-package')==args.package_sha256,'cleanup identity differs')
+                cleaned=command(DOCKER+['rm','-f',data['Id']],30)
+                save(output/'cleanup.json',{'cid':data['Id'],'returncode':cleaned.returncode,'stdout':cleaned.stdout.decode(),'stderr':cleaned.stderr.decode()})
+                result['cleanup_exit_code']=cleaned.returncode
+                result['pending']=None if cleaned.returncode==0 else 'cleanup_unknown'
+            except BaseException as exc:
+                result['cleanup_error']=type(exc).__name__+': '+str(exc);result['pending']='operator_reconciliation_required'
+        result['wall_seconds']=time.monotonic()-started
+        result['success']=result['success'] and result['pending'] is None
+        save(output/'execution.private.json',result)
+    print(json.dumps({'path':str(output/'execution.private.json'),'sha256':sha(output/'execution.private.json'),'success':result['success'],'pending':result['pending']}))
+    return 0 if result['success'] else 1
+
+if __name__=='__main__':
+    raise SystemExit(main())

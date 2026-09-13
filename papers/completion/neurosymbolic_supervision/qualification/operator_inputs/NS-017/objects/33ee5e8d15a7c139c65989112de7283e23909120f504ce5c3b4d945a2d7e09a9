@@ -1,0 +1,25 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "f3209f8951ee507c14c3f481925920666cbfd213f652fe62b221e3f2a91224e7",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2",
+    "grant_sha256": "6dda67ff11c1e7cbf0c68e6393d35af1afdb2954dcbaa9a0335bbeeaed9e1be4",
+    "manifest_sha256": "37598d3007c5d2cb2ad4f61ff3c24482321f08e3010057611338191fa723ff78",
+    "original_receipt_sha256": "d23b1ffe30019983aa0c9adba3e6604cdfda52d8952a19ef089bda2be9161f30",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "provider_termination_evidence_sha256": "a9a8ba936dae5d9a357820510857d23b068deffd01b5328fad5615787f9252ad",
+    "request_sha256": "d2eff73566adab5463a90d5a55f5335a5dac805b4791391d730bea9fa6da080b",
+    "reservation_sha256": "79dbf2777be3237e427eba821d9683f9f38374bee46f9f98d29efcc0328ab9c2",
+    "service_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "source_sha256": "5f5d0af7cb89b166a1adda1b7fa6c46b6fca13f4c02126a13012c24118be1e2a"
+  },
+  "classification": "known_proposal_failure",
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T07:06:03.494160+00:00",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "The existing proposal attempt ended without an admitted patch (0 patch bytes). The retained signed result records operator_reconciliation_required and no scorer execution. Actual provider-child time 595.000329743023 seconds exceeds its 595-second limit; wrapper 595.4364538419759 and signed gateway 595.6951294029132 seconds remain separately measured nested intervals. The exact provider container has cleanup return 0 and is absent on fresh Docker inspection. Original signed termination and all failure evidence are retained. This is known-proposal-failure accounting with no useful or score credit. Remote charges remain unknown. No request, grant, proposal or scorer is retried. This record supplies no human annotation or final admission."
+}

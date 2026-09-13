@@ -1,0 +1,658 @@
+{
+  "authoring_claim_completion_admitted": false,
+  "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+  "cell_id": "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+  "files": {
+    "disposition.json": {
+      "bytes": 11540,
+      "sha256": "240e00dcaa0f33366d848d96a279dc65b3d0aa5aa39854209fb25a698b0de6f9"
+    },
+    "offer.json": {
+      "bytes": 9628,
+      "sha256": "a51f7e6ab3cbf7ac2a4af6ee802f44a82be131bbded1117525cd11db478d015e"
+    },
+    "proposal.json": {
+      "bytes": 23008,
+      "sha256": "c1dc540cdc176ad09105a1dc9854319cf4d92715706055710a2a91d3b1539735"
+    },
+    "request.json": {
+      "bytes": 660,
+      "sha256": "80f5528572a5e11ac0b3d7574467c2564bbb0212a8d688e088e6b7df0ea050bd"
+    },
+    "response.json": {
+      "bytes": 23008,
+      "sha256": "c1dc540cdc176ad09105a1dc9854319cf4d92715706055710a2a91d3b1539735"
+    }
+  },
+  "profile_sha256": "99cf725758eb3deb71e5ff75c6fa8d1e6a459530ad2ea4c4a4d4025c140a26d9",
+  "runtime_continuation_checks": {
+    "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+      "documents": {
+        "disposition.json": "240e00dcaa0f33366d848d96a279dc65b3d0aa5aa39854209fb25a698b0de6f9",
+        "proposal.json": "c1dc540cdc176ad09105a1dc9854319cf4d92715706055710a2a91d3b1539735",
+        "response.json": "c1dc540cdc176ad09105a1dc9854319cf4d92715706055710a2a91d3b1539735"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "a51f7e6ab3cbf7ac2a4af6ee802f44a82be131bbded1117525cd11db478d015e",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0",
+      "documents": {
+        "disposition.json": "0ca577d6071336daf72a0599adc16f50b3104e0890d179ed54341c04b28dcb2b",
+        "proposal.json": "f36e2d6b3140143884c3cfe671738540cadec47ceeb43e196aa0bbad806d9862",
+        "response.json": "f36e2d6b3140143884c3cfe671738540cadec47ceeb43e196aa0bbad806d9862"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "82f00945c4437d431ed1aecc972eb528e2de45adf5a5add95b7833aa2f024cf5",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064",
+      "documents": {
+        "proposal.json": "7926930d644ed75707b6de5dfdb334f904f2e3ab060e1009ea62d8f025f900a4",
+        "response.json": "8dbac99f6cf1561a12b08543dfbc6b1af9654c48835aa60a00dbd17a7345d489"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "2073978c634638f2c10f94b4d47e5ced9b325bb9bcc15d9f7657bdf712c26034",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0",
+      "documents": {
+        "proposal.json": "c3e570ccf22f6879a16ddc05acfd5f50593b358ff64de3ae7e40227184ed54b3",
+        "response.json": "48c533b2b04c6147e164b6799e0c90240a4eed4ae5b3d6d7462e29787bd0e538"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "f4de4ed52cde000153313e1b857501751683537290666fcb51bf9b7515466622",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8",
+      "documents": {
+        "proposal.json": "a1885ed4ee230d170da92f5a940dccd2c61a28153ceea6b43c1fe891d0ecbf1e",
+        "response.json": "9ac65172f263d8e56f7dfbb81e76d5611bf9e86f09ad0ad55a204c2eeb12bcd6"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "57061dd1250df5b99a22122c961d49b488ee4473be12fb188230fea3ebf315cb",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe",
+      "documents": {
+        "disposition.json": "227445cc681eda963c05e0832163dca04302d024e02f5394c56091ad7d8e3432",
+        "proposal.json": "5dba13ea3003586ff5d39f5e5a7119b71eea7581e8b35c5efc34991d2141d6fc",
+        "response.json": "5dba13ea3003586ff5d39f5e5a7119b71eea7581e8b35c5efc34991d2141d6fc"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "424457e741b0ac1205db855fdaa5e757fcf51351676744632dd3d8f16dddf9b8",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c",
+      "documents": {
+        "proposal.json": "f90bb6a6ae4ad3c33eec9ac1a2734528e0012a972ef175167c0fadf4664747e6",
+        "response.json": "b8581f697bac27402cd4a6d5928300f3c972e7fa9593daa16bd13472a8536449"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "0d33e200747df7e26e980585f293bdb5245745323f09ade28039ef585ebb6bd2",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2",
+      "documents": {
+        "proposal.json": "e0316b02c9ec1f132a228593c3fc29b9891b058b801ed09d3ea502b2d7366c0e",
+        "response.json": "ff6a671dd2c5688408cd9b10c677ff95a123ef62ce30d62a0cdfa4e1dc67abe5"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "13910fe70c48d707208d82a3f36958aaff466686c0b5059a1878c6598a4b8963",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633",
+      "documents": {
+        "proposal.json": "e684db0553f43bff66655a951c704c079b0add087a15922aaef64156f3f96b43",
+        "response.json": "c21e09b853c90e4cdbf5cb315e0a230eeb66159f946bb3f08dec29c06fe22cc0"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "08102ff8240aca92cb469ae1ee185fd377d1259c1ff17f4cfb7bc4b5d2081beb",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1",
+      "documents": {
+        "proposal.json": "aebb3a1eb0e51c0ffc514f82e04c4961bb697c01f2307fb298676a4e6a2549ae",
+        "response.json": "d0ce0827cd71a7826b624c9ea1843bf4b20997edb5c39ff7cbbca2825fc33366"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "c775fc3f0018725b25b29a35b42afe6f7f065a7f91bf0d2186e1c33b05125508",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca",
+      "documents": {
+        "disposition.json": "f4048e9b406baa876d02400fe028e2b6bdb1e9a9677f25667b9225b26b529ff8",
+        "proposal.json": "8182c9851bd3fdfe98d337de757d8c10b8af98904c94f03a129aef897bb30829",
+        "response.json": "8182c9851bd3fdfe98d337de757d8c10b8af98904c94f03a129aef897bb30829"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "12f3334ac7f44bac2ae15122b0800f1afcedf0c3d1e8cac85003dc8c4d59eb80",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6",
+      "documents": {
+        "proposal.json": "b80ef3edb1bd9d7848510184a784dc896fa83d6d3c0dbb7c95985297cb82b274",
+        "response.json": "aeb18ed14806a9d1885877495e02e3174332ec1fd657a9d5a4f9fd9de6500b50"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "f51d94bd92473ac76599b85e499ad07ef50425816e395b46bc23fc5646f57ac9",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67",
+      "documents": {
+        "disposition.json": "03702ac9769206da1d6158dc4457394560a26b0a62fd35f373b486b404682276",
+        "proposal.json": "705a286927e5749adf22340d840cdfa582f4a4aa1241614c7b98e1e4a6b24b38",
+        "response.json": "705a286927e5749adf22340d840cdfa582f4a4aa1241614c7b98e1e4a6b24b38"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "f80969728b8eecc5502c0e15ed5d130b2d130433330089b10db8d17d41455ef7",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64",
+      "documents": {
+        "disposition.json": "6ad5afa28516acb44750eb095b982fc0e475db1d9b52a3b8482de257d8b79fa1",
+        "proposal.json": "2eb30f25554843f5184e5dbf6783dd779421e33ba38741f1bd1a3c70f50d120c",
+        "response.json": "2eb30f25554843f5184e5dbf6783dd779421e33ba38741f1bd1a3c70f50d120c"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "151e0adc65606dbf95a7386c43689a1882b022a88e00b1812b653d84c9c0b0db",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d",
+      "documents": {
+        "disposition.json": "8deee99e00bf945c94c5300382348240115a0ccbc254c10a1fae3fb12c943230",
+        "proposal.json": "ecd845cca472e845fc74d3d87987d13979b12d4c8e750ba1f05955db441f80ec",
+        "response.json": "ecd845cca472e845fc74d3d87987d13979b12d4c8e750ba1f05955db441f80ec"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "530d625c0de693685a18cb0e5aa354d32b40769c7e0ef465e45a6c6c08e2ae99",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08",
+      "documents": {
+        "proposal.json": "f3de63990695c4b9891dd6616acfa1c048393406a99592afca4cef0b321213c6",
+        "response.json": "20f213d5393ec085d76299d11a291ea5ff2ce366d40410f023687c55d4b18379"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "fbf0fa5b9281276585a0265028f703b0fae22413b426c18f698badb0cfa67712",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148",
+      "documents": {
+        "proposal.json": "7bbbc67d473dc0b10a39fee160cdb0b9678d1af29a0d84e7336e1c1c22d6f43d",
+        "response.json": "32d30c83357a3fb4275d4238ca85b6de79c7515917cd8ea19865e2d125376d0b"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "b4ef390009c6b5312c484e86e25e848508bcfed874d444cec720faa800e7d27c",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+      "documents": {
+        "disposition.json": "65672d9185f3d45b5ac4f84313d8553f3032d1be8922da30b9bbb48bd9eec5d8",
+        "proposal.json": "3a92311c444df0ac298cd1ae3a074f67b5f2807cbcb9f0293020ed4c63a8c094",
+        "response.json": "3a92311c444df0ac298cd1ae3a074f67b5f2807cbcb9f0293020ed4c63a8c094"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "6fa805788bda961a7bfae305b1de3cfc1d12925efc8da4066fe0041d646d6321",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0",
+      "documents": {
+        "proposal.json": "1e63ff8ea115aaecea04955871a270dc5c697514386ff55f0c3c98a838ce8f92",
+        "response.json": "bd08bc4beb223519e04d675f5ac5d496d92c0cb25d062464aa2bc0225f36a1cf"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "5971026f3bd37a0640862410d0e4729140523366aa2df3ad5de4664c6a10816a",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": false,
+        "epoch": "original_resource_lease",
+        "lease_liveness_verified": false,
+        "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4"
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    },
+    "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f": {
+      "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+      "cell_id": "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f",
+      "documents": {
+        "disposition.json": "44afb59758ff6c12d0086b1981d90e450bc333577daf3088de2f64d1eadf3572",
+        "proposal.json": "07cbdcd463b284f7e2b549bbf6fffb48cb3a3c60e8cce9ab654f96c1067fb1b9",
+        "response.json": "07cbdcd463b284f7e2b549bbf6fffb48cb3a3c60e8cce9ab654f96c1067fb1b9"
+      },
+      "lease_liveness_verified": false,
+      "offer_sha256": "73dac33a47981c3bb9e27cde106c1f570b54dec3cc359261683c4a340cbb7f82",
+      "provider_calls": 0,
+      "request_writes": 0,
+      "runtime_source_provenance": {
+        "continuation_applied": true,
+        "contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+        "epoch": "prospective_resource_lease_continuation",
+        "lease_liveness_verified": false,
+        "runtime_continuation": {
+          "authority": {
+            "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+            "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+          },
+          "continuation_id": "ab32-remaining25-managed-lease-v1",
+          "effective_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+          "original_frozen_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+          "successor_resource_reservation": {
+            "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v2/reservation.private.json",
+            "sha256": "1a172dba534844db9e4c96bdd2e2aa8dfc670f91b06d33fa484f2c5d1ff6d2f4"
+          }
+        }
+      },
+      "schema": "ns-final-offline-runtime-continuation-verification/v1",
+      "scorer_calls": 0,
+      "signature_verifier_source": "unchanged original Ed25519 verifier implementation",
+      "terminal": true
+    }
+  },
+  "runtime_continuation_contract_sha256": "a7f556670c5911e2c201a8f56e9c4428d4572264bdb0c4b63518616e4b62ce82",
+  "runtime_continuation_verifier_sha256": "9c4f5e1cdf863bfa3b050b48ed4f8b142377394ce4661b3ded4b2e7c1c8d8dfa",
+  "schema": "ns028-operator-public-client-export/v1",
+  "source5": {
+    "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a",
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb",
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/pilot_client.py": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/worker_adapter.py": "3679e37d1edcea728dd1e209fd3c2dbba2994fb252e609c5c5688b86c0ec0acc"
+  }
+}

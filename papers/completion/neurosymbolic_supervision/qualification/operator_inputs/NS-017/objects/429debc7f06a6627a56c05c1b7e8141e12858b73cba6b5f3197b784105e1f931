@@ -1,0 +1,21 @@
+{
+  "at": "2026-09-13T11:02:45.133212+00:00",
+  "attempted_posts": 1,
+  "continued_driver_admission": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/root_driver_candidate_v1/driver_admission.approved.private.json",
+    "sha256": "b6e0e8c5a4fa331a581bb5ed1cc9615f28f24dd2ffbc9fd8675fff4084df5fa7"
+  },
+  "exact_CID_absent": true,
+  "inspect_exit_code": 1,
+  "original_receipt_sha256": "91ab329cca8d56756d0df19876a0782bbdda8d434cc5253ab433c9a8e7f0062d",
+  "provider_child_timeout": true,
+  "provider_cleanup_sha256": "86eb00912a4b726c9d794137f0856b8fe4e87c24218fe3c8703937349162567e",
+  "response_bytes": 0,
+  "root_prior_diagnostic_false_negatives": "Original output uses lowercase no such object; prior root case-sensitive and boolean predicates returned false without effects. Exact current diagnostic compared against original retained CID.",
+  "runtime_continuation_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/authority.approved.private.json",
+    "sha256": "5dd848ce32081268ab57851e6fbd76b746b3525ee5445d3e81debd631605d154"
+  },
+  "stderr_sha256": "81735ce7176ed8d573bd4c171dc478971fa9781f779ee5b40b6c41cae4b7c8a4",
+  "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+}

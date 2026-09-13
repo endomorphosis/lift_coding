@@ -1,0 +1,169 @@
+"""Read current frozen files and call the pinned native final-admission API.
+
+This child does not create grants, contact a provider, reconstruct an oracle,
+or run a scorer. The host supplies a hash-bound native repo and metadata only.
+"""
+import sys
+sys.dont_write_bytecode = True
+import datetime
+import fcntl
+import hashlib
+import json
+import os
+import stat
+import time
+from pathlib import Path
+import lease_continuation as L
+
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+
+def file_digest(path):
+    path = Path(path)
+    require(path.is_absolute() and path.resolve() == path, 'canonical frozen file required')
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        info = os.fstat(fd)
+        require(stat.S_ISREG(info.st_mode) and info.st_size <= 32 * 1024 * 1024,
+                'bounded regular frozen file required')
+        digest = hashlib.sha256()
+        with os.fdopen(fd, 'rb', closefd=False) as stream:
+            for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                digest.update(chunk)
+        return digest.hexdigest()
+    finally:
+        os.close(fd)
+
+
+def current_digests(files):
+    require(isinstance(files, dict) and 0 < len(files) <= 128, 'bounded frozen pin map required')
+    require(all(type(k) is str and k for k in files), 'pin labels required')
+    return {name: file_digest(path) for name, path in files.items()}
+
+
+def resource_reservation(binding):
+    """Verify a real cooperative lease; never claim exclusive physical capacity."""
+    require(set(binding)=={'path','sha256'} and file_digest(binding['path'])==binding['sha256'],
+            'resource reservation evidence changed')
+    raw=Path(binding['path']).read_bytes()
+    require(len(raw)<=1048576 and hashlib.sha256(raw).hexdigest()==binding['sha256'],
+            'bounded resource evidence required')
+    value=json.loads(raw)
+    require(value.get('schema')=='ns-final-root-resource-reservation/v1' and
+            value.get('allocation_kind')=='cooperative_operator_lease' and
+            value.get('exclusive_physical_resources') is False,
+            'explicit cooperative resource allocation required')
+    require(value.get('paid_call_ceiling')==32 and value.get('scorer_call_ceiling')==32 and
+            value.get('phase_limits')=={'cpu_count':1,'memory_bytes':2147483648,'provider_pids':32,'scorer_pids':128,
+                                       'proposal_seconds':600,'scorer_seconds':120},
+            'reserved final resource scope differs')
+    pid=value['holder_pid'];fd_number=value['holder_fd']
+    require(type(pid)is int and pid>1 and type(fd_number)is int and fd_number>=0,'exact lease holder required')
+    process=Path('/proc')/str(pid)
+    fields=(process/'stat').read_text().rsplit(')',1)[1].split()
+    require(fields[0] not in ('Z','X') and fields[19]==str(value['holder_start_ticks']),
+            'resource lease holder exited or PID reused')
+    path=Path(value['lock_file'])
+    require(path.is_absolute() and path.resolve()==path,'canonical resource lock required')
+    stat_=path.stat();held=(process/'fd'/str(fd_number)).stat()
+    require(stat.S_ISREG(stat_.st_mode) and stat_.st_ino==held.st_ino==value['lock_inode'] and
+            stat_.st_dev==held.st_dev==value['lock_device'],'resource lock inode/holder differs')
+    locks=[line.split() for line in (process/'fdinfo'/str(fd_number)).read_text().splitlines()
+           if line.startswith('lock:')]
+    require(any(len(row)>=7 and row[2:5]==['FLOCK','ADVISORY','WRITE'] and row[5]==str(pid)
+                for row in locks),'recorded holder does not own the kernel advisory lock')
+    fd=os.open(path,os.O_RDWR|os.O_NOFOLLOW)
+    try:
+        try:
+            fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:
+            pass
+        else:
+            raise ValueError('resource allocation is not actually locked')
+    finally:os.close(fd)
+    expiry=datetime.datetime.fromisoformat(value['expires_at'])
+    require(expiry.tzinfo is not None and expiry>datetime.datetime.now(datetime.timezone.utc),
+            'resource lease expired')
+    boundary=value['measured_boundary_evidence']
+    require(set(boundary)=={'path','sha256'} and file_digest(boundary['path'])==boundary['sha256'],
+            'measured resource boundary evidence changed')
+    available={line.split(':')[0]:line.split(':')[1].strip()for line in Path('/proc/meminfo').read_text().splitlines()}
+    memory=int(available['MemAvailable'].split()[0])*1024
+    require(memory>=2147483648 and len(os.sched_getaffinity(0))>=1,'current capacity unavailable; no new effect')
+    return {'held':True,'holder_pid':pid,'holder_start_ticks':value['holder_start_ticks'],
+            'lock_inode':stat_.st_ino,'evidence_sha256':binding['sha256'],'available_memory_bytes':memory,
+            'allocation_kind':'cooperative_operator_lease','exclusive_physical_resources':False}
+
+
+def main():
+    started = time.monotonic()
+    cpu_started = time.process_time()
+    raw = sys.stdin.buffer.read(1024 * 1024 + 1)
+    require(len(raw) <= 1024 * 1024, 'native admission input exceeds metadata bound')
+    value = json.loads(raw)
+    require(set(value) == {'native_repo', 'native_harness_sha256', 'freeze_path',
+                           'freeze_file_sha256', 'pin_files', 'runtime_profile_binding', 'request', 'continuation', 'cell_id'},
+            'exact native admission metadata required')
+    freeze_path = Path(value['freeze_path'])
+    require(file_digest(freeze_path) == value['freeze_file_sha256'], 'freeze file changed')
+    freeze_raw = freeze_path.read_bytes()
+    require(len(freeze_raw) <= 1024 * 1024 and
+            hashlib.sha256(freeze_raw).hexdigest() == value['freeze_file_sha256'],
+            'freeze metadata bytes changed')
+    freeze = json.loads(freeze_raw)
+    authority=L.checked_authority(value['continuation'],cell_id=value['cell_id'])
+    require(authority['original_freeze']=={'path':str(freeze_path),'sha256':value['freeze_file_sha256']} and freeze['resource_reservation_evidence']==authority['old_reservation'],'continuation original freeze/lease differs')
+    batch=L.bound(authority['original_batch'])
+    require(value['cell_id'] in authority['remaining_cells'] and value['request']['task_id'] in batch['units'],'continuation cell/unit scope differs')
+    meta=batch['units'][value['request']['task_id']]
+    expected_cells={hashlib.sha256(L.canonical({'unit':value['request']['task_id'],'arm':value['request']['arm'],'cache':'local_cold','repetition':rep,'record_kind':'final'})).hexdigest() for rep in batch['repetitions']}
+    require(value['cell_id'] in expected_cells and value['request']['family_id']==meta['family_id'],'continuation native request identity differs')
+    lease=resource_reservation(authority['successor_reservation'])
+    repo = Path(value['native_repo'])
+    require(repo.is_absolute() and repo.resolve() == repo, 'canonical native repo required')
+    source = repo / 'ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py'
+    require(file_digest(source) == value['native_harness_sha256'], 'native harness changed')
+    require(str(source) in value['pin_files'].values(), 'actual harness missing from frozen pin map')
+    observed = current_digests(value['pin_files'])
+    runtime_binding=value['runtime_profile_binding']
+    require(set(runtime_binding)=={'path','sha256'} and file_digest(runtime_binding['path'])==runtime_binding['sha256'], 'native runtime profile changed')
+    require(runtime_binding['path'] in value['pin_files'].values(), 'runtime profile missing from frozen pins')
+    runtime=json.loads(Path(runtime_binding['path']).read_text())
+    require(file_digest(runtime['manifest'])==runtime['manifest_sha256'], 'native runtime manifest changed')
+    runtime_python=Path(runtime['root'])/'python'
+    require(runtime_python.is_absolute() and runtime_python.resolve()==runtime_python and runtime_python.is_dir(), 'canonical native runtime Python root required')
+    sys.path[:0]=[str(repo),str(runtime_python)]
+    from ipfs_accelerate_py.agent_supervisor.semantic_state import harness
+    require(Path(harness.__file__).resolve() == source, 'wrong native harness imported')
+    current = harness.source_bound_current_profile_check(freeze, observed)
+    admission = harness.admit_final_attempt(freeze, value['request'])
+    require(current.get('current') is True and admission.get('admitted') is True,
+            'native final admission refused: ' + repr((current, admission)))
+    # The API uses the canonical freeze self-hash; wire custody separately binds
+    # the complete freeze file hash. Neither is substituted for the other.
+    result = {
+        'schema': 'ns028-actual-native-final-grant-preflight/v1',
+        'execution_kind': 'actual_native_python_import_and_call',
+        'source_path': str(source), 'source_sha256': value['native_harness_sha256'],
+        'freeze_file_sha256': value['freeze_file_sha256'],
+        'native_freeze_sha256': freeze['freeze_sha256'],
+        'current_file_digests': observed, 'current_profile': current,
+        'runtime_profile_binding':runtime_binding, 'runtime_manifest_sha256':runtime['manifest_sha256'],
+        'runtime_python_root':str(runtime_python),
+        'resource_reservation':lease,
+        'runtime_continuation':L.runtime_evidence(authority,value['continuation']),
+        'frozen_source_bindings':authority['original_frozen_source_bindings'],
+        'source_bindings':authority['effective_source_bindings'],
+        'current_profile_scope':'Original immutable37 source objects remain byte-identical; actual prospective control-plane runtime is separately bound above.',
+        'final_admission': admission, 'wall_seconds': time.monotonic() - started,
+        'cpu_seconds': time.process_time() - cpu_started,
+        'provider_calls': 0, 'scorer_calls': 0, 'native_store_mutations': 0,
+    }
+    print(json.dumps(result, sort_keys=True, allow_nan=False))
+
+
+if __name__ == '__main__':
+    main()

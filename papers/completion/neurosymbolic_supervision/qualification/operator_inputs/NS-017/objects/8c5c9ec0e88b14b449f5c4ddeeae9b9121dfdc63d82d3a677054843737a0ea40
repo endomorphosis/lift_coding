@@ -1,0 +1,27 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "f096d51b6a4cbf6a1ad27195a181f3f7b3b05341358d09f27c575862537c4750",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe",
+    "grant_sha256": "ee12096a05ac2e5d43f99510307b07a7d8ca9af74c1d539623cfcf47622f5d96",
+    "manifest_sha256": "f929bb052fa711340f84ad1cd74651d230a421c9b70b1477082c99f86886cdc8",
+    "original_receipt_sha256": "5dba13ea3003586ff5d39f5e5a7119b71eea7581e8b35c5efc34991d2141d6fc",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "provider_termination_evidence_sha256": "0b74829bc6b66876b8b904380943210faead332db30612162196eed10246dbeb",
+    "request_sha256": "652d42261331cca07428b18aaacd4c235108e3735f350e694810278428e57bb9",
+    "reservation_sha256": "43a140d472fc6c7ff61b13ecc77225cba8259c8388e48aa9f028680470cb4dfe",
+    "service_source_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "source_sha256": "7503fd84698352a71ffe5d4a38b36cf622bbd6ef33ae0fd6dda7b48745f48c6e"
+  },
+  "classification": "known_proposal_failure",
+  "delegation_sha256": "eb933810292c6abca35e04d0929180b4d8e271cae25cd3057fc13069f68e474b",
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T02:50:56.022999+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "I reviewed original signed final cell006 and exact retained provider metadata: one POST reached the child absolute deadline in open_entered, returning zero response bytes and no applied candidate. Child595.000392 seconds slightly exceeds595 and is explicitly resource-unqualified; wrapper595.649494/gateway595.862854 remain below600. Exact container3acc6d17 cleanup returned0 and termination_proven is true. No scorer reservation or scorer invocation exists. Preserve the original failed effect, all measured clocks and unknown remote usage/settled charge; this local timeout does not establish zero external charge. Record a known locally terminated proposal failure only, adding zero provider/scorer calls and no score/success credit, retry or regrant. This is delegated AI operator accounting, not a human annotation or managed task completion."
+}

@@ -1,0 +1,103 @@
+"""Constructed reducer controls only; no signature, model, scorer or native run."""
+import sys
+sys.dont_write_bytecode=True
+import copy,hashlib,json,math,tempfile,unittest
+from pathlib import Path
+import analyze as A
+
+def rows():
+    return [{'cell_id':A.cell_id(u,a,r),'unit':u,'arm':a,'repetition':r,'terminal':True,'useful_completion':False,'outcome':'constructed_failure',**{k:None for k in A.METRICS}}for u in A.UNITS for a in('A','B')for r in A.REPS]
+
+def saved(p,v):
+    p.parent.mkdir(mode=0o700,parents=True,exist_ok=True);p.write_text(json.dumps(v,sort_keys=True)+'\n');return {'path':str(p),'sha256':A.sha(p)}
+
+def terminal_fixture(root,score_seconds=120,lie_about_useful=False):
+    pc=A.load_client();u=A.UNITS[0];arm='A';rep=A.REPS[0];cid=A.cell_id(u,arm,rep);p=root/'grants'/cid;p.mkdir(parents=True);op=root/'operator';op.mkdir();batchsha='1'*64;freezesha='2'*64
+    amendment=saved(root/'amendment.json',{'schema':'operator-constructed-fixture','scientific_authority':False});meta={**amendment,'unit':u,'arm':arm,'repetition':rep}
+    profile={};request={};sources={'constructed.py':'0'*64}
+    grant={'schema':'operator-historical-final-grant/v1','batch_binding':{'cell_id':cid,'sha256':batchsha},'profile':profile,'request_binding':request,'native_head':'3'*40,'source_bindings':sources,'created_at':'2026-09-13T00:00:00+00:00','expires_at':'2026-09-13T02:00:00+00:00','qualification_fixture_only':True}
+    gb=saved(p/'grant.json',grant);pr=saved(p/'http_proposer/result.json',{'provider':{'attempted_posts':1,'elapsed_seconds':595,'usage':None},'elapsed_seconds':600,'settled_provider_cost':None,'qualification_fixture_only':True});cl=saved(p/'http_proposer/cleanup.json',{'returncode':0,'container':'constructed-no-container'})
+    body={'schema':'operator-final-receipt/v1','record_kind':'final','final_scientific_run':True,'inert_qualification':False,'cell_id':cid,'batch_sha256':batchsha,'amendment_sha256':amendment['sha256'],'final_freeze_sha256':freezesha,'unit':u,'arm':arm,'repetition':rep,'cache':'local_cold','provider_termination':{'termination_proven':True,'cleanup_sha256':cl['sha256'],'container_id':'constructed-no-container'},'grant_sha256':gb['sha256'],'profile':profile,'request_binding':request,'proposal_result_sha256':pr['sha256'],'proposal_resource_measurements':{'provider_child_seconds':595,'http_wrapper_seconds':600,'gateway_proposal_seconds':600},'score_elapsed_seconds':score_seconds,'elapsed_seconds':600,'scorer':{'success':True,'scorer':{'classification':'constructed_cold_pass'}},'qualification_fixture_only':True,'unknown_external_charge':True}
+    body['proposal_resource_compliance']=pc.resource_compliance(body,scoring=False);body['resource_compliance']=pc.resource_compliance(body)
+    useful=body['resource_compliance']['compliant']or lie_about_useful
+    verified={'receipt':body,'signature_and_scope_verified':True,'admitted_historical_final':True,'resource_compliance':body['resource_compliance'],'useful_completion':useful,'qualification_fixture_only':True}
+    scalar={'candidate_valid':useful,'cold_full_validation':True,'human_annotation':False}
+    saved(p/'result.json',{'receipt':body,'signature':'NOT_A_REAL_SIGNATURE_CONSTRUCTED_ONLY'})
+    cp=op/'cell001_client_poll001';client={'terminal':True,'batch_sha256':batchsha,'results':[{'cell_id':cid,'result':{'host_verified':verified,'cold_scalar_result':scalar}}],'cpu_seconds':.01};cb=saved(cp/'work/result.json',client);eb=saved(cp/'execution.private.json',{'success':True,'cleanup_exit_code':0,'result_sha256':cb['sha256'],'wall_seconds':.02,'qualification_fixture_only':True})
+    saved(op/'cell001_terminal.private.json',{'terminal_verified':True,'cell_id':cid,'batch_sha256':batchsha,'client_execution':eb,'client_result':cb,'cold_scalar_result':scalar,'terminal_failure':False,'at':'2026-09-13T00:12:00+00:00','qualification_fixture_only':True})
+    a={'amendments':{cid:meta},'private_root':str(root/'grants'),'batch':{'sha256':batchsha},'freeze':{'sha256':freezesha}}
+    batch={'units':{u:{'arms':{arm:{'profile_sha256':hashlib.sha256(A.canon(profile)).hexdigest(),'request_binding_sha256':hashlib.sha256(A.canon(request)).hexdigest()}}}},'native_head':'3'*40,'package_sha256':hashlib.sha256(A.canon(sources)).hexdigest()}
+    return op,a,batch,cid,pc
+
+class Analysis(unittest.TestCase):
+    def test_fixed_eight_family_blocks_and_known_binomial_interval(self):
+        r=rows()
+        for x in r:
+            i=A.UNITS.index(x['unit']);x['useful_completion']=(i<4)==(x['arm']=='B')
+        s=A.summarize(r);self.assertEqual(s['useful_completions'],16);self.assertEqual(s['mean_B_minus_A_useful'],0);self.assertEqual(s['bootstrap']['quality_B_minus_A'],{'lower':-.75,'upper':.75,'degenerate':False});self.assertEqual(s['bootstrap']['draws_per_resample'],8);self.assertEqual(s['bootstrap']['resamples'],20000)
+    def test_shared_pair_cost_constant_difference(self):
+        r=rows()
+        for x in r:
+            for k in A.METRICS:x[k]=float(A.UNITS.index(x['unit'])+(2 if x['arm']=='B'else 0))
+        s=A.summarize(r)
+        self.assertEqual(s['bootstrap']['cost_B_minus_A']['provider_child_elapsed_seconds'],{'lower':2.0,'upper':2.0,'degenerate':True})
+    def test_missing_family_cost_does_not_change_outcome_denominator(self):
+        r=rows()
+        for x in r:x['provider_child_elapsed_seconds']=0.0
+        r[0]['provider_child_elapsed_seconds']=None;s=A.summarize(r)
+        self.assertEqual(s['planned_cells'],32);self.assertEqual(s['paired_cost_family_coverage']['provider_child_elapsed_seconds']['complete_families'],7);self.assertNotIn('provider_child_elapsed_seconds',s['bootstrap']['cost_B_minus_A']);self.assertEqual(s['resource_summaries']['provider_child_elapsed_seconds']['missing_or_invalid_count'],1)
+    def test_missing_all_is_not_zero_cost_or_completed_outcomes(self):
+        r=rows()
+        for x in r:x.update(terminal=False,outcome='unissued_pending')
+        s=A.summarize(r);self.assertFalse(s['complete']);self.assertEqual(s['terminal_cells'],0);self.assertEqual(s['useful_fraction_fixed32'],0);self.assertIsNone(s['bootstrap']);self.assertIsNone(s['resource_summaries']['gateway_score_elapsed_seconds']['known_sum'])
+    def test_genuine_constructed_zero_outcome_is_degenerate_not_promotion(self):
+        s=A.summarize(rows());self.assertTrue(s['complete']);self.assertTrue(s['bootstrap']['quality_B_minus_A']['degenerate']);self.assertIn('does not establish',s['bootstrap']['interpretation'])
+    def test_duplicate_cell_refused(self):
+        r=rows();r[-1]=r[0].copy()
+        with self.assertRaises(ValueError):A.summarize(r)
+    def test_missing_repetition_refused(self):
+        with self.assertRaises(ValueError):A.summarize(rows()[:-1])
+    def test_wrong_repetition_identity_refused(self):
+        r=rows();r[0]['repetition']=0
+        with self.assertRaises(ValueError):A.summarize(r)
+    def test_missing_cell_cannot_claim_useful(self):
+        r=rows();r[0].update(terminal=False,useful_completion=True)
+        with self.assertRaises(ValueError):A.summarize(r)
+    def test_nonfinite_negative_and_boolean_costs_missing(self):
+        s=A.measured([None,float('nan'),float('inf'),-1,False,0,2]);self.assertEqual(s['known_sum'],2);self.assertEqual(s['known_count'],2);self.assertEqual(s['missing_or_invalid_count'],5)
+    def test_quantile_uses_linear_interpolation(self):self.assertEqual(A.quantile([0,10],.025),.25)
+    def test_timestamps_missing_or_negative_not_zero(self):
+        self.assertIsNone(A.interval(None,None));self.assertIsNone(A.interval('2026-09-13T02:00:00+00:00','2026-09-13T01:00:00+00:00'));self.assertEqual(A.interval('2026-09-13T01:00:00+00:00','2026-09-13T01:00:00+00:00'),0)
+    def test_actual_final_client_resource_function_controls(self):
+        pc=A.load_client();body={'proposal_resource_measurements':{'provider_child_seconds':595,'http_wrapper_seconds':600,'gateway_proposal_seconds':600},'score_elapsed_seconds':120};self.assertTrue(pc.resource_compliance(body)['compliant']);body['proposal_resource_measurements']['http_wrapper_seconds']=618.5;self.assertFalse(pc.resource_compliance(body)['compliant']);body['proposal_resource_measurements']['http_wrapper_seconds']=None;self.assertIn('http_wrapper_seconds',pc.resource_compliance(body)['unavailable'])
+    def test_constructed_retained_terminal_full_path_at_exact_caps(self):
+        with tempfile.TemporaryDirectory()as td:
+            op,a,b,c,pc=terminal_fixture(Path(td));r=A.terminal_row(op,a,b,1,c,{},pc);self.assertTrue(r['useful_completion']);self.assertEqual(r['grant_to_terminal_elapsed_seconds'],720);self.assertEqual(r['client_poll_wall_seconds'],.02)
+    def test_raw_cold_pass_overrun_has_no_useful_credit(self):
+        with tempfile.TemporaryDirectory()as td:
+            op,a,b,c,pc=terminal_fixture(Path(td),121);r=A.terminal_row(op,a,b,1,c,{},pc);self.assertTrue(r['raw_scorer_success']);self.assertFalse(r['useful_completion']);self.assertEqual(r['outcome'],'scorer_resource_unqualified')
+    def test_lie_about_overrun_useful_credit_refused(self):
+        with tempfile.TemporaryDirectory()as td:
+            op,a,b,c,pc=terminal_fixture(Path(td),121,True)
+            with self.assertRaises(ValueError):A.terminal_row(op,a,b,1,c,{},pc)
+    def test_grant_profile_lineage_mismatch_refused(self):
+        with tempfile.TemporaryDirectory()as td:
+            op,a,b,c,pc=terminal_fixture(Path(td));b['units'][A.UNITS[0]]['arms']['A']['profile_sha256']='0'*64
+            with self.assertRaises(ValueError):A.terminal_row(op,a,b,1,c,{},pc)
+    def test_retained_original_filename_and_two_hashes(self):
+        with tempfile.TemporaryDirectory()as td:
+            p=Path(td);h=saved(p/'proposal_result.json',{'fixture':True})['sha256'];d={'classification':'candidate_rejected','original_filename':'proposal_result.json','original_receipt_sha256':h,'binding':{'original_receipt_sha256':h}};self.assertEqual(A.original_terminal_path(p,d),p/'proposal_result.json');d['binding']['original_receipt_sha256']='0'*64
+            with self.assertRaises(ValueError):A.original_terminal_path(p,d)
+    def test_no_symlink_input_or_hash_mismatch(self):
+        with tempfile.TemporaryDirectory()as td:
+            p=Path(td);h=saved(p/'plain.json',{'fixture':True})['sha256'];(p/'link.json').symlink_to(p/'plain.json')
+            with self.assertRaises(ValueError):A.read(p/'link.json',{},h)
+            with self.assertRaises(ValueError):A.read(p/'plain.json',{},'0'*64)
+    def test_nonfinite_serialization_retains_null_not_zero(self):
+        with tempfile.TemporaryDirectory()as td:
+            p=Path(td)/'out.json';A.write(p,{'measured':float('nan')});self.assertIsNone(json.loads(p.read_text())['measured'])
+    def test_pending_observed_costs_retained_without_terminal_credit(self):
+        with tempfile.TemporaryDirectory()as td:
+            op,a,b,c,pc=terminal_fixture(Path(td));r=A.pending_row(a,1,c,{})
+            self.assertFalse(r['terminal']);self.assertFalse(r['useful_completion']);self.assertEqual(r['provider_child_elapsed_seconds'],595);self.assertEqual(r['actual_provider_posts'],1)
+if __name__=='__main__':unittest.main(verbosity=2)

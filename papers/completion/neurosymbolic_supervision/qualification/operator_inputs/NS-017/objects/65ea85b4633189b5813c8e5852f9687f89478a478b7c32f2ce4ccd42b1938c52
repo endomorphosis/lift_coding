@@ -1,0 +1,30 @@
+"""Constructed public-byte copying only, not a scientific terminal export."""
+import sys
+sys.dont_write_bytecode=True
+import tempfile,unittest
+from pathlib import Path
+import export_public as E
+class Export(unittest.TestCase):
+ def test_copy_keeps_exact_bytes(self):
+  with tempfile.TemporaryDirectory()as td:
+   p=Path(td);s=p/'source.json';s.write_bytes(b'{"fixture":true}\n');d=p/'out.json';E.copy_bound(s,d,E.sha(s));self.assertEqual(d.read_bytes(),s.read_bytes())
+ def test_changed_hash_refused(self):
+  with tempfile.TemporaryDirectory()as td:
+   p=Path(td);s=p/'source.json';s.write_bytes(b'{}')
+   with self.assertRaises(AssertionError):E.copy_bound(s,p/'out.json','0'*64)
+   self.assertFalse((p/'out.json').exists())
+ def test_symlink_refused(self):
+  with tempfile.TemporaryDirectory()as td:
+   p=Path(td);s=p/'source.json';s.write_bytes(b'{}');l=p/'link.json';l.symlink_to(s)
+   with self.assertRaises(AssertionError):E.copy_bound(l,p/'out.json',E.sha(s))
+ def test_existing_output_not_overwritten(self):
+  with tempfile.TemporaryDirectory()as td:
+   p=Path(td);s=p/'source.json';s.write_bytes(b'{}');d=p/'out.json';d.write_bytes(b'old')
+   with self.assertRaises(FileExistsError):E.copy_bound(s,d,E.sha(s))
+   self.assertEqual(d.read_bytes(),b'old')
+ def test_unexpected_large_input_refused(self):
+  with tempfile.TemporaryDirectory()as td:
+   p=Path(td);s=p/'large.json'
+   with s.open('wb')as f:f.truncate(1048577)
+   with self.assertRaises(AssertionError):E.copy_bound(s,p/'out.json','0'*64)
+if __name__=='__main__':unittest.main(verbosity=2)

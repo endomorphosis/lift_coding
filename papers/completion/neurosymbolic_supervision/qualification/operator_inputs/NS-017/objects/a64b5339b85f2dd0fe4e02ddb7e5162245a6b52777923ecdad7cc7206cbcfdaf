@@ -1,0 +1,35 @@
+{
+  "absolute_post_timestamp_available": false,
+  "at": "2026-09-13T07:33:10.597021+00:00",
+  "cell_number": 27,
+  "clock_scope": "Relative monotonic seconds since HTTP child started; no absolute UTC POST timestamp is reconstructed.",
+  "credential_values_included": false,
+  "raw_logs_or_response_body_included": false,
+  "schema": "ns-final-sanitized-relative-http-phase-metadata/v1",
+  "selected_metadata": [
+    {
+      "elapsed_seconds": 2.5e-05,
+      "phase": "child_started",
+      "schema": "ns-http-child-phase/v1"
+    },
+    {
+      "attempted_posts_upper_bound": 1,
+      "elapsed_seconds": 0.034313,
+      "phase": "open_entered",
+      "schema": "ns-http-child-phase/v1"
+    },
+    {
+      "elapsed_seconds": 595.000441,
+      "http_status": null,
+      "phase": "final_result",
+      "response_bytes": 0,
+      "schema": "ns-http-child-phase/v1",
+      "status": "transport_error"
+    }
+  ],
+  "source_bytes": 768,
+  "source_log": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e/http_proposer/stderr.private.log",
+    "sha256": "37451e1b5d434dd6991179470ab4317e7419cc9054eea745615f589384a74b81"
+  }
+}

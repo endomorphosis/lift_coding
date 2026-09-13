@@ -1,0 +1,961 @@
+{
+  "activation": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/activation.private.json",
+    "sha256": "a79cb456abf20fef034e70261509075c181540ce13aa1a588fced63cae934b05"
+  },
+  "actual_final_outcomes_read": 0,
+  "approved": false,
+  "entry_mode": "deduplicated_by_exact_sha256",
+  "excluded": "No grants, private keys, credential files, hidden oracle/reference-patch payloads, or active cell outputs are scanned or copied.",
+  "forecast_only": true,
+  "immutable_pins": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py": "5724b1e870b28875a073cd84e836af9312ff9b4d5a742271486ae64ff32a9168",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/actual_eight_context_qualification.private.json": "baa4bc46e5bbe646e679e07f13d2fc46ccc06ece009267d40960b2b8e426c8c6",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/analysis_policy.json": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/build_final_inputs.py": "24785724480f7bfd3e8330ed39f57e7c8e78facbc1ee6d6a77c2a3415d961dc8",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/common_amendment.private.json": "c5cc3953bd52c383666f2f3222812b13f10825ec8257ef4b124601c2d22c5b69",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/complete24_analysis.private.json": "634254087669d9a71b198e77445816ab7f4444f42beba5600d62ec322b685482",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/final_source_package.private.json": "595a06a354aad453ccac215060a06dec8afd52ca5bbb1148ee9a640f805a4331",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/adapter.py": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/batch_control.py": "e4ba75dc2538baf7538cb181a57d52096a5ef916d674023a8faf5bc624ed475a",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/context_selection.py": "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/http_proposer.py": "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/native_final_gate.py": "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/pilot_client.py": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/pilot_gateway.py": "34ab3070b9b55edbd3ca05953df008a8e46c086e5c3ffb55e2ba5a9726ded97e",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/semantic_context.py": "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/native_harness_execution.json": "180cdf00178c6dd841f1a7e6917abe8cb9e50026415c9f04d4baae9f4a694cee",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/original192.private.json": "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_context_manifest.private.json": "b38564212c5924cbbf3432fee9b09e6e1f342ed89104933e2e551677dab441f8",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-09-tomlkit.private.json": "3e91c4b04b58ee822dbd255542af63ea083c3736109e5665d87953d980ee04b9",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-10-installer.private.json": "0ec2bc6631410c56d8c4d034f560f11c5148f5c7ecfe9a943f5d643951bcf00d",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-11-tornado.private.json": "1acfa4ba73d40c46d3511a50cb76ee2b4568cbaedb7aa877076a89d41f75d7ce",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-12-more-itertools.private.json": "9f6c7b8c6752056a9e4e73c587bea6edc044301afbf58849caa4c0d285e090f5",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-13-charset_normalizer.private.json": "58659a3b7620d9b8e14b362a4a777c1e16fb5e19bae8e1bf89c30c6c1b1a464e",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-14-iniconfig.private.json": "e30e4220051be56b230b83634dd44c10807d97de98842d87231ad0637d294757",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-15-wheel.private.json": "6b9c550d637fef4cfc0873d81bdfa7ff69a79aa6ee40919746cd6f3ee6bccbff",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-16-jinja.private.json": "7396dba18783346b45612f137724a30a7fbac10a1a7c282f5312afb5c28914c7",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_inputs.private.json": "c3a27fadb68ebcb1f13f60b391d691367473da4bb7aff58934a81a5861aa96db",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/public_baseline_128_join.private.json": "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/root_eight_input_review.private.json": "e5b9723e87e06a7e3d06cd65c3a409478095eb4cf93ea89031679f264f2c8200",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/runtime_manifest.json": "bcc53f4f8340da7c84d8aa28d78219ae07d9baf5950d0d804100ad1b1c3e3906",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/shared_gateway/host_gateway.py": "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/production_gateway.py": "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/run_comparison.py": "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb",
+    "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/score_runs.py": "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3",
+    "papers/completion/toolchains/research_profile.json": "1bc2c65388bc5a79ae61e762653d336ae5401e7b0d592d265884d2ab166a8f84"
+  },
+  "schema": "ns017-retained-source-inventory-proposal/v1",
+  "source_packages": [
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_source_package_v1/package.private.json",
+      "sha256": "595a06a354aad453ccac215060a06dec8afd52ca5bbb1148ee9a640f805a4331"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/package.private.json",
+      "sha256": "a117c5b4583a517001108d681375419f23145ff2d91f6ad010f5a6895c4c494f"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_analysis_v1/package.private.json",
+      "sha256": "d6fb560ae4db1bfeaa7712829e3a3d724b37242986bff94212380d96221c159d"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_context_support_package_v2.private.json",
+      "sha256": "67f0533055817a484a5f465e7c8f147197e9e9a7948647c593ef970f300f53f8"
+    }
+  ],
+  "sources": {
+    "0ec2bc6631410c56d8c4d034f560f11c5148f5c7ecfe9a943f5d643951bcf00d": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 396917,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-10-installer.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "0ec2bc6631410c56d8c4d034f560f11c5148f5c7ecfe9a943f5d643951bcf00d",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-10-installer.private.json"
+      ]
+    },
+    "0f37c570bccb4232e96d62edcad6388bc65e8ace1159ad2576812ddc348e6857": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 32237,
+      "labels": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py"
+      ],
+      "roles": [
+        "native_support_qualified_lineage"
+      ],
+      "sha256": "0f37c570bccb4232e96d62edcad6388bc65e8ace1159ad2576812ddc348e6857",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_candidate/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py"
+      ]
+    },
+    "13e611840fc3633a7c5147f3ca218fb1d6ab1ec3f0bdea2f22404a62cd9d9290": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 8714,
+      "labels": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py"
+      ],
+      "roles": [
+        "native_support_qualified_lineage"
+      ],
+      "sha256": "13e611840fc3633a7c5147f3ca218fb1d6ab1ec3f0bdea2f22404a62cd9d9290",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_candidate/external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py"
+      ]
+    },
+    "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 113603,
+      "labels": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ]
+    },
+    "17067a906fd1f3f033b6fd2f8ff9425a0dfc6e49b2b152310bf95020c40c4f0b": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 6523,
+      "labels": [
+        "strict_final_reducer_export/export_public.py"
+      ],
+      "roles": [
+        "strict_final_reducer_export"
+      ],
+      "sha256": "17067a906fd1f3f033b6fd2f8ff9425a0dfc6e49b2b152310bf95020c40c4f0b",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_analysis_v1/export_public.py"
+      ]
+    },
+    "180cdf00178c6dd841f1a7e6917abe8cb9e50026415c9f04d4baae9f4a694cee": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 6927,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/native_harness_execution.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "180cdf00178c6dd841f1a7e6917abe8cb9e50026415c9f04d4baae9f4a694cee",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/native_harness_execution.json"
+      ]
+    },
+    "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 25044,
+      "labels": [
+        "actual_final_host_source/host_gateway.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/shared_gateway/host_gateway.py"
+      ],
+      "roles": [
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_v2/host_gateway.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/shared_gateway/host_gateway.py"
+      ]
+    },
+    "1acfa4ba73d40c46d3511a50cb76ee2b4568cbaedb7aa877076a89d41f75d7ce": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 859950,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-11-tornado.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "1acfa4ba73d40c46d3511a50cb76ee2b4568cbaedb7aa877076a89d41f75d7ce",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-11-tornado.private.json"
+      ]
+    },
+    "1b7c3db5492d9e389134cffb0ca97d03f7e7a64b1d4fbf6baad0c03fc7b5edc9": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 25927,
+      "labels": [
+        "actual_operator_phase_helper/operator_cell.py"
+      ],
+      "roles": [
+        "actual_operator_phase_helper"
+      ],
+      "sha256": "1b7c3db5492d9e389134cffb0ca97d03f7e7a64b1d4fbf6baad0c03fc7b5edc9",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/operator_cell.py"
+      ]
+    },
+    "1bc2c65388bc5a79ae61e762653d336ae5401e7b0d592d265884d2ab166a8f84": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 373,
+      "labels": [
+        "papers/completion/toolchains/research_profile.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "1bc2c65388bc5a79ae61e762653d336ae5401e7b0d592d265884d2ab166a8f84",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/toolchains/research_profile.json"
+      ]
+    },
+    "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 8609,
+      "labels": [
+        "final_qualified_service_and_input_builder/native_final_gate.py",
+        "actual_final_host_source/native_final_gate.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/native_final_gate.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/native_final_gate.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/native_final_gate.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/native_final_gate.py"
+      ]
+    },
+    "24785724480f7bfd3e8330ed39f57e7c8e78facbc1ee6d6a77c2a3415d961dc8": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 17299,
+      "labels": [
+        "final_qualified_service_and_input_builder/build_final_inputs.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/build_final_inputs.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "24785724480f7bfd3e8330ed39f57e7c8e78facbc1ee6d6a77c2a3415d961dc8",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/build_final_inputs.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/build_final_inputs.py"
+      ]
+    },
+    "2875fc49ba0fc93d28920b01029f209e83357445ab892e420570e065e5bc95f1": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 25611,
+      "labels": [
+        "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_merkle.py"
+      ],
+      "roles": [
+        "native_support_qualified_lineage"
+      ],
+      "sha256": "2875fc49ba0fc93d28920b01029f209e83357445ab892e420570e065e5bc95f1",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_performance_candidate/external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_merkle.py"
+      ]
+    },
+    "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 6205,
+      "labels": [
+        "final_qualified_service_and_input_builder/cold_scorer.py",
+        "actual_final_host_source/cold_scorer.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/cold_scorer.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/cold_scorer.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/cold_scorer.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/cold_scorer.py"
+      ]
+    },
+    "307491ac3d047cdfddb209b90ef0ca8636238a51576bdad7cee4a948b73083f9": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 22931,
+      "labels": [
+        "strict_final_reducer_export/analyze_qualified_v1.py"
+      ],
+      "roles": [
+        "strict_final_reducer_export"
+      ],
+      "sha256": "307491ac3d047cdfddb209b90ef0ca8636238a51576bdad7cee4a948b73083f9",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_analysis_v1/analyze_qualified_v1.py"
+      ]
+    },
+    "34ab3070b9b55edbd3ca05953df008a8e46c086e5c3ffb55e2ba5a9726ded97e": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 44318,
+      "labels": [
+        "final_qualified_service_and_input_builder/pilot_gateway.py",
+        "actual_final_host_source/pilot_gateway.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/pilot_gateway.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "34ab3070b9b55edbd3ca05953df008a8e46c086e5c3ffb55e2ba5a9726ded97e",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/pilot_gateway.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/pilot_gateway.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/pilot_gateway.py"
+      ]
+    },
+    "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 12843,
+      "labels": [
+        "final_qualified_service_and_input_builder/semantic_context.py",
+        "actual_final_host_source/semantic_context.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/semantic_context.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/semantic_context.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/semantic_context.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/semantic_context.py"
+      ]
+    },
+    "3679e37d1edcea728dd1e209fd3c2dbba2994fb252e609c5c5688b86c0ec0acc": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 10635,
+      "labels": [
+        "final_qualified_service_and_input_builder/worker_adapter.py",
+        "actual_operator_client_driver/worker_adapter.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_operator_client_driver"
+      ],
+      "sha256": "3679e37d1edcea728dd1e209fd3c2dbba2994fb252e609c5c5688b86c0ec0acc",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/worker_adapter.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/client_source/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/worker_adapter.py"
+      ]
+    },
+    "398faa231429dbb907422efb97ee9d75de2ce4e16b69dfe6c219a09e66df9e3c": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 7983,
+      "labels": [
+        "final_qualified_service_and_input_builder/build_offer_drop.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder"
+      ],
+      "sha256": "398faa231429dbb907422efb97ee9d75de2ce4e16b69dfe6c219a09e66df9e3c",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/build_offer_drop.py"
+      ]
+    },
+    "3e91c4b04b58ee822dbd255542af63ea083c3736109e5665d87953d980ee04b9": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 1349449,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-09-tomlkit.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "3e91c4b04b58ee822dbd255542af63ea083c3736109e5665d87953d980ee04b9",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-09-tomlkit.private.json"
+      ]
+    },
+    "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 12185,
+      "labels": [
+        "final_qualified_service_and_input_builder/pilot_client.py",
+        "actual_final_host_source/pilot_client.py",
+        "actual_operator_client_driver/pilot_client.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/pilot_client.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "actual_operator_client_driver",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/pilot_client.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/pilot_client.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/pilot_client.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/client_source/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/pilot_client.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/pilot_client.py"
+      ]
+    },
+    "5724b1e870b28875a073cd84e836af9312ff9b4d5a742271486ae64ff32a9168": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 32250,
+      "labels": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "5724b1e870b28875a073cd84e836af9312ff9b4d5a742271486ae64ff32a9168",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py"
+      ]
+    },
+    "58659a3b7620d9b8e14b362a4a777c1e16fb5e19bae8e1bf89c30c6c1b1a464e": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 568209,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-13-charset_normalizer.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "58659a3b7620d9b8e14b362a4a777c1e16fb5e19bae8e1bf89c30c6c1b1a464e",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-13-charset_normalizer.private.json"
+      ]
+    },
+    "595a06a354aad453ccac215060a06dec8afd52ca5bbb1148ee9a640f805a4331": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 18893,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/final_source_package.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "595a06a354aad453ccac215060a06dec8afd52ca5bbb1148ee9a640f805a4331",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/final_source_package.private.json"
+      ]
+    },
+    "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 17197,
+      "labels": [
+        "final_qualified_service_and_input_builder/adapter.py",
+        "actual_final_host_source/adapter.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/adapter.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/adapter.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/adapter.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/adapter.py"
+      ]
+    },
+    "634254087669d9a71b198e77445816ab7f4444f42beba5600d62ec322b685482": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 47238,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/complete24_analysis.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "634254087669d9a71b198e77445816ab7f4444f42beba5600d62ec322b685482",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/complete24_analysis.private.json"
+      ]
+    },
+    "65ea85b4633189b5813c8e5852f9687f89478a478b7c32f2ce4ccd42b1938c52": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 1558,
+      "labels": [
+        "strict_final_reducer_export/test_export.py"
+      ],
+      "roles": [
+        "strict_final_reducer_export"
+      ],
+      "sha256": "65ea85b4633189b5813c8e5852f9687f89478a478b7c32f2ce4ccd42b1938c52",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_analysis_v1/test_export.py"
+      ]
+    },
+    "6b9c550d637fef4cfc0873d81bdfa7ff69a79aa6ee40919746cd6f3ee6bccbff": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 451682,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-15-wheel.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "6b9c550d637fef4cfc0873d81bdfa7ff69a79aa6ee40919746cd6f3ee6bccbff",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-15-wheel.private.json"
+      ]
+    },
+    "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 48458,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/original192.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/original192.private.json"
+      ]
+    },
+    "7396dba18783346b45612f137724a30a7fbac10a1a7c282f5312afb5c28914c7": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 609571,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-16-jinja.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "7396dba18783346b45612f137724a30a7fbac10a1a7c282f5312afb5c28914c7",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-16-jinja.private.json"
+      ]
+    },
+    "7b1d71ab20c9fbe2d3c47ee1e6825881d2b66e3d98e4ef6b1b094d4baa1a6b69": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 11133,
+      "labels": [
+        "strict_final_reducer_export/test_analysis.py"
+      ],
+      "roles": [
+        "strict_final_reducer_export"
+      ],
+      "sha256": "7b1d71ab20c9fbe2d3c47ee1e6825881d2b66e3d98e4ef6b1b094d4baa1a6b69",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_analysis_v1/test_analysis.py"
+      ]
+    },
+    "9868efad4a8029edd7d1b4d0f7b0ff2ff3ed453420fa86b9d6c1a2999bd3193f": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 25207,
+      "labels": [
+        "strict_final_reducer_export/analyze.py"
+      ],
+      "roles": [
+        "strict_final_reducer_export"
+      ],
+      "sha256": "9868efad4a8029edd7d1b4d0f7b0ff2ff3ed453420fa86b9d6c1a2999bd3193f",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_analysis_v1/analyze.py"
+      ]
+    },
+    "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 104456,
+      "labels": [
+        "final_qualified_service_and_input_builder/run_comparison.py",
+        "actual_operator_client_driver/run_comparison.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/run_comparison.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_operator_client_driver",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/client_source/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/run_comparison.py"
+      ]
+    },
+    "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 48052,
+      "labels": [
+        "final_qualified_service_and_input_builder/production_gateway.py",
+        "actual_operator_client_driver/production_gateway.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/production_gateway.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_operator_client_driver",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/client_source/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/production_gateway.py"
+      ]
+    },
+    "9f6c7b8c6752056a9e4e73c587bea6edc044301afbf58849caa4c0d285e090f5": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 5083608,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-12-more-itertools.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "9f6c7b8c6752056a9e4e73c587bea6edc044301afbf58849caa4c0d285e090f5",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-12-more-itertools.private.json"
+      ]
+    },
+    "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 5353,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/analysis_policy.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/analysis_policy.json"
+      ]
+    },
+    "b38564212c5924cbbf3432fee9b09e6e1f342ed89104933e2e551677dab441f8": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 2587,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_context_manifest.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "b38564212c5924cbbf3432fee9b09e6e1f342ed89104933e2e551677dab441f8",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_context_manifest.private.json"
+      ]
+    },
+    "b6f10a422710507f8d36b016a0485befb03f1d201600a1fe9edac1c7b4a3ff7a": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 4220,
+      "labels": [
+        "final_qualified_service_and_input_builder/acquire_resource_lease.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder"
+      ],
+      "sha256": "b6f10a422710507f8d36b016a0485befb03f1d201600a1fe9edac1c7b4a3ff7a",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/acquire_resource_lease.py"
+      ]
+    },
+    "baa4bc46e5bbe646e679e07f13d2fc46ccc06ece009267d40960b2b8e426c8c6": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 33738,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/actual_eight_context_qualification.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "baa4bc46e5bbe646e679e07f13d2fc46ccc06ece009267d40960b2b8e426c8c6",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/actual_eight_context_qualification.private.json"
+      ]
+    },
+    "bb17ec2921b57566b93f82ec6414749802b214f13a69f3fb672826ce01df997c": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 31807,
+      "labels": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py"
+      ],
+      "roles": [
+        "native_support_qualified_lineage"
+      ],
+      "sha256": "bb17ec2921b57566b93f82ec6414749802b214f13a69f3fb672826ce01df997c",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_performance_candidate/external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py"
+      ]
+    },
+    "bcc53f4f8340da7c84d8aa28d78219ae07d9baf5950d0d804100ad1b1c3e3906": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 6753518,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/runtime_manifest.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "bcc53f4f8340da7c84d8aa28d78219ae07d9baf5950d0d804100ad1b1c3e3906",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/runtime_manifest.json"
+      ]
+    },
+    "c3a27fadb68ebcb1f13f60b391d691367473da4bb7aff58934a81a5861aa96db": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 357356,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_inputs.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "c3a27fadb68ebcb1f13f60b391d691367473da4bb7aff58934a81a5861aa96db",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_inputs.private.json"
+      ]
+    },
+    "c443f1a56a06be84a27a2111b36fa47fdc6c8a8614eb91f5d08027a92404bac4": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 7436,
+      "labels": [
+        "final_qualified_service_and_input_builder/bootstrap.py",
+        "actual_operator_client_driver/bootstrap.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_operator_client_driver"
+      ],
+      "sha256": "c443f1a56a06be84a27a2111b36fa47fdc6c8a8614eb91f5d08027a92404bac4",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_candidate/bootstrap.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/bootstrap.py"
+      ]
+    },
+    "c5cc3953bd52c383666f2f3222812b13f10825ec8257ef4b124601c2d22c5b69": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 38131,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/common_amendment.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "c5cc3953bd52c383666f2f3222812b13f10825ec8257ef4b124601c2d22c5b69",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/common_amendment.private.json"
+      ]
+    },
+    "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 27458,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/public_baseline_128_join.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/public_baseline_128_join.private.json"
+      ]
+    },
+    "c6941d512387f0b5cf707d27b294b90e77dc30e1ce93edb813521620fb7dd310": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 982,
+      "labels": [
+        "final_qualified_service_and_input_builder/final_profile.template.json"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder"
+      ],
+      "sha256": "c6941d512387f0b5cf707d27b294b90e77dc30e1ce93edb813521620fb7dd310",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/final_profile.template.json"
+      ]
+    },
+    "c8e0cbb3b9f458410e328bef21a5fbbbac849975f4f6407c323876b12caac6f4": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 15992,
+      "labels": [
+        "external/ipfs_accelerate/test/api/semantic_state/test_context_pack.py"
+      ],
+      "roles": [
+        "native_support_qualified_lineage"
+      ],
+      "sha256": "c8e0cbb3b9f458410e328bef21a5fbbbac849975f4f6407c323876b12caac6f4",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_candidate/external/ipfs_accelerate/test/api/semantic_state/test_context_pack.py"
+      ]
+    },
+    "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 4437,
+      "labels": [
+        "final_qualified_service_and_input_builder/context_selection.py",
+        "actual_final_host_source/context_selection.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/context_selection.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/context_selection.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/context_selection.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/context_selection.py"
+      ]
+    },
+    "db370ef636dda079aba4c5c9d0001108bf9037e2045783a316f5718826fff83e": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 1935,
+      "labels": [
+        "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_surrogate_normalization.py"
+      ],
+      "roles": [
+        "native_support_qualified_lineage"
+      ],
+      "sha256": "db370ef636dda079aba4c5c9d0001108bf9037e2045783a316f5718826fff83e",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/native_candidate/external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_surrogate_normalization.py"
+      ]
+    },
+    "dfea955fa20d2e26c49b50f1a8b1817451f5d67c34928cb49aca935baf7dcb8a": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 14062,
+      "labels": [
+        "final_qualified_service_and_input_builder/test_final_worker.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder"
+      ],
+      "sha256": "dfea955fa20d2e26c49b50f1a8b1817451f5d67c34928cb49aca935baf7dcb8a",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/test_final_worker.py"
+      ]
+    },
+    "e30e4220051be56b230b83634dd44c10807d97de98842d87231ad0637d294757": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 324133,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-14-iniconfig.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "e30e4220051be56b230b83634dd44c10807d97de98842d87231ad0637d294757",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/prepared_contexts/ns-hist-14-iniconfig.private.json"
+      ]
+    },
+    "e4ba75dc2538baf7538cb181a57d52096a5ef916d674023a8faf5bc624ed475a": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 13779,
+      "labels": [
+        "final_qualified_service_and_input_builder/batch_control.py",
+        "actual_final_host_source/batch_control.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/batch_control.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "e4ba75dc2538baf7538cb181a57d52096a5ef916d674023a8faf5bc624ed475a",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/batch_control.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/batch_control.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/batch_control.py"
+      ]
+    },
+    "e5b9723e87e06a7e3d06cd65c3a409478095eb4cf93ea89031679f264f2c8200": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 42894,
+      "labels": [
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/root_eight_input_review.private.json"
+      ],
+      "roles": [
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "e5b9723e87e06a7e3d06cd65c3a409478095eb4cf93ea89031679f264f2c8200",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/root_eight_input_review.private.json"
+      ]
+    },
+    "e6ceda24bdf5e5c33786f99e0d3967a097f411e72a033371c0f7144cfa1657d5": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 9312,
+      "labels": [
+        "final_qualified_service_and_input_builder/production_profile.json"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder"
+      ],
+      "sha256": "e6ceda24bdf5e5c33786f99e0d3967a097f411e72a033371c0f7144cfa1657d5",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/production_profile.json"
+      ]
+    },
+    "ebbf8e66ed74f28d1e9f789a0487d0ce510a05f362a7dd58439c25c4e9d9365a": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 11310,
+      "labels": [
+        "final_qualified_service_and_input_builder/launch.py",
+        "actual_operator_client_driver/launch.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_operator_client_driver"
+      ],
+      "sha256": "ebbf8e66ed74f28d1e9f789a0487d0ce510a05f362a7dd58439c25c4e9d9365a",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_candidate/launch.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/launch.py"
+      ]
+    },
+    "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 19918,
+      "labels": [
+        "final_qualified_service_and_input_builder/score_runs.py",
+        "actual_operator_client_driver/score_runs.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/score_runs.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_operator_client_driver",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_v1/client_source/papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/worker_source/score_runs.py"
+      ]
+    },
+    "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9": {
+      "anonymous_release_policy": "review exact source for identity strings; use a separately hashed portable derivative when needed",
+      "bytes": 25043,
+      "labels": [
+        "final_qualified_service_and_input_builder/http_proposer.py",
+        "actual_final_host_source/http_proposer.py",
+        "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/http_proposer.py"
+      ],
+      "roles": [
+        "final_qualified_service_and_input_builder",
+        "actual_final_host_source",
+        "frozen37_source_or_public_prepared_input"
+      ],
+      "sha256": "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9",
+      "source_paths": [
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/http_proposer.py",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/http_proposer.py",
+        "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/paper_completion_staging_v1/root_authorized_source_v1/papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source/host_service/http_proposer.py"
+      ]
+    }
+  },
+  "total_unique_source_bytes": 17807196
+}

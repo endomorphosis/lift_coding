@@ -1,0 +1,94 @@
+{
+  "at": "2026-09-13T03:02:46.573948+00:00",
+  "bindings": {
+    "http_proposer/cleanup.json": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68/http_proposer/cleanup.json",
+      "sha256": "4dbdddd7536bf19783489779909a81f969cf34985aa4faa904de9b881085d841"
+    },
+    "http_proposer/result.json": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68/http_proposer/result.json",
+      "sha256": "56d075b7a810598b868dc3abaffe661f1142a634a290346411dfd3f632c4efdf"
+    },
+    "result.json": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants/e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68/result.json",
+      "sha256": "3a92311c444df0ac298cd1ae3a074f67b5f2807cbcb9f0293020ed4c63a8c094"
+    }
+  },
+  "cell_number": 7,
+  "exec_exit_code": 0,
+  "exec_session_id": 8240,
+  "fixed_later_cells_unissued": true,
+  "lease_process_proc_exists": false,
+  "next_cell_number": 8,
+  "no_retry_or_regrant": true,
+  "operator": "/root/submodule_mounts",
+  "reported_lease_pid": 2886108,
+  "scalar_evidence": {
+    "http_proposer/cleanup.json": {
+      "container": "2059c2dae822d1d15e6d88045495e3da8da09fd4f079ed6da9c3b8793ca9308f",
+      "returncode": 0
+    },
+    "http_proposer/result.json": {
+      "candidate_applied": false,
+      "container_exit_code": 0,
+      "elapsed_seconds": 595.5647319440031,
+      "provider": {
+        "absolute_timeout": true,
+        "attempted_posts": 1,
+        "elapsed_seconds": 595.0004390469985,
+        "errno": null,
+        "exception_class": "_ChildAbsoluteDeadline",
+        "failed_phase": "open_entered",
+        "request_sha256": "330b2f9b784f038792fe81cf256c57a27f66133e457d2bbef8f95b1ec97ba066",
+        "response_bytes": 0,
+        "status": "transport_error"
+      },
+      "success": false,
+      "timed_out": false
+    },
+    "result.json": {
+      "elapsed_seconds": 595.7565531239379,
+      "error": {
+        "message": "[Errno 2] No such file or directory: '/proc/2886108/stat'",
+        "type": "FileNotFoundError"
+      },
+      "proposal_resource_compliance": {
+        "compliant": false,
+        "exceeded": [
+          "provider_child_seconds"
+        ],
+        "limits_seconds": {
+          "gateway_proposal_seconds": 600,
+          "http_wrapper_seconds": 600,
+          "provider_child_seconds": 595
+        },
+        "measured_seconds": {
+          "gateway_proposal_seconds": 595.7565531239379,
+          "http_wrapper_seconds": 595.5647319440031,
+          "provider_child_seconds": 595.0004390469985
+        },
+        "missing_is_zero": false,
+        "schema": "ns-final-measured-resource-compliance/v1",
+        "scope": "Actual signed phase clocks, separately nested; excludes preparation, operator review and client verification. No postprocessing exclusion inside measured gateway/wrapper phases.",
+        "unavailable": []
+      },
+      "proposal_resource_measurements": {
+        "gateway_proposal_seconds": 595.7565531239379,
+        "http_wrapper_seconds": 595.5647319440031,
+        "provider_child_seconds": 595.0004390469985
+      },
+      "provider_termination": {
+        "cleanup_sha256": "4dbdddd7536bf19783489779909a81f969cf34985aa4faa904de9b881085d841",
+        "command_sha256": "88c623f6cc5664edf9ac69c4037f8c4f1fbe8a951cf0abb6cdf6b55bd98d835b",
+        "container_id": "2059c2dae822d1d15e6d88045495e3da8da09fd4f079ed6da9c3b8793ca9308f",
+        "container_name": "ns-historical-http-8794a367193b45b183754d1fcd3a8e83",
+        "immediate_operator_action_required": false,
+        "no_automatic_retry": true,
+        "termination_proven": true
+      },
+      "status": "operator_reconciliation_required"
+    }
+  },
+  "schema": "ns-final-current-lease-loss-stop/v1",
+  "source_or_lease_changed_by_operator": false
+}

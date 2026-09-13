@@ -1,0 +1,36 @@
+{
+  "approved": true,
+  "automatic_adversarial_scorer_integrity_qualified": false,
+  "binding": {
+    "adapter_source_sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "amendment_sha256": "68bec7ac15074776a75e22fcf6b2ae213edda15e13eb946e197fc6a60359fedc",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "candidate_binding_sha256": "df62acc421441d81518c83202e73272bff323d4a01e02d4d523dddf6023032a8",
+    "candidate_sha256": "532f577a00191b6d504c4b2710d6fc409a90ec03632129890c00245f456fe4dc",
+    "cell_id": "3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85",
+    "grant_sha256": "bb8df638e46aafe156e6338495121cb1a58b32b027bb2082e1989098b51568e8",
+    "manifest_sha256": "72ac11a35f276bea5fa5bc855a7530e27761b1b93b9b197a64c680a9f2f2bc53",
+    "patch_sha256": "d3635640de8732a07e8cb890b24f4918b55fd803ff7737d9f0555d91a356d466",
+    "profile_sha256": "6d6699e8367b4960b7d3194ba64a03ad5d971add4ad9c162344fd85e741f822a",
+    "proposal_receipt_sha256": "3bd8d29632b1e2c80af33deb3f03eed30a6e5ea480290c1a2f07e0328747287b",
+    "provider_result_sha256": "400d5a96539e7388a3fd0881a9bd44e72e639f12b9a81b55a11f87b19353638d",
+    "record_kind": "final",
+    "request_sha256": "e13553cb168275f38b710c1f9606d60d7d58c92ceedfc805e4b7770b09ff1f11",
+    "reservation_sha256": "112406896bbcac817cc8a4336c4887485faf72dabc4aa22a4c7212416f12585a",
+    "scorer_profile_sha256": "bdc8b7f2371602917e244a7ad9b8cd8c53ac7bea50ade1b3c137f9aa3b152faf",
+    "scorer_source_sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "source_sha256": "1ff459077c646bd12f03ca171df991012476f267bf547bf8d9801a29c85fca33"
+  },
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "review_statement": "I read the exact1146-byte two-file patch using the public IniConfig constructor and _parseline context already examined. It adds a classmethod that forwards supplied text by keyword with a synthetic default path, and strips #/semicolon suffixes in both values and continuation lines. Shared-parser behavior, literal comment characters and the chosen API/default path still require measurement; this review does not assert correctness. Only the permitted implementation files change, without tests, dependencies, resources or scorer edits. I approve this exact candidate for its own cold validation under the stated bounded AI trust scope, with no human-annotation or adversarial-integrity claim.",
+  "reviewed_at": "2026-09-13T06:24:33.734526+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-historical-final-candidate-review/v1",
+  "trust_scope": "specific_reviewed_final_candidate_only"
+}

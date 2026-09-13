@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md": "2c0cf3af9fb87cefc6c6f56cdf017ef2fd577a5c4ffee453cf10348d585e854d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl": "5373f74be90552cfcfe12be26ffbe99a77d4112003152233cfd8263ce4ad1d83",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json": "f50c0359111630f3621cda57d62c5521b7759d6af3bda438c1dabd70eee8ba59"
+  },
+  "commands": [],
+  "completed_at": null,
+  "correction_of": {
+    "native_history_unchanged": true,
+    "path": "papers/completion/neurosymbolic_supervision/pilot/recovery/pre_final_projection_history_v1/papers/completion/neurosymbolic_supervision/receipts/NS-016.json",
+    "sha256": "2c15a7b1a45fa0c7ea72762557c1b792e2c301a5b4a0ae982e21862d77f678a8"
+  },
+  "criteria": [
+    {
+      "criterion": "Pilot tasks are excluded from final holdouts and labeled developmental.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "explanation": "The corrected pilot has24 terminal developmental rows in four historical families; the frozen eight final families are disjoint. Earlier76 compact rows are historical unsupported preparation, not new execution.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Each retained arm has a valid useful path and completed independent scoring, or is explicitly removed with claims updated before final runs.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "explanation": "Actual retained signed independent cold scoring gives five useful A witnesses and five useful B witnesses. Other arms,caches,routing/reuse/publication endpoints were withdrawn before final outcomes, not counted as completed.",
+      "status": "pending"
+    },
+    {
+      "criterion": "All receipts required by Tables 17/18 and cost analysis can be produced; missing provider/resources have honest readiness statuses.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "explanation": "Actual24 proposals,12 cold scores, all failures, nested time endpoints, unavailable settlement data and separate prior failures/diagnostic costs remain explicit. Pilot layer overruns are disclosed, not budget-compliant success.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Final source/task/protocol/scorer manifests are immutable and hashed before the first final attempt.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "explanation": "The exact pre-outcome freeze and original192\u219232 order-preserving filter bind source/runtime/model/context/scorer/analysis policy. Separate root grants remain outside ordinary task authority.",
+      "status": "pending"
+    }
+  ],
+  "outputs": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
+    "papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+    "papers/completion/neurosymbolic_supervision/pilot/readiness_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+    "papers/completion/neurosymbolic_supervision/pilot/results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+    "papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/operator_correction_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json"
+  },
+  "schema": "paper-task-evidence/v1",
+  "scope": "Corrective receipt prepared from actual retained pilot/freeze evidence. NS016 stays blocked until root separately decides native admission timing. No final outcome, new effect or old-history rewrite.",
+  "source_versions": {
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "native_harness_sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+    "original_source_head": "d53bac06485bc6e8efa2874b27a343076bb3ef2b"
+  },
+  "status": "pending_operator_evidence_review",
+  "task_id": "NS-016",
+  "template_only": true
+}

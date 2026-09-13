@@ -1,0 +1,69 @@
+"""Export already verified public final receipts; no service/credential/oracle access."""
+import sys
+sys.dont_write_bytecode=True
+import argparse,hashlib,json,os,stat
+from pathlib import Path
+import continuation_io as CI
+
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def load(p):return json.loads(Path(p).read_bytes())
+def copy_bound(src,dst,expected):
+ assert src.is_file()and not src.is_symlink()and src.stat().st_size<=1048576
+ raw=src.read_bytes();assert hashlib.sha256(raw).hexdigest()==expected
+ fd=os.open(dst,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+ with os.fdopen(fd,'wb')as f:f.write(raw);f.flush();os.fsync(f.fileno())
+def record(path,x):
+ fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+ with os.fdopen(fd,'w')as f:json.dump(x,f,sort_keys=True,indent=2,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
+def main():
+ ap=argparse.ArgumentParser();ap.add_argument('--activation',type=Path,required=True);ap.add_argument('--activation-sha256',required=True);ap.add_argument('--analysis',type=Path,required=True);ap.add_argument('--analysis-sha256',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--continuation-contract',type=Path,required=True);ap.add_argument('--continuation-contract-sha256',required=True);args=ap.parse_args()
+ OP=args.activation.parent
+ continuation_bindings={};context=CI.load_context({'path':str(args.continuation_contract),'sha256':args.continuation_contract_sha256},continuation_bindings)
+ assert not args.output.exists()and args.output.is_absolute()and args.output.resolve()==args.output
+ assert sha(args.activation)==args.activation_sha256 and sha(args.analysis)==args.analysis_sha256
+ a=load(args.activation);an=load(args.analysis);assert a['schema']=='ns028-root-final-operator-activation/v1'and an['schema']=='ns-final32-retained-evidence-analysis/v1'and an['complete']is True and an['terminal_cells']==32 and an['batch_sha256']==a['batch']['sha256']
+ assert an['activation']=={'path':str(args.activation),'sha256':args.activation_sha256} and an['freeze_sha256']==a['freeze']['sha256']
+ assert an.get('runtime_continuation')==context['summary']
+ assert [r['cell_id']for r in an['rows']]==a['ordered_cells']
+ prepared=[]
+ for i,row in enumerate(an['rows'],1):
+  cid=row['cell_id'];tpath=OP/f'cell{i:03}_terminal.private.json';t=load(tpath);assert sha(tpath)==row['signed_terminal_sha256']and t['terminal_verified']is True
+  for k in ('client_execution','client_result'):assert sha(t[k]['path'])==t[k]['sha256']
+  execution=load(t['client_execution']['path']);assert execution['success']is True and execution['cleanup_exit_code']==0
+  client=load(t['client_result']['path']);verified=client['results'][0]['result']['host_verified'];assert verified['signature_and_scope_verified']is True
+  pe=Path(t['client_result']['path']).parent/'public_evidence';manifest=load(pe/'manifest.json');assert manifest['batch_sha256']==a['batch']['sha256']and manifest['cell_id']==cid
+  files=manifest['files'];assert set(files)<=set(('request.json','offer.json','response.json','proposal.json','disposition.json'))and 'offer.json'in files
+  offer=load(pe/'offer.json');request=offer['request'];assert request==load(pe/'request.json')and request['cell_id']==cid
+  assert sha(pe/'offer.json')==verified['binding']['offer_sha256'] and request['record_kind']=='final'and request['final_freeze_sha256']==a['freeze']['sha256']
+  terminal_name='disposition.json'if t['terminal_failure']else'response.json';assert terminal_name in files
+  raw_terminal=load(pe/terminal_name);body=raw_terminal['receipt'];assert body.get('batch_sha256',body.get('binding',{}).get('batch_sha256'))==a['batch']['sha256']
+  assert sha(pe/terminal_name)==verified['response_sha256']
+  original=load(pe/('proposal.json'if body.get('original_filename')=='proposal_result.json'else'response.json'))['receipt'] if t['terminal_failure']else body
+  original_name='proposal.json'if t['terminal_failure']and body.get('original_filename')=='proposal_result.json'else'response.json'
+  assert sha(pe/original_name)==row['original_signed_receipt_sha256']and original==verified['receipt']
+  grant=load(Path(a['private_root'])/cid/'grant.json');assert sha(Path(a['private_root'])/cid/'grant.json')==original['grant_sha256']
+  runtime_provenance=CI.verify_row_runtime(grant,original,client,cid,context);assert runtime_provenance==row['runtime_source_provenance']
+  binding={**request,'offer_sha256':sha(pe/'offer.json'),'profile':offer['profile'],'source_sha256':offer['source_sha256'],'manifest_sha256':original['manifest_sha256']}
+  priv=Path(a['private_root'])/cid;reviews={n:sha(priv/n)for n in ('operator_review.json','operator_disposition.json')if(priv/n).exists()}
+  if 'operator_review.json'in reviews:
+   review=load(priv/'operator_review.json')
+   if t['terminal_failure']:
+    assert hashlib.sha256(json.dumps(review,sort_keys=True,separators=(',',':')).encode()).hexdigest()==body['binding']['candidate_review_sha256']
+   else:assert reviews['operator_review.json']==original['operator_review_sha256']
+  if 'operator_disposition.json'in reviews:assert t['terminal_failure']and load(priv/'operator_disposition.json')==body['operator_record']
+  prepared.append((cid,pe,files,priv,reviews,{'runtime_source_provenance':runtime_provenance,'binding':binding,'offer_sha256':sha(pe/'offer.json'),'public_key_sha256':offer['public_key_sha256'],'terminal_filename':terminal_name,'terminal_sha256':sha(pe/terminal_name)}))
+ args.output.mkdir(mode=0o700);root=args.output/'host_receipts';root.mkdir(mode=0o700);inventory={};cells={}
+ for cid,pe,files,priv,reviews,entry in prepared:
+  d=root/cid;d.mkdir(mode=0o700)
+  for n,v in files.items():
+   digest=v['sha256']if isinstance(v,dict)else v
+   copy_bound(pe/n,d/n,digest);inventory[str((d/n).relative_to(args.output))]=digest
+  for n,digest in reviews.items():copy_bound(priv/n,d/n,digest);inventory[str((d/n).relative_to(args.output))]=digest
+  copy_bound(pe/'manifest.json',d/'client_export_manifest.json',sha(pe/'manifest.json'));inventory[str((d/'client_export_manifest.json').relative_to(args.output))]=sha(pe/'manifest.json')
+  cells[cid]=entry
+ copy_bound(args.continuation_contract,args.output/'public_runtime_continuation_contract.json',args.continuation_contract_sha256);inventory['public_runtime_continuation_contract.json']=args.continuation_contract_sha256
+ record(args.output/'continuation_verification_bindings.private.json',continuation_bindings);inventory['continuation_verification_bindings.private.json']=sha(args.output/'continuation_verification_bindings.private.json')
+ record(args.output/'root_cells.proposed.private.json',{'runtime_continuation':context['summary'],'schema':'ns-final-root-cell-authority-proposal/v1','approved':False,'batch_sha256':a['batch']['sha256'],'cells':cells,'scope':'Actual32 signed final terminals only, with raw outcomes and signed measured-resource compliance. Root/native evidence authority remains separate; no managed authoring completion claim.'})
+ record(args.output/'export_manifest.private.json',{'runtime_continuation':context['summary'],'schema':'ns-final32-public-evidence-export/v1','analysis':{'path':str(args.analysis),'sha256':args.analysis_sha256},'source_sha256':sha(__file__),'files':inventory,'cells':32,'root_cells_sha256':sha(args.output/'root_cells.proposed.private.json'),'new_provider_calls':0,'new_scorer_calls':0,'new_native_calls':0,'private_keys_or_oracle_payloads_exported':False,'task_completion_admitted':False})
+ print(json.dumps({'manifest_sha256':sha(args.output/'export_manifest.private.json'),'files':len(inventory),'root_cells_sha256':sha(args.output/'root_cells.proposed.private.json')}))
+if __name__=='__main__':main()

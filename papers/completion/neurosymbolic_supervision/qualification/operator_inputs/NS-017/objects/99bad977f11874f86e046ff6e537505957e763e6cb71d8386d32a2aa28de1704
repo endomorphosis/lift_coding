@@ -1,0 +1,30 @@
+{
+  "at": "2026-09-13T03:09:12.194413+00:00",
+  "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+  "cell_id": "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+  "client_execution": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell007_client_poll002/execution.private.json",
+    "sha256": "3b0e9b33234a9289073c4398b08dd01325604e76d9a3fdd967e13b3844aa7f7f"
+  },
+  "client_result": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/cell007_client_poll002/work/result.json",
+    "sha256": "1d950fca49c6a8ba85d2e1aa6ed41452de0a8a826681786f9b661e25a97624f7"
+  },
+  "cold_scalar_result": {
+    "automatic_adversarial_scorer_integrity_qualified": false,
+    "candidate_valid": null,
+    "cold_full_validation": false,
+    "failure_disposition_sha256": "65672d9185f3d45b5ac4f84313d8553f3032d1be8922da30b9bbb48bd9eec5d8",
+    "hidden_access_incident": false,
+    "human_annotation": false,
+    "independent_scorer_id": null,
+    "reason": "Terminal known_proposal_failure; original effect/error/usage retained, no score or success credit, no retry.",
+    "receipt_id": "sha256:65672d9185f3d45b5ac4f84313d8553f3032d1be8922da30b9bbb48bd9eec5d8",
+    "status": "unavailable"
+  },
+  "final_admitted": false,
+  "native_task_completed": false,
+  "operator_driver": true,
+  "terminal_failure": true,
+  "terminal_verified": true
+}

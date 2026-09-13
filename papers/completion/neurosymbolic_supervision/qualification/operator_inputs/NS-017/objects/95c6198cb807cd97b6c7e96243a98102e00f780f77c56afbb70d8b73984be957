@@ -1,0 +1,91 @@
+{
+  "at": "2026-09-13T03:30:18.356799+00:00",
+  "client_analysis_slice": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/client_analysis_slice_v1/package.private.json",
+    "sha256": "c62063240596d38c574f587e83a39ac2191e8aed4be1e27310dcac7f73587b8e"
+  },
+  "command": [
+    "/home/barberb/.local/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_continuation"
+  ],
+  "constructed_controls": [
+    "test_actual_original_resource_predicate_ast_unchanged",
+    "test_only_declared_gateway_functions_changed",
+    "test_static_authority_positive_and_all_prefix_refs_forwarded",
+    "test_unapproved_rejected",
+    "test_fixture_authority_rejected",
+    "test_old_freeze_changed_refused",
+    "test_consumed_cell_refused",
+    "test_suffix_reordered_refused",
+    "test_extra_provider_slot_refused",
+    "test_float_slot_count_refused",
+    "test_profile_budget_change_refused",
+    "test_retry_refused",
+    "test_false_unchanged_runtime_claim_refused",
+    "test_scientific_source_change_refused",
+    "test_validator_source_omission_refused",
+    "test_mismatched_effective_service_path_refused",
+    "test_actual_prefix_audit_binding_required",
+    "test_successor_fixture_refused",
+    "test_manager_custody_missing_refused",
+    "test_post_caller_evidence_required",
+    "test_source_qualification_wrong_map_refused",
+    "test_accounting_mode_does_not_call_liveness",
+    "test_effect_mode_calls_exact_successor_lease_check",
+    "test_public_projection_accepted_by_actual_new_client",
+    "test_gateway_refuses_missing_continuation_before_effects",
+    "test_gateway_configures_client_from_exact_authority",
+    "test_gateway_authority_symlink_refused",
+    "test_gateway_runtime_fields_actual_map_and_original_map",
+    "test_signing_adds_all_runtime_fields_without_lease_refresh",
+    "test_prefix_hash_mutation_refused",
+    "test_source_and_prefix_symlink_refused",
+    "test_static_globals_resolve"
+  ],
+  "constructed_controls_count": 32,
+  "control_limits": [
+    "Static authority positive uses explicit constructed successor/manager metadata; no actual scientific authority.",
+    "Read-only prefix ref forwarding and hash corruption controls, not a second scientific audit.",
+    "Managed fixture survives actual caller tool exit and is now released. Root separately owns the actual successor lease.",
+    "No actual G native-import preflight, grant, HTTP model, scorer, or continuation offline driver execution in this qualification."
+  ],
+  "effective_source_bindings": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_v2/host_gateway.py": "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/adapter.py": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/batch_control.py": "e4ba75dc2538baf7538cb181a57d52096a5ef916d674023a8faf5bc624ed475a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/context_selection.py": "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/http_proposer.py": "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/lease_continuation.py": "0db6242e1854984cba9893ef04912f7f0a4d73ca08c6fad74c349daa389bfcb9",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/native_final_gate.py": "d0f400dccc4f375f033b34734fad391ae1563be70821d89c62ecc0ff0b271e17",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/pilot_client.py": "9c4f5e1cdf863bfa3b050b48ed4f8b142377394ce4661b3ded4b2e7c1c8d8dfa",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/pilot_gateway.py": "c452b74da3d57b8e57d1050c542f4add514a2fff3a70323843341813aaa38eb2",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/candidate/final_service/semantic_context.py": "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65"
+  },
+  "exit_code": 0,
+  "log": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/qualification.private.log",
+    "sha256": "7e68db78df62bb3125565696049ab57264ba8fa228c8786d62f734275ab96a7b"
+  },
+  "managed_control": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/managed_control_v1/qualification.private.json",
+    "sha256": "b2ebde6638927d72d73836ea3623a9b555318315d274b983db682bf78fba7998"
+  },
+  "new_native_calls": 0,
+  "new_provider_calls": 0,
+  "new_scorer_calls": 0,
+  "no_scientific_calls": true,
+  "schema": "ns-final-resource-continuation-overlay-qualification/v1",
+  "source_scope": "Only G/N/PC plus added L changed in new service copies; original freeze/batch/activation/source objects remain unchanged. Original lease predicate AST identical.",
+  "success": true,
+  "test_source": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_lease_continuation_v1/test_continuation.py",
+    "sha256": "ef3fe20a88b9e4134d8f464efce634390902f10b98c3d8366d2ba6747b841540"
+  },
+  "unchanged_lease_checks_verified": true,
+  "wall_seconds": 0.19478674698621035
+}

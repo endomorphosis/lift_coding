@@ -1,0 +1,32 @@
+{
+  "authoring_claim_completion_admitted": false,
+  "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+  "cell_id": "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148",
+  "files": {
+    "offer.json": {
+      "bytes": 3305,
+      "sha256": "b4ef390009c6b5312c484e86e25e848508bcfed874d444cec720faa800e7d27c"
+    },
+    "proposal.json": {
+      "bytes": 31799,
+      "sha256": "7bbbc67d473dc0b10a39fee160cdb0b9678d1af29a0d84e7336e1c1c22d6f43d"
+    },
+    "request.json": {
+      "bytes": 649,
+      "sha256": "2aaae1adca979f013ed40ce3899d2ec0577de50fb010b9f8b00ea2907a12a94b"
+    },
+    "response.json": {
+      "bytes": 35445,
+      "sha256": "32d30c83357a3fb4275d4238ca85b6de79c7515917cd8ea19865e2d125376d0b"
+    }
+  },
+  "profile_sha256": "eb583a0c7a3427628863335f5b533ff60fc0d608f5159ffe96e34cc73ed2f4a5",
+  "schema": "ns028-operator-public-client-export/v1",
+  "source5": {
+    "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a",
+    "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb",
+    "papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/pilot_client.py": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+    "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/worker_adapter.py": "3679e37d1edcea728dd1e209fd3c2dbba2994fb252e609c5c5688b86c0ec0acc"
+  }
+}

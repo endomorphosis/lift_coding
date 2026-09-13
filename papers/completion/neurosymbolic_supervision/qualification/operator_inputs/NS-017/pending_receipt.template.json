@@ -1,0 +1,87 @@
+{
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl": "7d3471f965cc9bd6c024e1fd9c528b9797c40601e5083eb8f1f506d78094716f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md": "af86395218d147f7a9707bce476cf7aa002fe3af87df8a0a1b3f658608ff0c24",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl": "8448634cb9dd6569a46dc9a90dbd48f99f047a798014df7f461c19d93b7bd55a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl": "97e9a1bb9503886c3a609322cab8dbe1e927854df10bee5805be16240eec17ee"
+  },
+  "automatic_completion_available": false,
+  "commands": [],
+  "completed_at": null,
+  "criteria": [
+    {
+      "criterion": "All planned task-arm-repeat units have an actual terminal record or explicitly documented missingness; denominator changes are prohibited after outcomes.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md"
+      ],
+      "explanation": "Review the bound actual32 evidence and precise limitations; complete only through ordinary validation.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Useful completions are independently validated and linked to admitted publication where the arm requires it.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md"
+      ],
+      "explanation": "Review the bound actual32 evidence and precise limitations; complete only through ordinary validation.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Actual provider and stage measurements support the final cost fields; estimated/unavailable data remain distinct.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md"
+      ],
+      "explanation": "Review the bound actual32 evidence and precise limitations; complete only through ordinary validation.",
+      "status": "pending"
+    },
+    {
+      "criterion": "Raw records and deviations bind the immutable final experiment freeze and are sufficient for independent rescoring.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md"
+      ],
+      "explanation": "Review the bound actual32 evidence and precise limitations; complete only through ordinary validation.",
+      "status": "pending"
+    }
+  ],
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/runs/main/attempts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+    "papers/completion/neurosymbolic_supervision/runs/main/deviations.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md",
+    "papers/completion/neurosymbolic_supervision/runs/main/manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+    "papers/completion/neurosymbolic_supervision/runs/main/provider_receipts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+    "papers/completion/neurosymbolic_supervision/runs/main/resource_measurements.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl"
+  },
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "analysis_source_sha256": "ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94",
+    "effective_continuation_host_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "export_source_sha256": "b62c6283bcfcfb5afc3f8289ea273a82101aee117275dfce91c18960deebd081",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "native_accelerate": "60baee769d39a53c52142c56fbf6ed7483773aa3",
+    "native_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+    "native_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "original_frozen_host_source_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "runtime_epochs": [
+      "original_resource_lease",
+      "prospective_resource_lease_continuation"
+    ]
+  },
+  "status": "pending_operator_evidence_review",
+  "task_id": "NS-017",
+  "template_only": true
+}

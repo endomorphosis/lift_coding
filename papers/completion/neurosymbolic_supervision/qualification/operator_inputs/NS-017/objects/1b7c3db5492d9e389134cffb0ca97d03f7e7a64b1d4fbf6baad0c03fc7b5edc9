@@ -1,0 +1,418 @@
+"""Root operator orchestration of the separately admitted fixed final32 cohort.
+
+Each invocation performs one named phase. Candidate approval is deliberately
+absent: the coordinating AI operator must read the sealed patch and write its bound review.
+This helper creates no approval of its own; the root supplies exact activation authority.
+Existing host/client implementations retain all scientific validation/effects.
+"""
+import sys
+sys.dont_write_bytecode = True
+import argparse
+import datetime as dt
+import hashlib
+import json
+import os
+import re
+import stat
+import time
+from pathlib import Path
+import subprocess
+
+HERE = Path(__file__).resolve().parent
+DRIVER = HERE.parent / 'operator_client_driver_v1'
+PY = '/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python'
+HOST = Path('/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1')
+NATIVE_HEAD = '60baee769d39a53c52142c56fbf6ed7483773aa3'
+ORIGINAL_PLAN_SHA = '6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80'
+PAPER = Path('papers/completion/neurosymbolic_supervision')
+SERVICE = PAPER / 'qualification/production_provider/pilot_service/final_service'
+UNITS = ('ns-hist-09-tomlkit','ns-hist-10-installer','ns-hist-11-tornado',
+         'ns-hist-12-more-itertools','ns-hist-13-charset_normalizer','ns-hist-14-iniconfig',
+         'ns-hist-15-wheel','ns-hist-16-jinja')
+ACTIVATION = None
+PACKAGE = None
+
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def read_json_bytes(path):
+    path = Path(path)
+    require(path.is_absolute() and path.resolve() == path, 'canonical input required')
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        info = os.fstat(fd)
+        require(stat.S_ISREG(info.st_mode) and info.st_size <= 16*1024*1024, 'bounded JSON input required')
+        with os.fdopen(fd, 'rb', closefd=False) as stream:
+            raw = stream.read(16*1024*1024+1)
+    finally:
+        os.close(fd)
+    require(len(raw) <= 16*1024*1024, 'JSON input grew')
+    return raw
+
+
+def load(path):
+    return json.loads(read_json_bytes(path))
+
+
+def bound(binding):
+    require(isinstance(binding, dict) and set(binding) >= {'path','sha256'}
+            and re.fullmatch('[a-f0-9]{64}', binding['sha256']) is not None, 'exact path/hash binding required')
+    raw = read_json_bytes(binding['path'])
+    require(hashlib.sha256(raw).hexdigest() == binding['sha256'], 'input changed: '+binding['path'])
+    return json.loads(raw)
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(',',':'), allow_nan=False).encode()
+
+
+def cell_id(unit, arm, repetition):
+    require(unit in UNITS and arm in ('A','B') and type(repetition) is int
+            and repetition in (104729,130363), 'fixed final cell identity differs')
+    return hashlib.sha256(canonical({'unit':unit,'arm':arm,'cache':'local_cold',
+                                     'repetition':repetition,'record_kind':'final'})).hexdigest()
+
+
+def checked_activation(path, expected):
+    a = bound({'path':str(path),'sha256':expected})
+    require(a.get('schema') == 'ns028-root-final-operator-activation/v1'
+            and a.get('approved') is True and a.get('record_kind') == 'final'
+            and a.get('authority') == 'root_operator_scientific_driver'
+            and a.get('operator_script_sha256') == sha(__file__), 'exact root final activation required')
+    require(a.get('native_head') == NATIVE_HEAD, 'qualified final native source differs')
+    require(a['host_service'] == str(HOST/'final_service')
+            and a['private_root'] == str(HOST/'activation_v1/grants')
+            and a['workspace'] == str(HERE.parent/'operator_workspace_v1')
+            and a['queue_root'] == str(Path(a['workspace'])/SERVICE/'host_handoff'), 'final namespaces differ')
+    require(a['registry']['path'] == str(HOST/'prepared_inputs_v1/final_registry.private.json'), 'final registry namespace differs')
+    pkg = bound(a['driver_package'])
+    require(a['driver_package']['path'] == str(DRIVER/'package.private.json')
+            and pkg.get('record_kind') == 'final', 'final driver package differs')
+    review = bound(a['driver_review'])
+    require(review.get('accepted_for_root_operator_client_use') is True, 'root-reviewed final client required')
+    for rel, digest in pkg['package_files'].items():
+        require(not Path(rel).is_absolute() and '..' not in Path(rel).parts
+                and sha(DRIVER/rel) == digest, 'driver source changed')
+    inputs = {name:bound(a[name]) for name in ('registry','batch','freeze','scientific_review',
+                                              'operator_admission','driver_amendment')}
+    b = inputs['batch']; freeze = inputs['freeze']; reg = inputs['registry']; op = inputs['operator_admission']
+    require(reg.get('schema') == 'ns-historical-private-final-registry/v1', 'final registry schema differs')
+    require(b.get('schema') == 'ns-historical-final-AB-cold-batch/v1'
+            and b.get('scope') == 'heldout_AB_cold_final_only'
+            and b.get('enabled_arms') == ['A','B'] and b.get('enabled_cache') == 'local_cold'
+            and b.get('repetitions') == [104729,130363]
+            and all(type(v) is int for v in b['repetitions'])
+            and set(b['units']) == set(UNITS), 'fixed final batch scope differs')
+    require(b.get('max_provider_calls') == 32 and type(b.get('max_provider_calls')) is int
+            and b.get('max_scorer_calls') == 32 and type(b.get('max_scorer_calls')) is int
+            and b.get('candidate_review_required') is True and type(b.get('retries')) is int
+            and b['retries'] == 0 and b.get('fallback_allowed') is False, 'final effect limits differ')
+    require(b.get('native_head') == NATIVE_HEAD and b['registry_sha256'] == a['registry']['sha256']
+            and b['freeze_binding'] == a['freeze'] and b['private_root'] == a['private_root']
+            and b['queue_root'] == a['queue_root'], 'final batch authority differs')
+    old = bound(b['original_plan_binding'])
+    require(b['original_plan_binding']['sha256'] == ORIGINAL_PLAN_SHA and len(old['units']) == 192, 'original192 source differs')
+    selected = [x for x in old['units'] if x['arm'] in ('A','B') and x['cache'] == 'local_cold']
+    ids = [cell_id(x['task_id'],x['arm'],x['repetition']) for x in selected]
+    require(len(ids) == 32 and len(set(ids)) == 32 and set(ids) ==
+            {cell_id(u,arm,r) for u in UNITS for arm in ('A','B') for r in (104729,130363)}, 'complete original32 identity set differs')
+    require(a['ordered_cells'] == ids and b['planned_cells'] == ids and b['enabled_cells'] == ids
+            and [x['cell_id'] for x in pkg['ordered_cells']] == ids, 'original filtered cell order differs')
+    require(freeze.get('schema') == 'paper-ns-final-experiment-freeze/v1' and freeze.get('frozen') is True
+            and freeze.get('native_head') == NATIVE_HEAD and freeze['planned_cells'] == ids
+            and freeze.get('first_final_attempt_started') is False
+            and freeze['freeze_sha256'] == hashlib.sha256(canonical({k:v for k,v in freeze.items() if k!='freeze_sha256'})).hexdigest(), 'final freeze differs')
+    require(pkg['batch'] == a['batch'] and pkg['worker_root'] == a['workspace']
+            and pkg['queue_root'] == a['queue_root'] and pkg['host_package_sha256'] == b['package_sha256'], 'client host/batch differs')
+    require(op.get('schema') == 'ns-final-AB-operator-admission/v1' and op.get('approved') is True
+            and op.get('scope') == 'heldout_AB_cold_final_only' and op.get('final_admitted') is True
+            and op['batch_sha256'] == a['batch']['sha256'] and op['freeze_sha256'] == a['freeze']['sha256']
+            and op['package_sha256'] == b['package_sha256'] and op.get('paid_calls_authorized') == 32
+            and op.get('scorer_calls_authorized') == 32 and op.get('candidate_review_required') is True,
+            'separate root scientific authority differs')
+    require(inputs['scientific_review'].get('final_freeze_sha256') == a['freeze']['sha256']
+            and inputs['scientific_review'].get('batch_sha256') == a['batch']['sha256'], 'scientific review scope differs')
+    require(a['driver_amendment'] == pkg['root_operator_driver_amendment'], 'driver authority differs')
+    sources = a['host_source_files']
+    require(sources == reg['source_bindings'] and len(sources) == 10
+            and hashlib.sha256(canonical(sources)).hexdigest() == b['package_sha256'], 'exact host package map differs')
+    for name, digest in sources.items():
+        require(sha(name) == digest, 'host source changed')
+    require(str(HOST/'final_service/pilot_gateway.py') in sources, 'gateway source unbound')
+    for row in selected:
+        cid = cell_id(row['task_id'], row['arm'], row['repetition']); entry = a['amendments'][cid]
+        amendment = bound(entry)
+        require(entry['unit'] == row['task_id'] and entry['arm'] == row['arm']
+                and type(entry['repetition']) is int and entry['repetition'] == row['repetition']
+                and amendment.get('schema') == 'ns-historical-final-provider-amendment/v1'
+                and amendment.get('unit_id') == row['task_id'] and amendment.get('arm') == row['arm']
+                and type(amendment.get('repetition')) is int and amendment['repetition'] == row['repetition'], 'per-cell final amendment differs')
+        require(amendment['batch_binding'] == {**a['batch'],'cell_id':cid,
+                    'operator_admission_path':a['operator_admission']['path'],
+                    'operator_admission_sha256':a['operator_admission']['sha256']}, 'pending or changed final cell authority')
+        profile = amendment['profile']
+        require(profile['scorer']['pids'] == 128 and profile['scorer']['cpu_count'] == 1
+                and profile['scorer']['memory_bytes'] == 2147483648
+                and profile['scorer']['wall_seconds_max'] == 120
+                and profile['scorer']['child_shared_wall_seconds_max'] == 115
+                and profile['http']['wall_seconds_max'] == 600
+                and profile['http']['child_absolute_wall_seconds'] == 595
+                and profile['http']['socket_timeout_seconds'] == 590
+                and profile['http']['pids'] == 32 and profile['http']['cpu_count'] == 1
+                and profile['http']['memory_bytes'] == 2147483648, 'prospective resource recipe differs')
+    require(set(a['amendments']) == set(ids), 'amendment denominator differs')
+    for rel, digest in pkg['source5'].items():
+        require(sha(Path(a['workspace'])/rel) == digest, 'workspace source changed')
+    builder = Path(a['workspace'])/SERVICE/'build_offer_drop.py'
+    require(a['offer_builder']['path'] == str(builder) and sha(builder) == a['offer_builder']['sha256'], 'offer builder changed')
+    return a, pkg
+
+
+def now():
+    return dt.datetime.now(dt.timezone.utc).isoformat()
+
+
+def write(path, raw, mode=0o600):
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, mode)
+    with os.fdopen(fd, 'wb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    fd = os.open(Path(path).parent, os.O_RDONLY | os.O_DIRECTORY)
+    os.fsync(fd)
+    os.close(fd)
+
+
+def record(path, value):
+    write(path, (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + '\n').encode())
+
+
+def run(name, argv):
+    target = HERE / name
+    target.mkdir(mode=0o700)
+    record(target / 'plan.private.json', {
+        'at': now(), 'argv': argv, 'operator_script_sha256': sha(__file__),
+        'activation_sha256': ACTIVATION, 'automatic_retry': False,
+        'authoring_claim_execution': False,
+    })
+    started = time.monotonic()
+    with (target / 'stdout.private.json').open('xb') as out, (target / 'stderr.private.txt').open('xb') as err:
+        try:
+            result = subprocess.run(argv, stdout=out, stderr=err)
+        except BaseException as exc:
+            out.flush(); err.flush(); os.fsync(out.fileno()); os.fsync(err.fileno())
+            record(target / 'execution.private.json', {
+                'at': now(), 'exit_code': None, 'exception_class': type(exc).__name__,
+                'elapsed_host_wall_seconds': time.monotonic() - started,
+                'pending': 'phase_outcome_unknown_requires_exact_reconciliation',
+                'stdout_sha256': sha(target / 'stdout.private.json'),
+                'stderr_sha256': sha(target / 'stderr.private.txt'),
+                'automatic_retry': False,
+            })
+            raise
+        out.flush(); err.flush()
+        os.fsync(out.fileno()); os.fsync(err.fileno())
+    record(target / 'execution.private.json', {
+        'at': now(), 'exit_code': result.returncode,
+        'elapsed_host_wall_seconds': time.monotonic() - started,
+        'stdout_sha256': sha(target / 'stdout.private.json'),
+        'stderr_sha256': sha(target / 'stderr.private.txt'),
+        'automatic_retry': False,
+    })
+    require(result.returncode == 0, 'phase failed; retained evidence requires reconciliation, no replay: ' + name)
+    return load(target / 'stdout.private.json')
+
+
+def main():
+    global ACTIVATION, PACKAGE
+    os.umask(0o077)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('phase', choices=('prepare', 'poll', 'execute', 'review-template', 'score'))
+    parser.add_argument('cell_number', type=int)
+    parser.add_argument('--activation', type=Path, required=True)
+    parser.add_argument('--activation-sha256', required=True)
+    parser.add_argument('--check-only', action='store_true')
+    args = parser.parse_args()
+    if args.phase in ('prepare', 'execute', 'score'):
+        require(not (HERE / 'final_execution_pause.private.json').exists(),
+                'final batch is paused; preserve all consumed cells and reconcile before any new effect')
+    require(1 <= args.cell_number <= 32, 'fixed cell number must be1..32')
+    index = args.cell_number - 1
+    tag = 'cell%03d' % args.cell_number
+    a, pkg = checked_activation(args.activation, args.activation_sha256)
+    ACTIVATION = args.activation_sha256
+    PACKAGE = a['driver_package']['sha256']
+    cell = a['ordered_cells'][index]
+    amendment = a['amendments'][cell]
+    require(sha(amendment['path']) == amendment['sha256'], 'cell amendment changed')
+    worker = Path(a['workspace'])
+    private = Path(a['private_root']) / cell
+    queue = Path(a['queue_root']) / cell
+    profile = worker / pkg['profile_relative']
+    gateway = Path(a['host_service']) / 'pilot_gateway.py'
+    require(sha(gateway) == a['host_source_files'][str(gateway)], 'gateway changed')
+    for rel, digest in pkg['source5'].items():
+        require(sha(worker / rel) == digest, 'retained workspace scientific source changed')
+    if index:
+        prior = load(HERE / ('cell%03d_terminal.private.json' % index))
+        require(prior['cell_id'] == a['ordered_cells'][index - 1]
+                and prior['batch_sha256'] == a['batch']['sha256']
+                and prior['terminal_verified'] is True, 'previous fixed cell not terminal')
+        require(sha(prior['client_execution']['path']) == prior['client_execution']['sha256']
+                and sha(prior['client_result']['path']) == prior['client_result']['sha256'],
+                'previous terminal observation changed')
+    if args.check_only:
+        print(json.dumps({'phase':args.phase,'cell_id':cell,'cell_number':args.cell_number,
+                          'activation_sha256':ACTIVATION,'effects_performed':False,
+                          'scope':'source/admission/fixed-prefix check only; phase state/lease rechecked by actual service before effects'}))
+        return
+    if args.phase == 'prepare':
+        require(not private.exists() and not queue.exists(), 'grant already prepared or consumed')
+        builder = worker / SERVICE / 'build_offer_drop.py'
+        require(sha(builder) == a['offer_builder']['sha256'], 'offer builder changed')
+        before_raw = profile.read_bytes()
+        before = json.loads(before_raw)
+        old_drop = worker / before['final_host_handoff']['offer_drop_relative']
+        old_drop_hash = sha(old_drop) if index else None
+        if index:
+            require(old_drop_hash == before['final_host_handoff']['offer_drop_sha256'], 'previous offer history changed')
+            require({b['cell_id'] for b in load(old_drop)['bindings']} == set(a['ordered_cells'][:index]),
+                    'previous offer history differs from fixed prefix')
+        else:
+            require(old_drop.parent.is_dir(), 'root must prepare exact empty final offer directory before grants')
+            require(not old_drop.exists() and before['final_host_handoff']['offer_drop_sha256'] is None
+                    and before['final_host_handoff']['scientific_activation_review_sha256'] is None
+                    and before['final_host_handoff']['final_freeze_sha256'] is None,
+                    'first cell requires fresh inactive profile and no old offer')
+        result = run(tag + '_prepare', [PY, '-B', str(gateway), 'prepare',
+            '--private', str(private), '--queue', str(queue), '--repo', a['native_repo'],
+            '--registry', a['registry']['path'], '--registry-sha256', a['registry']['sha256'],
+            '--unit', amendment['unit'], '--amendment', amendment['path'],
+            '--amendment-sha256', amendment['sha256']])
+        wave = HERE / ('wave%03d' % args.cell_number)
+        built = run(tag + '_build_offer', [PY, '-B', str(builder), '--worker', str(worker),
+            '--grant', str(private / 'grant.json'), '--review', a['scientific_review']['path'],
+            '--review-sha256', a['scientific_review']['sha256'], '--out', str(wave)])
+        after = load(wave / 'production_profile.proposed.json')
+        drop = load(wave / 'offer_drop.json')
+        require(drop['previous_drop_sha256'] == old_drop_hash and drop['batch_sha256'] == a['batch']['sha256'],
+                'offer append changed batch/history')
+        require({b['cell_id'] for b in drop['bindings']} == set(a['ordered_cells'][:index + 1]),
+                'offer history is not exactly fixed prefix')
+        old_base = dict(before); new_base = dict(after)
+        old_base.pop('final_host_handoff'); new_base.pop('final_host_handoff')
+        require(old_base == new_base, 'base scientific profile changed')
+        expected = dict(before['final_host_handoff'])
+        expected['offer_drop_sha256'] = sha(wave / 'offer_drop.json')
+        if index == 0:
+            expected['scientific_activation_review_sha256'] = a['scientific_review']['sha256']
+            expected['final_freeze_sha256'] = a['freeze']['sha256']
+        require(expected == after['final_host_handoff'], 'profile change exceeds new offer hash')
+        require(profile.read_bytes() == before_raw and (sha(old_drop) == old_drop_hash if index else not old_drop.exists()), 'installation preimage changed')
+        record(wave / 'installation_review.private.json', {
+            'at': now(), 'operator_script_sha256': sha(__file__), 'activation_sha256': ACTIVATION,
+            'fixed_prefix_verified': True, 'base_profile_unchanged': True, 'cell_id': cell,
+            'grant_sha256': sha(private / 'grant.json'), 'previous_drop_sha256': old_drop_hash,
+            'drop_sha256': sha(wave / 'offer_drop.json'), 'profile_sha256': sha(wave / 'production_profile.proposed.json'),
+            'candidate_review_not_performed': True, 'provider_calls': 0, 'scorer_calls': 0,
+        })
+        write(wave / 'production_profile.preimage.json', before_raw)
+        if index:
+            write(wave / 'offer_drop.preimage.json', old_drop.read_bytes())
+        for dest, source in ((old_drop, wave / 'offer_drop.json'), (profile, wave / 'production_profile.proposed.json')):
+            temp = dest.with_name(dest.name + '.operator-' + tag)
+            write(temp, source.read_bytes(), 0o644)
+            os.replace(temp, dest)
+            fd = os.open(dest.parent, os.O_RDONLY | os.O_DIRECTORY); os.fsync(fd); os.close(fd)
+        record(HERE / (tag + '_client_admission.private.json'), {
+            'schema': 'ns028-operator-final-client-admission/v1', 'approved': True, 'approved_at': now(),
+            'authority': 'root_operator_scientific_driver', 'package_sha256': PACKAGE,
+            'batch_sha256': a['batch']['sha256'], 'worker_root': str(worker),
+            'cell_index': index, 'cell_id': cell, 'profile': {'path': str(profile), 'sha256': sha(profile)},
+            'operator_driver_amendment_sha256': a['driver_amendment']['sha256'],
+            'provider_calls_by_client': 0, 'scorer_calls_by_client': 0, 'authoring_claim_execution': False,
+            'operator_script_sha256': sha(__file__), 'final_admitted': True,
+        })
+        print(json.dumps({'cell_id': cell, 'grant_sha256': result['grant_sha256'], 'offer': built}))
+        return
+    require(private.is_dir(), 'grant missing')
+    grant_hash = sha(private / 'grant.json')
+    grant = load(private / 'grant.json')
+    require(grant.get('schema') == 'operator-historical-final-grant/v1'
+            and grant.get('final_freeze_sha256') == a['freeze']['sha256']
+            and grant.get('native_head') == NATIVE_HEAD
+            and grant.get('batch_binding') == bound(amendment)['batch_binding']
+            and grant.get('unit') == amendment['unit'] and grant.get('arm') == amendment['arm']
+            and type(grant.get('repetition')) is int and grant['repetition'] == amendment['repetition'], 'grant final scope differs')
+    if args.phase == 'poll':
+        terminal = HERE / (tag + '_terminal.private.json')
+        if terminal.exists():
+            old = load(terminal)
+            require(old.get('terminal_verified') is True and old.get('cell_id') == cell
+                    and old.get('batch_sha256') == a['batch']['sha256'], 'retained terminal scope differs')
+            for key in ('client_execution', 'client_result'):
+                require(sha(old[key]['path']) == old[key]['sha256'], 'retained terminal observation changed')
+            print(json.dumps({'terminal': True, 'retained_record': str(terminal), 'sha256': sha(terminal),
+                              'new_client_execution': False, 'new_provider_calls': 0, 'new_scorer_calls': 0}))
+            return
+        admission = HERE / (tag + '_client_admission.private.json')
+        n = 1
+        while (HERE / (tag + '_client_poll%03d' % n)).exists():
+            n += 1
+        output = HERE / (tag + '_client_poll%03d' % n)
+        value = run(tag + '_poll_command%03d' % n, [PY, '-B', str(DRIVER / 'launch.py'),
+            '--package-sha256', PACKAGE, '--admission', str(admission), '--admission-sha256', sha(admission),
+            '--output', str(output)])
+        execution = load(output / 'execution.private.json')
+        body = load(output / 'work/result.json')
+        require(execution['success'] is True and execution['cleanup_exit_code'] == 0, 'client cleanup unproven')
+        if body.get('terminal') is True:
+            require(body['batch_sha256'] == a['batch']['sha256'] and len(body['results']) == 1
+                    and body['results'][0]['cell_id'] == cell, 'terminal cell differs')
+            verified = body['results'][0]['result']['host_verified']
+            require(verified.get('signature_and_scope_verified') is True
+                    and (verified.get('terminal_failure') is True or verified.get('admitted_historical_final') is True),
+                    'client did not verify terminal accounting')
+            record(HERE / (tag + '_terminal.private.json'), {
+                'at': now(), 'cell_id': cell, 'batch_sha256': a['batch']['sha256'], 'terminal_verified': True,
+                'client_execution': {'path': str(output / 'execution.private.json'), 'sha256': sha(output / 'execution.private.json')},
+                'client_result': {'path': str(output / 'work/result.json'), 'sha256': sha(output / 'work/result.json')},
+                'terminal_failure': verified.get('terminal_failure', False),
+                'cold_scalar_result': body['results'][0]['result'].get('cold_scalar_result'),
+                'operator_driver': True, 'native_task_completed': False, 'final_admitted': not verified.get('terminal_failure', False),
+            })
+        print(json.dumps({'client': value, 'terminal': body.get('terminal'), 'result_path': str(output / 'work/result.json')}))
+        return
+    request = load(queue / 'request.json')
+    require(request.get('schema') == 'operator-final-request/v1'
+            and request.get('record_kind') == 'final'
+            and request.get('final_freeze_sha256') == a['freeze']['sha256']
+            and request == load(private / 'expected_request.json'), 'exact typed final request missing')
+    argv = [PY, '-B', str(gateway)]
+    if args.phase == 'execute':
+        require(not (private / 'reservation.json').exists(), 'provider phase consumed; no replay')
+        argv += ['execute']
+    elif args.phase == 'review-template':
+        argv += ['review-template']
+    else:
+        review = private / 'operator_review.json'
+        require(load(review).get('schema') == 'operator-historical-final-candidate-review/v1'
+                and load(review).get('approved') is True, 'actual AI operator candidate approval required')
+        require(not (private / 'score_reservation.json').exists(), 'scorer phase consumed; no replay')
+        argv += ['score-reviewed', '--review-sha256', sha(review)]
+    argv += ['--private', str(private), '--grant-sha256', grant_hash]
+    value = run(tag + '_' + args.phase, argv)
+    body = value.get('receipt', value)
+    print(json.dumps({'cell_id': cell, 'phase': args.phase, **{k: body.get(k) for k in
+        ('status', 'approved', 'error', 'candidate_sha256', 'patch_bytes', 'elapsed_seconds', 'scorer')}}))
+
+
+if __name__ == '__main__':
+    main()

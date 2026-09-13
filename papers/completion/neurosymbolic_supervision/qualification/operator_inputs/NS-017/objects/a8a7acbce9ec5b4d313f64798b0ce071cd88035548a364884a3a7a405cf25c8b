@@ -1,0 +1,30 @@
+{
+  "approved": true,
+  "binding": {
+    "amendment_sha256": "6d895c31bd08679f9883a7548193f5b720dd7c7c157099eb01f63bd8ae732dfd",
+    "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+    "cell_id": "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d",
+    "grant_sha256": "751e0359ca36ddc87bb15b158ca4a7a2ccb04301d4cdefae31a73d5f44f8d61d",
+    "manifest_sha256": "566ed9618932490039b084a65aa35520d73badac4913cefb11b19ca22f9e9279",
+    "original_receipt_sha256": "ecd845cca472e845fc74d3d87987d13979b12d4c8e750ba1f05955db441f80ec",
+    "profile_sha256": "56359a6e5f01a0e212e8cfdc9e8a804d069dd88d79071332b954e6d0d4b0c10d",
+    "provider_termination_evidence_sha256": "f1b01e728175752655666e6f2a845f710a128d71d66c14bf760229de37736ef9",
+    "request_sha256": "b5ab55c17b58a77ab22b0262bf118779069656cfd5df336f43be522d30dc3f24",
+    "reservation_sha256": "47d04ccf0950ecf6f11f8ee30a3c30c7d21d9b50c253efe2be3b19b6127d06a7",
+    "service_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "source_sha256": "d26c3053b4a25d7c7f5c3d5ea59bf2f51d6a70a7318bd8d3bfb30d9744ab1b1a"
+  },
+  "classification": "known_proposal_failure",
+  "delegated_root_operator_authority": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/delegation_continued_cells008_032.private.json",
+    "sha256": "9f69d91c7674f2cfdba13525dc046b865e12fc5cc3454cb5e07da7f6d4892822"
+  },
+  "final_admission": false,
+  "human_annotation": false,
+  "reviewed_at": "2026-09-13T05:21:18.946020+00:00",
+  "reviewer": "/root/submodule_mounts",
+  "reviewer_kind": "ai_operator",
+  "schema": "operator-final-failure-accounting-review/v1",
+  "scope": "terminal_failure_accounting_only",
+  "statement": "I inspected this cell\u2019s original one-POST metadata: _ChildAbsoluteDeadline at open_entered, zero response bytes, child595.000496s. Its measured child limit is exceeded; wrapper595.454252s and signed gateway595.720243s remain separate clocks. No proposal was admitted and no score ran. The zero patch/unchanged-tree binding does not provide candidate success. The original signed termination evidence, cleanup0 and independently absent exact CID prove local termination. Remote work and settled charge remain unknown. Account this original fixed cell as failed, with no replacement, retry, regrant, score, human annotation or task-completion claim."
+}
