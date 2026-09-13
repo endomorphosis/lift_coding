@@ -1,6 +1,6 @@
 # NS028 retained-evidence adoption input
 
-Read `pending_receipt.template.json` in this directory completely. Its SHA256 is `dde182f7bbfbadc6f99917667d7c5fc48e8cf96730b406ee232f8b6dcab5b707`; it contains all 156 current-output/snapshot mappings. It is pending evidence review, with no completion or final-run outcome asserted.
+Read `pending_receipt.template.json` in this directory completely. Its SHA256 is `f8a79dda737881b04099f37c9467cfc5ba86b11f1894ae8b9d510358e706d2ea`; it contains all 156 current-output/snapshot mappings. It is pending evidence review, with no completion or final-run outcome asserted.
 
 The original 24-cell pilot is terminal. Preserve its actual signed dispositions, unscored failures, clock overruns, unknown charges, and earlier protocol costs. The frozen final design is the separately admitted 32 A/B cold cells over eight independent families, with two nested repetitions. Completing this pilot task authorizes no provider, scorer, lease, grant, retry, or native-context action and cannot fabricate final outcomes.
 
