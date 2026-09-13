@@ -1,0 +1,38 @@
+{
+  "actual": true,
+  "argv": [
+    "python3",
+    "scripts/paper_supervisors.py",
+    "verify-task",
+    "--paper",
+    "neurosymbolic_supervision",
+    "--task",
+    "NS-016"
+  ],
+  "artifact_integrity_valid": true,
+  "current_outputs_checked": true,
+  "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns016_completion_audit_execution_v1/repository",
+  "elapsed_host_wall_seconds": 5.231940905097872,
+  "exit_code": 0,
+  "finished_at": "2026-09-13T12:12:04.983310+00:00",
+  "fixture": false,
+  "interpreter": {
+    "path": "/usr/bin/python3",
+    "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "paper_receipt_sha256": "8e882dff3beb0a3ddde9bc593072fcd735002e799370494da17f101be459cb13",
+  "schema": "ns-current-paper-receipt-validation/v1",
+  "source_head": "4303f0afcdacee08c1a1ab69605dce3df2010d1e",
+  "started_at": "2026-09-13T12:11:59.751367+00:00",
+  "stderr": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns016_017_adoption_route_v1/integration_candidate_v2/actual_candidate_validation_v1/NS-016.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns016_017_adoption_route_v1/integration_candidate_v2/actual_candidate_validation_v1/NS-016.stdout.txt",
+    "sha256": "34c9298f1c286e9b2e552e7b6c3f2fea873a2469cc54184fc407789441a9bc60"
+  },
+  "stdout_parse_error": null,
+  "task_id": "NS-016",
+  "timed_out": false
+}

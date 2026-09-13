@@ -1,10 +1,26 @@
 {
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-028",
+  "status": "complete",
+  "completed_at": "2026-09-13T02:39:01.539072+00:00",
+  "scope": "Ordinary native validation and coordinating-assistant evidence review of the already-completed root-reviewed 24-cell developmental pilot and immutable pre-outcome 32-cell A/B cold freeze. No grants, offered cells, provider/model/scorer calls, native context preparation, lease changes, or repeated experiments. Final 32 results are not part of this completion. NS016 remains pending corrective review until root separately admits it.",
+  "source_versions": {
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "native_harness_sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+    "native_harness_execution_sha256": "180cdf00178c6dd841f1a7e6917abe8cb9e50026415c9f04d4baae9f4a694cee",
+    "original_source_head": "d53bac06485bc6e8efa2874b27a343076bb3ef2b",
+    "pending_receipt_template_sha256": "f8a79dda737881b04099f37c9467cfc5ba86b11f1894ae8b9d510358e706d2ea",
+    "original_ns016_receipt_sha256": "2c15a7b1a45fa0c7ea72762557c1b792e2c301a5b4a0ae982e21862d77f678a8",
+    "corrective_ns016_receipt_sha256": "0268ead2952a90bf46f2d0acb67fe04a03176796bbc88184154be81ca2fe4d7d",
+    "pilot_batch_sha256": "7f15268d26c338b1c46722db9eb1988545dfc41b08605e945673b8b50d297866",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "new_provider_calls": 0,
+    "new_scorer_calls": 0,
+    "new_native_context_preparation": 0
+  },
   "artifacts": {
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log": "f29110c71293e27adb4f123ac87463f321b6cbd87b6c425e027b771190ad7198",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.py": "aa1316e2157cecfd807fc186494099675c7c929874d0ce367009b37e7a8bbb8a",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/actual_NS016_validation.json": "400d88d8a8aa824d54b8d82a6868267cfff3c156a0944957da340398043b8a0a",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/completed_NS-016.json": "8e882dff3beb0a3ddde9bc593072fcd735002e799370494da17f101be459cb13",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/previous_NS-028.json": "4b02bbefcee9159732a2267f0b53293006681c00cc88e44f3eee5214586d2083",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/experiments/README.md": "5d0d1dbcb27ce3a1c6c0d6cfff60ad49322c6d10d4f3b3ad1d1a39a2982493ec",
@@ -160,162 +176,10 @@
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/runner_integration.patch": "0b6d2844ad09a97327cbd21c8a1a8f2dd6f05045cd044cde1711126c9a2288bd",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/test_worker_delivery.py": "690a306f7eb7888d927a8e2adbfa7be3622aa63cee08f6a91cb93be47417d231",
     "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/worker_adapter.py": "934be147b21aeb56ab69c2e5b778788baa60518fc34765a0194f61164207779e",
-    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/receipts/NS-016.json": "0268ead2952a90bf46f2d0acb67fe04a03176796bbc88184154be81ca2fe4d7d"
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/receipts/NS-016.json": "0268ead2952a90bf46f2d0acb67fe04a03176796bbc88184154be81ca2fe4d7d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.py": "aa1316e2157cecfd807fc186494099675c7c929874d0ce367009b37e7a8bbb8a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log": "f29110c71293e27adb4f123ac87463f321b6cbd87b6c425e027b771190ad7198"
   },
-  "commands": [
-    {
-      "argv": [
-        "env",
-        "-i",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2",
-        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.cache",
-        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.config",
-        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.local/share",
-        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.local/state",
-        "PYTHONDONTWRITEBYTECODE=1",
-        "/usr/bin/python3.12",
-        "-B",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.py"
-      ],
-      "cwd": ".",
-      "execution_kind": "sealed-profile retained-evidence hash check and protected NS028 completion-gate review; no provider, scorer, grant, lease, or experiment rerun",
-      "exit_code": 0,
-      "finished_at": "2026-09-13T02:37:20.412545+00:00",
-      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log",
-      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.py",
-      "started_at": "2026-09-13T02:37:20.025120+00:00"
-    }
-  ],
-  "completed_at": "2026-09-13T02:39:01.539072+00:00",
-  "criteria": [
-    {
-      "criterion": "Pilot tasks are excluded from final holdouts and labeled developmental.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json"
-      ],
-      "explanation": "The retained signed pilot is 24 terminal developmental rows (split=pilot, record_kind=pilot, developmental=true) over four historical families (ns-hist-05-dnspython through ns-hist-08-protego), A/B, and three nested repetitions. The immutable pre-outcome freeze keeps eight disjoint final families (ns-hist-09-tomlkit through ns-hist-16-jinja) and 32 planned A/B cold cells; developmental_family_ids and final_family_ids do not overlap. The archived 76 compact NS016 rows remain unsupported historical preparation, not this pilot. No final 32 outcomes are present or invented.",
-      "status": "met"
-    },
-    {
-      "criterion": "Each retained arm has a valid useful path and completed independent scoring, or is explicitly removed with claims updated before final runs.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
-      ],
-      "explanation": "Independent host-signed cold scoring yields five useful A witnesses and five useful B witnesses; the protected completion gate independently reverified those counts without a new scorer call. C, C-no-reuse, C-no-route and D are withdrawn in the freeze with explicit claim updates before final outcomes. Warm/reuse/publication-efficacy endpoints are withdrawn, not completed results. The retained executable design is nonempty A/B local_cold only.",
-      "status": "met"
-    },
-    {
-      "criterion": "All receipts required by Tables 17/18 and cost analysis can be produced; missing provider/resources have honest readiness statuses.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/costs.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json"
-      ],
-      "explanation": "The 24-cell denominator retains 24 actual provider POSTs, 12 independent cold scores, 12 unscored terminal failures, nested gateway/HTTP/child clocks, one disclosed layer overrun (ns-hist-08-protego B repetition 2 proposal 635.5778229869902s), and unavailable settlement receipts on every row (unknown_external_charge=true). Prior six protocol failures plus one diagnostic remain separately charged. Missing remote charges stay unknown rather than zero. Final 32-cell results are outside this pilot completion.",
-      "status": "met"
-    },
-    {
-      "criterion": "Final source/task/protocol/scorer manifests are immutable and hashed before the first final attempt.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/source_profile_qualification.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md"
-      ],
-      "explanation": "The canonical freeze self-hash ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d and file SHA256 7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a bind source/runtime/model/context/scorer/analysis pins before any final attempt (first_final_attempt_started=false; 32 ordered A/B cold cells from the original 192). The paper final-run manifest binds that freeze hash, keeps first_final_attempt_started false, and creates no ordinary grant or dispatch authority. This completion issued no grants and did not start a final cell.",
-      "status": "met"
-    },
-    {
-      "criterion": "At least one actual useful historical independently cold-scored witness exists for every retained arm, with nonempty retained executable arms; fixture replay, grant lookup, hardcoded measurements and an empty design cannot satisfy this task. A predeclared small matched historical pilot exercises the intended actual between-arm comparison; labels on identical requests do not instantiate mechanisms.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/pilot_client.py",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
-      ],
-      "explanation": "The protected verifier checked all 24 root-admitted host offers/signatures and found nonempty useful independently cold-scored witnesses for both retained arms (A=5, B=5). The matched pilot is four historical families x A/B x three nested repetitions. Arm mechanism commitments differ (A a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3 vs B e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d); identical-request labels are not accepted as mechanisms. Fixture/empty-design/grant-lookup routes cannot pass the guard. Native harness evidence is executed=true and fixture=false.",
-      "status": "met"
-    },
-    {
-      "criterion": "Before new effects, the exact batch/model/context/arm/source/scorer profile is frozen; each cell has an append-only one-use provider and scorer reservation, and all refused, failed or unknown calls remain in the fixed denominator without automatic replay. The common source-only context selection and each full context/request hash are retained; oversized requests are explicit refusals rather than silent truncation or case substitution.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/pilot_run_manifest.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/costs.jsonl"
-      ],
-      "explanation": "Pilot batch 7f15268d26c338b1c46722db9eb1988545dfc41b08605e945673b8b50d297866 is frozen with retries=0, fallback_allowed=false, and one-use reservations for all 24 cells. All 12 terminal failures, two completed hidden-acceptance failures, one parser failure and one candidate rejection remain in the denominator; this completion made zero new provider/scorer calls and did not replay consumed cells. Common source-only context policy ns-pilot-AB-common-context/v1 and per-arm context/request hashes are retained. Oversized requests are explicit refusals (request_serialized_bytes_max=65536) rather than silent truncation. Native consumed-replay and stale/missing-freeze controls already ran.",
-      "status": "met"
-    },
-    {
-      "criterion": "The successor can submit an offered typed pilot request to the separately reviewed host service, receive a signed scoped result after mandatory bound AI/operator candidate review, and independently reverify it without accessing oracle material or issuing another model/scorer call.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/pilot_client.py",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
-      ],
-      "explanation": "Each of the 24 cells has a root-admitted typed offer and a signed terminal (12 completed responses with bound ai_operator candidate reviews; 12 failure dispositions). The independently reviewed host verifier (pilot_client.py SHA256 81e8758031abe1102992987e5bee8830039c68c9599fc0d2665012515fa544a9) reverified those signatures against the protected authority without oracle access. Guard output records new_provider_calls=0 and new_scorer_calls=0. Trust remains specific_reviewed_pilot_candidate_only; automatic adversarial scorer integrity is not claimed. No offered cell was requested in this completion.",
-      "status": "met"
-    },
-    {
-      "criterion": "The original NS016 receipt and unsupported source records are retained intact with an explicit correction; the new NS016 and NS028 receipts bind actual artifact hashes, observed command logs and review evidence without changing old successful/failed native history. Actual pinned native harness/final-admission APIs and source-bound current profile checks must run, with stale/missing freeze and interruption/replay controls; AST checks or hardcoded measurements are insufficient. Unobserved costs remain null and every actual command/log/attempt is retained.",
-      "evidence": [
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/pre_final_projection_history_v1/papers/completion/neurosymbolic_supervision/receipts/NS-016.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/receipts/NS-016.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.log",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/completed_NS-016.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/previous_NS-028.json",
-        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/actual_NS016_validation.json"
-      ],
-      "explanation": "The original unsupported NS016 receipt, pending corrective receipt, prior completed NS028 receipt, all old command logs/snapshots and original native histories remain retained. The current NS016 paper receipt is now a separately validated actual-evidence correction at SHA256 8e882dff3beb0a3ddde9bc593072fcd735002e799370494da17f101be459cb13. This current-output refresh changes only its NS028 snapshot ownership and adds truthful validation provenance. It does not retroactively repair the old portal attempt or invent its missing task_completed event. Native NS016 completion still requires separately reviewed normal APIs after the paired source passes both current validators. All original eight obligations and signed pilot evidence remain unchanged.",
-      "status": "met"
-    }
-  ],
-  "current_output_correction": {
-    "actual_NS016_validation": {
-      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/actual_NS016_validation.json",
-      "sha256": "400d88d8a8aa824d54b8d82a6868267cfff3c156a0944957da340398043b8a0a"
-    },
-    "correction_of": {
-      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/previous_NS-028.json",
-      "sha256": "4b02bbefcee9159732a2267f0b53293006681c00cc88e44f3eee5214586d2083"
-    },
-    "current_NS016_receipt_sha256": "8e882dff3beb0a3ddde9bc593072fcd735002e799370494da17f101be459cb13",
-    "generated_at": "2026-09-13T12:13:52.963930+00:00",
-    "new_native_task_completion_claimed": false,
-    "normal_NS028_revalidation_required": true,
-    "original_completed_at_preserved": "2026-09-13T02:39:01.539072+00:00",
-    "prior_NS016_pending_snapshot": {
-      "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/receipts/NS-016.json",
-      "sha256": "0268ead2952a90bf46f2d0acb67fe04a03176796bbc88184154be81ca2fe4d7d"
-    },
-    "schema": "ns028-current-output-ownership-correction/v1",
-    "scientific_results_or_frozen_sources_changed": false
-  },
-  "limitations": [
-    "This completion reviews already-retained signed pilot evidence; it does not rerun the 24-cell host experiment or invent final 32-cell outcomes.",
-    "NS016 remains blocked pending separate root admission of the corrective receipt. Original NS016 native history is unchanged.",
-    "C/D routing, warm/reuse caches and publication-efficacy comparisons are withdrawn from the frozen final design, not completed benchmark outcomes.",
-    "Unobserved remote charges and unavailable settlement receipts remain unknown; nested clocks are not additive complete cost.",
-    "Pilot layer overruns, 12 unscored failures, prior six protocol failures and one diagnostic remain in the denominator.",
-    "Automatic adversarial scorer integrity and human semantic-fidelity annotation are not claimed.",
-    "Ordinary final grants and first final attempt remain outside this task."
-  ],
   "outputs": {
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
     "papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
@@ -472,27 +336,136 @@
     "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/runner_integration.patch": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/runner_integration.patch",
     "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/test_worker_delivery.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/test_worker_delivery.py",
     "papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/worker_adapter.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/worker_adapter.py",
-    "papers/completion/neurosymbolic_supervision/receipts/NS-016.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/current_output_correction_v1/completed_NS-016.json"
+    "papers/completion/neurosymbolic_supervision/receipts/NS-016.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/receipts/NS-016.json"
   },
-  "runtime_authority": "Artifact completion record only; no source tree experiment, grant, lease, provider/scorer call, or NS016 native admission was performed.",
-  "schema": "paper-task-evidence/v1",
-  "scope": "Ordinary native validation and coordinating-assistant evidence review of the already-completed root-reviewed 24-cell developmental pilot and immutable pre-outcome 32-cell A/B cold freeze. No grants, offered cells, provider/model/scorer calls, native context preparation, lease changes, or repeated experiments. Final 32 results are not part of this completion. NS016 remains pending corrective review until root separately admits it.",
-  "source_versions": {
-    "corrective_ns016_receipt_sha256": "0268ead2952a90bf46f2d0acb67fe04a03176796bbc88184154be81ca2fe4d7d",
-    "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
-    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
-    "interpreter": "/usr/bin/python3.12",
-    "native_harness_execution_sha256": "180cdf00178c6dd841f1a7e6917abe8cb9e50026415c9f04d4baae9f4a694cee",
-    "native_harness_sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
-    "new_native_context_preparation": 0,
-    "new_provider_calls": 0,
-    "new_scorer_calls": 0,
-    "original_ns016_receipt_sha256": "2c15a7b1a45fa0c7ea72762557c1b792e2c301a5b4a0ae982e21862d77f678a8",
-    "original_source_head": "d53bac06485bc6e8efa2874b27a343076bb3ef2b",
-    "pending_receipt_template_sha256": "f8a79dda737881b04099f37c9467cfc5ba86b11f1894ae8b9d510358e706d2ea",
-    "pilot_batch_sha256": "7f15268d26c338b1c46722db9eb1988545dfc41b08605e945673b8b50d297866",
-    "python": "Python 3.12.3"
-  },
-  "status": "complete",
-  "task_id": "NS-028"
+  "criteria": [
+    {
+      "criterion": "Pilot tasks are excluded from final holdouts and labeled developmental.",
+      "status": "met",
+      "explanation": "The retained signed pilot is 24 terminal developmental rows (split=pilot, record_kind=pilot, developmental=true) over four historical families (ns-hist-05-dnspython through ns-hist-08-protego), A/B, and three nested repetitions. The immutable pre-outcome freeze keeps eight disjoint final families (ns-hist-09-tomlkit through ns-hist-16-jinja) and 32 planned A/B cold cells; developmental_family_ids and final_family_ids do not overlap. The archived 76 compact NS016 rows remain unsupported historical preparation, not this pilot. No final 32 outcomes are present or invented.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json"
+      ]
+    },
+    {
+      "criterion": "Each retained arm has a valid useful path and completed independent scoring, or is explicitly removed with claims updated before final runs.",
+      "status": "met",
+      "explanation": "Independent host-signed cold scoring yields five useful A witnesses and five useful B witnesses; the protected completion gate independently reverified those counts without a new scorer call. C, C-no-reuse, C-no-route and D are withdrawn in the freeze with explicit claim updates before final outcomes. Warm/reuse/publication-efficacy endpoints are withdrawn, not completed results. The retained executable design is nonempty A/B local_cold only.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
+      ]
+    },
+    {
+      "criterion": "All receipts required by Tables 17/18 and cost analysis can be produced; missing provider/resources have honest readiness statuses.",
+      "status": "met",
+      "explanation": "The 24-cell denominator retains 24 actual provider POSTs, 12 independent cold scores, 12 unscored terminal failures, nested gateway/HTTP/child clocks, one disclosed layer overrun (ns-hist-08-protego B repetition 2 proposal 635.5778229869902s), and unavailable settlement receipts on every row (unknown_external_charge=true). Prior six protocol failures plus one diagnostic remain separately charged. Missing remote charges stay unknown rather than zero. Final 32-cell results are outside this pilot completion.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/costs.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json"
+      ]
+    },
+    {
+      "criterion": "Final source/task/protocol/scorer manifests are immutable and hashed before the first final attempt.",
+      "status": "met",
+      "explanation": "The canonical freeze self-hash ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d and file SHA256 7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a bind source/runtime/model/context/scorer/analysis pins before any final attempt (first_final_attempt_started=false; 32 ordered A/B cold cells from the original 192). The paper final-run manifest binds that freeze hash, keeps first_final_attempt_started false, and creates no ordinary grant or dispatch authority. This completion issued no grants and did not start a final cell.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/source_profile_qualification.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/readiness_report.md"
+      ]
+    },
+    {
+      "criterion": "At least one actual useful historical independently cold-scored witness exists for every retained arm, with nonempty retained executable arms; fixture replay, grant lookup, hardcoded measurements and an empty design cannot satisfy this task. A predeclared small matched historical pilot exercises the intended actual between-arm comparison; labels on identical requests do not instantiate mechanisms.",
+      "status": "met",
+      "explanation": "The protected verifier checked all 24 root-admitted host offers/signatures and found nonempty useful independently cold-scored witnesses for both retained arms (A=5, B=5). The matched pilot is four historical families x A/B x three nested repetitions. Arm mechanism commitments differ (A a2bf3d71b81c03e7f5250509c3c71fb79780678d9ebe693d4ed6880f249ebdc3 vs B e06f96233cb25c5d2016c33a47d58249456dc412d85a5bf80c518f7ed4e1663d); identical-request labels are not accepted as mechanisms. Fixture/empty-design/grant-lookup routes cannot pass the guard. Native harness evidence is executed=true and fixture=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/pilot_client.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
+      ]
+    },
+    {
+      "criterion": "Before new effects, the exact batch/model/context/arm/source/scorer profile is frozen; each cell has an append-only one-use provider and scorer reservation, and all refused, failed or unknown calls remain in the fixed denominator without automatic replay. The common source-only context selection and each full context/request hash are retained; oversized requests are explicit refusals rather than silent truncation or case substitution.",
+      "status": "met",
+      "explanation": "Pilot batch 7f15268d26c338b1c46722db9eb1988545dfc41b08605e945673b8b50d297866 is frozen with retries=0, fallback_allowed=false, and one-use reservations for all 24 cells. All 12 terminal failures, two completed hidden-acceptance failures, one parser failure and one candidate rejection remain in the denominator; this completion made zero new provider/scorer calls and did not replay consumed cells. Common source-only context policy ns-pilot-AB-common-context/v1 and per-arm context/request hashes are retained. Oversized requests are explicit refusals (request_serialized_bytes_max=65536) rather than silent truncation. Native consumed-replay and stale/missing-freeze controls already ran.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/protocol/pilot_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/costs.jsonl"
+      ]
+    },
+    {
+      "criterion": "The successor can submit an offered typed pilot request to the separately reviewed host service, receive a signed scoped result after mandatory bound AI/operator candidate review, and independently reverify it without accessing oracle material or issuing another model/scorer call.",
+      "status": "met",
+      "explanation": "Each of the 24 cells has a root-admitted typed offer and a signed terminal (12 completed responses with bound ai_operator candidate reviews; 12 failure dispositions). The independently reviewed host verifier (pilot_client.py SHA256 81e8758031abe1102992987e5bee8830039c68c9599fc0d2665012515fa544a9) reverified those signatures against the protected authority without oracle access. Guard output records new_provider_calls=0 and new_scorer_calls=0. Trust remains specific_reviewed_pilot_candidate_only; automatic adversarial scorer integrity is not claimed. No offered cell was requested in this completion.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/pilot_client.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
+      ]
+    },
+    {
+      "criterion": "The original NS016 receipt and unsupported source records are retained intact with an explicit correction; the new NS016 and NS028 receipts bind actual artifact hashes, observed command logs and review evidence without changing old successful/failed native history. Actual pinned native harness/final-admission APIs and source-bound current profile checks must run, with stale/missing freeze and interruption/replay controls; AST checks or hardcoded measurements are insufficient. Unobserved costs remain null and every actual command/log/attempt is retained.",
+      "status": "met",
+      "explanation": "The original completed NS016 receipt remains unmodified at SHA256 2c15a7b1a45fa0c7ea72762557c1b792e2c301a5b4a0ae982e21862d77f678a8 under the historical recovery directory. The current NS016 file is the explicit pending corrective receipt (SHA256 0268ead2952a90bf46f2d0acb67fe04a03176796bbc88184154be81ca2fe4d7d) that binds that original hash and stays blocked for separate root admission. This NS028 receipt binds the 156 committed current-output/snapshot hashes plus the ordinary sealed validation log. Native harness evidence records actual import/call of the pinned source (SHA256 1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3) with admit_final_attempt, missing_freeze_refused, stale_freeze_refused, current_source_profile and consumed_replay_refused all true. Unobserved settlement costs remain unavailable/null; every retained command, log and attempt is kept. Old native success/failure history was not rewritten.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/pre_final_projection_history_v1/papers/completion/neurosymbolic_supervision/receipts/NS-016.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/receipts/NS-016.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/operator_adoption_v2/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns028-adoption-a7c1e4f2/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-028/adoption_validation/verify_retained_evidence.log",
+      "started_at": "2026-09-13T02:37:20.025120+00:00",
+      "finished_at": "2026-09-13T02:37:20.412545+00:00",
+      "execution_kind": "sealed-profile retained-evidence hash check and protected NS028 completion-gate review; no provider, scorer, grant, lease, or experiment rerun"
+    }
+  ],
+  "limitations": [
+    "This completion reviews already-retained signed pilot evidence; it does not rerun the 24-cell host experiment or invent final 32-cell outcomes.",
+    "NS016 remains blocked pending separate root admission of the corrective receipt. Original NS016 native history is unchanged.",
+    "C/D routing, warm/reuse caches and publication-efficacy comparisons are withdrawn from the frozen final design, not completed benchmark outcomes.",
+    "Unobserved remote charges and unavailable settlement receipts remain unknown; nested clocks are not additive complete cost.",
+    "Pilot layer overruns, 12 unscored failures, prior six protocol failures and one diagnostic remain in the denominator.",
+    "Automatic adversarial scorer integrity and human semantic-fidelity annotation are not claimed.",
+    "Ordinary final grants and first final attempt remain outside this task."
+  ],
+  "runtime_authority": "Artifact completion record only; no source tree experiment, grant, lease, provider/scorer call, or NS016 native admission was performed."
 }
