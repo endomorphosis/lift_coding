@@ -44,6 +44,7 @@ CONFIG: Final = (
 BOARD: Final = ROOT / "config/agent_supervisor_direct_objective_event_driven_planning_board.json"
 OWNER_SESSION: Final = "doep-v1-executor"
 GRANT_TTL_SECONDS: Final = 86_400.0
+GRANT_RENEW_INTERVAL_SECONDS: Final = 300.0
 LIVE_MONITOR_INTERVAL_SECONDS: Final = 5.0
 LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES: Final = 3
 LIVE_MONITOR_STOP_TIMEOUT_SECONDS: Final = 35.0
@@ -2240,6 +2241,8 @@ class _BootstrapBroker:
         self._accepted: socket.socket | None = None
         self._lock = threading.Lock()
         self._grants: dict[str, dict[str, Any]] = {}
+        self._grant_bindings: dict[str, tuple[Any, dict[str, Any]]] = {}
+        self._grant_renew_at = 0.0
         self._history: list[dict[str, Any]] = []
         self._thread = threading.Thread(target=self._run, name="doep-bootstrap-broker", daemon=True)
 
@@ -2284,6 +2287,7 @@ class _BootstrapBroker:
         with self._lock:
             grants = tuple(self._grants.values())
             self._grants.clear()
+            self._grant_bindings.clear()
         for item in grants:
             grant_id = str(item.get("grant_id") or "")
             if grant_id:
@@ -2443,6 +2447,7 @@ class _BootstrapBroker:
         try:
             with self._lock:
                 self._grants[client_id] = {**public, "grant_id": grant.grant_id}
+                self._grant_bindings[client_id] = (grant, owner_identity.to_dict())
                 self._history.append(public)
                 self._history = self._history[-128:]
                 safe_current = [
@@ -2476,6 +2481,7 @@ class _BootstrapBroker:
                 current = self._grants.get(client_id)
                 if isinstance(current, Mapping) and current.get("grant_id") == grant.grant_id:
                     self._grants.pop(client_id, None)
+                    self._grant_bindings.pop(client_id, None)
             self.server.revoke_typed_client_grant(grant.grant_id)
             raise
         return {
@@ -2491,6 +2497,73 @@ class _BootstrapBroker:
             "execution_route_policy": self.policy.to_dict(),
         }
 
+    def _maintain_grants(self) -> None:
+        """Extend exact live capabilities before cached supervisor clients expire.
+
+        Renewal keeps the existing token, scope, and grant ID. Expired, revoked,
+        replaced, or differently owned grants must never be reissued here.
+        """
+        from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import process_birth_id
+        from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import read_process_birth
+
+        now = time.monotonic()
+        if now < self._grant_renew_at or self.stopping.is_set():
+            return
+        with self._lock:
+            records = tuple((client_id, dict(record), self._grant_bindings.get(client_id))
+                            for client_id, record in self._grants.items())
+        for client_id, record, binding in records:
+            if binding is None:
+                raise HandoffError("bootstrap grant has no retained authority binding")
+            issued, owner_identity = binding
+            birth = record["process_birth"]
+            observed = read_process_birth(birth["pid"])
+            if observed is None or observed.to_dict() != birth:
+                # A dead or reused PID cannot retain its old authority. A new
+                # child must pass the original authenticated admission path.
+                with self._lock:
+                    if self._grants.get(client_id) == record:
+                        self._grants.pop(client_id, None)
+                        self._grant_bindings.pop(client_id, None)
+                self.server.revoke_typed_client_grant(issued.grant_id)
+                continue
+            identity = self.server.identity
+            gateway = self.server._command_gateway
+            if (
+                record["client_id"] != client_id
+                or record["grant_id"] != issued.grant_id
+                or issued.client_id != client_id
+                or issued.process_birth_id != record["process_birth_id"]
+                or issued.process_birth_id != process_birth_id(observed)
+                or identity is None
+                or identity.to_dict() != owner_identity
+                or gateway is None
+                or dict(gateway.identity) != owner_identity
+            ):
+                raise HandoffError("bootstrap renewal authority identity changed")
+            self._validate_parent(peer_pid=observed.pid, client_id=client_id)
+            with gateway._grants_lock:
+                matches = tuple(grant for grant in gateway._grants.values()
+                                if grant.grant_id == issued.grant_id)
+            if len(matches) != 1 or matches[0] != issued:
+                raise HandoffError("bootstrap renewal grant is no longer exact")
+            gateway._require_active_grant(
+                issued,
+                peer_identity=(observed.pid, os.stat(f"/proc/{observed.pid}").st_uid,
+                               observed.start_time_ticks),
+            )
+            with self._lock:
+                if self.stopping.is_set():
+                    return
+                if (self._grants.get(client_id) != record
+                        or self._grant_bindings.get(client_id) != binding):
+                    raise HandoffError("bootstrap grant changed during renewal")
+                renewed = self.server.renew_typed_client_grant(
+                    issued.grant_id, ttl_seconds=GRANT_TTL_SECONDS,
+                )
+                self._grant_bindings[client_id] = (renewed, owner_identity)
+        self._grant_renew_at = now + GRANT_RENEW_INTERVAL_SECONDS
+
     def _run(self) -> None:
         from ipfs_accelerate_py.agent_supervisor.task_sources.state_owner_bootstrap import (
             STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA,
@@ -2502,6 +2575,7 @@ class _BootstrapBroker:
         while not self.stopping.is_set():
             accepted: socket.socket | None = None
             try:
+                self._maintain_grants()
                 accepted, _address = self.listener.accept()
                 with self._lock:
                     self._accepted = accepted
