@@ -2228,6 +2228,8 @@ class _BootstrapBroker:
         paths: Mapping[str, Path],
         policy: Any,
         launch_id: str,
+        queue_server: Any = None,
+        queue_scope_bindings: Sequence[Mapping[str, str]] = (),
     ) -> None:
         self.listener = listener
         self.server = server
@@ -2242,6 +2244,20 @@ class _BootstrapBroker:
         self._grants: dict[str, dict[str, Any]] = {}
         self._history: list[dict[str, Any]] = []
         self._thread = threading.Thread(target=self._run, name="doep-bootstrap-broker", daemon=True)
+        self._paired = None
+        self._reader_renew_at = 0.0
+        if queue_server is not None:
+            from ipfs_accelerate_py.agent_supervisor.runtime.owner_merge_bootstrap_broker import NativeOwnerMergeBroker
+            from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
+
+            self._paired = NativeOwnerMergeBroker(
+                task_server=server, queue_server=queue_server,
+                repository_id=checkout_repository_id(ROOT),
+                target_branch=str(board.payload["merge_target_branch"]),
+                scope_bindings=queue_scope_bindings,
+                issue_task=self._issue_paired_task, revoke_task=self._revoke_paired_task,
+                validate_peer=self._validate_merge_peer, ttl_seconds=GRANT_TTL_SECONDS,
+            )
 
     def start(self) -> None:
         identity = self.server.identity
@@ -2281,6 +2297,8 @@ class _BootstrapBroker:
         except OSError:
             pass
         self._thread.join(timeout=5.0)
+        if self._paired is not None:
+            self._paired.close()
         with self._lock:
             grants = tuple(self._grants.values())
             self._grants.clear()
@@ -2289,7 +2307,7 @@ class _BootstrapBroker:
             if grant_id:
                 self.server.revoke_typed_client_grant(grant_id)
 
-    def _validate_parent(self, *, peer_pid: int, client_id: str) -> None:
+    def _validate_parent(self, *, peer_pid: int, client_id: str) -> int:
         from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import read_process_birth
 
         supervisor_prefix = f"database-implementation-supervisor:{OWNER_SESSION}"
@@ -2337,8 +2355,90 @@ class _BootstrapBroker:
                 or not daemon_sessions[0].startswith(OWNER_SESSION)
             ):
                 raise HandoffError("executor daemon differs from its sealed lane")
+        return int(shards[0])
+
+    def _validate_merge_peer(self, *, peer_pid: int, client_id: str) -> str:
+        if not _client_matches(client_id, f"database-implementation-daemon:{OWNER_SESSION}"):
+            raise HandoffError("paired merge grants require an executor daemon")
+        lane = self._validate_parent(peer_pid=peer_pid, client_id=client_id)
+        from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import _slug
+        from ipfs_accelerate_py.agent_supervisor.merge.owner_recovery_runtime import _cid
+
+        argv = _process_argv(peer_pid)
+        if (len(argv) < 3 or argv[1:3] != (
+                "-m", "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon")):
+            raise HandoffError("paired executor entry differs from the admitted native module route")
+        sessions = _argv_values(argv, "--owner-session-id")
+        expected = {
+            "--state-dir": str(self.paths["state"] / f"lane-{lane}"),
+            "--state-prefix": f"{_slug(self.board.task_prefix)}_lane_{lane}",
+            "--board-namespace": self.board.board_namespace,
+            "--state-owner-bootstrap-fd": str(self.listener.fileno()),
+            "--state-owner-bootstrap-store-id": _store_id(self.board),
+            "--owner-merge-config-cid": _cid(dict(self.board.payload)),
+            "--owner-merge-plan-cid": self.policy.plan_root_cid,
+        }
+        if (len(sessions) != 1 or client_id != f"database-implementation-daemon:{sessions[0]}"
+                or any(_argv_values(argv, key) != (value,) for key, value in expected.items())):
+            raise HandoffError("paired executor state namespace differs from its sealed lane")
+        return str(lane)
+
+    def _issue_paired_task(self, request, *, peer_pid, peer_uid):
+        response = self._admit_task(request, peer_pid=peer_pid, peer_uid=peer_uid, publish=False)
+        with self._lock:
+            grant_id = self._grants[request["client_id"]]["grant_id"]
+        return response, grant_id
+
+    def _revoke_paired_task(self, client_id, grant_id):
+        try:
+            with self._lock:
+                current = self._grants.get(client_id)
+                if current is not None and current.get("grant_id") == grant_id:
+                    self._grants.pop(client_id, None)
+                    self._publish_grants_locked()
+        finally:
+            self.server.revoke_typed_client_grant(grant_id)
+
+    def _publish_grants_locked(self):
+        identity = self.server.identity
+        if identity is None:
+            raise HandoffError("native task owner is unavailable")
+        _atomic_json(self.paths["broker_evidence"], {
+            "schema": BROKER_SCHEMA, "ready": bool(self._grants),
+            "launch_id": self.launch_id, "operator_pid": os.getpid(),
+            "updated_at": _utc_now(),
+            "accepted_lane_count": sum(
+                _client_matches(key, f"database-implementation-daemon:{OWNER_SESSION}")
+                for key in self._grants),
+            "accepted_supervisor_reader_count": sum(
+                _client_matches(key, f"database-implementation-supervisor:{OWNER_SESSION}")
+                for key in self._grants),
+            "expected_lane_count": int(self.board.max_lanes),
+            "server_id": identity.server_id,
+            "state_owner_process_birth_id": identity.process_birth_id,
+            "execution_route_policy": self.policy.public_summary(),
+            "current": [{key: value for key, value in item.items() if key != "grant_id"}
+                for item in self._grants.values()],
+            "history": list(self._history),
+        })
 
     def _admit(self, request: Mapping[str, Any], *, peer_pid: int, peer_uid: int) -> dict[str, Any]:
+        from ipfs_accelerate_py.agent_supervisor.task_sources.owner_merge_bootstrap import REQUEST_SCHEMA
+
+        if request.get("schema") == REQUEST_SCHEMA:
+            if self._paired is None:
+                raise HandoffError("native paired queue role is not admitted")
+            response = self._paired.admit(request, peer_pid=peer_pid, peer_uid=peer_uid)
+            with self._lock:
+                self._publish_grants_locked()
+            return response
+        if self._paired is not None and _client_matches(
+            str(request.get("client_id") or ""), f"database-implementation-daemon:{OWNER_SESSION}"
+        ):
+            raise HandoffError("executor must request its complete paired owner bundle")
+        return self._admit_task(request, peer_pid=peer_pid, peer_uid=peer_uid)
+
+    def _admit_task(self, request: Mapping[str, Any], *, peer_pid: int, peer_uid: int, publish: bool = True) -> dict[str, Any]:
         from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import (
             process_birth_id,
         )
@@ -2445,32 +2545,8 @@ class _BootstrapBroker:
                 self._grants[client_id] = {**public, "grant_id": grant.grant_id}
                 self._history.append(public)
                 self._history = self._history[-128:]
-                safe_current = [
-                    {key: value for key, value in item.items() if key != "grant_id"}
-                    for item in self._grants.values()
-                ]
-                _atomic_json(
-                    self.paths["broker_evidence"],
-                    {
-                        "schema": BROKER_SCHEMA,
-                        "ready": True,
-                        "launch_id": self.launch_id,
-                        "operator_pid": os.getpid(),
-                        "updated_at": _utc_now(),
-                        "accepted_lane_count": sum(
-                            _client_matches(key, daemon_prefix) for key in self._grants
-                        ),
-                        "accepted_supervisor_reader_count": sum(
-                            _client_matches(key, supervisor_prefix) for key in self._grants
-                        ),
-                        "expected_lane_count": int(self.board.max_lanes),
-                        "server_id": owner_identity.server_id,
-                        "state_owner_process_birth_id": owner_identity.process_birth_id,
-                        "execution_route_policy": self.policy.public_summary(),
-                        "current": safe_current,
-                        "history": list(self._history),
-                    },
-                )
+                if publish:
+                    self._publish_grants_locked()
         except BaseException:
             with self._lock:
                 current = self._grants.get(client_id)
@@ -2491,17 +2567,44 @@ class _BootstrapBroker:
             "execution_route_policy": self.policy.to_dict(),
         }
 
+    def _maintain_paired_grants(self) -> None:
+        if self._paired is None:
+            return
+        from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import read_process_birth
+
+        self._paired.maintain()
+        now = time.monotonic()
+        if now < self._reader_renew_at:
+            return
+        with self._lock:
+            readers = tuple((client_id, dict(record)) for client_id, record in self._grants.items()
+                if record.get("client_role") == "supervisor_read")
+        for client_id, record in readers:
+            supplied = record["process_birth"]
+            observed = read_process_birth(supplied["pid"])
+            if observed is None or observed.to_dict() != supplied:
+                self._revoke_paired_task(client_id, record["grant_id"])
+                continue
+            self._validate_parent(peer_pid=observed.pid, client_id=client_id)
+            self._paired._live_grant(self.server, record["grant_id"], observed)
+            self.server.renew_typed_client_grant(record["grant_id"], ttl_seconds=GRANT_TTL_SECONDS)
+        with self._lock:
+            self._publish_grants_locked()
+        self._reader_renew_at = now + 300.0
+
     def _run(self) -> None:
         from ipfs_accelerate_py.agent_supervisor.task_sources.state_owner_bootstrap import (
             STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA,
-            _receive_frame,
             _send_frame,
         )
+
+        from ipfs_accelerate_py.agent_supervisor.task_sources.owner_merge_bootstrap import receive_bundle_frame
 
         self.listener.settimeout(1.0)
         while not self.stopping.is_set():
             accepted: socket.socket | None = None
             try:
+                self._maintain_paired_grants()
                 accepted, _address = self.listener.accept()
                 with self._lock:
                     self._accepted = accepted
@@ -2511,7 +2614,7 @@ class _BootstrapBroker:
                 )
                 peer_pid, peer_uid, _peer_gid = struct.unpack("3i", raw_peer)
                 response = self._admit(
-                    _receive_frame(accepted), peer_pid=int(peer_pid), peer_uid=int(peer_uid)
+                    receive_bundle_frame(accepted), peer_pid=int(peer_pid), peer_uid=int(peer_uid)
                 )
                 _send_frame(accepted, response)
             except TimeoutError:
@@ -3307,7 +3410,42 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
         connection.close()
 
 
-def launch(*, observe_history_only: bool = False) -> int:
+def _start_admitted_merge_owner(*, board, paths, policy, prepared):
+    """Bind a separately prepared role supplied by the native admission caller.
+
+    This entry does not load qualification JSON or discover/migrate a live queue.
+    The caller must already hold the source-adoption and prior-consumer closure
+    admission before supplying this in-memory prepared store to launch().
+    """
+    from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
+    from ipfs_accelerate_py.agent_supervisor.merge.owner_recovery_runtime import _cid
+    from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import _slug
+    from scripts.ops.agent_supervisor.spar_merge_owner import PreparedQueueStore, start_queue_owner
+
+    if type(prepared) is not PreparedQueueStore:
+        raise HandoffError("native paired launch requires its prepared queue object")
+    config_cid = _cid(dict(board.payload))
+    expected = [{
+        "board_namespace": board.board_namespace,
+        "config_cid": config_cid,
+        "plan_cid": policy.plan_root_cid,
+        "lane_id": str(lane),
+        "attempt_root": str(paths["state"] / f"lane-{lane}" /
+            f"{_slug(board.task_prefix)}_lane_{lane}_database_portal_attempts"),
+    } for lane in range(int(board.max_lanes))]
+    manifest = prepared.manifest
+    if (manifest["repository_id"] != checkout_repository_id(ROOT)
+            or manifest["target_branch"] != board.payload["merge_target_branch"]
+            or manifest["scope_bindings"] != expected
+            or manifest["store_id"] == _store_id(board)):
+        raise HandoffError("prepared queue differs from the current configured native scopes")
+    queue_server = start_queue_owner(
+        prepared, state_dir=prepared.database_path.parent / "native-queue-owner",
+    )
+    return queue_server, expected, config_cid
+
+
+def launch(*, observe_history_only: bool = False, prepared_merge_queue: Any = None) -> int:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
     )
@@ -3343,6 +3481,9 @@ def launch(*, observe_history_only: bool = False) -> int:
     listener: socket.socket | None = None
     broker: _BootstrapBroker | None = None
     monitor: _LiveMonitor | None = None
+    queue_server: Any = None
+    queue_scopes: Sequence[Mapping[str, str]] = ()
+    queue_config_cid = ""
     prior_environment = dict(os.environ)
     result = 1
     try:
@@ -3394,6 +3535,10 @@ def launch(*, observe_history_only: bool = False) -> int:
             "launch_id": launch_id,
             "owner_identity": identity.to_dict(),
         })
+        if prepared_merge_queue is not None:
+            queue_server, queue_scopes, queue_config_cid = _start_admitted_merge_owner(
+                board=board, paths=paths, policy=policy, prepared=prepared_merge_queue,
+            )
         listener = _listener()
         broker = _BootstrapBroker(
             listener=listener,
@@ -3402,6 +3547,8 @@ def launch(*, observe_history_only: bool = False) -> int:
             paths=paths,
             policy=policy,
             launch_id=launch_id,
+            queue_server=queue_server,
+            queue_scope_bindings=queue_scopes,
         )
         broker.start()
         monitor = _LiveMonitor(
@@ -3424,6 +3571,10 @@ def launch(*, observe_history_only: bool = False) -> int:
             _store_id(board),
         ):
             runner_args.append(f"--common-arg={value}")
+        if queue_server is not None:
+            for value in ("--owner-merge-config-cid", queue_config_cid,
+                          "--owner-merge-plan-cid", policy.plan_root_cid):
+                runner_args.append(f"--common-arg={value}")
         environment = dict(os.environ)
         python_paths: list[str] = []
         for item in (
@@ -3461,6 +3612,8 @@ def launch(*, observe_history_only: bool = False) -> int:
             "credential_transport": "private_inherited_socket",
             "raw_token_in_argv_or_environment": False,
             "canonical_runner": "configured_board_scheduler -> multi_supervisor_runner",
+            "merge_owner_identity": (queue_server.identity.to_dict() if queue_server is not None else None),
+            "merge_scope_bindings": list(queue_scopes),
             "task_history_observation": {
                 "path": str(history_path),
                 "observation_cid": history_observation["observation_cid"],
@@ -3491,7 +3644,11 @@ def launch(*, observe_history_only: bool = False) -> int:
                     listener.close()
             finally:
                 try:
-                    server.stop()
+                    try:
+                        if queue_server is not None:
+                            queue_server.stop()
+                    finally:
+                        server.stop()
                 finally:
                     try:
                         if paths["operator_pid"].read_text(encoding="utf-8").strip() == str(
