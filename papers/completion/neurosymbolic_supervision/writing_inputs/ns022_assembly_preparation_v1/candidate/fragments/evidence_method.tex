@@ -1,0 +1,54 @@
+\section{Method and trusted assumptions}
+\label{sec:evidence-method}
+
+\paragraph{Separate evidence classes.}
+Semantic state links facts, dependencies, contracts, and unresolved obligations
+to source. Operational state records goals, tasks, attempts, leases, and
+decisions. Artifact storage preserves candidate bytes and accepted manifests.
+An evidence item binds a subject to a declared statement, checker, environment,
+and provenance. A passing test concerns the finite checks actually executed;
+a formal derivation concerns its encoded relation and premises; a grant concerns
+an actor's permission to act now. These classes cannot substitute for one another.
+In particular, a signature binds a record to a key under cryptographic
+assumptions. It establishes neither checker adequacy nor the honesty of an
+observation.
+
+\paragraph{Applicable evidence.}
+The intended loop derives obligations from current source, chooses an
+admissible analysis or proposal route, checks an isolated candidate, and admits
+only evidence applicable to that candidate. Translation validation motivates
+checking a particular conversion against its stated relation~\citep{baseline04};
+a source-linked record alone is not such validation. Abstract facts likewise
+depend on an approximation relation~\citep{baseline02}. A typed or
+content-addressed representation does not imply full source-language soundness.
+
+\paragraph{Conditional acceptance and reuse.}
+If publication succeeds only after checking the current parent, authorized
+scope, complete requirement manifest, admitted evidence, and expected-parent
+compare-and-swap, each successful successor satisfies those gates. Given a valid
+initial root and exclusive use of that publication operation, induction
+preserves the declared manifest policy. This does not establish enforcement by
+unexamined write paths or atomicity of external effects.
+
+For test reuse, suppose the observation of test $t$ under profile $\theta$
+factors through a complete dependency projection:
+\[
+  \operatorname{Obs}_{\theta}(t,s)=f_{\theta}(\pi_D(s)).
+\]
+If $f_\theta$ is deterministic on every admitted state, equal projections imply
+equal observations. Completeness and determinism are substantive premises;
+hashing an incomplete dependency list, opaque fixture, or uncontrolled effect
+does not discharge them. Appendix~\ref{sec:formal-arguments-ns023} preserves
+the full conditional, unmachine-checked statements and the distinction between
+behavioral acceptance, action permission, and publication.
+
+\paragraph{Executed scope.}
+The final comparison exercises native context preparation, model proposals,
+candidate custody and AI inspection, and separate cold scoring. Earlier
+constructed controls and a local guard-before-write witness test named
+implementation boundaries; they do not establish that the complete intended
+loop ran as a live benchmark. The retained proof profile lacks the admitted
+backend, key provenance, and exact statement binding required for native proof
+admission. Neither native proving performance nor empirical reuse benefit is
+inferred from these arguments.
+

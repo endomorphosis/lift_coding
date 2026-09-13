@@ -32,3 +32,17 @@ No outside reviewer or returned annotation packet is a completion prerequisite.
 Independent human fidelity, expert agreement and human time remain unmeasured.
 No new provider/scorer calls, grants, retries, changes to the frozen experiment,
 publication or submission are authorized by these writing inputs.
+
+Additional reviewed execution and assembly inputs:
+
+- NS-020: [the reconciliation command](../analysis/reconcile_boundaries.md)
+  documents `analysis/reconcile_boundaries.py`. It requires complete reviewed
+  NS017 evidence and exact regenerated NS019 results, then emits the four
+  declared boundary/claim deliverables. Signed terminal and operator-observation
+  digests remain distinct; reconstructed zero-change metadata keeps separate
+  derivation provenance. Installing the helper is not completing the task.
+- NS-022: [the assembly handoff](ns022_assembly_preparation_v1/ASSEMBLY_HANDOFF.md)
+  and [source scope](ns022_assembly_preparation_v1/README.md) provide compact
+  non-result fragments under `ns022_assembly_preparation_v1/candidate/`.
+  The actual abstract, results, conclusion and checklist are still required.
+  The active manuscript and generated result paths are not replaced here.

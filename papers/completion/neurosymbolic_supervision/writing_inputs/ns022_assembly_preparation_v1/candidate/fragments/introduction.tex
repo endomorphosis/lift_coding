@@ -1,0 +1,36 @@
+\section{Introduction}
+\label{sec:introduction}
+
+A coding supervisor must distinguish what an edit changes, what evidence
+applies to the resulting program, and who may accept the transition. A stored
+passing result can concern an earlier source revision; a completed task can
+record an operational decision without establishing a behavioral property.
+Repository-agent interfaces and test-validation benchmarks make the boundary
+between proposals and checks central to useful repair~\citep{baseline08,baseline11}.
+Our starting point is to make each observation's subject, scope, and authority
+explicit.
+
+The architecture separates semantic state, which records source-linked facts
+and unresolved obligations, from operational state, which records work and
+decisions, and artifact storage, which retains candidate bytes and evidence.
+A proposed transition identifies evidence for its declared acceptance
+conditions. Unknown dependencies and unsupported translations remain visible
+obligations. Neither persistence nor a cryptographic commitment turns an
+observation into proof of an unstated property.
+
+The contribution is a design for these evidence boundaries, conditional
+acceptance and reuse arguments, and a bounded implementation comparison.
+The empirical question is whether adding native source-linked semantic
+context to matched public raw context changes useful cold repair under a
+fixed resource policy. The retained design contains eight repository families,
+two arms, and two nested repetitions per arm. It tests the combined context
+mechanism, rather than every component of the intended supervision loop.
+Symbolic routing, warm-cache reuse, publication efficacy, and native proving
+performance require separate evidence.
+
+A returned proposal is not a successful repair. Useful completion requires
+actual nonempty public and hidden checks to pass within the measured resource
+rules; provider failures, timeouts, and incomplete validation stay in the fixed
+denominator. This separation also governs the reporting of setup work, earlier
+pilot results, runtime interruptions, and unknown costs.
+
