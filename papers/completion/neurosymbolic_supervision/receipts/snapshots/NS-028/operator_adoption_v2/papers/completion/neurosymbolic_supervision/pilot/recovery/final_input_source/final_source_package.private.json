@@ -1,0 +1,125 @@
+{
+  "actual_final_freeze_created": false,
+  "actual_resource_lease_obtained": false,
+  "builder_registry_delta": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_source_package_v1/builder_registry_reader.patch",
+    "sha256": "212acb8c7611d9fc3248aa33afc737d545c8d245d2f34fbcc2b9849f6c3edab1"
+  },
+  "candidate_common_amendment": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_input_stage_v1/prepared_inputs/common_amendment.private.json",
+    "sha256": "c5cc3953bd52c383666f2f3222812b13f10825ec8257ef4b124601c2d22c5b69"
+  },
+  "candidate_prepared_inputs": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_input_stage_v1/prepared_inputs/prepared_inputs.private.json",
+    "sha256": "16febac82afc63111cabfa8d9919737cd62c030194b3aa151effc94e3c484f81"
+  },
+  "candidate_registry": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_input_stage_v1/prepared_inputs/final_registry.private.json",
+    "sha256": "162fb9618975d4ea0695e860f6ed0107fa95b626f4299405d3269c6398164981"
+  },
+  "grants_created": 0,
+  "independent_final_families": 8,
+  "intended_installed_host_package_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+  "intended_installed_host_source": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/intended_final_host_source.private.json",
+    "sha256": "ad0cc64cea227c6400df74201e473e6f392e648aae80ef32aedca3eae1d1db65"
+  },
+  "namespaces": {
+    "freeze_inputs": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1",
+    "host_root": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1",
+    "host_source": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service",
+    "installed_prepared_inputs": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/prepared_inputs_v1",
+    "private_root": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/activation_v1/grants",
+    "queue_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_workspace_v1/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/host_handoff",
+    "worker_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_workspace_v1"
+  },
+  "native_pins": {
+    "accelerate": "60baee769d39a53c52142c56fbf6ed7483773aa3",
+    "datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+    "harness_sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+    "outer": "d53bac06485bc6e8efa2874b27a343076bb3ef2b",
+    "runtime_profile_sha256": "1bc2c65388bc5a79ae61e762653d336ae5401e7b0d592d265884d2ab166a8f84"
+  },
+  "nested_repetitions_per_arm_family": 2,
+  "new_actual_context_computations_in_saved_stage": 0,
+  "operator_client_actual_no_offer_qualification_pending": true,
+  "oracle_payloads_read": false,
+  "planned_cells": 32,
+  "preimage_files": {
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/adapter.py": "86fe1291c34cca6c13e20aa4eb51cbe9e4a2e99bea296bc0d859ffbe75d5b948",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/batch_control.py": "f546e61595e98661f8bd625de7a4ab2fdbbd34b3a0fa6ea6b9da58993f4578db",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/context_selection.py": "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/http_proposer.py": "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/pilot_client.py": "81e8758031abe1102992987e5bee8830039c68c9599fc0d2665012515fa544a9",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/pilot_gateway.py": "514f5785a93240c08b332f2003dd2aa12dfaf934054dce277ea281c29563b8d2",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/pilot-host-ab-runtime-20260912-v3/pilot_service/semantic_context.py": "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65",
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "de34ec9c1119869fe85810dfda0f65f301e9066a0ec35bb0cd97c56c5f00ad6b",
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/experiments/production_profile.json": "b07b2aea54bfd81cb3a0f8ac7d876216632cc1907e69586848b7226ccb86ec12",
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "750204e11f769a91f74fcdc0d9e1567da3e9503bdb13d410d0b31bbfc1895d2c",
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "3d6402ef79f2764c40f6c6eccc1e048e64ac392c4142c8266cda85fae2e3add2"
+  },
+  "provider_calls": 0,
+  "qualification_and_provenance": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/delegated_analysis_v1/root_complete24_review.private.json": "83105becb14ab86615f20d526409941d4bbeab5b4c9927803de3c388a195ca5a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_context_qualification.private.json": "baa4bc46e5bbe646e679e07f13d2fc46ccc06ece009267d40960b2b8e426c8c6",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_input_stage_v1/equivalence.private.json": "3665d4b855fd6a6a61b92c7eac6dbb5bf430fbbe68812aaba5344267bac4cd75",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_input_stage_v1/execution.private.json": "76a965e319ee3c63d60a19758f39083da112713fe1517681171f3f3ce22ca464",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/analysis_policy_v2.proposed.private.json": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/builder_registry_reader_v1/qualification.private.json": "8b1690b327eb9a172f9b1708458052dd466fa9a91e2130c47bfdaf57618f01ec",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/intended_final_host_source.private.json": "ad0cc64cea227c6400df74201e473e6f392e648aae80ef32aedca3eae1d1db65",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/native_gate_controls_v1/qualification.private.json": "fdb5a447b52b2081047eb65fd48cc2fbf050ee02a395e43ea9ce14fa01e25269",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_cell_qualification_v1/package.private.json": "b615f2295994295ec98f7d9b7f9b95beccda365edb499ea373cd05ed20791961",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/order_scope_verification.private.json": "b40912f83443a48d8a1d838d01fd5f4665f1e1fb68655f330dbc23512761b5f0",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/manifest.private.json": "b38564212c5924cbbf3432fee9b09e6e1f342ed89104933e2e551677dab441f8",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/resource_controls_v2/qualification.private.json": "f4ef41bd797d473226683b5f6ee1aaa3d02b29cb96dba025db2cb7189a92b8ce",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_qualification_v5.private.json": "7952749c7aa426566c1c2826305d3befb42f7f62501aa0e8b1945e669ddd38c1",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_source_freeze_v5.private.json": "4a0b77afbe4d6d4875752eedde9f5913c4a99265cdb473345d069d94e45044eb",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_qualification_v1/qualification.private.json": "22c25a5dca35760790b3e4976bb2f57a17d7a4aeeaf0d275a7adc1df12d5a354",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/final128_joined_compatibility.private.json": "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f"
+  },
+  "qualified_counts": {
+    "actual_final_context_units": 8,
+    "actual_native_predicate_controls": 8,
+    "actual_saved_request_comparisons": 16,
+    "inert_whole_service": 41,
+    "real_lock_and_resource_controls": 15,
+    "registry_reader_controls": 8,
+    "worker_controls": 18
+  },
+  "root_handoff": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_source_package_v1/ROOT_HANDOFF.private.md",
+    "sha256": "29a1e9d2a3dca04fabe067147a519bce15c7aeb718a685b61e2a8a153d846dbe"
+  },
+  "schema": "ns-final-source-and-saved-input-package/v1",
+  "scientific_dispatch_authorized": false,
+  "scorer_calls": 0,
+  "source_files": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/acquire_resource_lease.py": "b6f10a422710507f8d36b016a0485befb03f1d201600a1fe9edac1c7b4a3ff7a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_candidate/bootstrap.py": "c443f1a56a06be84a27a2111b36fa47fdc6c8a8614eb91f5d08027a92404bac4",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/operator_client_driver_candidate/launch.py": "ebbf8e66ed74f28d1e9f789a0487d0ce510a05f362a7dd58439c25c4e9d9365a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/build_final_inputs.py": "24785724480f7bfd3e8330ed39f57e7c8e78facbc1ee6d6a77c2a3415d961dc8",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/adapter.py": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/batch_control.py": "e4ba75dc2538baf7538cb181a57d52096a5ef916d674023a8faf5bc624ed475a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/context_selection.py": "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/http_proposer.py": "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/native_final_gate.py": "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/pilot_client.py": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/pilot_gateway.py": "34ab3070b9b55edbd3ca05953df008a8e46c086e5c3ffb55e2ba5a9726ded97e",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/service_native_v2/final_service/semantic_context.py": "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/production_profile.json": "e6ceda24bdf5e5c33786f99e0d3967a097f411e72a033371c0f7144cfa1657d5",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/score_runs.py": "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/build_offer_drop.py": "398faa231429dbb907422efb97ee9d75de2ce4e16b69dfe6c219a09e66df9e3c",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/final_profile.template.json": "c6941d512387f0b5cf707d27b294b90e77dc30e1ce93edb813521620fb7dd310",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/pilot_client.py": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/test_final_worker.py": "dfea955fa20d2e26c49b50f1a8b1817451f5d67c34928cb49aca935baf7dcb8a",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/qualification/production_provider/pilot_service/final_service/worker_adapter.py": "3679e37d1edcea728dd1e209fd3c2dbba2994fb252e609c5c5688b86c0ec0acc"
+  },
+  "source_patch": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_source_package_v1/source.patch",
+    "sha256": "67a1f353348b24d655118e792aed45ba3757ced64466faa106b33bb33d337546"
+  }
+}

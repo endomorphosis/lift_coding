@@ -1,0 +1,369 @@
+"""Host-only one-use historical FINAL A/B cold transport; no campaign authority.
+
+The fixed public gateway remains unchanged. Host registry + amendment choose the
+unit/source/prompt/checker. Worker messages contain the offered IDs only.
+"""
+from pathlib import Path
+import argparse,datetime as dt,fcntl,importlib.util,json,os,secrets,shutil,subprocess,sys,time
+HERE=Path(__file__).resolve().parent
+SHARED=Path('/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_v2')
+sys.path.insert(0,str(SHARED));import host_gateway as P
+sys.path.insert(0,str(HERE));import adapter as A
+import http_proposer as F
+import batch_control as B
+import context_selection as C
+import semantic_context as S
+import pilot_client as PC
+import native_final_gate as N
+# The separate wrapper consumes these utilities without changing the public module.
+require=P.require;read=P.read;write=P.write;load=P.load;canonical=P.canonical;sha=P.sha;file_sha=P.file_sha;now=P.now;git=P.git
+ROOT=P.ROOT;IMAGE=P.IMAGE;SOCKET=P.SOCKET
+SCHEMA='operator-historical-final-grant/v1'
+
+def source_binding():
+    paths=[Path(__file__).resolve(),Path(P.__file__).resolve(),Path(A.__file__).resolve(),Path(A.__file__).with_name('cold_scorer.py'),Path(F.__file__).resolve(),Path(B.__file__).resolve(),Path(C.__file__).resolve(),Path(S.__file__).resolve(),Path(PC.__file__).resolve(),Path(N.__file__).resolve()]
+    return {str(p):file_sha(p)for p in paths}
+def native_environment(repo):
+    C,env=P.native_environment(repo)
+    for key in ('IPFS_ACCELERATE_AGENT_GROK_TEX_TOOLCHAIN_JSON','IPFS_ACCELERATE_AGENT_RESEARCH_TOOLCHAIN_JSON'):
+        env.pop(key,None)
+    return C,env
+def configuration_binding(repo):
+    C,env=native_environment(repo)
+    selected={k:v for k,v in env.items()if(k.startswith(('IPFS_ACCELERATE','IPFS_DATASETS','IPFS_KIT'))or k in ('PATH','PYTHONPATH','HOME'))and not any(x in k for x in ('KEY','TOKEN','SECRET','PASSWORD'))}
+    return {'driver_path':str(Path(C.__file__).resolve()),'driver_sha256':file_sha(Path(C.__file__).resolve()),'effective_minimal_profile_environment_sha256':sha(canonical(selected)),'optional_research_tex_profiles':False}
+def native_final_preflight(repo,batch,unit,arm):
+    freeze=B.read_bound(batch['freeze_binding']['path'],batch['freeze_binding']['sha256'])
+    request={'record_kind':'final','split':'final','task_id':unit,'family_id':batch['units'][unit]['family_id'],'arm':arm,'final_freeze_sha256':freeze['freeze_sha256']}
+    payload={'native_repo':str(repo),'native_harness_sha256':batch['native_harness_source_sha256'],'freeze_path':batch['freeze_binding']['path'],'freeze_file_sha256':batch['freeze_binding']['sha256'],'pin_files':batch['native_pin_files'],'runtime_profile_binding':batch['native_runtime_profile_binding'],'request':request}
+    C,env=native_environment(repo)
+    env={k:v for k,v in env.items()if not any(word in k for word in ('KEY','TOKEN','SECRET','PASSWORD'))}
+    env.update(PYTHONDONTWRITEBYTECODE='1',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1')
+    argv=[str(C.PYTHON),'-B',str(Path(N.__file__).resolve())]
+    began=time.monotonic()
+    result=subprocess.run(argv,input=canonical(payload),capture_output=True,env=env,timeout=30)
+    require(result.returncode==0,'actual native final preflight refused: '+result.stderr.decode(errors='replace')[-4096:])
+    observed=json.loads(result.stdout)
+    require(observed.get('current_profile',{}).get('current')is True and observed.get('final_admission',{}).get('admitted')is True,'native final/current-profile checks did not admit')
+    require(observed.get('freeze_file_sha256')==batch['freeze_binding']['sha256']and observed.get('source_sha256')==batch['native_harness_source_sha256'],'native preflight binding changed')
+    return {'transport':F.PROFILE['transport'],'provider_cli_required':False,'http_source_sha256':file_sha(Path(F.__file__).resolve()),'native_final_gate':observed,'command':{'argv':argv,'exit_code':result.returncode,'stdin_sha256':sha(canonical(payload)),'stdout_sha256':sha(result.stdout),'stderr_sha256':sha(result.stderr)},'host_wall_seconds':time.monotonic()-began}
+
+def manifest_for(grant):
+    m=A.lookup_unit(grant['registry_path'],grant['registry_sha256'],grant['unit'])
+    require(A.digest(m)==grant['manifest_sha256'],'admitted historical unit changed')
+    return m
+def stable(grant,*,accounting_only=False):
+    b=B.checked(grant['batch_binding']);require(grant['arm']in ('A','B')and grant['repetition']in B.REPETITIONS and grant['unit']in B.UNITS and grant['batch_binding']['cell_id']==B.cell_id(grant['unit'],grant['arm'],'local_cold',grant['repetition']),'pilot cell scope differs')
+    require(source_binding()==grant['source_bindings'],'historical service dependency drift')
+    require(grant['final_freeze_sha256']==b['freeze_binding']['sha256']and grant['native_head']==b['native_head'],'final freeze/native source changed')
+    require(N.current_digests(b['native_pin_files'])==grant['native_preflight']['native_final_gate']['current_file_digests'],'actual frozen native/source files changed')
+    require(file_sha(Path(grant['native_repo'])/'ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py')==b['native_harness_source_sha256'],'qualified final harness changed')
+    repo=Path(grant['native_repo']);require(configuration_binding(repo)==grant['configuration_binding'],'historical proposal profile drift')
+    require(git(repo,'rev-parse','HEAD')==grant['native_head']and not git(repo,'status','--porcelain=v1','--untracked-files=all'),'native source changed')
+    require(file_sha(repo/'ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py')==grant['runner_sha256'],'native runner changed')
+    if not accounting_only:
+        freeze=B.read_bound(b['freeze_binding']['path'],b['freeze_binding']['sha256'])
+        N.resource_reservation(freeze['resource_reservation_evidence'])
+    require(accounting_only or now()<dt.datetime.fromisoformat(grant['expires_at']),'expired historical pilot grant')
+    return manifest_for(grant)
+def profile_for(m,arm='A'):
+    require(arm in ('A','B'),'unsupported paired arm')
+    return {'provider':'grok','model':'grok-4.6','expected_served_aliases':['grok-4.6'],'underlying_served_revision_known':False,'transport':F.PROFILE['transport'],'fallback_allowed':False,'http':F.PROFILE,'scorer':m['scorer_profile'],'phases_sequential':True,'max_provider_calls':1,'max_patch_bytes':16384,'implemented_arm':arm,'implemented_cache':'local_cold','context_profile_sha256':S.digest(S.COMMON),'mechanism_profile_sha256':S.digest(S.PROFILE)if arm=='B'else C.digest(C.PROFILE),'scoring_admission':'explicit_ai_operator_candidate_review','automatic_adversarial_scorer_integrity_qualified':False,'production_final_admitted':True}
+
+def preflight(private,registry,registry_sha,unit,arm='A'):
+    require(not private.exists(),'fresh preflight export required')
+    m=A.lookup_unit(registry,registry_sha,unit);prepared=A.prepare_admitted_unit(private,m)
+    _,request_binding=F.build_request(private,m,arm)
+    return {'schema':'historical-host-preflight/v1','unit_id':unit,'manifest_sha256':A.digest(m),'source_preimage_sha256':prepared['source_preimage_sha256'],'prompt_sha256':prepared['prompt_sha256'],'request_binding':request_binding,'profile':profile_for(m,arm),'source_bindings':source_binding(),'provider_invoked':False,'oracle_executed':False}
+
+def prepare(private,queue,repo,registry,registry_sha,unit,amendment,amendment_sha):
+    private=private.resolve();queue=queue.resolve();repo=repo.resolve();registry=registry.resolve()
+    require(not private.exists()and not queue.exists(),'fresh private grant and handoff queue required')
+    require(not private.is_relative_to(queue)and not queue.is_relative_to(private),'private grant overlaps worker handoff')
+    policy=load(amendment);require(sha(read(amendment))==amendment_sha,'amendment changed')
+    require(policy.get('schema')=='ns-historical-final-provider-amendment/v1'and policy.get('scope')=='heldout_AB_cold_final_only'and policy.get('unit_id')==unit and policy.get('provider')=='grok'and policy.get('model')=='grok-4.6'and policy.get('expected_served_aliases')==['grok-4.6']and policy.get('fallback_allowed')is False and policy.get('max_provider_calls')==1,'explicit historical pilot-only amendment required')
+    require(policy.get('arm')in ('A','B')and policy.get('cache')=='local_cold'and type(policy.get('repetition'))is int and policy.get('repetition')in B.REPETITIONS and policy.get('transport')==F.PROFILE['transport'],'only reviewed A/B cold repetitions are implemented')
+    m=A.lookup_unit(registry,registry_sha,unit)
+    require(m['scorer_profile']['wall_seconds_max']==120 and m['scorer_profile']['pids']==128,'historical scorer budget differs')
+    require(policy.get('manifest_sha256')==A.digest(m)and policy.get('prompt_sha256')==sha(m['prompt'].encode()),'amendment not bound to exact source/prompt')
+    if 'installed_target_masks'in m:
+        require(A.digest(m['installed_target_masks'])==m['installed_target_masks_sha256'],'installed target mask inventory changed')
+    else:
+        require(F.PROFILE['tools']==[]and F.PROFILE['transport']=='operator_host_fixed_https_json_edits/v1','missing CLI masks cannot admit a filesystem-capable proposer')
+    profile=profile_for(m,policy['arm'])
+    require(policy.get('profile')==profile,'amendment does not freeze exact proposal/scorer resource and tool profile')
+    require(not git(repo,'status','--porcelain=v1','--untracked-files=all'),'native source dirty')
+    batch=B.checked(policy['batch_binding'])
+    require(batch['package_sha256']==sha(canonical(source_binding())),'batch package differs')
+    require(git(repo,'rev-parse','HEAD')==batch['native_head'],'qualified native commit differs')
+    preflight=native_final_preflight(repo,batch,unit,policy['arm'])
+    batch=B.prepare_cell(policy['batch_binding'],private,queue,unit,sha(canonical(profile)),registry_sha,policy['arm'],policy['repetition'])
+    require(batch['package_sha256']==sha(canonical(source_binding())),'batch package differs')
+    require(git(repo,'rev-parse','HEAD')==batch['native_head']and file_sha(repo/'ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py')==batch['native_harness_source_sha256'],'qualified final native harness/source differs')
+    private.mkdir(mode=0o700);fd=os.open(private.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+    prepared=A.prepare_admitted_unit(private,m)
+    # HTTP receives only the frozen public request; no agent filesystem/tools.
+    _,request_binding=F.build_request(private,m,policy['arm'])
+    require(policy.get('request_binding')==request_binding,'amendment does not bind exact public request')
+    meta=batch['units'][unit];arm_meta=meta['arms'][policy['arm']];require(meta['manifest_sha256']==A.digest(m)and arm_meta['request_binding_sha256']==sha(canonical(request_binding))and arm_meta['context_binding_sha256']==request_binding['context_binding_sha256'],'batch preflight bindings differ')
+    grant={'schema':SCHEMA,'batch_binding':policy['batch_binding'],'grant_id':secrets.token_hex(16),'unit':unit,'arm':policy['arm'],'repetition':policy['repetition'],'created_at':now().isoformat(),'expires_at':(now()+dt.timedelta(hours=2)).isoformat(),'queue':str(queue),'registry_path':str(registry),'registry_sha256':registry_sha,'manifest_sha256':A.digest(m),'source_sha256':prepared['source_preimage_sha256'],'prompt_sha256':prepared['prompt_sha256'],'amendment_sha256':amendment_sha,'profile':profile,'native_repo':str(repo),'native_head':git(repo,'rev-parse','HEAD'),'runner_sha256':file_sha(repo/'ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py'),'native_preflight':preflight,'configuration_binding':configuration_binding(repo),'source_bindings':source_binding(),'gateway_sha256':file_sha(Path(__file__).resolve()),'request_binding':request_binding,'max_provider_calls':1,'authority':'explicit_operator_final_grant_not_campaign_claim','historical_population_admitted':True,'historical_final_unit_admitted':True,'final_scientific_results_permitted':True,'final_freeze_sha256':batch['freeze_binding']['sha256']}
+    write(private/'amendment.json',read(amendment));write(private/'grant.json',canonical(grant))
+    P.command(['openssl','genpkey','-algorithm','ED25519','-out',str(private/'signing.pem')]);(private/'signing.pem').chmod(0o600)
+    fd=os.open(private/'signing.pem',os.O_RDONLY);os.fsync(fd);os.close(fd)
+    pub=P.command(['openssl','pkey','-in',str(private/'signing.pem'),'-pubout','-outform','DER']).stdout;write(private/'public.der',pub)
+    request={'schema':'operator-final-request/v1','final_freeze_sha256':grant['final_freeze_sha256'],'batch_sha256':policy['batch_binding']['sha256'],'cell_id':policy['batch_binding']['cell_id'],'cache':'local_cold','repetition':grant['repetition'],'record_kind':'final','grant_sha256':sha(canonical(grant)),'grant_id':grant['grant_id'],'request_id':secrets.token_hex(16),'unit':unit,'arm':grant['arm'],'amendment_sha256':amendment_sha};write(private/'expected_request.json',canonical(request))
+    queue.mkdir(parents=True)
+    offer={'request':request,'profile':profile,'source_sha256':grant['source_sha256'],'public_key_sha256':sha(pub),'public_verifier':{'algorithm':'Ed25519','encoding':'spki_der_base64','data':__import__('base64').b64encode(pub).decode()},'authority':grant['authority'],'mode':'operator_proposal_review_score_historical_final_handoff','status':'waiting_for_exact_worker_request_and_operator_execute'}
+    write(queue/'offer.json',canonical(offer),0o644)
+    return {'grant_sha256':request['grant_sha256'],'offer_sha256':sha(canonical(offer)),'provider_invoked':False,'historical_evaluation_executed':False}
+def seal(private,manifest):
+    workspace=private/'proposal';target=private/'sealed';require(not target.exists(),'preserve prior sealed proposal')
+    target.mkdir(mode=0o700)
+    # Copy all current non-Git content; strict candidate binding rejects additions,
+    # removed files, type/mode changes, escaping links and non-admitted edits.
+    for p in workspace.iterdir():
+        if p.name=='.git':continue
+        q=target/p.name
+        if p.is_symlink():q.symlink_to(os.readlink(p))
+        elif p.is_dir():shutil.copytree(p,q,symlinks=True)
+        else:shutil.copy2(p,q,follow_symlinks=False)
+    binding=A.candidate_binding(target,manifest)
+    return target,binding
+
+def http_reconciliation(private):
+    target=private/'http_proposer';cleanup=target/'cleanup.json'
+    record={'termination_proven':False,'immediate_operator_action_required':True,'no_automatic_retry':True}
+    if cleanup.exists():
+        observed=load(cleanup);record.update(termination_proven=observed.get('returncode')==0,immediate_operator_action_required=observed.get('returncode')!=0,container_id=observed.get('container'),cleanup_sha256=A.sha(cleanup))
+    command_path=target/'command.private.json'
+    if command_path.exists():
+        argv=load(command_path);record['command_sha256']=A.sha(command_path)
+        if argv.count('--name')==1:record['container_name']=argv[argv.index('--name')+1]
+        if argv.count('--cidfile')==1:
+            cid=Path(argv[argv.index('--cidfile')+1])
+            if cid.exists():
+                value=read(cid,100).decode().strip();require(len(value)==64 and all(c in '0123456789abcdef'for c in value),'invalid retained HTTP CID');record['container_id']=value
+    if not record['termination_proven']:record['operator_action']='Inspect only the retained exact owned container name/CID and reconcile termination; do not repeat this consumed grant or score an unproven candidate.'
+    write(private/'http_reconciliation.json',canonical(record));return record
+
+def sign_phase(private,receipt,phase):
+    require(phase in ('proposal','final','disposition'),'unknown receipt phase')
+    raw=private/(phase+'.unsigned.json');write(raw,canonical(receipt))
+    signature=P.command(['openssl','pkeyutl','-sign','-rawin','-inkey',str(private/'signing.pem'),'-in',str(raw)]).stdout
+    return {'receipt':receipt,'signature':__import__('base64').b64encode(signature).decode(),'public_key_sha256':sha(read(private/'public.der'))}
+
+def pending_binding(private,grant_sha):
+    grant=load(private/'grant.json');require(sha(read(private/'grant.json'))==grant_sha and grant['schema']==SCHEMA,'wrong historical grant')
+    m=stable(grant);request=load(private/'expected_request.json')
+    require(load(Path(grant['queue'])/'request.json')==request,'review request drift')
+    require(sha(read(private/'amendment.json'))==grant['amendment_sha256'],'review amendment drift')
+    reservation=load(private/'reservation.json')
+    require(reservation['grant_sha256']==grant_sha and reservation['request_sha256']==sha(canonical(request)),'model reservation binding differs')
+    pending=load(private/'proposal_result.json');P.verify_signature(pending,private/'public.der');body=pending['receipt']
+    require(body['status']=='awaiting_operator_candidate_review' and body['error'] is None and body['scorer']['executed'] is False,'proposal not pending review')
+    require(body['provider_termination']['termination_proven'] is True,'provider termination not established')
+    require(body['grant_sha256']==grant_sha and body['request_sha256']==reservation['request_sha256'],'pending receipt scope differs')
+    require(body['proposal_result_sha256']==file_sha(private/'http_proposer/result.json'),'proposal result changed')
+    candidate=A.candidate_binding(private/'sealed',m)
+    require(candidate==load(private/'candidate_binding.json') and candidate['sha256']==body['candidate_sha256'],'sealed candidate changed')
+    binding={'batch_sha256':grant['batch_binding']['sha256'],'cell_id':grant['batch_binding']['cell_id'],'record_kind':'final','grant_sha256':grant_sha,'request_sha256':reservation['request_sha256'],'proposal_receipt_sha256':file_sha(private/'proposal_result.json'),'provider_result_sha256':body['proposal_result_sha256'],'reservation_sha256':file_sha(private/'reservation.json'),'amendment_sha256':grant['amendment_sha256'],'source_sha256':grant['source_sha256'],'manifest_sha256':grant['manifest_sha256'],'profile_sha256':sha(canonical(grant['profile'])),'candidate_binding_sha256':sha(canonical(candidate)),'candidate_sha256':candidate['sha256'],'patch_sha256':candidate['patch_sha256'],'scorer_source_sha256':file_sha(Path(A.__file__).with_name('cold_scorer.py')),'adapter_source_sha256':file_sha(Path(A.__file__)),'scorer_profile_sha256':sha(canonical(m['scorer_profile']))}
+    return grant,m,body,binding
+
+def review_template(private,grant_sha):
+    _,_,_,binding=pending_binding(private.resolve(),grant_sha)
+    return {'schema':'operator-historical-final-candidate-review/v1','approved':False,'reviewer_kind':'ai_operator','reviewed_at':None,'binding':binding,'review_statement':'REPLACE after reading this exact candidate diff: record the bounded source review and specific trust assumptions. This is not human annotation or adversarial scorer qualification.','trust_scope':'specific_reviewed_final_candidate_only','automatic_adversarial_scorer_integrity_qualified':False,'human_annotation':False,'final_admission':False}
+
+def _score_reviewed(private,grant_sha,review_sha):
+    private=private.resolve();fd=os.open(private/'execution.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
+    try:
+        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        require(not(private/'disposition_reservation.json').exists()and not(private/'disposition.json').exists(),'failure disposition consumed; no scoring')
+        grant,m,body,binding=pending_binding(private,grant_sha)
+        require(PC.resource_compliance(body,scoring=False)['compliant'],'proposal measured resource bound missing/exceeded; retain unscored candidate and use accounting-only rejection')
+        review=load(private/'operator_review.json');require(file_sha(private/'operator_review.json')==review_sha,'operator review changed')
+        require(review.get('schema')=='operator-historical-final-candidate-review/v1' and review.get('approved')is True and review.get('reviewer_kind')=='ai_operator' and review.get('binding')==binding,'explicit bound AI operator review required')
+        require(review.get('trust_scope')=='specific_reviewed_final_candidate_only' and review.get('automatic_adversarial_scorer_integrity_qualified')is False and review.get('human_annotation')is False and review.get('final_admission')is False,'operator review overclaims authority')
+        require(type(review.get('review_statement'))is str and 20<=len(review['review_statement'])<=8192 and not review['review_statement'].startswith('REPLACE'),'actual bounded review statement required')
+        reviewed=dt.datetime.fromisoformat(review['reviewed_at']);require(dt.datetime.fromisoformat(body['completed_at'])<=reviewed<=now(),'review must follow this sealed proposal')
+        if(private/'result.json').exists():
+            existing=load(private/'result.json');require(existing['receipt'].get('operator_review_sha256')==review_sha,'different terminal review');return existing
+        require(not(private/'score_reservation.json').exists(),'score consumed or uncertain; no automatic scoring retry')
+        write(private/'score_reservation.json',canonical({'grant_sha256':grant_sha,'review_sha256':review_sha,'binding':binding,'reserved_at':now().isoformat(),'max_scorer_calls':1,'new_provider_calls':0}))
+        # Recheck all immutable inputs immediately before the independent process.
+        _,m,_,again=pending_binding(private,grant_sha);require(again==binding and file_sha(private/'operator_review.json')==review_sha,'review inputs changed at scoring boundary')
+        started=now().isoformat();score_t0=time.monotonic();error=None
+        try:
+            scorer=A.score_sealed_candidate(private,private/'sealed',m)
+            require(A.candidate_binding(private/'sealed',m)==load(private/'candidate_binding.json'),'sealed candidate changed during scoring')
+            stable(grant)
+        except BaseException as exc:
+            error={'type':type(exc).__name__,'message':str(exc)};scorer={'success':False,'executed':False,'execution_may_have_occurred':True,'reason':'scorer_reconciliation_required_no_automatic_retry'}
+        receipt=dict(body);receipt.update(status='completed'if error is None else'scorer_reconciliation_required',completed_at=now().isoformat(),score_started_at=started,score_elapsed_seconds=time.monotonic()-score_t0,score_elapsed_seconds_scope='host_scorer_invocation_and_postcheck_only_excludes_proposal_and_operator_review',scorer=scorer,error=error,operator_review_sha256=review_sha,operator_review_binding=binding,operator_review_kind='ai_operator',human_annotation=False,trust_scope='specific_reviewed_final_candidate_only',historical_final_unit_admitted=bool(error is None and not body['inert_qualification'] and body['served_profile_admitted']),new_provider_calls_during_score=0,automatic_adversarial_scorer_integrity_qualified=False,production_final_admitted=not body['inert_qualification'],adversarial_demonstration_performed=False)
+        receipt['resource_compliance']=PC.resource_compliance(receipt)
+        signed=sign_phase(private,receipt,'final');write(private/'result.json',canonical(signed));write(Path(grant['queue'])/'response.json',canonical(signed),0o644);return signed
+    finally:os.close(fd)
+
+def _execute(private,grant_sha,*,inert_fixture=None):
+    inert=inert_fixture is not None
+    private=private.resolve();grant=load(private/'grant.json');require(grant['schema']==SCHEMA and sha(read(private/'grant.json'))==grant_sha,'wrong historical grant')
+    m=stable(grant);require(sha(read(private/'amendment.json'))==grant['amendment_sha256'],'amendment drift')
+    queue=Path(grant['queue']);request=load(queue/'request.json');require(request==load(private/'expected_request.json'),'historical request scope mismatch')
+    fd=os.open(private/'execution.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
+    try:
+        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        require(not(private/'disposition_reservation.json').exists()and not(private/'disposition.json').exists(),'failure disposition consumed; no provider replay')
+        if(private/'result.json').exists():return load(private/'result.json')
+        if(private/'proposal_result.json').exists():return load(private/'proposal_result.json')
+        require(not(private/'reservation.json').exists(),'historical grant consumed or uncertain; no automatic retry')
+        require(sha(read(private/'prompt.txt'))==grant['prompt_sha256'],'proposal prompt changed')
+        _,request_binding=F.build_request(private,m,grant['arm']);require(request_binding==grant['request_binding'],'frozen visible request changed before effect reservation')
+        write(private/'reservation.json',canonical({'grant_sha256':grant_sha,'request_sha256':sha(canonical(request)),'reserved_at':now().isoformat(),'provider_call_budget_consumed':not inert,'possible_external_charge':not inert,'mode':'inert_qualification'if inert else'operator_final','campaign_claim_or_budget_modified':False}))
+        started=now().isoformat();t0=time.monotonic();termination=None;failure=None;binding=None;rc=None
+        try:
+            if inert:require(m.get('qualification_fixture')is True,'inert service qualification cannot execute real historical oracle')
+            proposal=F.propose_http(private,m,arm=grant['arm'],inert_fixture=inert_fixture)
+            rc=proposal['container_exit_code'];termination=http_reconciliation(private);require(termination['termination_proven'],'HTTP proposer termination unproven; no scoring')
+            stable(grant);target,binding=seal(private,m)
+            require(proposal['success'],'provider candidate not admitted for operator review')
+            write(private/'candidate_binding.json',canonical(binding))
+            result={'success':False,'executed':False,'reason':'awaiting_operator_candidate_review'}
+        except BaseException as exc:
+            failure={'type':type(exc).__name__,'message':str(exc)};result={'success':False,'executed':False,'reason':'operator_reconciliation_required'}
+            proposal=load(private/'http_proposer/result.json')if(private/'http_proposer/result.json').exists()else None
+            if termination is None:termination=http_reconciliation(private)
+        provider=(proposal or{}).get('provider')or{}
+        meta={'served_models':[provider['served_model']]if provider.get('served_model')else [],'usage':provider.get('usage'),'api_system_fingerprint':provider.get('served_revision'),'underlying_served_revision_known':False,'response_sha256':provider.get('response_sha256'),'runtime_receipt_id':provider.get('runtime_receipt_id')}
+        receipt={'schema':'operator-final-receipt/v1','batch_sha256':grant['batch_binding']['sha256'],'cell_id':grant['batch_binding']['cell_id'],'cache':'local_cold','repetition':grant['repetition'],'record_kind':'final','grant_id':grant['grant_id'],'grant_sha256':grant_sha,'request_sha256':sha(canonical(request)),'unit':grant['unit'],'arm':grant['arm'],'amendment_sha256':grant['amendment_sha256'],'profile':grant['profile'],'source_sha256':grant['source_sha256'],'manifest_sha256':grant['manifest_sha256'],'candidate_sha256':binding['sha256']if binding else None,'patch_bytes':binding['patch_bytes']if binding else None,'started_at':started,'completed_at':now().isoformat(),'elapsed_seconds':time.monotonic()-t0,'elapsed_seconds_scope':'proposal_phase_only_excludes_operator_review_and_scoring','provider_invoked':False if inert else(proposal or{}).get('provider_invoked'),'provider_dispatch_attempted':not inert,'provider_dispatch_may_have_occurred':False if inert else(proposal or{}).get('provider_dispatch_may_have_occurred',True),'unknown_external_charge':not inert,'provider_exit_code':rc,'provider_stream_metadata':meta,'served_profile_admitted':False if inert else bool(meta and meta['served_models']==grant['profile']['expected_served_aliases']),'provider_termination':termination,'proposal_result_sha256':A.sha(private/'http_proposer/result.json')if(private/'http_proposer/result.json').exists()else None,'request_binding':grant['request_binding'],'native_campaign_claim_admitted':False,'authority':grant['authority'],'scorer':result,'error':failure,'inert_qualification':inert,'historical_population_admitted':not inert,'historical_final_unit_admitted':False,'final_scientific_run':not inert,'final_freeze_sha256':grant['final_freeze_sha256'],'native_production_admission_pending':True}
+        receipt['proposal_resource_measurements']={'provider_child_seconds':provider.get('elapsed_seconds'),'http_wrapper_seconds':(proposal or{}).get('elapsed_seconds'),'gateway_proposal_seconds':receipt['elapsed_seconds']}
+        receipt['proposal_resource_compliance']=PC.resource_compliance(receipt,scoring=False)
+        receipt.update(status='operator_reconciliation_required'if failure else'awaiting_operator_candidate_review',automatic_adversarial_scorer_integrity_qualified=False,production_final_admitted=not inert,adversarial_demonstration_performed=False)
+        signed=sign_phase(private,receipt,'proposal')
+        write(private/'proposal_result.json',canonical(signed));write(queue/'proposal.json',canonical(signed),0o644)
+        if failure:
+            write(private/'result.json',canonical(signed));write(queue/'response.json',canonical(signed),0o644)
+        return signed
+    finally:os.close(fd)
+def execute(private,grant_sha,*,inert_fixture=None):
+    grant=load(Path(private)/'grant.json');require(sha(read(Path(private)/'grant.json'))==grant_sha,'wrong pilot grant')
+    with B.phase_lock(grant['batch_binding']):
+        B.require_provider_order(grant['batch_binding'])
+        return _execute(private,grant_sha,inert_fixture=inert_fixture)
+def score_reviewed(private,grant_sha,review_sha):
+    grant=load(Path(private)/'grant.json');require(sha(read(Path(private)/'grant.json'))==grant_sha,'wrong pilot grant')
+    with B.phase_lock(grant['batch_binding']):
+        return _score_reviewed(private,grant_sha,review_sha)
+
+def cleanup_binding(private,stage):
+    target=private/stage;cleanup=load(target/'cleanup.json');cid=read(target/'container.cid',100).decode().strip()
+    require(len(cid)==64 and all(c in '0123456789abcdef'for c in cid),'exact retained child CID required')
+    require(cleanup.get('container')==cid and type(cleanup.get('returncode'))is int and cleanup['returncode']==0,'child termination is not proven')
+    command=load(target/'command.private.json');require(command.count('--cidfile')==1 and Path(command[command.index('--cidfile')+1])==target/'container.cid','cleanup command/CID differs')
+    require(command.count('--name')==1,'exact retained child name required')
+    return {'termination_proven':True,'container_id':cid,'container_name':command[command.index('--name')+1],'cleanup_sha256':file_sha(target/'cleanup.json'),'cid_sha256':file_sha(target/'container.cid'),'command_sha256':file_sha(target/'command.private.json')}
+
+def disposition_inputs(private,grant_sha,classification):
+    grant=load(private/'grant.json');require(file_sha(private/'grant.json')==grant_sha and grant['schema']==SCHEMA,'wrong disposition grant')
+    m=stable(grant,accounting_only=True);request=load(private/'expected_request.json');queue=Path(grant['queue']);offer=load(queue/'offer.json')
+    require(offer['request']==request==load(queue/'request.json'),'disposition request/offer changed')
+    require(sha(read(private/'public.der'))==offer['public_key_sha256'],'disposition public verifier differs')
+    require(sha(read(private/'amendment.json'))==grant['amendment_sha256'],'disposition amendment changed')
+    reservation=load(private/'reservation.json');require(reservation['grant_sha256']==grant_sha and reservation['request_sha256']==sha(canonical(request)),'consumed proposal reservation missing')
+    require(classification in ('known_proposal_failure','candidate_rejected','known_scorer_failure'),'unsupported disposition')
+    original_name='proposal_result.json'if classification=='candidate_rejected'else'result.json';original_raw=read(private/original_name)
+    body=PC.verify_signature(offer,json.loads(original_raw));PC.receipt_scope(body,offer,{'profile':grant['profile'],'source_sha256':grant['source_sha256'],'manifest_sha256':grant['manifest_sha256']})
+    require(body['grant_sha256']==grant_sha and body['provider_termination'].get('termination_proven')is True,'unknown provider termination blocks disposition')
+    provider_cleanup=cleanup_binding(private,'http_proposer');require(provider_cleanup['cleanup_sha256']==body['provider_termination'].get('cleanup_sha256')and provider_cleanup['container_id']==body['provider_termination'].get('container_id'),'provider termination evidence changed')
+    if body.get('proposal_result_sha256')is not None:require(body['proposal_result_sha256']==file_sha(private/'http_proposer/result.json'),'retained provider metadata changed')
+    binding={k:body[k]for k in ('grant_sha256','request_sha256','batch_sha256','cell_id','source_sha256','manifest_sha256','amendment_sha256')}
+    binding.update(profile_sha256=sha(canonical(body['profile'])),original_receipt_sha256=sha(original_raw),reservation_sha256=file_sha(private/'reservation.json'),service_source_sha256=sha(canonical(source_binding())),provider_termination_evidence_sha256=sha(canonical(provider_cleanup)))
+    extra={'provider_termination':body['provider_termination'],'provider_termination_evidence':provider_cleanup}
+    if classification=='known_proposal_failure':
+        require(body['status']=='operator_reconciliation_required'and body['error']is not None and body['scorer'].get('executed')is False,'original proposal is not failed')
+        require(not(private/'score_reservation.json').exists()and not(private/'historical_scorer').exists(),'unexpected scorer state')
+    else:
+        pending=load(private/'proposal_result.json');PC.verify_signature(offer,pending)
+        candidate=load(private/'candidate_binding.json');require(candidate['sha256']==body['candidate_sha256']==pending['receipt']['candidate_sha256'],'retained sealed candidate identity differs')
+        if classification=='candidate_rejected':
+            require(A.candidate_binding(private/'sealed',m)==candidate,'sealed candidate changed')
+        else:
+            # Accounting a terminated failed scorer never re-admits its candidate.
+            # Preserve prior reviewed bytes' commitment and report any current drift.
+            try:
+                current=A.candidate_binding(private/'sealed',m)
+                check={'matches_retained_binding':current==candidate,'current_binding_sha256':sha(canonical(current)),'error_type':None}
+            except Exception as exc:
+                check={'matches_retained_binding':None,'current_binding_sha256':None,'error_type':type(exc).__name__}
+            extra['post_failure_candidate_integrity']=check
+            binding['post_failure_candidate_integrity_sha256']=sha(canonical(check))
+        review=load(private/'operator_review.json');rb=review.get('binding',{})
+        require(review.get('schema')=='operator-historical-final-candidate-review/v1'and review.get('reviewer_kind')=='ai_operator'and review.get('trust_scope')=='specific_reviewed_final_candidate_only'and review.get('automatic_adversarial_scorer_integrity_qualified')is False and review.get('human_annotation')is False and review.get('final_admission')is False,'candidate review scope differs')
+        expected={'batch_sha256':grant['batch_binding']['sha256'],'cell_id':grant['batch_binding']['cell_id'],'record_kind':'final','grant_sha256':grant_sha,'request_sha256':sha(canonical(request)),'proposal_receipt_sha256':file_sha(private/'proposal_result.json'),'provider_result_sha256':pending['receipt']['proposal_result_sha256'],'reservation_sha256':file_sha(private/'reservation.json'),'amendment_sha256':grant['amendment_sha256'],'source_sha256':grant['source_sha256'],'manifest_sha256':grant['manifest_sha256'],'profile_sha256':sha(canonical(grant['profile'])),'candidate_binding_sha256':sha(canonical(candidate)),'candidate_sha256':candidate['sha256'],'patch_sha256':candidate['patch_sha256'],'scorer_source_sha256':file_sha(Path(A.__file__).with_name('cold_scorer.py')),'adapter_source_sha256':file_sha(Path(A.__file__)),'scorer_profile_sha256':sha(canonical(m['scorer_profile']))}
+        require(rb==expected and expected['provider_result_sha256']==file_sha(private/'http_proposer/result.json'),'exact candidate review binding differs')
+        require(type(review.get('review_statement'))is str and 20<=len(review['review_statement'])<=8192 and not review['review_statement'].startswith('REPLACE'),'actual candidate review statement required')
+        require(dt.datetime.fromisoformat(pending['receipt']['completed_at'])<=dt.datetime.fromisoformat(review['reviewed_at'])<=now(),'candidate review chronology differs')
+        binding.update(candidate_review_binding=rb,candidate_review_sha256=sha(canonical(review)),candidate_binding_sha256=sha(canonical(candidate)))
+        if classification=='candidate_rejected':
+            require(body['status']=='awaiting_operator_candidate_review'and body['error']is None and review.get('approved')is False,'explicit rejected candidate required')
+            require(not(private/'result.json').exists()and not(private/'score_reservation.json').exists()and not(private/'historical_scorer').exists(),'scoring already consumed or uncertain')
+            extra['candidate_review']=review
+        else:
+            require(body['status']=='scorer_reconciliation_required'and body['error']is not None and review.get('approved')is True,'original scorer is not failed')
+            score_reservation=load(private/'score_reservation.json');require(score_reservation['grant_sha256']==grant_sha and score_reservation['binding']==rb and score_reservation['review_sha256']==file_sha(private/'operator_review.json'),'scorer reservation differs')
+            extra['scorer_termination']=cleanup_binding(private,'historical_scorer');binding.update(scorer_termination_evidence_sha256=sha(canonical(extra['scorer_termination'])),score_reservation_sha256=file_sha(private/'score_reservation.json'))
+    return grant,body,binding,extra,original_name
+
+def disposition_template(private,grant_sha,classification):
+    _,_,binding,_,_=disposition_inputs(private.resolve(),grant_sha,classification)
+    return {'schema':'operator-final-failure-accounting-review/v1','approved':False,'classification':classification,'reviewer_kind':'ai_operator','reviewed_at':None,'binding':binding,'statement':'REPLACE with the exact failed effect or rejected candidate, proven termination, retained unknown costs and no-retry disposition.','scope':'terminal_failure_accounting_only','human_annotation':False,'final_admission':False}
+
+def dispose_failed(private,grant_sha,record_sha):
+    private=private.resolve();grant=load(private/'grant.json');require(file_sha(private/'grant.json')==grant_sha,'wrong disposition grant')
+    with B.phase_lock(grant['batch_binding']):
+        fd=os.open(private/'execution.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
+        try:
+            fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            record=load(private/'operator_disposition.json');require(file_sha(private/'operator_disposition.json')==record_sha,'operator disposition record changed')
+            grant,body,binding,extra,name=disposition_inputs(private,grant_sha,record['classification'])
+            require(record.get('schema')=='operator-final-failure-accounting-review/v1'and record.get('approved')is True and record.get('reviewer_kind')=='ai_operator'and record.get('binding')==binding,'exact operator failure accounting review required')
+            require(record.get('scope')=='terminal_failure_accounting_only'and record.get('human_annotation')is False and record.get('final_admission')is False,'failure accounting scope differs')
+            require(type(record.get('statement'))is str and 20<=len(record['statement'])<=8192 and not record['statement'].startswith('REPLACE'),'actual disposition statement required')
+            require(dt.datetime.fromisoformat(body['completed_at'])<=dt.datetime.fromisoformat(record['reviewed_at'])<=now(),'disposition review chronology differs')
+            # A retained completed disposition may be republished identically after a queue-write interruption.
+            if(private/'disposition.json').exists():
+                signed=load(private/'disposition.json');PC.verify_disposition(load(Path(grant['queue'])/'offer.json'),signed,read(private/name),{'profile':grant['profile'],'source_sha256':grant['source_sha256'],'manifest_sha256':grant['manifest_sha256']})
+                require(signed['receipt']['operator_record_sha256']==sha(canonical(record))and load(private/'disposition_reservation.json').get('binding')==binding,'different terminal disposition')
+            else:
+                require(not(private/'disposition_reservation.json').exists(),'disposition interrupted; reconcile exact retained files, never redispatch or rescore')
+                write(private/'disposition_reservation.json',canonical({'binding':binding,'operator_record_file_sha256':record_sha,'reserved_at':now().isoformat(),'new_provider_calls':0,'new_scorer_calls':0}))
+                _,_,again,again_extra,_=disposition_inputs(private,grant_sha,record['classification']);require(again==binding and again_extra==extra and file_sha(private/'operator_disposition.json')==record_sha,'disposition evidence drift')
+                receipt={'schema':'operator-final-failure-disposition/v1','status':'terminal_failed','terminal':True,'classification':record['classification'],'binding':binding,'original_filename':name,'original_receipt_sha256':file_sha(private/name),'preserved_original_body_sha256':sha(canonical(body)),'operator_record':record,'operator_record_sha256':sha(canonical(record)),'completed_at':now().isoformat(),'new_provider_calls':0,'new_scorer_calls':0,'retry_allowed':False,'success_credit':False,'score_credit':False,'historical_final_unit_admitted':False,'final_admitted':False,'human_annotation':False,**extra}
+                signed=sign_phase(private,receipt,'disposition');write(private/'disposition.json',canonical(signed))
+            target=Path(grant['queue'])/'disposition.json'
+            if target.exists():require(read(target)==canonical(signed),'published disposition changed')
+            else:write(target,canonical(signed),0o644)
+            return signed
+        finally:os.close(fd)
+
+def main():
+    p=argparse.ArgumentParser();s=p.add_subparsers(dest='command',required=True)
+    a=s.add_parser('preflight')
+    for n in ('private','registry'):a.add_argument('--'+n,type=Path,required=True)
+    for n in ('registry-sha256','unit'):a.add_argument('--'+n,required=True)
+    a=s.add_parser('prepare')
+    for n in ('private','queue','repo','registry','amendment'):a.add_argument('--'+n,type=Path,required=True)
+    for n in ('registry-sha256','unit','amendment-sha256'):a.add_argument('--'+n,required=True)
+    for name in ('execute','review-template','score-reviewed','disposition-template','dispose-failed'):
+        a=s.add_parser(name);a.add_argument('--private',type=Path,required=True);a.add_argument('--grant-sha256',required=True)
+        if name=='score-reviewed':a.add_argument('--review-sha256',required=True)
+        if name=='disposition-template':a.add_argument('--classification',choices=('known_proposal_failure','candidate_rejected','known_scorer_failure'),required=True)
+        if name=='dispose-failed':a.add_argument('--record-sha256',required=True)
+    a=p.parse_args()
+    if a.command=='preflight':r=preflight(a.private,a.registry,a.registry_sha256,a.unit)
+    elif a.command=='prepare':r=prepare(a.private,a.queue,a.repo,a.registry,a.registry_sha256,a.unit,a.amendment,a.amendment_sha256)
+    elif a.command=='execute':r=execute(a.private,a.grant_sha256)
+    elif a.command=='review-template':r=review_template(a.private,a.grant_sha256)
+    elif a.command=='disposition-template':r=disposition_template(a.private,a.grant_sha256,a.classification)
+    elif a.command=='dispose-failed':r=dispose_failed(a.private,a.grant_sha256,a.record_sha256)
+    else:r=score_reviewed(a.private,a.grant_sha256,a.review_sha256)
+    print(json.dumps(r,sort_keys=True))
+if __name__=='__main__':main()

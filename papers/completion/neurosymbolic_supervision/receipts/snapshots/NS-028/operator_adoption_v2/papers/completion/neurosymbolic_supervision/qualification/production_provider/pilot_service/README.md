@@ -1,0 +1,17 @@
+# NS028 A/B worker handoff
+
+This source delivers the reviewed A/B client and narrow runner hooks. It activates no grant or model/scorer effect. The original NS026 development route and four corrected NS027 cold-only functions stay unchanged.
+
+The current frozen scope is24 cells:4 unchanged pilot units × A/B × repetitions0,1,2, all local_cold. The actual old48-cell plan remains historical, with8 original identities retained,40 removed and16 added. The worker must preserve all planned cells, pending states, failed/unknown effects and actual stage costs. One cell is not a paired comparison or final admission.
+
+The current failure-accounting hooks are recorded in failure_advancement_integration.json. The older integration_manifest.json, integration_candidates and patch remain historical preimages; do not replay that older integration helper against this source. Root integrates the newly reviewed commit with exact preimage guards. The context/profile/arm amendment and complete four-unit native preparation must be independently admitted before the first pilot outcome. No pilot grant can inherit the old development witness.
+
+Root prepares one-use host grants near the actual worker activation time. build_offer_drop.py reads exact private grant metadata and matching public offers, plus the same hash-bound scientific activation review; it creates a new private proposal directory only. It does not install into the worker. The review uses schema ns028-scientific-pilot-AB-activation-review/v1 and binds distinct A/B mechanisms, the exact24/old48 transition, batch, original profile and worker source hashes.
+
+Each proposed wave may contain1..24 newly issued cells from that immutable batch. Previous installed drop bytes must match their hash; prior bindings and expiries are carried forward exactly. An already issued cell cannot be reissued, including after expiry or consumption. Every output directory is fresh; keep prior proposed drops/profile files as append-only history. Root installs a concrete reviewed drop/profile only into the actual authorized NS028 workspace. The host batch enforces frozen cell order, one active phase and no retries. Do not select later cells because of earlier outcomes.
+
+Missing/unissued cells return pending before historical materialization, hidden reconstruction, requests or terminal ledger publication. Present offers permit only the exact fixed-ID request; no worker path, command, prompt, credential or source authority is accepted. Actual proposal returns pending for explicit AI/operator candidate review; signed exact cold results are verified and used as scalar evidence. Rescore reuses that signed result without a new model/scorer call. Client CPU is not remote aggregate CPU.
+
+Short-lived grants can expire during review or long runs. Preserve the expired/unknown record and stop for explicit operator reconciliation; do not renew or silently count it as a completed comparison. Final scientific admission, automatic adversarial scorer integrity, warm-cache and reuse benefits remain disabled.
+
+The reviewed failure-accounting extension is documented in [FAILURE_DISPOSITIONS.md](FAILURE_DISPOSITIONS.md). Its three known failure classes preserve original signed evidence and costs, then publish unavailable outcomes without success/score credit or retries. Unproven termination remains pending. The client, adapter, gateway and unactivated template bind the new host source package; fresh actual-workspace batch/activation/offer metadata is still required before calls.

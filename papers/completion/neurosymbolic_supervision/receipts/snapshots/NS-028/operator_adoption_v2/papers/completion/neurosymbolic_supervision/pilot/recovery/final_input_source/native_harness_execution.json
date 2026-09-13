@@ -1,0 +1,194 @@
+{
+  "actual_import_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_native_harness_qualification_v1/native_source/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
+  "authoring_claim_execution": false,
+  "caller_current_file_hashes": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3"
+  },
+  "checks": {
+    "admit_final_attempt": true,
+    "consumed_replay_refused": true,
+    "current_source_profile": true,
+    "missing_freeze_refused": true,
+    "native_import": true,
+    "stale_freeze_refused": true
+  },
+  "command": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/qualification/execute_controls.py"
+    ],
+    "exit_code": 0,
+    "log": "papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.log"
+  },
+  "control_scope": "Actual native Python methods and real caller-computed source bytes. Missing/stale/consumed mapping variants are normal negative controls, not historical/scientific outcomes. This receipt is not a scientific freeze or execution grant.",
+  "cpu_seconds": 0.644641232,
+  "executed": true,
+  "execution_kind": "actual_native_python_import_and_call",
+  "fixture": false,
+  "native_state_mutations": 0,
+  "native_state_or_coordinator_queries": 0,
+  "normal_control_inputs_constructed": true,
+  "peak_rss_kib": 57524,
+  "provider_calls": 0,
+  "qualification_only_freeze_sha256": "b36af5517cca298adb302f669845960b0a6ce1de0acd2ddb18ed3599e24e4810",
+  "results": {
+    "consumed": {
+      "action": "retain_terminal",
+      "reasons": [
+        "retry_or_reissue_forbidden",
+        "consumed_reservation_no_replay",
+        "terminal_cell_no_replay"
+      ],
+      "record_kind": "pilot",
+      "replay_allowed": false,
+      "terminal": true
+    },
+    "current": {
+      "current": true,
+      "freeze_sha256": "b36af5517cca298adb302f669845960b0a6ce1de0acd2ddb18ed3599e24e4810",
+      "mismatched": [],
+      "missing_current": [],
+      "missing_freeze": false,
+      "reasons": [],
+      "stale": false
+    },
+    "damaged": {
+      "current": false,
+      "freeze_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "mismatched": [],
+      "missing_current": [],
+      "missing_freeze": false,
+      "reasons": [
+        "freeze_sha256_mismatch"
+      ],
+      "stale": true
+    },
+    "final_refusal": {
+      "admitted": false,
+      "arm": "A",
+      "first_final_attempt_started": false,
+      "freeze_sha256": "b36af5517cca298adb302f669845960b0a6ce1de0acd2ddb18ed3599e24e4810",
+      "reasons": [
+        "final_dispatch_not_authorized",
+        "served_model_identity_unavailable",
+        "resource_reservation_unavailable",
+        "retained_arm_missing_useful_path:A",
+        "retained_arm_missing_useful_path:B"
+      ],
+      "record_kind": "final",
+      "split": "final",
+      "task_id": "normal-control-only-final-id"
+    },
+    "missing": {
+      "current": false,
+      "mismatched": [],
+      "missing_current": [],
+      "missing_freeze": true,
+      "reasons": [
+        "missing_final_experiment_freeze"
+      ],
+      "stale": true
+    },
+    "missing_admission": {
+      "admitted": false,
+      "first_final_attempt_started": false,
+      "reasons": [
+        "missing_final_experiment_freeze"
+      ]
+    },
+    "missing_current": {
+      "current": false,
+      "freeze_sha256": "b36af5517cca298adb302f669845960b0a6ce1de0acd2ddb18ed3599e24e4810",
+      "mismatched": [],
+      "missing_current": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "missing_freeze": false,
+      "reasons": [
+        "current_digest_missing:external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "stale": false
+    },
+    "pending": {
+      "action": "repoll_same_cell",
+      "reasons": [
+        "pending_operator_input_no_terminal_publish"
+      ],
+      "record_kind": "pilot",
+      "replay_allowed": false,
+      "terminal": false
+    },
+    "pilot_refusal": {
+      "admitted": false,
+      "arm": "A",
+      "first_final_attempt_started": false,
+      "freeze_sha256": "b36af5517cca298adb302f669845960b0a6ce1de0acd2ddb18ed3599e24e4810",
+      "reasons": [
+        "final_dispatch_not_authorized",
+        "developmental_task_in_final",
+        "pilot_or_development_task_in_final",
+        "pilot_or_development_family_in_final",
+        "served_model_identity_unavailable",
+        "resource_reservation_unavailable",
+        "retained_arm_missing_useful_path:A",
+        "retained_arm_missing_useful_path:B"
+      ],
+      "record_kind": "final",
+      "split": "pilot",
+      "task_id": "ns-hist-07-idna"
+    },
+    "stale": {
+      "current": false,
+      "freeze_sha256": "b36af5517cca298adb302f669845960b0a6ce1de0acd2ddb18ed3599e24e4810",
+      "mismatched": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "missing_current": [],
+      "missing_freeze": false,
+      "reasons": [
+        "stale_pin:external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py"
+      ],
+      "stale": true
+    },
+    "stale_admission": {
+      "admitted": false,
+      "arm": "A",
+      "first_final_attempt_started": false,
+      "freeze_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "reasons": [
+        "final_dispatch_not_authorized",
+        "freeze_sha256_mismatch",
+        "served_model_identity_unavailable",
+        "resource_reservation_unavailable",
+        "retained_arm_missing_useful_path:A",
+        "retained_arm_missing_useful_path:B",
+        "request_freeze_sha256_mismatch"
+      ],
+      "record_kind": "final",
+      "split": "final",
+      "task_id": "normal-control-only-final-id"
+    },
+    "unknown": {
+      "action": "repoll_same_cell",
+      "reasons": [
+        "automatic_replay_forbidden",
+        "unknown_effect_must_remain",
+        "consumed_reservation_no_replay",
+        "pending_operator_input_no_terminal_publish"
+      ],
+      "record_kind": "pilot",
+      "replay_allowed": false,
+      "terminal": false
+    }
+  },
+  "schema": "ns028-root-native-harness-execution/v1",
+  "scientific_or_final_admission": false,
+  "scientific_or_final_executions": 0,
+  "scope_limit": "These APIs are metadata predicates. Actual signed host/client one-use custody remains separately enforced by the reviewed service; this run does not prove native coordinator reservation exclusion or scientific completion.",
+  "scorer_calls": 0,
+  "source_path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py",
+  "source_sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3",
+  "wall_seconds": 0.7028043229365721
+}

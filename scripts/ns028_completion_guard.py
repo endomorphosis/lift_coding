@@ -51,11 +51,11 @@ def verify(root, receipt):
                 "missing, redirected or oversized file: " + name)
         return path.read_bytes()
 
-    def evidence(name):
+    def evidence(name, maximum=4 * 1024 * 1024):
         snapshot = outputs.get(name)
         require(isinstance(snapshot, str) and snapshot in artifacts,
                 "required evidence lacks a task snapshot: " + name)
-        raw = raw_file(snapshot)
+        raw = raw_file(snapshot, maximum)
         require(sha(raw) == artifacts[snapshot], "evidence snapshot changed: " + name)
         return raw
 
@@ -104,7 +104,7 @@ def verify(root, receipt):
             "freeze source pins differ from protected root authority")
     for name, digest in pins.items():
         require(isinstance(digest, str) and re.fullmatch("[0-9a-f]{64}", digest), "invalid source pin")
-        raw = evidence(name) if name in outputs else raw_file(name, 64 * 1024 * 1024)
+        raw = evidence(name, maximum=64 * 1024 * 1024) if name in outputs else raw_file(name, 64 * 1024 * 1024)
         require(sha(raw) == digest, "frozen source bytes changed: " + name)
 
     harness = authority.get("native_harness")

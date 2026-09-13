@@ -1,0 +1,164 @@
+{
+  "schema": "paper-ns-scientific-provider-profile/v1",
+  "profile_id": "ns-026-scientific-profile-v1",
+  "frozen_for": "NS-026 development qualification and NS-016 freeze handoff",
+  "protocol_id": "ns-core-v1",
+  "ns004_protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+  "ns004_proposed_scientific_profile": {
+    "provider": "openai",
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "historically_observed_cli": "0.154.0",
+    "transport": "existing_native_quota_guarded_Docker_Codex_fallback",
+    "primary_provider": "grok",
+    "fallback_trigger": "independently_verified_primary_quota_exhausted",
+    "usage_reset_authorizes_fallback": false,
+    "paid_budget_extension_authorized": false
+  },
+  "ns004_proposed_available": false,
+  "ns004_unavailable_reasons": [
+    "docker_absent_from_sealed_validation_path",
+    "codex_cli_not_on_authoritative_validation_PATH",
+    "no_independently_verified_fresh_grok_quota_exhaustion",
+    "no_native_scientific_container_reservation",
+    "usage_reset_does_not_authorize_terra_high"
+  ],
+  "production_admission": {
+    "admitted": false,
+    "class": "production",
+    "requirements": [
+      "independently_verified_fresh_grok_quota_exhaustion",
+      "native_quota_guarded_terra_high_route",
+      "NS-016_pre_final_freeze"
+    ],
+    "mismatch_action": "unavailable:model_profile_mismatch before any scientific production dispatch"
+  },
+  "authoring_policy": {
+    "supervisor_primary": "grok",
+    "supervisor_fallback": "codex",
+    "supervisor_fallback_model": "gpt-5.6-terra",
+    "supervisor_fallback_reasoning": "high",
+    "supervisor_fallback_trigger": "verified_fresh_grok_quota_exhaustion",
+    "scientific_calls_obey_this_profile": true,
+    "never_switch_scientific_models_within_paired_block": true,
+    "never_manufacture_quota_exhaustion": true
+  },
+  "development_amendment": "papers/completion/neurosymbolic_supervision/protocol/development_provider_amendment.json",
+  "gateway": "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+  "transport_when_container_cannot_dispatch": {
+    "kind": "scoped_https_scientific_gateway",
+    "endpoint": "https://api.x.ai/v1/chat/completions",
+    "requested_model": "grok-4.6",
+    "docker_socket_mounted": false,
+    "host_credential_tree_mounted_into_proposal": false
+  },
+  "source_pins": {
+    "provider_gateway": "papers/completion/neurosymbolic_supervision/experiments/production_gateway.py",
+    "runner": "papers/completion/neurosymbolic_supervision/experiments/run_comparison.py",
+    "scorer": "papers/completion/neurosymbolic_supervision/experiments/score_runs.py",
+    "oracle_manifest": "papers/completion/neurosymbolic_supervision/benchmark/oracle_manifest.json",
+    "hidden_oracle_store": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-005/scorer_only/"
+  },
+  "budgets": {
+    "request_serialized_bytes_max": 65536,
+    "admitted_patch_bytes_max": 16384,
+    "provider_wall_seconds_max": 180,
+    "active_unit_wall_seconds_max": 300,
+    "aggregate_unit_host_cpu_seconds_max": 240,
+    "independent_cold_scoring_wall_seconds_max": 120,
+    "proposal_effects_per_unit": 1,
+    "pre_final_boundary_provider_effects_reserved": 64,
+    "additional_paid_provider_currency_budget": 0
+  },
+  "sampling_seed_supported": false,
+  "temperature_supported": false,
+  "temperature": null,
+  "sampling_seed": null,
+  "immutable_weight_revision": null,
+  "revision_policy": "Record actually served model and system_fingerprint. Never invent a snapshot revision.",
+  "ns016_still_owns_pilot_and_final_freeze": true,
+  "host_handoff": {
+    "schema": "paper-ns-operator-historical-development-client/v1",
+    "mode": "two_phase_signed_host_grant",
+    "admission_scope": "historical_development_only",
+    "grants": [
+      {
+        "task_id": "ns-hist-01-xmltodict",
+        "unit_id": "ns-hist-01-xmltodict",
+        "arm": "A",
+        "cache": "local_cold",
+        "repetition": 0,
+        "record_kind": "development",
+        "queue_relative": "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_handoff/275899d8094c0f5789455968f0c3d242",
+        "evidence_relative": "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_receipts/275899d8094c0f5789455968f0c3d242",
+        "offer_sha256": "e92490180649069cf8feda39ed929c15d6e592ab3eb392323d665be66f591955",
+        "grant_sha256": "a0bcebe5532b6d3a0db7145954828e6b979a2fd44f32f71af8ae3bf1cec07f6f",
+        "amendment_sha256": "00f4fc0512506510dfbf2433c48d029b74a8207015a55c24094bcf5d11205029",
+        "manifest_sha256": "6c7d2a76877748ce37b859349483417c652a859079eebae0bb8a0c5afa34bbf6",
+        "source_sha256": "ac3dcdc721ce1e9b322d3e686e20ebdb372c231635a76dcef70542624f399e5f",
+        "profile": {
+          "automatic_adversarial_scorer_integrity_qualified": false,
+          "expected_served_aliases": [
+            "grok-4.6"
+          ],
+          "fallback_allowed": false,
+          "http": {
+            "context_policy": "whole admitted implementation files plus public visible-node test files and conftest; auto-collected baseline includes all upstream Python test files; fixed for every arm; no truncation",
+            "cpu_count": 1,
+            "endpoint": "https://api.x.ai/v1/chat/completions",
+            "expected_served_aliases": [
+              "grok-4.6"
+            ],
+            "fallback_allowed": false,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "max_edits": 32,
+            "max_http_posts": 1,
+            "max_patch_bytes": 16384,
+            "max_tokens": 4096,
+            "memory_bytes": 2147483648,
+            "pids": 32,
+            "reasoning_effort": null,
+            "reasoning_policy": "parameter omitted; no served-effort attestation",
+            "request_serialized_bytes_max": 65536,
+            "requested_model": "grok-4.6",
+            "response_bytes_max": 1048576,
+            "retries": 0,
+            "runtime": "runc",
+            "schema": "ns-historical-http-profile/v1",
+            "socket_timeout_seconds": 175,
+            "tools": [],
+            "transport": "operator_host_fixed_https_json_edits/v1",
+            "wall_seconds_max": 180
+          },
+          "max_patch_bytes": 16384,
+          "max_provider_calls": 1,
+          "model": "grok-4.6",
+          "phases_sequential": true,
+          "production_final_admitted": false,
+          "provider": "grok",
+          "scorer": {
+            "child_shared_wall_seconds_max": 115,
+            "cpu_count": 1,
+            "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+            "memory_bytes": 2147483648,
+            "network": "none",
+            "pids": 32,
+            "runtime": "runc",
+            "wall_seconds_max": 120
+          },
+          "scoring_admission": "explicit_ai_operator_candidate_review",
+          "transport": "operator_host_fixed_https_json_edits/v1",
+          "underlying_served_revision_known": false
+        }
+      }
+    ],
+    "grant_authority": "operator-reviewed immutable source/prompt/profile plus one consumed HTTP effect",
+    "pending_behavior": "submit exact ID-only request once; resume same unit/arm command after signed response; do not publish a terminal scientific outcome while pending",
+    "rescore_behavior": "reverify signed durable receipt; never reconstruct hidden oracles in the client or repeat provider/scorer",
+    "native_final_admission": false,
+    "final_admission_owner": "NS-016",
+    "queue_excluded_from_git": true,
+    "durable_public_evidence_root": "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_receipts",
+    "service_source_root": "papers/completion/neurosymbolic_supervision/qualification/production_provider/host_service"
+  }
+}

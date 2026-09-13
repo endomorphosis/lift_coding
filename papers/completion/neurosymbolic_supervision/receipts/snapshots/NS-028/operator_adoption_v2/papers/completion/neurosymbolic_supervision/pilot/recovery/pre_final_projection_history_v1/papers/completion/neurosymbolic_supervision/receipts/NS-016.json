@@ -1,0 +1,142 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-016",
+  "status": "complete",
+  "completed_at": "2026-09-12T08:12:49.615317+00:00",
+  "completion_scope": "Developmental/pilot execution, hashed pre-final freeze, and fail-closed final-run admission. No NS-017/018 dispatch. No Table 17 efficacy result.",
+  "source_versions": {
+    "workspace_git_head": "bd2dfd56439a7f263592cc9a7c3e6f316c3000a0",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "jsonschema": "4.26.0",
+    "openssl": "3.0.13",
+    "consumer_gitlinks": {
+      "external/ipfs_accelerate": "cf85648380946e776170b7f30c66cc0f72a01a2e",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "protocol_id": "ns-core-v1",
+    "ns004_protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a",
+    "measurement_schema_sha256": "e20f70ba7c055e9fdbbcd1540ce13213733dd3f3810d44a23c1f9f0b24064e03",
+    "freeze_id": "ns-016-prefinal-v1",
+    "freeze_sha256": "ce60e7aa7981bef597f9bd4704b82816412772a6d804c3c9224eaf4f8752cea4",
+    "final_run_manifest_sha256": "8d9bcd2d41e4fd966ad4be719569a827431b6bcf541a3e5f90e1802f3eaee9de",
+    "harness_sha256": "aa635c70eb1a45338d5cdc229d6f42e03f05cf88a93ff6553faf11d8eb56f874",
+    "run_comparison_sha256": "6bc348d5f56ac32ea68704a10a478293786cf53da3a8371fbb534d75cd4df509",
+    "score_runs_sha256": "5e80572e51e0609d06fd1842694da5a0753ebdd66aa6c27bb3c50eca9abab158",
+    "served_development_model": "grok-4.6",
+    "api_system_fingerprint": "fp_e41c6060b2628547",
+    "immutable_weight_revision_known": false
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/pilot/results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/results.jsonl",
+    "papers/completion/neurosymbolic_supervision/pilot/readiness_report.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/readiness_report.md",
+    "papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/artifacts/final_experiment_freeze.json",
+    "papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/protocol/final_run_manifest.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/harness.py"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/artifacts/final_experiment_freeze.json": "4701a3419a3b96b9361a000e7b8004af9dd625ee1c6a2b120d68c490920d7dfb",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/compact_materialize.py": "9a3b87ccecd39f4791b8babe8137f12889b6d8209d88cf711c05711330302153",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/harness.py": "aa635c70eb1a45338d5cdc229d6f42e03f05cf88a93ff6553faf11d8eb56f874",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/readiness_report.md": "04aaff3e81a345f7c7f5a87c95543ad861829d5a45380721b34aed173597aad2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/results.jsonl": "320610a6b053ae5c918b930e4a5cef9a92a4e2b536e2c19141e4737e6e2af49a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot-freeze-validation.log": "e1c6dc5ad57de8b06f2363803f01b04de57524a214e717ade017aa990c2d5b55",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot_recipe.json": "1fdf6a6b899d2490f5657d437a6ec25c7af1d96691fc98c056f889cc9cad03bb",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/protocol/final_run_manifest.json": "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/fixture_useful_paths.json": "ca5b39ad3d6c0a9fe8d8e983be5cd3a31f62c112a3b4453f45a927b850334835",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/interruption.json": "18dfa064c6039dfc465c9431e246dedc58435646929428ff7fff9aff28c0e7d2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/live_xmltodict.json": "ee8dad288e1c4f9e3ffba334d5de911a4c6efe40f538ad2291298e9c71f70a44",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/provider_probe.json": "1cea65b49d17e99a0a0a5602dfdc9d25eacc7ae0ab7f764d6e6d83e3ee6b2942",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/table17_completeness.json": "9e6c8dadaf366ad238cc94bb4652ff706d760ba7f85ac37c3bf22f0e7f943154",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/unavailable_grants.json": "1357164a12dcd7fa4688735ef9424a9318c4fb1a972a9918982727c10c1afbbd",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/validate_pilot_freeze.py": "bd8bf0af6a0d7ed6d8af3f5312924be5d632a408488bf051f40cfab9dddd76a8"
+  },
+  "criteria": [
+    {
+      "criterion": "Pilot tasks are excluded from final holdouts and labeled developmental.",
+      "status": "met",
+      "explanation": "NS-005 splits remain disjoint: 4 development and 4 pilot families are recorded as developmental_family_ids and are absent from the 8 frozen final families. All 76 pilot result rows for those splits set developmental=true. The 48 pilot-split scheduled cells and the embedded ns-dev-boundary-add fixture never appear in final_task_ids or in the 192-unit final-run schedule. admit_final_attempt refuses a pilot family presented as record_kind=final. No final attempt started.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/readiness_report.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot-freeze-validation.log"
+      ]
+    },
+    {
+      "criterion": "Each retained arm has a valid useful path and completed independent scoring, or is explicitly removed with claims updated before final runs.",
+      "status": "met",
+      "explanation": "All six arms have independently scored developmental-fixture useful paths (12/12 solved, hidden oracle passed) plus interruption resume on A. Live independently scored historical residual repair exists only for A/ns-hist-01-xmltodict/local_cold (grok-4.6, hidden 1 passed). B, C, D, C-no-route, and C-no-reuse have no live historical grant. The freeze therefore sets retained_executable_arms=[] and removes every arm from the executable final comparison with Table 17 claim updates before any final run. final_dispatch_authorized=false.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/live_xmltodict.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/fixture_useful_paths.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/interruption.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/readiness_report.md"
+      ]
+    },
+    {
+      "criterion": "All receipts required by Tables 17/18 and cost analysis can be produced; missing provider/resources have honest readiness statuses.",
+      "status": "met",
+      "explanation": "Every pilot result row carries the Table 17 identity and measurement object. Unmeasured fields are unavailable with a reason and a null value, never zero. Terra HIGH, production reservation, settled currency, immutable weights, sampling seed/temperature, aggregate remote CPU/memory, pilot/final host grants, and adversarial scorer integrity are recorded unavailable/unqualified. Table 18 retained boundaries remain NS-007--013 qualification evidence; native/world rows stay NS-014/015 unavailable. Remaining-deadline feasibility is not ready.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/table17_completeness.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/provider_probe.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/qualification/unavailable_grants.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot/readiness_report.md"
+      ]
+    },
+    {
+      "criterion": "Final source/task/protocol/scorer manifests are immutable and hashed before the first final attempt.",
+      "status": "met",
+      "explanation": "final_experiment_freeze.json pins ns-core-v1 protocol, tasks/splits/oracles, runner/scorer/gateway/profile/amendment, source forest, and harness.py by SHA-256. freeze_sha256 is the canonical body hash; the final-run manifest binds that digest and lists 192 amended final units without dispatch. first_final_attempt_started=false on both freeze and manifest. Harness admit_final_attempt refuses final dispatch unless that hashed freeze authorizes it. No final unit was executed.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/artifacts/final_experiment_freeze.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/protocol/final_run_manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/harness.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/validate_pilot_freeze.py",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot-freeze-validation.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns016-evidence-8f3c1a2b",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns016-evidence-8f3c1a2b/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns016-evidence-8f3c1a2b/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns016-evidence-8f3c1a2b/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns016-evidence-8f3c1a2b/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/validate_pilot_freeze.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/validate_pilot_freeze.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-016/pilot-freeze-validation.log",
+      "started_at": "2026-09-12T08:12:49.615317+00:00",
+      "finished_at": "2026-09-12T08:12:49.615317+00:00",
+      "execution_kind": "sealed-profile structural freeze, split-isolation, receipt-completeness, and final-admission audit; no provider dispatch and no final attempt"
+    }
+  ],
+  "limitations": [
+    "Final dispatch is not authorized. NS-017/018 remain blocked.",
+    "Fixture useful paths use the NS-006 deterministic stub and are excluded from live-repair denominators.",
+    "The single live historical solved unit is the NS-026 AI-operator-reviewed xmltodict/A grant; no new HTTP POST was issued.",
+    "Host adapter/service still reject pilot/final grants; that code is outside this task's allowed edit paths.",
+    "Terra HIGH, native reservation, settled currency, and immutable weight revision remain unavailable.",
+    "Adversarial scorer observation integrity remains unqualified.",
+    "N=8 recruited final families versus preregistered 16/24; missing families are not replaced.",
+    "Remaining workshop deadline does not fit a live A-D campaign.",
+    "Sealed validation cannot import semantic_state because anyio is absent; harness freeze gates are AST-checked and reimplemented in the validator."
+  ],
+  "runtime_authority": "Artifact completion record only; no source tree, rollout, acceptance oracle, protected validator, worker promotion, portal, or submission state was changed beyond the declared NS-016 outputs."
+}

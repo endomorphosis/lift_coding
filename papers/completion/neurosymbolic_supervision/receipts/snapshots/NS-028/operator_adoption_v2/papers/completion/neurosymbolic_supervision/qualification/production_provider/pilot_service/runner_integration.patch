@@ -1,0 +1,112 @@
+--- a/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py
++++ b/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py
+@@ -439,7 +439,21 @@
+     return {"binding": binding, "offer": offer, "queue": queue}
+ 
+ 
++def _pilot_worker(root: Path):
++    """Load the reviewed NS028 input client; no host authority is created here."""
++    import importlib.util
++    path = root / PAPER_REL / "qualification/production_provider/pilot_service/worker_adapter.py"
++    if path.resolve() != path or sha256_bytes(path.read_bytes()) != "f9f4f6e497313436790b6b6c3ec1683abdd7c7dc91c449d92670a793b52eba39":
++        raise GatewayError("reviewed pilot adapter changed", terminal="rejected")
++    spec = importlib.util.spec_from_file_location("ns028_pilot_worker", path)
++    module = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(module)
++    return module
++
++
+ def verify_host_response(root: Path, binding: Mapping[str, Any]) -> dict[str, Any]:
++    if binding.get("record_kind") == "pilot":
++        return _pilot_worker(root).verify(root, binding)
+     import base64
+     import subprocess
+     selected = host_handoff_grant(root, binding["task_id"], binding["arm"], binding["cache"], binding["repetition"], binding["record_kind"])
+@@ -511,6 +525,8 @@
+ def host_oracle(verified: Mapping[str, Any]) -> dict[str, Any]:
+     """Interpret scalar signed host evidence; no tests, source or oracle loading."""
+     receipt = verified["receipt"]
++    if receipt.get("schema") == "operator-pilot-receipt/v2":
++        return _pilot_worker(repo_root()).oracle(verified)
+     scorer = receipt.get("scorer") or {}
+     binding = receipt.get("operator_review_binding") or {}
+     if not verified.get("signature_and_scope_verified") or receipt.get("status") != "completed" or receipt.get("error") is not None or receipt.get("operator_review_kind") != "ai_operator" or receipt.get("trust_scope") != "specific_reviewed_development_candidate_only" or receipt.get("automatic_adversarial_scorer_integrity_qualified") is not False or receipt.get("production_final_admitted") is not False:
+@@ -528,6 +544,11 @@
+ def dispatch(request: Mapping[str, Any], *, root: Path | None = None, timeout: float | None = None) -> dict[str, Any]:
+     root = repo_root(root)
+     path_class = str(request.get("path_class") or "development")
++    if path_class == "production" and request.get("record_kind") == "pilot":
++        try:
++            return _pilot_worker(root).dispatch(root, request)
++        except (ValueError, KeyError) as exc:
++            raise GatewayError(str(exc), terminal="rejected") from exc
+     if path_class == "production" and request.get("record_kind") == "development":
+         return dispatch_host_handoff(request, root)
+     amendment = load_amendment(root)
+--- a/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py
++++ b/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py
+@@ -1157,13 +1157,13 @@
+             )
+ 
+         try:
+-            if path_class == "production" and record_kind == "development":
++            if path_class == "production" and record_kind in ("development", "pilot"):
+                 gateway = load_gateway()
+                 gw = gateway.dispatch({"path_class": path_class, "record_kind": record_kind, "task_id": task["task_id"], "arm": arm, "cache": cache, "repetition": repetition}, root=self.root)
+                 if gw.get("schema") == "paper-ns-host-handoff-pending/v1":
+                     # Pending transport is not a scientific outcome or terminal ledger row.
+                     return {**gw, "path_class": path_class, "schedule_unit_id": unit_id, "task_id": task["task_id"], "record_kind": record_kind, "terminal_published": False}
+-                if gw.get("schema") != "paper-ns-host-historical-development/v1":
++                if gw.get("schema") != f"paper-ns-host-historical-{record_kind}/v1":
+                     raise RunnerError("unrecognized historical host response")
+                 verified = gw["host_verified"]
+                 signed = verified["receipt"]
+@@ -1174,8 +1174,8 @@
+                 candidate = {"host_candidate_sha256": signed.get("candidate_sha256"), "patch_bytes": signed.get("patch_bytes"), "files_retained_host_only": True} if signed.get("candidate_sha256") else None
+                 context = {"arm": arm, "routing": "fixed_operator_host_http_request", "request_binding": signed.get("request_binding"), "client_reads_hidden_oracle": False}
+                 isolation = {"scope_preserved": True, "hidden_store_mounted": False, "hidden_markers_found": [], "boundary_scope": "fixed_host_http_request_and_reviewed_sealed_candidate", "provider_termination": signed.get("provider_termination"), "scorer_boundary_sha256": (signed.get("scorer") or {}).get("boundary_sha256"), "automatic_adversarial_scorer_integrity_qualified": False, "human_annotation": False}
+-                if not gw.get("admitted_historical_development"):
+-                    return finish("unavailable", "Signed result does not admit this historical development pipeline; no final result inferred.")
++                if not gw.get("admitted_historical_" + record_kind):
++                    return finish("unavailable", f"Signed result does not admit this historical {record_kind} pipeline; no final result inferred.")
+                 oracle = gateway.host_oracle(verified)
+                 return finish("solved" if oracle["status"] == "passed" else "unsolved" if oracle["status"] == "failed" else "unavailable", oracle["reason"])
+             t_index = time.perf_counter()
+@@ -1635,6 +1635,7 @@
+             "simulated": False,
+             "admitted_production": bool(gw.get("admitted_production")),
+             "admitted_historical_development": bool(gw.get("admitted_historical_development")),
++            **({"admitted_historical_pilot": bool(gw.get("admitted_historical_pilot"))} if gw.get("schema") == "paper-ns-host-historical-pilot/v1" else {}),
+             "host_verified": gw.get("host_verified"),
+             "dispatched": bool(gw.get("dispatched")),
+             "dispatch_confirmed": bool(gw.get("dispatch_confirmed")),
+@@ -1789,7 +1790,7 @@
+             "NS-026 runner/provider qualification; not a frozen final A-D scientific result.",
+         ]
+         if host:
+-            interpretation.append("Historical development only, one operator grant and AI-reviewed candidate; no native campaign reservation, final-profile admission or adversarial scorer-integrity qualification. Rescore verifies the retained signed result without another score.")
++            interpretation.append("Historical pilot A/B cold only; one exact operator grant and reviewed candidate within the frozen24-cell plan. Historical48 identities remain separately retained (8 retained,40 removed,16 added). One cell does not establish a paired result or final admission. Rescore verifies the signed result without another score." if kw["record_kind"] == "pilot" else "Historical development only, one operator grant and AI-reviewed candidate; no native campaign reservation, final-profile admission or adversarial scorer-integrity qualification. Rescore verifies the retained signed result without another score.")
+         if not kw["live"]:
+             interpretation.append(
+                 "Development/simulated path is not an admitted production repair and is excluded from live-repair denominators."
+--- a/papers/completion/neurosymbolic_supervision/experiments/score_runs.py
++++ b/papers/completion/neurosymbolic_supervision/experiments/score_runs.py
+@@ -227,7 +227,8 @@
+     receipt = verified["receipt"]
+     identity = attempt["measurement"]["identity"]
+     binding = verified["binding"]
+-    if attempt["measurement"]["record_kind"] != "development" or any(identity.get(key) != binding.get(key) for key in ("task_id", "arm", "cache", "repetition")):
++    kind = binding.get("record_kind", "development")
++    if kind not in ("development", "pilot") or attempt["measurement"]["record_kind"] != kind or any(identity.get(key) != binding.get(key) for key in ("task_id", "arm", "cache", "repetition")):
+         raise ValueError("host receipt schedule differs")
+     if attempt["bindings"]["source_preimage_id"] != receipt["source_sha256"] or identity["source_preimage_id"] != receipt["source_sha256"] or (attempt["runner"].get("candidate") or {}).get("host_candidate_sha256") != receipt["candidate_sha256"]:
+         raise ValueError("host source/candidate binding differs")
+@@ -236,7 +237,7 @@
+     scored["measurement"]["oracle"] = oracle
+     scored["runner"]["command"] = "rescore"
+     scored["runner"]["host_rescore"] = {"signed_evidence_reverified": True, "new_provider_calls": 0, "new_scorer_calls": 0, "hidden_oracle_loaded": False, "response_sha256": verified["response_sha256"]}
+-    admitted = receipt.get("historical_development_unit_admitted") is True and receipt.get("served_profile_admitted") is True
++    admitted = receipt.get("historical_" + kind + "_unit_admitted") is True and receipt.get("served_profile_admitted") is True
+     passed = admitted and oracle["status"] == "passed"
+     scored["measurement"]["terminal_state"] = "solved" if passed else "unsolved" if admitted and oracle["status"] == "failed" else "unavailable"
+     scored["measurement"]["terminal_reason"] = oracle["reason"]

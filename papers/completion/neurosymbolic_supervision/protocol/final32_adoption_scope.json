@@ -1,0 +1,33 @@
+{
+  "amended_tasks": [
+    "NS-017",
+    "NS-018",
+    "NS-019",
+    "NS-020",
+    "NS-022",
+    "NS-024",
+    "NS-025"
+  ],
+  "cache": "local_cold",
+  "experiment_scope_already_frozen_before_outcomes": true,
+  "final_cell_count": 32,
+  "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+  "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+  "independent_families": 8,
+  "limitations": "The governing design is the already root-frozen pre-outcome 32-cell A/B local-cold comparison across eight original final families and two nested repetitions (104729,130363), canonical freeze ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d, file SHA7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a. This source amendment implements that existing freeze; it does not change the experiment after outcomes. Preserve original192 order/filter lineage,160 removed factor cells,eight unrecruited families, prior pilot/protocol failures and all costs. C/D routing, warm caches, reuse, publication-comparison efficacy and original16-family inferential objectives are withdrawn from this experiment; they are not completed benchmark outcomes. Outside human review is not required; human semantic fidelity remains unmeasured. ",
+  "native_task_status_changes": false,
+  "nested_repetitions": [
+    104729,
+    130363
+  ],
+  "new_experiment_authority": false,
+  "original_factor_cells": 192,
+  "prospective_task_metadata_alignment": true,
+  "removed_factor_cells": 160,
+  "retained_arms": [
+    "A",
+    "B"
+  ],
+  "schema": "ns-frozen32-downstream-adoption-scope/v1",
+  "unrecruited_families": 8
+}

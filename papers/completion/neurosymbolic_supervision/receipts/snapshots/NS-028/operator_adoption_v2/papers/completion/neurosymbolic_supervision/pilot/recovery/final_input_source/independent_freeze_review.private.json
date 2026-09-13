@@ -1,0 +1,333 @@
+{
+  "accepted_source_and_preoutcome_binding": true,
+  "actual_lease_liveness_rechecked": false,
+  "batch_sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418",
+  "builder_manifest_compatibility": "Preserve builder bytes; additive paper projection binds canonical freeze_sha256 and first_final_attempt_started false.",
+  "canonical_freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+  "created_at": "2026-09-13T01:26:18.005248+00:00",
+  "exact_ordered_retained_cells": 32,
+  "families": 8,
+  "file_bindings": {
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/build_final_inputs.py": {
+      "bytes": 17299,
+      "sha256": "24785724480f7bfd3e8330ed39f57e7c8e78facbc1ee6d6a77c2a3415d961dc8"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/adapter.py": {
+      "bytes": 17197,
+      "sha256": "59f2c8e9308bf2528d525349abcca06dcab56e7f6de1e570366aca3c65584519"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/batch_control.py": {
+      "bytes": 13779,
+      "sha256": "e4ba75dc2538baf7538cb181a57d52096a5ef916d674023a8faf5bc624ed475a"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/cold_scorer.py": {
+      "bytes": 6205,
+      "sha256": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/context_selection.py": {
+      "bytes": 4437,
+      "sha256": "d83eccfc2b43bab5798a8258048a8dcb2ee353f3636e0a35ff638ea100a694cb"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/http_proposer.py": {
+      "bytes": 25043,
+      "sha256": "f96af1679435219a2f3600e569e632cc7e0530c7c660077a2b88c6f480eea1e9"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/native_final_gate.py": {
+      "bytes": 8609,
+      "sha256": "1c57956d5abbd9dba5202ebb7d41fe9eb76c6b1a4d989ffc1239b2f51c9657f1"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/pilot_client.py": {
+      "bytes": 12185,
+      "sha256": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/pilot_gateway.py": {
+      "bytes": 44318,
+      "sha256": "34ab3070b9b55edbd3ca05953df008a8e46c086e5c3ffb55e2ba5a9726ded97e"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/final_service/semantic_context.py": {
+      "bytes": 12843,
+      "sha256": "35cb686f84882eb887c969652d74de70904703dc0aadfc7298dc91ebec15ff65"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e.amendment.pending.json": {
+      "bytes": 13961,
+      "sha256": "95a2cdfdd53dbcfc7e4cc3295dae7f4f955c868531beffddb8fea834c9c1f921"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0.amendment.pending.json": {
+      "bytes": 28844,
+      "sha256": "a2f3c538e6ab3254f59fffa7bdcc0369ce720bc3959e6c68a9b91d376e2b4f38"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064.amendment.pending.json": {
+      "bytes": 14023,
+      "sha256": "46a43fb482c959d74f5e581680d675c6b3cbbf81bc8b9ec2681a8f320d57bf3c"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0.amendment.pending.json": {
+      "bytes": 16234,
+      "sha256": "6d8f588a3519d8404257cbb913a2ee0cfbdee88f459b0255ec9ab1cb91a5942d"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8.amendment.pending.json": {
+      "bytes": 16234,
+      "sha256": "ad3f08fe243a76fd44cb4726d5c666c6d0e2c83fca8dab66ab32e4a2fe4539cc"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925.amendment.pending.json": {
+      "bytes": 10357,
+      "sha256": "a76972e36390ed8748c20aef9251a2e84dbb6c1b2c188222ae2351c221aa4b37"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe.amendment.pending.json": {
+      "bytes": 12749,
+      "sha256": "83fc6f4ceca687a3f15ab2009b70c392f0abf8f568ddbdcaeeeae56d7f812c21"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f.amendment.pending.json": {
+      "bytes": 10419,
+      "sha256": "2455043cfc99abe235135b75c002c48b5665205b41adcf5b25d3a85d31f58a8e"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c.amendment.pending.json": {
+      "bytes": 73404,
+      "sha256": "a9bdc58722562e76ce4c277a18c0aa739164e08da4d0905035f553b8cf47d392"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2.amendment.pending.json": {
+      "bytes": 16296,
+      "sha256": "8978341e89ce79560fe89c5dd2cd32651e3a72254444192ab47e7b4670b6708f"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85.amendment.pending.json": {
+      "bytes": 10180,
+      "sha256": "c0567a75e16a919e700cf21a2b5fa64bf7e1ad225a16e29b977a431709da101a"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633.amendment.pending.json": {
+      "bytes": 73342,
+      "sha256": "74e20e4113fbb9b6c68874ea87cf0087bfe0c15a1675412677fd10ee84e788d7"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1.amendment.pending.json": {
+      "bytes": 12687,
+      "sha256": "62b1cc2c42022e4470e4541d83c5425c6845b891b1b16cc71e8db35f2bd80337"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca.amendment.pending.json": {
+      "bytes": 12687,
+      "sha256": "92470ef089197d36f61097f02ca1ac7c4051770470b1902c4b554e2d531815d8"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6.amendment.pending.json": {
+      "bytes": 73342,
+      "sha256": "bd7f60d0d20627f2f2a28e35b6a4a796bb09376767a3816fba0459197617932f"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b.amendment.pending.json": {
+      "bytes": 10242,
+      "sha256": "10b4bb742a23020ce8c1f02d17ffd48d3c0d76143b5a0e306a7420129e0d2c21"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67.amendment.pending.json": {
+      "bytes": 28782,
+      "sha256": "90e67dfa3041b00bd763e803eb0098d1897dc50c2d1f46caec42ad493f72c7c1"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64.amendment.pending.json": {
+      "bytes": 13961,
+      "sha256": "44f8dac4369d1906775472d474b7818877ebfffa99767e7bdbce9f93b772973c"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442.amendment.pending.json": {
+      "bytes": 14190,
+      "sha256": "136946e9833f2d29f6ae49b23a4dd194750987064ccedf96687c6a1a9b479837"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d.amendment.pending.json": {
+      "bytes": 14023,
+      "sha256": "e76a070529a669d832c78dd3c4400eb37dbd3eaa4469506e946fdf101e543e31"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2.amendment.pending.json": {
+      "bytes": 10242,
+      "sha256": "33e3f85f311ca6baf9c4776629ae9e91d520c72f3a505c212e8b36162525ddca"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08.amendment.pending.json": {
+      "bytes": 73404,
+      "sha256": "c93036bd9cb81ee2d176d691199b31c337f2cdd6798d3c0880f5e257d954f3f8"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148.amendment.pending.json": {
+      "bytes": 28782,
+      "sha256": "e973f7c4f24d5c5ec1ca00cf25a5c608e6aa79f7d93a90a890a445dbddf58f6a"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b.amendment.pending.json": {
+      "bytes": 14128,
+      "sha256": "f2a041d9c6676088190b5a2e329c9d25428171b8d18ec71828a0463825fa11db"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a.amendment.pending.json": {
+      "bytes": 14190,
+      "sha256": "a5d264e918a8856ff18af9884cb941411a8c3e3efa05eefea86f7226c3c5d4c6"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0.amendment.pending.json": {
+      "bytes": 14128,
+      "sha256": "a72a190b55cdec171536760af67bb45d843b13f3afbac1c57a9d00bba9750c20"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/batch.private.json": {
+      "bytes": 24108,
+      "sha256": "ef9d30f50d8e45ac0a63f24777ed6b9cef03360b7a7d7ea0f70cf4d0201e0418"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2.amendment.pending.json": {
+      "bytes": 10419,
+      "sha256": "de21316e80a061aaff83053609c696e2e58ab7c1f0e17e89d2c12754fae9e5cd"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e.amendment.pending.json": {
+      "bytes": 10357,
+      "sha256": "0a727559d0bba9a76744eaaa068a8c155d0682a0103414df31188ee17e1ab652"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68.amendment.pending.json": {
+      "bytes": 12749,
+      "sha256": "a05a21756728314795d62f284b23b66a813074e20cd5019a53fd8ee5d632189a"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0.amendment.pending.json": {
+      "bytes": 28844,
+      "sha256": "220a765ff6f617bd6ebbb16fe612c62f5066d54ce506ab6b8e75761b48541c33"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7.amendment.pending.json": {
+      "bytes": 10180,
+      "sha256": "c0a7569064534a4447780837511d961177214ba16fcbfbfa71b71c6891817552"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f.amendment.pending.json": {
+      "bytes": 16296,
+      "sha256": "008d77e4716d367b77979644341448667c740b3ce614e4af0bdd615338596b3b"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/final_experiment_freeze.json": {
+      "bytes": 12880,
+      "sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/final_run_manifest.json": {
+      "bytes": 8179,
+      "sha256": "1dd32415b2c78faace09d11e39ed4d3fbd2c36c3823496c4c664b47636e71029"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/freeze_inputs_v1/staged_inputs.private.json": {
+      "bytes": 21272,
+      "sha256": "9dfe2fd35a7528dd9e9cca9b96168c7233a949cdfd682d59414d6746b260e83e"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/prepared_inputs_v1/common_amendment.private.json": {
+      "bytes": 38131,
+      "sha256": "c5cc3953bd52c383666f2f3222812b13f10825ec8257ef4b124601c2d22c5b69"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/prepared_inputs_v1/final_registry.private.json": {
+      "bytes": 324386,
+      "sha256": "e2cf46545a70aad95098bfa1a076ecabd7a7efe961025a3add5a0f2f4352b72c"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/prepared_inputs_v1/prepared_inputs.private.json": {
+      "bytes": 357356,
+      "sha256": "c3a27fadb68ebcb1f13f60b391d691367473da4bb7aff58934a81a5861aa96db"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/resource_lease_v1/reservation.private.json": {
+      "bytes": 1494,
+      "sha256": "2b00ba343d676fb29f445df3f3527cea62f853faf1c0ac846942bb46444655c4"
+    },
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py": {
+      "bytes": 32250,
+      "sha256": "5724b1e870b28875a073cd84e836af9312ff9b4d5a742271486ae64ff32a9168"
+    },
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/harness.py": {
+      "bytes": 113603,
+      "sha256": "1423e6b98b2ef397e3d8ad7b0f1099535b5b307ea8e04f29421642d429db6fa3"
+    },
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/pilot/recovery/root_native_harness_execution.json": {
+      "bytes": 6927,
+      "sha256": "180cdf00178c6dd841f1a7e6917abe8cb9e50026415c9f04d4baae9f4a694cee"
+    },
+    "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/toolchains/research_profile.json": {
+      "bytes": 373,
+      "sha256": "1bc2c65388bc5a79ae61e762653d336ae5401e7b0d592d265884d2ab166a8f84"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/gateway_v2/host_gateway.py": {
+      "bytes": 25044,
+      "sha256": "19af7d0e587c674937bb894ff530bd0dfa84ba52f36ddc2d9522c2c437f75d2f"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/actual_pilot_v3/delegated_analysis_v1/complete024_v1/results/analysis.private.json": {
+      "bytes": 47238,
+      "sha256": "634254087669d9a71b198e77445816ab7f4444f42beba5600d62ec322b685482"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_context_qualification.private.json": {
+      "bytes": 33738,
+      "sha256": "baa4bc46e5bbe646e679e07f13d2fc46ccc06ece009267d40960b2b8e426c8c6"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_final_v1/root_freeze_authority.private.json": {
+      "bytes": 22942,
+      "sha256": "280fe1c3f66456e48711e01d405c33c3d9b601e4b38957187b3f0b833c9198a3"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_input_stage_v1/original192.private.json": {
+      "bytes": 48458,
+      "sha256": "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/analysis_policy_v2.proposed.private.json": {
+      "bytes": 5353,
+      "sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/final_source_package_v1/package.private.json": {
+      "bytes": 18893,
+      "sha256": "595a06a354aad453ccac215060a06dec8afd52ca5bbb1148ee9a640f805a4331"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/manifest.private.json": {
+      "bytes": 2587,
+      "sha256": "b38564212c5924cbbf3432fee9b09e6e1f342ed89104933e2e551677dab441f8"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-09-tomlkit.private.json": {
+      "bytes": 1349449,
+      "sha256": "3e91c4b04b58ee822dbd255542af63ea083c3736109e5665d87953d980ee04b9"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-10-installer.private.json": {
+      "bytes": 396917,
+      "sha256": "0ec2bc6631410c56d8c4d034f560f11c5148f5c7ecfe9a943f5d643951bcf00d"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-11-tornado.private.json": {
+      "bytes": 859950,
+      "sha256": "1acfa4ba73d40c46d3511a50cb76ee2b4568cbaedb7aa877076a89d41f75d7ce"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-12-more-itertools.private.json": {
+      "bytes": 5083608,
+      "sha256": "9f6c7b8c6752056a9e4e73c587bea6edc044301afbf58849caa4c0d285e090f5"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-13-charset_normalizer.private.json": {
+      "bytes": 568209,
+      "sha256": "58659a3b7620d9b8e14b362a4a777c1e16fb5e19bae8e1bf89c30c6c1b1a464e"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-14-iniconfig.private.json": {
+      "bytes": 324133,
+      "sha256": "e30e4220051be56b230b83634dd44c10807d97de98842d87231ad0637d294757"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-15-wheel.private.json": {
+      "bytes": 451682,
+      "sha256": "6b9c550d637fef4cfc0873d81bdfa7ff69a79aa6ee40919746cd6f3ee6bccbff"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/prepared_contexts_v1/ns-hist-16-jinja.private.json": {
+      "bytes": 609571,
+      "sha256": "7396dba18783346b45612f137724a30a7fbac10a1a7c282f5312afb5c28914c7"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/root_actual_eight_input_and_baseline_review.private.json": {
+      "bytes": 42894,
+      "sha256": "e5b9723e87e06a7e3d06cd65c3a409478095eb4cf93ea89031679f264f2c8200"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/production_gateway.py": {
+      "bytes": 48052,
+      "sha256": "9e42f9ad517592db6ecfb2dc66e68753182824ef997bbd77834770dce4ba568a"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/run_comparison.py": {
+      "bytes": 104456,
+      "sha256": "9bd63f497c4f5d3dfe9c0752828451cc887429a98dbc75685b1862e6ca7723cb"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/worker_candidate/papers/completion/neurosymbolic_supervision/experiments/score_runs.py": {
+      "bytes": 19918,
+      "sha256": "f80c621339a78bc4e27b54fbe142345ffb4d365276aa8a45c87660adc17efbe3"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_final_public_baseline_compatibility_v1/final128_joined_compatibility.private.json": {
+      "bytes": 27458,
+      "sha256": "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f"
+    },
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_native_runtime/research-runtime-tree.json": {
+      "bytes": 6753518,
+      "sha256": "bcc53f4f8340da7c84d8aa28d78219ae07d9baf5950d0d804100ad1b1c3e3906"
+    }
+  },
+  "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+  "initial_read_only_audit_correction": "The first ad hoc metadata audit stopped at amendment unit accessor: actual unit_id, not unit. No source or evidence changed.",
+  "live_source_edits": 0,
+  "model_calls": 0,
+  "native_mutations": 0,
+  "oracle_payloads_read": false,
+  "original_cells": 192,
+  "removed_factor_cells": 160,
+  "repetitions": [
+    104729,
+    130363
+  ],
+  "reservation_scope": "Immutable acquisition evidence reviewed. Service must check actual current held lease at each effect.",
+  "schema": "ns-final-independent-actual-freeze-binding-review/v1",
+  "scientific_dispatch_authorized_by_this_review": false,
+  "scorer_calls": 0,
+  "source_pin_count": 37
+}
