@@ -1,0 +1,129 @@
+{
+  "authoritative_validation_environment": {
+    "home_prefix": "ipfs-accelerate-validation-home-",
+    "note": "Provider-inherited PATH and operator profile toolchains are ignored.",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "python_version": "Python 3.12.3",
+    "xdg": {
+      "cache": "$HOME/.cache",
+      "config": "$HOME/.config",
+      "data": "$HOME/.local/share",
+      "state": "$HOME/.local/state"
+    }
+  },
+  "container_recipe": {
+    "docker": [
+      "/usr/bin/docker",
+      "--host",
+      "unix:///var/run/docker.sock"
+    ],
+    "image_digest": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+    "limits": {
+      "cpus": 1,
+      "global_measured_cpu_seconds": 18000,
+      "memory_bytes": 2147483648,
+      "per_cell_cpu_seconds": 20,
+      "per_cell_wall_seconds": 20,
+      "pids": 16,
+      "swap_bytes": 0
+    },
+    "network": "disabled",
+    "not_required_for_bounded_reproduce": [
+      "docker",
+      "operator private store",
+      "study UCAN key"
+    ],
+    "required_for": "LA-029 900-cell operator matrix only",
+    "sealed_path_has_docker": false
+  },
+  "harness_pins": {
+    "handlers/effects.py_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "run.py_sha256": "5c454f0d6060d9682330ed0d9ab98f75d2c0f7f74d7609804b95e2da5d7eadd0",
+    "test_measurement_integrity.py_sha256": "0d96890144cf355b238872c55e9210d7cb5bb9f3500773f2c32f3ee479ccb2c4"
+  },
+  "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+  "locked_at": "2026-09-13T00:00:00+00:00",
+  "models": {
+    "paid_provider_budget": 0,
+    "scientific_model_pinned": false,
+    "status": "unrun_closed_loop_claims_withdrawn"
+  },
+  "python_packages": [
+    {
+      "available_on_sealed_path": true,
+      "name": "cryptography",
+      "origin": "/usr/lib/python3/dist-packages/cryptography/__init__.py",
+      "origin_sha256": "8953e50655d64c9ca215e45e77171b30f8721c1df8be238cd7477bdaf1a75ae1",
+      "version": "41.0.7"
+    },
+    {
+      "available_on_sealed_path": true,
+      "executable_on_sealed_path": false,
+      "name": "pytest",
+      "origin": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+      "origin_sha256": "43128a83a553f2c15a912137297b6b7ac7f6b2d946b52e7e20f576d72b1f4f1f",
+      "version": "8.1.1"
+    },
+    {
+      "available_on_sealed_path": true,
+      "name": "sympy",
+      "origin": "/usr/lib/python3/dist-packages/sympy/__init__.py",
+      "origin_sha256": "f39a3961fab611e022112f5ef39034643ea7f46beba5a9ef11d51ebbe5797b6c",
+      "role": "QF_BOOL SAT provider for the selected proof route; SAT/UNSAT cannot authorize theorem_proof allows",
+      "version": "1.12"
+    }
+  ],
+  "result_pins": {
+    "admitted_raw_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+    "admitted_summary_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+    "arm_safety_utility_sha256": "ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f",
+    "source_ir_metrics_sha256": "dc60da670036e8f03cc982dc8b19993359583dddeb3ac2c10a827a85362e0564"
+  },
+  "schema": "law-to-action-environment-lock/v1",
+  "solvers": {
+    "coq_rocq": {
+      "available": false
+    },
+    "cvc5": {
+      "available": false,
+      "probe": "shutil.which and importlib under sealed PATH"
+    },
+    "duckdb_module": {
+      "available": false,
+      "note": "file-backed DuckDB was used in the operator cells; the sealed validation interpreter has no duckdb module"
+    },
+    "e_prover": {
+      "available": false
+    },
+    "isabelle": {
+      "available": false
+    },
+    "lean_lake": {
+      "available": false
+    },
+    "qf_bool_sympy_sat": {
+      "authority": "satisfiability",
+      "available": true,
+      "fragment": "QF_BOOL",
+      "required_for_bounded_reproduce": false
+    },
+    "vampire": {
+      "available": false
+    },
+    "z3": {
+      "available": false,
+      "probe": "shutil.which and importlib under sealed PATH"
+    }
+  },
+  "source_pins": {
+    "cve_snapshot": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "protocol_json_sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+    "provers_json_sha256": "81e3873e996516f47451a1fa5859e390e39e989dadab20eed7ba35c9b7ac39e1",
+    "skillcenter_snapshot": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+    "sources_json_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+    "splits_json_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6"
+  },
+  "task": "LA-023"
+}

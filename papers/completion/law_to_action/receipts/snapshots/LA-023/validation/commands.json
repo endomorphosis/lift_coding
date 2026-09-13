@@ -1,0 +1,38 @@
+{
+  "reproduce": {
+    "argv": [
+      "bash",
+      "papers/completion/law_to_action/artifact/reproduce.sh"
+    ],
+    "cwd": ".",
+    "exit_code": 0,
+    "started_at": "2026-09-13T02:21:01.249291+00:00",
+    "completed_at": "2026-09-13T02:21:01.249291+00:00",
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/reproduce.stdout.log",
+    "environment_overrides": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "SOURCE_DATE_EPOCH": "0"
+    },
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/reproduce.sh"
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py"
+    ],
+    "cwd": ".",
+    "exit_code": 0,
+    "started_at": "2026-09-13T02:21:01.249291+00:00",
+    "completed_at": "2026-09-13T02:21:01.249291+00:00",
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stdout.log",
+    "environment_overrides": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "SOURCE_DATE_EPOCH": "0"
+    },
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py"
+  }
+}

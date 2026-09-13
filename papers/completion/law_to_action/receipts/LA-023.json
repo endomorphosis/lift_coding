@@ -1,0 +1,166 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-023",
+  "status": "complete",
+  "completed_at": "2026-09-13T02:21:01.249291+00:00",
+  "completion_mode": "Anonymous artifact packaging with pinned sealed-PATH environment, lawful retrieval-only source records, hashed reported results, compact outcomes recipe, one-command bounded reproduction/analysis, and anonymized logs. The declared supplement path is a UTF-8 directory bundle; a packed ZIP is generated in-memory during checks. Not a 900-cell operator rerun, model study, or independent human review.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/assemble_la023.py": "418429d8e34fefaf30673983f0e652195e8367da319ad341d3ffffbfc42a4b7d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/check_artifact.py": "48f075fc17de967c8387b7fd128e898244d20285061d8040c289fe28e05a45c6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/README.md": "d0ec5314c1795263bba2607cac4b805922fd6a80c2295501ebf69f66da1d0995",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/README.md": "d0ec5314c1795263bba2607cac4b805922fd6a80c2295501ebf69f66da1d0995",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/bundle.manifest.json": "2dfd345b242fb3f5dbc244649d9e27ad142ffd678a4d6ac7859a60b415c7ac5e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/environment.lock": "50c80bcd1aef032515690441d05359f10af158ccf1d99a28d5cc6e65b82e8dd8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/handlers/__init__.py": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/run.py": "5c454f0d6060d9682330ed0d9ab98f75d2c0f7f74d7609804b95e2da5d7eadd0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/tests/test_measurement_integrity.py": "0d96890144cf355b238872c55e9210d7cb5bb9f3500773f2c32f3ee479ccb2c4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/logs/anonymized_cost_report.md": "d8d86ee16a6db9bb9c107632dce52173591a8e3719ea23046e071227e65a6d92",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/reproduce.sh": "492e41fa7a196e454d144c563558bd421b85aba3c40bbc354b8080a8effd7555",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/scripts/check_artifact.py": "48f075fc17de967c8387b7fd128e898244d20285061d8040c289fe28e05a45c6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/arm_safety_utility.json": "ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/claim_guidance.md": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/outcomes.recipe.json": "44ba360f403e11a27efe7acd132ba782a1cc14fa373adf88207ea0d531043f13",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/sources.json": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/bundle.manifest.json": "2dfd345b242fb3f5dbc244649d9e27ad142ffd678a4d6ac7859a60b415c7ac5e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/environment.lock": "50c80bcd1aef032515690441d05359f10af158ccf1d99a28d5cc6e65b82e8dd8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/manifest.json": "cb02b7d19cb53e5389ccc18c30fc135888744568c7d4f8ca76af8da775b06ebe",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/reproduce.sh": "492e41fa7a196e454d144c563558bd421b85aba3c40bbc354b8080a8effd7555",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py": "8878d761aee17b1402a5e51d3a42882ea1c8db932e0c1a9e2fa748916090ba99",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/commands.json": "59e34dd57a1ba194fc946671752b975e3ed1e5bca86ff497e25bcc57864ef82b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/reproduce.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/reproduce.stdout.log": "579b8d45bd7e4c9f1b20bd4721869794e34114c3b3c5e46d772679660c023e10",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stdout.log": "a2a86ada4b8dc7aacccf51dbabc11cf97c850f7295d788d24fab463a0f0748aa"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/artifact/README.md": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/README.md",
+    "papers/completion/law_to_action/artifact/environment.lock": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/environment.lock",
+    "papers/completion/law_to_action/artifact/reproduce.sh": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/reproduce.sh",
+    "papers/completion/law_to_action/artifact/manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/manifest.json",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/README.md": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/README.md",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/bundle.manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/bundle.manifest.json",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/environment.lock": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/environment.lock",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/harness/handlers/__init__.py": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/handlers/__init__.py",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/harness/handlers/effects.py": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/handlers/effects.py",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/harness/run.py": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/run.py",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/harness/tests/test_measurement_integrity.py": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/harness/tests/test_measurement_integrity.py",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/logs/anonymized_cost_report.md": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/logs/anonymized_cost_report.md",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/reproduce.sh": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/reproduce.sh",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/scripts/check_artifact.py": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/scripts/check_artifact.py",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/subset/arm_safety_utility.json": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/arm_safety_utility.json",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/subset/claim_guidance.md": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/claim_guidance.md",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/subset/outcomes.recipe.json": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/outcomes.recipe.json",
+    "papers/completion/law_to_action/artifact/anonymous_supplement.zip/subset/sources.json": "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/sources.json"
+  },
+  "criteria": [
+    {
+      "criterion": "A fresh checkout has documented environment setup and one-command bounded reproduction/analysis paths.",
+      "status": "met",
+      "explanation": "artifact/README.md documents the sealed PATH, /usr/bin/python3.12 digest, XDG home, present/absent packages, and the one-command `bash papers/completion/law_to_action/artifact/reproduce.sh` (or `./reproduce.sh` from the directory bundle). environment.lock pins that environment and records that Docker/Z3/cvc5/duckdb are unavailable on the sealed PATH. reproduce.sh forces the sealed PATH and interpreter, uses the directory bundle, regenerates A0-A4 rates from the hashed 900-row admitted raw.jsonl via subset/outcomes.recipe.json, binds those rates to retained hashes, checks retrieval-only sources, packs a ZIP in memory for credential scans, and runs the 22-test measurement-integrity harness. The sealed-PATH command exited 0.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/README.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/environment.lock",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/reproduce.sh",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/check_artifact.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/reproduce.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Reported results resolve to included or explicitly retrievable artifacts and matching hashes.",
+      "status": "met",
+      "explanation": "manifest.json records SHA-256 for included bundle files and for checkout-resident reported results. Compact 900-row scientific outcomes are regenerated from admitted raw.jsonl (sha256 d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07) using subset/outcomes.recipe.json and recompute to A0-A2 90/90 forbidden and 90/90 useful, A3 33/90 forbidden and 90/90 useful, A4 0/90 forbidden and 90/90 useful, matching arm_safety_utility.json (sha256 ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f). Frozen legal/CVE/SkillCenter bodies are retrieval_only with URI+SHA-256 and included_bytes=0. The in-memory packed ZIP is 48490 bytes.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/bundle.manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/subset/outcomes.recipe.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/environment.lock",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/check_artifact.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/reproduce.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Raw logs are anonymized without altering scientific outcome fields; no credentials or private author companion are packaged.",
+      "status": "met",
+      "explanation": "The packaged cost_report.md replaces /home/<user>/ with /home/anonymous/ while preserving every numeric token and SHA-256. Compact outcome scientific fields are regenerated from live admitted raw.jsonl and required to equal those live values. The in-memory packed ZIP and directory bundle are scanned for operator home paths, Overleaf project URLs, private keys, and AWS-style credentials and contain none. papers/completion/law_to_action/private/source_provenance.json is excluded; private_author_companion_packaged and credentials_packaged are false.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/anonymous_supplement.zip/logs/anonymized_cost_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/outputs/README.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/check_artifact.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "bash",
+        "papers/completion/law_to_action/artifact/reproduce.sh"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/reproduce.stdout.log",
+      "started_at": "2026-09-13T02:21:01.249291+00:00",
+      "completed_at": "2026-09-13T02:21:01.249291+00:00",
+      "environment_overrides": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "0"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-023/validation/validate_la023.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-023/validate_la023.py",
+      "started_at": "2026-09-13T02:21:01.249291+00:00",
+      "completed_at": "2026-09-13T02:21:01.249291+00:00",
+      "environment_overrides": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "0"
+      }
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3 (/usr/bin/python3.12)",
+    "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "authoritative_validation_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "cryptography": "41.0.7 (/usr/lib/python3/dist-packages)",
+    "pytest": "8.1.1 module present; pytest executable absent from sealed PATH",
+    "sympy": "1.12 (/usr/lib/python3/dist-packages)",
+    "z3": "unavailable on sealed PATH",
+    "cvc5": "unavailable on sealed PATH",
+    "duckdb": "unavailable on sealed PATH",
+    "docker": "unavailable on sealed PATH",
+    "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "admitted_raw_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+    "admitted_summary_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+    "anonymous_supplement_form": "directory_bundle",
+    "packed_zip_bytes": 48490,
+    "packed_zip_sha256": "0352153884b7186f997b55e522d80b4219c85924d07c1d6bd9ec65745ed484e5",
+    "model_or_solver_experiment": "none performed by LA-023; bounded harness smoke plus hash/rate consistency of retained LA-029/LA-009 records",
+    "human_agreement": null,
+    "human_fidelity": null
+  },
+  "limitations": [
+    "Bounded reproduce.sh does not re-execute the 900-cell Docker operator matrix. Docker is absent from the sealed PATH.",
+    "Z3, cvc5, Lean, Coq, Isabelle, and duckdb are unavailable under the sealed validation interpreter. SAT/UNSAT cannot authorize theorem-proof allows.",
+    "Expert legal fidelity, human agreement, and closed-loop model planning remain unmeasured or withdrawn.",
+    "Private author companion, study UCAN key, and operator DuckDB are excluded from the anonymous bundle.",
+    "Source bodies are retrieval-only; this package includes zero source-body bytes.",
+    "The declared anonymous_supplement.zip path is a UTF-8 directory bundle so the proposal patch stays text-only; a packed ZIP is generated in-memory during bounded checks."
+  ]
+}

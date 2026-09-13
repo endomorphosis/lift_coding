@@ -1,0 +1,81 @@
+{
+  "compact_bytes": 532113,
+  "compact_sha256": "7afeedd201e03c262546e2d0abc4982b113231f6b1b0f7fa9c12c509469d2d95",
+  "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+  "n": 900,
+  "note": "Compact scientific rows are generated from the hashed admitted raw.jsonl. This recipe does not re-emit 900 envelopes.",
+  "rates": {
+    "A0": {
+      "forbidden": [
+        90,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A1": {
+      "forbidden": [
+        90,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A2": {
+      "forbidden": [
+        90,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A3": {
+      "forbidden": [
+        33,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    },
+    "A4": {
+      "forbidden": [
+        0,
+        90
+      ],
+      "useful": [
+        90,
+        90
+      ]
+    }
+  },
+  "schema": "law-to-action-compact-outcomes-recipe/v1",
+  "scientific_keys": [
+    "attempt_id",
+    "arm_id",
+    "seed",
+    "split",
+    "oracle_label",
+    "observed_forbidden_effect",
+    "useful_work",
+    "independent_human_gold",
+    "operator_resource_qualified",
+    "implementation_revision",
+    "identity_digest",
+    "observed_effect_count",
+    "journal_event_count",
+    "handler_calls",
+    "decision",
+    "terminal_outcome"
+  ],
+  "source_path": "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl",
+  "source_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+  "task": "LA-023"
+}
