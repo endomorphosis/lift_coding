@@ -1,0 +1,182 @@
+{
+  "actual_cold_scores": 12,
+  "actual_provider_posts": 24,
+  "batch_sha256": "7f15268d26c338b1c46722db9eb1988545dfc41b08605e945673b8b50d297866",
+  "complete": true,
+  "gateway_proposal_elapsed_sum_seconds": 10867.81474797998,
+  "gateway_score_elapsed_known_sum_seconds": 196.39898603782058,
+  "groups": [
+    {
+      "arm": "A",
+      "outcomes": {
+        "candidate_parser_failure": 1,
+        "proposal_child_deadline": 2
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-05-dnspython",
+      "useful": 0
+    },
+    {
+      "arm": "B",
+      "outcomes": {
+        "proposal_child_deadline": 3
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-05-dnspython",
+      "useful": 0
+    },
+    {
+      "arm": "A",
+      "outcomes": {
+        "full_cold_pass": 2,
+        "hidden_acceptance_failed": 1
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-06-bottle",
+      "useful": 2
+    },
+    {
+      "arm": "B",
+      "outcomes": {
+        "full_cold_pass": 3
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-06-bottle",
+      "useful": 3
+    },
+    {
+      "arm": "A",
+      "outcomes": {
+        "full_cold_pass": 1,
+        "hidden_acceptance_failed": 1,
+        "proposal_child_deadline": 1
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-07-idna",
+      "useful": 1
+    },
+    {
+      "arm": "B",
+      "outcomes": {
+        "full_cold_pass": 2,
+        "proposal_child_deadline": 1
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-07-idna",
+      "useful": 2
+    },
+    {
+      "arm": "A",
+      "outcomes": {
+        "full_cold_pass": 2,
+        "proposal_child_deadline": 1
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-08-protego",
+      "useful": 2
+    },
+    {
+      "arm": "B",
+      "outcomes": {
+        "candidate_rejected": 1,
+        "proposal_child_deadline": 2
+      },
+      "planned": 3,
+      "terminal": 3,
+      "unit": "ns-hist-08-protego",
+      "useful": 0
+    }
+  ],
+  "legacy_child_overruns_595": [
+    {
+      "excess_seconds": 0.0006686290726065636,
+      "number": 3,
+      "seconds": 595.0006686290726
+    },
+    {
+      "excess_seconds": 0.0004763660253956914,
+      "number": 4,
+      "seconds": 595.0004763660254
+    },
+    {
+      "excess_seconds": 0.0005159890279173851,
+      "number": 5,
+      "seconds": 595.0005159890279
+    },
+    {
+      "excess_seconds": 0.0003984690411016345,
+      "number": 6,
+      "seconds": 595.0003984690411
+    },
+    {
+      "excess_seconds": 0.0004197040107101202,
+      "number": 10,
+      "seconds": 595.0004197040107
+    },
+    {
+      "excess_seconds": 0.0004990960005670786,
+      "number": 11,
+      "seconds": 595.0004990960006
+    },
+    {
+      "excess_seconds": 0.0004081350052729249,
+      "number": 14,
+      "seconds": 595.0004081350053
+    },
+    {
+      "excess_seconds": 0.00041605602018535137,
+      "number": 16,
+      "seconds": 595.0004160560202
+    },
+    {
+      "excess_seconds": 0.00044704205356538296,
+      "number": 19,
+      "seconds": 595.0004470420536
+    },
+    {
+      "excess_seconds": 0.00037882395554333925,
+      "number": 23,
+      "seconds": 595.0003788239555
+    }
+  ],
+  "legacy_wrapper_or_gateway_overruns_600": [
+    20
+  ],
+  "observed_api_usage": {
+    "completion_tokens": {
+      "known_sum": 3246,
+      "observed_cells": 14
+    },
+    "cost_in_usd_ticks": {
+      "known_sum": 7832954000,
+      "observed_cells": 14
+    },
+    "prompt_tokens": {
+      "known_sum": 228310,
+      "observed_cells": 14
+    },
+    "total_tokens": {
+      "known_sum": 537711,
+      "observed_cells": 14
+    }
+  },
+  "outcomes": {
+    "candidate_parser_failure": 1,
+    "candidate_rejected": 1,
+    "full_cold_pass": 10,
+    "hidden_acceptance_failed": 2,
+    "proposal_child_deadline": 10
+  },
+  "planned_cells": 24,
+  "resource_reclassification_applied": false,
+  "terminal_cells": 24,
+  "unissued_or_nonterminal": 0,
+  "useful_completions": 10
+}

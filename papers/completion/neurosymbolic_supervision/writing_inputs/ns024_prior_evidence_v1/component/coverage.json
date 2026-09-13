@@ -1,0 +1,56 @@
+{
+  "additional_coverage": [
+    "26 original four-family native preparation attempts including failures and setup controls",
+    "24 saved collect/run timestamp intervals for original four pilot and eight final-family 128-PID baselines",
+    "Six prior protocol terminal gateway clocks and six terminal-client poll clocks; v1 nested provider clocks",
+    "V2 metadata staging intervals, one separate generated diagnostic, original lease lifecycle and successor launch"
+  ],
+  "no_clock_grand_total": true,
+  "no_outcome_pooling": true,
+  "pilot": {
+    "cells": 24,
+    "independent_families": 4,
+    "nested_repetitions": 3,
+    "pooled_with_final32": false,
+    "scalar_reproduction": true
+  },
+  "schema": "ns-prior-component-coverage/v1",
+  "signature_authentication_of_derivatives": false,
+  "six_ledgers": [
+    {
+      "index": 0,
+      "original_sha256": "baa4bc46e5bbe646e679e07f13d2fc46ccc06ece009267d40960b2b8e426c8c6"
+    },
+    {
+      "index": 1,
+      "original_sha256": "c68d2e39c1fbcff33c39e8d656a5be6f83fae057dda0d2c79bcec8a0d746873f"
+    },
+    {
+      "index": 2,
+      "original_sha256": "76a965e319ee3c63d60a19758f39083da112713fe1517681171f3f3ce22ca464"
+    },
+    {
+      "index": 3,
+      "original_sha256": "d3f45d2ea6139d3cdf6259d1ea6c84edfd4530d83196ca2989d5d1fd1580885f"
+    },
+    {
+      "index": 4,
+      "original_sha256": "8ac85c4df1069d35d3713b4a712655cc56c822173bd3c1ec210f02d35fcd195d"
+    },
+    {
+      "index": 5,
+      "original_sha256": "b7ac4ef6be8ed0c46a33a2d708838ef9b8bf7dd88c682f0288c8233dc0e0505e"
+    }
+  ],
+  "unresolved": [
+    "Settled provider charges absent; observed API ticks are not settlement.",
+    "Prior interrupted preparation CPU and complete original preparation CPU are unavailable in the admitted metadata.",
+    "V2 timeout child CPU/duration and remote effects remain unknown where no child result exists.",
+    "Historical baseline CPU/memory unavailable; timestamps yield stage wall intervals only.",
+    "All operator polls, source qualification, authoring, human/AI review, network diagnostics, and packaging costs are not a complete measured ledger.",
+    "Lease occupancy is not computation; successor full lifetime CPU/wall is not measured here.",
+    "Baseline coverage is the four-family pilot plus eight final families; earlier NS026 families and other unrelated controls are outside this component and are not asserted zero.",
+    "Private signed originals, candidate/reference/oracle bytes and original-source-tree replay are not released by this numerical component."
+  ],
+  "whole_NS024_obligation": "Combine this prior numerical component with separately reviewed final32 anonymous component and permitted source/license/candidate reproduction material. This component alone is not the complete supplement."
+}

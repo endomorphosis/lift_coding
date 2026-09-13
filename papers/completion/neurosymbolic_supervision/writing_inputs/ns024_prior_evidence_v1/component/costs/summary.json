@@ -1,0 +1,383 @@
+{
+  "cross_clock_or_cross_scope_addition": false,
+  "grand_total": null,
+  "known_sums_are_partial_measurements_not_complete_experiment_cost": true,
+  "schema": "ns-prior-separated-cost-summary/v1",
+  "scopes": {
+    "final_metadata_staging": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 2
+        },
+        "host_wall_seconds": {
+          "known_sum": 14.24558069894556,
+          "observed_records": 2,
+          "unknown_records": 0
+        }
+      },
+      "records": 2
+    },
+    "final_public_baseline_current32": {
+      "clocks": {
+        "cgroup_cpu_seconds_lower_bound": {
+          "known_sum": 8.616261,
+          "observed_records": 8,
+          "unknown_records": 0
+        },
+        "cgroup_peak_memory_bytes_lower_bound": {
+          "maximum_observed": 79372288,
+          "observed_records": 8,
+          "unknown_records": 0
+        },
+        "child_elapsed_seconds": {
+          "known_sum": 10.158299655886367,
+          "observed_records": 8,
+          "unknown_records": 0
+        },
+        "host_attach_wall_seconds": {
+          "known_sum": 11.953597140032798,
+          "observed_records": 8,
+          "unknown_records": 0
+        },
+        "host_cleanup_wall_seconds": {
+          "known_sum": 0.16775067627895623,
+          "observed_records": 8,
+          "unknown_records": 0
+        }
+      },
+      "records": 8
+    },
+    "final_public_baseline_historical128": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 16
+        },
+        "host_timestamp_interval_seconds": {
+          "known_sum": 17.458237,
+          "observed_records": 16,
+          "unknown_records": 0
+        },
+        "memory_bytes": {
+          "maximum_observed": null,
+          "observed_records": 0,
+          "unknown_records": 16
+        }
+      },
+      "records": 16
+    },
+    "final_public_baseline_new128": {
+      "clocks": {
+        "cgroup_cpu_seconds_lower_bound": {
+          "known_sum": 9.162806,
+          "observed_records": 1,
+          "unknown_records": 0
+        },
+        "cgroup_peak_memory_bytes_lower_bound": {
+          "maximum_observed": 213852160,
+          "observed_records": 1,
+          "unknown_records": 0
+        },
+        "child_elapsed_seconds": {
+          "known_sum": 9.833202279987745,
+          "observed_records": 1,
+          "unknown_records": 0
+        },
+        "host_attach_wall_seconds": {
+          "known_sum": 10.036315820063464,
+          "observed_records": 1,
+          "unknown_records": 0
+        },
+        "host_cleanup_wall_seconds": {
+          "known_sum": 0.025645407964475453,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "final_shared_native_preparation": {
+      "clocks": {
+        "child_cpu_seconds": {
+          "known_sum": 339.83170864,
+          "observed_records": 11,
+          "unknown_records": 0
+        },
+        "child_wall_seconds": {
+          "known_sum": 340.96053276292514,
+          "observed_records": 11,
+          "unknown_records": 0
+        },
+        "host_wall_seconds": {
+          "known_sum": 346.68547677702736,
+          "observed_records": 11,
+          "unknown_records": 0
+        }
+      },
+      "records": 11
+    },
+    "original_lease_lifecycle": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "timestamp_occupancy_seconds": {
+          "known_sum": 5922.720917,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "pilot_public_baseline_historical128": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 8
+        },
+        "host_timestamp_interval_seconds": {
+          "known_sum": 5.375222999999999,
+          "observed_records": 8,
+          "unknown_records": 0
+        },
+        "memory_bytes": {
+          "maximum_observed": null,
+          "observed_records": 0,
+          "unknown_records": 8
+        }
+      },
+      "records": 8
+    },
+    "pilot_shared_native_preparation": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 26
+        },
+        "host_timestamp_interval_seconds": {
+          "known_sum": 1758.9971320000002,
+          "observed_records": 26,
+          "unknown_records": 0
+        }
+      },
+      "records": 26
+    },
+    "prior_protocol_v1": {
+      "clocks": {
+        "gateway_proposal_seconds": {
+          "known_sum": 185.10169843002222,
+          "observed_records": 3,
+          "unknown_records": 0
+        },
+        "http_wrapper_seconds": {
+          "known_sum": 184.1373595170444,
+          "observed_records": 3,
+          "unknown_records": 0
+        },
+        "provider_child_seconds": {
+          "known_sum": 182.49902199499775,
+          "observed_records": 3,
+          "unknown_records": 0
+        },
+        "provider_cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 3
+        },
+        "settled_provider_cost": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 3
+        }
+      },
+      "records": 3
+    },
+    "prior_protocol_v2": {
+      "clocks": {
+        "gateway_proposal_seconds": {
+          "known_sum": 383.8281252851011,
+          "observed_records": 3,
+          "unknown_records": 0
+        },
+        "http_wrapper_seconds": {
+          "known_sum": 382.8552486639237,
+          "observed_records": 3,
+          "unknown_records": 0
+        },
+        "provider_child_seconds": {
+          "known_sum": 20.350152658997104,
+          "observed_records": 1,
+          "unknown_records": 2
+        },
+        "provider_cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 3
+        },
+        "settled_provider_cost": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 3
+        }
+      },
+      "records": 3
+    },
+    "prior_terminal_client_verification": {
+      "clocks": {
+        "child_cpu_seconds": {
+          "known_sum": 0.259281968,
+          "observed_records": 6,
+          "unknown_records": 0
+        },
+        "child_wall_seconds": {
+          "known_sum": 0.6116067499388009,
+          "observed_records": 6,
+          "unknown_records": 0
+        },
+        "host_wall_seconds": {
+          "known_sum": 3.0928884730674326,
+          "observed_records": 6,
+          "unknown_records": 0
+        }
+      },
+      "records": 6
+    },
+    "separate_constructed_generation_diagnostic": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "enclosing_wall_seconds": {
+          "known_sum": 9.367797,
+          "observed_records": 1,
+          "unknown_records": 0
+        },
+        "nested_http_seconds": {
+          "known_sum": 8.700476,
+          "observed_records": 1,
+          "unknown_records": 0
+        },
+        "settled_provider_cost": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        }
+      },
+      "records": 1
+    },
+    "successor_lease_launcher": {
+      "clocks": {
+        "holder_cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "launcher_wall_seconds": {
+          "known_sum": 0.33431415795348585,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "v2_metadata_enclosing_installation_seconds": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "wall_seconds": {
+          "known_sum": 38.994561052066274,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "v2_metadata_final_payload_qualification_seconds": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "wall_seconds": {
+          "known_sum": 4.125144817051478,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "v2_metadata_initial_payload_qualification_seconds": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "wall_seconds": {
+          "known_sum": 5.615407229983248,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "v2_metadata_installed_eight_request_comparison_seconds": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "wall_seconds": {
+          "known_sum": 1.9719368040096015,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "v2_metadata_installed_metadata_builder_seconds": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "wall_seconds": {
+          "known_sum": 38.86050887696911,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    },
+    "v2_metadata_staged_metadata_builder_seconds": {
+      "clocks": {
+        "cpu_seconds": {
+          "known_sum": 0,
+          "observed_records": 0,
+          "unknown_records": 1
+        },
+        "wall_seconds": {
+          "known_sum": 37.706350081949495,
+          "observed_records": 1,
+          "unknown_records": 0
+        }
+      },
+      "records": 1
+    }
+  }
+}
