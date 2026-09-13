@@ -1,0 +1,41 @@
+{
+  "all_45_paired_family_bootstrap_contrasts_recomputed": true,
+  "all_9933_original_reducer_inputs_verified": true,
+  "all_package_files_verified": true,
+  "compact_analysis": {
+    "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+    "exit_code": 0,
+    "scope": "offline retained analysis and local harness controls; no scientific execution",
+    "timed_out": false,
+    "wall_seconds": 0.5664286779938266
+  },
+  "new_scientific_executions": 0,
+  "recovery_analysis": {
+    "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+    "exit_code": 0,
+    "scope": "offline retained analysis and local harness controls; no scientific execution",
+    "timed_out": false,
+    "wall_seconds": 11.73716214101296
+  },
+  "schema": "law-final-offline-reproduction/v1",
+  "scope": {
+    "actual_group_cpu_seconds": 1608.817478,
+    "analysis": "retained modeled-policy sandbox effects and paired family bootstrap; not new physical enforcement or scientific execution",
+    "historical_host_false_flags_preserved": [
+      459,
+      560
+    ],
+    "historical_startup_failures_preserved": [
+      591,
+      625
+    ],
+    "host_attempts": 902,
+    "human_agreement": null,
+    "human_fidelity": null,
+    "model_calls_in_fixed_action_study": 0,
+    "new_scientific_executions": 0,
+    "scientific_rows": 900,
+    "startup_cpu_seconds_counted_once": 0.118787
+  },
+  "success": true
+}
