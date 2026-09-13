@@ -44,6 +44,7 @@ CONFIG: Final = (
 BOARD: Final = ROOT / "config/agent_supervisor_direct_objective_event_driven_planning_board.json"
 OWNER_SESSION: Final = "doep-v1-executor"
 GRANT_TTL_SECONDS: Final = 86_400.0
+GRANT_RENEW_INTERVAL_SECONDS: Final = 300.0
 LIVE_MONITOR_INTERVAL_SECONDS: Final = 5.0
 LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES: Final = 3
 LIVE_MONITOR_STOP_TIMEOUT_SECONDS: Final = 35.0
@@ -2242,10 +2243,11 @@ class _BootstrapBroker:
         self._accepted: socket.socket | None = None
         self._lock = threading.Lock()
         self._grants: dict[str, dict[str, Any]] = {}
+        self._grant_bindings: dict[str, tuple[Any, dict[str, Any]]] = {}
+        self._grant_renew_at = 0.0
         self._history: list[dict[str, Any]] = []
         self._thread = threading.Thread(target=self._run, name="doep-bootstrap-broker", daemon=True)
         self._paired = None
-        self._reader_renew_at = 0.0
         if queue_server is not None:
             from ipfs_accelerate_py.agent_supervisor.runtime.owner_merge_bootstrap_broker import NativeOwnerMergeBroker
             from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
@@ -2256,7 +2258,8 @@ class _BootstrapBroker:
                 target_branch=str(board.payload["merge_target_branch"]),
                 scope_bindings=queue_scope_bindings,
                 issue_task=self._issue_paired_task, revoke_task=self._revoke_paired_task,
-                validate_peer=self._validate_merge_peer, ttl_seconds=GRANT_TTL_SECONDS,
+                validate_peer=self._validate_merge_peer, renew_task=self._renew_paired_task,
+                ttl_seconds=GRANT_TTL_SECONDS,
             )
 
     def start(self) -> None:
@@ -2302,6 +2305,7 @@ class _BootstrapBroker:
         with self._lock:
             grants = tuple(self._grants.values())
             self._grants.clear()
+            self._grant_bindings.clear()
         for item in grants:
             grant_id = str(item.get("grant_id") or "")
             if grant_id:
@@ -2395,6 +2399,7 @@ class _BootstrapBroker:
                 current = self._grants.get(client_id)
                 if current is not None and current.get("grant_id") == grant_id:
                     self._grants.pop(client_id, None)
+                    self._grant_bindings.pop(client_id, None)
                     self._publish_grants_locked()
         finally:
             self.server.revoke_typed_client_grant(grant_id)
@@ -2543,6 +2548,7 @@ class _BootstrapBroker:
         try:
             with self._lock:
                 self._grants[client_id] = {**public, "grant_id": grant.grant_id}
+                self._grant_bindings[client_id] = (grant, owner_identity.to_dict())
                 self._history.append(public)
                 self._history = self._history[-128:]
                 if publish:
@@ -2552,6 +2558,7 @@ class _BootstrapBroker:
                 current = self._grants.get(client_id)
                 if isinstance(current, Mapping) and current.get("grant_id") == grant.grant_id:
                     self._grants.pop(client_id, None)
+                    self._grant_bindings.pop(client_id, None)
             self.server.revoke_typed_client_grant(grant.grant_id)
             raise
         return {
@@ -2567,30 +2574,96 @@ class _BootstrapBroker:
             "execution_route_policy": self.policy.to_dict(),
         }
 
-    def _maintain_paired_grants(self) -> None:
-        if self._paired is None:
-            return
+    def _renew_retained_grant(self, client_id, record, binding):
+        """Apply the same exact native authority checks on either launch path."""
+        from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import process_birth_id
         from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import read_process_birth
 
-        self._paired.maintain()
+        if binding is None:
+            raise HandoffError("bootstrap grant has no retained authority binding")
+        issued, owner_identity = binding
+        birth = record["process_birth"]
+        observed = read_process_birth(birth["pid"])
+        if observed is None or observed.to_dict() != birth:
+            # A dead or reused PID cannot retain its old authority. A new
+            # child must pass the original authenticated admission path.
+            with self._lock:
+                if self._grants.get(client_id) == record:
+                    self._grants.pop(client_id, None)
+                    self._grant_bindings.pop(client_id, None)
+            self.server.revoke_typed_client_grant(issued.grant_id)
+            return None
+        identity = self.server.identity
+        gateway = self.server._command_gateway
+        if (
+            record["client_id"] != client_id
+            or record["grant_id"] != issued.grant_id
+            or issued.client_id != client_id
+            or issued.process_birth_id != record["process_birth_id"]
+            or issued.process_birth_id != process_birth_id(observed)
+            or identity is None
+            or identity.to_dict() != owner_identity
+            or gateway is None
+            or dict(gateway.identity) != owner_identity
+        ):
+            raise HandoffError("bootstrap renewal authority identity changed")
+        self._validate_parent(peer_pid=observed.pid, client_id=client_id)
+        with gateway._grants_lock:
+            matches = tuple(grant for grant in gateway._grants.values()
+                            if grant.grant_id == issued.grant_id)
+        if len(matches) != 1 or matches[0] != issued:
+            raise HandoffError("bootstrap renewal grant is no longer exact")
+        gateway._require_active_grant(
+            issued,
+            peer_identity=(observed.pid, os.stat(f"/proc/{observed.pid}").st_uid,
+                           observed.start_time_ticks),
+        )
+        with self._lock:
+            if self.stopping.is_set():
+                return
+            if (self._grants.get(client_id) != record
+                    or self._grant_bindings.get(client_id) != binding):
+                raise HandoffError("bootstrap grant changed during renewal")
+            renewed = self.server.renew_typed_client_grant(
+                issued.grant_id, ttl_seconds=GRANT_TTL_SECONDS,
+            )
+            self._grant_bindings[client_id] = (renewed, owner_identity)
+            return renewed
+
+    def _renew_paired_task(self, client_id, issued):
+        with self._lock:
+            record = dict(self._grants.get(client_id) or {})
+            binding = self._grant_bindings.get(client_id)
+        if (record.get("client_role") != "executor" or binding is None
+                or binding[0] != issued):
+            raise HandoffError("paired task grant differs from its retained native binding")
+        renewed = self._renew_retained_grant(client_id, record, binding)
+        if renewed is None:
+            raise HandoffError("paired task grant retired during renewal")
+        return renewed
+
+    def _maintain_grants(self) -> None:
+        """Renew each role once, with paired executors scheduled as one bundle."""
+        if self.stopping.is_set():
+            return
+        if self._paired is not None:
+            self._paired.maintain()
         now = time.monotonic()
-        if now < self._reader_renew_at:
+        if now < self._grant_renew_at:
             return
         with self._lock:
-            readers = tuple((client_id, dict(record)) for client_id, record in self._grants.items()
-                if record.get("client_role") == "supervisor_read")
-        for client_id, record in readers:
-            supplied = record["process_birth"]
-            observed = read_process_birth(supplied["pid"])
-            if observed is None or observed.to_dict() != supplied:
-                self._revoke_paired_task(client_id, record["grant_id"])
+            records = tuple((client_id, dict(record), self._grant_bindings.get(client_id))
+                            for client_id, record in self._grants.items())
+        for client_id, record, binding in records:
+            if self._paired is not None and record.get("client_role") == "executor":
+                if not self._paired.owns_task_grant(client_id, record.get("grant_id")):
+                    raise HandoffError("paired executor has no complete retained owner bundle")
                 continue
-            self._validate_parent(peer_pid=observed.pid, client_id=client_id)
-            self._paired._live_grant(self.server, record["grant_id"], observed)
-            self.server.renew_typed_client_grant(record["grant_id"], ttl_seconds=GRANT_TTL_SECONDS)
-        with self._lock:
-            self._publish_grants_locked()
-        self._reader_renew_at = now + 300.0
+            self._renew_retained_grant(client_id, record, binding)
+        if self._paired is not None:
+            with self._lock:
+                self._publish_grants_locked()
+        self._grant_renew_at = now + GRANT_RENEW_INTERVAL_SECONDS
 
     def _run(self) -> None:
         from ipfs_accelerate_py.agent_supervisor.task_sources.state_owner_bootstrap import (
@@ -2604,7 +2677,7 @@ class _BootstrapBroker:
         while not self.stopping.is_set():
             accepted: socket.socket | None = None
             try:
-                self._maintain_paired_grants()
+                self._maintain_grants()
                 accepted, _address = self.listener.accept()
                 with self._lock:
                     self._accepted = accepted
