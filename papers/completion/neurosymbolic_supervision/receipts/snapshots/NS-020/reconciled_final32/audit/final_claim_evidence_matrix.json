@@ -1,0 +1,1150 @@
+{
+  "actual_final32_reconciliation": {
+    "NS017_manifest": {
+      "repository_path": "papers/completion/neurosymbolic_supervision/runs/main/manifest.json",
+      "sha256": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac"
+    },
+    "NS019_renderer_source_sha256": "16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251",
+    "NS019_results": {
+      "repository_path": "papers/completion/neurosymbolic_supervision/analysis/results.json",
+      "sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e"
+    },
+    "NS019_reverified_provenance": {
+      "ablation_manifest_sha256": "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+      "analysis_policy_sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+      "analysis_sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766",
+      "manifest_sha256": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+      "operator_cost_manifest_sha256": "66ba659d7aafe5667751c7490f43bbbb83352a5ea48fd1b04f583caa623d9d4b",
+      "operator_projector_source_sha256": "efc9a050dc3c89f73bda163d1c15753c0df5c25308fece3bf369534b9bff36e1",
+      "prior_component_manifest_sha256": "1d00715d05bbea2c7cab0ef1892f039153cc12ea0820bd556a13452ffe6b70a7",
+      "reducer_source_sha256": "ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94",
+      "root_review_sha256": "f6a094d63dd9e86ea250f2e53a7bebd802ef14e78b7e18fbdebd4b7dfb8b1c0e",
+      "signature_function_source_sha256": "4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84",
+      "signatures_reverified": 48,
+      "validation_disclosures_sha256": "156cf6f7e835ddae1d38960d60701ca951fb6441277898f6d084ad3bd8c7ead5",
+      "verification_scope": "Exact original Ed25519 signatures and source/order/freeze joins; retained root bundle supplies full client/resource/candidate review. No new hidden-test, full service or native admission replay."
+    },
+    "actual_terminal_cells": 32,
+    "frozen_policy_unchanged": true,
+    "historical_table_rows_changed": false,
+    "human_annotation": false,
+    "new_native_calls": 0,
+    "new_provider_calls": 0,
+    "new_scorer_calls": 0,
+    "original_claim_ids_and_text_changed": false,
+    "original_ordered_cells": [
+      "09e9117c11fbfa6d0a3e87e31ad75f78c3f4aca13d0f0902e2f4c169a055fdb0",
+      "9b3ad8781f007f44ec982f024dccdc4803c83964a11e6ebbab0c8eba26aab148",
+      "7eb87291171adf4421c71faf75a489c8930a0383ab193ac44b5282802e00aa67",
+      "f24a2eaf00599a0f917f8fd8cfe58eda6c2c19773d3b6681d481c43e6eb5aee0",
+      "5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1",
+      "2bb45354ffdf1e23bf1cca86a9d97017388c856a94ad7fd15ec2fd885b810bbe",
+      "e1fd2b30903bff4168831fd66a5180c12cd2209f69eba39fcd1f2e5decab4e68",
+      "5d8c1e3d3cc7cfa7998255351e28c1be9e953080e0b9c8a606afe3c9828940ca",
+      "1a33548c03ce23089c5b580ca10451623006792dd5c2891d261a78d3543223b0",
+      "3749792b21d798a7a20fea36c287759c82e380af6206f4f3d9278171f0a9f2a2",
+      "1a998abf591da1ff80dc232cfeb76949e2e3111a62f86ac8e80650ca1e2dd7c8",
+      "fef942a98324c3c65fbd3bebb98ac31a62df4cbd1e18037ae9679dac7fcd388f",
+      "97d062ad4128bdcf823fcaa020c8f4b883bb033eeca25fbf1d15202fa49c4f08",
+      "3d6280f2b73d7032d7dee882ec6126e7b6860825e70cc0ad40c04987bbdb9633",
+      "34956efdceb20b61891e3d87e789b47e9fd0618264c0a4049daf1e4b3b9fec8c",
+      "629a345e1bba96615eb9ae20b074126754d1d0579831131447ec1cc8ed5df8d6",
+      "877c8826d880cad5e916412c33bbce58002e19aaa4ee203790c7ccb7118a6b64",
+      "90e491805e7c5694a02a4c7d541aec1f463a3ad6948a03bf2a7909711c58700d",
+      "0d185efce414ff3ff4bc2a2f2bd1d92fa2783a3d11483f9bd7d74d1ad948b064",
+      "018e407870deb2dc5055bac165079761b53930415c6813e3dc9810df43690a8e",
+      "f66d239ac6696329ad7ac4e10c16ef38f8adca6648acdbf38b0ae825147156a7",
+      "94a618ed9b033355e6be30c1b16a65835028db173981aaf0fc9e45530c116db2",
+      "6dc456c4a6b0aebb2dda749f2673c736d10f9b056c4e4c9d6c62261ead1f6b1b",
+      "3a7360d1c26b94d92dda554c65a8e62b2788fe8fecaee2fbbb1e78ee4aa0bd85",
+      "ca2952cc6896108fe21aa936874accfb8ec391d195b8bfa43551b2a949fa34f2",
+      "1d8238ef6d861a8f457c57d4c04a926dfcc04e76986d5e070059598aeb419925",
+      "d5f7adf14d4edb8534fa4b696de817ede4426ac754fbd6f852a27b8701662d4e",
+      "2caa8ea9de91e65abd18061ab74ac273567f552b5ea5d2a65d1d5702f4b5d74f",
+      "b1592bc952f0a9b1345dec1d5bea40650fe6ea2c947528a3517417e7ce6c240a",
+      "afefb21e69e743ec317d9ce4a71919bd45336f3ccacba3dc08d066d3a18ba21b",
+      "babccde4286352da76436a93b44814b4611525809caf7e1ac5fe24185591aed0",
+      "8ebc2bef9d924f11d073c6323c62e0663dbedcecf97529c2183a6a49075f4442"
+    ],
+    "preparation_files_sha256": {
+      "README.md": "ded611c18a7a04caf8a6edc5548b758b0dc279c2ce4f8986cd0d14b05a0d6053",
+      "boundary_witnesses.json": "d4c402839086e2eb6b089a58ccfe775947caa7cfcb3f9647e19c621dfa83ad90",
+      "failure_cases.md": "ad3f954f1a337d377f0ae71d7748450980c319f3dba2d2909a88ffe5ea539016",
+      "final_claim_evidence_matrix.json": "b8f850530295251187d4760c71ed551dc3c95d40f113050056201c27212d2d5e",
+      "source_evidence.json": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25",
+      "table18.tex": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    "publication_authorized": false,
+    "root_review_reference": {
+      "path": "papers/completion/neurosymbolic_supervision/qualification/operator_inputs/NS-017/objects/f6a094d63dd9e86ea250f2e53a7bebd802ef14e78b7e18fbdebd4b7dfb8b1c0e",
+      "sha256": "f6a094d63dd9e86ea250f2e53a7bebd802ef14e78b7e18fbdebd4b7dfb8b1c0e"
+    }
+  },
+  "all_final_claims_resolved": true,
+  "boundary_witnesses_file": "../analysis/boundary_witnesses.json",
+  "claims": [
+    {
+      "allowed_current_wording": "Report the root-reviewed frozen eight-family A/B cold32 outcomes and conditional descriptive interval from NS019. The two repetitions are nested identifiers, not independent families or served-API seed claims. Separate measured clock/usage scopes do not establish net settled cost; isolated false-admission, human fidelity, C/D, warm/reuse/publication benefits and the original confirmatory comparisons remain unmeasured or withdrawn.",
+      "empirical_final_outcome": {
+        "arm_useful_fixed16": {
+          "A": {
+            "planned": 16,
+            "useful": 5
+          },
+          "B": {
+            "planned": 16,
+            "useful": 4
+          }
+        },
+        "bootstrap": {
+          "cost_B_minus_A": {
+            "client_poll_cpu_seconds": {
+              "degenerate": false,
+              "lower": -0.11307373400000006,
+              "upper": -0.006393456000000061
+            },
+            "client_poll_wall_seconds": {
+              "degenerate": false,
+              "lower": -0.18834614723054982,
+              "upper": 0.6285356203006813
+            },
+            "gateway_proposal_elapsed_seconds": {
+              "degenerate": false,
+              "lower": -43.00590978117834,
+              "upper": 88.88643335063534
+            },
+            "grant_to_terminal_elapsed_seconds": {
+              "degenerate": false,
+              "lower": 18.977067750000018,
+              "upper": 1959.5105419828117
+            },
+            "http_wrapper_elapsed_seconds": {
+              "degenerate": false,
+              "lower": -42.887481293293966,
+              "upper": 88.91944541770499
+            },
+            "provider_child_elapsed_seconds": {
+              "degenerate": false,
+              "lower": -42.80496710547486,
+              "upper": 88.80292585586992
+            }
+          },
+          "cost_interval_unavailable": {
+            "gateway_score_elapsed_seconds": "One or more original family blocks lacks both repetitions for both arms; no zero imputation or reduced-block bootstrap."
+          },
+          "draw_bytes_sha256": "32f62bd020d4b9f69eb792e1f689457038718089b4519890bc2a3e6df1160b03",
+          "draws_per_resample": 8,
+          "family_order": [
+            "ns-hist-09-tomlkit",
+            "ns-hist-10-installer",
+            "ns-hist-11-tornado",
+            "ns-hist-12-more-itertools",
+            "ns-hist-13-charset_normalizer",
+            "ns-hist-14-iniconfig",
+            "ns-hist-15-wheel",
+            "ns-hist-16-jinja"
+          ],
+          "interpretation": "Conditional descriptive percentile intervals on8 convenience-selected families; degeneracy does not establish equality/safety/promotion. No replacement original D/A confirmatory gate.",
+          "quality_B_minus_A": {
+            "degenerate": false,
+            "lower": -0.1875,
+            "upper": 0.0
+          },
+          "resamples": 20000,
+          "robust_B_minus_A": {
+            "degenerate": false,
+            "lower": -0.375,
+            "upper": 0.0
+          },
+          "seed": 20260911
+        },
+        "fixed_cells": 32,
+        "human_semantic_fidelity": null,
+        "independent_families": 8,
+        "isolated_false_admission_estimate": null,
+        "mean_B_minus_A_useful": -0.0625,
+        "nested_repetitions_per_family_arm": 2,
+        "net_cost_grand_total": null,
+        "observed_api_usage": {
+          "completion_tokens": {
+            "known_count": 16,
+            "known_sum": 7125,
+            "maximum": 1133,
+            "mean": 445.3125,
+            "median": 354.0,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 1001.75,
+            "planned_count": 32,
+            "settled_charge": false
+          },
+          "cost_in_usd_ticks": {
+            "known_count": 16,
+            "known_sum": 7304090800,
+            "maximum": 759580400,
+            "mean": 456505675.0,
+            "median": 457755600.0,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 753338000.0,
+            "planned_count": 32,
+            "settled_charge": false
+          },
+          "prompt_tokens": {
+            "known_count": 16,
+            "known_sum": 229853,
+            "maximum": 19637,
+            "mean": 14365.8125,
+            "median": 15113.0,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 19637.0,
+            "planned_count": 32,
+            "settled_charge": false
+          },
+          "total_tokens": {
+            "known_count": 16,
+            "known_sum": 532847,
+            "maximum": 52003,
+            "mean": 33302.9375,
+            "median": 31375.5,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 47691.25,
+            "planned_count": 32,
+            "settled_charge": false
+          }
+        },
+        "outcomes": {
+          "full_cold_pass": 9,
+          "hidden_acceptance_failed": 7,
+          "known_proposal_failure": 2,
+          "proposal_child_deadline": 14
+        },
+        "resource_summaries": {
+          "client_poll_cpu_seconds": {
+            "known_count": 32,
+            "known_sum": 29.299512848,
+            "maximum": 1.8585515839999998,
+            "mean": 0.9156097765,
+            "median": 0.9624936399999999,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 1.7772688792,
+            "planned_count": 32
+          },
+          "client_poll_wall_seconds": {
+            "known_count": 32,
+            "known_sum": 120.0056417172309,
+            "maximum": 7.898218608112074,
+            "mean": 3.7501763036634657,
+            "median": 3.8812886989908293,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 6.423576724494342,
+            "planned_count": 32
+          },
+          "gateway_proposal_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 13488.55892518803,
+            "maximum": 596.7738712399732,
+            "mean": 421.51746641212594,
+            "median": 474.1069081349997,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 596.1627230628743,
+            "planned_count": 32
+          },
+          "gateway_score_elapsed_seconds": {
+            "known_count": 16,
+            "known_sum": 83.39396208082326,
+            "maximum": 11.708531051990576,
+            "mean": 5.212122630051454,
+            "median": 2.500105839979369,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 11.674594187992625,
+            "planned_count": 32
+          },
+          "grant_to_terminal_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 30754.079073,
+            "maximum": 10938.574228,
+            "mean": 961.06497103125,
+            "median": 603.643553,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 1736.166195649999,
+            "planned_count": 32
+          },
+          "http_wrapper_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 13471.243494776194,
+            "maximum": 596.5120502701029,
+            "mean": 420.97635921175606,
+            "median": 473.6595022229594,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 595.6837113510468,
+            "planned_count": 32
+          },
+          "provider_child_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 13439.325202726177,
+            "maximum": 595.0023912630277,
+            "mean": 419.97891258519303,
+            "median": 472.7765865229885,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 595.0007990862883,
+            "planned_count": 32
+          }
+        },
+        "scope": "Descriptive frozen A/B cold comparison; resource clocks are separate and unknown costs remain unknown.",
+        "useful_completions": 9
+      },
+      "evidence_ids": [],
+      "final_disposition": "partially_measured_AB_outcomes_separate_costs_no_false_admission_estimate",
+      "final_evidence": {
+        "NS019_results": {
+          "repository_path": "papers/completion/neurosymbolic_supervision/analysis/results.json",
+          "sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e"
+        },
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "No final estimate supplied here. Require complete actual NS017/NS019 evidence; isolated false-admission and net-cost claims need their own observations.",
+      "original_claim": "A frozen population has a useful-completion rate, net measured cost, uncertainty intervals, and false-admission result.",
+      "original_claim_id": "C-ABS-01",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "deferred_complete32"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "The architecture maintains typed semantic, operational, and durable evidence and specifies routing, checking, sealing, reuse, and evaluation.",
+      "original_claim_id": "C-ABS-02",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Hashes, model confidence, and available solvers do not prove arbitrary Python correct.",
+      "original_claim_id": "C-ABS-03",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Persistent state-and-obligation representation can organize source intent, explicit obligations, proposal routing, evidence reuse, and accepted transitions.",
+      "original_claim_id": "C-01",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Located source is not deployed/qualified closure; use exact historical and final runtime versions separately.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "source_presence_and_distinct_runtime_epochs_not_complete_deployment",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Located source is not deployed/qualified closure; use exact historical and final runtime versions separately.",
+      "original_claim": "The prototype has source-present components but incompletely qualified integration paths, and final claims need an exact loaded multi-repository forest.",
+      "original_claim_id": "C-02",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "source_presence_not_integration"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "A semantic root represents program facts/contracts/dependencies/limits, not task completion, permission, or all-language correctness.",
+      "original_claim_id": "C-T1-SEMANTIC",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Operational task state may record decisions but does not change semantic meaning or establish proof correctness.",
+      "original_claim_id": "C-T1-OPERATIONAL",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Canonical bytes/CAS records do not establish truth, fresh applicability, or authorization merely by persistence.",
+      "original_claim_id": "C-T1-DURABLE",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Source-linked context/selection qualification only; no acceptance decision or final efficacy.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-007"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Source-linked context/selection qualification only; no acceptance decision or final efficacy.",
+      "original_claim": "The semantic index/producer extracts and seals typed source evidence and supplies selection/freshness without deciding acceptance or running tests.",
+      "original_claim_id": "C-03",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Claims have identity, applicability, checker, environment, policy, and provenance dimensions; integrity/evidence/authorization are distinct.",
+      "original_claim_id": "C-04",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Freshness/fallback controls retained; positive production reuse is removed.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007",
+        "NS-011",
+        "NS-027"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-007",
+          "NS-011",
+          "NS-027"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Freshness/fallback controls retained; positive production reuse is removed.",
+      "original_claim": "Exact fresh dependency capsules can support reuse while stale, opaque, or dynamic dependencies expand validation frontier.",
+      "original_claim_id": "C-05",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Abstract interpretation, assume-guarantee, SMT/interpolation, proof search, temporal/deontic views, and ZK attestation each have a limited question and stated qualification obligation.",
+      "original_claim_id": "C-T2",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Cross-domain IR, manifest-bound authorization, revocation/context checks, and receipt consumption are interfaces with separate correctness/authorization gates; inspected rollout is off/shadow.",
+      "original_claim_id": "C-06",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Bounded loss-aware translation, no lifted kernel/source claim.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-009"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-009"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Bounded loss-aware translation, no lifted kernel/source claim.",
+      "original_claim": "Lossy projections cannot establish original temporal/deontic obligations; supported translation and solver outcomes have bounded semantics.",
+      "original_claim_id": "C-07",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Objective compilation and residual plans are admitted only after schema/dependency/scope/resource/acceptance checks; models cannot lower objectives or remove tests.",
+      "original_claim_id": "C-08",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Kernel dispositions and one constructed residual call; zero local hooks is not savings.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-008"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-008"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Kernel dispositions and one constructed residual call; zero local hooks is not savings.",
+      "original_claim": "The kernel can defer, deterministically choose, abstain, or authorize a residual, but neither its boolean nor zero local hooks proves workflow success/savings.",
+      "original_claim_id": "C-09",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "This pack does not qualify complete event/PlanDelta/refill lifecycle. Queue exhaustion and old campaign labels cannot establish completion.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "broader_lifecycle_claim_unestablished",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "This pack does not qualify complete event/PlanDelta/refill lifecycle. Queue exhaustion and old campaign labels cannot establish completion.",
+      "original_claim": "Event invalidation, PlanDelta retention, bounded refill, and reconciliation preserve mandatory obligations; queue exhaustion is not success.",
+      "original_claim_id": "C-10",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "broader_claim_not_established_by_this_pack"
+    },
+    {
+      "allowed_current_wording": "Exact-preimage fenced repair on constructed fixtures, no generic CST/AST relinking.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007",
+        "NS-013"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-007",
+          "NS-013"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Exact-preimage fenced repair on constructed fixtures, no generic CST/AST relinking.",
+      "original_claim": "State-bound repair may use dependency/abstract/contract analyses and a fenced patch-validation path; generic tokenizer-alias and CST/AST editing are separate extensions.",
+      "original_claim_id": "C-11",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Constructed nontruncatable context-core checks; calibrated UTF-8 token estimates are not model-token savings.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-007"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-007"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Constructed nontruncatable context-core checks; calibrated UTF-8 token estimates are not model-token savings.",
+      "original_claim": "Context capsules retain non-truncatable goal/authority/scope/acceptance evidence and bind optional compression/cache reuse to identities.",
+      "original_claim_id": "C-12",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "No retained procedure/learned/refactoring extension.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-015"
+      ],
+      "final_disposition": "withdrawn_unavailable_or_untested_as_declared",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-015"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "No retained procedure/learned/refactoring extension.",
+      "original_claim": "Procedure synthesis, incoming memory, learned candidates, and architecture refactoring are bounded/non-authoritative and require applicability, holdouts, validation, rollback, and consumed evidence.",
+      "original_claim_id": "C-13",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "withdrawn_or_unavailable"
+    },
+    {
+      "allowed_current_wording": "Native proof profile unavailable; no proving/verification or pytest attestation result.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-014"
+      ],
+      "final_disposition": "withdrawn_unavailable_or_untested_as_declared",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-014"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Native proof profile unavailable; no proving/verification or pytest attestation result.",
+      "original_claim": "Certificates have bounded statements and trust profiles; Groth16 source presence/opt-in wrapper and restricted derivation do not establish test execution, a qualified circuit, ceremony, or timing.",
+      "original_claim_id": "C-14",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "withdrawn_or_unavailable"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Membership, signed observation, formal proof, aggregation, and direct execution each establish only their named relation with remaining assumptions.",
+      "original_claim_id": "C-T3",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Preserve 1/26 historical false reuse; corrected admitted behavior is full cold, not reusable proof.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-011",
+        "NS-027"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-011",
+          "NS-027"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Preserve 1/26 historical false reuse; corrected admitted behavior is full cold, not reusable proof.",
+      "original_claim": "Fixture/call/teardown reuse needs complete lifecycle identity and a dependency projection; opaque closure or teardown failure forces execution.",
+      "original_claim_id": "C-15",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Local constructed completeness/CAS/recovery with labeled shims only.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-012",
+        "NS-013"
+      ],
+      "final_disposition": "retained_historical_constructed_qualification_only",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-012",
+          "NS-013"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Local constructed completeness/CAS/recovery with labeled shims only.",
+      "original_claim": "Complete manifests, parent-bound delta seals, persistence, CAS, and parallel preparation require completeness/recovery checks and do not provide global consensus.",
+      "original_claim_id": "C-16",
+      "original_decision_historical": "evidence_required",
+      "preparation_disposition": "bounded_component_qualification"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "The acceptance invariant is a conditional design invariant, not proof that current code universally enforces it or exactly-once side effects.",
+      "original_claim_id": "C-17",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "No required world/procedure pre/post consumption witness.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [
+        "NS-015"
+      ],
+      "final_disposition": "withdrawn_unavailable_or_untested_as_declared",
+      "final_evidence": {
+        "historical_evidence_ids": [
+          "NS-015"
+        ],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "No required world/procedure pre/post consumption witness.",
+      "original_claim": "Multi-agent/world roots and required-mode state consumption are an extension requiring transactional authority and observed consumption.",
+      "original_claim_id": "C-18",
+      "original_decision_historical": "narrow_or_remove",
+      "preparation_disposition": "withdrawn_or_unavailable"
+    },
+    {
+      "allowed_current_wording": "Report the root-reviewed frozen eight-family A/B cold32 outcomes and conditional descriptive interval from NS019. The two repetitions are nested identifiers, not independent families or served-API seed claims. Separate measured clock/usage scopes do not establish net settled cost; isolated false-admission, human fidelity, C/D, warm/reuse/publication benefits and the original confirmatory comparisons remain unmeasured or withdrawn.",
+      "empirical_final_outcome": {
+        "arm_useful_fixed16": {
+          "A": {
+            "planned": 16,
+            "useful": 5
+          },
+          "B": {
+            "planned": 16,
+            "useful": 4
+          }
+        },
+        "bootstrap": {
+          "cost_B_minus_A": {
+            "client_poll_cpu_seconds": {
+              "degenerate": false,
+              "lower": -0.11307373400000006,
+              "upper": -0.006393456000000061
+            },
+            "client_poll_wall_seconds": {
+              "degenerate": false,
+              "lower": -0.18834614723054982,
+              "upper": 0.6285356203006813
+            },
+            "gateway_proposal_elapsed_seconds": {
+              "degenerate": false,
+              "lower": -43.00590978117834,
+              "upper": 88.88643335063534
+            },
+            "grant_to_terminal_elapsed_seconds": {
+              "degenerate": false,
+              "lower": 18.977067750000018,
+              "upper": 1959.5105419828117
+            },
+            "http_wrapper_elapsed_seconds": {
+              "degenerate": false,
+              "lower": -42.887481293293966,
+              "upper": 88.91944541770499
+            },
+            "provider_child_elapsed_seconds": {
+              "degenerate": false,
+              "lower": -42.80496710547486,
+              "upper": 88.80292585586992
+            }
+          },
+          "cost_interval_unavailable": {
+            "gateway_score_elapsed_seconds": "One or more original family blocks lacks both repetitions for both arms; no zero imputation or reduced-block bootstrap."
+          },
+          "draw_bytes_sha256": "32f62bd020d4b9f69eb792e1f689457038718089b4519890bc2a3e6df1160b03",
+          "draws_per_resample": 8,
+          "family_order": [
+            "ns-hist-09-tomlkit",
+            "ns-hist-10-installer",
+            "ns-hist-11-tornado",
+            "ns-hist-12-more-itertools",
+            "ns-hist-13-charset_normalizer",
+            "ns-hist-14-iniconfig",
+            "ns-hist-15-wheel",
+            "ns-hist-16-jinja"
+          ],
+          "interpretation": "Conditional descriptive percentile intervals on8 convenience-selected families; degeneracy does not establish equality/safety/promotion. No replacement original D/A confirmatory gate.",
+          "quality_B_minus_A": {
+            "degenerate": false,
+            "lower": -0.1875,
+            "upper": 0.0
+          },
+          "resamples": 20000,
+          "robust_B_minus_A": {
+            "degenerate": false,
+            "lower": -0.375,
+            "upper": 0.0
+          },
+          "seed": 20260911
+        },
+        "fixed_cells": 32,
+        "human_semantic_fidelity": null,
+        "independent_families": 8,
+        "isolated_false_admission_estimate": null,
+        "mean_B_minus_A_useful": -0.0625,
+        "nested_repetitions_per_family_arm": 2,
+        "net_cost_grand_total": null,
+        "observed_api_usage": {
+          "completion_tokens": {
+            "known_count": 16,
+            "known_sum": 7125,
+            "maximum": 1133,
+            "mean": 445.3125,
+            "median": 354.0,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 1001.75,
+            "planned_count": 32,
+            "settled_charge": false
+          },
+          "cost_in_usd_ticks": {
+            "known_count": 16,
+            "known_sum": 7304090800,
+            "maximum": 759580400,
+            "mean": 456505675.0,
+            "median": 457755600.0,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 753338000.0,
+            "planned_count": 32,
+            "settled_charge": false
+          },
+          "prompt_tokens": {
+            "known_count": 16,
+            "known_sum": 229853,
+            "maximum": 19637,
+            "mean": 14365.8125,
+            "median": 15113.0,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 19637.0,
+            "planned_count": 32,
+            "settled_charge": false
+          },
+          "total_tokens": {
+            "known_count": 16,
+            "known_sum": 532847,
+            "maximum": 52003,
+            "mean": 33302.9375,
+            "median": 31375.5,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 47691.25,
+            "planned_count": 32,
+            "settled_charge": false
+          }
+        },
+        "outcomes": {
+          "full_cold_pass": 9,
+          "hidden_acceptance_failed": 7,
+          "known_proposal_failure": 2,
+          "proposal_child_deadline": 14
+        },
+        "resource_summaries": {
+          "client_poll_cpu_seconds": {
+            "known_count": 32,
+            "known_sum": 29.299512848,
+            "maximum": 1.8585515839999998,
+            "mean": 0.9156097765,
+            "median": 0.9624936399999999,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 1.7772688792,
+            "planned_count": 32
+          },
+          "client_poll_wall_seconds": {
+            "known_count": 32,
+            "known_sum": 120.0056417172309,
+            "maximum": 7.898218608112074,
+            "mean": 3.7501763036634657,
+            "median": 3.8812886989908293,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 6.423576724494342,
+            "planned_count": 32
+          },
+          "gateway_proposal_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 13488.55892518803,
+            "maximum": 596.7738712399732,
+            "mean": 421.51746641212594,
+            "median": 474.1069081349997,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 596.1627230628743,
+            "planned_count": 32
+          },
+          "gateway_score_elapsed_seconds": {
+            "known_count": 16,
+            "known_sum": 83.39396208082326,
+            "maximum": 11.708531051990576,
+            "mean": 5.212122630051454,
+            "median": 2.500105839979369,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 16,
+            "p95": 11.674594187992625,
+            "planned_count": 32
+          },
+          "grant_to_terminal_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 30754.079073,
+            "maximum": 10938.574228,
+            "mean": 961.06497103125,
+            "median": 603.643553,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 1736.166195649999,
+            "planned_count": 32
+          },
+          "http_wrapper_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 13471.243494776194,
+            "maximum": 596.5120502701029,
+            "mean": 420.97635921175606,
+            "median": 473.6595022229594,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 595.6837113510468,
+            "planned_count": 32
+          },
+          "provider_child_elapsed_seconds": {
+            "known_count": 32,
+            "known_sum": 13439.325202726177,
+            "maximum": 595.0023912630277,
+            "mean": 419.97891258519303,
+            "median": 472.7765865229885,
+            "missing_is_zero": false,
+            "missing_or_invalid_count": 0,
+            "p95": 595.0007990862883,
+            "planned_count": 32
+          }
+        },
+        "scope": "Descriptive frozen A/B cold comparison; resource clocks are separate and unknown costs remain unknown.",
+        "useful_completions": 9
+      },
+      "evidence_ids": [],
+      "final_disposition": "original_design_superseded_bounded_actual_AB_cold_comparison",
+      "final_evidence": {
+        "NS019_results": {
+          "repository_path": "papers/completion/neurosymbolic_supervision/analysis/results.json",
+          "sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e"
+        },
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Only eight-family A/B cold32 retained; original192/removed160/eight unrecruited remain explicit. C/D, warm, isolated ablations and original confirmatory inference are withdrawn.",
+      "original_claim": "A-D matched comparisons, isolated ablations, hidden independent oracles, full terminal denominators, direct resource measurement, and preregistered thresholds are required for an efficacy conclusion.",
+      "original_claim_id": "C-19",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "original_design_superseded_by_frozen32"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Each context/routing/repair/reuse/sealing comparison pairs safety with useful-progress outcomes; deny-all is not a competitive baseline.",
+      "original_claim_id": "C-T4",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    },
+    {
+      "allowed_current_wording": "Preserve historical estimate/source label privately; do not present old checked-in arithmetic as final model/prover or measured performance evidence.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "historical_estimate_excluded_from_current_measured_results",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Preserve historical estimate/source label privately; do not present old checked-in arithmetic as final model/prover or measured performance evidence.",
+      "original_claim": "A checked-in 40-task report has 58.90% median estimated context reduction and no model receipts.",
+      "original_claim_id": "C-T5-CONTEXT",
+      "original_decision_historical": "preliminary_report",
+      "preparation_disposition": "legacy_preliminary_only_not_current_measurement"
+    },
+    {
+      "allowed_current_wording": "Preserve historical estimate/source label privately; do not present old checked-in arithmetic as final model/prover or measured performance evidence.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "historical_estimate_excluded_from_current_measured_results",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Preserve historical estimate/source label privately; do not present old checked-in arithmetic as final model/prover or measured performance evidence.",
+      "original_claim": "A checked-in 40-transition summary reports 43.6161% reuse and 43.0539% estimated compute reduction, with no measured timing/GPU proof.",
+      "original_claim_id": "C-T5-SEALER",
+      "original_decision_historical": "preliminary_report",
+      "preparation_disposition": "legacy_preliminary_only_not_current_measurement"
+    },
+    {
+      "allowed_current_wording": "Located source is not deployed/qualified closure; use exact historical and final runtime versions separately.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "source_presence_and_distinct_runtime_epochs_not_complete_deployment",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Located source is not deployed/qualified closure; use exact historical and final runtime versions separately.",
+      "original_claim": "Source inspection locates typed-state/routing/formalization/synthesis/storage surfaces but not a fully integrated deployment or runtime qualification.",
+      "original_claim_id": "C-T5-SOURCE",
+      "original_decision_historical": "supported_now",
+      "preparation_disposition": "source_presence_not_integration"
+    },
+    {
+      "allowed_current_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "empirical_final_outcome": null,
+      "evidence_ids": [],
+      "final_disposition": "conditional_design_not_empirically_established",
+      "final_evidence": {
+        "historical_evidence_ids": [],
+        "historical_source_evidence_sha256": "2d2edeede2454e431cfd5fec227c9189f09ae14eee8e142f49821e6e53bd2b25"
+      },
+      "historical_allowed_wording": "Retain as bounded design/assumption only; this preparation does not establish a complete deployed implementation or empirical benefit.",
+      "original_claim": "Loaded forest binding, conditional claims, established-method attribution, protected acceptance authority, independent holdouts, accurate model-use disclosure, and paired evaluation delimit the contribution.",
+      "original_claim_id": "C-20",
+      "original_decision_historical": "conditional_design",
+      "preparation_disposition": "conditional_design_only"
+    }
+  ],
+  "current_scope": {
+    "bytes": 1681,
+    "custody": "current_repository",
+    "path": "papers/completion/neurosymbolic_supervision/protocol/final32_adoption_scope.json",
+    "sha256": "37e089bd8fde93868389158eaa3c01983cd0382d481a2dc548b2d27eba58ea74"
+  },
+  "external_human_review_required": false,
+  "final_scientific_results_deferred": false,
+  "human_fidelity_measured": false,
+  "narrow_final_boundary_observations": [
+    {
+      "actual_ordered_cell_count": 32,
+      "boundary_witness_file": "../analysis/boundary_witnesses.json",
+      "claim": "Actual original-order provider outcomes and missingness are retained. One-call limits and observed POST counts do not prove production routing efficacy.",
+      "id": "F-HTTP",
+      "scientific_success_inferred_from_controls": false
+    },
+    {
+      "actual_ordered_cell_count": 32,
+      "boundary_witness_file": "../analysis/boundary_witnesses.json",
+      "claim": "Exact signed candidate identities, retained AI review metadata and separately disclosed reconstructed zero-change metadata are joined. No human semantic fidelity or comprehensive malicious-candidate guarantee is inferred.",
+      "id": "F-custody",
+      "scientific_success_inferred_from_controls": false
+    },
+    {
+      "actual_ordered_cell_count": 32,
+      "boundary_witness_file": "../analysis/boundary_witnesses.json",
+      "claim": "Original signed cold-score/failure evidence is joined to the existing useful-completion policy; incomplete validation, hidden assertion outcomes and missing scoring remain distinct.",
+      "id": "F-score",
+      "scientific_success_inferred_from_controls": false
+    },
+    {
+      "actual_ordered_cell_count": 32,
+      "boundary_witness_file": "../analysis/boundary_witnesses.json",
+      "claim": "Original and successor source epochs, measured compliance, termination and separate clocks are retained. This replay establishes neither current lease liveness nor exclusive physical capacity.",
+      "id": "F-lease",
+      "scientific_success_inferred_from_controls": false
+    },
+    {
+      "actual_ordered_cell_count": 32,
+      "boundary_witness_file": "../analysis/boundary_witnesses.json",
+      "claim": "All 32 terminal cells remain in original order and denominator; consumed failures retain no credit, no retry and unknown charges, with additive operational disclosures.",
+      "id": "F-failure",
+      "scientific_success_inferred_from_controls": false
+    }
+  ],
+  "original_claim_count": 32,
+  "original_claim_ids_preserved": [
+    "C-ABS-01",
+    "C-ABS-02",
+    "C-ABS-03",
+    "C-01",
+    "C-02",
+    "C-T1-SEMANTIC",
+    "C-T1-OPERATIONAL",
+    "C-T1-DURABLE",
+    "C-03",
+    "C-04",
+    "C-05",
+    "C-T2",
+    "C-06",
+    "C-07",
+    "C-08",
+    "C-09",
+    "C-10",
+    "C-11",
+    "C-12",
+    "C-13",
+    "C-14",
+    "C-T3",
+    "C-15",
+    "C-16",
+    "C-17",
+    "C-18",
+    "C-19",
+    "C-T4",
+    "C-T5-CONTEXT",
+    "C-T5-SEALER",
+    "C-T5-SOURCE",
+    "C-20"
+  ],
+  "original_scope_cannot_override_current_frozen32": true,
+  "outside_reviewers_are_not_completion_gate": true,
+  "preparation_only": false,
+  "resolution_means": "Every original claim has an explicit retained/narrowed/conditional/withdrawn disposition; it does not mean every original claim was proved.",
+  "schema": "ns020-complete32-final-claim-evidence-matrix/v1",
+  "source_evidence_file": "../writing_inputs/ns020_boundary_preparation_v2/source_evidence.json"
+}

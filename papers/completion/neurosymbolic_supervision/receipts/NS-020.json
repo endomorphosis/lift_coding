@@ -1,0 +1,168 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-020",
+  "status": "complete",
+  "template_only": false,
+  "completed_at": "2026-09-13T13:48:44.659492+00:00",
+  "scope": "Ordinary current-source reconciliation of the already root-frozen 32-cell A/B local-cold comparison. After NS-019 adopted the qualified identical-label correction, this completion applies only the reconcile_boundaries.py RENDERER_SHA256 rebind to 16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251 and regenerates Table 18, the five final boundary joins, the 32-claim matrix, and the failure report from immutable NS-017/NS-019 records. The committed boundary_witnesses.json is a compact SHA256-pointer recipe of those 32-cell joins; it does not re-emit full retained envelopes. It does not issue grants, run models, scorers, contexts, experiments, retries, or resource-lease actions, and it does not change frozen outcomes, claim identities, or historical Table 18 rows.",
+  "source_versions": {
+    "analyzer_source_sha256": "16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251",
+    "ns019_results_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "reconcile_boundaries_current_source_sha256": "e58609d5123df6d959ba2d9a70c01dd2b4c3e715d46d5137de8b10919cbc4b14",
+    "reconcile_boundaries_rebind_sha256": "780d9417ff88d4178b185a6d8a9281b0d0d44cb00ac3e8d58af5bbfdbd0b7bae",
+    "renderer_sha256": "16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251",
+    "analysis_policy_sha256": "a0edbc1cdf13f1d5aab4170dd60fcb3a3b2ef26d192f6dbbdce9b6a26ff700d3",
+    "actual32_bundle_sha256": "f8488d8e69f097a8332ec6ae41aded6b260e5ad8df90531bd539d6f9e85b4f46",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "native_accelerate": "60baee769d39a53c52142c56fbf6ed7483773aa3",
+    "native_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+    "native_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "ns017_manifest_sha256": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+    "ns018_ablation_manifest_sha256": "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024",
+    "python": "Python 3.12.3",
+    "reducer_source_sha256": "ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94",
+    "strict_complete32_analysis_sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766",
+    "boundary_witnesses_sha256": "dfe49703613e3a2d19eff8cbf85c608ea25f1b1360477be5ef510e752141f6c0",
+    "table18_sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+    "final_claim_evidence_matrix_sha256": "2c2528f5fbed0d784c9cb09509f1979e12ad06107610804757ae8b96b8aa15b7",
+    "failure_cases_sha256": "eb580e020477267a7cd2ca23e67a66280f14237cf7d68e64f7c69afd4aedbe48"
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/reconcile.log": "ce696eb559499bc8ccc36ce59ef5f88447f1bef218179e78d8844b16cf86de33",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.log": "050bbf9df9b8bd99bc1c2c4492b188b10e672be52636d5eab68ba0d2ffc70780",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.py": "54c7a3155a8e7b0b870d18b16d86d1bdf2d2c78994c5fda694eeab19f9022fef",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconcile_boundaries.py": "780d9417ff88d4178b185a6d8a9281b0d0d44cb00ac3e8d58af5bbfdbd0b7bae",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/boundary_witnesses.json": "dfe49703613e3a2d19eff8cbf85c608ea25f1b1360477be5ef510e752141f6c0",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/failure_cases.md": "eb580e020477267a7cd2ca23e67a66280f14237cf7d68e64f7c69afd4aedbe48",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/audit/final_claim_evidence_matrix.json": "2c2528f5fbed0d784c9cb09509f1979e12ad06107610804757ae8b96b8aa15b7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/manuscript/generated/table18.tex": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/source.patch": "ccc6dd28a82455228780355b63a0812e911833730ad8df94e7bbcadd3ec3254d"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/analysis/boundary_witnesses.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/boundary_witnesses.json",
+    "papers/completion/neurosymbolic_supervision/manuscript/generated/table18.tex": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/manuscript/generated/table18.tex",
+    "papers/completion/neurosymbolic_supervision/audit/final_claim_evidence_matrix.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/audit/final_claim_evidence_matrix.json",
+    "papers/completion/neurosymbolic_supervision/analysis/failure_cases.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/failure_cases.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Every Table 18 cell has an evidence-backed outcome/ID or explicit untested/unavailable scope; no TBD or synthetic proof of progress remains.",
+      "status": "met",
+      "explanation": "The historical six-row Table 18 is byte-identical to the pinned preparation table (SHA256 3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495). All 18 cells have either observed case IDs (provider, translation, reuse, restart) or explicit untested/unavailable scope (native proof NS-014; world/procedure NS-015). Ordinary validation found no TBD or TO BE FILLED in those cells. Five final joins each contain the original-order 32 terminal cells from NS-017 manifest 0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac, with useful completions 9/32 and outcomes 9 full_cold_pass, 7 hidden_acceptance_failed, 14 proposal_child_deadline, and 2 known_proposal_failure. The compact witness maps those 32 cells by SHA256 to retained signed receipts, candidate metadata, cold-score fields, lease/time clocks and failure accounting without re-emitting full envelopes. No synthetic progress, retry, or new provider/scorer/native call was issued (scientific_calls=0).",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/manuscript/generated/table18.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/boundary_witnesses.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/reconcile.log"
+      ]
+    },
+    {
+      "criterion": "All retained claims point to code/runtime/population and reproducible measured artifacts.",
+      "status": "met",
+      "explanation": "All 32 original claim IDs and claim texts remain exact. Only C-ABS-01 and C-19 receive the copied NS-019 descriptive eight-family A/B cold32 summary (fixed_cells=32, independent_families=8, nested repetitions 104729/130363, useful 9/32, mean B-minus-A -0.0625). Isolated false-admission, net settled cost, and human semantic fidelity remain null. The other 30 claims keep narrowed/conditional/withdrawn dispositions without fabricated final outcomes. Final joins bind signed receipts, candidate metadata, cold-score fields, lease/time clocks, and failure accounting to retained NS-017 objects and NS-019 results 6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e via compact SHA256 pointers. The executed helper differs from current-source reconcile_boundaries.py only by the RENDERER_SHA256 rebind onto analyzer 16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/audit/final_claim_evidence_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/boundary_witnesses.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/source.patch",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.log"
+      ]
+    },
+    {
+      "criterion": "False-admission, false-reuse, inability to dispatch, and recovery failures remain visible and trigger narrowed conclusions where required.",
+      "status": "met",
+      "explanation": "The failure report retains all 32 original-order terminals, including 14 child-deadline overruns, 7 hidden-acceptance failures, and 2 known proposal failures. Historical false reuse remains 1 of all 26 attempts; NS-027 keeps 48 attempted cases and 47 completed rows with two 34-test public baselines and no reuse credit. The thin provider-gate helper still omitted required views. Incomplete hidden collection on cell 5 stays an import/collection failure, not an observed hidden assertion or proved infrastructure fault. Additive disclosures preserve reconstructed zero-change candidate metadata, lease interruption, authentication headroom shortfall, and administrative recovery clocks without changing signed outcomes or authorizing retries. Isolated false-admission remains unestimated.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/failure_cases.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/manuscript/generated/table18.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/boundary_witnesses.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.log"
+      ]
+    },
+    {
+      "criterion": "Author-only plans and old campaign success labels cannot override current evidence.",
+      "status": "met",
+      "explanation": "C/D routing, warm caches, reuse, publication-comparison efficacy, and original 16-family inferential objectives remain withdrawn. Native proof and world/procedure rows stay untested/unavailable. Constructed controls are not treated as historical repairs or final efficacy. scientific_success_inferred_from_controls is false on all five joins. Human annotation is false; outside reviewers are not a completion gate; publication_authorized is false. Source commitments and private-path digest records are provenance, not reopened bodies or semantic proofs. The renderer rebind does not change frozen outcomes, original192/160 withdrawal lineage, eight unrecruited families, or any signed result.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/audit/final_claim_evidence_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/boundary_witnesses.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconciled_final32/analysis/failure_cases.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns020-reconcile-c3f91a0b",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns020-reconcile-c3f91a0b/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns020-reconcile-c3f91a0b/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns020-reconcile-c3f91a0b/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns020-reconcile-c3f91a0b/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "TMPDIR=/tmp",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconcile_boundaries.py",
+        "--repository",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-020-40bac41a640e-attempt-1-1789305809",
+        "--manifest-sha256",
+        "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+        "--ablation-manifest-sha256",
+        "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+        "--results-sha256",
+        "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+        "--output",
+        "/tmp/ipfs-accelerate-ns020-reconciled-final32-c3f91a0b"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 0.6665225509786978,
+      "execution_kind": "sealed-profile current-source reconciliation of the frozen 32-cell A/B local-cold comparison after the NS-019 identical-label renderer rebind; no provider, scorer, grant, lease, or experiment rerun",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:28:27.560398+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/reconcile.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/reconcile_boundaries.py",
+      "started_at": "2026-09-13T13:28:26.893866+00:00"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns020-verify-dfe49703",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns020-verify-dfe49703/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns020-verify-dfe49703/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns020-verify-dfe49703/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns020-verify-dfe49703/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.py"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 0.09091022098436952,
+      "execution_kind": "sealed-profile ordinary hash, identity, compact-recipe, and count check of current-source NS-020 outputs against frozen NS-017/NS-019 identities, historical Table 18 bytes, 32 claim texts, and the renderer rebind; no provider, scorer, grant, lease, or experiment rerun",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T13:48:25.137764+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/adoption_validation/verify_reconciliation.py",
+      "started_at": "2026-09-13T13:48:25.046727+00:00"
+    }
+  ],
+  "limitations": [
+    "Committed boundary_witnesses.json is a compact SHA256-pointer recipe of the 32 original-order terminals. It does not re-emit full retained envelopes or private original host paths. Full bodies remain in NS-017 retained objects and NS-019 results; the snapshot helper is the generator, not a second experiment.",
+    "This completion reconciles already admitted NS-017/NS-019 evidence. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+    "The 32 nested cells are eight families with two nested repetitions, not 32 independent repositories or a sixteen-family sample. Original D/A promotion, noninferiority, superiority, and 16-family inferential objectives remain withdrawn.",
+    "C/D routing, warm caches, reuse, publication-comparison efficacy, native proof, world/procedure consumption, and human semantic fidelity remain withdrawn, untested, or unmeasured.",
+    "Constructed native and service controls remain structural or metadata qualifications. They are not historical repairs, final efficacy measurements, or exclusive physical-capacity proofs.",
+    "Private-original digest commitments are provenance. This helper does not reopen candidate code, hidden oracles, grant/cleanup bodies, or author-host paths.",
+    "Reconstructed zero-change candidate metadata is labeled separately and does not establish that an original candidate-binding file existed after a failed proposal.",
+    "Unknown provider charges, missing scorer clocks, and missing operator phases stay unavailable rather than zero. Nested clocks are not summed as elapsed. Isolated false-admission remains unestimated.",
+    "The current-source reconcile_boundaries.py pin is unchanged except in the executed snapshot rebind. No other reconciliation logic was modified.",
+    "Outside human review is not required; this receipt is provenance validation, not independent scientific peer review or authorization to submit."
+  ]
+}
