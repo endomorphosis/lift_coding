@@ -1,0 +1,107 @@
+{
+  "committed_final_output": {
+    "bytes": 519352,
+    "commit": "473407cb75afd8c641ea78aaed88186234960c8c",
+    "path": "papers/completion/neurosymbolic_supervision/analysis/boundary_witnesses.json",
+    "repository": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+    "sha256": "dfe49703613e3a2d19eff8cbf85c608ea25f1b1360477be5ef510e752141f6c0"
+  },
+  "exact_data_scope": "Six historical rows,32 claim IDs/texts,five original-order32 joins and all retained scalar/pointer values match earlier root envelopes; table18/failure text byte-identical. Null padding and pointer/count flattening are explicit representation changes, not scientific values.",
+  "generator_attribution_correction": "Unchanged compact output envelope_recipe.generator_snapshot names780d as the original full-envelope producer only. Actual compact derivative source is the ordered stage01/stage02 source pair retained here. The output pointer remains immutable historical metadata, not a claim that780d itself emits the finalcompact bytes.",
+  "independent_saved_metadata_comparison": {
+    "bytes": 14158,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/independent_NS020_committed_review_v1/comparison.private.json",
+    "sha256": "0781e2b647bc2dd8bec3ac5233003c5bd40eee9ed5d778eeea637556858b0a6e"
+  },
+  "intermediate_output": {
+    "bytes": 773477,
+    "sha256": "1dbf0fe62a41ffba21723c8643eae107d482ac03be31f4f4ce094901a5ec8804",
+    "source": "stage01 actual stdout; intermediate bytes not claimed retained here"
+  },
+  "new_scientific_or_derivative_replays": 0,
+  "origin": "Two separately extracted verbatim Python stdin sources from actual ordinary-worker shell calls. These files were not claimed to exist at original execution. Neither source was replayed.",
+  "original_recorded_commands": "The original780d reconciliation command/log and54c7 final verifier command/log remain intact. The final verifier checks the actual compact output; it does not generate it. These new tool records supplement, not replace or backdate, those commands.",
+  "prepared_at": "2026-09-13T14:12:34.025836+00:00",
+  "public_body_scope": "Private-original hash commitments remain commitments, not claims of retained/reopened full bodies. Candidate reconstruction provenance and incomplete hidden validation caveats remain in unchanged failure report.",
+  "retained_prior_attempts": {
+    "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/prior_attempts.json",
+    "sha256": "26ab729c25798670cd84b00cebecf287b947364c45fafe5a71736f64ba7ff9fd"
+  },
+  "schema": "ns020-compact-witness-actual-derivative-provenance/v1",
+  "successful_derivation_stages": [
+    {
+      "OS_argv": null,
+      "call_line": 3199,
+      "call_line_sha256": "83cff19d743a9b597c1c745dea6f3e0e3699487efc6813e8ad4d7ecdb9cee9cf",
+      "current_dir": null,
+      "elapsed_seconds": null,
+      "exit_code": 0,
+      "extracted_source": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage01_compact.py",
+        "sha256": "3acf64296293c228fbd6afdd198a7969e09a24af445a5673d2f7b535cd279ece"
+      },
+      "finished_at": null,
+      "first_write_source_line": 233,
+      "result_line": 3203,
+      "result_line_sha256": "c6f6804994d00a35f96a7e51f6d2bc59dfb4daafc5cc1659db2e2a4ea3230455",
+      "signal": null,
+      "started_at": null,
+      "stdout": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage01_compact.stdout.log",
+        "sha256": "8b801136745d4227589d3d5dd2f57188cdd00954d5c52d96e1efa2301c9554c4"
+      },
+      "timed_out": false,
+      "timing_scope": "Original tool event does not supply OS argv or per-command clocks; none inferred from mtime/event order.",
+      "tool_call": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage01_compact.call.json",
+        "sha256": "600148a57b29bb711d5519134a9791bb1db9937e7540204e57dbd7c35db9571e"
+      },
+      "tool_call_id": "call-a61d9f99-714a-47f4-a7a8-019ef741abaa-54",
+      "tool_result": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage01_compact.result.json",
+        "sha256": "e05f9664b5ef3b8f7cf47618ff65be6bb1269c6bc183b0806f42c43c3b3149b2"
+      },
+      "truncated": false
+    },
+    {
+      "OS_argv": null,
+      "call_line": 3534,
+      "call_line_sha256": "7ace2b59b821d332a1ce7e0533faa825b03bd573994a8582123f0af5931ceb11",
+      "current_dir": null,
+      "elapsed_seconds": null,
+      "exit_code": 0,
+      "extracted_source": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage02_slim.py",
+        "sha256": "354f130e3814245f2385fa98c8932842c5d5fd64326d7a7b29a9948cd9c15818"
+      },
+      "finished_at": null,
+      "first_write_source_line": 75,
+      "result_line": 3538,
+      "result_line_sha256": "e64c7cdcca83491a82eaf55cdd6ad6d76ce7323d4428a74a3fb8eb29664b3e86",
+      "signal": null,
+      "started_at": null,
+      "stdout": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage02_slim.stdout.log",
+        "sha256": "7865612aec5d0a1362da4dbf21fdca5bc4c0678c2bfaec2b3078631ee8ed07fa"
+      },
+      "timed_out": false,
+      "timing_scope": "Original tool event does not supply OS argv or per-command clocks; none inferred from mtime/event order.",
+      "tool_call": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage02_slim.call.json",
+        "sha256": "a52c9e74348be91fc8f08a865d58f115c752475ae641505a9906e6c26e3f0502"
+      },
+      "tool_call_id": "call-c76c1706-3a16-4bb9-be73-f776f62d9fe9-64",
+      "tool_result": {
+        "path": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-020/compact_derivative_provenance_v1/stage02_slim.result.json",
+        "sha256": "740e8aae2450d86114d639e390ad3a73fec484f18f0c6add48b8bb84ab870161"
+      },
+      "truncated": false
+    }
+  ],
+  "worker_log": {
+    "bytes": 3970882,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_database_portal_attempts/556b838629db09242ac7c175/implementation-logs/ns-020-attempt-1.log",
+    "scope": "Only exact four compaction calls and their matching terminal results retained; no general worker log/environment/credential/scorer or hidden body copied.",
+    "sha256": "a6482d41947d420d2376f46452fb2277dc0c7ac377e03f3cdc6c164fd8590830"
+  }
+}
