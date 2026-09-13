@@ -1,0 +1,12 @@
+--- papers/completion/neurosymbolic_supervision/analysis/reconcile_boundaries.py
++++ papers/completion/neurosymbolic_supervision/analysis/reconcile_boundaries.py
+@@ -12,7 +12,7 @@ import os
+ from pathlib import Path
+ 
+ P = Path('papers/completion/neurosymbolic_supervision')
+ PREPARATION = P / 'writing_inputs/ns020_boundary_preparation_v2'
+-RENDERER_SHA256 = '1aa277d0539216b7071ec81ba8f6b6b44acbb0dece9c00894d4b4b8c8d031363'
++RENDERER_SHA256 = '16da76bbe3fe032cde70599790ad8ad1e52d9eb1baf4ea799cf4856d23410251'
+ PREPARATION_SHA256 = {
+     'README.md': 'ded611c18a7a04caf8a6edc5548b758b0dc279c2ce4f8986cd0d14b05a0d6053',
+     'boundary_witnesses.json': 'd4c402839086e2eb6b089a58ccfe775947caa7cfcb3f9647e19c621dfa83ad90',
