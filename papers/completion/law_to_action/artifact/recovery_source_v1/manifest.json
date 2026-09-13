@@ -1,0 +1,33 @@
+{
+  "all_original_reducer_bindings_included": 9933,
+  "analysis_functions_origin": {
+    "execution_scope": "Only stdlib analysis functions copied; historical reducer/controller modules are never imported.",
+    "functions": [
+      "ratio",
+      "metrics",
+      "summarize"
+    ],
+    "original_reducer_sha256": "1826005e94cb80ce9aafbbd182746fde26a21b89e325854414115eff701f536a",
+    "verbatim_function_source_sha256": "a48d88e46c08f7920693c2ba07512867c5ebb95a25cd75b6632b62a362838ee5"
+  },
+  "archive": "evidence.zip",
+  "bytes": 30925812,
+  "companion_files": {
+    "README.md": "8dcd85d2284ee67f51290c889d63ac34f6adfac8787e5057a6fe305510598ff2",
+    "licenses/ipfs_accelerate.LICENSE": "6f1e622c82a380075843bb084a7ec3b1f1d12a4a02526d75e78b0924a860aa75",
+    "licenses/ipfs_datasets.LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+    "licenses/ipfs_kit.LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+    "licenses/repository.LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+  },
+  "expanded_bytes": 198373746,
+  "host_attempts": 902,
+  "members": 9976,
+  "original_inputs_rewritten": false,
+  "portable_index_sha256": "11fbb987f90130aa40f842b5c2addcf1c7c7aa49d571ac74acead4f7be043078",
+  "reproduce_sha256": "16ffdeb0ef00989c9bd258912b81c27c352782d6dade52dc11a5970a18e98d47",
+  "schema": "la029-portable-recovery-archive/v1",
+  "scientific_rows": 900,
+  "scope": "Bounded offline evidence verification and analysis; not a new benchmark execution.",
+  "sha256": "5456553d86dd7397ce4bd6b090ab02614da9721160974a8a4bb5b6e074d3e58d",
+  "source_lineage_sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+}

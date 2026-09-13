@@ -1,0 +1,385 @@
+{
+  "schema": "law-to-action-claim-evidence-matrix/v2",
+  "updated_at": "2026-09-13T12:00:00Z",
+  "updated_by": "LA-022",
+  "purpose": "Link every manuscript claim in the LA-022 draft to exact experiments or clearly marked nonempirical implementation evidence. Historical LA-002 inspection pins remain provenance; they are not substituted for admitted run records.",
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "independent_human_gold": false,
+  "optional_author_review": {
+    "required_for_manuscript_generation": false,
+    "independent": false,
+    "label": "non-independent; not annotation, expert validation, agreement evidence, or a run dependency"
+  },
+  "withdrawn_unmeasured_claims": [
+    "expert legal source-to-IR fidelity",
+    "human agreement / inter-annotator agreement",
+    "legal validity in the world",
+    "closed-loop generated-code planning and recovery (protocol RQ3)",
+    "trained skill normalizer or semantic encoder performance",
+    "QF_LIA interpolation and interactive kernel theorems",
+    "universal prevention or complete mediation beyond the selected ENFORCE sandbox route",
+    "release-wide corpus coverage"
+  ],
+  "labeling_rules": {
+    "LA-009_18_of_18": "shared-producer conformance; the repeated Intent IR decoder/schema is not an independent checker",
+    "LA-015": "protocol-unadmitted diagnostic; original compact rows and rescue retained but not headline admitted rates",
+    "LA-016": "protocol-unadmitted / withdrawn; 900/900 not_started; not pooled with fixed-action results",
+    "LA-017": "protocol-unadmitted diagnostic; wording does not establish admitted model efficacy",
+    "LA-020": "separate diagnostic replay of frozen A4 identities; compact admitted rows remain the scored outcomes",
+    "LA-019_tables": "historical analysis of the unadmitted log; must not substitute for the LA-029 admitted summary",
+    "LA-029": "admitted 900-cell operator matrix; consume summary.json, cost_report.md, and claim_guidance.md"
+  },
+  "claim_status_vocabulary": {
+    "empirical_admitted": "Retained admitted run with denominators, identities, and limitations.",
+    "empirical_qualification": "Executed qualification suite, not a scored arm rate.",
+    "shared_producer_conformance": "Structural agreement with a checker that shares the producer.",
+    "protocol_unadmitted_diagnostic": "Executed and retained, but not the admitted headline study.",
+    "implementation_nonempirical": "Inspectable code or configuration; not a measured research outcome.",
+    "withdrawn_unmeasured": "Explicit scoped removal; no invented numeric score.",
+    "future_work": "Outside the evaluated contribution."
+  },
+  "prior_audit": {
+    "task": "LA-002",
+    "path": "papers/completion/law_to_action/claim_evidence_matrix.json",
+    "note": "v1 inspection statuses (implemented_unqualified, fixture_only, declared_only, unsupported) remain historically valid as of 2026-09-11. LA-022 overwrites paper-level claim language using later retained runs."
+  },
+  "manuscript_claims": [
+    {
+      "id": "M1",
+      "claim": "On the admitted 60x5x3 matrix, A4 observed 0/90 policy-forbidden handler effects and 90/90 allowed useful work.",
+      "manuscript_locations": ["abstract", "results.tex:tab:3", "results.tex:sec:eval-admitted", "main.tex:Conclusion"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-029"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md",
+        "papers/completion/law_to_action/receipts/LA-029.json"
+      ],
+      "not_established": [
+        "universal legal correctness",
+        "universal prevention",
+        "expert legality of allowed/forbidden labels",
+        "model-generated source programs"
+      ]
+    },
+    {
+      "id": "M2",
+      "claim": "Final-split A4 observed 0/54 forbidden effects and 54/54 allowed useful work with 0/54 false denials.",
+      "manuscript_locations": ["results.tex:tab:3", "results.tex:sec:eval-admitted"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-029"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json"
+      ],
+      "not_established": ["population-level absence from a degenerate zero interval"]
+    },
+    {
+      "id": "M3",
+      "claim": "Unguarded A0 and model-free A1/A2 observed 90/90 policy-forbidden effects; A1 and A2 are equivalence controls, not prompt or retrieval efficacy.",
+      "manuscript_locations": ["abstract", "results.tex:tab:3", "results.tex:sec:eval-admitted"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-029"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl"
+      ],
+      "not_established": ["prompt efficacy", "retrieval efficacy", "closed-loop model comparison"]
+    },
+    {
+      "id": "M4",
+      "claim": "Lightweight policy+UCAN (A3) leaked 33/90 forbidden effects (18/54 on the final split) on residual mutation classes that A4 denied.",
+      "manuscript_locations": ["abstract", "results.tex:sec:eval-negative", "results.tex:tab:3"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-029"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl"
+      ],
+      "residual_by_mutation_overall": {
+        "wrong_date_or_jurisdiction": 9,
+        "forged_receipt": 6,
+        "replay": 6,
+        "changed_root_clock_or_environment": 6,
+        "undeclared_handler_effect": 6
+      },
+      "not_established": ["A3 as a complete substitute for A4"]
+    },
+    {
+      "id": "M5",
+      "claim": "Source-span linkage 60/60, schema validity 50/60, machine-contract coverage 60/60; four CVE adapter failures and six unsupported skill rows retained.",
+      "manuscript_locations": ["results.tex:sec:eval-source", "main.tex:tab:E1"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-009"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/source_ir/metrics.json",
+        "papers/completion/law_to_action/results/source_ir/raw.jsonl",
+        "papers/completion/law_to_action/results/source_ir/failure_review.md",
+        "papers/completion/law_to_action/receipts/LA-009.json"
+      ],
+      "not_established": ["expert legal fidelity", "semantic accuracy", "annotator agreement"]
+    },
+    {
+      "id": "M6",
+      "claim": "The LA-009 skill-validator 18/18 comparison is shared-producer conformance, not independent checker agreement.",
+      "manuscript_locations": ["results.tex:sec:eval-protocol", "main.tex:tab:E1"],
+      "status": "shared_producer_conformance",
+      "experiments": ["LA-009"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/source_ir/metrics.json"
+      ],
+      "not_established": ["independent checker agreement", "semantic accuracy"]
+    },
+    {
+      "id": "M7",
+      "claim": "CVE source-difference observation 24/24; polarity unknown 24/24; no untrusted source executed; transfer unsupported.",
+      "manuscript_locations": ["results.tex:sec:eval-source", "main.tex:tab:E1"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-006", "LA-009", "LA-026"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/source_ir/metrics.json",
+        "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/receipts/LA-006.json"
+      ],
+      "not_established": ["vulnerable/fixed detection accuracy", "universal security", "transfer to export_json"]
+    },
+    {
+      "id": "M8",
+      "claim": "Expert-reviewed legal source-to-IR fidelity is withdrawn and unmeasured; no independent human legal/security/intent validation or inter-annotator agreement was collected.",
+      "manuscript_locations": ["abstract", "results.tex:sec:eval-protocol", "limitations.tex", "main.tex:tab:E1", "main.tex:Appendix F"],
+      "status": "withdrawn_unmeasured",
+      "experiments": ["LA-005", "LA-027"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/benchmark/AUTOMATED_EVIDENCE_SCOPE.md",
+        "papers/completion/law_to_action/benchmark/annotations/legal_review_report.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json"
+      ],
+      "numeric_score_assigned": false
+    },
+    {
+      "id": "M9",
+      "claim": "The qualified proof route is QF_BOOL SAT with an independent truth-table checker; SAT cannot authorize theorem_proof allows; other families are unavailable rather than invented.",
+      "manuscript_locations": ["main.tex:tab:2", "results.tex:sec:eval-negative", "main.tex:tab:E1"],
+      "status": "empirical_qualification",
+      "experiments": ["LA-010"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/proof_jobs/qualification.md",
+        "papers/completion/law_to_action/results/proof_jobs/raw.jsonl",
+        "papers/completion/law_to_action/benchmark/manifests/provers.json",
+        "papers/completion/law_to_action/receipts/LA-010.json"
+      ],
+      "not_established": ["kernel theorem", "QF_LIA interpolation", "Z3/cvc5/Vampire/E/Lean/Coq/Isabelle execution"]
+    },
+    {
+      "id": "M10",
+      "claim": "Selected ENFORCE mediation cases passed 14/14 with real Ed25519 verification; OFF/audit/unprotected routes are excluded from the safety claim.",
+      "manuscript_locations": ["main.tex:protected route", "limitations.tex"],
+      "status": "empirical_qualification",
+      "experiments": ["LA-011"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/mediation/qualification.md",
+        "papers/completion/law_to_action/results/mediation/raw.jsonl",
+        "papers/completion/law_to_action/benchmark/route_inventory.json",
+        "papers/completion/law_to_action/receipts/LA-011.json"
+      ],
+      "not_established": ["coverage of arbitrary supervisor or MCP routes"]
+    },
+    {
+      "id": "M11",
+      "claim": "File-backed DuckDB consumption with typed Quack owner passed 14/14 selected-claim cases; in-memory restart is a labeled contrast; a DuckDB commit is not remote exactly-once.",
+      "manuscript_locations": ["limitations.tex", "main.tex:tab:E1", "results.tex:sec:eval-negative"],
+      "status": "empirical_qualification",
+      "experiments": ["LA-012"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/state/failure_matrix.md",
+        "papers/completion/law_to_action/results/state/raw.jsonl",
+        "papers/completion/law_to_action/receipts/LA-012.json"
+      ],
+      "not_established": ["remote exactly-once APIs", "Quack gateway (unavailable)"]
+    },
+    {
+      "id": "M12",
+      "claim": "Local stdio, loopback HTTP, and loopback libp2p carried identical allow/deny/unknown/wrong-audience/replay decisions; WAN and IPFS daemon are absent.",
+      "manuscript_locations": ["results.tex:sec:eval-negative", "main.tex:tab:E1"],
+      "status": "empirical_qualification",
+      "experiments": ["LA-013"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/transport/parity.md",
+        "papers/completion/law_to_action/results/transport/raw.jsonl",
+        "papers/completion/law_to_action/receipts/LA-013.json"
+      ],
+      "not_established": ["wide-area libp2p", "public IPFS availability"]
+    },
+    {
+      "id": "M13",
+      "claim": "Closed-loop generated-code planning is explicitly withdrawn: 900/900 not_started, 0 model calls, 0 generated programs; not pooled with fixed-action results.",
+      "manuscript_locations": ["abstract", "results.tex:sec:eval-negative", "main.tex:tab:E1", "limitations.tex"],
+      "status": "withdrawn_unmeasured",
+      "experiments": ["LA-016"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/agents/recovery_analysis.md",
+        "papers/completion/law_to_action/results/agents/run_manifest.json",
+        "papers/completion/law_to_action/results/tables/closed_loop_status.json",
+        "papers/completion/law_to_action/receipts/LA-016.json"
+      ],
+      "numeric_score_assigned": false
+    },
+    {
+      "id": "M14",
+      "claim": "Original LA-015 rows, LA-016/LA-017 comparison wording, and LA-017 ablations are protocol-unadmitted diagnostic evidence.",
+      "manuscript_locations": ["results.tex:sec:eval-negative"],
+      "status": "protocol_unadmitted_diagnostic",
+      "experiments": ["LA-015", "LA-016", "LA-017"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md",
+        "papers/completion/law_to_action/results/fixed_actions/summary.json",
+        "papers/completion/law_to_action/results/ablations/summary.json",
+        "papers/completion/law_to_action/results/statistical_report.md"
+      ],
+      "not_established": ["admitted model efficacy", "headline safety rates from unadmitted cells"]
+    },
+    {
+      "id": "M15",
+      "claim": "LA-020 twelve-step traces are separate diagnostic replays of frozen A4 identities, including permitted useful work and prevented forbidden effects.",
+      "manuscript_locations": ["main.tex:Appendix D"],
+      "status": "protocol_unadmitted_diagnostic",
+      "experiments": ["LA-020"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/worked_trace/trace.md",
+        "papers/completion/law_to_action/results/worked_trace/trace.json",
+        "papers/completion/law_to_action/receipts/LA-020.json"
+      ],
+      "not_established": ["additional scored cells", "kernel theorem", "generated programs"]
+    },
+    {
+      "id": "M16",
+      "claim": "Evaluated corpus freeze is 30 families / 60 cases (6 legal, 12 CVE, 12 skill); release-card totals are unrecounted background.",
+      "manuscript_locations": ["main.tex:Corpus sources", "main.tex:Appendix A"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-004"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/benchmark/corpus_counts.json",
+        "papers/completion/law_to_action/benchmark/manifests/sources.json",
+        "papers/completion/law_to_action/benchmark/manifests/splits.json",
+        "papers/completion/law_to_action/receipts/LA-004.json"
+      ],
+      "not_established": ["worldwide legal coverage", "full CVEfixes or SkillCenter release recount"]
+    },
+    {
+      "id": "M17",
+      "claim": "No trained skill normalizer or encoder is part of the evaluated contribution; the default is a deterministic structural normalizer.",
+      "manuscript_locations": ["main.tex:Corpus sources", "limitations.tex"],
+      "status": "implementation_nonempirical",
+      "experiments": ["LA-002", "LA-007"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/receipts/LA-002.json",
+        "papers/completion/law_to_action/receipts/LA-007.json"
+      ],
+      "not_established": ["trained-model performance"]
+    },
+    {
+      "id": "M18",
+      "claim": "Default OFF is pass-through and the default in-memory store is not the A4 restart-safety configuration.",
+      "manuscript_locations": ["main.tex:Introduction", "limitations.tex"],
+      "status": "implementation_nonempirical",
+      "experiments": ["LA-002", "LA-012", "LA-029"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/state/failure_matrix.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl"
+      ],
+      "not_established": ["default-safe deployment"]
+    },
+    {
+      "id": "M19",
+      "claim": "Development A4 efficiency timings are instrumentation, not a 900-cell rescore; model tokens were unobserved and no price conversion was applied.",
+      "manuscript_locations": ["results.tex:sec:eval-negative", "main.tex:tab:E1"],
+      "status": "protocol_unadmitted_diagnostic",
+      "experiments": ["LA-018"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/efficiency/summary.json",
+        "papers/completion/law_to_action/receipts/LA-018.json"
+      ],
+      "not_established": ["monetary savings", "token counts", "900-cell cost ranking"]
+    },
+    {
+      "id": "M20",
+      "claim": "Closest related systems were cited from primary sources and were not executed as scored arms.",
+      "manuscript_locations": ["main.tex:sec:related", "abstract"],
+      "status": "implementation_nonempirical",
+      "experiments": ["LA-021"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/related_work.md",
+        "papers/completion/law_to_action/novelty_statement.md",
+        "papers/completion/law_to_action/receipts/LA-021.json"
+      ],
+      "not_established": ["bake-off superiority"]
+    },
+    {
+      "id": "M21",
+      "claim": "Semantic program worlds, learned residuals, refactoring, parallel sealing, and proof-carrying test reuse are not implemented contributions.",
+      "manuscript_locations": ["main.tex:Appendix F"],
+      "status": "future_work",
+      "experiments": [],
+      "evidence_paths": [
+        "papers/completion/law_to_action/review.md"
+      ],
+      "not_established": ["those methods as executed results"]
+    },
+    {
+      "id": "M22",
+      "claim": "Manuscript generation requires no outside review; optional author review is non-independent.",
+      "manuscript_locations": ["limitations.tex", "main.tex:Appendix F", "main.tex:Conclusion"],
+      "status": "implementation_nonempirical",
+      "experiments": ["LA-027"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/benchmark/AUTOMATED_EVIDENCE_SCOPE.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md"
+      ],
+      "not_established": ["independent human validation"]
+    },
+    {
+      "id": "M23",
+      "claim": "Admitted operator costs: 902 host attempts, scientific_retries=0, group CPU 1608.817478 s, two pre-scientific startups at 591 and 625, original false host admissions 459 and 560 retained.",
+      "manuscript_locations": ["results.tex:sec:eval-admitted"],
+      "status": "empirical_admitted",
+      "experiments": ["LA-029"],
+      "evidence_paths": [
+        "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md",
+        "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json",
+        "papers/completion/law_to_action/receipts/LA-029.json"
+      ],
+      "not_established": ["imputed original diagnostic CPU (left null)"]
+    }
+  ],
+  "contributions": [
+    {
+      "id": "C1",
+      "draft_claim": "Source-preserving adapters and retrieval releases for legal, CVE, and skill IR families.",
+      "status": "empirical_admitted",
+      "what_is_supported": "Bounded frozen adapters with 60/60 span linkage and retained failures/unsupported rows.",
+      "what_is_not_supported": "Expert legal interpretation, corpus completeness, trained normalizers."
+    },
+    {
+      "id": "C2",
+      "draft_claim": "Multi-logic constraint compilation and proof-oriented authorization.",
+      "status": "empirical_qualification",
+      "what_is_supported": "QF_BOOL SAT plus independent checker on the selected invariant; authority rejection of SAT-only theorem claims.",
+      "what_is_not_supported": "All-family backends, QF_LIA interpolation, kernel theorems."
+    },
+    {
+      "id": "C3",
+      "draft_claim": "DuckDB-backed supervision and exact-context enforcement.",
+      "status": "empirical_admitted",
+      "what_is_supported": "ENFORCE plus file-backed DuckDB consumption in admitted A4 cells; qualification of restart/replay/lost-reply.",
+      "what_is_not_supported": "Default OFF, default in-memory store, remote exactly-once, complete mediation of all routes."
+    },
+    {
+      "id": "C4",
+      "draft_claim": "Content-addressed, peer-accessible evidence and delegated MCP execution.",
+      "status": "empirical_qualification",
+      "what_is_supported": "Local stdio/HTTP/libp2p parity and local CID integrity; real Ed25519 UCAN in A3/A4.",
+      "what_is_not_supported": "WAN, public IPFS daemon, peer identity as permission."
+    }
+  ]
+}

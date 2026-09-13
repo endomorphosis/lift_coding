@@ -1,0 +1,144 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-022",
+  "status": "complete",
+  "completed_at": "2026-09-13T01:10:08.759921+00:00",
+  "completion_mode": "Evidence-scoped manuscript completion from the LA-029 admitted operator summary, LA-009 source-contract metrics, and explicit scoped omissions. Not independent scientific peer review and not a substitute for later artifact packaging.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.bbl": "4b92dcb4a1c3d409b6c6305aa2c091557916059113c19b876b51d3eaa97a077c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.blg": "ca6ab7a5b4323f741ff04e718564e7b4ac084b6d0a44ebdb29613663312445b6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.log": "237051d7a03e714e37231afb70b872c69d5912cae0fc9fd81767ca09239428d3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.txt": "daf82d65e74d8e7bed9b941afdbc1b2d3e9de0d921e70dec4d6929dc124c488b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/pdf_digest.json": "78fa52419042d02a4a8781050594164230788a76d3fa83483949ac0db13bd687",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/claim_evidence_matrix.json": "d88508eec5f47513ea22eb8ca450cdce873eb5cd186acc2be2ec1ffd2ed8abb3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/limitations.tex": "b454ac8d2925e9ebfa865b9127f0b236d8842e0f57d05dc21efaee73b2fa071e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex": "e09dbcc3f00e7ce6f74a089db1c4b4f02fe48695fb98fb933f8ec19f89dde5f1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex": "6b04a0fa8ab53b46177b2dba81708c7d268c6a1f70890e55a2ecb5e1fbcc792e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/validate_la022.py": "150118d76155fbf1463baf339f70bb7a8b35d2051a677d1294bffddf5bfa1c89",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/compile.stdout.log": "8d0efa413a131ed0f806bf6116be8f7b3480e37ea3f0ccd80ef9ccd73c9c19d6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/validate_la022.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/validate_la022.stdout.log": "6c184182b52ec0054bbe6612f3e92a87b656c27ec684ba9a7c83dbf8e247147e"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/manuscript/main.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex",
+    "papers/completion/law_to_action/manuscript/results.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex",
+    "papers/completion/law_to_action/manuscript/limitations.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/limitations.tex",
+    "papers/completion/law_to_action/claim_evidence_matrix.json": "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/claim_evidence_matrix.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Every Not run/pending result placeholder is resolved by evidence or explicit scoped removal, never invented data.",
+      "status": "met",
+      "explanation": "Table E1 and the evaluation template are replaced. Expert legal fidelity is withdrawn/unmeasured. CVE polarity remains unknown. Closed-loop planning is withdrawn (900/900 not_started). Proof kernels and QF_LIA interpolation are unavailable, not invented. Guarded-effect headlines are the LA-029 admitted 0/90, 90/90, and 33/90 rates. DuckDB, transport, and efficiency rows are qualification or development instrumentation. No Not run or run-pending placeholder remains in the editable manuscript.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.txt",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/validate_la022.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Claim matrix links manuscript claims to exact experiments or clearly marked nonempirical implementation evidence.",
+      "status": "met",
+      "explanation": "claim_evidence_matrix.json v2 records M1–M23 with manuscript locations, experiment ids, evidence paths, and statuses (empirical_admitted, qualification, shared-producer conformance, protocol-unadmitted diagnostic, withdrawn_unmeasured, implementation_nonempirical, future_work). Human gold is false. Optional author review is labeled non-independent.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/validate_la022.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Paper contains reproducible methodology and negative results, with a coherent evaluated verifiable-coding contribution.",
+      "status": "met",
+      "explanation": "The manuscript states the frozen 30-family/60-case protocol, five matched arms, selected ENFORCE route, QF_BOOL SAT authority, and durable DuckDB configuration. The evaluated contribution is bounded policy-relative prevention of forbidden sandbox effects with retained allowed useful work (A4 0/90 and 90/90). Negative results include A3 33/90 leaks, SAT-only authority, withdrawn closed-loop planning, four CVE adapter failures, six unsupported skill rows, and unavailable kernels. Compiled main text is 7 pages.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.txt",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/pdf_digest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/compile.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Manuscript generation and an evidence-scoped submission candidate require no outside review. Optional author review is labeled non-independent and unsupported expert legal fidelity, human agreement and legal-validity claims are absent.",
+      "status": "met",
+      "explanation": "The draft states that manuscript generation requires no outside review, labels optional author review non-independent, and records expert legal fidelity, human agreement, and legal-validity rates as unmeasured rather than scored. independent_human_gold remains false on the admitted summary and claim matrix.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/compiled/main.txt",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/validate_la022.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/bin/vericodegen-latexmk",
+        "-g",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "papers/completion/law_to_action/manuscript",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/compile.stdout.log",
+      "started_at": "2026-09-13T01:07:10.795796+00:00",
+      "completed_at": "2026-09-13T01:07:10.795796+00:00",
+      "environment_overrides": {
+        "PATH_NOTE": "Wrapper prepends user-local TinyTeX; pdflatex/bibtex are not on the sealed validation PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin."
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/validate_la022.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-022/validation/validate_la022.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-022/validate_la022.py",
+      "started_at": "2026-09-13T01:09:07.927602+00:00",
+      "completed_at": "2026-09-13T01:09:07.927602+00:00",
+      "environment_overrides": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3 (/usr/bin/python3.12)",
+    "authoritative_validation_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "latexmk": "4.88 via /home/barberb/.local/bin/vericodegen-latexmk -> TinyTeX TeX Live 2026",
+    "pdftex": "3.141592653-2.6-1.40.29 (TeX Live 2026)",
+    "bibtex": "0.99e (TeX Live 2026)",
+    "pdftotext": "24.02.0 (/usr/bin/pdftotext; present on sealed PATH)",
+    "selected_bibliography": "papers/completion/law_to_action/manuscript/related_work.bib",
+    "admitted_summary": "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json",
+    "admitted_summary_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+    "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "compiled_pdf_snapshot": "omitted; NUL-byte binary. Digest and pdftotext extract retained.",
+    "main_text_pages": 7,
+    "pdf_pages": 16,
+    "model_or_solver_experiment": "none performed by LA-022; consumes retained LA-029/LA-009 records",
+    "human_agreement": null,
+    "human_fidelity": null
+  },
+  "limitations": [
+    "LA-022 writes the manuscript from retained evidence. It does not re-execute the 900-cell operator matrix or invent missing studies.",
+    "pdflatex/bibtex/latexmk are absent from the sealed validation PATH. Compilation used the same user-local TinyTeX wrapper as LA-001/LA-021. The sealed-PATH validator checked sources, citations, admitted numbers, and the compiled text extract via pdftotext.",
+    "The binary PDF is omitted from the snapshot because it contains NUL bytes; sha256 and page counts are in pdf_digest.json.",
+    "Expert legal fidelity, human agreement, and legal-validity rates remain unmeasured. Optional author review is non-independent and was not collected as a gate.",
+    "Original LA-015 rows, LA-016/LA-017 comparison wording, and LA-017 ablations remain protocol-unadmitted diagnostics. LA-020 traces are separate diagnostic replays. LA-009 18/18 is shared-producer conformance.",
+    "Closed-loop generated-code planning remains withdrawn. Compact admitted records do not retain full per-cell proof/capability payloads."
+  ]
+}

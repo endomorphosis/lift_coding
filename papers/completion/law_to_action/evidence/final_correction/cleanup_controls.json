@@ -1,0 +1,56 @@
+{
+  "controls": [
+    {
+      "metadata": {
+        "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+        "exit_code": 0,
+        "scope": "offline retained analysis and local harness controls; no scientific execution",
+        "timed_out": false,
+        "wall_seconds": 0.042088210000656545
+      },
+      "name": "normal",
+      "passed": true
+    },
+    {
+      "metadata": {
+        "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+        "exit_code": 7,
+        "scope": "offline retained analysis and local harness controls; no scientific execution",
+        "timed_out": false,
+        "wall_seconds": 0.033930473029613495
+      },
+      "name": "error",
+      "passed": true
+    },
+    {
+      "metadata": {
+        "all_possible_descendants_termination_proven": false,
+        "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+        "descendant_snapshot_truncated": false,
+        "exit_code": -9,
+        "known_descendants": [
+          {
+            "birth_ticks": 67702561,
+            "parent_pid": 1686292,
+            "pid": 1686331,
+            "state": "S"
+          }
+        ],
+        "known_descendants_terminated": true,
+        "process_group_kill_requested": true,
+        "scope": "offline retained analysis and local harness controls; no scientific execution",
+        "timed_out": true,
+        "wall_seconds": 0.4085959969088435
+      },
+      "name": "detached_child_timeout",
+      "passed": true
+    }
+  ],
+  "native_calls": 0,
+  "passed": true,
+  "provider_calls": 0,
+  "schema": "law-artifact-wrapper-cleanup-qualification/v1",
+  "scientific_executions": 0,
+  "scope": "Three real disposable process controls; timeout is failure, not a successful evidence reproduction.",
+  "source_sha256": "268f1a58d1a907119cfdd57dc04e1be049adbb043e4c82cbfc4dd10ab1925f26"
+}
