@@ -1,0 +1,73 @@
+{
+  "schema": "ns024-template-inputs/v1",
+  "task_id": "NS-024",
+  "shared_user_templates_unmodified": true,
+  "recorded_from": "byte comparison against current repository files and NS-001 source_inputs.json",
+  "shared_user_templates": [
+    {
+      "path": "papers/neurips_2026_vericode_workshop.tex",
+      "bytes": 17416,
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "role": "shared_research_workshop_template",
+      "unmodified": true
+    },
+    {
+      "path": "papers/neurips_2026_vericode.sty",
+      "bytes": 13757,
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "role": "shared_research_workshop_style",
+      "unmodified": true
+    },
+    {
+      "path": "papers/checklist.tex",
+      "bytes": 26167,
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "role": "shared_official_unanswered_checklist",
+      "unmodified": true,
+      "note": "The per-paper answered copy is manuscript/checklist.tex; this shared input remains the official unanswered questionnaire."
+    }
+  ],
+  "unused_adjacent_styles_not_substituted": [
+    {
+      "path": "papers/neurips_2026.sty",
+      "bytes": 13704,
+      "sha256": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+      "role": "generic_neurips_style_present_in_repository_not_loaded"
+    },
+    {
+      "path": "papers/neurips_2026_vericode_competition.sty",
+      "bytes": 13933,
+      "sha256": "a0178f152d13cf24f44936da0ee95bab975ceced8d54980efbbf8f7c1bb31f72",
+      "role": "competition_style_present_in_repository_not_loaded"
+    },
+    {
+      "path": "papers/neurips_2026_vericode_workshop_competition.tex",
+      "bytes": 17871,
+      "sha256": "0e21c08ce8a32cb3d4c0fb7123d38249209c2ef488a0c210acbea026f6fefc23",
+      "role": "competition_workshop_template_present_in_repository_not_loaded"
+    }
+  ],
+  "per_paper_copies": {
+    "manuscript/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "matches_shared_research_style": true,
+      "loaded_by": "manuscript_source_v1/sources/header.tex via \\usepackage{neurips_2026_vericode} with no options",
+      "anonymous_default_mode": true
+    },
+    "manuscript/checklist.tex": {
+      "bytes": 28079,
+      "sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1",
+      "role": "per_paper_answered_checklist",
+      "instruction_block_removed": true,
+      "official_questions_preserved": 16,
+      "answerTODO_or_justificationTODO_fields": false
+    }
+  },
+  "official_anonymous_author_block_allowed": [
+    "Anonymous Author(s)",
+    "Affiliation",
+    "Address",
+    "email"
+  ]
+}

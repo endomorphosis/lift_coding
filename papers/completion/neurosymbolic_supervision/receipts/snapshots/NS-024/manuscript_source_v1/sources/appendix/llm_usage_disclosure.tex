@@ -1,0 +1,54 @@
+% Proposed NS024 appendix insertion; reviewed integration and compilation are separate.
+\section{LLM use, public reproduction, and responsible use}
+\label{sec:ns024-disclosures}
+
+\paragraph{Scientific model use.}
+The final cold-repair comparison uses Grok 4.6 to propose source edits from
+the fixed A/B context requests (Section~\ref{sec:design}). Each of the 32 cells
+consumes one proposal POST with a maximum of 4,096 requested output tokens and
+a structured edit response. No scientific fallback, retry, served random seed,
+or reasoning-effort parameter is used. The model's weights and exact served
+revision are unavailable. Candidate inspection by AI is a procedural control;
+it is not independent human assessment or a substitute for executed checks.
+
+\paragraph{Research and manuscript assistance.}
+AI assistance also contributed to source recovery and drafting, implementation
+and debugging, experiment preparation and candidate inspection, and analysis
+and artifact preparation. The authoring supervisors were configured to use
+Grok 4.6, with Codex \texttt{gpt-5.6-terra} at high reasoning effort as a fallback
+only following independently verified primary-quota exhaustion. This describes
+the configured authoring policy, not a claim that every task used a fallback or
+that these models generated the scientific comparison under a mixed route.
+The configured policy does not identify the model behind every separate
+interactive assistance session. AI-assisted checking supplies no measured
+human semantic fidelity, expert agreement, or human effort time, and does not
+discharge the conditional arguments in Appendix~\ref{sec:formal-arguments-ns023}.
+
+\paragraph{Anonymous numerical reproduction.}
+The accompanying supplement keeps the 32-cell final comparison, the separate
+24-cell developmental pilot, and historical boundary controls in distinct
+components. Its top-level \texttt{README.md} specifies Python 3.12 and the
+command \texttt{python3 -B reproduce.py --root ROOT --output OUTPUT}, where
+\texttt{ROOT} is a fresh extraction and \texttt{OUTPUT} is a fresh directory
+outside it. The program checks the manifest-bound files and reproduces their
+retained numerical summaries; it does not generate new proposals, execute
+candidates or hidden tests, rerun historical qualifications, or authenticate
+original signed records. Hidden tests, reference patches, credentials, keys,
+and raw private operational logs are excluded. Original and derivative hashes
+have distinct roles: original signatures do not authenticate modified anonymous
+derivative bytes. Exact executed source and labeled reference derivatives remain
+distinct. Upstream retrieval metadata, revisions, and retained license and
+copyright notices accompany the released assets. Stable hashes and timestamps
+may permit correlation, so these release controls do not guarantee anonymity.
+
+\paragraph{Potential impacts and limits.}
+Explicit evidence boundaries may help users identify stale checks and
+unsupported acceptance claims, but this experiment establishes no general
+reliability or efficiency benefit. Incorrect repairs, incomplete tests, or
+mistaking signed provenance for correctness could lead to unsafe deployment;
+automated coding can also be misused to introduce harmful changes. The stated
+scope, isolated checks, restricted artifact projection, and visible failures
+reduce particular risks without establishing comprehensive adversarial
+resistance. No model weights or human-subject dataset are released, and no
+human semantic annotations, expert-agreement study, or human-time measurements
+were collected for the reported comparison. 

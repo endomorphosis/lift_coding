@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-ns024-source-89bffcb1",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns024-source-89bffcb1/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns024-source-89bffcb1/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns024-source-89bffcb1/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns024-source-89bffcb1/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "/usr/bin/python3.12",
+    "-B",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-024/manuscript_source_v1/build_from_snapshot.py",
+    "--manifest-sha256",
+    "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973",
+    "--verify-only"
+  ],
+  "elapsed_host_wall_seconds": 0.06359969300683588,
+  "exit_code": 0,
+  "finished_at": "2026-09-13T17:03:56.124176454+00:00",
+  "started_at": "2026-09-13T17:03:56.059936016+00:00",
+  "stderr_bytes": 0,
+  "stdout": {
+    "compiler_calls": 0,
+    "decoded_original_source_bytes": 166920,
+    "files_written": 0,
+    "manifest_sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973",
+    "source_files": 24,
+    "verified": true
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "components": {
+    "boundary": {
+      "execution": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-B",
+          "-s",
+          "/tmp/ns024-supplement-extract-v1/boundary/reproduce.py",
+          "--root",
+          "/tmp/ns024-supplement-extract-v1/boundary"
+        ],
+        "elapsed_host_wall_seconds": 0.06389593693893403,
+        "exit_code": 0,
+        "finished_at": "2026-09-13T17:03:56.605172+00:00",
+        "started_at": "2026-09-13T17:03:56.541285+00:00",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "162c5ffb0b74a800114f2f002692195046212adb2cdc87688154aaf70eddd55b",
+        "timed_out": false
+      },
+      "result": {
+        "NS011_false_reuse": {
+          "all_attempts": 26,
+          "observed": 1,
+          "selected_25_not_substituted": true
+        },
+        "NS012_recovery_records": 3,
+        "NS027": {
+          "case_attempts": 48,
+          "completed_rows": 47,
+          "full_public_baselines": 2,
+          "invocations": 4,
+          "reuse_credit": false,
+          "tests_per_baseline": 34
+        },
+        "final_outcome_rows": 0,
+        "historical_rows": {
+          "NS-007": 26,
+          "NS-008": 20,
+          "NS-009": 32,
+          "NS-011": 26,
+          "NS-012": 27
+        },
+        "native_qualification_reexecuted": false,
+        "original_claims": 32,
+        "provider_calls": 0,
+        "schema": "ns020-public-boundary-count-replay/v1",
+        "scorer_calls": 0,
+        "signature_authentication_of_derivatives": false,
+        "table_rows": 6
+      }
+    },
+    "final32": {
+      "execution": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-B",
+          "-s",
+          "/tmp/ns024-supplement-extract-v1/final32/reproduce.py",
+          "--release",
+          "/tmp/ns024-supplement-extract-v1/final32",
+          "--output",
+          "/tmp/ns024-supplement-repro-v1/final32/numerical"
+        ],
+        "elapsed_host_wall_seconds": 0.21511036809533834,
+        "exit_code": 0,
+        "finished_at": "2026-09-13T17:03:56.475419+00:00",
+        "started_at": "2026-09-13T17:03:56.260310+00:00",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "2f996577eb215251fc45c7514cc2a7b02c5746705a505b6575ba77572cb07ad6",
+        "timed_out": false
+      },
+      "result": {
+        "success": true,
+        "summary_sha256": "ae46fd4e9eb98004620d3533e59bee084c33c76b95829c469d196a034701a215"
+      }
+    },
+    "prior": {
+      "execution": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-B",
+          "-s",
+          "/tmp/ns024-supplement-extract-v1/prior/source/reproduce.py",
+          "/tmp/ns024-supplement-extract-v1/prior"
+        ],
+        "elapsed_host_wall_seconds": 0.06455588294193149,
+        "exit_code": 0,
+        "finished_at": "2026-09-13T17:03:56.540842+00:00",
+        "started_at": "2026-09-13T17:03:56.476288+00:00",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "8250f30117602e14fac7cc21358729046dd9fb8f35551c5ee920597c8a897e75",
+        "timed_out": false
+      },
+      "result": {
+        "all_files": 16,
+        "cost_records": 93,
+        "families": 4,
+        "indexed_members": 15,
+        "new_provider_scorer_native_calls": 0,
+        "original_signature_reverification": false,
+        "pilot_cells": 24,
+        "success": true,
+        "useful": 10
+      }
+    }
+  },
+  "cost_scopes_summed": false,
+  "manifest_sha256": "1a2b523bea55cd81699bc749bc002445edf53b298b7b245b797ad3888bec23a8",
+  "network_isolation_claimed": false,
+  "new_scientific_or_native_calls": 0,
+  "offline_scope": "Exact reviewed local numerical/file programs only; no networking program or API is invoked.",
+  "outcomes_pooled": false,
+  "schema": "ns-combined-anonymous-offline-reproduction/v1",
+  "scopes": {
+    "boundary": "Six historical boundary rows and retained qualification counts; no final outcomes or new qualifications",
+    "final32": "32 A/B cold cells; eight families and two nested repetitions",
+    "prior": "Separate 24-cell developmental pilot; four families and three nested repetitions, plus original separated cost ledgers"
+  },
+  "signature_authentication_performed": false,
+  "success": true
+}

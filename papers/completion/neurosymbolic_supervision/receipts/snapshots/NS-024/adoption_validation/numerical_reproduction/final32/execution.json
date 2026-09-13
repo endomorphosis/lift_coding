@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-B",
+    "-s",
+    "/tmp/ns024-supplement-extract-v1/final32/reproduce.py",
+    "--release",
+    "/tmp/ns024-supplement-extract-v1/final32",
+    "--output",
+    "/tmp/ns024-supplement-repro-v1/final32/numerical"
+  ],
+  "elapsed_host_wall_seconds": 0.21511036809533834,
+  "exit_code": 0,
+  "finished_at": "2026-09-13T17:03:56.475419+00:00",
+  "started_at": "2026-09-13T17:03:56.260310+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "2f996577eb215251fc45c7514cc2a7b02c5746705a505b6575ba77572cb07ad6",
+  "timed_out": false
+}

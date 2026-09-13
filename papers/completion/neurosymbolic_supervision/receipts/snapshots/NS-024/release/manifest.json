@@ -1,0 +1,135 @@
+{
+  "schema": "ns024-anonymous-release-manifest/v1",
+  "task_id": "NS-024",
+  "publication_authorized": false,
+  "submission_authorized": false,
+  "author_proofread_completed": false,
+  "new_scientific_or_native_calls": 0,
+  "human_annotations_created": false,
+  "no_outcome_pooling": true,
+  "no_cross_scope_cost_sum": true,
+  "original_signature_replay": false,
+  "paper_pdf": {
+    "path": "paper.pdf",
+    "bytes": 252576,
+    "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+    "pages": 20,
+    "main_pages_excluding_references_and_appendices": 6,
+    "layout": {
+      "main": "1-6",
+      "references": "7",
+      "technical_appendices": "8-12",
+      "llm_disclosure": "13",
+      "official_checklist": "14-20"
+    },
+    "role": "accepted20page_release_PDF_with_disclosure_and_official_checklist"
+  },
+  "supplement_zip": {
+    "path": "supplement.zip",
+    "bytes": 2280657,
+    "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07",
+    "zip_entries": 468,
+    "role": "actual_reviewed_combined_anonymous_supplement"
+  },
+  "size_bounds": {
+    "pdf_below_50_mb": true,
+    "supplement_zip_below_100_mb": true,
+    "main_text_pages_within_4_to_9": true,
+    "subject_to_final_live_cfp_verification": true
+  },
+  "components": {
+    "final32": {
+      "manifest": "final32/release_manifest.json",
+      "schema": "ns-final32-anonymous-release-manifest/v1",
+      "sha256": "6612cfa4b957d7aa701d6cc3255f37bd47c95758dbe88f22ecbc1a6b32f1ec26",
+      "files_including_manifest": 399,
+      "bytes_including_manifest": 7460880,
+      "role": "eight_family_32_cell_final_A_B_local_cold_comparison"
+    },
+    "prior": {
+      "manifest": "prior/manifest.json",
+      "schema": "ns-anonymous-prior-component/v1",
+      "sha256": "1d00715d05bbea2c7cab0ef1892f039153cc12ea0820bd556a13452ffe6b70a7",
+      "files_including_manifest": 16,
+      "bytes_including_manifest": 212761,
+      "role": "four_family_24_cell_developmental_pilot_and_prior_costs"
+    },
+    "boundary": {
+      "manifest": "boundary/manifest.json",
+      "schema": "ns020-public-boundary-component/v1",
+      "sha256": "8addd3465f79791a1126d6fb4bf08c77107fa5a4e5b1ddf844d8b78b48271369",
+      "files_including_manifest": 50,
+      "bytes_including_manifest": 1195073,
+      "role": "historical_boundary_qualification_and_constructed_controls"
+    }
+  },
+  "combined_supplement_manifest": {
+    "schema": "ns-combined-anonymous-supplement/v1",
+    "path_inside_zip": "manifest.json",
+    "reproduce_py_sha256": "89c5e0702308226915407c70528a314974555f2e13cfbebfd7b915c32716c143",
+    "readme_sha256": "f055c0ba489dc70a557b989a3e80a825d94f06cfa04e64ef2d27de79166aee24"
+  },
+  "numerical_reproduction": {
+    "python": "Python 3.12",
+    "wrapper": "reproduce.sh ABSOLUTE_EXTRACT_DIR ABSOLUTE_OUTPUT_DIR",
+    "included_command": "python3 -B reproduce.py --root ROOT --output OUTPUT",
+    "regenerates": "retained scalar summaries and table joins from frozen anonymous derivatives",
+    "does_not": [
+      "provider_or_scorer_calls",
+      "hidden_test_execution",
+      "original_signature_authentication",
+      "candidate_execution",
+      "population_pooling",
+      "unlike_clock_summation"
+    ]
+  },
+  "manuscript_sources": {
+    "snapshot_root": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-024/manuscript_source_v1/",
+    "source_manifest_sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973",
+    "decoded_source_count": 24,
+    "payload_text_file_count": 26,
+    "helper": "build_from_snapshot.py",
+    "helper_sha256": "03fd2813eda5350be5c54b8db1f67aac096caf070da2f481bdb650f68e71dae7",
+    "ns022_live_main_tex_not_replaced": true,
+    "ns019_generated_figure_not_replaced": true
+  },
+  "freeze": {
+    "canonical_freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "freeze_file": "papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+    "freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "families": 8,
+    "cells": 32,
+    "nested_repetitions": [104729, 130363],
+    "original_planned_factor_cells": 192,
+    "withdrawn_planned_factor_cells": 160,
+    "unrecruited_original_families": 8,
+    "served_model": "grok-4.6",
+    "underlying_served_revision_known": false
+  },
+  "official_style_and_templates": {
+    "per_paper_style": "papers/completion/neurosymbolic_supervision/manuscript/neurips_2026_vericode.sty",
+    "per_paper_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "shared_research_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "shared_workshop_tex_sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "shared_official_checklist_sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "per_paper_answered_checklist_sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1",
+    "anonymous_default_mode": true,
+    "competition_single_blind_final_preprint_nonanonymous_or_generic_substitution": false
+  },
+  "writing_inputs": {
+    "directory": "papers/completion/neurosymbolic_supervision/writing_inputs/ns024_complete_release_v1/",
+    "manifest_sha256": "386cead215fba321f9e5ee04dbd84f86250d958e7022529361b229a346f0b7f8",
+    "readme_sha256": "97d848f2e235b580995867fe5f3bf775a2ba739a125e30df897ad15bd770626b"
+  },
+  "withdrawn_or_unmeasured": [
+    "C/D routing comparative benefits",
+    "warm-cache and reuse comparative effects",
+    "publication-comparison efficacy",
+    "original sixteen-family inferential objectives",
+    "human semantic fidelity",
+    "expert agreement",
+    "human time",
+    "settled provider charges",
+    "exact served model revision"
+  ]
+}

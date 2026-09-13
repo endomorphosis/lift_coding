@@ -1,0 +1,202 @@
+{
+  "accepted_combined_supplement": {
+    "bytes": 2280657,
+    "path": "supplement.zip",
+    "role": "actual_reviewed_combined_anonymous_supplement",
+    "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+  },
+  "accepted_pdf": {
+    "bytes": 252576,
+    "path": "paper.pdf",
+    "role": "accepted20page_release_PDF_with_disclosure_and_official_checklist",
+    "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862"
+  },
+  "all_essential_source_PDF_ZIP_bytes_available_in_checkout": true,
+  "decoded_manuscript_source_file_count": 24,
+  "files": {
+    "README.md": {
+      "bytes": 3514,
+      "role": "checkout_relative_worker_guidance",
+      "sha256": "97d848f2e235b580995867fe5f3bf775a2ba739a125e30df897ad15bd770626b"
+    },
+    "evidence/original_adoption_guidance.md": {
+      "bytes": 9411,
+      "role": "exact_retained_review_build_or_scope_metadata",
+      "sha256": "806206c468942f8264fed25274842fb8761b7ca93fab79c3535644fd3ecfa85e"
+    },
+    "evidence/original_framework_scope_review.json": {
+      "bytes": 10263,
+      "role": "exact_retained_review_build_or_scope_metadata",
+      "sha256": "f95d0bb50ff5abd036169786106f3552ab5ca76c12367deef6b1846eb2aa15b1"
+    },
+    "evidence/original_manuscript_build_record.json": {
+      "bytes": 27563,
+      "role": "exact_retained_review_build_or_scope_metadata",
+      "sha256": "aef9146a234e08ebed053c4be53d703a5716ee601146e6e6ea341a463775435d"
+    },
+    "evidence/original_root_integrated_review.json": {
+      "bytes": 3507,
+      "role": "exact_retained_review_build_or_scope_metadata",
+      "sha256": "ad2da401c0e16ff07c0b4f469c464e40cdae10a1ce12f3ad2c7c0e9b79736e63"
+    },
+    "evidence/original_worker_payload_qualification.json": {
+      "bytes": 2556,
+      "role": "exact_retained_review_build_or_scope_metadata",
+      "sha256": "38dfbb6268507616eac8dcc2fa5f3233e08aa1d9c632a1af2ebeb73a2d481ba7"
+    },
+    "paper.pdf": {
+      "bytes": 252576,
+      "role": "accepted20page_release_PDF_with_disclosure_and_official_checklist",
+      "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862"
+    },
+    "payload/build_from_snapshot.py": {
+      "bytes": 7867,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "03fd2813eda5350be5c54b8db1f67aac096caf070da2f481bdb650f68e71dae7"
+    },
+    "payload/source_manifest.json": {
+      "bytes": 9232,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973"
+    },
+    "payload/sources/appendix/entry.tex": {
+      "bytes": 708,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+    },
+    "payload/sources/appendix/formal_arguments.tex": {
+      "bytes": 10689,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+    },
+    "payload/sources/appendix/llm_usage_disclosure.tex": {
+      "bytes": 3624,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "cf7395658ce77a0872a0b914ac7b28f0173501f7ee2ee71c0f24eeed163a3ec7"
+    },
+    "payload/sources/checklist.tex": {
+      "bytes": 28079,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "48859ff3d74dd0fabfbd77a1579b5d51d2d226a5564fab9b81f27aa3c4b531b1"
+    },
+    "payload/sources/fragments/abstract.tex": {
+      "bytes": 1125,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "6bbfa679a15787c20a5edd71cc64b2a37e13dc1b5e16ffca125d7cf2a31240c8"
+    },
+    "payload/sources/fragments/analysis_method.tex": {
+      "bytes": 2619,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+    },
+    "payload/sources/fragments/conclusion.tex": {
+      "bytes": 772,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "947a8337834e907cfb869b4c01869499a5a3d18378c6fbe51b1673091fc88711"
+    },
+    "payload/sources/fragments/design.tex": {
+      "bytes": 4229,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+    },
+    "payload/sources/fragments/evidence_method.tex": {
+      "bytes": 3099,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "0b8d25f29d1636378d348fd0fe8ec7ea3806e239d62d29656f92afd65f2a633c"
+    },
+    "payload/sources/fragments/introduction.tex": {
+      "bytes": 2105,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "c26b82b6fb9d1eafce035fb0bcf2011ab86f0c74e5c65e8f1e26fdd4b7f97bcf"
+    },
+    "payload/sources/fragments/limitations.tex": {
+      "bytes": 2050,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "f7aad3fef3d624e4dd3bd82162682a8713df4d118e4abd9ea3f7a1a1960caa53"
+    },
+    "payload/sources/fragments/related_work.tex": {
+      "bytes": 1490,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+    },
+    "payload/sources/fragments/results.tex": {
+      "bytes": 5438,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "8bed75f07be9c7af1fd49a1ea48650333ea70047d84b7db1ea01c0015cf73f55"
+    },
+    "payload/sources/generated/ablations.tex": {
+      "bytes": 894,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+    },
+    "payload/sources/generated/figures/family_useful.pdf.base64.txt": {
+      "bytes": 22073,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "07c009104b0ce18fdf72a112483b8dc1f9480215cb81d7492840e69337f70325"
+    },
+    "payload/sources/generated/figures/family_useful.svg": {
+      "bytes": 42894,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+    },
+    "payload/sources/generated/table17.tex": {
+      "bytes": 477,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    },
+    "payload/sources/generated/table18.tex": {
+      "bytes": 1431,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    "payload/sources/header.tex": {
+      "bytes": 586,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "1c85c4d98b25222af3d94ea3843e3a0ed03883803b22eb40472c4512414eeb0e"
+    },
+    "payload/sources/layout/family_useful.pdf.base64.txt": {
+      "bytes": 18753,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "018a63253057464f0212106bc6656027be09f47ee248eaf3165b15ef089b263d"
+    },
+    "payload/sources/layout/table18.tex": {
+      "bytes": 1455,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+    },
+    "payload/sources/main.tex": {
+      "bytes": 2443,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "2cf5ac9c9d5efa6d7477a7d1107a93122f0710de0e80bec2ff8872aaf0922f5e"
+    },
+    "payload/sources/neurips_2026_vericode.sty": {
+      "bytes": 13757,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    "payload/sources/verified_references.bib": {
+      "bytes": 6339,
+      "role": "exact_reviewed_NS024_text_payload",
+      "sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951"
+    },
+    "supplement.zip": {
+      "bytes": 2280657,
+      "role": "actual_reviewed_combined_anonymous_supplement",
+      "sha256": "48cee756e4e1bcdcf4d541b6c8721f21cba0800e990e1159a64f3eeb888a0b07"
+    }
+  },
+  "native_artifact_envelope_already_qualified": false,
+  "native_task_completion_or_publication_claimed": false,
+  "original_absolute_metadata_paths_are_historical_commitments_only": true,
+  "original_worker_package_sha256": "46ae4bfe00b2444ed70f096ddd55f1540b8bb582aeed7c00e923a7c4cfca6edb",
+  "payload_text_file_count": 26,
+  "private_environment_credentials_hidden_bodies_or_general_worker_logs_copied": false,
+  "schema": "ns024-complete-checkout-writing-inputs/v1",
+  "source_manifest": {
+    "bytes": 9232,
+    "path": "payload/source_manifest.json",
+    "role": "exact_reviewed_NS024_text_payload",
+    "sha256": "89bffcb1545d491945dba5604dc11ea3fa0a0a9745d2b3ef44b0fd85a1aa0973"
+  },
+  "task_id": "NS-024"
+}

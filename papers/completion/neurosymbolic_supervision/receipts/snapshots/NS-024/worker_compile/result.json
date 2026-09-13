@@ -1,0 +1,18 @@
+{
+  "elapsed_host_wall_seconds": 1.201351935043931,
+  "exit_code": 0,
+  "finished_at": "2026-09-13T17:03:57.272907428+00:00",
+  "inherited_root_pdf_sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862",
+  "output": "/tmp/ns024-manuscript-build-v1",
+  "release_binary_adopted": false,
+  "started_at": "2026-09-13T17:03:56.064867980+00:00",
+  "toolchain": {
+    "bibtex": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/bibtex",
+    "pdflatex": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex"
+  },
+  "worker_pdf": {
+    "bytes": 252576,
+    "matches_accepted_0fb82abb": false,
+    "sha256": "dfb5e0c03efd858dab9775405802b3bf934eef62c3daab8e3946b12875fc62c6"
+  }
+}
