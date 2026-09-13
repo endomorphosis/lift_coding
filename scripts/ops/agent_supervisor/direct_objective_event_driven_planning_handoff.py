@@ -3735,9 +3735,9 @@ def recover_legacy_verification_timeout(
     scoped Quack command supplies the CAS and idempotency boundary; historical
     workspace bytes are preserved and cannot serve as completion evidence.
     """
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.legacy_verification_retry import (
-        hold_legacy_retry_queue_absence,
-        inspect_legacy_verification_retry,
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.legacy_quarantined_predecessor import (
+        hold_legacy_verification_retry_observation,
+        inspect_legacy_retry_profile,
     )
     from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import checkout_repository_id
 
@@ -3787,17 +3787,15 @@ def recover_legacy_verification_timeout(
                     or saved.get("projection_path") != str(projection)):
                 raise HandoffError("retained legacy retry authorization differs")
         if current.get("status") == "blocked" and current.get("revision") == expected_revision:
-            evidence = inspect_legacy_verification_retry(
+            with hold_legacy_verification_retry_observation(
                 current, task_projection=projection, allowed_attempt_root=paths["state"],
                 retained_worktree_root=paths["root"] / "worktrees",
                 expected_task_revision=expected_revision,
-            )
-            with hold_legacy_retry_queue_absence(
                 queue_dir=paths["root"] / "merge-queue",
                 target_repository_id=checkout_repository_id(ROOT),
                 target_branch=board.merge_target_branch,
-                evidence=evidence,
-            ) as queue_evidence:
+                repository_root=ROOT,
+            ) as (evidence, queue_evidence):
                 body = json.loads(current["body_json"])
                 terminal = body["completion_receipt"]
                 cooldowns = client.execute("executor_retry_cooldown_by_task", {"task_cid": task_cid})
@@ -3825,7 +3823,7 @@ def recover_legacy_verification_timeout(
                       or saved.get("expected_released_cooldown") != prior_cooldown):
                     raise HandoffError("legacy retry predecessor changed after authorization")
                 # Recheck the retained history immediately before the guarded CAS.
-                if inspect_legacy_verification_retry(
+                if inspect_legacy_retry_profile(
                     current, task_projection=projection, allowed_attempt_root=paths["state"],
                     retained_worktree_root=paths["root"] / "worktrees",
                     expected_task_revision=expected_revision,

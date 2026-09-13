@@ -29,7 +29,7 @@ def operator(tmp_path, monkeypatch):
     row = {"task_alias": "DOEP-041", "task_cid": "task:041", "revision": 4,
            "status": "blocked", "body_json": json.dumps(body)}
     calls = []; submissions = []; active_guard = [False]; fail_after_cas = [False]
-    evidence = {"evidence_id": "sha256:" + "e" * 64, "require_fresh_portal_revalidation": True,
+    evidence = {"schema": legacy.SCHEMA, "evidence_id": "sha256:" + "e" * 64, "require_fresh_portal_revalidation": True,
                 "retained_candidate_admitted": False}
     monkeypatch.setattr(m, "_load", lambda: (board, population, paths))
     monkeypatch.setattr(m, "_pid_alive", lambda _: False)
@@ -74,7 +74,7 @@ def operator(tmp_path, monkeypatch):
     monkeypatch.setattr(m, "_make_blocked_retry_recovery_client",
                         lambda *_args, **_kw: (client, SimpleNamespace(grant_id="grant:041")))
     return SimpleNamespace(m=m, legacy=legacy, row=row, body=body, paths=paths, projection=projection,
-        evidence=evidence, calls=calls, submissions=submissions, fail_after_cas=fail_after_cas)
+        evidence=evidence, calls=calls, submissions=submissions, fail_after_cas=fail_after_cas, guard=guard)
 
 
 def run(op):
@@ -153,3 +153,46 @@ def test_source_forest_change_during_recovery_never_submits(operator, monkeypatc
         run(operator)
     assert operator.submissions == []
     assert operator.calls[-3:] == ["client-closed", "grant-revoked", "server-stopped"]
+
+
+def test_native_operator_selects_reconciled_predecessor_and_holds_exact_guard(operator, monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import legacy_quarantined_predecessor as prior
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge import DatabasePortalBridgeError
+
+    def single(*args, **kwargs):
+        raise DatabasePortalBridgeError("legacy verification retry has no single completed provider lifecycle")
+
+    expected = {**operator.evidence, "schema": prior.SCHEMA, "predecessor_queue_settlement_required": True}
+    monkeypatch.setattr(operator.legacy, "inspect_legacy_verification_retry", single)
+    monkeypatch.setattr(prior, "inspect_reconciled_legacy_verification_retry", lambda *a, **k: copy.deepcopy(expected))
+
+    @contextmanager
+    def guard(**kwargs):
+        assert kwargs['repository_root'] == operator.m.ROOT
+        assert kwargs['evidence'] == expected
+        with operator.guard(**kwargs) as receipt:
+            yield {**receipt, 'matching_queue_rows': 1, 'quarantined_predecessor_unchanged': True}
+
+    monkeypatch.setattr(prior, "hold_reconciled_legacy_retry_queue", guard)
+    assert run(operator) == 0
+    assert len(operator.submissions) == 1
+    assert operator.calls.index('queue-held') < operator.calls.index('cas') < operator.calls.index('queue-released')
+    saved = json.loads(next(operator.paths['evidence'].rglob('legacy-verification-*.json')).read_text())
+    assert saved['evidence'] == expected
+    assert saved['queue_evidence']['matching_queue_rows'] == 1
+    assert saved['require_fresh_portal_revalidation'] is True
+
+
+def test_unknown_predecessor_never_reaches_operator_cas(operator, monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import legacy_quarantined_predecessor as prior
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge import DatabasePortalBridgeError
+
+    def refuse(*args, **kwargs):
+        raise DatabasePortalBridgeError('unsettled candidate history')
+
+    monkeypatch.setattr(operator.legacy, 'inspect_legacy_verification_retry', refuse)
+    monkeypatch.setattr(prior, 'inspect_reconciled_legacy_verification_retry', refuse)
+    with pytest.raises(DatabasePortalBridgeError, match='unsettled candidate'):
+        run(operator)
+    assert operator.submissions == [] and 'queue-held' not in operator.calls
+    assert operator.calls[-3:] == ['client-closed', 'grant-revoked', 'server-stopped']
