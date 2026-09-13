@@ -1,0 +1,421 @@
+{
+  "all_six_rows_all_18_original_cells_have_observation_or_explicit_scope": true,
+  "criteria_exact": [
+    "Every Table 18 cell has an evidence-backed outcome/ID or explicit untested/unavailable scope; no TBD or synthetic proof of progress remains.",
+    "All retained claims point to code/runtime/population and reproducible measured artifacts.",
+    "False-admission, false-reuse, inability to dispatch, and recovery failures remain visible and trigger narrowed conclusions where required.",
+    "Author-only plans and old campaign success labels cannot override current evidence."
+  ],
+  "destination_preimages": [
+    {
+      "exists": false,
+      "repository_path": "papers/completion/neurosymbolic_supervision/analysis/boundary_witnesses.json"
+    },
+    {
+      "exists": false,
+      "repository_path": "papers/completion/neurosymbolic_supervision/manuscript/generated/table18.tex"
+    },
+    {
+      "exists": false,
+      "repository_path": "papers/completion/neurosymbolic_supervision/audit/final_claim_evidence_matrix.json"
+    },
+    {
+      "exists": false,
+      "repository_path": "papers/completion/neurosymbolic_supervision/analysis/failure_cases.md"
+    }
+  ],
+  "final_claim_reconciliation_complete": false,
+  "final_empirical_boundary_joins": [
+    {
+      "boundary": "One HTTP proposal and candidate schema",
+      "claim": "Constructed admission/custody/timing controls; actual final proposal outcomes deferred.",
+      "control_evidence": [
+        "original_service",
+        "original_resource"
+      ],
+      "empirical_final_evidence_status": "deferred_to_root_reviewed_complete32_and_NS019",
+      "empirical_final_rows": [],
+      "id": "F-HTTP",
+      "scientific_success_inferred_from_controls": false,
+      "source_roles": [
+        "http_proposer.py",
+        "adapter.py",
+        "pilot_gateway.py"
+      ]
+    },
+    {
+      "boundary": "Exact candidate bytes and AI pre-score review",
+      "claim": "Missing review and changed sealed source are refused in constructed controls. This is no human fidelity or comprehensive adversarial-scorer guarantee.",
+      "control_evidence": [
+        "original_service",
+        "continued_overlay"
+      ],
+      "empirical_final_evidence_status": "deferred_to_root_reviewed_complete32_and_NS019",
+      "empirical_final_rows": [],
+      "id": "F-custody",
+      "scientific_success_inferred_from_controls": false,
+      "source_roles": [
+        "pilot_gateway.py",
+        "adapter.py"
+      ]
+    },
+    {
+      "boundary": "Signed independent cold-score/client acceptance",
+      "claim": "Inert service signatures and scope/resource joins qualified; actual signed scores and failed validation categories require complete retained final evidence.",
+      "control_evidence": [
+        "original_service",
+        "original_resource",
+        "continued_client_analysis"
+      ],
+      "empirical_final_evidence_status": "deferred_to_root_reviewed_complete32_and_NS019",
+      "empirical_final_rows": [],
+      "id": "F-score",
+      "scientific_success_inferred_from_controls": false,
+      "source_roles": [
+        "cold_scorer.py",
+        "pilot_client.py",
+        "pilot_gateway.py"
+      ]
+    },
+    {
+      "boundary": "Current source/lease/time admission",
+      "claim": "Exact cooperative lock/PID birth/inode/expiry and timing controls; no exclusive physical capacity or unstoppable holder guarantee. Old and continued executable versions differ.",
+      "control_evidence": [
+        "historical_native_gate",
+        "original_resource",
+        "continued_overlay",
+        "managed_fixture"
+      ],
+      "empirical_final_evidence_status": "deferred_to_root_reviewed_complete32_and_NS019",
+      "empirical_final_rows": [],
+      "id": "F-lease",
+      "scientific_success_inferred_from_controls": false,
+      "source_roles": [
+        "native_final_gate.py",
+        "lease_continuation.py",
+        "pilot_gateway.py"
+      ]
+    },
+    {
+      "boundary": "No retry and explicit failure accounting",
+      "claim": "Constructed unknown/pending boundary prevents redispatch; original signatures/runtime joins and failure preservation tested. Actual32 terminal/cleanup/cost ledger deferred.",
+      "control_evidence": [
+        "original_service",
+        "continued_overlay",
+        "continued_client_analysis"
+      ],
+      "empirical_final_evidence_status": "deferred_to_root_reviewed_complete32_and_NS019",
+      "empirical_final_rows": [],
+      "id": "F-failure",
+      "scientific_success_inferred_from_controls": false,
+      "source_roles": [
+        "pilot_gateway.py",
+        "pilot_client.py",
+        "lease_continuation.py"
+      ]
+    }
+  ],
+  "native_completion_claimed": false,
+  "preparation_only": true,
+  "schema": "ns020-boundary-witnesses-preparation/v1",
+  "table18_columns": [
+    "safe_rejection",
+    "valid_progress",
+    "evidence_ids"
+  ],
+  "table18_rows": [
+    {
+      "evidence_ids": [
+        "NS-008"
+      ],
+      "id": "B-provider",
+      "limitations": [
+        "Thin evaluate_provider_gate omits required view CIDs; direct typed KernelEvaluationRequest was used for the positive residual.",
+        "Kernel hook zero is not saved workflow calls; deny-all makes no useful progress.",
+        "No final A/B outcome or routing efficacy transfer."
+      ],
+      "population": "Hermetic add/scale fixture, 20 qualification rows. Injected residual provider process; no admitted production-model identity.",
+      "safe_rejection": {
+        "cases": [
+          {
+            "case_id": "residual_missing_authority_receipts",
+            "observed_reason": "missing_typed_resolvable_authority_receipts",
+            "polarity": "invalid",
+            "status": "pass",
+            "useful_progress": false
+          },
+          {
+            "case_id": "residual_mismatched_views",
+            "observed_reason": "missing_typed_resolvable_authority_receipts",
+            "polarity": "invalid",
+            "status": "pass",
+            "useful_progress": false
+          },
+          {
+            "case_id": "closes_claim_untrusted",
+            "observed_reason": "closes_claim_not_independent_success",
+            "polarity": "invalid",
+            "status": "pass",
+            "useful_progress": false
+          },
+          {
+            "case_id": "deny_all_control",
+            "observed_reason": "deny_all_not_useful_progress",
+            "polarity": "diagnostic",
+            "status": "pass",
+            "useful_progress": false
+          }
+        ],
+        "status": "observed_in_constructed_qualification"
+      },
+      "valid_progress": {
+        "cases": [
+          {
+            "case_id": "deterministic_unique_close",
+            "observed_reason": "analytical_unique_mapping",
+            "polarity": "valid",
+            "status": "pass",
+            "useful_progress": true
+          },
+          {
+            "case_id": "residual_authorized_progress",
+            "observed_reason": "residual_packet_authorized",
+            "polarity": "valid",
+            "status": "pass",
+            "useful_progress": true
+          }
+        ],
+        "status": "observed_constructed_fixture_only"
+      },
+      "witness": "Pre-implementation provider gate"
+    },
+    {
+      "evidence_ids": [
+        "NS-009"
+      ],
+      "id": "B-translation",
+      "limitations": [
+        "No kernel proof of arbitrary Python; all retained source_claim_admitted flags remain false.",
+        "SMT SAT/UNSAT unavailable in that historical profile; no interpolant/composition or incremental-state performance claim."
+      ],
+      "population": "32 reviewed atom, converter and IPA qualification rows.",
+      "safe_rejection": {
+        "cases": [
+          {
+            "case_id": "modal_erasure_obligation_lift",
+            "observed_reason": "dropped_modal_operator",
+            "polarity": "invalid",
+            "source_claim_admitted": false,
+            "status": "pass",
+            "useful_progress": false
+          },
+          {
+            "case_id": "temporal_erasure_always_lift",
+            "observed_reason": "dropped_modal_operator",
+            "polarity": "invalid",
+            "source_claim_admitted": false,
+            "status": "pass",
+            "useful_progress": false
+          },
+          {
+            "case_id": "unvalidated_solver_result_rejected",
+            "observed_reason": "evidence_kind_does_not_support_verdict",
+            "polarity": "invalid",
+            "source_claim_admitted": false,
+            "status": "pass",
+            "useful_progress": false
+          }
+        ],
+        "status": "observed_in_constructed_qualification"
+      },
+      "valid_progress": {
+        "cases": [
+          {
+            "case_id": "exact_atom_supported_progress",
+            "observed_reason": "exact_translation_conformant",
+            "polarity": "valid",
+            "source_claim_admitted": false,
+            "status": "pass",
+            "useful_progress": true
+          },
+          {
+            "case_id": "declared_conservative_modal_progress",
+            "observed_reason": "conservative_candidate_only",
+            "polarity": "valid",
+            "source_claim_admitted": false,
+            "status": "pass",
+            "useful_progress": true
+          }
+        ],
+        "status": "bounded_translation_progress_not_source_proof"
+      },
+      "witness": "Loss-aware formal translation"
+    },
+    {
+      "evidence_ids": [
+        "NS-014"
+      ],
+      "id": "B-native",
+      "limitations": [
+        "CLI help is capability observation only. Missing approved backend/circuit/key/setup provenance and exact statement/public inputs.",
+        "Native generation and verification costs null, not zero; desired future rejection rules are not executed controls."
+      ],
+      "population": "One unavailable-profile scope record, not a proving/verification run.",
+      "safe_rejection": {
+        "actual_boundary_outcome": null,
+        "status": "untested_unavailable_native_profile"
+      },
+      "valid_progress": {
+        "actual_boundary_outcome": null,
+        "status": "unavailable_no_genuine_native_proof"
+      },
+      "witness": "Current native theorem/circuit profile"
+    },
+    {
+      "evidence_ids": [
+        "NS-011",
+        "NS-027"
+      ],
+      "id": "B-reuse",
+      "limitations": [
+        "The selected historical 0/25 subset cannot replace all-attempt 1/26.",
+        "The correction retains four invocations and 48 attempted case records, including failed/partial invocations; it is not a new pooled reuse-safety denominator.",
+        "No admitted positive reuse profile, false-denial estimate or speedup. Current top-level selected-three baseline is historical; corrected snapshot evidence supplies full-cold claim."
+      ],
+      "population": "Original mocked-verifier 26 attempts (1 false reuse), plus separately retained correction invocations; two full 34-test public-baseline runs are preparation, not independent repair trials.",
+      "safe_rejection": {
+        "current_cases": [
+          "unconditional_callback_rejected",
+          "ns011_placeholder_certificate_rejected",
+          "changed_certificate_bytes_rejected",
+          "stale_key_without_rebind_rejected",
+          "teardown_failure_cannot_skip"
+        ],
+        "historical_counterexample": [
+          {
+            "case_id": "stale_key_presented_without_rebind",
+            "false_reuse": true,
+            "observed_reason": "proof_cache_hit",
+            "polarity": "invalid",
+            "reuse_action": "SKIP",
+            "status": "pass",
+            "unsound_reuse": true
+          }
+        ],
+        "status": "full_cold_removal_with_prior_false_reuse_retained"
+      },
+      "valid_progress": {
+        "case_id": "historical_xmltodict_unchanged_baseline_cold",
+        "corrected_invocations": [
+          "operator-repair-qualification-v3",
+          "operator-repair-qualification-v4"
+        ],
+        "reuse_credit": false,
+        "status": "actual_public_full_cold_only_no_reuse_progress"
+      },
+      "witness": "Fixture/call/teardown reuse"
+    },
+    {
+      "evidence_ids": [
+        "NS-012",
+        "NS-013"
+      ],
+      "id": "B-restart",
+      "limitations": [
+        "The sealer uses explicitly labeled kit proof_seal_store and datasets evidence shims.",
+        "Local durable CAS/Git fencing is not federation, global consensus or exactly-once external effects.",
+        "Integrated fixture pytest/integrity receipts are not native proof or final publication efficacy."
+      ],
+      "population": "27 local sealer controls, three recovery records and one integrated guard-before-write witness.",
+      "safe_rejection": {
+        "cases": [
+          {
+            "case_id": "empty_manifest_cannot_pass",
+            "observed_reason": "incomplete_manifest",
+            "polarity": "invalid",
+            "reason": "incomplete_manifest",
+            "status": "pass"
+          },
+          {
+            "case_id": "stale_parent_cannot_overwrite",
+            "observed_reason": "stale_parent",
+            "polarity": "invalid",
+            "status": "pass"
+          },
+          {
+            "case_id": "failed_units_cannot_publish",
+            "observed_reason": "proof_failed",
+            "polarity": "invalid",
+            "reason": "proof_failed",
+            "status": "pass"
+          },
+          {
+            "case_id": "pre_cas_crash_leaves_old_pointer",
+            "observed_reason": "pre_cas_pointer_unchanged",
+            "polarity": "invalid",
+            "status": "pass"
+          },
+          {
+            "case_id": "git_fence_mismatch_denied",
+            "observed_reason": "git_fence_mismatch_denied",
+            "polarity": "invalid",
+            "status": "pass"
+          }
+        ],
+        "status": "observed_local_constructed_controls"
+      },
+      "valid_progress": {
+        "cases": [
+          {
+            "case_id": "post_cas_crash_recovers_success",
+            "observed_reason": "recovered_success",
+            "polarity": "valid",
+            "status": "pass"
+          },
+          {
+            "case_id": "recovery_is_idempotent",
+            "observed_reason": "idempotent_recovery",
+            "polarity": "valid",
+            "status": "pass"
+          },
+          {
+            "case_id": "pre_cas_crash_then_valid_continuation",
+            "observed_reason": "valid_continuation",
+            "polarity": "valid",
+            "status": "pass"
+          }
+        ],
+        "status": "observed_local_wal_cas_recovery"
+      },
+      "witness": "Root publication after restart"
+    },
+    {
+      "evidence_ids": [
+        "NS-015"
+      ],
+      "id": "B-world",
+      "limitations": [
+        "No observed paired pre-state consumption, accepted transition and published post-state.",
+        "Source-present world query/admission is not consumed learned/world/procedure output.",
+        "No extension imports/training/synthesis/held-out consumption in this qualification; unavailable values remain null."
+      ],
+      "population": "Source-and-scope inventory only; retained extension set empty.",
+      "safe_rejection": {
+        "actual_boundary_outcome": null,
+        "status": "untested_out_of_scope"
+      },
+      "valid_progress": {
+        "actual_boundary_outcome": null,
+        "status": "untested_out_of_scope"
+      },
+      "witness": "Required world/procedure consumption"
+    }
+  ],
+  "task_id": "NS-020",
+  "trusted_assumptions": [
+    "Historical recorded scripts, runtimes, selected local fixtures and labeled shims delimit each observation.",
+    "A signature authenticates original bytes under its key assumptions, not test adequacy or semantic correctness.",
+    "Complete dependency/lifecycle projections, admitted write paths and uncontrolled external effects remain explicit assumptions.",
+    "Configured caps and passed constructed controls do not prove every actual call met its measured budget."
+  ]
+}

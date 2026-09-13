@@ -1,0 +1,36 @@
+This renderer is a prepared NS019 source input. It creates no results until the actual, root-reviewed complete32 NS017 bundle and the completed NS018 withdrawal records are present. Installing this source does not complete NS019.
+
+From the repository root, after those prerequisites have been committed, run one command using the two actual reviewed manifest file digests:
+
+```sh
+python3.12 -B papers/completion/neurosymbolic_supervision/analysis/analyze.py \
+  --repository "$PWD" \
+  --manifest-sha256 ACTUAL_REVIEWED_NS017_MANIFEST_SHA256 \
+  --ablation-manifest-sha256 ACTUAL_COMMITTED_NS018_MANIFEST_SHA256 \
+  --output /absolute/fresh/ns019-rendered-final32
+```
+
+The command writes `analysis/results.json`, `analysis/statistical_report.md`, `analysis/cost_report.md`, `manuscript/generated/table17.tex`, `manuscript/generated/ablations.tex`, and the PDF/SVG family comparison figure under `manuscript/generated/figures/`. These paths are relative to the fresh output directory. The ordinary NS019 worker reviews and adopts those generated files under `papers/completion/neurosymbolic_supervision/`, records its actual validation, and retains its normal task receipt. Existing evidence is never overwritten by the command.
+
+The required immutable inputs are:
+
+- `runs/main/manifest.json`, the three main JSONL projections, and the content-addressed objects named in the NS017 manifest. The manifest must be `ns017-actual-final32-main-adoption/v1`, with all 32 actual terminals, the original ordering, eight families, two nested repetitions, and the original freeze/policy identities. Its root complete-evidence review must be accepted, nonfixture, strict, and have zero unknown local terminations.
+- The manifest's exact retained strict analysis, original Ed25519 receipt verifier source, export authority, final public offers/signed receipts/dispositions, reviewed validation disclosures, and separately retained operator cost manifest. Original private paths inside provenance documents are never followed; their digests resolve only to the repository's NS017 object directory. Candidate source, public archives, and hidden/scorer bodies are not opened by this renderer.
+- `pilot/recovery/final_input_source/analysis_policy.json`, whose fixed SHA256 is in `analyze.py`.
+- The completed NS018 `runs/ablations/{manifest.json,attempts.jsonl,resource_measurements.jsonl,deviations.md}`. Both measured JSONL datasets must be byte-empty. The withdrawal manifest binds the original 192 planned cells, retained 32, and disjoint 128 non-A/B plus 32 A/B warm withdrawals. The prepared NS018 metadata is a source input, not measured ablation evidence.
+
+The statistical implementation is the exact reviewed `analyze_continuation.py` source with SHA256 `ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94`. Only its named pure functions and three constants are compiled; its module imports and main are not run. Every recomputed summary field must equal the retained strict analysis, including the draw digest from the 20,000 shared whole-family bootstrap resamples. This introduces no second estimator. The original client source SHA256 `4675aeb4e650819cd55f53f737d9426dcd8664a80c50b3f44d0db7a5240c8f84` supplies the unchanged signature, receipt-scope and failure-disposition definitions. Only public-key verification uses OpenSSL; no model, scorer, service, native store, or candidate code is invoked.
+
+The figures are descriptive views of the same eight paired family means. The repetitions are not independent families or claimed served-API random seeds. A degenerate conditional interval does not establish equality, safety, promotion, or population-wide superiority. Withdrawn C/D, warm/reuse, publication, and human-fidelity endpoints receive no estimates. Raw outcomes, resource failures, incomplete hidden-validation disclosures, mixed runtime provenance, and prior costs retain their original scope. Nested stage clocks are separate; missing values and settled charges remain unavailable rather than zero. Isolated ablation cost components remain unmeasured.
+
+This is a numerical and signed-metadata replay. It does not repeat full service/native admission, regenerate candidates, execute hidden tests, or reproduce original provider outputs. The retained root bundle is the authority for those original observations and their review. The internal results include provenance references and are not an anonymous publication archive; NS024 must use the separately reviewed anonymous derivative and preserve its mapping to private originals.
+
+The cost report now includes every recorded final operator phase's enclosing wall time, measurement flag, missing reason, exit code and retry flag, with links to the retained content-addressed execution records. The exact `export_operator_phase_costs.py` scalar projector is reused to check these values; its source and each present execution record are included by the NS017 builder. No phase total is newly estimated or added to signed component clocks.
+
+The installed `writing_inputs/ns024_prior_evidence_v1/component/manifest.json` is additionally required at SHA256 `1d00715d05bbea2c7cab0ef1892f039153cc12ea0820bd556a13452ffe6b70a7`. Its six original-ledger digest commitments must match the strict analysis. The renderer copies its already reported preparation/protocol/lease clock summaries, separate pilot gateway/usage summaries, unknown-count fields and coverage limitations. It links to the exact readable records and timing disclosure. The original prior summary uses empty observed sums of zero in some fields; these remain unchanged in JSON provenance, while a field with zero observed records is displayed as unavailable in the report. No second cost estimator or complete-cost claim is introduced. Report links are relative to their final adopted repository location.
+
+The prepared code was checked on Python 3.12.3, Matplotlib 3.10.8 and the installed OpenSSL. Python 3.12 is required for the frozen arithmetic runtime. Matplotlib is used only for a standard two-dimensional figure. Cross-version PDF/SVG byte identity is not claimed; the numerical results and retained source/hash joins are deterministic. A local optional Axes3D import warning did not affect the exercised two-dimensional figure.
+
+The original reducer field `signed_terminal_sha256` names the operator's terminal-observation metadata file. It is distinct from the export authority's signed response/disposition digest. The renderer joins the observation to the retained strict input-binding map and authenticates the public signed bytes against their separate export digest. It preserves both commitments; it does not equate or relabel them.
+
+NS024 also needs the separately prepared NS020 boundary-qualification records underlying any claimed NS020 observations. The final32 component and prior pilot/cost component alone do not cover that obligation. The internal boundary preparation contains 118 selected bindings (about 2.1 MB); it still requires an eligible readable/reproducible public derivative and its original-to-public mapping. Internal `NS-NNN` task identifiers appearing in tables need a defined supplement index in the manuscript. Neither requirement is satisfied by this renderer or by adding those claims to a caption.
