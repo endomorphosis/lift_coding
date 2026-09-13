@@ -1,0 +1,64 @@
+{
+  "files": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md": "8eb5a09ec06fb34c58cd8527fd1d08a242c19c62b7359d58515673010f7f33eb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656"
+  },
+  "root_admission_sha256": "ca4cee32d84f1b611a7d082b58e344592ac5777533f84139be1ac35edfff9470",
+  "root_complete_review": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la015_fixed_action_recovery_v1/completion_adoption_v1/root_complete_matrix_review.private.json",
+    "sha256": "92db8cf6d22e5dcef3198ce28726252fb5479c3572406d74f985e4b19021bdba"
+  },
+  "schema": "la029-root-reviewed-import-bindings/v1",
+  "scope": "Verified actual retained operator evidence. This import performs no new scientific execution.",
+  "source_versions": {
+    "adoption_native_pins": {
+      "external/ipfs_accelerate": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "adoption_source_baseline": "6982551762d479629b14f0bfb394ce31fe9784b3",
+    "aggregate_package": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la015_fixed_action_recovery_v1/aggregate_v1/package.private.json",
+      "sha256": "431ab0e8fb44af7f6a5cda31f515cde31aca29bbfe887f95e0dc42899f8f55ab"
+    },
+    "aggregate_source": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/la015_fixed_action_recovery_v1/aggregate_v1/aggregate.py",
+      "sha256": "1826005e94cb80ce9aafbbd182746fde26a21b89e325854414115eff701f536a"
+    },
+    "container_startup_recoveries": [
+      591,
+      625
+    ],
+    "frozen_inputs_sha256": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+    "harness_version": "la029-complete-operator-adoption/v1",
+    "host_attempts": 902,
+    "human_agreement": null,
+    "human_fidelity": null,
+    "model_calls": 0,
+    "new_scientific_execution_in_adoption": false,
+    "original_fixed_action_source_head": "7fc7c210531cf61ae22094a6d23b485b32b2f626",
+    "original_implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "original_operator_source_commit": "d6127a257a433fabb8183180d82cc3b309040c47",
+    "original_schedule_sha256": "80366f623ecbf5883be07311f9e3981813c86f7cdfe802d66ee5388d7677fb9e",
+    "run_manifest_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+    "scientific_retries": 0,
+    "scientific_rows": 900
+  },
+  "summary_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656"
+}
