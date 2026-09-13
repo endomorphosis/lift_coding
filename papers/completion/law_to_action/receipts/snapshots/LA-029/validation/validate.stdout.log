@@ -1,0 +1,27 @@
+{
+  "all900_resource_qualified": true,
+  "container_startup_recoveries": [
+    591,
+    625
+  ],
+  "frozen_inputs_sha256": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+  "host_attempts": 902,
+  "human_agreement": null,
+  "human_fidelity": null,
+  "imported_snapshot_hashes_verified": true,
+  "infrastructure_startup_cpu_seconds": 0.118787,
+  "model_calls": 0,
+  "original_diagnostic_cpu_seconds": null,
+  "original_monitor_failures_retained": [
+    459,
+    560
+  ],
+  "pending_template_sha256": "d08721031efc49a2b4cd41de645fbacc07cd1a3c1ac82e832002be780bf181f9",
+  "rows": 900,
+  "run_manifest_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+  "schema": "la029-operator-adoption-validation/v1",
+  "scientific_cell_group_cpu_seconds": 1608.698691,
+  "scientific_execution": false,
+  "scientific_retries": 0,
+  "summary_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656"
+}
