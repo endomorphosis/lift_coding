@@ -1,0 +1,126 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-017",
+  "status": "complete",
+  "template_only": false,
+  "completed_at": "2026-09-13T12:41:26.445124+00:00",
+  "scope": "Ordinary adoption of the root-preinstalled actual32 A/B local-cold evidence. This completion verifies retained hashes and writes the paper receipt; it does not issue grants, run models, scorers, contexts, experiments, retries, or resource-lease actions.",
+  "source_versions": {
+    "analysis_source_sha256": "ed7ebc7d939c9592537e33a6a37a6962ceaeca84b5da3b5efd0cbb641f652e94",
+    "actual32_bundle_sha256": "f8488d8e69f097a8332ec6ae41aded6b260e5ad8df90531bd539d6f9e85b4f46",
+    "effective_continuation_host_source_sha256": "2d004403fdb8e56a028ce45514b81e4a03789109f861407f75dae038a8ca4744",
+    "export_source_sha256": "b62c6283bcfcfb5afc3f8289ea273a82101aee117275dfce91c18960deebd081",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "native_accelerate": "60baee769d39a53c52142c56fbf6ed7483773aa3",
+    "native_datasets": "b9686e09beb4973fea13a9c6d93d40b6d2741366",
+    "native_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "original_frozen_host_source_sha256": "5c51d42f911d5423cb7485bee441de486a60774e8366c6d66311b2b8e7482df4",
+    "pending_receipt_template_sha256": "384f24146bdd10e93b690a21e6a987c8d8329691482d0e4d36d0314fd60576d6",
+    "strict_complete32_analysis_sha256": "824366e7fb10725be884b04448d5b4a8dd2ff5c478af5df7a8c98721f4641766",
+    "runtime_epochs": [
+      "original_resource_lease",
+      "prospective_resource_lease_continuation"
+    ]
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.log": "02ca7b18915c5fcc44ea909b459cf9807c4a25fc08cbcacbf0da2416aa217963",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.py": "e94e35a6799c99a81c347436323c72861b5577372b6dcb206295d2fdde671227",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl": "7d3471f965cc9bd6c024e1fd9c528b9797c40601e5083eb8f1f506d78094716f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md": "af86395218d147f7a9707bce476cf7aa002fe3af87df8a0a1b3f658608ff0c24",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl": "8448634cb9dd6569a46dc9a90dbd48f99f047a798014df7f461c19d93b7bd55a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl": "97e9a1bb9503886c3a609322cab8dbe1e927854df10bee5805be16240eec17ee"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/runs/main/attempts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+    "papers/completion/neurosymbolic_supervision/runs/main/deviations.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md",
+    "papers/completion/neurosymbolic_supervision/runs/main/manifest.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+    "papers/completion/neurosymbolic_supervision/runs/main/provider_receipts.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+    "papers/completion/neurosymbolic_supervision/runs/main/resource_measurements.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl"
+  },
+  "criteria": [
+    {
+      "criterion": "All planned task-arm-repeat units have an actual terminal record or explicitly documented missingness; denominator changes are prohibited after outcomes.",
+      "status": "met",
+      "explanation": "The adopted main run retains all 32 original-order A/B local-cold cells across eight final families and two nested repetitions (104729, 130363). Ordinary validation joined 32 terminal attempt rows, 32 original signed receipts, and the strict complete32 analysis (missing_or_nonterminal=0). Outcomes remain 9 full_cold_pass, 7 hidden_acceptance_failed, 14 proposal_child_deadline, and 2 known_proposal_failure. The one incomplete hidden collection (cell 5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1) keeps the signed hidden_acceptance_failed label; it is not an observed hidden assertion failure or a proven infrastructure fault. The other six hidden-acceptance failures have nonempty hidden collection. No cell leaves the 32-cell denominator. C/D routing, warm caches, reuse, publication-comparison efficacy, and the original 16-family inferential objective stay withdrawn rather than added after outcomes. Mixed runtime provenance (7 original-lease cells and 25 continuation cells) does not change identities, order, or limits.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.log"
+      ]
+    },
+    {
+      "criterion": "Useful completions are independently validated and linked to admitted publication where the arm requires it.",
+      "status": "met",
+      "explanation": "Nine useful completions (A 5/16, B 4/16) each join an original signed receipt to an independently scoped host-cold scorer pass, a bound ai_operator candidate review object, and raw_scorer_success. Publication is not required by either retained arm; anonymous_release_admitted remains false and no publication linkage is claimed. Human annotation is false on all 32 cells; human semantic fidelity remains unmeasured. This ordinary adoption issued no grants, model requests, or scorer invocations. C/D, warm/reuse, and publication-comparison efficacy stay withdrawn, not completed benchmark outcomes.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.log"
+      ]
+    },
+    {
+      "criterion": "Actual provider and stage measurements support the final cost fields; estimated/unavailable data remain distinct.",
+      "status": "met",
+      "explanation": "All 32 provider rows have one actual POST, unknown_external_charge=true, and settled_provider_cost status unavailable rather than zero. Resource rows keep nested provider-child, HTTP-wrapper, gateway, scorer, client, grant-to-terminal, and operator-phase clocks; missing_is_zero is false. Sixteen unscored cells retain null scorer clocks. Operator-review effort is null on all 32 rows. Fourteen measured child-deadline overruns remain resource-unqualified. Six prior/setup ledgers stay separately bound and are not pooled into final outcomes. Mixed runtime/cost disclosures and incomplete hidden validation remain explicit.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.log"
+      ]
+    },
+    {
+      "criterion": "Raw records and deviations bind the immutable final experiment freeze and are sufficient for independent rescoring.",
+      "status": "met",
+      "explanation": "The adopted attempts, provider receipts, resource measurements, and deviations bind canonical freeze ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d and freeze file SHA256 7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a. Ordinary validation hashed the exact 631-file actual32 bundle f8488d8e69f097a8332ec6ae41aded6b260e5ad8df90531bd539d6f9e85b4f46 and all 32 original signed receipts, including public candidate references, independent cold scalars, bound AI/operator reviews, cleanup/budget fields, and original unscored rejections. Hidden oracle and reference-patch payloads are not in this bundle; independent hidden rescoring requires separately authorized scorer custody. This source amendment does not change the experiment after outcomes.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/manifest.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/attempts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/provider_receipts.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/resource_measurements.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/operator_adoption_v1/deviations.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns017-adoption-GzMAaL",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns017-adoption-GzMAaL/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns017-adoption-GzMAaL/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns017-adoption-GzMAaL/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns017-adoption-GzMAaL/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.py"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 0.089586,
+      "execution_kind": "sealed-profile retained-evidence hash check of the root-preinstalled actual32 bundle; no provider, scorer, grant, lease, or experiment rerun",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T12:40:20.473203+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-017/adoption_validation/verify_retained_evidence.py",
+      "started_at": "2026-09-13T12:40:20.383617+00:00"
+    }
+  ],
+  "limitations": [
+    "This completion reviews already-retained signed final32 evidence; it does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions.",
+    "Incomplete hidden validation on cell 5b9fa96eca823dc3ffd30cbb91900160bc9cfa53476b5fe5bb462b114b47b1a1 preserves the signed hidden_acceptance_failed label and is not an observed hidden assertion failure or a proven infrastructure fault.",
+    "Runtime provenance is mixed: 7 cells used the original resource lease and 25 used a prospectively admitted continuation with a different executable source. The original freeze file remains a pre-outcome record.",
+    "All 32 external provider charges remain unsettled. Nested clocks are not an additive grand total. Missing scorer time, operator-review effort, and authoring effort remain unavailable, not zero.",
+    "Publication is not required by either retained arm. Anonymous release is not admitted. Hidden oracle payloads are omitted; independent hidden rescoring needs separately authorized scorer custody.",
+    "C/D routing, warm caches, reuse, publication-comparison efficacy, and original 16-family inferential objectives are withdrawn, not completed benchmark outcomes.",
+    "Outside human review is not required; human semantic fidelity remains unmeasured. Native task completion is not claimed."
+  ]
+}
