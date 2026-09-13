@@ -1,0 +1,43 @@
+{
+  "all_original_9933_commitments_unchanged": true,
+  "all_other_indexed_member_bytes_unchanged": true,
+  "derived_public_archive_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+  "only_two_indexed_members_changed": true,
+  "original_files_modified": false,
+  "original_portable_archive_sha256": "5456553d86dd7397ce4bd6b090ab02614da9721160974a8a4bb5b6e074d3e58d",
+  "original_portable_index_sha256": "11fbb987f90130aa40f842b5c2addcf1c7c7aa49d571ac74acead4f7be043078",
+  "original_portable_manifest_sha256": "62a11f6bfa91c0b78e1151204a0243c4d579f9c08f129ed560ce336ea8310917",
+  "schema": "la029-public-project-link-redaction/v1",
+  "scientific_executions": 0,
+  "scientific_fields_modified": false,
+  "transforms": [
+    {
+      "original_sha256": "f67bbe99b71dbe112922ce153a29038294f219d1cbad7e5f55da79b145ce41e5",
+      "path": "recovery_history/candidate/papers/completion/law_to_action/paper.todo.md",
+      "prior_bytes": 111795,
+      "prior_portable_sha256": "f67bbe99b71dbe112922ce153a29038294f219d1cbad7e5f55da79b145ce41e5",
+      "public_bytes": 111737,
+      "public_sha256": "fa5c1747d0ecb71a7644d847efab27ebdeed8d2470270c2c3e1673ca4d85702e",
+      "redacted_occurrences": 2,
+      "redacted_value_sha256": [
+        "350cab2a21cd1659671cccb29dc494ea2f5fd1bda47c570075173b6694552c84"
+      ],
+      "replacement": "PRIVATE_PROJECT_URL_REDACTED",
+      "scope": "Only a private project URL in retained administrative source metadata. No observed data, scientific outcome, cost, source definition or original digest commitment changed."
+    },
+    {
+      "original_sha256": "b481b0f3dce145fce354369dcb8a72fd0a133e9985a095d76fbd4b485d289d1f",
+      "path": "recovery_history/candidate/papers/completion/law_to_action/tasks.json",
+      "prior_bytes": 72523,
+      "prior_portable_sha256": "b481b0f3dce145fce354369dcb8a72fd0a133e9985a095d76fbd4b485d289d1f",
+      "public_bytes": 72465,
+      "public_sha256": "2630cbeaade569213262e9654a9a7fa06a0fd3232cd6c521f168ae589a18ace4",
+      "redacted_occurrences": 2,
+      "redacted_value_sha256": [
+        "350cab2a21cd1659671cccb29dc494ea2f5fd1bda47c570075173b6694552c84"
+      ],
+      "replacement": "PRIVATE_PROJECT_URL_REDACTED",
+      "scope": "Only a private project URL in retained administrative source metadata. No observed data, scientific outcome, cost, source definition or original digest commitment changed."
+    }
+  ]
+}

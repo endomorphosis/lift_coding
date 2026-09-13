@@ -1,0 +1,218 @@
+{
+  "analysis": {
+    "all_45_paired_family_bootstrap_contrasts_recomputed": true,
+    "all_9933_original_reducer_inputs_verified": true,
+    "all_package_files_verified": true,
+    "compact_analysis": {
+      "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+      "exit_code": 0,
+      "scope": "offline retained analysis and local harness controls; no scientific execution",
+      "timed_out": false,
+      "wall_seconds": 0.8668964749667794
+    },
+    "new_scientific_executions": 0,
+    "recovery_analysis": {
+      "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+      "exit_code": 0,
+      "scope": "offline retained analysis and local harness controls; no scientific execution",
+      "timed_out": false,
+      "wall_seconds": 15.143738109967671
+    },
+    "schema": "law-final-offline-reproduction/v1",
+    "scope": {
+      "actual_group_cpu_seconds": 1608.817478,
+      "analysis": "retained modeled-policy sandbox effects and paired family bootstrap; not new physical enforcement or scientific execution",
+      "historical_host_false_flags_preserved": [
+        459,
+        560
+      ],
+      "historical_startup_failures_preserved": [
+        591,
+        625
+      ],
+      "host_attempts": 902,
+      "human_agreement": null,
+      "human_fidelity": null,
+      "model_calls_in_fixed_action_study": 0,
+      "new_scientific_executions": 0,
+      "scientific_rows": 900,
+      "startup_cpu_seconds_counted_once": 0.118787
+    },
+    "success": true
+  },
+  "commands": [
+    {
+      "argv_semantic": [
+        "python3",
+        "-B",
+        "evaluation/final_correction/assemble_package.py",
+        "--paper",
+        "PAPER",
+        "--output",
+        "FRESH_ARTIFACT"
+      ],
+      "cpu_seconds": null,
+      "elapsed_seconds": null,
+      "exit_code": 0,
+      "label": "final_artifact_v4",
+      "scope": "actual source/retained-data/LaTeX qualification; no scientific execution",
+      "source": "papers/completion/law_to_action/evaluation/final_correction/assemble_package.py",
+      "source_sha256": "419f63cf6d373e04d0cae5c8557aff6e4aebaa0dbfd04c1f5c01afdc54287791",
+      "stderr": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_artifact_v4.stderr.txt",
+      "stdout": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_artifact_v4.stdout.txt"
+    },
+    {
+      "argv_semantic": [
+        "python3",
+        "-I",
+        "-B",
+        "evaluation/final_correction/reproduce.py",
+        "--zip",
+        "FRESH_ARTIFACT/anonymous_supplement.zip",
+        "--output",
+        "FRESH_ANALYSIS"
+      ],
+      "cpu_seconds": null,
+      "elapsed_seconds": null,
+      "exit_code": 0,
+      "label": "final_analysis_v4",
+      "scope": "actual source/retained-data/LaTeX qualification; no scientific execution",
+      "source": "papers/completion/law_to_action/evaluation/final_correction/reproduce.py",
+      "source_sha256": "268f1a58d1a907119cfdd57dc04e1be049adbb043e4c82cbfc4dd10ab1925f26",
+      "stderr": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_analysis_v4.stderr.txt",
+      "stdout": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_analysis_v4.stdout.txt"
+    },
+    {
+      "argv_semantic": [
+        "./build_pdf.sh",
+        "FRESH_PDF"
+      ],
+      "cpu_seconds": null,
+      "elapsed_seconds": null,
+      "exit_code": 0,
+      "label": "final_pdf_v4",
+      "scope": "actual source/retained-data/LaTeX qualification; no scientific execution",
+      "source": "papers/completion/law_to_action/evaluation/final_correction/build_pdf.sh",
+      "source_sha256": "67ddba6c541816579eec3383d0e9b17e01999c50c1ff3a83e3901a1e35370478",
+      "stderr": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_pdf_v4.stderr.txt",
+      "stdout": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_pdf_v4.stdout.txt"
+    },
+    {
+      "argv_semantic": [
+        "python3",
+        "-B",
+        "evaluation/final_correction/inspect_final.py",
+        "--paper",
+        "PAPER",
+        "--build",
+        "FRESH_PDF",
+        "--archive",
+        "FRESH_ARTIFACT/anonymous_supplement.zip",
+        "--analysis",
+        "FRESH_ANALYSIS",
+        "--output",
+        "FRESH_REPORT"
+      ],
+      "cpu_seconds": null,
+      "elapsed_seconds": null,
+      "exit_code": 0,
+      "label": "final_inspection_v4",
+      "scope": "actual source/retained-data/LaTeX qualification; no scientific execution",
+      "source": "papers/completion/law_to_action/evaluation/final_correction/inspect_final.py",
+      "source_sha256": "57f67a32531508841bfea4bd830b25302a7b44718c95327409fbca01e9da019c",
+      "stderr": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_inspection_v4.stderr.txt",
+      "stdout": "papers/completion/law_to_action/evidence/public_redaction_v4/logs/final_inspection_v4.stdout.txt"
+    }
+  ],
+  "earlier_preparation_failures": [
+    {
+      "kind": "overrestrictive additional CPU affinity caused two original five-second harness smoke timeouts",
+      "resolution": "original compact harness retains caller affinity; scientific study unaffected"
+    },
+    {
+      "kind": "checklist inspector counted blank lines left by instruction removal",
+      "resolution": "match the exact original instruction-block removal including adjacent whitespace; questions/guidelines unchanged"
+    }
+  ],
+  "format": {
+    "all_actual_resource_cost_and_pairing_analysis_verified": true,
+    "anonymous_default_style": true,
+    "answers": [
+      "Yes",
+      "Yes",
+      "NA",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "No",
+      "NA",
+      "Yes",
+      "Yes",
+      "NA",
+      "NA",
+      "NA"
+    ],
+    "archive": {
+      "bytes": 31209772,
+      "sha256": "e46b58516a47020e3df826bb7cdc3f870566c28a6a3eb92c5abf53c64ed679e1"
+    },
+    "checklist_questions": 16,
+    "external_submission": false,
+    "limits": "Source/PDF/package conformance and retained-data analysis; not new scientific execution, expert validation or workshop acceptance.",
+    "main_pages": 7,
+    "neutral_symbols_resolve_to_included_sources": 8,
+    "new_scientific_executions": 0,
+    "official_template_hashes": {
+      "checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250"
+    },
+    "pdf": {
+      "bytes": 215003,
+      "sha256": "b306a5d4c64961f9e9a1c061dac99645fbc3fca406621092ba813bc3cd221ecb"
+    },
+    "recursive_public_archive_audit": {
+      "archives": 3,
+      "expanded_bytes": 231059546,
+      "members": 10028,
+      "private_project_links": 0
+    },
+    "schema": "law-final-paper-artifact-inspection/v1",
+    "shared_templates_unchanged": true,
+    "source_and_pdf_placeholders_absent": true,
+    "success": true,
+    "total_pages": 23
+  },
+  "human_review_collected": false,
+  "native_status_changes": 0,
+  "new_scientific_runs": 0,
+  "original_attempt_not_replayed": true,
+  "preserved_failed_LA024_commit": "b932446ac8151e5733ecbc964e4a5568c74d5eb8",
+  "preserved_failed_LA024_receipt_sha256": "026278b4f85d1eb57e55454ac5ffab6f197805a8b666289a17598a43c5ba6322",
+  "provider_calls": 0,
+  "public_archive_correction": {
+    "original_v3_public_archive_rejected": true,
+    "public_derivation": "papers/completion/law_to_action/artifact/recovery_source_public_v4/public_derivation.json",
+    "recursive_archive_audit": {
+      "archives": 3,
+      "expanded_bytes": 231059546,
+      "members": 10028,
+      "private_project_links": 0
+    },
+    "scope": "Exactly four private project URL occurrences redacted from two administrative metadata members; old archive remains privately retained. All original digest commitments and every other indexed member remain unchanged."
+  },
+  "qualification_limits": "Analysis consumes retained observations; it is not fresh scientific execution, full runtime provision, expert validation or publication.",
+  "recorded_at": "2026-09-13T03:45:30.378124+00:00",
+  "schema": "law-final-corrective-execution/v1",
+  "source_base": "e5bff61dbe708a5b8002a20666e8d423eeb00305",
+  "success": true,
+  "visual_inspection": {
+    "actual_last_main_page": 7,
+    "no_font_or_margin_override": true,
+    "partial_page_counted": true,
+    "review_line_numbers_visible": true
+  }
+}

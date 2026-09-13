@@ -26,6 +26,19 @@
     "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/limitations.tex": "b454ac8d2925e9ebfa865b9127f0b236d8842e0f57d05dc21efaee73b2fa071e",
     "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/main.tex": "e09dbcc3f00e7ce6f74a089db1c4b4f02fe48695fb98fb933f8ec19f89dde5f1",
     "papers/completion/law_to_action/receipts/snapshots/LA-022/outputs/manuscript/results.tex": "6b04a0fa8ab53b46177b2dba81708c7d268c6a1f70890e55a2ecb5e1fbcc792e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/actual_execution.json": "148bbcb16bd655f8b0baa85c62c009af382a1b581feaaad40d24afbecda50e4c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/artifact_verification.json": "53944cf467c89ede19ab81483700a4210ad3b214a79f49ed6af192927d743ae2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/format_inspection.json": "e15349a2b7da43f12c226e7fd5ad03f09a7f3e04ba6d97328773b5fdd0ccf8a4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stdout.txt": "0cab689368bf9f90d53fc643bc04c3635a7cfdd088699a8a7df17f6ba284b4ba",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/claim_evidence_matrix.json": "a27474e9d91be5973d1163349b0d971fcfddfe9c0ee2f8f3b82513fe2c899a81",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/limitations.tex": "b454ac8d2925e9ebfa865b9127f0b236d8842e0f57d05dc21efaee73b2fa071e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/main.tex": "5b60ab4abb6e71b0829406e916abd80e66dcfd0f18b339b3945fdaf61850e96e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/results.tex": "0fc41caa846a605226602db69b29514097d856ff6723d37b1f54c85b45765c2c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/prior_receipt.json": "9b167f1a06af88bf75e6681b6c079170aab5128bf60b6eb4986b33d3587d1796",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/recovery_verification.json": "5da408b7fcd5f784e2dad4fea657f2453c13b75060026adab6571710590e4804",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/source/inspect_final.py": "57f67a32531508841bfea4bd830b25302a7b44718c95327409fbca01e9da019c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/symbol_source_qualification.json": "14090ec519a3d3d57a96d17fb6f30ce109dae1f6f2d135467aed30a9553aa17c",
     "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/actual_execution.json": "9013d7ca1e0d49d545b315afdd49275a3827e76cda01286f98afda30ca981cfa",
     "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/artifact_verification.json": "30ab3790b5579826cb206a8897e557bf1b5de75195a91cd9c57b589fb28160eb",
     "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/format_inspection.json": "64816cf4a5fbd1595e7399ec7ca69af1b0ec605d265a86a904722a3616d2ed4c",
@@ -50,28 +63,28 @@
       "argv": [
         "python3",
         "-B",
-        "candidate_v3/papers/completion/law_to_action/evaluation/final_correction/inspect_final.py",
+        "candidate_v4/papers/completion/law_to_action/evaluation/final_correction/inspect_final.py",
         "--paper",
-        "candidate_v3/papers/completion/law_to_action",
+        "candidate_v4/papers/completion/law_to_action",
         "--build",
-        "final_pdf_v3",
+        "final_pdf_v4",
         "--archive",
-        "final_artifact_v3c/anonymous_supplement.zip",
+        "final_artifact_v4/anonymous_supplement.zip",
         "--analysis",
-        "final_analysis_v3",
+        "final_analysis_v4",
         "--output",
-        "final_inspection_v3.private.json"
+        "final_inspection_v4.private.json"
       ],
       "cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/law_final_manuscript_recovery_v1",
       "elapsed_seconds": null,
       "execution_kind": "actual corrective source/retained-data/PDF validation; no scientific rerun",
       "exit_code": 0,
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/logs/final_inspection_v3.stdout.txt",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/source/inspect_final.py",
-      "stderr_log": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/logs/final_inspection_v3.stderr.txt"
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stdout.txt",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/source/inspect_final.py",
+      "stderr_log": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stderr.txt"
     }
   ],
-  "completed_at": "2026-09-13T03:25:25.435890+00:00",
+  "completed_at": "2026-09-13T03:45:56.985504+00:00",
   "corrective_validation": {
     "actor": "coordinating assistant",
     "native_mutations_performed": 0,
@@ -79,9 +92,9 @@
     "new_worker_attempt": false,
     "original_native_outcome": "completed historical task; status unchanged",
     "original_receipt": {
-      "completed_at": "2026-09-13T03:00:57.082864+00:00",
-      "path": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/prior_receipt.json",
-      "sha256": "444e559e255a3709afe03e3310427b5bc228e8ced3f638b3b3a7591b222a463e"
+      "completed_at": "2026-09-13T03:25:25.435890+00:00",
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/prior_receipt.json",
+      "sha256": "9b167f1a06af88bf75e6681b6c079170aab5128bf60b6eb4986b33d3587d1796"
     },
     "scope": "Actual artifact/source/format correction; original snapshots and claims retained, native validation/evidence/status adoption separate."
   },
@@ -89,12 +102,12 @@
     {
       "criterion": "Every Not run/pending result placeholder is resolved by evidence or explicit scoped removal, never invented data.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/main.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/results.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/limitations.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/claim_evidence_matrix.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/actual_execution.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/logs/final_inspection_v3.stdout.txt"
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/actual_execution.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stdout.txt"
       ],
       "explanation": "Abstract, results and conclusion retain the admitted 900-cell modeled-policy handler study, all fixed denominators and policy-relative limits. CVE polarity is correctly 24 cases / 12 pairs. No scientific counts changed.",
       "status": "met"
@@ -102,12 +115,12 @@
     {
       "criterion": "Claim matrix links manuscript claims to exact experiments or clearly marked nonempirical implementation evidence.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/main.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/results.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/limitations.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/claim_evidence_matrix.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/actual_execution.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/logs/final_inspection_v3.stdout.txt"
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/actual_execution.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stdout.txt"
       ],
       "explanation": "All original 23 claim records retain their scope and evidence links. The correction explicitly distinguishes paired family bootstrap from historical diagnostic intervals, individual-cell wall from cumulative-active startup amendments, and observed LLM development assistance from zero model calls in the scored study.",
       "status": "met"
@@ -115,12 +128,12 @@
     {
       "criterion": "Paper contains reproducible methodology and negative results, with a coherent evaluated verifiable-coding contribution.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/main.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/results.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/limitations.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/claim_evidence_matrix.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/actual_execution.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/logs/final_inspection_v3.stdout.txt"
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/actual_execution.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stdout.txt"
       ],
       "explanation": "Limitations preserve shared-producer 18/18 conformance, unadmitted earlier diagnostics, independent physical effect observations, no expert fidelity or human agreement, and withdrawn unrun closed-loop efficacy. No missing data are replaced with inferred success.",
       "status": "met"
@@ -128,27 +141,27 @@
     {
       "criterion": "Manuscript generation and an evidence-scoped submission candidate require no outside review. Optional author review is labeled non-independent and unsupported expert legal fidelity, human agreement and legal-validity claims are absent.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/main.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/results.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/limitations.tex",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/claim_evidence_matrix.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/actual_execution.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/logs/final_inspection_v3.stdout.txt"
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/results.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/limitations.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/actual_execution.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/logs/final_inspection_v4.stdout.txt"
       ],
       "explanation": "The actual supplied anonymous research style, original bibliography and related-work scope are preserved. The full 7-main-page PDF and its reference checks pass with ordinary-font table wrapping, without font, margin or spacing overrides.",
       "status": "met"
     }
   ],
   "outputs": {
-    "papers/completion/law_to_action/claim_evidence_matrix.json": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/claim_evidence_matrix.json",
-    "papers/completion/law_to_action/manuscript/limitations.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/limitations.tex",
-    "papers/completion/law_to_action/manuscript/main.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/main.tex",
-    "papers/completion/law_to_action/manuscript/results.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/symbol_alias_v3/outputs/manuscript/results.tex"
+    "papers/completion/law_to_action/claim_evidence_matrix.json": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/claim_evidence_matrix.json",
+    "papers/completion/law_to_action/manuscript/limitations.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/limitations.tex",
+    "papers/completion/law_to_action/manuscript/main.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/main.tex",
+    "papers/completion/law_to_action/manuscript/results.tex": "papers/completion/law_to_action/receipts/snapshots/LA-022/public_redaction_v4/outputs/manuscript/results.tex"
   },
   "paper_id": "law_to_action",
   "schema": "paper-task-evidence/v1",
   "source_versions": {
-    "portable_manifest_sha256": "62a11f6bfa91c0b78e1151204a0243c4d579f9c08f129ed560ce336ea8310917",
+    "portable_manifest_sha256": "8f73043581a9ae05350ffb6312c64cb5ab91ac27f3559ae09a17b2c727a9d37e",
     "preserved_failed_LA024_commit": "b932446ac8151e5733ecbc964e4a5568c74d5eb8",
     "python": "3.12.3",
     "scientific_scope": "Immutable admitted LA029 matrix; new source/retained-data/LaTeX checks only",

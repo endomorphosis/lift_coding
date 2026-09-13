@@ -1,0 +1,36 @@
+{
+  "all_original_reducer_bindings_included": 9933,
+  "analysis_functions_origin": {
+    "execution_scope": "Only stdlib analysis functions copied; historical reducer/controller modules are never imported.",
+    "functions": [
+      "ratio",
+      "metrics",
+      "summarize"
+    ],
+    "original_reducer_sha256": "1826005e94cb80ce9aafbbd182746fde26a21b89e325854414115eff701f536a",
+    "verbatim_function_source_sha256": "a48d88e46c08f7920693c2ba07512867c5ebb95a25cd75b6632b62a362838ee5"
+  },
+  "archive": "evidence.zip",
+  "bytes": 30926382,
+  "companion_files": {
+    "README.md": "55601c93a89e0b545c90fb42eb6fe2c9df67daaa78dd29b13a6462afcfd890cc",
+    "licenses/ipfs_accelerate.LICENSE": "6f1e622c82a380075843bb084a7ec3b1f1d12a4a02526d75e78b0924a860aa75",
+    "licenses/ipfs_datasets.LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+    "licenses/ipfs_kit.LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+    "licenses/repository.LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+    "public_derivation.json": "cab35f388a456884db1d9c6095bb9525b6e428afe03d0fe556f9765c05a8bd82"
+  },
+  "expanded_bytes": 198376041,
+  "host_attempts": 902,
+  "members": 9976,
+  "original_inputs_rewritten": false,
+  "portable_index_sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef",
+  "public_derivation_sha256": "cab35f388a456884db1d9c6095bb9525b6e428afe03d0fe556f9765c05a8bd82",
+  "public_derivative": true,
+  "reproduce_sha256": "97edb1cb2f33efde8af7e958cafc8181044ecb7da09002866a4117873ae09487",
+  "schema": "la029-portable-recovery-archive/v1",
+  "scientific_rows": 900,
+  "scope": "Bounded offline evidence verification and analysis; not a new benchmark execution.",
+  "sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+  "source_lineage_sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+}
