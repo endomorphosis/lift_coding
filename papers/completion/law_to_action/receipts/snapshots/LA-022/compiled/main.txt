@@ -1,0 +1,804 @@
+            From Law to Action: Neuro-Symbolic Runtime
+                   Enforcement for MCP Agents
+
+
+                                                  Anonymous Author(s)
+                                                      Affiliation
+                                                       Address
+                                                        email
+
+
+
+                                                         Abstract
+ 1             We evaluate a bounded runtime-checking question for tool effects that stand in
+ 2             for generated-code side effects: under explicit ENFORCE at one pre-invocation
+ 3             Model Context Protocol (MCP) handler, can an independently observed sandbox
+ 4             mutation that lacks a matching context-bound admission be prevented, while a
+ 5             matched admitted case still performs useful permitted work? Legal documents,
+ 6             CVE-linked vulnerability and repair records, and SkillCenter procedures compile
+ 7             into Legal, Security, and Intent IR. Those IRs are models with distinct authority,
+ 8             not proofs of legal correctness, universal vulnerability absence, or permission. On
+ 9             an admitted 60 × 5 × 3 matrix of frozen modeled-policy probes, full enforcement
+10             observed 0/90 policy-forbidden handler effects and completed 90/90 allowed
+11             useful work. Unguarded execution and model-free prompt/retrieval labels observed
+12             90/90 forbidden effects. Lightweight policy plus UCAN leaked 33/90. Expert
+13             legal fidelity, human agreement, and closed-loop model planning were not collected
+14             or executed and are withdrawn rather than filled. Closest systems—reference
+15             monitors, proof-carrying authorization, Catala, UCAN/Cedar, AgentSpec, Progent,
+16             CaMeL, and AgentDojo—motivate implementable arm classes; none is a scored
+17             baseline here.
+
+
+18   1    Introduction
+19   An autonomous agent can follow a useful procedure and still violate a legal restriction, reproduce
+20   a known vulnerability, or act outside its delegated authority. A safeguard placed only in the model
+21   prompt cannot distinguish these cases reliably. The implementation described here places source-
+22   grounded constraints and a separate authorization boundary between proposed actions and a protected
+23   MCP handler. MCP supplies tool discovery and invocation; application implementations remain
+24   responsible for enforcing security requirements [1, 2].
+25   The method begins before a tool call. A legal collection supplies normative constraints, a vulnerability-
+26   and-fix collection supplies security evidence, and a skill collection supplies descriptions of intended
+27   procedures. These become three intermediate representations (IRs), not one undifferentiated retrieval
+28   index. Formalization produces typed logic views and proof obligations. The runtime joins the results
+29   against one exact invocation, then checks authorization again before the effect. This design combines
+30   semantic compilation, proof search, capability security, and stateful execution rather than asking a
+31   language model to certify its own behavior.
+32   The evaluated workshop contribution is that bounded mediation test [3]. It is not a new authorization
+33   logic, a new legal language, or a first agent runtime monitor. AgentSpec, Progent, and CaMeL
+34   already supply runtime rules, tool-privilege checks, and capability isolation [4–6]; Catala compiles
+35   expert-authored law [7]; AgentDojo measures utility beside attacks [8]. We cite those primary sources
+36   as comparison classes. We do not execute them as experimental arms. Source adapters, constraint
+
+     Submitted to NeurIPS 2026 Workshop on AI for Verifiable Coding. Do not distribute.
+37   compilation, DuckDB-backed supervision, and content-addressed evidence are implementation
+38   context. Legal IR is a lossy model of selected facets, not a proof of legal correctness. Default OFF
+39   pass-through and in-memory consumption are not enforcement. The scored study uses one sandbox
+40   handler, independently observed filesystem-journal effects, and a frozen modeled policy. It does not
+41   evaluate model-generated programs, expert legal interpretation, or universal prevention.
+
+
+42   2   Related work
+
+43   The scored evaluation asks whether an independently observed handler effect is denied at one explicit
+44   ENFORCE delegate while matched admitted work remains executable. The comparison below is a
+45   literature comparison on that question. No cited external system was executed as a scored arm.
+
+46   Runtime enforcement. Complete mediation requires a check at every access to a protected resource
+47   [9]. Security automata and inlined or editing monitors describe which policies a runtime mechanism
+48   can enforce [10–13]. Those mechanisms inspect program actions. They do not compile legal or
+49   vulnerability sources, and they do not count useful MCP-handler work. AgentSpec supplies agent
+50   runtime triggers, predicates, and enforcement rules [4]. Progent checks symbolic tool privileges and
+51   classifies policy updates using an SMT solver [5]. These direct precedents rule out claims that this
+52   paper introduces agent runtime rules or guarded privilege updates. Neither system was benchmarked
+53   here.
+
+54   Proof-carrying admission. Proof-carrying code [14] and proof-carrying authentication [15] re-
+55   quire a checker to accept a proof before running untrusted code or granting a request. Translation
+56   validation and CompCert separate a translator from a checked proof [16, 17]. A content identifier or
+57   a proof_cid in an envelope is not that check.
+
+58   Executable law is not checked derivation. Encoding a statute as a logic program already performs
+59   an interpretation [18–20]. Catala compiles literate legal specifications to programs and has been
+60   applied to tax law [7, 21]. It is the closest executable-law precedent. It is not an agent runtime. Legal
+61   IR in this paper is a bounded, lossy compilation of selected facets; unsupported facets and expert
+62   applicability remain labeling problems, not theorems.
+
+63   Capabilities and application-level MCP enforcement. Object capabilities, attenuating caveats,
+64   relation tuples, and analyzable policy languages [22–25] justify a lightweight grant check. UCAN
+65   specifies signed delegated capabilities [26]. MCP supplies tool invocation; its authorization document
+66   specifies OAuth 2.1 resource-server roles and requires implementations to follow OAuth 2.1 security
+67   best practices [1, 2]. That protocol is not a generated-code effect monitor. A signature, a CID, or a
+68   peer identity is not a generated-code effect observation.
+
+69   Verifiable coding and agent-security evaluations. Functional correctness and issue resolution
+70   [27, 28] measure useful coding work without gated forbidden-effect counters. Closed-loop verified
+71   generation and autoformalization [29–31] target specs and prover artifacts, not this handler route.
+72   AgentDojo, ToolEmu, InjecAgent, τ -bench, and AgentHarm [8, 32–35] measure tool-use attacks,
+73   emulated risk, injection, policy following, or harm. CaMeL isolates agent data flow with capabilities
+74   [6]. They motivate reporting utility beside forbidden effects. They were not run here.
+
+75   Implementable arms, not imported suites. The matched arms are mechanism classes in this stack:
+76   an unguarded handler (A0); inert prompt and retrieval labels as model-free equivalence controls
+77   (A1, A2); a qualified policy and capability verifier (A3); and explicit ENFORCE with exact context
+78   binding, a qualified proof route, and durable consumption (A4). Prompt or retrieval efficacy is not
+79   identified in the model-free study. CVEfixes is a vulnerability/fix collection [36], not a runtime.
+80   DuckDB/Quack, IPFS, and libp2p [37–39] are operational substrates. The workshop fit is runtime
+81   checking of a proposed effect before a protected mutation [3], not a claim that every cited system was
+82   benchmarked.
+
+
+                                                        2
+83    3   Corpus sources and compilation into IRs
+84    The evaluated source freeze is 30 lineage families and 60 cases: six legal documents, 12 CVE
+85    repository families with vulnerable/fixed pairs, and 12 SkillCenter families with a base procedure and
+86    an adversarial variant. Physical reads used to reserve that freeze were six legal documents, 4329 rows
+87    from the first CVEfixes shard, and 1182 SkillCenter index/content rows in the read bundle. Release-
+88    card totals (municipal harvests, national-legislation cards, 12,987 CVEfixes input rows, 216,972
+89    SkillCenter physical records) remain unrecounted background and are not evaluated populations.
+90    Appendix A records family-level provenance requirements. No worldwide-coverage claim follows
+91    from the bounded sample.
+92    Legal documents compile through a restricted seven-field grammar (modality, actor, action, object,
+93    conditions, exceptions, temporal qualifiers) with source maps and declared losses. Compilation is
+94    inspectable. Source-to-rule fidelity remains a separate validation requirement and was not expert-
+95    reviewed in this study. Executable-law work such as Catala supplies a relevant precedent [7]; it is not
+96    an agent runtime or a handler-effect observer.
+97    CVEfixes links vulnerability records to source repositories and fixes [36]. The inspected release pins
+98    hitoshura25/cvefixes at d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2. The adapter constructs
+99    a canonical Security IR declaration and rejects wildcard scope and inserted authority grants. Vulnera-
+100   ble code is a positive control for a candidate restriction; fixed code is a negative control for that restric-
+101   tion. A fix does not certify that all other vulnerabilities are absent. Runtime cve_security_gate
+102   maps declared intent and independently extracted handler effects into the same Security IR root.
+103   Incomplete mappings remain unknown.
+104   SkillCenter supplies procedural Markdown. The bounded reader opens upstream SQLite bundles read-
+105   only, disables extension loading, and never executes commands appearing in a skill. The inspected
+106   source is Tommysha/skillcenter-bundles at f9dd4fec3c86d85ebf116c7408ac5ce602c418a1. In-
+107   tent IR distinguishes goals, guards, effects, and control edges, with source spans and grounded-versus-
+108   inferred status. A procedure’s word “permitted” is a source assertion, not a capability. The default
+109   skill path is a deterministic structural normalizer. No trained encoder was pinned or evaluated.
+110   The three families share identity, provenance, and obligation contracts. They do not share an ontology
+111   or grant authority to one another. Sparse, dense, and graph retrieval may nominate evidence; hard
+112   applicability and exact identity determine whether it may be used. Retrieval engineering is not a
+113   measured token-saving result.
+
+                    Table 1: Three source-to-IR paths. None of the source streams directly
+                    supplies execution authority.
+
+      Source stream                Derived semantics                     Contribution to an action decision
+      Legal texts and versions     Norms, scope, authority,              Which represented legal constraints
+                                   exceptions, temporal                  apply?
+                                   applicability
+      CVE-linked code and          Threat assumptions, effects,          Does the proposed or generated
+      fixes                        mitigations, scoped prohibition       behavior violate a reviewed security
+                                   candidates                            constraint?
+      Skill Markdown and           Goals, actions, guards, effects,      What is the agent trying to do, and
+      metadata                     verification, control flow            what effects does its procedure
+                                                                         require?
+
+
+114   4   Logic families, joining, and the protected route
+115   An IR is a domain representation; a logic family determines how its statements are interpreted; a
+116   prover is a backend that checks a supported encoding. A family’s presence in a registry does not mean
+117   every formula or backend is qualified. Appendix B records the broader map. The benchmark-required
+118   proof-oriented route actually executed is a QF_BOOL / propositional SAT encoding of a Hoare-style
+119   security invariant, with SymPy DPLL as a child process and an independent exhaustive truth-table
+120   checker. Both emit satisfiability authority only. SAT-only, simulated, policy-only, and monitor
+
+
+                                                            3
+121   evidence cannot satisfy a theorem_proof requirement. QF_LIA interpolation and interactive
+122   kernels were not selected and were not available on the sealed validation path.
+
+
+                    Table 2: Roles of native views. Only the QF_BOOL SAT route was
+                    qualified for the scored study.
+
+      Logic or formal view        Implemented role in the stack       Qualified in this evaluation
+      Hoare-style contracts       Preconditions, postconditions,      QF_BOOL SAT plus independent
+      and SAT                     and a propositional invariant       truth table; satisfiability only
+                                  over grant and forbidden effect
+      Rule/policy and             Bounded authorization               Real Ed25519 verification in A3/A4;
+      capability views            declarations and signed UCAN        not a theorem
+                                  grants
+      Deontic / temporal /        Native representations and          Registered; not a live scored backend
+      event-calculus tags         compiler bridges
+      Interactive proof           Lean/Coq/Isabelle adapters          Unavailable on the sealed path; no
+      kernels                                                         invented kernel result
+
+
+
+123   An InvocationIntentEnvelope commits to source identity, tenant, actor, audience, tool/version, argu-
+124   ments, proposed effects, environment, nonce, and relevant roots. Trusted adapters bind the effect
+125   description to the actual operation. The constraint compiler joins Legal, Security, and Intent checks
+126   against that exact invocation. A favorable score cannot offset a failed hard constraint.
+127   The selected protected route is SupervisorPreInvocationEnforcement.authorize_and_
+128   delegate in explicit ENFORCE around BoundedExportHandler.export_json. Independent
+129   filesystem-journal counters observe handler effects. A permissible candidate still requires a current
+130   grant for the exact actor, tool, resource, and bounds. The runtime revalidates and consumes the
+131   permitted use immediately before delegation. Replay, expiry, wrong audience, changed arguments,
+132   undeclared effects, and changed roots are denials at that boundary. DuckDB with a typed Quack
+133   owner records operational progression for the A4 deployment; the default in-memory store is a
+134   labeled contrast only. IPFS names immutable bytes [38]; libp2p carries framed MCP messages [39];
+135   UCAN checks signed attenuated delegation [26]. None of those substrates is itself the scored safety
+136   result. Kit’s AuthorizationGate is a related policy gate and is not the selected safety claim.
+
+
+137   5     Evaluation
+
+138   5.1   Frozen protocol and automated evidence scope
+
+139   The predeclared fixed-action study uses 30 source-lineage families and 60 cases (six legal families,
+140   12 CVE repository pairs, 12 SkillCenter families), split 6/6/18 into development, calibration, and final
+141   by source lineage [36]. Each family contributes one policy-allowed and one policy-forbidden case.
+142   Five matched arms share the same candidate identifiers, arguments, and sandbox handler: unguarded
+143   execution (A0); inert prompt-text and retrieval-context labels as model-free equivalence controls
+144   (A1, A2); lightweight policy plus real Ed25519 UCAN verification (A3); and explicit ENFORCE with
+145   exact-context binding, a qualified QF_BOOL SAT job, and file-backed DuckDB consumption (A4).
+146   Seeds 104729, 104759, and 104761 yield a 60 × 5 × 3 = 900-cell matrix. The independent unit is the
+147   lineage family. Allowed and forbidden labels are the frozen modeled policy and machine-checkable
+148   behavior contract, not real-world legality.
+149   Outside reviewers were not a run dependency. Expert legal applicability, exception fidelity, semantic
+150   accuracy, inter-annotator agreement, and legal validity were not collected and are not scored. Optional
+151   author reading, if it occurs later, is non-independent and is not human gold. Generated interpretations
+152   remain predictions. The LA-009 skill-validator comparison of 18/18 is shared-producer confor-
+153   mance: the same Intent IR decoder and schema functions already invoked by the normalizer, not an
+154   independent checker.
+
+
+                                                         4
+      Table 3: Admitted LA-029 fixed-action rates from independent effect counters. Forbidden-effect rate
+      uses forbidden-labelled attempts; allowed-task success uses allowed-labelled attempts. Labels are the
+      frozen modeled policy. Overall n = 90 forbidden-labelled and 90 allowed-labelled attempts per arm
+      (180 decisions). Final n = 54 + 54.
+
+               Arm                   Split    Forbidden effects   Allowed useful work   False denials
+               A0 unguarded         overall        90/90                90/90              0/90
+               A1 prompt label      overall        90/90                90/90              0/90
+               A2 retrieval label   overall        90/90                90/90              0/90
+               A3 policy+UCAN       overall        33/90                90/90              0/90
+               A4 ENFORCE           overall        0/90                 90/90              0/90
+               A0 unguarded          final         54/54                54/54              0/54
+               A3 policy+UCAN        final         18/54                54/54              0/54
+               A4 ENFORCE            final         0/54                 54/54              0/54
+
+
+
+
+155   5.2   Source-to-IR contracts
+
+156   Every frozen case has a retained prediction, failure, or unsupported record; cohorts were not changed
+157   after outcomes. Quoted source-span linkage held on 60/60 cases. Parse or schema validity held
+158   on 50/60. The scoped machine-contract coverage was 60/60. Four CVE adapter errors and six
+159   skill-policy-blocked unsupported rows remain in the denominator accounting. CVE source-difference
+160   observation was 24/24 under an independent behavior-contract producer; polarity remains unknown
+161   on all 24 pairs, and transfer to the export_json handler is unsupported. Implementation agreement
+162   is not semantic accuracy. These measurements replace the original expert-reviewed legal-fidelity row,
+163   which is withdrawn as unmeasured (Table E1).
+
+
+
+164   5.3   Admitted protected-effect and useful-work results
+
+165   The primary empirical study is the LA-029 operator matrix: 900 scientific cells, all resource-
+166   qualified, with independent filesystem-journal effect counters. Compact rows do not retain
+167   full per-cell proof or capability payloads; pinned executed mechanisms, effect counters, and
+168   the shared durable-store identity support the runtime observations. Implementation revision
+169   ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c. Model calls
+170   were 0. Independent human gold is false. Two original false host admissions (schedule indices
+171   459 and 560) remain labeled as such. Two container-startup recoveries at indices 591 and 625
+172   were charged once after proof that science had not started; scientific retries were 0. Host attempts
+173   total 902. Measured descendant-inclusive group CPU was 1608.817478 seconds, under the frozen
+174   18,000-second stop. Peak cell memory was 274812928 bytes; maximum whole-cell wall time was
+175   18.022665493073873 seconds.
+176   Table 3 reports the admitted rates. On the held-out final split (18 families; 54 forbidden-labelled
+177   and 54 allowed-labelled attempts per arm), A4 observed 0/54 policy-forbidden effects and com-
+178   pleted 54/54 allowed useful work with 0/54 false denials. Across the full admitted matrix the
+179   same pattern holds: A4 0/90 forbidden effects and 90/90 allowed useful work; A0–A2 90/90
+180   forbidden effects on forbidden-labelled attempts; A3 33/90 forbidden effects. A1 and A2 match
+181   A0 (final-split paired family difference 0, cluster-bootstrap 95% interval [0, 0]) and therefore re-
+182   main instrumentation/equivalence controls, not prompt or retrieval efficacy. Final-split paired fam-
+183   ily differences in forbidden-effect rate are −0.6666666666666666 for A3 versus A0 (percentile
+184   95% [−0.8888888888888888, −0.4444444444444444]), −1.0 for A4 versus A0 ([−1.0, −1.0]), and
+185   −0.3333333333333333 for A4 versus A3 ([−0.5555555555555556, −0.1111111111111111]). A
+186   degenerate zero interval does not establish population-level absence or universal prevention.
+187   The handler under test accepts a declarative export_json instruction. Independently observed
+188   effects are sandbox filesystem-journal events, not AST extraction from model-generated source. No
+189   scientific generative model was pinned.
+
+
+                                                           5
+190   5.4   Negative results and scoped omissions
+
+191   A3 is not equivalent to A4. The 33 A3 leaks (decision allow, observed forbidden ef-
+192   fect) concentrate on wrong_date_or_jurisdiction (9), forged_receipt (6), replay (6),
+193   changed_root_clock_or_environment (6), and undeclared_handler_effect (6). On the
+194   final split the residual classes are replay, changed root/clock/environment, and wrong date/jurisdiction
+195   (6 each). A4 denied those identities. SAT/UNSAT on the selected QF_BOOL route has satisfiability
+196   authority only; it cannot authorize a theorem_proof allow. Z3, cvc5, Vampire, E, Lean, Coq/Rocq,
+197   Isabelle, and QF_LIA interpolation were absent from the sealed validation path and are not assigned
+198   invented results.
+199   Closed-loop generated-code planning (protocol RQ3) is explicitly withdrawn: 900/900 scheduled
+200   cells were not_started, model calls 0, generated programs 0. Unstarted zeros are accounting, not
+201   measured agent failure. Results are not pooled with the fixed-action matrix.
+202   The original LA-015 compact log and its rescue remain protocol-unadmitted diagnostics; they are
+203   not headline admitted rates. LA-017 paired mechanism ablations and LA-016/LA-017 comparison
+204   wording are protocol-unadmitted diagnostic evidence and do not establish admitted model efficacy.
+205   LA-018 cold/warm/stale timings are a development A4 instrumentation study (n = 12 per condition;
+206   cold mean end-to-end wall 0.012326 s, warm 0.006635 s, stale-root and stale-clock 0.00322 s with
+207   12/12 stale-evidence flags; model tokens unobserved; no price conversion) and are not a 900-
+208   cell rescore. LA-020 twelve-step traces are separate diagnostic replays of frozen A4 identities,
+209   not additional scored cells. Qualification suites for mediation, DuckDB consumption, and local
+210   stdio/HTTP/libp2p parity passed their selected-claim cases and remain qualification, not scored arm
+211   rates. Wide-area publication and an IPFS daemon were not available.
+212   Admitted rates are taken from results/fixed_actions_admitted/summary.json together with
+213   the matching cost report and claim guidance. LA-019 generated tables and figures analyze the
+214   historical unadmitted log and are not substituted for that admitted summary.
+
+215   6     Limitations and modeling assumptions
+216   Legal IR is a lossy model of selected facets (modality, actor, action, object, conditions, exceptions,
+217   temporal qualifiers), not the law and not a proof of legal correctness. Unsupported constructs must
+218   not disappear into a successful admission. Expert legal fidelity, human agreement, and legal-validity
+219   rates were not collected; they remain unmeasured rather than filled with compiler agreement or
+220   generated labels. Security IR is a scoped candidate prohibition. A CVE or CWE identifier, a fix, or a
+221   source-difference observation is not universal vulnerability absence and is not transfer to unrelated
+222   code. Skill Markdown is untrusted data; a procedure’s word “permitted” is not a capability.
+223   Complete mediation is claimed only for SupervisorPreInvocationEnforcement.authorize_
+224   and_delegate in explicit ENFORCE around one benchmark-owned BoundedExportHandler.
+225   export_json sandbox mutation. Default OFF is pass-through. The default in-memory consumption
+226   store is not the restart-safety configuration; A4 used a file-backed DuckDB typed Quack owner. A
+227   DuckDB commit is not remote exactly-once evidence. Unprotected, observational, and nonidentical
+228   routes were exercised in qualification and excluded from the safety claim. Local stdio, loopback
+229   HTTP, and loopback libp2p parity do not establish wide-area transport.
+230   The selected proof route is propositional SAT with an independent truth-table checker. Satisfiability
+231   is not a kernel theorem. Compact admitted records do not retain full per-cell proof or capability
+232   payloads. The evaluated handler consumes a declarative export instruction; closed-loop model-
+233   generated programs were not executed. No trained skill normalizer or encoder was evaluated.
+234   Release-card corpus totals were not independently recounted and are not evaluated populations.
+235   Optional author review is not a prerequisite for this draft, is not independent annotation, and cannot
+236   replace the frozen automated evidence.
+
+237   7     Conclusion
+238   On one explicit ENFORCE sandbox route, independently observed forbidden handler effects were
+239   prevented for every frozen policy-forbidden probe while matched admitted work still succeeded.
+240   Lightweight policy plus UCAN was not sufficient for the residual mutation classes. Unguarded
+
+
+                                                         6
+241   execution and inert prompt or retrieval labels were not sufficient either. The result is a bounded,
+242   policy-relative verifiable-coding measurement [3], not superiority to Catala, AgentSpec, Progent,
+243   CaMeL, AgentDojo, or any other listed system, and not a claim of legal correctness, expert agreement,
+244   or closed-loop generated-program control. Those latter studies remain unmeasured or withdrawn.
+245   Optional author review is not required to generate this evidence-scoped draft and would not be
+246   independent human validation.
+
+
+
+
+                                                       7
+247   References
+248    [1] Model Context Protocol contributors. Model Context Protocol specification, revision 2025-
+249        11-25, 2025. URL https://modelcontextprotocol.io/specification/2025-11-25.
+250        Accessed 6 September 2026 (reconstructed bibliography). Live document retrieved 12 Septem-
+251        ber 2026 at the same URL; title: Specification - Model Context Protocol. Tool-invocation
+252        protocol, not a generated-code effect monitor.
+253    [2] Model Context Protocol contributors. Model Context Protocol: Authorization, revision 2025-
+254        11-25, 2025. URL https://modelcontextprotocol.io/specification/2025-11-25/
+255        basic/authorization. Accessed 6 September 2026 (reconstructed bibliography). Live
+256        document retrieved 12 September 2026; title: Authorization - Model Context Protocol. Specifies
+257        OAuth 2.1 resource-server roles and requires implementations to follow OAuth 2.1 security best
+258        practices. It is not a generated-code effect observer.
+259    [3] NeurIPS 2026 Workshop on AI for Verifiable Coding organizers. Call for papers, 2026. URL
+260        https://vericodegen.github.io/cfp.html. Live page retrieved 12 September 2026.
+261        Title: Call for Papers — VeriCodeGen: AI for Verifiable Coding at NeurIPS 2026. Research
+262        track: main text at least 4 and at most 9 pages excluding references and appendices; official
+263        2026 workshop template; double-blind submission including linked artifacts; methodology-
+264        essential LLM disclosure; non-archival workshop. Listed topics include runtime monitoring of
+265        agents, verified guardrails, constrained tool use, and access-control policies. Paper deadline 13
+266        September 2026 AoE; camera-ready 14 October 2026; workshop 12 December 2026, Atlanta.
+267    [4] Haoyu Wang, Christopher M. Poskitt, and Jun Sun. Agentspec: Customizable runtime enforce-
+268        ment for safe and reliable llm agents, 2025. URL https://arxiv.org/abs/2503.18666v3.
+269        Version 3, 31 July 2025. arXiv abstract retrieved 12 September 2026; first submitted 24 March
+270        2025. Operator metadata check 11 September 2026. Not benchmarked in this paper.
+271    [5] Tianneng Shi, Jingxuan He, Zhun Wang, Hongwei Li, Linyu Wu, Wenbo Guo, and Dawn Song.
+272        Progent: Securing ai agents with privilege control, 2025. URL https://arxiv.org/abs/
+273        2504.11703v3. Version 3 revised 14 May 2026; first submitted 16 April 2025. arXiv abstract
+274        retrieved 12 September 2026. Operator metadata check 11 September 2026. Not benchmarked
+275        in this paper.
+276    [6] Edoardo Debenedetti, Ilia Shumailov, Tianqi Fan, Jamie Hayes, Nicholas Carlini, Daniel
+277        Fabian, Christoph Kern, Chongyang Shi, Andreas Terzis, and Florian Tramèr. Defeating
+278        prompt injections by design, 2025. URL https://arxiv.org/abs/2503.18813v2. CaMeL
+279        capability isolation for LLM agents. Version 2, 24 June 2025; arXiv abstract retrieved 12
+280        September 2026. Operator metadata check 11 September 2026. Not executed as a scored arm
+281        here.
+282    [7] Denis Merigoux, Nicolas Chataing, and Jonathan Protzenko. Catala: A programming language
+283        for the law. Proceedings of the ACM on Programming Languages, 5(ICFP):77:1–77:29, 2021.
+284        doi: 10.1145/3473582. Crossref retrieved 12 September 2026. Crossref page field is 1-29;
+285        PACMPL article-number pagination 77:1–77:29 is retained from the reconstructed bibliography.
+286    [8] Edoardo Debenedetti, Jie Zhang, Mislav Balunović, Luca Beurer-Kellner, Marc Fischer, and
+287        Florian Tramèr. AgentDojo: A dynamic environment to evaluate prompt injection attacks and
+288        defenses for LLM agents. In Advances in Neural Information Processing Systems, volume 37,
+289        pages 82895–82920, 2024. doi: 10.52202/079017-2636. Crossref retrieved 12 September
+290        2026. arXiv abstract retrieved 12 September 2026; submitted 19 June 2024. Datasets and
+291        Benchmarks track. Utility versus attack-success in dynamic tool environments; not this paper’s
+292        sandbox-handler counters.
+293    [9] Jerome H. Saltzer and Michael D. Schroeder. The protection of information in computer systems.
+294        Proceedings of the IEEE, 63(9):1278–1308, 1975. doi: 10.1109/PROC.1975.9939. Crossref
+295        retrieved 12 September 2026.
+296   [10] Fred B. Schneider. Enforceable security policies. ACM Transactions on Information and System
+297        Security, 3(1):30–50, 2000. doi: 10.1145/353323.353382. Crossref retrieved 12 September
+298        2026.
+
+
+                                                       8
+299   [11] Úlfar Erlingsson and Fred B. Schneider. IRM enforcement of Java stack inspection. In
+300        Proceeding of the 2000 IEEE Symposium on Security and Privacy, pages 246–255. IEEE, 2000.
+301        doi: 10.1109/SECPRI.2000.848461. Crossref retrieved 12 September 2026. IEEE container
+302        title uses “Proceeding” rather than “Proceedings”.
+303   [12] Jay Ligatti, Lujo Bauer, and David Walker. Edit automata: enforcement mechanisms for run-
+304        time security policies. International Journal of Information Security, 4(1-2):2–16, 2005. doi:
+305        10.1007/s10207-004-0046-8. Crossref retrieved 12 September 2026. Issue is 1-2.
+306   [13] Kevin W. Hamlen, Greg Morrisett, and Fred B. Schneider. Computability classes for enforce-
+307        ment mechanisms. ACM Transactions on Programming Languages and Systems, 28(1):175–205,
+308        2006. doi: 10.1145/1111596.1111601. Crossref retrieved 12 September 2026. Corrected from
+309        the non-resolving identifier 10.1145/1111596.1111603.
+310   [14] George C. Necula. Proof-carrying code. In Proceedings of the 24th ACM SIGPLAN-SIGACT
+311        Symposium on Principles of Programming Languages, POPL ’97, pages 106–119. ACM, 1997.
+312        doi: 10.1145/263699.263712. Crossref retrieved 12 September 2026.
+313   [15] Andrew W. Appel and Edward W. Felten. Proof-carrying authentication. In Proceedings of
+314        the 6th ACM Conference on Computer and Communications Security, CCS ’99, pages 52–62.
+315        ACM, 1999. doi: 10.1145/319709.319718. Crossref retrieved 12 September 2026.
+316   [16] Amir Pnueli, Michael Siegel, and Eli Singerman. Translation validation. In Tools and Algorithms
+317        for the Construction and Analysis of Systems, volume 1384 of Lecture Notes in Computer
+318        Science, pages 151–166. Springer, 1998. doi: 10.1007/BFb0054170. Crossref retrieved 12
+319        September 2026. TACAS 1998, LNCS 1384.
+320   [17] Xavier Leroy. Formal verification of a realistic compiler. Communications of the ACM, 52(7):
+321        107–115, 2009. doi: 10.1145/1538788.1538814. Crossref retrieved 12 September 2026.
+322   [18] M. J. Sergot, F. Sadri, R. A. Kowalski, F. Kriwaczek, P. Hammond, and H. T. Cory. The British
+323        Nationality Act as a logic program. Communications of the ACM, 29(5):370–386, 1986. doi:
+324        10.1145/5689.5920. Crossref retrieved 12 September 2026.
+325   [19] Henry Prakken and Giovanni Sartor. Law and logic: A review from an argumentation perspective.
+326        Artificial Intelligence, 227:214–245, 2015. doi: 10.1016/j.artint.2015.06.005. Crossref retrieved
+327        12 September 2026.
+328   [20] Christoph Benzmüller, Xavier Parent, and Leendert van der Torre. Designing normative theories
+329        for ethical and legal reasoning: LogiKEy framework, methodology, and tool support. Artificial
+330        Intelligence, 287:103348, 2020. doi: 10.1016/j.artint.2020.103348. Crossref retrieved 12
+331        September 2026.
+332   [21] Denis Merigoux, Raphaël Monat, and Jonathan Protzenko. A modern compiler for the French
+333        tax code. In Proceedings of the 30th ACM SIGPLAN International Conference on Compiler
+334        Construction, CC 2021, pages 71–82. ACM, 2021. doi: 10.1145/3446804.3446850. Crossref
+335        retrieved 12 September 2026.
+336   [22] Mark S. Miller. Robust Composition: Towards a Unified Approach to Access Control and
+337        Concurrency Control. PhD thesis, Johns Hopkins University, 2006. PhD thesis; no DOI used.
+338        Object-capability discipline.
+
+339   [23] Arnar Birgisson, Joe Gibbs Politz, Úlfar Erlingsson, Ankur Taly, Michael Vrable, and Mark
+340        Lentczner. Macaroons: Cookies with contextual caveats for decentralized authorization in the
+341        cloud. In Proceedings of the 2014 Network and Distributed System Security Symposium, NDSS
+342        2014. Internet Society, 2014. doi: 10.14722/ndss.2014.23212. Crossref retrieved 12 September
+343        2026.
+344   [24] Ruoming Pang, Ramón Cáceres, Mike Burrows, Zhifeng Chen, Pratik Godiwala, Ankur Kapoor,
+345        Christopher J. Hill, Kamil Kowalczyk, Alexander Piwonka, David Ramadan, David Rosen-
+346        thal, David Sun, Rodrigo Tuttle, Jason Wang, Aaron Weingarten, and Maya Zaks. Zanz-
+347        ibar: Google’s consistent, global authorization system. In 2019 USENIX Annual Technical
+348        Conference (USENIX ATC 19), pages 33–46. USENIX Association, 2019. URL https:
+
+
+                                                        9
+349        //www.usenix.org/conference/atc19/presentation/pang. USENIX ATC 2019. No
+350        Crossref DOI required; official proceedings pagination 33–46.
+351   [25] Joseph W. Cutler, Craig Disselkoen, Aaron Eline, Shaobo He, Kyle Headley, Michael Hicks,
+352        Kesha Hietala, Eleftherios Ioannidis, John Kastner, Anwar Mamat, Darin McAdams, Matt
+353        McCutchen, Neha Rungta, Emina Torlak, and Andrew Wells. Cedar: A new language for
+354        expressive, fast, safe, and analyzable authorization. Proceedings of the ACM on Programming
+355        Languages, 8(OOPSLA1):670–697, 2024. doi: 10.1145/3649835. Crossref retrieved 12 Septem-
+356        ber 2026. Corrected from inherited DOI 10.1145/3649817 (Cocoon, a different OOPSLA1
+357        2024 paper) and inherited eprint 2403.04623 (a different arXiv record). Extended version:
+358        arXiv:2403.04651, submitted 7 March 2024.
+359   [26] UCAN contributors. User controlled authorization network (UCAN) specification, 2026. URL
+360        https://ucan.xyz/specification/. Specification accessed 6 September 2026 (recon-
+361        structed bibliography). Live document retrieved 12 September 2026; title: User Controlled
+362        Authorization Network (UCAN) Specification. Signed delegation is distinct from theorem
+363        checking and from exact proof-capability binding.
+364   [27] Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto,
+365        Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, Alex Ray, Raul
+366        Puri, Gretchen Krueger, Mikhail Petrov, Heidy Khlaaf, Girish Sastry, Pamela Mishkin, Brooke
+367        Chan, Scott Gray, Nick Ryder, Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad
+368        Bavarian, Clemens Winter, Philippe Tillet, Felipe Petroski Such, Dave Cummings, Matthias
+369        Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss, William Hebgen Guss, Alex
+370        Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor Babuschkin, Suchir Balaji, Shantanu Jain,
+371        William Saunders, Christopher Hesse, Andrew N. Carr, Jan Leike, Josh Achiam, Vedant Misra,
+372        Evan Morikawa, Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer,
+373        Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, and Wojciech
+374        Zaremba. Evaluating large language models trained on code, 2021. arXiv abstract retrieved 12
+375        September 2026; submitted 7 July 2021. HumanEval functional-correctness benchmark; not a
+376        forbidden-effect mediation measurement.
+377   [28] Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and
+378        Karthik Narasimhan. SWE-bench: Can language models resolve real-world GitHub issues?
+379        In The Twelfth International Conference on Learning Representations, 2024. ICLR 2024.
+380        OpenReview forum VTF8yNQM66 (OpenReview API returned HTTP 403 on 12 September
+381        2026). arXiv:2310.06770 abstract retrieved 12 September 2026; submitted 10 October 2023.
+382        Issue-resolution utility, not gated handler-effect counters.
+383   [29] Chuyue Sun, Ying Sheng, Oded Padon, and Clark Barrett. Clover: Closed-loop verifiable
+384        code generation, 2023. arXiv abstract retrieved 12 September 2026; submitted 26 October
+385        2023. No arXiv journal-ref or DOI on the abstract page. The inherited TU Wien ISBN item 27
+386        identifier resolves to a different FMCAD 2024 paper (Toward Exhaustive Sequential Redundancy
+387        Removal) and is not used.
+388   [30] Kaiyu Yang, Aidan Swope, Alex Gu, Rahul Chalamala, Peiyang Song, Shixing Yu, Saad
+389        Godil, Ryan J. Prenger, and Animashree Anandkumar. LeanDojo: Theorem proving with
+390        retrieval-augmented language models. In Advances in Neural Information Processing Systems,
+391        volume 36, pages 21573–21612, 2023. doi: 10.52202/075280-0944. Crossref retrieved 12
+392        September 2026. Neighboring workshop topic; not this handler route.
+393   [31] Yuhuai Wu, Albert Q. Jiang, Wenda Li, Markus N. Rabe, Charles Staats, Mateja Jamnik, and
+394        Christian Szegedy. Autoformalization with large language models. In Advances in Neural
+395        Information Processing Systems, volume 35, pages 32353–32368, 2022. doi: 10.52202/
+396        068431-2344. Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September
+397        2026; submitted 25 May 2022. Neighboring workshop topic; not this handler route.
+398   [32] Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba, Yann
+399        Dubois, Chris J. Maddison, and Tatsunori Hashimoto. Identifying the risks of LM agents with an
+400        LM-emulated sandbox. In The Twelfth International Conference on Learning Representations,
+401        2024. ToolEmu. arXiv abstract retrieved 12 September 2026; submitted 25 September 2023.
+402        Emulated tools are not independently observed handler mutations.
+
+
+                                                      10
+403   [33] Qiusi Zhan, Zhixiang Liang, Zifan Ying, and Daniel Kang. InjecAgent: Benchmarking indirect
+404        prompt injections in tool-integrated large language model agents. In Findings of the Association
+405        for Computational Linguistics: ACL 2024, pages 10471–10506, 2024. doi: 10.18653/v1/2024.
+406        findings-acl.624. Crossref retrieved 12 September 2026. arXiv abstract retrieved 12 September
+407        2026; submitted 5 March 2024.
+408   [34] Shunyu Yao, Noah Shinn, Pedram Razavi, and Karthik Narasimhan. τ -bench: A benchmark for
+409        tool-agent-user interaction in real-world domains, 2024. arXiv abstract retrieved 12 September
+410        2026; submitted 17 June 2024. Policy-following success in tool-agent-user interaction; not a
+411        generated-code-to-protected-effect mediation measurement.
+412   [35] Maksym Andriushchenko, Alexandra Souly, Mateusz Dziemian, Derek Duenas, Maxwell Lin,
+413        Justin Wang, Dan Hendrycks, Andy Zou, Zico Kolter, Matt Fredrikson, Eric Winsor, Jerome
+414        Wynne, Yarin Gal, and Xander Davies. AgentHarm: A benchmark for measuring harmfulness
+415        of LLM agents. In The Thirteenth International Conference on Learning Representations,
+416        2025. arXiv abstract retrieved 12 September 2026; submitted 11 October 2024. ICLR 2025.
+417        Harmfulness oracle; not this handler route.
+418   [36] Guru Bhandari, Amara Naseer, and Leon Moonen. CVEfixes: Automated collection of vulner-
+419        abilities and their fixes from open-source software. In Proceedings of the 17th International
+420        Conference on Predictive Models and Data Analytics in Software Engineering, pages 30–39,
+421        2021. doi: 10.1145/3475960.3475985. Crossref retrieved 12 September 2026. Dataset, not a
+422        runtime.
+423   [37] DuckDB team. Quack: The duckdb client-server protocol, 2026. URL https://duckdb.
+424        org/2026/05/12/quack-remote-protocol. 12 May 2026. Accessed 6 September 2026
+425        (reconstructed bibliography). Live document retrieved 12 September 2026; title: Quack: The
+426        DuckDB Client-Server Protocol. Operational-state substrate, not a safety theorem.
+427   [38] IPFS contributors. Content identifiers (CIDs), 2026. URL https://docs.ipfs.tech/
+428        concepts/content-addressing/. Documentation accessed 6 September 2026 (recon-
+429        structed bibliography). Live document retrieved 12 September 2026; title: Content Identifiers
+430        (CIDs) | IPFS Docs. Content identity is not publication, availability, or authorization.
+431   [39] libp2p contributors. libp2p connections specification, 2026. URL https://github.com/
+432        libp2p/specs/blob/master/connections/README.md. Specification accessed 6 Septem-
+433        ber 2026 (reconstructed bibliography). Live document retrieved 12 September 2026; title:
+434        specs/connections/README.md at master. Transport identity is not a tool grant.
+
+
+
+
+                                                       11
+435   A    Corpus lineage and release accounting
+436   The author-maintained legal program includes public releases for the U.S. Code, state statutes, state
+437   administrative rules, Federal Register documents, state/local court rules, municipal/county codes,
+438   caselaw, and national legislation. The paper does not interpret a dataset title, a country registry entry,
+439   or a successful scrape as exhaustive coverage. The evaluated legal cohort is the six frozen documents.
+440   Card-reported municipal, Netherlands, and Belgian quantities have not been independently recounted
+441   and are not evaluated records.
+
+                    Table A1: Legal source families and provenance requirements. Identify-
+                    ing publisher/dataset mappings belong in the private author record until
+                    camera-ready.
+
+      Source family               Representative inspected             Required distinctions
+                                  substrate
+      Federal statutory law       U.S. Code sparse GraphRAG            Codification/release point, provision
+                                  release, pinned source revision      identity, amendment history and
+                                  and official release point           actual effective dates
+      State law                   State-statute release and            State, authority family, rule/statute
+                                  separate administrative-rule         distinction, missing jurisdictions and
+                                  corpus                               time coverage
+      Federal regulatory          Federal Register collection          Proposed rule, final rule, notice,
+      material                                                         publication date, effective date and
+                                                                       codified regulation are not
+                                                                       interchangeable
+      Court rules and caselaw     Merged per-state court rules;        Court, jurisdiction, local/general rule,
+                                  Caselaw Access Project-derived       opinion treatment, holdings versus
+                                  collection                           quotations
+      Municipal and county        Multi-drop municipal harvest         Publisher, jurisdiction, per-drop
+      law                                                              discovery and failure counts; registry
+                                                                       aliases may lag new release
+                                                                       namespaces
+      International legislation   Netherlands corpus; Belgian          Language, source authority,
+                                  official-source archive harvest;     consolidation date, archive capture,
+                                  Argentine CID-keyed retrieval        extraction version and incomplete
+                                  release                              coverage
+
+
+442   The security source pins hitoshura25/cvefixes at d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2.
+443   Graph nodes, edges, vectors, source rows, and unique CVEs are different populations. The evaluated
+444   CVE cohort is 12 repository families / 24 cases plus 84 excluded controls that never enter empirical
+445   sample counts. Evaluation includes the original vulnerable condition and the fixed negative control.
+446   Transfer to a proposed tool needs an explicit mapping; polarity remains unknown where the machine
+447   contract does not support it.
+448   The         SkillCenter          source         is        Tommysha/skillcenter-bundles           at
+449   f9dd4fec3c86d85ebf116c7408ac5ce602c418a1. SQLite is an untrusted input container,
+450   not the supervisor database. The evaluated skill cohort is 12 families / 24 cases. Index totals are
+451   not additional skills. Counts of available records do not establish counts of normalized Intent IR
+452   documents or safe procedures.
+
+453   pinned source revision + raw artifact bytes
+454     -> bounded source record + content identity + use policy
+455     -> LegalIR | SecurityIR | IntentIR declaration
+456     -> native formal views + source map + loss/coverage diagnostics
+457     -> selected applicable constraints + exact invocation
+458     -> proof jobs + checked evidence + decision receipt
+459     -> authenticated capability / execution permit
+460     -> guarded effect + operational observation + durable record
+
+
+                                                         12
+461   B    Logic-family and backend method map
+462   A shared symbol table does not prove that two encodings preserve meaning. The TDFOL and
+463   DCEC Python cores establish parsable native representations. Resource-scoped authorization may be
+464   representable without invoking every family. Solver success, kernel acceptance, runtime monitors,
+465   and policy approval are non-interchangeable authority kinds. A timeout or unavailable backend is not
+466   a refutation.
+                    Table B1: Logic families have different meanings. A shared symbol
+                    table or cross-view link does not prove that two encodings preserve those
+                    meanings.
+
+      Family/view                Representation and                 What the paper may claim
+                                 operations
+      Propositional and          Boolean operators, typed terms,    Bounded facts and implications under
+      first-order                predicates, variables and          the encoded vocabulary; not general
+                                 quantifiers                        natural-language understanding
+      F-logic / frame            Object identity, class             Structured semantic relations; not a
+                                 membership, slots and              cryptographic or temporal proof by
+                                 relational inheritance             itself
+      Deontic                    Obligation, permission,            Explicit normative force under the
+                                 prohibition                        selected axioms; an encoded
+                                                                    permission is not an issued capability
+      Temporal / TDFOL           Always, eventually, next, until,   Model time-sensitive requirements; a
+                                 since                              backend must support the actual
+                                                                    fragment
+      Event calculus             Events, fluents,                   Reason about transitions as
+                                 initiation/termination             represented; an observed event record
+                                                                    is not a proof of every transition
+      Datalog / rule-policy      Bounded rules and                  Rule derivation with an explicit
+                                 authorization declarations         open/closed-world convention, not
+                                                                    automatic theorem authority
+      Hoare-style / SAT          Preconditions, postconditions,     The qualified QF_BOOL SAT route;
+                                 propositional invariants           SAT/UNSAT cannot authorize
+                                                                    theorem_proof allows
+      Interactive proof          Native proof terms/scripts         Unavailable here; no invented kernel
+                                                                    result
+
+
+467   C    Database, artifact, network, and capability boundaries
+
+                    Table C1: Database and protocol responsibilities. Legacy or auxiliary
+                    indexes can exist without changing the canonical DuckDB control-plane
+                    description.
+
+      Layer                      Technology and inspected role      Incorrect inference to avoid
+      Supervisor operational     DuckDB control.duckdb; typed       “The supervisor uses SQLite” or
+      authority                  Quack owner/client;                “each agent writes the database file
+                                 StateTransaction CAS and           directly”
+                                 idempotency
+      Source input packaging     Read-only SkillCenter SQLite       “An input database format defines the
+                                 bundles; source Parquet/JSON-      runtime architecture”
+                                 LD/HTML/WARC
+      Retrieval products         BM25, vectors, graphs and          “A retrieved neighbor is a grant or a
+                                 bounded Parquet shards keyed       proof”
+                                 by source IDs/CIDs
+
+
+
+                                                          13
+      Layer                        Technology and inspected role       Incorrect inference to avoid
+      Immutable artifacts          Kit-managed content-addressed       “The newest block is automatically
+                                   blocks, manifests, maps,            the accepted state”
+                                   proof/decision receipts, optional
+                                   IPFS replication
+      Peer carriage                libp2p negotiated streams and       “A peer identity grants tool
+                                   MCP++ framing                       permission”
+      Delegated capability         Strict signed UCAN verification     “A valid token proves the action is
+                                   and revocation/replay state         legally and semantically safe”
+
+
+468   A caller supplies a named command and typed parameters, not a SQL string. The identical command
+469   can retrieve a committed result after a lost reply; a changed payload with the same identity is a
+470   conflict. The Quack gateway extension was unavailable under the sealed home and is not claimed.
+471   IPFS answers which artifact bytes are requested; local CID computation proves neither publication
+472   nor public availability. libp2p answers how peers connect. In-process framing is not libp2p network
+473   evidence. Strict UCAN checks cryptographic issuer identity, delegation continuity, resource/ability
+474   bounds, temporal validity, attenuation, revocation, and replay policy. It does not infer delegation from
+475   natural-language text.
+
+476   D    Implementation trace
+477   The private companion contains exact repository revisions and paths. Neutral aliases should replace
+478   identifying names in a blind artifact.
+
+                      Table D1: Implementation-oriented trace. Compact LA-029 rows remain
+                      the scored outcomes; LA-020 retains intermediate artifacts on a separate
+                      diagnostic replay of frozen A4 identities.
+
+      Method                       Representative                      Inputs inspected in a reproducible
+                                   implementation                      run
+      Legal routing                Deterministic deontic parser;       Dataset revision, source body,
+                                   typed canonical compiler            jurisdiction, source maps,
+                                                                       unsupported facets
+      Skill import                 SkillCenterSkillRecord and          Physical source row, metadata,
+                                   read-only bundle adapter            skill/library Markdown, entry/body
+                                                                       identities
+      CVE adaptation               adapt_cvefixes_candidate            Vulnerable/fixed source records,
+                                                                       candidate scope, prohibition/control
+                                                                       polarity
+      Constraint join              IRConstraintCompiler                Candidate graph, legal/security/intent
+                                                                       checks, proof requirements, current
+                                                                       roots
+      Proof authorization          IntentAuthorizationService;         QF_BOOL jobs, satisfiability
+                                   SAT child process plus              authority, rejected theorem_proof
+                                   truth-table checker                 upgrades
+      Guarded execution            Pre-invocation enforcement          Current live context, authenticated
+                                   wrapper in ENFORCE                  receipt, expiry/use state, delegate
+                                                                       effects
+      State control                QuackStateClient; file-backed       Named command, generation, fence,
+                                   DuckDB consumption                  revision, idempotency and committed
+                                                                       result
+
+
+479   A diagnostic replay of the permitted A4 identity recorded by LA-020 (seed 104729, skill case-0;
+480   exact attempt identifier retained in the worked-trace record) ran source-pin resolution, Intent IR
+481   derivation, exact tool/argument binding, QF_BOOL SAT (provider unsat, checker agrees, satisfiability
+482   only), real Ed25519 UCAN allow, ENFORCE consume on the DuckDB owner, one export_json
+
+
+                                                         14
+483   dispatch, and one independent journal event with useful work. Matched forbidden replays for wrong
+484   audience, undeclared effect, and replay denied at delegation or consumption with zero forbidden
+485   effects. LegalIRCompilerAPI was not the selected adapter. Independent human review was not used.
+486   No fabricated signature or conceptual step is presented as executed.
+
+487   E    Resolved measurement inventory
+488   Original Table E1 listed placeholders. Table E1 records the actual disposition. “Withdrawn” and
+489   “qualification only” are scoped omissions, not zeros invented from missing runs.
+
+                   Table E1: Resolved measurement inventory. Withdrawn claims are un-
+                   measured. Qualification suites are not scored arm rates. The primary
+                   protected-effect study is the admitted LA-029 matrix.
+
+      Measurement               Actual record                      Disposition
+      Legal source-to-IR        Expert-reviewed atoms,             Withdrawn / unmeasured; replaced by
+      fidelity                  exceptions, applicability and      automated span, schema, and
+                                agreement                          machine-contract checks (60/60,
+                                                                   50/60, 60/60)
+      CVE restriction           Vulnerable/fixed pairs and         12 pairs / 24 cases and 84 excluded
+      specificity               excluded controls                  controls retained; source-difference
+                                                                   24/24; polarity unknown 24/24; no
+                                                                   transfer claim
+      Skill grounding           Source spans and malicious         Span linkage on all skill cases; 18/18
+                                Markdown negatives                 shared-producer schema conformance,
+                                                                   not independent agreement; six
+                                                                   unsupported policy-blocked rows
+      Proof job execution       Per-family provider/checker        QF_BOOL SAT qualified; theorem
+                                route                              kernels and QF_LIA interpolation
+                                                                   unavailable, not invented
+      Guarded effect            Delegate/effect counters under     Admitted LA-029: A4 0/90
+      prevention                allow, deny, stale and replay      forbidden effects and 90/90 allowed
+                                                                   useful work
+      DuckDB owner safety       Wrong generation/fence,            Qualification 14/14 selected-claim
+                                concurrent commands, lost          cases; in-memory restart is a labeled
+                                reply, restart                     contrast; not a scored 900-cell rate
+      Cross-transport parity    Stdio/HTTP/P2P same request        Local-process and loopback
+                                and outcome                        qualification; WAN and IPFS daemon
+                                                                   absent
+      End-to-end efficiency     Model tokens, retrieval, proof     Development A4 instrumentation
+                                and state overhead                 only; model tokens unobserved; no
+                                                                   price conversion; not a 900-cell
+                                                                   rescore
+      Closed-loop planning      Pinned-model generated             Explicitly withdrawn: 900/900 not
+                                programs and recovery              started; 0 model calls; 0 generated
+                                                                   programs
+
+
+490   F   Scope, ongoing work, and disclosure
+491   Semantic-addressed program worlds, learned residuals, semantic-preserving refactoring, parallel
+492   sealing, and proof-carrying test reuse were unavailable for this revision and are not implemented
+493   contributions. Semantic minification and learned encoders were not evaluated as cost savings.
+494   This draft was prepared using language-model assistance for source inspection, organization, and
+495   writing. Manuscript generation and the evidence-scoped submission candidate require no outside
+496   review. Optional author review is labeled non-independent and is not a prerequisite. No independent
+497   human legal, security, or intent validation and no inter-annotator agreement study was collected.
+
+
+                                                      15
+498   Exact tools, model versions, and executed experiments for camera-ready disclosure remain an LA-024
+499   obligation; the scientific claims above are bound to the retained receipts cited in the claim–evidence
+500   matrix.
+
+
+
+
+                                                       16
+
