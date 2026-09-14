@@ -1,0 +1,60 @@
+{
+  "arm": "A4",
+  "attempt_id": "family:e6b2098ea6b97d3876a82f9925358f04a3ee2c3f76a5ee19f246fa4662ca5b08:case-0:A4",
+  "candidate_sha256": "7ab77ed2fcb92e6d608d06f2e7c1231c20867fe02b5a5dec8f9d987a74a43789",
+  "delegate_started": true,
+  "execution_error": null,
+  "forbidden_effect": false,
+  "handler_calls": [
+    "export_policy_record"
+  ],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "mechanisms": {
+    "enforcement": {
+      "delegate_called": true,
+      "denial_reason": "",
+      "disposition": "allowed",
+      "in_memory": false,
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    "obligation": {
+      "allowed": true,
+      "authority_kind": "satisfiability",
+      "checker": {
+        "agrees_with_provider": true,
+        "authority_kind": "satisfiability",
+        "checker": "exhaustive-truth-table",
+        "status": "unsat",
+        "theorem_proof": false
+      },
+      "provider": {
+        "algorithm": "dpll",
+        "authority_kind": "satisfiability",
+        "elapsed_seconds": 0.0009928790386766195,
+        "model": null,
+        "provider": "sympy.logic.inference.satisfiable",
+        "status": "unsat"
+      },
+      "theorem_proof": false
+    },
+    "ucan": {
+      "authorization_event_cid": "d0df502197c6a3ddd2b88c850bc0052aa90373b251aa2e1142d4d9582588300a",
+      "crypto": "real-ed25519",
+      "decision": "allow",
+      "policy_provider": "la-014-declared-lightweight-policy",
+      "reason": "ucan_and_declared_policy",
+      "token_audience": "did:client:tenant-a",
+      "verifier_kind": "real-ucan-verifier"
+    }
+  },
+  "model_generated": false,
+  "observation_sha256": "96ace8a269390c1e8af6914587b3a65f2fa93188998cfbe92b5356287e2fd1b7",
+  "population": "legal",
+  "profile_diagnostic": null,
+  "profile_id": "source-relative-handlers-v1",
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "task_sha256": "f55efc63bc8d1918d27d19a7819a0ba9188e26ef2a482c47f76b35fe32714e6e",
+  "useful_work": true
+}

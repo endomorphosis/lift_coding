@@ -1,0 +1,17 @@
+{
+  "bytes_before_redaction": 11808768,
+  "in_memory": false,
+  "nonempty_tables": {
+    "client_sessions": 3,
+    "control_plane_metadata": 6,
+    "diagnostic_schema_inventory_v1": 11,
+    "idempotency_records": 3,
+    "schema_contracts": 11,
+    "schema_migration_attempts": 1,
+    "schema_migrations": 1,
+    "store_generations": 1
+  },
+  "note": "Full DuckDB catalog exceeds the 1MiB paper-file bound; occupancy is retained. Actual file-backed consumption ran during profile qualification.",
+  "schema": "la-generated-study-durable-store-occupancy/v1",
+  "store_kind": "duckdb-file-typed-quack-owner"
+}

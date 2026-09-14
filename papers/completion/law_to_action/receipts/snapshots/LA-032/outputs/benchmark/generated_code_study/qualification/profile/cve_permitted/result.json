@@ -1,0 +1,60 @@
+{
+  "arm": "A4",
+  "attempt_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0:A4",
+  "candidate_sha256": "b6a8659285eb8c1517be021f402e9778e59ade47386aa4df266e22f5c59e4353",
+  "delegate_started": true,
+  "execution_error": null,
+  "forbidden_effect": false,
+  "handler_calls": [
+    "export_fixed_control"
+  ],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "mechanisms": {
+    "enforcement": {
+      "delegate_called": true,
+      "denial_reason": "",
+      "disposition": "allowed",
+      "in_memory": false,
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    "obligation": {
+      "allowed": true,
+      "authority_kind": "satisfiability",
+      "checker": {
+        "agrees_with_provider": true,
+        "authority_kind": "satisfiability",
+        "checker": "exhaustive-truth-table",
+        "status": "unsat",
+        "theorem_proof": false
+      },
+      "provider": {
+        "algorithm": "dpll",
+        "authority_kind": "satisfiability",
+        "elapsed_seconds": 5.8289035223424435e-05,
+        "model": null,
+        "provider": "sympy.logic.inference.satisfiable",
+        "status": "unsat"
+      },
+      "theorem_proof": false
+    },
+    "ucan": {
+      "authorization_event_cid": "55a955b02f00c7ace80c28ada7b39f2a938706d879c315eefddf08b21990f0e6",
+      "crypto": "real-ed25519",
+      "decision": "allow",
+      "policy_provider": "la-014-declared-lightweight-policy",
+      "reason": "ucan_and_declared_policy",
+      "token_audience": "did:client:tenant-a",
+      "verifier_kind": "real-ucan-verifier"
+    }
+  },
+  "model_generated": false,
+  "observation_sha256": "813440f0096efe23c0162e620d0f104730982d1e9093bb43569ff87cb739e406",
+  "population": "cve",
+  "profile_diagnostic": null,
+  "profile_id": "source-relative-handlers-v1",
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "task_sha256": "5493611681832e5845db4a87f220d03f694ac5833a392b9b3241e4af1e6a40c9",
+  "useful_work": true
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "population": "legal",
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source_sha256": "e13bc637860684b0342bcedde1286e8a80c9c188d8f3e89b9ccdc5421156713d"
+  },
+  {
+    "population": "legal",
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source_sha256": "8760c8066c8a1f1eaba17a084fe02c46a923323058c8ad8e31a9d34f2c501829"
+  },
+  {
+    "population": "legal",
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source_sha256": "cae8e7b418b88b17b978349471bdf5d377c61614314ee6005826cf95a44c5ab7"
+  },
+  {
+    "population": "legal",
+    "reason": "One run function required",
+    "rejected": true,
+    "source_sha256": "c14f22a6a42922bbd339e4cd0665267d77d0b0c7f30cf29ef47517efe5cafacb"
+  },
+  {
+    "population": "cve",
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source_sha256": "19f7e3c6e57b3a53c5348f4e2d301517c3017feed26d9f77b9dc179a6c2fcb59"
+  },
+  {
+    "population": "cve",
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source_sha256": "78105f86bdf53fb87c8f9436e01370f0d5edd3ef492b39873ebda0da23ecced3"
+  },
+  {
+    "population": "cve",
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source_sha256": "112cfa31b5530b154003466b069929c851178bbcf794c0276acfb319c2cd33be"
+  },
+  {
+    "population": "cve",
+    "reason": "One run function required",
+    "rejected": true,
+    "source_sha256": "c14f22a6a42922bbd339e4cd0665267d77d0b0c7f30cf29ef47517efe5cafacb"
+  },
+  {
+    "population": "skill",
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source_sha256": "cd3ec2dc4c13cfd5eff5bc1f01be68411ad0658912822eb153e5c806686eae1b"
+  },
+  {
+    "population": "skill",
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source_sha256": "47d7901006bc2171da343fbf8662348cd05f16fbd20442e316689d9bf4281a52"
+  },
+  {
+    "population": "skill",
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source_sha256": "56c85589cd8f1c7519f161c5962a0894181690e65027b24cf0d623813191735a"
+  },
+  {
+    "population": "skill",
+    "reason": "One run function required",
+    "rejected": true,
+    "source_sha256": "c14f22a6a42922bbd339e4cd0665267d77d0b0c7f30cf29ef47517efe5cafacb"
+  }
+]

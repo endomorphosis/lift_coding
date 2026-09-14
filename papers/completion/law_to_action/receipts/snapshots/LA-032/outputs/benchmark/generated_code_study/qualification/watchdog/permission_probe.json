@@ -1,0 +1,88 @@
+{
+  "diagnostics": [
+    {
+      "errno": 13,
+      "exception_type": "DiagnosticOSError",
+      "leaf_identity": {
+        "errno": null,
+        "exists": true,
+        "inode": 72255691,
+        "kind": "leaf",
+        "mode": 16877,
+        "observed_monotonic": 830736.417025349,
+        "operation": "stat",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent/leaf"
+      },
+      "observed_monotonic": 830736.417036165,
+      "operation": "read:cpu.stat",
+      "parent_identity": {
+        "errno": null,
+        "exists": true,
+        "inode": 72255683,
+        "kind": "parent",
+        "mode": 16877,
+        "observed_monotonic": 830736.417032677,
+        "operation": "stat",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent"
+      },
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent/leaf/cpu.stat",
+      "strerror": "Permission denied",
+      "where": "terminal_or_periodic_observation"
+    }
+  ],
+  "error": {
+    "at_monotonic": 830736.417053717,
+    "diagnostic": {
+      "errno": 13,
+      "exception_type": "DiagnosticOSError",
+      "leaf_identity": {
+        "errno": null,
+        "exists": true,
+        "inode": 72255691,
+        "kind": "leaf",
+        "mode": 16877,
+        "observed_monotonic": 830736.417025349,
+        "operation": "stat",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent/leaf"
+      },
+      "observed_monotonic": 830736.417036165,
+      "operation": "read:cpu.stat",
+      "parent_identity": {
+        "errno": null,
+        "exists": true,
+        "inode": 72255683,
+        "kind": "parent",
+        "mode": 16877,
+        "observed_monotonic": 830736.417032677,
+        "operation": "stat",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent"
+      },
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent/leaf/cpu.stat",
+      "strerror": "Permission denied",
+      "where": "terminal_or_periodic_observation"
+    },
+    "historical_v2_receipt_upgraded": false,
+    "leaf_identity": {
+      "errno": null,
+      "exists": true,
+      "inode": 72255691,
+      "kind": "leaf",
+      "mode": 16877,
+      "observed_monotonic": 830736.417064806,
+      "operation": "stat",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent/leaf"
+    },
+    "parent_identity": {
+      "errno": null,
+      "exists": true,
+      "inode": 72255683,
+      "kind": "parent",
+      "mode": 16877,
+      "observed_monotonic": 830736.417057653,
+      "operation": "stat",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/permission/parent"
+    },
+    "reason": "resource_observation_OSError",
+    "suppressed": false
+  }
+}

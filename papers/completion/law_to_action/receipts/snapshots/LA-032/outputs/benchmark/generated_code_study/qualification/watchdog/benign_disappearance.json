@@ -1,0 +1,43 @@
+{
+  "accepted": true,
+  "diagnostics": [
+    {
+      "benign_leaf_disappearance": true,
+      "empty_parent_state": true,
+      "errno": 2,
+      "exception_type": "DiagnosticOSError",
+      "leaf_identity": {
+        "errno": null,
+        "exists": true,
+        "inode": 72255680,
+        "kind": "leaf",
+        "mode": 16877,
+        "observed_monotonic": 830736.416116023,
+        "operation": "stat",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/benign/parent/leaf"
+      },
+      "monotonic_parent_counters": true,
+      "observed_monotonic": 830736.416126568,
+      "operation": "read:cpu.stat",
+      "parent_identity": {
+        "errno": null,
+        "exists": true,
+        "inode": 72255672,
+        "kind": "parent",
+        "mode": 16877,
+        "observed_monotonic": 830736.416123,
+        "operation": "stat",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/benign/parent"
+      },
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fixtures/benign/parent/leaf/cpu.stat",
+      "revalidated_parent_identity": true,
+      "strerror": "No such file or directory",
+      "where": "terminal_or_periodic_observation"
+    }
+  ],
+  "empty_parent": true,
+  "monotonic_counters": true,
+  "parent_accounting_retained": true,
+  "parent_inode_stable": true,
+  "whole_group_exit_proven": true
+}

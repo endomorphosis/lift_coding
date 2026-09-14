@@ -1,0 +1,61 @@
+{
+  "actual_model_calls": 3,
+  "actual_service_resource_boundary_qualified": true,
+  "base_url": "http://127.0.0.1:50115",
+  "bounded_http_sha256": "5ccc38e54267908c55e11d8e4ccc52b57d3375712a21a626707ef2ac727db8bf",
+  "calls": [
+    {
+      "completion_tokens": 1024,
+      "input_count": 567,
+      "prompt_tokens": 567,
+      "prompt_tokens_equal_preflight": true,
+      "raw_response_sha256": "88f7a36af6495e3cfc9b249f84edf1d09c99e341b44ae70b6ed55946457826da",
+      "seed": 104729,
+      "wall_seconds": 0.06088139093481004
+    },
+    {
+      "completion_tokens": 1024,
+      "input_count": 567,
+      "prompt_tokens": 567,
+      "prompt_tokens_equal_preflight": true,
+      "raw_response_sha256": "f71181437dee3e550500facfbe2c96a23b9416a56486ab7c2227dce96c2bcf45",
+      "seed": 104759,
+      "wall_seconds": 0.06137184600811452
+    }
+  ],
+  "cancellation": true,
+  "chat_template_sha256": "6ad7769906591a6fac66285fdcb3ddaea91a95fe3ede163815589ef397d03838",
+  "constructed_transport": false,
+  "deployment_sha256": "8d76638ce7fc12692185d8181f95c2c00ce486048021d2a871e4479e48485569",
+  "indefinitely_running_required": false,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "la032-byte-causal-lm",
+  "model_revision": "la032-v1",
+  "paid_budget": 0,
+  "prompt_profile_sha256": "f4b4b807ec88500fbaa1cb0fd89fcffc44fd4a8b748d0d5dadd54bd7729aa0ce",
+  "qualification": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789419820/papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+    "sha256": "2e7c56966d3ccc1fdb02d7dca337992439d614f48c9af04fed1c2d80761d66b4"
+  },
+  "raw_response_preserved": true,
+  "reuse_warm_model_during_active_batches": true,
+  "schema": "la-qualified-local-model/v1",
+  "scientific_benchmark": false,
+  "seed_behavior_recorded": true,
+  "service_resource_accounting": {
+    "cpu_seconds": 11.7,
+    "rss_bytes": 420167680,
+    "rss_peak_bytes": 420167680
+  },
+  "startup_readiness_seconds": 360,
+  "startup_seconds": 1.6198501701001078,
+  "status": "PASS",
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenization_agrees_with_usage": true,
+  "tokenizer_revision": "byte-utf8-v1",
+  "tokenizer_sha256": "ab9e60aa4fed937a71c5db1ba381cf35fd4aa6500b58136bdd4e65a16f97654f",
+  "total_service_wall_seconds": 10000,
+  "weights_sha256": "adf00b3f74718695beceb95e691f5def199dc367947175ac32301cfc44fbe23a"
+}

@@ -1,0 +1,33 @@
+{
+  "arm": "A3",
+  "attempt_id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0:A3",
+  "candidate_sha256": "470ab80e4857b95a2896cbc0773e588da19607118178da67feabe76be1e6eaf4",
+  "delegate_started": true,
+  "execution_error": null,
+  "forbidden_effect": false,
+  "handler_calls": [
+    "export_authorized_step"
+  ],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "mechanisms": {
+    "ucan": {
+      "authorization_event_cid": "09b30d67db4060372be351224ae08f8343ebe79bfaaad146513952aa0461fa39",
+      "crypto": "real-ed25519",
+      "decision": "allow",
+      "policy_provider": "la-014-declared-lightweight-policy",
+      "reason": "ucan_and_declared_policy",
+      "token_audience": "did:client:tenant-a",
+      "verifier_kind": "real-ucan-verifier"
+    }
+  },
+  "model_generated": false,
+  "observation_sha256": "2bd655ab273b47a50f0ae477c72439f8374b952ae2ffb8f3f9c745448e136c36",
+  "population": "skill",
+  "profile_diagnostic": null,
+  "profile_id": "source-relative-handlers-v1",
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "task_sha256": "92fa975bd5ba87771ff0f86e9f2bf2ab7c96a6cd488bc6872ab64c8dcfe94960",
+  "useful_work": true
+}

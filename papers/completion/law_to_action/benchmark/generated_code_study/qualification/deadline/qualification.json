@@ -1,0 +1,44 @@
+{
+  "complete_attempt_wall_seconds": 120,
+  "maximum_input_tokens": 2048,
+  "maximum_model_calls": 8,
+  "maximum_output_tokens": 1024,
+  "overrun_retained": true,
+  "paid_budget": 0,
+  "phases": [
+    {
+      "overrun": 0.0,
+      "phase": "template",
+      "remaining_after": 119.9899263450643,
+      "wall_consumed": 0.01
+    },
+    {
+      "overrun": 0.0,
+      "phase": "tokenize",
+      "remaining_after": 119.9798477620352,
+      "wall_consumed": 0.01
+    },
+    {
+      "overrun": 0.0,
+      "phase": "inference",
+      "remaining_after": 119.95976743008941,
+      "wall_consumed": 0.02
+    },
+    {
+      "overrun": 0.0,
+      "phase": "execution",
+      "remaining_after": 119.93969080899842,
+      "wall_consumed": 0.02
+    },
+    {
+      "overrun": 0.0,
+      "phase": "cleanup",
+      "remaining_after": 119.92962397099473,
+      "wall_consumed": 0.01
+    }
+  ],
+  "schema": "la-generated-study-attempt-deadline/v1",
+  "scientific_benchmark": false,
+  "status": "PASS",
+  "unknowns_retained": true
+}

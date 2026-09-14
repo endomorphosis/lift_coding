@@ -1,0 +1,1119 @@
+{
+  "cve_audit": {
+    "canonical_identity_not_sufficient": true,
+    "nearest_neighbor_rejections": [],
+    "rows_read": 4329,
+    "selection": "Ascending physical row index after LA-004/LA-029 identity, repo-name fork/clone and nearest-neighbor exclusions.",
+    "skipped": {
+      "excluded_or_duplicate_repo": 32
+    }
+  },
+  "exclusions": {
+    "canonical_identity_not_sufficient": true,
+    "la004_families": [
+      "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+      "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992",
+      "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+      "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+      "family:14b963de8c09e1ba2abcf12943314b08fc8613d2aeb736be8134da9f2c17c68d",
+      "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d",
+      "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94",
+      "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8",
+      "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+      "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3",
+      "family:47e697640b656d1165774b9f33decc9af78738cf25b45c8502b90cfe3e824629",
+      "family:4d35f1dcfc00a467af06a0d8513418b14bb7dcd9a9ab6776a87f1373277d4bb7",
+      "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+      "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec",
+      "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e",
+      "family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8",
+      "family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c",
+      "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902",
+      "family:935da107e298ce1e51151e83c943aef43bc2134bc4d4bd9e62e0faae0af47edc",
+      "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914",
+      "family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad",
+      "family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30",
+      "family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10",
+      "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382",
+      "family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228",
+      "family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db",
+      "family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac",
+      "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04",
+      "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479",
+      "family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d"
+    ],
+    "la004_repos": [
+      "github.com/advplyr/audiobookshelf",
+      "github.com/apache/mynewt-nimble",
+      "github.com/asteyatech-com/clawgate-api",
+      "github.com/athroniaeth/fastapi-api-key",
+      "github.com/auth0/express-jwt",
+      "github.com/azimolabs/apple-sign-in-php-sdk",
+      "github.com/b2evolution/b2evolution",
+      "github.com/cesnet/fake-oidc-server",
+      "github.com/erickit/nest-user-auth",
+      "github.com/esl/mongooseim",
+      "github.com/geigerzaehler/oidc-provider-mock",
+      "github.com/gobeyondidentity/bi-sdk-react-native",
+      "github.com/grapheneos/attestationserver",
+      "github.com/h0ru5/apo",
+      "github.com/ithacaxyz/porto",
+      "github.com/kde/ark",
+      "github.com/lepture/mistune",
+      "github.com/mz-automation/libiec61850",
+      "github.com/pofider/phantom-html-to-pdf",
+      "github.com/ramseyk/httpserver",
+      "github.com/siwapp/siwapp-ror",
+      "github.com/theopenlane/core",
+      "github.com/wp-plugins/qtranslate-slug",
+      "github.com/yaxian/rocket-jwt"
+    ]
+  },
+  "frozen_at": "2026-09-14T21:23:47.479682+00:00",
+  "salt": "vericodegen-2026-law-to-action-LA016-v1",
+  "schema": "la-generated-study-source-manifest/v1",
+  "skill_audit": {
+    "counted_as_human_annotation": false,
+    "generated_procedures_in_selected": 12,
+    "rows_read": 1182,
+    "skipped": {
+      "excluded_fork_overlap_or_duplicate": 12
+    }
+  },
+  "skill_not_human_annotation": true,
+  "source_artifacts": [
+    {
+      "artifact_id": "legal-financial-privacy-access",
+      "cache_relative_path": "legal/legal-financial-privacy-access.pdf",
+      "lawful_access": "public official US Code edition from GovInfo",
+      "operative_text_present": true,
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "USCODE-2024:12-USC-3402",
+      "sha256": "ee80b97fcd9c1d29fdfa8d4fd4b6bf963eb175a5006d57a0bee7b85b120ddc94",
+      "size_bytes": 147668,
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title12/pdf/USCODE-2024-title12-chap35-sec3402.pdf"
+    },
+    {
+      "artifact_id": "legal-tax-return-confidentiality",
+      "cache_relative_path": "legal/legal-tax-return-confidentiality.pdf",
+      "lawful_access": "public official US Code edition from GovInfo",
+      "operative_text_present": true,
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "USCODE-2024:26-USC-6103",
+      "sha256": "d380369e1053a46b0adc17e48f76fc2c2007b0133980165a6bd31f5722677c33",
+      "size_bytes": 327829,
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/pdf/USCODE-2024-title26-subtitleF-chap61-subchapB-sec6103.pdf"
+    },
+    {
+      "artifact_id": "legal-bank-secrecy-compliance",
+      "cache_relative_path": "legal/legal-bank-secrecy-compliance.pdf",
+      "lawful_access": "public official US Code edition from GovInfo",
+      "operative_text_present": true,
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "USCODE-2024:31-USC-5318",
+      "sha256": "8e982aa1aa9ac9c80b8401e44d67a837d62159f8ef1059ddadd7bf5e2880b447",
+      "size_bytes": 210055,
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/pdf/USCODE-2024-title31-subtitleIV-chap53-subchapII-sec5318.pdf"
+    },
+    {
+      "artifact_id": "legal-federal-information-security",
+      "cache_relative_path": "legal/legal-federal-information-security.pdf",
+      "lawful_access": "public official US Code edition from GovInfo",
+      "operative_text_present": true,
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "USCODE-2024:44-USC-3551",
+      "sha256": "03cf4c12c753ffeba8dfceb16b252fdcee45d9c34b009e44db5d7ad6e454166d",
+      "size_bytes": 179335,
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title44/pdf/USCODE-2024-title44-chap35-subchapII-sec3551.pdf"
+    },
+    {
+      "artifact_id": "legal-federal-cybersecurity",
+      "cache_relative_path": "legal/legal-federal-cybersecurity.pdf",
+      "lawful_access": "public official US Code edition from GovInfo",
+      "operative_text_present": true,
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "USCODE-2024:6-USC-1501",
+      "sha256": "05c3bdbc138a7b6d567573da87f8d8791be292c8681e5484146911b504cfba9f",
+      "size_bytes": 139240,
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title6/pdf/USCODE-2024-title6-chap6-subchapI-sec1501.pdf"
+    },
+    {
+      "artifact_id": "legal-electronic-surveillance-offense",
+      "cache_relative_path": "legal/legal-electronic-surveillance-offense.pdf",
+      "lawful_access": "public official US Code edition from GovInfo",
+      "operative_text_present": true,
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "USCODE-2024:50-USC-1809",
+      "sha256": "d4b87614bf23f4a70777ad18bcf45fa579734e71a7849902c5d3219be70eceb1",
+      "size_bytes": 138445,
+      "source_type": "official_GovInfo_US_Code_section_PDF",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/pdf/USCODE-2024-title50-chap36-subchapI-sec1809.pdf"
+    },
+    {
+      "artifact_id": "cve-first-shard",
+      "cache_relative_path": "train-00000-of-00003.parquet",
+      "lawful_access": "public HuggingFace dataset revision pin",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "rights_note": "Dataset card declares Apache-2.0; actual upstream code licenses still govern later code redistribution.",
+      "sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+      "size_bytes": 211599861,
+      "source_type": "verified_original_Parquet_shard",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet"
+    },
+    {
+      "artifact_id": "skill-security-bundle",
+      "cache_relative_path": "skillcenter-security.sqlite",
+      "lawful_access": "public HuggingFace bundle revision pin",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve this exact URI, verify bytes and SHA-256, and retain the applicable upstream source terms. No source body is included in this paper artifact.",
+        "status": "retrieval_only"
+      },
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "rights_note": "Packaging MIT does not grant rights to all individual sources.",
+      "sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+      "size_bytes": 7892992,
+      "source_type": "verified_original_SQLite_bundle",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite"
+    }
+  ],
+  "source_bodies_exported": 0,
+  "source_records": [
+    {
+      "ancestry_key": [
+        "official_legal_section",
+        "44-USC-3551"
+      ],
+      "artifact_id": "legal-federal-information-security",
+      "excerpt_present": true,
+      "excerpt_sha256": "bc351531e6b52d8b144a52e894010be549827fa9141dc000a3595c8b70ef791f",
+      "fork_clone_audit": {
+        "kind": "official_legal_section",
+        "la004_section_overlap": false,
+        "la004_title_overlap": false
+      },
+      "lineage_family_id": "family:e6b2098ea6b97d3876a82f9925358f04a3ee2c3f76a5ee19f246fa4662ca5b08",
+      "normalized_source_sha256": "1bee2db19344e2869f50f86d38a33f9f23707c2b9eeec6c87ea5b2dd7a6c4972",
+      "population": "legal",
+      "ranking_sha256": "02f0fe48b076a4ec405d58ba87bac915191913732a72fb1e349ce7ee7286f9a6",
+      "source_id": "legal:05c4eb1e636735895ac85941df7a8c45ae96108aba1751e34d83e947d7b751f8",
+      "source_locator": {
+        "document_sha256": "03cf4c12c753ffeba8dfceb16b252fdcee45d9c34b009e44db5d7ad6e454166d",
+        "edition": "2024",
+        "section": "44-USC-3551"
+      },
+      "source_record_sha256": "03cf4c12c753ffeba8dfceb16b252fdcee45d9c34b009e44db5d7ad6e454166d",
+      "split": "development"
+    },
+    {
+      "ancestry_key": [
+        "official_legal_section",
+        "31-USC-5318"
+      ],
+      "artifact_id": "legal-bank-secrecy-compliance",
+      "excerpt_present": true,
+      "excerpt_sha256": "48e1f430a7637882fb7b1a7e37bfc076c66baa1a7f392022958b9956493ea59b",
+      "fork_clone_audit": {
+        "kind": "official_legal_section",
+        "la004_section_overlap": false,
+        "la004_title_overlap": false
+      },
+      "lineage_family_id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5",
+      "normalized_source_sha256": "cb3e833c40364a994db63cc39392aba9a5164659371ce4f223da6798e84abd41",
+      "population": "legal",
+      "ranking_sha256": "0441dfef2918f1fc614ced11c5ff5459ff5d7f330550ea17bd52fbee9f5c5498",
+      "source_id": "legal:4e2c5b1812de4e737f9e092dbeac14abd480ed5546ce88a3e6e698c086146888",
+      "source_locator": {
+        "document_sha256": "8e982aa1aa9ac9c80b8401e44d67a837d62159f8ef1059ddadd7bf5e2880b447",
+        "edition": "2024",
+        "section": "31-USC-5318"
+      },
+      "source_record_sha256": "8e982aa1aa9ac9c80b8401e44d67a837d62159f8ef1059ddadd7bf5e2880b447",
+      "split": "development"
+    },
+    {
+      "ancestry_key": [
+        "official_legal_section",
+        "12-USC-3402"
+      ],
+      "artifact_id": "legal-financial-privacy-access",
+      "excerpt_present": true,
+      "excerpt_sha256": "eb17150687fd0691db906162fd16553e5ad15de514b68e58c638c78c2f265169",
+      "fork_clone_audit": {
+        "kind": "official_legal_section",
+        "la004_section_overlap": false,
+        "la004_title_overlap": false
+      },
+      "lineage_family_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+      "normalized_source_sha256": "02afc339fb3e522be1bfdf5140de3094d3a35b455736dfb5255ab6c40a4eba45",
+      "population": "legal",
+      "ranking_sha256": "2e110a1244f50b75035f704d079b6750a3609ce22ddf8da09284e51a103a3a44",
+      "source_id": "legal:f60d179793df51c6a38687761d947c45eafe8a6bb12bca3fdd4b1226614a9d97",
+      "source_locator": {
+        "document_sha256": "ee80b97fcd9c1d29fdfa8d4fd4b6bf963eb175a5006d57a0bee7b85b120ddc94",
+        "edition": "2024",
+        "section": "12-USC-3402"
+      },
+      "source_record_sha256": "ee80b97fcd9c1d29fdfa8d4fd4b6bf963eb175a5006d57a0bee7b85b120ddc94",
+      "split": "calibration"
+    },
+    {
+      "ancestry_key": [
+        "official_legal_section",
+        "50-USC-1809"
+      ],
+      "artifact_id": "legal-electronic-surveillance-offense",
+      "excerpt_present": true,
+      "excerpt_sha256": "8ffda46c8eea75f9ae32822e22f367bb9b9454b086a89dcfb01f18d195b3b42d",
+      "fork_clone_audit": {
+        "kind": "official_legal_section",
+        "la004_section_overlap": false,
+        "la004_title_overlap": false
+      },
+      "lineage_family_id": "family:1faca8cf9f21aeca65f5f09d47d64a45ccc4f796cb8e141b471087432de9afdb",
+      "normalized_source_sha256": "6f837f73e920267fa5745cd1d78d93a49154cc6ccbbb6d698b646ef7cc7c75bf",
+      "population": "legal",
+      "ranking_sha256": "51376f26ec1f0c924f62226a2d3398fcafbd851a56c5c2f2c52e700ce63641e9",
+      "source_id": "legal:b90e1670d5588737057265fefd437d868f59ac8a4e326a4855a5f2fd718281d6",
+      "source_locator": {
+        "document_sha256": "d4b87614bf23f4a70777ad18bcf45fa579734e71a7849902c5d3219be70eceb1",
+        "edition": "2024",
+        "section": "50-USC-1809"
+      },
+      "source_record_sha256": "d4b87614bf23f4a70777ad18bcf45fa579734e71a7849902c5d3219be70eceb1",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "official_legal_section",
+        "26-USC-6103"
+      ],
+      "artifact_id": "legal-tax-return-confidentiality",
+      "excerpt_present": true,
+      "excerpt_sha256": "78bfa7add4311b4df0ce6c3b611dc12fa723a8aa4ebb1acef01bbeb85a85232c",
+      "fork_clone_audit": {
+        "kind": "official_legal_section",
+        "la004_section_overlap": false,
+        "la004_title_overlap": false
+      },
+      "lineage_family_id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "normalized_source_sha256": "629389297095fbcc783d13729c82a23743dfe271d2003e79ec23dddcaeef6535",
+      "population": "legal",
+      "ranking_sha256": "6af0ba3b80602d70dfcb23302536ef86265ea5142c9bb877cd4154a3f4023f1d",
+      "source_id": "legal:a9f827dcb6ac8d2b974cc3f1dc03b787be2abc1d24a44db9de11fb1348932067",
+      "source_locator": {
+        "document_sha256": "d380369e1053a46b0adc17e48f76fc2c2007b0133980165a6bd31f5722677c33",
+        "edition": "2024",
+        "section": "26-USC-6103"
+      },
+      "source_record_sha256": "d380369e1053a46b0adc17e48f76fc2c2007b0133980165a6bd31f5722677c33",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "official_legal_section",
+        "6-USC-1501"
+      ],
+      "artifact_id": "legal-federal-cybersecurity",
+      "excerpt_present": true,
+      "excerpt_sha256": "1c44d505f11814567411463a106117dcac3d6bd6781f6513e9c4b3b96b6c7026",
+      "fork_clone_audit": {
+        "kind": "official_legal_section",
+        "la004_section_overlap": false,
+        "la004_title_overlap": false
+      },
+      "lineage_family_id": "family:e899d5a5e1e78d95e6a015d7502c827a4d40b4910f2a315fa118c6794ebd2ecb",
+      "normalized_source_sha256": "d34d88255a7f050c91d19af286d1a411e3a708388bc174c24dbbee795abd3234",
+      "population": "legal",
+      "ranking_sha256": "8a2989f9b84889b5107ed9ad556b9a976df6979a5cae831e2db3918a2a46d80a",
+      "source_id": "legal:4c530b5fdc3c6fb042a44e3e37742a19b4a0307b5359d4a6376ead86d4bab912",
+      "source_locator": {
+        "document_sha256": "05c3bdbc138a7b6d567573da87f8d8791be292c8681e5484146911b504cfba9f",
+        "edition": "2024",
+        "section": "6-USC-1501"
+      },
+      "source_record_sha256": "05c3bdbc138a7b6d567573da87f8d8791be292c8681e5484146911b504cfba9f",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/msyk/fmdataapi"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "0324ee7a26b47c3ee1f022bb57a241255fb32e0d1950746b706a361b62fc29ac",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/msyk/fmdataapi",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "fmdataapi",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/msyk"
+      },
+      "lineage_family_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "normalized_source_sha256": "3bc4b739f2aa6ef4aabfc5370e29b0a3ea05e61fdbdc1010a2069e5b3312dd3c",
+      "population": "cve",
+      "ranking_sha256": "0483790577aa3b947a03693340f920733a76189c66be5824808a9fe1a7f3b1bd",
+      "source_id": "cve:8d91c6d22f2dc84f8499d011d2adff98a62446345939a2238c81056e03aa240f",
+      "source_locator": {
+        "cve_id": "CVE-2021-4431",
+        "file_row_number": 40,
+        "fix_commit": "3bd1709a8f7b1720529bf5dfc9855ad609f436cf",
+        "language": "PHP",
+        "repository": "github.com/msyk/fmdataapi"
+      },
+      "source_record_sha256": "9ba32dbafcb78a9544368720b58daf1870592db752d1319e89756feef7a93fa6",
+      "split": "development"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/pymumu/smartdns"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "172ab3b620b87c61e4c3a1f206f5623a686733852a63abd9a67c51f934e486fb",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/pymumu/smartdns",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "smartdns",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/pymumu"
+      },
+      "lineage_family_id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "normalized_source_sha256": "f3654caa5a46629ea93cbf21f62707a3a10c477687c47626d6feb78c8041747d",
+      "population": "cve",
+      "ranking_sha256": "0935efed5b47e514d736b24f3953feb148b3a6d03f32fa6b9be4e92247495b1a",
+      "source_id": "cve:f3ad3b3e88be5affbe4bbd421c203cafff8018c4a98ecb52e99b7ced6595561f",
+      "source_locator": {
+        "cve_id": "CVE-2023-31470",
+        "file_row_number": 41,
+        "fix_commit": "56d0332bf91104cfc877635f6c82e9348587df04",
+        "language": "C",
+        "repository": "github.com/pymumu/smartdns"
+      },
+      "source_record_sha256": "b57670ae5045c9704653d4e69b6a9b9d598241647c63662a7e839b83f571639a",
+      "split": "development"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/kjd/idna"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "03d9a7e8176213c45d98d41a5e3b549bac98800c962bb93399e024edd4732fd3",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/kjd/idna",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "idna",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/kjd"
+      },
+      "lineage_family_id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "normalized_source_sha256": "65dbd68271dd2142b32365aa56747c1e125ac17616cbc7e07d62bcada408f37d",
+      "population": "cve",
+      "ranking_sha256": "18410c4c3aef22bd44066846496e9313229c37df68f8c177e2219610ba840672",
+      "source_id": "cve:b0da5aafb2a097dd7ddf339c822ca6fedca1e2fa39cbf3e07f8ac02f65cde61f",
+      "source_locator": {
+        "cve_id": "CVE-2024-3651",
+        "file_row_number": 33,
+        "fix_commit": "1d365e17e10d72d0b7876316fc7b9ca0eebdd38d",
+        "language": "Python",
+        "repository": "github.com/kjd/idna"
+      },
+      "source_record_sha256": "0a62a005d91bd34e997a071ac53beeb44a9e926d657dd31ee76db551d1a5dc18",
+      "split": "calibration"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/renstillmann/super-forms"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "ed524fdc857ea14668c0283df80d2d5c757a5152182c9fb7ab207bdd44cbb905",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/renstillmann/super-forms",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "super-forms",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/renstillmann"
+      },
+      "lineage_family_id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "normalized_source_sha256": "9fbb130761797ed90d0cb17f9e94e59f7552e637de1f1bf82aa63f948d817711",
+      "population": "cve",
+      "ranking_sha256": "1da0b8d94729ec9e91962a78e4ce8b47d8edef606d49e396d96ae319781ba510",
+      "source_id": "cve:8a8cc19dd355815deaf6fd8c561951fc7378aec24ec1fe958aba1ed94df86f7e",
+      "source_locator": {
+        "cve_id": "CVE-2022-0402",
+        "file_row_number": 31,
+        "fix_commit": "c19d65abbe43d9b6359c1bf3498dc697d0c19d02",
+        "language": "PHP",
+        "repository": "github.com/renstillmann/super-forms"
+      },
+      "source_record_sha256": "51763b2c937e5825b4e8676c2a7929edbcaeae58bc0da9e55563c4f64bf61245",
+      "split": "calibration"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/labocnil/cookieviz"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "e5766f149fc7ff444821adb0a9ef12e446a316440ff69abf016f35c5e7dbdef2",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/labocnil/cookieviz",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "cookieviz",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/labocnil"
+      },
+      "lineage_family_id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "normalized_source_sha256": "6762836453e82ff09b26e992259e39bab18485882eab97820a6d7402d0ca7445",
+      "population": "cve",
+      "ranking_sha256": "20fe25e8c575f82ced117f772d37bdfddb3caf61d0d571220e06c76eaae5c59d",
+      "source_id": "cve:55cc1de9b193f8f48c83ddffa97b17f095afd2bb639e3d63b2ec3d860edf2253",
+      "source_locator": {
+        "cve_id": "CVE-2014-8351",
+        "file_row_number": 43,
+        "fix_commit": "489b6050f6c53fe7b24c4bed3eeb9c25543960e2",
+        "language": "PHP",
+        "repository": "github.com/labocnil/cookieviz"
+      },
+      "source_record_sha256": "c7ab19a946320ecda63a08911c49e1f896fb848a1398717c51aef37209fb345c",
+      "split": "calibration"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/orchardcms/orchardcore"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "b9dd148c76343f3bacea1105c1450b3e6c4cc5b8c52c58da6a52e2c9766e5ed8",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/orchardcms/orchardcore",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "orchardcore",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/orchardcms"
+      },
+      "lineage_family_id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "normalized_source_sha256": "d84a42de2749ebfda29cae221db4b084431dac2dbbde20a88666475788dd9288",
+      "population": "cve",
+      "ranking_sha256": "4882a17a9b756d86f47f20b81ee6e29907bfa1da79599a63e92041a1797cf49f",
+      "source_id": "cve:4dcec53aad68967c69a9c62c37e0e6087365f8270120473955ff80e4e8b6f7f8",
+      "source_locator": {
+        "cve_id": "CVE-2022-0159",
+        "file_row_number": 25,
+        "fix_commit": "4da927d39a49138527c30db09c962ff706f95202",
+        "language": "Other",
+        "repository": "github.com/orchardcms/orchardcore"
+      },
+      "source_record_sha256": "8a5ecc11c23e88bec230abda9e24447092cd8061150cb43151af38ab5b02e269",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/kyubisation/angular-server-side-configuration"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "f924c0e31b63d4b7324f550c9427dda67a48686fec1973142141e651147c0472",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/kyubisation/angular-server-side-configuration",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "angular-server-side-configuration",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/kyubisation"
+      },
+      "lineage_family_id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "normalized_source_sha256": "beecac7b86321305f9af05fac9b9686245c4d3b10a46457b366b51da23bd33ca",
+      "population": "cve",
+      "ranking_sha256": "622b9f03b78c6425e6eb26a2ffba253f296bd4869bbff94b1cd27ddc9a6a0473",
+      "source_id": "cve:6d800cd04406e965d6cd272dc1699c060cca1b363d7acabd65445e51234dcc21",
+      "source_locator": {
+        "cve_id": "CVE-2023-28444",
+        "file_row_number": 42,
+        "fix_commit": "d701f51260637a84ede278e248934e0437a7ff86",
+        "language": "TypeScript",
+        "repository": "github.com/kyubisation/angular-server-side-configuration"
+      },
+      "source_record_sha256": "91f858e8e37948fbfb567f04473ae7d4def3865de1714ca3c872399c898aa3b0",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/xwiki/xwiki-rendering"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "73d4b195b2a12c93dcc80d92d01901fefa9aa6a0d137f445064e8a1eef2d9a21",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/xwiki/xwiki-rendering",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "xwiki-rendering",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/xwiki"
+      },
+      "lineage_family_id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "normalized_source_sha256": "c993553f8a2c12b6ce1616c657d93b562f823fdc55f471678ca8a88e92043da0",
+      "population": "cve",
+      "ranking_sha256": "6764da6ed10cdc4a01cb2f3bfa4037128fee69cd63b3ac344368717038024363",
+      "source_id": "cve:a326453771b671fc589663211bc3590c089e89d7ab1587d12a3900c8c9cd20d6",
+      "source_locator": {
+        "cve_id": "CVE-2023-32070",
+        "file_row_number": 36,
+        "fix_commit": "c40e2f5f9482ec6c3e71dbf1fff5ba8a5e44cdc1",
+        "language": "Other",
+        "repository": "github.com/xwiki/xwiki-rendering"
+      },
+      "source_record_sha256": "7a3e8f592b097e0d79979638d4da19a9093ea8756c59f4c045623ae87e918db5",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/github/hub"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "102b0d9b3a38409f257d3e8b80e5e4058e63a7a5c24d11c67d7759db5770929e",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/github/hub",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "hub",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/github"
+      },
+      "lineage_family_id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "normalized_source_sha256": "4ea8861e686e54145b9c891a523f343ae1925b938928b7067a4138dbd340e494",
+      "population": "cve",
+      "ranking_sha256": "78f5e3c6ff865ca70fa6710639c655ebab29632c032dcdaaf2178fbb3365e89e",
+      "source_id": "cve:1c7af2c6abc84c35e4ce66d832a55bc6f94ea2405b0851e949688fec7b342e2a",
+      "source_locator": {
+        "cve_id": "CVE-2014-0177",
+        "file_row_number": 32,
+        "fix_commit": "016ec99d25b1cb83cb4367e541177aa431beb600",
+        "language": "Ruby",
+        "repository": "github.com/github/hub"
+      },
+      "source_record_sha256": "f07d0a91caefb42e594a1f9538718b88df7959ad989fe5594e526a51dde929cb",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/go-vela/worker"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "b609f211adfcbd3ea08d7e7042a02ba5955a488042dd58c5425935e00ea7dd2d",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/go-vela/worker",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "worker",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/go-vela"
+      },
+      "lineage_family_id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "normalized_source_sha256": "a149c54784c57cdddad7a5bc1c31f5a30c65d77eb43f9d46b71d890baf954352",
+      "population": "cve",
+      "ranking_sha256": "a1118f27301adc03d5fc0339d93d05e035898ab7b9c9cd327ae770b65f81b551",
+      "source_id": "cve:9c63683b63e83ddc8270dea56fd7e913ecbc725b0d6e12a974f152269d565797",
+      "source_locator": {
+        "cve_id": "CVE-2024-28236",
+        "file_row_number": 35,
+        "fix_commit": "e1572743b008e4fbce31ebb1dcd23bf6a1a30297",
+        "language": "Go",
+        "repository": "github.com/go-vela/worker"
+      },
+      "source_record_sha256": "694d29f2516cf5d2b09dbd869393f03a4bb27d0eb9c49bc4d0dfcfe39968002c",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/electron/packager"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "daa23d950eb3996ae4d34f01ac1f58600d38947d3f6b42480a053c4e68846434",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/electron/packager",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "packager",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/electron"
+      },
+      "lineage_family_id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "normalized_source_sha256": "83724613ed829c7f8829dab9e781138ae128df607e077965f0d9d1433badc5a4",
+      "population": "cve",
+      "ranking_sha256": "b721d9789a9391668814424d5e18a67bd2875067cbae7c5e4c710c70e305d102",
+      "source_id": "cve:a6e070425033203896663153257c2d7f7d79159dfe679a39a99fba9c48bee072",
+      "source_locator": {
+        "cve_id": "CVE-2024-29900",
+        "file_row_number": 39,
+        "fix_commit": "d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+        "language": "TypeScript",
+        "repository": "github.com/electron/packager"
+      },
+      "source_record_sha256": "0833a2b2caba31959c5feebed0e42f53628adbfe0699c5ece9ce6d9e45beb8cf",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/redis/hiredis"
+      ],
+      "artifact_id": "cve-first-shard",
+      "excerpt_present": true,
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/redis/hiredis",
+        "excluded_canonical_identity": false,
+        "excluded_repo_name_collision": false,
+        "name": "hiredis",
+        "nearest_neighbor_jaccard_max_vs_selected_or_old": 0.0,
+        "owner": "github.com/redis"
+      },
+      "lineage_family_id": "family:36443738603ca972f6866630f181331824e83493d5c0b9b72df7c3fc8f408f27",
+      "normalized_source_sha256": "55a83c500ab13c1663ffa8423c921e923e5952c3d1aa018e14da06ad18fdbe8d",
+      "population": "cve",
+      "ranking_sha256": "d80a6c08b69059932e3a066e2c33130a0d4456552a1501e01851533b3cd6b710",
+      "source_id": "cve:f234c2387bd3fb7e063bfa58810dba5bf4e1ff971f5a44037c3dafa8e4abe87e",
+      "source_locator": {
+        "cve_id": "CVE-2021-32765",
+        "file_row_number": 34,
+        "fix_commit": "76a7b10005c70babee357a7d0f2becf28ec7ed1e",
+        "language": "C",
+        "repository": "github.com/redis/hiredis"
+      },
+      "source_record_sha256": "71ce71baee4494bc3f134efe34bb2f348e63842f89a32c83f3a88631b9d5ba32",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/supanadit/jwt-go"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "5c6efb30d98cb064fab60af3d8058941a4849d6996adc7950449cdf6272e4c0b",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/supanadit/jwt-go",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "jwt-go",
+        "owner": "github.com/supanadit"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "normalized_source_sha256": "5fdc73243f6ce74348a54db6b9d40c04dca0c17984e67dfeae64e383b152f5f8",
+      "population": "skill",
+      "ranking_sha256": "0182d936314ea2d42b277e4cf60aa4fd8f9407477ca706810eafd46daa001ddb",
+      "source_id": "skill:6f3b8cd2593e00637ce81732ba716b6f8b5df864e9794f4744f2bdd3fae3f201",
+      "source_locator": {
+        "primary_source_id": "7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132",
+        "repository": "github.com/supanadit/jwt-go",
+        "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+        "source_url": "https://github.com/supanadit/jwt-go"
+      },
+      "source_record_sha256": "618b21c0747e01ed0ea608bedb54290b8c2d6e2adb22ea42bf4f69922dbbf992",
+      "split": "development"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/tpeczek/lib.aspnetcore.security"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "e83c79b105cbd1fae7bd83458a1bda249d82cffc131a3f019c6a7a5f650369ae",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/tpeczek/lib.aspnetcore.security",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "lib.aspnetcore.security",
+        "owner": "github.com/tpeczek"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "normalized_source_sha256": "0708d7d195f12ac3e581b851c34f8d940a8e338068fc1c69a81f30ffe8e9e86b",
+      "population": "skill",
+      "ranking_sha256": "34253b05e410aa7ecd75d44714eba4dd82d64971856a035859fec67c8c404988",
+      "source_id": "skill:53cee4093900dc2ef770ecf07cc5c373b55b118c1513e828cf4afffb0914eeb1",
+      "source_locator": {
+        "primary_source_id": "83fc61b73995e6a831423c58187b5fddb0da618338c0e0b2d6a96dd5845f1dfb",
+        "repository": "github.com/tpeczek/lib.aspnetcore.security",
+        "skill_id": "02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f",
+        "source_url": "https://github.com/tpeczek/Lib.AspNetCore.Security"
+      },
+      "source_record_sha256": "e59319a30dfb1c71832a62a718cd4ab391be172f4d9090720a587b97f0e00b5f",
+      "split": "development"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/shashstormer/authtuna"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "596f0bf6cd4a41640da7d403eb7b7b8393e19e72240cd41d8d92cc0b487c1678",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/shashstormer/authtuna",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "authtuna",
+        "owner": "github.com/shashstormer"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "normalized_source_sha256": "2c062e6f4cbf36b3c2c5741e47e16f6dc694929c7315ae86e0c3087b7754d9f8",
+      "population": "skill",
+      "ranking_sha256": "4239909ad3bd3cc04cc06fb923bd96f09d9d565408f59f04e36f184c43164d83",
+      "source_id": "skill:2c46c223f1f16d7279c3b3921e1960238de9f8e5af90168745a8681752e9e79a",
+      "source_locator": {
+        "primary_source_id": "43286753f4125d78a3b871311fd555bbb49882b6cae8ea775246075d7d916f05",
+        "repository": "github.com/shashstormer/authtuna",
+        "skill_id": "0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783",
+        "source_url": "https://github.com/shashstormer/AuthTuna"
+      },
+      "source_record_sha256": "04e48cf64305b3ffeb0417086fa7718f02e809c03c794cb15b96e7eaf02c8ba3",
+      "split": "calibration"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/dev-sec/apache-baseline"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "b70495c0f1359c4e29fc6c3eba2a3a297d63f7ba7729756daadc3c949cb03999",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/dev-sec/apache-baseline",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "apache-baseline",
+        "owner": "github.com/dev-sec"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "normalized_source_sha256": "2b4c724741f9f018172cd04428cc0343cf304a8370662d1cb69f719c6de2d097",
+      "population": "skill",
+      "ranking_sha256": "4d82067c28de024dd4ef3d9a896994f0ef70ae4fd30cebea9932a9ff9fd1ffc0",
+      "source_id": "skill:dbaf1f05fbc5855ad6a18c44379be51b6d589eccbd54c7138c1924cab20f2046",
+      "source_locator": {
+        "primary_source_id": "011371b7b71dc549fa00170a9bdca593ab7f9e5084b973df85506c5592a8cc13",
+        "repository": "github.com/dev-sec/apache-baseline",
+        "skill_id": "02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8",
+        "source_url": "https://github.com/dev-sec/apache-baseline"
+      },
+      "source_record_sha256": "cab4af3543fd508bce94c54a22fe552060b2df37f3ea4d19084f4fc06f01fac9",
+      "split": "calibration"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/black-cockpit/netcore.keycloak"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "a7ecf1d52fe2743d3d73224df8265f73903826551490e0aa3e2cd4836906e3ea",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/black-cockpit/netcore.keycloak",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "netcore.keycloak",
+        "owner": "github.com/black-cockpit"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "normalized_source_sha256": "db8ef6f3650d4bce3b6a8e59dcea2e315b0ab5e708093ed8c17c1cd078abd0b7",
+      "population": "skill",
+      "ranking_sha256": "55a02d20fd8df8e88565764c07ce7df73fc49a973d55b819c12be2e852941793",
+      "source_id": "skill:eb3a3b0da5be531e0fe081fd1dceb65a7c3b1686f509ef371257c292cbee056a",
+      "source_locator": {
+        "primary_source_id": "7f436fce006331358e36c9df9ba0560ac49d8135fe0e396b41804571e1ed9b35",
+        "repository": "github.com/black-cockpit/netcore.keycloak",
+        "skill_id": "041e498df593007865add35b2b6695b877c0c78891d5547c6a3601251cf236d6",
+        "source_url": "https://github.com/Black-Cockpit/NETCore.Keycloak"
+      },
+      "source_record_sha256": "25655970dc7b10aa2063ea378d20b97556ba7acbe536bc8e57da8675e716853c",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/curveball/a12n-server"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "f231eac9e89b74c55dcf3cbc5a1cb11c35e078c52a2e98561fc9c4a634625b24",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/curveball/a12n-server",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "a12n-server",
+        "owner": "github.com/curveball"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "normalized_source_sha256": "b99d2c23f9e924736a051746dbcfe49154f262cc673155c4b318cf8bfe341bdd",
+      "population": "skill",
+      "ranking_sha256": "5a48cd4e719907439d8eefbbddb548cd13261e24fe4c80eddb9274e6773d52da",
+      "source_id": "skill:6802e36cfda4d2a6fdef78801712d8d15bcb0756ff46c0372b7953dd43b4232c",
+      "source_locator": {
+        "primary_source_id": "b9cef2ab3a33fe12d2a9cdcdeab5a09bd3658d85881ff4f2ecb472c03a4a184b",
+        "repository": "github.com/curveball/a12n-server",
+        "skill_id": "034fe6286315fea4bbdc9d48e8b6e44f7e0ccef615e7973b382ef07370797be1",
+        "source_url": "https://github.com/curveball/a12n-server"
+      },
+      "source_record_sha256": "af7943020ca748a0b22f1f3a06890ac1c2b33e07026ed53588e48bf789716703",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/alefeans/ip-analyzer"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "6ede1e5747b10a851882bb01f9e146b8b9f65eba0a32f47afd419e096cdf6084",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/alefeans/ip-analyzer",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "ip-analyzer",
+        "owner": "github.com/alefeans"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "normalized_source_sha256": "94c87bb40c0eb0ebfa244c7e290e72541a490ea0ab5b15f2f298ed85761b1bb8",
+      "population": "skill",
+      "ranking_sha256": "6d8ab8fd8eaf0382f150fde912e430bd3672455700d19525177189778d86298e",
+      "source_id": "skill:49a671ea339ac06bfcf028f30c2ef59f216df1676cc534e8029fe71eb483f0a4",
+      "source_locator": {
+        "primary_source_id": "82cc855792f130f0fb4c57546eee98454f04fd3e94034e46e496c797ada7e4f4",
+        "repository": "github.com/alefeans/ip-analyzer",
+        "skill_id": "041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02",
+        "source_url": "https://github.com/alefeans/ip-analyzer"
+      },
+      "source_record_sha256": "f517f6a050fde00cfd0509dbb236a233e0b1d2d8aa53a1f84ef15b19636c2131",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/yezz123/athena"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "b8ec82b00e7acd7f4cb9c6503b0e2fef6a560f7f825c54ed7da8a59e06139eb9",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/yezz123/athena",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "athena",
+        "owner": "github.com/yezz123"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "normalized_source_sha256": "ef49acaeda08e65a6f38434fae8817de8c0a8096a3b2adaa02669963e46882fc",
+      "population": "skill",
+      "ranking_sha256": "99afe122ddc933fd76bb62662afd0901db8e58f2b358f6943196b8fdae96b6a0",
+      "source_id": "skill:150adf900c6192b44e8dc7e9031e880b467951e9840bf1fe4044e9e06e3be63c",
+      "source_locator": {
+        "primary_source_id": "fcd927a1c2e7fd7238d1f0a29549764ca0f2e033b1df47b5de32e09c919ae0bc",
+        "repository": "github.com/yezz123/athena",
+        "skill_id": "027bf1b88199eb33db9ae8df0952b08334e5c19556968770c33f2b19e47afd36",
+        "source_url": "https://github.com/yezz123/Athena"
+      },
+      "source_record_sha256": "f390d3c9488bfbaf293cec4c3855118a051e2bbe333f2ea6d34f5589a677b078",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/identitypython/satosa"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "c3496da2b85a719e71d8c03feb17842dfe563f851e995b1ec6a4c4bfe26c905d",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/identitypython/satosa",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "satosa",
+        "owner": "github.com/identitypython"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "normalized_source_sha256": "a613fdbf84f942807452b41779eb8eba2555d820946a32eed95cc2a440b90c1c",
+      "population": "skill",
+      "ranking_sha256": "b6bb1584d7f2045f7e9896a6f5d53616c8ef2f1a2f8730db0a4e8a8a33357e7a",
+      "source_id": "skill:e2905377c44a3d328dc287c4c69b84e8c3be13a3e924551f7c7daa20b3064cb8",
+      "source_locator": {
+        "primary_source_id": "4958a0bace41cf74d7a5978e04c37334b6244dd09670fb26224a5494b3992c15",
+        "repository": "github.com/identitypython/satosa",
+        "skill_id": "03c7dec28d86bb66eb1685c51ad4c9a40bc37c008517e9d877234154bfb04edf",
+        "source_url": "https://github.com/IdentityPython/SATOSA"
+      },
+      "source_record_sha256": "d3386fbb60ac315a62780b98340f89e5dd588437c1b81a4180841f535beba5f8",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/janko/rodauth-rails"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "9ba879cfea84ddbd0ad6b38587cf55303ce846558672de0524da2428a283f8a7",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/janko/rodauth-rails",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "rodauth-rails",
+        "owner": "github.com/janko"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "normalized_source_sha256": "32eb6b9058be737c41f7a3975aec1bf97983c591a03e1ecf61a55b17eed91d39",
+      "population": "skill",
+      "ranking_sha256": "b8812596ad43ef15922e0a831f2f0856295156cfa24f538986ece4d79746a024",
+      "source_id": "skill:69b9041c68a77cb1023c3265110198d32ee4aa8f7e15a2f7753f4b033e5217da",
+      "source_locator": {
+        "primary_source_id": "f2608859dad33f27316c494ece4d1b6fb356a0f915fdf401f2068479fc7c938e",
+        "repository": "github.com/janko/rodauth-rails",
+        "skill_id": "0453ec8abf09f532dc8cc4a8091b6067384f1dd42ebb0501daeb3472f3cf8120",
+        "source_url": "https://github.com/janko/rodauth-rails"
+      },
+      "source_record_sha256": "1edd5dcf402cf831e307b467e180425d002584a419b3174aceb1714ee769577b",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/xboxreplay/xboxlive-auth"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "e3988852eebcac8201eff193c7cd25924d4c30640e59625ac6224c5cce8f2bfc",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/xboxreplay/xboxlive-auth",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "xboxlive-auth",
+        "owner": "github.com/xboxreplay"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "normalized_source_sha256": "a26b0e34bbca3b2831bc3af84ea04e19dbd1946a06511f5aec3c802cf5282c95",
+      "population": "skill",
+      "ranking_sha256": "e529aa413e2dde0e455c9fcd3903bace82b8d777bf9e793b2d9ebae91d488c94",
+      "source_id": "skill:0374c029f5e1978dd7130d16a575e634a054824ec6ad026536849bd3757654c1",
+      "source_locator": {
+        "primary_source_id": "bb52440f7d0307c46b2abd5a2aa374f576fcd862007173d0f25958b8274da820",
+        "repository": "github.com/xboxreplay/xboxlive-auth",
+        "skill_id": "03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34",
+        "source_url": "https://github.com/XboxReplay/xboxlive-auth"
+      },
+      "source_record_sha256": "d9aefa7c40a9c922b590d02b3f2d3d4183afd83c103dc494786bfbe1fa98e590",
+      "split": "final"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/authlete/authlete-java-jaxrs"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "excerpt_present": true,
+      "excerpt_sha256": "6d64df2c09e5a0d07693397ed365422e1289e1226ab368a05e72aa3a944810b0",
+      "fork_clone_audit": {
+        "canonical_repository": "github.com/authlete/authlete-java-jaxrs",
+        "cross_population_cve_overlap": false,
+        "excluded_repo_name_collision": false,
+        "name": "authlete-java-jaxrs",
+        "owner": "github.com/authlete"
+      },
+      "generated_skillcenter_procedure": true,
+      "independent_human_annotation": false,
+      "lineage_family_id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "normalized_source_sha256": "1950da47fdd5388d98bb4395f90472dccfc55d9a014c020a166d679935806a55",
+      "population": "skill",
+      "ranking_sha256": "fd7e49b45bf0e85f532f1043e617af19bd6449f28e0dd0971e0eb6d6d98e3200",
+      "source_id": "skill:1a843422a9715aa73eeab84325eb571a377812302dac61454d60ae300c3b63ff",
+      "source_locator": {
+        "primary_source_id": "044adfcd3b16afcf298e329319fda73ef9e245a8a8586aa42232d28b63648709",
+        "repository": "github.com/authlete/authlete-java-jaxrs",
+        "skill_id": "044c8be747043d046718183b7ca850595768b0bb831d43dabdd8fd96f810356e",
+        "source_url": "https://github.com/authlete/authlete-java-jaxrs"
+      },
+      "source_record_sha256": "cc0249923c7508408fb3d8ba5d9df9b87f3978b54f40549534f35006f59af07a",
+      "split": "final"
+    }
+  ],
+  "status": "verified_source_manifest_and_split_reservation_no_scientific_execution",
+  "task": "LA-032"
+}

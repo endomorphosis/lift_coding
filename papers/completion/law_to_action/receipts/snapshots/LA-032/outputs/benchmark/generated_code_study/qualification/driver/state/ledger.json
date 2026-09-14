@@ -1,0 +1,69 @@
+{
+  "calls": {
+    "call-0": {
+      "call_id": "call-0",
+      "cell_id": "dev:interrupt:A0:104729",
+      "completion_tokens": null,
+      "consumed_before_request": true,
+      "input_count": 17,
+      "prompt_tokens": null,
+      "refunded": false,
+      "status": "unknown"
+    }
+  },
+  "capabilities": {
+    "capability:dev-interrupt": {
+      "capability_id": "capability:dev-interrupt",
+      "consumed_at": "2026-09-14T21:23:52.394180+00:00",
+      "once": true,
+      "owner_id": "owner-b"
+    }
+  },
+  "cells": {
+    "dev:interrupt:A0:104729": {
+      "arm": "A0",
+      "case_id": "development-probe-case-0",
+      "cell_id": "dev:interrupt:A0:104729",
+      "completed_at": "2026-09-14T21:23:52.394061+00:00",
+      "model_calls_consumed": 1,
+      "model_calls_reserved": 1,
+      "owner_id": "owner-a",
+      "refunded": false,
+      "requires_reconciliation": true,
+      "reserved_at": "2026-09-14T21:23:52.392816+00:00",
+      "scientific": false,
+      "seed": 104729,
+      "split": "development",
+      "status": "unknown_effect",
+      "unknown_effect": true,
+      "unknown_usage": true
+    }
+  },
+  "final_cells_dispatched": 0,
+  "identity": {
+    "cohort_sha256": "7ec4a35c179b7eb9c53d432499eab586e68e24ec338cac01e187e1f4bd072917",
+    "model_profile_sha256": "98bc8f465d6084262d0eb6d954333a22f9895d1b9b55c42bd951f0dccf87e4d4",
+    "oracle_manifest_sha256": "732bc3fa9eb4c07ad3590149dd196e8364d22370f1f3e6921cb7a7a5f87e5e8e",
+    "prompt_profile_sha256": "f4b4b807ec88500fbaa1cb0fd89fcffc44fd4a8b748d0d5dadd54bd7729aa0ce",
+    "runtime_profile_sha256": "3f28b8a6588474073fcd36241d9ed65abb017d1d6006939555cdec95ad0eb26f",
+    "schedule_sha256": "8c1871b6cd43924334a8501bb107e289b0341ba8b1d273ca35c61176c776595d",
+    "source_manifest_sha256": "046cdf0d45952a488a5ed906a16560e59db1b2e2d4e8cbde3c2c40832ca46bca",
+    "study_sha256": "pending"
+  },
+  "schema": "la-generated-study-ledger/v1",
+  "scientific_cells_executed": 0,
+  "unknowns": [
+    {
+      "cell_id": "dev:interrupt:A0:104729",
+      "reason": "stale_owner"
+    },
+    {
+      "call_id": "call-0",
+      "reason": "unknown_usage"
+    },
+    {
+      "cell_id": "dev:interrupt:A0:104729",
+      "reason": "unknown_effect"
+    }
+  ]
+}

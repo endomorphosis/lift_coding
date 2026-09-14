@@ -1,0 +1,27 @@
+{
+  "call": {
+    "call_id": "call-0",
+    "cell_id": "dev:interrupt:A0:104729",
+    "completion_tokens": null,
+    "consumed_before_request": true,
+    "input_count": 17,
+    "prompt_tokens": null,
+    "refunded": false,
+    "status": "reserved"
+  },
+  "cell": {
+    "arm": "A0",
+    "case_id": "development-probe-case-0",
+    "cell_id": "dev:interrupt:A0:104729",
+    "model_calls_consumed": 1,
+    "model_calls_reserved": 1,
+    "owner_id": "owner-a",
+    "refunded": false,
+    "reserved_at": "2026-09-14T21:23:52.392816+00:00",
+    "scientific": false,
+    "seed": 104729,
+    "split": "development",
+    "status": "running"
+  },
+  "interrupted": true
+}

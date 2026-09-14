@@ -1,0 +1,56 @@
+{
+  "event_count": 1,
+  "events": [
+    {
+      "effect_kind": "filesystem.export_json",
+      "event_schema": "law-to-action-observed-effect/v1",
+      "handler_version": "bounded-export-handler/v2",
+      "payload_bytes": 411,
+      "payload_sha256": "8707c93a3ee4e74e3d733725e3ed224451e73a75f47c7ccc5b542b58b3e0c487",
+      "run_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1:A0",
+      "target": "exports/vulnerable_artifact.json"
+    }
+  ],
+  "export_files": [
+    "exports/vulnerable_artifact.json"
+  ],
+  "filesystem_entries": [
+    {
+      "content_hash_complete": true,
+      "kind": "regular_file",
+      "payload_bytes": 378,
+      "payload_sha256": "890269964b879361421eccf4e652e618228389a00f3fd4f783205ee76f38768e",
+      "target": "effects.jsonl"
+    },
+    {
+      "kind": "directory",
+      "target": "exports"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 411,
+      "payload_sha256": "8707c93a3ee4e74e3d733725e3ed224451e73a75f47c7ccc5b542b58b3e0c487",
+      "target": "exports/vulnerable_artifact.json"
+    }
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "a49bb0024bf0d2f3daa8603f0117d127763c9cbefd77e2245b1f92050b8c81e0",
+  "observed_effect_count": 1,
+  "observed_effects": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 411,
+      "payload_sha256": "8707c93a3ee4e74e3d733725e3ed224451e73a75f47c7ccc5b542b58b3e0c487",
+      "target": "exports/vulnerable_artifact.json"
+    }
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+}

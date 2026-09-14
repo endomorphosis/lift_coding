@@ -1,0 +1,33 @@
+{
+  "arm": "A3",
+  "attempt_id": "family:e6b2098ea6b97d3876a82f9925358f04a3ee2c3f76a5ee19f246fa4662ca5b08:case-0:A3",
+  "candidate_sha256": "7ab77ed2fcb92e6d608d06f2e7c1231c20867fe02b5a5dec8f9d987a74a43789",
+  "delegate_started": true,
+  "execution_error": null,
+  "forbidden_effect": false,
+  "handler_calls": [
+    "export_policy_record"
+  ],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "mechanisms": {
+    "ucan": {
+      "authorization_event_cid": "c0158b630bfa515513a116140a7af88917961c8add8411e4d9cbf8b7262783fb",
+      "crypto": "real-ed25519",
+      "decision": "allow",
+      "policy_provider": "la-014-declared-lightweight-policy",
+      "reason": "ucan_and_declared_policy",
+      "token_audience": "did:client:tenant-a",
+      "verifier_kind": "real-ucan-verifier"
+    }
+  },
+  "model_generated": false,
+  "observation_sha256": "1fa5fff6c97388467c4a5a609231650277e9bd2b078f7460a5e1da172fa450b9",
+  "population": "legal",
+  "profile_diagnostic": null,
+  "profile_id": "source-relative-handlers-v1",
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "task_sha256": "f55efc63bc8d1918d27d19a7819a0ba9188e26ef2a482c47f76b35fe32714e6e",
+  "useful_work": true
+}

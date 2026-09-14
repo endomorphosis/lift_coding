@@ -1,0 +1,25 @@
+{
+  "schema": "la-preparation-plan-validation/v1",
+  "status": "PASS_FOR_PROPOSED_PLAN_ONLY",
+  "native_tasks_registered": 0,
+  "families_selected": 0,
+  "scientific_cells_executed": 0,
+  "complete_proposed_cells": 900,
+  "family_batches": 30,
+  "final_cells": 540,
+  "dependency_graph_acyclic": true,
+  "explicit_parent_dependencies_verified": true,
+  "per_batch_scientific_attempt_seconds": 3600,
+  "worker_ceiling_seconds": 7200,
+  "source_artifact_identity_checks": "PASS",
+  "actual_scientific_readiness_qualified": false,
+  "files": {
+    "README.md": "b23b5332317cdd7231181c064a00e86bbce5d2de783f4293cfa801f802786b15",
+    "local_source_discovery.json": "dd324ba0c6423b1bfac73911ebf5ce92d17a8df596110970b1d48b6a07ca58ab",
+    "prior_study_exclusion_check.json": "a76405e0a69deeae7b0c43afc2610260e0380359294289e35ba3a5fd0c5e57da",
+    "LA-032.task.json": "a8e8a4065c26f6c74bbff85a207af70c343ecac9ffefde6c5376489c7ed4bf91",
+    "native_stage_plan.json": "95b5879e3c3337e36c91cf7cff7ac218f3c245ece4a42384dc42bdc742f62dde",
+    "discover_local_sources.py": "2ba8c4c1addb73a65560055f89aea02ef6dd1eec36a973e9de14a70bc7873161"
+  },
+  "prior_study_family_set_crosscheck": "PASS"
+}

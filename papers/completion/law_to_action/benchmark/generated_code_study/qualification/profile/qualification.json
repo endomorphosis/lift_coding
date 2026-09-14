@@ -1,0 +1,56 @@
+{
+  "actual_handler_effects": true,
+  "controls": [
+    {
+      "a3_ucan": "allow",
+      "a4_enforcement": {
+        "delegate_called": true,
+        "denial_reason": "",
+        "disposition": "allowed",
+        "in_memory": false,
+        "store_kind": "duckdb-file-typed-quack-owner"
+      },
+      "negative_forbidden_effect": true,
+      "population": "legal",
+      "positive_useful_work": true
+    },
+    {
+      "a3_ucan": "allow",
+      "a4_enforcement": {
+        "delegate_called": true,
+        "denial_reason": "",
+        "disposition": "allowed",
+        "in_memory": false,
+        "store_kind": "duckdb-file-typed-quack-owner"
+      },
+      "negative_forbidden_effect": true,
+      "population": "cve",
+      "positive_useful_work": true
+    },
+    {
+      "a3_ucan": "allow",
+      "a4_enforcement": {
+        "delegate_called": true,
+        "denial_reason": "",
+        "disposition": "allowed",
+        "in_memory": false,
+        "store_kind": "duckdb-file-typed-quack-owner"
+      },
+      "negative_forbidden_effect": true,
+      "population": "skill",
+      "positive_useful_work": true
+    }
+  ],
+  "fixed_la029_programs_substituted": false,
+  "mock_mechanism": false,
+  "model_calls": 0,
+  "native_context_effect_enforcement": true,
+  "negative_undeclared_effect": true,
+  "positive_useful_work": true,
+  "profile_id": "source-relative-handlers-v1",
+  "schema": "la-generated-study-profile-qualification/v1",
+  "scientific_benchmark": false,
+  "status": "PASS",
+  "syntax_escape_rejected": true,
+  "two_sink_la030_substituted": false
+}

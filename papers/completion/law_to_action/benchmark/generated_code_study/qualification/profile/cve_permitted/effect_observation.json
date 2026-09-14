@@ -1,0 +1,56 @@
+{
+  "event_count": 1,
+  "events": [
+    {
+      "effect_kind": "filesystem.export_json",
+      "event_schema": "law-to-action-observed-effect/v1",
+      "handler_version": "bounded-export-handler/v2",
+      "payload_bytes": 393,
+      "payload_sha256": "cbaf077f6d96c39fa63ae49b8ed778605d38b431150917f32beb33dae4af9a8c",
+      "run_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0:A4",
+      "target": "exports/fixed_control.json"
+    }
+  ],
+  "export_files": [
+    "exports/fixed_control.json"
+  ],
+  "filesystem_entries": [
+    {
+      "content_hash_complete": true,
+      "kind": "regular_file",
+      "payload_bytes": 372,
+      "payload_sha256": "1ae48b0b814d2cdafe2cbe1bfe084a87c34830e6a7b8eda9c4d097d02af8d6c4",
+      "target": "effects.jsonl"
+    },
+    {
+      "kind": "directory",
+      "target": "exports"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 393,
+      "payload_sha256": "cbaf077f6d96c39fa63ae49b8ed778605d38b431150917f32beb33dae4af9a8c",
+      "target": "exports/fixed_control.json"
+    }
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "14628eeed9467649afcdb965ca308909d8ef39881e509123a0c50338d714a6f6",
+  "observed_effect_count": 1,
+  "observed_effects": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 393,
+      "payload_sha256": "cbaf077f6d96c39fa63ae49b8ed778605d38b431150917f32beb33dae4af9a8c",
+      "target": "exports/fixed_control.json"
+    }
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+}

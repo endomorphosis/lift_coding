@@ -1,0 +1,31 @@
+{
+  "actual_service_resource_boundary_qualified": true,
+  "base_url": "http://127.0.0.1:50115",
+  "bounded_http_sha256": "5ccc38e54267908c55e11d8e4ccc52b57d3375712a21a626707ef2ac727db8bf",
+  "chat_template_sha256": "6ad7769906591a6fac66285fdcb3ddaea91a95fe3ede163815589ef397d03838",
+  "constructed_transport": false,
+  "deployment_sha256": "8d76638ce7fc12692185d8181f95c2c00ce486048021d2a871e4479e48485569",
+  "indefinitely_running_required": false,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "la032-byte-causal-lm",
+  "model_revision": "la032-v1",
+  "paid_budget": 0,
+  "prompt_profile_sha256": "f4b4b807ec88500fbaa1cb0fd89fcffc44fd4a8b748d0d5dadd54bd7729aa0ce",
+  "qualification": {
+    "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+    "sha256": "6bc0c209ce1571a2caf418a2dba990671c4fc5a8ee4e2fd20268995f17ea086d"
+  },
+  "reuse_warm_model_during_active_batches": true,
+  "schema": "la-qualified-local-model/v1",
+  "scientific_cells_executed": 0,
+  "startup_readiness_seconds": 360,
+  "status": "PASS",
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenization_agrees_with_usage": true,
+  "tokenizer_revision": "byte-utf8-v1",
+  "tokenizer_sha256": "ab9e60aa4fed937a71c5db1ba381cf35fd4aa6500b58136bdd4e65a16f97654f",
+  "total_service_wall_seconds": 10000,
+  "weights_sha256": "adf00b3f74718695beceb95e691f5def199dc367947175ac32301cfc44fbe23a"
+}
