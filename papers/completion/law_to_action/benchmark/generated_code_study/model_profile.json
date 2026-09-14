@@ -1,0 +1,36 @@
+{
+  "base_url": "http://127.0.0.1:0",
+  "chat_template_sha256": "dc126cf0155881b6f71b8e9a239956ae0ba45f68df08b016dadddf4c61120217",
+  "deployment_sha256": "661b8d05d5dd0d80fc008420df92ba299caf4556fb236ebee6ffde87104731bc",
+  "indefinitely_running_model_required": false,
+  "loopback_only": true,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "paid_budget": 0,
+  "prompt_profile_sha256": "d86d380a5067da1b4b85b6ecb84cdabe7e2ecec6fa25ac1ffb8bcc7aed492ea8",
+  "qualification": {
+    "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+    "sha256": "c338f05a5ba7c865a5f71482cbf905c7fc8aa8f607231ccdf14d65780705c298"
+  },
+  "reuse_warm_model_during_active_work": true,
+  "schema": "la-qualified-local-model/v1",
+  "scientific_benchmark": false,
+  "service_stopped": true,
+  "shutdown": {
+    "left_running": false,
+    "returncode": 0,
+    "service_wall_seconds": 21.08382256492041,
+    "terminated": true,
+    "under_10000_second_budget": true
+  },
+  "startup_readiness_seconds": 360,
+  "startup_seconds_observed": 5.209242621902376,
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenizer_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "tokenizer_sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+  "total_service_wall_seconds": 10000,
+  "weights_sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+}

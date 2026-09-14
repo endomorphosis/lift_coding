@@ -1,0 +1,22 @@
+{
+  "cause_unproven_from_la030_v2_receipt": true,
+  "errno": 2,
+  "errno_name": "ENOENT",
+  "leaf_identity": {
+    "exists": true,
+    "inode": 72255510,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789416936/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fake_parent/leaf",
+    "pids_current": null
+  },
+  "operation": "read_leaf_cpu.stat",
+  "parent_identity": {
+    "exists": true,
+    "inode": 72255509,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789416936/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fake_parent",
+    "pids_current": "1"
+  },
+  "parent_inode_at_error": 72255509,
+  "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789416936/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fake_parent/leaf/cpu.stat",
+  "reason": "resource_observation_OSError",
+  "strerror": "No such file or directory"
+}

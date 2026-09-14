@@ -1,0 +1,22 @@
+{
+  "complete_attempt_wall_seconds": 120,
+  "covers": [
+    "template",
+    "tokenization",
+    "inference",
+    "generated_program_execution",
+    "cleanup"
+  ],
+  "max_calls": 8,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "paid_budget": 0,
+  "retain_descendant_cpu": true,
+  "retain_memory": true,
+  "retain_model_service_costs": true,
+  "retain_overruns_and_unknowns": true,
+  "retain_transport_wall": true,
+  "schema": "la-generated-study-runtime-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS"
+}

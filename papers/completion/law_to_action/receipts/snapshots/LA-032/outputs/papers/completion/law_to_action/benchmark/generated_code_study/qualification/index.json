@@ -1,0 +1,35 @@
+{
+  "bindings": {
+    "driver": {
+      "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/qualification.json",
+      "sha256": "efa4830fa3dfd7f3692d4012afad9ef5232d921a04f81d0459611c27b4139895"
+    },
+    "model": {
+      "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+      "sha256": "c338f05a5ba7c865a5f71482cbf905c7fc8aa8f607231ccdf14d65780705c298"
+    },
+    "model_profile_sha256": "8ef8a00de379e71410a9c5e337dd173a1749e8ff919d62aaa11b1a50cd91247e",
+    "profile": {
+      "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/qualification.json",
+      "sha256": "294f2d0ce0832888445435c8d6072004ba69e1afad0d089161d76a82cbff1a65"
+    },
+    "runtime": {
+      "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/runtime/qualification.json",
+      "sha256": "565aa9b0c2d3f680b816fe49181dfe9040a54b226cf3467712832267d6f90939"
+    },
+    "schema": "la-generated-study-qualification-index/v1",
+    "watchdog": {
+      "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/qualification.json",
+      "sha256": "48e6f091a100bf1d63abbbd3d4f9f8bf309b4af17588804ba95bb85c28cb8a58"
+    }
+  },
+  "completed_at": "2026-09-14T20:41:33.934848+00:00",
+  "driver_status": "PASS",
+  "model_status": "PASS",
+  "profile_status": "PASS",
+  "runtime_status": "PASS",
+  "schema": "la-generated-study-qualification-index/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS",
+  "watchdog_status": "PASS"
+}

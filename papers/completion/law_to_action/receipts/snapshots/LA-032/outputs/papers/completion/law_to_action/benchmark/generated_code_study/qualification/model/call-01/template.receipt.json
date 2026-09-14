@@ -1,0 +1,25 @@
+{
+  "child_pid": 1149,
+  "child_returncode": 0,
+  "child_started": true,
+  "child_termination_proven": true,
+  "cleanup_errors": [],
+  "cleanup_seconds_after_deadline_observation": null,
+  "deadline_expired": false,
+  "deadline_overrun_seconds": null,
+  "error": null,
+  "request_sha256": "b7b37ede9ee777ec7e7efa22755157052c36eac0d68da1a969eb7fba574fc293",
+  "response_bytes_retained": 639,
+  "response_read_error": null,
+  "response_sha256": "35718b740f12dae01a91a9fa5a9abf6cf221719fb226593f8ab02021ff1bc25a",
+  "status": 200,
+  "timeout_seconds": 60.0,
+  "wall_seconds": 0.11439416708890349,
+  "worker": {
+    "body_limit_exceeded": false,
+    "complete": true,
+    "error": null,
+    "status": 200
+  },
+  "worker_metadata_error": null
+}

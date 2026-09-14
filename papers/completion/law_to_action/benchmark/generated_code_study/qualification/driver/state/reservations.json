@@ -1,0 +1,71 @@
+{
+  "consumptions": {
+    "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0:call:0": {
+      "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+      "delivered": false,
+      "iteration": 0,
+      "key": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0:call:0",
+      "one_time": true,
+      "refunded": false,
+      "reserved_at": "2026-09-14T20:41:33.919378+00:00",
+      "unknown_usage": true,
+      "usage": null
+    }
+  },
+  "events": [
+    {
+      "at": "2026-09-14T20:41:33.918952+00:00",
+      "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+      "event": "cell_reserved"
+    },
+    {
+      "at": "2026-09-14T20:41:33.919833+00:00",
+      "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+      "event": "interrupt"
+    },
+    {
+      "at": "2026-09-14T20:41:33.920777+00:00",
+      "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+      "detail": "cleanup fault probe; child result missing",
+      "event": "unknown_effect"
+    },
+    {
+      "at": "2026-09-14T20:41:33.925559+00:00",
+      "event": "stale_owner_reconciliation",
+      "owner_id": "owner:la032-stale",
+      "previous": "owner:la032-qualify"
+    }
+  ],
+  "heartbeat_monotonic": 828200.375098541,
+  "identity": {
+    "cases": 60,
+    "families": 30,
+    "model_profile_sha256": "d80af75fbf7251c0e19a2c2983285becdad612fb6c1e3a5278af70e613ed0042",
+    "planned_cells": 900,
+    "prompt_profile_sha256": "d86d380a5067da1b4b85b6ecb84cdabe7e2ecec6fa25ac1ffb8bcc7aed492ea8",
+    "runtime_profile": "direct-calls-v2-source-relative",
+    "split_salt": "vericodegen-2026-law-to-action-LA016-v1",
+    "study_sha256": "5e4ad65a213901cd11c2cb960a28df3594bfa4957af95aa020d435c0b9c20438"
+  },
+  "owner_id": "owner:la032-stale",
+  "reservations": {
+    "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0": {
+      "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+      "consumed": false,
+      "effect_status": "unknown",
+      "interrupted_at": "2026-09-14T20:41:33.919826+00:00",
+      "model_calls_reserved": 1,
+      "model_calls_unknown": 1,
+      "owner_id": "owner:la032-qualify",
+      "refunded": false,
+      "reserved_at": "2026-09-14T20:41:33.918934+00:00",
+      "terminal": "interrupted",
+      "unknown": {
+        "at": "2026-09-14T20:41:33.920766+00:00",
+        "detail": "cleanup fault probe; child result missing",
+        "kind": "effect"
+      }
+    }
+  },
+  "schema": "la-generated-study-driver-ledger/v1"
+}

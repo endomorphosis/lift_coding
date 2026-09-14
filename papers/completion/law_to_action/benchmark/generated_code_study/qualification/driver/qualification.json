@@ -1,0 +1,73 @@
+{
+  "actual_cleanup_fault_probe": true,
+  "actual_interrupt_resume_probe": true,
+  "cell_reservation": {
+    "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+    "consumed": false,
+    "effect_status": "not_executed",
+    "model_calls_reserved": 0,
+    "model_calls_unknown": 0,
+    "owner_id": "owner:la032-qualify",
+    "refunded": false,
+    "reserved_at": "2026-09-14T20:41:33.918934+00:00",
+    "terminal": null
+  },
+  "configuration_flag_only": false,
+  "exclusive_ownership": true,
+  "final_dispatch_rejected": "final oracle material is sealed until LA-063",
+  "identity": {
+    "cases": 60,
+    "families": 30,
+    "model_profile_sha256": "d80af75fbf7251c0e19a2c2983285becdad612fb6c1e3a5278af70e613ed0042",
+    "planned_cells": 900,
+    "prompt_profile_sha256": "d86d380a5067da1b4b85b6ecb84cdabe7e2ecec6fa25ac1ffb8bcc7aed492ea8",
+    "runtime_profile": "direct-calls-v2-source-relative",
+    "split_salt": "vericodegen-2026-law-to-action-LA016-v1",
+    "study_sha256": "d785c6772dddda8648e36840b5591472abe1fabab9eaa109ee05144e17cafaaa"
+  },
+  "interrupt": {
+    "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+    "consumed": false,
+    "effect_status": "not_executed",
+    "interrupted_at": "2026-09-14T20:41:33.919826+00:00",
+    "model_calls_reserved": 1,
+    "model_calls_unknown": 1,
+    "owner_id": "owner:la032-qualify",
+    "refunded": false,
+    "reserved_at": "2026-09-14T20:41:33.918934+00:00",
+    "terminal": "interrupted"
+  },
+  "model_call_reservation": {
+    "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+    "delivered": false,
+    "iteration": 0,
+    "key": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0:call:0",
+    "one_time": true,
+    "refunded": false,
+    "reserved_at": "2026-09-14T20:41:33.919378+00:00",
+    "unknown_usage": true
+  },
+  "one_time_durable_consumption": true,
+  "replay_rejected": "silent replay/refund of a reserved model call is forbidden: 104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0:call:0",
+  "resume": {
+    "attempt_id": "104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+    "consumed": false,
+    "effect_status": "not_executed",
+    "interrupted_at": "2026-09-14T20:41:33.919826+00:00",
+    "model_calls_reserved": 1,
+    "model_calls_unknown": 1,
+    "owner_id": "owner:la032-qualify",
+    "refunded": false,
+    "reserved_at": "2026-09-14T20:41:33.918934+00:00",
+    "resumed": true,
+    "terminal": "interrupted"
+  },
+  "schema": "la-generated-study-driver-qualification/v1",
+  "scientific_cells_executed": 0,
+  "scientific_completion_claim_rejected": "preparation cannot claim planned scientific cells completed: 104729:A0:family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+  "silent_replay_or_refund": false,
+  "stale_owner_reconciled": true,
+  "status": "PASS",
+  "unknown_effect_retained": true,
+  "unknown_usage_retained": true
+}

@@ -1,0 +1,31 @@
+{
+  "benign_disappearance_sha256": "037f04c64770cb62e8258b406d98add00c7f15a3b3b36603f0d25fd43e2e137e",
+  "first_observation": {
+    "cpu_usage_usec": 10,
+    "identity": {
+      "exists": true,
+      "inode": 72255509,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789416936/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fake_parent",
+      "pids_current": "1"
+    },
+    "inode": 72255509
+  },
+  "historical": {
+    "broad_oserror_suppression": false,
+    "historical_errno_path_cause": "unproven",
+    "historical_reason": "resource_observation_OSError",
+    "la030_v2_receipt_upgraded": false,
+    "new_diagnostic_retains_operation_path_errno_and_identities": true
+  },
+  "oserror_snapshot_sha256": "ecc4fec3033f8e2db41628911336be5c5cc3265de4d5394030533b8c5d001749",
+  "parent_final": {
+    "exists": true,
+    "inode": 72255509,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789416936/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/fake_parent",
+    "pids_current": "0"
+  },
+  "retained_parent_accounting_mandatory": true,
+  "schema": "la-generated-study-watchdog-diagnostic/v1",
+  "status": "PASS",
+  "whole_group_exit_mandatory": true
+}

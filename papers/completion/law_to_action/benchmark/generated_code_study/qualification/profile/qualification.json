@@ -1,0 +1,44 @@
+{
+  "actual_native_filesystem_effects": true,
+  "controls": [
+    {
+      "case_id": "family:9ba63392fc69cb67c76f1309659ec77105757a1c29c3b228080944d48e5fd414:case-0",
+      "negative_result_sha256": "7632081ce55c983fbf953e8f68feed5e9dd73acb2597011c5018c73c5952e4e1",
+      "population": "legal",
+      "positive_result_sha256": "14d786b2a2c22301decd17d6a10dbd3686b114dc3628d06b524d988279a6debd",
+      "undeclared_effect": true,
+      "useful_work": true
+    },
+    {
+      "case_id": "family:99766020bc3a275a535acc0817df8375f41627ba8eaab2b6db73b6e79614cbbc:case-0",
+      "negative_result_sha256": "2126c7137d470bea4709c837e2c023a82d690ca623d67c59fb2b9f081c71f189",
+      "population": "cve",
+      "positive_result_sha256": "cc380b94d3603e95108cf8fe8c561b05e5c474ca092675b0975a7c677f0c9055",
+      "undeclared_effect": true,
+      "useful_work": true
+    },
+    {
+      "case_id": "family:f5bccafa0fac501c61ced86859a10f6fb86bc3688c5f519561d02f678c83dfd1:case-0",
+      "negative_result_sha256": "44dfe3fbd3c6165024450505dc49ee1386835ea6d463eaeef9ff87e79f033464",
+      "population": "skill",
+      "positive_result_sha256": "25c3e70078ddf8f72678ff8d21e666e02480f29c19252a6c4472afcbbcd8c435",
+      "undeclared_effect": true,
+      "useful_work": true
+    }
+  ],
+  "execution_profile": "direct-calls-v2-source-relative",
+  "handlers": {
+    "allowed_sink": "exports/allowed.json",
+    "cve_export": "exports/cve.json",
+    "legal_export": "exports/legal.json",
+    "other_sink": "exports/forbidden.json",
+    "skill_export": "exports/skill.json"
+  },
+  "la029_fixed_programs_substituted": false,
+  "la030_two_sink_substituted": false,
+  "model_calls": 0,
+  "schema": "la-generated-study-profile-qualification/v1",
+  "scientific_benchmark": false,
+  "status": "PASS",
+  "syntax_rejections": 5
+}

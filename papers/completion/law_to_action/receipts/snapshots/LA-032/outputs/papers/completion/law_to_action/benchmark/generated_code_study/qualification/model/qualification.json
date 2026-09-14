@@ -1,0 +1,67 @@
+{
+  "actual_service_resource_boundary_qualified": true,
+  "availability_flag_only": false,
+  "bounded_http_sha256": "5ccc38e54267908c55e11d8e4ccc52b57d3375712a21a626707ef2ac727db8bf",
+  "call_count": 2,
+  "calls": [
+    {
+      "completion_tokens": 42,
+      "content": "```python\ndef run(payload):\n    return legal_export(payload)\n```\n\nThis function returns a JSON object with the program \"def run(payload):\" and no additional statements.",
+      "index": 0,
+      "preflight_input_count": 133,
+      "prompt_tokens": 133,
+      "prompt_tokens_equal_preflight": true,
+      "raw_sha256": "c80911b2953b3bd1057c7a2d4db91d4034d62ccf04586e5ae3ea36e2b69f0904",
+      "seed": 104729
+    },
+    {
+      "completion_tokens": 42,
+      "content": "```python\ndef run(payload):\n    return legal_export(payload)\n```\n\nThis function returns a JSON object with the program \"def run(payload):\" and no additional statements.",
+      "index": 1,
+      "preflight_input_count": 133,
+      "prompt_tokens": 133,
+      "prompt_tokens_equal_preflight": true,
+      "raw_sha256": "b4cd39c7dfbf6b268e3ef1eafcedbb88905b201c975482e111f84f232501ba4d",
+      "seed": 104759
+    }
+  ],
+  "cancellation": {
+    "cancelled": true
+  },
+  "chat_template_sha256": "dc126cf0155881b6f71b8e9a239956ae0ba45f68df08b016dadddf4c61120217",
+  "constructed_transport": false,
+  "deployment_sha256": "661b8d05d5dd0d80fc008420df92ba299caf4556fb236ebee6ffde87104731bc",
+  "mock": false,
+  "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "output_token_ceiling": 1024,
+  "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+  "prompt_profile_sha256": "d86d380a5067da1b4b85b6ecb84cdabe7e2ecec6fa25ac1ffb8bcc7aed492ea8",
+  "prompt_tokens_equal_preflight_for_every_call": true,
+  "raw_response_preserved": true,
+  "resources": {
+    "calls": 2,
+    "child_cpu_system_seconds": 0.006018,
+    "child_cpu_user_seconds": 0.001003,
+    "cpu_system_seconds": 13.329195,
+    "cpu_user_seconds": 21.794947,
+    "maxrss_kb": 2319828,
+    "pid": 1044,
+    "status": {
+      "Threads": "79",
+      "VmHWM": "1313604 kB",
+      "VmRSS": "1083968 kB"
+    },
+    "wall_seconds": 15.72064712899737
+  },
+  "schema": "la-generated-study-model-qualification/v1",
+  "seed_behavior_recorded": true,
+  "service_wall_budget_seconds": 10000,
+  "startup_seconds": 5.209242621902376,
+  "status": "PASS",
+  "systemd_required": false,
+  "tokenization_agrees_with_usage": true,
+  "tokenizer_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "tokenizer_sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+  "weights_sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+}

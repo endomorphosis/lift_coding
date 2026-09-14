@@ -1,0 +1,55 @@
+{
+  "canonical_repository_identity_treated_as_complete_fork_audit": false,
+  "cve_artifact": {
+    "artifact_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+    "neighbor_rejections": [],
+    "rows": 4329
+  },
+  "cve_repositories": [
+    "github.com/rubygems/rubygems.org",
+    "github.com/wp-plugins/media-downloader",
+    "github.com/opensearch-project/opensearch",
+    "github.com/freepbx/contactmanager",
+    "github.com/codiad/codiad",
+    "github.com/hgzojer/vocabletrainer",
+    "github.com/opentsdb/opentsdb",
+    "github.com/kevinpapst/kimai2",
+    "github.com/urllib3/urllib3",
+    "github.com/significant-gravitas/autogpt",
+    "github.com/discourse/message_bus",
+    "github.com/capnproto/capnproto"
+  ],
+  "la004_manifest_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+  "la029_frozen_inputs_sha256": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+  "legal_titles": [
+    "6-USC-652",
+    "12-USC-3402",
+    "26-USC-6103",
+    "29-USC-2614",
+    "31-USC-5318",
+    "44-USC-3554"
+  ],
+  "prior_study_families_excluded": 30,
+  "schema": "la-generated-study-source-freeze/v1",
+  "skill_artifact": {
+    "artifact_sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+    "joined_rows": 1182
+  },
+  "skill_procedures_are_independent_human_annotations": false,
+  "skill_repositories": [
+    "github.com/ermadmi78/kobby-gradle-example",
+    "github.com/openappsec/openappsec",
+    "github.com/xyfir/accownt",
+    "github.com/labd/django-cognito-jwt",
+    "github.com/amitxshukla/graphql-middleware-jwtauth-authorization",
+    "github.com/ggicci/caddy-jwt",
+    "github.com/dinochiesa/jwt-webtool",
+    "github.com/ruulian/cspass",
+    "github.com/nhost/hasura-backend-plus",
+    "github.com/gethop-dev/buddy-auth.jwt-oidc",
+    "github.com/googleapis/google-auth-library-nodejs",
+    "github.com/jagaapple/next-secure-headers"
+  ],
+  "source_bodies_redistributed": 0,
+  "status": "PASS"
+}

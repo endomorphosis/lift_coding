@@ -1,0 +1,56 @@
+{
+  "event_count": 1,
+  "events": [
+    {
+      "effect_kind": "filesystem.export_json",
+      "event_schema": "law-to-action-observed-effect/v1",
+      "handler_version": "bounded-export-handler/v2",
+      "payload_bytes": 518,
+      "payload_sha256": "967522c04e7cab7c121ffcb49cc2bb205281b504028e980d0a1c567276381de2",
+      "run_id": "family:99766020bc3a275a535acc0817df8375f41627ba8eaab2b6db73b6e79614cbbc:case-0:A0",
+      "target": "exports/cve.json"
+    }
+  ],
+  "export_files": [
+    "exports/cve.json"
+  ],
+  "filesystem_entries": [
+    {
+      "content_hash_complete": true,
+      "kind": "regular_file",
+      "payload_bytes": 362,
+      "payload_sha256": "3c5e6460802a3674fc6deaf8ba921504b82d232f92f23b90fffe695c32771dc9",
+      "target": "effects.jsonl"
+    },
+    {
+      "kind": "directory",
+      "target": "exports"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 518,
+      "payload_sha256": "967522c04e7cab7c121ffcb49cc2bb205281b504028e980d0a1c567276381de2",
+      "target": "exports/cve.json"
+    }
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "3bc5d8fdf938668d746b6dea4542e56c4343a7f5150c3c2627d644d7f3ba83cc",
+  "observed_effect_count": 1,
+  "observed_effects": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 518,
+      "payload_sha256": "967522c04e7cab7c121ffcb49cc2bb205281b504028e980d0a1c567276381de2",
+      "target": "exports/cve.json"
+    }
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+}
