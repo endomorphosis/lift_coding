@@ -1101,3 +1101,178 @@ Acceptance criteria:
 4. No failed or unknown-termination cell is replayed, no usage is refunded or invented, and no diagnostic unadmitted rate is promoted to an admitted headline result. Downstream analysis and trace tasks consume only exact admitted correction evidence or explicitly retain its incompleteness. The recalculated admitted-run analysis/statistics, corrected cost report and explicit shared-validator, diagnostic-rate and separate-replay guidance are retained for LA019 and LA022.
 
 Record exact operator commands, admitted boundary/cost receipts, all attempted cells and failures. This is an automated evidence obligation, not an outside review gate.
+
+## LA-030 Qualify a native generated-code and bounded-repair development runner
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: law_to_action
+- Depends on: LA-016, LA-029
+- Goal id: LA-G5
+- Parent goal: LA-G000
+- Objective heap: papers/completion/law_to_action/paper.objectives.md
+- Board namespace: vericodegen-2026-law_to_action
+- Bundle: law_to_action/LA-G5
+- Parallel lane: law_to_action
+- Outputs: papers/completion/law_to_action/benchmark/generated_code_development/common.py, papers/completion/law_to_action/benchmark/generated_code_development/native_candidate.py, papers/completion/law_to_action/benchmark/generated_code_development/container_runner.py, papers/completion/law_to_action/benchmark/generated_code_development/loop.py, papers/completion/law_to_action/benchmark/generated_code_development/bounded_http.py, papers/completion/law_to_action/benchmark/generated_code_development/qualify.py, papers/completion/law_to_action/benchmark/generated_code_development/qualify_interfaces.py, papers/completion/law_to_action/benchmark/generated_code_development/verify_development.py, papers/completion/law_to_action/benchmark/generated_code_development/development_runtime.json, papers/completion/law_to_action/benchmark/generated_code_development/development_qualification_v3/, papers/completion/law_to_action/benchmark/generated_code_development/README.md, papers/completion/law_to_action/receipts/LA-030.json, papers/completion/law_to_action/receipts/snapshots/LA-030/
+- Predicted files: papers/completion/law_to_action/benchmark/generated_code_development/common.py, papers/completion/law_to_action/benchmark/generated_code_development/native_candidate.py, papers/completion/law_to_action/benchmark/generated_code_development/container_runner.py, papers/completion/law_to_action/benchmark/generated_code_development/loop.py, papers/completion/law_to_action/benchmark/generated_code_development/bounded_http.py, papers/completion/law_to_action/benchmark/generated_code_development/qualify.py, papers/completion/law_to_action/benchmark/generated_code_development/qualify_interfaces.py, papers/completion/law_to_action/benchmark/generated_code_development/verify_development.py, papers/completion/law_to_action/benchmark/generated_code_development/development_runtime.json, papers/completion/law_to_action/benchmark/generated_code_development/development_qualification_v3/, papers/completion/law_to_action/benchmark/generated_code_development/README.md, papers/completion/law_to_action/receipts/LA-030.json, papers/completion/law_to_action/receipts/snapshots/LA-030/
+- Allowed paths: papers/completion/law_to_action/benchmark/generated_code_development/
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-030
+- Acceptance: A retained, reproducible constructed development qualification demonstrates actual execution of exact response program bytes, native facts bound to those bytes, independent task-policy intent, and real A4 pre-invocation admission before a real handler effect. Facts alone never authorize execution.; The declared direct-calls-v1 language is enforced before execution and rejects imports, attributes, dynamic calls, decorators, annotations, generic type parameters, unsupported signatures and extra statements. Candidate code cannot access admission objects or hidden utility expectations.; Actual A0 undeclared-effect control is observed; actual A4 permitted useful work succeeds; actual A4 undeclared candidate is denied before delegation and then repaired from retained observed feedback to useful work; a generic-function candidate is rejected; actual A3 permitted work uses real policy/UCAN. These five controls/six candidate executions remain development evidence only.; Every candidate has actual one-CPU, 2-GiB/no-extra-swap, 16-process, no-network/read-only containment and a 20-second cell wall/descendant-CPU allowance. Exact-owned cleanup and an empty retained parent cgroup prove termination; complete descendant costs and any unknown accounting are retained.; Native A4 receipts bind candidate, task, policy, runtime, arguments, effects, context and current time; actual file-backed native durable consumption is used. Independent file bytes and journal reconciliation determine useful work and forbidden effects. No model self-report, mock proof, or in-memory store substitutes for the mechanism.; All requests, raw responses, candidates, retries, failures, feedback and known/unknown costs are retained. Failed inference reservations still consume a call, unavailable token usage stays unknown, and uncertain execution never becomes measured absence of forbidden effects. Fresh output directories prevent silent replay; a full durable resume scheduler remains downstream.; A0/A1/A2 prompt composition is explicitly distinct and A2/A3/A4 model context is matched, while actual A3/A4 execution mechanisms differ. Constructed responses establish neither prompt efficacy nor retrieval efficacy, and the two-sink development profile does not replace the full scientific population.; The pluggable HTTP interface retains request/response/failure evidence and uses a parent-enforced complete HTTP deadline. Actual model use remains gated by hash-bound model weights, tokenizer, revisions, template, deployment, decoding, prompt and real preflight evidence; study admission additionally binds the actual development report/code/runtime and separate full-cohort/runtime qualifications.; The read-only verifier passes on the exact final retained qualification and current implementation. Qualification source snapshots and earlier failed/successful development attempts remain intact. Completing LA-030 does not mark LA-G5 or the original downstream 900-cell scientific study complete.
+- Paper evidence: Original LA-016 describes an actual pinned-model, generated-code planning and repair comparison; its completed omission receipt did not implement that loop.; Original protocol preserves 30 independently lineaged families, 60 paired cases, all A0-A4 arms and all 900 case-arm-seed cells.; LA-029 provides real native policy, UCAN, durable consumption, independent effects and operator resource containment to reuse, without reclassifying fixed actions as generated programs.
+- Reuse candidates: papers/completion/law_to_action/benchmark/fixed_action_operator/controller.py, papers/completion/law_to_action/benchmark/baselines.py, papers/completion/law_to_action/benchmark/handlers/effects.py
+- Receipt: papers/completion/law_to_action/receipts/LA-030.json
+
+Implement and qualify the missing byte-bound generated-response to native facts, independently supplied policy intent, actual native admission, real contained handlers, independent filesystem/journal utility, and bounded observed-feedback repair path. Reuse the actual LA-029 containment implementation. This successor completes a concrete development increment, not the original generated-code empirical study. Preserve LA-016's withdrawn 900-cell record, the final manuscript, historical receipts and failed development attempts. Constructed development responses are explicitly labeled and never reported as model calls or scientific benchmark evidence. Real model inference, final-cohort release and scientific scheduling are outside this task's execution authority and require separate prospective qualifications.
+
+Acceptance criteria:
+
+1. A retained, reproducible constructed development qualification demonstrates actual execution of exact response program bytes, native facts bound to those bytes, independent task-policy intent, and real A4 pre-invocation admission before a real handler effect. Facts alone never authorize execution.
+2. The declared direct-calls-v1 language is enforced before execution and rejects imports, attributes, dynamic calls, decorators, annotations, generic type parameters, unsupported signatures and extra statements. Candidate code cannot access admission objects or hidden utility expectations.
+3. Actual A0 undeclared-effect control is observed; actual A4 permitted useful work succeeds; actual A4 undeclared candidate is denied before delegation and then repaired from retained observed feedback to useful work; a generic-function candidate is rejected; actual A3 permitted work uses real policy/UCAN. These five controls/six candidate executions remain development evidence only.
+4. Every candidate has actual one-CPU, 2-GiB/no-extra-swap, 16-process, no-network/read-only containment and a 20-second cell wall/descendant-CPU allowance. Exact-owned cleanup and an empty retained parent cgroup prove termination; complete descendant costs and any unknown accounting are retained.
+5. Native A4 receipts bind candidate, task, policy, runtime, arguments, effects, context and current time; actual file-backed native durable consumption is used. Independent file bytes and journal reconciliation determine useful work and forbidden effects. No model self-report, mock proof, or in-memory store substitutes for the mechanism.
+6. All requests, raw responses, candidates, retries, failures, feedback and known/unknown costs are retained. Failed inference reservations still consume a call, unavailable token usage stays unknown, and uncertain execution never becomes measured absence of forbidden effects. Fresh output directories prevent silent replay; a full durable resume scheduler remains downstream.
+7. A0/A1/A2 prompt composition is explicitly distinct and A2/A3/A4 model context is matched, while actual A3/A4 execution mechanisms differ. Constructed responses establish neither prompt efficacy nor retrieval efficacy, and the two-sink development profile does not replace the full scientific population.
+8. The pluggable HTTP interface retains request/response/failure evidence and uses a parent-enforced complete HTTP deadline. Actual model use remains gated by hash-bound model weights, tokenizer, revisions, template, deployment, decoding, prompt and real preflight evidence; study admission additionally binds the actual development report/code/runtime and separate full-cohort/runtime qualifications.
+9. The read-only verifier passes on the exact final retained qualification and current implementation. Qualification source snapshots and earlier failed/successful development attempts remain intact. Completing LA-030 does not mark LA-G5 or the original downstream 900-cell scientific study complete.
+
+Execution boundaries and remaining obligations:
+
+```json
+{
+  "runtime_boundaries": {
+    "provider_calls_allowed": false,
+    "model_loads_allowed": false,
+    "final_cohort_release_allowed": false,
+    "actual_candidate_controls": 6,
+    "concurrent_candidate_executions": 1,
+    "cell_cpu_cores": 1,
+    "cell_memory_bytes": 2147483648,
+    "cell_process_limit": 16,
+    "cell_wall_seconds": 20,
+    "cell_descendant_cpu_seconds": 20,
+    "attempt_maximum_calls": 8,
+    "attempt_maximum_wall_seconds": 120,
+    "paid_budget": 0,
+    "unknown_effect_or_cleanup_action": "Stop, preserve unknown disposition and reconcile; do not replay silently."
+  },
+  "input_boundaries": {
+    "permitted": [
+      "Pinned native implementation and existing LA-029 containment",
+      "Explicitly constructed non-benchmark development tasks/responses",
+      "Isolated local HTTP fault servers carrying test JSON and no model payloads"
+    ],
+    "not_released": [
+      "New scientific sources or final cohort",
+      "Existing hidden final oracles",
+      "Model service inference or provider credentials"
+    ]
+  },
+  "write_boundaries": {
+    "allowed": [
+      "papers/completion/law_to_action/benchmark/generated_code_development/",
+      "Exact-owned ephemeral containment resources declared in each retained request"
+    ],
+    "preserve": [
+      "papers/final/",
+      "All historical LA-016 and LA-029 receipts/results",
+      "All previously recorded development attempts"
+    ]
+  },
+  "downstream_still_required": [
+    "Freeze the separate original full 30-family/60-case cohort, lawful immutable source pins, ranked population splits, exact/normalized text and lineage audits, source-relative tasks, independent utility/effect oracles, permitted retrieval and all 900 scheduled identities before outcomes.",
+    "Qualify the actual scientifically adequate generated-program and handler profile for all intended tasks and original arms; do not substitute the two-sink development controls or fixed LA-029 programs.",
+    "Qualify full native/runtime/dependency provenance and actual already-loaded model service, exact weights/tokenizer/template/deployment revisions, token preflight agreement, decoding, resource accounting and cancellation behavior.",
+    "Implement and qualify a durable complete-schedule reservation/resume/reconciliation driver and a hard complete-attempt deadline covering transport, execution and cleanup, retaining every failure/unknown cost without refunded calls or silent replay.",
+    "Run matched A0-A4 on seeds 104729, 104759 and 104761 with all 900 planned cells, including 540 final cells, original per-call token limits and original per-attempt budgets. Preserve denominator and omissions if any cell remains unrun.",
+    "Analyze source-family paired effects, useful task completion, repair attempts and complete costs from actual model-generated candidates, then update the manuscript only from those measurements. Outside annotations are not required for the established automated policy-relative evidence scope."
+  ],
+  "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_development/verify_development.py --output papers/completion/law_to_action/benchmark/generated_code_development/development_qualification_v3"
+}
+```
+
+## LA-031 Complete and execute the original generated-code planning and recovery study
+
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: law_to_action
+- Depends on: LA-030, LA-016, LA-029, LA-027
+- Goal id: LA-G5
+- Parent goal: LA-G000
+- Objective heap: papers/completion/law_to_action/paper.objectives.md
+- Board namespace: vericodegen-2026-law_to_action
+- Bundle: law_to_action/LA-G5
+- Parallel lane: law_to_action
+- Outputs: papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json, papers/completion/law_to_action/benchmark/generated_code_study/cohort/, papers/completion/law_to_action/benchmark/generated_code_study/qualification/, papers/completion/law_to_action/benchmark/generated_code_study/model_profile.json, papers/completion/law_to_action/benchmark/generated_code_study/schedule.json, papers/completion/law_to_action/benchmark/generated_code_study/driver.py, papers/completion/law_to_action/results/generated_code_study/run_manifest.json, papers/completion/law_to_action/results/generated_code_study/raw.jsonl, papers/completion/law_to_action/results/generated_code_study/generated_code/, papers/completion/law_to_action/results/generated_code_study/costs.jsonl, papers/completion/law_to_action/results/generated_code_study/summary.json, papers/completion/law_to_action/results/generated_code_study/recovery_analysis.md, papers/completion/law_to_action/results/generated_code_study/reproducibility/, papers/completion/law_to_action/results/generated_code_study/manuscript_evidence_crosswalk.json, papers/completion/law_to_action/benchmark/generated_code_study/verify_study.py, papers/completion/law_to_action/manuscript/main.tex, papers/completion/law_to_action/manuscript/results.tex, papers/completion/law_to_action/manuscript/limitations.tex, papers/completion/law_to_action/submission/, papers/final/law_to_action/editable/, papers/final/law_to_action/paper.pdf, papers/final/law_to_action/supplement.zip, papers/completion/law_to_action/artifact/, papers/final/law_to_action/BUILD.md, papers/final/law_to_action/provenance/, papers/completion/law_to_action/receipts/LA-031.json, papers/completion/law_to_action/receipts/snapshots/LA-031/
+- Predicted files: papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json, papers/completion/law_to_action/benchmark/generated_code_study/cohort/, papers/completion/law_to_action/benchmark/generated_code_study/qualification/, papers/completion/law_to_action/benchmark/generated_code_study/model_profile.json, papers/completion/law_to_action/benchmark/generated_code_study/schedule.json, papers/completion/law_to_action/benchmark/generated_code_study/driver.py, papers/completion/law_to_action/results/generated_code_study/run_manifest.json, papers/completion/law_to_action/results/generated_code_study/raw.jsonl, papers/completion/law_to_action/results/generated_code_study/generated_code/, papers/completion/law_to_action/results/generated_code_study/costs.jsonl, papers/completion/law_to_action/results/generated_code_study/summary.json, papers/completion/law_to_action/results/generated_code_study/recovery_analysis.md, papers/completion/law_to_action/results/generated_code_study/reproducibility/, papers/completion/law_to_action/results/generated_code_study/manuscript_evidence_crosswalk.json, papers/completion/law_to_action/benchmark/generated_code_study/verify_study.py, papers/completion/law_to_action/manuscript/main.tex, papers/completion/law_to_action/manuscript/results.tex, papers/completion/law_to_action/manuscript/limitations.tex, papers/completion/law_to_action/submission/, papers/final/law_to_action/editable/, papers/final/law_to_action/paper.pdf, papers/final/law_to_action/supplement.zip, papers/completion/law_to_action/artifact/, papers/final/law_to_action/BUILD.md, papers/final/law_to_action/provenance/, papers/completion/law_to_action/receipts/LA-031.json, papers/completion/law_to_action/receipts/snapshots/LA-031/
+- Allowed paths: papers/completion/law_to_action/benchmark/generated_code_development/, papers/completion/law_to_action/benchmark/generated_code_study/, papers/completion/law_to_action/results/generated_code_study/, papers/completion/law_to_action/manuscript/, papers/completion/law_to_action/submission/, papers/final/law_to_action/, papers/completion/law_to_action/artifact/
+- Resource class: cpu-medium
+- Resource stage: execution
+- Implementation timeout seconds: 7200
+- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-031
+- Acceptance: Before outcome inspection, freeze exactly 30 new source-lineage families and 60 paired cases: 6 legal, 12 CVE and 12 skill families. Establish lawful immutable source pins, actual source bytes, exact and normalized text hashes, ancestry and nearest-neighbor leakage audit; exclude every LA-004/LA-029 fixed-action family and all its derivatives. Apply the original ranked hash split with salt vericodegen-2026-law-to-action-LA016-v1 and population quotas legal 2/1/3, CVE 2/3/7, skill 2/2/8 for development/calibration/final. All descendant cases inherit their parent split.; Implement source-relative prompts/tasks and independent machine-checkable effect/utility expectations for all 60 cases. Retain each source-to-policy/task/oracle mapping. Generated candidates must perform useful bounded work through actual handlers, not select a canned fixed program. The LA-030 two-sink controls remain development evidence and are not relabeled as this cohort. Qualify the generated-code language/handler profile against supported useful tasks and undeclared effects before final release.; Implement real A0 task-only, A1 policy prompting, A2 retrieval plus policy, A3 actual policy/UCAN, and A4 full actual native enforcement interventions. Match task source, payload, permitted retrieval, model, decoding, execution bounds and independent scoring within case/seed. Preserve every proposed candidate and observed-feedback repair. Demonstrate actual positive useful-work and negative effect/authorization qualification for each supported mechanism; no inert metadata substitutes for a model intervention.; Qualify a concrete actual local model deployment with immutable model/weights/tokenizer/revision/template/deployment hashes, original token ceilings, decoding/seed behavior, exact prompt/template token agreement and measured service resource boundaries. Reuse the model warm during active inference as requested. A bounded runner may replace systemd; do not require an always-on service or reload between ordinary requests. Respect the user's current 10000-second total service wall preference and separate 360-second startup readiness bound while retaining separate original 120-second scientific attempt limits. Preserve actual startup, warm-service, per-call and shutdown/cancellation costs without double counting.; Implement and qualify an actual durable full-schedule driver: reserve each case-arm-seed cell and model call before dispatch, retain unknown delivery/usage, continue only after explicit failed-run reconciliation, and never silently refund or replay. Qualify interruption/resume, stale ownership, one-time capability use, complete descendant cleanup and an outer hard 120-second attempt deadline across transport, generated-code execution and cleanup. CPU, memory, token, model-call and paid-budget costs remain known or explicitly unknown, never replaced by configured limits.; Freeze the complete balanced original schedule and prospectively qualified code/runtime/model/cohort/prompt/oracle artifacts before scientific outputs. Execute exactly the original 60 cases x 5 arms x seeds 104729/104759/104761, preserving all 900 identities: 180 development, 180 calibration and 540 final. Freeze thresholds/analysis before final outputs. Every planned identity has an accounted terminal disposition; any unrun or unadmitted cell keeps this empirical execution obligation incomplete and remains in reporting denominators.; Retain real model HTTP/provider request and response bytes, precise candidate bytes, source/fact/admission identity, actual native handler and durable-consumption evidence, independent observed effect/utility outcomes, repair feedback, model calls/tokens and measured costs for every attempt. At least actual executed model calls and generated programs must exist; constructed transport, model-free LA-029 programs, omission reports and logged intended commands cannot satisfy this requirement.; Recompute matched arm comparisons, source-family-aware uncertainty, useful work, forbidden effects, repair behavior and complete cost/omission summaries from the exact admitted records. Keep the generated-code study separate from fixed-action evidence and distinguish policy-relative safety/utility from legal validity or human semantic fidelity. Validate a portable reproducibility package from raw records.; Update the editable Law-to-Action manuscript and final local artifact from the actual new evidence, preserving page limits, citation accuracy, anonymity and historical records. Qualify the final source/results/package crosswalk and compilation. No external workshop upload or submission is part of this task. LA-G5 may be completed only when its actual remaining acceptance criteria are met.; The dedicated scientific verifier fails if any original scheduled identity is absent, unrun or unadmitted; if real model calls or generated-program execution evidence is missing; if reservation/candidate/admission/effect/cost bindings fail; or if source-family paired analysis or manuscript/package crosswalk cannot be reproduced from raw records. A completed omission cannot pass this verifier.
+- Paper evidence: Original LA-016 and LA-003/v3 protocol RQ3 require actual pinned-model generation and revision under matched A0-A4 interventions.; LA-016's historical completed receipt contains no model calls and 900 not-started cells; LA-029 fixed programs and LA-030 constructed development outputs do not supply those measurements.; LA-027 permits automated source-contract and policy-relative effect/utility measurements without outside annotations; expert legal validity and independent human semantic-fidelity claims remain excluded.
+- Reuse candidates: papers/completion/law_to_action/benchmark/generated_code_development/loop.py, papers/completion/law_to_action/benchmark/generated_code_development/native_candidate.py, papers/completion/law_to_action/benchmark/generated_code_development/container_runner.py, papers/completion/law_to_action/benchmark/generated_code_development/bounded_http.py, papers/completion/law_to_action/benchmark/protocol.md, papers/completion/law_to_action/benchmark/resource_plan.json
+- Receipt: papers/completion/law_to_action/receipts/LA-031.json
+
+Finish the actual scientific work left unrun by LA-016. Use LA-030's concrete native generated-response/effect/repair runner as a development foundation. Implement the missing source-relative tasks, independently computed policy-relative utility/effect oracles, qualified generated-program profile and original arm interventions; qualify actual existing local model transport and runtime; implement durable reservation/resume and complete-attempt resource accounting; then execute and analyze the original complete 900-cell study. Missing readiness is an engineering or qualification task to complete, not a reason to install a permanent false dispatch gate or mark the study completed by a new withdrawal. Preserve original historical receipts and failed attempts. A benchmark omission may be reported truthfully, but it does not satisfy this task's completion acceptance.
+
+Acceptance criteria:
+
+1. Before outcome inspection, freeze exactly 30 new source-lineage families and 60 paired cases: 6 legal, 12 CVE and 12 skill families. Establish lawful immutable source pins, actual source bytes, exact and normalized text hashes, ancestry and nearest-neighbor leakage audit; exclude every LA-004/LA-029 fixed-action family and all its derivatives. Apply the original ranked hash split with salt vericodegen-2026-law-to-action-LA016-v1 and population quotas legal 2/1/3, CVE 2/3/7, skill 2/2/8 for development/calibration/final. All descendant cases inherit their parent split.
+2. Implement source-relative prompts/tasks and independent machine-checkable effect/utility expectations for all 60 cases. Retain each source-to-policy/task/oracle mapping. Generated candidates must perform useful bounded work through actual handlers, not select a canned fixed program. The LA-030 two-sink controls remain development evidence and are not relabeled as this cohort. Qualify the generated-code language/handler profile against supported useful tasks and undeclared effects before final release.
+3. Implement real A0 task-only, A1 policy prompting, A2 retrieval plus policy, A3 actual policy/UCAN, and A4 full actual native enforcement interventions. Match task source, payload, permitted retrieval, model, decoding, execution bounds and independent scoring within case/seed. Preserve every proposed candidate and observed-feedback repair. Demonstrate actual positive useful-work and negative effect/authorization qualification for each supported mechanism; no inert metadata substitutes for a model intervention.
+4. Qualify a concrete actual local model deployment with immutable model/weights/tokenizer/revision/template/deployment hashes, original token ceilings, decoding/seed behavior, exact prompt/template token agreement and measured service resource boundaries. Reuse the model warm during active inference as requested. A bounded runner may replace systemd; do not require an always-on service or reload between ordinary requests. Respect the user's current 10000-second total service wall preference and separate 360-second startup readiness bound while retaining separate original 120-second scientific attempt limits. Preserve actual startup, warm-service, per-call and shutdown/cancellation costs without double counting.
+5. Implement and qualify an actual durable full-schedule driver: reserve each case-arm-seed cell and model call before dispatch, retain unknown delivery/usage, continue only after explicit failed-run reconciliation, and never silently refund or replay. Qualify interruption/resume, stale ownership, one-time capability use, complete descendant cleanup and an outer hard 120-second attempt deadline across transport, generated-code execution and cleanup. CPU, memory, token, model-call and paid-budget costs remain known or explicitly unknown, never replaced by configured limits.
+6. Freeze the complete balanced original schedule and prospectively qualified code/runtime/model/cohort/prompt/oracle artifacts before scientific outputs. Execute exactly the original 60 cases x 5 arms x seeds 104729/104759/104761, preserving all 900 identities: 180 development, 180 calibration and 540 final. Freeze thresholds/analysis before final outputs. Every planned identity has an accounted terminal disposition; any unrun or unadmitted cell keeps this empirical execution obligation incomplete and remains in reporting denominators.
+7. Retain real model HTTP/provider request and response bytes, precise candidate bytes, source/fact/admission identity, actual native handler and durable-consumption evidence, independent observed effect/utility outcomes, repair feedback, model calls/tokens and measured costs for every attempt. At least actual executed model calls and generated programs must exist; constructed transport, model-free LA-029 programs, omission reports and logged intended commands cannot satisfy this requirement.
+8. Recompute matched arm comparisons, source-family-aware uncertainty, useful work, forbidden effects, repair behavior and complete cost/omission summaries from the exact admitted records. Keep the generated-code study separate from fixed-action evidence and distinguish policy-relative safety/utility from legal validity or human semantic fidelity. Validate a portable reproducibility package from raw records.
+9. Update the editable Law-to-Action manuscript and final local artifact from the actual new evidence, preserving page limits, citation accuracy, anonymity and historical records. Qualify the final source/results/package crosswalk and compilation. No external workshop upload or submission is part of this task. LA-G5 may be completed only when its actual remaining acceptance criteria are met.
+10. The dedicated scientific verifier fails if any original scheduled identity is absent, unrun or unadmitted; if real model calls or generated-program execution evidence is missing; if reservation/candidate/admission/effect/cost bindings fail; or if source-family paired analysis or manuscript/package crosswalk cannot be reproduced from raw records. A completed omission cannot pass this verifier.
+
+Execution boundaries and remaining obligations:
+
+```json
+{
+  "original_study_budget": {
+    "planned_cells": 900,
+    "final_cells": 540,
+    "source_families": 30,
+    "paired_cases": 60,
+    "arms": [
+      "A0",
+      "A1",
+      "A2",
+      "A3",
+      "A4"
+    ],
+    "seeds": [
+      104729,
+      104759,
+      104761
+    ],
+    "maximum_model_calls_per_attempt": 8,
+    "maximum_input_tokens_per_call": 2048,
+    "maximum_output_tokens_per_call": 1024,
+    "maximum_total_model_calls": 7200,
+    "maximum_total_input_output_tokens": 22118400,
+    "maximum_wall_seconds_per_attempt": 120,
+    "maximum_aggregate_attempt_wall_hours": 30,
+    "maximum_parallel_attempts": 1,
+    "paid_provider_budget": 0
+  },
+  "completion_evidence_boundary": "Actual qualified generated-model execution and analysis are required. Readiness reports, development qualification, source freeze alone, missing-runtime reports or manuscript withdrawal do not complete LA-031.",
+  "execution_authority": "This file is a concrete task contract for root/native registration, not an instruction to dispatch inference while the current LA-030 development task is running. Registered execution must satisfy the prospective artifact and runtime gates, preserve existing authorization and follow the user's warm-model and bounded-service preferences.",
+  "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_study.py --study papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --results papers/completion/law_to_action/results/generated_code_study"
+}
+```

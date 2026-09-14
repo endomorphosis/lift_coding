@@ -1,0 +1,25 @@
+{
+  "child_pid": 2810192,
+  "child_returncode": 1,
+  "child_started": true,
+  "child_termination_proven": true,
+  "cleanup_errors": [],
+  "cleanup_seconds_after_deadline_observation": null,
+  "deadline_expired": false,
+  "deadline_overrun_seconds": null,
+  "error": null,
+  "request_sha256": "e87b2fc7d68e26416105fbcfd1a2d059fa4ad28c19aa41a5c39551027b1d0783",
+  "response_bytes_retained": 71,
+  "response_read_error": null,
+  "response_sha256": "2ee4590f8dab64e7d75a955dee6f53809a8fae6f65f1489e4e7a6c5c67e041d4",
+  "status": 503,
+  "timeout_seconds": 2.0,
+  "wall_seconds": 0.1144537259824574,
+  "worker": {
+    "body_limit_exceeded": false,
+    "complete": true,
+    "error": null,
+    "status": 503
+  },
+  "worker_metadata_error": null
+}
