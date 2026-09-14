@@ -1,0 +1,27 @@
+{
+  "body": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": " factors factors factors factors factors factors factors factors",
+          "role": "assistant"
+        }
+      }
+    ],
+    "id": "la032-81185645199d",
+    "model": "sshleifer/tiny-gpt2",
+    "object": "chat.completion",
+    "preflight_input_count": 17,
+    "usage": {
+      "completion_tokens": 8,
+      "prompt_tokens": 17,
+      "total_tokens": 25
+    }
+  },
+  "path": "/v1/chat/completions",
+  "request_sha256": "81185645199d1571f8e009174b8b39f9167856f7411051bb2d58720494f779bc",
+  "response_sha256": "b809cfe722d7bbf196b994dc0519e7c97ceeccccc7871e1d13213b0dc183c3dd",
+  "wall_seconds": 0.04462410998530686
+}

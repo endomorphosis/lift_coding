@@ -1,0 +1,101 @@
+{
+  "diagnostics": [],
+  "error": {
+    "at_monotonic": 813711.550451257,
+    "current": {
+      "cgroup.events": "populated 0\nfrozen 0\n",
+      "cpu.stat": "usage_usec 100\nuser_usec 100\nsystem_usec 0\n",
+      "cpu_usage_seconds": 0.0001,
+      "identities": {
+        "cgroup.events": {
+          "exists": true,
+          "inode": 72255545,
+          "mode": 33188,
+          "observed_monotonic": 813711.550417256,
+          "operation": "parent.read:cgroup.events",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent/cgroup.events"
+        },
+        "cpu.stat": {
+          "exists": true,
+          "inode": 72255540,
+          "mode": 33188,
+          "observed_monotonic": 813711.550393303,
+          "operation": "parent.read:cpu.stat",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent/cpu.stat"
+        },
+        "parent": {
+          "exists": true,
+          "inode": 72255539,
+          "mode": 16877,
+          "observed_monotonic": 813711.55044828,
+          "operation": "parent.stat",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent"
+        },
+        "pids.current": {
+          "exists": true,
+          "inode": 72255546,
+          "mode": 33188,
+          "observed_monotonic": 813711.550440664,
+          "operation": "parent.read:pids.current",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent/pids.current"
+        }
+      },
+      "inode": 72255539,
+      "observed_monotonic": 813711.55045012,
+      "pids.current": "0"
+    },
+    "leaf_identity": null,
+    "parent_identity": {
+      "exists": true,
+      "inode": 72255539,
+      "mode": 16877,
+      "observed_monotonic": 813711.550458873,
+      "operation": "fail.parent",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent"
+    },
+    "previous": {
+      "cgroup.events": "populated 0\nfrozen 0\n",
+      "cpu.stat": "usage_usec 8000\nuser_usec 8000\nsystem_usec 0\n",
+      "cpu_usage_seconds": 0.008,
+      "identities": {
+        "cgroup.events": {
+          "exists": true,
+          "inode": 72255545,
+          "mode": 33188,
+          "observed_monotonic": 813711.550280789,
+          "operation": "parent.read:cgroup.events",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent/cgroup.events"
+        },
+        "cpu.stat": {
+          "exists": true,
+          "inode": 72255540,
+          "mode": 33188,
+          "observed_monotonic": 813711.550255765,
+          "operation": "parent.read:cpu.stat",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent/cpu.stat"
+        },
+        "parent": {
+          "exists": true,
+          "inode": 72255539,
+          "mode": 16877,
+          "observed_monotonic": 813711.550313126,
+          "operation": "parent.stat",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent"
+        },
+        "pids.current": {
+          "exists": true,
+          "inode": 72255546,
+          "mode": 33188,
+          "observed_monotonic": 813711.550305334,
+          "operation": "parent.read:pids.current",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/counter_regression/parent/pids.current"
+        }
+      },
+      "inode": 72255539,
+      "observed_monotonic": 813711.550316694,
+      "pids.current": "0"
+    },
+    "reason": "parent_counter_regressed"
+  },
+  "name": "counter_regression"
+}

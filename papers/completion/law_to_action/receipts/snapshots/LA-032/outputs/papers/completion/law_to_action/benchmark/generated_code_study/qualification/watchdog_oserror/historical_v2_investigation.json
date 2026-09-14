@@ -1,0 +1,23 @@
+{
+  "effect_disposition_preserved": "unknown",
+  "exact_owned_cleanup_proven": true,
+  "historical_cause": null,
+  "historical_errno": null,
+  "historical_operation": null,
+  "historical_path": null,
+  "historical_reason": "resource_observation_OSError",
+  "historical_receipt_upgraded": false,
+  "historical_status": "FAILED_RETAINED",
+  "interpretation": "The retained v2 receipt records resource_observation_OSError during terminal leaf observation after child exit 0. It does not retain errno, path, operation or cause. This investigation does not upgrade that failed receipt.",
+  "reconciliation_sha256": "9481e7589a529677366dd548de8069f0c9d959ccc8734e72ecff45413c97f44b",
+  "resources_sha256": "a8a0058fd1d0f1d732fceb04d737c7c821cf0baace322503f60d24c1f790ffc7",
+  "schema": "la032-watchdog-historical-investigation/v1",
+  "unproven_fields": [
+    "errno",
+    "path",
+    "operation",
+    "filename",
+    "cause"
+  ],
+  "whole_group_termination_proven": true
+}

@@ -1,0 +1,18 @@
+{
+  "controls": [
+    "injected_enoent",
+    "benign_disappearance",
+    "unstable_parent",
+    "counter_regression",
+    "wall_bound"
+  ],
+  "historical_investigation_sha256": "835e2033cad0d80b374e1ec325451774d49c5a9345843b6dfeba09c453514ab2",
+  "historical_v2_upgraded": false,
+  "injected_enoent_errno": 2,
+  "injected_enoent_operation": "leaf.read:cpu.stat",
+  "oserror_broadly_suppressed": false,
+  "parent_accounting_mandatory": true,
+  "schema": "la032-watchdog-diagnostic-qualification/v1",
+  "status": "PASS",
+  "whole_group_exit_mandatory": true
+}

@@ -1,0 +1,39 @@
+{
+  "configured_attempt_wall_seconds": 120,
+  "covers": [
+    "template",
+    "tokenization",
+    "inference",
+    "generated_program_execution",
+    "cleanup"
+  ],
+  "hard_stop_observed": true,
+  "max_calls": 8,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "paid_provider_budget": 0,
+  "probe_bound_seconds": 0.2,
+  "schema": "la032-attempt-deadline-qualification/v1",
+  "stages": [
+    {
+      "budget_remaining_before": 0.1999967040028423,
+      "stage": "template",
+      "started": true,
+      "wall_seconds": 0.010068551986478269
+    },
+    {
+      "budget_remaining_before": 0.18992187990806997,
+      "stage": "tokenize",
+      "started": true,
+      "wall_seconds": 0.010072616045363247
+    },
+    {
+      "budget_remaining_before": 0.17984508792869747,
+      "overrun": true,
+      "stage": "inference",
+      "started": true,
+      "wall_seconds": 4.320172592997551e-07
+    }
+  ],
+  "status": "PASS"
+}

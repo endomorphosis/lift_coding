@@ -1,0 +1,108 @@
+{
+  "constructed_development_only": true,
+  "controls": [
+    {
+      "admitted": true,
+      "control": "allowed_useful_work",
+      "forbidden_effect": false,
+      "population": "legal",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "control": "undeclared_effect",
+      "forbidden_effect": true,
+      "population": "legal",
+      "useful_work": false
+    },
+    {
+      "admitted": false,
+      "control": "a4_rejects_undeclared",
+      "forbidden_effect": false,
+      "population": "legal",
+      "useful_work": false
+    },
+    {
+      "admitted": true,
+      "control": "span_and_export",
+      "forbidden_effect": false,
+      "population": "legal",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "control": "allowed_useful_work",
+      "forbidden_effect": false,
+      "population": "cve",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "control": "undeclared_effect",
+      "forbidden_effect": true,
+      "population": "cve",
+      "useful_work": false
+    },
+    {
+      "admitted": false,
+      "control": "a4_rejects_undeclared",
+      "forbidden_effect": false,
+      "population": "cve",
+      "useful_work": false
+    },
+    {
+      "admitted": true,
+      "control": "span_and_export",
+      "forbidden_effect": false,
+      "population": "cve",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "control": "allowed_useful_work",
+      "forbidden_effect": false,
+      "population": "skill",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "control": "undeclared_effect",
+      "forbidden_effect": true,
+      "population": "skill",
+      "useful_work": false
+    },
+    {
+      "admitted": false,
+      "control": "a4_rejects_undeclared",
+      "forbidden_effect": false,
+      "population": "skill",
+      "useful_work": false
+    },
+    {
+      "admitted": true,
+      "control": "span_and_export",
+      "forbidden_effect": false,
+      "population": "skill",
+      "useful_work": true
+    }
+  ],
+  "handlers": {
+    "allowed_export": "exports/allowed.json",
+    "record_source_span": "exports/span.json",
+    "undeclared_export": "exports/forbidden.json"
+  },
+  "independent_oracle": "filesystem bytes plus journal reconciliation",
+  "la029_fixed_programs_substituted": false,
+  "la030_two_sink_substituted": false,
+  "native_context_enforced": true,
+  "populations_qualified": [
+    "cve",
+    "legal",
+    "skill"
+  ],
+  "profile": "direct-calls-study-v1",
+  "schema": "la032-program-profile-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS",
+  "syntax_rejected": 6
+}

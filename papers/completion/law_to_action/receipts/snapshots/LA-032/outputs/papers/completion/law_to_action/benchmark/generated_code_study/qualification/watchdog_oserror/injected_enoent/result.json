@@ -1,0 +1,37 @@
+{
+  "diagnostics": [],
+  "error": {
+    "at_monotonic": 813711.538574144,
+    "historical_v2_errno_unproven": true,
+    "leaf_identity": {
+      "exists": true,
+      "inode": 72255522,
+      "mode": 16877,
+      "observed_monotonic": 813711.538564367,
+      "operation": "error.leaf",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/injected_enoent/leaf"
+    },
+    "oserror": {
+      "cause": null,
+      "errno": 2,
+      "errno_name": "ENOENT",
+      "error_type": "FileNotFoundError",
+      "filename": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/injected_enoent/leaf/cpu.stat",
+      "filename2": null,
+      "operation": "leaf.read:cpu.stat",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/injected_enoent/leaf/cpu.stat",
+      "strerror": "No such file or directory",
+      "unproven_historical_receipt": true
+    },
+    "parent_identity": {
+      "exists": true,
+      "inode": 72255518,
+      "mode": 16877,
+      "observed_monotonic": 813711.538572608,
+      "operation": "error.parent",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/injected_enoent/parent"
+    },
+    "reason": "resource_observation_OSError"
+  },
+  "name": "injected_enoent"
+}

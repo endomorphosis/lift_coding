@@ -1,0 +1,205 @@
+{
+  "canonical_repository_identity_complete": false,
+  "cross_population_repository_overlap": [],
+  "cve": {
+    "audits": [
+      {
+        "cve_id": "CVE-2007-10001",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/web-cyradm/web-cyradm"
+      },
+      {
+        "cve_id": "CVE-2008-10002",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/cfire24/ajaxlife"
+      },
+      {
+        "cve_id": "CVE-2008-1897",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/kaoru6/asterisk"
+      },
+      {
+        "cve_id": "CVE-2009-1194",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/bratsche/pango"
+      },
+      {
+        "cve_id": "CVE-2010-10008",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/simplesamlphp/simplesamlphp-module-openidprovider"
+      },
+      {
+        "cve_id": "CVE-2010-1152",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/memcached/memcached"
+      },
+      {
+        "cve_id": "CVE-2010-1155",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/ensc/irssi-proxy"
+      },
+      {
+        "cve_id": "CVE-2010-1630",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/phpbb/phpbb3"
+      },
+      {
+        "cve_id": "CVE-2010-3872",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/apache/httpd-mod_fcgid"
+      },
+      {
+        "cve_id": "CVE-2010-4264",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/vanilla/vanilla"
+      },
+      {
+        "cve_id": "CVE-2010-4802",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/kraih/mojo"
+      },
+      {
+        "cve_id": "CVE-2011-0469",
+        "fork_reasons_excluded": [],
+        "nearest_neighbor": [],
+        "repository": "github.com/opensuse/open-build-service"
+      }
+    ],
+    "cross_population_repos": [
+      "github.com/apache/httpd-mod_fcgid",
+      "github.com/bratsche/pango",
+      "github.com/cfire24/ajaxlife",
+      "github.com/ensc/irssi-proxy",
+      "github.com/kaoru6/asterisk",
+      "github.com/kraih/mojo",
+      "github.com/memcached/memcached",
+      "github.com/opensuse/open-build-service",
+      "github.com/phpbb/phpbb3",
+      "github.com/simplesamlphp/simplesamlphp-module-openidprovider",
+      "github.com/vanilla/vanilla",
+      "github.com/web-cyradm/web-cyradm"
+    ],
+    "skipped": {
+      "duplicate_selected_repository": 3,
+      "missing_pair_bodies": 3,
+      "normalized_code_hash_overlap": 2
+    }
+  },
+  "excluded_family_count": 30,
+  "hidden_oracles_in_retrieval": false,
+  "legal": [
+    {
+      "excluded_overlap": false,
+      "nearest_neighbor": [],
+      "section": "18-USC-2701"
+    },
+    {
+      "excluded_overlap": false,
+      "nearest_neighbor": [
+        {
+          "jaccard": 0.1509433962264151,
+          "peer": "18-USC-2701"
+        }
+      ],
+      "section": "18-USC-2511"
+    },
+    {
+      "excluded_overlap": false,
+      "nearest_neighbor": [
+        {
+          "jaccard": 0.15723270440251572,
+          "peer": "18-USC-2701"
+        },
+        {
+          "jaccard": 0.06875,
+          "peer": "18-USC-2511"
+        }
+      ],
+      "section": "5-USC-552"
+    },
+    {
+      "excluded_overlap": false,
+      "nearest_neighbor": [
+        {
+          "jaccard": 0.08609271523178808,
+          "peer": "18-USC-2701"
+        },
+        {
+          "jaccard": 0.06338028169014084,
+          "peer": "18-USC-2511"
+        },
+        {
+          "jaccard": 0.10948905109489052,
+          "peer": "5-USC-552"
+        }
+      ],
+      "section": "15-USC-45"
+    },
+    {
+      "excluded_overlap": false,
+      "nearest_neighbor": [
+        {
+          "jaccard": 0.1206896551724138,
+          "peer": "18-USC-2701"
+        },
+        {
+          "jaccard": 0.1165644171779141,
+          "peer": "18-USC-2511"
+        },
+        {
+          "jaccard": 0.08284023668639054,
+          "peer": "5-USC-552"
+        },
+        {
+          "jaccard": 0.07236842105263158,
+          "peer": "15-USC-45"
+        }
+      ],
+      "section": "18-USC-1832"
+    },
+    {
+      "excluded_overlap": false,
+      "nearest_neighbor": [
+        {
+          "jaccard": 0.12121212121212122,
+          "peer": "18-USC-2701"
+        },
+        {
+          "jaccard": 0.10967741935483871,
+          "peer": "18-USC-2511"
+        },
+        {
+          "jaccard": 0.08125,
+          "peer": "5-USC-552"
+        },
+        {
+          "jaccard": 0.05517241379310345,
+          "peer": "15-USC-45"
+        },
+        {
+          "jaccard": 0.12195121951219512,
+          "peer": "18-USC-1832"
+        }
+      ],
+      "section": "18-USC-1905"
+    }
+  ],
+  "schema": "la032-lineage-audit/v1",
+  "skill": {
+    "llm_metadata_rows": 12,
+    "skipped": {
+      "exact_canonical_repository,owner_name_identity": 12
+    }
+  }
+}

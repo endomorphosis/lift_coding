@@ -1,0 +1,19 @@
+{
+  "cgroup": {
+    "controllers": "cpuset cpu io memory hugetlb pids rdma misc dmem",
+    "path": "/sys/fs/cgroup",
+    "writable": false
+  },
+  "containment": "local process + actual handlers; docker/cgroup parent creation unavailable on this host",
+  "descendant_accounting": "resource.getrusage(RUSAGE_CHILDREN) plus explicit unknown when cgroup counters are unavailable",
+  "docker": {
+    "executable": false,
+    "exists": true,
+    "path": "/usr/bin/docker",
+    "size_bytes": 0
+  },
+  "mock_mechanism": false,
+  "permissive_availability_flag": false,
+  "schema": "la032-runtime-observation/v1",
+  "unknowns_retained": true
+}

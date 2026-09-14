@@ -1,0 +1,37 @@
+{
+  "actual_probes": true,
+  "capability_consumed_once": {
+    "attempt_id": "104729:A3:family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0",
+    "consumed": true,
+    "refunded": false
+  },
+  "configuration_flag_only": false,
+  "exclusive_inference_owner": "owner:la032-prep",
+  "final_cells_refused": true,
+  "first_reservation": {
+    "attempt_id": "104729:A3:family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0",
+    "capability_consumed": false,
+    "resumed": false
+  },
+  "interruption_resumed": true,
+  "no_refund": "one-time capability already consumed",
+  "replay_blocked": "silent replay of a reserved model call is forbidden",
+  "resume": {
+    "attempt_id": "104729:A3:family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0",
+    "capability_consumed": false,
+    "resumed": true
+  },
+  "schema": "la032-driver-qualification/v1",
+  "scientific_cells_completed": 0,
+  "stale_owner_reconciled": [
+    {
+      "attempt_id": "104729:A3:family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0:stale",
+      "heartbeat": 1789403891.8741057,
+      "previous_owner": "owner:la032-prep",
+      "status": "reserved"
+    }
+  ],
+  "status": "PASS",
+  "unknown_effect_retained": true,
+  "unknown_usage_retained": true
+}

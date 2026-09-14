@@ -1,0 +1,17 @@
+{
+  "diagnostics": [],
+  "error": {
+    "at_monotonic": 120.0,
+    "leaf_identity": null,
+    "parent_identity": {
+      "exists": true,
+      "inode": 72255549,
+      "mode": 16877,
+      "observed_monotonic": 813711.554009833,
+      "operation": "fail.parent",
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/wall_bound/parent"
+    },
+    "reason": "whole_attempt_wall_budget"
+  },
+  "name": "wall_bound"
+}

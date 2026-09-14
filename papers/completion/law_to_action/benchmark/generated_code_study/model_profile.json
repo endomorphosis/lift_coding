@@ -1,0 +1,29 @@
+{
+  "base_url_ephemeral": true,
+  "chat_template": "{% for message in messages %}{{ message['role'] }}: {{ message['content'] }}\n{% endfor %}{% if add_generation_prompt %}assistant: {% endif %}",
+  "chat_template_sha256": "578572a7fcbcfc27e5c4dc0918426cd4b4eda803584ce27df024a6c6a39bfc8b",
+  "deployment_sha256": "94ba3fb1c8e07541b2145dbef2a052e8e8c6d014f4064c81c6fa5f40a91e81a4",
+  "indefinitely_running_required": false,
+  "loopback_only": true,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "sshleifer/tiny-gpt2",
+  "model_revision": "5f91d94",
+  "paid_provider_budget": 0,
+  "prompt_profile_sha256": "4c7fd6dec553e42b75b898bd693320058aba69e68cfee95661b0fb60df3e2543",
+  "qualification": {
+    "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+    "sha256": "311ffcc75937e526f07ad4c089f6c37a92b93103343eb2bbe0d29bc1ef079fab"
+  },
+  "schema": "la-qualified-local-model/v1",
+  "service_wall_seconds": 10000,
+  "startup_readiness_seconds": 360,
+  "startup_seconds": 5.935378198046237,
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenizer_id": "sshleifer/tiny-gpt2",
+  "tokenizer_revision": "5f91d94",
+  "tokenizer_sha256": "f7a7679a7289dac7c55b4265e9f15243acd9341c061605edb85f8255b4472fbf",
+  "warm_reuse_during_active_inference": true,
+  "weights_sha256": "20acecc6308f4563c15cd8c7ee77a4e7ff401d47b4f26ac620f564760af5a092"
+}

@@ -1,0 +1,40 @@
+{
+  "diagnostics": [
+    {
+      "accepted": true,
+      "counters_monotonic": true,
+      "kind": "benign_leaf_disappearance_candidate",
+      "leaf_identity": {
+        "exists": false,
+        "inode": null,
+        "observed_monotonic": 813711.542490935,
+        "operation": "leaf_gone.leaf",
+        "oserror": {
+          "cause": null,
+          "errno": 2,
+          "errno_name": "ENOENT",
+          "error_type": "FileNotFoundError",
+          "filename": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/benign_disappearance/leaf",
+          "filename2": null,
+          "operation": "leaf_gone.leaf",
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/benign_disappearance/leaf",
+          "strerror": "No such file or directory",
+          "unproven_historical_receipt": true
+        },
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/benign_disappearance/leaf"
+      },
+      "parent_empty": true,
+      "parent_identity": {
+        "exists": true,
+        "inode": 72255527,
+        "mode": 16877,
+        "observed_monotonic": 813711.542392053,
+        "operation": "leaf_gone.parent",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789402539/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog_oserror/benign_disappearance/parent"
+      },
+      "parent_identity_stable": true
+    }
+  ],
+  "error": null,
+  "name": "benign_disappearance"
+}

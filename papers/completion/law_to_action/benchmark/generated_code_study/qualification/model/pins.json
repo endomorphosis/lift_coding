@@ -1,0 +1,38 @@
+{
+  "base_url": "http://127.0.0.1:40363",
+  "chat_template": "{% for message in messages %}{{ message['role'] }}: {{ message['content'] }}\n{% endfor %}{% if add_generation_prompt %}assistant: {% endif %}",
+  "chat_template_sha256": "578572a7fcbcfc27e5c4dc0918426cd4b4eda803584ce27df024a6c6a39bfc8b",
+  "deployment_sha256": "94ba3fb1c8e07541b2145dbef2a052e8e8c6d014f4064c81c6fa5f40a91e81a4",
+  "indefinitely_running_required": false,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "sshleifer/tiny-gpt2",
+  "model_revision": "5f91d94",
+  "paid_provider_budget": 0,
+  "schema": "la-qualified-local-model/v1",
+  "service_wall_seconds": 10000,
+  "snapshot_dir": "/tmp/la032-model-cache/models--sshleifer--tiny-gpt2/snapshots/5f91d94bd9cd7190a9f3216ff93cd1dd95f2c7be",
+  "startup_readiness_seconds": 360,
+  "startup_seconds": 5.935378198046237,
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenizer_files": {
+    "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5",
+    "special_tokens_map.json": "c0b3c279b6ecdb71996a86ffb4d4ab94dfdb5df95f00bac9515688faef2ff5dd",
+    "tokenizer_config.json": "5e04eb606e3a1583530a42e36c2a6b6615c86f34fe77e44d9ddeb43ff940931f",
+    "vocab.json": "03087853bc70c618b66e7c7a43e787d2db4c469416beac9a483e53dad1f72f27"
+  },
+  "tokenizer_id": "sshleifer/tiny-gpt2",
+  "tokenizer_revision": "5f91d94",
+  "tokenizer_sha256": "f7a7679a7289dac7c55b4265e9f15243acd9341c061605edb85f8255b4472fbf",
+  "torch_version": "2.13.0+cpu",
+  "weights_files": {
+    "config.json": "77a9e9830c3abeba929f5c61e0e97c398f98b4481ad75516c0be5bf038b340b0",
+    "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5",
+    "pytorch_model.bin": "b706b24034032bdfe765ded5ab6403d201d295a995b790cb24c74becca5c04e6",
+    "special_tokens_map.json": "c0b3c279b6ecdb71996a86ffb4d4ab94dfdb5df95f00bac9515688faef2ff5dd",
+    "tokenizer_config.json": "5e04eb606e3a1583530a42e36c2a6b6615c86f34fe77e44d9ddeb43ff940931f",
+    "vocab.json": "03087853bc70c618b66e7c7a43e787d2db4c469416beac9a483e53dad1f72f27"
+  },
+  "weights_sha256": "20acecc6308f4563c15cd8c7ee77a4e7ff401d47b4f26ac620f564760af5a092"
+}

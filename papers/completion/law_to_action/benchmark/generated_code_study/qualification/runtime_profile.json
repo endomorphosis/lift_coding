@@ -1,0 +1,32 @@
+{
+  "attempt_wall_seconds": 120,
+  "docker_not_prerequisite": true,
+  "driver": "papers/completion/law_to_action/benchmark/generated_code_study/driver.py",
+  "max_calls": 8,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "observation": {
+    "cgroup": {
+      "controllers": "cpuset cpu io memory hugetlb pids rdma misc dmem",
+      "path": "/sys/fs/cgroup",
+      "writable": false
+    },
+    "containment": "local process + actual handlers; docker/cgroup parent creation unavailable on this host",
+    "descendant_accounting": "resource.getrusage(RUSAGE_CHILDREN) plus explicit unknown when cgroup counters are unavailable",
+    "docker": {
+      "executable": false,
+      "exists": true,
+      "path": "/usr/bin/docker",
+      "size_bytes": 0
+    },
+    "mock_mechanism": false,
+    "permissive_availability_flag": false,
+    "schema": "la032-runtime-observation/v1",
+    "unknowns_retained": true
+  },
+  "paid_provider_budget": 0,
+  "program_profile": "direct-calls-study-v1",
+  "schema": "la032-runtime-profile/v1",
+  "systemd_not_prerequisite": true,
+  "watchdog": "papers/completion/law_to_action/benchmark/generated_code_study/preparation/watchdog_diagnostic.py"
+}
