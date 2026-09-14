@@ -1,0 +1,23 @@
+{
+  "base_url_host": "127.0.0.1",
+  "loopback_only": true,
+  "shutdown": {
+    "calls": 2,
+    "cpu_seconds": 5.794789,
+    "elapsed_seconds": 0.10783774103038013,
+    "rss_bytes": 543858688,
+    "within_total_service_wall": true
+  },
+  "startup": {
+    "base_url": "http://127.0.0.1:43979",
+    "cpu_seconds_ready": 5.688261,
+    "indefinitely_running_required": false,
+    "pid": 488,
+    "rss_bytes_ready": 529403904,
+    "startup_bound_seconds": 360,
+    "startup_seconds": 5.440991595038213,
+    "systemd_required": false,
+    "total_service_wall_seconds": 10000
+  },
+  "warm_reuse_calls": 2
+}

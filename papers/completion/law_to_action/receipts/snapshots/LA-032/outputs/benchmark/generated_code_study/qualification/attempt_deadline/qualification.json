@@ -1,0 +1,18 @@
+{
+  "complete_attempt_wall_seconds": 120,
+  "covers": [
+    "template",
+    "tokenization",
+    "inference",
+    "generated_program_execution",
+    "cleanup"
+  ],
+  "maximum_input_tokens": 2048,
+  "maximum_model_calls": 8,
+  "maximum_output_tokens": 1024,
+  "overruns_recorded_as_unknown_or_failure": true,
+  "paid_budget": 0,
+  "schema": "la-attempt-deadline-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS"
+}

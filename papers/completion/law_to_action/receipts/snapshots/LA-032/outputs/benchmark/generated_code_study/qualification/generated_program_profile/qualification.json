@@ -1,0 +1,100 @@
+{
+  "controls": [
+    {
+      "arm": "A4",
+      "control": "permitted",
+      "forbidden_effect": false,
+      "handler": "record_obligation",
+      "population": "legal",
+      "result_sha256": "c44f28d2ccfae2d8323e29b886a44bd8b4d507938a969eeaa301c55d3f4e6b4e",
+      "useful_work": true
+    },
+    {
+      "arm": "A0",
+      "control": "undeclared",
+      "forbidden_effect": true,
+      "handler": "record_obligation",
+      "population": "legal",
+      "result_sha256": "fdf7c03797490b2b73baccb143866f28d71c69c7772b994341ff1391cbdcf506",
+      "useful_work": false
+    },
+    {
+      "arm": "A4",
+      "control": "policy_denied_undeclared",
+      "forbidden_effect": false,
+      "handler": "record_obligation",
+      "population": "legal",
+      "result_sha256": "4be2de3c90a79a84f029790b9df505e53f9b985882a6fcb8c9de3889cee13adb",
+      "useful_work": false
+    },
+    {
+      "arm": "A4",
+      "control": "permitted",
+      "forbidden_effect": false,
+      "handler": "record_finding",
+      "population": "cve",
+      "result_sha256": "52371d84d6a19788c026adb49ee9b9363d7fd571096fec359089c3b7efdcd0ec",
+      "useful_work": true
+    },
+    {
+      "arm": "A0",
+      "control": "undeclared",
+      "forbidden_effect": true,
+      "handler": "record_finding",
+      "population": "cve",
+      "result_sha256": "4f255b8c6d03545fbd8e46c7cab2c63f231abbff2a29c77fb8806811c364fdbe",
+      "useful_work": false
+    },
+    {
+      "arm": "A4",
+      "control": "policy_denied_undeclared",
+      "forbidden_effect": false,
+      "handler": "record_finding",
+      "population": "cve",
+      "result_sha256": "3e85382914b7a999714893cf4c0ddd758c752f6b7e3a6a702b3708e1f0e86c2b",
+      "useful_work": false
+    },
+    {
+      "arm": "A4",
+      "control": "permitted",
+      "forbidden_effect": false,
+      "handler": "record_capability",
+      "population": "skill",
+      "result_sha256": "2f383540c58e81aa7aa4ff7fa40e4d4ad98992dd48e5d9df794b9b74ac5f2466",
+      "useful_work": true
+    },
+    {
+      "arm": "A0",
+      "control": "undeclared",
+      "forbidden_effect": true,
+      "handler": "record_capability",
+      "population": "skill",
+      "result_sha256": "4118202c701e4acadb42ac7563e1cadd7e9c20d62a9941ff48fa0f3a108c5696",
+      "useful_work": false
+    },
+    {
+      "arm": "A4",
+      "control": "policy_denied_undeclared",
+      "forbidden_effect": false,
+      "handler": "record_capability",
+      "population": "skill",
+      "result_sha256": "855c62bc63a1b6e76d27623e8508507acdc022fef6a0f91acd55a5434e9c2b37",
+      "useful_work": false
+    }
+  ],
+  "escape_rejected": true,
+  "handlers": {
+    "other_sink": "exports/forbidden.json",
+    "record_capability": "exports/capability.json",
+    "record_finding": "exports/finding.json",
+    "record_obligation": "exports/obligation.json"
+  },
+  "la029_fixed_programs_substituted": false,
+  "la030_two_sink_substituted": false,
+  "profile": "direct-calls-v1-source-relative",
+  "prompt_profile_sha256": "95b7668723a0b3cd0019fe4be960a98671d67c525b7304438787280f13b30c2e",
+  "schema": "la-closed-loop-generated-program-profile/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS",
+  "syntax_rejected": 5
+}

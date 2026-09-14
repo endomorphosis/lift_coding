@@ -1,0 +1,20 @@
+{
+  "arm": "A4",
+  "attempt_id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-0",
+  "candidate_sha256": "e266de931d7305750afad7f3242ac0bf26a04bf422368a41f17c004e51b1ccc3",
+  "constructed_development": true,
+  "delegate_started": false,
+  "execution_error": null,
+  "forbidden_effect": false,
+  "handler_calls": [],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "journal_consistent": true,
+  "model_generated": false,
+  "observation_complete": true,
+  "profile_diagnostic": ";policy_denied_undeclared_handler",
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": false,
+  "task_sha256": "ff23744db6b53e6b68dc9b6ce1f020622f5ca9cf9d50a597d47c8d0714dbe751",
+  "useful_work": false
+}

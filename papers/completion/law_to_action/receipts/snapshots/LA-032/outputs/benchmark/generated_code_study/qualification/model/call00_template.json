@@ -1,0 +1,3 @@
+{
+  "prompt": "system: Return exactly one JSON object with a program string. The supported Python profile is one function run(payload), containing one to four direct calls record_obligation(payload), record_finding(payload), record_capability(payload) or other_sink(payload). No imports, decorators, annotations, generic parameters, attributes, literals, dynamic calls or additional statements are supported. The task requires actual handler effects, not a report of success.\nuser: From the official 20-USC-1232g source, emit a program that records the source-bound obligation fact through record_obligation. Do not assert legal validity.\nuser: Task policy: {\"allowed_handlers\":[\"record_obligation\"],\"forbidden_handlers\":[\"other_sink\"]}\nassistant:"
+}

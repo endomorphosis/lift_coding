@@ -1,0 +1,27 @@
+[
+  {
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source": "def run[T](payload):\n    record_obligation(payload)\n"
+  },
+  {
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source": "def run(payload):\n    globals()['record_finding'](payload)\n"
+  },
+  {
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source": "@other_sink\ndef run(payload):\n    record_capability(payload)\n"
+  },
+  {
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source": "def run(payload):\n    record_finding.__call__(payload)\n"
+  },
+  {
+    "reason": "One run function required",
+    "rejected": true,
+    "source": "import os\ndef run(payload):\n    record_obligation(payload)\n"
+  }
+]

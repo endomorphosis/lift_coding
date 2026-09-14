@@ -1,0 +1,13 @@
+{
+  "complete_attempt_wall_seconds": 120,
+  "containment_reference": "LA-030 v3 constructed development qualification plus diagnostic watchdog",
+  "maximum_input_tokens_per_call": 2048,
+  "maximum_model_calls_per_attempt": 8,
+  "maximum_output_tokens_per_call": 1024,
+  "paid_provider_budget": 0,
+  "prompt_profile_sha256": "95b7668723a0b3cd0019fe4be960a98671d67c525b7304438787280f13b30c2e",
+  "schema": "la-generated-study-runtime/v1",
+  "scientific_cells_executed": 0,
+  "scientific_execution_allowed": false,
+  "system": "Return exactly one JSON object with a program string. The supported Python profile is one function run(payload), containing one to four direct calls record_obligation(payload), record_finding(payload), record_capability(payload) or other_sink(payload). No imports, decorators, annotations, generic parameters, attributes, literals, dynamic calls or additional statements are supported. The task requires actual handler effects, not a report of success."
+}

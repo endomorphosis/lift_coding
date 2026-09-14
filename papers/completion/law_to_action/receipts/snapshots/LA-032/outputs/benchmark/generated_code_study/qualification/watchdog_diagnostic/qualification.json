@@ -1,0 +1,17 @@
+{
+  "benign_disappearance_revalidates_parent": true,
+  "benign_leaf_errnos": [
+    2,
+    19
+  ],
+  "broad_oserror_suppressed": false,
+  "errno_retained": true,
+  "historical_cause_claimed": false,
+  "historical_v2_upgraded": false,
+  "leaf_parent_identity_snapshots": true,
+  "operation_path_retained": true,
+  "parent_accounting_mandatory": true,
+  "schema": "la-watchdog-diagnostic-qualification/v1",
+  "status": "PASS",
+  "whole_group_exit_mandatory": true
+}
