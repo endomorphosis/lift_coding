@@ -1,0 +1,25 @@
+{
+  "candidate_methods": [
+    "hashlib.file_digest",
+    "readinto reusable buffer",
+    "safe mmap",
+    "threaded independent SHA",
+    "process canonicalization",
+    "optional qualified native batch"
+  ],
+  "current_path": [
+    "source discovery",
+    "canonical serialization",
+    "SHA/CID",
+    "proof verification",
+    "Merkle",
+    "immutable store",
+    "serial WAL/CAS"
+  ],
+  "observed_gaps": [
+    "duplicate serialization/hashing requires task instrumentation",
+    "unverified metadata cannot authorize reuse",
+    "parallel immutable preparation absent or partial"
+  ],
+  "schema": "pctdd/hashing-critical-path@1"
+}

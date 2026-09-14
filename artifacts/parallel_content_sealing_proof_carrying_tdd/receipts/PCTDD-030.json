@@ -1,0 +1,98 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-030.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist_reuse_coordination.py",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py"
+  ],
+  "claim": "Worker-authored xdist reuse coordination into pytest. Workers return bounded public intents and only the controller may publish accepted reuse evidence. Typed unavailable guarded post-setup reuse, pre-setup item reuse, fixture-proof-aware xdist scheduling, signed runner attestation, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-030, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; worker publication; current-root publication; task completion; production ZK; guarded post-setup reuse; pre-setup item reuse; signed admission; fixture-proof-aware scheduling",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-030@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "coordination": {
+    "controller_owns_writes": true,
+    "establishes": "workers return bounded intents and only the controller may publish accepted reuse evidence",
+    "interface": "XdistReuseCoordination@1",
+    "may_authorize_skip": false,
+    "normal_execution_fallback": true,
+    "predecessor_interface": "ProofReuseXdistCoordination@1",
+    "production_admitted": false,
+    "schema_authority": "ipfs_accelerate_py.testing.proof_reuse.xdist_reuse_coordination",
+    "workers_may_publish": false
+  },
+  "dependency_receipts": [
+    "PCTDD-002",
+    "PCTDD-025",
+    "PCTDD-026"
+  ],
+  "limitations": {
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "fixture_proof_aware_xdist": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "fixture_proof_aware_xdist_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "guarded_post_setup_reuse": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "guarded_post_setup_reuse_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "pre_setup_item_reuse": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "pre_setup_item_reuse_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "signed_runner_attestation": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "signed_runner_attestation_not_verified",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree coordination and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-030",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-030@1",
+  "worker_authored_test_is_sufficient_alone": false
+}

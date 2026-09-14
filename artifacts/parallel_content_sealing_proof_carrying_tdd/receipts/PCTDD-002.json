@@ -1,0 +1,153 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "boundary_inventory": {
+    "collection": {
+      "authority_path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py",
+      "authorizes_lookup": false,
+      "authorizes_skip": false,
+      "claim_unchanged": true,
+      "classification": "available_with_caveats",
+      "does_not": "fixture setup, test call, final execution key, eligibility, cache hit, or skip",
+      "establishes": "locator-first collection seed and stable TestLocatorKey before any runtime trace",
+      "has_execution_key": false,
+      "interface": "ProofReuseCollectionSeed@1",
+      "plugin_hook": "pytest_collection_modifyitems",
+      "production_admitted": false,
+      "self_approved": false
+    },
+    "fixture_timing": {
+      "authority_path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/item_identity.py",
+      "authoritative_fixture_instance": "after_current_setup_only",
+      "claim_unchanged": true,
+      "classification": "available_with_caveats",
+      "does_not": "pre-call TestExecutionKeyV2 or an authoritative fixture-instance key at collection",
+      "establishes": "normal pytest fixture values exist only after setup; collection has static identity only",
+      "phases": [
+        "setup",
+        "call",
+        "teardown"
+      ],
+      "production_admitted": false,
+      "self_approved": false
+    },
+    "di": {
+      "authority_path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+      "claim_unchanged": true,
+      "classification": "available_with_caveats",
+      "does_not": "fabricate missing lookup, store, provider, or issuer authority",
+      "establishes": "session DI for lookup, store, provider, and issuer after proof reuse is enabled",
+      "handles": [
+        "lookup",
+        "store",
+        "provider",
+        "issuer"
+      ],
+      "interface": "ProofReuseServices@1",
+      "production_admitted": false,
+      "self_approved": false
+    },
+    "runtime_trace": {
+      "authority_path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_trace_lifecycle.py",
+      "claim_unchanged": true,
+      "classification": "available_with_caveats",
+      "does_not": "re-enter the test body or publish from incomplete, overflowed, or exceptional traces",
+      "establishes": "PytestRuntimeTraceLifecycle@1 observes one setup/call/teardown pass as a side channel",
+      "interface": "PytestRuntimeTraceLifecycle@1",
+      "may_authorize_skip": false,
+      "phases": [
+        "setup",
+        "call",
+        "teardown"
+      ],
+      "production_admitted": false,
+      "publication_requires": "complete_pass",
+      "self_approved": false
+    },
+    "xdist_publication": {
+      "authority_path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py",
+      "claim_unchanged": true,
+      "classification": "available_with_caveats",
+      "controller_owns_writes": true,
+      "does_not": "let workers publish receipts, locators, or private witness material",
+      "establishes": "workers return bounded public intents; only the controller may flush accepted publication",
+      "interface": "ProofReuseXdistCoordination@1",
+      "production_admitted": false,
+      "self_approved": false,
+      "workers_may_publish": false
+    }
+  },
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py"
+  ],
+  "claim": "Worker-authored inventory that collection, fixture timing, DI, runtime trace and xdist publication boundaries are mapped. Typed unavailable TestExecutionKeyV2, pre-call fixture-instance key, composite phase receipt, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-002, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; TestExecutionKeyV2; pre-call fixture-instance authority; composite phase receipts; current-root publication; task completion; production ZK",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "gap": "exact fixture-instance key becomes safely authoritative only after current setup; add pre-call V2 key and honest composite phase receipt",
+  "limitations": {
+    "composite_phase_receipt": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "composite_phase_receipt_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "pre_call_fixture_instance_key": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "fixture_instance_authoritative_only_after_current_setup",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "test_execution_key_v2": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "test_execution_key_v2_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "never cherry-pick the stale outer receipt commit; independently implement or recover component changes and issue fresh g6 evidence",
+    "classification": "receipt-observation-only",
+    "outer_commit": "25b2a4e0fd1ab354a0db5317ec8ea49ce0319a61"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-002",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1",
+  "worker_authored_test_is_sufficient_alone": false
+}

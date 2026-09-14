@@ -1,0 +1,57 @@
+{
+  "all_governed_sources_clean_and_gitlink_exact": true,
+  "branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1-g9",
+  "captured_utc": "2026-08-30T17:02:36Z",
+  "control_generation_input_head": "3be981e55320fba49c4b8395086cea65c8ac571e",
+  "control_generation_input_tree": "74e3f2aa0f738b442fbc275a78039223fb11ec34",
+  "dirty_user_tree_preserved": true,
+  "evidence_note": "The reviewed fail-closed supervisor-recovery anchor and exact governed gitlinks seed the pending g9 package; only the final clean-source marker-last receipt admits migration without rewriting accepted task or completion history.",
+  "original_user_tree_evidence": {
+    "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798",
+    "captured_utc": "2026-08-28",
+    "datasets_status_sha256": "a1b4619c21ab5c19d90aa666b48d10d7f5034a2abe2ce57e0f854892429d9c83",
+    "root_diff_sha256": "72f6c22550da009960d570f8b5128077c9160ef2d4ae2d5cc75498ab69e08fb7",
+    "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3",
+    "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac"
+  },
+  "planning_root": "/home/barberb/lift_coding/.worktrees/pctdd-g9-orphan-recovery",
+  "schema": "pctdd/repository-baseline@3",
+  "sources": [
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "0fccbf887b8ba25dff4adae7893e774a25895823",
+      "gitlink_matches_nested_head": true,
+      "head": "0fccbf887b8ba25dff4adae7893e774a25895823",
+      "name": "ipfs_accelerate_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "path": "external/ipfs_accelerate",
+      "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "3358f5b4bbb4d693d5f57b1a24fc057d01a2af5e"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
+      "gitlink_matches_nested_head": true,
+      "head": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
+      "name": "ipfs_datasets_py",
+      "origin": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy/external/ipfs_datasets",
+      "path": "external/ipfs_datasets",
+      "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "ef4aebe3b1d7e39429c7fb71fd8add4de5afa21a"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "gitlink_matches_nested_head": true,
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "name": "ipfs_kit_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "path": "external/ipfs_kit",
+      "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+    }
+  ]
+}

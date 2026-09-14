@@ -1,0 +1,144 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py"
+  ],
+  "claim": "Worker-authored inventory that real, simulated, signed, aggregate, direct and incremental evidence remain distinctly classified. Typed unavailable production ZK, key ceremony, direct-execution, groth16-unqualified, provekit, and aggregate-selected-test-ZK cases are recorded without changing claim meaning. This receipt does not complete PCTDD-003, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; production ZK; key ceremony; task completion; self-approval; promotion of simulated, signed, aggregate, or incremental evidence",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-003@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "evidence_kind_inventory": {
+    "real": {
+      "backend": "groth16_binary",
+      "claim_class": "UnqualifiedGroth16Backend",
+      "claim_unchanged": true,
+      "classification": "real_backend_binary_present_unqualified",
+      "does_not": "ceremony, allowlist, or current public-input binding",
+      "establishes": "packaged backend bytes may be present",
+      "production_admitted": false,
+      "promotes_to": [],
+      "self_approved": false
+    },
+    "simulated": {
+      "backend": "simulated",
+      "claim_class": "SimulatedProof",
+      "claim_unchanged": true,
+      "classification": "simulated",
+      "does_not": "production admission or cryptographic soundness",
+      "establishes": "educational non-cryptographic simulation only",
+      "production_admitted": false,
+      "promotes_to": [],
+      "self_approved": false
+    },
+    "signed": {
+      "backend": "signed_receipt",
+      "claim_class": "SignedExecutionReceipt",
+      "claim_unchanged": true,
+      "classification": "trusted issuer assertion under explicit verifier policy",
+      "does_not": "independent faithful execution",
+      "establishes": "trusted issuer assertion under explicit verifier policy",
+      "production_admitted": false,
+      "promotes_to": [],
+      "self_approved": false
+    },
+    "aggregate": {
+      "backend": "merkle_manifest / receipt_aggregation",
+      "claim_class": "ReceiptAggregationZkProof",
+      "claim_unchanged": true,
+      "classification": "missing",
+      "does_not": "CPython execution and cannot exceed leaf evidence",
+      "establishes": "committed admitted receipt population satisfies circuit",
+      "production_admitted": false,
+      "promotes_to": [],
+      "self_approved": false
+    },
+    "direct": {
+      "backend": "direct_cpython",
+      "claim_class": "DirectExecutionProof",
+      "claim_unchanged": true,
+      "classification": "research_only",
+      "does_not": "broader correctness",
+      "establishes": "declared machine/program/inputs executed",
+      "production_admitted": false,
+      "promotes_to": [],
+      "self_approved": false
+    },
+    "incremental": {
+      "backend": "incremental_seal",
+      "claim_class": "IncrementalCommitSeal",
+      "claim_unchanged": true,
+      "classification": "available_with_caveats",
+      "does_not": "arbitrary repository correctness",
+      "establishes": "accepted parent plus complete valid changed/reused units",
+      "production_admitted": false,
+      "promotes_to": [],
+      "self_approved": false
+    }
+  },
+  "limitations": {
+    "aggregate_selected_test_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "aggregate_selected_test_zk_missing",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "groth16_unqualified": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "real_backend_binary_present_unqualified",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "provekit": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "provekit_adapter_source_present_unadmitted",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "never cherry-pick the stale outer receipt commit; independently implement or recover component changes and issue fresh g6 evidence",
+    "classification": "receipt-observation-only",
+    "outer_commit": "37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-003",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-003@1",
+  "worker_authored_test_is_sufficient_alone": false
+}

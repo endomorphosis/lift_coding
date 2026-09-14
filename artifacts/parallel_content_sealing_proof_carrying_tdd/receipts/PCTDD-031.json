@@ -1,0 +1,78 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-031.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/fixture_proof_aware_xdist.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py"
+  ],
+  "claim": "Worker-authored fixture- and proof-aware xdist scheduling into pytest. Fixture affinity and proof cost improve placement without omitting tests or merging resource pools. Typed unavailable aggregate selected-test ZK, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-031, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; omitting tests; merging resource pools; worker publication; current-root publication; task completion; production ZK; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-004",
+    "PCTDD-022",
+    "PCTDD-030"
+  ],
+  "limitations": {
+    "aggregate_selected_test_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "aggregate_selected_test_zk_missing",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree scheduling and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "scheduling": {
+    "controller_owns_writes": true,
+    "establishes": "fixture affinity and proof cost improve placement without omitting tests or merging resource pools",
+    "interface": "FixtureProofAwareXdistScheduling@1",
+    "may_authorize_skip": false,
+    "may_merge_resource_pools": false,
+    "may_omit_tests": false,
+    "normal_execution_fallback": true,
+    "predecessor_interface": "XdistReuseCoordination@1",
+    "production_admitted": false,
+    "schema_authority": "ipfs_accelerate_py.testing.proof_reuse.fixture_proof_aware_xdist",
+    "workers_may_publish": false
+  },
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-031",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1",
+  "worker_authored_test_is_sufficient_alone": false
+}

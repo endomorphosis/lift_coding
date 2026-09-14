@@ -1,0 +1,200 @@
+{
+  "amends_plan_revision": "PCTDD-PLAN-V1",
+  "artifacts": {
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json": "sha256:b94644acaa931b0d08cad069c7b02728be7963ea4cec25beaff6224d440dd192",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:941688f9491f5454b89b8d8f553504bb5e0fc5d2e77a56579066ed6c2d8e83dd",
+    "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json": "sha256:0fe2d6a4e0a481164ac5e3715d2404b2ddfd76019c45c97a9d29181eff7670ed",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in": "sha256:dd99907f6d441642815972dd765bb6ed3945c3f14b7cf3d3e048240fcf4eb357",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer": "sha256:12d6b6fb95e90a434f3b686393bcd196de6e1bbd65d80c10ceb31a0ff9781301",
+    "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json": "sha256:1b61f10063e4ae29acbf2c83fa5a951473d20f558b3ff6a442424d1153d2c780",
+    "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md": "sha256:dc73d3121abe4aad8a955dcc9d47f4959cd8f2b5b32ae31fe39179af49eb1a71",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md": "sha256:3771a42d8301cc0a5a904edeada71f068979a7db3158ee58f5a0fe3571c2f6b0",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md": "sha256:e488ca53ea8f6aa7be7c0b33fdee3390af05e6274b615648ddbce06e922616d8",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json": "sha256:2ab53517798dcf840dc5aeb6c89b889931b1ed06c6f09592d79568a4a896c827",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json": "sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json": "sha256:b1ab0748c41944b7c01e0895e930f55c6d7c8907387ff4b71a1141b38d1d3576",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json": "sha256:377ca828ed51ee29355a4d782da847fa0986db506f86ec3f79126ef067b4c250",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json": "sha256:a7c9ca60074ab5e92f11fe9c3b0c926f13a86389728bf45de07e3cf80f37ab96",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json": "sha256:ce046bc39e4c35eddc628c6e05301a4e96c9d215c1cebde7e096ecea52d6003e",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json": "sha256:dfe4759bc9ce74997363f7ac14f8a396222a57dad3b386137e1f9910375d5784",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_to_g9_descendant_source_inventory.json": "sha256:139df78c5920c656aa24bf228e1dbdf947cd4a88ef85d1e9fa071b3836a8889d",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json": "sha256:c9d66ddb8c0533ece06d7a26be36f49d4e46bf6d9c109eb2c1f68a87be320ae4",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json": "sha256:3f6d6a38ee9958a4e7bc854d726d7c5227effc757cf6924568de1ffd4371af6e",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:1a965f63d8ce811581780298cefba60cbbcfb6cd4895e31c1a6fdd52bd37634e",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:9ee0219cfc50e47f661bb2938f66d00c9b7f5e99767113bb7ae0f3457069ed4b",
+    "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:2d391409f13e9717bb2652dcfc347e628e4f80fb24d384197ecb975f9087837f",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:a8690e4ded672081b08fc1a9ad30c0928d36e5c89dd31fd01caa2340510038e9",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py": "sha256:6dd08f6a4f98733ea010dd5d7fd3f2abfeae13f6f1654a1432f17233b77cca99",
+    "scripts/pctdd_g7_source_binding_successor.py": "sha256:f1d849644364d12a50ec8c5c88d52f0e385ec58408a3ea5d1d0e919cce7b2f6c",
+    "scripts/pctdd_g8_provider_route_successor.py": "sha256:0a88d8d88ccf63214788ecc935937ddc419b9eb7045a417d6cf84ece69cf1345",
+    "scripts/pctdd_g9_descendant_source_successor.py": "sha256:7355003eeb3e470098d77d898c79e35d06837e057ea28a0291c4c0b5bf477ec7",
+    "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py": "sha256:c023bfd0d718a49ea42429d35b62400d43df58fc6d952c814c6af8cbcfdae40c",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py": "sha256:e4fd212012a7cd7e8a482f21895532f3ba0f2475f0672e66f2aa841c4c24bd8c",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:9d03cda621c3827affc379c52516693dd550a834a87565be104eacda2a844969",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:14e40340fc7f3cb7db9fd8d419af3c2af4eead997bd901dc06cd578c359f193b",
+    "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py": "sha256:1eac5c566cf6bf16a498e502442e7d2f01954c18044bbfa04a59f91138b311b0",
+    "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py": "sha256:af9f1c4b07c177a17bab7d7d49c4813f241e0498ec826450d896333c9df74c59",
+    "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py": "sha256:292d787ac9b99be370ab707547df2bd25cc6cf7ee9fd51208973482b453f066b",
+    "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py": "sha256:3c450c71ef1e135d648a934c06b558ef56cdca8c150a1327117ead8df3b7bccd",
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py": "sha256:e6d96cfcacefd1a303770e1f3d6d3550612aecfc53f61cd1af39abc5e9f386ee",
+    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py": "sha256:7a5dfc5c65fc455fd435186f07eaaf34444859b4be31cb74e640004d410da8ec"
+  },
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "environment": {
+    "capabilities": {
+      "coq": {
+        "admission_note": "ipfs_datasets_py lazy installer is the provisioning authority; managed Lean/CVC5/Coq executables are admitted when they run",
+        "available": true,
+        "classification": "ipfs_datasets_py_lazy_installer_available",
+        "error": "",
+        "install_path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/coqc",
+        "installer_discovered": true,
+        "name": "coq",
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "required": false,
+        "version": "The Rocq Prover, version 9.1.1"
+      },
+      "cvc5": {
+        "admission_note": "ipfs_datasets_py lazy installer is the provisioning authority; managed Lean/CVC5/Coq executables are admitted when they run",
+        "available": true,
+        "classification": "ipfs_datasets_py_lazy_installer_available",
+        "error": "",
+        "install_path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+        "installer_discovered": true,
+        "name": "cvc5",
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "required": false,
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+      },
+      "ducklake": {
+        "available": true,
+        "error": "",
+        "extension_directory": "/home/barberb/.duckdb/extensions",
+        "install_mode": "REPOSITORY",
+        "install_path": "/home/barberb/.duckdb/extensions/v1.5.5/linux_arm64/ducklake.duckdb_extension",
+        "install_sha256": "sha256:d0b57c8e261b89a1ae367c7224f0857cfde72ab6cf2609f188e0de9b897b1088",
+        "installed_from": "core",
+        "loaded": true,
+        "name": "ducklake",
+        "required_for_launch": false,
+        "version": "d8a1881e"
+      },
+      "lean": {
+        "admission_note": "ipfs_datasets_py lazy installer is the provisioning authority; managed Lean/CVC5/Coq executables are admitted when they run",
+        "available": true,
+        "classification": "ipfs_datasets_py_lazy_installer_available",
+        "error": "",
+        "install_path": "/home/barberb/.elan/bin/lean",
+        "installer_discovered": true,
+        "name": "lean",
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "required": false,
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      "quack": {
+        "available": true,
+        "error": "",
+        "extension_directory": "/home/barberb/.duckdb/extensions",
+        "install_mode": "REPOSITORY",
+        "install_path": "/home/barberb/.duckdb/extensions/v1.5.5/linux_arm64/quack.duckdb_extension",
+        "install_sha256": "sha256:41b2b9292bfb860c5ca8c5f818f9dd7a2c6bc24f9c750cffbc3169286fe59f08",
+        "installed_from": "core",
+        "loaded": true,
+        "name": "quack",
+        "required_for_launch": true,
+        "version": "c154811"
+      }
+    },
+    "duckdb_version": "1.5.5",
+    "pytest_version": "9.1.1",
+    "pytest_xdist_version": "3.8.0",
+    "python": {
+      "executable": "/usr/bin/python3.12",
+      "name": "python",
+      "sha256": "sha256:1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+      "version": "3.12.3"
+    }
+  },
+  "historical_g5_migration_inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json",
+  "historical_g6_source_migration_inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json",
+  "historical_g7_provider_route_migration_inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json",
+  "historical_generations": [
+    "pctdd-v1-g5",
+    "pctdd-v1-g6",
+    "pctdd-v1-g7",
+    "pctdd-v1-g8"
+  ],
+  "migration_inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_to_g9_descendant_source_inventory.json",
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g8",
+  "proof_backends": {
+    "direct_cpython": {
+      "classification": "research_only",
+      "production_admitted": false
+    },
+    "groth16_binary": {
+      "classification": "real_backend_binary_present_unqualified",
+      "production_admitted": false,
+      "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding",
+      "sha256": "sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15"
+    },
+    "ordinary_inner_loop": "signed receipts permitted by explicit policy; ZK asynchronous",
+    "provekit": {
+      "classification": "adapter_source_present",
+      "production_admitted": false
+    },
+    "schema": "pctdd/zkp-backend-inventory@1",
+    "simulated": {
+      "classification": "simulated",
+      "production_admitted": false
+    }
+  },
+  "resolved_guardrail_archive": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
+  "schema": "pctdd/dependency-source-seal@1",
+  "sources": [
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "0fccbf887b8ba25dff4adae7893e774a25895823",
+      "gitlink_matches_nested_head": true,
+      "head": "0fccbf887b8ba25dff4adae7893e774a25895823",
+      "name": "ipfs_accelerate_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "path": "external/ipfs_accelerate",
+      "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "3358f5b4bbb4d693d5f57b1a24fc057d01a2af5e"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
+      "gitlink_matches_nested_head": true,
+      "head": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
+      "name": "ipfs_datasets_py",
+      "origin": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy/external/ipfs_datasets",
+      "path": "external/ipfs_datasets",
+      "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "ef4aebe3b1d7e39429c7fb71fd8add4de5afa21a"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "gitlink_matches_nested_head": true,
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "name": "ipfs_kit_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "path": "external/ipfs_kit",
+      "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+    }
+  ],
+  "status": "sealed",
+  "store_generation": "pctdd-v1-g9"
+}

@@ -1,0 +1,24 @@
+{
+  "closed_reuse_classes": [
+    "pure",
+    "deterministic_snapshot",
+    "transactional",
+    "idempotent_external",
+    "effectful_replayable",
+    "effectful_nonreplayable",
+    "opaque"
+  ],
+  "default": "opaque",
+  "initial_review_candidates": [
+    "immutable scalar",
+    "frozen canonical record",
+    "path-independent temp directory root",
+    "transaction baseline",
+    "clock",
+    "RNG",
+    "service image/config/corpus",
+    "explicit environment projection"
+  ],
+  "schema": "pctdd/fixture-adapter-inventory@1",
+  "secret_rule": "commit provider identity/version/epoch/policy, never secret bytes"
+}

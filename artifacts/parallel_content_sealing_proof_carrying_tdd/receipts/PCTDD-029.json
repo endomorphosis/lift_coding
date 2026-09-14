@@ -1,0 +1,92 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-029.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/pre_setup_item_reuse.py",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py"
+  ],
+  "claim": "Worker-authored narrowly gated pre-setup whole-item reuse into pytest. Whole-item reuse is limited to explicitly pure or replay-safe teardown-compatible populations. Typed unavailable fixture-proof-aware xdist, aggregate selected-test ZK, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-029, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; current-root publication; task completion; production ZK; opaque whole-item reuse; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-029@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-027",
+    "PCTDD-032"
+  ],
+  "limitations": {
+    "aggregate_selected_test_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "aggregate_selected_test_zk_missing",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "fixture_proof_aware_xdist": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "fixture_proof_aware_xdist_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "reuse": {
+    "certificate_interface": "AdmittedItemCertificate@1",
+    "eligible_population_kinds": [
+      "explicitly_pure",
+      "replay_safe_teardown_compatible"
+    ],
+    "establishes": "whole-item reuse is limited to explicitly pure or replay-safe teardown-compatible populations",
+    "interface": "PreSetupItemReuse@1",
+    "may_authorize_skip": false,
+    "normal_execution_fallback": true,
+    "population_interface": "PreSetupReusePopulation@1",
+    "predecessor_assembly_interface": "SetupBoundExecutionKeyAssembly@1",
+    "predecessor_attestation_interface": "SignedRunnerAttestationBinding@1",
+    "production_admitted": false,
+    "reused_phases": [
+      "setup",
+      "call",
+      "teardown"
+    ],
+    "schema_authority": "ipfs_accelerate_py.testing.proof_reuse.pre_setup_item_reuse"
+  },
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-029",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-029@1",
+  "worker_authored_test_is_sufficient_alone": false
+}

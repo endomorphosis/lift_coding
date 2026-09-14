@@ -1,0 +1,106 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-021.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/fixture_definition_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py"
+  ],
+  "claim": "Worker-authored contracts that fixture closure schemas bind transitive definitions, conftests, hooks, policies and finalizers. Typed unavailable extraction, TestExecutionKeyV2, pre-call fixture-instance key, instance-time finalizer, composite phase receipt, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-021, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; TestExecutionKeyV2; fixture-body execution; pre-call fixture-instance authority; composite phase receipts; current-root publication; task completion; production ZK; adapter execution; extraction",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-021@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "authoritative_at": "collection",
+    "executed_fixture_bodies": false,
+    "fixture_definition": "FixtureDefinition@1",
+    "fixture_definition_closure": "FixtureDefinitionClosure@1",
+    "may_authorize_skip": false,
+    "production_admitted": false,
+    "required_member_kinds": [
+      "fixture_definition",
+      "conftest",
+      "hook",
+      "policy",
+      "finalizer"
+    ]
+  },
+  "dependency_receipts": [
+    "PCTDD-002"
+  ],
+  "limitations": {
+    "composite_phase_receipt": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "composite_phase_receipt_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "fixture_definition_extraction": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "fixture_definition_extraction_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "instance_time_finalizer": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "instance_time_finalizer_not_definition_identity",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "pre_call_fixture_instance_key": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "fixture_instance_authoritative_only_after_current_setup",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "test_execution_key_v2": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "test_execution_key_v2_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-021",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-021@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
