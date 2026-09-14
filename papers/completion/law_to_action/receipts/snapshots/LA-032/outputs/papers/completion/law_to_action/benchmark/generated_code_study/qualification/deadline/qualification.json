@@ -1,0 +1,30 @@
+{
+ "cgroup_parent_writable": false,
+ "covers": ["template","tokenization","inference","generated_program_execution","cleanup"],
+ "descendant_cpu_source": "resource.getrusage RUSAGE_CHILDREN plus explicit unknowns when cgroup peak is unavailable",
+ "docker_available": false,
+ "maximum_input_tokens": 2048,
+ "maximum_model_calls": 8,
+ "maximum_output_tokens": 1024,
+ "memory_peak_cgroup": "unknown",
+ "overrun": {
+  "cleanup_seconds": 0.01007766998372972,
+  "configured_probe_seconds": 1.2,
+  "failed_stage": "cleanup",
+  "unknown_costs": false,
+  "wall_to_stop": 2.0406717909500003
+ },
+ "paid_provider_budget": 0,
+ "parent_accounting_mandatory": true,
+ "probe_wall_seconds": 1.2,
+ "schema": "la032-complete-attempt-deadline-qualification/v1",
+ "scientific_attempt_wall_seconds": 120,
+ "stages": [
+  {"stage":"template","status":"ok","wall":0.010082244989462197},
+  {"stage":"tokenization","status":"ok","wall":0.010069862008094788},
+  {"stage":"inference","status":"ok","wall":0.010328408912755549},
+  {"stage":"generated_program_execution","status":"ok","wall":2.0000767399324104},
+  {"remaining":-0.8305885210866109,"stage":"cleanup","status":"deadline_before_stage"}
+ ],
+ "status": "PASS"
+}

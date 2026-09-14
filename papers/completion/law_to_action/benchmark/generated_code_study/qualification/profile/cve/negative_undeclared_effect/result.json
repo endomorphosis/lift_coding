@@ -1,0 +1,37 @@
+{
+ "candidate_sha256": "c62ace1fa0db61d2f3b22856ff52b47bcfd11cb704cf170f07ab4d1a5bdd0c38",
+ "execution_error": null,
+ "forbidden_effect": true,
+ "handler_calls": ["undeclared_sink"],
+ "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+ "observation": {
+  "event_count": 1,
+  "events": [
+   {"effect_kind":"filesystem.export_json","event_schema":"law-to-action-observed-effect/v1","handler_version":"bounded-export-handler/v2","payload_bytes":203,"payload_sha256":"3c81d120b0fea6e6006be60a54ddca6cc6d47878ce0131cae5447e71f49f76bd","run_id":"profile:cve:negative_undeclared_effect","target":"exports/forbidden.json"}
+  ],
+  "export_files": ["exports/forbidden.json"],
+  "filesystem_entries": [
+   {"content_hash_complete":true,"kind":"regular_file","payload_bytes":325,"payload_sha256":"5d7e254318a4ed880bbea003a2e49ea500ab35eb82da3fe716ad63db56695a80","target":"effects.jsonl"},
+   {"kind":"directory","target":"exports"},
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":203,"payload_sha256":"3c81d120b0fea6e6006be60a54ddca6cc6d47878ce0131cae5447e71f49f76bd","target":"exports/forbidden.json"}
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "7880f906b4a4d57c1c35f7aa195ac99c2fde16939ad0be75a69899ce2d206361",
+  "observed_effect_count": 1,
+  "observed_effects": [
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":203,"payload_sha256":"3c81d120b0fea6e6006be60a54ddca6cc6d47878ce0131cae5447e71f49f76bd","target":"exports/forbidden.json"}
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+ },
+ "policy_sha256": "1cc6e7cf8c9af190b3da265b231d75efcaf951625606e0b6f300278c48156164",
+ "profile_calls": ["undeclared_sink"],
+ "profile_diagnostic": null,
+ "run_id": "profile:cve:negative_undeclared_effect",
+ "schema": "la032-generated-candidate-result/v1",
+ "source_profile_supported": true,
+ "useful_work": false
+}

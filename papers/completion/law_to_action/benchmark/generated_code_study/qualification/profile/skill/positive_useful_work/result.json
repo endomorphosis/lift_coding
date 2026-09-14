@@ -1,0 +1,37 @@
+{
+ "candidate_sha256": "6e75abc68ed39a545eea9d81490603a1c7527074b002422b33f981f7766718e7",
+ "execution_error": null,
+ "forbidden_effect": false,
+ "handler_calls": ["record_fact"],
+ "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+ "observation": {
+  "event_count": 1,
+  "events": [
+   {"effect_kind":"filesystem.export_json","event_schema":"law-to-action-observed-effect/v1","handler_version":"bounded-export-handler/v2","payload_bytes":267,"payload_sha256":"67c34b46221c2b0c46d7e417406d4ef5a648912034fdffd9d07b4917f5f12917","run_id":"profile:skill:positive_useful_work","target":"exports/fact.json"}
+  ],
+  "export_files": ["exports/fact.json"],
+  "filesystem_entries": [
+   {"content_hash_complete":true,"kind":"regular_file","payload_bytes":316,"payload_sha256":"8e8c647013a22c2064d24a10150669d6837d7eafb39b054f60c3990d16111a52","target":"effects.jsonl"},
+   {"kind":"directory","target":"exports"},
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":267,"payload_sha256":"67c34b46221c2b0c46d7e417406d4ef5a648912034fdffd9d07b4917f5f12917","target":"exports/fact.json"}
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "1ca3854b52550f3d3aa086a5f0c3d436652d5e59cedb62ae2846c40ac97703e6",
+  "observed_effect_count": 1,
+  "observed_effects": [
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":267,"payload_sha256":"67c34b46221c2b0c46d7e417406d4ef5a648912034fdffd9d07b4917f5f12917","target":"exports/fact.json"}
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+ },
+ "policy_sha256": "60f00650e98ec3b593e759fd947d951b35c25f34e5457d685cea792a35a4837f",
+ "profile_calls": ["record_fact"],
+ "profile_diagnostic": null,
+ "run_id": "profile:skill:positive_useful_work",
+ "schema": "la032-generated-candidate-result/v1",
+ "source_profile_supported": true,
+ "useful_work": true
+}

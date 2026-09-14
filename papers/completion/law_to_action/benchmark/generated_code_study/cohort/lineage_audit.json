@@ -1,0 +1,45 @@
+{
+ "cross_population_repository_overlap": [],
+ "cve": {
+  "fork_audit": "Repository identity plus same-name owner collisions, shared commits, exact/normalized hashes and shingle nearest-neighbor. GitHub parent/fork graph was not retrieved; identity-only selection is insufficient and was not used.",
+  "name_collisions_excluded": [
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/orchardcms/orchardcore"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/orchardcms/orchardcore"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/orchardcms/orchardcore"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/orchardcms/orchardcore"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/orchardcms/orchardcore"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/xwiki/xwiki-rendering"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/xwiki/xwiki-rendering"},
+   {"reason":"same-name different owner treated as potential fork/clone","repository":"github.com/labocnil/cookieviz"}
+  ],
+  "overlap_with_skill_checked_later": true,
+  "rows_read": 4329,
+  "selected": 12,
+  "skipped": {
+   "insufficient_pair": 1,
+   "old_family_repository": 25,
+   "potential_fork_name_collision": 8
+  }
+ },
+ "hidden_oracles_in_retrieval": false,
+ "legal": {
+  "distinct_titles": 6,
+  "excluded_uscode_sections": ["15-USC-6502","17-USC-1201","18-USC-1030","42-USC-1320d-6","47-USC-222","5-USC-552a"],
+  "families": 6
+ },
+ "nearest_neighbor_threshold": 0.8,
+ "schema": "la032-lineage-audit/v1",
+ "sibling_final_labels_in_retrieval": false,
+ "skill": {
+  "fork_audit": "Cross-population repository exclusion, same-name fork/clone filter, primary-source and normalized-body identity, shingle nearest-neighbor. Canonical repository spelling was not the sole audit.",
+  "generated_skillcenter_procedures_counted_as_human_annotations": false,
+  "rows_read": 1182,
+  "selected": 12,
+  "selected_with_llm_metadata": 12,
+  "skipped": {
+   "old_or_cve_repository": 12
+  }
+ },
+ "status": "PASS",
+ "target_patches_in_retrieval": false
+}

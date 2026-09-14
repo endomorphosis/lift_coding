@@ -1,0 +1,35 @@
+{
+ "base_url": "http://127.0.0.1:0",
+ "chat_template_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/chat_template.jinja",
+ "chat_template_sha256": "16ba47d6df09095f79fdcd791e320fc6435f9dd829e8ca2f346d05afbd687d02",
+ "decoding": {
+  "argmax": true,
+  "max_tokens": 1024,
+  "seed_applied": true,
+  "temperature": 0
+ },
+ "deployment_sha256": "11d0a053da4eb93f61eca5d41e7afe4e6450031db223e898587ee5a5ae1955b0",
+ "indefinitely_running_service_required": false,
+ "max_input_tokens": 2048,
+ "max_output_tokens": 1024,
+ "model_id": "la032-bounded-dev-transformer/v1",
+ "model_revision": "40ddbbf95520d3f8cfee079cec6f6f1daac95ccc6842c4069a76e90b8970a678",
+ "paid_provider_budget": 0,
+ "prompt_profile_sha256": "baf8a70ed0436d92667f84f2615e0dbd1ea315feb003c0fe83cfcd5bd11e8def",
+ "qualification": {
+  "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+  "sha256": "77ee09e33d160962050293d0c499446187a3de5dd5d9e70bcdb5698a15d2fa76"
+ },
+ "reuse_warm_model_during_active_inference": true,
+ "schema": "la-qualified-local-model/v1",
+ "seed_policy": "request seed is applied to torch.manual_seed; provider determinism is recorded even if hardware differs",
+ "startup_readiness_seconds": 360,
+ "systemd_required": false,
+ "temperature": 0,
+ "tokenizer_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/tokenizer.json",
+ "tokenizer_revision": "byte-tokenizer-v1",
+ "tokenizer_sha256": "3f7c8f9cf31c52ea671220dfafecaf12e4e3fd3599f490480355ff22ef32d2ec",
+ "total_service_wall_seconds": 10000,
+ "weights_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/weights.pt",
+ "weights_sha256": "40ddbbf95520d3f8cfee079cec6f6f1daac95ccc6842c4069a76e90b8970a678"
+}

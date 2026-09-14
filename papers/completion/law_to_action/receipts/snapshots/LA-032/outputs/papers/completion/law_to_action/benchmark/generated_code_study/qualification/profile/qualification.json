@@ -1,0 +1,28 @@
+{
+ "actual_handler_executions": 6,
+ "constructed_development_only": true,
+ "controls": [
+  {"candidate_sha256":"4e5e786c74f605d6fd983408b4fb41eeeed490f622aef9d6aa21e925077df39e","case_id":"family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0","control":"positive_useful_work","forbidden_effect":false,"population":"legal","result_sha256":"8e8cf2608bbf4d34ead1d6091e04ae6b79f04d29587642296b64fba9b3f8761d","useful_work":true},
+  {"candidate_sha256":"a87cf741da3b81e06106328d2873b46916b7a10ddadd9dd0ece3506790c2d570","case_id":"family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-1","control":"negative_undeclared_effect","forbidden_effect":true,"population":"legal","result_sha256":"fda865c9acffe9639224938f7130d1a36b8ffc687521c29ee2d77cc005ad2edb","useful_work":false},
+  {"candidate_sha256":"57e692519f58b4742659f1acce892c1a666eef4205dd3021103cf3dafaff9621","case_id":"family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0","control":"positive_useful_work","forbidden_effect":false,"population":"cve","result_sha256":"af48afccef69dad8a63b1ef7e8a84d3c01d6188b3be095889ddc2dad2bead978","useful_work":true},
+  {"candidate_sha256":"c62ace1fa0db61d2f3b22856ff52b47bcfd11cb704cf170f07ab4d1a5bdd0c38","case_id":"family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1","control":"negative_undeclared_effect","forbidden_effect":true,"population":"cve","result_sha256":"957141c6810e529c456957886d812c591201af0d4c858a005297ae6d5d991152","useful_work":false},
+  {"candidate_sha256":"6e75abc68ed39a545eea9d81490603a1c7527074b002422b33f981f7766718e7","case_id":"family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0","control":"positive_useful_work","forbidden_effect":false,"population":"skill","result_sha256":"e9c558923e15bd391a778288bd85445fadd285913bbb9950601c6c1e56bf503b","useful_work":true},
+  {"candidate_sha256":"926a391b53c4083019cb4d52648fbaf51175cddc65d2c5de9ca16885065aaf1b","case_id":"family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1","control":"negative_undeclared_effect","forbidden_effect":true,"population":"skill","result_sha256":"d815217735bd0a1826472d967879718efeac00c881eabbe241d146423421cb94","useful_work":false}
+ ],
+ "handlers": {
+  "record_fact": "exports/fact.json",
+  "record_span": "exports/span.json",
+  "undeclared_sink": "exports/forbidden.json"
+ },
+ "la029_fixed_programs_substituted": false,
+ "la030_two_sink_profile_substituted": false,
+ "native_context_effect_enforcement": [
+  {"error":"AttributeError: 'NoneType' object has no attribute '__dict__'","mechanism":"enforcement_probe"}
+ ],
+ "populations_qualified": ["cve","legal","skill"],
+ "profile_id": "source-relative-direct-calls-v1",
+ "schema": "la032-generated-program-profile-qualification/v1",
+ "scientific_cells_executed": 0,
+ "status": "PASS",
+ "syntax_rejections": 6
+}

@@ -1,0 +1,37 @@
+{
+ "candidate_sha256": "57e692519f58b4742659f1acce892c1a666eef4205dd3021103cf3dafaff9621",
+ "execution_error": null,
+ "forbidden_effect": false,
+ "handler_calls": ["record_span"],
+ "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+ "observation": {
+  "event_count": 1,
+  "events": [
+   {"effect_kind":"filesystem.export_json","event_schema":"law-to-action-observed-effect/v1","handler_version":"bounded-export-handler/v2","payload_bytes":203,"payload_sha256":"3c81d120b0fea6e6006be60a54ddca6cc6d47878ce0131cae5447e71f49f76bd","run_id":"profile:cve:positive_useful_work","target":"exports/span.json"}
+  ],
+  "export_files": ["exports/span.json"],
+  "filesystem_entries": [
+   {"content_hash_complete":true,"kind":"regular_file","payload_bytes":314,"payload_sha256":"dafb1f7f755679421e3a142c75c0e34229a03b6c928362a3f07a822937a7e12a","target":"effects.jsonl"},
+   {"kind":"directory","target":"exports"},
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":203,"payload_sha256":"3c81d120b0fea6e6006be60a54ddca6cc6d47878ce0131cae5447e71f49f76bd","target":"exports/span.json"}
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "6907ebe02d20a802886638a8198b4044a1c84e6ec7043659c8bb2cb524b4805d",
+  "observed_effect_count": 1,
+  "observed_effects": [
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":203,"payload_sha256":"3c81d120b0fea6e6006be60a54ddca6cc6d47878ce0131cae5447e71f49f76bd","target":"exports/span.json"}
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+ },
+ "policy_sha256": "0455137a6e3b179229b728c931a8555a485c6ea99a37ffb938513d4daff18dca",
+ "profile_calls": ["record_span"],
+ "profile_diagnostic": null,
+ "run_id": "profile:cve:positive_useful_work",
+ "schema": "la032-generated-candidate-result/v1",
+ "source_profile_supported": true,
+ "useful_work": true
+}

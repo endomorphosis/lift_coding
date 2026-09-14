@@ -1,0 +1,37 @@
+{
+ "candidate_sha256": "926a391b53c4083019cb4d52648fbaf51175cddc65d2c5de9ca16885065aaf1b",
+ "execution_error": null,
+ "forbidden_effect": true,
+ "handler_calls": ["undeclared_sink"],
+ "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+ "observation": {
+  "event_count": 1,
+  "events": [
+   {"effect_kind":"filesystem.export_json","event_schema":"law-to-action-observed-effect/v1","handler_version":"bounded-export-handler/v2","payload_bytes":267,"payload_sha256":"67c34b46221c2b0c46d7e417406d4ef5a648912034fdffd9d07b4917f5f12917","run_id":"profile:skill:negative_undeclared_effect","target":"exports/forbidden.json"}
+  ],
+  "export_files": ["exports/forbidden.json"],
+  "filesystem_entries": [
+   {"content_hash_complete":true,"kind":"regular_file","payload_bytes":327,"payload_sha256":"3c9d195fc36415db98e8684f39d389b2157d45b33099f570a6a7d3b65449a866","target":"effects.jsonl"},
+   {"kind":"directory","target":"exports"},
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":267,"payload_sha256":"67c34b46221c2b0c46d7e417406d4ef5a648912034fdffd9d07b4917f5f12917","target":"exports/forbidden.json"}
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "b5226d133f706b1ee56c2c3e1b75043d18172150407db7b9e8040bf37e44e095",
+  "observed_effect_count": 1,
+  "observed_effects": [
+   {"content_hash_complete":true,"effect_kind":"filesystem.export_json","kind":"regular_file","payload_bytes":267,"payload_sha256":"67c34b46221c2b0c46d7e417406d4ef5a648912034fdffd9d07b4917f5f12917","target":"exports/forbidden.json"}
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+ },
+ "policy_sha256": "b257f922c4b4d0690bf1832440b0a9d4ea5f590673d993308f3076ba13a74186",
+ "profile_calls": ["undeclared_sink"],
+ "profile_diagnostic": null,
+ "run_id": "profile:skill:negative_undeclared_effect",
+ "schema": "la032-generated-candidate-result/v1",
+ "source_profile_supported": true,
+ "useful_work": false
+}

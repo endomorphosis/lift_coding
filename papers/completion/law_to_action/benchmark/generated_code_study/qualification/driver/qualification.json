@@ -1,0 +1,73 @@
+{
+ "actual_probes": ["reserve_cell","reserve_model_call","interrupt","resume","capability_replay_refusal","refund_refusal","stale_owner","sealed_final_refusal","cleanup_fault_unknown_effect"],
+ "call": {
+  "attempt_id": "104729:A2:family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "call_id": "104729:A2:family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0:call:0",
+  "completion_tokens": 3,
+  "consumed": true,
+  "consumed_before_request": true,
+  "input_count": 17,
+  "owner_id": "owner:la032-qualification",
+  "prompt_tokens": 17,
+  "refunded": false,
+  "reserved_at": "2026-09-14T19:49:47.495177Z",
+  "status": "completed",
+  "usage_known": true
+ },
+ "configuration_flag_only": false,
+ "exclusive_ownership": true,
+ "final_cells_not_dispatched": true,
+ "interruption_resume": true,
+ "one_time_capability_consumption": true,
+ "pre_dispatch_reservations": true,
+ "refunded_calls_refused": true,
+ "reservation": {
+  "arm": "A2",
+  "attempt_id": "104729:A2:family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "case_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "consumed": false,
+  "family_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+  "identity": {
+   "model_profile_sha256": null,
+   "owner_id": "owner:la032-qualification",
+   "runtime_sha256": null,
+   "source_freeze_sha256": null,
+   "study_sha256": "833ece33916a313861621544dcc16b3444475c332b2dbee7d8f603b4658b8980"
+  },
+  "owner_id": "owner:la032-qualification",
+  "refunded": false,
+  "reserved_at": "2026-09-14T19:49:47.494572Z",
+  "seed": 104729,
+  "split": "development",
+  "terminal": null
+ },
+ "resumed": {
+  "arm": "A2",
+  "attempt_id": "104729:A2:family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "case_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "consumed": false,
+  "family_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+  "identity": {
+   "model_profile_sha256": null,
+   "owner_id": "owner:la032-qualification",
+   "runtime_sha256": null,
+   "source_freeze_sha256": null,
+   "study_sha256": "833ece33916a313861621544dcc16b3444475c332b2dbee7d8f603b4658b8980"
+  },
+  "interrupted_at": "2026-09-14T19:49:47.495415Z",
+  "owner_id": "owner:la032-qualification",
+  "refunded": false,
+  "reserved_at": "2026-09-14T19:49:47.494572Z",
+  "resume_at": "2026-09-14T19:49:47.496012Z",
+  "resumed": true,
+  "seed": 104729,
+  "split": "development",
+  "terminal": "interrupted"
+ },
+ "schema": "la032-driver-qualification/v1",
+ "scientific_cells_executed": 0,
+ "silent_replay_refused": true,
+ "stale_owner_reconciliation": true,
+ "status": "PASS",
+ "unknown_effect_not_treated_as_absence": true
+}

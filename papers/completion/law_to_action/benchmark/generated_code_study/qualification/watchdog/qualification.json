@@ -1,0 +1,28 @@
+{
+ "benign_disappearance": {
+  "count": 6,
+  "parent_empty": true,
+  "parent_inode_stable": true,
+  "revalidated": true
+ },
+ "broad_oserror_suppressed": false,
+ "cgroup_sysfs_writable": false,
+ "diagnostic_tree": "synthetic cgroup files; kernel parent creation is read-only in this environment",
+ "docker_available": false,
+ "historical_v2_errno_retained": false,
+ "historical_v2_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_development/development_qualification_v2/full_repair/iteration-01/cell/host/resources.json",
+ "historical_v2_path_retained": false,
+ "historical_v2_reason": "resource_observation_OSError",
+ "historical_v2_receipt_upgraded": false,
+ "injected_raw_oserror": {
+  "errno_observed": [2],
+  "leaf_identity_present": true,
+  "operations": ["read:leaf:cpu.stat"],
+  "paths": ["/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf/cpu.stat"],
+  "reason": "resource_observation_OSError"
+ },
+ "parent_accounting_mandatory": true,
+ "schema": "la032-watchdog-qualification/v1",
+ "status": "PASS",
+ "whole_group_exit_mandatory": true
+}

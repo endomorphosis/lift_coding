@@ -1,0 +1,17 @@
+{
+ "attempt_wall_seconds": 120,
+ "cgroup_sysfs_writable": false,
+ "docker_available": false,
+ "la030_two_sink_substituted": false,
+ "max_input_tokens": 2048,
+ "max_model_calls": 8,
+ "max_output_tokens": 1024,
+ "native_subprocess_rlimits": true,
+ "paid_provider_budget": 0,
+ "profile_id": "source-relative-direct-calls-v1",
+ "prompt_profile_sha256": "baf8a70ed0436d92667f84f2615e0dbd1ea315feb003c0fe83cfcd5bd11e8def",
+ "python": "/usr/bin/python3.12",
+ "schema": "la032-scientific-runtime/v1",
+ "scientific_cells_executed": 0,
+ "watchdog": "diagnostic implementation retains operation/path/errno and identities"
+}

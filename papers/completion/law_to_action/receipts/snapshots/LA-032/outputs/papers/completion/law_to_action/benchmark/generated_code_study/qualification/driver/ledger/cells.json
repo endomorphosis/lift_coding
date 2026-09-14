@@ -1,0 +1,28 @@
+{
+ "104729:A2:family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0": {
+  "arm": "A2",
+  "attempt_id": "104729:A2:family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "case_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+  "completed_at": "2026-09-14T19:49:47.497333Z",
+  "consumed": true,
+  "family_id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+  "identity": {
+   "model_profile_sha256": null,
+   "owner_id": "owner:la032-qualification",
+   "runtime_sha256": null,
+   "source_freeze_sha256": null,
+   "study_sha256": "833ece33916a313861621544dcc16b3444475c332b2dbee7d8f603b4658b8980"
+  },
+  "interrupted_at": "2026-09-14T19:49:47.495415Z",
+  "owner_id": "owner:la032-qualification",
+  "refunded": false,
+  "reserved_at": "2026-09-14T19:49:47.494572Z",
+  "resume_at": "2026-09-14T19:49:47.496012Z",
+  "resumed": true,
+  "seed": 104729,
+  "split": "development",
+  "terminal": "qualification_probe",
+  "unknown_effect": false,
+  "unknown_usage": false
+ }
+}

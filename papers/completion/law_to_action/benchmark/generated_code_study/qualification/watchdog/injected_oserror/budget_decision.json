@@ -1,0 +1,28 @@
+{
+ "at_monotonic": 825045.718740113,
+ "benign_revalidation_failed": "RuntimeError: parent not empty after claimed leaf disappearance",
+ "diagnostic": {
+  "at": "2026-09-14T19:48:59.268500Z",
+  "at_monotonic": 825045.718040103,
+  "broad_oserror_suppressed": false,
+  "errno": 2,
+  "error_type": "FileNotFoundError",
+  "filename": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf/cpu.stat",
+  "historical_v2_receipt_upgraded": false,
+  "leaf_identity": null,
+  "operation": "read:leaf:cpu.stat",
+  "parent_identity": {
+   "cgroup.events": "populated 1\nfrozen 0\n",
+   "cpu_usage_seconds": 0.001,
+   "inode": 72255548,
+   "memory.peak": "8192\n",
+   "observed_monotonic": 825045.717951205,
+   "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent",
+   "pids.current": "1\n"
+  },
+  "parent_inode_retained": 72255548,
+  "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789413835/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf/cpu.stat",
+  "strerror": "No such file or directory"
+ },
+ "reason": "resource_observation_OSError"
+}

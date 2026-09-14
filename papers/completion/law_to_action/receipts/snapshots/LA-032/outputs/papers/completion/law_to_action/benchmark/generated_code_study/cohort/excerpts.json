@@ -1,0 +1,230 @@
+{
+ "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0": {
+  "cve_id": "CVE-2021-4431",
+  "fixed_sha256": "ff90c695a0d1d5c6665849bc73f9f8f67cae2c8d97ef1cec4a95c18913e9c863",
+  "quote": "echo \"Product Info: {$pInfo}<hr>\"; echo \"Database Names: {$pInfo}<hr>\"; echo \"Layout Names: {$pInfo}<hr>\"; echo \"Script Names: {$pInfo}<hr>\"; echo \"Layout Metadata: {$pInfo}<hr>\"; echo \"Layout Metadata (Old): {$pInfo}<hr>\"; echo \"HTTP Statu",
+  "quote_sha256": "907c49688b43fa264a27d29cbeb3cf2fac707ff673bd8267824c6ba954c241f8",
+  "repository": "github.com/msyk/fmdataapi",
+  "vulnerable_sha256": "49c8694c5143ed0b9a7c26aa8131f9a32812863625ec928bc3fba9ba6e98f526"
+ },
+ "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5": {
+  "normalized_source_sha256": "cb3e833c40364a994db63cc39392aba9a5164659371ce4f223da6798e84abd41",
+  "quote": "Page 453 TITLE 31—MONEY AND FINANCE § 5318 1 See References in Text note below. section 5316 of this title has not been filed or contains a material omission or misstatement.’’ 1984—Subsecs. (b), (c). Pub. L. 98–473, § 901, added sub- sec. (b) and redesignated former subsec. (b) ",
+  "quote_sha256": "6d7c918d82d81c898f958211810f8ac89f8a422fb371b9a3191c5c855518ef22",
+  "section": "31-USC-5318"
+ },
+ "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a": {
+  "cve_id": "CVE-2022-0159",
+  "fixed_sha256": "9bd7a6d100d802191b6e9bd4fc5ed6c7550f6b2257a7a81c2779976bd737a665",
+  "quote": "dashboardCreatable.Add(new SelectListItem(new LocalizedString(ctd.DisplayName, ctd.DisplayName).Value, ctd.Name)); <a class=\"dropdown-item add-list-widget btn-sm\" href=\"@Url.RouteUrl(new { area = \"OrchardCore.Contents\", controller = \"Admin\"",
+  "quote_sha256": "c8ae2c6ceb52d036f7c506b99adcd03dae2f5493dbf08ae76a2df186c99b276c",
+  "repository": "github.com/orchardcms/orchardcore",
+  "vulnerable_sha256": "816b3c5367c451059a1073396195a80ad969cfea993584e49cb89198de91e24f"
+ },
+ "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045": {
+  "cve_id": "CVE-2024-29900",
+  "fixed_sha256": "d04ec72acc7e2818dbf7109f035ceb9ca392e38e8da465f60a448b78ad7e4b21",
+  "quote": "type: 'Integrity', id: 'ElectronAsar', bin: Buffer.from(JSON.stringify(options.asarIntegrity)).buffer,",
+  "quote_sha256": "daa23d950eb3996ae4d34f01ac1f58600d38947d3f6b42480a053c4e68846434",
+  "repository": "github.com/electron/packager",
+  "vulnerable_sha256": "fd0a19ab96f6f0e6687c699c77b28dbffa83595450e053f6ae76a7cb17dd9cf7"
+ },
+ "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225": {
+  "cve_id": "CVE-2014-0177",
+  "fixed_sha256": "fd4990248d9366541389d5e697042dc4d54c283a28c1afc7974a2e4b81dbba69",
+  "quote": "patch_file = File.join(tmp_dir, patch_name) def tmp_dir ENV['TMPDIR'] || ENV['TEMP'] || '/tmp' end",
+  "quote_sha256": "102b0d9b3a38409f257d3e8b80e5e4058e63a7a5c24d11c67d7759db5770929e",
+  "repository": "github.com/github/hub",
+  "vulnerable_sha256": "76767635ad7cb199959ab9507bde933fd0a442cbafb5d017ff70e1e831b44196"
+ },
+ "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e": {
+  "normalized_source_sha256": "e391bfb5e997cdedaa21f86627e1a2d94e20945b2bc9955cfa1d70885a0e4bdc",
+  "quote": "Page 6 TITLE 13—CENSUS § 9 thereof) referred to in section 191(a) of this title, State or local agencies, or other public and pri- vate persons and agencies, upon payment of the actual or estimated cost of such work. In the case of nonprofit agencies or organizations, the Secreta",
+  "quote_sha256": "50876ae7d40128f32049d307f86dc023822c217bc566d5d8348ed86322404661",
+  "section": "13-USC-9"
+ },
+ "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2": {
+  "body_sha256": "32eb6b9058be737c41f7a3975aec1bf97983c591a03e1ecf61a55b17eed91d39",
+  "has_llm_model_metadata": true,
+  "quote": "# Add Rodauth authentication to a Rails app (JSON/JWT/cookie sessions) ## Background Rodauth-Rails integrates the Rodauth authentication framework into Ruby on Rails. It provides standardized JSON API support for authentication features (in",
+  "quote_sha256": "9ba879cfea84ddbd0ad6b38587cf55303ce846558672de0524da2428a283f8a7",
+  "repository": "github.com/janko/rodauth-rails",
+  "skill_id": "0453ec8abf09f532dc8cc4a8091b6067384f1dd42ebb0501daeb3472f3cf8120"
+ },
+ "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6": {
+  "body_sha256": "db8ef6f3650d4bce3b6a8e59dcea2e315b0ab5e708093ed8c17c1cd078abd0b7",
+  "has_llm_model_metadata": true,
+  "quote": "# Integrate Keycloak (OIDC/OAuth2) in .NET Core Using NETCore.Keycloak ## Background NETCore.Keycloak is a .NET Core client library that integrates with Keycloak via its REST APIs, with support for OpenID Connect and OAuth 2.0. It aims to p",
+  "quote_sha256": "a7ecf1d52fe2743d3d73224df8265f73903826551490e0aa3e2cd4836906e3ea",
+  "repository": "github.com/black-cockpit/netcore.keycloak",
+  "skill_id": "041e498df593007865add35b2b6695b877c0c78891d5547c6a3601251cf236d6"
+ },
+ "family:6a972ad6c661574c870b12a2935ebdfe8ab23d39d56e4bc560ab5c77a8dac877": {
+  "normalized_source_sha256": "d68f4531555879c099f94d573fdd5a7ca1ede069f190df6304b45e7a2517198f",
+  "quote": "Page 425 TITLE 10—ARMED FORCES § 394 to subpar. (D) by Pub. L. 116–283, see 2021 Amendment note above. Pub. L. 116–92, § 902(8)(B), added subpar. (C). Former subpar. (C) redesignated (D). Subsec. (b)(2)(D) to (F). Pub. L. 116–92, § 902(8)(C), re- designated subpars. (C) to (E) as",
+  "quote_sha256": "3bca953594f7987776d138f73e8d6cfa5eba25a44dae60ea7f9a149b0418e7d8",
+  "section": "10-USC-394"
+ },
+ "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700": {
+  "cve_id": "CVE-2023-28444",
+  "fixed_sha256": "6dd297127a40aa4660323adc20191a46cae689286c96d161132195eb84d37c74",
+  "quote": "either `app.module.ts`, `app.components.ts` or `main.ts` depending on availability. The ngssc builder will also now search all files for environment variable usages instead of just the defined environment file. Due to this, the `ngsscEnviro",
+  "quote_sha256": "f924c0e31b63d4b7324f550c9427dda67a48686fec1973142141e651147c0472",
+  "repository": "github.com/kyubisation/angular-server-side-configuration",
+  "vulnerable_sha256": "69cff2a699d03e9f35893d2f07866d1851edbd2ee08ca84bfbfda1fdaf2f6320"
+ },
+ "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6": {
+  "normalized_source_sha256": "2c255d7f5ce4358e5a92e758a195cbbdb2defc626bf8219af60e7a97f3032b28",
+  "quote": "Page 190 TITLE 44—PUBLIC PRINTING AND DOCUMENTS § 3554 ‘‘(ii) include the assessment described in clause (i) in the report required under section 3553(c) of title 44, United States Code. ‘‘(B) SECRETARY OF HOMELAND SECURITY.—During the first 2 years beginning after the date of en",
+  "quote_sha256": "8d4fdf456fcaf41564a06a4e4ea60981705ef0280dd4de8c446593b8225eb0b4",
+  "section": "44-USC-3554"
+ },
+ "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3": {
+  "cve_id": "CVE-2024-3651",
+  "fixed_sha256": "e4f04f6ed90e7a601293b75e7ab02df1e7db65afa3483ad011564cbf5a1d22d7",
+  "quote": "Copyright (c) 2013-2023, Kim Davies and contributors. __version__ = '3.6'",
+  "quote_sha256": "03d9a7e8176213c45d98d41a5e3b549bac98800c962bb93399e024edd4732fd3",
+  "repository": "github.com/kjd/idna",
+  "vulnerable_sha256": "e6236bb316a6c0732254c722ca3205c925be383e487ca0ef4a405cf81896cbbe"
+ },
+ "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557": {
+  "body_sha256": "5fdc73243f6ce74348a54db6b9d40c04dca0c17984e67dfeae64e383b152f5f8",
+  "has_llm_model_metadata": true,
+  "quote": "# JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go ## Background This skill shows how to use the Go library `github.com/supanadit/jwt-go` to: - Set a JWT secret - Generate and verify JWTs from either",
+  "quote_sha256": "5c6efb30d98cb064fab60af3d8058941a4849d6996adc7950449cdf6272e4c0b",
+  "repository": "github.com/supanadit/jwt-go",
+  "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2"
+ },
+ "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41": {
+  "cve_id": "CVE-2024-28236",
+  "fixed_sha256": "e1268f8e3b12ae2ae5d5a0df5c93c8aeacd4e45057b3533a6ca4824a15b824ae",
+  "quote": "// add secret to the map c.Secrets[secret.Name] = s // add secret to the temp map lazySecrets[secret.Name] = s Logger *logrus.Entry Vela *vela.Client Runtime runtime.Engine Secrets map[string]*library.Secret Hostname string Version string g",
+  "quote_sha256": "81b4b78b6f2e379759720ae8196d9441e625acba35ac537e89716c16087c099b",
+  "repository": "github.com/go-vela/worker",
+  "vulnerable_sha256": "907878a1fcc388095b0f2e3344daa72c296a10a2ca3b0b1ef12cdeca4a05fadc"
+ },
+ "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b": {
+  "body_sha256": "ef49acaeda08e65a6f38434fae8817de8c0a8096a3b2adaa02669963e46882fc",
+  "has_llm_model_metadata": true,
+  "quote": "# Run and Validate Athena (Flask/SQLite) in Good vs Bad Security Modes ## Background Athena is a Python/Flask/SQLite web application intended to help engineers practice application security by comparing an intentionally vulnerable “bad” imp",
+  "quote_sha256": "b8ec82b00e7acd7f4cb9c6503b0e2fef6a560f7f825c54ed7da8a59e06139eb9",
+  "repository": "github.com/yezz123/athena",
+  "skill_id": "027bf1b88199eb33db9ae8df0952b08334e5c19556968770c33f2b19e47afd36"
+ },
+ "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c": {
+  "cve_id": "CVE-2023-32070",
+  "fixed_sha256": "ba722b83eeae68d29ff138391da77ccdc664ee5e31b4f0f82bede52983b7f4d2",
+  "quote": "<p><span class=\"wikiexternallink\"><a param=\"value\" href=\"refe||rence\">lab&gt;&gt;el~</a></span></p> <p><!--startwikilink:false|-|url|-|refe||rence--><span class=\"wikiexternallink\"><a param=\"value\" href=\"refe||rence\">lab&gt;&gt;el~</a></span",
+  "quote_sha256": "73d4b195b2a12c93dcc80d92d01901fefa9aa6a0d137f445064e8a1eef2d9a21",
+  "repository": "github.com/xwiki/xwiki-rendering",
+  "vulnerable_sha256": "da72c2525e27eb8071f192b25a468d2844678f3e65d6e0dc671e5f842fb3aa7d"
+ },
+ "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1": {
+  "body_sha256": "94c87bb40c0eb0ebfa244c7e290e72541a490ea0ab5b15f2f298ed85761b1bb8",
+  "has_llm_model_metadata": true,
+  "quote": "# Run IP Analyzer (GraphQL) to check an IP risk score via AbuseIPDB ## Background IP Analyzer unifies information about public IP addresses into a simplified GraphQL schema. It uses well-known IP scanners; currently, AbuseIPDB is the only s",
+  "quote_sha256": "6ede1e5747b10a851882bb01f9e146b8b9f65eba0a32f47afd419e096cdf6084",
+  "repository": "github.com/alefeans/ip-analyzer",
+  "skill_id": "041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02"
+ },
+ "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c": {
+  "body_sha256": "a613fdbf84f942807452b41779eb8eba2555d820946a32eed95cc2a440b90c1c",
+  "has_llm_model_metadata": true,
+  "quote": "# Deploy SATOSA as a SAML2 ↔ OpenID Connect Proxy (Security Gateway Pattern) ## Background SATOSA is a configurable proxy that translates between authentication protocols such as SAML2, OpenID Connect (OIDC), and OAuth2. It is commonly used",
+  "quote_sha256": "c3496da2b85a719e71d8c03feb17842dfe563f851e995b1ec6a4c4bfe26c905d",
+  "repository": "github.com/identitypython/satosa",
+  "skill_id": "03c7dec28d86bb66eb1685c51ad4c9a40bc37c008517e9d877234154bfb04edf"
+ },
+ "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2": {
+  "body_sha256": "0708d7d195f12ac3e581b851c34f8d940a8e338068fc1c69a81f30ffe8e9e86b",
+  "has_llm_model_metadata": true,
+  "quote": "# Add ASP.NET Core security headers with Lib.AspNetCore.Security ## Background Lib.AspNetCore.Security is a library for ASP.NET Core that provides security features such as Content Security Policy (CSP), Strict Transport Security (HSTS), an",
+  "quote_sha256": "e83c79b105cbd1fae7bd83458a1bda249d82cffc131a3f019c6a7a5f650369ae",
+  "repository": "github.com/tpeczek/lib.aspnetcore.security",
+  "skill_id": "02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f"
+ },
+ "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd": {
+  "cve_id": "CVE-2023-31470",
+  "fixed_sha256": "78f8998f57f05c4ac52ea4c6022f949a028624c735ee75934364668778f63018",
+  "quote": "int dns_add_rr_nested_memcpy(struct dns_rr_nested *rr_nested, void *data, int data_len) int target_len = strnlen(target, DNS_MAX_CNAME_LEN) + 1; int dns_HTTPS_add_ipv4hint(struct dns_rr_nested *svcparam, unsigned char addr[][DNS_RR_A_LEN], ",
+  "quote_sha256": "a53587d23d1dc0648d34a9c41ac5677e1fe0c31d11b723afc6982de6d56afc00",
+  "repository": "github.com/pymumu/smartdns",
+  "vulnerable_sha256": "f61a49b66349f3dc8826e9f82bddbf440be3700a37dd38dcc1efd05544842e46"
+ },
+ "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772": {
+  "cve_id": "CVE-2023-1070",
+  "fixed_sha256": "dfc95a5d45f9a1b6fa33eb451b510ec12a6f81af360c8d8774e158e2780ae7cb",
+  "quote": "$path .= '>' . htmlspecialchars(stripslashes(htmlspecialchars_decode($elem->title, ENT_QUOTES)), ENT_QUOTES); * @version 3.0.0.22 define('TP_VERSION_FULL', TP_VERSION.'.22'); * @version 3.0.0.22 * @version 3.0.0.22 * @version 3.0.0.22 * @ve",
+  "quote_sha256": "c40b883ea0282b6a5db194c7e4f1ce611dbef77490481d3725a287dc56592ede",
+  "repository": "github.com/nilsteampassnet/teampass",
+  "vulnerable_sha256": "1521b81a8ed02bcdf366dbae4781da312bef1ae7843458b235977d29b72767e1"
+ },
+ "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39": {
+  "body_sha256": "2c062e6f4cbf36b3c2c5741e47e16f6dc694929c7315ae86e0c3087b7754d9f8",
+  "has_llm_model_metadata": true,
+  "quote": "# Integrate AuthTuna session-based authentication into a FastAPI app ## Background AuthTuna is a modern async security framework for Python with a FastAPI-first integration and a framework-agnostic core. This skill wires AuthTuna’s database",
+  "quote_sha256": "596f0bf6cd4a41640da7d403eb7b7b8393e19e72240cd41d8d92cc0b487c1678",
+  "repository": "github.com/shashstormer/authtuna",
+  "skill_id": "0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783"
+ },
+ "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd": {
+  "body_sha256": "1950da47fdd5388d98bb4395f90472dccfc55d9a014c020a166d679935806a55",
+  "has_llm_model_metadata": true,
+  "quote": "# Implement an OAuth 2.0 / OpenID Connect Authorization Endpoint in JAX-RS with authlete-java-jaxrs ## Background Authlete provides a JAX-RS (Java) helper library to implement an authorization server that supports OAuth 2.0 and OpenID Conne",
+  "quote_sha256": "6d64df2c09e5a0d07693397ed365422e1289e1226ab368a05e72aa3a944810b0",
+  "repository": "github.com/authlete/authlete-java-jaxrs",
+  "skill_id": "044c8be747043d046718183b7ca850595768b0bb831d43dabdd8fd96f810356e"
+ },
+ "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd": {
+  "body_sha256": "a26b0e34bbca3b2831bc3af84ea04e19dbd1946a06511f5aec3c802cf5282c95",
+  "has_llm_model_metadata": true,
+  "quote": "# Authenticate to Xbox Network (Xbox Live) in Node.js using @xboxreplay/xboxlive-auth ## Background @xboxreplay/xboxlive-auth is a lightweight, zero-dependency Node.js library that performs Xbox Network (Xbox Live) authentication with OAuth",
+  "quote_sha256": "e3988852eebcac8201eff193c7cd25924d4c30640e59625ac6224c5cce8f2bfc",
+  "repository": "github.com/xboxreplay/xboxlive-auth",
+  "skill_id": "03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34"
+ },
+ "family:e899d5a5e1e78d95e6a015d7502c827a4d40b4910f2a315fa118c6794ebd2ecb": {
+  "normalized_source_sha256": "d34d88255a7f050c91d19af286d1a411e3a708388bc174c24dbbee795abd3234",
+  "quote": "Page 499 TITLE 6—DOMESTIC SECURITY § 1501 other authority for reimbursable or non- reimbursable details. A nonreimbursable de- tail made pursuant to such paragraph shall not be considered an augmentation of the ap- propriations of the receiving element of the Office of the Nation",
+  "quote_sha256": "2808847be37a155a2701aa59f3009910b87fdbd43370adbdb61cf66ea11bace2",
+  "section": "6-USC-1501"
+ },
+ "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a": {
+  "body_sha256": "b99d2c23f9e924736a051746dbcfe49154f262cc673155c4b318cf8bfe341bdd",
+  "has_llm_model_metadata": true,
+  "quote": "# Run a12n-server (OAuth2/OIDC) locally with MFA-ready defaults and verify core endpoints ## Background a12n-server is a lightweight authentication server implementing OAuth2 and OpenID Connect. It supports multiple authentication methods i",
+  "quote_sha256": "f231eac9e89b74c55dcf3cbc5a1cb11c35e078c52a2e98561fc9c4a634625b24",
+  "repository": "github.com/curveball/a12n-server",
+  "skill_id": "034fe6286315fea4bbdc9d48e8b6e44f7e0ccef615e7973b382ef07370797be1"
+ },
+ "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df": {
+  "body_sha256": "2b4c724741f9f018172cd04428cc0343cf304a8370662d1cb69f719c6de2d097",
+  "has_llm_model_metadata": true,
+  "quote": "# Run the dev-sec Apache Baseline InSpec profile ## Background The dev-sec/apache-baseline repository is an InSpec compliance profile intended to help ensure consistent quality across Apache hardening projects. It can be executed locally af",
+  "quote_sha256": "b70495c0f1359c4e29fc6c3eba2a3a297d63f7ba7729756daadc3c949cb03999",
+  "repository": "github.com/dev-sec/apache-baseline",
+  "skill_id": "02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8"
+ },
+ "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1": {
+  "cve_id": "CVE-2014-8351",
+  "fixed_sha256": "2a0fb4b68d80a27d2f6764536afb1754e919c3d9d906e9f5bfd4daead8969a69",
+  "quote": "<?php $domain = $_GET[\"domain\"]; $init_max_date = $_GET[\"max_date\"]; $domain = $_GET[\"domain\"];",
+  "quote_sha256": "e5766f149fc7ff444821adb0a9ef12e446a316440ff69abf016f35c5e7dbdef2",
+  "repository": "github.com/labocnil/cookieviz",
+  "vulnerable_sha256": "445404b7821a80541d85085a24ff71d6a29726e10a3095f4586753172c1548f4"
+ },
+ "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818": {
+  "normalized_source_sha256": "02afc339fb3e522be1bfdf5140de3094d3a35b455736dfb5255ab6c40a4eba45",
+  "quote": "Page 1535 TITLE 12—BANKS AND BANKING § 3402 (7) ‘‘supervisory agency’’ means with respect to any particular financial institution, hold- ing company, or any subsidiary of a financial institution or holding company, any of the fol- lowing which has statutory authority to ex- amine",
+  "quote_sha256": "9495133d932f1fd9811dd84659041fd4e2ba1f4d183298df9a0e41a838049abb",
+  "section": "12-USC-3402"
+ },
+ "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4": {
+  "cve_id": "CVE-2022-0402",
+  "fixed_sha256": "982b9667bce857e4d4694b3d60a6420895877479958dc4c96f64bf31515015f7",
+  "quote": "$result .= ' name=\"' . $atts['name'] . '\" value=\"' . $code . '\"'; {\"version\":3,\"sourceRoot\":\"\",\"sources\":[\"elements.sass\"],\"names\":[],\"mappings\":\";AAqFA;EACE;;;AAEF;AAAA;AAAA;AAAA;AAAA;AAAA;EAME;;;AAEA;AAAA;EAEE;;;AAEF;AAAA;EAEE;;AACF;AAAA;",
+  "quote_sha256": "cf3ac9e36c33a3fcda5ab17de3aff9344373dbb2fcd16bfdcb54a1b4f179e778",
+  "repository": "github.com/renstillmann/super-forms",
+  "vulnerable_sha256": "a57e1eaef465911f8dba887a318b826af899d575e0de4a34fd66ee613a967643"
+ }
+}
