@@ -2197,33 +2197,80 @@ def _maintenance_option(argv: Sequence[str], name: str, value: str) -> bool:
     return [argv[i + 1] for i, token in enumerate(argv[:-1]) if token == name] == [value]
 
 
-def _maintenance_daemon_command(board: Any, wrapper: Mapping[str, Any], daemon: Mapping[str, Any]) -> None:
-    """Reconstruct the exact existing native command without starting a wrapper.
+def _maintenance_strict_program_json(raw):
+    def pairs(rows):
+        result={}
+        for k,v in rows:
+            _maintenance_require(k not in result,'duplicate master program key');result[k]=v
+        return result
+    def bad(_):raise RuntimeError('current daemon observation refused: nonfinite master program')
+    return json.loads(raw,object_pairs_hook=pairs,parse_constant=bad)
 
-    Config parsing and the non-plan-bound command renderer are pure. Deliberately
-    bypass the supervisor constructor, which has unrelated stateful work.
-    """
+
+def _maintenance_canonical_program(value):
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False)
+
+
+def _maintenance_master_program(board,master):
+    argv=master['argv'];values=[argv[i+1] for i,x in enumerate(argv[:-1]) if x=='--database-program-json']
+    _maintenance_require(len(values)==1 and sum(x.startswith('--database-program-json=') for x in argv)==0,
+            'one explicit master database program required')
+    _maintenance_require(_maintenance_canonical_program(_maintenance_strict_program_json(values[0]))==_maintenance_canonical_program(board.resolved_database_program().to_dict()),
+            'master configured program differs')
+
+
+def _maintenance_daemon_command(board,wrapper,daemon):
     _ensure_import_path()
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
-        PortalImplementationSupervisor, parse_args, supervisor_config_from_args,
+        PortalImplementationSupervisor,parse_args,supervisor_config_from_args,
+        database_program_from_cli_namespace,
     )
-    argv = wrapper["argv"]
-    entry = str(ROOT / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py")
-    _maintenance_require(len(argv) > 2 and argv[1] == entry, "native wrapper entry differs")
-    config = supervisor_config_from_args(parse_args(list(argv[2:])), repo_root=ROOT)
+    argv=wrapper['argv'];root=ROOT
+    entry=str(root/'scripts/ops/agent_supervisor/implementation_supervisor_entry.py')
+    _maintenance_require(len(argv)>2 and argv[1]==entry,'native wrapper entry differs')
+    args=parse_args(list(argv[2:]))
+    config=supervisor_config_from_args(args,repo_root=root)
+    program=board.resolved_database_program()
+    # Use the producer's own deterministic CLI projection, with no ambient
+    # observer environment filling missing authority options.
+    expected_args=parse_args(program.cli_args())
+    expected_program=database_program_from_cli_namespace(expected_args,environ={})
+    actual_program=database_program_from_cli_namespace(args,environ={})
     _maintenance_require(not config.plan_bound_dispatch and config.daemon_script_path is None
-                         and config.database_program is not None
-                         and config.database_program == board.resolved_database_program()
-                         and config.task_prefix == board.task_prefix
-                         and config.board_namespace == board.board_namespace
-                         and config.task_shard_count == int(board.max_lanes),
-                         "native daemon configured scope differs")
-    renderer = object.__new__(PortalImplementationSupervisor)
-    renderer.config = config
-    renderer.board_namespace = board.board_namespace
-    expected = renderer._build_daemon_command()
-    _maintenance_require(renderer._commands_match_with_verified_executable_alias(daemon["argv"], expected),
-                         "native daemon command differs")
+            and expected_program is not None and actual_program is not None
+            and _maintenance_canonical_program(actual_program.to_dict())==_maintenance_canonical_program(expected_program.to_dict())
+            and config.database_program is not None
+            and _maintenance_canonical_program(config.database_program.to_dict())==_maintenance_canonical_program(actual_program.to_dict())
+            and config.task_prefix==board.task_header_prefix
+            and config.board_namespace==board.board_namespace
+            and config.task_shard_count==int(board.max_lanes),
+            'native projected database/task scope differs')
+    # Do not discard these differences silently. They are the only two fields
+    # omitted by the exact worker projection; all other fields must survive.
+    original=program.to_dict();projected=expected_program.to_dict()
+    _maintenance_require(set(original)-set(projected)<= {'owner_management'}
+            and set(projected)-set(original)==set()
+            and _maintenance_canonical_program({k:v for k,v in original.items() if k not in {'owner_management','worktree_root'}})
+                ==_maintenance_canonical_program({k:v for k,v in projected.items() if k not in {'owner_management','worktree_root'}})
+            and projected['worktree_root']=='' and expected_program.owner_management is None,
+            'unexpected worker projection loss')
+    wanted=Path(program.worktree_root)
+    actual=Path(config.worktree_root) if config.worktree_root is not None else None
+    _maintenance_require(program.worktree_root and actual is not None,'dedicated worktree root missing')
+    wanted=wanted if wanted.is_absolute() else root/wanted
+    actual=actual if actual.is_absolute() else root/actual
+    _maintenance_require(actual==wanted and actual.resolve(strict=True)==actual
+            and actual.is_relative_to(root) and actual!=root,'dedicated worktree root differs')
+    renderer=object.__new__(PortalImplementationSupervisor)
+    renderer.config=config;renderer.board_namespace=board.board_namespace
+    expected=renderer._build_daemon_command()
+    _maintenance_require(renderer._commands_match_with_verified_executable_alias(daemon['argv'],expected),
+            'native daemon command differs')
+    return {'schema':'pctdd/worker-command-projection@1',
+            'exact_projected_program':actual_program.to_dict(),
+            'dedicated_worktree_root':str(actual),'requires_separate_master_program_validation':True,
+            'callback_settlement_claimed':False,'native_launch_authority':False}
+
 
 
 def _maintenance_cohort_identity(cohort: Mapping[str, Any]) -> dict[str, Any]:
@@ -2282,6 +2329,7 @@ class _BlockedMaintenanceMonitor:
                              and _maintenance_option(argv, "--repo-root", str(ROOT))
                              and _maintenance_option(argv, "--master-dir", str(self.paths["runtime"])),
                              "launched master scope differs")
+        _maintenance_master_program(self.board, self.launched_master)
 
     def actor(self, pid: int) -> dict[str, Any]:
         value = _maintenance_process(pid)
