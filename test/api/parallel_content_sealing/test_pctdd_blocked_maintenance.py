@@ -264,14 +264,16 @@ def monitor_fixture(tmp_path, monkeypatch):
     current['identity'].update(generation=109,server_id='new',process_birth_id='newbirth',started_at='now',status='ready',revision=2)
     source={'runtime':{'source_id':'source:current','control_plane_tree_id':'tree:current'}}
     board=SimpleNamespace(max_lanes=4,task_prefix='PCTDD-',payload={'watchdog_startup_grace_seconds':600},
-                          resolved_database_program=lambda:SimpleNamespace(endpoint_secret_handle='env://TEST'))
+                          resolved_database_program=lambda:SimpleNamespace(endpoint_secret_handle='env://TEST',
+                              to_dict=lambda:{'endpoint_secret_handle':'env://TEST'}))
     paths={'runtime':tmp_path/'runtime','state':tmp_path/'state','owner':tmp_path/'owner'}
     actors={}
     def actor(pid,parent,argv):
         value={'birth':{'pid':pid,'parent_pid':parent,'start_time_ticks':pid+1000,'boot_id':'boot'},'argv':argv}
         actors[pid]=value;return value
     master=actor(100,1,['python','-m','ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner',
-                            '--repo-root',str(tmp_path),'--master-dir',str(paths['runtime'])])
+                            '--repo-root',str(tmp_path),'--master-dir',str(paths['runtime']),
+                            '--database-program-json',json.dumps(board.resolved_database_program().to_dict())])
     owner=actor(101,1,['python','native-owner'])
     lanes=[];projections={}
     for i in range(4):
@@ -360,12 +362,14 @@ def test_native_daemon_renderer_refuses_wrong_entry_and_flags(tmp_path,monkeypat
     from ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner import DatabaseProgramConfig
     program=DatabaseProgramConfig.from_mapping({'task_source_kind':'duckdb','authority_mode':'quack',
              'quack_endpoint':'quack:127.0.0.1:12345','endpoint_secret_handle':'env://TEST',
-             'store_id':'control.duckdb','store_generation':'g1','schema_revision':'1','failover_policy':'fail_closed'})
+             'store_id':'control.duckdb','store_generation':'g1','schema_revision':'1','failover_policy':'fail_closed',
+             'worktree_root':'workspaces'})
+    (tmp_path/'workspaces').mkdir()
     argv=argv[:14]+program.cli_args()
     config=supervisor_config_from_args(parse_args(argv),repo_root=tmp_path)
     renderer=object.__new__(PortalImplementationSupervisor);renderer.config=config;renderer.board_namespace='pctdd'
     command=renderer._build_daemon_command()
-    board=SimpleNamespace(max_lanes=4,task_prefix='PCTDD-',board_namespace='pctdd',resolved_database_program=lambda:program)
+    board=SimpleNamespace(max_lanes=4,task_prefix='PCTDD-',task_header_prefix='PCTDD-',board_namespace='pctdd',resolved_database_program=lambda:program)
     wrapper={'argv':[sys.executable,str(tmp_path/'scripts/ops/agent_supervisor/implementation_supervisor_entry.py'),*argv]}
     native._maintenance_daemon_command(board,wrapper,{'argv':command})
     for changed in ([sys.executable,'-c','pass',*command[4:]],command+['--implement'],command[:-2]+['--task-shard-index','1']):
