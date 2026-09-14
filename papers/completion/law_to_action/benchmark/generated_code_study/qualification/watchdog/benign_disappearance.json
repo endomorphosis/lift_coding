@@ -1,0 +1,30 @@
+{
+  "error": null,
+  "events": [
+    {
+      "diagnostic": {
+        "errno": 2,
+        "exception_type": "FileNotFoundError",
+        "operation": "leaf_sample:existence",
+        "parent_inode_before": 72255534,
+        "parent_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789410623/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_empty_exit/parent",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789410623/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_empty_exit/parent/leaf",
+        "strerror": "No such file or directory"
+      },
+      "parent_revalidation": {
+        "empty": true,
+        "parent": {
+          "cgroup.events": "populated 0\nfrozen 0",
+          "cpu.stat": "usage_usec 1500\nuser_usec 1000\nsystem_usec 500",
+          "cpu_usage_seconds": 0.0015,
+          "inode": 72255534,
+          "memory.current": "4096",
+          "observed_monotonic": 822624.36330776,
+          "pids.current": "0"
+        }
+      }
+    }
+  ],
+  "parent_inode": 72255534,
+  "parent_samples": 2
+}

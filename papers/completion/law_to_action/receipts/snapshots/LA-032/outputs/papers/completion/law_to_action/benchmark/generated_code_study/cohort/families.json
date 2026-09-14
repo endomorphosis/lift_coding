@@ -1,0 +1,929 @@
+{
+  "families": [
+    {
+      "action": "maintain records and report transactions",
+      "actor": "Secretary and financial institutions",
+      "ancestry_key": [
+        "official_legal_section",
+        "31-USC-5318"
+      ],
+      "artifact_id": "legal-bank-secrecy-reporting",
+      "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5",
+      "lawful_access": "official_GovInfo_US_Code_section_PDF",
+      "modality": "shall",
+      "normalized_source_sha256": "8dd9034b591dea3ec81e0db16dfec1b321e4b3ea386480be2472bcc1f8a6d72f",
+      "object": "records and reports useful in criminal, tax, or regulatory investigations",
+      "operative_pattern": "financial institution",
+      "population": "legal",
+      "ranking_sha256": "0441dfef2918f1fc614ced11c5ff5459ff5d7f330550ea17bd52fbee9f5c5498",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the exact URI, verify SHA-256, and retain upstream terms. Source bodies remain in the pinned cache and are not redistributed here.",
+        "status": "us_code_public_domain_retrieval_pin"
+      },
+      "revision": "USCODE-2024:31-USC-5318",
+      "section": "31-USC-5318",
+      "source_bytes": 210055,
+      "source_id": "legal:4e2c5b1812de4e737f9e092dbeac14abd480ed5546ce88a3e6e698c086146888",
+      "source_sha256": "8e982aa1aa9ac9c80b8401e44d67a837d62159f8ef1059ddadd7bf5e2880b447",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/pdf/USCODE-2024-title31-subtitleIV-chap53-subchapII-sec5318.pdf",
+      "split": "development",
+      "text_sha256": "bfde3a83320de96fea9ccffc378ee0fc5744223502455f2e58b487636a9f1155",
+      "title_number": "31"
+    },
+    {
+      "action": "give access to financial records",
+      "actor": "financial institution",
+      "ancestry_key": [
+        "official_legal_section",
+        "12-USC-3402"
+      ],
+      "artifact_id": "legal-financial-privacy",
+      "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+      "lawful_access": "official_GovInfo_US_Code_section_PDF",
+      "modality": "shall-not-except-as-authorized",
+      "normalized_source_sha256": "8d3cf43cd4b7949d822808999389113af042f3a8005599099aaca2d433bd7a43",
+      "object": "customer financial records",
+      "operative_pattern": "financial institution",
+      "population": "legal",
+      "ranking_sha256": "2e110a1244f50b75035f704d079b6750a3609ce22ddf8da09284e51a103a3a44",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the exact URI, verify SHA-256, and retain upstream terms. Source bodies remain in the pinned cache and are not redistributed here.",
+        "status": "us_code_public_domain_retrieval_pin"
+      },
+      "revision": "USCODE-2024:12-USC-3402",
+      "section": "12-USC-3402",
+      "source_bytes": 147668,
+      "source_id": "legal:f60d179793df51c6a38687761d947c45eafe8a6bb12bca3fdd4b1226614a9d97",
+      "source_sha256": "ee80b97fcd9c1d29fdfa8d4fd4b6bf963eb175a5006d57a0bee7b85b120ddc94",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title12/pdf/USCODE-2024-title12-chap35-sec3402.pdf",
+      "split": "development",
+      "text_sha256": "bc5dc05c0ab64409327136bc3f99a6fe53e2d755be0b82548baa841b4dae526e",
+      "title_number": "12"
+    },
+    {
+      "action": "release education records",
+      "actor": "funded educational agency or institution",
+      "ancestry_key": [
+        "official_legal_section",
+        "20-USC-1232g"
+      ],
+      "artifact_id": "legal-education-records",
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+      "lawful_access": "official_GovInfo_US_Code_section_PDF",
+      "modality": "shall-not-without-consent",
+      "normalized_source_sha256": "a2e8ab85a5d3b4ac2a84ee72eed814a9bb3983077bab17fd32284ea1ba9242a2",
+      "object": "education records of students",
+      "operative_pattern": "No funds shall be made available",
+      "population": "legal",
+      "ranking_sha256": "48db3b44fcd03a49381fdb17d9b5a8e84fe91e9e2f84e210c3a4dd1b6ba5d79a",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the exact URI, verify SHA-256, and retain upstream terms. Source bodies remain in the pinned cache and are not redistributed here.",
+        "status": "us_code_public_domain_retrieval_pin"
+      },
+      "revision": "USCODE-2024:20-USC-1232g",
+      "section": "20-USC-1232g",
+      "source_bytes": 173328,
+      "source_id": "legal:d2bdb013786c1838407969c3d700a86400809734a0d8093464ca6344e6ff45f4",
+      "source_sha256": "80f2a6e95b011d81f7cab5b9b73339ab9aa61ccb851090db2ca42a2003d8dc0c",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title20/pdf/USCODE-2024-title20-chap31-subchapIII-part4-sec1232g.pdf",
+      "split": "calibration",
+      "text_sha256": "c380acc3dc3fd9f174414ab43473c3506786a175fd6b0c9f10ae57462fef4b9c",
+      "title_number": "20"
+    },
+    {
+      "action": "disclose returns or return information",
+      "actor": "officer or employee of the United States",
+      "ancestry_key": [
+        "official_legal_section",
+        "26-USC-6103"
+      ],
+      "artifact_id": "legal-tax-return-confidentiality",
+      "id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "lawful_access": "official_GovInfo_US_Code_section_PDF",
+      "modality": "shall-be-confidential",
+      "normalized_source_sha256": "9b31074380a5117e67ac6974cd162292247792a7b1507744004e4d2a2125d957",
+      "object": "returns and return information",
+      "operative_pattern": "Returns and return information shall be con-? ?fidential",
+      "population": "legal",
+      "ranking_sha256": "6af0ba3b80602d70dfcb23302536ef86265ea5142c9bb877cd4154a3f4023f1d",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the exact URI, verify SHA-256, and retain upstream terms. Source bodies remain in the pinned cache and are not redistributed here.",
+        "status": "us_code_public_domain_retrieval_pin"
+      },
+      "revision": "USCODE-2024:26-USC-6103",
+      "section": "26-USC-6103",
+      "source_bytes": 327829,
+      "source_id": "legal:a9f827dcb6ac8d2b974cc3f1dc03b787be2abc1d24a44db9de11fb1348932067",
+      "source_sha256": "d380369e1053a46b0adc17e48f76fc2c2007b0133980165a6bd31f5722677c33",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/pdf/USCODE-2024-title26-subtitleF-chap61-subchapB-sec6103.pdf",
+      "split": "final",
+      "text_sha256": "27f96f0fc73032ee67a5748af1a71d01503316895df7438ec209044b57846a69",
+      "title_number": "26"
+    },
+    {
+      "action": "require a lie detector test",
+      "actor": "employer engaged in or affecting commerce",
+      "ancestry_key": [
+        "official_legal_section",
+        "29-USC-2002"
+      ],
+      "artifact_id": "legal-employee-polygraph",
+      "id": "family:df26c5a311132ddb73f34d86fa7fcb851dfb7fa40a878a80033db821503007d7",
+      "lawful_access": "official_GovInfo_US_Code_section_PDF",
+      "modality": "shall-be-unlawful",
+      "normalized_source_sha256": "7167309745c3e6d126c307360b25aa9ab1ad583c2f99c583491e7df4e9bdf5e8",
+      "object": "employee or prospective employee",
+      "operative_pattern": "it shall be unlawful for any employer",
+      "population": "legal",
+      "ranking_sha256": "96ec9f63f790f24348e858d737314c55e51806a256a4401fc110e12ea1f2bf02",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the exact URI, verify SHA-256, and retain upstream terms. Source bodies remain in the pinned cache and are not redistributed here.",
+        "status": "us_code_public_domain_retrieval_pin"
+      },
+      "revision": "USCODE-2024:29-USC-2002",
+      "section": "29-USC-2002",
+      "source_bytes": 133917,
+      "source_id": "legal:91e3b60dde8fa4373f15b52b6172ba3d40d60bea00e989d9f9db77ed39bf5e02",
+      "source_sha256": "28e2c97df1557c0c8cc2ab06ed524e9e06a6e484a1360b5ff08d27f0c725c868",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/pdf/USCODE-2024-title29-chap22-sec2002.pdf",
+      "split": "final",
+      "text_sha256": "8d44c4052de7ebfd45119214344e1f80f81115a95be561d1b53a0a143a8d1309",
+      "title_number": "29"
+    },
+    {
+      "action": "provide information security protections",
+      "actor": "agency head",
+      "ancestry_key": [
+        "official_legal_section",
+        "44-USC-3554"
+      ],
+      "artifact_id": "legal-federal-information-security",
+      "id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "lawful_access": "official_GovInfo_US_Code_section_PDF",
+      "modality": "shall",
+      "normalized_source_sha256": "3ba4ecd3ca2213fb616954542336aaff3e298f60983526c47537cd1c47e155f7",
+      "object": "agency information systems",
+      "operative_pattern": "information security",
+      "population": "legal",
+      "ranking_sha256": "d4288c0ffbbbb97e47c31be2877cdb9049eb4b13ad971bb754478a787fa86386",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the exact URI, verify SHA-256, and retain upstream terms. Source bodies remain in the pinned cache and are not redistributed here.",
+        "status": "us_code_public_domain_retrieval_pin"
+      },
+      "revision": "USCODE-2024:44-USC-3554",
+      "section": "44-USC-3554",
+      "source_bytes": 141384,
+      "source_id": "legal:4a7fb97d1b1dcb4885615261a0fab5904d74c73cbe8f004cbcad4ee93db0f9e7",
+      "source_sha256": "3ebdc4ea33c99576f197a1e2b375ae0bb077a1747e132e071a3f37a1b5780c8f",
+      "source_uri": "https://www.govinfo.gov/content/pkg/USCODE-2024-title44/pdf/USCODE-2024-title44-chap35-subchapII-sec3554.pdf",
+      "split": "final",
+      "text_sha256": "e2fcdc5d3e5500c05724fdbc968879680bfd323c7a76fa0ca60cee4135808540",
+      "title_number": "44"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/msyk/fmdataapi"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2021-4431",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "file_row_number": 40,
+      "fix_commit": "3bd1709a8f7b1720529bf5dfc9855ad609f436cf",
+      "fixed_sha256": "ff90c695a0d1d5c6665849bc73f9f8f67cae2c8d97ef1cec4a95c18913e9c863",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "language": "PHP",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "b196e8300c0d1802fb4ecbc2302fd62491470d97653516221fb518d1504f69d7",
+      "population": "cve",
+      "ranking_sha256": "0483790577aa3b947a03693340f920733a76189c66be5824808a9fe1a7f3b1bd",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/msyk/fmdataapi",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:8d91c6d22f2dc84f8499d011d2adff98a62446345939a2238c81056e03aa240f",
+      "source_sha256": "3df70aa34f80009021fb2c8fa9edf1c19295851b518243a9865a4c35895f05d7",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "development",
+      "vulnerable_sha256": "49c8694c5143ed0b9a7c26aa8131f9a32812863625ec928bc3fba9ba6e98f526"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/pymumu/smartdns"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2023-31470",
+      "cwe_name": "Out-of-bounds Write",
+      "file_row_number": 41,
+      "fix_commit": "56d0332bf91104cfc877635f6c82e9348587df04",
+      "fixed_sha256": "78f8998f57f05c4ac52ea4c6022f949a028624c735ee75934364668778f63018",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "language": "C",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "fbff80269e45454402aabbf753f054676ab56c4bf487be7b3e6e42f8d95e302a",
+      "population": "cve",
+      "ranking_sha256": "0935efed5b47e514d736b24f3953feb148b3a6d03f32fa6b9be4e92247495b1a",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/pymumu/smartdns",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:f3ad3b3e88be5affbe4bbd421c203cafff8018c4a98ecb52e99b7ced6595561f",
+      "source_sha256": "5fc81ab848d697a8ad6b53d24ddd33d5b07a0d1be53888d4b2291ea4c1e8cf46",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "development",
+      "vulnerable_sha256": "f61a49b66349f3dc8826e9f82bddbf440be3700a37dd38dcc1efd05544842e46"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/kjd/idna"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2024-3651",
+      "cwe_name": "Insufficient Information",
+      "file_row_number": 33,
+      "fix_commit": "1d365e17e10d72d0b7876316fc7b9ca0eebdd38d",
+      "fixed_sha256": "e4f04f6ed90e7a601293b75e7ab02df1e7db65afa3483ad011564cbf5a1d22d7",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "language": "Python",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "03d9a7e8176213c45d98d41a5e3b549bac98800c962bb93399e024edd4732fd3",
+      "population": "cve",
+      "ranking_sha256": "18410c4c3aef22bd44066846496e9313229c37df68f8c177e2219610ba840672",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/kjd/idna",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:b0da5aafb2a097dd7ddf339c822ca6fedca1e2fa39cbf3e07f8ac02f65cde61f",
+      "source_sha256": "7550599645b37dc850f178710bdbb0c67dcd4bb60ac3e0f9045eae0f7a4c5ade",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "calibration",
+      "vulnerable_sha256": "e6236bb316a6c0732254c722ca3205c925be383e487ca0ef4a405cf81896cbbe"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/renstillmann/super-forms"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2022-0402",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "file_row_number": 31,
+      "fix_commit": "c19d65abbe43d9b6359c1bf3498dc697d0c19d02",
+      "fixed_sha256": "982b9667bce857e4d4694b3d60a6420895877479958dc4c96f64bf31515015f7",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "language": "PHP",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "0475628ac879daef265ad18b9dd9efe0d37cfa193c96f3ce0af583a606c8097f",
+      "population": "cve",
+      "ranking_sha256": "1da0b8d94729ec9e91962a78e4ce8b47d8edef606d49e396d96ae319781ba510",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/renstillmann/super-forms",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:8a8cc19dd355815deaf6fd8c561951fc7378aec24ec1fe958aba1ed94df86f7e",
+      "source_sha256": "03d978abecdb874c090cd6ffc3f63427a2f35eaba36866cd4e1f656ab7be76b5",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "calibration",
+      "vulnerable_sha256": "a57e1eaef465911f8dba887a318b826af899d575e0de4a34fd66ee613a967643"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/labocnil/cookieviz"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2014-8351",
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "file_row_number": 43,
+      "fix_commit": "489b6050f6c53fe7b24c4bed3eeb9c25543960e2",
+      "fixed_sha256": "2a0fb4b68d80a27d2f6764536afb1754e919c3d9d906e9f5bfd4daead8969a69",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "language": "PHP",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "e5766f149fc7ff444821adb0a9ef12e446a316440ff69abf016f35c5e7dbdef2",
+      "population": "cve",
+      "ranking_sha256": "20fe25e8c575f82ced117f772d37bdfddb3caf61d0d571220e06c76eaae5c59d",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/labocnil/cookieviz",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:55cc1de9b193f8f48c83ddffa97b17f095afd2bb639e3d63b2ec3d860edf2253",
+      "source_sha256": "70259f69bc4a3ca0410fd3c495b26556ccc565e4a9db702141ee4b2b95c9c462",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "calibration",
+      "vulnerable_sha256": "445404b7821a80541d85085a24ff71d6a29726e10a3095f4586753172c1548f4"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/orchardcms/orchardcore"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2022-0159",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "file_row_number": 25,
+      "fix_commit": "4da927d39a49138527c30db09c962ff706f95202",
+      "fixed_sha256": "9bd7a6d100d802191b6e9bd4fc5ed6c7550f6b2257a7a81c2779976bd737a665",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "language": "Other",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "46783cba46935ec7c95bf28ba5567dc9798406d4dc8dff6f81ae9ba57fbc6057",
+      "population": "cve",
+      "ranking_sha256": "4882a17a9b756d86f47f20b81ee6e29907bfa1da79599a63e92041a1797cf49f",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/orchardcms/orchardcore",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:4dcec53aad68967c69a9c62c37e0e6087365f8270120473955ff80e4e8b6f7f8",
+      "source_sha256": "dceda43ca8a9ef1c66fedb98f0d9abf8c57580169b6cfc40414cdb8c711e6acb",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "816b3c5367c451059a1073396195a80ad969cfea993584e49cb89198de91e24f"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/kyubisation/angular-server-side-configuration"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2023-28444",
+      "cwe_name": "Exposure of Sensitive Information to an Unauthorized Actor",
+      "file_row_number": 42,
+      "fix_commit": "d701f51260637a84ede278e248934e0437a7ff86",
+      "fixed_sha256": "6dd297127a40aa4660323adc20191a46cae689286c96d161132195eb84d37c74",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "language": "TypeScript",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "f5e44875736c4d4d8d4e07a7452a32e3977fa3d138b1cef29a68d2c85663b67e",
+      "population": "cve",
+      "ranking_sha256": "622b9f03b78c6425e6eb26a2ffba253f296bd4869bbff94b1cd27ddc9a6a0473",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/kyubisation/angular-server-side-configuration",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:6d800cd04406e965d6cd272dc1699c060cca1b363d7acabd65445e51234dcc21",
+      "source_sha256": "0d8ecf5b934ba591374386416be84c5384480771cdf735903923703935aaee65",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "69cff2a699d03e9f35893d2f07866d1851edbd2ee08ca84bfbfda1fdaf2f6320"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/xwiki/xwiki-rendering"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2023-32070",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "file_row_number": 36,
+      "fix_commit": "c40e2f5f9482ec6c3e71dbf1fff5ba8a5e44cdc1",
+      "fixed_sha256": "ba722b83eeae68d29ff138391da77ccdc664ee5e31b4f0f82bede52983b7f4d2",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "language": "Other",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "b648d7b05f53b8c070db461726d0d5fccfd397a5932abf82674dd952ce452304",
+      "population": "cve",
+      "ranking_sha256": "6764da6ed10cdc4a01cb2f3bfa4037128fee69cd63b3ac344368717038024363",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/xwiki/xwiki-rendering",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:a326453771b671fc589663211bc3590c089e89d7ab1587d12a3900c8c9cd20d6",
+      "source_sha256": "707a2df06ab1204354d12339bccd9146b546d8f7b3f317824e29adea7168e0cf",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "da72c2525e27eb8071f192b25a468d2844678f3e65d6e0dc671e5f842fb3aa7d"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/nilsteampassnet/teampass"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2023-1070",
+      "cwe_name": "External Control of File Name or Path",
+      "file_row_number": 45,
+      "fix_commit": "0af3574caba27a61b16dc25c94fa51ae12d2d967",
+      "fixed_sha256": "dfc95a5d45f9a1b6fa33eb451b510ec12a6f81af360c8d8774e158e2780ae7cb",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "language": "PHP",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "081fcb7c4eb22b39f051e212cf0cb34b0fce036ff5caf3d375d09090ec37e556",
+      "population": "cve",
+      "ranking_sha256": "6e81ae4de3b131a7c256028165c656b51b3740bea5e72f2b2fc4ce44346fb9bd",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/nilsteampassnet/teampass",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:3f4a883326e2162247604cb6eca27457918a6302a4cfc2c44a431e51e6b189dc",
+      "source_sha256": "dc9e10855e3dec05993f1b81bc06f6e51a699d2bb1b003fb2813ee64a08264bd",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "1521b81a8ed02bcdf366dbae4781da312bef1ae7843458b235977d29b72767e1"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/github/hub"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2014-0177",
+      "cwe_name": "Cryptographic Issues",
+      "file_row_number": 32,
+      "fix_commit": "016ec99d25b1cb83cb4367e541177aa431beb600",
+      "fixed_sha256": "fd4990248d9366541389d5e697042dc4d54c283a28c1afc7974a2e4b81dbba69",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "language": "Ruby",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "e55af44ef7230efc305f54c39fb3e085acb9cebad6c645fe6d29a30157fee986",
+      "population": "cve",
+      "ranking_sha256": "78f5e3c6ff865ca70fa6710639c655ebab29632c032dcdaaf2178fbb3365e89e",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/github/hub",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:1c7af2c6abc84c35e4ce66d832a55bc6f94ea2405b0851e949688fec7b342e2a",
+      "source_sha256": "b0f89177c783530d4f270a1b2f20127d5dbedbc116b4e870cad4fcdfb9f1faa4",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "76767635ad7cb199959ab9507bde933fd0a442cbafb5d017ff70e1e831b44196"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/go-vela/worker"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2024-28236",
+      "cwe_name": "Insufficient Information",
+      "file_row_number": 35,
+      "fix_commit": "e1572743b008e4fbce31ebb1dcd23bf6a1a30297",
+      "fixed_sha256": "e1268f8e3b12ae2ae5d5a0df5c93c8aeacd4e45057b3533a6ca4824a15b824ae",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "language": "Go",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "d988f79ca5a5f17a830de17b8a096dd6e0328d5452f69faaace68e27a3ceb410",
+      "population": "cve",
+      "ranking_sha256": "a1118f27301adc03d5fc0339d93d05e035898ab7b9c9cd327ae770b65f81b551",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/go-vela/worker",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:9c63683b63e83ddc8270dea56fd7e913ecbc725b0d6e12a974f152269d565797",
+      "source_sha256": "0c816642e55a9ef0fcecad09ef3c48b116bd6d72789ccb208207883e64a34c3a",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "907878a1fcc388095b0f2e3344daa72c296a10a2ca3b0b1ef12cdeca4a05fadc"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/electron/packager"
+      ],
+      "artifact_id": "cve-first-shard",
+      "cve_id": "CVE-2024-29900",
+      "cwe_name": "Insufficient Information",
+      "file_row_number": 39,
+      "fix_commit": "d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+      "fixed_sha256": "d04ec72acc7e2818dbf7109f035ceb9ca392e38e8da465f60a448b78ad7e4b21",
+      "fork_clone_audit": "canonical_repo plus stem collision plus normalized-code nearest neighbor; repository spelling is not sufficient",
+      "id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "language": "TypeScript",
+      "lawful_access": "pinned_cvefixes_parquet_row",
+      "normalized_source_sha256": "4c422703cf524aa14eca227c2534df05730072c73c3c280b0343acb16470a27e",
+      "population": "cve",
+      "ranking_sha256": "b721d9789a9391668814424d5e18a67bd2875067cbae7c5e4c710c70e305d102",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned shard, verify SHA-256, and retain upstream repository licenses. Code bodies are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/electron/packager",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "source_id": "cve:a6e070425033203896663153257c2d7f7d79159dfe679a39a99fba9c48bee072",
+      "source_sha256": "4061cdfa606ba7bd8647be482e8d6a3e74136f75d412e25959a997520649b891",
+      "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+      "split": "final",
+      "vulnerable_sha256": "fd0a19ab96f6f0e6687c699c77b28dbffa83595450e053f6ae76a7cb17dd9cf7"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/supanadit/jwt-go"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "3713a39a4774413f816227785ec19ec0bb431ba6279324c722cbbc978431361f",
+      "population": "skill",
+      "primary_source_id": "7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132",
+      "ranking_sha256": "0182d936314ea2d42b277e4cf60aa4fd8f9407477ca706810eafd46daa001ddb",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/supanadit/jwt-go",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+      "source_id": "skill:6f3b8cd2593e00637ce81732ba716b6f8b5df864e9794f4744f2bdd3fae3f201",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/supanadit/jwt-go",
+      "split": "development",
+      "title": "JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/tpeczek/lib.aspnetcore.security"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "8631a38d529e4424417cd0984b8ae9f4ad9bcb1ccd4955fd949bbe0de92f8fc6",
+      "population": "skill",
+      "primary_source_id": "83fc61b73995e6a831423c58187b5fddb0da618338c0e0b2d6a96dd5845f1dfb",
+      "ranking_sha256": "34253b05e410aa7ecd75d44714eba4dd82d64971856a035859fec67c8c404988",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/tpeczek/lib.aspnetcore.security",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f",
+      "source_id": "skill:53cee4093900dc2ef770ecf07cc5c373b55b118c1513e828cf4afffb0914eeb1",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/tpeczek/Lib.AspNetCore.Security",
+      "split": "development",
+      "title": "Add ASP.NET Core security headers with Lib.AspNetCore.Security"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/shashstormer/authtuna"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "cd791f66864f59f6b7bffbf720013df15d30b6289013f1e38abc1f64d2bae86b",
+      "population": "skill",
+      "primary_source_id": "43286753f4125d78a3b871311fd555bbb49882b6cae8ea775246075d7d916f05",
+      "ranking_sha256": "4239909ad3bd3cc04cc06fb923bd96f09d9d565408f59f04e36f184c43164d83",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/shashstormer/authtuna",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783",
+      "source_id": "skill:2c46c223f1f16d7279c3b3921e1960238de9f8e5af90168745a8681752e9e79a",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/shashstormer/AuthTuna",
+      "split": "calibration",
+      "title": "Integrate AuthTuna session-based authentication into a FastAPI app"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/dev-sec/apache-baseline"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "077ae96572668f1ebd4cd82bb648bd5d71209f0b22421e7a08611748efdbfc7a",
+      "population": "skill",
+      "primary_source_id": "011371b7b71dc549fa00170a9bdca593ab7f9e5084b973df85506c5592a8cc13",
+      "ranking_sha256": "4d82067c28de024dd4ef3d9a896994f0ef70ae4fd30cebea9932a9ff9fd1ffc0",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/dev-sec/apache-baseline",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8",
+      "source_id": "skill:dbaf1f05fbc5855ad6a18c44379be51b6d589eccbd54c7138c1924cab20f2046",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/dev-sec/apache-baseline",
+      "split": "calibration",
+      "title": "Run the dev-sec Apache Baseline InSpec profile"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/black-cockpit/netcore.keycloak"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "16f404cbf1dcee881898f81232e59287daf8a1b880cb52db83cd8331014c34e7",
+      "population": "skill",
+      "primary_source_id": "7f436fce006331358e36c9df9ba0560ac49d8135fe0e396b41804571e1ed9b35",
+      "ranking_sha256": "55a02d20fd8df8e88565764c07ce7df73fc49a973d55b819c12be2e852941793",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/black-cockpit/netcore.keycloak",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "041e498df593007865add35b2b6695b877c0c78891d5547c6a3601251cf236d6",
+      "source_id": "skill:eb3a3b0da5be531e0fe081fd1dceb65a7c3b1686f509ef371257c292cbee056a",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/Black-Cockpit/NETCore.Keycloak",
+      "split": "final",
+      "title": "Integrate Keycloak (OIDC/OAuth2) in .NET Core Using NETCore.Keycloak"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/curveball/a12n-server"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "055671056f369853ab072af2538e0a12b1d4503ff04fdab58901739119f102ed",
+      "population": "skill",
+      "primary_source_id": "b9cef2ab3a33fe12d2a9cdcdeab5a09bd3658d85881ff4f2ecb472c03a4a184b",
+      "ranking_sha256": "5a48cd4e719907439d8eefbbddb548cd13261e24fe4c80eddb9274e6773d52da",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/curveball/a12n-server",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "034fe6286315fea4bbdc9d48e8b6e44f7e0ccef615e7973b382ef07370797be1",
+      "source_id": "skill:6802e36cfda4d2a6fdef78801712d8d15bcb0756ff46c0372b7953dd43b4232c",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/curveball/a12n-server",
+      "split": "final",
+      "title": "Run a12n-server (OAuth2/OIDC) locally with MFA-ready defaults and verify core endpoints"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/alefeans/ip-analyzer"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "5d97d0eb49b2c2adbf459eb5b232cc45e5f72b978f3b3aa83bd6b6a0f173e278",
+      "population": "skill",
+      "primary_source_id": "82cc855792f130f0fb4c57546eee98454f04fd3e94034e46e496c797ada7e4f4",
+      "ranking_sha256": "6d8ab8fd8eaf0382f150fde912e430bd3672455700d19525177189778d86298e",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/alefeans/ip-analyzer",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02",
+      "source_id": "skill:49a671ea339ac06bfcf028f30c2ef59f216df1676cc534e8029fe71eb483f0a4",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/alefeans/ip-analyzer",
+      "split": "final",
+      "title": "Run IP Analyzer (GraphQL) to check an IP risk score via AbuseIPDB"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/yezz123/athena"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "e054271848edffdf71f7214502145cefa09e9356d76508203cd9f3348cd199ea",
+      "population": "skill",
+      "primary_source_id": "fcd927a1c2e7fd7238d1f0a29549764ca0f2e033b1df47b5de32e09c919ae0bc",
+      "ranking_sha256": "99afe122ddc933fd76bb62662afd0901db8e58f2b358f6943196b8fdae96b6a0",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/yezz123/athena",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "027bf1b88199eb33db9ae8df0952b08334e5c19556968770c33f2b19e47afd36",
+      "source_id": "skill:150adf900c6192b44e8dc7e9031e880b467951e9840bf1fe4044e9e06e3be63c",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/yezz123/Athena",
+      "split": "final",
+      "title": "Run and Validate Athena (Flask/SQLite) in Good vs Bad Security Modes"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/identitypython/satosa"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "857f570695e21ed8e84c970bacdc877f46dc058cfcdd650a7c054ce0acb69c92",
+      "population": "skill",
+      "primary_source_id": "4958a0bace41cf74d7a5978e04c37334b6244dd09670fb26224a5494b3992c15",
+      "ranking_sha256": "b6bb1584d7f2045f7e9896a6f5d53616c8ef2f1a2f8730db0a4e8a8a33357e7a",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/identitypython/satosa",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "03c7dec28d86bb66eb1685c51ad4c9a40bc37c008517e9d877234154bfb04edf",
+      "source_id": "skill:e2905377c44a3d328dc287c4c69b84e8c3be13a3e924551f7c7daa20b3064cb8",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/IdentityPython/SATOSA",
+      "split": "final",
+      "title": "Deploy SATOSA as a SAML2 \u2194 OpenID Connect Proxy (Security Gateway Pattern)"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/janko/rodauth-rails"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "6f013394b4585d1ddca228541776d5c12dd8663bfee4bd66cd5b2b2356ce7460",
+      "population": "skill",
+      "primary_source_id": "f2608859dad33f27316c494ece4d1b6fb356a0f915fdf401f2068479fc7c938e",
+      "ranking_sha256": "b8812596ad43ef15922e0a831f2f0856295156cfa24f538986ece4d79746a024",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/janko/rodauth-rails",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "0453ec8abf09f532dc8cc4a8091b6067384f1dd42ebb0501daeb3472f3cf8120",
+      "source_id": "skill:69b9041c68a77cb1023c3265110198d32ee4aa8f7e15a2f7753f4b033e5217da",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/janko/rodauth-rails",
+      "split": "final",
+      "title": "Add Rodauth authentication to a Rails app (JSON/JWT/cookie sessions)"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/xboxreplay/xboxlive-auth"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "d286d964711d8cf4ff589484da5c0ff5d1bbc245f59494cae42f28f31305d586",
+      "population": "skill",
+      "primary_source_id": "bb52440f7d0307c46b2abd5a2aa374f576fcd862007173d0f25958b8274da820",
+      "ranking_sha256": "e529aa413e2dde0e455c9fcd3903bace82b8d777bf9e793b2d9ebae91d488c94",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/xboxreplay/xboxlive-auth",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34",
+      "source_id": "skill:0374c029f5e1978dd7130d16a575e634a054824ec6ad026536849bd3757654c1",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/XboxReplay/xboxlive-auth",
+      "split": "final",
+      "title": "Authenticate to Xbox Network (Xbox Live) in Node.js using @xboxreplay/xboxlive-auth"
+    },
+    {
+      "ancestry_key": [
+        "repository",
+        "github.com/authlete/authlete-java-jaxrs"
+      ],
+      "artifact_id": "skill-security-bundle",
+      "fork_clone_audit": "canonical_repo plus stem collision plus primary/normalized-body identity; repository spelling is not sufficient",
+      "has_llm_model_metadata": true,
+      "id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "independent_human_annotation": false,
+      "lawful_access": "pinned_skillcenter_sqlite_row",
+      "normalized_source_sha256": "65a59119b9122704dd183b6d523f387926cd2f9300122f6f86176d6f6388f646",
+      "population": "skill",
+      "primary_source_id": "044adfcd3b16afcf298e329319fda73ef9e245a8a8586aa42232d28b63648709",
+      "ranking_sha256": "fd7e49b45bf0e85f532f1043e617af19bd6449f28e0dd0971e0eb6d6d98e3200",
+      "redistribution": {
+        "included_bytes": 0,
+        "instructions": "Retrieve the pinned sqlite bundle, verify SHA-256, and retain per-source terms. Procedures are not redistributed.",
+        "status": "retrieval_only"
+      },
+      "repository": "github.com/authlete/authlete-java-jaxrs",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "skill_id": "044c8be747043d046718183b7ca850595768b0bb831d43dabdd8fd96f810356e",
+      "source_id": "skill:1a843422a9715aa73eeab84325eb571a377812302dac61454d60ae300c3b63ff",
+      "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+      "source_url": "https://github.com/authlete/authlete-java-jaxrs",
+      "split": "final",
+      "title": "Implement an OAuth 2.0 / OpenID Connect Authorization Endpoint in JAX-RS with authlete-java-jaxrs"
+    }
+  ],
+  "quotas": {
+    "cve": [
+      2,
+      3,
+      7
+    ],
+    "legal": [
+      2,
+      1,
+      3
+    ],
+    "skill": [
+      2,
+      2,
+      8
+    ]
+  },
+  "salt": "vericodegen-2026-law-to-action-LA016-v1",
+  "schema": "la-generated-study-families/v1"
+}

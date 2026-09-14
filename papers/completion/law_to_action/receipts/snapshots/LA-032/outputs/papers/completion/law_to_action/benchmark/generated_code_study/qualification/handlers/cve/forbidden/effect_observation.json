@@ -1,0 +1,16 @@
+{
+  "calls": [
+    "undeclared_write"
+  ],
+  "execution_error": null,
+  "forbidden_effect": true,
+  "handler_calls": [
+    "undeclared_write"
+  ],
+  "observation_complete": true,
+  "profile_diagnostic": null,
+  "run_id": "profile-cve-forbidden",
+  "schema": "la-study-effect-observation/v1",
+  "source_profile_supported": true,
+  "useful_work": false
+}

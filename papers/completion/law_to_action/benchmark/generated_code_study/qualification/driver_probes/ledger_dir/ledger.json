@@ -1,0 +1,68 @@
+{
+  "calls": {
+    "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0:call-0": {
+      "call_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0:call-0",
+      "consumed": true,
+      "delivery": "unknown_or_failed",
+      "input_token_count": 17,
+      "refunded": false,
+      "reserved": true,
+      "usage": {
+        "completion_tokens": null,
+        "prompt_tokens": null
+      }
+    }
+  },
+  "cells": {
+    "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0": {
+      "attempt_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+      "consumed": true,
+      "costs": {
+        "cpu_seconds": 0.0,
+        "model_calls": 0,
+        "unknown": false
+      },
+      "identity": {
+        "arm": "A0",
+        "case_id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+        "seed": 104729
+      },
+      "reserved": true,
+      "status": "constructed_profile"
+    }
+  },
+  "events": [
+    {
+      "at": 1789412918.0026224,
+      "attempt_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+      "kind": "cell_reserved"
+    },
+    {
+      "at": 1789412918.0088236,
+      "attempt_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+      "kind": "interrupted"
+    },
+    {
+      "at": 1789412918.015541,
+      "attempt_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+      "kind": "resumed"
+    },
+    {
+      "at": 1789412918.0295177,
+      "attempt_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+      "kind": "cell_consumed",
+      "status": "constructed_profile"
+    },
+    {
+      "at": 1789412918.0602999,
+      "call_id": "104729:A0:family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0:call-0",
+      "kind": "call_reserved"
+    }
+  ],
+  "owner": {
+    "id": "la032-prep",
+    "pid": 3183,
+    "taken_at": 1789412917.998718
+  },
+  "schema": "la-study-durable-ledger/v1"
+}

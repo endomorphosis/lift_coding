@@ -1,0 +1,19 @@
+{
+  "attempt_wall_seconds": 120,
+  "docker_required": false,
+  "driver_qualification_sha256": "e79457288bbc5db2f62fcd3aa3804ff481fffb10f63b959e927076ea9315837c",
+  "final_cohort_released": false,
+  "handler_qualification_sha256": "92a07e900f595d877d58dc7cb69b2941e91b0aa89f4c5d48bc2fa84ff457a2b8",
+  "max_calls": 8,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_qualification_sha256": "ccc098daf5e11cb5f1186c8f60b59a0b9520e64ec90ce041a71102644c8db8d1",
+  "paid_provider_budget": 0,
+  "prompt_profile_sha256": "6b0a43374530fd0c4b9b753aa5db4ffb13a736d236a872084088faa889f8facb",
+  "python": "/usr/bin/python3.12",
+  "schema": "la-generated-study-runtime/v1",
+  "scientific_cells_executed": 0,
+  "scientific_model_qualified": true,
+  "systemd_required": false,
+  "watchdog_qualification_sha256": "15cd9b8bede8e5e99bca8d8060a1f760a10f16ad3ae177da4b18dfbcfb25496d"
+}

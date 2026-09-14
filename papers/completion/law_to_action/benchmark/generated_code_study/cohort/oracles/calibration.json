@@ -1,0 +1,146 @@
+{
+  "oracles": {
+    "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2024-3651",
+        "cwe": "Insufficient Information",
+        "status": "vulnerable"
+      },
+      "human_gold": false,
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-1": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2024-3651",
+        "status": "fixed"
+      },
+      "human_gold": false,
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "action": "release education records",
+        "actor": "funded educational agency or institution",
+        "modality": "shall-not-without-consent",
+        "object": "education records of students",
+        "section": "20-USC-1232g"
+      },
+      "human_gold": false,
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "section": "20-USC-1232g"
+      },
+      "human_gold": false,
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "skill_id": "0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783",
+        "status": "in-scope",
+        "title": "Integrate AuthTuna session-based authentication into a FastAPI app"
+      },
+      "human_gold": false,
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "human_gold": false,
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "skill_id": "02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8",
+        "status": "in-scope",
+        "title": "Run the dev-sec Apache Baseline InSpec profile"
+      },
+      "human_gold": false,
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "human_gold": false,
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2014-8351",
+        "cwe": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+        "status": "vulnerable"
+      },
+      "human_gold": false,
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-1": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2014-8351",
+        "status": "fixed"
+      },
+      "human_gold": false,
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2022-0402",
+        "cwe": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "status": "vulnerable"
+      },
+      "human_gold": false,
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-1": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2022-0402",
+        "status": "fixed"
+      },
+      "human_gold": false,
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    }
+  },
+  "schema": "la-generated-study-oracles/v1",
+  "split": "calibration"
+}

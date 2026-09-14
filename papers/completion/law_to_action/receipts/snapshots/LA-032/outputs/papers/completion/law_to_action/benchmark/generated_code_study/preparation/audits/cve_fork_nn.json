@@ -1,0 +1,83 @@
+{
+  "artifact_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+  "audit": [
+    {
+      "cve_id": "CVE-2022-0159",
+      "decision": "include",
+      "file_row_number": 25,
+      "repository": "github.com/orchardcms/orchardcore"
+    },
+    {
+      "cve_id": "CVE-2022-0402",
+      "decision": "include",
+      "file_row_number": 31,
+      "repository": "github.com/renstillmann/super-forms"
+    },
+    {
+      "cve_id": "CVE-2014-0177",
+      "decision": "include",
+      "file_row_number": 32,
+      "repository": "github.com/github/hub"
+    },
+    {
+      "cve_id": "CVE-2024-3651",
+      "decision": "include",
+      "file_row_number": 33,
+      "repository": "github.com/kjd/idna"
+    },
+    {
+      "cve_id": "CVE-2024-28236",
+      "decision": "include",
+      "file_row_number": 35,
+      "repository": "github.com/go-vela/worker"
+    },
+    {
+      "cve_id": "CVE-2023-32070",
+      "decision": "include",
+      "file_row_number": 36,
+      "repository": "github.com/xwiki/xwiki-rendering"
+    },
+    {
+      "cve_id": "CVE-2024-29900",
+      "decision": "include",
+      "file_row_number": 39,
+      "repository": "github.com/electron/packager"
+    },
+    {
+      "cve_id": "CVE-2021-4431",
+      "decision": "include",
+      "file_row_number": 40,
+      "repository": "github.com/msyk/fmdataapi"
+    },
+    {
+      "cve_id": "CVE-2023-31470",
+      "decision": "include",
+      "file_row_number": 41,
+      "repository": "github.com/pymumu/smartdns"
+    },
+    {
+      "cve_id": "CVE-2023-28444",
+      "decision": "include",
+      "file_row_number": 42,
+      "repository": "github.com/kyubisation/angular-server-side-configuration"
+    },
+    {
+      "cve_id": "CVE-2014-8351",
+      "decision": "include",
+      "file_row_number": 43,
+      "repository": "github.com/labocnil/cookieviz"
+    },
+    {
+      "cve_id": "CVE-2023-1070",
+      "decision": "include",
+      "file_row_number": 45,
+      "repository": "github.com/nilsteampassnet/teampass"
+    }
+  ],
+  "shard_rows": 4329,
+  "skipped": {
+    "duplicate_repo": 8,
+    "la004_or_stem_exclusion": 25,
+    "missing_pair_bodies": 1
+  }
+}

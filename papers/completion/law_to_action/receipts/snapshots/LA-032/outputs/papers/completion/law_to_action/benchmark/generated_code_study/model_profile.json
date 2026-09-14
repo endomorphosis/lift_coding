@@ -1,0 +1,27 @@
+{
+  "base_url": "http://127.0.0.1:48513",
+  "chat_template": "{% for m in messages %}{{ m.role }}: {{ m.content }}\n{% endfor %}assistant:",
+  "chat_template_sha256": "dd4189f6e9bb52304488a56103980133db53d3125afec4d8c4b900433b0e597b",
+  "deployment": {
+    "host": "127.0.0.1",
+    "kind": "bounded-child-http",
+    "service_wall_seconds": 10000,
+    "startup_seconds_bound": 360,
+    "systemd": false
+  },
+  "deployment_sha256": "586eef1eb67822cae9effa21032631a256b77d110563d5f3507baa3311a9fcbd",
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "la032-tiny-onnx-lm",
+  "model_revision": "v1-3b73a56d1dea",
+  "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789410623/papers/completion/law_to_action/benchmark/generated_code_study/model_profile.json",
+  "port": 48513,
+  "profile_sha256": "950d87b4eb68db89838a27217354c14d59c56e89e78ea8d45a7ee93479b57b5a",
+  "prompt_profile_sha256": "6b0a43374530fd0c4b9b753aa5db4ffb13a736d236a872084088faa889f8facb",
+  "schema": "la-qualified-local-model/v1",
+  "temperature": 0,
+  "tokenizer_revision": "byte-offset-v1",
+  "tokenizer_sha256": "b742b8a1b67a233180c0e2e595b03d47f68ca9a9ad8707e63f2d7e5d455b6e95",
+  "weights_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789410623/papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/tiny_lm.npz",
+  "weights_sha256": "3b73a56d1dea5f49e899daf130f7a42abf96fbb527fc4615b06ec1bfc54db11c"
+}

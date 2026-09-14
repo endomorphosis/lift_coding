@@ -1,0 +1,148 @@
+{
+  "oracles": {
+    "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2021-4431",
+        "cwe": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "status": "vulnerable"
+      },
+      "human_gold": false,
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2021-4431",
+        "status": "fixed"
+      },
+      "human_gold": false,
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "action": "maintain records and report transactions",
+        "actor": "Secretary and financial institutions",
+        "modality": "shall",
+        "object": "records and reports useful in criminal, tax, or regulatory investigations",
+        "section": "31-USC-5318"
+      },
+      "human_gold": false,
+      "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "section": "31-USC-5318"
+      },
+      "human_gold": false,
+      "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+        "status": "in-scope",
+        "title": "JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go"
+      },
+      "human_gold": false,
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "human_gold": false,
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "skill_id": "02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f",
+        "status": "in-scope",
+        "title": "Add ASP.NET Core security headers with Lib.AspNetCore.Security"
+      },
+      "human_gold": false,
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "human_gold": false,
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2023-31470",
+        "cwe": "Out-of-bounds Write",
+        "status": "vulnerable"
+      },
+      "human_gold": false,
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-1": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "cve_id": "CVE-2023-31470",
+        "status": "fixed"
+      },
+      "human_gold": false,
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0": {
+      "expected_export": "exports/fact.json",
+      "expected_payload": {
+        "action": "give access to financial records",
+        "actor": "financial institution",
+        "modality": "shall-not-except-as-authorized",
+        "object": "customer financial records",
+        "section": "12-USC-3402"
+      },
+      "human_gold": false,
+      "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    },
+    "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-1": {
+      "expected_export": "exports/decision.json",
+      "expected_payload": {
+        "decision": "deny",
+        "section": "12-USC-3402"
+      },
+      "human_gold": false,
+      "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-1:oracle",
+      "independent": true,
+      "skill_is_human_annotation": false
+    }
+  },
+  "schema": "la-generated-study-oracles/v1",
+  "split": "development"
+}

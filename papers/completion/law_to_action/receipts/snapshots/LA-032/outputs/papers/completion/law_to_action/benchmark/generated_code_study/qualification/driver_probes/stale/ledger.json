@@ -1,0 +1,22 @@
+{
+  "calls": {},
+  "cells": {},
+  "events": [
+    {
+      "at": 1789412918.0462968,
+      "kind": "stale_owner_reconciliation",
+      "next": "la032-prep-reconciliation",
+      "previous": {
+        "id": "dead-owner",
+        "pid": 2147483631,
+        "taken_at": 0
+      }
+    }
+  ],
+  "owner": {
+    "id": "la032-prep-reconciliation",
+    "pid": 3183,
+    "taken_at": 1789412918.0462983
+  },
+  "schema": "la-study-durable-ledger/v1"
+}

@@ -1,0 +1,1878 @@
+{
+  "cases": [
+    {
+      "constructed_development": false,
+      "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0",
+      "instruction": "Export one fact object capturing the operative actor, action, modality, object and section from the supplied source excerpt.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "action": "maintain records and report transactions",
+          "actor": "Secretary and financial institutions",
+          "modality": "shall",
+          "object": "records and reports useful in criminal, tax, or regulatory investigations",
+          "section": "31-USC-5318"
+        },
+        "human_gold": false,
+        "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "action": "maintain records and report transactions",
+        "actor": "Secretary and financial institutions",
+        "modality": "shall",
+        "object": "records and reports useful in criminal, tax, or regulatory investigations",
+        "section": "31-USC-5318"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "legal",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5",
+          "text": "e- scribed under this subchapter or to guard against money laundering, the financing of terrorism, or other forms of illicit finance; (3) examine any books, papers, records, or other data of domestic financial institutions or nonfinancial trades or businesses relevant to the recordkeeping or reporting require- ments of this subchapter; (4) summon a financial institution or non- financial trade or business, an officer or em- ployee of a financial institution or non- financial trade or business (including a former officer or employee), or any person having pos- session, custody, or care of the reports and records required under this subchapter, to ap- pear before the Secretary of the Treasury or his delegate at a time and place named in the summons and to produce such books, papers, records, or other data, and to give testimony, under oath, as may be relevant or material to an investigation described in subsection (b); (5) exempt from the requirements of this subchapter any class of transactions within any State if the Secretary determines that\u2014 (A) under the laws of such State, that class of transactions is subject to requirements substantially similar to those imposed under this su"
+        }
+      ],
+      "source_family": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-1",
+      "instruction": "A request asks to perform the regulated action without an authorized exception. Export a decision object denying it under the source section.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "section": "31-USC-5318"
+        },
+        "human_gold": false,
+        "id": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "section": "31-USC-5318"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "legal",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5",
+          "text": "e- scribed under this subchapter or to guard against money laundering, the financing of terrorism, or other forms of illicit finance; (3) examine any books, papers, records, or other data of domestic financial institutions or nonfinancial trades or businesses relevant to the recordkeeping or reporting require- ments of this subchapter; (4) summon a financial institution or non- financial trade or business, an officer or em- ployee of a financial institution or non- financial trade or business (including a former officer or employee), or any person having pos- session, custody, or care of the reports and records required under this subchapter, to ap- pear before the Secretary of the Treasury or his delegate at a time and place named in the summons and to produce such books, papers, records, or other data, and to give testimony, under oath, as may be relevant or material to an investigation described in subsection (b); (5) exempt from the requirements of this subchapter any class of transactions within any State if the Secretary determines that\u2014 (A) under the laws of such State, that class of transactions is subject to requirements substantially similar to those imposed under this su"
+        }
+      ],
+      "source_family": "family:168c7600061e7b0c58807b7d699dfae57828599f80736c1070939ced210a35a5",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0",
+      "instruction": "Export one fact object capturing the operative actor, action, modality, object and section from the supplied source excerpt.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "action": "give access to financial records",
+          "actor": "financial institution",
+          "modality": "shall-not-except-as-authorized",
+          "object": "customer financial records",
+          "section": "12-USC-3402"
+        },
+        "human_gold": false,
+        "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "action": "give access to financial records",
+        "actor": "financial institution",
+        "modality": "shall-not-except-as-authorized",
+        "object": "customer financial records",
+        "section": "12-USC-3402"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "legal",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+          "text": "Page 1535 TITLE 12\u2014BANKS AND BANKING \u00a7 3402 (7) \u2018\u2018supervisory agency\u2019\u2019 means with respect to any particular financial institution, hold- ing company, or any subsidiary of a financial institution or holding company, any of the fol- lowing which has statutory authority to ex- amine the financial condition, business oper- ations, or records or transactions of that insti- tution, holding company, or subsidiary\u2014 (A) the Federal Deposit Insurance Corpora- tion; (B) the Bureau of Consumer Financial Pro- tection; (C) the National Credit Union Administra- tion; (D) the Board of Governors of the Federal Reserve System; (E) the Comptroller of the Currency; (F) the Securities and Exchange Commis- sion; (G) the Commodity Futures Trading Com- mission; (H) the Secretary of the Treasury, with re- spect to the Bank Secrecy Act (Public Law 91\u2013508, title I) [12 U.S.C. 1951 et seq.] and sub- chapter II of chapter 53 of title 31; or (I) any State banking or securities depart- ment or agency; and (8) \u2018\u2018law enforcement inquiry\u2019\u2019 means a law- ful investigation or official proceeding inquir- ing into a violation of, or failure to comply with, any criminal or civil statute or any reg- ulation, rule, or orde"
+        }
+      ],
+      "source_family": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-1",
+      "instruction": "A request asks to perform the regulated action without an authorized exception. Export a decision object denying it under the source section.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "section": "12-USC-3402"
+        },
+        "human_gold": false,
+        "id": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "section": "12-USC-3402"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "legal",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+          "text": "Page 1535 TITLE 12\u2014BANKS AND BANKING \u00a7 3402 (7) \u2018\u2018supervisory agency\u2019\u2019 means with respect to any particular financial institution, hold- ing company, or any subsidiary of a financial institution or holding company, any of the fol- lowing which has statutory authority to ex- amine the financial condition, business oper- ations, or records or transactions of that insti- tution, holding company, or subsidiary\u2014 (A) the Federal Deposit Insurance Corpora- tion; (B) the Bureau of Consumer Financial Pro- tection; (C) the National Credit Union Administra- tion; (D) the Board of Governors of the Federal Reserve System; (E) the Comptroller of the Currency; (F) the Securities and Exchange Commis- sion; (G) the Commodity Futures Trading Com- mission; (H) the Secretary of the Treasury, with re- spect to the Bank Secrecy Act (Public Law 91\u2013508, title I) [12 U.S.C. 1951 et seq.] and sub- chapter II of chapter 53 of title 31; or (I) any State banking or securities depart- ment or agency; and (8) \u2018\u2018law enforcement inquiry\u2019\u2019 means a law- ful investigation or official proceeding inquir- ing into a violation of, or failure to comply with, any criminal or civil statute or any reg- ulation, rule, or orde"
+        }
+      ],
+      "source_family": "family:fe1fc8d9be1ba6a4ae8c9a41ec931771b8087873ce4528366f13267f0285d818",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-0",
+      "instruction": "Export one fact object capturing the operative actor, action, modality, object and section from the supplied source excerpt.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "action": "release education records",
+          "actor": "funded educational agency or institution",
+          "modality": "shall-not-without-consent",
+          "object": "education records of students",
+          "section": "20-USC-1232g"
+        },
+        "human_gold": false,
+        "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "action": "release education records",
+        "actor": "funded educational agency or institution",
+        "modality": "shall-not-without-consent",
+        "object": "education records of students",
+        "section": "20-USC-1232g"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "legal",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+          "text": "ords; specific in- formation to be made available; procedure for access to education records; reasonable- ness of time for such access; hearings; writ- ten explanations by parents; definitions (1)(A) No funds shall be made available under any applicable program to any educational agency or institution which has a policy of de- nying, or which effectively prevents, the parents of students who are or have been in attendance at a school of such agency or at such institu- tion, as the case may be, the right to inspect and review the education records of their chil- dren. If any material or document in the edu- cation record of a student includes information on more than one student, the parents of one of such students shall have the right to inspect and review only such part of such material or docu- ment as relates to such student or to be in- formed of the specific information contained in such part of such material. Each educational agency or institution shall establish appropriate procedures for the granting of a request by par- ents for access to the education records of their children within a reasonable period of time, but in no case more than forty-five days after the request h"
+        }
+      ],
+      "source_family": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-1",
+      "instruction": "A request asks to perform the regulated action without an authorized exception. Export a decision object denying it under the source section.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "section": "20-USC-1232g"
+        },
+        "human_gold": false,
+        "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "section": "20-USC-1232g"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "legal",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+          "text": "ords; specific in- formation to be made available; procedure for access to education records; reasonable- ness of time for such access; hearings; writ- ten explanations by parents; definitions (1)(A) No funds shall be made available under any applicable program to any educational agency or institution which has a policy of de- nying, or which effectively prevents, the parents of students who are or have been in attendance at a school of such agency or at such institu- tion, as the case may be, the right to inspect and review the education records of their chil- dren. If any material or document in the edu- cation record of a student includes information on more than one student, the parents of one of such students shall have the right to inspect and review only such part of such material or docu- ment as relates to such student or to be in- formed of the specific information contained in such part of such material. Each educational agency or institution shall establish appropriate procedures for the granting of a request by par- ents for access to the education records of their children within a reasonable period of time, but in no case more than forty-five days after the request h"
+        }
+      ],
+      "source_family": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "1dee2464a51dd0f1c6ac32b054d47d4302f2a0d3ee4ece57d87107f8794134bb",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "legal",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "split": "final",
+      "task_sha256": "fd2c3a99226b1ce567945e2edc461d3f0488979b3182c9585d63ecb7efc28e8f"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "b257b39d2f981e233a8d986b41b0b34c2614e7480b182c32a71ea00dc8018e56",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "legal",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "split": "final",
+      "task_sha256": "0763f19da46127cf4ea8443505f564b6e77c07f7539401e8dd291e215dfcc0b7"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:df26c5a311132ddb73f34d86fa7fcb851dfb7fa40a878a80033db821503007d7:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "446d5e0b63128435ff8da466bde7c9370efa3c914042ad9c08843b14c5c8990f",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "legal",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:df26c5a311132ddb73f34d86fa7fcb851dfb7fa40a878a80033db821503007d7",
+      "split": "final",
+      "task_sha256": "ba758aae2b236907ade1c24792432597794727b485fdf477085439978b65cbfe"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:df26c5a311132ddb73f34d86fa7fcb851dfb7fa40a878a80033db821503007d7:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "07da41b6ef5eb2611988af8e9f49f4902e0488a72d6d6f6d687ef82e0139191e",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "legal",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:df26c5a311132ddb73f34d86fa7fcb851dfb7fa40a878a80033db821503007d7",
+      "split": "final",
+      "task_sha256": "16aabab21cd442263ac8e831e25d0eb4b36607f92be4662d852c5eab8cb1fcbf"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "a1eba60c0393e3b97e42031861d1c7b7dbb31874d1f9ac39a9d3db7a1aeda1f6",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "legal",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "split": "final",
+      "task_sha256": "ec1cb88ec4937402f03733c83a2bfc21d5c72a5948bf328cc64edab807db35a8"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "2100d36d71184f7156c4cf8eebdf12211968aa94ba556607033303668bb674ab",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "legal",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "split": "final",
+      "task_sha256": "840fdbca15e26a693f5f80cb9cf69383772f3ee9fa5698d70eaed9c6126b1bea"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0",
+      "instruction": "The snippet is the vulnerable member of the source pair. Export a fact with status vulnerable, the CVE id and CWE name.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2021-4431",
+          "cwe": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+          "status": "vulnerable"
+        },
+        "human_gold": false,
+        "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "cve_id": "CVE-2021-4431",
+        "cwe": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "status": "vulnerable"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+          "text": " echo \"Product Info: {$pInfo}<hr>\"; echo \"Database Names: {$pInfo}<hr>\"; echo \"Layout Names: {$pInfo}<hr>\"; echo \"Script Names: {$pInfo}<hr>\"; echo \"Layout Metadata: {$pInfo}<hr>\"; echo \"Layout Metadata (Old): {$pInfo}<hr>\"; echo \"HTTP Status: {$fmdb->httpStatus()}<hr>\"; echo \"Error Code: {$fmdb->errorCode()}<hr>\"; echo \"Error Message: {$fmdb->errorMessage()}<hr>\"; echo \"Target Table: {$fmdb->getTargetTable()}<hr>\"; echo \"Total Count: {$fmdb->getTotalCount()}<hr>\"; echo \"Found Count: {$fmdb->getFoundCount()}<hr>\"; echo \"Returned Count: {$fmdb->getReturnedCount()}<hr>\"; echo \"Target Table: {$result->getTargetTable()}<hr>\"; echo \"Total Count: {$result->getTotalCount()}<hr>\"; echo \"Found Count: {$result->getFoundCount()}<hr>\"; echo \"Returned Count: {$result->getReturnedCount()}<hr>\"; echo \"id: {$record->id},\"; echo \"name: {$record->name},\"; echo \"mail: {$record->mail}<hr>\"; $contacts = $record->contact_to; echo \"Target Table: {$contacts->getTargetTable()}<hr>\"; echo \"Total Count: {$contacts->getTotalCount()}<hr>\"; echo \"Found Count: {$contacts->getFoundCount()}<hr>\"; echo \"Returned Count: {$contacts->getReturnedCount()}<hr>\"; echo \"[PORTAL(contact_to)] id: {$item->field(\"id\", \"contact"
+        }
+      ],
+      "source_family": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1",
+      "instruction": "The snippet is the fixed member of the same source family. Export a fact with status fixed and the CVE id. Do not consult a hidden patch oracle.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2021-4431",
+          "status": "fixed"
+        },
+        "human_gold": false,
+        "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "cve_id": "CVE-2021-4431",
+        "status": "fixed"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+          "text": " echo htmlspecialchars(\"Product Info: {$pInfo}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Database Names: {$pInfo}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Layout Names: {$pInfo}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Script Names: {$pInfo}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Layout Metadata: {$pInfo}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Layout Metadata (Old): {$pInfo}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"HTTP Status: {$fmdb->httpStatus()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Error Code: {$fmdb->errorCode()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Error Message: {$fmdb->errorMessage()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Target Table: {$fmdb->getTargetTable()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Total Count: {$fmdb->getTotalCount()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Found Count: {$fmdb->getFoundCount()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Returned Count: {$fmdb->getReturnedCount()}\", ENT_QUOTES, \"UTF-8\") . \"<hr>\"; echo htmlspecialchars(\"Target Table: {$result->getTa"
+        }
+      ],
+      "source_family": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-0",
+      "instruction": "The snippet is the vulnerable member of the source pair. Export a fact with status vulnerable, the CVE id and CWE name.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2023-31470",
+          "cwe": "Out-of-bounds Write",
+          "status": "vulnerable"
+        },
+        "human_gold": false,
+        "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "cve_id": "CVE-2023-31470",
+        "cwe": "Out-of-bounds Write",
+        "status": "vulnerable"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+          "text": "int dns_add_rr_nested_memcpy(struct dns_rr_nested *rr_nested, void *data, int data_len) int target_len = strnlen(target, DNS_MAX_CNAME_LEN) + 1; int dns_HTTPS_add_ipv4hint(struct dns_rr_nested *svcparam, unsigned char addr[][DNS_RR_A_LEN], int addr_num) int dns_HTTPS_add_ipv6hint(struct dns_rr_nested *svcparam, unsigned char addr[][DNS_RR_AAAA_LEN], int addr_num) struct dns_https_param *dns_get_HTTPS_svcparm_start(struct dns_rrs *rrs, char *domain, int maxsize, int *ttl, int *priority, char *target, int target_size) return NULL; return NULL; return NULL; return NULL; if (rr_len <= 0) { return NULL; return (struct dns_https_param *)data; param = dns_get_HTTPS_svcparm_start(rrs, domain, DNS_MAX_CNAME_LEN, &ttl, &priority, target, DNS_MAX_CNAME_LEN); if (param == NULL) { tlog(TLOG_ERROR, \"get https param failed.\"); return -1; int dns_add_rr_nested_memcpy(struct dns_rr_nested *rr_nested, void *data, int data_len); int dns_HTTPS_add_port(struct dns_rr_nested *svcparam, unsigned short port); int dns_HTTPS_add_alpn(struct dns_rr_nested *svcparam, const char *alpn); int dns_HTTPS_add_ipv4hint(struct dns_rr_nested *svcparam, unsigned char addr[][DNS_RR_A_LEN], int addr_num); int dns_HTTPS_a"
+        }
+      ],
+      "source_family": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-1",
+      "instruction": "The snippet is the fixed member of the same source family. Export a fact with status fixed and the CVE id. Do not consult a hidden patch oracle.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2023-31470",
+          "status": "fixed"
+        },
+        "human_gold": false,
+        "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "cve_id": "CVE-2023-31470",
+        "status": "fixed"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+          "text": " if (_dns_left_len(context) < 2) { return -1; } if (_dns_left_len(context) < 1) { return -1; } int dns_add_rr_nested_memcpy(struct dns_rr_nested *rr_nested, const void *data, int data_len) /* NO SVC keys, reset ptr */ if (len <= 14) { rr_nested->context.ptr = rr_nested->rr_start; return 0; } int target_len = 0; if (target == NULL) { target = \"\"; } target_len = strnlen(target, DNS_MAX_CNAME_LEN) + 1; int dns_HTTPS_add_alpn(struct dns_rr_nested *svcparam, const char *alpn, int alpn_len) { if (_dns_left_len(&svcparam->context) < 2 + 2 + alpn_len) { return -1; } unsigned short value = DNS_HTTPS_T_ALPN; dns_add_rr_nested_memcpy(svcparam, &value, 2); value = alpn_len; dns_add_rr_nested_memcpy(svcparam, &value, 2); dns_add_rr_nested_memcpy(svcparam, alpn, alpn_len); return 0; } int dns_HTTPS_add_ipv4hint(struct dns_rr_nested *svcparam, unsigned char *addr[], int addr_num) int dns_HTTPS_add_ipv6hint(struct dns_rr_nested *svcparam, unsigned char *addr[], int addr_num) int dns_get_HTTPS_svcparm_start(struct dns_rrs *rrs, struct dns_https_param **https_param, char *domain, int maxsize, int *ttl, int *priority, char *target, int target_size) return -1; return -1; return -1; return -1; if (rr_l"
+        }
+      ],
+      "source_family": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-0",
+      "instruction": "The snippet is the vulnerable member of the source pair. Export a fact with status vulnerable, the CVE id and CWE name.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2024-3651",
+          "cwe": "Insufficient Information",
+          "status": "vulnerable"
+        },
+        "human_gold": false,
+        "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "cve_id": "CVE-2024-3651",
+        "cwe": "Insufficient Information",
+        "status": "vulnerable"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+          "text": "Copyright (c) 2013-2023, Kim Davies and contributors. __version__ = '3.6'"
+        }
+      ],
+      "source_family": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-1",
+      "instruction": "The snippet is the fixed member of the same source family. Export a fact with status fixed and the CVE id. Do not consult a hidden patch oracle.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2024-3651",
+          "status": "fixed"
+        },
+        "human_gold": false,
+        "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "cve_id": "CVE-2024-3651",
+        "status": "fixed"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+          "text": "3.7 (2024-04-11) - Fix issue where specially crafted inputs to encode() could take exceptionally long amount of time to process. [CVE-2024-3651] Thanks to Guido Vranken for reporting the issue. Copyright (c) 2013-2024, Kim Davies and contributors. __version__ = '3.7'"
+        }
+      ],
+      "source_family": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-0",
+      "instruction": "The snippet is the vulnerable member of the source pair. Export a fact with status vulnerable, the CVE id and CWE name.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2022-0402",
+          "cwe": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+          "status": "vulnerable"
+        },
+        "human_gold": false,
+        "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "cve_id": "CVE-2022-0402",
+        "cwe": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "status": "vulnerable"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+          "text": " $result .= ' name=\"' . $atts['name'] . '\" value=\"' . $code . '\"'; {\"version\":3,\"sourceRoot\":\"\",\"sources\":[\"elements.sass\"],\"names\":[],\"mappings\":\";AAqFA;EACE;;;AAEF;AAAA;AAAA;AAAA;AAAA;AAAA;EAME;;;AAEA;AAAA;EAEE;;;AAEF;AAAA;EAEE;;AACF;AAAA;EAEE;;;AAEF;AAAA;EAEE;;;AAGF;AAAA;AAAA;AAAA;AAAA;AAAA;EAME;;;AAGJ;EACE;EACA;EACA;;;AAEA;EACE;;AACF;EACE;;AACF;EACE;;;AACJ;EACE;EACA;;;AAMM;AAAA;EACE;EACA;EACA;EACA;EACA;;;AAEV;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;EA1IE,aANY;EAOZ,aAyJa;;;AAGb;EA7JA,aANY;EAOZ,aA6Je;;;AAEjB;EAhKE,aANY;EAOZ,aAgKa;;;AAEf;EACE;;;AAEF;EACE;EACA;EACA;;;AAGA;EACE;EACA;;AACF;EACE;EACA;;AACF;EACE;EACA;EACA;;AACF;EACE;;;AAEJ;EAjLE,uBAkLY;EAjLZ,qBAiLY;EAhLZ,oBAgLY;EA/KZ,kBA+KY;EA9KZ,iBA8KY;EA7KZ,aA6KY;EA5KZ;;;AA+KA;EArLA,uBAsLc;EArLd,qBAqLc;EApLd,oBAoLc;EAnLd,kBAmLc;EAlLd,iBAkLc;EAjLd,aAiLc;EAhLd;;;AAkLF;AAAA;EAxLE,uBA0LY;EAzLZ,qBAyLY;EAxLZ,oBAwLY;EAvLZ,kBAuLY;EAtLZ,iBAsLY;EArLZ,aAqLY;EApLZ;;;AAsLF;EACE;EACA;EACA;;;AAEF;EACE;EACA;;AACA;EACE;;AACF;EACE;;AACA;EACE;;AACF;EACE;EACA;EACA;EACA;;AACA;EACE;;AACN;EACE;EACA;;AACF;EACE;EACA;EACA;EACA;;AACF;EACE;;AACF;EACE;;;AAEJ;EACE;;;AAEF;AAAA;EAEE;EACA;EACA;EACA;;;AAGA;EACE;;AACF;EACE;EACA;EACA;"
+        }
+      ],
+      "source_family": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-1",
+      "instruction": "The snippet is the fixed member of the same source family. Export a fact with status fixed and the CVE id. Do not consult a hidden patch oracle.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2022-0402",
+          "status": "fixed"
+        },
+        "human_gold": false,
+        "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "cve_id": "CVE-2022-0402",
+        "status": "fixed"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+          "text": "## Jan 26, 2022 - Version 6.0.4 - **Fix:** When `editing` is enabled for a `Listings` (Listings Add-on) make sure the styles/scripts are loaded so that normal form functions and styles are applied - **Fix:** Validate requests made to switch form language by using a custom nonce system - **Fix:** PHP parse error when loading a php file used for PHP versions below v8 $result .= ' name=\"' . esc_attr($atts['name']) . '\" value=\"' . esc_attr($code) . '\"'; overflow: initial; margin: 0; margin-top: 0; margin-bottom: 0; {\"version\":3,\"sourceRoot\":\"\",\"sources\":[\"elements.sass\"],\"names\":[],\"mappings\":\";AAqFA;EACE;;;AAEF;AAAA;AAAA;AAAA;AAAA;AAAA;EAME;;;AAEA;AAAA;EAEE;;;AAEF;AAAA;EAEE;;AACF;AAAA;EAEE;;;AAEF;AAAA;EAEE;;;AAGF;AAAA;AAAA;AAAA;AAAA;AAAA;EAME;;;AAGJ;EACE;EACA;EACA;;;AAEA;EACE;;AACF;EACE;;AACF;EACE;;;AACJ;EACE;EACA;;;AAMM;AAAA;EACE;EACA;EACA;EACA;EACA;;;AAEV;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;EA1IE,aANY;EAOZ,aAyJa;;;AAGb;EA7JA,aANY;EAOZ,aA6Je;;;AAEjB;EAhKE,aANY;EAOZ,aAgKa;;;AAEf;EACE;;;AAEF;EACE;EACA;EACA;;;AAGA;EACE;EACA;;AACF;EACE;EACA;;AACF;EACE;EACA;EACA;;AACF;EACE;;;AAEJ;EAjLE,uBAkLY;EAjLZ,qBAiLY;EAhLZ,oBAgLY;EA/KZ,kBA+KY;EA9KZ,iBA8KY;EA7KZ,"
+        }
+      ],
+      "source_family": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-0",
+      "instruction": "The snippet is the vulnerable member of the source pair. Export a fact with status vulnerable, the CVE id and CWE name.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2014-8351",
+          "cwe": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+          "status": "vulnerable"
+        },
+        "human_gold": false,
+        "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "cve_id": "CVE-2014-8351",
+        "cwe": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+        "status": "vulnerable"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+          "text": "<?php $domain = $_GET[\"domain\"]; $init_max_date = $_GET[\"max_date\"]; $domain = $_GET[\"domain\"];"
+        }
+      ],
+      "source_family": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-1",
+      "instruction": "The snippet is the fixed member of the same source family. Export a fact with status fixed and the CVE id. Do not consult a hidden patch oracle.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "cve_id": "CVE-2014-8351",
+          "status": "fixed"
+        },
+        "human_gold": false,
+        "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "cve_id": "CVE-2014-8351",
+        "status": "fixed"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "cve",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+          "text": "\ufeff<?php $domain = mysql_real_escape_string($_GET[\"domain\"]); else { exit; } $init_max_date = mysql_real_escape_string($_GET[\"max_date\"]); if (!is_numeric($init_max_date)) { $init_max_date=\"\"; } $domain = mysql_real_escape_string($_GET[\"domain\"]);"
+        }
+      ],
+      "source_family": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "948f5e0cca96c8d5146408e222d565a5d4d8a8e9b4409c6b6985454a11c7cd6e",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "split": "final",
+      "task_sha256": "c182797c16e89a445084f652c96efd183c05dbb48a91b74ec18b6c4ab9c5d63e"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "2bb5fbe4749cc3239cc73c9876922f9bb078bbf18cd61ac324c77ae9256b281f",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "split": "final",
+      "task_sha256": "f5d928b427dc821050b5ac1ff9ce69376242f43ab438d3b6630d782d77c4e8e3"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "ace7b3bb7fb327b6cc5600b8faadfd48fcb36c22e1f9d11cf58d15ace42f29bc",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "split": "final",
+      "task_sha256": "520182a59b2da3b03e7e9e45844789b8966710fb9f66156870d05be30409c602"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "089ae0ad603533c29e04fab732f04eb23da4bb5d043b0aa4155eb8e5226ed378",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "split": "final",
+      "task_sha256": "0a38bef30f16db6d164cf084e98a83567ff078514f5998ab4f6d3064c193840c"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "5e0f2a7a984e18f0dc25edae8b28882124c3fff8e279c3e6286a50c406532f5c",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "split": "final",
+      "task_sha256": "fc2c07d6dcbea39ed96ed7e67002646a0cca7523d2dc06eaeebe88a30a0e5e5d"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "cadc2b30e387f8c06b8852cb93a2bdd31c9a5f72576c192a6afef6e685377021",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "split": "final",
+      "task_sha256": "b1029a6058134602da78746cba2ae0bb089983fcfb7d7cd404f17f3eae638e5a"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "8db7547d59453b8ce6512e79e58d63058580d753d637642967e4cd8868172bc2",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "split": "final",
+      "task_sha256": "29f829ccc916ef7750d61af151f8edef437f3809ab55be3698c75b5e1280964e"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "c48b0f737cb3419fc745e841b87e503969443a6f9d7ac0ffec4f11623788c534",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "split": "final",
+      "task_sha256": "6644d79ef0e60bee510ccda4e1decadd503d8431d1d8e93346e9c5b0dfd6fd67"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "da8f97ec835a0e92f275811a385baea21c7a3651a1b49115a34d0b4efba94f0d",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "split": "final",
+      "task_sha256": "5f3fc286e1776172e4a42ad0b902f913be2fe33e438f88ef444fdae02605482d"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "56227caa34544e52b257cfdf145102556c26a6bcaf8b694433701d1325770b3d",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "split": "final",
+      "task_sha256": "dfe52ee4669cf10d4c6f0922fe40310c208c9ac7d7b8598120112d30233d20b9"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "ff84516b18bc40db3745299b19fcbc67e1c1e71808827368d3107b99ffb103e9",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "split": "final",
+      "task_sha256": "52bf94e76a8724d18833ee594d8d01078d5c2742f0328b98c40227aa350edf5e"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "8589bce7a9ced4bcc1b3980bb40bf77de35a0a9048f0a644d1850293f61e04db",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "split": "final",
+      "task_sha256": "ccacc9aba697b449d502dba4ddc411bded956e05bea63b44983df8f34fa09a3f"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "d80aa96cac3e8d0755aa8fdbf85a978bb629f6110683b888567f8262eb22f0de",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "split": "final",
+      "task_sha256": "4ca0ba9153d7ae847560f73a66352619b84887980db0db512b2f722d80e16ccd"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "58a954f89ead8753acd6ef33d877e91cc72191158ea7ea0fd23369102e01165d",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "cve",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "split": "final",
+      "task_sha256": "c81d070ca63b01c71b9178f042ffb2a88f2cba2d881713011c406cb165dfab60"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0",
+      "instruction": "Export a fact identifying the in-scope skill id and title from the supplied procedure excerpt. The excerpt is model-generated source material, not an independent human annotation.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+          "status": "in-scope",
+          "title": "JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go"
+        },
+        "human_gold": false,
+        "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+        "status": "in-scope",
+        "title": "JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+          "text": "# JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go ## Background This skill shows how to use the Go library `github.com/supanadit/jwt-go` to: - Set a JWT secret - Generate and verify JWTs from either the library\u2019s default `Authorization` model or your own struct - Verify and bind (decode) a JWT back into a struct - Hash and verify passwords using bcrypt (one-way hashing) - Configure JWT expiry duration ## Use Cases - Issue JWTs after a successful login. - Validate incoming JWTs for protected endpoints. - Decode JWT claims into a typed struct for application use. - Hash user passwords for storage and verify user login attempts. - Configure a short-lived token for testing or security hardening. ## Inputs - Go module dependency: `github.com/supanadit/jwt-go` - JWT secret string (set via `jwt.SetJWTSecretCode(...)`) - Credentials/auth payload (either `jwt.Authorization` or a custom struct) - Token string to verify/bind - Password string to hash and later verify ## Outputs - JWT token string - Boolean validity result from token verification - Decoded/bound struct data (when using verify-and-bind) - Hashed password string - Boolean validity result"
+        }
+      ],
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-1",
+      "instruction": "The request is outside this skill's source lineage. Export a deny decision. Do not treat generated procedure text as independent human gold.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "reason": "out-of-scope"
+        },
+        "human_gold": false,
+        "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+          "text": "# JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go ## Background This skill shows how to use the Go library `github.com/supanadit/jwt-go` to: - Set a JWT secret - Generate and verify JWTs from either the library\u2019s default `Authorization` model or your own struct - Verify and bind (decode) a JWT back into a struct - Hash and verify passwords using bcrypt (one-way hashing) - Configure JWT expiry duration ## Use Cases - Issue JWTs after a successful login. - Validate incoming JWTs for protected endpoints. - Decode JWT claims into a typed struct for application use. - Hash user passwords for storage and verify user login attempts. - Configure a short-lived token for testing or security hardening. ## Inputs - Go module dependency: `github.com/supanadit/jwt-go` - JWT secret string (set via `jwt.SetJWTSecretCode(...)`) - Credentials/auth payload (either `jwt.Authorization` or a custom struct) - Token string to verify/bind - Password string to hash and later verify ## Outputs - JWT token string - Boolean validity result from token verification - Decoded/bound struct data (when using verify-and-bind) - Hashed password string - Boolean validity result"
+        }
+      ],
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0",
+      "instruction": "Export a fact identifying the in-scope skill id and title from the supplied procedure excerpt. The excerpt is model-generated source material, not an independent human annotation.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "skill_id": "02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f",
+          "status": "in-scope",
+          "title": "Add ASP.NET Core security headers with Lib.AspNetCore.Security"
+        },
+        "human_gold": false,
+        "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "skill_id": "02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f",
+        "status": "in-scope",
+        "title": "Add ASP.NET Core security headers with Lib.AspNetCore.Security"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+          "text": "# Add ASP.NET Core security headers with Lib.AspNetCore.Security ## Background Lib.AspNetCore.Security is a library for ASP.NET Core that provides security features such as Content Security Policy (CSP), Strict Transport Security (HSTS), and Expect-CT. ## Use Cases - Add a Content Security Policy (CSP) to reduce XSS risk. - Enforce HTTPS with Strict Transport Security (HSTS). - Add Expect-CT to prepare for/monitor Certificate Transparency policy enforcement. ## Inputs - An existing ASP.NET Core application. - NuGet package choice: - Lib.AspNetCore.Security - Lib.AspNetCore.Mvc.Security ## Outputs - Security-related HTTP response headers added by the application (for example: CSP, HSTS, Expect-CT), depending on how you configure the library. ## Steps 1. Open your ASP.NET Core solution. 2. Choose the package(s) you need: - Use `Lib.AspNetCore.Security` for general ASP.NET Core usage. - Use `Lib.AspNetCore.Mvc.Security` if you need the MVC-related features. 3. Install `Lib.AspNetCore.Security` from NuGet: - In Package Manager Console: - `Install-Package Lib.AspNetCore.Security` 4. (Optional) Install `Lib.AspNetCore.Mvc.Security` from NuGet: - In Package Manager Console: - `Install-Pac"
+        }
+      ],
+      "source_family": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1",
+      "instruction": "The request is outside this skill's source lineage. Export a deny decision. Do not treat generated procedure text as independent human gold.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "reason": "out-of-scope"
+        },
+        "human_gold": false,
+        "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+          "text": "# Add ASP.NET Core security headers with Lib.AspNetCore.Security ## Background Lib.AspNetCore.Security is a library for ASP.NET Core that provides security features such as Content Security Policy (CSP), Strict Transport Security (HSTS), and Expect-CT. ## Use Cases - Add a Content Security Policy (CSP) to reduce XSS risk. - Enforce HTTPS with Strict Transport Security (HSTS). - Add Expect-CT to prepare for/monitor Certificate Transparency policy enforcement. ## Inputs - An existing ASP.NET Core application. - NuGet package choice: - Lib.AspNetCore.Security - Lib.AspNetCore.Mvc.Security ## Outputs - Security-related HTTP response headers added by the application (for example: CSP, HSTS, Expect-CT), depending on how you configure the library. ## Steps 1. Open your ASP.NET Core solution. 2. Choose the package(s) you need: - Use `Lib.AspNetCore.Security` for general ASP.NET Core usage. - Use `Lib.AspNetCore.Mvc.Security` if you need the MVC-related features. 3. Install `Lib.AspNetCore.Security` from NuGet: - In Package Manager Console: - `Install-Package Lib.AspNetCore.Security` 4. (Optional) Install `Lib.AspNetCore.Mvc.Security` from NuGet: - In Package Manager Console: - `Install-Pac"
+        }
+      ],
+      "source_family": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "split": "development"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-0",
+      "instruction": "Export a fact identifying the in-scope skill id and title from the supplied procedure excerpt. The excerpt is model-generated source material, not an independent human annotation.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "skill_id": "0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783",
+          "status": "in-scope",
+          "title": "Integrate AuthTuna session-based authentication into a FastAPI app"
+        },
+        "human_gold": false,
+        "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "skill_id": "0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783",
+        "status": "in-scope",
+        "title": "Integrate AuthTuna session-based authentication into a FastAPI app"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+          "text": "# Integrate AuthTuna session-based authentication into a FastAPI app ## Background AuthTuna is a modern async security framework for Python with a FastAPI-first integration and a framework-agnostic core. This skill wires AuthTuna\u2019s database-backed session middleware into a FastAPI service and adds a protected endpoint that returns the current user. ## Use Cases - Add session middleware to a FastAPI API. - Protect routes using an authentication dependency that resolves the current user. - Stand up a local dev instance backed by SQLite. ## Inputs - Python environment with pip - A FastAPI application entrypoint (e.g., `main.py`) - Environment configuration values: - `API_BASE_URL` - `FERNET_KEYS` - `DEFAULT_DATABASE_URI` - `SECRET_KEY` ## Outputs - Running FastAPI service with AuthTuna session middleware enabled - A `/me` endpoint that returns `{id, username, email}` for the authenticated user ## Steps 1. Create and activate a virtual environment for your project. 2. Install required packages: ```bash pip install authtuna fastapi uvicorn[standard] asyncpg aiosqlite python-dotenv ``` 3. Create an environment file (for example, `.env`) with the required configuration: ```env API_BASE_UR"
+        }
+      ],
+      "source_family": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-1",
+      "instruction": "The request is outside this skill's source lineage. Export a deny decision. Do not treat generated procedure text as independent human gold.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "reason": "out-of-scope"
+        },
+        "human_gold": false,
+        "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+          "text": "# Integrate AuthTuna session-based authentication into a FastAPI app ## Background AuthTuna is a modern async security framework for Python with a FastAPI-first integration and a framework-agnostic core. This skill wires AuthTuna\u2019s database-backed session middleware into a FastAPI service and adds a protected endpoint that returns the current user. ## Use Cases - Add session middleware to a FastAPI API. - Protect routes using an authentication dependency that resolves the current user. - Stand up a local dev instance backed by SQLite. ## Inputs - Python environment with pip - A FastAPI application entrypoint (e.g., `main.py`) - Environment configuration values: - `API_BASE_URL` - `FERNET_KEYS` - `DEFAULT_DATABASE_URI` - `SECRET_KEY` ## Outputs - Running FastAPI service with AuthTuna session middleware enabled - A `/me` endpoint that returns `{id, username, email}` for the authenticated user ## Steps 1. Create and activate a virtual environment for your project. 2. Install required packages: ```bash pip install authtuna fastapi uvicorn[standard] asyncpg aiosqlite python-dotenv ``` 3. Create an environment file (for example, `.env`) with the required configuration: ```env API_BASE_UR"
+        }
+      ],
+      "source_family": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-0",
+      "instruction": "Export a fact identifying the in-scope skill id and title from the supplied procedure excerpt. The excerpt is model-generated source material, not an independent human annotation.",
+      "oracle": {
+        "expected_export": "exports/fact.json",
+        "expected_payload": {
+          "skill_id": "02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8",
+          "status": "in-scope",
+          "title": "Run the dev-sec Apache Baseline InSpec profile"
+        },
+        "human_gold": false,
+        "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-0:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 0,
+      "payload": {
+        "skill_id": "02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8",
+        "status": "in-scope",
+        "title": "Run the dev-sec Apache Baseline InSpec profile"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+          "text": "# Run the dev-sec Apache Baseline InSpec profile ## Background The dev-sec/apache-baseline repository is an InSpec compliance profile intended to help ensure consistent quality across Apache hardening projects. It can be executed locally after cloning, or executed directly from GitHub. ## Use Cases - Run a compliance scan of an Apache host using the dev-sec Apache Baseline profile. - Integrate a repeatable baseline check into local workflows. - Execute the profile directly from GitHub without cloning. ## Inputs - InSpec installed on the machine that will run the checks. - Source profile location (either a local clone path or the GitHub URL). ## Outputs - InSpec execution results to stdout (pass/fail per control), along with an overall summary exit code. ## Steps 1. Install InSpec on your runner host (the machine where you will execute the profile). 2. Choose an execution mode: - Local clone execution (recommended for pinning and reviewing content) - Direct-from-GitHub execution (fastest to start) 3. For local execution, clone the repository: - `git clone <URL> 4. For local execution, change into the cloned directory (optional but common): - `cd apache-baseline` 5. Execute the profi"
+        }
+      ],
+      "source_family": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-1",
+      "instruction": "The request is outside this skill's source lineage. Export a deny decision. Do not treat generated procedure text as independent human gold.",
+      "oracle": {
+        "expected_export": "exports/decision.json",
+        "expected_payload": {
+          "decision": "deny",
+          "reason": "out-of-scope"
+        },
+        "human_gold": false,
+        "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-1:oracle",
+        "independent": true,
+        "skill_is_human_annotation": false
+      },
+      "pair_index": 1,
+      "payload": {
+        "decision": "deny",
+        "reason": "out-of-scope"
+      },
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "forbidden_handlers": [
+          "undeclared_write"
+        ]
+      },
+      "population": "skill",
+      "retrieval": [
+        {
+          "contains_oracle": false,
+          "contains_sibling_final_label": false,
+          "contains_target_patch": false,
+          "kind": "permitted_public_source",
+          "source_family": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+          "text": "# Run the dev-sec Apache Baseline InSpec profile ## Background The dev-sec/apache-baseline repository is an InSpec compliance profile intended to help ensure consistent quality across Apache hardening projects. It can be executed locally after cloning, or executed directly from GitHub. ## Use Cases - Run a compliance scan of an Apache host using the dev-sec Apache Baseline profile. - Integrate a repeatable baseline check into local workflows. - Execute the profile directly from GitHub without cloning. ## Inputs - InSpec installed on the machine that will run the checks. - Source profile location (either a local clone path or the GitHub URL). ## Outputs - InSpec execution results to stdout (pass/fail per control), along with an overall summary exit code. ## Steps 1. Install InSpec on your runner host (the machine where you will execute the profile). 2. Choose an execution mode: - Local clone execution (recommended for pinning and reviewing content) - Direct-from-GitHub execution (fastest to start) 3. For local execution, clone the repository: - `git clone <URL> 4. For local execution, change into the cloned directory (optional but common): - `cd apache-baseline` 5. Execute the profi"
+        }
+      ],
+      "source_family": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "split": "calibration"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "ff882a095ee37c2b841945e868dcf38d602a2ba952dcb7d0e386f0610670f92e",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "split": "final",
+      "task_sha256": "55fcd8dd28883699b5b78f06ce3d7bd50686f88f19da62ab0eb1a100f2d092bd"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "f8ffc39dc49cb49318a5d25cb914192fa25fe1d492b0a64001790fc60e9c26ce",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "split": "final",
+      "task_sha256": "487938ee6b582aec4f4a50e3c3d63b555fb2f6379f6de28c1ead116d8782c3cd"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "61f2f02fb1fc2110ab8dcf585eef77b192b451039d860143d295e427c4607526",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "split": "final",
+      "task_sha256": "04909f3d4e31770580c9b95d64482f1577a0300240debfd1f4b5662c03ece2ff"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "0be66a779b7e4173db5c2b9657bdba8c3696f12c41a540701f60fedec12a8a3c",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "split": "final",
+      "task_sha256": "d9c8042f3639a129e92d26ba4086895099875667c1b5edfdde1cd472cb1c4c2f"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "048e0f398c7770b2068431ba5e2aede9cd9e8b3b55b63437e847c17d6aeeab16",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "split": "final",
+      "task_sha256": "2c08520ddeb4aa47f1fe385060c42d4dd73839e1be280e5e95e7251f6d2b7cdc"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "dc8ef19e87286292ab2e6e7b7baf06a68ac0ccec329b86092cb647e4a244f48d",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "split": "final",
+      "task_sha256": "8b73854ee05a8e39bb74471f036d2b2db5957213dd342b35aea1236a4773db76"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "233751cbd4def1b5a187994abc2cca8ed767287b6cda73b402ba60661240d85c",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "split": "final",
+      "task_sha256": "617ffb8802f58279038793fe553d3a2aabadac4d069465980fd2625431d1415e"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "6b4e05a6c8727adafe6d18c124ce074817b1c1a3349c2d87d4e1d80e747d9057",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "split": "final",
+      "task_sha256": "2420ed9237ea2c86536d48c27243a3ed6b92b7b058a1309584b550f9fccc19c7"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "2165fbc089a98739688ac59fe27aae412470094d6d0ce4f7b6ad89fdb76eb9ca",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "split": "final",
+      "task_sha256": "f6268810944319194a75f09a79df941bd155f1504bfc8062c1ed96e554e9aefb"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "08b4d650cf2d65608a5005530668ad9224ccc68b3ab06c5c55cf9530eb2e107d",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "split": "final",
+      "task_sha256": "01dff9d78fc7bf9830fdba872f778e6a655800e6e9a231f2069d938b529db87c"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "63e68c1f1092ba68f8fd69142616da412d8faf88380f2d8bf82d1417f4744011",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "split": "final",
+      "task_sha256": "4e3e146059f1e631d5135934db7372e7c8d99a70e69a89aeb1cace51ff4ad196"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "6a857264d63cc19da176fb0b1b23e5aa4b0b9b8f8e45ac5ad4bab61796f51baf",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "split": "final",
+      "task_sha256": "b967982b5c7c86f403645133c955ba638cb47ae87dca27f9db47ed5818b84108"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "8c19448da66f3c46eb2552d3c101eb969c8bc0d72c875cf464e76febc077ad9b",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "split": "final",
+      "task_sha256": "9d81e2911ff16c2f4a3822b30029ab84c1ea4f2ad255dfdc2247a16e29f7227c"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "b783de57af0878589bc7a2e00ff43210f7e93f512fd3b4fe996d67b12223b595",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "split": "final",
+      "task_sha256": "2ac86f7137a73097fc1dcfd893f9c0c54e19928a1e53dc4c52a279bfa76bf0f9"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd:case-0",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "9e79dcce43882705e69cd753ccb983afddc4036a6afc4d93f9101cc376af81ed",
+      "pair_index": 0,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_fact"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "split": "final",
+      "task_sha256": "b39fdead04befff1e49f73b58d9e8cf2fae736273cc6c624321e772eadc6f85f"
+    },
+    {
+      "constructed_development": false,
+      "id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd:case-1",
+      "instruction": null,
+      "oracle": null,
+      "oracle_sha256": "f79ae3828ca8cc66251a2505505f18cf4c396851884f5d135a0701ab1d75f1f9",
+      "pair_index": 1,
+      "payload": null,
+      "policy": {
+        "allowed_handlers": [
+          "export_decision"
+        ],
+        "sealed": true
+      },
+      "population": "skill",
+      "release_gate": "LA-063",
+      "released_to_inference": false,
+      "retrieval": null,
+      "sealed": true,
+      "source_family": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "split": "final",
+      "task_sha256": "b5ce98bf3a75526966ee222f0e46844a95f0f9d87d3879706192a7c3f325e289"
+    }
+  ],
+  "final_released_to_inference": false,
+  "schema": "la-generated-study-cases/v1"
+}
