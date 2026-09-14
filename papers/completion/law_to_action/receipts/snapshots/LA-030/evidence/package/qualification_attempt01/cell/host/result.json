@@ -1,0 +1,21 @@
+{
+  "admission_sha256": "77403a990a9f6248524bd0726c5fc319e39c6ca8388a918e9515b7a7a103a943",
+  "admitted": false,
+  "cleanup_proven": false,
+  "cost_scope": "Measured final descendant-inclusive CPU/user/system and memory peak from a fresh private parent retained empty after exact child cleanup. CPU samples are cumulative, never added. Host orchestration/cleanup wall is separately reported; unknown counters stop the run.",
+  "cpu_allowance_seconds": 20,
+  "elapsed_seconds_including_cleanup": 0.23412736295722425,
+  "error": "Docker create not acknowledged",
+  "error_type": "RuntimeError",
+  "index": 0,
+  "parent_accounting_unknown": true,
+  "parent_preexisting": false,
+  "pending": "uncertain_create_manual_reconciliation",
+  "private_parent_cgroup": "/sys/fs/cgroup/la02977403a990a9f6248524bd072x0000.slice",
+  "requires_reconciliation": true,
+  "schema": "la029-operator-cell-envelope/v1",
+  "scientific_retry": false,
+  "started_monotonic": 789749.570399069,
+  "termination_proven": false,
+  "watchdog_kill_result": null
+}

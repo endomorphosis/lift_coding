@@ -1,0 +1,22 @@
+[
+  {
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source": "def run[T](payload):\n    allowed_sink(payload)\n"
+  },
+  {
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source": "def run(payload):\n    globals()[\"allowed_sink\"](payload)\n"
+  },
+  {
+    "reason": "Unsupported function contract",
+    "rejected": true,
+    "source": "@other_sink\ndef run(payload):\n    allowed_sink(payload)\n"
+  },
+  {
+    "reason": "Unsupported/dynamic handler invocation",
+    "rejected": true,
+    "source": "def run(payload):\n    allowed_sink.__call__(payload)\n"
+  }
+]

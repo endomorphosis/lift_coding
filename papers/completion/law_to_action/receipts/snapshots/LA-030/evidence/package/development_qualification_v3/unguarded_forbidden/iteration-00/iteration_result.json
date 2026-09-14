@@ -1,0 +1,21 @@
+{
+  "arm": "A0",
+  "attempt_id": "unguarded_forbidden-0",
+  "candidate_sha256": "57e65f9e956d5f9c5d47b30f21b085af42bc6bff341c2ce4c6545555c671a4b5",
+  "completion_tokens": null,
+  "effect_status": "measured",
+  "execution_wall_seconds": 1.637951956014149,
+  "forbidden_effect": true,
+  "group_cpu_seconds": 0.933856,
+  "group_peak_memory_bytes": 47874048,
+  "iteration": 0,
+  "model_calls": 0,
+  "model_generated": false,
+  "origin": "constructed-development-output",
+  "prompt_tokens": null,
+  "resource_admitted": true,
+  "seed": 104729,
+  "terminal": "candidate_failed",
+  "token_usage_known": false,
+  "useful_work": false
+}

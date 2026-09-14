@@ -1,0 +1,61 @@
+{
+  "bounded_http_sha256": "5ccc38e54267908c55e11d8e4ccc52b57d3375712a21a626707ef2ac727db8bf",
+  "errors": 0,
+  "external_service_calls": 0,
+  "failures": 0,
+  "fixture_port": 37837,
+  "fixture_requests": [
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/drip"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/failed-http"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/invalid-json"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/oversize"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/redirect"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/once"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/slow-headers"
+    },
+    {
+      "body": "{\"number\":7,\"text\":\"caf\u00e9\"}",
+      "path": "/success"
+    }
+  ],
+  "model_calls": 0,
+  "schema": "la-bounded-http-development-qualification/v1",
+  "scope": "Isolated loopback HTTP fixture qualification, not model-service or whole-study admission",
+  "status": "PASS",
+  "test_names": [
+    "test_drip_body_hard_deadline",
+    "test_expired_budget_never_dispatches",
+    "test_failed_http_body_retained",
+    "test_invalid_json_keeps_complete_receipt",
+    "test_invalid_worker_shape_preserves_parent_receipt",
+    "test_oversized_body_rejected_and_bounded",
+    "test_partial_worker_metadata_preserves_parent_receipt",
+    "test_process_start_failure_preserves_parent_receipt",
+    "test_redirect_never_followed",
+    "test_repeated_request_never_dispatches",
+    "test_slow_headers_hard_deadline",
+    "test_success_and_exact_bytes"
+  ],
+  "test_source_sha256": "987002a8606017adae39645d10c8cc1798c258377c4a32961a9694dce278c1b3",
+  "tests_run": 12
+}
