@@ -1,0 +1,115 @@
+{
+  "decision": null,
+  "leaf_samples": [
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255792,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.805647305,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    },
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255792,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.82619328,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    },
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255792,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.8470599,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    },
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255792,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.867865127,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    }
+  ],
+  "parent_samples": [
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255781,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.805309172,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    },
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255781,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.826032477,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    },
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255781,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.846745479,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    },
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255781,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816942.867572338,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/interrupt/cells/probe_interrupt_resume/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    }
+  ]
+}

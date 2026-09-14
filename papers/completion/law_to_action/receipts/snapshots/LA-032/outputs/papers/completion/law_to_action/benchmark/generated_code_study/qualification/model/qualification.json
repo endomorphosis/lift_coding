@@ -1,0 +1,66 @@
+{
+  "actual_service_resource_boundary_qualified": true,
+  "bounded_http_sha256": "5ccc38e54267908c55e11d8e4ccc52b57d3375712a21a626707ef2ac727db8bf",
+  "calls": [
+    {
+      "completion_tokens": 1024,
+      "finish_reason": "stop",
+      "input_count": 175,
+      "prompt_tokens": 175,
+      "prompt_tokens_equal_preflight": true,
+      "raw_response_sha256": "478a87abe9ed1ea547281a06e95e96fb83db097dd02856e0566783e37a8d5d93",
+      "seed": 104729
+    },
+    {
+      "completion_tokens": 1024,
+      "finish_reason": "stop",
+      "input_count": 175,
+      "prompt_tokens": 175,
+      "prompt_tokens_equal_preflight": true,
+      "raw_response_sha256": "4a1b80a828d2b2dad0d4a424aad8d346650cecc0b6bf9e713205009e64fa7eba",
+      "seed": 104759
+    }
+  ],
+  "cancellation_endpoint": "/v1/cancel",
+  "chat_template_sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+  "constructed_transport": false,
+  "deployment": {
+    "exclusive_inference_owner": true,
+    "kind": "bounded-local-transformers-http",
+    "loopback": true,
+    "model_service_py_sha256": "a6782d9e9746c2821b7d9a24a984747ce59032ff271741315d91a6ab2feaa52a",
+    "not_indefinite": true,
+    "not_systemd": true,
+    "paid_provider_budget": 0,
+    "reuse_warm_model": true,
+    "startup_readiness_seconds": 360,
+    "total_service_wall_seconds": 10000
+  },
+  "deployment_sha256": "c0825a2512e6d2400e01b25285999b28df99aeeeacb27d803b8b7df97b4bccbd",
+  "every_call_prompt_tokens_equals_preflight": true,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "model_revision": "12fd25f77366fa6b3b838768ec3050bf629380bac",
+  "paid_provider_budget": 0,
+  "prompt_profile_sha256": "7181fe3cdb823fe24242ab6a1ff8613163ee9822e2d6c6a32a60871d06de6f36",
+  "raw_response_preserved": true,
+  "schema": "la-qualified-local-model/v1",
+  "scientific_cells_executed": 0,
+  "seed_policy": "torch.manual_seed recorded even for greedy decoding",
+  "startup": {
+    "failed": null,
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "model_revision": "12fd25f77366fa6b3b838768ec3050bf629380bac",
+    "pid": 2046,
+    "port": 45253,
+    "ready": true,
+    "startup_seconds": 6.925339162000455
+  },
+  "status": "PASS",
+  "temperature": 0,
+  "tokenization_agrees_with_usage": true,
+  "tokenizer_revision": "12fd25f77366fa6b3b838768ec3050bf629380bac",
+  "tokenizer_sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+  "weights_sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+}

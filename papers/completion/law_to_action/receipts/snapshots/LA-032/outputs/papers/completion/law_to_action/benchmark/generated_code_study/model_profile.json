@@ -1,0 +1,30 @@
+{
+  "base_url": "http://127.0.0.1:45253",
+  "chat_template_sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+  "deployment_sha256": "c0825a2512e6d2400e01b25285999b28df99aeeeacb27d803b8b7df97b4bccbd",
+  "exclusive_inference_owner": true,
+  "indefinite_service_required": false,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "model_revision": "12fd25f77366fa6b3b838768ec3050bf629380bac",
+  "note": "Qualification started a bounded service and shut it down. Batch tasks start their own exclusive owner.",
+  "paid_provider_budget": 0,
+  "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+  "profile_sha256": "26c4642d5684d21d996b434c311f2a1f324ea17ef008c0d0a9d733acef955f0c",
+  "prompt_profile_sha256": "7181fe3cdb823fe24242ab6a1ff8613163ee9822e2d6c6a32a60871d06de6f36",
+  "qualification": {
+    "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/qualification.json",
+    "sha256": "e05a268d0d6680105d27f6125584303e5e92ef311cfbd4d86efa998f23543a21"
+  },
+  "reuse_warm_model_during_active_batches": true,
+  "schema": "la-qualified-local-model/v1",
+  "scientific_service_running_after_qualification": false,
+  "startup_readiness_seconds": 360,
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenizer_revision": "12fd25f77366fa6b3b838768ec3050bf629380bac",
+  "tokenizer_sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+  "total_service_wall_seconds": 10000,
+  "weights_sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+}

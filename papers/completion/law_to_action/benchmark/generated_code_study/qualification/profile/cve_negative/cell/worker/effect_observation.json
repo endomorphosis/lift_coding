@@ -1,0 +1,56 @@
+{
+  "event_count": 1,
+  "events": [
+    {
+      "effect_kind": "filesystem.export_json",
+      "event_schema": "law-to-action-observed-effect/v1",
+      "handler_version": "bounded-export-handler/v2",
+      "payload_bytes": 381,
+      "payload_sha256": "d22847ad94202a3effcb349770d308962e547e741eb5285a074cb92402419ad0",
+      "run_id": "profile-cve-negative",
+      "target": "exports/cve-vulnerable.json"
+    }
+  ],
+  "export_files": [
+    "exports/cve-vulnerable.json"
+  ],
+  "filesystem_entries": [
+    {
+      "content_hash_complete": true,
+      "kind": "regular_file",
+      "payload_bytes": 312,
+      "payload_sha256": "336e985a92561609559a1b7727c9d535e61a56aa9671bdfa0d4664b57a4f2d42",
+      "target": "effects.jsonl"
+    },
+    {
+      "kind": "directory",
+      "target": "exports"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 381,
+      "payload_sha256": "d22847ad94202a3effcb349770d308962e547e741eb5285a074cb92402419ad0",
+      "target": "exports/cve-vulnerable.json"
+    }
+  ],
+  "integrity_errors": [],
+  "journal_consistent": true,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "0ae1cc8656800ab6a636136ebd447acc0ecd3d49c9b95e4c9658f0937be631b3",
+  "observed_effect_count": 1,
+  "observed_effects": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 381,
+      "payload_sha256": "d22847ad94202a3effcb349770d308962e547e741eb5285a074cb92402419ad0",
+      "target": "exports/cve-vulnerable.json"
+    }
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 3
+}

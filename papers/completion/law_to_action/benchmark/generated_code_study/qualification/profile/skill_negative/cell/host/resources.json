@@ -1,0 +1,115 @@
+{
+  "decision": null,
+  "leaf_samples": [
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255679,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816717.951261771,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    },
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255679,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816717.972041383,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    },
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255679,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816717.992802786,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    },
+    {
+      "cpu.max": "100000 100000",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255679,
+      "memory.current": "4096",
+      "memory.max": "2147483648",
+      "memory.peak": "8192",
+      "observed_monotonic": 816718.013338666,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/leaf.slice",
+      "pids.current": "1",
+      "pids.events": "max 0",
+      "pids.max": "16"
+    }
+  ],
+  "parent_samples": [
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255658,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816717.950895253,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    },
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255658,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816717.971748834,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    },
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255658,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816717.992518974,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    },
+    {
+      "cgroup.events": "populated 1\nfrozen 0",
+      "cpu.stat": "usage_usec 1\nuser_usec 1\nsystem_usec 0",
+      "cpu_usage_seconds": 1e-06,
+      "inode": 72255658,
+      "memory.current": "4096",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0",
+      "memory.peak": "8192",
+      "observed_monotonic": 816718.0131846,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_negative/cell/host/parent.slice",
+      "pids.current": "1",
+      "pids.events": "max 0"
+    }
+  ]
+}

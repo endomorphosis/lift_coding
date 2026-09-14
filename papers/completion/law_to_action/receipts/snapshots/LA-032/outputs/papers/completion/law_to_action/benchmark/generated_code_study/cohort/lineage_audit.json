@@ -1,0 +1,27 @@
+{
+  "canonical_repository_not_sufficient": true,
+  "cross_population_repo_disjoint": true,
+  "cve_skipped": {
+    "duplicate_repo": 8,
+    "empty_pair": 1,
+    "excluded_cve": 0,
+    "excluded_repo": 25,
+    "fork_name": 0,
+    "normalized_overlap": 0
+  },
+  "excluded_la004_families": 30,
+  "excluded_la029_families": 30,
+  "fork_name_heuristic_applied": true,
+  "generated_skillcenter_not_human_annotation": true,
+  "nearest_neighbor_cve_name_collisions": [],
+  "schema": "la-source-lineage-audit/v1",
+  "skill_skipped": {
+    "cve_overlap": 0,
+    "duplicate": 0,
+    "fork_name": 0,
+    "non_github": 0,
+    "old": 12
+  },
+  "skill_source_rows_read": 1182,
+  "status": "PASS"
+}

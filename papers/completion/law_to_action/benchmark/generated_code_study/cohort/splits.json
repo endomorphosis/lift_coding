@@ -1,0 +1,358 @@
+{
+  "assignments": [
+    {
+      "lineage_family_id": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8",
+      "planned_case_ids": [
+        "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0",
+        "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-1"
+      ],
+      "population": "legal",
+      "ranking_sha256": "01f2336df98855d31eb51dabd02ef1c9c704d4fdc5593ea737389920cb4aa6ab",
+      "source_id": "legal:749cbae7b295f75c7f0720f191f4c52e9d317b576c0428139f1d89f0126333c7",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:e6b2098ea6b97d3876a82f9925358f04a3ee2c3f76a5ee19f246fa4662ca5b08",
+      "planned_case_ids": [
+        "family:e6b2098ea6b97d3876a82f9925358f04a3ee2c3f76a5ee19f246fa4662ca5b08:case-0",
+        "family:e6b2098ea6b97d3876a82f9925358f04a3ee2c3f76a5ee19f246fa4662ca5b08:case-1"
+      ],
+      "population": "legal",
+      "ranking_sha256": "02f0fe48b076a4ec405d58ba87bac915191913732a72fb1e349ce7ee7286f9a6",
+      "source_id": "legal:05c4eb1e636735895ac85941df7a8c45ae96108aba1751e34d83e947d7b751f8",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:283506ea323de1f4296c73439dd145dfca0a1b960a77b85011e17902ab120f4b",
+      "planned_case_ids": [
+        "family:283506ea323de1f4296c73439dd145dfca0a1b960a77b85011e17902ab120f4b:case-0",
+        "family:283506ea323de1f4296c73439dd145dfca0a1b960a77b85011e17902ab120f4b:case-1"
+      ],
+      "population": "legal",
+      "ranking_sha256": "701cb41885a9ff3d2a54398e674eb437e429aa6dfee12645a6da6e990378e51b",
+      "source_id": "legal:f24fc25d5476226ef7223a16a84ded49e7f97b7f4c930a02cd3c8d271363f384",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:2fdfa64822fdbef6fa558e9c971504de1aded6b2462faa09531efbf162a13537",
+      "planned_case_ids": [
+        "family:2fdfa64822fdbef6fa558e9c971504de1aded6b2462faa09531efbf162a13537:case-0",
+        "family:2fdfa64822fdbef6fa558e9c971504de1aded6b2462faa09531efbf162a13537:case-1"
+      ],
+      "population": "legal",
+      "ranking_sha256": "894e18071acd5db6c99431f523672a579f430f224fed6e0026f31b332744b297",
+      "source_id": "legal:bb8d6f08fbcf7f5ce37fccbff079db39f6be3ed552a3762d81ceb5fb5d4674b8",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:e49f948f9d74d3b09258056abccc72dbd195c9a93c2acd897f25931fd003f9fd",
+      "planned_case_ids": [
+        "family:e49f948f9d74d3b09258056abccc72dbd195c9a93c2acd897f25931fd003f9fd:case-0",
+        "family:e49f948f9d74d3b09258056abccc72dbd195c9a93c2acd897f25931fd003f9fd:case-1"
+      ],
+      "population": "legal",
+      "ranking_sha256": "d2c315700e3bd987f82c23cc05e12474cb06dba7b1ded93140dd674f1ee10006",
+      "source_id": "legal:c4db54b2b28320a14671f78b69d1c7de26491222ef734707675e1ad39a8816fd",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:381d4bf610d095550ee9f2e48bb29e66fc3e18725e29608677c8ef00354ede7d",
+      "planned_case_ids": [
+        "family:381d4bf610d095550ee9f2e48bb29e66fc3e18725e29608677c8ef00354ede7d:case-0",
+        "family:381d4bf610d095550ee9f2e48bb29e66fc3e18725e29608677c8ef00354ede7d:case-1"
+      ],
+      "population": "legal",
+      "ranking_sha256": "f396d4fba82d52eb9aafb7c3b5cae294fb0831377fc2688482399670bff5e144",
+      "source_id": "legal:d009cbcd88fc4932e7e3aec44567e174ba2a67ae4344e74b90f1df17edf0a246",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "planned_case_ids": [
+        "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0",
+        "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "0483790577aa3b947a03693340f920733a76189c66be5824808a9fe1a7f3b1bd",
+      "source_id": "cve:1edf15fce58790157887fb9edbb7b01f30f36f1d2e6a9c9e812fbb502322e282",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "planned_case_ids": [
+        "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-0",
+        "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "0935efed5b47e514d736b24f3953feb148b3a6d03f32fa6b9be4e92247495b1a",
+      "source_id": "cve:e3dd75cabbedf49c4569b06edfe29f63b83aab5b7d2ae47f32d4f092b4cc0d1d",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "planned_case_ids": [
+        "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-0",
+        "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "18410c4c3aef22bd44066846496e9313229c37df68f8c177e2219610ba840672",
+      "source_id": "cve:6ac65b8a11c2adb5e69be0d3bfebf8323ee4b5ffb07915acca436e7c81a4dff8",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "planned_case_ids": [
+        "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-0",
+        "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "1da0b8d94729ec9e91962a78e4ce8b47d8edef606d49e396d96ae319781ba510",
+      "source_id": "cve:1797e5fd9dff7d9bf85c60d6a4d8b21699a8fbc3616fd9b997f20118bfe076dd",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "planned_case_ids": [
+        "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-0",
+        "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "20fe25e8c575f82ced117f772d37bdfddb3caf61d0d571220e06c76eaae5c59d",
+      "source_id": "cve:3c619fc7da665de9955bf720361cebace6b41de338222ffde09b702e1b3181e8",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "planned_case_ids": [
+        "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-0",
+        "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "4882a17a9b756d86f47f20b81ee6e29907bfa1da79599a63e92041a1797cf49f",
+      "source_id": "cve:40a97c68d741076695792a4037b58b7cb1b9c475b4b33d09888da2ef6fdc8bf2",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "planned_case_ids": [
+        "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700:case-0",
+        "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "622b9f03b78c6425e6eb26a2ffba253f296bd4869bbff94b1cd27ddc9a6a0473",
+      "source_id": "cve:8b6b8695e333eb5bda4a83f77326d38f51a76e4b33e2c0ff67d0dca29caf8f2a",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "planned_case_ids": [
+        "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c:case-0",
+        "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "6764da6ed10cdc4a01cb2f3bfa4037128fee69cd63b3ac344368717038024363",
+      "source_id": "cve:90e93a4318f0ac6ff9444f6d6470f4bf4c89370ab0cbea736d5da7a99317829e",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "planned_case_ids": [
+        "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772:case-0",
+        "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "6e81ae4de3b131a7c256028165c656b51b3740bea5e72f2b2fc4ce44346fb9bd",
+      "source_id": "cve:12d4530bd38778a176331dfcc68f55610b0bad1ab07f32ab23305fc431ff96e2",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "planned_case_ids": [
+        "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225:case-0",
+        "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "78f5e3c6ff865ca70fa6710639c655ebab29632c032dcdaaf2178fbb3365e89e",
+      "source_id": "cve:bfeb3de8deebd1ba8c241037b13c29d9262316d21095d8ceff1c1d2d84ce1644",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "planned_case_ids": [
+        "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41:case-0",
+        "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "a1118f27301adc03d5fc0339d93d05e035898ab7b9c9cd327ae770b65f81b551",
+      "source_id": "cve:e7b0076ad53e57ada39a0b0a098f097e55b101478451e3a7eb05665501e3cfb5",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "planned_case_ids": [
+        "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045:case-0",
+        "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045:case-1"
+      ],
+      "population": "cve",
+      "ranking_sha256": "b721d9789a9391668814424d5e18a67bd2875067cbae7c5e4c710c70e305d102",
+      "source_id": "cve:eed80560768a9a0f1fd889e0a4b17b6d5a5d4db4b834880f7dbb2959fd0ac507",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "planned_case_ids": [
+        "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0",
+        "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "0182d936314ea2d42b277e4cf60aa4fd8f9407477ca706810eafd46daa001ddb",
+      "source_id": "skill:2da57d7c021c569b1019a13d2cf85639dbef340b0b3a7241f2aab351075c956b",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "planned_case_ids": [
+        "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0",
+        "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "34253b05e410aa7ecd75d44714eba4dd82d64971856a035859fec67c8c404988",
+      "source_id": "skill:52a837db5657b2f6db00a96bafc0210f606b7ebbb3739c2010baf5560b499d72",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "planned_case_ids": [
+        "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-0",
+        "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "4239909ad3bd3cc04cc06fb923bd96f09d9d565408f59f04e36f184c43164d83",
+      "source_id": "skill:757ea61135efc800d8a6193dfe9c0ee06bee5891b1e73ece3fb6cacb15324b23",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "planned_case_ids": [
+        "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-0",
+        "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "4d82067c28de024dd4ef3d9a896994f0ef70ae4fd30cebea9932a9ff9fd1ffc0",
+      "source_id": "skill:63dc9e50e15efe2c271605b358562ecb8ee896c6f51028c97766f474efc6d280",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "planned_case_ids": [
+        "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6:case-0",
+        "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "55a02d20fd8df8e88565764c07ce7df73fc49a973d55b819c12be2e852941793",
+      "source_id": "skill:51b4e01a6fb98227cbb0d67407a697fc417f42b8269193bd659153ccb5fb3a7c",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "planned_case_ids": [
+        "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a:case-0",
+        "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "5a48cd4e719907439d8eefbbddb548cd13261e24fe4c80eddb9274e6773d52da",
+      "source_id": "skill:bba889aab7ee5bc13a5262287df9da095e9519846a594495192e9adb738ec815",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "planned_case_ids": [
+        "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1:case-0",
+        "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "6d8ab8fd8eaf0382f150fde912e430bd3672455700d19525177189778d86298e",
+      "source_id": "skill:0668ea26ad6406ab3d6972b08513af13bd613a7e0f60ab1c86fbe25817a90704",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "planned_case_ids": [
+        "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b:case-0",
+        "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "99afe122ddc933fd76bb62662afd0901db8e58f2b358f6943196b8fdae96b6a0",
+      "source_id": "skill:dc44efb011b1bc3a9ec9ce87809e7df4938781bedc4585dd70ad5889ed66fec1",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "planned_case_ids": [
+        "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c:case-0",
+        "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "b6bb1584d7f2045f7e9896a6f5d53616c8ef2f1a2f8730db0a4e8a8a33357e7a",
+      "source_id": "skill:a309d9e84057e9887be956d0dfa38a548ed65483eca303f2a5af5420ee5f5561",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "planned_case_ids": [
+        "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2:case-0",
+        "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "b8812596ad43ef15922e0a831f2f0856295156cfa24f538986ece4d79746a024",
+      "source_id": "skill:6c8df3295cb304a1b20f1dcf9407d0ccfdd094340bfc1a873434d69eac39c690",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "planned_case_ids": [
+        "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd:case-0",
+        "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "e529aa413e2dde0e455c9fcd3903bace82b8d777bf9e793b2d9ebae91d488c94",
+      "source_id": "skill:37d353ff5abfc418c3396b590a6636cd575125791972a30e60ad0a047a585873",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "planned_case_ids": [
+        "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd:case-0",
+        "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd:case-1"
+      ],
+      "population": "skill",
+      "ranking_sha256": "fd7e49b45bf0e85f532f1043e617af19bd6449f28e0dd0971e0eb6d6d98e3200",
+      "source_id": "skill:0f01ff9bcde14512f9efd9b42e3489c665620248b957eef11d8735207cf40874",
+      "split": "final"
+    }
+  ],
+  "quotas": {
+    "cve": [
+      2,
+      3,
+      7
+    ],
+    "legal": [
+      2,
+      1,
+      3
+    ],
+    "skill": [
+      2,
+      2,
+      8
+    ]
+  },
+  "salt": "vericodegen-2026-law-to-action-LA016-v1",
+  "schema": "law-to-action-splits/v2",
+  "split_order": [
+    "development",
+    "calibration",
+    "final"
+  ]
+}

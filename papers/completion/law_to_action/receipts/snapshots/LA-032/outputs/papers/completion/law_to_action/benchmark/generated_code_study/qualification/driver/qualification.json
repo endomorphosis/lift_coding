@@ -1,0 +1,27 @@
+{
+  "actual_probes": true,
+  "cleanup_fault": {
+    "constructed_invalid_program": true,
+    "profile_enforced": true,
+    "refunded": false,
+    "schema": "la-driver-cleanup-fault-probe/v1",
+    "scientific_cell_executed": false,
+    "status": "PASS",
+    "terminal": "completed",
+    "unknown_effect_retained": true
+  },
+  "configuration_flags_only": false,
+  "interrupt_resume": {
+    "refunded": false,
+    "replay_blocked": true,
+    "result_terminal": "completed",
+    "resumed": true,
+    "schema": "la-driver-interrupt-resume-probe/v1",
+    "scientific_cell_executed": false,
+    "stale_owner_detected": true,
+    "status": "PASS"
+  },
+  "schema": "la-driver-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS"
+}

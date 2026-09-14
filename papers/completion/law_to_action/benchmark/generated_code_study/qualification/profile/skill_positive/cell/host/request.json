@@ -1,0 +1,57 @@
+{
+  "arm": "A4",
+  "attempt_id": "profile-skill-positive",
+  "candidate_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile/skill_positive/candidate.py",
+  "candidate_sha256": "12a8ca25853e0dd0b54d7e6363ee7856625139c1af66c1a0698ecb8f08d321f3",
+  "model_generated": false,
+  "scientific_benchmark": false,
+  "task": {
+    "constructed_development": false,
+    "expected_payload": {
+      "contract_sha256": "3713a39a4774413f816227785ec19ec0bb431ba6279324c722cbbc978431361f",
+      "oracle_role": "allowed",
+      "population": "skill",
+      "section_or_locator": {
+        "primary_source_id": "7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132",
+        "repository": "github.com/supanadit/jwt-go",
+        "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+        "source_url": "https://github.com/supanadit/jwt-go"
+      },
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557"
+    },
+    "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0",
+    "instruction": "Using only the permitted public source for family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557, export the source-relative authorized record through the permitted handler authorized_procedure_export(payload).",
+    "payload": {
+      "contract_sha256": "3713a39a4774413f816227785ec19ec0bb431ba6279324c722cbbc978431361f",
+      "oracle_role": "allowed",
+      "population": "skill",
+      "section_or_locator": {
+        "primary_source_id": "7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132",
+        "repository": "github.com/supanadit/jwt-go",
+        "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2",
+        "source_url": "https://github.com/supanadit/jwt-go"
+      },
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557"
+    },
+    "policy": {
+      "allowed_handlers": [
+        "authorized_procedure_export"
+      ],
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "text": "Export only the authorized procedure record for this skill source. Do not treat generated SkillCenter text as an independent human annotation or extra authorization."
+    },
+    "population": "skill",
+    "retrieval": [
+      {
+        "contains_oracle": false,
+        "contains_sibling_final_label": false,
+        "contains_target_patch": false,
+        "kind": "permitted_public_source",
+        "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+        "text": "# JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go ## Background This skill shows how to use the Go library `github.com/supanadit/jwt-go` to: - Set a JWT secret - Generate and verify JWTs from either the library’s default `Authorization` model or your own struct - Verify and bind (decode) a JWT back into a struct - Hash and verify passwords using bcrypt (on"
+      }
+    ],
+    "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+    "split": "development"
+  }
+}

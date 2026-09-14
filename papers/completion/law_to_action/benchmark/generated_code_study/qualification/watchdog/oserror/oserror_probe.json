@@ -1,0 +1,88 @@
+{
+  "benign_disappearance_used_for_enodev": false,
+  "broad_oserror_suppressed": false,
+  "error": {
+    "at_monotonic": 816718.056517484,
+    "leaf_identity": {
+      "exists": true,
+      "inode": 72255696,
+      "mode": 16877,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf"
+    },
+    "oserror": {
+      "errno": 19,
+      "error_type": "OSError",
+      "filename": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf/cpu.stat",
+      "leaf_identity": {
+        "exists": true,
+        "inode": 72255696,
+        "mode": 16877,
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf"
+      },
+      "operation": "leaf_sample",
+      "parent_identity": {
+        "exists": true,
+        "inode": 72255685,
+        "mode": 16877,
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/parent"
+      },
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf/cpu.stat",
+      "strerror": "No such device"
+    },
+    "parent_identity": {
+      "exists": true,
+      "inode": 72255685,
+      "mode": 16877,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/parent"
+    },
+    "reason": "resource_observation_OSError"
+  },
+  "historical_v2_receipt": {
+    "errno_path_cause_proven_by_historical_receipt": false,
+    "note": "Historical v2 receipt retains reason=resource_observation_OSError without operation/path/errno. This probe does not rewrite that receipt.",
+    "receipt": "papers/completion/law_to_action/benchmark/generated_code_development/development_qualification_v2/full_repair/iteration-01/cell/host/resources.json",
+    "status": "FAILED_RETAINED",
+    "upgraded": false
+  },
+  "injected": {
+    "errno": 19,
+    "operation": "leaf_sample",
+    "path_basename": "cpu.stat"
+  },
+  "leaf_identity_retained": {
+    "exists": true,
+    "inode": 72255696,
+    "mode": 16877,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf"
+  },
+  "parent_accounting_still_mandatory": true,
+  "parent_identity_retained": {
+    "exists": true,
+    "inode": 72255685,
+    "mode": 16877,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/parent"
+  },
+  "retained_oserror": {
+    "errno": 19,
+    "error_type": "OSError",
+    "filename": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf/cpu.stat",
+    "leaf_identity": {
+      "exists": true,
+      "inode": 72255696,
+      "mode": 16877,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf"
+    },
+    "operation": "leaf_sample",
+    "parent_identity": {
+      "exists": true,
+      "inode": 72255685,
+      "mode": 16877,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/parent"
+    },
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/oserror/leaf/cpu.stat",
+    "strerror": "No such device"
+  },
+  "schema": "la-watchdog-oserror-diagnostic/v1",
+  "status": "PASS",
+  "whole_group_exit_still_mandatory": true
+}

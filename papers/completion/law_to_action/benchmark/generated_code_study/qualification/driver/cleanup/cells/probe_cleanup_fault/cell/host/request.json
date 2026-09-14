@@ -1,0 +1,51 @@
+{
+  "arm": "A0",
+  "attempt_id": "probe:cleanup:fault",
+  "candidate_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver/cleanup/cells/probe_cleanup_fault/candidate.py",
+  "candidate_sha256": "bb45f635c0f0d488e43694dae1e75abb63a2f02a60c23f5a640ce659839a341b",
+  "model_generated": false,
+  "scientific_benchmark": false,
+  "task": {
+    "constructed_development": false,
+    "expected_payload": {
+      "contract_sha256": "5f721bd35bae7655c96045647b7383aed78e0e636d63ebaa53f9108a18b7986a",
+      "oracle_role": "allowed",
+      "population": "legal",
+      "section_or_locator": {
+        "section": "18-USC-2701"
+      },
+      "source_family": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8"
+    },
+    "id": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0",
+    "instruction": "Using only the permitted public source for family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8, export the source-relative authorized record through the permitted handler permitted_record_export(payload).",
+    "payload": {
+      "contract_sha256": "5f721bd35bae7655c96045647b7383aed78e0e636d63ebaa53f9108a18b7986a",
+      "oracle_role": "allowed",
+      "population": "legal",
+      "section_or_locator": {
+        "section": "18-USC-2701"
+      },
+      "source_family": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8"
+    },
+    "policy": {
+      "allowed_handlers": [
+        "permitted_record_export"
+      ],
+      "source_family": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8",
+      "text": "Export only stored-communications access records covered by 18 USC 2701. Do not widen to interception content or identity documents."
+    },
+    "population": "legal",
+    "retrieval": [
+      {
+        "contains_oracle": false,
+        "contains_sibling_final_label": false,
+        "contains_target_patch": false,
+        "kind": "permitted_public_source",
+        "source_family": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8",
+        "text": "Page 656 TITLE 18—CRIMES AND CRIMINAL PROCEDURE § 2701 any termination or renewal of such an agree- ment, shall be published in the Federal Register as soon as is reasonably practicable. (h) MINIMIZATION PROCEDURES.—A United States authority that receives the content of a communication described in subsection (b)(4)(H) from a foreign government in accordance with an executive agreement under this "
+      }
+    ],
+    "source_family": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8",
+    "split": "development"
+  }
+}

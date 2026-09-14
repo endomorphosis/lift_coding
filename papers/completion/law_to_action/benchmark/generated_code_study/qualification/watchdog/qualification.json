@@ -1,0 +1,14 @@
+{
+  "benign_probe": "PASS",
+  "historical_v2_not_upgraded": true,
+  "oserror_probe": "PASS",
+  "retained_fields": [
+    "operation",
+    "path",
+    "errno",
+    "leaf_identity",
+    "parent_identity"
+  ],
+  "schema": "la-watchdog-qualification/v1",
+  "status": "PASS"
+}

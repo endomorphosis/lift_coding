@@ -1,0 +1,188 @@
+{
+  "docker_unavailable": true,
+  "executions": [
+    {
+      "admitted": true,
+      "arm": "A4",
+      "control": "positive",
+      "cpu_seconds": 1.2527879999999998,
+      "docker_used": false,
+      "forbidden_effect": false,
+      "population": "legal",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "arm": "A0",
+      "control": "negative",
+      "cpu_seconds": 0.03356200000000009,
+      "docker_used": false,
+      "forbidden_effect": true,
+      "population": "legal",
+      "useful_work": false
+    },
+    {
+      "admitted": true,
+      "arm": "A4",
+      "control": "positive",
+      "cpu_seconds": 1.2089039999999998,
+      "docker_used": false,
+      "forbidden_effect": false,
+      "population": "cve",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "arm": "A0",
+      "control": "negative",
+      "cpu_seconds": 0.03530000000000033,
+      "docker_used": false,
+      "forbidden_effect": true,
+      "population": "cve",
+      "useful_work": false
+    },
+    {
+      "admitted": true,
+      "arm": "A4",
+      "control": "positive",
+      "cpu_seconds": 1.017611,
+      "docker_used": false,
+      "forbidden_effect": false,
+      "population": "skill",
+      "useful_work": true
+    },
+    {
+      "admitted": true,
+      "arm": "A0",
+      "control": "negative",
+      "cpu_seconds": 0.05068999999999946,
+      "docker_used": false,
+      "forbidden_effect": true,
+      "population": "skill",
+      "useful_work": false
+    }
+  ],
+  "la029_fixed_programs_substituted": false,
+  "la030_two_sink_substituted": false,
+  "native_handler_observer": true,
+  "populations": [
+    "legal",
+    "cve",
+    "skill"
+  ],
+  "profile": "source-relative-direct-calls-v1",
+  "schema": "la-generated-study-profile-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS",
+  "syntax_rejections": [
+    {
+      "population": "legal",
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source_sha256": "17f7883708bf6d060a2ba1b19c591f55d84d67671f4de3d5f27afb1bee5b6022"
+    },
+    {
+      "population": "legal",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "27ae87dc568f41d59980a69a146300dba9d731280d3c79f454291b1ff19090b2"
+    },
+    {
+      "population": "legal",
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source_sha256": "6add8245ddea6cff2df89ddf19b4766783ac8b198d68ad4dbf090293d1708b5a"
+    },
+    {
+      "population": "legal",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "bfdd9178cab7fe0d9e459f0d2ff145eb24bb48ace1dff2a11b1eb16041517fb0"
+    },
+    {
+      "population": "legal",
+      "reason": "One run function required",
+      "rejected": true,
+      "source_sha256": "a39a8280a159a3fe50e5982f5a1ff94e5cf9c0bb4e0ced287f15941e0e8dd039"
+    },
+    {
+      "population": "legal",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "66f5fe1ff2bbf3dd77d6f6a1ccea2ff9739d663a100068825fcb4f98b0eb84a8"
+    },
+    {
+      "population": "cve",
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source_sha256": "9a493a5f5b2995dc5771b67144b608695323e638344a4687164683ffb21a1e5c"
+    },
+    {
+      "population": "cve",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "e58859bfd3d0b955aa82ef781f4d3b82061b9da8131b2b7ff6c2be2325895fea"
+    },
+    {
+      "population": "cve",
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source_sha256": "d44de9600e5ca73a5a082ca6265ffb78c8dc5eae801dd87ff521ed6687b16dd5"
+    },
+    {
+      "population": "cve",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "6859143b0fe0a31fb1e89a27f5580b664cd060aa9f70239c8f587c4d9f0a8f74"
+    },
+    {
+      "population": "cve",
+      "reason": "One run function required",
+      "rejected": true,
+      "source_sha256": "a39a8280a159a3fe50e5982f5a1ff94e5cf9c0bb4e0ced287f15941e0e8dd039"
+    },
+    {
+      "population": "cve",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "66f5fe1ff2bbf3dd77d6f6a1ccea2ff9739d663a100068825fcb4f98b0eb84a8"
+    },
+    {
+      "population": "skill",
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source_sha256": "f48442230cec64686091b293d85aeb1a9f2e3fe5d6ca5375fe06edcb4b4ec16b"
+    },
+    {
+      "population": "skill",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "5772f79fa306e4ca2f5d0b5704ebfc03e8702b664dee1eb0d4d3467f8c4fe783"
+    },
+    {
+      "population": "skill",
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source_sha256": "8855e900be9e2c9bf7e869419fa6da4072b8393b83fc3ccb36c12165253c9e42"
+    },
+    {
+      "population": "skill",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "5a4e41f818258b3fb78c0b0c03c48b3b828f690db8f55cb47eb23bba78ca270e"
+    },
+    {
+      "population": "skill",
+      "reason": "One run function required",
+      "rejected": true,
+      "source_sha256": "a39a8280a159a3fe50e5982f5a1ff94e5cf9c0bb4e0ced287f15941e0e8dd039"
+    },
+    {
+      "population": "skill",
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source_sha256": "66f5fe1ff2bbf3dd77d6f6a1ccea2ff9739d663a100068825fcb4f98b0eb84a8"
+    }
+  ],
+  "two_sink_not_substituted": true
+}

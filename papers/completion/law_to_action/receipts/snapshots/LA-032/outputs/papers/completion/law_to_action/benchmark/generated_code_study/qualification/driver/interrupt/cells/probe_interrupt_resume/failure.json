@@ -1,0 +1,6 @@
+{
+  "error": "silent replay refused for probe:interrupt:resume",
+  "error_type": "DriverError",
+  "refunded": false,
+  "traceback": "Traceback (most recent call last):\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/driver.py\", line 275, in run_cell\n    reserved = self.reserve_cell(identity)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/driver.py\", line 264, in reserve_cell\n    return self.store.reserve(identity[\"attempt_id\"], \"cell\", identity)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789405336/papers/completion/law_to_action/benchmark/generated_code_study/driver.py\", line 122, in reserve\n    raise DriverError(\"silent replay refused for \" + identity)\ndriver.DriverError: silent replay refused for probe:interrupt:resume\n"
+}
