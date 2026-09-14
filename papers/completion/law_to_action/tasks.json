@@ -1088,7 +1088,8 @@
         "LA-030",
         "LA-016",
         "LA-029",
-        "LA-027"
+        "LA-027",
+        "LA-032"
       ],
       "manual_review": false,
       "description": "Finish the actual scientific work left unrun by LA-016. Use LA-030's concrete native generated-response/effect/repair runner as a development foundation. Implement the missing source-relative tasks, independently computed policy-relative utility/effect oracles, qualified generated-program profile and original arm interventions; qualify actual existing local model transport and runtime; implement durable reservation/resume and complete-attempt resource accounting; then execute and analyze the original complete 900-cell study. Missing readiness is an engineering or qualification task to complete, not a reason to install a permanent false dispatch gate or mark the study completed by a new withdrawal. Preserve original historical receipts and failed attempts. A benchmark omission may be reported truthfully, but it does not satisfy this task's completion acceptance.",
@@ -1183,6 +1184,70 @@
       "completion_evidence_boundary": "Actual qualified generated-model execution and analysis are required. Readiness reports, development qualification, source freeze alone, missing-runtime reports or manuscript withdrawal do not complete LA-031.",
       "execution_authority": "This file is a concrete task contract for root/native registration, not an instruction to dispatch inference while the current LA-030 development task is running. Registered execution must satisfy the prospective artifact and runtime gates, preserve existing authorization and follow the user's warm-model and bounded-service preferences.",
       "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_study.py --study papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --results papers/completion/law_to_action/results/generated_code_study"
+    },
+    {
+      "id": "LA-032",
+      "subgoal_id": "LA-G5",
+      "parent_task_id": "LA-031",
+      "title": "Qualify and freeze the complete generated-code study for finite family batches",
+      "priority": "P0",
+      "depends_on": [
+        "LA-030",
+        "LA-016",
+        "LA-029",
+        "LA-027"
+      ],
+      "manual_review": false,
+      "description": "Complete the scientific preparation needed to execute the original LA-031 study through finite native tasks. Qualify all 30 source families and 60 source-relative cases, the actual generated-program profile/handlers and independent effect/utility oracles, real model/runtime transport, full-attempt deadline, durable schedule ownership/resume, and the complete 900-cell matrix. Produce an immutable prospective freeze and 30 family-batch manifests, each containing that family's two cases x five arms x three seeds. This task establishes actual readiness; a discovery inventory, constructed two-sink test, availability flag or omission report alone does not complete it. It does not execute or claim the 900 scientific cells. Preserve frozen LA-030 and all historical receipts. Current contract-authoring/source-discovery work does not authorize model calls or final-cohort release; the registered preparation task may perform separately budgeted, source-disjoint development qualification using concrete pins.",
+      "paper_evidence": [
+        "Original LA-016/LA-003/v3 reserves 30 source families, 60 paired cases and all 900 A0-A4/seed identities, with 540 final cells.",
+        "LA-030 provides a qualified constructed development path, not a scientific cohort, model qualification or benchmark result.",
+        "Native workers have a 7200-second ceiling; one family's 30 attempts has at most 3600 scientific attempt seconds under the original 120-second limit.",
+        "LA-027 automated source-contract/policy-relative scope does not require outside human annotations."
+      ],
+      "acceptance_criteria": [
+        "Prospectively freeze exactly 6 legal, 12 CVE and 12 skill source-lineage families with two source-relative cases each. Verify actual source bytes, lawful access and any redistribution terms, immutable upstream versions, exact/normalized hashes, fork/ancestry and nearest-neighbor audits. Exclude every LA-004/LA-029 family and derivative across all populations; canonical repository identity alone is not a complete fork/clone audit. Do not count generated SkillCenter procedures as independent human annotations.",
+        "Apply the original ranked SHA256 split rule with salt vericodegen-2026-law-to-action-LA016-v1 and population development/calibration/final quotas legal 2/1/3, CVE 2/3/7, skill 2/2/8. Descendants inherit parent splits. Bind permitted retrieval to source lineage and exclude hidden oracles, sibling final labels and target patches. Seal final task/oracle material so it cannot be released to inference before the final-stage gate.",
+        "Implement all 60 scientifically useful source-relative tasks and independent machine-checkable utility/effect oracles. Qualify an adequate actual generated-program and bounded-handler profile across legal/CVE/skill cases. Retain source-to-policy/task/oracle mappings, positive useful-work and negative undeclared-effect tests, strict syntax/escape rejection and actual native context/effect enforcement. The LA-030 two-sink profile and fixed LA-029 programs may inform development but cannot substitute for the study.",
+        "Qualify actual model, weights, tokenizer, revision, chat template, deployment, prompt and decoding pins with real bounded development calls. For every qualified call, require returned prompt_tokens to equal that call's retained preflight input_count, not merely stay below 2048. Qualify 1024 output-token ceiling, seed behavior, raw response preservation, cancellation and actual model-service resource accounting. Reuse a warm model while actively inferring; preserve 10000 seconds of total service wall and a separate 360-second startup-readiness bound. Do not make systemd or an indefinitely running model a prerequisite.",
+        "Qualify a hard complete-attempt 120-second boundary across template/tokenization/inference, all generated-program execution and cleanup. Preserve the full 8-call/2048-input/1024-output and zero-paid-budget contract. Retain actual descendant CPU, memory, model/service costs, transport wall and all overruns/unknowns. Explicitly investigate and regression-test the retained LA-030 v2 native watchdog resource_observation_OSError during terminal observation. Its exact errno/path/cause is unproven by the historical receipt. First retain operation/path/errno plus leaf/parent identity snapshots in a new diagnostic implementation; do not suppress OSError broadly or upgrade the failed receipt. Any benign-disappearance handling must revalidate stable parent identity, monotonic counters and empty state. Retained parent accounting and whole-group exit remain mandatory.",
+        "Implement a durable scientific driver with exact source/model/runtime/freeze identity, exclusive ownership, pre-dispatch reservations for each cell and model call, interruption/resume, stale-owner reconciliation, unknown usage/effect handling, actual one-time durable capability consumption and no silent replay/refunded calls. Qualification must include actual interruption/resume and cleanup fault probes under bounded development input, not configuration flags alone.",
+        "Freeze the full 900 unique case-arm-seed identities before scientific outputs and partition them into exactly 30 disjoint source-family batches of 30 cells each. The six development families contain 180 cells, six calibration families 180 and eighteen final families 540. Each batch retains original arm/seed identities, source pairing and declared arm-position balancing. Record the phase/family dispatch order and its mapping to the original schedule explicitly before outcomes; any operational ordering amendment must preserve scientific contrasts and be visible in the freeze.",
+        "Bind every family batch to the same cohort/code/model/runtime/prompt/oracle/schedule freeze and a <=3600-second scientific-attempt allowance, leaving room within the <=7200-second worker ceiling for setup/cleanup/reporting. A bounded warm-service owner may span active batches, with costs allocated once and exclusive inference ownership. Preparation cannot dispatch final cells or claim any planned scientific cell completed.",
+        "Create real native dependency edges before execution: development/calibration family tasks depend on LA-032 and prior owned batch/phase gates; an analysis-freeze task depends on all development/calibration batches; every final-family task depends on that analysis freeze; LA-031 depends explicitly on preparation, all 30 batch tasks and the analysis-freeze task. Parent metadata alone is insufficient. Do not register future batch success or mark LA-031 completed by the schedule freeze.",
+        "A dedicated read-only preparation verifier recomputes exact source counts/exclusions/splits, all 900 identities and disjoint batch coverage, actual qualification artifact bindings, source-relative case/oracle completeness, sealed-final status, scientific zero-execution status and the dependency plan. It must fail on missing sources, incomplete runtime/model/profile evidence, mock mechanisms, reduced denominators or a permissive availability flag. Completion records readiness only; actual scientific execution stays with the batch tasks."
+      ],
+      "deliverables": [
+        "papers/completion/law_to_action/benchmark/generated_code_study/preparation/",
+        "papers/completion/law_to_action/benchmark/generated_code_study/cohort/",
+        "papers/completion/law_to_action/benchmark/generated_code_study/qualification/",
+        "papers/completion/law_to_action/benchmark/generated_code_study/model_profile.json",
+        "papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json",
+        "papers/completion/law_to_action/benchmark/generated_code_study/schedule.json",
+        "papers/completion/law_to_action/benchmark/generated_code_study/family_batches.json",
+        "papers/completion/law_to_action/benchmark/generated_code_study/native_dependency_plan.json",
+        "papers/completion/law_to_action/benchmark/generated_code_study/driver.py",
+        "papers/completion/law_to_action/benchmark/generated_code_study/verify_preparation.py"
+      ],
+      "implementation_paths": [
+        "papers/completion/law_to_action/benchmark/generated_code_study/"
+      ],
+      "suggested_code_paths": [
+        "papers/completion/law_to_action/benchmark/generated_code_development/",
+        "papers/completion/law_to_action/benchmark/manifests/sources.json",
+        "papers/completion/law_to_action/benchmark/manifests/splits.json",
+        "papers/completion/law_to_action/benchmark/protocol.md",
+        "papers/completion/law_to_action/benchmark/resource_plan.json"
+      ],
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_preparation.py --study papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --require-scientific-cells-unexecuted",
+      "runtime_seconds": 7200,
+      "scientific_execution_allowed": false,
+      "scientific_cells_claimed_executed": 0,
+      "planned_downstream_families": 30,
+      "planned_downstream_cells": 900,
+      "future_batch_size": 30,
+      "future_batch_maximum_scientific_attempt_seconds": 3600,
+      "completion_scope": "Actual qualification and prospective full-study freeze only. LA-031/full benchmark remains incomplete until qualified family batches and final analysis/manuscript handoff complete."
     }
   ]
 }

@@ -1,0 +1,1105 @@
+{
+  "schema": "la-generated-study-proposed-native-stages/v1",
+  "status": "PROPOSED_NOT_REGISTERED",
+  "source_families_selected": 0,
+  "scientific_cells_executed": 0,
+  "final_cohort_released": false,
+  "preparation_task": "LA-032",
+  "worker_runtime_ceiling_seconds": 7200,
+  "family_batch_count": 30,
+  "planned_cells": 900,
+  "phase_cells": {
+    "development": 180,
+    "calibration": 180,
+    "final": 540
+  },
+  "model_service_preferences": {
+    "total_service_wall_seconds": 10000,
+    "startup_readiness_seconds": 360,
+    "reuse_warm_model_during_active_batches": true,
+    "exclusive_inference_owner": true
+  },
+  "family_batch_tasks": [
+    {
+      "id": "LA-033",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen development source-family batch 01",
+      "depends_on": [
+        "LA-032"
+      ],
+      "phase": "development",
+      "phase_family_slot": 1,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-033 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-033/"
+    },
+    {
+      "id": "LA-034",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen development source-family batch 02",
+      "depends_on": [
+        "LA-032",
+        "LA-033"
+      ],
+      "phase": "development",
+      "phase_family_slot": 2,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-034 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-034/"
+    },
+    {
+      "id": "LA-035",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen development source-family batch 03",
+      "depends_on": [
+        "LA-032",
+        "LA-034"
+      ],
+      "phase": "development",
+      "phase_family_slot": 3,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-035 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-035/"
+    },
+    {
+      "id": "LA-036",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen development source-family batch 04",
+      "depends_on": [
+        "LA-032",
+        "LA-035"
+      ],
+      "phase": "development",
+      "phase_family_slot": 4,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-036 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-036/"
+    },
+    {
+      "id": "LA-037",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen development source-family batch 05",
+      "depends_on": [
+        "LA-032",
+        "LA-036"
+      ],
+      "phase": "development",
+      "phase_family_slot": 5,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-037 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-037/"
+    },
+    {
+      "id": "LA-038",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen development source-family batch 06",
+      "depends_on": [
+        "LA-032",
+        "LA-037"
+      ],
+      "phase": "development",
+      "phase_family_slot": 6,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-038 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-038/"
+    },
+    {
+      "id": "LA-039",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen calibration source-family batch 01",
+      "depends_on": [
+        "LA-032",
+        "LA-038"
+      ],
+      "phase": "calibration",
+      "phase_family_slot": 1,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-039 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-039/"
+    },
+    {
+      "id": "LA-040",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen calibration source-family batch 02",
+      "depends_on": [
+        "LA-032",
+        "LA-039"
+      ],
+      "phase": "calibration",
+      "phase_family_slot": 2,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-040 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-040/"
+    },
+    {
+      "id": "LA-041",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen calibration source-family batch 03",
+      "depends_on": [
+        "LA-032",
+        "LA-040"
+      ],
+      "phase": "calibration",
+      "phase_family_slot": 3,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-041 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-041/"
+    },
+    {
+      "id": "LA-042",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen calibration source-family batch 04",
+      "depends_on": [
+        "LA-032",
+        "LA-041"
+      ],
+      "phase": "calibration",
+      "phase_family_slot": 4,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-042 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-042/"
+    },
+    {
+      "id": "LA-043",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen calibration source-family batch 05",
+      "depends_on": [
+        "LA-032",
+        "LA-042"
+      ],
+      "phase": "calibration",
+      "phase_family_slot": 5,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-043 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-043/"
+    },
+    {
+      "id": "LA-044",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen calibration source-family batch 06",
+      "depends_on": [
+        "LA-032",
+        "LA-043"
+      ],
+      "phase": "calibration",
+      "phase_family_slot": 6,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-044 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-044/"
+    },
+    {
+      "id": "LA-045",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 01",
+      "depends_on": [
+        "LA-032",
+        "LA-044",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 1,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-045 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-045/"
+    },
+    {
+      "id": "LA-046",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 02",
+      "depends_on": [
+        "LA-032",
+        "LA-045",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 2,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-046 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-046/"
+    },
+    {
+      "id": "LA-047",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 03",
+      "depends_on": [
+        "LA-032",
+        "LA-046",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 3,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-047 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-047/"
+    },
+    {
+      "id": "LA-048",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 04",
+      "depends_on": [
+        "LA-032",
+        "LA-047",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 4,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-048 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-048/"
+    },
+    {
+      "id": "LA-049",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 05",
+      "depends_on": [
+        "LA-032",
+        "LA-048",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 5,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-049 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-049/"
+    },
+    {
+      "id": "LA-050",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 06",
+      "depends_on": [
+        "LA-032",
+        "LA-049",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 6,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-050 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-050/"
+    },
+    {
+      "id": "LA-051",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 07",
+      "depends_on": [
+        "LA-032",
+        "LA-050",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 7,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-051 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-051/"
+    },
+    {
+      "id": "LA-052",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 08",
+      "depends_on": [
+        "LA-032",
+        "LA-051",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 8,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-052 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-052/"
+    },
+    {
+      "id": "LA-053",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 09",
+      "depends_on": [
+        "LA-032",
+        "LA-052",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 9,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-053 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-053/"
+    },
+    {
+      "id": "LA-054",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 10",
+      "depends_on": [
+        "LA-032",
+        "LA-053",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 10,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-054 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-054/"
+    },
+    {
+      "id": "LA-055",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 11",
+      "depends_on": [
+        "LA-032",
+        "LA-054",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 11,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-055 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-055/"
+    },
+    {
+      "id": "LA-056",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 12",
+      "depends_on": [
+        "LA-032",
+        "LA-055",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 12,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-056 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-056/"
+    },
+    {
+      "id": "LA-057",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 13",
+      "depends_on": [
+        "LA-032",
+        "LA-056",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 13,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-057 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-057/"
+    },
+    {
+      "id": "LA-058",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 14",
+      "depends_on": [
+        "LA-032",
+        "LA-057",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 14,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-058 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-058/"
+    },
+    {
+      "id": "LA-059",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 15",
+      "depends_on": [
+        "LA-032",
+        "LA-058",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 15,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-059 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-059/"
+    },
+    {
+      "id": "LA-060",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 16",
+      "depends_on": [
+        "LA-032",
+        "LA-059",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 16,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-060 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-060/"
+    },
+    {
+      "id": "LA-061",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 17",
+      "depends_on": [
+        "LA-032",
+        "LA-060",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 17,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-061 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-061/"
+    },
+    {
+      "id": "LA-062",
+      "parent_task_id": "LA-031",
+      "subgoal_id": "LA-G5",
+      "title": "Execute frozen final source-family batch 18",
+      "depends_on": [
+        "LA-032",
+        "LA-061",
+        "LA-063"
+      ],
+      "phase": "final",
+      "phase_family_slot": 18,
+      "family_binding": "Assigned only by the complete prospective LA-032 freeze; no source family selected by this plan",
+      "paired_cases": 2,
+      "arms": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "planned_cells": 30,
+      "maximum_scientific_attempt_seconds": 3600,
+      "runtime_seconds": 7200,
+      "execution_rule": "Consume only this family batch from the common immutable schedule/freeze; reserve and preserve every actual model attempt; never substitute a fixed program, resample after outcomes or silently replay an uncertain attempt. Hold the exclusive warm-model lease while actively inferring.",
+      "completion_rule": "Exactly all 30 original identities have source/model/runtime-bound, protocol-accounted terminal records with real generated candidates/effects/costs. Missing/unrun/unadmitted evidence keeps the batch incomplete. Legitimate measured candidate failure is retained as an outcome, not dropped.",
+      "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_batch.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --batch-task LA-062 --require-complete",
+      "results_prefix": "papers/completion/law_to_action/results/generated_code_study/batches/LA-062/"
+    }
+  ],
+  "analysis_freeze_task": {
+    "id": "LA-063",
+    "parent_task_id": "LA-031",
+    "subgoal_id": "LA-G5",
+    "title": "Freeze generated-code analysis after development and calibration",
+    "depends_on": [
+      "LA-032",
+      "LA-033",
+      "LA-034",
+      "LA-035",
+      "LA-036",
+      "LA-037",
+      "LA-038",
+      "LA-039",
+      "LA-040",
+      "LA-041",
+      "LA-042",
+      "LA-043",
+      "LA-044"
+    ],
+    "runtime_seconds": 7200,
+    "scientific_inference_allowed": false,
+    "final_material_release_allowed": false,
+    "completion_rule": "Verify all 360 development/calibration cells and their source-family records, then freeze analysis code, thresholds, error taxonomy, estimands, exclusions/denominators, uncertainty and cost accounting before final outputs. Preserve original final-family identities and held source/oracle sealing. No retrospective replacement or final-outcome inspection.",
+    "deliverable": "papers/completion/law_to_action/benchmark/generated_code_study/analysis_freeze.json",
+    "verifier_command": "python3 -B papers/completion/law_to_action/benchmark/generated_code_study/verify_analysis_freeze.py --freeze papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json --require-final-unexecuted"
+  },
+  "parent_dependency_update": {
+    "task_id": "LA-031",
+    "preserve_existing_dependencies": true,
+    "add_explicit_depends_on": [
+      "LA-032",
+      "LA-033",
+      "LA-034",
+      "LA-035",
+      "LA-036",
+      "LA-037",
+      "LA-038",
+      "LA-039",
+      "LA-040",
+      "LA-041",
+      "LA-042",
+      "LA-043",
+      "LA-044",
+      "LA-045",
+      "LA-046",
+      "LA-047",
+      "LA-048",
+      "LA-049",
+      "LA-050",
+      "LA-051",
+      "LA-052",
+      "LA-053",
+      "LA-054",
+      "LA-055",
+      "LA-056",
+      "LA-057",
+      "LA-058",
+      "LA-059",
+      "LA-060",
+      "LA-061",
+      "LA-062",
+      "LA-063"
+    ],
+    "remaining_parent_role": "After all batch receipts and analysis freeze, verify all900, analyze complete paired evidence, produce reproduction package and update paper/final local handoff."
+  },
+  "freeze_requirements": [
+    "Bind actual family IDs to phase slots only after LA032 full-cohort selection and ancestry audit",
+    "Freeze exact family-batch schedule and original per-case arm rotation/seed mapping before outputs",
+    "Document phase/family operational order and original-schedule mapping prospectively; no silent scientific protocol change",
+    "Register all dependencies before any batch release; final tasks remain blocked by LA063",
+    "Preparation and final-analysis tasks fit native runtime limits; if concrete qualification implementation exceeds one worker, persist engineering state or add bounded implementation children without shrinking the scientific denominator"
+  ],
+  "reserved_id_note": "LA033-LA063 are proposed IDs for root registration; this artifact does not mutate native tasks or claim their existence."
+}
