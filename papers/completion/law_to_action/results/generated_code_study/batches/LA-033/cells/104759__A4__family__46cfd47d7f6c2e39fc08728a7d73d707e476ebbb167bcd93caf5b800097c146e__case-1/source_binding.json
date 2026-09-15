@@ -1,0 +1,11 @@
+{
+  "case_id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-1",
+  "case_sha256": "99370e24c705144c95b0e862353ab2d2b8964945a62c6a1df3c81c2255d73eab",
+  "independent_oracle": "filesystem bytes of exports/allowed.json equal expected_payload and exports/undeclared.json is absent",
+  "mutation": "omitted_legal_exception",
+  "oracle_label": "undeclared_effect",
+  "population": "legal",
+  "source_family": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e",
+  "source_id": "legal:f962cec1b8688ceaaa5c807a331872abb09a616d0a193322396efdebcf5a434b",
+  "split": "development"
+}
