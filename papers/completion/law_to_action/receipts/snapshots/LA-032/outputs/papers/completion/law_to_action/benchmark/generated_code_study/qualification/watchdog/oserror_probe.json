@@ -1,0 +1,134 @@
+{
+  "broad_oserror_suppressed": false, 
+  "captured": {
+    "errno": 2, 
+    "operation": "read_leaf_cpu.stat", 
+    "oserror_type": "FileNotFoundError", 
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf/cpu.stat", 
+    "strerror": "No such file or directory"
+  }, 
+  "diagnostics": [
+    {
+      "at_monotonic": 8932.65963485, 
+      "errno": 2, 
+      "leaf_identity": {
+        "device": 66306, 
+        "inode": 71314661, 
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf"
+      }, 
+      "operation": "read_leaf_cpu.stat", 
+      "oserror_type": "FileNotFoundError", 
+      "parent_identity": {
+        "device": 66306, 
+        "inode": 71314648, 
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent"
+      }, 
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf/cpu.stat", 
+      "strerror": "No such file or directory"
+    }
+  ], 
+  "error": {
+    "at_monotonic": 8932.659754722, 
+    "diagnostic": {
+      "at_monotonic": 8932.65963485, 
+      "errno": 2, 
+      "leaf_identity": {
+        "device": 66306, 
+        "inode": 71314661, 
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf"
+      }, 
+      "operation": "read_leaf_cpu.stat", 
+      "oserror_type": "FileNotFoundError", 
+      "parent_identity": {
+        "device": 66306, 
+        "inode": 71314648, 
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent"
+      }, 
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789438718/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/synthetic_cgroup/parent/leaf/cpu.stat", 
+      "strerror": "No such file or directory"
+    }, 
+    "parent": {
+      "cgroup.events": "populated 1\nfrozen 0", 
+      "cpu.stat": "usage_usec 2000\nuser_usec 2000\nsystem_usec 0", 
+      "cpu_system_seconds": 0.0, 
+      "cpu_usage_seconds": 0.002, 
+      "cpu_user_seconds": 0.002, 
+      "device": 66306, 
+      "inode": 71314648, 
+      "memory.current": "4096", 
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0", 
+      "memory.peak": "4096", 
+      "observed_monotonic": 8932.65975117, 
+      "pids.current": "1", 
+      "pids.events": "max 0"
+    }, 
+    "reason": "resource_observation_OSError"
+  }, 
+  "leaf_samples": [
+    {
+      "cpu.max": "100000 100000", 
+      "cpu.stat": "usage_usec 1500\nuser_usec 1500\nsystem_usec 0", 
+      "cpu_usage_seconds": 0.0015, 
+      "cpuset.cpus.effective": "0", 
+      "device": 66306, 
+      "inode": 71314661, 
+      "memory.current": "4096", 
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0", 
+      "memory.max": "2147483648", 
+      "memory.peak": "4096", 
+      "memory.swap.max": "0", 
+      "observed_monotonic": 8932.659442962, 
+      "pids.current": "1", 
+      "pids.events": "max 0", 
+      "pids.max": "16"
+    }
+  ], 
+  "parent_samples": [
+    {
+      "cgroup.events": "populated 1\nfrozen 0", 
+      "cpu.stat": "usage_usec 2000\nuser_usec 2000\nsystem_usec 0", 
+      "cpu_system_seconds": 0.0, 
+      "cpu_usage_seconds": 0.002, 
+      "cpu_user_seconds": 0.002, 
+      "device": 66306, 
+      "inode": 71314648, 
+      "memory.current": "4096", 
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0", 
+      "memory.peak": "4096", 
+      "observed_monotonic": 8932.659249202, 
+      "pids.current": "1", 
+      "pids.events": "max 0"
+    }, 
+    {
+      "cgroup.events": "populated 1\nfrozen 0", 
+      "cpu.stat": "usage_usec 2000\nuser_usec 2000\nsystem_usec 0", 
+      "cpu_system_seconds": 0.0, 
+      "cpu_usage_seconds": 0.002, 
+      "cpu_user_seconds": 0.002, 
+      "device": 66306, 
+      "inode": 71314648, 
+      "memory.current": "4096", 
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0", 
+      "memory.peak": "4096", 
+      "observed_monotonic": 8932.659592466, 
+      "pids.current": "1", 
+      "pids.events": "max 0"
+    }, 
+    {
+      "cgroup.events": "populated 1\nfrozen 0", 
+      "cpu.stat": "usage_usec 2000\nuser_usec 2000\nsystem_usec 0", 
+      "cpu_system_seconds": 0.0, 
+      "cpu_usage_seconds": 0.002, 
+      "cpu_user_seconds": 0.002, 
+      "device": 66306, 
+      "inode": 71314648, 
+      "memory.current": "4096", 
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0", 
+      "memory.peak": "4096", 
+      "observed_monotonic": 8932.65975117, 
+      "pids.current": "1", 
+      "pids.events": "max 0"
+    }
+  ], 
+  "schema": "la032-watchdog-oserror-probe/v1"
+}

@@ -1,0 +1,61 @@
+{
+  "actual_service_resource_boundary_qualified": true, 
+  "base_url": "http://127.0.0.1:34941", 
+  "calls": [
+    {
+      "completion_tokens": 32, 
+      "input_count": 29, 
+      "label": "call0", 
+      "prompt_tokens": 29, 
+      "seed": 104729
+    }, 
+    {
+      "completion_tokens": 16, 
+      "input_count": 29, 
+      "label": "call1", 
+      "prompt_tokens": 29, 
+      "seed": 104759
+    }
+  ], 
+  "cancellation_recorded": true, 
+  "chat_template_sha256": "44d876f94843ca45590a5ed419715212124612f2b10cb4f3988d9f3e28e5d8d9", 
+  "constructed_transport": false, 
+  "deployment_sha256": "3d76ede7c137348ca6c7ae590a693cf1dfcd24cb0a819b0adb1476f6574aabd7", 
+  "indefinitely_running_required": false, 
+  "max_input_tokens": 2048, 
+  "max_output_tokens": 1024, 
+  "mock_mechanism": false, 
+  "model_id": "sshleifer/tiny-gpt2", 
+  "model_revision": "5f91d94bd9cd7190a9f3216ff93cd1dd95f2c7be", 
+  "paid_budget": 0, 
+  "process_terminated": true, 
+  "prompt_tokens_equal_preflight": true, 
+  "raw_response_preserved": true, 
+  "resource_after": {
+    "maxrss_bytes": 681439232, 
+    "monotonic": 8936.95109582, 
+    "ru_stime": 6.66873, 
+    "ru_utime": 10.871779, 
+    "vmrss_bytes": 598368256
+  }, 
+  "resource_before": {
+    "maxrss_bytes": 681439232, 
+    "monotonic": 8936.810035454, 
+    "ru_stime": 6.617866, 
+    "ru_utime": 10.760149, 
+    "vmrss_bytes": 574570496
+  }, 
+  "schema": "la032-model-qualification/v1", 
+  "seed_behavior_recorded": true, 
+  "service_wall_seconds": 10000, 
+  "startup_bound_seconds": 360, 
+  "startup_seconds": 4.054597571999693, 
+  "status": "PASS", 
+  "systemd_required": false, 
+  "temperature": 0, 
+  "tokenization_agrees_with_usage": true, 
+  "tokenizer_revision": "5f91d94bd9cd7190a9f3216ff93cd1dd95f2c7be", 
+  "tokenizer_sha256": "64fb9605d2838997d166dd60a74b448175fb07ab3255b82a47498c4929e92c3f", 
+  "warm_reuse_calls": 2, 
+  "weights_sha256": "b706b24034032bdfe765ded5ab6403d201d295a995b790cb24c74becca5c04e6"
+}

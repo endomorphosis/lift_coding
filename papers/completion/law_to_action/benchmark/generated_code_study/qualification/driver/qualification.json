@@ -1,0 +1,17 @@
+{
+  "capability_one_time": true, 
+  "cell_reserved": true, 
+  "cleanup_fault_unknown_not_absence": true, 
+  "constructed_only": false, 
+  "exclusive_owner": true, 
+  "final_cells_blocked": true, 
+  "interrupt_resume": true, 
+  "mock_mechanism": false, 
+  "model_call_consumed_once": true, 
+  "no_silent_cell_replay": true, 
+  "prompt_tokens_must_equal_preflight": true, 
+  "resume_preserves_reservations": true, 
+  "schema": "la032-driver-qualification/v1", 
+  "scientific_cells_completed": 0, 
+  "status": "PASS"
+}

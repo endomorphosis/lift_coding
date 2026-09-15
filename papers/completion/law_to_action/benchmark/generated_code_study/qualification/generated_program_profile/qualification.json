@@ -1,0 +1,41 @@
+{
+  "cases": [
+    {
+      "case_id": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8:case-0", 
+      "model_self_report_used": false, 
+      "native_enforcement": true, 
+      "negative_undeclared_effect": true, 
+      "population": "legal", 
+      "positive_useful_work": true
+    }, 
+    {
+      "case_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0", 
+      "model_self_report_used": false, 
+      "native_enforcement": true, 
+      "negative_undeclared_effect": true, 
+      "population": "cve", 
+      "positive_useful_work": true
+    }, 
+    {
+      "case_id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0", 
+      "model_self_report_used": false, 
+      "native_enforcement": true, 
+      "negative_undeclared_effect": true, 
+      "population": "skill", 
+      "positive_useful_work": true
+    }
+  ], 
+  "independent_oracle": "filesystem bytes plus journal reconciliation", 
+  "la029_fixed_programs_substituted": false, 
+  "la030_two_sink_substituted": false, 
+  "language": "direct-calls-v1", 
+  "mock_mechanism": false, 
+  "populations": [
+    "cve", 
+    "legal", 
+    "skill"
+  ], 
+  "schema": "la032-generated-program-profile-qualification/v1", 
+  "status": "PASS", 
+  "syntax_rejected": 5
+}

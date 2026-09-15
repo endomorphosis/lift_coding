@@ -1,0 +1,16 @@
+{
+  "cause_proven": false, 
+  "cleanup_proven": true, 
+  "errno_proven": false, 
+  "historical_receipt_upgraded": false, 
+  "historical_status_preserved": "FAILED_RETAINED", 
+  "note": "The v2 watchdog classified an OSError without retaining operation/path/errno. This investigation does not change that failed admission.", 
+  "operation_proven": false, 
+  "path_proven": false, 
+  "reason": "resource_observation_OSError", 
+  "reconciliation_sha256": "fd05d67eea6b7500899475129d76a13ffc03819de70bb51f584157f666fa3190", 
+  "resources_sha256": "d16e58e98adde31d412afbb6f600c63b2e2e5d999754d33c2e4b15bcc17d3bbd", 
+  "result_sha256": "d2eb25b98e676ac33d38d775240e912f5c73fc8a1cd9b7d231f567fdfe7846d6", 
+  "schema": "la032-historical-watchdog-investigation/v1", 
+  "whole_group_termination_proven": true
+}
