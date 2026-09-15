@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 766,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 580,
+  "prompt_tokens": 580,
+  "raw_sha256": "00da93e31ed136df2227f38490e50d2a6f882c6d8ed6cfff474eceb69ee73490",
+  "response_text": "```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"22\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n 2 \"cwe_id\": \"CWE-79\",\n  3 \"affected_component\": \"FMDataAPI_Sample.php\",\n  4 \"affected_component_type\": \"source\",\n  5 \"vulnerability_type\": \"cross site scripting\",\n  6 \"attack_vector\": \"remote\",\n  7 \"fix_version\": \"23\",\n  8 \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_end|>",
+  "wall_seconds": 60.92385439200007
+}

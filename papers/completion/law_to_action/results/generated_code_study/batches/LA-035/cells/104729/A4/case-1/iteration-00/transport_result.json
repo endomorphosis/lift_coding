@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 596,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 580,
+  "prompt_tokens": 580,
+  "raw_sha256": "364a017b352f8cc51e0582ef12b809d9ee98edce5ed70edfae658eca7680dae3",
+  "response_text": "```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"cve_id\": \"CVE-2021-4431\",\n  \"cwe_id\": \"CWE-79\",\n  \"affected_component\": \"FMDataAPI_Sample.php\",\n  \"affected_component_type\": \"source\",\n  \"vulnerability_type\": \"cross site scripting\",\n  \"attack_vector\": \"remote\",\n  \"fix_version\": \"23\",\n  \"patch_commit\": \"3bd1709a8f7b1720529bf5dfc9855ad609f436cf\"\n}\n```<|im_end|>",
+  "wall_seconds": 54.03576829699887
+}
