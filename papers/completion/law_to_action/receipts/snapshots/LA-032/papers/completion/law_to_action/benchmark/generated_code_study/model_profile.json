@@ -1,0 +1,26 @@
+{
+  "base_url_binding": "ephemeral loopback assigned at service start; not a standing daemon",
+  "chat_template": "{% for message in messages %}{{ message.role }}: {{ message.content }}\n{% endfor %}assistant:",
+  "chat_template_sha256": "aeeaae8712d91357d88b79948d24862d4be2154169a9c1e2b032cba3363bb114",
+  "deployment_sha256": "cac5a8400f6538a0251eb96dee1718fbc0f94efcf316790dfce1c11da56ba53f",
+  "indefinitely_running_required": false,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "la032-tiny-byte-lm/3d443a424bd43847",
+  "model_revision": "la032-tiny-byte-lm/3d443a424bd43847",
+  "paid_budget": 0,
+  "prompt_profile_sha256": "6cae8a3c46cbd5a247cacc2b239b30967998defb269b1bfcd60f04b09a236485",
+  "qualification": {
+    "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model.json",
+    "sha256": "688823dce37da6c447d011f6cf986be02cf8efe78ff1b00eefa8e3c31a8c587c"
+  },
+  "schema": "la-qualified-local-model/v1",
+  "service_wall_seconds": 10000,
+  "startup_readiness_seconds": 360,
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenizer_revision": "la032-tiny-byte-lm/3d443a424bd43847",
+  "tokenizer_sha256": "cd660e467f822e9f24c0690cca126f4d9c2c39d3cae76f5dc6144d3c69b69b57",
+  "warm_reuse_while_inferring": true,
+  "weights_sha256": "3d443a424bd43847f94bebdad1acc1cafe34cebaf1551f3f6db9372d34d1bb18"
+}
