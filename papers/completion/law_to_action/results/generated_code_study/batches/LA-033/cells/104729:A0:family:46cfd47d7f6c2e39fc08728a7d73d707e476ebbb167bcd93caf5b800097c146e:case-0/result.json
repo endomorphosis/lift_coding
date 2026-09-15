@@ -1,0 +1,37 @@
+{
+  "arm": "A0",
+  "constructed_program_substituted": false,
+  "cpu_seconds": 9.1092264,
+  "descendant_cpu_seconds": 0.0,
+  "iterations": [
+    {
+      "arm": "A0",
+      "completion_tokens": 1024,
+      "constructed_program_substituted": false,
+      "forbidden_effect": false,
+      "iteration": 0,
+      "model_calls": 1,
+      "model_generated": true,
+      "origin": "qualified-local-model",
+      "parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+      "profile_diagnostic": "invalid character '\ufffd' (U+FFFD) (candidate.py, line 1)",
+      "prompt_tokens": 611,
+      "seed": 104729,
+      "source_profile_supported": false,
+      "terminal": "candidate_failed",
+      "useful_work": false
+    }
+  ],
+  "mock": false,
+  "model_calls": 1,
+  "overrun": false,
+  "paid_budget": 0,
+  "parsed_program": false,
+  "peak_memory_kb": 0,
+  "schema": "la-closed-loop-attempt/v1",
+  "scientific_benchmark": true,
+  "seed": 104729,
+  "terminal": "candidate_failed",
+  "unknown_costs": false,
+  "wall_seconds": 2.46431257599761
+}
