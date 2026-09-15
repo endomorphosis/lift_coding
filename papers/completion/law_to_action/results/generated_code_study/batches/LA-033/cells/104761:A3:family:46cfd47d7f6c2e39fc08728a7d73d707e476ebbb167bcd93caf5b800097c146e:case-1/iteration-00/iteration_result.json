@@ -1,0 +1,21 @@
+{
+  "arm": "A3",
+  "attempt_id": "104761:A3:family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-1",
+  "candidate_extracted": false,
+  "completion_tokens": 1024,
+  "effect_status": "not_executed",
+  "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "forbidden_effect": false,
+  "inference_reserved": true,
+  "iteration": 0,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 1607,
+  "prompt_tokens": 1607,
+  "raw_sha256": "8ea2c358507d83a2fe89cdd78e0d22daed7f22f2f6dc57beb4d04062539ff5e0",
+  "seed": 104761,
+  "terminal": "transport_or_format_failure",
+  "token_usage_known": true,
+  "useful_work": false
+}

@@ -1,0 +1,21 @@
+{
+  "arm": "A4",
+  "attempt_id": "104759:A4:family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-1",
+  "candidate_extracted": false,
+  "completion_tokens": 1024,
+  "effect_status": "not_executed",
+  "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "forbidden_effect": false,
+  "inference_reserved": true,
+  "iteration": 0,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 1607,
+  "prompt_tokens": 1607,
+  "raw_sha256": "38892ebeab7dad21cb82688b798a4fb8488d9a581e80c517de4df8b7ecb32bc7",
+  "seed": 104759,
+  "terminal": "transport_or_format_failure",
+  "token_usage_known": true,
+  "useful_work": false
+}
