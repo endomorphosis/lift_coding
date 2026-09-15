@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 36,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 551,
+  "prompt_tokens": 551,
+  "raw_sha256": "eac4202de58b3a885c3ef180794fabe0a867289e754011ed45afa012da73f997",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed('CVE-2022-0402')\"\n}\n```<|im_end|>",
+  "wall_seconds": 3.1267159370036097
+}

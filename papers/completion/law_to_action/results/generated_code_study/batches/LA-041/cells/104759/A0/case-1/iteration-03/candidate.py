@@ -1,0 +1,10 @@
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\n\\ndef run(payload):\\n    # Parse the lineage family data\\n    data = json.loads(payload)\\n    # Extract the source\\n    source = data.get('source', '')\\n    # Emit the source-relative JSON record\\n    emit_allowed({'payload': json.dumps({'lineage': {'source': source, 'family': 'source-relative'}})})\\n    \"}"}<|im_end|>
+<|im_im_start|>assistant
+<|im_start|>assistant
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\n\\ndef run(payload):\\n    # Parse the lineage family data\\n    data = json.loads(payload)\\n    # Extract the source\\n    source = data.get('source', '')\\n    # Emit the source-relative JSON record\\n    emit_allowed({'payload': json.dumps({'lineage': {'source': source, 'family': 'source-relative'}})})\\n    \"}"}<|im_end|>
+<|im_start|>assistant
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\n\\ndef run(payload):\\n    # Parse the lineage family data\\n    data = json.loads(payload)\\n    # Extract the source\\n    source = data.get('source', '')\\n    # Emit the source-relative JSON record\\n    emit_allowed({'payload': json.dumps({'lineage': {'source': source, 'family': 'source-relative'}})})\\n    \"}"}<|im_end|>
+<|im_start|>assistant
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\n\\ndef run(payload):\\n    # Parse the lineage family data\\n    data = json.loads(payload)\\n    # Extract the source\\n    source = data.get('source', '')\\n    # Emit the source-relative JSON record\\n    emit_allowed({'payload': json.dumps({'lineage': {'source': source, 'family': 'source-relative'}})})\\n    \"}"}<|im_end|>
+<|im_start|>assistant
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\n\\ndef run(payload):\\n    # Parse the lineage family data\\n    data = json.loads(payload)\\n    # Extract the source\\n    source = data.get('source', '')\\n    # Emit the source-relative JSON record\\n    emit_allowed({'payload': json.dumps({'lineage': {'source': source, 'family': 'source-relative'}})})\\n    \"}"}<|im_end|>

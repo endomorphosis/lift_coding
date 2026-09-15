@@ -1,0 +1,1 @@
+emit_allowed('CVE-2022-0402')

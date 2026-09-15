@@ -1,0 +1,20 @@
+{
+  "base_url": "http://172.17.0.1:8080",
+  "batch_id": "LA-041",
+  "bind": "docker0",
+  "constructed_transport": false,
+  "execution_profile": "source-relative-direct-calls-v1",
+  "family_binding": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+  "fixed_program_substituted": false,
+  "freeze_sha256": "7822e0da434ec0e221b19a663e7ac0656b2f1af1c8f9a5911207e06afb048c8c",
+  "mock": false,
+  "model_id": "leanstral_local",
+  "model_revision": "leanstral_local",
+  "paid_budget": 0,
+  "phase": "calibration",
+  "schedule_identity_digest": "ea1e2a6957b76d45b4709f1725aca0a6a01e5be37723cd527630b478d148c853",
+  "scientific_execution": true,
+  "source_id": "cve:1b56fbc12eba93e7b2f1360e8041fffb83c23850db1bb219c351220adcb4a41b",
+  "systemd_unit": "ipfs-accelerate-leanstral.service",
+  "tiny_byte_lm": false
+}

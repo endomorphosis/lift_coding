@@ -1,0 +1,1 @@
+emit_allowed('{"type":"XSS","vulnerability":"Reflected XSS","affected_component":"bob_czy_panstwa_sprawa_zostala_rozwiazana parameter","attack_vector":"super_language_switcher AJAX action","impact":"Session hijacking, defacement, phishing","remediation":"Update to version 6.0.4","source":"CVE-2022-0402"}')
