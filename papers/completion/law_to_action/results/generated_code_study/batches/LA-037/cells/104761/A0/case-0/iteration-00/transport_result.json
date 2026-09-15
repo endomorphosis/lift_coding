@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 88,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "370008b19d8b9dd92e4615c3e69d1d0f77312ec898e61ac90b27f8a3de6ee588",
+  "response_text": "{\"name\": \"return_one_json_object\", \"arguments\": {\"type\": \"object\", \"properties\": {\"program\": {\"type\": \"string\", \"description\": \"The program string\"}, \"reasoning\": {\"type\": \"string\", \"description\": \"The reasoning for the output\"}}}}\n</|im_manual_tool_call_end|>\n<|im_start|>assistant\n<|tool_call_end|>",
+  "wall_seconds": 5.596159081993392
+}

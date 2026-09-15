@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 106,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "40f7204e669672b5a2f284fa27faa0f7ba0291d73714cb9eaf76547331ca2100",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed({\\\"source\\\": \\\"https://example.com/source1\\\", \\\"lineage\\\": \\\"https://example.com/lineage1\\\"})\"\n}\n```<|im_end|><|im_start|>assistant\n```json\n{\n  \"program\": \"emit_allowed({\\\"source\\\": \\\"https://example.com/source1\\\", \\\"lineage\\\": \\\"https://example.com/lineage1\\\"})\"\n}\n```<|im_end|>",
+  "wall_seconds": 8.663987954001641
+}

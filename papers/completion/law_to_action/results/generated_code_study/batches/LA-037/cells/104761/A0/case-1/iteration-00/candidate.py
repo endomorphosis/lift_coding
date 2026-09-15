@@ -1,0 +1,1 @@
+emit_allowed({"source": "https://example.com/source1", "lineage": "lineage_family_1", "effect": "source_relative_json_record"})

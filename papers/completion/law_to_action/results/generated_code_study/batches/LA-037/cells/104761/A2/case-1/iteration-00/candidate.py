@@ -1,0 +1,3 @@
+{"kind":"program","string":"{\"kind\":\"function\",\"name\":\"run\",\"outputs\":{\"output_type\":\"string\"},\"destination\":\"allowed\",\"function\":\"run\",\"parameters\":{\"properties\":{\"payload\":{\"kind\":\"string\",\"description\":\"The JSON object to emit\"}},\"required\":[\"payload\"],\"type\":\"object\"}","emit_allowed":{"kind":"function","name":"emit_allowed","outputs\":{\"output_type\":\"string\"},\"destination\":\"allowed\",\"function\":\"emit_allowed\",\"parameters\":{\"properties\":{\"payload\":{\"kind\":\"string\",\"description\":\"The JSON object to emit\"}},\"required\":[\"payload\"],\"type\":\"object\"}}<|im_end|>
+<|im_start|>assistant
+{"kind":"function","name":"run","outputs":{},"destination":"allowed","function":"run","parameters":{}}<|im_im_end|>

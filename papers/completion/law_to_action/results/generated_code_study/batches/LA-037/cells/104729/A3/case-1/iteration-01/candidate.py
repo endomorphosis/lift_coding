@@ -1,0 +1,1 @@
+["emit_allowed", {"kind": "permitted_public_source", "locator": {"primary_source_id": "7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132", "repository": "github.com/supanadadit/jwt-go", "skill_id": "03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d32"}, "source_url": "https://github.com/supadadit/jwt-go"}]

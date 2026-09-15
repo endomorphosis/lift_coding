@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 392,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 614,
+  "prompt_tokens": 614,
+  "raw_sha256": "d9f99c228e6aff9d5351877e755422b6ae6abd2a576098a5cbcc357405e45756",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\": \\\"[\\\\\\\"emit_allowed\\\\\\\", {\\\\\\\"kind\\\\\\\": \\\\\\\"permitted_public_source\\\\\\\", \\\\\\\"locator\\\\\\\": {\\\\\\\"primary_source_id\\\\\\\": \\\\\\\"7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132\\\\\\\", \\\\\\\"repository\\\\\\\": \\\\\\\"github.com/supanadit/jwt-go\\\\\\\", \\\\\\\"skill_id\\\\\\\": \\\\\\\"03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2\\\\\\\", \\\\\\\"source_url\\\\\\\": \\\\\\\"https://github.com/supanadit/jwt-go\\\\\\\"}, \\\\\\\"source_family\\\\\\\": \\\\\\\"family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b32f132\\\\\\\", \\\\\\\"excerpt\\\\\\\": \\\\\\\"# JWT auth, verification, binding, password hashing, and expiry in Go with supanadit/jwt-go ## Background This skill shows how to use the Go library `github.com/supanadit/jwt-go` to: - Set a JWT secret - Generate and verify JWTs from either the library's default `Authorization` model or your own struct - Verify and bind (decode) a JWT back into a struct - Hash and verify passwords using bcrypt (on\\\\\\\"}]\"}",
+  "wall_seconds": 33.21751899299852
+}

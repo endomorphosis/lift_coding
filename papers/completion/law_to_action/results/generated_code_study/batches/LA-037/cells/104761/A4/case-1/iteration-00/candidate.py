@@ -1,0 +1,1 @@
+{"kind":"program","string":"{\"kind\":\"program\",\"string\":\"import \\\"fmt\\\"\\n\\nfunc run(payload string) {\\n\\tfmt.Println(\\\"Hello, World!\\\")\\n}\"}"}

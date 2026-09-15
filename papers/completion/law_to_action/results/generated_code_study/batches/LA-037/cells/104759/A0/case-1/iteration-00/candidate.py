@@ -1,0 +1,1 @@
+emit_allowed({"source": "public", "lineage": "public", "payload": {"type": "text", "content": "Hello, World!"}})

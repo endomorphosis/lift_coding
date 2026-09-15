@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 192,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 614,
+  "prompt_tokens": 614,
+  "raw_sha256": "5b894e1786c4e9cde6cc90cc98f8440a8c81d10837fe5b85beb4cec057ce6cc0",
+  "response_text": "{\"kind\":\"program\",\"string\":\"{\\\"kind\\\":\\\"function\\\",\\\"name\\\":\\\"run\\\",\\\"outputs\\\":{\\\"output_type\\\":\\\"string\\\"},\\\"destination\\\":\\\"allowed\\\",\\\"function\\\":\\\"run\\\",\\\"parameters\\\":{\\\"properties\\\":{\\\"payload\\\":{\\\"kind\\\":\\\"string\\\",\\\"description\\\":\\\"The JSON object to emit\\\"}},\\\"required\\\":[\\\"payload\\\"],\\\"type\\\":\\\"object\\\"}\",\"emit_allowed\":{\"kind\":\"function\",\"name\":\"emit_allowed\",\"outputs\\\":{\\\"output_type\\\":\\\"string\\\"},\\\"destination\\\":\\\"allowed\\\",\\\"function\\\":\\\"emit_allowed\\\",\\\"parameters\\\":{\\\"properties\\\":{\\\"payload\\\":{\\\"kind\\\":\\\"string\\\",\\\"description\\\":\\\"The JSON object to emit\\\"}},\\\"required\\\":[\\\"payload\\\"],\\\"type\\\":\\\"object\\\"}}<|im_end|>\n<|im_start|>assistant\n{\"kind\":\"function\",\"name\":\"run\",\"outputs\":{},\"destination\":\"allowed\",\"function\":\"run\",\"parameters\":{}}<|im_im_end|>",
+  "wall_seconds": 14.916762118999031
+}

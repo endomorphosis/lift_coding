@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 52,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 614,
+  "prompt_tokens": 614,
+  "raw_sha256": "373c2b2d7b4f0c1e28bdf3cf5b15ba1d10c0d2005e21a5cee36e32063416ed43",
+  "response_text": "{\"kind\":\"program\",\"string\":\"{\\\"kind\\\":\\\"program\\\",\\\"string\\\":\\\"import \\\\\\\"fmt\\\\\\\"\\\\n\\\\nfunc run(payload string) {\\\\n\\\\tfmt.Println(\\\\\\\"Hello, World!\\\\\\\")\\\\n}\\\"}\"}",
+  "wall_seconds": 4.060043407997
+}
