@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 171,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 612,
+  "prompt_tokens": 612,
+  "raw_sha256": "f8c68fef6a3607d6e5c2cc5f2840da098a4332eefc865becb5dc485087512283",
+  "response_text": "<|im_start|>assistant\n{\"type\":\"text\",\"text\":\"<|tool_call_begin|tool_call|{\\\"name\\\":\\\"emit_allowed\\\",\\\"arguments\\\":{\\\"payload\\\":\\\"{\\\\\\\"kind\\\\\\\":\\\\\\\"permitted_public_source\\\\\\\",\\\\\\\"locator\\\\\\\":{\\\\\\\"document_sha256\\\\\\\":\\\\\\\"d380369e1054a46b0adc17e48f76fc2c2007b0133980165a6bd31f5722677c33\\\\\\\",\\\\\\\"edition\\\\\\\":\\\\\\\"2024\\\\\\\",\\\\\\\"section\\\\\":\"} <|tool_call_end|>tool_call|\"} <|im_end|>",
+  "wall_seconds": 14.341486546996748
+}

@@ -1,0 +1,2 @@
+<|im_start|>assistant
+{"type":"text","text":"<|tool_call_begin|tool_call|{\"name\":\"emit_allowed\",\"arguments\":{\"payload\":\"{\\\"kind\\\":\\\"permitted_public_source\\\",\\\"locator\\\":{\\\"document_sha256\\\":\\\"d380369e1054a46b0adc17e48f76fc2c2007b0133980165a6bd31f5722677c33\\\",\\\"edition\\\":\\\"2024\\\",\\\"section\\":"} <|tool_call_end|>tool_call|"} <|im_end|>

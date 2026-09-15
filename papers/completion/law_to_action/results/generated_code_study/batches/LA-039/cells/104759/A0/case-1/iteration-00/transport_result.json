@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 164,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "ba4d11f937ffd8e146015e23be9f2517aebce408fb9c6b72e154751a2925b3ac",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\n\\\\ndef run(payload):\\\\n    # Parse the payload\\\\n    data = json.loads(payload)\\\\n    # Extract the required fields\\\\n    name = data.get('name')\\\\n    age = data.get('age')\\\\n    city = data.get('city')\\\\n    country = data.get('country')\\\\n    # Construct the output record\\\\n    output = {\\\\n        'name': name,\\\\n        'age': age,\\\\n        'city': city,\\\\n        'country': country\\\\n    }\\\\n    # Emit the JSON record\\\\n    emit_allowed(output)\\\\n\\\\n\\\"}\"}",
+  "wall_seconds": 12.273740069998894
+}

@@ -1,0 +1,1 @@
+[/SOI]{"run": "def run(payload):\n    emit_allowed(payload)\n    emit_allowed(payload)\n    emit_allowed(payload)\n    emit_allowed(payload)"}[/EOI]
