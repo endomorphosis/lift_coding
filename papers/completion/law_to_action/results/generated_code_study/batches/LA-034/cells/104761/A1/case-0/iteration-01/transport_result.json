@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 132,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 394,
+  "prompt_tokens": 394,
+  "raw_sha256": "415ed659c84d9ea296a5929cce2da2fc366524433ba3a94f16ee2049878a535f",
+  "response_text": "{\"type\":\"json_object\",\"json\": {\"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\"}}<|im_end|>\n<|im_observed_execution_feedback|>\n<|im_start|>assistant\n{\"type\":\"json_object\",\"json\": {\"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\"}}<|im_end|>\n<|im_end|>",
+  "wall_seconds": 13.902783659003035
+}

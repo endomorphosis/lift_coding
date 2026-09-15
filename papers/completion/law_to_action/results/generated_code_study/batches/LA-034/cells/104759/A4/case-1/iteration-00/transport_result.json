@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 201,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 654,
+  "prompt_tokens": 654,
+  "raw_sha256": "38b0c7c8ace95b88fe204482299cb7a6cc62fbd33d031da756dd3e0cbad4ded3",
+  "response_text": "```json\n{\n  \"emit_allowed\": {\n    \"kind\": \"public_source\",\n    \"locator\": {\n      \"document_sha256\": \"80f2a6e95b011d81f7cab5b9b73339ab9aa61ccb851090db2ca42a2003d8dc0c\",\n      \"edition\": \"2024\",\n      \"section\": \"20-USC-1232g\"\n    },\n    \"source_family\": \"family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769\"\n  }\n}\n```<|im_end|>",
+  "wall_seconds": 15.204258573998231
+}
