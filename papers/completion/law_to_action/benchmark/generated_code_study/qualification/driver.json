@@ -1,0 +1,19 @@
+{
+  "claim": {
+    "owner": "owner:la032-qualification",
+    "reconciled": false,
+    "status": "acquired"
+  },
+  "cleanup_fault_consumed": true,
+  "configuration_flag_only": false,
+  "interrupt_resume": true,
+  "scientific_cells_completed": 0,
+  "silent_replay": false,
+  "stale_owner_reconciled": {
+    "owner": "owner:la032-stale",
+    "previous_owner": "owner:la032-qualification",
+    "reconciled": true,
+    "status": "reconciled_stale_owner"
+  },
+  "status": "PASS"
+}

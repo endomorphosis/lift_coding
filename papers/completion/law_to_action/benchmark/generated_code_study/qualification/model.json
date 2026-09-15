@@ -1,0 +1,71 @@
+{
+  "accounting": {
+    "calls": 5,
+    "completion_tokens": 5120,
+    "cpu_seconds": 48.337907232,
+    "indefinitely_running_required": false,
+    "prompt_tokens": 2606,
+    "schema": "la032-model-service-accounting/v1",
+    "service_wall_budget_seconds": 10000,
+    "startup_bound_seconds": 360,
+    "systemd_required": false,
+    "wall_seconds": 13.028811354000936
+  },
+  "actual_service_resource_boundary_qualified": true,
+  "availability_flag_only": false,
+  "bounded_http": false,
+  "calls": [
+    {
+      "call_id": "model-call-0",
+      "completion_tokens": 1024,
+      "preflight_input_count": 544,
+      "prompt_tokens": 544,
+      "prompt_tokens_equal_preflight": true,
+      "raw_sha256": "57f2924c4c1279927863281247510eccdd0d7726271bd731cd812e868e8a3b1c",
+      "seed": 104729,
+      "warm_service": true
+    },
+    {
+      "call_id": "model-call-1",
+      "completion_tokens": 1024,
+      "preflight_input_count": 544,
+      "prompt_tokens": 544,
+      "prompt_tokens_equal_preflight": true,
+      "raw_sha256": "2ff16ce2d5f801258c3903870b7681ee043ab0f2e1518b327a8157ea3f273565",
+      "seed": 104759,
+      "warm_service": true
+    },
+    {
+      "call_id": "model-call-2",
+      "completion_tokens": 1024,
+      "preflight_input_count": 544,
+      "prompt_tokens": 544,
+      "prompt_tokens_equal_preflight": true,
+      "raw_sha256": "24d6f829446130c597057614f491351b6e848295c9a521b999b54226e7fe9622",
+      "seed": 104761,
+      "warm_service": true
+    }
+  ],
+  "cancellation_observed": true,
+  "cancelled_completion_tokens": 1024,
+  "chat_template_sha256": "aeeaae8712d91357d88b79948d24862d4be2154169a9c1e2b032cba3363bb114",
+  "constructed_transport": false,
+  "deployment_sha256": "cac5a8400f6538a0251eb96dee1718fbc0f94efcf316790dfce1c11da56ba53f",
+  "in_process_http": true,
+  "mock": false,
+  "model_id": "la032-tiny-byte-lm/3d443a424bd43847",
+  "model_revision": "la032-tiny-byte-lm/3d443a424bd43847",
+  "output_ceiling_respected": true,
+  "prompt_profile_sha256": "6cae8a3c46cbd5a247cacc2b239b30967998defb269b1bfcd60f04b09a236485",
+  "raw_response_preserved": true,
+  "schema": "la032-model-qualification/v1",
+  "service_wall_seconds": 10000,
+  "startup_readiness_seconds": 360,
+  "status": "PASS",
+  "systemd_required": false,
+  "tokenization_agrees_with_usage": true,
+  "tokenizer_revision": "la032-tiny-byte-lm/3d443a424bd43847",
+  "tokenizer_sha256": "cd660e467f822e9f24c0690cca126f4d9c2c39d3cae76f5dc6144d3c69b69b57",
+  "warm_reuse": true,
+  "weights_sha256": "3d443a424bd43847f94bebdad1acc1cafe34cebaf1551f3f6db9372d34d1bb18"
+}

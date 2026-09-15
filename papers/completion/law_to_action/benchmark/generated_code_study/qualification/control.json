@@ -1,0 +1,111 @@
+{
+  "cells": {
+    "qual:A4:family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0": {
+      "arm": "A4",
+      "attempt_id": "qual:A4:family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0",
+      "batch_id": "LA-033",
+      "case_id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0",
+      "consumed": 1,
+      "error": "cleanup_fault_probe",
+      "family_id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e",
+      "model_calls": 1,
+      "owner": "owner:la032-qualification",
+      "reservation_sha256": "491bb7e1ea93214b6f67ec8d277546ab3877cef8dde9ca169339324c8a4d05e5",
+      "result_sha256": null,
+      "scientific": 0,
+      "seed": 104729,
+      "split": "development",
+      "state": "failed_consumed",
+      "updated_at": "2026-09-15T04:32:56.986285Z"
+    }
+  },
+  "freeze_sha256": "7822e0da434ec0e221b19a663e7ac0656b2f1af1c8f9a5911207e06afb048c8c",
+  "model_calls": {
+    "model-call-0": {
+      "attempt_id": "qual-model-0",
+      "call_id": "model-call-0",
+      "completion_tokens": 1024,
+      "error": null,
+      "input_count": 544,
+      "owner": "owner:la032-qualification",
+      "prompt_tokens": 544,
+      "raw_sha256": "57f2924c4c1279927863281247510eccdd0d7726271bd731cd812e868e8a3b1c",
+      "reservation_sha256": "bc9d347cd2edfa1bdbba58f90afb98ceb2bb8e3743f5dc6b14ae727fdd6188ff",
+      "state": "completed",
+      "updated_at": "2026-09-15T04:33:00.651942Z"
+    },
+    "model-call-1": {
+      "attempt_id": "qual-model-1",
+      "call_id": "model-call-1",
+      "completion_tokens": 1024,
+      "error": null,
+      "input_count": 544,
+      "owner": "owner:la032-qualification",
+      "prompt_tokens": 544,
+      "raw_sha256": "2ff16ce2d5f801258c3903870b7681ee043ab0f2e1518b327a8157ea3f273565",
+      "reservation_sha256": "d1fb4d37b8700f6d128242621b99a8674ceb03220abd5ce6e92926be18600b00",
+      "state": "completed",
+      "updated_at": "2026-09-15T04:33:03.397246Z"
+    },
+    "model-call-2": {
+      "attempt_id": "qual-model-2",
+      "call_id": "model-call-2",
+      "completion_tokens": 1024,
+      "error": null,
+      "input_count": 544,
+      "owner": "owner:la032-qualification",
+      "prompt_tokens": 544,
+      "raw_sha256": "24d6f829446130c597057614f491351b6e848295c9a521b999b54226e7fe9622",
+      "reservation_sha256": "ce53ad2436b5979639d6a1190050177c6be7c8ca485e98c20c96fc410dc821c4",
+      "state": "completed",
+      "updated_at": "2026-09-15T04:33:05.761466Z"
+    },
+    "model-call-cancel": {
+      "attempt_id": "qual-cancel",
+      "call_id": "model-call-cancel",
+      "completion_tokens": 1024,
+      "error": null,
+      "input_count": 487,
+      "owner": "owner:la032-qualification",
+      "prompt_tokens": 487,
+      "raw_sha256": "9d01a82f8960e171a7969f8d0f544bc0f8ea39cbf71dcb42f5b1fb31817a470e",
+      "reservation_sha256": "b452b8c0188ebe5a0621bf649c2d7dc4ee0b187c8d9f9a2b3de8b710f43b246d",
+      "state": "completed",
+      "updated_at": "2026-09-15T04:33:10.024081Z"
+    },
+    "model-call-ceiling": {
+      "attempt_id": "qual-ceiling",
+      "call_id": "model-call-ceiling",
+      "completion_tokens": 1024,
+      "error": null,
+      "input_count": 487,
+      "owner": "owner:la032-qualification",
+      "prompt_tokens": 487,
+      "raw_sha256": "05913e36073fc4a7833befaec3ff1615b47b95b69449aab4a26b0fa387b5a664",
+      "reservation_sha256": "94417fe595f6d4b37957c12552923162a660d05b6f0bfc89e76e6b4ff5740bbf",
+      "state": "completed",
+      "updated_at": "2026-09-15T04:33:08.065024Z"
+    },
+    "qual-call-interrupt": {
+      "attempt_id": "qual:A4:family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0",
+      "call_id": "qual-call-interrupt",
+      "completion_tokens": null,
+      "error": "cleanup_fault_probe",
+      "input_count": null,
+      "owner": "owner:la032-qualification",
+      "prompt_tokens": null,
+      "raw_sha256": null,
+      "reservation_sha256": "c3920667e8ec491fd3c404d5dcdea0af585008bc9e7a18c961e0ea5eaaa5bf06",
+      "state": "failed_consumed",
+      "updated_at": "2026-09-15T04:32:56.981025Z"
+    }
+  },
+  "ownership": {
+    "freeze_sha256": "7822e0da434ec0e221b19a663e7ac0656b2f1af1c8f9a5911207e06afb048c8c",
+    "heartbeat": "2026-09-15T04:32:56.995690Z",
+    "owner": "owner:la032-stale",
+    "service_started_monotonic": 15083.588097859,
+    "service_wall_budget": 10000.0
+  },
+  "schema": "la032-durable-schedule/v1"
+}
