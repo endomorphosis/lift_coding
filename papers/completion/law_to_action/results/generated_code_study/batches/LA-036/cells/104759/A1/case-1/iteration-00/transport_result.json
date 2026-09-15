@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 86,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 250,
+  "prompt_tokens": 250,
+  "raw_sha256": "1c66e565a78ad9deb1279230b856b64f986f24b8ae47687aafc6163e89f117b4",
+  "response_text": "{\"type\":\"program\",\"instructions\":\"Return exactly one JSON object with a program string. The supported Python profile is one function run(payload) containing one to four direct calls emit_allowed(payload) or emit_undeclared(payload). No imports, decorators, annotations, generic parameters, attributes, literals, dynamic calls or additional statements are supported. The task requires actual handler effects, not a report of success.\"}",
+  "wall_seconds": 6.644240779998654
+}
