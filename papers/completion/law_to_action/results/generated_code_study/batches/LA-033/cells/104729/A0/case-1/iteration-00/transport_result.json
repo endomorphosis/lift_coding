@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 58,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "84dd80de52bd08a9f9f4a6cb2da49bc8b88838338eed7c12844e220eb3255199",
+  "response_text": "{\"name\": \"lineage.json\", \"content\": \"{\\\"run\\\":{\\\"name\\\":\\\"lineage.json\\\",\\\"type\\\":\\\"program\\\",\\\"statements\\\":[{\\\"type\\\":\\\"function\\\",\\\"name\\\":\\\"run\\\",\\\"parameters\\\":{\\\"statements\\\":[\\\"emit_allowed(payload)\\\"]}}]}}\"}",
+  "wall_seconds": 4.544024506001733
+}

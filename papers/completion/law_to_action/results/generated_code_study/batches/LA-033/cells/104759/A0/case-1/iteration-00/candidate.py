@@ -1,0 +1,1 @@
+{"name": "lineage.json", "content": "{\"run\":{\"name\":\"lineage.json\",\"type\":\"program\",\"statements\":[{\"type\":\"function\",\"name\":\"run\",\"parameters\":{\"statements\":[\"emit_allowed(payload)\"]}}]}}"}

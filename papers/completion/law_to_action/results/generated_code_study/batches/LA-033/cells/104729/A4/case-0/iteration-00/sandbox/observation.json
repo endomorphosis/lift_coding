@@ -1,0 +1,81 @@
+{
+  "event_count": 2,
+  "events": [
+    {
+      "effect_kind": "filesystem.export_json",
+      "event_schema": "law-to-action-observed-effect/v1",
+      "handler_version": "bounded-export-handler/v2",
+      "payload_bytes": 295,
+      "payload_sha256": "51cdd483afeaf35cb3a8249be4c28ddaf04e0ceee6a619543cbb1e4cae1163ae",
+      "run_id": "104729:A4:family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0:00",
+      "target": "exports/allowed.json"
+    }
+  ],
+  "export_files": [
+    "exports/allowed.json"
+  ],
+  "filesystem_entries": [
+    {
+      "content_hash_complete": true,
+      "kind": "regular_file",
+      "payload_bytes": 376,
+      "payload_sha256": "e774ce782f859aa44abf8ecbae5b906f195c897c4225a428c2c66484d747cb23",
+      "target": "effects.jsonl"
+    },
+    {
+      "kind": "directory",
+      "target": "exports"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 295,
+      "payload_sha256": "51cdd483afeaf35cb3a8249be4c28ddaf04e0ceee6a619543cbb1e4cae1163ae",
+      "target": "exports/allowed.json"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.unexpected_file",
+      "kind": "regular_file",
+      "payload_bytes": 447,
+      "payload_sha256": "0be8b69d92c16c8ea1d48576ff9d0cedb11df44e85b9cbfd93083f648db1140c",
+      "target": "observation.json"
+    }
+  ],
+  "integrity_errors": [
+    {
+      "code": "unexpected_state_file",
+      "target": "observation.json"
+    },
+    {
+      "code": "journal_file_bijection_failed",
+      "target": "observation.json"
+    }
+  ],
+  "journal_consistent": false,
+  "journal_event_count": 1,
+  "observation_complete": true,
+  "observation_digest": "f2ccbc8ac29e328c0467ba3aa2002fb5c3eb15a36f585b9a1b7b5ae37b4b477f",
+  "observed_effect_count": 2,
+  "observed_effects": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.export_json",
+      "kind": "regular_file",
+      "payload_bytes": 295,
+      "payload_sha256": "51cdd483afeaf35cb3a8249be4c28ddaf04e0ceee6a619543cbb1e4cae1163ae",
+      "target": "exports/allowed.json"
+    },
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.unexpected_file",
+      "kind": "regular_file",
+      "payload_bytes": 447,
+      "payload_sha256": "0be8b69d92c16c8ea1d48576ff9d0cedb11df44e85b9cbfd93083f648db1140c",
+      "target": "observation.json"
+    }
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 4
+}
