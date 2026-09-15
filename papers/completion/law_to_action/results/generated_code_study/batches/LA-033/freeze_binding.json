@@ -1,0 +1,12 @@
+{
+  "base_url": "http://127.0.0.1:40323",
+  "bind": "docker0",
+  "exclusive_inference_owner": true,
+  "execution_profile": "source-relative-direct-calls-v1",
+  "freeze_sha256": "7822e0da434ec0e221b19a663e7ac0656b2f1af1c8f9a5911207e06afb048c8c",
+  "model_profile_sha256": "29c99ceb3d5d90a48fb053dcdbd46207d22c6c7aceb47fd191c7c5b83bbb62ef",
+  "prompt_profile_sha256": "6cae8a3c46cbd5a247cacc2b239b30967998defb269b1bfcd60f04b09a236485",
+  "schedule_identity_digest": "ea1e2a6957b76d45b4709f1725aca0a6a01e5be37723cd527630b478d148c853",
+  "schema": "la033-freeze-binding/v1",
+  "weights_sha256": "3d443a424bd43847f94bebdad1acc1cafe34cebaf1551f3f6db9372d34d1bb18"
+}
