@@ -1,0 +1,16 @@
+{
+  "batch": "batch.json",
+  "batch_id": "LA-033",
+  "cell_directory_rule": "cells/{attempt_id with colon replaced by __}/",
+  "cell_index": "cell_index.json",
+  "completeness": "completeness.json",
+  "control": "control.json",
+  "count": 30,
+  "freeze_binding": "freeze_binding.json",
+  "identities": "identities.json",
+  "planned_cells": 30,
+  "records_jsonl": "records.jsonl",
+  "schema": "la033-batch-layout/v1",
+  "summary": "summary.json",
+  "terminals": "terminals.json"
+}
