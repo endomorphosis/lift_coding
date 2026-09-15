@@ -1,0 +1,1 @@
+{"kind":"program","name":"run","language":"Python","code":"def run(payload):\n    emit_allowed(payload)\n"}

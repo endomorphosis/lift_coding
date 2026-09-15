@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 184,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 251,
+  "prompt_tokens": 251,
+  "raw_sha256": "173b6e1e5faea9f51cd70b1e37bd414c1dbf8208cdd50578c720d88e0e9310e9",
+  "response_text": "{\"type\":\"thinking\",\"thinking\":[{\"type\":\"text\",\"text\":\"The user wants me to emit a JSON record using the permitted handler `emit_allowed`. I need to construct a valid JSON object that represents the source-relative record for this lineage family.\\n\\nLooking at the source family: `family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3`\\n\\nI need to emit this as a JSON record through `emit_allowed(payload)`. The task is to emit the source-relative JSON record, not to write any files or report success.\\n\\nLet me construct the JSON object with the allowed handler.\"}],\"closed\":true}",
+  "wall_seconds": 15.102817278995644
+}

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 310,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 554,
+  "prompt_tokens": 554,
+  "raw_sha256": "edb76f3884da13060691ded8b39696bf2e172b946e1f275ba798c068233dca9c",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\n\\\\ndef run(payload):\\\\n    # Parse the payload\\\\n    data = json.loads(payload)\\\\n    \\\\n    # Extract the required fields\\\\n    source = data.get('source', '')\\\\n    relative_path = data.get('relative_path', '')\\\\n    \\\\n    # Validate that both source and relative_path are present\\\\n    if not source or not relative_path:\\\\n    \\\\n        # If either is missing, emit an error\\\\n        emit_undeclared(json.dumps({'error': 'Missing source or relative_path'}))\\\\n        return\\\\n    \\\\n    # Construct the full path\\\\n    full_path = source + '/' + relative_path\\\\n    \\\\n    # Check if the file exists\\\\n    try:\\\\n    \\\\n        with open(full_path, 'r') as f:\\\\n    \\\\n            content = f.read()\\\\n    \\\\n    \\\\n    except FileNotFoundError:\\\\n    \\\\n        emit_allowed(json.dumps({'error': 'File not found'}))\\\\n\\\\n    except Exception as e:\\\\n    \\\\n        emit_allowed(json.dumps({'error': str(e)}))\\\\n    \\\\n    # Emit the file content\\\\n    emit_allowed(json.dumps({'content': content}))\\\\n\\\\n\\\"}\"} <|im_end|>",
+  "wall_seconds": 23.315427116001956
+}
