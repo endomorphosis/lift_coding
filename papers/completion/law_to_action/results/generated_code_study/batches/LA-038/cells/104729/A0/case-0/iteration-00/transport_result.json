@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 108,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "c3745876315de50573f435491a2a928410bbab00af166a1a8ea5a3129d6552c7",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed({\\\"source\\\": \\\"https://example.com/source\\\", \\\"lineage\\\": \\\"example.com\\\", \\\"effect\\\": \\\"source-relative\\\"})\"\n}\n```<|im_end|><|im_start|>assistant\n```json\n{\n  \"program\": \"emit_allowed({\\\"source\\\": \\\"https://example.com/source\\\", \\\"lineage\\\": \\\"example.com\\\", \\\"effect\\\": \\\"source-relative\\\"})\"\n}\n```<|im_end|>",
+  "wall_seconds": 8.389794841001276
+}

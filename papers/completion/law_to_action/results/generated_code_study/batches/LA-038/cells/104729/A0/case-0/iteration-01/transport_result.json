@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 43,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 345,
+  "prompt_tokens": 345,
+  "raw_sha256": "0a29b079a8049a60e44f17ea6e630e9b6150b713a720c094ac42768132c5f6e7",
+  "response_text": "{\"program\": \"emit_allowed({\\\"source\\\": \\\"https://example.com/source\\\", \\\"lineage\\\": \\\"example.com\\\", \\\"effect\\\": \\\"source-relative\\\"})\"}\n<|im_end|>",
+  "wall_seconds": 3.775201199998264
+}

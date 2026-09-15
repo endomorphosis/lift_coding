@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 118,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "f32534d50885cf5121a6f6ec8fb84894cdd4adf2cec8c2587f61fa4850c0a708",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\n\\\\ndef run(payload):\\\\n    # Parse the lineage family data\\\\n    data = json.loads(payload)\\\\n    # Extract the source\\\\n    source = data.get('source', '')\\\\n    # Emit the source-relative JSON record\\\\n    emit_allowed({'payload': json.dumps({'lineage': source})})\\\\n    # Return the result\\\\n    return json.dumps({'lineage': source})\\\\n\\\"}\"}",
+  "wall_seconds": 8.338990927004488
+}

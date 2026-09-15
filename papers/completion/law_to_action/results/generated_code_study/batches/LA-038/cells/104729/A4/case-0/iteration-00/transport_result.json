@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 111,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 615,
+  "prompt_tokens": 615,
+  "raw_sha256": "315164270f5f0c88424d10decdffb6b292118c8451d2bf5d77ba4f6c6dd31ba3",
+  "response_text": "```json\n{\n  \"emit_allowed\": [\n    {\n      \"effect\": \"add_security_headers\",\n      \"description\": \"Adds security headers to reduce XSS, enforce HTTPS, and mitigate other attacks using Lib.AspNetCore.Security\",\n      \"handler\": \"Lib.AspNetCore.Security\",\n      \"source\": \"github.com/tpeczek/Lib.AspNetCore.Security\",\n      \"targets\": [\"aspnetcore\"],\n      \"references\": [\"aspnetcore\"]\n    }\n  ]\n}\n```<|im_im_end|>",
+  "wall_seconds": 9.789762822998455
+}

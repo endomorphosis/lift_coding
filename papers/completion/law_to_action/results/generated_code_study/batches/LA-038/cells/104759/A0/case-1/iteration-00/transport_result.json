@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 69,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "1fee29da4211b6f090dbca6a38cd228a52608e1edcc8de7d1ab212f9b22d4080",
+  "response_text": "{\n  \"allowed\": [\n    {\n      \"source\": \"public\",\n      \"payload\": \"{\\\"lineage\\\": \\\"public\\\", \\\"version\\\": \\\"1.0.0\\\", \\\"handlers\\\": [\\\"emit_allowed\\\", \\\"emit_undeclared\\\"]]}\"\n    }\n  ]\n}\n<|im_end|>",
+  "wall_seconds": 6.2964319640013855
+}
