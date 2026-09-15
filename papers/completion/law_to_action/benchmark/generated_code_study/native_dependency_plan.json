@@ -1,0 +1,483 @@
+{
+  "analysis_freeze_task": {
+    "depends_on": [
+      "LA-032",
+      "LA-033",
+      "LA-034",
+      "LA-035",
+      "LA-036",
+      "LA-037",
+      "LA-038",
+      "LA-039",
+      "LA-040",
+      "LA-041",
+      "LA-042",
+      "LA-043",
+      "LA-044"
+    ],
+    "final_material_release_allowed": false,
+    "id": "LA-063",
+    "parent_task_id": "LA-031",
+    "registered_success": false,
+    "scientific_inference_allowed": false,
+    "title": "Freeze generated-code analysis after development and calibration"
+  },
+  "family_batch_tasks": [
+    {
+      "depends_on": [
+        "LA-032"
+      ],
+      "family_id": "family:bcf43bf1c8c384d20047165585f4a7f760e9a64d5aa93a95cba242a41aa123b8",
+      "id": "LA-033",
+      "parent_task_id": "LA-031",
+      "phase": "development",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen development source-family batch 01"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-033"
+      ],
+      "family_id": "family:55d20f60eb6be4d04287698e1d8aa9c1c0b6efea261d499a21f3c3bfeef912b4",
+      "id": "LA-034",
+      "parent_task_id": "LA-031",
+      "phase": "development",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen development source-family batch 02"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-034"
+      ],
+      "family_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "id": "LA-035",
+      "parent_task_id": "LA-031",
+      "phase": "development",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen development source-family batch 03"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-035"
+      ],
+      "family_id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "id": "LA-036",
+      "parent_task_id": "LA-031",
+      "phase": "development",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen development source-family batch 04"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-036"
+      ],
+      "family_id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "id": "LA-037",
+      "parent_task_id": "LA-031",
+      "phase": "development",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen development source-family batch 05"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-037"
+      ],
+      "family_id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "id": "LA-038",
+      "parent_task_id": "LA-031",
+      "phase": "development",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen development source-family batch 06"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-038"
+      ],
+      "family_id": "family:283506ea323de1f4296c73439dd145dfca0a1b960a77b85011e17902ab120f4b",
+      "id": "LA-039",
+      "parent_task_id": "LA-031",
+      "phase": "calibration",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen calibration source-family batch 01"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-039"
+      ],
+      "family_id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "id": "LA-040",
+      "parent_task_id": "LA-031",
+      "phase": "calibration",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen calibration source-family batch 02"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-040"
+      ],
+      "family_id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "id": "LA-041",
+      "parent_task_id": "LA-031",
+      "phase": "calibration",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen calibration source-family batch 03"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-041"
+      ],
+      "family_id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "id": "LA-042",
+      "parent_task_id": "LA-031",
+      "phase": "calibration",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen calibration source-family batch 04"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-042"
+      ],
+      "family_id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "id": "LA-043",
+      "parent_task_id": "LA-031",
+      "phase": "calibration",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen calibration source-family batch 05"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-043"
+      ],
+      "family_id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "id": "LA-044",
+      "parent_task_id": "LA-031",
+      "phase": "calibration",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen calibration source-family batch 06"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-044",
+        "LA-063"
+      ],
+      "family_id": "family:2fdfa64822fdbef6fa558e9c971504de1aded6b2462faa09531efbf162a13537",
+      "id": "LA-045",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 01"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-045",
+        "LA-063"
+      ],
+      "family_id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "id": "LA-046",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 02"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-046",
+        "LA-063"
+      ],
+      "family_id": "family:48c1a96c08c8c42832575388d876d2eeebeafba64f5ce876c3d47b8560baadd7",
+      "id": "LA-047",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 03"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-047",
+        "LA-063"
+      ],
+      "family_id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "id": "LA-048",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 04"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-048",
+        "LA-063"
+      ],
+      "family_id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "id": "LA-049",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 05"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-049",
+        "LA-063"
+      ],
+      "family_id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "id": "LA-050",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 06"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-050",
+        "LA-063"
+      ],
+      "family_id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "id": "LA-051",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 07"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-051",
+        "LA-063"
+      ],
+      "family_id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "id": "LA-052",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 08"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-052",
+        "LA-063"
+      ],
+      "family_id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "id": "LA-053",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 09"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-053",
+        "LA-063"
+      ],
+      "family_id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "id": "LA-054",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 10"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-054",
+        "LA-063"
+      ],
+      "family_id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "id": "LA-055",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 11"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-055",
+        "LA-063"
+      ],
+      "family_id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "id": "LA-056",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 12"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-056",
+        "LA-063"
+      ],
+      "family_id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "id": "LA-057",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 13"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-057",
+        "LA-063"
+      ],
+      "family_id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "id": "LA-058",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 14"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-058",
+        "LA-063"
+      ],
+      "family_id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "id": "LA-059",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 15"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-059",
+        "LA-063"
+      ],
+      "family_id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "id": "LA-060",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 16"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-060",
+        "LA-063"
+      ],
+      "family_id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "id": "LA-061",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 17"
+    },
+    {
+      "depends_on": [
+        "LA-032",
+        "LA-061",
+        "LA-063"
+      ],
+      "family_id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "id": "LA-062",
+      "parent_task_id": "LA-031",
+      "phase": "final",
+      "planned_cells": 30,
+      "registered_success": false,
+      "title": "Execute frozen final source-family batch 18"
+    }
+  ],
+  "future_batch_success_registered": false,
+  "la031_marked_complete": false,
+  "native_edges_are_explicit": true,
+  "parent_dependency_update": {
+    "add_explicit_depends_on": [
+      "LA-032",
+      "LA-033",
+      "LA-034",
+      "LA-035",
+      "LA-036",
+      "LA-037",
+      "LA-038",
+      "LA-039",
+      "LA-040",
+      "LA-041",
+      "LA-042",
+      "LA-043",
+      "LA-044",
+      "LA-045",
+      "LA-046",
+      "LA-047",
+      "LA-048",
+      "LA-049",
+      "LA-050",
+      "LA-051",
+      "LA-052",
+      "LA-053",
+      "LA-054",
+      "LA-055",
+      "LA-056",
+      "LA-057",
+      "LA-058",
+      "LA-059",
+      "LA-060",
+      "LA-061",
+      "LA-062",
+      "LA-063"
+    ],
+    "mark_complete": false,
+    "task_id": "LA-031"
+  },
+  "parent_metadata_insufficient": true,
+  "phase_counts": {
+    "calibration": 6,
+    "development": 6,
+    "final": 18
+  },
+  "schema": "la-generated-study-native-dependencies/v1",
+  "status": "PLAN_FROZEN_NOT_EXECUTED"
+}

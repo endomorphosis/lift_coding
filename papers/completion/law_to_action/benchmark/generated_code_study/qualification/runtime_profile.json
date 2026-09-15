@@ -1,0 +1,15 @@
+{
+  "attempt_wall_seconds": 120,
+  "cell_cpu_cores": 1,
+  "cell_memory_bytes": 2147483648,
+  "cell_process_limit": 16,
+  "driver": "driver.py",
+  "max_calls": 8,
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "paid_budget": 0,
+  "profile_id": "direct-calls-scientific-v1",
+  "python": "/usr/bin/python3.12",
+  "schema": "la032-runtime-profile/v1",
+  "watchdog": "qualification/watchdog.py"
+}

@@ -1,0 +1,53 @@
+{
+  "actual_service_resource_boundary_qualified": true,
+  "calls": [
+    {
+      "equal": true,
+      "id": "call0",
+      "preflight_input_count": 865,
+      "prompt_tokens": 865,
+      "status": 200
+    },
+    {
+      "equal": true,
+      "id": "call1",
+      "preflight_input_count": 865,
+      "prompt_tokens": 865,
+      "seed_stable": true
+    },
+    {
+      "cancelled": true,
+      "error": "HTTPError",
+      "id": "cancel"
+    }
+  ],
+  "cancellation_observed": true,
+  "chat_template_sha256": "6ad7769906591a6fac66285fdcb3ddaea91a95fe3ede163815589ef397d03838",
+  "constructed_transport": false,
+  "deployment_sha256": "95dd914f10443728aecf704f4cd64a660a242ceb27f5646e74a2ac79233aa0ed",
+  "indefinitely_running_model_required": false,
+  "model_id": "la032-byte-lm-v1",
+  "model_revision": "la032-byte-lm-v1-r1",
+  "output_token_ceiling": 1024,
+  "paid_budget": 0,
+  "prompt_profile_sha256": "8012d575a35e90841f105cdb5c9dd38783e8ffe0a6de8d37b3db3ba9ef649298",
+  "prompt_tokens_equal_preflight_input_count": true,
+  "raw_response_preserved": true,
+  "resource_accounting": {
+    "known_prompt_tokens": 1730,
+    "model_calls": 3
+  },
+  "schema": "la-qualified-local-model-qualification/v1",
+  "scientific_cells_executed": 0,
+  "seed_greedy_stable": true,
+  "service_wall_seconds": 10000,
+  "startup_bound_seconds": 360,
+  "startup_seconds": 0.000848131999191537,
+  "status": "PASS",
+  "systemd_required": false,
+  "tokenization_agrees_with_usage": true,
+  "tokenizer_revision": "byte-utf8-v1",
+  "tokenizer_sha256": "ac597ae496176d053a29e21308e956d0313b7d59b275ba09bb6a0f6747d99fec",
+  "warm_reuse_during_qualification": true,
+  "weights_sha256": "2d4b6e74b14b8b1980e0b31670ab3ebac662647109077515c890d456d3b7115f"
+}

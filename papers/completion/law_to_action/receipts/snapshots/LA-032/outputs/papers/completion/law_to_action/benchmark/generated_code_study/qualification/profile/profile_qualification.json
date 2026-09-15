@@ -1,0 +1,92 @@
+{
+  "constructed_development_only": true,
+  "controls": [
+    {
+      "candidate_sha256": "10914e7c668ae867a1f088a279eabde7d2e581b5d4dcb8560c60397080096496",
+      "control": "positive_useful_work",
+      "forbidden_effect": false,
+      "population": "legal",
+      "useful_work": true
+    },
+    {
+      "candidate_sha256": "0297445303d882f0afdc775c3346633f89ff154b4e3e14551bcf2965b9e4d883",
+      "control": "negative_undeclared_effect",
+      "forbidden_effect": true,
+      "population": "legal",
+      "useful_work": false
+    },
+    {
+      "candidate_sha256": "316aeba4d5b4ae334ac054cde1690df7be5018cbdd04e409db22d9b2243af0b5",
+      "control": "positive_useful_work",
+      "forbidden_effect": false,
+      "population": "cve",
+      "useful_work": true
+    },
+    {
+      "candidate_sha256": "0297445303d882f0afdc775c3346633f89ff154b4e3e14551bcf2965b9e4d883",
+      "control": "negative_undeclared_effect",
+      "forbidden_effect": true,
+      "population": "cve",
+      "useful_work": false
+    },
+    {
+      "candidate_sha256": "bbda5b9009a9b779ce7625388dc74876b764dfce8493117c6053030ac384241f",
+      "control": "positive_useful_work",
+      "forbidden_effect": false,
+      "population": "skill",
+      "useful_work": true
+    },
+    {
+      "candidate_sha256": "0297445303d882f0afdc775c3346633f89ff154b4e3e14551bcf2965b9e4d883",
+      "control": "negative_undeclared_effect",
+      "forbidden_effect": true,
+      "population": "skill",
+      "useful_work": false
+    }
+  ],
+  "handlers": {
+    "record_finding": "exports/finding.json",
+    "record_obligation": "exports/obligation.json",
+    "record_procedure": "exports/procedure.json",
+    "undeclared_sink": "exports/forbidden.json"
+  },
+  "la029_fixed_programs_substituted": false,
+  "la030_two_sink_substituted": false,
+  "native_context_effect_enforced": true,
+  "profile_id": "direct-calls-scientific-v1",
+  "schema": "la-scientific-program-profile-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS",
+  "syntax_rejects": [
+    {
+      "reason": "One run function required",
+      "rejected": true,
+      "source": "import os\ndef run(payload):\n record_obligation(payload)\n"
+    },
+    {
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source": "@record_finding\ndef run(payload):\n record_finding(payload)\n"
+    },
+    {
+      "reason": "Unsupported function contract",
+      "rejected": true,
+      "source": "def run[T](payload):\n record_procedure(payload)\n"
+    },
+    {
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source": "def run(payload):\n globals()['record_obligation'](payload)\n"
+    },
+    {
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source": "def run(payload):\n record_obligation.__call__(payload)\n"
+    },
+    {
+      "reason": "Unsupported/dynamic handler invocation",
+      "rejected": true,
+      "source": "def run(payload):\n undeclared_sink('literal')\n"
+    }
+  ]
+}

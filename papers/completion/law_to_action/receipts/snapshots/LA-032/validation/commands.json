@@ -1,0 +1,24 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "-B",
+      "papers/completion/law_to_action/benchmark/generated_code_study/verify_preparation.py",
+      "--study",
+      "papers/completion/law_to_action/benchmark/generated_code_study/prospective_study.json",
+      "--require-scientific-cells-unexecuted"
+    ],
+    "completed_at": "2026-09-15T02:12:05.131688Z",
+    "cwd": ".",
+    "environment_overrides": {
+      "HOME": "/tmp/ipfs-accelerate-validation-home-la032",
+      "LANG": "C.UTF-8",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-032/validation/verify.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-032/outputs/papers/completion/law_to_action/benchmark/generated_code_study/verify_preparation.py",
+    "started_at": "2026-09-15T02:12:05.066250Z"
+  }
+]

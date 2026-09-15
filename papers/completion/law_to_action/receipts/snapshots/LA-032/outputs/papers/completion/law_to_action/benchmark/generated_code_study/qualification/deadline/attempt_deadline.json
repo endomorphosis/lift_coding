@@ -1,0 +1,20 @@
+{
+  "configured_max_calls": 8,
+  "configured_max_input_tokens": 2048,
+  "configured_max_output_tokens": 1024,
+  "covers": [
+    "template",
+    "tokenization",
+    "inference",
+    "generated_program_execution",
+    "cleanup"
+  ],
+  "hard_complete_attempt_seconds": 120,
+  "overrun_truncated_to_limit": false,
+  "paid_budget": 0,
+  "probe_elapsed_seconds": 0.20167128899993259,
+  "schema": "la032-attempt-deadline-qualification/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS",
+  "unknown_costs_retained": true
+}

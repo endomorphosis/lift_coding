@@ -1,0 +1,15 @@
+{
+  "candidate_sha256": "0297445303d882f0afdc775c3346633f89ff154b4e3e14551bcf2965b9e4d883",
+  "execution_error": null,
+  "forbidden_effect": true,
+  "handler_calls": [
+    "undeclared_sink"
+  ],
+  "profile_diagnostic": null,
+  "profile_id": "direct-calls-scientific-v1",
+  "run_id": "cve-negative_undeclared_effect",
+  "schema": "la-scientific-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "useful_work": false
+}

@@ -1,0 +1,25 @@
+{
+  "chat_template_path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/chat_template.txt",
+  "chat_template_sha256": "6ad7769906591a6fac66285fdcb3ddaea91a95fe3ede163815589ef397d03838",
+  "deployment_path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model_service.py",
+  "deployment_sha256": "95dd914f10443728aecf704f4cd64a660a242ceb27f5646e74a2ac79233aa0ed",
+  "max_input_tokens": 2048,
+  "max_output_tokens": 1024,
+  "model_id": "la032-byte-lm-v1",
+  "model_revision": "la032-byte-lm-v1-r1",
+  "prompt_profile_sha256": "8012d575a35e90841f105cdb5c9dd38783e8ffe0a6de8d37b3db3ba9ef649298",
+  "qualification": {
+    "path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/model_qualification.json",
+    "sha256": "671ff07c01a17b582d110b67936a7c35a2705fb00175546d828e77a960bf1909"
+  },
+  "schema": "la-qualified-local-model/v1",
+  "service_wall_seconds": 10000,
+  "startup_readiness_seconds": 360,
+  "systemd_required": false,
+  "temperature": 0,
+  "tokenizer_path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/tokenizer.json",
+  "tokenizer_revision": "byte-utf8-v1",
+  "tokenizer_sha256": "ac597ae496176d053a29e21308e956d0313b7d59b275ba09bb6a0f6747d99fec",
+  "weights_path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model/weights.json",
+  "weights_sha256": "2d4b6e74b14b8b1980e0b31670ab3ebac662647109077515c890d456d3b7115f"
+}
