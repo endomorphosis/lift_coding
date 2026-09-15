@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 243,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "0dcaa5634dc223480e9d52561d8a9667b5744fe3ec2a1266c10f085b23d7bb1d",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\n\\\\ndef run(payload):\\\\n    # Parse the lineage\\\\n    lineage = json.loads(payload)\\\\n\\\\n    # Check if the lineage is valid\\\\n    if not isinstance(lineage, dict):\\\\n        return\\\\n\\\\n    # Check if required keys exist\\\\n    if 'source' not in lineage or 'target' not in lineage:\\\\n        return\\\\n\\\\n    # Extract source and target\\\\n    source = lineage['source']\\\\n    target = lineage['target']\\\\n\\\\n    # Check if source and target are valid\\\\n    if not isinstance(source, dict) or not isinstance(target, dict):\\\\n        return\\\\n\\\\n    # Extract source and target names\\\\n    source_name = source.get('name', '')\\\\n    target_name = target.get('name', '')\\\\n\\\\n    # Emit the JSON record\\\\n    emit_allowed({\\\"source\\\": source_name, \\\"target\\\": target_name})\\\\n\\\\n\\\"}\"} <|im_end|>",
+  "wall_seconds": 17.996925781000755
+}
