@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 166,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 595,
+  "prompt_tokens": 595,
+  "raw_sha256": "7f909036f4cbd92459b70440e5a12b9d953bbfda9a94729927e59d40be7f85b1",
+  "response_text": "<|im_start||tool_call_begin|>emit_allowed<|tool_call_end|><|im_end|>\n<|im_start|>assistant\n<|im_start||tool_call_begin|>emit_allowed<|tool_call_end|>emit_allowed<|im_end|>\n<|im_start|>assistant\n<|im_start|>emit_allowed<|im_end|>\n<|im_start|>assistant\n<|im_start|>emit_undeclared<|im_end|>\n<|im_start|>assistant\n<|im_start|>emit_allowed<|im_end|>\n<|im_start|>assistant\n<|im_start|>emit_undeclared<|im_end|>",
+  "wall_seconds": 14.283655332008493
+}

@@ -1,0 +1,11 @@
+<|im_start||tool_call_begin|>emit_allowed<|tool_call_end|><|im_end|>
+<|im_start|>assistant
+<|im_start||tool_call_begin|>emit_allowed<|tool_call_end|>emit_allowed<|im_end|>
+<|im_start|>assistant
+<|im_start|>emit_allowed<|im_end|>
+<|im_start|>assistant
+<|im_start|>emit_undeclared<|im_end|>
+<|im_start|>assistant
+<|im_start|>emit_allowed<|im_end|>
+<|im_start|>assistant
+<|im_start|>emit_undeclared<|im_end|>
