@@ -1,0 +1,396 @@
+{
+  "arena_score": null,
+  "bake_argv_template": "{lake} build",
+  "first_is_strata_v4_26": true,
+  "first_job": {
+    "aesop_rev": "",
+    "arena_score": null,
+    "cache_key": "repo/github.com/strata-org/Strata/451e5f047bafa010d178856db76c00029bfa4d7f/v4.26.0",
+    "file_paths": [
+      "Strata/Transform/CallElimCorrect.lean",
+      "Strata/Languages/Core/StatementSemanticsProps.lean"
+    ],
+    "git_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+    "kind": "repo",
+    "lakefile_required": true,
+    "lean_tag": "v4.26.0",
+    "mathlib_rev": "",
+    "module": "Strata/Transform/CallElimCorrect.lean",
+    "phase": 0,
+    "putnambench_url": null,
+    "record_names": [
+      "CallElimCorrect.substOldPostSubset",
+      "CallElimCorrect.extractedOldExprInVars",
+      "Core.InitsUpdatesComm"
+    ],
+    "source": "strata",
+    "url": "https://github.com/strata-org/Strata"
+  },
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "jobs": [
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/strata-org/Strata/451e5f047bafa010d178856db76c00029bfa4d7f/v4.26.0",
+      "file_paths": [
+        "Strata/Transform/CallElimCorrect.lean",
+        "Strata/Languages/Core/StatementSemanticsProps.lean"
+      ],
+      "git_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.26.0",
+      "mathlib_rev": "",
+      "module": "Strata/Transform/CallElimCorrect.lean",
+      "phase": 0,
+      "putnambench_url": null,
+      "record_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm"
+      ],
+      "source": "strata",
+      "url": "https://github.com/strata-org/Strata"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/strata-org/Strata/4348c65a93a3b57b1a4541991ed2d2fcdd9fa35d/v4.27.0",
+      "file_paths": [
+        "Strata/Languages/Core/StatementSemanticsProps.lean"
+      ],
+      "git_commit": "4348c65a93a3b57b1a4541991ed2d2fcdd9fa35d",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.27.0",
+      "mathlib_rev": "",
+      "module": "Strata/Languages/Core/StatementSemanticsProps.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Core.InitsUpdatesComm"
+      ],
+      "source": "strata",
+      "url": "https://github.com/strata-org/Strata"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/strata-org/Strata/384e22374e0872095ad9c6f74c5998c09cfd93a9/v4.29.1",
+      "file_paths": [
+        "Strata/Languages/Core/StatementSemanticsProps.lean"
+      ],
+      "git_commit": "384e22374e0872095ad9c6f74c5998c09cfd93a9",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.29.1",
+      "mathlib_rev": "",
+      "module": "Strata/Languages/Core/StatementSemanticsProps.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Core.InitsUpdatesComm"
+      ],
+      "source": "strata",
+      "url": "https://github.com/strata-org/Strata"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/leanprover-community/physlib/c48433678e8fb6306ebcd48453300c8e16058a62/v4.32.0",
+      "file_paths": [
+        "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+        "Physlib/Electromagnetism/Dynamics/IsExtrema.lean",
+        "Physlib/QFT/PerturbationTheory/WickAlgebra/TimeOrder.lean"
+      ],
+      "git_commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.32.0",
+      "mathlib_rev": "",
+      "module": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time"
+      ],
+      "source": "physlib",
+      "url": "https://github.com/leanprover-community/physlib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/leanprover/cslib/c7944a9fb44c3298f1a960a5e574ab23a6ab8ed5/v4.30.0",
+      "file_paths": [
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean"
+      ],
+      "git_commit": "c7944a9fb44c3298f1a960a5e574ab23a6ab8ed5",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.30.0",
+      "mathlib_rev": "",
+      "module": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Cslib.SKI.parallelReduction_diamond"
+      ],
+      "source": "cslib",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/leanprover/cslib/8ea71c8df91acd63285515a04da952b23b78d266/v4.31.0",
+      "file_paths": [
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "git_commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.31.0",
+      "mathlib_rev": "",
+      "module": "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice"
+      ],
+      "source": "cslib",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/leanprover/cslib/197a7be621263b84c67ca4f803f69205b36d06df/v4.32.0",
+      "file_paths": [
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "git_commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.32.0",
+      "mathlib_rev": "",
+      "module": "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice"
+      ],
+      "source": "cslib",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/leanprover/cslib/3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc/v4.33.0-rc2",
+      "file_paths": [
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "git_commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.33.0-rc2",
+      "mathlib_rev": "",
+      "module": "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice"
+      ],
+      "source": "cslib",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/Verified-zkEVM/ArkLib/673fa440714eb1949b8b50a28f2a4f52b1837e9b/v4.28.0",
+      "file_paths": [
+        "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean"
+      ],
+      "git_commit": "673fa440714eb1949b8b50a28f2a4f52b1837e9b",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.28.0",
+      "mathlib_rev": "",
+      "module": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius"
+      ],
+      "source": "arklib",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/Verified-zkEVM/ArkLib/de71a9dfd2f5a343e8895517b7efe857d9f1ce5c/v4.29.0",
+      "file_paths": [
+        "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "ArkLib/Data/CodingTheory/ProximityGap/DG25/MainResults.lean"
+      ],
+      "git_commit": "de71a9dfd2f5a343e8895517b7efe857d9f1ce5c",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.29.0",
+      "mathlib_rev": "",
+      "module": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps"
+      ],
+      "source": "arklib",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/Verified-zkEVM/ArkLib/e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4/v4.30.0",
+      "file_paths": [
+        "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "ArkLib/Data/CodingTheory/ProximityGap/DG25/MainResults.lean"
+      ],
+      "git_commit": "e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.30.0",
+      "mathlib_rev": "",
+      "module": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps"
+      ],
+      "source": "arklib",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "aesop_rev": "",
+      "arena_score": null,
+      "cache_key": "repo/github.com/Verified-zkEVM/ArkLib/c1712f6c496d0aef04f09bae42aec13811b3273f/v4.31.0",
+      "file_paths": [
+        "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "ArkLib/Data/CodingTheory/ProximityGap/DG25/MainResults.lean"
+      ],
+      "git_commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+      "kind": "repo",
+      "lakefile_required": true,
+      "lean_tag": "v4.31.0",
+      "mathlib_rev": "",
+      "module": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "phase": 1,
+      "putnambench_url": null,
+      "record_names": [
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps"
+      ],
+      "source": "arklib",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "aesop_rev": "v4.25.0",
+      "arena_score": null,
+      "cache_key": "putnam/v4.25.0",
+      "file_paths": [
+        "Putnam/Candidate.lean"
+      ],
+      "git_commit": "1ccd71f89cbbd82ae7d097723ce1722ca7b01c33",
+      "kind": "putnam",
+      "lakefile_required": true,
+      "lean_tag": "v4.25.0",
+      "mathlib_rev": "v4.25.0",
+      "module": "Putnam.Candidate",
+      "phase": 2,
+      "putnambench_url": null,
+      "record_names": [
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "source": "putnambench",
+      "url": ""
+    },
+    {
+      "aesop_rev": "v4.26.0",
+      "arena_score": null,
+      "cache_key": "putnam/v4.26.0",
+      "file_paths": [
+        "Putnam/Candidate.lean"
+      ],
+      "git_commit": "2df2f0150c275ad53cb3c90f7c98ec15a56a1a67",
+      "kind": "putnam",
+      "lakefile_required": true,
+      "lean_tag": "v4.26.0",
+      "mathlib_rev": "v4.26.0",
+      "module": "Putnam.Candidate",
+      "phase": 2,
+      "putnambench_url": null,
+      "record_names": [
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "source": "putnambench",
+      "url": ""
+    },
+    {
+      "aesop_rev": "v4.27.0",
+      "arena_score": null,
+      "cache_key": "putnam/v4.27.0",
+      "file_paths": [
+        "Putnam/Candidate.lean"
+      ],
+      "git_commit": "a3a10db0e9d66acbebf76c5e6a135066525ac900",
+      "kind": "putnam",
+      "lakefile_required": true,
+      "lean_tag": "v4.27.0",
+      "mathlib_rev": "v4.27.0",
+      "module": "Putnam.Candidate",
+      "phase": 2,
+      "putnambench_url": null,
+      "record_names": [
+        "putnam_1964_a4",
+        "putnam_1995_a3"
+      ],
+      "source": "putnambench",
+      "url": ""
+    }
+  ],
+  "jsonl_bytes": 113826,
+  "kernel_command_template": "{lake} env {lean} --json {source_file}",
+  "measurement_maxHeartbeats": 400000,
+  "n_jobs": 15,
+  "n_putnam_jobs": 3,
+  "n_records": 15,
+  "n_repo_jobs": 12,
+  "putnam_module": "Putnam.Candidate",
+  "putnam_not_tmp_lean": true,
+  "putnam_tags": [
+    "v4.25.0",
+    "v4.26.0",
+    "v4.27.0"
+  ],
+  "score": null,
+  "strata_first_tag": "v4.26.0"
+}
