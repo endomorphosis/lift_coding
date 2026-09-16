@@ -1,0 +1,322 @@
+{
+  "arena_score": null,
+  "corpus_manifest_ingest": false,
+  "lemma_id_digest": "e827665541e4ab85a9b0f09b93e156a37ffd35fdc071c97844952cc335f01624",
+  "lemma_ids": [
+    "jsonl:CallElimCorrect.substOldPostSubset",
+    "jsonl:CallElimCorrect.extractedOldExprInVars",
+    "jsonl:fundamental_theorem_of_variational_calculus'",
+    "jsonl:Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+    "jsonl:FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+    "jsonl:Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+    "jsonl:Cslib.SKI.parallelReduction_diamond",
+    "jsonl:Cslib.CCS.bisimilarity_congr_choice",
+    "jsonl:Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+    "jsonl:Binius.BinaryBasefold.fold_advances_evaluation_poly",
+    "jsonl:interleaved_affine_gaps_imply_tensor_gaps",
+    "jsonl:putnam_1964_a4",
+    "jsonl:putnam_1964_b2",
+    "jsonl:putnam_1995_a3",
+    "src:InitStatesNotDefined",
+    "src:InitStatesNodup",
+    "src:InitStatesUpdated",
+    "src:Hinit",
+    "src:updatedStatesInit",
+    "src:UpdateStateNotDefMonotone'",
+    "src:UpdateStatesNotDefMonotone'",
+    "src:UpdateStates.update_some",
+    "src:UpdateStateUpdated",
+    "src:Hup",
+    "src:updatedStates",
+    "src:updatedStateComm'",
+    "src:isDefined",
+    "src:Option.isSome",
+    "src:updatedStateUpdate",
+    "src:InitStatesSomeMonotone"
+  ],
+  "mathlib_ingest": false,
+  "n_neighbors": 14,
+  "n_src_lemmas": 16,
+  "n_src_lemmas_uncapped": 18,
+  "neighbors": [
+    {
+      "file_path": "Strata/Transform/CallElimCorrect.lean",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "proof_head": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1]) := by\n  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n ",
+      "proof_length": 313,
+      "retrieved_full_src": true,
+      "source": "strata",
+      "src_chars": 2638,
+      "statement": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1])",
+      "url": "https://github.com/strata-org/Strata"
+    },
+    {
+      "file_path": "Strata/Transform/CallElimCorrect.lean",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "proof_head": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post \u2192\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    ",
+      "proof_length": 222,
+      "retrieved_full_src": true,
+      "source": "strata",
+      "src_chars": 1952,
+      "statement": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post \u2192\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post)",
+      "url": "https://github.com/strata-org/Strata"
+    },
+    {
+      "file_path": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "proof_head": "lemma fundamental_theorem_of_variational_calculus' {f : Y \u2192 V}\n    (\u03bc : Measure Y) [IsFiniteMeasureOnCompacts \u03bc] [\u03bc.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : \u2200 g, IsTestFunction g \u2192 \u222b x, \u27eaf x, g x\u27eb_\u211d \u2202\u03bc = 0) :\n    f = 0 := by\n  -- assume \u00ac(f = 0)\n    rw [funext_iff]; by_contra h\u2080\n    obtain \u27e8x\u2080, hx0\u27e9 := not_forall.1 h\u2080\n    simp at hx0 -- hx0 : f x\u2080 \u2260 0\n\n  -- [1] ",
+      "proof_length": 851,
+      "retrieved_full_src": true,
+      "source": "physlib",
+      "src_chars": 6662,
+      "statement": "lemma fundamental_theorem_of_variational_calculus' {f : Y \u2192 V}\n    (\u03bc : Measure Y) [IsFiniteMeasureOnCompacts \u03bc] [\u03bc.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : \u2200 g, IsTestFunction g \u2192 \u222b x, \u27eaf x, g x\u27eb_\u211d \u2202\u03bc = 0) :\n    f = 0",
+      "url": "https://github.com/leanprover-community/physlib"
+    },
+    {
+      "file_path": "Physlib/Electromagnetism/Dynamics/IsExtrema.lean",
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "proof_head": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {\ud835\udcd5 : FreeSpace}\n    (hA : ContDiff \u211d \u221e A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff \u211d \u221e J) (h : IsExtrema \ud835\udcd5 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    \u2202\u209c (\u2202\u209c (A.electricField \ud835\udcd5.c \u00b7 x i)) t =\n      \ud835\udcd5.c ^ 2 * \u2211 j, (\u2202[j] (\u2202[j] (A.electricField \ud835\udcd5.c t \u00b7 i)) x) -\n      \ud835\udcd5.c ^ 2 / \ud835\udcd5.\u03b5\u2080 * \u2202[i] (J.cha",
+      "proof_length": 1372,
+      "retrieved_full_src": true,
+      "source": "physlib",
+      "src_chars": 6238,
+      "statement": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {\ud835\udcd5 : FreeSpace}\n    (hA : ContDiff \u211d \u221e A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff \u211d \u221e J) (h : IsExtrema \ud835\udcd5 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    \u2202\u209c (\u2202\u209c (A.electricField \ud835\udcd5.c \u00b7 x i)) t =\n      \ud835\udcd5.c ^ 2 * \u2211 j, (\u2202[j] (\u2202[j] (A.electricField \ud835\udcd5.c t \u00b7 i)) x) -\n      \ud835\udcd5.c ^ 2 / \ud835\udcd5.\u03b5\u2080 * \u2202[i] (J.cha",
+      "url": "https://github.com/leanprover-community/physlib"
+    },
+    {
+      "file_path": "Physlib/QFT/PerturbationTheory/WickAlgebra/TimeOrder.lean",
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "proof_head": "lemma \u03b9_timeOrderF_superCommuteF_eq_time {\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp}\n    (h\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8) (h\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6) (a b : \ud835\udcd5.FieldOpFreeAlgebra) :\n    \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * b) =\n    \u03b9 ([ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * \ud835\udce3\u1da0(a * b)) := by\n  let pb (b : \ud835\udcd5.FieldOpFreeAlgebra) (hc : b \u2208 Submodule.span \u2102 (Set.range ofCrAnListFBasis)) :\n    Prop := \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF ",
+      "proof_length": 1217,
+      "retrieved_full_src": true,
+      "source": "physlib",
+      "src_chars": 6553,
+      "statement": "lemma \u03b9_timeOrderF_superCommuteF_eq_time {\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp}\n    (h\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8) (h\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6) (a b : \ud835\udcd5.FieldOpFreeAlgebra) :\n    \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * b) =\n    \u03b9 ([ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * \ud835\udce3\u1da0(a * b))",
+      "url": "https://github.com/leanprover-community/physlib"
+    },
+    {
+      "file_path": "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "proof_head": "lemma Typing.progress (der : Typing [] t \u03c4) : t.Value \u2228 \u2203 t', t \u2b62\u03b2\u1d5b t' := by\n  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n            have \u27e8\u03c3, t\u2081, eq\u27e9 := l.canonical_form_abs val_l",
+      "proof_length": 408,
+      "retrieved_full_src": true,
+      "source": "cslib",
+      "src_chars": 2080,
+      "statement": "lemma Typing.progress (der : Typing [] t \u03c4) : t.Value \u2228 \u2203 t', t \u2b62\u03b2\u1d5b t'",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "file_path": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "proof_head": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha'' hb'' =>\n      let \u27e8a\u2083, ha\u27e9 := parallelReduction_diamond ha' ha''\n      let \u27e8b\u2083, hb\u27e9 := parallelReduction_diam",
+      "proof_length": 407,
+      "retrieved_full_src": true,
+      "source": "cslib",
+      "src_chars": 1904,
+      "statement": "theorem parallelReduction_diamond : Diamond ParallelReduction",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "file_path": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "proof_head": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) \u2192 (choice p r) ~[lts (defs := defs)] (choice q r) := by\n  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 := hbisim\n      cases htr\n      case choiceL a b c htr =>",
+      "proof_length": 251,
+      "retrieved_full_src": true,
+      "source": "cslib",
+      "src_chars": 1727,
+      "statement": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) \u2192 (choice p r) ~[lts (defs := defs)] (choice q r)",
+      "url": "https://github.com/leanprover/cslib"
+    },
+    {
+      "file_path": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "proof_head": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin \u2113) (steps : \u2115)\n    [NeZero steps] (h_i_add_steps : i.val + steps \u2264 \u2113)\n    (f : OracleFunction \ud835\udd3dq \u03b2 (h_\u2113_add_R_rate := h_\u2113_add_R_rate) \u27e8i, by omega\u27e9)\n  (h_fw_dist_lt : fiberwiseClose \ud835\udd3dq \u03b2 (h_\u2113_add_R_rate := h_\u2113_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose \ud835\udd3dq \u03b2 (h_\u2113_add_R_ra",
+      "proof_length": 1463,
+      "retrieved_full_src": true,
+      "source": "arklib",
+      "src_chars": 11388,
+      "statement": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin \u2113) (steps : \u2115)\n    [NeZero steps] (h_i_add_steps : i.val + steps \u2264 \u2113)\n    (f : OracleFunction \ud835\udd3dq \u03b2 (h_\u2113_add_R_rate := h_\u2113_add_R_rate) \u27e8i, by omega\u27e9)\n  (h_fw_dist_lt : fiberwiseClose \ud835\udd3dq \u03b2 (h_\u2113_add_R_rate := h_\u2113_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose \ud835\udd3dq \u03b2 (h_\u2113_add_R_ra",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "file_path": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "proof_head": "theorem fold_advances_evaluation_poly\n  (i : Fin (\u2113)) (h_i_succ_lt : i + 1 < \u2113 + \ud835\udce1)\n  (coeffs : Fin (2 ^ (\u2113 - \u2191i)) \u2192 L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly \ud835\udd3dq \u03b2 h_\u2113_add_R_rate (i := \u27e8i, by\n    exact Nat.lt_trans (n := i) (k := \u2113+1) (m := \u2113) (h\u2081 := i.isLt) (by exact Nat.lt_add_one \u2113)\n  \u27e9) coeffs\n  let f_i := fun (x : (sDomain \ud835\udd3dq \u03b2 h_\u2113_add_R_rate)\n      \u27e8i, by exact Nat.lt_",
+      "proof_length": 1906,
+      "retrieved_full_src": true,
+      "source": "arklib",
+      "src_chars": 9795,
+      "statement": "theorem fold_advances_evaluation_poly\n  (i : Fin (\u2113)) (h_i_succ_lt : i + 1 < \u2113 + \ud835\udce1)\n  (coeffs : Fin (2 ^ (\u2113 - \u2191i)) \u2192 L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly \ud835\udd3dq \u03b2 h_\u2113_add_R_rate (i := \u27e8i, by\n    exact Nat.lt_trans (n := i) (k := \u2113+1) (m := \u2113) (h\u2081 := i.isLt) (by exact Nat.lt_add_one \u2113)\n  \u27e9) coeffs\n  let f_i := fun (x : (sDomain \ud835\udd3dq \u03b2 h_\u2113_add_R_rate)\n      \u27e8i, by exact Nat.lt_",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "file_path": "ArkLib/Data/CodingTheory/ProximityGap/DG25/MainResults.lean",
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "proof_head": "theorem interleaved_affine_gaps_imply_tensor_gaps\n    (hC_proximityGapAffineLines : e_\u03b5_correlatedAgreementAffineLinesNat\n      (F := F) (A := A) (\u03b9 := \u03b9) (C := MC) (e := e) (\u03b5 := \u03b5))\n    (h_interleaved_gaps : \u2200 m : \u2115, m \u2265 1 \u2192\n      e_\u03b5_correlatedAgreementAffineLinesNat (F := F)\n        (A := InterleavedSymbol A (Fin m)) (\u03b9 := \u03b9) (C := MC ^\u22c8 (Fin m)) e \u03b5) :\n    \u2200 (\u03d1 : \u2115), (h\u03d1_gt_0 : \u03d1 > 0) \u2192 \u03b4_\u03b5_m",
+      "proof_length": 1353,
+      "retrieved_full_src": true,
+      "source": "arklib",
+      "src_chars": 10254,
+      "statement": "theorem interleaved_affine_gaps_imply_tensor_gaps\n    (hC_proximityGapAffineLines : e_\u03b5_correlatedAgreementAffineLinesNat\n      (F := F) (A := A) (\u03b9 := \u03b9) (C := MC) (e := e) (\u03b5 := \u03b5))\n    (h_interleaved_gaps : \u2200 m : \u2115, m \u2265 1 \u2192\n      e_\u03b5_correlatedAgreementAffineLinesNat (F := F)\n        (A := InterleavedSymbol A (Fin m)) (\u03b9 := \u03b9) (C := MC ^\u22c8 (Fin m)) e \u03b5) :\n    \u2200 (\u03d1 : \u2115), (h\u03d1_gt_0 : \u03d1 > 0) \u2192 \u03b4_\u03b5_m",
+      "url": "https://github.com/Verified-zkEVM/ArkLib"
+    },
+    {
+      "file_path": "",
+      "name": "putnam_1964_a4",
+      "proof_head": "theorem putnam_1964_a4\n(u : \u2115 \u2192 \u2124)\n(boundedu : \u2203 B T : \u2124, \u2200 n : \u2115, B \u2264 u n \u2227 u n \u2264 T)\n(hu : \u2200 n \u2265 4, u n = ((u (n - 1) + u (n - 2) + u (n - 3) * u (n - 4)) : \u211d) / (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) \u2227 (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) \u2260 0)\n: (\u2203 N c : \u2115, c > 0 \u2227 \u2200 n \u2265 N, u (n + c) = u n) := by \n  have h_main : \u2203 (i j : \u2115), i < j \u2227 (u i = u j \u2227 u (i + 1) = u (j + 1) \u2227 u (i ",
+      "proof_length": 1769,
+      "retrieved_full_src": true,
+      "source": "putnambench",
+      "src_chars": 6934,
+      "statement": "theorem putnam_1964_a4\n(u : \u2115 \u2192 \u2124)\n(boundedu : \u2203 B T : \u2124, \u2200 n : \u2115, B \u2264 u n \u2227 u n \u2264 T)\n(hu : \u2200 n \u2265 4, u n = ((u (n - 1) + u (n - 2) + u (n - 3) * u (n - 4)) : \u211d) / (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) \u2227 (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) \u2260 0)\n: (\u2203 N c : \u2115, c > 0 \u2227 \u2200 n \u2265 N, u (n + c) = u n)",
+      "url": ""
+    },
+    {
+      "file_path": "",
+      "name": "putnam_1964_b2",
+      "proof_head": "theorem putnam_1964_b2\n(S : Type*) [Fintype S] [Nonempty S]\n(P : Finset (Set S))\n(hPP : \u2200 T \u2208 P, \u2200 U \u2208 P, T \u2229 U \u2260 \u2205)\n(hPS : \u00ac\u2203 T : Set S, T \u2209 P \u2227 (\u2200 U \u2208 P, T \u2229 U \u2260 \u2205))\n: (P.card = 2 ^ (Fintype.card S - 1)) := by \n  have h_no_empty : \u2200 (T : Set S), T \u2208 P \u2192 T.Nonempty := by\n    intro T hT\n    have h\u2081 : T \u2229 T \u2260 \u2205 := hPP T hT T hT\n    have h\u2082 : T \u2229 T = T := by simp [Set.ext_iff]\n    rw [h\u2082] at h\u2081\n    ",
+      "proof_length": 1754,
+      "retrieved_full_src": true,
+      "source": "putnambench",
+      "src_chars": 8829,
+      "statement": "theorem putnam_1964_b2\n(S : Type*) [Fintype S] [Nonempty S]\n(P : Finset (Set S))\n(hPP : \u2200 T \u2208 P, \u2200 U \u2208 P, T \u2229 U \u2260 \u2205)\n(hPS : \u00ac\u2203 T : Set S, T \u2209 P \u2227 (\u2200 U \u2208 P, T \u2229 U \u2260 \u2205))\n: (P.card = 2 ^ (Fintype.card S - 1))",
+      "url": ""
+    },
+    {
+      "file_path": "",
+      "name": "putnam_1995_a3",
+      "proof_head": "theorem putnam_1995_a3\n(relation : (Fin 9 \u2192 \u2124) \u2192 (Fin 9 \u2192 \u2124) \u2192 Prop)\n(digits_to_num : (Fin 9 \u2192 \u2124) \u2192 \u2124)\n(hdigits_to_num : digits_to_num = fun dig => \u2211 i : Fin 9, (dig i) * 10^i.1)\n(hrelation : \u2200 d e : (Fin 9 \u2192 \u2124), relation d e \u2194 (\u2200 i : Fin 9, d i < 10 \u2227 d i \u2265 0 \u2227 e i < 10 \u2227 e i \u2265 0) \u2227 (\u2200 i : Fin 9, 7 \u2223 (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: \u2200 d e f : (Fin 9 \u2192 \u2124), ((relati",
+      "proof_length": 4085,
+      "retrieved_full_src": true,
+      "source": "putnambench",
+      "src_chars": 13801,
+      "statement": "theorem putnam_1995_a3\n(relation : (Fin 9 \u2192 \u2124) \u2192 (Fin 9 \u2192 \u2124) \u2192 Prop)\n(digits_to_num : (Fin 9 \u2192 \u2124) \u2192 \u2124)\n(hdigits_to_num : digits_to_num = fun dig => \u2211 i : Fin 9, (dig i) * 10^i.1)\n(hrelation : \u2200 d e : (Fin 9 \u2192 \u2124), relation d e \u2194 (\u2200 i : Fin 9, d i < 10 \u2227 d i \u2265 0 \u2227 e i < 10 \u2227 e i \u2265 0) \u2227 (\u2200 i : Fin 9, 7 \u2223 (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: \u2200 d e f : (Fin 9 \u2192 \u2124), ((relati",
+      "url": ""
+    }
+  ],
+  "prompt_neighbors": [
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "proof_head": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1]) := by\n  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n ",
+      "statement": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1])"
+    },
+    {
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "proof_head": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post \u2192\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    ",
+      "statement": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post \u2192\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post)"
+    },
+    {
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "proof_head": "lemma fundamental_theorem_of_variational_calculus' {f : Y \u2192 V}\n    (\u03bc : Measure Y) [IsFiniteMeasureOnCompacts \u03bc] [\u03bc.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : \u2200 g, IsTestFunction g \u2192 \u222b x, \u27eaf x, g x\u27eb_\u211d \u2202\u03bc = 0) :\n    f = 0 := by\n  -- assume \u00ac(f = 0)\n    rw [funext_iff]; by_contra h\u2080\n    obtain \u27e8x\u2080, hx0\u27e9 := not_forall.1 h\u2080\n    simp at hx0 -- hx0 : f x\u2080 \u2260 0\n\n  -- [1] ",
+      "statement": "lemma fundamental_theorem_of_variational_calculus' {f : Y \u2192 V}\n    (\u03bc : Measure Y) [IsFiniteMeasureOnCompacts \u03bc] [\u03bc.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : \u2200 g, IsTestFunction g \u2192 \u222b x, \u27eaf x, g x\u27eb_\u211d \u2202\u03bc = 0) :\n    f = 0"
+    },
+    {
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "proof_head": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {\ud835\udcd5 : FreeSpace}\n    (hA : ContDiff \u211d \u221e A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff \u211d \u221e J) (h : IsExtrema \ud835\udcd5 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    \u2202\u209c (\u2202\u209c (A.electricField \ud835\udcd5.c \u00b7 x i)) t =\n      \ud835\udcd5.c ^ 2 * \u2211 j, (\u2202[j] (\u2202[j] (A.electricField \ud835\udcd5.c t \u00b7 i)) x) -\n      \ud835\udcd5.c ^ 2 / \ud835\udcd5.\u03b5\u2080 * \u2202[i] (J.cha",
+      "statement": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {\ud835\udcd5 : FreeSpace}\n    (hA : ContDiff \u211d \u221e A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff \u211d \u221e J) (h : IsExtrema \ud835\udcd5 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    \u2202\u209c (\u2202\u209c (A.electricField \ud835\udcd5.c \u00b7 x i)) t =\n      \ud835\udcd5.c ^ 2 * \u2211 j, (\u2202[j] (\u2202[j] (A.electricField \ud835\udcd5.c t \u00b7 i)) x) -\n      \ud835\udcd5.c ^ 2 / \ud835\udcd5.\u03b5\u2080 * \u2202[i] (J.cha"
+    }
+  ],
+  "query": "Core.InitsUpdatesComm",
+  "relevance_score": null,
+  "score": null,
+  "source": "strata",
+  "src_lemma_cap": 16,
+  "src_lemmas": [
+    {
+      "name": "InitStatesNotDefined",
+      "offset": 619,
+      "opener": "exact",
+      "tactic": "exact"
+    },
+    {
+      "name": "InitStatesNodup",
+      "offset": 656,
+      "opener": "exact",
+      "tactic": "exact"
+    },
+    {
+      "name": "InitStatesUpdated",
+      "offset": 682,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "Hinit",
+      "offset": 700,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "updatedStatesInit",
+      "offset": 818,
+      "opener": "apply",
+      "tactic": "apply"
+    },
+    {
+      "name": "UpdateStateNotDefMonotone'",
+      "offset": 854,
+      "opener": "apply",
+      "tactic": "apply"
+    },
+    {
+      "name": "UpdateStatesNotDefMonotone'",
+      "offset": 900,
+      "opener": "apply",
+      "tactic": "apply"
+    },
+    {
+      "name": "UpdateStates.update_some",
+      "offset": 1021,
+      "opener": "apply",
+      "tactic": "apply"
+    },
+    {
+      "name": "UpdateStateUpdated",
+      "offset": 1085,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "Hup",
+      "offset": 1104,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "updatedStates",
+      "offset": 1109,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "updatedStateComm'",
+      "offset": 1140,
+      "opener": "rw [",
+      "tactic": "rw"
+    },
+    {
+      "name": "isDefined",
+      "offset": 1220,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "Option.isSome",
+      "offset": 1231,
+      "opener": "simp [",
+      "tactic": "simp"
+    },
+    {
+      "name": "updatedStateUpdate",
+      "offset": 1339,
+      "opener": "apply",
+      "tactic": "apply"
+    },
+    {
+      "name": "InitStatesSomeMonotone",
+      "offset": 1384,
+      "opener": "apply",
+      "tactic": "apply"
+    }
+  ]
+}
