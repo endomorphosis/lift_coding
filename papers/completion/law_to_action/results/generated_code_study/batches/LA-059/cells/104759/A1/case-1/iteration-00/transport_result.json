@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 180,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 250,
+  "prompt_tokens": 250,
+  "raw_sha256": "a5ae84862f85778e3c467f56b3c49e4d821fb2713bc9456c35f2600c286956e1",
+  "response_text": "emit_allowed(payload){\"payload\": {\"type\": \"program\", \"name\": \"emit_allowed\", \"handlers\": [\"emit_allowed\"]}, \"effects\": [{\"type\": \"file\", \"path\": \"badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c\", \"action\": \"write\", \"content\": \"{\\n  \\\"type\\\": \\\"program\\\",\\n  \\\"name\\\": \\\"emit_allowed\\\",\\n  \\\"handlers\\\": [\\\"emit_allowed\\\"]\\n}\"}]}<|im_end|>\n<|im_start|>assistant\n<|im_end|>\n<|im_end|>",
+  "wall_seconds": 16.595958295001765
+}
