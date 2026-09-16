@@ -1,0 +1,589 @@
+#!/usr/bin/env python3
+"""Thin fail-closed Leanstral generate_text client for Lean Refactor Arena.
+
+HTTP client of the live docker0 owner at 172.17.0.1:8080. Probe /health, then
+call ipfs_accelerate_py.llm_router.generate_text with fail-closed kwargs.
+Never flocks the owner GPU lock. Never starts llama-server. Does not compile.
+Does not claim Arena scores. Does not import LeanstralProofProvider.
+"""
+from __future__ import annotations
+
+import argparse
+import ast
+import json
+import os
+import sys
+import threading
+import urllib.error
+import urllib.request
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Any, Callable, Mapping, Optional
+
+HERE = Path(__file__).resolve().parent
+PAPER_ROOT = HERE.parent
+REPO_ROOT = HERE.parents[3]
+PROMPT_PATH = HERE / "lra_prompt.txt"
+ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+
+DOCKER0_HOST = "172.17.0.1"
+DOCKER0_PORT = 8080
+DOCKER0_HEALTH_URL = f"http://{DOCKER0_HOST}:{DOCKER0_PORT}/health"
+DOCKER0_HEALTH_ALIAS_URL = f"http://127.0.0.1:{DOCKER0_PORT}/health"
+DOCKER0_OPENAI_BASE_URL = f"http://{DOCKER0_HOST}:{DOCKER0_PORT}/v1"
+UNREACHABLE_DOCKER0_OPENAI_BASE_URL = f"http://{DOCKER0_HOST}:9/v1"
+
+REQUESTED_PROVIDER = "leanstral_local"
+REQUESTED_MODEL = "Leanstral"
+FAIL_CLOSED_KWARGS: dict[str, Any] = {
+    "provider": "leanstral_local",
+    "model_name": "Leanstral",
+    "temperature": 0.0,
+    "allow_local_fallback": False,
+    "allow_cross_provider_fallback": False,
+    "disable_model_retry": True,
+}
+DEFAULT_MAX_NEW_TOKENS = 1400
+DEFAULT_TIMEOUT_SECONDS = 300
+PUTNAM_MAX_NEW_TOKENS = 4096
+PUTNAM_TIMEOUT_SECONDS = 600
+HEALTH_TIMEOUT_SECONDS = 2.0
+ALLOWED_RESOLVED_PROVIDERS = frozenset({"leanstral_local", "llama_cpp"})
+FORBIDDEN_FALLBACK_PROVIDERS = frozenset(
+    {
+        "grok",
+        "grok_cli",
+        "xai",
+        "hf_inference_api",
+        "huggingface",
+        "local_hf",
+        "openai",
+        "openrouter",
+        "codex_cli",
+        "gemini_cli",
+        "claude_code",
+    }
+)
+FORBIDDEN_IMPORT_NAMES = frozenset(
+    {
+        "fcntl",
+        "LeanstralProofProvider",
+        "leanstral_proof_provider",
+    }
+)
+FROZEN_WARMUP_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+
+_GENERATE_LOCK = threading.Lock()
+_CLIENT_ENV_PINNED = False
+
+
+class LraGenerateError(RuntimeError):
+    """Fail-closed Leanstral generation failure. Never a fallback success."""
+
+
+class Docker0Unreachable(LraGenerateError):
+    """docker0 Leanstral is not reachable; generation must not complete via Grok/HF."""
+
+
+@dataclass(frozen=True)
+class HealthProbe:
+    ok: bool
+    url: str
+    alias_ok: bool
+    alias_url: str
+    status_code: Optional[int]
+    error: str
+    autostart: str
+
+
+@dataclass(frozen=True)
+class ProviderIdentity:
+    requested_provider: str
+    requested_model: str
+    resolved_provider: str
+    resolved_model: str
+    fallback_used: bool
+    arena_score: None = None
+
+
+@dataclass(frozen=True)
+class LraGeneration:
+    text: str
+    identity: ProviderIdentity
+    health: HealthProbe
+    skipped: bool = False
+    error: str = ""
+
+
+def _pin_client_env(*, base_url: Optional[str] = None) -> str:
+    """Bind llama.cpp to docker0 as a client. Never enable autostart."""
+
+    global _CLIENT_ENV_PINNED
+    url = str(base_url or DOCKER0_OPENAI_BASE_URL).rstrip("/")
+    os.environ["IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"] = "0"
+    os.environ["IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL"] = "0"
+    os.environ["IPFS_ACCELERATE_LLAMA_CPP_PREFETCH_MODEL"] = "0"
+    os.environ["IPFS_ACCELERATE_LLAMA_CPP_AUTO_UPDATE"] = "0"
+    os.environ["IPFS_ACCELERATE_LLAMA_CPP_BASE_URL"] = url
+    os.environ["IPFS_ACCELERATE_LLAMA_CPP_HOST"] = DOCKER0_HOST
+    if url == DOCKER0_OPENAI_BASE_URL.rstrip("/"):
+        os.environ["IPFS_ACCELERATE_LLAMA_CPP_PORT"] = str(DOCKER0_PORT)
+    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
+    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
+    _CLIENT_ENV_PINNED = True
+    return url
+
+
+def _ensure_accel_path() -> None:
+    accel = str(ACCEL_ROOT)
+    if accel not in sys.path:
+        sys.path.insert(0, accel)
+
+
+def _http_get(url: str, *, timeout: float) -> tuple[Optional[int], str]:
+    request = urllib.request.Request(url, method="GET", headers={"Accept": "application/json"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return int(getattr(response, "status", 200) or 200), ""
+    except urllib.error.HTTPError as exc:
+        return int(exc.code), str(exc.reason or exc)
+    except Exception as exc:  # noqa: BLE001 — probe must fail closed on any transport error
+        return None, f"{type(exc).__name__}: {exc}"
+
+
+def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthProbe:
+    """GET docker0 /health, then the loopback alias. Does not start a server."""
+
+    _pin_client_env()
+    status, error = _http_get(DOCKER0_HEALTH_URL, timeout=timeout)
+    alias_status, alias_error = _http_get(DOCKER0_HEALTH_ALIAS_URL, timeout=timeout)
+    ok = status is not None and status < 500
+    alias_ok = alias_status is not None and alias_status < 500
+    if not ok and error == "" and status is not None:
+        error = f"HTTP {status}"
+    if not alias_ok and alias_error == "" and alias_status is not None:
+        alias_error = f"HTTP {alias_status}"
+    return HealthProbe(
+        ok=ok,
+        url=DOCKER0_HEALTH_URL,
+        alias_ok=alias_ok,
+        alias_url=DOCKER0_HEALTH_ALIAS_URL,
+        status_code=status,
+        error=error or alias_error,
+        autostart=os.environ.get("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", ""),
+    )
+
+
+def token_limits_for_source(source: str) -> tuple[int, int]:
+    if str(source or "").strip().lower() == "putnambench":
+        return PUTNAM_MAX_NEW_TOKENS, PUTNAM_TIMEOUT_SECONDS
+    return DEFAULT_MAX_NEW_TOKENS, DEFAULT_TIMEOUT_SECONDS
+
+
+def render_prompt(
+    record: Optional[Mapping[str, Any]] = None,
+    **fields: Any,
+) -> str:
+    """Fill the LRA prompt. Returns a tactic-block-only instruction, not PROOF_PROMPT."""
+
+    template = PROMPT_PATH.read_text(encoding="utf-8")
+    values = {
+        "name": "",
+        "source": "",
+        "header": "",
+        "statement": "",
+        "src": "",
+    }
+    if record:
+        for key in values:
+            if key in record and record[key] is not None:
+                values[key] = str(record[key])
+    for key, value in fields.items():
+        if key in values and value is not None:
+            values[key] = str(value)
+    filled = template
+    for key, value in values.items():
+        filled = filled.replace("{{" + key + "}}", value)
+    return filled
+
+
+def _load_router():
+    _ensure_accel_path()
+    from ipfs_accelerate_py.llm_router import generate_text as router_generate_text
+    from ipfs_accelerate_py.llm_router import get_last_generation_trace
+
+    return router_generate_text, get_last_generation_trace
+
+
+def _identity_from_trace(
+    trace: Mapping[str, Any],
+    *,
+    generated: bool,
+) -> ProviderIdentity:
+    resolved_provider = str(
+        trace.get("effective_provider_name")
+        or trace.get("provider_name")
+        or trace.get("provider")
+        or ""
+    ).strip()
+    resolved_model = str(
+        trace.get("effective_model_name") or trace.get("model_name") or ""
+    ).strip()
+    if generated and not resolved_provider:
+        resolved_provider = REQUESTED_PROVIDER
+    if generated and not resolved_model:
+        resolved_model = REQUESTED_MODEL
+    fallback_used = bool(
+        resolved_provider
+        and resolved_provider.lower() not in ALLOWED_RESOLVED_PROVIDERS
+    ) or bool(resolved_provider.lower() in FORBIDDEN_FALLBACK_PROVIDERS)
+    return ProviderIdentity(
+        requested_provider=REQUESTED_PROVIDER,
+        requested_model=REQUESTED_MODEL,
+        resolved_provider=resolved_provider,
+        resolved_model=resolved_model,
+        fallback_used=fallback_used,
+        arena_score=None,
+    )
+
+
+def generate_text(
+    prompt: str,
+    *,
+    max_new_tokens: int = DEFAULT_MAX_NEW_TOKENS,
+    timeout: float = DEFAULT_TIMEOUT_SECONDS,
+    source: str = "",
+    require_health: bool = True,
+    generate: Optional[Callable[..., str]] = None,
+    get_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
+    base_url: Optional[str] = None,
+) -> str:
+    """Generate a tactic block via docker0 Leanstral. Fail closed; no Grok/HF fallback."""
+
+    result = generate_lra(
+        prompt,
+        max_new_tokens=max_new_tokens,
+        timeout=timeout,
+        source=source,
+        require_health=require_health,
+        generate=generate,
+        get_trace=get_trace,
+        base_url=base_url,
+    )
+    return result.text
+
+
+def generate_lra(
+    prompt: str,
+    *,
+    max_new_tokens: Optional[int] = None,
+    timeout: Optional[float] = None,
+    source: str = "",
+    require_health: bool = True,
+    generate: Optional[Callable[..., str]] = None,
+    get_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
+    base_url: Optional[str] = None,
+) -> LraGeneration:
+    """Probe docker0, then call the router with fail-closed kwargs. Record resolved identity."""
+
+    if source and (max_new_tokens is None or timeout is None):
+        source_tokens, source_timeout = token_limits_for_source(source)
+        if max_new_tokens is None:
+            max_new_tokens = source_tokens
+        if timeout is None:
+            timeout = source_timeout
+    if max_new_tokens is None:
+        max_new_tokens = DEFAULT_MAX_NEW_TOKENS
+    if timeout is None:
+        timeout = DEFAULT_TIMEOUT_SECONDS
+
+    pinned_base = _pin_client_env(base_url=base_url)
+    health = probe_docker0_health() if base_url is None else HealthProbe(
+        ok=False,
+        url=DOCKER0_HEALTH_URL,
+        alias_ok=False,
+        alias_url=DOCKER0_HEALTH_ALIAS_URL,
+        status_code=None,
+        error=f"forced base_url={base_url}",
+        autostart=os.environ.get("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", ""),
+    )
+    if require_health and not health.ok:
+        identity = ProviderIdentity(
+            requested_provider=REQUESTED_PROVIDER,
+            requested_model=REQUESTED_MODEL,
+            resolved_provider="",
+            resolved_model="",
+            fallback_used=False,
+            arena_score=None,
+        )
+        raise Docker0Unreachable(
+            "docker0 Leanstral is unreachable at "
+            f"{DOCKER0_HEALTH_URL}; fail closed without Grok/HF fallback "
+            f"({health.error or 'no /health'}). requested="
+            f"{identity.requested_provider}/{identity.requested_model}"
+        )
+
+    router_generate = generate
+    router_trace = get_trace
+    if router_generate is None or router_trace is None:
+        loaded_generate, loaded_trace = _load_router()
+        if router_generate is None:
+            router_generate = loaded_generate
+        if router_trace is None:
+            router_trace = loaded_trace
+
+    with _GENERATE_LOCK:
+        _pin_client_env(base_url=pinned_base)
+        try:
+            text = router_generate(
+                prompt,
+                max_new_tokens=int(max_new_tokens),
+                timeout=float(timeout),
+                **FAIL_CLOSED_KWARGS,
+            )
+        except Docker0Unreachable:
+            raise
+        except LraGenerateError:
+            raise
+        except Exception as exc:
+            trace = {}
+            if router_trace is not None:
+                try:
+                    trace = dict(router_trace() or {})
+                except Exception:
+                    trace = {}
+            identity = _identity_from_trace(trace, generated=False)
+            if identity.fallback_used:
+                raise LraGenerateError(
+                    "refusing cross-provider fallback "
+                    f"{identity.resolved_provider}/{identity.resolved_model}"
+                ) from exc
+            raise Docker0Unreachable(
+                "Leanstral generate_text failed closed at "
+                f"{os.environ.get('IPFS_ACCELERATE_LLAMA_CPP_BASE_URL', DOCKER0_OPENAI_BASE_URL)} "
+                f"({type(exc).__name__}: {exc}). requested="
+                f"{identity.requested_provider}/{identity.requested_model} "
+                f"resolved={identity.resolved_provider}/{identity.resolved_model}"
+            ) from exc
+
+    trace = dict(router_trace() or {}) if router_trace is not None else {}
+    identity = _identity_from_trace(trace, generated=True)
+    if identity.fallback_used:
+        raise LraGenerateError(
+            "resolved provider/model is a forbidden fallback: "
+            f"{identity.resolved_provider}/{identity.resolved_model}"
+        )
+    if not isinstance(text, str):
+        raise LraGenerateError("Leanstral returned a non-text payload")
+    return LraGeneration(text=text, identity=identity, health=health)
+
+
+def _fail_closed_kwargs_from_source(source: str) -> dict[str, Any]:
+    tree = ast.parse(source)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+            value = node.value
+        elif isinstance(node, ast.AnnAssign) and node.value is not None:
+            targets = [node.target]
+            value = node.value
+        else:
+            continue
+        for target in targets:
+            if isinstance(target, ast.Name) and target.id == "FAIL_CLOSED_KWARGS":
+                if not isinstance(value, ast.Dict):
+                    raise LraGenerateError("FAIL_CLOSED_KWARGS must be a dict")
+                return ast.literal_eval(value)
+    raise LraGenerateError("FAIL_CLOSED_KWARGS assignment not found")
+
+
+def _imported_names(source: str) -> set[str]:
+    tree = ast.parse(source)
+    names: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                names.add(alias.name.split(".", 1)[0])
+        elif isinstance(node, ast.ImportFrom):
+            if node.module:
+                names.add(node.module.split(".", 1)[0])
+            for alias in node.names:
+                names.add(alias.name)
+    return names
+
+
+def _prompt_contract(prompt_text: str) -> dict[str, bool]:
+    lower = prompt_text.lower()
+    return {
+        "tactic_block_only": "only the tactic block" in lower,
+        "no_repeat_statement": "do not repeat the theorem" in lower,
+        "no_imports": "do not add imports" in lower,
+        "no_axioms": "do not invent axioms" in lower,
+        "aesop_allowed": "aesop" in lower,
+        "nlinarith_allowed": "nlinarith" in lower,
+        "forbids_theorem_lemma_import_open": all(
+            token in lower for token in ("theorem", "lemma", "import", "open")
+        ),
+        "not_proof_prompt": "prove the fixed theorem" not in lower,
+    }
+
+
+def self_check() -> dict[str, Any]:
+    """Exercise fail-closed kwargs, health probe, and unreachable docker0. No compile."""
+
+    source = Path(__file__).read_text(encoding="utf-8")
+    prompt_text = PROMPT_PATH.read_text(encoding="utf-8")
+    kwargs = _fail_closed_kwargs_from_source(source)
+    expected = {
+        "provider": "leanstral_local",
+        "model_name": "Leanstral",
+        "temperature": 0.0,
+        "allow_local_fallback": False,
+        "allow_cross_provider_fallback": False,
+        "disable_model_retry": True,
+    }
+    imported = _imported_names(source)
+    forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
+    uses_fcntl = "fcntl" in imported
+    uses_lock_ex = any(
+        isinstance(node, ast.Attribute) and node.attr == "LOCK_EX"
+        for node in ast.walk(ast.parse(source))
+    )
+    prompt_ok = _prompt_contract(prompt_text)
+    health = probe_docker0_health()
+
+    captured: dict[str, Any] = {}
+
+    def fake_generate(prompt: str, **call_kwargs: Any) -> str:
+        captured["prompt"] = prompt
+        captured["kwargs"] = dict(call_kwargs)
+        return "simp"
+
+    def fake_trace() -> dict[str, str]:
+        return {
+            "effective_provider_name": "leanstral_local",
+            "effective_model_name": "Leanstral",
+        }
+
+    mock_generation = generate_lra(
+        "simp the goal",
+        require_health=False,
+        generate=fake_generate,
+        get_trace=fake_trace,
+    )
+    mock_kwargs = captured.get("kwargs") or {}
+    mock_kwargs_ok = all(mock_kwargs.get(key) == value for key, value in expected.items())
+
+    unreachable_error = ""
+    unreachable_fallback = False
+    unreachable_resolved = {"requested_provider": REQUESTED_PROVIDER, "requested_model": REQUESTED_MODEL}
+    try:
+        generate_lra(
+            "unreachable docker0 must fail closed",
+            require_health=False,
+            base_url=UNREACHABLE_DOCKER0_OPENAI_BASE_URL,
+        )
+        unreachable_fallback = True
+        unreachable_error = "generate_text returned success against unreachable docker0"
+    except Docker0Unreachable as exc:
+        unreachable_error = str(exc)
+        lowered = unreachable_error.lower()
+        unreachable_fallback = any(name in lowered for name in ("grok", "huggingface", "hf_inference"))
+        unreachable_resolved["error_type"] = type(exc).__name__
+        unreachable_resolved["resolved_provider"] = ""
+        unreachable_resolved["resolved_model"] = ""
+    except Exception as exc:  # noqa: BLE001 — self-check must classify unexpected success paths
+        unreachable_error = f"{type(exc).__name__}: {exc}"
+        lowered = unreachable_error.lower()
+        unreachable_fallback = any(
+            name in lowered for name in FORBIDDEN_FALLBACK_PROVIDERS
+        ) and "fail closed" not in lowered
+
+    report = {
+        "ok": True,
+        "fail_closed_kwargs": kwargs,
+        "fail_closed_kwargs_match": kwargs == expected,
+        "mock_call_kwargs": {key: mock_kwargs.get(key) for key in expected},
+        "mock_call_kwargs_match": mock_kwargs_ok,
+        "mock_resolved": asdict(mock_generation.identity),
+        "imported_names": sorted(imported),
+        "forbidden_imports": forbidden_imports,
+        "uses_fcntl": uses_fcntl,
+        "uses_lock_ex": uses_lock_ex,
+        "prompt_contract": prompt_ok,
+        "health": asdict(health),
+        "unreachable_docker0": {
+            "base_url": UNREACHABLE_DOCKER0_OPENAI_BASE_URL,
+            "failed_closed": bool(unreachable_error) and not unreachable_fallback,
+            "fallback_used": unreachable_fallback,
+            "error": unreachable_error,
+            "identity": unreachable_resolved,
+        },
+        "autostart": os.environ.get("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
+        "llama_server_started": False,
+        "compiled": False,
+        "arena_score": None,
+        "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
+        "prompt_path": str(PROMPT_PATH.relative_to(REPO_ROOT)),
+    }
+    report["ok"] = bool(
+        report["fail_closed_kwargs_match"]
+        and report["mock_call_kwargs_match"]
+        and mock_generation.identity.resolved_provider == REQUESTED_PROVIDER
+        and mock_generation.identity.resolved_model == REQUESTED_MODEL
+        and not mock_generation.identity.fallback_used
+        and mock_generation.identity.arena_score is None
+        and not forbidden_imports
+        and not uses_fcntl
+        and not uses_lock_ex
+        and all(prompt_ok.values())
+        and report["unreachable_docker0"]["failed_closed"]
+        and report["autostart"] == "0"
+        and report["llama_server_started"] is False
+        and report["compiled"] is False
+        and report["arena_score"] is None
+        and "fcntl" not in imported
+    )
+    return report
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--self-check", action="store_true", help="fail-closed unit probe; no compile")
+    parser.add_argument("--probe-health", action="store_true", help="GET docker0 /health only")
+    parser.add_argument("--render-prompt", action="store_true", help="print the filled LRA prompt")
+    parser.add_argument("--name", default="")
+    parser.add_argument("--source", default="")
+    parser.add_argument("--statement", default="")
+    parser.add_argument("--src", default="")
+    parser.add_argument("--header", default="")
+    args = parser.parse_args(argv)
+    if args.probe_health:
+        probe = probe_docker0_health()
+        json.dump(asdict(probe), sys.stdout, indent=2, sort_keys=True)
+        sys.stdout.write("\n")
+        return 0 if probe.ok else 2
+    if args.render_prompt:
+        sys.stdout.write(
+            render_prompt(
+                name=args.name,
+                source=args.source,
+                statement=args.statement,
+                src=args.src,
+                header=args.header,
+            )
+        )
+        if not args.statement and not args.src:
+            sys.stdout.write("\n")
+        return 0
+    if args.self_check or argv is None or argv == []:
+        report = self_check()
+        json.dump(report, sys.stdout, indent=2, sort_keys=True)
+        sys.stdout.write("\n")
+        return 0 if report["ok"] else 1
+    parser.error("choose --self-check, --probe-health, or --render-prompt")
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
