@@ -1,0 +1,3 @@
+{"allowed_handlers":["emit_allowed"],"forbidden_handlers":["emit_undeclared"],"source_family":"family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772"}<|im_end|>
+<|im_start|>assistant
+I need to see the actual public source excerpt to emit the JSON record. Please provide the source code or the specific excerpt you want me to use. I cannot proceed without the actual source content to emit.<|im_end|>
