@@ -1,0 +1,2 @@
+{"type":"json_object","text":"{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}","json_object":{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}"}}<|im_end|>
+<|im_allowed|>emit_allowed<|im_end|>{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}<|im_end|>{\"type\":\"json_object\",\"text\":\"{\\\"program\\\":\\\"def run(payload):\\n    emit_allowed(payload)\\\"}\"}"}

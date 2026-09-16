@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 157,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 629,
+  "prompt_tokens": 629,
+  "raw_sha256": "8e02e96c786967f23d4fc43d8ae212d55fd319730a16e4210d6607f33a07bb4d",
+  "response_text": "```json\n{\n  \"program\": \"def run(payload):\\n    # Keycloak authentication integration for .NET Core\\n    # This implementation uses the NETCore.Keycloak library\\n    \\n    # 1. Configure Keycloak settings from payload\\n    keycloak_config = payload.get('keycloak_config', {})\\n    \\n    # 2. Initialize Keycloak client\\n    keycloak_client = KeycloakClient(keycloak_config)\\n    \\n    # 3. Authenticate and get tokens\\n    auth_result = keycloak_client.authenticate()\\n    \\n    # 4. Return the authentication result\\n    return auth_result\"\n}\n```<|im_end|>",
+  "wall_seconds": 15.856124672005535
+}

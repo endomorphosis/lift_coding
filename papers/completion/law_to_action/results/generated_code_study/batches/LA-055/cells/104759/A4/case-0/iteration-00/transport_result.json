@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 131,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 629,
+  "prompt_tokens": 629,
+  "raw_sha256": "54e351287dfdf40c1e298044f78d360c816742ec5d9f4fbccf78debcfe14f64f",
+  "response_text": "```json\n{\n  \"program\": \"def run(payload):\\n    # Integrate Keycloak (OIDC/OAuth2) in .NET Core Using NETCore.Keycloak\\n    # Background\\n    # NETCore.Keycloak is a .NET Core client library that integrates with Keycloak via its REST APIs, with support for OpenID Connect and OAuth 2.0. It aims to provide automated token management/renewal, multiple authentication flows, and advanced user/group management.\\n    # Use Cases\\n    # - Add Keycloak-based authentication/a\"\n}\n```<|im_im_end|>",
+  "wall_seconds": 11.37108885300404
+}
