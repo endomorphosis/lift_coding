@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 33,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 248,
+  "prompt_tokens": 248,
+  "raw_sha256": "2b1187e3975d7d76cee7d14b457574fc3fdb13e44fc27a9772f38084108229e4",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\\\\\"program\\\\\\\":\\\\\\\"def run(payload):\\\\\\\\n    emit_allowed(payload)\\\\\\\"}\"}",
+  "wall_seconds": 2.261380169002223
+}

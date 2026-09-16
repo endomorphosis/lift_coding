@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 127,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 818,
+  "prompt_tokens": 818,
+  "raw_sha256": "d3f69a89b05210aed005c25aed257832fdfdf5e07ea409aa4e40209e3720d530",
+  "response_text": "{\"kind\":\"program\",\"program\":\"def run(payload):\\n    # Check if the IP is in the allowed list\\n    if payload.get('ip') in ['127.0.0.1', '192.168.1.1']:\\n        emit_allowed(payload)\\n    # If not, check if it's a private IP\\n    elif is_private_ip(payload.get('ip')):\\n        emit_allowed(payload)\\n    # If not, check if it's a public IP\\n    else:\\n        emit_allowed(payload)\\n    return payload\"}",
+  "wall_seconds": 11.829371028012247
+}
