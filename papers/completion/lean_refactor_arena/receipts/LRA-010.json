@@ -1,0 +1,107 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-010",
+  "status": "complete",
+  "completed_at": "2026-09-16T22:40:19.512321+00:00",
+  "completion_mode": "thin fail-closed generate_text entry point with actual local probes; not a scored Arena run and not a live Leanstral completion",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py": "1ca049a30976863a939865139defb5713b2dbef09363376cd443e2695f24f670",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/lra_prompt.txt": "57036f2bb94d8d8b38d77096ad92a2e615571addee7d01c72e104edaacfee96a",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/git-head.txt": "9d1403f2c07f68b9d406fe15cd8352da9851b8055046b831e8b1247098cc2463",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/probe-health.meta.json": "8083b1e3eb947736cd20931231958bea4a6225516e8cc5202eeb63787deaba8d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/probe-health.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/probe-health.stdout.log": "a2819c5a2734c95c22d86e7404116078ebdcbedd46a25dfcdc8d23104e590f99",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/render-prompt.meta.json": "5c4efa899c751b13ba24d31fd35987f2027126fc51342f50d177a01acaee1f24",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/render-prompt.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/render-prompt.stdout.log": "cb959e4ae85ab3ba0432d1cc3987b62980914e0cb80999313663ff9fd5df971a",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.json": "c97610e35d208e10ef970c2c2913d9e2966bfdd9fe4669157e9c3c602e5e1820",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.meta.json": "c8fb1e65991e1281a1b668f30208e82a638d1c028a50ed28e92c32d339766db4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.stdout.log": "c97610e35d208e10ef970c2c2913d9e2966bfdd9fe4669157e9c3c602e5e1820"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/generate_text.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py",
+    "papers/completion/lean_refactor_arena/harness/lra_prompt.txt": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/lra_prompt.txt"
+  },
+  "criteria": [
+    {
+      "criterion": "generate_text uses provider=leanstral_local, model_name=Leanstral, temperature=0.0, allow_local_fallback=False, allow_cross_provider_fallback=False, disable_model_retry=True.",
+      "status": "met",
+      "explanation": "FAIL_CLOSED_KWARGS in generate_text.py is the literal dict provider=leanstral_local, model_name=Leanstral, temperature=0.0, allow_local_fallback=False, allow_cross_provider_fallback=False, disable_model_retry=True. generate_lra always splats that dict into ipfs_accelerate_py.llm_router.generate_text. The self-check AST-parsed the dict and captured the same kwargs on a mock router call.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Unreachable docker0 fails closed without Grok/HF fallback; receipts record resolved provider/model.",
+      "status": "met",
+      "explanation": "Live GET http://172.17.0.1:8080/health returned HTTP 200 with IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0. A generate_text call against unreachable docker0 http://172.17.0.1:9/v1 raised Docker0Unreachable wrapping LLMRouterError at that llama.cpp base URL and did not complete via Grok or Hugging Face. The mock success path recorded resolved provider=leanstral_local and resolved model=Leanstral; the unreachable path recorded requested leanstral_local/Leanstral with empty resolved identity and fallback_used=false. This cpu-medium task did not issue a live Leanstral completion.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/probe-health.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py"
+      ]
+    },
+    {
+      "criterion": "No LOCK_EX; no second llama-server; no compile; no Arena scores.",
+      "status": "met",
+      "explanation": "AST import audit found no fcntl and no LOCK_EX attribute. The client pins IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0 and never execs llama-server. Self-check recorded llama_server_started=false, compiled=false, and arena_score=null. lra_prompt.txt asks only for a tactic block and does not claim scores.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/lra_prompt.txt",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/generate_text.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/generate_text.py",
+        "--probe-health"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/validation/probe-health.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-010/outputs/generate_text.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "93cfc10bff55816833eebee96d2409a4367dfa1f",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "generate_text_py_sha256": "1ca049a30976863a939865139defb5713b2dbef09363376cd443e2695f24f670",
+    "lra_prompt_txt_sha256": "57036f2bb94d8d8b38d77096ad92a2e615571addee7d01c72e104edaacfee96a",
+    "protocol": "LRA/v1",
+    "requested_provider": "leanstral_local",
+    "requested_model": "Leanstral",
+    "docker0_health_url": "http://172.17.0.1:8080/health",
+    "llama_cpp_autostart": "0",
+    "model_or_solver_experiment": "none; cpu-medium entry point only, no live Leanstral completion, no lake compile, no Arena scores"
+  },
+  "limitations": [
+    "Live docker0 /health was reachable (HTTP 200 at 172.17.0.1:8080). This task is cpu-medium and did not send a Leanstral completion against the live owner.",
+    "Unreachable fail-closed evidence uses docker0 host 172.17.0.1 port 9 so the live owner on 8080 is not stolen and llama.cpp is not autostarted.",
+    "127.0.0.1:8080/health was connection-refused; the live listener is docker0, not loopback.",
+    "No lake compile, no lexical admission, no warmup loop, and no Arena scores were produced.",
+    "Resolved provider/model on a successful path is recorded from llm_router.get_last_generation_trace; the unreachable path records requested identity and empty resolved fields because the router raises before a successful trace."
+  ]
+}

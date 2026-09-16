@@ -1,0 +1,94 @@
+{
+  "arena_score": null,
+  "autostart": "0",
+  "compiled": false,
+  "fail_closed_kwargs": {
+    "allow_cross_provider_fallback": false,
+    "allow_local_fallback": false,
+    "disable_model_retry": true,
+    "model_name": "Leanstral",
+    "provider": "leanstral_local",
+    "temperature": 0.0
+  },
+  "fail_closed_kwargs_match": true,
+  "forbidden_imports": [],
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "health": {
+    "alias_ok": false,
+    "alias_url": "http://127.0.0.1:8080/health",
+    "autostart": "0",
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>",
+    "ok": true,
+    "status_code": 200,
+    "url": "http://172.17.0.1:8080/health"
+  },
+  "imported_names": [
+    "Any",
+    "Callable",
+    "Mapping",
+    "Optional",
+    "Path",
+    "__future__",
+    "annotations",
+    "argparse",
+    "asdict",
+    "ast",
+    "dataclass",
+    "dataclasses",
+    "generate_text",
+    "get_last_generation_trace",
+    "ipfs_accelerate_py",
+    "json",
+    "os",
+    "pathlib",
+    "sys",
+    "threading",
+    "typing",
+    "urllib"
+  ],
+  "llama_server_started": false,
+  "mock_call_kwargs": {
+    "allow_cross_provider_fallback": false,
+    "allow_local_fallback": false,
+    "disable_model_retry": true,
+    "model_name": "Leanstral",
+    "provider": "leanstral_local",
+    "temperature": 0.0
+  },
+  "mock_call_kwargs_match": true,
+  "mock_resolved": {
+    "arena_score": null,
+    "fallback_used": false,
+    "requested_model": "Leanstral",
+    "requested_provider": "leanstral_local",
+    "resolved_model": "Leanstral",
+    "resolved_provider": "leanstral_local"
+  },
+  "ok": true,
+  "prompt_contract": {
+    "aesop_allowed": true,
+    "forbids_theorem_lemma_import_open": true,
+    "nlinarith_allowed": true,
+    "no_axioms": true,
+    "no_imports": true,
+    "no_repeat_statement": true,
+    "not_proof_prompt": true,
+    "tactic_block_only": true
+  },
+  "prompt_path": "papers/completion/lean_refactor_arena/harness/lra_prompt.txt",
+  "unreachable_docker0": {
+    "base_url": "http://172.17.0.1:9/v1",
+    "error": "Leanstral generate_text failed closed at http://172.17.0.1:9/v1 (LLMRouterError: llama.cpp server is not reachable at http://172.17.0.1:9/v1. Start it with `ipfs-accelerate-llama-cpp-serve --serve` or set IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=1.). requested=leanstral_local/Leanstral resolved=/",
+    "failed_closed": true,
+    "fallback_used": false,
+    "identity": {
+      "error_type": "Docker0Unreachable",
+      "requested_model": "Leanstral",
+      "requested_provider": "leanstral_local",
+      "resolved_model": "",
+      "resolved_provider": ""
+    }
+  },
+  "uses_fcntl": false,
+  "uses_lock_ex": false
+}

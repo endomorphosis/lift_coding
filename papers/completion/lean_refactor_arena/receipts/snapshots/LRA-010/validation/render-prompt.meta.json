@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/lean_refactor_arena/harness/generate_text.py",
+    "--render-prompt",
+    "--name",
+    "CallElimCorrect.extractedOldExprInVars",
+    "--source",
+    "strata",
+    "--statement",
+    "theorem extractedOldExprInVars",
+    "--src",
+    "theorem extractedOldExprInVars := by sorry",
+    "--header",
+    ""
+  ],
+  "cwd": ".",
+  "exit_code": 0
+}
