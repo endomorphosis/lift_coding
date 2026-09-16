@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 192,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 531,
+  "prompt_tokens": 531,
+  "raw_sha256": "be06a41f0be501be4a4b2ce341a8997051d39070ee1412f22d13ef4e399c2ca7",
+  "response_text": "{\n  \"emit_allowed\": {\n    \"source\": \"d1cf8d46e1fab0bc3f4ff29b598c71771d39affb7649b73931e0afeb1836bd\",\n    \"handlers\": [\n      {\n        \"name\": \"emit_allowed\",\n        \"payload\": {\n          \"allowed_handlers\": [\"emit_allowed\"],\n          \"forbidden_handlers\": [\"emit_undeclared\"],\n          \"source_family\": \"family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd\"\n        }\n      }\n    ]\n  }\n}\n<|im_end|>",
+  "wall_seconds": 12.492064166988712
+}

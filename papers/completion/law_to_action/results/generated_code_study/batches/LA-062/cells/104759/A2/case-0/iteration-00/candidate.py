@@ -1,0 +1,1 @@
+{"type":"json_object","thinking":[],"content":[]} <|tool_call_end|> <|tool_call_end|> <|im_end|> <|im_end|>
