@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 91,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 492,
+  "prompt_tokens": 492,
+  "raw_sha256": "ba8b72306cba3819bb2966fa60a955a97708e9f2bd9a4e6973382ddbb3f32273",
+  "response_text": "```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n}\n```\n```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n}\"\n```",
+  "wall_seconds": 6.2185214450000785
+}

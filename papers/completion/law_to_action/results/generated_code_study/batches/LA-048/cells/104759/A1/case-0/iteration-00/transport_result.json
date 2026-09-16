@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 333,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 251,
+  "prompt_tokens": 251,
+  "raw_sha256": "11b30ff56298cd6829ed9fa41d56d032eac4d01f3120957f5a21dfea21a053f2",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    emit_allowed(payload)\\\"}\",\"json_object\":{\\\"program\":\"def run(payload):\\\\n    emit_allowed(payload)\",\"source\":\"family:2370f765432989bf05efd823080d2de2858b52bcab58dce3bc8680fa948b6a\",\"description\":\"Emit the source-relative JSON record through emit_allowed\",\"handlers_used\":{\\\"emit_allowed\\\":{\\\"source\":\"family:2370f765432989bf05efd823080d2de2858b52bcab58dce3bc8680fa948b6a\\\",\\\"description\\\":\\\"Emit the source-relative JSON record through emit_allowed\\\",\\\"payload\\\":\\\"{\\\\\\\"program\\\\\\\":\\\\\\\"def run(payload):\\\\\\\\n    emit_allowed(payload)\\\\\\\"}\\\",\\\"handler\\\":\\\"emit_allowed\\\",\\\"source\\\":\\\"family:2370f765432989bf05efd820d2de2858b52bcab58dce3bc8680fa948b6a\\\",\\\"description\\\":\\\"Emit the source-relative JSON record through emit_allowed\\\",\\\"payload\\\":\\\"{\\\\\\\"program\\\\\\\\n    emit_allowed(payload)\\\"}\",\"handlers_used\":{}}}\"}",
+  "wall_seconds": 29.036347866989672
+}
