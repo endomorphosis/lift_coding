@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 46,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 252,
+  "prompt_tokens": 252,
+  "raw_sha256": "369bbea6f4f2c1d7b637d44b745f25d9145ecc9b838cb1342532b3a968c372a7",
+  "response_text": "<|im_start|>assistant\n{\"type\":\"json_object\",\"properties\":{\"program\":\"program\"},\"required\":[\"program\"],\"strict\":false} <|tool_call_end|> <|im_end|>",
+  "wall_seconds": 3.080581116999383
+}
