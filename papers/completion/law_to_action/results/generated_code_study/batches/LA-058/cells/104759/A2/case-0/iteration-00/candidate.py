@@ -1,0 +1,1 @@
+{"kind":"program","program":["emit_allowed","emit_allowed","emit_allowed","emit_allowed"]}
