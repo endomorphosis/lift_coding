@@ -1,0 +1,148 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-022",
+  "status": "complete",
+  "completed_at": "2026-09-16T23:36:54.242271+00:00",
+  "completion_mode": "premise retrieval from the other 14 frozen warm-up JSONL proofs plus src lemmas via simp/rw/exact/apply regex; not a CorpusManifest ingest, not a lake compile, and not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py": "5aa5e42eb356ee517116923117e218c70bcf02dee7280cef52e521b992e73e42",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/git-head.txt": "63eee7a052e354dfd6d26af5a49ee299f8593f691d0e1f28be0e254255de25e2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-putnam.meta.json": "1c4b84fc320c631971c36a1404be1b55936f00b595f1f153287ddbe1039fd187",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-putnam.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-putnam.stdout.log": "202a506d7e88e0cd191e8b9277520573b3fa11c11be20ad1abdd642278c83805",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-rw.meta.json": "d215e58d68846af70dd1059bdbd7e41a4c0abcbba23fb04c423d0a014bb8392e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-rw.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-rw.stdout.log": "34a20477506c2a3c2bfbfbf15b37f8d9107f81494c997f71814c3cc3349b07d8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-strata.meta.json": "86cb746c9c6e420e5c738e93e33c752cf3c692f673480a739df29098fb1a8eed",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-strata.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-strata.stdout.log": "4d441396b0661aa839dc3716c542ed9e2994918e6250f23b5549e064fbefd3c9",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.json": "57fd027d7bd49667260946c5f3a2a803aca9855cc594c37e4c79e8da7c341906",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.meta.json": "e3dc44947eeb4692bfbceab5ad6fb84336425fe9ebd89956f309b8f05e549595",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.stdout.log": "57fd027d7bd49667260946c5f3a2a803aca9855cc594c37e4c79e8da7c341906"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/retrieve.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Retrieves other warm-up proofs and lemmas mentioned in src (simp/rw/exact).",
+      "status": "met",
+      "explanation": "retrieve.py loaded all 15 frozen JSONL records via splice.load_warmup_records (digest 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804, 113826 bytes). For every query, jsonl_neighbors returns the other 14 records in JSONL order with the full neighbor src (prefix-bound: src.startswith(statement)); the query name is never a neighbor. Self-check reported neighbor_cover_all=true, n_neighbors_all_14=true, full_neighbor_proofs_retrieved=true. Src lemmas are regex-extracted from simp[/simp only[/simp_all[/simp_rw[/rw[/erw[ lists and the identifier after exact/apply, unique in source order, then capped at 16. Self-check reported src_lemmas_from_simp_rw_exact_apply=true, has_simp_lemma=true, has_rw_lemma=true, has_exact_lemma=true. CallElimCorrect.substOldPostSubset retrieved 14 neighbors (first CallElimCorrect.extractedOldExprInVars, last putnam_1995_a3) and 12 src lemmas including substOld (simp), ih (exact), List.Subset.app (apply); lemma_id_digest=70097d371a247f758872fcedd7d14209553aa4afac8ecb1e40e2555b87253e9f. Core.InitsUpdatesComm includes updatedStateComm' (rw) among 16 capped lemmas (18 uncapped). putnam_1995_a3 includes Finset.sum_add_distrib (rw) and hdigits_to_num (simp). This is not a Lean parser; local hypotheses such as ih may appear because they follow exact/apply.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-strata.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-rw.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-putnam.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/jsonl-sha256.txt"
+      ]
+    },
+    {
+      "criterion": "No Mathlib-scale CorpusManifest ingest.",
+      "status": "met",
+      "explanation": "AST import audit of retrieve.py found only stdlib plus sibling splice (LRA-011 JSONL loader). Imported names: ['Any', 'Mapping', 'Optional', 'Path', 'Sequence', '__future__', 'annotations', 'argparse', 'asdict', 'ast', 'dataclass', 'dataclasses', 'hashlib', 'json', 'pathlib', 're', 'splice', 'sys', 'typing']. forbidden_imports=[], corpus_manifest_attrs=[], called_select_premises=false, uses_subprocess=false. No ipfs_datasets, CorpusManifest, TheoremEntry, GoalFeatures, or select_premises. Every retrieval sets corpus_manifest_ingest=false and mathlib_ingest=false. The corpus is the frozen 15-record JSONL only; there is no lake-wide constant export and no Mathlib ingest. A synthetic 20-lemma simp list plus apply ExtraIdent returned 16 names (Lemma_00..Lemma_15) with uncapped=21.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No invented scores.",
+      "status": "met",
+      "explanation": "Retrieval records a SHA-256 lemma-id digest of (query, 14 neighbor names, capped src lemma names), not a relevance or Arena score. Self-check reported no_invented_scores=true, numeric_score_assignments=[], arena_score=null, score=null. Every per-record view has arena_score=null, score=null, relevance_score=null. Live --retrieve of CallElimCorrect.substOldPostSubset, Core.InitsUpdatesComm, and putnam_1995_a3 each emitted arena_score=null and score=null. compiled=false, lake=false, llama_server_started=false. No Track 1/Track 2 ranking was produced.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-strata.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-rw.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-putnam.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/retrieve.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/retrieve.py",
+        "--retrieve",
+        "--name",
+        "CallElimCorrect.substOldPostSubset"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-strata.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/retrieve.py",
+        "--retrieve",
+        "--name",
+        "Core.InitsUpdatesComm"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-rw.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/retrieve.py",
+        "--retrieve",
+        "--name",
+        "putnam_1995_a3"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/validation/retrieve-putnam.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-022/outputs/retrieve.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "aebaa8df38676972f44fd426590fc89174ab3552",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "n_jsonl_neighbors": 14,
+    "src_lemma_cap": 16,
+    "retrieve_py_sha256": "5aa5e42eb356ee517116923117e218c70bcf02dee7280cef52e521b992e73e42",
+    "protocol": "LRA/v1",
+    "retrieval_method": "jsonl-neighbors-plus-src-regex",
+    "corpus_manifest_ingest": false,
+    "mathlib_ingest": false,
+    "loop": "v2-deferred-retrieve-only",
+    "model_or_solver_experiment": "none; cpu-medium JSONL+regex retrieval only, no live Leanstral completion, no lake compile, no Arena scores"
+  },
+  "limitations": [
+    "This is loop v2 / PR-6 deferred retrieval, not the 30 Sep critical path and not a warm-up generate/compile loop.",
+    "Lemma extraction is character-class regex plus bracket-depth on simp[/rw[/exact/apply; it does not parse Lean and may include local hypotheses (ih, Hinit) and field projections (hA.of_le).",
+    "Src lemmas are capped at 16 after uniquing; the other 14 JSONL proofs are always retrieved in full even when JSON views truncate statement/src to 400 characters.",
+    "No CorpusManifest, no Mathlib-scale lake ingest, no embeddings, and no Jev/TypeSafe call.",
+    "No lake compile, no Leanstral completion, no LOCK_EX, and no Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}
