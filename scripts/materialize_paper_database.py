@@ -18,8 +18,15 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
-PREFIXES = dict(zip(PAPERS, ("AF", "LA", "NS")))
+RESEARCH_PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
+COMPETITION_PAPERS = ("lean_refactor_arena",)
+PAPERS = RESEARCH_PAPERS + COMPETITION_PAPERS
+PREFIXES = {
+    "autoformalization": "AF",
+    "law_to_action": "LA",
+    "neurosymbolic_supervision": "NS",
+    "lean_refactor_arena": "LRA",
+}
 
 
 def _native(repo_root):

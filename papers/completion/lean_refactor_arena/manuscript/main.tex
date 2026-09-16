@@ -1,0 +1,179 @@
+\documentclass{article}
+
+\usepackage{neurips_2026_vericode_competition}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+\title{Warm-up Characterization and an Open-Weight Harness for Lean Refactor Arena}
+
+\author{%
+  Benjamin Barber \\
+  \texttt{starworks5@gmail.com} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The Lean Refactor Arena at the NeurIPS 2026 VeriCodeGen workshop asks whether agents can make Lean~4 proofs better, not merely correct, by reducing proof size, reducing elaboration cost, and preserving compilation across toolchains. We import the public warm-up JSONL (15 theorems from Strata, PhysLib, CSLib, ArkLib, and PutnamBench) and report a frozen characterization of that subset. We then describe an open-weight refactoring harness that uses a local Leanstral owner to propose tactic-level rewrites while Lean remains the checker. This report does \emph{not} claim Arena leaderboard scores, token savings, or a completed official submission: the warm-up characterization is measured; the refactoring run is specified and unrun.
+\end{abstract}
+
+\section{Approach}
+
+The competition is a two-track verified proof-refactoring task~\cite{vericodegen2026,leanrefactorarena,leanrefactorsite}. Track~1 wraps closed-source APIs under a US\$3-per-problem cap. Track~2 post-trains or harnesses open-weight models and must run the full benchmark on at most four 80\,GB A100s in 48 hours. Scoring has three axes: proof-source token count, Lean elaboration effort, and zero-shot version transfer. Theorem statements must be preserved and proofs must remain Lean-correct.
+
+This report targets Track~2 as a \emph{development} harness on a local NVIDIA GB10 DGX Spark owner, not as an official 4$\times$A100 run. The pipeline is:
+
+\begin{enumerate}
+  \item Load a problem from \texttt{benchmark\_data\_warmup.jsonl}: theorem name, statement, reference proof, file path, and toolchain snapshots.
+  \item Construct a prompt that includes the statement, the reference proof, and a request for a shorter tactic script that proves the same statement.
+  \item Call a local OpenAI-compatible Leanstral server (\texttt{leanstral\_local} on \texttt{172.17.0.1:8080}) with temperature 0.
+  \item Replace the proof body, compile with the listed Lean snapshots, and record token count and elaboration metrics only if compilation succeeds.
+  \item Reject any candidate that changes the statement, fails to compile, or depends on untrusted oracles.
+\end{enumerate}
+
+Lean is the only correctness oracle. Failed candidates are retained as measured failures, not rewritten as successes. We have not yet executed this loop on the 15 warm-up problems; Section~\ref{warmup} reports only the imported reference proofs.
+
+\paragraph{Intended prompt (unrun).} The generator sees the theorem \texttt{statement}, the reference \texttt{src}, and the instruction: return only a tactic proof of the same statement that is shorter in source tokens; do not change the statement; do not invent axioms. The checker then substitutes the candidate body and compiles. No LLM-as-judge step exists.
+
+\paragraph{Validity and scoring.} A candidate is valid only if (i)~the declaration is byte-identical to the JSONL statement (modulo whitespace in the proof body), (ii)~it compiles on every Lean tag in that record's \texttt{version\_info}, and (iii)~no extra axiom or \texttt{sorry} is introduced. Invalid candidates score as failures on all three organizer axes: proof-source token count, elaboration effort, and zero-shot version transfer~\cite{vericodegen2026}. We will report those axes only after Lean receipts exist. Aggregating a ``win'' from a subset of snapshots, or from Spark-only compiles, is out of scope.
+
+\subsection{Warm-up subset}
+\label{warmup}
+
+We downloaded the public warm-up JSONL from the Arena Gradio API on 2026-09-16. The file contains 15 records (113\,826 bytes), three problems from each of Strata~\cite{strata}, PhysLib~\cite{physlib}, CSLib~\cite{cslib}, ArkLib~\cite{arklib}, and PutnamBench. SHA-256 of the frozen copy is \path{6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804}. The Gradio \texttt{/tmp/gradio/} URL is ephemeral; the local copy is authoritative.
+
+\begin{table}[ht]
+  \caption{Public warm-up subset (15 problems). Proof tokens are the JSONL \texttt{proof\_length} field. Short names are last-component labels; full identifiers are in the appendix. No refactoring scores are reported.}
+  \label{warmup-table}
+  \centering
+  \small
+  \input{warmup_table}
+\end{table}
+
+Reference proof length ranges from 222 to 4085 tokens (mean 1173.0). Line counts range from 55 to 294 (mean 142.9). Source-file character counts in the \texttt{src} field range from 1727 to 13\,801 (mean 6183.0). Putnam problems ship without a \texttt{file\_path}/\texttt{url} and are the only records with a nonempty \texttt{header} (Mathlib/Aesop imports); the others point at public Lean repositories. Toolchain multiplicity varies: some theorems list a single Lean snapshot, others list three or four (v4.25.0--v4.33.0-rc2). That spread is the version-transfer axis of the official scorer.
+
+\paragraph{JSONL schema.} Each record has the twelve fields in Table~\ref{schema-table}. The \texttt{version\_info} field is a list of single-key maps from Lean tag to git commit. We do not treat \texttt{proof\_length} as an official Arena score; it is the organizer-supplied size of the reference proof.
+
+\begin{table}[ht]
+  \caption{Warm-up JSONL fields. All 15 records share this schema.}
+  \label{schema-table}
+  \centering
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    Field & Role \\
+    \midrule
+    \texttt{name} & Fully qualified theorem identifier \\
+    \texttt{source} & \texttt{strata}/\texttt{physlib}/\texttt{cslib}/\texttt{arklib}/\texttt{putnambench} \\
+    \texttt{statement} & Declaration to preserve \\
+    \texttt{src} & Reference proof source \\
+    \texttt{proof\_length} & Organizer reference token count \\
+    \texttt{num\_lines} & Reference line count \\
+    \texttt{header} & Imports; nonempty only for Putnam \\
+    \texttt{file\_path}, \texttt{url} & Repo path; empty for Putnam \\
+    \texttt{start\_line}, \texttt{end\_line} & Span in the upstream file \\
+    \texttt{version\_info} & Lean tag $\mapsto$ commit snapshots \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Per-source notes.} Strata problems are CallElim/Core lemmas on Lean v4.26--v4.29, short (222--313 tokens). PhysLib problems are variational calculus, electromagnetism extrema, and Wick-algebra time-order lemmas, all pinned to v4.32.0 only, so they cannot yet exercise version transfer. CSLib problems (Fsub progress, SKI diamond, CCS bisimilarity) list three or four snapshots including \texttt{v4.33.0-rc2}. ArkLib problems are the longest non-Putnam proofs (1353--1906 tokens) with v4.28--v4.31 snapshots. Putnam proofs are the longest overall (1754--4085 tokens) and the only records missing repository URLs.
+
+\paragraph{Competition phase.} The workshop timeline lists warm-up as now through 30 September 2026, with the full benchmark on 1 November 2026 and proof/code plus tech-report deadline on 8 November 2026~\cite{vericodegen2026}. This report is a warm-up census during that first phase. It is not a full-benchmark entry.
+
+\section{Models}
+
+The intended generator is \textbf{Leanstral-1.5-119B-A6B-NVFP4}~\cite{leanstral}, served locally as \texttt{leanstral\_local} by \texttt{llama-server} bound to the Docker bridge (\texttt{172.17.0.1:8080}). Weights are the NVFP4 GGUF already used as the VeriCodeGen generated-code owner on this host. Sampling for the unrun harness is temperature 0, seed equal to the problem index, maximum 1024 completion tokens, and a 2048-token input ceiling. No embedding model, reranker, or LLM judge is in the pipeline. Lean snapshots listed in each JSONL \texttt{version\_info} entry are the only compilers. We have not fine-tuned Leanstral for this competition.
+
+This host is a DGX Spark with one GB10 GPU, not the official Track~2 4$\times$A100 80\,GB envelope. Development measurements on Spark must not be reported as official open-track scores.
+
+\section{Budget accounting}
+\label{budget}
+
+\paragraph{This report} Importing and characterizing the 15-line JSONL used CPU only (seconds of wall-clock; \$0 API). No closed-track API spend occurred. No Track~1 or Track~2 inference run was billed.
+
+\paragraph{Intended Track~2 run} Official scoring must use $\le$4$\times$A100 80\,GB and $\le$48 hours for the full benchmark. Fine-tuning compute, if any, will be reported separately and is not capped. We have not started that run. The hardware table (Table~\ref{hardware-table}) records a \emph{planned} envelope, not a measured one.
+
+\begin{table}[!ht]
+  \caption{Open track: planned hardware. The benchmark-run row is unrun. Only an official 4$\times$A100 inference run would count against the 48-hour cap.}
+  \label{hardware-table}
+  \centering
+  \begin{tabular}{llr}
+    \toprule
+    Stage & Accelerators & Wall-clock \\
+    \midrule
+    Warm-up characterization (this report) & CPU & $<$1 min (measured) \\
+    Development harness (Spark GB10) & 1 $\times$ GB10 & unrun \\
+    Official Track~2 benchmark run & 4 $\times$ A100 80\,GB & unrun; cap 48 h \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+We do not claim general token savings. Negative and incomplete outcomes will be retained when the harness runs. Under-reporting cost, or reporting Spark wall-clock as if it were the official envelope, would be a desk-rejection condition~\cite{vericodegen2026}; we therefore leave the official row blank rather than fill it with a substitute.
+
+\section{Reproduction}
+
+The imported JSONL and the machine-readable summary live at
+\texttt{papers/completion/lean\_refactor\_arena/data/}.
+Regenerating Table~\ref{warmup-table} and the SHA-256 check is
+\begin{verbatim}
+python3 papers/completion/lean_refactor_arena/tools/summarize_warmup.py
+\end{verbatim}
+from the repository root. The command fails closed if the JSONL digest is not
+\path{6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804}.
+The Arena UI is \url{https://huggingface.co/spaces/delta-lab-ai/lean-refactor-arena}.
+Workshop rules: \url{https://vericodegen.github.io/}.
+Competition site: \url{https://leanrefactor.github.io/}.
+
+The refactoring harness is specified above and is \textbf{not} executed in this report. Organizers cannot regenerate a submission JSONL from this archive yet: there is no entry-point that emits refactored proofs. When that entry point exists, the README will give the command, expected wall-clock, and hardware. Sampling at temperature 0 is intended to be deterministic given the local owner; we have not measured score variance across reruns because we have not run the scorer.
+
+Desk-rejection conditions we are already satisfying or leaving blank rather than faking: the four required section headings are present; every model that would be used is named; Track~1 spend is \$0; Track~2 wall-clock is unrun rather than substituted; no auxiliary judge is hidden.
+
+\section{Limitations}
+
+This is a competition-report scaffold plus a frozen warm-up census. It is not a ranked Arena entry. We have not compiled the 15 proofs, have not measured elaboration, and have not submitted to the Space. Putnam records lack repository URLs in the JSONL. Local Spark hardware is not the official Track~2 envelope. The three scoring axes remain unspecified numerically for our system because no candidate proofs exist.
+
+\begin{ack}
+Workshop: VeriCodeGen, NeurIPS 2026. Competition: Lean Refactor Arena (delta-lab-ai). No Arena submission was made with this report.
+\end{ack}
+
+{
+\small
+\bibliographystyle{plain}
+\bibliography{references}
+}
+
+\appendix
+\section{Full warm-up identifiers}
+\label{app-ids}
+
+The short-name table (Table~\ref{warmup-table}) uses abbreviated labels. The frozen JSONL names, repositories, and Lean tags follow.
+
+\sloppy
+\begin{itemize}\raggedright
+  \item \texttt{CallElimCorrect.substOldPostSubset} --- Strata, \texttt{Strata/Transform/CallElimCorrect.lean}, v4.26.0, 97 lines, 313 tokens.
+  \item \texttt{CallElimCorrect.extractedOldExprInVars} --- Strata, same file, v4.26.0, 82 lines, 222 tokens.
+  \item \texttt{Core.InitsUpdatesComm} --- Strata, \texttt{Strata/Languages/Core/\allowbreak StatementSemanticsProps.lean}, v4.29.1/v4.27.0/v4.26.0, 55 lines, 224 tokens.
+  \item \texttt{fundamental\_theorem\_of\_variational\_calculus'} --- PhysLib, \texttt{Physlib/Mathematics/\allowbreak VariationalCalculus/Basic.lean}, v4.32.0, 126 lines, 851 tokens.
+  \item \texttt{Electromagnetism.ElectromagneticPotential.\allowbreak time\_deriv\_time\_deriv\_electricField\_of\_isExtrema} --- PhysLib, \texttt{Physlib/Electromagnetism/Dynamics/IsExtrema.lean}, v4.32.0, 126 lines, 1372 tokens.
+  \item Wick-algebra time-order (JSONL name uses Greek iota) --- PhysLib, \texttt{Physlib/QFT/\allowbreak PerturbationTheory/WickAlgebra/TimeOrder.lean}, v4.32.0, 117 lines, 1217 tokens.
+  \item \texttt{Cslib.LambdaCalculus.LocallyNameless.\allowbreak Fsub.Typing.progress} --- CSLib, \texttt{Cslib/Languages/\allowbreak LambdaCalculus/LocallyNameless/Fsub/Safety.lean}, v4.33.0-rc2/v4.32.0/v4.31.0, 83 lines, 408 tokens.
+  \item \texttt{Cslib.SKI.parallelReduction\_diamond} --- CSLib, \texttt{Cslib/Languages/\allowbreak CombinatoryLogic/Confluence.lean}, four snapshots through v4.30.0, 64 lines, 407 tokens.
+  \item \texttt{Cslib.CCS.bisimilarity\_congr\_choice} --- CSLib, \texttt{Cslib/Languages/CCS/\allowbreak BehaviouralTheory.lean}, three snapshots, 62 lines, 251 tokens.
+  \item \texttt{Binius.BinaryBasefold.\allowbreak fiberwise\_dist\_lt\_imp\_dist\_lt\_unique\_decoding\_radius} --- ArkLib, \texttt{ArkLib/ProofSystem/\allowbreak Binius/BinaryBasefold/Prelude.lean}, four snapshots v4.28.0--v4.31.0, 209 lines, 1463 tokens.
+  \item \texttt{Binius.BinaryBasefold.fold\_advances\_evaluation\_poly} --- ArkLib, same file, three snapshots, 184 lines, 1906 tokens.
+  \item \texttt{interleaved\_affine\_gaps\_imply\_tensor\_gaps} --- ArkLib, \texttt{ArkLib/Data/\allowbreak CodingTheory/ProximityGap/DG25/MainResults.lean}, three snapshots, 177 lines, 1353 tokens.
+  \item \texttt{putnam\_1964\_a4}, \texttt{putnam\_1964\_b2}, \texttt{putnam\_1995\_a3} --- PutnamBench; empty \texttt{file\_path}/\texttt{url}; Mathlib+Aesop headers; 186/294/282 lines and 1769/1754/4085 tokens.
+\end{itemize}
+
+\end{document}

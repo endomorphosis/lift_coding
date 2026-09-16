@@ -20,7 +20,10 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
+RESEARCH_PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
+COMPETITION_PAPERS = ("lean_refactor_arena",)
+PAPERS = RESEARCH_PAPERS
+ALL_PAPERS = RESEARCH_PAPERS + COMPETITION_PAPERS
 SUBMODULES = ("external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit")
 PYTHON = Path.home() / "lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python"
 GROK_TEX_PROFILE = Path("papers/completion/toolchains/grok_tex_profile.json")
@@ -189,13 +192,17 @@ def native_argv(repo, paper, lane, ready):
     for path in SUBMODULES:
         argv.extend(["--worktree-submodule-path", path])
     protected = ["scripts/paper_supervisors.py", "scripts/paper_supervisor_campaign.py",
+                 "scripts/ns028_completion_guard.py", "scripts/ns028_completion_authority.json",
                  "scripts/materialize_paper_database.py", "scripts/paper_state_owner.py",
                  "scripts/paper_ducklake_projection.py", "scripts/paper_worker_observation.py",
                  "scripts/migrate_paper_validation_argv.py", "scripts/repair_paper_launch_validation.py",
                  "scripts/repair_paper_snapshot_outputs.py",
                  "papers/completion/README.md",
                  "papers/neurips_2026_vericode_workshop.tex", "papers/neurips_2026_vericode.sty", "papers/checklist.tex"]
-    for other in PAPERS:
+    for other in ALL_PAPERS:
+        config_path = repo / "papers/completion" / other / "supervisor.json"
+        if not config_path.is_file():
+            continue
         config = cfg(repo, other)
         protected.extend([config[k] for k in ("pdf", "manifest_path", "review_path", "todo_path", "objective_path")])
         protected.append(f"papers/completion/{other}/supervisor.json")
@@ -239,9 +246,10 @@ def fetch_board(paper, lane):
         conn.close()
 
 
-def snapshot(state):
+def snapshot(state, papers=None):
+    papers = tuple(papers or PAPERS)
     return {"schema": "vericodegen-quack-snapshot/v1", "transport": "quack",
-            "fetched_at": now(), "boards": [fetch_board(p, state / p) for p in PAPERS]}
+            "fetched_at": now(), "boards": [fetch_board(p, state / p) for p in papers]}
 
 
 def worker_observation(lane, authoritative_tasks=None):
@@ -324,7 +332,8 @@ def cleanup_children(children):
     return failures
 
 
-def serve(state, worktree_parent):
+def serve(state, worktree_parent, papers=None):
+    papers = tuple(papers or PAPERS)
     state.mkdir(parents=True, exist_ok=True)
     os.chmod(state, 0o700)
     lock = (state / "campaign.lock").open("a")
@@ -344,7 +353,7 @@ def serve(state, worktree_parent):
     previous_signals = {sig: signal.signal(sig, stop) for sig in (signal.SIGTERM, signal.SIGINT)}
     try:
         # Verify every lane before starting owners/providers.
-        for paper in PAPERS:
+        for paper in papers:
             repo = repo_for(paper, worktree_parent)
             branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
             if branch != f"agent/vericodegen-2026-{paper}":
@@ -357,7 +366,7 @@ def serve(state, worktree_parent):
                          "scripts/paper_ducklake_projection.py", "scripts/paper_worker_observation.py"):
                 if not subprocess.check_output(["git", "ls-files", "--", path], cwd=repo, text=True).strip():
                     raise RuntimeError(f"uncommitted campaign source {path}")
-        for paper in PAPERS:
+        for paper in papers:
             if stopping:
                 raise RuntimeError("campaign startup was stopped")
             repo, lane = repo_for(paper, worktree_parent), state / paper
@@ -383,11 +392,12 @@ def serve(state, worktree_parent):
             fetch_board(paper, lane)  # independent real remote authenticated read
         # Establish actual DuckLake projection before implementations begin.
         from paper_ducklake_projection import project_snapshot
-        snap = snapshot(state)
+        snap = snapshot(state, papers)
         write(state / "quack-snapshot.json", snap)
-        lake = project_snapshot(snap, state / "ducklake", repo_root=ROOT, source_path=state / "quack-snapshot.json")
-        write(state / "ducklake-status.json", lake)
-        for paper in PAPERS:
+        if papers == RESEARCH_PAPERS:
+            lake = project_snapshot(snap, state / "ducklake", repo_root=ROOT, source_path=state / "quack-snapshot.json")
+            write(state / "ducklake-status.json", lake)
+        for paper in papers:
             if stopping:
                 raise RuntimeError("campaign startup was stopped")
             lane, repo = state / paper, repo_for(paper, worktree_parent)
@@ -402,19 +412,20 @@ def serve(state, worktree_parent):
             failures = [dict(kind=kind, pid=p.pid, exit_code=p.returncode) for kind, p, _record in children if p.poll() is not None]
             health = {"checked_at": now(), "children_exited": failures}
             try:
-                snap = snapshot(state)
+                snap = snapshot(state, papers)
                 health["workers"] = {b["paper_id"]: worker_observation(
                     state / b["paper_id"], authoritative_tasks=b["tasks"]) for b in snap["boards"]}
                 write(state / "quack-snapshot.json", snap)
-                lake = project_snapshot(snap, state / "ducklake", repo_root=ROOT, source_path=state / "quack-snapshot.json")
-                write(state / "ducklake-status.json", lake)
+                if papers == RESEARCH_PAPERS:
+                    lake = project_snapshot(snap, state / "ducklake", repo_root=ROOT, source_path=state / "quack-snapshot.json")
+                    write(state / "ducklake-status.json", lake)
                 health["tasks"] = {b["paper_id"]: dict(Counter(t["status"] for t in b["tasks"])) for b in snap["boards"]}
                 health["progress"] = {b["paper_id"]: task_progress(b) for b in snap["boards"]}
                 health["quack_reads_succeeded"] = True
             except Exception as exc:
                 health.update(quack_reads_succeeded=False, error_type=type(exc).__name__)
                 if "workers" not in health:
-                    health["workers"] = {paper: worker_observation(state / paper) for paper in PAPERS}
+                    health["workers"] = {paper: worker_observation(state / paper) for paper in papers}
             write(state / "health.json", health)
             print(json.dumps(health), flush=True)
             for _ in range(30):
@@ -438,17 +449,20 @@ def main():
     parser.add_argument("action", choices=("start", "serve", "status", "stop"))
     parser.add_argument("--state-root", type=Path, default=Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026")
     parser.add_argument("--worktree-parent", type=Path, default=ROOT / ".worktrees")
+    parser.add_argument("--papers", nargs="+", choices=ALL_PAPERS, default=None,
+                        help="Lane subset. Default is the three research papers. Use lean_refactor_arena with a dedicated --state-root.")
     args = parser.parse_args()
     state = args.state_root.expanduser().resolve()
+    selected = tuple(args.papers) if args.papers else PAPERS
     if args.action == "serve":
-        serve(state, args.worktree_parent.resolve())
+        serve(state, args.worktree_parent.resolve(), papers=selected)
     elif args.action == "start":
         state.mkdir(parents=True, exist_ok=True)
         prior = read(state / "campaign.json") if (state / "campaign.json").exists() else {}
         if alive(prior.get("controller")):
             raise RuntimeError("campaign controller is already running")
         argv = [str(PYTHON), str(Path(__file__).resolve()), "serve", "--state-root", str(state),
-                "--worktree-parent", str(args.worktree_parent.resolve())]
+                "--worktree-parent", str(args.worktree_parent.resolve()), "--papers", *selected]
         process, record = launch(argv, ROOT, environment(ROOT), state / "campaign.log")
         print(json.dumps({"controller": record, "status": "starting", "state_root": str(state)}, indent=2))
     elif args.action == "stop":

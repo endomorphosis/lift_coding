@@ -306,11 +306,11 @@ class PaperEvidenceTests(unittest.TestCase):
 class PaperBoardBuildTests(unittest.TestCase):
     def test_three_fresh_boards_admit_only_each_tasks_evidence_without_changing_seed_science(self):
         parse_goals, parse_tasks, _, _ = MODULE.native_modules()
-        manifests = {paper: MODULE.manifest(paper) for paper in MODULE.PAPERS}
+        manifests = {paper: MODULE.manifest(paper) for paper in MODULE.RESEARCH_PAPERS}
         original = json.dumps(manifests, sort_keys=True)
         with tempfile.TemporaryDirectory() as temporary, patch.object(MODULE, "ROOT", Path(temporary)), \
                 patch.object(MODULE, "manifest", side_effect=manifests.__getitem__):
-            for paper in MODULE.PAPERS:
+            for paper in MODULE.RESEARCH_PAPERS:
                 with self.subTest(paper=paper):
                     folder = MODULE.ROOT / MODULE.BASE / paper
                     folder.mkdir(parents=True)
@@ -338,10 +338,10 @@ class PaperLauncherTests(unittest.TestCase):
         _, _, parse_args, make_config = MODULE.native_modules()
         with tempfile.TemporaryDirectory() as state, patch.dict(os.environ, {"VERICODEGEN_STATE_ROOT": state}):
             configs = [make_config(parse_args(MODULE.supervisor_argv(paper)), repo_root=MODULE.ROOT)
-                       for paper in MODULE.PAPERS]
+                       for paper in MODULE.RESEARCH_PAPERS]
         for field in ("state_prefix", "task_prefix", "state_dir", "state_path", "worktree_root"):
-            self.assertEqual(len({str(getattr(cfg, field)) for cfg in configs}), 3, field)
-        self.assertEqual(len({str(cfg.merge_queue_dir) for cfg in configs}), 3)
+            self.assertEqual(len({str(getattr(cfg, field)) for cfg in configs}), len(MODULE.RESEARCH_PAPERS), field)
+        self.assertEqual(len({str(cfg.merge_queue_dir) for cfg in configs}), len(MODULE.RESEARCH_PAPERS))
         self.assertTrue(all(cfg.implement and cfg.use_ephemeral_worktree for cfg in configs))
 
         self.assertTrue(all(cfg.database_program.authority_mode == "quack" for cfg in configs))

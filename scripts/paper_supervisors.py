@@ -18,8 +18,15 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path("papers/completion")
-PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
-PREFIXES = dict(zip(PAPERS, ("AF", "LA", "NS")))
+RESEARCH_PAPERS = ("autoformalization", "law_to_action", "neurosymbolic_supervision")
+COMPETITION_PAPERS = ("lean_refactor_arena",)
+PAPERS = RESEARCH_PAPERS + COMPETITION_PAPERS
+PREFIXES = {
+    "autoformalization": "AF",
+    "law_to_action": "LA",
+    "neurosymbolic_supervision": "NS",
+    "lean_refactor_arena": "LRA",
+}
 ACCEL = ROOT / "external/ipfs_accelerate"
 SUBMODULES = ("external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit")
 TEMPLATES = ("papers/neurips_2026_vericode_workshop.tex", "papers/neurips_2026_vericode.sty", "papers/checklist.tex")
