@@ -1,0 +1,800 @@
+{
+  "all_pins_tag_pinned": true,
+  "any_lock_used_primary_executable": false,
+  "arena_score": null,
+  "capability_gap": "No tag-pinned elan lean/lake binaries are installed under the resolver elan home. Paths are still tag-pinned; this is not PATH lean usability and is not a lake compile.",
+  "compiled": false,
+  "default_elan_home": "/tmp/asref-grok-home-po3odwh3/.elan",
+  "elan_home_env": null,
+  "environment_lock_fields": [
+    "container_digest",
+    "executable_paths",
+    "itp",
+    "itp_version",
+    "kernel_command_template",
+    "lock_id",
+    "os_info",
+    "pinned_at",
+    "policy_digest",
+    "schema_version",
+    "solver_versions"
+  ],
+  "environment_lock_has_executable_paths": true,
+  "environment_lock_has_primary_executable": false,
+  "expected_unique_tags": [
+    "v4.25.0",
+    "v4.26.0",
+    "v4.27.0",
+    "v4.28.0",
+    "v4.29.0",
+    "v4.29.1",
+    "v4.30.0",
+    "v4.31.0",
+    "v4.32.0",
+    "v4.33.0-rc2"
+  ],
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "installed_tags_in_default_elan_home": [],
+  "jsonl_bytes": 113826,
+  "jsonl_unchanged": true,
+  "lake": false,
+  "lean_frontend": {
+    "capability_find_executable": true,
+    "capability_run_bounded_process": true,
+    "imports_lean_toolchain": false,
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-012-09b44c896a29-attempt-1-1789599540/external/ipfs_datasets/ipfs_datasets_py/logic/hammers/frontends/lean.py",
+    "snapshot_argv_has_json_flag": true,
+    "snapshot_argv_has_lake": false,
+    "snapshot_calls_run_bounded_process": true,
+    "snapshot_calls_run_lean_process": false,
+    "unchanged_path_lean_json": true
+  },
+  "llama_server_started": false,
+  "missing_tags_in_default_elan_home": [
+    "v4.25.0",
+    "v4.26.0",
+    "v4.27.0",
+    "v4.28.0",
+    "v4.29.0",
+    "v4.29.1",
+    "v4.30.0",
+    "v4.31.0",
+    "v4.32.0",
+    "v4.33.0-rc2"
+  ],
+  "n_records": 15,
+  "n_version_pins": 36,
+  "ok": true,
+  "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-012-09b44c896a29-attempt-1-1789599540/external/ipfs_datasets/bin:/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-012-09b44c896a29-attempt-1-1789599540/external/ipfs_datasets/bin/.deps/npm/bin:/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/",
+  "records": [
+    {
+      "n_toolchains": 1,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "pins": [
+        {
+          "git_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+          "lean_tag": "v4.26.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreibycbx2hkffbuymlhfcxlnz7n6lsg7grguchy5amoixkx6ng3tijm",
+          "tag_pinned": true
+        }
+      ],
+      "source": "strata"
+    },
+    {
+      "n_toolchains": 1,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "pins": [
+        {
+          "git_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+          "lean_tag": "v4.26.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreibycbx2hkffbuymlhfcxlnz7n6lsg7grguchy5amoixkx6ng3tijm",
+          "tag_pinned": true
+        }
+      ],
+      "source": "strata"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "Core.InitsUpdatesComm",
+      "pins": [
+        {
+          "git_commit": "384e22374e0872095ad9c6f74c5998c09cfd93a9",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "lean_tag": "v4.29.1",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreig5hs34azjusk5fa65wtq5dupfhxw5wy635mihskuqhbkw4kw3dlu",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "4348c65a93a3b57b1a4541991ed2d2fcdd9fa35d",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean",
+          "lean_tag": "v4.27.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreidoopkcvfgnhpywivmtomwnxizfi3fq7bg7fmftwbkj3k4y6hrtce",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+          "lean_tag": "v4.26.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreibycbx2hkffbuymlhfcxlnz7n6lsg7grguchy5amoixkx6ng3tijm",
+          "tag_pinned": true
+        }
+      ],
+      "source": "strata"
+    },
+    {
+      "n_toolchains": 1,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "pins": [
+        {
+          "git_commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "lean_tag": "v4.32.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreie4m2logxtshhhxnoy5hnoopi4uqbh5xtky46w7yh2rct7m4eowde",
+          "tag_pinned": true
+        }
+      ],
+      "source": "physlib"
+    },
+    {
+      "n_toolchains": 1,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "pins": [
+        {
+          "git_commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "lean_tag": "v4.32.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreie4m2logxtshhhxnoy5hnoopi4uqbh5xtky46w7yh2rct7m4eowde",
+          "tag_pinned": true
+        }
+      ],
+      "source": "physlib"
+    },
+    {
+      "n_toolchains": 1,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "pins": [
+        {
+          "git_commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "lean_tag": "v4.32.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreie4m2logxtshhhxnoy5hnoopi4uqbh5xtky46w7yh2rct7m4eowde",
+          "tag_pinned": true
+        }
+      ],
+      "source": "physlib"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "pins": [
+        {
+          "git_commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean",
+          "lean_tag": "v4.33.0-rc2",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreiags7kbgw3wsuu2bdz3avog6isk7iaxpmdfjmiaf6gbdj5aohszr4",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "lean_tag": "v4.32.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreieenyrfqhikkwzqsny5bsyq2h4fu7eawt6qr4wpyterfukpvcam5u",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "lean_tag": "v4.31.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreiagjjeyynmvgr667ymkqoq3cuombimnolbsspopauwvlejww2f5py",
+          "tag_pinned": true
+        }
+      ],
+      "source": "cslib"
+    },
+    {
+      "n_toolchains": 4,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "pins": [
+        {
+          "git_commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean",
+          "lean_tag": "v4.33.0-rc2",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreiags7kbgw3wsuu2bdz3avog6isk7iaxpmdfjmiaf6gbdj5aohszr4",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "lean_tag": "v4.32.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreieenyrfqhikkwzqsny5bsyq2h4fu7eawt6qr4wpyterfukpvcam5u",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "lean_tag": "v4.31.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreiagjjeyynmvgr667ymkqoq3cuombimnolbsspopauwvlejww2f5py",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "c7944a9fb44c3298f1a960a5e574ab23a6ab8ed5",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean",
+          "lean_tag": "v4.30.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreigzv7f6o56cnwz75j4uxkvuwwim6xcuab4vgz5hnbvbv5zzylygwy",
+          "tag_pinned": true
+        }
+      ],
+      "source": "cslib"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "pins": [
+        {
+          "git_commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean",
+          "lean_tag": "v4.33.0-rc2",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreiags7kbgw3wsuu2bdz3avog6isk7iaxpmdfjmiaf6gbdj5aohszr4",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "lean_tag": "v4.32.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreieenyrfqhikkwzqsny5bsyq2h4fu7eawt6qr4wpyterfukpvcam5u",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "lean_tag": "v4.31.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreiagjjeyynmvgr667ymkqoq3cuombimnolbsspopauwvlejww2f5py",
+          "tag_pinned": true
+        }
+      ],
+      "source": "cslib"
+    },
+    {
+      "n_toolchains": 4,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "pins": [
+        {
+          "git_commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "lean_tag": "v4.31.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreicmwz4reo4c4sx4fk4khei7h6gn2w6x3naqlr7hwrwppdykcdglzi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean",
+          "lean_tag": "v4.30.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreih55xcw4zsouwa3v35kpv6wttmka7tc7bmiz4dnpxw4yslgjjqbpi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "de71a9dfd2f5a343e8895517b7efe857d9f1ce5c",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean",
+          "lean_tag": "v4.29.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreickmxwgca6w2jb6itncpvnmv3owprq2pcwgvmqpnjha5nxdi7ynn4",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "673fa440714eb1949b8b50a28f2a4f52b1837e9b",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean",
+          "lean_tag": "v4.28.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.28.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreihqf46svqzgmesfypzshwq3udqfnipcj677pk7f3a6jxvtxibekb4",
+          "tag_pinned": true
+        }
+      ],
+      "source": "arklib"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "pins": [
+        {
+          "git_commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "lean_tag": "v4.31.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreicmwz4reo4c4sx4fk4khei7h6gn2w6x3naqlr7hwrwppdykcdglzi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean",
+          "lean_tag": "v4.30.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreih55xcw4zsouwa3v35kpv6wttmka7tc7bmiz4dnpxw4yslgjjqbpi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "de71a9dfd2f5a343e8895517b7efe857d9f1ce5c",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean",
+          "lean_tag": "v4.29.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreickmxwgca6w2jb6itncpvnmv3owprq2pcwgvmqpnjha5nxdi7ynn4",
+          "tag_pinned": true
+        }
+      ],
+      "source": "arklib"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "pins": [
+        {
+          "git_commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "lean_tag": "v4.31.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreicmwz4reo4c4sx4fk4khei7h6gn2w6x3naqlr7hwrwppdykcdglzi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean",
+          "lean_tag": "v4.30.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreih55xcw4zsouwa3v35kpv6wttmka7tc7bmiz4dnpxw4yslgjjqbpi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "de71a9dfd2f5a343e8895517b7efe857d9f1ce5c",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean",
+          "lean_tag": "v4.29.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreickmxwgca6w2jb6itncpvnmv3owprq2pcwgvmqpnjha5nxdi7ynn4",
+          "tag_pinned": true
+        }
+      ],
+      "source": "arklib"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "putnam_1964_a4",
+      "pins": [
+        {
+          "git_commit": "1ccd71f89cbbd82ae7d097723ce1722ca7b01c33",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lean",
+          "lean_tag": "v4.25.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreie4ksidrvmat2xj5qi7mnrav6yw6362sj5faw3tacxglec6rs64ii",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "2df2f0150c275ad53cb3c90f7c98ec15a56a1a67",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+          "lean_tag": "v4.26.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreibo7gcfzwnuc3qxf33bkvnwlug6fmmxfh7oyskgdy4vcuzps7u6wi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "a3a10db0e9d66acbebf76c5e6a135066525ac900",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean",
+          "lean_tag": "v4.27.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreigfjq6h7axule7yr3bskexabqjmpfzpsuaby5wfnyvdykpz7aivmq",
+          "tag_pinned": true
+        }
+      ],
+      "source": "putnambench"
+    },
+    {
+      "n_toolchains": 2,
+      "name": "putnam_1964_b2",
+      "pins": [
+        {
+          "git_commit": "1ccd71f89cbbd82ae7d097723ce1722ca7b01c33",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lean",
+          "lean_tag": "v4.25.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreie4ksidrvmat2xj5qi7mnrav6yw6362sj5faw3tacxglec6rs64ii",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "2df2f0150c275ad53cb3c90f7c98ec15a56a1a67",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+          "lean_tag": "v4.26.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreibo7gcfzwnuc3qxf33bkvnwlug6fmmxfh7oyskgdy4vcuzps7u6wi",
+          "tag_pinned": true
+        }
+      ],
+      "source": "putnambench"
+    },
+    {
+      "n_toolchains": 3,
+      "name": "putnam_1995_a3",
+      "pins": [
+        {
+          "git_commit": "1ccd71f89cbbd82ae7d097723ce1722ca7b01c33",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lean",
+          "lean_tag": "v4.25.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.25.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreie4ksidrvmat2xj5qi7mnrav6yw6362sj5faw3tacxglec6rs64ii",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "2df2f0150c275ad53cb3c90f7c98ec15a56a1a67",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+          "lean_tag": "v4.26.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreibo7gcfzwnuc3qxf33bkvnwlug6fmmxfh7oyskgdy4vcuzps7u6wi",
+          "tag_pinned": true
+        },
+        {
+          "git_commit": "a3a10db0e9d66acbebf76c5e6a135066525ac900",
+          "installed": false,
+          "lake_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+          "lean_path": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean",
+          "lean_tag": "v4.27.0",
+          "lock_executable_paths": {
+            "lake": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+            "lean": "/tmp/asref-grok-home-po3odwh3/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean"
+          },
+          "lock_has_primary_executable": false,
+          "lock_id": "bafkreigfjq6h7axule7yr3bskexabqjmpfzpsuaby5wfnyvdykpz7aivmq",
+          "tag_pinned": true
+        }
+      ],
+      "source": "putnambench"
+    }
+  ],
+  "resolver_audit": {
+    "environment_lock_kwargs": [
+      [
+        "lock_id",
+        "itp",
+        "itp_version",
+        "kernel_command_template",
+        "solver_versions",
+        "executable_paths",
+        "os_info",
+        "container_digest",
+        "policy_digest"
+      ]
+    ],
+    "forbidden_attrs": [],
+    "forbidden_calls": [],
+    "ok": true,
+    "uses_executable_paths_kwarg": true,
+    "uses_primary_executable_kwarg": false
+  },
+  "run_lean_process_exported": true,
+  "synthetic_elan": {
+    "did_not_select_v4_32_for_v4_26": true,
+    "elan_home": "/tmp/lra-012-elan-v3qhr33y",
+    "environment_lock_field_names": [
+      "container_digest",
+      "executable_paths",
+      "itp",
+      "itp_version",
+      "kernel_command_template",
+      "lock_id",
+      "os_info",
+      "pinned_at",
+      "policy_digest",
+      "schema_version",
+      "solver_versions"
+    ],
+    "ignored_empty_path": true,
+    "lock_dict_has_primary_executable": false,
+    "lock_executable_paths": {
+      "lake": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+      "lean": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+    },
+    "lock_has_primary_executable_attr": false,
+    "lock_id": "bafkreiei6x3rv4q27ruds4jd2k6w6vn3fvw5m5k2iyqizcjkqiqgchggie",
+    "lock_itp": "lean",
+    "lock_itp_version": "v4.26.0",
+    "lock_kernel_command_template": "{lake} env {lean} --json {source_file}",
+    "missing_v4.25.0_paths": {
+      "elan_home": "/tmp/lra-012-elan-v3qhr33y",
+      "executable_paths": {
+        "lake": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+        "lean": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.25.0/bin/lean"
+      },
+      "git_commit": "",
+      "installed": false,
+      "lake_installed": false,
+      "lake_path": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.25.0/bin/lake",
+      "lean_installed": false,
+      "lean_path": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.25.0/bin/lean",
+      "lean_tag": "v4.25.0",
+      "toolchain_dir": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.25.0",
+      "toolchain_name": "leanprover--lean4---v4.25.0"
+    },
+    "missing_v4.25.0_require_installed_raises": true,
+    "ok": true,
+    "resolved_version_info_tags": [
+      "v4.26.0",
+      "v4.32.0"
+    ],
+    "tag_pinned_v4_26": true,
+    "tag_pinned_v4_32": true,
+    "v4.26.0": {
+      "elan_home": "/tmp/lra-012-elan-v3qhr33y",
+      "executable_paths": {
+        "lake": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "lean": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+      },
+      "git_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+      "installed": true,
+      "lake_installed": true,
+      "lake_path": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+      "lean_installed": true,
+      "lean_path": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+      "lean_tag": "v4.26.0",
+      "toolchain_dir": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.26.0",
+      "toolchain_name": "leanprover--lean4---v4.26.0"
+    },
+    "v4.32.0": {
+      "elan_home": "/tmp/lra-012-elan-v3qhr33y",
+      "executable_paths": {
+        "lake": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+        "lean": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.32.0/bin/lean"
+      },
+      "git_commit": "",
+      "installed": true,
+      "lake_installed": true,
+      "lake_path": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+      "lean_installed": true,
+      "lean_path": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+      "lean_tag": "v4.32.0",
+      "toolchain_dir": "/tmp/lra-012-elan-v3qhr33y/toolchains/leanprover--lean4---v4.32.0",
+      "toolchain_name": "leanprover--lean4---v4.32.0"
+    }
+  },
+  "unique_tags": [
+    "v4.25.0",
+    "v4.26.0",
+    "v4.27.0",
+    "v4.28.0",
+    "v4.29.0",
+    "v4.29.1",
+    "v4.30.0",
+    "v4.31.0",
+    "v4.32.0",
+    "v4.33.0-rc2"
+  ],
+  "unique_tags_match": true,
+  "validation_home": "/tmp/asref-grok-home-po3odwh3",
+  "warmup_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-012-09b44c896a29-attempt-1-1789599540/papers/completion/lean_refactor_arena/data/benchmark_data_warmup.jsonl"
+}
