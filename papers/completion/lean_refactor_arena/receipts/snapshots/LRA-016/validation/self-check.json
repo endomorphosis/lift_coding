@@ -1,0 +1,210 @@
+{
+  "actions": {
+    "healthy_is_generate": true,
+    "unhealthy_free_exec": "exec_owner",
+    "unhealthy_free_skip": "skip_llm",
+    "unhealthy_held": "skip_llm",
+    "unhealthy_held_wait": "wait"
+  },
+  "arena_score": null,
+  "autostart": "0",
+  "child_lock": {
+    "action": "skip_llm",
+    "child_pid": 307,
+    "free_before_held": true,
+    "held": true,
+    "lock_ex_taken_by_client": false,
+    "method": "proc_locks",
+    "ok": true,
+    "pid": 307,
+    "pid_matches_child": true,
+    "released_after_kill": true
+  },
+  "compiled": false,
+  "fail_closed_kwargs": {
+    "allow_cross_provider_fallback": false,
+    "allow_local_fallback": false,
+    "disable_model_retry": true,
+    "model_name": "Leanstral",
+    "provider": "leanstral_local",
+    "temperature": 0.0
+  },
+  "fake_owner_exec": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "-B",
+      "/tmp/lra-016-lock-fdvnxofs/run_leanstral_ephemeral.py",
+      "--bind",
+      "docker0",
+      "--gpu",
+      "0"
+    ],
+    "argv_relative": [
+      "/usr/bin/python3.12",
+      "-B",
+      "/tmp/lra-016-lock-fdvnxofs/run_leanstral_ephemeral.py",
+      "--bind",
+      "docker0",
+      "--gpu",
+      "0"
+    ],
+    "error": "",
+    "ok": true,
+    "recorded_argv": [
+      "/tmp/lra-016-lock-fdvnxofs/run_leanstral_ephemeral.py",
+      "--bind",
+      "docker0",
+      "--gpu",
+      "0"
+    ],
+    "returncode": 0,
+    "started_llama_server": false
+  },
+  "forbidden_imports": [],
+  "forbidden_server_binaries_in_source": false,
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "health": {
+    "alias_ok": false,
+    "alias_url": "http://127.0.0.1:8080/health",
+    "autostart": "0",
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>",
+    "ok": true,
+    "status_code": 200,
+    "url": "http://172.17.0.1:8080/health"
+  },
+  "health_url": "http://172.17.0.1:8080/health",
+  "health_url_exact": true,
+  "healthy_generation": {
+    "autostart_during_generate": "0",
+    "call_kwargs": {
+      "allow_cross_provider_fallback": false,
+      "allow_local_fallback": false,
+      "disable_model_retry": true,
+      "model_name": "Leanstral",
+      "provider": "leanstral_local",
+      "temperature": 0.0
+    },
+    "call_kwargs_match": true,
+    "identity": {
+      "arena_score": null,
+      "fallback_used": false,
+      "requested_model": "Leanstral",
+      "requested_provider": "leanstral_local",
+      "resolved_model": "Leanstral",
+      "resolved_provider": "leanstral_local"
+    },
+    "lock_ex_taken_by_client": false,
+    "skipped": false,
+    "text": "simp"
+  },
+  "imported_names": [
+    "Any",
+    "Callable",
+    "Mapping",
+    "Optional",
+    "Path",
+    "__future__",
+    "annotations",
+    "argparse",
+    "asdict",
+    "ast",
+    "dataclass",
+    "dataclasses",
+    "fcntl",
+    "generate_text",
+    "json",
+    "os",
+    "pathlib",
+    "stat",
+    "subprocess",
+    "sys",
+    "tempfile",
+    "time",
+    "typing"
+  ],
+  "live_lock": {
+    "error": "",
+    "exists": false,
+    "held": false,
+    "lock_ex_taken_by_client": false,
+    "lock_id": "gpu-0",
+    "method": "missing",
+    "path": "/run/user/1000/leanstral-jobs-1000/gpu-0.lock",
+    "pid": null
+  },
+  "live_plan": {
+    "action": "generate",
+    "autostart": "0",
+    "health": {
+      "alias_ok": false,
+      "alias_url": "http://127.0.0.1:8080/health",
+      "autostart": "0",
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>",
+      "ok": true,
+      "status_code": 200,
+      "url": "http://172.17.0.1:8080/health"
+    },
+    "llama_server_started": false,
+    "lock": {
+      "error": "",
+      "exists": false,
+      "held": false,
+      "lock_ex_taken_by_client": false,
+      "lock_id": "gpu-0",
+      "method": "missing",
+      "path": "/run/user/1000/leanstral-jobs-1000/gpu-0.lock",
+      "pid": null
+    },
+    "lock_ex_taken_by_client": false,
+    "owner_exec": {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-016-14191253dbb0-attempt-1-1789600374/scripts/run_leanstral_ephemeral.py",
+        "--bind",
+        "docker0",
+        "--gpu",
+        "0"
+      ],
+      "argv_relative": [
+        "/usr/bin/python3.12",
+        "-B",
+        "scripts/run_leanstral_ephemeral.py",
+        "--bind",
+        "docker0",
+        "--gpu",
+        "0"
+      ],
+      "attempted": false,
+      "error": "",
+      "executed": false,
+      "pid": null,
+      "returncode": null,
+      "started_llama_server": false
+    },
+    "reason": "docker0 /health ok; generate_text as HTTP client without exclusive lock",
+    "skipped": false
+  },
+  "llama_server_started": false,
+  "lock_ex_attributes": [],
+  "lock_ex_taken_by_client": false,
+  "ok": true,
+  "owner_argv_ok": true,
+  "owner_argv_relative": [
+    "/usr/bin/python3.12",
+    "-B",
+    "scripts/run_leanstral_ephemeral.py",
+    "--bind",
+    "docker0",
+    "--gpu",
+    "0"
+  ],
+  "owner_script_exists": false,
+  "skipped_unhealthy": {
+    "arena_score": null,
+    "skipped": true,
+    "text": ""
+  },
+  "uses_lock_ex": false,
+  "wait_recovers": true
+}
