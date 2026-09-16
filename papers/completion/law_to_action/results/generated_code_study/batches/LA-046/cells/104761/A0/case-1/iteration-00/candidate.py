@@ -1,0 +1,1 @@
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\n\\ndef run(payload):\\n    # Parse the payload\\n    data = json.loads(payload)\\n    # Extract the lineage\\n    lineage = data.get('lineage', [])\\n    # Emit the source-relative JSON record\\n    emit_allowed(json.dumps(lineage))\\n\\n\"}"}
