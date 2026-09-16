@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 143,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 851,
+  "prompt_tokens": 851,
+  "raw_sha256": "c90bbecc4a54f5fddb72c1680d0c3d5f30877a816e4b40f5c98af544718cbd09",
+  "response_text": "{\"kind\":\"program\",\"program\":\"# Authenticate to Xbox Network (Xbox Network) in Node.js using @xboxreplay/xboxlive-auth\\n\\nimport { XboxLiveAuth } from '@xboxreplay/xboxlive-auth';\\n\\nconst auth = new XboxLiveAuth();\\n\\n// Exchange authorization code for tokens\\nconst tokens = await auth.exchangeCode(code);\\n\\n// Get XSTS token and user hash\\nconst xstsToken = tokens.xstsToken;\\nconst userHash = tokens.userHash;\\n\\n// Return the authentication result\\nreturn { kind: 'success', tokens: { xstsToken, userHash } } };\"}",
+  "wall_seconds": 14.810554416995728
+}

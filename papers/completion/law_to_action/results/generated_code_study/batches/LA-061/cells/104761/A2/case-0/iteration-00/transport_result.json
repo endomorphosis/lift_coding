@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 321,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 620,
+  "prompt_tokens": 620,
+  "raw_sha256": "b6c636d8ee770c35d545507af9a5c1779bf6bfe3390c914dd05bcda48d26fcac",
+  "response_text": "{\"kind\":\"program\",\"program\":\"# Authenticate to Xbox Network (Xbox Live) in Node.js using @xboxreplay/xboxlive-auth\\n\\nimport { XboxLiveAuth } from '@xboxreplay/xboxlive-auth';\\n\\nconst auth = new XboxLiveAuth();\\n\\n// Authenticate using OAuth 2.0\\nasync function authenticateToXboxNetwork(payload) {\\n  try {\\n    // Get the access token from the payload\\n    const accessToken = payload.access_token;\\n\\n    // Authenticate to Xbox Network\\n    const result = await auth.authenticate(accessToken);\\n\\n    // Return the XSTS token and user hash\\n    return {\\n      xsts_token: result.xsts_token,\\n      user_hash: result.user_hash\\n    };\\n  } catch (error) {\\n    console.error('Authentication failed:', error);\\n    throw error;\\n  }\\n}\\n\\n// Emit the allowed JSON record\\nfunction emit_allowed(payload) {\\n  console.log(JSON.stringify(payload));\\n}\\n\\n// Main function to run the authentication\\nasync function run(payload) {\\n  try {\\n    const authResult = await authenticateToXboxNetwork(payload);\\n    emit_allowed(authResult);\\n  } catch (error) {\\n    console.error('Error:', error);\\n  }\\n}\\n\\n// Start the authentication process\\nrun({});\"} <|tool_call_end|> <|im_end|>",
+  "wall_seconds": 27.658230014989385
+}
