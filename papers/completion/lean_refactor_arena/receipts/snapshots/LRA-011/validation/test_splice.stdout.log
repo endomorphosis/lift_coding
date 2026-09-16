@@ -1,0 +1,52 @@
+test_digest_mismatch_fails_closed (__main__.TestFrozenWarmupJsonl.test_digest_mismatch_fails_closed) ... ok
+test_schema_has_twelve_fields_and_putnam_omits_line_span (__main__.TestFrozenWarmupJsonl.test_schema_has_twelve_fields_and_putnam_omits_line_span) ... ok
+test_sha256_is_frozen_and_file_is_not_rewritten (__main__.TestFrozenWarmupJsonl.test_sha256_is_frozen_and_file_is_not_rewritten) ... ok
+test_canonical_source_equal_to_src_trips_source_copy (__main__.TestLexicalAdmission.test_canonical_source_equal_to_src_trips_source_copy) ... ok
+test_expected_statement_is_not_the_jsonl_prefix_bind (__main__.TestLexicalAdmission.test_expected_statement_is_not_the_jsonl_prefix_bind) ... ok
+test_forbidden_theorem_lemma_import_open_are_rejected (__main__.TestLexicalAdmission.test_forbidden_theorem_lemma_import_open_are_rejected) ... ok
+test_original_src_is_not_native_source (__main__.TestLexicalAdmission.test_original_src_is_not_native_source) ... ok
+test_putnam_header_stays_out_of_proof_text (__main__.TestLexicalAdmission.test_putnam_header_stays_out_of_proof_text) ... ok
+test_sorry_template_is_statement_plus_by_sorry_on_all_records (__main__.TestLexicalAdmission.test_sorry_template_is_statement_plus_by_sorry_on_all_records) ... ok
+test_tactic_only_simp_on_all_fifteen_uses_the_sorry_template (__main__.TestLexicalAdmission.test_tactic_only_simp_on_all_fifteen_uses_the_sorry_template) ... ok
+test_arklib_fold_keeps_twenty_seven_assigns_in_the_statement (__main__.TestNamedAssignStaysInStatement.test_arklib_fold_keeps_twenty_seven_assigns_in_the_statement) ... ok
+test_ccs_first_assign_is_inside_the_117_byte_statement (__main__.TestNamedAssignStaysInStatement.test_ccs_first_assign_is_inside_the_117_byte_statement) ... ok
+test_five_statements_contain_named_assign (__main__.TestNamedAssignStaysInStatement.test_five_statements_contain_named_assign) ... ok
+test_naive_first_assign_scan_is_not_the_body (__main__.TestNamedAssignStaysInStatement.test_naive_first_assign_scan_is_not_the_body) ... ok
+test_splice_module_has_no_bare_assign_needle (__main__.TestNeverScanFirstAssign.test_splice_module_has_no_bare_assign_needle) ... ok
+test_split_statement_body_source_uses_startswith_only (__main__.TestNeverScanFirstAssign.test_split_statement_body_source_uses_startswith_only) ... ok
+test_body_is_the_suffix_after_the_statement (__main__.TestPrefixBindAllFifteen.test_body_is_the_suffix_after_the_statement) ... ok
+test_covers_exactly_fifteen_records (__main__.TestPrefixBindAllFifteen.test_covers_exactly_fifteen_records) ... ok
+test_every_record_src_startswith_statement (__main__.TestPrefixBindAllFifteen.test_every_record_src_startswith_statement) ... ok
+test_record_Binius_BinaryBasefold_fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (__main__.TestPrefixBindAllFifteen.test_record_Binius_BinaryBasefold_fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius) ... ok
+test_record_Binius_BinaryBasefold_fold_advances_evaluation_poly (__main__.TestPrefixBindAllFifteen.test_record_Binius_BinaryBasefold_fold_advances_evaluation_poly) ... ok
+test_record_CallElimCorrect_extractedOldExprInVars (__main__.TestPrefixBindAllFifteen.test_record_CallElimCorrect_extractedOldExprInVars) ... ok
+test_record_CallElimCorrect_substOldPostSubset (__main__.TestPrefixBindAllFifteen.test_record_CallElimCorrect_substOldPostSubset) ... ok
+test_record_Core_InitsUpdatesComm (__main__.TestPrefixBindAllFifteen.test_record_Core_InitsUpdatesComm) ... ok
+test_record_Cslib_CCS_bisimilarity_congr_choice (__main__.TestPrefixBindAllFifteen.test_record_Cslib_CCS_bisimilarity_congr_choice) ... ok
+test_record_Cslib_LambdaCalculus_LocallyNameless_Fsub_Typing_progress (__main__.TestPrefixBindAllFifteen.test_record_Cslib_LambdaCalculus_LocallyNameless_Fsub_Typing_progress) ... ok
+test_record_Cslib_SKI_parallelReduction_diamond (__main__.TestPrefixBindAllFifteen.test_record_Cslib_SKI_parallelReduction_diamond) ... ok
+test_record_Electromagnetism_ElectromagneticPotential_time_deriv_time_deriv_electricField_of_isExtrema (__main__.TestPrefixBindAllFifteen.test_record_Electromagnetism_ElectromagneticPotential_time_deriv_time_deriv_electricField_of_isExtrema) ... ok
+test_record_FieldSpecification_WickAlgebra_ι_timeOrderF_superCommuteF_eq_time (__main__.TestPrefixBindAllFifteen.test_record_FieldSpecification_WickAlgebra_ι_timeOrderF_superCommuteF_eq_time) ... ok
+test_record_fundamental_theorem_of_variational_calculus_ (__main__.TestPrefixBindAllFifteen.test_record_fundamental_theorem_of_variational_calculus_) ... ok
+test_record_interleaved_affine_gaps_imply_tensor_gaps (__main__.TestPrefixBindAllFifteen.test_record_interleaved_affine_gaps_imply_tensor_gaps) ... ok
+test_record_putnam_1964_a4 (__main__.TestPrefixBindAllFifteen.test_record_putnam_1964_a4) ... ok
+test_record_putnam_1964_b2 (__main__.TestPrefixBindAllFifteen.test_record_putnam_1964_b2) ... ok
+test_record_putnam_1995_a3 (__main__.TestPrefixBindAllFifteen.test_record_putnam_1995_a3) ... ok
+test_split_raises_when_prefix_bind_fails (__main__.TestPrefixBindAllFifteen.test_split_raises_when_prefix_bind_fails) ... ok
+test_self_check_covers_all_fifteen_and_keeps_digest (__main__.TestSelfCheck.test_self_check_covers_all_fifteen_and_keeps_digest) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 0.193s
+
+OK
+{
+  "arena_score": null,
+  "compiled": false,
+  "errors": 0,
+  "failures": 0,
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "n_records": 15,
+  "ok": true,
+  "skipped": 0,
+  "testsRun": 36
+}
