@@ -95,6 +95,12 @@ class CampaignTests(unittest.TestCase):
         self.assertFalse(set(foreign) & set(result))
         self.assertEqual(result["PAPER_TEST_UNRELATED"], "preserved")
         self.assertEqual(result["PYTHONPATH"], os.pathsep.join(str(ROOT / p) for p in CAM.SUBMODULES))
+        with patch.dict(os.environ, {"PYTHONPATH": "/lane/external/ipfs_accelerate"}, clear=True):
+            roots = [str(path) for path in CAM.import_roots()]
+        self.assertEqual(roots[0], "/lane/external/ipfs_accelerate")
+        self.assertIn(str(ROOT / "external/ipfs_accelerate"), roots)
+        self.assertLess(roots.index("/lane/external/ipfs_accelerate"),
+                        roots.index(str(ROOT / "external/ipfs_accelerate")))
         # Resolve through the actual native selector: six strings alone must
         # produce the supported quota-only high route, not an ambient default.
         with patch.object(sys, "path", [str(ROOT / p) for p in CAM.SUBMODULES] + sys.path), patch.dict(os.environ, result, clear=True):
@@ -145,12 +151,37 @@ class CampaignTests(unittest.TestCase):
                 self.assertEqual(CAM.cleanup_children([("owner", child, CAM.process_record(child.pid))]), [])
                 self.assertIsNotNone(child.poll())
                 self.assertIsNone(foreign.poll())
+                fallback = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+                try:
+                    with patch.object(CAM, "native_imports", side_effect=SyntaxError("keyword argument repeated")):
+                        self.assertEqual(CAM.cleanup_children(
+                            [("owner", fallback, CAM.process_record(fallback.pid))]), [])
+                    self.assertIsNotNone(fallback.poll())
+                finally:
+                    if fallback.poll() is None:
+                        fallback.terminate()
+                        fallback.wait(timeout=10)
                 self.assertEqual(ready_path.read_bytes(), original)
             finally:
                 for process in (child, foreign):
                     if process.poll() is None:
                         process.terminate()
                     process.wait(timeout=10)
+
+    def test_missing_accelerate_runtime_starts_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp) / "state"
+            state.mkdir()
+            repo = CAM.repo_for("law_to_action", Path(tmp))
+            repo.mkdir()
+            def git(argv, **_kwargs):
+                if argv[1] == "branch":
+                    return "agent/vericodegen-2026-law_to_action\n"
+                return "" if argv[1] == "status" else "tracked\n"
+            with patch.object(CAM, "PAPERS", ("law_to_action",)), patch.object(CAM.subprocess, "check_output", side_effect=git), patch.object(CAM, "launch") as launch:
+                with self.assertRaisesRegex(RuntimeError, "missing accelerate runtime"):
+                    CAM.serve(state, Path(tmp))
+                launch.assert_not_called()
 
     def test_dirty_preflight_starts_nothing_and_duplicate_lock_preserves_report(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -177,10 +208,14 @@ class CampaignTests(unittest.TestCase):
             state, paper = root / "state", "law_to_action"
             lane = state / paper
             lane.mkdir(parents=True)
+            repo = CAM.repo_for(paper, root)
             for profile_path in (CAM.GROK_TEX_PROFILE, CAM.RESEARCH_PROFILE):
-                profile = CAM.repo_for(paper, root) / profile_path
+                profile = repo / profile_path
                 profile.parent.mkdir(parents=True, exist_ok=True)
                 profile.write_bytes((ROOT / profile_path).read_bytes())
+            marker = repo / CAM.ACCELERATE_RUNTIME
+            marker.parent.mkdir(parents=True, exist_ok=True)
+            marker.write_text("# test-only accelerate runtime marker\n")
             (lane / "control.duckdb").touch()
             (lane / "control.duckdb.bootstrap.json").write_text("{}")
             children, timers = [], []

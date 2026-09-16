@@ -25,6 +25,8 @@ COMPETITION_PAPERS = ("lean_refactor_arena",)
 PAPERS = RESEARCH_PAPERS
 ALL_PAPERS = RESEARCH_PAPERS + COMPETITION_PAPERS
 SUBMODULES = ("external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit")
+ACCELERATE_RUNTIME = Path(
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py")
 PYTHON = Path.home() / "lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python"
 GROK_TEX_PROFILE = Path("papers/completion/toolchains/grok_tex_profile.json")
 RESEARCH_PROFILE = Path("papers/completion/toolchains/research_profile.json")
@@ -155,6 +157,46 @@ def repo_for(paper, worktree_parent):
     return worktree_parent / f"vericodegen-{paper}-2026"
 
 
+def require_lane_runtime(repo, paper):
+    """Fail closed when a lane worktree has empty gitlinks instead of accelerate."""
+    marker = repo / ACCELERATE_RUNTIME
+    if not marker.is_file():
+        raise RuntimeError(
+            f"lane worktree missing accelerate runtime for {paper}: {marker}; "
+            "run git submodule update --init -- external/ipfs_accelerate")
+
+
+def import_roots(repo=None):
+    """Prefer PYTHONPATH / lane worktree copies over the campaign script tree.
+
+    The lift_coding checkout's accelerate tree can be a different, unparseable
+    revision. Owners and supervisors must import the lane pin.
+    """
+    roots = []
+    seen = set()
+    for part in os.environ.get("PYTHONPATH", "").split(os.pathsep):
+        if part:
+            path = Path(part)
+            key = str(path)
+            if key not in seen:
+                roots.append(path)
+                seen.add(key)
+    if repo is not None:
+        for relative in SUBMODULES:
+            path = repo / relative
+            key = str(path)
+            if key not in seen:
+                roots.append(path)
+                seen.add(key)
+    for relative in SUBMODULES:
+        path = ROOT / relative
+        key = str(path)
+        if key not in seen:
+            roots.append(path)
+            seen.add(key)
+    return roots
+
+
 def cfg(repo, paper):
     return read(repo / "papers/completion" / paper / "supervisor.json")
 
@@ -211,9 +253,9 @@ def native_argv(repo, paper, lane, ready):
     return argv
 
 
-def native_imports():
-    for p in reversed(SUBMODULES):
-        sys.path.insert(0, str(ROOT / p))
+def native_imports(repo=None):
+    for path in reversed(import_roots(repo)):
+        sys.path.insert(0, str(path))
     os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
     os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
     from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import open_quack_transport_connection
@@ -310,12 +352,41 @@ def launch(argv, cwd, env, log):
     return process, {**process_record(process.pid), "log": str(log), "argv": argv}
 
 
-def cleanup_children(children):
+def _signal_pid(pid, sig):
+    try:
+        os.killpg(pid, sig)
+    except (ProcessLookupError, PermissionError, OSError):
+        os.kill(pid, sig)
+
+
+def _terminate_pid_tree_fallback(pid, grace_seconds=3.0, freeze_first=False, require_gone=True):
+    del freeze_first, require_gone
+    try:
+        _signal_pid(pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    deadline = time.monotonic() + max(0.0, float(grace_seconds))
+    while time.monotonic() < deadline:
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return
+        time.sleep(0.05)
+    try:
+        _signal_pid(pid, signal.SIGKILL)
+    except ProcessLookupError:
+        return
+
+
+def cleanup_children(children, repo=None):
     failures = []
     if not children:
         return failures
-    native_imports()
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import terminate_pid_tree
+    try:
+        native_imports(repo)
+        from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import terminate_pid_tree
+    except (ImportError, ModuleNotFoundError, SyntaxError):
+        terminate_pid_tree = _terminate_pid_tree_fallback
     for kind, process, record in reversed(children):
         try:
             if process.poll() is None and alive(record):
@@ -366,6 +437,7 @@ def serve(state, worktree_parent, papers=None):
                          "scripts/paper_ducklake_projection.py", "scripts/paper_worker_observation.py"):
                 if not subprocess.check_output(["git", "ls-files", "--", path], cwd=repo, text=True).strip():
                     raise RuntimeError(f"uncommitted campaign source {path}")
+            require_lane_runtime(repo, paper)
         for paper in papers:
             if stopping:
                 raise RuntimeError("campaign startup was stopped")
@@ -435,7 +507,8 @@ def serve(state, worktree_parent, papers=None):
     finally:
         # Only exact children are stopped; no fleet-wide process matching.
         try:
-            report["cleanup_errors"] = cleanup_children(children)
+            report["cleanup_errors"] = cleanup_children(
+                children, repo=repo_for(papers[0], worktree_parent) if papers else None)
             report["stopped_at"] = now()
             write(state / "campaign.json", report)
         finally:
@@ -463,7 +536,10 @@ def main():
             raise RuntimeError("campaign controller is already running")
         argv = [str(PYTHON), str(Path(__file__).resolve()), "serve", "--state-root", str(state),
                 "--worktree-parent", str(args.worktree_parent.resolve()), "--papers", *selected]
-        process, record = launch(argv, ROOT, environment(ROOT), state / "campaign.log")
+        env_repo = repo_for(selected[0], args.worktree_parent.resolve())
+        for paper in selected:
+            require_lane_runtime(repo_for(paper, args.worktree_parent.resolve()), paper)
+        process, record = launch(argv, ROOT, environment(env_repo), state / "campaign.log")
         print(json.dumps({"controller": record, "status": "starting", "state_root": str(state)}, indent=2))
     elif args.action == "stop":
         report = read(state / "campaign.json")
