@@ -1,0 +1,106 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-012",
+  "status": "complete",
+  "completed_at": "2026-09-16T23:11:00.164645+00:00",
+  "completion_mode": "tag-pinned elan lean/lake resolver and EnvironmentLockRecord executable_paths; not a lake compile and not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/outputs/lean_toolchain.py": "87357140de9026a8c8b088307a0bbaa0c1face65fc6b80910305c10b902e06b8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/git-head.txt": "950d20b081b027b89260dfe15ec2de4f734a8c7f1f434303f3f53c3766c3b741",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/ipfs_datasets-head.txt": "193ba47b391c802cb3d6c76e090aae07f6cd530e2132c2170846b0a26f3e0d2c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.json": "f9ac1f6c2b0dfdb5113675dea021baaf5a7ddc09a1b3dd5ec84d9a8adf79b9ef",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.meta.json": "dada9f3f0c58cfb238538b85a96be1d9aacb4bb2d53bbc26aad06652fdb1f11d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.stdout.log": "f9ac1f6c2b0dfdb5113675dea021baaf5a7ddc09a1b3dd5ec84d9a8adf79b9ef"
+  },
+  "outputs": {
+    "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/frontends/lean_toolchain.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/outputs/lean_toolchain.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Resolver returns tag-pinned elan lean and lake paths from JSONL version_info.",
+      "status": "met",
+      "explanation": "LeanToolchainResolver.resolve_version_info parsed every warm-up JSONL version_info entry (15 records, 36 pins, 10 unique tags) under frozen digest 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804. Each pin is {ELAN_HOME}/toolchains/leanprover--lean4---<tag>/bin/{lean,lake}. Self-check reported all_pins_tag_pinned=true and unique_tags_match=true for v4.25.0 through v4.33.0-rc2. AST audit found no shutil.which, find_executable, glob, or newest-mtime selection. A private fake elan home resolved v4.26.0 and v4.32.0 to those exact tag directories with PATH emptied; a missing v4.25.0 tag raised LeanToolchainMissing instead of falling back. Default HOME has no installed elan binaries (capability gap); paths remain tag-pinned and this task did not treat PATH lean as usable.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/outputs/lean_toolchain.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/jsonl-sha256.txt"
+      ]
+    },
+    {
+      "criterion": "EnvironmentLockRecord is populated via executable_paths, not primary_executable.",
+      "status": "met",
+      "explanation": "environment_lock constructs EnvironmentLockRecord(executable_paths={'lean': tag_lean, 'lake': tag_lake}) and never calls build_environment_lock or passes primary_executable. dataclasses.fields(EnvironmentLockRecord) has executable_paths and no primary_executable; lock.to_dict() likewise omits that field. Self-check set environment_lock_has_primary_executable=false, any_lock_used_primary_executable=false, and the synthetic v4.26.0 lock recorded lock_executable_paths for lean and lake only. Kernel command template is '{lake} env {lean} --json {source_file}'.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/outputs/lean_toolchain.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.stdout.log"
+      ]
+    },
+    {
+      "criterion": "LeanFrontend PATH lean --json behavior is unchanged.",
+      "status": "met",
+      "explanation": "lean.py was not edited. AST of LeanFrontend.snapshot_goal still calls run_bounded_process with --json and does not call run_lean_process or lake. capability() still uses find_executable on PATH. lean.py does not import lean_toolchain. Self-check lean_frontend.unchanged_path_lean_json=true. Compile workers are directed to run_lean_process on the tag-pinned paths; this task does not make snapshot_goal lake-aware.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/outputs/lean_toolchain.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/frontends/lean_toolchain.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-012/outputs/lean_toolchain.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "840b2e6bb7764b62af23b0960dbec18ce6d3c25e",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "n_version_pins": 36,
+    "unique_lean_tags": [
+      "v4.25.0",
+      "v4.26.0",
+      "v4.27.0",
+      "v4.28.0",
+      "v4.29.0",
+      "v4.29.1",
+      "v4.30.0",
+      "v4.31.0",
+      "v4.32.0",
+      "v4.33.0-rc2"
+    ],
+    "lean_toolchain_py_sha256": "87357140de9026a8c8b088307a0bbaa0c1face65fc6b80910305c10b902e06b8",
+    "elan_toolchain_layout": "{ELAN_HOME}/toolchains/leanprover--lean4---<tag>/bin/{lean,lake}",
+    "kernel_command_template": "{lake} env {lean} --json {source_file}",
+    "protocol": "LRA/v1",
+    "model_or_solver_experiment": "none; cpu-medium tag-pinned elan resolver only, no live Leanstral completion, no lake compile, no Arena scores"
+  },
+  "limitations": [
+    "No elan toolchains are installed under the resolver elan home (Path.home()/.elan or ELAN_HOME). All 10 warm-up tags resolve to tag-pinned paths with installed=false. That is a recorded capability gap, not PATH lean usability and not a lake compile.",
+    "Authoritative validation uses a sealed PATH (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin) and a fresh HOME named ipfs-accelerate-validation-home-*; operator ~/.elan is unavailable there as well.",
+    "Synthetic elan-home fixtures prove tag pinning and fail-closed missing-tag behavior without executing Lean or lake.",
+    "/tmp is noexec in this environment; installed detection uses execute-mode bits, not os.access(X_OK).",
+    "LeanFrontend.snapshot_goal was not modified and is still PATH lean --json via run_bounded_process. A lake-aware frontend is out of scope.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "This task did not call Leanstral, did not LOCK_EX, did not start llama-server, and did not bake oleans."
+  ]
+}
