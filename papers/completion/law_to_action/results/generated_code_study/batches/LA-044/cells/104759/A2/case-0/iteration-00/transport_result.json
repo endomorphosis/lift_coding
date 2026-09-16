@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 422,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 599,
+  "prompt_tokens": 599,
+  "raw_sha256": "8e815d1f5be89c1ee60073184f63b53236ca288cd20e58ec033ec8645ff52d78",
+  "response_text": "```json\n{\n  \"allowed_handlers\": [\"emit_allowed\"],\n  \"handlers\": [\n    {\n      \"kind\": \"emit_allowed\",\n      \"locator\": {\n        \"primary_source_id\": \"011371b7b71dc549fa00170a9bdca593ab7f9e5084b973df85506c5592a8cc13\",\n        \"repository\": \"github.com/dev-sec/apache-baseline\",\n        \"skill_id\": \"02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8\",\n        \"source_url\": \"https://github.com/dev-sec/apache-b\n```\n\n<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"allowed_handlers\": [\"emit_allowed\"],\n  \"handlers\": [\n    {\n      \"kind\": \"emit_allowed\",\n      \"locator\": {\n        \"primary_source_id\": \"011371b7b71dc549fa00170a9bdca593ab7f9e5084b973df85506c5592a8cc13\",\n        \"repository\": \"github.com/dev-sec/apache-baseline\",\n        \"skill_id\": \"02f39003180b127f68db3152c95cad95d330c0c1d79585af7c9929c73c4e89e8\",\n        \"source_url\": \"https://github.com/dev-sec/apache-baseline\"\n      }\n    }\n  ]\n}\n```",
+  "wall_seconds": 37.231706324004335
+}

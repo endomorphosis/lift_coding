@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 65,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 472,
+  "prompt_tokens": 472,
+  "raw_sha256": "edfbd82ec94f1dfd16229d565268a91d6657e6ad8f46a66f8aa342d81fdee3e9",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\ndef run(payload):\\\\n    data = json.loads(payload)\\\\n    lineage = data.get('lineage', [])\\\\n    emit_allowed(json.dumps(lineage))\\\\n\\\\n\\\"}\"}",
+  "wall_seconds": 5.35475349900662
+}

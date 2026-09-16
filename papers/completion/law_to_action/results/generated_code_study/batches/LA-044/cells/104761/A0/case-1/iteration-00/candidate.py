@@ -1,0 +1,1 @@
+{"type": "json_object", "text": "{\"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_ready(payload)\"}"}
