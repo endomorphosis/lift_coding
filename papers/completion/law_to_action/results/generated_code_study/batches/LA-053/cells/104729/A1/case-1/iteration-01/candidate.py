@@ -1,0 +1,1 @@
+{"type":"json_object","payload":{"program":"```python\nimport json\n\ndef run(payload):\n    # Emit the source-relative JSON record through emit_allowed\n    emit_allowed(payload)\n```"} <|im_end|>

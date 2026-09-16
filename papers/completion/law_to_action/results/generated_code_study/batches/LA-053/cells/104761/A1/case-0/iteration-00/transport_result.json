@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 52,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 254,
+  "prompt_tokens": 254,
+  "raw_sha256": "fcf5ad1ea72d41a177ba6aa9344b7b2f1abea426d1dd8ebd7e7525bf241b6429",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    if 'source' in payload:\\\\n        return emit_allowed(payload)\\\\n    return emit_allowed({'message': 'No source provided'})\\\"}\"}",
+  "wall_seconds": 3.1441916579933604
+}
