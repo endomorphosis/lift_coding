@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 252,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 254,
+  "prompt_tokens": 254,
+  "raw_sha256": "5259baeaf2d9dcf2b25ec386790755289e65a8bcd11ef7bb10529c8bd0ff0b1b",
+  "response_text": "{\"type\":\"json_object\",\"payload\":{\"program\":\"```python\\nimport json\\n\\ndef run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n```\"}<|im_end|>\n<|im_impersonated|>assistant\n{\"type\":\"json_object\",\"payload\":{\"program\":\"```python\\nimport json\\n\\ndef run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n```}}<|im_end|>\n<|im_start|>assistant\n{\"type\":\"json_object\",\"payload\":{\"program\":\"```python\\nimport json\\n\\ndef run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n```<|tool_call_end|> <|tool_call_begin|>assistant<|tool_call_arguments|>{\"type\":\"json_object\",\"payload\":{\"program\":\"```python\\nimport json\\n\\ndef run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n```}}<|tool_call_end|>",
+  "wall_seconds": 21.411845918992185
+}
