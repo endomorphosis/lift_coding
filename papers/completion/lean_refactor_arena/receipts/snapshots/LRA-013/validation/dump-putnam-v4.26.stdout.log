@@ -1,0 +1,15 @@
+{
+  "arena_score": null,
+  "files": {
+    "Putnam.lean": "import Putnam.Candidate\n",
+    "Putnam/Candidate.lean": "/-\n  LRA Putnam candidate module.\n\n  The compile worker overwrites this file with header + statement +\n  tactic block via splice.lake_candidate_source. This is a module in\n  the per-tag Mathlib+Aesop lake project, not Tmp.lean, and not\n  `lake env lean Tmp.lean` without a lakefile.\n-/\n\ntheorem lra_putnam_candidate_placeholder : True := by\n  trivial\n",
+    "lakefile.lean": "import Lake\nopen Lake DSL\n\npackage \u00abputnam_lake\u00bb where\n  moreLeanArgs := #[\"-DmaxHeartbeats=400000\"]\n  moreServerArgs := #[\"-DmaxHeartbeats=400000\"]\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4.git\" @ \"v4.26.0\"\n\nrequire aesop from git\n  \"https://github.com/leanprover-community/aesop.git\" @ \"v4.26.0\"\n\n@[default_target]\nlean_lib \u00abPutnam\u00bb where\n  globs := #[.submodules `Putnam]\n",
+    "lean-toolchain": "leanprover/lean4:v4.26.0\n",
+    "pins.json": "{\n  \"aesop_git\": \"https://github.com/leanprover-community/aesop.git\",\n  \"aesop_rev\": \"v4.26.0\",\n  \"candidate_relpath\": \"Putnam/Candidate.lean\",\n  \"jsonl_version_pin\": \"2df2f0150c275ad53cb3c90f7c98ec15a56a1a67\",\n  \"lean_tag\": \"v4.26.0\",\n  \"lib\": \"Putnam\",\n  \"mathlib_git\": \"https://github.com/leanprover-community/mathlib4.git\",\n  \"mathlib_rev\": \"v4.26.0\",\n  \"module\": \"Putnam.Candidate\",\n  \"package\": \"putnam_lake\",\n  \"putnambench_url\": null,\n  \"tmp_lean\": false\n}\n"
+  },
+  "jsonl_version_pin": "2df2f0150c275ad53cb3c90f7c98ec15a56a1a67",
+  "lean_tag": "v4.26.0",
+  "module": "Putnam.Candidate",
+  "not_tmp_lean": true,
+  "putnambench_url": null
+}
