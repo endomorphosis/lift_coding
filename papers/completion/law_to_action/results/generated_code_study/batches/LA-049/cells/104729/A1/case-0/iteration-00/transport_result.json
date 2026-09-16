@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 152,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 252,
+  "prompt_tokens": 252,
+  "raw_sha256": "60854e7ed7cfe39e11f55a4790ea85be863e6ba958e41d032030be8e82608905",
+  "response_text": "{\"type\":\"json_object\",\"payload\":\"{\\\"event\\\":\\\"source_allowed\\\",\\\"source\\\":\\\"77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700\\\",\\\"lineage\\\":{\\\"source\\\":\\\"77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700\\\",\\\"transforms\\\":[]}}\"}<|im_end|>",
+  "wall_seconds": 10.327108220997616
+}

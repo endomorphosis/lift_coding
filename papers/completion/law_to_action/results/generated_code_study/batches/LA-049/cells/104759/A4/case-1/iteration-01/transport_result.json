@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 197,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 654,
+  "prompt_tokens": 654,
+  "raw_sha256": "4df84f2cab050ee8dd8b0f83eb5b7950b5617a91fa67498fa67dd919dacc1d3c",
+  "response_text": "{\n  \"program\": \"function run(payload) {\\n  emit_allowed(payload)\\n}\"\n} <|im_end|><|im_end|>\n<|im_start|>assistant\n{\n  \"program\": \"function run(payload) {\\n  emit_allowed(payload)\\n}\"\n} <|im_end|><|im_end|>\n<|im_start|>assistant\n{\n  \"program\": \"function run(payload) {\\n  emit_allowed(payload)\\n}\"\n} <|im_end|><|im_end|>\n<|im_start|>assistant\n{\n  \"program\": \"function run(payload) {\\n  emit_allowed(payload)\\n}\"\n} <|im_end|<|tool_call_endpoint|>assistant<|tool_call_endpoint|>assistant<|tool_call_endpoint|>assistant<|tool_call_endpoint|>assistant<|tool_call_end|>",
+  "wall_seconds": 17.101950616997783
+}

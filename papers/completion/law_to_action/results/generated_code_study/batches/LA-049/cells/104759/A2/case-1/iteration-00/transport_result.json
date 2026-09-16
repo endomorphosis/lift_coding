@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 228,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "f3b88b4f9ed1fee0fbdaf39b343f13dacd5aaaac1b3f97634665cce8ffc35a21",
+  "response_text": "```json\n{\n  \"program\": \"import { Injectable } from '@angular/core';\\nimport { HttpClient } from '@angular/common/http';\\nimport { Observable } from 'rxjs';\\nimport { map } from 'rxjs/operators';\\n\\n@Injectable()\\nexport class AngularServerSideConfigurationService {\\n  private readonly configUrl = 'assets/config.json';\\n\\n  constructor(private http: HttpClient) {}\\n\\n  getConfig(): Observable<any> {\\n    return this.http.get<any>(this.configUrl)\\n      .pipe(\\n        map(config => {\\n          // Extract environment variables used in TypeScript files\\n          const usedEnvVars = config.environmentVariables || [];\\n          \\n          // Emit the configuration through the allowed handler\\n          emit_allowed({\\n            environmentVariables: usedEnvVars,\\n            source: 'angular-server-side-configuration',\\n            kind: 'build-time-configuration'\\n          });\\n        })\\n      );\\n  }\\n}\"\n}\n```<|im_end|>",
+  "wall_seconds": 21.08740334599861
+}

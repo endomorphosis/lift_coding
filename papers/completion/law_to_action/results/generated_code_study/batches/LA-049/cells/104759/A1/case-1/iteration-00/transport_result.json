@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 166,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 252,
+  "prompt_tokens": 252,
+  "raw_sha256": "681e816e526e7a13d7352e6fff36206516576c85b49744d503ca716d44ab5391",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    emit_allowed(payload)\\\"}\",\"thinking\":\"{\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"The user wants me to emit a JSON object with a program string using the emit_allowed handler. The program should be a Python function called run that takes a payload parameter and calls emit_allowed with that payload.\\\\n\\\\nI need to return exactly one JSON object with the program string. The supported Python profile is one function run(payload) containing one to four direct calls emit_allowed(payload) or emit_undeclared(payload).\\\\n\\\\nThe task requires actual handler effects, not a report of success.\\\\n\\\\nSo I should emit the program that calls emit_allowed(payload).\\\"}\",\"closed\":true}",
+  "wall_seconds": 14.50361395800428
+}

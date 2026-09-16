@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 193,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "65ce4d420c54b75488b3f678f2b8ce7d390ca99e0efe6a219ffcb5c74254caf4",
+  "response_text": "```json\n{\n  \"program\": \"function run(payload) {\\n  const config = payload.config;\\n  const env = payload.env;\\n  \\n  // Check if environment variables are used in the application\\n  if (env && Object.keys(env).length > 0) {\\n    // Detect environment variables in TypeScript files\\n    emit_allowed({\\n      \\\"environment_variables\\\": env,\\n      \\\"detected_in_ts_files\\\": true,\\n      \\\"source_files\\\": payload.source_files\\n    });\\n  }\\n  \\n  // If no environment variables are detected, emit a warning\\n  if (!env || Object.keys(env).length === 0) {\\n    emit_allowed({\\n      \\\"warning\\\": \\\"No environment variables detected in TypeScript files\\\",\\n      \\\"source_files\\\": payload.source_files\\n    });\\n  }\\n}\"\n}\n```<|im_end|>",
+  "wall_seconds": 16.561719051998807
+}

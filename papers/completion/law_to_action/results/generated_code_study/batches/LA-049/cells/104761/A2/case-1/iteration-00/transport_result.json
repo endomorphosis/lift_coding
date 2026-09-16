@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 290,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "68b930366b8b56fb16107a843638eac71482d9c47e336dccfc96793a29ef775d",
+  "response_text": "```json\n{\n  \"program\": \"async function run(payload) {\\n  const config = payload.config;\\n  const env = config.env;\\n  \\n  // Detect environment variables used in TypeScript files\\n  const tsFiles = payload.ts_files || [];\\n  const detectedEnvVars = [];\\n  \\n  for (const file of tsFiles) {\\n    const filePath = file.path;\\n    const fileContent = file.content;\\n    \\n    // Extract environment variable names from TypeScript files\\n    const envVarMatches = fileContent.match(/process\\\\.env\\\\.\\\\w+/g) || [];\\n    for (const match of envVarMatches) {\\n      const varName = match.split('.').pop();\\n      if (!detectedEnvVars.includes(varName)) {\\n        detectedEnvVars.push(varName);\\n      }\\n    }\\n  }\\n  \\n  // Write detected environment variables to ngssc.json file\\n  if (detectedEnvVars.length > 0) {\\n    const jsonContent = JSON.stringify({ environmentVariables: detectedEnvVars }, null, 2);\\n    await emit_allowed({\\n      file: {\\n        path: 'ngssc.json',\\n        content: jsonContent\\n      }\\n    });\\n  }\\n}\"\n}\n```",
+  "wall_seconds": 23.260001898001065
+}

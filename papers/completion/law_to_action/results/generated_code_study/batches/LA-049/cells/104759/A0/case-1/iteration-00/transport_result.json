@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 89,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "57990e49fbaa6a385725076315ef28d80945b07bdd18eefa8e60b9e957c6be47",
+  "response_text": "<|im_start|>tool_calls\n[{\"type\": \"function\", \"function\": {\"name\": \"emit_allowed\", \"arguments\": {\"payload\": {\"type\": \"text\", \"text\": \"{\\\"event\\\": \\\"allowed\\\", \\\"program\\\": \\\"def run(payload):\\\\n    emit_allowed(payload)\\\"}}, \"mode\": \"text\"}}] <|tool_call_end|> <|im_end|>",
+  "wall_seconds": 8.17930735500704
+}

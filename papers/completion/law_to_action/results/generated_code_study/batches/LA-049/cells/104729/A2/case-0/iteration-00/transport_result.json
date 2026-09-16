@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 372,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "4b7c06d079353997dd165c7eca9b1ea9132060191a336ab8c74a2ab99ebe8e4c",
+  "response_text": "```json\n{\n  \"program\": \"function run(payload) {\\n  const ts = payload.ts;\\n  const config = payload.config;\\n  \\n  // Check if ts file exists\\n  if (!ts) {\\n    emit_allowed(payload);\\n    return;\\n  }\\n  \\n  // Check if config file exists\\n  if (!config) {\\n    emit_allowed(payload);\\n    return;\\n  }\\n  \\n  // Check if ts contains environment variable detection\\n  if (!ts.includes('environment')) {\\n    emit_allowed(payload);\\n    return;\\n  }\\n  \\n  // Check if config contains sibling final label\\n  if (!config.includes('final')) {\\n    emit_allowed(payload);\\n    return;\\n  }\\n  \\n  // If all checks pass, emit the source-relative JSON record\\n  emit_allowed({\\n    ts: ts,\\n    config: config,\\n    source: 'CVE-2023-28444',\\n    kind: 'permitted_public_source',\\n    locator: {\\n      cve_id: 'CVE-2023-28444',\\n      cwe_id: 'CWE-200',\\n      fix_commit: 'd701f51260637a84ede278e248934e0437a7ff86',\\n      language: 'TypeScript',\\n      repository: 'github.com/kyubisation/angular-server-side-configuration'\\n    }\\n  });\\n}\"\n}\n```<|im_end|>",
+  "wall_seconds": 32.26381850200414
+}
