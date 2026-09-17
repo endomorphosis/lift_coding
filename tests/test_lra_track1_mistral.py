@@ -38,6 +38,15 @@ class Track1MistralTests(unittest.TestCase):
         self.assertEqual(ledger.mistral_calls, 2)
         self.assertEqual(ledger.grok_calls, 0)
 
+    def test_flatten_overindent_aligns_case_lines(self) -> None:
+        import track1_keepbest as keepbest
+
+        reference = "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n"
+        hosted = "  induction post <;> simp [substOld]\n    case fvar =>\n      intros x Hin\n"
+        fixed = keepbest.flatten_overindent(reference, hosted)
+        self.assertIn("\n  case fvar =>\n", "\n" + fixed)
+        self.assertNotIn("\n    case fvar =>\n", "\n" + fixed)
+
     def test_assert_hosted_url_blocks_spark(self) -> None:
         with self.assertRaises(mistral.Track1MistralError):
             mistral.assert_hosted_url("http://172.17.0.1:8080/v1/chat/completions")

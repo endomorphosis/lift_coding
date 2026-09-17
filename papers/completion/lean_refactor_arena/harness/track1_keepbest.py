@@ -8,10 +8,8 @@ Not official Track 2. Not an Arena ranking.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
-import shutil
 import sys
 import time
 from datetime import datetime, timezone
@@ -33,6 +31,7 @@ import draft_fanout as lra_fan  # noqa: E402
 import run_warmup as lra_loop  # noqa: E402
 import splice as lra_splice  # noqa: E402
 import track1_ledger as lra_t1  # noqa: E402
+import track1_mistral_leanstral as lra_mistral  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 
@@ -96,8 +95,75 @@ def compile_tactics(
         "compile_wall_ms_outer": (time.perf_counter() - started) * 1000.0,
         "stdout_tail": (receipt.get("stdout") or "")[-400:] if isinstance(receipt.get("stdout"), str) else None,
         "stderr_tail": (receipt.get("stderr") or "")[-400:] if isinstance(receipt.get("stderr"), str) else None,
+        "errors": parse_lean_errors(str(receipt.get("stdout") or "")),
         "arena_score": None,
     }
+
+
+def parse_lean_errors(stdout: str) -> list[dict[str, Any]]:
+    errors: list[dict[str, Any]] = []
+    for line in (stdout or "").splitlines():
+        if not line.startswith("{"):
+            continue
+        try:
+            payload = json.loads(line)
+        except Exception:
+            continue
+        if payload.get("severity") != "error":
+            continue
+        errors.append({"pos": payload.get("pos"), "data": str(payload.get("data") or "")[:400]})
+        if len(errors) >= 6:
+            break
+    return errors
+
+
+def flatten_overindent(reference: str, tactics: str) -> str:
+    """If hosted ``case`` lines are deeper than the reference, strip the extra indent."""
+
+    def case_indents(text: str) -> list[int]:
+        found = []
+        for line in text.splitlines():
+            stripped = line.lstrip()
+            if stripped.startswith("case ") and "=>" in stripped:
+                found.append(len(line) - len(stripped))
+        return found
+
+    ref_cases = case_indents(reference)
+    tac_cases = case_indents(tactics)
+    if not ref_cases or not tac_cases:
+        return tactics
+    extra = min(tac_cases) - min(ref_cases)
+    if extra <= 0:
+        return tactics
+    floor = min(tac_cases)
+    out = []
+    for line in tactics.splitlines():
+        if not line.strip():
+            out.append(line)
+            continue
+        indent = len(line) - len(line.lstrip())
+        if indent >= floor:
+            line = line[extra:]
+        out.append(line)
+    return "\n".join(out)
+
+
+def repair_prompt(record: Mapping[str, Any], *, failed: str, errors: Sequence[Mapping[str, Any]], reference: str) -> str:
+    err_lines = []
+    for item in errors[:4]:
+        err_lines.append(f"{item.get('pos')}: {item.get('data')}")
+    return (
+        "Lean Refactor Arena repair. The previous tactic block failed `lake env lean`.\n"
+        "Return ONLY the corrected tactic block after `:= by`.\n"
+        "Match reference indentation: top-level tactics and `case` lines use the same indent as the reference.\n"
+        "Do not re-introduce explicit binders already in the theorem telescope.\n"
+        "Do not repeat the statement. Do not emit sorry, admit, theorem, lemma, import, or open.\n\n"
+        f"Problem: {record.get('name')}\n\n"
+        f"Statement:\n{record.get('statement')}\n\n"
+        f"Reference tactic block (lake exit 0):\n{reference[:1200]}\n\n"
+        f"Failed tactic block:\n{failed[:1200]}\n\n"
+        f"Lake errors:\n" + "\n".join(err_lines)
+    )
 
 
 def match_reference_indent(reference: str, tactics: str) -> str:
@@ -121,12 +187,19 @@ def hosted_tactics(path: Path) -> str:
     return lra_loop.extract_generated_tactics(text)
 
 
+def _row(item: Mapping[str, Any], compile_row: Mapping[str, Any]) -> dict[str, Any]:
+    payload = {**item, **compile_row, "n_chars": len(str(item.get("tactics") or "")), "tactics_head": str(item.get("tactics") or "")[:240]}
+    payload.pop("tactics", None)
+    return payload
+
+
 def keepbest(
     *,
     name: str,
     hosted_path: Path,
     state_root: Path,
     timeout: float,
+    repair: bool = False,
 ) -> dict[str, Any]:
     _raw, digest, records = lra_splice.load_warmup_records()
     record = next(item for item in records if item.get("name") == name)
@@ -140,15 +213,21 @@ def keepbest(
     drafts = lra_fan.enumerate_drafts(record, records)
     collapse = next((item for item in drafts if "collapse_simp_at" in item.ops), None)
     hosted = match_reference_indent(ref_tactics, hosted_tactics(hosted_path))
+    flattened = flatten_overindent(ref_tactics, hosted)
     candidates = [
         {"kind": "reference", "generator": "deterministic", "tactics": ref_tactics},
         {"kind": "hosted_mistral", "generator": "labs-leanstral-1-5", "tactics": hosted},
     ]
+    if flattened != hosted:
+        candidates.append(
+            {"kind": "hosted_indent_normalized", "generator": "deterministic", "tactics": flattened}
+        )
     if collapse is not None and collapse.tactics != ref_tactics:
         candidates.append(
             {"kind": "fanout_collapse_simp_at", "generator": "deterministic", "tactics": collapse.tactics}
         )
     rows = []
+    tactics_by_kind = {item["kind"]: item["tactics"] for item in candidates}
     for item in candidates:
         compile_row = compile_tactics(
             record,
@@ -157,14 +236,78 @@ def keepbest(
             timeout=timeout,
             restore=restore,
         )
-        rows.append({**item, "n_chars": len(item["tactics"]), **compile_row, "tactics_head": item["tactics"][:240]})
-        del rows[-1]["tactics"]
+        rows.append(_row(item, compile_row))
+    repair_identity = None
+    repaired = False
+    hosted_row = next((row for row in rows if row["kind"] == "hosted_mistral"), None)
+    indent_row = next((row for row in rows if row["kind"] == "hosted_indent_normalized"), None)
+    ref_tokens = lra_loop.token_count(ref_tactics)
+    beats_reference = any(
+        row.get("module_exit_0") and int(row.get("token_count") or ref_tokens) < ref_tokens
+        for row in rows
+        if row["kind"] != "reference"
+    )
+    needs_repair = repair and not beats_reference
+    if needs_repair and hosted_row is not None:
+        lra_mistral.load_keyfiles()
+        lra_mistral.pin_paths()
+        failed = tactics_by_kind.get("hosted_indent_normalized") or tactics_by_kind["hosted_mistral"]
+        errors = (hosted_row.get("errors") if hosted_row else None) or []
+        if indent_row and indent_row.get("module_exit_0"):
+            errors = [
+                {
+                    "pos": None,
+                    "data": (
+                        "The indent-normalized draft compiles but is not shorter than the "
+                        "reference. Return a strictly shorter tactic block that still compiles."
+                    ),
+                }
+            ]
+        prompt = repair_prompt(record, failed=failed, errors=errors, reference=ref_tactics)
+        ledger = lra_t1.ProblemLedger(name=f"{name}#repair")
+        text, repair_identity, _line = lra_mistral.generate_mistral(
+            prompt,
+            ledger,
+            max_new_tokens=1400,
+            timeout=180.0,
+        )
+        repaired_tactics = flatten_overindent(
+            ref_tactics,
+            match_reference_indent(ref_tactics, lra_loop.extract_generated_tactics(text)),
+        )
+        compile_row = compile_tactics(
+            record,
+            repaired_tactics,
+            state_root=state_root,
+            timeout=timeout,
+            restore=restore,
+        )
+        rows.append(
+            _row(
+                {
+                    "kind": "hosted_mistral_repair",
+                    "generator": "labs-leanstral-1-5",
+                    "tactics": repaired_tactics,
+                    "ledger": ledger.as_dict(),
+                    "repair_identity": repair_identity,
+                },
+                compile_row,
+            )
+        )
+        repaired = True
     valid = [row for row in rows if row.get("ok") and not row.get("sorryAx")]
     module_ok = [row for row in rows if row.get("module_exit_0")]
     if valid:
         kept = sorted(valid, key=lambda row: (row["token_count"], row.get("wall_ms") or 0, row["kind"]))[0]
     elif module_ok:
-        kept = next((row for row in module_ok if row["kind"] == "reference"), module_ok[0])
+        kept = sorted(
+            module_ok,
+            key=lambda row: (
+                int(row.get("token_count") or 10**9),
+                0 if row.get("kind") == "reference" else 1,
+                float(row.get("wall_ms") or 0),
+            ),
+        )[0]
     else:
         kept = next((row for row in rows if row["kind"] == "reference"), rows[0] if rows else None)
     return {
@@ -176,14 +319,23 @@ def keepbest(
         "prototype_hardware_class": PROTOTYPE_HARDWARE,
         "used_prototype_endpoint": False,
         "called_docker0": False,
+        "repaired": repaired,
         "official_track2": False,
         "arena_score": None,
         "clone": str(clone),
         "file_path": rel,
         "hosted_receipt": str(hosted_path),
         "candidates": rows,
-        "kept": None if kept is None else {"kind": kept["kind"], "ok": kept.get("ok"), "token_count": kept.get("token_count")},
+        "kept": None
+        if kept is None
+        else {
+            "kind": kept["kind"],
+            "ok": kept.get("ok"),
+            "module_exit_0": kept.get("module_exit_0"),
+            "token_count": kept.get("token_count"),
+        },
         "n_valid": len(valid),
+        "n_module_exit_0": len(module_ok),
     }
 
 
@@ -193,6 +345,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--hosted", type=Path, default=OUT_DEFAULT / "track1-mistral-latest.json")
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=600.0)
+    parser.add_argument("--repair", action="store_true", help="one hosted Labs repair if drafts fail lake")
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
     os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
@@ -201,6 +354,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         hosted_path=args.hosted,
         state_root=args.state_root,
         timeout=args.timeout,
+        repair=args.repair,
     )
     text = json.dumps(report, indent=2, sort_keys=True) + "\n"
     args.out.mkdir(parents=True, exist_ok=True)
@@ -214,8 +368,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "latest": str(latest),
         "kept": report.get("kept"),
         "n_valid": report.get("n_valid"),
+        "repaired": report.get("repaired"),
         "candidates": [
-            {"kind": row.get("kind"), "ok": row.get("ok"), "tokens": row.get("token_count"), "exit": row.get("exit_code"), "error": row.get("error")}
+            {
+                "kind": row.get("kind"),
+                "ok": row.get("ok"),
+                "module_exit_0": row.get("module_exit_0"),
+                "tokens": row.get("token_count"),
+                "exit": row.get("exit_code"),
+                "errors": row.get("errors"),
+            }
             for row in report.get("candidates") or []
         ],
         "arena_score": None,

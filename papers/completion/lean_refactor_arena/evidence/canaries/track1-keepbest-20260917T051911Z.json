@@ -12,7 +12,7 @@
         "--json",
         "Strata/Transform/CallElimCorrect.lean"
       ],
-      "compile_wall_ms_outer": 6232.24768700311,
+      "compile_wall_ms_outer": 6214.589414012153,
       "error": null,
       "errors": [],
       "exit_code": 0,
@@ -27,7 +27,7 @@
       "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3283},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3283},\"severity\":\"warning\"}\n",
       "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
       "token_count": 482,
-      "wall_ms": 6231.456506997347
+      "wall_ms": 6213.9879319875035
     },
     {
       "arena_score": null,
@@ -39,7 +39,7 @@
         "--json",
         "Strata/Transform/CallElimCorrect.lean"
       ],
-      "compile_wall_ms_outer": 6208.7114619789645,
+      "compile_wall_ms_outer": 5935.495753015857,
       "error": null,
       "errors": [
         {
@@ -69,7 +69,7 @@
       "stdout_tail": "Name\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":4,\"line\":3095},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
       "tactics_head": "  induction post <;> simp [substOld]\n    case fvar =>\n      intros x Hin\n      rename_i m name ty2\n      simp at m\n      simp at name\n      simp at ty2\n      simp_all\n    case op =>\n      intros x Hin\n      rename_i m name ty2\n      simp at",
       "token_count": 482,
-      "wall_ms": 6207.884376985021
+      "wall_ms": 5934.712540998589
     },
     {
       "arena_score": null,
@@ -81,7 +81,7 @@
         "--json",
         "Strata/Transform/CallElimCorrect.lean"
       ],
-      "compile_wall_ms_outer": 6005.279613018502,
+      "compile_wall_ms_outer": 6140.830558986636,
       "error": null,
       "errors": [],
       "exit_code": 0,
@@ -96,7 +96,7 @@
       "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
       "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n  ",
       "token_count": 482,
-      "wall_ms": 6004.443855985301
+      "wall_ms": 6140.017699013697
     },
     {
       "arena_score": null,
@@ -108,7 +108,7 @@
         "--json",
         "Strata/Transform/CallElimCorrect.lean"
       ],
-      "compile_wall_ms_outer": 5657.204726012424,
+      "compile_wall_ms_outer": 6111.7815600009635,
       "error": null,
       "errors": [
         {
@@ -138,95 +138,7 @@
       "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":4,\"line\":3105},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3279},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3279},\"severity\":\"warning\"}\n",
       "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n    simp_all\n  case const =>\n    intros x Hin\n    ren",
       "token_count": 466,
-      "wall_ms": 5656.397401995491
-    },
-    {
-      "arena_score": null,
-      "argv": [
-        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
-        "env",
-        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
-        "-DmaxHeartbeats=400000",
-        "--json",
-        "Strata/Transform/CallElimCorrect.lean"
-      ],
-      "compile_wall_ms_outer": 5959.921589004807,
-      "error": null,
-      "errors": [
-        {
-          "data": "unsolved goals\ncase h_2\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LM",
-          "pos": {
-            "column": 19,
-            "line": 3139
-          }
-        },
-        {
-          "data": "unsolved goals\ncase quant\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
-          "pos": {
-            "column": 69,
-            "line": 3093
-          }
-        }
-      ],
-      "exit_code": 1,
-      "generator": "labs-leanstral-1-5",
-      "kind": "hosted_mistral_repair",
-      "lean_tag": "v4.26.0",
-      "ledger": {
-        "arena_score": null,
-        "budget_usd": 3.0,
-        "contaminates_track2": false,
-        "grok_calls": 0,
-        "hard_stopped": false,
-        "includes_jev_and_grok": true,
-        "jev_calls": 0,
-        "lines": [
-          {
-            "call_index": 1,
-            "fixture": false,
-            "input_tokens": 1004,
-            "kind": "mistral",
-            "model": "labs-leanstral-1-5",
-            "output_tokens": 401,
-            "reason": "recorded",
-            "skipped": false,
-            "usd": 0.0
-          }
-        ],
-        "max_grok_calls": 2,
-        "max_jev_calls": 2,
-        "max_mistral_calls": 2,
-        "mistral_calls": 1,
-        "name": "CallElimCorrect.substOldPostSubset#repair",
-        "official_track2": false,
-        "reason": "",
-        "remaining_usd": 3.0,
-        "skipped": false,
-        "spent_usd": 0.0,
-        "track": "track1_closed"
-      },
-      "module_exit_0": false,
-      "n_chars": 1226,
-      "ok": false,
-      "repair_identity": {
-        "arena_score": null,
-        "fallback_used": false,
-        "finish_reason": "stop",
-        "hardware_class": "mistral_labs_api",
-        "request_id": "0184b20bf13e48c5bfe717f12c55e2fe",
-        "requested_model": "labs-leanstral-1-5",
-        "requested_provider": "mistral",
-        "resolved_model": "labs-leanstral-1-5",
-        "resolved_provider": "mistral",
-        "url_host": "api.mistral.ai",
-        "used_prototype_endpoint": false
-      },
-      "sorryAx": true,
-      "stderr_tail": "",
-      "stdout_tail": "ta/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":69,\"line\":3093},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3245},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3245},\"severity\":\"warning\"}\n",
-      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n  ",
-      "token_count": 241,
-      "wall_ms": 5959.0709670155775
+      "wall_ms": 6110.885512985988
     }
   ],
   "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/strata-org/Strata",
@@ -242,10 +154,10 @@
   "n_module_exit_0": 2,
   "n_valid": 0,
   "name": "CallElimCorrect.substOldPostSubset",
-  "observed_at": "2026-09-17T05:20:26.185233+00:00",
+  "observed_at": "2026-09-17T05:19:11.465775+00:00",
   "official_track2": false,
   "prototype_hardware_class": "spark_gb10",
-  "repaired": true,
+  "repaired": false,
   "schema": "lra-track1-keepbest/v1",
   "used_prototype_endpoint": false,
   "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
