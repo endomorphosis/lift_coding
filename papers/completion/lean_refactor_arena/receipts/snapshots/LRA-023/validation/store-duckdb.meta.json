@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/lean_refactor_arena/harness/receipt_store.py",
+    "--store",
+    "--name",
+    "CallElimCorrect.substOldPostSubset",
+    "--tag",
+    "v4.26.0",
+    "--verdict",
+    "fail",
+    "--out-dir",
+    "/tmp/lra023-snap-db-c8qoga98",
+    "--duckdb",
+    "/tmp/lra023-snap-db-c8qoga98/receipts.duckdb",
+    "--require-duckdb"
+  ],
+  "cwd": ".",
+  "exit_code": 0
+}
