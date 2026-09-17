@@ -1,0 +1,71 @@
+{
+  "arena_score": null,
+  "capability_gap": "No tag-pinned elan lean/lake binaries are installed under the resolver elan home. Paths remain tag-pinned; this is not PATH lake usability and is not IndependentKernelVerifier.",
+  "default_elan_home": "/tmp/asref-grok-home-zn2q_9sr/.elan",
+  "elan_home_env": null,
+  "independent_kernel_verifier_is_lake_oracle": false,
+  "installed_tags": [],
+  "kernel_command_template": "{lake} env {lean} --json {source_file}",
+  "lake": false,
+  "measurement_argv_template": "{lake} env {lean} -DmaxHeartbeats=400000 --json {source_file}",
+  "missing_tags": [
+    "v4.26.0",
+    "v4.27.0",
+    "v4.29.1"
+  ],
+  "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-014-093f858d7a6e-attempt-1-1789602942/external/ipfs_datasets/bin:/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena/worktrees/lra-014-093f858d7a6e-attempt-1-1789602942/external/ipfs_datasets/bin/.deps/npm/bin:/home/barberb/.local/share/vericodegen-research-runtime/bin:/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux:/home/barberb/.local/bin:/opt/ipfs-task-tools/bin:/usr/bin:/bin:/opt/mellanox/doca/tools/",
+  "pins": [
+    {
+      "elan_home": "/tmp/asref-grok-home-zn2q_9sr/.elan",
+      "executable_paths": {
+        "lake": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "lean": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean"
+      },
+      "git_commit": "",
+      "installed": false,
+      "lake_installed": false,
+      "lake_path": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+      "lean_installed": false,
+      "lean_path": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+      "lean_tag": "v4.26.0",
+      "toolchain_dir": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.26.0",
+      "toolchain_name": "leanprover--lean4---v4.26.0"
+    },
+    {
+      "elan_home": "/tmp/asref-grok-home-zn2q_9sr/.elan",
+      "executable_paths": {
+        "lake": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+        "lean": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean"
+      },
+      "git_commit": "",
+      "installed": false,
+      "lake_installed": false,
+      "lake_path": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lake",
+      "lean_installed": false,
+      "lean_path": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean",
+      "lean_tag": "v4.27.0",
+      "toolchain_dir": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.27.0",
+      "toolchain_name": "leanprover--lean4---v4.27.0"
+    },
+    {
+      "elan_home": "/tmp/asref-grok-home-zn2q_9sr/.elan",
+      "executable_paths": {
+        "lake": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lake",
+        "lean": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean"
+      },
+      "git_commit": "",
+      "installed": false,
+      "lake_installed": false,
+      "lake_path": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lake",
+      "lean_installed": false,
+      "lean_path": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+      "lean_tag": "v4.29.1",
+      "toolchain_dir": "/tmp/asref-grok-home-zn2q_9sr/.elan/toolchains/leanprover--lean4---v4.29.1",
+      "toolchain_name": "leanprover--lean4---v4.29.1"
+    }
+  ],
+  "run_lean_process": "run_lean_process",
+  "score": null,
+  "validation_home": "/tmp/asref-grok-home-zn2q_9sr",
+  "warmup_timeout_seconds": 600.0
+}

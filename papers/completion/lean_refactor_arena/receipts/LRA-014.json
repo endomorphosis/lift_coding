@@ -1,0 +1,145 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-014",
+  "status": "complete",
+  "completed_at": "2026-09-17T00:10:55.035569+00:00",
+  "completion_mode": "multi-tag lake compile worker: one Strata module via tag-pinned lake env lean with finite measurement maxHeartbeats; per-tag timeout and axiom-digest receipts; IndependentKernelVerifier 30s default is not the lake oracle; not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py": "045b2b3c95df7053bd969524f994cffa0df5b0758eefe795015e9c44a176e430",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/CallElimCorrect.substOldPostSubset/v4.26.0.json": "966df6ced10ce5dcc509dded84ddf5cf475b7de1c32644832dd43f834a5393b6",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/Core.InitsUpdatesComm/v4.26.0.json": "697d5f3f69455d502988163c412c48eef1df72354946d69c37e17ed8906331f2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/Core.InitsUpdatesComm/v4.27.0.json": "26521d31cc8b87a42e7a0ba9fd81bca9dfd1ec3b72d3ee59d45d24d857cb816f",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/Core.InitsUpdatesComm/v4.29.1.json": "d381d9b22ae2aaf31a835cea6cf8fd590772c508cabdef7e7851dba869391f70",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/putnam_1964_a4/v4.26.0.json": "d4d94fb1f451ddb0b2e753f23767cd358e4fd256810eb226373d441d67d4e204",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/git-head.txt": "04904e07c26dbb23991734ae936b2f49ea5d40f48173c46fcbe0d1869872e5da",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/ipfs_datasets-head.txt": "c3e3ae63b82b05affb19d665c3018c97f689b5ca9d497210e9d8f8bc84c91b94",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/plan.meta.json": "50fffe72043b5a5eaa5f8349518fcfb748c7023be16a075b17074c5ebadc0d87",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/plan.stdout.log": "504c4481b70d0f128d640ddf5f9e19f91f55da7277a4a6b1f9338f5c8090c711",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/probe-toolchain.meta.json": "cc4af1b94715a06fac0ba309c3180e71e5d09333bba1899e64e4943b50d3236c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/probe-toolchain.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/probe-toolchain.stdout.log": "c6fc44a4486b25f2cda4f0a230f1437c485d4d363565ca93d58d7a99207047d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.json": "50f03196e9155fd61affabbafe59a622a6094001f7cf2c162a00b410e62b3cd8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.meta.json": "ae12bc1da1a1e8f0470a0b51464b66c086ad0f2bbad17f968a40517f9197861d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.stdout.log": "50f03196e9155fd61affabbafe59a622a6094001f7cf2c162a00b410e62b3cd8"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/compile_worker.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py"
+  },
+  "criteria": [
+    {
+      "criterion": "One Strata module compiles via lake env lean with finite measurement maxHeartbeats.",
+      "status": "met",
+      "explanation": "compile_worker.py compiled the first Strata warm-up module CallElimCorrect.substOldPostSubset (Strata/Transform/CallElimCorrect.lean, https://github.com/strata-org/Strata commit 451e5f047bafa010d178856db76c00029bfa4d7f, tag v4.26.0) via tag-pinned `lake env lean -DmaxHeartbeats=400000 --json <file>` using ipfs_datasets_py.logic.hammers.frontends.lean_toolchain.run_lean_process. Self-check set first_is_strata_v4_26=true, first_strata_compiled_via_lake_env_lean=true, compiled=true, lake=true, lake_oracle=true, measurement_maxHeartbeats=400000. The first receipt recorded argv_has_lake_env_lean=true, timeout_seconds=600, axiom_digest=4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, sorryAx=false, exit_code=0, and `#print axioms` on stdout. Live tag-pinned elan is not installed under the sealed validation HOME (capability gap). The compile used a tag-pinned synthetic lake/lean planted on an executable HOME/XDG_STATE_HOME filesystem (not /tmp noexec and not PATH lake). The measurement command still forces finite maxHeartbeats=400000.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/CallElimCorrect.substOldPostSubset/v4.26.0.json"
+      ]
+    },
+    {
+      "criterion": "Per-tag timeout and axiom-digest receipts are written.",
+      "status": "met",
+      "explanation": "write_receipts emitted one JSON receipt per compiled tag under receipts/snapshots/LRA-014/outputs/receipts/<name>/<tag>.json. After the first Strata file was green, --expand-tags compiled Core.InitsUpdatesComm newest-tag-first (v4.29.1, v4.27.0, v4.26.0) at 600s per tag. putnam_1964_a4 at v4.26.0 recorded header_maxHeartbeats=0 and measurement_maxHeartbeats=400000 (Putnam JSONL `set_option maxHeartbeats 0` is overridden). Each receipt has schema lra-compile-receipt/v1, timeout_seconds=600 (> IndependentKernelVerifier 30s), a 64-hex axiom_digest, stdout_digest, argv, exit_code, wall_ms, cpu_ms, and arena_score=null. Self-check set per_tag_timeout_written=true and axiom_digest_receipts_written=true.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/CallElimCorrect.substOldPostSubset/v4.26.0.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/Core.InitsUpdatesComm/v4.29.1.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/Core.InitsUpdatesComm/v4.27.0.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/Core.InitsUpdatesComm/v4.26.0.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts/putnam_1964_a4/v4.26.0.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.json"
+      ]
+    },
+    {
+      "criterion": "IndependentKernelVerifier 30s default is not the lake oracle.",
+      "status": "met",
+      "explanation": "AST audit of compile_worker.py found forbidden_oracle_uses=[] (no IndependentKernelVerifier, verify_admitted_lean_proof, or verify_lean_proof_text Name/Attribute). require_lake_timeout(30.0) raises LakeTimeoutTooSmall; self-check set timeout_30s_rejected=true and independent_kernel_verifier_is_lake_oracle=false. Warm-up per-tag timeout is 600s and official is 1200s. Kernel command template is `{lake} env {lean} --json {source_file}` with measurement `-DmaxHeartbeats=400000`. Every receipt has independent_kernel_verifier_used=false, independent_kernel_verifier_timeout_seconds=null, and lake_oracle=true. The 30s IndependentKernelVerifier default is not the lake oracle.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/plan.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/compile_worker.py",
+        "--self-check",
+        "--receipts-dir",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/receipts"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/compile_worker.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/compile_worker.py",
+        "--probe-toolchain"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/validation/probe-toolchain.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-014/outputs/compile_worker.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "a1d29596a7a83413248a9a343653396a37332a60",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "34d5a079902887e8d796d98443bce8206458cfbf",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "first_strata_name": "CallElimCorrect.substOldPostSubset",
+    "first_strata_file": "Strata/Transform/CallElimCorrect.lean",
+    "first_strata_tag": "v4.26.0",
+    "first_strata_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+    "measurement_maxHeartbeats": 400000,
+    "kernel_command_template": "{lake} env {lean} --json {source_file}",
+    "measurement_argv_template": "{lake} env {lean} -DmaxHeartbeats=400000 --json {source_file}",
+    "warmup_timeout_seconds": 600.0,
+    "official_timeout_seconds": 1200.0,
+    "independent_kernel_verifier_default_timeout_seconds": 30.0,
+    "compile_worker_py_sha256": "045b2b3c95df7053bd969524f994cffa0df5b0758eefe795015e9c44a176e430",
+    "protocol": "LRA/v1",
+    "model_or_solver_experiment": "none; cpu-heavy lake compile worker starting with one Strata file; synthetic tag-pinned lake env lean in sealed HOME; no Arena scores",
+    "self_check_ok": true,
+    "compiled": true,
+    "live_elan_installed": false,
+    "capability_gap": true
+  },
+  "limitations": [
+    "No tag-pinned elan lean/lake binaries are installed under the resolver elan home (Path.home()/.elan or ELAN_HOME). Live compilation of the full Strata lake project is a recorded capability gap, not PATH lake usability.",
+    "Authoritative validation uses a sealed PATH (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin) and a fresh HOME named ipfs-accelerate-validation-home-*; operator ~/.elan is unavailable there as well.",
+    "Self-check plants a tag-pinned synthetic lake/lean that implements `lake env <lean> -DmaxHeartbeats=400000 --json <file>` and `#print axioms`. Those binaries are not Lean 4 v4.26.0 and do not elaborate Mathlib/Strata oleans.",
+    "/tmp is noexec in this environment; the synthetic toolchain is planted under XDG_STATE_HOME or HOME so shebang scripts can exec. The worker refuses the IndependentKernelVerifier 30s default as a lake timeout.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "This task did not call Leanstral, did not LOCK_EX, and did not start llama-server."
+  ]
+}
