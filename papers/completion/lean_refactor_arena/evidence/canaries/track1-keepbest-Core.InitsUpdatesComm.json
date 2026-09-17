@@ -1,0 +1,166 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Languages/Core/StatementSemanticsProps.lean"
+      ],
+      "compile_wall_ms_outer": 2279.482801008271,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": true,
+      "n_chars": 1699,
+      "ok": true,
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "re/StatementSemanticsProps.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":2045},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":31,\"line\":2090},\"fileName\":\"Strata/Languages/Core/StatementSemanticsProps.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":2090},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+      "theorem_ok": true,
+      "theorem_span": [
+        931,
+        985
+      ],
+      "token_count": 268,
+      "wall_ms": 2278.6813830025494
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Languages/Core/StatementSemanticsProps.lean"
+      ],
+      "compile_wall_ms_outer": 2085.8519300236367,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+          "pos": {
+            "column": 33,
+            "line": 939
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 17,
+            "line": 953
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d000_update_none",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1698,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "update_none"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "re/StatementSemanticsProps.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":2044},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":31,\"line\":2089},\"fileName\":\"Strata/Languages/Core/StatementSemanticsProps.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":2089},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+      "theorem_ok": false,
+      "theorem_span": [
+        931,
+        984
+      ],
+      "token_count": 268,
+      "wall_ms": 2085.274772020057
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Languages/Core/StatementSemanticsProps.lean"
+      ],
+      "compile_wall_ms_outer": 2167.093971016584,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 21,
+            "line": 980
+          }
+        },
+        {
+          "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+          "pos": {
+            "column": 10,
+            "line": 980
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d001_update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1650,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "re/StatementSemanticsProps.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":2044},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":31,\"line\":2089},\"fileName\":\"Strata/Languages/Core/StatementSemanticsProps.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":2089},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+      "theorem_ok": false,
+      "theorem_span": [
+        931,
+        984
+      ],
+      "token_count": 262,
+      "wall_ms": 2165.8300989947747
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/strata-org/Strata",
+  "file_path": "Strata/Languages/Core/StatementSemanticsProps.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "None",
+  "kept": {
+    "kind": "reference",
+    "module_exit_0": true,
+    "ok": true,
+    "theorem_ok": true,
+    "token_count": 268
+  },
+  "n_module_exit_0": 1,
+  "n_valid": 1,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T05:35:07.895432+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "repaired": false,
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

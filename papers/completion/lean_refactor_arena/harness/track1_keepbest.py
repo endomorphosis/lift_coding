@@ -36,6 +36,33 @@ import track1_mistral_leanstral as lra_mistral  # noqa: E402
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 
 
+def installed_matching_pins(record: Mapping[str, Any], clone: Path) -> list[dict[str, str]]:
+    """Keep version_info rows whose elan tag is installed and commit matches the clone."""
+
+    head = ""
+    git_dir = clone / ".git"
+    if git_dir.exists():
+        import subprocess
+
+        completed = subprocess.run(
+            ["git", "-C", str(clone), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        head = (completed.stdout or "").strip()
+    kept: list[dict[str, str]] = []
+    for pin in lra_cw.iter_version_pins(record.get("version_info")):
+        try:
+            lra_cw.resolve_pin(pin, require_installed=True)
+        except Exception:
+            continue
+        if head and pin.git_commit and pin.git_commit != head:
+            continue
+        kept.append({pin.lean_tag: pin.git_commit})
+    return kept
+
+
 def splice_src(path: Path, original_src: str, replacement: str) -> None:
     """Replace the frozen JSONL ``src`` substring. Does not search for ``:=``."""
 
@@ -62,8 +89,21 @@ def compile_tactics(
     timeout: float,
     restore: bytes,
 ) -> dict[str, Any]:
-    pin = lra_cw.iter_version_pins(record.get("version_info"))[0]
     clone = lra_cw.clone_dir(str(record["url"]), state_root)
+    record = dict(record)
+    record["version_info"] = installed_matching_pins(record, clone)
+    if not record["version_info"]:
+        return {
+            "ok": False,
+            "theorem_ok": False,
+            "module_exit_0": False,
+            "exit_code": -1,
+            "error": "no_installed_matching_toolchain",
+            "token_count": lra_loop.token_count(tactics),
+            "errors": [],
+            "arena_score": None,
+        }
+    pin = lra_cw.iter_version_pins(record.get("version_info"))[0]
     rel = lra_cw.source_relpath(record)
     dest = clone / rel
     dest.write_bytes(restore)
@@ -245,7 +285,7 @@ def _row(item: Mapping[str, Any], compile_row: Mapping[str, Any]) -> dict[str, A
 def keepbest(
     *,
     name: str,
-    hosted_path: Path,
+    hosted_path: Optional[Path],
     state_root: Path,
     timeout: float,
     repair: bool = False,
@@ -261,16 +301,19 @@ def keepbest(
     ref_tactics = lra_splice.tactic_block_from_body(lra_splice.split_statement_body(record).body_suffix)
     drafts = lra_fan.enumerate_drafts(record, records)
     collapse = next((item for item in drafts if "collapse_simp_at" in item.ops), None)
-    hosted = match_reference_indent(ref_tactics, hosted_tactics(hosted_path))
-    flattened = flatten_overindent(ref_tactics, hosted)
     candidates = [
         {"kind": "reference", "generator": "deterministic", "tactics": ref_tactics},
-        {"kind": "hosted_mistral", "generator": "labs-leanstral-1-5", "tactics": hosted},
     ]
-    if flattened != hosted:
+    if hosted_path is not None and hosted_path.is_file():
+        hosted = match_reference_indent(ref_tactics, hosted_tactics(hosted_path))
+        flattened = flatten_overindent(ref_tactics, hosted)
         candidates.append(
-            {"kind": "hosted_indent_normalized", "generator": "deterministic", "tactics": flattened}
+            {"kind": "hosted_mistral", "generator": "labs-leanstral-1-5", "tactics": hosted}
         )
+        if flattened != hosted:
+            candidates.append(
+                {"kind": "hosted_indent_normalized", "generator": "deterministic", "tactics": flattened}
+            )
     if collapse is not None and collapse.tactics != ref_tactics:
         candidates.append(
             {"kind": "fanout_collapse_simp_at", "generator": "deterministic", "tactics": collapse.tactics}
@@ -410,47 +453,87 @@ def keepbest(
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--name", default=CANARY_NAME)
+    parser.add_argument("--names", default="", help="comma-separated warmup names; overrides --name")
     parser.add_argument("--hosted", type=Path, default=OUT_DEFAULT / "track1-mistral-latest.json")
+    parser.add_argument("--no-hosted", action="store_true")
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=600.0)
     parser.add_argument("--repair", action="store_true", help="one hosted Labs repair if drafts fail lake")
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
     os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
-    report = keepbest(
-        name=args.name,
-        hosted_path=args.hosted,
-        state_root=args.state_root,
-        timeout=args.timeout,
-        repair=args.repair,
-    )
-    text = json.dumps(report, indent=2, sort_keys=True) + "\n"
+    names = [item.strip() for item in str(args.names).split(",") if item.strip()] or [args.name]
+    hosted = None if args.no_hosted else args.hosted
+    reports = []
+    for name in names:
+        use_hosted = hosted if (hosted is not None and name == CANARY_NAME) else None
+        reports.append(
+            keepbest(
+                name=name,
+                hosted_path=use_hosted,
+                state_root=args.state_root,
+                timeout=args.timeout,
+                repair=args.repair and use_hosted is not None,
+            )
+        )
     args.out.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"track1-keepbest-{stamp}.json"
-    latest = args.out / "track1-keepbest-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(json.dumps({
-        "ok": any(row.get("ok") for row in report.get("candidates") or []),
-        "latest": str(latest),
-        "kept": report.get("kept"),
-        "n_valid": report.get("n_valid"),
-        "repaired": report.get("repaired"),
-        "candidates": [
-            {
-                "kind": row.get("kind"),
-                "ok": row.get("ok"),
-                "theorem_ok": row.get("theorem_ok"),
-                "module_exit_0": row.get("module_exit_0"),
-                "tokens": row.get("token_count"),
-                "exit": row.get("exit_code"),
-                "errors": row.get("errors"),
-            }
-            for row in report.get("candidates") or []
-        ],
+    if len(reports) == 1:
+        report = reports[0]
+        text = json.dumps(report, indent=2, sort_keys=True) + "\n"
+        path = args.out / f"track1-keepbest-{stamp}.json"
+        latest = args.out / "track1-keepbest-latest.json"
+        path.write_text(text, encoding="utf-8")
+        latest.write_text(text, encoding="utf-8")
+        print(json.dumps({
+            "ok": any(row.get("ok") for row in report.get("candidates") or []),
+            "latest": str(latest),
+            "kept": report.get("kept"),
+            "n_valid": report.get("n_valid"),
+            "repaired": report.get("repaired"),
+            "candidates": [
+                {
+                    "kind": row.get("kind"),
+                    "ok": row.get("ok"),
+                    "theorem_ok": row.get("theorem_ok"),
+                    "module_exit_0": row.get("module_exit_0"),
+                    "tokens": row.get("token_count"),
+                    "exit": row.get("exit_code"),
+                    "errors": row.get("errors"),
+                }
+                for row in report.get("candidates") or []
+            ],
+            "arena_score": None,
+        }, indent=2, sort_keys=True))
+        return 0
+    summary = {
+        "schema": "lra-track1-keepbest-batch/v1",
+        "observed_at": datetime.now(timezone.utc).isoformat(),
         "arena_score": None,
-    }, indent=2, sort_keys=True))
+        "called_docker0": False,
+        "problems": [
+            {
+                "name": item.get("name"),
+                "kept": item.get("kept"),
+                "n_valid": item.get("n_valid"),
+                "ref_tokens": next(
+                    (row.get("token_count") for row in item.get("candidates") or [] if row.get("kind") == "reference"),
+                    None,
+                ),
+            }
+            for item in reports
+        ],
+    }
+    path = args.out / f"track1-keepbest-batch-{stamp}.json"
+    latest = args.out / "track1-keepbest-batch-latest.json"
+    path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    latest.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    for item in reports:
+        safe = str(item.get("name") or "unnamed").replace("/", "_")
+        (args.out / f"track1-keepbest-{safe}.json").write_text(
+            json.dumps(item, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    print(json.dumps({"ok": True, "latest": str(latest), "summary": summary["problems"], "arena_score": None}, indent=2, sort_keys=True))
     return 0
 
 

@@ -1,0 +1,325 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5866.800108982716,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": true,
+      "n_chars": 1788,
+      "ok": true,
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3283},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3283},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+      "theorem_ok": true,
+      "theorem_span": [
+        2858,
+        2939
+      ],
+      "token_count": 322,
+      "wall_ms": 5866.064115980407
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5799.8740850016475,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty\u271d : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\ne\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\ne_ih\u271d : NormalizedOldExpr ",
+          "pos": {
+            "column": 43,
+            "line": 2862
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 18,
+            "line": 2895
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d000_app fn e fn_ih e_ih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1787,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "app fn e fn_ih e_ih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":18,\"line\":2895},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+      "theorem_ok": false,
+      "theorem_span": [
+        2858,
+        2938
+      ],
+      "token_count": 322,
+      "wall_ms": 5798.951513977954
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6222.152854024898,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase quant\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk\u271d : Lambda.QuantifierKind\nty\u271d : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\ntrigger\u271d e\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lam",
+          "pos": {
+            "column": 43,
+            "line": 2862
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 29,
+            "line": 2898
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d001_abs ih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1787,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "abs ih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":29,\"line\":2898},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+      "theorem_ok": false,
+      "theorem_span": [
+        2858,
+        2938
+      ],
+      "token_count": 322,
+      "wall_ms": 6221.376316010719
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6261.889841000084,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase ite\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d t\u271d e\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nc_ih\u271d : NormalizedOldExpr c\u271d \u2192 (extractOldExprVars c\u271d).Subset (Lambda.LExpr.LExpr.getVars c\u271d)\nt_ih\u271d : NormalizedOldExpr t\u271d \u2192 (extractOldExp",
+          "pos": {
+            "column": 43,
+            "line": 2862
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 16,
+            "line": 2912
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d002_quant trih eih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1787,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "quant trih eih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":16,\"line\":2912},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+      "theorem_ok": false,
+      "theorem_span": [
+        2858,
+        2938
+      ],
+      "token_count": 322,
+      "wall_ms": 6260.942581022391
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5468.115659983596,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase ite\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d t\u271d e\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nc_ih\u271d : NormalizedOldExpr c\u271d \u2192 (extractOldExprVars c\u271d).Subset (Lambda.LExpr.LExpr.getVars c\u271d)\nt_ih\u271d : NormalizedOldExpr t\u271d \u2192 (extractOldExp",
+          "pos": {
+            "column": 43,
+            "line": 2862
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 16,
+            "line": 2909
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d003_quant trih eih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1711,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "quant trih eih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":16,\"line\":2909},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3279},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3279},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+      "theorem_ok": false,
+      "theorem_span": [
+        2858,
+        2935
+      ],
+      "token_count": 313,
+      "wall_ms": 5467.038590984885
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5931.242860009661,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase eq\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1\u271d e2\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\ne1_ih\u271d : NormalizedOldExpr e1\u271d \u2192 (extractOldExprVars e1\u271d).Subset (Lambda.LExpr.LExpr.getVars e1\u271d)\ne2_ih\u271d : NormalizedOldExpr e2\u271d \u2192 (extractOl",
+          "pos": {
+            "column": 43,
+            "line": 2862
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 16,
+            "line": 2928
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d004_ite cih tih eih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 1787,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "ite cih tih eih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":16,\"line\":2928},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+      "theorem_ok": false,
+      "theorem_span": [
+        2858,
+        2938
+      ],
+      "token_count": 322,
+      "wall_ms": 5930.35723399953
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/strata-org/Strata",
+  "file_path": "Strata/Transform/CallElimCorrect.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "None",
+  "kept": {
+    "kind": "reference",
+    "module_exit_0": true,
+    "ok": true,
+    "theorem_ok": true,
+    "token_count": 322
+  },
+  "n_module_exit_0": 1,
+  "n_valid": 1,
+  "name": "CallElimCorrect.extractedOldExprInVars",
+  "observed_at": "2026-09-17T05:35:01.352300+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "repaired": false,
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

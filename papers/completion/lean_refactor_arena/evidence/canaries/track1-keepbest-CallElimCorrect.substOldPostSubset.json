@@ -1,0 +1,936 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5994.398218987044,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": true,
+      "n_chars": 2406,
+      "ok": true,
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3283},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3283},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": true,
+      "theorem_span": [
+        3089,
+        3185
+      ],
+      "token_count": 482,
+      "wall_ms": 5993.634993996238
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6215.617217007093,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 4,
+            "line": 3095
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "labs-leanstral-1-5",
+      "kind": "hosted_mistral",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2585,
+      "ok": false,
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Name\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":4,\"line\":3095},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n    case fvar =>\n      intros x Hin\n      rename_i m name ty2\n      simp at m\n      simp at name\n      simp at ty2\n      simp_all\n    case op =>\n      intros x Hin\n      rename_i m name ty2\n      simp at",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 6214.676453993889
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5753.871956985677,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "hosted_indent_normalized",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": true,
+      "n_chars": 2405,
+      "ok": true,
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n  ",
+      "theorem_ok": true,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 5753.105212992523
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5702.0558929943945,
+      "error": null,
+      "errors": [
+        {
+          "data": "No goals to be solved",
+          "pos": {
+            "column": 4,
+            "line": 3100
+          }
+        },
+        {
+          "data": "No goals to be solved",
+          "pos": {
+            "column": 4,
+            "line": 3105
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "fanout_collapse_simp_at",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2338,
+      "ok": false,
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":4,\"line\":3105},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3279},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3279},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n    simp_all\n  case const =>\n    intros x Hin\n    ren",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3181
+      ],
+      "token_count": 466,
+      "wall_ms": 5701.5207989898045
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6423.6253930139355,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3099
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d000_fvar",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2358,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "fvar"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3099},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3279},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3279},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case const =>\n    ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3181
+      ],
+      "token_count": 473,
+      "wall_ms": 6422.673477005446
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5889.481131976936,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `name`",
+          "pos": {
+            "column": 12,
+            "line": 3098
+          }
+        },
+        {
+          "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3101
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d001_fvar",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2381,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "fvar"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3101},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3281},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3281},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_a",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3183
+      ],
+      "token_count": 478,
+      "wall_ms": 5888.244236994069
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5270.295576017816,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3106
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d002_op",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2358,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "op"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3106},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3279},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3279},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all  case const =>\n    ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3181
+      ],
+      "token_count": 473,
+      "wall_ms": 5269.24501999747
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5492.720780981472,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `name`",
+          "pos": {
+            "column": 12,
+            "line": 3106
+          }
+        },
+        {
+          "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3108
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d003_op",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2381,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "op"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3108},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3281},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3281},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n    simp_",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3183
+      ],
+      "token_count": 478,
+      "wall_ms": 5491.677393001737
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5714.205785014201,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase bvar\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.L",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3114
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d004_const",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2405,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "const"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3114},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 5713.517008989584
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5666.703747003339,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase bvar\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.L",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3113
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d005_const",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2385,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "const"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3113},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3281},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3281},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3183
+      ],
+      "token_count": 479,
+      "wall_ms": 5665.763913013507
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5927.282051998191,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LM",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3119
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d006_bvar",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2405,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "bvar"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3119},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 5926.266135997139
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5663.735519017791,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LM",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 14,
+            "line": 3118
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d007_bvar",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2388,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "bvar"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":14,\"line\":3118},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3281},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3281},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3183
+      ],
+      "token_count": 479,
+      "wall_ms": 5662.703921989305
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6035.5900790018495,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `case`",
+          "pos": {
+            "column": 14,
+            "line": 3121
+          }
+        },
+        {
+          "data": "unsolved goals\ncase quant\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected token '=>'; expected command",
+          "pos": {
+            "column": 35,
+            "line": 3121
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d008_abs ih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2405,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "abs ih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":35,\"line\":3121},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 6034.539601998404
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5694.379432999995,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase quant\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 16,
+            "line": 3139
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d009_ite cih tih eih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2405,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "ite cih tih eih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":16,\"line\":3139},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 5693.357693002326
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6306.661352980882,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase quant\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 18,
+            "line": 3159
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d010_app ih1 ih2",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2405,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "app ih1 ih2"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":18,\"line\":3159},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 6305.8583039965015
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5934.709736990044,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase eq\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMo",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 16,
+            "line": 3173
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d011_quant trih eih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2405,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "quant trih eih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":16,\"line\":3173},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3184
+      ],
+      "token_count": 482,
+      "wall_ms": 5933.918461989379
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 6006.312105979305,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase eq\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMo",
+          "pos": {
+            "column": 69,
+            "line": 3093
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 16,
+            "line": 3171
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d012_quant trih eih",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2255,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "quant trih eih"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":16,\"line\":3171},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3280},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3280},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "theorem_ok": false,
+      "theorem_span": [
+        3089,
+        3182
+      ],
+      "token_count": 446,
+      "wall_ms": 6004.348833987024
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5991.443990991684,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "span_d013_all_cases",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": true,
+      "n_chars": 2312,
+      "ok": true,
+      "ops": [
+        "drop_redundant_simp_at",
+        "all_cases"
+      ],
+      "sorryAx": true,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3277},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3277},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m",
+      "theorem_ok": true,
+      "theorem_span": [
+        3089,
+        3179
+      ],
+      "token_count": 464,
+      "wall_ms": 5990.809120004997
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/strata-org/Strata",
+  "file_path": "Strata/Transform/CallElimCorrect.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/track1-mistral-latest.json",
+  "kept": {
+    "kind": "span_d013_all_cases",
+    "module_exit_0": true,
+    "ok": true,
+    "theorem_ok": true,
+    "token_count": 464
+  },
+  "n_module_exit_0": 3,
+  "n_valid": 3,
+  "name": "CallElimCorrect.substOldPostSubset",
+  "observed_at": "2026-09-17T05:34:25.775987+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "repaired": false,
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}
