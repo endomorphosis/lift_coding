@@ -1,0 +1,376 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T06:33:59.578315+00:00",
+  "pr": "PR-9d",
+  "problems": [
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 2406,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+          "theorem_ok": true,
+          "token_count": 482,
+          "wall_ms": 7226.743384992005
+        },
+        {
+          "errors": [
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 4,
+                "line": 3100
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 4,
+                "line": 3105
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 2108,
+          "n_holes": 8,
+          "ok": false,
+          "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n\n    simp_all\n    simp_all\n  case const =>\n    intros x Hin\n\n    simp at m\n    simp_all\n  case bvar =>\n    intros",
+          "theorem_ok": false,
+          "token_count": 416,
+          "wall_ms": 6294.890574004967
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.T",
+              "pos": {
+                "column": 12,
+                "line": 3095
+              }
+            },
+            {
+              "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+              "pos": {
+                "column": 69,
+                "line": 3093
+              }
+            },
+            {
+              "data": "unexpected identifier; expected command",
+              "pos": {
+                "column": 0,
+                "line": 3098
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "labs-leanstral-1-5",
+          "kind": "mca_leanstral_holes",
+          "module_exit_0": false,
+          "n_chars": 2180,
+          "n_holes": 8,
+          "ok": false,
+          "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n\nsimp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n\nsimp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case const =>\n    intros",
+          "theorem_ok": false,
+          "token_count": 435,
+          "wall_ms": 5773.614935023943
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 92,
+          "family": "dead_code",
+          "hole_id": "MCA_0",
+          "indent": "    ",
+          "original": "    rename_i m name ty2",
+          "start": 69
+        },
+        {
+          "end": 139,
+          "family": "strength_reduction",
+          "hole_id": "MCA_1",
+          "indent": "    ",
+          "original": "    simp at m\n    simp at name\n    simp at ty2",
+          "start": 93
+        },
+        {
+          "end": 207,
+          "family": "dead_code",
+          "hole_id": "MCA_2",
+          "indent": "    ",
+          "original": "    rename_i m name ty2",
+          "start": 184
+        },
+        {
+          "end": 254,
+          "family": "strength_reduction",
+          "hole_id": "MCA_3",
+          "indent": "    ",
+          "original": "    simp at m\n    simp at name\n    simp at ty2",
+          "start": 208
+        },
+        {
+          "end": 320,
+          "family": "dead_code",
+          "hole_id": "MCA_4",
+          "indent": "    ",
+          "original": "    rename_i m name",
+          "start": 301
+        },
+        {
+          "end": 396,
+          "family": "dead_code",
+          "hole_id": "MCA_5",
+          "indent": "    ",
+          "original": "    rename_i m d",
+          "start": 380
+        },
+        {
+          "end": 1813,
+          "family": "dead_code",
+          "hole_id": "MCA_6",
+          "indent": "      ",
+          "original": "      rename_i m1 k1 ty1 trigger1 e1",
+          "start": 1777
+        },
+        {
+          "end": 1926,
+          "family": "loop_invariant",
+          "hole_id": "MCA_7",
+          "indent": "      ",
+          "original": "      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]",
+          "start": 1814
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 482
+      },
+      "leanstral_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "finish_reason": "stop",
+        "hardware_class": "mistral_labs_api",
+        "request_id": "b6e5553f890d482683d328e8ff27f9c0",
+        "requested_model": "labs-leanstral-1-5",
+        "requested_provider": "mistral",
+        "resolved_model": "labs-leanstral-1-5",
+        "resolved_provider": "mistral",
+        "url_host": "api.mistral.ai",
+        "used_prototype_endpoint": false
+      },
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 1110,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 118,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 1,
+        "name": "CallElimCorrect.substOldPostSubset#mca-mask",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 8,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    <<<MCA_0 family=dead_code>>>\n    <<<MCA_1 family=strength_reduction>>>\n\n    simp_all\n  case op =>\n    intros x Hin\n    <<<MCA_2 family=dead_code>>>\n    <<<MCA_3 family=strength_reduction>>>\n    simp_all\n  case const =>\n    intros x Hin\n    <<<MCA_4 family=dead_code>>>\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    <<<MCA_5 family=dead_code>>>\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n  ",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1788,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+          "theorem_ok": true,
+          "token_count": 322,
+          "wall_ms": 5625.786253018305
+        },
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": true,
+          "n_chars": 1713,
+          "n_holes": 3,
+          "ok": true,
+          "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+          "theorem_ok": true,
+          "token_count": 313,
+          "wall_ms": 5585.543288005283
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\ncase quant\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk\u271d : Lambda.QuantifierKind\nty\u271d : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\ntrigger\u271d e\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lam",
+              "pos": {
+                "column": 22,
+                "line": 2899
+              }
+            },
+            {
+              "data": "unsolved goals\ncase ite\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d t\u271d e\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nc_ih\u271d : NormalizedOldExpr c\u271d \u2192 (extractOldExprVars c\u271d).Subset (Lambda.LExpr.LExpr.getVars c\u271d)\nt_ih\u271d : NormalizedOldExpr t\u271d \u2192 (extractOldExp",
+              "pos": {
+                "column": 43,
+                "line": 2862
+              }
+            },
+            {
+              "data": "unexpected identifier; expected command",
+              "pos": {
+                "column": 0,
+                "line": 2901
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "labs-leanstral-1-5",
+          "kind": "mca_leanstral_holes",
+          "module_exit_0": false,
+          "n_chars": 1945,
+          "n_holes": 3,
+          "ok": false,
+          "tactics_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . si",
+          "theorem_ok": false,
+          "token_count": 346,
+          "wall_ms": 5891.735190991312
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 889,
+          "family": "dead_code",
+          "hole_id": "MCA_0",
+          "indent": "    ",
+          "original": "    rename_i e_normalized",
+          "start": 864
+        },
+        {
+          "end": 916,
+          "family": "dead_code",
+          "hole_id": "MCA_1",
+          "indent": "    ",
+          "original": "    rename_i tr_normalized",
+          "start": 890
+        },
+        {
+          "end": 939,
+          "family": "dead_code",
+          "hole_id": "MCA_2",
+          "indent": "    ",
+          "original": "    rename_i tr e ty k",
+          "start": 917
+        }
+      ],
+      "kept": {
+        "kind": "mca_template_fill",
+        "theorem_ok": true,
+        "token_count": 313
+      },
+      "leanstral_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "finish_reason": "stop",
+        "hardware_class": "mistral_labs_api",
+        "request_id": "6be777c770a54d65afd5506ca098242a",
+        "requested_model": "labs-leanstral-1-5",
+        "requested_provider": "mistral",
+        "resolved_model": "labs-leanstral-1-5",
+        "resolved_provider": "mistral",
+        "url_host": "api.mistral.ai",
+        "used_prototype_endpoint": false
+      },
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 811,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 111,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 1,
+        "name": "CallElimCorrect.extractedOldExprInVars#mca-mask",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 3,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . simp [Lambda.LExpr.LExpr.getVars]\n      intros x Hin\n      exact Hin\n    . next Hfalse =>\n      cases Hnorm with\n      | app H1 H2 Hn =>\n      exfalso\n      specialize Hn ?_\n      constructor\n      cases Hn\n      apply Hfalse\n      rfl\n    . cases Hnorm with\n      | app H1 H2 Hn =>\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply fn_ih\n        exact H1\n        intros x Hin\n        simp_all\n      . apply List.Subset.trans\n        apply e_ih\n        exact H2\n        intros x Hin\n        simp_all\n  case abs ih =>\n    cases Hnorm\n    a",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mca-mask-replace-batch/v1",
+  "wall_ms": 39896.31494000787
+}

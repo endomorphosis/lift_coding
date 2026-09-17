@@ -55,6 +55,14 @@ class Track1MistralTests(unittest.TestCase):
         self.assertIn("simp [a, b]", collapsed)
         self.assertNotIn("rw [a]", collapsed)
 
+    def test_mca_mask_keeps_case_skeleton(self) -> None:
+        import mca_mask_replace as mask
+
+        report = mask.self_check()
+        self.assertTrue(report["ok"], report)
+        self.assertGreaterEqual(report["n_holes"], 2)
+        self.assertIn("strength_reduction", report["families"])
+
     def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
         import draft_fanout as fanout
 

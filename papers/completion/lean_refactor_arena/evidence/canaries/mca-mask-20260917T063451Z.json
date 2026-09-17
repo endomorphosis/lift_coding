@@ -1,0 +1,170 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T06:34:51.208557+00:00",
+  "pr": "PR-9d",
+  "problems": [
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 2406,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+          "theorem_ok": true,
+          "token_count": 482,
+          "wall_ms": 6170.279618003406
+        },
+        {
+          "errors": [
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 4,
+                "line": 3100
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 4,
+                "line": 3105
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 2108,
+          "n_holes": 8,
+          "ok": false,
+          "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n\n    simp_all\n    simp_all\n  case const =>\n    intros x Hin\n\n    simp at m\n    simp_all\n  case bvar =>\n    intros",
+          "theorem_ok": false,
+          "token_count": 416,
+          "wall_ms": 5786.190291983075
+        },
+        {
+          "errors": [
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 4,
+                "line": 3100
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 4,
+                "line": 3105
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_strength_only",
+          "module_exit_0": false,
+          "n_chars": 2338,
+          "n_holes": 2,
+          "ok": false,
+          "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n    simp_all\n  case const =>\n    intros x Hin\n    ren",
+          "theorem_ok": false,
+          "token_count": 466,
+          "wall_ms": 5800.963714020327
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 92,
+          "family": "dead_code",
+          "hole_id": "MCA_0",
+          "indent": "    ",
+          "original": "    rename_i m name ty2",
+          "start": 69
+        },
+        {
+          "end": 139,
+          "family": "strength_reduction",
+          "hole_id": "MCA_1",
+          "indent": "    ",
+          "original": "    simp at m\n    simp at name\n    simp at ty2",
+          "start": 93
+        },
+        {
+          "end": 207,
+          "family": "dead_code",
+          "hole_id": "MCA_2",
+          "indent": "    ",
+          "original": "    rename_i m name ty2",
+          "start": 184
+        },
+        {
+          "end": 254,
+          "family": "strength_reduction",
+          "hole_id": "MCA_3",
+          "indent": "    ",
+          "original": "    simp at m\n    simp at name\n    simp at ty2",
+          "start": 208
+        },
+        {
+          "end": 320,
+          "family": "dead_code",
+          "hole_id": "MCA_4",
+          "indent": "    ",
+          "original": "    rename_i m name",
+          "start": 301
+        },
+        {
+          "end": 396,
+          "family": "dead_code",
+          "hole_id": "MCA_5",
+          "indent": "    ",
+          "original": "    rename_i m d",
+          "start": 380
+        },
+        {
+          "end": 1813,
+          "family": "dead_code",
+          "hole_id": "MCA_6",
+          "indent": "      ",
+          "original": "      rename_i m1 k1 ty1 trigger1 e1",
+          "start": 1777
+        },
+        {
+          "end": 1926,
+          "family": "loop_invariant",
+          "hole_id": "MCA_7",
+          "indent": "      ",
+          "original": "      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]",
+          "start": 1814
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 482
+      },
+      "leanstral_identity": null,
+      "ledger": null,
+      "n_holes": 8,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    <<<MCA_0 family=dead_code>>>\n    <<<MCA_1 family=strength_reduction>>>\n\n    simp_all\n  case op =>\n    intros x Hin\n    <<<MCA_2 family=dead_code>>>\n    <<<MCA_3 family=strength_reduction>>>\n    simp_all\n  case const =>\n    intros x Hin\n    <<<MCA_4 family=dead_code>>>\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    <<<MCA_5 family=dead_code>>>\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n  ",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mca-mask-replace-batch/v1",
+  "wall_ms": 17774.076960020466
+}
