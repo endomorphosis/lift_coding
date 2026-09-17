@@ -1,0 +1,28 @@
+{
+  "added_to_paper_supervisors_papers": false,
+  "arena_score": null,
+  "completing_requires_verify_lra_batch_require_complete_pass": true,
+  "completion_authority": "--require-complete",
+  "failures": [],
+  "hardware_class": "spark_gb10",
+  "jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "manuscript_main_tex_sha256": "f871de146fbd152e42c85e80fa7216f4d51ea3a14fdda9604c94418e63b12466",
+  "manuscript_warmup_table_sha256": "f67e4f6e2ebac1dacd4adcd412fb2708713e06a173a80c46731b99ee60112f7e",
+  "n_problems": 15,
+  "official_score": null,
+  "official_track2": false,
+  "ok": true,
+  "operator_argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+    "--run",
+    "--receipts-dir",
+    "papers/completion/lean_refactor_arena/submissions/warmup",
+    "--network",
+    "deny"
+  ],
+  "operator_command_runs_15_on_spark_gb10": true,
+  "run_freeze_schema": "lra-run-freeze/v1",
+  "score": null,
+  "writes_arena_scores_into_manuscript": false
+}

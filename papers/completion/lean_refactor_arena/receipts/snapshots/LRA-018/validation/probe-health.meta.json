@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+    "--probe-health"
+  ],
+  "cwd": ".",
+  "env": {
+    "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
+    "LRA_HARDWARE": "spark_gb10",
+    "LRA_TYPESAFE": "off"
+  },
+  "exit_code": 0
+}

@@ -1,0 +1,173 @@
+{
+  "arena_score": null,
+  "audit": {
+    "forbidden_import_needles": [],
+    "forbidden_imports": [],
+    "imported_names": [
+      "Any",
+      "Mapping",
+      "Optional",
+      "Path",
+      "Sequence",
+      "__future__",
+      "annotations",
+      "argparse",
+      "ast",
+      "dataclass",
+      "dataclasses",
+      "field",
+      "hashlib",
+      "json",
+      "pathlib",
+      "re",
+      "shutil",
+      "splice",
+      "subprocess",
+      "sys",
+      "tempfile",
+      "typing"
+    ],
+    "imports_law_to_action_verify_batch": false,
+    "ok": true,
+    "score_assignments": [],
+    "sys_path_inserts_law_to_action": false,
+    "uses_lock_ex": false,
+    "writes_arena_scores": false
+  },
+  "compiled": false,
+  "empty_axiom_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "fail_closed": {
+    "arena_score_written": {
+      "exit_code": 2,
+      "message": "arena scores written: CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "status": "FAIL"
+    },
+    "complete": {
+      "complete": true,
+      "exit_code": 0,
+      "message": "",
+      "ok": true,
+      "status": "PASS"
+    },
+    "complete_cli": {
+      "arena_score": null,
+      "complete": true,
+      "exit_code": 0,
+      "fail_line": "",
+      "imports_law_to_action_verify_batch": false,
+      "ok": true,
+      "status": "PASS",
+      "stderr_head": "",
+      "stdout_head": "{\n  \"all_tags_ok\": true,\n  \"arena_score\": null,\n  \"compiled\": false,\n  \"complete\": true,\n  \"digest_ok\": true,\n  \"duplicate_receipts\": [],\n  \"extra_receipt_names\": [],\n  \"failures\": [],\n  \"frozen_warmup_sha256\": \"6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804\",\n  \"gates\": [\n    \"all_tags\",\n    \"complete\",\n    \"digest\",\n    \"no_sorry\",\n    \"statement_bind\"\n  ],\n  \"imports_law_to_ac",
+      "writes_arena_scores": false
+    },
+    "digest_mismatch": {
+      "digest_ok": false,
+      "exit_code": 2,
+      "message": "freeze_binding warmup_sha256 mismatch",
+      "ok": true,
+      "status": "FAIL"
+    },
+    "duplicate_receipt": {
+      "duplicate": [
+        "CallElimCorrect.substOldPostSubset"
+      ],
+      "exit_code": 2,
+      "ok": true,
+      "status": "FAIL"
+    },
+    "lra014_incomplete": {
+      "complete": false,
+      "exit_code": 2,
+      "missing_n": 12,
+      "n_receipts": 3,
+      "ok": true,
+      "status": "FAIL"
+    },
+    "missing_receipt": {
+      "exit_code": 2,
+      "message": "missing receipts: CallElimCorrect.substOldPostSubset",
+      "missing": [
+        "CallElimCorrect.substOldPostSubset"
+      ],
+      "ok": true,
+      "status": "FAIL"
+    },
+    "missing_tag": {
+      "all_tags_ok": false,
+      "dropped_tag": "v4.26.0",
+      "exit_code": 2,
+      "message": "missing listed tags: Core.InitsUpdatesComm",
+      "ok": true,
+      "problem": "Core.InitsUpdatesComm",
+      "status": "FAIL"
+    },
+    "sorryAx": {
+      "exit_code": 2,
+      "message": "sorryAx or missing axiom report: putnam_1964_a4",
+      "no_sorryAx": false,
+      "ok": true,
+      "problem": "putnam_1964_a4",
+      "status": "FAIL",
+      "tag": "v4.25.0"
+    },
+    "statement_mutated": {
+      "exit_code": 2,
+      "ok": true,
+      "statement_bind_ok": false,
+      "status": "FAIL"
+    },
+    "statement_unbound": {
+      "exit_code": 2,
+      "message": "statement-bind failed: CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "statement_bind_ok": false,
+      "status": "FAIL"
+    }
+  },
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "gates_ok": true,
+  "header_bind_putnam": true,
+  "header_plus_statement_bind": true,
+  "imports_law_to_action_verify_batch": false,
+  "independent_kernel_verifier_used": false,
+  "jsonl_bytes": 113826,
+  "jsonl_unchanged": true,
+  "lake": false,
+  "llama_server_started": false,
+  "n_listed_tags": 36,
+  "n_records": 15,
+  "named_assign_first_assign_byte": 55,
+  "named_assign_inside_statement": true,
+  "names": [
+    "CallElimCorrect.substOldPostSubset",
+    "CallElimCorrect.extractedOldExprInVars",
+    "Core.InitsUpdatesComm",
+    "fundamental_theorem_of_variational_calculus'",
+    "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+    "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+    "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+    "Cslib.SKI.parallelReduction_diamond",
+    "Cslib.CCS.bisimilarity_congr_choice",
+    "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+    "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+    "interleaved_affine_gaps_imply_tensor_gaps",
+    "putnam_1964_a4",
+    "putnam_1964_b2",
+    "putnam_1995_a3"
+  ],
+  "ok": true,
+  "one_receipt_per_scheduled_problem": true,
+  "protocol": "LRA/v1",
+  "require_all_tags": true,
+  "require_complete": true,
+  "require_digest": true,
+  "require_no_sorry": true,
+  "require_statement_bind": true,
+  "schema": "lra-batch-verify/v1",
+  "score": null,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "warmup_path": "papers/completion/lean_refactor_arena/data/benchmark_data_warmup.jsonl",
+  "writes_arena_scores": false
+}
