@@ -63,6 +63,17 @@ class Track1MistralTests(unittest.TestCase):
         self.assertGreaterEqual(report["n_holes"], 2)
         self.assertIn("strength_reduction", report["families"])
 
+    def test_few_shot_examples_have_scored_cuts(self) -> None:
+        import mca_mask_replace as mask
+        import splice as lra_splice
+
+        records = lra_splice.load_warmup_records()[2]
+        rec = next(item for item in records if item["name"] == "CallElimCorrect.substOldPostSubset")
+        shot = mask.few_shot_example(rec)
+        self.assertLess(shot["ratio"], 1.0)
+        self.assertEqual(shot["filled_tokens"], 414)
+        self.assertGreater(shot["n_holes"], 0)
+
     def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
         import draft_fanout as fanout
 

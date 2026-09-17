@@ -275,6 +275,59 @@ def one_hole_prompt(record: Mapping[str, Any], tactics: str, hole: Hole) -> str:
     )
 
 
+SHOT_NAMES = (
+    "CallElimCorrect.substOldPostSubset",
+    "CallElimCorrect.extractedOldExprInVars",
+)
+
+
+def few_shot_example(record: Mapping[str, Any]) -> dict[str, Any]:
+    tactics = lra_fan.tactic_block(record)
+    holes = find_holes(tactics)
+    fills = {hole.hole_id: template_fill(hole) for hole in holes}
+    filled = apply_fills(tactics, holes, fills)
+    return {
+        "name": record.get("name"),
+        "ref_tokens": lra_loop.token_count(tactics),
+        "filled_tokens": lra_loop.token_count(filled),
+        "n_holes": len(holes),
+        "families": [hole.family for hole in holes],
+        "skeleton": mask_skeleton(tactics, holes),
+        "reference": tactics,
+        "filled": filled,
+        "ratio": round(lra_loop.token_count(filled) / max(1, lra_loop.token_count(tactics)), 4),
+    }
+
+
+def few_shot_prompt(target: Mapping[str, Any], shots: Sequence[Mapping[str, Any]]) -> str:
+    blocks = []
+    for index, shot in enumerate(shots, 1):
+        blocks.append(
+            f"EXAMPLE {index}: {shot['name']}\n"
+            f"Score: {shot['filled_tokens']}/{shot['ref_tokens']} tokens (ratio {shot['ratio']}), "
+            f"holes={shot['n_holes']} families={shot['families']}. Lake-valid after deleting MCA residuals.\n"
+            f"PCA skeleton (induction/case kept):\n{shot['skeleton'][:900]}\n\n"
+            f"BEFORE ({shot['ref_tokens']} tokens):\n{shot['reference'][:700]}\n\n"
+            f"AFTER ({shot['filled_tokens']} tokens, smallest lake-valid):\n{shot['filled'][:700]}\n"
+        )
+    tactics = lra_fan.tactic_block(target)
+    holes = find_holes(tactics)
+    skeleton = mask_skeleton(tactics, holes)
+    return (
+        "You are refactoring a Lean 4 proof for Lean Refactor Arena. "
+        "PCA principal structure = induction and every case arm (keep and connect these). "
+        "MCA residuals = simp-at runs, rename_i, have after induction, rw chains (delete or replace with shorter tactics).\n"
+        "Goal: the SMALLEST lake-valid tactic block. No sorry, no theorem/lemma/import/open. "
+        "Do not drop case headers. Match indentation.\n\n"
+        + "\n".join(blocks)
+        + f"\nTARGET: {target.get('name')}\n"
+        f"Statement:\n{str(target.get('statement') or '')[:700]}\n\n"
+        f"PCA skeleton with MCA holes marked:\n{skeleton[:1800]}\n\n"
+        f"CURRENT tactics ({lra_loop.token_count(tactics)} tokens):\n{tactics[:1600]}\n\n"
+        "Reply with ONLY the refactored tactic block after := by.\n"
+    )
+
+
 def assemble_candidates(
     record: Mapping[str, Any],
     tactics: str,
@@ -409,6 +462,7 @@ def run_problem(
     call_leanstral: bool,
     ablate: bool = False,
     one_hole: bool = False,
+    few_shot: bool = False,
 ) -> dict[str, Any]:
     _raw, digest, records = lra_splice.load_warmup_records()
     record = next(item for item in records if item.get("name") == name)
@@ -420,7 +474,37 @@ def run_problem(
     ledger = None
     fill_holes = [hole for hole in holes if hole.family in {"strength_reduction", "algebraic_simplification"}]
     one_hole_fills: list[dict[str, Any]] = []
-    if call_leanstral and one_hole:
+    few_shot_row: Optional[dict[str, Any]] = None
+    if few_shot and call_leanstral:
+        shots = []
+        for shot_name in SHOT_NAMES:
+            if shot_name == name:
+                continue
+            shot_rec = next((item for item in records if item.get("name") == shot_name), None)
+            if shot_rec is not None:
+                shots.append(few_shot_example(shot_rec))
+        lra_mistral.load_keyfiles()
+        lra_mistral.pin_paths()
+        ledger = lra_t1.ProblemLedger(name=f"{name}#few-shot")
+        prompt = few_shot_prompt(record, shots)
+        text, identity, _line = lra_mistral.generate_mistral(
+            prompt, ledger, max_new_tokens=900, timeout=180.0
+        )
+        filled = lra_kb.flatten_overindent(
+            tactics, lra_kb.match_reference_indent(tactics, lra_loop.extract_generated_tactics(text))
+        )
+        few_shot_row = {
+            "kind": "leanstral_few_shot",
+            "generator": "labs-leanstral-1-5",
+            "tactics": filled,
+            "holes": [],
+            "n_shots": len(shots),
+            "shot_scores": [
+                {"name": shot["name"], "ratio": shot["ratio"], "filled_tokens": shot["filled_tokens"], "ref_tokens": shot["ref_tokens"]}
+                for shot in shots
+            ],
+        }
+    elif call_leanstral and one_hole:
         targets = prioritize_holes(fill_holes or holes, cap=2)
         if targets:
             lra_mistral.load_keyfiles()
@@ -468,6 +552,8 @@ def run_problem(
             if item["kind"] not in kinds:
                 candidates.append(item)
     candidates.extend(one_hole_fills)
+    if few_shot_row is not None:
+        candidates.append(few_shot_row)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     restore = dest.read_bytes() if dest.is_file() else b""
@@ -574,6 +660,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--no-leanstral", action="store_true")
     parser.add_argument("--ablate", action="store_true", help="lake-check dropping one MCA hole at a time")
     parser.add_argument("--one-hole", action="store_true", help="hosted Leanstral fills one MCA hole at a time")
+    parser.add_argument("--few-shot", action="store_true", help="few-shot Leanstral from scored MCA hole examples")
     parser.add_argument("--names", default=",".join(LAKE_READY))
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
@@ -595,6 +682,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             call_leanstral=not args.no_leanstral,
             ablate=args.ablate,
             one_hole=args.one_hole,
+            few_shot=args.few_shot,
         )
         for name in names
     ]
