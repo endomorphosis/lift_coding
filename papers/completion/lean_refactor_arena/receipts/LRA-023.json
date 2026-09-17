@@ -1,0 +1,180 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-023",
+  "status": "complete",
+  "completed_at": "2026-09-17T01:18:20.145832+00:00",
+  "completion_mode": "optional DuckDB INSERT-only sidecar; filesystem receipts remain authority; not a scored Arena run and not a run_warmup control-plane replacement",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py": "7123e1d5cf3a9b50ce9eb7acb13040e78785004cf6bbf319339a1b9f7eba7f98",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/git-head.txt": "b20c6a097116eeb7819f618ab20b3383f4ce09ea121c9d352fd7ec81021916eb",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/ipfs_datasets-head.txt": "c3e3ae63b82b05affb19d665c3018c97f689b5ca9d497210e9d8f8bc84c91b94",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.json": "e8a54d191c10285171da85eb18e2717bbdde86e6313201638dd839634fb3c412",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.meta.json": "ab9dc9f6e09732096ef75d51f5c6eaa60571b9947aa166bf7dc4c7b7fdf673e7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.stdout.log": "e8a54d191c10285171da85eb18e2717bbdde86e6313201638dd839634fb3c412",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-duckdb.meta.json": "b08f1816b78da8d6568fee70f7cd71c19d8669b0f4c234b136800bdfb5331cd4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-duckdb.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-duckdb.stdout.log": "1d088656bd1c2706f9550f4e8cbd22e5b67331ebdeb972174f7ccd6298d6412d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-dup.meta.json": "b08f1816b78da8d6568fee70f7cd71c19d8669b0f4c234b136800bdfb5331cd4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-dup.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-dup.stdout.log": "dd36ec400331bf7b08540dc717d52d35dc058480fba8965bc3f1be2bb14a13b4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-fs.meta.json": "1e96fdd295337645be5d8209f220c1ada71a95aa3cad4ee04cfa3f748c962df3",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-fs.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-fs.stdout.log": "859a78936123d13decf28856b2d2f363b25afec836ff90ee8a648a2b4e4bc9c6"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/receipt_store.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py"
+  },
+  "criteria": [
+    {
+      "criterion": "INSERT-only; no DELETE of existing edges; no upsert_task of huge parent rows.",
+      "status": "met",
+      "explanation": "receipt_store.py writes filesystem receipts first, then optionally INSERTs tiny DuckDB rows (CIDs, verdicts, token/elab numbers). SQL is fail-closed to CREATE TABLE IF NOT EXISTS / INSERT INTO / SELECT; DELETE FROM, UPDATE, and INSERT OR REPLACE are rejected (delete_sql_rejected=true, update_sql_rejected=true, upsert_sql_rejected=true). Live DuckDB 1.5.2 INSERT of CallElimCorrect.substOldPostSubset/v4.26.0 stored 1 receipt and 2 edges; a duplicate INSERT skipped (inserted=false, skipped_duplicate=true) without DELETE. Existing edges survived (n_edges=2, existing_edges_survived=true, duplicate_edge_skipped=true). AST has no delete_edge/delete_receipt/upsert_task. Proof bodies are CAS-only (candidate.lean 3 bytes 'rfl'); row payload 323 bytes <= 8192. Huge parent rows and src/proof_text fields are rejected. Filesystem-only --store set duckdb_used=false; --require-duckdb INSERT set duckdb_used=true, inserted=true. engine=duckdb. This is not a todo_daemon upsert_task of parent task rows.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-fs.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-duckdb.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-dup.stdout.log"
+      ]
+    },
+    {
+      "criterion": "All PROOF_AUTHORITY_DIMENSIONS populated; executable_paths not primary_executable.",
+      "status": "met",
+      "explanation": "Closed vocabulary parsed from external/ipfs_datasets/ipfs_datasets_py/logic/common/duckdb_proof_store.py matches the local pin (15 names: ir, property, assumptions, premises, translator, solver, toolchain, theorem_registry, policy, resource, tree, backend_id, backend_binary, backend_version, backend_config). Self-check reported dimensions_match_duckdb_proof_store=true and all_dimensions_populated=true on the dataclass, filesystem JSON, and DuckDB row. Dropping assumptions fails closed. EnvironmentLockRecord fields include executable_paths and not primary_executable (environment_lock_has_primary_executable=false). Payloads with primary_executable are rejected; AST has no primary_executable keyword. Synthetic lock used executable_paths={\"lake\":\"/elan/toolchains/leanprover--lean4---v4.26.0/bin/lake\",\"lean\":\"/elan/toolchains/leanprover--lean4---v4.26.0/bin/lean\"}. premises used retrieve.py lemma_id_digest 70097d371a247f758872fcedd7d14209553aa4afac8ecb1e40e2555b87253e9f (CallElimCorrect.substOldPostSubset). ir=lean4-proof-body, property=statement-preserving-refactor, translator=body-splice-v1, backend_id=lake-env-lean, resource=spark_gb10, policy=open_policy_v1. kernel_command_template='{lake} env {lean} --json {source_file}'.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-duckdb.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/ipfs_datasets-head.txt"
+      ]
+    },
+    {
+      "criterion": "run_warmup.py remains the control plane.",
+      "status": "met",
+      "explanation": "CONTROL_PLANE is papers/completion/lean_refactor_arena/harness/run_warmup.py, matching supervisor.json primary_control_plane. IS_CONTROL_PLANE=false, REQUIRES_TODO_DAEMON=false, REQUIRES_DUCKDB=false, FILESYSTEM_IS_AUTHORITY=true. Self-check reported run_warmup_remains_control_plane=true. AST imports are stdlib plus sibling splice/retrieve (imported_names=['Any', 'Mapping', 'Optional', 'Path', 'Sequence', '__future__', 'annotations', 'argparse', 'asdict', 'ast', 'dataclass', 'dataclasses', 'duckdb', 'field', 'hashlib', 'json', 'pathlib', 're', 'retrieve', 'splice', 'sqlite3', 'sys', 'tempfile', 'time', 'typing']); forbidden_imports=[] (no todo_daemon, IntentRepository, paper_supervisors, or run_warmup). duckdb is a lazy optional import; duckdb_available=True in this environment but the store still writes filesystem receipts when --duckdb is omitted. run_warmup.py is not yet landed (LRA-017); this sidecar does not replace it and does not schedule the 15-problem warm-up.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-fs.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/receipt_store.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/receipt_store.py",
+        "--store",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--tag",
+        "v4.26.0",
+        "--verdict",
+        "fail",
+        "--out-dir",
+        "/tmp/lra023-snap-fs-s0mkeyuy"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-fs.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/receipt_store.py",
+        "--store",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--tag",
+        "v4.26.0",
+        "--verdict",
+        "fail",
+        "--out-dir",
+        "/tmp/lra023-snap-db-c8qoga98",
+        "--duckdb",
+        "/tmp/lra023-snap-db-c8qoga98/receipts.duckdb",
+        "--require-duckdb"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-duckdb.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/receipt_store.py",
+        "--store",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--tag",
+        "v4.26.0",
+        "--verdict",
+        "fail",
+        "--out-dir",
+        "/tmp/lra023-snap-db-c8qoga98",
+        "--duckdb",
+        "/tmp/lra023-snap-db-c8qoga98/receipts.duckdb",
+        "--require-duckdb"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/validation/store-dup.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-023/outputs/receipt_store.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "351943d8b7b162dc8838602827b10d064d838e72",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "34d5a079902887e8d796d98443bce8206458cfbf",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "receipt_store_py_sha256": "7123e1d5cf3a9b50ce9eb7acb13040e78785004cf6bbf319339a1b9f7eba7f98",
+    "protocol": "LRA/v1",
+    "store_schema": "lra-receipt-store/v1",
+    "receipt_schema": "lra-proof-receipt/v1",
+    "pr": "PR-7",
+    "duckdb_version": "1.5.2",
+    "duckdb_required": false,
+    "filesystem_authority": true,
+    "insert_only": true,
+    "control_plane": "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+    "loop": "optional-insert-only-sidecar",
+    "model_or_solver_experiment": "none; cpu-medium INSERT-only receipt writer, no live Leanstral completion, no lake compile, no Arena scores",
+    "sample_key_digest": "905677ee2b99c3229af40a99a17798024b51427dd6e411e1c578936d6aa395b8",
+    "sample_premises_digest": "70097d371a247f758872fcedd7d14209553aa4afac8ecb1e40e2555b87253e9f",
+    "duplicate_skipped": true,
+    "duckdb_first_inserted": true
+  },
+  "limitations": [
+    "Filesystem receipts remain authority. DuckDB is optional and was exercised because duckdb 1.5.2 imported under /usr/bin/python3.12; the store still writes filesystem receipts when --duckdb is omitted.",
+    "DuckDB database files are not retained (default pages exceed the tiny-row budget). Live INSERT/skip-duplicate evidence is the command stdout.",
+    "run_warmup.py is the declared control plane and is not yet landed (LRA-017). This module does not schedule the 15-problem warm-up and does not import todo_daemon.",
+    "No lake compile, no Leanstral completion, no LOCK_EX, and no Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "Negative cache records fail/error for (theorem, body_digest, toolchain) and skips retry; it does not compile Lean.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}
