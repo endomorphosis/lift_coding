@@ -1,0 +1,23 @@
+{
+  "arena_score": null,
+  "expand_after_first_green": true,
+  "first_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+  "first_file": "Strata/Transform/CallElimCorrect.lean",
+  "first_is_strata": true,
+  "first_is_strata_v4_26": true,
+  "first_name": "CallElimCorrect.substOldPostSubset",
+  "first_tag": "v4.26.0",
+  "first_url": "https://github.com/strata-org/Strata",
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "independent_kernel_verifier_default_timeout_seconds": 30.0,
+  "independent_kernel_verifier_is_lake_oracle": false,
+  "jsonl_bytes": 113826,
+  "kernel_command_template": "{lake} env {lean} --json {source_file}",
+  "measurement_argv_template": "{lake} env {lean} -DmaxHeartbeats=400000 --json {source_file}",
+  "measurement_maxHeartbeats": 400000,
+  "n_records": 15,
+  "newest_tag_first": true,
+  "official_timeout_seconds": 1200.0,
+  "score": null,
+  "warmup_timeout_seconds": 600.0
+}
