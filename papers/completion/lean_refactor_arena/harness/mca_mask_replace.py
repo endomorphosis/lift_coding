@@ -376,6 +376,9 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
             continue
         cleaned.append(line)
     out = "\n".join(cleaned)
+    out = re.sub(r"\bgrind\b", "simp_all", out)
+    out = re.sub(r"\bexact\?", "simp_all", out)
+    out = re.sub(r"\bapply\?", "simp_all", out)
     if "unknown tactic" in blob.lower():
         # Error often omits the name; drop leftover non-Lean tokens on their own line.
         again: list[str] = []
