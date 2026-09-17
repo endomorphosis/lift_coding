@@ -1,0 +1,14 @@
+           Table 10: Ablations for the actual learning method. All outcomes are pending a frozen run.
+
+      Arm      Condition                                        Main question
+      T0       Deterministic codec and view adapters            Teacher baseline, coverage and original
+                                                                fidelity
+      T1       Adaptive learner with sample memory              How much apparent gain is memorization?
+      T2       Same learner, shared parameters only             Does prediction generalize to unseen source
+                                                                families?
+      T3       T2 plus isolated proof heads                     Does trusted feedback improve
+                                                                routing/calibration without harming fidelity?
+      T4       T3 plus admitted stable guidance                 Does the actual compiler/realizer improve
+                                                                when guidance is consumed?
+      T5       Bounded compiler/decompiler code                 Does algorithm repair add value beyond
+               improvements                                     numerical updates?

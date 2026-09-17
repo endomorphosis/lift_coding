@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 84,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 394,
+  "prompt_tokens": 394,
+  "raw_sha256": "6b53a8af71bf1a71b320b404bfb0e7120fef8cfa43b10ddb243a6de7f62ce988",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"calls\\\": [{\\\"emit_allowed\\\": \\\"source-relative\\\"}]}\"} <|im_end|><|im_end|>\n<|im_start|>handler>\n{\"type\": \"json_object\", \"text\": \"{\\\"calls\\\": [{\\\"emit_allowed\\\": \\\"source-relative\\\"}]}\"} <|im_end|>",
+  "wall_seconds": 8.210798764004721
+}

@@ -1,0 +1,194 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-013",
+  "status": "complete",
+  "completed_at": "2026-09-16T23:53:44.957450+00:00",
+  "completion_mode": "olean bake plan with Strata v4.26 first, fail-closed missing cache under network=deny, and per-tag Putnam Mathlib+Aesop lake projects; not a live lake build and not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/README.md": "cbce5252835a241050082243bb5611cc37a516ba6195f868cd6b479bd177e54c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py": "d83b79e474f7c11d57887449298d9a02e1125a9cb67c33f8b0a089324709e5f6",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.25.0/Putnam/Candidate.lean": "999c14f85be0f50847a2b516852875f994763b64918ee03b7522ea70d172fd13",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.25.0/Putnam.lean": "da633053331aa3fa8ff4ba0e309198e0004d5d835316d7d00ddec35830b08184",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.25.0/lakefile.lean": "4282f118f461df29a3aad995b185fd9f709d011ca36caebc03a70d67924d76fc",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.25.0/lean-toolchain": "dbbf063fc415c8e718172605f23a8f86679a3c320eff6d3890cc009534452925",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.25.0/pins.json": "668edf5ae7411ed003da4a5ca9391b0e854a950138fa3c3511efccda8ea3bc0a",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/Putnam/Candidate.lean": "999c14f85be0f50847a2b516852875f994763b64918ee03b7522ea70d172fd13",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/Putnam.lean": "da633053331aa3fa8ff4ba0e309198e0004d5d835316d7d00ddec35830b08184",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/lakefile.lean": "6b5ff8933a43d0fc32fb7d9ee0964dfe6dde9612bc7b9ec44d9377f4c7514082",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/lean-toolchain": "e8173aad377a6d70041e5f7a5d8895ed587628f5cab243c53a18c40a1b7b6bf8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/pins.json": "904134b5650915e6c224d4da4cd2b222181eea4dde9b097b3dfa4b7b060bc39a",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.27.0/Putnam/Candidate.lean": "999c14f85be0f50847a2b516852875f994763b64918ee03b7522ea70d172fd13",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.27.0/Putnam.lean": "da633053331aa3fa8ff4ba0e309198e0004d5d835316d7d00ddec35830b08184",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.27.0/lakefile.lean": "11b8e6fcf536c30e56aac04cb70e5ff8ca9255a0ccdd98714f8983e06a8a2fb7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.27.0/lean-toolchain": "d55ca0039a5479db5b38919d005b2c427b89b3be4f0184a20f2f4eae931f5bdb",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.27.0/pins.json": "d8621077a90694da7399c2c3f817c8fcf5c4a5a79af5c12bec128c0fd0226be2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/dump-putnam-v4.26.meta.json": "24cb8be47182eede44b5baa7c61eca0ca9b5150b4f133a559df96757bf4fa87c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/dump-putnam-v4.26.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/dump-putnam-v4.26.stdout.log": "989ab5b661716c9e4e08288a0adba8c3c0183b7e8e0ecaa42fa7fd10ed8fb6f1",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/git-head.txt": "84f612b0ba3955701237ef7ae66dc84dd348a8cb93ee2baaca8eabb7775bdde5",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/ipfs_datasets-head.txt": "c3e3ae63b82b05affb19d665c3018c97f689b5ca9d497210e9d8f8bc84c91b94",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/materialize-putnam.meta.json": "651fb20eddeae464b0f95938edb6ec619c78ee44846e0c7749fa1366ee0250d7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/materialize-putnam.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/materialize-putnam.stdout.log": "1bdddfea27bec5252576da1f0e6b5110fe2cfeac98f7ece5f6c9dc93941210cc",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/plan.meta.json": "981853be43d88c148775ab44568a5306c1cc3499d738d7a1e32973c8dd602014",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/plan.stdout.log": "8dabb575eca081e3a1a8e6ecc3244e9e9b53a331e1f56f6877578ccde6d63659",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/probe-toolchain.meta.json": "bd18e1719ebd861fbcd49f11416f1901373155d3a8cc1eab9495ecb1c7a94195",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/probe-toolchain.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/probe-toolchain.stdout.log": "7e362f645c143d6339eb63b214ad31be7feb2118ace921229e444596bfcb5d7f",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.json": "962db5bdbfdee93f09d0253ab3563d660c78c6a905196e7034308a5fa3c92cf2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.meta.json": "42395842c097834f981fdd828469f654fd41877646cee4e8787568b9fc9d3a3b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.stdout.log": "962db5bdbfdee93f09d0253ab3563d660c78c6a905196e7034308a5fa3c92cf2"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/bake_oleans.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py",
+    "papers/completion/lean_refactor_arena/harness/putnam_lake/README.md": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/README.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Strata v4.26 olean bake is recorded first; missing cache fails closed under network=deny.",
+      "status": "met",
+      "explanation": "bake_oleans.py --plan/--self-check loaded the frozen warm-up JSONL (SHA-256 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804, 113826 bytes, 15 records) and recorded 15 unique bake jobs. Job 0 is the Strata v4.26.0 repo unit: https://github.com/strata-org/Strata at commit 451e5f047bafa010d178856db76c00029bfa4d7f, covering Strata/Transform/CallElimCorrect.lean and Strata/Languages/Core/StatementSemanticsProps.lean. Self-check set first_is_strata_v4_26=true and strata_v426_before_rest=true (phase 0 before other repo tags and before Putnam). A synthetic Strata v4.26 cache (BAKED marker plus one .olean) was accepted under network=deny; a missing Putnam cache raised OleanCacheMissing with network=deny in the message (missing_cache_fails_closed_under_network_deny=true). No PATH lake fallback. oleans_baked=false: tag-pinned elan lake is not installed (capability gap), so this task records the bake order and the fail-closed missing-cache contract rather than a multi-hour lake build.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/jsonl-sha256.txt"
+      ]
+    },
+    {
+      "criterion": "Putnam is a per-tag Mathlib+Aesop lake project, not Tmp.lean.",
+      "status": "met",
+      "explanation": "The three Putnam JSONL records have empty url/file_path and headers that import Mathlib and Aesop. bake_oleans.py materializes one lake project per tag v4.25.0/v4.26.0/v4.27.0 with lakefile.lean requiring mathlib and aesop from git at that Lean tag, lean-toolchain leanprover/lean4:<tag>, Putnam.lean importing Putnam.Candidate, and Putnam/Candidate.lean as the compile-worker module. pins.json sets putnambench_url=null and tmp_lean=false; the JSONL git commit is stored only as jsonl_version_pin and is not cloned. Self-check set putnam_not_tmp_lean=true, any_putnam_tmp_lean=false, write_candidate_rejects_tmp_lean=true, and all_putnam_have_mathlib_aesop_lakefile=true. AST audit found no https PutnamBench clone URL. harness/putnam_lake/README.md documents the same layout. --dump-putnam-project --tag v4.26.0 and --materialize-putnam wrote those files; none is Tmp.lean.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/README.md",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/lakefile.lean",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake/v4.26.0/pins.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/dump-putnam-v4.26.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.json"
+      ]
+    },
+    {
+      "criterion": "No Arena scores.",
+      "status": "met",
+      "explanation": "BakeJob.arena_score is always None. --self-check, --plan, --probe-toolchain, --dump-putnam-project, and --materialize-putnam each emit arena_score=null (and score=null on the plan/self-check). AST audit reported score_assignments=[]. Self-check set compiled=false, lake=false, lake_build_executed=false, oleans_baked=false, llama_server_started=false. No token-savings percentage or Track 1/Track 2 ranking was produced.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "--probe-toolchain"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/probe-toolchain.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "--dump-putnam-project",
+        "--tag",
+        "v4.26.0"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/dump-putnam-v4.26.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "--materialize-putnam",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/putnam_lake"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/validation/materialize-putnam.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-013/outputs/bake_oleans.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "4e7c3101d7ddc3159a80ae5a920b3b11c2274194",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "34d5a079902887e8d796d98443bce8206458cfbf",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "n_bake_jobs": 15,
+    "n_repo_jobs": 12,
+    "n_putnam_jobs": 3,
+    "strata_first_tag": "v4.26.0",
+    "strata_first_commit": "451e5f047bafa010d178856db76c00029bfa4d7f",
+    "putnam_tags": [
+      "v4.25.0",
+      "v4.26.0",
+      "v4.27.0"
+    ],
+    "putnam_module": "Putnam.Candidate",
+    "forbidden_putnam_basename": "Tmp.lean",
+    "mathlib_git": "https://github.com/leanprover-community/mathlib4.git",
+    "aesop_git": "https://github.com/leanprover-community/aesop.git",
+    "measurement_maxHeartbeats": 400000,
+    "kernel_command_template": "{lake} env {lean} --json {source_file}",
+    "bake_argv_template": "{lake} build",
+    "elan_toolchain_layout": "{ELAN_HOME}/toolchains/leanprover--lean4---<tag>/bin/{lean,lake}",
+    "bake_oleans_py_sha256": "d83b79e474f7c11d57887449298d9a02e1125a9cb67c33f8b0a089324709e5f6",
+    "putnam_readme_sha256": "cbce5252835a241050082243bb5611cc37a516ba6195f868cd6b479bd177e54c",
+    "protocol": "LRA/v1",
+    "model_or_solver_experiment": "none; cpu-heavy olean bake plan and Putnam Mathlib+Aesop lakefiles only, no live lake build, no Arena scores",
+    "self_check_ok": true,
+    "oleans_baked": false,
+    "capability_gap": true
+  },
+  "limitations": [
+    "No tag-pinned elan lean/lake binaries are installed under the resolver elan home (Path.home()/.elan or ELAN_HOME). All bake jobs resolve to tag-pinned paths with installed=false. That is a recorded capability gap, not PATH lake usability and not a completed olean bake.",
+    "Authoritative validation uses a sealed PATH (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin) and a fresh HOME named ipfs-accelerate-validation-home-*; operator ~/.elan is unavailable there as well.",
+    "Self-check plants a synthetic Strata v4.26 .olean cache to prove network=deny fail-closed behavior. Dummy .olean bytes are not a Mathlib or Strata build.",
+    "A live lake build was not executed (oleans_baked=false, lake_build_executed=false). First lake build remains hours and must run on a host with tag-pinned elan and, unless caches are pre-vendored, network=allow.",
+    "Putnam Mathlib/Aesop revisions are the Lean tags v4.25.0/v4.26.0/v4.27.0. JSONL git commits are recorded as jsonl_version_pin only; they are not used as a PutnamBench clone. If organizers later publish SHAs in evidence/run_freeze.json, replace the pins and rebake.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "This task did not call Leanstral, did not LOCK_EX, and did not start llama-server."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-003",
+  "status": "blocked",
+  "blocked_reason": "The task's exact allowed edit paths exclude the immutable receipt snapshot directory that the protected verifier requires for every complete receipt. Creating papers/completion/law_to_action/receipts/snapshots/LA-003/* would be outside the declared output scope; without those files a truthful receipt cannot have status complete.",
+  "artifacts": {},
+  "outputs": {},
+  "criteria": [],
+  "commands": [],
+  "source_versions": {
+    "protocol_basis": "papers/completion/law_to_action/environment_inventory.json",
+    "authoritative_environment": "/usr/bin/python3.12 with PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "limitations": ["This receipt records the scope conflict rather than asserting unsupported completion.", "The protocol itself records no empirical outcomes and schedules no model- or solver-dependent run."]
+}

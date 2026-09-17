@@ -1,0 +1,149 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-026",
+  "status": "complete",
+  "completed_at": "2026-09-12T06:17:34.938864+00:00",
+  "completion_mode": "Recovered official GitHub vulnerable/fixed revisions for the frozen twelve CVE families and twenty-four reserved cases. Isolated reproductions observe source differences at those revisions; untrusted source was not executed. Eighty-four excluded controls retain complete source and mutation lineage and do not enter empirical sample counts. Reviewer polarity and adjudication fields are blank. Independent human security review remains pending in LA-027 and LA-006.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/cve_review.md": "c448a29137708c6980c084713e77c18c3938d9b857db791b7f825c4a9aece437",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/review_packet_manifest.json": "6272e6a0d6f4905c6f0a727a2735d1ec94caf290cc107256fb53e7996d74ffa5",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_controls.jsonl": "9c4ef24da2b52c5f7965f60327f3c1f56159090d6221fd3791827415b780966c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_pairs.jsonl": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/failures.jsonl": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/index.json": "36eb9b6fe1f207a0e12e0f220f8d0667f2ffb4bb09c0ddf686927a5078a695b7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2014-2829.json": "c39f9c03cd9c46b6c6fed8395757b0d7c649f6a1259e5cc315bccc90be817bca",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2015-10092.json": "e2e1a5494742a05515adef9b06a4b6a7bcd1d2aab1b5136e3962d58b2205c838",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2016-7149.json": "1b042f7974654908b5d9a9b458bf31201d00daf5c8ec7428363d81dca129faea",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2017-16876.json": "e2ea49b9233e950c98798f47a074ba71b1b8e4b450f9fdf3d5f1671b5f20f27b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2019-25087.json": "dcb091cafb7c687282710ad7becb86e358c17ebbe623bbe524bd602eee290261",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-15084.json": "ac8de7ebe32db0bd1ffb4a3167ad98654a5cd6aea88b56a44c248d89afa5f93b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-24654.json": "a3677a45caf2825708810665a8350e12d085ec709894982beecaf7153370abb4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-7763.json": "eaf6ada6ebe754e55a8441b5115e61bbc425bb2728d55dbd76be0cb9df928a28",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2021-4265.json": "c8cd6ae9339f2b5213456b1eb538927c7966b1030063539b09722c7bebfeb791",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2022-21159.json": "507280a4cdb4cf653c2332672116916e8acceed97f193e84008a841c4d49cbe2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2023-51665.json": "b619dbe2b27c806157562fe873caf3617884e85c020625acf2f9e4168c2ad1e8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2024-24746.json": "71bc66364f790008a9e3d5a83212173039eb2f6b613f47788584c099e922b590",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/recover_upstream.py": "8d9ac0eae502bd9d00af3c76ebfe910512943f356d5ba7652fc161db9b2ace72",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/validate_reproduction.py": "4a4125582c117f9746e3af9347eea3ee3a7375d1217a62bbaaa42ba33723ee83",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/recover_upstream.stdout.log": "1c6839c0dc27222f09011e8d9746fe4926c1cf2531a693c8cf65b72f0fed5e46",
+    "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/validate_reproduction.stdout.log": "8ad9354ab0c8e8975cb7aa44d43c750667a7215fd15ca2e6a1d45128cc8a31e9"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_pairs.jsonl",
+    "papers/completion/law_to_action/benchmark/cases/cve_controls.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_controls.jsonl",
+    "papers/completion/law_to_action/benchmark/annotations/cve_review.md": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/cve_review.md",
+    "papers/completion/law_to_action/benchmark/annotations/review_packet_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/review_packet_manifest.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/index.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/index.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/failures.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/failures.jsonl",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2019-25087.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2019-25087.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2020-15084.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-15084.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2023-51665.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2023-51665.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2024-24746.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2024-24746.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2020-24654.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-24654.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2020-7763.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-7763.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2014-2829.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2014-2829.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2022-21159.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2022-21159.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2016-7149.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2016-7149.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2017-16876.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2017-16876.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2015-10092.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2015-10092.json",
+    "papers/completion/law_to_action/benchmark/cve_reproduction/pairs/CVE-2021-4265.json": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2021-4265.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Every reserved pair has exact source/revision hashes and an isolated reproduction or precisely defined source-supported behavior evidence, with failure records for all attempted recovery.",
+      "status": "met",
+      "explanation": "All twelve frozen pairs record shard SHA-256, file_row_number, repository, fix commit, first-parent vulnerable revision, recovered commit SHA, git blob SHAs, and SHA-256 hashes of recovered file bytes. Isolated reproductions observe the source difference at those revisions. Source-supported behavior is defined from recovered files, commit patches, CWE observations, and pinned shard locators. Native sinks were not executed. Every attempted recovery that failed would be recorded in failures.jsonl; this run recovered both sides of all twelve pairs with zero failed attempts, and the empty failure log is retained.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/index.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/failures.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2024-24746.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2014-2829.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2020-15084.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/recover_upstream.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/validate_reproduction.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validate_reproduction.py"
+      ]
+    },
+    {
+      "criterion": "The frozen 12 pairs/24 cases and 84 excluded controls remain distinguishable with complete source and mutation lineage; no synthetic control enters empirical sample counts.",
+      "status": "met",
+      "explanation": "Empirical sample counts remain exactly twelve LA-004 repository families and twenty-four reserved case identities. Each pair and control carries source and mutation lineage including family, source_id, CVE, fix commit, parent revision, and source_record_sha256. Sixty synthetic policy-mutation controls and twenty-four real distractor/fixed-side controls are labeled empirical_sample false and enters_empirical_sample_count false. Fixture identifier CVE-2026-0042 is absent from empirical counts.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_controls.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/cve_review.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/index.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/validate_reproduction.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validate_reproduction.py"
+      ]
+    },
+    {
+      "criterion": "Reviewers receive source evidence, scope assumptions and blank polarity/adjudication fields in a complete manifest; independent review remains pending in LA-027 and LA-006.",
+      "status": "met",
+      "explanation": "review_packet_manifest.json contains 108 packets covering all 24 empirical cases and 84 excluded controls. Every packet includes source evidence and scope assumptions, and polarity, expected_polarity, adjudication, agreement, disagreement, reviewer_id, reviewed_at, reviewer_notes, and final_adjudication are null. Independent review status is pending in LA-027 and LA-006. Packet state polarity remains unknown; no independent expected polarity was inferred from recovered source or the implementation under evaluation.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/review_packet_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/annotations/cve_review.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/validate_reproduction.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validate_reproduction.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/recover_upstream.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:17:34.938864+00:00",
+      "completed_at": "2026-09-12T06:17:34.938864+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/recover_upstream.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-026/recover_upstream.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-026/validate_reproduction.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-12T06:17:34.938864+00:00",
+      "completed_at": "2026-09-12T06:17:34.938864+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-026/validation/validate_reproduction.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-026/validate_reproduction.py"
+    }
+  ],
+  "source_versions": {
+    "repository_tree_id": "c3e1d703cc3122ab7da0da5bbe69a0440b51cb17",
+    "python": "/usr/bin/python3.12 (Python 3.12.3)",
+    "github_api": "https://api.github.com",
+    "raw_source_host": "https://raw.githubusercontent.com",
+    "cvefixes_dataset": "hitoshura25/cvefixes",
+    "cvefixes_revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "cvefixes_first_shard_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+    "la004_frozen_manifest_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+    "la004_frozen_split_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+    "recovery_worker": "la026-source-recovery-implementation-worker",
+    "independent_human_security_review": "pending_LA-027_and_LA-006",
+    "untrusted_source_executed": false,
+    "pairs_recovered": 12,
+    "empirical_cases": 24,
+    "excluded_controls": 84,
+    "failed_recovery_attempts": 0
+  },
+  "claim_limitations": [
+    "Independent human security review was not obtained and remains pending in LA-027 and LA-006.",
+    "Generated, packet-preparer, and source-recovery labels are not expert review.",
+    "Independently reviewed expected polarity is blank in the reviewer manifest and unknown in packet state.",
+    "Untrusted CVE and upstream source was not executed; isolated reproduction observes source differences, not native exploits.",
+    "A fix for one scoped restriction is not universal security.",
+    "Evaluation admission for CVE cases remains blocked until competent independent review and adjudication.",
+    "Twelve repository families from one shard are not the full CVEfixes release.",
+    "The structural validator is provenance checking, not scientific peer review."
+  ]
+}

@@ -1,0 +1,283 @@
+{
+  "activity_labels": {
+    "automated": [
+      "isolated ZIP extract",
+      "reproduce.sh retained-data analysis",
+      "pdfinfo/pdftotext inspection",
+      "template/checklist/placeholder audit",
+      "claim-to-raw comparison",
+      "optional CFP fetch"
+    ],
+    "human_not_performed": [
+      "independent legal/security/intent review",
+      "inter-annotator agreement",
+      "optional author scientific sign-off",
+      "OpenReview or CFP portal submission",
+      "workshop acceptance"
+    ]
+  },
+  "analysis_verification": {
+    "all_45_paired_family_bootstrap_contrasts_recomputed": true,
+    "all_9933_original_reducer_inputs_verified": true,
+    "all_package_files_verified": true,
+    "compact_analysis": {
+      "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+      "exit_code": 0,
+      "scope": "offline retained analysis and local harness controls; no scientific execution",
+      "timed_out": false,
+      "wall_seconds": 0.5664286779938266
+    },
+    "new_scientific_executions": 0,
+    "recovery_analysis": {
+      "cpu_limit_scope": "per process; not a measured whole-group CPU counter",
+      "exit_code": 0,
+      "scope": "offline retained analysis and local harness controls; no scientific execution",
+      "timed_out": false,
+      "wall_seconds": 11.73716214101296
+    },
+    "schema": "law-final-offline-reproduction/v1",
+    "scope": {
+      "actual_group_cpu_seconds": 1608.817478,
+      "analysis": "retained modeled-policy sandbox effects and paired family bootstrap; not new physical enforcement or scientific execution",
+      "historical_host_false_flags_preserved": [
+        459,
+        560
+      ],
+      "historical_startup_failures_preserved": [
+        591,
+        625
+      ],
+      "host_attempts": 902,
+      "human_agreement": null,
+      "human_fidelity": null,
+      "model_calls_in_fixed_action_study": 0,
+      "new_scientific_executions": 0,
+      "scientific_rows": 900,
+      "startup_cpu_seconds_counted_once": 0.118787
+    },
+    "success": true
+  },
+  "cfp": {
+    "abstract_deadline": "2026-09-11 AoE",
+    "activity": "automated",
+    "error": null,
+    "http_status": 200,
+    "live_bytes": 14043,
+    "live_fetch": true,
+    "live_sha256": "66b5740723edb198ed6faf80430bbee3634e316ee4c0385a64da6480e0724468",
+    "matches_retained": true,
+    "paper_deadline": "2026-09-13 AoE",
+    "retained_sha256": "66b5740723edb198ed6faf80430bbee3634e316ee4c0385a64da6480e0724468",
+    "url": "https://vericodegen.github.io/cfp.html"
+  },
+  "claims": {
+    "claim_statuses": [
+      "empirical_admitted",
+      "empirical_qualification",
+      "future_work",
+      "implementation_nonempirical",
+      "protocol_unadmitted_diagnostic",
+      "shared_producer_conformance",
+      "withdrawn_unmeasured"
+    ],
+    "human_agreement": null,
+    "model_calls": 0,
+    "rate_mismatches": [],
+    "recomputed_table": {
+      "final:A0": [
+        54,
+        54,
+        54,
+        54,
+        0,
+        54
+      ],
+      "final:A3": [
+        18,
+        54,
+        54,
+        54,
+        0,
+        54
+      ],
+      "final:A4": [
+        0,
+        54,
+        54,
+        54,
+        0,
+        54
+      ],
+      "overall:A0": [
+        90,
+        90,
+        90,
+        90,
+        0,
+        90
+      ],
+      "overall:A1": [
+        90,
+        90,
+        90,
+        90,
+        0,
+        90
+      ],
+      "overall:A2": [
+        90,
+        90,
+        90,
+        90,
+        0,
+        90
+      ],
+      "overall:A3": [
+        33,
+        90,
+        90,
+        90,
+        0,
+        90
+      ],
+      "overall:A4": [
+        0,
+        90,
+        90,
+        90,
+        0,
+        90
+      ]
+    },
+    "source_ir_schema_valid": 50,
+    "source_ir_span_linked": 60,
+    "summary_host_attempts": 902,
+    "summary_rows": 900,
+    "unsupported_empirical_phrases": [
+      "universal legal correctness",
+      "universal prevention"
+    ]
+  },
+  "completed_at": "2026-09-13T04:08:03.264807+00:00",
+  "discrepancies": [
+    "AUTOMATED capability gap: latexmk/pdflatex are absent from PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin. Documented ./build_pdf.sh was not run. Live paper.pdf b306a5d4c64961f9e9a1c061dac99645fbc3fca406621092ba813bc3cd221ecb was inspected instead of rebuilt.",
+    "HISTORICAL: submission/template_inputs.json compiled.pdf_sha256 e51fbbdc79f6f29f74899b6861d1bc36d34f3df15a8daafce0a98d4ccd042c43 records the earlier LA-024 compile; live paper.pdf is the public_redaction_v4 file b306a5d4c64961f9e9a1c061dac99645fbc3fca406621092ba813bc3cd221ecb. Not a scientific outcome change.",
+    "HISTORICAL: submission/template_inputs.json compiled.zip_sha256 bce0e313c66fab971fbb86b613125bcb098f6bf20039b1307eb27660d787dd22 records the earlier LA-024 archive; live ZIP is the public_redaction_v4 file e46b58516a47020e3df826bb7cdc3f870566c28a6a3eb92c5abf53c64ed679e1. Not a scientific outcome change.",
+    "WORKTREE: papers/completion/law_to_action/manuscript/main.log is a stale 2026-09-11 compile and is not the submission PDF log. Citation/overflow checks used the retained LA-024 public_redaction_v4 build_evidence logs."
+  ],
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "activity": "automated",
+    "git_dirty_files": 1,
+    "git_head": "2995f20e6b36ed0fa0f703765bb5bd567f0209b7",
+    "home_basename": "home",
+    "latexmk_rebuild_attempted": false,
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "python_version": "3.12.3",
+    "tools": {
+      "git": "/usr/bin/git",
+      "latexmk": "absent",
+      "pdfinfo": "/usr/bin/pdfinfo",
+      "pdflatex": "absent",
+      "pdftotext": "/usr/bin/pdftotext",
+      "python3": "/usr/bin/python3",
+      "python3.12": "/usr/bin/python3.12"
+    }
+  },
+  "external_submission": false,
+  "new_scientific_executions": 0,
+  "pdf": {
+    "anonymous_block": true,
+    "author_metadata": "Creator:         LaTeX with hyperref",
+    "bytes": 215003,
+    "main_text_pages": 7,
+    "pages": 23,
+    "scientific_placeholders": [],
+    "sha256": "b306a5d4c64961f9e9a1c061dac99645fbc3fca406621092ba813bc3cd221ecb",
+    "workshop_footer": true
+  },
+  "pdf_rebuilt_in_this_task": false,
+  "recovery_verification": {
+    "actual_group_cpu_seconds": 1608.817478,
+    "all_45_paired_family_bootstrap_contrasts_recomputed": true,
+    "all_9933_original_reducer_inputs_included": true,
+    "all_member_digests_verified": true,
+    "final_families": 18,
+    "host_attempts": 902,
+    "leaf_samples_verified": 92113,
+    "lineage_families": 30,
+    "native_or_docker_calls": 0,
+    "original_host_false_flags_preserved": [
+      459,
+      560
+    ],
+    "parent_samples_verified": 109437,
+    "schema": "la029-portable-offline-reproduction/v1",
+    "scientific_executions": 0,
+    "scientific_rows": 900,
+    "scope": "Reproduction of retained observed evidence and analysis; no new benchmark, fresh physical enforcement, source-semantic/legal validity, independent human agreement or model efficacy is inferred.",
+    "startup_cpu_counted_once": 0.118787,
+    "startup_host_failures_preserved": [
+      591,
+      625
+    ],
+    "success": true,
+    "wall_seconds": 7.855954769998789
+  },
+  "reproduce_command": {
+    "argv": [
+      "/bin/sh",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-025-408fcb814e09-attempt-1-1789271759/papers/completion/law_to_action/receipts/snapshots/LA-025/work/extract/law_to_action_final_supplement/reproduce.sh",
+      "--output",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-025-408fcb814e09-attempt-1-1789271759/papers/completion/law_to_action/receipts/snapshots/LA-025/work/analysis"
+    ],
+    "completed_at": "2026-09-13T04:07:59.827139+00:00",
+    "cwd": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-025-408fcb814e09-attempt-1-1789271759/papers/completion/law_to_action/receipts/snapshots/LA-025/work/extract/law_to_action_final_supplement",
+    "execution_kind": "automated",
+    "exit_code": 0,
+    "started_at": "2026-09-13T04:07:47.439774+00:00",
+    "stderr": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-025-408fcb814e09-attempt-1-1789271759/papers/completion/law_to_action/receipts/snapshots/LA-025/work/logs/isolated_reproduce.stderr.txt",
+    "stdout": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-025-408fcb814e09-attempt-1-1789271759/papers/completion/law_to_action/receipts/snapshots/LA-025/work/logs/isolated_reproduce.stdout.txt",
+    "timeout_seconds": 300
+  },
+  "schema": "law-la025-isolated-reproduction/v1",
+  "sources": {
+    "anonymous_default_style": true,
+    "checklist_answers": [
+      "Yes",
+      "Yes",
+      "NA",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "No",
+      "NA",
+      "Yes",
+      "Yes",
+      "NA",
+      "NA",
+      "NA"
+    ],
+    "checklist_justification_count": 16,
+    "copied_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "cve_population_wording": "24 cases / 12 pairs",
+    "shared_template_sha256": {
+      "papers/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "papers/neurips_2026.sty": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+      "papers/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "papers/neurips_2026_vericode_competition.sty": "a0178f152d13cf24f44936da0ee95bab975ceced8d54980efbbf8f7c1bb31f72",
+      "papers/neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "papers/neurips_2026_vericode_workshop_competition.tex": "0e21c08ce8a32cb3d4c0fb7123d38249209c2ef488a0c210acbea026f6fefc23"
+    },
+    "shared_templates_unchanged": true,
+    "source_placeholder_hits": []
+  },
+  "zip": {
+    "bytes": 31209772,
+    "sha256": "e46b58516a47020e3df826bb7cdc3f870566c28a6a3eb92c5abf53c64ed679e1"
+  }
+}

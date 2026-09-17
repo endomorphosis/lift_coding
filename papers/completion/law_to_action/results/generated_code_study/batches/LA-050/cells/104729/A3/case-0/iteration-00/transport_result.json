@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 127,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 573,
+  "prompt_tokens": 573,
+  "raw_sha256": "5ebcf9f09e3cda0d881c97901b1915bbf3cce698fea1f791d2b986b175d399dd",
+  "response_text": "```json\n{\n  \"emit_allowed\": [\n    {\n      \"kind\": \"patch\",\n      \"target\": \"github.com/xwiki/xwiki-rendering\",\n      \"language\": \"Other\",\n      \"value\": \"CVE-2023-32070: Prior to version 14.6-rc-1, HTML rendering didn't check for dangerous attributes/attribute values, allowing XSS attacks via attributes and link URLs in XWiki syntax. Fixed in version 14.6-rc-1.\"\n    }\n  ]\n}\n```<|im_end|>",
+  "wall_seconds": 12.738211995994789
+}

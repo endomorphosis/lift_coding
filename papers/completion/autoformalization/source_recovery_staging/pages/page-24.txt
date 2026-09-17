@@ -1,0 +1,59 @@
+755   SMT-facing API may report a solver-local result without representing it as a native ITP theorem.
+756   [artifact S19,S37]
+757   A theorem applies to the formalized premises and goal. It does not independently establish that the
+758   original prose, source-code extractor, or cross-domain identity mapping was correct. In particular,
+759   a valid reconstructed proof of an incorrectly simplified obligation does not repair the semantic loss
+760   caused by the simplification.
+
+761   O.3    What the optional premise selector actually learns
+
+762   The deterministic baseline uses symbol, type, import, and graph-overlap features. The optional
+763   selector artifact applies a bounded linear score followed by a sigmoid, with additional count features
+764   and a pinned model digest. The supplied default weights are hand-authored. Its documentation
+765   explicitly does not claim a trained neural or tree-based checkpoint. A genuinely learned artifact can
+766   fit the same interface, but the training dataset, loss, split, parameter provenance, and evaluation would
+767   then require separate evidence. [artifact S36]
+768   The documented held-out benchmark uses shared-import proximity as a relevance proxy because
+769   the fixture corpus lacks explicit theorem-to-theorem dependency labels. Recall or reciprocal rank
+770   against that proxy is not ground-truth proof-premise recall. A digest binds the loaded artifact; it
+771   neither demonstrates training nor proves that the source of the digest was independently trusted.
+
+772   O.4    Leanstral does not train itself by generating a draft
+
+773   The security proof-assistant lane treats Leanstral output as advisory and checks the proposed Lean
+774   code against a designated proof consumer. Its policy rejects proof bypasses such as sorry, admit,
+775   or unapproved axioms. Configuration readiness, an actual model call, a generated candidate, and a
+776   checker-accepted proof are different events. The source audit does not demonstrate fine-tuning of
+777   Leanstral’s base weights. [artifact S39]
+778   The legal rollout gives the return path to learning an explicit artifact boundary. Candidate JSON or
+779   free-form drafts are audit inputs only. Structured guidance that passes the required syntax, provenance,
+780   anti-copy, proof, and configured reconstruction checks may enter the trusted feature bus and bounded
+781   autoencoder training. A stable source-free export remains inert until its independent promotion gate
+782   accepts it. A deterministic compiler/decompiler patch is a separately versioned executable change
+783   with focused tests and frozen-canary evidence. [artifact S40]
+784   The documented rollout is an ordered smoke, hyperparameter-selection, fixed-canary, and production
+785   sequence. Promotion checks per-family semantics, reconstruction, source-copy behavior, trusted-
+786   feedback receipt agreement, process outcomes, queue telemetry, accepted-patch rate, and rollback
+787   identity. These are documented control requirements, not evidence that this manuscript executed or
+788   completed such a rollout.
+
+789   P     Putting the representations and update loops together
+790   This explanatory procedure composes inspected interfaces while explicitly separating design from
+791   execution. It is not a claim that one repository function implements the entire procedure with every
+792   optional component enabled.
+
+793   Construct and ground. Begin with a versioned source and provenance. Retrieve candidate frames
+794   or context through the configured lexical, numerical, or graph route. Compile an interpretation using
+795   the chosen domain adapter and record ambiguity or unsupported semantics. Preserve the canonical
+796   declaration independently of any learned feature vector. Numerical targets identify their producer;
+797   compiler-derived targets identify their teacher. [artifact S01,S07,S22,S34,S35]
+
+798   Project and challenge. Produce named logical views using shared symbols and explicit projection
+799   contracts. A frame view records roles, a deontic view records normative force, a temporal view
+800   records clock relations, and an event view records transitions. Source-withheld decompilation exposes
+801   missing reconstructable information. Minimal pairs and independent annotations challenge omissions
+802   that a compiler/decompiler cycle could share. [artifact S04,S07,S09,S31]
+
+
+                                                         24
+

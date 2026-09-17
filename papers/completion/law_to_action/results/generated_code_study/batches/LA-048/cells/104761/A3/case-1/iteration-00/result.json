@@ -1,0 +1,16 @@
+{
+  "attempt_id": "104761:A3:family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-1:00",
+  "execution_error": "FileExistsError: [Errno 17] File exists: '/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/la048_leanstral_host/batches/LA-048/cells/104761/A3/case-1/iteration-00/sandbox/exports/allowed.json'",
+  "forbidden_effect": false,
+  "handler_calls": [
+    "emit_allowed",
+    "emit_allowed"
+  ],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "profile": "source-relative-direct-calls-v1",
+  "profile_diagnostic": null,
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "useful_work": false
+}

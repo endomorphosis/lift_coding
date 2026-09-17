@@ -1,0 +1,21 @@
+{
+  "actual_derived_audit": {
+    "archives": 1,
+    "expanded_bytes": 198376041,
+    "members": 9976,
+    "private_project_links": 0
+  },
+  "checks": 4,
+  "controls": [
+    "nested public normal archive",
+    "nested constructed private project link refused",
+    "actual unchanged v3 archive refused",
+    "actual derived v4 archive passes all9976 members"
+  ],
+  "derived_archive_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+  "original_archive_unchanged_sha256": "5456553d86dd7397ce4bd6b090ab02614da9721160974a8a4bb5b6e074d3e58d",
+  "production_effects": 0,
+  "schema": "law-recursive-public-archive-controls/v1",
+  "source_sha256": "57f67a32531508841bfea4bd830b25302a7b44718c95327409fbca01e9da019c",
+  "success": true
+}

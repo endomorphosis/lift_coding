@@ -1,0 +1,59 @@
+473   from facts, nonfactive belief, present truth from always, quantifier order, incomplete trace capture,
+474   unaligned identities, and lossy round trips.
+
+      Table 4: All twelve reference checks. “Expected” includes finding a counterexample when the tested
+      shortcut is invalid.
+      Check                                          Cases    Expected outcome
+      Normal modal distribution                        512    No finite countermodel
+      Reflexive factivity                               32    No finite countermodel
+      Serial D                                          72    No finite countermodel
+      Obligation not actuality                           1    Explicit separating model
+      Belief without factivity                           1    Explicit separating model
+      Until not conjunction                             64    26 disagreements
+      Always not current truth                           1    Explicit separating trace
+      Quantifier order                                   1    Diagonal-relation witness
+      Guarded writes                                     4    Safe relation 0; unsafe 1 violation
+      Complete audit window                             16    1 violating assignment
+      Incomplete/unaligned traces                        3    Unknown, unresolved, bounded satisfaction
+      Round-trip shared loss                             1    Equal recompiled IR; unequal source
+                                                              meaning
+
+475   A finite absence of counterexamples is not a proof of unbounded correctness. The standard semantic
+476   laws have their own mathematical proofs; these executable cases merely ensure the illustrative
+477   definitions behave as described.
+
+
+478   E     Pipeline manifest, evaluation protocol, and result fields
+
+479   One tested combination. Freeze the exact repository commit, loaded module paths, dirty overlays if
+480   permitted, domain adapters, schema versions, source artifacts, vocabularies, review profiles, modality
+481   profiles, compiler configuration, selected models/tokenizers, and solver/native checker versions. Do
+482   not combine one branch’s compiler with a different branch’s results and call it one tested system.
+483   This draft does not inspect unpushed local worktrees.
+
+484   Three evaluation populations. Use: (i) controlled minimal pairs with independent expected
+485   meanings; (ii) held-out natural documents, code, and traces with source-family/time splits and
+486   reviewed entity mappings; and (iii) extracted-media examples only after the concrete extraction route
+487   is installed and measured. Separate generator-authored examples from real held-out material. Keep
+488   alternative correct formalizations and abstentions instead of forcing a unique string match.
+
+489   Annotations and leakage. Freeze the intended propositions, logical profile, exceptions, temporal
+490   intervals, ambiguous readings, source-map spans, and admissible assumptions before evaluating
+491   model output. Annotators and proof scorers should not use candidate generation as their only oracle.
+492   Source derivatives, paraphrases, translations, views, and adjacent sections can leak across splits.
+493   Source-withheld realization must block original text, full source maps, file/path recovery, and access
+494   to gold IR; it must not quietly retrieve the withheld source.
+
+                   Table 5: Methods to compare under matched tasks and reasoning budgets.
+
+      Arm     Method
+      A       Direct model-to-target formalization with the same target checker.
+      B       Deterministic bounded compiler, declared vocabulary, and explicit abstention.
+      C       Typed multi-view representation with source grounding, but no admitted cross-view proof
+              transfer.
+      D       C plus checked property-specific bridges and compatible cross-source premise assembly.
+      E       D plus bounded learned view/premise advice, with frozen checkpoint and unchanged checker.
+
+
+                                                       15
+

@@ -1,0 +1,116 @@
+{
+  "schema": "law-automated-evidence-scope-amendment/v1",
+  "amendment_id": "LA-027/v1",
+  "status": "bound_versioned_amendment_before_evaluated_predictions",
+  "bound_by": "LA-027",
+  "requested_by": "user clarification relayed by root on 2026-09-12",
+  "source_head": "31dbbbcfa58e6b7746ae6678f6e52d7cc9a823dd",
+  "original_protocol": {
+    "path": "papers/completion/law_to_action/benchmark/protocol.json",
+    "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+    "protocol_revision": "LA-003/v3"
+  },
+  "original_population": {
+    "unchanged": true,
+    "families": {
+      "legal": 6,
+      "cve": 12,
+      "skill": 12,
+      "total": 30
+    },
+    "cases": {
+      "legal": 12,
+      "cve": 24,
+      "skill": 24,
+      "total": 60
+    },
+    "split_families": {
+      "development": 6,
+      "calibration": 6,
+      "final": 18
+    },
+    "splits_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+    "sources_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6"
+  },
+  "completed_receipts_unchanged": {
+    "LA-005": {
+      "path": "papers/completion/law_to_action/receipts/LA-005.json",
+      "sha256": "d63c7184e5415d7594b25c9152b933a8b3f927600d307ad22b8fd5f402e42e62"
+    },
+    "LA-007": {
+      "path": "papers/completion/law_to_action/receipts/LA-007.json",
+      "sha256": "c9771b05898a283b7254a9159133576314da02aa452079a8c98796450e8ab8c8"
+    },
+    "LA-026": {
+      "path": "papers/completion/law_to_action/receipts/LA-026.json",
+      "sha256": "d79447296f4f77952bffbac39ae9726ea1808160abea7f25e1ac3cd7b548f883"
+    },
+    "LA-028": {
+      "path": "papers/completion/law_to_action/receipts/LA-028.json",
+      "sha256": "1d724b21352f77d494566df3bbb977ac2027fdcada0a1793b42bb70cf5706fe8"
+    }
+  },
+  "blank_review_packets_preserved": {
+    "path": "papers/completion/law_to_action/benchmark/annotations/review_packet_manifest.json",
+    "sha256": "6272e6a0d6f4905c6f0a727a2735d1ec94caf290cc107256fb53e7996d74ffa5",
+    "status": "blank_fields_remain_blank"
+  },
+  "external_human_review_required": false,
+  "optional_author_review": {
+    "required": false,
+    "independent": false,
+    "collected": false,
+    "may_substitute_for_empirical_evidence": false,
+    "label": "non-independent"
+  },
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "machine_expectation_provenance": {
+    "producer_id": "la-027-automated-reference-manifest",
+    "producer_kind": "machine_contract_expectation_compiler",
+    "generated_labels_are": "explicitly identified machine-contract expectations, never human/expert gold",
+    "frozen_before_evaluated_predictions": true,
+    "manifest": "papers/completion/law_to_action/benchmark/annotations/automated_reference_manifest.json",
+    "not_human_gold": true,
+    "not_independent_review": true
+  },
+  "scope": {
+    "permitted_claims": [
+      "source provenance/span linkage and coverage",
+      "parse/schema/structural contract conformance",
+      "source-supported narrowly defined CVE behavior",
+      "actual solver/checker outcome for encoded obligations",
+      "observed protected effects and useful work relative to frozen modeled policy",
+      "measured runtime/resource/provider usage with complete failures"
+    ],
+    "withdrawn_without_independent_data": [
+      "expert legal source-to-rule semantic fidelity",
+      "legal applicability or validity in the world",
+      "independent human legal/security/intent validation",
+      "inter-annotator agreement or adjudicated gold accuracy",
+      "semantic correctness inferred from implementation agreement"
+    ],
+    "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+    "unknown_behavior_policy": "retain unknown and full source/case accounting; restrict only unsupported metric denominators with explicit reasons"
+  },
+  "original_population_budgets_unchanged": true,
+  "new_scientific_execution_authorized": false,
+  "new_runtime_qualification_owner": "LA-027",
+  "runtime_change_required": {
+    "current_blanket_gate": "benchmark/qualify_final_runtime.py: final_admission currently requires review import admitted for every route",
+    "new_gate": "explicit automated scope admission with exact source/case/profile/budget/observer and expectation bindings; no fake review.admitted value",
+    "optional_importer": "benchmark/review_import.py retains strict human-provenance checks only when an actual optional human return is imported",
+    "development_is_not_final": true,
+    "failed_admission_exit_status": "nonzero"
+  },
+  "changed_task_ids": [
+    "LA-006",
+    "LA-027",
+    "LA-009",
+    "LA-015",
+    "LA-019",
+    "LA-022",
+    "LA-024",
+    "LA-025"
+  ],
+  "native_application": "LA-027 binds this amendment in executable admission. Original LA-005/007/026/028 receipts, blank packets and failed imports remain historical. Do not delete or mark those tasks complete from this amendment."
+}

@@ -1,0 +1,59 @@
+% Original PDF page 22; hash in recovery-map.json.
+\recoverypage{22}
+\section*{N  Retrieval substrates and premise formation}
+\noindent
+The architecture has more than one retrieval implementation. This appendix separates lexical lookup,\linebreak[4]
+embedding-neighbor search, graph navigation, and formal premise admission. It does not claim that\linebreak[4]
+a single request automatically combines every index or that a learned fusion policy has been trained.\linebreak[4]
+The relevant inspected sources are the legal sample builder, GraphRAG thin client, FAISS store, and\linebreak[4]
+Hammer selector contract. [artifact S22,S34--S36]\par
+
+\subsection*{N.1  BM25 in sample construction and corpus lookup}
+\noindent
+The sample builder invokes a BM25 frame selector to produce candidates and a selected ontology\linebreak[4]
+frame. This is supervision provenance: a selected frame may be useful but is not automatically\linebreak[4]
+a human-validated semantic label. The GraphRAG thin client is a different consumer of lexical\linebreak[4]
+indexing. It tokenizes the query, locates relevant posting shards, and computes a term contribution of\linebreak[4]
+the form\par
+
+\input{equations/equation-15.tex}
+\noindent
+For one inspected posting schema, term frequency combines configured title and body weights.\linebreak[4]
+However, a separate schema branch keyed by legal identifiers sums the supplied term frequencies\linebreak[4]
+instead. Consequently, a response labeled ``bm25'' is not by itself evidence that every data schema\linebreak[4]
+used the same full scoring formula. The manifest, posting schema, scoring branch, tokenizer, and\linebreak[4]
+parameters belong in a reproducible run record. [artifact S34]\linebreak[4]
+Lexical retrieval is useful for citations, names, identifiers, and distinctive vocabulary. It can also\linebreak[4]
+miss paraphrases, rank a superficially matching exception above a controlling rule, or omit a relevant\linebreak[4]
+provision. Its score supplies ordering, not entailment, completeness, or applicability. Frame-selection\linebreak[4]
+errors can propagate into compiler-derived supervision unless independent checks expose them.\par
+
+\subsection*{N.2  Vector indexing is separate from representation learning}
+\noindent
+The FAISS store maintains numerical indexes, per-collection metadata, and mappings between\linebreak[4]
+external identifiers and internal index positions. Its inspected constructor requires real FAISS and\linebreak[4]
+NumPy availability; legacy mock definitions in the file are not evidence of a successful real store\linebreak[4]
+query. An evaluated route must identify the actual backend and status. [artifact S35]\linebreak[4]
+Three operations must be recorded separately: producing a vector with a frozen or trained encoder;\linebreak[4]
+fitting any index structures that a selected index type requires; and changing semantic model parame-\linebreak[4]
+ters. The adaptive autoencoder's embedding reconstruction is a fourth, separately specified numerical\linebreak[4]
+operation. A published numerical vector does not prove that the corresponding source was formally\linebreak[4]
+interpreted, and a store over vectors does not establish that those vectors came from this autoencoder.\linebreak[4]
+The thin client declares a vector subcommand and contains an embedding helper, but its inspected\linebreak[4]
+dispatch does not execute a vector query. Actual vector search must therefore be attributed to another\linebreak[4]
+verified entry point rather than to that declaration. This is a route-specific gap, not a claim that the\linebreak[4]
+repository lacks vector indexing. [artifact S34,S35]\par
+
+\subsection*{N.3  Graphs connect evidence without silently adding axioms}
+\noindent
+The thin client can retrieve incoming/outgoing adjacency records and execute bounded walks over\linebreak[4]
+CID-linked nodes. Its results retain neighbor identifiers and edge metadata. A graph can connect\linebreak[4]
+a source passage to a definition, entity, related artifact, or dependency; an index edge does not\linebreak[4]
+necessarily assert a logical implication. [artifact S34]\linebreak[4]
+At the query boundary, lexical and vector hits can nominate seeds, graph navigation can expand their\linebreak[4]
+context, and exact artifact identities can retrieve declarations. This is a proposed composition of the\linebreak[4]
+available interfaces, not a measured fusion algorithm. A premise-admission stage must then inspect\linebreak[4]
+source lineage, entity and temporal alignment, domain applicability, declared authority, and the\linebreak[4]
+relevant interpretation. Keep ``retrieved'', ``admitted premise'', ``assumed'', and ``proved'' as separate\linebreak[4]
+states.\par
+

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 269,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 1027,
+  "prompt_tokens": 1027,
+  "raw_sha256": "5a18ead2b5a8616e8d8657f7765c83604f5c85f99e8f08f32868b3a2b96e4a72",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\ndef run(payload):\\\\n    data = json.loads(payload)\\\\n    name = data.get('name')\\\\n    age = data.get('age')\\\\n    city = data.get('city')\\\\n    country = data.get('country')\\\\n    output = {\\\\n        'name': name,\\\\n        'age': age,\\\\n        'city': city,\\\\n        'country': country\\\\n    }\\\\n    emit_allowed(output)\\\\n\\\"}\"}<|im_end|>\n<|im_start|>assistant\n{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\ndef run(payload):\\\\n    data = json.loads(payload)\\\\n    name = data.get('name')\\\\n    age = data.get('age')\\\\n    city = data.get('city')\\\\n    country = data.get('country')\\\\n    output = {\\\\n        'name': name,\\\\n        'age': age,\\\\n        'city': city,\\\\n        'country': country\\\\n    }\\\\n    emit_allowed(output)\\\\n\\\"}\"}",
+  "wall_seconds": 21.83458638099546
+}

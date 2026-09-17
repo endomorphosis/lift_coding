@@ -1,0 +1,104 @@
+{
+  "cryptography_origin": "/opt/ipfs-validation-site-packages/cryptography/__init__.py",
+  "cryptography_version": "49.0.0",
+  "home": "/tmp/ipfs-accelerate-validation-home-la013-KuR3eE",
+  "home_is_validation_prefix": true,
+  "ipfs_daemon": {
+    "attempted": true,
+    "available": false,
+    "binary": null,
+    "endpoint": "/ip4/127.0.0.1/tcp/5001/http",
+    "error": "ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5001): Max retries exceeded with url: /api/v0/version?stream-channels=true (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=5001): Failed to establish a new connection: [Errno 111] Connection refused\"))",
+    "error_type": "ConnectionError",
+    "kubo_binary": null
+  },
+  "kit_have_libp2p": true,
+  "kit_libp2p_error": null,
+  "kit_p2p_protocol": "/mcp+p2p/1.0.0",
+  "kit_serve_p2p_listens": false,
+  "kit_serve_p2p_note": "ipfs_kit_py.mcp_server.p2p_transport.serve_p2p constructs a host and sleeps; it does not listen. In-process handle_stream_message is framing only.",
+  "libp2p_runtime_compatible": true,
+  "libp2p_runtime_error": null,
+  "mcp_server_import_error": null,
+  "mcp_server_importable": true,
+  "modules": {
+    "anyio": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/anyio/__init__.py",
+      "version": null
+    },
+    "hypercorn": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/hypercorn/__init__.py",
+      "version": null
+    },
+    "ipfshttpclient": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/ipfshttpclient/__init__.py",
+      "version": "0.8.0a2"
+    },
+    "libp2p": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/libp2p/__init__.py",
+      "version": "0.7.0"
+    },
+    "multiaddr": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/multiaddr/__init__.py",
+      "version": "0.2.0"
+    },
+    "multiformats": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/multiformats/__init__.py",
+      "version": "0.3.1"
+    },
+    "trio": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/trio/__init__.py",
+      "version": "0.33.0"
+    }
+  },
+  "observed_at": "2026-09-12T03:15:25.259981+00:00",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "python": "/usr/bin/python3.12",
+  "python_executable": "/usr/bin/python3.12",
+  "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "python_version": "3.12.3",
+  "pythonpath": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+    },
+    "artifacts.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/artifacts.py",
+      "sha256": "b9921b8e5fff0dfee4318b54095f23b5f917fab77594dd0c5cfd64baaaeff3e3"
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+    },
+    "libp2p_runtime.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p/libp2p_runtime.py",
+      "sha256": "06f9b87278f456a1a85ef30e08ccb4a5e4013515addff27e98a1d20f33aa1fe6"
+    },
+    "mcp_p2p.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/mcp_p2p.py",
+      "sha256": "691076cf779a84c63cf31c5e1e7b5bbc449ed3fab68d2676a01952e4369f454d"
+    },
+    "mcp_p2p_client.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/mcp_p2p_client.py",
+      "sha256": "d2aafd5f0cde4c2b47fa272a71ab422381df66015feed02b007307c672379b02"
+    },
+    "p2p_transport.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/p2p_transport.py",
+      "sha256": "74f4f1eb34c76fba96996fe65dca100fcf8f551e4f293fa65a4bf3c93315f14a"
+    },
+    "server.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/server.py",
+      "sha256": "ea9e9906daedc3b38dbc1c787f0ec0b535e09efadb232ca8a5cf95cd742189db"
+    }
+  },
+  "validation_site_packages": "/opt/ipfs-validation-site-packages",
+  "validation_site_packages_exists": true
+}

@@ -1,0 +1,1 @@
+{"type":"json_object","thinking":[],"plan":[],"user_message":[],"content":"{\"program\": \"def run(payload):\\n    emit_allowed(payload)\"}"}

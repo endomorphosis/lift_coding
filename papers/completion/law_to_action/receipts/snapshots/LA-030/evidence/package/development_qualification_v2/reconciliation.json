@@ -1,0 +1,12 @@
+{
+  "schema": "la-development-qualification-failure-reconciliation/v1",
+  "status": "FAILED_RETAINED",
+  "failure": "Original native watchdog resource_observation_OSError at fourth candidate leaf teardown; child exit0 but failed resource admission preserved",
+  "whole_group_termination_proven": true,
+  "exact_owned_cleanup_proven": true,
+  "effect_disposition_preserved": "unknown",
+  "scientific_benchmark": false,
+  "model_calls": 0,
+  "next_action": "Fresh development qualification v3 with corrected metadata/accounting and no change to original vendor containment; preserve every v2 output",
+  "known_descendant_cpu_seconds": 7.353408
+}

@@ -1,0 +1,25 @@
+{
+  "child_pid": 2810494,
+  "child_returncode": 1,
+  "child_started": true,
+  "child_termination_proven": true,
+  "cleanup_errors": [],
+  "cleanup_seconds_after_deadline_observation": null,
+  "deadline_expired": false,
+  "deadline_overrun_seconds": null,
+  "error": null,
+  "request_sha256": "e87b2fc7d68e26416105fbcfd1a2d059fa4ad28c19aa41a5c39551027b1d0783",
+  "response_bytes_retained": 1025,
+  "response_read_error": null,
+  "response_sha256": "c6d8e9905300876046729949cc95c2385221270d389176f7234fe7ac00c4e430",
+  "status": 200,
+  "timeout_seconds": 2.0,
+  "wall_seconds": 0.11563050106633455,
+  "worker": {
+    "body_limit_exceeded": true,
+    "complete": false,
+    "error": "HTTPTransportError: Response exceeds retained byte bound",
+    "status": 200
+  },
+  "worker_metadata_error": null
+}

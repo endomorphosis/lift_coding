@@ -1,0 +1,279 @@
+{
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent-out/review_analysis.json": "c0123b4181dfdc8161177f95b9a2dd0ed9eb9b3f0a34825b29da2c2bee2fc248",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent-out/review_import_refusal.json": "c2dea3ccc39819359a548ce6a74d2d54df617fd35ce765982a4b64d2a2a56e6f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent_generated.json": "686bd578120e5c5118b0acd95cc6b5f2a4131765616d5477a58e8b7c83b2758a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete-out/review_analysis.json": "4b168ae464f211f999e6398487de1cc56c656dc17fae41fe70358549dfd963d8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete-out/review_import_refusal.json": "36ce33bf8244a209219b0ffe3ff95c55c352251772363998f1ee1224b6e668de",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete.json": "21399110f274d50288161890dffa7cd28e1b1f4ba3a3369e533d45a7779bb423",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/FINAL_RUN.md": "6800ce1fab5338129ce04c44edddee16caf1b244cc99af4449b0d74d283dacd5",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/qualify_final_runtime.py": "db9bedb6f7a17a061b174d044ed90e0384fcb5516bd0e4904b3006c0ddf2d3b7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/review_import.py": "d307ca6682061244b03be5608a1ad8b0ec2bda0083aa676d86c5d60f1946bbbc",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/runtime_manifest.json": "00dabb35d659381aa3a86975a473da922f9df682c05c1f9b13a7541ad6bb1b16",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/source_pipeline.py": "d25e7a0c7330070f02024dd2277fb26129f632e4b9edbb49ea95f76f77264508",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/e2e_handler_trace.json": "567fc663b86a2b075937bdaf2fcb5fe4d35197fc9bdcfacdab6fd2ad64cd9949",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/final_admission.json": "4501d4c85bfc65a6a09f206546c3f3623d093fa1dffd48537c0bd5949b779379",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/final_analysis.json": "b33dd8ef9b938f14ec3671a7b8450d4ec0ecb1ee7ad15b43e1ee8d7e5f92a822",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/freeze_digest.json": "de3ad5484a008b1b7b95d2faa1cb01052baf93315884d4a86f7e545f9b9023f0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/frozen_budgets.json": "44a286ced4d785d732959d1d31a5f16148aa9ebaea76095336dc66e4a95e1143",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/frozen_inputs.json": "9795a14ea8fa74ce06a994b8a279cf3d690697678b3486e45a2b6e18ba3145a1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/model_provider_ledger.json": "efa891704b6e3e8d5c8f7e825e7a8dfef0df508b326f7c104481a60d635dcd34",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/qualification_summary.json": "611260d8524e6d54488c5de7d039dec8fdc509c26370ad1c796ab2128d86ab77",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/review_analysis.json": "77c342042462bce9f1da744605d83faf928b8d13b8676a487fa936ac2dd3d303",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/review_import_refusal.json": "a93c4370949cf9e1ea3d5208dc3533a453f1a356524dffca8bc8171372e8d842",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/runtime_manifest.json": "00dabb35d659381aa3a86975a473da922f9df682c05c1f9b13a7541ad6bb1b16",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/runtime_probe.json": "c533ac5ed0e78a4c6d2b81fe1041d6e5fefcbf83e87a6be984a69def399a4fc2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_failures.jsonl": "8623e82186a5c19f66fce76e5d0cb99d7399395ee3b6482a6233917004268411",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_pipeline_freeze.json": "19c37cd2a561d2211cb35ff5f84b3bd9e7bea9699cfc9988e31ae7e1201ec655",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_pipeline_summary.json": "c279167b8a9c432f78348effcb2a618240e4267d39c1cb76109ff3c6255091e1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_predictions.jsonl": "60b129c4952cf503643b087c520348229f8e07d08c91ba895bacee60d6257d6e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_records.jsonl": "be77e755a8395a228605141bd2d975a8d4e37fecbb8df88f5e493ea513ae92c4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py": "db9bedb6f7a17a061b174d044ed90e0384fcb5516bd0e4904b3006c0ddf2d3b7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py": "d307ca6682061244b03be5608a1ad8b0ec2bda0083aa676d86c5d60f1946bbbc",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/source_pipeline.py": "d25e7a0c7330070f02024dd2277fb26129f632e4b9edbb49ea95f76f77264508",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validate_qualification.py": "9aea990300d07cf4f30a0d09261e570bbca79fbcec9fdd6de0c5b90248ce6dfc",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/admit.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/admit.stdout.log": "9eb7aa9d664264291dccfd824f1c889c80ea30136069b2c04c39731369ac2dca",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/agent-import.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/agent-import.stdout.log": "c2dea3ccc39819359a548ce6a74d2d54df617fd35ce765982a4b64d2a2a56e6f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/commands.json": "3231aaa08f2ae5cd191c1db78ad1afa4b2284031e1b27ee3eb254f0462cf14f2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/incomplete-import.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/incomplete-import.stdout.log": "36ce33bf8244a209219b0ffe3ff95c55c352251772363998f1ee1224b6e668de",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/qualify.stdout.log": "611260d8524e6d54488c5de7d039dec8fdc509c26370ad1c796ab2128d86ab77",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/validate.stdout.log": "9fd3e91d8b7d4180ed66b6a2251e301af838157b6c2754d1685dbd2f034d1978"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+        "qualify",
+        "--out",
+        "papers/completion/law_to_action/results/development_qualification"
+      ],
+      "completed_at": "2026-09-12T06:37:47.082373+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/qualify.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+      "started_at": "2026-09-12T06:37:44.733593+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validate_qualification.py"
+      ],
+      "completed_at": "2026-09-12T06:37:47.118504+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/validate_qualification.py",
+      "started_at": "2026-09-12T06:37:47.082720+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+        "admit-final",
+        "--out",
+        "papers/completion/law_to_action/results/development_qualification"
+      ],
+      "completed_at": "2026-09-12T06:37:47.164905+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/admit.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+      "started_at": "2026-09-12T06:37:47.118830+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+        "import",
+        "--returned",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent_generated.json",
+        "--out",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent-out"
+      ],
+      "completed_at": "2026-09-12T06:37:47.194747+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/agent-import.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+      "started_at": "2026-09-12T06:37:47.165616+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+        "import",
+        "--returned",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete.json",
+        "--out",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete-out"
+      ],
+      "completed_at": "2026-09-12T06:37:47.237392+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/incomplete-import.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+      "started_at": "2026-09-12T06:37:47.195120+00:00"
+    }
+  ],
+  "completed_at": "2026-09-12T06:37:47.249124+00:00",
+  "completion_mode": "Development source adapters processed the frozen legal/CVE/skill cases into retained predictions or explicit failures. An A4 development command reached SAT, UCAN, ENFORCE, durable consumption, and the effect-observing handler. Review import, final admission and analysis refused missing independent labels. Inputs and arm budgets were frozen before predictions. Fixture-only routes are not production. This is qualification, not scored LA-009/LA-015.",
+  "criteria": [
+    {
+      "criterion": "Selected source adapters actually process development legal/CVE/skill sources into retained predictions or explicit failures, with all inputs and runtime versions pinned.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/source_pipeline.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_pipeline_summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_predictions.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_failures.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/frozen_inputs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/qualify.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/validate.stdout.log"
+      ],
+      "explanation": "source_pipeline.py ran extract_normative_elements/DeonticConverter on four development legal cases, adapt_cvefixes_candidate on four development CVE cases, and SkillCenterIntentNormalizer on four development skill cases. Counts: 11 predictions and 1 explicit failures across 12 reserved development cases. The malicious-Markdown mutation was excluded by SkillSourcePolicy. Inputs and runtime versions are pinned in frozen_inputs.json, source_pipeline_freeze.json, and runtime_manifest.json. Final-split labels were not inspected and no gold was scored.",
+      "status": "met"
+    },
+    {
+      "criterion": "An executable end-to-end development command reaches the selected proof/capability/effect-observing handler boundary and records actual model/provider calls when the chosen arm requires them; fixture-only routes are not represented as production.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/qualify_final_runtime.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/runtime_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/FINAL_RUN.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/e2e_handler_trace.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/model_provider_ledger.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/qualification_summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/qualify.stdout.log"
+      ],
+      "explanation": "qualify_final_runtime.py qualify executed source-derived A4 allow/deny attempts through QF_BOOL SAT, real Ed25519 UCAN, SupervisorPreInvocationEnforcement ENFORCE, file-backed DuckDB consumption, BoundedExportHandler, and EffectObserver. Handler boundary reached=True; allow=allow; deny=deny. Selected A4 requires no model calls; the ledger records call_count=0 rather than a fixture completion. LA-008 run.py and other fixture routes are labeled not production in runtime_manifest.json and FINAL_RUN.md.",
+      "status": "met"
+    },
+    {
+      "criterion": "Review import, final admission and analysis refuse missing independent labels, unavailable runtime routes and incomplete populations; final inputs/arm budgets are frozen before evaluated predictions.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/review_import.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/review_import_refusal.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/final_admission.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/final_analysis.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/frozen_budgets.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/admit.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/agent-import.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/incomplete-import.stdout.log"
+      ],
+      "explanation": "review_import.py refused the absent independent return (missing_independent_review_return), refused an agent-generated packet, and refused an incomplete population. qualify admit-final and analysis remain refused with missing_independent_labels. frozen_inputs.json and frozen_budgets.json were written before source predictions; freeze_digest.json records that pin. Final examples were not scored.",
+      "status": "met"
+    }
+  ],
+  "limitations": [
+    "Independent human legal/CVE/skill review remains pending in LA-027.",
+    "This is development qualification, not scored source-to-IR (LA-009) or scored A4 (LA-015).",
+    "SAT evidence cannot authorize theorem_proof allows.",
+    "Closed-loop model arms are unrun; no scientific model is pinned.",
+    "Full legal PDFs, CVE parquet, and SkillCenter SQLite bodies remain retrieval_only; adapters processed pinned quoted spans and recovered pair evidence."
+  ],
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/FINAL_RUN.md": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/FINAL_RUN.md",
+    "papers/completion/law_to_action/benchmark/qualify_final_runtime.py": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/qualify_final_runtime.py",
+    "papers/completion/law_to_action/benchmark/review_import.py": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/review_import.py",
+    "papers/completion/law_to_action/benchmark/runtime_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/runtime_manifest.json",
+    "papers/completion/law_to_action/benchmark/source_pipeline.py": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/benchmark/source_pipeline.py",
+    "papers/completion/law_to_action/results/development_qualification/e2e_handler_trace.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/e2e_handler_trace.json",
+    "papers/completion/law_to_action/results/development_qualification/final_admission.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/final_admission.json",
+    "papers/completion/law_to_action/results/development_qualification/final_analysis.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/final_analysis.json",
+    "papers/completion/law_to_action/results/development_qualification/freeze_digest.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/freeze_digest.json",
+    "papers/completion/law_to_action/results/development_qualification/frozen_budgets.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/frozen_budgets.json",
+    "papers/completion/law_to_action/results/development_qualification/frozen_inputs.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/frozen_inputs.json",
+    "papers/completion/law_to_action/results/development_qualification/model_provider_ledger.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/model_provider_ledger.json",
+    "papers/completion/law_to_action/results/development_qualification/qualification_summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/qualification_summary.json",
+    "papers/completion/law_to_action/results/development_qualification/review_analysis.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/review_analysis.json",
+    "papers/completion/law_to_action/results/development_qualification/review_import_refusal.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/review_import_refusal.json",
+    "papers/completion/law_to_action/results/development_qualification/runtime_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/runtime_manifest.json",
+    "papers/completion/law_to_action/results/development_qualification/runtime_probe.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/runtime_probe.json",
+    "papers/completion/law_to_action/results/development_qualification/source_failures.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_failures.jsonl",
+    "papers/completion/law_to_action/results/development_qualification/source_pipeline_freeze.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_pipeline_freeze.json",
+    "papers/completion/law_to_action/results/development_qualification/source_pipeline_summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_pipeline_summary.json",
+    "papers/completion/law_to_action/results/development_qualification/source_predictions.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_predictions.jsonl",
+    "papers/completion/law_to_action/results/development_qualification/source_records.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-028/outputs/results/development_qualification/source_records.jsonl"
+  },
+  "paper_id": "law_to_action",
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "cryptography": "49.0.0",
+    "duckdb": "1.5.2",
+    "empirical_benchmark_result": false,
+    "independent_human_review": "pending_LA-027",
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "qualify_final_runtime.py_sha256": "db9bedb6f7a17a061b174d044ed90e0384fcb5516bd0e4904b3006c0ddf2d3b7",
+    "review_import.py_sha256": "d307ca6682061244b03be5608a1ad8b0ec2bda0083aa676d86c5d60f1946bbbc",
+    "runtime_manifest.json_sha256": "00dabb35d659381aa3a86975a473da922f9df682c05c1f9b13a7541ad6bb1b16",
+    "selected_arm": "A4",
+    "source_pipeline.py_sha256": "d25e7a0c7330070f02024dd2277fb26129f632e4b9edbb49ea95f76f77264508",
+    "sympy": "1.14.0",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
+  },
+  "status": "complete",
+  "task_id": "LA-028"
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py"
+    ],
+    "completed_at": "2026-09-12T16:58:26.937001+00:00",
+    "elapsed_seconds": 38.408668115967885,
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/measure.stdout.log",
+    "name": "measure",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py",
+    "started_at": "2026-09-12T16:57:48.529188+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py"
+    ],
+    "completed_at": "2026-09-12T16:58:26.971539+00:00",
+    "elapsed_seconds": 0.03383304597809911,
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stdout.log",
+    "name": "validate",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py",
+    "started_at": "2026-09-12T16:58:26.937938+00:00"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 145,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 774,
+  "prompt_tokens": 774,
+  "raw_sha256": "1e5fc4de5f467b2dab8dec33cf634dc167fcf7d772edb5669effc22d89d4645f",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed({\\\"type\\\":\\\"reflected_xss\\\",\\\"parameter\\\":\\\"bob_czy_panstwa_sprawa_zostala_rozwiazana\\\",\\\"action\\\":\\\"super_language_switcher\\\",\\\"cwe\\\":\\\"CWE-79\\\",\\\"description\\\":\\\"The Super Forms plugin does not escape the bob_czy_panstwa_sprawa_zostala_rozwiazana parameter before outputting it back in an attribute via the super_language_switcher AJAX action, leading to a Reflected Cross-Site Scripting vulnerability. The action is also lacks CSRF protection, making the attack easier to perform against any user.\\\"})\"\n}\n```<|im_end|>",
+  "wall_seconds": 13.547469266995904
+}

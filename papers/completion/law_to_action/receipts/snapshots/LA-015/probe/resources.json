@@ -1,0 +1,45 @@
+{
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "affinity_count": 20,
+  "as_limit": [
+    -1,
+    -1
+  ],
+  "cgroup_controllers": "cpuset cpu io memory hugetlb pids rdma misc dmem",
+  "cgroup_v2": true,
+  "descendant_process_group_kill": true,
+  "kill_signal": 9,
+  "nproc_limit": [
+    -1,
+    -1
+  ],
+  "observed_at": "2026-09-12T17:29:11.134816Z",
+  "private_cgroup_created": false,
+  "probe_wall_seconds": 0.402989,
+  "protocol_gate": "If singleton CPU cgroup/quota cannot be enforced for every descendant, protocol-scored attempts stay unadmitted. Executed cells remain in the raw log with effect counters and are never recoded as zero-failure.",
+  "reason": "private cgroup creation failed: OSError: [Errno 30] Read-only file system: '/sys/fs/cgroup/la015-382'",
+  "scored_attempts_admitted": false,
+  "self_cgroup": "0::/",
+  "singleton_cpu_enforced": false
+}

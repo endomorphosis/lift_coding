@@ -1,0 +1,28 @@
+                    Table 7: Objects that must not all be called the same latent representation.
+
+      Object                    Construction and use                      What the current evidence does
+                                                                          not establish
+      Canonical modal IR        Source-linked formulas, operators,        Unsupervised invention of the
+                                predicates, roles, conditions, excep-     schema; arbitrary whole-language
+                                tions and frame structure.                correctness.
+      Structured round-trip     Seven-field rule records under a spe-     Full fidelity for every richer modal
+      IR                        cific compiler, vocabulary and real-      declaration.
+                                ization profile.
+      Feature encoding          Token/cue, semantic-slot, frame, con-     A pure text-only input when an
+                                tract, scope, provenance and diagnos-     existing parse or bridge target is
+                                tic features.                             used.
+      Decoded embedding         Numerical prediction compared             Generated natural-language recon-
+                                against the sample embedding using        struction or a guaranteed informa-
+                                MSE and cosine.                           tion bottleneck.
+      Family/view distribu-     Class scores over configured modal        Probability that a statement is
+      tion                      families and compiler/prover view         legally true or a theorem is proved.
+                                components.
+      Source-withheld text      Deterministic realization from admit-     Proof of original-source fidelity;
+                                ted IR without originating surface ac-    compiler and decoder can share
+                                cess.                                     omissions.
+      Proof-feedback heads      Bounded supervised predictions from       A substitute for the next actual
+                                admitted, version-bound verifier feed-    proof check.
+                                back.
+      Stable guidance ex-       Selected shared features mapped to        Raw parameter state becoming a
+      port                      canonical view contracts after canary     new semantic authority.
+                                admission.

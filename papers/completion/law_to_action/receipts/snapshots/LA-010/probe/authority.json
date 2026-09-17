@@ -1,0 +1,183 @@
+{
+  "closed_profile_allowed_authority_paths": [
+    "theorem_proof"
+  ],
+  "composed_job_count": 12,
+  "composed_job_kinds": [
+    "applicability",
+    "positive_grant",
+    "non_conflict",
+    "security_invariant",
+    "obligation_pre",
+    "obligation_during",
+    "obligation_post",
+    "consistency",
+    "translation",
+    "reconstruction",
+    "coverage",
+    "context_binding"
+  ],
+  "composed_required_authority": [
+    "theorem_proof"
+  ],
+  "decisions": {
+    "policy_approval": {
+      "allowed": false,
+      "diagnostics": [
+        "auth.decision.indeterminate",
+        "auth.decision.unproved:applicability:policy"
+      ],
+      "internal_status": "indeterminate",
+      "reason_codes": [
+        "missing_evidence"
+      ],
+      "wire_status": "abstain"
+    },
+    "runtime_monitor": {
+      "allowed": false,
+      "diagnostics": [
+        "auth.decision.indeterminate",
+        "auth.decision.unproved:applicability:monitor"
+      ],
+      "internal_status": "indeterminate",
+      "reason_codes": [
+        "missing_evidence"
+      ],
+      "wire_status": "abstain"
+    },
+    "sat_only": {
+      "allowed": false,
+      "diagnostics": [
+        "auth.decision.indeterminate",
+        "auth.decision.unproved:applicability:sat_only"
+      ],
+      "internal_status": "indeterminate",
+      "reason_codes": [
+        "missing_evidence"
+      ],
+      "wire_status": "abstain"
+    },
+    "simulated": {
+      "allowed": false,
+      "diagnostics": [
+        "auth.decision.indeterminate",
+        "auth.decision.unproved:applicability:simulation"
+      ],
+      "internal_status": "indeterminate",
+      "reason_codes": [
+        "missing_evidence"
+      ],
+      "wire_status": "abstain"
+    },
+    "unavailable_kernel": {
+      "allowed": false,
+      "diagnostics": [
+        "auth.decision.indeterminate",
+        "auth.decision.unproved:applicability:unavailable"
+      ],
+      "internal_status": "indeterminate",
+      "reason_codes": [
+        "missing_evidence",
+        "prover_unavailable"
+      ],
+      "wire_status": "abstain"
+    }
+  },
+  "native_portfolio_probes": {
+    "cvc5": {
+      "availability": "unavailable",
+      "backend_id": "cvc5",
+      "capabilities": null,
+      "diagnostics": [
+        "auth.portfolio.executable_missing:cvc5",
+        "auth.portfolio.probe_without_install"
+      ],
+      "executable_path": "",
+      "logic_families": [],
+      "metadata": {},
+      "probed_without_install": true,
+      "query_kinds": [],
+      "schema_version": "authorization-backend-probe/v1",
+      "version": ""
+    },
+    "eprover": {
+      "availability": "unavailable",
+      "backend_id": "eprover",
+      "capabilities": null,
+      "diagnostics": [
+        "auth.portfolio.executable_missing:eprover",
+        "auth.portfolio.probe_without_install"
+      ],
+      "executable_path": "",
+      "logic_families": [],
+      "metadata": {},
+      "probed_without_install": true,
+      "query_kinds": [],
+      "schema_version": "authorization-backend-probe/v1",
+      "version": ""
+    },
+    "lean": {
+      "availability": "unavailable",
+      "backend_id": "lean",
+      "capabilities": null,
+      "diagnostics": [
+        "auth.portfolio.executable_missing:lean",
+        "auth.portfolio.probe_without_install"
+      ],
+      "executable_path": "",
+      "logic_families": [],
+      "metadata": {},
+      "probed_without_install": true,
+      "query_kinds": [],
+      "schema_version": "authorization-backend-probe/v1",
+      "version": ""
+    },
+    "vampire": {
+      "availability": "unavailable",
+      "backend_id": "vampire",
+      "capabilities": null,
+      "diagnostics": [
+        "auth.portfolio.executable_missing:vampire",
+        "auth.portfolio.probe_without_install"
+      ],
+      "executable_path": "",
+      "logic_families": [],
+      "metadata": {},
+      "probed_without_install": true,
+      "query_kinds": [],
+      "schema_version": "authorization-backend-probe/v1",
+      "version": ""
+    },
+    "z3": {
+      "availability": "unavailable",
+      "backend_id": "z3",
+      "capabilities": null,
+      "diagnostics": [
+        "auth.portfolio.executable_missing:z3",
+        "auth.portfolio.probe_without_install"
+      ],
+      "executable_path": "",
+      "logic_families": [],
+      "metadata": {},
+      "probed_without_install": true,
+      "query_kinds": [],
+      "schema_version": "authorization-backend-probe/v1",
+      "version": ""
+    }
+  },
+  "no_decision_allowed": true,
+  "policy_authority_rejects_theorem_require": true,
+  "portfolio_verdicts": {
+    "monitor_satisfied": "monitor",
+    "policy_approved": "policy",
+    "sat_as_sat_authority": "sat_only",
+    "simulated_theorem": "simulation",
+    "true_theorem": "proved",
+    "unsat_as_sat_authority": "sat_only"
+  },
+  "sat_authority_reject_message": "satisfiability authority cannot be used as theorem_proof",
+  "sat_authority_rejects_theorem_require": true,
+  "select_job_result_sat_only_cannot_prove": true,
+  "selected_sat_only_authority_path": "sat_only",
+  "selected_sat_only_verdict": "sat_only"
+}

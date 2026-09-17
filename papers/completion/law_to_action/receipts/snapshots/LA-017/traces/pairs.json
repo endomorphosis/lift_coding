@@ -1,0 +1,51 @@
+[
+  {
+    "frozen_mutation": "none",
+    "mechanism_id": "source_provenance",
+    "negative_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+    "negative_overlay": "swapped_source_id",
+    "positive_case_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0"
+  },
+  {
+    "frozen_mutation": "misleading_cve_similarity",
+    "mechanism_id": "hard_applicability",
+    "negative_case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1",
+    "negative_overlay": null,
+    "positive_case_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0"
+  },
+  {
+    "frozen_mutation": "undeclared_handler_effect",
+    "mechanism_id": "intent_code_correlation",
+    "negative_case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+    "negative_overlay": null,
+    "positive_case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0"
+  },
+  {
+    "frozen_mutation": "none",
+    "mechanism_id": "proof_jobs",
+    "negative_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+    "negative_overlay": "extra_claimed_effect",
+    "positive_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0"
+  },
+  {
+    "frozen_mutation": "changed_root_clock_or_environment",
+    "mechanism_id": "current_root_binding",
+    "negative_case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1",
+    "negative_overlay": null,
+    "positive_case_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0"
+  },
+  {
+    "frozen_mutation": "expired_or_revoked_capability",
+    "mechanism_id": "capability_verification",
+    "negative_case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1",
+    "negative_overlay": null,
+    "positive_case_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0"
+  },
+  {
+    "frozen_mutation": "replay",
+    "mechanism_id": "consumption",
+    "negative_case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+    "negative_overlay": null,
+    "positive_case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0"
+  }
+]

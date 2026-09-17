@@ -1,0 +1,42 @@
+[
+  {
+    "paper": "autoformalization",
+    "goals": 8,
+    "subgoals": 7,
+    "tasks": 25,
+    "completed": 0,
+    "ready": [
+      "AF-001",
+      "AF-002",
+      "AF-003"
+    ],
+    "native_parser_and_cli_valid": true,
+    "provider_or_experiment_started": false
+  },
+  {
+    "paper": "law_to_action",
+    "goals": 9,
+    "subgoals": 8,
+    "tasks": 25,
+    "completed": 0,
+    "ready": [
+      "LA-001",
+      "LA-002"
+    ],
+    "native_parser_and_cli_valid": true,
+    "provider_or_experiment_started": false
+  },
+  {
+    "paper": "neurosymbolic_supervision",
+    "goals": 8,
+    "subgoals": 7,
+    "tasks": 25,
+    "completed": 0,
+    "ready": [
+      "NS-001",
+      "NS-002"
+    ],
+    "native_parser_and_cli_valid": true,
+    "provider_or_experiment_started": false
+  }
+]

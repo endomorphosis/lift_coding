@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 279,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 905,
+  "prompt_tokens": 905,
+  "raw_sha256": "e35228e9516efe6e4f5511bfa647ccdc9845e936ec8366f0db08ad0c5d2a8041",
+  "response_text": "```json\n{\n  \"program\": \"function run(payload) {\\n  const config = payload.config;\\n  const tsFiles = payload.ts_files;\\n  \\n  // Check if we have configuration and TypeScript files\\n  if (!config || !tsFiles || tsFiles.length === 0) {\\n    return;\\n  }\\n  \\n  // Process each TypeScript file to detect environment variables\\n  tsFiles.forEach(file => {\\n    const filePath = file.path;\\n    const fileContent = file.content;\\n    \\n    // Find all environment variable references in the file\\n    const envVarRegex = /process\\\\.env\\\\.\\\\w+/g;\\n    const matches = fileContent.match(envVarRegex);\\n    \\n    if (matches) {\\n      // Extract unique environment variable names\\n      const uniqueEnvVars = [...new Set(matches.map(match => match.split('.')[2]))];\\n      \\n      // Update the configuration with detected environment variables\\n      config.environment_variables = uniqueEnvVars;\\n    }\\n  });\\n  \\n  // Emit the updated configuration\\n  emit_allowed({\\n    \\\"config\\\": config,\\n    \\\"ts_files\\\": tsFiles\\n  });\\n}\"\n}\n```<|im_end|>",
+  "wall_seconds": 21.865619319010875
+}

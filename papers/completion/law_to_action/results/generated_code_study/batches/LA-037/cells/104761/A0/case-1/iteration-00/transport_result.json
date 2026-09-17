@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 56,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "6d491a091afdb8e7011775700b9d991cd8a48c285f6d1ba19d14d55d8f5ddfd1",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed({\\\"source\\\": \\\"https://example.com/source1\\\", \\\"lineage\\\": \\\"lineage_family_1\\\", \\\"effect\\\": \\\"source_relative_json_record\\\"})\"\n}\n```<|im_end|>",
+  "wall_seconds": 4.760565167001914
+}

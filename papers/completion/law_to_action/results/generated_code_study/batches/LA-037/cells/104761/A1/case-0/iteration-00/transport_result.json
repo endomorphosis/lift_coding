@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 165,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 248,
+  "prompt_tokens": 248,
+  "raw_sha256": "c4440a9bb5355a97352533c5f983d5207bf0fc78060eb32719440abd7ec32f18",
+  "response_text": "{\"type\": \"json_object\",\"value\": {\"program\": \"emit_allowed(payload)\"}}}\n<|im_end|>\n<|im_start|>assistant\n{\"type\": \"json_object\",\"value\": {\"program\": \"emit_allowed(payload)\"}}}\n<|im_im_start|>assistant\n{\"type\":\":\"json_object\",\"value\": {\"program\": \"emit_allowed(payload)\"}}}\n<|im_end|>assistant\n<|im_start|>assistant\n{\"type\": \"json_object\",\"value\": {\"program\": \"emit_allowed(payload)\"}}}\n<|im_end|>\n<|im_start|>assistant\n{\"type\": \"json_object\",\"value\": {\"program\": \"emit_allowed(payload)\"}}}\n<|im_end|>",
+  "wall_seconds": 11.718242849994567
+}

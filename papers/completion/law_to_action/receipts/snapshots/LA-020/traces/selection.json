@@ -1,0 +1,19 @@
+{
+  "arm_id": "A4",
+  "attempt_ids": [
+    "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+    "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+    "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+    "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+    "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+    "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+    "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1"
+  ],
+  "mutations": {
+    "replay": "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+    "undeclared_handler_effect": "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+    "wrong_audience": "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1"
+  },
+  "permitted_attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+  "seed": 104729
+}

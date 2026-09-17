@@ -1,0 +1,40 @@
+{
+  "HAVE_CRYPTO_ED25519": true,
+  "canonical_profile_d_available": true,
+  "cryptography_version": "49.0.0",
+  "duckdb_available": true,
+  "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+  "duckdb_version": "1.5.2",
+  "home": "/tmp/ipfs-accelerate-validation-home-la015",
+  "home_is_validation_prefix": true,
+  "observed_at": "2026-09-12T17:29:10.674876+00:00",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "python": "/usr/bin/python3.12",
+  "python_executable": "/usr/bin/python3.12",
+  "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "python_version": "3.12.3",
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+    },
+    "authorization.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd"
+    },
+    "durable_consumption.py": {
+      "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+      "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe"
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+    },
+    "ucan.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+      "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95"
+    }
+  },
+  "sympy_available": true,
+  "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
+}

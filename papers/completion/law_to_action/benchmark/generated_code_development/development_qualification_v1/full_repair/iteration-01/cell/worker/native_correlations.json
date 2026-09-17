@@ -1,0 +1,99 @@
+{
+  "code": [
+    {
+      "evidence_ids": [
+        "code-security-fact:sha256:364382b79155f3afb84b92cdd117ab368ed9887d87971e8efe2a4bb76756cccf",
+        "code-security-fact:sha256:61459eda10560b7ac072a3eea2290c683f12b2db8a0824d4a9952ab127e8154f",
+        "code-security-fact:sha256:63da7243043ceb8e14079389ba0362210ee998d78f07edbbc841ecc598856272",
+        "code-security-fact:sha256:99865a14c3af974730ecb87576e88e7e236034340deef29089cf925de9f7d244",
+        "code-security-fact:sha256:bbc4f3bd8d85fee11cb46db5efb36d8839f122cfe68bdc6928d6ec2af56b6d77"
+      ],
+      "gate_version": 1,
+      "mapping_id": "cve-security-request-mapping:sha256:0a9cddb02842f79d7222cc4e0529a13130a2c9159220011e8d6341654a76a44e",
+      "reason_codes": [],
+      "request": {
+        "accepted_claim_result_ids": [],
+        "action": "invoke",
+        "adapter_version": 1,
+        "asserted_grant_sources": [],
+        "content_id": "security-authorization-request:sha256:c03de56b0a8921f7cb595c6d9121b2f3f97b59505f4989b9b39024dd8f114604",
+        "current_state": {
+          "sandbox": "empty"
+        },
+        "data_flow": "name->argument:allowed_sink",
+        "evaluated_at_ms": 1789380330930,
+        "expected_effect": "call",
+        "intent_is_authority": false,
+        "legal_permission_is_authority": false,
+        "model_output_is_authority": false,
+        "principal": "did:client:tenant-a",
+        "requested_authority": "mutation",
+        "retrieval_rank_is_authority": false,
+        "satisfied_assumption_ids": [],
+        "schema": "ipfs_accelerate_py/agent-supervisor/security-authorization-request@1",
+        "security_root_artifact_id": "policy:c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8",
+        "security_root_cid_v1": "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a",
+        "security_root_supervisor_digest": "c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8",
+        "state_revision": 0,
+        "state_version": 0,
+        "target": "allowed_sink",
+        "tool": "tool:python-handler-profile"
+      },
+      "schema": "ipfs_accelerate_py/agent-supervisor/cve-security-request-mapping@1",
+      "source_id": "code-security-request-source:sha256:09c7838f7ae40e1de6bdc7f22e0c3ab6dd4363355a52d4e1578543a0784f9be6",
+      "status": "exact",
+      "stream": "code"
+    }
+  ],
+  "findings": [],
+  "intent": [
+    {
+      "evidence_ids": [
+        "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a"
+      ],
+      "gate_version": 1,
+      "mapping_id": "cve-security-request-mapping:sha256:34be0906c33ba8fb45c7f8a212c3698df6ae7aee6353fa6118e0945cf5fefaa9",
+      "reason_codes": [],
+      "request": {
+        "accepted_claim_result_ids": [],
+        "action": "invoke",
+        "adapter_version": 1,
+        "asserted_grant_sources": [],
+        "content_id": "security-authorization-request:sha256:c03de56b0a8921f7cb595c6d9121b2f3f97b59505f4989b9b39024dd8f114604",
+        "current_state": {
+          "sandbox": "empty"
+        },
+        "data_flow": "name->argument:allowed_sink",
+        "evaluated_at_ms": 1789380330930,
+        "expected_effect": "call",
+        "intent_is_authority": false,
+        "legal_permission_is_authority": false,
+        "model_output_is_authority": false,
+        "principal": "did:client:tenant-a",
+        "requested_authority": "mutation",
+        "retrieval_rank_is_authority": false,
+        "satisfied_assumption_ids": [],
+        "schema": "ipfs_accelerate_py/agent-supervisor/security-authorization-request@1",
+        "security_root_artifact_id": "policy:c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8",
+        "security_root_cid_v1": "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a",
+        "security_root_supervisor_digest": "c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8",
+        "state_revision": 0,
+        "state_version": 0,
+        "target": "allowed_sink",
+        "tool": "tool:python-handler-profile"
+      },
+      "schema": "ipfs_accelerate_py/agent-supervisor/cve-security-request-mapping@1",
+      "source_id": "policy:c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8:allowed_sink",
+      "status": "exact",
+      "stream": "intent"
+    }
+  ],
+  "intent_source": "independent task policy, not candidate-derived",
+  "policy": {
+    "allowed_handlers": [
+      "allowed_sink"
+    ]
+  },
+  "policy_cid": "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a",
+  "policy_sha256": "c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8"
+}

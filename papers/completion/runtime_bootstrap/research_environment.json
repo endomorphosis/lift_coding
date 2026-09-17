@@ -1,0 +1,2466 @@
+{
+  "schema": "vericodegen-research-environment/v1",
+  "observed_started_at": "2026-09-11T15:36:22.132393+00:00",
+  "observed_finished_at": "2026-09-11T15:36:25.996833+00:00",
+  "purpose": "Read-only resource and installed-component planning inventory for all three paper protocols",
+  "paper_ids": [
+    "autoformalization",
+    "law_to_action",
+    "neurosymbolic_supervision"
+  ],
+  "authoritative_task_state": false,
+  "task_completion_claim": false,
+  "benchmark_evidence": false,
+  "runtime_update_pending": true,
+  "host": {
+    "system": "Linux",
+    "release": "6.17.0-1014-nvidia",
+    "cpu": {
+      "architecture": "aarch64",
+      "logical_count": 20,
+      "affinity_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "load_average": [
+        33.08642578125,
+        28.27685546875,
+        25.4013671875
+      ],
+      "model": "not reported"
+    },
+    "memory": {
+      "MemTotal_bytes": 130663821312,
+      "MemAvailable_bytes": 107396296704,
+      "SwapTotal_bytes": 17179865088,
+      "SwapFree_bytes": 12734046208
+    },
+    "cgroup": {
+      "cpu.max": null,
+      "cpuset.cpus.effective": "0-19",
+      "memory.max": null,
+      "memory.current": null,
+      "memory.swap.max": null
+    },
+    "disk": {
+      "/home/barberb/lift_coding": {
+        "total_bytes": 4031871553536,
+        "used_bytes": 3687762964480,
+        "free_bytes": 139267854336
+      },
+      "/tmp": {
+        "total_bytes": 4031871553536,
+        "used_bytes": 3687762964480,
+        "free_bytes": 139267854336
+      },
+      "/home/barberb": {
+        "total_bytes": 4031871553536,
+        "used_bytes": 3687762964480,
+        "free_bytes": 139267854336
+      }
+    }
+  },
+  "executables": {
+    "z3": {
+      "found_on_path": true,
+      "path": "/home/barberb/.local/bin/z3",
+      "resolved_path": "/home/barberb/.local/bin/z3",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.local/bin/z3",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Z3 version 4.15.4 - 64 bit",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "cvc5": {
+      "found_on_path": true,
+      "path": "/home/barberb/.local/bin/cvc5",
+      "resolved_path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.local/bin/cvc5",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]\ncompiled with GCC version 11.4.0\non Feb 26 2026 01:24:28\n\nCopyright (c) 2009-2025 by the authors and their institutional\naffiliations listed at https://cvc5.github.io/people.html\n\ncvc5 is open-source and is covered by the BSD license (modified).\n\nTHIS SOFTWARE IS PROVIDED AS-IS, WITHOUT ANY WARRANTIES.\nUSE AT YOUR OWN RISK.\n\nThis version of cvc5 is linked against the following non-(L)GPL'ed\nthird party libraries.\n\n  CaDiCaL - Simplified Satisfiability Solver\n  See https://github.com/arminbiere/cadical for copyright information.\n\n  Editline Library\n  See https://thrysoee.dk/editline\n  for copyright information.\n\n  SymFPU - The Symbolic Floating Point Unit\n  See https://github.com/martin-cs/symfpu/tree/CVC4 for copyright information.\n\nThis version of cvc5 is linked against the following third party\nlibraries covered by the LGPLv3 license.\nSee licenses/lgpl-3.0.txt for more information.\n\n  GMP - Gnu Multi Precision Arithmetic Library\n  See http://gmplib.org for copyright information.\n\n  LibPoly polynomial library\n  See https://github.com/SRI-CSL/libpoly for copyright and\n  licensing information.\n\ncvc5 is statically linked against these libraries. To recompile\nthis version of cvc5 with different versions of these libraries\nfollow the instructions on https://github.com/cvc5/cvc5/blob/main/INSTALL.md\n\nSee the file COPYING (distributed with the source code, and with\nall binaries) for the full cvc5 copyright, licensing, and (lack of)\nwarranty information.",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "coqc": {
+      "found_on_path": false,
+      "path": null,
+      "resolved_path": null,
+      "version_probe": null,
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "rocq": {
+      "found_on_path": false,
+      "path": null,
+      "resolved_path": null,
+      "version_probe": null,
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "pdflatex": {
+      "found_on_path": true,
+      "path": "/home/barberb/.local/bin/pdflatex",
+      "resolved_path": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdftex",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.local/bin/pdflatex",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)\nkpathsea version 6.4.2\nCopyright 2026 Han The Thanh (pdfTeX) et al.\nThere is NO warranty.  Redistribution of this software is\ncovered by the terms of both the pdfTeX copyright and\nthe Lesser GNU General Public License.\nFor more information about these matters, see the file\nnamed COPYING and the pdfTeX source.\nPrimary author of pdfTeX: Han The Thanh (pdfTeX) et al.\nCompiled with libpng 1.6.55; using libpng 1.6.55\nCompiled with zlib 1.3.2; using zlib 1.3.2\nCompiled with xpdf version 4.06",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "xelatex": {
+      "found_on_path": true,
+      "path": "/home/barberb/.local/bin/xelatex",
+      "resolved_path": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/xetex",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.local/bin/xelatex",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)\nkpathsea version 6.4.2\nCopyright 2026 SIL International, Jonathan Kew and Khaled Hosny.\nThere is NO warranty.  Redistribution of this software is\ncovered by the terms of both the XeTeX copyright and\nthe Lesser GNU General Public License.\nFor more information about these matters, see the file\nnamed COPYING and the XeTeX source.\nPrimary author of XeTeX: Jonathan Kew.\nCompiled with ICU version 78.2; using 78.2\nCompiled with zlib version 1.3.2; using 1.3.2\nCompiled with FreeType2 version 2.14.1; using 2.14.1\nCompiled with Graphite2 version 1.3.14; using 1.3.14\nCompiled with HarfBuzz version 12.3.2; using 12.3.2\nCompiled with libpng version 1.6.55; using 1.6.55\nCompiled with pplib version v2.2\nCompiled with fontconfig version 2.13.1; using 2.15.0",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "lualatex": {
+      "found_on_path": true,
+      "path": "/home/barberb/.local/bin/lualatex",
+      "resolved_path": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/luahbtex",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.local/bin/lualatex",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)\nDevelopment id: 7724\n\nExecute  'luahbtex --credits'  for credits and version details.\n\nThere is NO warranty. Redistribution of this software is covered by\nthe terms of the GNU General Public License, version 2 or (at your option)\nany later version. For more information about these matters, see the file\nnamed COPYING and the LuaTeX source.\n\nLuaTeX is Copyright 2025 Taco Hoekwater and the LuaTeX Team.",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "latexmk": {
+      "found_on_path": true,
+      "path": "/home/barberb/.local/bin/latexmk",
+      "resolved_path": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/scripts/latexmk/latexmk.pl",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.local/bin/latexmk",
+          "-v"
+        ],
+        "exit_code": 0,
+        "stdout": "Latexmk, John Collins, 9 March 2026. Version 4.88",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "tectonic": {
+      "found_on_path": false,
+      "path": null,
+      "resolved_path": null,
+      "version_probe": null,
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "nvcc": {
+      "found_on_path": true,
+      "path": "/usr/local/cuda/bin/nvcc",
+      "resolved_path": "/usr/local/cuda-13.0/bin/nvcc",
+      "version_probe": {
+        "argv": [
+          "/usr/local/cuda/bin/nvcc",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:57:39_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "nvidia-smi": {
+      "found_on_path": true,
+      "path": "/usr/bin/nvidia-smi",
+      "resolved_path": "/usr/bin/nvidia-smi",
+      "version_probe": {
+        "argv": [
+          "/usr/bin/nvidia-smi",
+          "--query-gpu=index,name,memory.total,memory.free,driver_version",
+          "--format=csv,noheader,nounits"
+        ],
+        "exit_code": 0,
+        "stdout": "0, NVIDIA GB10, [N/A], [N/A], 580.142",
+        "stderr": ""
+      },
+      "qualification": "executable/version only; no research workload tested"
+    },
+    "lean": {
+      "found_on_path": true,
+      "path": "/home/barberb/.elan/bin/lean",
+      "launcher_invoked": false,
+      "reason": "Direct installed toolchain binary versions probed; Elan launcher avoided to prevent implicit downloads."
+    },
+    "lake": {
+      "found_on_path": true,
+      "path": "/home/barberb/.elan/bin/lake",
+      "launcher_invoked": false,
+      "reason": "Direct installed toolchain binary versions probed; Elan launcher avoided to prevent implicit downloads."
+    }
+  },
+  "installed_lean_toolchains": [
+    {
+      "toolchain": "leanprover--lean4---v4.29.0",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.29.0, aarch64-unknown-linux-gnu, commit 98dc76e3c0a9b856c9b98726b713fb04fab16740, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.29.0",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+98dc76e (Lean version 4.29.0)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.29.1",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.29.1, aarch64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.29.1",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.30.0",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.30.0, aarch64-unknown-linux-gnu, commit d024af099ca4bf2c86f649261ebf59565dc8c622, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.30.0",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+d024af0 (Lean version 4.30.0)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.31.0",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.31.0, aarch64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.31.0",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.32.0",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.32.0, aarch64-unknown-linux-gnu, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.32.0",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+8c9756b (Lean version 4.32.0)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.32.1",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.1/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.1/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.32.1, aarch64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.32.1",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.1/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.1/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+f054605 (Lean version 4.32.1)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.32.2",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.2/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.2/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.32.2, aarch64-unknown-linux-gnu, commit f3b06c705e6c85f5314019d5d3baab0fec5b580c, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.32.2",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.2/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.32.2/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+f3b06c7 (Lean version 4.32.2)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.33.0",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.0/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.0/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.33.0, aarch64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.33.0",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.0/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.0/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.33.1",
+      "tool": "lean",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+        "stderr": ""
+      }
+    },
+    {
+      "toolchain": "leanprover--lean4---v4.33.1",
+      "tool": "lake",
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lake",
+      "version_probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Lake version 5.0.0-src+819816b (Lean version 4.33.1)",
+        "stderr": ""
+      }
+    }
+  ],
+  "python_environments": {
+    "current": {
+      "path": "/home/barberb/.local/bin/python",
+      "present": true,
+      "metadata_only": true,
+      "heavy_packages_imported": false,
+      "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+      "executable": "/home/barberb/.local/bin/python",
+      "packages": {
+        "torch": {
+          "installed": true,
+          "version": "2.13.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "torchvision": {
+          "installed": false
+        },
+        "torchaudio": {
+          "installed": true,
+          "version": "2.8.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "transformers": {
+          "installed": true,
+          "version": "4.52.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "tokenizers": {
+          "installed": true,
+          "version": "0.21.4",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "datasets": {
+          "installed": false
+        },
+        "accelerate": {
+          "installed": true,
+          "version": "1.8.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "peft": {
+          "installed": false
+        },
+        "trl": {
+          "installed": false
+        },
+        "bitsandbytes": {
+          "installed": false
+        },
+        "deepspeed": {
+          "installed": false
+        },
+        "vllm": {
+          "installed": false
+        },
+        "sglang": {
+          "installed": false
+        },
+        "numpy": {
+          "installed": true,
+          "version": "1.26.4",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "pandas": {
+          "installed": true,
+          "version": "3.0.2",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "scipy": {
+          "installed": true,
+          "version": "1.17.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "scikit-learn": {
+          "installed": true,
+          "version": "1.8.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "sentence-transformers": {
+          "installed": true,
+          "version": "5.4.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "sentencepiece": {
+          "installed": true,
+          "version": "0.2.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "safetensors": {
+          "installed": true,
+          "version": "0.7.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "spacy": {
+          "installed": true,
+          "version": "3.8.14",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "duckdb": {
+          "installed": true,
+          "version": "1.5.5",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "z3-solver": {
+          "installed": true,
+          "version": "4.15.4.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "cvc5": {
+          "installed": true,
+          "version": "1.3.3",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "lean-dojo": {
+          "installed": false
+        },
+        "mathlibtools": {
+          "installed": false
+        },
+        "coq-serapi": {
+          "installed": false
+        },
+        "pytest": {
+          "installed": true,
+          "version": "9.1.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "hypothesis": {
+          "installed": true,
+          "version": "6.152.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "psutil": {
+          "installed": true,
+          "version": "7.2.2",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "ipfs-accelerate-py": {
+          "installed": false
+        },
+        "ipfs-datasets-py": {
+          "installed": true,
+          "version": "0.2.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "ipfs-kit-py": {
+          "installed": true,
+          "version": "0.3.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        }
+      }
+    },
+    "system": {
+      "path": "/usr/bin/python3",
+      "present": true,
+      "metadata_only": true,
+      "heavy_packages_imported": false,
+      "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+      "executable": "/usr/bin/python3",
+      "packages": {
+        "torch": {
+          "installed": true,
+          "version": "2.13.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "torchvision": {
+          "installed": false
+        },
+        "torchaudio": {
+          "installed": true,
+          "version": "2.8.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "transformers": {
+          "installed": true,
+          "version": "4.52.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "tokenizers": {
+          "installed": true,
+          "version": "0.21.4",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "datasets": {
+          "installed": false
+        },
+        "accelerate": {
+          "installed": true,
+          "version": "1.8.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "peft": {
+          "installed": false
+        },
+        "trl": {
+          "installed": false
+        },
+        "bitsandbytes": {
+          "installed": false
+        },
+        "deepspeed": {
+          "installed": false
+        },
+        "vllm": {
+          "installed": false
+        },
+        "sglang": {
+          "installed": false
+        },
+        "numpy": {
+          "installed": true,
+          "version": "1.26.4",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "pandas": {
+          "installed": true,
+          "version": "3.0.2",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "scipy": {
+          "installed": true,
+          "version": "1.17.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "scikit-learn": {
+          "installed": true,
+          "version": "1.8.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "sentence-transformers": {
+          "installed": true,
+          "version": "5.4.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "sentencepiece": {
+          "installed": true,
+          "version": "0.2.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "safetensors": {
+          "installed": true,
+          "version": "0.7.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "spacy": {
+          "installed": true,
+          "version": "3.8.14",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "duckdb": {
+          "installed": true,
+          "version": "1.5.5",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "z3-solver": {
+          "installed": true,
+          "version": "4.15.4.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "cvc5": {
+          "installed": true,
+          "version": "1.3.3",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "lean-dojo": {
+          "installed": false
+        },
+        "mathlibtools": {
+          "installed": false
+        },
+        "coq-serapi": {
+          "installed": false
+        },
+        "pytest": {
+          "installed": true,
+          "version": "9.1.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "hypothesis": {
+          "installed": true,
+          "version": "6.152.1",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "psutil": {
+          "installed": true,
+          "version": "7.2.2",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "ipfs-accelerate-py": {
+          "installed": false
+        },
+        "ipfs-datasets-py": {
+          "installed": true,
+          "version": "0.2.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        },
+        "ipfs-kit-py": {
+          "installed": true,
+          "version": "0.3.0",
+          "distribution_location": "/home/barberb/.local/lib/python3.12/site-packages"
+        }
+      }
+    },
+    "campaign": {
+      "path": "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+      "present": true,
+      "metadata_only": true,
+      "heavy_packages_imported": false,
+      "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+      "executable": "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+      "packages": {
+        "torch": {
+          "installed": false
+        },
+        "torchvision": {
+          "installed": false
+        },
+        "torchaudio": {
+          "installed": false
+        },
+        "transformers": {
+          "installed": false
+        },
+        "tokenizers": {
+          "installed": false
+        },
+        "datasets": {
+          "installed": false
+        },
+        "accelerate": {
+          "installed": false
+        },
+        "peft": {
+          "installed": false
+        },
+        "trl": {
+          "installed": false
+        },
+        "bitsandbytes": {
+          "installed": false
+        },
+        "deepspeed": {
+          "installed": false
+        },
+        "vllm": {
+          "installed": false
+        },
+        "sglang": {
+          "installed": false
+        },
+        "numpy": {
+          "installed": false
+        },
+        "pandas": {
+          "installed": false
+        },
+        "scipy": {
+          "installed": false
+        },
+        "scikit-learn": {
+          "installed": false
+        },
+        "sentence-transformers": {
+          "installed": false
+        },
+        "sentencepiece": {
+          "installed": false
+        },
+        "safetensors": {
+          "installed": false
+        },
+        "spacy": {
+          "installed": false
+        },
+        "duckdb": {
+          "installed": true,
+          "version": "1.5.5",
+          "distribution_location": "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/lib/python3.12/site-packages"
+        },
+        "z3-solver": {
+          "installed": false
+        },
+        "cvc5": {
+          "installed": false
+        },
+        "lean-dojo": {
+          "installed": false
+        },
+        "mathlibtools": {
+          "installed": false
+        },
+        "coq-serapi": {
+          "installed": false
+        },
+        "pytest": {
+          "installed": false
+        },
+        "hypothesis": {
+          "installed": false
+        },
+        "psutil": {
+          "installed": false
+        },
+        "ipfs-accelerate-py": {
+          "installed": false
+        },
+        "ipfs-datasets-py": {
+          "installed": false
+        },
+        "ipfs-kit-py": {
+          "installed": false
+        }
+      }
+    },
+    "validator": {
+      "path": "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack-validator/bin/python",
+      "present": true,
+      "metadata_only": true,
+      "heavy_packages_imported": false,
+      "probe_error": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "sealed validator Python rejected -c source"
+      }
+    }
+  },
+  "canonical_repositories": [
+    {
+      "path": "/home/barberb/lift_coding",
+      "head": "8601408d6406681a14a9488d31d1cd9a16164649",
+      "tree": "e35dfaebbd229d7e7de988b2e0345444d9284221",
+      "branch": "chore/fmt-check-main",
+      "observed_at": "2026-09-11T15:36:23.467917+00:00",
+      "dirty_status": [
+        {
+          "status": " M",
+          "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-17-pgir-114-pgir-030-retry-budget.md"
+        },
+        {
+          "status": " M",
+          "path": "external/ipfs_accelerate"
+        },
+        {
+          "status": " M",
+          "path": "external/ipfs_datasets"
+        },
+        {
+          "status": " M",
+          "path": "external/ipfs_kit"
+        },
+        {
+          "status": " M",
+          "path": "hallucinate_app"
+        },
+        {
+          "status": " M",
+          "path": "swissknife"
+        },
+        {
+          "status": "??",
+          "path": ".aseh-runtime-archives/"
+        },
+        {
+          "status": "??",
+          "path": ".aseh-validation-stage.NtxknddH/"
+        },
+        {
+          "status": "??",
+          "path": ".aseh-wheel-delta-stage.F8IovCkI/"
+        },
+        {
+          "status": "??",
+          "path": ".backups/"
+        },
+        {
+          "status": "??",
+          "path": ".codex-sandbox-probe.IbJduK/"
+        },
+        {
+          "status": "??",
+          "path": ".codex/"
+        },
+        {
+          "status": "??",
+          "path": ".cvefixes-build/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-accel-integration.aNViEq/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-bootstrap-recovery-integration/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-callback-submodule-requal-fix/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-control-fix.4KYnWJ/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-detached-validation.7411oq/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-exact-callback-integration/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-handoff-fix.kDRwxP/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-lock-fix.U3gxOX/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-monitor-recovery/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-post-commit-recovery.drFcpF/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-requal-probe.EAwcO8/"
+        },
+        {
+          "status": "??",
+          "path": ".doep-stale-route-fix.c6K6pH/"
+        },
+        {
+          "status": "??",
+          "path": ".doep011-protected-projection-recovery/"
+        },
+        {
+          "status": "??",
+          "path": ".doep011-route-lineage-carry/"
+        },
+        {
+          "status": "??",
+          "path": ".doep011-security-review.BAQPAa/"
+        },
+        {
+          "status": "??",
+          "path": ".doep011-zero-provider-inner-recheck/"
+        },
+        {
+          "status": "??",
+          "path": ".dqp012-diagnostic.kIF1vO/"
+        },
+        {
+          "status": "??",
+          "path": ".git-sync-recovery-20260727-202941.md"
+        },
+        {
+          "status": "??",
+          "path": ".kit-semantic-state-supervisor-worktrees/"
+        },
+        {
+          "status": "??",
+          "path": ".lgcvf-quarantine/"
+        },
+        {
+          "status": "??",
+          "path": ".merge-backups/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-042bde204/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-174fd2daf-pre-rematerialize/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-5c306727f/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-670d4925d/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-80c614a80-pre-ff3c8d2f7/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-ad86c41a4/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-adf98744c-stale-lanes/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-c1bb3a26f/"
+        },
+        {
+          "status": "??",
+          "path": ".pcar-runtime-quarantine-e0bc7e787/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/launch_pgir_parallel_grok.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/master/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/merge_queue/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-16-pgir-112-codebase-scan-45be53b0ad05.md"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-16-pgir-113-codebase-scan-2049598c9447.md"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-16-pgir-114-codebase-scan-881f61cee68f.md"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-16-pgir-115-codebase-scan-5a8ca5d0a0f5.md"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-17-pgir-114-repair-complete.md"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/discovery/scan-details/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/lane-0/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/lane-1/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/lane-2/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/parallel/objective_generation.json"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/pgir_implementation_provider.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/preflight-parallel-20260816T222343Z/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/preflight-parallel-20260816T222808Z/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/preflight-parallel-resume-20260816T224133Z/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/preflight-parallel-resume-20260816T224434Z/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/preflight/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/quarantine/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/resume_parallel_when_master_exits.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/track/"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/watch_pgir013_or_fanout.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/watch_pgir014_or_fanout.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/watch_pgir020.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/watch_pgir050.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/watch_pgir060.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/watch_pgir_task.sh"
+        },
+        {
+          "status": "??",
+          "path": ".pgir_campaign/runtime/worktrees/"
+        },
+        {
+          "status": "??",
+          "path": ".recovery-backups/"
+        },
+        {
+          "status": "??",
+          "path": ".runtime-archives/"
+        },
+        {
+          "status": "??",
+          "path": ".sawm-m59-datasets-gitfile.initialization-failed"
+        },
+        {
+          "status": "??",
+          "path": ".sawm-m59-kit-gitfile.initialization-failed"
+        },
+        {
+          "status": "??",
+          "path": ".sawm-m59-standalone.zCFkq4/"
+        },
+        {
+          "status": "??",
+          "path": ".sawm-m60-standalone.cQ68RF/"
+        },
+        {
+          "status": "??",
+          "path": ".tmp-gitlink-probe-mYHtmN/"
+        },
+        {
+          "status": "??",
+          "path": ".tmp-readme-compare/"
+        },
+        {
+          "status": "??",
+          "path": ".venvs/"
+        },
+        {
+          "status": "??",
+          "path": ".worktrees/"
+        },
+        {
+          "status": "??",
+          "path": "docs/architecture/agent_supervisor_causal_event_federation.todo.md"
+        },
+        {
+          "status": "??",
+          "path": "implementation_plan/proof_grounded_ir_learning_fabric/"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/"
+        },
+        {
+          "status": "??",
+          "path": "ne_detail_audit.py"
+        },
+        {
+          "status": "??",
+          "path": "papers/"
+        },
+        {
+          "status": "??",
+          "path": "scripts/materialize_paper_database.py"
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_ducklake_projection.py"
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_state_owner.py"
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_supervisor_campaign.py"
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_supervisors.py"
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_worker_observation.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_materialize_paper_database.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_database_daemon.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_ducklake_projection.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_state_owner.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_supervisor_campaign.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_supervisors.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_worker_observation.py"
+        },
+        {
+          "status": "??",
+          "path": "tmp_readme_compare/"
+        }
+      ],
+      "dirty_status_entry_count": 101,
+      "dirty_source_hashes": [
+        {
+          "status": "??",
+          "path": "docs/architecture/agent_supervisor_causal_event_federation.todo.md",
+          "kind": "file",
+          "bytes": 230277,
+          "sha256": "d38536385a1f7fb81134f438077da511f2d909f67bb8baf245a2fbd4c7edc6e7",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py",
+          "kind": "file",
+          "bytes": 71681,
+          "sha256": "82f7334dfd4a5707feea891eed8d3ca65e57be20efa75ec48f091ca6742bffc2",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ne_detail_audit.py",
+          "kind": "file",
+          "bytes": 4220,
+          "sha256": "701bf96ff6e1b763133bb299ebdf2913d2840e228bb57713291e7baa38706f9f",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/checklist.tex",
+          "kind": "file",
+          "bytes": 26167,
+          "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/README.md",
+          "kind": "file",
+          "bytes": 14618,
+          "sha256": "53179a81f9594e367443774fa756d50f7f25616b013aead6f3d519ae937316f4",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/autoformalization/paper.objectives.md",
+          "kind": "file",
+          "bytes": 18568,
+          "sha256": "3623a1c3877f0643cb4776b028943b8298ece5795ed5ffe014c10412651e8967",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/autoformalization/paper.todo.md",
+          "kind": "file",
+          "bytes": 90599,
+          "sha256": "718b3d64d95f84335ed448e61cee077fec020be466836f712215fb0894428fd5",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/autoformalization/review.md",
+          "kind": "file",
+          "bytes": 22586,
+          "sha256": "179964332c6f9b34b251d76cdd444d87d1a0e79f27afa56e76fca590e8b1eb4a",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/autoformalization/supervisor.json",
+          "kind": "file",
+          "bytes": 1640,
+          "sha256": "e6fdc339a18e9251a6e3d60e6c223255110a3102bf8ef8fb1674537cc1803c31",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/autoformalization/tasks.json",
+          "kind": "file",
+          "bytes": 58121,
+          "sha256": "9b84d234b360867a5db6a450c5324537d3b453f2bcef164139e606a732d046a7",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/law_to_action/paper.objectives.md",
+          "kind": "file",
+          "bytes": 17773,
+          "sha256": "6a6cee0f9bd2412db889b7919ce95c09f77c84ea920f0db54a946d3000df8feb",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/law_to_action/paper.todo.md",
+          "kind": "file",
+          "bytes": 82038,
+          "sha256": "82a920ca7e336fde932332d5c67c852f71014d0bca390959a76674b75e3f8ed6",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/law_to_action/review.md",
+          "kind": "file",
+          "bytes": 20213,
+          "sha256": "4433d28993fed8a0b797ea66e1c954203bce81f6c89fdf77707b0e11810b2be8",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/law_to_action/supervisor.json",
+          "kind": "file",
+          "bytes": 1599,
+          "sha256": "9d32cd3a3f3f2343f19b5019cab7c493197aafe01f05435c4c5c14a9a7140f98",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/law_to_action/tasks.json",
+          "kind": "file",
+          "bytes": 51985,
+          "sha256": "95dc6a59fe049062676ac48673e301c4a05b8fa9c6860d92f254cb2d7f4459ef",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/neurosymbolic_supervision/paper.objectives.md",
+          "kind": "file",
+          "bytes": 22608,
+          "sha256": "5991e267f65c80775c97d1ca46fd712b38a448e360699e0f21958a59f183f9e2",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/neurosymbolic_supervision/paper.todo.md",
+          "kind": "file",
+          "bytes": 108851,
+          "sha256": "a5cc52e842c9c44ccbb984fa015b0a90810374f7a026659617d1225a55559e05",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/neurosymbolic_supervision/review.md",
+          "kind": "file",
+          "bytes": 22732,
+          "sha256": "38a45680ab8da863e90388093d614fb8d076cda52a749f777a2d7271099d0951",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/neurosymbolic_supervision/supervisor.json",
+          "kind": "file",
+          "bytes": 1728,
+          "sha256": "5c63a5befecdf2bb03b7d7f846538c32c9dc96d85c0332a4d3eb3b1e18e010b2",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/neurosymbolic_supervision/tasks.json",
+          "kind": "file",
+          "bytes": 70114,
+          "sha256": "2dc2dd40be1e6e84246a73d432700487574aa9a810e0cd3c7e3f3e22168bec65",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/source_inputs.json",
+          "kind": "file",
+          "bytes": 3641,
+          "sha256": "c3ceaa366d6e3427140d5df302a761303921e95c9124375897bd0936f295241f",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/completion/validation.json",
+          "kind": "file",
+          "bytes": 782,
+          "sha256": "1d67a3d324f83e25c30e952ab530420f5d0d7a207a83eef6ed9b89023230e4af",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/neurips_2026.sty",
+          "kind": "file",
+          "bytes": 13704,
+          "sha256": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/neurips_2026_vericode.sty",
+          "kind": "file",
+          "bytes": 13757,
+          "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/neurips_2026_vericode_competition.sty",
+          "kind": "file",
+          "bytes": 13933,
+          "sha256": "a0178f152d13cf24f44936da0ee95bab975ceced8d54980efbbf8f7c1bb31f72",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/neurips_2026_vericode_workshop.tex",
+          "kind": "file",
+          "bytes": 17416,
+          "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "papers/neurips_2026_vericode_workshop_competition.tex",
+          "kind": "file",
+          "bytes": 17871,
+          "sha256": "0e21c08ce8a32cb3d4c0fb7123d38249209c2ef488a0c210acbea026f6fefc23",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "scripts/materialize_paper_database.py",
+          "kind": "file",
+          "bytes": 17177,
+          "sha256": "c0cb13eea298e69e4576f88734b35edba65eac3197d1c5e9530579ecb91c5ea4",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_ducklake_projection.py",
+          "kind": "file",
+          "bytes": 17954,
+          "sha256": "9fc1869cbdefcb06eee6a62e037b0c61b1f89509cb6d411a8cf2ad52711b6e62",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_state_owner.py",
+          "kind": "file",
+          "bytes": 9163,
+          "sha256": "36757da48daf130c8d6c60358e0530af8a5f8017098a72c50a677557a3071f0f",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_supervisor_campaign.py",
+          "kind": "file",
+          "bytes": 20105,
+          "sha256": "6ab69e0421d53dc55ea165585927ddbc16402e0946d89aab2f491bbf63e02186",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_supervisors.py",
+          "kind": "file",
+          "bytes": 24844,
+          "sha256": "376d9c9c4a81e86b36c3d9100429cf8b5661e53ca5dc883bdc1040c267256fcc",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "scripts/paper_worker_observation.py",
+          "kind": "file",
+          "bytes": 4509,
+          "sha256": "6ed57a235096d43d73961594b7ec74183cf8c242369261c1d4a65c50f3fc0415",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_materialize_paper_database.py",
+          "kind": "file",
+          "bytes": 5301,
+          "sha256": "f40c14ba58678c9c0a742411149236b595ee56a175c3512f07dc183f2d8b585a",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_database_daemon.py",
+          "kind": "file",
+          "bytes": 10331,
+          "sha256": "a76163aeccef3659a4214038cc7ec1c72fbbfe412011213046112b3e869bdbcc",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_ducklake_projection.py",
+          "kind": "file",
+          "bytes": 5021,
+          "sha256": "718f7d209a45c9b8938a1454446419963508bd1c145ac2445353b424c16f33cd",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_state_owner.py",
+          "kind": "file",
+          "bytes": 5458,
+          "sha256": "8053850d8d6935d75ac858b1b1b42c9ce8c80e21eb2818ac5a4566e2a82eed03",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_supervisor_campaign.py",
+          "kind": "file",
+          "bytes": 10563,
+          "sha256": "fc0b6db930e8946411f7a936b247f523758e78df03dd53ae9f319bec3a0e9a52",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_supervisors.py",
+          "kind": "file",
+          "bytes": 10771,
+          "sha256": "73dcd769c0a6601fede2bb20df2322a53f2c7d69b5a63857ba4f878c2572502f",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/test_paper_worker_observation.py",
+          "kind": "file",
+          "bytes": 2277,
+          "sha256": "73845480d92c013437c6805726ba1440f5bca6415e2d3f6310a4ead54262623b",
+          "stable_during_hash": true
+        }
+      ],
+      "excluded_source_candidate_count": 110,
+      "hash_scope": {
+        "source_suffixes": [
+          ".bib",
+          ".c",
+          ".cc",
+          ".cfg",
+          ".cls",
+          ".cpp",
+          ".cu",
+          ".cuh",
+          ".h",
+          ".ini",
+          ".json",
+          ".lean",
+          ".md",
+          ".py",
+          ".pyi",
+          ".rs",
+          ".sh",
+          ".sql",
+          ".sty",
+          ".tex",
+          ".toml",
+          ".v",
+          ".yaml",
+          ".yml"
+        ],
+        "untracked_directories_expanded": [
+          "benchmarks",
+          "docs",
+          "formal",
+          "ipfs_accelerate_py",
+          "ipfs_datasets_py",
+          "ipfs_kit_py",
+          "packages",
+          "papers",
+          "scripts",
+          "test",
+          "tests"
+        ],
+        "excluded_parts": [
+          ".cache",
+          ".git",
+          ".venvs",
+          ".worktrees",
+          "__pycache__",
+          "node_modules"
+        ],
+        "excluded": "hidden top-level runtime/quarantine trees and generated papers/completion/runtime_bootstrap; non-source file kinds; files over64MiB explicitly reported without a hash",
+        "note": "All git status entries retained; untracked directories outside canonical source scope remain summarized by git. Canonical observation, not isolated lane runtime."
+      }
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+      "tree": "c5ddd043de58349aafac0f9af03c1b018313623d",
+      "branch": "recovery/pre-reboot-agent-supervisor-20260822",
+      "observed_at": "2026-09-11T15:36:25.479657+00:00",
+      "dirty_status": [
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_implementation_route.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py"
+        },
+        {
+          "status": " M",
+          "path": "test/api/test_agent_supervisor_implementation_auto_rescue.py"
+        },
+        {
+          "status": "??",
+          "path": "data/agent_supervisor/.control-transaction.lock"
+        },
+        {
+          "status": "??",
+          "path": "data/agent_supervisor/control-audit.jsonl"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/_hash_resources.py"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/analysis/mcp_invocation_trace.py"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/runtime/hash_pressure.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_database_claim_eligibility.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_database_observation.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_hash_pressure.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_managed_quack_child_environment.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_quack_session_sql.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_quack_transport_native.py"
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_resource_rollout_admission.py"
+        }
+      ],
+      "dirty_status_entry_count": 21,
+      "dirty_source_hashes": [
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/_hash_resources.py",
+          "kind": "file",
+          "bytes": 18976,
+          "sha256": "6037d8aa7d70f70deae36e26c45e08c90c617be558253d85004589463eea9420",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_implementation_route.py",
+          "kind": "file",
+          "bytes": 272648,
+          "sha256": "f99e5d1bd84bd886e35d64a9b082458863aea829b743bdb7746a47a12a23d0b5",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py",
+          "kind": "file",
+          "bytes": 71680,
+          "sha256": "958a7c9c6fb8e8810922a8dd80fae9e375a1917ec4e90910be19703eb698b00b",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/analysis/mcp_invocation_trace.py",
+          "kind": "file",
+          "bytes": 44018,
+          "sha256": "c263ada779b3996774ef93311b992b914ecdb02e31f04c669e5928a54b584a43",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+          "kind": "file",
+          "bytes": 245934,
+          "sha256": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_accelerate_py/agent_supervisor/runtime/hash_pressure.py",
+          "kind": "file",
+          "bytes": 1026,
+          "sha256": "63c6831518647017eb49c88693fe6bbf54ba8c586b9b9826356be4b099df817d",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py",
+          "kind": "file",
+          "bytes": 81405,
+          "sha256": "7fe6055fc60884149b4a43fe28543d62e90620dd942b569a748fa02be5a19ff1",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+          "kind": "file",
+          "bytes": 45752,
+          "sha256": "371573eb906de095fc5d97c3008ebec0ed7663cab25ac0af4991cb7ea95b2533",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+          "kind": "file",
+          "bytes": 2901703,
+          "sha256": "13ff5ea68a47ec22088a73e5e055c1c860438c90daa07e5ea273186b3f7849a0",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "kind": "file",
+          "bytes": 831351,
+          "sha256": "0f0bddae6c38681f6afe0a9213c22dea29fcd5b2a9b77d86702c0d5aadeedff3",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py",
+          "kind": "file",
+          "bytes": 78729,
+          "sha256": "88d4ba17975d7a8a77e00293ff365c9e7f7d2cf76ca947b9b0a9803fce564b48",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_database_claim_eligibility.py",
+          "kind": "file",
+          "bytes": 7103,
+          "sha256": "dad36570ead1481a7d2a208f79c1468ee73a14baf966da89b971f1002bf258b3",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_database_observation.py",
+          "kind": "file",
+          "bytes": 8026,
+          "sha256": "029bf65e5e1e4a1eb035bf26fbd5c837f330b4157bd696ec42ee8a4b0d6b9afa",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_hash_pressure.py",
+          "kind": "file",
+          "bytes": 3071,
+          "sha256": "27806582a8f30f0dfd54e0677f9983ce60aca1c48c440b4a7f136a3c55f799aa",
+          "stable_during_hash": true
+        },
+        {
+          "status": " M",
+          "path": "test/api/test_agent_supervisor_implementation_auto_rescue.py",
+          "kind": "file",
+          "bytes": 23833,
+          "sha256": "4917f617a18009f05db8518df76f7dc138cab3669a925796fe0fd326792b53ca",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_managed_quack_child_environment.py",
+          "kind": "file",
+          "bytes": 3547,
+          "sha256": "bfde41ffd6304188ddef0e9f97f33ad24cb7c2499228e53f09f839a21572d182",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_quack_session_sql.py",
+          "kind": "file",
+          "bytes": 7791,
+          "sha256": "41082187999e4a62f27c59f559b9f42b724a85227c0236b5b510ee826205e72d",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_agent_supervisor_quack_transport_native.py",
+          "kind": "file",
+          "bytes": 4246,
+          "sha256": "df424b358cb0885fbc1cb4c95d4a59c4ef17c16c2b587f6da2eb608fbda7fc5d",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "test/api/test_resource_rollout_admission.py",
+          "kind": "file",
+          "bytes": 8799,
+          "sha256": "50ca4dbd64a33dffd5683c62fc3c14a55f131233ec396c35de1543a832e44334",
+          "stable_during_hash": true
+        }
+      ],
+      "excluded_source_candidate_count": 2,
+      "hash_scope": {
+        "source_suffixes": [
+          ".bib",
+          ".c",
+          ".cc",
+          ".cfg",
+          ".cls",
+          ".cpp",
+          ".cu",
+          ".cuh",
+          ".h",
+          ".ini",
+          ".json",
+          ".lean",
+          ".md",
+          ".py",
+          ".pyi",
+          ".rs",
+          ".sh",
+          ".sql",
+          ".sty",
+          ".tex",
+          ".toml",
+          ".v",
+          ".yaml",
+          ".yml"
+        ],
+        "untracked_directories_expanded": [
+          "benchmarks",
+          "docs",
+          "formal",
+          "ipfs_accelerate_py",
+          "ipfs_datasets_py",
+          "ipfs_kit_py",
+          "packages",
+          "papers",
+          "scripts",
+          "test",
+          "tests"
+        ],
+        "excluded_parts": [
+          ".cache",
+          ".git",
+          ".venvs",
+          ".worktrees",
+          "__pycache__",
+          "node_modules"
+        ],
+        "excluded": "hidden top-level runtime/quarantine trees and generated papers/completion/runtime_bootstrap; non-source file kinds; files over64MiB explicitly reported without a hash",
+        "note": "All git status entries retained; untracked directories outside canonical source scope remain summarized by git. Canonical observation, not isolated lane runtime."
+      }
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "branch": "main",
+      "observed_at": "2026-09-11T15:36:25.613637+00:00",
+      "dirty_status": [
+        {
+          "status": " M",
+          "path": ".tools/ipfs_kit_py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_accelerate_py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/core_operations/logic_processor.py"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/logic/CEC/DCEC_Library"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/logic/CEC/Eng-DCEC"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/logic/CEC/ShadowProver"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/logic/CEC/Talos"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/multimedia/omni_converter_mk2"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+        },
+        {
+          "status": " M",
+          "path": "ipfs_kit_py"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/"
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/mcp_server/mcplusplus/p2p_libp2p_transport.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/fixtures/ui_ux_ir/"
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/logic/ui_ux_ir/"
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py"
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/mcp_server/test_mcplusplus_p2p_tool_parity.py"
+        }
+      ],
+      "dirty_status_entry_count": 17,
+      "dirty_source_hashes": [
+        {
+          "status": " M",
+          "path": "ipfs_datasets_py/core_operations/logic_processor.py",
+          "kind": "file",
+          "bytes": 41319,
+          "sha256": "fdfcfb1b49fca543b57a13db7ca7006ccf6f182bfd2e66909883d1d4f451d8bd",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/__init__.py",
+          "kind": "file",
+          "bytes": 3680,
+          "sha256": "a1ba4f2cf55788cd65b858f20eb7591b960c373e939f124567f8f16f0b961b51",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/canonicalize.py",
+          "kind": "file",
+          "bytes": 3975,
+          "sha256": "a76ea9e180e296ac5ccad13ce788690678c3332822ce23b91b1d4e87948541df",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+          "kind": "file",
+          "bytes": 20512,
+          "sha256": "a91eaa4e2353ee7de3c834b534cb2288d70335d75f5ed83fc95d359a436072be",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/__init__.py",
+          "kind": "file",
+          "bytes": 1593,
+          "sha256": "e4c1c2a52cfc776b6a22759e2c8cadf7201950e65dfff415fccb13d98a972d7c",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/compiler.py",
+          "kind": "file",
+          "bytes": 5528,
+          "sha256": "c84483dc5feefd7f078947d33c20c3964d564bf6dc2b61f0220e0c8f7a975c6b",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/contracts.py",
+          "kind": "file",
+          "bytes": 8839,
+          "sha256": "0fd0e2e6dbf1c57d2c15b6c202c45f69a5a78116fb314698038adee47bb8ce02",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/dcec.py",
+          "kind": "file",
+          "bytes": 7717,
+          "sha256": "76e03e25db9c75aea87af8667f459ad35ebdfdd9722b7b6673f29f1dd6f73a7c",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/decompiler.py",
+          "kind": "file",
+          "bytes": 3537,
+          "sha256": "cb59ad9f6cb2a001ccc5816a24a5d4b273ac533e938ef22eb242e6abb81538fa",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/event_calculus.py",
+          "kind": "file",
+          "bytes": 6443,
+          "sha256": "2f24826d4113aa98078fe832b33048914c0218c13e2b0f1afeb3f300993331f7",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/flogic.py",
+          "kind": "file",
+          "bytes": 6189,
+          "sha256": "244e12ab6daf429b533bcdb8dd13fc8b1c45364bc9c2d792b5780696c65a9138",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/ontology.py",
+          "kind": "file",
+          "bytes": 5331,
+          "sha256": "a98f472191feaf56e2e67db446ca6dcf173f77d4faae1683a9b0794bee1f6dc8",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/roundtrip.py",
+          "kind": "file",
+          "bytes": 5666,
+          "sha256": "0d792997122d45d726fd464252d5dc93d884366a3dfc8f50c9fdc963c38f98cf",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/tdfol.py",
+          "kind": "file",
+          "bytes": 6405,
+          "sha256": "22a249191f47f01fc6fd4e4e7f70018b35ea7c8e096bf46d21f0fb30bdd1090d",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/migrations.py",
+          "kind": "file",
+          "bytes": 10335,
+          "sha256": "7fe621818fc703bb410841d455b15b98cd6ddb44589c2fed149168b5fb65d141",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/__init__.py",
+          "kind": "file",
+          "bytes": 451,
+          "sha256": "1f2b44c09b82ea39519ec049ce256ed28b8c85cd83d98b7b946df21f026191bd",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/glasses.py",
+          "kind": "file",
+          "bytes": 9038,
+          "sha256": "2190c17b9bd098d1c8877b0d87b48f85e03716d8bed339fe00a58043fbb07b99",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/mobile.py",
+          "kind": "file",
+          "bytes": 8388,
+          "sha256": "7ac90447ee5413cd265f559c6d79a1159cb308d7e8657b8591196b6b84bea0e5",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/semantic_items.py",
+          "kind": "file",
+          "bytes": 4715,
+          "sha256": "e31be71dbed0d113ce399c1e72f45e45bc6f18a63f43480634e7342cf6aace3e",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/solver.py",
+          "kind": "file",
+          "bytes": 4321,
+          "sha256": "25eb664b6112485fd647efe4ba12a31e95b608e3d81407a712201775adf265a5",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/web.py",
+          "kind": "file",
+          "bytes": 6626,
+          "sha256": "0a01fce11683694f28134ddb76bdc7a3fed36da51885a7efee400b3a70f6c47a",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/projections.py",
+          "kind": "file",
+          "bytes": 9057,
+          "sha256": "1d42e14fef14fb061f4fdb5d4a8f9e50e1ebab59e0fbbb910264e0a5d55eefbb",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+          "kind": "file",
+          "bytes": 38181,
+          "sha256": "deeee1e1e1f5875f48e6f694b223c90dee5616921f9b0d0fd33b1286402f3d80",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "ipfs_datasets_py/mcp_server/mcplusplus/p2p_libp2p_transport.py",
+          "kind": "file",
+          "bytes": 8052,
+          "sha256": "1e053ad191b85ae002b10c85721fdaf6b488a9ebe3b924eb71ef91131b22835b",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/fixtures/ui_ux_ir/v1/golden_vectors.json",
+          "kind": "file",
+          "bytes": 18847,
+          "sha256": "ede2d6e05f8fc0daf48b9dfe7fc064b3bd9dd1cf8ab3fea952d5d5a1b9c616ce",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/logic/ui_ux_ir/formalize/test_compiler.py",
+          "kind": "file",
+          "bytes": 4416,
+          "sha256": "697951f71c7b471ed62953cb2eba6a3d9e620446f09d749d8903f82bd10c818c",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/logic/ui_ux_ir/test_projections.py",
+          "kind": "file",
+          "bytes": 2334,
+          "sha256": "43780b53361af1514cf891defa46e23861c8097ab551145bfddef0109ac5ea36",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/logic/ui_ux_ir/test_schema_decode.py",
+          "kind": "file",
+          "bytes": 8069,
+          "sha256": "cf748cc0dfd0671049a6aa1d9c5d68f8dd779e6f2b949a13083a3677a2241542",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py",
+          "kind": "file",
+          "bytes": 2659,
+          "sha256": "1c013570b87452cf972fe78883682c64d2f1deb4a18d197339d1399082345e47",
+          "stable_during_hash": true
+        },
+        {
+          "status": "??",
+          "path": "tests/unit/mcp_server/test_mcplusplus_p2p_tool_parity.py",
+          "kind": "file",
+          "bytes": 2948,
+          "sha256": "52e1e45c73207c848ee5d8ddbf431209a42ada0bb2bdebaa90cd3e8845c3578c",
+          "stable_during_hash": true
+        }
+      ],
+      "excluded_source_candidate_count": 13,
+      "hash_scope": {
+        "source_suffixes": [
+          ".bib",
+          ".c",
+          ".cc",
+          ".cfg",
+          ".cls",
+          ".cpp",
+          ".cu",
+          ".cuh",
+          ".h",
+          ".ini",
+          ".json",
+          ".lean",
+          ".md",
+          ".py",
+          ".pyi",
+          ".rs",
+          ".sh",
+          ".sql",
+          ".sty",
+          ".tex",
+          ".toml",
+          ".v",
+          ".yaml",
+          ".yml"
+        ],
+        "untracked_directories_expanded": [
+          "benchmarks",
+          "docs",
+          "formal",
+          "ipfs_accelerate_py",
+          "ipfs_datasets_py",
+          "ipfs_kit_py",
+          "packages",
+          "papers",
+          "scripts",
+          "test",
+          "tests"
+        ],
+        "excluded_parts": [
+          ".cache",
+          ".git",
+          ".venvs",
+          ".worktrees",
+          "__pycache__",
+          "node_modules"
+        ],
+        "excluded": "hidden top-level runtime/quarantine trees and generated papers/completion/runtime_bootstrap; non-source file kinds; files over64MiB explicitly reported without a hash",
+        "note": "All git status entries retained; untracked directories outside canonical source scope remain summarized by git. Canonical observation, not isolated lane runtime."
+      }
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_kit",
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "tree": "93070c709af29095fdff11f3e2698543449c08ef",
+      "branch": "main",
+      "observed_at": "2026-09-11T15:36:25.943473+00:00",
+      "dirty_status": [
+        {
+          "status": " M",
+          "path": "ipfs_kit_py/iroh/blob_store.py"
+        }
+      ],
+      "dirty_status_entry_count": 1,
+      "dirty_source_hashes": [
+        {
+          "status": " M",
+          "path": "ipfs_kit_py/iroh/blob_store.py",
+          "kind": "file",
+          "bytes": 36485,
+          "sha256": "16f17361dcbbcdf39b980b56565421b05bbf394a8087bd4b130bb78ab7d16011",
+          "stable_during_hash": true
+        }
+      ],
+      "excluded_source_candidate_count": 0,
+      "hash_scope": {
+        "source_suffixes": [
+          ".bib",
+          ".c",
+          ".cc",
+          ".cfg",
+          ".cls",
+          ".cpp",
+          ".cu",
+          ".cuh",
+          ".h",
+          ".ini",
+          ".json",
+          ".lean",
+          ".md",
+          ".py",
+          ".pyi",
+          ".rs",
+          ".sh",
+          ".sql",
+          ".sty",
+          ".tex",
+          ".toml",
+          ".v",
+          ".yaml",
+          ".yml"
+        ],
+        "untracked_directories_expanded": [
+          "benchmarks",
+          "docs",
+          "formal",
+          "ipfs_accelerate_py",
+          "ipfs_datasets_py",
+          "ipfs_kit_py",
+          "packages",
+          "papers",
+          "scripts",
+          "test",
+          "tests"
+        ],
+        "excluded_parts": [
+          ".cache",
+          ".git",
+          ".venvs",
+          ".worktrees",
+          "__pycache__",
+          "node_modules"
+        ],
+        "excluded": "hidden top-level runtime/quarantine trees and generated papers/completion/runtime_bootstrap; non-source file kinds; files over64MiB explicitly reported without a hash",
+        "note": "All git status entries retained; untracked directories outside canonical source scope remain summarized by git. Canonical observation, not isolated lane runtime."
+      }
+    }
+  ],
+  "backend_health": {
+    "probed": false,
+    "reason": "No already-known unauthenticated backend health URL supplied to this bounded task. No endpoint guessing or new services."
+  },
+  "limitations": [
+    "Installed metadata and --version success do not qualify model inference/training, CUDA execution, project-compatible proof checking, or benchmark acceptance.",
+    "No model weights, datasets, checker imports, proof acceptance, or model inference were tested.",
+    "Resource availability is a shared-host observation, not a reservation.",
+    "Runtime source update is pending: use lane runtime snapshot for executed campaign code, not these canonical heads alone.",
+    "No paper tasks or live database state were modified."
+  ]
+}

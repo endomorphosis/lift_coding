@@ -1,0 +1,297 @@
+{
+  "schema": "autoformalization-experiment-plan/v1",
+  "plan_id": "AF-002/v1",
+  "frozen_at": "2026-09-11T00:00:00+00:00",
+  "frozen_before_outcome_inspection": true,
+  "outcome_state_at_freeze": "No A-E or T0-T5 experiment has executed; no outcome may be inferred from source or fixture availability.",
+  "scope_status": "full_empirical_route_planned_unrun",
+  "final_test_access": {
+    "status": "locked_pending_AF-004_manifest",
+    "permitted_before_seal": [
+      "manifest grouping audit",
+      "independent label creation without candidate outputs",
+      "count/source-family metadata validation"
+    ],
+    "forbidden": [
+      "training",
+      "teacher fitting",
+      "model/prompt/hyperparameter selection",
+      "canary thresholds",
+      "grammar/compiler patch selection",
+      "retrieval tuning",
+      "candidate generation access",
+      "manual label/outcome inspection"
+    ],
+    "release_rule": "Only sealed harness evaluation after checkpoint/configuration/patch lock; append-only records cannot feed selection."
+  },
+  "permitted_scope_decisions": {
+    "fixed_before_outcomes": [
+      "condition definitions",
+      "metrics",
+      "seeds",
+      "population floor",
+      "controls",
+      "budgets",
+      "final-test lock",
+      "completion statuses"
+    ],
+    "allowed_pre_outcome_change": "Capability/licensing blocker found before a run may narrow its claim only in a versioned revision naming blocker and affected claims; lock, denominators, and unrun history persist.",
+    "post_outcome_change": "Exploratory only; never retrospective prespecification."
+  },
+  "population_and_statistics": {
+    "manifest_dependencies": [
+      "AF-003 runtime matrix",
+      "AF-004 corpus/splits/teacher manifests",
+      "AF-005 independent annotations"
+    ],
+    "planned_natural_final_test_minimum": {
+      "source_units": 100,
+      "source_family_time_groups": 20,
+      "rationale": "Precision/heterogeneity floor, not an available-count claim."
+    },
+    "seeds": [
+      104729,
+      130363,
+      155921
+    ],
+    "deterministic_replays": 3,
+    "interval": "95% source-family/time-group cluster bootstrap, 10000 resamples; seed summaries separate.",
+    "coverage_rule": "All eligible examples remain denominator: measured, abstained, unsupported, unavailable, timeout, invalid distinct."
+  },
+  "common_budget": {
+    "learned_condition_seeds": 3,
+    "natural_final_test_units_per_condition": 100,
+    "per_seed_wall_minutes": 30,
+    "per_item_search_validation_minutes": 10,
+    "memory_gib": 16,
+    "gpu_or_model_service_slots": 1,
+    "current_resource_availability": "unavailable_pending_AF-003_preflight_and_shared_scheduler_reservation",
+    "exhaustion": "partial_or_unrun; retain attempts/costs and narrow only affected claims"
+  },
+  "teachers": {
+    "source_gold": "unavailable_pending_AF-005; compiler/adaptor targets are never semantic gold",
+    "compiler_targets": "unavailable_pending_AF-003 pinned compiler/vocabulary/view registry",
+    "proof_feedback": "unavailable_pending_AF-003 checker and AF-012 feedback manifest",
+    "learned_advice": "unavailable_pending_AF-011 checkpoint and AF-013 promotion receipt"
+  },
+  "checker_catalog": {
+    "source_fidelity": "independent candidate-blind facet adjudication, pending AF-005",
+    "formal": "pinned elaborator/compiler profile, pending AF-003",
+    "proof": "native checker receipt where supported; solver-local results distinct, pending AF-003"
+  },
+  "conditions": [
+    {
+      "id": "A",
+      "family": "pipeline",
+      "status": "planned_unrun",
+      "inputs": "Frozen natural/minimal-pair sources and declared vocabulary; direct model to target formalization.",
+      "teacher_availability": "Direct-model route unavailable pending AF-003; independent source labels unavailable pending AF-005.",
+      "checker": "Same pinned target formal checker and independent candidate-blind facet adjudication.",
+      "budget": "Common envelope; identical per-item time and model-call accounting.",
+      "primary_metrics": [
+        "all-facet source fidelity",
+        "native checked useful-proof coverage",
+        "coverage/abstention",
+        "total cost"
+      ],
+      "control_comparison": "A vs B on identical eligible tasks; unavailable is not zero.",
+      "claim": "Direct model baseline under matched checker."
+    },
+    {
+      "id": "B",
+      "family": "pipeline",
+      "status": "planned_unrun",
+      "inputs": "Frozen sources, deterministic bounded compiler, declared vocabulary, explicit abstention.",
+      "teacher_availability": "Compiler/vocabulary identity unavailable pending AF-003; source labels pending AF-005.",
+      "checker": "Pinned elaborator/compiler and independent facet adjudication.",
+      "budget": "Common envelope; three replays and complete processing cost.",
+      "primary_metrics": [
+        "all-facet source fidelity",
+        "native checked useful-proof coverage",
+        "coverage/abstention",
+        "total cost"
+      ],
+      "control_comparison": "B vs A and C on identical tasks/checker/budget.",
+      "claim": "Deterministic compiler baseline."
+    },
+    {
+      "id": "C",
+      "family": "pipeline",
+      "status": "planned_unrun",
+      "inputs": "Frozen sources and typed source-grounded multiview representation; no cross-view proof transfer.",
+      "teacher_availability": "Compiler/view targets unavailable pending AF-003; independent labels pending AF-005.",
+      "checker": "Pinned compiler/elaborator, independent facets, native proof checker where supported.",
+      "budget": "Common envelope; no bridge/advice allowed.",
+      "primary_metrics": [
+        "all-facet source fidelity",
+        "native checked useful-proof coverage",
+        "coverage/abstention",
+        "total cost"
+      ],
+      "control_comparison": "C vs B isolates multiview representation without transfer.",
+      "claim": "Source-grounded multiview without transfer."
+    },
+    {
+      "id": "D",
+      "family": "pipeline",
+      "status": "planned_unrun",
+      "inputs": "C inputs plus checked property bridges and compatible cross-source premise assembly.",
+      "teacher_availability": "Bridge/premise identities unavailable pending AF-003/AF-015; labels pending AF-005.",
+      "checker": "Pinned bridge obligations, premise compatibility/nonvacuity, and native proof checker where supported.",
+      "budget": "Common envelope including bridge validation and failed reconstruction cost.",
+      "primary_metrics": [
+        "all-facet source fidelity",
+        "native checked useful-proof coverage",
+        "false transfer",
+        "coverage",
+        "total cost"
+      ],
+      "control_comparison": "D vs C isolates checked bridges and premise assembly.",
+      "claim": "Checked cross-source proof transfer."
+    },
+    {
+      "id": "E",
+      "family": "pipeline",
+      "status": "planned_unrun",
+      "inputs": "D inputs plus bounded learned view/premise advice from frozen checkpoint; unchanged checker.",
+      "teacher_availability": "Checkpoint/advice unavailable pending AF-011/AF-013; other teachers pending AF-003/AF-005.",
+      "checker": "Same D checker stack; advice cannot replace checking.",
+      "budget": "Common envelope plus checkpoint/advice/model-service cost; one service slot after reservation.",
+      "primary_metrics": [
+        "all-facet source fidelity",
+        "native checked useful-proof coverage",
+        "false transfer",
+        "coverage",
+        "total cost"
+      ],
+      "control_comparison": "E vs D isolates learned advice with checker fixed.",
+      "claim": "Learned advice beyond checked bridges."
+    },
+    {
+      "id": "T0",
+      "family": "learning_transfer",
+      "status": "planned_unrun",
+      "inputs": "Frozen sources, deterministic codec, and view adapters.",
+      "teacher_availability": "Compiler/view identity unavailable pending AF-003; independent gold pending AF-005.",
+      "checker": "Pinned compiler/profile and independent facet adjudication.",
+      "budget": "Common envelope; three deterministic replays.",
+      "primary_metrics": [
+        "held-out all-facet fidelity",
+        "teacher diagnostics separately",
+        "coverage",
+        "total cost"
+      ],
+      "control_comparison": "T2 vs T0 is primary shared-learner test.",
+      "claim": "Teacher/codec baseline."
+    },
+    {
+      "id": "T1",
+      "family": "learning_transfer",
+      "status": "planned_unrun",
+      "inputs": "T0 plus adaptive learner with sample memory; seen and unseen partitions reported separately.",
+      "teacher_availability": "Compiler/view targets unavailable pending AF-003; independent gold pending AF-005.",
+      "checker": "Pinned compiler/profile and independent facet adjudication.",
+      "budget": "Three fixed seeds/common envelope; record memory state and lookup cost.",
+      "primary_metrics": [
+        "seen-source fidelity",
+        "unseen-source fidelity",
+        "coverage",
+        "total cost"
+      ],
+      "control_comparison": "T1 vs T2 is memorization diagnostic, not generalization.",
+      "claim": "Apparent gain attributable to memory."
+    },
+    {
+      "id": "T2",
+      "family": "learning_transfer",
+      "status": "planned_unrun",
+      "inputs": "T1 learner with shared parameters only; update/evaluation memory disabled.",
+      "teacher_availability": "Compiler/view targets unavailable pending AF-003; independent gold pending AF-005.",
+      "checker": "Pinned compiler/profile and independent facet adjudication.",
+      "budget": "Three fixed seeds/common envelope; checkpoint/config/parameter-change receipts required.",
+      "primary_metrics": [
+        "unseen all-facet fidelity",
+        "native checked useful-proof coverage",
+        "coverage",
+        "total cost"
+      ],
+      "control_comparison": "T2 vs T0 isolates shared learning; T2 vs T1 separates memory.",
+      "claim": "Shared learner generalizes to unseen groups."
+    },
+    {
+      "id": "T3",
+      "family": "learning_transfer",
+      "status": "planned_unrun",
+      "inputs": "Frozen T2 checkpoint plus isolated proof-feedback heads and protected primary fingerprint.",
+      "teacher_availability": "Proof-feedback/checker unavailable pending AF-003/AF-012; source gold pending AF-005.",
+      "checker": "Pinned verifier, calibration/abstention, protected-parameter invariant check, independent facets.",
+      "budget": "Three seeds/common envelope plus proof-feedback/checker cost.",
+      "primary_metrics": [
+        "route calibration",
+        "native checked useful-proof coverage",
+        "protected fidelity invariance",
+        "total cost"
+      ],
+      "control_comparison": "T3 vs T2 isolates trusted proof heads.",
+      "claim": "Trusted feedback improves routing/calibration."
+    },
+    {
+      "id": "T4",
+      "family": "learning_transfer",
+      "status": "planned_unrun",
+      "inputs": "Frozen T3 checkpoint plus admitted source-free stable guidance consumed by pinned compiler/realizer.",
+      "teacher_availability": "Guidance export/consumer unavailable pending AF-013; upstream teachers pending AF-003/AF-005/AF-012.",
+      "checker": "Paired canary, active-consumer load receipt, independent facets, native proof checker, rollback identity.",
+      "budget": "Three seeds/common envelope plus promotion/canary/rollback/consumer costs.",
+      "primary_metrics": [
+        "consumer activation",
+        "unseen fidelity",
+        "native checked coverage",
+        "regressions",
+        "total cost"
+      ],
+      "control_comparison": "T4 vs T3 with same profile and frozen source families.",
+      "claim": "Consumed promoted guidance improves behavior."
+    },
+    {
+      "id": "T5",
+      "family": "learning_transfer",
+      "status": "planned_unrun",
+      "inputs": "Sealed T4 configuration (or explicitly unavailable T4 baseline) plus development-discovered bounded compiler/decompiler patch.",
+      "teacher_availability": "Patch task/introspection and starting arm unavailable pending AF-014; final test forbidden for patch selection.",
+      "checker": "Independent regressions, paired canary, pinned validator, activation/rollback, then locked final test.",
+      "budget": "One bounded isolated-worktree patch attempt per defect plus common evaluation envelope; retain rejects/review cost.",
+      "primary_metrics": [
+        "unseen fidelity",
+        "native checked coverage",
+        "regressions",
+        "repair cost"
+      ],
+      "control_comparison": "T5 vs declared sealed T4 starting arm; no bundled numerical update.",
+      "claim": "Executable repair beyond numerical updates."
+    }
+  ],
+  "completion_policy": {
+    "statuses": [
+      "measured",
+      "partial",
+      "unrun",
+      "unavailable",
+      "unsupported"
+    ],
+    "measured_requires": [
+      "raw per-item records",
+      "pinned data/teacher/model/checker identities",
+      "retained command log",
+      "stated checker receipt"
+    ],
+    "full_empirical_completion": "Explicit A-E/T0-T5 statuses and admissible evidence for each retained empirical claim; deletion/narrowing cannot satisfy it.",
+    "narrowed_route": "Methods/protocol only, empirical gain/coverage/deployment claims removed; author decision required."
+  },
+  "prohibited_actions": [
+    "submission",
+    "OpenReview upload",
+    "public release",
+    "author sign-off claim"
+  ]
+}

@@ -1,0 +1,2 @@
+def run(payload):
+    emit_allowed(payload, '{"type": "program", "name": "main", "source": "def run(payload):\n    emit_allowed(payload, 'main')\n    emit_allowed(payload, 'main')\n    emit_allowed(payload, 'main')\n    emit_allowed(payload, 'main')"}'

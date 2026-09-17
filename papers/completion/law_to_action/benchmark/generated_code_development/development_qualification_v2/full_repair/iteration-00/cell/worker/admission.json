@@ -1,0 +1,117 @@
+{
+  "capability": null,
+  "cryptographic_proof_receipt_claimed": false,
+  "receipt": {
+    "attempt_digests": [
+      "594247eae4554fe7f9b6c9a779ebee532e9e8f2b8c8a1aa0cac4302129abc883"
+    ],
+    "content_cid": "bafkreieazqhumhasn3f53tuccdprgolure3faxzr3ahhrzabfma53ljnwy",
+    "content_digest": "sha256:80cc0f461c126ecbddce8210df1339748936505f31d80e78e4012b01ddad2db6",
+    "context": {
+      "actor_id": "did:client:tenant-a",
+      "arguments_digest": "7c7cee9df380c959621fd482a71bbf101b1816d8ede21a4fa588f8a58df6702a",
+      "audience_id": "audience:la-development",
+      "capability_ids": [
+        "capability:full_repair-0"
+      ],
+      "delegation_digest": "",
+      "delegation_ids": [],
+      "effect_ids": [
+        "effect:other_sink"
+      ],
+      "environment_digest": "bbab58727456b9605309dc56cc04367337d3f4f2e4ff934cbcefd9156a061cc3",
+      "environment_id": "env:contained-la-development",
+      "metadata": {},
+      "nonce": "nonce:full_repair-0",
+      "request_digest": "0a933930f2842073015781c702f6b902c8925315d2fc23c430d95701eb79605d",
+      "resource_ids": [
+        "resource:exports/forbidden.json"
+      ],
+      "schema_version": "decision-receipt-bound-context/v1",
+      "tool_id": "tool:python-handler-profile",
+      "tool_version": "1"
+    },
+    "deadline": "2026-09-14T10:12:23.008514Z",
+    "decision_digest": "072deedf3ff1cda5082d56252c93919c69ddcf3f0ee7a04831636c0f79505007",
+    "decision_interface": "AuthorizationDecision@1",
+    "expiry": "2026-09-14T10:12:33.008514Z",
+    "identity_algorithm": "sha256-canonical-json/v1",
+    "interface": "DecisionReceipt@1",
+    "issued_at": "2026-09-14T10:11:52.008514Z",
+    "metadata": {
+      "scientific_benchmark": false,
+      "semantic_fidelity": false,
+      "source_evidence": {
+        "candidate_sha256": "57e65f9e956d5f9c5d47b30f21b085af42bc6bff341c2ce4c6545555c671a4b5",
+        "correlation_sha256": "7fdf38a62564b99a4711d90ce0bfed2d0c8d1032b2c524a1679fa4b5e9225d76",
+        "mechanisms": {
+          "obligation": {
+            "allowed": false,
+            "authority_kind": "satisfiability",
+            "checker": {
+              "agrees_with_provider": true,
+              "authority_kind": "satisfiability",
+              "checker": "exhaustive-truth-table",
+              "status": "sat",
+              "theorem_proof": false
+            },
+            "provider": {
+              "algorithm": "dpll",
+              "authority_kind": "satisfiability",
+              "elapsed_seconds": 0.000503011979162693,
+              "model": {
+                "x1": true
+              },
+              "provider": "sympy.logic.inference.satisfiable",
+              "status": "sat"
+            },
+            "theorem_proof": false
+          },
+          "ucan": {
+            "authorization_event_cid": "d8a7b504119fadd19e9f24e1456c66120158a0b027fddf88a0f05fc0936fa1aa",
+            "crypto": "real-ed25519",
+            "decision": "allow",
+            "policy_provider": "la-014-declared-lightweight-policy",
+            "reason": "ucan_and_declared_policy",
+            "token_audience": "did:client:tenant-a",
+            "verifier_kind": "real-ucan-verifier"
+          }
+        },
+        "native_facts_sha256": "e955d036ce89c325ea897e487b5a0f5587683ba5aaf611ef7d7c4d23cf8ec1ce",
+        "profile_supported": true
+      }
+    },
+    "obligation_ids": [
+      "obligation:declared-handler-only"
+    ],
+    "outcome": "deny",
+    "policy_digest": "c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8",
+    "producer_id": "producer:trusted-la-development-adapter",
+    "profile_id": "profile:direct-calls-v1",
+    "reason_codes": [],
+    "reasons": [
+      "Native policy/correlation rejected candidate"
+    ],
+    "receipt_id": "receipt:full_repair-0",
+    "residual_duties": [],
+    "result_digests": [
+      "80a141ae0060c5722f81b8980dbfc877d720462d0c2bc07dc571b4177b9db1be"
+    ],
+    "roots": {
+      "circuit_roots": [],
+      "corpus_roots": [
+        "source:ff695c254d8b645ab4d44a2e92ddd0d797b6f12a07de1021417034ebff122781"
+      ],
+      "policy_root": "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a",
+      "revocation_root": "revocation:9c4f0baa6b8dd2cd27cffd468eaf105477cd302de00f9350ace4a9f2dd9dee1c",
+      "schema_version": "decision-receipt-bound-roots/v1",
+      "vk_roots": []
+    },
+    "schema_version": "decision-receipt/v1",
+    "selected_evidence_cids": [
+      "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a"
+    ],
+    "selected_evidence_digest": "2cc260f7cba7cf984d8f703b97f0ff6878fe38c26dd3f264f15e6f04fb48dbc1",
+    "wire_status": "reject"
+  }
+}

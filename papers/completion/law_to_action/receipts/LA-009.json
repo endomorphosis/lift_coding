@@ -1,0 +1,213 @@
+{
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py": "b5afcf58631acc2250bfcc79c324bcc95706b6b60c0126cedb5af7393ff6cc6a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/outputs/results/source_ir/failure_review.md": "b38e8034bb65a6a86d2ceb7daccb024c0eeb5415083236e11932072edaf1699f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/outputs/results/source_ir/metrics.json": "1caa2ab02c253415d64f459b44d6c75ed1bccba99312726ef91bf16d693e939c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/outputs/results/source_ir/raw.jsonl": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/DOWNSTREAM_GUIDANCE.md": "1691a5ff8bdbaa7ac4cefec0f81673456c146616698fe66222586843b663a730",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/correct_shared_provenance.py": "c9d003df33db19a40d9fe19ec6fb03d9b0239e46100d32da256806c8b2b0a0a1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/original_receipt.json": "1410f502978a1e55f46071fe80e0e67d88fff79f4e770c6e127b19517721e7f8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/failure_review.md": "ae633df62aa344c621147f5da9077795d92b5acc187a6c06821b2cd8e8e3a9f6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/metrics.json": "dc60da670036e8f03cc982dc8b19993359583dddeb3ac2c10a827a85362e0564",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/raw.jsonl": "670e1dfa4e78aa1cd3f982a9e2b741885798212e1887c3de13107eae3550b8ce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/qualification.json": "e097aa71f755ed300b5ebf8e5b55ef9dc7d2f811dac1c3dbd09e6147f8585883",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py": "bee48bdd7e385041d684c9515e73be2bd13310cc68810a9ec66280d87901e9f9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/command-times.json": "828b31cbec6f017f1670d77014df4bd8d980145cab23d2068df522b2b4ec5327",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/measure.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/measure.stdout.log": "d3aad742de4361c806ba49ec51197feeda719bacde5dc1accac8c9c6cb9aabfa",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stdout.log": "eb4737f2de613179e8e8e20051cff90ae10186537152f4eb3de4f804953df162"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py"
+      ],
+      "completed_at": "2026-09-12T16:58:26.937001+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/measure.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py",
+      "started_at": "2026-09-12T16:57:48.529188+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py"
+      ],
+      "completed_at": "2026-09-12T16:58:26.971539+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py",
+      "started_at": "2026-09-12T16:58:26.937938+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/correct_shared_provenance.py"
+      ],
+      "completed_at": "2026-09-12T17:16:41.939506+00:00",
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/qualification.json",
+      "result": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/qualification.json",
+      "scope": "retained_metadata_only_no_adapter_or_checker_rerun",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/correct_shared_provenance.py",
+      "started_at": "2026-09-12T17:16:41.894015+00:00"
+    }
+  ],
+  "completed_at": "2026-09-12T17:16:41.939506+00:00",
+  "completion_mode": "Pinned source adapters processed the unchanged frozen 30-family/60-case cohort under the LA-027 automated evidence scope. Every selected case has a prediction or an explicit failed/unsupported record. Metrics are reproduced from case-level files against LA-027/LA-006 machine contracts. Expert legal fidelity, human agreement, and semantic accuracy from implementation agreement remain unmeasured. Human review was not a run dependency. Subsequent metadata-only correction labels the skill18/18 result as shared-validator conformance and preserves all original measurements.",
+  "criteria": [
+    {
+      "criterion": "Every frozen selected case has an actual prediction/observation or explicit failed, unavailable or unsupported record without changing cohorts after outcomes.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/metrics.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/failure_review.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/measure_source_ir.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/measure.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stdout.log"
+      ],
+      "explanation": "raw.jsonl contains exactly the 60 planned case identities from splits.json (SHA-256 f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6). Counts: 50 predictions, 4 failed CVE adapter records, 6 unsupported skill-policy-blocked malicious-Markdown mutations, 0 unavailable, 0 missing. Sources SHA-256 remains 55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6. cohorts_changed_after_outcomes is false.",
+      "status": "met"
+    },
+    {
+      "criterion": "Every reported metric is reproducible from case-level files and an exact scoped machine expectation or observation with independent provenance where the metric requires it. Implementation agreement is not semantic accuracy.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/metrics.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/failure_review.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/qualification.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/DOWNSTREAM_GUIDANCE.md"
+      ],
+      "explanation": "validate_source_ir.py recomputes source-span linkage 60/60, parse/schema validity 50/60, and machine-contract coverage 60/60 from raw.jsonl and matches metrics.json. Legal/skill expectations come from la-027-automated-reference-manifest (distinct from evaluated adapters). CVE source-difference observations come from la-006-scoped-behavior-contract-compiler; polarity remains unknown and is not scored. Legal parser/converter agreement is labeled shared-producer implementation consistency, not semantic accuracy. The normalizer already invokes these same Intent IR decoder/schema functions. This repeats shared-validator conformance; it is not independent agreement or semantic accuracy.",
+      "status": "met"
+    },
+    {
+      "criterion": "Original source-lineage splits and case denominators remain fixed. Human/author review is not a run dependency, and unmeasured expert legal fidelity or agreement is not assigned a numeric score.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/metrics.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/failure_review.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validation/validate.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-009/validate_source_ir.py"
+      ],
+      "explanation": "Family/case denominators remain 30/60 with split quotas development 6, calibration 6, final 18 and population cases legal 12, CVE 24, skill 24. The original protocol hash ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f remains bound by the LA-027 amendment. human_review_run_dependency is false; independent_human_gold is false. expert_legal_fidelity, inter_annotator_agreement, independent_human_validation, legal_applicability_or_validity_in_the_world, and semantic_accuracy_from_implementation_agreement are recorded as unmeasured with numeric_score_assigned false. Twenty-four extra synthetic skill controls are excluded from the frozen denominator.",
+      "status": "met"
+    }
+  ],
+  "limitations": [
+    "Expert legal applicability/exception fidelity is unmeasured and has no numeric score.",
+    "Human/author review was not a run dependency and was not obtained.",
+    "CVE polarity remains unknown; source-difference observation is not detection accuracy.",
+    "Four CVE adapter failures and six skill policy blocks are retained in the 60-case denominator.",
+    "Extra synthetic skill_claims_authorization and command_execution_bait rows are qualification controls, not frozen selected cases.",
+    "The normalizer already invokes these same Intent IR decoder/schema functions. This repeats shared-validator conformance; it is not independent agreement or semantic accuracy."
+  ],
+  "original_completed_at": "2026-09-12T16:58:26.971539+00:00",
+  "outputs": {
+    "papers/completion/law_to_action/results/source_ir/failure_review.md": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/failure_review.md",
+    "papers/completion/law_to_action/results/source_ir/metrics.json": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/metrics.json",
+    "papers/completion/law_to_action/results/source_ir/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/outputs/results/source_ir/raw.jsonl"
+  },
+  "paper_id": "law_to_action",
+  "provenance_correction": {
+    "native_task_completion_history_unchanged": true,
+    "original_measurement_outcomes_unchanged": true,
+    "original_receipt": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/original_receipt.json",
+    "original_receipt_sha256": "1410f502978a1e55f46071fe80e0e67d88fff79f4e770c6e127b19517721e7f8",
+    "qualification": "papers/completion/law_to_action/receipts/snapshots/LA-009/shared_provenance_correction_v1/qualification.json"
+  },
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "adapter.py_sha256": "e48c33c7bed68da1c93539c23174d3963d01f0b7bec39b0475395c85a5851cdc",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "cryptography": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/cryptography/__init__.py",
+      "version": "49.0.0"
+    },
+    "decoder.py_sha256": "119037ce18bb6e8ab82e807bbbb9af293c3845efea124a98d8f54bdcdb5b8251",
+    "deontic_parser.py_sha256": "3aaca7fa973f711cebc47ce052f253596db247c90325a07650c0ea43cd54f4bb",
+    "duckdb": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+      "version": "1.5.2"
+    },
+    "empirical_benchmark_result": true,
+    "home_is_validation_prefix": false,
+    "human_review_run_dependency": false,
+    "independent_cve_behavior_producer": "la-006-scoped-behavior-contract-compiler",
+    "independent_human_gold": false,
+    "independent_span_checker": "la-009-quoted-span-hash-checker",
+    "limitations": [
+      "Expert legal fidelity, human agreement, and world-legal applicability remain unmeasured.",
+      "Implementation agreement is not semantic accuracy.",
+      "Four CVE cases failed CVEfixes adapter attribute completeness and are retained as failures; independent source-difference observations remain.",
+      "Six reserved malicious-Markdown skill mutations were policy-blocked before Intent IR emission and are retained as unsupported.",
+      "LegalIRCompilerAPI remains unavailable on the sealed PATH because /usr/.symai is read-only.",
+      "Packet-preparer atoms and intent nodes were not used as independent gold."
+    ],
+    "machine_expectation_producer": "la-027-automated-reference-manifest",
+    "multiformats": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/multiformats/__init__.py",
+      "version": "0.3.1"
+    },
+    "original_protocol_sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+    "pipeline_version": "la-009-source-ir/v1",
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "raw_sha256": "670e1dfa4e78aa1cd3f982a9e2b741885798212e1887c3de13107eae3550b8ce",
+    "raw_sha256_before_provenance_correction": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+    "schema.py_sha256": "c63bf084ef082078763c6c666f2461f274609a267960afd547fa07918daf2d58",
+    "selected_cve_adapter": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter.adapt_cvefixes_candidate",
+    "selected_legal_adapter": "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_normative_elements",
+    "selected_skill_adapter": "ipfs_datasets_py.logic.intent_ir.normalize.skill.SkillCenterIntentNormalizer",
+    "shared_skill_checker": "intent-ir-decoder-and-schema",
+    "shared_skill_validator_dependence": true,
+    "skill.py_sha256": "a4213c6a9c3a872797863375905c3f50d1e02db477425116b2d04c9a9ff048fd",
+    "sources_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+    "splits_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+    "sympy": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+      "version": "1.14.0"
+    },
+    "typed_compiler.py_sha256": "5e779360745b8e3f8b49b24edda84497d7c66f10f2eafe75bc9c8f45550e0db6",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages"
+  },
+  "status": "complete",
+  "task_id": "LA-009"
+}

@@ -1,0 +1,195 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-020",
+  "status": "complete",
+  "completed_at": "2026-09-17T02:12:55.984383+00:00",
+  "completion_mode": "optional Track 1 US$3 ledger and grok/grok-4.6 generate_text adapter; prepared not default; skip if keys missing; does not contaminate Track 2 receipts; CI fixtures without live key; not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py": "8d38085c5840f46a71f1012ab1dcf0aabcc127d731b6b4528b9e4b63191c9bf0",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/git-head.txt": "31a090b4747befb46789b59bfcdc6326a508c1da4d54c0d81ebbfcbf4f56b607",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.json": "ff657f4f3d60e80045fe6ee692c0da09e8c1a2cb223fe886b26eb41217b459fd",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.meta.json": "f533637a7c9602e9198eca62ef3a5991df58fca08262e1187bacf6824142b5ce",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.stdout.log": "ff657f4f3d60e80045fe6ee692c0da09e8c1a2cb223fe886b26eb41217b459fd",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-fixture.meta.json": "fbb5d15f56f8da4b814ea857cac21be7c6ad0d7c093b40a08d5ada0949662b51",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-fixture.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-fixture.stdout.log": "700c01be2aa1c27783fe95372e72d7d030b7a3f8bdff9cf04ee23c2dc54a91da",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-nokey.meta.json": "533ae3ffade7e342bdc977a9817d7304b838ed0dc30d666f069036537b758020",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-nokey.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-nokey.stdout.log": "bef650fc82ebb852157c54708a38b9e038e180ba053b6cc75c7036d24d75626b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-off.meta.json": "ace483b82474d2ffa54601c7806df107b172fa4cc16a024081a44c9ab8c294b9",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-off.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-off.stdout.log": "4d160fb024ca233cee8098b045943d762c2bff5b1c5b6089049d3b5878e1bee1",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-track2.meta.json": "33947df3e04dc035585b2ba60c99d5cf022c048b8b068bb30434d0da5557fd1c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-track2.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-track2.stdout.log": "a2f56af963981d9a2becfa85d022d6d23eccce6b568e30439386064e601f2d9d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.json": "e76f3ece67e0bac225267605a531fd648a39953016020440f53825992fdece9a",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.meta.json": "8a8351fc16025abc103aad20890ac3a147ad39bcc02857867dec154526a97df0",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.stdout.log": "e76f3ece67e0bac225267605a531fd648a39953016020440f53825992fdece9a"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/track1_ledger.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Hard stop at US$3/problem including Jev+grok.",
+      "status": "met",
+      "explanation": "track1_ledger.py freezes PROBLEM_BUDGET_USD=3.00 covering Jev+grok on the same ProblemLedger. TypeSafe Jev is billed at $0.042/1M input tokens (output free, TypeSafe public pricing Sep 2026); grok-4.6 is billed at $3.00/1M input and $15.00/1M output. Self-check hard-stop probe recorded Jev 20\u00d78 kTok = $0.00672 (jev_recorded_usd=0.00672), then refused a 1M-token grok draft (combined_grok_million_skipped=true, reason=hard_stop) so spent stayed $0.00672 and did not cross $3. An exact $3 grok 1M-input charge was allowed (exact_three_allowed=true); the next 1-token grok call hard-stopped. MAX_GROK_CALLS=2 (1 draft + 1 Lean-feedback repair); a third grok record was refused with max_grok_calls. --run --track1 --fixture on CallElimCorrect.substOldPostSubset charged Jev+grok together (jev_calls=1, grok_calls=1, spent_usd=0.002685, hard_stopped=false) under the $3 cap. authorize() compares spent+cost against $3 before recording; over-budget calls are skipped, not charged.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-fixture.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Not the default winning path; skip if keys missing.",
+      "status": "met",
+      "explanation": "DEFAULT_MODE and LOOP_V1_TRACK1 are the constant off; DEFAULT_GENERATOR is leanstral; IS_DEFAULT_WINNING_PATH=false. resolve_track1_mode() with an empty env, with LRA_TRACK1='', and with LRA_GENERATOR=leanstral all returned off (default_mode_is_off=true, not_default_winning_path=true). LRA_GENERATOR=grok and LRA_TRACK1=1 resolved to track1 (opt-in only). --plan emitted resolved_mode=off, default_mode=off, is_default_winning_path=false, keys_configured=false, closed generator grok/grok-4.6. --run on CallElimCorrect.substOldPostSubset with default flags skipped reason=not_default_winning_path (called_grok=False). --run --track1 without --fixture skipped reason=no_key (keys_configured=False, grok_key_configured=False, jev_key_configured=False). --run --track1 --fixture generated used_fixture=true called_grok=true text='simp' via FixtureGrok (no live XAI_API_KEY / TYPESAFE_API_KEY POST). FAIL_CLOSED_KWARGS pin provider=grok model_name=grok-4.6 with allow_local_fallback=false, allow_cross_provider_fallback=false, disable_model_retry=true. A fixture trace resolving to leanstral_local/Leanstral was rejected. Additive on Leanstral, not a replacement.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-off.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-nokey.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-fixture.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Does not contaminate Track 2 receipts.",
+      "status": "met",
+      "explanation": "Official Track 2 forces mode off. --run --track1 --official-track2 skipped reason=official_track2_off (mode=off, called_grok=False, official_track2=True, contaminates_track2=False) even though Track 1 was requested. LRA_OFFICIAL_TRACK2=1 and LRA_TRACK=official_track2 also force off. write_ledger_receipt refuses path components official_track2/track2/a100_80gb_x4 and the loop-v1 submissions/warmup tree (track2_path_rejected=true, warmup_path_rejected=true, official_track2_ledger_rejected=true). Allowed Track 1 receipts are schema lra-track1-ledger/v1, track=track1_closed, official_track2=false, contaminates_track2=false, is_default_winning_path=false, arena_score=null, api_key_present_in_record=false. No Track 2 receipt was written. Fixture and default runs set contaminates_track2=false and arena_score=null. This adapter is not official Track 2 and does not mix spend into Spark-dev warmup receipts.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-track2.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "--run",
+        "--name",
+        "CallElimCorrect.substOldPostSubset"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-off.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "--run",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--track1",
+        "--fixture"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-fixture.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "--run",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--track1",
+        "--official-track2"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-track2.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "--run",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--track1"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/validation/run-nokey.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-020/outputs/track1_ledger.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "cc5fe417642d3a255dc047096e1eaec7372f2eda",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "track1_ledger_py_sha256": "8d38085c5840f46a71f1012ab1dcf0aabcc127d731b6b4528b9e4b63191c9bf0",
+    "protocol": "LRA/v1",
+    "pr": "PR-12",
+    "lrah": "LRAH-011",
+    "default_lra_track1": "off",
+    "default_generator": "leanstral",
+    "requested_provider": "grok",
+    "requested_model": "grok-4.6",
+    "budget_usd": 3.0,
+    "max_grok_calls": 2,
+    "jev_input_usd_per_mtok": 0.042,
+    "grok_input_usd_per_mtok": 3.0,
+    "grok_output_usd_per_mtok": 15.0,
+    "is_default_winning_path": false,
+    "official_track2_stays_off": true,
+    "additive_not_replacement": true,
+    "loop_v1_track1": "off",
+    "hardware_class": "spark_gb10",
+    "writes_arena_scores_into_manuscript": false,
+    "keys_configured_during_validation": false,
+    "model_or_solver_experiment": "optional Track 1 US$3 Jev+grok ledger + grok-4.6 generate_text adapter; CI fixtures; no live xAI/TypeSafe POST; not a scored Arena run and not official Track 2"
+  },
+  "limitations": [
+    "No live XAI_API_KEY or TYPESAFE_API_KEY call was made. Fixture grok text is canned ('simp'/'omega'), not a vendor grok-4.6 measurement, and is not an Arena score.",
+    "Grok-4.6 USD rates used for the hard stop are the disclosed $3.00/1M input and $15.00/1M output family rates; Jev is $0.042/1M input (output free) from TypeSafe public pricing, Sep 2026. Live usage logs would replace estimates when Track 1 is actually entered.",
+    "Loop v1 / official Track 2 keep Track 1 off. This adapter is prepared and additive on Leanstral, not the default winning path and not official Track 2.",
+    "No lake compile, no Leanstral completion, no LOCK_EX, and no Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}

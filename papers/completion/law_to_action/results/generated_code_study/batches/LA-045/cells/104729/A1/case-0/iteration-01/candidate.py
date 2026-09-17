@@ -1,0 +1,1 @@
+{"type":"program","payload":"```python\ndef run(payload):\n    emit_allowed(payload)\n```"}

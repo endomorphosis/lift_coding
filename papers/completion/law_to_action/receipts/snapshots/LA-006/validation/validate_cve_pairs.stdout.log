@@ -1,0 +1,26 @@
+{
+  "adjudication": "automated_scope_complete_human_gold_uncollected",
+  "control_classes": [
+    "broadened_effects",
+    "fixed_negative_control",
+    "misleading_cve_similarity",
+    "self_granted_authority",
+    "unknown_scope",
+    "unsupported_transfer",
+    "wildcard_scope"
+  ],
+  "controls": 84,
+  "empirical_cases": 24,
+  "empirical_success_credits": 0,
+  "evaluation_admission": "automated_scope_source_supported_evidence_complete_polarity_unknown",
+  "expected_polarity": "unknown",
+  "fabricated_reviewers": 0,
+  "fixture_cves_in_empirical_counts": 0,
+  "independent_human_security_review": "not_obtained",
+  "limitation": "Structural packet checks passed; this is not independent scientific or security expert review.",
+  "mocked_source_records_in_empirical_counts": 0,
+  "original_failed_history_retained": true,
+  "pairs": 12,
+  "polarity_results_bound": 108,
+  "status": "passed"
+}

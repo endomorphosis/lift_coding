@@ -1,0 +1,54 @@
+{
+  "arm_position_counts_seed_104729": {
+    "A0": [
+      12,
+      12,
+      12,
+      12,
+      12
+    ],
+    "A1": [
+      12,
+      12,
+      12,
+      12,
+      12
+    ],
+    "A2": [
+      12,
+      12,
+      12,
+      12,
+      12
+    ],
+    "A3": [
+      12,
+      12,
+      12,
+      12,
+      12
+    ],
+    "A4": [
+      12,
+      12,
+      12,
+      12,
+      12
+    ]
+  },
+  "arms": [
+    "A0",
+    "A1",
+    "A2",
+    "A3",
+    "A4"
+  ],
+  "count": 900,
+  "digest": "238e5c3bd9130d46189a40fae64608cb28e05a242d69f1fb63f7b4e07234ca2c",
+  "rule": "For each seed, shuffle 60 planned case IDs and 5 arm IDs, then rotate arms by case_index modulo 5.",
+  "seeds": [
+    104729,
+    104759,
+    104761
+  ]
+}

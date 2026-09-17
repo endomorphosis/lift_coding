@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 191,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 654,
+  "prompt_tokens": 654,
+  "raw_sha256": "65733bfb9df14c9e7a2aed3b694b42ba93a473c9a9f30b46b52a5658034d3357",
+  "response_text": "<|im_start|>assistant\n```json\n{\n  \"emit_allowed\": {\n    \"source\": \"20-USC-1232g\",\n    \"edition\": \"2024\",\n    \"section\": \"20-USC-1232f\",\n    \"kind\": \"permitted_public_source\",\n    \"locator\": {\n      \"document_sha256\": \"80f2a6e95b011d81f7cab5b9b73339ab9aa61ccb851090db2ca42a2003d8dc03d8dc0\",\n      \"edition\": \"2024\",\n      \"section\": \"20-USC-1232f\"\n    }\n  }\n}\n```\n<|im_end|>",
+  "wall_seconds": 15.107213903997035
+}

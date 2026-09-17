@@ -1,0 +1,1 @@
+{"code": "def run(payload):\n    emit_allowed(payload)\n"}

@@ -1,0 +1,17 @@
+{
+  "agrees_with_provider": true,
+  "algorithm": "enumerate-all-assignments",
+  "assignments_examined": 4,
+  "authority_kind": "satisfiability",
+  "checker": "exhaustive-truth-table",
+  "claimed_model_accepted": true,
+  "elapsed_seconds": 4.976987838745117e-06,
+  "forged_evidence": false,
+  "model": {
+    "x1": true,
+    "x2": false
+  },
+  "nclauses": 2,
+  "nvars": 2,
+  "status": "sat"
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-011/qualify_mediation.py"
+    ],
+    "completed_at": "2026-09-12T02:17:50.058788+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "RAYON_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/qualify.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-011/qualify_mediation.py",
+    "started_at": "2026-09-12T02:17:49.056899+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-011/validate_mediation.py"
+    ],
+    "completed_at": "2026-09-12T02:17:50.091779+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "RAYON_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-011/validation/validate.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-011/validate_mediation.py",
+    "started_at": "2026-09-12T02:17:50.059009+00:00"
+  }
+]

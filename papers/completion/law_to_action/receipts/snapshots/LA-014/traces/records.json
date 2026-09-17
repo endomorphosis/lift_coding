@@ -1,0 +1,4736 @@
+{
+  "arm_fingerprints": {
+    "A0": "0f1f8b2cb93307e606b30948e62369e552e02e4f64c01f29fcd21878c3ae343d",
+    "A1": "5869069a0cddd0f0309bad86834905d8bf01268e03eee1c00c2d24823fafb52d",
+    "A2": "54adecf3913076161fad108bfc04fc516e967366c869a579e537f8cfbdb90b8b",
+    "A3": "835067e1176c4a34d0a397ced7075db4d1783b7f759bf7464228e10b6b55041e",
+    "A4": "0219b5b8bd3adb4160d5c6be3be395aff872db76dae7c27023332034090ac8e2"
+  },
+  "comparison": {
+    "a0_a1_a2_operational_equivalence": true,
+    "a3_a4_differ_from_unguarded_on_forbidden": true,
+    "arm_fingerprints": {
+      "A0": "0f1f8b2cb93307e606b30948e62369e552e02e4f64c01f29fcd21878c3ae343d",
+      "A1": "5869069a0cddd0f0309bad86834905d8bf01268e03eee1c00c2d24823fafb52d",
+      "A2": "54adecf3913076161fad108bfc04fc516e967366c869a579e537f8cfbdb90b8b",
+      "A3": "835067e1176c4a34d0a397ced7075db4d1783b7f759bf7464228e10b6b55041e",
+      "A4": "0219b5b8bd3adb4160d5c6be3be395aff872db76dae7c27023332034090ac8e2"
+    },
+    "details": [
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "allow",
+          "A4": "allow"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 1,
+          "A4": 1
+        },
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "identity_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "oracle_role": "allowed"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "deny",
+          "A4": "deny"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 0,
+          "A4": 0
+        },
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "identity_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+        "oracle_role": "forbidden"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "allow",
+          "A4": "allow"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 1,
+          "A4": 1
+        },
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "identity_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+        "oracle_role": "allowed"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "deny",
+          "A4": "deny"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 0,
+          "A4": 0
+        },
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "identity_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+        "oracle_role": "forbidden"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "allow",
+          "A4": "allow"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 1,
+          "A4": 1
+        },
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "identity_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+        "oracle_role": "allowed"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "deny",
+          "A4": "deny"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 0,
+          "A4": 0
+        },
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "identity_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+        "oracle_role": "forbidden"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "allow",
+          "A4": "allow"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 1,
+          "A4": 1
+        },
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "identity_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+        "oracle_role": "allowed"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "deny",
+          "A4": "deny"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 0,
+          "A4": 0
+        },
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "identity_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+        "oracle_role": "forbidden"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "allow",
+          "A4": "allow"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 1,
+          "A4": 1
+        },
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "identity_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+        "oracle_role": "allowed"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "deny",
+          "A4": "deny"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 0,
+          "A4": 0
+        },
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "identity_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+        "oracle_role": "forbidden"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "allow",
+          "A4": "allow"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 1,
+          "A4": 1
+        },
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "identity_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+        "oracle_role": "allowed"
+      },
+      {
+        "arm_decisions": {
+          "A0": "allow",
+          "A1": "allow",
+          "A2": "allow",
+          "A3": "deny",
+          "A4": "deny"
+        },
+        "arm_effects": {
+          "A0": 1,
+          "A1": 1,
+          "A2": 1,
+          "A3": 0,
+          "A4": 0
+        },
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "identity_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+        "oracle_role": "forbidden"
+      }
+    ],
+    "empirical_benchmark_result": false,
+    "failures": [],
+    "held_out_used": false,
+    "identical_candidate_identity": true,
+    "n_attempts": 60,
+    "n_candidates": 12,
+    "no_failures": true,
+    "prompt_only_distinct_from_retrieval_prompt": true,
+    "shared_fingerprint": "68922e130aab6d3f04d8df14d689c9267ceb598ea5a0f8c95589d96128cf8d31",
+    "unguarded_remains_sandboxed": true
+  },
+  "empirical_benchmark_result": false,
+  "environment": {
+    "HAVE_CRYPTO_ED25519": true,
+    "canonical_profile_d_available": true,
+    "cryptography_version": "49.0.0",
+    "duckdb_available": true,
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "duckdb_version": "1.5.2",
+    "home": "/tmp/ipfs-accelerate-validation-home-la014",
+    "home_is_validation_prefix": true,
+    "observed_at": "2026-09-12T02:58:25.085604+00:00",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_executable": "/usr/bin/python3.12",
+    "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "python_version": "3.12.3",
+    "source_pins": {
+      "admissibility_enforcement.py": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+        "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+      },
+      "authorization.py": {
+        "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+        "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd"
+      },
+      "durable_consumption.py": {
+        "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+        "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe"
+      },
+      "effects.py": {
+        "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+        "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+      },
+      "ucan.py": {
+        "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+        "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95"
+      }
+    },
+    "sympy_available": true,
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
+  },
+  "records": [
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "legal:ecbeda8c2b54b70c25b58163f663d98ad9f0b0773a571205b7544b126b0968df",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "authorization_event_cid": "38a1d0a1a0f0cd8d2b347feaa653b72a9b82a816bf70f82ebf5c90a6ad1cc063",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 0.0003120449837297201,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "ffa754da091f236d4c70449b391442a7f50861b36c5df423197358329c0271eb",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-9b4549cc5346e2a4.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "d5dca576b842569eb7a270ece47e92f668ba90fc6ce101a8bcf2ee5e289ff8d5",
+            "target": "exports/dev-9b4549cc5346e2a4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-9b4549cc5346e2a4.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "d5dca576b842569eb7a270ece47e92f668ba90fc6ce101a8bcf2ee5e289ff8d5",
+            "target": "exports/dev-9b4549cc5346e2a4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-9b4549cc5346e2a4.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "d5dca576b842569eb7a270ece47e92f668ba90fc6ce101a8bcf2ee5e289ff8d5",
+            "target": "exports/dev-9b4549cc5346e2a4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "legal:ecbeda8c2b54b70c25b58163f663d98ad9f0b0773a571205b7544b126b0968df",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-9b4549cc5346e2a4.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "d5dca576b842569eb7a270ece47e92f668ba90fc6ce101a8bcf2ee5e289ff8d5",
+            "target": "exports/dev-9b4549cc5346e2a4.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "crypto": "real-ed25519",
+        "decision": "deny",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_denied",
+        "token_audience": "did:wrong",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-9b4549cc5346e2a4.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1960d1328f133cfec2410640907ba456018c86c4551dc038b7a46f597b059dfb",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "d5dca576b842569eb7a270ece47e92f668ba90fc6ce101a8bcf2ee5e289ff8d5",
+            "target": "exports/dev-9b4549cc5346e2a4.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 5.161797162145376e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-01f63aff56d8a050.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "1507e470dad44df8bfb1d3c423e1fb782ab2687e8730d1e6c2095b716d428fdd",
+            "target": "exports/dev-01f63aff56d8a050.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-01f63aff56d8a050.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "1507e470dad44df8bfb1d3c423e1fb782ab2687e8730d1e6c2095b716d428fdd",
+            "target": "exports/dev-01f63aff56d8a050.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-01f63aff56d8a050.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "1507e470dad44df8bfb1d3c423e1fb782ab2687e8730d1e6c2095b716d428fdd",
+            "target": "exports/dev-01f63aff56d8a050.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "legal:de03688269ae120e7a9ee211cd7d2b0071d1038a5bb0ed19d153c68f8ac66f19",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-01f63aff56d8a050.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "1507e470dad44df8bfb1d3c423e1fb782ab2687e8730d1e6c2095b716d428fdd",
+            "target": "exports/dev-01f63aff56d8a050.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "authorization_event_cid": "ec8b973e9eab0375e2d2e9ff888d03e719f42c33488a96ad3ddeaa1f36948ec4",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-01f63aff56d8a050.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9be8f8d1e58c69e585f9dfa03740462d710bbabf916d8fb9d810284eb35d2a05",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "1507e470dad44df8bfb1d3c423e1fb782ab2687e8730d1e6c2095b716d428fdd",
+            "target": "exports/dev-01f63aff56d8a050.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.6322005800902843e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "c4ac9b6975034e6f83e3f13eec8d53f1ba426dbec051a9e3a85b92665f95a7b4",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-f01d66c636e39285.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "0dc0e9c85d3457f4076abaa2ac3469d2af3ddeff26ecd7734e372467fcef41e8",
+            "target": "exports/dev-f01d66c636e39285.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-f01d66c636e39285.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "0dc0e9c85d3457f4076abaa2ac3469d2af3ddeff26ecd7734e372467fcef41e8",
+            "target": "exports/dev-f01d66c636e39285.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-f01d66c636e39285.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "0dc0e9c85d3457f4076abaa2ac3469d2af3ddeff26ecd7734e372467fcef41e8",
+            "target": "exports/dev-f01d66c636e39285.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "legal:de03688269ae120e7a9ee211cd7d2b0071d1038a5bb0ed19d153c68f8ac66f19",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-f01d66c636e39285.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "0dc0e9c85d3457f4076abaa2ac3469d2af3ddeff26ecd7734e372467fcef41e8",
+            "target": "exports/dev-f01d66c636e39285.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "crypto": "real-ed25519",
+        "decision": "deny",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_denied",
+        "token_audience": "did:wrong",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-f01d66c636e39285.json",
+          "payload": {
+            "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+            "oracle_role": "forbidden",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "82173e893e2639565493aea72a3cb2cededf7cceeec1405b68993bb8e33a091e",
+        "candidate_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "0dc0e9c85d3457f4076abaa2ac3469d2af3ddeff26ecd7734e372467fcef41e8",
+            "target": "exports/dev-f01d66c636e39285.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.476902540773153e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-fed344be69c125af.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "4922a8c84b7a35190ce490502c51e8d6859e5bb570d7b8056b758a169073937e",
+            "target": "exports/dev-fed344be69c125af.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-fed344be69c125af.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "4922a8c84b7a35190ce490502c51e8d6859e5bb570d7b8056b758a169073937e",
+            "target": "exports/dev-fed344be69c125af.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-fed344be69c125af.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "4922a8c84b7a35190ce490502c51e8d6859e5bb570d7b8056b758a169073937e",
+            "target": "exports/dev-fed344be69c125af.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-fed344be69c125af.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "4922a8c84b7a35190ce490502c51e8d6859e5bb570d7b8056b758a169073937e",
+            "target": "exports/dev-fed344be69c125af.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "authorization_event_cid": "1e66f3b0d3cbf8eb7b137ef05626720e5419b6f19af9f8244b77383402801165",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-fed344be69c125af.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "32afb8eaf486a105e0e855ffaaabcdb8d875512fdd257b2ab02ac2b2ed7c85cc",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "4922a8c84b7a35190ce490502c51e8d6859e5bb570d7b8056b758a169073937e",
+            "target": "exports/dev-fed344be69c125af.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 5.4338015615940094e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "84f445b6f21b294298831adfe263e3ad8cfcce7bdd9cf15be501bbc5a8c9272b",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-5de4b12213fe7d79.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e14a6bffb71e52931034356cbb6838f6fe3e85b1dfef13b6a70b0a4f56e05883",
+            "target": "exports/dev-5de4b12213fe7d79.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-5de4b12213fe7d79.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e14a6bffb71e52931034356cbb6838f6fe3e85b1dfef13b6a70b0a4f56e05883",
+            "target": "exports/dev-5de4b12213fe7d79.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-5de4b12213fe7d79.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e14a6bffb71e52931034356cbb6838f6fe3e85b1dfef13b6a70b0a4f56e05883",
+            "target": "exports/dev-5de4b12213fe7d79.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-5de4b12213fe7d79.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e14a6bffb71e52931034356cbb6838f6fe3e85b1dfef13b6a70b0a4f56e05883",
+            "target": "exports/dev-5de4b12213fe7d79.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "crypto": "real-ed25519",
+        "decision": "deny",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_denied",
+        "token_audience": "did:wrong",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-5de4b12213fe7d79.json",
+          "payload": {
+            "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "90a501a5bc41f4f87e6b526049963206ffdd202cf1594c554eb0bcb5e6fee06a",
+        "candidate_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e14a6bffb71e52931034356cbb6838f6fe3e85b1dfef13b6a70b0a4f56e05883",
+            "target": "exports/dev-5de4b12213fe7d79.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.577799700200558e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-2fb68d791c8888c0.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "bfd9a36a3e705cc6841695a0a4c1b9863bae18490c95e5aac7b4f1778a77e5b4",
+            "target": "exports/dev-2fb68d791c8888c0.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-2fb68d791c8888c0.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "bfd9a36a3e705cc6841695a0a4c1b9863bae18490c95e5aac7b4f1778a77e5b4",
+            "target": "exports/dev-2fb68d791c8888c0.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-2fb68d791c8888c0.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "bfd9a36a3e705cc6841695a0a4c1b9863bae18490c95e5aac7b4f1778a77e5b4",
+            "target": "exports/dev-2fb68d791c8888c0.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-2fb68d791c8888c0.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "bfd9a36a3e705cc6841695a0a4c1b9863bae18490c95e5aac7b4f1778a77e5b4",
+            "target": "exports/dev-2fb68d791c8888c0.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "authorization_event_cid": "b22ecae690cf677a189aef64d2ac7694901de1e4053153810379b58782c50de9",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-2fb68d791c8888c0.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+            "oracle_role": "allowed",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "d270ef32d18e26a8461060320e8cbfe9459210eb2b2a81120a070489f8cb4b80",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 191,
+            "payload_sha256": "bfd9a36a3e705cc6841695a0a4c1b9863bae18490c95e5aac7b4f1778a77e5b4",
+            "target": "exports/dev-2fb68d791c8888c0.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.5937951654195786e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "b0fafc694dc782701c3b0ce47f38cdf28a28352dac8603a36157b94e1dbc40a2",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-19d06fcc66a2394a.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "269a1566c14a86fb456b643f6a2f7c1d5c7bf65d86b0ecb3f9f53d4a49b7f319",
+            "target": "exports/dev-19d06fcc66a2394a.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-19d06fcc66a2394a.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "269a1566c14a86fb456b643f6a2f7c1d5c7bf65d86b0ecb3f9f53d4a49b7f319",
+            "target": "exports/dev-19d06fcc66a2394a.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-19d06fcc66a2394a.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "269a1566c14a86fb456b643f6a2f7c1d5c7bf65d86b0ecb3f9f53d4a49b7f319",
+            "target": "exports/dev-19d06fcc66a2394a.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-19d06fcc66a2394a.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "269a1566c14a86fb456b643f6a2f7c1d5c7bf65d86b0ecb3f9f53d4a49b7f319",
+            "target": "exports/dev-19d06fcc66a2394a.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "crypto": "real-ed25519",
+        "decision": "deny",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_denied",
+        "token_audience": "did:wrong",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-19d06fcc66a2394a.json",
+          "payload": {
+            "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+            "oracle_role": "forbidden",
+            "population": "cve",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "ec74763b1e2c9de78af0e075673071c9831ef264d2251a4c091d8b032a50b314",
+        "candidate_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "269a1566c14a86fb456b643f6a2f7c1d5c7bf65d86b0ecb3f9f53d4a49b7f319",
+            "target": "exports/dev-19d06fcc66a2394a.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.50740335509181e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-be11ca50dec7f31b.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "159fb20a1bdbd2cae7d4a85d05a988cff92a105aebf5f3940e7f8393dfe0299c",
+            "target": "exports/dev-be11ca50dec7f31b.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-be11ca50dec7f31b.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "159fb20a1bdbd2cae7d4a85d05a988cff92a105aebf5f3940e7f8393dfe0299c",
+            "target": "exports/dev-be11ca50dec7f31b.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-be11ca50dec7f31b.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "159fb20a1bdbd2cae7d4a85d05a988cff92a105aebf5f3940e7f8393dfe0299c",
+            "target": "exports/dev-be11ca50dec7f31b.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "skill:e0ad50b89f0dda175af0c86e086b5b4f0ca0bc7d5d7b8e4983e9b4f84cd8c5b1",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-be11ca50dec7f31b.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "159fb20a1bdbd2cae7d4a85d05a988cff92a105aebf5f3940e7f8393dfe0299c",
+            "target": "exports/dev-be11ca50dec7f31b.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "authorization_event_cid": "2d47bc9c91378f514c649fcf0637c8eb15305f910f08a60010b53d57a5b06d22",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-be11ca50dec7f31b.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "617e7540666ebb2ed7d12edf7c79142520f032a91fd50cc131bc8d5201cd1b5d",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "159fb20a1bdbd2cae7d4a85d05a988cff92a105aebf5f3940e7f8393dfe0299c",
+            "target": "exports/dev-be11ca50dec7f31b.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.533003084361553e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "6e44055d158746d9f4d75a43fcea5791e95493928059113866ce8b76ddb3160a",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-b96c9f83a6ae6ba7.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "9d6636d5bfd78d5218d0e12938be43c461d5bb2264e4fab270ca6b01c4542c79",
+            "target": "exports/dev-b96c9f83a6ae6ba7.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-b96c9f83a6ae6ba7.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "9d6636d5bfd78d5218d0e12938be43c461d5bb2264e4fab270ca6b01c4542c79",
+            "target": "exports/dev-b96c9f83a6ae6ba7.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-b96c9f83a6ae6ba7.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "9d6636d5bfd78d5218d0e12938be43c461d5bb2264e4fab270ca6b01c4542c79",
+            "target": "exports/dev-b96c9f83a6ae6ba7.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "skill:e0ad50b89f0dda175af0c86e086b5b4f0ca0bc7d5d7b8e4983e9b4f84cd8c5b1",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-b96c9f83a6ae6ba7.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "9d6636d5bfd78d5218d0e12938be43c461d5bb2264e4fab270ca6b01c4542c79",
+            "target": "exports/dev-b96c9f83a6ae6ba7.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "crypto": "real-ed25519",
+        "decision": "deny",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_denied",
+        "token_audience": "did:wrong",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-b96c9f83a6ae6ba7.json",
+          "payload": {
+            "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "a69d6f40adca51e77ac61f2d2f10d69d8835406d5956799926f2143470a6899f",
+        "candidate_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "9d6636d5bfd78d5218d0e12938be43c461d5bb2264e4fab270ca6b01c4542c79",
+            "target": "exports/dev-b96c9f83a6ae6ba7.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.416191950440407e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-075d8327ad20c2d4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e06e89d9052e96383a10ca9bda39d2910b3066772aee7e08bfb4abec2501c5bd",
+            "target": "exports/dev-075d8327ad20c2d4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-075d8327ad20c2d4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e06e89d9052e96383a10ca9bda39d2910b3066772aee7e08bfb4abec2501c5bd",
+            "target": "exports/dev-075d8327ad20c2d4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-075d8327ad20c2d4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e06e89d9052e96383a10ca9bda39d2910b3066772aee7e08bfb4abec2501c5bd",
+            "target": "exports/dev-075d8327ad20c2d4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-075d8327ad20c2d4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e06e89d9052e96383a10ca9bda39d2910b3066772aee7e08bfb4abec2501c5bd",
+            "target": "exports/dev-075d8327ad20c2d4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "authorization_event_cid": "04fe607d75f65340455b7e6799fd192c53c2050ef7d96b62cd97f54757bac938",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-075d8327ad20c2d4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+            "oracle_role": "allowed",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "1888823e91b2fdde6b94233c65f6df1dac3f86f213111010a8bcade785a0fbe4",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "e06e89d9052e96383a10ca9bda39d2910b3066772aee7e08bfb4abec2501c5bd",
+            "target": "exports/dev-075d8327ad20c2d4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": true,
+        "denial_reason": "",
+        "enforce_decision": "allow",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.419300239533186e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "authorization_event_cid": "88a164d7fa90199bdd7c2a7fc0c8bef461f728f9633f677d320d61e334f56064",
+          "crypto": "real-ed25519",
+          "decision": "allow",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_and_declared_policy",
+          "token_audience": "did:client:tenant-a",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A0",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-4c68406959c656c4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "5dd693bc91ce9be9b7091e96e433ff036732925a98570bb0d5a7eaa50101875f",
+            "target": "exports/dev-4c68406959c656c4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A0",
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A1",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-4c68406959c656c4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "5dd693bc91ce9be9b7091e96e433ff036732925a98570bb0d5a7eaa50101875f",
+            "target": "exports/dev-4c68406959c656c4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A1",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36"
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A2",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "decision": "allow",
+      "delegated": true,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 1,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-4c68406959c656c4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "5dd693bc91ce9be9b7091e96e433ff036732925a98570bb0d5a7eaa50101875f",
+            "target": "exports/dev-4c68406959c656c4.json"
+          }
+        ]
+      },
+      "journal_event_count": 1,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "dispatch": "direct_bounded_export_handler",
+        "handler_version": "bounded-export-handler/v2"
+      },
+      "metadata": {
+        "arm_id": "A2",
+        "consumed_by_planner": false,
+        "model_calls": 0,
+        "policy_text": "Export only tenant-a/bucket-a/documents under export_json. Do not widen tenant, audience, or resource. This text is inert in the model-free study.",
+        "policy_text_sha256": "b920a424e4a3fdccfb5a50f32dc74b9ad6a2b5512f85bff32460de14769e8c36",
+        "retrieval": {
+          "includes_acceptance_oracle": false,
+          "includes_final_sibling": false,
+          "includes_target_patch": false,
+          "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+          "lineage_safe": true,
+          "snippet": "development-split lineage identifier only; no held-out label or sibling text",
+          "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+          "split": "development"
+        }
+      },
+      "observed_effect_count": 1,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": true,
+        "inert_retrieval_context": true,
+        "lightweight_declared_policy": false,
+        "real_ucan_verifier": false,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": true
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "success"
+    },
+    {
+      "arm_id": "A3",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-4c68406959c656c4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "5dd693bc91ce9be9b7091e96e433ff036732925a98570bb0d5a7eaa50101875f",
+            "target": "exports/dev-4c68406959c656c4.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "crypto": "real-ed25519",
+        "decision": "deny",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_denied",
+        "token_audience": "did:wrong",
+        "verifier_kind": "real-ucan-verifier"
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": false,
+        "durable_consumption": false,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": false,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    },
+    {
+      "arm_id": "A4",
+      "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+      "decision": "deny",
+      "delegated": false,
+      "empirical_benchmark_result": false,
+      "failure": null,
+      "handler_calls": 0,
+      "identity": {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-4c68406959c656c4.json",
+          "payload": {
+            "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+            "oracle_role": "forbidden",
+            "population": "skill",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "9d4915ece0f68f91c7ec04094f338bb7c97fda134c5d0fbf461b145de8d772dc",
+        "candidate_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 195,
+            "payload_sha256": "5dd693bc91ce9be9b7091e96e433ff036732925a98570bb0d5a7eaa50101875f",
+            "target": "exports/dev-4c68406959c656c4.json"
+          }
+        ]
+      },
+      "journal_event_count": 0,
+      "mechanism": {
+        "arbitrary_generated_source_execution": false,
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "enforce_decision": "deny",
+        "enforce_mode": "enforce",
+        "in_memory_store": false,
+        "obligation": {
+          "allowed": true,
+          "authority_kind": "satisfiability",
+          "checker": {
+            "agrees_with_provider": true,
+            "authority_kind": "satisfiability",
+            "checker": "exhaustive-truth-table",
+            "status": "unsat",
+            "theorem_proof": false
+          },
+          "provider": {
+            "algorithm": "dpll",
+            "authority_kind": "satisfiability",
+            "elapsed_seconds": 4.393700510263443e-05,
+            "model": null,
+            "provider": "sympy.logic.inference.satisfiable",
+            "status": "unsat"
+          },
+          "theorem_proof": false
+        },
+        "store_kind": "duckdb-file-typed-quack-owner",
+        "ucan": {
+          "crypto": "real-ed25519",
+          "decision": "deny",
+          "policy_provider": "la-014-declared-lightweight-policy",
+          "reason": "ucan_denied",
+          "token_audience": "did:wrong",
+          "verifier_kind": "real-ucan-verifier"
+        }
+      },
+      "metadata": {
+        "consumed_by_planner": false,
+        "model_calls": 0
+      },
+      "observed_effect_count": 0,
+      "policy_components": {
+        "checked_sat_obligations": true,
+        "durable_consumption": true,
+        "inert_policy_text": false,
+        "inert_retrieval_context": false,
+        "lightweight_declared_policy": true,
+        "real_ucan_verifier": true,
+        "supervisor_enforce": true,
+        "unguarded_sandbox_dispatch": false
+      },
+      "sandbox": true,
+      "split": "development",
+      "terminal_outcome": "denied"
+    }
+  ],
+  "replay": {
+    "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+    "first_identity": [
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      }
+    ],
+    "identity_stable": true,
+    "second_identity": [
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      },
+      {
+        "actor": "did:client:tenant-a",
+        "arguments": {
+          "operation": "export_json",
+          "path": "exports/dev-1aff4ebeb953245c.json",
+          "payload": {
+            "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+            "oracle_role": "allowed",
+            "population": "legal",
+            "split": "development",
+            "task": "LA-014-fixed-action"
+          }
+        },
+        "audience": "did:service:tenant-a",
+        "candidate_digest": "827b1ff44ce65936442a428150060dd969d930f416f19680bef33c4a7a0a4a2e",
+        "candidate_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+        "declared_effects": [
+          {
+            "effect_kind": "filesystem.export_json",
+            "payload_bytes": 193,
+            "payload_sha256": "9be20cd6e620f8daf2420d6c5d6fa29b61dfb92d16c6b2e4896d56c46aa9f6e7",
+            "target": "exports/dev-1aff4ebeb953245c.json"
+          }
+        ]
+      }
+    ]
+  },
+  "resources": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "affinity_count": 20,
+    "as_limit": [
+      -1,
+      -1
+    ],
+    "cgroup_controllers": "cpuset cpu io memory hugetlb pids rdma misc dmem",
+    "cgroup_v2": true,
+    "descendant_process_group_kill": true,
+    "kill_signal": 9,
+    "nproc_limit": [
+      -1,
+      -1
+    ],
+    "observed_at": "2026-09-12T02:58:25.540591+00:00",
+    "private_cgroup_created": false,
+    "probe_wall_seconds": 0.402733,
+    "protocol_gate": "If singleton CPU cgroup/quota cannot be enforced for every descendant, scored LA-015 attempts stay unrun.",
+    "reason": "host cpuset recorded; creating a private cgroup requires privileges not granted in this qualification",
+    "scored_attempts_admitted": false,
+    "singleton_cpu_enforced": false
+  },
+  "schema": "law-to-action-comparability/v1",
+  "shared_fingerprint": "68922e130aab6d3f04d8df14d689c9267ceb598ea5a0f8c95589d96128cf8d31",
+  "task": "LA-014"
+}

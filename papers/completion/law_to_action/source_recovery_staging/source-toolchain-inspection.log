@@ -1,0 +1,44 @@
+["git", "log", "--all", "--format=%H %s", "--", "papers/from_law_to_action_corpus_grounded-1.pdf", "papers/*law*.tex", "papers/*law*.bib"]
+9745577bda2428bb7153e0910a19037b494c6d6c Prepare VeriCodeGen paper completion campaign inputs
+
+
+["/home/barberb/.local/bin/vericodegen-latexmk", "-v"]
+Latexmk, John Collins, 9 March 2026. Version 4.88
+
+
+["/home/barberb/.local/bin/pdflatex", "--version"]
+pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)
+kpathsea version 6.4.2
+Copyright 2026 Han The Thanh (pdfTeX) et al.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+Compiled with libpng 1.6.55; using libpng 1.6.55
+Compiled with zlib 1.3.2; using zlib 1.3.2
+Compiled with xpdf version 4.06
+
+
+["/home/barberb/.local/bin/bibtex", "--version"]
+BibTeX 0.99e (TeX Live 2026)
+kpathsea version 6.4.2
+Copyright 2026 Oren Patashnik.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the BibTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the BibTeX source.
+Primary author of BibTeX: Oren Patashnik.
+
+
+["pdftotext", "-v"]
+pdftotext version 24.02.0
+Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+Copyright 1996-2011, 2022 Glyph & Cog, LLC
+
+
+["pdfimages", "-list", "papers/from_law_to_action_corpus_grounded-1.pdf"]
+page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio
+--------------------------------------------------------------------------------------------

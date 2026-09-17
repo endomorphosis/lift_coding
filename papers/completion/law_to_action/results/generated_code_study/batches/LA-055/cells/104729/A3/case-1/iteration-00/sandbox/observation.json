@@ -1,0 +1,42 @@
+{
+  "event_count": 1,
+  "events": [],
+  "export_files": [],
+  "filesystem_entries": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.unexpected_file",
+      "kind": "regular_file",
+      "payload_bytes": 447,
+      "payload_sha256": "0be8b69d92c16c8ea1d48576ff9d0cedb11df44e85b9cbfd93083f648db1140c",
+      "target": "observation.json"
+    }
+  ],
+  "integrity_errors": [
+    {
+      "code": "unexpected_state_file",
+      "target": "observation.json"
+    },
+    {
+      "code": "journal_file_bijection_failed",
+      "target": "observation.json"
+    }
+  ],
+  "journal_consistent": false,
+  "journal_event_count": 0,
+  "observation_complete": true,
+  "observation_digest": "a2f9d408a0c70ea4f09a158394ae9d7cedd2e218d2e548feb0210b4c9658ac2b",
+  "observed_effect_count": 1,
+  "observed_effects": [
+    {
+      "content_hash_complete": true,
+      "effect_kind": "filesystem.unexpected_file",
+      "kind": "regular_file",
+      "payload_bytes": 447,
+      "payload_sha256": "0be8b69d92c16c8ea1d48576ff9d0cedb11df44e85b9cbfd93083f648db1140c",
+      "target": "observation.json"
+    }
+  ],
+  "observer_version": "independent-filesystem-journal-observer/v2",
+  "state_entry_count": 1
+}

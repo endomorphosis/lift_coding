@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 831,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 847,
+  "prompt_tokens": 847,
+  "raw_sha256": "5c9444ebcc2dc54fd6dd48c8738502fba039efc5df3b6d383c41680218b8efb8",
+  "response_text": "```json\n{\n  \"emit_allowed\": [\n    {\n      \"source_sha256\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0af0b\",\n      \"kind\": \"permitted_public_source\",\n      \"locator\": {\n        \"document_sha256\": \"08dc0c16f21f99a9f560a43dfd76d0764ef4d0af0b\",\n        \"edition\": \"2024\",\n        \"section\": \"13-USC-9\"\n      }\n    }\n  ]\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"emit_allowed\": [\n    {\n      \"source_sha255\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0af0b\",\n      \"kind\": \"permitted_public_source\",\n      \"locator\": {\n        \"document_sha255\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0af0b\",\n        \"edition\": \"2024\",\n        \"section\": \"13-USC-9\"\n      }\n    }\n  ]\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"emit_allowed\": [\n    {\n      \"source_sha256\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0af0b\",\n      \"kind\": \"permitted_public_source\",\n      \"locator\": {\n        \"document_sha256\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0764ef4d0af0b\",\n        \"edition\": \"2024\",\n        \"section\": \"13-USC-9\"\n      }\n    }\n  ]\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"emit_allowed\": [\n    {\n      \"source_sha256\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0af0b\",\n      \"kind\": \"permitted_public_source\",\n      \"locator\": {\n        \"document_sha256\": \"08dc0c16f21f99a9f56688304bf0e5a3c82c2cd360a43dfd76d0764ef4d0af0b\",\n        \"edition\": \"2024\",\n        \"section\": \"13-USC-9\"\n      }\n    }\n  ]\n}\n```<|im_end|>",
+  "wall_seconds": 66.49039391899714
+}

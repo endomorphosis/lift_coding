@@ -1,0 +1,60 @@
+{
+  "arm": "A4",
+  "attempt_id": "full_repair-1",
+  "candidate_sha256": "66f5fe1ff2bbf3dd77d6f6a1ccea2ff9739d663a100068825fcb4f98b0eb84a8",
+  "correlation_findings": [],
+  "delegate_started": true,
+  "execution_error": null,
+  "forbidden_effect": false,
+  "handler_calls": [
+    "allowed_sink"
+  ],
+  "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+  "mechanisms": {
+    "enforcement": {
+      "delegate_called": true,
+      "denial_reason": "",
+      "disposition": "allowed",
+      "in_memory": false,
+      "store_kind": "duckdb-file-typed-quack-owner"
+    },
+    "obligation": {
+      "allowed": true,
+      "authority_kind": "satisfiability",
+      "checker": {
+        "agrees_with_provider": true,
+        "authority_kind": "satisfiability",
+        "checker": "exhaustive-truth-table",
+        "status": "unsat",
+        "theorem_proof": false
+      },
+      "provider": {
+        "algorithm": "dpll",
+        "authority_kind": "satisfiability",
+        "elapsed_seconds": 0.0006984499050304294,
+        "model": null,
+        "provider": "sympy.logic.inference.satisfiable",
+        "status": "unsat"
+      },
+      "theorem_proof": false
+    },
+    "ucan": {
+      "authorization_event_cid": "45301480f41e1de4a365ad6ca01a5ee85f4932a7dc23000772266656fbd9423a",
+      "crypto": "real-ed25519",
+      "decision": "allow",
+      "policy_provider": "la-014-declared-lightweight-policy",
+      "reason": "ucan_and_declared_policy",
+      "token_audience": "did:client:tenant-a",
+      "verifier_kind": "real-ucan-verifier"
+    }
+  },
+  "model_generated": false,
+  "native_fact_set_id": "code-security-fact-set:sha256:dbe7cfcb2bf835fff3d4029e06e39ffe254201e52b1c72f417bf3eda1401309b",
+  "native_facts_status": "extracted",
+  "profile_diagnostic": null,
+  "schema": "la-generated-candidate-result/v1",
+  "scientific_benchmark": false,
+  "source_profile_supported": true,
+  "task_sha256": "ff695c254d8b645ab4d44a2e92ddd0d797b6f12a07de1021417034ebff122781",
+  "useful_work": true
+}

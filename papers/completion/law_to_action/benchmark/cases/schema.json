@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "law-to-action-benchmark-case/v1",
+  "title": "Law-to-Action trusted bounded export fixture qualification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "case_kind",
+    "fixture",
+    "actor",
+    "audience",
+    "root",
+    "declared_intent",
+    "generated_code",
+    "grant",
+    "expected_decision",
+    "expected_effects",
+    "labels"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "case_kind": {
+      "type": "string",
+      "enum": [
+        "legal",
+        "cve",
+        "skill",
+        "token",
+        "proof",
+        "replay",
+        "context_mutation",
+        "smoke"
+      ]
+    },
+    "fixture": {
+      "const": true
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audience": {
+      "type": "string",
+      "minLength": 1
+    },
+    "root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "declared_intent": {
+      "$ref": "#/$defs/effect"
+    },
+    "generated_code": {
+      "$ref": "#/$defs/effect"
+    },
+    "grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorized",
+        "actor",
+        "audience",
+        "root"
+      ],
+      "properties": {
+        "authorized": {
+          "type": "boolean"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "root": {
+          "type": "string"
+        }
+      }
+    },
+    "expected_decision": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny"
+      ]
+    },
+    "expected_effects": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "solver",
+        "crypto",
+        "storage",
+        "network",
+        "model"
+      ],
+      "properties": {
+        "solver": {
+          "const": "none"
+        },
+        "crypto": {
+          "const": "fixture_only"
+        },
+        "storage": {
+          "const": "ephemeral_filesystem"
+        },
+        "network": {
+          "const": "not_exercised_not_isolated"
+        },
+        "model": {
+          "const": "none"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "path",
+        "payload"
+      ],
+      "properties": {
+        "operation": {
+          "const": "export_json"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^exports/[A-Za-z0-9][A-Za-z0-9._/-]*\\.json$",
+          "description": "Canonical relative path below exports; no dot/parent/empty segments. Runtime validates this in addition to the pattern."
+        },
+        "payload": {}
+      }
+    }
+  },
+  "$comment": "Trusted declarative export_json only. No arbitrary source execution or OS filesystem/network isolation. Non-fixture, product-runtime and untrusted-code admission remain pending.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "expected_decision": {
+            "const": "allow"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "expected_effects": {
+            "const": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "expected_effects": {
+            "const": 0
+          }
+        }
+      }
+    }
+  ]
+}

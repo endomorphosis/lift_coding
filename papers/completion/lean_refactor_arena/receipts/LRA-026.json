@@ -1,0 +1,149 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-026",
+  "status": "complete",
+  "completed_at": "2026-09-17T01:58:45.596668+00:00",
+  "completion_mode": "fill Approach/Models/Budget/Reproduction from existing LRA receipts only; 15-problem Spark row and official Track 2 row stay unrun; no invented leaderboard ranks or token savings; author unchanged",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/audit_manuscript.py": "249a6ae7c8bf569bad794a201cf3ff0cce4ee6309cbf4cc7754d059b16815f01",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/extract_receipt_claims.py": "425b26f7ee390191a5844d4332f0bf5f0b066b272c29deadcac23fb7872d6f02",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/main.tex": "1ccece007b5f5d05b4afbc754372e5a2ec9f1d47543c90816b44975167888702",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.json": "c40a61177e5e090d2ad39622e2a47f747550d616985aaf52766394521380c392",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.meta.json": "e4225a7a6c193998b234ae8b9aaa9a4c9e14d2e13169028109b6d95d9c84bfc4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.stdout.log": "c40a61177e5e090d2ad39622e2a47f747550d616985aaf52766394521380c392",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/git-head.txt": "79d06efb6d08a19d673e95959d13f10c215a2cd82c3a32e8c8da04f8604776c4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/ipfs_datasets-head.txt": "c3e3ae63b82b05affb19d665c3018c97f689b5ca9d497210e9d8f8bc84c91b94",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.json": "2b9ef1b75feac689904dbe1859a4ce57f9e490ef1b8325338e33cc8b00420505",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.meta.json": "3a131ca7304b20b9b3a00c32f577e764f397140bf9574689c7d3dad8e45920ba",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.stdout.log": "2b9ef1b75feac689904dbe1859a4ce57f9e490ef1b8325338e33cc8b00420505"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/manuscript/main.tex": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/main.tex"
+  },
+  "criteria": [
+    {
+      "criterion": "Approach/Models/Budget/Reproduction updated only from receipts; unrun rows stay unrun.",
+      "status": "met",
+      "explanation": "manuscript/main.tex Approach now records loop v1 from LRA-011/017/018/022 receipts (splice prefix-bind, 14-neighbor retrieve, docker0 generate-or-skip, lexical admit, lake env lean with maxHeartbeats=400000 and 600s/tag, keep-best 0.55/0.45). Models replaced the scaffold 1024/2048 limits with generate_text.py DEFAULT_MAX_NEW_TOKENS=1400 and PUTNAM_MAX_NEW_TOKENS=4096 (timeouts 300s/600s), provider=leanstral_local, temperature=0.0, Frosty40 revision abcc5ce2528c6375148d41dac6dce20f06c339f4, CID bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i, 67135119264 NVFP4 bytes, SM80 SHA null. Budget/Reproduction cite run_freeze.json operator argv and verify_lra_batch --require-complete. Hardware table keeps 'Development harness (Spark GB10, 15 problems)' unrun and 'Official Track 2 benchmark run' unrun; submissions/warmup does not exist. The 32-token CallElimCorrect.substOldPostSubset Leanstral probe from LRA-017 is disclosed as a self-check, not a 15-problem campaign. Synthetic compile receipts stay labeled hardware_class=synthetic. Protocol remains LRA/v1. Audit self-check.json: ok=true, unrun_15_problem_spark=true, unrun_official_track2=true, stale_1024_2048_removed=true, protocol_not_grown=true.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/main.tex",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/audit_manuscript.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No invented leaderboard ranks or general token savings.",
+      "status": "met",
+      "explanation": "main.tex keeps 'does not claim Arena leaderboard scores' and 'We do not claim general token savings'. No numeric arena_score/official_score/token_savings assignment. warmup_table.tex still has no Score column (sha256 f67e4f6e2ebac1dacd4adcd412fb2708713e06a173a80c46731b99ee60112f7e, unchanged from LRA-018). extract.json and self-check.json set arena_score=null, official_score=null, token_savings=null, leaderboard_rank=null, writes_arena_scores=false. Unpublished SHA 3fe4e64d is not cited. Local keep-best weights 0.55/0.45 are described as a local composite, not an Arena ranking. The three organizer axes remain unreported pending live Lean receipts and verify_lra_batch --require-complete PASS.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/main.tex",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/audit_manuscript.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.json"
+      ]
+    },
+    {
+      "criterion": "Author line remains Benjamin Barber / starworks5@gmail.com unless explicitly changed.",
+      "status": "met",
+      "explanation": "The author block is still Benjamin Barber with \\texttt{starworks5@gmail.com}. Audit self-check.json author=Benjamin Barber, email=starworks5@gmail.com. The NeurIPS template Hippocampus author is absent. No author-line change was requested.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/main.tex",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/audit_manuscript.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/audit_manuscript.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/extract_receipt_claims.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/extract.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/outputs/extract_receipt_claims.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "--version"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/python-version.txt"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-c",
+        "import hashlib, pathlib; p=pathlib.Path(\"papers/completion/lean_refactor_arena/data/benchmark_data_warmup.jsonl\"); d=hashlib.sha256(p.read_bytes()).hexdigest(); print(d); print(f\"bytes={p.stat().st_size}\"); print(f\"path={p.as_posix()}\")"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-026/validation/jsonl-sha256.txt"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "422b1bae98a853744d5e16cce4c5fb49f6800eab",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "34d5a079902887e8d796d98443bce8206458cfbf",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "protocol": "LRA/v1",
+    "loop_version": "v1",
+    "hardware_class": "spark_gb10",
+    "default_max_new_tokens": 1400,
+    "putnam_max_new_tokens": 4096,
+    "requested_provider": "leanstral_local",
+    "requested_model": "Leanstral",
+    "weight_revision": "abcc5ce2528c6375148d41dac6dce20f06c339f4",
+    "weight_cid": "bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i",
+    "nvfp4_bytes": 67135119264,
+    "sm80_derivative_sha256": null,
+    "lra_prompt_txt_sha256": "57036f2bb94d8d8b38d77096ad92a2e615571addee7d01c72e104edaacfee96a",
+    "main_tex_sha256": "1ccece007b5f5d05b4afbc754372e5a2ec9f1d47543c90816b44975167888702",
+    "warmup_table_tex_sha256": "f67e4f6e2ebac1dacd4adcd412fb2708713e06a173a80c46731b99ee60112f7e",
+    "typesafe": "off",
+    "hammers": "off",
+    "arena_score": null,
+    "official_score": null,
+    "token_savings": null,
+    "unrun_15_problem_spark": true,
+    "unrun_official_track2": true,
+    "author": "Benjamin Barber",
+    "email": "starworks5@gmail.com",
+    "model_or_solver_experiment": "none; manuscript fill from existing receipts; no live 15-problem lake campaign and not official Track 2"
+  },
+  "limitations": [
+    "This task updates manuscript/main.tex from existing LRA-010 through LRA-023 receipts. It does not execute the 15-problem Spark operator command or official Track 2.",
+    "Tag-pinned elan lake/lean binaries are not installed under a sealed ipfs-accelerate-validation-home-* HOME. That capability gap is disclosed; synthetic compile receipts are not kernel correctness of the 15 reference proofs.",
+    "The LRA-017 live Leanstral call was one first-Strata record with max_new_tokens=32 and is disclosed as a probe, not a scored run.",
+    "Protocol LRA/v1 is not grown. No Arena scores, token-savings percentages, or leaderboard ranks were written.",
+    "manuscript/main.pdf is operator-protected and was not regenerated.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}

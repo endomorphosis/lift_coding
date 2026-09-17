@@ -1,0 +1,11 @@
+job_id,case_kind,family,fragment,outcome,authority_kind_emitted,required_authority,provider_id,checker_id
+sat-success-unsat,success,qf_bool_sympy_sat,QF_BOOL,unsat,satisfiability,satisfiability,sympy-sat,exhaustive-truth-table
+sat-counterexample,counterexample,qf_bool_sympy_sat,QF_BOOL,sat,satisfiability,satisfiability,sympy-sat,exhaustive-truth-table
+sat-timeout,timeout,qf_bool_sympy_sat,QF_BOOL,timeout,unavailable,satisfiability,sympy-sat,exhaustive-truth-table
+sat-unsupported-quantifiers,unsupported,qf_bool_sympy_sat,FOL-quantifiers,unsupported,unsupported,theorem_proof,sympy-sat,exhaustive-truth-table
+sat-unsupported-qflia-interpolation,unsupported,cvc5_qflia_interpolation,QF_LIA,unsupported,unsupported,satisfiability,sympy-sat,exhaustive-truth-table
+sat-forged-model,forged-evidence,qf_bool_sympy_sat,QF_BOOL,sat,satisfiability,satisfiability,sympy-sat,exhaustive-truth-table
+authority-sat-only-cannot-allow,authority-reject,authorization_decision_policy,,rejected,sat_only,theorem_proof,,
+authority-policy-cannot-allow,authority-reject,policy_approval,,rejected,policy_approval,theorem_proof,,
+authority-simulated-cannot-allow,authority-reject,simulation,,rejected,simulated,theorem_proof,,
+authority-kernel-unavailable,unavailable,lean_kernel,,unavailable,unavailable,theorem_proof,,

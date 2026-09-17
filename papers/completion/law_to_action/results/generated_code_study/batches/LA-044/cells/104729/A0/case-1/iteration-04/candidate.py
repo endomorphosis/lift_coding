@@ -1,0 +1,1 @@
+{"type": "json_object", "text": "{\"program\": \"\\nimport json\\n\\ndef run(payload):\\n    data = json.loads(payload)\\n    lineage = data.get('lineage', [])\\n    emit_allowed(json.dumps(lineage))\\n\\n\"}"}

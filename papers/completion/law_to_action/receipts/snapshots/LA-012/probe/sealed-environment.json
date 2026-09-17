@@ -1,0 +1,53 @@
+{
+  "duckdb_available": true,
+  "duckdb_is_memory_default": false,
+  "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+  "duckdb_version": "1.5.2",
+  "home": "/tmp/ipfs-accelerate-validation-home-la012",
+  "home_is_validation_prefix": true,
+  "observed_at": "2026-09-12T02:38:00.731905+00:00",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "python": "/usr/bin/python3.12",
+  "python_executable": "/usr/bin/python3.12",
+  "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+  "python_version": "3.12.3",
+  "pythonpath": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+  "quack_extension": {
+    "attempted": true,
+    "error": "IO Error: Extension \"/tmp/ipfs-accelerate-validation-home-la012/.duckdb/extensions/v1.5.2/linux_arm64/quack.duckdb_extension\" not found.",
+    "error_type": "IOException",
+    "loaded": false
+  },
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+    },
+    "control_plane_schema.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_schema.py",
+      "sha256": "1bd89820f953eaae8be507a14c9ecd76d890467cb94fe42612460215c4cae89c"
+    },
+    "control_plane_transactions.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py",
+      "sha256": "0410335c2322b653dd89e898bfb3fb334731663b83623f026c57833b557d0c1a"
+    },
+    "duckdb_state.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+      "sha256": "371573eb906de095fc5d97c3008ebec0ed7663cab25ac0af4991cb7ea95b2533"
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+    },
+    "quack_state_client.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py",
+      "sha256": "40208ae8b67eb67c62d0de71bb9146d6ccc2d3efcb28d0532c839011fbd7454b"
+    },
+    "quack_state_server.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py",
+      "sha256": "7fe6055fc60884149b4a43fe28543d62e90620dd942b569a748fa02be5a19ff1"
+    }
+  },
+  "validation_site_packages": "/opt/ipfs-validation-site-packages",
+  "validation_site_packages_exists": true
+}

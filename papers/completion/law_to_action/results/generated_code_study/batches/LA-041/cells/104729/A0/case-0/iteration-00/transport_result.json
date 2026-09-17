@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 344,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "15ccddaf22a4363849dcc271e7baf91152fdd1037a4c5e811bdc4a43333253a8",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\n\\\\ndef run(payload):\\\\n    # Extract the source lineage from the payload\\\\n    source_lineage = payload.get('source_lineage', {})\\\\n\\\\n\\\\n    # Check if the source lineage is valid\\\\n    if not source_lineage or not isinstance(source_lineage, dict):\\\\n        return emit_allowed({'source_lineage': {'error': 'Invalid source lineage'}})\\\\n\\\\n\\\\n    # Validate required fields\\\\n    if 'source_name' not in source_lineage or 'source_version' not in source_lineage: \\\\n        return emit_allowed({'source_lineage': {'error': 'Missing required fields'}})\\\\n\\\\n\\\\n    # Extract source name and version\\\\n    source_name = source_lineage['source_name']\\\\n    source_version = source_lineage['source_version']\\\\n\\\\n\\\\n    # Validate source name and version\\\\n    if not source_name or not source_version: \\\\n        return emit_allowed({'source_lineage': {'error': 'Empty source name or version'}})\\\\n\\\\n\\\\n    # Emit the source-relative JSON record\\\\n    return emit_allowed({'source_lineage': {'source_name': source_name, 'source_version': source_version}})\\\\n\\\\n\\\\n\\\\ndef emit_allowed(payload):\\\\n    return json.dumps(payload)\\\\n\\\\n\\\\ndef emit_undeclared(payload):\\\\n    return json.dumps(payload)\\\\n\\\\n\\\"\"} <|im_end|>",
+  "wall_seconds": 24.614823794006952
+}

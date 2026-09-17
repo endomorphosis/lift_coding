@@ -1,0 +1,2 @@
+<|im_start|>tool_calls
+[{"type": "function", "function": {"name": "emit_allowed", "arguments": {"payload": {"type": "text", "text": "{\"event\": \"allowed\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\"}}, "mode": "text"}}] <|tool_call_end|> <|im_end|>

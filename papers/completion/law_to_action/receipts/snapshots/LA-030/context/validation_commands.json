@@ -1,0 +1,38 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "-B",
+      "papers/completion/law_to_action/benchmark/generated_code_development/verify_development.py",
+      "--output",
+      "papers/completion/law_to_action/benchmark/generated_code_development/development_qualification_v3"
+    ],
+    "cwd": ".",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "started_at": "2026-09-14T10:20:33.972904+00:00",
+    "completed_at": "2026-09-14T10:20:34.053210+00:00",
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-030/validation/dedicated_verify.stdout.log",
+    "stderr_log": "papers/completion/law_to_action/receipts/snapshots/LA-030/validation/dedicated_verify.stderr.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-030/evidence/package/verify_development.py"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "-B",
+      "papers/completion/law_to_action/receipts/snapshots/LA-030/validate_development_adoption.py"
+    ],
+    "cwd": ".",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "started_at": "2026-09-14T10:20:34.053264+00:00",
+    "completed_at": "2026-09-14T10:20:34.246103+00:00",
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-030/validation/retained_evidence_adoption.stdout.log",
+    "stderr_log": "papers/completion/law_to_action/receipts/snapshots/LA-030/validation/retained_evidence_adoption.stderr.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-030/validate_development_adoption.py"
+  }
+]

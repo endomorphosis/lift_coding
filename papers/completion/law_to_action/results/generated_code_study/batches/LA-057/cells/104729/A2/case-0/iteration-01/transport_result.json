@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 254,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 940,
+  "prompt_tokens": 940,
+  "raw_sha256": "f20320175884dbd69544e994be2318fb88b42486c48507d39672416fddddae7d",
+  "response_text": "{\"kind\": \"program\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant>",
+  "wall_seconds": 23.1569854059926
+}

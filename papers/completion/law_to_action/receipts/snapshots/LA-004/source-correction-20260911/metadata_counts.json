@@ -1,0 +1,37 @@
+{
+  "schema": "la004-independent-cve-source-metadata/v1",
+  "observed_at": "2026-09-11T17:46:53.230532+00:00",
+  "duckdb_version": "1.5.5",
+  "source_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+  "columns_read": [
+    "cve_id",
+    "hash",
+    "repo_url",
+    "file_row_number"
+  ],
+  "whole_first_shard": {
+    "physical_rows": 4329,
+    "distinct_cve_ids": 3901,
+    "distinct_commit_hashes": 3881,
+    "distinct_cve_commit_locators": 4221,
+    "distinct_repositories": 1589,
+    "missing_identifiers": 0,
+    "largest_repository_row_cluster": 197
+  },
+  "first_twelve_physical_rows": {
+    "physical_rows": 12,
+    "distinct_cve_ids": 12,
+    "distinct_commit_hashes": 12,
+    "distinct_cve_commit_locators": 12,
+    "distinct_repositories": 8,
+    "missing_identifiers": 0,
+    "largest_repository_row_cluster": 3
+  },
+  "benchmark_admitted_families": null,
+  "limits": [
+    "These are verified source metadata counts, not evaluated cases or independently qualified lineage families.",
+    "Distinct CVE/commit locators alone do not prove lineage independence or absence of derivative/cross-split leakage.",
+    "Only the first pinned shard was read; no full release row count was independently reproduced.",
+    "No code, patches, annotation labels, final split assignments, or benchmark outcomes were selected or displayed."
+  ]
+}

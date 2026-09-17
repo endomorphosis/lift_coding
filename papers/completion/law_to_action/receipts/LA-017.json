@@ -1,0 +1,161 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-017",
+  "status": "complete",
+  "completed_at": "2026-09-12T18:16:35.863658+00:00",
+  "completion_mode": "Seven one-factor sandbox ablations were executed against the full A4 arm on frozen paired controls (28 cells). Each removed mechanism (source provenance, hard applicability, intent/code correlation, proof jobs, current-root binding, capability verification, consumption) changed the independent forbidden-effect counter from 0 to 1 on its isolated challenge while allowed controls kept useful work and 0 false rejections. Raw rows retain configuration differences, would_deny/applied_deny guards, and effect counters. Ablated configurations are sandbox-only and were not enabled in live services. Absence of change is not manufactured into benefit; this run had no masked cells. Not independent human gold and not a live-service deployment.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json": "8b4cf2f6de9bc82535ff837414d0afa08d6148c538d7625d0185dd08e78dd54d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/raw.jsonl": "7ecf2358aaa50d072aacb0085d284d2ae86d8eb792830c581e56da8fda348428",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json": "2c698efe7ebb632fad889c46ca77f901dcab99f70169b20e11e4f387736fffa7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/probe/environment.json": "35b0822e01ed8e149cc19528e4531d2de0428622c5975fda2f4fc765c8916a1f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/run_ablations.py": "0705a49e9b8a3ab9f3bc1b12235a3186a1ccd9ee8648eb5fe8e59205e4a59d89",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/traces/pairs.json": "86812a6d890a9ca2a768351012371e4f0ab35068d3dcdef9fd484084e71c1733",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/traces/run_head.json": "6c30136e455059b0702a57a89b8b7dfe13d5fce33560f468f7e3cdd45d1a13c2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/validate_ablations.py": "151d8aea63b4b33ba6ca0bbb8c5f09aa502b841596ef15813e3c1a923cf83326",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/commands.json": "a4f291ca57e91b5686d02665bef91a9674db774865fbf37d4f67cabfd3ab99d7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/run.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/run.stdout.log": "1c64e09bc499c83787a78e978ff99a8e67b51cb4de2b47098a5b57e48ea06312",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stdout.log": "a260b1d1df6340ddd584af46dde7c02d5089c1f81434ef0a1db70c175dbd622b"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/ablations.json": "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+    "papers/completion/law_to_action/results/ablations/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/raw.jsonl",
+    "papers/completion/law_to_action/results/ablations/summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Each of the seven requested mechanisms has a paired experiment or justified scoped omission.",
+      "status": "met",
+      "explanation": "ablations.json names source provenance, hard applicability, intent/code correlation, proof jobs, current-root binding, capability verification, and consumption. raw.jsonl contains 28 executed cells (7 mechanisms x full/ablated x positive/negative). summary.json records mechanisms_with_paired_experiment as those seven IDs and mechanisms_with_scoped_omission as empty. Source-provenance and proof-job isolating challenges use documented sandbox overlays on frozen allowed cases because the LA-015 mutation taxonomy does not isolate those two dispatch checks; they are paired experiments, not omissions.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/traces/pairs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Raw paired case outcomes and configuration differences are retained.",
+      "status": "met",
+      "explanation": "Every raw row stores attempt_id, mechanism_id, config_id, polarity, frozen case_id, challenge_overlay, decision, terminal_outcome, handler_calls, observed_effect_count, journal_event_count, observed_forbidden_effect, useful_work, false_rejection, identity_digest, enabled_mechanisms, and configuration_difference. Ablated rows are one-factor (exactly the named mechanism disabled). Full versus ablated identity_digest is constant per pair. Live files byte-match the snapshot copies.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Attribution discusses interacting checks when another guard masks an ablation; absence of change is not manufactured into benefit.",
+      "status": "met",
+      "explanation": "Each mechanism has an attribution object with kind, forbidden_effect_delta, remaining_guards, and absence_of_change_manufactured_into_benefit=false. The summary narrative states that interacting remaining guards are recorded and that a missing effect-counter change is masked_by_interacting_checks, not a benefit. On this run every isolated challenge was load_bearing (full negatives 0/7 forbidden effects, ablated negatives 7/7), with 0 false rejections on allowed controls. Ablated configurations have live_service=false and were not enabled in live services.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/run_ablations.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/run_ablations.py",
+        "run",
+        "--out",
+        "papers/completion/law_to_action/results/ablations",
+        "--snapshot",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017"
+      ],
+      "completed_at": "2026-09-12T18:16:35.821781Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la017-dkMDGY"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/run.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-017/run_ablations.py",
+      "started_at": "2026-09-12T18:16:34.123833Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/validate_ablations.py"
+      ],
+      "completed_at": "2026-09-12T18:16:35.863658Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/opt/ipfs-validation-site-packages:external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+        "RAYON_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "HOME": "/tmp/ipfs-accelerate-validation-home-la017-dkMDGY"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-017/validate_ablations.py",
+      "started_at": "2026-09-12T18:16:35.822927Z"
+    }
+  ],
+  "source_versions": {
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "cryptography": "49.0.0",
+    "HAVE_CRYPTO_ED25519": true,
+    "duckdb": "1.5.2",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "validation_site_packages": "/opt/ipfs-validation-site-packages",
+    "bounded_export_handler": "bounded-export-handler/v2",
+    "observer": "independent-filesystem-journal-observer/v2",
+    "harness_version": "la-017-paired-ablation-harness/v1",
+    "implementation_revision": "27f4a15c8d2eb3e6a5bfe04141bbf1c21c7bdec1afa420129b22b81f3212f412",
+    "empirical_benchmark_result": true,
+    "independent_human_gold": false,
+    "ablated_configurations_enabled_in_live_services": false,
+    "sandbox_only": true,
+    "model_calls": 0,
+    "scheduled_attempts": 28,
+    "executed_attempts": 28,
+    "load_bearing_mechanisms": 7,
+    "masked_mechanisms": 0,
+    "false_rejections": 0,
+    "a4_crypto": "real-ed25519",
+    "a4_store_kind": "duckdb-file-typed-quack-owner",
+    "a4_enforce_mode": "enforce",
+    "admissibility_enforcement.py_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "authorization.py_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+    "ucan.py_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+    "durable_consumption.py_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "effects.py_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "future_gates": [
+      "Ablated configurations remain sandbox-only and must not be installed as live MCP/supervisor routes.",
+      "SAT/UNSAT cannot authorize theorem_proof allows.",
+      "Independent human gold, expert legal fidelity, and real-world legality remain unclaimed.",
+      "Source-provenance and proof-job isolating challenges used documented overlays because LA-015 mutations do not isolate those two dispatch checks."
+    ]
+  }
+}

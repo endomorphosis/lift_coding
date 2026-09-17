@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 91,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 251,
+  "prompt_tokens": 251,
+  "raw_sha256": "720d5f2c1c34d89f2e9cfda4a00927d6b356b9452a24ac3c8cc43d669c4f6129",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\": \\\"def run(payload):\\\\n    emit_allowed(payload)\\\", \\\"source\\\": \\\"family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a\\\"}\"}",
+  "wall_seconds": 6.855516898998758
+}

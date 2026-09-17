@@ -1,0 +1,588 @@
+{
+  "arms": [
+    "A0",
+    "A1",
+    "A2",
+    "A3",
+    "A4"
+  ],
+  "cases": [
+    {
+      "id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0",
+      "population": "legal",
+      "source_family": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e",
+      "split": "development"
+    },
+    {
+      "id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-1",
+      "population": "legal",
+      "source_family": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e",
+      "split": "development"
+    },
+    {
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-0",
+      "population": "legal",
+      "source_family": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+      "split": "development"
+    },
+    {
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769:case-1",
+      "population": "legal",
+      "source_family": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+      "split": "development"
+    },
+    {
+      "id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9:case-0",
+      "population": "legal",
+      "source_family": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "split": "calibration"
+    },
+    {
+      "id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9:case-1",
+      "population": "legal",
+      "source_family": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "split": "calibration"
+    },
+    {
+      "id": "family:be4f0eb4e4906cc6e5a6865e8714b7ba1653b1522b347b84deee7ba5957aa5d3:case-0",
+      "population": "legal",
+      "source_family": "family:be4f0eb4e4906cc6e5a6865e8714b7ba1653b1522b347b84deee7ba5957aa5d3",
+      "split": "final"
+    },
+    {
+      "id": "family:be4f0eb4e4906cc6e5a6865e8714b7ba1653b1522b347b84deee7ba5957aa5d3:case-1",
+      "population": "legal",
+      "source_family": "family:be4f0eb4e4906cc6e5a6865e8714b7ba1653b1522b347b84deee7ba5957aa5d3",
+      "split": "final"
+    },
+    {
+      "id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6:case-0",
+      "population": "legal",
+      "source_family": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "split": "final"
+    },
+    {
+      "id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6:case-1",
+      "population": "legal",
+      "source_family": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "split": "final"
+    },
+    {
+      "id": "family:aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c14fc:case-0",
+      "population": "legal",
+      "source_family": "family:aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c14fc",
+      "split": "final"
+    },
+    {
+      "id": "family:aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c14fc:case-1",
+      "population": "legal",
+      "source_family": "family:aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c14fc",
+      "split": "final"
+    },
+    {
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0",
+      "population": "cve",
+      "source_family": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "split": "development"
+    },
+    {
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-1",
+      "population": "cve",
+      "source_family": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "split": "development"
+    },
+    {
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-0",
+      "population": "cve",
+      "source_family": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "split": "development"
+    },
+    {
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd:case-1",
+      "population": "cve",
+      "source_family": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "split": "development"
+    },
+    {
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-0",
+      "population": "cve",
+      "source_family": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "split": "calibration"
+    },
+    {
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3:case-1",
+      "population": "cve",
+      "source_family": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "split": "calibration"
+    },
+    {
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-0",
+      "population": "cve",
+      "source_family": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "split": "calibration"
+    },
+    {
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4:case-1",
+      "population": "cve",
+      "source_family": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "split": "calibration"
+    },
+    {
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-0",
+      "population": "cve",
+      "source_family": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "split": "calibration"
+    },
+    {
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1:case-1",
+      "population": "cve",
+      "source_family": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "split": "calibration"
+    },
+    {
+      "id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-0",
+      "population": "cve",
+      "source_family": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "split": "final"
+    },
+    {
+      "id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a:case-1",
+      "population": "cve",
+      "source_family": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "split": "final"
+    },
+    {
+      "id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700:case-0",
+      "population": "cve",
+      "source_family": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "split": "final"
+    },
+    {
+      "id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700:case-1",
+      "population": "cve",
+      "source_family": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "split": "final"
+    },
+    {
+      "id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c:case-0",
+      "population": "cve",
+      "source_family": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "split": "final"
+    },
+    {
+      "id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c:case-1",
+      "population": "cve",
+      "source_family": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "split": "final"
+    },
+    {
+      "id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772:case-0",
+      "population": "cve",
+      "source_family": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "split": "final"
+    },
+    {
+      "id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772:case-1",
+      "population": "cve",
+      "source_family": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "split": "final"
+    },
+    {
+      "id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225:case-0",
+      "population": "cve",
+      "source_family": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "split": "final"
+    },
+    {
+      "id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225:case-1",
+      "population": "cve",
+      "source_family": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "split": "final"
+    },
+    {
+      "id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41:case-0",
+      "population": "cve",
+      "source_family": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "split": "final"
+    },
+    {
+      "id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41:case-1",
+      "population": "cve",
+      "source_family": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "split": "final"
+    },
+    {
+      "id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045:case-0",
+      "population": "cve",
+      "source_family": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "split": "final"
+    },
+    {
+      "id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045:case-1",
+      "population": "cve",
+      "source_family": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "split": "final"
+    },
+    {
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0",
+      "population": "skill",
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "split": "development"
+    },
+    {
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-1",
+      "population": "skill",
+      "source_family": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "split": "development"
+    },
+    {
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-0",
+      "population": "skill",
+      "source_family": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "split": "development"
+    },
+    {
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2:case-1",
+      "population": "skill",
+      "source_family": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "split": "development"
+    },
+    {
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-0",
+      "population": "skill",
+      "source_family": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "split": "calibration"
+    },
+    {
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39:case-1",
+      "population": "skill",
+      "source_family": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "split": "calibration"
+    },
+    {
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-0",
+      "population": "skill",
+      "source_family": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "split": "calibration"
+    },
+    {
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df:case-1",
+      "population": "skill",
+      "source_family": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "split": "calibration"
+    },
+    {
+      "id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6:case-0",
+      "population": "skill",
+      "source_family": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "split": "final"
+    },
+    {
+      "id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6:case-1",
+      "population": "skill",
+      "source_family": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "split": "final"
+    },
+    {
+      "id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a:case-0",
+      "population": "skill",
+      "source_family": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "split": "final"
+    },
+    {
+      "id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a:case-1",
+      "population": "skill",
+      "source_family": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "split": "final"
+    },
+    {
+      "id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1:case-0",
+      "population": "skill",
+      "source_family": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "split": "final"
+    },
+    {
+      "id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1:case-1",
+      "population": "skill",
+      "source_family": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "split": "final"
+    },
+    {
+      "id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b:case-0",
+      "population": "skill",
+      "source_family": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "split": "final"
+    },
+    {
+      "id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b:case-1",
+      "population": "skill",
+      "source_family": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "split": "final"
+    },
+    {
+      "id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c:case-0",
+      "population": "skill",
+      "source_family": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "split": "final"
+    },
+    {
+      "id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c:case-1",
+      "population": "skill",
+      "source_family": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "split": "final"
+    },
+    {
+      "id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2:case-0",
+      "population": "skill",
+      "source_family": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "split": "final"
+    },
+    {
+      "id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2:case-1",
+      "population": "skill",
+      "source_family": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "split": "final"
+    },
+    {
+      "id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd:case-0",
+      "population": "skill",
+      "source_family": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "split": "final"
+    },
+    {
+      "id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd:case-1",
+      "population": "skill",
+      "source_family": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "split": "final"
+    },
+    {
+      "id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd:case-0",
+      "population": "skill",
+      "source_family": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "split": "final"
+    },
+    {
+      "id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd:case-1",
+      "population": "skill",
+      "source_family": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "split": "final"
+    }
+  ],
+  "cohort_files": {
+    "cases": "papers/completion/law_to_action/benchmark/generated_code_study/cohort/cases.json",
+    "families": "papers/completion/law_to_action/benchmark/generated_code_study/cohort/families.json",
+    "sealed_final_oracles": "papers/completion/law_to_action/benchmark/generated_code_study/cohort/sealed_final_oracles.json"
+  },
+  "execution_profile": "source-relative-direct-calls-v1",
+  "families": [
+    {
+      "id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e",
+      "population": "legal",
+      "source_id": "legal:f962cec1b8688ceaaa5c807a331872abb09a616d0a193322396efdebcf5a434b",
+      "split": "development"
+    },
+    {
+      "id": "family:bda920695a33240af027ee820eef25e367b43634df6b41d1e13e504c52d68769",
+      "population": "legal",
+      "source_id": "legal:d2bdb013786c1838407969c3d700a86400809734a0d8093464ca6344e6ff45f4",
+      "split": "development"
+    },
+    {
+      "id": "family:afa49f58eafe672820fea1d0d56109fbb2f898a22ef68992de994f59677d12f9",
+      "population": "legal",
+      "source_id": "legal:a9f827dcb6ac8d2b974cc3f1dc03b787be2abc1d24a44db9de11fb1348932067",
+      "split": "calibration"
+    },
+    {
+      "id": "family:be4f0eb4e4906cc6e5a6865e8714b7ba1653b1522b347b84deee7ba5957aa5d3",
+      "population": "legal",
+      "source_id": "legal:34933a2b66f55fbf86f89d43b86b99b4615278509e90a0dcb1bb24e627b8af6d",
+      "split": "final"
+    },
+    {
+      "id": "family:86f5a4638e5104ade1d7b5cffdcd762f0ae283cef2b12be4eba577d05bdce1e6",
+      "population": "legal",
+      "source_id": "legal:4a7fb97d1b1dcb4885615261a0fab5904d74c73cbe8f004cbcad4ee93db0f9e7",
+      "split": "final"
+    },
+    {
+      "id": "family:aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c14fc",
+      "population": "legal",
+      "source_id": "legal:6d8355b21fc4d621f3f739300e28f8d6fc07961059d40dcf7271b98dfc43eb20",
+      "split": "final"
+    },
+    {
+      "id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0",
+      "population": "cve",
+      "source_id": "cve:0fe7b2f02155ad735986958ea1009442d732e22d7a9c3c1b64e525a3bc544a3c",
+      "split": "development"
+    },
+    {
+      "id": "family:c21d2be1f494f81418fd8c77c7822d7736124a3bb02561fe43adafb57ba65acd",
+      "population": "cve",
+      "source_id": "cve:c2bb354ec7ca6bc60d0a1eb6fb8b54fb696da308cfe52e566b228891750bffd2",
+      "split": "development"
+    },
+    {
+      "id": "family:87809fbe44c50aa630517de98d1e28b7aa273f3455044018de52bb1eb3899ab3",
+      "population": "cve",
+      "source_id": "cve:ac123e3f44e5b6e3af990220a1268934c1da272c4f234e79b8a7fadcdb456d68",
+      "split": "calibration"
+    },
+    {
+      "id": "family:ffe1f6ee2be20cf0a97681300bfb94a67114a67b8f9bc8aeeb51c7c196f93cc4",
+      "population": "cve",
+      "source_id": "cve:1b56fbc12eba93e7b2f1360e8041fffb83c23850db1bb219c351220adcb4a41b",
+      "split": "calibration"
+    },
+    {
+      "id": "family:f801ff29981b6ccd2dd4899330dcdfadcb21b2678b5afb5ea505ab919fc34da1",
+      "population": "cve",
+      "source_id": "cve:6e45328a82c301a621e600280e562caddf783de3c443a3b35b8da728627503db",
+      "split": "calibration"
+    },
+    {
+      "id": "family:2370f765432989bf05efd823080d2de2858b52bcab58dce32cbc8680fa948b6a",
+      "population": "cve",
+      "source_id": "cve:e75222b641593cebc53a5599255074d9570a80ecb187b451181a6fd0f4a4b480",
+      "split": "final"
+    },
+    {
+      "id": "family:77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700",
+      "population": "cve",
+      "source_id": "cve:f52170b3704bdfc14f6395e4d184d575150e728b2f30a017214c31207c0ca018",
+      "split": "final"
+    },
+    {
+      "id": "family:a8ac1bdf44167e65c75258014a97f8b668d43b7c438a29c9a5d936b6f358433c",
+      "population": "cve",
+      "source_id": "cve:ec7fdc63cc29807ce033bb60b5d952c35a52fee95a354dc289075fa4deba66ba",
+      "split": "final"
+    },
+    {
+      "id": "family:c5e65c072eb057cadd3aefc85e5041857cecb2dd770fc69fe32ea7b29a8f2772",
+      "population": "cve",
+      "source_id": "cve:8e4533a134ade42809c76d639dbb383981faeafc7108fc909909a44022146168",
+      "split": "final"
+    },
+    {
+      "id": "family:3497b693ed8ccfa00b3d2eadb59c655a01f90397daf9d90c6a24217e86cad225",
+      "population": "cve",
+      "source_id": "cve:f57fbc7f54e7e7801e0b75776c1a13a5971a3b3602483489f87601420b90e2b8",
+      "split": "final"
+    },
+    {
+      "id": "family:936cd048492ae7e426a68b10c909ff3dfff88f714130b9d711517f23a1175b41",
+      "population": "cve",
+      "source_id": "cve:029318a713d0c11c25104bface4afe68a2b689e2a33bde1e60944d907106bf79",
+      "split": "final"
+    },
+    {
+      "id": "family:33c144fa75db2abab72234c557a0d9108b9c59d18742843178646cf3d4150045",
+      "population": "cve",
+      "source_id": "cve:a44d7868eb1d7b67c1ae8edd5dc5827f9b9e6d628da6cd836c4c6f44346c9abc",
+      "split": "final"
+    },
+    {
+      "id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557",
+      "population": "skill",
+      "source_id": "skill:6f3b8cd2593e00637ce81732ba716b6f8b5df864e9794f4744f2bdd3fae3f201",
+      "split": "development"
+    },
+    {
+      "id": "family:beaebab85f467042d9425581b6fec1fcb67ca818667b5401c3de0537e2e11df2",
+      "population": "skill",
+      "source_id": "skill:53cee4093900dc2ef770ecf07cc5c373b55b118c1513e828cf4afffb0914eeb1",
+      "split": "development"
+    },
+    {
+      "id": "family:ca95e8064f7814051bc415b05c03ca72c8d95d24ed022128a177bf200c9bef39",
+      "population": "skill",
+      "source_id": "skill:2c46c223f1f16d7279c3b3921e1960238de9f8e5af90168745a8681752e9e79a",
+      "split": "calibration"
+    },
+    {
+      "id": "family:f269223604c5f69e1c8c9d2747c59dbb8717eae7a36bffd243db8e6f0cbab8df",
+      "population": "skill",
+      "source_id": "skill:dbaf1f05fbc5855ad6a18c44379be51b6d589eccbd54c7138c1924cab20f2046",
+      "split": "calibration"
+    },
+    {
+      "id": "family:63fa9f31f7cc964abfa2545c72353cb4c9b46b26c4c6004662ac572466c7ebc6",
+      "population": "skill",
+      "source_id": "skill:eb3a3b0da5be531e0fe081fd1dceb65a7c3b1686f509ef371257c292cbee056a",
+      "split": "final"
+    },
+    {
+      "id": "family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a",
+      "population": "skill",
+      "source_id": "skill:6802e36cfda4d2a6fdef78801712d8d15bcb0756ff46c0372b7953dd43b4232c",
+      "split": "final"
+    },
+    {
+      "id": "family:abc28ef8be357b09217607cb38744361dfcf7034718fc8e45ed696bd4ce614c1",
+      "population": "skill",
+      "source_id": "skill:49a671ea339ac06bfcf028f30c2ef59f216df1676cc534e8029fe71eb483f0a4",
+      "split": "final"
+    },
+    {
+      "id": "family:9c008076635b8f1b1d75ab37f195416cbb4e7d33fa722d662b3462b1fd7e7b3b",
+      "population": "skill",
+      "source_id": "skill:150adf900c6192b44e8dc7e9031e880b467951e9840bf1fe4044e9e06e3be63c",
+      "split": "final"
+    },
+    {
+      "id": "family:badb410e89bea30b3a6adea8f796b5d1a2a4503bc468cb2b8687e1deea4c8d2c",
+      "population": "skill",
+      "source_id": "skill:e2905377c44a3d328dc287c4c69b84e8c3be13a3e924551f7c7daa20b3064cb8",
+      "split": "final"
+    },
+    {
+      "id": "family:4a135fdb4d1cdfd077dfe1ffea6886c1ce58e353c58d53d5f9ab8d33a3bc12c2",
+      "population": "skill",
+      "source_id": "skill:69b9041c68a77cb1023c3265110198d32ee4aa8f7e15a2f7753f4b033e5217da",
+      "split": "final"
+    },
+    {
+      "id": "family:dadb9a44b945a4e4f80bd4f183f1beed9c21d8181282fe506a94fda20f94a2dd",
+      "population": "skill",
+      "source_id": "skill:0374c029f5e1978dd7130d16a575e634a054824ec6ad026536849bd3757654c1",
+      "split": "final"
+    },
+    {
+      "id": "family:d1cf8d46e1fab0bc3f4ff29b598c71771d3329affb7649b73931e0afeb1836bd",
+      "population": "skill",
+      "source_id": "skill:1a843422a9715aa73eeab84325eb571a377812302dac61454d60ae300c3b63ff",
+      "split": "final"
+    }
+  ],
+  "final_release_gate": false,
+  "freeze_sha256": "7822e0da434ec0e221b19a663e7ac0656b2f1af1c8f9a5911207e06afb048c8c",
+  "frozen_at": "2026-09-15T04:33:10.116662Z",
+  "independent_effect_oracle_frozen": true,
+  "la031_completed": false,
+  "mock": false,
+  "model_profile_sha256": "29c99ceb3d5d90a48fb053dcdbd46207d22c6c7aceb47fd191c7c5b83bbb62ef",
+  "permissive_availability_flag": false,
+  "prompt_profile_sha256": "6cae8a3c46cbd5a247cacc2b239b30967998defb269b1bfcd60f04b09a236485",
+  "qualification": {
+    "driver": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/driver.json",
+    "model": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/model.json",
+    "profile": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/profile.json",
+    "runtime": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/runtime.json",
+    "watchdog": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog.json"
+  },
+  "schedule_count": 900,
+  "schedule_identity_digest": "ea1e2a6957b76d45b4709f1725aca0a6a01e5be37723cd527630b478d148c853",
+  "schema": "la-closed-loop-study/v1",
+  "scientific_cells_executed": 0,
+  "scientific_execution_allowed": false,
+  "seeds": [
+    104729,
+    104759,
+    104761
+  ],
+  "split_salt": "vericodegen-2026-law-to-action-LA016-v1",
+  "status": "prospective_freeze_ready_unexecuted",
+  "task": "LA-032"
+}

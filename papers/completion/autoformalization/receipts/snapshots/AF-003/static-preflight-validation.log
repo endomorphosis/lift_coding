@@ -1,0 +1,9 @@
+Command: PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool papers/completion/autoformalization/evidence/source_audit_private.json; PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool papers/completion/autoformalization/evidence/runtime_capability_matrix.json; PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool papers/completion/autoformalization/config/environment_manifest.json
+Exit code: 0
+Result: all three AF-003 mutable outputs are valid JSON before immutable snapshotting.
+
+Command: PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -c "import importlib.util, importlib.metadata, shutil; ... sealed dependency/executable probe ..."
+Exit code: 0
+Result: numpy 1.26.4, requests 2.34.2, spacy 3.8.14, faiss-cpu 1.13.2, transformers 4.52.1, and openai 2.32.0 are installed; torch, lean_dojo, and ipfs_datasets_py are absent. Lean, Lake, Elan, CVC5, Z3, Vampire, E, Prover9, Coq, and Isabelle executables are absent.
+
+AF-003 static preflight validation: PASS. This log records static evidence validation only; it does not report an executable formalization, retrieval, training, solver, or native-checker success.

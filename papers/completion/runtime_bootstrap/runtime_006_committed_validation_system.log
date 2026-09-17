@@ -1,0 +1,26 @@
+
+test/api/test_agent_supervisor_nested_git_metadata.py::test_real_nested_linked_submodule_metadata_is_discovered PASSED [  5%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_uncommitted_declarations_and_unrelated_repos_are_not_mounts PASSED [ 10%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_declared_repository_without_committed_gitlink_is_not_a_mount PASSED [ 15%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_standard_absorbed_submodules_are_supported PASSED [ 20%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[submodule_symlink] PASSED [ 25%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[ancestor_symlink] PASSED [ 30%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[marker_symlink] PASSED [ 35%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[foreign_worktree] PASSED [ 40%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[home_directory] PASSED [ 45%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[fifo_commondir] PASSED [ 50%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_unsafe_initialized_metadata_is_rejected[fifo_gitfile] PASSED [ 55%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_uninitialized_declared_submodule_does_not_require_metadata PASSED [ 60%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_committed_unsafe_submodule_paths_are_rejected[../outside] PASSED [ 65%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_committed_unsafe_submodule_paths_are_rejected[/tmp/foreign-repository] PASSED [ 70%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_committed_unsafe_submodule_paths_are_rejected[.] PASSED [ 75%]
+test/api/test_agent_supervisor_nested_git_metadata.py::test_real_docker_git_status_requires_declared_linked_metadata PASSED [ 80%]
+test/api/test_agent_supervisor_coordination_commit_failure.py::test_failed_preparation_commit_propagates_and_rolls_back 
+-------------------------------- live log call ---------------------------------
+2026-09-11 17:28:13 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-barberb/pytest-2659/test_failed_preparation_commit0/coordination.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1177)
+PASSED                                                                   [ 85%]
+test/api/test_agent_supervisor_coordination_commit_failure.py::test_raw_and_fallback_commit_errors_are_not_suppressed[True] PASSED [ 90%]
+test/api/test_agent_supervisor_coordination_commit_failure.py::test_raw_and_fallback_commit_errors_are_not_suppressed[False] PASSED [ 95%]
+test/api/test_agent_supervisor_coordination_commit_failure.py::test_real_duckdb_commit_without_transaction_is_a_noop PASSED [100%]
+
+============================== 20 passed in 5.99s ==============================

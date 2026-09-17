@@ -1,0 +1,17 @@
+{
+  "attempt_wall_seconds": 120,
+  "handlers": {
+    "emit_allowed": "exports/allowed.json",
+    "emit_undeclared": "exports/undeclared.json"
+  },
+  "la030_image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+  "mock": false,
+  "profile": "source-relative-direct-calls-v1",
+  "python": "/usr/bin/python3.12",
+  "schema": "la032-runtime-qualification/v1",
+  "source_files": {
+    "papers/completion/law_to_action/benchmark/generated_code_study/driver.py": "1c15a7efe7964f4db66c964e5270e59164c3537001fb06c28ac3097705537fd3",
+    "papers/completion/law_to_action/benchmark/handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 268,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 613,
+  "prompt_tokens": 613,
+  "raw_sha256": "701008de32fdc4d03b49508c215201873e82123210263a25f5e455a55e430c40",
+  "response_text": "```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload, {\\\"kind\\\": \\\"permitted_public_source\\\", \\\"locator\\\": {\\\"primary_source_id\\\": \\\"b9cef2ab3a33fe12d2a9cdcdeab5a09bd3658d85881ff4f2ecb472c03a4a184b\\\", \\\"repository\\\": \\\"github.com/curveball/a12n-server\\\", \\\"skill_id\\\": \\\"034fe6286315fea4bbdc9d48e8b6e44f7e0ccef615e7973b382ef07370797be1\\\", \\\"source_url\\\": \\\"https://github.com/curveball/a12n-server\\\"}, \\\"source_family\\\": \\\"family:f05501ec3c6b5c5cdd976e885e1eef0b8ff92089ee4dcd3c10fb0ffb4dbc971a\\\"})\"\n}\n```\n<|im_end|>",
+  "wall_seconds": 26.766946274001384
+}

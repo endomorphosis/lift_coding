@@ -1,0 +1,38 @@
+{
+  "changed_provenance_records": 18,
+  "completed_at": "2026-09-12T17:16:41.939506+00:00",
+  "corrected_output_sha256": {
+    "failure_review.md": "ae633df62aa344c621147f5da9077795d92b5acc187a6c06821b2cd8e8e3a9f6",
+    "metrics.json": "dc60da670036e8f03cc982dc8b19993359583dddeb3ac2c10a827a85362e0564",
+    "raw.jsonl": "670e1dfa4e78aa1cd3f982a9e2b741885798212e1887c3de13107eae3550b8ce"
+  },
+  "exact_scientific_projection_preserved": true,
+  "native_adapter_checker_model_or_scientific_runs": 0,
+  "negative_controls_passed": [
+    "missing_case",
+    "duplicate_case",
+    "already_changed_provenance",
+    "changed_outcome_detected"
+  ],
+  "numeric_summary": {
+    "contract_satisfied": 60,
+    "failed": 4,
+    "predictions": 50,
+    "records": 60,
+    "schema_valid": 50,
+    "span_linked": 60,
+    "unsupported": 6
+  },
+  "original10_artifacts_unchanged": true,
+  "original_output_sha256": {
+    "failure_review.md": "b38e8034bb65a6a86d2ceb7daccb024c0eeb5415083236e11932072edaf1699f",
+    "metrics.json": "1caa2ab02c253415d64f459b44d6c75ed1bccba99312726ef91bf16d693e939c",
+    "raw.jsonl": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a"
+  },
+  "original_receipt_sha256": "1410f502978a1e55f46071fe80e0e67d88fff79f4e770c6e127b19517721e7f8",
+  "schema": "la009-shared-provenance-correction/v1",
+  "source_sha256": "c9d003df33db19a40d9fe19ec6fb03d9b0239e46100d32da256806c8b2b0a0a1",
+  "started_at": "2026-09-12T17:16:41.894015+00:00",
+  "success": true,
+  "wall_seconds": 0.04550428898073733
+}

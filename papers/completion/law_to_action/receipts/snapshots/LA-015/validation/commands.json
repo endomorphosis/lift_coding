@@ -1,0 +1,25 @@
+{
+  "run": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+      "run",
+      "--out",
+      "papers/completion/law_to_action/results/fixed_actions",
+      "--snapshot",
+      "papers/completion/law_to_action/receipts/snapshots/LA-015"
+    ],
+    "completed_at": "2026-09-12T17:29:22.490162Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T17:29:10.508338Z"
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-015/validate_fixed_actions.py"
+    ],
+    "completed_at": "2026-09-12T17:29:44.727550Z",
+    "exit_code": 0,
+    "started_at": "2026-09-12T17:29:44.681647Z"
+  }
+}

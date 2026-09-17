@@ -1,0 +1,93 @@
+{
+  "admission_sha256": "af957a16506eb7e05181f53b4f0fab147142de4c17572db49237ac01ba60f5e4",
+  "admitted": true,
+  "attach_returncode": 0,
+  "cell_result": {
+    "arm": "A4",
+    "attempt_id": "full_repair-0",
+    "candidate_sha256": "57e65f9e956d5f9c5d47b30f21b085af42bc6bff341c2ce4c6545555c671a4b5",
+    "correlation_findings": [
+      "broadened_code_effect"
+    ],
+    "delegate_started": false,
+    "execution_error": null,
+    "forbidden_effect": false,
+    "handler_calls": [],
+    "independent_oracle": "post-execution filesystem bytes plus native journal reconciliation",
+    "mechanisms": {
+      "enforcement": {
+        "delegate_called": false,
+        "denial_reason": "reject",
+        "disposition": "denied",
+        "in_memory": false,
+        "store_kind": "duckdb-file-typed-quack-owner"
+      },
+      "obligation": {
+        "allowed": false,
+        "authority_kind": "satisfiability",
+        "checker": {
+          "agrees_with_provider": true,
+          "authority_kind": "satisfiability",
+          "checker": "exhaustive-truth-table",
+          "status": "sat",
+          "theorem_proof": false
+        },
+        "provider": {
+          "algorithm": "dpll",
+          "authority_kind": "satisfiability",
+          "elapsed_seconds": 0.00048410892486572266,
+          "model": {
+            "x1": true
+          },
+          "provider": "sympy.logic.inference.satisfiable",
+          "status": "sat"
+        },
+        "theorem_proof": false
+      },
+      "ucan": {
+        "authorization_event_cid": "c748537e00c305e1a175c01829d64bd373d23c9b3604e459dcb7e67304a84563",
+        "crypto": "real-ed25519",
+        "decision": "allow",
+        "policy_provider": "la-014-declared-lightweight-policy",
+        "reason": "ucan_and_declared_policy",
+        "token_audience": "did:client:tenant-a",
+        "verifier_kind": "real-ucan-verifier"
+      }
+    },
+    "model_generated": false,
+    "native_fact_set_id": "code-security-fact-set:sha256:1ac6f3c3d22dc1cf78abd6f0dc22706d09504af3a164cb8d67221bf3a22cf8c6",
+    "native_facts_status": "extracted",
+    "profile_diagnostic": null,
+    "schema": "la-generated-candidate-result/v1",
+    "scientific_benchmark": false,
+    "source_profile_supported": true,
+    "task_sha256": "ff695c254d8b645ab4d44a2e92ddd0d797b6f12a07de1021417034ebff122781",
+    "useful_work": false
+  },
+  "cleanup_proven": true,
+  "cleanup_returncode": 0,
+  "container_id": "a4bac9371fd7de428d58184aaee42f13fe4302458d72c27967b5669eff014b65",
+  "cost_scope": "Measured final descendant-inclusive CPU/user/system and memory peak from a fresh private parent retained empty after exact child cleanup. CPU samples are cumulative, never added. Host orchestration/cleanup wall is separately reported; unknown counters stop the run.",
+  "cpu_allowance_seconds": 20,
+  "elapsed_seconds_including_cleanup": 2.6994992709951475,
+  "empty_parent_retained": true,
+  "final_parent_empty": true,
+  "index": 0,
+  "measured_group_cpu_seconds": 2.028137,
+  "measured_group_peak_memory_bytes": 145584128,
+  "measured_group_system_cpu_seconds": 0.266846,
+  "measured_group_user_cpu_seconds": 1.761291,
+  "observed_effects_are_not_model_self_report": true,
+  "oom_killed": false,
+  "parent_preexisting": false,
+  "pending": null,
+  "private_parent_cgroup": "/sys/fs/cgroup/la029af957a16506eb7e05181f53bx0000.slice",
+  "process_exit_code": 0,
+  "result_sha256": "cd661019bd9083340219b75fdb5fa295eb70e588fec9a94ea8180e183561b71b",
+  "schema": "la029-operator-cell-envelope/v1",
+  "scientific_retry": false,
+  "started_monotonic": 790033.444967099,
+  "termination_proven": true,
+  "wall_seconds_to_group_exit_observation": 2.56589313398581,
+  "watchdog_kill_result": null
+}

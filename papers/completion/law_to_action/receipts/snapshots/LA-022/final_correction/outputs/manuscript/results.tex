@@ -1,0 +1,60 @@
+% Results consumed from LA-029 admitted summary/cost/claim guidance, LA-009
+% source-contract metrics, and explicit scoped omissions. No invented cells.
+\section{Evaluation}
+\label{sec:eval}
+
+\subsection{Frozen protocol and automated evidence scope}
+\label{sec:eval-protocol}
+
+The predeclared fixed-action study uses 30 source-lineage families and 60 cases (six legal families, 12 CVE repository pairs, 12 SkillCenter families), split 6/6/18 into development, calibration, and final by source lineage \citep{cvefixes}. Each family contributes one policy-allowed and one policy-forbidden case. Five matched arms share the same candidate identifiers, arguments, and sandbox handler: unguarded execution (A0); inert prompt-text and retrieval-context labels as model-free equivalence controls (A1, A2); lightweight policy plus real Ed25519 UCAN verification (A3); and explicit \texttt{ENFORCE} with exact-context binding, a qualified QF\_BOOL SAT job, and file-backed DuckDB consumption (A4). Seeds $104729$, $104759$, and $104761$ yield a $60\times 5\times 3=900$-cell matrix. The independent unit is the lineage family. Allowed and forbidden labels are the frozen modeled policy and machine-checkable behavior contract, not real-world legality.
+
+Outside reviewers were not a run dependency. Expert legal applicability, exception fidelity, semantic accuracy, inter-annotator agreement, and legal validity were not collected and are not scored. Optional author reading, if it occurs later, is non-independent and is not human gold. Generated interpretations remain predictions. The LA-009 skill-validator comparison of $18/18$ is shared-producer conformance: the same Intent IR decoder and schema functions already invoked by the normalizer, not an independent checker.
+
+\subsection{Source-to-IR contracts}
+\label{sec:eval-source}
+
+Every frozen case has a retained prediction, failure, or unsupported record; cohorts were not changed after outcomes. Quoted source-span linkage held on $60/60$ cases. Parse or schema validity held on $50/60$. The scoped machine-contract coverage was $60/60$. Four CVE adapter errors and six skill-policy-blocked unsupported rows remain in the denominator accounting. CVE source-difference observation was $24/24$ under an independent behavior-contract producer; polarity remains unknown on all $24$ cases ($12$ pairs), and transfer to the \texttt{export\_json} handler is unsupported. Implementation agreement is not semantic accuracy. These measurements replace the original expert-reviewed legal-fidelity row, which is withdrawn as unmeasured (Table~\ref{tab:E1}).
+
+\subsection{Admitted protected-effect and useful-work results}
+\label{sec:eval-admitted}
+
+The primary empirical study is the LA-029 operator matrix: $900$ scientific cells, all resource-qualified, with independent filesystem-journal effect counters. Compact rows do not retain full per-cell proof or capability payloads; pinned executed mechanisms, effect counters, and the shared durable-store identity support the runtime observations. Implementation revision \texttt{ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c}. Model calls were $0$. Independent human gold is false. Two original false host admissions (schedule indices $459$ and $560$) remain labeled as such. Two container-startup recoveries at indices $591$ and $625$ were charged once after proof that science had not started; scientific retries were $0$. Host attempts total $902$. Measured descendant-inclusive group CPU was $1608.817478$ seconds, under the frozen $18{,}000$-second stop. Peak cell memory was $274812928$ bytes; maximum individual-cell wall-to-exit was $18.022665493073873$ seconds. The startup recoveries used prospective cumulative-active allowances: failed-startup plus recovered-run wall totaled $11.766052$ seconds at index $591$ and $19.793533$ seconds at index $625$. Separate operator pause gaps were not active runtime; these amendments do not claim an uninterrupted original absolute $20$-second interval.
+
+Table~\ref{tab:3} reports the admitted rates. On the held-out final split ($18$ families; $54$ forbidden-labelled and $54$ allowed-labelled attempts per arm), A4 observed $0/54$ policy-forbidden effects and completed $54/54$ allowed useful work with $0/54$ false denials. Across the full admitted matrix the same pattern holds: A4 $0/90$ forbidden effects and $90/90$ allowed useful work; A0--A2 $90/90$ forbidden effects on forbidden-labelled attempts; A3 $33/90$ forbidden effects. A1 and A2 match A0 (final-split paired family difference $0$, cluster-bootstrap $95\%$ interval $[0,0]$) and therefore remain instrumentation/equivalence controls, not prompt or retrieval efficacy. Final-split paired family differences in forbidden-effect rate are $-0.6666666666666666$ for A3 versus A0 (percentile $95\%$ $[-0.8888888888888888,-0.4444444444444444]$), $-1.0$ for A4 versus A0 ($[-1.0,-1.0]$), and $-0.3333333333333333$ for A4 versus A3 ($[-0.5555555555555556,-0.1111111111111111]$). A degenerate zero interval does not establish population-level absence or universal prevention.
+
+The handler under test accepts a declarative \texttt{export\_json} instruction. Independently observed effects are sandbox filesystem-journal events, not AST extraction from model-generated source. No scientific generative model was pinned.
+
+\begingroup
+\renewcommand{\thetable}{3}
+\begin{table}[t]
+\centering
+\caption{Admitted LA-029 fixed-action rates from independent effect counters. Forbidden-effect rate uses forbidden-labelled attempts; allowed-task success uses allowed-labelled attempts. Labels are the frozen modeled policy. Overall $n=90$ forbidden-labelled and $90$ allowed-labelled attempts per arm ($180$ decisions). Final $n=54+54$.}
+\label{tab:3}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Arm & Split & \shortstack{Forbidden\\effects} & \shortstack{Allowed useful\\work} & False denials \\
+\midrule
+A0 unguarded & overall & $90/90$ & $90/90$ & $0/90$ \\
+A1 prompt label & overall & $90/90$ & $90/90$ & $0/90$ \\
+A2 retrieval label & overall & $90/90$ & $90/90$ & $0/90$ \\
+A3 policy+UCAN & overall & $33/90$ & $90/90$ & $0/90$ \\
+A4 \texttt{ENFORCE} & overall & $0/90$ & $90/90$ & $0/90$ \\
+\midrule
+A0 unguarded & final & $54/54$ & $54/54$ & $0/54$ \\
+A3 policy+UCAN & final & $18/54$ & $54/54$ & $0/54$ \\
+A4 \texttt{ENFORCE} & final & $0/54$ & $54/54$ & $0/54$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\endgroup
+
+\subsection{Negative results and scoped omissions}
+\label{sec:eval-negative}
+
+A3 is not equivalent to A4. The $33$ A3 leaks (decision \texttt{allow}, observed forbidden effect) concentrate on \texttt{wrong\_date\_or\_jurisdiction} ($9$), \texttt{forged\_receipt} ($6$), \texttt{replay} ($6$), \texttt{changed\_root\_clock\_or\_environment} ($6$), and \texttt{undeclared\_handler\_effect} ($6$). On the final split the residual classes are replay, changed root/clock/environment, and wrong date/jurisdiction ($6$ each). A4 denied those identities. SAT/UNSAT on the selected QF\_BOOL route has satisfiability authority only; it cannot authorize a \texttt{theorem\_proof} allow. Z3, cvc5, Vampire, E, Lean, Coq/Rocq, Isabelle, and QF\_LIA interpolation were absent from the sealed validation path and are not assigned invented results.
+
+Closed-loop generated-code planning (protocol RQ3) is explicitly withdrawn: $900/900$ scheduled cells were \texttt{not\_started}, model calls $0$, generated programs $0$. Unstarted zeros are accounting, not measured agent failure. Results are not pooled with the fixed-action matrix.
+
+The original LA-015 compact log and its rescue remain protocol-unadmitted diagnostics; they are not headline admitted rates. LA-017 paired mechanism ablations and LA-016/LA-017 comparison wording are protocol-unadmitted diagnostic evidence and do not establish admitted model efficacy. LA-018 cold/warm/stale timings are a development A4 instrumentation study ($n=12$ per condition; cold mean end-to-end wall $0.012326$\,s, warm $0.006635$\,s, stale-root and stale-clock $0.00322$\,s with $12/12$ stale-evidence flags; model tokens unobserved; no price conversion) and are not a $900$-cell rescore. LA-020 twelve-step traces are separate diagnostic replays of frozen A4 identities, not additional scored cells. Qualification suites for mediation, DuckDB consumption, and local stdio/HTTP/libp2p parity passed their selected-claim cases and remain qualification, not scored arm rates. Wide-area publication and an IPFS daemon were not available.
+
+Admitted rates are taken from \texttt{results/fixed\_actions\_admitted/summary.json} together with the matching cost report and claim guidance. LA-019 generated tables and figures analyze the historical unadmitted log and are not substituted for that admitted summary.

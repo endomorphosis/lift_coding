@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 429,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 1056,
+  "prompt_tokens": 1056,
+  "raw_sha256": "ad4736e7ab606f0f3843ea7de0eafaad84759be9305f62de9d2deb255f3ad264",
+  "response_text": "```json\n{\n  \"program\": \"async function run(payload) {\\n  // CVE-2024-29900: Electron Packager bundles Electron-based application source code with a renamed Electron executable and supporting files into folders ready for distribution.\\n  // A random segment of ~1-10kb of Node.js heap memory allocated either side of a known buffer will be leaked into the final executable.\\n  // This memory could contain sensitive information such as environment variables, se\\n  \\n  // The vulnerability is in the TypeScript source code of electron/packager\\n  // We need to emit the source-relative JSON record through emit_allowed\\n  \\n  // Since the source family is electron/packager and the CVE is about memory leaks\\n  // during packaging, we should emit the allowed handler with the payload\\n  \\n  // The memory leak occurs when packaging Electron apps with a random segment of\\n  // Node.js heap memory allocated either side of a known buffer. This could expose\\n  // sensitive data like environment variables.\\n  \\n  // We emit the allowed handler with the relevant data\\n  emit_allowed({\\n    \\\"cve_id\\\": \\\"CVE-2024-29900\\\",\\n    \\\"description\\\": \\\"Electron Packager bundles Electron-based application source code with a renamed Electron executable and supporting files into folders ready for distribution. A random segment of ~1-10kb of Node.js heap memory allocated either side of a known buffer will be leaked into the final executable. This memory could contain sensitive information such as environment variables, se\\\",\\n    \\\"source_repository\\\": \\\"github.com/electron/packager\\\",\\n    \\\"source_language\\\": \\\"TypeScript\\\",\\n    \\\"vulnerability_type\\\": \\\"Memory Leak / Sensitive Data Exposure\\\",\\n    \\\"affected_component\\\": \\\"Electron Packager\\\",\\n    \\\"severity\\\": \\\"High\\\"\\n  })\\n}\"\n}\n```<|im_end|>",
+  "wall_seconds": 42.707170584006235
+}

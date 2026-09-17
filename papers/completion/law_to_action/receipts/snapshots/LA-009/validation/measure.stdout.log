@@ -1,0 +1,24 @@
+{
+  "case_accounting": {
+    "denominator": 60,
+    "every_frozen_case_recorded": true,
+    "failed": 4,
+    "missing": 0,
+    "prediction": 50,
+    "records": 60,
+    "unavailable": 0,
+    "unsupported": 6
+  },
+  "cases": 60,
+  "cohorts_changed_after_outcomes": false,
+  "metrics_sha256": "bd15e8421cce239773020354c228c3f3a665e8dfc711b6daf30f46adebfdff96",
+  "raw_sha256": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+  "task": "LA-009",
+  "withdrawn_unmeasured": [
+    "expert_legal_fidelity",
+    "inter_annotator_agreement",
+    "independent_human_validation",
+    "legal_applicability_or_validity_in_the_world",
+    "semantic_accuracy_from_implementation_agreement"
+  ]
+}

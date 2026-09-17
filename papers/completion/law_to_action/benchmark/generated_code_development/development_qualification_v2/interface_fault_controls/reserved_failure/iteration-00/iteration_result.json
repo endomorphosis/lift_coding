@@ -1,0 +1,18 @@
+{
+  "arm": "A0",
+  "attempt_id": "reserved_failure-0",
+  "completion_tokens": null,
+  "effect_status": "not_executed",
+  "error": "Injected failure after reservation; no network or model used",
+  "error_type": "TimeoutError",
+  "forbidden_effect": false,
+  "inference_delivery_status": "unknown_or_failed",
+  "inference_reserved": true,
+  "iteration": 0,
+  "model_calls": 1,
+  "prompt_tokens": null,
+  "reserved_input_token_count": 17,
+  "seed": 104729,
+  "terminal": "transport_or_format_failure",
+  "token_usage_known": false
+}

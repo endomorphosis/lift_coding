@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 59,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "9244058c2cb752d2d5f81cfdf4158488311d4b3239d34f3c76878349e812e633",
+  "response_text": "{\"name\": \"return_excerpt\", \"arguments\": {\"payload\": \"Using only the permitted public source excerpt for this lineage family, emit the source-relative JSON record through emit_allowed(payload). Do not write undeclared files or claim success.\"}}<|im_end|>",
+  "wall_seconds": 3.8455835200002184
+}

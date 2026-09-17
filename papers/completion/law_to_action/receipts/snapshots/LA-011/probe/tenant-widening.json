@@ -1,0 +1,5 @@
+{
+  "tenant-a/* covers tenant-a/x": true,
+  "tenant-a/* covers tenant-ab": false,
+  "tenant-a/* covers tenant-ab/x": false
+}

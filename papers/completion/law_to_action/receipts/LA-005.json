@@ -1,0 +1,116 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-005",
+  "status": "complete",
+  "completed_at": "2026-09-11T23:19:25.903910+00:00",
+  "completion_mode": "Annotation packets prepared from pinned USCODE-2024 section text with explicit unknown applicability. Independent human legal expert review was not obtained; claims are narrowed and evaluation admission remains blocked. Generated labels are not expert review.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/build_legal_gold.py": "99fdc3fa17d869fe0c9003852fb9cb71961e774abb188a4943bf726f73552e4f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal.jsonl": "964be42468c82e04d77b37a90fbab66f5be82f899e54ada60ff403072323dd1b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_guidelines.md": "9e7eb3fb043b7c528e29b222c43664ab1f907445b0366a6601d1aebc3d36f4b7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_review_report.md": "b3655fc752b37ddd9b05b475aad5177648f1d010a459eecde93b5ea6fe334cd8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/review_status.json": "f373dd2a28b5be96189a09de618cde0e4e69812cacde994ea3fc2cc9ea88a0ca",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/validate_legal_annotations.py": "84e2269829139a1634dfa76ece2d6cb86e91ca19265ca2833df1b8c59ac8008e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/build_legal_gold.stdout.log": "7a5a2dcd0ed90df7ff95b1e50cf45c39292654619dc787531f8f22c0aa626bd9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/validate_legal_annotations.stdout.log": "cee91d9b042663c53ca12d2028b084cd6b1cdfcaf8cace8a38bd3a6f4e768bc9"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/annotations/legal.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal.jsonl",
+    "papers/completion/law_to_action/benchmark/annotations/legal_guidelines.md": "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_guidelines.md",
+    "papers/completion/law_to_action/benchmark/annotations/legal_review_report.md": "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_review_report.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Every held-out label has source spans, annotator/review provenance and applicability assumptions.",
+      "status": "met",
+      "explanation": "All eight calibration/final held-out records, and the four development records, include unique quoted source spans with offsets and SHA-256 values, packet-preparer annotator provenance, independent-review provenance set to not_obtained, and explicit applicability assumptions. Review provenance documents missing expert review rather than omitting it.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_guidelines.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_review_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/review_status.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/validate_legal_annotations.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validate_legal_annotations.py"
+      ]
+    },
+    {
+      "criterion": "Ambiguous/unsupported cases have explicit unknown labels rather than silently forced permission or denial.",
+      "status": "met",
+      "explanation": "Every applicability label is unknown, including omitted-exception, wrong-date/jurisdiction, unsupported-construct, and no-applicable-record probes. forced_permission_or_denial is false. Unsupported incorporated regulations and Librarian class rulemaking are retained as unsupported constructs rather than compiled into allow or deny.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_guidelines.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_review_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/review_status.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/validate_legal_annotations.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validate_legal_annotations.py"
+      ]
+    },
+    {
+      "criterion": "Agreement/disagreement and final adjudication are documented; missing expert review narrows claims and is visibly unresolved.",
+      "status": "met",
+      "explanation": "The review report and every JSONL record document zero independent expert reviews, agreement as not applicable, an empty disagreement list, null final adjudication, and adjudication status unresolved_missing_expert_review. Claims are limited to span-grounded packet preparation. Evaluation admission is blocked until a competent independent human legal reviewer is obtained. Generated labels are not represented as expert review.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_review_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/outputs/benchmark/annotations/legal_guidelines.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/review_status.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/validate_legal_annotations.stdout.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validate_legal_annotations.py"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/build_legal_gold.py",
+        "--text-dir",
+        "/tmp/asref-grok-home-bpygth4s/la005-cache/text",
+        "--output",
+        "papers/completion/law_to_action/benchmark/annotations/legal.jsonl"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-11T23:18:22+00:00",
+      "completed_at": "2026-09-11T23:18:22.945019+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/build_legal_gold.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-005/build_legal_gold.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-005/validate_legal_annotations.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-11T23:19:25.865815+00:00",
+      "completed_at": "2026-09-11T23:19:25.902430+00:00",
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-005/validation/validate_legal_annotations.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-005/validate_legal_annotations.py"
+    }
+  ],
+  "source_versions": {
+    "repository_tree_id": "5c04968260561afc3b83ea69db4a65fecb069846",
+    "python": "/usr/bin/python3.12 (Python 3.12.3)",
+    "pdftotext": "24.02.0",
+    "legal_edition": "GovInfo USCODE-2024 six distinct legal section documents frozen by LA-004",
+    "text_extraction": "pdftotext -raw UTF-8; whitespace collapsed with re.sub(r'\\\\s+', ' ', text)",
+    "la004_frozen_manifest_sha256": "da9126276cf6fd1e6e2c427f67ad7f531bb489193ebf8d709d0d01dbc24d9757",
+    "la004_frozen_split_sha256": "d710ed9ed60d9e556b0d93efc0d486418404d5ab86f71a6914fba4ca49218ce3",
+    "packet_preparer": "la005-packet-preparer-implementation-worker",
+    "independent_human_legal_review": "not_obtained",
+    "source_cache_location": "Private retrieval cache used only to extract quoted spans; PDF bodies remain retrieval_only and are not paper outputs."
+  },
+  "claim_limitations": [
+    "Independent human legal expert review was not obtained. These packets are not expert gold.",
+    "Generated and worker-prepared labels are not expert review.",
+    "All applicability labels are unknown; no allow/deny oracle is admitted.",
+    "Evaluation admission for legal cases remains blocked until competent independent review and adjudication.",
+    "Quoted spans ground atom presence in USCODE-2024 text; they do not certify legal conclusions, case-law gloss, or implementing regulations.",
+    "Six U.S. Code sections are not worldwide legal coverage.",
+    "The structural validator is provenance checking, not scientific or legal peer review.",
+    "The operator-protected checkpoint directory was not writable in this environment; no coordinate checkpoint was stored there."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "neurosymbolic-supervision/capability-inventory@1",
+  "task_id": "NS-002",
+  "observed_at": "2026-09-11T16:45:51Z",
+  "environment": {"interpreter": "/usr/bin/python3.12", "python_version": "3.12.3", "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin", "home_profile": "fresh validation-style HOME", "pythonpath_for_source_probe": ["external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit"]},
+  "dependencies": {"pytest": "8.1.1", "jsonschema": "4.10.3", "anyio": "not-installed", "z3-solver": "not-installed", "cvc5": "not-installed", "pysmt": "not-installed", "multiformats": "not-installed", "nltk": "not-installed", "beartype": "not-installed", "symbolicai": "not-installed"},
+  "native_binaries": [
+    {"name": "z3", "available": false}, {"name": "cvc5", "available": false}, {"name": "lean", "available": false}, {"name": "lake", "available": false}, {"name": "coqc", "available": false}, {"name": "souffle", "available": false}
+  ],
+  "capabilities": [
+    {"id": "formal_assurance_cegis", "kind": "Python module", "availability": "available_for_import", "evidence": "loaded __file__ in source_forest.json", "operational_claim": "No: importability is not a live repair or promotion receipt."},
+    {"id": "ipa_abstract_interpreter", "kind": "Python module", "availability": "available_for_import", "evidence": "loaded __file__ in source_forest.json", "operational_claim": "No: static import does not establish analysis on a target program."},
+    {"id": "semantic_state", "kind": "Python module", "availability": "blocked", "reason": "anyio is absent in the authoritative-style environment", "operational_claim": "No; this optional provider surface does not block provenance or static-module work."},
+    {"id": "incremental_proof_sealer", "kind": "Python module", "availability": "blocked", "reason": "required ipfs_datasets_py.logic.zkp.incremental_sealing module is absent", "operational_claim": "No; raw historical summary remains inspectable but execution is not established."},
+    {"id": "native_provers", "kind": "external binaries", "availability": "unavailable", "reason": "z3, cvc5, lean, lake, coqc, and souffle are absent from authoritative PATH", "operational_claim": "No live prover timing or proof execution is claimed."}
+  ],
+  "dependency_declarations": [
+    {"path": "external/ipfs_accelerate/requirements-proof-reuse.txt", "sha256": "4809b7012f515cfaea30140a117c86e47ada29f96fff9045eff57e390cf2fc8b", "note": "declaration, not proof of installation"},
+    {"path": "external/ipfs_datasets/requirements-theorem-provers.txt", "sha256": "cb22dd5328bca48746c0747e2580a19b1a8602ed008875ad11c0eb650df825b9", "note": "declares optional bindings and lazy native installation; neither is treated as operational"}
+  ]
+}

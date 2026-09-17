@@ -1,0 +1,30 @@
+{
+  "verified_at": "2026-09-11T17:13:39.703806+00:00",
+  "verifier_sha256": "0dc1aced74cf4eca1be42d9aa3b7f5d080b857a5744ad50a21e66af7fddb8592",
+  "result": {
+    "task": "LA-003",
+    "artifact_integrity_valid": true,
+    "current_outputs_checked": true,
+    "completed_at": "2026-09-11T17:13:39.695488+00:00",
+    "outputs": {
+      "papers/completion/law_to_action/benchmark/protocol.md": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md",
+      "papers/completion/law_to_action/benchmark/protocol.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json",
+      "papers/completion/law_to_action/benchmark/resource_plan.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json"
+    },
+    "artifacts": {
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json": "ebd521039ed25e6d6e7d5a724879a0bd676089d15c54e6384d42f4290ae4d607",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/protocol.json": "de8863191437800858415d66ef46707682e149d25b8af57f22e3cee52b4afad3",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/protocol.md": "df9dba9b048eafa59a7ac9b1ae842a78cd8910dc931f98b5f7a7dce42cae0c98",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/resource_plan.json": "668abadfdad659d74c0841cd83c1c031c8a2bf4882fcb0934427135db8dae521",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/failed-attempt-checkpoint.json": "c54b7ab43c06a917100c38609dd7b8af0e543dd9b937a142652e74521e19f9cb",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/implementation.patch": "97d49f3b5a7eb82a3712a1f9b4b4f6ac76c1de8c58b2958dc617067dc4101db8",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/receipts/LA-003.json": "efa341eef2ef2b4d1c0a615f275519335629c0880a318609283de940553a2beb",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json": "ce9bb855d4eab9060999afc060db2ba00154ce570500d0821b36bd5eb6582feb",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md": "85facc4169320db9a5c0a0f3aab231a532cf2a376f06907df85867a33cabb5fe",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json": "4c5b5d2a857179bc363eaffc5565f84ae5436e75aa1c22f8d89b38b967092465",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py": "c7835d27db09d7e6fde437bce7a28a36314309d8490928a9fc0dd0791496b4b6",
+      "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log": "1a40bd5bb2c4e43c29551ca046eedfcf6c2f58bd5eaef3a78b7a3b93ac8a8bf3"
+    },
+    "limitation": "Recorded evidence is checked; this is not independent scientific replication."
+  }
+}

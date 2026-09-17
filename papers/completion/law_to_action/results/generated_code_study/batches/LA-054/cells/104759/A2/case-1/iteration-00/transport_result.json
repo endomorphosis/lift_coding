@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 113,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "6bb155f4250c9e4e2fd77fa6d60be8d16760c9efd5007ab2185691b33c25dd95",
+  "response_text": "```json\n{\n  \"program\": \"run(payload) { payload.emit_allowed('CVE-2024-29900', 'Electron Packager bundles Electron-based application source code with a renamed Electron executable and supporting files into folders ready for distribution. A random segment of ~1-10kb of Node.js heap memory allocated either side of a known buffer will be leaked into the final executable. This memory _could_ contain sensitive information such as environment variables, se\\\");\"\n}\n```<|im_end|>",
+  "wall_seconds": 11.634858456003712
+}

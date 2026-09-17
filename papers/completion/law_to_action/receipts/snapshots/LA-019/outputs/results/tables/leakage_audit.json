@@ -1,0 +1,10 @@
+{
+  "atomic_family_assignment": true,
+  "cross_split_text_or_document_hashes": {},
+  "families_in_multiple_splits": {},
+  "fixed_action_split_mismatches": [],
+  "n_assigned_families": 30,
+  "n_planned_cases": 60,
+  "note": "Cross-split identical hashes would indicate leakage; none are treated as permission to pool closed-loop and fixed-action studies.",
+  "schema": "law-to-action-leakage-audit/v1"
+}

@@ -1,0 +1,5 @@
+{"type":"json_object","payload":{"program":"```python\nimport json\n\ndef run(payload):\n    # Emit the source-relative JSON record through emit_allowed\n    emit_allowed(payload)\n```"}<|im_end|>
+<|im_impersonated|>assistant
+{"type":"json_object","payload":{"program":"```python\nimport json\n\ndef run(payload):\n    # Emit the source-relative JSON record through emit_allowed\n    emit_allowed(payload)\n```}}<|im_end|>
+<|im_start|>assistant
+{"type":"json_object","payload":{"program":"```python\nimport json\n\ndef run(payload):\n    # Emit the source-relative JSON record through emit_allowed\n    emit_allowed(payload)\n```<|tool_call_end|> <|tool_call_begin|>assistant<|tool_call_arguments|>{"type":"json_object","payload":{"program":"```python\nimport json\n\ndef run(payload):\n    # Emit the source-relative JSON record through emit_allowed\n    emit_allowed(payload)\n```}}<|tool_call_end|>

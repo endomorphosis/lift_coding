@@ -1,0 +1,45 @@
+{
+  "schema": "la027-saved-admission-cli-qualification/v1",
+  "executed": true,
+  "scope": "Actual standard-library CLI execution over copied source and metadata only; no source bodies, native runtime, handler, provider or scorer execution.",
+  "test_count": 11,
+  "cli_invocations": 20,
+  "direct_analysis_controls": 3,
+  "all_passed": true,
+  "command": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "-B",
+      "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/test_saved_automated_admission.py"
+    ],
+    "cwd": ".",
+    "exit_code": 0,
+    "started_at": "2026-09-12T15:52:42.754116+00:00",
+    "finished_at": "2026-09-12T15:52:43.985896+00:00",
+    "log": "papers/completion/law_to_action/results/automated_scope_qualification/stale_admission_correction_v1/cli_validation.log"
+  },
+  "historical_defect_reproduced": [
+    {
+      "command": "admit-final",
+      "exit_code": 0,
+      "stale_profile_accepted": true,
+      "scored": false
+    },
+    {
+      "command": "analyze",
+      "exit_code": 0,
+      "stale_profile_accepted": true,
+      "scored": false
+    }
+  ],
+  "source_sha256": {
+    "automated_evidence.py": "7ced94a508638cf4fd7c67357c3a14cbded1283c67046c3b6af40887049a3757",
+    "qualify_final_runtime.py": "82dc0a54c039f083140df169be287d440a7a18ae4d623bf04e0e23c761a6cf7b"
+  },
+  "test_sha256": "b1d528dfaa20087f7e684919955a9617902cc76fea0ebf4cde5580c707b7ca20",
+  "log_sha256": "c16fe6a7a5696121cec7dc0ed845cd3644825067dd4e073bad9c42b528a9999b",
+  "native_runtime_calls": 0,
+  "provider_calls": 0,
+  "scorer_calls": 0,
+  "old_receipt_and_original_snapshots_modified": false
+}

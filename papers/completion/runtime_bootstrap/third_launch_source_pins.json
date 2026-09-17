@@ -1,0 +1,18 @@
+{
+  "schema": "paper-third-launch-source-pins/v1",
+  "created_at": "2026-09-11T15:56:36.923740+00:00",
+  "lanes": {
+    "autoformalization": {
+      "parent_commit": "d549c97306ec9219e0c97c6d7cb36b39b86ddae7",
+      "accelerator_commit": "448451025e4583b520fc8c389b9152f9f9d7a969"
+    },
+    "law_to_action": {
+      "parent_commit": "b890001f52364d00681552a69ea68efb740cf455",
+      "accelerator_commit": "1e2f6779587478158917e9ee3e4921eb584a20c0"
+    },
+    "neurosymbolic_supervision": {
+      "parent_commit": "a5c99869b35dad2e521143f724a97a46fe4896ad",
+      "accelerator_commit": "085f341a39ff239764504892b92e4b79c903a842"
+    }
+  }
+}

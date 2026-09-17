@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 99,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 254,
+  "prompt_tokens": 254,
+  "raw_sha256": "b00f2de909fc408bef9e258751914827a722286f96f0aca798cf2e12b6c3ef16",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    if 'source' in payload:\\\\n        return emit_allowed(payload)\\\"}\",\"valid\":true} <|im_end|>\n<|im_start|>assistant\n{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    if 'source' in payload:\\\\n        return emit_allowed(payload)\\\"}\",\"valid\":true} <|im_end|",
+  "wall_seconds": 8.145833939008298
+}

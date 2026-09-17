@@ -1,0 +1,14 @@
+{
+  "actual_container_executions": 0,
+  "actual_model_calls": 0,
+  "benchmark_evidence": false,
+  "controls": [
+    "reservation_survives_transport_failure",
+    "unknown_tokens_remain_unknown",
+    "infrastructure_failure_has_unknown_effect",
+    "unqualified_scientific_transport_refused"
+  ],
+  "schema": "la-closed-loop-interface-fault-qualification/v1",
+  "simulated_reserved_call_count": 1,
+  "status": "PASS"
+}

@@ -1,0 +1,35 @@
+{
+  "acceptance_criteria": [
+    "One authorized operation produces expected observed effects and a rejected operation produces none.",
+    "Reject-all policy is detected by allowed-work metrics.",
+    "Harness supports deterministic replay, actual exit statuses/timeouts, unique run IDs and raw trace retention.",
+    "Harness smoke checks verify measurement correctness without treating fixtures as empirical benchmark results."
+  ],
+  "deliverables": [
+    "papers/completion/law_to_action/benchmark/run.py",
+    "papers/completion/law_to_action/benchmark/handlers/",
+    "papers/completion/law_to_action/benchmark/cases/schema.json",
+    "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py"
+  ],
+  "depends_on": [
+    "LA-003"
+  ],
+  "description": "Build the benchmark runner and bounded export/code-generation handlers. Record actual delegate/effect counts, arguments, actor/audience, code/handler effects, roots, grants and observed postconditions. Keep independently extracted code effects separate from agent-declared intent. Enumerate legal/CVE/skill/token/proof/replay/context-mutation cases from the protocol. Persist append-only case-level records with explicit fixture/solver/crypto/storage/network/model labels.",
+  "id": "LA-008",
+  "implementation_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/cve_security_gate.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ir_constraint_compiler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/execution_permit.py"
+  ],
+  "paper_evidence": [
+    "p5 \u00a74.1 lines 172\u2013187; p8 \u00a77 lines 298\u2013325; p16 E.2 lines 525\u2013529"
+  ],
+  "priority": "P0",
+  "subgoal_id": "LA-G4",
+  "suggested_code_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/cve_security_gate.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ir_constraint_compiler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/execution_permit.py"
+  ],
+  "title": "Implement a reproducible sandbox harness with observed generated-code effects"
+}

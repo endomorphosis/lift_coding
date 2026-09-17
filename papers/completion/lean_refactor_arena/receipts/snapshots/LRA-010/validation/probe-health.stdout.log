@@ -1,0 +1,9 @@
+{
+  "alias_ok": false,
+  "alias_url": "http://127.0.0.1:8080/health",
+  "autostart": "0",
+  "error": "URLError: <urlopen error [Errno 111] Connection refused>",
+  "ok": true,
+  "status_code": 200,
+  "url": "http://172.17.0.1:8080/health"
+}

@@ -1,0 +1,1 @@
+{"name": "return_excerpt", "arguments": {"payload": "Using only the permitted public source excerpt for this lineage family, emit the source-relative JSON record through emit_allowed(payload). Do not write undeclared files or claim success."}}<|im_end|>

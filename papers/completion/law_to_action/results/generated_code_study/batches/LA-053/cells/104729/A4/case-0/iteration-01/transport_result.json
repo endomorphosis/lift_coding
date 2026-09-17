@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 88,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 725,
+  "prompt_tokens": 725,
+  "raw_sha256": "159f65a7960362350f2ac63f35582b08c274265fb0c9029c13c94c3f88158ebe",
+  "response_text": "```json\n{\n  \"program\": \"Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang. Vela pipelines can use variable substitution combined with insensitive fields like `parameters`, `image` and `entrypoint` to inject secrets into a plugin/image and \u2014 by using common substitution string manipulation \u2014 can bypass log masking and expose secrets without the\"\n}\n```<|im_end|>",
+  "wall_seconds": 11.305599383995286
+}

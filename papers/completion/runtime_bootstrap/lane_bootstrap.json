@@ -1,0 +1,144 @@
+{
+  "schema": "vericodegen-independent-lane-bootstrap/v1",
+  "started_at": "2026-09-11T15:03:48.634216+00:00",
+  "campaign_base": "9745577bda2428bb7153e0910a19037b494c6d6c",
+  "source_snapshot": "papers/completion/runtime_bootstrap/lane_source_snapshot.json",
+  "lanes": [
+    {
+      "paper_id": "autoformalization",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+      "branch": "agent/vericodegen-2026-autoformalization",
+      "dependencies": {
+        "external/ipfs_accelerate": {
+          "initial_head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_accelerate",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate",
+          "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "nested_submodules_initialized": false,
+          "runtime_commit": "14d988826326c060d98871e655c8125fc92e2d82",
+          "runtime_tree": "8ce80702be4c4b54f11fe88e0fb4dd7ba9e39044",
+          "final_head": "14d988826326c060d98871e655c8125fc92e2d82",
+          "status": ""
+        },
+        "external/ipfs_datasets": {
+          "initial_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_datasets",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_datasets",
+          "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "nested_submodules_initialized": false,
+          "final_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "status": ""
+        },
+        "external/ipfs_kit": {
+          "initial_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_kit",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_kit",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_kit",
+          "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+          "nested_submodules_initialized": false,
+          "final_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "status": ""
+        }
+      },
+      "parent_commit": "bd0daf73a9d94f6b4c2467ffea89ea40dedf48a8",
+      "parent_status": ""
+    },
+    {
+      "paper_id": "law_to_action",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+      "branch": "agent/vericodegen-2026-law_to_action",
+      "dependencies": {
+        "external/ipfs_accelerate": {
+          "initial_head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_accelerate",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_accelerate",
+          "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "nested_submodules_initialized": false,
+          "runtime_commit": "d5eef39f0c98208fe4886efdf427dcabd2800379",
+          "runtime_tree": "8ce80702be4c4b54f11fe88e0fb4dd7ba9e39044",
+          "final_head": "d5eef39f0c98208fe4886efdf427dcabd2800379",
+          "status": ""
+        },
+        "external/ipfs_datasets": {
+          "initial_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_datasets",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_datasets",
+          "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "nested_submodules_initialized": false,
+          "final_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "status": ""
+        },
+        "external/ipfs_kit": {
+          "initial_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_kit",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_kit",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_kit",
+          "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+          "nested_submodules_initialized": false,
+          "final_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "status": ""
+        }
+      },
+      "parent_commit": "e19dd9ddbe65ee702a00717924384b478d9adec5",
+      "parent_status": ""
+    },
+    {
+      "paper_id": "neurosymbolic_supervision",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+      "branch": "agent/vericodegen-2026-neurosymbolic_supervision",
+      "dependencies": {
+        "external/ipfs_accelerate": {
+          "initial_head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_accelerate",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate",
+          "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "nested_submodules_initialized": false,
+          "runtime_commit": "1b6a63c63b40a0fe4329d9b50ccc0fd8af3157f4",
+          "runtime_tree": "8ce80702be4c4b54f11fe88e0fb4dd7ba9e39044",
+          "final_head": "1b6a63c63b40a0fe4329d9b50ccc0fd8af3157f4",
+          "status": ""
+        },
+        "external/ipfs_datasets": {
+          "initial_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_datasets",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_datasets",
+          "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "nested_submodules_initialized": false,
+          "final_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "status": ""
+        },
+        "external/ipfs_kit": {
+          "initial_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "canonical_clone_source": "/home/barberb/lift_coding/external/ipfs_kit",
+          "canonical_clone_uri": "file:///home/barberb/lift_coding/external/ipfs_kit",
+          "lane_repository_uri": "file:///home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_kit",
+          "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+          "nested_submodules_initialized": false,
+          "final_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "status": ""
+        }
+      },
+      "parent_commit": "e779f13540270891e5d1eb6a50f365b2d92ad70c",
+      "parent_status": ""
+    }
+  ],
+  "failures": [],
+  "finished_at": "2026-09-11T15:04:20.482242+00:00",
+  "root_index_sha256_after": "57fb070b931374128b1a30ae76bf63ca537560eaacde22e347a14bb002ce47a5",
+  "root_index_bytes_unchanged": true,
+  "root_head_after": "8601408d6406681a14a9488d31d1cd9a16164649",
+  "root_branch_after": "chore/fmt-check-main",
+  "final_verification": {
+    "all_accelerator_trees_identical": true,
+    "accelerator_runtime_tree": "8ce80702be4c4b54f11fe88e0fb4dd7ba9e39044",
+    "canonical_patch_still_matches_snapshot": true,
+    "canonical_patch_current_sha256": "6a4913f2a0448532293895b301f7e0f768be504a5ba933b89bae275659cb35d3",
+    "root_index_bytes_unchanged": true
+  }
+}

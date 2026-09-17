@@ -1,0 +1,47 @@
+{
+  "schema": "paper-runtime-validation/v1",
+  "source_commit": "2b21c37b75951161574b4ffd5487f89392a9c440",
+  "accelerator_commit": "3679c00e0e5508bc5298adfbd3a015f3043f3eb3",
+  "tests": [
+    {
+      "argv": [
+        "python3",
+        "tests/test_paper_supervisors.py",
+        "-q"
+      ],
+      "passed": 26,
+      "seconds": 3.581
+    },
+    {
+      "argv": [
+        "python3",
+        "tests/test_paper_supervisor_campaign.py",
+        "-q"
+      ],
+      "passed": 7,
+      "seconds": 37.247
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts=",
+        "--confcutdir=test/api",
+        "test/api/test_agent_supervisor_nested_git_metadata.py",
+        "test/api/test_agent_supervisor_coordination_commit_failure.py"
+      ],
+      "passed": 20,
+      "seconds": 5.99,
+      "docker_test_enabled": true,
+      "log": "papers/completion/runtime_bootstrap/runtime_006_committed_validation_system.log",
+      "log_sha256": "20d43a09b215a3924c5d7b255daf1bc7c331ad5f5cafa7ab4fb846c34a5bd3b6"
+    }
+  ],
+  "invocation_corrections": [
+    "tests directory is not an importable package: reran direct test file entry points",
+    "campaign DuckDB venv has no pytest: used installed system Python with explicit lane PYTHONPATH"
+  ]
+}

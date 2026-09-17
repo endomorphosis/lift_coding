@@ -1,0 +1,32 @@
+{
+  "schema": "paper-runtime-update/v1",
+  "reason": "Exact expired-attempt recovery and scrubbed provider process environments",
+  "files": {
+    "ipfs_accelerate_py/agent_implementation_route.py": "f99e5d1bd84bd886e35d64a9b082458863aea829b743bdb7746a47a12a23d0b5",
+    "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+    "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py": "7fe6055fc60884149b4a43fe28543d62e90620dd942b569a748fa02be5a19ff1",
+    "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py": "371573eb906de095fc5d97c3008ebec0ed7663cab25ac0af4991cb7ea95b2533",
+    "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py": "13ff5ea68a47ec22088a73e5e055c1c860438c90daa07e5ea273186b3f7849a0",
+    "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py": "0f0bddae6c38681f6afe0a9213c22dea29fcd5b2a9b77d86702c0d5aadeedff3",
+    "ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py": "88d4ba17975d7a8a77e00293ff365c9e7f7d2cf76ca947b9b0a9803fce564b48",
+    "test/api/test_agent_supervisor_implementation_auto_rescue.py": "4917f617a18009f05db8518df76f7dc138cab3669a925796fe0fd326792b53ca",
+    "ipfs_accelerate_py/_hash_resources.py": "6037d8aa7d70f70deae36e26c45e08c90c617be558253d85004589463eea9420",
+    "ipfs_accelerate_py/agent_supervisor/runtime/hash_pressure.py": "63c6831518647017eb49c88693fe6bbf54ba8c586b9b9826356be4b099df817d",
+    "test/api/test_agent_supervisor_quack_session_sql.py": "41082187999e4a62f27c59f559b9f42b724a85227c0236b5b510ee826205e72d",
+    "test/api/test_agent_supervisor_quack_transport_native.py": "df424b358cb0885fbc1cb4c95d4a59c4ef17c16c2b587f6da2eb608fbda7fc5d",
+    "test/api/test_agent_supervisor_database_observation.py": "029bf65e5e1e4a1eb035bf26fbd5c837f330b4157bd696ec42ee8a4b0d6b9afa",
+    "test/api/test_agent_supervisor_managed_quack_child_environment.py": "bfde41ffd6304188ddef0e9f97f33ad24cb7c2499228e53f09f839a21572d182",
+    "test/api/test_agent_supervisor_database_claim_eligibility.py": "dad36570ead1481a7d2a208f79c1468ee73a14baf966da89b971f1002bf258b3"
+  },
+  "lanes": {
+    "autoformalization": {
+      "accelerator_commit": "3673f13374277d4970f8e97fdb2a8894612c70d8"
+    },
+    "law_to_action": {
+      "accelerator_commit": "d8f69b547cea1fa01fae52cd4cad642ea3a5dd13"
+    },
+    "neurosymbolic_supervision": {
+      "accelerator_commit": "4972284aeaf44e301cfa857cc93bad17ffb8aaaa"
+    }
+  }
+}

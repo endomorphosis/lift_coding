@@ -1,0 +1,20 @@
+{
+  "actual_cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la008_independent_correction/candidate",
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/qualify_negative_controls.py"
+  ],
+  "completed_at": "2026-09-11T18:50:28.945123Z",
+  "cwd": ".",
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "started_at": "2026-09-11T18:50:28.767886Z",
+  "stderr": "",
+  "stderr_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.stderr.raw",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout": "{\"actual_handler_failure\": {\"returncode\": 2, \"signal\": null, \"timed_out\": false, \"wall_seconds\": 0.046855766}, \"actual_timeout\": {\"returncode\": -9, \"signal\": 9, \"timed_out\": true, \"wall_seconds\": 0.011629848}, \"empirical_benchmark_result\": false, \"network_isolation_claimed\": false, \"passed\": true, \"raw_traces_retained\": true, \"reject_all\": {\"allowed_decision_denials\": 2, \"allowed_measurement_failures\": 0, \"allowed_scheduled\": 2, \"allowed_work_success_rate\": 0.0, \"allowed_work_successful\": 0, \"reject_all_detected\": true}, \"scope\": \"Induced trusted-fixture measurement controls; no empirical benchmark result\", \"unique_run_ids\": [\"0f3995df-3d47-4b6d-b0d3-8ae9d92c0386\", \"8756c927-e85c-490c-acc7-74a913456f05\", \"50b78c22-46b7-460f-a052-b9004356603c\", \"7ecb8c68-c4df-4b93-aafa-102b4eaf25ba\"]}\n",
+  "stdout_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.stdout.raw",
+  "stdout_sha256": "f96a846df5faba51cc3b99106c2c26ee4b87d952b23a685debef3a070a921e67"
+}

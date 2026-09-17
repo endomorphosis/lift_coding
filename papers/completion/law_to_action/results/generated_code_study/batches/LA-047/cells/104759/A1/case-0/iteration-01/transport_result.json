@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 170,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 506,
+  "prompt_tokens": 506,
+  "raw_sha256": "ec0afca3da067f67545245cabdea9d3678e72fb834964fdf40b07f5bd3a27df5",
+  "response_text": "{\n  \"payload\": {\n    \"lineage\": {\n      \"source\": {\n        \"source_id\": \"aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c80c14fc\",\n        \"source_name\": \"family:aca695e01049cc0e1846401bda1b548dcc322025bf35941eef882d77c80c14fc\",\n        \"source_type\": \"family\"\n      }\n    }\n  }\n}\n<|im_end|>",
+  "wall_seconds": 15.55780407099519
+}

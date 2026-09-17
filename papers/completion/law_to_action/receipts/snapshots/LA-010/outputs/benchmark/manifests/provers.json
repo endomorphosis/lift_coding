@@ -1,0 +1,338 @@
+{
+  "authoritative_environment": {
+    "home_is_validation_prefix": true,
+    "home_observed": "/tmp/ipfs-accelerate-validation-home-NMQTr0",
+    "home_prefix": "ipfs-accelerate-validation-home-",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "python_version": "Python 3.12.3"
+  },
+  "authority_summary": {
+    "no_weak_authority_allow": true,
+    "sat_rejects_theorem": true,
+    "select_job_result_sat_only_cannot_prove": true
+  },
+  "empirical_benchmark_result": false,
+  "families": [
+    {
+      "authority_kind": "satisfiability",
+      "cannot_authorize_theorem_allow": true,
+      "fragment": "QF_BOOL",
+      "id": "qf_bool_sympy_sat",
+      "independent_checker": {
+        "algorithm": "enumerate-all-assignments",
+        "id": "exhaustive-truth-table",
+        "kind": "in_process_child",
+        "max_vars": 16
+      },
+      "kernel_reconstruction": false,
+      "logic_family": "propositional",
+      "paper_role": "Hoare-style / SMT security-invariant fragment for generated-code effects",
+      "provider": {
+        "algorithm": "dpll",
+        "id": "sympy-sat",
+        "kind": "in_process_child",
+        "module": "sympy.logic.inference.satisfiable",
+        "origin": "/usr/lib/python3/dist-packages/sympy/__init__.py",
+        "origin_sha256": "f39a3961fab611e022112f5ef39034643ea7f46beba5a9ef11d51ebbe5797b6c",
+        "version": "1.12"
+      },
+      "query_kind": "satisfiability",
+      "receipt_job_ids": [
+        "sat-success-unsat",
+        "sat-counterexample",
+        "sat-timeout",
+        "sat-unsupported-quantifiers",
+        "sat-unsupported-qflia-interpolation",
+        "sat-forged-model"
+      ],
+      "required_for_benchmark": true,
+      "selected_route_evidence_job": "sat-success-unsat",
+      "status": "qualified"
+    },
+    {
+      "authority_kind": "satisfiability",
+      "fragment": "unqualified",
+      "id": "z3_smt",
+      "invented_results": false,
+      "logic_family": "smt",
+      "paper_role": "SMT results, models, or cores (Z3)",
+      "probe": {
+        "authority_kind": "satisfiability",
+        "available": false,
+        "executable": "z3",
+        "family": "smt",
+        "optional": true,
+        "path": null,
+        "probe": "shutil.which under process PATH; no install",
+        "required_for_selected_route": false
+      },
+      "python_module": {
+        "importable": false,
+        "origin": null
+      },
+      "query_kind": "satisfiability",
+      "reason": "z3 executable and Python module absent from authoritative PATH/interpreter",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_kind": "satisfiability",
+      "fragment": "unqualified",
+      "id": "cvc5_smt",
+      "invented_results": false,
+      "logic_family": "smt",
+      "paper_role": "SMT results, models, cores; QF_LIA interpolation if selected",
+      "probe": {
+        "authority_kind": "satisfiability",
+        "available": false,
+        "executable": "cvc5",
+        "family": "smt",
+        "optional": true,
+        "path": null,
+        "probe": "shutil.which under process PATH; no install",
+        "required_for_selected_route": false
+      },
+      "python_module": {
+        "importable": false,
+        "origin": null
+      },
+      "query_kind": "satisfiability",
+      "reason": "cvc5 executable and Python module absent from authoritative PATH/interpreter",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_kind": "satisfiability",
+      "fragment": "QF_LIA",
+      "id": "cvc5_qflia_interpolation",
+      "invented_results": false,
+      "logic_family": "smt",
+      "paper_role": "QF_LIA interpolation with independent interpolant checks",
+      "query_kind": "satisfiability",
+      "reason": "Interpolation is optional and not selected; cvc5 is absent so no interpolant was produced",
+      "required_for_benchmark": false,
+      "status": "not_selected_unavailable"
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "id": "vampire_fol",
+      "invented_results": false,
+      "logic_family": "first_order",
+      "paper_role": "First-order automated proving",
+      "probe": {
+        "authority_kind": "theorem_proof",
+        "available": false,
+        "executable": "vampire",
+        "family": "first_order",
+        "optional": true,
+        "path": null,
+        "probe": "shutil.which under process PATH; no install",
+        "required_for_selected_route": false
+      },
+      "query_kind": "theorem_proof",
+      "reason": "vampire executable absent from authoritative PATH",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "id": "eprover_fol",
+      "invented_results": false,
+      "logic_family": "first_order",
+      "paper_role": "First-order automated proving",
+      "probe": {
+        "authority_kind": "theorem_proof",
+        "available": false,
+        "executable": "eprover",
+        "family": "first_order",
+        "optional": true,
+        "path": null,
+        "probe": "shutil.which under process PATH; no install",
+        "required_for_selected_route": false
+      },
+      "query_kind": "theorem_proof",
+      "reason": "eprover executable absent from authoritative PATH",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "id": "lean_kernel",
+      "invented_results": false,
+      "logic_family": "dependent_type",
+      "paper_role": "Interactive proof reconstruction / kernel checking",
+      "probe": {
+        "lake": {
+          "authority_kind": "theorem_proof",
+          "available": false,
+          "executable": "lake",
+          "family": "dependent_type",
+          "optional": true,
+          "path": null,
+          "probe": "shutil.which under process PATH; no install",
+          "required_for_selected_route": false
+        },
+        "lean": {
+          "authority_kind": "theorem_proof",
+          "available": false,
+          "executable": "lean",
+          "family": "dependent_type",
+          "optional": true,
+          "path": null,
+          "probe": "shutil.which under process PATH; no install",
+          "required_for_selected_route": false
+        }
+      },
+      "query_kind": "theorem_proof",
+      "reason": "lean and lake executables absent from authoritative PATH; user-profile elan toolchains are not admitted",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "id": "coq_rocq_kernel",
+      "invented_results": false,
+      "logic_family": "dependent_type",
+      "paper_role": "Interactive proof reconstruction / kernel checking",
+      "probe": {
+        "coqc": {
+          "authority_kind": "theorem_proof",
+          "available": false,
+          "executable": "coqc",
+          "family": "dependent_type",
+          "optional": true,
+          "path": null,
+          "probe": "shutil.which under process PATH; no install",
+          "required_for_selected_route": false
+        },
+        "rocq": {
+          "authority_kind": "theorem_proof",
+          "available": false,
+          "executable": "rocq",
+          "family": "dependent_type",
+          "optional": true,
+          "path": null,
+          "probe": "shutil.which under process PATH; no install",
+          "required_for_selected_route": false
+        }
+      },
+      "query_kind": "theorem_proof",
+      "reason": "coqc and rocq executables absent from authoritative PATH",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_kind": "theorem_proof",
+      "id": "isabelle_kernel",
+      "invented_results": false,
+      "logic_family": "higher_order",
+      "paper_role": "Interactive proof reconstruction / kernel checking",
+      "probe": {
+        "authority_kind": "theorem_proof",
+        "available": false,
+        "executable": "isabelle",
+        "family": "higher_order",
+        "optional": true,
+        "path": null,
+        "probe": "shutil.which under process PATH; no install",
+        "required_for_selected_route": false
+      },
+      "query_kind": "theorem_proof",
+      "reason": "isabelle executable absent from authoritative PATH",
+      "required_for_benchmark": false,
+      "status": "unavailable"
+    },
+    {
+      "authority_check": {
+        "allowed": false,
+        "diagnostics": [
+          "auth.decision.indeterminate",
+          "auth.decision.unproved:applicability:monitor"
+        ],
+        "internal_status": "indeterminate",
+        "reason_codes": [
+          "missing_evidence"
+        ],
+        "wire_status": "abstain"
+      },
+      "authority_kind": "runtime_monitor",
+      "id": "runtime_monitor",
+      "invented_results": false,
+      "logic_family": "monitor",
+      "paper_role": "Runtime monitor observations",
+      "query_kind": "runtime_monitor",
+      "reason": "Monitor satisfaction is a distinct authority kind and cannot authorize theorem_proof allows",
+      "required_for_benchmark": false,
+      "status": "not_selected"
+    },
+    {
+      "authority_check": {
+        "allowed": false,
+        "diagnostics": [
+          "auth.decision.indeterminate",
+          "auth.decision.unproved:applicability:policy"
+        ],
+        "internal_status": "indeterminate",
+        "reason_codes": [
+          "missing_evidence"
+        ],
+        "wire_status": "abstain"
+      },
+      "authority_kind": "policy_approval",
+      "id": "policy_approval",
+      "invented_results": false,
+      "logic_family": "datalog",
+      "paper_role": "Policy / Datalog-style authorization declarations",
+      "query_kind": "policy_approval",
+      "reason": "Policy approval is not theorem evidence; closed-profile allow requires theorem_proof",
+      "required_for_benchmark": false,
+      "status": "not_selected"
+    }
+  ],
+  "qualified_at": "2026-09-12T01:57:29.233412+00:00",
+  "resource_bounds": {
+    "protocol_attempt_wall_seconds": 20,
+    "qualification_timeout_seconds": {
+      "other_jobs": 5,
+      "sat-timeout": 0.02
+    },
+    "threads": 1
+  },
+  "schema": "law-to-action-prover-manifest/v1",
+  "selected_route": {
+    "authority_kind": "satisfiability",
+    "cannot_authorize_closed_profile_allow": true,
+    "checker_id": "exhaustive-truth-table",
+    "family_id": "qf_bool_sympy_sat",
+    "fragment": "QF_BOOL",
+    "id": "qf_bool_security_invariant",
+    "kernel_reconstruction": false,
+    "provider_id": "sympy-sat",
+    "query_kind": "satisfiability"
+  },
+  "source_pins": {
+    "compose.py": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/compose.py",
+      "sha256": "99f3a672ad2c765c31d327b85fb77e1c000451a27636409c2e8c9c5632fa7765"
+    },
+    "portfolio.py": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/portfolio.py",
+      "sha256": "92943d470b44717416e55cebf90ed2f037de74e445ffcd997651262a4c69335e"
+    },
+    "protocols.py": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/protocols.py",
+      "sha256": "69c172359b693d926c5059ed289945195445019cee64566c71618ce73949c738"
+    },
+    "sat_checker.py": {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+      "sha256": "258125dd9adf388c20f8acb7352f3206f1400c3e217966314b07ea78c85eb20a"
+    },
+    "sat_provider.py": {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+      "sha256": "7a356270b936a5fb41ab2fa0746d6bf6f52da639d6465d99060fa5f28c1d4644"
+    }
+  },
+  "task": "LA-010"
+}

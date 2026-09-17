@@ -1,0 +1,25 @@
+{
+  "child_pid": 2810835,
+  "child_returncode": 1,
+  "child_started": true,
+  "child_termination_proven": true,
+  "cleanup_errors": [],
+  "cleanup_seconds_after_deadline_observation": null,
+  "deadline_expired": false,
+  "deadline_overrun_seconds": null,
+  "error": null,
+  "request_sha256": "e87b2fc7d68e26416105fbcfd1a2d059fa4ad28c19aa41a5c39551027b1d0783",
+  "response_bytes_retained": null,
+  "response_read_error": null,
+  "response_sha256": null,
+  "status": null,
+  "timeout_seconds": 2.0,
+  "wall_seconds": 0.11583406804129481,
+  "worker": {
+    "body_limit_exceeded": false,
+    "complete": false,
+    "error": "HTTPTransportError: HTTP redirects are forbidden",
+    "status": null
+  },
+  "worker_metadata_error": null
+}

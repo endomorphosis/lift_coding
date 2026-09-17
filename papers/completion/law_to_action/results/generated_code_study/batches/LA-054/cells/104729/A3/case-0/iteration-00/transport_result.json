@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 189,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "d5b8608d8d00a5a4ee16f077c98d03f9fae472d629c4f86df194611af969a887",
+  "response_text": "```json\n{\n  \"program\": \"import { execSync } from 'child_process';\\n\\n// This is a mock implementation to demonstrate the vulnerability\\n// In the real packager, this would be actual code that processes the source\\n\\nfunction run(payload) {\\n  // Simulate the random memory allocation behavior described in the CVE\\n  const randomSegment = Buffer.alloc(1024); // 1kb buffer\\n  \\n  // Leak sensitive data into the final executable\\n  // In a real scenario, this would be environment variables or other secrets\\n  const leakedData = process.env.API_KEY || 'default_leaked_key';\\n  \\n  // The vulnerability is that this random segment is leaked\\n  // We simulate the actual handler effect by emitting the allowed payload\\n  emit_allowed(payload);\\n}\\n\"\n}\n```<|im_end|>",
+  "wall_seconds": 17.900199746
+}

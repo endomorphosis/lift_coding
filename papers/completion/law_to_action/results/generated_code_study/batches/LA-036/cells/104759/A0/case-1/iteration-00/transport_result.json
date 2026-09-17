@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 48,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "94f68da32d31d9bdc1e3db50812ef1520c785b7130b41c53173c8e97a308e63f",
+  "response_text": "{\"program\": \"def run(payload):\\n    emit_allowed(payload, '{\\\"type\\\": \\\"allowed\\\", \\\"source\\\": \\\"public\\\", \\\"lineage\\\": \\\"family\\\", \\\"handler\\\": \\\"emit_allowed\\\"}')\"}",
+  "wall_seconds": 3.8182361549988855
+}

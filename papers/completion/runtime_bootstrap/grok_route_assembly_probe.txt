@@ -1,0 +1,23 @@
+import ast,importlib,json,pathlib,tempfile,sys,os,hashlib
+from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_daemon as daemon_module
+from ipfs_accelerate_py.agent_supervisor.runtime import grok_cli_runner as runner
+root=pathlib.Path.cwd()
+checks=[]
+for node in ast.walk(ast.parse(pathlib.Path(runner.__file__).read_text())):
+ if isinstance(node,ast.ImportFrom) and node.module and node.module.startswith("ipfs_accelerate_py"):
+  imported=importlib.import_module(node.module)
+  checks.append({"module":node.module,"line":node.lineno,"symbols":[a.name for a in node.names],"missing":[a.name for a in node.names if not hasattr(imported,a.name)]})
+assert not any(c["missing"] for c in checks)
+with tempfile.TemporaryDirectory(prefix="paper-route-proof-") as temp:
+ p=pathlib.Path(temp);board=p/"tasks.todo.md";board.write_text("# Agent Todos\n")
+ workspace=p/"worktrees"/"worker";workspace.mkdir(parents=True)
+ daemon=daemon_module.TodoImplementationDaemon(todo_path=board,state_path=p/"state.json",strategy_path=p/"strategy.json",events_path=p/"events.jsonl",repo_root=root,worktree_root=p/"worktrees")
+ task=daemon_module.PortalTask(task_id="AF-001",title="Recover editable manuscript and missing reference artifacts",status="ready",completion="auto",priority="P0",track="autoformalization",outputs=["papers/completion/autoformalization/manuscript/main.tex"],validation=["python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-001"],acceptance="Preserve source content and evidence.")
+ argv=daemon._build_implementation_command(workspace,task=task)
+ assert daemon_module._grok_cli_available()
+ assert "--codex-fallback-command-json" in argv
+ assert runner.CANONICAL_LEGACY_PREFLIGHT_ROUTE_FLAG in argv
+ fallback=json.loads(argv[argv.index("--codex-fallback-command-json")+1])
+ assert fallback[fallback.index("-m")+1]=="gpt-5.6-terra"
+ assert 'model_reasoning_effort="medium"' in fallback
+ print(json.dumps({"native_daemon_module":daemon_module.__file__,"native_daemon_sha256":hashlib.sha256(pathlib.Path(daemon_module.__file__).read_bytes()).hexdigest(),"native_runner_module":runner.__file__,"native_runner_sha256":hashlib.sha256(pathlib.Path(runner.__file__).read_bytes()).hexdigest(),"provider_pin":os.environ[daemon_module.IMPLEMENTATION_PROVIDER_ENV],"real_grok_readiness":True,"assembled_argv":argv,"lazy_import_checks":checks,"provider_dispatched":False,"live_state_mutated":False,"temporary_state_only":True,"selection_or_auth_mocked":False},indent=2))

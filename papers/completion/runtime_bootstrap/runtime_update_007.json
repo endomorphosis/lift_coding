@@ -1,0 +1,24 @@
+{
+  "schema": "paper-runtime-update/v1",
+  "created_at": "2026-09-11T17:54:34.573506+00:00",
+  "reason": "Include actual contract catalog/invocation analysis dependencies needed by native goal validation",
+  "files": {
+    "ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py": "958a7c9c6fb8e8810922a8dd80fae9e375a1917ec4e90910be19703eb698b00b",
+    "ipfs_accelerate_py/agent_supervisor/analysis/mcp_invocation_trace.py": "c263ada779b3996774ef93311b992b914ecdb02e31f04c669e5928a54b584a43"
+  },
+  "qualification": "native_source_goal_import_support.json",
+  "lanes": {
+    "autoformalization": {
+      "accelerator_previous_commit": "228a769c74bd2743530ca4834ece38dccc45f880",
+      "accelerator_commit": "56a4836492efd3411b57e28e8bad7cfd8fc13ecb"
+    },
+    "law_to_action": {
+      "accelerator_previous_commit": "e1cec4c9f04e1d96e6e2299114992962bfe06430",
+      "accelerator_commit": "7e23befce72b3ad30730c1250894358f6e7b2721"
+    },
+    "neurosymbolic_supervision": {
+      "accelerator_previous_commit": "3679c00e0e5508bc5298adfbd3a015f3043f3eb3",
+      "accelerator_commit": "34c8475d041db57cbe3c4e1dad122885b526e652"
+    }
+  }
+}

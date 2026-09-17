@@ -1,0 +1,392 @@
+{
+  "baseline": "69772dc97a9dd13b1ac74e2759adb4ecec898dd9",
+  "exact_operator_shared_change_attribution": [
+    {
+      "exact_operator_after_sha256": "fc45c9365ea546a46dd20e0af56841a21d03d67f09ac42ad4b5d1c7fe494b88c",
+      "exact_operator_before_sha256": "8b05455e9f03ee667ea6e279617893842d72fcd8b13dc7761b1ad6b1b6838115",
+      "path": "papers/completion/law_to_action/paper.objectives.md",
+      "scope": "shared_checkout"
+    },
+    {
+      "exact_operator_after_sha256": "e206607a761653ff755614d54beaf44b259d8a5866ac7c9e29346ab5c92543ea",
+      "exact_operator_before_sha256": "8e8cdc61ffafed9637e19a00e91ef38c71b6c3fbc29c7ddabb46a28073531c8e",
+      "path": "papers/completion/law_to_action/paper.todo.md",
+      "scope": "shared_checkout"
+    },
+    {
+      "exact_operator_after_sha256": "eeda389302fc7e73d0f34e17e7db90f78a825ac8e2cdb6ce3294baf4efcf7f07",
+      "exact_operator_before_sha256": "f7c612b1ef10bd0f1547847b3e945cb2c8eaec864096aae9df31a196fe369f6e",
+      "path": "papers/completion/law_to_action/tasks.json",
+      "scope": "shared_checkout"
+    }
+  ],
+  "operator_forward_commit": "4607152b0bf0994d65c591db1eb94940dd8c085f",
+  "original_attempt_failure_retained": true,
+  "original_guard_correctly_detected_change_but_did_not_attribute_authorized_operator": true,
+  "original_outputs": {
+    "papers/completion/law_to_action/analysis/analyze.py": {
+      "bytes": 92330,
+      "sha256": "e4ab07e90f70f9a920e1b0a93670130cf055d1633a00eedc5fc5b34da6412103"
+    },
+    "papers/completion/law_to_action/receipts/LA-019.json": {
+      "bytes": 23020,
+      "sha256": "fe72d50669c0435d0018b23b9617ae412457a695a3bef048f4df23ca257a548c"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/analyze.py": {
+      "bytes": 92330,
+      "sha256": "e4ab07e90f70f9a920e1b0a93670130cf055d1633a00eedc5fc5b34da6412103"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/build_receipt.py": {
+      "bytes": 9304,
+      "sha256": "4f7afcfa08bca6e550eb2981afb8e452aabe21e573846911e56722c7a5c3d2eb"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/failure_taxonomy.json": {
+      "bytes": 67339,
+      "sha256": "ce07ad7defb391fe5cfb2cedcfb6e64afc7b672bc684a747496b905bbc76b5c9"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig01_arm_forbidden_effects.pdf": {
+      "bytes": 15288,
+      "sha256": "df1c07dd9a2efab5ccd8c123c2f2ba2f93aa9447e3f5afafad26175a19b06d0f"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig01_arm_forbidden_effects.svg": {
+      "bytes": 34617,
+      "sha256": "7c64e32dd7eb87a1670b7d55fea6953865e664209a1d78ff8a0b1de42e036f4b"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig02_arm_allowed_utility.pdf": {
+      "bytes": 14753,
+      "sha256": "12fc1165334f1650537343516f26ce131c14258e68d88d64358feb836087a46a"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig02_arm_allowed_utility.svg": {
+      "bytes": 31680,
+      "sha256": "784c5391b711bbce44adc2aebd86ac1b5de5aaa932226b69a1f639ace882b542"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig03_ablation_deltas.pdf": {
+      "bytes": 14400,
+      "sha256": "bc8f949d96eed1be670cab22b4789ddfa28717c241ce79a5cd88abdda4d36936"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig03_ablation_deltas.svg": {
+      "bytes": 40888,
+      "sha256": "a73da4dde42ca14e24a06144f30f8f1aa9d6095c7b1a0eed69e8c783b9ff27c5"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig04_efficiency_phases.pdf": {
+      "bytes": 13104,
+      "sha256": "99ce3fd604f8374a1ac33c0dfd7bcb437cffb02f2248e61c93a6f4cb7d06c44e"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig04_efficiency_phases.svg": {
+      "bytes": 30314,
+      "sha256": "468615d4c4974359fcb45521886288d4af9512af11a34c256254a721414ffc62"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig05_failure_taxonomy.pdf": {
+      "bytes": 14025,
+      "sha256": "88b62711a5bd399e41fcb501af8acecc9bb6eaa7b40ca3b4fb9c32d31a19607b"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig05_failure_taxonomy.svg": {
+      "bytes": 35548,
+      "sha256": "68706d51574b304cbf8edeb1560b2f7d8f9af61509ca855e24632456f0a2d06b"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig06_family_sensitivity.pdf": {
+      "bytes": 14411,
+      "sha256": "cfadaa86f738c29443b4d28c3d8e81d0669d2b5ce4baca7d05bc10d69ed8f6b9"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig06_family_sensitivity.svg": {
+      "bytes": 36637,
+      "sha256": "1872514da8b54cfbb63fc19a91db099ad646a6bcf1db80d55fdf584b2f3e40a9"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig07_mutation_by_arm.pdf": {
+      "bytes": 19327,
+      "sha256": "b9266dc51ccfc3c9e5cc3124673a28bbfb0b2f649807253b20210ba27cd38a8d"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/fig07_mutation_by_arm.svg": {
+      "bytes": 59342,
+      "sha256": "6a288a14d77b0e985356a05a1277c9d261e6383806e8b96f1c36ae1649638ab8"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/figures/source_to_effect_trace.pdf": {
+      "bytes": 10840,
+      "sha256": "0911525ffcf952346c82ffc295d70d51ab93035df63df5589924ca99ab32ba61"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/statistical_report.md": {
+      "bytes": 19436,
+      "sha256": "af9671af44f0b981e97776ecc83d14727089524433519becd615b2d009ce66be"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/ablations.csv": {
+      "bytes": 2228,
+      "sha256": "11cb22b011d9ebed60e1d5f23d1d00427bf99fb4b78a7b494240c64dc072a0c7"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/ablations.json": {
+      "bytes": 6996,
+      "sha256": "bce26e3c821f41ae413659692acdbf1b6e3ddf4ee252732c090c7cd72f6ec6a6"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/analysis_inventory.json": {
+      "bytes": 3210,
+      "sha256": "decc509471ae3db217f7961d9687019cb8f56179e834bbcab39ba4dba2b2f665"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/arm_safety_utility.csv": {
+      "bytes": 1246,
+      "sha256": "70fe8e5e6715f75e78423f0ce9a9cad869eb30c12a0078e803329eb17383710d"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/arm_safety_utility.json": {
+      "bytes": 3831,
+      "sha256": "ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/closed_loop_status.csv": {
+      "bytes": 183,
+      "sha256": "51e1e0e3c7c86c6b47989c366940b72bb6ca8678eb96437e80a066b1db9ae682"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/closed_loop_status.json": {
+      "bytes": 2628,
+      "sha256": "56a038e8cce97c009b76f47205c7e8e2a9d86f8c32a6b01be00346ada7a199ab"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/durable_state.csv": {
+      "bytes": 2123,
+      "sha256": "c03d61a4ad4c315cd380f92b5c95c33f9841ecbaaa0e8b916ce72821f5bf1fea"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/durable_state.json": {
+      "bytes": 5946,
+      "sha256": "9021d5a9feaf73c8f1e8b508354c9b2b7b1c5b3951b8ad4bd5afee6d00a33a93"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/efficiency.csv": {
+      "bytes": 317,
+      "sha256": "a360a62dd45e157a2cb5d7e9aab2dbd20d7ef4ccb116760ee739765c1c70bfd0"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/efficiency.json": {
+      "bytes": 6649,
+      "sha256": "7757ba3983e58f6dd374aa4d44359a52197352edb70c66d1dfbd1b7c626c0b34"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/family_sensitivity.csv": {
+      "bytes": 3492,
+      "sha256": "3ff7ad5e2d902b7b80344f420202b916a9c5ddce1cdda4f1c4a641e4a4e1f0f5"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/family_sensitivity.json": {
+      "bytes": 8673,
+      "sha256": "295803e550bf143bf8b15b866e4989b7782190b9b09f85c3882ca719b8d72c15"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/headline_claims.json": {
+      "bytes": 23781,
+      "sha256": "61eb562f6ef3f74a86b9c081c3bad32b2b4ac7042017ee59631f7315f0f50252"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/leakage_audit.json": {
+      "bytes": 403,
+      "sha256": "d9737bee842bf18df07ca825673780cc2ffc8a52c979ef7ba76a7ac3ca5130ac"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/mutation_forbidden_effects.csv": {
+      "bytes": 1196,
+      "sha256": "f17da41338a52fe439df0b71d1fbc39be817186febfde28edca873f8d8b2ef8e"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/mutation_forbidden_effects.json": {
+      "bytes": 4055,
+      "sha256": "dab79b354f3245ba5509b7335cddb9be8a4576118a53f21f0f189cf441536e48"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/paired_arm_contrasts.csv": {
+      "bytes": 603,
+      "sha256": "c7322a40bdb3e051970ea92f8d664f7cf673d3101be3158bee511ed7d8c73234"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/paired_arm_contrasts.json": {
+      "bytes": 1392,
+      "sha256": "0ff54c317bc7992e9a4fc157e84836105fc656a38bae099614ef78cc7a5d2bfb"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/proof_jobs.csv": {
+      "bytes": 1312,
+      "sha256": "eb483fc1019f4f61bab411482b7aebfec49d76dc4a3a40a6cee7772888d6f201"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/proof_jobs.json": {
+      "bytes": 3768,
+      "sha256": "d02296860c70df7df093e15e061116c52c360fce9674593b852cf9e2c4e0db0d"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/source_ir_contracts.csv": {
+      "bytes": 194,
+      "sha256": "b1f5a958e4cdbfe8dc8cf2a1432a969b94cfdf7e0a8032f9d4f299c1cf2dfdee"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/tables/source_ir_contracts.json": {
+      "bytes": 10331,
+      "sha256": "54663e079892128ee18ec2e0adf69762a22b5de37080b9f0f347fe63b3d687d0"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validate_analysis.py": {
+      "bytes": 7096,
+      "sha256": "c38fb00f32e3eb5a069c66b2ba394051c4295d32afb0b1c732c50750ef981e22"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validation/commands.json": {
+      "bytes": 555,
+      "sha256": "d14e8d0f767bbb244d55ba1ba923e43402ccce0362fe5fa53c8d95ce4e47a86d"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validation/run.stderr.log": {
+      "bytes": 361,
+      "sha256": "bb557a3813f4667b2f010b96bd997d5599e33ee6005007cb70e6a6cbfedaca1a"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validation/run.stdout.log": {
+      "bytes": 8480,
+      "sha256": "19703d797e9c20706ef1159a07f505f49000b20414ef678d026a293cf17196b7"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validation/times.json": {
+      "bytes": 209,
+      "sha256": "8dc01e8e4ca59050853db6c5b54b01d3980b77ee01c63d340cd9d6884a745591"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validation/validate.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "papers/completion/law_to_action/receipts/snapshots/LA-019/validation/validate.stdout.log": {
+      "bytes": 337,
+      "sha256": "2e800ec10c9ec4af8af3c02567b49e2893449809d78701b1807bfddc90d98351"
+    },
+    "papers/completion/law_to_action/results/failure_taxonomy.json": {
+      "bytes": 67339,
+      "sha256": "ce07ad7defb391fe5cfb2cedcfb6e64afc7b672bc684a747496b905bbc76b5c9"
+    },
+    "papers/completion/law_to_action/results/figures/fig01_arm_forbidden_effects.pdf": {
+      "bytes": 15288,
+      "sha256": "df1c07dd9a2efab5ccd8c123c2f2ba2f93aa9447e3f5afafad26175a19b06d0f"
+    },
+    "papers/completion/law_to_action/results/figures/fig01_arm_forbidden_effects.svg": {
+      "bytes": 34617,
+      "sha256": "7c64e32dd7eb87a1670b7d55fea6953865e664209a1d78ff8a0b1de42e036f4b"
+    },
+    "papers/completion/law_to_action/results/figures/fig02_arm_allowed_utility.pdf": {
+      "bytes": 14753,
+      "sha256": "12fc1165334f1650537343516f26ce131c14258e68d88d64358feb836087a46a"
+    },
+    "papers/completion/law_to_action/results/figures/fig02_arm_allowed_utility.svg": {
+      "bytes": 31680,
+      "sha256": "784c5391b711bbce44adc2aebd86ac1b5de5aaa932226b69a1f639ace882b542"
+    },
+    "papers/completion/law_to_action/results/figures/fig03_ablation_deltas.pdf": {
+      "bytes": 14400,
+      "sha256": "bc8f949d96eed1be670cab22b4789ddfa28717c241ce79a5cd88abdda4d36936"
+    },
+    "papers/completion/law_to_action/results/figures/fig03_ablation_deltas.svg": {
+      "bytes": 40888,
+      "sha256": "a73da4dde42ca14e24a06144f30f8f1aa9d6095c7b1a0eed69e8c783b9ff27c5"
+    },
+    "papers/completion/law_to_action/results/figures/fig04_efficiency_phases.pdf": {
+      "bytes": 13104,
+      "sha256": "99ce3fd604f8374a1ac33c0dfd7bcb437cffb02f2248e61c93a6f4cb7d06c44e"
+    },
+    "papers/completion/law_to_action/results/figures/fig04_efficiency_phases.svg": {
+      "bytes": 30314,
+      "sha256": "468615d4c4974359fcb45521886288d4af9512af11a34c256254a721414ffc62"
+    },
+    "papers/completion/law_to_action/results/figures/fig05_failure_taxonomy.pdf": {
+      "bytes": 14025,
+      "sha256": "88b62711a5bd399e41fcb501af8acecc9bb6eaa7b40ca3b4fb9c32d31a19607b"
+    },
+    "papers/completion/law_to_action/results/figures/fig05_failure_taxonomy.svg": {
+      "bytes": 35548,
+      "sha256": "68706d51574b304cbf8edeb1560b2f7d8f9af61509ca855e24632456f0a2d06b"
+    },
+    "papers/completion/law_to_action/results/figures/fig06_family_sensitivity.pdf": {
+      "bytes": 14411,
+      "sha256": "cfadaa86f738c29443b4d28c3d8e81d0669d2b5ce4baca7d05bc10d69ed8f6b9"
+    },
+    "papers/completion/law_to_action/results/figures/fig06_family_sensitivity.svg": {
+      "bytes": 36637,
+      "sha256": "1872514da8b54cfbb63fc19a91db099ad646a6bcf1db80d55fdf584b2f3e40a9"
+    },
+    "papers/completion/law_to_action/results/figures/fig07_mutation_by_arm.pdf": {
+      "bytes": 19327,
+      "sha256": "b9266dc51ccfc3c9e5cc3124673a28bbfb0b2f649807253b20210ba27cd38a8d"
+    },
+    "papers/completion/law_to_action/results/figures/fig07_mutation_by_arm.svg": {
+      "bytes": 59342,
+      "sha256": "6a288a14d77b0e985356a05a1277c9d261e6383806e8b96f1c36ae1649638ab8"
+    },
+    "papers/completion/law_to_action/results/statistical_report.md": {
+      "bytes": 19436,
+      "sha256": "af9671af44f0b981e97776ecc83d14727089524433519becd615b2d009ce66be"
+    },
+    "papers/completion/law_to_action/results/tables/ablations.csv": {
+      "bytes": 2228,
+      "sha256": "11cb22b011d9ebed60e1d5f23d1d00427bf99fb4b78a7b494240c64dc072a0c7"
+    },
+    "papers/completion/law_to_action/results/tables/ablations.json": {
+      "bytes": 6996,
+      "sha256": "bce26e3c821f41ae413659692acdbf1b6e3ddf4ee252732c090c7cd72f6ec6a6"
+    },
+    "papers/completion/law_to_action/results/tables/analysis_inventory.json": {
+      "bytes": 3210,
+      "sha256": "decc509471ae3db217f7961d9687019cb8f56179e834bbcab39ba4dba2b2f665"
+    },
+    "papers/completion/law_to_action/results/tables/arm_safety_utility.csv": {
+      "bytes": 1246,
+      "sha256": "70fe8e5e6715f75e78423f0ce9a9cad869eb30c12a0078e803329eb17383710d"
+    },
+    "papers/completion/law_to_action/results/tables/arm_safety_utility.json": {
+      "bytes": 3831,
+      "sha256": "ddbcf1b6128fd37e697df68002ae0658ba6e16338b6b5791dc3073abbe2ba75f"
+    },
+    "papers/completion/law_to_action/results/tables/closed_loop_status.csv": {
+      "bytes": 183,
+      "sha256": "51e1e0e3c7c86c6b47989c366940b72bb6ca8678eb96437e80a066b1db9ae682"
+    },
+    "papers/completion/law_to_action/results/tables/closed_loop_status.json": {
+      "bytes": 2628,
+      "sha256": "56a038e8cce97c009b76f47205c7e8e2a9d86f8c32a6b01be00346ada7a199ab"
+    },
+    "papers/completion/law_to_action/results/tables/durable_state.csv": {
+      "bytes": 2123,
+      "sha256": "c03d61a4ad4c315cd380f92b5c95c33f9841ecbaaa0e8b916ce72821f5bf1fea"
+    },
+    "papers/completion/law_to_action/results/tables/durable_state.json": {
+      "bytes": 5946,
+      "sha256": "9021d5a9feaf73c8f1e8b508354c9b2b7b1c5b3951b8ad4bd5afee6d00a33a93"
+    },
+    "papers/completion/law_to_action/results/tables/efficiency.csv": {
+      "bytes": 317,
+      "sha256": "a360a62dd45e157a2cb5d7e9aab2dbd20d7ef4ccb116760ee739765c1c70bfd0"
+    },
+    "papers/completion/law_to_action/results/tables/efficiency.json": {
+      "bytes": 6649,
+      "sha256": "7757ba3983e58f6dd374aa4d44359a52197352edb70c66d1dfbd1b7c626c0b34"
+    },
+    "papers/completion/law_to_action/results/tables/family_sensitivity.csv": {
+      "bytes": 3492,
+      "sha256": "3ff7ad5e2d902b7b80344f420202b916a9c5ddce1cdda4f1c4a641e4a4e1f0f5"
+    },
+    "papers/completion/law_to_action/results/tables/family_sensitivity.json": {
+      "bytes": 8673,
+      "sha256": "295803e550bf143bf8b15b866e4989b7782190b9b09f85c3882ca719b8d72c15"
+    },
+    "papers/completion/law_to_action/results/tables/headline_claims.json": {
+      "bytes": 23781,
+      "sha256": "61eb562f6ef3f74a86b9c081c3bad32b2b4ac7042017ee59631f7315f0f50252"
+    },
+    "papers/completion/law_to_action/results/tables/leakage_audit.json": {
+      "bytes": 403,
+      "sha256": "d9737bee842bf18df07ca825673780cc2ffc8a52c979ef7ba76a7ac3ca5130ac"
+    },
+    "papers/completion/law_to_action/results/tables/mutation_forbidden_effects.csv": {
+      "bytes": 1196,
+      "sha256": "f17da41338a52fe439df0b71d1fbc39be817186febfde28edca873f8d8b2ef8e"
+    },
+    "papers/completion/law_to_action/results/tables/mutation_forbidden_effects.json": {
+      "bytes": 4055,
+      "sha256": "dab79b354f3245ba5509b7335cddb9be8a4576118a53f21f0f189cf441536e48"
+    },
+    "papers/completion/law_to_action/results/tables/paired_arm_contrasts.csv": {
+      "bytes": 603,
+      "sha256": "c7322a40bdb3e051970ea92f8d664f7cf673d3101be3158bee511ed7d8c73234"
+    },
+    "papers/completion/law_to_action/results/tables/paired_arm_contrasts.json": {
+      "bytes": 1392,
+      "sha256": "0ff54c317bc7992e9a4fc157e84836105fc656a38bae099614ef78cc7a5d2bfb"
+    },
+    "papers/completion/law_to_action/results/tables/proof_jobs.csv": {
+      "bytes": 1312,
+      "sha256": "eb483fc1019f4f61bab411482b7aebfec49d76dc4a3a40a6cee7772888d6f201"
+    },
+    "papers/completion/law_to_action/results/tables/proof_jobs.json": {
+      "bytes": 3768,
+      "sha256": "d02296860c70df7df093e15e061116c52c360fce9674593b852cf9e2c4e0db0d"
+    },
+    "papers/completion/law_to_action/results/tables/source_ir_contracts.csv": {
+      "bytes": 194,
+      "sha256": "b1f5a958e4cdbfe8dc8cf2a1432a969b94cfdf7e0a8032f9d4f299c1cf2dfdee"
+    },
+    "papers/completion/law_to_action/results/tables/source_ir_contracts.json": {
+      "bytes": 10331,
+      "sha256": "54663e079892128ee18ec2e0adf69762a22b5de37080b9f0f347fe63b3d687d0"
+    }
+  },
+  "schema": "la019-protected-change-cause-and-preservation/v1",
+  "scope": "Declared diagnostic-analysis output recovery only; no task contract, protected path or original failed attempt is rewritten. The root operator shared-source commit caused the protected-path incident.",
+  "worker_commit": "eed606608244cf02931a00391f0d1dd79042cbb4",
+  "worker_protected_mutation_established": false
+}

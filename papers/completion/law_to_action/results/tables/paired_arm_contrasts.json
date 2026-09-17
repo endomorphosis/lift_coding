@@ -1,0 +1,52 @@
+[
+  {
+    "boot_high": 0.0,
+    "boot_low": 0.0,
+    "contrast": "A1_versus_A0",
+    "interpretation": "equivalence_instrumentation_check",
+    "mean_family_delta": 0.0,
+    "n_families": 18,
+    "strat_boot_high": 0.0,
+    "strat_boot_low": 0.0
+  },
+  {
+    "boot_high": 0.0,
+    "boot_low": 0.0,
+    "contrast": "A2_versus_A0",
+    "interpretation": "equivalence_instrumentation_check",
+    "mean_family_delta": 0.0,
+    "n_families": 18,
+    "strat_boot_high": 0.0,
+    "strat_boot_low": 0.0
+  },
+  {
+    "boot_high": -0.4444444444444444,
+    "boot_low": -0.8888888888888888,
+    "contrast": "A3_versus_A0",
+    "interpretation": "protocol_unadmitted_diagnostic_contrast",
+    "mean_family_delta": -0.6666666666666666,
+    "n_families": 18,
+    "strat_boot_high": -0.4444444444444444,
+    "strat_boot_low": -0.8888888888888888
+  },
+  {
+    "boot_high": -1.0,
+    "boot_low": -1.0,
+    "contrast": "A4_versus_A0",
+    "interpretation": "protocol_unadmitted_diagnostic_contrast",
+    "mean_family_delta": -1.0,
+    "n_families": 18,
+    "strat_boot_high": -1.0,
+    "strat_boot_low": -1.0
+  },
+  {
+    "boot_high": -0.1111111111111111,
+    "boot_low": -0.5555555555555556,
+    "contrast": "A4_versus_A3",
+    "interpretation": "protocol_unadmitted_diagnostic_contrast",
+    "mean_family_delta": -0.3333333333333333,
+    "n_families": 18,
+    "strat_boot_high": -0.1111111111111111,
+    "strat_boot_low": -0.5555555555555556
+  }
+]

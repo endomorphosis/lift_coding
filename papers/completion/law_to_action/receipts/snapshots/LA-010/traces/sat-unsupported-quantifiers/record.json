@@ -1,0 +1,55 @@
+{
+  "authority_kind_emitted": "unsupported",
+  "case_kind": "unsupported",
+  "checker": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-quantifiers.json",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-unsupported-quantifiers/provider.json"
+    ],
+    "elapsed_seconds": 0.021477838046848774,
+    "exit_code": 0,
+    "result": {
+      "agrees_with_provider": true,
+      "authority_kind": "satisfiability",
+      "checker": "exhaustive-truth-table",
+      "reason": "quantified first-order formulas are outside the selected QF_BOOL fragment",
+      "status": "unsupported"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "d40b339b80143193b62795bf521bd33a2301f632aba55f91905b5a006baf6de0"
+  },
+  "checker_id": "exhaustive-truth-table",
+  "empirical_benchmark_result": false,
+  "family": "qf_bool_sympy_sat",
+  "formula": "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-quantifiers.json",
+  "fragment": "FOL-quantifiers",
+  "job_id": "sat-unsupported-quantifiers",
+  "outcome": "unsupported",
+  "provider": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-unsupported-quantifiers.json"
+    ],
+    "elapsed_seconds": 0.021549102966673672,
+    "exit_code": 0,
+    "result": {
+      "authority_kind": "satisfiability",
+      "family": "first_order",
+      "fragment": "FOL",
+      "provider": "sympy-sat",
+      "query_kind": "theorem_proof",
+      "reason": "quantified first-order formulas are outside the selected QF_BOOL fragment",
+      "status": "unsupported"
+    },
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "f1ef33d7aa72395be581ca732cdd149f4b2265937c634a3e34c5d508a59f2724",
+    "timed_out": false
+  },
+  "provider_id": "sympy-sat",
+  "query_kind": "theorem_proof",
+  "required_authority": "theorem_proof",
+  "timeout_seconds": null
+}

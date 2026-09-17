@@ -1,0 +1,662 @@
+{
+  "absent_or_narrowed": [
+    {
+      "reason": "LA-016 generated_program_count=0; the handler consumes a declarative export_json instruction, not generated source text.",
+      "status": "absent",
+      "step": "Generated-code AST / model program"
+    },
+    {
+      "reason": "LegalIRCompilerAPI was not selected; the deterministic deontic parser is the recorded adapter. Independent legal review was not used.",
+      "status": "absent",
+      "step": "LegalIRCompilerAPI"
+    },
+    {
+      "reason": "The executed job is QF_BOOL SAT with satisfiability authority. SAT/UNSAT cannot authorize theorem_proof allows.",
+      "status": "absent",
+      "step": "Kernel theorem_proof"
+    },
+    {
+      "reason": "Source pins are SHA-256 content identities. Harness selected_evidence_cids include a constant stub CID that is labeled not-proof and is not shown as a receipt.",
+      "status": "absent",
+      "step": "Published IPFS proof CID"
+    },
+    {
+      "reason": "independent_human_gold remains false on the frozen LA-015 and LA-009 records.",
+      "status": "absent",
+      "step": "Independent human gold"
+    }
+  ],
+  "claim_limits": [
+    "Allowed and forbidden refer only to the frozen modeled policy and machine-checkable behavior contract.",
+    "Independent effect observation is the filesystem-journal observer, not an outside human reviewer.",
+    "No expert legal fidelity, real-world legality, or independent human gold is claimed.",
+    "SAT/UNSAT cannot authorize theorem_proof allows.",
+    "No fabricated signature or conceptual step is presented as executed.",
+    "Closed-loop model-generated programs remain unrun.",
+    "Detailed replay artifacts recover omitted intermediate fields; compact LA-015 rows remain the scored identities."
+  ],
+  "completed_at": "2026-09-12T18:32:51.805523Z",
+  "empirical_benchmark_result": true,
+  "environment": {
+    "HAVE_CRYPTO_ED25519": true,
+    "cryptography_version": "49.0.0",
+    "duckdb_origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+    "home": "/tmp/ipfs-accelerate-validation-home-la020",
+    "home_is_validation_prefix": true,
+    "observed_at": "2026-09-12T18:32:51.805547Z",
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-020-3f8cdf14987c-attempt-1-1789237144/external/ipfs_datasets/bin:/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-020-3f8cdf14987c-attempt-1-1789237144/external/ipfs_datasets/bin/.deps/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "python_version": "3.12.3",
+    "sympy_origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py"
+  },
+  "fabricated_signature": false,
+  "generated_program_count": 0,
+  "harness_version": "la-020-worked-trace/v1",
+  "illustrated": {
+    "permitted_useful_work": {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "decision": "allow",
+      "enforce_mode": "enforce",
+      "identity_digest": "b0875e6b1a86ac83a3e0b9b45085ce75cbadd9a6a7abdfab1e035e44e4e1d3cf",
+      "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+      "manifest": {
+        "artifact_id": "skill-security-bundle",
+        "artifact_sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+        "content_identity": "ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0",
+        "found": true,
+        "ipfs_cid_published": false,
+        "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+        "normalized_source_sha256": "c4f637f560e6ad58552cdac53694f8d42e086964b9b35da5d9a685f381d34b1a",
+        "population": "skill",
+        "redistribution": "retrieval_only",
+        "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+        "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+        "source_locator": {
+          "repository": "github.com/grapheneos/attestationserver",
+          "skill_id": "00bf87910b65138ba37289b1c504ccee30e92946045d0cefca49a22d3e46148c",
+          "source_url": "https://github.com/GrapheneOS/AttestationServer"
+        },
+        "source_record_sha256": "ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0",
+        "source_to_ir_status": "planned_not_materialized",
+        "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+        "status": "source_frozen_case_construction_and_independent_review_pending"
+      },
+      "mutation": "none",
+      "observed_effect_count": 1,
+      "observed_forbidden_effect": false,
+      "population": "skill",
+      "sat_status": "unsat",
+      "source": {
+        "action_count": 0,
+        "adapter": {
+          "id": "skillcenter-intent-normalizer",
+          "module": "ipfs_datasets_py.logic.intent_ir.normalize.skill",
+          "symbol": "SkillCenterIntentNormalizer.normalize_with_diagnostics",
+          "version": "skillcenter-intent-normalizer/v1"
+        },
+        "candidate_cid": null,
+        "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "control_edge_count": 0,
+        "cve_polarity_supported": null,
+        "cve_transfer_to_export_json": null,
+        "cve_untrusted_source_executed": null,
+        "document_id": "intent:skillcenter:8e128cbf4c4daa54d7d61c54864dd1759b03d3279f5379611420f54dd9397967",
+        "document_sha256": "2113817aa46ab9730193c65c22a6eaa93f159e28a9b0ba209debd0d2c0a29c87",
+        "element_count": null,
+        "independent_human_gold": false,
+        "legal_ir_compiler_available": null,
+        "legal_ir_compiler_selected": null,
+        "mutation_class": "source_faithful",
+        "population": "skill",
+        "prediction_kind": "skill_intent_ir",
+        "schema_valid": true,
+        "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+        "source_record_id": null,
+        "span_linkage": {
+          "checker": "la-009-quoted-span-hash-checker",
+          "hash_matches": 16,
+          "hash_mismatches": 0,
+          "linked": true,
+          "reconstructed_sha256": "26e6897a4690392ed6567f9fbc902f3eb6583d200a2cc195892abc2405e3035e",
+          "span_count": 16
+        },
+        "split": "development",
+        "statement_count": 10,
+        "status": "prediction",
+        "supported_unsupported_fields": {
+          "supported": [
+            "statements"
+          ],
+          "unsupported": [
+            "actions",
+            "control_edges"
+          ]
+        },
+        "typed_compiler_available": false,
+        "unmeasured": {
+          "expert_legal_fidelity": "unmeasured",
+          "human_agreement": "unmeasured",
+          "numeric_score_assigned": false,
+          "reason": "withdrawn_without_independent_data",
+          "semantic_accuracy": "unmeasured"
+        },
+        "untrusted_markdown_executed": false
+      },
+      "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+      "split": "development",
+      "store_kind": "duckdb-file-typed-quack-owner",
+      "terminal_outcome": "success",
+      "ucan_crypto": "real-ed25519",
+      "ucan_token_sha256": "7c3c672fef6711990550af7f97134d67b372f0a56d5ddfcdfceb00f03993800e",
+      "useful_work": true
+    },
+    "variants": [
+      {
+        "allowed": {
+          "attempt_id": "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+          "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+          "decision": "allow",
+          "identity_digest": "9e588a3240284cc6f38c68d3f70933c43559934bf1534d9524a7e89cf31e567f",
+          "observed_effect_count": 1,
+          "observed_forbidden_effect": false,
+          "terminal_outcome": "success",
+          "useful_work": true
+        },
+        "divergence": "Step 8 signed delegation: UCAN audience did:wrong decision=deny reason=ucan_denied; handler was not dispatched.",
+        "forbidden": {
+          "attempt_id": "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+          "case_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+          "consume_outcome": "accepted",
+          "decision": "deny",
+          "denial_reason": "context-mismatch",
+          "enforce_decision": "deny",
+          "identity_digest": "056f447e3b7d7534540a6095df7c092a8fa53d755d28e9dc9f130ebd205cbc4e",
+          "observed_effect_count": 0,
+          "observed_forbidden_effect": false,
+          "sat_status": "unsat",
+          "terminal_outcome": "denial",
+          "ucan_decision": "deny",
+          "useful_work": false
+        },
+        "kind": "rejected_recipient",
+        "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+        "mutation": "wrong_audience",
+        "population": "cve",
+        "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4"
+      },
+      {
+        "allowed": {
+          "attempt_id": "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "decision": "allow",
+          "identity_digest": "d049b94cb70891f70456b0f845529a0cf245f8c1342a5342eb3fcbf9162be2e3",
+          "observed_effect_count": 1,
+          "observed_forbidden_effect": false,
+          "terminal_outcome": "success",
+          "useful_work": true
+        },
+        "divergence": "Step 9 ENFORCE revalidation: supervisor context listed an extra undeclared effect and enforce_decision=deny denial=context-mismatch.",
+        "forbidden": {
+          "attempt_id": "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "case_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "consume_outcome": "accepted",
+          "decision": "deny",
+          "denial_reason": "context-mismatch",
+          "enforce_decision": "deny",
+          "identity_digest": "10f53a7911fbfa34bb174469cbf648b59543c46e680fae1a32b336aac65a7af1",
+          "observed_effect_count": 0,
+          "observed_forbidden_effect": false,
+          "sat_status": "unsat",
+          "terminal_outcome": "denial",
+          "ucan_decision": "allow",
+          "useful_work": false
+        },
+        "kind": "undeclared_effect",
+        "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+        "mutation": "undeclared_handler_effect",
+        "population": "cve",
+        "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f"
+      },
+      {
+        "allowed": {
+          "attempt_id": "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+          "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+          "decision": "allow",
+          "identity_digest": "a658596422007ff975e932cce23c413f599a0c0ec848e334f68dc056cd3578ba",
+          "observed_effect_count": 1,
+          "observed_forbidden_effect": false,
+          "terminal_outcome": "success",
+          "useful_work": true
+        },
+        "divergence": "Step 9 consumption: warmup consume accepted then replay consume idempotent_replay; enforce_decision=deny.",
+        "forbidden": {
+          "attempt_id": "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "case_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "consume_outcome": "idempotent_replay",
+          "decision": "deny",
+          "denial_reason": "replayed",
+          "enforce_decision": "deny",
+          "identity_digest": "a8c7ffea9926f5f5b5db66b119272b8ff359e846bf9a9787d5e9ee56da8708eb",
+          "observed_effect_count": 0,
+          "observed_forbidden_effect": false,
+          "sat_status": "unsat",
+          "terminal_outcome": "denial",
+          "ucan_decision": "allow",
+          "useful_work": false
+        },
+        "kind": "replay",
+        "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+        "mutation": "replay",
+        "population": "cve",
+        "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188"
+      }
+    ]
+  },
+  "independent_human_gold": false,
+  "mismatch_count": 0,
+  "model_calls": 0,
+  "pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "present": true,
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "size_bytes": 51466
+    },
+    "authorization.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "present": true,
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "size_bytes": 13330
+    },
+    "baselines.py": {
+      "path": "papers/completion/law_to_action/benchmark/baselines.py",
+      "present": true,
+      "sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "size_bytes": 57307
+    },
+    "durable_consumption.py": {
+      "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+      "present": true,
+      "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "size_bytes": 71273
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "present": true,
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "size_bytes": 12768
+    },
+    "fixed_actions_raw.jsonl": {
+      "path": "papers/completion/law_to_action/results/fixed_actions/raw.jsonl",
+      "present": true,
+      "sha256": "bd2e78e40f6c77679f8dd675357dc91cfdbedadf7806dd94c027119a030fcd49",
+      "size_bytes": 673566
+    },
+    "la015_run_fixed_actions.py": {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+      "present": true,
+      "sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "size_bytes": 61888
+    },
+    "source_ir_raw.jsonl": {
+      "path": "papers/completion/law_to_action/results/source_ir/raw.jsonl",
+      "present": true,
+      "sha256": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+      "size_bytes": 412543
+    },
+    "sources.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+      "present": true,
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+      "size_bytes": 51880
+    },
+    "splits.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+      "present": true,
+      "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+      "size_bytes": 17657
+    },
+    "ucan.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+      "present": true,
+      "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "size_bytes": 21851
+    }
+  },
+  "replay_matches_la015": true,
+  "run_identity": {
+    "arm_id": "A4",
+    "detailed_replay_harness": "la-020-worked-trace/v1",
+    "harness_version": "la-015-fixed-action-harness/v1",
+    "implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "seed": 104729,
+    "source_run": "LA-015"
+  },
+  "schema": "law-to-action-worked-source-to-effect-trace/v1",
+  "selection_rule": "One successful skill bounded-export A4 cell at seed 104729, plus the matched case-0/case-1 A4 pairs whose case-1 mutations are wrong_audience, undeclared_handler_effect, and replay.",
+  "started_at": "2026-09-12T18:32:50.696972Z",
+  "status": "executed_detailed_replay_of_frozen_identities",
+  "task": "LA-020",
+  "theorem_proof": false,
+  "twelve_steps": [
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "content_identity",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_manifest_selected.json"
+        },
+        {
+          "field": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json"
+        }
+      ],
+      "name": "Resolve source and declaration manifests by exact revision/CID",
+      "notes": [
+        "No source body CID was published for this paper artifact.",
+        "SHA-256 content identity is the retained pin."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 1,
+      "summary": "Frozen source_id skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693 with content identity ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0; IPFS publication was not performed."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "document_id",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_ir_selected.json"
+        },
+        {
+          "field": "source_ir",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        }
+      ],
+      "name": "Import skill procedure as data; derive or validate IntentIR",
+      "notes": [
+        "Untrusted Markdown was not executed.",
+        "Typed Intent compiler remains unavailable."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 2,
+      "summary": "SkillCenter normalizer produced skill_intent_ir document_id=intent:skillcenter:8e128cbf4c4daa54d7d61c54864dd1759b03d3279f5379611420f54dd9397967 schema_valid=True. Typed compiler available=False."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "legal_ir_compiler_available",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_ir_selected.json"
+        },
+        {
+          "field": "span_linkage",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/source_ir_selected.json"
+        }
+      ],
+      "name": "Select applicable LegalIR and reviewed SecurityIR constraints",
+      "notes": [
+        "legal_ir_compiler_available=None",
+        "Expert legal fidelity remains unmeasured."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "partial",
+      "step": 3,
+      "summary": "LegalIRCompilerAPI was not the selected adapter. Independent human legal/security review was not used. Machine-contract span linkage ran."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "identity",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "identity_digest",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json"
+        }
+      ],
+      "name": "Bind actual requested tool, arguments, actor and expected effects",
+      "notes": [],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 4,
+      "summary": "Bound actor=did:client:tenant-a tool=export_json path=exports/fa-075d8327ad20c2d4.json candidate_digest=b0875e6b1a86ac83."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "identity.declared_effects",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "handler.observation",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        }
+      ],
+      "name": "Correlate intent-side effects with code/handler-side observations",
+      "notes": [
+        "Independent generated-code AST analysis did not run.",
+        "No model-generated program exists for this identity."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "partial",
+      "step": 5,
+      "summary": "The handler accepts a declarative export_json instruction, not generated source. LA-016 produced 0 generated programs. Declared filesystem.export_json effects were compared with the independent journal observer."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "sat",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "sat_raw",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        }
+      ],
+      "name": "Compose and execute the required formal jobs; retain non-successes",
+      "notes": [
+        "SAT/UNSAT cannot authorize theorem_proof allows."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 6,
+      "summary": "QF_BOOL SAT provider=unsat checker agrees=True. Authority is satisfiability, not theorem_proof."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "receipt",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "capability",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        }
+      ],
+      "name": "Produce an exact-context decision, not an effect",
+      "notes": [
+        "Do not treat the harness stub CID as a proof receipt.",
+        "stub_cid_labeled_not_proof=bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi"
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 7,
+      "summary": "An internal BoundContext decision receipt and capability were derived for the exact actor/tool/args digest. Harness selected_evidence_cids are constants, not a published proof."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "ucan",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "token_sha256",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.ucan-meta.json"
+        }
+      ],
+      "name": "Check signed delegation and host-controlled current policy/state",
+      "notes": [
+        "Signature bytes are from cryptography Ed25519, not a fixture verifier."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 8,
+      "summary": "Real Ed25519 UCAN verifier decision=allow token_sha256=7c3c672fef671199 signature_present=True."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "enforce",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "owner",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        }
+      ],
+      "name": "In enforce mode, revalidate and consume the exact permitted use",
+      "notes": [],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 9,
+      "summary": "ENFORCE decision=allow store=duckdb-file-typed-quack-owner in_memory=False consume=accepted."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "handler",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "handler_calls",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json"
+        }
+      ],
+      "name": "Dispatch once through the selected protected path",
+      "notes": [],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 10,
+      "summary": "BoundedExportHandler.export_json handler_calls=1 delegate_called=True."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "handler.observation",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        },
+        {
+          "field": "observed_effect_count",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/evidence/la015_selected.json"
+        }
+      ],
+      "name": "Record observed outcome separately from proof and authorization",
+      "notes": [],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 11,
+      "summary": "Independent observer v2 counted effects=1 journal=1 useful_work=True (LA-015 compact useful_work=True)."
+    },
+    {
+      "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "case_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "evidence": [
+        {
+          "field": "owner.consume_cas",
+          "path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json"
+        }
+      ],
+      "name": "Commit operational progression through the DuckDB owner",
+      "notes": [
+        "Quack Unix-socket gateway is not claimed; embedded exclusive-lock owner ran."
+      ],
+      "run_identity": {
+        "arm_id": "A4",
+        "attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729,
+        "source_run": "LA-015"
+      },
+      "status": "ran",
+      "step": 12,
+      "summary": "Typed Quack owner consume CAS outcome=accepted generation=1 revision=1."
+    }
+  ]
+}

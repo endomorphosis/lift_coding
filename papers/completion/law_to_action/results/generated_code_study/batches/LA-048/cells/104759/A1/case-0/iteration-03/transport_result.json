@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 132,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 1420,
+  "prompt_tokens": 1420,
+  "raw_sha256": "28b962c615e0ab583c60eef445ff3b733257b1319b978d5b4393c8dbc979bd85",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    emit_allowed(payload)\\\"}\",\"json_object\":{\\\"program\\\":\\\"def run(payload):\\\\n    emit_allowed(payload)\\\"}\",\"source\":\"family:2370f765432989bf05efd823080d2de2858b52bcab58dce3bc8680fa9480fa948b6a\",\"description\":\"Emit the source-relative JSON record through emit_allowed\",\"handlers_used\":{}}\"}",
+  "wall_seconds": 12.74094947699632
+}

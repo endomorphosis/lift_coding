@@ -1,0 +1,55 @@
+{
+  "schema": "law-to-action-private-alias-map/v1",
+  "classification": "private author companion; exclude from anonymous public bundles",
+  "task_id": "LA-024",
+  "recorded_at": "2026-09-13T02:39:50.897613+00:00",
+  "note": "Anonymous PDF uses the public alias. Camera-ready restoration uses the author-maintained symbol.",
+  "aliases": [
+    {
+      "anonymous": "inspected legal-source program",
+      "author_maintained": "author-maintained legal program"
+    },
+    {
+      "anonymous": "PreInvocationEnforcer",
+      "author_maintained": "SupervisorPreInvocationEnforcement"
+    },
+    {
+      "anonymous": "SandboxExportHandler",
+      "author_maintained": "BoundedExportHandler"
+    },
+    {
+      "anonymous": "LegalIRCompiler",
+      "author_maintained": "LegalIRCompilerAPI"
+    },
+    {
+      "anonymous": "SkillRecordAdapter",
+      "author_maintained": "SkillCenterSkillRecord"
+    },
+    {
+      "anonymous": "ConstraintCompiler",
+      "author_maintained": "IRConstraintCompiler"
+    },
+    {
+      "anonymous": "AuthorizationService",
+      "author_maintained": "IntentAuthorizationService"
+    },
+    {
+      "anonymous": "TypedStateClient",
+      "author_maintained": "QuackStateClient"
+    },
+    {
+      "anonymous": "CVEFixesAdapter",
+      "author_maintained": "adapt_cvefixes_candidate"
+    }
+  ],
+  "retained_independent_sources": [
+    "hitoshura25/cvefixes@d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "Tommysha/skillcenter-bundles@f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+    "GovInfo USCODE-2024 section PDFs"
+  ],
+  "excluded_from_anonymous_package": [
+    "papers/completion/law_to_action/private/source_provenance.json",
+    "https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0",
+    "operator home paths"
+  ]
+}

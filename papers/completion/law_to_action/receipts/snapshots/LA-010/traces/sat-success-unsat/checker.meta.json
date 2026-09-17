@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_checker.py",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-success-unsat.json",
+    "papers/completion/law_to_action/receipts/snapshots/LA-010/traces/sat-success-unsat/provider.json"
+  ],
+  "completed_at": "2026-09-12T01:57:29.539549+00:00",
+  "elapsed_seconds": 0.03589831304270774,
+  "exit_code": 0,
+  "parsed": {
+    "agrees_with_provider": true,
+    "algorithm": "enumerate-all-assignments",
+    "assignments_examined": 8,
+    "authority_kind": "satisfiability",
+    "checker": "exhaustive-truth-table",
+    "claimed_model_accepted": null,
+    "elapsed_seconds": 1.1473079212009907e-05,
+    "forged_evidence": false,
+    "model": null,
+    "nclauses": 4,
+    "nvars": 3,
+    "status": "unsat"
+  },
+  "started_at": "2026-09-12T01:57:29.503649+00:00",
+  "timed_out": false,
+  "timeout_seconds": 5
+}

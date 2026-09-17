@@ -1,0 +1,110 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-011",
+  "status": "complete",
+  "completed_at": "2026-09-16T22:57:05.339884+00:00",
+  "completion_mode": "prefix splice and lexical admission over the frozen 15-record warm-up JSONL; not a lake compile and not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/splice.py": "834bf2186d0b0ab475901262d10a936ad91cdb739253a9cd17befc609f5473f4",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/test_splice.py": "52d16bbfeb9f3e42043dd65b982b3b406d6b94c2a07dfa44502b7a9c0ca0cd78",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/git-head.txt": "7491be87a1c405802f6973a6fcb8e8c34cfd1506e68026f427d830edc5e0489f",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.json": "322c195134f54cd48fe270a705e86885ef73137a68c910d770cb1fe1254b95e9",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.meta.json": "2c524a24059aa70f8ae1b00e02699a740bec9809644edb777216cd3619408602",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.stdout.log": "322c195134f54cd48fe270a705e86885ef73137a68c910d770cb1fe1254b95e9",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.meta.json": "2c8dc2435aa227d4eac26486ba51c8bb545bce17d0fcc7abc294b90f97ba1d08",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.stdout.log": "c10563269f6a95bce468fcd5e5fc9e814d42cd7864f6d32cea3790854c31c2f0"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/splice.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/splice.py",
+    "papers/completion/lean_refactor_arena/harness/test_splice.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/test_splice.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Every warm-up record satisfies src.startswith(statement); body is the suffix after the statement.",
+      "status": "met",
+      "explanation": "load_warmup_records read all 15 JSONL objects under frozen digest 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804. split_statement_body asserts src.startswith(statement) and sets body_suffix = src[len(statement):]. The unit test installs one test_record_* method per name plus subtests in test_every_record_src_startswith_statement and test_body_is_the_suffix_after_the_statement. splice.py --self-check reported prefix_bind_all=true, reconstructed_src equality for every record, and jsonl_unchanged=true. The JSONL was not rewritten.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/splice.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/test_splice.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/jsonl-sha256.txt"
+      ]
+    },
+    {
+      "criterion": "Never scan for the first :=; named := inside types remains part of the frozen statement.",
+      "status": "met",
+      "explanation": "split_statement_body uses only startswith and len(statement); an AST audit of splice.py finds no bare two-character assign needle and no find/index/split of that needle. Tests lock the measured named-assign cases: Cslib.CCS.bisimilarity_congr_choice has first := at byte 55 of a 117-byte statement ((defs := defs) stays in the statement); Binius.BinaryBasefold.fold_advances_evaluation_poly keeps 27 := and by omega inside the statement. For all five named-assign records, cutting src at the first := is not the body suffix. Lexical admission punches statement + ' := by\\nsorry' and never passes the original src as native_source or canonical_source.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/splice.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/test_splice.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.json"
+      ]
+    },
+    {
+      "criterion": "Unit test covers all 15 records; SHA-256 of the JSONL remains 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804.",
+      "status": "met",
+      "explanation": "/usr/bin/python3.12 papers/completion/lean_refactor_arena/harness/test_splice.py ran 36 tests, 0 failures, 0 errors, testsRun includes one test_record_* method per warm-up name (15/15) plus digest, named-assign, and lexical-admission tests. SHA-256 of data/benchmark_data_warmup.jsonl is 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804 (113826 bytes) before and after the tests. splice.py --self-check reported the same digest, n_records=15, compiled=false, lake=false, arena_score=null.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/test_splice.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/jsonl-sha256.txt"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/test_splice.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/test_splice.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/test_splice.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/splice.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-011/outputs/splice.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "831ece0c42a9ed27ebb865a1d1fb565b3ed4c7f0",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "splice_py_sha256": "834bf2186d0b0ab475901262d10a936ad91cdb739253a9cd17befc609f5473f4",
+    "test_splice_py_sha256": "52d16bbfeb9f3e42043dd65b982b3b406d6b94c2a07dfa44502b7a9c0ca0cd78",
+    "protocol": "LRA/v1",
+    "lexical_admission": "admit_lean_proof_text on statement + ' := by\\nsorry' with tactic-only proof_text",
+    "model_or_solver_experiment": "none; cpu-medium prefix splice and lexical admission only, no live Leanstral completion, no lake compile, no Arena scores"
+  },
+  "limitations": [
+    "Lexical admission is not a lake compile and is not the multi-tag Lean oracle.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "admit_lean_proof_text still scans the first := / by when expected_statement is supplied; LRA admission therefore leaves expected_statement empty and binds via src.startswith(statement).",
+    "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time has a Unicode iota lemma name that admit_lean_proof_text's ASCII identifier regex does not match, so tactic-only 'simp' is rejected as theorem_substitution; the JSONL prefix bind still holds and remains the authority.",
+    "Passing the original complete src as native_source or canonical_source is rejected (placeholder count / SOURCE_COPY). Tests document that path; the harness does not use it.",
+    "Putnam records omit start_line/end_line keys; header stays in the lake file and is not proof_text.",
+    "This cpu-medium task did not call Leanstral, did not LOCK_EX, did not start llama-server, and did not compile lake projects.",
+    "The implementation checkpoint directory was not writable on this host (read-only filesystem), so no coordinate checkpoint was stored there."
+  ]
+}

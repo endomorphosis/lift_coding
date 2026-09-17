@@ -1,0 +1,133 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+      "qualify",
+      "--out",
+      "papers/completion/law_to_action/results/development_qualification"
+    ],
+    "completed_at": "2026-09-12T06:37:47.082373+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/qualify.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+    "started_at": "2026-09-12T06:37:44.733593+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/validate_qualification.py"
+    ],
+    "completed_at": "2026-09-12T06:37:47.118504+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/validate.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/validate_qualification.py",
+    "started_at": "2026-09-12T06:37:47.082720+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+      "admit-final",
+      "--out",
+      "papers/completion/law_to_action/results/development_qualification"
+    ],
+    "completed_at": "2026-09-12T06:37:47.164905+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/admit.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/qualify_final_runtime.py",
+    "started_at": "2026-09-12T06:37:47.118830+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+      "import",
+      "--returned",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent_generated.json",
+      "--out",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/agent-out"
+    ],
+    "completed_at": "2026-09-12T06:37:47.194747+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/agent-import.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+    "started_at": "2026-09-12T06:37:47.165616+00:00"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+      "import",
+      "--returned",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete.json",
+      "--out",
+      "papers/completion/law_to_action/receipts/snapshots/LA-028/negative-reviews/incomplete-out"
+    ],
+    "completed_at": "2026-09-12T06:37:47.237392+00:00",
+    "cwd": ".",
+    "environment_overrides": {
+      "LANG": "C.UTF-8",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "exit_code": 0,
+    "log": "papers/completion/law_to_action/receipts/snapshots/LA-028/validation/incomplete-import.stdout.log",
+    "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-028/review_import.py",
+    "started_at": "2026-09-12T06:37:47.195120+00:00"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "child_pid": 2809608,
+  "child_returncode": -9,
+  "child_started": true,
+  "child_termination_proven": true,
+  "cleanup_errors": [],
+  "cleanup_seconds_after_deadline_observation": 0.004990063025616109,
+  "deadline_expired": true,
+  "deadline_overrun_seconds": 0.0015306859277188778,
+  "error": "HTTP exchange exceeded its complete wall deadline",
+  "request_sha256": "e87b2fc7d68e26416105fbcfd1a2d059fa4ad28c19aa41a5c39551027b1d0783",
+  "response_bytes_retained": 298,
+  "response_read_error": null,
+  "response_sha256": "fd78be363155ef60d2c634d0f5abd8bd033002b12999d00143d6152ee04353bd",
+  "status": null,
+  "timeout_seconds": 0.3,
+  "wall_seconds": 0.3065207489999011,
+  "worker": null,
+  "worker_metadata_error": null
+}

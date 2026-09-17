@@ -1,0 +1,2353 @@
+{
+  "arena_score": null,
+  "called_select_premises": false,
+  "cap_fixture": {
+    "capped_at_16": true,
+    "first": "Lemma_00",
+    "includes_extra_apply": false,
+    "last": "Lemma_15",
+    "names": [
+      "Lemma_00",
+      "Lemma_01",
+      "Lemma_02",
+      "Lemma_03",
+      "Lemma_04",
+      "Lemma_05",
+      "Lemma_06",
+      "Lemma_07",
+      "Lemma_08",
+      "Lemma_09",
+      "Lemma_10",
+      "Lemma_11",
+      "Lemma_12",
+      "Lemma_13",
+      "Lemma_14",
+      "Lemma_15"
+    ],
+    "returned": 16,
+    "tactics": [
+      "simp"
+    ],
+    "uncapped": 21,
+    "uncapped_has_all_twenty_plus_extra": true
+  },
+  "compiled": false,
+  "corpus_manifest_attrs": [],
+  "forbidden_imports": [],
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "full_neighbor_proofs_retrieved": true,
+  "has_exact_lemma": true,
+  "has_rw_lemma": true,
+  "has_simp_lemma": true,
+  "imported_names": [
+    "Any",
+    "Mapping",
+    "Optional",
+    "Path",
+    "Sequence",
+    "__future__",
+    "annotations",
+    "argparse",
+    "asdict",
+    "ast",
+    "dataclass",
+    "dataclasses",
+    "hashlib",
+    "json",
+    "pathlib",
+    "re",
+    "splice",
+    "sys",
+    "typing"
+  ],
+  "jsonl_bytes": 113826,
+  "jsonl_unchanged": true,
+  "lake": false,
+  "llama_server_started": false,
+  "loop": "v2-deferred-retrieve-only",
+  "n_neighbors_all_14": true,
+  "n_neighbors_per_query": 14,
+  "n_records": 15,
+  "names": [
+    "CallElimCorrect.substOldPostSubset",
+    "CallElimCorrect.extractedOldExprInVars",
+    "Core.InitsUpdatesComm",
+    "fundamental_theorem_of_variational_calculus'",
+    "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+    "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+    "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+    "Cslib.SKI.parallelReduction_diamond",
+    "Cslib.CCS.bisimilarity_congr_choice",
+    "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+    "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+    "interleaved_affine_gaps_imply_tensor_gaps",
+    "putnam_1964_a4",
+    "putnam_1964_b2",
+    "putnam_1995_a3"
+  ],
+  "neighbor_cover_all": true,
+  "no_corpus_manifest_ingest": true,
+  "no_invented_scores": true,
+  "numeric_score_assignments": [],
+  "ok": true,
+  "protocol": "LRA/v1",
+  "records": [
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": false,
+      "has_simp": true,
+      "lemma_id_digest": "70097d371a247f758872fcedd7d14209553aa4afac8ecb1e40e2555b87253e9f",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 26,
+      "n_neighbors": 14,
+      "n_src_lemmas": 12,
+      "n_src_lemmas_uncapped": 12,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "neighbor_names": [
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "strata",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "substOld",
+        "ih",
+        "Imperative.HasVarsPure.getVars",
+        "Lambda.LExpr.LExpr.getVars",
+        "List.Subset.app",
+        "List.Subset.trans",
+        "cih",
+        "tih",
+        "eih",
+        "ih1",
+        "ih2",
+        "trih"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "substOld",
+          "offset": 253,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "ih",
+          "offset": 683,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Imperative.HasVarsPure.getVars",
+          "offset": 716,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Lambda.LExpr.LExpr.getVars",
+          "offset": 748,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "List.Subset.app",
+          "offset": 797,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "List.Subset.trans",
+          "offset": 825,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "cih",
+          "offset": 855,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "tih",
+          "offset": 1005,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "eih",
+          "offset": 1129,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "ih1",
+          "offset": 1611,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "ih2",
+          "offset": 1745,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "trih",
+          "offset": 1970,
+          "opener": "apply",
+          "tactic": "apply"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": false,
+      "has_simp": true,
+      "lemma_id_digest": "ec759d95288aed7ad6ad00b3fc9afccfe091588bad7c9ca5ee1bab1e93860f01",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 18,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "strata",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Imperative.HasVarsPure.getVars",
+        "extractOldExprVars",
+        "Lambda.LExpr.LExpr.getVars",
+        "Hin",
+        "Hfalse",
+        "List.Subset.app",
+        "List.Subset.trans",
+        "fn_ih",
+        "H1",
+        "e_ih",
+        "H2",
+        "ih",
+        "trih",
+        "eih",
+        "cih",
+        "tih"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Imperative.HasVarsPure.getVars",
+          "offset": 204,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "extractOldExprVars",
+          "offset": 236,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Lambda.LExpr.LExpr.getVars",
+          "offset": 266,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Hin",
+          "offset": 467,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Hfalse",
+          "offset": 621,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "List.Subset.app",
+          "offset": 697,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "List.Subset.trans",
+          "offset": 727,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "fn_ih",
+          "offset": 759,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "H1",
+          "offset": 779,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "e_ih",
+          "offset": 866,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "H2",
+          "offset": 885,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "ih",
+          "offset": 969,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "trih",
+          "offset": 1172,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "eih",
+          "offset": 1268,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "cih",
+          "offset": 1431,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "tih",
+          "offset": 1552,
+          "opener": "apply",
+          "tactic": "apply"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "e827665541e4ab85a9b0f09b93e156a37ffd35fdc071c97844952cc335f01624",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 18,
+      "name": "Core.InitsUpdatesComm",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "strata",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "InitStatesNotDefined",
+        "InitStatesNodup",
+        "InitStatesUpdated",
+        "Hinit",
+        "updatedStatesInit",
+        "UpdateStateNotDefMonotone'",
+        "UpdateStatesNotDefMonotone'",
+        "UpdateStates.update_some",
+        "UpdateStateUpdated",
+        "Hup",
+        "updatedStates",
+        "updatedStateComm'",
+        "isDefined",
+        "Option.isSome",
+        "updatedStateUpdate",
+        "InitStatesSomeMonotone"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "InitStatesNotDefined",
+          "offset": 619,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "InitStatesNodup",
+          "offset": 656,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "InitStatesUpdated",
+          "offset": 682,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Hinit",
+          "offset": 700,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "updatedStatesInit",
+          "offset": 818,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "UpdateStateNotDefMonotone'",
+          "offset": 854,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "UpdateStatesNotDefMonotone'",
+          "offset": 900,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "UpdateStates.update_some",
+          "offset": 1021,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "UpdateStateUpdated",
+          "offset": 1085,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Hup",
+          "offset": 1104,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "updatedStates",
+          "offset": 1109,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "updatedStateComm'",
+          "offset": 1140,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "isDefined",
+          "offset": 1220,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Option.isSome",
+          "offset": 1231,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "updatedStateUpdate",
+          "offset": 1339,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "InitStatesSomeMonotone",
+          "offset": 1384,
+          "opener": "apply",
+          "tactic": "apply"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "cd4ae896482ec57d26a0daa8fe24fb19f344651f7d36a570cd08bbdc9a0c5074",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 17,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "physlib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "funext_iff",
+        "hx0",
+        "congrArg",
+        "mem_sphere_iff_norm.mp",
+        "inner_add_left",
+        "ContDiffBump.support_eq",
+        "Metric.mem_closedBall",
+        "Metric.mem_ball.mpr",
+        "inner_smul_right'",
+        "h\u03c60",
+        "mul_nonneg",
+        "Function.notMem_support.mp",
+        "hx",
+        "Function.support_mul",
+        "Set.mem_inter_iff",
+        "Function.mem_support"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "funext_iff",
+          "offset": 286,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "hx0",
+          "offset": 647,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "congrArg",
+          "offset": 658,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "mem_sphere_iff_norm.mp",
+          "offset": 1528,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "inner_add_left",
+          "offset": 1979,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "ContDiffBump.support_eq",
+          "offset": 3041,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Metric.mem_closedBall",
+          "offset": 3206,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Metric.mem_ball.mpr",
+          "offset": 3255,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "inner_smul_right'",
+          "offset": 3957,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u03c60",
+          "offset": 4668,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "mul_nonneg",
+          "offset": 5336,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Function.notMem_support.mp",
+          "offset": 5468,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "hx",
+          "offset": 5495,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Function.support_mul",
+          "offset": 6218,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Set.mem_inter_iff",
+          "offset": 6240,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Function.mem_support",
+          "offset": 6259,
+          "opener": "simp only [",
+          "tactic": "simp"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": false,
+      "has_exact": false,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "0fd8f7930d725b37c461706b6f7175a2d5e8c8e8157eb9fcfae60d9ef67ed063",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 37,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "physlib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Time.deriv_euclid",
+        "electricField_differentiable_time",
+        "hA.of_le",
+        "right_eq_inf.mp",
+        "rfl",
+        "time_deriv_electricField_of_isExtrema",
+        "hA",
+        "hJ",
+        "Time.deriv_eq",
+        "fderiv_fun_sub",
+        "one_div",
+        "mul_inv_rev",
+        "FunLike.coe_sub",
+        "Pi.sub_apply",
+        "fderiv_const_mul",
+        "Differentiable.fun_sum"
+      ],
+      "src_lemma_tactics": [
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Time.deriv_euclid",
+          "offset": 1539,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "electricField_differentiable_time",
+          "offset": 1558,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "hA.of_le",
+          "offset": 1605,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "right_eq_inf.mp",
+          "offset": 1615,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "rfl",
+          "offset": 1631,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "time_deriv_electricField_of_isExtrema",
+          "offset": 1653,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "hA",
+          "offset": 1691,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "hJ",
+          "offset": 1696,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Time.deriv_eq",
+          "offset": 1866,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "fderiv_fun_sub",
+          "offset": 1891,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "one_div",
+          "offset": 1917,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "mul_inv_rev",
+          "offset": 1926,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "FunLike.coe_sub",
+          "offset": 1939,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Pi.sub_apply",
+          "offset": 1956,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "fderiv_const_mul",
+          "offset": 1987,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Differentiable.fun_sum",
+          "offset": 2005,
+          "opener": "rw [",
+          "tactic": "rw"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": false,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "1914cd83b85c393155a22456785ee680703f158c02fd9fb6b12e606403f52cfa",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 39,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "physlib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Submodule.span_induction",
+        "ofListBasis_eq_ofList",
+        "map_mul",
+        "pb",
+        "pa",
+        "ofCrAnListF_singleton",
+        "superCommuteF_ofCrAnListF_ofCrAnListF",
+        "mul_sub",
+        "sub_mul",
+        "ofCrAnListF_append",
+        "timeOrderF_ofCrAnListF",
+        "map_smul",
+        "sub_right_inj",
+        "crAnTimeOrderSign_swap_eq_time",
+        "h\u03c6\u03c8",
+        "h\u03c8\u03c6"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Submodule.span_induction",
+          "offset": 504,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "ofListBasis_eq_ofList",
+          "offset": 556,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "map_mul",
+          "offset": 579,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "pb",
+          "offset": 588,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "pa",
+          "offset": 971,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "ofCrAnListF_singleton",
+          "offset": 1379,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "superCommuteF_ofCrAnListF_ofCrAnListF",
+          "offset": 1441,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "mul_sub",
+          "offset": 1496,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "sub_mul",
+          "offset": 1505,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "ofCrAnListF_append",
+          "offset": 1516,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "timeOrderF_ofCrAnListF",
+          "offset": 1554,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "map_smul",
+          "offset": 1616,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "sub_right_inj",
+          "offset": 1626,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "crAnTimeOrderSign_swap_eq_time",
+          "offset": 1969,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u03c6\u03c8",
+          "offset": 2000,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u03c8\u03c6",
+          "offset": 2004,
+          "opener": "rw [",
+          "tactic": "rw"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": false,
+      "has_rw": false,
+      "has_simp": false,
+      "lemma_id_digest": "eb28a99f9f7370bd96dfd22faa77de2a24ac3466d845092f765b258bf3b67d46",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 16,
+      "n_neighbors": 14,
+      "n_src_lemmas": 2,
+      "n_src_lemmas_uncapped": 2,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "cslib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "LC.abs",
+        "LC.tabs"
+      ],
+      "src_lemma_tactics": [
+        "apply"
+      ],
+      "src_lemmas": [
+        {
+          "name": "LC.abs",
+          "offset": 1881,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "LC.tabs",
+          "offset": 2008,
+          "opener": "apply",
+          "tactic": "apply"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": false,
+      "has_rw": true,
+      "has_simp": false,
+      "lemma_id_digest": "ef89a7b18e28e59839c5e3ecad8c97a14a7edb67c374251531ba244826bd4d73",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 21,
+      "n_neighbors": 14,
+      "n_src_lemmas": 7,
+      "n_src_lemmas_uncapped": 7,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "cslib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "I_irreducible",
+        "a'",
+        "ha'",
+        "ha\u2082'",
+        "ParallelReduction.par",
+        "hc",
+        "h'"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "rw"
+      ],
+      "src_lemmas": [
+        {
+          "name": "I_irreducible",
+          "offset": 531,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "a'",
+          "offset": 545,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "ha'",
+          "offset": 548,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "ha\u2082'",
+          "offset": 655,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "ParallelReduction.par",
+          "offset": 870,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "hc",
+          "offset": 1082,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h'",
+          "offset": 1353,
+          "opener": "rw [",
+          "tactic": "rw"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": false,
+      "has_rw": false,
+      "has_simp": false,
+      "lemma_id_digest": "11c5e2fe9ffa006246e72c19f427f997f24b49afc86ff69bd7d054a73abac48d",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 18,
+      "n_neighbors": 14,
+      "n_src_lemmas": 4,
+      "n_src_lemmas_uncapped": 4,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "cslib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Tr.choiceL",
+        "hb.le_bisimilarity",
+        "Tr.choiceR",
+        "HomBisimilarity.refl"
+      ],
+      "src_lemma_tactics": [
+        "apply"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Tr.choiceL",
+          "offset": 512,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "hb.le_bisimilarity",
+          "offset": 566,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "Tr.choiceR",
+          "offset": 680,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "HomBisimilarity.refl",
+          "offset": 733,
+          "opener": "apply",
+          "tactic": "apply"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "daaf5e46d6694f3c85c0355d196ddc5b5210ff55b0b5d38e0f833666bf0a83d2",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 86,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "arklib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Nat.sub_lt_sub_right",
+        "Nat.lt_add_of_pos_right",
+        "pos_of_neZero",
+        "Nat.pow_lt_pow_right",
+        "nonempty_subtype",
+        "C_i",
+        "Submodule.nonempty",
+        "Set.univ_nonempty",
+        "Set.mem_image",
+        "id",
+        "ENat.coe_mul",
+        "ENat.coe_le_coe",
+        "h_g'_min_card",
+        "hammingDist",
+        "ne_eq",
+        "\u0394H"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Nat.sub_lt_sub_right",
+          "offset": 1063,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Nat.lt_add_of_pos_right",
+          "offset": 1148,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "pos_of_neZero",
+          "offset": 1179,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Nat.pow_lt_pow_right",
+          "offset": 1272,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "nonempty_subtype",
+          "offset": 1374,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "C_i",
+          "offset": 1392,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Submodule.nonempty",
+          "offset": 1418,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Set.univ_nonempty",
+          "offset": 2066,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Set.mem_image",
+          "offset": 2480,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "id",
+          "offset": 2670,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "ENat.coe_mul",
+          "offset": 3122,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "ENat.coe_le_coe",
+          "offset": 3136,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h_g'_min_card",
+          "offset": 3153,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "hammingDist",
+          "offset": 3377,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "ne_eq",
+          "offset": 3390,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "\u0394H",
+          "offset": 3397,
+          "opener": "simp only [",
+          "tactic": "simp"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "91ef23c9f1ec834757acb2dde3a74e05a64f32134448264640b9590810f33194",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 105,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "arklib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Nat.lt_trans",
+        "Nat.lt_add_one",
+        "Nat.add_zero",
+        "j.val",
+        "mul_two_add_bit_lt_two_pow",
+        "Nat.pow_one",
+        "pow_add",
+        "Nat.sub_add_eq_sub_sub_rev",
+        "h1",
+        "omega",
+        "h2",
+        "Nat.add_sub_cancel",
+        "Subtype.eq_iff",
+        "h.symm",
+        "pointToIterateQuotientIndex_qMap_total_fiber_eq_self",
+        "h_res"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Nat.lt_trans",
+          "offset": 225,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Nat.lt_add_one",
+          "offset": 292,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Nat.add_zero",
+          "offset": 687,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "j.val",
+          "offset": 701,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "mul_two_add_bit_lt_two_pow",
+          "offset": 729,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "Nat.pow_one",
+          "offset": 1743,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "pow_add",
+          "offset": 1771,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Nat.sub_add_eq_sub_sub_rev",
+          "offset": 1799,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h1",
+          "offset": 1827,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "omega",
+          "offset": 1836,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h2",
+          "offset": 1844,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Nat.add_sub_cancel",
+          "offset": 1912,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Subtype.eq_iff",
+          "offset": 2313,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h.symm",
+          "offset": 2349,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "pointToIterateQuotientIndex_qMap_total_fiber_eq_self",
+          "offset": 2481,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h_res",
+          "offset": 2544,
+          "opener": "rw [",
+          "tactic": "rw"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": false,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "bab4302dce9f2609a8e60058678c641223bce24af598997d056cd6074be796b7",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 51,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "putnam_1964_a4",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "arklib",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "zero_add",
+        "gt_iff_lt",
+        "zero_lt_one",
+        "ModuleCode",
+        "forall_const",
+        "toAffineLineEval",
+        "prob_eq",
+        "Nat.cast_one",
+        "ENNReal.coe_one",
+        "one_mul",
+        "jointProximityNat\u2082",
+        "Fin.isValue",
+        "h_u_eq.symm",
+        "h_correlated_agreement",
+        "Fin.snoc_last",
+        "Fin.val_last"
+      ],
+      "src_lemma_tactics": [
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "zero_add",
+          "offset": 698,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "gt_iff_lt",
+          "offset": 708,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "zero_lt_one",
+          "offset": 719,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "ModuleCode",
+          "offset": 732,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "forall_const",
+          "offset": 744,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "toAffineLineEval",
+          "offset": 910,
+          "opener": "simp_rw [",
+          "tactic": "simp"
+        },
+        {
+          "name": "prob_eq",
+          "offset": 1163,
+          "opener": "simp_rw [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Nat.cast_one",
+          "offset": 1172,
+          "opener": "simp_rw [",
+          "tactic": "simp"
+        },
+        {
+          "name": "ENNReal.coe_one",
+          "offset": 1186,
+          "opener": "simp_rw [",
+          "tactic": "simp"
+        },
+        {
+          "name": "one_mul",
+          "offset": 1203,
+          "opener": "simp_rw [",
+          "tactic": "simp"
+        },
+        {
+          "name": "jointProximityNat\u2082",
+          "offset": 1328,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Fin.isValue",
+          "offset": 1348,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h_u_eq.symm",
+          "offset": 1558,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h_correlated_agreement",
+          "offset": 1615,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Fin.snoc_last",
+          "offset": 2567,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Fin.val_last",
+          "offset": 2751,
+          "opener": "rw [",
+          "tactic": "rw"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "9802822daf17b95dc48872afd4c64e06ff6758fd0198595e0262a91681023c5a",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 24,
+      "name": "putnam_1964_a4",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_b2",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "putnambench",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Set.mem_Icc",
+        "Prod.le_def",
+        "Set.Finite.subset",
+        "h\u2087",
+        "Set.not_infinite.mpr",
+        "Prod.ext_iff",
+        "h\u2081",
+        "add_assoc",
+        "h\u2084",
+        "h\u2085",
+        "h\u2086",
+        "h\u2088",
+        "h\u2089",
+        "h\u2081\u2080",
+        "h\u2081\u2081",
+        "h\u2081\u2082"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Set.mem_Icc",
+          "offset": 1028,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Prod.le_def",
+          "offset": 1041,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Set.Finite.subset",
+          "offset": 1359,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "h\u2087",
+          "offset": 1766,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Set.not_infinite.mpr",
+          "offset": 2104,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Prod.ext_iff",
+          "offset": 2244,
+          "opener": "simp_all [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2081",
+          "offset": 2323,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "add_assoc",
+          "offset": 2758,
+          "opener": "simp_all [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2084",
+          "offset": 5861,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u2085",
+          "offset": 5865,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u2086",
+          "offset": 5887,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2088",
+          "offset": 5895,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2089",
+          "offset": 5899,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2081\u2080",
+          "offset": 5903,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2081\u2081",
+          "offset": 5908,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2081\u2082",
+          "offset": 5913,
+          "opener": "simp [",
+          "tactic": "simp"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "fdd110d68fbdab60939f08e9959c86d55d8485430c664227821b698127b8222f",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 30,
+      "name": "putnam_1964_b2",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1995_a3"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "putnambench",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "Set.ext_iff",
+        "h\u2082",
+        "Set.nonempty_iff_ne_empty.mpr",
+        "h\u2085",
+        "Set.mem_inter_iff",
+        "h\u2088",
+        "hPS",
+        "h\u2084",
+        "h\u2089",
+        "h\u2086",
+        "Set.mem_compl_iff",
+        "hU'",
+        "hV'",
+        "Set.eq_empty_of_forall_not_mem",
+        "Finset.mem_sdiff",
+        "Finset.card_bij'"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "Set.ext_iff",
+          "offset": 359,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2082",
+          "offset": 382,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Set.nonempty_iff_ne_empty.mpr",
+          "offset": 406,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2085",
+          "offset": 863,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Set.mem_inter_iff",
+          "offset": 1038,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2088",
+          "offset": 1170,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "hPS",
+          "offset": 1293,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2084",
+          "offset": 1421,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2089",
+          "offset": 1679,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2086",
+          "offset": 1993,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "Set.mem_compl_iff",
+          "offset": 3015,
+          "opener": "simp_all [",
+          "tactic": "simp"
+        },
+        {
+          "name": "hU'",
+          "offset": 3099,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "hV'",
+          "offset": 3323,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Set.eq_empty_of_forall_not_mem",
+          "offset": 3418,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "Finset.mem_sdiff",
+          "offset": 4455,
+          "opener": "simp only [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Finset.card_bij'",
+          "offset": 5328,
+          "opener": "apply",
+          "tactic": "apply"
+        }
+      ]
+    },
+    {
+      "arena_score": null,
+      "corpus_manifest_ingest": false,
+      "full_src_retrieved": true,
+      "has_apply": true,
+      "has_exact": true,
+      "has_rw": true,
+      "has_simp": true,
+      "lemma_id_digest": "09927fbd4469445e1a700b216a743ef196a944d9749defe28b58d195062913d6",
+      "lemma_id_digest_hex64": true,
+      "lemmas_mentioned_in_src": true,
+      "mathlib_ingest": false,
+      "n_lemma_ids": 30,
+      "n_neighbors": 14,
+      "n_src_lemmas": 16,
+      "n_src_lemmas_uncapped": 34,
+      "name": "putnam_1995_a3",
+      "neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'",
+        "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+        "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+        "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "Cslib.SKI.parallelReduction_diamond",
+        "Cslib.CCS.bisimilarity_congr_choice",
+        "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+        "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "interleaved_affine_gaps_imply_tensor_gaps",
+        "putnam_1964_a4",
+        "putnam_1964_b2"
+      ],
+      "neighbors_are_the_other_fourteen": true,
+      "prefix_bind_neighbors": true,
+      "prompt_neighbor_names": [
+        "CallElimCorrect.substOldPostSubset",
+        "CallElimCorrect.extractedOldExprInVars",
+        "Core.InitsUpdatesComm",
+        "fundamental_theorem_of_variational_calculus'"
+      ],
+      "relevance_score": null,
+      "score": null,
+      "self_excluded": true,
+      "source": "putnambench",
+      "src_lemma_cap_held": true,
+      "src_lemma_names": [
+        "h\u2084",
+        "h\u2085",
+        "hdigits_to_num",
+        "Finset.sum_congr",
+        "Finset.sum_add_distrib",
+        "Finset.sum_ite_eq'",
+        "Finset.mem_univ",
+        "i.is_lt",
+        "h\u2088",
+        "h\u2087",
+        "h\u2086",
+        "h\u2081\u2080",
+        "h\u2089",
+        "h\u2081\u2081",
+        "Finset.dvd_sum",
+        "Finset.sum_const"
+      ],
+      "src_lemma_tactics": [
+        "apply",
+        "exact",
+        "rw",
+        "simp"
+      ],
+      "src_lemmas": [
+        {
+          "name": "h\u2084",
+          "offset": 902,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2085",
+          "offset": 1145,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "hdigits_to_num",
+          "offset": 1652,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Finset.sum_congr",
+          "offset": 2109,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "Finset.sum_add_distrib",
+          "offset": 2450,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Finset.sum_ite_eq'",
+          "offset": 2967,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "Finset.mem_univ",
+          "offset": 2987,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "i.is_lt",
+          "offset": 3004,
+          "opener": "simp [",
+          "tactic": "simp"
+        },
+        {
+          "name": "h\u2088",
+          "offset": 3103,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u2087",
+          "offset": 3415,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u2086",
+          "offset": 3443,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2081\u2080",
+          "offset": 3681,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "h\u2089",
+          "offset": 3719,
+          "opener": "exact",
+          "tactic": "exact"
+        },
+        {
+          "name": "h\u2081\u2081",
+          "offset": 6256,
+          "opener": "rw [",
+          "tactic": "rw"
+        },
+        {
+          "name": "Finset.dvd_sum",
+          "offset": 7392,
+          "opener": "apply",
+          "tactic": "apply"
+        },
+        {
+          "name": "Finset.sum_const",
+          "offset": 7917,
+          "opener": "simp [",
+          "tactic": "simp"
+        }
+      ]
+    }
+  ],
+  "score": null,
+  "src_lemma_cap": 16,
+  "src_lemmas_from_simp_rw_exact_apply": true,
+  "unknown_name_fail_closed": true,
+  "uses_fcntl": false,
+  "uses_lock_ex": false,
+  "uses_subprocess": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "warmup_path": "papers/completion/lean_refactor_arena/data/benchmark_data_warmup.jsonl"
+}

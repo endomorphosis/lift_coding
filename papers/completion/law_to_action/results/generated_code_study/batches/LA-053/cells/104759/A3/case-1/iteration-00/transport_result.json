@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 237,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "2faec0b1e04fb5bc69c1961e33a951e37a9dbbea6ca04c436d05a232dc3f0430",
+  "response_text": "```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n\"\n}\n```<|im_end|>\n<|im_start|>>assistant\n```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n\"\n}\n```<|im_end|>\n<|im_start|>assistant\n```json\n{\n  \"program\": \"def run(payload):\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n    emit_allowed(payload)\\n\"\n}\n```<|im_end|>",
+  "wall_seconds": 20.401949178005452
+}

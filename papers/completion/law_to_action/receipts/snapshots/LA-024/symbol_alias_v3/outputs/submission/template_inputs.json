@@ -1,0 +1,111 @@
+{
+  "schema": "vericodegen-template-inputs/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-024",
+  "recorded_at": "2026-09-13T02:39:50.897841+00:00",
+  "cfp": {
+    "url": "https://vericodegen.github.io/cfp.html",
+    "retrieved_at": "2026-09-13",
+    "http_status": 200,
+    "sha256": "66b5740723edb198ed6faf80430bbee3634e316ee4c0385a64da6480e0724468",
+    "bytes": 14043,
+    "title": "Call for Papers — VeriCodeGen: AI for Verifiable Coding at NeurIPS 2026",
+    "abstract_deadline": "2026-09-11 AoE",
+    "paper_deadline": "2026-09-13 AoE",
+    "review_deadline": "2026-09-27",
+    "notification": "2026-09-29",
+    "camera_ready": "2026-10-14",
+    "workshop": "2026-12-12 Atlanta",
+    "main_text_pages": "4-9 excluding references and appendices",
+    "pdf_max_mb": 50,
+    "supplement_max_mb": 100,
+    "template": "neurips_2026_vericode_workshop.tex + neurips_2026_vericode.sty (2026-01-29)",
+    "double_blind": true,
+    "llm_disclosure_required": true,
+    "non_archival": true,
+    "prior_checks": [
+      "papers/completion/README.md and review.md on 2026-09-11",
+      "related_work.bib live-page retrieval on 2026-09-12",
+      "this task re-fetched the live page on 2026-09-13"
+    ],
+    "dates_unchanged_versus_2026-09-11_review": true
+  },
+  "shared_inputs": {
+    "papers/neurips_2026_vericode_workshop.tex": {
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "bytes": 17416,
+      "unchanged": true
+    },
+    "papers/neurips_2026_vericode.sty": {
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "bytes": 13757,
+      "unchanged": true
+    },
+    "papers/checklist.tex": {
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "bytes": 26167,
+      "unchanged": true
+    },
+    "papers/neurips_2026.sty": {
+      "sha256": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+      "bytes": 13704,
+      "unchanged": true
+    },
+    "papers/neurips_2026_vericode_competition.sty": {
+      "sha256": "a0178f152d13cf24f44936da0ee95bab975ceced8d54980efbbf8f7c1bb31f72",
+      "bytes": 13933,
+      "unchanged": true
+    },
+    "papers/neurips_2026_vericode_workshop_competition.tex": {
+      "sha256": "0e21c08ce8a32cb3d4c0fb7123d38249209c2ef488a0c210acbea026f6fefc23",
+      "bytes": 17871,
+      "unchanged": true
+    }
+  },
+  "local_copies": {
+    "papers/completion/law_to_action/manuscript/neurips_2026_vericode.sty": {
+      "source": "papers/neurips_2026_vericode.sty",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "bytes_identical_to_source": true
+    },
+    "papers/completion/law_to_action/manuscript/checklist.tex": {
+      "source": "papers/checklist.tex",
+      "instruction_block_removed": true,
+      "questions_preserved": 16,
+      "answerTODO_remaining": 0,
+      "justificationTODO_remaining": 0
+    }
+  },
+  "build": {
+    "usepackage": "\\usepackage{neurips_2026_vericode}",
+    "options": [],
+    "anonymous_default": true,
+    "line_numbers": true,
+    "acknowledgments_hidden": true,
+    "workshop_footer": "Submitted to NeurIPS 2026 Workshop on AI for Verifiable Coding. Do not distribute.",
+    "style_provides": "neurips_2026_vericode 2026-01-29",
+    "official_anonymous_block": [
+      "Anonymous Author(s)",
+      "Affiliation",
+      "Address",
+      "email"
+    ],
+    "absent_substitutions": [
+      "final",
+      "preprint",
+      "nonanonymous",
+      "sglblindworkshop",
+      "competition style/shell",
+      "papers/neurips_2026.sty"
+    ],
+    "placeholder_policy": "Official style-generated Affiliation/Address/email are exempt; unanswered scientific and checklist fields are failures."
+  },
+  "compiled": {
+    "main_text_pages": 7,
+    "pdf_pages": 23,
+    "pdf_bytes": 239400,
+    "pdf_sha256": "e51fbbdc79f6f29f74899b6861d1bc36d34f3df15a8daafce0a98d4ccd042c43",
+    "zip_bytes": 48490,
+    "zip_sha256": "bce0e313c66fab971fbb86b613125bcb098f6bf20039b1307eb27660d787dd22"
+  }
+}

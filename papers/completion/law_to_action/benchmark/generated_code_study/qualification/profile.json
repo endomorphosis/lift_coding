@@ -1,0 +1,34 @@
+{
+  "mock": false,
+  "profile": "source-relative-direct-calls-v1",
+  "rows": [
+    {
+      "case_id": "family:46cfd47d7f6c2e39fc08728a7d73d707e476ebbb167bcd93caf5b800097c146e:case-0",
+      "generic_rejected": true,
+      "la029_fixed_program_substituted": false,
+      "la030_two_sink_substituted": false,
+      "negative_undeclared_effect": true,
+      "population": "legal",
+      "positive_useful_work": true
+    },
+    {
+      "case_id": "family:145e6278ecc6f69af6f7b29a640f4b953167aca22fd70c30fd740b37c8876ad0:case-0",
+      "generic_rejected": true,
+      "la029_fixed_program_substituted": false,
+      "la030_two_sink_substituted": false,
+      "negative_undeclared_effect": true,
+      "population": "cve",
+      "positive_useful_work": true
+    },
+    {
+      "case_id": "family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0",
+      "generic_rejected": true,
+      "la029_fixed_program_substituted": false,
+      "la030_two_sink_substituted": false,
+      "negative_undeclared_effect": true,
+      "population": "skill",
+      "positive_useful_work": true
+    }
+  ],
+  "status": "PASS"
+}

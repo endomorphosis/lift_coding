@@ -1,0 +1,110 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-003",
+  "status": "complete",
+  "completed_at": "2026-09-11T17:13:39.695488+00:00",
+  "completion_mode": "Agent-assisted correction/recovery of pre-outcome protocol only; original failed provider attempt/blocked receipt preserved. Native task remains unchanged pending root integration and independent review.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json": "ebd521039ed25e6d6e7d5a724879a0bd676089d15c54e6384d42f4290ae4d607",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/protocol.json": "de8863191437800858415d66ef46707682e149d25b8af57f22e3cee52b4afad3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/protocol.md": "df9dba9b048eafa59a7ac9b1ae842a78cd8910dc931f98b5f7a7dce42cae0c98",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/benchmark/resource_plan.json": "668abadfdad659d74c0841cd83c1c031c8a2bf4882fcb0934427135db8dae521",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/failed-attempt-checkpoint.json": "c54b7ab43c06a917100c38609dd7b8af0e543dd9b937a142652e74521e19f9cb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/implementation.patch": "97d49f3b5a7eb82a3712a1f9b4b4f6ac76c1de8c58b2958dc617067dc4101db8",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/receipts/LA-003.json": "efa341eef2ef2b4d1c0a615f275519335629c0880a318609283de940553a2beb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json": "ce9bb855d4eab9060999afc060db2ba00154ce570500d0821b36bd5eb6582feb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md": "85facc4169320db9a5c0a0f3aab231a532cf2a376f06907df85867a33cabb5fe",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json": "4c5b5d2a857179bc363eaffc5565f84ae5436e75aa1c22f8d89b38b967092465",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py": "c7835d27db09d7e6fde437bce7a28a36314309d8490928a9fc0dd0791496b4b6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log": "1a40bd5bb2c4e43c29551ca046eedfcf6c2f58bd5eaef3a78b7a3b93ac8a8bf3"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/protocol.md": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md",
+    "papers/completion/law_to_action/benchmark/protocol.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json",
+    "papers/completion/law_to_action/benchmark/resource_plan.json": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.",
+      "status": "met",
+      "explanation": "The protocol fixes30 independent source-lineage families/60 paired cases, exact6/6/18 development/calibration/final family allocation and three named schedule seeds, giving900 planned fixed-action attempts and a distinct conditional900-attempt actual-model study. Five-hour fixed-action and explicit model call/token/time ceilings justify a bounded execution plan without a power or significance guarantee. Exact split, pairing, arm-order and budget arithmetic are checked by retained synthetic-only validation.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json"
+      ]
+    },
+    {
+      "criterion": "Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.",
+      "status": "met",
+      "explanation": "Every source derivative inherits one frozen parent-family split. CVE vulnerable/fixed pairs and skill variants are atomic. Deterministic SHA256 ranking with explicit canonical UTF-8 tuple, salt and per-population cumulative quotas guarantees the stated exact allocation. Duplicate/cross-population IDs and cohort shortfalls reject before outcomes; final siblings, patches and labels cannot enter retrieval. Synthetic validator checks quota totals, ordering invariance, derivative lookup and invalid cohort rejection.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json"
+      ]
+    },
+    {
+      "criterion": "Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.",
+      "status": "met",
+      "explanation": "The protocol defines independent oracle labels, decisions, terminal outcomes and effect flags separately; false denial counts only explicit denial, abstention is disjoint, and the optional union is named withholding. It specifies useful success, forbidden effects including those on allowed requests, conservative scheduled bounds, failures, timeouts, unavailable/not-started counts and undefined-denominator rules. Synthetic decision examples verify disjoint arithmetic, and all original attempts and failures remain in reporting.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json"
+      ]
+    },
+    {
+      "criterion": "Protocol records model/solver availability and compute/provider requirements without assuming paid access.",
+      "status": "met",
+      "explanation": "The resource plan distinguishes historical provider visibility from future scientific deployment qualification, records currently unqualified model/checker/UCAN/durable/source/oracle requirements, and refuses fixture substitution for scored mechanisms. Model-free prompt/retrieval metadata are equivalence controls. Actual-model prompt/retrieval and closed-loop work retains its own preregistered population and exact no-added-paid-access budget, presently zero dispatchable runs. No experiments or availability qualification are claimed.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/protocol.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/outputs/resource_plan.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/correction-audit.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py",
+        "--protocol-dir",
+        "papers/completion/law_to_action/benchmark"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validation/protocol-validator.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/validate_protocol.py",
+      "executed_at": "2026-09-11T17:11:40.407703+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  ],
+  "source_versions": {
+    "original_protocol_commit": "b10a9bddb1d93b0526a368cd42c3d10cfb08798f",
+    "original_parent_commit": "418980b7522555d03194e74eb5c790f9e7106437",
+    "validator_python": "Python 3.12.3"
+  },
+  "limitations": [
+    "Only protocol document and synthetic arithmetic validation ran. No source corpus, independent labels, empirical benchmark, model, provider, solver, or network evaluation was run.",
+    "Actual source/manifests, labels, handler observations, named mechanisms, and scientific model deployments remain unqualified or unrun until their respective tasks supply evidence.",
+    "This checkpoint does not complete the paper, authorize submission or spending, or replace any LA-004\u2013LA-025 obligation. Root must independently review and integrate the candidate before native completion is recorded."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 239,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 611,
+  "prompt_tokens": 611,
+  "raw_sha256": "caf0da5024c2d98e04d107dd95276ff345958413ec4a389add98754b1bda4d5d",
+  "response_text": "{\"kind\":\"program\",\"program\":\"def run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\":\"program\",\"program\":\"def run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    # Emit the source-relative JSON record through emit_allowed\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload):\\n    # Emit the source-allowed JSON record through emit_allowed\\n    emit_allowed(payload)\\n    return True\"}<|im_end|>\n<|im_start|>assistant\n{\"kind\": \"program\", \"program\": \"def run(payload): \"}",
+  "wall_seconds": 21.078785228994093
+}

@@ -1,0 +1,318 @@
+{
+  "admission_requirements": {
+    "complete_population": "exactly 6 legal, 12 CVE, and 12 skill families / 60 cases; shortfall refuses",
+    "durable_consumption": "file-backed DuckDB store required for A4; InMemoryCapabilityConsumptionStore is not production",
+    "final_split": "final examples remain unscored until LA-027 independent labels exist",
+    "fixture_only_routes_are_not_production": true,
+    "independent_labels": "required; missing labels refuse final admission and analysis",
+    "model_route": "closed-loop arms require a pinned scientific model; none is pinned",
+    "reviewer_identity_and_timestamp": "required; agent-generated provenance is refused",
+    "selected_crypto_route": "real Ed25519 UCAN verifier required for A3/A4; fixture verifiers are not production",
+    "selected_handler_route": "BoundedExportHandler plus independent EffectObserver; LA-008 fixture harness is not production",
+    "selected_solver_route": "qf_bool_sympy_sat must remain available for A4 SAT obligations; native theorem kernels remain unavailable"
+  },
+  "authoritative_environment": {
+    "home_is_validation_prefix": false,
+    "home_prefix": "ipfs-accelerate-validation-home-",
+    "observed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12"
+  },
+  "budgets": {
+    "admitted_split": "development",
+    "calibration_and_final_excluded": true,
+    "closed_loop_arm": {
+      "id": "closed_loop_A4",
+      "maximum_model_calls_per_attempt": 8,
+      "paid_provider_budget": 0,
+      "requires_model_calls": true,
+      "selected": false,
+      "status": "unrun"
+    },
+    "empirical_benchmark_result": false,
+    "fixed_action": {
+      "attempts_if_scored": 900,
+      "development_scheduled_attempts": 180,
+      "network": "disabled",
+      "scored": false,
+      "seeds": [
+        104729,
+        104759,
+        104761
+      ],
+      "this_qualification_attempts": 2,
+      "wall_timeout_seconds": 20
+    },
+    "frozen_at": "2026-09-12T06:37:44.930638Z",
+    "frozen_before_evaluated_predictions": true,
+    "protocol_revision": "law-to-action-benchmark-protocol/v2",
+    "schema": "law-to-action-frozen-arm-budgets/v1",
+    "selected_arm": "A4",
+    "selected_arm_model_calls": 0,
+    "selected_arm_name": "full_enforcement",
+    "shared_controls_fingerprint_rule": "sha256 of canonical UTF-8 JSON of shared_controls for the shared fingerprint; sha256 of {shared_controls, policy_components} for each arm. Arms must differ only in policy_components plus documentation labels."
+  },
+  "empirical_benchmark_result": false,
+  "fixture_routes": {
+    "in_memory_capability_store": {
+      "production": false
+    },
+    "injected_ucan_fixture_verifiers": {
+      "production": false
+    },
+    "la008_trusted_fixture_harness": {
+      "path": "papers/completion/law_to_action/benchmark/run.py",
+      "production": false,
+      "role": "measurement-integrity smoke only"
+    },
+    "supervisor_off_audit_shadow": {
+      "production": false
+    }
+  },
+  "frozen_at": "2026-09-12T06:37:44.931282Z",
+  "frozen_before_evaluated_predictions": true,
+  "inputs": {
+    "families": [
+      {
+        "lineage_family_id": "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec",
+        "planned_case_ids": [
+          "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-0",
+          "family:4dc1c0262a20db5bf8be9e86516477b4d94d51832cc1e41478a8d7d5513c46ec:case-1"
+        ],
+        "population": "legal",
+        "source_id": "legal:ecbeda8c2b54b70c25b58163f663d98ad9f0b0773a571205b7544b126b0968df"
+      },
+      {
+        "lineage_family_id": "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d",
+        "planned_case_ids": [
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-0",
+          "family:208a23c76523a9e2b55ada4bfe1a7714e20d77ceb6fc29105abcc144157f6e0d:case-1"
+        ],
+        "population": "legal",
+        "source_id": "legal:de03688269ae120e7a9ee211cd7d2b0071d1038a5bb0ed19d153c68f8ac66f19"
+      },
+      {
+        "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+        "planned_case_ids": [
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1"
+        ],
+        "population": "cve",
+        "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f"
+      },
+      {
+        "lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+        "planned_case_ids": [
+          "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+          "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1"
+        ],
+        "population": "cve",
+        "source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b"
+      },
+      {
+        "lineage_family_id": "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914",
+        "planned_case_ids": [
+          "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-0",
+          "family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:case-1"
+        ],
+        "population": "skill",
+        "source_id": "skill:e0ad50b89f0dda175af0c86e086b5b4f0ca0bc7d5d7b8e4983e9b4f84cd8c5b1"
+      },
+      {
+        "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+        "planned_case_ids": [
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+          "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-1"
+        ],
+        "population": "skill",
+        "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693"
+      }
+    ],
+    "frozen_at": "2026-09-12T06:37:44.926429Z",
+    "frozen_before_evaluated_predictions": true,
+    "inspect_final_labels": false,
+    "pins": {
+      "arms.json": {
+        "path": "papers/completion/law_to_action/benchmark/arms.json",
+        "present": true,
+        "sha256": "418f06958aa55df738e3615c9e7b57a0b767deaa56bda3488681dee0d4236fbd",
+        "size_bytes": 9985
+      },
+      "corpus_counts.json": {
+        "path": "papers/completion/law_to_action/benchmark/corpus_counts.json",
+        "present": true,
+        "sha256": "9bb3e85c460fc33710a2cfe12d836e6e9a9a62a63c9985e5250e475bd30de5fc",
+        "size_bytes": 3199
+      },
+      "cve_pairs.jsonl": {
+        "path": "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl",
+        "present": true,
+        "sha256": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+        "size_bytes": 150894
+      },
+      "legal.jsonl": {
+        "path": "papers/completion/law_to_action/benchmark/annotations/legal.jsonl",
+        "present": true,
+        "sha256": "964be42468c82e04d77b37a90fbab66f5be82f899e54ada60ff403072323dd1b",
+        "size_bytes": 117635
+      },
+      "protocol.json": {
+        "path": "papers/completion/law_to_action/benchmark/protocol.json",
+        "present": true,
+        "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+        "size_bytes": 22587
+      },
+      "resource_plan.json": {
+        "path": "papers/completion/law_to_action/benchmark/resource_plan.json",
+        "present": true,
+        "sha256": "985d48de55803995bec8ab4b75ffb0979a1c3f49c66f314d97caa7609db616aa",
+        "size_bytes": 8234
+      },
+      "skills.jsonl": {
+        "path": "papers/completion/law_to_action/benchmark/annotations/skills.jsonl",
+        "present": true,
+        "sha256": "05bb0e1f48900a35bf3ed1bdac89bf9b7f5bbcb2673c0cf140da9d5cd3d8bb44",
+        "size_bytes": 213314
+      },
+      "sources.json": {
+        "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+        "present": true,
+        "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+        "size_bytes": 51880
+      },
+      "splits.json": {
+        "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+        "present": true,
+        "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+        "size_bytes": 17657
+      }
+    },
+    "schema": "law-to-action-frozen-final-inputs/v1",
+    "score_final_examples": false,
+    "split": "development"
+  },
+  "production_claim": false,
+  "qualify_version": "la-028-qualify-final-runtime/v1",
+  "routes": {
+    "crypto": {
+      "available": true,
+      "fixture_verifier_is_production": false,
+      "id": "real_ed25519_ucan_verifier"
+    },
+    "durable_store": {
+      "available": true,
+      "id": "duckdb-file-typed-quack-owner",
+      "in_memory_store_is_production": false
+    },
+    "enforcement": {
+      "id": "supervisor_pre_invocation_enforce",
+      "mode": "enforce",
+      "off_mode_is_production": false,
+      "symbol": "SupervisorPreInvocationEnforcement.authorize_and_delegate"
+    },
+    "handler": {
+      "arbitrary_generated_source_execution": false,
+      "fixture_harness": "papers/completion/law_to_action/benchmark/run.py",
+      "fixture_harness_is_production": false,
+      "id": "bounded_export_handler",
+      "observer": "EffectObserver.observe",
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "symbol": "BoundedExportHandler.execute"
+    },
+    "model": {
+      "closed_loop_status": "declared_unrun_pending_LA-016",
+      "paid_provider_budget": 0,
+      "scientific_model_pinned": false
+    },
+    "native_kernel_status": "unavailable",
+    "solver": {
+      "authority_kind": "satisfiability",
+      "available": true,
+      "cannot_authorize_theorem_allow": true,
+      "id": "qf_bool_sympy_sat",
+      "production_theorem_route": false
+    },
+    "transport": {
+      "actual_network": false,
+      "development_mode": "local-process",
+      "in_process_not_libp2p": true,
+      "ipfs_daemon": false
+    }
+  },
+  "schema": "law-to-action-runtime-manifest/v1",
+  "selected_arm": {
+    "id": "A4",
+    "model_calls": 0,
+    "name": "full_enforcement",
+    "requires_durable_consumption": true,
+    "requires_effect_observer": true,
+    "requires_enforce": true,
+    "requires_model_provider": false,
+    "requires_sat": true,
+    "requires_ucan": true
+  },
+  "source_pins": {
+    "admissibility_enforcement.py": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "present": true,
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "size_bytes": 51466
+    },
+    "arms.json": {
+      "path": "papers/completion/law_to_action/benchmark/arms.json",
+      "present": true,
+      "sha256": "418f06958aa55df738e3615c9e7b57a0b767deaa56bda3488681dee0d4236fbd",
+      "size_bytes": 9985
+    },
+    "authorization.py": {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "present": true,
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "size_bytes": 13330
+    },
+    "baselines.py": {
+      "path": "papers/completion/law_to_action/benchmark/baselines.py",
+      "present": true,
+      "sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "size_bytes": 57307
+    },
+    "durable_consumption.py": {
+      "path": "papers/completion/law_to_action/benchmark/durable_consumption.py",
+      "present": true,
+      "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "size_bytes": 71273
+    },
+    "effects.py": {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "present": true,
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "size_bytes": 12768
+    },
+    "provers.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/provers.json",
+      "present": true,
+      "sha256": "81e3873e996516f47451a1fa5859e390e39e989dadab20eed7ba35c9b7ac39e1",
+      "size_bytes": 11748
+    },
+    "review_import.py": {
+      "path": "papers/completion/law_to_action/benchmark/review_import.py",
+      "present": true,
+      "sha256": "d307ca6682061244b03be5608a1ad8b0ec2bda0083aa676d86c5d60f1946bbbc",
+      "size_bytes": 15734
+    },
+    "route_inventory.json": {
+      "path": "papers/completion/law_to_action/benchmark/route_inventory.json",
+      "present": true,
+      "sha256": "82a200972a126373b57135c8e7ecbf2dbfdbbc06c87cc275bdf7ceeee606f96d",
+      "size_bytes": 9056
+    },
+    "source_pipeline.py": {
+      "path": "papers/completion/law_to_action/benchmark/source_pipeline.py",
+      "present": true,
+      "sha256": "d25e7a0c7330070f02024dd2277fb26129f632e4b9edbb49ea95f76f77264508",
+      "size_bytes": 35085
+    }
+  },
+  "task": "LA-028",
+  "unavailable_runtime_routes": []
+}

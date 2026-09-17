@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 63,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 611,
+  "prompt_tokens": 611,
+  "raw_sha256": "6249dcb29f2fb28df282ef0b2ca78ccbbdf9edcaf665854245f712affcdb88a1",
+  "response_text": "```json\n{\n  \"program\": \"def run(payload):\\n    # Query AbuseIPDB for IP risk score\\n    # This is the only permitted handler for this source family\\n    result = emit_allowed(payload)\\n    return result\"\n}\n```<|im_end|>",
+  "wall_seconds": 4.93207780100056
+}

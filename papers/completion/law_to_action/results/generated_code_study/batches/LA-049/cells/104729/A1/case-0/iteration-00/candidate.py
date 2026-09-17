@@ -1,0 +1,1 @@
+{"type":"json_object","payload":"{\"event\":\"source_allowed\",\"source\":\"77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700\",\"lineage\":{\"source\":\"77e82461e3a157810abed6c08005303b303af7fe2a4efcc6384e83f6b4fe9700\",\"transforms\":[]}}"}<|im_end|>

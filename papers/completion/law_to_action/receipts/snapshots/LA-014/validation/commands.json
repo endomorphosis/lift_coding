@@ -1,0 +1,23 @@
+{
+  "qualify": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-014/baselines.py",
+      "qualify",
+      "--trace-dir",
+      "papers/completion/law_to_action/receipts/snapshots/LA-014/traces",
+      "--report",
+      "papers/completion/law_to_action/benchmark/comparability_report.md",
+      "--records",
+      "papers/completion/law_to_action/receipts/snapshots/LA-014/traces/records.json"
+    ],
+    "exit_code": 0
+  },
+  "validate": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/law_to_action/receipts/snapshots/LA-014/validate_comparability.py"
+    ],
+    "exit_code": 0
+  }
+}

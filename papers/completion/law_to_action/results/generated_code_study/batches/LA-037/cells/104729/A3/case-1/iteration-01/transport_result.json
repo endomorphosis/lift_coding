@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 220,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 912,
+  "prompt_tokens": 912,
+  "raw_sha256": "ea5e6995febce411f1e2c9563bf1c192c8e837790ce272358f10f560929b8dc2",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\": \\\"[\\\\\\\"emit_allowed\\\\\\\", {\\\\\\\"kind\\\\\\\": \\\\\\\"permitted_public_source\\\\\\\", \\\\\\\"locator\\\\\\\": {\\\\\\\"primary_source_id\\\\\\\": \\\\\\\"7d0c5b1226d79c872a261f8a04996c4e7d336fac25605788f47c8ab17b32f132\\\\\\\", \\\\\\\"repository\\\\\\\": \\\\\\\"github.com/supanadadit/jwt-go\\\\\\\", \\\\\\\"skill_id\\\\\\\": \\\\\\\"03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d32\\\\\\\"}, \\\\\\\"source_url\\\\\\\": \\\\\\\"https://github.com/supadadit/jwt-go\\\\\\\"}]\\\"}\"}",
+  "wall_seconds": 20.556093274004525
+}

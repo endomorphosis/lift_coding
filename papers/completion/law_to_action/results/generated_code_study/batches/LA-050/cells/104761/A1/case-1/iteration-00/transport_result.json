@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 39,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 256,
+  "prompt_tokens": 256,
+  "raw_sha256": "e2d711040da51a2c54c15745f38cb733b8a43333912e1c580fe74ec08847adf7",
+  "response_text": "{\"type\":\"json_object\",\"value\":\"{\\\"program\\\":\\\"def run(payload):\\\\n    # Emit the source-relative JSON record\\\\n    emit_allowed(payload)\\\"}\"}",
+  "wall_seconds": 3.69525503499608
+}

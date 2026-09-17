@@ -1,0 +1,30 @@
+{
+  "child_program_scope": "Constructed or actual-response Python bytes in direct-calls-v1; no scientific cohort released",
+  "containment_sha256": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7",
+  "cpu": 0,
+  "docker_endpoint": "unix:///var/run/docker.sock",
+  "final_cohort_released": false,
+  "image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+  "image_discovery_correction": "Default Docker context is rootless; original LA029 explicitly uses rootful socket. Original exact image is present on its qualified daemon. Two wrong-daemon pre-start development create failures retained; no program/model executed.",
+  "legacy_image": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+  "legacy_image_observed_installed": true,
+  "python": "/usr/bin/python3.12",
+  "runtime_root": "/home/barberb/.local/share/vericodegen-research-runtime",
+  "schema": "la-closed-loop-development-runtime/v1",
+  "scientific_model_qualified": false,
+  "scientific_results": false,
+  "source_files": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/code_security_facts.py": "b9f15a5030f644234cfb49cec5a2d2630813efaf87d195fdae814dd7a137a761",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/cve_security_gate.py": "32b413d70cd47daefd36d50152e592003e5163baa4dfd16a261db8fcd0c84af3",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/compose.py": "99f3a672ad2c765c31d327b85fb77e1c000451a27636409c2e8c9c5632fa7765",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/admissibility/receipt.py": "ae8c4462361c8fc79ee5ab4889ac365efb6accc43d6efe4387ed28a7c5e7397b",
+    "external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+    "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+    "papers/completion/law_to_action/benchmark/arms.json": "418f06958aa55df738e3615c9e7b57a0b767deaa56bda3488681dee0d4236fbd",
+    "papers/completion/law_to_action/benchmark/baselines.py": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+    "papers/completion/law_to_action/benchmark/durable_consumption.py": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+    "papers/completion/law_to_action/benchmark/handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+  },
+  "source_root": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026"
+}

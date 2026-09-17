@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 56,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 148,
+  "prompt_tokens": 148,
+  "raw_sha256": "a494f3236c3df5f1bd83b8b72f60e7f4c9b621f1374d1f76c5a327fdbbb653ba",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed({\\\"source\\\": \\\"public\\\", \\\"lineage\\\": \\\"public\\\", \\\"payload\\\": {\\\"type\\\": \\\"text\\\", \\\"content\\\": \\\"Hello, World!\\\"}})\"\n}\n```<|im_end|>",
+  "wall_seconds": 3.6135131180053577
+}

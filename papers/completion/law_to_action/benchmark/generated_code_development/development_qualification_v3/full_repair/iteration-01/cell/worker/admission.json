@@ -1,0 +1,151 @@
+{
+  "capability": {
+    "allowed_effects": [
+      "effect:allowed_sink"
+    ],
+    "audience_id": "audience:la-development",
+    "capability_id": "capability:full_repair-1",
+    "content_cid": "bafkreicwlvsoycwyr36t3ydyt5zauhlcvugu6hkyfnhvpv5hbiwxd4aysi",
+    "content_digest": "sha256:565d64ec0ad88efd3de0789f720a1d62ad0d4f1d582b4f57d7a70a2d71f01892",
+    "expiry": "2026-09-14T10:13:54.656365Z",
+    "identity_algorithm": "sha256-canonical-json/v1",
+    "interface": "AuthorizationCapability@1",
+    "issued_at": "2026-09-14T10:13:13.656365Z",
+    "metadata": {},
+    "nonce": "nonce:full_repair-1",
+    "one_time": true,
+    "parent_capability_digest": "",
+    "parent_capability_id": "",
+    "producer_id": "producer:trusted-la-development-adapter",
+    "receipt_digest": "287f65bc7aa0afab434059e3e492faf2713c00a5b589be8b8540e01820797721",
+    "receipt_id": "receipt:full_repair-1",
+    "request_digest": "4771a21926d33e9a3a1c8f8e073d51cb2bd4444aa121d7f343886c8156866ea4",
+    "resource_ids": [
+      "resource:exports/allowed.json"
+    ],
+    "roots": {
+      "circuit_roots": [],
+      "corpus_roots": [
+        "source:ff695c254d8b645ab4d44a2e92ddd0d797b6f12a07de1021417034ebff122781"
+      ],
+      "policy_root": "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a",
+      "revocation_root": "revocation:94f7a9779e57ae8720eb927018a6226a7a4a4a6b6f72b9bec1cd68361f739052",
+      "schema_version": "decision-receipt-bound-roots/v1",
+      "vk_roots": []
+    },
+    "schema_version": "authorization-capability/v1",
+    "tool_id": "tool:python-handler-profile"
+  },
+  "cryptographic_proof_receipt_claimed": false,
+  "receipt": {
+    "attempt_digests": [
+      "4531b0c075b2f7d6f6e91906bbcfa6698170b3354e764d30f724aa378bfc464c"
+    ],
+    "content_cid": "bafkreibip5s3y6vav6vugqcz4psjf6xsoe6abjnvrg7ixbka4amca6lxee",
+    "content_digest": "sha256:287f65bc7aa0afab434059e3e492faf2713c00a5b589be8b8540e01820797721",
+    "context": {
+      "actor_id": "did:client:tenant-a",
+      "arguments_digest": "b6dff3bbf118f83e786938e3c364ec714e2e22ecd65b89ec01b29ddd90ca4675",
+      "audience_id": "audience:la-development",
+      "capability_ids": [
+        "capability:full_repair-1"
+      ],
+      "delegation_digest": "",
+      "delegation_ids": [],
+      "effect_ids": [
+        "effect:allowed_sink"
+      ],
+      "environment_digest": "bbab58727456b9605309dc56cc04367337d3f4f2e4ff934cbcefd9156a061cc3",
+      "environment_id": "env:contained-la-development",
+      "metadata": {},
+      "nonce": "nonce:full_repair-1",
+      "request_digest": "4771a21926d33e9a3a1c8f8e073d51cb2bd4444aa121d7f343886c8156866ea4",
+      "resource_ids": [
+        "resource:exports/allowed.json"
+      ],
+      "schema_version": "decision-receipt-bound-context/v1",
+      "tool_id": "tool:python-handler-profile",
+      "tool_version": "1"
+    },
+    "deadline": "2026-09-14T10:13:44.656365Z",
+    "decision_digest": "61f76048317387a68d6e0d2449ef443a0101daa1f9ea7687b773e09d423f64e9",
+    "decision_interface": "AuthorizationDecision@1",
+    "expiry": "2026-09-14T10:13:54.656365Z",
+    "identity_algorithm": "sha256-canonical-json/v1",
+    "interface": "DecisionReceipt@1",
+    "issued_at": "2026-09-14T10:13:13.656365Z",
+    "metadata": {
+      "scientific_benchmark": false,
+      "semantic_fidelity": false,
+      "source_evidence": {
+        "candidate_sha256": "66f5fe1ff2bbf3dd77d6f6a1ccea2ff9739d663a100068825fcb4f98b0eb84a8",
+        "correlation_sha256": "930449c95d15d910568ea5ba166d92616d358efff69782651dfbd252fdeb52f9",
+        "mechanisms": {
+          "obligation": {
+            "allowed": true,
+            "authority_kind": "satisfiability",
+            "checker": {
+              "agrees_with_provider": true,
+              "authority_kind": "satisfiability",
+              "checker": "exhaustive-truth-table",
+              "status": "unsat",
+              "theorem_proof": false
+            },
+            "provider": {
+              "algorithm": "dpll",
+              "authority_kind": "satisfiability",
+              "elapsed_seconds": 0.000567064038477838,
+              "model": null,
+              "provider": "sympy.logic.inference.satisfiable",
+              "status": "unsat"
+            },
+            "theorem_proof": false
+          },
+          "ucan": {
+            "authorization_event_cid": "d30922aef8b518d7e345e0ed592385b4d48a7d27b8dc7ad59e94c77449e483af",
+            "crypto": "real-ed25519",
+            "decision": "allow",
+            "policy_provider": "la-014-declared-lightweight-policy",
+            "reason": "ucan_and_declared_policy",
+            "token_audience": "did:client:tenant-a",
+            "verifier_kind": "real-ucan-verifier"
+          }
+        },
+        "native_facts_sha256": "83f63f166ee65ab0d506a8f307442d68c1ee7910812133e83a6913c800cd4b37",
+        "profile_supported": true
+      }
+    },
+    "obligation_ids": [
+      "obligation:declared-handler-only"
+    ],
+    "outcome": "allow",
+    "policy_digest": "c26b7f2e98397f9685e2e18a57f9bdd4efae9c491c9d8dbac74c5995395394d8",
+    "producer_id": "producer:trusted-la-development-adapter",
+    "profile_id": "profile:direct-calls-v1",
+    "reason_codes": [],
+    "reasons": [
+      "Qualified direct-call profile and native policy checks"
+    ],
+    "receipt_id": "receipt:full_repair-1",
+    "residual_duties": [],
+    "result_digests": [
+      "a4fd0f14837ab91ef53e10d9e7243ea221e1b0b66f372fa99bd8f6c7accfcdc7"
+    ],
+    "roots": {
+      "circuit_roots": [],
+      "corpus_roots": [
+        "source:ff695c254d8b645ab4d44a2e92ddd0d797b6f12a07de1021417034ebff122781"
+      ],
+      "policy_root": "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a",
+      "revocation_root": "revocation:94f7a9779e57ae8720eb927018a6226a7a4a4a6b6f72b9bec1cd68361f739052",
+      "schema_version": "decision-receipt-bound-roots/v1",
+      "vk_roots": []
+    },
+    "schema_version": "decision-receipt/v1",
+    "selected_evidence_cids": [
+      "bafkreigcnn7s5gbzp6lilyxbrjl7tpou56xjysi4twg3vr2mlgktsu4u3a"
+    ],
+    "selected_evidence_digest": "2cc260f7cba7cf984d8f703b97f0ff6878fe38c26dd3f264f15e6f04fb48dbc1",
+    "wire_status": "allow"
+  }
+}

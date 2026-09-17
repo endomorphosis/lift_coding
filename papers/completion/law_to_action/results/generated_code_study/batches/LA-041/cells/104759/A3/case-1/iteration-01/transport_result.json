@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 117,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 746,
+  "prompt_tokens": 746,
+  "raw_sha256": "b70082d551851a6a03b6d878858ee0180fcc19e532ae779b988c6925daa0dda8",
+  "response_text": "```json\n{\n  \"program\": \"emit_allowed('{\\\"type\\\":\\\"XSS\\\",\\\"vulnerability\\\":\\\"Reflected XSS\\\",\\\"affected_component\\\":\\\"bob_czy_panstwa_sprawa_zostala_rozwiazana parameter\\\",\\\"attack_vector\\\":\\\"super_language_switcher AJAX action\\\",\\\"impact\\\":\\\"Session hijacking, defacement, phishing\\\",\\\"remediation\\\":\\\"Update to version 6.0.4\\\",\\\"source\\\":\\\"CVE-2022-0402\\\"}')\"\n}\n```<|im_end|>",
+  "wall_seconds": 8.084620366993477
+}

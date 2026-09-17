@@ -1,0 +1,16 @@
+{
+  "algorithm": "dpll",
+  "authority_kind": "satisfiability",
+  "elapsed_seconds": 0.00018904195167124271,
+  "formula_id": "sat-forged-model",
+  "model": {
+    "x1": true,
+    "x2": false
+  },
+  "nclauses": 2,
+  "nvars": 2,
+  "provider": "sympy.logic.inference.satisfiable",
+  "query_kind": "satisfiability",
+  "status": "sat",
+  "sympy_version": "1.12"
+}

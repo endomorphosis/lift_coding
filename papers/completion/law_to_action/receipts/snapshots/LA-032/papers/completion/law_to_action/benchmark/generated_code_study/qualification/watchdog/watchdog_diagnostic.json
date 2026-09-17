@@ -1,0 +1,69 @@
+{
+  "broad_oserror_suppressed": false,
+  "decision": null,
+  "diagnostics": [
+    {
+      "at_monotonic": 15083.482225501,
+      "benign_leaf_disappearance_revalidated": true,
+      "cause": "FileNotFoundError",
+      "errno": 2,
+      "filename": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent/leaf/cpu.stat",
+      "leaf_identity": {
+        "errno": 2,
+        "exists": false,
+        "inode": null,
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent/leaf",
+        "strerror": "No such file or directory"
+      },
+      "operation": "leaf_sample:cpu.stat",
+      "parent_identity": {
+        "exists": true,
+        "inode": 71314617,
+        "nlink": 2,
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent"
+      },
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent/leaf/cpu.stat",
+      "strerror": "No such file or directory"
+    }
+  ],
+  "historical_v2_receipt_upgraded": false,
+  "leaf_samples": [
+    {
+      "cpu.stat": "usage_usec 500\n",
+      "cpu_usage_seconds": 0.0005,
+      "inode": 71314618,
+      "observed_monotonic": 15083.481994698,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent/leaf",
+      "pids_current": 1
+    }
+  ],
+  "parent_accounting_retained": true,
+  "parent_samples": [
+    {
+      "cpu.stat": "usage_usec 1000\n",
+      "cpu_usage_seconds": 0.001,
+      "inode": 71314617,
+      "observed_monotonic": 15083.481952617,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent",
+      "pids_current": 1
+    },
+    {
+      "cpu.stat": "usage_usec 1500\n",
+      "cpu_usage_seconds": 0.0015,
+      "inode": 71314617,
+      "observed_monotonic": 15083.482198012,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent",
+      "pids_current": 0
+    },
+    {
+      "cpu.stat": "usage_usec 1500\n",
+      "cpu_usage_seconds": 0.0015,
+      "inode": 71314617,
+      "observed_monotonic": 15083.482264109,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789445272/papers/completion/law_to_action/benchmark/generated_code_study/qualification/watchdog/parent",
+      "pids_current": 0
+    }
+  ],
+  "schema": "la032-watchdog-diagnostic/v1",
+  "whole_group_exit_required": true
+}

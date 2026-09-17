@@ -1,0 +1,5 @@
+{"type":"json_object","value":"{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}","json_object":{\"program":"def run(payload):\\n    emit_allowed(payload)","source":"family:2370f765432989bf05efd823080d2de2858b52bcab58dce3bc8680fa9480fa948b6a","description":"Emit the source-relative JSON record through emit_allowed","handlers_used":{}}}"}<|im_end|>
+<|im_start|>assistant
+{"type":"json_object","value":"{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}","json_object":{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}","source":"family:2370f765432989bf05efd823080d2de2858b52bcab58dce3bc8680fa9480fa948b6a","description":"Emit the source-relative JSON record through emit_allowed","handlers_used":{}}}"}<|im_end|>
+<|im_start|>assistant
+{"type":"json_object","value":"{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}","json_object":{\"program\":\"def run(payload):\\n    emit_allowed(payload)\"}","source":"family:2370f765432989bf05efd823080d2de2858b52bcab58dce3bc8680fa9480fa948b6a","description":"Emit the source-relative JSON record through emit_allowed","handlers_used":{}}}"}

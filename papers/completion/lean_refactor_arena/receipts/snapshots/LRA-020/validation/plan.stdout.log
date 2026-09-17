@@ -1,0 +1,68 @@
+{
+  "additive_not_replacement": true,
+  "allowed_modes": [
+    "off",
+    "track1"
+  ],
+  "arena_score": null,
+  "budget_usd": 3.0,
+  "closed_generator": "grok/grok-4.6",
+  "compiled": false,
+  "contaminates_track2": false,
+  "default_generator": "leanstral",
+  "default_mode": "off",
+  "default_receipts_dir": "papers/completion/lean_refactor_arena/submissions/track1",
+  "fail_closed_kwargs": {
+    "allow_cross_provider_fallback": false,
+    "allow_local_fallback": false,
+    "disable_model_retry": true,
+    "model_name": "grok-4.6",
+    "provider": "grok",
+    "temperature": 0.0
+  },
+  "forbidden_receipt_parts": [
+    "a100_80gb_x4",
+    "official-track-2",
+    "official_track2",
+    "track-2",
+    "track2"
+  ],
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "grok_input_usd_per_mtok": 3.0,
+  "grok_key_configured": false,
+  "grok_key_env_names": [
+    "XAI_API_KEY",
+    "ipfs_accelerate_py_XAI_API_KEY",
+    "IPFS_ACCELERATE_PY_XAI_API_KEY",
+    "IPFS_DATASETS_PY_XAI_API_KEY"
+  ],
+  "grok_output_usd_per_mtok": 15.0,
+  "imports_llm_router": true,
+  "includes_jev_and_grok": true,
+  "inloop_is_track1_only": true,
+  "is_default_winning_path": false,
+  "jev_input_usd_per_mtok": 0.042,
+  "jev_key_configured": false,
+  "jev_key_env_names": [
+    "TYPESAFE_API_KEY",
+    "ipfs_accelerate_py_TYPESAFE_API_KEY",
+    "IPFS_ACCELERATE_PY_TYPESAFE_API_KEY",
+    "IPFS_DATASETS_PY_TYPESAFE_API_KEY"
+  ],
+  "jev_output_usd_per_mtok": 0.0,
+  "keys_configured": false,
+  "llama_server_started": false,
+  "loop_v1_track1": "off",
+  "lrah": "LRAH-011",
+  "max_grok_calls": 2,
+  "max_jev_calls": 2,
+  "official_track2": false,
+  "official_track2_stays_off": true,
+  "ok": true,
+  "pr": "PR-12",
+  "protocol": "LRA/v1",
+  "requested_model": "grok-4.6",
+  "requested_provider": "grok",
+  "resolved_mode": "off",
+  "skip_if_keys_missing": true
+}

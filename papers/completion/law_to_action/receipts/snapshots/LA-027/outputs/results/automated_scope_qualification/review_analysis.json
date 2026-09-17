@@ -1,0 +1,27 @@
+{
+  "code": "analysis_refuses_incomplete_or_missing_review",
+  "import": {
+    "admitted": false,
+    "code": "missing_independent_review_return",
+    "complete_review": false,
+    "details": {
+      "pending_in": [
+        "LA-027"
+      ],
+      "required_case_count": 60,
+      "return_path": null
+    },
+    "empirical_benchmark_result": false,
+    "importer_version": "la-028-review-import/v1",
+    "message": "No independent human review return is present. Missing reviewers or labels cannot yield a complete review or scored fidelity claim.",
+    "refused_at": "2026-09-12T15:36:55.602158Z",
+    "schema": "law-to-action-review-import/v1",
+    "scored_fidelity_claim": false,
+    "status": "refused",
+    "task": "LA-028"
+  },
+  "message": "Analysis refuses missing independent labels, agent-generated provenance, and incomplete populations.",
+  "schema": "law-to-action-review-analysis/v1",
+  "scored": false,
+  "status": "refused"
+}

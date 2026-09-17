@@ -1,0 +1,17 @@
+{
+  "HAVE_CRYPTO_ED25519": true,
+  "canonical_profile_d_available": false,
+  "cases": 56,
+  "empirical_benchmark_result": false,
+  "failed": [],
+  "fixture_verifier_jobs": [
+    "gate-fixture-verifier-labeled"
+  ],
+  "passed": 56,
+  "real_ed25519_jobs": 14,
+  "real_ed25519_passed": 14,
+  "selected_claim_cases": 14,
+  "selected_claim_passed": 14,
+  "status": "ok",
+  "unprotected_in_claim": false
+}

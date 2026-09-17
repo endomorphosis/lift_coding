@@ -1,0 +1,130 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-017",
+  "status": "complete",
+  "completed_at": "2026-09-17T01:09:47.748170+00:00",
+  "completion_mode": "run_warmup.py loop v1 HTTP client of live docker0 Leanstral; splice, optional generate, lexical admit, lake compile, keep-best; hammers and TypeSafe off; 15-problem synthetic self-check plus one live Leanstral call on the first Strata record; not a scored Arena run and not official Track 2",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py": "c9fbade6602684a515793822d640774c6c07cec13986de3b2d499c5a8177b4a7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/git-head.txt": "b20c6a097116eeb7819f618ab20b3383f4ce09ea121c9d352fd7ec81021916eb",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/plan.meta.json": "853878c5c2ba8ea4b9a3e5b4a627e532de03dccb8dc47a818c16f1bf7b744cc7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/plan.stdout.log": "c8e1963caf1b2e8177405a4021a34f05431ba596f93329a000446221d11eab36",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/probe-health.meta.json": "08025dbd595a887d44eea6a2fad4f3270e0f91df026e25e54a16562e1c65ff40",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/probe-health.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/probe-health.stdout.log": "398a715532a03463a22b73c3e5896c7e4629766553ad8dc3bbf66848b4a998df",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.json": "f3760e213eb562ce33078d8d8d5842c70c4b4657b3b963dd19882a7e82e54753",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.meta.json": "0c455756ee17d179257ef95f2323f453e5a7c5465780e30bed29c80e5e0a07e7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.stdout.log": "f3760e213eb562ce33078d8d8d5842c70c4b4657b3b963dd19882a7e82e54753"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/run_warmup.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py"
+  },
+  "criteria": [
+    {
+      "criterion": "When /health is ok, loop v1 MUST call Leanstral; skip generate only if docker0 is down.",
+      "status": "met",
+      "explanation": "Live GET http://172.17.0.1:8080/health returned HTTP 200 with IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0. Because /health was ok, self-check called generate_lra on the first Strata warm-up record (CallElimCorrect.substOldPostSubset) with FAIL_CLOSED_KWARGS; live.called_leanstral=true and skipped=false. The 15-problem healthy synthetic path also called generate 15 times. The 15-problem down path called generate 0 times and kept only reference / reference_stripped. skip_generate_only_if_docker0_down=true. This process never took LOCK_EX.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/probe-health.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Loop is splice, optional generate, lexical admit, lake compile, keep-best; hammers and TypeSafe off.",
+      "status": "met",
+      "explanation": "run_warmup.py V1_PHASES are splice, retrieve, generate_or_skip, lexical_admit, lake_compile, keep_best. Self-check set loop_is_splice_generate_admit_lake_keepbest=true, hammers=off, typesafe=off, generator=leanstral, protocol=LRA/v1. AST audit forbids TypeSafeClient, typesafe_inference, IndependentKernelVerifier, LeanFrontend, fcntl, and llama-server. Compile uses compile_worker lake env lean; hammers stay off.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/plan.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Failures retained; no Arena scores; hardware_class=spark_gb10.",
+      "status": "met",
+      "explanation": "Self-check retained failures (n_failures=4 on the healthy 15-problem synthetic run) including Putnam generated-failed candidates. arena_score is JSON null on the loop, every problem, every candidate, --plan, and --probe-health. hardware_class is the spark_gb10 literal on all 15 healthy and 15 down rows. official_score is null. This is not official Track 2 and not a scored Arena ranking.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/plan.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+        "--probe-health"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/probe-health.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-017/outputs/run_warmup.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "351943d8b7b162dc8838602827b10d064d838e72",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "run_warmup_py_sha256": "c9fbade6602684a515793822d640774c6c07cec13986de3b2d499c5a8177b4a7",
+    "protocol": "LRA/v1",
+    "loop_version": "v1",
+    "requested_provider": "leanstral_local",
+    "requested_model": "Leanstral",
+    "docker0_health_url": "http://172.17.0.1:8080/health",
+    "llama_cpp_autostart": "0",
+    "hardware_class": "spark_gb10",
+    "hammers": "off",
+    "typesafe": "off",
+    "live_health_ok": true,
+    "live_health_status_code": 200,
+    "live_called_leanstral": true,
+    "live_problem": "CallElimCorrect.substOldPostSubset",
+    "synthetic_n_problems": 15,
+    "synthetic_n_failures_retained": 4,
+    "lock_ex_taken_by_client": false,
+    "llama_server_started": false,
+    "model_or_solver_experiment": "loop v1 HTTP client of live docker0 Leanstral; synthetic 15-problem lake via planted toolchain; one live generate_text call; not official Track 2"
+  },
+  "limitations": [
+    "The 15-problem self-check lake compiles used a planted fake toolchain (plant_synthetic=True), not host elan under the sealed validation HOME. That is a capability gap for live lake, not a scored Arena run.",
+    "The live Leanstral call was one first-Strata record with max_new_tokens=32. Leanstral returned a DSML/tool-call-shaped tactic head; the call still happened because /health was ok. This is not a 15-problem live lake campaign and not official Track 2.",
+    "127.0.0.1:8080/health was connection-refused; the live listener is docker0 172.17.0.1:8080.",
+    "This process never took exclusive ownership of gpu-0.lock and never started llama-server.",
+    "arena_score remains JSON null. Local keep-best numbers are not Arena rankings.",
+    "Grok's first LRA-017 attempt failed supervisor proposal validation (malformed quoted patch path) with no commit. This landing salvages that run_warmup.py and records a passing dedicated verify-task."
+  ]
+}

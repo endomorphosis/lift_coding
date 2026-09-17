@@ -1,0 +1,368 @@
+{
+  "by_population": {
+    "cve": {
+      "cases": 24,
+      "failed": 4,
+      "machine_contract_satisfied": 24,
+      "prediction": 20,
+      "schema_valid": 20,
+      "span_linked": 24,
+      "unavailable": 0,
+      "unsupported": 0
+    },
+    "legal": {
+      "cases": 12,
+      "failed": 0,
+      "machine_contract_satisfied": 12,
+      "prediction": 12,
+      "schema_valid": 12,
+      "span_linked": 12,
+      "unavailable": 0,
+      "unsupported": 0
+    },
+    "skill": {
+      "cases": 24,
+      "failed": 0,
+      "machine_contract_satisfied": 24,
+      "prediction": 18,
+      "schema_valid": 18,
+      "span_linked": 24,
+      "unavailable": 0,
+      "unsupported": 6
+    }
+  },
+  "by_split": {
+    "calibration": {
+      "cases": 12,
+      "failed": 2,
+      "machine_contract_satisfied": 12,
+      "prediction": 9,
+      "schema_valid": 9,
+      "span_linked": 12,
+      "unavailable": 0,
+      "unsupported": 1
+    },
+    "development": {
+      "cases": 12,
+      "failed": 0,
+      "machine_contract_satisfied": 12,
+      "prediction": 11,
+      "schema_valid": 11,
+      "span_linked": 12,
+      "unavailable": 0,
+      "unsupported": 1
+    },
+    "final": {
+      "cases": 36,
+      "failed": 2,
+      "machine_contract_satisfied": 36,
+      "prediction": 30,
+      "schema_valid": 30,
+      "span_linked": 36,
+      "unavailable": 0,
+      "unsupported": 4
+    }
+  },
+  "case_accounting": {
+    "denominator": 60,
+    "every_frozen_case_recorded": true,
+    "failed": 4,
+    "missing": 0,
+    "prediction": 50,
+    "records": 60,
+    "unavailable": 0,
+    "unsupported": 6
+  },
+  "derived_from": "papers/completion/law_to_action/results/source_ir/raw.jsonl",
+  "empirical_benchmark_result": true,
+  "evidence_scope": "automated_source_contracts_and_policy_effects",
+  "frozen_population": {
+    "cases": 60,
+    "cohorts_changed_after_outcomes": false,
+    "complete": true,
+    "families": 30,
+    "original_protocol_sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+    "population_case_counts": {
+      "cve": 24,
+      "legal": 12,
+      "skill": 24
+    },
+    "population_family_counts": {
+      "cve": 12,
+      "legal": 6,
+      "skill": 12
+    },
+    "sources_sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+    "split_family_counts": {
+      "calibration": 6,
+      "development": 6,
+      "final": 18
+    },
+    "splits_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6"
+  },
+  "generated_at": "2026-09-12T16:58:26.550781+00:00",
+  "generated_labels_are": "predictions or explicitly identified machine-contract expectations, never human/expert gold",
+  "held_out_expert_fidelity_inferred": false,
+  "human_review_run_dependency": false,
+  "implementation_agreement_is_not_semantic_accuracy": true,
+  "independent_human_gold": false,
+  "metrics": {
+    "compiler_checker_consistency": {
+      "cve_adapter_paired_with_independent_behavior_observation": {
+        "denominator": 24,
+        "formula": "24/24",
+        "independent_producer": "la-006-scoped-behavior-contract-compiler",
+        "numerator": 24,
+        "rate": 1.0,
+        "shared_producer_dependence": false
+      },
+      "legal_parser_converter_both_ran": {
+        "denominator": 12,
+        "formula": "12/12",
+        "numerator": 12,
+        "rate": 1.0
+      },
+      "legal_parser_converter_nonempty_agreement": {
+        "denominator": 12,
+        "formula": "12/12",
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "note": "same deontic package; not expert legal fidelity",
+        "numerator": 12,
+        "rate": 1.0,
+        "shared_producer_dependence": true
+      },
+      "skill_normalizer_independent_decoder_agreement": {
+        "denominator": 18,
+        "formula": "18/18",
+        "implementation_agreement_is_not_semantic_accuracy": true,
+        "independent_checker": "intent-ir-decoder-and-schema",
+        "numerator": 18,
+        "rate": 1.0,
+        "shared_producer_dependence": false
+      }
+    },
+    "cve_source_supported_behavior": {
+      "denominator": 24,
+      "independent_producer": "la-006-scoped-behavior-contract-compiler",
+      "note": "source-difference observation is not vulnerable/fixed detection accuracy",
+      "polarity_accuracy_not_scored": true,
+      "polarity_supported_by_contract": 0,
+      "polarity_unknown": 24,
+      "source_difference_observed": 24,
+      "source_difference_observed_rate": {
+        "denominator": 24,
+        "formula": "24/24",
+        "numerator": 24,
+        "rate": 1.0
+      },
+      "transfer_unsupported": 24,
+      "untrusted_source_executed": 0
+    },
+    "machine_contract_coverage": {
+      "denominator": 60,
+      "formula": "60/60",
+      "numerator": 60,
+      "property": "exact_scoped_machine_expectation",
+      "rate": 1.0,
+      "reference_producers": [
+        "la-027-automated-reference-manifest",
+        "la-006-scoped-behavior-contract-compiler"
+      ]
+    },
+    "parse_schema_validity": {
+      "denominator": 60,
+      "formula": "50/60",
+      "note": "schema validity is not semantic accuracy",
+      "numerator": 50,
+      "property": "adapter_or_independent_schema_conformance",
+      "rate": 0.8333333333333334
+    },
+    "source_span_linkage_coverage": {
+      "denominator": 60,
+      "formula": "60/60",
+      "independent_checker": "la-009-quoted-span-hash-checker",
+      "numerator": 60,
+      "property": "quoted_span_hash_linkage",
+      "rate": 1.0
+    }
+  },
+  "pins": {
+    "automated_evidence_amendment.json": {
+      "path": "papers/completion/law_to_action/benchmark/automated_evidence_amendment.json",
+      "present": true,
+      "sha256": "864fa9b4c47db37688cc1944f9fee84cf64835154ddedbbee8dc34ecb95bd6e6",
+      "size_bytes": 5002
+    },
+    "automated_reference_manifest.json": {
+      "path": "papers/completion/law_to_action/benchmark/annotations/automated_reference_manifest.json",
+      "present": true,
+      "sha256": "41da0f2198f8cb7a7c8dfe24782013f9610a3a26027a3c7d8745d876e3f77fcc",
+      "size_bytes": 81839
+    },
+    "corpus_counts.json": {
+      "path": "papers/completion/law_to_action/benchmark/corpus_counts.json",
+      "present": true,
+      "sha256": "9bb3e85c460fc33710a2cfe12d836e6e9a9a62a63c9985e5250e475bd30de5fc",
+      "size_bytes": 3199
+    },
+    "cve_pairs.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl",
+      "present": true,
+      "sha256": "2ccf55f725559f8a61ccee62e49cdd2a350f6171b7d400148bd62389a55a4117",
+      "size_bytes": 150894
+    },
+    "cve_reproduction_index.json": {
+      "path": "papers/completion/law_to_action/benchmark/cve_reproduction/index.json",
+      "present": true,
+      "sha256": "36eb9b6fe1f207a0e12e0f220f8d0667f2ffb4bb09c0ddf686927a5078a695b7",
+      "size_bytes": 1569
+    },
+    "legal.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/annotations/legal.jsonl",
+      "present": true,
+      "sha256": "964be42468c82e04d77b37a90fbab66f5be82f899e54ada60ff403072323dd1b",
+      "size_bytes": 117635
+    },
+    "original_protocol_sha256_bound_by_amendment": {
+      "current_protocol_matches_original_bound_hash": false,
+      "current_protocol_sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+      "path": "papers/completion/law_to_action/benchmark/automated_evidence_amendment.json",
+      "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f"
+    },
+    "polarity_contracts.jsonl": {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-006/polarity_contracts.jsonl",
+      "present": true,
+      "sha256": "4ef386604710a0c5f20deba8efce4fb9f99cc1fa1fed44e50ad05eff76556c3a",
+      "size_bytes": 237056
+    },
+    "protocol.json": {
+      "path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "present": true,
+      "sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+      "size_bytes": 24163
+    },
+    "skill_adversarial.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/cases/skill_adversarial.jsonl",
+      "present": true,
+      "sha256": "ce4517052c2aff98e77097349d1d7b8a0c7c9a1116cf2c174109e02fc910838e",
+      "size_bytes": 240660
+    },
+    "skills.jsonl": {
+      "path": "papers/completion/law_to_action/benchmark/annotations/skills.jsonl",
+      "present": true,
+      "sha256": "05bb0e1f48900a35bf3ed1bdac89bf9b7f5bbcb2673c0cf140da9d5cd3d8bb44",
+      "size_bytes": 213314
+    },
+    "sources.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+      "present": true,
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+      "size_bytes": 51880
+    },
+    "splits.json": {
+      "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+      "present": true,
+      "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+      "size_bytes": 17657
+    }
+  },
+  "pipeline_version": "la-009-source-ir/v1",
+  "raw_sha256": "b420d59a9bb918c50e42f4b99cfd7973bbb502b646030c8b9fd2c8c8445b708a",
+  "runtime": {
+    "cryptography": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/cryptography/__init__.py",
+      "version": "49.0.0"
+    },
+    "duckdb": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/duckdb/__init__.py",
+      "version": "1.5.2"
+    },
+    "home": "/tmp/asref-grok-home-rb8i_8hl",
+    "home_is_validation_prefix": false,
+    "multiformats": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/multiformats/__init__.py",
+      "version": "0.3.1"
+    },
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "pipeline_version": "la-009-source-ir/v1",
+    "python": "/usr/bin/python3.12",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "python_version": "3.12.3",
+    "sympy": {
+      "available": true,
+      "origin": "/opt/ipfs-validation-site-packages/sympy/__init__.py",
+      "version": "1.14.0"
+    },
+    "validation_site_packages": "/opt/ipfs-validation-site-packages"
+  },
+  "schema": "law-to-action-source-ir-metrics/v1",
+  "synthetic_qualification_controls": {
+    "count": 24,
+    "excluded_case_ids": [
+      "synthetic:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:command_execution_bait",
+      "synthetic:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:malicious_markdown",
+      "synthetic:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:command_execution_bait",
+      "synthetic:family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:skill_claims_authorization",
+      "synthetic:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:command_execution_bait",
+      "synthetic:family:564de790672a8ff721a37da968ab57f51cfa0f46f489aa5e77130c8487f9dee8:malicious_markdown",
+      "synthetic:family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:command_execution_bait",
+      "synthetic:family:7fb5e91eebb23de8362cd6d577e98b102f7e5b0bd11e0c4886be3db4b79ad02c:skill_claims_authorization",
+      "synthetic:family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:command_execution_bait",
+      "synthetic:family:aad9fb3792cc37134651428c8410b4912ee1568bb3f5ba93f0afbb625e65f914:skill_claims_authorization",
+      "synthetic:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:command_execution_bait",
+      "synthetic:family:af2d220ac03bb25626bc2481a068dd98abb4c0907fb89decdd50028f7814ddad:malicious_markdown",
+      "synthetic:family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:command_execution_bait",
+      "synthetic:family:b7d9f67c75ce5c3d3612efbddf3ec32c8dec1469ecdc8a4e31d2dbb0b2757b30:skill_claims_authorization",
+      "synthetic:family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:command_execution_bait",
+      "synthetic:family:b947bde75c0695ef7224e81ee81699aa8a1c7d9eab2ab546f8bb3843a36d7a10:skill_claims_authorization",
+      "synthetic:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:command_execution_bait",
+      "synthetic:family:bdb094f619eded6d259e518640d5b5b469bf25ef06103b60891529ffe079e228:skill_claims_authorization",
+      "synthetic:family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:command_execution_bait",
+      "synthetic:family:c8c0d8e29a596f792708eb72a5815e752b90c081c7ebda19bf315989e9e288db:malicious_markdown",
+      "synthetic:family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:command_execution_bait",
+      "synthetic:family:e8a49438d9f648468887e8c9429cfa975620d996f6dd7b4a8c04933544a311ac:malicious_markdown",
+      "synthetic:family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:command_execution_bait",
+      "synthetic:family:f761769c88e7c2240ae3440d8be2102ac5be2b311463fe806297f7e134fe651d:malicious_markdown"
+    ],
+    "included_in_frozen_denominator": false,
+    "reason": "extra skill_claims_authorization and command_execution_bait rows are synthetic qualification controls, not frozen selected cases"
+  },
+  "task": "LA-009",
+  "useful_work_success_inferred_from_fixtures": false,
+  "withdrawn_unmeasured": {
+    "expert_legal_fidelity": {
+      "denominator_restricted": true,
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "status": "unmeasured"
+    },
+    "independent_human_validation": {
+      "denominator_restricted": true,
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "status": "unmeasured"
+    },
+    "inter_annotator_agreement": {
+      "denominator_restricted": true,
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "status": "unmeasured"
+    },
+    "legal_applicability_or_validity_in_the_world": {
+      "denominator_restricted": true,
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "status": "unmeasured"
+    },
+    "semantic_accuracy_from_implementation_agreement": {
+      "denominator_restricted": true,
+      "numeric_score_assigned": false,
+      "reason": "withdrawn_without_independent_data",
+      "status": "unmeasured"
+    }
+  }
+}

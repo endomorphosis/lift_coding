@@ -1,0 +1,1324 @@
+{
+  "artifact": {
+    "artifact_id": "cve-first-shard",
+    "redistribution": "retrieval_only",
+    "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+    "size_bytes": 211599861,
+    "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet"
+  },
+  "distractors": {
+    "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b": {
+      "parent_lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+      "parent_source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b",
+      "relation": "same_repository_unselected_real_row",
+      "row": {
+        "commit_message": "- fixed path traversal vulnerability in MMS file services (LIB61850-357)\n",
+        "commit_message_sha256": "5a44267ccc68786bba4e7741c3d453bb1c16aa627fc793d4392835ac77aeb816",
+        "cve_description": "[{'lang': 'en', 'value': 'A vulnerability has been found in MZ Automation libiec61850 up to 1.4 and classified as critical. This vulnerability affects unknown code of the file src/mms/iso_mms/client/mms_client_files.c of the component MMS File Services. The manipulation of the argument filename leads to path traversal. Upgrading to version 1.5 is able to address this issue. The name of the patch is 10622ba36bb3910c151348f1569f039ecdd8786f. It is recommended to upgrade the affected component. The",
+        "cve_id": "CVE-2022-3976",
+        "cwe_id": "CWE-22",
+        "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+        "file_paths": [
+          "hal/filesystem/linux/file_provider_linux.c",
+          "src/mms/inc_private/mms_common_internal.h",
+          "src/mms/iso_mms/client/mms_client_files.c",
+          "src/mms/iso_mms/common/mms_common_msg.c",
+          "src/mms/iso_mms/server/mms_file_service.c"
+        ],
+        "file_row_number": 8,
+        "fix_commit": "10622ba36bb3910c151348f1569f039ecdd8786f",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 67,
+            "char_start": 23,
+            "quoted_sha256": "4b2e7d914ebb6f7b6e6c524748c5ed3dd5cedc42ae9de61786fd586180df0415",
+            "quoted_text": "mmsMsg_isFilenameSave(const char* filename);",
+            "unique_in_body": true
+          },
+          "sha256": "0f38f793f6df8bfab0949fcf39ff38fcc1a0de89e2c46692cb583dbd8a588ceb",
+          "utf8_bytes": 3743
+        },
+        "language": "C",
+        "normalized_source_sha256": "433b8ed2ae8941068601deffb8d2c1e008e33c73472c8f3e211b5c905ef2ea78",
+        "repo_url": "https://github.com/mz-automation/libiec61850",
+        "repository": "github.com/mz-automation/libiec61850",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "46e34274c68f9b997f71fdcddb8ed6421a4c9cbe3631c0c4796ac253df23670a",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 66,
+            "char_start": 10,
+            "quoted_sha256": "819f6fc49212a1f69e435868f07a901ccfbc6d518d2026cb9c40328eada46df5",
+            "quoted_text": "MmsFileReadStateMachine* frsm = getFreeFrsm(connection);",
+            "unique_in_body": true
+          },
+          "sha256": "16debb87a2e86ad808efc28b735a7d01ec52f09947cdcb8b7cad881d4cfeb27d",
+          "utf8_bytes": 1310
+        }
+      }
+    },
+    "cve:4f2ed896018faeb0a70c1542a88ed36959d0c5f257ba25698c49f2336c0f32c7": {
+      "parent_lineage_family_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8",
+      "parent_source_id": "cve:4f2ed896018faeb0a70c1542a88ed36959d0c5f257ba25698c49f2336c0f32c7",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "Patch vulnerabilities\n\nPatch vulnerabilities :\nCVE-2014-8352\nCVE-2014-8351\n",
+        "commit_message_sha256": "2f1d8254b25ad1db60a4e28ba076af003b52b7784ec3b4a2dae4878dcfc4aa6a",
+        "cve_description": "[{'lang': 'en', 'value': 'SQL injection vulnerability in info.php in French National Commission on Informatics and Liberty (aka CNIL) CookieViz before 1.0.1 allows remote web servers to execute arbitrary SQL commands via the domain parameter.'}]",
+        "cve_id": "CVE-2014-8351",
+        "cwe_id": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+        "file_paths": [
+          "cookieviz/info.php",
+          "cookieviz/json.php"
+        ],
+        "file_row_number": 43,
+        "fix_commit": "489b6050f6c53fe7b24c4bed3eeb9c25543960e2",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 143,
+            "char_start": 81,
+            "quoted_sha256": "e9d58f61013ea1fa4c62d8734087cd8d81b7c688d354d40d104a9c924a3716fb",
+            "quoted_text": "$init_max_date = \tmysql_real_escape_string($_GET[\"max_date\"]);",
+            "unique_in_body": true
+          },
+          "sha256": "2a0fb4b68d80a27d2f6764536afb1754e919c3d9d906e9f5bfd4daead8969a69",
+          "utf8_bytes": 260
+        },
+        "language": "PHP",
+        "normalized_source_sha256": "ca640ec963783a91fa12fabe0da3d5834e59181d4d4c3305e978b19ef9400ffc",
+        "repo_url": "https://github.com/LaboCNIL/CookieViz",
+        "repository": "github.com/labocnil/cookieviz",
+        "security_keywords": [],
+        "severity": "HIGH",
+        "source_record_sha256": "c7ab19a946320ecda63a08911c49e1f896fb848a1398717c51aef37209fb345c",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 98,
+            "char_start": 0,
+            "quoted_sha256": "445404b7821a80541d85085a24ff71d6a29726e10a3095f4586753172c1548f4",
+            "quoted_text": "<?php\n\t$domain = $_GET[\"domain\"];\n\t$init_max_date = $_GET[\"max_date\"];\n\t$domain = $_GET[\"domain\"];",
+            "unique_in_body": true
+          },
+          "sha256": "445404b7821a80541d85085a24ff71d6a29726e10a3095f4586753172c1548f4",
+          "utf8_bytes": 98
+        }
+      }
+    },
+    "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f": {
+      "parent_lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+      "parent_source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "Release v3.7\n",
+        "commit_message_sha256": "c675f6e1086cf7a036daaff9cd27d342a92f61db60b3ee5aee29bf5950c629c0",
+        "cve_description": "[{'lang': 'en', 'value': \"A vulnerability was identified in the kjd/idna library, specifically within the `idna.encode()` function, affecting version 3.6. The issue arises from the function's handling of crafted input strings, which can lead to quadratic complexity and consequently, a denial of service condition. This vulnerability is triggered by a crafted input that causes the `idna.encode()` function to process the input with considerable computational load, significantly increasing the proce",
+        "cve_id": "CVE-2024-3651",
+        "cwe_id": "NVD-CWE-noinfo",
+        "cwe_name": "Insufficient Information",
+        "file_paths": [
+          "HISTORY.rst",
+          "LICENSE.md",
+          "idna/package_data.py"
+        ],
+        "file_row_number": 33,
+        "fix_commit": "1d365e17e10d72d0b7876316fc7b9ca0eebdd38d",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 78,
+            "char_start": 18,
+            "quoted_sha256": "db80b14134f1f8b0bb7a33bebda5598295b1d783c5e59172fb840a6d62907f65",
+            "quoted_text": "- Fix issue where specially crafted inputs to encode() could",
+            "unique_in_body": true
+          },
+          "sha256": "e4f04f6ed90e7a601293b75e7ab02df1e7db65afa3483ad011564cbf5a1d22d7",
+          "utf8_bytes": 272
+        },
+        "language": "Python",
+        "normalized_source_sha256": "f06afb0ed12aa245ca779c289ba6c88289be5a6c915bbd20ee9a35532544ce7a",
+        "repo_url": "https://github.com/kjd/idna",
+        "repository": "github.com/kjd/idna",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "0a62a005d91bd34e997a071ac53beeb44a9e926d657dd31ee76db551d1a5dc18",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 53,
+            "char_start": 0,
+            "quoted_sha256": "3d05b11f2ffdee8a6c45b5ca624287dff79083b292a01c59d8e56d4d98ed438a",
+            "quoted_text": "Copyright (c) 2013-2023, Kim Davies and contributors.",
+            "unique_in_body": true
+          },
+          "sha256": "e6236bb316a6c0732254c722ca3205c925be383e487ca0ef4a405cf81896cbbe",
+          "utf8_bytes": 73
+        }
+      }
+    },
+    "cve:632938f672083d701d8c1114b64ce424829f45b2fb3a90cc83cfb4c82b43a441": {
+      "parent_lineage_family_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e",
+      "parent_source_id": "cve:632938f672083d701d8c1114b64ce424829f45b2fb3a90cc83cfb4c82b43a441",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "Fix for integer/buffer overflow CVE-2021-32765\n\nThis fix prevents hiredis from trying to allocate more than `SIZE_MAX`\nbytes, which would result in a buffer overrun.\n\n[Full Details](https://github.com/redis/hiredis/security/advisories/GHSA-hfm9-39pp-55p2)\n",
+        "commit_message_sha256": "1cffdd770e7e7891b7df98559c911607abab6c7c77419a87673b9f9fc4930e04",
+        "cve_description": "[{'lang': 'en', 'value': \"Hiredis is a minimalistic C client library for the Redis database. In affected versions Hiredis is vulnurable to integer overflow if provided maliciously crafted or corrupted `RESP` `mult-bulk` protocol data. When parsing `multi-bulk` (array-like) replies, hiredis fails to check if `count * sizeof(redisReply*)` can be represented in `SIZE_MAX`. If it can not, and the `calloc()` call doesn't itself make this check, it would result in a short allocation and subsequent buf",
+        "cve_id": "CVE-2021-32765",
+        "cwe_id": "CWE-190",
+        "cwe_name": "Integer Overflow or Wraparound",
+        "file_paths": [
+          "hiredis.c",
+          "test.c"
+        ],
+        "file_row_number": 34,
+        "fix_commit": "76a7b10005c70babee357a7d0f2becf28ec7ed1e",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 89,
+            "char_start": 8,
+            "quoted_sha256": "80942afb50e30ea014987508a170a96c59a7fe7fb6d0fdf5fc4819bf7cae5d87",
+            "quoted_text": "if (SIZE_MAX / sizeof(redisReply*) < elements) return NULL;  /* Don't overflow */",
+            "unique_in_body": true
+          },
+          "sha256": "1a2ca31e05b6bc0ae6b24b1ba35c6ddcec7e8d407851da7270f26e723bdbc919",
+          "utf8_bytes": 731
+        },
+        "language": "C",
+        "normalized_source_sha256": "5f7eb59a752527781d78676f0b3022eda925fb4ebac6a5e3977e6a51fe424b66",
+        "repo_url": "https://github.com/redis/hiredis",
+        "repository": "github.com/redis/hiredis",
+        "security_keywords": [],
+        "severity": "MEDIUM",
+        "source_record_sha256": "71ce71baee4494bc3f134efe34bb2f348e63842f89a32c83f3a88631b9d5ba32",
+        "vulnerable": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        }
+      }
+    },
+    "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188": {
+      "parent_lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+      "parent_source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+      "relation": "same_repository_unselected_real_row",
+      "row": {
+        "commit_message": "Fix XSS vulnerability on \"site name\"\n",
+        "commit_message_sha256": "08a7e5a88ef07f9a4fe8b51cc84fe58e365f65b0f7ab41e12d3b2ab91c01152a",
+        "cve_description": "[{'lang': 'en', 'value': 'Cross-site scripting (XSS) vulnerability in b2evolution 6.7.5 and earlier allows remote authenticated users to inject arbitrary web script or HTML via the site name.'}]",
+        "cve_id": "CVE-2016-7150",
+        "cwe_id": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "file_paths": [
+          "skins_site/_site_body_header.inc.php"
+        ],
+        "file_row_number": 14,
+        "fix_commit": "dd975fff7fce81bf12f9c59edb1a99475747c83c",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 161,
+            "char_start": 1,
+            "quoted_sha256": "aaca8725022f1b9f9fb256a7610a8694f4ff590bba91be12b0a06c64e4b48248",
+            "quoted_text": "$site_title = $Settings->get( 'notification_long_name' ) != '' ? ' title=\"'.format_to_output( $Settings->get( 'notification_long_name' ), 'htmlattr' ).'\"' : '';",
+            "unique_in_body": true
+          },
+          "sha256": "ff833e7324950c7ff6e2c955493da5a357486d12f6654eed2f657d8341a1680d",
+          "utf8_bytes": 340
+        },
+        "language": "PHP",
+        "normalized_source_sha256": "9183713cf78fe41e5df5c8d360e4127128a2a7795d1104f92ad41efd51274ec5",
+        "repo_url": "https://github.com/b2evolution/b2evolution",
+        "repository": "github.com/b2evolution/b2evolution",
+        "security_keywords": [],
+        "severity": "LOW",
+        "source_record_sha256": "9183713cf78fe41e5df5c8d360e4127128a2a7795d1104f92ad41efd51274ec5",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 129,
+            "char_start": 1,
+            "quoted_sha256": "8b348afe242109f67dfbb9acd99438e02aa877ccd404a56ca02b36c24ed498ce",
+            "quoted_text": "$site_title = $Settings->get( 'notification_long_name' ) != '' ? ' title=\"'.$Settings->get( 'notification_long_name' ).'\"' : '';",
+            "unique_in_body": true
+          },
+          "sha256": "79ab394cc9fca2f3fa670d80f35f08889fcb5760346abba98458e33dd252fb60",
+          "utf8_bytes": 276
+        }
+      }
+    },
+    "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4": {
+      "parent_lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+      "parent_source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "fix: do not deref the integrity buffer (#1699)\n\n",
+        "commit_message_sha256": "0e2da8c6e68aad0d5a79e80b02bd5a655593489a7a3bcae3c9af320c04466328",
+        "cve_description": "[{'lang': 'en', 'value': 'Electron Packager bundles Electron-based application source code with a renamed Electron executable and supporting files into folders ready for distribution. A random segment of ~1-10kb of Node.js heap memory allocated either side of a known buffer will be leaked into the final executable. This memory _could_ contain sensitive information such as environment variables, secrets files, etc. This issue is patched in 18.3.1.\\n'}]",
+        "cve_id": "CVE-2024-29900",
+        "cwe_id": "NVD-CWE-noinfo",
+        "cwe_name": "Insufficient Information",
+        "file_paths": [
+          "src/resedit.ts"
+        ],
+        "file_row_number": 39,
+        "fix_commit": "d421d4bd3ced889a4143c5c3ab6d95e3be249eee",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 77,
+            "char_start": 4,
+            "quoted_sha256": "f3d985b35d2f70dccef071251e245ee3abe0615d4ff28eb0a3fb23deedf557bd",
+            "quoted_text": "const integrityList = Object.keys(options.asarIntegrity).map((file) => ({",
+            "unique_in_body": true
+          },
+          "sha256": "d04ec72acc7e2818dbf7109f035ceb9ca392e38e8da465f60a448b78ad7e4b21",
+          "utf8_bytes": 312
+        },
+        "language": "TypeScript",
+        "normalized_source_sha256": "f4597c44501eebd2490cf83d5e096799a3f431dd020fe38baf6cbc42f63f4737",
+        "repo_url": "https://github.com/electron/packager",
+        "repository": "github.com/electron/packager",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "0833a2b2caba31959c5feebed0e42f53628adbfe0699c5ece9ce6d9e45beb8cf",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 120,
+            "char_start": 57,
+            "quoted_sha256": "2744e5efb64cfba98d4fae26fa64ad0bf1c1ac3581f08ee72c01ec9960c642a9",
+            "quoted_text": "bin: Buffer.from(JSON.stringify(options.asarIntegrity)).buffer,",
+            "unique_in_body": true
+          },
+          "sha256": "fd0a19ab96f6f0e6687c699c77b28dbffa83595450e053f6ae76a7cb17dd9cf7",
+          "utf8_bytes": 120
+        }
+      }
+    },
+    "cve:ce7168a173a1bb4ebef7f3a1162d072d30690f27ce74640ee65231c7c4033fd3": {
+      "parent_lineage_family_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04",
+      "parent_source_id": "cve:ce7168a173a1bb4ebef7f3a1162d072d30690f27ce74640ee65231c7c4033fd3",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "Fix encoding issues (#11008)\n\n",
+        "commit_message_sha256": "974d753edd1115aa64d6d685ab3e769c3f0741c1cf20438a45b5acc2df0f02de",
+        "cve_description": "[{'lang': 'en', 'value': \"orchardcore is vulnerable to Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')\"}]",
+        "cve_id": "CVE-2022-0159",
+        "cwe_id": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "file_paths": [
+          "src/OrchardCore.Modules/OrchardCore.AdminDashboard/Controllers/DashboardController.cs",
+          "src/OrchardCore.Modules/OrchardCore.AdminDashboard/Views/Dashboard/Manage.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Contents/Controllers/AdminController.cs",
+          "src/OrchardCore.Modules/OrchardCore.Contents/Views/Admin/Create.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Contents/Views/Admin/Edit.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Contents/Views/ContentsAdminListCreate.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Contents/Views/Download/Display.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Demo/Pages/Admin/Hello.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Demo/Pages/Hello.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Demo/Pages/OutsideAdmin.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Flows/Views/FlowMetadata.Edit.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Layers/Views/Admin/Index.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Users/Views/RegistrationSettings.Edit.cshtml",
+          "src/OrchardCore.Modules/OrchardCore.Workflows/Views/Content.UserTaskButton.cshtml"
+        ],
+        "file_row_number": 25,
+        "fix_commit": "4da927d39a49138527c30db09c962ff706f95202",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 90,
+            "char_start": 20,
+            "quoted_sha256": "e886076061c3a3660549a66d3afeb2dd72a1ab146b0517d6e3498de7ca6a397f",
+            "quoted_text": "dashboardCreatable.Add(new SelectListItem(ctd.DisplayName, ctd.Name));",
+            "unique_in_body": true
+          },
+          "sha256": "9bd7a6d100d802191b6e9bd4fc5ed6c7550f6b2257a7a81c2779976bd737a665",
+          "utf8_bytes": 2715
+        },
+        "language": "Other",
+        "normalized_source_sha256": "8deca75ff6b8489ebca286c8f06f59ac695e33cc14d3111a7a0532478d5c9adb",
+        "repo_url": "https://github.com/orchardcms/orchardcore",
+        "repository": "github.com/orchardcms/orchardcore",
+        "security_keywords": [],
+        "severity": "LOW",
+        "source_record_sha256": "8a5ecc11c23e88bec230abda9e24447092cd8061150cb43151af38ab5b02e269",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 134,
+            "char_start": 20,
+            "quoted_sha256": "ddffe7ef47d6c6a8caa9d47117c3166de90e213c026c03250bfdc895f0a3035a",
+            "quoted_text": "dashboardCreatable.Add(new SelectListItem(new LocalizedString(ctd.DisplayName, ctd.DisplayName).Value, ctd.Name));",
+            "unique_in_body": true
+          },
+          "sha256": "816b3c5367c451059a1073396195a80ad969cfea993584e49cb89198de91e24f",
+          "utf8_bytes": 2334
+        }
+      }
+    },
+    "cve:d00ef5daf47afdace1397eb13f05855cdad67c0631cfcdf8a44960c8caf09957": {
+      "parent_lineage_family_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902",
+      "parent_source_id": "cve:d00ef5daf47afdace1397eb13f05855cdad67c0631cfcdf8a44960c8caf09957",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "Merge pull request from GHSA-pwx5-6wxg-px5h\n\n* fix(secrets): split env injection based on allow_substitution value\n\n* upgrade sdk server and types",
+        "commit_message_sha256": "b64902cfb855c9b1f977f9101dabebd560d6e192beb62062985947dee6cbcd57",
+        "cve_description": "[{'lang': 'en', 'value': 'Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang. Vela pipelines can use variable substitution combined with insensitive fields like `parameters`, `image` and `entrypoint` to inject secrets into a plugin/image and \u2014 by using common substitution string manipulation \u2014 can bypass log masking and expose secrets without the use of the commands block. This unexpected behavior primarily impacts secrets restricted by the \"no ",
+        "cve_id": "CVE-2024-28236",
+        "cwe_id": "NVD-CWE-noinfo",
+        "cwe_name": "Insufficient Information",
+        "file_paths": [
+          "executor/linux/build.go",
+          "executor/linux/linux.go",
+          "executor/linux/secret.go",
+          "executor/linux/service.go",
+          "executor/linux/step.go",
+          "go.mod",
+          "go.sum"
+        ],
+        "file_row_number": 35,
+        "fix_commit": "e1572743b008e4fbce31ebb1dcd23bf6a1a30297",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 204,
+            "char_start": 152,
+            "quoted_sha256": "1ddf05cdc0b091a438b12d1edb5e2c01d8d0a3d31565db8d2e864bdb4d3e5a1e",
+            "quoted_text": "lazyNoSubSecrets := make(map[string]*library.Secret)",
+            "unique_in_body": true
+          },
+          "sha256": "e1268f8e3b12ae2ae5d5a0df5c93c8aeacd4e45057b3533a6ca4824a15b824ae",
+          "utf8_bytes": 2337
+        },
+        "language": "Go",
+        "normalized_source_sha256": "7e28c85c232a15b9811143a010073d00dc26070399c23d8460e1d98a72bffd9e",
+        "repo_url": "https://github.com/go-vela/worker",
+        "repository": "github.com/go-vela/worker",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "694d29f2516cf5d2b09dbd869393f03a4bb27d0eb9c49bc4d0dfcfe39968002c",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 455,
+            "char_start": 374,
+            "quoted_sha256": "22b70099e83228b81f258de7907ff786410120e3b5a0bdcffa02000e49ba0e13",
+            "quoted_text": "github.com/go-vela/sdk-go v0.23.1 h1:4KxfAF1vR8DvtRraBoWQDIm8f8zxXP806lJR3MmTlC8=",
+            "unique_in_body": true
+          },
+          "sha256": "907878a1fcc388095b0f2e3344daa72c296a10a2ca3b0b1ef12cdeca4a05fadc",
+          "utf8_bytes": 884
+        }
+      }
+    },
+    "cve:ef8efcd2f930b4d7a14d77f1cc349b019e7614237c33057ccd0362db8ce5f19c": {
+      "parent_lineage_family_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94",
+      "parent_source_id": "cve:ef8efcd2f930b4d7a14d77f1cc349b019e7614237c33057ccd0362db8ce5f19c",
+      "relation": "same_repository_unselected_real_row",
+      "row": {
+        "commit_message": "Update:API endpoint /podcasts/feed validates rssFeed URL and uses SSRF req filter\n",
+        "commit_message_sha256": "0d5a7addaa2ffad6164cadb27337b8ac1b351e644a3104e484d69c1e90718179",
+        "cve_description": "[{'lang': 'en', 'value': 'Audiobookshelf is a self-hosted audiobook and podcast server. Prior to 2.7.0, Audiobookshelf is vulnerable to unauthenticated blind server-side request (SSRF) vulnerability in `podcastUtils.js`. This vulnerability has been addressed in version 2.7.0. There are no known workarounds for this vulnerability.\\n\\n'}]",
+        "cve_id": "CVE-2023-51697",
+        "cwe_id": "CWE-918",
+        "cwe_name": "Server-Side Request Forgery (SSRF)",
+        "file_paths": [
+          "server/controllers/PodcastController.js",
+          "server/utils/index.js",
+          "server/utils/podcastUtils.js"
+        ],
+        "file_row_number": 3,
+        "fix_commit": "f2f2ea161ca0701e1405e737b0df0f96296e4f64",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 49,
+            "char_start": 0,
+            "quoted_sha256": "93c27881847ff044d3f09850a31efc0565b4fddb1a1827504dde4cee5d202df0",
+            "quoted_text": "const { validateUrl } = require('../utils/index')",
+            "unique_in_body": true
+          },
+          "sha256": "4df7f84c290714bc1505e2661871cac47ef2774a6977a7759cf04b0b1e8e8127",
+          "utf8_bytes": 1553
+        },
+        "language": "JavaScript",
+        "normalized_source_sha256": "a62a92a72bfd0f8fef759d02572e9af62eba31c40c74c40f0de225e87ab07fad",
+        "repo_url": "https://github.com/advplyr/audiobookshelf",
+        "repository": "github.com/advplyr/audiobookshelf",
+        "security_keywords": [
+          "sanitization",
+          "validation"
+        ],
+        "severity": null,
+        "source_record_sha256": "75c522f0a3fa74f64dc1d452bbbbbfe45f528194c0ca5044f9cbddc9afdb2f19",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 79,
+            "char_start": 37,
+            "quoted_sha256": "cf6fecedb93d815fb24297b3f55db37fb80700ccc916ff556a7fc63bcd8c1158",
+            "quoted_text": "return res.status(400).send('Bad request')",
+            "unique_in_body": true
+          },
+          "sha256": "cf6893d434da4119e457de408b462a3c4c529ad4014bb457b994e1e7e55255d6",
+          "utf8_bytes": 508
+        }
+      }
+    },
+    "cve:f0a887e8b29776f66de7442393d150390a06677855a40098c2cb879c1ea17e8d": {
+      "parent_lineage_family_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382",
+      "parent_source_id": "cve:f0a887e8b29776f66de7442393d150390a06677855a40098c2cb879c1ea17e8d",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "feat: add searchPattern as an option and restrict default search pattern (#75)\n\nWith version 15, the behavior of the environment variable lookup changed to try to find occurrences in the whole workspace. This could lead to a potential information disclosure vulnerability, by exposing environment variables meant for a backend/Node.js application.\r\nThis PR mitigates this possibility, by restricting ",
+        "commit_message_sha256": "8d389de9d0a4f5c05c4df04bd860e36516431add2758ff36726ced30c5dc6f1a",
+        "cve_description": "[{'lang': 'en', 'value': 'angular-server-side-configuration helps configure an angular application at runtime on the server or in a docker container via environment variables. angular-server-side-configuration detects used environment variables in TypeScript (.ts) files during build time of an Angular CLI project. The detected environment variables are written to a ngssc.json file in the output directory.\\nDuring deployment of an Angular based app, the environment variables based on the variable",
+        "cve_id": "CVE-2023-28444",
+        "cwe_id": "CWE-200",
+        "cwe_name": "Exposure of Sensitive Information to an Unauthorized Actor",
+        "file_paths": [
+          ".gitignore",
+          ".nvmrc",
+          "README.md",
+          "package.json",
+          "projects/angular-server-side-configuration/builders/browser/schema.json",
+          "projects/angular-server-side-configuration/builders/dev-server/index.ts",
+          "projects/angular-server-side-configuration/builders/dev-server/schema.json",
+          "projects/angular-server-side-configuration/builders/ngsscbuild/index.spec.ts",
+          "projects/angular-server-side-configuration/builders/ngsscbuild/index.ts",
+          "projects/angular-server-side-configuration/builders/ngsscbuild/schema.json",
+          "projects/angular-server-side-configuration/builders/ngsscbuild/schema.ts",
+          "projects/angular-server-side-configuration/ng-package.json",
+          "projects/angular-server-side-configuration/package.json",
+          "projects/angular-server-side-configuration/schematics/ng-add/index.ts",
+          "test/hello-world-app/.browserslistrc",
+          "test/hello-world-app/.editorconfig",
+          "test/hello-world-app/.gitignore",
+          "test/hello-world-app/README.md",
+          "test/hello-world-app/angular.json",
+          "test/hello-world-app/karma.conf.js",
+          "test/hello-world-app/protractor.conf.js",
+          "test/hello-world-app/src/app/app.component.html",
+          "test/hello-world-app/src/app/app.component.spec.ts",
+          "test/hello-world-app/src/app/app.component.ts",
+          "test/hello-world-app/src/app/app.module.ts",
+          "test/hello-world-app/src/app/app.server.module.ts",
+          "test/hello-world-app/src/index.html",
+          "test/hello-world-app/src/main.server.ts",
+          "test/hello-world-app/src/main.ts",
+          "test/hello-world-app/src/polyfills.ts",
+          "test/hello-world-app/src/src/locale/messages.xlf",
+          "test/hello-world-app/src/styles.css",
+          "test/hello-world-app/src/tsconfig.app.json",
+          "test/hello-world-app/src/tsconfig.server.json",
+          "test/hello-world-app/src/tsconfig.spec.json",
+          "test/hello-world-app/src/typings.d.ts",
+          "test/hello-world-app/tsconfig.json",
+          "test/jasmine.js",
+          "test/test-utils.ts",
+          "yarn.lock"
+        ],
+        "file_row_number": 42,
+        "fix_commit": "d701f51260637a84ede278e248934e0437a7ff86",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 141,
+            "char_start": 53,
+            "quoted_sha256": "c206392d5f5811b5fa875a137ec8ce206e2adb87b15b619d805e37cc5415eb07",
+            "quoted_text": "With the change in version 15 to search all files for environment variables, a potential",
+            "unique_in_body": true
+          },
+          "sha256": "6dd297127a40aa4660323adc20191a46cae689286c96d161132195eb84d37c74",
+          "utf8_bytes": 28732
+        },
+        "language": "TypeScript",
+        "normalized_source_sha256": "34067a28304044c8f88039925598bab4880eb6db9a70be16a825f3da538baba3",
+        "repo_url": "https://github.com/kyubisation/angular-server-side-configuration",
+        "repository": "github.com/kyubisation/angular-server-side-configuration",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "91f858e8e37948fbfb567f04473ae7d4def3865de1714ca3c872399c898aa3b0",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 93,
+            "char_start": 0,
+            "quoted_sha256": "2390a025c818a0934dc67cca0f507010e997c356128398529999aed6ef9acab9",
+            "quoted_text": "either `app.module.ts`, `app.components.ts` or `main.ts` depending on availability. The ngssc",
+            "unique_in_body": true
+          },
+          "sha256": "69cff2a699d03e9f35893d2f07866d1851edbd2ee08ca84bfbfda1fdaf2f6320",
+          "utf8_bytes": 5585
+        }
+      }
+    },
+    "cve:f67ed820310f942901fff3ec0fa3da08da2a62a9267dcb3cb09f07de54a7665c": {
+      "parent_lineage_family_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479",
+      "parent_source_id": "cve:f67ed820310f942901fff3ec0fa3da08da2a62a9267dcb3cb09f07de54a7665c",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "dns: fix crash issue\n",
+        "commit_message_sha256": "439501f1a2b87b946982edbbff07b943fe783959cf500e8cb8a521e4014790ca",
+        "cve_description": "[{'lang': 'en', 'value': 'SmartDNS through 41 before 56d0332 allows an out-of-bounds write because of a stack-based buffer overflow in the _dns_encode_domain function in the dns.c file, via a crafted DNS request.'}]",
+        "cve_id": "CVE-2023-31470",
+        "cwe_id": "CWE-787",
+        "cwe_name": "Out-of-bounds Write",
+        "file_paths": [
+          "src/dns.c",
+          "src/dns.h",
+          "src/util.c"
+        ],
+        "file_row_number": 41,
+        "fix_commit": "56d0332bf91104cfc877635f6c82e9348587df04",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 299,
+            "char_start": 254,
+            "quoted_sha256": "9c14cc55194c3b68022e44325942cee63e4d27d831a62ea59e31b3a9bcf5aa29",
+            "quoted_text": "rr_nested->context.ptr = rr_nested->rr_start;",
+            "unique_in_body": true
+          },
+          "sha256": "78f8998f57f05c4ac52ea4c6022f949a028624c735ee75934364668778f63018",
+          "utf8_bytes": 3313
+        },
+        "language": "C",
+        "normalized_source_sha256": "cf2113b3a3408d9706cfacf8bfb8439ac429a3d3215977600c6bb90d073853aa",
+        "repo_url": "https://github.com/pymumu/smartdns",
+        "repository": "github.com/pymumu/smartdns",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "b57670ae5045c9704653d4e69b6a9b9d598241647c63662a7e839b83f571639a",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 145,
+            "char_start": 89,
+            "quoted_sha256": "f271bda19d5d1f0b131f3044bdfec4bf607c326640d82a39fb10bc0b57b4abe8",
+            "quoted_text": "int target_len = strnlen(target, DNS_MAX_CNAME_LEN) + 1;",
+            "unique_in_body": true
+          },
+          "sha256": "f61a49b66349f3dc8826e9f82bddbf440be3700a37dd38dcc1efd05544842e46",
+          "utf8_bytes": 1658
+        }
+      }
+    },
+    "cve:fe6696430d9a566ecafc3137e39b1bd92826c03dcd3ade6ed9ec504c3f843644": {
+      "parent_lineage_family_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992",
+      "parent_source_id": "cve:fe6696430d9a566ecafc3137e39b1bd92826c03dcd3ade6ed9ec504c3f843644",
+      "relation": "unrelated_unselected_real_row",
+      "row": {
+        "commit_message": "Use non-predictable filename for downloaded patch file\n\nSince the /tmp directory is readable by everybody on Unix, and since\nthe patch name could be public or easy to guess, a attacker could create a symlink\nto a file writable by the user running hub, which would be replaced by the patch.\n\nThis has been assigned CVE-2014-0177\n",
+        "commit_message_sha256": "83e9f65732f88b1e895696a30e9484cac1dd42905677c0d6a606f538497d717f",
+        "cve_description": "[{'lang': 'en', 'value': 'The am function in lib/hub/commands.rb in hub before 1.12.1 allows local users to overwrite arbitrary files via a symlink attack on a temporary patch file.'}]",
+        "cve_id": "CVE-2014-0177",
+        "cwe_id": "CWE-310",
+        "cwe_name": "Cryptographic Issues",
+        "file_paths": [
+          "lib/hub/commands.rb",
+          "lib/hub/context.rb"
+        ],
+        "file_row_number": 32,
+        "fix_commit": "016ec99d25b1cb83cb4367e541177aa431beb600",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 47,
+            "char_start": 0,
+            "quoted_sha256": "fd4990248d9366541389d5e697042dc4d54c283a28c1afc7974a2e4b81dbba69",
+            "quoted_text": "        patch_file = Tempfile.new('patch_name')",
+            "unique_in_body": true
+          },
+          "sha256": "fd4990248d9366541389d5e697042dc4d54c283a28c1afc7974a2e4b81dbba69",
+          "utf8_bytes": 47
+        },
+        "language": "Ruby",
+        "normalized_source_sha256": "43aba732add8e75a217698f9c1ea3f1f046c28a7aec6ab025f660fc17907cb89",
+        "repo_url": "https://github.com/github/hub",
+        "repository": "github.com/github/hub",
+        "security_keywords": [],
+        "severity": "LOW",
+        "source_record_sha256": "f07d0a91caefb42e594a1f9538718b88df7959ad989fe5594e526a51dde929cb",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 51,
+            "char_start": 8,
+            "quoted_sha256": "304f11f0bff23cf069b26cf7c7557f85ff0c64323a49349c56b004da8a197f3d",
+            "quoted_text": "patch_file = File.join(tmp_dir, patch_name)",
+            "unique_in_body": true
+          },
+          "sha256": "76767635ad7cb199959ab9507bde933fd0a442cbafb5d017ff70e1e831b44196",
+          "utf8_bytes": 127
+        }
+      }
+    }
+  },
+  "extraction": {
+    "executed_source": false,
+    "full_bodies_retained": false,
+    "quoted_spans_and_hashes_only": true
+  },
+  "schema": "law-to-action-cve-row-evidence/v1",
+  "selected_rows": [
+    {
+      "lineage_family_id": "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04",
+      "planned_case_ids": [
+        "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-0",
+        "family:ebdcafa63e90d6e25c5fc28a35b5ecf8385c2c72f971bce552ed13f4203e0d04:case-1"
+      ],
+      "row": {
+        "commit_message": "nimble/host: Fix disconnect on host connection timeout\n\nWe don't need to have double loop and lock-unlock host lock when\nissuing disconnect. ble_gap_terminate_with_conn() can be used\nto disconnect and it can be called with already provided conn object\nunder host lock.\n",
+        "commit_message_sha256": "2c5569f31d2f5b7bec71dba5bb0d12e4b67ec379b96bded8f10548d2340e5b57",
+        "cve_description": "[{'lang': 'en', 'value': \"Loop with Unreachable Exit Condition ('Infinite Loop') vulnerability in Apache NimBLE.\\xa0\\n\\nSpecially crafted GATT operation can cause infinite loop in GATT server leading to denial of service in Bluetooth stack or device.\\n\\nThis issue affects Apache NimBLE: through 1.6.0.\\nUsers are recommended to upgrade to version 1.7.0, which fixes the issue.\"}]",
+        "cve_id": "CVE-2024-24746",
+        "cwe_id": "CWE-835",
+        "cwe_name": "Loop with Unreachable Exit Condition ('Infinite Loop')",
+        "file_paths": [
+          "nimble/host/src/ble_hs_conn.c"
+        ],
+        "file_row_number": 0,
+        "fix_commit": "d42a0ebe6632bd0c318560e4293a522634f60594",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 44,
+            "char_start": 4,
+            "quoted_sha256": "db936cfcc9354c6c99871e367010012257378f59df801a75d1dfd4b1142addec",
+            "quoted_text": "ble_npl_time_t now = ble_npl_time_get();",
+            "unique_in_body": true
+          },
+          "sha256": "cd90b0a6953cc858b3d8d275bd87a9792e1aa0ae3aa66d8a1afe32b7e3d31a81",
+          "utf8_bytes": 1996
+        },
+        "language": "C",
+        "normalized_source_sha256": "db05a0d69399ac05782b8e782a5a14dc257feb52bb255bc15680c3dd86e46565",
+        "repo_url": "https://github.com/apache/mynewt-nimble",
+        "repository": "github.com/apache/mynewt-nimble",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "3694e02a800ae58a3a700e354d9fede8d450a695d9672655aaee99a9f0faf2dd",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 361,
+            "char_start": 290,
+            "quoted_sha256": "3a2df4db0a01453c57a6843a49ca1a65db35399f2209a69fc10a4ea82c4df10b",
+            "quoted_text": "* 1. Determine if any connections need to be terminated due to timeout.",
+            "unique_in_body": true
+          },
+          "sha256": "71e628fa5917b15ce8e12975b5327e482c40a6ab2b62d3ddb088cc625a80d59c",
+          "utf8_bytes": 2655
+        }
+      },
+      "source_id": "cve:ce7168a173a1bb4ebef7f3a1162d072d30690f27ce74640ee65231c7c4033fd3",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992",
+      "planned_case_ids": [
+        "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-0",
+        "family:0628043631781ea885f941cb5db5d39b9fdea265f80878b00db882b9178ca992:case-1"
+      ],
+      "row": {
+        "commit_message": "fix access to files without protocol\n",
+        "commit_message_sha256": "d54151853bd87938266840387449e00b8ec029ef7994d55f1949b00af5a7aed9",
+        "cve_description": "[{'lang': 'en', 'value': 'This affects the package phantom-html-to-pdf before 0.6.1.'}]",
+        "cve_id": "CVE-2020-7763",
+        "cwe_id": "CWE-22",
+        "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+        "file_paths": [
+          "lib/scripts/conversionScriptPart.js",
+          "test/test.js"
+        ],
+        "file_row_number": 1,
+        "fix_commit": "b5d2da2639a49a95e0bdb3bc0c987cb6406b8259",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 174,
+            "char_start": 51,
+            "quoted_sha256": "6adf5171958d72d3dbbe5314aed0f15828d1ed8594ec2b85f7d2b47c606ce42f",
+            "quoted_text": "if (request.url.lastIndexOf(\"http://\", 0) !== 0 && request.url.lastIndexOf(\"https://\", 0) && !body.allowLocalFilesAccess) {",
+            "unique_in_body": true
+          },
+          "sha256": "1525167dd7cec01ffd91d25a34b811d8ae4adcd3e45a5da8870656d4e1e1763d",
+          "utf8_bytes": 1396
+        },
+        "language": "JavaScript",
+        "normalized_source_sha256": "98afcf96412c4f785421b725dc31bc0fe467258ba0fdf3d71124264631195899",
+        "repo_url": "https://github.com/pofider/phantom-html-to-pdf",
+        "repository": "github.com/pofider/phantom-html-to-pdf",
+        "security_keywords": [],
+        "severity": "MEDIUM",
+        "source_record_sha256": "a6c2026c1ae04607fab0a9e9944880675837e22b1ee27c8f93cac0148fe7bfab",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 129,
+            "char_start": 47,
+            "quoted_sha256": "32da749297d6af3dc84e69b1a60f2acec8f6f044d809de4a2163559ecad66007",
+            "quoted_text": "if (request.url.lastIndexOf(\"file:///\", 0) === 0 && !body.allowLocalFilesAccess) {",
+            "unique_in_body": true
+          },
+          "sha256": "07bdf99149444b4e46eb939220f96cbc6524624e9b0e1578f0a468532dad3555",
+          "utf8_bytes": 747
+        }
+      },
+      "source_id": "cve:fe6696430d9a566ecafc3137e39b1bd92826c03dcd3ade6ed9ec504c3f843644",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94",
+      "planned_case_ids": [
+        "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-0",
+        "family:2739a5be7cddc505be8cd958735831cb6151ce40602b9f2b79de441ccb5cfb94:case-1"
+      ],
+      "row": {
+        "commit_message": "Update:/auth/openid/config API endpoint to require admin user and validate issuer URL\n",
+        "commit_message_sha256": "6f7142d8932ccb5ffecfc10c28c78dda1ccfda19cf32715086e0a751582b9f0c",
+        "cve_description": "[{'lang': 'en', 'value': 'Audiobookshelf is a self-hosted audiobook and podcast server. Prior to 2.7.0, Audiobookshelf is vulnerable to unauthenticated blind server-side request (SSRF) vulnerability in Auth.js. This vulnerability has been addressed in version 2.7.0. There are no known workarounds for this vulnerability.\\n\\n'}]",
+        "cve_id": "CVE-2023-51665",
+        "cwe_id": "CWE-918",
+        "cwe_name": "Server-Side Request Forgery (SSRF)",
+        "file_paths": [
+          "server/Auth.js"
+        ],
+        "file_row_number": 2,
+        "fix_commit": "728496010cbfcee5b7b54001c9f79e02ede30d82",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 149,
+            "char_start": 12,
+            "quoted_sha256": "88f86b920ec50fb90701b649617a0f8435965374a597c5c1a540210e14f31528",
+            "quoted_text": "(Database.serverSettings.authOpenIDMobileRedirectURIs.length === 1 && Database.serverSettings.authOpenIDMobileRedirectURIs[0] === '*')) {",
+            "unique_in_body": true
+          },
+          "sha256": "e952898932f99519ed24ff1d4af88d6f6de320ea028d5715675b3ae0fa5eba6a",
+          "utf8_bytes": 1328
+        },
+        "language": "JavaScript",
+        "normalized_source_sha256": "5b790b83d1bfdeb19044f27ebd37d07596d19e58c50cfc0c9137a2d9ee7ca669",
+        "repo_url": "https://github.com/advplyr/audiobookshelf",
+        "repository": "github.com/advplyr/audiobookshelf",
+        "security_keywords": [
+          "validation",
+          "authentication"
+        ],
+        "severity": null,
+        "source_record_sha256": "b027e7f6fd69a3e8ec808a060b090940947f959799c2367ac8d3f5d277aa2d12",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 148,
+            "char_start": 11,
+            "quoted_sha256": "88f86b920ec50fb90701b649617a0f8435965374a597c5c1a540210e14f31528",
+            "quoted_text": "(Database.serverSettings.authOpenIDMobileRedirectURIs.length === 1 && Database.serverSettings.authOpenIDMobileRedirectURIs[0] === '*')) {",
+            "unique_in_body": true
+          },
+          "sha256": "b14135afb82175485f7fa615c57794652b7285dd3389f90c0b607148f83cd963",
+          "utf8_bytes": 403
+        }
+      },
+      "source_id": "cve:ef8efcd2f930b4d7a14d77f1cc349b019e7614237c33057ccd0362db8ce5f19c",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+      "planned_case_ids": [
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+        "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1"
+      ],
+      "row": {
+        "commit_message": "Fix possible XSS issues (#365)\n\n* some fixes for old migrations, that allows new migrations\r\n\r\n* force ssl default true unless env var\r\n\r\n* check address no html tags",
+        "commit_message_sha256": "47b2bf771d6f7ca441280e63289c36ab0882428699a0f88456cd17d7df04e244",
+        "cve_description": "[{'lang': 'en', 'value': 'A vulnerability was found in siwapp-ror. It has been rated as problematic. This issue affects some unknown processing. The manipulation leads to cross site scripting. The attack may be initiated remotely. The name of the patch is 924d16008cfcc09356c87db01848e45290cb58ca. It is recommended to apply a patch to fix this issue. The associated identifier of this vulnerability is VDB-216467.'}]",
+        "cve_id": "CVE-2021-4265",
+        "cwe_id": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "file_paths": [
+          "app/models/common.rb",
+          "app/models/customer.rb",
+          "config/environments/production.rb",
+          "db/migrate/20160907152236_default_for_enabled.rb",
+          "db/migrate/20160908093323_add_indexes_on_deleted_column.rb",
+          "db/migrate/20160913081503_remove_status_from_commons.rb",
+          "db/migrate/20160915000824_add_active_to_customer.rb",
+          "db/migrate/20160915094942_add_failed_to_commons.rb",
+          "db/migrate/20160923100618_series_first_number.rb",
+          "db/migrate/20160929124104_email_and_print_template_to_common.rb",
+          "db/migrate/20160929133954_email_and_print_default_templates_to_template.rb",
+          "db/migrate/20161025134552_change_customer_index.rb",
+          "db/migrate/20161026092553_add_template_subject.rb",
+          "db/migrate/20161028103504_add_invoice_number_unique_number.rb",
+          "db/migrate/20161207184222_remove_tax_amount.rb",
+          "db/migrate/20161208171651_remove_commons_amounts.rb",
+          "db/migrate/20170112115658_remove_invoice_unique_number.rb",
+          "db/migrate/20170209101048_remove_customers_unique_name.rb",
+          "db/migrate/20170216122053_add_unique_index_to_invoice_series_and_number.rb",
+          "db/migrate/20170217120023_add_deleted_number_to_commons.rb",
+          "db/migrate/20170223101022_add_commons_customer_id_not_null.rb",
+          "db/migrate/20170608155530_add_currency_to_commons.rb"
+        ],
+        "file_row_number": 5,
+        "fix_commit": "924d16008cfcc09356c87db01848e45290cb58ca",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 494,
+            "char_start": 432,
+            "quoted_sha256": "4ac54b32b4d4ddfbf3950f86be6e65f3b4ccbdd09b06be64b391a8a090d9bf0c",
+            "quoted_text": "config.force_ssl = ENV['NO_FORCE_SSL'].present? ? false : true",
+            "unique_in_body": true
+          },
+          "sha256": "2a33f662a2bff435b1ddb67c1472a53ebcc41afd8f73558068a20d312ff38735",
+          "utf8_bytes": 1663
+        },
+        "language": "Ruby",
+        "normalized_source_sha256": "f50a7f11b10953b3102360b5997a625332423b27efe9243e31ca69af745c6862",
+        "repo_url": "https://github.com/siwapp/siwapp-ror",
+        "repository": "github.com/siwapp/siwapp-ror",
+        "security_keywords": [
+          "validation"
+        ],
+        "severity": null,
+        "source_record_sha256": "bea567d2e5b5cdf5b027174872b0ac13b281a27b1a3eaca5db7903363e18a233",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 77,
+            "char_start": 28,
+            "quoted_sha256": "80903edf1c3e22042f502b0b42381876b8a44233a10c300d751927700fb6f8cb",
+            "quoted_text": "class DefaultForEnabled < ActiveRecord::Migration",
+            "unique_in_body": true
+          },
+          "sha256": "2394dd58b09d66fb5474f91848e9dcbf460983036dde9ff461b86a8d08b577f4",
+          "utf8_bytes": 1101
+        }
+      },
+      "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e",
+      "planned_case_ids": [
+        "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-0",
+        "family:4f107c64ed5a288a11696992204b313b675da5a9f785e52fef9053197752800e:case-1"
+      ],
+      "row": {
+        "commit_message": "Fix CVE-2017-16876\n",
+        "commit_message_sha256": "1037395cd344141eb61b3f61547a52e36f17e5e5a0d706ff1cc9bb50c101cfe3",
+        "cve_description": "[{'lang': 'en', 'value': 'Cross-site scripting (XSS) vulnerability in the _keyify function in mistune.py in Mistune before 0.8.1 allows remote attackers to inject arbitrary web script or HTML by leveraging failure to escape the \"key\" argument.'}]",
+        "cve_id": "CVE-2017-16876",
+        "cwe_id": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "file_paths": [
+          "mistune.py"
+        ],
+        "file_row_number": 6,
+        "fix_commit": "5f06d724bc05580e7f203db2d4a4905fc1127f98",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 159,
+            "char_start": 114,
+            "quoted_sha256": "5ec4833e573718403e3603d9f6e951b2eb3914961c249d24fe1fefc023b2c154",
+            "quoted_text": "r'<(\\w+%s)((?:%s)*?)\\s*>([\\s\\S]*?)<\\/\\1>' % (",
+            "unique_in_body": true
+          },
+          "sha256": "648689675eebbddcea83e540b3e6044c95841b8d845b0b630d7d0f289af39d6a",
+          "utf8_bytes": 201
+        },
+        "language": "Python",
+        "normalized_source_sha256": "fb7ecb8af956e59c5f3252bdd5bb5313848efd5ede1d7339eac958ec4aa5762b",
+        "repo_url": "https://github.com/lepture/mistune",
+        "repository": "github.com/lepture/mistune",
+        "security_keywords": [],
+        "severity": "MEDIUM",
+        "source_record_sha256": "45bef39ed91c595b79f2e4d0d4cde4cc34e9816cd594fbcbd80240f1290a9c11",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 65,
+            "char_start": 24,
+            "quoted_sha256": "3f2be42d9fc5b9c5819a917c540fd1804df2826a3c54664de3a9bd68a5d6cea7",
+            "quoted_text": "return _key_pattern.sub(' ', key.lower())",
+            "unique_in_body": true
+          },
+          "sha256": "d8214d67cd47dce6d60b19daf127bf7bc4cfddeae9f2d17a280a5b785e004f58",
+          "utf8_bytes": 148
+        }
+      },
+      "source_id": "cve:632938f672083d701d8c1114b64ce424829f45b2fb3a90cc83cfb4c82b43a441",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5",
+      "planned_case_ids": [
+        "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-0",
+        "family:4d6aa95fe31cd827ad4e09e69ddb103bfd7ecfb70d4ae341ab3b3046a573e4c5:case-1"
+      ],
+      "row": {
+        "commit_message": "- fixed - Bug in presentation layer parser can cause infinite loop (LIB61850-302)\n",
+        "commit_message_sha256": "bc2a76c1977bb982e64c30256c593d42781e73632a293e553f7d2b2edf003fea",
+        "cve_description": "[{'lang': 'en', 'value': 'A denial of service vulnerability exists in the parseNormalModeParameters functionality of MZ Automation GmbH libiec61850 1.5.0. A specially-crafted series of network requests can lead to denial of service. An attacker can send a sequence of malformed iec61850 messages to trigger this vulnerability.'}]",
+        "cve_id": "CVE-2022-21159",
+        "cwe_id": "CWE-835",
+        "cwe_name": "Loop with Unreachable Exit Condition ('Infinite Loop')",
+        "file_paths": [
+          "src/mms/iso_presentation/iso_presentation.c"
+        ],
+        "file_row_number": 7,
+        "fix_commit": "cfa94cbf10302bedc779703f874ee2e8387a0721",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 56,
+            "char_start": 0,
+            "quoted_sha256": "c8d756befc0c4cb08bb7adb478c5ce35918f011617379456515b152b03b06919",
+            "quoted_text": "\n            if (bufPos < 0)\n                return -1;\n",
+            "unique_in_body": true
+          },
+          "sha256": "c8d756befc0c4cb08bb7adb478c5ce35918f011617379456515b152b03b06919",
+          "utf8_bytes": 56
+        },
+        "language": "C",
+        "normalized_source_sha256": "7ed70977de69b2e5cedbe033df785128e5546fd51b39de885a8887d32eda95dd",
+        "repo_url": "https://github.com/mz-automation/libiec61850",
+        "repository": "github.com/mz-automation/libiec61850",
+        "security_keywords": [],
+        "severity": "MEDIUM",
+        "source_record_sha256": "60d0c37b065045352e2635efc0c6809da8f7a014319af3655c2cdf6be651e8ca",
+        "vulnerable": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        }
+      },
+      "source_id": "cve:3d93e9cea960fe6e6b1360415a3409c495bc8f4d58853985434830eb49c4fd1b",
+      "split": "development"
+    },
+    {
+      "lineage_family_id": "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902",
+      "planned_case_ids": [
+        "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-0",
+        "family:811022de64d7d176d9bdd98c0f06a6da0569d0cdbc8d96c8f47eb9ea417fa902:case-1"
+      ],
+      "row": {
+        "commit_message": "Deny any directory traversal paths.  README update\n",
+        "commit_message_sha256": "de712fe3d09225f44def3a3a36581124d1b3cbb4f01bd4ab2cabfcd1fd21dece",
+        "cve_description": "[{'lang': 'en', 'value': \"A vulnerability was found in RamseyK httpserver. It has been rated as critical. This issue affects the function ResourceHost::getResource of the file src/ResourceHost.cpp of the component URI Handler. The manipulation of the argument uri leads to path traversal: '../filedir'. The attack may be initiated remotely. The name of the patch is 1a0de56e4dafff9c2f9c8f6b130a764f7a50df52. It is recommended to apply a patch to fix this issue. The associated identifier of this vuln",
+        "cve_id": "CVE-2019-25087",
+        "cwe_id": "CWE-22",
+        "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+        "file_paths": [
+          "README.md",
+          "src/HTTPServer.cpp",
+          "src/ResourceHost.cpp"
+        ],
+        "file_row_number": 10,
+        "fix_commit": "1a0de56e4dafff9c2f9c8f6b130a764f7a50df52",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 149,
+            "char_start": 0,
+            "quoted_sha256": "8ce8b2ae2ea95591f8f5d6d9b7dc560414682a3e2c74e35d5031f72871c38c7c",
+            "quoted_text": "A high performance, single threaded, HTTP server written in C++ to serve as a kqueue socket management and HTTP protocol learning tool on BSD systems",
+            "unique_in_body": true
+          },
+          "sha256": "02f019a66247d0a71ebb458b58ca973d22a74fefe2cd5e347992d71be8710e3e",
+          "utf8_bytes": 319
+        },
+        "language": "C++",
+        "normalized_source_sha256": "d061e46cbc7cd175c504be2c0f74944d59f2abd1b6ff579265bee021b932d761",
+        "repo_url": "https://github.com/RamseyK/httpserver",
+        "repository": "github.com/ramseyk/httpserver",
+        "security_keywords": [],
+        "severity": null,
+        "source_record_sha256": "e640a1923f2d2d9cdf26283c8e13fe16533ac0882541c1d5a160856d9b8804c1",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 134,
+            "char_start": 0,
+            "quoted_sha256": "bac222c8121f3d4e9231670a9b227b488f1a181f0d60f8fa157c60f56cf009d7",
+            "quoted_text": "A high performance, single threaded, HTTP server written in C++ to serve as a kqueue socket management and HTTP protocol learning tool",
+            "unique_in_body": true
+          },
+          "sha256": "a9f87de3649aba40ec24abd24b38e923cf3269fd56d30488306e74d494c37d75",
+          "utf8_bytes": 184
+        }
+      },
+      "source_id": "cve:d00ef5daf47afdace1397eb13f05855cdad67c0631cfcdf8a44960c8caf09957",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+      "planned_case_ids": [
+        "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+        "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1"
+      ],
+      "row": {
+        "commit_message": "Merge pull request #167 from esl/zlib_cwe400_fix\n\nAdd zlib inflated data size limit",
+        "commit_message_sha256": "e932a552aa2860487718d6ba988b0217256d570767f5f694c7974a13e19106d6",
+        "cve_description": "[{'lang': 'en', 'value': 'Erlang Solutions MongooseIM through 1.3.1 rev. 2 does not properly restrict the processing of compressed XML elements, which allows remote attackers to cause a denial of service (resource consumption) via a crafted XMPP stream, aka an \"xmppbomb\" attack.'}]",
+        "cve_id": "CVE-2014-2829",
+        "cwe_id": "CWE-264",
+        "cwe_name": "Permissions, Privileges, and Access Controls",
+        "file_paths": [],
+        "file_row_number": 11,
+        "fix_commit": "586d96cc12ef218243a3466354b4d208b5472a6c",
+        "fixed": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        },
+        "language": "Unknown",
+        "normalized_source_sha256": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+        "repo_url": "https://github.com/esl/MongooseIM",
+        "repository": "github.com/esl/mongooseim",
+        "security_keywords": [],
+        "severity": "HIGH",
+        "source_record_sha256": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+        "vulnerable": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        }
+      },
+      "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479",
+      "planned_case_ids": [
+        "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-0",
+        "family:f3e06f4eae288395b755b9240a5d9376cdd20289f9c7aa9b3b1b5025f05de479:case-1"
+      ],
+      "row": {
+        "commit_message": "Merge pull request from GHSA-6g6m-m6h5-w9gf\n\nMade algorithms mandatory",
+        "commit_message_sha256": "e41947bd88f2829d155552d5b65d89f295921061c371f9ca6a3a0dbd8149f038",
+        "cve_description": "[{'lang': 'en', 'value': 'In express-jwt (NPM package) up and including version 5.3.3, the algorithms entry to be specified in the configuration is not being enforced. When algorithms is not specified in the configuration, with the combination of jwks-rsa, it may lead to authorization bypass. You are affected by this vulnerability if all of the following conditions apply: - You are using express-jwt - You do not have **algorithms** configured in your express-jwt configuration. - You are using li",
+        "cve_id": "CVE-2020-15084",
+        "cwe_id": "CWE-863",
+        "cwe_name": "Incorrect Authorization",
+        "file_paths": [],
+        "file_row_number": 12,
+        "fix_commit": "7ecab5f8f0cab5297c2b863596566eb0c019cdef",
+        "fixed": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        },
+        "language": "Unknown",
+        "normalized_source_sha256": "ad0fb31f2368ab3b96e0c8ced712b2a0ef91ff4ce8b73df7dee8f77ef985c965",
+        "repo_url": "https://github.com/auth0/express-jwt",
+        "repository": "github.com/auth0/express-jwt",
+        "security_keywords": [],
+        "severity": "MEDIUM",
+        "source_record_sha256": "ad0fb31f2368ab3b96e0c8ced712b2a0ef91ff4ce8b73df7dee8f77ef985c965",
+        "vulnerable": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        }
+      },
+      "source_id": "cve:f67ed820310f942901fff3ec0fa3da08da2a62a9267dcb3cb09f07de54a7665c",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+      "planned_case_ids": [
+        "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+        "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1"
+      ],
+      "row": {
+        "commit_message": "Fix autolink function to avoid XSS issue\n",
+        "commit_message_sha256": "003e7004f65c3160a054ec3951a0c7f2213f0a7100aa2ddd0037b18beab9068e",
+        "cve_description": "[{'lang': 'en', 'value': 'Cross-site scripting (XSS) vulnerability in b2evolution 6.7.5 and earlier allows remote attackers to inject arbitrary web script or HTML via vectors related to the autolink function.'}]",
+        "cve_id": "CVE-2016-7149",
+        "cwe_id": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "file_paths": [
+          "_tests/blogs/evocore/misc.funcs.simpletest.php",
+          "inc/_core/_misc.funcs.php"
+        ],
+        "file_row_number": 13,
+        "fix_commit": "9a4ab85439d1b838ee7b8eeebbf59174bb787811",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 194,
+            "char_start": 24,
+            "quoted_sha256": "1376d1368afd0b5d8b71225bc2fc45ef1301c4d69f2a513609f40dc2f4f3c92a",
+            "quoted_text": "'text http://test_url.test\"onmouseover=\"alert(1)\"onerror=1 \"text' => 'text <a href=\"http://test_url.test\">http://test_url.test</a>\"onmouseover=\"alert(1)\"onerror=1 \"text',",
+            "unique_in_body": true
+          },
+          "sha256": "ac872effd2acfc75f3e2aeedc447e6b11d63fdaea09bf04ab1c6ffe41e68019a",
+          "utf8_bytes": 497
+        },
+        "language": "PHP",
+        "normalized_source_sha256": "99040a5062b9d88ebc76f463d88346144989857ba9677184f4e27e170d08477e",
+        "repo_url": "https://github.com/b2evolution/b2evolution",
+        "repository": "github.com/b2evolution/b2evolution",
+        "security_keywords": [],
+        "severity": "MEDIUM",
+        "source_record_sha256": "a642fdc33b7a12639c13df620ae0e19793cc4fea2a4402897922fe47630d564f",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 83,
+            "char_start": 2,
+            "quoted_sha256": "2c75c4ed9a7c378d16cda7f9ef254583e669ca0a80da1dc99b5bfc8f5006a329",
+            "quoted_text": "array( '#(^|[\\s>\\(]|\\[url=)(https?|mailto)://([^<>{}\\s]+[^.,:;!\\?<>{}\\s\\]\\)])#i',",
+            "unique_in_body": true
+          },
+          "sha256": "e0d97ddea06bef849a90c8bd860be13eee5e3fe2cf1032e1b68255901bf12db4",
+          "utf8_bytes": 296
+        }
+      },
+      "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+      "split": "final"
+    },
+    {
+      "lineage_family_id": "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382",
+      "planned_case_ids": [
+        "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-0",
+        "family:bc2735dbd68f90645171e9b4afcac819ef6744a3a7d82d763ee839cee9995382:case-1"
+      ],
+      "row": {
+        "commit_message": "Pass the ARCHIVE_EXTRACT_SECURE_SYMLINKS flag to libarchive\n\nThere are archive types which allow to first create a symlink and then\nlater on dereference it. If the symlink points outside of the archive,\nthis results in writing outside of the destination directory.\n\nWith the ARCHIVE_EXTRACT_SECURE_SYMLINKS option set, libarchive avoids\nthis situation by verifying that none of the target path compon",
+        "commit_message_sha256": "f1630b01a430253746bec5fc7dfee5ca2a3e18c92cbbb88ea222784e9f2a32ab",
+        "cve_description": "[{'lang': 'en', 'value': \"In KDE Ark before 20.08.1, a crafted TAR archive with symlinks can install files outside the extraction directory, as demonstrated by a write operation to a user's home directory.\"}]",
+        "cve_id": "CVE-2020-24654",
+        "cwe_id": "CWE-59",
+        "cwe_name": "Improper Link Resolution Before File Access ('Link Following')",
+        "file_paths": [
+          "plugins/libarchive/libarchiveplugin.cpp"
+        ],
+        "file_row_number": 23,
+        "fix_commit": "8bf8c5ef07b0ac5e914d752681e470dea403a5bd",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 122,
+            "char_start": 0,
+            "quoted_sha256": "56f2ddc57dba960c12fb137c05b1486ac9be7e9f88e53e244c296555d46deb4d",
+            "quoted_text": "    return ARCHIVE_EXTRACT_TIME\n           | ARCHIVE_EXTRACT_SECURE_NODOTDOT\n           | ARCHIVE_EXTRACT_SECURE_SYMLINKS;",
+            "unique_in_body": true
+          },
+          "sha256": "56f2ddc57dba960c12fb137c05b1486ac9be7e9f88e53e244c296555d46deb4d",
+          "utf8_bytes": 122
+        },
+        "language": "C++",
+        "normalized_source_sha256": "4907051f926aa9e770211e2f157aafdd677db38ed76d258eea5471748639812e",
+        "repo_url": "https://github.com/KDE/ark",
+        "repository": "github.com/kde/ark",
+        "security_keywords": [
+          "validation"
+        ],
+        "severity": "MEDIUM",
+        "source_record_sha256": "009e86295e7f9b3aedd7b280ce0281185adee69a4a9a5dcdcf39e90bce973e9c",
+        "vulnerable": {
+          "present": true,
+          "quote": {
+            "char_end": 85,
+            "char_start": 43,
+            "quoted_sha256": "6833c92c03a32276f3ba8fefe6beba715f9651a08f111024c5de3102f91b5532",
+            "quoted_text": "result |= ARCHIVE_EXTRACT_SECURE_NODOTDOT;",
+            "unique_in_body": true
+          },
+          "sha256": "064834ae9b81537b78cea9e6c1fc42ec1057a1ca52e9cbada686b4b922e7b301",
+          "utf8_bytes": 347
+        }
+      },
+      "source_id": "cve:f0a887e8b29776f66de7442393d150390a06677855a40098c2cb879c1ea17e8d",
+      "split": "calibration"
+    },
+    {
+      "lineage_family_id": "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8",
+      "planned_case_ids": [
+        "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-0",
+        "family:285acef5bb3d614213a2021305b4912119210712395cc83462cb9d216c23e1c8:case-1"
+      ],
+      "row": {
+        "commit_message": "fixed XSS and added hability to filter the metabox position\n\ngit-svn-id: https://plugins.svn.wordpress.org/qtranslate-slug/trunk@1213627 b8457f37-d9ea-0310-8a92-e5e31aec5664\n",
+        "commit_message_sha256": "6cf9a23ade2f97728e0dbbc950b24b5accd940579bb60d447d341b8ca21a9d8e",
+        "cve_description": "[{'lang': 'en', 'value': 'A vulnerability was found in Qtranslate Slug Plugin up to 1.1.16 on WordPress. It has been classified as problematic. Affected is the function add_slug_meta_box of the file includes/class-qtranslate-slug.php. The manipulation leads to cross site scripting. It is possible to launch the attack remotely. Upgrading to version 1.1.17 is able to address this issue. The name of the patch is 74b3932696f9868e14563e51b7d0bb68c53bf5e4. It is recommended to upgrade the affected com",
+        "cve_id": "CVE-2015-10092",
+        "cwe_id": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "file_paths": [
+          "assets/css/qts-default.css",
+          "assets/css/qts-default.min.css",
+          "assets/css/qts-settings.css",
+          "assets/js/qts-nav-menu-min.js",
+          "assets/js/qts-nav-menu.js",
+          "assets/js/qts-settings-upgrade.js",
+          "assets/js/qts-settings.js",
+          "includes/class-qtranslate-slug-widget.php",
+          "includes/class-qtranslate-slug.php",
+          "includes/qtranslate-slug-settings-options.php",
+          "includes/qtranslate-slug-settings.php",
+          "includes/termmeta-core.php",
+          "languages/qts-es_ES.po",
+          "languages/qts-pt_PT.po",
+          "languages/qts.pot",
+          "qtranslate-slug.php",
+          "readme.txt",
+          "version.txt"
+        ],
+        "file_row_number": 24,
+        "fix_commit": "74b3932696f9868e14563e51b7d0bb68c53bf5e4",
+        "fixed": {
+          "present": true,
+          "quote": {
+            "char_end": 119,
+            "char_start": 76,
+            "quoted_sha256": "997c3cc95d0fef72c662ea5ef4d8d02008b46626cd5ecd65c23553b52b28e18f",
+            "quoted_text": ".qts_type_image .qts_lang_item.last-child {",
+            "unique_in_body": true
+          },
+          "sha256": "3bd7806245bdf8ac40f06873eb694858e5e09516c5e550765bfb18244f49f9e1",
+          "utf8_bytes": 203625
+        },
+        "language": "PHP",
+        "normalized_source_sha256": "f7f9d017767e3df4f28d5db028e3641dce80cefdbe43246bc4aebc261f88248e",
+        "repo_url": "https://github.com/wp-plugins/qtranslate-slug",
+        "repository": "github.com/wp-plugins/qtranslate-slug",
+        "security_keywords": [
+          "sanitization"
+        ],
+        "severity": null,
+        "source_record_sha256": "2cb83aa0244b05fbb2a72ef2646c039b7b1ff01862268ae24d1ecf71c6838628",
+        "vulnerable": {
+          "present": false,
+          "quote": null,
+          "sha256": null,
+          "utf8_bytes": 0
+        }
+      },
+      "source_id": "cve:4f2ed896018faeb0a70c1542a88ed36959d0c5f257ba25698c49f2336c0f32c7",
+      "split": "final"
+    }
+  ],
+  "task": "LA-006"
+}

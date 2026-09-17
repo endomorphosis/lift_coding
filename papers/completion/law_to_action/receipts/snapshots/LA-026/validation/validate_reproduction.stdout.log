@@ -1,0 +1,19 @@
+{
+  "adjudication": "unresolved_missing_expert_review",
+  "controls": 84,
+  "empirical_cases": 24,
+  "evaluation_admission": "blocked",
+  "expected_polarity_packet_state": "unknown",
+  "fixture_cves_in_empirical_counts": 0,
+  "independent_human_security_review": "pending_LA-027_and_LA-006",
+  "limitation": "Structural packet checks passed; this is not independent scientific or security expert review.",
+  "mocked_source_records_in_empirical_counts": 0,
+  "pairs": 12,
+  "recovery_failure_records": 0,
+  "reviewer_adjudication_fields": "blank",
+  "reviewer_polarity_fields": "blank",
+  "status": "passed",
+  "synthetic_controls": 60,
+  "synthetic_controls_in_empirical_sample_counts": 0,
+  "untrusted_source_executed": false
+}

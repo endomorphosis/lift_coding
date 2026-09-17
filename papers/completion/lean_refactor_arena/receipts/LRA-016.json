@@ -1,0 +1,151 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-016",
+  "status": "complete",
+  "completed_at": "2026-09-16T23:24:45.163907+00:00",
+  "completion_mode": "docker0 HTTP client of live Leanstral; never owner exclusive lock; cpu-medium protocol probe, not a scored Arena run and not a live Leanstral completion",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py": "c06b78a7bc3f851b98847977de89313f42cdb11c0549f67520b38a5bba9affc0",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/git-head.txt": "b6a3b0f9b737509768afb99f0369ddb0654c6fdaa7ab1350f9ba6651b1203f02",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/inspect-lock.meta.json": "28b38782041816dee8d7226e36e4569d3a490aba8f7d4b30a5a517235cc36e50",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/inspect-lock.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/inspect-lock.stdout.log": "a093aa12123e50c6b844175068e52d18ff5069612c336e6f4b2d7b5b591f59f5",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/plan.meta.json": "19d485743454cb9812ac5d388ba4e89bb2c813ee1d3a57fd1630aace2d0f96ec",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/plan.stdout.log": "eea60316ab18ed805674362d0bfe49df5635b8b3a0f180c82d8e18d5d0679af0",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/probe-health.meta.json": "368348a6142a8a7fd638ae9cf4e48cff5f37d255d990c0fe4541fb8f0c2e23cc",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/probe-health.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/probe-health.stdout.log": "65c874e1f21398baa93cf8eb896e85355fa3515672f228e5ea9e1c7d6d086677",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.json": "6b3ae1db2945bb4eeeeb5dd453a531be0d04a29cc210e7335f07a0e8784c676b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.meta.json": "32e82b8baf91b8a5c259d7de7a174b97561bbf9bd1a95c0a74b38ad5e625e052",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.stdout.log": "6b3ae1db2945bb4eeeeb5dd453a531be0d04a29cc210e7335f07a0e8784c676b"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/docker0_client.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Probe http://172.17.0.1:8080/health; if healthy, generate_text as client without LOCK_EX.",
+      "status": "met",
+      "explanation": "Live GET http://172.17.0.1:8080/health returned HTTP 200 with IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0. Because /health was ok, plan_session action=generate and generate_as_client called ipfs_accelerate_py.llm_router.generate_text via harness/generate_text.py with FAIL_CLOSED_KWARGS (provider=leanstral_local, model_name=Leanstral, temperature=0.0, allow_local_fallback=False, allow_cross_provider_fallback=False, disable_model_retry=True). AST of docker0_client.py has no LOCK_EX attribute. inspect_gpu0_lock uses /proc/locks and a shared non-blocking flock only; lock_ex_taken_by_client is false on the live probe, the healthy generate path, and the child-held exclusive flock fixture. This cpu-medium task did not issue a live Leanstral completion.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/probe-health.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/plan.stdout.log"
+      ]
+    },
+    {
+      "criterion": "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0; never start a second llama-server.",
+      "status": "met",
+      "explanation": "pin_client_env sets IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0 (and AUTO_INSTALL/PREFETCH/AUTO_UPDATE=0) before any probe or generate. Self-check recorded autostart=0 during the healthy generate path and llama_server_started=false. AST audit of subprocess calls found no llama-server / ipfs-accelerate-llama-cpp-serve argv. Optional owner exec targets scripts/run_leanstral_ephemeral.py --bind docker0 --gpu 0; that child would own the server. This process did not start llama-server.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/probe-health.stdout.log"
+      ]
+    },
+    {
+      "criterion": "If unhealthy and gpu-0.lock free, may exec run_leanstral_ephemeral.py --bind docker0 --gpu 0; if EX held, wait or skip LLM.",
+      "status": "met",
+      "explanation": "decide_action is generate when /health is ok; exec_owner only when unhealthy, gpu-0.lock free, and allow_owner_exec; skip_llm when exclusive ownership is held and wait_seconds=0; wait when exclusive ownership is held and wait_seconds>0. Self-check spawned a child that took exclusive flock on a temp gpu-0.lock; the client detected held=true via /proc/locks, took no exclusive lock itself, and chose skip_llm. A stub owner script (not llama-server) was executed with --bind docker0 --gpu 0. Live plan_session did not exec the owner because /health was already ok. scripts/run_leanstral_ephemeral.py is absent in this worktree; the argv is still recorded.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/inspect-lock.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/plan.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/docker0_client.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/docker0_client.py",
+        "--probe-health"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/probe-health.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/docker0_client.py",
+        "--inspect-lock"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/inspect-lock.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/docker0_client.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-016/outputs/docker0_client.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "03c34bd4a20c91362acd01725f6b5051b886e1fa",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "docker0_client_py_sha256": "c06b78a7bc3f851b98847977de89313f42cdb11c0549f67520b38a5bba9affc0",
+    "protocol": "LRA/v1",
+    "requested_provider": "leanstral_local",
+    "requested_model": "Leanstral",
+    "docker0_health_url": "http://172.17.0.1:8080/health",
+    "llama_cpp_autostart": "0",
+    "owner_lock_id": "gpu-0",
+    "owner_exec_argv": [
+      "/usr/bin/python3.12",
+      "-B",
+      "scripts/run_leanstral_ephemeral.py",
+      "--bind",
+      "docker0",
+      "--gpu",
+      "0"
+    ],
+    "live_health_ok": true,
+    "live_health_status_code": 200,
+    "live_lock_exists": false,
+    "live_lock_held": false,
+    "live_plan_action": "generate",
+    "owner_script_exists": false,
+    "model_or_solver_experiment": "none; cpu-medium docker0 client protocol only, no live Leanstral completion, no lake compile, no Arena scores"
+  },
+  "limitations": [
+    "Live docker0 /health was reachable (HTTP 200 at 172.17.0.1:8080). This cpu-medium task did not send a Leanstral completion against the live owner; the healthy generate path used an injected generate_text callable that recorded fail-closed kwargs.",
+    "127.0.0.1:8080/health was connection-refused; the live listener is docker0, not loopback.",
+    "Live gpu-0.lock was missing at $XDG_RUNTIME_DIR/leanstral-jobs-$UID/gpu-0.lock. LRA still generates from /health, not from who holds exclusive ownership. Exclusive-held behavior was proven with a child flock on a temporary lock file.",
+    "scripts/run_leanstral_ephemeral.py is not present in this worktree. Owner exec argv is still python3 -B scripts/run_leanstral_ephemeral.py --bind docker0 --gpu 0. A stub script, not llama-server, was used to prove the argv.",
+    "This process never took exclusive ownership of gpu-0.lock and never started llama-server.",
+    "No lake compile, no lexical admission, no warmup loop, and no Arena scores were produced.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}

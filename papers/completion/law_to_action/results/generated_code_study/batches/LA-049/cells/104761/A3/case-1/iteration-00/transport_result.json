@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 109,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "f8fc96c6ec213f56f3a881c79d80810c2c300382de69ebbfece00fcffeb460e8",
+  "response_text": "```json\n{\n  \"program\": \"function run(payload) {\\n  const config = {\\n    \\\"environment\\\": {\\n      \\\"source\\\": \\\"ngssc.json\\\",\\n      \\\"target\\\": \\\"environment.ts\\\"\\n    },\\n    \\\"build\\\": {\\n      \\\"source\\\": \\\"ngssc.json\\\",\\n      \\\"target\\\": \\\"ngssc.json\\\"\\n    }\\n  };\\n\\n  emit_allowed(payload, config);\\n}\"\n}\n```<|im_end|>",
+  "wall_seconds": 10.172557074998622
+}

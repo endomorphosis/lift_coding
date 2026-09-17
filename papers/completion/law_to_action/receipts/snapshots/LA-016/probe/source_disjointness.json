@@ -1,0 +1,18 @@
+{
+  "fixed_action_case_count": 60,
+  "fixed_action_family_count": 30,
+  "lineage_disjoint_cohort_frozen": false,
+  "overlap_case_ids": [],
+  "overlap_family_slots": [],
+  "planned_case_count": 60,
+  "planned_family_count": 30,
+  "reasons": [
+    "LA-004 froze exactly 30 lineage families and LA-015 consumed all of them",
+    "protocol requires a separately frozen 30-family cohort with salt vericodegen-2026-law-to-action-LA016-v1 and no overlap with the fixed-action study",
+    "no LA-016 source freeze exists in allowed task outputs, and inventing family hashes is not a freeze",
+    "leftover unread CVE/Skill rows are not admitted without a versioned pre-outcome freeze"
+  ],
+  "reused_fixed_action_families": false,
+  "split_algorithm_applied_to_frozen_families": false,
+  "split_salt": "vericodegen-2026-law-to-action-LA016-v1"
+}

@@ -1,0 +1,1 @@
+emit_allowed({"source": "https://example.com/source", "lineage": "example.com", "effect": "source-relative"})

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 132,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 600,
+  "prompt_tokens": 600,
+  "raw_sha256": "a551641ef9e4567b062315451e654fefa1475e4ca19e253fb38c2dc39346c7cb",
+  "response_text": "{\"type\": \"json_object\", \"text\": \"{\\\"program\\\": \\\"\\\\nimport json\\\\n\\\\ndef run(payload):\\\\n    data = json.loads(payload)\\\\n    name = data.get('name')\\\\n    age = data.get('age')\\\\n    city = data.get('city')\\\\n    country = data.get('country')\\\\n    output = {\\\\n        'name': name,\\\\n        'age': age,\\\\n        'city': city,\\\\n    }\\\\n    emit_allowed(output)\\\\n\\\"}\"}<|im_end|>\n<|im_end|>",
+  "wall_seconds": 11.893783563995385
+}

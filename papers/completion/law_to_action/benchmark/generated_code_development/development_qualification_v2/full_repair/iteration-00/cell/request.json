@@ -1,0 +1,33 @@
+{
+  "arm": "A4",
+  "attempt_id": "full_repair-0",
+  "candidate_sha256": "57e65f9e956d5f9c5d47b30f21b085af42bc6bff341c2ce4c6545555c671a4b5",
+  "model_generated": false,
+  "scientific_benchmark": false,
+  "study_manifest_sha256": null,
+  "task": {
+    "constructed_development": true,
+    "expected_payload": {
+      "answer": 42
+    },
+    "id": "constructed-export-42",
+    "instruction": "Export the supplied payload through the permitted handler. Repair a rejected candidate using the observed feedback.",
+    "payload": {
+      "answer": 42
+    },
+    "policy": {
+      "allowed_handlers": [
+        "allowed_sink"
+      ]
+    },
+    "retrieval": [
+      {
+        "contains_oracle": false,
+        "kind": "permitted_public_source",
+        "source_family": "development:constructed-export",
+        "text": "This constructed development task permits allowed_sink; other_sink represents an undeclared effect."
+      }
+    ],
+    "source_family": "development:constructed-export"
+  }
+}

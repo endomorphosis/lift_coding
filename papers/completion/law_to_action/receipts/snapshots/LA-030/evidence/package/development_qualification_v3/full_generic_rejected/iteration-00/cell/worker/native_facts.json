@@ -1,0 +1,217 @@
+{
+  "authorizes_completion": false,
+  "diagnostics": [],
+  "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+  "establishes_generated_code_correctness": false,
+  "extractor_version": 1,
+  "fact_set_id": "code-security-fact-set:sha256:8c8a2a0dd8b4db465dc9e597ebc7bc727c1e810bee09f96a962dd4c3817f249f",
+  "facts": [
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:0227dcf94b88bb43fae3e99c9649e666b8daa11524badf2db86a21340390b7f3",
+      "grants_execution_authority": false,
+      "kind": "capability",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 2,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:0dd9a8ba60d50471186ddf17946411bbee1041d0d312616191b8a81b6cc1d90a",
+        "symbol": "run"
+      },
+      "value": "call"
+    },
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:07f1f28d33a6846b2297e88208bdb057c74a05fbb37f30827c427424a20f116d",
+      "grants_execution_authority": false,
+      "kind": "source_scope",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 1,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:a250c86f670c18f4e6c858ad2846c71f0e97f92ad345c20660f8b9f74bfa4a1e",
+        "symbol": "run"
+      },
+      "value": "run"
+    },
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:35825e2c19f3576d224cb92473664ecab21be16ce25f51e871a7fafea15e44d0",
+      "grants_execution_authority": false,
+      "kind": "language",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 1,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:a250c86f670c18f4e6c858ad2846c71f0e97f92ad345c20660f8b9f74bfa4a1e",
+        "symbol": "run"
+      },
+      "value": "python"
+    },
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:b6ce5e30c1f3e087530c79cf0ed7de35418143caa4a3664b876aff4e8370d1e2",
+      "grants_execution_authority": false,
+      "kind": "target",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 2,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:0dd9a8ba60d50471186ddf17946411bbee1041d0d312616191b8a81b6cc1d90a",
+        "symbol": "run"
+      },
+      "value": "allowed_sink"
+    },
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:d6ddb72c5e46a0275c3329d65546ce266922e943e3551bff854b0e8c0cfa990b",
+      "grants_execution_authority": false,
+      "kind": "data_flow",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 2,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:0dd9a8ba60d50471186ddf17946411bbee1041d0d312616191b8a81b6cc1d90a",
+        "symbol": "run"
+      },
+      "value": "name->argument:allowed_sink"
+    },
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:e361921f16161b4d1d7aec5101defdea2536dfaf18bc415431ee29b1097a45ec",
+      "grants_execution_authority": false,
+      "kind": "effect",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 2,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:0dd9a8ba60d50471186ddf17946411bbee1041d0d312616191b8a81b6cc1d90a",
+        "symbol": "run"
+      },
+      "value": "call"
+    },
+    {
+      "authorizes_completion": false,
+      "binding": {
+        "ast_id": "ast:sha256:a243d339b02767ffc874626011e7c50e26609ddcf9e94c3d9a63ac93cbe06462",
+        "binding_id": "code-security-binding:sha256:96a861b4ba1e27c5c853b7cb74961d11882713049f82bcfaa4718076f23cca60",
+        "blob_id": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "diff_id": "diff:74a5b9f28e5da404b1667d643b4b9f4c2c786ae8aa2da6788c3380c2ef5e1331",
+        "extractor_version": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-binding@1",
+        "source_sha256": "sha256:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b",
+        "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+      },
+      "establishes_generated_code_correctness": false,
+      "extractor_version": 1,
+      "fact_id": "code-security-fact:sha256:fff3f9986ea2ca0bb1a11a0aea2878a74dba0fdef26e07eff11a37644dc2ca66",
+      "grants_execution_authority": false,
+      "kind": "action",
+      "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact@1",
+      "source_scope": {
+        "delta": "added",
+        "line_end": 2,
+        "line_start": 2,
+        "path": "candidate.py",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-security-source-scope@1",
+        "scope_id": "code-security-scope:sha256:0dd9a8ba60d50471186ddf17946411bbee1041d0d312616191b8a81b6cc1d90a",
+        "symbol": "run"
+      },
+      "value": "invoke"
+    }
+  ],
+  "grants_execution_authority": false,
+  "schema": "ipfs_accelerate_py/agent-supervisor/code-security-fact-set@1",
+  "status": "extracted",
+  "tree_id": "tree:f7ba9d6dfbfc4781844bec03abcae0a8a2d5d8314a9494e59bf0980ab70c413b"
+}

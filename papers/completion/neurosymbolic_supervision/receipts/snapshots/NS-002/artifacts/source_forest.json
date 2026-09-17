@@ -1,0 +1,37 @@
+{
+  "schema": "neurosymbolic-supervision/source-forest@1",
+  "task_id": "NS-002",
+  "observed_at": "2026-09-11T16:45:51Z",
+  "observation_scope": "Read-only provenance inventory. Paths below are workspace-relative renderings of observed __file__ locations; their content digests, rather than a mutable path, identify the source.",
+  "workspace": {
+    "path_identity": "WORKSPACE_ROOT",
+    "git_commit": "6c7f59fc7d0c3cb370c6d2f5b76596030f5f2fdb",
+    "working_tree_dirty_before_outputs": false,
+    "source_digest_algorithm": "sha256"
+  },
+  "declared_gitlinks": [
+    {"path": "external/ipfs_accelerate", "gitlink_commit": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b", "nested_git_metadata": "broken_stale_gitdir", "overlay": "unverified; nested .git points outside this workspace to a missing worktree"},
+    {"path": "external/ipfs_datasets", "gitlink_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6", "nested_git_metadata": "broken_stale_gitdir", "overlay": "unverified; nested .git points outside this workspace to a missing worktree"},
+    {"path": "external/ipfs_kit", "gitlink_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae", "nested_git_metadata": "broken_stale_gitdir", "overlay": "unverified; nested .git points outside this workspace to a missing worktree"}
+  ],
+  "loaded_modules": [
+    {"module": "ipfs_accelerate_py.agent_supervisor.autonomous_repair.formal_assurance_cegis", "loaded": true, "__file__": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/formal_assurance_cegis.py", "sha256": "9d4c230b0948628eef7818eceb5583f029c1b862fdea63e9566dc223243dc2f4"},
+    {"module": "ipfs_accelerate_py.agent_supervisor.todo_daemon.deterministic_repair_composition", "loaded": true, "__file__": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/deterministic_repair_composition.py", "sha256": "31f6460bf9ee0bab4806b09be04bbf3eae7eba17614661bfecf35293d9ac1b67"},
+    {"module": "ipfs_accelerate_py.agent_supervisor.analysis.formal_assurance.ipa", "loaded": true, "__file__": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_assurance/ipa.py", "sha256": "952ab04860b135248c5c286417c0f18fe85930a3b1c4dd1b7e8ccc757b6f6a39"},
+    {"module": "ipfs_datasets_py.logic.software_contracts", "loaded": true, "__file__": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/__init__.py", "sha256": "b4182826af58a52d90da4cea3c57ee684be90d4b41e39f209a697a0bbd8e3e45"},
+    {"module": "ipfs_accelerate_py.agent_supervisor.semantic_state", "loaded": false, "resolved_origin": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/__init__.py", "sha256": "112a3e11907cc0a609f1a99aa58103214ecfa52175b169205c461a3e14f6f0ef", "failure": "ModuleNotFoundError: anyio"},
+    {"module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.sealer", "loaded": false, "resolved_origin": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py", "sha256": "9618561ddda1d53b9368ea220ceeff13c7149986d8d49641b78e6623a3a22fed", "failure": "ModuleNotFoundError: ipfs_datasets_py.logic.zkp.incremental_sealing"}
+  ],
+  "source_inputs": [
+    {"path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/benchmark.py", "sha256": "f0d4bb0f334869e3facc7d9fdf597ccb7f68d1788f112377dc5d7231d6647c22"},
+    {"path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/counterexample_guided_tactician.py", "sha256": "4665e1b61ad4deb7e9b31d7b062bf365b3bc0cdfee953333128cab61d7a20f71"},
+    {"path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/datasets_adapter.py", "sha256": "8075843572a05070f3037c74680292647febc5ed7bd603c9cfca458b437ba391"},
+    {"path": "external/ipfs_accelerate/requirements-proof-reuse.txt", "sha256": "4809b7012f515cfaea30140a117c86e47ada29f96fff9045eff57e390cf2fc8b"},
+    {"path": "external/ipfs_datasets/requirements-theorem-provers.txt", "sha256": "cb22dd5328bca48746c0747e2580a19b1a8602ed008875ad11c0eb650df825b9"},
+    {"path": "external/ipfs_accelerate/docs/benchmarks/semantic_compression_harness_results.json", "sha256": "c7c71899bc7d7abf55c21c169055af1a85d680982ada4f538aad922b57b3b2dd"},
+    {"path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/summary.json", "sha256": "e76123068ebe94557647f90044155c06126ab3f6cc33efb27ab0c2e3033f00f6"},
+    {"path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt", "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"}
+  ],
+  "rollout_flags": {"semantic_harness_production_eligible_true_count": 0, "semantic_harness_model_receipt_count": 0, "semantic_harness_production_root_advanced": false, "deterministic_repair_composition_execution_authorized": false, "deterministic_repair_composition_completion_authorized": false, "incremental_sealer_loadable_in_authoritative_profile": false},
+  "provenance_limit": "Gitlinks identify the consumer pin, but unavailable nested Git metadata prevents asserting that the present nested files equal those commits. Source hashes above bind the inspected bytes."
+}

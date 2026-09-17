@@ -1,0 +1,87 @@
+{
+  "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f": {
+    "artifact_id": "cve-first-shard",
+    "artifact_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+    "content_identity": "bea567d2e5b5cdf5b027174872b0ac13b281a27b1a3eaca5db7903363e18a233",
+    "found": true,
+    "ipfs_cid_published": false,
+    "lineage_family_id": "family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a",
+    "normalized_source_sha256": "f50a7f11b10953b3102360b5997a625332423b27efe9243e31ca69af745c6862",
+    "population": "cve",
+    "redistribution": "retrieval_only",
+    "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "source_id": "cve:5e66f309d82d35cc9d886f12cf51e4d69f2e1b3baaa61a5a8f1185bd7ecd312f",
+    "source_locator": {
+      "cve_id": "CVE-2021-4265",
+      "repository": "github.com/siwapp/siwapp-ror"
+    },
+    "source_record_sha256": "bea567d2e5b5cdf5b027174872b0ac13b281a27b1a3eaca5db7903363e18a233",
+    "source_to_ir_status": "planned_not_materialized",
+    "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+    "status": "source_frozen_case_construction_and_independent_review_pending"
+  },
+  "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188": {
+    "artifact_id": "cve-first-shard",
+    "artifact_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+    "content_identity": "a642fdc33b7a12639c13df620ae0e19793cc4fea2a4402897922fe47630d564f",
+    "found": true,
+    "ipfs_cid_published": false,
+    "lineage_family_id": "family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8",
+    "normalized_source_sha256": "99040a5062b9d88ebc76f463d88346144989857ba9677184f4e27e170d08477e",
+    "population": "cve",
+    "redistribution": "retrieval_only",
+    "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "source_id": "cve:69312f92cf866ab7073cf1e89cd7d3a6d76b636d6e6587cd846bcee662db1188",
+    "source_locator": {
+      "cve_id": "CVE-2016-7149",
+      "repository": "github.com/b2evolution/b2evolution"
+    },
+    "source_record_sha256": "a642fdc33b7a12639c13df620ae0e19793cc4fea2a4402897922fe47630d564f",
+    "source_to_ir_status": "planned_not_materialized",
+    "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+    "status": "source_frozen_case_construction_and_independent_review_pending"
+  },
+  "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4": {
+    "artifact_id": "cve-first-shard",
+    "artifact_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+    "content_identity": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+    "found": true,
+    "ipfs_cid_published": false,
+    "lineage_family_id": "family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85",
+    "normalized_source_sha256": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+    "population": "cve",
+    "redistribution": "retrieval_only",
+    "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+    "source_id": "cve:81c9b1cd5d5972c78d3b2936312fd2497afe0e9c0ae4f32aa477d041848c72b4",
+    "source_locator": {
+      "cve_id": "CVE-2014-2829",
+      "repository": "github.com/esl/mongooseim"
+    },
+    "source_record_sha256": "846d255ae9a3134c7cb9737f7e47d5d26343f3b6fe97997ef8e48dbf4a54bbdb",
+    "source_to_ir_status": "planned_not_materialized",
+    "source_uri": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+    "status": "source_frozen_case_construction_and_independent_review_pending"
+  },
+  "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693": {
+    "artifact_id": "skill-security-bundle",
+    "artifact_sha256": "8b763be5896b12510c38b92459325d9568770d99cf38aa53ab17485b456d82a4",
+    "content_identity": "ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0",
+    "found": true,
+    "ipfs_cid_published": false,
+    "lineage_family_id": "family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949",
+    "normalized_source_sha256": "c4f637f560e6ad58552cdac53694f8d42e086964b9b35da5d9a685f381d34b1a",
+    "population": "skill",
+    "redistribution": "retrieval_only",
+    "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+    "source_id": "skill:cde85f1fbfa19461702271bc52c9b65be4eb944e75e427a2470e9f34227dd693",
+    "source_locator": {
+      "repository": "github.com/grapheneos/attestationserver",
+      "skill_id": "00bf87910b65138ba37289b1c504ccee30e92946045d0cefca49a22d3e46148c",
+      "source_url": "https://github.com/GrapheneOS/AttestationServer"
+    },
+    "source_record_sha256": "ef917528b31bf690eda2fac57a9f568f7f66f15a99384d00447e12fdeb40e7e0",
+    "source_to_ir_status": "planned_not_materialized",
+    "source_uri": "https://huggingface.co/datasets/Tommysha/skillcenter-bundles/resolve/f9dd4fec3c86d85ebf116c7408ac5ce602c418a1/clawskills-bundle-lite-security-v20260227.sqlite",
+    "status": "source_frozen_case_construction_and_independent_review_pending"
+  }
+}

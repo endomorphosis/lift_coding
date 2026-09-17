@@ -1,0 +1,527 @@
+{
+  "schema": "autoformalization-environment-manifest/v1",
+  "task_id": "AF-003",
+  "created_at": "2026-09-11T17:29:41.628465+00:00",
+  "execution_profile": {
+    "id": "AF-003-host-cpu-pinned-preflight-v1",
+    "status": "selected_interfaces_smoke_qualified",
+    "selection_scope": "Pinned intended AdaptiveModalAutoencoder + real MiniLM embedding producer, Intent compiler registry, Z3/CVC5 and Lean checker; full A-E/T0-T5 remains planned.",
+    "provider_sandbox_equivalence": "not claimed; use this explicit host profile or reproduce its package/tool/model mounts before worker execution",
+    "evaluation_authorization": "closed until AF004/005 data+labels, AF007 bridges, AF009 numerics and AF010 adapters/qualification"
+  },
+  "interpreter": {
+    "executable_path": "/usr/bin/python3.12",
+    "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "HOME": "/home/barberb",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "external/ipfs_datasets",
+      "IPFS_AUTO_INSTALL": "false",
+      "IPFS_DATASETS_AUTO_INSTALL": "false",
+      "IPFS_KIT_AUTO_INSTALL_DEPS": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "CUDA_VISIBLE_DEVICES": "",
+      "OMP_NUM_THREADS": "2",
+      "OPENBLAS_NUM_THREADS": "2"
+    },
+    "packages": {
+      "numpy": "1.26.4",
+      "safetensors": "0.7.0",
+      "tokenizers": "0.21.4",
+      "torch": "2.13.0",
+      "transformers": "4.52.1"
+    },
+    "source_mount": "exact datasets Git archive, pinned in private ledger"
+  },
+  "source_pins": {
+    "source-repository-01": {
+      "private_ledger_ref": "source_audit_private.json#/private_ledger/source-repository-01",
+      "historical_revision_claimed_by_AF-002": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "current_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "resolution_required": "none for current host bytes; manuscript-era identity remains unknown"
+    }
+  },
+  "selected_entry_points": {
+    "compiler": {
+      "entry_point": "ipfs_datasets_py.logic.intent_ir.formalize.compiler.IntentFormalizationCompiler",
+      "source_role": "S07",
+      "source_sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+      "producer_version": "intent-formalization-compiler/v1",
+      "qualification": "import and constructor smoke only; not source-formalization or training qualification"
+    },
+    "model": {
+      "entry_point": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder.AdaptiveModalAutoencoder",
+      "source_role": "S24",
+      "source_sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+      "architecture_version": "proof_aware_auxiliary_heads_v2",
+      "constructor_configuration": "Exact retained constructor signature/defaults in selected runtime smoke evidence.",
+      "constructor_signature_sha256": "a71d18849376df60740ab3570d9c5a1123eaf3ba03969671bed84af756f2f9b5",
+      "initial_state_sha256": "7de39589f48c85e46f8958ea1c3126614b72b7e763e9bf43e2beee8336f42391",
+      "trained_checkpoint": null,
+      "training_task": "AF-011 after AF-009 numerical qualification",
+      "qualification": "import and constructor smoke only; not source-formalization or training qualification"
+    },
+    "embedding_producer": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "model_directory": "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "files": [
+        {
+          "path": "1_Pooling/config.json",
+          "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+          "size": 190
+        },
+        {
+          "path": "README.md",
+          "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+          "size": 10502
+        },
+        {
+          "path": "config.json",
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+          "size": 612
+        },
+        {
+          "path": "config_sentence_transformers.json",
+          "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+          "size": 116
+        },
+        {
+          "path": "model.safetensors",
+          "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+          "size": 90868376
+        },
+        {
+          "path": "modules.json",
+          "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+          "size": 349
+        },
+        {
+          "path": "sentence_bert_config.json",
+          "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+          "size": 53
+        },
+        {
+          "path": "special_tokens_map.json",
+          "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+          "size": 112
+        },
+        {
+          "path": "tokenizer.json",
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+          "size": 466247
+        },
+        {
+          "path": "tokenizer_config.json",
+          "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+          "size": 350
+        },
+        {
+          "path": "vocab.txt",
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+          "size": 231508
+        }
+      ],
+      "loader": "transformers.AutoTokenizer.from_pretrained + transformers.AutoModel.from_pretrained",
+      "pooling": "attention-mask mean pooling then L2 normalization",
+      "max_length": 256,
+      "trust_remote_code": false,
+      "local_files_only": true,
+      "device": "cpu",
+      "dtype": "torch.float32",
+      "qualification": "local loading and two synthetic embedding inferences only; no semantic-quality or retrieval measurement"
+    },
+    "solver": {
+      "primary": {
+        "binary_path": "/home/barberb/.local/bin/z3",
+        "binary_sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "probe": {
+          "argv": [
+            "/home/barberb/.local/bin/z3",
+            "-in",
+            "-smt2"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "unsat\n"
+        },
+        "resolved_binary": "/home/barberb/.local/bin/z3",
+        "status": "synthetic QF_LIA smoke only; solver-local result",
+        "stdin_artifact": "sentinel.smt2",
+        "version": {
+          "argv": [
+            "/home/barberb/.local/bin/z3",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "Z3 version 4.15.4 - 64 bit\n"
+        }
+      },
+      "independent_diagnostic": {
+        "binary_path": "/home/barberb/.local/bin/cvc5",
+        "binary_sha256": "85827e46576d68570c520a2b2927fe1d260d0bfb2b93919f53f50ed29ee1e419",
+        "probe": {
+          "argv": [
+            "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+            "--lang=smt2"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "unsat\n"
+        },
+        "resolved_binary": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+        "status": "synthetic QF_LIA smoke only; solver-local result",
+        "stdin_artifact": "sentinel.smt2",
+        "version": {
+          "argv": [
+            "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+            "--version"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]\ncompiled with GCC version 11.4.0\non Feb 26 2026 01:24:28\n\nCopyright (c) 2009-2025 by the authors and their institutional\naffiliations listed at https://cvc5.github.io/people.html\n\ncvc5 is open-source and is covered by the BSD license (modified).\n\nTHIS SOFTWARE IS PROVIDED AS-IS, WITHOUT ANY WARRANTIES.\nUSE AT YOUR OWN RISK.\n\nThis version of cvc5 is linked against the following non-(L)GPL'ed\nthird party libraries.\n\n  CaDiCaL - Simplified Satisfiability Solver\n  See https://github.com/arminbiere/cadical for copyright information.\n\n  Editline Library\n  See https://thrysoee.dk/editline\n  for copyright information.\n\n  SymFPU - The Symbolic Floating Point Unit\n  See https://github.com/martin-cs/symfpu/tree/CVC4 for copyright information.\n\nThis version of cvc5 is linked against the following third party\nlibraries covered by the LGPLv3 license.\nSee licenses/lgpl-3.0.txt for more information.\n\n  GMP - Gnu Multi Precision Arithmetic Library\n  See http://gmplib.org for copyright information.\n\n  LibPoly polynomial library\n  See https://github.com/SRI-CSL/libpoly for copyright and\n  licensing information.\n\ncvc5 is statically linked against these libraries. To recompile\nthis version of cvc5 with different versions of these libraries\nfollow the instructions on https://github.com/cvc5/cvc5/blob/main/INSTALL.md\n\nSee the file COPYING (distributed with the source code, and with\nall binaries) for the full cvc5 copyright, licensing, and (lack of)\nwarranty information.\n\n"
+        }
+      },
+      "proof_authority": "solver-local only; never substitutes for native reconstruction"
+    },
+    "native_checker": {
+      "binary_path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+      "binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+      "probe": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+          "/tmp/af-003-command-correction-ebqtr67x/papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/sentinel.lean"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "source_artifact": "sentinel.lean",
+      "status": "fresh kernel checks synthetic identity theorem; no task-generated proof or bridge qualified",
+      "version": {
+        "argv": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)\n"
+      }
+    },
+    "retrieval_backend": {
+      "selected": "existing lexical/CID backend R08 for deterministic control; vector adapter R09 planned",
+      "index": null,
+      "qualification": "no retrieval corpus/index or evaluation qualified"
+    },
+    "direct_generative_model": {
+      "selected": null,
+      "status": "unqualified_pending_AF-010",
+      "cached_leanstral_candidate": {
+        "model_id": "Frosty40/Leanstral-1.5-119B-A6B-GGUF-NVFP4",
+        "revision": "abcc5ce2528c6375148d41dac6dce20f06c339f4",
+        "weight_file_bytes": 67135119264,
+        "blocker": "weight file alone exceeds frozen16GiB route envelope; no compatible served runtime qualified"
+      },
+      "scope_guard": "Do not substitute cached GPT-2 or claim A executed; select compatible direct-model service/artifact or explicitly version affected scope before outcomes."
+    }
+  },
+  "candidate_entry_points": {
+    "compiler": "ipfs_datasets_py.logic.intent_ir.formalize.compiler.IntentFormalizationCompiler",
+    "model": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder.AdaptiveModalAutoencoder",
+    "solver_router": "ipfs_datasets_py.logic.external_provers.prover_router",
+    "native_checker": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean (selected host synthetic kernel smoke passed; benchmark integration unqualified)",
+    "vector_store": "ipfs_datasets_py.logic.intent_ir.graphrag.skillcenter_cid_vectors",
+    "embedding_fixture": "legal_samples.stable_mock_embedding (forbidden for semantic/retrieval claims)"
+  },
+  "logical_profile": {
+    "selected": "AF-003-intent-typed-views-v1",
+    "domain": "intent",
+    "compiler_version": "intent-formalization-compiler/v1",
+    "view_registry": {
+      "registry_id": "intent-ir-formalization-views",
+      "schema_version": "formalization-view-registry/v1",
+      "views": [
+        {
+          "capabilities": [
+            "action_contracts",
+            "hoare_triples",
+            "source_grounding"
+          ],
+          "description": "Actions with preconditions, effects, and observations.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "dynamic_hoare",
+          "metadata": {
+            "intent_constructs": [
+              "action"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/action-hoare/v1"
+        },
+        {
+          "capabilities": [
+            "source_grounding",
+            "typed_symbols"
+          ],
+          "description": "Typed Intent entities, predicates, and action facts.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "typed_first_order",
+          "metadata": {
+            "intent_constructs": [
+              "statement",
+              "action"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/facts/v1"
+        },
+        {
+          "capabilities": [
+            "failure_conditions",
+            "proof_obligations",
+            "source_grounding"
+          ],
+          "description": "Explicit failure conditions and failure transitions.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "safety_liveness",
+          "metadata": {
+            "intent_constructs": [
+              "failure"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/failure/v1"
+        },
+        {
+          "capabilities": [
+            "deontic_modality",
+            "intention",
+            "source_grounding"
+          ],
+          "description": "Goals, intentions, requirements, permissions, and prohibitions.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "intention_deontic",
+          "metadata": {
+            "intent_constructs": [
+              "goal",
+              "modality"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/intention-deontic/v1"
+        },
+        {
+          "capabilities": [
+            "invariants",
+            "proof_obligations",
+            "source_grounding"
+          ],
+          "description": "State invariants represented as always obligations.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "safety",
+          "metadata": {
+            "intent_constructs": [
+              "invariant"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/invariant/v1"
+        },
+        {
+          "capabilities": [
+            "observations",
+            "proof_obligations",
+            "source_grounding"
+          ],
+          "description": "Observable criteria and evidence obligations.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "verification_condition",
+          "metadata": {
+            "intent_constructs": [
+              "verification"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/verification/v1"
+        },
+        {
+          "capabilities": [
+            "source_grounding",
+            "state_transitions",
+            "temporal_control"
+          ],
+          "description": "Entry, terminal, sequencing, branching, retry, and concurrency.",
+          "formula_schema": "formal-formula/v1",
+          "logic_family": "workflow_temporal",
+          "metadata": {
+            "intent_constructs": [
+              "control_edge",
+              "workflow_boundary"
+            ]
+          },
+          "schema_version": "formalization-view/v1",
+          "view_id": "intent-ir-view/workflow-temporal/v1"
+        }
+      ]
+    },
+    "view_registry_sha256": "f5e75ca0b7014d2a8155620bd25a99717237d7449c9a651e518840a9a2e7770b",
+    "solver_smoke_logic": "QF_LIA",
+    "native_checker_language": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+    "proof_transfer": "none selected; AF-007 must qualify each bridge",
+    "corpus_vocabulary": "pending AF-004; no corpus-specific formalization qualification claimed"
+  },
+  "feature_flags": {
+    "use_cuda": false,
+    "bf16_activations": false,
+    "external_model_calls": false,
+    "native_prover_calls": false,
+    "solver_portfolio": false,
+    "faiss_vector_mode": false,
+    "spacy_pipeline": false,
+    "mock_embeddings_allowed_for_claims": false,
+    "source_withheld_retrieval": false,
+    "preflight_native_solver_calls": true,
+    "preflight_local_embedding_inference": true,
+    "final_test_access": false,
+    "sample_memory_main_generalization": false
+  },
+  "capabilities": {
+    "selected_host_packages": {
+      "numpy": "1.26.4",
+      "safetensors": "0.7.0",
+      "tokenizers": "0.21.4",
+      "torch": "2.13.0",
+      "transformers": "4.52.1"
+    },
+    "selected_host_smoke": {
+      "evidence": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log",
+      "full_routes_qualified": 0
+    },
+    "historical_provider_sandbox_capabilities": {
+      "reference": "#/historical_static_profile/capabilities",
+      "scope": "Earlier sandbox only; does not describe the selected host CPU environment."
+    }
+  },
+  "resource_constraints": {
+    "task_resource_class": "cpu-medium",
+    "shared_gpu_model_service_slots": 0,
+    "gpu_reservation": "not held or used",
+    "memory_limit_gib": 16,
+    "training_time_limit_minutes_per_seed": 30,
+    "search_validation_limit_minutes_per_item": 10,
+    "network_model_service": "not used in selected CPU preflight; research direct-model service remains unqualified",
+    "concurrency": "one shared model-service slot may be used only after an approved reservation",
+    "cpu_threads": 2,
+    "preflight_wall_seconds_limit": 90,
+    "enforcement": "Actual preflight child RLIMIT_AS=17179869184; CPU libraries2threads; subprocess probes30s limit."
+  },
+  "activation_requirements": [
+    "Reproduce selected host profile in the actual execution workspace and verify all recorded hashes.",
+    "Freeze corpus, partitions, labels and exact vocabulary in AF004/005 without test access.",
+    "Qualify bridges in AF007, numerical updates in AF009 and executable matched adapters in AF010.",
+    "Keep direct generative model unavailable until a compatible pinned route is qualified.",
+    "Train and identify actual seed checkpoints in AF011; do not promote constructor smoke to model performance.",
+    "Acquire and record resource reservations before research runs; preserve AF002 budgets and all unrun history."
+  ],
+  "integrity_rule": "requested and effective compiler, model, solver, checker, profile, vocabulary, feature flags, resource lease, source revision, and environment must agree exactly. Otherwise the route remains unavailable.",
+  "historical_static_profile": {
+    "created_at": "2026-09-11T17:10:00Z",
+    "execution_profile": {
+      "id": "AF-003-static-preflight-sealed-python312",
+      "status": "blocked_no_runtime_route",
+      "selected_for_this_task": "static source audit only",
+      "prohibition": "No training, external model calls, solver calls, or claim-bearing inference was run."
+    },
+    "interpreter": {
+      "executable_path": "/usr/bin/python3.12",
+      "version": "3.12.3",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "home_policy": "fresh private HOME with fresh XDG directories"
+    },
+    "selected_entry_points": {
+      "compiler": null,
+      "model": null,
+      "solver": null,
+      "native_checker": null,
+      "embedding_producer": null,
+      "retrieval_backend": null,
+      "planner": "ipfs_datasets_py.logic.tactician.planner.LogicTactician (source-only; not executed)"
+    },
+    "logical_profile": {
+      "selected": null,
+      "required_selection_before_execution": [
+        "target syntax/version",
+        "modal/deontic/temporal semantics",
+        "domain adapter",
+        "view registry",
+        "vocabulary",
+        "source-map policy",
+        "bridge assumptions"
+      ]
+    },
+    "feature_flags": {
+      "use_cuda": false,
+      "bf16_activations": false,
+      "external_model_calls": false,
+      "native_prover_calls": false,
+      "solver_portfolio": false,
+      "faiss_vector_mode": false,
+      "spacy_pipeline": false,
+      "mock_embeddings_allowed_for_claims": false,
+      "source_withheld_retrieval": false
+    },
+    "capabilities": {
+      "packages": {
+        "numpy": {
+          "status": "available",
+          "distribution": "numpy",
+          "version": "1.26.4"
+        },
+        "requests": {
+          "status": "available",
+          "distribution": "requests",
+          "version": "2.34.2"
+        },
+        "torch": {
+          "status": "absent"
+        },
+        "spacy": {
+          "status": "available",
+          "distribution": "spacy",
+          "version": "3.8.14"
+        },
+        "faiss": {
+          "status": "available",
+          "distribution": "faiss-cpu",
+          "version": "1.13.2"
+        },
+        "transformers": {
+          "status": "available",
+          "distribution": "transformers",
+          "version": "4.52.1"
+        },
+        "openai": {
+          "status": "available",
+          "distribution": "openai",
+          "version": "2.32.0"
+        },
+        "ipfs_datasets_py": {
+          "status": "absent"
+        }
+      },
+      "executables": {
+        "lean": "absent",
+        "lake": "absent",
+        "cvc5": "absent",
+        "z3": "absent",
+        "vampire": "absent",
+        "eprover": "absent",
+        "coqc": "absent",
+        "isabelle": "absent"
+      }
+    }
+  }
+}

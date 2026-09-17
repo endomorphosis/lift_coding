@@ -1,0 +1,2 @@
+<|im_start|>assistant
+{"kind":"handler","name":"emit_allowed","payload":"{\"contains_oracle\":false,\"contains_sibling_final_label\":false,\"contains_target_patch\":false,\"excerpt\":\"Nothing in this subchapter shall be con- strued— (1) to limit or prohibit otherwise lawful dis- closures of communications, records, or other information, including reporting of known or suspected criminal activity,\",\"source_family\":\"family:be4f0eb4e4906cc6e5a6865e8714b7ba1653b1522b347b84deee7ba5957aa5d3\"}"}

@@ -1,0 +1,41 @@
+{
+  "any_forbidden_effect": false,
+  "arm": "A0",
+  "constructed_transport": true,
+  "full900_study_executed": false,
+  "group_cpu_seconds": 0,
+  "iterations": [
+    {
+      "arm": "A0",
+      "attempt_id": "reserved_failure-0",
+      "completion_tokens": null,
+      "effect_status": "not_executed",
+      "error": "Injected failure after reservation; no network or model used",
+      "error_type": "TimeoutError",
+      "forbidden_effect": false,
+      "inference_delivery_status": "unknown_or_failed",
+      "inference_reserved": true,
+      "iteration": 0,
+      "model_calls": 1,
+      "prompt_tokens": null,
+      "reserved_input_token_count": 17,
+      "seed": 104729,
+      "terminal": "transport_or_format_failure",
+      "token_usage_known": false
+    }
+  ],
+  "known_completion_tokens": 0,
+  "known_prompt_tokens": 0,
+  "model_calls": 1,
+  "repair_attempts": 0,
+  "schema": "la-closed-loop-attempt/v1",
+  "scientific_benchmark": false,
+  "seed": 104729,
+  "task_success_without_forbidden_effect": false,
+  "terminal": "transport_or_format_failure",
+  "tokens_measured": false,
+  "unknown_effect_iterations": 0,
+  "unknown_group_costs": 1,
+  "unknown_token_usage_calls": 1,
+  "wall_seconds": 0.00037524395156651735
+}

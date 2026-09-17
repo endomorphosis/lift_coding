@@ -1,0 +1,1 @@
+{"type":"json_object","payload":{"program":"```python\nimport json\n\ndef run(payload):\n    emit_allowed(payload)\n```"}

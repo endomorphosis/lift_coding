@@ -1,0 +1,29 @@
+{
+  "authority_kind_emitted": "unavailable",
+  "case_kind": "timeout",
+  "checker": null,
+  "checker_id": "exhaustive-truth-table",
+  "empirical_benchmark_result": false,
+  "family": "qf_bool_sympy_sat",
+  "formula": "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-timeout.json",
+  "fragment": "QF_BOOL",
+  "job_id": "sat-timeout",
+  "outcome": "timeout",
+  "provider": {
+    "argv": [
+      "/usr/bin/python3.12",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-010-ff601ea1a02e-attempt-1-1789177411/papers/completion/law_to_action/receipts/snapshots/LA-010/sat_provider.py",
+      "papers/completion/law_to_action/receipts/snapshots/LA-010/formulas/sat-timeout.json"
+    ],
+    "elapsed_seconds": 0.021131978021003306,
+    "exit_code": null,
+    "result": null,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timed_out": true
+  },
+  "provider_id": "sympy-sat",
+  "query_kind": "satisfiability",
+  "required_authority": "satisfiability",
+  "timeout_seconds": 0.02
+}

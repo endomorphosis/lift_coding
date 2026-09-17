@@ -1,0 +1,20 @@
+{
+  "arm": "A0",
+  "attempt_id": "unknown_effect-0",
+  "completion_tokens": null,
+  "effect_status": "unknown_after_execution_reservation",
+  "error": "Injected unknown cleanup; no container created",
+  "execution_wall_seconds": 0.01,
+  "forbidden_effect": null,
+  "group_cpu_seconds": null,
+  "group_peak_memory_bytes": null,
+  "iteration": 0,
+  "model_calls": 0,
+  "model_generated": false,
+  "origin": "constructed-development-output",
+  "prompt_tokens": null,
+  "resource_admitted": false,
+  "seed": 104729,
+  "terminal": "infrastructure_failure",
+  "token_usage_known": false
+}

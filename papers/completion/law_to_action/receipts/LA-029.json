@@ -1,0 +1,186 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-029",
+  "status": "complete",
+  "completed_at": "2026-09-13T00:48:19.400000+00:00",
+  "completion_mode": "Ordinary evidence review of the already-completed exact 900-cell operator run. Imported snapshot hashes, live output mappings, the frozen 60x5x3 matrix, resource admission, descendant-inclusive costs, and the two pre-scientific startup recoveries at 591 and 625 were verified from retained artifacts. No benchmark, provider, model, native effect, store reset, replay, or scientific retry was dispatched. Original diagnostic histories, missing historical costs, false host admissions at 459 and 560, and the explicit 591/625 cumulative-active accounting amendment are retained. Human fidelity and model efficacy remain out of scope.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md": "8eb5a09ec06fb34c58cd8527fd1d08a242c19c62b7359d58515673010f7f33eb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/validate_operator_adoption.py": "e6a7bfde6d2dde7ed95c2ea9b13246f7d8300220f54a68d40811b70f105943e3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/commands.json": "0f277f33e03e3acf13d5316f0719fe6d13df737f68afffa0932dbf75959d8f39",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stdout.log": "fa8f2ff70311ede017fd236d2ce31011d96041efdee9f8f30e846c5c2e3bb92c"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/fixed_action_operator/README.md": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md",
+    "papers/completion/law_to_action/benchmark/fixed_action_operator/cell.py": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py",
+    "papers/completion/law_to_action/benchmark/fixed_action_operator/controller.py": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py",
+    "papers/completion/law_to_action/benchmark/fixed_action_operator/frozen_inputs.json": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json",
+    "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json"
+  },
+  "criteria": [
+    {
+      "criterion": "All 900 frozen case-arm-seed identities have exactly one new accounted operator disposition, with source/candidate/schedule/runtime hashes and all original diagnostic histories preserved. An incomplete or unadmitted matrix remains an explicit unfinished benchmark obligation.",
+      "status": "met",
+      "explanation": "raw.jsonl contains exactly 900 unique attempt_ids in frozen_inputs.json schedule order (60 cases x 5 arms x 3 seeds; 180/180/540 development/calibration/final). Each identity has one scientific operator disposition. Host attempts are 902 because the undispatched container-startup recoveries at 591 and 625 are retained separately rather than duplicating scientific rows. Pins match the pending receipt: frozen_inputs sha256 52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9, original_schedule_sha256 80366f623ecbf5883be07311f9e3981813c86f7cdfe802d66ee5388d7677fb9e, schedule-list digest dac3d21265b6acbb2feaf35212cd6e01b23e4f421fc3dec5dbddc8fc25e49d43 equal to the LA-015 schedule digest, compact candidates 398854b31b31c7bb1fe4496b2c0d3c6273fd23a50185367f41a660a3901f527d, operator source commit d6127a257a433fabb8183180d82cc3b309040c47, implementation revision ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c. Original diagnostic history remains bound (preservation sha256 1a08bad62b3032ae47182cffe604e199412c99888c779fcad3f59bbfe39196a8) with original_diagnostic_cpu_seconds null rather than imputed. 459 and 560 retain original false host admissions. all900_resource_qualified is true, so this matrix is complete and admitted rather than an unfinished obligation.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Each executed cell has observed singleton cpuset and CPU quota, 2 GiB/no-swap/16-process enforcement, actual whole-group timeout/termination evidence and measured descendant-inclusive cost accounting under the frozen 20 s/18,000 CPU-second stopping limits. Any prospective accounting clarification is explicit and frozen before this corrected run.",
+      "status": "met",
+      "explanation": "Frozen controller LIMITS and cell.py boundary()/controller verify_sample require singleton cpuset, one-core quota, memory.max 2147483648, swap 0, pids 16, 20 s wall/CPU, and a 18,000 CPU-second global stop. All 900 resource_admission cells are resource_qualified with unique container_ids, parent and leaf samples, and shared public_key_sha256 b8a0306a33962ef274378156da3d4d006f491484e2a38d740a0d65e13f81c05c. All 900 scientific cost rows have termination_proven and cleanup_proven; whole-cell wall and group CPU stay within 20 s; peak memory stays under 2 GiB (max 274812928). Scientific group CPU is 1608.698691 s; the two pre-scientific startups at 591 and 625 add 0.118787 s once; total 1608.817478 s, under 18,000. The 591/625 budgets are the frozen cumulative-active-allowance amendment (11.766051943064667 s and 19.793533246032894 s) with separate pause intervals, recorded before this adoption rather than as a continuous original absolute 20 s clock.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Actual frozen arm implementations produce retained independent effect-observer counters, useful-work outcomes and source-bound native proof/capability/durable-consumption evidence. The original mechanisms, schedule and shared private store/key semantics are unchanged.",
+      "status": "met",
+      "explanation": "Every raw row retains observed_effect_count, journal_event_count, observed_forbidden_effect, handler_calls and useful_work, with independent_human_gold false. Unguarded A0-A2 forbidden cases are 90/90 forbidden effects and 0/90 useful work; A3 forbidden effects are 33/90; A4 is 0/90 forbidden effects and 90/90 allowed useful work. All 180 A3 and 180 A4 rows record real-ed25519; every A4 row records enforce, SAT status, and duckdb-file-typed-quack-owner. cell.py still calls original run_slot once against the pinned LA-015 harness 7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5; all frozen source_files still match the current tree. The schedule list digest equals the LA-015 900-cell digest. All 900 cells share one study public key; historical_ready_relocation records store_reset_or_write=false and native_effects=0.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stdout.log"
+      ]
+    },
+    {
+      "criterion": "No failed or unknown-termination cell is replayed, no usage is refunded or invented, and no diagnostic unadmitted rate is promoted to an admitted headline result. Downstream analysis and trace tasks consume only exact admitted correction evidence or explicitly retain its incompleteness. The recalculated admitted-run analysis/statistics, corrected cost report and explicit shared-validator, diagnostic-rate and separate-replay guidance are retained for LA019 and LA022.",
+      "status": "met",
+      "explanation": "All 900 scientific terminals are success or denial; scientific_retries=0 and this adoption performed no new scientific execution. Failed/unknown cells were not replayed. Each of 902 host attempts is cost_counted_once with no refund; original diagnostic CPU remains null because it was not measured with the required process-group boundary. 459 and 560 remain false original host admissions with append-only physical dispositions; 591 and 625 startups remain separately charged pre-scientific recoveries. LA-015 protocol-unadmitted diagnostic rates are not used as admitted headlines. claim_guidance.md and summary.json recalculate admitted-run analysis and instruct LA019 not to substitute historical tables and LA022 to consume this summary while preserving every limitation, including LA009 shared-validator conformance and LA020 as a separate replay.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/README.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/cell.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/controller.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/operator/frozen_inputs.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-029/validate_operator_adoption.py"
+      ],
+      "completed_at": "2026-09-13T00:48:19.321430+00:00",
+      "cwd": ".",
+      "environment_overrides": {
+        "LANG": "C.UTF-8",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-029/validation/validate.stdout.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-029/validate_operator_adoption.py",
+      "started_at": "2026-09-13T00:48:19.247241+00:00"
+    }
+  ],
+  "limitations": [
+    "Frozen modeled-policy/effect probes with actual isolated resource enforcement; automated policy labels are not independent human legal or source-semantic judgments.",
+    "Compact records do not retain full per-cell proof/capability payloads; pinned executed mechanisms, effect counters and durable shared-state identity support the stated runtime observations.",
+    "No blanket compiler soundness, theorem-proof validity, model efficacy or independent human fidelity is inferred. human_agreement and human_fidelity remain null; model_calls=0.",
+    "Original LA-015 and its rescue remain protocol-unadmitted diagnostics. LA-020 detailed replays are separate executions. LA-009 18/18 is shared-validator conformance, not independent-checker agreement.",
+    "The original LA-016 model comparison was unrun; LA-017 wording does not establish admitted model efficacy.",
+    "Original monitoring errors at 459 and 560 remain false host admissions with separate append-only physical-boundary dispositions.",
+    "Two explicitly admitted container-startup retries, one each at 591 and 625, occurred after proof that science had not started; scientific_retries=0. Both original failed host attempts and measured startup costs remain separate and charged once.",
+    "Original diagnostic CPU was not measured with the required process-group boundary and is left null, not imputed.",
+    "LA-019 historical tables must not substitute for this admitted summary. LA-022 must use this summary and preserve every limitation."
+  ],
+  "source_versions": {
+    "adoption_native_pins": {
+      "external/ipfs_accelerate": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2",
+      "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "adoption_source_baseline": "6982551762d479629b14f0bfb394ce31fe9784b3",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "container_startup_recoveries": [
+      591,
+      625
+    ],
+    "frozen_inputs_sha256": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+    "harness_version": "la029-complete-operator-adoption/v1",
+    "host_attempts": 902,
+    "human_agreement": null,
+    "human_fidelity": null,
+    "model_calls": 0,
+    "new_scientific_execution_in_adoption": false,
+    "original_fixed_action_source_head": "7fc7c210531cf61ae22094a6d23b485b32b2f626",
+    "original_implementation_revision": "ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c",
+    "original_operator_source_commit": "d6127a257a433fabb8183180d82cc3b309040c47",
+    "original_schedule_sha256": "80366f623ecbf5883be07311f9e3981813c86f7cdfe802d66ee5388d7677fb9e",
+    "pending_receipt_template_sha256": "d08721031efc49a2b4cd41de645fbacc07cd1a3c1ac82e832002be780bf181f9",
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+    "root_admission_sha256": "ca4cee32d84f1b611a7d082b58e344592ac5777533f84139be1ac35edfff9470",
+    "run_manifest_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+    "scientific_retries": 0,
+    "scientific_rows": 900,
+    "summary_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+    "validate_operator_adoption.py_sha256": "e6a7bfde6d2dde7ed95c2ea9b13246f7d8300220f54a68d40811b70f105943e3"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "completion_tokens": 284,
+  "model_calls": 1,
+  "model_generated": true,
+  "origin": "qualified-local-model",
+  "preflight_input_count": 541,
+  "prompt_tokens": 541,
+  "raw_sha256": "3030461b0a51265f9bd39297d4ac3ad94d95aea8f85318227083caa8b3e0987c",
+  "response_text": "```json\n{\n  \"program\": \"function run(payload) {\\n  const config = payload.config;\\n  const env = payload.env;\\n  \\n  // Check if environment variables are used in the application\\n  if (env && env.length > 0) {\\n    // Detect environment variables in TypeScript files\\n    const detectedVars = [];\\n    for (const file of payload.files) {\\n      if (file.lang === 'en' && file.value) {\\n        // Parse the file content to find environment variable usage\\n        const content = file.value;\\n        const varPattern = /process\\\\.env\\\\.([A-Z_]+)/g;\\n        let match;\\n        while ((match = varPattern.exec(content)) !== null) {\\n          detectedVars.push(match[1]);\\n        }\\n      }\\n    }\\n    \\n    // Emit the detected environment variables as JSON\\n    emit_allowed({\\n      \\\"detected_env_vars\\\": detectedVars,\\n      \\\"config\\\": config,\\n      \\\"env\\\": env\\n    });\\n  } else {\\n    // No environment variables to detect\\n    emit_allowed({\\n      \\\"detected_env_vars\\\": [],\\n      \\\"config\\\": config,\\n      \\\"env\\\": env\\n    });\\n  }\\n}\"\n}\n```",
+  "wall_seconds": 23.50058450999495
+}
