@@ -1,0 +1,176 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-019",
+  "status": "complete",
+  "completed_at": "2026-09-17T01:46:24.680104+00:00",
+  "completion_mode": "TypeSafe Jev router via in-tree ipfs_accelerate_py.typesafe_inference; frozen ROUTE_QUESTIONS; CI fixtures without live key; additive on top of Leanstral; not official Track 2 and not a scored Arena run",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py": "e251fc43a12cf06e2f89c9032b2f44faf78426d1cae79cabfca6c8d4cf9f83c8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/git-head.txt": "bac9aba1e97771caf509df80c3273080f3ec11d5f9d5637042157fdf4c3bac48",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.json": "74e8ca8651cf43a1ffc52a4c4962962491405b8d610d81d8abb6437bacd2acd3",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.meta.json": "9f0cc60ed42b9d36438306906f2853b2459ed7186183cf9690f5e4872f99dfee",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.stdout.log": "74e8ca8651cf43a1ffc52a4c4962962491405b8d610d81d8abb6437bacd2acd3",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-distill.meta.json": "786edb0dc01a2de3ebe5735df0ef179d9f1c8b0c57617138560c2b2d09c18e7b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-distill.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-distill.stdout.log": "fe7c68cd9c879b0f07e14035102d9745f3d3cc786ff38afec32936fea9d70493",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-off.meta.json": "d5e7a18dae5cd3011cf543095af815871d3ad82a3d5204c4f051bf88c7c3bbfd",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-off.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-off.stdout.log": "9d64bd3feccf094fc6ffdd99dca6e4a0e7b5157069446385698e392f56f86646",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-track2.meta.json": "8c44369c9038a2efe44849f9a9bb685f64719a216e02f6fc3ecb6a6fda3a0372",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-track2.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-track2.stdout.log": "a04097e8c245f6a285ebd3a426567896152aea5711107ebf3e982b514d360134",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.json": "76a869e48d3e1488be8c6cec10b3f5de47006faf8150b81740caddae9b0015f0",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.meta.json": "fe431f2e4575b40745e10bd758ed552547132182147e0023eaeaa66f186eb327",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.stdout.log": "76a869e48d3e1488be8c6cec10b3f5de47006faf8150b81740caddae9b0015f0"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/typesafe_router.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Imports ipfs_accelerate_py.typesafe_inference, not a second typesafe_sdk client.",
+      "status": "met",
+      "explanation": "typesafe_router.py AST-imports ipfs_accelerate_py.typesafe_inference (Choice, Noul, Score, TypeSafeClient, typesafe_configured) after putting external/ipfs_accelerate on sys.path. Self-check audit set imports_typesafe_inference=true, imports_choice=true, imports_typesafe_client=true, imports_typesafe_sdk=false, imported_names includes ipfs_accelerate_py.typesafe_inference. forbidden_imports=[]. There is no typesafe-sdk / typesafe pip client, no urllib/requests/httpx POST from this router (router_posts_to_typesafe=false; in-tree client would POST https://api.typesafe.ai/v1/systemone). The in-tree module file is currently missing in this checkout (exists=false, error=ModuleNotFoundError: No module named 'ipfs_accelerate_py.typesafe_inference'); live routing without --fixture therefore no-ops (no_key or typesafe_inference_missing) rather than shipping a second SDK. CI fixtures inject FixtureClient, which is not typesafe-sdk and never POSTs.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Default LRA_TYPESAFE=off; distill uses LRA_TYPESAFE=distill; official Track 2 stays off.",
+      "status": "met",
+      "explanation": "DEFAULT_MODE and LOOP_V1_TYPESAFE are the constant off. resolve_typesafe_mode() with an empty env and with LRA_TYPESAFE='' both returned off (default_mode_is_off=true). LRA_TYPESAFE=distill resolved to distill; LRA_TYPESAFE=inloop resolved to inloop (Track 1 only). --plan emitted resolved_mode=off, official_track2_stays_off=true, distill_uses_lra_typesafe_distill=true. --route on CallElimCorrect.substOldPostSubset with default flags skipped reason=typesafe_off (mode=off, called_typesafe=False). --route --typesafe distill --fixture routed mode=distill used_fixture=true called_typesafe=true. --route --typesafe distill --official-track2 skipped reason=official_track2_off (mode=off, called_typesafe=False) even though distill was requested. LRA_OFFICIAL_TRACK2=1 and LRA_TRACK=official_track2 also force off. This is additive on Leanstral, not a replacement, and not official Track 2.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-off.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-distill.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-track2.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Score is a rubric index; Jev does not generate Lean.",
+      "status": "met",
+      "explanation": "likely_shorter and elab_risk_if_automated are Score questions with ordered 3-level criteria (legend 0=longer or same / elab likely better or same, 1=modest cut ~10% / elab unclear, 2=large cut \u226530% / elab likely worse). SCORE_IS_RUBRIC_INDEX=true. The distill fixture returned likely_shorter=0.0 with legend 0='longer or same', which is rubric level 0, not a probability; self-check likely_shorter_not_probability=true and skip_llm_on_rubric_level_0=true (tight reference AND score<1.0). A custom fixture at rubric level 2 plus spend_llm=0.8 set spend_llm_on_custom_level_2=true. JEV_GENERATES_LEAN=false; AST forbids llm_router/generate_text imports and generate_text calls. RouteResult.lean_text/tactics/proof_text are always null; jev_generated_lean=false on off, distill fixture, and official Track 2 paths. Jev answers are Choice/Noul/Score only. arena_score=null. No lake compile and no Leanstral completion.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-distill.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+        "--route",
+        "--name",
+        "CallElimCorrect.substOldPostSubset"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-off.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+        "--route",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--typesafe",
+        "distill",
+        "--fixture"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-distill.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+        "--route",
+        "--name",
+        "CallElimCorrect.substOldPostSubset",
+        "--typesafe",
+        "distill",
+        "--official-track2"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/validation/route-track2.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-019/outputs/typesafe_router.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "a8591ed10581c1be09a3a5ff751f38716a450026",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "typesafe_router_py_sha256": "e251fc43a12cf06e2f89c9032b2f44faf78426d1cae79cabfca6c8d4cf9f83c8",
+    "protocol": "LRA/v1",
+    "pr": "PR-9",
+    "lrah": "LRAH-006",
+    "default_lra_typesafe": "off",
+    "model_id": "jev-latest",
+    "score_is_rubric_index": true,
+    "jev_generates_lean": false,
+    "imports_typesafe_inference": true,
+    "imports_typesafe_sdk": false,
+    "typesafe_inference_module_present": false,
+    "official_track2_stays_off": true,
+    "additive_not_replacement": true,
+    "loop_v1_typesafe": "off",
+    "hardware_class": "spark_gb10",
+    "writes_arena_scores_into_manuscript": false,
+    "model_or_solver_experiment": "TypeSafe Jev router + CI fixtures; no live TypeSafe POST; in-tree typesafe_inference.py absent in this checkout; not a scored Arena run and not official Track 2"
+  },
+  "limitations": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py is not present in this ipfs_accelerate checkout (git ef2415689acbd142a8e8e57e70e3e29b608b1c0f). The router still AST-imports that module and fail-closes live calls; CI uses FixtureClient rather than a second typesafe-sdk HTTP client.",
+    "No live TYPESAFE_API_KEY call was made. Distill fixture answers are canned rubric indexes, not vendor Jev measurements, and are not Arena scores.",
+    "This task does not write policy/open_policy_v1.json (not an allowed output). Distill mode logs (features, answers, Lean outcome) and leaves policy writing to a later distill run on the 15.",
+    "Loop v1 / official Track 2 keep LRA_TYPESAFE=off. This router is additive on Leanstral, not a replacement generator.",
+    "No lake compile, no Leanstral completion, no LOCK_EX, and no Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}

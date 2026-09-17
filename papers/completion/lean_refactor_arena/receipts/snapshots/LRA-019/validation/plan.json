@@ -1,0 +1,112 @@
+{
+  "additive_not_replacement": true,
+  "allowed_modes": [
+    "off",
+    "distill",
+    "inloop"
+  ],
+  "arena_score": null,
+  "catalog_kinds": {
+    "calc_structure_worth_keeping": "noul",
+    "elab_risk_if_automated": "score",
+    "hammer_before_llm": "noul",
+    "likely_shorter": "score",
+    "neighbor_style_match": "choice",
+    "putnam_aesop_plausible": "noul",
+    "reference_already_tight": "noul",
+    "rewrite_family": "choice",
+    "spend_llm": "noul",
+    "statement_in_proof_duplicated": "noul",
+    "uses_sorry_or_admit": "noul",
+    "version_fragile": "noul"
+  },
+  "choice_question_keys": [
+    "rewrite_family",
+    "neighbor_style_match"
+  ],
+  "compiled": false,
+  "default_mode": "off",
+  "distill_policy_path": "papers/completion/lean_refactor_arena/policy/open_policy_v1.json",
+  "distill_uses_lra_typesafe_distill": true,
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "imports_typesafe_inference": true,
+  "imports_typesafe_sdk": false,
+  "inloop_is_track1_only": true,
+  "jev_generates_lean": false,
+  "key_configured": false,
+  "key_env_names": [
+    "TYPESAFE_API_KEY",
+    "ipfs_accelerate_py_TYPESAFE_API_KEY",
+    "IPFS_ACCELERATE_PY_TYPESAFE_API_KEY",
+    "IPFS_DATASETS_PY_TYPESAFE_API_KEY"
+  ],
+  "likely_shorter_criteria": [
+    "longer or same",
+    "modest cut around 10 percent",
+    "large cut of 30 percent or more"
+  ],
+  "likely_shorter_legend": {
+    "0": "longer or same",
+    "1": "modest cut around 10 percent",
+    "2": "large cut of 30 percent or more"
+  },
+  "llama_server_started": false,
+  "loop_v1_typesafe": "off",
+  "lrah": "LRAH-006",
+  "model": "jev-latest",
+  "n_catalog": 12,
+  "noul_question_keys": [
+    "hammer_before_llm",
+    "reference_already_tight",
+    "version_fragile",
+    "putnam_aesop_plausible",
+    "calc_structure_worth_keeping",
+    "statement_in_proof_duplicated",
+    "uses_sorry_or_admit",
+    "spend_llm"
+  ],
+  "official_track2": false,
+  "official_track2_stays_off": true,
+  "ok": true,
+  "pr": "PR-9",
+  "protocol": "LRA/v1",
+  "resolved_mode": "off",
+  "route_question_keys": [
+    "rewrite_family",
+    "hammer_before_llm",
+    "reference_already_tight",
+    "likely_shorter",
+    "elab_risk_if_automated",
+    "version_fragile",
+    "putnam_aesop_plausible",
+    "calc_structure_worth_keeping",
+    "statement_in_proof_duplicated",
+    "uses_sorry_or_admit",
+    "neighbor_style_match",
+    "spend_llm"
+  ],
+  "router_posts_to_typesafe": false,
+  "score_is_rubric_index": true,
+  "score_levels": {
+    "elab_risk_if_automated": [
+      "elab likely better or same",
+      "elab unclear",
+      "elab likely worse"
+    ],
+    "likely_shorter": [
+      "longer or same",
+      "modest cut around 10 percent",
+      "large cut of 30 percent or more"
+    ]
+  },
+  "score_question_keys": [
+    "likely_shorter",
+    "elab_risk_if_automated"
+  ],
+  "typesafe_inference_available": false,
+  "typesafe_inference_error": "ModuleNotFoundError: No module named 'ipfs_accelerate_py.typesafe_inference'",
+  "typesafe_inference_exists": false,
+  "typesafe_inference_path": "external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py",
+  "typesafe_systemone_url": "https://api.typesafe.ai/v1/systemone",
+  "writes_policy_by_default": false
+}

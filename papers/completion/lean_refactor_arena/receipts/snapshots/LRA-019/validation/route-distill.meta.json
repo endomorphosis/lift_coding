@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+    "--route",
+    "--name",
+    "CallElimCorrect.substOldPostSubset",
+    "--typesafe",
+    "distill",
+    "--fixture"
+  ],
+  "cwd": ".",
+  "exit_code": 0
+}
