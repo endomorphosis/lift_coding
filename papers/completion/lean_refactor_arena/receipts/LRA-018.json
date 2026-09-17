@@ -1,0 +1,175 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-018",
+  "status": "complete",
+  "completed_at": "2026-09-17T01:33:35.767161+00:00",
+  "completion_mode": "warm-up runbook plus freeze file schema wired to verify_lra_batch --require-complete; operator command runs 15 problems on Spark with hardware_class=spark_gb10; completing requires verifier PASS; does not write Arena scores into the manuscript; not official Track 2",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/RUNBOOK.md": "c07fb0a706d26831c72bf15c6a164923c14a8950439ee2e52c23fcbee73aa918",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/audit_runbook.py": "4929fdc161260e077394955568f53a2e5c8e28dbbb107e1cabdd46d1deb0b2bf",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/run_freeze.json": "fb1b6a654c6ba0df5ec72d69cd0365e6fee940fb53f4ebb9cfecf0587895899d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.json": "39aa65a0c6899930a2607135427db5c3f08b48eca3f47d13eff058b9ee61716e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.meta.json": "ca704f09691fde912393a9ee2c18a2973c274cf7b32cd1d3e1e08a8f98371120",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.stdout.log": "39aa65a0c6899930a2607135427db5c3f08b48eca3f47d13eff058b9ee61716e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/git-head.txt": "853019ac6c2376072a7696152cf6d6ab9b320e269baccb2a5ea509ad7ff6f3a7",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/ipfs_datasets-head.txt": "c3e3ae63b82b05affb19d665c3018c97f689b5ca9d497210e9d8f8bc84c91b94",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.json": "c8e1963caf1b2e8177405a4021a34f05431ba596f93329a000446221d11eab36",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.meta.json": "54d4a015c918b451f9ef6c3f1f43a89f19166bb875fec0458fe976041079b7d8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.stdout.log": "c8e1963caf1b2e8177405a4021a34f05431ba596f93329a000446221d11eab36",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/probe-health.json": "398a715532a03463a22b73c3e5896c7e4629766553ad8dc3bbf66848b4a998df",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/probe-health.meta.json": "e7e459be0d72a481316072ff0d34b588cd70bc30aceee05a500df07955ec3b5c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/probe-health.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/probe-health.stdout.log": "398a715532a03463a22b73c3e5896c7e4629766553ad8dc3bbf66848b4a998df",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/schedule.json": "b7f245ccb700b22def402384ce85f80b01b1762ddf4f4e8e9cb4852a39b7371e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/schedule.meta.json": "70976a6cd26df72d77e8a7457fc4ce2734ec7d02bebd5b55831b66effb080331",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/schedule.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/schedule.stdout.log": "b7f245ccb700b22def402384ce85f80b01b1762ddf4f4e8e9cb4852a39b7371e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.json": "abb29b6166da5dc77d3cdc445a33a7f6871acf5f8db7cfb6539a81d0f63c7d1b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.meta.json": "c80c112adfb4ee5b686abc4b5ecd537cf0291d1f12b2c6424f19cc6b490ae12a",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.stdout.log": "abb29b6166da5dc77d3cdc445a33a7f6871acf5f8db7cfb6539a81d0f63c7d1b"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/RUNBOOK.md": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/RUNBOOK.md",
+    "papers/completion/lean_refactor_arena/evidence/run_freeze.json": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/run_freeze.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Operator command runs 15 problems on Spark with hardware_class=spark_gb10.",
+      "status": "met",
+      "explanation": "harness/RUNBOOK.md records the operator command IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART=0 LRA_HARDWARE=spark_gb10 LRA_TYPESAFE=off LRA_GENERATOR=leanstral /usr/bin/python3.12 papers/completion/lean_refactor_arena/harness/run_warmup.py --run --receipts-dir papers/completion/lean_refactor_arena/submissions/warmup --network deny. evidence/run_freeze.json operator_command repeats that argv with n_problems=15 and hardware_class=spark_gb10. run_warmup.py --plan exited 0 with n_problems=15, hardware_class=spark_gb10, arena_score=null, official_score=null, and the 15 frozen JSONL names. --probe-health returned HTTP 200 on http://172.17.0.1:8080/health with hardware_class=spark_gb10, autostart=0, lock_ex_taken_by_client=false, llama_server_started=false. verify_lra_batch --schedule listed n_scheduled=15 under frozen SHA-256 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804. Audit of the runbook/freeze set operator_command_runs_15_on_spark_gb10=true. This is Spark-dev, not official Track 2.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/RUNBOOK.md",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/run_freeze.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/probe-health.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/schedule.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.json"
+      ]
+    },
+    {
+      "criterion": "Completing requires verify_lra_batch --require-complete PASS.",
+      "status": "met",
+      "explanation": "The runbook states that verify_lra_batch.py --require-complete is the only process allowed to declare the warm-up run complete, with exit 0, status=PASS, and complete=true; incomplete is not success. run_freeze.json completion_authority.command_flag is --require-complete, required_status=PASS, required_exit_code=0, gates=[digest, statement_bind, all_tags, no_sorry, complete], imports_law_to_action_verify_batch=false. tools/verify_lra_batch.py --self-check exited 0 with ok=true, require_complete=true, and fail_closed.complete_cli status=PASS complete=true exit_code=0 on a compact 15-problem fixture (also fail-closed mutations exit 2). Operator completing argv is /usr/bin/python3.12 papers/completion/lean_refactor_arena/tools/verify_lra_batch.py --receipts-dir papers/completion/lean_refactor_arena/submissions/warmup --require-complete. Audit set completing_requires_verify_lra_batch_require_complete_pass=true.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/RUNBOOK.md",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/run_freeze.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.json"
+      ]
+    },
+    {
+      "criterion": "Does not write Arena scores into the manuscript.",
+      "status": "met",
+      "explanation": "This task did not edit manuscript/main.tex, manuscript/warmup_table.tex, or manuscript/main.pdf. Frozen manuscript SHA-256 values remain main.tex f871de146fbd152e42c85e80fa7216f4d51ea3a14fdda9604c94418e63b12466, warmup_table.tex f67e4f6e2ebac1dacd4adcd412fb2708713e06a173a80c46731b99ee60112f7e, main.pdf 11a2813b17dfb702ee400c08c9274abaccc18932a04a8fc6ea77e17536e32ffe. The runbook forbids writing arena_score / official_score / token_savings into those files. run_freeze.json sets arena_score=null, official_score=null, writes_arena_scores_into_manuscript=false, manuscript.arena_scores_written=false. Audit confirmed arena_score is absent from main.tex and warmup_table.tex, warmup_table has no Score column, and the manuscript still disclaims Arena leaderboard scores. Verifier self-check writes_arena_scores=false and rejects a fixture with arena_score=0.42. Plan and schedule payloads keep arena_score JSON null.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/RUNBOOK.md",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/run_freeze.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/plan.stdout.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+        "--probe-health"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/probe-health.stdout.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/self-check.stdout.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+        "--schedule"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/schedule.stdout.log"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/audit_runbook.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/validation/audit.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-018/outputs/audit_runbook.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "800fe3d162221e58285014dcd3c1bb3d4ada52de",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "34d5a079902887e8d796d98443bce8206458cfbf",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "hardware_class": "spark_gb10",
+    "protocol": "LRA/v1",
+    "loop_version": "v1",
+    "runbook_sha256": "c07fb0a706d26831c72bf15c6a164923c14a8950439ee2e52c23fcbee73aa918",
+    "run_freeze_sha256": "fb1b6a654c6ba0df5ec72d69cd0365e6fee940fb53f4ebb9cfecf0587895899d",
+    "run_freeze_schema": "lra-run-freeze/v1",
+    "verify_lra_batch_py_sha256": "bbae452ef0e05e69bc1009a6498a9907509e3cc8fa0adbfbd5bb9868353a801d",
+    "run_warmup_py_sha256": "c9fbade6602684a515793822d640774c6c07cec13986de3b2d499c5a8177b4a7",
+    "lra_prompt_txt_sha256": "57036f2bb94d8d8b38d77096ad92a2e615571addee7d01c72e104edaacfee96a",
+    "weight_revision": "abcc5ce2528c6375148d41dac6dce20f06c339f4",
+    "weight_cid": "bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i",
+    "nvfp4_bytes": 67135119264,
+    "sm80_derivative_sha256": null,
+    "manuscript_main_tex_sha256": "f871de146fbd152e42c85e80fa7216f4d51ea3a14fdda9604c94418e63b12466",
+    "manuscript_warmup_table_sha256": "f67e4f6e2ebac1dacd4adcd412fb2708713e06a173a80c46731b99ee60112f7e",
+    "writes_arena_scores_into_manuscript": false,
+    "self_check_require_complete_pass": true,
+    "live_health_ok": true,
+    "live_health_status_code": 200,
+    "lock_ex_taken_by_client": false,
+    "llama_server_started": false,
+    "added_to_paper_supervisors_papers": false,
+    "model_or_solver_experiment": "runbook+freeze for Spark-dev 15-problem operator command; verifier --require-complete PASS on compact synthetic receipts; not a live 15-problem lake campaign and not official Track 2"
+  },
+  "limitations": [
+    "This task lands the operator runbook and freeze file schema. It does not execute a live 15-problem lake compile campaign on host elan under the sealed validation HOME.",
+    "verify_lra_batch --self-check proved --require-complete PASS on compact synthetic receipts (header+statement plus tactic rfl). That is the verifier gate, not kernel correctness of those fixtures and not a scored Arena run.",
+    "Tag-pinned elan lake/lean binaries are not installed under a sealed ipfs-accelerate-validation-home-* HOME. That is a recorded capability gap, not PATH lean usability.",
+    "The local NVFP4 GGUF (CID bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i, 67135119264 bytes) was not present on this host. scripts/run_leanstral_ephemeral.py is absent. docker0 /health on 172.17.0.1:8080 was HTTP 200; 127.0.0.1:8080 was connection-refused.",
+    "SM80 derivative SHA is null. Unpublished SHA 3fe4e64d is not cited as the LRA pin. Completing this task is not official Track 2.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were written into the manuscript or the freeze file.",
+    "The implementation checkpoint directory was not writable on this host; coordinate checkpoints are best-effort."
+  ]
+}
