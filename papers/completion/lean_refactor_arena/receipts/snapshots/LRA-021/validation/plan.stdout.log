@@ -1,0 +1,233 @@
+{
+  "aesop_if_imported": true,
+  "arena_score": null,
+  "critical_path_note": "Not on the 30 Sep critical path.",
+  "first_putnam_name": "putnam_1964_a4",
+  "first_putnam_tactics": [
+    "rfl",
+    "decide",
+    "omega",
+    "simp_all",
+    "aesop"
+  ],
+  "first_strata_name": "CallElimCorrect.substOldPostSubset",
+  "first_strata_tactics": [
+    "rfl",
+    "decide",
+    "omega",
+    "simp_all"
+  ],
+  "fixed_tactics": [
+    "rfl",
+    "decide",
+    "omega",
+    "simp_all"
+  ],
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "generator": "lake_native",
+  "goal_snapshot_required": false,
+  "hammer_006_claim": "Do not claim HAMMER-006 is LRA-ready.",
+  "hammer_006_lra_ready": false,
+  "jsonl_bytes": 113826,
+  "kernel_command_template": "{lake} env {lean} --json {source_file}",
+  "loop": "v2",
+  "lrah": "LRAH-005",
+  "measurement_argv_template": "{lake} env {lean} -DmaxHeartbeats=400000 --json {source_file}",
+  "n_records": 15,
+  "on_30_sep_critical_path": false,
+  "path": "A",
+  "path_b_implemented": false,
+  "pr": "PR-5",
+  "protocol": "LRA/v1",
+  "records": [
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "source": "strata",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Core.InitsUpdatesComm",
+      "source": "strata",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source": "physlib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "source": "physlib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "source": "physlib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "source": "cslib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "source": "cslib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "source": "arklib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "source": "arklib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": false,
+      "aesop_in_list": false,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "source": "arklib",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all"
+      ]
+    },
+    {
+      "aesop_imported": true,
+      "aesop_in_list": true,
+      "name": "putnam_1964_a4",
+      "source": "putnambench",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all",
+        "aesop"
+      ]
+    },
+    {
+      "aesop_imported": true,
+      "aesop_in_list": true,
+      "name": "putnam_1964_b2",
+      "source": "putnambench",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all",
+        "aesop"
+      ]
+    },
+    {
+      "aesop_imported": true,
+      "aesop_in_list": true,
+      "name": "putnam_1995_a3",
+      "source": "putnambench",
+      "tactics": [
+        "rfl",
+        "decide",
+        "omega",
+        "simp_all",
+        "aesop"
+      ]
+    }
+  ],
+  "run_lean_process": "run_lean_process",
+  "score": null,
+  "sorry_template": "statement + ' := by\\nsorry'",
+  "tactic_timeout_seconds": 120.0,
+  "uses_snapshot_goal": false,
+  "v1_runs_this": false
+}

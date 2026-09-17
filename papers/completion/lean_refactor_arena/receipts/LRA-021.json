@@ -1,0 +1,155 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-021",
+  "status": "complete",
+  "completed_at": "2026-09-17T01:00:56.400629+00:00",
+  "completion_mode": "loop v2 path A lake-native tactic try: sorry hole then tag-pinned lake env lean over rfl/decide/omega/simp_all/aesop-if-imported via run_lean_process; does not use LeanFrontend.snapshot_goal; does not claim HAMMER-006 is LRA-ready; not on the 30 Sep critical path",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py": "168d7ed3fdb0daa28ab0ece2d243a4748ea18e3c01ded1822ebd1a3b45a4e598",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/receipts/CallElimCorrect.substOldPostSubset/v4.26.0.json": "41918e98d6f6198b9a2ab08e283cb3906977853dd590b5b9fb93936ab7865797",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/receipts/lra_unsolved/v4.26.0.json": "feabfcd5470b350435225b2c5b53396d0c22ea553df43feac0970b1732eb8587",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/receipts/putnam_1964_a4/v4.26.0.json": "287e94c5deff4a9941d22017d40a5a7d59dda566aea4e72b8df38bcc2212653d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/git-head.txt": "193241eb6ed0d8ec4f8f072eff5a79f75a06fc12a66d7ff4ec9fa499dc1e7ea3",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/ipfs_datasets-head.txt": "c3e3ae63b82b05affb19d665c3018c97f689b5ca9d497210e9d8f8bc84c91b94",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.meta.json": "1d2b6b5d6a1818a4c448fd5c15921843d36003ab1a74b346a1d42f480631a07c",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.stdout.log": "886d1f9879eca0dc5ec0eef6188dd593cc91abd7b1024b05403307c00f72443f",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/probe-toolchain.meta.json": "0aae74332f662a02f29dbdf9be85333d51dabda31a619ae1e6f631ff1e2f6f44",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/probe-toolchain.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/probe-toolchain.stdout.log": "7033d8ae886dcc029fa3df139207a73dd08f03e63d907431ae3d45dd59aba7ae",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.json": "289e10193f06d6f5efb318398101b157d3296c65ba1716f52cc756b68d1738c8",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.meta.json": "72c0db5962588a617b7859088bf333f9ccf2b61fa70607d69228fa747cd3fa5f",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.stdout.log": "289e10193f06d6f5efb318398101b157d3296c65ba1716f52cc756b68d1738c8"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/harness/lake_native_try.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Loop v2 path A uses lake env lean tactic try; does not require LeanFrontend.snapshot_goal.",
+      "status": "met",
+      "explanation": "lake_native_try.py implements loop v2 path A (PR-5 / LRAH-005). It punches statement + \" := by\\nsorry\" via splice.statement_sorry_template / lake_candidate_source, then tries the fixed tactic list rfl, decide, omega, simp_all, and aesop only when `import Aesop` is present, each as tag-pinned `lake env lean -DmaxHeartbeats=400000 --json <file>` through lean_toolchain.run_lean_process. Self-check set loop=v2, path=A, uses_snapshot_goal=false, goal_snapshot_required=false, path_a_lake_env_lean=true, sorry_hole_then_tactic_list=true. Synthetic Strata CallElimCorrect.substOldPostSubset wrote the sorry hole first (sorryAx, not ok), then rfl failed and decide won and stopped (omega/simp_all not run; aesop omitted because Aesop is not imported). Putnam putnam_1964_a4 imported Aesop so the list ended with aesop; rfl/decide/omega/simp_all failed and aesop won. AST audit: snapshot_goal is not called, LeanFrontend and GoalSnapshot are not imported, and LeanFrontend.snapshot_goal remains PATH lean --json via run_bounded_process (unchanged_path_lean_json=true). No GoalSnapshot is required.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/receipts/CallElimCorrect.substOldPostSubset/v4.26.0.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/receipts/putnam_1964_a4/v4.26.0.json"
+      ]
+    },
+    {
+      "criterion": "Does not claim HAMMER-006 is LRA-ready.",
+      "status": "met",
+      "explanation": "HAMMER_006_LRA_READY is the constant False. Self-check and --plan emit hammer_006_lra_ready=false and hammer_006_claim=\"Do not claim HAMMER-006 is LRA-ready.\". Path B (LeanLakeFrontend / cwd+tag+lake env on a frontend sibling) is path_b_implemented=false. AST audit set hammer_006_lra_ready_constant=false and did not import LeanFrontend, GoalSnapshot, attempt_native_automation, or LeanReconstructor. LeanFrontend remains the HAMMER-006 PATH lean --json adapter and is not treated as lake-ready.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Not on the 30 Sep critical path.",
+      "status": "met",
+      "explanation": "ON_30_SEP_CRITICAL_PATH and V1_RUNS_THIS are False. Self-check set on_30_sep_critical_path=false, v1_runs_this=false, loop=v2, pr=PR-5, lrah=LRAH-005, and critical_path_note=\"Not on the 30 Sep critical path.\". --plan repeats those flags. Loop v1 (30 Sep / PR-10) does not run this argv loop. Live tag-pinned elan is not installed under the resolver HOME (capability gap); this task does not claim a 30 Sep warm-up run.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/probe-toolchain.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/lake_native_try.py",
+        "--self-check",
+        "--receipts-dir",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/receipts"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/lake_native_try.py",
+        "--plan"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/plan.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/harness/lake_native_try.py",
+        "--probe-toolchain"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/validation/probe-toolchain.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-021/outputs/lake_native_try.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "d93fd377169fc19ed4c53aecef3a2a0494af93ee",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "ipfs_datasets_git_head": "34d5a079902887e8d796d98443bce8206458cfbf",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "first_strata_name": "CallElimCorrect.substOldPostSubset",
+    "first_putnam_name": "putnam_1964_a4",
+    "fixed_tactics": [
+      "rfl",
+      "decide",
+      "omega",
+      "simp_all"
+    ],
+    "aesop_if_imported": true,
+    "kernel_command_template": "{lake} env {lean} --json {source_file}",
+    "measurement_argv_template": "{lake} env {lean} -DmaxHeartbeats=400000 --json {source_file}",
+    "tactic_timeout_seconds": 120.0,
+    "lake_native_try_py_sha256": "168d7ed3fdb0daa28ab0ece2d243a4748ea18e3c01ded1822ebd1a3b45a4e598",
+    "protocol": "LRA/v1",
+    "loop": "v2",
+    "path": "A",
+    "pr": "PR-5",
+    "lrah": "LRAH-005",
+    "hammer_006_lra_ready": false,
+    "on_30_sep_critical_path": false,
+    "uses_snapshot_goal": false,
+    "v1_runs_this": false,
+    "model_or_solver_experiment": "none; cpu-heavy loop v2 path A lake-native tactic try with synthetic tag-pinned lake env lean in sealed HOME; no Arena scores",
+    "self_check_ok": true,
+    "live_elan_installed": false,
+    "capability_gap": true,
+    "generator": "lake_native"
+  },
+  "limitations": [
+    "No tag-pinned elan lean/lake binaries are installed under the resolver elan home (Path.home()/.elan or ELAN_HOME). Live lake-native tactic try on Strata/Putnam oleans is a recorded capability gap, not PATH lean usability and not LeanFrontend.snapshot_goal.",
+    "Authoritative validation uses a sealed PATH (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin) and a fresh HOME named ipfs-accelerate-validation-home-*; operator ~/.elan is unavailable there as well.",
+    "Self-check plants a tag-pinned synthetic lake/lean that implements `lake env <lean> -DmaxHeartbeats=400000 --json <file>` and a tactic oracle (rfl fails; decide/omega/simp_all close non-Aesop goals; aesop closes only with import Aesop). Those binaries are not Lean 4 v4.26.0 and do not elaborate Mathlib/Strata oleans.",
+    "/tmp is noexec in this environment; the synthetic toolchain is planted under XDG_STATE_HOME or HOME so shebang scripts can exec.",
+    "Loop v1 (30 Sep critical path) does not run this module. Path B (lake-aware LeanFrontend sibling) is not implemented.",
+    "Do not claim HAMMER-006 is LRA-ready. LeanFrontend.snapshot_goal remains PATH lean --json via run_bounded_process.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "This task did not call Leanstral, did not LOCK_EX, and did not start llama-server.",
+    "The implementation checkpoint directory may be unwritable on this host; coordinate checkpoints are best-effort."
+  ]
+}
