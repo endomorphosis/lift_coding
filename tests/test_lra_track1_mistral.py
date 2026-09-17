@@ -84,6 +84,13 @@ class Track1MistralTests(unittest.TestCase):
         self.assertIn("have Hlen1", out)
         self.assertNotIn("grind", out)
         self.assertIn("simp_all", out)
+        tagged = mask.hammer_repair(
+            "  case update_some =>\n    simp_all\n",
+            "  induction Hup\n  case update_none =>\n    simp_all\n",
+            [{"data": "Case tag `update_some` not found."}],
+        )
+        self.assertNotIn("update_some", tagged)
+        self.assertIn("induction Hup", tagged)
 
     def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
         import draft_fanout as fanout

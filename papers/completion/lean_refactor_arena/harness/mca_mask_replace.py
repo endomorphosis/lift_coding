@@ -328,8 +328,25 @@ def few_shot_prompt(target: Mapping[str, Any], shots: Sequence[Mapping[str, Any]
     )
 
 
+_UNKNOWN_TACTICS = frozenset(
+    {
+        "grind",
+        "aesop",
+        "exact?",
+        "apply?",
+        "hint",
+        "native_decide",
+        "decide+",
+        "tauto",
+        "linarith",
+        "nlinarith",
+        "ring_nf",
+    }
+)
+
+
 def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]]) -> str:
-    """Local tactician: restore missing PCA names, swap unknown tactics, close goals.
+    """Local tactician: restore PCA glue, drop illegal tactics, then simp_all/omega.
 
     Strata/CSLib lake projects do not depend on Aesop. Portable closers are
     ``simp_all`` and ``omega``. Aesop is only safe on Putnam's Mathlib+Aesop lake.
@@ -343,11 +360,31 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
             restore_lines = [line for line in reference.splitlines() if ident in line]
         present = {line.strip() for line in out.splitlines()}
         if restore_lines and restore_lines[0].strip() not in present:
-            # Re-attach the have/hypothesis Leanstral dropped (PCA glue).
             out = restore_lines[0] + "\n" + out
-    out = re.sub(r"\bgrind\b", "simp_all", out)
-    out = re.sub(r"\bexact\?", "simp_all", out)
-    out = re.sub(r"\bapply\?", "simp_all", out)
+    for tag in re.findall(r"Case tag `([^`]+)` not found", blob):
+        out = re.sub(rf"(?m)^[ \t]*case {re.escape(tag)}\b.*$", "", out)
+    ref_ind = [line for line in reference.splitlines() if line.strip().startswith("induction ")]
+    if ref_ind and not any(line.strip().startswith("induction ") for line in out.splitlines()):
+        out = ref_ind[0] + "\n" + out
+    cleaned: list[str] = []
+    for line in out.splitlines():
+        stripped = line.strip()
+        head = stripped.split()[0] if stripped else ""
+        if head.rstrip(";") in _UNKNOWN_TACTICS or stripped.rstrip(";") in _UNKNOWN_TACTICS:
+            indent = line[: len(line) - len(line.lstrip())]
+            cleaned.append(f"{indent}simp_all")
+            continue
+        cleaned.append(line)
+    out = "\n".join(cleaned)
+    if "unknown tactic" in blob.lower():
+        # Error often omits the name; drop leftover non-Lean tokens on their own line.
+        again: list[str] = []
+        for line in out.splitlines():
+            token = line.strip().split()[0] if line.strip() else ""
+            if token.rstrip(";") in _UNKNOWN_TACTICS:
+                continue
+            again.append(line)
+        out = "\n".join(again)
     if "unsolved goals" in blob.lower() or "unknown tactic" in blob.lower() or "Unknown identifier" in blob:
         if "all_goals try simp_all" not in out:
             out = out.rstrip() + "\n  all_goals try simp_all\n  try omega"
@@ -603,8 +640,13 @@ def run_problem(
             }
         )
         if str(item.get("kind") or "").startswith("leanstral") and not compiled.get("theorem_ok"):
-            repaired = hammer_repair(item["tactics"], tactics, compiled.get("errors") or [])
-            if repaired != item["tactics"]:
+            current = item["tactics"]
+            current_errors = compiled.get("errors") or []
+            last_kind = str(item["kind"])
+            for pass_i in (1, 2):
+                repaired = hammer_repair(current, tactics, current_errors)
+                if repaired == current:
+                    break
                 compiled_h = lra_kb.compile_tactics(
                     record,
                     repaired,
@@ -612,9 +654,10 @@ def run_problem(
                     timeout=timeout,
                     restore=restore,
                 )
+                last_kind = f"{item['kind']}_hammer{pass_i}"
                 rows.append(
                     {
-                        "kind": str(item["kind"]) + "_hammer",
+                        "kind": last_kind,
                         "generator": "leanstral+simp_all/omega",
                         "n_chars": len(repaired),
                         "tactics_head": repaired[:240],
@@ -625,6 +668,10 @@ def run_problem(
                         },
                     }
                 )
+                if compiled_h.get("theorem_ok"):
+                    break
+                current = repaired
+                current_errors = compiled_h.get("errors") or []
     if ablate and holes:
         rows.extend(
             ablate_holes(
