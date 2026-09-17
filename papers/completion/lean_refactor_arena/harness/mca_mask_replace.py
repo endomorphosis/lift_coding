@@ -328,6 +328,32 @@ def few_shot_prompt(target: Mapping[str, Any], shots: Sequence[Mapping[str, Any]
     )
 
 
+def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]]) -> str:
+    """Local tactician: restore missing PCA names, swap unknown tactics, close goals.
+
+    Strata/CSLib lake projects do not depend on Aesop. Portable closers are
+    ``simp_all`` and ``omega``. Aesop is only safe on Putnam's Mathlib+Aesop lake.
+    """
+
+    blob = "\n".join(str(item.get("data") or "") for item in errors)
+    out = draft
+    for ident in re.findall(r"Unknown identifier `([^`]+)`", blob):
+        restore_lines = [line for line in reference.splitlines() if ident in line.split()]
+        if not restore_lines:
+            restore_lines = [line for line in reference.splitlines() if ident in line]
+        present = {line.strip() for line in out.splitlines()}
+        if restore_lines and restore_lines[0].strip() not in present:
+            # Re-attach the have/hypothesis Leanstral dropped (PCA glue).
+            out = restore_lines[0] + "\n" + out
+    out = re.sub(r"\bgrind\b", "simp_all", out)
+    out = re.sub(r"\bexact\?", "simp_all", out)
+    out = re.sub(r"\bapply\?", "simp_all", out)
+    if "unsolved goals" in blob.lower() or "unknown tactic" in blob.lower() or "Unknown identifier" in blob:
+        if "all_goals try simp_all" not in out:
+            out = out.rstrip() + "\n  all_goals try simp_all\n  try omega"
+    return out
+
+
 def assemble_candidates(
     record: Mapping[str, Any],
     tactics: str,
@@ -576,6 +602,29 @@ def run_problem(
                 **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
             }
         )
+        if str(item.get("kind") or "").startswith("leanstral") and not compiled.get("theorem_ok"):
+            repaired = hammer_repair(item["tactics"], tactics, compiled.get("errors") or [])
+            if repaired != item["tactics"]:
+                compiled_h = lra_kb.compile_tactics(
+                    record,
+                    repaired,
+                    state_root=state_root,
+                    timeout=timeout,
+                    restore=restore,
+                )
+                rows.append(
+                    {
+                        "kind": str(item["kind"]) + "_hammer",
+                        "generator": "leanstral+simp_all/omega",
+                        "n_chars": len(repaired),
+                        "tactics_head": repaired[:240],
+                        "n_holes": 0,
+                        **{
+                            k: compiled_h.get(k)
+                            for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")
+                        },
+                    }
+                )
     if ablate and holes:
         rows.extend(
             ablate_holes(

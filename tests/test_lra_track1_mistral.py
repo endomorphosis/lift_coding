@@ -74,6 +74,17 @@ class Track1MistralTests(unittest.TestCase):
         self.assertEqual(shot["filled_tokens"], 414)
         self.assertGreater(shot["n_holes"], 0)
 
+    def test_hammer_restores_identifier_and_rewrites_grind(self) -> None:
+        import mca_mask_replace as mask
+
+        reference = "  have Hlen1 : ks.length = vs.length := by sorry\n  exact Hlen1\n"
+        draft = "  grind\n  exact Hlen1\n"
+        errors = [{"data": "Unknown identifier `Hlen1`"}, {"data": "unknown tactic"}]
+        out = mask.hammer_repair(draft, reference, errors)
+        self.assertIn("have Hlen1", out)
+        self.assertNotIn("grind", out)
+        self.assertIn("simp_all", out)
+
     def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
         import draft_fanout as fanout
 
