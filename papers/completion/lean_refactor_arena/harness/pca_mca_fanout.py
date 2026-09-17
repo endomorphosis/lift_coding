@@ -42,6 +42,9 @@ LAKE_READY = (
     "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
     "Cslib.SKI.parallelReduction_diamond",
     "Cslib.CCS.bisimilarity_congr_choice",
+    "putnam_1964_a4",
+    "putnam_1964_b2",
+    "putnam_1995_a3",
 )
 
 if str(HERE) not in sys.path:
