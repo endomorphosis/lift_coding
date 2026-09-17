@@ -295,10 +295,17 @@ def keep_calc_only(text: str) -> str:
     return "\n".join(kept[:40]) if kept else text
 
 
-def guided_drafts(tactics: str, families: Sequence[Mapping[str, Any]]) -> list[lra_fan.Draft]:
+def guided_drafts(
+    tactics: str,
+    families: Sequence[Mapping[str, Any]],
+    counts: Optional[Mapping[str, float]] = None,
+) -> list[lra_fan.Draft]:
     drafts: list[lra_fan.Draft] = []
     seen: set[str] = set()
     names = {item["family"] for item in families}
+    counts = dict(counts or {})
+    if counts.get("n_rw") or counts.get("n_calc") or counts.get("n_omega") or counts.get("n_ring") or counts.get("n_induction"):
+        names.add("algebraic_simplification")
     lra_fan._push(drafts, seen, "reference", tactics, ("identity", "pca_keep"))
     if "strength_reduction" in names or "dead_code" in names:
         lra_fan._push(
@@ -380,12 +387,27 @@ def fanout_questions(drafts: Sequence[lra_fan.Draft], *, Choice: Any, Noul: Any,
         item.draft_id: f"{item.family}; ops={','.join(item.ops)}; {item.n_chars} chars"
         for item in drafts
     }
+    family_criteria = {
+        "dead_code": "Drop unused have/obtain/rename_i or simp-at-before-simp_all",
+        "search_space": "Shrink intros/apply search; never delete a case arm",
+        "loop_invariant": "Drop have-facts after induction",
+        "strength_reduction": "Replace simp-at runs with simp_all",
+        "algebraic_simplification": "Collapse rw/calc/ring/omega into simp or omega",
+        "pca_keep": "Keep the reference; PCA says it is already the dominant style",
+    }
     return {
+        "best_compiler_family": Choice(
+            instructions=(
+                "Which compiler family should lake try first on this AST given PCA/MCA? "
+                "Do not write Lean."
+            ),
+            criteria=family_criteria,
+        ),
         "best_first_draft": Choice(
             instructions=(
                 "Which draft id should lake-compile first as a refactor of the reference? "
-                "Prefer MCA-guided dead_code or strength_reduction if they preserve every case arm. "
-                "Do not write Lean."
+                "Prefer MCA-guided dead_code, strength_reduction, or algebraic_simplification "
+                "if they preserve every case arm. Do not write Lean."
             ),
             criteria=criteria,
         ),
@@ -425,7 +447,7 @@ def rank_problem(
     tactics = lra_fan.tactic_block(record)
     features = count_tactics(tactics)
     families = amenable_families(features, model)
-    drafts = guided_drafts(tactics, families)
+    drafts = guided_drafts(tactics, families, features)
     state = fanout_state(record, features=features, families=families, drafts=drafts, pca=model)
     payload = {
         "name": record.get("name"),
@@ -463,6 +485,9 @@ def rank_problem(
             "model": getattr(result, "model", None),
             "usage": dict(getattr(result, "usage", None) or {}),
             "wall_ms": (time.perf_counter() - started) * 1000.0,
+            "best_compiler_family": getattr(
+                (getattr(result, "choices", None) or {}).get("best_compiler_family"), "choice", None
+            ),
             "best_first_draft": getattr(best, "choice", None),
             "best_confidence": getattr(best, "confidence", None),
             "dead_code_safe": getattr(nouls.get("dead_code_safe"), "noul", None),
@@ -563,7 +588,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--self-check", action="store_true")
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--lake", action="store_true", help="lake-compile TypeSafe top drafts on baked clones")
-    parser.add_argument("--names", default=",".join(LAKE_READY[:2]))
+    parser.add_argument("--names", default=",".join(LAKE_READY))
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     parser.add_argument("--state-root", type=Path, default=Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake")
     args = parser.parse_args(list(argv) if argv is not None else None)
@@ -592,12 +617,20 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             catalog = {item["id"]: item for item in (row.get("catalog") or [])}
             # Reconstruct tactics for top picks from guided_drafts.
             families = row.get("amenable") or []
-            drafts = guided_drafts(tactics, families)
+            drafts = guided_drafts(tactics, families, row.get("features") or {})
             by_id = {item.draft_id: item for item in drafts}
+            family_pick = row.get("best_compiler_family")
             picks = [row.get("best_first_draft")] + [item.get("id") for item in (row.get("top") or [])[:3]]
+            for draft in drafts:
+                if draft.family in {"algebraic_simplification", "strength_reduction", "pca_keep", "reference"}:
+                    picks.append(draft.draft_id)
+                if family_pick and draft.family == family_pick:
+                    picks.append(draft.draft_id)
             seen: set[str] = set()
             lake_rows = []
             for draft_id in picks:
+                if len(seen) >= 8:
+                    break
                 if not draft_id or draft_id in seen or draft_id not in by_id:
                     continue
                 seen.add(draft_id)
