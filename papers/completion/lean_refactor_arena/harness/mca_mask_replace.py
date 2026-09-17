@@ -32,7 +32,15 @@ LAKE_READY = (
     "CallElimCorrect.substOldPostSubset",
     "CallElimCorrect.extractedOldExprInVars",
     "Core.InitsUpdatesComm",
+    "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+    "Cslib.SKI.parallelReduction_diamond",
     "Cslib.CCS.bisimilarity_congr_choice",
+    "fundamental_theorem_of_variational_calculus'",
+    "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+    "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+    "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+    "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+    "interleaved_affine_gaps_imply_tensor_gaps",
 )
 
 if str(HERE) not in sys.path:
@@ -326,15 +334,25 @@ def run_problem(
     leanstral_text = None
     identity = None
     ledger = None
-    if call_leanstral and holes:
+    fill_holes = [hole for hole in holes if hole.family in {"strength_reduction", "algebraic_simplification"}]
+    if call_leanstral and fill_holes:
         lra_mistral.load_keyfiles()
         lra_mistral.pin_paths()
         ledger = lra_t1.ProblemLedger(name=f"{name}#mca-mask")
-        prompt = leanstral_prompt(record, skeleton, holes)
+        prompt = leanstral_prompt(record, mask_skeleton(tactics, fill_holes), fill_holes)
         leanstral_text, identity, _line = lra_mistral.generate_mistral(
             prompt, ledger, max_new_tokens=700, timeout=180.0
         )
-    candidates = assemble_candidates(record, tactics, holes, leanstral_text=leanstral_text)
+        holes_for_leanstral = fill_holes
+    else:
+        holes_for_leanstral = holes
+    candidates = assemble_candidates(record, tactics, holes, leanstral_text=None)
+    if leanstral_text:
+        extra = assemble_candidates(record, tactics, holes_for_leanstral, leanstral_text=leanstral_text)
+        kinds = {item["kind"] for item in candidates}
+        for item in extra:
+            if item["kind"] not in kinds:
+                candidates.append(item)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     restore = dest.read_bytes() if dest.is_file() else b""
@@ -428,7 +446,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--self-check", action="store_true")
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--no-leanstral", action="store_true")
-    parser.add_argument("--names", default=",".join(LAKE_READY[:2]))
+    parser.add_argument("--names", default=",".join(LAKE_READY))
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
