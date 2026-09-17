@@ -89,8 +89,67 @@ def compile_tactics(
     timeout: float,
     restore: bytes,
 ) -> dict[str, Any]:
-    clone = lra_cw.clone_dir(str(record["url"]), state_root)
     record = dict(record)
+    if str(record.get("source") or "") == "putnambench":
+        pins = lra_cw.iter_version_pins(record.get("version_info"))
+        kept = []
+        for pin in pins:
+            try:
+                lra_cw.resolve_pin(pin, require_installed=True)
+            except Exception:
+                continue
+            kept.append({pin.lean_tag: pin.git_commit})
+        record["version_info"] = kept
+        if not record["version_info"]:
+            return {
+                "ok": False,
+                "theorem_ok": False,
+                "module_exit_0": False,
+                "exit_code": -1,
+                "error": "no_installed_matching_toolchain",
+                "token_count": lra_loop.token_count(tactics),
+                "errors": [],
+                "arena_score": None,
+            }
+        split = lra_splice.split_statement_body(record)
+        patched = dict(record)
+        patched["src"] = lra_splice.lake_candidate_source(
+            header=split.header,
+            statement=split.statement,
+            tactic_block=tactics,
+        )
+        started = time.perf_counter()
+        receipts = lra_cw.compile_record(
+            patched,
+            timeout=timeout,
+            state_root=state_root,
+            network="allow",
+            require_oleans=False,
+            hardware_class=HARDWARE_CLASS,
+            skip_checkout=True,
+            abort_on_first_failure=True,
+        )
+        receipt = receipts[0].to_dict() if receipts else {"ok": False, "error": "no_receipt"}
+        stdout = str(receipt.get("stdout") or "")
+        errors = parse_lean_errors(stdout)
+        sorry = sorry_in_span(stdout, 1, 10**9)
+        timed_out = bool(receipt.get("timed_out"))
+        theorem_ok = not timed_out and not errors and not sorry
+        return {
+            "ok": bool(theorem_ok),
+            "theorem_ok": bool(theorem_ok),
+            "module_exit_0": receipt.get("exit_code") == 0 and not timed_out,
+            "exit_code": receipt.get("exit_code"),
+            "wall_ms": receipt.get("wall_ms"),
+            "error": receipt.get("error"),
+            "token_count": lra_loop.token_count(tactics),
+            "sorryAx": receipt.get("sorryAx"),
+            "sorry_in_theorem": sorry,
+            "errors": errors,
+            "compile_wall_ms_outer": (time.perf_counter() - started) * 1000.0,
+            "arena_score": None,
+        }
+    clone = lra_cw.clone_dir(str(record["url"]), state_root)
     record["version_info"] = installed_matching_pins(record, clone)
     if not record["version_info"]:
         return {
