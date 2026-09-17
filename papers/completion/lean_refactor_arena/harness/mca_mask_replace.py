@@ -394,7 +394,15 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
                 continue
             again.append(line)
         out = "\n".join(again)
-    if "unsolved goals" in blob.lower() or "unknown tactic" in blob.lower() or "Unknown identifier" in blob:
+    if "No goals to be solved" in blob:
+        out = re.sub(r"(?m)^[ \t]*all_goals try simp_all\s*$", "", out)
+        out = re.sub(r"(?m)^[ \t]*try omega\s*$", "", out)
+        # Drop a trailing extra simp_all that closed the last goal too early.
+        lines = out.splitlines()
+        while lines and lines[-1].strip() in {"simp_all", "try omega", "all_goals try simp_all"}:
+            lines.pop()
+        out = "\n".join(lines)
+    elif "unsolved goals" in blob.lower() or "unknown tactic" in blob.lower() or "Unknown identifier" in blob:
         if "all_goals try simp_all" not in out:
             out = out.rstrip() + "\n  all_goals try simp_all\n  try omega"
     return out
