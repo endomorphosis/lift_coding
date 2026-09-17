@@ -185,7 +185,9 @@ def template_fill(hole: Hole) -> str:
                 lemmas.extend(part.strip() for part in match.group(2).split(",") if part.strip())
         if lemmas:
             return f"{hole.indent}simp [{', '.join(lemmas)}]"
-        return f"{hole.indent}simp_all"
+        if "calc" in hole.original:
+            return f"{hole.indent}simp_all"
+        return f"{hole.indent}omega"
     if hole.family in {"dead_code", "loop_invariant"}:
         return ""  # drop the residual line
     return hole.original
@@ -252,6 +254,24 @@ def leanstral_prompt(record: Mapping[str, Any], skeleton: str, holes: Sequence[H
         f"SKELETON:\n{skeleton}\n\n"
         f"HOLES:\n{''.join(hole_docs)}\n"
         "Reply as:\n<<<MCA_0 family=...>>>\n<tactics>\n<<<MCA_1 family=...>>>\n<tactics>\n"
+    )
+
+
+def one_hole_prompt(record: Mapping[str, Any], tactics: str, hole: Hole) -> str:
+    skeleton = mask_skeleton(tactics, [hole])
+    return (
+        "Lean Refactor Arena: replace ONE residual span. Keep the PCA skeleton "
+        "(induction, every case header, exact/constructor). Fill the hole with "
+        "1-4 Lean tactic lines that are STRICTLY SHORTER than ORIGINAL, same indent.\n"
+        "Do not emit sorry, theorem, lemma, import, or open. Do not drop case arms.\n"
+        "Prefer: simp [lemmas], simp_all, omega, ring, linarith, exact <hyp>.\n\n"
+        f"Problem: {record.get('name')}\n"
+        f"Statement:\n{str(record.get('statement') or '')[:600]}\n\n"
+        f"ORIGINAL hole {hole.hole_id} family={hole.family} ({len(hole.original.split())} words):\n"
+        f"{hole.original}\n\n"
+        f"SKELETON (hole marked <<<{hole.hole_id} family={hole.family}>>>):\n"
+        f"{skeleton[:2800]}\n\n"
+        f"Reply with only the replacement tactics, or:\n<<<{hole.hole_id} family={hole.family}>>>\n<tactics>\n"
     )
 
 
@@ -388,6 +408,7 @@ def run_problem(
     timeout: float,
     call_leanstral: bool,
     ablate: bool = False,
+    one_hole: bool = False,
 ) -> dict[str, Any]:
     _raw, digest, records = lra_splice.load_warmup_records()
     record = next(item for item in records if item.get("name") == name)
@@ -398,7 +419,37 @@ def run_problem(
     identity = None
     ledger = None
     fill_holes = [hole for hole in holes if hole.family in {"strength_reduction", "algebraic_simplification"}]
-    if call_leanstral and fill_holes:
+    one_hole_fills: list[dict[str, Any]] = []
+    if call_leanstral and one_hole:
+        targets = prioritize_holes(fill_holes or holes, cap=2)
+        if targets:
+            lra_mistral.load_keyfiles()
+            lra_mistral.pin_paths()
+            ledger = lra_t1.ProblemLedger(name=f"{name}#mca-one-hole")
+            for hole in targets:
+                prompt = one_hole_prompt(record, tactics, hole)
+                try:
+                    text, identity, _line = lra_mistral.generate_mistral(
+                        prompt, ledger, max_new_tokens=256, timeout=120.0
+                    )
+                except lra_mistral.Track1MistralError:
+                    break
+                parsed = parse_leanstral_fills(text, [hole])
+                fill = parsed.get(hole.hole_id) or parsed.get("__full__") or ""
+                if not fill.strip():
+                    fill = lra_loop.extract_generated_tactics(text)
+                fills = {item.hole_id: (fill if item.hole_id == hole.hole_id else item.original) for item in holes}
+                filled = apply_fills(tactics, holes, fills)
+                filled = lra_kb.flatten_overindent(tactics, lra_kb.match_reference_indent(tactics, filled))
+                one_hole_fills.append(
+                    {
+                        "kind": f"leanstral_one_{hole.hole_id}",
+                        "generator": "labs-leanstral-1-5",
+                        "tactics": filled,
+                        "holes": [asdict(hole) | {"fill": fill[:400]}],
+                    }
+                )
+    elif call_leanstral and fill_holes:
         lra_mistral.load_keyfiles()
         lra_mistral.pin_paths()
         ledger = lra_t1.ProblemLedger(name=f"{name}#mca-mask")
@@ -416,6 +467,7 @@ def run_problem(
         for item in extra:
             if item["kind"] not in kinds:
                 candidates.append(item)
+    candidates.extend(one_hole_fills)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     restore = dest.read_bytes() if dest.is_file() else b""
@@ -521,6 +573,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--no-leanstral", action="store_true")
     parser.add_argument("--ablate", action="store_true", help="lake-check dropping one MCA hole at a time")
+    parser.add_argument("--one-hole", action="store_true", help="hosted Leanstral fills one MCA hole at a time")
     parser.add_argument("--names", default=",".join(LAKE_READY))
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
@@ -541,6 +594,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             timeout=args.timeout,
             call_leanstral=not args.no_leanstral,
             ablate=args.ablate,
+            one_hole=args.one_hole,
         )
         for name in names
     ]
