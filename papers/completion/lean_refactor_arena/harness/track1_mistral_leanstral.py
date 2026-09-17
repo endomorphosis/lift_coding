@@ -391,6 +391,7 @@ def run_named(
         "prototype_hardware_class": PROTOTYPE_HARDWARE_CLASS,
         "used_prototype_endpoint": False,
         "labs_retire_date": LABS_RETIRE_DATE,
+        "text": text,
         "text_head": text[:400],
         "n_chars": len(text),
         "jev_route": jev_result.as_dict(),
