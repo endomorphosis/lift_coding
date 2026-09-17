@@ -319,12 +319,75 @@ def assemble_candidates(
     return rows
 
 
+def prioritize_holes(holes: Sequence[Hole], *, cap: int = 6) -> list[Hole]:
+    rank = {"strength_reduction": 0, "algebraic_simplification": 1, "dead_code": 2, "loop_invariant": 3}
+    ordered = sorted(
+        holes,
+        key=lambda hole: (rank.get(hole.family, 9), -len(hole.original), hole.hole_id),
+    )
+    return ordered[: max(0, int(cap))]
+
+
+def ablate_holes(
+    record: Mapping[str, Any],
+    tactics: str,
+    holes: Sequence[Hole],
+    *,
+    state_root: Path,
+    timeout: float,
+    restore: bytes,
+) -> list[dict[str, Any]]:
+    """Drop one MCA hole at a time, then combine lake-valid drops."""
+
+    rows: list[dict[str, Any]] = []
+    droppable: list[Hole] = []
+    for hole in holes:
+        fills = {item.hole_id: (template_fill(item) if item.hole_id == hole.hole_id else item.original) for item in holes}
+        tactics_one = apply_fills(tactics, holes, fills)
+        compiled = lra_kb.compile_tactics(
+            record, tactics_one, state_root=state_root, timeout=timeout, restore=restore
+        )
+        ok = bool(compiled.get("theorem_ok"))
+        rows.append(
+            {
+                "kind": f"ablate_{hole.hole_id}",
+                "generator": "deterministic",
+                "n_chars": len(tactics_one),
+                "tactics_head": tactics_one[:240],
+                "hole_id": hole.hole_id,
+                "family": hole.family,
+                **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
+            }
+        )
+        if ok:
+            droppable.append(hole)
+    if len(droppable) >= 2:
+        fills = {item.hole_id: (template_fill(item) if item in droppable else item.original) for item in holes}
+        combined = apply_fills(tactics, holes, fills)
+        compiled = lra_kb.compile_tactics(
+            record, combined, state_root=state_root, timeout=timeout, restore=restore
+        )
+        rows.append(
+            {
+                "kind": "ablate_combine_droppable",
+                "generator": "deterministic",
+                "n_chars": len(combined),
+                "tactics_head": combined[:240],
+                "n_droppable": len(droppable),
+                "droppable_ids": [hole.hole_id for hole in droppable],
+                **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
+            }
+        )
+    return rows
+
+
 def run_problem(
     name: str,
     *,
     state_root: Path,
     timeout: float,
     call_leanstral: bool,
+    ablate: bool = False,
 ) -> dict[str, Any]:
     _raw, digest, records = lra_splice.load_warmup_records()
     record = next(item for item in records if item.get("name") == name)
@@ -374,6 +437,17 @@ def run_problem(
                 "n_holes": len(item.get("holes") or []),
                 **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
             }
+        )
+    if ablate and holes:
+        rows.extend(
+            ablate_holes(
+                record,
+                tactics,
+                prioritize_holes(holes, cap=6),
+                state_root=state_root,
+                timeout=timeout,
+                restore=restore,
+            )
         )
     valid = [row for row in rows if row.get("theorem_ok")]
     kept = None
@@ -446,6 +520,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--self-check", action="store_true")
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--no-leanstral", action="store_true")
+    parser.add_argument("--ablate", action="store_true", help="lake-check dropping one MCA hole at a time")
     parser.add_argument("--names", default=",".join(LAKE_READY))
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
@@ -465,6 +540,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             state_root=args.state_root,
             timeout=args.timeout,
             call_leanstral=not args.no_leanstral,
+            ablate=args.ablate,
         )
         for name in names
     ]
