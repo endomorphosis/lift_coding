@@ -1,0 +1,186 @@
+{
+  "arena_score": null,
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "imports_law_to_action_verify_batch": false,
+  "jsonl_bytes": 113826,
+  "n_scheduled": 15,
+  "problems": [
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.26.0"
+      ],
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "src_startswith_statement": true,
+      "statement_chars": 225
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.26.0"
+      ],
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "source": "strata",
+      "src_startswith_statement": true,
+      "statement_chars": 157
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.29.1",
+        "v4.27.0",
+        "v4.26.0"
+      ],
+      "name": "Core.InitsUpdatesComm",
+      "source": "strata",
+      "src_startswith_statement": true,
+      "statement_chars": 284
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.32.0"
+      ],
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source": "physlib",
+      "src_startswith_statement": true,
+      "statement_chars": 254
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.32.0"
+      ],
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "source": "physlib",
+      "src_startswith_statement": true,
+      "statement_chars": 480
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.32.0"
+      ],
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "source": "physlib",
+      "src_startswith_statement": true,
+      "statement_chars": 253
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.33.0-rc2",
+        "v4.32.0",
+        "v4.31.0"
+      ],
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "source": "cslib",
+      "src_startswith_statement": true,
+      "statement_chars": 70
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.33.0-rc2",
+        "v4.32.0",
+        "v4.31.0",
+        "v4.30.0"
+      ],
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "source": "cslib",
+      "src_startswith_statement": true,
+      "statement_chars": 61
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.33.0-rc2",
+        "v4.32.0",
+        "v4.31.0"
+      ],
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "src_startswith_statement": true,
+      "statement_chars": 117
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.31.0",
+        "v4.30.0",
+        "v4.29.0",
+        "v4.28.0"
+      ],
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "source": "arklib",
+      "src_startswith_statement": true,
+      "statement_chars": 437
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.31.0",
+        "v4.30.0",
+        "v4.29.0"
+      ],
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "source": "arklib",
+      "src_startswith_statement": true,
+      "statement_chars": 1215
+    },
+    {
+      "header_chars": 0,
+      "listed_tags": [
+        "v4.31.0",
+        "v4.30.0",
+        "v4.29.0"
+      ],
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "source": "arklib",
+      "src_startswith_statement": true,
+      "statement_chars": 503
+    },
+    {
+      "header_chars": 77,
+      "listed_tags": [
+        "v4.25.0",
+        "v4.26.0",
+        "v4.27.0"
+      ],
+      "name": "putnam_1964_a4",
+      "source": "putnambench",
+      "src_startswith_statement": true,
+      "statement_chars": 313
+    },
+    {
+      "header_chars": 93,
+      "listed_tags": [
+        "v4.25.0",
+        "v4.26.0"
+      ],
+      "name": "putnam_1964_b2",
+      "source": "putnambench",
+      "src_startswith_statement": true,
+      "statement_chars": 205
+    },
+    {
+      "header_chars": 85,
+      "listed_tags": [
+        "v4.25.0",
+        "v4.26.0",
+        "v4.27.0"
+      ],
+      "name": "putnam_1995_a3",
+      "source": "putnambench",
+      "src_startswith_statement": true,
+      "statement_chars": 456
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-batch-verify/v1",
+  "score": null,
+  "status": "SCHEDULE",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "writes_arena_scores": false
+}
