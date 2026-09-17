@@ -1,0 +1,128 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "lean_refactor_arena",
+  "task_id": "LRA-015",
+  "status": "complete",
+  "completed_at": "2026-09-17T00:26:01.698252+00:00",
+  "completion_mode": "dedicated fail-closed verify_lra_batch --require-complete; digest, statement-bind, all listed tags, no sorryAx, one receipt per scheduled problem; does not import law_to_action verify_batch.py and does not write Arena scores",
+  "artifacts": {
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py": "bbae452ef0e05e69bc1009a6498a9907509e3cc8fa0adbfbd5bb9868353a801d",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.json": "ca75a9a8b6af90e472df0e9b664cd604dd4947c73fca26339ea12e06c1db4c7e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.meta.json": "d6b30afb75ea2e9965549de1710dadba5d494299dd07ddcdee48891d34aa1b17",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.stdout.log": "ca75a9a8b6af90e472df0e9b664cd604dd4947c73fca26339ea12e06c1db4c7e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/git-head.txt": "6b39ded5a2f039e2056fc1d8f889213521c2255f747145bd30728657bd5a070e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/ipfs_accelerate-head.txt": "6db2a3d73b690c5691815b2558a2fe861d042e0c55f382b774c4f83e9bc583d2",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/jsonl-sha256.txt": "82c4f89fa0ec915d57bcea71bef31aec80814c6bb32566be41a03a44996ef922",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/python-version.txt": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.json": "b7f245ccb700b22def402384ce85f80b01b1762ddf4f4e8e9cb4852a39b7371e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.meta.json": "ce6361d6630db5db1dd69c4991d80f2883d853d69bf463d118c3c1629be50d5b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.stdout.log": "b7f245ccb700b22def402384ce85f80b01b1762ddf4f4e8e9cb4852a39b7371e",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.json": "abb29b6166da5dc77d3cdc445a33a7f6871acf5f8db7cfb6539a81d0f63c7d1b",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.meta.json": "3046fdd9603dd9fb79e471e7d4748e6eb7019e4f6163de076dc767a05d3fc125",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.stdout.log": "abb29b6166da5dc77d3cdc445a33a7f6871acf5f8db7cfb6539a81d0f63c7d1b"
+  },
+  "outputs": {
+    "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py"
+  },
+  "criteria": [
+    {
+      "criterion": "Verifier requires digest, statement-bind, all listed tags, no sorryAx, one receipt per scheduled problem.",
+      "status": "met",
+      "explanation": "verify_lra_batch.py loaded the frozen warm-up JSONL via splice.load_warmup_records (SHA-256 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804, 113826 bytes, 15 records, 36 listed version_info tags). Self-check wrote a compact 15-problem fixture (header+statement prefix candidate with tactic rfl, one compile record per listed tag, axiom_digest of [], sorryAx=false) and --require-complete --require-digest --require-statement-bind --require-all-tags --require-no-sorry returned status=PASS, complete=true, digest_ok=true, statement_bind_ok=true, all_tags_ok=true, no_sorryAx=true, one_receipt_per_scheduled_problem=true (CLI exit 0). Fail-closed mutations exit 2: missing receipt for CallElimCorrect.substOldPostSubset; freeze_binding/receipt digest mismatch; candidate prefixed with 'axiom evil'; receipt statement mutated; dropped listed tag v4.26.0 from Core.InitsUpdatesComm; sorryAx on putnam_1964_a4 tag v4.25.0; duplicate problem.json for the same name. Existing LRA-014 compile receipts (3 of 15 problems, no candidates) fail --require-complete (missing_n=12). Putnam candidates bind header+statement without scanning the first :=; Cslib.CCS.bisimilarity_congr_choice keeps the first := at byte 55 of a 117-byte statement. Incomplete is not success.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/jsonl-sha256.txt"
+      ]
+    },
+    {
+      "criterion": "Does not import law_to_action verify_batch.py.",
+      "status": "met",
+      "explanation": "AST import audit of verify_lra_batch.py found only stdlib plus sibling harness splice (imported_names=['Any', 'Mapping', 'Optional', 'Path', 'Sequence', '__future__', 'annotations', 'argparse', 'ast', 'dataclass', 'dataclasses', 'field', 'hashlib', 'json', 'pathlib', 're', 'shutil', 'splice', 'subprocess', 'sys', 'tempfile', 'typing']). forbidden_imports=[], forbidden_import_needles=[], sys_path_inserts_law_to_action=false, uses_lock_ex=false, imports_law_to_action_verify_batch=false. There is no import of verify_batch, law_to_action, or generated_code_study.driver. --audit-source exited 0 with the same flags. The fail-closed pattern (FAIL + exit 2, --require-complete) is implemented in this dedicated tools/ file.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.json"
+      ]
+    },
+    {
+      "criterion": "Does not write Arena scores.",
+      "status": "met",
+      "explanation": "AST audit found score_assignments=[] and writes_arena_scores=false. Every verifier payload sets arena_score=null and score=null, including --schedule, --audit-source, --self-check, and --require-complete PASS. A compact fixture with arena_score=0.42 is rejected (exit 2, status=FAIL, complete=false). The verifier is read-only against manuscript/score files and does not emit token-savings percentages or Track 1/Track 2 rankings. compiled=false, lake=false, llama_server_started=false.",
+      "evidence": [
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.json",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.stdout.log",
+        "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+        "--self-check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/self-check.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+        "--schedule"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/schedule.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+        "--audit-source"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/validation/audit-source.stdout.log",
+      "script_artifact": "papers/completion/lean_refactor_arena/receipts/snapshots/LRA-015/outputs/verify_lra_batch.py"
+    }
+  ],
+  "source_versions": {
+    "workspace_git_head": "5ceed36b7ea586b72a075c0bfe3a1d4f829bc13c",
+    "ipfs_accelerate_git_head": "ef2415689acbd142a8e8e57e70e3e29b608b1c0f",
+    "python": "Python 3.12.3",
+    "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "warmup_jsonl_bytes": 113826,
+    "n_warmup_records": 15,
+    "n_listed_tags": 36,
+    "verify_lra_batch_py_sha256": "bbae452ef0e05e69bc1009a6498a9907509e3cc8fa0adbfbd5bb9868353a801d",
+    "empty_axiom_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "protocol": "LRA/v1",
+    "imports_law_to_action_verify_batch": false,
+    "writes_arena_scores": false,
+    "self_check_ok": true,
+    "compiled": false,
+    "model_or_solver_experiment": "none; cpu-medium dedicated verifier with compact synthetic receipts; no lake compile, no Leanstral, no Arena scores"
+  },
+  "limitations": [
+    "This task lands the dedicated verifier. It does not execute the 15-problem warm-up loop (LRA-017) or write the runbook/freeze (LRA-018).",
+    "Self-check fixtures use compact header+statement candidates with tactic rfl and synthetic axiom reports; they are not live lake env lean compiles and do not claim kernel correctness of those fixtures.",
+    "LRA-014 compile-worker receipts cover 3 of 15 scheduled problems and omit candidates; --require-complete correctly fails closed on that incomplete batch.",
+    "No Arena scores, token-savings percentages, or official Track 1/Track 2 rankings were produced.",
+    "The verifier does not call Leanstral, does not LOCK_EX, and does not start llama-server.",
+    "The implementation checkpoint directory is not writable on this host; coordinate checkpoints are best-effort."
+  ]
+}
