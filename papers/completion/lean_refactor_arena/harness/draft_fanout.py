@@ -181,6 +181,78 @@ def collapse_simp_at(text: str) -> str:
     return "\n".join(out)
 
 
+def drop_redundant_simp_at(text: str) -> str:
+    """Delete a ``simp at`` run when the next tactic is already ``simp_all``."""
+
+    lines = text.splitlines()
+    out: list[str] = []
+    index = 0
+    while index < len(lines):
+        match = _SIMP_AT.match(lines[index])
+        if not match:
+            out.append(lines[index])
+            index += 1
+            continue
+        indent = match.group("indent")
+        run_end = index
+        while run_end < len(lines) and _SIMP_AT.match(lines[run_end]) and lines[run_end].startswith(indent):
+            run_end += 1
+        skip = run_end
+        while skip < len(lines) and not lines[skip].strip():
+            skip += 1
+        following = lines[skip].strip() if skip < len(lines) else ""
+        if run_end - index >= 2 and following.startswith("simp_all"):
+            index = run_end
+            continue
+        if run_end - index >= 2:
+            out.append(f"{indent}simp_all")
+            index = run_end
+            continue
+        out.append(lines[index])
+        index += 1
+    return "\n".join(out)
+
+
+def span_preserving_drafts(tactics: str) -> list[Draft]:
+    """One-case edits that keep every ``case`` arm. Not whole-proof templates."""
+
+    drafts: list[Draft] = []
+    seen: set[str] = set()
+    spans = case_spans(tactics)
+    if not spans:
+        whole = drop_redundant_simp_at(tactics)
+        _push(drafts, seen, "simp_set", whole, ("drop_redundant_simp_at", "whole"))
+        return drafts
+    top = min(span.indent for span in spans)
+    for span in spans:
+        if span.indent != top:
+            continue
+        body = tactics[span.header_end : span.end]
+        collapsed = drop_redundant_simp_at(body)
+        if collapsed != body:
+            merged = tactics[: span.header_end] + collapsed + tactics[span.end :]
+            _push(
+                drafts,
+                seen,
+                "simp_set",
+                merged,
+                ("drop_redundant_simp_at", "case", span.label),
+            )
+        dropped = drop_have_obtain(body)
+        if dropped != body:
+            merged = tactics[: span.header_end] + dropped + tactics[span.end :]
+            _push(
+                drafts,
+                seen,
+                "have_chain",
+                merged,
+                ("drop_have_obtain", "case", span.label),
+            )
+    whole = drop_redundant_simp_at(tactics)
+    _push(drafts, seen, "simp_set", whole, ("drop_redundant_simp_at", "all_cases"))
+    return drafts
+
+
 def drop_have_obtain(text: str) -> str:
     kept = [line for line in text.splitlines() if not _HAVE_OBTAIN.match(line)]
     return "\n".join(kept)

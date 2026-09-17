@@ -38,6 +38,21 @@ class Track1MistralTests(unittest.TestCase):
         self.assertEqual(ledger.mistral_calls, 2)
         self.assertEqual(ledger.grok_calls, 0)
 
+    def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
+        import draft_fanout as fanout
+
+        body = (
+            "    intros x Hin\n"
+            "    simp at m\n"
+            "    simp at name\n"
+            "    simp at ty2\n"
+            "\n"
+            "    simp_all\n"
+        )
+        out = fanout.drop_redundant_simp_at(body)
+        self.assertNotIn("simp at m", out)
+        self.assertEqual(out.count("simp_all"), 1)
+
     def test_flatten_overindent_aligns_case_lines(self) -> None:
         import track1_keepbest as keepbest
 

@@ -67,7 +67,13 @@ def compile_tactics(
     rel = lra_cw.source_relpath(record)
     dest = clone / rel
     dest.write_bytes(restore)
-    splice_src(dest, str(record["src"]), candidate_source(record, tactics))
+    replacement = candidate_source(record, tactics)
+    original = restore.decode("utf-8")
+    spliced = original.replace(str(record["src"]), replacement, 1)
+    start_at = spliced.find(replacement)
+    start_line = spliced[:start_at].count("\n") + 1 if start_at >= 0 else 1
+    end_line = start_line + replacement.count("\n")
+    splice_src(dest, str(record["src"]), replacement)
     started = time.perf_counter()
     receipts = lra_cw.compile_record(
         record,
@@ -81,23 +87,66 @@ def compile_tactics(
     )
     dest.write_bytes(restore)
     receipt = receipts[0].to_dict() if receipts else {"ok": False, "error": "no_receipt"}
+    stdout = str(receipt.get("stdout") or "")
+    errors = parse_lean_errors(stdout)
+    sorry_in_theorem = sorry_in_span(stdout, start_line, end_line)
+    errors_in = [item for item in errors if _line_in_span(item.get("pos"), start_line, end_line)]
+    errors_out = [item for item in errors if not _line_in_span(item.get("pos"), start_line, end_line)]
+    timed_out = bool(receipt.get("timed_out"))
+    exit_code = receipt.get("exit_code")
+    theorem_ok = (
+        not timed_out
+        and not errors_in
+        and not errors_out
+        and not sorry_in_theorem
+    )
     tokens = lra_loop.token_count(tactics)
     return {
-        "ok": bool(receipt.get("ok")),
-        "module_exit_0": receipt.get("exit_code") == 0 and not receipt.get("timed_out"),
-        "exit_code": receipt.get("exit_code"),
+        "ok": bool(theorem_ok),
+        "theorem_ok": bool(theorem_ok),
+        "module_exit_0": exit_code == 0 and not timed_out,
+        "exit_code": exit_code,
         "wall_ms": receipt.get("wall_ms"),
         "error": receipt.get("error") or receipt.get("stderr_digest"),
         "token_count": tokens,
         "lean_tag": pin.lean_tag,
         "sorryAx": receipt.get("sorryAx"),
+        "sorry_in_theorem": sorry_in_theorem,
+        "theorem_span": [start_line, end_line],
         "argv": receipt.get("argv"),
         "compile_wall_ms_outer": (time.perf_counter() - started) * 1000.0,
-        "stdout_tail": (receipt.get("stdout") or "")[-400:] if isinstance(receipt.get("stdout"), str) else None,
+        "stdout_tail": stdout[-400:] if stdout else None,
         "stderr_tail": (receipt.get("stderr") or "")[-400:] if isinstance(receipt.get("stderr"), str) else None,
-        "errors": parse_lean_errors(str(receipt.get("stdout") or "")),
+        "errors": errors_in or errors[:6],
         "arena_score": None,
     }
+
+
+def _line_in_span(pos: Any, start_line: int, end_line: int) -> bool:
+    if not isinstance(pos, Mapping):
+        return False
+    try:
+        line = int(pos.get("line"))
+    except (TypeError, ValueError):
+        return False
+    return start_line <= line <= end_line
+
+
+def sorry_in_span(stdout: str, start_line: int, end_line: int) -> bool:
+    for line in (stdout or "").splitlines():
+        if not line.startswith("{"):
+            continue
+        try:
+            payload = json.loads(line)
+        except Exception:
+            continue
+        if payload.get("kind") != "hasSorry" and "sorry" not in str(payload.get("data") or "").lower():
+            continue
+        if payload.get("severity") not in {"warning", "error", None}:
+            continue
+        if _line_in_span(payload.get("pos"), start_line, end_line):
+            return True
+    return False
 
 
 def parse_lean_errors(stdout: str) -> list[dict[str, Any]]:
@@ -226,6 +275,17 @@ def keepbest(
         candidates.append(
             {"kind": "fanout_collapse_simp_at", "generator": "deterministic", "tactics": collapse.tactics}
         )
+    for draft in lra_fan.span_preserving_drafts(ref_tactics):
+        if draft.tactics == ref_tactics:
+            continue
+        candidates.append(
+            {
+                "kind": f"span_{draft.draft_id}_{draft.ops[-1] if draft.ops else draft.family}",
+                "generator": "deterministic",
+                "tactics": draft.tactics,
+                "ops": list(draft.ops),
+            }
+        )
     rows = []
     tactics_by_kind = {item["kind"]: item["tactics"] for item in candidates}
     for item in candidates:
@@ -295,10 +355,17 @@ def keepbest(
             )
         )
         repaired = True
-    valid = [row for row in rows if row.get("ok") and not row.get("sorryAx")]
-    module_ok = [row for row in rows if row.get("module_exit_0")]
+    valid = [row for row in rows if row.get("theorem_ok") or (row.get("ok") and not row.get("sorry_in_theorem"))]
+    module_ok = [row for row in rows if row.get("module_exit_0") or row.get("theorem_ok")]
     if valid:
-        kept = sorted(valid, key=lambda row: (row["token_count"], row.get("wall_ms") or 0, row["kind"]))[0]
+        kept = sorted(
+            valid,
+            key=lambda row: (
+                int(row.get("token_count") or 10**9),
+                0 if row.get("kind") == "reference" else 1,
+                float(row.get("wall_ms") or 0),
+            ),
+        )[0]
     elif module_ok:
         kept = sorted(
             module_ok,
@@ -331,6 +398,7 @@ def keepbest(
         else {
             "kind": kept["kind"],
             "ok": kept.get("ok"),
+            "theorem_ok": kept.get("theorem_ok"),
             "module_exit_0": kept.get("module_exit_0"),
             "token_count": kept.get("token_count"),
         },
@@ -373,6 +441,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             {
                 "kind": row.get("kind"),
                 "ok": row.get("ok"),
+                "theorem_ok": row.get("theorem_ok"),
                 "module_exit_0": row.get("module_exit_0"),
                 "tokens": row.get("token_count"),
                 "exit": row.get("exit_code"),
