@@ -1,0 +1,706 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 6282.779617991764,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": true,
+      "n_chars": 2003,
+      "ok": true,
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": null,
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": true,
+      "theorem_span": [
+        76,
+        158
+      ],
+      "token_count": 519,
+      "wall_ms": 6282.208857999649
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4431.172740994953,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 97
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d000_app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 2002,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "app t\u2081 _ _ t\u2082 l r ih_l ih_r"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":97},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":97},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        157
+      ],
+      "token_count": 519,
+      "wall_ms": 4430.640765989665
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 5462.753990024794,
+      "error": null,
+      "errors": [
+        {
+          "data": "`grind` failed\ncase grind.1.1.1.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\nt\u2081 : Term Var\n\u03c3 \u03c4_1 : Ty Var\nt\u2082 : Term Var\nl : Typing [] t\u2081 (\u03c3.arrow \u03c4_1)\nr : Typing [] t\u2082 \u03c3\nih_l : [] = [] \u2192 Typing [] t\u2081 (\u03c3.arrow \u03c4_1) \u2192 t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\nih_r : [] = [] \u2192 Typing [] t\u2082 \u03c3 \u2192 t\u2082.Value \u2228 \u2203 t', t\u2082 \u2b62\u03b2\u1d5b t'\nder' : Typing [] (t\u2081",
+          "pos": {
+            "column": 12,
+            "line": 88
+          }
+        },
+        {
+          "data": "Unknown identifier `t\u2082'`",
+          "pos": {
+            "column": 26,
+            "line": 90
+          }
+        },
+        {
+          "data": "Unknown identifier `t\u2081'.app`",
+          "pos": {
+            "column": 15,
+            "line": 93
+          }
+        },
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 94
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d001_app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1873,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "app t\u2081 _ _ t\u2082 l r ih_l ih_r"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":94},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":94},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        154
+      ],
+      "token_count": 482,
+      "wall_ms": 5457.714722986566
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4084.1110039909836,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 109
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d002_tapp \u03c3' der _ ih",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 2002,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "tapp \u03c3' der _ ih"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":109},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":109},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        157
+      ],
+      "token_count": 519,
+      "wall_ms": 4083.2201929879375
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4033.6647239746526,
+      "error": null,
+      "errors": [
+        {
+          "data": "`grind` failed\ncase grind.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\nt\u2081 : Term Var\n\u03c3 \u03c4_1 \u03c3' : Ty Var\nder : Typing [] t\u2081 (\u03c3.all \u03c4_1)\nh : Sub [] \u03c3' \u03c3\nder' : Typing [] (t\u2081.tapp \u03c3') (\u03c4_1 ^\u1d5e \u03c3')\nval : t\u2081.Value\nh_1 : \u00act\u2081.tapp \u03c3' \u2b62\u03b2\u1d5b t ^\u1d57\u1d5e \u03c3'\n\u03c3_1 : Ty Var\nt\u2081_1 : Term Var\nh_2 : (Term.abs \u03c3_1 t\u2081_1).LC\nh_3 : t\u2081 = Term.abs \u03c3_1 t\u2081_1",
+          "pos": {
+            "column": 8,
+            "line": 104
+          }
+        },
+        {
+          "data": "Unknown identifier `t'`",
+          "pos": {
+            "column": 21,
+            "line": 106
+          }
+        },
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 107
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d003_tapp \u03c3' der _ ih",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1916,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "tapp \u03c3' der _ ih"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":107},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":107},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        155
+      ],
+      "token_count": 496,
+      "wall_ms": 4032.7268069959246
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 3787.2907670098357,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 119
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d004_let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 2002,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":119},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":119},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        157
+      ],
+      "token_count": 519,
+      "wall_ms": 3786.4032040233724
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4017.7632849954534,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `t\u2081'.let'`",
+          "pos": {
+            "column": 15,
+            "line": 117
+          }
+        },
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 118
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d005_let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1971,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":118},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":118},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        156
+      ],
+      "token_count": 508,
+      "wall_ms": 4016.849640000146
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 3655.970685998909,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 127
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d006_inl der _ ih",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 2002,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "inl der _ ih"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":127},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":127},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        157
+      ],
+      "token_count": 519,
+      "wall_ms": 3655.1301150175277
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4068.1063570082188,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `t'`",
+          "pos": {
+            "column": 20,
+            "line": 125
+          }
+        },
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 126
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d007_inl der _ ih",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1972,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "inl der _ ih"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":126},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":126},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        156
+      ],
+      "token_count": 510,
+      "wall_ms": 4067.555470013758
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4082.5540240039118,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 135
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d008_inr der _ ih",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 2002,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "inr der _ ih"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":135},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":135},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        157
+      ],
+      "token_count": 519,
+      "wall_ms": 4081.7662860208657
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4168.925161007792,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `t'`",
+          "pos": {
+            "column": 20,
+            "line": 133
+          }
+        },
+        {
+          "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 134
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d009_inr der _ ih",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1972,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "inr der _ ih"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "Silent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":74,\"line\":76},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":134},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":134},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        156
+      ],
+      "token_count": 510,
+      "wall_ms": 4168.201166990912
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean"
+      ],
+      "compile_wall_ms_outer": 4188.531218998833,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `lr`",
+          "pos": {
+            "column": 14,
+            "line": 140
+          }
+        },
+        {
+          "data": "Tactic `cases` failed: major premise type is not an inductive type\n  ?m.602\n\nExplanation: the `cases` tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\ncase inl\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableE",
+          "pos": {
+            "column": 8,
+            "line": 140
+          }
+        },
+        {
+          "data": "Unknown identifier `t\u2081'.case`",
+          "pos": {
+            "column": 15,
+            "line": 142
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d010_case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1920,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "t\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":8,\"line\":140},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"Unknown identifier `t\u2081'.case`\",\"endPos\":{\"column\":23,\"line\":142},\"fileName\":\"Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"lean.unknownIdentifier._namedError\",\"pos\":{\"column\":15,\"line\":142},\"severity\":\"error\"}\n",
+      "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+      "theorem_ok": false,
+      "theorem_span": [
+        76,
+        156
+      ],
+      "token_count": 495,
+      "wall_ms": 4187.657528003911
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/leanprover/cslib",
+  "file_path": "Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "None",
+  "kept": {
+    "kind": "reference",
+    "module_exit_0": true,
+    "ok": true,
+    "theorem_ok": true,
+    "token_count": 519
+  },
+  "n_module_exit_0": 1,
+  "n_valid": 1,
+  "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "observed_at": "2026-09-17T05:40:55.596916+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "repaired": false,
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

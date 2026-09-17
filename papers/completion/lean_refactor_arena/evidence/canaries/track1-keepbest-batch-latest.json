@@ -1,20 +1,10 @@
 {
   "arena_score": null,
   "called_docker0": false,
-  "observed_at": "2026-09-17T05:35:07.895562+00:00",
+  "n_problems": 6,
+  "n_shorter": 1,
+  "observed_at": "2026-09-17T05:41:37.843694+00:00",
   "problems": [
-    {
-      "kept": {
-        "kind": "span_d013_all_cases",
-        "module_exit_0": true,
-        "ok": true,
-        "theorem_ok": true,
-        "token_count": 464
-      },
-      "n_valid": 3,
-      "name": "CallElimCorrect.substOldPostSubset",
-      "ref_tokens": 482
-    },
     {
       "kept": {
         "kind": "reference",
@@ -23,9 +13,29 @@
         "theorem_ok": true,
         "token_count": 322
       },
+      "kept_tokens": 322,
       "n_valid": 1,
       "name": "CallElimCorrect.extractedOldExprInVars",
-      "ref_tokens": 322
+      "ratio": 1.0,
+      "ref_tokens": 322,
+      "source": "strata",
+      "theorem_ok": true
+    },
+    {
+      "kept": {
+        "kind": "span_d013_all_cases",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 464
+      },
+      "kept_tokens": 464,
+      "n_valid": 3,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ratio": 0.9627,
+      "ref_tokens": 482,
+      "source": "strata",
+      "theorem_ok": true
     },
     {
       "kept": {
@@ -35,9 +45,61 @@
         "theorem_ok": true,
         "token_count": 268
       },
+      "kept_tokens": 268,
       "n_valid": 1,
       "name": "Core.InitsUpdatesComm",
-      "ref_tokens": 268
+      "ratio": 1.0,
+      "ref_tokens": 268,
+      "source": "strata",
+      "theorem_ok": true
+    },
+    {
+      "kept": {
+        "kind": "reference",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 296
+      },
+      "kept_tokens": 296,
+      "n_valid": 1,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "ratio": 1.0,
+      "ref_tokens": 296,
+      "source": "cslib",
+      "theorem_ok": true
+    },
+    {
+      "kept": {
+        "kind": "reference",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 519
+      },
+      "kept_tokens": 519,
+      "n_valid": 1,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "ratio": 1.0,
+      "ref_tokens": 519,
+      "source": "cslib",
+      "theorem_ok": true
+    },
+    {
+      "kept": {
+        "kind": "reference",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 552
+      },
+      "kept_tokens": 552,
+      "n_valid": 1,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "ratio": 1.0,
+      "ref_tokens": 552,
+      "source": "cslib",
+      "theorem_ok": true
     }
   ],
   "schema": "lra-track1-keepbest-batch/v1"
