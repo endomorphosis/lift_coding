@@ -47,7 +47,13 @@ class Track1MistralTests(unittest.TestCase):
         self.assertAlmostEqual(sum(report["pca"]["explained_ratio"]), 1.0, places=5)
         sample = report["sample"]
         self.assertGreaterEqual(sample["n_drafts"], 2)
-        self.assertTrue(any(fam in {"dead_code", "strength_reduction"} for fam in sample["families"]))
+        self.assertTrue(
+            any(fam in {"dead_code", "strength_reduction", "algebraic_simplification"} for fam in sample["families"])
+        )
+        self.assertIn("algebraic_simplification", pca.FAMILY_FEATURES)
+        collapsed = pca.collapse_rw_to_simp("  rw [a]\n  rw [b]\n  exact h\n")
+        self.assertIn("simp [a, b]", collapsed)
+        self.assertNotIn("rw [a]", collapsed)
 
     def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
         import draft_fanout as fanout

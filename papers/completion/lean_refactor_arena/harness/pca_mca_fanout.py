@@ -9,6 +9,7 @@ directions are labeled as classical compiler families:
 - search_space: extra search tactics; never drop case arms
 - loop_invariant: have-facts after induction
 - strength_reduction: simp-at runs → simp_all
+- algebraic_simplification: rw/calc/ring/omega chains → simp/omega
 
 TypeSafe ranks the drafts. Lake is the oracle. Jev does not write Lean.
 Not official Track 2. Not an Arena ranking. Never LOCK_EX.
@@ -65,6 +66,9 @@ FEATURE_NAMES = (
     "n_apply",
     "n_rw",
     "n_intro",
+    "n_ring",
+    "n_omega",
+    "n_linarith",
     "n_tokens",
     "n_lines",
     "max_indent",
@@ -75,9 +79,11 @@ FAMILY_FEATURES = {
     "search_space": ("n_apply", "n_intro", "n_cases"),
     "loop_invariant": ("n_have", "n_induction"),
     "strength_reduction": ("n_simp_at", "n_simp_all", "n_rw"),
+    "algebraic_simplification": ("n_rw", "n_calc", "n_ring", "n_omega", "n_linarith", "n_simp_all"),
 }
 _RENAME = re.compile(r"^( *)rename_i ")
 _HAVE = re.compile(r"^( *)have ")
+_RW_BRACKET = re.compile(r"^(?P<indent> *)rw \[([^\]]+)\]\s*$")
 FORBIDDEN_IMPORT_NAMES = frozenset({"fcntl", "generate_text", "typesafe_sdk"})
 
 
@@ -145,6 +151,12 @@ def count_tactics(tactics: str) -> dict[str, float]:
             counts["n_rw"] += 1
         if stripped.startswith("intro") or stripped.startswith("intros "):
             counts["n_intro"] += 1
+        if stripped == "ring" or stripped.startswith("ring "):
+            counts["n_ring"] += 1
+        if stripped == "omega" or stripped.startswith("omega "):
+            counts["n_omega"] += 1
+        if stripped.startswith("linarith") or stripped.startswith("nlinarith"):
+            counts["n_linarith"] += 1
     return counts
 
 
@@ -199,7 +211,7 @@ def fit_pca_mca(rows: Sequence[FeatureRow], *, n_principal: int = 3, n_minor: in
     }
 
 
-def amenable_families(counts: Mapping[str, float], model: Mapping[str, Any], *, top_k: int = 4) -> list[dict[str, Any]]:
+def amenable_families(counts: Mapping[str, float], model: Mapping[str, Any], *, top_k: int = 5) -> list[dict[str, Any]]:
     """Features that load on minor components *and* are present in this proof."""
 
     std = np.asarray(model["std"], dtype=float)
@@ -249,6 +261,40 @@ def drop_have_after_induction(text: str) -> str:
     return "\n".join(out)
 
 
+def collapse_rw_to_simp(text: str) -> str:
+    """Strength-reduce consecutive ``rw [lemmas]`` into one ``simp [lemmas]``."""
+
+    lines = text.splitlines()
+    out: list[str] = []
+    index = 0
+    while index < len(lines):
+        match = _RW_BRACKET.match(lines[index])
+        if not match:
+            out.append(lines[index])
+            index += 1
+            continue
+        indent = match.group("indent")
+        lemmas: list[str] = []
+        while index < len(lines):
+            nxt = _RW_BRACKET.match(lines[index])
+            if not nxt or nxt.group("indent") != indent:
+                break
+            lemmas.extend(part.strip() for part in nxt.group(2).split(",") if part.strip())
+            index += 1
+        if len(lemmas) >= 2:
+            out.append(f"{indent}simp [{', '.join(lemmas)}]")
+        else:
+            out.append(f"{indent}rw [{lemmas[0]}]" if lemmas else lines[index - 1])
+    return "\n".join(out)
+
+
+def keep_calc_only(text: str) -> str:
+    if not lra_fan._CALC.search(text):
+        return text
+    kept = [line for line in text.splitlines() if line.strip().startswith("calc") or line.startswith("  ")]
+    return "\n".join(kept[:40]) if kept else text
+
+
 def guided_drafts(tactics: str, families: Sequence[Mapping[str, Any]]) -> list[lra_fan.Draft]:
     drafts: list[lra_fan.Draft] = []
     seen: set[str] = set()
@@ -287,6 +333,25 @@ def guided_drafts(tactics: str, families: Sequence[Mapping[str, Any]]) -> list[l
             line for line in tactics.splitlines() if not line.strip().startswith("intros ") or "Hin" not in line
         )
         lra_fan._push(drafts, seen, "search_space", stripped_intros, ("drop_intros_hin", "mca"))
+    if "algebraic_simplification" in names:
+        lra_fan._push(
+            drafts,
+            seen,
+            "algebraic_simplification",
+            collapse_rw_to_simp(tactics),
+            ("collapse_rw_to_simp", "mca"),
+        )
+        calc = keep_calc_only(tactics)
+        lra_fan._push(drafts, seen, "algebraic_simplification", calc, ("keep_calc", "mca"))
+        match = re.search(r"induction (\S+)", tactics)
+        if match:
+            lra_fan._push(
+                drafts,
+                seen,
+                "algebraic_simplification",
+                f"induction {match.group(1)} <;> simp",
+                ("induction_simp", "mca"),
+            )
     return drafts
 
 
@@ -335,6 +400,9 @@ def fanout_questions(drafts: Sequence[lra_fan.Draft], *, Choice: Any, Noul: Any,
         ),
         "search_space_safe": Noul(
             instructions="Can intros/search tactics shrink without deleting a case arm?"
+        ),
+        "algebraic_simplification_safe": Noul(
+            instructions="Can rw/calc/ring/omega chains be replaced by simp or omega without changing the theorem?"
         ),
         "likely_token_cut": Score(
             instructions="How large a source-token cut is plausible if the best MCA draft replaces the reference?",
@@ -401,6 +469,7 @@ def rank_problem(
             "strength_reduction_safe": getattr(nouls.get("strength_reduction_safe"), "noul", None),
             "loop_invariant_safe": getattr(nouls.get("loop_invariant_safe"), "noul", None),
             "search_space_safe": getattr(nouls.get("search_space_safe"), "noul", None),
+            "algebraic_simplification_safe": getattr(nouls.get("algebraic_simplification_safe"), "noul", None),
             "likely_token_cut": getattr(scores.get("likely_token_cut"), "score", None),
             "top": lra_fan.rank_choice(probabilities, drafts),
         }
@@ -439,6 +508,7 @@ def self_check() -> dict[str, Any]:
         and ranked["n_drafts"] >= 2
         and "dead_code" in FAMILY_FEATURES
         and "strength_reduction" in FAMILY_FEATURES
+        and "algebraic_simplification" in FAMILY_FEATURES
     )
     public_model = {key: value for key, value in model.items() if key not in {"zscore", "vt"}}
     return {
