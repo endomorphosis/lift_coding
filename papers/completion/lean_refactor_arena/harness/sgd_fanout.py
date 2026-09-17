@@ -301,12 +301,177 @@ def sgd_search(
     )
 
 
+def _accept(evals: Sequence[Mapping[str, Any]], keep_tokens: int) -> Optional[dict[str, Any]]:
+    valid = [row for row in evals if row.get("theorem_ok")]
+    if not valid:
+        return None
+    best = sorted(valid, key=lambda row: int(row.get("token_count") or 10**9))[0]
+    if int(best.get("token_count") or keep_tokens) < keep_tokens:
+        return best
+    return None
+
+
+def diffuse_search(
+    name: str,
+    *,
+    state_root: Path,
+    timeout: float,
+    rounds: int,
+    seed: int,
+    use_leanstral: bool,
+    tau: float = 0.12,
+) -> dict[str, Any]:
+    """Exploit: drop all high-p holes at once. Explore: random subset + Leanstral noise.
+
+    Denoise: hammer variants. This is bandit/coordinate search with a diffusion
+    restart, not neural SGD or a trained denoiser.
+    """
+
+    rng = random.Random(seed)
+    _raw, digest, records = lra_splice.load_warmup_records()
+    record = next(item for item in records if item.get("name") == name)
+    reference = lra_fan.tactic_block(record)
+    holes = lra_mask.find_holes(reference)
+    clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
+    dest = clone / lra_kb.lra_cw.source_relpath(record)
+    restore = dest.read_bytes() if dest.is_file() else b""
+    keep = reference
+    keep_tokens = lra_loop.token_count(reference)
+    dropped: set[str] = set()
+    history: list[dict[str, Any]] = []
+    rounds_out: list[dict[str, Any]] = []
+    lra_pca.load_keyfile()
+    lra_pca.pin_typesafe_path()
+    ledger = lra_t1.ProblemLedger(name=f"{name}#diffuse") if use_leanstral else None
+    if use_leanstral:
+        lra_mistral.load_keyfiles()
+        lra_mistral.pin_paths()
+
+    def consider(label: str, hole_ids: Sequence[str]) -> dict[str, Any]:
+        nonlocal keep, keep_tokens, dropped
+        trial = drop_subset(reference, holes, list(dict.fromkeys(list(dropped) + list(hole_ids))))
+        evals = evaluate_tactics(
+            record, trial, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+        )
+        hit = _accept(evals, keep_tokens)
+        if hit:
+            keep = str(hit.get("tactics") or trial)
+            keep_tokens = int(hit["token_count"])
+            dropped.update(hole_ids)
+        return {
+            "label": label,
+            "holes": list(hole_ids),
+            "accepted": bool(hit),
+            "keep_tokens": keep_tokens,
+            "evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals],
+        }
+
+    # Exploit jump: delete every MCA hole (the 414 move on CallElimCorrect).
+    full = consider("exploit_all_holes", [hole.hole_id for hole in holes])
+    rounds_out.append({"round": 0, "phase": "exploit_all", **full})
+
+    for round_i in range(1, max(1, rounds) + 1):
+        remaining = [hole for hole in holes if hole.hole_id not in dropped]
+        if not remaining:
+            break
+        jev = jev_round(record, remaining, history, keep_tokens)
+        probs = jev.get("probabilities") or {}
+        high = [hid for hid, p in probs.items() if float(p) >= tau]
+        if not high and jev.get("choice"):
+            high = [str(jev["choice"])]
+        explore = [rng.choice([hole.hole_id for hole in remaining])]
+        step_exploit = consider("exploit_high_p", high)
+        step_explore = consider("explore_random", explore)
+        noise = None
+        if use_leanstral and ledger is not None and remaining:
+            hole = rng.choice(remaining)
+            prompt = lra_mask.one_hole_prompt(record, keep, hole)
+            try:
+                text, identity, _line = lra_mistral.generate_mistral(
+                    prompt, ledger, max_new_tokens=256, timeout=120.0
+                )
+            except lra_t1.Track1LedgerError:
+                text, identity = "", {}
+            except lra_mistral.Track1MistralError:
+                text, identity = "", {}
+            filled = lra_loop.extract_generated_tactics(text) if text else ""
+            if filled:
+                noisy = lra_kb.flatten_overindent(
+                    keep, lra_kb.match_reference_indent(keep, filled)
+                )
+                evals_n = evaluate_tactics(
+                    record, noisy, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+                )
+                denoised = lra_mask.hammer_repair(
+                    noisy, reference, (evals_n[0].get("errors") if evals_n else None) or []
+                )
+                evals_d = evaluate_tactics(
+                    record, denoised, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+                )
+                hit = _accept(evals_n + evals_d, keep_tokens)
+                if hit:
+                    keep = str(hit.get("tactics") or denoised)
+                    keep_tokens = int(hit["token_count"])
+                noise = {
+                    "hole": hole.hole_id,
+                    "identity": identity,
+                    "accepted": bool(hit),
+                    "noise_evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals_n],
+                    "denoise_evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals_d],
+                }
+        history.append(
+            {
+                "round": round_i,
+                "high_p": high,
+                "explore": explore,
+                "keep_tokens": keep_tokens,
+                "jev_choice": jev.get("choice"),
+            }
+        )
+        rounds_out.append(
+            {
+                "round": round_i,
+                "jev": jev,
+                "exploit": step_exploit,
+                "explore": step_explore,
+                "diffuse": noise,
+                "keep_tokens": keep_tokens,
+            }
+        )
+    ref_tokens = lra_loop.token_count(reference)
+    return lra_pca.redact(
+        {
+            "schema": "lra-diffuse-denoise/v1",
+            "protocol": PROTOCOL,
+            "pr": PR_ID,
+            "name": name,
+            "warmup_jsonl_sha256": digest,
+            "n_holes": len(holes),
+            "ref_tokens": ref_tokens,
+            "keep_tokens": keep_tokens,
+            "ratio": round(keep_tokens / max(1, ref_tokens), 4),
+            "dropped": sorted(dropped),
+            "rounds": rounds_out,
+            "ledger": None if ledger is None else ledger.as_dict(),
+            "hardware_class": HARDWARE_CLASS,
+            "called_docker0": False,
+            "official_track2": False,
+            "arena_score": None,
+            "note": (
+                "Exploit=drop high-p and all MCA holes; explore=random hole; "
+                "diffuse=Leanstral one-hole noise; denoise=hammer. Not neural SGD."
+            ),
+        }
+    )
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--names", default="CallElimCorrect.substOldPostSubset,Core.InitsUpdatesComm")
     parser.add_argument("--rounds", type=int, default=3)
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--no-leanstral", action="store_true")
+    parser.add_argument("--diffuse", action="store_true", help="multi-hole exploit + Leanstral noise/denoise")
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
@@ -315,7 +480,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     names = [item.strip() for item in str(args.names).split(",") if item.strip()]
     started = time.perf_counter()
     reports = [
-        sgd_search(
+        (
+            diffuse_search if args.diffuse else sgd_search
+        )(
             name,
             state_root=args.state_root,
             timeout=args.timeout,
