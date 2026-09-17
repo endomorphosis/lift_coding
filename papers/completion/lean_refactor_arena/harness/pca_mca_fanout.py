@@ -45,6 +45,9 @@ LAKE_READY = (
     "putnam_1964_a4",
     "putnam_1964_b2",
     "putnam_1995_a3",
+    "fundamental_theorem_of_variational_calculus'",
+    "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+    "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
 )
 
 if str(HERE) not in sys.path:
