@@ -62,6 +62,11 @@ GROK_INPUT_USD_PER_MTOK = Decimal("3.00")
 GROK_OUTPUT_USD_PER_MTOK = Decimal("15.00")
 MAX_GROK_CALLS = 2  # 1 draft + 1 Lean-feedback repair, then stop
 MAX_JEV_CALLS = 2  # at most two TypeSafe fan-outs per problem
+MAX_MISTRAL_CALLS = 2  # hosted Labs Leanstral: 1 draft + 1 repair, then stop
+# Labs preview lists hosted Leanstral 1.5 as free (Sep 2026). Still log tokens.
+MISTRAL_INPUT_USD_PER_MTOK = Decimal("0")
+MISTRAL_OUTPUT_USD_PER_MTOK = Decimal("0")
+MISTRAL_MODEL_ID = "labs-leanstral-1-5"
 USD_QUANT = Decimal("0.000001")
 FAIL_CLOSED_KWARGS: dict[str, Any] = {
     "provider": "grok",
@@ -175,6 +180,11 @@ def usd_for(kind: str, input_tokens: int, output_tokens: int) -> Decimal:
             (Decimal(inn) / million) * GROK_INPUT_USD_PER_MTOK
             + (Decimal(out) / million) * GROK_OUTPUT_USD_PER_MTOK
         )
+    if kind_key == "mistral":
+        return _money(
+            (Decimal(inn) / million) * MISTRAL_INPUT_USD_PER_MTOK
+            + (Decimal(out) / million) * MISTRAL_OUTPUT_USD_PER_MTOK
+        )
     raise Track1LedgerError(f"unknown spend kind {kind!r}")
 
 
@@ -222,7 +232,16 @@ def resolve_track1_mode(
         else:
             generator = str(source.get("LRA_GENERATOR", DEFAULT_GENERATOR) or DEFAULT_GENERATOR)
             generator = generator.strip().lower()
-            if generator in {"grok", "grok-4.6", "xai", "track1"}:
+            if generator in {
+                "grok",
+                "grok-4.6",
+                "xai",
+                "track1",
+                "mistral",
+                "mistral_labs",
+                "labs-leanstral-1-5",
+                "leanstral-1-5",
+            }:
                 raw = "track1"
             else:
                 raw = source.get("LRA_TRACK1_MODE", DEFAULT_MODE)
@@ -272,6 +291,7 @@ class ProblemLedger:
     lines: list[UsageLine] = field(default_factory=list)
     grok_calls: int = 0
     jev_calls: int = 0
+    mistral_calls: int = 0
     hard_stopped: bool = False
     skipped: bool = False
     reason: str = ""
@@ -301,6 +321,9 @@ class ProblemLedger:
         if kind_key == "grok" and self.grok_calls >= MAX_GROK_CALLS:
             self.hard_stopped = True
             return False, "max_grok_calls", Decimal("0")
+        if kind_key == "mistral" and self.mistral_calls >= MAX_MISTRAL_CALLS:
+            self.hard_stopped = True
+            return False, "max_mistral_calls", Decimal("0")
         if kind_key == "jev" and self.jev_calls >= MAX_JEV_CALLS:
             self.hard_stopped = True
             return False, "max_jev_calls", Decimal("0")
@@ -325,9 +348,14 @@ class ProblemLedger:
         if kind_key == "grok":
             default_model = REQUESTED_MODEL
             call_index = self.grok_calls + 1
-        else:
+        elif kind_key == "mistral":
+            default_model = MISTRAL_MODEL_ID
+            call_index = self.mistral_calls + 1
+        elif kind_key == "jev":
             default_model = JEV_MODEL_ID
             call_index = self.jev_calls + 1
+        else:
+            raise Track1LedgerError(f"unknown spend kind {kind_key!r}")
         if not allowed:
             line = UsageLine(
                 kind=kind_key,
@@ -347,8 +375,12 @@ class ProblemLedger:
         self._spent = _money(self._spent + cost)
         if kind_key == "grok":
             self.grok_calls += 1
-        else:
+        elif kind_key == "mistral":
+            self.mistral_calls += 1
+        elif kind_key == "jev":
             self.jev_calls += 1
+        else:
+            raise Track1LedgerError(f"unknown spend kind {kind_key!r}")
         self._refresh()
         line = UsageLine(
             kind=kind_key,
@@ -375,8 +407,10 @@ class ProblemLedger:
             "reason": self.reason,
             "grok_calls": self.grok_calls,
             "jev_calls": self.jev_calls,
+            "mistral_calls": self.mistral_calls,
             "max_grok_calls": MAX_GROK_CALLS,
             "max_jev_calls": MAX_JEV_CALLS,
+            "max_mistral_calls": MAX_MISTRAL_CALLS,
             "official_track2": self.official_track2,
             "contaminates_track2": self.contaminates_track2,
             "track": self.track,

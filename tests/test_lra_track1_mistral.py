@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Parse-only Track 1 Mistral Labs adapter tests. No live POST."""
+
+from __future__ import annotations
+
+import unittest
+from pathlib import Path
+import sys
+
+HARNESS = Path(__file__).resolve().parents[1] / "papers/completion/lean_refactor_arena/harness"
+sys.path.insert(0, str(HARNESS))
+import track1_ledger as lra_t1  # noqa: E402
+import track1_mistral_leanstral as mistral  # noqa: E402
+
+
+class Track1MistralTests(unittest.TestCase):
+    def test_self_check_refuses_docker0_and_prices_zero(self) -> None:
+        report = mistral.self_check()
+        self.assertTrue(report["ok"], report)
+        self.assertTrue(report["refuses_docker0"])
+        self.assertTrue(report["labs_priced_zero"])
+        self.assertTrue(report["official_track2_stays_off"])
+        self.assertEqual(report["hardware_class"], "mistral_labs_api")
+        self.assertIsNone(report["arena_score"])
+
+    def test_usd_for_mistral_is_zero(self) -> None:
+        self.assertEqual(float(lra_t1.usd_for("mistral", 2_000_000, 50_000)), 0.0)
+
+    def test_ledger_counts_mistral_separately_from_grok(self) -> None:
+        ledger = lra_t1.ProblemLedger(name="x")
+        first = ledger.record("mistral", input_tokens=100, output_tokens=10, fixture=True)
+        second = ledger.record("mistral", input_tokens=100, output_tokens=10, fixture=True)
+        third = ledger.record("mistral", input_tokens=100, output_tokens=10, fixture=True)
+        self.assertFalse(first.skipped)
+        self.assertFalse(second.skipped)
+        self.assertTrue(third.skipped)
+        self.assertEqual(third.reason, "max_mistral_calls")
+        self.assertEqual(ledger.mistral_calls, 2)
+        self.assertEqual(ledger.grok_calls, 0)
+
+    def test_assert_hosted_url_blocks_spark(self) -> None:
+        with self.assertRaises(mistral.Track1MistralError):
+            mistral.assert_hosted_url("http://172.17.0.1:8080/v1/chat/completions")
+        mistral.assert_hosted_url("https://api.mistral.ai/v1/chat/completions")
+
+
+if __name__ == "__main__":
+    unittest.main()
