@@ -342,7 +342,6 @@ def diffuse_search(
     rounds_out: list[dict[str, Any]] = []
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
-    ledger = lra_t1.ProblemLedger(name=f"{name}#diffuse") if use_leanstral else None
     if use_leanstral:
         lra_mistral.load_keyfiles()
         lra_mistral.pin_paths()
@@ -372,27 +371,47 @@ def diffuse_search(
 
     for round_i in range(1, max(1, rounds) + 1):
         remaining = [hole for hole in holes if hole.hole_id not in dropped]
-        if not remaining:
-            break
-        jev = jev_round(record, remaining, history, keep_tokens)
-        probs = jev.get("probabilities") or {}
-        high = [hid for hid, p in probs.items() if float(p) >= tau]
-        if not high and jev.get("choice"):
-            high = [str(jev["choice"])]
-        explore = [rng.choice([hole.hole_id for hole in remaining])]
-        step_exploit = consider("exploit_high_p", high)
-        step_explore = consider("explore_random", explore)
+        jev: dict[str, Any] = {"skipped": True, "reason": "no_holes"}
+        step_exploit: Optional[dict[str, Any]] = None
+        step_explore: Optional[dict[str, Any]] = None
+        high: list[str] = []
+        explore: list[str] = []
+        if remaining:
+            jev = jev_round(record, remaining, history, keep_tokens)
+            probs = jev.get("probabilities") or {}
+            high = [hid for hid, p in probs.items() if float(p) >= tau]
+            if not high and jev.get("choice"):
+                high = [str(jev["choice"])]
+            explore = [rng.choice([hole.hole_id for hole in remaining])]
+            step_exploit = consider("exploit_high_p", high)
+            step_explore = consider("explore_random", explore)
         noise = None
-        if use_leanstral and ledger is not None and remaining:
-            hole = rng.choice(remaining)
-            prompt = lra_mask.one_hole_prompt(record, keep, hole)
+        if use_leanstral:
+            round_ledger = lra_t1.ProblemLedger(name=f"{name}#diffuse-r{round_i}")
+            if remaining:
+                hole = rng.choice(remaining)
+                prompt = lra_mask.one_hole_prompt(record, keep, hole)
+                noise_meta = {"hole": hole.hole_id, "mode": "one_hole"}
+            else:
+                shots = [
+                    lra_mask.few_shot_example(item)
+                    for item in records
+                    if item.get("name") in lra_mask.SHOT_NAMES and item.get("name") != name
+                ]
+                prompt = (
+                    f"Current lake-valid keep is {keep_tokens} tokens "
+                    f"(reference {lra_loop.token_count(reference)}). "
+                    "Shrink it further. Keep induction and every case arm. "
+                    "Delete only residual simp-at/rename_i/have/rw. No sorry.\n\n"
+                    + lra_mask.few_shot_prompt(record, shots)
+                    + f"\nCURRENT KEEP ({keep_tokens} tokens):\n{keep[:1800]}\n"
+                )
+                noise_meta = {"hole": None, "mode": "shrink_keep"}
             try:
                 text, identity, _line = lra_mistral.generate_mistral(
-                    prompt, ledger, max_new_tokens=256, timeout=120.0
+                    prompt, round_ledger, max_new_tokens=400, timeout=120.0
                 )
-            except lra_t1.Track1LedgerError:
-                text, identity = "", {}
-            except lra_mistral.Track1MistralError:
+            except (lra_t1.Track1LedgerError, lra_mistral.Track1MistralError):
                 text, identity = "", {}
             filled = lra_loop.extract_generated_tactics(text) if text else ""
             if filled:
@@ -413,7 +432,7 @@ def diffuse_search(
                     keep = str(hit.get("tactics") or denoised)
                     keep_tokens = int(hit["token_count"])
                 noise = {
-                    "hole": hole.hole_id,
+                    **noise_meta,
                     "identity": identity,
                     "accepted": bool(hit),
                     "noise_evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals_n],
@@ -452,7 +471,7 @@ def diffuse_search(
             "ratio": round(keep_tokens / max(1, ref_tokens), 4),
             "dropped": sorted(dropped),
             "rounds": rounds_out,
-            "ledger": None if ledger is None else ledger.as_dict(),
+            "ledger": None,
             "hardware_class": HARDWARE_CLASS,
             "called_docker0": False,
             "official_track2": False,
