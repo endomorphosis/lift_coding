@@ -1,0 +1,1174 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T07:49:21.578819+00:00",
+  "problems": [
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "dropped": [
+        "MCA_1",
+        "MCA_3"
+      ],
+      "hardware_class": "mistral_labs_api",
+      "keep_tokens": 464,
+      "leanstral": null,
+      "n_holes": 8,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "note": "Jev-guided stochastic coordinate descent on MCA holes; not neural SGD.",
+      "official_track2": false,
+      "pr": "PR-9e",
+      "protocol": "LRA/v1",
+      "ratio": 0.9627,
+      "ref_tokens": 482,
+      "rounds": [
+        {
+          "accepted": {
+            "errors": [],
+            "exit_code": 0,
+            "hammer": "identity",
+            "n_chars": 2313,
+            "theorem_ok": true,
+            "token_count": 464
+          },
+          "evals": [
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "identity",
+              "n_chars": 2313,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      rename_i m1 k1 ty1 trigger1 e1\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+              "theorem_ok": true,
+              "token_count": 464
+            },
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "simp_all",
+              "n_chars": 2338,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      rename_i m1 k1 ty1 trigger1 e1\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  all_goals try simp_all",
+              "theorem_ok": true,
+              "token_count": 467
+            },
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "omega",
+              "n_chars": 2325,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      rename_i m1 k1 ty1 trigger1 e1\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  try omega",
+              "theorem_ok": true,
+              "token_count": 466
+            },
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "restore+simp",
+              "n_chars": 2350,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      rename_i m1 k1 ty1 trigger1 e1\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  all_goals try simp_all\n  try omega",
+              "theorem_ok": true,
+              "token_count": 469
+            }
+          ],
+          "jev": {
+            "choice": "MCA_1",
+            "confidence": 0.75,
+            "likely_compiles": 0.65,
+            "likely_token_cut": 0.66,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.01,
+              "MCA_1": 0.78,
+              "MCA_2": 0.0,
+              "MCA_3": 0.19,
+              "MCA_4": 0.01,
+              "MCA_5": 0.01,
+              "MCA_6": 0.0,
+              "MCA_7": 0.0
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 943,
+              "output_tokens": 136
+            },
+            "wall_ms": 177.47415200574324
+          },
+          "keep_tokens": 464,
+          "minibatch": [
+            "MCA_1",
+            "MCA_3"
+          ],
+          "round": 1
+        },
+        {
+          "accepted": null,
+          "evals": [
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3161
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3161
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "identity",
+              "n_chars": 2253,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+              "theorem_ok": false,
+              "token_count": 454
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3161
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3161
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "simp_all",
+              "n_chars": 2278,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  all_goals try simp_all",
+              "theorem_ok": false,
+              "token_count": 457
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3161
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3161
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "omega",
+              "n_chars": 2265,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 456
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3161
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3161
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "restore+simp",
+              "n_chars": 2290,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  all_goals try simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 459
+            }
+          ],
+          "jev": {
+            "choice": "MCA_6",
+            "confidence": 0.6,
+            "likely_compiles": 0.73,
+            "likely_token_cut": 0.5,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.03,
+              "MCA_2": 0.06,
+              "MCA_4": 0.01,
+              "MCA_5": 0.01,
+              "MCA_6": 0.67,
+              "MCA_7": 0.22
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 863,
+              "output_tokens": 116
+            },
+            "wall_ms": 216.90674498677254
+          },
+          "keep_tokens": 464,
+          "minibatch": [
+            "MCA_6",
+            "MCA_2"
+          ],
+          "round": 2
+        },
+        {
+          "accepted": null,
+          "evals": [
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3162
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3162
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "identity",
+              "n_chars": 2261,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+              "theorem_ok": false,
+              "token_count": 455
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3162
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3162
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "simp_all",
+              "n_chars": 2286,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  all_goals try simp_all",
+              "theorem_ok": false,
+              "token_count": 458
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3162
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3162
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "omega",
+              "n_chars": 2273,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 457
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `trigger1`",
+                  "pos": {
+                    "column": 66,
+                    "line": 3162
+                  }
+                },
+                {
+                  "data": "Unknown identifier `e1`",
+                  "pos": {
+                    "column": 104,
+                    "line": 3162
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "restore+simp",
+              "n_chars": 2298,
+              "tactics": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all\n  all_goals try simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 460
+            }
+          ],
+          "jev": {
+            "choice": "MCA_6",
+            "confidence": 0.66,
+            "likely_compiles": 0.72,
+            "likely_token_cut": 0.4,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.03,
+              "MCA_2": 0.08,
+              "MCA_4": 0.02,
+              "MCA_5": 0.02,
+              "MCA_6": 0.71,
+              "MCA_7": 0.14
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 920,
+              "output_tokens": 116
+            },
+            "wall_ms": 167.87084500538185
+          },
+          "keep_tokens": 464,
+          "minibatch": [
+            "MCA_6",
+            "MCA_5"
+          ],
+          "round": 3
+        }
+      ],
+      "schema": "lra-sgd-fanout/v1",
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "dropped": [],
+      "hardware_class": "mistral_labs_api",
+      "keep_tokens": 268,
+      "leanstral": {
+        "evals": [
+          {
+            "errors": [
+              {
+                "data": "Case tag `update_some` not found.\n\nNote: There are no cases to select.",
+                "pos": {
+                  "column": 2,
+                  "line": 954
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "identity",
+            "n_chars": 1394,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all",
+            "theorem_ok": false,
+            "token_count": 241
+          },
+          {
+            "errors": [
+              {
+                "data": "Case tag `update_some` not found.\n\nNote: There are no cases to select.",
+                "pos": {
+                  "column": 2,
+                  "line": 954
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "simp_all",
+            "n_chars": 1419,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  all_goals try simp_all",
+            "theorem_ok": false,
+            "token_count": 244
+          },
+          {
+            "errors": [
+              {
+                "data": "Case tag `update_some` not found.\n\nNote: There are no cases to select.",
+                "pos": {
+                  "column": 2,
+                  "line": 954
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "omega",
+            "n_chars": 1406,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  try omega",
+            "theorem_ok": false,
+            "token_count": 243
+          },
+          {
+            "errors": [
+              {
+                "data": "Case tag `update_some` not found.\n\nNote: There are no cases to select.",
+                "pos": {
+                  "column": 2,
+                  "line": 954
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "restore+simp",
+            "n_chars": 1431,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  all_goals try simp_all\n  try omega",
+            "theorem_ok": false,
+            "token_count": 246
+          }
+        ],
+        "hammer_evals": [
+          {
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 2,
+                  "line": 955
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "identity",
+            "n_chars": 1380,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  all_goals try simp_all\n  try omega",
+            "theorem_ok": false,
+            "token_count": 230
+          },
+          {
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 2,
+                  "line": 955
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "simp_all",
+            "n_chars": 1405,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  all_goals try simp_all\n  try omega\n  all_goals try simp_all",
+            "theorem_ok": false,
+            "token_count": 233
+          },
+          {
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 2,
+                  "line": 955
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "omega",
+            "n_chars": 1392,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  all_goals try simp_all\n  try omega\n  try omega",
+            "theorem_ok": false,
+            "token_count": 232
+          },
+          {
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 2,
+                  "line": 955
+                }
+              },
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              }
+            ],
+            "exit_code": 1,
+            "hammer": "restore+simp",
+            "n_chars": 1380,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  apply And.intro\n  refine updatedStatesInit Hlen1 ?_ ?_\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  simp [InitStatesUpdated Hinit]\n  constructor\n\n  refine \u27e8rfl, ?_, ?_\u27e9\n  .apply updatedStatesInit Hlen1\n  apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  exact InitStatesNotDefined Hinit\n  exact InitStatesNodup Hinit\n  .apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  .simp [UpdateStateUpdated Hup, updatedStates]\n  rw [\u2190 updatedStateComm']\n  .have Hdef := UpdateStateDefined' Hup\n  simp [isDefined, Option.isSome] at Hdef\n  split at Hdef <;> simp_all\n  next val heq =>\n  apply updatedStateUpdate (v':=val)\n  apply InitStatesSomeMonotone heq\n  apply updatedStatesInit\n  .simp_all\n  .apply UpdateStateNotDefMonotone' ?_ Hup\n  apply UpdateStatesNotDefMonotone' ?_ Hups\n  apply InitStatesNotDefined Hinit\n  .exact InitStatesNodup Hinit\n  .rw [List.unzip_zip] <;> simp_all\n  have Hnd := InitStatesNotDefined Hinit\n  simp [isNotDefined, isDefined] at *\n  apply Not.intro\n  intros Hin\n  specialize Hnd _ Hin\n  simp_all\n  all_goals try simp_all\n  try omega",
+            "theorem_ok": false,
+            "token_count": 230
+          }
+        ],
+        "identity": {
+          "arena_score": null,
+          "fallback_used": false,
+          "finish_reason": "stop",
+          "hardware_class": "mistral_labs_api",
+          "request_id": "84482c167a814eceb0e3750328b3f5de",
+          "requested_model": "labs-leanstral-1-5",
+          "requested_provider": "mistral",
+          "resolved_model": "labs-leanstral-1-5",
+          "resolved_provider": "mistral",
+          "url_host": "api.mistral.ai",
+          "used_prototype_endpoint": false
+        },
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 0,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 2909,
+              "kind": "mistral",
+              "model": "labs-leanstral-1-5",
+              "output_tokens": 423,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 0.0
+            }
+          ],
+          "max_grok_calls": 2,
+          "max_jev_calls": 2,
+          "max_mistral_calls": 2,
+          "mistral_calls": 1,
+          "name": "Core.InitsUpdatesComm#sgd",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 3.0,
+          "skipped": false,
+          "spent_usd": 0.0,
+          "track": "track1_closed"
+        }
+      },
+      "n_holes": 4,
+      "name": "Core.InitsUpdatesComm",
+      "note": "Jev-guided stochastic coordinate descent on MCA holes; not neural SGD.",
+      "official_track2": false,
+      "pr": "PR-9e",
+      "protocol": "LRA/v1",
+      "ratio": 1.0,
+      "ref_tokens": 268,
+      "rounds": [
+        {
+          "accepted": null,
+          "evals": [
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "identity",
+              "n_chars": 1605,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+              "theorem_ok": false,
+              "token_count": 249
+            },
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "simp_all",
+              "n_chars": 1630,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  all_goals try simp_all",
+              "theorem_ok": false,
+              "token_count": 252
+            },
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "omega",
+              "n_chars": 1617,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 251
+            },
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "restore+simp",
+              "n_chars": 1642,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  all_goals try simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 254
+            }
+          ],
+          "jev": {
+            "choice": "MCA_0",
+            "confidence": 0.41,
+            "likely_compiles": 0.61,
+            "likely_token_cut": 0.86,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.56,
+              "MCA_1": 0.08,
+              "MCA_2": 0.11,
+              "MCA_3": 0.25
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 719,
+              "output_tokens": 96
+            },
+            "wall_ms": 169.52624401892535
+          },
+          "keep_tokens": 268,
+          "minibatch": [
+            "MCA_0",
+            "MCA_2"
+          ],
+          "round": 1
+        },
+        {
+          "accepted": null,
+          "evals": [
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 948
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 955
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 970
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 981
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit ?m.275\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 983
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "identity",
+              "n_chars": 1604,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+              "theorem_ok": false,
+              "token_count": 249
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 948
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 955
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 970
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 981
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit ?m.275\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 983
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "simp_all",
+              "n_chars": 1629,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  all_goals try simp_all",
+              "theorem_ok": false,
+              "token_count": 252
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 948
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 955
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 970
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 981
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit ?m.275\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 983
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "omega",
+              "n_chars": 1616,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 251
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 948
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 955
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 970
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 981
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit ?m.275\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 983
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "restore+simp",
+              "n_chars": 1641,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  all_goals try simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 254
+            }
+          ],
+          "jev": {
+            "choice": "MCA_0",
+            "confidence": 0.32,
+            "likely_compiles": 0.56,
+            "likely_token_cut": 0.82,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.49,
+              "MCA_1": 0.11,
+              "MCA_2": 0.12,
+              "MCA_3": 0.28
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 775,
+              "output_tokens": 96
+            },
+            "wall_ms": 187.29536698083393
+          },
+          "keep_tokens": 268,
+          "minibatch": [
+            "MCA_0",
+            "MCA_1"
+          ],
+          "round": 2
+        },
+        {
+          "accepted": null,
+          "evals": [
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "identity",
+              "n_chars": 1605,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+              "theorem_ok": false,
+              "token_count": 249
+            },
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "simp_all",
+              "n_chars": 1630,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  all_goals try simp_all",
+              "theorem_ok": false,
+              "token_count": 252
+            },
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "omega",
+              "n_chars": 1617,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 251
+            },
+            {
+              "errors": [
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 10,
+                    "line": 982
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 983
+                  }
+                },
+                {
+                  "data": "No goals to be solved",
+                  "pos": {
+                    "column": 8,
+                    "line": 984
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "restore+simp",
+              "n_chars": 1642,
+              "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  have Hlen1 := InitStatesLength Hinit\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all\n  all_goals try simp_all\n  try omega",
+              "theorem_ok": false,
+              "token_count": 254
+            }
+          ],
+          "jev": {
+            "choice": "MCA_0",
+            "confidence": 0.29,
+            "likely_compiles": 0.6,
+            "likely_token_cut": 0.84,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.47,
+              "MCA_1": 0.08,
+              "MCA_2": 0.14,
+              "MCA_3": 0.31
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 832,
+              "output_tokens": 96
+            },
+            "wall_ms": 212.8311849955935
+          },
+          "keep_tokens": 268,
+          "minibatch": [
+            "MCA_0",
+            "MCA_2"
+          ],
+          "round": 3
+        }
+      ],
+      "schema": "lra-sgd-fanout/v1",
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "schema": "lra-sgd-fanout-batch/v1",
+  "wall_ms": 121889.47065200773
+}
