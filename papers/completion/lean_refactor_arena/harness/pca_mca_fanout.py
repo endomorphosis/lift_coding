@@ -48,6 +48,9 @@ LAKE_READY = (
     "fundamental_theorem_of_variational_calculus'",
     "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
     "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+    "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+    "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+    "interleaved_affine_gaps_imply_tensor_gaps",
 )
 
 if str(HERE) not in sys.path:
