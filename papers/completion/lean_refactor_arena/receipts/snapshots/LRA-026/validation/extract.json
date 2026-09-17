@@ -1,0 +1,73 @@
+{
+  "arena_score": null,
+  "freeze": {
+    "arena_score": null,
+    "completing_argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+      "--receipts-dir",
+      "papers/completion/lean_refactor_arena/submissions/warmup",
+      "--require-complete"
+    ],
+    "hardware_class": "spark_gb10",
+    "jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "n_problems": 15,
+    "nvfp4_bytes": 67135119264,
+    "official_score": null,
+    "operator_argv": [
+      "/usr/bin/python3.12",
+      "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+      "--run",
+      "--receipts-dir",
+      "papers/completion/lean_refactor_arena/submissions/warmup",
+      "--network",
+      "deny"
+    ],
+    "protocol": "LRA/v1",
+    "schema": "lra-run-freeze/v1",
+    "sm80_derivative_sha256": null,
+    "token_savings": null,
+    "typesafe": "off",
+    "unpublished_sha_3fe4e64d_cited": false,
+    "weight_cid": "bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i",
+    "weight_revision": "abcc5ce2528c6375148d41dac6dce20f06c339f4",
+    "writes_arena_scores_into_manuscript": false
+  },
+  "generate_text": {
+    "DEFAULT_MAX_NEW_TOKENS": 1400,
+    "DEFAULT_TIMEOUT_SECONDS": 300,
+    "FAIL_CLOSED_KWARGS": {
+      "allow_cross_provider_fallback": false,
+      "allow_local_fallback": false,
+      "disable_model_retry": true,
+      "model_name": "Leanstral",
+      "provider": "leanstral_local",
+      "temperature": 0.0
+    },
+    "PUTNAM_MAX_NEW_TOKENS": 4096,
+    "PUTNAM_TIMEOUT_SECONDS": 600,
+    "REQUESTED_MODEL": "Leanstral",
+    "REQUESTED_PROVIDER": "leanstral_local"
+  },
+  "jsonl_bytes": 113826,
+  "jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "leaderboard_rank": null,
+  "main_tex_sha256": "1ccece007b5f5d05b4afbc754372e5a2ec9f1d47543c90816b44975167888702",
+  "official_score": null,
+  "ok": true,
+  "prompt_sha256": "57036f2bb94d8d8b38d77096ad92a2e615571addee7d01c72e104edaacfee96a",
+  "run_warmup": {
+    "ELAB_WEIGHT": 0.45,
+    "GATES": "off",
+    "HAMMERS": "off",
+    "HARDWARE_CLASS": "spark_gb10",
+    "LIVE_SELF_CHECK_MAX_NEW_TOKENS": 32,
+    "LOOP_VERSION": "v1",
+    "PROTOCOL": "LRA/v1",
+    "TOKENIZER_ID": "lra-local-ws-punct/v1",
+    "TOKEN_WEIGHT": 0.55,
+    "TYPESAFE": "off"
+  },
+  "submissions_warmup_exists": false,
+  "token_savings": null
+}
