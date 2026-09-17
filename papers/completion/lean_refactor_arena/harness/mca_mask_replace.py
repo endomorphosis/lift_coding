@@ -359,8 +359,14 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
         if not restore_lines:
             restore_lines = [line for line in reference.splitlines() if ident in line]
         present = {line.strip() for line in out.splitlines()}
-        if restore_lines and restore_lines[0].strip() not in present:
-            out = restore_lines[0] + "\n" + out
+        haveish = next((line for line in restore_lines if "have " in line or ":=" in line), None)
+        pick = haveish or (restore_lines[0] if restore_lines else "")
+        if pick and pick.strip() not in present:
+            out = pick + "\n" + out
+    for tac in re.findall(r"unknown tactic[:\s]*[`']?([A-Za-z_?][A-Za-z0-9_?]*)", blob, re.I):
+        if tac.lower() in {"case", "induction", "simp", "simp_all", "intro", "intros", "exact", "apply"}:
+            continue
+        out = re.sub(rf"\b{re.escape(tac)}\b", "simp_all", out)
     for tag in re.findall(r"Case tag `([^`]+)` not found", blob):
         out = re.sub(rf"(?m)^[ \t]*case {re.escape(tag)}\b.*$", "", out)
     ref_ind = [line for line in reference.splitlines() if line.strip().startswith("induction ")]
@@ -646,7 +652,7 @@ def run_problem(
             current = item["tactics"]
             current_errors = compiled.get("errors") or []
             last_kind = str(item["kind"])
-            for pass_i in (1, 2):
+            for pass_i in (1, 2, 3):
                 repaired = hammer_repair(current, tactics, current_errors)
                 if repaired == current:
                     break
