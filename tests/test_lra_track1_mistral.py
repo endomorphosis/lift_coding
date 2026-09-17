@@ -38,6 +38,17 @@ class Track1MistralTests(unittest.TestCase):
         self.assertEqual(ledger.mistral_calls, 2)
         self.assertEqual(ledger.grok_calls, 0)
 
+    def test_pca_mca_self_check_and_mca_maps_simp_at_to_strength(self) -> None:
+        import pca_mca_fanout as pca
+
+        report = pca.self_check()
+        self.assertTrue(report["ok"], report.get("audit"))
+        self.assertIsNone(report["arena_score"])
+        self.assertAlmostEqual(sum(report["pca"]["explained_ratio"]), 1.0, places=5)
+        sample = report["sample"]
+        self.assertGreaterEqual(sample["n_drafts"], 2)
+        self.assertTrue(any(fam in {"dead_code", "strength_reduction"} for fam in sample["families"]))
+
     def test_drop_redundant_simp_at_keeps_following_simp_all(self) -> None:
         import draft_fanout as fanout
 

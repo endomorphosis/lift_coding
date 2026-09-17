@@ -1,0 +1,812 @@
+{
+  "arena_score": null,
+  "canaries": [
+    {
+      "amenable": [
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have",
+            "n_rename_i",
+            "n_simp_at"
+          ],
+          "mca_score": 3.660941869184676,
+          "present": {
+            "n_have": 1.0,
+            "n_rename_i": 5.0,
+            "n_simp_at": 8.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_simp_at",
+            "n_simp_all"
+          ],
+          "mca_score": 2.513787687614904,
+          "present": {
+            "n_simp_all": 18.0,
+            "n_simp_at": 8.0
+          }
+        },
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 1.5553371384073726,
+          "present": {
+            "n_apply": 14.0,
+            "n_cases": 9.0,
+            "n_intro": 15.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have",
+            "n_induction"
+          ],
+          "mca_score": 1.08012109377167,
+          "present": {
+            "n_have": 1.0,
+            "n_induction": 1.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_confidence": 0.5,
+      "best_first_draft": "d001",
+      "dead_code_safe": 0.74,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005",
+        "d006",
+        "d007",
+        "d008",
+        "d009",
+        "d010",
+        "d011",
+        "d012",
+        "d013",
+        "d014",
+        "d015",
+        "d016",
+        "d017",
+        "d018"
+      ],
+      "families": [
+        "dead_code",
+        "strength_reduction",
+        "search_space",
+        "loop_invariant"
+      ],
+      "features": {
+        "max_indent": 8.0,
+        "n_apply": 14.0,
+        "n_blank": 1.0,
+        "n_calc": 0.0,
+        "n_cases": 9.0,
+        "n_exact": 1.0,
+        "n_have": 1.0,
+        "n_induction": 1.0,
+        "n_intro": 15.0,
+        "n_lines": 92.0,
+        "n_obtain": 0.0,
+        "n_rename_i": 5.0,
+        "n_rw": 0.0,
+        "n_simp_all": 18.0,
+        "n_simp_at": 8.0,
+        "n_tokens": 482.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "strength_reduction",
+            "id": "d001",
+            "ops": [
+              "drop_redundant_simp_at",
+              "mca"
+            ],
+            "theorem_ok": true,
+            "token_count": 464
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3098
+                }
+              },
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3105
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d016",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 432
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3098
+                }
+              },
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3105
+                }
+              },
+              {
+                "data": "Unknown identifier `trigger1`",
+                "pos": {
+                  "column": 66,
+                  "line": 3162
+                }
+              },
+              {
+                "data": "Unknown identifier `e1`",
+                "pos": {
+                  "column": 104,
+                  "line": 3162
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d015",
+            "ops": [
+              "drop_rename_i",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 462
+          }
+        ]
+      },
+      "likely_token_cut": 0.95,
+      "live": true,
+      "loop_invariant_safe": 0.49,
+      "model": "jev-1.13.0",
+      "n_drafts": 19,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "search_space_safe": 0.83,
+      "source": "strata",
+      "strength_reduction_safe": 0.65,
+      "top": [
+        {
+          "family": "strength_reduction",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i ",
+          "id": "d001",
+          "n_chars": 2312,
+          "ops": [
+            "drop_redundant_simp_at",
+            "mca"
+          ],
+          "probability": 0.53
+        },
+        {
+          "family": "dead_code",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n",
+          "id": "d016",
+          "n_chars": 2171,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.26
+        },
+        {
+          "family": "dead_code",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n",
+          "id": "d015",
+          "n_chars": 2284,
+          "ops": [
+            "drop_rename_i",
+            "mca"
+          ],
+          "probability": 0.16
+        },
+        {
+          "family": "reference",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d000",
+          "n_chars": 2406,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.02
+        },
+        {
+          "family": "loop_invariant",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d017",
+          "n_chars": 2293,
+          "ops": [
+            "drop_have_after_induction",
+            "mca"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "simp_set",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d006",
+          "n_chars": 2405,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "const",
+            "mca_span"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "simp_set",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all",
+          "id": "d004",
+          "n_chars": 2358,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "op",
+            "mca_span"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "have_chain",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d014",
+          "n_chars": 2255,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "quant trih eih",
+            "mca_span"
+          ],
+          "probability": 0.0
+        }
+      ],
+      "usage": {
+        "input_tokens": 6772,
+        "output_tokens": 305
+      },
+      "wall_ms": 434.6249570080545
+    },
+    {
+      "amenable": [
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 0.7068739671603215,
+          "present": {
+            "n_apply": 6.0,
+            "n_cases": 10.0,
+            "n_intro": 4.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_obtain"
+          ],
+          "mca_score": 0.5033485201089839,
+          "present": {
+            "n_obtain": 8.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_confidence": 0.74,
+      "best_first_draft": "d004",
+      "dead_code_safe": 0.53,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004"
+      ],
+      "families": [
+        "search_space",
+        "dead_code"
+      ],
+      "features": {
+        "max_indent": 10.0,
+        "n_apply": 6.0,
+        "n_blank": 0.0,
+        "n_calc": 0.0,
+        "n_cases": 10.0,
+        "n_exact": 0.0,
+        "n_have": 0.0,
+        "n_induction": 0.0,
+        "n_intro": 4.0,
+        "n_lines": 60.0,
+        "n_obtain": 8.0,
+        "n_rename_i": 0.0,
+        "n_rw": 0.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 296.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 15,
+                  "line": 325
+                }
+              },
+              {
+                "data": "Unknown identifier `htr2`",
+                "pos": {
+                  "column": 27,
+                  "line": 327
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 16,
+                  "line": 329
+                }
+              },
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 13,
+                  "line": 337
+                }
+              },
+              {
+                "data": "Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\n\u03bc : Act Name\ns1' : Process Name Constant\nhtr : lts.Tr s1 \u03bc s1'\nhbisim : s1 ~[lts] s2\n\u22a2 lts.Tr s2 \u03bc sorry",
+                "pos": {
+                  "column": 8,
+                  "line": 339
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 12,
+                  "line": 341
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d004",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 192
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 15,
+                  "line": 325
+                }
+              },
+              {
+                "data": "Unknown identifier `htr2`",
+                "pos": {
+                  "column": 27,
+                  "line": 327
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 16,
+                  "line": 329
+                }
+              },
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 13,
+                  "line": 337
+                }
+              },
+              {
+                "data": "Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\n\u03bc : Act Name\ns1' : Process Name Constant\nhtr : lts.Tr s1 \u03bc s1'\nhbisim : s1 ~[lts] s2\n\u22a2 lts.Tr s2 \u03bc sorry",
+                "pos": {
+                  "column": 8,
+                  "line": 339
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 12,
+                  "line": 341
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "have_chain",
+            "id": "d002",
+            "ops": [
+              "drop_have_obtain",
+              "case",
+              "left",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 244
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 296
+          }
+        ]
+      },
+      "likely_token_cut": 1.3,
+      "live": true,
+      "loop_invariant_safe": 0.29,
+      "model": "jev-1.13.0",
+      "n_drafts": 5,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "search_space_safe": 0.71,
+      "source": "cslib",
+      "strength_reduction_safe": 0.54,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      cases htr\n      case c",
+          "id": "d004",
+          "n_chars": 1235,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.79
+        },
+        {
+          "family": "have_chain",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      cases htr\n      case c",
+          "id": "d002",
+          "n_chars": 1418,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "left",
+            "mca_span"
+          ],
+          "probability": 0.07
+        },
+        {
+          "family": "reference",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d000",
+          "n_chars": 1603,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.05
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d001",
+          "n_chars": 1602,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "left",
+            "mca_span"
+          ],
+          "probability": 0.05
+        },
+        {
+          "family": "have_chain",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d003",
+          "n_chars": 1419,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "right",
+            "mca_span"
+          ],
+          "probability": 0.04
+        }
+      ],
+      "usage": {
+        "input_tokens": 4067,
+        "output_tokens": 165
+      },
+      "wall_ms": 172.71763100870885
+    }
+  ],
+  "jev_generated_lean": false,
+  "lock_ex": false,
+  "observed_at": "2026-09-17T05:49:09.092500+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.42706949915959413,
+      0.2399170425481989,
+      0.0920687227021113,
+      0.0737984007352172,
+      0.05485757536721184,
+      0.035236407413966955,
+      0.03010587276925452,
+      0.019141456584891633,
+      0.010757439456409942,
+      0.008964276170755259,
+      0.00420332095928038,
+      0.0021696467906426983,
+      0.0014551824848345002,
+      0.0002551568576307534,
+      1.6601310231905288e-33
+    ],
+    "feature_names": [
+      "n_cases",
+      "n_simp_at",
+      "n_simp_all",
+      "n_have",
+      "n_obtain",
+      "n_rename_i",
+      "n_induction",
+      "n_calc",
+      "n_exact",
+      "n_apply",
+      "n_rw",
+      "n_intro",
+      "n_tokens",
+      "n_lines",
+      "max_indent",
+      "n_blank"
+    ],
+    "mean": [
+      3.066666666666667,
+      1.0,
+      5.6,
+      21.466666666666665,
+      1.8,
+      0.5333333333333333,
+      0.4,
+      0.8666666666666667,
+      6.266666666666667,
+      5.533333333333333,
+      7.4,
+      5.733333333333333,
+      1631.4,
+      136.53333333333333,
+      13.333333333333334,
+      6.733333333333333
+    ],
+    "minor": [
+      {
+        "explained": 0.0014551824848345002,
+        "index": 12,
+        "loadings": {
+          "max_indent": 0.09574526181321172,
+          "n_apply": 0.09320824867674048,
+          "n_blank": -0.0599720406787979,
+          "n_calc": 0.06515566870005539,
+          "n_cases": 0.13080474852471727,
+          "n_exact": -0.37660495116081666,
+          "n_have": 0.7222924339224993,
+          "n_induction": -0.09443631658675045,
+          "n_intro": -0.21978563937961862,
+          "n_lines": -0.15093754732821918,
+          "n_obtain": -0.08595246106911596,
+          "n_rename_i": 0.3224375308833174,
+          "n_rw": -0.2017535764446936,
+          "n_simp_all": -0.09957685564690091,
+          "n_simp_at": -0.17204709035329813,
+          "n_tokens": 0.14857825035875327
+        }
+      },
+      {
+        "explained": 0.0002551568576307534,
+        "index": 13,
+        "loadings": {
+          "max_indent": -0.19700823251787147,
+          "n_apply": 0.05936614197361837,
+          "n_blank": -0.4620118650738188,
+          "n_calc": 0.044754919931447264,
+          "n_cases": 0.03465802945541862,
+          "n_exact": 0.2616427354894938,
+          "n_have": -0.10307144873494546,
+          "n_induction": -0.06641000643627386,
+          "n_intro": -0.12419730092214241,
+          "n_lines": -0.09929203229043632,
+          "n_obtain": 0.1013632589657914,
+          "n_rename_i": -0.0709460758990819,
+          "n_rw": -0.25061984937392184,
+          "n_simp_all": 0.33470647326515485,
+          "n_simp_at": -0.11410215838317599,
+          "n_tokens": 0.655029442667343
+        }
+      },
+      {
+        "explained": 1.6601310231905288e-33,
+        "index": 14,
+        "loadings": {
+          "max_indent": 0.06344385068249919,
+          "n_apply": 0.0706412910128017,
+          "n_blank": 0.5638343228347188,
+          "n_calc": -0.3669500258587683,
+          "n_cases": 0.19824600205031162,
+          "n_exact": -0.27738291332983545,
+          "n_have": -0.10929633923083175,
+          "n_induction": 0.13783800546108876,
+          "n_intro": 0.03757724941042188,
+          "n_lines": -0.34779544098968407,
+          "n_obtain": 0.03688886474957613,
+          "n_rename_i": -0.16514555767965083,
+          "n_rw": 0.16232701428837817,
+          "n_simp_all": 0.2146333255938966,
+          "n_simp_at": -0.07636353344782586,
+          "n_tokens": 0.4024661252840344
+        }
+      }
+    ],
+    "n_features": 16,
+    "n_rows": 15,
+    "principal": [
+      {
+        "explained": 0.42706949915959413,
+        "index": 0,
+        "loadings": {
+          "max_indent": -0.286250310478066,
+          "n_apply": 0.09424584816932287,
+          "n_blank": -0.3464000878921089,
+          "n_calc": -0.31432567704611286,
+          "n_cases": 0.2450229600301903,
+          "n_exact": -0.3347176636569427,
+          "n_have": -0.3352649475916247,
+          "n_induction": 0.1732998199807837,
+          "n_intro": -0.12920988048145413,
+          "n_lines": -0.3525823931563415,
+          "n_obtain": 0.07441326609713375,
+          "n_rename_i": 0.15406471527629692,
+          "n_rw": -0.25914120825513204,
+          "n_simp_all": -0.06135395753272758,
+          "n_simp_at": 0.06290847625180987,
+          "n_tokens": -0.3615501231772924
+        }
+      },
+      {
+        "explained": 0.2399170425481989,
+        "index": 1,
+        "loadings": {
+          "max_indent": -0.04495627338600194,
+          "n_apply": 0.37762833752365343,
+          "n_blank": 0.10576863421747783,
+          "n_calc": 0.04497929109157115,
+          "n_cases": 0.06822548270219125,
+          "n_exact": 0.11826296080016722,
+          "n_have": 0.10940598376773701,
+          "n_induction": 0.22419348409937864,
+          "n_intro": 0.43698592702455336,
+          "n_lines": 0.08873879210550323,
+          "n_obtain": -0.10268332187982714,
+          "n_rename_i": 0.4260490279049822,
+          "n_rw": -0.15302206810399202,
+          "n_simp_all": 0.4366314622418669,
+          "n_simp_at": 0.39316271017917837,
+          "n_tokens": -0.04194977178031689
+        }
+      },
+      {
+        "explained": 0.0920687227021113,
+        "index": 2,
+        "loadings": {
+          "max_indent": 0.08964190732195029,
+          "n_apply": -0.3024016374958787,
+          "n_blank": 0.11016793446537186,
+          "n_calc": -0.12129711232094313,
+          "n_cases": 0.10237162968796916,
+          "n_exact": 0.06679111984270612,
+          "n_have": 0.2542807527704864,
+          "n_induction": 0.11004096654028364,
+          "n_intro": 0.121030273711498,
+          "n_lines": 0.10833062955178324,
+          "n_obtain": 0.7111601908143702,
+          "n_rename_i": -0.20534582928631714,
+          "n_rw": -0.42217164490414466,
+          "n_simp_all": 0.05231418184978788,
+          "n_simp_at": 0.12987926408222156,
+          "n_tokens": -0.09912124579455407
+        }
+      }
+    ],
+    "singular_values": [
+      10.12406439125624,
+      7.588154598554759,
+      4.700690741636458,
+      4.208517099460584,
+      3.6284732447864134,
+      2.908047073097695,
+      2.68801217717128,
+      2.1433500834847283,
+      1.6067935366867723,
+      1.4667741070053228,
+      1.0043888839624278,
+      0.7216060072880821,
+      0.5909685240013042,
+      0.2474624129668601,
+      6.312142628028354e-16
+    ],
+    "std": [
+      4.479087208597553,
+      2.160246899469287,
+      6.008882314263333,
+      26.780258068626264,
+      2.7616420236277306,
+      1.407914138796191,
+      0.4898979485566357,
+      1.9618585292749549,
+      8.751888685052819,
+      4.379751388175157,
+      7.400900846068223,
+      5.507167047483568,
+      1198.7467233184275,
+      72.81562713837982,
+      4.237399621885522,
+      11.715896133980628
+    ]
+  },
+  "pr": "PR-9c",
+  "protocol": "LRA/v1",
+  "schema": "lra-pca-mca-fanout/v1",
+  "typesafe_key_in_receipt": false,
+  "wall_ms": 613.3737140044104,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}
