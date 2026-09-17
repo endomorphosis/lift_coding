@@ -113,11 +113,8 @@ def compile_tactics(
             }
         split = lra_splice.split_statement_body(record)
         patched = dict(record)
-        patched["src"] = lra_splice.lake_candidate_source(
-            header=split.header,
-            statement=split.statement,
-            tactic_block=tactics,
-        )
+        body = tactics if tactics.startswith(" := by") else " := by\n" + tactics
+        patched["src"] = split.statement + body
         started = time.perf_counter()
         receipts = lra_cw.compile_record(
             patched,

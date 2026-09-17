@@ -611,12 +611,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 continue
             record = next(item for item in records if item.get("name") == row["name"])
             tactics = lra_fan.tactic_block(record)
-            clone = lra_kb.lra_cw.clone_dir(str(record["url"]), args.state_root)
-            dest = clone / lra_kb.lra_cw.source_relpath(record)
-            if not dest.is_file():
-                row["lake"] = {"error": "missing_clone_file"}
-                continue
-            restore = dest.read_bytes()
+            if str(record.get("source") or "") == "putnambench":
+                restore = b""
+            else:
+                clone = lra_kb.lra_cw.clone_dir(str(record["url"]), args.state_root)
+                dest = clone / lra_kb.lra_cw.source_relpath(record)
+                if not dest.is_file():
+                    row["lake"] = {"error": "missing_clone_file"}
+                    continue
+                restore = dest.read_bytes()
             catalog = {item["id"]: item for item in (row.get("catalog") or [])}
             # Reconstruct tactics for top picks from guided_drafts.
             families = row.get("amenable") or []
