@@ -1,0 +1,316 @@
+{
+  "arena_score": null,
+  "canaries": [
+    {
+      "any_draft_likely_compiles": 0.64,
+      "arena_score": null,
+      "best_confidence": 0.24,
+      "best_first_draft": "d000",
+      "compile_attempted": false,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005",
+        "d006",
+        "d007",
+        "d008",
+        "d009",
+        "d010",
+        "d011",
+        "d012",
+        "d013",
+        "d014",
+        "d015",
+        "d016",
+        "d017",
+        "d018",
+        "d019",
+        "d020",
+        "d021",
+        "d022",
+        "d023",
+        "d024",
+        "d025",
+        "d026"
+      ],
+      "families": [
+        "aesop",
+        "custom",
+        "have_chain",
+        "native_hammer",
+        "omega_decide",
+        "reference",
+        "simp_set"
+      ],
+      "jev_generated_lean": false,
+      "likely_token_cut": 1.46,
+      "live": true,
+      "model": "jev-1.13.0",
+      "n_case_spans": 9,
+      "n_drafts": 27,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "spend_llm_after_fanout": 0.45,
+      "state_chars": 9120,
+      "top": [
+        {
+          "family": "reference",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d000",
+          "n_chars": 2406,
+          "ops": [
+            "identity"
+          ],
+          "probability": 0.27
+        },
+        {
+          "family": "custom",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d024",
+          "n_chars": 231,
+          "ops": [
+            "neighbor_style",
+            "CallElimCorrect.extractedOldExprInVars"
+          ],
+          "probability": 0.26
+        },
+        {
+          "family": "simp_set",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n    simp_all\n  case const =>\n    ",
+          "id": "d005",
+          "n_chars": 2338,
+          "ops": [
+            "collapse_simp_at"
+          ],
+          "probability": 0.21
+        },
+        {
+          "family": "simp_set",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case const =>\n    intros x Hin\n    rena",
+          "id": "d008",
+          "n_chars": 2317,
+          "ops": [
+            "replace_case",
+            "fvar",
+            "simp_all"
+          ],
+          "probability": 0.08
+        },
+        {
+          "family": "custom",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all",
+          "id": "d007",
+          "n_chars": 153,
+          "ops": [
+            "first_case_only"
+          ],
+          "probability": 0.05
+        },
+        {
+          "family": "native_hammer",
+          "head": "simp_all",
+          "id": "d002",
+          "n_chars": 8,
+          "ops": [
+            "template",
+            "simp_all"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "have_chain",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n",
+          "id": "d006",
+          "n_chars": 2171,
+          "ops": [
+            "drop_have_obtain"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "native_hammer",
+          "head": "rfl",
+          "id": "d001",
+          "n_chars": 3,
+          "ops": [
+            "template",
+            "rfl"
+          ],
+          "probability": 0.02
+        }
+      ],
+      "usage": {
+        "input_tokens": 4822,
+        "output_tokens": 355
+      },
+      "wall_ms": 210.5436510173604
+    },
+    {
+      "any_draft_likely_compiles": 0.6,
+      "arena_score": null,
+      "best_confidence": 0.45,
+      "best_first_draft": "d000",
+      "compile_attempted": false,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005",
+        "d006",
+        "d007",
+        "d008",
+        "d009",
+        "d010",
+        "d011",
+        "d012",
+        "d013",
+        "d014",
+        "d015",
+        "d016",
+        "d017",
+        "d018",
+        "d019",
+        "d020",
+        "d021",
+        "d022",
+        "d023",
+        "d024",
+        "d025"
+      ],
+      "families": [
+        "aesop",
+        "custom",
+        "have_chain",
+        "native_hammer",
+        "omega_decide",
+        "reference",
+        "simp_set"
+      ],
+      "jev_generated_lean": false,
+      "likely_token_cut": 1.24,
+      "live": true,
+      "model": "jev-1.13.0",
+      "n_case_spans": 10,
+      "n_drafts": 26,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "spend_llm_after_fanout": 0.47,
+      "state_chars": 9254,
+      "top": [
+        {
+          "family": "reference",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d000",
+          "n_chars": 1603,
+          "ops": [
+            "identity"
+          ],
+          "probability": 0.47
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    simp_all\n  case right =>\n    intro s2' htr\n    cases r\n    case choice p q r hbisim =>",
+          "id": "d007",
+          "n_chars": 889,
+          "ops": [
+            "replace_case",
+            "left",
+            "simp_all"
+          ],
+          "probability": 0.13
+        },
+        {
+          "family": "have_chain",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      cases htr\n      case c",
+          "id": "d005",
+          "n_chars": 1235,
+          "ops": [
+            "drop_have_obtain"
+          ],
+          "probability": 0.1
+        },
+        {
+          "family": "custom",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d006",
+          "n_chars": 856,
+          "ops": [
+            "first_case_only"
+          ],
+          "probability": 0.08
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      simp_all\n    case bisi",
+          "id": "d009",
+          "n_chars": 1180,
+          "ops": [
+            "replace_case",
+            "choice p q r hbisim",
+            "simp_all"
+          ],
+          "probability": 0.05
+        },
+        {
+          "family": "aesop",
+          "head": "aesop",
+          "id": "d003",
+          "n_chars": 5,
+          "ops": [
+            "template",
+            "aesop"
+          ],
+          "probability": 0.04
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d019",
+          "n_chars": 1180,
+          "ops": [
+            "replace_case",
+            "choice p q r hbisim",
+            "simp_all"
+          ],
+          "probability": 0.02
+        },
+        {
+          "family": "aesop",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      aesop\n    case bisim h",
+          "id": "d010",
+          "n_chars": 1177,
+          "ops": [
+            "replace_case",
+            "choice p q r hbisim",
+            "aesop"
+          ],
+          "probability": 0.02
+        }
+      ],
+      "usage": {
+        "input_tokens": 4810,
+        "output_tokens": 345
+      },
+      "wall_ms": 181.91415799083188
+    }
+  ],
+  "compile_attempted": false,
+  "frozen_warmup_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "jev_generated_lean": false,
+  "live": true,
+  "llama_server_started": false,
+  "lock_ex": false,
+  "observed_at": "2026-09-17T04:50:30.156711+00:00",
+  "official_track2": false,
+  "pr": "PR-9b",
+  "protocol": "LRA/v1",
+  "schema": "lra-draft-fanout/v1",
+  "typesafe_key_in_receipt": false,
+  "wall_ms": 407.5442389876116,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}
