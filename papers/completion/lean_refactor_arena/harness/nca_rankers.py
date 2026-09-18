@@ -66,6 +66,16 @@ RANKER_STEMS = (
     "tape_pop",
     "tape_crop",
     "tape_keep",
+    "got",
+    "nca_plan",
+    "cache_put",
+    "cache_get",
+    "cache_lru",
+    "cache_arc",
+    "negative_ttl",
+    "singleflight",
+    "context_budget",
+    "nca_kernel",
 )
 RIDGE_L2 = 1.0
 SVD_RANK = 3
@@ -742,6 +752,20 @@ def call_ranker(
     rng = rng or random.Random(0)
     text = str(stem or "").lower()
     name = str(problem or "")
+    try:
+        import nca_kernel as lra_kern
+
+        if lra_kern.is_kernel_stem(stem):
+            return lra_kern.call_kernel(stem, memory=memory, tactics=tactics, problem=name)
+    except Exception:
+        pass
+    try:
+        import nca_plan as lra_plan
+
+        if lra_plan.is_plan_stem(stem):
+            return lra_plan.call_plan(stem, memory=memory, tactics=tactics, problem=name)
+    except Exception:
+        pass
     try:
         import nca_turing as lra_tm
 

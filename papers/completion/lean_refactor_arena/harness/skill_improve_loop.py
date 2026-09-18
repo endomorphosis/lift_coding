@@ -163,12 +163,20 @@ def nca_status_for_router(memory: Optional[Mapping[str, Any]] = None) -> dict[st
     except Exception:
         halt, window = {}, []
     budget = (((mem.get("nca") or {}).get("grid") or {}).get("ptr://tool/budget") or {})
+    plan = {}
+    try:
+        import nca_plan as lra_plan
+
+        plan = lra_plan.plan_window(mem)
+    except Exception:
+        plan = {}
     return {
         "halt": bool(halt.get("halt")),
         "budget_dead": bool(halt.get("budget_dead")),
         "budget_energy": halt.get("budget_energy", budget.get("energy")),
         "n_hot_tasks": halt.get("n_hot_tasks"),
         "board_window": window[:6],
+        "plan": plan,
     }
 
 

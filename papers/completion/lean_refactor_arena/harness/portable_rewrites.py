@@ -944,6 +944,42 @@ SKILL_CRITERIA: dict[str, dict[str, str]] = {
         "what": "Keep the k highest-energy tape cells",
         "not_for": "Writing Lean",
     },
+    "port_nca_plan": {
+        "what": "Seed/read goal→subgoal→task DAG in nca.plan (supervisor-style)",
+        "not_for": "Campaign DuckDB writes; leases",
+    },
+    "port_got": {
+        "what": "Graph of thoughts: Jev-scored nodes linked to tasks",
+        "not_for": "Writing Lean; treating thoughts as lake admits",
+    },
+    "port_cache_put": {
+        "what": "CID-put into L1 (and optional L2/L3); never a lake admit",
+        "not_for": "Treating a cache hit as theorem_ok",
+    },
+    "port_cache_get": {
+        "what": "CID-get L1 then L2 then optional DuckDB JSON-LD",
+        "not_for": "Requiring DuckDB; admitting Lean",
+    },
+    "port_cache_lru": {
+        "what": "Set L1 eviction to LRU (recency list)",
+        "not_for": "Admitting Lean from a hot key",
+    },
+    "port_cache_arc": {
+        "what": "Set L1 eviction to ARC (T1/T2 + B1/B2 ghosts, adaptive p)",
+        "not_for": "Admitting Lean; requiring floats",
+    },
+    "port_negative_ttl": {
+        "what": "Negative cache with tick TTL (unlike forever blacklist)",
+        "not_for": "Skipping a later lake-ok body after expiry",
+    },
+    "port_singleflight": {
+        "what": "One in-flight key per (problem, tactics head)",
+        "not_for": "Leases or campaign CAS",
+    },
+    "port_context_budget": {
+        "what": "Apply max_cells keep-k on the neural tape",
+        "not_for": "Changing Lean",
+    },
 }
 
 

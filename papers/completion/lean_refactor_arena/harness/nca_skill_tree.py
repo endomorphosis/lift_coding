@@ -51,6 +51,10 @@ SKILL_TREE: dict[str, dict[str, tuple[str, ...]]] = {
     "wraps": {
         "mca": ("sgd", "mask", "diffuse"),
     },
+    "plan": {
+        "board": ("nca_plan", "got"),
+        "kernel": ("cache_put", "cache_get", "cache_lru", "cache_arc", "negative_ttl", "singleflight", "context_budget"),
+    },
     "turing": {
         "tape": ("tm_read", "tm_write", "tm_left", "tm_right", "tm_step", "tm_run"),
         "stack": ("tm_push", "tm_pop"),

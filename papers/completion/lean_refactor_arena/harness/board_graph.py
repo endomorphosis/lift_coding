@@ -227,6 +227,12 @@ def seed_nca_from_board(memory: dict[str, Any], *, board: Optional[Mapping[str, 
             edges.append((tid, cptr))
     nca["board_edges"] = [list(edge) for edge in edges]
     try:
+        import nca_plan as lra_plan
+
+        lra_plan.seed_plan(memory, board=data, force=force)
+    except Exception:
+        pass
+    try:
         import codepath_graph as lra_cp
 
         if not nca.get("sidecar_built") and not (lra_cp.SIDECAR_DUCKDB.is_file()):

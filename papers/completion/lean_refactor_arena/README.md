@@ -47,6 +47,8 @@ Template: `neurips_2026_vericode_competition.sty` (competition track, not the re
 | `harness/nca_temporal.py` | Hawkes, CRF, submodular, delayed bandit, tape conv/DFT |
 | `harness/nca_turing.py` | Turing tape/stack tools; decision-transformer (s,a,R) window |
 | `harness/nca_tape_tools.py` | Tape splice/mask/pop/crop/keep/checkpoint for DT context |
+| `harness/nca_plan.py` | Goal/subgoal/task DAG and graph-of-thoughts for Jev |
+| `harness/nca_kernel.py` | Cache tiers L0–L3, CID, negative TTL, single-flight, context budget |
 | `data/benchmark_data_warmup.jsonl` | Frozen organizer warm-up |
 | `data/warmup_summary.json` | Machine-readable census |
 | `tools/summarize_warmup.py` | Hash check + table + receipt |

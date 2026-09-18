@@ -315,6 +315,21 @@ def teach_roundtrip(
     previous = _batch(memory)
     ranked = jev_rank_variations(variations, previous=previous, jev_fn=jev_fn)
     winner = dict(ranked.get("best") or variations[0])
+    if ranked.get("used_jev"):
+        try:
+            import nca_plan as lra_plan
+
+            lra_plan.record_jev(
+                memory,
+                choice=str(ranked.get("choice") or ""),
+                score_m=int(winner.get("cosine_m") or 0),
+                noul_m=int(float(ranked.get("noul") or 0) * 1000) if float(ranked.get("noul") or 0) <= 2 else int(ranked.get("noul") or 0),
+                task_id="",
+                skill="autoencoder",
+                text="vae batch jev",
+            )
+        except Exception:
+            pass
     lake_ok = None
     if compile_fn is not None:
         try:
