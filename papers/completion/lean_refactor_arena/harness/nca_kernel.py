@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import time
 from pathlib import Path
 from typing import Any, Mapping, Optional
 
@@ -24,6 +26,7 @@ MAX_BYTES = 65536
 L1_CAP = 32
 L1_MAX_BYTES = 262144
 L2_MAX_FILES = 128
+INFLIGHT_TTL_S = 180
 KERNEL_STEMS = (
     "cache_put",
     "cache_get",
@@ -375,6 +378,16 @@ def sweep_negative(memory: dict[str, Any]) -> int:
     return dropped
 
 
+def _inflight_dir() -> Path:
+    override = os.environ.get("LRA_NCA_INFLIGHT")
+    return Path(override) if override else (CAS_DIR / "inflight")
+
+
+def _inflight_path(key: str) -> Path:
+    digest = content_cid(key).replace(":", "_")
+    return _inflight_dir() / f"{digest}.json"
+
+
 def flight_begin(memory: dict[str, Any], key: str) -> dict[str, Any]:
     k = _kernel(memory)
     inflight = [str(x) for x in (k.get("in_flight") or [])]
@@ -382,16 +395,94 @@ def flight_begin(memory: dict[str, Any], key: str) -> dict[str, Any]:
     if key in inflight:
         _stat(k, "flights")
         return {"ok": False, "kind": "port_singleflight", "reason": "in_flight", "key": key, "admit": False}
+    path = _inflight_path(key)
+    if path.is_file():
+        try:
+            age = time.time() - path.stat().st_mtime
+        except OSError:
+            age = INFLIGHT_TTL_S + 1
+        if age < INFLIGHT_TTL_S:
+            _stat(k, "flights")
+            return {
+                "ok": False,
+                "kind": "port_singleflight",
+                "reason": "in_flight",
+                "key": key,
+                "durable": True,
+                "admit": False,
+            }
+        try:
+            path.unlink()
+        except OSError:
+            pass
     inflight.append(key)
     _stat(k, "flights")
     k["in_flight"] = inflight[-64:]
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"key": key, "t": time.time()}), encoding="utf-8")
+    except OSError:
+        pass
     return {"ok": True, "kind": "port_singleflight", "key": key, "begun": True, "admit": False}
+
+
+def guarded_compile(
+    memory: Optional[dict[str, Any]],
+    *,
+    name: Any,
+    kind: str,
+    tactics: str,
+    compile_fn: Any,
+) -> dict[str, Any]:
+    """Wrap a lake compile: negative TTL + single-flight. Never admits from cache."""
+
+    if not isinstance(memory, dict):
+        return dict(compile_fn() or {})
+    bump_tick(memory)
+    sweep_negative(memory)
+    key = lake_key(name, kind, tactics)
+    if negative_hit(memory, key):
+        return {
+            "theorem_ok": False,
+            "ok": False,
+            "token_count": 0,
+            "errors": [],
+            "skipped": "negative_ttl",
+            "reason": "negative_ttl",
+        }
+    begun = flight_begin(memory, key)
+    if not begun.get("ok"):
+        return {
+            "theorem_ok": False,
+            "ok": False,
+            "token_count": 0,
+            "errors": [],
+            "skipped": "in_flight",
+            "reason": "in_flight",
+        }
+    try:
+        compiled = dict(compile_fn() or {})
+        if not compiled.get("theorem_ok"):
+            negative_put(memory, key, reason=str(compiled.get("error_class") or "lake_fail"))
+            cache_put(
+                memory,
+                {"name": name, "kind": kind, "tactics": str(tactics)[:400]},
+                kind=str(kind or "compile"),
+                ns="draft",
+            )
+        return compiled
+    finally:
+        flight_end(memory, key)
 
 
 def flight_end(memory: dict[str, Any], key: str) -> dict[str, Any]:
     k = _kernel(memory)
     key = str(key)
     k["in_flight"] = [x for x in (k.get("in_flight") or []) if str(x) != key]
+    try:
+        _inflight_path(key).unlink()
+    except OSError:
+        pass
     return {"ok": True, "kind": "port_singleflight", "key": key, "begun": False, "admit": False}
 
 
@@ -399,20 +490,32 @@ def apply_context_budget(memory: dict[str, Any]) -> dict[str, Any]:
     k = _kernel(memory)
     budget = dict(k.get("budget") or {})
     max_cells = int(budget.get("max_cells") or MAX_CELLS)
+    max_bytes = int(budget.get("max_bytes") or MAX_BYTES)
+    trimmed = 0
     try:
         import neural_tape as lra_tape
 
         tape = lra_tape.Tape.from_memory(memory)
         kept = tape.keep_k(max_cells)
+        trimmed = tape.trim_bytes(max_bytes)
         tape.persist(memory)
     except Exception:
         kept = 0
+    dt = dict((memory.get("nca") or {}).get("dt") or {})
+    window = list(dt.get("window") or [])
+    while window and len(json.dumps(window, default=str)) > max_bytes:
+        window.pop(0)
+        trimmed += 1
+    if dt:
+        dt["window"] = window
+        memory.setdefault("nca", {})["dt"] = dt
     return {
         "ok": True,
         "kind": "port_context_budget",
         "max_cells": max_cells,
-        "max_bytes": int(budget.get("max_bytes") or MAX_BYTES),
+        "max_bytes": max_bytes,
         "kept": kept,
+        "trimmed": trimmed,
         "writes_lean": False,
         "called_docker0": False,
     }

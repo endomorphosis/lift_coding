@@ -264,6 +264,33 @@ class Tape:
         self.head = min(self.head, len(self.cells) - 1)
         return len(self.cells)
 
+    def trim_bytes(self, max_bytes: int) -> int:
+        """Drop lowest-energy cells until json size fits. Never admits Lean."""
+
+        import json
+
+        cap = max(64, int(max_bytes))
+        dropped = 0
+
+        def size() -> int:
+            return len(json.dumps(self.cells, default=str, separators=(",", ":")))
+
+        while self.cells and size() > cap:
+            head = self.read()
+            others = [c for c in self.cells if c is not head]
+            if not others:
+                if isinstance(head.get("payload"), str) and len(head["payload"]) > 32:
+                    head["payload"] = head["payload"][: len(head["payload"]) // 2]
+                    dropped += 1
+                    continue
+                break
+            victim = min(others, key=lambda c: float(c.get("energy") or 0.0))
+            self.cells.remove(victim)
+            dropped += 1
+            if self.cells:
+                self.head = min(self.head, len(self.cells) - 1)
+        return dropped
+
     def drop_below(self, energy: float = 0.2) -> int:
         kept = [c for c in self.cells if float(c.get("energy") or 0.0) >= float(energy)]
         n = len(self.cells) - len(kept)

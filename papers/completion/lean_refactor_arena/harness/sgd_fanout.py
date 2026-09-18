@@ -146,10 +146,24 @@ def evaluate_tactics(
     timeout: float,
     restore: bytes,
     reference: str,
+    memory: Optional[dict[str, Any]] = None,
 ) -> list[dict[str, Any]]:
     def _one(label: str, body: str) -> dict[str, Any]:
-        compiled = lra_kb.compile_tactics(
-            record, body, state_root=state_root, timeout=timeout, restore=restore
+        import nca_kernel as lra_kern
+
+        def _run() -> dict[str, Any]:
+            return dict(
+                lra_kb.compile_tactics(
+                    record, body, state_root=state_root, timeout=timeout, restore=restore
+                )
+            )
+
+        compiled = lra_kern.guarded_compile(
+            memory,
+            name=record.get("name"),
+            kind=f"sgd:{label}",
+            tactics=body,
+            compile_fn=_run,
         )
         return {
             "hammer": label,
@@ -175,6 +189,7 @@ def sgd_search(
     rounds: int,
     seed: int,
     use_leanstral: bool,
+    memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     rng = random.Random(seed)
     _raw, digest, records = lra_splice.load_warmup_records()
@@ -225,6 +240,7 @@ def sgd_search(
             timeout=timeout,
             restore=restore,
             reference=reference,
+            memory=memory,
         )
         accepted = None
         valid = [row for row in evals if row.get("theorem_ok")]
@@ -272,11 +288,11 @@ def sgd_search(
             reference, lra_kb.match_reference_indent(reference, lra_loop.extract_generated_tactics(text))
         )
         evals = evaluate_tactics(
-            record, filled, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+            record, filled, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
         )
         hammered = lra_mask.hammer_repair(filled, reference, (evals[0].get("errors") if evals else None) or [])
         evals_h = evaluate_tactics(
-            record, hammered, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+            record, hammered, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
         )
         leanstral = {
             "identity": identity,
@@ -361,7 +377,7 @@ def diffuse_search(
         nonlocal keep, keep_tokens, dropped
         trial = drop_subset(reference, holes, list(dict.fromkeys(list(dropped) + list(hole_ids))))
         evals = evaluate_tactics(
-            record, trial, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+            record, trial, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
         )
         hit = _accept(evals, keep_tokens)
         if hit:
@@ -430,13 +446,13 @@ def diffuse_search(
                     keep, lra_kb.match_reference_indent(keep, filled)
                 )
                 evals_n = evaluate_tactics(
-                    record, noisy, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+                    record, noisy, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
                 )
                 denoised = lra_mask.hammer_repair(
                     noisy, reference, (evals_n[0].get("errors") if evals_n else None) or []
                 )
                 evals_d = evaluate_tactics(
-                    record, denoised, state_root=state_root, timeout=timeout, restore=restore, reference=reference
+                    record, denoised, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
                 )
                 hit = _accept(evals_n + evals_d, keep_tokens)
                 if hit:

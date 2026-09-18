@@ -324,6 +324,7 @@ def eval_theorem(
     compile_fn: Callable[..., Mapping[str, Any]],
     args: Any,
     restore: bytes,
+    memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Lake a small warmup theorem. Other names fail closed if not small."""
 
@@ -355,25 +356,69 @@ def eval_theorem(
         restore_bytes = dest.read_bytes() if dest.is_file() else b""
         if not dest.is_file():
             return {"ok": False, "reason": "no_clone", "name": target, "theorem_ok": False}
-    compiled = dict(
-        compile_fn(
-            rec,
-            body,
-            state_root=lra_rand.DEFAULT_STATE,
-            timeout=float(getattr(args, "timeout", 180.0) or 180.0),
-            restore=restore_bytes,
+    lake_id = ""
+    if isinstance(memory, dict):
+        import nca_kernel as lra_kern
+
+        lra_kern.bump_tick(memory)
+        lra_kern.sweep_negative(memory)
+        lake_id = lra_kern.lake_key(rec.get("name"), "eval_theorem", body)
+        if lra_kern.negative_hit(memory, lake_id):
+            return {
+                "ok": False,
+                "name": rec.get("name"),
+                "theorem_ok": False,
+                "tactics": body,
+                "energy": 0.25,
+                "reason": "negative_ttl",
+                "skipped": "negative_ttl",
+            }
+        begun = lra_kern.flight_begin(memory, lake_id)
+        if not begun.get("ok"):
+            return {
+                "ok": False,
+                "name": rec.get("name"),
+                "theorem_ok": False,
+                "tactics": body,
+                "energy": 0.25,
+                "reason": "in_flight",
+                "skipped": "in_flight",
+            }
+    try:
+        compiled = dict(
+            compile_fn(
+                rec,
+                body,
+                state_root=lra_rand.DEFAULT_STATE,
+                timeout=float(getattr(args, "timeout", 180.0) or 180.0),
+                restore=restore_bytes,
+            )
         )
-    )
-    ok = bool(compiled.get("theorem_ok"))
-    return {
-        "ok": ok,
-        "name": rec.get("name"),
-        "theorem_ok": ok,
-        "tokens": compiled.get("token_count"),
-        "tactics": body,
-        "energy": 0.75 if ok else 0.25,
-        "reason": None if ok else "lake_failed",
-    }
+        ok = bool(compiled.get("theorem_ok"))
+        if isinstance(memory, dict) and not ok:
+            import nca_kernel as lra_kern
+
+            lra_kern.negative_put(memory, lake_id, reason="lake_failed")
+            lra_kern.cache_put(
+                memory,
+                {"name": rec.get("name"), "tactics": str(body)[:400]},
+                kind="eval_theorem",
+                ns="draft",
+            )
+        return {
+            "ok": ok,
+            "name": rec.get("name"),
+            "theorem_ok": ok,
+            "tokens": compiled.get("token_count"),
+            "tactics": body,
+            "energy": 0.75 if ok else 0.25,
+            "reason": None if ok else "lake_failed",
+        }
+    finally:
+        if isinstance(memory, dict) and lake_id:
+            import nca_kernel as lra_kern
+
+            lra_kern.flight_end(memory, lake_id)
 
 
 def inner_typesafe_walk(
@@ -407,7 +452,12 @@ def inner_typesafe_walk(
     import neural_tape as lra_tape
     import typesafe_nca as lra_nca
 
-    compile_fn = compile_one or lra_mcmc.compile_one
+    raw_compile = compile_one or lra_mcmc.compile_one
+
+    def compile_fn(record: Mapping[str, Any], tactics: str, **kwargs: Any) -> Mapping[str, Any]:
+        if compile_one is None:
+            kwargs.setdefault("memory", memory)
+        return raw_compile(record, tactics, **kwargs)
     research = research_fn or lra_rand.typesafe_autoresearch
     pick = pick_fn or lra_rand.typesafe_pick
     counter = steps if steps is not None else [0]
@@ -427,6 +477,14 @@ def inner_typesafe_walk(
             locals_={"tactics": body},
         )
         tape.write("theorem", str(record.get("name") or ""), ptr=f"ptr://theorem/{record.get('name')}", tokens=0)
+        tape.persist(memory)
+        try:
+            import nca_kernel as lra_kern
+
+            lra_kern.apply_context_budget(memory)
+            tape = lra_tape.Tape.from_memory(memory)
+        except Exception:
+            pass
         try:
             import board_graph as lra_board
 
@@ -775,6 +833,7 @@ def inner_typesafe_walk(
                     compile_fn=compile_fn,
                     args=args,
                     restore=restore,
+                    memory=memory,
                 )
                 child_payload.update(evaled)
                 try:
@@ -1203,6 +1262,7 @@ def _eval_theorem_entry(**kwargs: Any) -> dict[str, Any]:
         compile_fn=kwargs.get("compile_one") or kwargs.get("compile_fn"),
         args=kwargs.get("args"),
         restore=kwargs.get("restore") or b"",
+        memory=kwargs.get("memory") if isinstance(kwargs.get("memory"), dict) else None,
     )
 
 

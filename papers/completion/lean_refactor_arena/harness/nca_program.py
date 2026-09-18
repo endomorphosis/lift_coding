@@ -401,6 +401,7 @@ def execute_program_ops(
                         compile_fn=compile_fn,
                         args=args or type("A", (), {"timeout": 180.0})(),
                         restore=restore,
+                        memory=memory,
                     )
                     if isinstance(detail, dict) and detail.get("name"):
                         lra_board.credit_theorem(

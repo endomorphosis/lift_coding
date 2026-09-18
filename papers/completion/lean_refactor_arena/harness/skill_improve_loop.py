@@ -170,6 +170,8 @@ def nca_status_for_router(memory: Optional[Mapping[str, Any]] = None) -> dict[st
         plan = lra_plan.plan_window(mem)
     except Exception:
         plan = {}
+    kern = dict((mem.get("nca") or {}).get("kernel") or {})
+    stats = dict(kern.get("stats") or {})
     return {
         "halt": bool(halt.get("halt")),
         "budget_dead": bool(halt.get("budget_dead")),
@@ -177,6 +179,14 @@ def nca_status_for_router(memory: Optional[Mapping[str, Any]] = None) -> dict[st
         "n_hot_tasks": halt.get("n_hot_tasks"),
         "board_window": window[:6],
         "plan": plan,
+        "kernel": {
+            "policy": kern.get("policy") or "arc",
+            "tick": kern.get("tick") or 0,
+            "n_l1": len(kern.get("l1") or {}),
+            "n_negative": len(kern.get("negative") or {}),
+            "n_in_flight": len(kern.get("in_flight") or []),
+            "stats": stats,
+        },
     }
 
 
