@@ -578,6 +578,8 @@ Ranking skills (not Lean folds) live in `nca_rankers.py` and are CALLed as `ptr:
 - **Temporal / budget (`nca_temporal.py`)** — `port_hawkes` recency intensity; `port_crf` Viterbi on tactic heads; `port_submodular` residual set-cover under CALL budget; `port_delayed_bandit` UCB with pending lake pulls; `port_tape_conv` / `port_tape_fft` integer conv and 7-point DFT on the neural tape.
 - **Turing + decision transformer (`nca_turing.py`)** — TM read/write/left/right/step/run on the neural tape, aux stack push/pop (with call_stack), bounded δ-table. `port_decision_transformer` packs `(state, action, rtg_m)` milles windows from TM history for TypeSafe/Grok. Jev does not write Lean.
 - **Tape editor (`nca_tape_tools.py`)** — context manager for the DT window: splice, mask/unmask, pop, peek, swap, dup, crop, keep-k, drop-low-energy, compress blanks, rotate, checkpoint/restore, attention milles. Distinct from MCA `port_mask`.
+- **Plan + graph of thoughts (`nca_plan.py`)** — supervisor-style `nca.plan` (goal→subgoal→task from `tasks.json`, no leases/DuckDB). Thoughts are Jev-scored nodes (`generate`/`score`/`aggregate`) linked to tasks. `port_nca_plan` / `port_got`. Outer Grok sees `nca_status.plan`. JSON-LD edges merge into `nca.jsonld`.
+- **Kernel (`nca_kernel.py`)** — cache tiers L0 tape / L1 process / L2 host CAS files / L3 optional JSON-LD DuckDB. CID put/get **never** admit Lean (`theorem_ok` stripped). L1 eviction is **ARC** (default) or **LRU**. Namespaces `draft|jev|graph|context`. L2 CID re-hash (corrupt → miss). L1 byte quota + L2 file GC. Metrics on `nca.kernel.stats`. `apply_lake_round` uses single-flight + negative TTL (skips duplicate fails). Not FACP admission and not a second Lean kernel.
 
 `pipeline_order` key:
 

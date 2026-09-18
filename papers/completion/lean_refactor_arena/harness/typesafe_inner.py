@@ -140,138 +140,177 @@ def apply_lake_round(
     accepted_tok = int(analysis.get("n_tokens") or 10**9)
     timeout = float(getattr(args, "timeout", 180.0) or 180.0)
     out_dir = getattr(args, "out", None)
+    import nca_kernel as lra_kern
+
+    lra_kern.bump_tick(memory)
+    lra_kern.sweep_negative(memory)
     for kind in order:
         if kind in seen or kind not in by_kind:
             continue
         if kind in fired_skip and unfired:
             continue
         seen.add(str(kind))
-        compiled = dict(
-            compile_one(
-                record,
-                str(by_kind[kind]["tactics"]),
-                state_root=lra_rand.DEFAULT_STATE,
-                timeout=timeout,
-                restore=restore,
-            )
-        )
-        row: dict[str, Any] = {
-            "name": record.get("name"),
-            "round": round_i,
-            "kind": kind,
-            "ok": bool(compiled.get("theorem_ok")),
-            "tokens": compiled.get("token_count"),
-            "repaired": False,
-            "error_class": None
-            if compiled.get("theorem_ok")
-            else lra_bind.error_class(compiled.get("errors") or []),
-            "errors": (compiled.get("errors") or [])[:1],
-            "depth": intent.get("tree_node"),
-        }
-        if not row["ok"]:
-            repaired_body = str(by_kind[kind]["tactics"])
-            if row.get("error_class") == "unknown_identifier":
-                repaired_body = lra_bind.restore_unknown_binders(
-                    repaired_body, tactics, compiled.get("errors") or []
-                )
-                repaired_body = lra_mask.hammer_repair(
-                    repaired_body, tactics, compiled.get("errors") or []
-                )
-            if repaired_body.strip("\n") != str(by_kind[kind]["tactics"]).strip("\n"):
-                repaired = dict(
-                    compile_one(
-                        record,
-                        repaired_body,
-                        state_root=lra_rand.DEFAULT_STATE,
-                        timeout=timeout,
-                        restore=restore,
-                    )
-                )
-                row = {
+        body = str(by_kind[kind]["tactics"])
+        lake_id = lra_kern.lake_key(record.get("name"), kind, body)
+        if lra_kern.negative_hit(memory, lake_id):
+            lake.append(
+                {
                     "name": record.get("name"),
                     "round": round_i,
-                    "kind": f"{kind}#repair",
-                    "ok": bool(repaired.get("theorem_ok")),
-                    "tokens": repaired.get("token_count"),
-                    "repaired": True,
-                    "error_class": None
-                    if repaired.get("theorem_ok")
-                    else lra_bind.error_class(repaired.get("errors") or []),
-                    "errors": (repaired.get("errors") or [])[:1],
-                    "depth": intent.get("tree_node"),
+                    "kind": kind,
+                    "skipped": "negative_ttl",
+                    "ok": False,
                 }
-                if row["ok"]:
-                    by_kind[kind]["tactics"] = repaired_body
-        lake.append(row)
-        if row["ok"]:
-            lra_bind.remember_success(
-                memory,
-                name=str(record.get("name") or ""),
-                kind=str(row["kind"]),
-                family=str(by_kind[kind].get("family") or ""),
-                from_tokens=int(analysis.get("n_tokens") or 0),
-                to_tokens=int(row["tokens"] or analysis.get("n_tokens") or 0),
             )
-            try:
-                import typesafe_nca as lra_nca
-
-                lra_nca.upsert_from_event(
-                    memory,
-                    ptr=str(row["kind"]),
-                    kind="skill",
-                    energy=0.7,
-                    theorem_ok=True,
-                    tokens=int(row["tokens"] or 0),
+            continue
+        begun = lra_kern.flight_begin(memory, lake_id)
+        if not begun.get("ok"):
+            lake.append(
+                {
+                    "name": record.get("name"),
+                    "round": round_i,
+                    "kind": kind,
+                    "skipped": "in_flight",
+                    "ok": False,
+                }
+            )
+            continue
+        try:
+            compiled = dict(
+                compile_one(
+                    record,
+                    body,
+                    state_root=lra_rand.DEFAULT_STATE,
+                    timeout=timeout,
+                    restore=restore,
                 )
-            except Exception:
-                pass
-            if int(row["tokens"] or 10**9) < accepted_tok:
-                accepted_tok = int(row["tokens"])
-                accepted_body = str(by_kind[kind].get("tactics") or "")
+            )
+            row: dict[str, Any] = {
+                "name": record.get("name"),
+                "round": round_i,
+                "kind": kind,
+                "ok": bool(compiled.get("theorem_ok")),
+                "tokens": compiled.get("token_count"),
+                "repaired": False,
+                "error_class": None
+                if compiled.get("theorem_ok")
+                else lra_bind.error_class(compiled.get("errors") or []),
+                "errors": (compiled.get("errors") or [])[:1],
+                "depth": intent.get("tree_node"),
+            }
+            if not row["ok"]:
+                repaired_body = str(by_kind[kind]["tactics"])
+                if row.get("error_class") == "unknown_identifier":
+                    repaired_body = lra_bind.restore_unknown_binders(
+                        repaired_body, tactics, compiled.get("errors") or []
+                    )
+                    repaired_body = lra_mask.hammer_repair(
+                        repaired_body, tactics, compiled.get("errors") or []
+                    )
+                if repaired_body.strip("\n") != str(by_kind[kind]["tactics"]).strip("\n"):
+                    repaired = dict(
+                        compile_one(
+                            record,
+                            repaired_body,
+                            state_root=lra_rand.DEFAULT_STATE,
+                            timeout=timeout,
+                            restore=restore,
+                        )
+                    )
+                    row = {
+                        "name": record.get("name"),
+                        "round": round_i,
+                        "kind": f"{kind}#repair",
+                        "ok": bool(repaired.get("theorem_ok")),
+                        "tokens": repaired.get("token_count"),
+                        "repaired": True,
+                        "error_class": None
+                        if repaired.get("theorem_ok")
+                        else lra_bind.error_class(repaired.get("errors") or []),
+                        "errors": (repaired.get("errors") or [])[:1],
+                        "depth": intent.get("tree_node"),
+                    }
+                    if row["ok"]:
+                        by_kind[kind]["tactics"] = repaired_body
+            lake.append(row)
+            if row["ok"]:
+                lra_bind.remember_success(
+                    memory,
+                    name=str(record.get("name") or ""),
+                    kind=str(row["kind"]),
+                    family=str(by_kind[kind].get("family") or ""),
+                    from_tokens=int(analysis.get("n_tokens") or 0),
+                    to_tokens=int(row["tokens"] or analysis.get("n_tokens") or 0),
+                )
                 try:
-                    import codepath_graph as lra_cp
+                    import typesafe_nca as lra_nca
 
-                    if (memory.get("nca") or {}).get("sidecar_built") and lra_cp.SIDECAR_DUCKDB.is_file():
-                        lra_cp.build_sidecar_duckdb()
-                except Exception:
-                    pass
-                try:
-                    import board_graph as lra_board
-
-                    lra_board.credit_theorem(
+                    lra_nca.upsert_from_event(
                         memory,
-                        str(record.get("name") or ""),
+                        ptr=str(row["kind"]),
+                        kind="skill",
+                        energy=0.7,
                         theorem_ok=True,
                         tokens=int(row["tokens"] or 0),
                     )
                 except Exception:
                     pass
-                if out_dir is not None:
-                    safe = str(record.get("name") or "canary").replace("/", "_")[:80]
-                    best_path = out_dir / f"random-best-{safe}-{row['tokens']}.lean"
-                    best_path.write_text(accepted_body + "\n")
-                    row["best_path"] = str(best_path)
-        else:
-            lra_bind.remember_failure(
-                memory,
-                name=str(record.get("name") or ""),
-                kind=str(kind),
-                errors=row.get("errors") or compiled.get("errors") or [],
-                tactics=str(by_kind[kind].get("tactics") or ""),
-            )
-            try:
-                import typesafe_nca as lra_nca
+                if int(row["tokens"] or 10**9) < accepted_tok:
+                    accepted_tok = int(row["tokens"])
+                    accepted_body = str(by_kind[kind].get("tactics") or "")
+                    try:
+                        import codepath_graph as lra_cp
 
-                lra_nca.upsert_from_event(
+                        if (memory.get("nca") or {}).get("sidecar_built") and lra_cp.SIDECAR_DUCKDB.is_file():
+                            lra_cp.build_sidecar_duckdb()
+                    except Exception:
+                        pass
+                    try:
+                        import board_graph as lra_board
+
+                        lra_board.credit_theorem(
+                            memory,
+                            str(record.get("name") or ""),
+                            theorem_ok=True,
+                            tokens=int(row["tokens"] or 0),
+                        )
+                    except Exception:
+                        pass
+                    if out_dir is not None:
+                        safe = str(record.get("name") or "canary").replace("/", "_")[:80]
+                        best_path = out_dir / f"random-best-{safe}-{row['tokens']}.lean"
+                        best_path.write_text(accepted_body + "\n")
+                        row["best_path"] = str(best_path)
+            else:
+                lra_bind.remember_failure(
                     memory,
-                    ptr=str(kind),
-                    kind="skill",
-                    energy=0.25,
-                    theorem_ok=False,
+                    name=str(record.get("name") or ""),
+                    kind=str(kind),
+                    errors=row.get("errors") or compiled.get("errors") or [],
+                    tactics=str(by_kind[kind].get("tactics") or ""),
                 )
-            except Exception:
-                pass
-        tried += 1
+                lra_kern.negative_put(memory, lake_id, reason=str(row.get("error_class") or "lake_fail"))
+                lra_kern.cache_put(
+                    memory,
+                    {"kind": kind, "tactics": body[:400]},
+                    kind="draft",
+                    ns="draft",
+                )
+                try:
+                    import typesafe_nca as lra_nca
+
+                    lra_nca.upsert_from_event(
+                        memory,
+                        ptr=str(kind),
+                        kind="skill",
+                        energy=0.25,
+                        theorem_ok=False,
+                    )
+                except Exception:
+                    pass
+            tried += 1
+        finally:
+            lra_kern.flight_end(memory, lake_id)
         if tried >= lake_budget:
             break
     return accepted_body, lake
