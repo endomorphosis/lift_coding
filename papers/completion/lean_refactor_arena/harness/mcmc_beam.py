@@ -1007,15 +1007,35 @@ def leanstral_line_swap(
     }
 
 
-def compile_one(record: Mapping[str, Any], tactics: str, *, state_root: Path, timeout: float, restore: bytes) -> dict[str, Any]:
-    compiled = lra_kb.compile_tactics(
-        record,
-        tactics,
-        state_root=state_root,
-        timeout=timeout,
-        restore=restore,
+def compile_one(
+    record: Mapping[str, Any],
+    tactics: str,
+    *,
+    state_root: Path,
+    timeout: float,
+    restore: bytes,
+    memory: Optional[dict[str, Any]] = None,
+) -> dict[str, Any]:
+    import nca_kernel as lra_kern
+
+    def _run() -> dict[str, Any]:
+        return dict(
+            lra_kb.compile_tactics(
+                record,
+                tactics,
+                state_root=state_root,
+                timeout=timeout,
+                restore=restore,
+            )
+        )
+
+    return lra_kern.guarded_compile(
+        memory,
+        name=record.get("name"),
+        kind="mcmc",
+        tactics=tactics,
+        compile_fn=_run,
     )
-    return compiled
 
 
 def run_mcmc(
@@ -1029,6 +1049,7 @@ def run_mcmc(
     timeout: float,
     init_tactics: Optional[str] = None,
     leanstral: bool = False,
+    memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     reference = lra_fan.tactic_block(record)
     rng = random.Random(int(seed))
@@ -1042,7 +1063,9 @@ def run_mcmc(
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     restore = dest.read_bytes() if dest.is_file() else b""
     start = (init_tactics or reference).strip("\n")
-    start_compiled = compile_one(record, start, state_root=state_root, timeout=timeout, restore=restore)
+    start_compiled = compile_one(
+        record, start, state_root=state_root, timeout=timeout, restore=restore, memory=memory
+    )
     start_tok = int(start_compiled.get("token_count") or lra_loop.token_count(start))
     start_ok = bool(start_compiled.get("theorem_ok"))
     ref_tok = lra_loop.token_count(reference)
@@ -1118,6 +1141,7 @@ def run_mcmc(
                     state_root=state_root,
                     timeout=timeout,
                     restore=restore,
+                    memory=memory,
                 )
                 lake_calls += 1
                 ok = bool(compiled.get("theorem_ok"))
@@ -1281,6 +1305,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 state_root=args.state_root,
                 timeout=args.timeout,
                 restore=restore,
+                memory=None,
             )
             rows.append(
                 {

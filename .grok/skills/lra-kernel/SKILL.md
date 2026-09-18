@@ -17,7 +17,7 @@ description: LRA NCA kernel — cache tiers L0–L3, CID put/get, negative TTL, 
 - Put/get by `sha256:` CID. `theorem_ok` is stripped.
 - L1 eviction: **ARC** (default) or **LRU**. CALL `port_cache_arc` / `port_cache_lru`. ARC uses T1 recency, T2 frequency, B1/B2 ghosts, integer `p`.
 - Negative cache expires after N ticks (default 32).
-- Single-flight: second begin on the same key returns `in_flight`.
-- Context budget: `keep_k` on the tape.
+- Single-flight: second begin on the same key returns `in_flight`. Durable flag under `nca-cas/inflight` (TTL 180s; stale locks are stolen). Override dir with `LRA_NCA_INFLIGHT`.
+- Context budget: `keep_k` plus **byte** trim on tape payloads and DT window.
 
 Never docker0. Jev does not write Lean.
