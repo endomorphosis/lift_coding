@@ -780,6 +780,50 @@ SKILL_CRITERIA: dict[str, dict[str, str]] = {
         "what": "Metropolis-Hastings over pipeline stem order; energy is 1 - Bayes mean",
         "not_for": "Writing Lean; docker0; replacing lake as the oracle",
     },
+    "port_svd": {
+        "what": "Truncated SVD on the theorem×skill lake matrix; recommend skills for a theorem",
+        "not_for": "Proof-AST PCA (that is port_pca); writing Lean; n_theorems<2",
+    },
+    "port_pca": {
+        "what": "CALL existing pca_mca_fanout SVD: keep principal style, surface MCA families",
+        "not_for": "A second SVD ranker of leftover drafts; docker0; Arena scores",
+    },
+    "port_thompson": {
+        "what": "Thompson-sample Beta(α,β) so high-variance stems still get a lake try",
+        "not_for": "Treating a draw as a lake admit",
+    },
+    "port_ridge": {
+        "what": "Integer milles ridge P(lake-ok | feature_row); companion to the forest",
+        "not_for": "Writing Lean; fewer than four labeled rows",
+    },
+    "port_ols": {
+        "what": "Integer ordinary least squares on milles features",
+        "not_for": "Writing Lean; fewer than four labeled rows",
+    },
+    "port_logistic": {
+        "what": "Integer logistic (OLS + milles sigmoid LUT)",
+        "not_for": "Writing Lean; treating score as a lake admit",
+    },
+    "port_kmeans": {
+        "what": "Integer k-means on milles feature rows; rank stems by cluster win-rate",
+        "not_for": "Writing Lean; k greater than labeled rows",
+    },
+    "port_knn": {
+        "what": "Integer k-NN milles distance to labeled lake rows",
+        "not_for": "Writing Lean; empty memory",
+    },
+    "port_ica": {
+        "what": "Integer FastICA-style deflation on the theorem×skill matrix",
+        "not_for": "Writing Lean; n_theorems<2",
+    },
+    "port_nmf": {
+        "what": "Integer NMF of nonnegative lake counts; rank skills by H mass",
+        "not_for": "Writing Lean; negative-only matrices",
+    },
+    "port_kalman": {
+        "what": "Integer 1-D Kalman on skill win milles (x,P,Q,R all ints)",
+        "not_for": "Writing Lean; float covariance",
+    },
 }
 
 

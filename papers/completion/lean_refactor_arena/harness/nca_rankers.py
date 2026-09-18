@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""NCA ranking skills: random forest, Bayesian estimation over time, MCMC.
+"""NCA ranking skills: RF, Bayes-time, MCMC, grid SVD, PCA CALL, Thompson, ridge.
 
 These skills rank portable drafts / pipeline stems. They do not write Lean.
 Lake remains the oracle. Jev does not generate tactic text. Never docker0.
-Not Arena scores. Not Track 2.
+Not Arena scores. Not Track 2. Proof-style PCA already lives in pca_mca_fanout
+(np.linalg.svd); port_pca exposes it. port_svd factors theorem×skill lake wins.
 """
 from __future__ import annotations
 
@@ -19,7 +20,24 @@ RF_DEPTH = 4
 MCMC_STEPS = 8
 MCMC_TEMP = 1.0
 
-RANKER_STEMS = ("random_forest", "bayes_time", "mcmc")
+RANKER_STEMS = (
+    "random_forest",
+    "bayes_time",
+    "mcmc",
+    "svd",
+    "pca",
+    "thompson",
+    "ridge",
+    "kmeans",
+    "knn",
+    "logistic",
+    "ols",
+    "ica",
+    "nmf",
+    "kalman",
+)
+RIDGE_L2 = 1.0
+SVD_RANK = 3
 
 
 def is_ranker_stem(stem: str) -> bool:
@@ -399,6 +417,285 @@ def mcmc_pipeline_order(
     return ran
 
 
+def _labeled_rows(memory: Mapping[str, Any]) -> list[tuple[list[float], int]]:
+    rows: list[tuple[list[float], int]] = []
+    for label, bucket in ((1, memory.get("successes") or []), (0, memory.get("failures") or [])):
+        for item in bucket:
+            kind = str(item.get("kind") or "")
+            if not kind:
+                continue
+            rows.append(
+                (
+                    feature_row(
+                        kind=kind,
+                        tokens=int(item.get("tokens") or item.get("token_count") or 0),
+                        memory=memory,
+                        name=str(item.get("name") or ""),
+                    ),
+                    label,
+                )
+            )
+    return rows
+
+
+def lake_win_matrix(memory: Mapping[str, Any]) -> tuple[list[str], list[str], list[list[float]]]:
+    """Theorem × skill signed lake counts (win +1, fail −1)."""
+
+    cells: dict[tuple[str, str], float] = {}
+    for sign, bucket in ((1.0, memory.get("successes") or []), (-1.0, memory.get("failures") or [])):
+        for item in bucket:
+            thm = str(item.get("name") or "")
+            stem = _stem_of(str(item.get("kind") or ""))
+            if not thm or not stem:
+                continue
+            cells[(thm, stem)] = cells.get((thm, stem), 0.0) + sign
+    theorems = sorted({key[0] for key in cells})
+    skills = sorted({key[1] for key in cells})
+    matrix = [[cells.get((thm, stem), 0.0) for stem in skills] for thm in theorems]
+    return theorems, skills, matrix
+
+
+def fit_grid_svd(memory: dict[str, Any], *, rank: int = SVD_RANK) -> dict[str, Any]:
+    """Truncated SVD on the theorem×skill lake matrix. Not proof-AST PCA."""
+
+    theorems, skills, matrix = lake_win_matrix(memory)
+    if len(theorems) < 2 or len(skills) < 2:
+        memory.setdefault("nca", {})["svd"] = {}
+        return {
+            "ok": True,
+            "reason": "too_small",
+            "n_theorems": len(theorems),
+            "n_skills": len(skills),
+            "writes_lean": False,
+            "kind": "port_svd",
+        }
+    try:
+        import numpy as np
+    except Exception:
+        return {"ok": False, "reason": "no_numpy", "writes_lean": False, "kind": "port_svd"}
+    arr = np.asarray(matrix, dtype=float)
+    u, singular, vt = np.linalg.svd(arr, full_matrices=False)
+    k = max(1, min(int(rank), int(singular.shape[0])))
+    recon = (u[:, :k] * singular[:k]) @ vt[:k]
+    scores = {
+        theorems[i]: {skills[j]: float(recon[i, j]) for j in range(len(skills))}
+        for i in range(len(theorems))
+    }
+    memory.setdefault("nca", {})["svd"] = {
+        "theorems": theorems,
+        "skills": skills,
+        "k": k,
+        "singular": [float(x) for x in singular[:k]],
+        "scores": scores,
+    }
+    return {
+        "ok": True,
+        "n_theorems": len(theorems),
+        "n_skills": len(skills),
+        "k": k,
+        "singular": [float(x) for x in singular[:k]],
+        "writes_lean": False,
+        "kind": "port_svd",
+    }
+
+
+def recommend_svd(memory: dict[str, Any], *, problem: str = "") -> dict[str, Any]:
+    """Rank skills for a theorem from reconstructed SVD scores."""
+
+    fitted = fit_grid_svd(memory)
+    blob = ((memory.get("nca") or {}).get("svd") or {})
+    scores = dict(blob.get("scores") or {})
+    skills = list(blob.get("skills") or [])
+    if not scores or not skills:
+        fitted["ranked"] = []
+        return fitted
+    if problem in scores:
+        row = dict(scores[problem])
+    else:
+        row = {stem: 0.0 for stem in skills}
+        n = 0
+        for other in scores.values():
+            n += 1
+            for stem, val in other.items():
+                row[stem] = row.get(stem, 0.0) + float(val)
+        if n:
+            row = {stem: val / float(n) for stem, val in row.items()}
+    ranked = sorted(row, key=lambda stem: (-float(row[stem]), stem))
+    memory.setdefault("nca", {})["pipeline_bias"] = ranked
+    fitted["ranked"] = ranked
+    fitted["problem"] = problem
+    fitted["ok"] = True
+    return fitted
+
+
+def call_pca(
+    memory: dict[str, Any],
+    *,
+    tactics: str = "",
+    problem: str = "",
+) -> dict[str, Any]:
+    """Expose pca_mca_fanout.fit_pca_mca (already SVD) as an NCA CALL."""
+
+    try:
+        import pca_mca_fanout as lra_pca
+        import splice as lra_splice
+    except Exception as exc:
+        return {"ok": False, "reason": type(exc).__name__, "writes_lean": False, "kind": "port_pca"}
+    try:
+        _raw, _digest, records = lra_splice.load_warmup_records()
+        rows = [lra_pca.feature_row(item) for item in records]
+        model = lra_pca.fit_pca_mca(rows)
+    except Exception as exc:
+        return {"ok": False, "reason": type(exc).__name__, "writes_lean": False, "kind": "port_pca"}
+    stored = {
+        "n_rows": model.get("n_rows"),
+        "n_features": model.get("n_features"),
+        "feature_names": list(model.get("feature_names") or []),
+        "mean": list(model.get("mean") or []),
+        "std": list(model.get("std") or []),
+        "singular_values": list(model.get("singular_values") or []),
+        "explained_ratio": list(model.get("explained_ratio") or []),
+        "principal": list(model.get("principal") or []),
+        "minor": list(model.get("minor") or []),
+    }
+    memory.setdefault("nca", {})["pca"] = stored
+    families: list[dict[str, Any]] = []
+    if tactics:
+        try:
+            counts = lra_pca.count_tactics(tactics)
+            families = lra_pca.amenable_families(counts, stored)
+        except Exception:
+            families = []
+    try:
+        import typesafe_nca as lra_nca
+
+        for fam in families[:6]:
+            name = str(fam.get("family") or "")
+            if name:
+                lra_nca.upsert_from_event(
+                    memory,
+                    ptr=f"ptr://family/{name}",
+                    kind="family",
+                    energy=min(0.9, 0.4 + 0.1 * float(fam.get("score") or 0.0)),
+                )
+    except Exception:
+        pass
+    return {
+        "ok": True,
+        "kind": "port_pca",
+        "n_rows": stored.get("n_rows"),
+        "families": [str(item.get("family")) for item in families],
+        "problem": problem,
+        "writes_lean": False,
+        "duplicate_of": "pca_mca_fanout.fit_pca_mca",
+    }
+
+
+def thompson_rank(
+    memory: dict[str, Any],
+    *,
+    rng: Optional[random.Random] = None,
+    name: str = "",
+) -> dict[str, Any]:
+    """Sample Beta(α,β) per stem so high-variance skills still get a try."""
+
+    rng = rng or random.Random(0)
+    if not _bayes_store(memory):
+        sync_bayes_from_memory(memory)
+    stems = _pipeline_stems(memory, name=name) or list(_bayes_store(memory))
+    if not stems:
+        return {"ok": True, "reason": "no_stems", "ranked": [], "writes_lean": False, "kind": "port_thompson"}
+    scored: list[tuple[float, str]] = []
+    draws: dict[str, float] = {}
+    for stem in stems:
+        post = posterior(memory, stem)
+        alpha = max(1e-6, float(post["alpha"]))
+        beta = max(1e-6, float(post["beta"]))
+        try:
+            x = rng.gammavariate(alpha, 1.0)
+            y = rng.gammavariate(beta, 1.0)
+            draw = x / (x + y) if (x + y) else 0.5
+        except ValueError:
+            draw = float(post["mean"])
+        draws[stem] = draw
+        scored.append((-draw, stem))
+    scored.sort()
+    ranked = [stem for _s, stem in scored]
+    memory.setdefault("nca", {})["pipeline_bias"] = ranked
+    return {
+        "ok": True,
+        "kind": "port_thompson",
+        "ranked": ranked,
+        "draws": draws,
+        "writes_lean": False,
+    }
+
+
+def train_ridge(memory: dict[str, Any], *, lam: float = RIDGE_L2) -> dict[str, Any]:
+    """Ridge P(lake-ok | feature_row). Complementary to RF on small n."""
+
+    rows = _labeled_rows(memory)
+    if len(rows) < 4:
+        memory.setdefault("nca", {})["ridge"] = {}
+        return {"ok": True, "reason": "too_few_rows", "n_rows": len(rows), "writes_lean": False, "kind": "port_ridge"}
+    try:
+        import numpy as np
+    except Exception:
+        return {"ok": False, "reason": "no_numpy", "writes_lean": False, "kind": "port_ridge"}
+    x = np.asarray([feat for feat, _y in rows], dtype=float)
+    y = np.asarray([float(lab) for _feat, lab in rows], dtype=float)
+    ones = np.ones((x.shape[0], 1), dtype=float)
+    design = np.concatenate([ones, x], axis=1)
+    xtx = design.T @ design + float(lam) * np.eye(design.shape[1])
+    try:
+        weights = np.linalg.solve(xtx, design.T @ y)
+    except np.linalg.LinAlgError:
+        return {"ok": False, "reason": "singular", "writes_lean": False, "kind": "port_ridge"}
+    memory.setdefault("nca", {})["ridge"] = {"weights": [float(w) for w in weights], "lam": float(lam), "n_rows": len(rows)}
+    return {
+        "ok": True,
+        "kind": "port_ridge",
+        "n_rows": len(rows),
+        "n_weights": int(weights.shape[0]),
+        "writes_lean": False,
+    }
+
+
+def score_ridge(memory: Mapping[str, Any], feat: Sequence[float]) -> float:
+    weights = ((memory.get("nca") or {}).get("ridge") or {}).get("weights") or []
+    if not weights:
+        return 0.5
+    total = float(weights[0])
+    for index, value in enumerate(feat):
+        if index + 1 >= len(weights):
+            break
+        total += float(weights[index + 1]) * float(value)
+    return _clip01(1.0 / (1.0 + math.exp(-total)))
+
+
+def rank_drafts_ridge(
+    drafts: Sequence[Mapping[str, Any]],
+    *,
+    memory: Mapping[str, Any],
+    name: str = "",
+    remaining_cut: int = 0,
+) -> list[Mapping[str, Any]]:
+    leftover = len(drafts)
+    scored: list[tuple[float, Mapping[str, Any]]] = []
+    for item in drafts:
+        feat = feature_row(
+            kind=str(item.get("kind") or ""),
+            tokens=int(item.get("token_count") or 0),
+            memory=memory,
+            name=name,
+            leftover=leftover,
+            remaining_cut=remaining_cut,
+        )
+        scored.append((-score_ridge(memory, feat), item))
+    scored.sort(key=lambda row: (row[0], str(row[1].get("kind") or "")))
+    return [item for _s, item in scored]
+
+
 def call_ranker(
     stem: str,
     *,
@@ -407,11 +704,43 @@ def call_ranker(
     problem: str = "",
     rng: Optional[random.Random] = None,
 ) -> dict[str, Any]:
-    """Dispatch CALL ptr://skill/port_{random_forest,bayes_time,mcmc}."""
+    """Dispatch CALL ptr://skill/port_{random_forest,bayes_time,mcmc,svd,pca,thompson,ridge}."""
 
     rng = rng or random.Random(0)
     text = str(stem or "").lower()
     name = str(problem or "")
+    try:
+        import nca_int_rankers as lra_int
+
+        if lra_int.is_int_stem(stem):
+            return lra_int.call_int_ranker(
+                stem, memory=memory, tactics=tactics, problem=name, rng=rng
+            )
+    except Exception:
+        pass
+    if "thompson" in text:
+        return thompson_rank(memory, rng=rng, name=name)
+    if "ridge" in text or "logistic" in text:
+        trained = train_ridge(memory)
+        drafts: list[Mapping[str, Any]] = []
+        try:
+            import portable_rewrites as lra_port
+
+            drafts = list(lra_port.portable_drafts(tactics, memory=memory, name=name))
+        except Exception:
+            drafts = []
+        ranked = rank_drafts_ridge(drafts, memory=memory, name=name)
+        bias = [_stem_of(str(item.get("kind") or "")) for item in ranked if item.get("kind")]
+        if bias:
+            memory.setdefault("nca", {})["pipeline_bias"] = bias
+        trained["ranked"] = [str(item.get("kind")) for item in ranked]
+        trained["ok"] = bool(trained.get("ok"))
+        trained["writes_lean"] = False
+        return trained
+    if "svd" in text:
+        return recommend_svd(memory, problem=name)
+    if text.endswith("pca") or "/pca" in text or "port_pca" in text or text == "pca":
+        return call_pca(memory, tactics=tactics, problem=name)
     if "bayes" in text:
         synced = sync_bayes_from_memory(memory)
         synced["n_cells"] = apply_bayes_to_grid(memory)
@@ -421,7 +750,7 @@ def call_ranker(
         return synced
     if "forest" in text or "random_forest" in text:
         trained = train_random_forest(memory, rng=rng)
-        drafts: list[Mapping[str, Any]] = []
+        drafts = []
         try:
             import portable_rewrites as lra_port
 

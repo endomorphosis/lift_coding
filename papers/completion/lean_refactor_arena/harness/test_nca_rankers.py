@@ -123,6 +123,163 @@ class NcaRankerTests(unittest.TestCase):
         self.assertFalse(executed.get("called_docker0"))
         self.assertTrue(kinds)
 
+    def test_grid_svd_recommends_winning_skill(self) -> None:
+        mem = {
+            "successes": [
+                {"name": "ThmA", "kind": "port_trailing_tuple_comma"},
+                {"name": "ThmB", "kind": "port_trailing_tuple_comma"},
+            ],
+            "failures": [
+                {"name": "ThmA", "kind": "port_hoist_repeated_simp"},
+                {"name": "ThmB", "kind": "port_hoist_repeated_simp"},
+            ],
+            "nca": {},
+        }
+        rec = lra_rank.recommend_svd(mem, problem="ThmA")
+        self.assertTrue(rec["ok"], rec)
+        self.assertGreaterEqual(rec.get("k") or 0, 1)
+        self.assertEqual(rec["ranked"][0], "trailing_tuple_comma")
+        self.assertEqual(mem["nca"]["pipeline_bias"][0], "trailing_tuple_comma")
+
+    def test_thompson_explores_from_beta(self) -> None:
+        mem = {
+            "successes": [{"kind": "port_trailing_tuple_comma"}] * 6,
+            "failures": [{"kind": "port_grind_only_to_grind"}] * 6,
+            "nca": {},
+        }
+        ran = lra_rank.thompson_rank(mem, rng=random.Random(0))
+        self.assertTrue(ran["ok"])
+        self.assertGreater(ran["draws"]["trailing_tuple_comma"], ran["draws"]["grind_only_to_grind"])
+        self.assertEqual(ran["ranked"][0], "trailing_tuple_comma")
+
+    def test_ridge_scores_winner_above_loser(self) -> None:
+        mem = {
+            "successes": [{"kind": "port_trailing_tuple_comma", "tokens": 10, "name": "A"}] * 3,
+            "failures": [{"kind": "port_hoist_repeated_simp", "tokens": 40, "name": "A"}] * 3,
+            "nca": {},
+        }
+        trained = lra_rank.train_ridge(mem)
+        self.assertTrue(trained["ok"], trained)
+        win = lra_rank.feature_row(kind="port_trailing_tuple_comma", tokens=10, memory=mem, name="A")
+        lose = lra_rank.feature_row(kind="port_hoist_repeated_simp", tokens=40, memory=mem, name="A")
+        self.assertGreater(lra_rank.score_ridge(mem, win), lra_rank.score_ridge(mem, lose))
+
+    def test_pca_call_does_not_write_lean(self) -> None:
+        mem: dict = {"nca": {"grid": {}}}
+        out = lra_rank.call_pca(mem, tactics="  intro\n  simp_all\n", problem="P")
+        self.assertTrue(out["ok"], out)
+        self.assertFalse(out["writes_lean"])
+        self.assertGreaterEqual(int(out.get("n_rows") or 0), 2)
+        self.assertIn("pca", mem["nca"])
+
+    def test_skill_call_new_primitives(self) -> None:
+        mem = {
+            "nca": {
+                "grid": {},
+                "program_state": {
+                    "ops": [
+                        {"op": "CALL", "ptr": "ptr://skill/port_svd"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_thompson"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_ridge"},
+                        {"op": "KEEP"},
+                    ]
+                },
+            },
+            "successes": [
+                {"name": "ThmA", "kind": "port_trailing_tuple_comma", "tokens": 8},
+                {"name": "ThmB", "kind": "port_trailing_tuple_comma", "tokens": 9},
+            ]
+            * 2,
+            "failures": [
+                {"name": "ThmA", "kind": "port_hoist_repeated_simp", "tokens": 30},
+                {"name": "ThmB", "kind": "port_hoist_repeated_simp", "tokens": 31},
+            ]
+            * 2,
+        }
+        executed = lra_prog.execute_program_ops(mem, tactics="  exact Hin\n", problem="ThmA")
+        ptrs = [str(op.get("ptr") or "") for op in executed.get("ran") or [] if op.get("ok")]
+        self.assertTrue(any("svd" in p for p in ptrs), executed["ran"])
+        self.assertTrue(any("thompson" in p for p in ptrs))
+        self.assertTrue(any("ridge" in p for p in ptrs))
+        self.assertEqual(executed.get("tactics"), "  exact Hin\n")
+
+    def test_integer_primitives_no_float_scores(self) -> None:
+        import nca_int_rankers as lra_int
+
+        mem = {
+            "successes": [
+                {"name": "ThmA", "kind": "port_trailing_tuple_comma", "tokens": 8},
+                {"name": "ThmB", "kind": "port_trailing_tuple_comma", "tokens": 9},
+            ]
+            * 2,
+            "failures": [
+                {"name": "ThmA", "kind": "port_hoist_repeated_simp", "tokens": 30},
+                {"name": "ThmB", "kind": "port_hoist_repeated_simp", "tokens": 31},
+            ]
+            * 2,
+            "nca": {},
+        }
+        rng = random.Random(0)
+        for stem in (
+            "port_svd",
+            "port_ols",
+            "port_ridge",
+            "port_logistic",
+            "port_kmeans",
+            "port_knn",
+            "port_ica",
+            "port_nmf",
+            "port_kalman",
+            "port_bayes_time",
+            "port_mcmc",
+        ):
+            out = lra_int.call_int_ranker(stem, memory=mem, tactics="  exact ⟨a, b,⟩\n", problem="ThmA", rng=rng)
+            self.assertTrue(out.get("ok"), (stem, out))
+            self.assertTrue(out.get("integer") or out.get("kind"), stem)
+            self.assertFalse(out.get("writes_lean"))
+            for key in ("best_energy", "k", "n", "n_rows"):
+                if key in out and out[key] is not None:
+                    self.assertNotIsInstance(out[key], float, (stem, key, out[key]))
+        kalman = lra_int.kalman_observe({"nca": {}}, "port_trailing_tuple_comma", ok=True)
+        self.assertEqual(kalman["x"], int(kalman["x"]))
+        self.assertGreater(kalman["x"], 500)
+        self.assertLess(lra_int.kalman_observe({"nca": {"kalman": {"trailing_tuple_comma": dict(kalman)}}}, "trailing_tuple_comma", ok=False)["x"], kalman["x"])
+
+    def test_skill_call_integer_suite(self) -> None:
+        mem = {
+            "nca": {
+                "grid": {},
+                "program_state": {
+                    "ops": [
+                        {"op": "CALL", "ptr": "ptr://skill/port_kmeans"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_knn"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_ols"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_logistic"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_ica"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_nmf"},
+                        {"op": "CALL", "ptr": "ptr://skill/port_kalman"},
+                        {"op": "KEEP"},
+                    ]
+                },
+            },
+            "successes": [
+                {"name": "ThmA", "kind": "port_trailing_tuple_comma", "tokens": 8},
+                {"name": "ThmB", "kind": "port_trailing_tuple_comma", "tokens": 9},
+            ]
+            * 2,
+            "failures": [
+                {"name": "ThmA", "kind": "port_hoist_repeated_simp", "tokens": 30},
+                {"name": "ThmB", "kind": "port_hoist_repeated_simp", "tokens": 31},
+            ]
+            * 2,
+        }
+        body = "  exact ⟨a, b,⟩\n"
+        executed = lra_prog.execute_program_ops(mem, tactics=body, problem="ThmA")
+        self.assertEqual(executed.get("tactics"), body)
+        ok_ptrs = [str(op.get("ptr") or "") for op in executed.get("ran") or [] if op.get("ok")]
+        for tag in ("kmeans", "knn", "ols", "logistic", "ica", "nmf", "kalman"):
+            self.assertTrue(any(tag in p for p in ok_ptrs), (tag, executed["ran"]))
+
 
 if __name__ == "__main__":
     unittest.main()
