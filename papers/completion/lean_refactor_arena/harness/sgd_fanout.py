@@ -53,7 +53,9 @@ def drop_subset(tactics: str, holes: Sequence[lra_mask.Hole], chosen: Sequence[s
 def hammer_variants(tactics: str, reference: str) -> list[tuple[str, str]]:
     """Parallel tactician branches. Aesop is not a Strata/CSLib dep."""
 
-    return [
+    import inits_updates_shorten as lra_ius
+
+    rows = [
         ("identity", tactics),
         ("simp_all", tactics.rstrip() + "\n  all_goals try simp_all"),
         ("omega", tactics.rstrip() + "\n  try omega"),
@@ -61,7 +63,16 @@ def hammer_variants(tactics: str, reference: str) -> list[tuple[str, str]]:
             "restore+simp",
             lra_mask.hammer_repair(tactics, reference, [{"data": "unsolved goals"}]),
         ),
+        ("inits_replay", lra_ius.replay(reference)),
+        ("inits_step", lra_ius.replay(tactics)),
     ]
+    for item in lra_ius.propose(tactics)[:8]:
+        rows.append((str(item["kind"]), str(item["tactics"])))
+    import symbol_diffuse as lra_sym
+
+    for item in lra_sym.closed_candidates(tactics, max_candidates=6):
+        rows.append((str(item["kind"]), str(item["tactics"])))
+    return rows
 
 
 def jev_round(

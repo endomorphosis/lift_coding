@@ -201,7 +201,8 @@ def drop_redundant_simp_at(text: str) -> str:
         while skip < len(lines) and not lines[skip].strip():
             skip += 1
         following = lines[skip].strip() if skip < len(lines) else ""
-        if run_end - index >= 2 and following.startswith("simp_all"):
+        # A single ``simp at hyp`` immediately before ``simp_all`` is also residual.
+        if run_end > index and following.startswith("simp_all"):
             index = run_end
             continue
         if run_end - index >= 2:
@@ -254,8 +255,11 @@ def span_preserving_drafts(tactics: str) -> list[Draft]:
 
 
 def drop_have_obtain(text: str) -> str:
-    kept = [line for line in text.splitlines() if not _HAVE_OBTAIN.match(line)]
-    return "\n".join(kept)
+    """Drop unused have/obtain/rename_i only. Keep destructuring and used binders."""
+
+    import binder_use as lra_bind
+
+    return lra_bind.drop_unused_binders(text, kinds=("rename_i", "have", "obtain"))
 
 
 def first_case_only(text: str) -> str:

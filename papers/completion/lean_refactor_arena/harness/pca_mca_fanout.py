@@ -251,23 +251,36 @@ def amenable_families(counts: Mapping[str, float], model: Mapping[str, Any], *, 
 
 
 def drop_rename_i(text: str) -> str:
-    return "\n".join(line for line in text.splitlines() if not _RENAME.match(line))
+    """Drop rename_i lines whose binders are not referenced later."""
+
+    import binder_use as lra_bind
+
+    return lra_bind.drop_unused_binders(text, kinds=("rename_i",))
 
 
 def drop_have_after_induction(text: str) -> str:
-    lines = text.splitlines()
+    import binder_use as lra_bind
+
+    lines = text.splitlines(keepends=True)
     out: list[str] = []
     after_induction = False
+    offset = 0
     for line in lines:
+        start, end = offset, offset + len(line)
         stripped = line.strip()
         if stripped.startswith("induction "):
             after_induction = True
             out.append(line)
+            offset = end
             continue
-        if after_induction and _HAVE.match(line):
+        if after_induction and _HAVE.match(line.rstrip("\n")):
+            if not lra_bind.safe_to_drop_span(text, start, end, line.rstrip("\n")):
+                out.append(line)
+            offset = end
             continue
         out.append(line)
-    return "\n".join(out)
+        offset = end
+    return "".join(out).strip("\n")
 
 
 def collapse_rw_to_simp(text: str) -> str:
@@ -316,6 +329,24 @@ def guided_drafts(
     if counts.get("n_rw") or counts.get("n_calc") or counts.get("n_omega") or counts.get("n_ring") or counts.get("n_induction"):
         names.add("algebraic_simplification")
     lra_fan._push(drafts, seen, "reference", tactics, ("identity", "pca_keep"))
+    import portable_rewrites as lra_port
+
+    for item in lra_port.portable_drafts(tactics):
+        lra_fan._push(
+            drafts,
+            seen,
+            str(item.get("family") or "search_space"),
+            str(item["tactics"]),
+            ("portable", str(item.get("kind") or "")),
+        )
+    import inits_updates_shorten as lra_ius
+
+    for family, body, ops in lra_ius.pca_mca_ops(tactics):
+        lra_fan._push(drafts, seen, family, body, ops)
+    import symbol_diffuse as lra_sym
+
+    for family, body, ops in lra_sym.pca_mca_ops(tactics):
+        lra_fan._push(drafts, seen, family, body, ops)
     if "strength_reduction" in names or "dead_code" in names:
         lra_fan._push(
             drafts,
@@ -327,6 +358,15 @@ def guided_drafts(
         for span_draft in lra_fan.span_preserving_drafts(tactics):
             lra_fan._push(drafts, seen, span_draft.family, span_draft.tactics, span_draft.ops + ("mca_span",))
     if "dead_code" in names:
+        import binder_use as lra_bind
+
+        lra_fan._push(
+            drafts,
+            seen,
+            "dead_code",
+            lra_bind.drop_unused_binders(tactics),
+            ("drop_unused_binders", "mca"),
+        )
         lra_fan._push(drafts, seen, "dead_code", drop_rename_i(tactics), ("drop_rename_i", "mca"))
         lra_fan._push(
             drafts,
@@ -403,6 +443,16 @@ def fanout_questions(drafts: Sequence[lra_fan.Draft], *, Choice: Any, Noul: Any,
         "strength_reduction": "Replace simp-at runs with simp_all",
         "algebraic_simplification": "Collapse rw/calc/ring/omega into simp or omega",
         "pca_keep": "Keep the reference; PCA says it is already the dominant style",
+        "inits_replay": (
+            "Apply the closed Core.InitsUpdatesComm 268→139 kernel sequence. "
+            "No LLM. Lake is the oracle."
+        ),
+        "drop": "Drop a residual binder, named arg, or unused intro",
+        "rewrite": "Apply one InitsUpdatesComm shorten kernel (MCA residual)",
+        "symbol_diffuse": (
+            "Fill a masked Lean operator/symbol from the closed language "
+            "($, constructor, intro, all_goals, .update_some) or Leanstral"
+        ),
     }
     return {
         "best_compiler_family": Choice(
@@ -634,7 +684,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             family_pick = row.get("best_compiler_family")
             picks = [row.get("best_first_draft")] + [item.get("id") for item in (row.get("top") or [])[:3]]
             for draft in drafts:
-                if draft.family in {"algebraic_simplification", "strength_reduction", "pca_keep", "reference"}:
+                if "inits_replay" in draft.ops or draft.family == "inits_replay":
+                    picks.insert(0, draft.draft_id)
+                if draft.family in {
+                    "algebraic_simplification",
+                    "strength_reduction",
+                    "pca_keep",
+                    "reference",
+                    "inits_replay",
+                    "rewrite",
+                    "drop",
+                    "symbol_diffuse",
+                }:
                     picks.append(draft.draft_id)
                 if family_pick and draft.family == family_pick:
                     picks.append(draft.draft_id)

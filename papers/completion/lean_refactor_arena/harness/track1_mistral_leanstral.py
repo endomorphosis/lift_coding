@@ -98,7 +98,10 @@ def load_keyfiles() -> None:
             if not line or line.startswith("#") or "=" not in line:
                 continue
             name, value = line.split("=", 1)
-            os.environ.setdefault(name.strip(), value.strip())
+            value = value.strip()
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "'\"":
+                value = value[1:-1]
+            os.environ.setdefault(name.strip(), value)
 
 
 def pin_paths() -> None:
@@ -152,18 +155,27 @@ def chat_completions(
     max_tokens: int = MAX_NEW_TOKENS_DEFAULT,
     timeout: float = TIMEOUT_DEFAULT,
     url: str = CHAT_URL,
+    temperature: float = 0.0,
+    n: int = 1,
+    stop: Optional[Sequence[str]] = None,
 ) -> dict[str, Any]:
     """POST chat/completions to Mistral Labs. Never docker0."""
 
     assert_hosted_url(url)
     key = resolve_mistral_key()
-    payload = {
+    payload: dict[str, Any] = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.0,
+        "temperature": float(temperature),
         "top_p": 1,
         "max_tokens": int(max_tokens),
     }
+    if int(n) > 1:
+        payload["n"] = int(n)
+        if float(payload["temperature"]) <= 0.0:
+            payload["temperature"] = 0.3
+    if stop:
+        payload["stop"] = [str(item) for item in stop if str(item)]
     raw_body = json.dumps(payload).encode("utf-8")
     request = urllib.request.Request(
         url,
@@ -196,10 +208,18 @@ def chat_completions(
     if not isinstance(data, dict):
         raise Track1MistralError("Mistral returned a non-object JSON payload")
     choices = data.get("choices") if isinstance(data.get("choices"), list) else []
+    texts: list[str] = []
+    for choice in choices:
+        if not isinstance(choice, Mapping):
+            continue
+        message = choice.get("message") if isinstance(choice.get("message"), Mapping) else {}
+        content = str(message.get("content") or "")
+        if content:
+            texts.append(content)
     message = {}
     if choices and isinstance(choices[0], Mapping):
         message = choices[0].get("message") if isinstance(choices[0].get("message"), Mapping) else {}
-    text = str(message.get("content") or "")
+    text = texts[0] if texts else str(message.get("content") or "")
     usage = data.get("usage") if isinstance(data.get("usage"), Mapping) else {}
     resolved_model = str(data.get("model") or model)
     return {

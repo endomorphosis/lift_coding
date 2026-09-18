@@ -7,6 +7,7 @@ Minor residuals (simp-at runs, have/rename_i, rw chains) become holes.
 Fills:
 - deterministic compiler templates (dead_code / strength_reduction / algebraic)
 - one hosted Labs Leanstral pass over the masked skeleton
+- optional Track 1 grok-4.6 few-shot + one lake-error repair (max 2 grok calls)
 
 TypeSafe ranks the reassembled candidates. Lake is the oracle.
 Never docker0. Never LOCK_EX. Not official Track 2. Not an Arena ranking.
@@ -22,7 +23,7 @@ import time
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Mapping, Optional, Sequence
+from typing import Any, Callable, Mapping, Optional, Sequence
 
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
@@ -56,6 +57,9 @@ import track1_mistral_leanstral as lra_mistral  # noqa: E402
 PROTOCOL = "LRA/v1"
 PR_ID = "PR-9d"
 HARDWARE_CLASS = "mistral_labs_api"
+GROK_HARDWARE_CLASS = "grok_cli"
+GROK_MAX_NEW_TOKENS = 900
+GROK_TIMEOUT_SECONDS = 300.0
 _SIMP_AT = lra_fan._SIMP_AT
 _RW = lra_pca._RW_BRACKET
 _RENAME = lra_pca._RENAME
@@ -328,9 +332,108 @@ def few_shot_prompt(target: Mapping[str, Any], shots: Sequence[Mapping[str, Any]
     )
 
 
+def shot_examples(records: Sequence[Mapping[str, Any]], *, skip_name: str) -> list[dict[str, Any]]:
+    shots: list[dict[str, Any]] = []
+    for shot_name in SHOT_NAMES:
+        if shot_name == skip_name:
+            continue
+        shot_rec = next((item for item in records if item.get("name") == shot_name), None)
+        if shot_rec is not None:
+            shots.append(few_shot_example(shot_rec))
+    return shots
+
+
+def _kind_needs_hammer(kind: str) -> bool:
+    key = str(kind or "")
+    return key.startswith(("leanstral", "grok", "mca_leanstral", "tactician", "hybrid", "pca_"))
+
+
+def _identity_dict(identity: Any) -> Optional[dict[str, Any]]:
+    if identity is None:
+        return None
+    if hasattr(identity, "requested_provider"):
+        return {
+            "requested_provider": identity.requested_provider,
+            "requested_model": identity.requested_model,
+            "resolved_provider": identity.resolved_provider,
+            "resolved_model": identity.resolved_model,
+            "fallback_used": bool(identity.fallback_used),
+            "arena_score": None,
+        }
+    if isinstance(identity, Mapping):
+        return dict(identity)
+    return {"repr": str(identity), "arena_score": None}
+
+
+def _flatten_tactics(reference: str, text: str) -> str:
+    return lra_kb.flatten_overindent(
+        reference, lra_kb.match_reference_indent(reference, lra_loop.extract_generated_tactics(text))
+    )
+
+
+def _compile_row(item: Mapping[str, Any], compiled: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "kind": item["kind"],
+        "generator": item.get("generator"),
+        "n_chars": len(str(item.get("tactics") or "")),
+        "tactics_head": str(item.get("tactics") or "")[:240],
+        "n_holes": len(item.get("holes") or []),
+        **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
+    }
+
+
+def _hammer_passes(
+    *,
+    kind: str,
+    tactics_now: str,
+    reference: str,
+    errors: Sequence[Mapping[str, Any]],
+    record: Mapping[str, Any],
+    state_root: Path,
+    timeout: float,
+    restore: bytes,
+    generator: str,
+) -> tuple[list[dict[str, Any]], str, list[Any], bool]:
+    rows: list[dict[str, Any]] = []
+    current = tactics_now
+    current_errors = list(errors)
+    ok = False
+    for pass_i in (1, 2, 3):
+        repaired = hammer_repair(current, reference, current_errors)
+        if repaired == current:
+            break
+        compiled_h = lra_kb.compile_tactics(
+            record,
+            repaired,
+            state_root=state_root,
+            timeout=timeout,
+            restore=restore,
+        )
+        rows.append(
+            _compile_row(
+                {
+                    "kind": f"{kind}_hammer{pass_i}",
+                    "generator": generator,
+                    "tactics": repaired,
+                    "holes": [],
+                },
+                compiled_h,
+            )
+        )
+        if compiled_h.get("theorem_ok"):
+            ok = True
+            current = repaired
+            current_errors = compiled_h.get("errors") or []
+            break
+        current = repaired
+        current_errors = compiled_h.get("errors") or []
+    return rows, current, current_errors, ok
+
+
+# Cslib scripts use ``grind`` / ``grind only [→ wf]``. Never rewrite grind
+# unless the lake error is specifically "unknown tactic grind" (Strata).
 _UNKNOWN_TACTICS = frozenset(
     {
-        "grind",
         "aesop",
         "exact?",
         "apply?",
@@ -382,7 +485,8 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
             continue
         cleaned.append(line)
     out = "\n".join(cleaned)
-    out = re.sub(r"\bgrind\b", "simp_all", out)
+    if re.search(r"unknown tactic[:\s]*[`']?grind", blob, re.I):
+        out = re.sub(r"\bgrind\b", "simp_all", out)
     out = re.sub(r"\bexact\?", "simp_all", out)
     out = re.sub(r"\bapply\?", "simp_all", out)
     if "unknown tactic" in blob.lower():
@@ -394,6 +498,20 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
                 continue
             again.append(line)
         out = "\n".join(again)
+    if "simp_all made no progress" in blob:
+        out = re.sub(r"(?m)^[ \t]*simp_all(?:\s*;\s*)?$", "", out, count=1)
+    if "Type mismatch" in blob:
+        for ident in re.findall(r"`([^`]+)`", blob):
+            restore_lines = [line for line in reference.splitlines() if ident in line]
+            present = {line.strip() for line in out.splitlines()}
+            pick = next((line for line in restore_lines if "have " in line or "rw " in line), None)
+            if pick and pick.strip() not in present:
+                out = pick + "\n" + out
+        # Grok often substitutes `exact InitStatesNotDefined` for a longer rw chain.
+        if "InitStatesNotDefined" in blob and "unzip_zip" in reference and "unzip_zip" not in out:
+            out = out.replace("exact InitStatesNotDefined Hinit", "rw [List.unzip_zip] <;> simp_all")
+        if re.search(r"exact ih\.2\.2", out) and "apply (ih Hinit" in reference:
+            out = re.sub(r"exact ih\.2\.2", "apply (ih Hinit ?_ ?_).2.2", out)
     if "No goals to be solved" in blob:
         out = re.sub(r"(?m)^[ \t]*all_goals try simp_all\s*$", "", out)
         out = re.sub(r"(?m)^[ \t]*try omega\s*$", "", out)
@@ -408,6 +526,77 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
     return out
 
 
+def case_tag(label: str) -> str:
+    return str(label or "").split()[0]
+
+
+def replace_case_from(dst: str, src: str, tag: str) -> str:
+    """Replace one top-level ``case`` arm in ``dst`` with the matching arm from ``src``."""
+
+    want = case_tag(tag)
+    dst_span = next((span for span in lra_fan.case_spans(dst) if case_tag(span.label) == want), None)
+    src_span = next((span for span in lra_fan.case_spans(src) if case_tag(span.label) == want), None)
+    if dst_span is None or src_span is None:
+        return dst
+    return dst[: dst_span.start] + src[src_span.start : src_span.end] + dst[dst_span.end :]
+
+
+def drop_bare_simp_all(tactics: str) -> str:
+    return re.sub(r"(?m)^[ \t]*simp_all\s*$", "", tactics)
+
+
+def try_simp_all(tactics: str) -> str:
+    return re.sub(r"(?m)^([ \t]*)simp_all\s*$", r"\1try simp_all", tactics)
+
+
+def grok_tactician_variants(grok: str, reference: str) -> list[dict[str, Any]]:
+    """Deterministic repairs of a grok file draft. Jev does not write these."""
+
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = {grok.strip("\n")}
+
+    def push(kind: str, body: str, *ops: str) -> None:
+        text = body.strip("\n")
+        if not text or text in seen:
+            return
+        seen.add(text)
+        rows.append(
+            {
+                "kind": kind,
+                "generator": "tactician",
+                "tactics": text,
+                "holes": [],
+                "ops": list(ops),
+                "source": "grok-file+tactician",
+            }
+        )
+
+    push("tactician_drop_simp_all", drop_bare_simp_all(grok), "drop_bare_simp_all")
+    push("tactician_try_simp_all", try_simp_all(grok), "try_simp_all")
+    import inits_updates_shorten as lra_ius
+
+    push("tactician_inits_replay_ref", lra_ius.replay(reference), "inits_replay_ref")
+    push("tactician_inits_replay", lra_ius.replay(grok), "inits_replay")
+    for item in lra_ius.propose(grok)[:8]:
+        push(f"tactician_{item['kind']}", item["tactics"], item["kind"])
+    hammered = hammer_repair(
+        grok,
+        reference,
+        [{"data": "simp_all made no progress"}, {"data": "Type mismatch `InitStatesNotDefined`"}],
+    )
+    push("tactician_hammer_seed", hammered, "hammer_seed")
+    grok_tags = [case_tag(span.label) for span in lra_fan.case_spans(grok)]
+    ref_tags = [case_tag(span.label) for span in lra_fan.case_spans(reference)]
+    for tag in grok_tags:
+        if tag in ref_tags:
+            push(f"hybrid_ref_case_{tag}", replace_case_from(grok, reference, tag), "hybrid_ref_case", tag)
+            push(f"hybrid_grok_case_{tag}", replace_case_from(reference, grok, tag), "hybrid_grok_case", tag)
+    return rows
+
+
+MAX_GROK_FANOUT = 14
+
+
 def assemble_candidates(
     record: Mapping[str, Any],
     tactics: str,
@@ -417,8 +606,16 @@ def assemble_candidates(
 ) -> list[dict[str, Any]]:
     template_fills = {hole.hole_id: template_fill(hole) for hole in holes}
     template_tactics = apply_fills(tactics, holes, template_fills)
+    import inits_updates_shorten as lra_ius
+
     rows = [
         {"kind": "reference", "generator": "pca_skeleton", "tactics": tactics, "holes": []},
+        {
+            "kind": "inits_replay",
+            "generator": "inits_updates_shorten",
+            "tactics": lra_ius.replay(tactics),
+            "holes": [],
+        },
         {
             "kind": "mca_template_fill",
             "generator": "deterministic",
@@ -534,6 +731,82 @@ def ablate_holes(
     return rows
 
 
+def typesafe_rank_fanout(
+    record: Mapping[str, Any],
+    drafts: Sequence[dict[str, Any]],
+    *,
+    ledger: Optional[Any],
+) -> dict[str, Any]:
+    """One Jev Choice over tactician/PCA drafts. Jev does not write Lean."""
+
+    if not drafts:
+        return {"skipped": True, "reason": "no_drafts", "arena_score": None}
+    lra_pca.load_keyfile()
+    lra_pca.pin_typesafe_path()
+    from ipfs_accelerate_py.typesafe_inference import Choice, TypeSafeClient, typesafe_configured
+
+    if not typesafe_configured():
+        return {"skipped": True, "reason": "no_key", "arena_score": None}
+    criteria = {
+        str(item["kind"]): f"{item.get('generator')}; ops={item.get('ops')}; {len(item.get('tactics') or '')} chars"
+        for item in drafts[:20]
+    }
+    state = {
+        "problem": {"name": record.get("name"), "source": record.get("source")},
+        "statement": str(record.get("statement") or "")[:700],
+        "goal": "Repair a grok-written tactic file. Keep every case arm. Prefer the shortest lake-valid draft.",
+        "drafts": [
+            {
+                "id": item["kind"],
+                "ops": item.get("ops"),
+                "n_chars": len(item.get("tactics") or ""),
+                "head": str(item.get("tactics") or "")[:220],
+            }
+            for item in drafts[:20]
+        ],
+    }
+    questions = {
+        "best_first_draft": Choice(
+            instructions=(
+                "Which draft id should lake-compile first to repair this grok file? "
+                "Prefer restoring a truncated case arm from the reference, then dropping a "
+                "no-progress simp_all. Never delete a case header. Do not write Lean."
+            ),
+            criteria=criteria,
+        )
+    }
+    started = time.perf_counter()
+    client = TypeSafeClient(timeout=60.0)
+    try:
+        result = client.system_one(state, questions)
+    except Exception as exc:
+        return {"skipped": True, "reason": str(exc)[:400], "arena_score": None}
+    usage = dict(getattr(result, "usage", None) or {})
+    if ledger is not None:
+        inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or lra_t1.estimate_tokens(json.dumps(state)))
+        out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
+        ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
+    best = (getattr(result, "choices", None) or {}).get("best_first_draft")
+    return lra_pca.redact(
+        {
+            "skipped": False,
+            "reason": "routed",
+            "best_first_draft": getattr(best, "choice", None),
+            "best_confidence": getattr(best, "confidence", None),
+            "top": list(dict(getattr(best, "probabilities", None) or {})),
+            "usage": usage,
+            "wall_ms": (time.perf_counter() - started) * 1000.0,
+            "jev_generated_lean": False,
+            "arena_score": None,
+        }
+    )
+
+
+def load_grok_tactics_file(path: Path) -> str:
+    text = Path(path).read_text(encoding="utf-8")
+    return lra_loop.extract_generated_tactics(text)
+
+
 def run_problem(
     name: str,
     *,
@@ -543,6 +816,11 @@ def run_problem(
     ablate: bool = False,
     one_hole: bool = False,
     few_shot: bool = False,
+    grok_few_shot: bool = False,
+    grok_generate: Optional[Callable[..., str]] = None,
+    grok_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
+    grok_tactics_paths: Sequence[Path] = (),
+    typesafe_fanout: bool = False,
 ) -> dict[str, Any]:
     _raw, digest, records = lra_splice.load_warmup_records()
     record = next(item for item in records if item.get("name") == name)
@@ -552,17 +830,87 @@ def run_problem(
     leanstral_text = None
     identity = None
     ledger = None
+    grok_skip_reason = ""
+    if grok_few_shot:
+        # Grok smoke never falls back to hosted Leanstral or docker0.
+        call_leanstral = False
     fill_holes = [hole for hole in holes if hole.family in {"strength_reduction", "algebraic_simplification"}]
     one_hole_fills: list[dict[str, Any]] = []
     few_shot_row: Optional[dict[str, Any]] = None
-    if few_shot and call_leanstral:
-        shots = []
-        for shot_name in SHOT_NAMES:
-            if shot_name == name:
-                continue
-            shot_rec = next((item for item in records if item.get("name") == shot_name), None)
-            if shot_rec is not None:
-                shots.append(few_shot_example(shot_rec))
+    grok_few_shot_row: Optional[dict[str, Any]] = None
+    grok_tactics_current = ""
+    grok_errors_current: list[Any] = []
+    grok_workspace: Optional[Path] = None
+    grok_file_meta: list[dict[str, Any]] = []
+    grok_file_rows: list[dict[str, Any]] = []
+    typesafe_meta: Optional[dict[str, Any]] = None
+    if grok_tactics_paths:
+        grok_few_shot = False
+        call_leanstral = False
+        if ledger is None:
+            ledger = lra_t1.ProblemLedger(name=f"{name}#grok-file-fanout")
+        for path in grok_tactics_paths:
+            loaded = load_grok_tactics_file(path)
+            filled = _flatten_tactics(tactics, loaded)
+            grok_file_rows.append(
+                {
+                    "kind": f"grok_file_{Path(path).stem[:48]}",
+                    "generator": "grok-file",
+                    "tactics": filled,
+                    "holes": [],
+                    "source": str(path),
+                    "chat_ignored": True,
+                }
+            )
+    if grok_few_shot:
+        shots = shot_examples(records, skip_name=name)
+        ledger = lra_t1.ProblemLedger(name=f"{name}#grok-few-shot")
+        if grok_generate is None and not lra_t1.grok_callable():
+            grok_skip_reason = "no_key"
+            ledger.skipped = True
+            ledger.reason = "no_key"
+        else:
+            grok_workspace = lra_t1.prepare_grok_workspace()
+            prompt = lra_t1.grok_file_prompt(few_shot_prompt(record, shots))
+            try:
+                grok_result = lra_t1.generate_grok_file(
+                    prompt,
+                    ledger,
+                    workspace=grok_workspace,
+                    max_new_tokens=GROK_MAX_NEW_TOKENS,
+                    timeout=GROK_TIMEOUT_SECONDS,
+                    generate=grok_generate,
+                    fixture=grok_generate is not None,
+                    reset_stub=True,
+                )
+            except lra_t1.Track1LedgerError as exc:
+                grok_skip_reason = str(exc)
+            else:
+                identity = grok_result.identity
+                filled = _flatten_tactics(tactics, grok_result.tactics)
+                grok_file_meta.append({"call": "draft", **grok_result.as_dict()})
+                grok_few_shot_row = {
+                    "kind": "grok_few_shot",
+                    "generator": "grok-4.6",
+                    "tactics": filled,
+                    "holes": [],
+                    "n_shots": len(shots),
+                    "source": "tactics.lean",
+                    "tactics_path": grok_result.tactics_path,
+                    "chat_ignored": True,
+                    "shot_scores": [
+                        {
+                            "name": shot["name"],
+                            "ratio": shot["ratio"],
+                            "filled_tokens": shot["filled_tokens"],
+                            "ref_tokens": shot["ref_tokens"],
+                        }
+                        for shot in shots
+                    ],
+                }
+                grok_tactics_current = filled
+    elif few_shot and call_leanstral:
+        shots = shot_examples(records, skip_name=name)
         lra_mistral.load_keyfiles()
         lra_mistral.pin_paths()
         ledger = lra_t1.ProblemLedger(name=f"{name}#few-shot")
@@ -570,9 +918,7 @@ def run_problem(
         text, identity, _line = lra_mistral.generate_mistral(
             prompt, ledger, max_new_tokens=900, timeout=180.0
         )
-        filled = lra_kb.flatten_overindent(
-            tactics, lra_kb.match_reference_indent(tactics, lra_loop.extract_generated_tactics(text))
-        )
+        filled = _flatten_tactics(tactics, text)
         few_shot_row = {
             "kind": "leanstral_few_shot",
             "generator": "labs-leanstral-1-5",
@@ -634,10 +980,52 @@ def run_problem(
     candidates.extend(one_hole_fills)
     if few_shot_row is not None:
         candidates.append(few_shot_row)
+    if grok_few_shot_row is not None:
+        candidates.append(grok_few_shot_row)
+    candidates.extend(grok_file_rows)
+    grok_seeds = [item for item in candidates if str(item.get("kind") or "").startswith("grok")]
+    if typesafe_fanout and grok_seeds:
+        seed = grok_seeds[0]["tactics"]
+        extras = grok_tactician_variants(seed, tactics)
+        _raw, _digest, warmup_records = lra_splice.load_warmup_records()
+        rows_feat = [lra_pca.feature_row(item) for item in warmup_records]
+        model = lra_pca.fit_pca_mca(rows_feat)
+        public_model = {key: value for key, value in model.items() if key not in {"zscore", "vt"}}
+        features = lra_pca.count_tactics(seed)
+        families = lra_pca.amenable_families(features, public_model)
+        for draft in lra_pca.guided_drafts(seed, families, features):
+            extras.append(
+                {
+                    "kind": f"pca_{draft.draft_id}_{draft.family}",
+                    "generator": "pca_mca_fanout",
+                    "tactics": draft.tactics,
+                    "holes": [],
+                    "ops": list(draft.ops),
+                    "source": "grok-file+pca_mca",
+                }
+            )
+        typesafe_meta = typesafe_rank_fanout(record, extras, ledger=ledger)
+        pick = str((typesafe_meta or {}).get("best_first_draft") or "")
+        ordered = []
+        seen_kind = set()
+        if pick:
+            for item in extras:
+                if item["kind"] == pick:
+                    ordered.append(item)
+                    seen_kind.add(item["kind"])
+        for item in extras:
+            if item["kind"] in seen_kind:
+                continue
+            seen_kind.add(item["kind"])
+            ordered.append(item)
+            if len(ordered) >= MAX_GROK_FANOUT:
+                break
+        candidates.extend(ordered)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     restore = dest.read_bytes() if dest.is_file() else b""
     rows = []
+    grok_ok = False
     for item in candidates:
         compiled = lra_kb.compile_tactics(
             record,
@@ -646,49 +1034,114 @@ def run_problem(
             timeout=timeout,
             restore=restore,
         )
-        rows.append(
-            {
-                "kind": item["kind"],
-                "generator": item["generator"],
-                "n_chars": len(item["tactics"]),
-                "tactics_head": item["tactics"][:240],
-                "n_holes": len(item.get("holes") or []),
-                **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
-            }
+        rows.append(_compile_row(item, compiled))
+        kind = str(item.get("kind") or "")
+        if kind.startswith("grok"):
+            if compiled.get("theorem_ok"):
+                grok_ok = True
+            else:
+                grok_tactics_current = item["tactics"]
+                grok_errors_current = compiled.get("errors") or []
+        if _kind_needs_hammer(kind) and not compiled.get("theorem_ok"):
+            hammer_gen = "grok+simp_all/omega" if kind.startswith("grok") else "leanstral+simp_all/omega"
+            hammer_rows, current, current_errors, hammer_ok = _hammer_passes(
+                kind=kind,
+                tactics_now=item["tactics"],
+                reference=tactics,
+                errors=compiled.get("errors") or [],
+                record=record,
+                state_root=state_root,
+                timeout=timeout,
+                restore=restore,
+                generator=hammer_gen,
+            )
+            rows.extend(hammer_rows)
+            if kind.startswith("grok"):
+                grok_tactics_current = current
+                grok_errors_current = current_errors
+                grok_ok = grok_ok or hammer_ok
+            elif compiled.get("errors"):
+                grok_errors_current = grok_errors_current or list(compiled.get("errors") or [])
+    if grok_few_shot and grok_few_shot_row is not None and not grok_ok and ledger is not None:
+        prompt = lra_t1.grok_file_prompt(
+            lra_kb.repair_prompt(
+                record,
+                failed=grok_tactics_current or grok_few_shot_row["tactics"],
+                errors=grok_errors_current,
+                reference=tactics,
+            )
         )
-        if str(item.get("kind") or "").startswith("leanstral") and not compiled.get("theorem_ok"):
-            current = item["tactics"]
-            current_errors = compiled.get("errors") or []
-            last_kind = str(item["kind"])
-            for pass_i in (1, 2, 3):
-                repaired = hammer_repair(current, tactics, current_errors)
-                if repaired == current:
-                    break
-                compiled_h = lra_kb.compile_tactics(
-                    record,
-                    repaired,
+        try:
+            grok_result = lra_t1.generate_grok_file(
+                prompt,
+                ledger,
+                workspace=grok_workspace or lra_t1.prepare_grok_workspace(),
+                max_new_tokens=GROK_MAX_NEW_TOKENS,
+                timeout=GROK_TIMEOUT_SECONDS,
+                generate=grok_generate,
+                fixture=grok_generate is not None,
+                reset_stub=False,
+            )
+        except lra_t1.Track1LedgerError as exc:
+            grok_skip_reason = grok_skip_reason or str(exc)
+            rows.append(
+                {
+                    "kind": "grok_few_shot_repair",
+                    "generator": "grok-4.6",
+                    "n_chars": 0,
+                    "tactics_head": "",
+                    "n_holes": 0,
+                    "ok": False,
+                    "theorem_ok": False,
+                    "module_exit_0": False,
+                    "exit_code": None,
+                    "token_count": None,
+                    "errors": [{"pos": None, "data": str(exc)}],
+                    "wall_ms": None,
+                    "skipped": True,
+                    "reason": str(exc),
+                    "source": "tactics.lean",
+                    "chat_ignored": True,
+                }
+            )
+        else:
+            identity = grok_result.identity
+            grok_file_meta.append({"call": "repair", **grok_result.as_dict()})
+            repaired_tactics = _flatten_tactics(tactics, grok_result.tactics)
+            compiled_r = lra_kb.compile_tactics(
+                record,
+                repaired_tactics,
+                state_root=state_root,
+                timeout=timeout,
+                restore=restore,
+            )
+            rows.append(
+                _compile_row(
+                    {
+                        "kind": "grok_few_shot_repair",
+                        "generator": "grok-4.6",
+                        "tactics": repaired_tactics,
+                        "holes": [],
+                    },
+                    compiled_r,
+                )
+            )
+            if compiled_r.get("theorem_ok"):
+                grok_ok = True
+            else:
+                hammer_rows, _, _, hammer_ok = _hammer_passes(
+                    kind="grok_few_shot_repair",
+                    tactics_now=repaired_tactics,
+                    reference=tactics,
+                    errors=compiled_r.get("errors") or [],
+                    record=record,
                     state_root=state_root,
                     timeout=timeout,
                     restore=restore,
+                    generator="grok+simp_all/omega",
                 )
-                last_kind = f"{item['kind']}_hammer{pass_i}"
-                rows.append(
-                    {
-                        "kind": last_kind,
-                        "generator": "leanstral+simp_all/omega",
-                        "n_chars": len(repaired),
-                        "tactics_head": repaired[:240],
-                        "n_holes": 0,
-                        **{
-                            k: compiled_h.get(k)
-                            for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")
-                        },
-                    }
-                )
-                if compiled_h.get("theorem_ok"):
-                    break
-                current = repaired
-                current_errors = compiled_h.get("errors") or []
+                rows.extend(hammer_rows)
+                grok_ok = grok_ok or hammer_ok
     if ablate and holes:
         rows.extend(
             ablate_holes(
@@ -710,6 +1163,15 @@ def run_problem(
                 0 if row.get("kind") == "reference" else 1,
             ),
         )[0]
+    ref_tokens = lra_loop.token_count(tactics)
+    kept_tokens = None if kept is None else kept.get("token_count")
+    beats_reference = bool(
+        kept is not None
+        and kept.get("kind") != "reference"
+        and kept.get("theorem_ok")
+        and kept_tokens is not None
+        and int(kept_tokens) < ref_tokens
+    )
     return lra_pca.redact(
         {
             "schema": "lra-mca-mask-replace/v1",
@@ -720,8 +1182,19 @@ def run_problem(
             "skeleton_head": skeleton[:800],
             "called_docker0": False,
             "used_prototype_endpoint": False,
-            "hardware_class": HARDWARE_CLASS,
-            "leanstral_identity": identity,
+            "hardware_class": GROK_HARDWARE_CLASS if (grok_few_shot or grok_tactics_paths) else HARDWARE_CLASS,
+            "leanstral_identity": None if grok_few_shot else identity,
+            "grok_identity": _identity_dict(identity) if grok_few_shot else None,
+            "grok_few_shot": grok_few_shot,
+            "grok_ok": grok_ok,
+            "grok_skip_reason": grok_skip_reason or None,
+            "grok_used_file": True if grok_few_shot else False,
+            "grok_chat_ignored": True if grok_few_shot else False,
+            "grok_workspace": None if grok_workspace is None else str(grok_workspace),
+            "grok_file_calls": grok_file_meta,
+            "typesafe_fanout": typesafe_meta,
+            "reference_token_count": ref_tokens,
+            "beats_reference": beats_reference,
             "ledger": None if ledger is None else ledger.as_dict(),
             "candidates": rows,
             "kept": None
@@ -774,11 +1247,28 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--ablate", action="store_true", help="lake-check dropping one MCA hole at a time")
     parser.add_argument("--one-hole", action="store_true", help="hosted Leanstral fills one MCA hole at a time")
     parser.add_argument("--few-shot", action="store_true", help="few-shot Leanstral from scored MCA hole examples")
+    parser.add_argument(
+        "--grok-few-shot",
+        action="store_true",
+        help="few-shot grok-4.6 + one lake-error repair (max 2 grok calls, no Leanstral)",
+    )
+    parser.add_argument(
+        "--grok-tactics",
+        default="",
+        help="comma-separated grok tactics.lean files to repair (no new grok calls)",
+    )
+    parser.add_argument(
+        "--typesafe-fanout",
+        action="store_true",
+        help="TypeSafe Choice + PCA/MCA/tactician fan-out over grok file drafts",
+    )
     parser.add_argument("--names", default=",".join(LAKE_READY))
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
+    if args.few_shot and args.grok_few_shot:
+        raise SystemExit("use either --few-shot (Leanstral) or --grok-few-shot, not both")
     if args.self_check or not args.live:
         report = self_check()
         json.dump(report, sys.stdout, indent=2, sort_keys=True)
@@ -786,16 +1276,20 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 0 if report["ok"] else 1
     os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
     names = [item.strip() for item in str(args.names).split(",") if item.strip()]
+    grok_paths = [Path(item.strip()) for item in str(args.grok_tactics).split(",") if item.strip()]
     started = time.perf_counter()
     reports = [
         run_problem(
             name,
             state_root=args.state_root,
             timeout=args.timeout,
-            call_leanstral=not args.no_leanstral,
+            call_leanstral=not args.no_leanstral and not args.grok_few_shot and not grok_paths,
             ablate=args.ablate,
             one_hole=args.one_hole,
             few_shot=args.few_shot,
+            grok_few_shot=args.grok_few_shot,
+            grok_tactics_paths=grok_paths,
+            typesafe_fanout=args.typesafe_fanout,
         )
         for name in names
     ]
@@ -805,6 +1299,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "protocol": PROTOCOL,
         "pr": PR_ID,
         "called_docker0": False,
+        "grok_few_shot": bool(args.grok_few_shot),
+        "typesafe_fanout": bool(args.typesafe_fanout),
         "arena_score": None,
         "wall_ms": (time.perf_counter() - started) * 1000.0,
         "problems": reports,
@@ -818,12 +1314,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     latest = args.out / "mca-mask-latest.json"
     path.write_text(text, encoding="utf-8")
     latest.write_text(text, encoding="utf-8")
+    copied = []
+    for item in reports:
+        for call in item.get("grok_file_calls") or []:
+            src = Path(str(call.get("tactics_path") or ""))
+            if not src.is_file():
+                continue
+            dest = args.out / f"grok-{item.get('name')}-{call.get('call')}-{stamp}.lean"
+            dest.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+            copied.append(str(dest))
     print(
         json.dumps(
             {
                 "ok": True,
                 "latest": str(latest),
                 "kept": [{"name": item.get("name"), "kept": item.get("kept"), "n_holes": item.get("n_holes")} for item in reports],
+                "grok_tactics_files": copied,
                 "arena_score": None,
             },
             indent=2,
