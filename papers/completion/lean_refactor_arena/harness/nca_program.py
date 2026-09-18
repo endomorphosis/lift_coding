@@ -547,7 +547,7 @@ def program_nca(
         "hardware_class": instructed.get("hardware_class") or "nca_local_ir",
         "called_docker0": False,
     }
-    memory.setdefault("nca", {}).setdefault("program_state", state)
+    memory.setdefault("nca", {})["program_state"] = state
     grid = memory["nca"].setdefault("grid", {})
     cell = grid.setdefault(
         "ptr://tool/nca_program",
@@ -569,8 +569,16 @@ def program_nca(
         lra_nca.charge_budget(memory, ledger=ledger, event="instruct")
     except Exception:
         pass
-    state["ops"] = executed.get("remaining") or []
-    memory["nca"]["program_state"] = state
+    live = memory["nca"].setdefault("program_state", state)
+    live["ops"] = executed.get("remaining") or []
+    live["last_ran"] = executed.get("ran") or live.get("last_ran") or []
+    live["tactics"] = executed.get("tactics") or tactics
+    live["ir"] = state.get("ir")
+    live["provider"] = state.get("provider")
+    live["hardware_class"] = state.get("hardware_class")
+    live["called_docker0"] = False
+    memory["nca"]["program_state"] = live
+    state = live
     return {
         "ok": True,
         "program_state": state,

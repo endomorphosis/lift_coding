@@ -430,7 +430,8 @@ def run_loop(
             memory=memory,
         )
         applied = apply_action(memory, action)
-        lra_bind.save_memory(memory)
+        if persist_memory:
+            lra_bind.save_memory(memory)
         payload: dict[str, Any] = {}
         traces: list[Any] = []
         if str(action.get("action") or "") != "stop":
