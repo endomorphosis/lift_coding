@@ -1106,7 +1106,16 @@ def rank_live_records(
                 continue
             drafts.append(item)
         cut = max(0, int(warm.get(name) or 0) - int(kept.get(name) or 0))
-        scored.append((-len(drafts), -cut, name, rec))
+        rf_score = 0.0
+        try:
+            import nca_rankers as lra_rank
+
+            rf_score = float(
+                lra_rank.score_record(drafts, memory=mem, name=name, remaining_cut=cut) or 0.0
+            )
+        except Exception:
+            rf_score = 0.0
+        scored.append((-len(drafts), -cut, -rf_score, name, rec))
         try:
             import typesafe_nca as lra_nca
 
@@ -1123,7 +1132,7 @@ def rank_live_records(
         except Exception:
             pass
     scored.sort()
-    return [row[3] for row in scored]
+    return [row[-1] for row in scored]
 
 
 def run_live(args: argparse.Namespace) -> dict[str, Any]:
