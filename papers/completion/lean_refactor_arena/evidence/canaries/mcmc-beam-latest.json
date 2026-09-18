@@ -1,0 +1,845 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T18:25:28.314796+00:00",
+  "official_track2": false,
+  "pr": "PR-9g",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": true,
+      "called_docker0": false,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2445.982275996357
+        },
+        {
+          "errors": [],
+          "kind": "mcmc_best",
+          "module_exit_0": true,
+          "n_chars": 1642,
+          "ok": true,
+          "theorem_ok": true,
+          "token_count": 260,
+          "wall_ms": 2382.6956179982517
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "mcmc_best",
+        "theorem_ok": true,
+        "token_count": 260
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "beam": 2,
+        "best": {
+          "kind": "init",
+          "theorem_ok": true,
+          "token_count": 260
+        },
+        "best_tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          intros Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+        "best_tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [Ini",
+        "called_docker0": false,
+        "called_hosted_mistral": false,
+        "hardware_class": "spark_gb10",
+        "history": [
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 0,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.63,
+              "likely_shorter": 0.67,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 k",
+                "pos": {
+                  "column": 8,
+                  "line": 976
+                }
+              }
+            ],
+            "kind": "drop_duplicate",
+            "note": "drop duplicate simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.63,
+              "likely_shorter": 0.67,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Type mismatch\n  InitStatesNodup Hinit\nhas type\n  ks'.Nodup\nbut is expected to have type\n  isNotDefined \u03c3\u2081 ks'",
+                "pos": {
+                  "column": 6,
+                  "line": 959
+                }
+              }
+            ],
+            "kind": "drop_duplicate",
+            "note": "drop duplicate exact InitStatesNotDefined Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.63,
+              "likely_shorter": 0.67,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 0,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.62,
+              "likely_shorter": 0.63,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_1.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 4,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "drop_duplicate",
+            "note": "drop duplicate exact InitStatesNodup Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.62,
+              "likely_shorter": 0.63,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 1,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.15,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 1,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.17,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 2,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.5,
+              "likely_shorter": 0.17,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 2,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.16,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 3,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.19,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 3,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.19,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 4,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.2,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 4,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.18,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 5,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.21,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 5,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.19,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 6,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.2,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 6,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.17,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 7,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.17,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 7,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.18,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 8,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.17,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 8,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.19,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 9,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.22,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 9,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.17,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 10,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.19,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 10,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.18,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": true,
+            "chain": 0,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "accept",
+            "round": 11,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.15,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [],
+            "kind": "join_applies",
+            "note": "join consecutive apply",
+            "ok": true,
+            "reason": "reject_mh",
+            "round": 11,
+            "tokens": 269,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.2,
+              "pick": "p0",
+              "skipped": false
+            }
+          }
+        ],
+        "jev_generated_lean": false,
+        "lake_calls": 28,
+        "leanstral_calls": 0,
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 24,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 843,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 86,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.5e-05
+            },
+            {
+              "call_index": 2,
+              "fixture": false,
+              "input_tokens": 717,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 70,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3e-05
+            },
+            {
+              "call_index": 3,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 4,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 5,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 6,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 7,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 8,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 9,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 10,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 11,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 12,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 13,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 14,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 15,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 16,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 17,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 18,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 19,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 20,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 21,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 22,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 23,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 24,
+              "fixture": false,
+              "input_tokens": 647,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 62,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            }
+          ],
+          "max_grok_calls": 0,
+          "max_jev_calls": 24,
+          "max_mistral_calls": 0,
+          "mistral_calls": 0,
+          "name": "Core.InitsUpdatesComm#mcmc-beam",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 2.999341,
+          "skipped": false,
+          "spent_usd": 0.000659,
+          "track": "track1_closed"
+        },
+        "mh_temperature": 3.0,
+        "mode": "mcmc_beam",
+        "official_track2": false,
+        "rounds": 12,
+        "seed": 5
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mcmc-beam/v1",
+  "wall_ms": 75201.94888798869
+}

@@ -1,0 +1,1553 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T17:51:36.747825+00:00",
+  "official_track2": false,
+  "pr": "PR-9g",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": true,
+      "called_docker0": false,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2189.3245709943585
+        },
+        {
+          "errors": [],
+          "kind": "mcmc_best",
+          "module_exit_0": true,
+          "n_chars": 1642,
+          "ok": true,
+          "theorem_ok": true,
+          "token_count": 260,
+          "wall_ms": 2419.5425400102977
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "mcmc_best",
+        "theorem_ok": true,
+        "token_count": 260
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "beam": 2,
+        "best": {
+          "kind": "mcmc_r0_c1_drop_line",
+          "theorem_ok": true,
+          "token_count": 260
+        },
+        "best_tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          intros Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+        "best_tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [Ini",
+        "called_docker0": false,
+        "called_hosted_mistral": false,
+        "hardware_class": "spark_gb10",
+        "history": [
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "`simp` made no progress",
+                "pos": {
+                  "column": 4,
+                  "line": 951
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop exact InitStatesNodup Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 261,
+            "typesafe": {
+              "likely_compiles": 0.5,
+              "likely_shorter": 0.45,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 6,
+                  "line": 962
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . have Hdef := UpdateStateDefined' Hup",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.5,
+              "likely_shorter": 0.45,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 262,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.91,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": true,
+            "chain": 1,
+            "errors": [],
+            "kind": "drop_line",
+            "note": "drop specialize Hnd _ Hin",
+            "ok": true,
+            "reason": "accept",
+            "round": 0,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.91,
+              "pick": "p0",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined \u03c3 [x]` of `Hdef`\n\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\n\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs ",
+                "pos": {
+                  "column": 10,
+                  "line": 965
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp [isDefined, Option.isSome] at Hdef",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 254,
+            "typesafe": {
+              "likely_compiles": 0.57,
+              "likely_shorter": 0.75,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 262,
+            "typesafe": {
+              "likely_compiles": 0.57,
+              "likely_shorter": 0.75,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  updatedStatesInit Hlen1 ?m.71 ?m.72\nhas type\n  InitStates ?m.68 ks' vs' (updatedStates ?m.68 ks' vs')\nbut is expected to have type\n  updatedStates \u03c3\u271d ks' vs' = updatedStates \u03c3\u271d ks' vs'",
+                "pos": {
+                  "column": 4,
+                  "line": 948
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.78,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 258,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.78,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Unknown identifier `rw`",
+                "pos": {
+                  "column": 8,
+                  "line": 962
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . simp [UpdateStateUpdated Hup, updatedStates]",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.59,
+              "pick": "p2",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 262,
+            "typesafe": {
+              "likely_compiles": 0.53,
+              "likely_shorter": 0.59,
+              "pick": "p2",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  InitStatesNodup Hinit\nhas type\n  ks'.Nodup\nbut is expected to have type\n  isNotDefined \u03c3\u2081 ks'",
+                "pos": {
+                  "column": 6,
+                  "line": 959
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop exact InitStatesNotDefined Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.41,
+              "likely_shorter": 0.29,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nx\u271d : Option P.Expr\nval : P.Expr\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n   ",
+                "pos": {
+                  "column": 10,
+                  "line": 972
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply InitStatesNotDefined Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.41,
+              "likely_shorter": 0.29,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Unknown identifier `val`",
+                "pos": {
+                  "column": 40,
+                  "line": 967
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop next val heq =>",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.5,
+              "likely_shorter": 0.42,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 k",
+                "pos": {
+                  "column": 8,
+                  "line": 976
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 263,
+            "typesafe": {
+              "likely_compiles": 0.5,
+              "likely_shorter": 0.42,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStateUpdate`\n  UpdateState P ?m.200 ?m.201 ?m.202 (updatedState ?m.200 ?m.201 ?m.202)\nwith the goal\n  UpdateState P (updatedStates' \u03c3 (ks'.zip vs')) x v (updatedStates' (updatedState \u03c3 x v) (ks'.zip vs'))\n\nNote: The full type of `updatedStateUpdate` is\n  ?m.200 ?m.201 = some val \u2192 UpdateState P ?m.200 ?m.201 ?m.202 (updatedState ?m.2",
+                "pos": {
+                  "column": 10,
+                  "line": 967
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop rw [\u2190 updatedStateComm']",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 255,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.42,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nx\u271d : Option P.Expr\nval : P.Expr\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n   ",
+                "pos": {
+                  "column": 10,
+                  "line": 972
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply InitStatesNotDefined Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.42,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Application type mismatch: The argument\n  Hinit\nhas type\n  InitStates \u03c3\u2081 ks' vs' \u03c3''\nbut is expected to have type\n  InitStates \u03c3\u2080 ks' ?m.113 ?m.114\nin the application\n  InitStatesNotDefined Hinit",
+                "pos": {
+                  "column": 33,
+                  "line": 958
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply UpdateStatesNotDefMonotone' ?_ Hups",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.38,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 k",
+                "pos": {
+                  "column": 8,
+                  "line": 976
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 263,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.38,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  InitStatesNotDefined Hinit\nhas type\n  isNotDefined \u03c3\u271d ks'\nbut is expected to have type\n  InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs')",
+                "pos": {
+                  "column": 4,
+                  "line": 949
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop refine updatedStatesInit Hlen1 ?_ ?_",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 253,
+            "typesafe": {
+              "likely_compiles": 0.47,
+              "likely_shorter": 0.5,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 258,
+            "typesafe": {
+              "likely_compiles": 0.47,
+              "likely_shorter": 0.5,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192 isD",
+                "pos": {
+                  "column": 8,
+                  "line": 983
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . simp [isDefined] at * <;> simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 253,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.88,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 262,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.88,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  updatedStatesInit Hlen1 ?m.71 ?m.72\nhas type\n  InitStates ?m.68 ks' vs' (updatedStates ?m.68 ks' vs')\nbut is expected to have type\n  updatedStates \u03c3\u271d ks' vs' = updatedStates \u03c3\u271d ks' vs'",
+                "pos": {
+                  "column": 4,
+                  "line": 948
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.76,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 8,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . apply (ih Hinit ?_ ?_).2.2",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 246,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.76,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_1.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 4,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop exact InitStatesNodup Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 261,
+            "typesafe": {
+              "likely_compiles": 0.56,
+              "likely_shorter": 0.26,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `UpdateStateNotDefMonotone' ?m.232 Hup`\n  \u03c3 ?v = none\nwith the goal\n  ks'.length = vs'.length\n\nNote: The full type of `UpdateStateNotDefMonotone' ?m.232 Hup` is\n  isNotDefined \u03c3 ?m.229\n\ncase a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P",
+                "pos": {
+                  "column": 12,
+                  "line": 971
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 262,
+            "typesafe": {
+              "likely_compiles": 0.56,
+              "likely_shorter": 0.26,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `@updatedStatesInit`\n  InitStates ?\u03c3 ?hs ?vs (updatedStates ?\u03c3 ?hs ?vs)\nwith the goal\n  updatedStates' \u03c3 (ks'.zip vs') x = some val\n\nNote: The full type of `@updatedStatesInit` is\n  \u2200 {P : PureExpr} {\u03c3 : SemanticStore P} {hs : List P.Ident} {vs : List P.Expr},\n    hs.length = vs.length \u2192 isNotDefined \u03c3 hs \u2192 hs.Nodup \u2192 InitStates \u03c3 hs vs (upd",
+                "pos": {
+                  "column": 10,
+                  "line": 969
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply InitStatesSomeMonotone heq",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.56,
+              "likely_shorter": 0.22,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  updatedStatesInit Hlen1 ?m.71 ?m.72\nhas type\n  InitStates ?m.68 ks' vs' (updatedStates ?m.68 ks' vs')\nbut is expected to have type\n  updatedStates \u03c3\u271d ks' vs' = updatedStates \u03c3\u271d ks' vs'",
+                "pos": {
+                  "column": 4,
+                  "line": 948
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.56,
+              "likely_shorter": 0.22,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 6,
+                  "line": 962
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . have Hdef := UpdateStateDefined' Hup",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.57,
+              "pick": "p2",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Type mismatch\n  InitStatesNotDefined Hinit\nhas type\n  isNotDefined \u03c3\u271d ks'\nbut is expected to have type\n  InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs')",
+                "pos": {
+                  "column": 4,
+                  "line": 949
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop refine updatedStatesInit Hlen1 ?_ ?_",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.57,
+              "pick": "p2",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined \u03c3 [x]` of `Hdef`\n\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\n\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs ",
+                "pos": {
+                  "column": 10,
+                  "line": 965
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp [isDefined, Option.isSome] at Hdef",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 250,
+            "typesafe": {
+              "likely_compiles": 0.58,
+              "likely_shorter": 0.79,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 258,
+            "typesafe": {
+              "likely_compiles": 0.58,
+              "likely_shorter": 0.79,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 6,
+                  "line": 962
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . have Hdef := UpdateStateDefined' Hup",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 8,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.68,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 8,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . apply (ih Hinit ?_ ?_).2.2",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 8,
+            "tokens": 250,
+            "typesafe": {
+              "likely_compiles": 0.54,
+              "likely_shorter": 0.68,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.90 ks' vs' (updatedStates ?m.90 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs' \u2227\n    InitStates \u03c3 ks' vs' (updatedStates \u03c3 ks' vs') \u2227 UpdateStates (updatedStates \u03c3 ks' vs') (x :: xs) (v :: vs) \u03c3''\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.90 ks",
+                "pos": {
+                  "column": 6,
+                  "line": 955
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop refine \u27e8rfl, ?_, ?_\u27e9",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 8,
+            "tokens": 250,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.63,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 k",
+                "pos": {
+                  "column": 8,
+                  "line": 976
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 8,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.55,
+              "likely_shorter": 0.63,
+              "pick": "p4",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 6,
+                  "line": 962
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . have Hdef := UpdateStateDefined' Hup",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 9,
+            "tokens": 257,
+            "typesafe": {
+              "likely_compiles": 0.48,
+              "likely_shorter": 0.35,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_1.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isD",
+                "pos": {
+                  "column": 4,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop exact InitStatesNodup Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 9,
+            "tokens": 261,
+            "typesafe": {
+              "likely_compiles": 0.48,
+              "likely_shorter": 0.35,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the type of `UpdateStatesNotDefMonotone' ?m.109 Hups`\n  isNotDefined \u03c3\u2080 ?m.106\nwith the goal\n  isNotDefined \u03c3 ks'\n\ncase refine_1.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore",
+                "pos": {
+                  "column": 6,
+                  "line": 957
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply UpdateStateNotDefMonotone' ?_ Hup",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 9,
+            "tokens": 255,
+            "typesafe": {
+              "likely_compiles": 0.47,
+              "likely_shorter": 0.44,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  updatedStatesInit Hlen1 ?m.69 ?m.70\nhas type\n  InitStates ?m.66 ks' vs' (updatedStates ?m.66 ks' vs')\nbut is expected to have type\n  InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u271d ks' vs') [] [] \u03c3''",
+                "pos": {
+                  "column": 4,
+                  "line": 948
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply And.intro",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 9,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": 0.47,
+              "likely_shorter": 0.44,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 8,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . apply (ih Hinit ?_ ?_).2.2",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 10,
+            "tokens": 250,
+            "typesafe": {
+              "likely_compiles": 0.49,
+              "likely_shorter": 0.86,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined \u03c3\u2081 xs \u2192\n ",
+                "pos": {
+                  "column": 6,
+                  "line": 982
+                }
+              }
+            ],
+            "kind": "drop_last_simp_all",
+            "note": "drop last bare simp_all",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 10,
+            "tokens": 262,
+            "typesafe": {
+              "likely_compiles": 0.49,
+              "likely_shorter": 0.86,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nx\u271d : Option P.Expr\nval : P.Expr\nih :\n  \u2200 {\u03c3'' : SemanticStore ",
+                "pos": {
+                  "column": 23,
+                  "line": 967
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop . exact InitStatesNodup Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 10,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": 0.49,
+              "likely_shorter": 0.4,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Unknown identifier `val`",
+                "pos": {
+                  "column": 40,
+                  "line": 967
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop next val heq =>",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 10,
+            "tokens": 255,
+            "typesafe": {
+              "likely_compiles": 0.49,
+              "likely_shorter": 0.4,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "`simp` made no progress",
+                "pos": {
+                  "column": 4,
+                  "line": 951
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop exact InitStatesNodup Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 11,
+            "tokens": 261,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.36,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Application type mismatch: The argument\n  Hinit\nhas type\n  InitStates \u03c3\u2081 ks' vs' \u03c3''\nbut is expected to have type\n  InitStates \u03c3\u2080 ks' ?m.113 ?m.114\nin the application\n  InitStatesNotDefined Hinit",
+                "pos": {
+                  "column": 33,
+                  "line": 958
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop apply UpdateStatesNotDefMonotone' ?_ Hups",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 11,
+            "tokens": 259,
+            "typesafe": {
+              "likely_compiles": 0.52,
+              "likely_shorter": 0.36,
+              "pick": "p1",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih : \u2200 {\u03c3'' : SemanticStore P}, InitStates \u03c3\u2081 ks' vs'",
+                "pos": {
+                  "column": 8,
+                  "line": 976
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop have Hnd := InitStatesNotDefined Hinit",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 11,
+            "tokens": 254,
+            "typesafe": {
+              "likely_compiles": 0.45,
+              "likely_shorter": 0.81,
+              "pick": "p5",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Type mismatch\n  InitStatesNotDefined Hinit\nhas type\n  isNotDefined \u03c3\u271d ks'\nbut is expected to have type\n  InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs')",
+                "pos": {
+                  "column": 4,
+                  "line": 949
+                }
+              }
+            ],
+            "kind": "drop_line",
+            "note": "drop refine updatedStatesInit Hlen1 ?_ ?_",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 11,
+            "tokens": 253,
+            "typesafe": {
+              "likely_compiles": 0.45,
+              "likely_shorter": 0.81,
+              "pick": "p5",
+              "skipped": false
+            }
+          }
+        ],
+        "jev_generated_lean": false,
+        "lake_calls": 49,
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 24,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 1021,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 2,
+              "fixture": false,
+              "input_tokens": 1003,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 3,
+              "fixture": false,
+              "input_tokens": 1029,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 4,
+              "fixture": false,
+              "input_tokens": 1029,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 5,
+              "fixture": false,
+              "input_tokens": 1011,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 6,
+              "fixture": false,
+              "input_tokens": 975,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 7,
+              "fixture": false,
+              "input_tokens": 971,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 8,
+              "fixture": false,
+              "input_tokens": 1023,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 9,
+              "fixture": false,
+              "input_tokens": 989,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 10,
+              "fixture": false,
+              "input_tokens": 1015,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 11,
+              "fixture": false,
+              "input_tokens": 1043,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.4e-05
+            },
+            {
+              "call_index": 12,
+              "fixture": false,
+              "input_tokens": 1009,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 13,
+              "fixture": false,
+              "input_tokens": 979,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 14,
+              "fixture": false,
+              "input_tokens": 979,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 15,
+              "fixture": false,
+              "input_tokens": 1035,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 16,
+              "fixture": false,
+              "input_tokens": 1025,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 17,
+              "fixture": false,
+              "input_tokens": 1055,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.4e-05
+            },
+            {
+              "call_index": 18,
+              "fixture": false,
+              "input_tokens": 1029,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 19,
+              "fixture": false,
+              "input_tokens": 1005,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 20,
+              "fixture": false,
+              "input_tokens": 1021,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 21,
+              "fixture": false,
+              "input_tokens": 1059,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.4e-05
+            },
+            {
+              "call_index": 22,
+              "fixture": false,
+              "input_tokens": 1001,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 23,
+              "fixture": false,
+              "input_tokens": 1003,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 24,
+              "fixture": false,
+              "input_tokens": 1061,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 102,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.5e-05
+            }
+          ],
+          "max_grok_calls": 0,
+          "max_jev_calls": 24,
+          "max_mistral_calls": 0,
+          "mistral_calls": 0,
+          "name": "Core.InitsUpdatesComm#mcmc-beam",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 2.998978,
+          "skipped": false,
+          "spent_usd": 0.001022,
+          "track": "track1_closed"
+        },
+        "mh_temperature": 3.0,
+        "mode": "mcmc_beam",
+        "official_track2": false,
+        "rounds": 12,
+        "seed": 1
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mcmc-beam/v1",
+  "wall_ms": 123673.20099900826
+}

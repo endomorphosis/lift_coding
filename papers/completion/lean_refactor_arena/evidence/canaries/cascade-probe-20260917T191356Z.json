@@ -1,0 +1,57 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "and_intro_constructor+fold_nested_init_term",
+    "theorem_ok": true,
+    "token_count": 252
+  },
+  "called_docker0": false,
+  "from_tokens": 258,
+  "hardware_class": "spark_gb10",
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T19:13:56.926632+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "",
+      "kind": "fold_nested_init_term",
+      "ok": true,
+      "tokens": 255
+    },
+    {
+      "error": "",
+      "kind": "and_intro_constructor",
+      "ok": true,
+      "tokens": 255
+    },
+    {
+      "error": "",
+      "kind": "fold_some_init_term",
+      "ok": true,
+      "tokens": 258
+    },
+    {
+      "error": "",
+      "kind": "and_intro_constructor+fold_nested_init_term",
+      "ok": true,
+      "tokens": 252
+    },
+    {
+      "error": "",
+      "kind": "fold_some_init_term+fold_nested_init_term",
+      "ok": true,
+      "tokens": 255
+    },
+    {
+      "error": "",
+      "kind": "fold_some_init_term+and_intro_constructor",
+      "ok": true,
+      "tokens": 255
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "wall_ms": 13480.060005997075,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

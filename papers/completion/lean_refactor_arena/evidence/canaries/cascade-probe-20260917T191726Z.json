@@ -1,0 +1,32 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "and_intro_constructor+fold_nested_init_term+fold_some_init_term+fill_refine_init",
+    "theorem_ok": true,
+    "token_count": 250
+  },
+  "called_docker0": false,
+  "edits": [
+    "fold_init_exacts (258)",
+    "and_intro_constructor (255)",
+    "fold_nested_init_term (255)",
+    "compose ctor+nested (252)",
+    "fold_some_init_term (252, token-neutral)",
+    "fill_refine_init (250)"
+  ],
+  "from_tokens": 258,
+  "hardware_class": "spark_gb10",
+  "name": "Core.InitsUpdatesComm",
+  "negative": [
+    "fold_none_ctor compiles at 256 (longer)",
+    "fill_refine without keeping the \u00b7 apply bullet: invalid \u00b7 notation",
+    "drop_last_simp_all unsolved",
+    "sticky Hnd/ih/refine_constructor/collapse still fail"
+  ],
+  "observed_at": "2026-09-17T19:17:26.608912+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "schema": "lra-cascade-probe/v1",
+  "script": "cascade-best-250.lean"
+}

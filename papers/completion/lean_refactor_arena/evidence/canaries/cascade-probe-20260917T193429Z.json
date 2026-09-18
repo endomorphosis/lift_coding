@@ -1,0 +1,45 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 207
+  },
+  "called_docker0": false,
+  "from_tokens": 207,
+  "observed_at": "2026-09-17T19:34:29.117889+00:00",
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "unsolved goals P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : Seman",
+      "kind": "none_simp_all_lemmas",
+      "ok": false,
+      "tokens": 198
+    },
+    {
+      "error": "unsolved goals case right P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length",
+      "kind": "none_ctor_simp_all",
+      "ok": false,
+      "tokens": 198
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : Seman",
+      "kind": "none_only_simp_all",
+      "ok": false,
+      "tokens": 193
+    },
+    {
+      "error": "Invalid projection: Projections cannot be used on functions   ih Hinit ?m.228 ?m.229 has type   isNotDefined \u03c3\u2081 ks' \u2192     updatedStates \u03c3\u2080 k",
+      "kind": "lift_hnd_pre",
+      "ok": false,
+      "tokens": 204
+    },
+    {
+      "error": "No goals to be solved",
+      "kind": "merge_none_simp",
+      "ok": false,
+      "tokens": 206
+    }
+  ],
+  "schema": "lra-cascade-probe/v1"
+}

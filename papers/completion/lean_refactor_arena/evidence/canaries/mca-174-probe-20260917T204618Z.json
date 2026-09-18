@@ -1,0 +1,118 @@
+{
+  "schema": "lra-mca-174-probe/v1",
+  "jev": {
+    "choice": "MCA_3",
+    "confidence": 0.56,
+    "probabilities": {
+      "MCA_2": 0.01,
+      "keep": 0.0,
+      "drop_intros_hin": 0.0,
+      "MCA_4": 0.03,
+      "fold_rw_into_simp": 0.3,
+      "MCA_3": 0.62,
+      "MCA_1": 0.01,
+      "MCA_5": 0.02,
+      "MCA_0": 0.01
+    },
+    "usage": {
+      "input_tokens": 821,
+      "output_tokens": 109
+    },
+    "ms": 505.6624040007591
+  },
+  "rows": [
+    {
+      "kind": "drop_MCA_0_loop_invariant",
+      "ok": false,
+      "tokens": 169,
+      "count": 169,
+      "err": "Function expected at   ih Hinit ?m.130 but this term has type   updatedStates \u03c3'\u271d ks' vs' = updatedStates \u03c3'\u271d ks' vs' \u2227     InitStates \u03c3'\u271d k"
+    },
+    {
+      "kind": "drop_MCA_1_loop_invariant",
+      "ok": false,
+      "tokens": 168,
+      "count": 168,
+      "err": "Unknown identifier `Hlen1`"
+    },
+    {
+      "kind": "drop_MCA_2_loop_invariant",
+      "ok": false,
+      "tokens": 168,
+      "count": 168,
+      "err": "Function expected at   ih Hinit ?m.129 but this term has type   updatedStates \u03c3'\u271d ks' vs' = updatedStates \u03c3'\u271d ks' vs' \u2227     InitStates \u03c3'\u271d k"
+    },
+    {
+      "kind": "drop_MCA_3_dead_code",
+      "ok": false,
+      "tokens": 170,
+      "count": 170,
+      "err": "Unknown identifier `Hups`"
+    },
+    {
+      "kind": "drop_MCA_4_loop_invariant",
+      "ok": false,
+      "tokens": 169,
+      "count": 169,
+      "err": "Application type mismatch: The argument   this has type   isDefined \u03c3''\u271d (x\u271d :: xs\u271d) but is expected to have type   isNotDefined ?m.100 ks' "
+    },
+    {
+      "kind": "drop_MCA_5_loop_invariant",
+      "ok": false,
+      "tokens": 168,
+      "count": 168,
+      "err": "Application type mismatch: The argument   this has type   isDefined \u03c3''\u271d (x\u271d :: xs\u271d) but is expected to have type   isNotDefined ?m.101 ?m.1"
+    },
+    {
+      "kind": "fold_rw_into_simp",
+      "ok": false,
+      "tokens": 172,
+      "count": 172,
+      "err": "Type mismatch   updatedStateUpdate (InitStatesSomeMonotone heq\u271d Hst) has type   UpdateState P (updatedStates \u03c3\u271d ks' vs') x\u271d\u00b9 ?m.204 (updated"
+    },
+    {
+      "kind": "drop_intros_hin",
+      "ok": false,
+      "tokens": 172,
+      "count": 172,
+      "err": "unsolved goals case update_some.right.right P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.l"
+    },
+    {
+      "kind": "drop_rename_i",
+      "ok": false,
+      "tokens": 170,
+      "count": 170,
+      "err": "Unknown identifier `Hups`"
+    },
+    {
+      "kind": "unzip_simp_only",
+      "ok": false,
+      "tokens": 170,
+      "count": 170,
+      "err": "unsolved goals case update_some.right.right P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.l"
+    },
+    {
+      "kind": "unzip_simp_all",
+      "ok": true,
+      "tokens": 170,
+      "count": 170,
+      "err": ""
+    },
+    {
+      "kind": "drop_none_simp_all",
+      "ok": false,
+      "tokens": 173,
+      "count": 173,
+      "err": "Type mismatch   updatedStatesInit Hlen1 (InitStatesNotDefined Hinit) (InitStatesNodup Hinit) has type   InitStates \u03c3\u271d ks' vs' (updatedStates"
+    }
+  ],
+  "best": {
+    "kind": "unzip_simp_all",
+    "token_count": 170,
+    "ok": true
+  },
+  "from_tokens": 174,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "called_docker0": false,
+  "arena_score": null
+}

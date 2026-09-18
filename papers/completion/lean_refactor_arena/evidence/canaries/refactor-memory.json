@@ -1,0 +1,4764 @@
+{
+  "blacklist": [
+    "CallElimCorrect.substOldPostSubset::port_drop_intro_before_simp_all",
+    "CallElimCorrect.substOldPostSubset::port_hoist_repeated_simp",
+    "CallElimCorrect.substOldPostSubset::port_semi_assumption",
+    "CallElimCorrect.substOldPostSubset::port_shorten_hasvars_getvars",
+    "CallElimCorrect.substOldPostSubset::port_shorten_list_subset_app",
+    "CallElimCorrect.substOldPostSubset::port_shorten_list_subset_trans",
+    "CallElimCorrect.substOldPostSubset::port_shorten_llexpr_getvars",
+    "CallElimCorrect.extractedOldExprInVars::port_drop_intro_before_simp_all",
+    "CallElimCorrect.extractedOldExprInVars::port_drop_unfold_before_split",
+    "CallElimCorrect.extractedOldExprInVars::port_shorten_hasvars_getvars",
+    "CallElimCorrect.extractedOldExprInVars::port_shorten_list_subset_app",
+    "CallElimCorrect.extractedOldExprInVars::port_shorten_list_subset_trans",
+    "CallElimCorrect.extractedOldExprInVars::port_shorten_llexpr_getvars",
+    "Cslib.SKI.parallelReduction_diamond::port_use_exact_reuse",
+    "Cslib.CCS.bisimilarity_congr_choice::port_trim_intro_names",
+    "CallElimCorrect.substOldPostSubset::pca_search_space::d3bb741bd189",
+    "CallElimCorrect.substOldPostSubset::body::d3bb741bd189",
+    "CallElimCorrect.substOldPostSubset::pca_search_space::8ec0e65ebbc3",
+    "CallElimCorrect.substOldPostSubset::body::8ec0e65ebbc3",
+    "CallElimCorrect.substOldPostSubset::pca_search_space::4a9bbc82b6ab",
+    "CallElimCorrect.substOldPostSubset::body::4a9bbc82b6ab",
+    "CallElimCorrect.substOldPostSubset::pca_search_space::2a09f588c2b9",
+    "CallElimCorrect.substOldPostSubset::body::2a09f588c2b9",
+    "CallElimCorrect.substOldPostSubset::pca_search_space::f6d37379868c",
+    "CallElimCorrect.substOldPostSubset::body::f6d37379868c",
+    "CallElimCorrect.substOldPostSubset::pca_search_space::c49e9722abd8",
+    "CallElimCorrect.substOldPostSubset::body::c49e9722abd8"
+  ],
+  "expanded": [
+    {
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.86,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.62
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.82,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.61
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.7,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.63
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.57,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.61
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.66,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.64
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.46,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.47
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.35,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.5
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.37,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.46
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.41,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.5
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.38,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.45
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.33,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.47
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.23,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.46
+        }
+      ]
+    },
+    {
+      "name": "Core.InitsUpdatesComm",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.19,
+          "keep_structure": true,
+          "mint": [
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
+          ],
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.46
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "help": 0.5,
+          "keep_structure": true,
+          "mint": [
+            "trailing_tuple_comma"
+          ],
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "residual": "use_then_exact",
+          "unsafe": 0.73
+        }
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "error_class": "unsolved_goals",
+      "key": "CallElimCorrect.substOldPostSubset::pca_search_space::d3bb741bd189",
+      "kind": "pca_search_space_d001",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "unknown": []
+    },
+    {
+      "error_class": "other",
+      "key": "CallElimCorrect.substOldPostSubset::pca_search_space::8ec0e65ebbc3",
+      "kind": "pca_search_space_d017",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "unknown": []
+    },
+    {
+      "error_class": "other",
+      "key": "CallElimCorrect.substOldPostSubset::pca_search_space::4a9bbc82b6ab",
+      "kind": "pca_search_space_d003",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "unknown": []
+    },
+    {
+      "error_class": "other",
+      "key": "CallElimCorrect.substOldPostSubset::pca_search_space::2a09f588c2b9",
+      "kind": "pca_search_space_d002",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "unknown": []
+    },
+    {
+      "error_class": "unsolved_goals",
+      "key": "CallElimCorrect.substOldPostSubset::pca_search_space::f6d37379868c",
+      "kind": "pca_search_space_d004",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "unknown": []
+    },
+    {
+      "error_class": "other",
+      "key": "CallElimCorrect.substOldPostSubset::pca_search_space::c49e9722abd8",
+      "kind": "pca_search_space_d005",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "unknown": []
+    }
+  ],
+  "nca": {
+    "board_edges": [
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S01"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S02"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S03"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S04"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S05"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S06"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S07"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S08"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S09"
+      ],
+      [
+        "ptr://goal/LRA-G000",
+        "ptr://subgoal/LRA-S10"
+      ],
+      [
+        "ptr://subgoal/LRA-S01",
+        "ptr://task/LRA-010"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/harness.generate_text"
+      ],
+      [
+        "ptr://subgoal/LRA-S02",
+        "ptr://task/LRA-011"
+      ],
+      [
+        "ptr://task/LRA-011",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-011",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-011",
+        "ptr://codepath/harness.splice"
+      ],
+      [
+        "ptr://task/LRA-011",
+        "ptr://codepath/harness.test_splice"
+      ],
+      [
+        "ptr://subgoal/LRA-S03",
+        "ptr://task/LRA-012"
+      ],
+      [
+        "ptr://task/LRA-012",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-012",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-012",
+        "ptr://codepath/external.ipfs_datasets.ipfs_datasets_py.logic.hammers.frontends.lean_toolchain"
+      ],
+      [
+        "ptr://subgoal/LRA-S03",
+        "ptr://task/LRA-013"
+      ],
+      [
+        "ptr://task/LRA-012",
+        "ptr://task/LRA-013"
+      ],
+      [
+        "ptr://task/LRA-013",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-013",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-013",
+        "ptr://codepath/harness.bake_oleans"
+      ],
+      [
+        "ptr://subgoal/LRA-S03",
+        "ptr://task/LRA-014"
+      ],
+      [
+        "ptr://task/LRA-011",
+        "ptr://task/LRA-014"
+      ],
+      [
+        "ptr://task/LRA-012",
+        "ptr://task/LRA-014"
+      ],
+      [
+        "ptr://task/LRA-013",
+        "ptr://task/LRA-014"
+      ],
+      [
+        "ptr://task/LRA-014",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-014",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-014",
+        "ptr://codepath/harness.compile_worker"
+      ],
+      [
+        "ptr://subgoal/LRA-S03",
+        "ptr://task/LRA-015"
+      ],
+      [
+        "ptr://task/LRA-014",
+        "ptr://task/LRA-015"
+      ],
+      [
+        "ptr://task/LRA-015",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-015",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-015",
+        "ptr://codepath/papers.completion.lean_refactor_arena.tools.verify_lra_batch"
+      ],
+      [
+        "ptr://subgoal/LRA-S01",
+        "ptr://task/LRA-016"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://task/LRA-016"
+      ],
+      [
+        "ptr://task/LRA-016",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-016",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-016",
+        "ptr://codepath/harness.docker0_client"
+      ],
+      [
+        "ptr://subgoal/LRA-S04",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://task/LRA-014",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://task/LRA-016",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://task/LRA-017",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-017",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-017",
+        "ptr://codepath/harness.run_warmup"
+      ],
+      [
+        "ptr://subgoal/LRA-S04",
+        "ptr://task/LRA-018"
+      ],
+      [
+        "ptr://task/LRA-015",
+        "ptr://task/LRA-018"
+      ],
+      [
+        "ptr://task/LRA-017",
+        "ptr://task/LRA-018"
+      ],
+      [
+        "ptr://task/LRA-018",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-018",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://subgoal/LRA-S05",
+        "ptr://task/LRA-019"
+      ],
+      [
+        "ptr://task/LRA-017",
+        "ptr://task/LRA-019"
+      ],
+      [
+        "ptr://task/LRA-019",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-019",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-019",
+        "ptr://codepath/harness.typesafe_router"
+      ],
+      [
+        "ptr://subgoal/LRA-S06",
+        "ptr://task/LRA-020"
+      ],
+      [
+        "ptr://task/LRA-017",
+        "ptr://task/LRA-020"
+      ],
+      [
+        "ptr://task/LRA-019",
+        "ptr://task/LRA-020"
+      ],
+      [
+        "ptr://task/LRA-020",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-020",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-020",
+        "ptr://codepath/harness.track1_ledger"
+      ],
+      [
+        "ptr://subgoal/LRA-S07",
+        "ptr://task/LRA-021"
+      ],
+      [
+        "ptr://task/LRA-014",
+        "ptr://task/LRA-021"
+      ],
+      [
+        "ptr://task/LRA-021",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-021",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-021",
+        "ptr://codepath/harness.lake_native_try"
+      ],
+      [
+        "ptr://subgoal/LRA-S07",
+        "ptr://task/LRA-022"
+      ],
+      [
+        "ptr://task/LRA-011",
+        "ptr://task/LRA-022"
+      ],
+      [
+        "ptr://task/LRA-022",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-022",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-022",
+        "ptr://codepath/harness.retrieve"
+      ],
+      [
+        "ptr://subgoal/LRA-S08",
+        "ptr://task/LRA-023"
+      ],
+      [
+        "ptr://task/LRA-015",
+        "ptr://task/LRA-023"
+      ],
+      [
+        "ptr://task/LRA-023",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-023",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-023",
+        "ptr://codepath/harness.receipt_store"
+      ],
+      [
+        "ptr://subgoal/LRA-S09",
+        "ptr://task/LRA-024"
+      ],
+      [
+        "ptr://task/LRA-024",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-024",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://subgoal/LRA-S09",
+        "ptr://task/LRA-025"
+      ],
+      [
+        "ptr://task/LRA-018",
+        "ptr://task/LRA-025"
+      ],
+      [
+        "ptr://task/LRA-024",
+        "ptr://task/LRA-025"
+      ],
+      [
+        "ptr://task/LRA-025",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-025",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://task/LRA-025",
+        "ptr://codepath/harness.run_official_track2"
+      ],
+      [
+        "ptr://subgoal/LRA-S10",
+        "ptr://task/LRA-026"
+      ],
+      [
+        "ptr://task/LRA-018",
+        "ptr://task/LRA-026"
+      ],
+      [
+        "ptr://task/LRA-026",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-026",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://subgoal/LRA-S10",
+        "ptr://task/LRA-027"
+      ],
+      [
+        "ptr://task/LRA-026",
+        "ptr://task/LRA-027"
+      ],
+      [
+        "ptr://task/LRA-027",
+        "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md"
+      ],
+      [
+        "ptr://task/LRA-027",
+        "ptr://codepath/scripts.run_leanstral_ephemeral"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/load_keyfile"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/pin_typesafe_path"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/is_file"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/spec_from_file_location"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/module_from_spec"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/exec_module"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:load_typesafe",
+        "ptr://codepath/typesafe_configured"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:feature_questions",
+        "ptr://codepath/Noul"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:feature_questions",
+        "ptr://codepath/Score"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:feature_questions",
+        "ptr://codepath/list"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:feature_questions",
+        "ptr://codepath/__import__"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/call_stack:get"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/run_warmup:token_count"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/str"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/system_one"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/TypeSafeClient"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/autoresearch_mcmc:feature_questions"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/dict"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/getattr"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/int"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/track1_ledger:estimate_tokens"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/dumps"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:featurize_proposal",
+        "ptr://codepath/track1_ledger:record"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:update_weights",
+        "ptr://codepath/call_stack:get"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:update_weights",
+        "ptr://codepath/dict"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:update_weights",
+        "ptr://codepath/sum"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:update_weights",
+        "ptr://codepath/float"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:update_weights",
+        "ptr://codepath/len"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:update_weights",
+        "ptr://codepath/max"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:self_check",
+        "ptr://codepath/len"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/ArgumentParser"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/add_argument"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/parse_args"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/list"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/self_check"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/dump"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/neural_tape:write"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/setdefault"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/load_typesafe"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/print"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/dumps"
+      ],
+      [
+        "ptr://codepath/autoresearch_mcmc:main",
+        "ptr://codepath/load_warmup_records"
+      ],
+      [
+        "ptr://codepath/bake_oleans:to_dict",
+        "ptr://codepath/asdict"
+      ],
+      [
+        "ptr://codepath/bake_oleans:to_dict",
+        "ptr://codepath/list"
+      ],
+      [
+        "ptr://codepath/bake_oleans:to_dict",
+        "ptr://codepath/to_dict"
+      ],
+      [
+        "ptr://codepath/bake_oleans:to_dict",
+        "ptr://codepath/len"
+      ],
+      [
+        "ptr://codepath/bake_oleans:to_dict",
+        "ptr://codepath/sum"
+      ],
+      [
+        "ptr://codepath/bake_oleans:first_job",
+        "ptr://codepath/BakeError"
+      ],
+      [
+        "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://theorem/Core.InitsUpdatesComm",
+        "ptr://task/LRA-019"
+      ],
+      [
+        "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "ptr://task/LRA-017"
+      ],
+      [
+        "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "ptr://task/LRA-019"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/Run"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/Strip"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/after"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/def"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/free_before"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/held"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/if"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/inspect"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/portable_rewrites:_simp_spans"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/portable_rewrites:_parent_induction_simp"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/set"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/tuple"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/append"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/setdefault"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/items"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/len"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/any"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/join"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/find"
+      ],
+      [
+        "ptr://codepath/portable_rewrites:fold_hoist_repeated_simp",
+        "ptr://codepath/reversed"
+      ],
+      [
+        "ptr://residual/intro_then_simp_all",
+        "ptr://skill/port_trim_intro_names"
+      ],
+      [
+        "ptr://residual/intro_then_simp_all",
+        "ptr://skill/port_drop_intro_before_simp_all"
+      ],
+      [
+        "ptr://residual/ctor_lone",
+        "ptr://skill/port_ctor_pair_exacts"
+      ],
+      [
+        "ptr://residual/intros_x_Hin",
+        "ptr://skill/port_unused_intros"
+      ],
+      [
+        "ptr://residual/apply_semi_assumption",
+        "ptr://skill/port_semi_assumption"
+      ],
+      [
+        "ptr://residual/repeated_simp_list",
+        "ptr://skill/port_hoist_repeated_simp"
+      ]
+    ],
+    "board_window": [
+      {
+        "energy": 0.4946217574819578,
+        "id": "LRA-G000",
+        "kind": "goal"
+      },
+      {
+        "energy": 0.5866516317135192,
+        "id": "Core.InitsUpdatesComm",
+        "kind": "theorem",
+        "remaining_cut": 132,
+        "tokens": 139
+      },
+      {
+        "energy": 0.5843545350389906,
+        "id": "CallElimCorrect.substOldPostSubset",
+        "kind": "theorem",
+        "remaining_cut": 93,
+        "tokens": 392
+      },
+      {
+        "energy": 0.5753718569338104,
+        "id": "CallElimCorrect.extractedOldExprInVars",
+        "kind": "theorem",
+        "remaining_cut": 65,
+        "tokens": 260
+      },
+      {
+        "blocked": false,
+        "energy": 0.5600873833331,
+        "id": "LRA-S05",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5365376779988555,
+        "id": "LRA-S04",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5078408156900556,
+        "id": "LRA-S06",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5034588545000002,
+        "id": "LRA-S08",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5027245454653334,
+        "id": "LRA-S02",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.4977377837311185,
+        "id": "LRA-S01",
+        "kind": "subgoal"
+      }
+    ],
+    "call_edges": 48,
+    "grid": {
+      "ptr://cell/lake": {
+        "energy": 0.278265,
+        "help": 0.0,
+        "id": "ptr://cell/lake",
+        "kind": "cell",
+        "losses": 2,
+        "tick": 1,
+        "tokens": 392,
+        "unsafe": 0.0,
+        "updated_at": 1789722231.278893,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://codepath/Run": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/Run",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "nca_program.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/Strip": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/Strip",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "splice.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/after": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/after",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "docker0_client.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/def": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/def",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "docker0_client.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/external.ipfs_datasets.ipfs_datasets_py.logic.hammers.frontends.lean_toolchain": {
+        "blocked": false,
+        "energy": 0.48189157214177775,
+        "help": 0.0,
+        "id": "ptr://codepath/external.ipfs_datasets.ipfs_datasets_py.logic.hammers.frontends.lean_toolchain",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/frontends/lean_toolchain.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/free_before": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/free_before",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "docker0_client.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/harness.bake_oleans": {
+        "blocked": false,
+        "energy": 0.48189157214177775,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.bake_oleans",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.compile_worker": {
+        "blocked": false,
+        "energy": 0.4808493285398133,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.compile_worker",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/compile_worker.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.docker0_client": {
+        "blocked": false,
+        "energy": 0.48752315264302226,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.docker0_client",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/docker0_client.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.generate_text": {
+        "blocked": false,
+        "energy": 0.483019969845,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.generate_text",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/generate_text.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.lake_native_try": {
+        "blocked": false,
+        "energy": 0.4841543650328,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.lake_native_try",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/lake_native_try.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.receipt_store": {
+        "blocked": false,
+        "energy": 0.4842474802946667,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.receipt_store",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/receipt_store.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.retrieve": {
+        "blocked": false,
+        "energy": 0.484234931068,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.retrieve",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/retrieve.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.run_official_track2": {
+        "blocked": false,
+        "energy": 0.37946505030000005,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.run_official_track2",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/run_official_track2.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.run_warmup": {
+        "blocked": false,
+        "energy": 0.5882268633931668,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.run_warmup",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/run_warmup.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.splice": {
+        "blocked": false,
+        "energy": 0.4827788622253334,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.splice",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/splice.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.test_splice": {
+        "blocked": false,
+        "energy": 0.4827788622253334,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.test_splice",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/test_splice.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.track1_ledger": {
+        "blocked": false,
+        "energy": 0.49301140267477783,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.track1_ledger",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/harness.typesafe_router": {
+        "blocked": false,
+        "energy": 0.5906432482808666,
+        "help": 0.0,
+        "id": "ptr://codepath/harness.typesafe_router",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/held": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/held",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "docker0_client.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/if": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/if",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "nca_program.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/inspect": {
+        "energy": 0.47476498069875,
+        "id": "ptr://codepath/inspect",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "random_canary.py",
+        "tick": 3,
+        "wins": 0
+      },
+      "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md": {
+        "blocked": false,
+        "energy": 0.501146880144728,
+        "help": 0.0,
+        "id": "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/design_win_plan.md",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/papers.completion.lean_refactor_arena.tools.verify_lra_batch": {
+        "blocked": false,
+        "energy": 0.4803536601453333,
+        "help": 0.0,
+        "id": "ptr://codepath/papers.completion.lean_refactor_arena.tools.verify_lra_batch",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://codepath/scripts.run_leanstral_ephemeral": {
+        "blocked": false,
+        "energy": 0.501146880144728,
+        "help": 0.0,
+        "id": "ptr://codepath/scripts.run_leanstral_ephemeral",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "scripts/run_leanstral_ephemeral.py",
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://family/search_space": {
+        "energy": 0.5237364999999999,
+        "help": 0.0,
+        "id": "ptr://family/search_space",
+        "kind": "family",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://goal/LRA-G000": {
+        "blocked": false,
+        "energy": 0.4946217574819578,
+        "help": 0.0,
+        "id": "ptr://goal/LRA-G000",
+        "kind": "goal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Ship a Leanstral-backed local harness in this repo that rewrites warm-up proof bodies under Lean-as-oracle, without inventing Arena scores or treating Spark NVFP4 wall-clock as official Track 2.",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://residual/apply_semi_assumption": {
+        "count": 9,
+        "energy": 0.5986244818400001,
+        "help": 0.47,
+        "id": "ptr://residual/apply_semi_assumption",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.65,
+        "wins": 0
+      },
+      "ptr://residual/ctor_lone": {
+        "count": 3,
+        "energy": 0.3609473293066667,
+        "help": 0.18,
+        "id": "ptr://residual/ctor_lone",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.57,
+        "wins": 0
+      },
+      "ptr://residual/have": {
+        "count": 5,
+        "energy": 0.33549152836499996,
+        "help": 0.11,
+        "id": "ptr://residual/have",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.66,
+        "wins": 0
+      },
+      "ptr://residual/intro_then_simp_all": {
+        "count": 6,
+        "energy": 0.5701863845066667,
+        "help": 1.1,
+        "id": "ptr://residual/intro_then_simp_all",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.61,
+        "wins": 0
+      },
+      "ptr://residual/intros_x_Hin": {
+        "count": 7,
+        "energy": 0.5606494818400001,
+        "help": 0.28,
+        "id": "ptr://residual/intros_x_Hin",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.73,
+        "wins": 0
+      },
+      "ptr://residual/repeated_simp_list": {
+        "count": 6,
+        "energy": 0.61797948184,
+        "help": 0.54,
+        "id": "ptr://residual/repeated_simp_list",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.29,
+        "wins": 0
+      },
+      "ptr://skill/pca_search_space_d001": {
+        "energy": 0.2686882599666667,
+        "help": 0.0,
+        "id": "ptr://skill/pca_search_space_d001",
+        "kind": "skill",
+        "losses": 3,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "updated_at": 1789722198.374341,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://skill/pca_search_space_d002": {
+        "energy": 0.2897806924933334,
+        "help": 0.0,
+        "id": "ptr://skill/pca_search_space_d002",
+        "kind": "skill",
+        "losses": 2,
+        "tick": 1,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "updated_at": 1789722214.8766148,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://skill/pca_search_space_d003": {
+        "energy": 0.2686882599666667,
+        "help": 0.0,
+        "id": "ptr://skill/pca_search_space_d003",
+        "kind": "skill",
+        "losses": 3,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "updated_at": 1789722208.4579961,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://skill/pca_search_space_d004": {
+        "energy": 0.2897806924933334,
+        "help": 0.0,
+        "id": "ptr://skill/pca_search_space_d004",
+        "kind": "skill",
+        "losses": 2,
+        "tick": 1,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "updated_at": 1789722225.942875,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://skill/pca_search_space_d005": {
+        "energy": 0.2897806924933334,
+        "help": 0.0,
+        "id": "ptr://skill/pca_search_space_d005",
+        "kind": "skill",
+        "losses": 2,
+        "tick": 1,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "updated_at": 1789722231.2686818,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://skill/pca_search_space_d017": {
+        "energy": 0.2686882599666667,
+        "help": 0.0,
+        "id": "ptr://skill/pca_search_space_d017",
+        "kind": "skill",
+        "losses": 3,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "updated_at": 1789722203.368458,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://skill/port_ctor_pair_exacts": {
+        "energy": 0.5131148920644445,
+        "help": 0.0,
+        "id": "ptr://skill/port_ctor_pair_exacts",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_drop_intro_before_simp_all": {
+        "energy": 0.5120544824111112,
+        "help": 0.0,
+        "id": "ptr://skill/port_drop_intro_before_simp_all",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_hoist_repeated_simp": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_hoist_repeated_simp",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_semi_assumption": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_semi_assumption",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_hasvars_getvars": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_hasvars_getvars",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_list_subset_app": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_list_subset_app",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_list_subset_trans": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_list_subset_trans",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_llexpr_getvars": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_llexpr_getvars",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_trim_intro_names": {
+        "energy": 0.5120544824111112,
+        "help": 0.0,
+        "id": "ptr://skill/port_trim_intro_names",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_unused_intros": {
+        "energy": 0.5094395266333335,
+        "help": 0.0,
+        "id": "ptr://skill/port_unused_intros",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 2,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S01": {
+        "blocked": false,
+        "energy": 0.4977377837311185,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S01",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Leanstral generate_text and docker0 HTTP client",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S02": {
+        "blocked": false,
+        "energy": 0.5027245454653334,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S02",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Prefix splice and lexical admission",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S03": {
+        "blocked": false,
+        "energy": 0.48953127233480714,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S03",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Lake compile toolchain and dedicated verifier",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S04": {
+        "blocked": false,
+        "energy": 0.5365376779988555,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S04",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Warm-up loop v1 on this machine",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S05": {
+        "blocked": false,
+        "energy": 0.5600873833331,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S05",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "TypeSafe Jev distill after v1",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S06": {
+        "blocked": false,
+        "energy": 0.5078408156900556,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S06",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Optional Track 1 budget path",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S07": {
+        "blocked": false,
+        "energy": 0.4970198416020445,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S07",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Deferred lake-native hammers and JSONL retrieval",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S08": {
+        "blocked": false,
+        "energy": 0.5034588545000002,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S08",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Optional INSERT-only proof receipts",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S09": {
+        "blocked": true,
+        "do_not_fork": true,
+        "energy": 0.05,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S09",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Official Track 2 gate",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://subgoal/LRA-S10": {
+        "blocked": true,
+        "do_not_fork": true,
+        "energy": 0.05,
+        "help": 0.0,
+        "id": "ptr://subgoal/LRA-S10",
+        "kind": "subgoal",
+        "losses": 0,
+        "tick": 3,
+        "title": "Manuscript measured section and human submission",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-010": {
+        "blocked": false,
+        "energy": 0.47418925887456664,
+        "help": 0.0,
+        "id": "ptr://task/LRA-010",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Thin fail-closed Leanstral generate_text entry point",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-011": {
+        "blocked": false,
+        "energy": 0.47576758868075114,
+        "help": 0.0,
+        "id": "ptr://task/LRA-011",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Prefix splice tests on all 15 warm-up records",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-012": {
+        "blocked": false,
+        "energy": 0.47354209356221705,
+        "help": 0.0,
+        "id": "ptr://task/LRA-012",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Tag-pinned Lean/lake toolchain resolver",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-013": {
+        "blocked": false,
+        "energy": 0.47354209356221705,
+        "help": 0.0,
+        "id": "ptr://task/LRA-013",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Bake lake oleans and Putnam Mathlib lake projects",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-014": {
+        "blocked": false,
+        "energy": 0.4757458648462567,
+        "help": 0.0,
+        "id": "ptr://task/LRA-014",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Multi-tag lake compile worker starting with one Strata file",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-015": {
+        "blocked": false,
+        "energy": 0.47039398675941785,
+        "help": 0.0,
+        "id": "ptr://task/LRA-015",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Dedicated verify_lra_batch fail-closed verifier",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-016": {
+        "blocked": false,
+        "energy": 0.4922163914024907,
+        "help": 0.0,
+        "id": "ptr://task/LRA-016",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Docker0 HTTP client; never owner LOCK_EX",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-017": {
+        "blocked": false,
+        "energy": 0.711086586123003,
+        "help": 0.0,
+        "id": "ptr://task/LRA-017",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "run_warmup.py loop v1 using Leanstral on this machine",
+        "tokens": 322,
+        "unsafe": 0.0,
+        "updated_at": 1789722185.455889,
+        "visited": true,
+        "wins": 2
+      },
+      "ptr://task/LRA-018": {
+        "blocked": false,
+        "energy": 0.4552952666835222,
+        "help": 0.0,
+        "id": "ptr://task/LRA-018",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Warm-up runbook wired to verify_lra_batch",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-019": {
+        "blocked": false,
+        "energy": 0.7210787369756736,
+        "help": 0.0,
+        "id": "ptr://task/LRA-019",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "TypeSafe Jev router via in-tree typesafe_inference",
+        "tokens": 139,
+        "unsafe": 0.0,
+        "updated_at": 1789722175.0412612,
+        "visited": true,
+        "wins": 1
+      },
+      "ptr://task/LRA-020": {
+        "blocked": false,
+        "energy": 0.5108348444735796,
+        "help": 0.0,
+        "id": "ptr://task/LRA-020",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Optional Track 1 US$3 ledger and grok adapter",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-021": {
+        "blocked": false,
+        "energy": 0.4784961094919849,
+        "help": 0.0,
+        "id": "ptr://task/LRA-021",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Lake-native tactic try without snapshot_goal",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-022": {
+        "blocked": false,
+        "energy": 0.47888201622908894,
+        "help": 0.0,
+        "id": "ptr://task/LRA-022",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Premise retrieval from 14 JSONL neighbors plus src lemmas",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-023": {
+        "blocked": false,
+        "energy": 0.47898779340455555,
+        "help": 0.0,
+        "id": "ptr://task/LRA-023",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Optional DuckDB INSERT-only proof receipts",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-024": {
+        "blocked": true,
+        "do_not_fork": true,
+        "energy": 0.05,
+        "help": 0.0,
+        "id": "ptr://task/LRA-024",
+        "kind": "task",
+        "losses": 0,
+        "status": "blocked",
+        "tick": 3,
+        "title": "SM80 GGUF derived from Frosty40 NVFP4",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-025": {
+        "blocked": true,
+        "do_not_fork": true,
+        "energy": 0.05,
+        "help": 0.0,
+        "id": "ptr://task/LRA-025",
+        "kind": "task",
+        "losses": 0,
+        "status": "blocked",
+        "tick": 3,
+        "title": "Official Track 2 runner gated on cluster and SM80 GGUF",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-026": {
+        "blocked": true,
+        "do_not_fork": true,
+        "energy": 0.05,
+        "help": 0.0,
+        "id": "ptr://task/LRA-026",
+        "kind": "task",
+        "losses": 0,
+        "status": "completed",
+        "tick": 3,
+        "title": "Fill manuscript measured sections from receipts only",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://task/LRA-027": {
+        "blocked": true,
+        "do_not_fork": true,
+        "energy": 0.05,
+        "help": 0.0,
+        "id": "ptr://task/LRA-027",
+        "kind": "task",
+        "losses": 0,
+        "status": "blocked",
+        "tick": 3,
+        "title": "Human Arena Space / OpenReview submission",
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://theorem/CallElimCorrect.extractedOldExprInVars": {
+        "energy": 0.5677602998536673,
+        "help": 0.0,
+        "id": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "kind": "theorem",
+        "leftover_drafts": 0,
+        "losses": 0,
+        "remaining_cut": 65,
+        "tick": 3,
+        "tokens": 260,
+        "unsafe": 0.0,
+        "updated_at": 1789722486.9855857,
+        "visited": true,
+        "warmup_tokens": 325,
+        "wins": 2
+      },
+      "ptr://theorem/CallElimCorrect.substOldPostSubset": {
+        "energy": 0.5740481745272934,
+        "help": 0.0,
+        "id": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "kind": "theorem",
+        "leftover_drafts": 0,
+        "losses": 0,
+        "remaining_cut": 93,
+        "tick": 3,
+        "tokens": 392,
+        "unsafe": 0.0,
+        "updated_at": 1789722484.9033642,
+        "visited": true,
+        "warmup_tokens": 485,
+        "wins": 2
+      },
+      "ptr://theorem/Core.InitsUpdatesComm": {
+        "energy": 0.5756561421994634,
+        "help": 0.0,
+        "id": "ptr://theorem/Core.InitsUpdatesComm",
+        "kind": "theorem",
+        "leftover_drafts": 0,
+        "losses": 0,
+        "remaining_cut": 132,
+        "tick": 3,
+        "tokens": 139,
+        "unsafe": 0.0,
+        "updated_at": 1789722482.7121387,
+        "visited": true,
+        "warmup_tokens": 271,
+        "wins": 2
+      },
+      "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice": {
+        "energy": 0.5535791726729042,
+        "help": 0.0,
+        "id": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "kind": "theorem",
+        "leftover_drafts": 0,
+        "losses": 0,
+        "remaining_cut": 3,
+        "tick": 3,
+        "tokens": 296,
+        "unsafe": 0.0,
+        "updated_at": 1789722494.1116626,
+        "visited": true,
+        "warmup_tokens": 299,
+        "wins": 0
+      },
+      "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+        "energy": 0.5533801729869472,
+        "help": 0.0,
+        "id": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "kind": "theorem",
+        "leftover_drafts": 0,
+        "losses": 0,
+        "remaining_cut": 3,
+        "tick": 3,
+        "tokens": 519,
+        "unsafe": 0.0,
+        "updated_at": 1789722496.2335985,
+        "visited": true,
+        "warmup_tokens": 522,
+        "wins": 0
+      },
+      "ptr://theorem/Cslib.SKI.parallelReduction_diamond": {
+        "energy": 0.5533801729869472,
+        "help": 0.0,
+        "id": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "kind": "theorem",
+        "leftover_drafts": 0,
+        "losses": 0,
+        "remaining_cut": 15,
+        "tick": 3,
+        "tokens": 540,
+        "unsafe": 0.0,
+        "updated_at": 1789722490.6084828,
+        "visited": true,
+        "warmup_tokens": 555,
+        "wins": 0
+      },
+      "ptr://tool/budget": {
+        "energy": 0.995122,
+        "help": 0.0,
+        "id": "ptr://tool/budget",
+        "jev_calls": 48,
+        "kind": "tool",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "usd": 0.014634,
+        "visited": true,
+        "wins": 0
+      },
+      "ptr://tool/nca_program": {
+        "energy": 0.8554676358000003,
+        "id": "ptr://tool/nca_program",
+        "kind": "tool",
+        "losses": 0,
+        "tick": 3,
+        "wins": 0
+      }
+    },
+    "journal": [
+      {
+        "energy_delta": 0.0105,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0105,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0105,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0105,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0105,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0105,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0051,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.162,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.44,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-019",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.1672,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.44,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.1672,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.015,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 0
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 68,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 1
+      },
+      {
+        "energy_delta": -0.0579,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 1
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "skill",
+        "ptr": "ptr://skill/pca_search_space_d001",
+        "tick": 1
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "skill",
+        "ptr": "ptr://skill/pca_search_space_d017",
+        "tick": 1
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "skill",
+        "ptr": "ptr://skill/pca_search_space_d003",
+        "tick": 1
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 82,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 2
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "lake",
+        "ptr": "ptr://cell/lake",
+        "tick": 2
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "skill",
+        "ptr": "ptr://skill/pca_search_space_d002",
+        "tick": 2
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "skill",
+        "ptr": "ptr://skill/pca_search_space_d004",
+        "tick": 2
+      },
+      {
+        "energy_delta": -0.15,
+        "event": "upsert",
+        "op": "skill",
+        "ptr": "ptr://skill/pca_search_space_d005",
+        "tick": 2
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 86,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0093,
+        "event": "upsert",
+        "op": "lake",
+        "ptr": "ptr://cell/lake",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0647,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0123,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.013,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0123,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0613,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0453,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0654,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0086,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0086,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0091,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0458,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0429,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0317,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.006,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0064,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.006,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0321,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.03,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0222,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0042,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0045,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0042,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.021,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0155,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0224,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.003,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.003,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0031,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0157,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0147,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0109,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0021,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0022,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0021,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.011,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0048,
+        "event": "jev",
+        "jev_calls": 1,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 2,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 3,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 4,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 5,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "instruct",
+        "jev_calls": 5,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 6,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 7,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 8,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0103,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 9,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 10,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 11,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 12,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 13,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "instruct",
+        "jev_calls": 13,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 14,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 15,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 16,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0076,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 17,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 18,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 19,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 20,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 21,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "instruct",
+        "jev_calls": 21,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 22,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 23,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 24,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0014,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 25,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 26,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 27,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 28,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 29,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "instruct",
+        "jev_calls": 29,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 30,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 31,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 32,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0015,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 33,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 34,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 35,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 36,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 37,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "instruct",
+        "jev_calls": 37,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 38,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 39,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 40,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0014,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 41,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 42,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 43,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 44,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 45,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "instruct",
+        "jev_calls": 45,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 46,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 47,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      },
+      {
+        "energy_delta": -0.0001,
+        "event": "jev",
+        "jev_calls": 48,
+        "op": "BUDGET",
+        "ptr": "ptr://tool/budget",
+        "tick": 3
+      }
+    ],
+    "live_overlay": {
+      "n_overlaid": 18,
+      "reason": "fetch_board"
+    },
+    "overlay_done": true,
+    "program_state": {
+      "autoencoder_ok": true,
+      "called_docker0": false,
+      "datasets_ir_ok": true,
+      "decompiled": "inspect cells ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress, ptr://theorem/Core.InitsUpdatesComm, ptr://theorem/CallElimCorrect.substOldPostSubset, ptr://theorem/CallElimCorrect.extractedOldExprInVars, ptr://theorem/Cslib.SKI.parallelReduction_diamond, ptr://theorem/Cslib.CCS.bisimilarity_congr_choice; walk neighbors on the board and skill graph; project; limit",
+      "hardware_class": "nca_local_ir",
+      "ir": {
+        "called_docker0": false,
+        "n_edges": 24,
+        "ok": true,
+        "ops": [
+          {
+            "entity_ids": [
+              "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+              "ptr://theorem/Core.InitsUpdatesComm",
+              "ptr://theorem/CallElimCorrect.substOldPostSubset",
+              "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+              "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+              "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+              "ptr://task/LRA-010",
+              "ptr://task/LRA-011"
+            ],
+            "op": "SeedEntities",
+            "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress"
+          },
+          {
+            "direction": "both",
+            "op": "Expand",
+            "relationship_types": [
+              "board",
+              "skill"
+            ]
+          },
+          {
+            "fields": [
+              "id",
+              "kind",
+              "energy"
+            ],
+            "op": "Project"
+          },
+          {
+            "n": 16,
+            "op": "Limit"
+          }
+        ],
+        "seeds": [
+          "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+          "ptr://theorem/Core.InitsUpdatesComm",
+          "ptr://theorem/CallElimCorrect.substOldPostSubset",
+          "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+          "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+          "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+          "ptr://task/LRA-010",
+          "ptr://task/LRA-011"
+        ],
+        "source": "local"
+      },
+      "ops": [],
+      "provider": "local_ir"
+    },
+    "tick": 3
+  },
+  "observations": {
+    "no_drafts_instructed_by": {
+      "CallElimCorrect.extractedOldExprInVars": true,
+      "CallElimCorrect.substOldPostSubset": true,
+      "Core.InitsUpdatesComm": true,
+      "Cslib.CCS.bisimilarity_congr_choice": true,
+      "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": true,
+      "Cslib.SKI.parallelReduction_diamond": true
+    },
+    "no_drafts_tree": {
+      "families": {
+        "algebraic_simplification": [
+          "port_grind_only_to_grind"
+        ]
+      },
+      "keep_structure": [
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "hoist_repeated_simp"
+      ],
+      "observed": [
+        "no_drafts_instructed_by",
+        "no_drafts_tree",
+        "no_drafts_tree_by",
+        "self_improve"
+      ],
+      "ok": true,
+      "subloops": [
+        "eval_theorem",
+        "nca_fork",
+        "nca_tick",
+        "skill_walk"
+      ],
+      "tool": "decision_tree",
+      "tools": [
+        "ast_harness",
+        "board_walk",
+        "codepath_slice",
+        "decision_tree",
+        "diffuse",
+        "kg_skills",
+        "mcp_catalog",
+        "mcpplusplus",
+        "nca_fork",
+        "nca_heal",
+        "nca_hook",
+        "nca_mutate",
+        "nca_program",
+        "nca_tick",
+        "nca_walk",
+        "pkg_exports",
+        "stack_children",
+        "stack_parent",
+        "stack_walk",
+        "symbol_search",
+        "tape_populate"
+      ]
+    },
+    "no_drafts_tree_by": {
+      "CallElimCorrect.extractedOldExprInVars": true,
+      "CallElimCorrect.substOldPostSubset": true,
+      "Core.InitsUpdatesComm": true,
+      "Cslib.CCS.bisimilarity_congr_choice": true,
+      "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": true,
+      "Cslib.SKI.parallelReduction_diamond": true
+    },
+    "self_improve": {
+      "called_docker0": false,
+      "expanded": [],
+      "installed": null,
+      "ok": true,
+      "proposed": {},
+      "router": null
+    }
+  },
+  "research": [
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.15,
+        "have": 0.12,
+        "intro_then_simp_all": 0.54
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.55,
+        "have": 0.67,
+        "intro_then_simp_all": 0.41
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.22,
+        "have": 0.15,
+        "intro_then_simp_all": 0.37
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "have": 0.64,
+        "intro_then_simp_all": 0.43
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.22,
+        "have": 0.14,
+        "intro_then_simp_all": 0.23
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.52,
+        "have": 0.61,
+        "intro_then_simp_all": 0.46
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.24,
+        "have": 0.13,
+        "intro_then_simp_all": 0.32
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.5,
+        "have": 0.66,
+        "intro_then_simp_all": 0.44
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.21,
+        "have": 0.15,
+        "intro_then_simp_all": 0.19
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.52,
+        "have": 0.65,
+        "intro_then_simp_all": 0.46
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.24,
+        "have": 0.18,
+        "intro_then_simp_all": 0.3
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "have": 0.63,
+        "intro_then_simp_all": 0.44
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.22,
+        "have": 0.14,
+        "intro_then_simp_all": 0.18
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.52,
+        "have": 0.63,
+        "intro_then_simp_all": 0.44
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.2,
+        "have": 0.13,
+        "intro_then_simp_all": 0.18
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.48,
+        "have": 0.64,
+        "intro_then_simp_all": 0.43
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.42,
+        "intro_then_simp_all": 1.09,
+        "intros_x_Hin": 0.26,
+        "repeated_simp_list": 1.18
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.66,
+        "intro_then_simp_all": 0.59,
+        "intros_x_Hin": 0.65,
+        "repeated_simp_list": 0.37
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.37,
+        "intro_then_simp_all": 0.83,
+        "intros_x_Hin": 0.27,
+        "repeated_simp_list": 0.82
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.64,
+        "intro_then_simp_all": 0.58,
+        "intros_x_Hin": 0.65,
+        "repeated_simp_list": 0.36
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.32,
+        "intro_then_simp_all": 0.9,
+        "intros_x_Hin": 0.23,
+        "repeated_simp_list": 0.99
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.61,
+        "intro_then_simp_all": 0.57,
+        "intros_x_Hin": 0.64,
+        "repeated_simp_list": 0.38
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.4,
+        "intro_then_simp_all": 0.9,
+        "intros_x_Hin": 0.2,
+        "repeated_simp_list": 0.77
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.58,
+        "intro_then_simp_all": 0.56,
+        "intros_x_Hin": 0.64,
+        "repeated_simp_list": 0.4
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.43,
+        "intro_then_simp_all": 1.0,
+        "intros_x_Hin": 0.25,
+        "repeated_simp_list": 0.55
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.53,
+        "intro_then_simp_all": 0.54,
+        "intros_x_Hin": 0.66,
+        "repeated_simp_list": 0.36
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.46,
+        "intro_then_simp_all": 0.78,
+        "intros_x_Hin": 0.24,
+        "repeated_simp_list": 0.68
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.57,
+        "intro_then_simp_all": 0.56,
+        "intros_x_Hin": 0.65,
+        "repeated_simp_list": 0.36
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.42,
+        "intro_then_simp_all": 0.92,
+        "intros_x_Hin": 0.33,
+        "repeated_simp_list": 0.64
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.56,
+        "intro_then_simp_all": 0.58,
+        "intros_x_Hin": 0.65,
+        "repeated_simp_list": 0.4
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.41,
+        "intro_then_simp_all": 1.15,
+        "intros_x_Hin": 0.26,
+        "repeated_simp_list": 0.5
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.56,
+        "intro_then_simp_all": 0.56,
+        "intros_x_Hin": 0.67,
+        "repeated_simp_list": 0.36
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.51,
+        "ctor_lone": 0.21,
+        "intro_then_simp_all": 0.75,
+        "intros_x_Hin": 0.31
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.61,
+        "ctor_lone": 0.32,
+        "intro_then_simp_all": 0.6,
+        "intros_x_Hin": 0.56
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.44,
+        "ctor_lone": 0.16,
+        "intro_then_simp_all": 0.73,
+        "intros_x_Hin": 0.2
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.57,
+        "ctor_lone": 0.34,
+        "intro_then_simp_all": 0.59,
+        "intros_x_Hin": 0.49
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.41,
+        "ctor_lone": 0.08,
+        "intro_then_simp_all": 0.66,
+        "intros_x_Hin": 0.15
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.55,
+        "ctor_lone": 0.35,
+        "intro_then_simp_all": 0.61,
+        "intros_x_Hin": 0.45
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.4,
+        "ctor_lone": 0.07,
+        "intro_then_simp_all": 0.63,
+        "intros_x_Hin": 0.16
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.58,
+        "ctor_lone": 0.35,
+        "intro_then_simp_all": 0.58,
+        "intros_x_Hin": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.37,
+        "ctor_lone": 0.06,
+        "intro_then_simp_all": 0.68,
+        "intros_x_Hin": 0.15
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.34,
+        "intro_then_simp_all": 0.58,
+        "intros_x_Hin": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.3,
+        "ctor_lone": 0.08,
+        "intro_then_simp_all": 0.61,
+        "intros_x_Hin": 0.16
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.32,
+        "intro_then_simp_all": 0.61,
+        "intros_x_Hin": 0.46
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.39,
+        "ctor_lone": 0.08,
+        "intro_then_simp_all": 0.73,
+        "intros_x_Hin": 0.17
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.31,
+        "intro_then_simp_all": 0.57,
+        "intros_x_Hin": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.33,
+        "ctor_lone": 0.08,
+        "intro_then_simp_all": 0.63,
+        "intros_x_Hin": 0.15
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.58,
+        "ctor_lone": 0.34,
+        "intro_then_simp_all": 0.59,
+        "intros_x_Hin": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.22,
+        "use_then_exact": 0.5
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.45,
+        "use_then_exact": 0.73
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.29,
+        "use_then_exact": 0.41
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.41,
+        "use_then_exact": 0.7
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.26,
+        "use_then_exact": 0.32
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.41,
+        "use_then_exact": 0.72
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.19,
+        "use_then_exact": 0.3
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.4,
+        "use_then_exact": 0.73
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.3,
+        "use_then_exact": 0.33
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.39,
+        "use_then_exact": 0.71
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.27,
+        "use_then_exact": 0.24
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.42,
+        "use_then_exact": 0.73
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.3,
+        "use_then_exact": 0.32
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.4,
+        "use_then_exact": 0.74
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.28,
+        "use_then_exact": 0.31
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.37,
+        "use_then_exact": 0.73
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.63,
+        "ctor_lone": 0.59
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.62,
+        "ctor_lone": 0.55
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.43,
+        "ctor_lone": 0.21
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.64,
+        "ctor_lone": 0.53
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.4,
+        "ctor_lone": 0.24
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.6,
+        "ctor_lone": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.36,
+        "ctor_lone": 0.42
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.49
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.34,
+        "ctor_lone": 0.32
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.58,
+        "ctor_lone": 0.49
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.37,
+        "ctor_lone": 0.26
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.42,
+        "ctor_lone": 0.32
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.6,
+        "ctor_lone": 0.5
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.33,
+        "ctor_lone": 0.41
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.58,
+        "ctor_lone": 0.46
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.16,
+        "grind": 0.9,
+        "have": 0.44
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.54,
+        "grind": 0.62,
+        "have": 0.51
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.14,
+        "grind": 0.8,
+        "have": 0.32
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.58,
+        "have": 0.52
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.14,
+        "grind": 0.72,
+        "have": 0.31
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.53,
+        "have": 0.49
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.12,
+        "grind": 0.63,
+        "have": 0.25
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.56,
+        "have": 0.52
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.15,
+        "grind": 0.69,
+        "have": 0.39
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.52,
+        "grind": 0.59,
+        "have": 0.5
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.13,
+        "grind": 0.79,
+        "have": 0.39
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.56,
+        "have": 0.5
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.11,
+        "grind": 0.72,
+        "have": 0.35
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.58,
+        "have": 0.49
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.1,
+        "grind": 0.67,
+        "have": 0.23
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.57,
+        "have": 0.51
+      }
+    }
+  ],
+  "skill_params": {},
+  "skills": [],
+  "subloop_returns": [
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 4,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "eval_theorem",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "eval_theorem",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "eval_theorem",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "eval_theorem",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "search_space",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "search_space",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "search_space",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "search_space",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "skill_walk",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 6,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    },
+    {
+      "n_steps": 8,
+      "name": "nca_fork",
+      "ok": true,
+      "returned": true
+    }
+  ],
+  "successes": [],
+  "tape": {
+    "cells": [
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Core.InitsUpdatesComm",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "CallElimCorrect.substOldPostSubset",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.3,
+        "kind": "lake",
+        "parent_frame": "f1",
+        "payload": {
+          "n": 3,
+          "ok": false
+        },
+        "ptr": "",
+        "theorem_ok": false,
+        "tokens": 392
+      },
+      {
+        "energy": 0.3,
+        "kind": "lake",
+        "parent_frame": "f1",
+        "payload": {
+          "n": 3,
+          "ok": false
+        },
+        "ptr": "",
+        "theorem_ok": false,
+        "tokens": 392
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "CallElimCorrect.extractedOldExprInVars",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.SKI.parallelReduction_diamond",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.CCS.bisimilarity_congr_choice",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Core.InitsUpdatesComm",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "CallElimCorrect.substOldPostSubset",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "CallElimCorrect.extractedOldExprInVars",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.SKI.parallelReduction_diamond",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.CCS.bisimilarity_congr_choice",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Core.InitsUpdatesComm",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "CallElimCorrect.substOldPostSubset",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "CallElimCorrect.extractedOldExprInVars",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.SKI.parallelReduction_diamond",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.CCS.bisimilarity_congr_choice",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "theorem_ok": null,
+        "tokens": 0
+      }
+    ],
+    "head": 19,
+    "n": 20
+  }
+}

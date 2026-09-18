@@ -1,0 +1,143 @@
+{
+  "arena_score": null,
+  "canaries": [
+    {
+      "advisory_only": true,
+      "arena_score": null,
+      "expected_provable": true,
+      "expected_solver_status": "unsat",
+      "goal_id": "h.fol_identity",
+      "kernel": {
+        "error": "lean_nonzero_exit",
+        "exit_code": 1,
+        "ok": false,
+        "source_chars": 113,
+        "stderr_tail": "",
+        "stdout_tail": "/tmp/lra-fol-n1oii_7e/Canary.lean:3:8: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nU\u271d : Type\nP\u271d : U\u271d \u2192 Prop\nU : U\u271d\nP : P\u271d U\n\u22a2 P\u271d U\n",
+        "wall_ms": 3431.3395770150237
+      },
+      "kind": "fol",
+      "leanstral_finish_reason": "length",
+      "leanstral_usage": {
+        "completion_tokens": 192,
+        "prompt_tokens": 141,
+        "prompt_tokens_details": {
+          "cached_tokens": 140
+        },
+        "total_tokens": 333
+      },
+      "match_expected": false,
+      "parsed": {
+        "body": "by\n  intro U P\n  intro x\n  intro h\n  exact h",
+        "had_thought": false,
+        "kind": "proof_body",
+        "language": "lean4"
+      },
+      "typesafe_skipped": null,
+      "verdict": {
+        "advisory_only": true,
+        "body": "by\n  intro U P\n  intro x\n  intro h\n  exact h",
+        "candidate_quality": 1.47,
+        "claim_status": "unsat",
+        "confidence": 0.2,
+        "disposition": "accept_candidate",
+        "is_abstain": 0.02,
+        "is_proof_body": 0.97,
+        "kind": "proof_body",
+        "uses_forbidden": 0.03,
+        "well_formed": 0.96
+      },
+      "wall_ms": 16693.371827015653
+    },
+    {
+      "advisory_only": true,
+      "arena_score": null,
+      "expected_provable": false,
+      "expected_solver_status": "sat",
+      "goal_id": "h.fol_protected_write",
+      "kernel": {
+        "error": "lean_nonzero_exit",
+        "exit_code": 1,
+        "ok": false,
+        "source_chars": 562,
+        "stderr_tail": "",
+        "stdout_tail": "/tmp/lra-fol-i3uzo5mx/Canary.lean:1:96: error: unsolved goals\nProtected Approved Write : Prop\nh : Protected \u2227 \u00acApproved\nw : Write\nhProtected : Protected\nhNotApproved : \u00acApproved\nhWrite : Write\n\u22a2 False\n/tmp/lra-fol-i3uzo5mx/Canary.lean:12:0: error: unexpected identifier; expected command\n",
+        "wall_ms": 792.5172839895822
+      },
+      "kind": "fol",
+      "leanstral_finish_reason": "length",
+      "leanstral_usage": {
+        "completion_tokens": 192,
+        "prompt_tokens": 143,
+        "prompt_tokens_details": {
+          "cached_tokens": 142
+        },
+        "total_tokens": 335
+      },
+      "match_expected": true,
+      "parsed": {
+        "body": "by\n  intro h\n  intro w\n  have hProtected : Protected := h.1\n  have hNotApproved : \u00ac Approved := h.2\n  have hWrite : Write := w\n  -- We need to derive a contradiction from these assumptions\n  -- But we only have: Protected, \u00acApproved, Write\n  -- There's no contradiction here unless we know something about the relationship between these propositions\n  -- The statement is not provable from its explicit parameters alone\n  -- Therefore we must return ABSTAIN\nABSTAIN",
+        "had_thought": false,
+        "kind": "proof_body",
+        "language": "lean4"
+      },
+      "typesafe_skipped": null,
+      "verdict": {
+        "advisory_only": true,
+        "body": "by\n  intro h\n  intro w\n  have hProtected : Protected := h.1\n  have hNotApproved : \u00ac Approved := h.2\n  have hWrite : Write := w\n  -- We need to derive a contradiction from these assumptions\n  -- But we only have: Protected, \u00acApproved, Write\n  -- There's no contradiction here unless we know something about the relationship between these propositions\n  -- The statement is not provable from its explicit parameters alone\n  -- Therefore we must return ABSTAIN\nABSTAIN",
+        "candidate_quality": 0.24,
+        "claim_status": "sat",
+        "confidence": 0.44,
+        "disposition": "reject",
+        "is_abstain": 0.05,
+        "is_proof_body": 0.85,
+        "kind": "proof_body",
+        "uses_forbidden": 0.65,
+        "well_formed": 0.08
+      },
+      "wall_ms": 13423.836476984434
+    },
+    {
+      "arena_score": null,
+      "error": "ValueError: '/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py' is not in the subpath of '/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026'",
+      "kind": "lra_warmup",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false
+    },
+    {
+      "arena_score": null,
+      "error": "ValueError: '/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py' is not in the subpath of '/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026'",
+      "kind": "lra_warmup",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "ok": false
+    }
+  ],
+  "errors": [
+    {
+      "error": "ValueError: '/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py' is not in the subpath of '/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026'",
+      "kind": "lra_warmup",
+      "name": "CallElimCorrect.substOldPostSubset"
+    },
+    {
+      "error": "ValueError: '/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py' is not in the subpath of '/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026'",
+      "kind": "lra_warmup",
+      "name": "Cslib.CCS.bisimilarity_congr_choice"
+    }
+  ],
+  "fol_kernel_ok": 0,
+  "fol_match_expected": 1,
+  "fol_n": 2,
+  "leanstral_health_ok": true,
+  "llama_server_started": false,
+  "lock_ex": false,
+  "lra_admitted": 0,
+  "lra_jev_called": 0,
+  "lra_n": 2,
+  "n_canaries": 4,
+  "observed_at": "2026-09-17T04:37:50.477970+00:00",
+  "official_track2": false,
+  "schema": "lra-canary-run/v1",
+  "typesafe_configured": true,
+  "typesafe_key_in_receipt": false,
+  "wall_ms": 34106.47407601937
+}

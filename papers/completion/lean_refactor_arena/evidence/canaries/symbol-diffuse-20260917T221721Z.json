@@ -1,0 +1,243 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "r0_SYM_0_phrase_constructor",
+    "theorem_ok": true,
+    "token_count": 265
+  },
+  "called_docker0": false,
+  "cfg": [
+    {
+      "arena_score": null,
+      "best_schedule": "cfg4",
+      "cfg_confidence": 0.3,
+      "cfg_schedule": {
+        "cfg_scale": 3.0,
+        "id": "cfg4",
+        "n_masks": 8,
+        "n_shots": 8,
+        "span": 6
+      },
+      "cfg_score": 2.71,
+      "eligible_spans": {
+        "span_1": 32,
+        "span_2": 32,
+        "span_3": 32,
+        "span_4": 32,
+        "span_6": 32
+      },
+      "jev_generated_lean": false,
+      "round": 0,
+      "schedule_probabilities": {
+        "cfg0": 0.2,
+        "cfg1": 0.09,
+        "cfg2": 0.12,
+        "cfg3": 0.2,
+        "cfg4": 0.39
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 855,
+        "output_tokens": 73
+      },
+      "wall_ms": 364.0449640224688
+    }
+  ],
+  "few_shot": true,
+  "lake": [
+    {
+      "errors": [
+        {
+          "data": "unexpected token '<<<'; expected '{' or tactic",
+          "pos": {
+            "column": 35,
+            "line": 939
+          }
+        }
+      ],
+      "kind": "leanstral_cfg4_fullblock",
+      "n_shots": 5,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg4",
+      "tokens": 130
+    },
+    {
+      "errors": [
+        {
+          "data": "unknown tactic",
+          "pos": {
+            "column": 7,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "sweep_cfg4_closed",
+      "n_shots": 8,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg4",
+      "tokens": 255
+    },
+    {
+      "errors": [
+        {
+          "data": "unknown tactic",
+          "pos": {
+            "column": 7,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "sweep_cfg2_closed",
+      "n_shots": 4,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg2",
+      "tokens": 263
+    },
+    {
+      "errors": [],
+      "kind": "SYM_0_phrase_constructor",
+      "n_shots": null,
+      "ok": true,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 265
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 2,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 855,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.6e-05
+      },
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1509,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 156,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 2280,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 165,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.6e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 12,
+    "max_mistral_calls": 6,
+    "mistral_calls": 1,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999868,
+    "skipped": false,
+    "spent_usd": 0.000132,
+    "track": "track1_closed"
+  },
+  "llm": "on",
+  "n_closed": 8,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:17:21.493271+00:00",
+  "official_track2": false,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "leanstral_cfg4_fullblock",
+    "cfg_schedule": {
+      "cfg_scale": 1.5,
+      "id": "cfg2",
+      "n_masks": 4,
+      "n_shots": 4,
+      "span": 3
+    },
+    "cfg_score": 2.39,
+    "confidence": 0.77,
+    "jev_generated_lean": false,
+    "prefer_few_shot_noul": 0.56,
+    "probabilities": {
+      "SYM_0_phrase_constructor": 0.12,
+      "SYM_10_operator__": 0.0,
+      "SYM_6_operator__": 0.0,
+      "SYM_7_operator__": 0.0,
+      "SYM_8_operator__": 0.0,
+      "SYM_9_operator__": 0.0,
+      "leanstral_cfg4_fullblock": 0.81,
+      "sweep_cfg2_closed": 0.03,
+      "sweep_cfg4_closed": 0.04
+    },
+    "round": 0,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 2280,
+      "output_tokens": 165
+    },
+    "wall_ms": 187.15086299926043
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "leanstral_cfg4_fullblock",
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "cfg2",
+        "n_masks": 4,
+        "n_shots": 4,
+        "span": 3
+      },
+      "cfg_score": 2.39,
+      "confidence": 0.77,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": 0.56,
+      "probabilities": {
+        "SYM_0_phrase_constructor": 0.12,
+        "SYM_10_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator__": 0.0,
+        "SYM_9_operator__": 0.0,
+        "leanstral_cfg4_fullblock": 0.81,
+        "sweep_cfg2_closed": 0.03,
+        "sweep_cfg4_closed": 0.04
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 2280,
+        "output_tokens": 165
+      },
+      "wall_ms": 187.15086299926043
+    }
+  ],
+  "rounds": 1,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 268,
+  "sweep": true,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

@@ -1,0 +1,61 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "share_init_term+drop_hk_type+drop_named_val",
+    "theorem_ok": true,
+    "token_count": 223
+  },
+  "called_docker0": false,
+  "from_tokens": 250,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T19:22:43.310772+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "",
+      "kind": "share_init_term",
+      "ok": true,
+      "tokens": 236
+    },
+    {
+      "error": "",
+      "kind": "drop_refine_parens",
+      "ok": true,
+      "tokens": 248
+    },
+    {
+      "error": "",
+      "kind": "drop_hk_type",
+      "ok": true,
+      "tokens": 243
+    },
+    {
+      "error": "Tactic `rewrite` failed: Did not find an occurrence of the pattern   updatedStates' (updatedState ?m.132 ?m.133 ?m.134) ?m.135 in the target expression   UpdateState P (updatedStat",
+      "kind": "drop_named_sigma",
+      "ok": false,
+      "tokens": 239
+    },
+    {
+      "error": "",
+      "kind": "drop_named_val",
+      "ok": true,
+      "tokens": 244
+    },
+    {
+      "error": "",
+      "kind": "share_init_term+drop_hk_type",
+      "ok": true,
+      "tokens": 229
+    },
+    {
+      "error": "",
+      "kind": "share_init_term+drop_hk_type+drop_named_val",
+      "ok": true,
+      "tokens": 223
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

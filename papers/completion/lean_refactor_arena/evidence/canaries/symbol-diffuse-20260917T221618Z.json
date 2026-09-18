@@ -1,0 +1,268 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 139
+  },
+  "called_docker0": false,
+  "cfg": [
+    {
+      "arena_score": null,
+      "best_schedule": "cfg3",
+      "cfg_confidence": 0.13,
+      "cfg_schedule": {
+        "cfg_scale": 2.0,
+        "id": "cfg3",
+        "n_masks": 6,
+        "n_shots": 6,
+        "span": 4
+      },
+      "cfg_score": 2.55,
+      "eligible_spans": {
+        "span_1": 32,
+        "span_2": 32,
+        "span_3": 32,
+        "span_4": 31,
+        "span_6": 20
+      },
+      "jev_generated_lean": false,
+      "round": 0,
+      "schedule_probabilities": {
+        "cfg0": 0.12,
+        "cfg1": 0.09,
+        "cfg2": 0.15,
+        "cfg3": 0.4,
+        "cfg4": 0.24
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 858,
+        "output_tokens": 73
+      },
+      "wall_ms": 180.27200698270462
+    }
+  ],
+  "few_shot": true,
+  "lake": [
+    {
+      "errors": [
+        {
+          "data": "unexpected token ']'; expected term",
+          "pos": {
+            "column": 13,
+            "line": 961
+          }
+        }
+      ],
+      "kind": "sweep_cfg3_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg3",
+      "tokens": 133
+    },
+    {
+      "errors": [
+        {
+          "data": "unexpected token '='; expected '(', ':=', '|' or term",
+          "pos": {
+            "column": 6,
+            "line": 942
+          }
+        }
+      ],
+      "kind": "sweep_cfg1_closed",
+      "n_shots": 2,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg1",
+      "tokens": 136
+    },
+    {
+      "errors": [
+        {
+          "data": "unexpected token 'have'; expected ':=' or '|'",
+          "pos": {
+            "column": 32,
+            "line": 942
+          }
+        }
+      ],
+      "kind": "sweep_cfg2_closed",
+      "n_shots": 4,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg2",
+      "tokens": 135
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  InitStatesNodup\nhas type\n  InitStates ?m.99 ?m.100 ?m.101 ?m.102 \u2192 List.Nodup ?m.100\nbut is expected to have type\n  ks'.Nodup\nin the application\n  updatedStatesInit Hlen1 (UpdateStateNotDefMonotone' (UpdateStatesNotDefMonotone' this Hups) Hup) InitStatesNodup",
+          "pos": {
+            "column": 7,
+            "line": 954
+          }
+        }
+      ],
+      "kind": "SYM_3_operator_drop",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 138
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 2,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 858,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.6e-05
+      },
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 988,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 109,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 480,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 26,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 2361,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 174,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.9e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 12,
+    "max_mistral_calls": 6,
+    "mistral_calls": 2,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999865,
+    "skipped": false,
+    "spent_usd": 0.000135,
+    "track": "track1_closed"
+  },
+  "llm": "on",
+  "n_closed": 9,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:16:18.616948+00:00",
+  "official_track2": false,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "sweep_cfg3_closed",
+    "cfg_schedule": {
+      "cfg_scale": 1.5,
+      "id": "cfg2",
+      "n_masks": 4,
+      "n_shots": 4,
+      "span": 3
+    },
+    "cfg_score": 1.94,
+    "confidence": 0.3,
+    "jev_generated_lean": false,
+    "prefer_few_shot_noul": 0.4,
+    "probabilities": {
+      "SYM_0_operator_this": 0.08,
+      "SYM_1_operator__": 0.0,
+      "SYM_2_operator_drop": 0.0,
+      "SYM_3_operator_drop": 0.0,
+      "SYM_4_operator_drop": 0.0,
+      "SYM_5_operator_drop": 0.0,
+      "leanstral_cfg3_unparsed": 0.1,
+      "sweep_cfg1_closed": 0.35,
+      "sweep_cfg2_closed": 0.1,
+      "sweep_cfg3_closed": 0.37
+    },
+    "round": 0,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 2361,
+      "output_tokens": 174
+    },
+    "wall_ms": 167.90569000295363
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "sweep_cfg3_closed",
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "cfg2",
+        "n_masks": 4,
+        "n_shots": 4,
+        "span": 3
+      },
+      "cfg_score": 1.94,
+      "confidence": 0.3,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": 0.4,
+      "probabilities": {
+        "SYM_0_operator_this": 0.08,
+        "SYM_1_operator__": 0.0,
+        "SYM_2_operator_drop": 0.0,
+        "SYM_3_operator_drop": 0.0,
+        "SYM_4_operator_drop": 0.0,
+        "SYM_5_operator_drop": 0.0,
+        "leanstral_cfg3_unparsed": 0.1,
+        "sweep_cfg1_closed": 0.35,
+        "sweep_cfg2_closed": 0.1,
+        "sweep_cfg3_closed": 0.37
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 2361,
+        "output_tokens": 174
+      },
+      "wall_ms": 167.90569000295363
+    },
+    {
+      "round": 0,
+      "stopped": "no_shorter_lake_ok"
+    }
+  ],
+  "rounds": 1,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 139,
+  "sweep": true,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

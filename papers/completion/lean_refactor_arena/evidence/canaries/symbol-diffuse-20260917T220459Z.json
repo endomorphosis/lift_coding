@@ -1,0 +1,162 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 139
+  },
+  "called_docker0": false,
+  "lake": [
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  rfl\nhas type\n  ?m.214 = ?m.214\nbut is expected to have type\n  \u03c3\u271d x\u271d\u00b9 = some ?m.210\nin the application\n  InitStatesSomeMonotone rfl",
+          "pos": {
+            "column": 60,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "SYM_0_operator_rfl",
+      "ok": false,
+      "round": 0,
+      "tokens": 137
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  InitStatesNodup\nhas type\n  InitStates ?m.99 ?m.100 ?m.101 ?m.102 \u2192 List.Nodup ?m.100\nbut is expected to have type\n  ks'.Nodup\nin the application\n  updatedStatesInit Hlen1 (UpdateStateNotDefMonotone' (UpdateStatesNotDefMonotone' this Hups) Hup) InitStatesNodup",
+          "pos": {
+            "column": 7,
+            "line": 954
+          }
+        }
+      ],
+      "kind": "SYM_3_operator_drop",
+      "ok": false,
+      "round": 0,
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\nHup : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\nHups : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\nih :\n  InitStates \u03c3''\u271d ks' vs' \u03c3'' \u2192\n",
+          "pos": {
+            "column": 26,
+            "line": 959
+          }
+        }
+      ],
+      "kind": "SYM_1_operator__",
+      "ok": false,
+      "round": 0,
+      "tokens": 138
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 1,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 563,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 80,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1473,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 113,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 6.2e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 8,
+    "max_mistral_calls": 4,
+    "mistral_calls": 1,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999938,
+    "skipped": false,
+    "spent_usd": 6.2e-05,
+    "track": "track1_closed"
+  },
+  "llm": "on",
+  "n_closed": 8,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:04:59.719556+00:00",
+  "official_track2": false,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "SYM_0_operator_rfl",
+    "confidence": 0.51,
+    "jev_generated_lean": false,
+    "probabilities": {
+      "SYM_0_operator_rfl": 0.57,
+      "SYM_0_operator_this": 0.23,
+      "SYM_0_operator_trivial": 0.17,
+      "SYM_1_operator__": 0.02,
+      "SYM_2_operator_drop": 0.01,
+      "SYM_3_operator_drop": 0.0,
+      "SYM_4_operator_drop": 0.0,
+      "SYM_5_operator_drop": 0.0
+    },
+    "round": 0,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 1473,
+      "output_tokens": 113
+    },
+    "wall_ms": 197.52759800758213
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "SYM_0_operator_rfl",
+      "confidence": 0.51,
+      "jev_generated_lean": false,
+      "probabilities": {
+        "SYM_0_operator_rfl": 0.57,
+        "SYM_0_operator_this": 0.23,
+        "SYM_0_operator_trivial": 0.17,
+        "SYM_1_operator__": 0.02,
+        "SYM_2_operator_drop": 0.01,
+        "SYM_3_operator_drop": 0.0,
+        "SYM_4_operator_drop": 0.0,
+        "SYM_5_operator_drop": 0.0
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 1473,
+        "output_tokens": 113
+      },
+      "wall_ms": 197.52759800758213
+    },
+    {
+      "round": 0,
+      "stopped": "no_shorter_lake_ok"
+    }
+  ],
+  "rounds": 2,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 139,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

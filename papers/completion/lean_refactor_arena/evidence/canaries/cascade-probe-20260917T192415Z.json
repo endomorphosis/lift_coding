@@ -1,0 +1,55 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 223
+  },
+  "called_docker0": false,
+  "from_tokens": 223,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T19:24:15.211007+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `(\u03c3 x).isSome = true` of `Hdef`  Hint: Use `set_option trac",
+      "kind": "simp_hdef_defined",
+      "ok": false,
+      "tokens": 219
+    },
+    {
+      "error": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined \u03c3 [x]` of `Hdef`  Hint: Use `set_option trace.sp",
+      "kind": "simp_hdef_bare",
+      "ok": false,
+      "tokens": 216
+    },
+    {
+      "error": "Tactic `rewrite` failed: Did not find an occurrence of the pattern   updatedStates' (updatedState ?m.135 ?m.136 ?m.137) ?m.138 in the target",
+      "kind": "simp_upd_only",
+      "ok": false,
+      "tokens": 221
+    },
+    {
+      "error": "Tactic `rewrite` failed: Did not find an occurrence of the pattern   updatedStates' (updatedState ?m.135 ?m.136 ?m.137) ?m.138 in the target",
+      "kind": "simp_states_only",
+      "ok": false,
+      "tokens": 220
+    },
+    {
+      "error": "simp_all made no progress",
+      "kind": "simp_nd_only",
+      "ok": false,
+      "tokens": 221
+    },
+    {
+      "error": "simp_all made no progress",
+      "kind": "simp_nd_bare",
+      "ok": false,
+      "tokens": 218
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

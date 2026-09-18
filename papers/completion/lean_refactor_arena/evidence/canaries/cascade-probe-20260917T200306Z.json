@@ -1,0 +1,43 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "anon_hk",
+    "theorem_ok": true,
+    "token_count": 197
+  },
+  "called_docker0": false,
+  "from_tokens": 198,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T20:03:06.054950+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "unsolved goals case right.right P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : Semantic",
+      "kind": "inline_hnd",
+      "ok": false,
+      "tokens": 195
+    },
+    {
+      "error": "",
+      "kind": "anon_hk",
+      "ok": true,
+      "tokens": 197
+    },
+    {
+      "error": "Function expected at   ih Hinit ?m.128 but this term has type   updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227     InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3",
+      "kind": "drop_hlen2",
+      "ok": false,
+      "tokens": 192
+    },
+    {
+      "error": "Function expected at   ih Hinit ?m.129 but this term has type   updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227     InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3",
+      "kind": "drop_hk",
+      "ok": false,
+      "tokens": 192
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

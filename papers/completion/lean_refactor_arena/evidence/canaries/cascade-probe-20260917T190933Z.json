@@ -1,0 +1,111 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "fold_init_exacts",
+    "theorem_ok": true,
+    "token_count": 258
+  },
+  "called_docker0": false,
+  "hardware_class": "spark_gb10",
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T19:09:33.024301+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Ident ",
+      "kind": "collapse_ih_simps",
+      "ok": false,
+      "proposed": 250,
+      "tokens": 250
+    },
+    {
+      "error": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`   InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs') with the goal   upda",
+      "kind": "rewrite_refine_constructor",
+      "ok": false,
+      "proposed": 251,
+      "tokens": 251
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Ident ",
+      "kind": "collapse_defined_simp",
+      "ok": false,
+      "proposed": 251,
+      "tokens": 251
+    },
+    {
+      "error": "`simp` made no progress",
+      "kind": "hnd_simp_only",
+      "ok": false,
+      "proposed": 252,
+      "tokens": 252
+    },
+    {
+      "error": "simp_all made no progress",
+      "kind": "drop_isnotdefined_simp",
+      "ok": false,
+      "proposed": 252,
+      "tokens": 252
+    },
+    {
+      "error": "unsolved goals case refine_2.a P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStor",
+      "kind": "hnd_intro_exact",
+      "ok": false,
+      "proposed": 255,
+      "tokens": 255
+    },
+    {
+      "error": "unsolved goals case refine_2.a P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStor",
+      "kind": "hnd_intro_simp",
+      "ok": false,
+      "proposed": 256,
+      "tokens": 256
+    },
+    {
+      "error": "Type mismatch   updatedStatesInit Hlen1 ?m.69 ?m.70 has type   InitStates ?m.66 ks' vs' (updatedStates ?m.66 ks' vs') but is expected to have type   InitStates ",
+      "kind": "drop_and_intro",
+      "ok": false,
+      "proposed": 256,
+      "tokens": 256
+    },
+    {
+      "error": "Invalid projection: Projections cannot be used on functions   ih Hinit has type   isDefined \u03c3\u2081 xs \u2192     xs.length = vs.length \u2192       updatedStates \u03c3\u2080 ks' vs' =",
+      "kind": "rewrite_ih_short",
+      "ok": false,
+      "proposed": 256,
+      "tokens": 256
+    },
+    {
+      "error": "Tactic `apply` failed: could not unify the conclusion of `UpdateStateNotDefMonotone' ?m.232 Hup`   \u03c3 ?v = none with the goal   ks'.length = vs'.length  Note: Th",
+      "kind": "drop_nested_init_simp",
+      "ok": false,
+      "proposed": 258,
+      "tokens": 258
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Ident ",
+      "kind": "drop_duplicate",
+      "ok": false,
+      "proposed": 258,
+      "tokens": 258
+    },
+    {
+      "error": "unsolved goals case refine_2.a P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStor",
+      "kind": "drop_orphan_intros_hin",
+      "ok": false,
+      "proposed": 258,
+      "tokens": 258
+    },
+    {
+      "error": "",
+      "kind": "fold_init_exacts",
+      "ok": true,
+      "proposed": 258,
+      "tokens": 258
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "wall_ms": 29258.828978985548,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

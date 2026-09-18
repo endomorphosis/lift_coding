@@ -1,0 +1,103 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "lift_hnd+drop_generalizing+ih_by",
+    "theorem_ok": true,
+    "token_count": 215
+  },
+  "called_docker0": false,
+  "from_tokens": 223,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T19:28:34.673252+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Ident ",
+      "kind": "ih_by_simp_all",
+      "ok": false,
+      "tokens": 214
+    },
+    {
+      "error": "Function expected at   ih Hinit ?m.243 but this term has type   updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227     InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3",
+      "kind": "drop_hlen2",
+      "ok": false,
+      "tokens": 217
+    },
+    {
+      "error": "simp_all made no progress",
+      "kind": "drop_hk",
+      "ok": false,
+      "tokens": 217
+    },
+    {
+      "error": "Tactic `constructor` failed: no applicable constructor found  case right P : PureExpr \u03c3 \u03c3' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ",
+      "kind": "drop_none_init_simp",
+      "ok": false,
+      "tokens": 218
+    },
+    {
+      "error": "`simp` made no progress",
+      "kind": "none_init_simp_bare",
+      "ok": false,
+      "tokens": 219
+    },
+    {
+      "error": "",
+      "kind": "lift_hnd",
+      "ok": true,
+      "tokens": 220
+    },
+    {
+      "error": "",
+      "kind": "drop_generalizing",
+      "ok": true,
+      "tokens": 220
+    },
+    {
+      "error": "Type mismatch   updatedStatesInit Hlen1 (InitStatesNotDefined Hinit) (InitStatesNodup Hinit) has type   InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs') but is ",
+      "kind": "drop_none_simp_all",
+      "ok": false,
+      "tokens": 222
+    },
+    {
+      "error": "Tactic `rewrite` failed: Did not find an occurrence of the pattern   updatedState (updatedStates' ?m.135 ?m.138) ?m.136 ?m.137 in the target expression   Update",
+      "kind": "rw_comm_fwd",
+      "ok": false,
+      "tokens": 222
+    },
+    {
+      "error": "",
+      "kind": "ih_by",
+      "ok": true,
+      "tokens": 221
+    },
+    {
+      "error": "Unknown identifier `heq`",
+      "kind": "drop_next_names",
+      "ok": false,
+      "tokens": 221
+    },
+    {
+      "error": "",
+      "kind": "fold_update_term",
+      "ok": true,
+      "tokens": 223
+    },
+    {
+      "error": "",
+      "kind": "lift_hnd+drop_generalizing",
+      "ok": true,
+      "tokens": 217
+    },
+    {
+      "error": "",
+      "kind": "lift_hnd+drop_generalizing+ih_by",
+      "ok": true,
+      "tokens": 215
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

@@ -1,0 +1,73 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "ih_simp_all_defined+anon_hdef",
+    "theorem_ok": true,
+    "token_count": 207
+  },
+  "called_docker0": false,
+  "from_tokens": 212,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T19:32:50.286488+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "simp_all made no progress",
+      "kind": "hnd_simp_all_only",
+      "ok": false,
+      "tokens": 207
+    },
+    {
+      "error": "",
+      "kind": "ih_simp_all_defined",
+      "ok": true,
+      "tokens": 208
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Id",
+      "kind": "ih_simp_defined",
+      "ok": false,
+      "tokens": 208
+    },
+    {
+      "error": "Application type mismatch: The argument   updatedStates \u03c3\u2080 ks' vs' has type   SemanticStore P of sort `Type` but is expected to have type   UpdateState ?m.126 ?",
+      "kind": "positional_update_some",
+      "ok": false,
+      "tokens": 208
+    },
+    {
+      "error": "Invalid projection: Projections cannot be used on functions   ih Hinit ?m.228 ?m.229 has type   isNotDefined \u03c3\u2081 ks' \u2192     updatedStates \u03c3\u2080 ks' vs' = updatedStat",
+      "kind": "lift_hnd_pre",
+      "ok": false,
+      "tokens": 209
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Id",
+      "kind": "ih_drop_at_star",
+      "ok": false,
+      "tokens": 210
+    },
+    {
+      "error": "No goals to be solved",
+      "kind": "merge_none_simp",
+      "ok": false,
+      "tokens": 211
+    },
+    {
+      "error": "",
+      "kind": "anon_hdef",
+      "ok": true,
+      "tokens": 211
+    },
+    {
+      "error": "",
+      "kind": "ih_simp_all_defined+anon_hdef",
+      "ok": true,
+      "tokens": 207
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

@@ -1,0 +1,609 @@
+{
+  "arena_score": null,
+  "called_docker0": true,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T16:30:16.966622+00:00",
+  "official_track2": false,
+  "pr": "PR-9f",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": false,
+      "called_docker0": true,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2789.82370000449
+        },
+        {
+          "errors": [
+            {
+              "data": "Case tag `update_some` not found.\n\nNote: There are no cases to select.",
+              "pos": {
+                "column": 2,
+                "line": 945
+              }
+            },
+            {
+              "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' vs' \u03c3'' \u2192\n      updatedStates \u03c3'",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_0",
+          "module_exit_0": false,
+          "n_chars": 460,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n",
+          "theorem_ok": false,
+          "token_count": 95,
+          "wall_ms": 2593.9482219982892
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "beam": 1,
+        "called_docker0": true,
+        "called_hosted_mistral": false,
+        "finals": [
+          {
+            "steps": [
+              "  case update_none =>",
+              "simp_all",
+              "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')",
+              "constructor",
+              "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "have Hlen1 := InitStatesLength Hinit",
+              "have Hlen2 := UpdateStatesLength Hup",
+              "have Hnd := InitStatesNotDefined Hinit",
+              "omega",
+              "refine \u27e8rfl, ?_, ?_\u27e9",
+              "STOP"
+            ],
+            "stopped": true,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n  simp_all\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n  constructor\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  have Hnd := InitStatesNotDefined Hinit\n  omega\n  refine \u27e8rfl, ?_, ?_\u27e9"
+          }
+        ],
+        "hardware_class": "spark_gb10",
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 12,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 966,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 2,
+              "fixture": false,
+              "input_tokens": 1191,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 5e-05
+            },
+            {
+              "call_index": 3,
+              "fixture": false,
+              "input_tokens": 1004,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 4,
+              "fixture": false,
+              "input_tokens": 1448,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 108,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 6.1e-05
+            },
+            {
+              "call_index": 5,
+              "fixture": false,
+              "input_tokens": 1221,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 75,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 5.1e-05
+            },
+            {
+              "call_index": 6,
+              "fixture": false,
+              "input_tokens": 1251,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 75,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 5.3e-05
+            },
+            {
+              "call_index": 7,
+              "fixture": false,
+              "input_tokens": 1162,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 59,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.9e-05
+            },
+            {
+              "call_index": 8,
+              "fixture": false,
+              "input_tokens": 1132,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 51,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.8e-05
+            },
+            {
+              "call_index": 9,
+              "fixture": false,
+              "input_tokens": 1101,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 43,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.6e-05
+            },
+            {
+              "call_index": 10,
+              "fixture": false,
+              "input_tokens": 1071,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.5e-05
+            },
+            {
+              "call_index": 11,
+              "fixture": false,
+              "input_tokens": 1102,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.6e-05
+            },
+            {
+              "call_index": 12,
+              "fixture": false,
+              "input_tokens": 1130,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.7e-05
+            }
+          ],
+          "max_grok_calls": 0,
+          "max_jev_calls": 24,
+          "max_mistral_calls": 0,
+          "mistral_calls": 0,
+          "name": "Core.InitsUpdatesComm#constrained-beam-local",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 2.999421,
+          "skipped": false,
+          "spent_usd": 0.000579,
+          "track": "track1_closed"
+        },
+        "local_calls": 12,
+        "max_steps": 12,
+        "mode": "greedy",
+        "official_track2": false,
+        "pca_mca": {
+          "earliest_unfinished": "update_none",
+          "empty_arms": [],
+          "mca_holes": [
+            {
+              "family": "loop_invariant",
+              "head": "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "id": "MCA_0"
+            },
+            {
+              "family": "loop_invariant",
+              "head": "have Hlen1 := InitStatesLength Hinit",
+              "id": "MCA_1"
+            },
+            {
+              "family": "loop_invariant",
+              "head": "have Hlen2 := UpdateStatesLength Hup",
+              "id": "MCA_2"
+            },
+            {
+              "family": "loop_invariant",
+              "head": "have Hnd := InitStatesNotDefined Hinit",
+              "id": "MCA_3"
+            }
+          ],
+          "missing_cases": [
+            "update_none",
+            "update_some"
+          ],
+          "n_cases": 2,
+          "n_have": 4,
+          "n_induction": 1,
+          "n_tokens_ref": 268,
+          "open_case": null,
+          "pca_case_tags": [
+            "update_none",
+            "update_some"
+          ],
+          "pca_prefix": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''",
+          "pca_skeleton_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  <<<MCA_0 family=loop_invariant>>>\n  <<<MCA_1 family=loop_invariant>>>\n  <<<MCA_2 family=loop_invariant>>>\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n        "
+        },
+        "pca_prefix": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''",
+        "temperature": 0.9,
+        "trace": [
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_none",
+              "update_some"
+            ],
+            "open_case": null,
+            "prefix_lines": 3,
+            "proposals": [
+              "  case update_none =>",
+              "STOP"
+            ],
+            "step": 0,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "  case update_none =>",
+              "confidence": 0.6,
+              "kept": [
+                "  case update_none =>"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [
+              "update_none"
+            ],
+            "missing_cases": [
+              "update_some"
+            ],
+            "open_case": "update_none",
+            "prefix_lines": 4,
+            "proposals": [
+              "simp_all",
+              "    apply And.intro",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNotDefined Hinit",
+              "    exact InitStatesNodup Hinit",
+              "    simp [InitStatesUpdated Hinit]",
+              "    constructor",
+              "STOP"
+            ],
+            "step": 1,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "simp_all",
+              "confidence": 0.69,
+              "kept": [
+                "simp_all"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "open_case": "update_none",
+            "prefix_lines": 5,
+            "proposals": [
+              "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "STOP"
+            ],
+            "step": 2,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "confidence": 0.93,
+              "kept": [
+                "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [
+              "update_some"
+            ],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 6,
+            "proposals": [
+              "    refine \u27e8rfl, ?_, ?_\u27e9",
+              "    . apply updatedStatesInit Hlen1",
+              "      apply UpdateStateNotDefMonotone' ?_ Hup",
+              "      apply UpdateStatesNotDefMonotone' ?_ Hups",
+              "      exact InitStatesNotDefined Hinit",
+              "      exact InitStatesNodup Hinit",
+              "    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')",
+              "      . simp [UpdateStateUpdated Hup, updatedStates]",
+              "        rw [\u2190 updatedStateComm']",
+              "        . have Hdef := UpdateStateDefined' Hup",
+              "STOP"
+            ],
+            "step": 3,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')",
+              "confidence": 0.26,
+              "kept": [
+                "    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 7,
+            "proposals": [
+              "constructor",
+              "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "have Hlen1 := InitStatesLength Hinit",
+              "have Hlen2 := UpdateStatesLength Hup",
+              "have Hnd := InitStatesNotDefined Hinit",
+              "omega",
+              "constructor",
+              "STOP"
+            ],
+            "step": 4,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "constructor",
+              "confidence": 0.22,
+              "kept": [
+                "constructor"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 8,
+            "proposals": [
+              "refine \u27e8rfl, ?_, ?_\u27e9",
+              "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "have Hlen1 := InitStatesLength Hinit",
+              "have Hlen2 := UpdateStatesLength Hup",
+              "have Hnd := InitStatesNotDefined Hinit",
+              "omega",
+              "STOP"
+            ],
+            "step": 5,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "confidence": 0.26,
+              "kept": [
+                "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 9,
+            "proposals": [
+              "STOP",
+              "have Hlen1 := InitStatesLength Hinit",
+              "have Hlen2 := UpdateStatesLength Hup",
+              "have Hnd := InitStatesNotDefined Hinit",
+              "omega"
+            ],
+            "step": 6,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "have Hlen1 := InitStatesLength Hinit",
+              "confidence": 0.29,
+              "kept": [
+                "have Hlen1 := InitStatesLength Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 10,
+            "proposals": [
+              "STOP",
+              "have Hlen2 := UpdateStatesLength Hup",
+              "have Hnd := InitStatesNotDefined Hinit",
+              "omega"
+            ],
+            "step": 7,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "have Hlen2 := UpdateStatesLength Hup",
+              "confidence": 0.56,
+              "kept": [
+                "have Hlen2 := UpdateStatesLength Hup"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 11,
+            "proposals": [
+              "STOP",
+              "have Hnd := InitStatesNotDefined Hinit",
+              "omega"
+            ],
+            "step": 8,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "have Hnd := InitStatesNotDefined Hinit",
+              "confidence": 0.44,
+              "kept": [
+                "have Hnd := InitStatesNotDefined Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 12,
+            "proposals": [
+              "STOP",
+              "omega"
+            ],
+            "step": 9,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "omega",
+              "confidence": 0.12,
+              "kept": [
+                "omega"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 13,
+            "proposals": [
+              "refine \u27e8rfl, ?_, ?_\u27e9",
+              "STOP"
+            ],
+            "step": 10,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "refine \u27e8rfl, ?_, ?_\u27e9",
+              "confidence": 0.57,
+              "kept": [
+                "refine \u27e8rfl, ?_, ?_\u27e9"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": null,
+            "empty_arms": [],
+            "missing_cases": [],
+            "open_case": "update_some",
+            "prefix_lines": 14,
+            "proposals": [
+              "Lean 4 tactic syntax is strict: every command must be valid Lean 4, and every expression must",
+              "STOP"
+            ],
+            "step": 11,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "STOP",
+              "confidence": 0.32,
+              "kept": [
+                "STOP"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          }
+        ],
+        "vocab_n": 43
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-constrained-beam-local/v1",
+  "wall_ms": 46994.55176200718
+}

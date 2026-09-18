@@ -1,0 +1,34 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 252
+  },
+  "called_docker0": false,
+  "from_tokens": 252,
+  "observed_at": "2026-09-17T19:15:58.945799+00:00",
+  "official_track2": false,
+  "rows": [
+    {
+      "error": "invalid occurrence of `\u00b7` notation, it must be surrounded by parentheses (e.g. `(\u00b7 + 1)`)",
+      "kind": "fill_refine_init",
+      "ok": false,
+      "tokens": 247
+    },
+    {
+      "error": "",
+      "kind": "fold_none_ctor",
+      "ok": true,
+      "tokens": 256
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : Semantic",
+      "kind": "drop_last_simp_all",
+      "ok": false,
+      "tokens": 250
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

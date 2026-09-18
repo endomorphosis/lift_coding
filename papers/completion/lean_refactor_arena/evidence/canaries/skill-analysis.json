@@ -1,0 +1,386 @@
+{
+  "gaps": [
+    {
+      "compose_plan": [
+        "hoist_repeated_simp",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "semi_assumption",
+        "use_exact",
+        "use_exact_reuse",
+        "trim_intro_names",
+        "unused_intros",
+        "ctor_pair_exacts",
+        "redundant_inner_simp",
+        "trailing_tuple_comma",
+        "drop_try_simp_all",
+        "drop_unfold_before_split",
+        "exact_hyp"
+      ],
+      "failed_stems": [],
+      "keep_constructor": true,
+      "keep_intro": true,
+      "keep_structure": [],
+      "name": "Core.InitsUpdatesComm",
+      "proposed": {
+        "help": 0.18,
+        "keep_structure": false,
+        "residual": "intro_then_simp_all",
+        "unsafe": 0.43
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.2,
+          "residual": "ctor_lone",
+          "unsafe": 0.48
+        },
+        {
+          "do_not_cut": false,
+          "help": 0.18,
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.43
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.13,
+          "residual": "have",
+          "unsafe": 0.64
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "trim_intro_names",
+        "hoist_repeated_simp",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "semi_assumption",
+        "use_exact",
+        "use_exact_reuse",
+        "unused_intros",
+        "ctor_pair_exacts",
+        "redundant_inner_simp",
+        "trailing_tuple_comma",
+        "drop_try_simp_all",
+        "drop_unfold_before_split",
+        "exact_hyp"
+      ],
+      "failed_stems": [
+        "drop_intro_before_simp_all",
+        "hoist_repeated_simp",
+        "port_drop_intro_before_simp_all",
+        "port_hoist_repeated_simp",
+        "port_semi_assumption",
+        "port_shorten_hasvars_getvars",
+        "port_shorten_list_subset_app",
+        "port_shorten_list_subset_trans",
+        "port_shorten_llexpr_getvars",
+        "semi_assumption",
+        "shorten_hasvars_getvars",
+        "shorten_list_subset_app",
+        "shorten_list_subset_trans",
+        "shorten_llexpr_getvars"
+      ],
+      "keep_constructor": false,
+      "keep_intro": true,
+      "keep_structure": [],
+      "name": "CallElimCorrect.substOldPostSubset",
+      "proposed": {
+        "help": 0.5,
+        "keep_structure": false,
+        "residual": "repeated_simp_list",
+        "unsafe": 0.36
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 1.15,
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.56
+        },
+        {
+          "do_not_cut": false,
+          "help": 0.5,
+          "residual": "repeated_simp_list",
+          "unsafe": 0.36
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.41,
+          "residual": "apply_semi_assumption",
+          "unsafe": 0.56
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.26,
+          "residual": "intros_x_Hin",
+          "unsafe": 0.67
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "hoist_repeated_simp",
+        "trim_intro_names",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "semi_assumption",
+        "use_exact",
+        "use_exact_reuse",
+        "unused_intros",
+        "ctor_pair_exacts",
+        "redundant_inner_simp",
+        "trailing_tuple_comma",
+        "drop_try_simp_all",
+        "drop_unfold_before_split",
+        "exact_hyp"
+      ],
+      "failed_stems": [
+        "drop_intro_before_simp_all",
+        "drop_unfold_before_split",
+        "port_drop_intro_before_simp_all",
+        "port_drop_unfold_before_split",
+        "port_shorten_hasvars_getvars",
+        "port_shorten_list_subset_app",
+        "port_shorten_list_subset_trans",
+        "port_shorten_llexpr_getvars",
+        "shorten_hasvars_getvars",
+        "shorten_list_subset_app",
+        "shorten_list_subset_trans",
+        "shorten_llexpr_getvars"
+      ],
+      "keep_constructor": true,
+      "keep_intro": true,
+      "keep_structure": [],
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "proposed": {
+        "help": 0.08,
+        "keep_structure": false,
+        "residual": "ctor_lone",
+        "unsafe": 0.34
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.63,
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.59
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.33,
+          "residual": "apply_seq_assumption",
+          "unsafe": 0.58
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.15,
+          "residual": "intros_x_Hin",
+          "unsafe": 0.48
+        },
+        {
+          "do_not_cut": false,
+          "help": 0.08,
+          "residual": "ctor_lone",
+          "unsafe": 0.34
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "hoist_repeated_simp",
+        "trim_intro_names",
+        "semi_assumption",
+        "use_exact",
+        "use_exact_reuse",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "unused_intros",
+        "ctor_pair_exacts",
+        "redundant_inner_simp",
+        "trailing_tuple_comma",
+        "drop_try_simp_all",
+        "drop_unfold_before_split",
+        "exact_hyp"
+      ],
+      "failed_stems": [
+        "port_use_exact_reuse",
+        "use_exact_reuse"
+      ],
+      "keep_constructor": false,
+      "keep_intro": false,
+      "keep_structure": [],
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "proposed": {
+        "help": 0.28,
+        "keep_structure": false,
+        "residual": "grind",
+        "unsafe": 0.37
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.31,
+          "residual": "use_then_exact",
+          "unsafe": 0.73
+        },
+        {
+          "do_not_cut": false,
+          "help": 0.28,
+          "residual": "grind",
+          "unsafe": 0.37
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "hoist_repeated_simp",
+        "trim_intro_names",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "semi_assumption",
+        "ctor_pair_exacts",
+        "use_exact",
+        "use_exact_reuse",
+        "unused_intros",
+        "redundant_inner_simp",
+        "trailing_tuple_comma",
+        "drop_try_simp_all",
+        "drop_unfold_before_split",
+        "exact_hyp"
+      ],
+      "failed_stems": [
+        "port_trim_intro_names",
+        "trim_intro_names"
+      ],
+      "keep_constructor": true,
+      "keep_intro": false,
+      "keep_structure": [],
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "proposed": {},
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.41,
+          "residual": "ctor_lone",
+          "unsafe": 0.46
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.33,
+          "residual": "apply_seq_assumption",
+          "unsafe": 0.58
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "hoist_repeated_simp",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "trim_intro_names",
+        "semi_assumption",
+        "use_exact",
+        "use_exact_reuse",
+        "unused_intros",
+        "ctor_pair_exacts",
+        "redundant_inner_simp",
+        "trailing_tuple_comma",
+        "drop_try_simp_all",
+        "drop_unfold_before_split",
+        "exact_hyp"
+      ],
+      "failed_stems": [],
+      "keep_constructor": true,
+      "keep_intro": false,
+      "keep_structure": [],
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "proposed": {},
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.67,
+          "residual": "grind",
+          "unsafe": 0.57
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.23,
+          "residual": "have",
+          "unsafe": 0.51
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.1,
+          "residual": "ctor_lone",
+          "unsafe": 0.51
+        }
+      ]
+    }
+  ],
+  "nca_status": {
+    "board_window": [
+      {
+        "energy": 0.4946217574819578,
+        "id": "LRA-G000",
+        "kind": "goal"
+      },
+      {
+        "energy": 0.5866516317135192,
+        "id": "Core.InitsUpdatesComm",
+        "kind": "theorem",
+        "remaining_cut": 132,
+        "tokens": 139
+      },
+      {
+        "energy": 0.5843545350389906,
+        "id": "CallElimCorrect.substOldPostSubset",
+        "kind": "theorem",
+        "remaining_cut": 93,
+        "tokens": 392
+      },
+      {
+        "energy": 0.5753718569338104,
+        "id": "CallElimCorrect.extractedOldExprInVars",
+        "kind": "theorem",
+        "remaining_cut": 65,
+        "tokens": 260
+      },
+      {
+        "blocked": false,
+        "energy": 0.5600873833331,
+        "id": "LRA-S05",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5365376779988555,
+        "id": "LRA-S04",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5078408156900556,
+        "id": "LRA-S06",
+        "kind": "subgoal"
+      },
+      {
+        "blocked": false,
+        "energy": 0.5034588545000002,
+        "id": "LRA-S08",
+        "kind": "subgoal"
+      }
+    ],
+    "budget_dead": false,
+    "budget_energy": 0.995122,
+    "called_docker0": false,
+    "halt": false,
+    "last_ran": [],
+    "n_edges": 179,
+    "n_hot_tasks": 2,
+    "n_issues": 0,
+    "n_pending_ops": 0
+  },
+  "schema": "lra-skill-analysis/v1"
+}

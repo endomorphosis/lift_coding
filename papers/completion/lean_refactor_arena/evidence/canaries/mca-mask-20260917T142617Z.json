@@ -1,0 +1,352 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "grok_few_shot": true,
+  "observed_at": "2026-09-17T14:26:17.061804+00:00",
+  "pr": "PR-9d",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": false,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2362.450483982684
+        },
+        {
+          "errors": [
+            {
+              "data": "Unknown identifier `Hlen1`",
+              "pos": {
+                "column": 29,
+                "line": 947
+              }
+            },
+            {
+              "data": "Unknown identifier `Hlen1`",
+              "pos": {
+                "column": 30,
+                "line": 954
+              }
+            },
+            {
+              "data": "simp_all made no progress",
+              "pos": {
+                "column": 12,
+                "line": 969
+              }
+            },
+            {
+              "data": "Unknown identifier `Hnd`",
+              "pos": {
+                "column": 21,
+                "line": 979
+              }
+            },
+            {
+              "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+              "pos": {
+                "column": 10,
+                "line": 979
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 981
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 1517,
+          "n_holes": 4,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitState",
+          "theorem_ok": false,
+          "token_count": 237,
+          "wall_ms": 2344.584673992358
+        },
+        {
+          "errors": [
+            {
+              "data": "unknown tactic",
+              "pos": {
+                "column": 3,
+                "line": 940
+              }
+            },
+            {
+              "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            },
+            {
+              "data": "unexpected token ','; expected identifier",
+              "pos": {
+                "column": 25,
+                "line": 940
+              }
+            },
+            {
+              "data": "unexpected token 'then'; expected ':'",
+              "pos": {
+                "column": 27,
+                "line": 940
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "grok-4.6",
+          "kind": "grok_few_shot",
+          "module_exit_0": false,
+          "n_chars": 372,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  I'll locate the theorem, then shrink the tactic block by dropping MCA residuals while keeping the induction and every case arm.I'll inspect the original proof, MCA hole tags, and any prior lake-valid shrinks so I know which residuals are ",
+          "theorem_ok": false,
+          "token_count": 77,
+          "wall_ms": 2201.150053006131
+        },
+        {
+          "errors": [
+            {
+              "data": "unknown tactic",
+              "pos": {
+                "column": 3,
+                "line": 941
+              }
+            },
+            {
+              "data": "unexpected token ','; expected identifier",
+              "pos": {
+                "column": 25,
+                "line": 941
+              }
+            },
+            {
+              "data": "unexpected token 'then'; expected ':'",
+              "pos": {
+                "column": 27,
+                "line": 941
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "grok+simp_all/omega",
+          "kind": "grok_few_shot_hammer1",
+          "module_exit_0": false,
+          "n_chars": 442,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  induction Hup generalizing \u03c3''\n  I'll locate the theorem, then shrink the tactic block by dropping MCA residuals while keeping the induction and every case arm.I'll inspect the original proof, MCA hole tags, and any prior lake-valid shrin",
+          "theorem_ok": false,
+          "token_count": 87,
+          "wall_ms": 2004.5904330036137
+        },
+        {
+          "errors": [
+            {
+              "data": "unknown tactic",
+              "pos": {
+                "column": 3,
+                "line": 940
+              }
+            },
+            {
+              "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            },
+            {
+              "data": "unexpected token '-'; expected ':'",
+              "pos": {
+                "column": 72,
+                "line": 940
+              }
+            },
+            {
+              "data": "unexpected identifier; expected 'binder_predicate', 'builtin_dsimproc', 'builtin_simproc', 'dsimproc', 'elab', 'elab_rules', 'grind_pattern', 'infix', 'infixl', 'infixr', 'instance', 'macro', 'macro_rules', 'notation', 'postfix', 'prefix', 'simproc', 'syntax' or 'unif_hint'",
+              "pos": {
+                "column": 167,
+                "line": 940
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "grok-4.6",
+          "kind": "grok_few_shot_repair",
+          "module_exit_0": false,
+          "n_chars": 292,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  I'll locate the theorem and the original proof so I can restore a lake-valid tactic block.The original proof is in the LRA warmup JSONL; I\u2019ll pull that and any local Lean source next.I\u2019ll extract the full original `src` proof from the war",
+          "theorem_ok": false,
+          "token_count": 65,
+          "wall_ms": 2105.1139629853424
+        },
+        {
+          "errors": [
+            {
+              "data": "unknown tactic",
+              "pos": {
+                "column": 3,
+                "line": 941
+              }
+            },
+            {
+              "data": "unexpected token '-'; expected ':'",
+              "pos": {
+                "column": 72,
+                "line": 941
+              }
+            },
+            {
+              "data": "unexpected identifier; expected 'binder_predicate', 'builtin_dsimproc', 'builtin_simproc', 'dsimproc', 'elab', 'elab_rules', 'grind_pattern', 'infix', 'infixl', 'infixr', 'instance', 'macro', 'macro_rules', 'notation', 'postfix', 'prefix', 'simproc', 'syntax' or 'unif_hint'",
+              "pos": {
+                "column": 167,
+                "line": 941
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "grok+simp_all/omega",
+          "kind": "grok_few_shot_repair_hammer1",
+          "module_exit_0": false,
+          "n_chars": 362,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  induction Hup generalizing \u03c3''\n  I'll locate the theorem and the original proof so I can restore a lake-valid tactic block.The original proof is in the LRA warmup JSONL; I\u2019ll pull that and any local Lean source next.I\u2019ll extract the full ",
+          "theorem_ok": false,
+          "token_count": 75,
+          "wall_ms": 2152.6377060217783
+        }
+      ],
+      "grok_few_shot": true,
+      "grok_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "requested_model": "grok-4.6",
+        "requested_provider": "grok",
+        "resolved_model": "grok-4.6",
+        "resolved_provider": "grok_cli"
+      },
+      "grok_ok": false,
+      "grok_skip_reason": null,
+      "hardware_class": "grok_cli",
+      "holes": [
+        {
+          "end": 110,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "  ",
+          "original": "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+          "start": 54
+        },
+        {
+          "end": 149,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "  ",
+          "original": "  have Hlen1 := InitStatesLength Hinit",
+          "start": 111
+        },
+        {
+          "end": 188,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "  ",
+          "original": "  have Hlen2 := UpdateStatesLength Hup",
+          "start": 150
+        },
+        {
+          "end": 1457,
+          "family": "loop_invariant",
+          "hole_id": "MCA_3",
+          "indent": "          ",
+          "original": "          have Hnd := InitStatesNotDefined Hinit",
+          "start": 1409
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "leanstral_identity": null,
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 2,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 2343,
+            "kind": "grok",
+            "model": "grok-4.6",
+            "output_tokens": 93,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.008424
+          },
+          {
+            "call_index": 2,
+            "fixture": false,
+            "input_tokens": 656,
+            "kind": "grok",
+            "model": "grok-4.6",
+            "output_tokens": 73,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.003063
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 0,
+        "name": "Core.InitsUpdatesComm#grok-few-shot",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 2.988513,
+        "skipped": false,
+        "spent_usd": 0.011487,
+        "track": "track1_closed"
+      },
+      "n_holes": 4,
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  <<<MCA_0 family=loop_invariant>>>\n  <<<MCA_1 family=loop_invariant>>>\n  <<<MCA_2 family=loop_invariant>>>\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, upd",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mca-mask-replace-batch/v1",
+  "wall_ms": 104741.26909999177
+}
