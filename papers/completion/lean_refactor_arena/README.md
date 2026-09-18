@@ -37,7 +37,8 @@ Template: `neurips_2026_vericode_competition.sty` (competition track, not the re
 | Path | Role |
 | --- | --- |
 | `typesafe_nca.md` | TypeSafe NCA architecture for agents and harness engineers |
-| `harness/nca_rankers.py` | Random forest, Bayes-over-time, generalized MCMC ranking skills |
+| `harness/nca_rankers.py` | RF, Thompson, plus dispatch to integer milles rankers |
+| `harness/nca_int_rankers.py` | SVD, PCA, ridge, OLS, logistic, k-means, kNN, ICA, NMF, Kalman, Bayes, MCMC (no float64) |
 | `data/benchmark_data_warmup.jsonl` | Frozen organizer warm-up |
 | `data/warmup_summary.json` | Machine-readable census |
 | `tools/summarize_warmup.py` | Hash check + table + receipt |

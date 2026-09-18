@@ -562,11 +562,16 @@ A new skill is a **keep-structure fold**, not a one-off string and not a Jev-wri
 7. **Tests.** Add a case to `test_random_canary.py` that: (a) shortens a fixture, (b) preserves the keep-word/`<;>`/`at *` invariant, (c) no-ops the unsafe parent. Do **not** persist memory (`persist_memory=False` after PR-NCA-3 actually inhibits writes; until then, do not call `run_loop`/`run_live`/`save_memory` against live `MEMORY_DEFAULT`).
 8. **Do not** add a skill that calls docker0, writes `control.duckdb`, or treats Jev text as Lean.
 
-Ranking skills (not Lean folds) live in `nca_rankers.py` and are CALLed as `ptr://skill/port_{random_forest,bayes_time,mcmc}`:
+Ranking skills (not Lean folds) live in `nca_rankers.py` and are CALLed as `ptr://skill/port_{random_forest,bayes_time,mcmc,svd,pca,thompson,ridge}`:
 
 - **Random forest** — tiny CART forest on lake successes/failures. Ranks leftover drafts; writes `nca.pipeline_bias`. Needs ≥4 labeled rows.
 - **Bayes over time** — Beta-Bernoulli `α,β` with forget `0.98` on each live `observe_bayes`. `sync_bayes_from_memory` rebuilds conjugate counts. Posterior mean is energy, not a lake admit.
 - **Generalized MCMC** — Metropolis-Hastings over any state (`propose`, `energy`, optional hard `accept`). Default NCA skill permutes pipeline order; energy is `1 − Bayes mean`. Tactic MH still needs lake to admit.
+- **Grid SVD (`port_svd`)** — truncated SVD of the **theorem × skill** lake matrix (win +1, fail −1). Recommends skills for a theorem from neighbors. This is **not** proof-AST PCA.
+- **PCA CALL (`port_pca`)** — runs existing `pca_mca_fanout.fit_pca_mca` (`np.linalg.svd` on tactic counts) and writes family cells. Do not mint a second AST SVD.
+- **Thompson (`port_thompson`)** — sample `Beta(α,β)` so a high-variance stem still gets a lake try.
+- **Ridge (`port_ridge`)** — integer milles ridge; companion to the forest on small n.
+- **Integer milles suite (`nca_int_rankers.py`)** — SVD, PCA, OLS, logistic, k-means, kNN, ICA, NMF, Kalman, Bayes, MCMC. Scores are `0..1000` milles. No float64 in the hot path. Kalman is 1-D `(x,P,Q,R)` ints. PCA CALL uses tactic-count integers + power-iteration SVD, not `np.linalg.svd`.
 
 `pipeline_order` key:
 
