@@ -1,0 +1,101 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5741.996955999639,
+      "error": null,
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": true,
+      "n_chars": 2406,
+      "ok": false,
+      "sorryAx": true,
+      "stderr_tail": "",
+      "stdout_tail": "eName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":171},\"severity\":\"warning\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3283},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3283},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n ",
+      "token_count": 482,
+      "wall_ms": 5741.35348998243
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5806.834949005861,
+      "error": null,
+      "exit_code": 1,
+      "generator": "labs-leanstral-1-5",
+      "kind": "hosted_mistral",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2403,
+      "ok": false,
+      "sorryAx": true,
+      "stderr_tail": "",
+      "stdout_tail": "Name\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":2,\"line\":3095},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3282},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3282},\"severity\":\"warning\"}\n",
+      "tactics_head": "induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    ",
+      "token_count": 482,
+      "wall_ms": 5806.261213001562
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Strata/Transform/CallElimCorrect.lean"
+      ],
+      "compile_wall_ms_outer": 5831.332741014194,
+      "error": null,
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "fanout_collapse_simp_at",
+      "lean_tag": "v4.26.0",
+      "module_exit_0": false,
+      "n_chars": 2338,
+      "ok": false,
+      "sorryAx": true,
+      "stderr_tail": "",
+      "stdout_tail": "ame\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":4,\"line\":3105},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"declaration uses 'sorry'\",\"endPos\":{\"column\":32,\"line\":3279},\"fileName\":\"Strata/Transform/CallElimCorrect.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"hasSorry\",\"pos\":{\"column\":8,\"line\":3279},\"severity\":\"warning\"}\n",
+      "tactics_head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n    simp_all\n  case const =>\n    intros x Hin\n    ren",
+      "token_count": 466,
+      "wall_ms": 5830.642634013202
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/strata-org/Strata",
+  "file_path": "Strata/Transform/CallElimCorrect.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "papers/completion/lean_refactor_arena/evidence/canaries/track1-mistral-latest.json",
+  "kept": {
+    "kind": "reference",
+    "ok": false,
+    "token_count": 482
+  },
+  "n_valid": 0,
+  "name": "CallElimCorrect.substOldPostSubset",
+  "observed_at": "2026-09-17T05:12:40.235351+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

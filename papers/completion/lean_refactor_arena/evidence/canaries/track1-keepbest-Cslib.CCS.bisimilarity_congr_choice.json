@@ -1,0 +1,282 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "compile_wall_ms_outer": 3136.6764010163024,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": true,
+      "n_chars": 1603,
+      "ok": true,
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": null,
+      "tactics_head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 := hbisim\n      cases",
+      "theorem_ok": true,
+      "theorem_span": [
+        311,
+        372
+      ],
+      "token_count": 296,
+      "wall_ms": 3136.01037702756
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "compile_wall_ms_outer": 2993.0482000054326,
+      "error": null,
+      "errors": [
+        {
+          "data": "Function expected at\n  IsBisimulation.le_bisimilarity hb s1' s2' hr2\nbut this term has type\n  s1' ~[lts,lts] s2'\n\nNote: Expected a function because this term is being applied to the argument\n  case",
+          "pos": {
+            "column": 12,
+            "line": 345
+          }
+        },
+        {
+          "data": "unsolved goals\ncase right.right\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r\u271d : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\nr : ChoiceBisim s1 s2\n\u03bc : Act Name\n\u22a2 \u2200 (s\u2082' : Process Name Constant), lts.Tr s2 \u03bc s\u2082' \u2192 \u2203 s\u2081', lts.Tr s1 \u03bc s\u2081' \u2227 ChoiceBisim s\u2081' s\u2082'",
+          "pos": {
+            "column": 85,
+            "line": 312
+          }
+        },
+        {
+          "data": "unexpected token '=>'; expected command",
+          "pos": {
+            "column": 51,
+            "line": 345
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d000_left",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1602,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "left"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "uralTheory.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":85,\"line\":312},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected token '=>'; expected command\",\"endPos\":{\"column\":53,\"line\":345},\"fileName\":\"Cslib/Languages/CCS/BehaviouralTheory.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":51,\"line\":345},\"severity\":\"error\"}\n",
+      "tactics_head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 := hbisim\n      cases",
+      "theorem_ok": false,
+      "theorem_span": [
+        311,
+        371
+      ],
+      "token_count": 296,
+      "wall_ms": 2992.2819659987
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "compile_wall_ms_outer": 2920.6490429933183,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `s2'`",
+          "pos": {
+            "column": 15,
+            "line": 325
+          }
+        },
+        {
+          "data": "Unknown identifier `htr2`",
+          "pos": {
+            "column": 27,
+            "line": 327
+          }
+        },
+        {
+          "data": "Unknown identifier `hb.le_bisimilarity`",
+          "pos": {
+            "column": 16,
+            "line": 329
+          }
+        },
+        {
+          "data": "Unknown identifier `s2'`",
+          "pos": {
+            "column": 13,
+            "line": 337
+          }
+        },
+        {
+          "data": "Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\n\u03bc : Act Name\ns1' : Process Name Constant\nhtr : lts.Tr s1 \u03bc s1'\nhbisim : s1 ~[lts] s2\n\u22a2 lts.Tr s2 \u03bc sorry",
+          "pos": {
+            "column": 8,
+            "line": 339
+          }
+        },
+        {
+          "data": "Unknown identifier `hb.le_bisimilarity`",
+          "pos": {
+            "column": 12,
+            "line": 341
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d001_left",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1418,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "left"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": true,
+      "stderr_tail": "",
+      "stdout_tail": "uralTheory.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":85,\"line\":312},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected token '=>'; expected command\",\"endPos\":{\"column\":53,\"line\":341},\"fileName\":\"Cslib/Languages/CCS/BehaviouralTheory.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":51,\"line\":341},\"severity\":\"error\"}\n",
+      "tactics_head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      cases htr\n      case choiceL a b c htr =>\n",
+      "theorem_ok": false,
+      "theorem_span": [
+        311,
+        367
+      ],
+      "token_count": 244,
+      "wall_ms": 2920.0392259808723
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CCS/BehaviouralTheory.lean"
+      ],
+      "compile_wall_ms_outer": 3040.8998350030743,
+      "error": null,
+      "errors": [
+        {
+          "data": "Unknown identifier `s1'`",
+          "pos": {
+            "column": 15,
+            "line": 352
+          }
+        },
+        {
+          "data": "Unknown identifier `htr1`",
+          "pos": {
+            "column": 27,
+            "line": 354
+          }
+        },
+        {
+          "data": "Unknown identifier `hb.le_bisimilarity`",
+          "pos": {
+            "column": 16,
+            "line": 356
+          }
+        },
+        {
+          "data": "Unknown identifier `s1'`",
+          "pos": {
+            "column": 13,
+            "line": 364
+          }
+        },
+        {
+          "data": "Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\n\u03bc : Act Name\ns2' : Process Name Constant\nhtr : lts.Tr s2 \u03bc s2'\nhbisim : s1 ~[lts] s2\n\u22a2 lts.Tr s1 \u03bc sorry",
+          "pos": {
+            "column": 8,
+            "line": 366
+          }
+        },
+        {
+          "data": "Unknown identifier `hb.le_bisimilarity`",
+          "pos": {
+            "column": 14,
+            "line": 368
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d002_right",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1419,
+      "ok": false,
+      "ops": [
+        "drop_have_obtain",
+        "case",
+        "right"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": true,
+      "stderr_tail": "",
+      "stdout_tail": "n\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":8,\"line\":366},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"Unknown identifier `hb.le_bisimilarity`\",\"endPos\":{\"column\":32,\"line\":368},\"fileName\":\"Cslib/Languages/CCS/BehaviouralTheory.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"lean.unknownIdentifier._namedError\",\"pos\":{\"column\":14,\"line\":368},\"severity\":\"error\"}\n",
+      "tactics_head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 := hbisim\n      cases",
+      "theorem_ok": false,
+      "theorem_span": [
+        311,
+        368
+      ],
+      "token_count": 244,
+      "wall_ms": 3040.2430270041805
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/leanprover/cslib",
+  "file_path": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "None",
+  "kept": {
+    "kind": "reference",
+    "module_exit_0": true,
+    "ok": true,
+    "theorem_ok": true,
+    "token_count": 296
+  },
+  "n_module_exit_0": 1,
+  "n_valid": 1,
+  "name": "Cslib.CCS.bisimilarity_congr_choice",
+  "observed_at": "2026-09-17T05:41:13.632769+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "repaired": false,
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

@@ -1,0 +1,1029 @@
+{
+  "arena_score": null,
+  "canaries": [
+    {
+      "algebraic_simplification_safe": 0.62,
+      "amenable": [
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_rw",
+            "n_calc",
+            "n_omega"
+          ],
+          "mca_score": 0.5969071866910487,
+          "present": {
+            "n_calc": 1.0,
+            "n_omega": 1.0,
+            "n_rw": 13.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_rw"
+          ],
+          "mca_score": 0.5099325752692713,
+          "present": {
+            "n_rw": 13.0
+          }
+        },
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro"
+          ],
+          "mca_score": 0.31544787165147514,
+          "present": {
+            "n_apply": 6.0,
+            "n_intro": 3.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have",
+            "n_obtain"
+          ],
+          "mca_score": 0.17032431634522327,
+          "present": {
+            "n_have": 28.0,
+            "n_obtain": 1.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have"
+          ],
+          "mca_score": 0.10322082776864364,
+          "present": {
+            "n_have": 28.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "algebraic_simplification",
+      "best_confidence": 0.12,
+      "best_first_draft": "d003",
+      "dead_code_safe": 0.54,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003"
+      ],
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "search_space",
+        "dead_code",
+        "loop_invariant"
+      ],
+      "features": {
+        "max_indent": 14.0,
+        "n_apply": 6.0,
+        "n_blank": 15.0,
+        "n_calc": 1.0,
+        "n_cases": 0.0,
+        "n_exact": 12.0,
+        "n_have": 28.0,
+        "n_induction": 0.0,
+        "n_intro": 3.0,
+        "n_linarith": 0.0,
+        "n_lines": 203.0,
+        "n_obtain": 1.0,
+        "n_omega": 1.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 13.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 2800.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\nr : \u2115\ninst\u271d\u2079 : NeZero r\nL : Type\ninst\u271d\u2078 : Field L\ninst\u271d\u2077 : Fintype L\ninst\u271d\u2076 : DecidableEq L\n\ud835\udd3dq : Type\ninst\u271d\u2075 : Field \ud835\udd3dq\ninst\u271d\u2074 : Fintype \ud835\udd3dq\ninst\u271d\u00b3 : DecidableEq \ud835\udd3dq\nh_Fq_char_prime : Fact (Nat.Prime (ringChar \ud835\udd3dq))\nhF\u2082 : Fact (Fintype.card \ud835\udd3dq = 2)\ninst\u271d\u00b2 : Algebra \ud835\udd3dq L\n\u03b2 : Fin r \u2192 L\nh\u03b2_lin_indep : Fact (LinearIndependent \ud835\udd3dq \u03b2)\nh_\u03b2\u2080_eq_1 : Fact (\u03b2 0 = 1)\n\u2113 \ud835\udce1 : \u2115\ninst\u271d\u00b9 : NeZero \ud835\udce1\nh_\u2113_a",
+                "pos": {
+                  "column": 74,
+                  "line": 1270
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d003",
+            "ops": [
+              "keep_calc",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 625
+          },
+          {
+            "errors": [
+              {
+                "data": "Invalid argument name `a` for function `BBF_CodeDistance`\n\nHint: Perhaps you meant one of the following parameter names:\n  \u2022 `\u2113`: a\u0335\u2113\u0332\n  \u2022 `\ud835\udce1`: a\u0335\ud835\udce1\u0332\n  \u2022 `i`: a\u0335i\u0332",
+                "pos": {
+                  "column": 33,
+                  "line": 1281
+                }
+              },
+              {
+                "data": "Unknown identifier `g'`",
+                "pos": {
+                  "column": 61,
+                  "line": 1290
+                }
+              },
+              {
+                "data": "unsolved goals\nr : \u2115\ninst\u271d\u2079 : NeZero r\nL : Type\ninst\u271d\u2078 : Field L\ninst\u271d\u2077 : Fintype L\ninst\u271d\u2076 : DecidableEq L\n\ud835\udd3dq : Type\ninst\u271d\u2075 : Field \ud835\udd3dq\ninst\u271d\u2074 : Fintype \ud835\udd3dq\ninst\u271d\u00b3 : DecidableEq \ud835\udd3dq\nh_Fq_char_prime : Fact (Nat.Prime (ringChar \ud835\udd3dq))\nhF\u2082 : Fact (Fintype.card \ud835\udd3dq = 2)\ninst\u271d\u00b2 : Algebra \ud835\udd3dq L\n\u03b2 : Fin r \u2192 L\nh\u03b2_lin_indep : Fact (LinearIndependent \ud835\udd3dq \u03b2)\nh_\u03b2\u2080_eq_1 : Fact (\u03b2 0 = 1)\n\u2113 \ud835\udce1 : \u2115\ninst\u271d\u00b9 : NeZero \ud835\udce1\nh_\u2113_a",
+                "pos": {
+                  "column": 74,
+                  "line": 1270
+                }
+              },
+              {
+                "data": "unexpected token ':='; expected command",
+                "pos": {
+                  "column": 71,
+                  "line": 1290
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d001",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 2360
+          },
+          {
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `LE.le.trans (card_le_card h_\u0394H_subset_bad_fiber_points)`\n  #\u0394H \u2264 ?m.829\nwith the goal\n  \u2191(#\u0394H) \u2264 Y_bad.encard * 2 ^ steps\n\nNote: The full type of `LE.le.trans (card_le_card h_\u0394H_subset_bad_fiber_points)` is\n  #(Y_bad.toFinset.biUnion fun y => (qMap_total_fiber \ud835\udd3dq \u03b2 \u27e8\u2191i, \u22ef\u27e9 steps \u22ef y '' \u2191univ).toFinset) \u2264 ?m.829 \u2192 #\u0394H \u2264 ?m.829\n\nr : \u2115\ninst\u271d\u2079 ",
+                "pos": {
+                  "column": 4,
+                  "line": 1381
+                }
+              },
+              {
+                "data": "Tactic `apply` failed: could not unify the type of `lt_of_le_pred h_d_i_gt_0 h_final_inequality`\n  (2 : \u2115) * \u0394\u2080(f, \u2191C_i).toNat < d_i\nwith the goal\n  (2 : \u2115\u221e) * \u2191\u0394\u2080(f, \u2191C_i).toNat < \u2191(BBF_CodeDistance \u2113 \ud835\udce1 \u27e8\u2191i, \u22ef\u27e9)\n\nr : \u2115\ninst\u271d\u2079 : NeZero r\nL : Type\ninst\u271d\u2078 : Field L\ninst\u271d\u2077 : Fintype L\ninst\u271d\u2076 : DecidableEq L\n\ud835\udd3dq : Type\ninst\u271d\u2075 : Field \ud835\udd3dq\ninst\u271d\u2074 : Fintype \ud835\udd3dq\ninst\u271d\u00b3 : DecidableEq \ud835\udd3dq\nh_Fq_char_prime : Fact",
+                "pos": {
+                  "column": 2,
+                  "line": 1472
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d002",
+            "ops": [
+              "collapse_rw_to_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 2800
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 2800
+          }
+        ]
+      },
+      "likely_token_cut": 1.77,
+      "live": true,
+      "loop_invariant_safe": 0.34,
+      "model": "jev-1.13.0",
+      "n_drafts": 4,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "search_space_safe": 0.69,
+      "source": "arklib",
+      "strength_reduction_safe": 0.53,
+      "top": [
+        {
+          "family": "algebraic_simplification",
+          "head": "  unfold fiberwiseClose at h_fw_dist_lt\n  unfold hammingClose\n  -- 2 * \u0394\u2080(f, \u2191(BBF_Code \ud835\udd3dq \u03b2 \u27e8\u2191i, \u22ef\u27e9)) < \u2191(BBF_CodeDistance \u2113 \ud835\udce1 \u27e8\u2191i, \u22ef\u27e9)\n  let d_fw := fiberwiseDistance \ud835\udd3dq \u03b2 (i := i) steps h_i_add_steps f\n  let C_i := (B",
+          "id": "d003",
+          "n_chars": 2321,
+          "ops": [
+            "keep_calc",
+            "mca"
+          ],
+          "probability": 0.35000000000000003
+        },
+        {
+          "family": "dead_code",
+          "head": "  unfold fiberwiseClose at h_fw_dist_lt\n  unfold hammingClose\n  -- 2 * \u0394\u2080(f, \u2191(BBF_Code \ud835\udd3dq \u03b2 \u27e8\u2191i, \u22ef\u27e9)) < \u2191(BBF_CodeDistance \u2113 \ud835\udce1 \u27e8\u2191i, \u22ef\u27e9)\n  let d_fw := fiberwiseDistance \ud835\udd3dq \u03b2 (i := i) steps h_i_add_steps f\n  let C_i := (B",
+          "id": "d001",
+          "n_chars": 9109,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.33
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "  unfold fiberwiseClose at h_fw_dist_lt\n  unfold hammingClose\n  -- 2 * \u0394\u2080(f, \u2191(BBF_Code \ud835\udd3dq \u03b2 \u27e8\u2191i, \u22ef\u27e9)) < \u2191(BBF_CodeDistance \u2113 \ud835\udce1 \u27e8\u2191i, \u22ef\u27e9)\n  let d_fw := fiberwiseDistance \ud835\udd3dq \u03b2 (i := i) steps h_i_add_steps f\n  let C_i := (B",
+          "id": "d002",
+          "n_chars": 10950,
+          "ops": [
+            "collapse_rw_to_simp",
+            "mca"
+          ],
+          "probability": 0.29
+        },
+        {
+          "family": "reference",
+          "head": "  unfold fiberwiseClose at h_fw_dist_lt\n  unfold hammingClose\n  -- 2 * \u0394\u2080(f, \u2191(BBF_Code \ud835\udd3dq \u03b2 \u27e8\u2191i, \u22ef\u27e9)) < \u2191(BBF_CodeDistance \u2113 \ud835\udce1 \u27e8\u2191i, \u22ef\u27e9)\n  let d_fw := fiberwiseDistance \ud835\udd3dq \u03b2 (i := i) steps h_i_add_steps f\n  let C_i := (B",
+          "id": "d000",
+          "n_chars": 10944,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.03
+        }
+      ],
+      "usage": {
+        "input_tokens": 5111,
+        "output_tokens": 262
+      },
+      "wall_ms": 229.1026950115338
+    },
+    {
+      "algebraic_simplification_safe": 0.69,
+      "amenable": [
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_rw",
+            "n_calc",
+            "n_omega"
+          ],
+          "mca_score": 1.6727198498406775,
+          "present": {
+            "n_calc": 1.0,
+            "n_omega": 4.0,
+            "n_rw": 24.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_rw"
+          ],
+          "mca_score": 1.5115858481196258,
+          "present": {
+            "n_rw": 24.0
+          }
+        },
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro"
+          ],
+          "mca_score": 0.4224946404736164,
+          "present": {
+            "n_apply": 5.0,
+            "n_intro": 2.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have"
+          ],
+          "mca_score": 0.08742172147752471,
+          "present": {
+            "n_have": 27.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have"
+          ],
+          "mca_score": 0.08742172147752471,
+          "present": {
+            "n_have": 27.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "algebraic_simplification",
+      "best_confidence": 0.17,
+      "best_first_draft": "d001",
+      "dead_code_safe": 0.53,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003"
+      ],
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "search_space",
+        "dead_code",
+        "loop_invariant"
+      ],
+      "features": {
+        "max_indent": 10.0,
+        "n_apply": 5.0,
+        "n_blank": 1.0,
+        "n_calc": 1.0,
+        "n_cases": 0.0,
+        "n_exact": 0.0,
+        "n_have": 27.0,
+        "n_induction": 0.0,
+        "n_intro": 2.0,
+        "n_linarith": 0.0,
+        "n_lines": 160.0,
+        "n_obtain": 0.0,
+        "n_omega": 4.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 24.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 2618.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "unexpected identifier; expected '\u27e9', '\u27e9c' or '\u27e9\u2097'",
+                "pos": {
+                  "column": 49,
+                  "line": 852
+                }
+              },
+              {
+                "data": "Application type mismatch: The argument\n  \u27e8\u2191j * 2,?m.621\u27e9c\nhas type\n  PFunctor.Chart ?m.611 (PFunctor.tensor ?m.612 ?m.613)\nbut is expected to have type\n  Fin (2 ^ (\u2113 - \u2191i))\nin the application\n  coeffs \u27e8\u2191j * 2,?m.621\u27e9c",
+                "pos": {
+                  "column": 27,
+                  "line": 847
+                }
+              },
+              {
+                "data": "failed to synthesize instance of type class\n  HMul \u2115 \u2115 (PFunctor.Chart ?m.611 ?m.612)\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.",
+                "pos": {
+                  "column": 28,
+                  "line": 847
+                }
+              },
+              {
+                "data": "invalid `arg` conv tactic, application or implication expected\n  ?m.613",
+                "pos": {
+                  "column": 26,
+                  "line": 848
+                }
+              },
+              {
+                "data": "unsolved goals\nr : \u2115\ninst\u271d\u2078 : NeZero r\nL : Type\ninst\u271d\u2077 : Field L\ninst\u271d\u2076 : Fintype L\ninst\u271d\u2075 : DecidableEq L\n\ud835\udd3dq : Type\ninst\u271d\u2074 : Field \ud835\udd3dq\ninst\u271d\u00b3 : Fintype \ud835\udd3dq\ninst\u271d\u00b2 : DecidableEq \ud835\udd3dq\nh_Fq_char_prime : Fact (Nat.Prime (ringChar \ud835\udd3dq))\nhF\u2082 : Fact (Fintype.card \ud835\udd3dq = 2)\ninst\u271d\u00b9 : Algebra \ud835\udd3dq L\n\u03b2 : Fin r \u2192 L\nh\u03b2_lin_indep : Fact (LinearIndependent \ud835\udd3dq \u03b2)\nh_\u03b2\u2080_eq_1 : Fact (\u03b2 0 = 1)\n\u2113 \ud835\udce1 : \u2115\ninst\u271d : NeZero \ud835\udce1\nh_\u2113_ad",
+                "pos": {
+                  "column": 62,
+                  "line": 838
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d001",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 2012
+          },
+          {
+            "errors": [
+              {
+                "data": "`simp` made no progress",
+                "pos": {
+                  "column": 4,
+                  "line": 886
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d002",
+            "ops": [
+              "collapse_rw_to_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 2614
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\nr : \u2115\ninst\u271d\u2078 : NeZero r\nL : Type\ninst\u271d\u2077 : Field L\ninst\u271d\u2076 : Fintype L\ninst\u271d\u2075 : DecidableEq L\n\ud835\udd3dq : Type\ninst\u271d\u2074 : Field \ud835\udd3dq\ninst\u271d\u00b3 : Fintype \ud835\udd3dq\ninst\u271d\u00b2 : DecidableEq \ud835\udd3dq\nh_Fq_char_prime : Fact (Nat.Prime (ringChar \ud835\udd3dq))\nhF\u2082 : Fact (Fintype.card \ud835\udd3dq = 2)\ninst\u271d\u00b9 : Algebra \ud835\udd3dq L\n\u03b2 : Fin r \u2192 L\nh\u03b2_lin_indep : Fact (LinearIndependent \ud835\udd3dq \u03b2)\nh_\u03b2\u2080_eq_1 : Fact (\u03b2 0 = 1)\n\u2113 \ud835\udce1 : \u2115\ninst\u271d : NeZero \ud835\udce1\nh_\u2113_ad",
+                "pos": {
+                  "column": 62,
+                  "line": 838
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d003",
+            "ops": [
+              "keep_calc",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 576
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 2618
+          }
+        ]
+      },
+      "likely_token_cut": 1.84,
+      "live": true,
+      "loop_invariant_safe": 0.37,
+      "model": "jev-1.13.0",
+      "n_drafts": 4,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "search_space_safe": 0.69,
+      "source": "arklib",
+      "strength_reduction_safe": 0.54,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  simp only\n  intro y\n  set fiberMap := qMap_total_fiber \ud835\udd3dq \u03b2 (i := \u27e8i, by omega\u27e9) (steps := 1)\n    (h_i_add_steps := by simp only; omega) (y := y)\n  set x\u2080 := fiberMap 0\n  set x\u2081 := fiberMap 1\n  set P_i := intermediateE",
+          "id": "d001",
+          "n_chars": 6796,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.38
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "  simp only\n  intro y\n  set fiberMap := qMap_total_fiber \ud835\udd3dq \u03b2 (i := \u27e8i, by omega\u27e9) (steps := 1)\n    (h_i_add_steps := by simp only; omega) (y := y)\n  set x\u2080 := fiberMap 0\n  set x\u2081 := fiberMap 1\n  set P_i := intermediateE",
+          "id": "d002",
+          "n_chars": 8561,
+          "ops": [
+            "collapse_rw_to_simp",
+            "mca"
+          ],
+          "probability": 0.35
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "  simp only\n  intro y\n  set fiberMap := qMap_total_fiber \ud835\udd3dq \u03b2 (i := \u27e8i, by omega\u27e9) (steps := 1)\n    (h_i_add_steps := by simp only; omega) (y := y)\n  set x\u2080 := fiberMap 0\n  set x\u2081 := fiberMap 1\n  set P_i := intermediateE",
+          "id": "d003",
+          "n_chars": 1946,
+          "ops": [
+            "keep_calc",
+            "mca"
+          ],
+          "probability": 0.23
+        },
+        {
+          "family": "reference",
+          "head": "  simp only\n  intro y\n  set fiberMap := qMap_total_fiber \ud835\udd3dq \u03b2 (i := \u27e8i, by omega\u27e9) (steps := 1)\n    (h_i_add_steps := by simp only; omega) (y := y)\n  set x\u2080 := fiberMap 0\n  set x\u2081 := fiberMap 1\n  set P_i := intermediateE",
+          "id": "d000",
+          "n_chars": 8573,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.04
+        }
+      ],
+      "usage": {
+        "input_tokens": 5048,
+        "output_tokens": 262
+      },
+      "wall_ms": 228.25210701557808
+    },
+    {
+      "algebraic_simplification_safe": 0.48,
+      "amenable": [
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have",
+            "n_induction"
+          ],
+          "mca_score": 0.4876642150782409,
+          "present": {
+            "n_have": 18.0,
+            "n_induction": 1.0
+          }
+        },
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro"
+          ],
+          "mca_score": 0.25200192831947565,
+          "present": {
+            "n_apply": 4.0,
+            "n_intro": 7.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have"
+          ],
+          "mca_score": 0.054770235142545566,
+          "present": {
+            "n_have": 18.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_rw"
+          ],
+          "mca_score": 0.03642375537637656,
+          "present": {
+            "n_rw": 7.0
+          }
+        },
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_rw"
+          ],
+          "mca_score": 0.03642375537637656,
+          "present": {
+            "n_rw": 7.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "loop_invariant",
+      "best_confidence": 0.82,
+      "best_first_draft": "d001",
+      "dead_code_safe": 0.48,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002"
+      ],
+      "families": [
+        "loop_invariant",
+        "search_space",
+        "dead_code",
+        "strength_reduction",
+        "algebraic_simplification"
+      ],
+      "features": {
+        "max_indent": 16.0,
+        "n_apply": 4.0,
+        "n_blank": 2.0,
+        "n_calc": 0.0,
+        "n_cases": 0.0,
+        "n_exact": 6.0,
+        "n_have": 18.0,
+        "n_induction": 1.0,
+        "n_intro": 7.0,
+        "n_linarith": 0.0,
+        "n_lines": 169.0,
+        "n_obtain": 0.0,
+        "n_omega": 0.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 7.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 2454.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `h_correlated_agreement`",
+                "pos": {
+                  "column": 55,
+                  "line": 1234
+                }
+              },
+              {
+                "data": "Alternative `succ` has not been provided",
+                "pos": {
+                  "column": 6,
+                  "line": 1222
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 10,
+                  "line": 1235
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d001",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 2226
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 2454
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\n\u03b9 : Type l\ninst\u271d\u2077 : Fintype \u03b9\ninst\u271d\u2076 : Nonempty \u03b9\ninst\u271d\u2075 : DecidableEq \u03b9\nF : Type\ninst\u271d\u2074 : CommRing F\ninst\u271d\u00b3 : Fintype F\nA : Type\ninst\u271d\u00b2 : DecidableEq A\ninst\u271d\u00b9 : AddCommGroup A\ninst\u271d : Module F A\nMC : ModuleCode \u03b9 F A\ne \u03b5 : \u2115\nhC_proximityGapAffineLines : e_\u03b5_correlatedAgreementAffineLinesNat (\u2191MC) e \u03b5\nh_interleaved_gaps : \u2200 m \u2265 1, e_\u03b5_correlatedAgreementAffineLinesNat (\u2191(CodeInterle",
+                "pos": {
+                  "column": 55,
+                  "line": 1214
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 0,
+                  "line": 1215
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d002",
+            "ops": [
+              "induction_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 6
+          }
+        ]
+      },
+      "likely_token_cut": 1.0,
+      "live": true,
+      "loop_invariant_safe": 0.34,
+      "model": "jev-1.13.0",
+      "n_drafts": 3,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "search_space_safe": 0.71,
+      "source": "arklib",
+      "strength_reduction_safe": 0.54,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "    classical\n    intro \u03d1\n    induction \u03d1 with\n    | zero =>\n      intro u\n      contradiction\n    | succ \u03d1_sub_1 ih =>\n      cases \u03d1_sub_1 with\n      | zero =>\n        -- `\u03d1 = 1`\n        simp only [zero_add, gt_iff_lt, ",
+          "id": "d001",
+          "n_chars": 8668,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.88
+        },
+        {
+          "family": "reference",
+          "head": "    classical\n    intro \u03d1\n    induction \u03d1 with\n    | zero =>\n      intro u\n      contradiction\n    | succ \u03d1_sub_1 ih =>\n      cases \u03d1_sub_1 with\n      | zero =>\n        -- `\u03d1 = 1`\n        simp only [zero_add, gt_iff_lt, ",
+          "id": "d000",
+          "n_chars": 9744,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.07
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "induction \u03d1 <;> simp",
+          "id": "d002",
+          "n_chars": 20,
+          "ops": [
+            "induction_simp",
+            "mca"
+          ],
+          "probability": 0.05
+        }
+      ],
+      "usage": {
+        "input_tokens": 4688,
+        "output_tokens": 248
+      },
+      "wall_ms": 307.78036601259373
+    }
+  ],
+  "jev_generated_lean": false,
+  "lock_ex": false,
+  "observed_at": "2026-09-17T06:26:31.652977+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.4049405265687185,
+      0.20535547758361236,
+      0.11807994165651019,
+      0.07890666288267674,
+      0.05463727730428802,
+      0.04287295106587582,
+      0.031123637276978183,
+      0.019718565406560976,
+      0.01675492790373655,
+      0.012685473566352095,
+      0.00706393426205075,
+      0.004410320950069326,
+      0.0020881727554508097,
+      0.0013621308171197733,
+      1.1712855335003803e-33
+    ],
+    "feature_names": [
+      "n_cases",
+      "n_simp_at",
+      "n_simp_all",
+      "n_have",
+      "n_obtain",
+      "n_rename_i",
+      "n_induction",
+      "n_calc",
+      "n_exact",
+      "n_apply",
+      "n_rw",
+      "n_intro",
+      "n_ring",
+      "n_omega",
+      "n_linarith",
+      "n_tokens",
+      "n_lines",
+      "max_indent",
+      "n_blank"
+    ],
+    "mean": [
+      3.066666666666667,
+      1.0,
+      5.6,
+      21.466666666666665,
+      1.8,
+      0.5333333333333333,
+      0.4,
+      0.8666666666666667,
+      6.266666666666667,
+      5.533333333333333,
+      7.4,
+      5.733333333333333,
+      0.3333333333333333,
+      1.3333333333333333,
+      0.4666666666666667,
+      1631.4,
+      136.53333333333333,
+      13.333333333333334,
+      6.733333333333333
+    ],
+    "minor": [
+      {
+        "explained": 0.0020881727554508097,
+        "index": 12,
+        "loadings": {
+          "max_indent": -0.04885996426842456,
+          "n_apply": -0.18395556485260292,
+          "n_blank": 0.2616247028690958,
+          "n_calc": 0.1337264606042146,
+          "n_cases": 0.10664524913723084,
+          "n_exact": 0.020319313146787688,
+          "n_have": 0.02731632177119504,
+          "n_induction": 0.18945482027611893,
+          "n_intro": -0.4658015301803848,
+          "n_linarith": 0.18354337783793592,
+          "n_lines": 0.1674978449783974,
+          "n_obtain": 0.0390353016584911,
+          "n_omega": -0.01445259679616556,
+          "n_rename_i": 0.5727102207089121,
+          "n_ring": -0.2702393878645738,
+          "n_rw": 0.13716288554887357,
+          "n_simp_all": 0.14466831683441092,
+          "n_simp_at": -0.3198591148191455,
+          "n_tokens": -0.07410300328518059
+        }
+      },
+      {
+        "explained": 0.0013621308171197733,
+        "index": 13,
+        "loadings": {
+          "max_indent": 0.20532775145209983,
+          "n_apply": 0.16745590665455354,
+          "n_blank": 0.03827022493177878,
+          "n_calc": 0.4936584383410768,
+          "n_cases": 0.10542322925882158,
+          "n_exact": -0.2742239222199627,
+          "n_have": 0.35596393535866994,
+          "n_induction": 0.10215424535624705,
+          "n_intro": 0.028418144116426552,
+          "n_linarith": 0.1573464579784092,
+          "n_lines": -0.3538656329793766,
+          "n_obtain": -0.05703458675096095,
+          "n_omega": -0.07556932589587298,
+          "n_rename_i": -0.08733084039816595,
+          "n_ring": -0.3886387006523932,
+          "n_rw": 0.1464602776398848,
+          "n_simp_all": -0.2798493060427773,
+          "n_simp_at": 0.19978343918398905,
+          "n_tokens": -0.05550408149844495
+        }
+      },
+      {
+        "explained": 1.1712855335003803e-33,
+        "index": 14,
+        "loadings": {
+          "max_indent": 0.2479546000932821,
+          "n_apply": 0.0004747468094202069,
+          "n_blank": 0.16147514700171928,
+          "n_calc": -0.4964718335756315,
+          "n_cases": 0.05422836552155171,
+          "n_exact": 0.3109867101141589,
+          "n_have": 0.039823886599956414,
+          "n_induction": 0.06184738888932502,
+          "n_intro": 0.06580695241109172,
+          "n_linarith": 0.06657475309606603,
+          "n_lines": -0.5790092531601415,
+          "n_obtain": 0.13557487907193003,
+          "n_omega": 0.014855292846514746,
+          "n_rename_i": 0.16266582844018548,
+          "n_ring": 0.028346421859113673,
+          "n_rw": 0.39029834176625905,
+          "n_simp_all": -0.047179604869883075,
+          "n_simp_at": 0.0028941229086360187,
+          "n_tokens": 0.12825296004146405
+        }
+      }
+    ],
+    "n_features": 19,
+    "n_rows": 15,
+    "principal": [
+      {
+        "explained": 0.4049405265687185,
+        "index": 0,
+        "loadings": {
+          "max_indent": -0.26472716990802214,
+          "n_apply": 0.08062031373487605,
+          "n_blank": -0.3342438149027209,
+          "n_calc": -0.30073104239355397,
+          "n_cases": 0.22151097089138239,
+          "n_exact": -0.3223738861331306,
+          "n_have": -0.3229177802571527,
+          "n_induction": 0.1554714491780493,
+          "n_intro": -0.13949676587126572,
+          "n_linarith": -0.20355777263126,
+          "n_lines": -0.3316410647395201,
+          "n_obtain": 0.062338763096317515,
+          "n_omega": -0.061922673049083964,
+          "n_rename_i": 0.13191459411652012,
+          "n_ring": -0.2672920525771413,
+          "n_rw": -0.22982013977927257,
+          "n_simp_all": -0.07536010342633125,
+          "n_simp_at": 0.04284608346238592,
+          "n_tokens": -0.3347272419706519
+        }
+      },
+      {
+        "explained": 0.20535547758361236,
+        "index": 1,
+        "loadings": {
+          "max_indent": -0.06706052042749339,
+          "n_apply": 0.36282153292900254,
+          "n_blank": 0.07900790623226846,
+          "n_calc": 0.00732574445822508,
+          "n_cases": 0.08213121073929346,
+          "n_exact": 0.0890744176504485,
+          "n_have": 0.09814013760069844,
+          "n_induction": 0.23333800300355814,
+          "n_intro": 0.4285562020935429,
+          "n_linarith": 0.12753460879015457,
+          "n_lines": 0.06821325256409895,
+          "n_obtain": -0.07282631204263976,
+          "n_omega": 0.04122201675455599,
+          "n_rename_i": 0.42201549830897633,
+          "n_ring": 0.01269643546740824,
+          "n_rw": -0.18336605348962032,
+          "n_simp_all": 0.4340686253001083,
+          "n_simp_at": 0.4021982800631532,
+          "n_tokens": -0.071886864791934
+        }
+      },
+      {
+        "explained": 0.11807994165651019,
+        "index": 2,
+        "loadings": {
+          "max_indent": 0.0449532598571709,
+          "n_apply": -0.32352345885736516,
+          "n_blank": -0.0790536781896265,
+          "n_calc": -0.29693086963826953,
+          "n_cases": -0.1557294182565143,
+          "n_exact": -0.11989011770530777,
+          "n_have": 0.22881988237237064,
+          "n_induction": 0.08284743145871368,
+          "n_intro": 0.013422379827145477,
+          "n_linarith": 0.3730469553318964,
+          "n_lines": 0.13660004981656942,
+          "n_obtain": 0.3480550337682801,
+          "n_omega": 0.4556395923134139,
+          "n_rename_i": -0.19677983957993858,
+          "n_ring": -0.32586905836287494,
+          "n_rw": -0.17302750912548906,
+          "n_simp_all": 0.08422132896669182,
+          "n_simp_at": 0.1787978850106652,
+          "n_tokens": -0.01949180374786194
+        }
+      }
+    ],
+    "singular_values": [
+      10.742813880547532,
+      7.650249088188534,
+      5.80110191016374,
+      4.742193471544878,
+      3.9460897140995264,
+      3.4955387358423886,
+      2.9782942473736167,
+      2.3706098668633513,
+      2.1852126790234663,
+      1.9014099942964289,
+      1.4188802855366138,
+      1.1211340110663655,
+      0.7714461972836995,
+      0.623062824183192,
+      5.777684458739576e-16
+    ],
+    "std": [
+      4.479087208597553,
+      2.160246899469287,
+      6.008882314263333,
+      26.780258068626264,
+      2.7616420236277306,
+      1.407914138796191,
+      0.4898979485566357,
+      1.9618585292749549,
+      8.751888685052819,
+      4.379751388175157,
+      7.400900846068223,
+      5.507167047483568,
+      1.0110500592068734,
+      3.2998316455372216,
+      0.8844332774281066,
+      1198.7467233184275,
+      72.81562713837982,
+      4.237399621885522,
+      11.715896133980628
+    ]
+  },
+  "pr": "PR-9c",
+  "protocol": "LRA/v1",
+  "schema": "lra-pca-mca-fanout/v1",
+  "typesafe_key_in_receipt": false,
+  "wall_ms": 774.7208049986511,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

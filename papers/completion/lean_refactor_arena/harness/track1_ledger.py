@@ -16,6 +16,8 @@ import ast
 import hashlib
 import json
 import os
+import shutil
+import subprocess
 import sys
 import tempfile
 import time
@@ -62,6 +64,11 @@ GROK_INPUT_USD_PER_MTOK = Decimal("3.00")
 GROK_OUTPUT_USD_PER_MTOK = Decimal("15.00")
 MAX_GROK_CALLS = 2  # 1 draft + 1 Lean-feedback repair, then stop
 MAX_JEV_CALLS = 2  # at most two TypeSafe fan-outs per problem
+MAX_MISTRAL_CALLS = 2  # hosted Labs Leanstral: 1 draft + 1 repair, then stop
+# Labs preview lists hosted Leanstral 1.5 as free (Sep 2026). Still log tokens.
+MISTRAL_INPUT_USD_PER_MTOK = Decimal("0")
+MISTRAL_OUTPUT_USD_PER_MTOK = Decimal("0")
+MISTRAL_MODEL_ID = "labs-leanstral-1-5"
 USD_QUANT = Decimal("0.000001")
 FAIL_CLOSED_KWARGS: dict[str, Any] = {
     "provider": "grok",
@@ -71,6 +78,15 @@ FAIL_CLOSED_KWARGS: dict[str, Any] = {
     "allow_cross_provider_fallback": False,
     "disable_model_retry": True,
 }
+# Isolated leader so a nested grok CLI does not attach to this TUI session.
+DEFAULT_GROK_LEADER_SOCKET = str(Path.home() / ".grok" / "leader-lra-track1.sock")
+DEFAULT_GROK_CLI_MAX_TURNS = 4
+DEFAULT_GROK_FILE_MAX_TURNS = 8
+GROK_TACTICS_FILENAME = "tactics.lean"
+GROK_FILE_STUB = "-- REPLACE_THIS_FILE\n"
+GROK_FILE_TOOLS = "write_file"
+GROK_FILE_DISALLOWED = "run_terminal_cmd,web_search,web_fetch,Agent,read_file,list_dir,grep,search_replace"
+GROK_FILE_WORK_ROOT = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file"
 DEFAULT_MAX_NEW_TOKENS = lra_gt.DEFAULT_MAX_NEW_TOKENS
 DEFAULT_TIMEOUT_SECONDS = lra_gt.DEFAULT_TIMEOUT_SECONDS
 PUTNAM_MAX_NEW_TOKENS = lra_gt.PUTNAM_MAX_NEW_TOKENS
@@ -175,6 +191,11 @@ def usd_for(kind: str, input_tokens: int, output_tokens: int) -> Decimal:
             (Decimal(inn) / million) * GROK_INPUT_USD_PER_MTOK
             + (Decimal(out) / million) * GROK_OUTPUT_USD_PER_MTOK
         )
+    if kind_key == "mistral":
+        return _money(
+            (Decimal(inn) / million) * MISTRAL_INPUT_USD_PER_MTOK
+            + (Decimal(out) / million) * MISTRAL_OUTPUT_USD_PER_MTOK
+        )
     raise Track1LedgerError(f"unknown spend kind {kind!r}")
 
 
@@ -193,6 +214,29 @@ def official_track2_requested(
 def grok_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
     source = os.environ if env is None else env
     return any(str(source.get(name) or "").strip() for name in GROK_KEY_ENV_NAMES)
+
+
+def grok_cli_auth_configured(env: Optional[Mapping[str, str]] = None) -> bool:
+    """True when ``~/.grok/auth.json`` (or ``$GROK_HOME/auth.json``) exists.
+
+    Track 1 ``generate_grok`` may resolve ``provider=grok`` to ``grok_cli``
+    when the CLI is on PATH. OAuth in the CLI store is enough; an xAI API
+    key is not required. Does not read the file contents.
+    """
+
+    source = os.environ if env is None else env
+    grok_home = str(source.get("GROK_HOME") or "").strip()
+    auth = (Path(grok_home).expanduser() if grok_home else Path.home() / ".grok") / "auth.json"
+    try:
+        return auth.is_file() and auth.stat().st_size > 0
+    except OSError:
+        return False
+
+
+def grok_callable(env: Optional[Mapping[str, str]] = None) -> bool:
+    """Live grok is callable via XAI_API_KEY *or* grok CLI OAuth."""
+
+    return grok_key_configured(env) or grok_cli_auth_configured(env)
 
 
 def jev_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
@@ -222,7 +266,16 @@ def resolve_track1_mode(
         else:
             generator = str(source.get("LRA_GENERATOR", DEFAULT_GENERATOR) or DEFAULT_GENERATOR)
             generator = generator.strip().lower()
-            if generator in {"grok", "grok-4.6", "xai", "track1"}:
+            if generator in {
+                "grok",
+                "grok-4.6",
+                "xai",
+                "track1",
+                "mistral",
+                "mistral_labs",
+                "labs-leanstral-1-5",
+                "leanstral-1-5",
+            }:
                 raw = "track1"
             else:
                 raw = source.get("LRA_TRACK1_MODE", DEFAULT_MODE)
@@ -272,6 +325,7 @@ class ProblemLedger:
     lines: list[UsageLine] = field(default_factory=list)
     grok_calls: int = 0
     jev_calls: int = 0
+    mistral_calls: int = 0
     hard_stopped: bool = False
     skipped: bool = False
     reason: str = ""
@@ -279,6 +333,9 @@ class ProblemLedger:
     contaminates_track2: bool = False
     track: str = TRACK_LABEL
     arena_score: None = None
+    max_grok_calls: int = MAX_GROK_CALLS
+    max_jev_calls: int = MAX_JEV_CALLS
+    max_mistral_calls: int = MAX_MISTRAL_CALLS
     _spent: Decimal = field(default_factory=lambda: Decimal("0"), repr=False)
 
     def __post_init__(self) -> None:
@@ -298,10 +355,13 @@ class ProblemLedger:
         if self.official_track2:
             return False, "official_track2_off", Decimal("0")
         kind_key = str(kind or "").strip().lower()
-        if kind_key == "grok" and self.grok_calls >= MAX_GROK_CALLS:
+        if kind_key == "grok" and self.grok_calls >= int(self.max_grok_calls):
             self.hard_stopped = True
             return False, "max_grok_calls", Decimal("0")
-        if kind_key == "jev" and self.jev_calls >= MAX_JEV_CALLS:
+        if kind_key == "mistral" and self.mistral_calls >= int(self.max_mistral_calls):
+            self.hard_stopped = True
+            return False, "max_mistral_calls", Decimal("0")
+        if kind_key == "jev" and self.jev_calls >= int(self.max_jev_calls):
             self.hard_stopped = True
             return False, "max_jev_calls", Decimal("0")
         cost = usd_for(kind_key, input_tokens, output_tokens)
@@ -325,9 +385,14 @@ class ProblemLedger:
         if kind_key == "grok":
             default_model = REQUESTED_MODEL
             call_index = self.grok_calls + 1
-        else:
+        elif kind_key == "mistral":
+            default_model = MISTRAL_MODEL_ID
+            call_index = self.mistral_calls + 1
+        elif kind_key == "jev":
             default_model = JEV_MODEL_ID
             call_index = self.jev_calls + 1
+        else:
+            raise Track1LedgerError(f"unknown spend kind {kind_key!r}")
         if not allowed:
             line = UsageLine(
                 kind=kind_key,
@@ -347,8 +412,12 @@ class ProblemLedger:
         self._spent = _money(self._spent + cost)
         if kind_key == "grok":
             self.grok_calls += 1
-        else:
+        elif kind_key == "mistral":
+            self.mistral_calls += 1
+        elif kind_key == "jev":
             self.jev_calls += 1
+        else:
+            raise Track1LedgerError(f"unknown spend kind {kind_key!r}")
         self._refresh()
         line = UsageLine(
             kind=kind_key,
@@ -375,8 +444,10 @@ class ProblemLedger:
             "reason": self.reason,
             "grok_calls": self.grok_calls,
             "jev_calls": self.jev_calls,
-            "max_grok_calls": MAX_GROK_CALLS,
-            "max_jev_calls": MAX_JEV_CALLS,
+            "mistral_calls": self.mistral_calls,
+            "max_grok_calls": int(self.max_grok_calls),
+            "max_jev_calls": int(self.max_jev_calls),
+            "max_mistral_calls": int(self.max_mistral_calls),
             "official_track2": self.official_track2,
             "contaminates_track2": self.contaminates_track2,
             "track": self.track,
@@ -457,6 +528,299 @@ def _load_router():
     from ipfs_accelerate_py.llm_router import get_last_generation_trace
 
     return router_generate_text, get_last_generation_trace
+
+
+def _live_grok_kwargs() -> dict[str, Any]:
+    """Fail-closed grok kwargs plus an isolated grok CLI leader socket.
+
+    This TUI session already owns ``~/.grok/leader.sock``. A nested
+    ``grok --max-turns 1`` that attaches there returns ``max turns reached``
+    without generating. Pin a ``leader-lra-*.sock`` and a small CLI turn
+    budget (not extra Track 1 generate_grok calls).
+    """
+
+    kwargs = dict(FAIL_CLOSED_KWARGS)
+    kwargs["grok_max_turns"] = max(
+        1, int(str(os.environ.get("LRA_GROK_CLI_MAX_TURNS") or DEFAULT_GROK_CLI_MAX_TURNS))
+    )
+    grok_bin = shutil.which("grok")
+    if grok_bin:
+        socket = str(os.environ.get("LRA_GROK_LEADER_SOCKET") or DEFAULT_GROK_LEADER_SOCKET)
+        kwargs["grok_cli_cmd"] = [grok_bin, "--leader-socket", socket]
+    return kwargs
+
+
+def grok_file_prompt(body: str, *, dest_name: str = GROK_TACTICS_FILENAME) -> str:
+    """Instruct grok CLI to write tactics to a file. Chat is not the deliverable."""
+
+    return (
+        f"Your deliverable is the file {dest_name} in the working directory.\n"
+        "Use the write_file tool once to OVERWRITE that file with Lean 4 tactics only.\n"
+        "Do not read other files. Do not search the filesystem. Everything you need is in this prompt.\n"
+        "Do not put the tactics in chat. Chat may be a one-line ack such as wrote tactics.lean.\n"
+        "The file must contain ONLY the tactic block after := by.\n"
+        "No English, no markdown fences, no theorem/lemma/import/open/sorry/admit.\n"
+        "Keep induction and every case arm. Smallest lake-valid proof.\n"
+        f"The file currently contains a stub `{GROK_FILE_STUB.strip()}`. Replace it completely.\n\n"
+        + str(body or "")
+    )
+
+
+def prepare_grok_workspace(*, dest_name: str = GROK_TACTICS_FILENAME) -> Path:
+    GROK_FILE_WORK_ROOT.mkdir(parents=True, exist_ok=True)
+    workspace = Path(tempfile.mkdtemp(prefix="ws-", dir=str(GROK_FILE_WORK_ROOT)))
+    (workspace / dest_name).write_text(GROK_FILE_STUB, encoding="utf-8")
+    return workspace
+
+
+def tactics_file_is_stub(text: str) -> bool:
+    stripped = str(text or "").strip()
+    if not stripped:
+        return True
+    if "REPLACE_THIS_FILE" in stripped and len(stripped.split()) < 12:
+        return True
+    return stripped == GROK_FILE_STUB.strip()
+
+
+def read_grok_tactics_file(
+    workspace: Path,
+    *,
+    dest_name: str = GROK_TACTICS_FILENAME,
+) -> str:
+    """Return tactics from the workspace file. Chat is never consulted."""
+
+    dest = Path(workspace) / dest_name
+    candidates = []
+    if dest.is_file():
+        candidates.append(dest)
+    candidates.extend(sorted(path for path in Path(workspace).glob("*.lean") if path not in candidates))
+    for path in candidates:
+        raw = path.read_text(encoding="utf-8")
+        lines = [line for line in raw.splitlines() if "REPLACE_THIS_FILE" not in line]
+        body = "\n".join(lines).strip()
+        if body and not tactics_file_is_stub(body):
+            return body + "\n"
+    raise Track1LedgerError(f"grok did not write a tactics file under {workspace}")
+
+
+def build_grok_file_command(
+    workspace: Path,
+    prompt_path: Path,
+    *,
+    dest_name: str = GROK_TACTICS_FILENAME,
+) -> list[str]:
+    grok_bin = shutil.which("grok")
+    if not grok_bin:
+        raise Track1LedgerError("grok CLI not found on PATH")
+    socket = str(os.environ.get("LRA_GROK_LEADER_SOCKET") or DEFAULT_GROK_LEADER_SOCKET)
+    max_turns = max(
+        2,
+        int(str(os.environ.get("LRA_GROK_CLI_MAX_TURNS") or DEFAULT_GROK_FILE_MAX_TURNS)),
+    )
+    return [
+        grok_bin,
+        "--leader-socket",
+        socket,
+        "--cwd",
+        str(workspace),
+        "--model",
+        REQUESTED_MODEL,
+        "--output-format",
+        "json",
+        "--no-plan",
+        "--no-subagents",
+        "--disable-web-search",
+        "--no-memory",
+        "--verbatim",
+        "--always-approve",
+        "--max-turns",
+        str(max_turns),
+        "--permission-mode",
+        "acceptEdits",
+        "--reasoning-effort",
+        "low",
+        "--tools",
+        GROK_FILE_TOOLS,
+        "--disallowed-tools",
+        GROK_FILE_DISALLOWED,
+        "--allow",
+        f"Write({dest_name})",
+        "--allow",
+        f"Edit({dest_name})",
+        "--deny",
+        "Bash(*)",
+        "--prompt-file",
+        str(prompt_path),
+    ]
+
+
+def _grok_stdout_payload(stdout: str) -> dict[str, Any]:
+    raw = str(stdout or "").strip()
+    if not raw:
+        return {}
+    candidates = [raw, *reversed([line.strip() for line in raw.splitlines() if line.strip()])]
+    for candidate in candidates:
+        if not candidate.startswith("{"):
+            continue
+        try:
+            payload = json.loads(candidate)
+        except (TypeError, ValueError):
+            continue
+        if isinstance(payload, dict):
+            return payload
+    return {}
+
+
+@dataclass(frozen=True)
+class GrokFileResult:
+    tactics: str
+    identity: ProviderIdentity
+    line: UsageLine
+    chat_head: str
+    tactics_path: str
+    workspace: str
+    used_file: bool
+    chat_ignored: bool
+    called_docker0: bool = False
+    arena_score: None = None
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "tactics_path": self.tactics_path,
+            "workspace": self.workspace,
+            "used_file": self.used_file,
+            "chat_ignored": self.chat_ignored,
+            "chat_head": self.chat_head,
+            "n_chars": len(self.tactics),
+            "tactics_head": self.tactics[:240],
+            "called_docker0": self.called_docker0,
+            "identity": asdict(self.identity),
+            "arena_score": self.arena_score,
+        }
+
+
+def generate_grok_file(
+    prompt: str,
+    ledger: ProblemLedger,
+    *,
+    workspace: Path,
+    dest_name: str = GROK_TACTICS_FILENAME,
+    max_new_tokens: int = DEFAULT_MAX_NEW_TOKENS,
+    timeout: float = DEFAULT_TIMEOUT_SECONDS,
+    generate: Optional[Callable[..., str]] = None,
+    fixture: bool = False,
+    reset_stub: bool = False,
+) -> GrokFileResult:
+    """Run grok CLI so it writes ``tactics.lean``. Lake reads that file, not chat."""
+
+    estimated_in = estimate_tokens(prompt)
+    estimated_out = int(max_new_tokens)
+    allowed, reason, _cost = ledger.authorize("grok", estimated_in, estimated_out)
+    if not allowed:
+        line = ledger.record(
+            "grok",
+            input_tokens=estimated_in,
+            output_tokens=estimated_out,
+            fixture=fixture,
+            model=REQUESTED_MODEL,
+        )
+        raise Track1LedgerError(f"grok call refused: {reason}") from None
+
+    workspace = Path(workspace)
+    workspace.mkdir(parents=True, exist_ok=True)
+    dest = workspace / dest_name
+    if reset_stub or not dest.exists():
+        dest.write_text(GROK_FILE_STUB, encoding="utf-8")
+
+    chat = ""
+    if generate is not None:
+        chat = generate(prompt, **FAIL_CLOSED_KWARGS)
+        dest.write_text(str(chat), encoding="utf-8")
+        identity = _identity_from_trace(fixture_trace(), generated=True)
+    else:
+        prompt_path = workspace / "PROMPT.txt"
+        prompt_path.write_text(str(prompt), encoding="utf-8")
+        cmd = build_grok_file_command(workspace, prompt_path, dest_name=dest_name)
+        (workspace / "grok.argv.json").write_text(
+            json.dumps(cmd, indent=2) + "\n", encoding="utf-8"
+        )
+        try:
+            proc = subprocess.run(
+                cmd,
+                text=True,
+                capture_output=True,
+                check=False,
+                timeout=float(timeout),
+                env=os.environ.copy(),
+                cwd=str(workspace),
+            )
+        except subprocess.TimeoutExpired as exc:
+            chat = str(exc.stdout or "")
+            stderr = str(exc.stderr or "")
+            (workspace / "grok.stdout").write_text(chat, encoding="utf-8")
+            (workspace / "grok.stderr").write_text(stderr, encoding="utf-8")
+            (workspace / "grok.returncode").write_text("timeout", encoding="utf-8")
+        except FileNotFoundError as exc:
+            raise Track1LedgerError("grok CLI not found on PATH") from exc
+        else:
+            chat = proc.stdout or ""
+            stderr = proc.stderr or ""
+            (workspace / "grok.stdout").write_text(chat, encoding="utf-8")
+            (workspace / "grok.stderr").write_text(stderr, encoding="utf-8")
+            (workspace / "grok.returncode").write_text(str(proc.returncode), encoding="utf-8")
+            payload = _grok_stdout_payload(chat)
+            if payload.get("text"):
+                chat = str(payload.get("text") or chat)
+        identity = ProviderIdentity(
+            requested_provider=REQUESTED_PROVIDER,
+            requested_model=REQUESTED_MODEL,
+            resolved_provider="grok_cli",
+            resolved_model=REQUESTED_MODEL,
+            fallback_used=False,
+            arena_score=None,
+        )
+
+    try:
+        tactics = read_grok_tactics_file(workspace, dest_name=dest_name)
+    except Track1LedgerError as exc:
+        line = ledger.record(
+            "grok",
+            input_tokens=estimated_in,
+            output_tokens=estimate_tokens(chat) if chat else 1,
+            fixture=fixture,
+            model=identity.resolved_model or REQUESTED_MODEL,
+        )
+        stderr_head = ""
+        err_path = workspace / "grok.stderr"
+        if err_path.is_file():
+            stderr_head = err_path.read_text(encoding="utf-8")[:400]
+        detail = str(exc)
+        if stderr_head:
+            detail = f"{detail}; grok.stderr={stderr_head!r}"
+        raise Track1LedgerError(detail) from exc
+
+    usage_out = estimate_tokens(tactics)
+    line = ledger.record(
+        "grok",
+        input_tokens=estimated_in,
+        output_tokens=usage_out,
+        fixture=fixture,
+        model=identity.resolved_model or REQUESTED_MODEL,
+    )
+    if line.skipped:
+        raise Track1LedgerError(f"grok spend refused after call: {line.reason}")
+    return GrokFileResult(
+        tactics=tactics,
+        identity=identity,
+        line=line,
+        chat_head=str(chat or "")[:240],
+        tactics_path=str(dest),
+        workspace=str(workspace),
+        used_file=True,
+        chat_ignored=True,
+        called_docker0=False,
+        arena_score=None,
+    )
 
 
 def _identity_from_trace(trace: Mapping[str, Any], *, generated: bool) -> ProviderIdentity:
@@ -585,12 +949,18 @@ def generate_grok(
         if router_trace is None:
             router_trace = loaded_trace
 
-    text = router_generate(
-        prompt,
-        max_new_tokens=int(max_new_tokens),
-        timeout=float(timeout),
-        **FAIL_CLOSED_KWARGS,
-    )
+    call_kwargs = dict(FAIL_CLOSED_KWARGS) if generate is not None else _live_grok_kwargs()
+    try:
+        text = router_generate(
+            prompt,
+            max_new_tokens=int(max_new_tokens),
+            timeout=float(timeout),
+            **call_kwargs,
+        )
+    except Track1LedgerError:
+        raise
+    except Exception as exc:
+        raise Track1LedgerError(f"grok generate_text failed: {exc}") from exc
     trace = dict(router_trace() or {}) if router_trace is not None else {}
     identity = _identity_from_trace(trace, generated=True)
     if identity.fallback_used:

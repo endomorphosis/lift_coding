@@ -374,10 +374,14 @@ def _import_typesafe_inference() -> dict[str, Any]:
             typesafe_configured,
         )
     except ImportError as exc:
+        try:
+            reported = str(TYPESAFE_INFERENCE_PATH.relative_to(REPO_ROOT))
+        except ValueError:
+            reported = str(TYPESAFE_INFERENCE_PATH)
         return {
             "available": False,
             "error": f"{type(exc).__name__}: {exc}",
-            "path": str(TYPESAFE_INFERENCE_PATH.relative_to(REPO_ROOT)),
+            "path": reported,
             "exists": TYPESAFE_INFERENCE_PATH.is_file(),
             "Choice": None,
             "Noul": None,
@@ -388,7 +392,7 @@ def _import_typesafe_inference() -> dict[str, Any]:
     return {
         "available": True,
         "error": "",
-        "path": str(TYPESAFE_INFERENCE_PATH.relative_to(REPO_ROOT)),
+        "path": str(TYPESAFE_INFERENCE_PATH),
         "exists": True,
         "Choice": Choice,
         "Noul": Noul,

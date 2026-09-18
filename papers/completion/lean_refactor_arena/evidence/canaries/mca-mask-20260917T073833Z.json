@@ -1,0 +1,515 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T07:38:33.400523+00:00",
+  "pr": "PR-9d",
+  "problems": [
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2290.64032601309
+        },
+        {
+          "errors": [
+            {
+              "data": "Unknown identifier `Hlen1`",
+              "pos": {
+                "column": 29,
+                "line": 947
+              }
+            },
+            {
+              "data": "Unknown identifier `Hlen1`",
+              "pos": {
+                "column": 30,
+                "line": 954
+              }
+            },
+            {
+              "data": "simp_all made no progress",
+              "pos": {
+                "column": 12,
+                "line": 969
+              }
+            },
+            {
+              "data": "Unknown identifier `Hnd`",
+              "pos": {
+                "column": 21,
+                "line": 979
+              }
+            },
+            {
+              "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+              "pos": {
+                "column": 10,
+                "line": 979
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 981
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 1517,
+          "n_holes": 4,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitState",
+          "theorem_ok": false,
+          "token_count": 237,
+          "wall_ms": 2311.3228589936625
+        },
+        {
+          "errors": [
+            {
+              "data": "Case tag `update_some` not found.\n\nNote: There are no cases to select.",
+              "pos": {
+                "column": 2,
+                "line": 954
+              }
+            },
+            {
+              "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "labs-leanstral-1-5",
+          "kind": "leanstral_few_shot",
+          "module_exit_0": false,
+          "n_chars": 1386,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": false,
+          "token_count": 233,
+          "wall_ms": 2214.662045997102
+        },
+        {
+          "errors": [
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 2,
+                "line": 955
+              }
+            },
+            {
+              "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "leanstral+simp_all/omega",
+          "kind": "leanstral_few_shot_hammer1",
+          "module_exit_0": false,
+          "n_chars": 1372,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": false,
+          "token_count": 222,
+          "wall_ms": 2370.1444169855677
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 110,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "  ",
+          "original": "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+          "start": 54
+        },
+        {
+          "end": 149,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "  ",
+          "original": "  have Hlen1 := InitStatesLength Hinit",
+          "start": 111
+        },
+        {
+          "end": 188,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "  ",
+          "original": "  have Hlen2 := UpdateStatesLength Hup",
+          "start": 150
+        },
+        {
+          "end": 1457,
+          "family": "loop_invariant",
+          "hole_id": "MCA_3",
+          "indent": "          ",
+          "original": "          have Hnd := InitStatesNotDefined Hinit",
+          "start": 1409
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "leanstral_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "finish_reason": "stop",
+        "hardware_class": "mistral_labs_api",
+        "request_id": "ce43e9b7a92c43799e15f64824bc1949",
+        "requested_model": "labs-leanstral-1-5",
+        "requested_provider": "mistral",
+        "resolved_model": "labs-leanstral-1-5",
+        "resolved_provider": "mistral",
+        "url_host": "api.mistral.ai",
+        "used_prototype_endpoint": false
+      },
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 2909,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 422,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 1,
+        "name": "Core.InitsUpdatesComm#few-shot",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 4,
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  <<<MCA_0 family=loop_invariant>>>\n  <<<MCA_1 family=loop_invariant>>>\n  <<<MCA_2 family=loop_invariant>>>\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, upd",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 2003,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r wit",
+          "theorem_ok": true,
+          "token_count": 519,
+          "wall_ms": 4806.256634998135
+        },
+        {
+          "errors": [
+            {
+              "data": "Function expected at\n  ih_l rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  l",
+              "pos": {
+                "column": 10,
+                "line": 83
+              }
+            },
+            {
+              "data": "Tactic `cases` failed: major premise type is not an inductive type\n  ?m.186\n\nExplanation: the `cases` tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt :",
+              "pos": {
+                "column": 4,
+                "line": 83
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 15,
+                "line": 100
+              }
+            },
+            {
+              "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+              "pos": {
+                "column": 4,
+                "line": 100
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 10,
+                "line": 112
+              }
+            },
+            {
+              "data": "Tactic `cases` failed: major premise type is not an inductive type\n  ?m.205\n\nExplanation: the `cases` tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt :",
+              "pos": {
+                "column": 4,
+                "line": 112
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 1861,
+          "n_holes": 3,
+          "ok": false,
+          "tactics_head": "  generalize eq : [] = \u0393 at der\n\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n\n       ",
+          "theorem_ok": false,
+          "token_count": 481,
+          "wall_ms": 4036.5594100148883
+        },
+        {
+          "errors": [
+            {
+              "data": "unknown tactic",
+              "pos": {
+                "column": 7,
+                "line": 148
+              }
+            },
+            {
+              "data": "Function expected at\n  ih_l rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  l",
+              "pos": {
+                "column": 10,
+                "line": 82
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 15,
+                "line": 98
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 10,
+                "line": 110
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 11,
+                "line": 119
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 11,
+                "line": 127
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "labs-leanstral-1-5",
+          "kind": "leanstral_few_shot",
+          "module_exit_0": false,
+          "n_chars": 1676,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  generalize eq : [] = \u0393 at der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n         ",
+          "theorem_ok": false,
+          "token_count": 431,
+          "wall_ms": 4437.791637988994
+        },
+        {
+          "errors": [
+            {
+              "data": "unknown tactic",
+              "pos": {
+                "column": 7,
+                "line": 148
+              }
+            },
+            {
+              "data": "Function expected at\n  ih_l rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  l",
+              "pos": {
+                "column": 10,
+                "line": 82
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 15,
+                "line": 98
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 10,
+                "line": 110
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 11,
+                "line": 119
+              }
+            },
+            {
+              "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+              "pos": {
+                "column": 11,
+                "line": 127
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "leanstral+simp_all/omega",
+          "kind": "leanstral_few_shot_hammer1",
+          "module_exit_0": false,
+          "n_chars": 1758,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  generalize eq : [] = \u0393 at der\n  induction der <;> subst eq\n  case var mem => simp_all\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n      ",
+          "theorem_ok": false,
+          "token_count": 436,
+          "wall_ms": 4196.1427579808515
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 65,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "  ",
+          "original": "  have der' : Typing \u0393 t \u03c4 := der",
+          "start": 32
+        },
+        {
+          "end": 323,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "            ",
+          "original": "            have \u27e8\u03c3, t\u2081, eq\u27e9 := l.canonical_form_abs val_l",
+          "start": 265
+        },
+        {
+          "end": 1563,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "        ",
+          "original": "        have \u27e8t\u2081, lr\u27e9 := der.canonical_form_sum val",
+          "start": 1512
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 519
+      },
+      "leanstral_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "finish_reason": "stop",
+        "hardware_class": "mistral_labs_api",
+        "request_id": "087b340ec7924c4b9490df7d66c2226f",
+        "requested_model": "labs-leanstral-1-5",
+        "requested_provider": "mistral",
+        "resolved_model": "labs-leanstral-1-5",
+        "resolved_provider": "mistral",
+        "url_host": "api.mistral.ai",
+        "used_prototype_endpoint": false
+      },
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 3087,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 612,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 1,
+        "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress#few-shot",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 3,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  generalize eq : [] = \u0393 at der\n  <<<MCA_0 family=loop_invariant>>>\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n            <<<MCA_1 family=loop_invariant>>>\n            exists t\u2081 ^\u1d57\u1d57 t\u2082\n            grind\n        | inr red_r =>\n            obtain \u27e8t\u2082', _\u27e9 := red_r\n            exists t\u2081.app t\u2082'\n            grind\n    | inr red_l =>\n        obtain \u27e8t\u2081', _\u27e9 := red_l\n        exists t\u2081'.app t\u2082\n        grind\n  case tapp \u03c3' der _ ih =>\n    right\n    specialize ih rfl der\n    cases ih with\n    | inl val =>\n        obtain \u27e8_, t, _\u27e9 := der.canonical_form_tabs val\n        exists t ^\u1d57\u1d5e \u03c3'\n        grind\n    | inr red =>\n        obtain \u27e8t', _\u27e9 := red\n ",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mca-mask-replace-batch/v1",
+  "wall_ms": 37297.539494000375
+}

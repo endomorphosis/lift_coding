@@ -1,0 +1,597 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T06:47:13.146520+00:00",
+  "pr": "PR-9d",
+  "problems": [
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 6401,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  -- assume \u00ac(f = 0)\n    rw [funext_iff]; by_contra h\u2080\n    obtain \u27e8x\u2080, hx0\u27e9 := not_forall.1 h\u2080\n    simp at hx0 -- hx0 : f x\u2080 \u2260 0\n\n  -- [1] Proof that `f` is continuous at `x\u2080`.\n  -- Embed into the true IP-space `WithLp 2 V`.\n    let f\u2082 : Y ",
+          "theorem_ok": true,
+          "token_count": 1829,
+          "wall_ms": 3005.7834850158542
+        },
+        {
+          "errors": [
+            {
+              "data": "Function expected at\n  f\u2082 x\u2080\nbut this term has type\n  WithLp 2 V\n\nNote: Expected a function because this term is being applied to the argument\n  intro",
+              "pos": {
+                "column": 14,
+                "line": 112
+              }
+            },
+            {
+              "data": "unsolved goals\nV : Type u_2\ninst\u271d\u2079 : NormedAddCommGroup V\ninst\u271d\u2078 : NormedSpace \u211d V\ninst\u271d\u2077 : InnerProductSpace' \u211d V\nY : Type u_1\ninst\u271d\u2076 : NormedAddCommGroup Y\ninst\u271d\u2075 : InnerProductSpace \u211d Y\ninst\u271d\u2074 : FiniteDimensional \u211d Y\ninst\u271d\u00b3 : MeasurableSpace Y\nf : Y \u2192 V\n\u03bc : Measure Y\ninst\u271d\u00b2 : IsFiniteMeasureOnCompacts \u03bc\ninst\u271d\u00b9 : \u03bc.IsOpenPosMeasure\ninst\u271d : OpensMeasurableSpace Y\nhf : Continuous f\nhg : \u2200 (g : Y \u2192",
+              "pos": {
+                "column": 13,
+                "line": 103
+              }
+            },
+            {
+              "data": "unexpected token 'using'; expected command",
+              "pos": {
+                "column": 23,
+                "line": 130
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 5006,
+          "n_holes": 23,
+          "ok": false,
+          "tactics_head": "  -- assume \u00ac(f = 0)\n    rw [funext_iff]; by_contra h\u2080\n    obtain \u27e8x\u2080, hx0\u27e9 := not_forall.1 h\u2080\n    simp at hx0 -- hx0 : f x\u2080 \u2260 0\n\n  -- [1] Proof that `f` is continuous at `x\u2080`.\n  -- Embed into the true IP-space `WithLp 2 V`.\n    let f\u2082 : Y ",
+          "theorem_ok": false,
+          "token_count": 1338,
+          "wall_ms": 2117.879543977324
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 364,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "    ",
+          "original": "    have hx2 : x\u2082 \u2260 0 := by",
+          "start": 337
+        },
+        {
+          "end": 529,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "    ",
+          "original": "    have hcont\u2082 : ContinuousAt f\u2082 x\u2080 := ((toL2 \u211d).continuous.comp hf).continuousAt",
+          "start": 447
+        },
+        {
+          "end": 1018,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "    ",
+          "original": "    have inner_pos\u2082 : \u2200 x (hx : x \u2208 Metric.ball x\u2080 \u03b4\u2082), 0 < (\u27eaf\u2082 x, x\u2082\u27eb_\u211d : \u211d) := by",
+          "start": 934
+        },
+        {
+          "end": 1221,
+          "family": "loop_invariant",
+          "hole_id": "MCA_3",
+          "indent": "      ",
+          "original": "      have hclose : \u2016f\u2082 x - x\u2082\u2016 < \u2016x\u2082\u2016 / 2 := by",
+          "start": 1173
+        },
+        {
+          "end": 1380,
+          "family": "loop_invariant",
+          "hole_id": "MCA_4",
+          "indent": "      ",
+          "original": "      have hself : \u27eax\u2082, x\u2082\u27eb_\u211d = \u2016x\u2082\u2016^2 := real_inner_self_eq_norm_sq (x\u2082 : WithLp 2 V)",
+          "start": 1294
+        },
+        {
+          "end": 1515,
+          "family": "loop_invariant",
+          "hole_id": "MCA_5",
+          "indent": "      ",
+          "original": "      have hcs : -(\u2016f\u2082 x - x\u2082\u2016 * \u2016x\u2082\u2016) \u2264 \u27eaf\u2082 x - x\u2082, x\u2082\u27eb_\u211d :=",
+          "start": 1454
+        },
+        {
+          "end": 1619,
+          "family": "loop_invariant",
+          "hole_id": "MCA_6",
+          "indent": "      ",
+          "original": "      have hxp : 0 < \u2016x\u2082\u2016 := norm_pos_iff.mpr hx2",
+          "start": 1570
+        },
+        {
+          "end": 1707,
+          "family": "loop_invariant",
+          "hole_id": "MCA_7",
+          "indent": "      ",
+          "original": "      have inner_eq_self_add_diff : \u27eaf\u2082 x, x\u2082\u27eb_\u211d = \u27eax\u2082, x\u2082\u27eb_\u211d + \u27eaf\u2082 x - x\u2082, x\u2082\u27eb_\u211d := by",
+          "start": 1620
+        },
+        {
+          "end": 1997,
+          "family": "loop_invariant",
+          "hole_id": "MCA_8",
+          "indent": "    ",
+          "original": "    have inner_pos_V : \u2200 x \u2208 Metric.ball x\u2080 \u03b4\u2082, 0 < \u27eaf x, f x\u2080\u27eb_\u211d := fun x hx => inner_pos\u2082 x hx",
+          "start": 1901
+        },
+        {
+          "end": 2189,
+          "family": "loop_invariant",
+          "hole_id": "MCA_9",
+          "indent": "    ",
+          "original": "    have bump_exists : \u2203 \u03c6 : Y \u2192 \u211d, IsTestFunction \u03c6 \u2227 \u03c6 x\u2080 > 0 \u2227",
+          "start": 2124
+        },
+        {
+          "end": 3443,
+          "family": "loop_invariant",
+          "hole_id": "MCA_10",
+          "indent": "    ",
+          "original": "    have hg_test : IsTestFunction g := IsTestFunction.smul_right h\u03c6_testfun contDiff_const",
+          "start": 3353
+        },
+        {
+          "end": 3588,
+          "family": "loop_invariant",
+          "hole_id": "MCA_11",
+          "indent": "    ",
+          "original": "    have key_integral := hg g hg_test",
+          "start": 3551
+        },
+        {
+          "end": 4153,
+          "family": "loop_invariant",
+          "hole_id": "MCA_12",
+          "indent": "    ",
+          "original": "    have support_subset : Function.support \u03c6 \u2286 Metric.ball x\u2080 \u03b4\u2082 :=",
+          "start": 4086
+        },
+        {
+          "end": 4322,
+          "family": "loop_invariant",
+          "hole_id": "MCA_13",
+          "indent": "    ",
+          "original": "    have supp_subset2 : Function.support (fun x => \u03c6 x * \u27eaf x, f x\u2080\u27eb_\u211d) \u2286 Function.support \u03c6 := by",
+          "start": 4224
+        },
+        {
+          "end": 4488,
+          "family": "loop_invariant",
+          "hole_id": "MCA_14",
+          "indent": "    ",
+          "original": "    have hinner_cont : Continuous (fun x => \u27eaf x, f x\u2080\u27eb_\u211d) :=",
+          "start": 4427
+        },
+        {
+          "end": 4587,
+          "family": "loop_invariant",
+          "hole_id": "MCA_15",
+          "indent": "    ",
+          "original": "    have integrable_prod :",
+          "start": 4561
+        },
+        {
+          "end": 4950,
+          "family": "loop_invariant",
+          "hole_id": "MCA_16",
+          "indent": "    ",
+          "original": "    have h_nonneg : \u2200 x, 0 \u2264 \u03c6 x * \u27eaf x, f x\u2080\u27eb_\u211d := by",
+          "start": 4896
+        },
+        {
+          "end": 5432,
+          "family": "loop_invariant",
+          "hole_id": "MCA_17",
+          "indent": "    ",
+          "original": "    have h\u03bc_ball : 0 < \u03bc (Metric.ball x\u2080 (\u03b4\u2082/4)) :=",
+          "start": 5381
+        },
+        {
+          "end": 5565,
+          "family": "loop_invariant",
+          "hole_id": "MCA_18",
+          "indent": "    ",
+          "original": "    have h\u03bc : 0 < \u03bc (Metric.closedBall x\u2080 (\u03b4\u2082/4)) :=",
+          "start": 5513
+        },
+        {
+          "end": 5676,
+          "family": "loop_invariant",
+          "hole_id": "MCA_19",
+          "indent": "    ",
+          "original": "    have closedBall_subset_support :",
+          "start": 5640
+        },
+        {
+          "end": 5835,
+          "family": "loop_invariant",
+          "hole_id": "MCA_20",
+          "indent": "        ",
+          "original": "        have h\u03c6x := h\u03c6_pos_inner x hx",
+          "start": 5798
+        },
+        {
+          "end": 5875,
+          "family": "loop_invariant",
+          "hole_id": "MCA_21",
+          "indent": "        ",
+          "original": "        have hin : 0 < \u27eaf x, f x\u2080\u27eb_\u211d :=",
+          "start": 5836
+        },
+        {
+          "end": 6247,
+          "family": "loop_invariant",
+          "hole_id": "MCA_22",
+          "indent": "    ",
+          "original": "    have integral_pos : 0 < \u222b x, \u03c6 x * \u27eaf x, f x\u2080\u27eb_\u211d \u2202\u03bc :=",
+          "start": 6189
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 1829
+      },
+      "leanstral_identity": null,
+      "ledger": null,
+      "n_holes": 23,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  -- assume \u00ac(f = 0)\n    rw [funext_iff]; by_contra h\u2080\n    obtain \u27e8x\u2080, hx0\u27e9 := not_forall.1 h\u2080\n    simp at hx0 -- hx0 : f x\u2080 \u2260 0\n\n  -- [1] Proof that `f` is continuous at `x\u2080`.\n  -- Embed into the true IP-space `WithLp 2 V`.\n    let f\u2082 : Y \u2192 WithLp 2 V := toL2 \u211d \u2218 f\n    let x\u2082 := f\u2082 x\u2080\n  -- x\u2082 \u2260 0 because `fromL2 (toL2 (f x\u2080)) = f x\u2080`\n    <<<MCA_0 family=loop_invariant>>>\n      intro h; apply hx0; exact congrArg (fromL2 \u211d) h\n  -- continuity of f\u2082 at x\u2080\n    <<<MCA_1 family=loop_invariant>>>\n\n  -- [2] find open neighborhood guaranteeing positive inner product with the center, based on\n  -- which the test function `g` will be constructed.\n  -- pick \u03b4\u2082 so that on B(x\u2080, \u03b4\u2082), \u2016f\u2082 x - x\u2082\u2016 < \u2016x\u2082\u2016/2\n    obtain \u27e8\u03b4\u2082, h\u03b4\u2082_pos, h\u03b4\u2082\u27e9 :=\n    Metric.continuousAt_iff.mp hcont\u2082 (\u2016x\u2082\u2016 / 2)\n      (by simpa [h",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 5751,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  have hEs : \u2200 j, ContDiff \u211d 2 (fun y => A.electricField \ud835\udcd5.c t y j) :=\n    fun j => electricField_apply_contDiff_space (i := j) (hA.of_le (right_eq_inf.mp rfl)) t\n  have hEd : \u2200 j k, Differentiable \u211d (\u2202[k] (fun y => A.electricField \ud835\udcd5.c t y ",
+          "theorem_ok": true,
+          "token_count": 1820,
+          "wall_ms": 7760.153267998248
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\nd : \u2115\nA : ElectromagneticPotential d\n\ud835\udcd5 : FreeSpace\nhA : ContDiff \u211d \u221e A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff \u211d \u221e J\nh : IsExtrema \ud835\udcd5 A J\nt : Time\nx : Space d\ni : Fin d\n\u22a2 \u2202\u209c (\u2202\u209c fun x_1 => (electricField \ud835\udcd5.c A x_1 x).ofLp i) t =\n    \ud835\udcd5.c.val ^ 2 * \u2211 j, Space.deriv j (Space.deriv j fun x => (electricField \ud835\udcd5.c A t x).ofLp i) x -\n        \ud835\udcd5.c.val ^ 2 / \ud835\udcd5.\u03b5\u2080 * Space.deriv i (fun x =>",
+              "pos": {
+                "column": 60,
+                "line": 384
+              }
+            },
+            {
+              "data": "unexpected token 'fun'; expected command",
+              "pos": {
+                "column": 4,
+                "line": 385
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 5449,
+          "n_holes": 9,
+          "ok": false,
+          "tactics_head": "    fun j => electricField_apply_contDiff_space (i := j) (hA.of_le (right_eq_inf.mp rfl)) t\n\n    fun j k => Space.deriv_differentiable (hEs j) k\n\n      (fun s => \u2202[j] (fun y => A.magneticFieldMatrix \ud835\udcd5.c s y (j, i)) x) :=\n    fun j => Space.",
+          "theorem_ok": false,
+          "token_count": 1722,
+          "wall_ms": 7191.497609979706
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\nd : \u2115\nA : ElectromagneticPotential d\n\ud835\udcd5 : FreeSpace\nhA : ContDiff \u211d \u221e A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff \u211d \u221e J\nh : IsExtrema \ud835\udcd5 A J\nt : Time\nx : Space d\ni : Fin d\nhEs : \u2200 (j : Fin d), ContDiff \u211d 2 fun y => (electricField \ud835\udcd5.c A t y).ofLp j\nhEd : \u2200 (j k : Fin d), Differentiable \u211d (Space.deriv k fun y => (electricField \ud835\udcd5.c A t y).ofLp j)\nhBt : \u2200 (j : Fin d), Differentiable \u211d",
+              "pos": {
+                "column": 54,
+                "line": 407
+              }
+            },
+            {
+              "data": "unsolved goals\ncase calc.step\nd : \u2115\nA : ElectromagneticPotential d\n\ud835\udcd5 : FreeSpace\nhA : ContDiff \u211d \u221e A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff \u211d \u221e J\nh : IsExtrema \ud835\udcd5 A J\nt : Time\nx : Space d\ni : Fin d\nhEs : \u2200 (j : Fin d), ContDiff \u211d 2 fun y => (electricField \ud835\udcd5.c A t y).ofLp j\nhEd : \u2200 (j k : Fin d), Differentiable \u211d (Space.deriv k fun y => (electricField \ud835\udcd5.c A t y).ofLp j)\nhBt : \u2200 (j : Fin d), D",
+              "pos": {
+                "column": 60,
+                "line": 384
+              }
+            },
+            {
+              "data": "unexpected identifier; expected command",
+              "pos": {
+                "column": 0,
+                "line": 408
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "labs-leanstral-1-5",
+          "kind": "mca_leanstral_holes",
+          "module_exit_0": false,
+          "n_chars": 6218,
+          "n_holes": 5,
+          "ok": false,
+          "tactics_head": "  have hEs : \u2200 j, ContDiff \u211d 2 (fun y => A.electricField \ud835\udcd5.c t y j) :=\n    fun j => electricField_apply_contDiff_space (i := j) (hA.of_le (right_eq_inf.mp rfl)) t\n  have hEd : \u2200 j k, Differentiable \u211d (\u2202[k] (fun y => A.electricField \ud835\udcd5.c t y ",
+          "theorem_ok": false,
+          "token_count": 1918,
+          "wall_ms": 7046.16074700607
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 70,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "  ",
+          "original": "  have hEs : \u2200 j, ContDiff \u211d 2 (fun y => A.electricField \ud835\udcd5.c t y j) :=",
+          "start": 0
+        },
+        {
+          "end": 246,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "  ",
+          "original": "  have hEd : \u2200 j k, Differentiable \u211d (\u2202[k] (fun y => A.electricField \ud835\udcd5.c t y j)) :=",
+          "start": 163
+        },
+        {
+          "end": 333,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "  ",
+          "original": "  have hBt : \u2200 j, Differentiable \u211d",
+          "start": 299
+        },
+        {
+          "end": 620,
+          "family": "loop_invariant",
+          "hole_id": "MCA_3",
+          "indent": "  ",
+          "original": "  have hJt : Differentiable \u211d (fun s => J.currentDensity \ud835\udcd5.c s x i) :=",
+          "start": 550
+        },
+        {
+          "end": 1423,
+          "family": "algebraic_simplification",
+          "hole_id": "MCA_4",
+          "indent": "      ",
+          "original": "      rw [Time.deriv_eq]\n      rw [fderiv_fun_sub]",
+          "start": 1373
+        },
+        {
+          "end": 1629,
+          "family": "algebraic_simplification",
+          "hole_id": "MCA_5",
+          "indent": "      ",
+          "original": "      rw [fderiv_const_mul (Differentiable.fun_sum fun j _ => hBt j).differentiableAt]\n      rw [fderiv_const_mul hJt.differentiableAt]",
+          "start": 1494
+        },
+        {
+          "end": 2049,
+          "family": "algebraic_simplification",
+          "hole_id": "MCA_6",
+          "indent": "      ",
+          "original": "      rw [Time.deriv_eq]\n      rw [fderiv_fun_sum fun i _ => (hBt i).differentiableAt]",
+          "start": 1963
+        },
+        {
+          "end": 3277,
+          "family": "algebraic_simplification",
+          "hole_id": "MCA_7",
+          "indent": "        ",
+          "original": "        rw [Space.deriv_eq_fderiv_basis]\n        rw [fderiv_fun_sub (hEd _ _).differentiableAt (hEd _ _).differentiableAt]",
+          "start": 3155
+        },
+        {
+          "end": 4250,
+          "family": "algebraic_simplification",
+          "hole_id": "MCA_8",
+          "indent": "        ",
+          "original": "        rw [Space.deriv_eq_fderiv_basis]\n        rw [fderiv_fun_sum]",
+          "start": 4182
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 1820
+      },
+      "leanstral_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "finish_reason": "stop",
+        "hardware_class": "mistral_labs_api",
+        "request_id": "a233ea8c26a7473282909761be4a1427",
+        "requested_model": "labs-leanstral-1-5",
+        "requested_provider": "mistral",
+        "resolved_model": "labs-leanstral-1-5",
+        "resolved_provider": "mistral",
+        "url_host": "api.mistral.ai",
+        "used_prototype_endpoint": false
+      },
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 3275,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 424,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 1,
+        "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema#mca-mask",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 9,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  <<<MCA_0 family=loop_invariant>>>\n    fun j => electricField_apply_contDiff_space (i := j) (hA.of_le (right_eq_inf.mp rfl)) t\n  <<<MCA_1 family=loop_invariant>>>\n    fun j k => Space.deriv_differentiable (hEs j) k\n  <<<MCA_2 family=loop_invariant>>>\n      (fun s => \u2202[j] (fun y => A.magneticFieldMatrix \ud835\udcd5.c s y (j, i)) x) :=\n    fun j => Space.space_deriv_differentiable_time (i := j)\n      (magneticFieldMatrix_contDiff _ (hA.of_le (right_eq_inf.mp rfl)) (j, i)) x\n  <<<MCA_3 family=loop_invariant>>>\n    LorentzCurrentDensity.currentDensity_apply_differentiable_time (hJ.differentiable (by simp)) x i\n  calc _\n    _= \u2202\u209c (fun t =>\n      1 / (\ud835\udcd5.\u03bc\u2080 * \ud835\udcd5.\u03b5\u2080) * \u2211 j, Space.deriv j (fun x => magneticFieldMatrix \ud835\udcd5.c A t x (j, i)) x -\n      1 / \ud835\udcd5.\u03b5\u2080 * LorentzCurrentDensity.currentDensity \ud835\udcd5.c J t x i) t ",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 6293,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  let pb (b : \ud835\udcd5.FieldOpFreeAlgebra) (hc : b \u2208 Submodule.span \u2102 (Set.range ofCrAnListFBasis)) :\n    Prop := \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * b) =\n    \u03b9 ([ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * \ud835\udce3\u1da0(a * b))\n  change pb b (Basis.mem_span _ b)\n  ap",
+          "theorem_ok": true,
+          "token_count": 1473,
+          "wall_ms": 5458.710778999375
+        },
+        {
+          "errors": [
+            {
+              "data": "unexpected token 'by'; expected '{' or tactic",
+              "pos": {
+                "column": 13,
+                "line": 224
+              }
+            },
+            {
+              "data": "unsolved goals\n\ud835\udcd5 : FieldSpecification\n\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp\nh\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8\nh\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6\na b : \ud835\udcd5.FieldOpFreeAlgebra\npb : (b : \ud835\udcd5.FieldOpFreeAlgebra) \u2192 b \u2208 Submodule.span \u2102 (Set.range \u21d1ofCrAnListFBasis) \u2192 Prop :=\n  fun b hc =>\n    \u03b9 (timeOrderF (a * (superCommuteF (ofCrAnOpF \u03c6)) (ofCrAnOpF \u03c8) * b)) =\n      \u03b9 ((superCommuteF (ofCrAnOpF \u03c6)) (ofCrAnOpF \u03c8) * timeOrderF (a * b))\n\u03c6s",
+              "pos": {
+                "column": 72,
+                "line": 222
+              }
+            },
+            {
+              "data": "unsolved goals\ncase mem.mem.calc.step\n\ud835\udcd5 : FieldSpecification\n\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp\nh\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8\nh\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6\na b : \ud835\udcd5.FieldOpFreeAlgebra\npb : (b : \ud835\udcd5.FieldOpFreeAlgebra) \u2192 b \u2208 Submodule.span \u2102 (Set.range \u21d1ofCrAnListFBasis) \u2192 Prop :=\n  fun b hc =>\n    \u03b9 (timeOrderF (a * (superCommuteF (ofCrAnOpF \u03c6)) (ofCrAnOpF \u03c8) * b)) =\n      \u03b9 ((superCommuteF (ofCrAnOpF \u03c6)) (ofCrAnOpF \u03c8) *",
+              "pos": {
+                "column": 4,
+                "line": 178
+              }
+            },
+            {
+              "data": "unsolved goals\ncase mem.zero\n\ud835\udcd5 : FieldSpecification\n\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp\nh\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8\nh\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6\na b : \ud835\udcd5.FieldOpFreeAlgebra\npb : (b : \ud835\udcd5.FieldOpFreeAlgebra) \u2192 b \u2208 Submodule.span \u2102 (Set.range \u21d1ofCrAnListFBasis) \u2192 Prop := \u22ef\n\u03c6s : List \ud835\udcd5.CrAnFieldOp\npa : (a : \ud835\udcd5.FieldOpFreeAlgebra) \u2192 a \u2208 Submodule.span \u2102 (Set.range \u21d1ofCrAnListFBasis) \u2192 Prop := \u22ef\n\u22a2 pa 0 \u22ef\n\ncase add\n\ud835\udcd5 : FieldS",
+              "pos": {
+                "column": 2,
+                "line": 171
+              }
+            },
+            {
+              "data": "unsolved goals\ncase zero\n\ud835\udcd5 : FieldSpecification\n\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp\nh\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8\nh\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6\na b : \ud835\udcd5.FieldOpFreeAlgebra\npb : (b : \ud835\udcd5.FieldOpFreeAlgebra) \u2192 b \u2208 Submodule.span \u2102 (Set.range \u21d1ofCrAnListFBasis) \u2192 Prop := \u22ef\n\u22a2 pb 0 \u22ef\n\ncase add\n\ud835\udcd5 : FieldSpecification\n\u03c6 \u03c8 : \ud835\udcd5.CrAnFieldOp\nh\u03c6\u03c8 : crAnTimeOrderRel \u03c6 \u03c8\nh\u03c8\u03c6 : crAnTimeOrderRel \u03c8 \u03c6\na b : \ud835\udcd5.FieldOpFreeAlgebra\npb : (b : \ud835\udcd5",
+              "pos": {
+                "column": 52,
+                "line": 165
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 6055,
+          "n_holes": 3,
+          "ok": false,
+          "tactics_head": "  let pb (b : \ud835\udcd5.FieldOpFreeAlgebra) (hc : b \u2208 Submodule.span \u2102 (Set.range ofCrAnListFBasis)) :\n    Prop := \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * b) =\n    \u03b9 ([ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * \ud835\udce3\u1da0(a * b))\n  change pb b (Basis.mem_span _ b)\n  ap",
+          "theorem_ok": false,
+          "token_count": 1424,
+          "wall_ms": 4396.221720991889
+        }
+      ],
+      "hardware_class": "mistral_labs_api",
+      "holes": [
+        {
+          "end": 3235,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "          ",
+          "original": "          have h1 := insertionSort_of_eq_list \ud835\udcd5.crAnTimeOrderRel \u03c6 \u03c6s' [\u03c6, \u03c8] \u03c6s",
+          "start": 3155
+        },
+        {
+          "end": 3435,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "          ",
+          "original": "          have h2 := insertionSort_of_eq_list \ud835\udcd5.crAnTimeOrderRel \u03c6 \u03c6s' [\u03c8, \u03c6] \u03c6s",
+          "start": 3355
+        },
+        {
+          "end": 5551,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "      ",
+          "original": "      have h1 := insertionSort_of_takeWhile_filter \ud835\udcd5.crAnTimeOrderRel \u03c6 \u03c6s' \u03c6s",
+          "start": 5473
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 1473
+      },
+      "leanstral_identity": null,
+      "ledger": null,
+      "n_holes": 3,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "official_track2": false,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  let pb (b : \ud835\udcd5.FieldOpFreeAlgebra) (hc : b \u2208 Submodule.span \u2102 (Set.range ofCrAnListFBasis)) :\n    Prop := \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * b) =\n    \u03b9 ([ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * \ud835\udce3\u1da0(a * b))\n  change pb b (Basis.mem_span _ b)\n  apply Submodule.span_induction\n  \u00b7 rintro x \u27e8\u03c6s, rfl\u27e9\n    simp only [ofListBasis_eq_ofList, map_mul, pb]\n    let pa (a : \ud835\udcd5.FieldOpFreeAlgebra) (hc : a \u2208 Submodule.span \u2102 (Set.range ofCrAnListFBasis)) :\n      Prop := \u03b9 \ud835\udce3\u1da0(a * [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * ofCrAnListF \u03c6s) =\n      \u03b9 ([ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF * \ud835\udce3\u1da0(a* ofCrAnListF \u03c6s))\n    change pa a (Basis.mem_span _ a)\n    apply Submodule.span_induction\n    \u00b7 rintro x \u27e8\u03c6s', rfl\u27e9\n      simp only [ofListBasis_eq_ofList, map_mul, pa]\n      calc _\n        /- Split the commutator. -/\n        _ = crAnTimeOrder",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mca-mask-replace-batch/v1",
+  "wall_ms": 40028.54609998758
+}

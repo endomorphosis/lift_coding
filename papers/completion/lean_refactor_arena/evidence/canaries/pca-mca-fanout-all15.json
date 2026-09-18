@@ -1,0 +1,747 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "n": 15,
+  "observed_at": "2026-09-17T06:14:12.736436+00:00",
+  "problems": [
+    {
+      "algebraic_simplification_safe": 0.39,
+      "best_compiler_family": "dead_code",
+      "best_first_draft": "d016",
+      "families": [
+        "dead_code",
+        "strength_reduction",
+        "search_space",
+        "algebraic_simplification",
+        "loop_invariant"
+      ],
+      "lake_ok": [
+        {
+          "family": "strength_reduction",
+          "id": "d001",
+          "ops": [
+            "drop_redundant_simp_at",
+            "mca"
+          ],
+          "tokens": 464
+        },
+        {
+          "family": "reference",
+          "id": "d000",
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "tokens": 482
+        }
+      ],
+      "n_drafts": 20,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "top": [
+        [
+          "d016",
+          0.41,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.34,
+          "strength_reduction",
+          [
+            "drop_redundant_simp_at",
+            "mca"
+          ]
+        ],
+        [
+          "d015",
+          0.16,
+          "dead_code",
+          [
+            "drop_rename_i",
+            "mca"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.39,
+      "best_compiler_family": "search_space",
+      "best_first_draft": "d004",
+      "families": [
+        "search_space",
+        "dead_code"
+      ],
+      "lake_ok": [
+        {
+          "family": "reference",
+          "id": "d000",
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "tokens": 296
+        }
+      ],
+      "n_drafts": 5,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "top": [
+        [
+          "d004",
+          0.85,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.05,
+          "simp_set",
+          [
+            "drop_redundant_simp_at",
+            "case",
+            "left",
+            "mca_span"
+          ]
+        ],
+        [
+          "d002",
+          0.04,
+          "have_chain",
+          [
+            "drop_have_obtain",
+            "case",
+            "left",
+            "mca_span"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.38,
+      "best_compiler_family": "search_space",
+      "best_first_draft": "d006",
+      "families": [
+        "search_space",
+        "dead_code",
+        "loop_invariant",
+        "strength_reduction",
+        "algebraic_simplification"
+      ],
+      "lake_ok": [
+        {
+          "family": "dead_code",
+          "id": "d006",
+          "ops": [
+            "drop_rename_i",
+            "mca"
+          ],
+          "tokens": 313
+        },
+        {
+          "family": "reference",
+          "id": "d000",
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "tokens": 322
+        }
+      ],
+      "n_drafts": 9,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "top": [
+        [
+          "d006",
+          0.76,
+          "dead_code",
+          [
+            "drop_rename_i",
+            "mca"
+          ]
+        ],
+        [
+          "d008",
+          0.09,
+          "algebraic_simplification",
+          [
+            "induction_simp",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.08,
+          "simp_set",
+          [
+            "drop_redundant_simp_at",
+            "case",
+            "app fn e fn_ih e_ih",
+            "mca_span"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.52,
+      "best_compiler_family": "search_space",
+      "best_first_draft": "d003",
+      "families": [
+        "search_space",
+        "loop_invariant",
+        "strength_reduction",
+        "algebraic_simplification",
+        "dead_code"
+      ],
+      "lake_ok": [
+        {
+          "family": "reference",
+          "id": "d000",
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "tokens": 268
+        }
+      ],
+      "n_drafts": 6,
+      "name": "Core.InitsUpdatesComm",
+      "top": [
+        [
+          "d003",
+          0.47,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.23,
+          "simp_set",
+          [
+            "drop_redundant_simp_at",
+            "case",
+            "update_none",
+            "mca_span"
+          ]
+        ],
+        [
+          "d002",
+          0.19,
+          "have_chain",
+          [
+            "drop_have_obtain",
+            "case",
+            "update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih",
+            "mca_span"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.39,
+      "best_compiler_family": "dead_code",
+      "best_first_draft": "d012",
+      "families": [
+        "dead_code",
+        "loop_invariant",
+        "search_space"
+      ],
+      "lake_ok": [
+        {
+          "family": "reference",
+          "id": "d000",
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "tokens": 519
+        }
+      ],
+      "n_drafts": 15,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "top": [
+        [
+          "d012",
+          0.4,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d013",
+          0.25,
+          "loop_invariant",
+          [
+            "drop_have_after_induction",
+            "mca"
+          ]
+        ],
+        [
+          "d002",
+          0.2,
+          "have_chain",
+          [
+            "drop_have_obtain",
+            "case",
+            "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+            "mca_span"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.4,
+      "best_compiler_family": "search_space",
+      "best_first_draft": "d001",
+      "families": [
+        "search_space",
+        "strength_reduction",
+        "algebraic_simplification"
+      ],
+      "lake_ok": [
+        {
+          "family": "reference",
+          "id": "d000",
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "tokens": 552
+        }
+      ],
+      "n_drafts": 4,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "top": [
+        [
+          "d001",
+          0.58,
+          "simp_set",
+          [
+            "drop_redundant_simp_at",
+            "case",
+            "par a a' b b' ha' hb'",
+            "mca_span"
+          ]
+        ],
+        [
+          "d000",
+          0.2,
+          "reference",
+          [
+            "identity",
+            "pca_keep"
+          ]
+        ],
+        [
+          "d002",
+          0.15,
+          "simp_set",
+          [
+            "drop_redundant_simp_at",
+            "case",
+            "red_I",
+            "mca_span"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.51,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d001",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "dead_code",
+        "search_space",
+        "loop_invariant"
+      ],
+      "lake_ok": [],
+      "n_drafts": 2,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "top": [
+        [
+          "d001",
+          0.91,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d000",
+          0.09,
+          "reference",
+          [
+            "identity",
+            "pca_keep"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.56,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d003",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "dead_code",
+        "loop_invariant",
+        "search_space"
+      ],
+      "lake_ok": [],
+      "n_drafts": 4,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "top": [
+        [
+          "d003",
+          0.38,
+          "algebraic_simplification",
+          [
+            "keep_calc",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.35,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d002",
+          0.25,
+          "algebraic_simplification",
+          [
+            "collapse_rw_to_simp",
+            "mca"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.67,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d002",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "search_space",
+        "dead_code",
+        "loop_invariant"
+      ],
+      "lake_ok": [],
+      "n_drafts": 4,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "top": [
+        [
+          "d002",
+          0.37,
+          "algebraic_simplification",
+          [
+            "collapse_rw_to_simp",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.33,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d003",
+          0.26,
+          "algebraic_simplification",
+          [
+            "keep_calc",
+            "mca"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.45,
+      "best_compiler_family": "loop_invariant",
+      "best_first_draft": "d001",
+      "families": [
+        "loop_invariant",
+        "search_space",
+        "dead_code",
+        "strength_reduction",
+        "algebraic_simplification"
+      ],
+      "lake_ok": [],
+      "n_drafts": 3,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "top": [
+        [
+          "d001",
+          0.86,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d000",
+          0.08,
+          "reference",
+          [
+            "identity",
+            "pca_keep"
+          ]
+        ],
+        [
+          "d002",
+          0.06,
+          "algebraic_simplification",
+          [
+            "induction_simp",
+            "mca"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.63,
+      "best_compiler_family": "strength_reduction",
+      "best_first_draft": "d001",
+      "families": [
+        "strength_reduction",
+        "algebraic_simplification",
+        "dead_code",
+        "loop_invariant",
+        "search_space"
+      ],
+      "lake_ok": [],
+      "n_drafts": 5,
+      "name": "putnam_1964_a4",
+      "top": [
+        [
+          "d001",
+          0.52,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d003",
+          0.39,
+          "algebraic_simplification",
+          [
+            "collapse_rw_to_simp",
+            "mca"
+          ]
+        ],
+        [
+          "d000",
+          0.06,
+          "reference",
+          [
+            "identity",
+            "pca_keep"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.59,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d001",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "dead_code",
+        "search_space",
+        "loop_invariant"
+      ],
+      "lake_ok": [],
+      "n_drafts": 3,
+      "name": "putnam_1964_b2",
+      "top": [
+        [
+          "d001",
+          0.48,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d002",
+          0.44,
+          "algebraic_simplification",
+          [
+            "keep_calc",
+            "mca"
+          ]
+        ],
+        [
+          "d000",
+          0.08,
+          "reference",
+          [
+            "identity",
+            "pca_keep"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.55,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d002",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "dead_code",
+        "loop_invariant",
+        "search_space"
+      ],
+      "lake_ok": [],
+      "n_drafts": 3,
+      "name": "putnam_1995_a3",
+      "top": [
+        [
+          "d002",
+          0.61,
+          "algebraic_simplification",
+          [
+            "keep_calc",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.33,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d000",
+          0.06,
+          "reference",
+          [
+            "identity",
+            "pca_keep"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.59,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d002",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "search_space",
+        "dead_code",
+        "loop_invariant"
+      ],
+      "lake_ok": [],
+      "n_drafts": 4,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "top": [
+        [
+          "d002",
+          0.42,
+          "algebraic_simplification",
+          [
+            "collapse_rw_to_simp",
+            "mca"
+          ]
+        ],
+        [
+          "d001",
+          0.35,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d003",
+          0.21,
+          "algebraic_simplification",
+          [
+            "keep_calc",
+            "mca"
+          ]
+        ]
+      ]
+    },
+    {
+      "algebraic_simplification_safe": 0.63,
+      "best_compiler_family": "algebraic_simplification",
+      "best_first_draft": "d001",
+      "families": [
+        "algebraic_simplification",
+        "strength_reduction",
+        "search_space",
+        "dead_code",
+        "loop_invariant"
+      ],
+      "lake_ok": [],
+      "n_drafts": 4,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "top": [
+        [
+          "d001",
+          0.4,
+          "dead_code",
+          [
+            "drop_have_obtain",
+            "mca"
+          ]
+        ],
+        [
+          "d003",
+          0.33,
+          "algebraic_simplification",
+          [
+            "keep_calc",
+            "mca"
+          ]
+        ],
+        [
+          "d002",
+          0.24,
+          "algebraic_simplification",
+          [
+            "collapse_rw_to_simp",
+            "mca"
+          ]
+        ]
+      ]
+    }
+  ],
+  "schema": "lra-pca-mca-fanout-all15/v1"
+}

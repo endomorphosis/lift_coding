@@ -1,0 +1,2263 @@
+{
+  "arena_score": null,
+  "canaries": [
+    {
+      "algebraic_simplification_safe": 0.39,
+      "amenable": [
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have",
+            "n_rename_i",
+            "n_simp_at"
+          ],
+          "mca_score": 4.626639515583679,
+          "present": {
+            "n_have": 1.0,
+            "n_rename_i": 5.0,
+            "n_simp_at": 8.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_simp_at",
+            "n_simp_all"
+          ],
+          "mca_score": 2.6666122842333793,
+          "present": {
+            "n_simp_all": 18.0,
+            "n_simp_at": 8.0
+          }
+        },
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 1.975333590154705,
+          "present": {
+            "n_apply": 14.0,
+            "n_cases": 9.0,
+            "n_intro": 15.0
+          }
+        },
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_simp_all"
+          ],
+          "mca_score": 0.973399929996924,
+          "present": {
+            "n_simp_all": 18.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have",
+            "n_induction"
+          ],
+          "mca_score": 0.7562490220272625,
+          "present": {
+            "n_have": 1.0,
+            "n_induction": 1.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "dead_code",
+      "best_confidence": 0.37,
+      "best_first_draft": "d016",
+      "dead_code_safe": 0.71,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005",
+        "d006",
+        "d007",
+        "d008",
+        "d009",
+        "d010",
+        "d011",
+        "d012",
+        "d013",
+        "d014",
+        "d015",
+        "d016",
+        "d017",
+        "d018",
+        "d019"
+      ],
+      "families": [
+        "dead_code",
+        "strength_reduction",
+        "search_space",
+        "algebraic_simplification",
+        "loop_invariant"
+      ],
+      "features": {
+        "max_indent": 8.0,
+        "n_apply": 14.0,
+        "n_blank": 1.0,
+        "n_calc": 0.0,
+        "n_cases": 9.0,
+        "n_exact": 1.0,
+        "n_have": 1.0,
+        "n_induction": 1.0,
+        "n_intro": 15.0,
+        "n_linarith": 0.0,
+        "n_lines": 92.0,
+        "n_obtain": 0.0,
+        "n_omega": 0.0,
+        "n_rename_i": 5.0,
+        "n_ring": 0.0,
+        "n_rw": 0.0,
+        "n_simp_all": 18.0,
+        "n_simp_at": 8.0,
+        "n_tokens": 482.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3098
+                }
+              },
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3105
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d016",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 432
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "strength_reduction",
+            "id": "d001",
+            "ops": [
+              "drop_redundant_simp_at",
+              "mca"
+            ],
+            "theorem_ok": true,
+            "token_count": 464
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3098
+                }
+              },
+              {
+                "data": "Unknown identifier `name`",
+                "pos": {
+                  "column": 12,
+                  "line": 3105
+                }
+              },
+              {
+                "data": "Unknown identifier `trigger1`",
+                "pos": {
+                  "column": 66,
+                  "line": 3162
+                }
+              },
+              {
+                "data": "Unknown identifier `e1`",
+                "pos": {
+                  "column": 104,
+                  "line": 3162
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d015",
+            "ops": [
+              "drop_rename_i",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 462
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 482
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\ncase const\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.",
+                "pos": {
+                  "column": 69,
+                  "line": 3093
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d019",
+            "ops": [
+              "induction_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 6
+          }
+        ]
+      },
+      "likely_token_cut": 0.96,
+      "live": true,
+      "loop_invariant_safe": 0.51,
+      "model": "jev-1.13.0",
+      "n_drafts": 20,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "search_space_safe": 0.83,
+      "source": "strata",
+      "strength_reduction_safe": 0.64,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n",
+          "id": "d016",
+          "n_chars": 2171,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.41000000000000003
+        },
+        {
+          "family": "strength_reduction",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i ",
+          "id": "d001",
+          "n_chars": 2312,
+          "ops": [
+            "drop_redundant_simp_at",
+            "mca"
+          ],
+          "probability": 0.34
+        },
+        {
+          "family": "dead_code",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp at m\n    simp at name\n    simp at ty2\n    simp_all\n",
+          "id": "d015",
+          "n_chars": 2284,
+          "ops": [
+            "drop_rename_i",
+            "mca"
+          ],
+          "probability": 0.16
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "induction post <;> simp",
+          "id": "d019",
+          "n_chars": 23,
+          "ops": [
+            "induction_simp",
+            "mca"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "loop_invariant",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d017",
+          "n_chars": 2293,
+          "ops": [
+            "drop_have_after_induction",
+            "mca"
+          ],
+          "probability": 0.02
+        },
+        {
+          "family": "simp_set",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all",
+          "id": "d004",
+          "n_chars": 2358,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "op",
+            "mca_span"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "reference",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d000",
+          "n_chars": 2406,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "simp_set",
+          "head": "  induction post <;> simp [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n    simp at m\n    simp at name\n    simp at ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp at ",
+          "id": "d006",
+          "n_chars": 2405,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "const",
+            "mca_span"
+          ],
+          "probability": 0.01
+        }
+      ],
+      "usage": {
+        "input_tokens": 7614,
+        "output_tokens": 416
+      },
+      "wall_ms": 269.22528698924
+    },
+    {
+      "algebraic_simplification_safe": 0.38,
+      "amenable": [
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 1.4914458154265569,
+          "present": {
+            "n_apply": 16.0,
+            "n_cases": 5.0,
+            "n_intro": 11.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_rename_i"
+          ],
+          "mca_score": 1.4413831106337207,
+          "present": {
+            "n_rename_i": 3.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_induction"
+          ],
+          "mca_score": 0.43289397993569534,
+          "present": {
+            "n_induction": 1.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_simp_all"
+          ],
+          "mca_score": 0.34539997516019894,
+          "present": {
+            "n_simp_all": 10.0
+          }
+        },
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_simp_all"
+          ],
+          "mca_score": 0.34539997516019894,
+          "present": {
+            "n_simp_all": 10.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "search_space",
+      "best_confidence": 0.75,
+      "best_first_draft": "d006",
+      "dead_code_safe": 0.71,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005",
+        "d006",
+        "d007",
+        "d008"
+      ],
+      "families": [
+        "search_space",
+        "dead_code",
+        "loop_invariant",
+        "strength_reduction",
+        "algebraic_simplification"
+      ],
+      "features": {
+        "max_indent": 10.0,
+        "n_apply": 16.0,
+        "n_blank": 0.0,
+        "n_calc": 0.0,
+        "n_cases": 5.0,
+        "n_exact": 3.0,
+        "n_have": 0.0,
+        "n_induction": 1.0,
+        "n_intro": 11.0,
+        "n_linarith": 0.0,
+        "n_lines": 77.0,
+        "n_obtain": 0.0,
+        "n_omega": 0.0,
+        "n_rename_i": 3.0,
+        "n_ring": 0.0,
+        "n_rw": 0.0,
+        "n_simp_all": 10.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 322.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "dead_code",
+            "id": "d006",
+            "ops": [
+              "drop_rename_i",
+              "mca"
+            ],
+            "theorem_ok": true,
+            "token_count": 313
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\ncase const\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d : Lambda.LConst\n\u22a2 NormalizedOldExpr (Lambda.LExpr.const m\u271d c\u271d) \u2192\n    (extractOldExprVars (Lambda.LExpr.const m\u271d c\u271d)).Subset (Imperative.HasVarsPure.getVars (Lambda.LExpr.const m\u271d c\u271d))\n\ncase op\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Vis",
+                "pos": {
+                  "column": 43,
+                  "line": 2862
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d008",
+            "ops": [
+              "induction_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 6
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\ncase abs\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty\u271d : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\ne\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\ne_ih\u271d : NormalizedOldExpr ",
+                "pos": {
+                  "column": 43,
+                  "line": 2862
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 18,
+                  "line": 2895
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "simp_set",
+            "id": "d001",
+            "ops": [
+              "drop_redundant_simp_at",
+              "case",
+              "app fn e fn_ih e_ih",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 322
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 322
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `Hin`",
+                "pos": {
+                  "column": 12,
+                  "line": 2872
+                }
+              },
+              {
+                "data": "unsolved goals\ncase h_3.app.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e1\u271d e2\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nfn_ih : (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\ne_ih : (extractOldExprVars e).Subset (Lambda.LExpr.LEx",
+                "pos": {
+                  "column": 6,
+                  "line": 2885
+                }
+              },
+              {
+                "data": "unsolved goals\ncase h_3.app.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e1\u271d e2\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nfn_ih : (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\ne_ih : (extractOldExprVars e).Subset (Lambda.LExpr.LEx",
+                "pos": {
+                  "column": 6,
+                  "line": 2889
+                }
+              },
+              {
+                "data": "unsolved goals\ncase quant.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ntr : Lambda.QuantifierKind\ne : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\nty k : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMo",
+                "pos": {
+                  "column": 4,
+                  "line": 2902
+                }
+              },
+              {
+                "data": "unsolved goals\ncase quant.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ntr : Lambda.QuantifierKind\ne : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\nty k : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMo",
+                "pos": {
+                  "column": 4,
+                  "line": 2905
+                }
+              },
+              {
+                "data": "unsolved goals\ncase ite.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d t\u271d e\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\ncih : (extractOldExprVars c\u271d).Subset (Lambda.LExpr.LExpr.getVars c\u271d)\ntih : (extractOldExprVars t\u271d).Subset (Lambda.LExpr.LExpr.getVars t",
+                "pos": {
+                  "column": 4,
+                  "line": 2911
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "search_space",
+            "id": "d007",
+            "ops": [
+              "drop_intros_hin",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 292
+          }
+        ]
+      },
+      "likely_token_cut": 1.04,
+      "live": true,
+      "loop_invariant_safe": 0.27,
+      "model": "jev-1.13.0",
+      "n_drafts": 9,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "search_space_safe": 0.77,
+      "source": "strata",
+      "strength_reduction_safe": 0.61,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d006",
+          "n_chars": 1712,
+          "ops": [
+            "drop_rename_i",
+            "mca"
+          ],
+          "probability": 0.76
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "induction post <;> simp",
+          "id": "d008",
+          "n_chars": 23,
+          "ops": [
+            "induction_simp",
+            "mca"
+          ],
+          "probability": 0.09
+        },
+        {
+          "family": "simp_set",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d001",
+          "n_chars": 1787,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "app fn e fn_ih e_ih",
+            "mca_span"
+          ],
+          "probability": 0.08
+        },
+        {
+          "family": "reference",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d000",
+          "n_chars": 1788,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "simp_set",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d005",
+          "n_chars": 1787,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "ite cih tih eih",
+            "mca_span"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "search_space",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d007",
+          "n_chars": 1594,
+          "ops": [
+            "drop_intros_hin",
+            "mca"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "simp_set",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d002",
+          "n_chars": 1787,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "abs ih",
+            "mca_span"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "simp_set",
+          "head": "  intros Hnorm\n  induction post <;>\n    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,\n          Lambda.LExpr.LExpr.getVars] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVar",
+          "id": "d003",
+          "n_chars": 1787,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "quant trih eih",
+            "mca_span"
+          ],
+          "probability": 0.01
+        }
+      ],
+      "usage": {
+        "input_tokens": 5621,
+        "output_tokens": 306
+      },
+      "wall_ms": 204.5788480027113
+    },
+    {
+      "algebraic_simplification_safe": 0.52,
+      "amenable": [
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 0.7215869522400153,
+          "present": {
+            "n_apply": 9.0,
+            "n_cases": 2.0,
+            "n_intro": 2.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have",
+            "n_induction"
+          ],
+          "mca_score": 0.7088517031539058,
+          "present": {
+            "n_have": 4.0,
+            "n_induction": 1.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_simp_all",
+            "n_rw"
+          ],
+          "mca_score": 0.6298800826347787,
+          "present": {
+            "n_rw": 1.0,
+            "n_simp_all": 5.0
+          }
+        },
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_rw",
+            "n_simp_all"
+          ],
+          "mca_score": 0.6298800826347787,
+          "present": {
+            "n_rw": 1.0,
+            "n_simp_all": 5.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have"
+          ],
+          "mca_score": 0.27595772321821044,
+          "present": {
+            "n_have": 4.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "search_space",
+      "best_confidence": 0.38,
+      "best_first_draft": "d003",
+      "dead_code_safe": 0.56,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005"
+      ],
+      "families": [
+        "search_space",
+        "loop_invariant",
+        "strength_reduction",
+        "algebraic_simplification",
+        "dead_code"
+      ],
+      "features": {
+        "max_indent": 12.0,
+        "n_apply": 9.0,
+        "n_blank": 0.0,
+        "n_calc": 0.0,
+        "n_cases": 2.0,
+        "n_exact": 4.0,
+        "n_have": 4.0,
+        "n_induction": 1.0,
+        "n_intro": 2.0,
+        "n_linarith": 0.0,
+        "n_lines": 46.0,
+        "n_obtain": 0.0,
+        "n_omega": 0.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 1.0,
+        "n_simp_all": 5.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 268.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `Hlen1`",
+                "pos": {
+                  "column": 29,
+                  "line": 946
+                }
+              },
+              {
+                "data": "Unknown identifier `Hlen1`",
+                "pos": {
+                  "column": 30,
+                  "line": 953
+                }
+              },
+              {
+                "data": "simp_all made no progress",
+                "pos": {
+                  "column": 12,
+                  "line": 968
+                }
+              },
+              {
+                "data": "Unknown identifier `Hnd`",
+                "pos": {
+                  "column": 21,
+                  "line": 977
+                }
+              },
+              {
+                "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                "pos": {
+                  "column": 10,
+                  "line": 977
+                }
+              },
+              {
+                "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                "pos": {
+                  "column": 15,
+                  "line": 979
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d003",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 237
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' ",
+                "pos": {
+                  "column": 33,
+                  "line": 939
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 17,
+                  "line": 953
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "simp_set",
+            "id": "d001",
+            "ops": [
+              "drop_redundant_simp_at",
+              "case",
+              "update_none",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 268
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `Hnd`",
+                "pos": {
+                  "column": 21,
+                  "line": 980
+                }
+              },
+              {
+                "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                "pos": {
+                  "column": 10,
+                  "line": 980
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "have_chain",
+            "id": "d002",
+            "ops": [
+              "drop_have_obtain",
+              "case",
+              "update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 262
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 268
+          },
+          {
+            "errors": [
+              {
+                "data": "Invalid `\u27e8...\u27e9` notation: The expected type\n  UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''\nis not an inductive type\n\nNote: This notation can only be used when the expected type is an inductive type with a single constructor",
+                "pos": {
+                  "column": 2,
+                  "line": 940
+                }
+              },
+              {
+                "data": "No goals to be solved",
+                "pos": {
+                  "column": 2,
+                  "line": 941
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "search_space",
+            "id": "d004",
+            "ops": [
+              "drop_intros_hin",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 263
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `Hup`",
+                "pos": {
+                  "column": 10,
+                  "line": 940
+                }
+              },
+              {
+                "data": "Tactic `induction` failed: major premise type is not an inductive type\n  ?m.10\n\nExplanation: the `induction` tactic is for constructor-based reasoning as well as for applying custom induction principles with a 'using' clause or a registered '@[induction_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : ",
+                "pos": {
+                  "column": 0,
+                  "line": 940
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d005",
+            "ops": [
+              "induction_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 6
+          }
+        ]
+      },
+      "likely_token_cut": 0.99,
+      "live": true,
+      "loop_invariant_safe": 0.36,
+      "model": "jev-1.13.0",
+      "n_drafts": 6,
+      "name": "Core.InitsUpdatesComm",
+      "search_space_safe": 0.75,
+      "source": "strata",
+      "strength_reduction_safe": 0.63,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n",
+          "id": "d003",
+          "n_chars": 1515,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.47
+        },
+        {
+          "family": "simp_set",
+          "head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3'",
+          "id": "d001",
+          "n_chars": 1698,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "update_none",
+            "mca_span"
+          ],
+          "probability": 0.23
+        },
+        {
+          "family": "have_chain",
+          "head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3'",
+          "id": "d002",
+          "n_chars": 1650,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih",
+            "mca_span"
+          ],
+          "probability": 0.19
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "induction Hup <;> simp",
+          "id": "d005",
+          "n_chars": 22,
+          "ops": [
+            "induction_simp",
+            "mca"
+          ],
+          "probability": 0.07
+        },
+        {
+          "family": "reference",
+          "head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3'",
+          "id": "d000",
+          "n_chars": 1699,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "search_space",
+          "head": "  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_non",
+          "id": "d004",
+          "n_chars": 1659,
+          "ops": [
+            "drop_intros_hin",
+            "mca"
+          ],
+          "probability": 0.01
+        }
+      ],
+      "usage": {
+        "input_tokens": 5214,
+        "output_tokens": 276
+      },
+      "wall_ms": 166.54880400164984
+    },
+    {
+      "algebraic_simplification_safe": 0.39,
+      "amenable": [
+        {
+          "family": "dead_code",
+          "features": [
+            "n_have",
+            "n_obtain"
+          ],
+          "mca_score": 0.8118088659778215,
+          "present": {
+            "n_have": 3.0,
+            "n_obtain": 8.0
+          }
+        },
+        {
+          "family": "loop_invariant",
+          "features": [
+            "n_have",
+            "n_induction"
+          ],
+          "mca_score": 0.7246508094450246,
+          "present": {
+            "n_have": 3.0,
+            "n_induction": 1.0
+          }
+        },
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_cases"
+          ],
+          "mca_score": 0.4582782697267421,
+          "present": {
+            "n_apply": 2.0,
+            "n_cases": 6.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "dead_code",
+      "best_confidence": 0.35,
+      "best_first_draft": "d012",
+      "dead_code_safe": 0.62,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004",
+        "d005",
+        "d006",
+        "d007",
+        "d008",
+        "d009",
+        "d010",
+        "d011",
+        "d012",
+        "d013",
+        "d014"
+      ],
+      "families": [
+        "dead_code",
+        "loop_invariant",
+        "search_space"
+      ],
+      "features": {
+        "max_indent": 12.0,
+        "n_apply": 2.0,
+        "n_blank": 0.0,
+        "n_calc": 0.0,
+        "n_cases": 6.0,
+        "n_exact": 0.0,
+        "n_have": 3.0,
+        "n_induction": 1.0,
+        "n_intro": 0.0,
+        "n_linarith": 0.0,
+        "n_lines": 82.0,
+        "n_obtain": 8.0,
+        "n_omega": 0.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 0.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 519.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "Function expected at\n  ih_l rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  l",
+                "pos": {
+                  "column": 10,
+                  "line": 82
+                }
+              },
+              {
+                "data": "Tactic `cases` failed: major premise type is not an inductive type\n  ?m.186\n\nExplanation: the `cases` tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt :",
+                "pos": {
+                  "column": 4,
+                  "line": 82
+                }
+              },
+              {
+                "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081\u271d.Value \u2228 \u2203 t', t\u2081\u271d \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+                "pos": {
+                  "column": 15,
+                  "line": 96
+                }
+              },
+              {
+                "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                "pos": {
+                  "column": 4,
+                  "line": 96
+                }
+              },
+              {
+                "data": "Function expected at\n  ih rfl\nbut this term has type\n  t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\n\nNote: Expected a function because this term is being applied to the argument\n  der",
+                "pos": {
+                  "column": 10,
+                  "line": 106
+                }
+              },
+              {
+                "data": "Tactic `cases` failed: major premise type is not an inductive type\n  ?m.205\n\nExplanation: the `cases` tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt :",
+                "pos": {
+                  "column": 4,
+                  "line": 106
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d012",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 396
+          },
+          {
+            "errors": [
+              {
+                "data": "`grind` failed\ncase grind.1.1.1.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\nt\u2081 : Term Var\n\u03c3 \u03c4_1 : Ty Var\nt\u2082 : Term Var\nl : Typing [] t\u2081 (\u03c3.arrow \u03c4_1)\nr : Typing [] t\u2082 \u03c3\nih_l : [] = [] \u2192 Typing [] t\u2081 (\u03c3.arrow \u03c4_1) \u2192 t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\nih_r : [] = [] \u2192 Typing [] t\u2082 \u03c3 \u2192 t\u2082.Value \u2228 \u2203 t', t\u2082 \u2b62\u03b2\u1d5b t'\nder' : Typing [] (t\u2081",
+                "pos": {
+                  "column": 12,
+                  "line": 88
+                }
+              },
+              {
+                "data": "Unknown identifier `lr`",
+                "pos": {
+                  "column": 14,
+                  "line": 139
+                }
+              },
+              {
+                "data": "Tactic `cases` failed: major premise type is not an inductive type\n  ?m.571\n\nExplanation: the `cases` tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_eliminator]' theorem. The above type neither is an inductive type nor has a registered theorem.\n\ncase inl\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableE",
+                "pos": {
+                  "column": 8,
+                  "line": 139
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "loop_invariant",
+            "id": "d013",
+            "ops": [
+              "drop_have_after_induction",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 491
+          },
+          {
+            "errors": [
+              {
+                "data": "`grind` failed\ncase grind.1.1.1.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\nt\u2081 : Term Var\n\u03c3 \u03c4_1 : Ty Var\nt\u2082 : Term Var\nl : Typing [] t\u2081 (\u03c3.arrow \u03c4_1)\nr : Typing [] t\u2082 \u03c3\nih_l : [] = [] \u2192 Typing [] t\u2081 (\u03c3.arrow \u03c4_1) \u2192 t\u2081.Value \u2228 \u2203 t', t\u2081 \u2b62\u03b2\u1d5b t'\nih_r : [] = [] \u2192 Typing [] t\u2082 \u03c3 \u2192 t\u2082.Value \u2228 \u2203 t', t\u2082 \u2b62\u03b2\u1d5b t'\nder' : Typing [] (t\u2081",
+                "pos": {
+                  "column": 12,
+                  "line": 88
+                }
+              },
+              {
+                "data": "Unknown identifier `t\u2082'`",
+                "pos": {
+                  "column": 26,
+                  "line": 90
+                }
+              },
+              {
+                "data": "Unknown identifier `t\u2081'.app`",
+                "pos": {
+                  "column": 15,
+                  "line": 93
+                }
+              },
+              {
+                "data": "unsolved goals\ncase abs\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\n\u0393 : List ((_ : Var) \u00d7 Binding Var)\n\u03c3\u271d : Ty Var\nt\u2081\u271d : Term Var\n\u03c4\u271d : Ty Var\nL\u271d : Finset Var\na\u271d : \u2200 x \u2209 L\u271d, Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d\na_ih\u271d :\n  \u2200 x \u2209 L\u271d,\n    [] = [\u27e8x, Binding.ty \u03c3\u271d\u27e9] \u2192\n      Typing [\u27e8x, Binding.ty \u03c3\u271d\u27e9] (t\u2081\u271d ^\u1d57\u1d57 Term.fvar x) \u03c4\u271d \u2192\n        (t\u2081\u271d ^\u1d57\u1d57 Ter",
+                "pos": {
+                  "column": 74,
+                  "line": 76
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 15,
+                  "line": 94
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "have_chain",
+            "id": "d002",
+            "ops": [
+              "drop_have_obtain",
+              "case",
+              "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 482
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 519
+          },
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\nder : Typing [] t \u03c4\n\u22a2 t.Value \u2228 \u2203 t', t \u2b62\u03b2\u1d5b t'",
+                "pos": {
+                  "column": 74,
+                  "line": 76
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 0,
+                  "line": 77
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "algebraic_simplification",
+            "id": "d014",
+            "ops": [
+              "induction_simp",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 6
+          }
+        ]
+      },
+      "likely_token_cut": 1.64,
+      "live": true,
+      "loop_invariant_safe": 0.61,
+      "model": "jev-1.13.0",
+      "n_drafts": 15,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "search_space_safe": 0.68,
+      "source": "cslib",
+      "strength_reduction_safe": 0.48,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  generalize eq : [] = \u0393 at der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | in",
+          "id": "d012",
+          "n_chars": 1580,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.4
+        },
+        {
+          "family": "loop_invariant",
+          "head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        ",
+          "id": "d013",
+          "n_chars": 1892,
+          "ops": [
+            "drop_have_after_induction",
+            "mca"
+          ],
+          "probability": 0.25
+        },
+        {
+          "family": "have_chain",
+          "head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        ",
+          "id": "d002",
+          "n_chars": 1873,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+            "mca_span"
+          ],
+          "probability": 0.2
+        },
+        {
+          "family": "algebraic_simplification",
+          "head": "induction der <;> simp",
+          "id": "d014",
+          "n_chars": 22,
+          "ops": [
+            "induction_simp",
+            "mca"
+          ],
+          "probability": 0.05
+        },
+        {
+          "family": "reference",
+          "head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        ",
+          "id": "d000",
+          "n_chars": 2003,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.04
+        },
+        {
+          "family": "simp_set",
+          "head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        ",
+          "id": "d001",
+          "n_chars": 2002,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+            "mca_span"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "have_chain",
+          "head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        ",
+          "id": "d011",
+          "n_chars": 1920,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _",
+            "mca_span"
+          ],
+          "probability": 0.01
+        },
+        {
+          "family": "have_chain",
+          "head": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        ",
+          "id": "d006",
+          "n_chars": 1971,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _",
+            "mca_span"
+          ],
+          "probability": 0.01
+        }
+      ],
+      "usage": {
+        "input_tokens": 6786,
+        "output_tokens": 366
+      },
+      "wall_ms": 35923.2589850144
+    },
+    {
+      "algebraic_simplification_safe": 0.4,
+      "amenable": [
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 1.4152403377578484,
+          "present": {
+            "n_apply": 2.0,
+            "n_cases": 14.0,
+            "n_intro": 1.0
+          }
+        },
+        {
+          "family": "strength_reduction",
+          "features": [
+            "n_rw"
+          ],
+          "mca_score": 0.12748314381731785,
+          "present": {
+            "n_rw": 6.0
+          }
+        },
+        {
+          "family": "algebraic_simplification",
+          "features": [
+            "n_rw"
+          ],
+          "mca_score": 0.12748314381731785,
+          "present": {
+            "n_rw": 6.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "search_space",
+      "best_confidence": 0.43,
+      "best_first_draft": "d001",
+      "dead_code_safe": 0.63,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003"
+      ],
+      "families": [
+        "search_space",
+        "strength_reduction",
+        "algebraic_simplification"
+      ],
+      "features": {
+        "max_indent": 8.0,
+        "n_apply": 2.0,
+        "n_blank": 0.0,
+        "n_calc": 0.0,
+        "n_cases": 14.0,
+        "n_exact": 5.0,
+        "n_have": 0.0,
+        "n_induction": 0.0,
+        "n_intro": 1.0,
+        "n_linarith": 0.0,
+        "n_lines": 63.0,
+        "n_obtain": 0.0,
+        "n_omega": 0.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 6.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 552.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "unsolved goals\ncase red_I\na\u2081 a\u2082 : SKI\nh\u2082 : (I \u2b1d a\u2081) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction a\u2081 a\u2082\n\ncase red_K\na\u2081 a\u2082 b\u271d : SKI\nh\u2082 : (K \u2b1d a\u2081 \u2b1d b\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction a\u2081 a\u2082\n\ncase red_S\na\u2082 a\u271d b\u271d c\u271d : SKI\nh\u2082 : (S \u2b1d a\u271d \u2b1d b\u271d \u2b1d c\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction (a\u271d \u2b1d c\u271d \u2b1d (b\u271d \u2b1d c\u271d)) a\u2082",
+                "pos": {
+                  "column": 65,
+                  "line": 143
+                }
+              },
+              {
+                "data": "unexpected identifier; expected command",
+                "pos": {
+                  "column": 15,
+                  "line": 173
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "simp_set",
+            "id": "d001",
+            "ops": [
+              "drop_redundant_simp_at",
+              "case",
+              "par a a' b b' ha' hb'",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 552
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 552
+          },
+          {
+            "errors": [
+              {
+                "data": "Invalid `\u27e8...\u27e9` notation: The expected type of this term could not be determined",
+                "pos": {
+                  "column": 32,
+                  "line": 181
+                }
+              },
+              {
+                "data": "unsolved goals\ncase red_K\na\u2081 a\u2082 b\u271d : SKI\nh\u2082 : (K \u2b1d a\u2081 \u2b1d b\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction a\u2081 a\u2082\n\ncase red_S\na\u2082 a\u271d b\u271d c\u271d : SKI\nh\u2082 : (S \u2b1d a\u271d \u2b1d b\u271d \u2b1d c\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction (a\u271d \u2b1d c\u271d \u2b1d (b\u271d \u2b1d c\u271d)) a\u2082",
+                "pos": {
+                  "column": 65,
+                  "line": 143
+                }
+              },
+              {
+                "data": "unexpected token '=>'; expected command",
+                "pos": {
+                  "column": 67,
+                  "line": 181
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "simp_set",
+            "id": "d002",
+            "ops": [
+              "drop_redundant_simp_at",
+              "case",
+              "red_I",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 552
+          }
+        ]
+      },
+      "likely_token_cut": 0.26,
+      "live": true,
+      "loop_invariant_safe": 0.29,
+      "model": "jev-1.13.0",
+      "n_drafts": 4,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "search_space_safe": 0.7,
+      "source": "cslib",
+      "strength_reduction_safe": 0.54,
+      "top": [
+        {
+          "family": "simp_set",
+          "head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha",
+          "id": "d001",
+          "n_chars": 1835,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "par a a' b b' ha' hb'",
+            "mca_span"
+          ],
+          "probability": 0.58
+        },
+        {
+          "family": "reference",
+          "head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha",
+          "id": "d000",
+          "n_chars": 1836,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.2
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha",
+          "id": "d002",
+          "n_chars": 1835,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "red_I",
+            "mca_span"
+          ],
+          "probability": 0.15
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha",
+          "id": "d003",
+          "n_chars": 1835,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "red_K c",
+            "mca_span"
+          ],
+          "probability": 0.07
+        }
+      ],
+      "usage": {
+        "input_tokens": 4802,
+        "output_tokens": 256
+      },
+      "wall_ms": 196.51418601279147
+    },
+    {
+      "algebraic_simplification_safe": 0.39,
+      "amenable": [
+        {
+          "family": "search_space",
+          "features": [
+            "n_apply",
+            "n_intro",
+            "n_cases"
+          ],
+          "mca_score": 0.625967416446315,
+          "present": {
+            "n_apply": 6.0,
+            "n_cases": 10.0,
+            "n_intro": 4.0
+          }
+        },
+        {
+          "family": "dead_code",
+          "features": [
+            "n_obtain"
+          ],
+          "mca_score": 0.5200520364684922,
+          "present": {
+            "n_obtain": 8.0
+          }
+        }
+      ],
+      "arena_score": null,
+      "best_compiler_family": "search_space",
+      "best_confidence": 0.81,
+      "best_first_draft": "d004",
+      "dead_code_safe": 0.52,
+      "draft_ids": [
+        "d000",
+        "d001",
+        "d002",
+        "d003",
+        "d004"
+      ],
+      "families": [
+        "search_space",
+        "dead_code"
+      ],
+      "features": {
+        "max_indent": 10.0,
+        "n_apply": 6.0,
+        "n_blank": 0.0,
+        "n_calc": 0.0,
+        "n_cases": 10.0,
+        "n_exact": 0.0,
+        "n_have": 0.0,
+        "n_induction": 0.0,
+        "n_intro": 4.0,
+        "n_linarith": 0.0,
+        "n_lines": 60.0,
+        "n_obtain": 8.0,
+        "n_omega": 0.0,
+        "n_rename_i": 0.0,
+        "n_ring": 0.0,
+        "n_rw": 0.0,
+        "n_simp_all": 0.0,
+        "n_simp_at": 0.0,
+        "n_tokens": 296.0
+      },
+      "jev_generated_lean": false,
+      "lake": {
+        "arena_score": null,
+        "candidates": [
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 15,
+                  "line": 325
+                }
+              },
+              {
+                "data": "Unknown identifier `htr2`",
+                "pos": {
+                  "column": 27,
+                  "line": 327
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 16,
+                  "line": 329
+                }
+              },
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 13,
+                  "line": 337
+                }
+              },
+              {
+                "data": "Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\n\u03bc : Act Name\ns1' : Process Name Constant\nhtr : lts.Tr s1 \u03bc s1'\nhbisim : s1 ~[lts] s2\n\u22a2 lts.Tr s2 \u03bc sorry",
+                "pos": {
+                  "column": 8,
+                  "line": 339
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 12,
+                  "line": 341
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "dead_code",
+            "id": "d004",
+            "ops": [
+              "drop_have_obtain",
+              "mca"
+            ],
+            "theorem_ok": false,
+            "token_count": 192
+          },
+          {
+            "errors": [
+              {
+                "data": "Function expected at\n  IsBisimulation.le_bisimilarity hb s1' s2' hr2\nbut this term has type\n  s1' ~[lts,lts] s2'\n\nNote: Expected a function because this term is being applied to the argument\n  case",
+                "pos": {
+                  "column": 12,
+                  "line": 345
+                }
+              },
+              {
+                "data": "unsolved goals\ncase right.right\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r\u271d : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\nr : ChoiceBisim s1 s2\n\u03bc : Act Name\n\u22a2 \u2200 (s\u2082' : Process Name Constant), lts.Tr s2 \u03bc s\u2082' \u2192 \u2203 s\u2081', lts.Tr s1 \u03bc s\u2081' \u2227 ChoiceBisim s\u2081' s\u2082'",
+                "pos": {
+                  "column": 85,
+                  "line": 312
+                }
+              },
+              {
+                "data": "unexpected token '=>'; expected command",
+                "pos": {
+                  "column": 51,
+                  "line": 345
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "simp_set",
+            "id": "d001",
+            "ops": [
+              "drop_redundant_simp_at",
+              "case",
+              "left",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 296
+          },
+          {
+            "errors": [
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 15,
+                  "line": 325
+                }
+              },
+              {
+                "data": "Unknown identifier `htr2`",
+                "pos": {
+                  "column": 27,
+                  "line": 327
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 16,
+                  "line": 329
+                }
+              },
+              {
+                "data": "Unknown identifier `s2'`",
+                "pos": {
+                  "column": 13,
+                  "line": 337
+                }
+              },
+              {
+                "data": "Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant \u2192 Process Name Constant \u2192 Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 s2 : Process Name Constant\n\u03bc : Act Name\ns1' : Process Name Constant\nhtr : lts.Tr s1 \u03bc s1'\nhbisim : s1 ~[lts] s2\n\u22a2 lts.Tr s2 \u03bc sorry",
+                "pos": {
+                  "column": 8,
+                  "line": 339
+                }
+              },
+              {
+                "data": "Unknown identifier `hb.le_bisimilarity`",
+                "pos": {
+                  "column": 12,
+                  "line": 341
+                }
+              }
+            ],
+            "exit_code": 1,
+            "family": "have_chain",
+            "id": "d002",
+            "ops": [
+              "drop_have_obtain",
+              "case",
+              "left",
+              "mca_span"
+            ],
+            "theorem_ok": false,
+            "token_count": 244
+          },
+          {
+            "errors": [],
+            "exit_code": 0,
+            "family": "reference",
+            "id": "d000",
+            "ops": [
+              "identity",
+              "pca_keep"
+            ],
+            "theorem_ok": true,
+            "token_count": 296
+          }
+        ]
+      },
+      "likely_token_cut": 1.19,
+      "live": true,
+      "loop_invariant_safe": 0.29,
+      "model": "jev-1.13.0",
+      "n_drafts": 5,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "search_space_safe": 0.7,
+      "source": "cslib",
+      "strength_reduction_safe": 0.55,
+      "top": [
+        {
+          "family": "dead_code",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      cases htr\n      case c",
+          "id": "d004",
+          "n_chars": 1235,
+          "ops": [
+            "drop_have_obtain",
+            "mca"
+          ],
+          "probability": 0.85
+        },
+        {
+          "family": "simp_set",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d001",
+          "n_chars": 1602,
+          "ops": [
+            "drop_redundant_simp_at",
+            "case",
+            "left",
+            "mca_span"
+          ],
+          "probability": 0.05
+        },
+        {
+          "family": "have_chain",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      cases htr\n      case c",
+          "id": "d002",
+          "n_chars": 1418,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "left",
+            "mca_span"
+          ],
+          "probability": 0.04
+        },
+        {
+          "family": "reference",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d000",
+          "n_chars": 1603,
+          "ops": [
+            "identity",
+            "pca_keep"
+          ],
+          "probability": 0.03
+        },
+        {
+          "family": "have_chain",
+          "head": "  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 :",
+          "id": "d003",
+          "n_chars": 1419,
+          "ops": [
+            "drop_have_obtain",
+            "case",
+            "right",
+            "mca_span"
+          ],
+          "probability": 0.03
+        }
+      ],
+      "usage": {
+        "input_tokens": 4727,
+        "output_tokens": 266
+      },
+      "wall_ms": 163.82722000707872
+    }
+  ],
+  "jev_generated_lean": false,
+  "lock_ex": false,
+  "observed_at": "2026-09-17T05:58:32.769895+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.4049405265687185,
+      0.20535547758361236,
+      0.11807994165651019,
+      0.07890666288267674,
+      0.05463727730428802,
+      0.04287295106587582,
+      0.031123637276978183,
+      0.019718565406560976,
+      0.01675492790373655,
+      0.012685473566352095,
+      0.00706393426205075,
+      0.004410320950069326,
+      0.0020881727554508097,
+      0.0013621308171197733,
+      1.1712855335003803e-33
+    ],
+    "feature_names": [
+      "n_cases",
+      "n_simp_at",
+      "n_simp_all",
+      "n_have",
+      "n_obtain",
+      "n_rename_i",
+      "n_induction",
+      "n_calc",
+      "n_exact",
+      "n_apply",
+      "n_rw",
+      "n_intro",
+      "n_ring",
+      "n_omega",
+      "n_linarith",
+      "n_tokens",
+      "n_lines",
+      "max_indent",
+      "n_blank"
+    ],
+    "mean": [
+      3.066666666666667,
+      1.0,
+      5.6,
+      21.466666666666665,
+      1.8,
+      0.5333333333333333,
+      0.4,
+      0.8666666666666667,
+      6.266666666666667,
+      5.533333333333333,
+      7.4,
+      5.733333333333333,
+      0.3333333333333333,
+      1.3333333333333333,
+      0.4666666666666667,
+      1631.4,
+      136.53333333333333,
+      13.333333333333334,
+      6.733333333333333
+    ],
+    "minor": [
+      {
+        "explained": 0.0020881727554508097,
+        "index": 12,
+        "loadings": {
+          "max_indent": -0.04885996426842456,
+          "n_apply": -0.18395556485260292,
+          "n_blank": 0.2616247028690958,
+          "n_calc": 0.1337264606042146,
+          "n_cases": 0.10664524913723084,
+          "n_exact": 0.020319313146787688,
+          "n_have": 0.02731632177119504,
+          "n_induction": 0.18945482027611893,
+          "n_intro": -0.4658015301803848,
+          "n_linarith": 0.18354337783793592,
+          "n_lines": 0.1674978449783974,
+          "n_obtain": 0.0390353016584911,
+          "n_omega": -0.01445259679616556,
+          "n_rename_i": 0.5727102207089121,
+          "n_ring": -0.2702393878645738,
+          "n_rw": 0.13716288554887357,
+          "n_simp_all": 0.14466831683441092,
+          "n_simp_at": -0.3198591148191455,
+          "n_tokens": -0.07410300328518059
+        }
+      },
+      {
+        "explained": 0.0013621308171197733,
+        "index": 13,
+        "loadings": {
+          "max_indent": 0.20532775145209983,
+          "n_apply": 0.16745590665455354,
+          "n_blank": 0.03827022493177878,
+          "n_calc": 0.4936584383410768,
+          "n_cases": 0.10542322925882158,
+          "n_exact": -0.2742239222199627,
+          "n_have": 0.35596393535866994,
+          "n_induction": 0.10215424535624705,
+          "n_intro": 0.028418144116426552,
+          "n_linarith": 0.1573464579784092,
+          "n_lines": -0.3538656329793766,
+          "n_obtain": -0.05703458675096095,
+          "n_omega": -0.07556932589587298,
+          "n_rename_i": -0.08733084039816595,
+          "n_ring": -0.3886387006523932,
+          "n_rw": 0.1464602776398848,
+          "n_simp_all": -0.2798493060427773,
+          "n_simp_at": 0.19978343918398905,
+          "n_tokens": -0.05550408149844495
+        }
+      },
+      {
+        "explained": 1.1712855335003803e-33,
+        "index": 14,
+        "loadings": {
+          "max_indent": 0.2479546000932821,
+          "n_apply": 0.0004747468094202069,
+          "n_blank": 0.16147514700171928,
+          "n_calc": -0.4964718335756315,
+          "n_cases": 0.05422836552155171,
+          "n_exact": 0.3109867101141589,
+          "n_have": 0.039823886599956414,
+          "n_induction": 0.06184738888932502,
+          "n_intro": 0.06580695241109172,
+          "n_linarith": 0.06657475309606603,
+          "n_lines": -0.5790092531601415,
+          "n_obtain": 0.13557487907193003,
+          "n_omega": 0.014855292846514746,
+          "n_rename_i": 0.16266582844018548,
+          "n_ring": 0.028346421859113673,
+          "n_rw": 0.39029834176625905,
+          "n_simp_all": -0.047179604869883075,
+          "n_simp_at": 0.0028941229086360187,
+          "n_tokens": 0.12825296004146405
+        }
+      }
+    ],
+    "n_features": 19,
+    "n_rows": 15,
+    "principal": [
+      {
+        "explained": 0.4049405265687185,
+        "index": 0,
+        "loadings": {
+          "max_indent": -0.26472716990802214,
+          "n_apply": 0.08062031373487605,
+          "n_blank": -0.3342438149027209,
+          "n_calc": -0.30073104239355397,
+          "n_cases": 0.22151097089138239,
+          "n_exact": -0.3223738861331306,
+          "n_have": -0.3229177802571527,
+          "n_induction": 0.1554714491780493,
+          "n_intro": -0.13949676587126572,
+          "n_linarith": -0.20355777263126,
+          "n_lines": -0.3316410647395201,
+          "n_obtain": 0.062338763096317515,
+          "n_omega": -0.061922673049083964,
+          "n_rename_i": 0.13191459411652012,
+          "n_ring": -0.2672920525771413,
+          "n_rw": -0.22982013977927257,
+          "n_simp_all": -0.07536010342633125,
+          "n_simp_at": 0.04284608346238592,
+          "n_tokens": -0.3347272419706519
+        }
+      },
+      {
+        "explained": 0.20535547758361236,
+        "index": 1,
+        "loadings": {
+          "max_indent": -0.06706052042749339,
+          "n_apply": 0.36282153292900254,
+          "n_blank": 0.07900790623226846,
+          "n_calc": 0.00732574445822508,
+          "n_cases": 0.08213121073929346,
+          "n_exact": 0.0890744176504485,
+          "n_have": 0.09814013760069844,
+          "n_induction": 0.23333800300355814,
+          "n_intro": 0.4285562020935429,
+          "n_linarith": 0.12753460879015457,
+          "n_lines": 0.06821325256409895,
+          "n_obtain": -0.07282631204263976,
+          "n_omega": 0.04122201675455599,
+          "n_rename_i": 0.42201549830897633,
+          "n_ring": 0.01269643546740824,
+          "n_rw": -0.18336605348962032,
+          "n_simp_all": 0.4340686253001083,
+          "n_simp_at": 0.4021982800631532,
+          "n_tokens": -0.071886864791934
+        }
+      },
+      {
+        "explained": 0.11807994165651019,
+        "index": 2,
+        "loadings": {
+          "max_indent": 0.0449532598571709,
+          "n_apply": -0.32352345885736516,
+          "n_blank": -0.0790536781896265,
+          "n_calc": -0.29693086963826953,
+          "n_cases": -0.1557294182565143,
+          "n_exact": -0.11989011770530777,
+          "n_have": 0.22881988237237064,
+          "n_induction": 0.08284743145871368,
+          "n_intro": 0.013422379827145477,
+          "n_linarith": 0.3730469553318964,
+          "n_lines": 0.13660004981656942,
+          "n_obtain": 0.3480550337682801,
+          "n_omega": 0.4556395923134139,
+          "n_rename_i": -0.19677983957993858,
+          "n_ring": -0.32586905836287494,
+          "n_rw": -0.17302750912548906,
+          "n_simp_all": 0.08422132896669182,
+          "n_simp_at": 0.1787978850106652,
+          "n_tokens": -0.01949180374786194
+        }
+      }
+    ],
+    "singular_values": [
+      10.742813880547532,
+      7.650249088188534,
+      5.80110191016374,
+      4.742193471544878,
+      3.9460897140995264,
+      3.4955387358423886,
+      2.9782942473736167,
+      2.3706098668633513,
+      2.1852126790234663,
+      1.9014099942964289,
+      1.4188802855366138,
+      1.1211340110663655,
+      0.7714461972836995,
+      0.623062824183192,
+      5.777684458739576e-16
+    ],
+    "std": [
+      4.479087208597553,
+      2.160246899469287,
+      6.008882314263333,
+      26.780258068626264,
+      2.7616420236277306,
+      1.407914138796191,
+      0.4898979485566357,
+      1.9618585292749549,
+      8.751888685052819,
+      4.379751388175157,
+      7.400900846068223,
+      5.507167047483568,
+      1.0110500592068734,
+      3.2998316455372216,
+      0.8844332774281066,
+      1198.7467233184275,
+      72.81562713837982,
+      4.237399621885522,
+      11.715896133980628
+    ]
+  },
+  "pr": "PR-9c",
+  "protocol": "LRA/v1",
+  "schema": "lra-pca-mca-fanout/v1",
+  "typesafe_key_in_receipt": false,
+  "wall_ms": 36933.292667992646,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

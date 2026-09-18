@@ -446,6 +446,8 @@ def generate_as_client(
     lock_path: Optional[Path] = None,
     generate: Optional[Callable[..., str]] = None,
     get_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
+    temperature: Optional[float] = None,
+    stop: Optional[list[str]] = None,
 ) -> lra_gt.LraGeneration:
     """Probe docker0, then generate as a client, or wait/skip/exec-owner.
 
@@ -466,6 +468,8 @@ def generate_as_client(
             require_health=False,
             generate=generate,
             get_trace=get_trace,
+            temperature=temperature,
+            stop=stop,
         )
     lock = inspect_gpu0_lock(lock_path)
     action = decide_action(

@@ -1,0 +1,233 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "candidates": [
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean"
+      ],
+      "compile_wall_ms_outer": 1549.474880011985,
+      "error": null,
+      "errors": [],
+      "exit_code": 0,
+      "generator": "deterministic",
+      "kind": "reference",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": true,
+      "n_chars": 1836,
+      "ok": true,
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": null,
+      "tactics_head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha'' hb'' =>\n      let",
+      "theorem_ok": true,
+      "theorem_span": [
+        143,
+        206
+      ],
+      "token_count": 552,
+      "wall_ms": 1548.6771900032181
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean"
+      ],
+      "compile_wall_ms_outer": 1451.5723469958175,
+      "error": null,
+      "errors": [
+        {
+          "data": "unsolved goals\ncase red_I\na\u2081 a\u2082 : SKI\nh\u2082 : (I \u2b1d a\u2081) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction a\u2081 a\u2082\n\ncase red_K\na\u2081 a\u2082 b\u271d : SKI\nh\u2082 : (K \u2b1d a\u2081 \u2b1d b\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction a\u2081 a\u2082\n\ncase red_S\na\u2082 a\u271d b\u271d c\u271d : SKI\nh\u2082 : (S \u2b1d a\u271d \u2b1d b\u271d \u2b1d c\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction (a\u271d \u2b1d c\u271d \u2b1d (b\u271d \u2b1d c\u271d)) a\u2082",
+          "pos": {
+            "column": 65,
+            "line": 143
+          }
+        },
+        {
+          "data": "unexpected identifier; expected command",
+          "pos": {
+            "column": 15,
+            "line": 173
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d000_par a a' b b' ha' hb'",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1835,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "par a a' b b' ha' hb'"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ence.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":65,\"line\":143},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected identifier; expected command\",\"endPos\":{\"column\":19,\"line\":173},\"fileName\":\"Cslib/Languages/CombinatoryLogic/Confluence.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":15,\"line\":173},\"severity\":\"error\"}\n",
+      "tactics_head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha'' hb'' =>\n      let",
+      "theorem_ok": false,
+      "theorem_span": [
+        143,
+        205
+      ],
+      "token_count": 552,
+      "wall_ms": 1450.874001980992
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean"
+      ],
+      "compile_wall_ms_outer": 1477.6424270239659,
+      "error": null,
+      "errors": [
+        {
+          "data": "Invalid `\u27e8...\u27e9` notation: The expected type of this term could not be determined",
+          "pos": {
+            "column": 32,
+            "line": 181
+          }
+        },
+        {
+          "data": "unsolved goals\ncase red_K\na\u2081 a\u2082 b\u271d : SKI\nh\u2082 : (K \u2b1d a\u2081 \u2b1d b\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction a\u2081 a\u2082\n\ncase red_S\na\u2082 a\u271d b\u271d c\u271d : SKI\nh\u2082 : (S \u2b1d a\u271d \u2b1d b\u271d \u2b1d c\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction (a\u271d \u2b1d c\u271d \u2b1d (b\u271d \u2b1d c\u271d)) a\u2082",
+          "pos": {
+            "column": 65,
+            "line": 143
+          }
+        },
+        {
+          "data": "unexpected token '=>'; expected command",
+          "pos": {
+            "column": 67,
+            "line": 181
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d001_red_I",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1835,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "red_I"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ence.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":65,\"line\":143},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected token '=>'; expected command\",\"endPos\":{\"column\":69,\"line\":181},\"fileName\":\"Cslib/Languages/CombinatoryLogic/Confluence.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":67,\"line\":181},\"severity\":\"error\"}\n",
+      "tactics_head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha'' hb'' =>\n      let",
+      "theorem_ok": false,
+      "theorem_span": [
+        143,
+        205
+      ],
+      "token_count": 552,
+      "wall_ms": 1476.8359519948717
+    },
+    {
+      "arena_score": null,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lake",
+        "env",
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean",
+        "-DmaxHeartbeats=400000",
+        "--json",
+        "Cslib/Languages/CombinatoryLogic/Confluence.lean"
+      ],
+      "compile_wall_ms_outer": 1441.3409389962908,
+      "error": null,
+      "errors": [
+        {
+          "data": "Invalid `\u27e8...\u27e9` notation: The expected type of this term could not be determined",
+          "pos": {
+            "column": 20,
+            "line": 191
+          }
+        },
+        {
+          "data": "unsolved goals\ncase red_S\na\u2082 a\u271d b\u271d c\u271d : SKI\nh\u2082 : (S \u2b1d a\u271d \u2b1d b\u271d \u2b1d c\u271d) \u2b62\u209a a\u2082\n\u22a2 Join ParallelReduction (a\u271d \u2b1d c\u271d \u2b1d (b\u271d \u2b1d c\u271d)) a\u2082",
+          "pos": {
+            "column": 65,
+            "line": 143
+          }
+        },
+        {
+          "data": "unexpected token '=>'; expected command",
+          "pos": {
+            "column": 59,
+            "line": 191
+          }
+        }
+      ],
+      "exit_code": 1,
+      "generator": "deterministic",
+      "kind": "span_d002_red_K c",
+      "lean_tag": "v4.31.0",
+      "module_exit_0": false,
+      "n_chars": 1835,
+      "ok": false,
+      "ops": [
+        "drop_redundant_simp_at",
+        "case",
+        "red_K c"
+      ],
+      "sorryAx": false,
+      "sorry_in_theorem": false,
+      "stderr_tail": "",
+      "stdout_tail": "ence.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"Tactic.unsolvedGoals\",\"pos\":{\"column\":65,\"line\":143},\"severity\":\"error\"}\n{\"caption\":\"\",\"data\":\"unexpected token '=>'; expected command\",\"endPos\":{\"column\":61,\"line\":191},\"fileName\":\"Cslib/Languages/CombinatoryLogic/Confluence.lean\",\"isSilent\":false,\"keepFullRange\":true,\"kind\":\"[anonymous]\",\"pos\":{\"column\":59,\"line\":191},\"severity\":\"error\"}\n",
+      "tactics_head": "  intro a a\u2081 a\u2082 h\u2081 h\u2082\n  cases h\u2081\n  case refl => exact \u27e8a\u2082, h\u2082, .refl a\u2082\u27e9\n  case par a a' b b' ha' hb' =>\n    cases h\u2082\n    case refl =>\n      use a' \u2b1d b'\n      exact \u27e8.refl (a' \u2b1d b'), .par ha' hb'\u27e9\n    case par a'' b'' ha'' hb'' =>\n      let",
+      "theorem_ok": false,
+      "theorem_span": [
+        143,
+        205
+      ],
+      "token_count": 552,
+      "wall_ms": 1440.5399690149352
+    }
+  ],
+  "clone": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake/clones/github.com/leanprover/cslib",
+  "file_path": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+  "hardware_class": "mistral_labs_api",
+  "hosted_receipt": "None",
+  "kept": {
+    "kind": "reference",
+    "module_exit_0": true,
+    "ok": true,
+    "theorem_ok": true,
+    "token_count": 552
+  },
+  "n_module_exit_0": 1,
+  "n_valid": 1,
+  "name": "Cslib.SKI.parallelReduction_diamond",
+  "observed_at": "2026-09-17T05:41:01.529936+00:00",
+  "official_track2": false,
+  "prototype_hardware_class": "spark_gb10",
+  "repaired": false,
+  "schema": "lra-track1-keepbest/v1",
+  "used_prototype_endpoint": false,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

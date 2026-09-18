@@ -1,0 +1,1427 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T07:56:42.632726+00:00",
+  "problems": [
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "dropped": [
+        "MCA_0",
+        "MCA_1",
+        "MCA_2",
+        "MCA_3",
+        "MCA_4",
+        "MCA_5",
+        "MCA_6",
+        "MCA_7"
+      ],
+      "hardware_class": "mistral_labs_api",
+      "keep_tokens": 414,
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 0,
+        "name": "CallElimCorrect.substOldPostSubset#diffuse",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 8,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "note": "Exploit=drop high-p and all MCA holes; explore=random hole; diffuse=Leanstral one-hole noise; denoise=hammer. Not neural SGD.",
+      "official_track2": false,
+      "pr": "PR-9e",
+      "protocol": "LRA/v1",
+      "ratio": 0.8589,
+      "ref_tokens": 482,
+      "rounds": [
+        {
+          "accepted": true,
+          "evals": [
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "identity",
+              "n_chars": 2081,
+              "theorem_ok": true,
+              "token_count": 414
+            },
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "simp_all",
+              "n_chars": 2106,
+              "theorem_ok": true,
+              "token_count": 417
+            },
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "omega",
+              "n_chars": 2093,
+              "theorem_ok": true,
+              "token_count": 416
+            },
+            {
+              "errors": [],
+              "exit_code": 0,
+              "hammer": "restore+simp",
+              "n_chars": 2118,
+              "theorem_ok": true,
+              "token_count": 419
+            }
+          ],
+          "holes": [
+            "MCA_0",
+            "MCA_1",
+            "MCA_2",
+            "MCA_3",
+            "MCA_4",
+            "MCA_5",
+            "MCA_6",
+            "MCA_7"
+          ],
+          "keep_tokens": 414,
+          "label": "exploit_all_holes",
+          "phase": "exploit_all",
+          "round": 0
+        }
+      ],
+      "schema": "lra-diffuse-denoise/v1",
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "arena_score": null,
+      "called_docker0": false,
+      "dropped": [],
+      "hardware_class": "mistral_labs_api",
+      "keep_tokens": 268,
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 0,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 826,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 46,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          },
+          {
+            "call_index": 2,
+            "fixture": false,
+            "input_tokens": 826,
+            "kind": "mistral",
+            "model": "labs-leanstral-1-5",
+            "output_tokens": 256,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.0
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 2,
+        "name": "Core.InitsUpdatesComm#diffuse",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 3.0,
+        "skipped": false,
+        "spent_usd": 0.0,
+        "track": "track1_closed"
+      },
+      "n_holes": 4,
+      "name": "Core.InitsUpdatesComm",
+      "note": "Exploit=drop high-p and all MCA holes; explore=random hole; diffuse=Leanstral one-hole noise; denoise=hammer. Not neural SGD.",
+      "official_track2": false,
+      "pr": "PR-9e",
+      "protocol": "LRA/v1",
+      "ratio": 1.0,
+      "ref_tokens": 268,
+      "rounds": [
+        {
+          "accepted": false,
+          "evals": [
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 947
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 954
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 969
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hnd`",
+                  "pos": {
+                    "column": 21,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                  "pos": {
+                    "column": 10,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 981
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "identity",
+              "n_chars": 1517,
+              "theorem_ok": false,
+              "token_count": 237
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 947
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 954
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 969
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hnd`",
+                  "pos": {
+                    "column": 21,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                  "pos": {
+                    "column": 10,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 981
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "simp_all",
+              "n_chars": 1542,
+              "theorem_ok": false,
+              "token_count": 240
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 947
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 954
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 969
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hnd`",
+                  "pos": {
+                    "column": 21,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                  "pos": {
+                    "column": 10,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 981
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "omega",
+              "n_chars": 1529,
+              "theorem_ok": false,
+              "token_count": 239
+            },
+            {
+              "errors": [
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 29,
+                    "line": 947
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hlen1`",
+                  "pos": {
+                    "column": 30,
+                    "line": 954
+                  }
+                },
+                {
+                  "data": "simp_all made no progress",
+                  "pos": {
+                    "column": 12,
+                    "line": 969
+                  }
+                },
+                {
+                  "data": "Unknown identifier `Hnd`",
+                  "pos": {
+                    "column": 21,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                  "pos": {
+                    "column": 10,
+                    "line": 979
+                  }
+                },
+                {
+                  "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                  "pos": {
+                    "column": 15,
+                    "line": 981
+                  }
+                }
+              ],
+              "exit_code": 1,
+              "hammer": "restore+simp",
+              "n_chars": 1554,
+              "theorem_ok": false,
+              "token_count": 242
+            }
+          ],
+          "holes": [
+            "MCA_0",
+            "MCA_1",
+            "MCA_2",
+            "MCA_3"
+          ],
+          "keep_tokens": 268,
+          "label": "exploit_all_holes",
+          "phase": "exploit_all",
+          "round": 0
+        },
+        {
+          "diffuse": {
+            "accepted": false,
+            "denoise_evals": [
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 189,
+                "theorem_ok": false,
+                "token_count": 32
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 214,
+                "theorem_ok": false,
+                "token_count": 35
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 201,
+                "theorem_ok": false,
+                "token_count": 34
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 189,
+                "theorem_ok": false,
+                "token_count": 32
+              }
+            ],
+            "hole": "MCA_1",
+            "identity": {
+              "arena_score": null,
+              "fallback_used": false,
+              "finish_reason": "stop",
+              "hardware_class": "mistral_labs_api",
+              "request_id": "f80639d80f2f4d0584e88b1f9cf74038",
+              "requested_model": "labs-leanstral-1-5",
+              "requested_provider": "mistral",
+              "resolved_model": "labs-leanstral-1-5",
+              "resolved_provider": "mistral",
+              "url_host": "api.mistral.ai",
+              "used_prototype_endpoint": false
+            },
+            "noise_evals": [
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 152,
+                "theorem_ok": false,
+                "token_count": 27
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 177,
+                "theorem_ok": false,
+                "token_count": 30
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 164,
+                "theorem_ok": false,
+                "token_count": 29
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 189,
+                "theorem_ok": false,
+                "token_count": 32
+              }
+            ]
+          },
+          "exploit": {
+            "accepted": false,
+            "evals": [
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.265\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 1595,
+                "theorem_ok": false,
+                "token_count": 249
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.265\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 1620,
+                "theorem_ok": false,
+                "token_count": 252
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.265\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 1607,
+                "theorem_ok": false,
+                "token_count": 251
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.265\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 1632,
+                "theorem_ok": false,
+                "token_count": 254
+              }
+            ],
+            "holes": [
+              "MCA_3",
+              "MCA_0"
+            ],
+            "keep_tokens": 268,
+            "label": "exploit_high_p"
+          },
+          "explore": {
+            "accepted": false,
+            "evals": [
+              {
+                "errors": [
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.282\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 1661,
+                "theorem_ok": false,
+                "token_count": 262
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.282\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 1686,
+                "theorem_ok": false,
+                "token_count": 265
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.282\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 1673,
+                "theorem_ok": false,
+                "token_count": 264
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Function expected at\n  ih Hinit ?m.282\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 983
+                    }
+                  },
+                  {
+                    "data": "No goals to be solved",
+                    "pos": {
+                      "column": 8,
+                      "line": 984
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 1698,
+                "theorem_ok": false,
+                "token_count": 267
+              }
+            ],
+            "holes": [
+              "MCA_2"
+            ],
+            "keep_tokens": 268,
+            "label": "explore_random"
+          },
+          "jev": {
+            "choice": "MCA_0",
+            "confidence": 0.46,
+            "likely_compiles": 0.6,
+            "likely_token_cut": 0.87,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.6,
+              "MCA_1": 0.09,
+              "MCA_2": 0.09,
+              "MCA_3": 0.22
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 719,
+              "output_tokens": 96
+            },
+            "wall_ms": 378.5994039790239
+          },
+          "keep_tokens": 268,
+          "round": 1
+        },
+        {
+          "diffuse": {
+            "accepted": false,
+            "denoise_evals": [
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 857,
+                "theorem_ok": false,
+                "token_count": 143
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 882,
+                "theorem_ok": false,
+                "token_count": 146
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 869,
+                "theorem_ok": false,
+                "token_count": 145
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 857,
+                "theorem_ok": false,
+                "token_count": 143
+              }
+            ],
+            "hole": "MCA_0",
+            "identity": {
+              "arena_score": null,
+              "fallback_used": false,
+              "finish_reason": "length",
+              "hardware_class": "mistral_labs_api",
+              "request_id": "ef1dea0276c04aa095814e181ea539af",
+              "requested_model": "labs-leanstral-1-5",
+              "requested_provider": "mistral",
+              "resolved_model": "labs-leanstral-1-5",
+              "resolved_provider": "mistral",
+              "url_host": "api.mistral.ai",
+              "used_prototype_endpoint": false
+            },
+            "noise_evals": [
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 820,
+                "theorem_ok": false,
+                "token_count": 138
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 845,
+                "theorem_ok": false,
+                "token_count": 141
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 832,
+                "theorem_ok": false,
+                "token_count": 140
+              },
+              {
+                "errors": [
+                  {
+                    "data": "unexpected token '<<<'; expected '{' or tactic",
+                    "pos": {
+                      "column": 35,
+                      "line": 939
+                    }
+                  },
+                  {
+                    "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u22a2 UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''",
+                    "pos": {
+                      "column": 33,
+                      "line": 939
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 857,
+                "theorem_ok": false,
+                "token_count": 143
+              }
+            ]
+          },
+          "exploit": {
+            "accepted": false,
+            "evals": [
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 29,
+                      "line": 947
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 30,
+                      "line": 954
+                    }
+                  },
+                  {
+                    "data": "simp_all made no progress",
+                    "pos": {
+                      "column": 12,
+                      "line": 969
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 1517,
+                "theorem_ok": false,
+                "token_count": 237
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 29,
+                      "line": 947
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 30,
+                      "line": 954
+                    }
+                  },
+                  {
+                    "data": "simp_all made no progress",
+                    "pos": {
+                      "column": 12,
+                      "line": 969
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 1542,
+                "theorem_ok": false,
+                "token_count": 240
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 29,
+                      "line": 947
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 30,
+                      "line": 954
+                    }
+                  },
+                  {
+                    "data": "simp_all made no progress",
+                    "pos": {
+                      "column": 12,
+                      "line": 969
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 1529,
+                "theorem_ok": false,
+                "token_count": 239
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 29,
+                      "line": 947
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hlen1`",
+                    "pos": {
+                      "column": 30,
+                      "line": 954
+                    }
+                  },
+                  {
+                    "data": "simp_all made no progress",
+                    "pos": {
+                      "column": 12,
+                      "line": 969
+                    }
+                  },
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 979
+                    }
+                  },
+                  {
+                    "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+                    "pos": {
+                      "column": 15,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 1554,
+                "theorem_ok": false,
+                "token_count": 242
+              }
+            ],
+            "holes": [
+              "MCA_3",
+              "MCA_1",
+              "MCA_0",
+              "MCA_2"
+            ],
+            "keep_tokens": 268,
+            "label": "exploit_high_p"
+          },
+          "explore": {
+            "accepted": false,
+            "evals": [
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "identity",
+                "n_chars": 1651,
+                "theorem_ok": false,
+                "token_count": 262
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "simp_all",
+                "n_chars": 1676,
+                "theorem_ok": false,
+                "token_count": 265
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "omega",
+                "n_chars": 1663,
+                "theorem_ok": false,
+                "token_count": 264
+              },
+              {
+                "errors": [
+                  {
+                    "data": "Unknown identifier `Hnd`",
+                    "pos": {
+                      "column": 21,
+                      "line": 981
+                    }
+                  },
+                  {
+                    "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+                    "pos": {
+                      "column": 10,
+                      "line": 981
+                    }
+                  }
+                ],
+                "exit_code": 1,
+                "hammer": "restore+simp",
+                "n_chars": 1688,
+                "theorem_ok": false,
+                "token_count": 267
+              }
+            ],
+            "holes": [
+              "MCA_3"
+            ],
+            "keep_tokens": 268,
+            "label": "explore_random"
+          },
+          "jev": {
+            "choice": "MCA_0",
+            "confidence": 0.33,
+            "likely_compiles": 0.59,
+            "likely_token_cut": 0.78,
+            "model": "jev-1.13.0",
+            "probabilities": {
+              "MCA_0": 0.5,
+              "MCA_1": 0.15,
+              "MCA_2": 0.22,
+              "MCA_3": 0.13
+            },
+            "skipped": false,
+            "usage": {
+              "input_tokens": 782,
+              "output_tokens": 96
+            },
+            "wall_ms": 238.11374400975183
+          },
+          "keep_tokens": 268,
+          "round": 2
+        }
+      ],
+      "schema": "lra-diffuse-denoise/v1",
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "schema": "lra-sgd-fanout-batch/v1",
+  "wall_ms": 105615.98649501684
+}

@@ -283,6 +283,8 @@ def generate_lra(
     generate: Optional[Callable[..., str]] = None,
     get_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
     base_url: Optional[str] = None,
+    temperature: Optional[float] = None,
+    stop: Optional[list[str]] = None,
 ) -> LraGeneration:
     """Probe docker0, then call the router with fail-closed kwargs. Record resolved identity."""
 
@@ -332,6 +334,11 @@ def generate_lra(
         if router_trace is None:
             router_trace = loaded_trace
 
+    call_kwargs = dict(FAIL_CLOSED_KWARGS)
+    if temperature is not None:
+        call_kwargs["temperature"] = float(temperature)
+    if stop:
+        call_kwargs["stop"] = [str(item) for item in stop if str(item)]
     with _GENERATE_LOCK:
         _pin_client_env(base_url=pinned_base)
         try:
@@ -339,7 +346,7 @@ def generate_lra(
                 prompt,
                 max_new_tokens=int(max_new_tokens),
                 timeout=float(timeout),
-                **FAIL_CLOSED_KWARGS,
+                **call_kwargs,
             )
         except Docker0Unreachable:
             raise

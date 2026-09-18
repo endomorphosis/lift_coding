@@ -1,0 +1,44 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "observed_at": "2026-09-17T05:41:13.632897+00:00",
+  "problems": [
+    {
+      "kept": {
+        "kind": "reference",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 519
+      },
+      "n_valid": 1,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "ref_tokens": 519
+    },
+    {
+      "kept": {
+        "kind": "reference",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 552
+      },
+      "n_valid": 1,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "ref_tokens": 552
+    },
+    {
+      "kept": {
+        "kind": "reference",
+        "module_exit_0": true,
+        "ok": true,
+        "theorem_ok": true,
+        "token_count": 296
+      },
+      "n_valid": 1,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "ref_tokens": 296
+    }
+  ],
+  "schema": "lra-track1-keepbest-batch/v1"
+}
