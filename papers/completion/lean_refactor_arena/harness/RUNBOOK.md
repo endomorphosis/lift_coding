@@ -14,6 +14,11 @@ Identities frozen for this run live in
 run. Do not add `lean_refactor_arena` to `scripts/paper_supervisors.py`
 `PAPERS`. LRAH-* IDs in this file are documentation, not a second scheduler.
 
+The TypeSafe NCA inner loop (Grok outer, Jev gate, lake oracle) is documented
+in [`../typesafe_nca.md`](../typesafe_nca.md). That path is **not** this
+runbook's Spark `run_warmup.py` loop and is **not** official Track 2.
+Never docker0 from NCA instruct. Jev does not write Lean.
+
 ## Claim boundary
 
 Allowed after a verifier PASS:

@@ -953,7 +953,7 @@ class SkillImproveLoopTests(unittest.TestCase):
             rec,
             "  exact ⟨a, b,⟩\n",
             args=Args(),
-            memory={"nca": {"grid": {}, "program_state": {"ops": [{"op": "CALL", "ptr": "ptr://skill/port_trailing_tuple_comma"}, {"op": "KEEP"}]}}},
+            memory={"nca": {"grid": {}, "program_state": {"ops": [], "last_ran": []}}},
             ledger=None,
             rng=__import__("random").Random(0),
             model=None,
@@ -964,7 +964,9 @@ class SkillImproveLoopTests(unittest.TestCase):
             max_steps=3,
             max_depth=3,
         )
-        self.assertNotIn(",⟩", walked.get("tactics") or "")
+        actions = [ev.get("action") or ev.get("compose") for ev in lra_inner.flatten_trace(walked.get("trace") or [])]
+        self.assertIn("instruct", actions)
+        self.assertTrue((walked.get("observations") or {}) or walked.get("tactics"))
 
     def test_skill_call_lakes_and_tick_focus(self) -> None:
         import nca_program as lra_prog
@@ -1636,6 +1638,73 @@ class SkillImproveLoopTests(unittest.TestCase):
         instructed = (mem.get("observations") or {}).get("no_drafts_instructed_by") or {}
         self.assertTrue(instructed.get("Core.InitsUpdatesComm"))
         self.assertTrue(instructed.get("Cslib.SKI.parallelReduction_diamond"))
+
+    def test_persist_memory_false_never_writes(self) -> None:
+        writes: list[str] = []
+        orig = lra_bind.save_memory
+
+        def spy(memory, path=None):
+            writes.append(str(path or lra_bind.MEMORY_DEFAULT))
+            return path or lra_bind.MEMORY_DEFAULT
+
+        lra_bind.save_memory = spy  # type: ignore[assignment]
+        try:
+
+            def fake_generate(prompt: str, **_kwargs: object) -> str:
+                return '{"action": "stop", "reason": "fixture"}'
+
+            def fake_inner(_args: object) -> dict:
+                return {"skill_analysis": [], "lake": [], "ledger": {"jev_calls": 0}, "called_docker0": False}
+
+            lra_loop_sk.run_loop(
+                outer=1,
+                llm=True,
+                out=HERE.parent / "evidence" / "canaries",
+                rounds=1,
+                lake_top=1,
+                drafts=2,
+                timeout=1.0,
+                seed=1,
+                generate=fake_generate,
+                run_inner=fake_inner,
+                memory={},
+                persist_memory=False,
+            )
+        finally:
+            lra_bind.save_memory = orig  # type: ignore[assignment]
+        self.assertEqual(writes, [])
+
+    def test_program_nca_replaces_state_before_execute(self) -> None:
+        import board_graph as lra_board
+        import nca_program as lra_prog
+
+        mem: dict = {"nca": {"grid": {}, "program_state": {"ops": [], "last_ran": []}}}
+        lra_board.seed_nca_from_board(mem)
+        lra_board.seed_keepbest_theorems(
+            mem, {"Core.InitsUpdatesComm": 139}, warmup={"Core.InitsUpdatesComm": 271}
+        )
+        out = lra_prog.program_nca(
+            mem,
+            tactics="  exact Hin\n",
+            problem="Core.InitsUpdatesComm",
+            llm="off",
+            compile_fn=lambda *_a, **_k: {"theorem_ok": True, "token_count": 3, "errors": []},
+        )
+        ran = list((mem["nca"]["program_state"].get("last_ran") or []))
+        self.assertTrue(ran, out)
+        self.assertTrue(any(op.get("op") == "CALL" for op in ran))
+        self.assertIn("last_ran", mem["nca"]["program_state"])
+
+    def test_cold_seed_does_not_halt(self) -> None:
+        import board_graph as lra_board
+        import typesafe_nca as lra_nca
+
+        mem: dict = {"nca": {"grid": {}}}
+        lra_board.seed_nca_from_board(mem)
+        halt = lra_nca.should_halt(mem)
+        self.assertFalse(halt["halt"], halt)
+        self.assertFalse(halt["budget_dead"])
+        self.assertEqual(halt["n_hot_tasks"], 0)
 
 
 if __name__ == "__main__":

@@ -36,6 +36,7 @@ Template: `neurips_2026_vericode_competition.sty` (competition track, not the re
 
 | Path | Role |
 | --- | --- |
+| `typesafe_nca.md` | TypeSafe NCA architecture for agents and harness engineers |
 | `data/benchmark_data_warmup.jsonl` | Frozen organizer warm-up |
 | `data/warmup_summary.json` | Machine-readable census |
 | `tools/summarize_warmup.py` | Hash check + table + receipt |
