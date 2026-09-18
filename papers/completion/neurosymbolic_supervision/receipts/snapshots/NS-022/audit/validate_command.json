@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "env",
+    "-i",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937",
+    "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.cache",
+    "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.config",
+    "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.local/share",
+    "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.local/state",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "/usr/bin/python3.12",
+    "-B",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/validate_manuscript.py"
+  ],
+  "cwd": ".",
+  "exit_code": 0,
+  "started_at": "2026-09-13T14:11:28.695168+00:00",
+  "finished_at": "2026-09-13T14:11:28.931328+00:00",
+  "elapsed_host_wall_seconds": 0.23614835739135742
+}

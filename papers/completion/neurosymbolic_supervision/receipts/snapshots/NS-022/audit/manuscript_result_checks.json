@@ -1,0 +1,89 @@
+{
+  "schema": "neurosymbolic-supervision/manuscript-result-checks@1",
+  "task_id": "NS-022",
+  "new_scientific_calls": 0,
+  "results_json_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+  "generated_inputs_sha256": {
+    "generated/figures/family_useful.pdf": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "generated/figures/family_useful.svg": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
+    "generated/table17.tex": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "generated/table18.tex": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+    "generated/ablations.tex": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+    "formal_arguments.tex": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+    "neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+  },
+  "verified_references_sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951",
+  "ns019_family_useful_pdf": {
+    "path": "papers/completion/neurosymbolic_supervision/manuscript/generated/figures/family_useful.pdf",
+    "sha256": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "bytes": 5019,
+    "role": "NS-019 historical/task-owned ASCII rendering; not the published Figure 1",
+    "preserved": true
+  },
+  "published_figure": {
+    "kind": "Type1 TikZ drawing in main.tex",
+    "coordinates": "eight-family useful fractions matching generated Table 17",
+    "not_used": "manuscript/generated/figures/family_useful.pdf"
+  },
+  "table18_sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+  "table18_layout_copy": "two allowbreak points only; generated table18.tex bytes unchanged",
+  "numeric_claims": {
+    "useful_completions": "9/32",
+    "arm_A_useful": "5/16",
+    "arm_B_useful": "4/16",
+    "mean_B_minus_A": -0.0625,
+    "descriptive_95_percentile_interval": [
+      -0.1875,
+      0.0
+    ],
+    "independent_families": 8,
+    "nested_repetitions": [
+      104729,
+      130363
+    ],
+    "outcomes": {
+      "full_cold_pass": 9,
+      "hidden_acceptance_failed": 7,
+      "known_proposal_failure": 2,
+      "proposal_child_deadline": 14
+    },
+    "scoring_invocations": 16,
+    "completed_cold_validations": 15,
+    "unknown_external_charge_rows": 32
+  },
+  "placeholder_scan": {
+    "tbd_to_be_filled_results": false,
+    "unresolved_internal_labels": false
+  },
+  "pdf": {
+    "pages": 12,
+    "main_text_pages_excluding_references_appendices": 7,
+    "page_size": "612 x 792 pts (letter)",
+    "type3_fonts": false,
+    "font_count": 13,
+    "sha256": "3bc8d9375096729dec1915277417a014d73e4e2a4c1c26ed456bf5ab7de3b9d2",
+    "bytes": 239900,
+    "shell_escape": "disabled"
+  },
+  "style": {
+    "package": "neurips_2026_vericode",
+    "mode": "anonymous default",
+    "checklist_included": false,
+    "checklist_owner": "NS-024"
+  },
+  "claim_ledger_alignment": {
+    "final_claim_evidence_matrix": "papers/completion/neurosymbolic_supervision/audit/final_claim_evidence_matrix.json",
+    "scientific_scope": "eight-family A/B local-cold descriptive comparison; C/D, warm, reuse, publication, sixteen-family inference withdrawn",
+    "supplemental_not_evaluated_as_final_repairs": true
+  },
+  "limitations_preserved": [
+    "descriptive interval is not superiority/noninferiority/equality/safety",
+    "human semantic fidelity unmeasured",
+    "settled provider charges unavailable",
+    "nested clocks not summed",
+    "pilot 10/24 not pooled",
+    "false reuse 1/26 retained",
+    "native proof unavailable",
+    "no complete adversarial scorer-integrity claim"
+  ]
+}

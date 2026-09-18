@@ -1,0 +1,665 @@
+Rc files read (in order):
+  NONE
+Latexmk: This is Latexmk, John Collins, 9 March 2026. Version 4.88.
+No existing .aux file, so I'll make a simple one, and require run of *latex.
+Force everything to be remade.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Category 'other':
+  Rerun of 'pdflatex' forced or previously required:
+    Reason or flag: 'go_mode'
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running '/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -no-shell-escape  -interaction=nonstopmode -halt-on-error -file-line-error -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/size10.clo)) (./neurips_2026_vericode.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/float/float.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-ptm.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+
+Package epstopdf Warning: Shell escape feature is not enabled.
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1phv.fd)
+
+Package natbib Warning: Citation `baseline08' on page 1 undefined on input line 49.
+
+
+Package natbib Warning: Citation `baseline11' on page 1 undefined on input line 49.
+
+[1{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+
+Package natbib Warning: Citation `baseline04' on page 2 undefined on input line 96.
+
+
+Package natbib Warning: Citation `baseline02' on page 2 undefined on input line 98.
+
+
+LaTeX Warning: Reference `sec:formal-arguments-ns023' on page 2 undefined on input line 117.
+
+[2] [3]
+
+LaTeX Warning: Reference `tab:family-useful' on page 4 undefined on input line 256.
+
+
+LaTeX Warning: Reference `fig:family-useful' on page 4 undefined on input line 256.
+
+(./generated/table17.tex)
+
+LaTeX Warning: Reference `tab:family-useful' on page 4 undefined on input line 306.
+
+
+LaTeX Warning: Reference `tab:family-useful' on page 4 undefined on input line 306.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [4]
+
+LaTeX Warning: Reference `tab:ablations' on page 5 undefined on input line 344.
+
+
+LaTeX Warning: Reference `tab:boundary' on page 5 undefined on input line 345.
+
+
+Package natbib Warning: Citation `baseline01' on page 5 undefined on input line 363.
+
+
+Package natbib Warning: Citation `baseline02' on page 5 undefined on input line 368.
+
+
+Package natbib Warning: Citation `baseline04' on page 5 undefined on input line 368.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [5]
+
+Package natbib Warning: Citation `baseline07' on page 6 undefined on input line 372.
+
+
+Package natbib Warning: Citation `baseline08' on page 6 undefined on input line 378.
+
+
+Package natbib Warning: Citation `baseline11' on page 6 undefined on input line 379.
+
+[6] [7]
+No file main.bbl.
+(./formal_arguments.tex [8] [9])
+
+LaTeX Warning: Reference `tab:boundary' on page 10 undefined on input line 472.
+
+
+LaTeX Warning: Reference `tab:ablations' on page 10 undefined on input line 477.
+
+
+Underfull \hbox (badness 4279) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) thor-ity and un-trusted
+
+Underfull \hbox (badness 3148) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) close re-jected in fix-
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--492
+[]\T1/ptm/m/n/10 (+20) Deterministic re-pair
+
+Underfull \hbox (badness 1325) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) and in-jected resid-ual
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--493
+[]\T1/ptm/m/n/10 (+20) Exact/conservative
+
+Underfull \hbox (badness 3428) in paragraph at lines 493--493
+\T1/ptm/m/n/10 (+20) trans-la-tion only; no
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--494
+[]\T1/ptm/m/n/10 (+20) Native the-o-
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+[]\T1/ptm/m/n/10 (+20) NS-014 scope
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--495
+[]\T1/ptm/m/n/10 (+20) Fixture/call/
+
+Underfull \hbox (badness 1337) in paragraph at lines 495--495
+\T1/ptm/m/n/10 (+20) line only; no ad-mit-
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
+[]\T1/ptm/m/n/10 (+20) NS-011; cor-
+
+Underfull \hbox (badness 1975) in paragraph at lines 496--496
+[]\T1/ptm/m/n/10 (+20) Publication af-ter
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
+[]\T1/ptm/m/n/10 (+20) WAL/CAS re-cov-ery
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
+\T1/ptm/m/n/10 (+20) ex-plicit her-metic
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--497
+[]\T1/ptm/m/n/10 (+20) World/procedure
+
+Underfull \hbox (badness 5771) in paragraph at lines 497--497
+\T1/ptm/m/n/10 (+20) paired pre/post con-
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
+[]\T1/ptm/m/n/10 (+20) NS-015 scope
+(./generated/ablations.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--8
+[]\T1/ptm/m/n/10 (+20) adversarial scorer-integrity
+)
+
+Package natbib Warning: There were undefined citations.
+
+[10] [11] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)</home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (11 pages, 252586 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Missing bbl file 'main.bbl' in following:
+ No file main.bbl.
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'main.bbl' for 'pdflatex'
+Create bibtex main
+Latexmk: Found bibliography file(s):
+  ../audit/verified_references.bib
+Latexmk: applying rule 'bibtex main'...
+Rule 'bibtex main':  Reasons for rerun
+Category 'other':
+  Rerun of 'bibtex main' forced or previously required:
+    Reason or flag: 'Initial set up of rule'
+
+------------
+Run number 1 of rule 'bibtex main'
+------------
+------------
+Running 'bibtex  "main.aux"'
+------------
+This is BibTeX, Version 0.99e (TeX Live 2026)
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: ../audit/verified_references.bib
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+  main.bbl
+  main.out
+
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running '/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -no-shell-escape  -interaction=nonstopmode -halt-on-error -file-line-error -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/size10.clo)) (./neurips_2026_vericode.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/float/float.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-ptm.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+
+Package epstopdf Warning: Shell escape feature is not enabled.
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (./main.out) (./main.out) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1phv.fd)
+
+Package natbib Warning: Citation `baseline08' on page 1 undefined on input line 49.
+
+
+Package natbib Warning: Citation `baseline11' on page 1 undefined on input line 49.
+
+[1{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+
+Package natbib Warning: Citation `baseline04' on page 2 undefined on input line 96.
+
+
+Package natbib Warning: Citation `baseline02' on page 2 undefined on input line 98.
+
+[2] [3] (./generated/table17.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [4]
+
+Package natbib Warning: Citation `baseline01' on page 5 undefined on input line 363.
+
+
+Package natbib Warning: Citation `baseline02' on page 5 undefined on input line 368.
+
+
+Package natbib Warning: Citation `baseline04' on page 5 undefined on input line 368.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [5]
+
+Package natbib Warning: Citation `baseline07' on page 6 undefined on input line 372.
+
+
+Package natbib Warning: Citation `baseline08' on page 6 undefined on input line 378.
+
+
+Package natbib Warning: Citation `baseline11' on page 6 undefined on input line 379.
+
+[6] [7] (./main.bbl) [8] (./formal_arguments.tex [9] [10])
+Underfull \hbox (badness 4279) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) thor-ity and un-trusted
+
+Underfull \hbox (badness 3148) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) close re-jected in fix-
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--492
+[]\T1/ptm/m/n/10 (+20) Deterministic re-pair
+
+Underfull \hbox (badness 1325) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) and in-jected resid-ual
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--493
+[]\T1/ptm/m/n/10 (+20) Exact/conservative
+
+Underfull \hbox (badness 3428) in paragraph at lines 493--493
+\T1/ptm/m/n/10 (+20) trans-la-tion only; no
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--494
+[]\T1/ptm/m/n/10 (+20) Native the-o-
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+[]\T1/ptm/m/n/10 (+20) NS-014 scope
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--495
+[]\T1/ptm/m/n/10 (+20) Fixture/call/
+
+Underfull \hbox (badness 1337) in paragraph at lines 495--495
+\T1/ptm/m/n/10 (+20) line only; no ad-mit-
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
+[]\T1/ptm/m/n/10 (+20) NS-011; cor-
+
+Underfull \hbox (badness 1975) in paragraph at lines 496--496
+[]\T1/ptm/m/n/10 (+20) Publication af-ter
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
+[]\T1/ptm/m/n/10 (+20) WAL/CAS re-cov-ery
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
+\T1/ptm/m/n/10 (+20) ex-plicit her-metic
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--497
+[]\T1/ptm/m/n/10 (+20) World/procedure
+
+Underfull \hbox (badness 5771) in paragraph at lines 497--497
+\T1/ptm/m/n/10 (+20) paired pre/post con-
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
+[]\T1/ptm/m/n/10 (+20) NS-015 scope
+(./generated/ablations.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--8
+[]\T1/ptm/m/n/10 (+20) adversarial scorer-integrity
+)
+
+Package natbib Warning: There were undefined citations.
+
+[11] [12] (./main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information)</home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (12 pages, 267549 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Found input bbl file 'main.bbl'
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'main.bbl' for 'pdflatex'
+Latexmk: Found bibliography file(s):
+  ../audit/verified_references.bib
+Latexmk: applying rule 'bibtex main'...
+Rule 'bibtex main':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+
+------------
+Run number 2 of rule 'bibtex main'
+------------
+------------
+Running 'bibtex  "main.aux"'
+------------
+This is BibTeX, Version 0.99e (TeX Live 2026)
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: ../audit/verified_references.bib
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+
+------------
+Run number 3 of rule 'pdflatex'
+------------
+------------
+Running '/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -no-shell-escape  -interaction=nonstopmode -halt-on-error -file-line-error -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/size10.clo)) (./neurips_2026_vericode.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/float/float.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-ptm.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+
+Package epstopdf Warning: Shell escape feature is not enabled.
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (./main.out) (./main.out) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1phv.fd) [1{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] [3] (./generated/table17.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [4]
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [5] [6] [7] (./main.bbl) [8] (./formal_arguments.tex [9] [10])
+Underfull \hbox (badness 4279) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) thor-ity and un-trusted
+
+Underfull \hbox (badness 3148) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) close re-jected in fix-
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--492
+[]\T1/ptm/m/n/10 (+20) Deterministic re-pair
+
+Underfull \hbox (badness 1325) in paragraph at lines 492--492
+\T1/ptm/m/n/10 (+20) and in-jected resid-ual
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--493
+[]\T1/ptm/m/n/10 (+20) Exact/conservative
+
+Underfull \hbox (badness 3428) in paragraph at lines 493--493
+\T1/ptm/m/n/10 (+20) trans-la-tion only; no
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--494
+[]\T1/ptm/m/n/10 (+20) Native the-o-
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+[]\T1/ptm/m/n/10 (+20) NS-014 scope
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--495
+[]\T1/ptm/m/n/10 (+20) Fixture/call/
+
+Underfull \hbox (badness 1337) in paragraph at lines 495--495
+\T1/ptm/m/n/10 (+20) line only; no ad-mit-
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
+[]\T1/ptm/m/n/10 (+20) NS-011; cor-
+
+Underfull \hbox (badness 1975) in paragraph at lines 496--496
+[]\T1/ptm/m/n/10 (+20) Publication af-ter
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
+[]\T1/ptm/m/n/10 (+20) WAL/CAS re-cov-ery
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
+\T1/ptm/m/n/10 (+20) ex-plicit her-metic
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--497
+[]\T1/ptm/m/n/10 (+20) World/procedure
+
+Underfull \hbox (badness 5771) in paragraph at lines 497--497
+\T1/ptm/m/n/10 (+20) paired pre/post con-
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
+[]\T1/ptm/m/n/10 (+20) NS-015 scope
+(./generated/ablations.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--8
+[]\T1/ptm/m/n/10 (+20) adversarial scorer-integrity
+) [11] [12] (./main.aux) )
+(see the transcript file for additional information)</home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (12 pages, 268960 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Found input bbl file 'main.bbl'
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'main.bbl' for 'pdflatex'
+Latexmk: Found bibliography file(s):
+  ../audit/verified_references.bib
+Latexmk: All targets (main.pdf) are up-to-date
+

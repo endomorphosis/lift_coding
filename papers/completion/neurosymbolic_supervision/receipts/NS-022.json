@@ -1,0 +1,153 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-022",
+  "status": "complete",
+  "template_only": false,
+  "completed_at": "2026-09-13T14:12:20+00:00",
+  "scope": "Ordinary current-source manuscript assembly around the already frozen 32-cell A/B local-cold comparison. Replaces the placeholder reconstruction with reviewed non-result fragments plus actual NS-019/NS-020 numbers. Preserves the NS-019 ASCII family_useful.pdf unchanged and does not treat it as Figure 1. No grant, provider, model, scorer, native context, proof, scientific retry, or outside reviewer.",
+  "source_versions": {
+    "workspace_git_head": "9470bd57ac66d71aa2fe6797ecc2915d39827e89",
+    "python": "Python 3.12.3",
+    "interpreter": "/usr/bin/python3.12",
+    "latexmk": "Latexmk, John Collins, 9 March 2026. Version 4.88",
+    "pdflatex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+    "pdffonts": "pdffonts version 24.02.0",
+    "pdfinfo": "pdfinfo version 24.02.0",
+    "pdftotext": "pdftotext version 24.02.0",
+    "results_json_sha256": "6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e",
+    "table17_sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79",
+    "table18_sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495",
+    "ablations_sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf",
+    "family_useful_pdf_sha256": "8ea081bca5d5e309cc5659628b7ceea5e053089b3adfd1d5ae11a7f5c163e4a5",
+    "family_useful_svg_sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90",
+    "formal_arguments_sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+    "verified_references_sha256": "0445451efbb19678d9f1af3c84470a92966f8888230e44fe70eb9744f1ef1951",
+    "style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "freeze_sha256": "ac605b5de8b58cc41c5c3609e7752e5e4441ab627dbbe6d31f4d8d086b33732d",
+    "final_freeze_file_sha256": "7175ca68247d958dabf83a97441fe6042d3b88feafa74f95c76e1720cc74fa1a",
+    "ns017_manifest_sha256": "0891bee6e3a556f5448250bbf11815ac255958a2f02add848d4e0934f23aeeac",
+    "ns018_ablation_manifest_sha256": "15c8fb2d05ffcd02ecb105f6498288f43ef2717ea3db5605d95d277c0195e5d0",
+    "paper_pdf_sha256": "3bc8d9375096729dec1915277417a014d73e4e2a4c1c26ed456bf5ab7de3b9d2",
+    "new_scientific_calls": 0
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/main.tex": "bc2a4ebf59ad5825a0ddb5cb942bea11916093073a9e59af5421feaaaf93f528",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/paper.pdf": "3bc8d9375096729dec1915277417a014d73e4e2a4c1c26ed456bf5ab7de3b9d2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/manuscript_result_checks.json": "79708026145e4d9339136e301d9e9339a94cff0d57569a6bd6fbcabc08664316",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/revision_notes.md": "c5f7045e1800b7fd2f281621e42776cd3f62ded71347490325b779d0e6b06aa2",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/validate_manuscript.log": "908d66558f2aa8ea3156a612d6e35cdbd3117261e87945c16861f429622daf1f",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/validate_command.json": "7815071219a9ecd89351777631fc12b869704bc7ea734eec88ed243a9ee8b622",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/tool-versions.json": "86ee3f9e3c5de75dbfbab7d065d7a201e05ad8b4086257d76658e8f620524a89",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/build/latexmk.log": "dc182d2d4254d999fb9900299663e09b8582968f5fe3ce4da2b51a089381d7b7",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/build/command.json": "954a36aed1265258aaf6adb517bf4476197d73c7ada8dec73d686f7765498769",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/validate_manuscript.py": "3deee692b659d5643d9248061afcfddc3e3a4f8651176ca3aef8acaa905593fa"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/manuscript/main.tex": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/main.tex",
+    "papers/completion/neurosymbolic_supervision/manuscript/paper.pdf": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/paper.pdf",
+    "papers/completion/neurosymbolic_supervision/audit/manuscript_result_checks.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/manuscript_result_checks.json",
+    "papers/completion/neurosymbolic_supervision/audit/revision_notes.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/revision_notes.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Abstract numbers and conclusions exactly match generated results and their population/uncertainty/limitations.",
+      "status": "met",
+      "explanation": "Abstract, results, and conclusion report useful completion 9/32 (A 5/16, B 4/16), mean family B-minus-A −0.0625, descriptive conditional 95% interval [−0.1875, 0], eight families, nested repetitions 104729/130363, outcomes 9/7/14/2, sixteen scoring invocations, fifteen completed cold validations, fourteen child deadlines, and unavailable settled charges. These match NS-019 results.json SHA256 6b07e88ff02ad6674fd5979b361f4de4f121ec6b58906927d8cbfafca86b972e and generated Table 17. The interval is labeled descriptive and non-promotional. Population remains 32 nested cells, not 32 independent repositories or a sixteen-family sample.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/main.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/paper.pdf",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/manuscript_result_checks.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/validate_manuscript.log"
+      ]
+    },
+    {
+      "criterion": "No TBD, TO BE FILLED, RESULTS placeholder, unsupported success assertion, or unresolved internal artifact label remains in scientific text.",
+      "status": "met",
+      "explanation": "Ordinary validation scanned main.tex and the compiled PDF. No TBD, TO BE FILLED, RESULTS placeholder, TODO, or unresolved [D]/[A]/[N] workstream label remains. Figure 1 is not claimed as a success plot; the contrast is explicitly not superiority, noninferiority, equality, or safety. NS-NNN tokens in the boundary table are defined as internal qualification IDs. The official checklist is omitted for NS-024.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/main.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/paper.pdf",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/validate_manuscript.log",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/revision_notes.md"
+      ]
+    },
+    {
+      "criterion": "The main text clearly states research question, novel composition, trusted assumptions, matched method/baseline, results, and negative cases.",
+      "status": "met",
+      "explanation": "Section 1 states the research question (whether adding native source-linked semantic context to matched public raw context changes useful cold repair) and the evidence-boundary composition. Section 2 states trusted assumptions and the unmachine-checked conditional arguments. Section 3 states the matched A/B local-cold method, one-POST protocol, and resource endpoints. Section 5 reports the 32-cell results, family table/figure, 14 deadlines, 7 hidden-acceptance failures including one incomplete collection, and 2 known proposal failures. Limitations and conclusion keep withdrawn C/D, warm, reuse, publication, and sixteen-family objectives explicit.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/main.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/paper.pdf",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/revision_notes.md"
+      ]
+    },
+    {
+      "criterion": "Supplemental breadth cannot be mistaken for evaluated implementation; final scientific scope matches the claim ledger.",
+      "status": "met",
+      "explanation": "Main text and the ablation table state that C/D routing, warm caches, reuse, publication efficacy, native proving, world/procedure consumption, and human semantic fidelity are withdrawn or unmeasured. Table 18's six historical rows are labeled constructed controls/scope closures; NS-NNN IDs are not families or useful repairs. The four-family pilot 10/24 is not pooled with the final 9/32. The NS-023 formal appendix is retained as unmachine-checked design argument, not a new experiment. This matches the NS-020 final claim-evidence matrix dispositions.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/manuscript/main.tex",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/manuscript_result_checks.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/revision_notes.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/validate_manuscript.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/bin/vericodegen-latexmk",
+        "-g",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-bibtex",
+        "-pdflatex=/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -no-shell-escape %O %S",
+        "main.tex"
+      ],
+      "cwd": "/tmp/ns022-manuscript-build/manuscript",
+      "elapsed_host_wall_seconds": 1.413,
+      "execution_kind": "current-source pdflatex/latexmk build of main.tex with shell escape disabled; TeX Live is the installed user-local wrapper, not the sealed validation PATH",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T14:08:06.604905+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/build/latexmk.log",
+      "started_at": "2026-09-13T14:08:05.191000+00:00"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns022-manuscript-3bc8d937/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-B",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/validate_manuscript.py"
+      ],
+      "cwd": ".",
+      "elapsed_host_wall_seconds": 0.23614835739135742,
+      "execution_kind": "sealed-profile numeric, placeholder, hash, font, and page-count audit of the assembled manuscript against frozen NS-019/NS-020 products; no provider, scorer, grant, or experiment",
+      "exit_code": 0,
+      "finished_at": "2026-09-13T14:11:28.931328+00:00",
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/audit/validate_manuscript.log",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-022/validate_manuscript.py",
+      "started_at": "2026-09-13T14:11:28.695168+00:00"
+    }
+  ],
+  "limitations": [
+    "The specified 22-file manuscript_font_v2 package and reviewed PDF SHA 907f0a24 were not present at the named lift_coding path. Allowed outputs are main.tex, paper.pdf, the two audit files, and this receipt tree, so undeclared layout/ and generated/figures/ copies were not written.",
+    "Published Figure 1 is a Type 1 TikZ drawing of the NS-019 eight-family coordinates. The NS-019 ASCII PDF (5019 bytes, SHA256 prefix 8ea081bc) remains the historical/task-owned generated artifact and was not overwritten.",
+    "This completion renders already admitted NS-017/NS-019/NS-020 evidence. It does not rerun models, scorers, contexts, experiments, retries, or resource-lease actions (new_scientific_calls=0).",
+    "The 32 nested cells are eight families with two nested repetitions, not 32 independent repositories or a sixteen-family sample. Original D/A promotion, noninferiority, superiority, and 16-family inferential objectives remain withdrawn.",
+    "The descriptive conditional interval is not a population-wide efficacy, equality, or safety claim.",
+    "C/D routing, warm caches, reuse, publication-comparison efficacy, native proof, world/procedure consumption, and human semantic fidelity remain withdrawn or unmeasured.",
+    "Unknown provider charges, missing scorer clocks, and missing operator phases stay unavailable rather than zero. Nested clocks are not summed as elapsed.",
+    "The official 16-question checklist, anonymity package, and supplement ZIP are NS-024. This manuscript does not include the unanswered checklist.",
+    "Outside human review is not required; this receipt is provenance validation, not independent scientific peer review or authorization to submit."
+  ]
+}

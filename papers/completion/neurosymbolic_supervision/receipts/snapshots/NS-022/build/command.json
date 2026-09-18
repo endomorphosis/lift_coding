@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/barberb/.local/bin/vericodegen-latexmk",
+    "-g",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-file-line-error",
+    "-bibtex",
+    "-pdflatex=/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/bin/aarch64-linux/pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -no-shell-escape %O %S",
+    "main.tex"
+  ],
+  "cwd": "/tmp/ns022-ascii-build-qcxa1xvi/manuscript",
+  "shell_escape": false,
+  "pdfobjcompresslevel": 0,
+  "source_date_epoch": "1789257600",
+  "exit_code": 0
+}
