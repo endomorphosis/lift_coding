@@ -136,6 +136,42 @@ class Tape:
             return None
         return self.cells[self.head]
 
+    def read_symbol(self) -> str:
+        cell = self.read()
+        if not cell:
+            return "_"
+        return str(cell.get("symbol") or cell.get("kind") or "_")
+
+    def poke(self, symbol: str, *, energy: Optional[float] = None) -> dict[str, Any]:
+        """Overwrite the cell under the head (Turing write). Does not append."""
+
+        if not self.cells:
+            return self.write("blank", None, extra={"symbol": str(symbol or "_")})
+        cell = self.cells[self.head]
+        cell["symbol"] = str(symbol or "_")
+        if energy is not None:
+            cell["energy"] = float(energy)
+        return cell
+
+    def left(self) -> Optional[dict[str, Any]]:
+        if not self.cells:
+            return None
+        self.head = max(0, self.head - 1)
+        return self.read()
+
+    def right(self, *, extend: bool = True) -> Optional[dict[str, Any]]:
+        if not self.cells:
+            return self.write("blank", None, extra={"symbol": "_"})
+        if self.head + 1 >= len(self.cells):
+            if extend and len(self.cells) < TAPE_N:
+                self.write("blank", None, extra={"symbol": "_"})
+            else:
+                self.head = len(self.cells) - 1
+                return self.read()
+        else:
+            self.head += 1
+        return self.read()
+
     def seek(self, index: int) -> Optional[dict[str, Any]]:
         if not self.cells:
             return None
@@ -145,6 +181,143 @@ class Tape:
     def cells_for_frame(self, frame_id: str) -> list[dict[str, Any]]:
         fid = str(frame_id or "")
         return [cell for cell in self.cells if str(cell.get("parent_frame") or "") == fid]
+
+    def peek(self) -> Optional[dict[str, Any]]:
+        return self.read()
+
+    def pop(self) -> Optional[dict[str, Any]]:
+        """Remove the cell under the head. Head stays at the same index."""
+
+        if not self.cells:
+            return None
+        cell = self.cells.pop(self.head)
+        if self.cells:
+            self.head = min(self.head, len(self.cells) - 1)
+        else:
+            self.head = 0
+        return cell
+
+    def splice(self, cell: Optional[Mapping[str, Any]] = None, *, payload: Any = None, kind: str = "splice") -> dict[str, Any]:
+        """Insert a cell at the head (context splice)."""
+
+        row = dict(cell) if cell else _cell(kind=kind, payload=payload, extra={"symbol": kind})
+        if not self.cells:
+            self.cells = [row]
+            self.head = 0
+            return row
+        self.cells.insert(self.head, row)
+        self._trim()
+        return row
+
+    def mask_window(self, width: int = WINDOW) -> int:
+        n = 0
+        lo = max(0, self.head - int(width))
+        hi = min(len(self.cells), self.head + int(width) + 1)
+        for i, cell in enumerate(self.cells):
+            if lo <= i < hi and i != self.head:
+                cell["masked"] = True
+                n += 1
+        return n
+
+    def unmask_all(self) -> int:
+        n = 0
+        for cell in self.cells:
+            if cell.get("masked"):
+                cell["masked"] = False
+                n += 1
+        return n
+
+    def window_visible(self, width: int = WINDOW) -> list[dict[str, Any]]:
+        return [c for c in self.window(width) if not c.get("masked")]
+
+    def swap(self) -> bool:
+        if self.head <= 0 or not self.cells:
+            return False
+        i = self.head
+        self.cells[i], self.cells[i - 1] = self.cells[i - 1], self.cells[i]
+        return True
+
+    def dup(self) -> Optional[dict[str, Any]]:
+        cell = self.read()
+        if not cell:
+            return None
+        return self.splice(dict(cell), kind=str(cell.get("kind") or "dup"))
+
+    def crop(self, width: int = WINDOW) -> int:
+        win = self.window(width)
+        if not win:
+            return 0
+        head_cell = self.read()
+        self.cells = win
+        self.head = win.index(head_cell) if head_cell in win else min(self.head, len(win) - 1)
+        return len(win)
+
+    def keep_k(self, k: int) -> int:
+        """Keep the k highest-energy cells; head follows the max."""
+
+        k = max(1, int(k))
+        if len(self.cells) <= k:
+            return len(self.cells)
+        ranked = sorted(self.cells, key=lambda c: float(c.get("energy") or 0.0), reverse=True)[:k]
+        ranked.sort(key=lambda c: self.cells.index(c) if c in self.cells else 0)
+        self.cells = ranked
+        self.head = min(self.head, len(self.cells) - 1)
+        return len(self.cells)
+
+    def drop_below(self, energy: float = 0.2) -> int:
+        kept = [c for c in self.cells if float(c.get("energy") or 0.0) >= float(energy)]
+        n = len(self.cells) - len(kept)
+        self.cells = kept
+        self.head = min(self.head, max(0, len(self.cells) - 1))
+        return n
+
+    def compress_blanks(self) -> int:
+        n = 0
+        out: list[dict[str, Any]] = []
+        for cell in self.cells:
+            sym = str(cell.get("symbol") or cell.get("kind") or "")
+            if sym in {"_", "blank"} and out and str(out[-1].get("symbol") or out[-1].get("kind") or "") in {"_", "blank"}:
+                n += 1
+                continue
+            out.append(cell)
+        self.cells = out
+        if self.cells:
+            self.head = min(self.head, len(self.cells) - 1)
+        return n
+
+    def rotate(self, n: int = 1) -> None:
+        if not self.cells:
+            return
+        k = int(n) % len(self.cells)
+        self.cells = self.cells[k:] + self.cells[:k]
+        self.head = (self.head - k) % len(self.cells)
+
+    def clear(self) -> int:
+        n = len(self.cells)
+        self.cells = []
+        self.head = 0
+        return n
+
+    def attn_m(self, width: int = WINDOW) -> list[int]:
+        """Energy milles over the visible window (attention weights)."""
+
+        win = self.window_visible(width)
+        out = []
+        for cell in win:
+            try:
+                e = float(cell.get("energy") or 0.0)
+            except (TypeError, ValueError):
+                e = 0.0
+            out.append(int(e * 1000) if e <= 2 else int(e))
+        return out
+
+    def checkpoint(self) -> dict[str, Any]:
+        return {"cells": [dict(c) for c in self.cells], "head": self.head}
+
+    def restore(self, snap: Mapping[str, Any]) -> None:
+        self.cells = [dict(c) for c in (snap.get("cells") or [])]
+        self.head = int(snap.get("head") or 0)
+        self._trim()
 
     def populate(
         self,

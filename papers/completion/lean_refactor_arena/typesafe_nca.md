@@ -564,7 +564,7 @@ A new skill is a **keep-structure fold**, not a one-off string and not a Jev-wri
 
 Ranking skills (not Lean folds) live in `nca_rankers.py` and are CALLed as `ptr://skill/port_{random_forest,bayes_time,mcmc,svd,pca,thompson,ridge}`:
 
-- **Random forest** — tiny CART forest on lake successes/failures. Ranks leftover drafts; writes `nca.pipeline_bias`. Needs ≥4 labeled rows.
+- **Random forest** — tiny CART forest on lake successes/failures. Ranks leftover drafts **and** searches the hierarchical skill tree (`nca_skill_tree.py`: family → group → stem). `port_skill_tree` / `port_random_forest` return `ranked_paths` like `rankers/forest/random_forest`. Needs ≥4 labeled rows for trained trees; the catalog still flattens with 0 trees.
 - **Bayes over time** — Beta-Bernoulli `α,β` with forget `0.98` on each live `observe_bayes`. `sync_bayes_from_memory` rebuilds conjugate counts. Posterior mean is energy, not a lake admit.
 - **Generalized MCMC** — Metropolis-Hastings over any state (`propose`, `energy`, optional hard `accept`). Default NCA skill permutes pipeline order; energy is `1 − Bayes mean`. Tactic MH still needs lake to admit.
 - **Grid SVD (`port_svd`)** — truncated SVD of the **theorem × skill** lake matrix (win +1, fail −1). Recommends skills for a theorem from neighbors. This is **not** proof-AST PCA.
@@ -572,6 +572,12 @@ Ranking skills (not Lean folds) live in `nca_rankers.py` and are CALLed as `ptr:
 - **Thompson (`port_thompson`)** — sample `Beta(α,β)` so a high-variance stem still gets a lake try.
 - **Ridge (`port_ridge`)** — integer milles ridge; companion to the forest on small n.
 - **Integer milles suite (`nca_int_rankers.py`)** — SVD, PCA, OLS, logistic, k-means, kNN, ICA, NMF, Kalman, Bayes, MCMC. Scores are `0..1000` milles. No float64 in the hot path. Kalman is 1-D `(x,P,Q,R)` ints. PCA CALL uses tactic-count integers + power-iteration SVD, not `np.linalg.svd`.
+- **VAE autoencoder (`port_autoencoder` / `port_vae`)** — milles encode/sample/decode text→Lean round-trip. **Jev is the loss**: it scores the current variation against previous batch rounds (Choice/Score/Noul). CE/cosine milles and `ipfs_datasets_py` cosine helpers are diagnostics, never gold. Among Jev-ok variants, keep the **shortest** lake-valid Lean. Jev does not write Lean. Lake is the oracle.
+- **Wraps + sequence (`nca_more_rankers.py`)** — `port_sgd` / `port_mask` / `port_diffuse` wrap existing MCA/SGD/symbol loops without lake. `port_markov`/`port_hmm` are tactic-head bigrams. `port_isotonic` PAVA-calibrates Noul vs lake. `port_adaboost` milles stumps. `port_quantile` remaining-cut q25/50/75. `port_pagerank` on the board DAG. `port_contrastive` milles VAE pair loss (`gold: false`).
+- **Graph (`nca_graph.py` + `nca_jsonld.py`)** — Canonical graph is **JSON-LD 1.1** (`@context` + `@graph` of `Node`/`Edge`). Traverse, GraphRAG, and neural message-passing consume JSON-LD and **do not import DuckDB**. Optional `ingest_duckdb` / `query_duckdb` project the same document into a sidecar (never `control.duckdb`). `port_graphrag` searches JSON-LD first, then KG/AST/rg; DuckDB is `skipped_optional` unless a path is passed.
+- **Temporal / budget (`nca_temporal.py`)** — `port_hawkes` recency intensity; `port_crf` Viterbi on tactic heads; `port_submodular` residual set-cover under CALL budget; `port_delayed_bandit` UCB with pending lake pulls; `port_tape_conv` / `port_tape_fft` integer conv and 7-point DFT on the neural tape.
+- **Turing + decision transformer (`nca_turing.py`)** — TM read/write/left/right/step/run on the neural tape, aux stack push/pop (with call_stack), bounded δ-table. `port_decision_transformer` packs `(state, action, rtg_m)` milles windows from TM history for TypeSafe/Grok. Jev does not write Lean.
+- **Tape editor (`nca_tape_tools.py`)** — context manager for the DT window: splice, mask/unmask, pop, peek, swap, dup, crop, keep-k, drop-low-energy, compress blanks, rotate, checkpoint/restore, attention milles. Distinct from MCA `port_mask`.
 
 `pipeline_order` key:
 

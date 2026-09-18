@@ -428,7 +428,11 @@ def execute_program_ops(
 
                         if lra_rank.is_ranker_stem(stem):
                             detail = lra_rank.call_ranker(
-                                stem, memory=memory, tactics=body, problem=str(problem or "")
+                                stem,
+                                memory=memory,
+                                tactics=body,
+                                problem=str(problem or ""),
+                                compile_fn=compile_fn,
                             )
                             ok = bool(isinstance(detail, dict) and detail.get("ok"))
                             ranker_done = True

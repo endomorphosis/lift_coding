@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""Ranked symbol search for TypeSafe: DuckDB / vector index, KG, AST, ripgrep.
+"""Ranked symbol search for TypeSafe.
 
-Order: ipfs_accelerate_py DuckDB AST index (if present) → code-symbol vector
-index (if a snapshot is supplied) → skill knowledge graph → Python ``ast``
-on the harness → ripgrep. Hits are merged and ranked. Never docker0. Does
-not write Lean. Paths outside the paper harness are refused for AST/rg.
+Order: JSON-LD graph (if present) → optional DuckDB adapter → vector → KG →
+AST → ripgrep. DuckDB is never required. Never docker0. Does not write Lean.
 """
 from __future__ import annotations
 
@@ -25,8 +23,10 @@ RG_TIMEOUT = 4.0
 _IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.']*")
 
 SOURCE_WEIGHT = {
-    "duckdb": 1.0,
-    "sidecar_duckdb": 0.9,
+    "jsonld": 1.02,
+    "jsonld_duckdb": 0.92,
+    "duckdb": 0.9,
+    "sidecar_duckdb": 0.88,
     "vector": 0.95,
     "kg": 0.85,
     "ast": 0.7,
@@ -265,11 +265,12 @@ def search_symbols(
     memory: Optional[Mapping[str, Any]] = None,
     tactics: str = "",
     duckdb_path: Optional[Path] = None,
+    use_duckdb: bool = True,
     vector_snapshot: Optional[Mapping[str, Any]] = None,
     vector_search: Optional[Callable[..., Any]] = None,
     root: Optional[Path] = None,
 ) -> dict[str, Any]:
-    """Search/rank symbols. DuckDB → vector → KG → ast → ripgrep."""
+    """Search/rank symbols. JSON-LD → optional DuckDB → vector → KG → ast → rg."""
 
     q = str(query or "").strip()
     if not q and tactics:
@@ -278,9 +279,21 @@ def search_symbols(
     sources: dict[str, str] = {}
     hits: list[dict[str, Any]] = []
     if q:
-        db_hits, db_note = search_duckdb(q, db_path=duckdb_path)
-        sources["duckdb"] = db_note
-        hits.extend(db_hits)
+        try:
+            import nca_jsonld as lra_ld
+
+            doc = lra_ld.memory_jsonld(memory or {})
+            for hit in lra_ld.search_jsonld(doc, q):
+                hits.append(_hit(str(hit.get("symbol") or ""), source="jsonld", query=q))
+            sources["jsonld"] = "ok"
+        except Exception as exc:
+            sources["jsonld"] = type(exc).__name__
+        if use_duckdb:
+            db_hits, db_note = search_duckdb(q, db_path=duckdb_path)
+            sources["duckdb"] = db_note
+            hits.extend(db_hits)
+        else:
+            sources["duckdb"] = "skipped_optional"
         vec_hits, vec_note = search_vector_index(q, snapshot=vector_snapshot, search_fn=vector_search)
         sources["vector"] = vec_note
         hits.extend(vec_hits)

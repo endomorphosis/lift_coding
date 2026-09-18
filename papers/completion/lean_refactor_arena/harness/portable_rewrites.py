@@ -824,6 +824,126 @@ SKILL_CRITERIA: dict[str, dict[str, str]] = {
         "what": "Integer 1-D Kalman on skill win milles (x,P,Q,R all ints)",
         "not_for": "Writing Lean; float covariance",
     },
+    "port_autoencoder": {
+        "what": "VAE text→Lean round-trip; Jev scores variations vs previous batch; keep shortest lake-ok",
+        "not_for": "Treating Jev as a Lean admit; CE/cosine as gold; docker0",
+    },
+    "port_vae": {
+        "what": "Same as port_autoencoder; milles mu/logvar samples scored by Jev then length",
+        "not_for": "Writing Lean; CUDA training in the harness",
+    },
+    "port_sgd": {
+        "what": "Closed wrap of sgd_fanout MCA hole minibatch; does not lake",
+        "not_for": "Calling docker0; treating hole drop as admitted Lean",
+    },
+    "port_mask": {
+        "what": "MCA mask skeleton (PCA case/induction stays)",
+        "not_for": "Writing Lean into the proof",
+    },
+    "port_diffuse": {
+        "what": "Closed-vocab symbol fills ranked by token cut",
+        "not_for": "Open generation; docker0",
+    },
+    "port_markov": {
+        "what": "Mille bigrams of tactic heads; P(next|last)",
+        "not_for": "Bag-of-skill ranking (that is RF/kNN)",
+    },
+    "port_hmm": {
+        "what": "Markov plus start-state milles",
+        "not_for": "Writing Lean",
+    },
+    "port_isotonic": {
+        "what": "PAVA milles P(ok|score); calibrate Noul/unsafe vs lake",
+        "not_for": "Treating calibrated p as a lake admit",
+    },
+    "port_adaboost": {
+        "what": "Mille AdaBoost stumps on RF residuals",
+        "not_for": "n<4 labeled rows",
+    },
+    "port_quantile": {
+        "what": "Remaining-cut milles q25/q50/q75 per stem",
+        "not_for": "Mean-only remaining_cut (that is the IR ranker)",
+    },
+    "port_pagerank": {
+        "what": "Mille PageRank on the board DAG",
+        "not_for": "Theorem×skill SVD (that is port_svd)",
+    },
+    "port_contrastive": {
+        "what": "Mille VAE pair loss (neg-pos+margin); diagnostic only",
+        "not_for": "Replacing Jev as the VAE loss",
+    },
+    "port_graph_traverse": {
+        "what": "BFS/DFS on board_edges (bounded hops)",
+        "not_for": "Writing Lean; unbounded crawl",
+    },
+    "port_graphrag": {
+        "what": "GraphRAG over symbol_search (DuckDB/KG/AST/rg) plus optional datasets GraphRAG",
+        "not_for": "docker0; treating a hit as a lake admit",
+    },
+    "port_neural_graph": {
+        "what": "Integer message-passing on DAG energy milles (2-hop GNN-style)",
+        "not_for": "CUDA GNNs; writing Lean",
+    },
+    "port_skill_tree": {
+        "what": "Hierarchical family→group→skill catalog scored by random forest",
+        "not_for": "Writing Lean; skipping lake",
+    },
+    "port_hawkes": {
+        "what": "Mille Hawkes intensity from event recency (not just Beta counts)",
+        "not_for": "Instant-reward Thompson",
+    },
+    "port_crf": {
+        "what": "Linear-chain Viterbi on tactic heads (unary + milles bigrams)",
+        "not_for": "Bag-of-skills RF",
+    },
+    "port_submodular": {
+        "what": "Greedy residual set-cover under a CALL budget",
+        "not_for": "Single-skill ranking",
+    },
+    "port_delayed_bandit": {
+        "what": "UCB milles with pending lake pulls",
+        "not_for": "Thompson with instant reward",
+    },
+    "port_tape_conv": {
+        "what": "Integer conv on the neural-tape window (W=7)",
+        "not_for": "Writing Lean",
+    },
+    "port_tape_fft": {
+        "what": "7-point milles DFT of the tape window",
+        "not_for": "Float FFT libraries",
+    },
+    "port_tm_step": {
+        "what": "One Turing step on the neural tape (δ, write, move)",
+        "not_for": "Writing Lean; unbounded run",
+    },
+    "port_tm_run": {
+        "what": "Bounded TM run (max 32 steps) then halt",
+        "not_for": "Unbounded simulation",
+    },
+    "port_decision_transformer": {
+        "what": "Pack TM history as (state, action, rtg_m) window for TypeSafe/Grok",
+        "not_for": "Training a CUDA DT; writing Lean",
+    },
+    "port_tape_splice": {
+        "what": "Insert a cell at the tape head (context splice)",
+        "not_for": "Writing Lean",
+    },
+    "port_tape_mask": {
+        "what": "Mask the tape window except the head (DT attention)",
+        "not_for": "MCA port_mask",
+    },
+    "port_tape_pop": {
+        "what": "Delete the cell under the tape head",
+        "not_for": "TM aux-stack pop (that is port_tm_pop)",
+    },
+    "port_tape_crop": {
+        "what": "Keep only the TypeSafe window around the head",
+        "not_for": "Unbounded context",
+    },
+    "port_tape_keep": {
+        "what": "Keep the k highest-energy tape cells",
+        "not_for": "Writing Lean",
+    },
 }
 
 
