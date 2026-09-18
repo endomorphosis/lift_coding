@@ -35,6 +35,37 @@ RANKER_STEMS = (
     "ica",
     "nmf",
     "kalman",
+    "autoencoder",
+    "vae",
+    "sgd",
+    "mask",
+    "diffuse",
+    "markov",
+    "hmm",
+    "isotonic",
+    "platt",
+    "adaboost",
+    "quantile",
+    "pagerank",
+    "contrastive",
+    "graphrag",
+    "graph_traverse",
+    "neural_graph",
+    "skill_tree",
+    "hawkes",
+    "crf",
+    "submodular",
+    "delayed_bandit",
+    "tape_conv",
+    "tape_fft",
+    "turing",
+    "tm_step",
+    "decision_transformer",
+    "tape_splice",
+    "tape_mask",
+    "tape_pop",
+    "tape_crop",
+    "tape_keep",
 )
 RIDGE_L2 = 1.0
 SVD_RANK = 3
@@ -703,12 +734,65 @@ def call_ranker(
     tactics: str = "",
     problem: str = "",
     rng: Optional[random.Random] = None,
+    compile_fn: Optional[Callable[..., Mapping[str, Any]]] = None,
+    jev_fn: Optional[Callable[..., Mapping[str, Any]]] = None,
 ) -> dict[str, Any]:
-    """Dispatch CALL ptr://skill/port_{random_forest,bayes_time,mcmc,svd,pca,thompson,ridge}."""
+    """Dispatch CALL ptr://skill/port_{random_forest,...,autoencoder,vae}."""
 
     rng = rng or random.Random(0)
     text = str(stem or "").lower()
     name = str(problem or "")
+    try:
+        import nca_turing as lra_tm
+
+        if lra_tm.is_tm_stem(stem):
+            return lra_tm.call_tm(stem, memory=memory, tactics=tactics, problem=name)
+    except Exception:
+        pass
+    if "autoencoder" in text or "vae" in text:
+        import nca_autoencoder as lra_ae
+
+        return lra_ae.call_autoencoder(
+            stem,
+            memory=memory,
+            tactics=tactics,
+            problem=name,
+            jev_fn=jev_fn,
+            compile_fn=compile_fn,
+            rng=rng,
+        )
+    try:
+        import nca_temporal as lra_time
+
+        if lra_time.is_extra_stem(stem):
+            return lra_time.call_extra(stem, memory=memory, tactics=tactics, problem=name)
+    except Exception:
+        pass
+    try:
+        import nca_tape_tools as lra_tt
+
+        if lra_tt.is_tape_editor_stem(stem):
+            return lra_tt.call_tape_tool(stem, memory=memory, tactics=tactics, problem=name)
+    except Exception:
+        pass
+    try:
+        import nca_graph as lra_graph
+
+        if lra_graph.is_graph_stem(stem):
+            return lra_graph.call_graph(
+                stem, memory=memory, tactics=tactics, problem=name, query=name
+            )
+    except Exception:
+        pass
+    try:
+        import nca_more_rankers as lra_more
+
+        if lra_more.is_more_stem(stem):
+            return lra_more.call_more(
+                stem, memory=memory, tactics=tactics, problem=name, rng=rng
+            )
+    except Exception:
+        pass
     try:
         import nca_int_rankers as lra_int
 
@@ -748,7 +832,14 @@ def call_ranker(
         synced["ok"] = True
         synced["writes_lean"] = False
         return synced
+    if "skill_tree" in text or "hierarch" in text:
+        import nca_skill_tree as lra_tree
+
+        return lra_tree.search_with_forest(memory, tactics=tactics, problem=name, rng=rng)
     if "forest" in text or "random_forest" in text:
+        import nca_skill_tree as lra_tree
+
+        tree_hit = lra_tree.search_with_forest(memory, tactics=tactics, problem=name, rng=rng)
         trained = train_random_forest(memory, rng=rng)
         drafts = []
         try:
@@ -759,10 +850,14 @@ def call_ranker(
             drafts = []
         ranked = rank_drafts_forest(drafts, memory=memory, name=name)
         bias = [_stem_of(str(item.get("kind") or "")) for item in ranked if item.get("kind")]
+        if not bias:
+            bias = list(tree_hit.get("ranked") or [])
         if bias:
             memory.setdefault("nca", {})["pipeline_bias"] = bias
         trained["kind"] = "port_random_forest"
-        trained["ranked"] = [str(item.get("kind")) for item in ranked]
+        trained["ranked"] = [str(item.get("kind")) for item in ranked] or list(tree_hit.get("ranked") or [])
+        trained["ranked_paths"] = tree_hit.get("ranked_paths")
+        trained["n_leaves"] = tree_hit.get("n_leaves")
         trained["ok"] = True
         trained["writes_lean"] = False
         return trained
