@@ -562,10 +562,16 @@ A new skill is a **keep-structure fold**, not a one-off string and not a Jev-wri
 7. **Tests.** Add a case to `test_random_canary.py` that: (a) shortens a fixture, (b) preserves the keep-word/`<;>`/`at *` invariant, (c) no-ops the unsafe parent. Do **not** persist memory (`persist_memory=False` after PR-NCA-3 actually inhibits writes; until then, do not call `run_loop`/`run_live`/`save_memory` against live `MEMORY_DEFAULT`).
 8. **Do not** add a skill that calls docker0, writes `control.duckdb`, or treats Jev text as Lean.
 
+Ranking skills (not Lean folds) live in `nca_rankers.py` and are CALLed as `ptr://skill/port_{random_forest,bayes_time,mcmc}`:
+
+- **Random forest** — tiny CART forest on lake successes/failures. Ranks leftover drafts; writes `nca.pipeline_bias`. Needs ≥4 labeled rows.
+- **Bayes over time** — Beta-Bernoulli `α,β` with forget `0.98` on each live `observe_bayes`. `sync_bayes_from_memory` rebuilds conjugate counts. Posterior mean is energy, not a lake admit.
+- **Generalized MCMC** — Metropolis-Hastings over any state (`propose`, `energy`, optional hard `accept`). Default NCA skill permutes pipeline order; energy is `1 − Bayes mean`. Tactic MH still needs lake to admit.
+
 `pipeline_order` key:
 
 ```text
-(−wins[stem], losses[stem], bias_index, −research_help, 0 if KEEP_STRUCTURE else 1, stem)
+(−wins[stem], losses[stem], bias_index, −bayes_mean, −research_help, 0 if KEEP_STRUCTURE else 1, stem)
 ```
 
 ### 9. Failure modes already observed

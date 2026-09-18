@@ -422,7 +422,23 @@ def execute_program_ops(
 
                     stem = str(resolved.get("name") or "")
                     match = None
-                    if "pipeline" in stem.lower():
+                    ranker_done = False
+                    try:
+                        import nca_rankers as lra_rank
+
+                        if lra_rank.is_ranker_stem(stem):
+                            detail = lra_rank.call_ranker(
+                                stem, memory=memory, tactics=body, problem=str(problem or "")
+                            )
+                            ok = bool(isinstance(detail, dict) and detail.get("ok"))
+                            ranker_done = True
+                    except Exception as exc:
+                        ok = False
+                        detail = {"ok": False, "reason": type(exc).__name__, "stem": stem}
+                        ranker_done = True
+                    if ranker_done:
+                        pass
+                    elif "pipeline" in stem.lower():
                         piped, applied = lra_port.compose_pipeline(
                             body, memory=memory, name=str(problem or (record or {}).get("name") or "")
                         )
@@ -435,7 +451,7 @@ def execute_program_ops(
                                 "token_count": lra_loop.token_count(piped),
                                 "family": "search_space",
                             }
-                    if match is None:
+                    if not ranker_done and match is None:
                         drafts = lra_port.portable_drafts(
                             body, memory=memory, name=str(problem or (record or {}).get("name") or "")
                         )
@@ -445,7 +461,9 @@ def execute_program_ops(
                             if kind_name in {stem, f"port_{bare}", f"port_{stem}"} or kind_name.endswith(bare):
                                 match = item
                                 break
-                    if not match:
+                    if ranker_done:
+                        pass
+                    elif not match:
                         ok = False
                         detail = {"ok": False, "reason": "no_fold", "stem": stem}
                     elif compile_fn is None:
@@ -473,6 +491,12 @@ def execute_program_ops(
                         lake_ok = bool(accepted) or any(r.get("ok") for r in rows)
                         if accepted:
                             body = accepted
+                        try:
+                            import nca_rankers as lra_rank
+
+                            lra_rank.observe_bayes(memory, str(match.get("kind") or ""), ok=lake_ok)
+                        except Exception:
+                            pass
                         detail = {
                             "ok": lake_ok,
                             "kind": match.get("kind"),

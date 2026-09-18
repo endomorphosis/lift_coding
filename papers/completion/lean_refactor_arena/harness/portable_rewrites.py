@@ -549,12 +549,21 @@ def pipeline_order(
             stem = kind[len("port_") :].split("_pipeline")[0]
             losses[stem] += 1
     bias = list(((memory or {}).get("nca") or {}).get("pipeline_bias") or [])
+    bayes_mean: dict[str, float] = {}
+    try:
+        import nca_rankers as lra_rank
+
+        for stem, _fn in PIPELINE:
+            bayes_mean[stem] = float(lra_rank.posterior(dict(memory or {}), stem).get("mean") or 0.5)
+    except Exception:
+        bayes_mean = {}
     ranked = sorted(
         PIPELINE,
         key=lambda item: (
             -wins[item[0]],
             losses[item[0]],
             bias.index(item[0]) if item[0] in bias else len(bias),
+            -bayes_mean.get(item[0], 0.5),
             -_research_help(memory, item[0], name=name),
             0 if item[0] in KEEP_STRUCTURE else 1,
             item[0],
@@ -758,6 +767,18 @@ SKILL_CRITERIA: dict[str, dict[str, str]] = {
     "port_pipeline": {
         "what": "Compose un-blacklisted skills in memory-weighted order (keep-structure first, then wins)",
         "not_for": "When a step is Noul-fired or binder-unsafe",
+    },
+    "port_random_forest": {
+        "what": "Train a tiny forest on lake successes/failures and rank leftover drafts",
+        "not_for": "Writing Lean; fewer than four labeled rows; Arena scores",
+    },
+    "port_bayes_time": {
+        "what": "Beta-Bernoulli skill win-rate with exponential forget; write posterior onto cells",
+        "not_for": "Writing Lean; treating posterior mean as a lake admit",
+    },
+    "port_mcmc": {
+        "what": "Metropolis-Hastings over pipeline stem order; energy is 1 - Bayes mean",
+        "not_for": "Writing Lean; docker0; replacing lake as the oracle",
     },
 }
 
