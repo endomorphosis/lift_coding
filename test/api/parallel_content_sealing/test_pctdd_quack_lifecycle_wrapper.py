@@ -398,6 +398,121 @@ def test_state_owner_finally_only_removes_its_exact_process_record(
         assert _sha256(paths["owner_pid"]) == before
 
 
+def test_state_owner_refuses_a_second_owner_and_requires_session_attach(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_second_owner_refused")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    paths = {
+        "runtime": tmp_path / "runtime",
+        "state": tmp_path / "state",
+        "logs": tmp_path / "logs",
+        "owner": tmp_path / "quack-owner",
+        "database": tmp_path / "control.duckdb",
+        "owner_pid": tmp_path / "state" / "pctdd-quack-owner.pid",
+        "owner_status": tmp_path / "quack-owner" / "quack-state-server.status.json",
+    }
+    for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
+        item.mkdir()
+    live_birth = _birth(pid=424242, ticks=8888)
+    paths["owner_status"].write_text(
+        json.dumps(
+            {
+                "lifecycle": "ready",
+                "identity": {
+                    "status": "ready",
+                    "process_birth": live_birth,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    program = SimpleNamespace(
+        quack_endpoint="quack:127.0.0.1:27278",
+        store_id="control.duckdb",
+        endpoint_secret_handle="handle:pctdd-test",
+    )
+    board = SimpleNamespace(resolved_database_program=lambda: program)
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (board, {}))
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(facade, "_owner_liveness", lambda _payload: "alive")
+    facade._ensure_import_path()
+    import ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle as lifecycle
+    import ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server as runtime
+
+    owned = _birth(pid=30303, ticks=40404)
+    monkeypatch.setattr(
+        lifecycle,
+        "current_process_birth",
+        lambda: SimpleNamespace(to_dict=lambda: dict(owned)),
+    )
+    monkeypatch.setattr(
+        runtime,
+        "build_server",
+        lambda **_kwargs: pytest.fail("second owner must not start"),
+    )
+
+    with pytest.raises(facade.OperatorError, match="attach as a session"):
+        facade._serve_state_owner(tmp_path / "config.json")
+
+
+def test_start_owner_attaches_a_session_when_the_exclusive_owner_is_live(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_start_owner_session_attach")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    database = tmp_path / "control.duckdb"
+    database.write_bytes(b"store")
+    paths = {
+        "database": database,
+        "owner_status": tmp_path / "owner-status.json",
+        "runtime": tmp_path / "runtime",
+        "state": tmp_path / "state",
+        "logs": tmp_path / "logs",
+        "owner": tmp_path / "owner",
+    }
+    for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
+        item.mkdir()
+    board = SimpleNamespace(
+        resolved_database_program=lambda: SimpleNamespace(),
+        config_path=tmp_path / "config.json",
+    )
+    monkeypatch.setattr(
+        facade,
+        "_owner_projection",
+        lambda _paths: {"lifecycle": "ready", "liveness": "alive"},
+    )
+    monkeypatch.setattr(
+        facade,
+        "_authenticated_projection",
+        lambda _board, _paths: {"authenticated_query": True},
+    )
+    monkeypatch.setattr(facade, "_require_native_start_allowed", lambda _paths: None)
+    monkeypatch.setattr(facade, "_private_directory", lambda _path: None)
+
+    class _Winner:
+        def acquire(self) -> bool:
+            return True
+
+    monkeypatch.setattr(facade, "_owner_recovery_lock", lambda _path: _Winner())
+
+    def popen(*_args, **_kwargs):
+        raise AssertionError("live owner must not spawn a second state-owner")
+
+    monkeypatch.setattr(facade.subprocess, "Popen", popen)
+
+    result = facade._start_owner(board, paths, timeout=5.0)
+
+    assert result["started"] is False
+    assert result["already_running"] is True
+    assert result["ready"] is True
+    assert result["role"] == "session"
+    assert result["attached_session"] is True
+    assert result["authenticated_query"] is True
+
+
 def test_live_owner_status_defers_to_authenticated_transport_without_file_open(
     tmp_path: Path,
 ) -> None:

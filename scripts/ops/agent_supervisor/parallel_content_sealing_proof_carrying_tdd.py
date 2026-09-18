@@ -13,6 +13,11 @@ children, never argv, JSON, logs, provider environments, or DuckLake.  Status
 is accepted only after a live, authenticated Quack query matches the published
 owner identity.  DuckLake remains an optional, rebuildable, non-authoritative
 projection.
+
+A store has one exclusive Quack owner.  Lane daemons, status, and extra
+operator clients attach as authenticated sessions to that owner.  ``launch``
+reuses a live owner as a session; ``state-owner`` refuses to become a second
+owner while another process is live.
 """
 
 from __future__ import annotations
@@ -707,11 +712,60 @@ def _owner_liveness(status_payload: Mapping[str, Any]) -> str:
     return "unknown"
 
 
+def _same_owner_process_birth(
+    left: Mapping[str, Any],
+    right: Mapping[str, Any],
+) -> bool:
+    return (
+        int(left.get("pid") or 0) > 1
+        and int(left.get("pid") or 0) == int(right.get("pid") or 0)
+        and int(left.get("start_time_ticks") or 0) > 0
+        and int(left.get("start_time_ticks") or 0)
+        == int(right.get("start_time_ticks") or 0)
+        and str(left.get("boot_id") or "") == str(right.get("boot_id") or "")
+    )
+
+
+def _refuse_second_state_owner(
+    paths: Mapping[str, Path],
+    owned_birth: Mapping[str, Any],
+) -> None:
+    """Fail closed when another process already owns this store.
+
+    Extra operator processes must attach as Quack sessions (``status`` /
+    ``launch``) rather than start a second owner.
+    """
+
+    existing = _owner_projection(paths)
+    liveness = str(existing.get("liveness") or "absent")
+    if liveness == "unknown":
+        raise OperatorError("existing Quack owner liveness is unknown")
+    if liveness != "alive":
+        return
+    identity = existing.get("identity")
+    birth = identity.get("process_birth") if isinstance(identity, Mapping) else None
+    if not isinstance(birth, Mapping):
+        raise OperatorError(
+            "second Quack owner refused; live owner identity is incomplete"
+        )
+    if _same_owner_process_birth(birth, owned_birth):
+        return
+    raise OperatorError(
+        "second Quack owner refused; attach as a session to the live owner"
+    )
+
+
 def _owner_projection(paths: Mapping[str, Path]) -> dict[str, Any]:
-    if not paths["owner_status"].is_file():
+    status_path = paths.get("owner_status")
+    if status_path is None:
+        owner_dir = paths.get("owner")
+        if owner_dir is None:
+            return {"lifecycle": "absent", "liveness": "absent", "identity": {}}
+        status_path = Path(owner_dir) / "quack-state-server.status.json"
+    if not Path(status_path).is_file():
         return {"lifecycle": "absent", "liveness": "absent", "identity": {}}
     try:
-        payload = _json_object(paths["owner_status"])
+        payload = _json_object(Path(status_path))
     except OperatorError:
         return {"lifecycle": "malformed", "liveness": "unknown", "identity": {}}
     identity = payload.get("identity")
@@ -1670,12 +1724,15 @@ def _start_owner(
     while time.monotonic() < deadline:
         existing = _owner_projection(paths)
         if existing["lifecycle"] == "ready" and existing["liveness"] == "alive":
-            _authenticated_projection(board, paths)
+            projection = _authenticated_projection(board, paths)
             return {
                 "started": False,
                 "already_running": True,
                 "ready": True,
                 "one_winner_lock_acquired": False,
+                "role": "session",
+                "attached_session": True,
+                "authenticated_query": projection.get("authenticated_query") is True,
             }
         if winner.acquire():
             lock_acquired = True
@@ -1836,6 +1893,9 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
     Mutation results therefore carry the exact fresh-replica proof required by
     remote clients instead of the deliberately non-admissible injected-test
     observation.
+
+    This command is the exclusive owner process.  A second invocation against
+    a live owner fails closed; extra clients attach as sessions instead.
     """
 
     board, _payload = _load_board(config_path)
@@ -1857,6 +1917,7 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
     for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
         _private_directory(item)
     owned_birth = current_process_birth().to_dict()
+    _refuse_second_state_owner(paths, owned_birth)
     server: Any | None = None
     identity: Any | None = None
     stopped: Mapping[str, Any] | None = None
