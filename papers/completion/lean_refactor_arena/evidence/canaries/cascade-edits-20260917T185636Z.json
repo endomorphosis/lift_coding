@@ -1,0 +1,58 @@
+{
+  "arena_score": null,
+  "beam_k": 2,
+  "beats_reference": true,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 260
+  },
+  "best_tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          intros Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+  "called_docker0": false,
+  "confident": 0.55,
+  "cookbooks": [
+    "https://docs.typesafe.ai/cookbooks/sde_cascade",
+    "https://docs.typesafe.ai/cookbooks/hierarchical_classification",
+    "https://docs.typesafe.ai/cookbooks/classification_using_confidence"
+  ],
+  "fire_t": 0.7,
+  "hardware_class": "spark_gb10",
+  "history": [
+    {
+      "action": "typesafe_error",
+      "error": "TypeSafe HTTP 503: {\"detail\":{\"error_type\":\"model_unavailable\",\"message\":\"The model is unavailable. If this issue persists, please contact support.\"}}",
+      "round": 0
+    }
+  ],
+  "jev_generated_lean": false,
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 0,
+    "lines": [],
+    "max_grok_calls": 0,
+    "max_jev_calls": 20,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "Core.InitsUpdatesComm#cascade",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 3.0,
+    "skipped": false,
+    "spent_usd": 0.0,
+    "track": "track1_closed"
+  },
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T18:56:36.531676+00:00",
+  "official_track2": false,
+  "pr": "PR-9i",
+  "protocol": "LRA/v1",
+  "reference_token_count": 268,
+  "schema": "lra-cascade-edits/v1",
+  "wall_ms": 611.2975970027037,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

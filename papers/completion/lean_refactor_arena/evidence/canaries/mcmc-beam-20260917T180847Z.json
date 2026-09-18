@@ -1,0 +1,1309 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T18:08:47.494802+00:00",
+  "official_track2": false,
+  "pr": "PR-9g",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": true,
+      "called_docker0": false,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2613.5014290048275
+        },
+        {
+          "errors": [],
+          "kind": "mcmc_best",
+          "module_exit_0": true,
+          "n_chars": 1642,
+          "ok": true,
+          "theorem_ok": true,
+          "token_count": 260,
+          "wall_ms": 2335.926425002981
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "mcmc_best",
+        "theorem_ok": true,
+        "token_count": 260
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "beam": 2,
+        "best": {
+          "kind": "init",
+          "theorem_ok": true,
+          "token_count": 260
+        },
+        "best_tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          intros Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+        "best_tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [Ini",
+        "called_docker0": false,
+        "called_hosted_mistral": false,
+        "hardware_class": "spark_gb10",
+        "history": [
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `UpdateStates.update_some`\n  UpdateStates ?m.139 (?m.140 :: ?m.143) (?m.141 :: ?m.144) ?m.145\nwith the goal\n  UpdateState P (updatedStates' \u03c3 (ks'.zip vs')) x v (updatedStates' (updatedState \u03c3 x v) (ks'.zip vs'))\n\nNote: The full type of `UpdateStates.update_some` is\n  UpdateState P ?m.139 ?m.140 ?m.141 (updatedStates \u03c3\u2080 ks' vs') \u2192\n    Update",
+                "pos": {
+                  "column": 10,
+                  "line": 963
+                }
+              }
+            ],
+            "kind": "leanstral_swap",
+            "note": "leanstral rw [\u2190 updatedStateComm'] -> . apply UpdateStates.update_some (\u03c3':=up",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 271,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 0,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedStates' (updatedState ?m.139 ?m.140 ?m.141) ?m.142\nin the target expression\n  UpdateState P (updatedStates' \u03c3 (ks'.zip vs')) x v (updatedStates' \u03c3\u2080 (ks'.zip vs'))\n\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident",
+                "pos": {
+                  "column": 12,
+                  "line": 963
+                }
+              }
+            ],
+            "kind": "leanstral_swap",
+            "note": "leanstral . simp [UpdateStateUpdated Hup, updatedS -> . simp [UpdateStateDefined Hup, updatedS",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 1,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 2,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 3,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 4,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 5,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 6,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 0,
+            "errors": [
+              {
+                "data": "don't know how to synthesize placeholder for argument `Hlen2`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+                "pos": {
+                  "column": 27,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_exact",
+            "note": "apply ih -> exact ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 260,
+            "typesafe": {
+              "likely_compiles": null,
+              "likely_shorter": null,
+              "pick": null,
+              "skipped": true
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+                "pos": {
+                  "column": 6,
+                  "line": 956
+                }
+              }
+            ],
+            "kind": "rewrite_refine_constructor",
+            "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 251,
+            "typesafe": {
+              "likely_compiles": 0.67,
+              "likely_shorter": 0.81,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+                "pos": {
+                  "column": 14,
+                  "line": 981
+                }
+              }
+            ],
+            "kind": "rewrite_ih_short",
+            "note": "ih ?_ ?_ -> ih",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 256,
+            "typesafe": {
+              "likely_compiles": 0.67,
+              "likely_shorter": 0.81,
+              "pick": "p3",
+              "skipped": false
+            }
+          },
+          {
+            "accept": false,
+            "chain": 1,
+            "errors": [
+              {
+                "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192 isD",
+                "pos": {
+                  "column": 4,
+                  "line": 961
+                }
+              }
+            ],
+            "kind": "collapse_ih_simps",
+            "note": "ih apply <;> simp_all, drop two simp bullets",
+            "ok": false,
+            "reason": "reject_invalid",
+            "round": 7,
+            "tokens": 250,
+            "typesafe": {
+              "likely_compiles": 0.67,
+              "likely_shorter": 0.81,
+              "pick": "p3",
+              "skipped": false
+            }
+          }
+        ],
+        "jev_generated_lean": false,
+        "lake_calls": 49,
+        "leanstral_calls": 4,
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 1,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 1133,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 118,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.8e-05
+            }
+          ],
+          "max_grok_calls": 0,
+          "max_jev_calls": 24,
+          "max_mistral_calls": 0,
+          "mistral_calls": 0,
+          "name": "Core.InitsUpdatesComm#mcmc-beam",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 2.999952,
+          "skipped": false,
+          "spent_usd": 4.8e-05,
+          "track": "track1_closed"
+        },
+        "mh_temperature": 3.0,
+        "mode": "mcmc_beam",
+        "official_track2": false,
+        "rounds": 8,
+        "seed": 3
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mcmc-beam/v1",
+  "wall_ms": 137734.2022130033
+}

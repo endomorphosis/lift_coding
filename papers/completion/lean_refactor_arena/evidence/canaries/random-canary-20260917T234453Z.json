@@ -1,0 +1,2035 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "canaries": [
+    {
+      "analysis": {
+        "case_labels": [
+          "fvar",
+          "op",
+          "const",
+          "bvar",
+          "abs ih",
+          "ite cih tih eih",
+          "app ih1 ih2",
+          "quant trih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [
+          "<;> simp_all"
+        ],
+        "counts": {
+          "max_indent": 8,
+          "n_apply": 14,
+          "n_blank": 4,
+          "n_calc": 0,
+          "n_cases": 9,
+          "n_exact": 1,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 15,
+          "n_linarith": 0,
+          "n_lines": 81,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 18,
+          "n_simp_at": 0,
+          "n_tokens": 408
+        },
+        "eligible_spans": {
+          "span_1": 308,
+          "span_2": 288,
+          "span_3": 276,
+          "span_4": 265,
+          "span_6": 243
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.975333590154705,
+            "present": {
+              "n_apply": 14.0,
+              "n_cases": 9.0,
+              "n_intro": 15.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 9,
+        "n_lines": 81.0,
+        "n_mca_holes": 0,
+        "n_tags": 1,
+        "n_tokens": 408,
+        "name": "CallElimCorrect.substOldPostSubset",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "sweep_rand_s3_closed",
+        "pca_search_space_d013",
+        "pca_symbol_diffuse_d004",
+        "sweep_rand_s4_closed",
+        "port_intro_x_hin",
+        "sweep_rand_s6_closed",
+        "pca_symbol_diffuse_d002",
+        "pca_symbol_diffuse_d003"
+      ],
+      "lake": [
+        {
+          "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.substOldPostSubset-412.lean",
+          "error_class": null,
+          "errors": [],
+          "kind": "drop_dead_code_MCA_1",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 0,
+          "tokens": 412
+        },
+        {
+          "error_class": null,
+          "errors": [],
+          "kind": "port_intro_x_hin",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 0,
+          "tokens": 414
+        },
+        {
+          "error_class": null,
+          "errors": [],
+          "kind": "drop_unused_binders",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 0,
+          "tokens": 412
+        },
+        {
+          "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.substOldPostSubset-408.lean",
+          "error_class": null,
+          "errors": [],
+          "kind": "drop_dead_code_MCA_0",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 1,
+          "tokens": 408
+        },
+        {
+          "error_class": null,
+          "errors": [],
+          "kind": "drop_unused_binders",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 1,
+          "tokens": 408
+        },
+        {
+          "error_class": null,
+          "errors": [],
+          "kind": "port_intro_x_hin",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 1,
+          "tokens": 410
+        },
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "Case tag `op` not found.\n\nNote: There are no cases to select.",
+              "pos": {
+                "column": 2,
+                "line": 3100
+              }
+            }
+          ],
+          "kind": "pca_search_space_d013#repair",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": false,
+          "repaired": true,
+          "round": 2,
+          "tokens": 362
+        },
+        {
+          "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.substOldPostSubset-406.lean",
+          "error_class": null,
+          "errors": [],
+          "kind": "port_intro_x_hin",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": true,
+          "repaired": false,
+          "round": 2,
+          "tokens": 406
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Function expected at\n  Hin\nbut this term has type\n  x \u2208 Lambda.LExpr.LExpr.getVars c\u271d \u2228 x = h1\n\nNote: Expected a function because this term is being applied to the argument\n  all_goals",
+              "pos": {
+                "column": 12,
+                "line": 3120
+              }
+            }
+          ],
+          "kind": "pca_symbol_diffuse_d002",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": false,
+          "repaired": false,
+          "round": 2,
+          "tokens": 406
+        }
+      ],
+      "n_drafts": 8,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "pca_search_space_d013",
+          "port_intro_x_hin",
+          "pca_symbol_diffuse_d002",
+          "pca_symbol_diffuse_d003",
+          "pca_symbol_diffuse_d004",
+          "sweep_rand_s3_closed",
+          "sweep_rand_s6_closed",
+          "sweep_rand_s4_closed"
+        ],
+        "best_draft": "pca_search_space_d013",
+        "best_family": "search_space",
+        "draft_confidence": 0.67,
+        "draft_probabilities": {
+          "pca_search_space_d013": 0.83,
+          "port_intro_x_hin": 0.17
+        },
+        "family_confidence": 0.84,
+        "family_probabilities": {
+          "search_space": 0.92,
+          "symbol_diffuse": 0.08
+        },
+        "fired": false,
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.77,
+        "noul_fail": 0.43,
+        "noul_pca": 0.22,
+        "path_score": 0.873842090998139,
+        "separation": 2.2096047024697585,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 2088,
+          "output_tokens": 251
+        },
+        "wall_ms": 230.69679300533608
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app fn e fn_ih e_ih",
+          "abs ih",
+          "quant trih eih",
+          "ite cih tih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 16,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 5,
+          "n_exact": 3,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 11,
+          "n_linarith": 0,
+          "n_lines": 74,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 10,
+          "n_simp_at": 0,
+          "n_tokens": 302
+        },
+        "eligible_spans": {
+          "span_1": 233,
+          "span_2": 217,
+          "span_3": 205,
+          "span_4": 193,
+          "span_6": 169
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.4914458154265569,
+            "present": {
+              "n_apply": 16.0,
+              "n_cases": 5.0,
+              "n_intro": 11.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 5,
+        "n_lines": 74.0,
+        "n_mca_holes": 0,
+        "n_tags": 1,
+        "n_tokens": 302,
+        "name": "CallElimCorrect.extractedOldExprInVars",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "sweep_rand_s4_closed",
+        "sweep_rand_s3_closed",
+        "pca_algebraic_simplification_d009",
+        "port_exact_hin_assumption",
+        "port_apply_ih_assumption",
+        "pca_search_space_d008",
+        "port_intro_x_hin"
+      ],
+      "lake": [
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\ncase h_3.app.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e1\u271d e2\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nfn_ih : (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\ne_ih : (extractOldExprVars e).Subset (Lambda.LExpr.LEx",
+              "pos": {
+                "column": 6,
+                "line": 2886
+              }
+            }
+          ],
+          "kind": "pca_search_space_d008#repair",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 280
+        },
+        {
+          "error_class": "type_mismatch",
+          "errors": [
+            {
+              "data": "Type mismatch\n  ih\nhas type\n  NormalizedOldExpr e\u271d \u2192 (extractOldExprVars e\u271d).Subset (Lambda.LExpr.LExpr.getVars e\u271d)\nbut is expected to have type\n  (extractOldExprVars e\u271d).Subset (Lambda.LExpr.LExpr.getVars e\u271d)",
+              "pos": {
+                "column": 4,
+                "line": 2898
+              }
+            }
+          ],
+          "kind": "port_apply_ih_assumption",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 0,
+          "tokens": 298
+        },
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\ncase const\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d : Lambda.LConst\n\u22a2 NormalizedOldExpr (Lambda.LExpr.const m\u271d c\u271d) \u2192\n    (extractOldExprVars (Lambda.LExpr.const m\u271d c\u271d)).Subset (Imperative.HasVarsPure.getVars (Lambda.LExpr.const m\u271d c\u271d))\n\ncase op\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Vis",
+              "pos": {
+                "column": 43,
+                "line": 2862
+              }
+            }
+          ],
+          "kind": "pca_algebraic_simplification_d009#repair",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 11
+        }
+      ],
+      "n_drafts": 7,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "pca_search_space_d008",
+          "port_apply_ih_assumption",
+          "pca_algebraic_simplification_d009",
+          "port_exact_hin_assumption",
+          "port_intro_x_hin",
+          "sweep_rand_s3_closed",
+          "sweep_rand_s4_closed"
+        ],
+        "best_draft": "pca_search_space_d008",
+        "best_family": "search_space",
+        "draft_confidence": 0.54,
+        "draft_probabilities": {
+          "pca_search_space_d008": 0.65,
+          "port_apply_ih_assumption": 0.31,
+          "port_exact_hin_assumption": 0.02,
+          "port_intro_x_hin": 0.02
+        },
+        "family_confidence": 0.92,
+        "family_probabilities": {
+          "algebraic_simplification": 0.03,
+          "search_space": 0.95,
+          "symbol_diffuse": 0.02
+        },
+        "fired": false,
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.75,
+        "noul_fail": 0.5,
+        "noul_pca": 0.25,
+        "path_score": 0.7858116822750855,
+        "separation": 1.448024237900867,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 2014,
+          "output_tokens": 229
+        },
+        "wall_ms": 252.4083219759632
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 0,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 0,
+          "n_exact": 1,
+          "n_have": 5,
+          "n_induction": 1,
+          "n_intro": 1,
+          "n_linarith": 0,
+          "n_lines": 29,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 1,
+          "n_ring": 0,
+          "n_rw": 1,
+          "n_simp_all": 3,
+          "n_simp_at": 0,
+          "n_tokens": 139
+        },
+        "eligible_spans": {
+          "span_1": 127,
+          "span_2": 124,
+          "span_3": 121,
+          "span_4": 118,
+          "span_6": 112
+        },
+        "families": [
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all",
+              "n_rw"
+            ],
+            "mca_score": 0.7868800713439601,
+            "present": {
+              "n_rw": 1.0,
+              "n_simp_all": 3.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw",
+              "n_simp_all"
+            ],
+            "mca_score": 0.7868800713439601,
+            "present": {
+              "n_rw": 1.0,
+              "n_simp_all": 3.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.6930525968627868,
+            "present": {
+              "n_have": 5.0,
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_rename_i"
+            ],
+            "mca_score": 0.5328527189388765,
+            "present": {
+              "n_have": 5.0,
+              "n_rename_i": 1.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_intro"
+            ],
+            "mca_score": 0.4813350815210859,
+            "present": {
+              "n_intro": 1.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have := UpdateStatesDefined Hup",
+            "id": "MCA_0",
+            "n_tokens": 5,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hlen1 := InitStatesLength Hinit",
+            "id": "MCA_1",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hlen1",
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hlen2 := UpdateStatesLength Hup",
+            "id": "MCA_2",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i Hup Hups ih",
+            "id": "MCA_3",
+            "n_tokens": 4,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hup",
+              "Hups",
+              "ih"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have := InitStatesNotDefined Hinit",
+            "id": "MCA_4",
+            "n_tokens": 5,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hst := updatedStatesInit Hlen1",
+            "id": "MCA_5",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hst",
+              "this"
+            ]
+          }
+        ],
+        "n_cases": 0,
+        "n_lines": 29.0,
+        "n_mca_holes": 6,
+        "n_tags": 3,
+        "n_tokens": 139,
+        "name": "Core.InitsUpdatesComm",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "sweep_rand_s3_closed",
+        "pca_algebraic_simplification_d002",
+        "sweep_rand_s1_closed",
+        "sweep_rand_s2_closed",
+        "pca_search_space_d001"
+      ],
+      "lake": [
+        {
+          "error_class": "unknown_identifier",
+          "errors": [
+            {
+              "data": "Unknown identifier `Hup`",
+              "pos": {
+                "column": 30,
+                "line": 940
+              }
+            }
+          ],
+          "kind": "pca_algebraic_simplification_d002#repair",
+          "name": "Core.InitsUpdatesComm",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 19
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Invalid `\u27e8...\u27e9` notation: The expected type\n  UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''\nis not an inductive type\n\nNote: This notation can only be used when the expected type is an inductive type with a single constructor",
+              "pos": {
+                "column": 2,
+                "line": 940
+              }
+            }
+          ],
+          "kind": "pca_search_space_d001",
+          "name": "Core.InitsUpdatesComm",
+          "ok": false,
+          "repaired": false,
+          "round": 0,
+          "tokens": 136
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedState (updatedStates' ?m.138 ?m.141) ?m.139 ?m.140\nin the target expression\n  UpdateState P (updatedStates' \u03c3\u271d (ks'.zip vs')) x\u271d v\u271d (updatedStates' (updatedState \u03c3\u271d x\u271d v\u271d) (ks'.zip vs'))\n\ncase update_some.right.right\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'",
+              "pos": {
+                "column": 13,
+                "line": 961
+              }
+            }
+          ],
+          "kind": "sweep_rand_s1_closed",
+          "name": "Core.InitsUpdatesComm",
+          "ok": false,
+          "repaired": false,
+          "round": 0,
+          "tokens": 138
+        }
+      ],
+      "n_drafts": 5,
+      "ranked": {
+        "abstain": true,
+        "arena_score": null,
+        "beam_kinds": [
+          "pca_algebraic_simplification_d002",
+          "pca_search_space_d001",
+          "sweep_rand_s1_closed",
+          "sweep_rand_s3_closed",
+          "sweep_rand_s2_closed"
+        ],
+        "best_draft": "pca_algebraic_simplification_d002",
+        "best_family": "algebraic_simplification",
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "pca_algebraic_simplification_d002": 1.0
+        },
+        "family_confidence": 0.54,
+        "family_probabilities": {
+          "algebraic_simplification": 0.7,
+          "search_space": 0.18,
+          "symbol_diffuse": 0.12
+        },
+        "fired": false,
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.74,
+        "noul_fail": 0.59,
+        "noul_pca": 0.2,
+        "path_score": 0.8366600265340756,
+        "separation": 1.9720265943665387,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 2255,
+          "output_tokens": 172
+        },
+        "wall_ms": 205.51431202329695
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+          "tapp \u03c3' der _ ih",
+          "let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _",
+          "inl der _ ih",
+          "inr der _ ih",
+          "case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 12,
+          "n_apply": 2,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 6,
+          "n_exact": 0,
+          "n_have": 3,
+          "n_induction": 1,
+          "n_intro": 0,
+          "n_linarith": 0,
+          "n_lines": 82,
+          "n_obtain": 8,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 519
+        },
+        "eligible_spans": {
+          "span_1": 341,
+          "span_2": 322,
+          "span_3": 309,
+          "span_4": 296,
+          "span_6": 270
+        },
+        "families": [
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_obtain"
+            ],
+            "mca_score": 0.8118088659778215,
+            "present": {
+              "n_have": 3.0,
+              "n_obtain": 8.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.7246508094450246,
+            "present": {
+              "n_have": 3.0,
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_cases"
+            ],
+            "mca_score": 0.4582782697267421,
+            "present": {
+              "n_apply": 2.0,
+              "n_cases": 6.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have der' : Typing \u0393 t \u03c4 := der",
+            "id": "MCA_0",
+            "n_tokens": 10,
+            "safe_to_drop": true,
+            "used_binders": []
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have \u27e8\u03c3, t\u2081, eq\u27e9 := l.canonical_form_abs val_l",
+            "id": "MCA_1",
+            "n_tokens": 15,
+            "safe_to_drop": false,
+            "used_binders": [
+              "__keep__"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have \u27e8t\u2081, lr\u27e9 := der.canonical_form_sum val",
+            "id": "MCA_2",
+            "n_tokens": 13,
+            "safe_to_drop": false,
+            "used_binders": [
+              "__keep__"
+            ]
+          }
+        ],
+        "n_cases": 6,
+        "n_lines": 82.0,
+        "n_mca_holes": 3,
+        "n_tags": 3,
+        "n_tokens": 519,
+        "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "drop_unused_binders",
+        "pca_algebraic_simplification_d007",
+        "sweep_rand_s3_closed"
+      ],
+      "lake": [
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "unexpected token '\u2192'; expected ']'",
+              "pos": {
+                "column": 21,
+                "line": 150
+              }
+            }
+          ],
+          "kind": "drop_unused_binders#repair",
+          "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 509
+        },
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\nder : Typing [] t \u03c4\n\u22a2 t.Value \u2228 \u2203 t', t \u2b62\u03b2\u1d5b t'",
+              "pos": {
+                "column": 74,
+                "line": 76
+              }
+            }
+          ],
+          "kind": "pca_algebraic_simplification_d007#repair",
+          "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 11
+        },
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unexpected token '\u2192'; expected ']'",
+              "pos": {
+                "column": 21,
+                "line": 151
+              }
+            }
+          ],
+          "kind": "sweep_rand_s3_closed#repair",
+          "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 522
+        }
+      ],
+      "n_drafts": 3,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "drop_unused_binders",
+          "pca_algebraic_simplification_d007",
+          "sweep_rand_s3_closed"
+        ],
+        "best_draft": "drop_unused_binders",
+        "best_family": "dead_code",
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "drop_unused_binders": 1.0
+        },
+        "family_confidence": 0.91,
+        "family_probabilities": {
+          "algebraic_simplification": 0.04,
+          "dead_code": 0.94,
+          "symbol_diffuse": 0.02
+        },
+        "fired": false,
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.86,
+        "noul_fail": 0.59,
+        "noul_pca": 0.18,
+        "path_score": 0.9695359714832658,
+        "separation": 4.8476798574163285,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1630,
+          "output_tokens": 104
+        },
+        "wall_ms": 164.32706799241714
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "par a a' b b' ha' hb'",
+          "refl",
+          "par a'' b'' ha'' hb''",
+          "red_I",
+          "red_K",
+          "red_S a c",
+          "red_I",
+          "par c a\u2081' hc ha",
+          "red_K c",
+          "par a' c' ha hc",
+          "red_K",
+          "red_S a b c"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 8,
+          "n_apply": 2,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 14,
+          "n_exact": 6,
+          "n_have": 0,
+          "n_induction": 0,
+          "n_intro": 1,
+          "n_linarith": 0,
+          "n_lines": 61,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 6,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 551
+        },
+        "eligible_spans": {
+          "span_1": 362,
+          "span_2": 347,
+          "span_3": 332,
+          "span_4": 317,
+          "span_6": 295
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.4152403377578484,
+            "present": {
+              "n_apply": 2.0,
+              "n_cases": 14.0,
+              "n_intro": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 0.12748314381731785,
+            "present": {
+              "n_rw": 6.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 0.12748314381731785,
+            "present": {
+              "n_rw": 6.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 14,
+        "n_lines": 61.0,
+        "n_mca_holes": 0,
+        "n_tags": 4,
+        "n_tokens": 551,
+        "name": "Cslib.SKI.parallelReduction_diamond",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "sweep_rand_s4_closed"
+      ],
+      "lake": [
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\ncase right.a\na' b b' : SKI\nhb' : b \u2b62\u209a b'\na c : SKI\nha' : (S \u2b1d a \u2b1d c) \u2b62\u209a a'\na'' c' : SKI\nh : a \u2b62\u209a a'' \u2227 c \u2b62\u209a c' \u2227 a' = S \u2b1d a'' \u2b1d c'\n\u22a2 (c \u2b1d b) \u2b62\u209a c' \u2b1d b'",
+              "pos": {
+                "column": 19,
+                "line": 165
+              }
+            }
+          ],
+          "kind": "sweep_rand_s4_closed#repair",
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 554
+        }
+      ],
+      "n_drafts": 1,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "sweep_rand_s4_closed"
+        ],
+        "best_draft": "sweep_rand_s4_closed",
+        "best_family": "symbol_diffuse",
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "sweep_rand_s4_closed": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "symbol_diffuse": 1.0
+        },
+        "fired": false,
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.55,
+        "noul_fail": 0.44,
+        "noul_pca": 0.25,
+        "path_score": 1.0,
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1152,
+          "output_tokens": 84
+        },
+        "wall_ms": 218.67232501972467
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "left",
+          "choice p q r hbisim",
+          "choiceL a b c htr",
+          "choiceR a b c htr",
+          "bisim hbisim",
+          "right",
+          "choice p q r hbisim",
+          "choiceL a b c htr",
+          "choiceR a b c htr",
+          "bisim hbisim"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 6,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 10,
+          "n_exact": 0,
+          "n_have": 0,
+          "n_induction": 0,
+          "n_intro": 4,
+          "n_linarith": 0,
+          "n_lines": 60,
+          "n_obtain": 8,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 296
+        },
+        "eligible_spans": {
+          "span_1": 212,
+          "span_2": 196,
+          "span_3": 180,
+          "span_4": 165,
+          "span_6": 135
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 0.625967416446315,
+            "present": {
+              "n_apply": 6.0,
+              "n_cases": 10.0,
+              "n_intro": 4.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_obtain"
+            ],
+            "mca_score": 0.5200520364684922,
+            "present": {
+              "n_obtain": 8.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 10,
+        "n_lines": 60.0,
+        "n_mca_holes": 0,
+        "n_tags": 3,
+        "n_tokens": 296,
+        "name": "Cslib.CCS.bisimilarity_congr_choice",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "port_dot_ctor_apply"
+      ],
+      "lake": [
+        {
+          "error_class": "type_mismatch",
+          "errors": [
+            {
+              "data": "Type mismatch\n  IsBisimulation.le_bisimilarity hb s1' s2' hr2\nhas type\n  s1' ~[lts,lts] s2'\nbut is expected to have type\n  ChoiceBisim s1' s2'",
+              "pos": {
+                "column": 10,
+                "line": 330
+              }
+            }
+          ],
+          "kind": "port_dot_ctor_apply",
+          "name": "Cslib.CCS.bisimilarity_congr_choice",
+          "ok": false,
+          "repaired": false,
+          "round": 0,
+          "tokens": 295
+        }
+      ],
+      "n_drafts": 1,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "port_dot_ctor_apply"
+        ],
+        "best_draft": "port_dot_ctor_apply",
+        "best_family": "search_space",
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "port_dot_ctor_apply": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "search_space": 1.0
+        },
+        "fired": false,
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.44,
+        "noul_fail": 0.58,
+        "noul_pca": 0.27,
+        "path_score": 1.0,
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1079,
+          "output_tokens": 80
+        },
+        "wall_ms": 154.31160002481192
+      }
+    }
+  ],
+  "inits_139": {
+    "case_labels": [],
+    "catalog_phrases_present": [],
+    "counts": {
+      "max_indent": 10,
+      "n_apply": 0,
+      "n_blank": 0,
+      "n_calc": 0,
+      "n_cases": 0,
+      "n_exact": 1,
+      "n_have": 5,
+      "n_induction": 1,
+      "n_intro": 1,
+      "n_linarith": 0,
+      "n_lines": 29,
+      "n_obtain": 0,
+      "n_omega": 0,
+      "n_rename_i": 1,
+      "n_ring": 0,
+      "n_rw": 1,
+      "n_simp_all": 3,
+      "n_simp_at": 0,
+      "n_tokens": 139
+    },
+    "cut": "cascade-best-139",
+    "eligible_spans": {
+      "span_1": 127,
+      "span_2": 124,
+      "span_3": 121,
+      "span_4": 118,
+      "span_6": 112
+    },
+    "families": [
+      {
+        "family": "strength_reduction",
+        "features": [
+          "n_simp_all",
+          "n_rw"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "algebraic_simplification",
+        "features": [
+          "n_rw",
+          "n_simp_all"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "loop_invariant",
+        "features": [
+          "n_have",
+          "n_induction"
+        ],
+        "mca_score": 0.6930525968627868,
+        "present": {
+          "n_have": 5.0,
+          "n_induction": 1.0
+        }
+      },
+      {
+        "family": "dead_code",
+        "features": [
+          "n_have",
+          "n_rename_i"
+        ],
+        "mca_score": 0.5328527189388765,
+        "present": {
+          "n_have": 5.0,
+          "n_rename_i": 1.0
+        }
+      },
+      {
+        "family": "search_space",
+        "features": [
+          "n_intro"
+        ],
+        "mca_score": 0.4813350815210859,
+        "present": {
+          "n_intro": 1.0
+        }
+      }
+    ],
+    "mca_holes": [
+      {
+        "family": "loop_invariant",
+        "head": "have := UpdateStatesDefined Hup",
+        "id": "MCA_0",
+        "n_tokens": 5,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen1 := InitStatesLength Hinit",
+        "id": "MCA_1",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hlen1",
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen2 := UpdateStatesLength Hup",
+        "id": "MCA_2",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "dead_code",
+        "head": "rename_i Hup Hups ih",
+        "id": "MCA_3",
+        "n_tokens": 4,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hup",
+          "Hups",
+          "ih"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have := InitStatesNotDefined Hinit",
+        "id": "MCA_4",
+        "n_tokens": 5,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hst := updatedStatesInit Hlen1",
+        "id": "MCA_5",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hst",
+          "this"
+        ]
+      }
+    ],
+    "n_cases": 0,
+    "n_lines": 29.0,
+    "n_mca_holes": 6,
+    "n_tags": 3,
+    "n_tokens": 139,
+    "name": "Core.InitsUpdatesComm",
+    "pca_keep": true,
+    "source": "strata"
+  },
+  "k": 3,
+  "lake": [
+    {
+      "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.substOldPostSubset-412.lean",
+      "error_class": null,
+      "errors": [],
+      "kind": "drop_dead_code_MCA_1",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 0,
+      "tokens": 412
+    },
+    {
+      "error_class": null,
+      "errors": [],
+      "kind": "port_intro_x_hin",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 0,
+      "tokens": 414
+    },
+    {
+      "error_class": null,
+      "errors": [],
+      "kind": "drop_unused_binders",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 0,
+      "tokens": 412
+    },
+    {
+      "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.substOldPostSubset-408.lean",
+      "error_class": null,
+      "errors": [],
+      "kind": "drop_dead_code_MCA_0",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 1,
+      "tokens": 408
+    },
+    {
+      "error_class": null,
+      "errors": [],
+      "kind": "drop_unused_binders",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 1,
+      "tokens": 408
+    },
+    {
+      "error_class": null,
+      "errors": [],
+      "kind": "port_intro_x_hin",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 1,
+      "tokens": 410
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "Case tag `op` not found.\n\nNote: There are no cases to select.",
+          "pos": {
+            "column": 2,
+            "line": 3100
+          }
+        }
+      ],
+      "kind": "pca_search_space_d013#repair",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false,
+      "repaired": true,
+      "round": 2,
+      "tokens": 362
+    },
+    {
+      "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.substOldPostSubset-406.lean",
+      "error_class": null,
+      "errors": [],
+      "kind": "port_intro_x_hin",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": true,
+      "repaired": false,
+      "round": 2,
+      "tokens": 406
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Function expected at\n  Hin\nbut this term has type\n  x \u2208 Lambda.LExpr.LExpr.getVars c\u271d \u2228 x = h1\n\nNote: Expected a function because this term is being applied to the argument\n  all_goals",
+          "pos": {
+            "column": 12,
+            "line": 3120
+          }
+        }
+      ],
+      "kind": "pca_symbol_diffuse_d002",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false,
+      "repaired": false,
+      "round": 2,
+      "tokens": 406
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\ncase h_3.app.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e1\u271d e2\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nfn_ih : (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\ne_ih : (extractOldExprVars e).Subset (Lambda.LExpr.LEx",
+          "pos": {
+            "column": 6,
+            "line": 2886
+          }
+        }
+      ],
+      "kind": "pca_search_space_d008#repair",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 280
+    },
+    {
+      "error_class": "type_mismatch",
+      "errors": [
+        {
+          "data": "Type mismatch\n  ih\nhas type\n  NormalizedOldExpr e\u271d \u2192 (extractOldExprVars e\u271d).Subset (Lambda.LExpr.LExpr.getVars e\u271d)\nbut is expected to have type\n  (extractOldExprVars e\u271d).Subset (Lambda.LExpr.LExpr.getVars e\u271d)",
+          "pos": {
+            "column": 4,
+            "line": 2898
+          }
+        }
+      ],
+      "kind": "port_apply_ih_assumption",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 0,
+      "tokens": 298
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\ncase const\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc\u271d : Lambda.LConst\n\u22a2 NormalizedOldExpr (Lambda.LExpr.const m\u271d c\u271d) \u2192\n    (extractOldExprVars (Lambda.LExpr.const m\u271d c\u271d)).Subset (Imperative.HasVarsPure.getVars (Lambda.LExpr.const m\u271d c\u271d))\n\ncase op\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Vis",
+          "pos": {
+            "column": 43,
+            "line": 2862
+          }
+        }
+      ],
+      "kind": "pca_algebraic_simplification_d009#repair",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 11
+    },
+    {
+      "error_class": "unknown_identifier",
+      "errors": [
+        {
+          "data": "Unknown identifier `Hup`",
+          "pos": {
+            "column": 30,
+            "line": 940
+          }
+        }
+      ],
+      "kind": "pca_algebraic_simplification_d002#repair",
+      "name": "Core.InitsUpdatesComm",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 19
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Invalid `\u27e8...\u27e9` notation: The expected type\n  UpdateStates \u03c3 ks vs \u03c3' \u2192\n    InitStates \u03c3' ks' vs' \u03c3'' \u2192 \u2203 \u03c3\u2081, \u03c3\u2081 = updatedStates \u03c3 ks' vs' \u2227 InitStates \u03c3 ks' vs' \u03c3\u2081 \u2227 UpdateStates \u03c3\u2081 ks vs \u03c3''\nis not an inductive type\n\nNote: This notation can only be used when the expected type is an inductive type with a single constructor",
+          "pos": {
+            "column": 2,
+            "line": 940
+          }
+        }
+      ],
+      "kind": "pca_search_space_d001",
+      "name": "Core.InitsUpdatesComm",
+      "ok": false,
+      "repaired": false,
+      "round": 0,
+      "tokens": 136
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedState (updatedStates' ?m.138 ?m.141) ?m.139 ?m.140\nin the target expression\n  UpdateState P (updatedStates' \u03c3\u271d (ks'.zip vs')) x\u271d v\u271d (updatedStates' (updatedState \u03c3\u271d x\u271d v\u271d) (ks'.zip vs'))\n\ncase update_some.right.right\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'",
+          "pos": {
+            "column": 13,
+            "line": 961
+          }
+        }
+      ],
+      "kind": "sweep_rand_s1_closed",
+      "name": "Core.InitsUpdatesComm",
+      "ok": false,
+      "repaired": false,
+      "round": 0,
+      "tokens": 138
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "unexpected token '\u2192'; expected ']'",
+          "pos": {
+            "column": 21,
+            "line": 150
+          }
+        }
+      ],
+      "kind": "drop_unused_binders#repair",
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 509
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\nVar : Type u_1\ninst\u271d\u00b9 : HasFresh Var\ninst\u271d : DecidableEq Var\nt : Term Var\n\u03c4 : Ty Var\nder : Typing [] t \u03c4\n\u22a2 t.Value \u2228 \u2203 t', t \u2b62\u03b2\u1d5b t'",
+          "pos": {
+            "column": 74,
+            "line": 76
+          }
+        }
+      ],
+      "kind": "pca_algebraic_simplification_d007#repair",
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 11
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unexpected token '\u2192'; expected ']'",
+          "pos": {
+            "column": 21,
+            "line": 151
+          }
+        }
+      ],
+      "kind": "sweep_rand_s3_closed#repair",
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 522
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\ncase right.a\na' b b' : SKI\nhb' : b \u2b62\u209a b'\na c : SKI\nha' : (S \u2b1d a \u2b1d c) \u2b62\u209a a'\na'' c' : SKI\nh : a \u2b62\u209a a'' \u2227 c \u2b62\u209a c' \u2227 a' = S \u2b1d a'' \u2b1d c'\n\u22a2 (c \u2b1d b) \u2b62\u209a c' \u2b1d b'",
+          "pos": {
+            "column": 19,
+            "line": 165
+          }
+        }
+      ],
+      "kind": "sweep_rand_s4_closed#repair",
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 554
+    },
+    {
+      "error_class": "type_mismatch",
+      "errors": [
+        {
+          "data": "Type mismatch\n  IsBisimulation.le_bisimilarity hb s1' s2' hr2\nhas type\n  s1' ~[lts,lts] s2'\nbut is expected to have type\n  ChoiceBisim s1' s2'",
+          "pos": {
+            "column": 10,
+            "line": 330
+          }
+        }
+      ],
+      "kind": "port_dot_ctor_apply",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "ok": false,
+      "repaired": false,
+      "round": 0,
+      "tokens": 295
+    }
+  ],
+  "landscape": [
+    {
+      "n_have": 1,
+      "n_induction": 1,
+      "n_mca_holes": 8,
+      "n_rw": 0,
+      "n_simp_at": 8,
+      "n_tokens": 482,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 322,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 1,
+      "n_mca_holes": 4,
+      "n_rw": 1,
+      "n_simp_at": 0,
+      "n_tokens": 268,
+      "name": "Core.InitsUpdatesComm",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 23,
+      "n_induction": 0,
+      "n_mca_holes": 23,
+      "n_rw": 3,
+      "n_simp_at": 1,
+      "n_tokens": 1829,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 0,
+      "n_mca_holes": 9,
+      "n_rw": 17,
+      "n_simp_at": 0,
+      "n_tokens": 1820,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 0,
+      "n_mca_holes": 3,
+      "n_rw": 9,
+      "n_simp_at": 0,
+      "n_tokens": 1473,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 519,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "source": "cslib",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 6,
+      "n_simp_at": 0,
+      "n_tokens": 552,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 296,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 28,
+      "n_induction": 0,
+      "n_mca_holes": 28,
+      "n_rw": 13,
+      "n_simp_at": 0,
+      "n_tokens": 2800,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 27,
+      "n_induction": 0,
+      "n_mca_holes": 29,
+      "n_rw": 24,
+      "n_simp_at": 0,
+      "n_tokens": 2618,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 18,
+      "n_induction": 1,
+      "n_mca_holes": 18,
+      "n_rw": 7,
+      "n_simp_at": 0,
+      "n_tokens": 2454,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "source": "arklib",
+      "top_family": "loop_invariant"
+    },
+    {
+      "n_have": 54,
+      "n_induction": 1,
+      "n_mca_holes": 54,
+      "n_rw": 3,
+      "n_simp_at": 4,
+      "n_tokens": 2124,
+      "name": "putnam_1964_a4",
+      "source": "putnambench",
+      "top_family": "strength_reduction"
+    },
+    {
+      "n_have": 81,
+      "n_induction": 0,
+      "n_mca_holes": 81,
+      "n_rw": 10,
+      "n_simp_at": 2,
+      "n_tokens": 2350,
+      "name": "putnam_1964_b2",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 76,
+      "n_induction": 0,
+      "n_mca_holes": 76,
+      "n_rw": 18,
+      "n_simp_at": 0,
+      "n_tokens": 4564,
+      "name": "putnam_1995_a3",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 8,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 2297,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 240,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.6e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 2235,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 243,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.4e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 2088,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 251,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 8.8e-05
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 2014,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 229,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 8.5e-05
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 2255,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 172,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.5e-05
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 1630,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 104,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 6.8e-05
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 1152,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 84,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.8e-05
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 1079,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 80,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.5e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 38,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "warmup#random-canary",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999381,
+    "skipped": false,
+    "spent_usd": 0.000619,
+    "track": "track1_closed"
+  },
+  "memory": {
+    "n_blacklist": 34,
+    "n_failures": 69,
+    "n_successes": 49
+  },
+  "memory_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/refactor-memory.json",
+  "n_records": 15,
+  "n_tag_cells": 36,
+  "observed_at": "2026-09-17T23:44:53.466980+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.4049405265687185,
+      0.20535547758361236,
+      0.11807994165651019,
+      0.07890666288267674,
+      0.05463727730428802,
+      0.04287295106587582
+    ],
+    "principal0": {
+      "max_indent": -0.26472716990802214,
+      "n_apply": 0.08062031373487605,
+      "n_blank": -0.3342438149027209,
+      "n_calc": -0.30073104239355397,
+      "n_cases": 0.22151097089138239,
+      "n_exact": -0.3223738861331306,
+      "n_have": -0.3229177802571527,
+      "n_induction": 0.1554714491780493,
+      "n_intro": -0.13949676587126572,
+      "n_linarith": -0.20355777263126,
+      "n_lines": -0.3316410647395201,
+      "n_obtain": 0.062338763096317515,
+      "n_omega": -0.061922673049083964,
+      "n_rename_i": 0.13191459411652012,
+      "n_ring": -0.2672920525771413,
+      "n_rw": -0.22982013977927257,
+      "n_simp_all": -0.07536010342633125,
+      "n_simp_at": 0.04284608346238592,
+      "n_tokens": -0.3347272419706519
+    }
+  },
+  "schema": "lra-random-canary/v1",
+  "seed": 20260917,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

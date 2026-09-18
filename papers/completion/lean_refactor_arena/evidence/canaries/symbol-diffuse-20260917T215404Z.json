@@ -1,0 +1,131 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "SYM_0_phrase_constructor",
+    "theorem_ok": true,
+    "token_count": 265
+  },
+  "called_docker0": false,
+  "lake": [
+    {
+      "errors": [],
+      "kind": "SYM_0_phrase_constructor",
+      "ok": true,
+      "tokens": 265
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 isNotDefined \u03c3\u271d ks'",
+          "pos": {
+            "column": 35,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_6_operator__",
+      "ok": false,
+      "tokens": 267
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 ks'.Nodup",
+          "pos": {
+            "column": 38,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_7_operator__",
+      "ok": false,
+      "tokens": 267
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n  ",
+          "pos": {
+            "column": 17,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_8_operator__",
+      "ok": false,
+      "tokens": 267
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 1,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 2679,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 219,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000113
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 2,
+    "max_mistral_calls": 2,
+    "mistral_calls": 0,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999887,
+    "skipped": false,
+    "spent_usd": 0.000113,
+    "track": "track1_closed"
+  },
+  "llm": "off",
+  "n_closed": 17,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T21:54:04.551587+00:00",
+  "official_track2": false,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "SYM_0_phrase_constructor",
+    "confidence": 0.98,
+    "jev_generated_lean": false,
+    "probabilities": {
+      "SYM_0_phrase_constructor": 0.98,
+      "SYM_10_operator__": 0.0,
+      "SYM_11_operator__": 0.0,
+      "SYM_12_operator__": 0.0,
+      "SYM_13_operator__": 0.0,
+      "SYM_14_operator__": 0.0,
+      "SYM_15_operator__": 0.0,
+      "SYM_1_phrase_intro": 0.0,
+      "SYM_23_operator_drop": 0.0,
+      "SYM_2_phrase_.update_some": 0.0,
+      "SYM_3_phrase_\n          all_goals sim": 0.01,
+      "SYM_4_phrase_\n          all_goals sim": 0.01,
+      "SYM_6_operator__": 0.0,
+      "SYM_7_operator__": 0.0,
+      "SYM_8_operator__": 0.0,
+      "SYM_9_operator__": 0.0
+    },
+    "skipped": false,
+    "usage": {
+      "input_tokens": 2679,
+      "output_tokens": 219
+    },
+    "wall_ms": 188.835257984465
+  },
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 268,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

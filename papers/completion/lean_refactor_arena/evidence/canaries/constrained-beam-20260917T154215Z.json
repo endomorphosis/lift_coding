@@ -1,0 +1,563 @@
+{
+  "arena_score": null,
+  "called_docker0": true,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T15:42:15.173122+00:00",
+  "official_track2": false,
+  "pr": "PR-9f",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": false,
+      "called_docker0": true,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2382.1001180040184
+        },
+        {
+          "errors": [
+            {
+              "data": "unexpected token 'theorem'; expected '{' or tactic",
+              "pos": {
+                "column": 51,
+                "line": 948
+              }
+            },
+            {
+              "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\n\u22a2 InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u271d ks' vs') [] [] \u03c3''",
+              "pos": {
+                "column": 19,
+                "line": 943
+              }
+            },
+            {
+              "data": "Unknown identifier `Hup`",
+              "pos": {
+                "column": 35,
+                "line": 946
+              }
+            },
+            {
+              "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' vs' \u03c3'' \u2192\n      updatedStates \u03c3'",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_0",
+          "module_exit_0": false,
+          "n_chars": 292,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n    refine updatedStatesInit Hlen1 ?_ ?_",
+          "theorem_ok": false,
+          "token_count": 55,
+          "wall_ms": 2344.4083250069525
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\n\u22a2 InitStates \u03c3\u271d ks' vs' (updatedStates \u03c3\u271d ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u271d ks' vs') [] [] \u03c3''",
+              "pos": {
+                "column": 19,
+                "line": 943
+              }
+            },
+            {
+              "data": "Unknown identifier `Hup`",
+              "pos": {
+                "column": 35,
+                "line": 946
+              }
+            },
+            {
+              "data": "unsolved goals\ncase update_some\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\na\u271d\u00b9 : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\na\u271d : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\na_ih\u271d :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3''\u271d ks' vs' \u03c3'' \u2192\n      updatedStates \u03c3'",
+              "pos": {
+                "column": 33,
+                "line": 939
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_1",
+          "module_exit_0": false,
+          "n_chars": 272,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n    refine updatedStatesInit Hlen1 ?_ ?_",
+          "theorem_ok": false,
+          "token_count": 42,
+          "wall_ms": 2280.3844140144065
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "beam": 2,
+        "called_docker0": true,
+        "called_hosted_mistral": false,
+        "finals": [
+          {
+            "steps": [
+              "  case update_none =>",
+              "    simp_all",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>"
+            ],
+            "stopped": false,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n    refine updatedStatesInit Hlen1 ?_ ?_\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>"
+          },
+          {
+            "steps": [
+              "  case update_none =>",
+              "    simp_all",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNodup Hinit"
+            ],
+            "stopped": false,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNodup Hinit"
+          }
+        ],
+        "hardware_class": "spark_gb10",
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 11,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 646,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 67,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.7e-05
+            },
+            {
+              "call_index": 2,
+              "fixture": false,
+              "input_tokens": 685,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 75,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 2.9e-05
+            },
+            {
+              "call_index": 3,
+              "fixture": false,
+              "input_tokens": 729,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.1e-05
+            },
+            {
+              "call_index": 4,
+              "fixture": false,
+              "input_tokens": 768,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.2e-05
+            },
+            {
+              "call_index": 5,
+              "fixture": false,
+              "input_tokens": 708,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 75,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3e-05
+            },
+            {
+              "call_index": 6,
+              "fixture": false,
+              "input_tokens": 718,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 75,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3e-05
+            },
+            {
+              "call_index": 7,
+              "fixture": false,
+              "input_tokens": 772,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.2e-05
+            },
+            {
+              "call_index": 8,
+              "fixture": false,
+              "input_tokens": 725,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 75,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3e-05
+            },
+            {
+              "call_index": 9,
+              "fixture": false,
+              "input_tokens": 759,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.2e-05
+            },
+            {
+              "call_index": 10,
+              "fixture": false,
+              "input_tokens": 794,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.3e-05
+            },
+            {
+              "call_index": 11,
+              "fixture": false,
+              "input_tokens": 760,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 83,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 3.2e-05
+            }
+          ],
+          "max_grok_calls": 0,
+          "max_jev_calls": 16,
+          "max_mistral_calls": 0,
+          "mistral_calls": 0,
+          "name": "Core.InitsUpdatesComm#constrained-beam-local",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 2.999662,
+          "skipped": false,
+          "spent_usd": 0.000338,
+          "track": "track1_closed"
+        },
+        "local_calls": 22,
+        "max_steps": 6,
+        "mode": "beam",
+        "official_track2": false,
+        "pca_prefix": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  induction Hup generalizing \u03c3''",
+        "trace": [
+          {
+            "prefix_lines": 3,
+            "proposals": [
+              "STOP",
+              "STOP",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "  case update_none =>",
+              "    simp_all"
+            ],
+            "step": 0,
+            "typesafe": {
+              "best": "  case update_none =>",
+              "confidence": 0.82,
+              "kept": [
+                "  case update_none =>",
+                "    simp_all"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 4,
+            "proposals": [
+              "<|im_start|>system",
+              "<|im_start|>system",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    simp_all",
+              "    apply And.intro",
+              "STOP"
+            ],
+            "step": 1,
+            "typesafe": {
+              "best": "    simp_all",
+              "confidence": 0.8,
+              "kept": [
+                "    simp_all",
+                "    apply And.intro"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 4,
+            "proposals": [
+              "intros Hup Hinit",
+              "have Hdef := UpdateStateDefined' Hup",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "  case update_none =>",
+              "    apply And.intro",
+              "STOP"
+            ],
+            "step": 1,
+            "typesafe": {
+              "best": "  case update_none =>",
+              "confidence": 0.79,
+              "kept": [
+                "  case update_none =>",
+                "    apply And.intro"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 5,
+            "proposals": [
+              "have Hdef := UpdateStateDefined' Hup",
+              "-   have Hdef := UpdateStateDefined' Hup",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    apply And.intro",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "STOP"
+            ],
+            "step": 2,
+            "typesafe": {
+              "best": "STOP",
+              "confidence": 0.23,
+              "kept": [
+                "  have Hlen1 := InitStatesLength Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 5,
+            "proposals": [
+              "<|im_start|>assistant",
+              "STOP",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    simp_all",
+              "    refine updatedStatesInit Hlen1 ?_ ?_"
+            ],
+            "step": 2,
+            "typesafe": {
+              "best": "    simp_all",
+              "confidence": 0.64,
+              "kept": [
+                "    simp_all",
+                "  have Hlen1 := InitStatesLength Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 6,
+            "proposals": [
+              "<|im_start|>assistant",
+              "<|im_start|>assistant",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    apply And.intro",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNotDefined Hinit",
+              "STOP"
+            ],
+            "step": 3,
+            "typesafe": {
+              "best": "  have Hlen2 := UpdateStatesLength Hup",
+              "confidence": 0.38,
+              "kept": [
+                "  have Hlen2 := UpdateStatesLength Hup",
+                "    refine updatedStatesInit Hlen1 ?_ ?_"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 6,
+            "proposals": [
+              "<|im_start|>system",
+              ". apply updatedStateUpdate (v':=val)",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen1 := InitStatesLength Hinit",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNotDefined Hinit",
+              "STOP"
+            ],
+            "step": 3,
+            "typesafe": {
+              "best": "STOP",
+              "confidence": 0.5,
+              "kept": [
+                "  have Hlen1 := InitStatesLength Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 7,
+            "proposals": [
+              "<|im_start|>assistant",
+              "<|im_start|>assistant",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "    apply And.intro",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNotDefined Hinit",
+              "    exact InitStatesNodup Hinit",
+              "STOP"
+            ],
+            "step": 4,
+            "typesafe": {
+              "best": "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "confidence": 0.65,
+              "kept": [
+                "    refine updatedStatesInit Hlen1 ?_ ?_",
+                "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 7,
+            "proposals": [
+              "<|im_start|>system",
+              "<|im_start|>user",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "  have Hlen2 := UpdateStatesLength Hup",
+              "    apply And.intro",
+              "    exact InitStatesNotDefined Hinit",
+              "    exact InitStatesNodup Hinit",
+              "STOP"
+            ],
+            "step": 4,
+            "typesafe": {
+              "best": "    exact InitStatesNodup Hinit",
+              "confidence": 0.35,
+              "kept": [
+                "    exact InitStatesNodup Hinit",
+                "  have Hlen2 := UpdateStatesLength Hup"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 8,
+            "proposals": [
+              "<|im_start|>user",
+              "case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "    apply And.intro",
+              "    exact InitStatesNotDefined Hinit",
+              "    exact InitStatesNodup Hinit",
+              "    simp [InitStatesUpdated Hinit]",
+              "STOP"
+            ],
+            "step": 5,
+            "typesafe": {
+              "best": "case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "confidence": 0.61,
+              "kept": [
+                "case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+                "    exact InitStatesNodup Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "prefix_lines": 8,
+            "proposals": [
+              "intros Hup Hinit",
+              "<|im_start|>thought>",
+              "    apply And.intro",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNotDefined Hinit",
+              "    exact InitStatesNodup Hinit",
+              "    simp [InitStatesUpdated Hinit]",
+              "STOP"
+            ],
+            "step": 5,
+            "typesafe": {
+              "best": "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "confidence": 0.59,
+              "kept": [
+                "    refine updatedStatesInit Hlen1 ?_ ?_",
+                "    simp [InitStatesUpdated Hinit]"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          }
+        ],
+        "vocab_n": 43
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-constrained-beam-local/v1",
+  "wall_ms": 77984.38498101314
+}

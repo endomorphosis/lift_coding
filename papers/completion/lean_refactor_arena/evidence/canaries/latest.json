@@ -1,0 +1,418 @@
+{
+  "arena_score": null,
+  "canaries": [
+    {
+      "advisory_only": true,
+      "arena_score": null,
+      "expected_provable": true,
+      "expected_solver_status": "unsat",
+      "goal_id": "h.fol_identity",
+      "kernel": {
+        "error": "lean_nonzero_exit",
+        "exit_code": 1,
+        "ok": false,
+        "source_chars": 97,
+        "stderr_tail": "",
+        "stdout_tail": "/tmp/lra-fol-5yvg_7e4/Canary.lean:2:12: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nU\u271d : Type\nP\u271d : U\u271d \u2192 Prop\nU : U\u271d\nP : P\u271d U\n\u22a2 P\u271d U\n",
+        "wall_ms": 714.8159749922343
+      },
+      "kind": "fol",
+      "leanstral_finish_reason": "stop",
+      "leanstral_usage": {
+        "completion_tokens": 34,
+        "prompt_tokens": 141,
+        "prompt_tokens_details": {
+          "cached_tokens": 140
+        },
+        "total_tokens": 175
+      },
+      "match_expected": false,
+      "parsed": {
+        "body": "by\n  intro U P x h\n  exact h",
+        "had_thought": false,
+        "kind": "proof_body",
+        "language": "lean"
+      },
+      "typesafe_skipped": null,
+      "verdict": {
+        "advisory_only": true,
+        "body": "by\n  intro U P x h\n  exact h",
+        "candidate_quality": 1.73,
+        "claim_status": "unsat",
+        "confidence": 0.59,
+        "disposition": "accept_candidate",
+        "is_abstain": 0.01,
+        "is_proof_body": 0.97,
+        "kind": "proof_body",
+        "uses_forbidden": 0.03,
+        "well_formed": 0.96
+      },
+      "wall_ms": 3153.58221202041
+    },
+    {
+      "advisory_only": true,
+      "arena_score": null,
+      "expected_provable": false,
+      "expected_solver_status": "sat",
+      "goal_id": "h.fol_protected_write",
+      "kernel": {
+        "error": "lean_nonzero_exit",
+        "exit_code": 1,
+        "ok": false,
+        "source_chars": 1115,
+        "stderr_tail": "",
+        "stdout_tail": "/tmp/lra-fol-fxp6o0xp/Canary.lean:3:8: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nProtected Approved Write : Prop\nh : Protected \u2227 \u00acApproved\nhprotected : Write\n\u22a2 False\n",
+        "wall_ms": 694.1219310101587
+      },
+      "kind": "fol",
+      "leanstral_finish_reason": "length",
+      "leanstral_usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 143,
+        "prompt_tokens_details": {
+          "cached_tokens": 104
+        },
+        "total_tokens": 399
+      },
+      "match_expected": true,
+      "parsed": {
+        "body": "by\n  intro h hprotected\n  intro hnotapproved\n  intro hwrite\n  exfalso\n  -- We have Protected, \u00ac Approved, and Write. But we need to derive a contradiction.\n  -- The statement is not provable from its explicit parameters because it's an implication\n  -- with arbitrary propositions. We cannot derive \u00ac Write from Protected and \u00ac Approved.\n  -- Therefore, we must return ABSTAIN.\n  -- However, the user wants a Lean 4 proof body. Let me check if there's any way to prove this.\n  -- The statement is: (Protected \u2227 \u00ac Approved) \u2192 \u00ac Write\n  -- This is equivalent to: Protected \u2192 Approved \u2192 \u00ac Write\n  -- But we have no relationship between these propositions. They are arbitrary.\n  -- So we cannot prove this. We must return ABSTAIN.\n  -- Wait, the user says \"If the statement is not provable from its explicit parameters, return exactly ABSTAIN.\"\n  -- But the user also says \"Return only a Lean 4 proof body starting with by for the declaration below.\"\n  -- This is contradictory. Let me re-read.\n  -- The user wants a proof",
+        "had_thought": false,
+        "kind": "proof_body",
+        "language": "lean4"
+      },
+      "typesafe_skipped": null,
+      "verdict": {
+        "advisory_only": true,
+        "body": "by\n  intro h hprotected\n  intro hnotapproved\n  intro hwrite\n  exfalso\n  -- We have Protected, \u00ac Approved, and Write. But we need to derive a contradiction.\n  -- The statement is not provable from its explicit parameters because it's an implication\n  -- with arbitrary propositions. We cannot derive \u00ac Write from Protected and \u00ac Approved.\n  -- Therefore, we must return ABSTAIN.\n  -- However, the user wants a Lean 4 proof body. Let me check if there's any way to prove this.\n  -- The statement is: (Protected \u2227 \u00ac Approved) \u2192 \u00ac Write\n  -- This is equivalent to: Protected \u2192 Approved \u2192 \u00ac Write\n  -- But we have no relationship between these propositions. They are arbitrary.\n  -- So we cannot prove this. We must return ABSTAIN.\n  -- Wait, the user says \"If the statement is not provable from its explicit parameters, return exactly ABSTAIN.\"\n  -- But the user also says \"Return only a Lean 4 proof body starting with by for the declaration below.\"\n  -- This is contradictory. Let me re-read.\n  -- The user wants a proof",
+        "candidate_quality": 0.14,
+        "claim_status": "sat",
+        "confidence": 0.79,
+        "disposition": "reject",
+        "is_abstain": 0.03,
+        "is_proof_body": 0.76,
+        "kind": "proof_body",
+        "uses_forbidden": 0.94,
+        "well_formed": 0.06
+      },
+      "wall_ms": 17635.448948974954
+    },
+    {
+      "admission": {
+        "accepted": true,
+        "code": "",
+        "reason": "proof text admitted for independent Lean kernel checking"
+      },
+      "arena_score": null,
+      "called_leanstral": true,
+      "candidate_gate": {
+        "additive_not_replacement": true,
+        "api_key_redacted": true,
+        "arena_score": null,
+        "calc_structure_worth_keeping": 0.11,
+        "called_typesafe": true,
+        "elab_risk": 1.09,
+        "elab_risk_legend": {
+          "0": "elab likely better or same",
+          "1": "elab unclear",
+          "2": "elab likely worse"
+        },
+        "family": "simp_set",
+        "family_confidence": 0.29,
+        "family_probs": {
+          "aesop": 0.03,
+          "calc": 0.03,
+          "custom": 0.28,
+          "have_chain": 0.01,
+          "native_hammer": 0.25,
+          "omega_decide": 0.0,
+          "simp_set": 0.4
+        },
+        "hammer_before_llm": 0.55,
+        "jev_generated_lean": false,
+        "lean_text": null,
+        "likely_shorter": 1.46,
+        "likely_shorter_is_rubric_index": true,
+        "likely_shorter_legend": {
+          "0": "longer or same",
+          "1": "modest cut around 10 percent",
+          "2": "large cut of 30 percent or more"
+        },
+        "mode": "distill",
+        "model": "jev-latest",
+        "neighbor_style_match": "CallElimCorrect.extractedOldExprInVars",
+        "official_track2": false,
+        "proof_text": null,
+        "putnam_aesop_plausible": 0.51,
+        "reason": "routed",
+        "reference_already_tight": 0.41,
+        "score_is_rubric_index": true,
+        "skipped": false,
+        "spend_llm": 0.54,
+        "statement_in_proof_duplicated": 0.26,
+        "tactics": null,
+        "usage": {
+          "input_tokens": 3553,
+          "output_tokens": 394
+        },
+        "used_fixture": false,
+        "uses_sorry_or_admit": 0.03,
+        "version_fragile": 0.43,
+        "wall_ms": 233.67150902049616
+      },
+      "compile": {
+        "attempted": false,
+        "reason": "tag-pinned lake/oleans not installed for live Strata/CSLib; FOL kernel is the live oracle on this pass"
+      },
+      "generation": {
+        "error": "",
+        "identity": {
+          "arena_score": null,
+          "fallback_used": false,
+          "requested_model": "Leanstral",
+          "requested_provider": "leanstral_local",
+          "resolved_model": "Leanstral",
+          "resolved_provider": "llama_cpp"
+        },
+        "n_chars": 652,
+        "n_tactics_chars": 652,
+        "skipped": false,
+        "tactics_head": "</>lean\ninduction post <;> simp [substOld]\ncase fvar =>\n  intros x Hin\n  rename_i m name ty2\n  simp at m\n  simp at name\n  simp at ty2\n  simp_all\ncase op =>\n  intros x Hin\n  rename_i m name ty2\n  simp at m\n  simp at name\n  simp at ty2\n  simp_all\ncase const =>\n  intros x Hin\n  rename_i m name\n  simp at m\n  simp at name\n  simp_all\ncase bvar =>\n  intros x Hin\n  rename_i m d\n  simp at m\n  simp at d\n  s",
+        "text_head": "</>lean\ninduction post <;> simp [substOld]\ncase fvar =>\n  intros x Hin\n  rename_i m name ty2\n  simp at m\n  simp at name\n  simp at ty2\n  simp_all\ncase op =>\n  intros x Hin\n  rename_i m name ty2\n  simp at m\n  simp at name\n  simp at ty2\n  simp_all\ncase const =>\n  intros x Hin\n  rename_i m name\n  simp at m\n  simp at name\n  simp_all\ncase bvar =>\n  intros x Hin\n  rename_i m d\n  simp at m\n  simp at d\n  s"
+      },
+      "health_ok": true,
+      "jev_generated_lean": false,
+      "jev_recommends_llm": false,
+      "kind": "lra_warmup",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "num_lines": 97,
+      "official_score": null,
+      "proof_length": 313,
+      "route": {
+        "additive_not_replacement": true,
+        "api_key_redacted": true,
+        "arena_score": null,
+        "calc_structure_worth_keeping": 0.13,
+        "called_typesafe": true,
+        "elab_risk": 1.12,
+        "elab_risk_legend": {
+          "0": "elab likely better or same",
+          "1": "elab unclear",
+          "2": "elab likely worse"
+        },
+        "family": "simp_set",
+        "family_confidence": 0.27,
+        "family_probs": {
+          "aesop": 0.04,
+          "calc": 0.02,
+          "custom": 0.25,
+          "have_chain": 0.01,
+          "native_hammer": 0.31,
+          "omega_decide": 0.0,
+          "simp_set": 0.37
+        },
+        "hammer_before_llm": 0.52,
+        "jev_generated_lean": false,
+        "lean_text": null,
+        "likely_shorter": 1.09,
+        "likely_shorter_is_rubric_index": true,
+        "likely_shorter_legend": {
+          "0": "longer or same",
+          "1": "modest cut around 10 percent",
+          "2": "large cut of 30 percent or more"
+        },
+        "mode": "distill",
+        "model": "jev-latest",
+        "neighbor_style_match": "CallElimCorrect.extractedOldExprInVars",
+        "official_track2": false,
+        "proof_text": null,
+        "putnam_aesop_plausible": 0.59,
+        "reason": "routed",
+        "reference_already_tight": 0.49,
+        "score_is_rubric_index": true,
+        "skipped": false,
+        "spend_llm": 0.53,
+        "statement_in_proof_duplicated": 0.29,
+        "tactics": null,
+        "usage": {
+          "input_tokens": 3390,
+          "output_tokens": 394
+        },
+        "used_fixture": false,
+        "uses_sorry_or_admit": 0.03,
+        "version_fragile": 0.46,
+        "wall_ms": 183.37503398652188
+      },
+      "source": "strata",
+      "wall_ms": 16764.65961401118,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    },
+    {
+      "admission": {
+        "accepted": true,
+        "code": "",
+        "reason": "proof text admitted for independent Lean kernel checking"
+      },
+      "arena_score": null,
+      "called_leanstral": true,
+      "candidate_gate": {
+        "additive_not_replacement": true,
+        "api_key_redacted": true,
+        "arena_score": null,
+        "calc_structure_worth_keeping": 0.12,
+        "called_typesafe": true,
+        "elab_risk": 1.55,
+        "elab_risk_legend": {
+          "0": "elab likely better or same",
+          "1": "elab unclear",
+          "2": "elab likely worse"
+        },
+        "family": "custom",
+        "family_confidence": 0.72,
+        "family_probs": {
+          "aesop": 0.04,
+          "calc": 0.05,
+          "custom": 0.76,
+          "have_chain": 0.02,
+          "native_hammer": 0.05,
+          "omega_decide": 0.0,
+          "simp_set": 0.08
+        },
+        "hammer_before_llm": 0.14,
+        "jev_generated_lean": false,
+        "lean_text": null,
+        "likely_shorter": 1.58,
+        "likely_shorter_is_rubric_index": true,
+        "likely_shorter_legend": {
+          "0": "longer or same",
+          "1": "modest cut around 10 percent",
+          "2": "large cut of 30 percent or more"
+        },
+        "mode": "distill",
+        "model": "jev-latest",
+        "neighbor_style_match": "none",
+        "official_track2": false,
+        "proof_text": null,
+        "putnam_aesop_plausible": 0.28,
+        "reason": "routed",
+        "reference_already_tight": 0.54,
+        "score_is_rubric_index": true,
+        "skipped": false,
+        "spend_llm": 0.53,
+        "statement_in_proof_duplicated": 0.43,
+        "tactics": null,
+        "usage": {
+          "input_tokens": 3021,
+          "output_tokens": 367
+        },
+        "used_fixture": false,
+        "uses_sorry_or_admit": 0.03,
+        "version_fragile": 0.43,
+        "wall_ms": 170.5499239906203
+      },
+      "compile": {
+        "attempted": false,
+        "reason": "tag-pinned lake/oleans not installed for live Strata/CSLib; FOL kernel is the live oracle on this pass"
+      },
+      "generation": {
+        "error": "",
+        "identity": {
+          "arena_score": null,
+          "fallback_used": false,
+          "requested_model": "Leanstral",
+          "requested_provider": "leanstral_local",
+          "resolved_model": "Leanstral",
+          "resolved_provider": "llama_cpp"
+        },
+        "n_chars": 768,
+        "n_tactics_chars": 758,
+        "skipped": false,
+        "tactics_head": "intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 := hbisim\n      cases htr\n      case choiceL a b c htr =>\n        obtain \u27e8s2', htr2, hr2\u27e9 := hb.follow_fst hr htr\n        exists s2'\n        constructor\n        \u00b7 apply Tr.choiceL htr",
+        "text_head": "```lean\n  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  \u00b7 constructor; assumption\n  intro s1 s2 r \u03bc\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain \u27e8rel, hr, hb\u27e9 := hbisim\n      cases htr\n      case choiceL a b c htr =>\n        obtain \u27e8s2', htr2, hr2\u27e9 := hb.follow_fst hr htr\n        exists s2'\n        constructor\n        \u00b7 apply Tr.c"
+      },
+      "health_ok": true,
+      "jev_generated_lean": false,
+      "jev_recommends_llm": true,
+      "kind": "lra_warmup",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "num_lines": 62,
+      "official_score": null,
+      "proof_length": 251,
+      "route": {
+        "additive_not_replacement": true,
+        "api_key_redacted": true,
+        "arena_score": null,
+        "calc_structure_worth_keeping": 0.13,
+        "called_typesafe": true,
+        "elab_risk": 1.43,
+        "elab_risk_legend": {
+          "0": "elab likely better or same",
+          "1": "elab unclear",
+          "2": "elab likely worse"
+        },
+        "family": "custom",
+        "family_confidence": 0.59,
+        "family_probs": {
+          "aesop": 0.04,
+          "calc": 0.05,
+          "custom": 0.65,
+          "have_chain": 0.02,
+          "native_hammer": 0.08,
+          "omega_decide": 0.0,
+          "simp_set": 0.16
+        },
+        "hammer_before_llm": 0.15,
+        "jev_generated_lean": false,
+        "lean_text": null,
+        "likely_shorter": 1.1,
+        "likely_shorter_is_rubric_index": true,
+        "likely_shorter_legend": {
+          "0": "longer or same",
+          "1": "modest cut around 10 percent",
+          "2": "large cut of 30 percent or more"
+        },
+        "mode": "distill",
+        "model": "jev-latest",
+        "neighbor_style_match": "none",
+        "official_track2": false,
+        "proof_text": null,
+        "putnam_aesop_plausible": 0.34,
+        "reason": "routed",
+        "reference_already_tight": 0.54,
+        "score_is_rubric_index": true,
+        "skipped": false,
+        "spend_llm": 0.52,
+        "statement_in_proof_duplicated": 0.55,
+        "tactics": null,
+        "usage": {
+          "input_tokens": 2865,
+          "output_tokens": 367
+        },
+        "used_fixture": false,
+        "uses_sorry_or_admit": 0.02,
+        "version_fragile": 0.45,
+        "wall_ms": 174.72375501529314
+      },
+      "source": "cslib",
+      "wall_ms": 18594.67018599389,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "errors": [],
+  "fol_kernel_ok": 0,
+  "fol_match_expected": 1,
+  "fol_n": 2,
+  "leanstral_health_ok": true,
+  "llama_server_started": false,
+  "lock_ex": false,
+  "lra_admitted": 2,
+  "lra_jev_called": 2,
+  "lra_n": 2,
+  "n_canaries": 4,
+  "observed_at": "2026-09-17T04:39:39.093251+00:00",
+  "official_track2": false,
+  "schema": "lra-canary-run/v1",
+  "typesafe_configured": true,
+  "typesafe_key_in_receipt": false,
+  "wall_ms": 58607.52987698652
+}

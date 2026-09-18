@@ -1,0 +1,1609 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "canaries": [
+    {
+      "analysis": {
+        "case_labels": [
+          "fvar",
+          "op",
+          "const",
+          "bvar",
+          "abs ih",
+          "ite cih tih eih",
+          "app ih1 ih2",
+          "quant trih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [
+          "<;> simp_all"
+        ],
+        "counts": {
+          "max_indent": 8,
+          "n_apply": 14,
+          "n_blank": 4,
+          "n_calc": 0,
+          "n_cases": 9,
+          "n_exact": 1,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 15,
+          "n_linarith": 0,
+          "n_lines": 81,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 18,
+          "n_simp_at": 0,
+          "n_tokens": 392
+        },
+        "eligible_spans": {
+          "span_1": 316,
+          "span_2": 300,
+          "span_3": 284,
+          "span_4": 273,
+          "span_6": 251
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.975333590154705,
+            "present": {
+              "n_apply": 14.0,
+              "n_cases": 9.0,
+              "n_intro": 15.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 9,
+        "n_lines": 81.0,
+        "n_mca_holes": 0,
+        "n_tags": 1,
+        "n_tokens": 392,
+        "name": "CallElimCorrect.substOldPostSubset",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "pca_search_space_d012"
+      ],
+      "lake": [
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.T",
+              "pos": {
+                "column": 12,
+                "line": 3095
+              }
+            }
+          ],
+          "kind": "pca_search_space_d012#repair",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": false,
+          "repaired": true,
+          "round": 0,
+          "tokens": 375
+        }
+      ],
+      "n_drafts": 1,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "pca_search_space_d012"
+        ],
+        "best_draft": "pca_search_space_d012",
+        "best_family": "search_space",
+        "composite": 0.6635000000000001,
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "pca_search_space_d012": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "search_space": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'search_space', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.3,
+          "complexity": 1.09,
+          "confidence": 0.42,
+          "intent": "dead_code",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.04,
+            "dead_code": 0.52,
+            "loop_invariant": 0.1,
+            "pca_keep": 0.06,
+            "search_space": 0.13,
+            "strength_reduction": 0.15
+          },
+          "skip_lake": false,
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 213.96051399642602
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.67,
+        "noul_fail": 0.62,
+        "noul_pca": 0.25,
+        "path_score": 1.0,
+        "per_leaf_fail": {
+          "pca_search_space_d012": 0.6
+        },
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1789,
+          "output_tokens": 104
+        },
+        "wall_ms": 212.74191999691539
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app fn e fn_ih e_ih",
+          "abs ih",
+          "quant trih eih",
+          "ite cih tih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 16,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 5,
+          "n_exact": 2,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 11,
+          "n_linarith": 0,
+          "n_lines": 74,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 10,
+          "n_simp_at": 0,
+          "n_tokens": 277
+        },
+        "eligible_spans": {
+          "span_1": 235,
+          "span_2": 228,
+          "span_3": 221,
+          "span_4": 214,
+          "span_6": 200
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.4914458154265569,
+            "present": {
+              "n_apply": 16.0,
+              "n_cases": 5.0,
+              "n_intro": 11.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 5,
+        "n_lines": 74.0,
+        "n_mca_holes": 0,
+        "n_tags": 1,
+        "n_tokens": 277,
+        "name": "CallElimCorrect.extractedOldExprInVars",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "pca_search_space_d006",
+        "port_unused_intros"
+      ],
+      "lake": [
+        {
+          "error_class": null,
+          "errors": [],
+          "kind": "pca_search_space_d006#repair",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": true,
+          "repaired": true,
+          "round": 0,
+          "tokens": 283
+        },
+        {
+          "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.extractedOldExprInVars-277.lean",
+          "error_class": null,
+          "errors": [],
+          "kind": "port_exact_hin_assumption",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": true,
+          "repaired": false,
+          "round": 0,
+          "tokens": 277
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Tactic `assumption` failed\n\ncase h_1\nm\u271d\u00b2 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1\u271d e2\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nm\u271d\u00b9 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty\u271d\u00b9 : Op",
+              "pos": {
+                "column": 6,
+                "line": 2873
+              }
+            }
+          ],
+          "kind": "port_unused_intros",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 1,
+          "tokens": 275
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Tactic `assumption` failed\n\ncase h_1\nm\u271d\u00b2 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1\u271d e2\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nm\u271d\u00b9 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty\u271d\u00b9 : Op",
+              "pos": {
+                "column": 6,
+                "line": 2872
+              }
+            }
+          ],
+          "kind": "pca_search_space_d006",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 1,
+          "tokens": 274
+        }
+      ],
+      "n_drafts": 2,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "port_unused_intros",
+          "pca_search_space_d006"
+        ],
+        "best_draft": "port_unused_intros",
+        "best_family": "search_space",
+        "composite": 0.6705,
+        "draft_confidence": 0.25,
+        "draft_probabilities": {
+          "pca_search_space_d006": 0.38,
+          "port_unused_intros": 0.62
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "search_space": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'search_space', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.17,
+          "complexity": 1.17,
+          "confidence": 0.36,
+          "intent": "dead_code",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.03,
+            "dead_code": 0.45999999999999996,
+            "loop_invariant": 0.02,
+            "pca_keep": 0.06,
+            "search_space": 0.4,
+            "strength_reduction": 0.03
+          },
+          "skip_lake": false,
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 164.9394059786573
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.19,
+        "noul_fail": 0.51,
+        "noul_pca": 0.15,
+        "path_score": 0.7874007874011811,
+        "per_leaf_fail": {
+          "pca_search_space_d006": 0.38,
+          "port_unused_intros": 0.32
+        },
+        "separation": 1.2773327473170102,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 2003,
+          "output_tokens": 166
+        },
+        "wall_ms": 167.04462099005468
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 0,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 0,
+          "n_exact": 1,
+          "n_have": 5,
+          "n_induction": 1,
+          "n_intro": 1,
+          "n_linarith": 0,
+          "n_lines": 29,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 1,
+          "n_ring": 0,
+          "n_rw": 1,
+          "n_simp_all": 3,
+          "n_simp_at": 0,
+          "n_tokens": 139
+        },
+        "eligible_spans": {
+          "span_1": 127,
+          "span_2": 124,
+          "span_3": 121,
+          "span_4": 118,
+          "span_6": 112
+        },
+        "families": [
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all",
+              "n_rw"
+            ],
+            "mca_score": 0.7868800713439601,
+            "present": {
+              "n_rw": 1.0,
+              "n_simp_all": 3.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw",
+              "n_simp_all"
+            ],
+            "mca_score": 0.7868800713439601,
+            "present": {
+              "n_rw": 1.0,
+              "n_simp_all": 3.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.6930525968627868,
+            "present": {
+              "n_have": 5.0,
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_rename_i"
+            ],
+            "mca_score": 0.5328527189388765,
+            "present": {
+              "n_have": 5.0,
+              "n_rename_i": 1.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_intro"
+            ],
+            "mca_score": 0.4813350815210859,
+            "present": {
+              "n_intro": 1.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have := UpdateStatesDefined Hup",
+            "id": "MCA_0",
+            "n_tokens": 5,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hlen1 := InitStatesLength Hinit",
+            "id": "MCA_1",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hlen1",
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hlen2 := UpdateStatesLength Hup",
+            "id": "MCA_2",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i Hup Hups ih",
+            "id": "MCA_3",
+            "n_tokens": 4,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hup",
+              "Hups",
+              "ih"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have := InitStatesNotDefined Hinit",
+            "id": "MCA_4",
+            "n_tokens": 5,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hst := updatedStatesInit Hlen1",
+            "id": "MCA_5",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hst",
+              "this"
+            ]
+          }
+        ],
+        "n_cases": 0,
+        "n_lines": 29.0,
+        "n_mca_holes": 6,
+        "n_tags": 3,
+        "n_tokens": 139,
+        "name": "Core.InitsUpdatesComm",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [
+        {
+          "already_minimal": 0.31,
+          "intent": "loop_invariant",
+          "name": "Core.InitsUpdatesComm",
+          "round": 0,
+          "skipped": "intent_minimal"
+        }
+      ],
+      "n_drafts": 0,
+      "ranked": {}
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+          "tapp \u03c3' der _ ih",
+          "let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _",
+          "inl der _ ih",
+          "inr der _ ih",
+          "case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 12,
+          "n_apply": 2,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 6,
+          "n_exact": 0,
+          "n_have": 3,
+          "n_induction": 1,
+          "n_intro": 0,
+          "n_linarith": 0,
+          "n_lines": 82,
+          "n_obtain": 8,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 519
+        },
+        "eligible_spans": {
+          "span_1": 341,
+          "span_2": 322,
+          "span_3": 309,
+          "span_4": 296,
+          "span_6": 270
+        },
+        "families": [
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_obtain"
+            ],
+            "mca_score": 0.8118088659778215,
+            "present": {
+              "n_have": 3.0,
+              "n_obtain": 8.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.7246508094450246,
+            "present": {
+              "n_have": 3.0,
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_cases"
+            ],
+            "mca_score": 0.4582782697267421,
+            "present": {
+              "n_apply": 2.0,
+              "n_cases": 6.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have der' : Typing \u0393 t \u03c4 := der",
+            "id": "MCA_0",
+            "n_tokens": 10,
+            "safe_to_drop": true,
+            "used_binders": []
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have \u27e8\u03c3, t\u2081, eq\u27e9 := l.canonical_form_abs val_l",
+            "id": "MCA_1",
+            "n_tokens": 15,
+            "safe_to_drop": false,
+            "used_binders": [
+              "__keep__"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have \u27e8t\u2081, lr\u27e9 := der.canonical_form_sum val",
+            "id": "MCA_2",
+            "n_tokens": 13,
+            "safe_to_drop": false,
+            "used_binders": [
+              "__keep__"
+            ]
+          }
+        ],
+        "n_cases": 6,
+        "n_lines": 82.0,
+        "n_mca_holes": 3,
+        "n_tags": 3,
+        "n_tokens": 519,
+        "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [],
+      "n_drafts": 0,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "keep"
+        ],
+        "best_draft": "keep",
+        "best_family": "pca_keep",
+        "composite": 0.6729999999999999,
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "keep": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "pca_keep": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'loop_invariant'}",
+          "already_minimal": 0.41,
+          "complexity": 1.02,
+          "confidence": 0.73,
+          "intent": "loop_invariant",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "dead_code": 0.1,
+            "loop_invariant": 0.8,
+            "pca_keep": 0.06,
+            "search_space": 0.04
+          },
+          "skip_lake": false,
+          "skipped": false,
+          "uncertain": false,
+          "wall_ms": 237.2566310223192
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 1.31,
+        "noul_fail": 0.65,
+        "noul_pca": 0.21,
+        "path_score": 1.0,
+        "per_leaf_fail": {},
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1652,
+          "output_tokens": 82
+        },
+        "wall_ms": 176.49352800799534
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "par a a' b b' ha' hb'",
+          "refl",
+          "par a'' b'' ha'' hb''",
+          "red_I",
+          "red_K",
+          "red_S a c",
+          "red_I",
+          "par c a\u2081' hc ha",
+          "red_K c",
+          "par a' c' ha hc",
+          "red_K",
+          "red_S a b c"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 8,
+          "n_apply": 2,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 14,
+          "n_exact": 6,
+          "n_have": 0,
+          "n_induction": 0,
+          "n_intro": 1,
+          "n_linarith": 0,
+          "n_lines": 61,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 6,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 551
+        },
+        "eligible_spans": {
+          "span_1": 362,
+          "span_2": 347,
+          "span_3": 332,
+          "span_4": 317,
+          "span_6": 295
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.4152403377578484,
+            "present": {
+              "n_apply": 2.0,
+              "n_cases": 14.0,
+              "n_intro": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 0.12748314381731785,
+            "present": {
+              "n_rw": 6.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 0.12748314381731785,
+            "present": {
+              "n_rw": 6.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 14,
+        "n_lines": 61.0,
+        "n_mca_holes": 0,
+        "n_tags": 4,
+        "n_tokens": 551,
+        "name": "Cslib.SKI.parallelReduction_diamond",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [],
+      "n_drafts": 0,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "keep"
+        ],
+        "best_draft": "keep",
+        "best_family": "pca_keep",
+        "composite": 0.6910000000000001,
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "keep": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "pca_keep": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'search_space', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.54,
+          "complexity": 1.63,
+          "confidence": 0.51,
+          "intent": "algebraic_simplification",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.61,
+            "dead_code": 0.01,
+            "pca_keep": 0.08,
+            "search_space": 0.29,
+            "strength_reduction": 0.01
+          },
+          "skip_lake": false,
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 185.76340802246705
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.77,
+        "noul_fail": 0.55,
+        "noul_pca": 0.27,
+        "path_score": 1.0,
+        "per_leaf_fail": {},
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1306,
+          "output_tokens": 82
+        },
+        "wall_ms": 574.1329680022318
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "left",
+          "choice p q r hbisim",
+          "choiceL a b c htr",
+          "choiceR a b c htr",
+          "bisim hbisim",
+          "right",
+          "choice p q r hbisim",
+          "choiceL a b c htr",
+          "choiceR a b c htr",
+          "bisim hbisim"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 6,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 10,
+          "n_exact": 0,
+          "n_have": 0,
+          "n_induction": 0,
+          "n_intro": 4,
+          "n_linarith": 0,
+          "n_lines": 60,
+          "n_obtain": 8,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 296
+        },
+        "eligible_spans": {
+          "span_1": 212,
+          "span_2": 196,
+          "span_3": 180,
+          "span_4": 165,
+          "span_6": 135
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 0.625967416446315,
+            "present": {
+              "n_apply": 6.0,
+              "n_cases": 10.0,
+              "n_intro": 4.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_obtain"
+            ],
+            "mca_score": 0.5200520364684922,
+            "present": {
+              "n_obtain": 8.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 10,
+        "n_lines": 60.0,
+        "n_mca_holes": 0,
+        "n_tags": 3,
+        "n_tokens": 296,
+        "name": "Cslib.CCS.bisimilarity_congr_choice",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [
+        {
+          "already_minimal": 0.5,
+          "intent": "search_space",
+          "name": "Cslib.CCS.bisimilarity_congr_choice",
+          "round": 0,
+          "skipped": "intent_minimal"
+        }
+      ],
+      "n_drafts": 0,
+      "ranked": {}
+    }
+  ],
+  "inits_139": {
+    "case_labels": [],
+    "catalog_phrases_present": [],
+    "counts": {
+      "max_indent": 10,
+      "n_apply": 0,
+      "n_blank": 0,
+      "n_calc": 0,
+      "n_cases": 0,
+      "n_exact": 1,
+      "n_have": 5,
+      "n_induction": 1,
+      "n_intro": 1,
+      "n_linarith": 0,
+      "n_lines": 29,
+      "n_obtain": 0,
+      "n_omega": 0,
+      "n_rename_i": 1,
+      "n_ring": 0,
+      "n_rw": 1,
+      "n_simp_all": 3,
+      "n_simp_at": 0,
+      "n_tokens": 139
+    },
+    "cut": "cascade-best-139",
+    "eligible_spans": {
+      "span_1": 127,
+      "span_2": 124,
+      "span_3": 121,
+      "span_4": 118,
+      "span_6": 112
+    },
+    "families": [
+      {
+        "family": "strength_reduction",
+        "features": [
+          "n_simp_all",
+          "n_rw"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "algebraic_simplification",
+        "features": [
+          "n_rw",
+          "n_simp_all"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "loop_invariant",
+        "features": [
+          "n_have",
+          "n_induction"
+        ],
+        "mca_score": 0.6930525968627868,
+        "present": {
+          "n_have": 5.0,
+          "n_induction": 1.0
+        }
+      },
+      {
+        "family": "dead_code",
+        "features": [
+          "n_have",
+          "n_rename_i"
+        ],
+        "mca_score": 0.5328527189388765,
+        "present": {
+          "n_have": 5.0,
+          "n_rename_i": 1.0
+        }
+      },
+      {
+        "family": "search_space",
+        "features": [
+          "n_intro"
+        ],
+        "mca_score": 0.4813350815210859,
+        "present": {
+          "n_intro": 1.0
+        }
+      }
+    ],
+    "mca_holes": [
+      {
+        "family": "loop_invariant",
+        "head": "have := UpdateStatesDefined Hup",
+        "id": "MCA_0",
+        "n_tokens": 5,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen1 := InitStatesLength Hinit",
+        "id": "MCA_1",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hlen1",
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen2 := UpdateStatesLength Hup",
+        "id": "MCA_2",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "dead_code",
+        "head": "rename_i Hup Hups ih",
+        "id": "MCA_3",
+        "n_tokens": 4,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hup",
+          "Hups",
+          "ih"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have := InitStatesNotDefined Hinit",
+        "id": "MCA_4",
+        "n_tokens": 5,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hst := updatedStatesInit Hlen1",
+        "id": "MCA_5",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hst",
+          "this"
+        ]
+      }
+    ],
+    "n_cases": 0,
+    "n_lines": 29.0,
+    "n_mca_holes": 6,
+    "n_tags": 3,
+    "n_tokens": 139,
+    "name": "Core.InitsUpdatesComm",
+    "pca_keep": true,
+    "source": "strata"
+  },
+  "k": 3,
+  "lake": [
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.T",
+          "pos": {
+            "column": 12,
+            "line": 3095
+          }
+        }
+      ],
+      "kind": "pca_search_space_d012#repair",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false,
+      "repaired": true,
+      "round": 0,
+      "tokens": 375
+    },
+    {
+      "error_class": null,
+      "errors": [],
+      "kind": "pca_search_space_d006#repair",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": true,
+      "repaired": true,
+      "round": 0,
+      "tokens": 283
+    },
+    {
+      "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.extractedOldExprInVars-277.lean",
+      "error_class": null,
+      "errors": [],
+      "kind": "port_exact_hin_assumption",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": true,
+      "repaired": false,
+      "round": 0,
+      "tokens": 277
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Tactic `assumption` failed\n\ncase h_1\nm\u271d\u00b2 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1\u271d e2\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nm\u271d\u00b9 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty\u271d\u00b9 : Op",
+          "pos": {
+            "column": 6,
+            "line": 2873
+          }
+        }
+      ],
+      "kind": "port_unused_intros",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 1,
+      "tokens": 275
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Tactic `assumption` failed\n\ncase h_1\nm\u271d\u00b2 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1\u271d e2\u271d : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nm\u271d\u00b9 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty\u271d\u00b9 : Op",
+          "pos": {
+            "column": 6,
+            "line": 2872
+          }
+        }
+      ],
+      "kind": "pca_search_space_d006",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 1,
+      "tokens": 274
+    }
+  ],
+  "landscape": [
+    {
+      "n_have": 1,
+      "n_induction": 1,
+      "n_mca_holes": 8,
+      "n_rw": 0,
+      "n_simp_at": 8,
+      "n_tokens": 482,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 322,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 1,
+      "n_mca_holes": 4,
+      "n_rw": 1,
+      "n_simp_at": 0,
+      "n_tokens": 268,
+      "name": "Core.InitsUpdatesComm",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 23,
+      "n_induction": 0,
+      "n_mca_holes": 23,
+      "n_rw": 3,
+      "n_simp_at": 1,
+      "n_tokens": 1829,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 0,
+      "n_mca_holes": 9,
+      "n_rw": 17,
+      "n_simp_at": 0,
+      "n_tokens": 1820,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 0,
+      "n_mca_holes": 3,
+      "n_rw": 9,
+      "n_simp_at": 0,
+      "n_tokens": 1473,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 519,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "source": "cslib",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 6,
+      "n_simp_at": 0,
+      "n_tokens": 552,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 296,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 28,
+      "n_induction": 0,
+      "n_mca_holes": 28,
+      "n_rw": 13,
+      "n_simp_at": 0,
+      "n_tokens": 2800,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 27,
+      "n_induction": 0,
+      "n_mca_holes": 29,
+      "n_rw": 24,
+      "n_simp_at": 0,
+      "n_tokens": 2618,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 18,
+      "n_induction": 1,
+      "n_mca_holes": 18,
+      "n_rw": 7,
+      "n_simp_at": 0,
+      "n_tokens": 2454,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "source": "arklib",
+      "top_family": "loop_invariant"
+    },
+    {
+      "n_have": 54,
+      "n_induction": 1,
+      "n_mca_holes": 54,
+      "n_rw": 3,
+      "n_simp_at": 4,
+      "n_tokens": 2124,
+      "name": "putnam_1964_a4",
+      "source": "putnambench",
+      "top_family": "strength_reduction"
+    },
+    {
+      "n_have": 81,
+      "n_induction": 0,
+      "n_mca_holes": 81,
+      "n_rw": 10,
+      "n_simp_at": 2,
+      "n_tokens": 2350,
+      "name": "putnam_1964_b2",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 76,
+      "n_induction": 0,
+      "n_mca_holes": 76,
+      "n_rw": 18,
+      "n_simp_at": 0,
+      "n_tokens": 4564,
+      "name": "putnam_1995_a3",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 12,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1247,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 111,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.2e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 1789,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 104,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 7.5e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 1239,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 111,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.2e-05
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 2023,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 178,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 8.5e-05
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 1239,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 111,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.2e-05
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 2003,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 166,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 8.4e-05
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 1138,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 113,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.8e-05
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 1144,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 89,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.8e-05
+      },
+      {
+        "call_index": 9,
+        "fixture": false,
+        "input_tokens": 1652,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 82,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 6.9e-05
+      },
+      {
+        "call_index": 10,
+        "fixture": false,
+        "input_tokens": 1133,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 107,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.8e-05
+      },
+      {
+        "call_index": 11,
+        "fixture": false,
+        "input_tokens": 1306,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 82,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.5e-05
+      },
+      {
+        "call_index": 12,
+        "fixture": false,
+        "input_tokens": 992,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 77,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.2e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 38,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "warmup#random-canary",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.99929,
+    "skipped": false,
+    "spent_usd": 0.00071,
+    "track": "track1_closed"
+  },
+  "memory": {
+    "n_blacklist": 45,
+    "n_failures": 98,
+    "n_successes": 72
+  },
+  "memory_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/refactor-memory.json",
+  "n_records": 15,
+  "n_tag_cells": 36,
+  "observed_at": "2026-09-18T00:20:42.721589+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.4049405265687185,
+      0.20535547758361236,
+      0.11807994165651019,
+      0.07890666288267674,
+      0.05463727730428802,
+      0.04287295106587582
+    ],
+    "principal0": {
+      "max_indent": -0.26472716990802214,
+      "n_apply": 0.08062031373487605,
+      "n_blank": -0.3342438149027209,
+      "n_calc": -0.30073104239355397,
+      "n_cases": 0.22151097089138239,
+      "n_exact": -0.3223738861331306,
+      "n_have": -0.3229177802571527,
+      "n_induction": 0.1554714491780493,
+      "n_intro": -0.13949676587126572,
+      "n_linarith": -0.20355777263126,
+      "n_lines": -0.3316410647395201,
+      "n_obtain": 0.062338763096317515,
+      "n_omega": -0.061922673049083964,
+      "n_rename_i": 0.13191459411652012,
+      "n_ring": -0.2672920525771413,
+      "n_rw": -0.22982013977927257,
+      "n_simp_all": -0.07536010342633125,
+      "n_simp_at": 0.04284608346238592,
+      "n_tokens": -0.3347272419706519
+    }
+  },
+  "schema": "lra-random-canary/v1",
+  "seed": 20260917,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

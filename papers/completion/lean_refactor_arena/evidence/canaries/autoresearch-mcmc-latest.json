@@ -1,0 +1,551 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 260
+  },
+  "best_tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          intros Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+  "called_docker0": false,
+  "cookbook": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
+  "features": [
+    "likely_compiles",
+    "likely_shorter",
+    "drops_pca_glue",
+    "drops_prefix_have",
+    "breaks_refine",
+    "duplicate_needed",
+    "local_one_line",
+    "opens_refine_2a",
+    "semicolon_apply_longer",
+    "constructor_for_rfl_refine",
+    "drops_second_exact"
+  ],
+  "final_weights": {
+    "breaks_refine": 0.8,
+    "constructor_for_rfl_refine": 1.0,
+    "drops_pca_glue": 0.8,
+    "drops_prefix_have": 0.8,
+    "drops_second_exact": 1.0,
+    "duplicate_needed": 0.8,
+    "likely_compiles": 1.1,
+    "likely_shorter": 0.15,
+    "local_one_line": 0.2,
+    "opens_refine_2a": 1.0,
+    "semicolon_apply_longer": 1.0
+  },
+  "hardware_class": "spark_gb10",
+  "history": [
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192 isD",
+          "pos": {
+            "column": 4,
+            "line": 961
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.29,
+        "constructor_for_rfl_refine": 0.24,
+        "drops_pca_glue": 0.39,
+        "drops_prefix_have": 0.23,
+        "drops_second_exact": 0.11,
+        "duplicate_needed": 0.42,
+        "likely_compiles": 0.53,
+        "likely_shorter": 0.96,
+        "local_one_line": 0.17,
+        "opens_refine_2a": 0.31,
+        "semicolon_apply_longer": 0.09
+      },
+      "kind": "collapse_ih_simps",
+      "note": "ih apply <;> simp_all, drop two simp bullets",
+      "ok": false,
+      "round": 0,
+      "score": -1.053,
+      "tokens": 250
+    },
+    {
+      "errors": [
+        {
+          "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+          "pos": {
+            "column": 14,
+            "line": 981
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.33,
+        "constructor_for_rfl_refine": 0.25,
+        "drops_pca_glue": 0.44,
+        "drops_prefix_have": 0.32,
+        "drops_second_exact": 0.2,
+        "duplicate_needed": 0.36,
+        "likely_compiles": 0.55,
+        "likely_shorter": 0.96,
+        "local_one_line": 0.54,
+        "opens_refine_2a": 0.36,
+        "semicolon_apply_longer": 0.06
+      },
+      "kind": "rewrite_ih_short",
+      "note": "ih ?_ ?_ -> ih",
+      "ok": false,
+      "round": 0,
+      "score": -1.1729999999999998,
+      "tokens": 256
+    },
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192 isD",
+          "pos": {
+            "column": 4,
+            "line": 961
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.32,
+        "constructor_for_rfl_refine": 0.24,
+        "drops_pca_glue": 0.43,
+        "drops_prefix_have": 0.24,
+        "drops_second_exact": 0.13,
+        "duplicate_needed": 0.46,
+        "likely_compiles": 0.51,
+        "likely_shorter": 0.96,
+        "local_one_line": 0.16,
+        "opens_refine_2a": 0.32,
+        "semicolon_apply_longer": 0.09
+      },
+      "kind": "collapse_ih_simps",
+      "note": "ih apply <;> simp_all, drop two simp bullets",
+      "ok": false,
+      "round": 1,
+      "score": -1.2029999999999998,
+      "tokens": 250
+    },
+    {
+      "errors": [
+        {
+          "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+          "pos": {
+            "column": 14,
+            "line": 981
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.36,
+        "constructor_for_rfl_refine": 0.25,
+        "drops_pca_glue": 0.43,
+        "drops_prefix_have": 0.34,
+        "drops_second_exact": 0.24,
+        "duplicate_needed": 0.37,
+        "likely_compiles": 0.56,
+        "likely_shorter": 0.97,
+        "local_one_line": 0.53,
+        "opens_refine_2a": 0.34,
+        "semicolon_apply_longer": 0.06
+      },
+      "kind": "rewrite_ih_short",
+      "note": "ih ?_ ?_ -> ih",
+      "ok": false,
+      "round": 1,
+      "score": -1.2225,
+      "tokens": 256
+    },
+    {
+      "errors": [
+        {
+          "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+          "pos": {
+            "column": 14,
+            "line": 981
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.34,
+        "constructor_for_rfl_refine": 0.23,
+        "drops_pca_glue": 0.43,
+        "drops_prefix_have": 0.33,
+        "drops_second_exact": 0.22,
+        "duplicate_needed": 0.36,
+        "likely_compiles": 0.55,
+        "likely_shorter": 0.97,
+        "local_one_line": 0.59,
+        "opens_refine_2a": 0.33,
+        "semicolon_apply_longer": 0.06
+      },
+      "kind": "rewrite_ih_short",
+      "note": "ih ?_ ?_ -> ih",
+      "ok": false,
+      "round": 2,
+      "score": -1.1395,
+      "tokens": 256
+    },
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192 isD",
+          "pos": {
+            "column": 4,
+            "line": 961
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.32,
+        "constructor_for_rfl_refine": 0.24,
+        "drops_pca_glue": 0.51,
+        "drops_prefix_have": 0.26,
+        "drops_second_exact": 0.13,
+        "duplicate_needed": 0.42,
+        "likely_compiles": 0.51,
+        "likely_shorter": 0.95,
+        "local_one_line": 0.16,
+        "opens_refine_2a": 0.32,
+        "semicolon_apply_longer": 0.1
+      },
+      "kind": "collapse_ih_simps",
+      "note": "ih apply <;> simp_all, drop two simp bullets",
+      "ok": false,
+      "round": 2,
+      "score": -1.2624999999999997,
+      "tokens": 250
+    },
+    {
+      "errors": [
+        {
+          "data": "Invalid projection: Projections cannot be used on functions\n  ih Hinit\nhas type\n  isDefined \u03c3\u2081 xs \u2192\n    xs.length = vs.length \u2192\n      updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n        InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''",
+          "pos": {
+            "column": 14,
+            "line": 981
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.34,
+        "constructor_for_rfl_refine": 0.25,
+        "drops_pca_glue": 0.42,
+        "drops_prefix_have": 0.34,
+        "drops_second_exact": 0.21,
+        "duplicate_needed": 0.38,
+        "likely_compiles": 0.55,
+        "likely_shorter": 0.96,
+        "local_one_line": 0.53,
+        "opens_refine_2a": 0.35,
+        "semicolon_apply_longer": 0.06
+      },
+      "kind": "rewrite_ih_short",
+      "note": "ih ?_ ?_ -> ih",
+      "ok": false,
+      "round": 3,
+      "score": -1.1989999999999998,
+      "tokens": 256
+    },
+    {
+      "errors": [
+        {
+          "data": "Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\nwith the goal\n  updatedStates \u03c3 ks' vs' = updatedStates \u03c3 ks' vs'\n\nNote: The full type of `updatedStatesInit Hlen1` is\n  isNotDefined ?m.94 ks' \u2192 ks'.Nodup \u2192 InitStates ?m.94 ks' vs' (updatedStates ?m.94 ks' vs')\n\ncase left\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P",
+          "pos": {
+            "column": 6,
+            "line": 956
+          }
+        }
+      ],
+      "features": {
+        "breaks_refine": 0.45,
+        "constructor_for_rfl_refine": 0.5,
+        "drops_pca_glue": 0.29,
+        "drops_prefix_have": 0.37,
+        "drops_second_exact": 0.3,
+        "duplicate_needed": 0.31,
+        "likely_compiles": 0.57,
+        "likely_shorter": 0.96,
+        "local_one_line": 0.72,
+        "opens_refine_2a": 0.42,
+        "semicolon_apply_longer": 0.09
+      },
+      "kind": "rewrite_refine_constructor",
+      "note": "refine \u27e8rfl,?_,?_\u27e9 -> constructor",
+      "ok": false,
+      "round": 3,
+      "score": -1.531,
+      "tokens": 251
+    }
+  ],
+  "jev_generated_lean": false,
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": true,
+    "includes_jev_and_grok": true,
+    "jev_calls": 20,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 958,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 946,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 947,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 952,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 948,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 943,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 958,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 946,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 9,
+        "fixture": false,
+        "input_tokens": 947,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 10,
+        "fixture": false,
+        "input_tokens": 952,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 11,
+        "fixture": false,
+        "input_tokens": 948,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 12,
+        "fixture": false,
+        "input_tokens": 943,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 13,
+        "fixture": false,
+        "input_tokens": 958,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 14,
+        "fixture": false,
+        "input_tokens": 946,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 15,
+        "fixture": false,
+        "input_tokens": 947,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 16,
+        "fixture": false,
+        "input_tokens": 952,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 17,
+        "fixture": false,
+        "input_tokens": 948,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 18,
+        "fixture": false,
+        "input_tokens": 943,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 19,
+        "fixture": false,
+        "input_tokens": 958,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 20,
+        "fixture": false,
+        "input_tokens": 946,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4e-05
+      },
+      {
+        "call_index": 21,
+        "fixture": false,
+        "input_tokens": 947,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 213,
+        "reason": "max_jev_calls",
+        "skipped": true,
+        "usd": 0.0
+      }
+    ],
+    "max_grok_calls": 0,
+    "max_jev_calls": 20,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "Core.InitsUpdatesComm#autoresearch-mcmc",
+    "official_track2": false,
+    "reason": "max_jev_calls",
+    "remaining_usd": 2.9992,
+    "skipped": true,
+    "spent_usd": 0.0008,
+    "track": "track1_closed"
+  },
+  "miss_features": [
+    "opens_refine_2a",
+    "semicolon_apply_longer",
+    "constructor_for_rfl_refine",
+    "drops_second_exact"
+  ],
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T18:43:13.505524+00:00",
+  "official_track2": false,
+  "pr": "PR-9h",
+  "protocol": "LRA/v1",
+  "reference_token_count": 268,
+  "rounds": 5,
+  "schema": "lra-autoresearch-mcmc/v1",
+  "wall_ms": 22476.712332019815,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

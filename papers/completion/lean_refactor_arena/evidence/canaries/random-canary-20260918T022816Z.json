@@ -1,0 +1,2212 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "canaries": [
+    {
+      "analysis": {
+        "case_labels": [
+          "fvar",
+          "op",
+          "const",
+          "bvar",
+          "abs ih",
+          "ite cih tih eih",
+          "app ih1 ih2",
+          "quant trih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [
+          "<;> simp_all"
+        ],
+        "counts": {
+          "max_indent": 8,
+          "n_apply": 14,
+          "n_blank": 4,
+          "n_calc": 0,
+          "n_cases": 9,
+          "n_exact": 1,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 15,
+          "n_linarith": 0,
+          "n_lines": 81,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 18,
+          "n_simp_at": 0,
+          "n_tokens": 392
+        },
+        "eligible_spans": {
+          "span_1": 316,
+          "span_2": 300,
+          "span_3": 284,
+          "span_4": 273,
+          "span_6": 251
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.975333590154705,
+            "present": {
+              "n_apply": 14.0,
+              "n_cases": 9.0,
+              "n_intro": 15.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 9,
+        "n_lines": 81.0,
+        "n_mca_holes": 0,
+        "n_tags": 1,
+        "n_tokens": 392,
+        "name": "CallElimCorrect.substOldPostSubset",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "port_hoist_repeated_simp"
+      ],
+      "lake": [
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Case tag `op` not found.\n\nHint: Available tags:\n  \u2022 `abs`: o\u0335p\u0335a\u0332b\u0332s\u0332\n  \u2022 `quant`: o\u0335p\u0335q\u0332u\u0332a\u0332n\u0332t\u0332\n  \u2022 `app`: o\u0335p\u0335a\u0332p\u0332p\u0332\n  \u2022 `ite`: o\u0335p\u0335i\u0332t\u0332e\u0332\n  \u2022 `eq`: o\u0335p\u0335e\u0332q\u0332",
+              "pos": {
+                "column": 2,
+                "line": 3101
+              }
+            }
+          ],
+          "kind": "port_hoist_repeated_simp",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": false,
+          "repaired": false,
+          "round": 0,
+          "tokens": 297
+        }
+      ],
+      "n_drafts": 1,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "port_hoist_repeated_simp"
+        ],
+        "best_draft": "port_hoist_repeated_simp",
+        "best_family": "strength_reduction",
+        "composite": 0.771,
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "port_hoist_repeated_simp": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "strength_reduction": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'search_space', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.16,
+          "complexity": 0.9,
+          "compose": "pipeline",
+          "confidence": 0.27,
+          "fail_skill": 0.28,
+          "intent": "search_space",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.14,
+            "dead_code": 0.07,
+            "loop_invariant": 0.01,
+            "pca_keep": 0.17,
+            "search_space": 0.4,
+            "strength_reduction": 0.21
+          },
+          "residual_help": {
+            "apply_semi_assumption": 0.33,
+            "intro_then_simp_all": 1.34,
+            "intros_x_Hin": 0.34,
+            "repeated_simp_list": 1.15
+          },
+          "residual_unsafe": {
+            "apply_semi_assumption": 0.63,
+            "intro_then_simp_all": 0.5,
+            "intros_x_Hin": 0.52,
+            "repeated_simp_list": 0.32
+          },
+          "skill": "port_hoist_repeated_simp",
+          "skill_confidence": 0.32,
+          "skip_lake": false,
+          "skip_skills": [
+            "semi_assumption",
+            "unused_intros"
+          ],
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 209.17742099845782
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 1.47,
+        "noul_fail": 0.46,
+        "noul_pca": 0.23,
+        "path_score": 1.0,
+        "per_leaf_fail": {
+          "port_hoist_repeated_simp": 0.45
+        },
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1834,
+          "output_tokens": 109
+        },
+        "wall_ms": 219.30451097432524
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app fn e fn_ih e_ih",
+          "abs ih",
+          "quant trih eih",
+          "ite cih tih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 16,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 5,
+          "n_exact": 0,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 10,
+          "n_linarith": 0,
+          "n_lines": 72,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 10,
+          "n_simp_at": 0,
+          "n_tokens": 260
+        },
+        "eligible_spans": {
+          "span_1": 221,
+          "span_2": 215,
+          "span_3": 209,
+          "span_4": 203,
+          "span_6": 191
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.3897553052460458,
+            "present": {
+              "n_apply": 16.0,
+              "n_cases": 5.0,
+              "n_intro": 10.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 5,
+        "n_lines": 72.0,
+        "n_mca_holes": 0,
+        "n_tags": 1,
+        "n_tokens": 260,
+        "name": "CallElimCorrect.extractedOldExprInVars",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "pca_search_space_d002",
+        "pca_search_space_d006",
+        "pca_search_space_d004",
+        "pca_search_space_d005",
+        "pca_search_space_d003"
+      ],
+      "lake": [
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Tactic `split` failed: Could not split an `if` or `match` expression in the goal\n\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\n\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.L",
+              "pos": {
+                "column": 4,
+                "line": 2868
+              }
+            }
+          ],
+          "kind": "pca_search_space_d008",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 0,
+          "tokens": 258
+        },
+        {
+          "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.extractedOldExprInVars-260.lean",
+          "error_class": null,
+          "errors": [],
+          "kind": "port_redundant_inner_simp",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": true,
+          "repaired": false,
+          "round": 0,
+          "tokens": 260
+        },
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\ncase h_3.app.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e1\u271d e2\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nfn_ih : (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\ne_ih : (extractOldExprVars e).Subset (Lambda.LExpr.LEx",
+              "pos": {
+                "column": 6,
+                "line": 2884
+              }
+            }
+          ],
+          "kind": "pca_search_space_d006",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 1,
+          "tokens": 251
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Unknown constant `HasSubset.Subset.trans`",
+              "pos": {
+                "column": 21,
+                "line": 2884
+              }
+            }
+          ],
+          "kind": "pca_search_space_d003",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 1,
+          "tokens": 242
+        },
+        {
+          "error_class": "other",
+          "errors": [
+            {
+              "data": "Unknown constant `HasSubset.Subset.app`",
+              "pos": {
+                "column": 19,
+                "line": 2883
+              }
+            }
+          ],
+          "kind": "pca_search_space_d004",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": false,
+          "repaired": false,
+          "round": 1,
+          "tokens": 250
+        }
+      ],
+      "n_drafts": 5,
+      "ranked": {
+        "abstain": true,
+        "arena_score": null,
+        "beam_kinds": [
+          "pca_search_space_d006",
+          "pca_search_space_d003",
+          "pca_search_space_d004",
+          "pca_search_space_d002",
+          "pca_search_space_d005"
+        ],
+        "best_draft": "pca_search_space_d006",
+        "best_family": "search_space",
+        "composite": 0.6280000000000001,
+        "draft_confidence": 0.37,
+        "draft_probabilities": {
+          "pca_search_space_d002": 0.0,
+          "pca_search_space_d003": 0.44,
+          "pca_search_space_d004": 0.05,
+          "pca_search_space_d005": 0.0,
+          "pca_search_space_d006": 0.51
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "search_space": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'search_space', 'pca_keep', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.17,
+          "complexity": 0.98,
+          "compose": "pipeline",
+          "confidence": 0.3,
+          "fail_skill": 0.0,
+          "intent": "search_space",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.12,
+            "dead_code": 0.06,
+            "loop_invariant": 0.01,
+            "pca_keep": 0.22,
+            "search_space": 0.42,
+            "strength_reduction": 0.17
+          },
+          "residual_help": {
+            "apply_seq_assumption": 0.48,
+            "ctor_lone": 0.21,
+            "intro_then_simp_all": 0.75,
+            "intros_x_Hin": 0.22
+          },
+          "residual_unsafe": {
+            "apply_seq_assumption": 0.65,
+            "ctor_lone": 0.35,
+            "intro_then_simp_all": 0.57,
+            "intros_x_Hin": 0.43
+          },
+          "skill": "keep",
+          "skill_confidence": 1.0,
+          "skip_lake": false,
+          "skip_skills": [
+            "drop_intro_before_simp_all"
+          ],
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 194.52974502928555
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.7,
+        "noul_fail": 0.53,
+        "noul_pca": 0.15,
+        "path_score": 0.714142842854285,
+        "per_leaf_fail": {
+          "pca_search_space_d002": 0.49,
+          "pca_search_space_d003": 0.51,
+          "pca_search_space_d004": 0.47,
+          "pca_search_space_d005": 0.49,
+          "pca_search_space_d006": 0.41
+        },
+        "separation": 1.07661084384791,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 2792,
+          "output_tokens": 292
+        },
+        "wall_ms": 160.0217759842053
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 0,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 0,
+          "n_exact": 1,
+          "n_have": 5,
+          "n_induction": 1,
+          "n_intro": 1,
+          "n_linarith": 0,
+          "n_lines": 29,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 1,
+          "n_ring": 0,
+          "n_rw": 1,
+          "n_simp_all": 3,
+          "n_simp_at": 0,
+          "n_tokens": 139
+        },
+        "eligible_spans": {
+          "span_1": 127,
+          "span_2": 124,
+          "span_3": 121,
+          "span_4": 118,
+          "span_6": 112
+        },
+        "families": [
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all",
+              "n_rw"
+            ],
+            "mca_score": 0.7868800713439601,
+            "present": {
+              "n_rw": 1.0,
+              "n_simp_all": 3.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw",
+              "n_simp_all"
+            ],
+            "mca_score": 0.7868800713439601,
+            "present": {
+              "n_rw": 1.0,
+              "n_simp_all": 3.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.6930525968627868,
+            "present": {
+              "n_have": 5.0,
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_rename_i"
+            ],
+            "mca_score": 0.5328527189388765,
+            "present": {
+              "n_have": 5.0,
+              "n_rename_i": 1.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_intro"
+            ],
+            "mca_score": 0.4813350815210859,
+            "present": {
+              "n_intro": 1.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have := UpdateStatesDefined Hup",
+            "id": "MCA_0",
+            "n_tokens": 5,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hlen1 := InitStatesLength Hinit",
+            "id": "MCA_1",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hlen1",
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hlen2 := UpdateStatesLength Hup",
+            "id": "MCA_2",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i Hup Hups ih",
+            "id": "MCA_3",
+            "n_tokens": 4,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hup",
+              "Hups",
+              "ih"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have := InitStatesNotDefined Hinit",
+            "id": "MCA_4",
+            "n_tokens": 5,
+            "safe_to_drop": false,
+            "used_binders": [
+              "this"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have Hst := updatedStatesInit Hlen1",
+            "id": "MCA_5",
+            "n_tokens": 6,
+            "safe_to_drop": false,
+            "used_binders": [
+              "Hst",
+              "this"
+            ]
+          }
+        ],
+        "n_cases": 0,
+        "n_lines": 29.0,
+        "n_mca_holes": 6,
+        "n_tags": 3,
+        "n_tokens": 139,
+        "name": "Core.InitsUpdatesComm",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [
+        {
+          "name": "Core.InitsUpdatesComm",
+          "round": 0,
+          "skipped": "no_drafts_after_research"
+        }
+      ],
+      "n_drafts": 0,
+      "ranked": {
+        "arena_score": null,
+        "intent": {
+          "allow_families": "{'search_space', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.13,
+          "complexity": 1.1,
+          "compose": "pipeline",
+          "confidence": 0.37,
+          "fail_skill": 0.0,
+          "intent": "search_space",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.04,
+            "dead_code": 0.01,
+            "loop_invariant": 0.01,
+            "pca_keep": 0.23,
+            "search_space": 0.48,
+            "strength_reduction": 0.23
+          },
+          "residual_help": {
+            "ctor_lone": 0.03,
+            "have": 0.14,
+            "intro_then_simp_all": 0.75
+          },
+          "residual_unsafe": {
+            "ctor_lone": 0.46,
+            "have": 0.61,
+            "intro_then_simp_all": 0.4
+          },
+          "skill": "keep",
+          "skill_confidence": 1.0,
+          "skip_lake": false,
+          "skip_skills": [],
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 163.63075596746057
+        },
+        "jev_generated_lean": false,
+        "reason": "no_drafts_after_research",
+        "skipped": true
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app t\u2081 _ _ t\u2082 l r ih_l ih_r",
+          "tapp \u03c3' der _ ih",
+          "let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _",
+          "inl der _ ih",
+          "inr der _ ih",
+          "case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 12,
+          "n_apply": 2,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 6,
+          "n_exact": 0,
+          "n_have": 3,
+          "n_induction": 1,
+          "n_intro": 0,
+          "n_linarith": 0,
+          "n_lines": 82,
+          "n_obtain": 8,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 519
+        },
+        "eligible_spans": {
+          "span_1": 341,
+          "span_2": 322,
+          "span_3": 309,
+          "span_4": 296,
+          "span_6": 270
+        },
+        "families": [
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_obtain"
+            ],
+            "mca_score": 0.8118088659778215,
+            "present": {
+              "n_have": 3.0,
+              "n_obtain": 8.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.7246508094450246,
+            "present": {
+              "n_have": 3.0,
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_cases"
+            ],
+            "mca_score": 0.4582782697267421,
+            "present": {
+              "n_apply": 2.0,
+              "n_cases": 6.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have der' : Typing \u0393 t \u03c4 := der",
+            "id": "MCA_0",
+            "n_tokens": 10,
+            "safe_to_drop": false,
+            "used_binders": []
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have \u27e8\u03c3, t\u2081, eq\u27e9 := l.canonical_form_abs val_l",
+            "id": "MCA_1",
+            "n_tokens": 15,
+            "safe_to_drop": false,
+            "used_binders": [
+              "__keep__"
+            ]
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have \u27e8t\u2081, lr\u27e9 := der.canonical_form_sum val",
+            "id": "MCA_2",
+            "n_tokens": 13,
+            "safe_to_drop": false,
+            "used_binders": [
+              "__keep__"
+            ]
+          }
+        ],
+        "n_cases": 6,
+        "n_lines": 82.0,
+        "n_mca_holes": 3,
+        "n_tags": 3,
+        "n_tokens": 519,
+        "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [
+        {
+          "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+          "round": 0,
+          "skipped": "no_drafts_after_research"
+        }
+      ],
+      "n_drafts": 0,
+      "ranked": {
+        "arena_score": null,
+        "intent": {
+          "allow_families": "{'search_space', 'pca_keep', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.19,
+          "complexity": 1.31,
+          "compose": "pipeline",
+          "confidence": 0.48,
+          "fail_skill": 0.0,
+          "intent": "search_space",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "dead_code": 0.04,
+            "loop_invariant": 0.02,
+            "pca_keep": 0.34,
+            "search_space": 0.6
+          },
+          "residual_help": {
+            "ctor_lone": 0.15,
+            "grind": 1.2,
+            "have": 0.28
+          },
+          "residual_unsafe": {
+            "ctor_lone": 0.51,
+            "grind": 0.6,
+            "have": 0.54
+          },
+          "skill": "keep",
+          "skill_confidence": 0.51,
+          "skip_lake": false,
+          "skip_skills": [
+            "ctor_pair_exacts",
+            "grind_only_to_grind",
+            "repeat_par_grind"
+          ],
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 184.7185959923081
+        },
+        "jev_generated_lean": false,
+        "reason": "no_drafts_after_research",
+        "skipped": true
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "par a a' b b' ha' hb'",
+          "refl",
+          "par a'' b'' ha'' hb''",
+          "red_I",
+          "red_K",
+          "red_S a c",
+          "red_I",
+          "par c a\u2081' hc ha",
+          "red_K c",
+          "par a' c' ha hc",
+          "red_K",
+          "red_S a b c"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 6,
+          "n_apply": 0,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 14,
+          "n_exact": 8,
+          "n_have": 0,
+          "n_induction": 0,
+          "n_intro": 1,
+          "n_linarith": 0,
+          "n_lines": 55,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 6,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 540
+        },
+        "eligible_spans": {
+          "span_1": 355,
+          "span_2": 340,
+          "span_3": 325,
+          "span_4": 310,
+          "span_6": 288
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.131358629751447,
+            "present": {
+              "n_cases": 14.0,
+              "n_intro": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 0.12748314381731785,
+            "present": {
+              "n_rw": 6.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 0.12748314381731785,
+            "present": {
+              "n_rw": 6.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 14,
+        "n_lines": 55.0,
+        "n_mca_holes": 0,
+        "n_tags": 4,
+        "n_tokens": 540,
+        "name": "Cslib.SKI.parallelReduction_diamond",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "pca_search_space_d001"
+      ],
+      "lake": [
+        {
+          "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-Cslib.SKI.parallelReduction_diamond-540.lean",
+          "error_class": null,
+          "errors": [],
+          "kind": "port_trailing_tuple_comma",
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "ok": true,
+          "repaired": false,
+          "round": 0,
+          "tokens": 540
+        },
+        {
+          "error_class": "unsolved_goals",
+          "errors": [
+            {
+              "data": "unsolved goals\na\u2082 a' b b' : SKI\nhb' : b \u2b62\u209a b'\nha' : (K \u2b1d a\u2082) \u2b62\u209a a'\na\u2082' : SKI\nha\u2082' : a\u2082 \u2b62\u209a a\u2082' \u2227 a' = K \u2b1d a\u2082'\n\u22a2 Join ParallelReduction (K \u2b1d a\u2082' \u2b1d b') a\u2082",
+              "pos": {
+                "column": 15,
+                "line": 159
+              }
+            }
+          ],
+          "kind": "pca_search_space_d001",
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "ok": false,
+          "repaired": false,
+          "round": 1,
+          "tokens": 530
+        }
+      ],
+      "n_drafts": 1,
+      "ranked": {
+        "abstain": false,
+        "arena_score": null,
+        "beam_kinds": [
+          "pca_search_space_d001"
+        ],
+        "best_draft": "pca_search_space_d001",
+        "best_family": "search_space",
+        "composite": 0.6975000000000001,
+        "draft_confidence": 1.0,
+        "draft_probabilities": {
+          "pca_search_space_d001": 1.0
+        },
+        "family_confidence": 1.0,
+        "family_probabilities": {
+          "search_space": 1.0
+        },
+        "fired": false,
+        "fired_leaves": [],
+        "intent": {
+          "allow_families": "{'search_space', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.21,
+          "complexity": 1.23,
+          "compose": "pipeline",
+          "confidence": 0.33,
+          "fail_skill": 0.0,
+          "intent": "search_space",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "algebraic_simplification": 0.19,
+            "dead_code": 0.16,
+            "pca_keep": 0.17,
+            "search_space": 0.47,
+            "strength_reduction": 0.01
+          },
+          "residual_help": {
+            "grind": 0.3,
+            "use_then_exact": 0.51
+          },
+          "residual_unsafe": {
+            "grind": 0.46,
+            "use_then_exact": 0.69
+          },
+          "skill": "keep",
+          "skill_confidence": 1.0,
+          "skip_lake": false,
+          "skip_skills": [
+            "use_exact",
+            "use_exact_reuse"
+          ],
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 154.8587679862976
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 0.54,
+        "noul_fail": 0.54,
+        "noul_pca": 0.23,
+        "path_score": 1.0,
+        "per_leaf_fail": {
+          "pca_search_space_d001": 0.51
+        },
+        "separation": 999999999.9999999,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1440,
+          "output_tokens": 104
+        },
+        "wall_ms": 220.16215499024838
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "left",
+          "choice p q r hbisim",
+          "choiceL a b c htr",
+          "choiceR a b c htr",
+          "bisim hbisim",
+          "right",
+          "choice p q r hbisim",
+          "choiceL a b c htr",
+          "choiceR a b c htr",
+          "bisim hbisim"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 6,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 10,
+          "n_exact": 0,
+          "n_have": 0,
+          "n_induction": 0,
+          "n_intro": 4,
+          "n_linarith": 0,
+          "n_lines": 60,
+          "n_obtain": 8,
+          "n_omega": 0,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 296
+        },
+        "eligible_spans": {
+          "span_1": 212,
+          "span_2": 196,
+          "span_3": 180,
+          "span_4": 165,
+          "span_6": 135
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 0.625967416446315,
+            "present": {
+              "n_apply": 6.0,
+              "n_cases": 10.0,
+              "n_intro": 4.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_obtain"
+            ],
+            "mca_score": 0.5200520364684922,
+            "present": {
+              "n_obtain": 8.0
+            }
+          }
+        ],
+        "mca_holes": [],
+        "n_cases": 10,
+        "n_lines": 60.0,
+        "n_mca_holes": 0,
+        "n_tags": 3,
+        "n_tokens": 296,
+        "name": "Cslib.CCS.bisimilarity_congr_choice",
+        "pca_keep": true,
+        "source": "cslib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [],
+      "lake": [
+        {
+          "name": "Cslib.CCS.bisimilarity_congr_choice",
+          "round": 0,
+          "skipped": "no_drafts_after_research"
+        }
+      ],
+      "n_drafts": 0,
+      "ranked": {
+        "arena_score": null,
+        "intent": {
+          "allow_families": "{'search_space', 'pca_keep', 'dead_code', 'strength_reduction'}",
+          "already_minimal": 0.22,
+          "complexity": 1.3,
+          "compose": "pipeline",
+          "confidence": 0.45,
+          "fail_skill": 0.0,
+          "intent": "search_space",
+          "jev_generated_lean": false,
+          "probabilities": {
+            "dead_code": 0.03,
+            "pca_keep": 0.34,
+            "search_space": 0.63
+          },
+          "residual_help": {
+            "apply_seq_assumption": 0.51,
+            "ctor_lone": 1.06
+          },
+          "residual_unsafe": {
+            "apply_seq_assumption": 0.54,
+            "ctor_lone": 0.53
+          },
+          "skill": "keep",
+          "skill_confidence": 1.0,
+          "skip_lake": false,
+          "skip_skills": [
+            "ctor_pair_exacts"
+          ],
+          "skipped": false,
+          "uncertain": true,
+          "wall_ms": 183.10845998348668
+        },
+        "jev_generated_lean": false,
+        "reason": "no_drafts_after_research",
+        "skipped": true
+      }
+    }
+  ],
+  "inits_139": {
+    "case_labels": [],
+    "catalog_phrases_present": [],
+    "counts": {
+      "max_indent": 10,
+      "n_apply": 0,
+      "n_blank": 0,
+      "n_calc": 0,
+      "n_cases": 0,
+      "n_exact": 1,
+      "n_have": 5,
+      "n_induction": 1,
+      "n_intro": 1,
+      "n_linarith": 0,
+      "n_lines": 29,
+      "n_obtain": 0,
+      "n_omega": 0,
+      "n_rename_i": 1,
+      "n_ring": 0,
+      "n_rw": 1,
+      "n_simp_all": 3,
+      "n_simp_at": 0,
+      "n_tokens": 139
+    },
+    "cut": "cascade-best-139",
+    "eligible_spans": {
+      "span_1": 127,
+      "span_2": 124,
+      "span_3": 121,
+      "span_4": 118,
+      "span_6": 112
+    },
+    "families": [
+      {
+        "family": "strength_reduction",
+        "features": [
+          "n_simp_all",
+          "n_rw"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "algebraic_simplification",
+        "features": [
+          "n_rw",
+          "n_simp_all"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "loop_invariant",
+        "features": [
+          "n_have",
+          "n_induction"
+        ],
+        "mca_score": 0.6930525968627868,
+        "present": {
+          "n_have": 5.0,
+          "n_induction": 1.0
+        }
+      },
+      {
+        "family": "dead_code",
+        "features": [
+          "n_have",
+          "n_rename_i"
+        ],
+        "mca_score": 0.5328527189388765,
+        "present": {
+          "n_have": 5.0,
+          "n_rename_i": 1.0
+        }
+      },
+      {
+        "family": "search_space",
+        "features": [
+          "n_intro"
+        ],
+        "mca_score": 0.4813350815210859,
+        "present": {
+          "n_intro": 1.0
+        }
+      }
+    ],
+    "mca_holes": [
+      {
+        "family": "loop_invariant",
+        "head": "have := UpdateStatesDefined Hup",
+        "id": "MCA_0",
+        "n_tokens": 5,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen1 := InitStatesLength Hinit",
+        "id": "MCA_1",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hlen1",
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen2 := UpdateStatesLength Hup",
+        "id": "MCA_2",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "dead_code",
+        "head": "rename_i Hup Hups ih",
+        "id": "MCA_3",
+        "n_tokens": 4,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hup",
+          "Hups",
+          "ih"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have := InitStatesNotDefined Hinit",
+        "id": "MCA_4",
+        "n_tokens": 5,
+        "safe_to_drop": false,
+        "used_binders": [
+          "this"
+        ]
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hst := updatedStatesInit Hlen1",
+        "id": "MCA_5",
+        "n_tokens": 6,
+        "safe_to_drop": false,
+        "used_binders": [
+          "Hst",
+          "this"
+        ]
+      }
+    ],
+    "n_cases": 0,
+    "n_lines": 29.0,
+    "n_mca_holes": 6,
+    "n_tags": 3,
+    "n_tokens": 139,
+    "name": "Core.InitsUpdatesComm",
+    "pca_keep": true,
+    "source": "strata"
+  },
+  "k": 3,
+  "lake": [
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Case tag `op` not found.\n\nHint: Available tags:\n  \u2022 `abs`: o\u0335p\u0335a\u0332b\u0332s\u0332\n  \u2022 `quant`: o\u0335p\u0335q\u0332u\u0332a\u0332n\u0332t\u0332\n  \u2022 `app`: o\u0335p\u0335a\u0332p\u0332p\u0332\n  \u2022 `ite`: o\u0335p\u0335i\u0332t\u0332e\u0332\n  \u2022 `eq`: o\u0335p\u0335e\u0332q\u0332",
+          "pos": {
+            "column": 2,
+            "line": 3101
+          }
+        }
+      ],
+      "kind": "port_hoist_repeated_simp",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false,
+      "repaired": false,
+      "round": 0,
+      "tokens": 297
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Tactic `split` failed: Could not split an `if` or `match` expression in the goal\n\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\n\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.L",
+          "pos": {
+            "column": 4,
+            "line": 2868
+          }
+        }
+      ],
+      "kind": "pca_search_space_d008",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 0,
+      "tokens": 258
+    },
+    {
+      "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-CallElimCorrect.extractedOldExprInVars-260.lean",
+      "error_class": null,
+      "errors": [],
+      "kind": "port_redundant_inner_simp",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": true,
+      "repaired": false,
+      "round": 0,
+      "tokens": 260
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\ncase h_3.app.a.a\nm\u271d : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e1\u271d e2\u271d :\n  Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\nfn_ih : (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\ne_ih : (extractOldExprVars e).Subset (Lambda.LExpr.LEx",
+          "pos": {
+            "column": 6,
+            "line": 2884
+          }
+        }
+      ],
+      "kind": "pca_search_space_d006",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 1,
+      "tokens": 251
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Unknown constant `HasSubset.Subset.trans`",
+          "pos": {
+            "column": 21,
+            "line": 2884
+          }
+        }
+      ],
+      "kind": "pca_search_space_d003",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 1,
+      "tokens": 242
+    },
+    {
+      "error_class": "other",
+      "errors": [
+        {
+          "data": "Unknown constant `HasSubset.Subset.app`",
+          "pos": {
+            "column": 19,
+            "line": 2883
+          }
+        }
+      ],
+      "kind": "pca_search_space_d004",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": false,
+      "repaired": false,
+      "round": 1,
+      "tokens": 250
+    },
+    {
+      "best_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/random-best-Cslib.SKI.parallelReduction_diamond-540.lean",
+      "error_class": null,
+      "errors": [],
+      "kind": "port_trailing_tuple_comma",
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "ok": true,
+      "repaired": false,
+      "round": 0,
+      "tokens": 540
+    },
+    {
+      "error_class": "unsolved_goals",
+      "errors": [
+        {
+          "data": "unsolved goals\na\u2082 a' b b' : SKI\nhb' : b \u2b62\u209a b'\nha' : (K \u2b1d a\u2082) \u2b62\u209a a'\na\u2082' : SKI\nha\u2082' : a\u2082 \u2b62\u209a a\u2082' \u2227 a' = K \u2b1d a\u2082'\n\u22a2 Join ParallelReduction (K \u2b1d a\u2082' \u2b1d b') a\u2082",
+          "pos": {
+            "column": 15,
+            "line": 159
+          }
+        }
+      ],
+      "kind": "pca_search_space_d001",
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "ok": false,
+      "repaired": false,
+      "round": 1,
+      "tokens": 530
+    }
+  ],
+  "landscape": [
+    {
+      "n_have": 1,
+      "n_induction": 1,
+      "n_mca_holes": 8,
+      "n_rw": 0,
+      "n_simp_at": 8,
+      "n_tokens": 482,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 322,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 1,
+      "n_mca_holes": 4,
+      "n_rw": 1,
+      "n_simp_at": 0,
+      "n_tokens": 268,
+      "name": "Core.InitsUpdatesComm",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 23,
+      "n_induction": 0,
+      "n_mca_holes": 23,
+      "n_rw": 3,
+      "n_simp_at": 1,
+      "n_tokens": 1829,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 0,
+      "n_mca_holes": 9,
+      "n_rw": 17,
+      "n_simp_at": 0,
+      "n_tokens": 1820,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 0,
+      "n_mca_holes": 3,
+      "n_rw": 9,
+      "n_simp_at": 0,
+      "n_tokens": 1473,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 519,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "source": "cslib",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 6,
+      "n_simp_at": 0,
+      "n_tokens": 552,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 296,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 28,
+      "n_induction": 0,
+      "n_mca_holes": 28,
+      "n_rw": 13,
+      "n_simp_at": 0,
+      "n_tokens": 2800,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 27,
+      "n_induction": 0,
+      "n_mca_holes": 29,
+      "n_rw": 24,
+      "n_simp_at": 0,
+      "n_tokens": 2618,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 18,
+      "n_induction": 1,
+      "n_mca_holes": 18,
+      "n_rw": 7,
+      "n_simp_at": 0,
+      "n_tokens": 2454,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "source": "arklib",
+      "top_family": "loop_invariant"
+    },
+    {
+      "n_have": 54,
+      "n_induction": 1,
+      "n_mca_holes": 54,
+      "n_rw": 3,
+      "n_simp_at": 4,
+      "n_tokens": 2124,
+      "name": "putnam_1964_a4",
+      "source": "putnambench",
+      "top_family": "strength_reduction"
+    },
+    {
+      "n_have": 81,
+      "n_induction": 0,
+      "n_mca_holes": 81,
+      "n_rw": 10,
+      "n_simp_at": 2,
+      "n_tokens": 2350,
+      "name": "putnam_1964_b2",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 76,
+      "n_induction": 0,
+      "n_mca_holes": 76,
+      "n_rw": 18,
+      "n_simp_at": 0,
+      "n_tokens": 4564,
+      "name": "putnam_1995_a3",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 13,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 2802,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 378,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000118
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 1834,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 109,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 7.7e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 3116,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 448,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000131
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 2090,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 138,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 8.8e-05
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 2669,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 321,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000112
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 2792,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 292,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000117
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 2285,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 272,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.6e-05
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 2336,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 279,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.8e-05
+      },
+      {
+        "call_index": 9,
+        "fixture": false,
+        "input_tokens": 2590,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 352,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000109
+      },
+      {
+        "call_index": 10,
+        "fixture": false,
+        "input_tokens": 1427,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 103,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 6e-05
+      },
+      {
+        "call_index": 11,
+        "fixture": false,
+        "input_tokens": 2176,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 225,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 9.1e-05
+      },
+      {
+        "call_index": 12,
+        "fixture": false,
+        "input_tokens": 1440,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 104,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 6e-05
+      },
+      {
+        "call_index": 13,
+        "fixture": false,
+        "input_tokens": 1938,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 209,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 8.1e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 38,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "warmup#random-canary",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.998762,
+    "skipped": false,
+    "spent_usd": 0.001238,
+    "track": "track1_closed"
+  },
+  "memory": {
+    "n_blacklist": 50,
+    "n_failures": 157,
+    "n_successes": 82
+  },
+  "memory_path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026/papers/completion/lean_refactor_arena/evidence/canaries/refactor-memory.json",
+  "n_records": 15,
+  "n_tag_cells": 36,
+  "observed_at": "2026-09-18T02:28:16.846339+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.4049405265687185,
+      0.20535547758361236,
+      0.11807994165651019,
+      0.07890666288267674,
+      0.05463727730428802,
+      0.04287295106587582
+    ],
+    "principal0": {
+      "max_indent": -0.26472716990802214,
+      "n_apply": 0.08062031373487605,
+      "n_blank": -0.3342438149027209,
+      "n_calc": -0.30073104239355397,
+      "n_cases": 0.22151097089138239,
+      "n_exact": -0.3223738861331306,
+      "n_have": -0.3229177802571527,
+      "n_induction": 0.1554714491780493,
+      "n_intro": -0.13949676587126572,
+      "n_linarith": -0.20355777263126,
+      "n_lines": -0.3316410647395201,
+      "n_obtain": 0.062338763096317515,
+      "n_omega": -0.061922673049083964,
+      "n_rename_i": 0.13191459411652012,
+      "n_ring": -0.2672920525771413,
+      "n_rw": -0.22982013977927257,
+      "n_simp_all": -0.07536010342633125,
+      "n_simp_at": 0.04284608346238592,
+      "n_tokens": -0.3347272419706519
+    }
+  },
+  "schema": "lra-random-canary/v1",
+  "seed": 20260917,
+  "skill_analysis": [
+    {
+      "compose_plan": [
+        "unused_intros",
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "drop_try_simp_all",
+        "semi_assumption",
+        "use_exact",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "ctor_pair_exacts",
+        "exact_hyp",
+        "trim_intro_names",
+        "hoist_repeated_simp",
+        "use_exact_reuse",
+        "drop_unfold_before_split"
+      ],
+      "failed_stems": [
+        "drop_intro_before_simp_all",
+        "hoist_repeated_simp",
+        "intro_x_hin",
+        "port_drop_intro_before_simp_all",
+        "port_hoist_repeated_simp",
+        "port_intro_x_hin",
+        "port_semi_assumption",
+        "port_shorten_hasvars_getvars",
+        "port_shorten_list_subset_app",
+        "port_shorten_list_subset_trans",
+        "port_shorten_llexpr_getvars",
+        "semi_assumption",
+        "shorten_hasvars_getvars",
+        "shorten_list_subset_app",
+        "shorten_list_subset_trans",
+        "shorten_llexpr_getvars"
+      ],
+      "keep_constructor": false,
+      "keep_intro": true,
+      "keep_structure": [],
+      "name": "CallElimCorrect.substOldPostSubset",
+      "proposed": {
+        "help": 1.15,
+        "keep_structure": false,
+        "residual": "repeated_simp_list",
+        "unsafe": 0.32
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 1.34,
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.5
+        },
+        {
+          "do_not_cut": false,
+          "help": 1.15,
+          "residual": "repeated_simp_list",
+          "unsafe": 0.32
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.34,
+          "residual": "intros_x_Hin",
+          "unsafe": 0.52
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.33,
+          "residual": "apply_semi_assumption",
+          "unsafe": 0.63
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "unused_intros",
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "drop_try_simp_all",
+        "semi_assumption",
+        "use_exact",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "ctor_pair_exacts",
+        "exact_hyp",
+        "hoist_repeated_simp",
+        "use_exact_reuse",
+        "trim_intro_names",
+        "drop_unfold_before_split"
+      ],
+      "failed_stems": [
+        "apply_ih_assumption",
+        "drop_intro_before_simp_all",
+        "drop_unfold_before_split",
+        "intro_x_hin",
+        "port_apply_ih_assumption",
+        "port_drop_intro_before_simp_all",
+        "port_drop_unfold_before_split",
+        "port_intro_x_hin",
+        "port_shorten_hasvars_getvars",
+        "port_shorten_list_subset_app",
+        "port_shorten_list_subset_trans",
+        "port_shorten_llexpr_getvars",
+        "port_unused_intros",
+        "shorten_hasvars_getvars",
+        "shorten_list_subset_app",
+        "shorten_list_subset_trans",
+        "shorten_llexpr_getvars",
+        "unused_intros"
+      ],
+      "keep_constructor": true,
+      "keep_intro": true,
+      "keep_structure": [],
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "proposed": {
+        "help": 0.22,
+        "keep_structure": false,
+        "residual": "intros_x_Hin",
+        "unsafe": 0.43
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.75,
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.57
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.48,
+          "residual": "apply_seq_assumption",
+          "unsafe": 0.65
+        },
+        {
+          "do_not_cut": false,
+          "help": 0.22,
+          "residual": "intros_x_Hin",
+          "unsafe": 0.43
+        },
+        {
+          "do_not_cut": false,
+          "help": 0.21,
+          "residual": "ctor_lone",
+          "unsafe": 0.35
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "unused_intros",
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "drop_try_simp_all",
+        "semi_assumption",
+        "use_exact",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "ctor_pair_exacts",
+        "exact_hyp",
+        "hoist_repeated_simp",
+        "use_exact_reuse",
+        "trim_intro_names",
+        "drop_unfold_before_split"
+      ],
+      "failed_stems": [],
+      "keep_constructor": true,
+      "keep_intro": true,
+      "keep_structure": [],
+      "name": "Core.InitsUpdatesComm",
+      "proposed": {
+        "help": 0.75,
+        "keep_structure": false,
+        "residual": "intro_then_simp_all",
+        "unsafe": 0.4
+      },
+      "top_help": [
+        {
+          "do_not_cut": false,
+          "help": 0.75,
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.4
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.14,
+          "residual": "have",
+          "unsafe": 0.61
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.03,
+          "residual": "ctor_lone",
+          "unsafe": 0.46
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "unused_intros",
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "drop_try_simp_all",
+        "semi_assumption",
+        "use_exact",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "ctor_pair_exacts",
+        "exact_hyp",
+        "hoist_repeated_simp",
+        "trim_intro_names",
+        "use_exact_reuse",
+        "drop_unfold_before_split"
+      ],
+      "failed_stems": [],
+      "keep_constructor": true,
+      "keep_intro": false,
+      "keep_structure": [],
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "proposed": {},
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 1.2,
+          "residual": "grind",
+          "unsafe": 0.6
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.28,
+          "residual": "have",
+          "unsafe": 0.54
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.15,
+          "residual": "ctor_lone",
+          "unsafe": 0.51
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "unused_intros",
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "drop_try_simp_all",
+        "semi_assumption",
+        "use_exact",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "ctor_pair_exacts",
+        "exact_hyp",
+        "hoist_repeated_simp",
+        "trim_intro_names",
+        "use_exact_reuse",
+        "drop_unfold_before_split"
+      ],
+      "failed_stems": [
+        "port_use_exact_reuse",
+        "use_exact_reuse"
+      ],
+      "keep_constructor": false,
+      "keep_intro": false,
+      "keep_structure": [
+        "trailing_tuple_comma"
+      ],
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "proposed": {
+        "help": 0.51,
+        "keep_structure": true,
+        "mint": [
+          "trailing_tuple_comma"
+        ],
+        "residual": "use_then_exact",
+        "unsafe": 0.69
+      },
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 0.51,
+          "residual": "use_then_exact",
+          "unsafe": 0.69
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.3,
+          "residual": "grind",
+          "unsafe": 0.46
+        }
+      ]
+    },
+    {
+      "compose_plan": [
+        "unused_intros",
+        "trailing_tuple_comma",
+        "redundant_inner_simp",
+        "drop_try_simp_all",
+        "semi_assumption",
+        "ctor_pair_exacts",
+        "use_exact",
+        "grind_only_to_grind",
+        "repeat_par_grind",
+        "exact_hyp",
+        "hoist_repeated_simp",
+        "trim_intro_names",
+        "use_exact_reuse",
+        "drop_unfold_before_split"
+      ],
+      "failed_stems": [
+        "ccs_choiceL_exact",
+        "ccs_choiceL_hr1",
+        "ccs_choiceR_exact",
+        "dot_ctor_apply",
+        "port_ccs_choiceL_exact",
+        "port_ccs_choiceL_hr1",
+        "port_ccs_choiceR_exact",
+        "port_dot_ctor_apply",
+        "port_trim_intro_names",
+        "trim_intro_names"
+      ],
+      "keep_constructor": true,
+      "keep_intro": false,
+      "keep_structure": [],
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "proposed": {},
+      "top_help": [
+        {
+          "do_not_cut": true,
+          "help": 1.06,
+          "residual": "ctor_lone",
+          "unsafe": 0.53
+        },
+        {
+          "do_not_cut": true,
+          "help": 0.51,
+          "residual": "apply_seq_assumption",
+          "unsafe": 0.54
+        }
+      ]
+    }
+  ],
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

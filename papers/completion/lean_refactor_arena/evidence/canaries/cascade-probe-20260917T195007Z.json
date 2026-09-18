@@ -1,0 +1,67 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 204
+  },
+  "called_docker0": false,
+  "from_tokens": 204,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T19:50:07.883532+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined \u03c3\u271d [x]` of `this`  Hint: Use `set_option trace.split.failure true` t",
+      "kind": "simp_this_bare",
+      "ok": false,
+      "tokens": 197
+    },
+    {
+      "error": "invalid occurrence of `\u00b7` notation, it must be surrounded by parentheses (e.g. `(\u00b7 + 1)`)",
+      "kind": "double_ctor_hst",
+      "ok": false,
+      "tokens": 199
+    },
+    {
+      "error": "unsolved goals case h_2 P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : SemanticStore P ",
+      "kind": "split_no_simp_all",
+      "ok": false,
+      "tokens": 200
+    },
+    {
+      "error": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `(\u03c3\u271d x).isSome = true` of `this`  Hint: Use `set_option trace.split.failure tru",
+      "kind": "simp_this_defined",
+      "ok": false,
+      "tokens": 200
+    },
+    {
+      "error": "unsolved goals case right P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : SemanticStore ",
+      "kind": "none_last_simp_all",
+      "ok": false,
+      "tokens": 203
+    },
+    {
+      "error": "Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined \u03c3\u271d [x]` of `this`  Hint: Use `set_option trace.split.failure true` t",
+      "kind": "simp_this_option",
+      "ok": false,
+      "tokens": 202
+    },
+    {
+      "error": "",
+      "kind": "fill_ih_arg",
+      "ok": true,
+      "tokens": 204
+    },
+    {
+      "error": "",
+      "kind": "init+fill_ih_arg",
+      "ok": true,
+      "tokens": 204
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

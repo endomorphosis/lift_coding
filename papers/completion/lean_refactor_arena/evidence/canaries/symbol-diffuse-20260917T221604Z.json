@@ -1,0 +1,275 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "r0_SYM_0_phrase_constructor",
+    "theorem_ok": true,
+    "token_count": 265
+  },
+  "called_docker0": false,
+  "cfg": [
+    {
+      "arena_score": null,
+      "best_schedule": "cfg4",
+      "cfg_confidence": 0.23,
+      "cfg_schedule": {
+        "cfg_scale": 3.0,
+        "id": "cfg4",
+        "n_masks": 8,
+        "n_shots": 8,
+        "span": 6
+      },
+      "cfg_score": 2.61,
+      "eligible_spans": {
+        "span_1": 32,
+        "span_2": 32,
+        "span_3": 32,
+        "span_4": 32,
+        "span_6": 32
+      },
+      "jev_generated_lean": false,
+      "round": 0,
+      "schedule_probabilities": {
+        "cfg0": 0.2,
+        "cfg1": 0.11,
+        "cfg2": 0.12,
+        "cfg3": 0.21,
+        "cfg4": 0.36
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 855,
+        "output_tokens": 73
+      },
+      "wall_ms": 238.96463599521667
+    }
+  ],
+  "few_shot": true,
+  "lake": [
+    {
+      "errors": [
+        {
+          "data": "unknown tactic",
+          "pos": {
+            "column": 7,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "sweep_cfg4_closed",
+      "n_shots": 8,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg4",
+      "tokens": 255
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  InitStatesNodup\nhas type\n  InitStates ?m.123 ?m.124 ?m.125 ?m.126 \u2192 List.Nodup ?m.124\nbut is expected to have type\n  ks'.Nodup",
+          "pos": {
+            "column": 6,
+            "line": 960
+          }
+        }
+      ],
+      "kind": "sweep_cfg1_closed",
+      "n_shots": 2,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg1",
+      "tokens": 265
+    },
+    {
+      "errors": [
+        {
+          "data": "unknown tactic",
+          "pos": {
+            "column": 7,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "sweep_cfg2_closed",
+      "n_shots": 4,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg2",
+      "tokens": 263
+    },
+    {
+      "errors": [
+        {
+          "data": "unexpected token ')'; expected ':=' or '|'",
+          "pos": {
+            "column": 26,
+            "line": 942
+          }
+        }
+      ],
+      "kind": "sweep_cfg3_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "cfg3",
+      "tokens": 261
+    },
+    {
+      "errors": [],
+      "kind": "SYM_0_phrase_constructor",
+      "n_shots": null,
+      "ok": true,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 265
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 2,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 855,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.6e-05
+      },
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1511,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 124,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 699,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 29,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 2636,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 187,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000111
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 12,
+    "max_mistral_calls": 6,
+    "mistral_calls": 2,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999853,
+    "skipped": false,
+    "spent_usd": 0.000147,
+    "track": "track1_closed"
+  },
+  "llm": "on",
+  "n_closed": 10,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:16:04.642660+00:00",
+  "official_track2": false,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "sweep_cfg4_closed",
+    "cfg_schedule": {
+      "cfg_scale": 1.5,
+      "id": "cfg2",
+      "n_masks": 4,
+      "n_shots": 4,
+      "span": 3
+    },
+    "cfg_score": 2.05,
+    "confidence": 0.6,
+    "jev_generated_lean": false,
+    "prefer_few_shot_noul": 0.31,
+    "probabilities": {
+      "SYM_0_phrase_constructor": 0.09,
+      "SYM_10_operator__": 0.0,
+      "SYM_6_operator__": 0.0,
+      "SYM_7_operator__": 0.0,
+      "SYM_8_operator__": 0.0,
+      "SYM_9_operator__": 0.0,
+      "leanstral_cfg4_unparsed": 0.02,
+      "sweep_cfg1_closed": 0.04,
+      "sweep_cfg2_closed": 0.18000000000000002,
+      "sweep_cfg3_closed": 0.02,
+      "sweep_cfg4_closed": 0.65
+    },
+    "round": 0,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 2636,
+      "output_tokens": 187
+    },
+    "wall_ms": 199.30295998346992
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "sweep_cfg4_closed",
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "cfg2",
+        "n_masks": 4,
+        "n_shots": 4,
+        "span": 3
+      },
+      "cfg_score": 2.05,
+      "confidence": 0.6,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": 0.31,
+      "probabilities": {
+        "SYM_0_phrase_constructor": 0.09,
+        "SYM_10_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator__": 0.0,
+        "SYM_9_operator__": 0.0,
+        "leanstral_cfg4_unparsed": 0.02,
+        "sweep_cfg1_closed": 0.04,
+        "sweep_cfg2_closed": 0.18000000000000002,
+        "sweep_cfg3_closed": 0.02,
+        "sweep_cfg4_closed": 0.65
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 2636,
+        "output_tokens": 187
+      },
+      "wall_ms": 199.30295998346992
+    }
+  ],
+  "rounds": 1,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 268,
+  "sweep": true,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

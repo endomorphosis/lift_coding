@@ -1,0 +1,1195 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "canaries": [
+    {
+      "analysis": {
+        "case_labels": [],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 5,
+          "n_blank": 1,
+          "n_calc": 1,
+          "n_cases": 0,
+          "n_exact": 0,
+          "n_have": 27,
+          "n_induction": 0,
+          "n_intro": 2,
+          "n_linarith": 0,
+          "n_lines": 160,
+          "n_obtain": 0,
+          "n_omega": 4,
+          "n_rename_i": 0,
+          "n_ring": 0,
+          "n_rw": 24,
+          "n_simp_all": 0,
+          "n_simp_at": 0,
+          "n_tokens": 2618
+        },
+        "eligible_spans": {
+          "span_1": 2618,
+          "span_2": 2617,
+          "span_3": 2616,
+          "span_4": 2615,
+          "span_6": 2613
+        },
+        "families": [
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_rw",
+              "n_calc",
+              "n_omega"
+            ],
+            "mca_score": 1.6727198498406775,
+            "present": {
+              "n_calc": 1.0,
+              "n_omega": 4.0,
+              "n_rw": 24.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_rw"
+            ],
+            "mca_score": 1.5115858481196258,
+            "present": {
+              "n_rw": 24.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro"
+            ],
+            "mca_score": 0.4224946404736164,
+            "present": {
+              "n_apply": 5.0,
+              "n_intro": 2.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have"
+            ],
+            "mca_score": 0.08742172147752471,
+            "present": {
+              "n_have": 27.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have"
+            ],
+            "mca_score": 0.08742172147752471,
+            "present": {
+              "n_have": 27.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "loop_invariant",
+            "head": "have h : j.val * 2 < 2^(\u2113 - (i + 1)) * 2 := by omega",
+            "id": "MCA_0",
+            "n_tokens": 26
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h2 : 2^(\u2113 - i) = 2^(\u2113 - (i + 1)) * 2 := by",
+            "id": "MCA_1",
+            "n_tokens": 27
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_eval_qMap_x\u2080 : (AdditiveNTT.qMap \ud835\udd3dq \u03b2 \u27e8i, by omega\u27e9).eval x\u2080.val = y := b",
+            "id": "MCA_2",
+            "n_tokens": 29
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h := iteratedQuotientMap_k_eq_1_is_qMap \ud835\udd3dq \u03b2 h_\u2113_add_R_rate i (by omega) x\u2080",
+            "id": "MCA_3",
+            "n_tokens": 18
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_res := is_fiber_iff_generates_quotient_point \ud835\udd3dq \u03b2 i (steps := 1) (by omeg",
+            "id": "MCA_4",
+            "n_tokens": 19
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_eval_qMap_x\u2081 : (AdditiveNTT.qMap \ud835\udd3dq \u03b2 \u27e8i, by omega\u27e9).eval x\u2081.val = y := b",
+            "id": "MCA_5",
+            "n_tokens": 29
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h := iteratedQuotientMap_k_eq_1_is_qMap \ud835\udd3dq \u03b2 h_\u2113_add_R_rate i (by omega) x\u2081",
+            "id": "MCA_6",
+            "n_tokens": 18
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_res := is_fiber_iff_generates_quotient_point \ud835\udd3dq \u03b2 i (steps := 1) (by omeg",
+            "id": "MCA_7",
+            "n_tokens": 19
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have hx\u2080 := qMap_total_fiber_basis_sum_repr \ud835\udd3dq \u03b2 i (steps := 1)",
+            "id": "MCA_8",
+            "n_tokens": 16
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have hx\u2081 := qMap_total_fiber_basis_sum_repr \ud835\udd3dq \u03b2 i (steps := 1)",
+            "id": "MCA_9",
+            "n_tokens": 16
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_fiber_diff : x\u2081.val - x\u2080.val = 1 := by",
+            "id": "MCA_10",
+            "n_tokens": 17
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_index : \u2113 + \ud835\udce1 - i = (\u2113 + \ud835\udce1 - (i.val + 1)) + 1 := by omega",
+            "id": "MCA_11",
+            "n_tokens": 28
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_cast_0 :",
+            "id": "MCA_12",
+            "n_tokens": 3
+          },
+          {
+            "family": "algebraic_simplification",
+            "head": "rw [\u2190Fin.cast_eq_cast (h := by omega)]\n      rw [Fin.cast_val_eq_val (h_eq := by",
+            "id": "MCA_13",
+            "n_tokens": 27
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_cast_1 :",
+            "id": "MCA_14",
+            "n_tokens": 3
+          },
+          {
+            "family": "algebraic_simplification",
+            "head": "rw [\u2190Fin.cast_eq_cast (h := by omega)]\n      rw [Fin.cast_val_eq_val (h_eq := by",
+            "id": "MCA_15",
+            "n_tokens": 27
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_getBit_0_of_0 : Nat.getBit (k := 0) (n := 0) = 0 := by",
+            "id": "MCA_16",
+            "n_tokens": 23
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_getBit_0_of_1 : Nat.getBit (k := 0) (n := 1) = 1 := by",
+            "id": "MCA_17",
+            "n_tokens": 23
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h1 : \u2113 - (i + 1) + 1 = \u2113 - i := by omega",
+            "id": "MCA_18",
+            "n_tokens": 20
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h2 : 2^(\u2113 - (i + 1) + 1) = 2^(\u2113 - i) := by rw [h1]",
+            "id": "MCA_19",
+            "n_tokens": 31
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h3 : 2^(\u2113 - (i + 1)) * 2 = 2^(\u2113 - (i + 1) + 1) := by rw [pow_succ]",
+            "id": "MCA_20",
+            "n_tokens": 37
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h1 : \u2113 - (i + 1) + 1 = \u2113 - i := by omega",
+            "id": "MCA_21",
+            "n_tokens": 20
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h2 : 2^(\u2113 - (i + 1) + 1) = 2^(\u2113 - i) := by rw [h1]",
+            "id": "MCA_22",
+            "n_tokens": 31
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h3 : 2^(\u2113 - (i + 1)) * 2 = 2^(\u2113 - (i + 1) + 1) := by rw [pow_succ]",
+            "id": "MCA_23",
+            "n_tokens": 37
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_P_i_eval := evaluation_poly_split_identity \ud835\udd3dq \u03b2 h_\u2113_add_R_rate \u27e8i, by ome",
+            "id": "MCA_24",
+            "n_tokens": 18
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_equation_39_x\u2080 : P_i.eval x\u2080.val = P\u2080.eval y.val + x\u2080.val * P\u2081.eval y.val",
+            "id": "MCA_25",
+            "n_tokens": 35
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_equation_39_x\u2081 : P_i.eval x\u2081.val = P\u2080.eval y.val + x\u2081.val * P\u2081.eval y.val",
+            "id": "MCA_26",
+            "n_tokens": 35
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_fold_def : f_i_plus_1 y =",
+            "id": "MCA_27",
+            "n_tokens": 6
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have h_j_lt : j.val < 2 ^ (\u2113 - (\u2191i + 1)) := by",
+            "id": "MCA_28",
+            "n_tokens": 22
+          }
+        ],
+        "n_cases": 0,
+        "n_lines": 160.0,
+        "n_mca_holes": 29,
+        "n_tags": 3,
+        "n_tokens": 2618,
+        "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "pca_keep": false,
+        "source": "arklib"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "sweep_rand_s4_closed",
+        "sweep_rand_s6_closed",
+        "sweep_rand_s2_closed",
+        "drop_loop_invariant_MCA_18",
+        "drop_loop_invariant_MCA_10",
+        "drop_loop_invariant_MCA_14"
+      ],
+      "lake": [
+        {
+          "n_tokens": 2618,
+          "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+          "skipped": "too_large"
+        }
+      ],
+      "n_drafts": 6,
+      "ranked": {
+        "arena_score": null,
+        "best_draft": "drop_loop_invariant_MCA_18",
+        "best_family": "algebraic_simplification",
+        "draft_confidence": 0.82,
+        "draft_probabilities": {
+          "drop_loop_invariant_MCA_10": 0.04,
+          "drop_loop_invariant_MCA_14": 0.03,
+          "drop_loop_invariant_MCA_18": 0.85,
+          "sweep_rand_s2_closed": 0.06,
+          "sweep_rand_s4_closed": 0.01,
+          "sweep_rand_s6_closed": 0.01
+        },
+        "family_confidence": 0.87,
+        "family_probabilities": {
+          "algebraic_simplification": 0.89,
+          "dead_code": 0.09,
+          "loop_invariant": 0.0,
+          "search_space": 0.01,
+          "strength_reduction": 0.01
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 1.03,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1330,
+          "output_tokens": 203
+        },
+        "wall_ms": 278.22243998525664
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "app fn e fn_ih e_ih",
+          "abs ih",
+          "quant trih eih",
+          "ite cih tih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [],
+        "counts": {
+          "max_indent": 10,
+          "n_apply": 16,
+          "n_blank": 0,
+          "n_calc": 0,
+          "n_cases": 5,
+          "n_exact": 3,
+          "n_have": 0,
+          "n_induction": 1,
+          "n_intro": 11,
+          "n_linarith": 0,
+          "n_lines": 77,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 3,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 10,
+          "n_simp_at": 0,
+          "n_tokens": 322
+        },
+        "eligible_spans": {
+          "span_1": 253,
+          "span_2": 237,
+          "span_3": 225,
+          "span_4": 213,
+          "span_6": 189
+        },
+        "families": [
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.4914458154265569,
+            "present": {
+              "n_apply": 16.0,
+              "n_cases": 5.0,
+              "n_intro": 11.0
+            }
+          },
+          {
+            "family": "dead_code",
+            "features": [
+              "n_rename_i"
+            ],
+            "mca_score": 1.4413831106337207,
+            "present": {
+              "n_rename_i": 3.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_induction"
+            ],
+            "mca_score": 0.43289397993569534,
+            "present": {
+              "n_induction": 1.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.34539997516019894,
+            "present": {
+              "n_simp_all": 10.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "dead_code",
+            "head": "rename_i e_normalized",
+            "id": "MCA_0",
+            "n_tokens": 2
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i tr_normalized",
+            "id": "MCA_1",
+            "n_tokens": 2
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i tr e ty k",
+            "id": "MCA_2",
+            "n_tokens": 5
+          }
+        ],
+        "n_cases": 5,
+        "n_lines": 77.0,
+        "n_mca_holes": 3,
+        "n_tags": 1,
+        "n_tokens": 322,
+        "name": "CallElimCorrect.extractedOldExprInVars",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "drop_dead_code_MCA_1",
+        "drop_dead_code_MCA_2",
+        "sweep_rand_s4_closed",
+        "sweep_rand_s6_closed",
+        "sweep_rand_s2_closed",
+        "drop_dead_code_MCA_0"
+      ],
+      "lake": [
+        {
+          "errors": [],
+          "kind": "drop_dead_code_MCA_2",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": true,
+          "tokens": 317
+        },
+        {
+          "errors": [],
+          "kind": "drop_dead_code_MCA_1",
+          "name": "CallElimCorrect.extractedOldExprInVars",
+          "ok": true,
+          "tokens": 320
+        }
+      ],
+      "n_drafts": 6,
+      "ranked": {
+        "arena_score": null,
+        "best_draft": "drop_dead_code_MCA_2",
+        "best_family": "search_space",
+        "draft_confidence": 0.92,
+        "draft_probabilities": {
+          "drop_dead_code_MCA_0": 0.02,
+          "drop_dead_code_MCA_1": 0.02,
+          "drop_dead_code_MCA_2": 0.95,
+          "sweep_rand_s2_closed": 0.01,
+          "sweep_rand_s4_closed": 0.0,
+          "sweep_rand_s6_closed": 0.0
+        },
+        "family_confidence": 0.69,
+        "family_probabilities": {
+          "algebraic_simplification": 0.01,
+          "dead_code": 0.14,
+          "loop_invariant": 0.01,
+          "search_space": 0.74,
+          "strength_reduction": 0.1
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 1.08,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1255,
+          "output_tokens": 185
+        },
+        "wall_ms": 184.63274999521673
+      }
+    },
+    {
+      "analysis": {
+        "case_labels": [
+          "fvar",
+          "op",
+          "const",
+          "bvar",
+          "abs ih",
+          "ite cih tih eih",
+          "app ih1 ih2",
+          "quant trih eih",
+          "eq ih1 ih2"
+        ],
+        "catalog_phrases_present": [
+          "<;> simp_all"
+        ],
+        "counts": {
+          "max_indent": 8,
+          "n_apply": 14,
+          "n_blank": 1,
+          "n_calc": 0,
+          "n_cases": 9,
+          "n_exact": 1,
+          "n_have": 1,
+          "n_induction": 1,
+          "n_intro": 15,
+          "n_linarith": 0,
+          "n_lines": 92,
+          "n_obtain": 0,
+          "n_omega": 0,
+          "n_rename_i": 5,
+          "n_ring": 0,
+          "n_rw": 0,
+          "n_simp_all": 18,
+          "n_simp_at": 8,
+          "n_tokens": 482
+        },
+        "eligible_spans": {
+          "span_1": 382,
+          "span_2": 362,
+          "span_3": 346,
+          "span_4": 331,
+          "span_6": 301
+        },
+        "families": [
+          {
+            "family": "dead_code",
+            "features": [
+              "n_have",
+              "n_rename_i",
+              "n_simp_at"
+            ],
+            "mca_score": 4.626639515583679,
+            "present": {
+              "n_have": 1.0,
+              "n_rename_i": 5.0,
+              "n_simp_at": 8.0
+            }
+          },
+          {
+            "family": "strength_reduction",
+            "features": [
+              "n_simp_at",
+              "n_simp_all"
+            ],
+            "mca_score": 2.6666122842333793,
+            "present": {
+              "n_simp_all": 18.0,
+              "n_simp_at": 8.0
+            }
+          },
+          {
+            "family": "search_space",
+            "features": [
+              "n_apply",
+              "n_intro",
+              "n_cases"
+            ],
+            "mca_score": 1.975333590154705,
+            "present": {
+              "n_apply": 14.0,
+              "n_cases": 9.0,
+              "n_intro": 15.0
+            }
+          },
+          {
+            "family": "algebraic_simplification",
+            "features": [
+              "n_simp_all"
+            ],
+            "mca_score": 0.973399929996924,
+            "present": {
+              "n_simp_all": 18.0
+            }
+          },
+          {
+            "family": "loop_invariant",
+            "features": [
+              "n_have",
+              "n_induction"
+            ],
+            "mca_score": 0.7562490220272625,
+            "present": {
+              "n_have": 1.0,
+              "n_induction": 1.0
+            }
+          }
+        ],
+        "mca_holes": [
+          {
+            "family": "dead_code",
+            "head": "rename_i m name ty2",
+            "id": "MCA_0",
+            "n_tokens": 4
+          },
+          {
+            "family": "strength_reduction",
+            "head": "simp at m\n    simp at name\n    simp at ty2",
+            "id": "MCA_1",
+            "n_tokens": 9
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i m name ty2",
+            "id": "MCA_2",
+            "n_tokens": 4
+          },
+          {
+            "family": "strength_reduction",
+            "head": "simp at m\n    simp at name\n    simp at ty2",
+            "id": "MCA_3",
+            "n_tokens": 9
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i m name",
+            "id": "MCA_4",
+            "n_tokens": 3
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i m d",
+            "id": "MCA_5",
+            "n_tokens": 3
+          },
+          {
+            "family": "dead_code",
+            "head": "rename_i m1 k1 ty1 trigger1 e1",
+            "id": "MCA_6",
+            "n_tokens": 6
+          },
+          {
+            "family": "loop_invariant",
+            "head": "have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LE",
+            "id": "MCA_7",
+            "n_tokens": 30
+          }
+        ],
+        "n_cases": 9,
+        "n_lines": 92.0,
+        "n_mca_holes": 8,
+        "n_tags": 1,
+        "n_tokens": 482,
+        "name": "CallElimCorrect.substOldPostSubset",
+        "pca_keep": true,
+        "source": "strata"
+      },
+      "clone_exists": true,
+      "draft_kinds": [
+        "sweep_rand_s4_closed",
+        "sweep_rand_s6_closed",
+        "sweep_rand_s3_closed",
+        "drop_dead_code_MCA_4",
+        "drop_dead_code_MCA_6",
+        "sweep_rand_s2_closed"
+      ],
+      "lake": [
+        {
+          "errors": [
+            {
+              "data": "Unknown identifier `trigger1`",
+              "pos": {
+                "column": 66,
+                "line": 3167
+              }
+            }
+          ],
+          "kind": "drop_dead_code_MCA_6",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": false,
+          "tokens": 476
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\ncase a.a.a.inr\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lam",
+              "pos": {
+                "column": 4,
+                "line": 3131
+              }
+            }
+          ],
+          "kind": "sweep_rand_s4_closed",
+          "name": "CallElimCorrect.substOldPostSubset",
+          "ok": false,
+          "tokens": 480
+        }
+      ],
+      "n_drafts": 6,
+      "ranked": {
+        "arena_score": null,
+        "best_draft": "drop_dead_code_MCA_6",
+        "best_family": "dead_code",
+        "draft_confidence": 0.74,
+        "draft_probabilities": {
+          "drop_dead_code_MCA_4": 0.15,
+          "drop_dead_code_MCA_6": 0.78,
+          "sweep_rand_s2_closed": 0.02,
+          "sweep_rand_s3_closed": 0.02,
+          "sweep_rand_s4_closed": 0.01,
+          "sweep_rand_s6_closed": 0.02
+        },
+        "family_confidence": 0.74,
+        "family_probabilities": {
+          "algebraic_simplification": 0.0,
+          "dead_code": 0.8,
+          "loop_invariant": 0.0,
+          "search_space": 0.13,
+          "strength_reduction": 0.07
+        },
+        "jev_generated_lean": false,
+        "likely_token_cut": 1.01,
+        "skipped": false,
+        "usage": {
+          "input_tokens": 1291,
+          "output_tokens": 185
+        },
+        "wall_ms": 166.96888400474563
+      }
+    }
+  ],
+  "inits_139": {
+    "case_labels": [],
+    "catalog_phrases_present": [],
+    "counts": {
+      "max_indent": 10,
+      "n_apply": 0,
+      "n_blank": 0,
+      "n_calc": 0,
+      "n_cases": 0,
+      "n_exact": 1,
+      "n_have": 5,
+      "n_induction": 1,
+      "n_intro": 1,
+      "n_linarith": 0,
+      "n_lines": 29,
+      "n_obtain": 0,
+      "n_omega": 0,
+      "n_rename_i": 1,
+      "n_ring": 0,
+      "n_rw": 1,
+      "n_simp_all": 3,
+      "n_simp_at": 0,
+      "n_tokens": 139
+    },
+    "cut": "cascade-best-139",
+    "eligible_spans": {
+      "span_1": 127,
+      "span_2": 124,
+      "span_3": 121,
+      "span_4": 118,
+      "span_6": 112
+    },
+    "families": [
+      {
+        "family": "strength_reduction",
+        "features": [
+          "n_simp_all",
+          "n_rw"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "algebraic_simplification",
+        "features": [
+          "n_rw",
+          "n_simp_all"
+        ],
+        "mca_score": 0.7868800713439601,
+        "present": {
+          "n_rw": 1.0,
+          "n_simp_all": 3.0
+        }
+      },
+      {
+        "family": "loop_invariant",
+        "features": [
+          "n_have",
+          "n_induction"
+        ],
+        "mca_score": 0.6930525968627868,
+        "present": {
+          "n_have": 5.0,
+          "n_induction": 1.0
+        }
+      },
+      {
+        "family": "dead_code",
+        "features": [
+          "n_have",
+          "n_rename_i"
+        ],
+        "mca_score": 0.5328527189388765,
+        "present": {
+          "n_have": 5.0,
+          "n_rename_i": 1.0
+        }
+      },
+      {
+        "family": "search_space",
+        "features": [
+          "n_intro"
+        ],
+        "mca_score": 0.4813350815210859,
+        "present": {
+          "n_intro": 1.0
+        }
+      }
+    ],
+    "mca_holes": [
+      {
+        "family": "loop_invariant",
+        "head": "have := UpdateStatesDefined Hup",
+        "id": "MCA_0",
+        "n_tokens": 5
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen1 := InitStatesLength Hinit",
+        "id": "MCA_1",
+        "n_tokens": 6
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hlen2 := UpdateStatesLength Hup",
+        "id": "MCA_2",
+        "n_tokens": 6
+      },
+      {
+        "family": "dead_code",
+        "head": "rename_i Hup Hups ih",
+        "id": "MCA_3",
+        "n_tokens": 4
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have := InitStatesNotDefined Hinit",
+        "id": "MCA_4",
+        "n_tokens": 5
+      },
+      {
+        "family": "loop_invariant",
+        "head": "have Hst := updatedStatesInit Hlen1",
+        "id": "MCA_5",
+        "n_tokens": 6
+      }
+    ],
+    "n_cases": 0,
+    "n_lines": 29.0,
+    "n_mca_holes": 6,
+    "n_tags": 3,
+    "n_tokens": 139,
+    "name": "Core.InitsUpdatesComm",
+    "pca_keep": true,
+    "source": "strata"
+  },
+  "k": 3,
+  "lake": [
+    {
+      "errors": [],
+      "kind": "drop_dead_code_MCA_2",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": true,
+      "tokens": 317
+    },
+    {
+      "errors": [],
+      "kind": "drop_dead_code_MCA_1",
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "ok": true,
+      "tokens": 320
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `trigger1`",
+          "pos": {
+            "column": 66,
+            "line": 3167
+          }
+        }
+      ],
+      "kind": "drop_dead_code_MCA_6",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false,
+      "tokens": 476
+    },
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\ncase a.a.a.inr\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nh1 :\n  Lambda.Identifier\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lam",
+          "pos": {
+            "column": 4,
+            "line": 3131
+          }
+        }
+      ],
+      "kind": "sweep_rand_s4_closed",
+      "name": "CallElimCorrect.substOldPostSubset",
+      "ok": false,
+      "tokens": 480
+    }
+  ],
+  "landscape": [
+    {
+      "n_have": 1,
+      "n_induction": 1,
+      "n_mca_holes": 8,
+      "n_rw": 0,
+      "n_simp_at": 8,
+      "n_tokens": 482,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "source": "strata",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 322,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 1,
+      "n_mca_holes": 4,
+      "n_rw": 1,
+      "n_simp_at": 0,
+      "n_tokens": 268,
+      "name": "Core.InitsUpdatesComm",
+      "source": "strata",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 23,
+      "n_induction": 0,
+      "n_mca_holes": 23,
+      "n_rw": 3,
+      "n_simp_at": 1,
+      "n_tokens": 1829,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 4,
+      "n_induction": 0,
+      "n_mca_holes": 9,
+      "n_rw": 17,
+      "n_simp_at": 0,
+      "n_tokens": 1820,
+      "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 0,
+      "n_mca_holes": 3,
+      "n_rw": 9,
+      "n_simp_at": 0,
+      "n_tokens": 1473,
+      "name": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+      "source": "physlib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 3,
+      "n_induction": 1,
+      "n_mca_holes": 3,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 519,
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "source": "cslib",
+      "top_family": "dead_code"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 6,
+      "n_simp_at": 0,
+      "n_tokens": 552,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 0,
+      "n_induction": 0,
+      "n_mca_holes": 0,
+      "n_rw": 0,
+      "n_simp_at": 0,
+      "n_tokens": 296,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source": "cslib",
+      "top_family": "search_space"
+    },
+    {
+      "n_have": 28,
+      "n_induction": 0,
+      "n_mca_holes": 28,
+      "n_rw": 13,
+      "n_simp_at": 0,
+      "n_tokens": 2800,
+      "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 27,
+      "n_induction": 0,
+      "n_mca_holes": 29,
+      "n_rw": 24,
+      "n_simp_at": 0,
+      "n_tokens": 2618,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "source": "arklib",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 18,
+      "n_induction": 1,
+      "n_mca_holes": 18,
+      "n_rw": 7,
+      "n_simp_at": 0,
+      "n_tokens": 2454,
+      "name": "interleaved_affine_gaps_imply_tensor_gaps",
+      "source": "arklib",
+      "top_family": "loop_invariant"
+    },
+    {
+      "n_have": 54,
+      "n_induction": 1,
+      "n_mca_holes": 54,
+      "n_rw": 3,
+      "n_simp_at": 4,
+      "n_tokens": 2124,
+      "name": "putnam_1964_a4",
+      "source": "putnambench",
+      "top_family": "strength_reduction"
+    },
+    {
+      "n_have": 81,
+      "n_induction": 0,
+      "n_mca_holes": 81,
+      "n_rw": 10,
+      "n_simp_at": 2,
+      "n_tokens": 2350,
+      "name": "putnam_1964_b2",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    },
+    {
+      "n_have": 76,
+      "n_induction": 0,
+      "n_mca_holes": 76,
+      "n_rw": 18,
+      "n_simp_at": 0,
+      "n_tokens": 4564,
+      "name": "putnam_1995_a3",
+      "source": "putnambench",
+      "top_family": "algebraic_simplification"
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 3,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1330,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 203,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.6e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 1255,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 185,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.3e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 1291,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 185,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.4e-05
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 8,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "warmup#random-canary",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999837,
+    "skipped": false,
+    "spent_usd": 0.000163,
+    "track": "track1_closed"
+  },
+  "n_records": 15,
+  "n_tag_cells": 36,
+  "observed_at": "2026-09-17T22:49:05.275728+00:00",
+  "official_track2": false,
+  "pca": {
+    "explained_ratio": [
+      0.4049405265687185,
+      0.20535547758361236,
+      0.11807994165651019,
+      0.07890666288267674,
+      0.05463727730428802,
+      0.04287295106587582
+    ],
+    "principal0": {
+      "max_indent": -0.26472716990802214,
+      "n_apply": 0.08062031373487605,
+      "n_blank": -0.3342438149027209,
+      "n_calc": -0.30073104239355397,
+      "n_cases": 0.22151097089138239,
+      "n_exact": -0.3223738861331306,
+      "n_have": -0.3229177802571527,
+      "n_induction": 0.1554714491780493,
+      "n_intro": -0.13949676587126572,
+      "n_linarith": -0.20355777263126,
+      "n_lines": -0.3316410647395201,
+      "n_obtain": 0.062338763096317515,
+      "n_omega": -0.061922673049083964,
+      "n_rename_i": 0.13191459411652012,
+      "n_ring": -0.2672920525771413,
+      "n_rw": -0.22982013977927257,
+      "n_simp_all": -0.07536010342633125,
+      "n_simp_at": 0.04284608346238592,
+      "n_tokens": -0.3347272419706519
+    }
+  },
+  "schema": "lra-random-canary/v1",
+  "seed": 42,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

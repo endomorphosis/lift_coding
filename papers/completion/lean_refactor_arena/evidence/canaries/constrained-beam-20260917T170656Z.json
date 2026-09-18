@@ -1,0 +1,672 @@
+{
+  "arena_score": null,
+  "called_docker0": true,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T17:06:56.366293+00:00",
+  "official_track2": false,
+  "pr": "PR-9f",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": false,
+      "called_docker0": true,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 3013.128641003277
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      updatedStates \u03c3\u2080 ks",
+              "pos": {
+                "column": 4,
+                "line": 954
+              }
+            },
+            {
+              "data": "unsolved goals\ncase refine_2\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      updat",
+              "pos": {
+                "column": 49,
+                "line": 952
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_0",
+          "module_exit_0": false,
+          "n_chars": 548,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStat",
+          "theorem_ok": false,
+          "token_count": 89,
+          "wall_ms": 2491.1011130025145
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "beam": 1,
+        "called_docker0": true,
+        "called_hosted_mistral": false,
+        "finals": [
+          {
+            "steps": [
+              "  case update_none =>",
+              "    simp_all",
+              "apply And.intro",
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "    exact InitStatesNotDefined Hinit",
+              "    exact InitStatesNodup Hinit",
+              "    simp [InitStatesUpdated Hinit]",
+              "    constructor",
+              "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "refine \u27e8rfl, ?_, ?_\u27e9",
+              ". apply updatedStatesInit Hlen1",
+              "      apply UpdateStateNotDefMonotone' ?_ Hup",
+              "      apply UpdateStatesNotDefMonotone' ?_ Hups",
+              "STOP"
+            ],
+            "stopped": true,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups"
+          }
+        ],
+        "hardware_class": "spark_gb10",
+        "ledger": {
+          "arena_score": null,
+          "budget_usd": 3.0,
+          "contaminates_track2": false,
+          "grok_calls": 0,
+          "hard_stopped": false,
+          "includes_jev_and_grok": true,
+          "jev_calls": 14,
+          "lines": [
+            {
+              "call_index": 1,
+              "fixture": false,
+              "input_tokens": 975,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 2,
+              "fixture": false,
+              "input_tokens": 986,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.1e-05
+            },
+            {
+              "call_index": 3,
+              "fixture": false,
+              "input_tokens": 989,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.2e-05
+            },
+            {
+              "call_index": 4,
+              "fixture": false,
+              "input_tokens": 1024,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 5,
+              "fixture": false,
+              "input_tokens": 1027,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.3e-05
+            },
+            {
+              "call_index": 6,
+              "fixture": false,
+              "input_tokens": 1037,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.4e-05
+            },
+            {
+              "call_index": 7,
+              "fixture": false,
+              "input_tokens": 1051,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.4e-05
+            },
+            {
+              "call_index": 8,
+              "fixture": false,
+              "input_tokens": 1036,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.4e-05
+            },
+            {
+              "call_index": 9,
+              "fixture": false,
+              "input_tokens": 1069,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.5e-05
+            },
+            {
+              "call_index": 10,
+              "fixture": false,
+              "input_tokens": 1099,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.6e-05
+            },
+            {
+              "call_index": 11,
+              "fixture": false,
+              "input_tokens": 1096,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.6e-05
+            },
+            {
+              "call_index": 12,
+              "fixture": false,
+              "input_tokens": 1122,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.7e-05
+            },
+            {
+              "call_index": 13,
+              "fixture": false,
+              "input_tokens": 1141,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 35,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.8e-05
+            },
+            {
+              "call_index": 14,
+              "fixture": false,
+              "input_tokens": 1100,
+              "kind": "jev",
+              "model": "jev-latest",
+              "output_tokens": 27,
+              "reason": "recorded",
+              "skipped": false,
+              "usd": 4.6e-05
+            }
+          ],
+          "max_grok_calls": 0,
+          "max_jev_calls": 48,
+          "max_mistral_calls": 0,
+          "mistral_calls": 0,
+          "name": "Core.InitsUpdatesComm#constrained-beam-local",
+          "official_track2": false,
+          "reason": "",
+          "remaining_usd": 2.99938,
+          "skipped": false,
+          "spent_usd": 0.00062,
+          "track": "track1_closed"
+        },
+        "local_calls": 14,
+        "max_steps": 40,
+        "mode": "greedy",
+        "official_track2": false,
+        "pca_mca": {
+          "earliest_unfinished": "update_none",
+          "empty_arms": [],
+          "mca_holes": [
+            {
+              "family": "loop_invariant",
+              "head": "have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+              "id": "MCA_0"
+            },
+            {
+              "family": "loop_invariant",
+              "head": "have Hlen1 := InitStatesLength Hinit",
+              "id": "MCA_1"
+            },
+            {
+              "family": "loop_invariant",
+              "head": "have Hlen2 := UpdateStatesLength Hup",
+              "id": "MCA_2"
+            },
+            {
+              "family": "loop_invariant",
+              "head": "have Hnd := InitStatesNotDefined Hinit",
+              "id": "MCA_3"
+            }
+          ],
+          "missing_cases": [
+            "update_none",
+            "update_some"
+          ],
+          "n_cases": 2,
+          "n_have": 4,
+          "n_induction": 1,
+          "n_tokens_ref": 268,
+          "next_original": null,
+          "open_case": null,
+          "pca_case_tags": [
+            "update_none",
+            "update_some"
+          ],
+          "pca_prefix": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''",
+          "pca_skeleton_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  <<<MCA_0 family=loop_invariant>>>\n  <<<MCA_1 family=loop_invariant>>>\n  <<<MCA_2 family=loop_invariant>>>\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n        ",
+          "unfinished_arms": []
+        },
+        "pca_prefix": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''",
+        "temperature": 0.9,
+        "trace": [
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_none",
+              "update_some"
+            ],
+            "next_original": null,
+            "open_case": null,
+            "prefix_lines": 4,
+            "proposals": [
+              "  case update_none =>",
+              "STOP"
+            ],
+            "step": 0,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "  case update_none =>",
+              "confidence": 0.59,
+              "kept": [
+                "  case update_none =>"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [
+              "update_none"
+            ],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    simp_all",
+            "open_case": "update_none",
+            "prefix_lines": 5,
+            "proposals": [
+              "    simp_all",
+              "STOP"
+            ],
+            "step": 1,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    simp_all",
+              "confidence": 0.96,
+              "kept": [
+                "    simp_all"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    apply And.intro",
+            "open_case": "update_none",
+            "prefix_lines": 6,
+            "proposals": [
+              "apply And.intro",
+              "STOP"
+            ],
+            "step": 2,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "apply And.intro",
+              "confidence": 0.95,
+              "kept": [
+                "apply And.intro"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    refine updatedStatesInit Hlen1 ?_ ?_",
+            "open_case": "update_none",
+            "prefix_lines": 7,
+            "proposals": [
+              "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "STOP"
+            ],
+            "step": 3,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    refine updatedStatesInit Hlen1 ?_ ?_",
+              "confidence": 0.97,
+              "kept": [
+                "    refine updatedStatesInit Hlen1 ?_ ?_"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    exact InitStatesNotDefined Hinit",
+            "open_case": "update_none",
+            "prefix_lines": 8,
+            "proposals": [
+              "    exact InitStatesNotDefined Hinit",
+              "STOP"
+            ],
+            "step": 4,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    exact InitStatesNotDefined Hinit",
+              "confidence": 0.98,
+              "kept": [
+                "    exact InitStatesNotDefined Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    exact InitStatesNodup Hinit",
+            "open_case": "update_none",
+            "prefix_lines": 9,
+            "proposals": [
+              "    exact InitStatesNodup Hinit",
+              "STOP"
+            ],
+            "step": 5,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    exact InitStatesNodup Hinit",
+              "confidence": 0.97,
+              "kept": [
+                "    exact InitStatesNodup Hinit"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    simp [InitStatesUpdated Hinit]",
+            "open_case": "update_none",
+            "prefix_lines": 10,
+            "proposals": [
+              "    simp [InitStatesUpdated Hinit]",
+              "STOP"
+            ],
+            "step": 6,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    simp [InitStatesUpdated Hinit]",
+              "confidence": 0.97,
+              "kept": [
+                "    simp [InitStatesUpdated Hinit]"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_none",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": "    constructor",
+            "open_case": "update_none",
+            "prefix_lines": 11,
+            "proposals": [
+              "    constructor",
+              "STOP"
+            ],
+            "step": 7,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "    constructor",
+              "confidence": 0.91,
+              "kept": [
+                "    constructor"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [],
+            "missing_cases": [
+              "update_some"
+            ],
+            "next_original": null,
+            "open_case": "update_none",
+            "prefix_lines": 12,
+            "proposals": [
+              "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "STOP"
+            ],
+            "step": 8,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>",
+              "confidence": 0.82,
+              "kept": [
+                "  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [
+              "update_some"
+            ],
+            "missing_cases": [],
+            "next_original": "    refine \u27e8rfl, ?_, ?_\u27e9",
+            "open_case": "update_some",
+            "prefix_lines": 13,
+            "proposals": [
+              "refine \u27e8rfl, ?_, ?_\u27e9",
+              "STOP"
+            ],
+            "step": 9,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "refine \u27e8rfl, ?_, ?_\u27e9",
+              "confidence": 0.93,
+              "kept": [
+                "refine \u27e8rfl, ?_, ?_\u27e9"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [],
+            "missing_cases": [],
+            "next_original": "    . apply updatedStatesInit Hlen1",
+            "open_case": "update_some",
+            "prefix_lines": 14,
+            "proposals": [
+              ". apply updatedStatesInit Hlen1",
+              "STOP"
+            ],
+            "step": 10,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": ". apply updatedStatesInit Hlen1",
+              "confidence": 0.99,
+              "kept": [
+                ". apply updatedStatesInit Hlen1"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [],
+            "missing_cases": [],
+            "next_original": "      apply UpdateStateNotDefMonotone' ?_ Hup",
+            "open_case": "update_some",
+            "prefix_lines": 15,
+            "proposals": [
+              "      apply UpdateStateNotDefMonotone' ?_ Hup",
+              "STOP"
+            ],
+            "step": 11,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "      apply UpdateStateNotDefMonotone' ?_ Hup",
+              "confidence": 1.0,
+              "kept": [
+                "      apply UpdateStateNotDefMonotone' ?_ Hup"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [],
+            "missing_cases": [],
+            "next_original": "      apply UpdateStatesNotDefMonotone' ?_ Hups",
+            "open_case": "update_some",
+            "prefix_lines": 16,
+            "proposals": [
+              "      apply UpdateStatesNotDefMonotone' ?_ Hups",
+              "STOP"
+            ],
+            "step": 12,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "      apply UpdateStatesNotDefMonotone' ?_ Hups",
+              "confidence": 0.99,
+              "kept": [
+                "      apply UpdateStatesNotDefMonotone' ?_ Hups"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          },
+          {
+            "earliest_unfinished": "update_some",
+            "empty_arms": [],
+            "missing_cases": [],
+            "next_original": "      exact InitStatesNotDefined Hinit",
+            "open_case": "update_some",
+            "prefix_lines": 17,
+            "proposals": [
+              "STOP"
+            ],
+            "step": 13,
+            "temperature": 0.9,
+            "typesafe": {
+              "best": "STOP",
+              "confidence": 1.0,
+              "kept": [
+                "STOP"
+              ],
+              "reason": "routed",
+              "skipped": false
+            }
+          }
+        ],
+        "vocab_n": 43
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-constrained-beam-local/v1",
+  "wall_ms": 53693.25350399595
+}

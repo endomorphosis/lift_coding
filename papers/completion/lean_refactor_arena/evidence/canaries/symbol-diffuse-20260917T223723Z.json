@@ -1,0 +1,2354 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "r10_kernel_ih_defined_hups",
+    "theorem_ok": true,
+    "token_count": 191
+  },
+  "called_docker0": false,
+  "cfg": [
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.75,
+      "eligible_spans": {
+        "span_1": 191,
+        "span_2": 94,
+        "span_3": 63,
+        "span_4": 45,
+        "span_6": 31
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 0,
+      "schedule_probabilities": {
+        "span1": 0.52,
+        "span2": 0.13,
+        "span3": 0.07,
+        "span4": 0.08,
+        "span6": 0.2
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 869,
+        "output_tokens": 73
+      },
+      "wall_ms": 267.51230901572853
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.7,
+      "eligible_spans": {
+        "span_1": 189,
+        "span_2": 94,
+        "span_3": 63,
+        "span_4": 45,
+        "span_6": 31
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 1,
+      "schedule_probabilities": {
+        "span1": 0.49,
+        "span2": 0.14,
+        "span3": 0.07,
+        "span4": 0.09,
+        "span6": 0.21
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 869,
+        "output_tokens": 73
+      },
+      "wall_ms": 209.3135000031907
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.69,
+      "eligible_spans": {
+        "span_1": 177,
+        "span_2": 88,
+        "span_3": 59,
+        "span_4": 42,
+        "span_6": 29
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 2,
+      "schedule_probabilities": {
+        "span1": 0.35,
+        "span2": 0.14,
+        "span3": 0.1,
+        "span4": 0.14,
+        "span6": 0.27
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 878,
+        "output_tokens": 73
+      },
+      "wall_ms": 209.8092149826698
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.76,
+      "eligible_spans": {
+        "span_1": 176,
+        "span_2": 87,
+        "span_3": 58,
+        "span_4": 42,
+        "span_6": 28
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 3,
+      "schedule_probabilities": {
+        "span1": 0.42,
+        "span2": 0.14,
+        "span3": 0.09,
+        "span4": 0.12,
+        "span6": 0.23
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 878,
+        "output_tokens": 73
+      },
+      "wall_ms": 179.79318200377747
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.74,
+      "eligible_spans": {
+        "span_1": 174,
+        "span_2": 86,
+        "span_3": 58,
+        "span_4": 41,
+        "span_6": 28
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 4,
+      "schedule_probabilities": {
+        "span1": 0.45,
+        "span2": 0.14,
+        "span3": 0.08,
+        "span4": 0.13,
+        "span6": 0.2
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 878,
+        "output_tokens": 73
+      },
+      "wall_ms": 165.87927998625673
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.43,
+      "eligible_spans": {
+        "span_1": 173,
+        "span_2": 85,
+        "span_3": 57,
+        "span_4": 41,
+        "span_6": 27
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 5,
+      "schedule_probabilities": {
+        "span1": 0.48,
+        "span2": 0.13,
+        "span3": 0.07,
+        "span4": 0.12,
+        "span6": 0.2
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 877,
+        "output_tokens": 73
+      },
+      "wall_ms": 158.05953802191652
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.47,
+      "eligible_spans": {
+        "span_1": 173,
+        "span_2": 85,
+        "span_3": 57,
+        "span_4": 41,
+        "span_6": 27
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 6,
+      "schedule_probabilities": {
+        "span1": 0.43,
+        "span2": 0.18,
+        "span3": 0.1,
+        "span4": 0.12,
+        "span6": 0.17
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 883,
+        "output_tokens": 73
+      },
+      "wall_ms": 209.23220200347714
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.02,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.82,
+      "eligible_spans": {
+        "span_1": 169,
+        "span_2": 83,
+        "span_3": 55,
+        "span_4": 40,
+        "span_6": 26
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 7,
+      "schedule_probabilities": {
+        "span1": 0.48,
+        "span2": 0.15,
+        "span3": 0.08,
+        "span4": 0.1,
+        "span6": 0.19
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 883,
+        "output_tokens": 73
+      },
+      "wall_ms": 239.73676899913698
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.68,
+      "eligible_spans": {
+        "span_1": 167,
+        "span_2": 82,
+        "span_3": 55,
+        "span_4": 40,
+        "span_6": 26
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 8,
+      "schedule_probabilities": {
+        "span1": 0.45999999999999996,
+        "span2": 0.14,
+        "span3": 0.08,
+        "span4": 0.11,
+        "span6": 0.21
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 883,
+        "output_tokens": 73
+      },
+      "wall_ms": 185.3275350003969
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.78,
+      "eligible_spans": {
+        "span_1": 166,
+        "span_2": 82,
+        "span_3": 54,
+        "span_4": 40,
+        "span_6": 26
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 9,
+      "schedule_probabilities": {
+        "span1": 0.48,
+        "span2": 0.12,
+        "span3": 0.07,
+        "span4": 0.12,
+        "span6": 0.21
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 883,
+        "output_tokens": 73
+      },
+      "wall_ms": 150.4179329785984
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.73,
+      "eligible_spans": {
+        "span_1": 165,
+        "span_2": 82,
+        "span_3": 53,
+        "span_4": 40,
+        "span_6": 26
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 10,
+      "schedule_probabilities": {
+        "span1": 0.49,
+        "span2": 0.12,
+        "span3": 0.08,
+        "span4": 0.1,
+        "span6": 0.21
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 883,
+        "output_tokens": 73
+      },
+      "wall_ms": 276.2318050081376
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.04,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.85,
+      "eligible_spans": {
+        "span_1": 162,
+        "span_2": 80,
+        "span_3": 52,
+        "span_4": 39,
+        "span_6": 25
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 11,
+      "schedule_probabilities": {
+        "span1": 0.49,
+        "span2": 0.12,
+        "span3": 0.1,
+        "span4": 0.1,
+        "span6": 0.19
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 883,
+        "output_tokens": 73
+      },
+      "wall_ms": 168.5837990080472
+    }
+  ],
+  "few_shot": true,
+  "lake": [
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 969
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 214
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hdef",
+      "n_shots": 6,
+      "ok": true,
+      "round": 0,
+      "schedule_id": "kernel_anon_hdef",
+      "tokens": 222
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hk",
+      "n_shots": 6,
+      "ok": true,
+      "round": 0,
+      "schedule_id": "kernel_anon_hk",
+      "tokens": 222
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 0,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 222
+    },
+    {
+      "errors": [],
+      "kind": "kernel_dollar_nodup",
+      "n_shots": 6,
+      "ok": true,
+      "round": 0,
+      "schedule_id": "kernel_dollar_nodup",
+      "tokens": 221
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 0,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 222
+    },
+    {
+      "errors": [],
+      "kind": "kernel_none_simp_ctor",
+      "n_shots": 6,
+      "ok": true,
+      "round": 1,
+      "schedule_id": "kernel_none_simp_ctor",
+      "tokens": 209
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 969
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 1,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 212
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hdef",
+      "n_shots": 6,
+      "ok": true,
+      "round": 1,
+      "schedule_id": "kernel_anon_hdef",
+      "tokens": 220
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hk",
+      "n_shots": 6,
+      "ok": true,
+      "round": 1,
+      "schedule_id": "kernel_anon_hk",
+      "tokens": 220
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 1,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 220
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 1,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 220
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 2,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 200
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hdef",
+      "n_shots": 6,
+      "ok": true,
+      "round": 2,
+      "schedule_id": "kernel_anon_hdef",
+      "tokens": 208
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hk",
+      "n_shots": 6,
+      "ok": true,
+      "round": 2,
+      "schedule_id": "kernel_anon_hk",
+      "tokens": 208
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 2,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 208
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 2,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 208
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 972
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 2,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 208
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 3,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 199
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hk",
+      "n_shots": 6,
+      "ok": true,
+      "round": 3,
+      "schedule_id": "kernel_anon_hk",
+      "tokens": 207
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 3,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 207
+    },
+    {
+      "errors": [],
+      "kind": "kernel_simp_all_hdef",
+      "n_shots": 6,
+      "ok": true,
+      "round": 3,
+      "schedule_id": "kernel_simp_all_hdef",
+      "tokens": 206
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 3,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 207
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 972
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 3,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 207
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 4,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 197
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hk",
+      "n_shots": 6,
+      "ok": true,
+      "round": 4,
+      "schedule_id": "kernel_anon_hk",
+      "tokens": 205
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 4,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 205
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 4,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 205
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 972
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 4,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 205
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 4,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 197
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 5,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 196
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 5,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 204
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 5,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 204
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 972
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 5,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 204
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 5,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 196
+    },
+    {
+      "errors": [],
+      "kind": "kernel_case_none_dot",
+      "n_shots": 6,
+      "ok": true,
+      "round": 5,
+      "schedule_id": "kernel_case_none_dot",
+      "tokens": 202
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 6,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 193
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 6,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 201
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 6,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 201
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 972
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 6,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 201
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 6,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 193
+    },
+    {
+      "errors": [],
+      "kind": "kernel_unzip_simp_all",
+      "n_shots": 6,
+      "ok": true,
+      "round": 6,
+      "schedule_id": "kernel_unzip_simp_all",
+      "tokens": 198
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 7,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 189
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 7,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 197
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 7,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 197
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 972
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 7,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 197
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 7,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 189
+    },
+    {
+      "errors": [],
+      "kind": "kernel_split_all_goals",
+      "n_shots": 6,
+      "ok": true,
+      "round": 7,
+      "schedule_id": "kernel_split_all_goals",
+      "tokens": 196
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `Hnd`",
+          "pos": {
+            "column": 69,
+            "line": 967
+          }
+        }
+      ],
+      "kind": "kernel_lift_hnd",
+      "n_shots": 6,
+      "ok": false,
+      "round": 8,
+      "schedule_id": "kernel_lift_hnd",
+      "tokens": 187
+    },
+    {
+      "errors": [],
+      "kind": "kernel_anon_hnd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 8,
+      "schedule_id": "kernel_anon_hnd",
+      "tokens": 195
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 8,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 195
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 973
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 8,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 195
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 8,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 187
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3''",
+          "pos": {
+            "column": 17,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_3_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 8,
+      "schedule_id": null,
+      "tokens": 195
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 9,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 186
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_dollar_snd",
+      "n_shots": 6,
+      "ok": true,
+      "round": 9,
+      "schedule_id": "kernel_ih_dollar_snd",
+      "tokens": 194
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 973
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 9,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 194
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3''",
+          "pos": {
+            "column": 17,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_3_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 9,
+      "schedule_id": null,
+      "tokens": 194
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3'",
+          "pos": {
+            "column": 21,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_4_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 9,
+      "schedule_id": null,
+      "tokens": 194
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  UpdateStates.update_some\nhas type\n  UpdateState P ?m.112 ?m.113 ?m.114 (updatedStates \u03c3\u2080 ks' vs') \u2192\n    UpdateStates (updatedStates \u03c3\u2080 ks' vs') ?m.116 ?m.117 ?m.118 \u2192\n      UpdateStates ?m.112 (?m.113 :: ?m.116) (?m.114 :: ?m.117) ?m.118\nbut is expected to have type\n  UpdateStates (updatedStates \u03c3 ks' vs') (x :: xs) (v :: vs) \u03c3''",
+          "pos": {
+            "column": 6,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "SYM_1_phrase_refine .update_some",
+      "n_shots": null,
+      "ok": false,
+      "round": 9,
+      "schedule_id": null,
+      "tokens": 194
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 10,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 185
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit\n        (of_eq_true\n          (Eq.trans\n            (forall_congr fun v =>\n              Eq.trans\n                (implies_congr_ctx (Eq.refl (v \u2208 xs)) fun a =>\n                  Eq.trans\n                    (congrArg (fun x => x = true)\n                      ((fun a a_1 =>\n                          (id\n                                (Eq.mp\n                              ",
+          "pos": {
+            "column": 8,
+            "line": 973
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 10,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 193
+    },
+    {
+      "errors": [],
+      "kind": "kernel_ih_defined_hups",
+      "n_shots": 6,
+      "ok": true,
+      "round": 10,
+      "schedule_id": "kernel_ih_defined_hups",
+      "tokens": 191
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3''",
+          "pos": {
+            "column": 17,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_4_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 10,
+      "schedule_id": null,
+      "tokens": 193
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3'",
+          "pos": {
+            "column": 21,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_5_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 10,
+      "schedule_id": null,
+      "tokens": 193
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  UpdateStates.update_some\nhas type\n  UpdateState P ?m.112 ?m.113 ?m.114 (updatedStates \u03c3\u2080 ks' vs') \u2192\n    UpdateStates (updatedStates \u03c3\u2080 ks' vs') ?m.116 ?m.117 ?m.118 \u2192\n      UpdateStates ?m.112 (?m.113 :: ?m.116) (?m.114 :: ?m.117) ?m.118\nbut is expected to have type\n  UpdateStates (updatedStates \u03c3 ks' vs') (x :: xs) (v :: vs) \u03c3''",
+          "pos": {
+            "column": 6,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "SYM_1_phrase_refine .update_some",
+      "n_shots": null,
+      "ok": false,
+      "round": 10,
+      "schedule_id": null,
+      "tokens": 193
+    },
+    {
+      "errors": [
+        {
+          "data": "Unknown identifier `\u03c3\u2080`",
+          "pos": {
+            "column": 56,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "kernel_case_drop_unused",
+      "n_shots": 6,
+      "ok": false,
+      "round": 11,
+      "schedule_id": "kernel_case_drop_unused",
+      "tokens": 182
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  (ih Hinit (UpdateStatesDefined Hups)\n        (of_eq_true\n          (Eq.trans (congrArg (fun x => x = vs.length) (id (Eq.mp Nat.add_right_cancel_iff._simp_1 Hlen2)))\n            (eq_self vs.length)))).right.right\nhas type\n  UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\nbut is expected to have type\n  UpdateStates (updatedStates (updatedState \u03c3 x v) ks' vs') xs vs \u03c3''",
+          "pos": {
+            "column": 8,
+            "line": 973
+          }
+        }
+      ],
+      "kind": "kernel_sigma_hole",
+      "n_shots": 6,
+      "ok": false,
+      "round": 11,
+      "schedule_id": "kernel_sigma_hole",
+      "tokens": 190
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3''",
+          "pos": {
+            "column": 17,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_3_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 11,
+      "schedule_id": null,
+      "tokens": 190
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  InitStates \u03c3\u2081 ks' vs' \u03c3'",
+          "pos": {
+            "column": 21,
+            "line": 950
+          }
+        }
+      ],
+      "kind": "SYM_4_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 11,
+      "schedule_id": null,
+      "tokens": 190
+    },
+    {
+      "errors": [
+        {
+          "data": "Type mismatch\n  UpdateStates.update_some\nhas type\n  UpdateState P ?m.112 ?m.113 ?m.114 (updatedStates \u03c3\u2080 ks' vs') \u2192\n    UpdateStates (updatedStates \u03c3\u2080 ks' vs') ?m.116 ?m.117 ?m.118 \u2192\n      UpdateStates ?m.112 (?m.113 :: ?m.116) (?m.114 :: ?m.117) ?m.118\nbut is expected to have type\n  UpdateStates (updatedStates \u03c3 ks' vs') (x :: xs) (v :: vs) \u03c3''",
+          "pos": {
+            "column": 6,
+            "line": 956
+          }
+        }
+      ],
+      "kind": "SYM_1_phrase_refine .update_some",
+      "n_shots": null,
+      "ok": false,
+      "round": 11,
+      "schedule_id": null,
+      "tokens": 190
+    },
+    {
+      "errors": [
+        {
+          "data": "Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedState (updatedStates' ?m.123 ?m.126) ?m.124 ?m.125\nin the target expression\n  UpdateState P (updatedStates' \u03c3 (ks'.zip vs')) x v (updatedStates' (updatedState \u03c3 x v) (ks'.zip vs'))\n\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : Seman",
+          "pos": {
+            "column": 13,
+            "line": 958
+          }
+        }
+      ],
+      "kind": "SYM_5_operator_drop",
+      "n_shots": null,
+      "ok": false,
+      "round": 11,
+      "schedule_id": null,
+      "tokens": 190
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 24,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 869,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.6e-05
+      },
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1018,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 220,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 3636,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 230,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000153
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 869,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.6e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 1017,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 14,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 3616,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 223,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000152
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 878,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 986,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 26,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 3600,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 226,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000151
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 878,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 982,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 26,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 3667,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 230,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000154
+      },
+      {
+        "call_index": 9,
+        "fixture": false,
+        "input_tokens": 878,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 980,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 232,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 10,
+        "fixture": false,
+        "input_tokens": 3609,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 224,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000152
+      },
+      {
+        "call_index": 11,
+        "fixture": false,
+        "input_tokens": 877,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 978,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 39,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 12,
+        "fixture": false,
+        "input_tokens": 3530,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 247,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000148
+      },
+      {
+        "call_index": 13,
+        "fixture": false,
+        "input_tokens": 883,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 975,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 31,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 14,
+        "fixture": false,
+        "input_tokens": 3639,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 231,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000153
+      },
+      {
+        "call_index": 15,
+        "fixture": false,
+        "input_tokens": 883,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 969,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 226,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 16,
+        "fixture": false,
+        "input_tokens": 3613,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 233,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000152
+      },
+      {
+        "call_index": 17,
+        "fixture": false,
+        "input_tokens": 883,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 9,
+        "fixture": false,
+        "input_tokens": 972,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 26,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 18,
+        "fixture": false,
+        "input_tokens": 3581,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 232,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.00015
+      },
+      {
+        "call_index": 19,
+        "fixture": false,
+        "input_tokens": 883,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 10,
+        "fixture": false,
+        "input_tokens": 970,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 203,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 20,
+        "fixture": false,
+        "input_tokens": 3578,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 237,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.00015
+      },
+      {
+        "call_index": 21,
+        "fixture": false,
+        "input_tokens": 883,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 11,
+        "fixture": false,
+        "input_tokens": 970,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 31,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 22,
+        "fixture": false,
+        "input_tokens": 3585,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 236,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000151
+      },
+      {
+        "call_index": 23,
+        "fixture": false,
+        "input_tokens": 883,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 12,
+        "fixture": false,
+        "input_tokens": 968,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 37,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 24,
+        "fixture": false,
+        "input_tokens": 3571,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 238,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.00015
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 40,
+    "max_mistral_calls": 14,
+    "mistral_calls": 12,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.997742,
+    "skipped": false,
+    "spent_usd": 0.002258,
+    "track": "track1_closed"
+  },
+  "llm": "on",
+  "n_closed": 18,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:37:23.446859+00:00",
+  "official_track2": false,
+  "one_hole": true,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "kernel_case_drop_unused",
+    "cfg_schedule": {
+      "cfg_scale": 1.0,
+      "id": "cfg1",
+      "n_masks": 3,
+      "n_shots": 2,
+      "span": 2
+    },
+    "cfg_score": 0.91,
+    "confidence": 0.56,
+    "jev_generated_lean": false,
+    "prefer_few_shot_noul": null,
+    "probabilities": {
+      "SYM_0_phrase_intro": 0.03,
+      "SYM_1_phrase_refine .update_some": 0.13,
+      "SYM_3_operator__": 0.0,
+      "SYM_4_operator__": 0.0,
+      "SYM_5_operator_drop": 0.0,
+      "SYM_6_operator_drop": 0.0,
+      "kernel_case_drop_unused": 0.6,
+      "kernel_sigma_hole": 0.22,
+      "sweep_span1_p0_closed": 0.01,
+      "sweep_span1_p1_closed": 0.0,
+      "sweep_span2_p0_closed": 0.0,
+      "sweep_span2_p1_closed": 0.0,
+      "sweep_span3_p0_closed": 0.0,
+      "sweep_span3_p1_closed": 0.0,
+      "sweep_span4_p0_closed": 0.01,
+      "sweep_span4_p1_closed": 0.0
+    },
+    "round": 11,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 3571,
+      "output_tokens": 238
+    },
+    "wall_ms": 161.44054901087657
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.76,
+      "confidence": 0.71,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.01,
+        "SYM_2_phrase_\n          all_goals sim": 0.01,
+        "SYM_3_phrase_\n          all_goals sim": 0.01,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "kernel_anon_hdef": 0.0,
+        "kernel_anon_hk": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.03,
+        "kernel_case_none_dot": 0.14,
+        "kernel_dollar_nodup": 0.03,
+        "kernel_ih_dollar_snd": 0.0,
+        "kernel_lift_hnd": 0.73,
+        "kernel_sigma_hole": 0.0,
+        "kernel_unzip_simp_all": 0.04
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3636,
+        "output_tokens": 230
+      },
+      "wall_ms": 311.03395399986766
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_none_simp_ctor",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.74,
+      "confidence": 0.85,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.0,
+        "SYM_2_phrase_\n          all_goals sim": 0.01,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "SYM_8_operator_drop": 0.0,
+        "kernel_anon_hdef": 0.0,
+        "kernel_anon_hk": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.0,
+        "kernel_case_none_dot": 0.01,
+        "kernel_ih_dollar_snd": 0.01,
+        "kernel_lift_hnd": 0.09,
+        "kernel_none_simp_ctor": 0.87,
+        "kernel_sigma_hole": 0.0,
+        "kernel_unzip_simp_all": 0.01
+      },
+      "round": 1,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3616,
+        "output_tokens": 223
+      },
+      "wall_ms": 204.65169599629007
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.78,
+      "confidence": 0.73,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.02,
+        "SYM_2_phrase_\n          all_goals sim": 0.05,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "SYM_8_operator_drop": 0.0,
+        "kernel_anon_hdef": 0.0,
+        "kernel_anon_hk": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.02,
+        "kernel_case_none_dot": 0.03,
+        "kernel_ih_dollar_snd": 0.01,
+        "kernel_lift_hnd": 0.75,
+        "kernel_sigma_hole": 0.0,
+        "kernel_unzip_simp_all": 0.12,
+        "sweep_span1_p0_closed": 0.0
+      },
+      "round": 2,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3600,
+        "output_tokens": 226
+      },
+      "wall_ms": 192.2587130102329
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.73,
+      "confidence": 0.86,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.04,
+        "SYM_2_phrase_split at this\n          ": 0.0,
+        "SYM_5_phrase_simp_all [isDefined, Opt": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator_drop": 0.0,
+        "kernel_anon_hk": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.0,
+        "kernel_case_none_dot": 0.03,
+        "kernel_ih_dollar_snd": 0.01,
+        "kernel_lift_hnd": 0.88,
+        "kernel_sigma_hole": 0.0,
+        "kernel_simp_all_hdef": 0.0,
+        "kernel_split_all_goals": 0.01,
+        "kernel_unzip_simp_all": 0.03
+      },
+      "round": 3,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3667,
+        "output_tokens": 230
+      },
+      "wall_ms": 178.38047601981089
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.7,
+      "confidence": 0.92,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.0,
+        "SYM_2_phrase_split at this\n          ": 0.0,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "SYM_8_operator_drop": 0.0,
+        "kernel_anon_hk": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.01,
+        "kernel_case_none_dot": 0.01,
+        "kernel_ih_dollar_snd": 0.0,
+        "kernel_lift_hnd": 0.9400000000000001,
+        "kernel_sigma_hole": 0.0,
+        "kernel_split_all_goals": 0.0,
+        "kernel_unzip_simp_all": 0.03,
+        "sweep_span1_p0_closed": 0.0
+      },
+      "round": 4,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3609,
+        "output_tokens": 224
+      },
+      "wall_ms": 192.00409500626847
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.77,
+      "confidence": 0.8,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": 0.42,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.02,
+        "SYM_2_phrase_split at this\n          ": 0.0,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "SYM_8_operator_drop": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.01,
+        "kernel_case_none_dot": 0.03,
+        "kernel_ih_dollar_snd": 0.01,
+        "kernel_lift_hnd": 0.8200000000000001,
+        "kernel_sigma_hole": 0.0,
+        "kernel_split_all_goals": 0.01,
+        "kernel_unzip_simp_all": 0.04,
+        "leanstral_span1_unparsed": 0.05,
+        "sweep_span1_p0_closed": 0.0
+      },
+      "round": 5,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3530,
+        "output_tokens": 247
+      },
+      "wall_ms": 150.30788400326855
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.91,
+      "confidence": 0.86,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.01,
+        "SYM_2_phrase_split at this\n          ": 0.01,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "SYM_8_operator_drop": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.04,
+        "kernel_ih_dollar_snd": 0.01,
+        "kernel_lift_hnd": 0.88,
+        "kernel_sigma_hole": 0.0,
+        "kernel_split_all_goals": 0.01,
+        "kernel_unzip_simp_all": 0.04,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0
+      },
+      "round": 6,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3639,
+        "output_tokens": 231
+      },
+      "wall_ms": 180.95896000158973
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.98,
+      "confidence": 0.85,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_refine .update_some": 0.03,
+        "SYM_2_phrase_split at this\n          ": 0.01,
+        "SYM_4_operator__": 0.0,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator_drop": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.04,
+        "kernel_ih_dollar_snd": 0.01,
+        "kernel_lift_hnd": 0.87,
+        "kernel_sigma_hole": 0.0,
+        "kernel_split_all_goals": 0.04,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0
+      },
+      "round": 7,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3613,
+        "output_tokens": 233
+      },
+      "wall_ms": 160.52045501419343
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_lift_hnd",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.93,
+      "confidence": 0.87,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_0_phrase_intro": 0.01,
+        "SYM_1_phrase_refine .update_some": 0.04,
+        "SYM_3_operator__": 0.0,
+        "SYM_4_operator__": 0.0,
+        "SYM_5_operator_drop": 0.0,
+        "SYM_6_operator_drop": 0.0,
+        "kernel_anon_hnd": 0.0,
+        "kernel_case_drop_unused": 0.03,
+        "kernel_ih_dollar_snd": 0.03,
+        "kernel_lift_hnd": 0.89,
+        "kernel_sigma_hole": 0.0,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0
+      },
+      "round": 8,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3581,
+        "output_tokens": 232
+      },
+      "wall_ms": 170.65520799951628
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_case_drop_unused",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.94,
+      "confidence": 0.65,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_0_phrase_intro": 0.08,
+        "SYM_1_phrase_refine .update_some": 0.09,
+        "SYM_3_operator__": 0.0,
+        "SYM_4_operator__": 0.0,
+        "SYM_5_operator_drop": 0.0,
+        "SYM_6_operator_drop": 0.0,
+        "kernel_case_drop_unused": 0.68,
+        "kernel_ih_dollar_snd": 0.13,
+        "kernel_sigma_hole": 0.01,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.0
+      },
+      "round": 9,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3578,
+        "output_tokens": 237
+      },
+      "wall_ms": 458.4924959926866
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_case_drop_unused",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 1.03,
+      "confidence": 0.42,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_0_phrase_intro": 0.03,
+        "SYM_1_phrase_refine .update_some": 0.13,
+        "SYM_4_operator__": 0.0,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator_drop": 0.0,
+        "SYM_7_operator_drop": 0.0,
+        "kernel_case_drop_unused": 0.46,
+        "kernel_ih_defined_hups": 0.31,
+        "kernel_sigma_hole": 0.07,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.0
+      },
+      "round": 10,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3585,
+        "output_tokens": 236
+      },
+      "wall_ms": 261.7734009982087
+    },
+    {
+      "arena_score": null,
+      "best_fill": "kernel_case_drop_unused",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.91,
+      "confidence": 0.56,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_0_phrase_intro": 0.03,
+        "SYM_1_phrase_refine .update_some": 0.13,
+        "SYM_3_operator__": 0.0,
+        "SYM_4_operator__": 0.0,
+        "SYM_5_operator_drop": 0.0,
+        "SYM_6_operator_drop": 0.0,
+        "kernel_case_drop_unused": 0.6,
+        "kernel_sigma_hole": 0.22,
+        "sweep_span1_p0_closed": 0.01,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.01,
+        "sweep_span4_p1_closed": 0.0
+      },
+      "round": 11,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3571,
+        "output_tokens": 238
+      },
+      "wall_ms": 161.44054901087657
+    },
+    {
+      "round": 11,
+      "stopped": "no_shorter_lake_ok"
+    }
+  ],
+  "rounds": 12,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 223,
+  "sweep": true,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

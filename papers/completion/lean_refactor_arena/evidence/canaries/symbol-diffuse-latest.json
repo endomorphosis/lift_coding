@@ -1,0 +1,362 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 139
+  },
+  "called_docker0": false,
+  "cfg": [
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.65,
+      "eligible_spans": {
+        "span_1": 127,
+        "span_2": 63,
+        "span_3": 41,
+        "span_4": 31,
+        "span_6": 20
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 0,
+      "schedule_probabilities": {
+        "span1": 0.39,
+        "span2": 0.15,
+        "span3": 0.1,
+        "span4": 0.16,
+        "span6": 0.2
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 874,
+        "output_tokens": 73
+      },
+      "wall_ms": 179.3148519936949
+    }
+  ],
+  "few_shot": false,
+  "lake": [
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  rfl\nhas type\n  ?m.214 = ?m.214\nbut is expected to have type\n  \u03c3\u271d x\u271d\u00b9 = some ?m.210\nin the application\n  InitStatesSomeMonotone rfl",
+          "pos": {
+            "column": 60,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "sweep_span6_p0_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "span6_p0",
+      "tokens": 137
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  InitStatesNodup\nhas type\n  InitStates ?m.99 ?m.100 ?m.101 ?m.102 \u2192 List.Nodup ?m.100\nbut is expected to have type\n  ks'.Nodup\nin the application\n  updatedStatesInit Hlen1 (UpdateStateNotDefMonotone' (UpdateStatesNotDefMonotone' this Hups) Hup) InitStatesNodup",
+          "pos": {
+            "column": 7,
+            "line": 954
+          }
+        }
+      ],
+      "kind": "SYM_3_operator_drop",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d : SemanticStore P\nx\u271d : P.Ident\nv\u271d : P.Expr\n\u03c3'\u271d : SemanticStore P\nxs\u271d : List P.Ident\nvs\u271d : List P.Expr\n\u03c3''\u271d : SemanticStore P\nHup : UpdateState P \u03c3\u271d x\u271d v\u271d \u03c3'\u271d\nHups : UpdateStates \u03c3'\u271d xs\u271d vs\u271d \u03c3''\u271d\nih :\n  InitStates \u03c3''\u271d ks' vs' \u03c3'' \u2192\n",
+          "pos": {
+            "column": 26,
+            "line": 959
+          }
+        }
+      ],
+      "kind": "SYM_1_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  UpdateStatesLength\nhas type\n  UpdateStates ?m.129 ?m.131 ?m.132 ?m.130 \u2192 List.length ?m.131 = List.length ?m.132\nbut is expected to have type\n  xs\u271d.length = vs\u271d.length\nin the application\n  ih Hinit (UpdateStatesDefined Hups) UpdateStatesLength",
+          "pos": {
+            "column": 67,
+            "line": 959
+          }
+        }
+      ],
+      "kind": "SYM_4_operator_drop",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedState (updatedStates' ?m.138 ?m.141) ?m.139 ?m.140\nin the target expression\n  UpdateState P (updatedStates' \u03c3\u271d (ks'.zip vs')) x\u271d v\u271d (updatedStates' (updatedState \u03c3\u271d x\u271d v\u271d) (ks'.zip vs'))\n\ncase update_some.right.right\nP : PureExpr\n\u03c3 \u03c3' \u03c3'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'",
+          "pos": {
+            "column": 13,
+            "line": 961
+          }
+        }
+      ],
+      "kind": "SYM_2_operator_drop",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  InitStatesSomeMonotone\nhas type\n  ?m.207 ?m.209 = some ?m.210 \u2192 InitStates ?m.207 ?m.211 ?m.212 ?m.208 \u2192 ?m.208 ?m.209 = some ?m.210\nbut is expected to have type\n  ?m.202 ?m.203 = some ?m.205\nin the application\n  updatedStateUpdate InitStatesSomeMonotone",
+          "pos": {
+            "column": 36,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "SYM_5_operator_drop",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  this\nhas type\n  isNotDefined \u03c3''\u271d ks'\nbut is expected to have type\n  ?m.207 x\u271d\u00b9 = some ?m.210\nin the application\n  InitStatesSomeMonotone this",
+          "pos": {
+            "column": 60,
+            "line": 966
+          }
+        }
+      ],
+      "kind": "SYM_0_operator_this",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 137
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  InitStatesNodup\nhas type\n  InitStates ?m.99 ?m.100 ?m.101 ?m.102 \u2192 List.Nodup ?m.100\nbut is expected to have type\n  ks'.Nodup\nin the application\n  updatedStatesInit Hlen1 (UpdateStateNotDefMonotone' (UpdateStatesNotDefMonotone' this Hups) Hup) InitStatesNodup",
+          "pos": {
+            "column": 7,
+            "line": 954
+          }
+        }
+      ],
+      "kind": "sweep_span1_p0_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "span1_p0",
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  UpdateStatesLength\nhas type\n  UpdateStates ?m.129 ?m.131 ?m.132 ?m.130 \u2192 List.length ?m.131 = List.length ?m.132\nbut is expected to have type\n  xs\u271d.length = vs\u271d.length\nin the application\n  ih Hinit (UpdateStatesDefined Hups) UpdateStatesLength",
+          "pos": {
+            "column": 67,
+            "line": 959
+          }
+        }
+      ],
+      "kind": "sweep_span1_p1_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "span1_p1",
+      "tokens": 138
+    },
+    {
+      "errors": [
+        {
+          "data": "Application type mismatch: The argument\n  InitStatesNodup\nhas type\n  InitStates ?m.99 ?m.100 ?m.101 ?m.102 \u2192 List.Nodup ?m.100\nbut is expected to have type\n  ks'.Nodup\nin the application\n  updatedStatesInit Hlen1 (UpdateStateNotDefMonotone' (UpdateStatesNotDefMonotone' this Hups) Hup) InitStatesNodup",
+          "pos": {
+            "column": 79,
+            "line": 953
+          }
+        }
+      ],
+      "kind": "sweep_span2_p0_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 0,
+      "schedule_id": "span2_p0",
+      "tokens": 138
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 2,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 874,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 3574,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 246,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.00015
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 12,
+    "max_mistral_calls": 6,
+    "mistral_calls": 0,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999813,
+    "skipped": false,
+    "spent_usd": 0.000187,
+    "track": "track1_closed"
+  },
+  "llm": "off",
+  "n_closed": 16,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:43:14.488087+00:00",
+  "official_track2": false,
+  "one_hole": true,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "sweep_span6_p0_closed",
+    "cfg_schedule": {
+      "cfg_scale": 1.0,
+      "id": "cfg1",
+      "n_masks": 3,
+      "n_shots": 2,
+      "span": 2
+    },
+    "cfg_score": 0.85,
+    "confidence": 0.49,
+    "jev_generated_lean": false,
+    "prefer_few_shot_noul": null,
+    "probabilities": {
+      "SYM_0_operator_this": 0.44,
+      "SYM_1_operator__": 0.0,
+      "SYM_2_operator_drop": 0.0,
+      "SYM_3_operator_drop": 0.0,
+      "SYM_4_operator_drop": 0.0,
+      "SYM_5_operator_drop": 0.0,
+      "sweep_span1_p0_closed": 0.0,
+      "sweep_span1_p1_closed": 0.0,
+      "sweep_span2_p0_closed": 0.0,
+      "sweep_span2_p1_closed": 0.0,
+      "sweep_span3_p0_closed": 0.0,
+      "sweep_span3_p1_closed": 0.01,
+      "sweep_span4_p0_closed": 0.0,
+      "sweep_span4_p1_closed": 0.02,
+      "sweep_span6_p0_closed": 0.53,
+      "sweep_span6_p1_closed": 0.0
+    },
+    "round": 0,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 3574,
+      "output_tokens": 246
+    },
+    "wall_ms": 190.86881401017308
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "sweep_span6_p0_closed",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.85,
+      "confidence": 0.49,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_0_operator_this": 0.44,
+        "SYM_1_operator__": 0.0,
+        "SYM_2_operator_drop": 0.0,
+        "SYM_3_operator_drop": 0.0,
+        "SYM_4_operator_drop": 0.0,
+        "SYM_5_operator_drop": 0.0,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span1_p1_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0,
+        "sweep_span3_p1_closed": 0.01,
+        "sweep_span4_p0_closed": 0.0,
+        "sweep_span4_p1_closed": 0.02,
+        "sweep_span6_p0_closed": 0.53,
+        "sweep_span6_p1_closed": 0.0
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3574,
+        "output_tokens": 246
+      },
+      "wall_ms": 190.86881401017308
+    },
+    {
+      "round": 0,
+      "stopped": "no_shorter_lake_ok"
+    }
+  ],
+  "rounds": 1,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 139,
+  "sweep": true,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

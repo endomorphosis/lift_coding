@@ -1,0 +1,109 @@
+{
+  "jev": {
+    "choice": "MCA_3",
+    "confidence": 0.58,
+    "probabilities": {
+      "MCA_4": 0.01,
+      "MCA_3": 0.63,
+      "MCA_5": 0.01,
+      "split_exact": 0.0,
+      "erw_comm": 0.09,
+      "keep": 0.0,
+      "simp_unzip_bare": 0.04,
+      "MCA_2": 0.01,
+      "MCA_1": 0.01,
+      "none_by_simp": 0.02,
+      "fold_rw_simp": 0.17,
+      "MCA_0": 0.01
+    },
+    "usage": {
+      "input_tokens": 851,
+      "output_tokens": 135
+    }
+  },
+  "rows": [
+    {
+      "kind": "drop_rename_i",
+      "ok": false,
+      "tokens": 164,
+      "count": 164,
+      "err": "Unknown identifier `Hups`"
+    },
+    {
+      "kind": "fold_rw_simp",
+      "ok": false,
+      "tokens": 166,
+      "count": 166,
+      "err": "Type mismatch   updatedStateUpdate (InitStatesSomeMonotone heq\u271d Hst) has type   UpdateState P (updatedStates \u03c3\u271d ks' vs') x\u271d\u00b9 ?m.204 (updatedState (updatedStates \u03c3\u271d ks' vs') x\u271d\u00b9 ?m."
+    },
+    {
+      "kind": "erw_comm",
+      "ok": false,
+      "tokens": 167,
+      "count": 167,
+      "err": "Tactic `rewrite` failed: Did not find an occurrence of the pattern   updatedState (updatedStates' ?m.145 ?m.148) ?m.146 ?m.147 in the target expression   UpdateState P (updatedStat"
+    },
+    {
+      "kind": "simp_comm",
+      "ok": false,
+      "tokens": 168,
+      "count": 168,
+      "err": "`simp` made no progress"
+    },
+    {
+      "kind": "none_by_simp",
+      "ok": false,
+      "tokens": 168,
+      "count": 168,
+      "err": "simp_all made no progress"
+    },
+    {
+      "kind": "split_exact",
+      "ok": false,
+      "tokens": 167,
+      "count": 167,
+      "err": "Tactic `assumption` failed  P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : SemanticStore P x\u271d\u00b9 : P.Ident v\u271d"
+    },
+    {
+      "kind": "simp_unzip_bare",
+      "ok": false,
+      "tokens": 166,
+      "count": 166,
+      "err": "Unknown identifier `unzip_zip`"
+    },
+    {
+      "kind": "ih_no_parens_defined",
+      "ok": false,
+      "tokens": 166,
+      "count": 166,
+      "err": "unexpected token 'by'; expected ')', ',' or ':'"
+    },
+    {
+      "kind": "none_simpa",
+      "ok": true,
+      "tokens": 171,
+      "count": 171,
+      "err": ""
+    },
+    {
+      "kind": "cases_this",
+      "ok": false,
+      "tokens": 167,
+      "count": 167,
+      "err": "Dependent elimination failed: Failed to solve equation   true =     match \u03c3\u271d x\u271d with     | some val => true     | none => false"
+    },
+    {
+      "kind": "split_at_star",
+      "ok": false,
+      "tokens": 168,
+      "count": 168,
+      "err": "Tactic `assumption` failed  P : PureExpr \u03c3 \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3\u271d : SemanticStore P x\u271d\u00b9 : P.Ident v\u271d"
+    }
+  ],
+  "best": {
+    "kind": "init",
+    "token_count": 168,
+    "ok": true
+  },
+  "from": 168
+}

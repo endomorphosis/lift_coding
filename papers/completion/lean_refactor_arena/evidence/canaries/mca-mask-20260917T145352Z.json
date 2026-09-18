@@ -1,0 +1,304 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "grok_few_shot": true,
+  "observed_at": "2026-09-17T14:53:52.065118+00:00",
+  "pr": "PR-9d",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": false,
+      "called_docker0": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "generator": "pca_skeleton",
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "n_holes": 0,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2185.5901920062024
+        },
+        {
+          "errors": [
+            {
+              "data": "Unknown identifier `Hlen1`",
+              "pos": {
+                "column": 29,
+                "line": 947
+              }
+            },
+            {
+              "data": "Unknown identifier `Hlen1`",
+              "pos": {
+                "column": 30,
+                "line": 954
+              }
+            },
+            {
+              "data": "simp_all made no progress",
+              "pos": {
+                "column": 12,
+                "line": 969
+              }
+            },
+            {
+              "data": "Unknown identifier `Hnd`",
+              "pos": {
+                "column": 21,
+                "line": 979
+              }
+            },
+            {
+              "data": "'specialize' requires a term of the form `h x_1 .. x_n` where `h` appears in the local context",
+              "pos": {
+                "column": 10,
+                "line": 979
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 981
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "deterministic",
+          "kind": "mca_template_fill",
+          "module_exit_0": false,
+          "n_chars": 1517,
+          "n_holes": 4,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitState",
+          "theorem_ok": false,
+          "token_count": 237,
+          "wall_ms": 2292.327816976467
+        },
+        {
+          "errors": [
+            {
+              "data": "simp_all made no progress",
+              "pos": {
+                "column": 10,
+                "line": 980
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 981
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 8,
+                "line": 982
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "grok-4.6",
+          "kind": "grok_few_shot",
+          "module_exit_0": false,
+          "n_chars": 1603,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStat",
+          "theorem_ok": false,
+          "token_count": 249,
+          "wall_ms": 2386.9368429877795
+        },
+        {
+          "errors": [
+            {
+              "data": "Type mismatch\n  InitStatesNotDefined Hinit\nhas type\n  isNotDefined \u03c3\u2081 ks'\nbut is expected to have type\n  \u00acx \u2208 (ks'.zip vs').unzip.fst",
+              "pos": {
+                "column": 10,
+                "line": 976
+              }
+            },
+            {
+              "data": "Invalid projection: Projections cannot be used on functions\n  ih\nhas type\n  InitStates \u03c3\u2081 ks' vs' ?m.255 \u2192\n    isDefined \u03c3\u2081 xs \u2192\n      xs.length = vs.length \u2192\n        updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n          InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs ?m.255",
+              "pos": {
+                "column": 14,
+                "line": 977
+              }
+            }
+          ],
+          "exit_code": 1,
+          "generator": "grok-4.6",
+          "kind": "grok_few_shot_repair",
+          "module_exit_0": false,
+          "n_chars": 1429,
+          "n_holes": 0,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": false,
+          "token_count": 216,
+          "wall_ms": 2220.7578500092495
+        }
+      ],
+      "grok_chat_ignored": true,
+      "grok_few_shot": true,
+      "grok_file_calls": [
+        {
+          "arena_score": null,
+          "call": "draft",
+          "called_docker0": false,
+          "chat_head": "I'll write a minimized tactic block: keep induction and every case, drop unused pre-induction `have`s.Wrote tactics.lean.",
+          "chat_ignored": true,
+          "identity": {
+            "arena_score": null,
+            "fallback_used": false,
+            "requested_model": "grok-4.6",
+            "requested_provider": "grok",
+            "resolved_model": "grok-4.6",
+            "resolved_provider": "grok_cli"
+          },
+          "n_chars": 1602,
+          "tactics_head": "intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStates",
+          "tactics_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file/ws-mmhcjm98/tactics.lean",
+          "used_file": true,
+          "workspace": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file/ws-mmhcjm98"
+        },
+        {
+          "arena_score": null,
+          "call": "repair",
+          "called_docker0": false,
+          "chat_head": "Writing a complete tactic block from the reference, finishing the truncated `update_some` arm and applying `ih` as a conjunction rather than a function.Wrote tactics.lean.",
+          "chat_ignored": true,
+          "identity": {
+            "arena_score": null,
+            "fallback_used": false,
+            "requested_model": "grok-4.6",
+            "requested_provider": "grok",
+            "resolved_model": "grok-4.6",
+            "resolved_provider": "grok_cli"
+          },
+          "n_chars": 1428,
+          "tactics_head": "intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =",
+          "tactics_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file/ws-mmhcjm98/tactics.lean",
+          "used_file": true,
+          "workspace": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file/ws-mmhcjm98"
+        }
+      ],
+      "grok_identity": {
+        "arena_score": null,
+        "fallback_used": false,
+        "requested_model": "grok-4.6",
+        "requested_provider": "grok",
+        "resolved_model": "grok-4.6",
+        "resolved_provider": "grok_cli"
+      },
+      "grok_ok": false,
+      "grok_skip_reason": null,
+      "grok_used_file": true,
+      "grok_workspace": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file/ws-mmhcjm98",
+      "hardware_class": "grok_cli",
+      "holes": [
+        {
+          "end": 110,
+          "family": "loop_invariant",
+          "hole_id": "MCA_0",
+          "indent": "  ",
+          "original": "  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup",
+          "start": 54
+        },
+        {
+          "end": 149,
+          "family": "loop_invariant",
+          "hole_id": "MCA_1",
+          "indent": "  ",
+          "original": "  have Hlen1 := InitStatesLength Hinit",
+          "start": 111
+        },
+        {
+          "end": 188,
+          "family": "loop_invariant",
+          "hole_id": "MCA_2",
+          "indent": "  ",
+          "original": "  have Hlen2 := UpdateStatesLength Hup",
+          "start": 150
+        },
+        {
+          "end": 1457,
+          "family": "loop_invariant",
+          "hole_id": "MCA_3",
+          "indent": "          ",
+          "original": "          have Hnd := InitStatesNotDefined Hinit",
+          "start": 1409
+        }
+      ],
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "leanstral_identity": null,
+      "ledger": {
+        "arena_score": null,
+        "budget_usd": 3.0,
+        "contaminates_track2": false,
+        "grok_calls": 2,
+        "hard_stopped": false,
+        "includes_jev_and_grok": true,
+        "jev_calls": 0,
+        "lines": [
+          {
+            "call_index": 1,
+            "fixture": false,
+            "input_tokens": 2494,
+            "kind": "grok",
+            "model": "grok-4.6",
+            "output_tokens": 401,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.013497
+          },
+          {
+            "call_index": 2,
+            "fixture": false,
+            "input_tokens": 1059,
+            "kind": "grok",
+            "model": "grok-4.6",
+            "output_tokens": 357,
+            "reason": "recorded",
+            "skipped": false,
+            "usd": 0.008532
+          }
+        ],
+        "max_grok_calls": 2,
+        "max_jev_calls": 2,
+        "max_mistral_calls": 2,
+        "mistral_calls": 0,
+        "name": "Core.InitsUpdatesComm#grok-few-shot",
+        "official_track2": false,
+        "reason": "",
+        "remaining_usd": 2.977971,
+        "skipped": false,
+        "spent_usd": 0.022029,
+        "track": "track1_closed"
+      },
+      "n_holes": 4,
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "schema": "lra-mca-mask-replace/v1",
+      "skeleton_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  <<<MCA_0 family=loop_invariant>>>\n  <<<MCA_1 family=loop_invariant>>>\n  <<<MCA_2 family=loop_invariant>>>\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, upd",
+      "used_prototype_endpoint": false,
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-mca-mask-replace-batch/v1",
+  "wall_ms": 84732.0938599878
+}

@@ -1,0 +1,61 @@
+{
+  "arena_score": null,
+  "beats_reference": true,
+  "best": {
+    "kind": "split_assumption+case_underscores",
+    "theorem_ok": true,
+    "token_count": 204
+  },
+  "called_docker0": false,
+  "from_tokens": 207,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T19:45:27.392268+00:00",
+  "official_track2": false,
+  "reference_token_count": 268,
+  "rows": [
+    {
+      "error": "Type mismatch   Hst has type   InitStates \u03c3 ks' vs' (updatedStates \u03c3 ks' vs') but is expected to have type   InitStates \u03c3 ks' vs' (updatedStates \u03c3 ks' vs') \u2227 Up",
+      "kind": "ctor_rfl_hst",
+      "ok": false,
+      "tokens": 202
+    },
+    {
+      "error": "unsolved goals case a P : PureExpr \u03c3\u271d \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x",
+      "kind": "unzip_no_first_simp_all",
+      "ok": false,
+      "tokens": 203
+    },
+    {
+      "error": "unsolved goals P : PureExpr \u03c3\u271d \u03c3' \u03c3'' : SemanticStore P ks ks' : List P.Ident vs\u271d vs' : List P.Expr Hlen1 : ks'.length = vs'.length \u03c3 : SemanticStore P x : P.Id",
+      "kind": "split_exact",
+      "ok": false,
+      "tokens": 204
+    },
+    {
+      "error": "",
+      "kind": "split_assumption",
+      "ok": true,
+      "tokens": 205
+    },
+    {
+      "error": "",
+      "kind": "case_underscores",
+      "ok": true,
+      "tokens": 206
+    },
+    {
+      "error": "Tactic `rewrite` failed: Did not find an occurrence of the pattern   updatedStates' (updatedState ?m.138 ?m.139 ?m.140) ?m.141 in the target expression   Update",
+      "kind": "simp_upd_no_hup",
+      "ok": false,
+      "tokens": 206
+    },
+    {
+      "error": "",
+      "kind": "split_assumption+case_underscores",
+      "ok": true,
+      "tokens": 204
+    }
+  ],
+  "schema": "lra-cascade-probe/v1",
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

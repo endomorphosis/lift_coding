@@ -1,0 +1,49 @@
+{
+  "schema": "lra-hnd-family/v1",
+  "observed_at": "2026-09-17T18:46:31.344778+00:00",
+  "name": "Core.InitsUpdatesComm",
+  "init_tokens": 260,
+  "reference_token_count": 268,
+  "kept": {
+    "kind": "init_260",
+    "theorem_ok": true,
+    "token_count": 260
+  },
+  "beats_reference": true,
+  "new_family": "hnd_block_rewrite",
+  "results": [
+    {
+      "kind": "hnd_intro_simp",
+      "token_count": 256,
+      "theorem_ok": false,
+      "error": "unsolved refine_2.a"
+    },
+    {
+      "kind": "hnd_simp_only",
+      "token_count": 252,
+      "theorem_ok": false,
+      "error": "simp made no progress"
+    },
+    {
+      "kind": "hnd_intro_exact",
+      "token_count": 255,
+      "theorem_ok": false,
+      "error": "unsolved refine_2.a"
+    },
+    {
+      "kind": "drop_and_intro",
+      "token_count": 256,
+      "theorem_ok": false,
+      "error": "type mismatch updatedStatesInit"
+    },
+    {
+      "kind": "drop_nested_init_simp",
+      "token_count": 258,
+      "theorem_ok": false,
+      "error": "UpdateStateNotDefMonotone unify"
+    }
+  ],
+  "called_docker0": false,
+  "official_track2": false,
+  "arena_score": null
+}

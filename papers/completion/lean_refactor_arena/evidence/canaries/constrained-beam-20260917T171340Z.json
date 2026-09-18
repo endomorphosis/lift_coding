@@ -1,0 +1,161 @@
+{
+  "arena_score": null,
+  "called_docker0": false,
+  "called_hosted_mistral": false,
+  "hardware_class": "spark_gb10",
+  "observed_at": "2026-09-17T17:13:40.833884+00:00",
+  "official_track2": false,
+  "pr": "PR-9f",
+  "problems": [
+    {
+      "arena_score": null,
+      "beats_reference": false,
+      "called_docker0": false,
+      "called_hosted_mistral": false,
+      "candidates": [
+        {
+          "errors": [],
+          "exit_code": 0,
+          "kind": "reference",
+          "module_exit_0": true,
+          "n_chars": 1699,
+          "ok": true,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none",
+          "theorem_ok": true,
+          "token_count": 268,
+          "wall_ms": 2255.3054990130477
+        },
+        {
+          "errors": [
+            {
+              "data": "simp_all made no progress",
+              "pos": {
+                "column": 10,
+                "line": 980
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 981
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 8,
+                "line": 982
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_0",
+          "module_exit_0": false,
+          "n_chars": 1603,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStat",
+          "theorem_ok": false,
+          "token_count": 249,
+          "wall_ms": 2443.877148005413
+        },
+        {
+          "errors": [
+            {
+              "data": "simp_all made no progress",
+              "pos": {
+                "column": 10,
+                "line": 980
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 981
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 8,
+                "line": 982
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_0_nosimp1",
+          "module_exit_0": false,
+          "n_chars": 1584,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStat",
+          "theorem_ok": false,
+          "token_count": 247,
+          "wall_ms": 2414.2673460009973
+        },
+        {
+          "errors": [
+            {
+              "data": "unsolved goals\ncase refine_2.a.h\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081",
+              "pos": {
+                "column": 8,
+                "line": 974
+              }
+            },
+            {
+              "data": "Function expected at\n  ih Hinit\nbut this term has type\n  updatedStates \u03c3\u2080 ks' vs' = updatedStates \u03c3\u2080 ks' vs' \u2227\n    InitStates \u03c3\u2080 ks' vs' (updatedStates \u03c3\u2080 ks' vs') \u2227 UpdateStates (updatedStates \u03c3\u2080 ks' vs') xs vs \u03c3''\n\nNote: Expected a function because this term is being applied to the argument\n  ?_",
+              "pos": {
+                "column": 15,
+                "line": 980
+              }
+            },
+            {
+              "data": "No goals to be solved",
+              "pos": {
+                "column": 8,
+                "line": 981
+              }
+            }
+          ],
+          "exit_code": 1,
+          "kind": "beam_0_nosimp2",
+          "module_exit_0": false,
+          "n_chars": 1565,
+          "ok": false,
+          "tactics_head": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStat",
+          "theorem_ok": false,
+          "token_count": 246,
+          "wall_ms": 2486.931655992521
+        }
+      ],
+      "hardware_class": "spark_gb10",
+      "kept": {
+        "kind": "reference",
+        "theorem_ok": true,
+        "token_count": 268
+      },
+      "name": "Core.InitsUpdatesComm",
+      "official_track2": false,
+      "reference_token_count": 268,
+      "search": {
+        "arena_score": null,
+        "called_docker0": false,
+        "called_hosted_mistral": false,
+        "finals": [
+          {
+            "steps": [],
+            "stopped": true,
+            "tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hlen1 := InitStatesLength Hinit\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all"
+          }
+        ],
+        "hardware_class": "spark_gb10",
+        "mode": "repair_latest",
+        "official_track2": false
+      },
+      "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+    }
+  ],
+  "protocol": "LRA/v1",
+  "schema": "lra-constrained-beam-local/v1",
+  "wall_ms": 9615.445180999814
+}

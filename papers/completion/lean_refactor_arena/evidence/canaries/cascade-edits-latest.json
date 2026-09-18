@@ -1,0 +1,620 @@
+{
+  "arena_score": null,
+  "beam_k": 2,
+  "beats_reference": true,
+  "best": {
+    "kind": "init",
+    "theorem_ok": true,
+    "token_count": 260
+  },
+  "best_tactics": "  intros Hup Hinit\n  exists (updatedStates \u03c3 ks' vs')\n  have Hk : (isDefined \u03c3' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing \u03c3''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some \u03c3 x v \u03c3\u2080 xs vs \u03c3\u2081 Hup Hups ih =>\n    refine \u27e8rfl, ?_, ?_\u27e9\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (\u03c3':=updatedStates \u03c3\u2080 ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rw [\u2190 updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rw [List.unzip_zip] <;> simp_all\n          have Hnd := InitStatesNotDefined Hinit\n          simp [isNotDefined, isDefined] at *\n          intros Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+  "called_docker0": false,
+  "confident": 0.55,
+  "cookbooks": [
+    "https://docs.typesafe.ai/cookbooks/sde_cascade",
+    "https://docs.typesafe.ai/cookbooks/hierarchical_classification",
+    "https://docs.typesafe.ai/cookbooks/classification_using_confidence"
+  ],
+  "failed_kinds": [
+    "drop_orphan_hnd"
+  ],
+  "fire_t": 0.7,
+  "hardware_class": "spark_gb10",
+  "history": [
+    {
+      "abstain": true,
+      "action": "abstain_keep",
+      "beam_fams": [
+        "drop",
+        "rewrite"
+      ],
+      "family": {
+        "choice": "drop",
+        "confidence": 0.51,
+        "probabilities": {
+          "drop": 0.62,
+          "join": 0.04,
+          "keep": 0.01,
+          "rewrite": 0.33
+        }
+      },
+      "paths": [
+        {
+          "family": "drop",
+          "family_confidence": 0.51,
+          "family_p": 0.62,
+          "leaf": "drop_orphan_hnd",
+          "leaf_confidence": 0.22,
+          "leaf_p": 0.33999999999999997,
+          "path_score": 0.45912961132995983
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.51,
+          "family_p": 0.62,
+          "leaf": "drop_duplicate",
+          "leaf_confidence": 0.22,
+          "leaf_p": 0.27,
+          "path_score": 0.4091454509095757
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.51,
+          "family_p": 0.62,
+          "leaf": "drop_orphan_intros_hin",
+          "leaf_confidence": 0.22,
+          "leaf_p": 0.24,
+          "path_score": 0.38574603043971817
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.51,
+          "family_p": 0.33,
+          "leaf": "rewrite_ih_short",
+          "leaf_confidence": 0.36,
+          "leaf_p": 0.44,
+          "path_score": 0.381051177665153
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.51,
+          "family_p": 0.62,
+          "leaf": "drop_isnotdefined_simp",
+          "leaf_confidence": 0.22,
+          "leaf_p": 0.09,
+          "path_score": 0.23622023622035432
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.51,
+          "family_p": 0.33,
+          "leaf": "collapse_defined_simp",
+          "leaf_confidence": 0.36,
+          "leaf_p": 0.16,
+          "path_score": 0.22978250586152113
+        }
+      ],
+      "round": 0,
+      "separation": 1.122167215373564
+    },
+    {
+      "abstain": false,
+      "action": "lake",
+      "beam_fams": [
+        "drop",
+        "rewrite"
+      ],
+      "errors": [
+        {
+          "data": "unsolved goals\ncase refine_2.a\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\n\u03c3'' : SemanticStore P\nih : \u2200 {\u03c3'' : SemanticStore P}, InitStates \u03c3\u2081 ks' vs'",
+          "pos": {
+            "column": 8,
+            "line": 976
+          }
+        }
+      ],
+      "family": {
+        "choice": "drop",
+        "confidence": 0.58,
+        "probabilities": {
+          "drop": 0.6799999999999999,
+          "join": 0.04,
+          "keep": 0.01,
+          "rewrite": 0.27
+        }
+      },
+      "fired": {},
+      "greedy_family": true,
+      "ok": false,
+      "paths": [
+        {
+          "family": "drop",
+          "family_confidence": 0.58,
+          "family_p": 0.6799999999999999,
+          "leaf": "drop_orphan_hnd",
+          "leaf_confidence": 0.27,
+          "leaf_p": 0.4,
+          "path_score": 0.5215361924162119
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.58,
+          "family_p": 0.6799999999999999,
+          "leaf": "drop_duplicate",
+          "leaf_confidence": 0.27,
+          "leaf_p": 0.25,
+          "path_score": 0.412310562561766
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.58,
+          "family_p": 0.6799999999999999,
+          "leaf": "drop_orphan_intros_hin",
+          "leaf_confidence": 0.27,
+          "leaf_p": 0.21,
+          "path_score": 0.37788887255382364
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.58,
+          "family_p": 0.27,
+          "leaf": "rewrite_ih_short",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.44,
+          "path_score": 0.3446737587922817
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.58,
+          "family_p": 0.6799999999999999,
+          "leaf": "drop_isnotdefined_simp",
+          "leaf_confidence": 0.27,
+          "leaf_p": 0.1,
+          "path_score": 0.260768096208106
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.58,
+          "family_p": 0.27,
+          "leaf": "collapse_defined_simp",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.15,
+          "path_score": 0.20124611797498107
+        }
+      ],
+      "picked": {
+        "family": "drop",
+        "family_confidence": 0.58,
+        "family_p": 0.6799999999999999,
+        "leaf": "drop_orphan_hnd",
+        "leaf_confidence": 0.27,
+        "leaf_p": 0.4,
+        "path_score": 0.5215361924162119
+      },
+      "proposed_tokens": 254,
+      "round": 1,
+      "separation": 1.2649110640673518,
+      "tokens": 254,
+      "verify": {
+        "will_and_intro_type_mismatch": 0.35,
+        "will_invalid_ih_projection": 0.15,
+        "will_simp_no_progress": 0.24,
+        "will_unify_fail": 0.37,
+        "will_unsolve_refine": 0.17
+      }
+    },
+    {
+      "abstain": true,
+      "action": "abstain_keep",
+      "beam_fams": [
+        "drop",
+        "rewrite"
+      ],
+      "family": {
+        "choice": "drop",
+        "confidence": 0.34,
+        "probabilities": {
+          "drop": 0.5,
+          "join": 0.04,
+          "keep": 0.01,
+          "rewrite": 0.45
+        }
+      },
+      "paths": [
+        {
+          "family": "drop",
+          "family_confidence": 0.34,
+          "family_p": 0.5,
+          "leaf": "drop_duplicate",
+          "leaf_confidence": 0.25,
+          "leaf_p": 0.41000000000000003,
+          "path_score": 0.45276925690687087
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.34,
+          "family_p": 0.45,
+          "leaf": "rewrite_ih_short",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.44,
+          "path_score": 0.44497190922573976
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.34,
+          "family_p": 0.5,
+          "leaf": "drop_orphan_intros_hin",
+          "leaf_confidence": 0.25,
+          "leaf_p": 0.38,
+          "path_score": 0.4358898943540674
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.34,
+          "family_p": 0.5,
+          "leaf": "drop_isnotdefined_simp",
+          "leaf_confidence": 0.25,
+          "leaf_p": 0.15,
+          "path_score": 0.27386127875258304
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.34,
+          "family_p": 0.45,
+          "leaf": "hnd_simp_only",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.13999999999999999,
+          "path_score": 0.25099800796022265
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.34,
+          "family_p": 0.45,
+          "leaf": "collapse_defined_simp",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.12,
+          "path_score": 0.232379000772445
+        }
+      ],
+      "round": 2,
+      "separation": 1.0175232357806556
+    },
+    {
+      "abstain": true,
+      "action": "abstain_keep",
+      "beam_fams": [
+        "drop",
+        "rewrite"
+      ],
+      "family": {
+        "choice": "drop",
+        "confidence": 0.35,
+        "probabilities": {
+          "drop": 0.52,
+          "join": 0.03,
+          "keep": 0.01,
+          "rewrite": 0.44
+        }
+      },
+      "paths": [
+        {
+          "family": "drop",
+          "family_confidence": 0.35,
+          "family_p": 0.52,
+          "leaf": "drop_orphan_intros_hin",
+          "leaf_confidence": 0.25,
+          "leaf_p": 0.4,
+          "path_score": 0.4560701700396552
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.35,
+          "family_p": 0.44,
+          "leaf": "rewrite_ih_short",
+          "leaf_confidence": 0.39,
+          "leaf_p": 0.46,
+          "path_score": 0.4498888751680797
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.35,
+          "family_p": 0.52,
+          "leaf": "drop_duplicate",
+          "leaf_confidence": 0.25,
+          "leaf_p": 0.36,
+          "path_score": 0.43266615305567874
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.35,
+          "family_p": 0.52,
+          "leaf": "drop_isnotdefined_simp",
+          "leaf_confidence": 0.25,
+          "leaf_p": 0.16,
+          "path_score": 0.2884441020371192
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.35,
+          "family_p": 0.44,
+          "leaf": "hnd_simp_only",
+          "leaf_confidence": 0.39,
+          "leaf_p": 0.12,
+          "path_score": 0.22978250586152113
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.35,
+          "family_p": 0.44,
+          "leaf": "rewrite_ih_exact",
+          "leaf_confidence": 0.39,
+          "leaf_p": 0.12,
+          "path_score": 0.22978250586152113
+        }
+      ],
+      "round": 3,
+      "separation": 1.0137396037394037
+    },
+    {
+      "abstain": true,
+      "action": "abstain_keep",
+      "beam_fams": [
+        "drop",
+        "rewrite"
+      ],
+      "family": {
+        "choice": "drop",
+        "confidence": 0.41,
+        "probabilities": {
+          "drop": 0.55,
+          "join": 0.03,
+          "keep": 0.01,
+          "rewrite": 0.41
+        }
+      },
+      "paths": [
+        {
+          "family": "drop",
+          "family_confidence": 0.41,
+          "family_p": 0.55,
+          "leaf": "drop_orphan_intros_hin",
+          "leaf_confidence": 0.31,
+          "leaf_p": 0.44,
+          "path_score": 0.49193495504995377
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.41,
+          "family_p": 0.55,
+          "leaf": "drop_duplicate",
+          "leaf_confidence": 0.31,
+          "leaf_p": 0.37,
+          "path_score": 0.45110974274559845
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.41,
+          "family_p": 0.41,
+          "leaf": "rewrite_ih_short",
+          "leaf_confidence": 0.4,
+          "leaf_p": 0.45999999999999996,
+          "path_score": 0.43428101501216926
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.41,
+          "family_p": 0.55,
+          "leaf": "drop_isnotdefined_simp",
+          "leaf_confidence": 0.31,
+          "leaf_p": 0.12,
+          "path_score": 0.25690465157330256
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.41,
+          "family_p": 0.41,
+          "leaf": "hnd_simp_only",
+          "leaf_confidence": 0.4,
+          "leaf_p": 0.13,
+          "path_score": 0.23086792761230387
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.41,
+          "family_p": 0.41,
+          "leaf": "rewrite_ih_exact",
+          "leaf_confidence": 0.4,
+          "leaf_p": 0.12,
+          "path_score": 0.2218107301281883
+        }
+      ],
+      "round": 4,
+      "separation": 1.0904995136125413
+    },
+    {
+      "abstain": true,
+      "action": "abstain_keep",
+      "beam_fams": [
+        "rewrite",
+        "drop"
+      ],
+      "family": {
+        "choice": "rewrite",
+        "confidence": 0.34,
+        "probabilities": {
+          "drop": 0.45,
+          "join": 0.03,
+          "keep": 0.01,
+          "rewrite": 0.51
+        }
+      },
+      "paths": [
+        {
+          "family": "rewrite",
+          "family_confidence": 0.34,
+          "family_p": 0.51,
+          "leaf": "rewrite_ih_short",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.46,
+          "path_score": 0.4843552415324934
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.34,
+          "family_p": 0.45,
+          "leaf": "drop_orphan_intros_hin",
+          "leaf_confidence": 0.35,
+          "leaf_p": 0.47,
+          "path_score": 0.4598912915026767
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.34,
+          "family_p": 0.45,
+          "leaf": "drop_duplicate",
+          "leaf_confidence": 0.35,
+          "leaf_p": 0.32,
+          "path_score": 0.3794733192202055
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.34,
+          "family_p": 0.51,
+          "leaf": "rewrite_ih_exact",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.14,
+          "path_score": 0.2672077843177477
+        },
+        {
+          "family": "drop",
+          "family_confidence": 0.34,
+          "family_p": 0.45,
+          "leaf": "drop_isnotdefined_simp",
+          "leaf_confidence": 0.35,
+          "leaf_p": 0.14,
+          "path_score": 0.2509980079602227
+        },
+        {
+          "family": "rewrite",
+          "family_confidence": 0.34,
+          "family_p": 0.51,
+          "leaf": "hnd_simp_only",
+          "leaf_confidence": 0.38,
+          "leaf_p": 0.12,
+          "path_score": 0.24738633753705963
+        }
+      ],
+      "round": 5,
+      "separation": 1.0531950712740867
+    }
+  ],
+  "jev_generated_lean": false,
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 7,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1405,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 278,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.9e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 1405,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 278,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.9e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 1062,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 106,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 4.5e-05
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 1372,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 264,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.8e-05
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 1377,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 269,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.8e-05
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 1377,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 269,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.8e-05
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 1377,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 269,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 5.8e-05
+      }
+    ],
+    "max_grok_calls": 0,
+    "max_jev_calls": 20,
+    "max_mistral_calls": 0,
+    "mistral_calls": 0,
+    "name": "Core.InitsUpdatesComm#cascade",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999605,
+    "skipped": false,
+    "spent_usd": 0.000395,
+    "track": "track1_closed"
+  },
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T19:08:23.185329+00:00",
+  "official_track2": false,
+  "pr": "PR-9i",
+  "protocol": "LRA/v1",
+  "reference_token_count": 268,
+  "schema": "lra-cascade-edits/v1",
+  "wall_ms": 3473.775462975027,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}

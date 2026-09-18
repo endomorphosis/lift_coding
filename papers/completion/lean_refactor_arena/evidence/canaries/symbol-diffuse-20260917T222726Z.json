@@ -1,0 +1,901 @@
+{
+  "arena_score": null,
+  "best": {
+    "kind": "r2_SYM_9_operator__",
+    "theorem_ok": true,
+    "token_count": 263
+  },
+  "called_docker0": false,
+  "cfg": [
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.65,
+      "eligible_spans": {
+        "span_1": 231,
+        "span_2": 115,
+        "span_3": 76,
+        "span_4": 57,
+        "span_6": 38
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 0,
+      "schedule_probabilities": {
+        "span1": 0.33,
+        "span2": 0.12,
+        "span3": 0.17,
+        "span4": 0.17,
+        "span6": 0.21
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 873,
+        "output_tokens": 73
+      },
+      "wall_ms": 331.9148409937043
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.69,
+      "eligible_spans": {
+        "span_1": 228,
+        "span_2": 113,
+        "span_3": 75,
+        "span_4": 56,
+        "span_6": 37
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 1,
+      "schedule_probabilities": {
+        "span1": 0.3,
+        "span2": 0.11,
+        "span3": 0.15,
+        "span4": 0.19,
+        "span6": 0.25
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 871,
+        "output_tokens": 73
+      },
+      "wall_ms": 158.33374200155959
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span6",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span6",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 6
+      },
+      "cfg_score": 2.67,
+      "eligible_spans": {
+        "span_1": 227,
+        "span_2": 112,
+        "span_3": 74,
+        "span_4": 56,
+        "span_6": 36
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 2,
+      "schedule_probabilities": {
+        "span1": 0.28,
+        "span2": 0.11,
+        "span3": 0.15,
+        "span4": 0.18,
+        "span6": 0.28
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 871,
+        "output_tokens": 73
+      },
+      "wall_ms": 213.15267798490822
+    },
+    {
+      "arena_score": null,
+      "best_schedule": "span1",
+      "cfg_confidence": 0.0,
+      "cfg_schedule": {
+        "cfg_scale": 1.5,
+        "id": "span1",
+        "n_masks": 1,
+        "n_shots": 6,
+        "span": 1
+      },
+      "cfg_score": 2.59,
+      "eligible_spans": {
+        "span_1": 226,
+        "span_2": 112,
+        "span_3": 74,
+        "span_4": 56,
+        "span_6": 36
+      },
+      "jev_generated_lean": false,
+      "one_hole": true,
+      "round": 3,
+      "schedule_probabilities": {
+        "span1": 0.32,
+        "span2": 0.12,
+        "span3": 0.15,
+        "span4": 0.17,
+        "span6": 0.24
+      },
+      "skipped": false,
+      "usage": {
+        "input_tokens": 871,
+        "output_tokens": 73
+      },
+      "wall_ms": 172.42400799295865
+    }
+  ],
+  "few_shot": true,
+  "lake": [
+    {
+      "errors": [],
+      "kind": "SYM_0_phrase_constructor",
+      "n_shots": null,
+      "ok": true,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 265
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 isNotDefined \u03c3\u271d ks'",
+          "pos": {
+            "column": 35,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_6_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 267
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 ks'.Nodup",
+          "pos": {
+            "column": 38,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_7_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 267
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n  ",
+          "pos": {
+            "column": 17,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_8_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 267
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+          "pos": {
+            "column": 21,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_9_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 267
+    },
+    {
+      "errors": [],
+      "kind": "SYM_10_operator__",
+      "n_shots": null,
+      "ok": true,
+      "round": 0,
+      "schedule_id": null,
+      "tokens": 267
+    },
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\ncase h_2\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined ",
+          "pos": {
+            "column": 8,
+            "line": 964
+          }
+        }
+      ],
+      "kind": "sweep_span4_p1_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 1,
+      "schedule_id": "span4_p1",
+      "tokens": 263
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 isNotDefined \u03c3\u271d ks'",
+          "pos": {
+            "column": 35,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_5_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 1,
+      "schedule_id": null,
+      "tokens": 264
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 ks'.Nodup",
+          "pos": {
+            "column": 38,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_6_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 1,
+      "schedule_id": null,
+      "tokens": 264
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n  ",
+          "pos": {
+            "column": 17,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_7_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 1,
+      "schedule_id": null,
+      "tokens": 264
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+          "pos": {
+            "column": 21,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_8_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 1,
+      "schedule_id": null,
+      "tokens": 264
+    },
+    {
+      "errors": [],
+      "kind": "SYM_9_operator__",
+      "n_shots": null,
+      "ok": true,
+      "round": 1,
+      "schedule_id": null,
+      "tokens": 264
+    },
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\ncase h_2\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined ",
+          "pos": {
+            "column": 8,
+            "line": 964
+          }
+        }
+      ],
+      "kind": "sweep_span4_p1_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 2,
+      "schedule_id": "span4_p1",
+      "tokens": 262
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 isNotDefined \u03c3\u271d ks'",
+          "pos": {
+            "column": 35,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_5_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 2,
+      "schedule_id": null,
+      "tokens": 263
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 ks'.Nodup",
+          "pos": {
+            "column": 38,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_6_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 2,
+      "schedule_id": null,
+      "tokens": 263
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n  ",
+          "pos": {
+            "column": 17,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_7_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 2,
+      "schedule_id": null,
+      "tokens": 263
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+          "pos": {
+            "column": 21,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_8_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 2,
+      "schedule_id": null,
+      "tokens": 263
+    },
+    {
+      "errors": [],
+      "kind": "SYM_9_operator__",
+      "n_shots": null,
+      "ok": true,
+      "round": 2,
+      "schedule_id": null,
+      "tokens": 263
+    },
+    {
+      "errors": [
+        {
+          "data": "unsolved goals\ncase h_2\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n    InitStates \u03c3\u2081 ks' vs' \u03c3'' \u2192\n      isDefined ",
+          "pos": {
+            "column": 8,
+            "line": 964
+          }
+        }
+      ],
+      "kind": "sweep_span4_p1_closed",
+      "n_shots": 6,
+      "ok": false,
+      "round": 3,
+      "schedule_id": "span4_p1",
+      "tokens": 261
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 isNotDefined \u03c3\u271d ks'",
+          "pos": {
+            "column": 35,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_5_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 3,
+      "schedule_id": null,
+      "tokens": 262
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder\ncontext:\nP : PureExpr\n\u03c3 \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3\u271d \u03c3'' : SemanticStore P\nHinit : InitStates \u03c3\u271d ks' vs' \u03c3''\nHk : isDefined \u03c3\u271d []\n\u22a2 ks'.Nodup",
+          "pos": {
+            "column": 38,
+            "line": 949
+          }
+        }
+      ],
+      "kind": "SYM_6_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 3,
+      "schedule_id": null,
+      "tokens": 262
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `left`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n  ",
+          "pos": {
+            "column": 17,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_7_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 3,
+      "schedule_id": null,
+      "tokens": 262
+    },
+    {
+      "errors": [
+        {
+          "data": "don't know how to synthesize placeholder for argument `right`\ncontext:\nP : PureExpr\n\u03c3\u271d \u03c3' : SemanticStore P\nks ks' : List P.Ident\nvs\u271d vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\n\u03c3 : SemanticStore P\nx : P.Ident\nv : P.Expr\n\u03c3\u2080 : SemanticStore P\nxs : List P.Ident\nvs : List P.Expr\n\u03c3\u2081 : SemanticStore P\nHup : UpdateState P \u03c3 x v \u03c3\u2080\nHups : UpdateStates \u03c3\u2080 xs vs \u03c3\u2081\nih :\n  \u2200 {\u03c3'' : SemanticStore P},\n ",
+          "pos": {
+            "column": 21,
+            "line": 955
+          }
+        }
+      ],
+      "kind": "SYM_8_operator__",
+      "n_shots": null,
+      "ok": false,
+      "round": 3,
+      "schedule_id": null,
+      "tokens": 262
+    },
+    {
+      "errors": [
+        {
+          "data": "Invalid dotted identifier notation: The expected type of `.update_some` could not be determined",
+          "pos": {
+            "column": 12,
+            "line": 961
+          }
+        }
+      ],
+      "kind": "SYM_1_phrase_.update_some",
+      "n_shots": null,
+      "ok": false,
+      "round": 3,
+      "schedule_id": null,
+      "tokens": 262
+    }
+  ],
+  "ledger": {
+    "arena_score": null,
+    "budget_usd": 3.0,
+    "contaminates_track2": false,
+    "grok_calls": 0,
+    "hard_stopped": false,
+    "includes_jev_and_grok": true,
+    "jev_calls": 8,
+    "lines": [
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 873,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 1,
+        "fixture": false,
+        "input_tokens": 1085,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 29,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 3417,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 230,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000144
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 871,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 2,
+        "fixture": false,
+        "input_tokens": 1082,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 26,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 3416,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 233,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000143
+      },
+      {
+        "call_index": 5,
+        "fixture": false,
+        "input_tokens": 871,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 3,
+        "fixture": false,
+        "input_tokens": 1144,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 23,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 6,
+        "fixture": false,
+        "input_tokens": 3424,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 234,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000144
+      },
+      {
+        "call_index": 7,
+        "fixture": false,
+        "input_tokens": 871,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 73,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 3.7e-05
+      },
+      {
+        "call_index": 4,
+        "fixture": false,
+        "input_tokens": 1080,
+        "kind": "mistral",
+        "model": "labs-leanstral-1-5",
+        "output_tokens": 17,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.0
+      },
+      {
+        "call_index": 8,
+        "fixture": false,
+        "input_tokens": 3424,
+        "kind": "jev",
+        "model": "jev-latest",
+        "output_tokens": 235,
+        "reason": "recorded",
+        "skipped": false,
+        "usd": 0.000144
+      }
+    ],
+    "max_grok_calls": 2,
+    "max_jev_calls": 22,
+    "max_mistral_calls": 8,
+    "mistral_calls": 4,
+    "name": "Core.InitsUpdatesComm#symbol-diffuse",
+    "official_track2": false,
+    "reason": "",
+    "remaining_usd": 2.999277,
+    "skipped": false,
+    "spent_usd": 0.000723,
+    "track": "track1_closed"
+  },
+  "llm": "on",
+  "n_closed": 15,
+  "n_holes": 24,
+  "name": "Core.InitsUpdatesComm",
+  "observed_at": "2026-09-17T22:27:26.150469+00:00",
+  "official_track2": false,
+  "one_hole": true,
+  "ranked": {
+    "arena_score": null,
+    "best_fill": "sweep_span4_p1_closed",
+    "cfg_schedule": {
+      "cfg_scale": 1.0,
+      "id": "cfg1",
+      "n_masks": 3,
+      "n_shots": 2,
+      "span": 2
+    },
+    "cfg_score": 0.93,
+    "confidence": 0.47,
+    "jev_generated_lean": false,
+    "prefer_few_shot_noul": null,
+    "probabilities": {
+      "SYM_13_operator_drop": 0.0,
+      "SYM_1_phrase_.update_some": 0.37,
+      "SYM_5_operator__": 0.0,
+      "SYM_6_operator__": 0.0,
+      "SYM_7_operator__": 0.0,
+      "SYM_8_operator__": 0.0,
+      "sweep_span1_p0_closed": 0.0,
+      "sweep_span2_p0_closed": 0.0,
+      "sweep_span2_p1_closed": 0.0,
+      "sweep_span3_p0_closed": 0.0,
+      "sweep_span3_p1_closed": 0.0,
+      "sweep_span4_p0_closed": 0.0,
+      "sweep_span4_p1_closed": 0.52,
+      "sweep_span6_p0_closed": 0.0,
+      "sweep_span6_p1_closed": 0.11
+    },
+    "round": 3,
+    "skipped": false,
+    "usage": {
+      "input_tokens": 3424,
+      "output_tokens": 235
+    },
+    "wall_ms": 398.0784479936119
+  },
+  "ranked_rows": [
+    {
+      "arena_score": null,
+      "best_fill": "SYM_0_phrase_constructor",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.9,
+      "confidence": 0.71,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_0_phrase_constructor": 0.74,
+        "SYM_10_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator__": 0.0,
+        "SYM_9_operator__": 0.0,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.01,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.0,
+        "sweep_span4_p1_closed": 0.22,
+        "sweep_span6_p0_closed": 0.0,
+        "sweep_span6_p1_closed": 0.03
+      },
+      "round": 0,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3417,
+        "output_tokens": 230
+      },
+      "wall_ms": 148.48173601785675
+    },
+    {
+      "arena_score": null,
+      "best_fill": "sweep_span4_p1_closed",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.97,
+      "confidence": 0.75,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_10_operator__": 0.0,
+        "SYM_5_operator__": 0.01,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator__": 0.0,
+        "SYM_9_operator__": 0.0,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.06,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.02,
+        "sweep_span4_p1_closed": 0.78,
+        "sweep_span6_p0_closed": 0.0,
+        "sweep_span6_p1_closed": 0.13
+      },
+      "round": 1,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3416,
+        "output_tokens": 233
+      },
+      "wall_ms": 175.55290102609433
+    },
+    {
+      "arena_score": null,
+      "best_fill": "sweep_span4_p1_closed",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.95,
+      "confidence": 0.52,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_1_phrase_.update_some": 0.33,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator__": 0.0,
+        "SYM_9_operator__": 0.0,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.0,
+        "sweep_span4_p1_closed": 0.56,
+        "sweep_span6_p0_closed": 0.0,
+        "sweep_span6_p1_closed": 0.1
+      },
+      "round": 2,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3424,
+        "output_tokens": 234
+      },
+      "wall_ms": 164.16548599954695
+    },
+    {
+      "arena_score": null,
+      "best_fill": "sweep_span4_p1_closed",
+      "cfg_schedule": {
+        "cfg_scale": 1.0,
+        "id": "cfg1",
+        "n_masks": 3,
+        "n_shots": 2,
+        "span": 2
+      },
+      "cfg_score": 0.93,
+      "confidence": 0.47,
+      "jev_generated_lean": false,
+      "prefer_few_shot_noul": null,
+      "probabilities": {
+        "SYM_13_operator_drop": 0.0,
+        "SYM_1_phrase_.update_some": 0.37,
+        "SYM_5_operator__": 0.0,
+        "SYM_6_operator__": 0.0,
+        "SYM_7_operator__": 0.0,
+        "SYM_8_operator__": 0.0,
+        "sweep_span1_p0_closed": 0.0,
+        "sweep_span2_p0_closed": 0.0,
+        "sweep_span2_p1_closed": 0.0,
+        "sweep_span3_p0_closed": 0.0,
+        "sweep_span3_p1_closed": 0.0,
+        "sweep_span4_p0_closed": 0.0,
+        "sweep_span4_p1_closed": 0.52,
+        "sweep_span6_p0_closed": 0.0,
+        "sweep_span6_p1_closed": 0.11
+      },
+      "round": 3,
+      "skipped": false,
+      "usage": {
+        "input_tokens": 3424,
+        "output_tokens": 235
+      },
+      "wall_ms": 398.0784479936119
+    },
+    {
+      "round": 3,
+      "stopped": "no_shorter_lake_ok"
+    }
+  ],
+  "rounds": 6,
+  "schema": "lra-symbol-diffuse/v1",
+  "source_tokens": 268,
+  "sweep": true,
+  "warmup_jsonl_sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
+}
