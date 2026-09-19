@@ -29,6 +29,7 @@ TYPESAFE_INFERENCE_PATH = ACCEL_ROOT / "ipfs_accelerate_py" / "typesafe_inferenc
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import retrieve as lra_retrieve  # noqa: E402
 import splice as lra_splice  # noqa: E402
 
@@ -218,93 +219,12 @@ class TypesafeRouterError(RuntimeError):
     """Fail-closed TypeSafe router error. Never a generated Lean proof."""
 
 
-@dataclass(frozen=True)
-class CatalogQuestion:
-    """Frozen question descriptor. Not an HTTP client and not typesafe-sdk."""
-
-    kind: str
-    instructions: str
-    criteria: Any = None
-
-
-@dataclass(frozen=True)
-class FixtureChoice:
-    choice: str
-    confidence: float
-    probabilities: Mapping[str, float]
-
-
-@dataclass(frozen=True)
-class FixtureNoul:
-    noul: float
-
-
-@dataclass(frozen=True)
-class FixtureScore:
-    score: float
-    legend: Mapping[int, str]
-
-
-@dataclass(frozen=True)
-class FixtureResponse:
-    choices: Mapping[str, FixtureChoice]
-    nouls: Mapping[str, FixtureNoul]
-    scores: Mapping[str, FixtureScore]
-    usage: Mapping[str, Any]
-
-
-@dataclass
-class FixtureClient:
-    """CI fixture System One stand-in. Never POSTs. Not typesafe-sdk."""
-
-    model: str = MODEL_ID
-    answers: Mapping[str, Any] = field(default_factory=dict)
-
-    def __enter__(self) -> "FixtureClient":
-        return self
-
-    def __exit__(self, *exc: object) -> bool:
-        return False
-
-    def system_one(self, state: Mapping[str, Any], questions: Mapping[str, Any]) -> FixtureResponse:
-        del state
-        choices: dict[str, FixtureChoice] = {}
-        nouls: dict[str, FixtureNoul] = {}
-        scores: dict[str, FixtureScore] = {}
-        for name, question in questions.items():
-            kind = _question_kind(question)
-            override = self.answers.get(name)
-            if kind == "choice":
-                criteria = _question_criteria(question)
-                keys = list(criteria.keys()) if isinstance(criteria, Mapping) else ["none"]
-                picked = str(override if override is not None else (keys[0] if keys else "none"))
-                if picked not in keys:
-                    picked = keys[0] if keys else "none"
-                conf = 0.72 if picked != "none" else 0.64
-                mass = (1.0 - conf) / max(len(keys) - 1, 1)
-                probs = {key: (conf if key == picked else mass) for key in keys}
-                choices[name] = FixtureChoice(choice=picked, confidence=conf, probabilities=probs)
-            elif kind == "noul":
-                value = 0.25 if override is None else float(override)
-                nouls[name] = FixtureNoul(noul=value)
-            elif kind == "score":
-                criteria = _question_criteria(question)
-                n_levels = len(criteria) if isinstance(criteria, (list, tuple)) else 3
-                legend = {index: str(item) for index, item in enumerate(criteria)} if isinstance(
-                    criteria, (list, tuple)
-                ) else dict(LIKELY_SHORTER_LEGEND)
-                value = 0.0 if override is None else float(override)
-                scores[name] = FixtureScore(score=value, legend=legend)
-                if value < 0 or value > max(n_levels - 1, 0):
-                    raise TypesafeRouterError(f"{name}: rubric index {value} outside [0, {n_levels - 1}]")
-            else:
-                raise TypesafeRouterError(f"unknown question kind for {name}")
-        return FixtureResponse(
-            choices=choices,
-            nouls=nouls,
-            scores=scores,
-            usage={"input_tokens": 0, "output_tokens": 0, "fixture": True, "model": self.model},
-        )
+from jevops.jev import CatalogQuestion  # noqa: E402
+from jevops.jev import FixtureChoice  # noqa: E402
+from jevops.jev import FixtureClient  # noqa: E402
+from jevops.jev import FixtureNoul  # noqa: E402
+from jevops.jev import FixtureResponse  # noqa: E402
+from jevops.jev import FixtureScore  # noqa: E402
 
 
 @dataclass(frozen=True)
@@ -403,7 +323,9 @@ def _import_typesafe_inference() -> dict[str, Any]:
 
 
 def _env_truthy(value: Optional[str]) -> bool:
-    return str(value or "").strip().lower() in {"1", "true", "yes", "on"}
+    from jevops.jev import env_truthy
+
+    return env_truthy(value)
 
 
 def official_track2_requested(
@@ -411,13 +333,16 @@ def official_track2_requested(
     flag: bool = False,
     env: Optional[Mapping[str, str]] = None,
 ) -> bool:
-    if flag:
-        return True
+    from jevops.jev import env_flag
+
     source = os.environ if env is None else env
-    if _env_truthy(source.get("LRA_OFFICIAL_TRACK2")):
-        return True
-    track = str(source.get("LRA_TRACK", "")).strip().lower()
-    return track in {"official_track2", "official-track-2", "track2_official"}
+    return env_flag(
+        flag=flag,
+        env=source,
+        truthy_keys=("LRA_OFFICIAL_TRACK2",),
+        value_key="LRA_TRACK",
+        values=("official_track2", "official-track-2", "track2_official"),
+    )
 
 
 def resolve_typesafe_mode(
@@ -428,52 +353,48 @@ def resolve_typesafe_mode(
 ) -> str:
     """Default off. Distill/inloop only when not official Track 2."""
 
+    from jevops.jev import JevError
+    from jevops.jev import resolve_mode
+
     source = os.environ if env is None else env
-    if official_track2_requested(flag=official_track2, env=source):
-        return OFFICIAL_TRACK2_MODE
-    raw = DEFAULT_MODE if flag is None else flag
-    if flag is None:
-        raw = source.get("LRA_TYPESAFE", DEFAULT_MODE)
-    if raw is None or str(raw).strip() == "":
-        raw = DEFAULT_MODE
-    mode = str(raw).strip().lower()
-    if mode not in ALLOWED_MODES:
-        raise TypesafeRouterError(f"unknown LRA_TYPESAFE={mode!r}; expected {ALLOWED_MODES}")
-    return mode
+    try:
+        return resolve_mode(
+            flag=flag,
+            env=source,
+            env_key="LRA_TYPESAFE",
+            default=DEFAULT_MODE,
+            allowed=ALLOWED_MODES,
+            closed=OFFICIAL_TRACK2_MODE,
+            closed_if=official_track2_requested(flag=official_track2, env=source),
+        )
+    except JevError as exc:
+        raw = DEFAULT_MODE if flag is None else flag
+        if flag is None:
+            raw = source.get("LRA_TYPESAFE", DEFAULT_MODE)
+        mode = str(raw or DEFAULT_MODE).strip().lower()
+        raise TypesafeRouterError(f"unknown LRA_TYPESAFE={mode!r}; expected {ALLOWED_MODES}") from exc
 
 
 def key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
+    from jevops.jev import any_key
+
     source = os.environ if env is None else env
-    return any(str(source.get(name) or "").strip() for name in KEY_ENV_NAMES)
+    return any_key(source, KEY_ENV_NAMES)
 
 
 def _question_kind(question: Any) -> str:
-    if isinstance(question, CatalogQuestion):
-        return question.kind
-    kind = getattr(question, "kind", None) or getattr(question, "type", None)
-    if isinstance(kind, str) and kind:
-        return kind.lower()
-    name = type(question).__name__.lower()
-    if "choice" in name:
-        return "choice"
-    if "noul" in name:
-        return "noul"
-    if "score" in name:
-        return "score"
-    if isinstance(question, Mapping):
-        return str(question.get("type") or question.get("kind") or "")
-    raise TypesafeRouterError(f"cannot classify question {type(question).__name__}")
+    from jevops import jev
+
+    try:
+        return jev.question_kind(question)
+    except jev.JevError as exc:
+        raise TypesafeRouterError(str(exc)) from exc
 
 
 def _question_criteria(question: Any) -> Any:
-    if isinstance(question, CatalogQuestion):
-        return question.criteria
-    criteria = getattr(question, "criteria", None)
-    if criteria is not None:
-        return criteria
-    if isinstance(question, Mapping):
-        return question.get("criteria")
-    return None
+    from jevops import jev
+
+    return jev.question_criteria(question)
 
 
 def instantiate_questions(
@@ -486,28 +407,21 @@ def instantiate_questions(
 ) -> dict[str, Any]:
     """Build the frozen ROUTE_QUESTIONS dict. Uses in-tree types when loaded."""
 
-    choice_ctor = choice or (lambda **kwargs: CatalogQuestion(kind="choice", **kwargs))
-    noul_ctor = noul or (lambda **kwargs: CatalogQuestion(kind="noul", **kwargs))
-    score_ctor = score or (lambda **kwargs: CatalogQuestion(kind="score", **kwargs))
-    questions: dict[str, Any] = {}
-    for name, item in spec.items():
-        kind = str(item["type"])
-        instructions = str(item["instructions"])
-        criteria = item.get("criteria")
-        if name == "neighbor_style_match":
-            neighbor_criteria = {"none": "Do not imitate a neighbor"}
-            for neighbor in neighbor_names:
-                neighbor_criteria[str(neighbor)] = f"Imitate neighbor {neighbor}"
-            criteria = neighbor_criteria
-        if kind == "choice":
-            questions[name] = choice_ctor(instructions=instructions, criteria=criteria)
-        elif kind == "noul":
-            questions[name] = noul_ctor(instructions=instructions)
-        elif kind == "score":
-            questions[name] = score_ctor(instructions=instructions, criteria=list(criteria or []))
-        else:
-            raise TypesafeRouterError(f"unknown question type {kind} for {name}")
-    return questions
+    from jevops import jev
+
+    packed: dict[str, Mapping[str, Any]] = dict(spec)
+    if neighbor_names and "neighbor_style_match" in packed:
+        neighbor_criteria = {"none": "Do not imitate a neighbor"}
+        for neighbor in neighbor_names:
+            neighbor_criteria[str(neighbor)] = f"Imitate neighbor {neighbor}"
+        packed["neighbor_style_match"] = {
+            **dict(packed["neighbor_style_match"]),
+            "criteria": neighbor_criteria,
+        }
+    try:
+        return jev.instantiate_questions(packed, choice=choice, noul=noul, score=score)
+    except jev.JevError as exc:
+        raise TypesafeRouterError(str(exc)) from exc
 
 
 def route_questions(
@@ -544,17 +458,15 @@ def truncate_reference_proof(
 ) -> str:
     if not isinstance(src, str):
         raise TypesafeRouterError("reference_proof must be a string")
-    if len(src) <= char_budget:
-        return src
-    lines = src.splitlines()
-    if len(lines) <= head_lines + tail_lines:
-        return src[:char_budget]
-    head = "\n".join(lines[:head_lines])
-    tail = "\n".join(lines[-tail_lines:])
-    middle = "\n".join(lines[head_lines:-tail_lines]).encode("utf-8")
-    digest = hashlib.sha256(middle).hexdigest()
-    skipped = len(lines) - head_lines - tail_lines
-    return f"{head}\n\n# lra-truncated middle sha256:{digest} lines={skipped}\n\n{tail}"
+    from jevops.jev import truncate_middle
+
+    return truncate_middle(
+        src,
+        head_lines=head_lines,
+        tail_lines=tail_lines,
+        char_budget=char_budget,
+        marker="# lra-truncated middle",
+    )
 
 
 def problem_state(
@@ -563,110 +475,83 @@ def problem_state(
     neighbors: Sequence[Mapping[str, Any]] = (),
     candidate: Any = None,
 ) -> dict[str, Any]:
-    header = record.get("header") if isinstance(record.get("header"), str) else ""
-    version_info = record.get("version_info") if isinstance(record.get("version_info"), list) else []
-    return {
-        "problem": {
-            "name": record.get("name"),
-            "source": record.get("source"),
-            "n_toolchains": len(version_info),
-            "proof_length": record.get("proof_length"),
-            "num_lines": record.get("num_lines"),
-            "has_repo": bool(record.get("url")),
-            "header": header[:HEADER_CHARS],
-        },
-        "statement": record.get("statement"),
-        "reference_proof": truncate_reference_proof(str(record.get("src") or "")),
-        "neighbors": list(neighbors)[:NEIGHBOR_K],
-        "candidate": candidate,
-    }
+    from jevops.jev import record_state
+
+    return record_state(
+        record,
+        neighbors=neighbors,
+        candidate=candidate,
+        header_chars=HEADER_CHARS,
+        neighbor_k=NEIGHBOR_K,
+        truncate_fn=truncate_reference_proof,
+    )
 
 
 def _noul_value(answer: Any) -> float:
-    if hasattr(answer, "noul"):
-        return float(answer.noul)
-    if isinstance(answer, Mapping) and "noul" in answer:
-        return float(answer["noul"])
-    raise TypesafeRouterError("noul answer missing .noul")
+    from jevops import jev
+
+    try:
+        return jev.noul_value(answer)
+    except jev.JevError as exc:
+        raise TypesafeRouterError(str(exc)) from exc
 
 
 def _choice_value(answer: Any) -> tuple[str, float, dict[str, float]]:
-    choice = getattr(answer, "choice", None)
-    confidence = getattr(answer, "confidence", None)
-    probabilities = getattr(answer, "probabilities", None)
-    if isinstance(answer, Mapping):
-        choice = answer.get("choice") if choice is None else choice
-        confidence = answer.get("confidence") if confidence is None else confidence
-        probabilities = answer.get("probabilities") if probabilities is None else probabilities
-    if choice is None:
-        raise TypesafeRouterError("choice answer missing .choice")
-    return str(choice), float(confidence or 0.0), dict(probabilities or {})
+    from jevops import jev
+
+    try:
+        return jev.choice_value(answer)
+    except jev.JevError as exc:
+        raise TypesafeRouterError(str(exc)) from exc
 
 
 def _score_value(answer: Any, *, n_levels: int, legend_fallback: Mapping[int, str]) -> tuple[float, dict[int, str]]:
-    score = getattr(answer, "score", None)
-    legend = getattr(answer, "legend", None)
-    if isinstance(answer, Mapping):
-        score = answer.get("score") if score is None else score
-        legend = answer.get("legend") if legend is None else legend
-    if score is None:
-        raise TypesafeRouterError("score answer missing .score")
-    value = float(score)
-    if value < 0 or value > max(n_levels - 1, 0):
-        raise TypesafeRouterError(f"score rubric index {value} outside [0, {n_levels - 1}]")
-    if isinstance(legend, Mapping):
-        parsed = {int(key): str(item) for key, item in legend.items()}
-    else:
-        parsed = dict(legend_fallback)
-    return value, parsed
+    from jevops import jev
+
+    try:
+        return jev.score_value(answer, n_levels=n_levels, legend_fallback=legend_fallback)
+    except jev.JevError as exc:
+        raise TypesafeRouterError(str(exc)) from exc
 
 
 def answers_from_response(response: Any) -> dict[str, Any]:
     """Project System One answers. Score stays a rubric index. No Lean text."""
 
-    choices = getattr(response, "choices", None) or {}
-    nouls = getattr(response, "nouls", None) or {}
-    scores = getattr(response, "scores", None) or {}
-    usage = dict(getattr(response, "usage", None) or {})
-    family, family_confidence, family_probs = _choice_value(choices["rewrite_family"])
-    neighbor = None
-    if "neighbor_style_match" in choices:
-        neighbor, _, _ = _choice_value(choices["neighbor_style_match"])
-    likely_shorter, likely_legend = _score_value(
-        scores["likely_shorter"],
-        n_levels=len(LIKELY_SHORTER_CRITERIA),
-        legend_fallback=LIKELY_SHORTER_LEGEND,
-    )
-    elab_risk, elab_legend = _score_value(
-        scores["elab_risk_if_automated"],
-        n_levels=len(ELAB_RISK_CRITERIA),
-        legend_fallback=ELAB_RISK_LEGEND,
-    )
-    return {
-        "family": family,
-        "family_confidence": family_confidence,
-        "family_probs": family_probs,
-        "hammer_before_llm": _noul_value(nouls["hammer_before_llm"]),
-        "reference_already_tight": _noul_value(nouls["reference_already_tight"]),
-        "likely_shorter": likely_shorter,
-        "likely_shorter_legend": likely_legend,
-        "likely_shorter_is_rubric_index": True,
-        "elab_risk": elab_risk,
-        "elab_risk_legend": elab_legend,
-        "version_fragile": _noul_value(nouls["version_fragile"]),
-        "putnam_aesop_plausible": _noul_value(nouls["putnam_aesop_plausible"]),
-        "calc_structure_worth_keeping": _noul_value(nouls["calc_structure_worth_keeping"]),
-        "statement_in_proof_duplicated": _noul_value(nouls["statement_in_proof_duplicated"]),
-        "uses_sorry_or_admit": _noul_value(nouls["uses_sorry_or_admit"]),
-        "neighbor_style_match": neighbor,
-        "spend_llm": _noul_value(nouls["spend_llm"]),
-        "usage": usage,
-        "jev_generated_lean": False,
-        "lean_text": None,
-        "tactics": None,
-        "proof_text": None,
-        "arena_score": None,
-    }
+    from jevops.jev import project_answers
+
+    try:
+        out = project_answers(
+            response,
+            noul_keys=(
+                "hammer_before_llm",
+                "reference_already_tight",
+                "version_fragile",
+                "putnam_aesop_plausible",
+                "calc_structure_worth_keeping",
+                "statement_in_proof_duplicated",
+                "uses_sorry_or_admit",
+                "spend_llm",
+            ),
+            choice_aliases={"rewrite_family": "family", "neighbor_style_match": "neighbor_style_match"},
+            optional_choices=("neighbor_style_match",),
+            score_specs={
+                "likely_shorter": {
+                    "dest": "likely_shorter",
+                    "n_levels": len(LIKELY_SHORTER_CRITERIA),
+                    "legend": LIKELY_SHORTER_LEGEND,
+                    "rubric": True,
+                },
+                "elab_risk_if_automated": {
+                    "dest": "elab_risk",
+                    "n_levels": len(ELAB_RISK_CRITERIA),
+                    "legend": ELAB_RISK_LEGEND,
+                },
+            },
+        )
+    except Exception as exc:
+        raise TypesafeRouterError(str(exc)) from exc
+    out.update({"lean_text": None, "tactics": None, "proof_text": None, "arena_score": None})
+    return out
 
 
 def should_call_leanstral(answers: Optional[Mapping[str, Any]], rec: Mapping[str, Any]) -> bool:
@@ -844,82 +729,46 @@ def distill_record(
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _call_func_names(source: str) -> set[str]:
-    names: set[str] = set()
-    tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        func = node.func
-        if isinstance(func, ast.Name):
-            names.add(func.id)
-        elif isinstance(func, ast.Attribute):
-            names.add(func.attr)
-    return names
+    from jevops.repair import call_func_names
+
+    return call_func_names(source)
 
 
 def _assigned_constant(tree: ast.AST, name: str) -> Any:
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            value = node.value
-            targets = node.targets
-        elif isinstance(node, ast.AnnAssign) and node.value is not None:
-            value = node.value
-            targets = [node.target]
-        else:
-            continue
-        for target in targets:
-            if isinstance(target, ast.Name) and target.id == name:
-                if isinstance(value, ast.Constant):
-                    return value.value
-    return None
+    from jevops.repair import assigned_constant
+
+    return assigned_constant(tree, name)
 
 
 def _numeric_score_assignments(source: str) -> list[str]:
-    tree = ast.parse(source)
-    issues: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            value = node.value
-            if isinstance(value, ast.Constant) and value.value is None:
-                continue
-            issues.append(f"keyword {node.arg} at line {getattr(node, 'lineno', 0)}")
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES:
-                value = node.value
-                if isinstance(value, ast.Constant) and value.value is None:
-                    continue
-                issues.append(f"ann {node.target.id} at line {getattr(node, 'lineno', 0)}")
-    return issues
+    from jevops.repair import numeric_score_assignments
+
+    return numeric_score_assignments(source, FORBIDDEN_SCORE_NAMES)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import audit_source as _audit
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
-    tree = ast.parse(text)
-    imported = _imported_names(text)
-    calls = _call_func_names(text)
-    forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
-    forbidden_calls = sorted(name for name in calls if name in FORBIDDEN_CALLS)
-    score_issues = _numeric_score_assignments(text)
-    uses_lock_ex = any(
-        isinstance(node, ast.Attribute) and node.attr == "LOCK_EX" for node in ast.walk(tree)
+    out = _audit(
+        text,
+        forbidden_imports=FORBIDDEN_IMPORT_NAMES,
+        forbidden_calls=FORBIDDEN_CALLS,
+        forbidden_scores=FORBIDDEN_SCORE_NAMES,
     )
+    imported = out["imported_names"]
+    calls = _call_func_names(text)
+    tree = ast.parse(text)
+    forbidden_imports = out["forbidden_imports"]
+    forbidden_calls = out["forbidden_calls"]
+    score_issues = out["score_issues"]
+    uses_lock_ex = out["uses_lock_ex"]
     return {
         "imported_names": sorted(imported),
         "forbidden_imports": forbidden_imports,

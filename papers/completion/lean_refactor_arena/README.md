@@ -37,18 +37,9 @@ Template: `neurips_2026_vericode_competition.sty` (competition track, not the re
 | Path | Role |
 | --- | --- |
 | `typesafe_nca.md` | TypeSafe NCA architecture for agents and harness engineers |
-| `harness/nca_rankers.py` | RF, Thompson, plus dispatch to integer milles rankers |
-| `harness/nca_int_rankers.py` | SVD, PCA, ridge, OLS, logistic, k-means, kNN, ICA, NMF, Kalman, Bayes, MCMC (no float64) |
-| `harness/nca_autoencoder.py` | VAE text→Lean round-trip; Jev batch loss; shortest lake-ok Lean |
-| `harness/nca_more_rankers.py` | SGD/mask/diffuse wraps; Markov; isotonic; AdaBoost; quantiles; PageRank; contrastive |
-| `harness/nca_graph.py` | Graph traverse, GraphRAG search, milles neural message-passing |
-| `harness/nca_jsonld.py` | JSON-LD graph interface; optional DuckDB adapter |
-| `harness/nca_skill_tree.py` | Hierarchical skill tree searched by random forest |
-| `harness/nca_temporal.py` | Hawkes, CRF, submodular, delayed bandit, tape conv/DFT |
-| `harness/nca_turing.py` | Turing tape/stack tools; decision-transformer (s,a,R) window |
-| `harness/nca_tape_tools.py` | Tape splice/mask/pop/crop/keep/checkpoint for DT context |
-| `harness/nca_plan.py` | Goal/subgoal/task DAG and graph-of-thoughts for Jev |
-| `harness/nca_kernel.py` | Cache tiers L0–L3, CID, negative TTL, single-flight, context budget |
+| `harness/nca_*.py` (kernel shims) | Adapters → `~/lift_coding/JevOps` (`jevops.{kernel,tape,stack,jsonld,plan,graph,skill_tree,rankers,int_rankers,more_rankers,temporal,autoencoder,turing,tape_tools,nca}`) |
+| `harness/typesafe_nca.py` | LRA walker (tick/feed/mutate/halt); cell store is `jevops.nca` |
+| `harness/portable_rewrites.py` | Keep-structure Lean folds (implementation, not kernel) |
 | `data/benchmark_data_warmup.jsonl` | Frozen organizer warm-up |
 | `data/warmup_summary.json` | Machine-readable census |
 | `tools/summarize_warmup.py` | Hash check + table + receipt |

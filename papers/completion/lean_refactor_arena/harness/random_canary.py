@@ -28,6 +28,7 @@ CANARY_139 = OUT_DEFAULT / "cascade-best-139.lean"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import draft_fanout as lra_fan  # noqa: E402
 import mca_mask_replace as lra_mask  # noqa: E402
 import pca_mca_fanout as lra_pca  # noqa: E402
@@ -176,29 +177,11 @@ def random_drafts(
     names still appear later (the substOldPostSubset ``trigger1`` failure).
     """
 
-    body = tactics.strip("\n")
-    base = lra_loop.token_count(body)
-    rows: list[dict[str, Any]] = []
-    seen: set[str] = {body}
+    from jevops.pick import pin_prefix
+    from jevops.pick import shorter_bag
 
-    def push(kind: str, nxt: str, extra: Optional[dict[str, Any]] = None) -> None:
-        nxt = nxt.strip("\n")
-        if not nxt or nxt in seen:
-            return
-        tok = lra_loop.token_count(nxt)
-        if tok >= base:
-            return
-        seen.add(nxt)
-        item = {
-            "kind": kind,
-            "tactics": nxt,
-            "token_count": tok,
-            "generator": "random_canary",
-            "llm": "off",
-        }
-        if extra:
-            item.update(extra)
-        rows.append(item)
+    body = tactics.strip("\n")
+    push, rows = shorter_bag(body, token_fn=lra_loop.token_count)
 
     allow = set(allow_families) if allow_families else None
 
@@ -281,33 +264,26 @@ def random_drafts(
         push(kind, draft.tactics, {"family": draft.family})
         if len(rows) >= n:
             break
-    portable = [row for row in rows if str(row.get("kind") or "").startswith("port_")]
-    others = [row for row in rows if row not in portable]
-    rng.shuffle(others)
-    pinned = portable + others
-    return pinned[: max(n, len(portable))]
+    return pin_prefix(rows, n=n, shuffle_fn=rng.shuffle)
 
 
-def geo_mean(probs: Sequence[float]) -> float:
-    live = [max(float(p), EPSILON) for p in probs]
-    prod = 1.0
-    for item in live:
-        prod *= item
-    return prod ** (1.0 / max(1, len(live)))
+from jevops.pick import draft_tree as kernel_draft_tree  # noqa: E402
+from jevops.pick import geo_mean  # noqa: E402
+from jevops.pick import leftover_sort_key  # noqa: E402  # re-export
+from jevops.pick import sample_records  # noqa: E402
 
 
 def draft_tree(drafts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, str]]:
-    tree: dict[str, dict[str, str]] = {}
-    for item in drafts:
-        fam = str(item.get("family") or "search_space")
-        kind = str(item.get("kind") or "")
-        if not kind:
-            continue
-        blurb = FAMILY_STRUCTURED.get(fam, {}).get("what", FAMILY_BLURB.get(fam, fam))
-        tree.setdefault(fam, {})[kind] = f"{kind}; {item.get('token_count')} tok; {blurb}"
-    if not tree:
-        tree = {"pca_keep": {"keep": "No shorter draft"}}
-    return tree
+    blurbs = dict(FAMILY_BLURB)
+    for fam, spec in FAMILY_STRUCTURED.items():
+        what = spec.get("what")
+        if what:
+            blurbs[fam] = str(what)
+    return kernel_draft_tree(
+        drafts,
+        blurbs=blurbs,
+        empty_tree={"pca_keep": {"keep": "No shorter draft"}},
+    )
 
 
 def typesafe_pick(
@@ -325,10 +301,11 @@ def typesafe_pick(
     if not typesafe_configured():
         return {"skipped": True, "reason": "no_key"}
     tree = draft_tree(drafts)
-    family_criteria = {
-        fam: FAMILY_STRUCTURED.get(fam, {"what": FAMILY_BLURB.get(fam, fam)})
-        for fam in tree
-    }
+    from jevops.memory import named_success_kinds
+    from jevops.pick import family_criteria as _family_criteria
+    from jevops.pick import named_keys
+
+    family_criteria = _family_criteria(tree, structured=FAMILY_STRUCTURED, blurbs=FAMILY_BLURB)
     questions: dict[str, Any] = {
         "family": Choice(
             instructions={
@@ -371,21 +348,25 @@ def typesafe_pick(
             },
         ),
     }
-    for item in list(drafts)[:6]:
-        kind = str(item.get("kind") or "")
-        if not kind:
-            continue
-        questions[f"fail_{kind}"] = Noul(
-            instructions={
-                "question": f"Will draft `{kind}` fail lake compile?",
-                "inspect": f"`drafts` entry `{kind}`",
+    from jevops.jev import expand_questions
+
+    questions.update(
+        expand_questions(
+            [item for item in drafts if item.get("kind")],
+            ctor=Noul,
+            name_fn=lambda item: f"fail_{item.get('kind')}",
+            instructions_fn=lambda item: {
+                "question": f"Will draft `{item.get('kind')}` fail lake compile?",
+                "inspect": f"`drafts` entry `{item.get('kind')}`",
                 "focus": "true = P(wrong) for this field (SDE per-field battery).",
             },
             criteria={
                 "true": "Likely unknown identifier, type mismatch, or unsolved goals",
                 "false": "A binder-safe fold or a kernel that already laked on this problem",
             },
+            limit=6,
         )
+    )
     for fam, kids in tree.items():
         if len(kids) == 1:
             continue
@@ -408,131 +389,53 @@ def typesafe_pick(
             for item in drafts[:16]
         ],
         "memory": {
-            "success_kinds": sorted(
-                {str(item.get("kind")) for item in (memory or {}).get("successes") or [] if item.get("name") == record.get("name")}
-            )[:12],
-            "blacklist": [
-                key
-                for key in (memory or {}).get("blacklist") or []
-                if str(key).startswith(str(record.get("name") or ""))
-            ][:12],
+            "success_kinds": named_success_kinds(memory or {}, str(record.get("name") or ""), limit=12),
+            "blacklist": named_keys((memory or {}).get("blacklist") or [], str(record.get("name") or "")),
         },
         "goal": "Keep induction/case. Do not write Lean.",
     }
     started = time.perf_counter()
     result = TypeSafeClient(timeout=45.0).system_one(state, questions)
+    from jevops.jev import record_usage
+
     usage = dict(getattr(result, "usage", None) or {})
-    if ledger is not None:
-        inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or 200)
-        out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
-        ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
+    record_usage(ledger, usage, model=lra_t1.JEV_MODEL_ID)
     choices = getattr(result, "choices", None) or {}
     scores = getattr(result, "scores", None) or {}
     nouls = getattr(result, "nouls", None) or {}
     fam_ans = choices.get("family")
     fam_probs = dict(getattr(fam_ans, "probabilities", None) or {})
     family_conf = float(getattr(fam_ans, "confidence", None) or 0.0)
-    leaf_qs: dict[str, dict[str, Any]] = {}
-    for fam, kids in tree.items():
-        if len(kids) == 1:
-            only = next(iter(kids))
-            leaf_qs[fam] = {"choice": only, "confidence": 1.0, "probabilities": {only: 1.0}}
-            continue
-        ans = choices.get(f"leaf_{fam}")
-        probs = dict(getattr(ans, "probabilities", None) or {})
-        leaf_qs[fam] = {
-            "choice": getattr(ans, "choice", None),
-            "confidence": float(getattr(ans, "confidence", None) or 0.0),
-            "probabilities": {k: float(probs.get(k) or 0.0) for k in kids},
-        }
-    fam_rank = sorted(tree, key=lambda fam: float(fam_probs.get(fam) or 0.0), reverse=True)
-    paths: list[dict[str, Any]] = []
-    for fam in fam_rank[:BEAM_K]:
-        leaf_q = leaf_qs.get(fam) or {}
-        for leaf, _desc in tree[fam].items():
-            score = geo_mean(
-                [float(fam_probs.get(fam) or 0.0), float((leaf_q.get("probabilities") or {}).get(leaf) or 0.0)]
-            )
-            paths.append(
-                {
-                    "family": fam,
-                    "leaf": leaf,
-                    "path_score": score,
-                    "family_p": float(fam_probs.get(fam) or 0.0),
-                    "leaf_p": float((leaf_q.get("probabilities") or {}).get(leaf) or 0.0),
-                    "family_confidence": family_conf,
-                    "leaf_confidence": float(leaf_q.get("confidence") or 0.0),
-                }
-            )
-    paths.sort(key=lambda item: item["path_score"], reverse=True)
-    top = paths[0]["path_score"] if paths else 0.0
-    second = paths[1]["path_score"] if len(paths) > 1 else EPSILON
-    greedy_leaf = paths[0]["leaf"] if paths else None
+    from jevops import pick as lra_pick
+
+    leaf_qs = lra_pick.leaf_qs_from_choices(tree, choices, family_conf=family_conf)
     noul_fail = float(getattr(nouls.get("will_fail_compile"), "noul", 0.0) or 0.0)
     noul_pca = float(getattr(nouls.get("breaks_pca"), "noul", 0.0) or 0.0)
-    per_leaf_fail = {
-        str(item.get("kind")): float(getattr(nouls.get(f"fail_{item.get('kind')}"), "noul", 0.0) or 0.0)
-        for item in drafts[:6]
-        if item.get("kind")
-    }
-    failed_stems = lra_bind.failed_skill_stems(memory or {}, str(record.get("name") or ""))
-    fired_leaves = set()
-    for kind, prob in per_leaf_fail.items():
-        if prob > FIRE_T:
-            fired_leaves.add(kind)
-        elif prob > FIRE_T_LEAF and (
-            kind in failed_stems or kind.replace("port_", "") in failed_stems
-        ):
-            fired_leaves.add(kind)
-    fired = noul_fail > FIRE_T or noul_pca > FIRE_T or bool(fired_leaves)
-    beam_kinds = [item["leaf"] for item in paths if item["leaf"] and item["leaf"] not in fired_leaves]
-    if not beam_kinds:
-        beam_kinds = [item["leaf"] for item in paths if item["leaf"]]
-    if fired and greedy_leaf in beam_kinds and (noul_fail > FIRE_T or greedy_leaf in fired_leaves):
-        beam_kinds = [k for k in beam_kinds if k != greedy_leaf]
+    per_leaf_fail = lra_pick.noul_map(
+        nouls, [item.get("kind") for item in drafts[:6]], prefix="fail_"
+    )
     cut = scores.get("likely_token_cut")
-    cut_norm = min(1.0, float(getattr(cut, "score", None) or 0.0) / 2.0)
-    for path in paths:
-        noul = float(per_leaf_fail.get(str(path["leaf"]), noul_fail) or 0.0)
-        path["composite"] = (
-            0.45 * (1.0 - noul)
-            + 0.25 * float(path["leaf_p"])
-            + 0.20 * float(path["family_p"])
-            + 0.10 * cut_norm
-        )
-    paths.sort(key=lambda item: float(item.get("composite") or 0.0), reverse=True)
-    beam_kinds = [item["leaf"] for item in paths if item["leaf"] and item["leaf"] not in fired_leaves]
-    leaf_p = float(paths[0]["leaf_p"]) if paths else 0.0
-    leaf_conf = float(paths[0]["leaf_confidence"]) if paths else 0.0
-    abstain = family_conf < CONFIDENT or max(leaf_p, leaf_conf) < UNCERTAIN
-    if abstain:
-        safe = [k for k in ("drop_unused_binders", "collapse_simp_at") if any(item.get("kind") == k for item in drafts)]
-        beam_kinds = safe + [k for k in beam_kinds if k not in safe]
-    greedy_fam = paths[0]["family"] if paths else getattr(fam_ans, "choice", None)
-    return {
-        "skipped": False,
-        "best_family": greedy_fam,
-        "family_confidence": family_conf,
-        "family_probabilities": {k: float(fam_probs.get(k) or 0.0) for k in tree},
-        "best_draft": greedy_leaf,
-        "draft_confidence": paths[0]["leaf_confidence"] if paths else None,
-        "draft_probabilities": (leaf_qs.get(str(greedy_fam)) or {}).get("probabilities") or {},
-        "likely_token_cut": getattr(cut, "score", None),
-        "beam_kinds": beam_kinds[:8],
-        "path_score": top,
-        "separation": top / max(second, EPSILON),
-        "abstain": abstain,
-        "noul_fail": noul_fail,
-        "noul_pca": noul_pca,
-        "per_leaf_fail": per_leaf_fail,
-        "fired_leaves": sorted(fired_leaves),
-        "fired": fired,
-        "usage": usage,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
-        "jev_generated_lean": False,
-        "arena_score": None,
-        "composite": (paths[0].get("composite") if paths else None),
-    }
+    return lra_pick.rank_from_answers(
+        tree=tree,
+        fam_probs=fam_probs,
+        family_conf=family_conf,
+        leaf_qs=leaf_qs,
+        drafts=drafts,
+        noul_fail=noul_fail,
+        noul_pca=noul_pca,
+        per_leaf_fail=per_leaf_fail,
+        failed_stems=lra_bind.failed_skill_stems(memory or {}, str(record.get("name") or "")),
+        cut_score=getattr(cut, "score", None),
+        usage=usage,
+        wall_ms=(time.perf_counter() - started) * 1000.0,
+        greedy_fam_fallback=getattr(fam_ans, "choice", None),
+        beam_k=BEAM_K,
+        fire_t=FIRE_T,
+        fire_t_leaf=FIRE_T_LEAF,
+        confident=CONFIDENT,
+        uncertain=UNCERTAIN,
+        epsilon=EPSILON,
+    )
 
 
 # Residual name -> pipeline skill to skip when Noul says cutting it is unsafe.
@@ -582,27 +485,7 @@ def typesafe_autoresearch(
     return routed
 
 
-def bias_compose_no_drafts(
-    compose: str,
-    *,
-    memory: Optional[Mapping[str, Any]] = None,
-    skills: Optional[Mapping[str, Any]] = None,
-    skill: str = "keep",
-    name: str = "",
-) -> str:
-    """When drafts are exhausted and budget is alive, program NCA instruct next."""
-
-    obs = dict((memory or {}).get("observations") or {})
-    tree = (obs.get("no_drafts_tree_by") or {}).get(name)
-    instructed = (obs.get("no_drafts_instructed_by") or {}).get(name)
-    if not tree or instructed:
-        return compose
-    if compose in {"instruct", "heal", "return", "call", "nest", "spawn"}:
-        return compose
-    portable = [key for key in (skills or {}) if key != "keep"]
-    if portable and str(skill or "keep") not in {"keep", "None", ""}:
-        return compose
-    return "instruct"
+from jevops.walk import bias_compose_no_drafts  # noqa: E402
 
 
 def typesafe_intent(
@@ -619,6 +502,12 @@ def typesafe_intent(
 ) -> dict[str, Any]:
     """Intent routing + AutoResearch residual features."""
 
+    from jevops.memory import named_success_kinds
+    from jevops.memory import port_wins
+    from jevops.pick import filter_catalog
+    from jevops.walk import COMPOSE_CRITERIA
+    from jevops.walk import intent_window
+
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
     from ipfs_accelerate_py.typesafe_inference import Choice, Noul, Score, TypeSafeClient, typesafe_configured
@@ -627,7 +516,9 @@ def typesafe_intent(
         return {"skipped": True, "families": set(FAMILY_BLURB), "reason": "no_key"}
     present = {str(item.get("family")) for item in analysis.get("families") or []}
     present.update({"dead_code", "search_space", "pca_keep"})
-    criteria = {fam: FAMILY_STRUCTURED.get(fam, {"what": FAMILY_BLURB.get(fam, fam)}) for fam in present if fam in FAMILY_STRUCTURED}
+    from jevops.pick import family_criteria as _family_criteria
+
+    criteria = _family_criteria(present, structured=FAMILY_STRUCTURED, require_structured=True)
     state = {
         "problem": {"name": record.get("name"), "source": record.get("source")},
         "n_tokens": analysis.get("n_tokens"),
@@ -636,17 +527,9 @@ def typesafe_intent(
         "safe_holes": [h for h in analysis.get("mca_holes") or [] if h.get("safe_to_drop")],
         "residuals": lra_port.analyze_residuals(tactics) if tactics else {},
         "memory": {
-            "success_kinds": sorted(
-                {
-                    str(item.get("kind"))
-                    for item in (memory or {}).get("successes") or []
-                    if item.get("name") == record.get("name")
-                }
-            )[:8],
+            "success_kinds": named_success_kinds(memory or {}, str(record.get("name") or "")),
         },
-        "tape_window": list((memory or {}).get("_tape_window") or [])[:16],
-        "stack_top": list((memory or {}).get("_stack_top") or [])[:3],
-        "board_window": list(((memory or {}).get("nca") or {}).get("board_window") or [])[:8],
+        **intent_window(memory),
         "head": str(analysis.get("case_labels") or [])[:200],
         "tree_node": tree_node,
         "allow_families": sorted(allow_families or []),
@@ -654,38 +537,24 @@ def typesafe_intent(
         "proposed_skill": lra_bind.propose_skill_from_research(
             memory or {}, str(record.get("name") or "")
         ),
-        "memory_wins": {
-            str(row.get("kind")): 1
-            for row in (memory or {}).get("successes") or []
-            if str(row.get("kind") or "").startswith("port_")
-        },
+        "memory_wins": port_wins(memory),
     }
     skills = (
         lra_port.available_skills(tactics, memory=dict(memory or {}), name=str(record.get("name") or ""))
         if tactics
         else {"keep": "No tactics"}
     )
-    if allow_skills:
-        skills = {
-            key: val
-            for key, val in skills.items()
-            if key == "keep" or key in allow_skills or key.replace("port_", "") in allow_skills
-        }
     tree = lra_port.decision_tree(
         tactics, memory=dict(memory or {}), name=str(record.get("name") or "")
     ) if tactics else {}
-    if allow_families:
-        tree = {fam: kids for fam, kids in tree.items() if fam in allow_families}
-        allowed_kinds = {kid for kids in tree.values() for kid in kids}
-        skills = {key: val for key, val in skills.items() if key == "keep" or key in allowed_kinds}
-    if memory is not None:
-        skills = {
-            key: val
-            for key, val in skills.items()
-            if key == "keep" or not lra_bind.is_blacklisted(memory, str(record.get("name") or ""), key)
-        }
-        if not skills:
-            skills = {"keep": "No remaining un-blacklisted skill"}
+    name = str(record.get("name") or "")
+    skills, tree = filter_catalog(
+        skills,
+        tree,
+        allow_skills=allow_skills,
+        allow_families=allow_families,
+        is_blocked=(lambda kind: lra_bind.is_blacklisted(memory, name, kind)) if memory is not None else None,
+    )
     started = time.perf_counter()
     questions: dict[str, Any] = {
             "intent": Choice(
@@ -718,66 +587,7 @@ def typesafe_intent(
                     "question": "Apply one skill, the pipeline, or nest a TypeSafe loop on a child of the skill decision tree?",
                     "focus": "nest opens a recursive inner loop on one family/skill. Do not write Lean.",
                 },
-                criteria={
-                    "keep": {"what": "No skill; pop this tree node", "not_for": "When a shorter closed fold exists"},
-                    "single": {"what": "Apply only the winning skill at this node", "not_for": "When two skills commute and both shorten"},
-                    "pipeline": {
-                        "what": "Compose un-blacklisted skills in memory-weighted order (keep-structure first)",
-                        "not_for": "When a step is Noul-fired or binder-unsafe",
-                    },
-                    "nest": {
-                        "what": "Open a nested TypeSafe loop on one child family/skill of the decision tree, then keep looping here",
-                        "not_for": "When this node is already a leaf or already_minimal",
-                    },
-                    "spawn": {
-                        "what": "Spawn a callable named subloop and join its return (skill_walk, analyze, diffuse)",
-                        "not_for": "When no registered subloop exists",
-                    },
-                    "analyze": {
-                        "what": "Run a static-analysis tool (kg/ast/exports/mcp/diffuse/tree) then keep looping; no llm_router",
-                        "not_for": "When the next step is a lake apply",
-                    },
-                    "self_improve": {
-                        "what": "Mint/expand keep-structure skills from memory without llm_router",
-                        "not_for": "When a lake-valid portable draft is already in hand",
-                    },
-                    "invoke_router": {
-                        "what": "Autonomously call llm_router grok for a closed skill action",
-                        "not_for": "The default TypeSafe self-improve path",
-                    },
-                    "return": {
-                        "what": "Pop this subloop and return tactics/observations to the parent",
-                        "not_for": "The root walker unless the outer Grok step is done",
-                    },
-                    "tick": {
-                        "what": "NCA tick: feed each cell its last state + neighbors + TypeSafe scores",
-                        "not_for": "When no grid has been seeded",
-                    },
-                    "fork": {
-                        "what": "Fork high-energy cells as returnable subagent subloops (cap 4)",
-                        "not_for": "Unbounded nested grok",
-                    },
-                    "mutate": {
-                        "what": "Gated mutation of pipeline/skills/tactics from NCA energy",
-                        "not_for": "Arbitrary repo file rewrites",
-                    },
-                    "hook": {
-                        "what": "Hook, walk, and evaluate a harness module (AST/import/tests)",
-                        "not_for": "Paths outside the paper harness",
-                    },
-                    "call": {
-                        "what": "CALL ptr://skill|theorem|module|tool|cell|subloop|mcpplusplus|goal|task|codepath/…; child injects context on RETURN",
-                        "not_for": "Unknown pointers, live P2P, docker0, or depth > 3",
-                    },
-                    "instruct": {
-                        "what": "Compile NCA IR (datasets autoencoder/compiler if present) and program work ops; hosted Leanstral JSON only, never docker0",
-                        "not_for": "Letting Leanstral write Lean without lake",
-                    },
-                    "heal": {
-                        "what": "Diagnose malformed NCA/tape/stack/program_state and apply closed TypeSafe-ranked repairs",
-                        "not_for": "Healthy state or rewriting Lean",
-                    },
-                },
+                criteria=dict(COMPOSE_CRITERIA),
             ),
             "skill": Choice(
                 instructions={
@@ -787,21 +597,14 @@ def typesafe_intent(
                 criteria=skills,
             ),
         }
-    nest_criteria = {
-        fam: {"what": f"Nested TypeSafe loop over {fam}: {', '.join(kids)[:160]}"}
-        for fam, kids in tree.items()
-        if kids
-    }
-    for kids in tree.values():
-        for kid in kids[:8]:
-            nest_criteria.setdefault(kid, {"what": f"Nested TypeSafe loop on skill {kid}"})
     import typesafe_tools as _lra_tools_tree
+    from jevops.walk import nest_criteria as _nest_criteria
 
-    nest_criteria.setdefault("skill_walk", {"what": "Spawn the TypeSafe skill-walk subloop and join its return"})
-    for tool_name, spec in _lra_tools_tree.TOOL_CRITERIA.items():
-        nest_criteria.setdefault(tool_name, spec)
-    for sub_name in _lra_tools_tree.SUBLOOPS:
-        nest_criteria.setdefault(sub_name, {"what": f"Spawn registered subloop {sub_name}"})
+    nest_criteria = _nest_criteria(
+        tree,
+        tools=_lra_tools_tree.TOOL_CRITERIA,
+        subloops=_lra_tools_tree.SUBLOOPS,
+    )
     if extra_residual_qs and nest_criteria:
         questions["nest_child"] = Choice(
             instructions={
@@ -821,12 +624,17 @@ def typesafe_intent(
             criteria=lra_tools.TOOL_CRITERIA,
         )
     residuals = dict(state.get("residuals") or {})
+    from jevops.jev import expand_questions
+
     if extra_residual_qs:
-        for residual, count in list(residuals.items())[:6]:
-            questions[f"unsafe_{residual}"] = Noul(
-                instructions={
+        questions.update(
+            expand_questions(
+                list(residuals.items()),
+                ctor=Noul,
+                name_fn=lambda kv: f"unsafe_{kv[0]}",
+                instructions_fn=lambda kv: {
                     "question": (
-                        f"Is cutting residual `{residual}` (count={count}) lake-unsafe "
+                        f"Is cutting residual `{kv[0]}` (count={kv[1]}) lake-unsafe "
                         "on this script?"
                     ),
                     "focus": "true = P(wrong to cut). AutoResearch presence feature.",
@@ -835,20 +643,29 @@ def typesafe_intent(
                     "true": "The residual is required (used binder, extra goals, motive cast, Join witness)",
                     "false": "A closed fold of this residual has laked on this or a similar proof",
                 },
+                limit=6,
             )
-            questions[f"help_{residual}"] = Score(
-                instructions=f"How much would a *safe* cut of `{residual}` help token count?",
+        )
+        questions.update(
+            expand_questions(
+                list(residuals.items()),
+                ctor=Score,
+                name_fn=lambda kv: f"help_{kv[0]}",
+                instructions_fn=lambda kv: f"How much would a *safe* cut of `{kv[0]}` help token count?",
                 criteria=[
                     "No safe cut",
                     "A few tokens",
                     "A clear local shortening",
                 ],
+                limit=6,
             )
-    for sk in list(skills)[:6]:
-        if sk == "keep":
-            continue
-        questions[f"fail_skill_{sk}"] = Noul(
-            instructions={
+        )
+    questions.update(
+        expand_questions(
+            list(skills),
+            ctor=Noul,
+            name_fn=lambda sk: f"fail_skill_{sk}",
+            instructions_fn=lambda sk: {
                 "question": f"Will skill `{sk}` fail lake compile?",
                 "focus": "true = P(wrong). Do not invoke a fired skill.",
             },
@@ -856,125 +673,39 @@ def typesafe_intent(
                 "true": "Type mismatch, unknown identifier, or unsolved goals",
                 "false": "A binder-safe fold that already laked on this or a similar proof",
             },
+            limit=6,
+            skip=("keep",),
         )
-    result = TypeSafeClient(timeout=45.0).system_one(state, questions)
-    usage = dict(getattr(result, "usage", None) or {})
-    if ledger is not None:
-        inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or 200)
-        out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
-        ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-    choices = getattr(result, "choices", None) or {}
-    scores = getattr(result, "scores", None) or {}
-    nouls = getattr(result, "nouls", None) or {}
-    intent = choices.get("intent")
-    picked = str(getattr(intent, "choice", None) or "search_space")
-    conf = float(getattr(intent, "confidence", None) or 0.0)
-    probs = dict(getattr(intent, "probabilities", None) or {})
-    minimal = float(getattr(nouls.get("already_minimal"), "noul", 0.0) or 0.0)
-    complexity = float(getattr(scores.get("complexity"), "score", None) or 0.0)
-    floor = 0.85 if record.get("name") in HIGH_STAKES else CONFIDENT
-    compose_ans = choices.get("compose")
-    compose = str(getattr(compose_ans, "choice", None) or "single")
-    skill_ans = choices.get("skill")
-    skill = str(getattr(skill_ans, "choice", None) or "keep")
-    if compose == "pipeline" and skill == "keep":
-        skill = next((key for key in skills if str(key).startswith("port_pipeline")), "keep")
-    skill_conf = float(getattr(skill_ans, "confidence", None) or 0.0)
-    fail_skill = float(getattr(nouls.get(f"fail_skill_{skill}"), "noul", 0.0) or 0.0)
-    skip = bool(minimal > FIRE_T and conf >= CONFIDENT)
-    if picked == "pca_keep" and len([k for k in skills if k != "keep"]) == 0:
-        skip = True
-    if skill == "keep" and skill_conf >= UNCERTAIN and minimal > FIRE_T:
-        skip = True
-    if fail_skill > FIRE_T_LEAF and skill != "keep":
-        skill = "keep"
-    nest_ans = choices.get("nest_child")
-    nest_child = str(getattr(nest_ans, "choice", None) or "")
-    tool_ans = choices.get("tool_name")
-    tool_name = str(getattr(tool_ans, "choice", None) or "")
-    CONTROL = {
-        "nest",
-        "spawn",
-        "analyze",
-        "self_improve",
-        "invoke_router",
-        "return",
-        "tick",
-        "fork",
-        "mutate",
-        "hook",
-        "call",
-        "instruct",
-        "heal",
-    }
-    compose = bias_compose_no_drafts(
-        compose,
-        memory=memory,
-        skills=skills,
-        skill=skill,
-        name=str(record.get("name") or ""),
     )
-    if compose in CONTROL:
-        skip = False
-        if not nest_child:
-            nest_child = picked if picked in tree else (skill if skill != "keep" else "")
-    skip_skills: set[str] = set()
-    residual_unsafe: dict[str, float] = {}
-    residual_help: dict[str, float] = {}
-    for residual in residuals:
-        unsafe = float(getattr(nouls.get(f"unsafe_{residual}"), "noul", 0.0) or 0.0)
-        residual_unsafe[residual] = unsafe
-        help_ans = scores.get(f"help_{residual}")
-        residual_help[residual] = float(getattr(help_ans, "score", None) or 0.0)
-        if unsafe > FIRE_T_RESIDUAL:
-            skip_skills.update(RESIDUAL_TO_SKILL.get(residual, ()))
-    allow = {picked}
-    if conf < floor:
-        allow = {"dead_code", "strength_reduction", "search_space"}
-        # High-stakes still generate safe families; only skip lake when already_minimal fired.
-    second = sorted(probs, key=lambda fam: float(probs.get(fam) or 0.0), reverse=True)
-    if len(second) > 1 and float(probs.get(second[1]) or 0.0) >= 0.2:
-        allow.add(second[1])
-    return {
-        "skipped": False,
-        "intent": picked,
-        "confidence": conf,
-        "probabilities": {k: float(probs.get(k) or 0.0) for k in criteria},
-        "already_minimal": minimal,
-        "complexity": complexity,
-        "allow_families": allow,
-        "skip_lake": skip,
-        "uncertain": conf < floor,
-        "skill": skill,
-        "skill_confidence": skill_conf,
-        "compose": compose,
-        "nest_child": nest_child,
-        "tool_name": tool_name,
-        "tree": {fam: list(kids) for fam, kids in tree.items()},
-        "tree_node": tree_node,
-        "fail_skill": fail_skill,
-        "skip_skills": sorted(skip_skills),
-        "residual_unsafe": residual_unsafe,
-        "residual_help": residual_help,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
-        "jev_generated_lean": False,
-    }
+    result = TypeSafeClient(timeout=45.0).system_one(state, questions)
+    from jevops.jev import record_usage
+    from jevops.jev import unpack_response
+    from jevops.pick import intent_from_answers
 
+    usage = dict(getattr(result, "usage", None) or {})
+    record_usage(ledger, usage, model=lra_t1.JEV_MODEL_ID)
 
-def sample_records(
-    records: Sequence[Mapping[str, Any]],
-    *,
-    k: int,
-    seed: int,
-    exclude: Sequence[str] = (),
-) -> list[Mapping[str, Any]]:
-    pool = [item for item in records if item.get("name") not in set(exclude)]
-    rng = random.Random(int(seed))
-    if k >= len(pool):
-        picked = list(pool)
-        rng.shuffle(picked)
-        return picked
-    return rng.sample(pool, int(k))
+    choices, nouls, scores, _usage = unpack_response(result)
+    return intent_from_answers(
+        choices=choices,
+        scores=scores,
+        nouls=nouls,
+        skills=skills,
+        tree=tree,
+        residuals=residuals,
+        residual_to_skill=RESIDUAL_TO_SKILL,
+        fire_t_residual=FIRE_T_RESIDUAL,
+        fire_t=FIRE_T,
+        fire_t_leaf=FIRE_T_LEAF,
+        confident=CONFIDENT,
+        uncertain=UNCERTAIN,
+        high_stakes=record.get("name") in HIGH_STAKES,
+        tree_node=tree_node,
+        wall_ms=(time.perf_counter() - started) * 1000.0,
+        memory=memory,
+        name=str(record.get("name") or ""),
+        criteria=criteria,
+    )
 
 
 def self_check() -> dict[str, Any]:
@@ -1089,50 +820,35 @@ def rank_live_records(
             kept = lra_sk.keep_best_board(out)
         except Exception:
             kept = {}
-    scored: list[tuple[int, int, str, Mapping[str, Any]]] = []
-    for rec in records:
+    from jevops.pick import filter_unsafe_drafts
+    from jevops.pick import rank_leftover
+
+    def _drafts(rec: Mapping[str, Any]) -> list[Mapping[str, Any]]:
         name = str(rec.get("name") or "")
         body = lra_inner.starting_tactics(rec, out=out, from_best=from_best)
         prior = lra_bind.prior_research(mem, name)
-        unsafe = dict(prior.get("unsafe") or {})
-        drafts = []
-        for item in lra_port.portable_drafts(body, memory=mem, name=name):
-            kind = str(item.get("kind") or "")
-            if lra_bind.is_blacklisted(mem, name, kind):
-                continue
-            stem = kind[len("port_") :] if kind.startswith("port_") else kind
-            residual = lra_port.SKILL_RESIDUAL.get(stem, "")
-            if residual and float(unsafe.get(residual) or 0.0) >= FIRE_T_RESIDUAL:
-                continue
-            drafts.append(item)
-        cut = max(0, int(warm.get(name) or 0) - int(kept.get(name) or 0))
-        rf_score = 0.0
-        try:
-            import nca_rankers as lra_rank
+        return filter_unsafe_drafts(
+            lra_port.portable_drafts(body, memory=mem, name=name),
+            is_blocked=lambda kind: lra_bind.is_blacklisted(mem, name, kind),
+            unsafe=dict(prior.get("unsafe") or {}),
+            residual_map=lra_port.SKILL_RESIDUAL,
+            fire_t=FIRE_T_RESIDUAL,
+        )
 
-            rf_score = float(
-                lra_rank.score_record(drafts, memory=mem, name=name, remaining_cut=cut) or 0.0
-            )
-        except Exception:
-            rf_score = 0.0
-        scored.append((-len(drafts), -cut, -rf_score, name, rec))
-        try:
-            import typesafe_nca as lra_nca
+    def _rf(drafts: list[Mapping[str, Any]], rec: Mapping[str, Any], cut: int) -> float:
+        name = str(rec.get("name") or "")
+        import nca_rankers as lra_rank
 
-            cid = f"ptr://theorem/{name}"
-            lra_nca.upsert_from_event(mem, ptr=cid, kind="theorem", energy=0.55)
-            grid = ((mem.get("nca") or {}).get("grid") or {})
-            if isinstance(grid.get(cid), dict):
-                grid[cid]["leftover_drafts"] = len(drafts)
-                grid[cid]["remaining_cut"] = cut
-                if name in warm:
-                    grid[cid]["warmup_tokens"] = int(warm[name])
-                if name in kept:
-                    grid[cid]["tokens"] = int(kept[name])
-        except Exception:
-            pass
-    scored.sort()
-    return [row[-1] for row in scored]
+        return float(lra_rank.score_record(drafts, memory=mem, name=name, remaining_cut=cut) or 0.0)
+
+    return rank_leftover(
+        records,
+        drafts_fn=_drafts,
+        rf_fn=_rf,
+        memory=mem,
+        warmup=warm,
+        keep=kept,
+    )
 
 
 def run_live(args: argparse.Namespace) -> dict[str, Any]:
@@ -1141,32 +857,20 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
     _raw, digest, records = lra_splice.load_warmup_records()
     rows = [lra_pca.feature_row(item) for item in records]
     model = lra_pca.fit_pca_mca(rows)
+    from jevops.pick import ensure_named
+    from jevops.pick import filter_by_tokens
+
     landscape = [analyze_proof(item, model=model) for item in records]
     if args.all_small:
-        sampled = [
-            rec
-            for rec, row in zip(records, landscape)
-            if int(row.get("n_tokens") or 0) <= MAX_LIVE_TOKENS
-        ]
+        sampled = filter_by_tokens(records, landscape, cap=MAX_LIVE_TOKENS)
     else:
         sampled = sample_records(records, k=max(1, int(args.k)), seed=int(args.seed))
     if args.include_inits:
-        inits = next(item for item in records if item.get("name") == "Core.InitsUpdatesComm")
-        if all(item.get("name") != inits.get("name") for item in sampled):
-            sampled = [inits, *sampled][: max(1, int(args.k))]
+        sampled = ensure_named(sampled, records, name="Core.InitsUpdatesComm", k=max(1, int(args.k)))
     memory = lra_bind.load_memory()
-    obs = memory.setdefault("observations", {})
-    obs.pop("no_drafts_tree", None)
-    obs.pop("no_drafts_instructed", None)
-    obs["no_drafts_tree_by"] = {}
-    obs["no_drafts_instructed_by"] = {}
-    nca = memory.setdefault("nca", {})
-    nca.setdefault("program_state", {})["last_ran"] = []
-    nca["journal"] = [
-        row
-        for row in (nca.get("journal") or [])
-        if str(row.get("event") or "") not in {"call", "instruct", "jev", "jev_pick", "grok"}
-    ]
+    from jevops.walk import reset_pass_flags
+
+    reset_pass_flags(memory)
     lra_bind.save_memory(memory)
     sampled = rank_live_records(
         sampled,
@@ -1182,26 +886,20 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
         max_mistral_calls=0,
     )
     rng = random.Random(int(args.seed))
-    canaries: list[dict[str, Any]] = []
-    lake_rows: list[dict[str, Any]] = []
     import typesafe_nca as lra_nca_live
-    try:
-        import board_graph as lra_board_live
+    import board_graph as lra_board_live
+    import skill_improve_loop as lra_sk_board
+    from jevops.outer import memory_counts as _memory_counts
+    from jevops.outer import seed_runtime
 
-        lra_board_live.seed_nca_from_board(memory)
-        lra_board_live.overlay_live_board(memory)
-        try:
-            import skill_improve_loop as lra_sk_board
-
-            lra_board_live.seed_keepbest_theorems(
-                memory,
-                lra_sk_board.keep_best_board(args.out),
-                warmup=lra_board_live.warmup_token_map(),
-            )
-        except Exception:
-            pass
-    except Exception:
-        pass
+    seed_runtime(
+        memory,
+        seed_fn=lra_board_live.seed_nca_from_board,
+        overlay_fn=lra_board_live.overlay_live_board,
+        keepbest_fn=lambda mem: lra_board_live.seed_keepbest_theorems(
+            mem, lra_sk_board.keep_best_board(args.out), warmup=lra_board_live.warmup_token_map()
+        ),
+    )
 
     extra_139 = None
     if args.init_139 and CANARY_139.is_file():
@@ -1214,62 +912,29 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
         extra_139["cut"] = "cascade-best-139"
 
     import typesafe_inner as lra_inner
+    from jevops.walk import run_sampled
 
-    for record in sampled:
-        try:
-            halt = lra_nca_live.should_halt(memory)
-        except Exception:
-            halt = {}
-        if halt.get("budget_dead"):
-                canaries.append(
-                    {
-                        "analysis": {"name": record.get("name")},
-                        "n_drafts": 0,
-                        "draft_kinds": [],
-                        "ranked": {"skipped": True, "reason": "nca_budget"},
-                        "lake": [{"name": record.get("name"), "skipped": "nca_budget"}],
-                        "trace": [{"action": "nca_budget"}],
-                        "clone_exists": False,
-                        "n_steps": 0,
-                    }
-                )
-                lake_rows.append({"name": record.get("name"), "skipped": "nca_budget"})
-                continue
-        nested = lra_inner.run_nested_canary(
-            record,
+    canaries, lake_rows = run_sampled(
+        sampled,
+        memory=memory,
+        halt_fn=lra_nca_live.should_halt,
+        run_fn=lambda rec: lra_inner.run_nested_canary(
+            rec,
             args=args,
             memory=memory,
             ledger=ledger,
             rng=rng,
             model=model,
-        )
-        lake = list(nested.get("lake") or [])
-        lake_rows.extend(lake)
-        canaries.append(
-            {
-                "analysis": nested.get("analysis") or {},
-                "n_drafts": nested.get("n_drafts") or 0,
-                "draft_kinds": nested.get("draft_kinds") or [],
-                "ranked": nested.get("ranked") or {},
-                "lake": lake,
-                "trace": nested.get("trace") or [],
-                "clone_exists": bool(nested.get("clone_exists")),
-                "n_steps": nested.get("n_steps"),
-            }
-        )
+        ),
+    )
 
     args.out.mkdir(parents=True, exist_ok=True)
     mem_path = lra_bind.save_memory(memory)
     gaps = lra_bind.skill_gap_report(memory)
-    nca_status: dict[str, Any] = {}
-    try:
-        import board_graph as lra_board_status
-        import typesafe_nca as lra_nca_status
+    from jevops.nca import live_status
 
-        nca_status = dict(lra_nca_status.should_halt(memory))
-        nca_status["board_window"] = lra_board_status.board_window(memory)
-        nca_status["n_edges"] = len(((memory.get("nca") or {}).get("board_edges")) or [])
-        nca_status["last_ran"] = list((((memory.get("nca") or {}).get("program_state") or {}).get("last_ran")) or [])[:8]
+    try:
+        nca_status = live_status(memory)
     except Exception:
         nca_status = {}
     (args.out / "skill-analysis.json").write_text(
@@ -1307,21 +972,16 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
         "lake": lake_rows,
         "skill_analysis": gaps,
         "memory_path": str(mem_path),
-        "memory": {
-            "n_successes": len(memory.get("successes") or []),
-            "n_failures": len(memory.get("failures") or []),
-            "n_blacklist": len(memory.get("blacklist") or []),
-        },
+        "memory": _memory_counts(memory),
         "nca_status": nca_status,
         "called_docker0": False,
         "official_track2": False,
         "arena_score": None,
         "ledger": ledger.as_dict() if hasattr(ledger, "as_dict") else {"jev_calls": ledger.jev_calls},
     }
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    text = json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n"
-    (args.out / f"random-canary-{stamp}.json").write_text(text)
-    (args.out / "random-canary-latest.json").write_text(text)
+    from jevops.outer import write_json_pair
+
+    write_json_pair(args.out, payload, prefix="random-canary", latest="random-canary-latest.json")
     return payload
 
 
